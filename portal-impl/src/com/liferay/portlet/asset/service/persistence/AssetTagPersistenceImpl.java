@@ -206,7 +206,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 					tagId);
 			}
 
-			return remove(assetTag);
+			return assetTagPersistence.remove(assetTag);
 		}
 		catch (NoSuchTagException nsee) {
 			throw nsee;
@@ -970,7 +970,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (AssetTag assetTag : findByGroupId(groupId)) {
-			remove(assetTag);
+			assetTagPersistence.remove(assetTag);
 		}
 	}
 
@@ -981,7 +981,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	 */
 	public void removeAll() throws SystemException {
 		for (AssetTag assetTag : findAll()) {
-			remove(assetTag);
+			assetTagPersistence.remove(assetTag);
 		}
 	}
 

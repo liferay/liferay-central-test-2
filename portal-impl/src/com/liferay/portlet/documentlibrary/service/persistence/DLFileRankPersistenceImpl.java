@@ -249,7 +249,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 					fileRankId);
 			}
 
-			return remove(dlFileRank);
+			return dlFileRankPersistence.remove(dlFileRank);
 		}
 		catch (NoSuchFileRankException nsee) {
 			throw nsee;
@@ -1767,7 +1767,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (DLFileRank dlFileRank : findByUserId(userId)) {
-			remove(dlFileRank);
+			dlFileRankPersistence.remove(dlFileRank);
 		}
 	}
 
@@ -1779,7 +1779,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	 */
 	public void removeByFileEntryId(long fileEntryId) throws SystemException {
 		for (DLFileRank dlFileRank : findByFileEntryId(fileEntryId)) {
-			remove(dlFileRank);
+			dlFileRankPersistence.remove(dlFileRank);
 		}
 	}
 
@@ -1793,7 +1793,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (DLFileRank dlFileRank : findByG_U(groupId, userId)) {
-			remove(dlFileRank);
+			dlFileRankPersistence.remove(dlFileRank);
 		}
 	}
 
@@ -1809,7 +1809,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 		throws NoSuchFileRankException, SystemException {
 		DLFileRank dlFileRank = findByC_U_F(companyId, userId, fileEntryId);
 
-		remove(dlFileRank);
+		dlFileRankPersistence.remove(dlFileRank);
 	}
 
 	/**
@@ -1819,7 +1819,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	 */
 	public void removeAll() throws SystemException {
 		for (DLFileRank dlFileRank : findAll()) {
-			remove(dlFileRank);
+			dlFileRankPersistence.remove(dlFileRank);
 		}
 	}
 

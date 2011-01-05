@@ -275,7 +275,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 					statsUserId);
 			}
 
-			return remove(blogsStatsUser);
+			return blogsStatsUserPersistence.remove(blogsStatsUser);
 		}
 		catch (NoSuchStatsUserException nsee) {
 			throw nsee;
@@ -2520,7 +2520,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByGroupId(groupId)) {
-			remove(blogsStatsUser);
+			blogsStatsUserPersistence.remove(blogsStatsUser);
 		}
 	}
 
@@ -2532,7 +2532,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByUserId(userId)) {
-			remove(blogsStatsUser);
+			blogsStatsUserPersistence.remove(blogsStatsUser);
 		}
 	}
 
@@ -2547,7 +2547,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		throws NoSuchStatsUserException, SystemException {
 		BlogsStatsUser blogsStatsUser = findByG_U(groupId, userId);
 
-		remove(blogsStatsUser);
+		blogsStatsUserPersistence.remove(blogsStatsUser);
 	}
 
 	/**
@@ -2560,7 +2560,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	public void removeByG_NotE(long groupId, int entryCount)
 		throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByG_NotE(groupId, entryCount)) {
-			remove(blogsStatsUser);
+			blogsStatsUserPersistence.remove(blogsStatsUser);
 		}
 	}
 
@@ -2574,7 +2574,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	public void removeByC_NotE(long companyId, int entryCount)
 		throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByC_NotE(companyId, entryCount)) {
-			remove(blogsStatsUser);
+			blogsStatsUserPersistence.remove(blogsStatsUser);
 		}
 	}
 
@@ -2588,7 +2588,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	public void removeByU_L(long userId, Date lastPostDate)
 		throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findByU_L(userId, lastPostDate)) {
-			remove(blogsStatsUser);
+			blogsStatsUserPersistence.remove(blogsStatsUser);
 		}
 	}
 
@@ -2599,7 +2599,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 	 */
 	public void removeAll() throws SystemException {
 		for (BlogsStatsUser blogsStatsUser : findAll()) {
-			remove(blogsStatsUser);
+			blogsStatsUserPersistence.remove(blogsStatsUser);
 		}
 	}
 

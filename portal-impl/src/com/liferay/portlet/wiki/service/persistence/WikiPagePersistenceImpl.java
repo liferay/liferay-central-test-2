@@ -507,7 +507,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					pageId);
 			}
 
-			return remove(wikiPage);
+			return wikiPagePersistence.remove(wikiPage);
 		}
 		catch (NoSuchPageException nsee) {
 			throw nsee;
@@ -7475,7 +7475,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (WikiPage wikiPage : findByUuid(uuid)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7490,7 +7490,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByUUID_G(uuid, groupId);
 
-		remove(wikiPage);
+		wikiPagePersistence.remove(wikiPage);
 	}
 
 	/**
@@ -7501,7 +7501,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 */
 	public void removeByNodeId(long nodeId) throws SystemException {
 		for (WikiPage wikiPage : findByNodeId(nodeId)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7513,7 +7513,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 */
 	public void removeByFormat(String format) throws SystemException {
 		for (WikiPage wikiPage : findByFormat(format)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7527,7 +7527,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByR_N(long resourcePrimKey, long nodeId)
 		throws SystemException {
 		for (WikiPage wikiPage : findByR_N(resourcePrimKey, nodeId)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7541,7 +7541,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByN_T(long nodeId, String title)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_T(nodeId, title)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7555,7 +7555,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByN_H(long nodeId, boolean head)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_H(nodeId, head)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7569,7 +7569,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByN_P(long nodeId, String parentTitle)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_P(nodeId, parentTitle)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7583,7 +7583,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByN_R(long nodeId, String redirectTitle)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_R(nodeId, redirectTitle)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7596,7 +7596,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 */
 	public void removeByN_S(long nodeId, int status) throws SystemException {
 		for (WikiPage wikiPage : findByN_S(nodeId, status)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7612,7 +7612,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByR_N_V(resourcePrimKey, nodeId, version);
 
-		remove(wikiPage);
+		wikiPagePersistence.remove(wikiPage);
 	}
 
 	/**
@@ -7626,7 +7626,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByR_N_S(long resourcePrimKey, long nodeId, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByR_N_S(resourcePrimKey, nodeId, status)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7641,7 +7641,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByU_N_S(long userId, long nodeId, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByU_N_S(userId, nodeId, status)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7657,7 +7657,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		throws NoSuchPageException, SystemException {
 		WikiPage wikiPage = findByN_T_V(nodeId, title, version);
 
-		remove(wikiPage);
+		wikiPagePersistence.remove(wikiPage);
 	}
 
 	/**
@@ -7671,7 +7671,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_T_H(nodeId, title, head)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7686,7 +7686,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByN_T_S(long nodeId, String title, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_T_S(nodeId, title, status)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7701,7 +7701,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByN_H_P(long nodeId, boolean head, String parentTitle)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_H_P(nodeId, head, parentTitle)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7716,7 +7716,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByN_H_S(long nodeId, boolean head, int status)
 		throws SystemException {
 		for (WikiPage wikiPage : findByN_H_S(nodeId, head, status)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7732,7 +7732,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	public void removeByN_H_P_S(long nodeId, boolean head, String parentTitle,
 		int status) throws SystemException {
 		for (WikiPage wikiPage : findByN_H_P_S(nodeId, head, parentTitle, status)) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 
@@ -7743,7 +7743,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	 */
 	public void removeAll() throws SystemException {
 		for (WikiPage wikiPage : findAll()) {
-			remove(wikiPage);
+			wikiPagePersistence.remove(wikiPage);
 		}
 	}
 

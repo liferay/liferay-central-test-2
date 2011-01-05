@@ -261,7 +261,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					nodeId);
 			}
 
-			return remove(wikiNode);
+			return wikiNodePersistence.remove(wikiNode);
 		}
 		catch (NoSuchNodeException nsee) {
 			throw nsee;
@@ -2091,7 +2091,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (WikiNode wikiNode : findByUuid(uuid)) {
-			remove(wikiNode);
+			wikiNodePersistence.remove(wikiNode);
 		}
 	}
 
@@ -2106,7 +2106,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByUUID_G(uuid, groupId);
 
-		remove(wikiNode);
+		wikiNodePersistence.remove(wikiNode);
 	}
 
 	/**
@@ -2117,7 +2117,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (WikiNode wikiNode : findByGroupId(groupId)) {
-			remove(wikiNode);
+			wikiNodePersistence.remove(wikiNode);
 		}
 	}
 
@@ -2129,7 +2129,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (WikiNode wikiNode : findByCompanyId(companyId)) {
-			remove(wikiNode);
+			wikiNodePersistence.remove(wikiNode);
 		}
 	}
 
@@ -2144,7 +2144,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		throws NoSuchNodeException, SystemException {
 		WikiNode wikiNode = findByG_N(groupId, name);
 
-		remove(wikiNode);
+		wikiNodePersistence.remove(wikiNode);
 	}
 
 	/**
@@ -2154,7 +2154,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	 */
 	public void removeAll() throws SystemException {
 		for (WikiNode wikiNode : findAll()) {
-			remove(wikiNode);
+			wikiNodePersistence.remove(wikiNode);
 		}
 	}
 

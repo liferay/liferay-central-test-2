@@ -256,7 +256,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 					entryId);
 			}
 
-			return remove(announcementsEntry);
+			return announcementsEntryPersistence.remove(announcementsEntry);
 		}
 		catch (NoSuchEntryException nsee) {
 			throw nsee;
@@ -2557,7 +2557,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (AnnouncementsEntry announcementsEntry : findByUuid(uuid)) {
-			remove(announcementsEntry);
+			announcementsEntryPersistence.remove(announcementsEntry);
 		}
 	}
 
@@ -2569,7 +2569,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (AnnouncementsEntry announcementsEntry : findByUserId(userId)) {
-			remove(announcementsEntry);
+			announcementsEntryPersistence.remove(announcementsEntry);
 		}
 	}
 
@@ -2584,7 +2584,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		throws SystemException {
 		for (AnnouncementsEntry announcementsEntry : findByC_C(classNameId,
 				classPK)) {
-			remove(announcementsEntry);
+			announcementsEntryPersistence.remove(announcementsEntry);
 		}
 	}
 
@@ -2600,7 +2600,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		throws SystemException {
 		for (AnnouncementsEntry announcementsEntry : findByC_C_A(classNameId,
 				classPK, alert)) {
-			remove(announcementsEntry);
+			announcementsEntryPersistence.remove(announcementsEntry);
 		}
 	}
 
@@ -2611,7 +2611,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 	 */
 	public void removeAll() throws SystemException {
 		for (AnnouncementsEntry announcementsEntry : findAll()) {
-			remove(announcementsEntry);
+			announcementsEntryPersistence.remove(announcementsEntry);
 		}
 	}
 

@@ -453,7 +453,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					entryId);
 			}
 
-			return remove(blogsEntry);
+			return blogsEntryPersistence.remove(blogsEntry);
 		}
 		catch (NoSuchEntryException nsee) {
 			throw nsee;
@@ -7416,7 +7416,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (BlogsEntry blogsEntry : findByUuid(uuid)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7431,7 +7431,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByUUID_G(uuid, groupId);
 
-		remove(blogsEntry);
+		blogsEntryPersistence.remove(blogsEntry);
 	}
 
 	/**
@@ -7442,7 +7442,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (BlogsEntry blogsEntry : findByGroupId(groupId)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7454,7 +7454,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (BlogsEntry blogsEntry : findByCompanyId(companyId)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7468,7 +7468,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public void removeByC_U(long companyId, long userId)
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByC_U(companyId, userId)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7482,7 +7482,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public void removeByC_LtD(long companyId, Date displayDate)
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByC_LtD(companyId, displayDate)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7496,7 +7496,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public void removeByC_S(long companyId, int status)
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByC_S(companyId, status)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7511,7 +7511,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByG_UT(groupId, urlTitle);
 
-		remove(blogsEntry);
+		blogsEntryPersistence.remove(blogsEntry);
 	}
 
 	/**
@@ -7524,7 +7524,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public void removeByG_LtD(long groupId, Date displayDate)
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByG_LtD(groupId, displayDate)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7537,7 +7537,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 */
 	public void removeByG_S(long groupId, int status) throws SystemException {
 		for (BlogsEntry blogsEntry : findByG_S(groupId, status)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7552,7 +7552,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public void removeByC_U_S(long companyId, long userId, int status)
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByC_U_S(companyId, userId, status)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7568,7 +7568,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByC_LtD_S(companyId, displayDate,
 				status)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7583,7 +7583,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public void removeByG_U_LtD(long groupId, long userId, Date displayDate)
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByG_U_LtD(groupId, userId, displayDate)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7598,7 +7598,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public void removeByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByG_U_S(groupId, userId, status)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7613,7 +7613,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	public void removeByG_LtD_S(long groupId, Date displayDate, int status)
 		throws SystemException {
 		for (BlogsEntry blogsEntry : findByG_LtD_S(groupId, displayDate, status)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7630,7 +7630,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		int status) throws SystemException {
 		for (BlogsEntry blogsEntry : findByG_U_LtD_S(groupId, userId,
 				displayDate, status)) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 
@@ -7641,7 +7641,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 	 */
 	public void removeAll() throws SystemException {
 		for (BlogsEntry blogsEntry : findAll()) {
-			remove(blogsEntry);
+			blogsEntryPersistence.remove(blogsEntry);
 		}
 	}
 

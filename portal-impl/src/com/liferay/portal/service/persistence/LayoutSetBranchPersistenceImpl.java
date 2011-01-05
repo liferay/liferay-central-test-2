@@ -243,7 +243,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 					layoutSetBranchId);
 			}
 
-			return remove(layoutSetBranch);
+			return layoutSetBranchPersistence.remove(layoutSetBranch);
 		}
 		catch (NoSuchLayoutSetBranchException nsee) {
 			throw nsee;
@@ -1712,7 +1712,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (LayoutSetBranch layoutSetBranch : findByGroupId(groupId)) {
-			remove(layoutSetBranch);
+			layoutSetBranchPersistence.remove(layoutSetBranch);
 		}
 	}
 
@@ -1726,7 +1726,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
 		for (LayoutSetBranch layoutSetBranch : findByG_P(groupId, privateLayout)) {
-			remove(layoutSetBranch);
+			layoutSetBranchPersistence.remove(layoutSetBranch);
 		}
 	}
 
@@ -1743,7 +1743,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 		LayoutSetBranch layoutSetBranch = findByG_P_N(groupId, privateLayout,
 				name);
 
-		remove(layoutSetBranch);
+		layoutSetBranchPersistence.remove(layoutSetBranch);
 	}
 
 	/**
@@ -1753,7 +1753,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 	 */
 	public void removeAll() throws SystemException {
 		for (LayoutSetBranch layoutSetBranch : findAll()) {
-			remove(layoutSetBranch);
+			layoutSetBranchPersistence.remove(layoutSetBranch);
 		}
 	}
 

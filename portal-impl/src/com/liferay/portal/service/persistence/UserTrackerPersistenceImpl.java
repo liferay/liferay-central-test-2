@@ -217,7 +217,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 					userTrackerId);
 			}
 
-			return remove(userTracker);
+			return userTrackerPersistence.remove(userTracker);
 		}
 		catch (NoSuchUserTrackerException nsee) {
 			throw nsee;
@@ -1530,7 +1530,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (UserTracker userTracker : findByCompanyId(companyId)) {
-			remove(userTracker);
+			userTrackerPersistence.remove(userTracker);
 		}
 	}
 
@@ -1542,7 +1542,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (UserTracker userTracker : findByUserId(userId)) {
-			remove(userTracker);
+			userTrackerPersistence.remove(userTracker);
 		}
 	}
 
@@ -1554,7 +1554,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 */
 	public void removeBySessionId(String sessionId) throws SystemException {
 		for (UserTracker userTracker : findBySessionId(sessionId)) {
-			remove(userTracker);
+			userTrackerPersistence.remove(userTracker);
 		}
 	}
 
@@ -1565,7 +1565,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 */
 	public void removeAll() throws SystemException {
 		for (UserTracker userTracker : findAll()) {
-			remove(userTracker);
+			userTrackerPersistence.remove(userTracker);
 		}
 	}
 

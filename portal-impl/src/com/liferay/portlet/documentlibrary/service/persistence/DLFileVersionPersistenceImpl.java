@@ -236,7 +236,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					fileVersionId);
 			}
 
-			return remove(dlFileVersion);
+			return dlFileVersionPersistence.remove(dlFileVersion);
 		}
 		catch (NoSuchFileVersionException nsee) {
 			throw nsee;
@@ -1432,7 +1432,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 */
 	public void removeByFileEntryId(long fileEntryId) throws SystemException {
 		for (DLFileVersion dlFileVersion : findByFileEntryId(fileEntryId)) {
-			remove(dlFileVersion);
+			dlFileVersionPersistence.remove(dlFileVersion);
 		}
 	}
 
@@ -1447,7 +1447,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		throws NoSuchFileVersionException, SystemException {
 		DLFileVersion dlFileVersion = findByF_V(fileEntryId, version);
 
-		remove(dlFileVersion);
+		dlFileVersionPersistence.remove(dlFileVersion);
 	}
 
 	/**
@@ -1460,7 +1460,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	public void removeByF_S(long fileEntryId, int status)
 		throws SystemException {
 		for (DLFileVersion dlFileVersion : findByF_S(fileEntryId, status)) {
-			remove(dlFileVersion);
+			dlFileVersionPersistence.remove(dlFileVersion);
 		}
 	}
 
@@ -1471,7 +1471,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 	 */
 	public void removeAll() throws SystemException {
 		for (DLFileVersion dlFileVersion : findAll()) {
-			remove(dlFileVersion);
+			dlFileVersionPersistence.remove(dlFileVersion);
 		}
 	}
 

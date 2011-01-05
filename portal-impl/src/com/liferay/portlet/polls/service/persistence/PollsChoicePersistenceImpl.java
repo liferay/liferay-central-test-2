@@ -237,7 +237,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					choiceId);
 			}
 
-			return remove(pollsChoice);
+			return pollsChoicePersistence.remove(pollsChoice);
 		}
 		catch (NoSuchChoiceException nsee) {
 			throw nsee;
@@ -1425,7 +1425,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (PollsChoice pollsChoice : findByUuid(uuid)) {
-			remove(pollsChoice);
+			pollsChoicePersistence.remove(pollsChoice);
 		}
 	}
 
@@ -1437,7 +1437,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	 */
 	public void removeByQuestionId(long questionId) throws SystemException {
 		for (PollsChoice pollsChoice : findByQuestionId(questionId)) {
-			remove(pollsChoice);
+			pollsChoicePersistence.remove(pollsChoice);
 		}
 	}
 
@@ -1452,7 +1452,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 		throws NoSuchChoiceException, SystemException {
 		PollsChoice pollsChoice = findByQ_N(questionId, name);
 
-		remove(pollsChoice);
+		pollsChoicePersistence.remove(pollsChoice);
 	}
 
 	/**
@@ -1462,7 +1462,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	 */
 	public void removeAll() throws SystemException {
 		for (PollsChoice pollsChoice : findAll()) {
-			remove(pollsChoice);
+			pollsChoicePersistence.remove(pollsChoice);
 		}
 	}
 

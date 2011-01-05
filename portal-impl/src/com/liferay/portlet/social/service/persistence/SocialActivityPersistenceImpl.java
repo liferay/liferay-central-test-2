@@ -335,7 +335,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 					activityId);
 			}
 
-			return remove(socialActivity);
+			return socialActivityPersistence.remove(socialActivity);
 		}
 		catch (NoSuchActivityException nsee) {
 			throw nsee;
@@ -3493,7 +3493,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (SocialActivity socialActivity : findByGroupId(groupId)) {
-			remove(socialActivity);
+			socialActivityPersistence.remove(socialActivity);
 		}
 	}
 
@@ -3505,7 +3505,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (SocialActivity socialActivity : findByCompanyId(companyId)) {
-			remove(socialActivity);
+			socialActivityPersistence.remove(socialActivity);
 		}
 	}
 
@@ -3517,7 +3517,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (SocialActivity socialActivity : findByUserId(userId)) {
-			remove(socialActivity);
+			socialActivityPersistence.remove(socialActivity);
 		}
 	}
 
@@ -3531,7 +3531,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		throws NoSuchActivityException, SystemException {
 		SocialActivity socialActivity = findByMirrorActivityId(mirrorActivityId);
 
-		remove(socialActivity);
+		socialActivityPersistence.remove(socialActivity);
 	}
 
 	/**
@@ -3542,7 +3542,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 */
 	public void removeByClassNameId(long classNameId) throws SystemException {
 		for (SocialActivity socialActivity : findByClassNameId(classNameId)) {
-			remove(socialActivity);
+			socialActivityPersistence.remove(socialActivity);
 		}
 	}
 
@@ -3556,7 +3556,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		throws SystemException {
 		for (SocialActivity socialActivity : findByReceiverUserId(
 				receiverUserId)) {
-			remove(socialActivity);
+			socialActivityPersistence.remove(socialActivity);
 		}
 	}
 
@@ -3570,7 +3570,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
 		for (SocialActivity socialActivity : findByC_C(classNameId, classPK)) {
-			remove(socialActivity);
+			socialActivityPersistence.remove(socialActivity);
 		}
 	}
 
@@ -3586,7 +3586,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		long classPK) throws SystemException {
 		for (SocialActivity socialActivity : findByM_C_C(mirrorActivityId,
 				classNameId, classPK)) {
-			remove(socialActivity);
+			socialActivityPersistence.remove(socialActivity);
 		}
 	}
 
@@ -3608,7 +3608,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		SocialActivity socialActivity = findByG_U_CD_C_C_T_R(groupId, userId,
 				createDate, classNameId, classPK, type, receiverUserId);
 
-		remove(socialActivity);
+		socialActivityPersistence.remove(socialActivity);
 	}
 
 	/**
@@ -3618,7 +3618,7 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 	 */
 	public void removeAll() throws SystemException {
 		for (SocialActivity socialActivity : findAll()) {
-			remove(socialActivity);
+			socialActivityPersistence.remove(socialActivity);
 		}
 	}
 

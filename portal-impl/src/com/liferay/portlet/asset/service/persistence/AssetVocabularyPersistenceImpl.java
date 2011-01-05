@@ -277,7 +277,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 					vocabularyId);
 			}
 
-			return remove(assetVocabulary);
+			return assetVocabularyPersistence.remove(assetVocabulary);
 		}
 		catch (NoSuchVocabularyException nsee) {
 			throw nsee;
@@ -2122,7 +2122,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByUuid(uuid)) {
-			remove(assetVocabulary);
+			assetVocabularyPersistence.remove(assetVocabulary);
 		}
 	}
 
@@ -2137,7 +2137,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = findByUUID_G(uuid, groupId);
 
-		remove(assetVocabulary);
+		assetVocabularyPersistence.remove(assetVocabulary);
 	}
 
 	/**
@@ -2148,7 +2148,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByGroupId(groupId)) {
-			remove(assetVocabulary);
+			assetVocabularyPersistence.remove(assetVocabulary);
 		}
 	}
 
@@ -2160,7 +2160,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (AssetVocabulary assetVocabulary : findByCompanyId(companyId)) {
-			remove(assetVocabulary);
+			assetVocabularyPersistence.remove(assetVocabulary);
 		}
 	}
 
@@ -2175,7 +2175,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 		throws NoSuchVocabularyException, SystemException {
 		AssetVocabulary assetVocabulary = findByG_N(groupId, name);
 
-		remove(assetVocabulary);
+		assetVocabularyPersistence.remove(assetVocabulary);
 	}
 
 	/**
@@ -2185,7 +2185,7 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 	 */
 	public void removeAll() throws SystemException {
 		for (AssetVocabulary assetVocabulary : findAll()) {
-			remove(assetVocabulary);
+			assetVocabularyPersistence.remove(assetVocabulary);
 		}
 	}
 

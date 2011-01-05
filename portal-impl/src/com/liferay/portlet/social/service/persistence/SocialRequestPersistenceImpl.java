@@ -357,7 +357,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 					requestId);
 			}
 
-			return remove(socialRequest);
+			return socialRequestPersistence.remove(socialRequest);
 		}
 		catch (NoSuchRequestException nsee) {
 			throw nsee;
@@ -4035,7 +4035,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (SocialRequest socialRequest : findByUuid(uuid)) {
-			remove(socialRequest);
+			socialRequestPersistence.remove(socialRequest);
 		}
 	}
 
@@ -4050,7 +4050,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		throws NoSuchRequestException, SystemException {
 		SocialRequest socialRequest = findByUUID_G(uuid, groupId);
 
-		remove(socialRequest);
+		socialRequestPersistence.remove(socialRequest);
 	}
 
 	/**
@@ -4061,7 +4061,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (SocialRequest socialRequest : findByCompanyId(companyId)) {
-			remove(socialRequest);
+			socialRequestPersistence.remove(socialRequest);
 		}
 	}
 
@@ -4073,7 +4073,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (SocialRequest socialRequest : findByUserId(userId)) {
-			remove(socialRequest);
+			socialRequestPersistence.remove(socialRequest);
 		}
 	}
 
@@ -4086,7 +4086,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	public void removeByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		for (SocialRequest socialRequest : findByReceiverUserId(receiverUserId)) {
-			remove(socialRequest);
+			socialRequestPersistence.remove(socialRequest);
 		}
 	}
 
@@ -4099,7 +4099,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 */
 	public void removeByU_S(long userId, int status) throws SystemException {
 		for (SocialRequest socialRequest : findByU_S(userId, status)) {
-			remove(socialRequest);
+			socialRequestPersistence.remove(socialRequest);
 		}
 	}
 
@@ -4113,7 +4113,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	public void removeByR_S(long receiverUserId, int status)
 		throws SystemException {
 		for (SocialRequest socialRequest : findByR_S(receiverUserId, status)) {
-			remove(socialRequest);
+			socialRequestPersistence.remove(socialRequest);
 		}
 	}
 
@@ -4133,7 +4133,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		SocialRequest socialRequest = findByU_C_C_T_R(userId, classNameId,
 				classPK, type, receiverUserId);
 
-		remove(socialRequest);
+		socialRequestPersistence.remove(socialRequest);
 	}
 
 	/**
@@ -4150,7 +4150,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		int type, int status) throws SystemException {
 		for (SocialRequest socialRequest : findByU_C_C_T_S(userId, classNameId,
 				classPK, type, status)) {
-			remove(socialRequest);
+			socialRequestPersistence.remove(socialRequest);
 		}
 	}
 
@@ -4168,7 +4168,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 		long receiverUserId, int status) throws SystemException {
 		for (SocialRequest socialRequest : findByC_C_T_R_S(classNameId,
 				classPK, type, receiverUserId, status)) {
-			remove(socialRequest);
+			socialRequestPersistence.remove(socialRequest);
 		}
 	}
 
@@ -4179,7 +4179,7 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 	 */
 	public void removeAll() throws SystemException {
 		for (SocialRequest socialRequest : findAll()) {
-			remove(socialRequest);
+			socialRequestPersistence.remove(socialRequest);
 		}
 	}
 

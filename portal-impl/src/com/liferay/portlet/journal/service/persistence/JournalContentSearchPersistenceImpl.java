@@ -320,7 +320,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					contentSearchId);
 			}
 
-			return remove(journalContentSearch);
+			return journalContentSearchPersistence.remove(journalContentSearch);
 		}
 		catch (NoSuchContentSearchException nsee) {
 			throw nsee;
@@ -3180,7 +3180,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	public void removeByArticleId(String articleId) throws SystemException {
 		for (JournalContentSearch journalContentSearch : findByArticleId(
 				articleId)) {
-			remove(journalContentSearch);
+			journalContentSearchPersistence.remove(journalContentSearch);
 		}
 	}
 
@@ -3195,7 +3195,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		throws SystemException {
 		for (JournalContentSearch journalContentSearch : findByG_P(groupId,
 				privateLayout)) {
-			remove(journalContentSearch);
+			journalContentSearchPersistence.remove(journalContentSearch);
 		}
 	}
 
@@ -3210,7 +3210,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		throws SystemException {
 		for (JournalContentSearch journalContentSearch : findByG_A(groupId,
 				articleId)) {
-			remove(journalContentSearch);
+			journalContentSearchPersistence.remove(journalContentSearch);
 		}
 	}
 
@@ -3226,7 +3226,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		throws SystemException {
 		for (JournalContentSearch journalContentSearch : findByG_P_L(groupId,
 				privateLayout, layoutId)) {
-			remove(journalContentSearch);
+			journalContentSearchPersistence.remove(journalContentSearch);
 		}
 	}
 
@@ -3242,7 +3242,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		String articleId) throws SystemException {
 		for (JournalContentSearch journalContentSearch : findByG_P_A(groupId,
 				privateLayout, articleId)) {
-			remove(journalContentSearch);
+			journalContentSearchPersistence.remove(journalContentSearch);
 		}
 	}
 
@@ -3259,7 +3259,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		long layoutId, String portletId) throws SystemException {
 		for (JournalContentSearch journalContentSearch : findByG_P_L_P(
 				groupId, privateLayout, layoutId, portletId)) {
-			remove(journalContentSearch);
+			journalContentSearchPersistence.remove(journalContentSearch);
 		}
 	}
 
@@ -3279,7 +3279,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		JournalContentSearch journalContentSearch = findByG_P_L_P_A(groupId,
 				privateLayout, layoutId, portletId, articleId);
 
-		remove(journalContentSearch);
+		journalContentSearchPersistence.remove(journalContentSearch);
 	}
 
 	/**
@@ -3289,7 +3289,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	 */
 	public void removeAll() throws SystemException {
 		for (JournalContentSearch journalContentSearch : findAll()) {
-			remove(journalContentSearch);
+			journalContentSearchPersistence.remove(journalContentSearch);
 		}
 	}
 

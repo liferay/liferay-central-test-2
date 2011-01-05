@@ -229,7 +229,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 					resourcePrimKey);
 			}
 
-			return remove(wikiPageResource);
+			return wikiPageResourcePersistence.remove(wikiPageResource);
 		}
 		catch (NoSuchPageResourceException nsee) {
 			throw nsee;
@@ -1068,7 +1068,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (WikiPageResource wikiPageResource : findByUuid(uuid)) {
-			remove(wikiPageResource);
+			wikiPageResourcePersistence.remove(wikiPageResource);
 		}
 	}
 
@@ -1083,7 +1083,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		throws NoSuchPageResourceException, SystemException {
 		WikiPageResource wikiPageResource = findByN_T(nodeId, title);
 
-		remove(wikiPageResource);
+		wikiPageResourcePersistence.remove(wikiPageResource);
 	}
 
 	/**
@@ -1093,7 +1093,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 	 */
 	public void removeAll() throws SystemException {
 		for (WikiPageResource wikiPageResource : findAll()) {
-			remove(wikiPageResource);
+			wikiPageResourcePersistence.remove(wikiPageResource);
 		}
 	}
 

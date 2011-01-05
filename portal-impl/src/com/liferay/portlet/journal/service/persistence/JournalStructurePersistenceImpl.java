@@ -291,7 +291,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					id);
 			}
 
-			return remove(journalStructure);
+			return journalStructurePersistence.remove(journalStructure);
 		}
 		catch (NoSuchStructureException nsee) {
 			throw nsee;
@@ -2699,7 +2699,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (JournalStructure journalStructure : findByUuid(uuid)) {
-			remove(journalStructure);
+			journalStructurePersistence.remove(journalStructure);
 		}
 	}
 
@@ -2714,7 +2714,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByUUID_G(uuid, groupId);
 
-		remove(journalStructure);
+		journalStructurePersistence.remove(journalStructure);
 	}
 
 	/**
@@ -2725,7 +2725,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalStructure journalStructure : findByGroupId(groupId)) {
-			remove(journalStructure);
+			journalStructurePersistence.remove(journalStructure);
 		}
 	}
 
@@ -2738,7 +2738,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	public void removeByStructureId(String structureId)
 		throws SystemException {
 		for (JournalStructure journalStructure : findByStructureId(structureId)) {
-			remove(journalStructure);
+			journalStructurePersistence.remove(journalStructure);
 		}
 	}
 
@@ -2753,7 +2753,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByG_S(groupId, structureId);
 
-		remove(journalStructure);
+		journalStructurePersistence.remove(journalStructure);
 	}
 
 	/**
@@ -2767,7 +2767,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		throws SystemException {
 		for (JournalStructure journalStructure : findByG_P(groupId,
 				parentStructureId)) {
-			remove(journalStructure);
+			journalStructurePersistence.remove(journalStructure);
 		}
 	}
 
@@ -2778,7 +2778,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	 */
 	public void removeAll() throws SystemException {
 		for (JournalStructure journalStructure : findAll()) {
-			remove(journalStructure);
+			journalStructurePersistence.remove(journalStructure);
 		}
 	}
 

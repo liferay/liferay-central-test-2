@@ -225,7 +225,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 					productVersionId);
 			}
 
-			return remove(scProductVersion);
+			return scProductVersionPersistence.remove(scProductVersion);
 		}
 		catch (NoSuchProductVersionException nsee) {
 			throw nsee;
@@ -1050,7 +1050,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		throws SystemException {
 		for (SCProductVersion scProductVersion : findByProductEntryId(
 				productEntryId)) {
-			remove(scProductVersion);
+			scProductVersionPersistence.remove(scProductVersion);
 		}
 	}
 
@@ -1064,7 +1064,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		throws NoSuchProductVersionException, SystemException {
 		SCProductVersion scProductVersion = findByDirectDownloadURL(directDownloadURL);
 
-		remove(scProductVersion);
+		scProductVersionPersistence.remove(scProductVersion);
 	}
 
 	/**
@@ -1074,7 +1074,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	 */
 	public void removeAll() throws SystemException {
 		for (SCProductVersion scProductVersion : findAll()) {
-			remove(scProductVersion);
+			scProductVersionPersistence.remove(scProductVersion);
 		}
 	}
 

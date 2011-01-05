@@ -214,7 +214,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 					teamId);
 			}
 
-			return remove(team);
+			return teamPersistence.remove(team);
 		}
 		catch (NoSuchTeamException nsee) {
 			throw nsee;
@@ -1160,7 +1160,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (Team team : findByGroupId(groupId)) {
-			remove(team);
+			teamPersistence.remove(team);
 		}
 	}
 
@@ -1175,7 +1175,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		throws NoSuchTeamException, SystemException {
 		Team team = findByG_N(groupId, name);
 
-		remove(team);
+		teamPersistence.remove(team);
 	}
 
 	/**
@@ -1185,7 +1185,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 */
 	public void removeAll() throws SystemException {
 		for (Team team : findAll()) {
-			remove(team);
+			teamPersistence.remove(team);
 		}
 	}
 

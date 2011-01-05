@@ -230,7 +230,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 					companyId);
 			}
 
-			return remove(company);
+			return companyPersistence.remove(company);
 		}
 		catch (NoSuchCompanyException nsee) {
 			throw nsee;
@@ -1308,7 +1308,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByWebId(webId);
 
-		remove(company);
+		companyPersistence.remove(company);
 	}
 
 	/**
@@ -1321,7 +1321,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByMx(mx);
 
-		remove(company);
+		companyPersistence.remove(company);
 	}
 
 	/**
@@ -1334,7 +1334,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		throws NoSuchCompanyException, SystemException {
 		Company company = findByLogoId(logoId);
 
-		remove(company);
+		companyPersistence.remove(company);
 	}
 
 	/**
@@ -1345,7 +1345,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 */
 	public void removeBySystem(boolean system) throws SystemException {
 		for (Company company : findBySystem(system)) {
-			remove(company);
+			companyPersistence.remove(company);
 		}
 	}
 
@@ -1356,7 +1356,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 */
 	public void removeAll() throws SystemException {
 		for (Company company : findAll()) {
-			remove(company);
+			companyPersistence.remove(company);
 		}
 	}
 

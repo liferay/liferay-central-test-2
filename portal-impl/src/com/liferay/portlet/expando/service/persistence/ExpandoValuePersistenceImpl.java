@@ -337,7 +337,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 					valueId);
 			}
 
-			return remove(expandoValue);
+			return expandoValuePersistence.remove(expandoValue);
 		}
 		catch (NoSuchValueException nsee) {
 			throw nsee;
@@ -3853,7 +3853,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 */
 	public void removeByTableId(long tableId) throws SystemException {
 		for (ExpandoValue expandoValue : findByTableId(tableId)) {
-			remove(expandoValue);
+			expandoValuePersistence.remove(expandoValue);
 		}
 	}
 
@@ -3865,7 +3865,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 */
 	public void removeByColumnId(long columnId) throws SystemException {
 		for (ExpandoValue expandoValue : findByColumnId(columnId)) {
-			remove(expandoValue);
+			expandoValuePersistence.remove(expandoValue);
 		}
 	}
 
@@ -3877,7 +3877,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 */
 	public void removeByRowId(long rowId) throws SystemException {
 		for (ExpandoValue expandoValue : findByRowId(rowId)) {
-			remove(expandoValue);
+			expandoValuePersistence.remove(expandoValue);
 		}
 	}
 
@@ -3891,7 +3891,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	public void removeByT_C(long tableId, long columnId)
 		throws SystemException {
 		for (ExpandoValue expandoValue : findByT_C(tableId, columnId)) {
-			remove(expandoValue);
+			expandoValuePersistence.remove(expandoValue);
 		}
 	}
 
@@ -3905,7 +3905,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	public void removeByT_CPK(long tableId, long classPK)
 		throws SystemException {
 		for (ExpandoValue expandoValue : findByT_CPK(tableId, classPK)) {
-			remove(expandoValue);
+			expandoValuePersistence.remove(expandoValue);
 		}
 	}
 
@@ -3918,7 +3918,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 */
 	public void removeByT_R(long tableId, long rowId) throws SystemException {
 		for (ExpandoValue expandoValue : findByT_R(tableId, rowId)) {
-			remove(expandoValue);
+			expandoValuePersistence.remove(expandoValue);
 		}
 	}
 
@@ -3933,7 +3933,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByC_R(columnId, rowId);
 
-		remove(expandoValue);
+		expandoValuePersistence.remove(expandoValue);
 	}
 
 	/**
@@ -3946,7 +3946,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
 		for (ExpandoValue expandoValue : findByC_C(classNameId, classPK)) {
-			remove(expandoValue);
+			expandoValuePersistence.remove(expandoValue);
 		}
 	}
 
@@ -3962,7 +3962,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 		throws NoSuchValueException, SystemException {
 		ExpandoValue expandoValue = findByT_C_C(tableId, columnId, classPK);
 
-		remove(expandoValue);
+		expandoValuePersistence.remove(expandoValue);
 	}
 
 	/**
@@ -3976,7 +3976,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	public void removeByT_C_D(long tableId, long columnId, String data)
 		throws SystemException {
 		for (ExpandoValue expandoValue : findByT_C_D(tableId, columnId, data)) {
-			remove(expandoValue);
+			expandoValuePersistence.remove(expandoValue);
 		}
 	}
 
@@ -3987,7 +3987,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	 */
 	public void removeAll() throws SystemException {
 		for (ExpandoValue expandoValue : findAll()) {
-			remove(expandoValue);
+			expandoValuePersistence.remove(expandoValue);
 		}
 	}
 

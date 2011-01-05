@@ -200,7 +200,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 					itemFieldId);
 			}
 
-			return remove(shoppingItemField);
+			return shoppingItemFieldPersistence.remove(shoppingItemField);
 		}
 		catch (NoSuchItemFieldException nsee) {
 			throw nsee;
@@ -831,7 +831,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	 */
 	public void removeByItemId(long itemId) throws SystemException {
 		for (ShoppingItemField shoppingItemField : findByItemId(itemId)) {
-			remove(shoppingItemField);
+			shoppingItemFieldPersistence.remove(shoppingItemField);
 		}
 	}
 
@@ -842,7 +842,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	 */
 	public void removeAll() throws SystemException {
 		for (ShoppingItemField shoppingItemField : findAll()) {
-			remove(shoppingItemField);
+			shoppingItemFieldPersistence.remove(shoppingItemField);
 		}
 	}
 

@@ -252,7 +252,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 					emailAddressId);
 			}
 
-			return remove(emailAddress);
+			return emailAddressPersistence.remove(emailAddress);
 		}
 		catch (NoSuchEmailAddressException nsee) {
 			throw nsee;
@@ -2380,7 +2380,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (EmailAddress emailAddress : findByCompanyId(companyId)) {
-			remove(emailAddress);
+			emailAddressPersistence.remove(emailAddress);
 		}
 	}
 
@@ -2392,7 +2392,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (EmailAddress emailAddress : findByUserId(userId)) {
-			remove(emailAddress);
+			emailAddressPersistence.remove(emailAddress);
 		}
 	}
 
@@ -2406,7 +2406,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (EmailAddress emailAddress : findByC_C(companyId, classNameId)) {
-			remove(emailAddress);
+			emailAddressPersistence.remove(emailAddress);
 		}
 	}
 
@@ -2422,7 +2422,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		throws SystemException {
 		for (EmailAddress emailAddress : findByC_C_C(companyId, classNameId,
 				classPK)) {
-			remove(emailAddress);
+			emailAddressPersistence.remove(emailAddress);
 		}
 	}
 
@@ -2439,7 +2439,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 		boolean primary) throws SystemException {
 		for (EmailAddress emailAddress : findByC_C_C_P(companyId, classNameId,
 				classPK, primary)) {
-			remove(emailAddress);
+			emailAddressPersistence.remove(emailAddress);
 		}
 	}
 
@@ -2450,7 +2450,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	 */
 	public void removeAll() throws SystemException {
 		for (EmailAddress emailAddress : findAll()) {
-			remove(emailAddress);
+			emailAddressPersistence.remove(emailAddress);
 		}
 	}
 

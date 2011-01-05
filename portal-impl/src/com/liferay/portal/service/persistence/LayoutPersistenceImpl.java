@@ -362,7 +362,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					plid);
 			}
 
-			return remove(layout);
+			return layoutPersistence.remove(layout);
 		}
 		catch (NoSuchLayoutException nsee) {
 			throw nsee;
@@ -4122,7 +4122,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (Layout layout : findByUuid(uuid)) {
-			remove(layout);
+			layoutPersistence.remove(layout);
 		}
 	}
 
@@ -4137,7 +4137,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByUUID_G(uuid, groupId);
 
-		remove(layout);
+		layoutPersistence.remove(layout);
 	}
 
 	/**
@@ -4148,7 +4148,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (Layout layout : findByGroupId(groupId)) {
-			remove(layout);
+			layoutPersistence.remove(layout);
 		}
 	}
 
@@ -4160,7 +4160,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Layout layout : findByCompanyId(companyId)) {
-			remove(layout);
+			layoutPersistence.remove(layout);
 		}
 	}
 
@@ -4174,7 +4174,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByIconImageId(iconImageId);
 
-		remove(layout);
+		layoutPersistence.remove(layout);
 	}
 
 	/**
@@ -4187,7 +4187,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
 		for (Layout layout : findByG_P(groupId, privateLayout)) {
-			remove(layout);
+			layoutPersistence.remove(layout);
 		}
 	}
 
@@ -4203,7 +4203,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		throws NoSuchLayoutException, SystemException {
 		Layout layout = findByG_P_L(groupId, privateLayout, layoutId);
 
-		remove(layout);
+		layoutPersistence.remove(layout);
 	}
 
 	/**
@@ -4217,7 +4217,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	public void removeByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
 		for (Layout layout : findByG_P_P(groupId, privateLayout, parentLayoutId)) {
-			remove(layout);
+			layoutPersistence.remove(layout);
 		}
 	}
 
@@ -4233,7 +4233,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		String friendlyURL) throws NoSuchLayoutException, SystemException {
 		Layout layout = findByG_P_F(groupId, privateLayout, friendlyURL);
 
-		remove(layout);
+		layoutPersistence.remove(layout);
 	}
 
 	/**
@@ -4247,7 +4247,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	public void removeByG_P_T(long groupId, boolean privateLayout, String type)
 		throws SystemException {
 		for (Layout layout : findByG_P_T(groupId, privateLayout, type)) {
-			remove(layout);
+			layoutPersistence.remove(layout);
 		}
 	}
 
@@ -4258,7 +4258,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 */
 	public void removeAll() throws SystemException {
 		for (Layout layout : findAll()) {
-			remove(layout);
+			layoutPersistence.remove(layout);
 		}
 	}
 

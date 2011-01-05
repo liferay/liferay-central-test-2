@@ -307,7 +307,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					id);
 			}
 
-			return remove(journalTemplate);
+			return journalTemplatePersistence.remove(journalTemplate);
 		}
 		catch (NoSuchTemplateException nsee) {
 			throw nsee;
@@ -2863,7 +2863,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (JournalTemplate journalTemplate : findByUuid(uuid)) {
-			remove(journalTemplate);
+			journalTemplatePersistence.remove(journalTemplate);
 		}
 	}
 
@@ -2878,7 +2878,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findByUUID_G(uuid, groupId);
 
-		remove(journalTemplate);
+		journalTemplatePersistence.remove(journalTemplate);
 	}
 
 	/**
@@ -2889,7 +2889,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalTemplate journalTemplate : findByGroupId(groupId)) {
-			remove(journalTemplate);
+			journalTemplatePersistence.remove(journalTemplate);
 		}
 	}
 
@@ -2901,7 +2901,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 */
 	public void removeByTemplateId(String templateId) throws SystemException {
 		for (JournalTemplate journalTemplate : findByTemplateId(templateId)) {
-			remove(journalTemplate);
+			journalTemplatePersistence.remove(journalTemplate);
 		}
 	}
 
@@ -2915,7 +2915,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findBySmallImageId(smallImageId);
 
-		remove(journalTemplate);
+		journalTemplatePersistence.remove(journalTemplate);
 	}
 
 	/**
@@ -2929,7 +2929,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		throws NoSuchTemplateException, SystemException {
 		JournalTemplate journalTemplate = findByG_T(groupId, templateId);
 
-		remove(journalTemplate);
+		journalTemplatePersistence.remove(journalTemplate);
 	}
 
 	/**
@@ -2942,7 +2942,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	public void removeByG_S(long groupId, String structureId)
 		throws SystemException {
 		for (JournalTemplate journalTemplate : findByG_S(groupId, structureId)) {
-			remove(journalTemplate);
+			journalTemplatePersistence.remove(journalTemplate);
 		}
 	}
 
@@ -2953,7 +2953,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 	 */
 	public void removeAll() throws SystemException {
 		for (JournalTemplate journalTemplate : findAll()) {
-			remove(journalTemplate);
+			journalTemplatePersistence.remove(journalTemplate);
 		}
 	}
 

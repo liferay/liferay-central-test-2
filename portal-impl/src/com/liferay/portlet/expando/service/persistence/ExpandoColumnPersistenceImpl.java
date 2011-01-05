@@ -225,7 +225,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 					columnId);
 			}
 
-			return remove(expandoColumn);
+			return expandoColumnPersistence.remove(expandoColumn);
 		}
 		catch (NoSuchColumnException nsee) {
 			throw nsee;
@@ -1174,7 +1174,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	 */
 	public void removeByTableId(long tableId) throws SystemException {
 		for (ExpandoColumn expandoColumn : findByTableId(tableId)) {
-			remove(expandoColumn);
+			expandoColumnPersistence.remove(expandoColumn);
 		}
 	}
 
@@ -1189,7 +1189,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 		throws NoSuchColumnException, SystemException {
 		ExpandoColumn expandoColumn = findByT_N(tableId, name);
 
-		remove(expandoColumn);
+		expandoColumnPersistence.remove(expandoColumn);
 	}
 
 	/**
@@ -1199,7 +1199,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 	 */
 	public void removeAll() throws SystemException {
 		for (ExpandoColumn expandoColumn : findAll()) {
-			remove(expandoColumn);
+			expandoColumnPersistence.remove(expandoColumn);
 		}
 	}
 

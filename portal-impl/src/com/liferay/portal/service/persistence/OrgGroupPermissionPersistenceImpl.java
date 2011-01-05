@@ -210,7 +210,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 					orgGroupPermissionPK);
 			}
 
-			return remove(orgGroupPermission);
+			return orgGroupPermissionPersistence.remove(orgGroupPermission);
 		}
 		catch (NoSuchOrgGroupPermissionException nsee) {
 			throw nsee;
@@ -1169,7 +1169,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (OrgGroupPermission orgGroupPermission : findByGroupId(groupId)) {
-			remove(orgGroupPermission);
+			orgGroupPermissionPersistence.remove(orgGroupPermission);
 		}
 	}
 
@@ -1183,7 +1183,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 		throws SystemException {
 		for (OrgGroupPermission orgGroupPermission : findByPermissionId(
 				permissionId)) {
-			remove(orgGroupPermission);
+			orgGroupPermissionPersistence.remove(orgGroupPermission);
 		}
 	}
 
@@ -1194,7 +1194,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	 */
 	public void removeAll() throws SystemException {
 		for (OrgGroupPermission orgGroupPermission : findAll()) {
-			remove(orgGroupPermission);
+			orgGroupPermissionPersistence.remove(orgGroupPermission);
 		}
 	}
 

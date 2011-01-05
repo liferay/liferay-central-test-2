@@ -220,7 +220,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 					permissionId);
 			}
 
-			return remove(permission);
+			return permissionPersistence.remove(permission);
 		}
 		catch (NoSuchPermissionException nsee) {
 			throw nsee;
@@ -1056,7 +1056,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 */
 	public void removeByResourceId(long resourceId) throws SystemException {
 		for (Permission permission : findByResourceId(resourceId)) {
-			remove(permission);
+			permissionPersistence.remove(permission);
 		}
 	}
 
@@ -1071,7 +1071,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		throws NoSuchPermissionException, SystemException {
 		Permission permission = findByA_R(actionId, resourceId);
 
-		remove(permission);
+		permissionPersistence.remove(permission);
 	}
 
 	/**
@@ -1081,7 +1081,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 */
 	public void removeAll() throws SystemException {
 		for (Permission permission : findAll()) {
-			remove(permission);
+			permissionPersistence.remove(permission);
 		}
 	}
 

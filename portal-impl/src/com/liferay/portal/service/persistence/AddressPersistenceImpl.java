@@ -267,7 +267,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 					addressId);
 			}
 
-			return remove(address);
+			return addressPersistence.remove(address);
 		}
 		catch (NoSuchAddressException nsee) {
 			throw nsee;
@@ -2789,7 +2789,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Address address : findByCompanyId(companyId)) {
-			remove(address);
+			addressPersistence.remove(address);
 		}
 	}
 
@@ -2801,7 +2801,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (Address address : findByUserId(userId)) {
-			remove(address);
+			addressPersistence.remove(address);
 		}
 	}
 
@@ -2815,7 +2815,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (Address address : findByC_C(companyId, classNameId)) {
-			remove(address);
+			addressPersistence.remove(address);
 		}
 	}
 
@@ -2830,7 +2830,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		for (Address address : findByC_C_C(companyId, classNameId, classPK)) {
-			remove(address);
+			addressPersistence.remove(address);
 		}
 	}
 
@@ -2847,7 +2847,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		boolean mailing) throws SystemException {
 		for (Address address : findByC_C_C_M(companyId, classNameId, classPK,
 				mailing)) {
-			remove(address);
+			addressPersistence.remove(address);
 		}
 	}
 
@@ -2864,7 +2864,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		boolean primary) throws SystemException {
 		for (Address address : findByC_C_C_P(companyId, classNameId, classPK,
 				primary)) {
-			remove(address);
+			addressPersistence.remove(address);
 		}
 	}
 
@@ -2875,7 +2875,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	 */
 	public void removeAll() throws SystemException {
 		for (Address address : findAll()) {
-			remove(address);
+			addressPersistence.remove(address);
 		}
 	}
 

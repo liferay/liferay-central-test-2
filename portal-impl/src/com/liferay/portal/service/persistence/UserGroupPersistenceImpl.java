@@ -231,7 +231,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					userGroupId);
 			}
 
-			return remove(userGroup);
+			return userGroupPersistence.remove(userGroup);
 		}
 		catch (NoSuchUserGroupException nsee) {
 			throw nsee;
@@ -1693,7 +1693,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (UserGroup userGroup : findByCompanyId(companyId)) {
-			remove(userGroup);
+			userGroupPersistence.remove(userGroup);
 		}
 	}
 
@@ -1707,7 +1707,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	public void removeByC_P(long companyId, long parentUserGroupId)
 		throws SystemException {
 		for (UserGroup userGroup : findByC_P(companyId, parentUserGroupId)) {
-			remove(userGroup);
+			userGroupPersistence.remove(userGroup);
 		}
 	}
 
@@ -1722,7 +1722,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		throws NoSuchUserGroupException, SystemException {
 		UserGroup userGroup = findByC_N(companyId, name);
 
-		remove(userGroup);
+		userGroupPersistence.remove(userGroup);
 	}
 
 	/**
@@ -1732,7 +1732,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 */
 	public void removeAll() throws SystemException {
 		for (UserGroup userGroup : findAll()) {
-			remove(userGroup);
+			userGroupPersistence.remove(userGroup);
 		}
 	}
 

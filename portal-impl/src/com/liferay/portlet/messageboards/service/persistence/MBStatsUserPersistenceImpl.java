@@ -242,7 +242,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 					statsUserId);
 			}
 
-			return remove(mbStatsUser);
+			return mbStatsUserPersistence.remove(mbStatsUser);
 		}
 		catch (NoSuchStatsUserException nsee) {
 			throw nsee;
@@ -1743,7 +1743,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (MBStatsUser mbStatsUser : findByGroupId(groupId)) {
-			remove(mbStatsUser);
+			mbStatsUserPersistence.remove(mbStatsUser);
 		}
 	}
 
@@ -1755,7 +1755,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (MBStatsUser mbStatsUser : findByUserId(userId)) {
-			remove(mbStatsUser);
+			mbStatsUserPersistence.remove(mbStatsUser);
 		}
 	}
 
@@ -1770,7 +1770,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		throws NoSuchStatsUserException, SystemException {
 		MBStatsUser mbStatsUser = findByG_U(groupId, userId);
 
-		remove(mbStatsUser);
+		mbStatsUserPersistence.remove(mbStatsUser);
 	}
 
 	/**
@@ -1783,7 +1783,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	public void removeByG_NotM(long groupId, int messageCount)
 		throws SystemException {
 		for (MBStatsUser mbStatsUser : findByG_NotM(groupId, messageCount)) {
-			remove(mbStatsUser);
+			mbStatsUserPersistence.remove(mbStatsUser);
 		}
 	}
 
@@ -1794,7 +1794,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 	 */
 	public void removeAll() throws SystemException {
 		for (MBStatsUser mbStatsUser : findAll()) {
-			remove(mbStatsUser);
+			mbStatsUserPersistence.remove(mbStatsUser);
 		}
 	}
 

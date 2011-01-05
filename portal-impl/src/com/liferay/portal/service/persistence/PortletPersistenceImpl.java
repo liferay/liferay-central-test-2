@@ -216,7 +216,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 					id);
 			}
 
-			return remove(portlet);
+			return portletPersistence.remove(portlet);
 		}
 		catch (NoSuchPortletException nsee) {
 			throw nsee;
@@ -1019,7 +1019,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Portlet portlet : findByCompanyId(companyId)) {
-			remove(portlet);
+			portletPersistence.remove(portlet);
 		}
 	}
 
@@ -1034,7 +1034,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		throws NoSuchPortletException, SystemException {
 		Portlet portlet = findByC_P(companyId, portletId);
 
-		remove(portlet);
+		portletPersistence.remove(portlet);
 	}
 
 	/**
@@ -1044,7 +1044,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 	 */
 	public void removeAll() throws SystemException {
 		for (Portlet portlet : findAll()) {
-			remove(portlet);
+			portletPersistence.remove(portlet);
 		}
 	}
 

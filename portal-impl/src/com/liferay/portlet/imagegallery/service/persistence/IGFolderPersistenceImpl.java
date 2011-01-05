@@ -291,7 +291,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					folderId);
 			}
 
-			return remove(igFolder);
+			return igFolderPersistence.remove(igFolder);
 		}
 		catch (NoSuchFolderException nsee) {
 			throw nsee;
@@ -2636,7 +2636,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (IGFolder igFolder : findByUuid(uuid)) {
-			remove(igFolder);
+			igFolderPersistence.remove(igFolder);
 		}
 	}
 
@@ -2651,7 +2651,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = findByUUID_G(uuid, groupId);
 
-		remove(igFolder);
+		igFolderPersistence.remove(igFolder);
 	}
 
 	/**
@@ -2662,7 +2662,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (IGFolder igFolder : findByGroupId(groupId)) {
-			remove(igFolder);
+			igFolderPersistence.remove(igFolder);
 		}
 	}
 
@@ -2674,7 +2674,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (IGFolder igFolder : findByCompanyId(companyId)) {
-			remove(igFolder);
+			igFolderPersistence.remove(igFolder);
 		}
 	}
 
@@ -2688,7 +2688,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		for (IGFolder igFolder : findByG_P(groupId, parentFolderId)) {
-			remove(igFolder);
+			igFolderPersistence.remove(igFolder);
 		}
 	}
 
@@ -2704,7 +2704,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		throws NoSuchFolderException, SystemException {
 		IGFolder igFolder = findByG_P_N(groupId, parentFolderId, name);
 
-		remove(igFolder);
+		igFolderPersistence.remove(igFolder);
 	}
 
 	/**
@@ -2714,7 +2714,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 */
 	public void removeAll() throws SystemException {
 		for (IGFolder igFolder : findAll()) {
-			remove(igFolder);
+			igFolderPersistence.remove(igFolder);
 		}
 	}
 

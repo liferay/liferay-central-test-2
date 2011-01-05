@@ -269,7 +269,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 					folderId);
 			}
 
-			return remove(bookmarksFolder);
+			return bookmarksFolderPersistence.remove(bookmarksFolder);
 		}
 		catch (NoSuchFolderException nsee) {
 			throw nsee;
@@ -2426,7 +2426,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (BookmarksFolder bookmarksFolder : findByUuid(uuid)) {
-			remove(bookmarksFolder);
+			bookmarksFolderPersistence.remove(bookmarksFolder);
 		}
 	}
 
@@ -2441,7 +2441,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByUUID_G(uuid, groupId);
 
-		remove(bookmarksFolder);
+		bookmarksFolderPersistence.remove(bookmarksFolder);
 	}
 
 	/**
@@ -2452,7 +2452,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (BookmarksFolder bookmarksFolder : findByGroupId(groupId)) {
-			remove(bookmarksFolder);
+			bookmarksFolderPersistence.remove(bookmarksFolder);
 		}
 	}
 
@@ -2464,7 +2464,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (BookmarksFolder bookmarksFolder : findByCompanyId(companyId)) {
-			remove(bookmarksFolder);
+			bookmarksFolderPersistence.remove(bookmarksFolder);
 		}
 	}
 
@@ -2478,7 +2478,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		for (BookmarksFolder bookmarksFolder : findByG_P(groupId, parentFolderId)) {
-			remove(bookmarksFolder);
+			bookmarksFolderPersistence.remove(bookmarksFolder);
 		}
 	}
 
@@ -2489,7 +2489,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 	 */
 	public void removeAll() throws SystemException {
 		for (BookmarksFolder bookmarksFolder : findAll()) {
-			remove(bookmarksFolder);
+			bookmarksFolderPersistence.remove(bookmarksFolder);
 		}
 	}
 

@@ -283,7 +283,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 					resourcePermissionId);
 			}
 
-			return remove(resourcePermission);
+			return resourcePermissionPersistence.remove(resourcePermission);
 		}
 		catch (NoSuchResourcePermissionException nsee) {
 			throw nsee;
@@ -2368,7 +2368,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 */
 	public void removeByRoleId(long roleId) throws SystemException {
 		for (ResourcePermission resourcePermission : findByRoleId(roleId)) {
-			remove(resourcePermission);
+			resourcePermissionPersistence.remove(resourcePermission);
 		}
 	}
 
@@ -2381,7 +2381,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 */
 	public void removeByR_S(long roleId, int scope) throws SystemException {
 		for (ResourcePermission resourcePermission : findByR_S(roleId, scope)) {
-			remove(resourcePermission);
+			resourcePermissionPersistence.remove(resourcePermission);
 		}
 	}
 
@@ -2397,7 +2397,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		throws SystemException {
 		for (ResourcePermission resourcePermission : findByC_N_S(companyId,
 				name, scope)) {
-			remove(resourcePermission);
+			resourcePermissionPersistence.remove(resourcePermission);
 		}
 	}
 
@@ -2414,7 +2414,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		String primKey) throws SystemException {
 		for (ResourcePermission resourcePermission : findByC_N_S_P(companyId,
 				name, scope, primKey)) {
-			remove(resourcePermission);
+			resourcePermissionPersistence.remove(resourcePermission);
 		}
 	}
 
@@ -2434,7 +2434,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 		ResourcePermission resourcePermission = findByC_N_S_P_R(companyId,
 				name, scope, primKey, roleId);
 
-		remove(resourcePermission);
+		resourcePermissionPersistence.remove(resourcePermission);
 	}
 
 	/**
@@ -2444,7 +2444,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 */
 	public void removeAll() throws SystemException {
 		for (ResourcePermission resourcePermission : findAll()) {
-			remove(resourcePermission);
+			resourcePermissionPersistence.remove(resourcePermission);
 		}
 	}
 

@@ -199,7 +199,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 					browserTrackerId);
 			}
 
-			return remove(browserTracker);
+			return browserTrackerPersistence.remove(browserTracker);
 		}
 		catch (NoSuchBrowserTrackerException nsee) {
 			throw nsee;
@@ -639,7 +639,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		throws NoSuchBrowserTrackerException, SystemException {
 		BrowserTracker browserTracker = findByUserId(userId);
 
-		remove(browserTracker);
+		browserTrackerPersistence.remove(browserTracker);
 	}
 
 	/**
@@ -649,7 +649,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 	 */
 	public void removeAll() throws SystemException {
 		for (BrowserTracker browserTracker : findAll()) {
-			remove(browserTracker);
+			browserTrackerPersistence.remove(browserTracker);
 		}
 	}
 

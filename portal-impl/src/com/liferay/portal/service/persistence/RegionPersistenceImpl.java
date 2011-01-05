@@ -218,7 +218,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 					regionId);
 			}
 
-			return remove(region);
+			return regionPersistence.remove(region);
 		}
 		catch (NoSuchRegionException nsee) {
 			throw nsee;
@@ -1536,7 +1536,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 */
 	public void removeByCountryId(long countryId) throws SystemException {
 		for (Region region : findByCountryId(countryId)) {
-			remove(region);
+			regionPersistence.remove(region);
 		}
 	}
 
@@ -1548,7 +1548,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 */
 	public void removeByActive(boolean active) throws SystemException {
 		for (Region region : findByActive(active)) {
-			remove(region);
+			regionPersistence.remove(region);
 		}
 	}
 
@@ -1562,7 +1562,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	public void removeByC_A(long countryId, boolean active)
 		throws SystemException {
 		for (Region region : findByC_A(countryId, active)) {
-			remove(region);
+			regionPersistence.remove(region);
 		}
 	}
 
@@ -1573,7 +1573,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 */
 	public void removeAll() throws SystemException {
 		for (Region region : findAll()) {
-			remove(region);
+			regionPersistence.remove(region);
 		}
 	}
 

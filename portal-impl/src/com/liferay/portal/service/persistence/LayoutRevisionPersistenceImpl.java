@@ -268,7 +268,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 					layoutRevisionId);
 			}
 
-			return remove(layoutRevision);
+			return layoutRevisionPersistence.remove(layoutRevision);
 		}
 		catch (NoSuchLayoutRevisionException nsee) {
 			throw nsee;
@@ -2196,7 +2196,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 		throws SystemException {
 		for (LayoutRevision layoutRevision : findByLayoutSetBranchId(
 				layoutSetBranchId)) {
-			remove(layoutRevision);
+			layoutRevisionPersistence.remove(layoutRevision);
 		}
 	}
 
@@ -2208,7 +2208,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	 */
 	public void removeByPlid(long plid) throws SystemException {
 		for (LayoutRevision layoutRevision : findByPlid(plid)) {
-			remove(layoutRevision);
+			layoutRevisionPersistence.remove(layoutRevision);
 		}
 	}
 
@@ -2222,7 +2222,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	public void removeByL_P(long layoutSetBranchId, long plid)
 		throws SystemException {
 		for (LayoutRevision layoutRevision : findByL_P(layoutSetBranchId, plid)) {
-			remove(layoutRevision);
+			layoutRevisionPersistence.remove(layoutRevision);
 		}
 	}
 
@@ -2239,7 +2239,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 		LayoutRevision layoutRevision = findByL_H_P(layoutSetBranchId, head,
 				plid);
 
-		remove(layoutRevision);
+		layoutRevisionPersistence.remove(layoutRevision);
 	}
 
 	/**
@@ -2254,7 +2254,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 		throws SystemException {
 		for (LayoutRevision layoutRevision : findByL_P_S(layoutSetBranchId,
 				plid, status)) {
-			remove(layoutRevision);
+			layoutRevisionPersistence.remove(layoutRevision);
 		}
 	}
 
@@ -2265,7 +2265,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 	 */
 	public void removeAll() throws SystemException {
 		for (LayoutRevision layoutRevision : findAll()) {
-			remove(layoutRevision);
+			layoutRevisionPersistence.remove(layoutRevision);
 		}
 	}
 

@@ -223,7 +223,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 					membershipRequestId);
 			}
 
-			return remove(membershipRequest);
+			return membershipRequestPersistence.remove(membershipRequest);
 		}
 		catch (NoSuchMembershipRequestException nsee) {
 			throw nsee;
@@ -1564,7 +1564,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (MembershipRequest membershipRequest : findByGroupId(groupId)) {
-			remove(membershipRequest);
+			membershipRequestPersistence.remove(membershipRequest);
 		}
 	}
 
@@ -1576,7 +1576,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (MembershipRequest membershipRequest : findByUserId(userId)) {
-			remove(membershipRequest);
+			membershipRequestPersistence.remove(membershipRequest);
 		}
 	}
 
@@ -1590,7 +1590,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	public void removeByG_S(long groupId, int statusId)
 		throws SystemException {
 		for (MembershipRequest membershipRequest : findByG_S(groupId, statusId)) {
-			remove(membershipRequest);
+			membershipRequestPersistence.remove(membershipRequest);
 		}
 	}
 
@@ -1601,7 +1601,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	 */
 	public void removeAll() throws SystemException {
 		for (MembershipRequest membershipRequest : findAll()) {
-			remove(membershipRequest);
+			membershipRequestPersistence.remove(membershipRequest);
 		}
 	}
 

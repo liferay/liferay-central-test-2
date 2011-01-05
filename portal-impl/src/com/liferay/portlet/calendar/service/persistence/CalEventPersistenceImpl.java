@@ -289,7 +289,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					eventId);
 			}
 
-			return remove(calEvent);
+			return calEventPersistence.remove(calEvent);
 		}
 		catch (NoSuchEventException nsee) {
 			throw nsee;
@@ -3314,7 +3314,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (CalEvent calEvent : findByUuid(uuid)) {
-			remove(calEvent);
+			calEventPersistence.remove(calEvent);
 		}
 	}
 
@@ -3329,7 +3329,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByUUID_G(uuid, groupId);
 
-		remove(calEvent);
+		calEventPersistence.remove(calEvent);
 	}
 
 	/**
@@ -3340,7 +3340,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (CalEvent calEvent : findByCompanyId(companyId)) {
-			remove(calEvent);
+			calEventPersistence.remove(calEvent);
 		}
 	}
 
@@ -3352,7 +3352,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (CalEvent calEvent : findByGroupId(groupId)) {
-			remove(calEvent);
+			calEventPersistence.remove(calEvent);
 		}
 	}
 
@@ -3364,7 +3364,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 */
 	public void removeByNotRemindBy(int remindBy) throws SystemException {
 		for (CalEvent calEvent : findByNotRemindBy(remindBy)) {
-			remove(calEvent);
+			calEventPersistence.remove(calEvent);
 		}
 	}
 
@@ -3378,7 +3378,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public void removeByG_T(long groupId, String type)
 		throws SystemException {
 		for (CalEvent calEvent : findByG_T(groupId, type)) {
-			remove(calEvent);
+			calEventPersistence.remove(calEvent);
 		}
 	}
 
@@ -3392,7 +3392,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public void removeByG_R(long groupId, boolean repeating)
 		throws SystemException {
 		for (CalEvent calEvent : findByG_R(groupId, repeating)) {
-			remove(calEvent);
+			calEventPersistence.remove(calEvent);
 		}
 	}
 
@@ -3403,7 +3403,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 */
 	public void removeAll() throws SystemException {
 		for (CalEvent calEvent : findAll()) {
-			remove(calEvent);
+			calEventPersistence.remove(calEvent);
 		}
 	}
 

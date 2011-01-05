@@ -251,7 +251,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					categoryPropertyId);
 			}
 
-			return remove(assetCategoryProperty);
+			return assetCategoryPropertyPersistence.remove(assetCategoryProperty);
 		}
 		catch (NoSuchCategoryPropertyException nsee) {
 			throw nsee;
@@ -1813,7 +1813,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findByCompanyId(
 				companyId)) {
-			remove(assetCategoryProperty);
+			assetCategoryPropertyPersistence.remove(assetCategoryProperty);
 		}
 	}
 
@@ -1826,7 +1826,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	public void removeByCategoryId(long categoryId) throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findByCategoryId(
 				categoryId)) {
-			remove(assetCategoryProperty);
+			assetCategoryPropertyPersistence.remove(assetCategoryProperty);
 		}
 	}
 
@@ -1841,7 +1841,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findByC_K(
 				companyId, key)) {
-			remove(assetCategoryProperty);
+			assetCategoryPropertyPersistence.remove(assetCategoryProperty);
 		}
 	}
 
@@ -1856,7 +1856,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		throws NoSuchCategoryPropertyException, SystemException {
 		AssetCategoryProperty assetCategoryProperty = findByCA_K(categoryId, key);
 
-		remove(assetCategoryProperty);
+		assetCategoryPropertyPersistence.remove(assetCategoryProperty);
 	}
 
 	/**
@@ -1866,7 +1866,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 	 */
 	public void removeAll() throws SystemException {
 		for (AssetCategoryProperty assetCategoryProperty : findAll()) {
-			remove(assetCategoryProperty);
+			assetCategoryPropertyPersistence.remove(assetCategoryProperty);
 		}
 	}
 

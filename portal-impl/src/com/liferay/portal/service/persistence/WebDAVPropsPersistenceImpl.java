@@ -201,7 +201,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 					webDavPropsId);
 			}
 
-			return remove(webDAVProps);
+			return webDAVPropsPersistence.remove(webDAVProps);
 		}
 		catch (NoSuchWebDAVPropsException nsee) {
 			throw nsee;
@@ -665,7 +665,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		throws NoSuchWebDAVPropsException, SystemException {
 		WebDAVProps webDAVProps = findByC_C(classNameId, classPK);
 
-		remove(webDAVProps);
+		webDAVPropsPersistence.remove(webDAVProps);
 	}
 
 	/**
@@ -675,7 +675,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	 */
 	public void removeAll() throws SystemException {
 		for (WebDAVProps webDAVProps : findAll()) {
-			remove(webDAVProps);
+			webDAVPropsPersistence.remove(webDAVProps);
 		}
 	}
 

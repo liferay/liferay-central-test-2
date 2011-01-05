@@ -228,7 +228,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 					entryId);
 			}
 
-			return remove(ratingsEntry);
+			return ratingsEntryPersistence.remove(ratingsEntry);
 		}
 		catch (NoSuchEntryException nsee) {
 			throw nsee;
@@ -1063,7 +1063,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
 		for (RatingsEntry ratingsEntry : findByC_C(classNameId, classPK)) {
-			remove(ratingsEntry);
+			ratingsEntryPersistence.remove(ratingsEntry);
 		}
 	}
 
@@ -1079,7 +1079,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		throws NoSuchEntryException, SystemException {
 		RatingsEntry ratingsEntry = findByU_C_C(userId, classNameId, classPK);
 
-		remove(ratingsEntry);
+		ratingsEntryPersistence.remove(ratingsEntry);
 	}
 
 	/**
@@ -1089,7 +1089,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 	 */
 	public void removeAll() throws SystemException {
 		for (RatingsEntry ratingsEntry : findAll()) {
-			remove(ratingsEntry);
+			ratingsEntryPersistence.remove(ratingsEntry);
 		}
 	}
 

@@ -300,7 +300,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					folderId);
 			}
 
-			return remove(dlFolder);
+			return dlFolderPersistence.remove(dlFolder);
 		}
 		catch (NoSuchFolderException nsee) {
 			throw nsee;
@@ -3033,7 +3033,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (DLFolder dlFolder : findByUuid(uuid)) {
-			remove(dlFolder);
+			dlFolderPersistence.remove(dlFolder);
 		}
 	}
 
@@ -3048,7 +3048,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = findByUUID_G(uuid, groupId);
 
-		remove(dlFolder);
+		dlFolderPersistence.remove(dlFolder);
 	}
 
 	/**
@@ -3059,7 +3059,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (DLFolder dlFolder : findByGroupId(groupId)) {
-			remove(dlFolder);
+			dlFolderPersistence.remove(dlFolder);
 		}
 	}
 
@@ -3071,7 +3071,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (DLFolder dlFolder : findByCompanyId(companyId)) {
-			remove(dlFolder);
+			dlFolderPersistence.remove(dlFolder);
 		}
 	}
 
@@ -3085,7 +3085,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
 		for (DLFolder dlFolder : findByG_P(groupId, parentFolderId)) {
-			remove(dlFolder);
+			dlFolderPersistence.remove(dlFolder);
 		}
 	}
 
@@ -3099,7 +3099,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	public void removeByP_N(long parentFolderId, String name)
 		throws SystemException {
 		for (DLFolder dlFolder : findByP_N(parentFolderId, name)) {
-			remove(dlFolder);
+			dlFolderPersistence.remove(dlFolder);
 		}
 	}
 
@@ -3115,7 +3115,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		throws NoSuchFolderException, SystemException {
 		DLFolder dlFolder = findByG_P_N(groupId, parentFolderId, name);
 
-		remove(dlFolder);
+		dlFolderPersistence.remove(dlFolder);
 	}
 
 	/**
@@ -3125,7 +3125,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 */
 	public void removeAll() throws SystemException {
 		for (DLFolder dlFolder : findAll()) {
-			remove(dlFolder);
+			dlFolderPersistence.remove(dlFolder);
 		}
 	}
 

@@ -268,7 +268,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 					entryId);
 			}
 
-			return remove(bookmarksEntry);
+			return bookmarksEntryPersistence.remove(bookmarksEntry);
 		}
 		catch (NoSuchEntryException nsee) {
 			throw nsee;
@@ -2892,7 +2892,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (BookmarksEntry bookmarksEntry : findByUuid(uuid)) {
-			remove(bookmarksEntry);
+			bookmarksEntryPersistence.remove(bookmarksEntry);
 		}
 	}
 
@@ -2907,7 +2907,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		throws NoSuchEntryException, SystemException {
 		BookmarksEntry bookmarksEntry = findByUUID_G(uuid, groupId);
 
-		remove(bookmarksEntry);
+		bookmarksEntryPersistence.remove(bookmarksEntry);
 	}
 
 	/**
@@ -2918,7 +2918,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (BookmarksEntry bookmarksEntry : findByGroupId(groupId)) {
-			remove(bookmarksEntry);
+			bookmarksEntryPersistence.remove(bookmarksEntry);
 		}
 	}
 
@@ -2932,7 +2932,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (BookmarksEntry bookmarksEntry : findByG_U(groupId, userId)) {
-			remove(bookmarksEntry);
+			bookmarksEntryPersistence.remove(bookmarksEntry);
 		}
 	}
 
@@ -2946,7 +2946,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	public void removeByG_F(long groupId, long folderId)
 		throws SystemException {
 		for (BookmarksEntry bookmarksEntry : findByG_F(groupId, folderId)) {
-			remove(bookmarksEntry);
+			bookmarksEntryPersistence.remove(bookmarksEntry);
 		}
 	}
 
@@ -2957,7 +2957,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	 */
 	public void removeAll() throws SystemException {
 		for (BookmarksEntry bookmarksEntry : findAll()) {
-			remove(bookmarksEntry);
+			bookmarksEntryPersistence.remove(bookmarksEntry);
 		}
 	}
 

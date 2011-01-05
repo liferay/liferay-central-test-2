@@ -215,7 +215,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 					virtualHostId);
 			}
 
-			return remove(virtualHost);
+			return virtualHostPersistence.remove(virtualHost);
 		}
 		catch (NoSuchVirtualHostException nsee) {
 			throw nsee;
@@ -832,7 +832,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 		throws NoSuchVirtualHostException, SystemException {
 		VirtualHost virtualHost = findByHostname(hostname);
 
-		remove(virtualHost);
+		virtualHostPersistence.remove(virtualHost);
 	}
 
 	/**
@@ -846,7 +846,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 		throws NoSuchVirtualHostException, SystemException {
 		VirtualHost virtualHost = findByC_L(companyId, layoutSetId);
 
-		remove(virtualHost);
+		virtualHostPersistence.remove(virtualHost);
 	}
 
 	/**
@@ -856,7 +856,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	 */
 	public void removeAll() throws SystemException {
 		for (VirtualHost virtualHost : findAll()) {
-			remove(virtualHost);
+			virtualHostPersistence.remove(virtualHost);
 		}
 	}
 

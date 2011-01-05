@@ -181,7 +181,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 					clusterGroupId);
 			}
 
-			return remove(clusterGroup);
+			return clusterGroupPersistence.remove(clusterGroup);
 		}
 		catch (NoSuchClusterGroupException nsee) {
 			throw nsee;
@@ -468,7 +468,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 	 */
 	public void removeAll() throws SystemException {
 		for (ClusterGroup clusterGroup : findAll()) {
-			remove(clusterGroup);
+			clusterGroupPersistence.remove(clusterGroup);
 		}
 	}
 

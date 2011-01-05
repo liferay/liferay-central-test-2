@@ -329,7 +329,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					imageId);
 			}
 
-			return remove(igImage);
+			return igImagePersistence.remove(igImage);
 		}
 		catch (NoSuchImageException nsee) {
 			throw nsee;
@@ -4074,7 +4074,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (IGImage igImage : findByUuid(uuid)) {
-			remove(igImage);
+			igImagePersistence.remove(igImage);
 		}
 	}
 
@@ -4089,7 +4089,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByUUID_G(uuid, groupId);
 
-		remove(igImage);
+		igImagePersistence.remove(igImage);
 	}
 
 	/**
@@ -4100,7 +4100,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (IGImage igImage : findByGroupId(groupId)) {
-			remove(igImage);
+			igImagePersistence.remove(igImage);
 		}
 	}
 
@@ -4114,7 +4114,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findBySmallImageId(smallImageId);
 
-		remove(igImage);
+		igImagePersistence.remove(igImage);
 	}
 
 	/**
@@ -4127,7 +4127,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByLargeImageId(largeImageId);
 
-		remove(igImage);
+		igImagePersistence.remove(igImage);
 	}
 
 	/**
@@ -4140,7 +4140,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByCustom1ImageId(custom1ImageId);
 
-		remove(igImage);
+		igImagePersistence.remove(igImage);
 	}
 
 	/**
@@ -4153,7 +4153,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		throws NoSuchImageException, SystemException {
 		IGImage igImage = findByCustom2ImageId(custom2ImageId);
 
-		remove(igImage);
+		igImagePersistence.remove(igImage);
 	}
 
 	/**
@@ -4166,7 +4166,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (IGImage igImage : findByG_U(groupId, userId)) {
-			remove(igImage);
+			igImagePersistence.remove(igImage);
 		}
 	}
 
@@ -4180,7 +4180,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public void removeByG_F(long groupId, long folderId)
 		throws SystemException {
 		for (IGImage igImage : findByG_F(groupId, folderId)) {
-			remove(igImage);
+			igImagePersistence.remove(igImage);
 		}
 	}
 
@@ -4195,7 +4195,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	public void removeByG_F_N(long groupId, long folderId, String name)
 		throws SystemException {
 		for (IGImage igImage : findByG_F_N(groupId, folderId, name)) {
-			remove(igImage);
+			igImagePersistence.remove(igImage);
 		}
 	}
 
@@ -4206,7 +4206,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 */
 	public void removeAll() throws SystemException {
 		for (IGImage igImage : findAll()) {
-			remove(igImage);
+			igImagePersistence.remove(igImage);
 		}
 	}
 

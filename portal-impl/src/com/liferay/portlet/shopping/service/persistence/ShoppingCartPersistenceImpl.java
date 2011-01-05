@@ -230,7 +230,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 					cartId);
 			}
 
-			return remove(shoppingCart);
+			return shoppingCartPersistence.remove(shoppingCart);
 		}
 		catch (NoSuchCartException nsee) {
 			throw nsee;
@@ -1357,7 +1357,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (ShoppingCart shoppingCart : findByGroupId(groupId)) {
-			remove(shoppingCart);
+			shoppingCartPersistence.remove(shoppingCart);
 		}
 	}
 
@@ -1369,7 +1369,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (ShoppingCart shoppingCart : findByUserId(userId)) {
-			remove(shoppingCart);
+			shoppingCartPersistence.remove(shoppingCart);
 		}
 	}
 
@@ -1384,7 +1384,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		throws NoSuchCartException, SystemException {
 		ShoppingCart shoppingCart = findByG_U(groupId, userId);
 
-		remove(shoppingCart);
+		shoppingCartPersistence.remove(shoppingCart);
 	}
 
 	/**
@@ -1394,7 +1394,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 */
 	public void removeAll() throws SystemException {
 		for (ShoppingCart shoppingCart : findAll()) {
-			remove(shoppingCart);
+			shoppingCartPersistence.remove(shoppingCart);
 		}
 	}
 

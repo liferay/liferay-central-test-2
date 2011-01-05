@@ -219,7 +219,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 					equityGroupSettingId);
 			}
 
-			return remove(socialEquityGroupSetting);
+			return socialEquityGroupSettingPersistence.remove(socialEquityGroupSetting);
 		}
 		catch (NoSuchEquityGroupSettingException nsee) {
 			throw nsee;
@@ -707,7 +707,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 		SocialEquityGroupSetting socialEquityGroupSetting = findByG_C_T(groupId,
 				classNameId, type);
 
-		remove(socialEquityGroupSetting);
+		socialEquityGroupSettingPersistence.remove(socialEquityGroupSetting);
 	}
 
 	/**
@@ -717,7 +717,7 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 	 */
 	public void removeAll() throws SystemException {
 		for (SocialEquityGroupSetting socialEquityGroupSetting : findAll()) {
-			remove(socialEquityGroupSetting);
+			socialEquityGroupSettingPersistence.remove(socialEquityGroupSetting);
 		}
 	}
 

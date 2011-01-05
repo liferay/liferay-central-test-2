@@ -235,7 +235,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 					codeId);
 			}
 
-			return remove(resourceCode);
+			return resourceCodePersistence.remove(resourceCode);
 		}
 		catch (NoSuchResourceCodeException nsee) {
 			throw nsee;
@@ -1413,7 +1413,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (ResourceCode resourceCode : findByCompanyId(companyId)) {
-			remove(resourceCode);
+			resourceCodePersistence.remove(resourceCode);
 		}
 	}
 
@@ -1425,7 +1425,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 */
 	public void removeByName(String name) throws SystemException {
 		for (ResourceCode resourceCode : findByName(name)) {
-			remove(resourceCode);
+			resourceCodePersistence.remove(resourceCode);
 		}
 	}
 
@@ -1441,7 +1441,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		throws NoSuchResourceCodeException, SystemException {
 		ResourceCode resourceCode = findByC_N_S(companyId, name, scope);
 
-		remove(resourceCode);
+		resourceCodePersistence.remove(resourceCode);
 	}
 
 	/**
@@ -1451,7 +1451,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 */
 	public void removeAll() throws SystemException {
 		for (ResourceCode resourceCode : findAll()) {
-			remove(resourceCode);
+			resourceCodePersistence.remove(resourceCode);
 		}
 	}
 

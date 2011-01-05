@@ -262,7 +262,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 					categoryId);
 			}
 
-			return remove(mbCategory);
+			return mbCategoryPersistence.remove(mbCategory);
 		}
 		catch (NoSuchCategoryException nsee) {
 			throw nsee;
@@ -2728,7 +2728,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (MBCategory mbCategory : findByUuid(uuid)) {
-			remove(mbCategory);
+			mbCategoryPersistence.remove(mbCategory);
 		}
 	}
 
@@ -2743,7 +2743,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		throws NoSuchCategoryException, SystemException {
 		MBCategory mbCategory = findByUUID_G(uuid, groupId);
 
-		remove(mbCategory);
+		mbCategoryPersistence.remove(mbCategory);
 	}
 
 	/**
@@ -2754,7 +2754,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (MBCategory mbCategory : findByGroupId(groupId)) {
-			remove(mbCategory);
+			mbCategoryPersistence.remove(mbCategory);
 		}
 	}
 
@@ -2766,7 +2766,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (MBCategory mbCategory : findByCompanyId(companyId)) {
-			remove(mbCategory);
+			mbCategoryPersistence.remove(mbCategory);
 		}
 	}
 
@@ -2780,7 +2780,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	public void removeByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
 		for (MBCategory mbCategory : findByG_P(groupId, parentCategoryId)) {
-			remove(mbCategory);
+			mbCategoryPersistence.remove(mbCategory);
 		}
 	}
 
@@ -2791,7 +2791,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 */
 	public void removeAll() throws SystemException {
 		for (MBCategory mbCategory : findAll()) {
-			remove(mbCategory);
+			mbCategoryPersistence.remove(mbCategory);
 		}
 	}
 

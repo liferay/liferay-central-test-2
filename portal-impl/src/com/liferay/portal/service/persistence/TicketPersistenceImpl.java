@@ -194,7 +194,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 					ticketId);
 			}
 
-			return remove(ticket);
+			return ticketPersistence.remove(ticket);
 		}
 		catch (NoSuchTicketException nsee) {
 			throw nsee;
@@ -647,7 +647,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		throws NoSuchTicketException, SystemException {
 		Ticket ticket = findByKey(key);
 
-		remove(ticket);
+		ticketPersistence.remove(ticket);
 	}
 
 	/**
@@ -657,7 +657,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 */
 	public void removeAll() throws SystemException {
 		for (Ticket ticket : findAll()) {
-			remove(ticket);
+			ticketPersistence.remove(ticket);
 		}
 	}
 

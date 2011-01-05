@@ -193,7 +193,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 					orgLaborId);
 			}
 
-			return remove(orgLabor);
+			return orgLaborPersistence.remove(orgLabor);
 		}
 		catch (NoSuchOrgLaborException nsee) {
 			throw nsee;
@@ -833,7 +833,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	public void removeByOrganizationId(long organizationId)
 		throws SystemException {
 		for (OrgLabor orgLabor : findByOrganizationId(organizationId)) {
-			remove(orgLabor);
+			orgLaborPersistence.remove(orgLabor);
 		}
 	}
 
@@ -844,7 +844,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	 */
 	public void removeAll() throws SystemException {
 		for (OrgLabor orgLabor : findAll()) {
-			remove(orgLabor);
+			orgLaborPersistence.remove(orgLabor);
 		}
 	}
 

@@ -197,7 +197,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 					passwordTrackerId);
 			}
 
-			return remove(passwordTracker);
+			return passwordTrackerPersistence.remove(passwordTracker);
 		}
 		catch (NoSuchPasswordTrackerException nsee) {
 			throw nsee;
@@ -826,7 +826,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (PasswordTracker passwordTracker : findByUserId(userId)) {
-			remove(passwordTracker);
+			passwordTrackerPersistence.remove(passwordTracker);
 		}
 	}
 
@@ -837,7 +837,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 */
 	public void removeAll() throws SystemException {
 		for (PasswordTracker passwordTracker : findAll()) {
-			remove(passwordTracker);
+			passwordTrackerPersistence.remove(passwordTracker);
 		}
 	}
 

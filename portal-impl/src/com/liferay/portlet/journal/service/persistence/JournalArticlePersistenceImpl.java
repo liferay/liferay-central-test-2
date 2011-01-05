@@ -446,7 +446,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 					id);
 			}
 
-			return remove(journalArticle);
+			return journalArticlePersistence.remove(journalArticle);
 		}
 		catch (NoSuchArticleException nsee) {
 			throw nsee;
@@ -7483,7 +7483,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (JournalArticle journalArticle : findByUuid(uuid)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7498,7 +7498,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByUUID_G(uuid, groupId);
 
-		remove(journalArticle);
+		journalArticlePersistence.remove(journalArticle);
 	}
 
 	/**
@@ -7511,7 +7511,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws SystemException {
 		for (JournalArticle journalArticle : findByResourcePrimKey(
 				resourcePrimKey)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7523,7 +7523,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalArticle journalArticle : findByGroupId(groupId)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7535,7 +7535,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (JournalArticle journalArticle : findByCompanyId(companyId)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7548,7 +7548,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public void removeBySmallImageId(long smallImageId)
 		throws SystemException {
 		for (JournalArticle journalArticle : findBySmallImageId(smallImageId)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7562,7 +7562,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public void removeByR_ST(long resourcePrimKey, int status)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByR_ST(resourcePrimKey, status)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7576,7 +7576,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public void removeByG_A(long groupId, String articleId)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_A(groupId, articleId)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7590,7 +7590,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public void removeByG_S(long groupId, String structureId)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_S(groupId, structureId)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7604,7 +7604,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public void removeByG_T(long groupId, String templateId)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_T(groupId, templateId)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7618,7 +7618,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public void removeByG_UT(long groupId, String urlTitle)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_UT(groupId, urlTitle)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7632,7 +7632,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public void removeByG_ST(long groupId, int status)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_ST(groupId, status)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7646,7 +7646,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public void removeByC_ST(long companyId, int status)
 		throws SystemException {
 		for (JournalArticle journalArticle : findByC_ST(companyId, status)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7662,7 +7662,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws NoSuchArticleException, SystemException {
 		JournalArticle journalArticle = findByG_A_V(groupId, articleId, version);
 
-		remove(journalArticle);
+		journalArticlePersistence.remove(journalArticle);
 	}
 
 	/**
@@ -7677,7 +7677,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_A_ST(groupId, articleId,
 				status)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7693,7 +7693,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws SystemException {
 		for (JournalArticle journalArticle : findByG_UT_ST(groupId, urlTitle,
 				status)) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 
@@ -7704,7 +7704,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 */
 	public void removeAll() throws SystemException {
 		for (JournalArticle journalArticle : findAll()) {
-			remove(journalArticle);
+			journalArticlePersistence.remove(journalArticle);
 		}
 	}
 

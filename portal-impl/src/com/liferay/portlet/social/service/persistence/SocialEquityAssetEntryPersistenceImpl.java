@@ -205,7 +205,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 					equityAssetEntryId);
 			}
 
-			return remove(socialEquityAssetEntry);
+			return socialEquityAssetEntryPersistence.remove(socialEquityAssetEntry);
 		}
 		catch (NoSuchEquityAssetEntryException nsee) {
 			throw nsee;
@@ -656,7 +656,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 		throws NoSuchEquityAssetEntryException, SystemException {
 		SocialEquityAssetEntry socialEquityAssetEntry = findByAssetEntryId(assetEntryId);
 
-		remove(socialEquityAssetEntry);
+		socialEquityAssetEntryPersistence.remove(socialEquityAssetEntry);
 	}
 
 	/**
@@ -666,7 +666,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 	 */
 	public void removeAll() throws SystemException {
 		for (SocialEquityAssetEntry socialEquityAssetEntry : findAll()) {
-			remove(socialEquityAssetEntry);
+			socialEquityAssetEntryPersistence.remove(socialEquityAssetEntry);
 		}
 	}
 

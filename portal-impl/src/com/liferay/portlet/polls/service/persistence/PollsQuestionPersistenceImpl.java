@@ -239,7 +239,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 					questionId);
 			}
 
-			return remove(pollsQuestion);
+			return pollsQuestionPersistence.remove(pollsQuestion);
 		}
 		catch (NoSuchQuestionException nsee) {
 			throw nsee;
@@ -1559,7 +1559,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (PollsQuestion pollsQuestion : findByUuid(uuid)) {
-			remove(pollsQuestion);
+			pollsQuestionPersistence.remove(pollsQuestion);
 		}
 	}
 
@@ -1574,7 +1574,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		throws NoSuchQuestionException, SystemException {
 		PollsQuestion pollsQuestion = findByUUID_G(uuid, groupId);
 
-		remove(pollsQuestion);
+		pollsQuestionPersistence.remove(pollsQuestion);
 	}
 
 	/**
@@ -1585,7 +1585,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (PollsQuestion pollsQuestion : findByGroupId(groupId)) {
-			remove(pollsQuestion);
+			pollsQuestionPersistence.remove(pollsQuestion);
 		}
 	}
 
@@ -1596,7 +1596,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	 */
 	public void removeAll() throws SystemException {
 		for (PollsQuestion pollsQuestion : findAll()) {
-			remove(pollsQuestion);
+			pollsQuestionPersistence.remove(pollsQuestion);
 		}
 	}
 

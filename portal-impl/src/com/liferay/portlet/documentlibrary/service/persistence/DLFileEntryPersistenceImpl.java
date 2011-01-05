@@ -348,7 +348,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 					fileEntryId);
 			}
 
-			return remove(dlFileEntry);
+			return dlFileEntryPersistence.remove(dlFileEntry);
 		}
 		catch (NoSuchFileEntryException nsee) {
 			throw nsee;
@@ -4571,7 +4571,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (DLFileEntry dlFileEntry : findByUuid(uuid)) {
-			remove(dlFileEntry);
+			dlFileEntryPersistence.remove(dlFileEntry);
 		}
 	}
 
@@ -4586,7 +4586,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByUUID_G(uuid, groupId);
 
-		remove(dlFileEntry);
+		dlFileEntryPersistence.remove(dlFileEntry);
 	}
 
 	/**
@@ -4597,7 +4597,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (DLFileEntry dlFileEntry : findByGroupId(groupId)) {
-			remove(dlFileEntry);
+			dlFileEntryPersistence.remove(dlFileEntry);
 		}
 	}
 
@@ -4609,7 +4609,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (DLFileEntry dlFileEntry : findByCompanyId(companyId)) {
-			remove(dlFileEntry);
+			dlFileEntryPersistence.remove(dlFileEntry);
 		}
 	}
 
@@ -4623,7 +4623,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (DLFileEntry dlFileEntry : findByG_U(groupId, userId)) {
-			remove(dlFileEntry);
+			dlFileEntryPersistence.remove(dlFileEntry);
 		}
 	}
 
@@ -4637,7 +4637,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	public void removeByG_F(long groupId, long folderId)
 		throws SystemException {
 		for (DLFileEntry dlFileEntry : findByG_F(groupId, folderId)) {
-			remove(dlFileEntry);
+			dlFileEntryPersistence.remove(dlFileEntry);
 		}
 	}
 
@@ -4652,7 +4652,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	public void removeByG_U_F(long groupId, long userId, long folderId)
 		throws SystemException {
 		for (DLFileEntry dlFileEntry : findByG_U_F(groupId, userId, folderId)) {
-			remove(dlFileEntry);
+			dlFileEntryPersistence.remove(dlFileEntry);
 		}
 	}
 
@@ -4668,7 +4668,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByG_F_N(groupId, folderId, name);
 
-		remove(dlFileEntry);
+		dlFileEntryPersistence.remove(dlFileEntry);
 	}
 
 	/**
@@ -4683,7 +4683,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 		throws NoSuchFileEntryException, SystemException {
 		DLFileEntry dlFileEntry = findByG_F_T(groupId, folderId, title);
 
-		remove(dlFileEntry);
+		dlFileEntryPersistence.remove(dlFileEntry);
 	}
 
 	/**
@@ -4693,7 +4693,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	 */
 	public void removeAll() throws SystemException {
 		for (DLFileEntry dlFileEntry : findAll()) {
-			remove(dlFileEntry);
+			dlFileEntryPersistence.remove(dlFileEntry);
 		}
 	}
 

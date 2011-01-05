@@ -325,7 +325,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 					relationId);
 			}
 
-			return remove(socialRelation);
+			return socialRelationPersistence.remove(socialRelation);
 		}
 		catch (NoSuchRelationException nsee) {
 			throw nsee;
@@ -3550,7 +3550,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (SocialRelation socialRelation : findByUuid(uuid)) {
-			remove(socialRelation);
+			socialRelationPersistence.remove(socialRelation);
 		}
 	}
 
@@ -3562,7 +3562,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (SocialRelation socialRelation : findByCompanyId(companyId)) {
-			remove(socialRelation);
+			socialRelationPersistence.remove(socialRelation);
 		}
 	}
 
@@ -3574,7 +3574,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 */
 	public void removeByUserId1(long userId1) throws SystemException {
 		for (SocialRelation socialRelation : findByUserId1(userId1)) {
-			remove(socialRelation);
+			socialRelationPersistence.remove(socialRelation);
 		}
 	}
 
@@ -3586,7 +3586,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 */
 	public void removeByUserId2(long userId2) throws SystemException {
 		for (SocialRelation socialRelation : findByUserId2(userId2)) {
-			remove(socialRelation);
+			socialRelationPersistence.remove(socialRelation);
 		}
 	}
 
@@ -3598,7 +3598,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 */
 	public void removeByType(int type) throws SystemException {
 		for (SocialRelation socialRelation : findByType(type)) {
-			remove(socialRelation);
+			socialRelationPersistence.remove(socialRelation);
 		}
 	}
 
@@ -3611,7 +3611,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 */
 	public void removeByC_T(long companyId, int type) throws SystemException {
 		for (SocialRelation socialRelation : findByC_T(companyId, type)) {
-			remove(socialRelation);
+			socialRelationPersistence.remove(socialRelation);
 		}
 	}
 
@@ -3624,7 +3624,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 */
 	public void removeByU1_T(long userId1, int type) throws SystemException {
 		for (SocialRelation socialRelation : findByU1_T(userId1, type)) {
-			remove(socialRelation);
+			socialRelationPersistence.remove(socialRelation);
 		}
 	}
 
@@ -3637,7 +3637,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 */
 	public void removeByU2_T(long userId2, int type) throws SystemException {
 		for (SocialRelation socialRelation : findByU2_T(userId2, type)) {
-			remove(socialRelation);
+			socialRelationPersistence.remove(socialRelation);
 		}
 	}
 
@@ -3653,7 +3653,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		throws NoSuchRelationException, SystemException {
 		SocialRelation socialRelation = findByU1_U2_T(userId1, userId2, type);
 
-		remove(socialRelation);
+		socialRelationPersistence.remove(socialRelation);
 	}
 
 	/**
@@ -3663,7 +3663,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 */
 	public void removeAll() throws SystemException {
 		for (SocialRelation socialRelation : findAll()) {
-			remove(socialRelation);
+			socialRelationPersistence.remove(socialRelation);
 		}
 	}
 

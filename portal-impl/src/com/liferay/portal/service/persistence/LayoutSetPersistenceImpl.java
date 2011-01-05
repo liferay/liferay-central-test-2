@@ -213,7 +213,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 					layoutSetId);
 			}
 
-			return remove(layoutSet);
+			return layoutSetPersistence.remove(layoutSet);
 		}
 		catch (NoSuchLayoutSetException nsee) {
 			throw nsee;
@@ -1012,7 +1012,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (LayoutSet layoutSet : findByGroupId(groupId)) {
-			remove(layoutSet);
+			layoutSetPersistence.remove(layoutSet);
 		}
 	}
 
@@ -1027,7 +1027,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 		throws NoSuchLayoutSetException, SystemException {
 		LayoutSet layoutSet = findByG_P(groupId, privateLayout);
 
-		remove(layoutSet);
+		layoutSetPersistence.remove(layoutSet);
 	}
 
 	/**
@@ -1037,7 +1037,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 	 */
 	public void removeAll() throws SystemException {
 		for (LayoutSet layoutSet : findAll()) {
-			remove(layoutSet);
+			layoutSetPersistence.remove(layoutSet);
 		}
 	}
 

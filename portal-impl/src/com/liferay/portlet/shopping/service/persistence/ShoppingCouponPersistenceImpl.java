@@ -215,7 +215,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 					couponId);
 			}
 
-			return remove(shoppingCoupon);
+			return shoppingCouponPersistence.remove(shoppingCoupon);
 		}
 		catch (NoSuchCouponException nsee) {
 			throw nsee;
@@ -1022,7 +1022,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (ShoppingCoupon shoppingCoupon : findByGroupId(groupId)) {
-			remove(shoppingCoupon);
+			shoppingCouponPersistence.remove(shoppingCoupon);
 		}
 	}
 
@@ -1036,7 +1036,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 		throws NoSuchCouponException, SystemException {
 		ShoppingCoupon shoppingCoupon = findByCode(code);
 
-		remove(shoppingCoupon);
+		shoppingCouponPersistence.remove(shoppingCoupon);
 	}
 
 	/**
@@ -1046,7 +1046,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	 */
 	public void removeAll() throws SystemException {
 		for (ShoppingCoupon shoppingCoupon : findAll()) {
-			remove(shoppingCoupon);
+			shoppingCouponPersistence.remove(shoppingCoupon);
 		}
 	}
 

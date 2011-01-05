@@ -230,7 +230,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 					tableId);
 			}
 
-			return remove(expandoTable);
+			return expandoTablePersistence.remove(expandoTable);
 		}
 		catch (NoSuchTableException nsee) {
 			throw nsee;
@@ -1078,7 +1078,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (ExpandoTable expandoTable : findByC_C(companyId, classNameId)) {
-			remove(expandoTable);
+			expandoTablePersistence.remove(expandoTable);
 		}
 	}
 
@@ -1094,7 +1094,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		throws NoSuchTableException, SystemException {
 		ExpandoTable expandoTable = findByC_C_N(companyId, classNameId, name);
 
-		remove(expandoTable);
+		expandoTablePersistence.remove(expandoTable);
 	}
 
 	/**
@@ -1104,7 +1104,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 */
 	public void removeAll() throws SystemException {
 		for (ExpandoTable expandoTable : findAll()) {
-			remove(expandoTable);
+			expandoTablePersistence.remove(expandoTable);
 		}
 	}
 

@@ -212,7 +212,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 					layoutPrototypeId);
 			}
 
-			return remove(layoutPrototype);
+			return layoutPrototypePersistence.remove(layoutPrototype);
 		}
 		catch (NoSuchLayoutPrototypeException nsee) {
 			throw nsee;
@@ -1436,7 +1436,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (LayoutPrototype layoutPrototype : findByCompanyId(companyId)) {
-			remove(layoutPrototype);
+			layoutPrototypePersistence.remove(layoutPrototype);
 		}
 	}
 
@@ -1450,7 +1450,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	public void removeByC_A(long companyId, boolean active)
 		throws SystemException {
 		for (LayoutPrototype layoutPrototype : findByC_A(companyId, active)) {
-			remove(layoutPrototype);
+			layoutPrototypePersistence.remove(layoutPrototype);
 		}
 	}
 
@@ -1461,7 +1461,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	 */
 	public void removeAll() throws SystemException {
 		for (LayoutPrototype layoutPrototype : findAll()) {
-			remove(layoutPrototype);
+			layoutPrototypePersistence.remove(layoutPrototype);
 		}
 	}
 

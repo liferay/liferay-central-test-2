@@ -193,7 +193,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 					contactId);
 			}
 
-			return remove(contact);
+			return contactPersistence.remove(contact);
 		}
 		catch (NoSuchContactException nsee) {
 			throw nsee;
@@ -834,7 +834,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Contact contact : findByCompanyId(companyId)) {
-			remove(contact);
+			contactPersistence.remove(contact);
 		}
 	}
 
@@ -845,7 +845,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	 */
 	public void removeAll() throws SystemException {
 		for (Contact contact : findAll()) {
-			remove(contact);
+			contactPersistence.remove(contact);
 		}
 	}
 

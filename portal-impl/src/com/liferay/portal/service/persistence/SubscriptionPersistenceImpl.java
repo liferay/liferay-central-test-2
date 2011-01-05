@@ -256,7 +256,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 					subscriptionId);
 			}
 
-			return remove(subscription);
+			return subscriptionPersistence.remove(subscription);
 		}
 		catch (NoSuchSubscriptionException nsee) {
 			throw nsee;
@@ -1816,7 +1816,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (Subscription subscription : findByUserId(userId)) {
-			remove(subscription);
+			subscriptionPersistence.remove(subscription);
 		}
 	}
 
@@ -1830,7 +1830,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	public void removeByU_C(long userId, long classNameId)
 		throws SystemException {
 		for (Subscription subscription : findByU_C(userId, classNameId)) {
-			remove(subscription);
+			subscriptionPersistence.remove(subscription);
 		}
 	}
 
@@ -1846,7 +1846,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		throws SystemException {
 		for (Subscription subscription : findByC_C_C(companyId, classNameId,
 				classPK)) {
-			remove(subscription);
+			subscriptionPersistence.remove(subscription);
 		}
 	}
 
@@ -1864,7 +1864,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		Subscription subscription = findByC_U_C_C(companyId, userId,
 				classNameId, classPK);
 
-		remove(subscription);
+		subscriptionPersistence.remove(subscription);
 	}
 
 	/**
@@ -1874,7 +1874,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 */
 	public void removeAll() throws SystemException {
 		for (Subscription subscription : findAll()) {
-			remove(subscription);
+			subscriptionPersistence.remove(subscription);
 		}
 	}
 

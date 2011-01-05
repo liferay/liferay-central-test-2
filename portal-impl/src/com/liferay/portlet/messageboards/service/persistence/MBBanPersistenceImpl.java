@@ -236,7 +236,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 					banId);
 			}
 
-			return remove(mbBan);
+			return mbBanPersistence.remove(mbBan);
 		}
 		catch (NoSuchBanException nsee) {
 			throw nsee;
@@ -1679,7 +1679,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (MBBan mbBan : findByGroupId(groupId)) {
-			remove(mbBan);
+			mbBanPersistence.remove(mbBan);
 		}
 	}
 
@@ -1691,7 +1691,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (MBBan mbBan : findByUserId(userId)) {
-			remove(mbBan);
+			mbBanPersistence.remove(mbBan);
 		}
 	}
 
@@ -1703,7 +1703,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 */
 	public void removeByBanUserId(long banUserId) throws SystemException {
 		for (MBBan mbBan : findByBanUserId(banUserId)) {
-			remove(mbBan);
+			mbBanPersistence.remove(mbBan);
 		}
 	}
 
@@ -1718,7 +1718,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		throws NoSuchBanException, SystemException {
 		MBBan mbBan = findByG_B(groupId, banUserId);
 
-		remove(mbBan);
+		mbBanPersistence.remove(mbBan);
 	}
 
 	/**
@@ -1728,7 +1728,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	 */
 	public void removeAll() throws SystemException {
 		for (MBBan mbBan : findAll()) {
-			remove(mbBan);
+			mbBanPersistence.remove(mbBan);
 		}
 	}
 

@@ -324,7 +324,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					equityLogId);
 			}
 
-			return remove(socialEquityLog);
+			return socialEquityLogPersistence.remove(socialEquityLog);
 		}
 		catch (NoSuchEquityLogException nsee) {
 			throw nsee;
@@ -3212,7 +3212,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		throws SystemException {
 		for (SocialEquityLog socialEquityLog : findByAEI_T_A(assetEntryId,
 				type, active)) {
-			remove(socialEquityLog);
+			socialEquityLogPersistence.remove(socialEquityLog);
 		}
 	}
 
@@ -3229,7 +3229,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		boolean active, String extraData) throws SystemException {
 		for (SocialEquityLog socialEquityLog : findByAEI_AID_A_E(assetEntryId,
 				actionId, active, extraData)) {
-			remove(socialEquityLog);
+			socialEquityLogPersistence.remove(socialEquityLog);
 		}
 	}
 
@@ -3248,7 +3248,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		throws SystemException {
 		for (SocialEquityLog socialEquityLog : findByU_AEI_AID_A_E(userId,
 				assetEntryId, actionId, active, extraData)) {
-			remove(socialEquityLog);
+			socialEquityLogPersistence.remove(socialEquityLog);
 		}
 	}
 
@@ -3268,7 +3268,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		throws SystemException {
 		for (SocialEquityLog socialEquityLog : findByU_AID_AD_A_T_E(userId,
 				actionId, actionDate, active, type, extraData)) {
-			remove(socialEquityLog);
+			socialEquityLogPersistence.remove(socialEquityLog);
 		}
 	}
 
@@ -3288,7 +3288,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		throws SystemException {
 		for (SocialEquityLog socialEquityLog : findByAEI_AID_AD_A_T_E(
 				assetEntryId, actionId, actionDate, active, type, extraData)) {
-			remove(socialEquityLog);
+			socialEquityLogPersistence.remove(socialEquityLog);
 		}
 	}
 
@@ -3310,7 +3310,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 		SocialEquityLog socialEquityLog = findByU_AEI_AID_AD_A_T_E(userId,
 				assetEntryId, actionId, actionDate, active, type, extraData);
 
-		remove(socialEquityLog);
+		socialEquityLogPersistence.remove(socialEquityLog);
 	}
 
 	/**
@@ -3320,7 +3320,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 */
 	public void removeAll() throws SystemException {
 		for (SocialEquityLog socialEquityLog : findAll()) {
-			remove(socialEquityLog);
+			socialEquityLogPersistence.remove(socialEquityLog);
 		}
 	}
 

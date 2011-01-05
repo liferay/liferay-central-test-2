@@ -239,7 +239,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 					equitySettingId);
 			}
 
-			return remove(socialEquitySetting);
+			return socialEquitySettingPersistence.remove(socialEquitySetting);
 		}
 		catch (NoSuchEquitySettingException nsee) {
 			throw nsee;
@@ -1163,7 +1163,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		throws SystemException {
 		for (SocialEquitySetting socialEquitySetting : findByG_C_A(groupId,
 				classNameId, actionId)) {
-			remove(socialEquitySetting);
+			socialEquitySettingPersistence.remove(socialEquitySetting);
 		}
 	}
 
@@ -1182,7 +1182,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 		SocialEquitySetting socialEquitySetting = findByG_C_A_T(groupId,
 				classNameId, actionId, type);
 
-		remove(socialEquitySetting);
+		socialEquitySettingPersistence.remove(socialEquitySetting);
 	}
 
 	/**
@@ -1192,7 +1192,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	 */
 	public void removeAll() throws SystemException {
 		for (SocialEquitySetting socialEquitySetting : findAll()) {
-			remove(socialEquitySetting);
+			socialEquitySettingPersistence.remove(socialEquitySetting);
 		}
 	}
 

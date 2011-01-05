@@ -250,7 +250,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 					orderId);
 			}
 
-			return remove(shoppingOrder);
+			return shoppingOrderPersistence.remove(shoppingOrder);
 		}
 		catch (NoSuchOrderException nsee) {
 			throw nsee;
@@ -1940,7 +1940,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (ShoppingOrder shoppingOrder : findByGroupId(groupId)) {
-			remove(shoppingOrder);
+			shoppingOrderPersistence.remove(shoppingOrder);
 		}
 	}
 
@@ -1954,7 +1954,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 		throws NoSuchOrderException, SystemException {
 		ShoppingOrder shoppingOrder = findByNumber(number);
 
-		remove(shoppingOrder);
+		shoppingOrderPersistence.remove(shoppingOrder);
 	}
 
 	/**
@@ -1967,7 +1967,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 		throws NoSuchOrderException, SystemException {
 		ShoppingOrder shoppingOrder = findByPPTxnId(ppTxnId);
 
-		remove(shoppingOrder);
+		shoppingOrderPersistence.remove(shoppingOrder);
 	}
 
 	/**
@@ -1982,7 +1982,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 		String ppPaymentStatus) throws SystemException {
 		for (ShoppingOrder shoppingOrder : findByG_U_PPPS(groupId, userId,
 				ppPaymentStatus)) {
-			remove(shoppingOrder);
+			shoppingOrderPersistence.remove(shoppingOrder);
 		}
 	}
 
@@ -1993,7 +1993,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 */
 	public void removeAll() throws SystemException {
 		for (ShoppingOrder shoppingOrder : findAll()) {
-			remove(shoppingOrder);
+			shoppingOrderPersistence.remove(shoppingOrder);
 		}
 	}
 

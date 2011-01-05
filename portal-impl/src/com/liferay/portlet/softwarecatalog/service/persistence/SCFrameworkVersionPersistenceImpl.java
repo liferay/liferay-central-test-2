@@ -236,7 +236,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 					frameworkVersionId);
 			}
 
-			return remove(scFrameworkVersion);
+			return scFrameworkVersionPersistence.remove(scFrameworkVersion);
 		}
 		catch (NoSuchFrameworkVersionException nsee) {
 			throw nsee;
@@ -1852,7 +1852,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (SCFrameworkVersion scFrameworkVersion : findByGroupId(groupId)) {
-			remove(scFrameworkVersion);
+			scFrameworkVersionPersistence.remove(scFrameworkVersion);
 		}
 	}
 
@@ -1864,7 +1864,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (SCFrameworkVersion scFrameworkVersion : findByCompanyId(companyId)) {
-			remove(scFrameworkVersion);
+			scFrameworkVersionPersistence.remove(scFrameworkVersion);
 		}
 	}
 
@@ -1878,7 +1878,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	public void removeByG_A(long groupId, boolean active)
 		throws SystemException {
 		for (SCFrameworkVersion scFrameworkVersion : findByG_A(groupId, active)) {
-			remove(scFrameworkVersion);
+			scFrameworkVersionPersistence.remove(scFrameworkVersion);
 		}
 	}
 
@@ -1889,7 +1889,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 */
 	public void removeAll() throws SystemException {
 		for (SCFrameworkVersion scFrameworkVersion : findAll()) {
-			remove(scFrameworkVersion);
+			scFrameworkVersionPersistence.remove(scFrameworkVersion);
 		}
 	}
 

@@ -224,7 +224,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 					deliveryId);
 			}
 
-			return remove(announcementsDelivery);
+			return announcementsDeliveryPersistence.remove(announcementsDelivery);
 		}
 		catch (NoSuchDeliveryException nsee) {
 			throw nsee;
@@ -1038,7 +1038,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (AnnouncementsDelivery announcementsDelivery : findByUserId(userId)) {
-			remove(announcementsDelivery);
+			announcementsDeliveryPersistence.remove(announcementsDelivery);
 		}
 	}
 
@@ -1053,7 +1053,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 		throws NoSuchDeliveryException, SystemException {
 		AnnouncementsDelivery announcementsDelivery = findByU_T(userId, type);
 
-		remove(announcementsDelivery);
+		announcementsDeliveryPersistence.remove(announcementsDelivery);
 	}
 
 	/**
@@ -1063,7 +1063,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	 */
 	public void removeAll() throws SystemException {
 		for (AnnouncementsDelivery announcementsDelivery : findAll()) {
-			remove(announcementsDelivery);
+			announcementsDeliveryPersistence.remove(announcementsDelivery);
 		}
 	}
 

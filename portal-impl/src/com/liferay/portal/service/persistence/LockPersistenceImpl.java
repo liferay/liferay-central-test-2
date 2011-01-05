@@ -224,7 +224,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 					lockId);
 			}
 
-			return remove(lock);
+			return lockPersistence.remove(lock);
 		}
 		catch (NoSuchLockException nsee) {
 			throw nsee;
@@ -1413,7 +1413,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (Lock lock : findByUuid(uuid)) {
-			remove(lock);
+			lockPersistence.remove(lock);
 		}
 	}
 
@@ -1426,7 +1426,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	public void removeByLtExpirationDate(Date expirationDate)
 		throws SystemException {
 		for (Lock lock : findByLtExpirationDate(expirationDate)) {
-			remove(lock);
+			lockPersistence.remove(lock);
 		}
 	}
 
@@ -1441,7 +1441,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		throws NoSuchLockException, SystemException {
 		Lock lock = findByC_K(className, key);
 
-		remove(lock);
+		lockPersistence.remove(lock);
 	}
 
 	/**
@@ -1451,7 +1451,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 */
 	public void removeAll() throws SystemException {
 		for (Lock lock : findAll()) {
-			remove(lock);
+			lockPersistence.remove(lock);
 		}
 	}
 

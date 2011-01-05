@@ -258,7 +258,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 					id);
 			}
 
-			return remove(journalFeed);
+			return journalFeedPersistence.remove(journalFeed);
 		}
 		catch (NoSuchFeedException nsee) {
 			throw nsee;
@@ -1767,7 +1767,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (JournalFeed journalFeed : findByUuid(uuid)) {
-			remove(journalFeed);
+			journalFeedPersistence.remove(journalFeed);
 		}
 	}
 
@@ -1782,7 +1782,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		throws NoSuchFeedException, SystemException {
 		JournalFeed journalFeed = findByUUID_G(uuid, groupId);
 
-		remove(journalFeed);
+		journalFeedPersistence.remove(journalFeed);
 	}
 
 	/**
@@ -1793,7 +1793,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalFeed journalFeed : findByGroupId(groupId)) {
-			remove(journalFeed);
+			journalFeedPersistence.remove(journalFeed);
 		}
 	}
 
@@ -1808,7 +1808,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		throws NoSuchFeedException, SystemException {
 		JournalFeed journalFeed = findByG_F(groupId, feedId);
 
-		remove(journalFeed);
+		journalFeedPersistence.remove(journalFeed);
 	}
 
 	/**
@@ -1818,7 +1818,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	 */
 	public void removeAll() throws SystemException {
 		for (JournalFeed journalFeed : findAll()) {
-			remove(journalFeed);
+			journalFeedPersistence.remove(journalFeed);
 		}
 	}
 

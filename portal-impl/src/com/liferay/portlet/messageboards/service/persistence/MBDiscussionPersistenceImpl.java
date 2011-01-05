@@ -231,7 +231,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 					discussionId);
 			}
 
-			return remove(mbDiscussion);
+			return mbDiscussionPersistence.remove(mbDiscussion);
 		}
 		catch (NoSuchDiscussionException nsee) {
 			throw nsee;
@@ -1167,7 +1167,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 */
 	public void removeByClassNameId(long classNameId) throws SystemException {
 		for (MBDiscussion mbDiscussion : findByClassNameId(classNameId)) {
-			remove(mbDiscussion);
+			mbDiscussionPersistence.remove(mbDiscussion);
 		}
 	}
 
@@ -1181,7 +1181,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = findByThreadId(threadId);
 
-		remove(mbDiscussion);
+		mbDiscussionPersistence.remove(mbDiscussion);
 	}
 
 	/**
@@ -1195,7 +1195,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		throws NoSuchDiscussionException, SystemException {
 		MBDiscussion mbDiscussion = findByC_C(classNameId, classPK);
 
-		remove(mbDiscussion);
+		mbDiscussionPersistence.remove(mbDiscussion);
 	}
 
 	/**
@@ -1205,7 +1205,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	 */
 	public void removeAll() throws SystemException {
 		for (MBDiscussion mbDiscussion : findAll()) {
-			remove(mbDiscussion);
+			mbDiscussionPersistence.remove(mbDiscussion);
 		}
 	}
 

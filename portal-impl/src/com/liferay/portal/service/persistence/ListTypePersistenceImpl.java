@@ -193,7 +193,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 					listTypeId);
 			}
 
-			return remove(listType);
+			return listTypePersistence.remove(listType);
 		}
 		catch (NoSuchListTypeException nsee) {
 			throw nsee;
@@ -838,7 +838,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 */
 	public void removeByType(String type) throws SystemException {
 		for (ListType listType : findByType(type)) {
-			remove(listType);
+			listTypePersistence.remove(listType);
 		}
 	}
 
@@ -849,7 +849,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 */
 	public void removeAll() throws SystemException {
 		for (ListType listType : findAll()) {
-			remove(listType);
+			listTypePersistence.remove(listType);
 		}
 	}
 

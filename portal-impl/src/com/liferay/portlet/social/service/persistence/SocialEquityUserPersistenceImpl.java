@@ -272,7 +272,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 					equityUserId);
 			}
 
-			return remove(socialEquityUser);
+			return socialEquityUserPersistence.remove(socialEquityUser);
 		}
 		catch (NoSuchEquityUserException nsee) {
 			throw nsee;
@@ -2418,7 +2418,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByGroupId(groupId)) {
-			remove(socialEquityUser);
+			socialEquityUserPersistence.remove(socialEquityUser);
 		}
 	}
 
@@ -2430,7 +2430,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	 */
 	public void removeByGroupRanked(long groupId) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByGroupRanked(groupId)) {
-			remove(socialEquityUser);
+			socialEquityUserPersistence.remove(socialEquityUser);
 		}
 	}
 
@@ -2442,7 +2442,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByUserId(userId)) {
-			remove(socialEquityUser);
+			socialEquityUserPersistence.remove(socialEquityUser);
 		}
 	}
 
@@ -2454,7 +2454,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	 */
 	public void removeByRank(int rank) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByRank(rank)) {
-			remove(socialEquityUser);
+			socialEquityUserPersistence.remove(socialEquityUser);
 		}
 	}
 
@@ -2469,7 +2469,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		throws NoSuchEquityUserException, SystemException {
 		SocialEquityUser socialEquityUser = findByG_U(groupId, userId);
 
-		remove(socialEquityUser);
+		socialEquityUserPersistence.remove(socialEquityUser);
 	}
 
 	/**
@@ -2481,7 +2481,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	 */
 	public void removeByG_R(long groupId, int rank) throws SystemException {
 		for (SocialEquityUser socialEquityUser : findByG_R(groupId, rank)) {
-			remove(socialEquityUser);
+			socialEquityUserPersistence.remove(socialEquityUser);
 		}
 	}
 
@@ -2492,7 +2492,7 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 	 */
 	public void removeAll() throws SystemException {
 		for (SocialEquityUser socialEquityUser : findAll()) {
-			remove(socialEquityUser);
+			socialEquityUserPersistence.remove(socialEquityUser);
 		}
 	}
 

@@ -260,7 +260,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					portletPreferencesId);
 			}
 
-			return remove(portletPreferences);
+			return portletPreferencesPersistence.remove(portletPreferences);
 		}
 		catch (NoSuchPortletPreferencesException nsee) {
 			throw nsee;
@@ -1862,7 +1862,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 */
 	public void removeByPlid(long plid) throws SystemException {
 		for (PortletPreferences portletPreferences : findByPlid(plid)) {
-			remove(portletPreferences);
+			portletPreferencesPersistence.remove(portletPreferences);
 		}
 	}
 
@@ -1876,7 +1876,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	public void removeByP_P(long plid, String portletId)
 		throws SystemException {
 		for (PortletPreferences portletPreferences : findByP_P(plid, portletId)) {
-			remove(portletPreferences);
+			portletPreferencesPersistence.remove(portletPreferences);
 		}
 	}
 
@@ -1892,7 +1892,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		throws SystemException {
 		for (PortletPreferences portletPreferences : findByO_O_P(ownerId,
 				ownerType, plid)) {
-			remove(portletPreferences);
+			portletPreferencesPersistence.remove(portletPreferences);
 		}
 	}
 
@@ -1911,7 +1911,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		PortletPreferences portletPreferences = findByO_O_P_P(ownerId,
 				ownerType, plid, portletId);
 
-		remove(portletPreferences);
+		portletPreferencesPersistence.remove(portletPreferences);
 	}
 
 	/**
@@ -1921,7 +1921,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 */
 	public void removeAll() throws SystemException {
 		for (PortletPreferences portletPreferences : findAll()) {
-			remove(portletPreferences);
+			portletPreferencesPersistence.remove(portletPreferences);
 		}
 	}
 

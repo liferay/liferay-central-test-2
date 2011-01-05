@@ -186,7 +186,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 					equityHistoryId);
 			}
 
-			return remove(socialEquityHistory);
+			return socialEquityHistoryPersistence.remove(socialEquityHistory);
 		}
 		catch (NoSuchEquityHistoryException nsee) {
 			throw nsee;
@@ -477,7 +477,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	 */
 	public void removeAll() throws SystemException {
 		for (SocialEquityHistory socialEquityHistory : findAll()) {
-			remove(socialEquityHistory);
+			socialEquityHistoryPersistence.remove(socialEquityHistory);
 		}
 	}
 

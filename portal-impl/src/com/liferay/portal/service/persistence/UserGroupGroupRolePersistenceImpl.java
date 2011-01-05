@@ -249,7 +249,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 					userGroupGroupRolePK);
 			}
 
-			return remove(userGroupGroupRole);
+			return userGroupGroupRolePersistence.remove(userGroupGroupRole);
 		}
 		catch (NoSuchUserGroupGroupRoleException nsee) {
 			throw nsee;
@@ -2252,7 +2252,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	public void removeByUserGroupId(long userGroupId) throws SystemException {
 		for (UserGroupGroupRole userGroupGroupRole : findByUserGroupId(
 				userGroupId)) {
-			remove(userGroupGroupRole);
+			userGroupGroupRolePersistence.remove(userGroupGroupRole);
 		}
 	}
 
@@ -2264,7 +2264,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (UserGroupGroupRole userGroupGroupRole : findByGroupId(groupId)) {
-			remove(userGroupGroupRole);
+			userGroupGroupRolePersistence.remove(userGroupGroupRole);
 		}
 	}
 
@@ -2276,7 +2276,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	 */
 	public void removeByRoleId(long roleId) throws SystemException {
 		for (UserGroupGroupRole userGroupGroupRole : findByRoleId(roleId)) {
-			remove(userGroupGroupRole);
+			userGroupGroupRolePersistence.remove(userGroupGroupRole);
 		}
 	}
 
@@ -2291,7 +2291,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 		throws SystemException {
 		for (UserGroupGroupRole userGroupGroupRole : findByU_G(userGroupId,
 				groupId)) {
-			remove(userGroupGroupRole);
+			userGroupGroupRolePersistence.remove(userGroupGroupRole);
 		}
 	}
 
@@ -2305,7 +2305,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	public void removeByG_R(long groupId, long roleId)
 		throws SystemException {
 		for (UserGroupGroupRole userGroupGroupRole : findByG_R(groupId, roleId)) {
-			remove(userGroupGroupRole);
+			userGroupGroupRolePersistence.remove(userGroupGroupRole);
 		}
 	}
 
@@ -2316,7 +2316,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	 */
 	public void removeAll() throws SystemException {
 		for (UserGroupGroupRole userGroupGroupRole : findAll()) {
-			remove(userGroupGroupRole);
+			userGroupGroupRolePersistence.remove(userGroupGroupRole);
 		}
 	}
 

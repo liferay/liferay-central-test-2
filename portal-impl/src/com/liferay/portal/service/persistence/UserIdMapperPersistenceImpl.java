@@ -240,7 +240,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 					userIdMapperId);
 			}
 
-			return remove(userIdMapper);
+			return userIdMapperPersistence.remove(userIdMapper);
 		}
 		catch (NoSuchUserIdMapperException nsee) {
 			throw nsee;
@@ -1246,7 +1246,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (UserIdMapper userIdMapper : findByUserId(userId)) {
-			remove(userIdMapper);
+			userIdMapperPersistence.remove(userIdMapper);
 		}
 	}
 
@@ -1261,7 +1261,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		throws NoSuchUserIdMapperException, SystemException {
 		UserIdMapper userIdMapper = findByU_T(userId, type);
 
-		remove(userIdMapper);
+		userIdMapperPersistence.remove(userIdMapper);
 	}
 
 	/**
@@ -1275,7 +1275,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		throws NoSuchUserIdMapperException, SystemException {
 		UserIdMapper userIdMapper = findByT_E(type, externalUserId);
 
-		remove(userIdMapper);
+		userIdMapperPersistence.remove(userIdMapper);
 	}
 
 	/**
@@ -1285,7 +1285,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 	 */
 	public void removeAll() throws SystemException {
 		for (UserIdMapper userIdMapper : findAll()) {
-			remove(userIdMapper);
+			userIdMapperPersistence.remove(userIdMapper);
 		}
 	}
 

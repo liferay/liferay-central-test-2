@@ -219,7 +219,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 					licenseId);
 			}
 
-			return remove(scLicense);
+			return scLicensePersistence.remove(scLicense);
 		}
 		catch (NoSuchLicenseException nsee) {
 			throw nsee;
@@ -1480,7 +1480,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 */
 	public void removeByActive(boolean active) throws SystemException {
 		for (SCLicense scLicense : findByActive(active)) {
-			remove(scLicense);
+			scLicensePersistence.remove(scLicense);
 		}
 	}
 
@@ -1494,7 +1494,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	public void removeByA_R(boolean active, boolean recommended)
 		throws SystemException {
 		for (SCLicense scLicense : findByA_R(active, recommended)) {
-			remove(scLicense);
+			scLicensePersistence.remove(scLicense);
 		}
 	}
 
@@ -1505,7 +1505,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	 */
 	public void removeAll() throws SystemException {
 		for (SCLicense scLicense : findAll()) {
-			remove(scLicense);
+			scLicensePersistence.remove(scLicense);
 		}
 	}
 

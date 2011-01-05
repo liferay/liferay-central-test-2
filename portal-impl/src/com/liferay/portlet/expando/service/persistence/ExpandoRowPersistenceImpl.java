@@ -217,7 +217,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 					rowId);
 			}
 
-			return remove(expandoRow);
+			return expandoRowPersistence.remove(expandoRow);
 		}
 		catch (NoSuchRowException nsee) {
 			throw nsee;
@@ -1005,7 +1005,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 	 */
 	public void removeByTableId(long tableId) throws SystemException {
 		for (ExpandoRow expandoRow : findByTableId(tableId)) {
-			remove(expandoRow);
+			expandoRowPersistence.remove(expandoRow);
 		}
 	}
 
@@ -1020,7 +1020,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 		throws NoSuchRowException, SystemException {
 		ExpandoRow expandoRow = findByT_C(tableId, classPK);
 
-		remove(expandoRow);
+		expandoRowPersistence.remove(expandoRow);
 	}
 
 	/**
@@ -1030,7 +1030,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 	 */
 	public void removeAll() throws SystemException {
 		for (ExpandoRow expandoRow : findAll()) {
-			remove(expandoRow);
+			expandoRowPersistence.remove(expandoRow);
 		}
 	}
 

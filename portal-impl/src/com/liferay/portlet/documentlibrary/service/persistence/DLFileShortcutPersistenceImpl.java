@@ -272,7 +272,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 					fileShortcutId);
 			}
 
-			return remove(dlFileShortcut);
+			return dlFileShortcutPersistence.remove(dlFileShortcut);
 		}
 		catch (NoSuchFileShortcutException nsee) {
 			throw nsee;
@@ -2441,7 +2441,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByUuid(uuid)) {
-			remove(dlFileShortcut);
+			dlFileShortcutPersistence.remove(dlFileShortcut);
 		}
 	}
 
@@ -2456,7 +2456,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		throws NoSuchFileShortcutException, SystemException {
 		DLFileShortcut dlFileShortcut = findByUUID_G(uuid, groupId);
 
-		remove(dlFileShortcut);
+		dlFileShortcutPersistence.remove(dlFileShortcut);
 	}
 
 	/**
@@ -2468,7 +2468,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	public void removeByToFileEntryId(long toFileEntryId)
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByToFileEntryId(toFileEntryId)) {
-			remove(dlFileShortcut);
+			dlFileShortcutPersistence.remove(dlFileShortcut);
 		}
 	}
 
@@ -2482,7 +2482,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	public void removeByG_F(long groupId, long folderId)
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByG_F(groupId, folderId)) {
-			remove(dlFileShortcut);
+			dlFileShortcutPersistence.remove(dlFileShortcut);
 		}
 	}
 
@@ -2498,7 +2498,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findByG_F_S(groupId, folderId,
 				status)) {
-			remove(dlFileShortcut);
+			dlFileShortcutPersistence.remove(dlFileShortcut);
 		}
 	}
 
@@ -2509,7 +2509,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 	 */
 	public void removeAll() throws SystemException {
 		for (DLFileShortcut dlFileShortcut : findAll()) {
-			remove(dlFileShortcut);
+			dlFileShortcutPersistence.remove(dlFileShortcut);
 		}
 	}
 

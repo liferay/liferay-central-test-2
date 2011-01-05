@@ -297,7 +297,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 					messageFlagId);
 			}
 
-			return remove(mbMessageFlag);
+			return mbMessageFlagPersistence.remove(mbMessageFlag);
 		}
 		catch (NoSuchMessageFlagException nsee) {
 			throw nsee;
@@ -2852,7 +2852,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (MBMessageFlag mbMessageFlag : findByUserId(userId)) {
-			remove(mbMessageFlag);
+			mbMessageFlagPersistence.remove(mbMessageFlag);
 		}
 	}
 
@@ -2864,7 +2864,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 */
 	public void removeByThreadId(long threadId) throws SystemException {
 		for (MBMessageFlag mbMessageFlag : findByThreadId(threadId)) {
-			remove(mbMessageFlag);
+			mbMessageFlagPersistence.remove(mbMessageFlag);
 		}
 	}
 
@@ -2876,7 +2876,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 */
 	public void removeByMessageId(long messageId) throws SystemException {
 		for (MBMessageFlag mbMessageFlag : findByMessageId(messageId)) {
-			remove(mbMessageFlag);
+			mbMessageFlagPersistence.remove(mbMessageFlag);
 		}
 	}
 
@@ -2889,7 +2889,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 */
 	public void removeByT_F(long threadId, int flag) throws SystemException {
 		for (MBMessageFlag mbMessageFlag : findByT_F(threadId, flag)) {
-			remove(mbMessageFlag);
+			mbMessageFlagPersistence.remove(mbMessageFlag);
 		}
 	}
 
@@ -2902,7 +2902,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 */
 	public void removeByM_F(long messageId, int flag) throws SystemException {
 		for (MBMessageFlag mbMessageFlag : findByM_F(messageId, flag)) {
-			remove(mbMessageFlag);
+			mbMessageFlagPersistence.remove(mbMessageFlag);
 		}
 	}
 
@@ -2917,7 +2917,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	public void removeByU_T_F(long userId, long threadId, int flag)
 		throws SystemException {
 		for (MBMessageFlag mbMessageFlag : findByU_T_F(userId, threadId, flag)) {
-			remove(mbMessageFlag);
+			mbMessageFlagPersistence.remove(mbMessageFlag);
 		}
 	}
 
@@ -2933,7 +2933,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 		throws NoSuchMessageFlagException, SystemException {
 		MBMessageFlag mbMessageFlag = findByU_M_F(userId, messageId, flag);
 
-		remove(mbMessageFlag);
+		mbMessageFlagPersistence.remove(mbMessageFlag);
 	}
 
 	/**
@@ -2943,7 +2943,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	 */
 	public void removeAll() throws SystemException {
 		for (MBMessageFlag mbMessageFlag : findAll()) {
-			remove(mbMessageFlag);
+			mbMessageFlagPersistence.remove(mbMessageFlag);
 		}
 	}
 

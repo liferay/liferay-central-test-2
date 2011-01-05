@@ -228,7 +228,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 					flagId);
 			}
 
-			return remove(announcementsFlag);
+			return announcementsFlagPersistence.remove(announcementsFlag);
 		}
 		catch (NoSuchFlagException nsee) {
 			throw nsee;
@@ -1048,7 +1048,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 */
 	public void removeByEntryId(long entryId) throws SystemException {
 		for (AnnouncementsFlag announcementsFlag : findByEntryId(entryId)) {
-			remove(announcementsFlag);
+			announcementsFlagPersistence.remove(announcementsFlag);
 		}
 	}
 
@@ -1064,7 +1064,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		throws NoSuchFlagException, SystemException {
 		AnnouncementsFlag announcementsFlag = findByU_E_V(userId, entryId, value);
 
-		remove(announcementsFlag);
+		announcementsFlagPersistence.remove(announcementsFlag);
 	}
 
 	/**
@@ -1074,7 +1074,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 	 */
 	public void removeAll() throws SystemException {
 		for (AnnouncementsFlag announcementsFlag : findAll()) {
-			remove(announcementsFlag);
+			announcementsFlagPersistence.remove(announcementsFlag);
 		}
 	}
 

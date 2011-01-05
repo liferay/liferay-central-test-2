@@ -257,7 +257,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 					mailingListId);
 			}
 
-			return remove(mbMailingList);
+			return mbMailingListPersistence.remove(mbMailingList);
 		}
 		catch (NoSuchMailingListException nsee) {
 			throw nsee;
@@ -1608,7 +1608,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (MBMailingList mbMailingList : findByUuid(uuid)) {
-			remove(mbMailingList);
+			mbMailingListPersistence.remove(mbMailingList);
 		}
 	}
 
@@ -1623,7 +1623,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = findByUUID_G(uuid, groupId);
 
-		remove(mbMailingList);
+		mbMailingListPersistence.remove(mbMailingList);
 	}
 
 	/**
@@ -1634,7 +1634,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 */
 	public void removeByActive(boolean active) throws SystemException {
 		for (MBMailingList mbMailingList : findByActive(active)) {
-			remove(mbMailingList);
+			mbMailingListPersistence.remove(mbMailingList);
 		}
 	}
 
@@ -1649,7 +1649,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		throws NoSuchMailingListException, SystemException {
 		MBMailingList mbMailingList = findByG_C(groupId, categoryId);
 
-		remove(mbMailingList);
+		mbMailingListPersistence.remove(mbMailingList);
 	}
 
 	/**
@@ -1659,7 +1659,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	 */
 	public void removeAll() throws SystemException {
 		for (MBMailingList mbMailingList : findAll()) {
-			remove(mbMailingList);
+			mbMailingListPersistence.remove(mbMailingList);
 		}
 	}
 

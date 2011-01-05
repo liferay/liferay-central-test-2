@@ -230,7 +230,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 					pluginSettingId);
 			}
 
-			return remove(pluginSetting);
+			return pluginSettingPersistence.remove(pluginSetting);
 		}
 		catch (NoSuchPluginSettingException nsee) {
 			throw nsee;
@@ -1077,7 +1077,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (PluginSetting pluginSetting : findByCompanyId(companyId)) {
-			remove(pluginSetting);
+			pluginSettingPersistence.remove(pluginSetting);
 		}
 	}
 
@@ -1094,7 +1094,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		PluginSetting pluginSetting = findByC_I_T(companyId, pluginId,
 				pluginType);
 
-		remove(pluginSetting);
+		pluginSettingPersistence.remove(pluginSetting);
 	}
 
 	/**
@@ -1104,7 +1104,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 */
 	public void removeAll() throws SystemException {
 		for (PluginSetting pluginSetting : findAll()) {
-			remove(pluginSetting);
+			pluginSettingPersistence.remove(pluginSetting);
 		}
 	}
 

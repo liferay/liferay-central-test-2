@@ -179,7 +179,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 					accountId);
 			}
 
-			return remove(account);
+			return accountPersistence.remove(account);
 		}
 		catch (NoSuchAccountException nsee) {
 			throw nsee;
@@ -474,7 +474,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 	 */
 	public void removeAll() throws SystemException {
 		for (Account account : findAll()) {
-			remove(account);
+			accountPersistence.remove(account);
 		}
 	}
 

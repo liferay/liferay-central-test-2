@@ -207,7 +207,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 					orgGroupRolePK);
 			}
 
-			return remove(orgGroupRole);
+			return orgGroupRolePersistence.remove(orgGroupRole);
 		}
 		catch (NoSuchOrgGroupRoleException nsee) {
 			throw nsee;
@@ -1158,7 +1158,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (OrgGroupRole orgGroupRole : findByGroupId(groupId)) {
-			remove(orgGroupRole);
+			orgGroupRolePersistence.remove(orgGroupRole);
 		}
 	}
 
@@ -1170,7 +1170,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 */
 	public void removeByRoleId(long roleId) throws SystemException {
 		for (OrgGroupRole orgGroupRole : findByRoleId(roleId)) {
-			remove(orgGroupRole);
+			orgGroupRolePersistence.remove(orgGroupRole);
 		}
 	}
 
@@ -1181,7 +1181,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 	 */
 	public void removeAll() throws SystemException {
 		for (OrgGroupRole orgGroupRole : findAll()) {
-			remove(orgGroupRole);
+			orgGroupRolePersistence.remove(orgGroupRole);
 		}
 	}
 

@@ -210,7 +210,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 					shardId);
 			}
 
-			return remove(shard);
+			return shardPersistence.remove(shard);
 		}
 		catch (NoSuchShardException nsee) {
 			throw nsee;
@@ -821,7 +821,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		throws NoSuchShardException, SystemException {
 		Shard shard = findByName(name);
 
-		remove(shard);
+		shardPersistence.remove(shard);
 	}
 
 	/**
@@ -835,7 +835,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		throws NoSuchShardException, SystemException {
 		Shard shard = findByC_C(classNameId, classPK);
 
-		remove(shard);
+		shardPersistence.remove(shard);
 	}
 
 	/**
@@ -845,7 +845,7 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 */
 	public void removeAll() throws SystemException {
 		for (Shard shard : findAll()) {
-			remove(shard);
+			shardPersistence.remove(shard);
 		}
 	}
 

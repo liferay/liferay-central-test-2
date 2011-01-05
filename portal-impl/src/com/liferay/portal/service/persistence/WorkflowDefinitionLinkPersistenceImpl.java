@@ -242,7 +242,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 					workflowDefinitionLinkId);
 			}
 
-			return remove(workflowDefinitionLink);
+			return workflowDefinitionLinkPersistence.remove(workflowDefinitionLink);
 		}
 		catch (NoSuchWorkflowDefinitionLinkException nsee) {
 			throw nsee;
@@ -1497,7 +1497,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (WorkflowDefinitionLink workflowDefinitionLink : findByCompanyId(
 				companyId)) {
-			remove(workflowDefinitionLink);
+			workflowDefinitionLinkPersistence.remove(workflowDefinitionLink);
 		}
 	}
 
@@ -1514,7 +1514,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		WorkflowDefinitionLink workflowDefinitionLink = findByG_C_C(groupId,
 				companyId, classNameId);
 
-		remove(workflowDefinitionLink);
+		workflowDefinitionLinkPersistence.remove(workflowDefinitionLink);
 	}
 
 	/**
@@ -1529,7 +1529,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		int workflowDefinitionVersion) throws SystemException {
 		for (WorkflowDefinitionLink workflowDefinitionLink : findByC_W_W(
 				companyId, workflowDefinitionName, workflowDefinitionVersion)) {
-			remove(workflowDefinitionLink);
+			workflowDefinitionLinkPersistence.remove(workflowDefinitionLink);
 		}
 	}
 
@@ -1540,7 +1540,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 */
 	public void removeAll() throws SystemException {
 		for (WorkflowDefinitionLink workflowDefinitionLink : findAll()) {
-			remove(workflowDefinitionLink);
+			workflowDefinitionLinkPersistence.remove(workflowDefinitionLink);
 		}
 	}
 

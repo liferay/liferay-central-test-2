@@ -201,7 +201,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 					workflowInstanceLinkId);
 			}
 
-			return remove(workflowInstanceLink);
+			return workflowInstanceLinkPersistence.remove(workflowInstanceLink);
 		}
 		catch (NoSuchWorkflowInstanceLinkException nsee) {
 			throw nsee;
@@ -914,7 +914,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		long classPK) throws SystemException {
 		for (WorkflowInstanceLink workflowInstanceLink : findByG_C_C_C(
 				groupId, companyId, classNameId, classPK)) {
-			remove(workflowInstanceLink);
+			workflowInstanceLinkPersistence.remove(workflowInstanceLink);
 		}
 	}
 
@@ -925,7 +925,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 */
 	public void removeAll() throws SystemException {
 		for (WorkflowInstanceLink workflowInstanceLink : findAll()) {
-			remove(workflowInstanceLink);
+			workflowInstanceLinkPersistence.remove(workflowInstanceLink);
 		}
 	}
 

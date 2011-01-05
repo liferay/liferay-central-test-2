@@ -277,7 +277,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 					reviewId);
 			}
 
-			return remove(tasksReview);
+			return tasksReviewPersistence.remove(tasksReview);
 		}
 		catch (NoSuchReviewException nsee) {
 			throw nsee;
@@ -2577,7 +2577,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (TasksReview tasksReview : findByUserId(userId)) {
-			remove(tasksReview);
+			tasksReviewPersistence.remove(tasksReview);
 		}
 	}
 
@@ -2589,7 +2589,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	 */
 	public void removeByProposalId(long proposalId) throws SystemException {
 		for (TasksReview tasksReview : findByProposalId(proposalId)) {
-			remove(tasksReview);
+			tasksReviewPersistence.remove(tasksReview);
 		}
 	}
 
@@ -2604,7 +2604,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		throws NoSuchReviewException, SystemException {
 		TasksReview tasksReview = findByU_P(userId, proposalId);
 
-		remove(tasksReview);
+		tasksReviewPersistence.remove(tasksReview);
 	}
 
 	/**
@@ -2617,7 +2617,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	public void removeByP_S(long proposalId, int stage)
 		throws SystemException {
 		for (TasksReview tasksReview : findByP_S(proposalId, stage)) {
-			remove(tasksReview);
+			tasksReviewPersistence.remove(tasksReview);
 		}
 	}
 
@@ -2632,7 +2632,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	public void removeByP_S_C(long proposalId, int stage, boolean completed)
 		throws SystemException {
 		for (TasksReview tasksReview : findByP_S_C(proposalId, stage, completed)) {
-			remove(tasksReview);
+			tasksReviewPersistence.remove(tasksReview);
 		}
 	}
 
@@ -2649,7 +2649,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 		boolean rejected) throws SystemException {
 		for (TasksReview tasksReview : findByP_S_C_R(proposalId, stage,
 				completed, rejected)) {
-			remove(tasksReview);
+			tasksReviewPersistence.remove(tasksReview);
 		}
 	}
 
@@ -2660,7 +2660,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	 */
 	public void removeAll() throws SystemException {
 		for (TasksReview tasksReview : findAll()) {
-			remove(tasksReview);
+			tasksReviewPersistence.remove(tasksReview);
 		}
 	}
 

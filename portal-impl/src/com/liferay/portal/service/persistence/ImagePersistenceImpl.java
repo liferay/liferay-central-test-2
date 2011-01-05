@@ -193,7 +193,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 					imageId);
 			}
 
-			return remove(image);
+			return imagePersistence.remove(image);
 		}
 		catch (NoSuchImageException nsee) {
 			throw nsee;
@@ -814,7 +814,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 */
 	public void removeByLtSize(int size) throws SystemException {
 		for (Image image : findByLtSize(size)) {
-			remove(image);
+			imagePersistence.remove(image);
 		}
 	}
 
@@ -825,7 +825,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 */
 	public void removeAll() throws SystemException {
 		for (Image image : findAll()) {
-			remove(image);
+			imagePersistence.remove(image);
 		}
 	}
 

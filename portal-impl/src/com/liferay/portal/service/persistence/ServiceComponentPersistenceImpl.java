@@ -218,7 +218,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 					serviceComponentId);
 			}
 
-			return remove(serviceComponent);
+			return serviceComponentPersistence.remove(serviceComponent);
 		}
 		catch (NoSuchServiceComponentException nsee) {
 			throw nsee;
@@ -1070,7 +1070,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		throws SystemException {
 		for (ServiceComponent serviceComponent : findByBuildNamespace(
 				buildNamespace)) {
-			remove(serviceComponent);
+			serviceComponentPersistence.remove(serviceComponent);
 		}
 	}
 
@@ -1086,7 +1086,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		ServiceComponent serviceComponent = findByBNS_BNU(buildNamespace,
 				buildNumber);
 
-		remove(serviceComponent);
+		serviceComponentPersistence.remove(serviceComponent);
 	}
 
 	/**
@@ -1096,7 +1096,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 */
 	public void removeAll() throws SystemException {
 		for (ServiceComponent serviceComponent : findAll()) {
-			remove(serviceComponent);
+			serviceComponentPersistence.remove(serviceComponent);
 		}
 	}
 

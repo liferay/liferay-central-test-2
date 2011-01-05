@@ -248,7 +248,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 					phoneId);
 			}
 
-			return remove(phone);
+			return phonePersistence.remove(phone);
 		}
 		catch (NoSuchPhoneException nsee) {
 			throw nsee;
@@ -2358,7 +2358,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Phone phone : findByCompanyId(companyId)) {
-			remove(phone);
+			phonePersistence.remove(phone);
 		}
 	}
 
@@ -2370,7 +2370,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (Phone phone : findByUserId(userId)) {
-			remove(phone);
+			phonePersistence.remove(phone);
 		}
 	}
 
@@ -2384,7 +2384,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (Phone phone : findByC_C(companyId, classNameId)) {
-			remove(phone);
+			phonePersistence.remove(phone);
 		}
 	}
 
@@ -2399,7 +2399,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		for (Phone phone : findByC_C_C(companyId, classNameId, classPK)) {
-			remove(phone);
+			phonePersistence.remove(phone);
 		}
 	}
 
@@ -2416,7 +2416,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		boolean primary) throws SystemException {
 		for (Phone phone : findByC_C_C_P(companyId, classNameId, classPK,
 				primary)) {
-			remove(phone);
+			phonePersistence.remove(phone);
 		}
 	}
 
@@ -2427,7 +2427,7 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 */
 	public void removeAll() throws SystemException {
 		for (Phone phone : findAll()) {
-			remove(phone);
+			phonePersistence.remove(phone);
 		}
 	}
 

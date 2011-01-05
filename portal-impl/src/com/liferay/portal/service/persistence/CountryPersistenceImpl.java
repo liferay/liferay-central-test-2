@@ -230,7 +230,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 					countryId);
 			}
 
-			return remove(country);
+			return countryPersistence.remove(country);
 		}
 		catch (NoSuchCountryException nsee) {
 			throw nsee;
@@ -1335,7 +1335,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		throws NoSuchCountryException, SystemException {
 		Country country = findByName(name);
 
-		remove(country);
+		countryPersistence.remove(country);
 	}
 
 	/**
@@ -1348,7 +1348,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		throws NoSuchCountryException, SystemException {
 		Country country = findByA2(a2);
 
-		remove(country);
+		countryPersistence.remove(country);
 	}
 
 	/**
@@ -1361,7 +1361,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		throws NoSuchCountryException, SystemException {
 		Country country = findByA3(a3);
 
-		remove(country);
+		countryPersistence.remove(country);
 	}
 
 	/**
@@ -1372,7 +1372,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	 */
 	public void removeByActive(boolean active) throws SystemException {
 		for (Country country : findByActive(active)) {
-			remove(country);
+			countryPersistence.remove(country);
 		}
 	}
 
@@ -1383,7 +1383,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	 */
 	public void removeAll() throws SystemException {
 		for (Country country : findAll()) {
-			remove(country);
+			countryPersistence.remove(country);
 		}
 	}
 

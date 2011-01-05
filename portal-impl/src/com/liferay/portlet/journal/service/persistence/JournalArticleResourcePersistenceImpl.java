@@ -264,7 +264,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 					resourcePrimKey);
 			}
 
-			return remove(journalArticleResource);
+			return journalArticleResourcePersistence.remove(journalArticleResource);
 		}
 		catch (NoSuchArticleResourceException nsee) {
 			throw nsee;
@@ -1620,7 +1620,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (JournalArticleResource journalArticleResource : findByUuid(uuid)) {
-			remove(journalArticleResource);
+			journalArticleResourcePersistence.remove(journalArticleResource);
 		}
 	}
 
@@ -1636,7 +1636,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		JournalArticleResource journalArticleResource = findByUUID_G(uuid,
 				groupId);
 
-		remove(journalArticleResource);
+		journalArticleResourcePersistence.remove(journalArticleResource);
 	}
 
 	/**
@@ -1648,7 +1648,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalArticleResource journalArticleResource : findByGroupId(
 				groupId)) {
-			remove(journalArticleResource);
+			journalArticleResourcePersistence.remove(journalArticleResource);
 		}
 	}
 
@@ -1664,7 +1664,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		JournalArticleResource journalArticleResource = findByG_A(groupId,
 				articleId);
 
-		remove(journalArticleResource);
+		journalArticleResourcePersistence.remove(journalArticleResource);
 	}
 
 	/**
@@ -1674,7 +1674,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 	 */
 	public void removeAll() throws SystemException {
 		for (JournalArticleResource journalArticleResource : findAll()) {
-			remove(journalArticleResource);
+			journalArticleResourcePersistence.remove(journalArticleResource);
 		}
 	}
 

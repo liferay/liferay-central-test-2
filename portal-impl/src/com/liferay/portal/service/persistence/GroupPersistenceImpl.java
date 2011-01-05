@@ -359,7 +359,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 					groupId);
 			}
 
-			return remove(group);
+			return groupPersistence.remove(group);
 		}
 		catch (NoSuchGroupException nsee) {
 			throw nsee;
@@ -2514,7 +2514,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Group group : findByCompanyId(companyId)) {
-			remove(group);
+			groupPersistence.remove(group);
 		}
 	}
 
@@ -2528,7 +2528,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		throws NoSuchGroupException, SystemException {
 		Group group = findByLiveGroupId(liveGroupId);
 
-		remove(group);
+		groupPersistence.remove(group);
 	}
 
 	/**
@@ -2542,7 +2542,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_N(companyId, name);
 
-		remove(group);
+		groupPersistence.remove(group);
 	}
 
 	/**
@@ -2556,7 +2556,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_F(companyId, friendlyURL);
 
-		remove(group);
+		groupPersistence.remove(group);
 	}
 
 	/**
@@ -2568,7 +2568,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 */
 	public void removeByT_A(int type, boolean active) throws SystemException {
 		for (Group group : findByT_A(type, active)) {
-			remove(group);
+			groupPersistence.remove(group);
 		}
 	}
 
@@ -2584,7 +2584,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_C_C(companyId, classNameId, classPK);
 
-		remove(group);
+		groupPersistence.remove(group);
 	}
 
 	/**
@@ -2599,7 +2599,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_L_N(companyId, liveGroupId, name);
 
-		remove(group);
+		groupPersistence.remove(group);
 	}
 
 	/**
@@ -2616,7 +2616,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		throws NoSuchGroupException, SystemException {
 		Group group = findByC_C_L_N(companyId, classNameId, liveGroupId, name);
 
-		remove(group);
+		groupPersistence.remove(group);
 	}
 
 	/**
@@ -2626,7 +2626,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 */
 	public void removeAll() throws SystemException {
 		for (Group group : findAll()) {
-			remove(group);
+			groupPersistence.remove(group);
 		}
 	}
 

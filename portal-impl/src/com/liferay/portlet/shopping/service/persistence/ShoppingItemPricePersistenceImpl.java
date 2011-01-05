@@ -200,7 +200,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 					itemPriceId);
 			}
 
-			return remove(shoppingItemPrice);
+			return shoppingItemPricePersistence.remove(shoppingItemPrice);
 		}
 		catch (NoSuchItemPriceException nsee) {
 			throw nsee;
@@ -836,7 +836,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 */
 	public void removeByItemId(long itemId) throws SystemException {
 		for (ShoppingItemPrice shoppingItemPrice : findByItemId(itemId)) {
-			remove(shoppingItemPrice);
+			shoppingItemPricePersistence.remove(shoppingItemPrice);
 		}
 	}
 
@@ -847,7 +847,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 */
 	public void removeAll() throws SystemException {
 		for (ShoppingItemPrice shoppingItemPrice : findAll()) {
-			remove(shoppingItemPrice);
+			shoppingItemPricePersistence.remove(shoppingItemPrice);
 		}
 	}
 

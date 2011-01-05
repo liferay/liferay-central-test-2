@@ -263,7 +263,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 					productEntryId);
 			}
 
-			return remove(scProductEntry);
+			return scProductEntryPersistence.remove(scProductEntry);
 		}
 		catch (NoSuchProductEntryException nsee) {
 			throw nsee;
@@ -2085,7 +2085,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (SCProductEntry scProductEntry : findByGroupId(groupId)) {
-			remove(scProductEntry);
+			scProductEntryPersistence.remove(scProductEntry);
 		}
 	}
 
@@ -2097,7 +2097,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (SCProductEntry scProductEntry : findByCompanyId(companyId)) {
-			remove(scProductEntry);
+			scProductEntryPersistence.remove(scProductEntry);
 		}
 	}
 
@@ -2111,7 +2111,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (SCProductEntry scProductEntry : findByG_U(groupId, userId)) {
-			remove(scProductEntry);
+			scProductEntryPersistence.remove(scProductEntry);
 		}
 	}
 
@@ -2126,7 +2126,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 		throws NoSuchProductEntryException, SystemException {
 		SCProductEntry scProductEntry = findByRG_RA(repoGroupId, repoArtifactId);
 
-		remove(scProductEntry);
+		scProductEntryPersistence.remove(scProductEntry);
 	}
 
 	/**
@@ -2136,7 +2136,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	 */
 	public void removeAll() throws SystemException {
 		for (SCProductEntry scProductEntry : findAll()) {
-			remove(scProductEntry);
+			scProductEntryPersistence.remove(scProductEntry);
 		}
 	}
 

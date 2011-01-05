@@ -244,7 +244,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 					portletItemId);
 			}
 
-			return remove(portletItem);
+			return portletItemPersistence.remove(portletItem);
 		}
 		catch (NoSuchPortletItemException nsee) {
 			throw nsee;
@@ -1534,7 +1534,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	public void removeByG_C(long groupId, long classNameId)
 		throws SystemException {
 		for (PortletItem portletItem : findByG_C(groupId, classNameId)) {
-			remove(portletItem);
+			portletItemPersistence.remove(portletItem);
 		}
 	}
 
@@ -1550,7 +1550,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		throws SystemException {
 		for (PortletItem portletItem : findByG_P_C(groupId, portletId,
 				classNameId)) {
-			remove(portletItem);
+			portletItemPersistence.remove(portletItem);
 		}
 	}
 
@@ -1568,7 +1568,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 		PortletItem portletItem = findByG_N_P_C(groupId, name, portletId,
 				classNameId);
 
-		remove(portletItem);
+		portletItemPersistence.remove(portletItem);
 	}
 
 	/**
@@ -1578,7 +1578,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 */
 	public void removeAll() throws SystemException {
 		for (PortletItem portletItem : findAll()) {
-			remove(portletItem);
+			portletItemPersistence.remove(portletItem);
 		}
 	}
 

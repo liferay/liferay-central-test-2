@@ -270,7 +270,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 					itemId);
 			}
 
-			return remove(shoppingItem);
+			return shoppingItemPersistence.remove(shoppingItem);
 		}
 		catch (NoSuchItemException nsee) {
 			throw nsee;
@@ -1724,7 +1724,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findBySmallImageId(smallImageId);
 
-		remove(shoppingItem);
+		shoppingItemPersistence.remove(shoppingItem);
 	}
 
 	/**
@@ -1737,7 +1737,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findByMediumImageId(mediumImageId);
 
-		remove(shoppingItem);
+		shoppingItemPersistence.remove(shoppingItem);
 	}
 
 	/**
@@ -1750,7 +1750,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findByLargeImageId(largeImageId);
 
-		remove(shoppingItem);
+		shoppingItemPersistence.remove(shoppingItem);
 	}
 
 	/**
@@ -1763,7 +1763,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	public void removeByG_C(long groupId, long categoryId)
 		throws SystemException {
 		for (ShoppingItem shoppingItem : findByG_C(groupId, categoryId)) {
-			remove(shoppingItem);
+			shoppingItemPersistence.remove(shoppingItem);
 		}
 	}
 
@@ -1778,7 +1778,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 		throws NoSuchItemException, SystemException {
 		ShoppingItem shoppingItem = findByC_S(companyId, sku);
 
-		remove(shoppingItem);
+		shoppingItemPersistence.remove(shoppingItem);
 	}
 
 	/**
@@ -1788,7 +1788,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	 */
 	public void removeAll() throws SystemException {
 		for (ShoppingItem shoppingItem : findAll()) {
-			remove(shoppingItem);
+			shoppingItemPersistence.remove(shoppingItem);
 		}
 	}
 

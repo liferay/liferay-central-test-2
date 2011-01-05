@@ -250,7 +250,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 					websiteId);
 			}
 
-			return remove(website);
+			return websitePersistence.remove(website);
 		}
 		catch (NoSuchWebsiteException nsee) {
 			throw nsee;
@@ -2361,7 +2361,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Website website : findByCompanyId(companyId)) {
-			remove(website);
+			websitePersistence.remove(website);
 		}
 	}
 
@@ -2373,7 +2373,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 */
 	public void removeByUserId(long userId) throws SystemException {
 		for (Website website : findByUserId(userId)) {
-			remove(website);
+			websitePersistence.remove(website);
 		}
 	}
 
@@ -2387,7 +2387,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
 		for (Website website : findByC_C(companyId, classNameId)) {
-			remove(website);
+			websitePersistence.remove(website);
 		}
 	}
 
@@ -2402,7 +2402,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
 		for (Website website : findByC_C_C(companyId, classNameId, classPK)) {
-			remove(website);
+			websitePersistence.remove(website);
 		}
 	}
 
@@ -2419,7 +2419,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		boolean primary) throws SystemException {
 		for (Website website : findByC_C_C_P(companyId, classNameId, classPK,
 				primary)) {
-			remove(website);
+			websitePersistence.remove(website);
 		}
 	}
 
@@ -2430,7 +2430,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 */
 	public void removeAll() throws SystemException {
 		for (Website website : findAll()) {
-			remove(website);
+			websitePersistence.remove(website);
 		}
 	}
 

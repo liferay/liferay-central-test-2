@@ -265,7 +265,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 					linkId);
 			}
 
-			return remove(assetLink);
+			return assetLinkPersistence.remove(assetLink);
 		}
 		catch (NoSuchLinkException nsee) {
 			throw nsee;
@@ -2698,7 +2698,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 */
 	public void removeByE1(long entryId1) throws SystemException {
 		for (AssetLink assetLink : findByE1(entryId1)) {
-			remove(assetLink);
+			assetLinkPersistence.remove(assetLink);
 		}
 	}
 
@@ -2710,7 +2710,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 */
 	public void removeByE2(long entryId2) throws SystemException {
 		for (AssetLink assetLink : findByE2(entryId2)) {
-			remove(assetLink);
+			assetLinkPersistence.remove(assetLink);
 		}
 	}
 
@@ -2724,7 +2724,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public void removeByE_E(long entryId1, long entryId2)
 		throws SystemException {
 		for (AssetLink assetLink : findByE_E(entryId1, entryId2)) {
-			remove(assetLink);
+			assetLinkPersistence.remove(assetLink);
 		}
 	}
 
@@ -2737,7 +2737,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 */
 	public void removeByE1_T(long entryId1, int type) throws SystemException {
 		for (AssetLink assetLink : findByE1_T(entryId1, type)) {
-			remove(assetLink);
+			assetLinkPersistence.remove(assetLink);
 		}
 	}
 
@@ -2750,7 +2750,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 */
 	public void removeByE2_T(long entryId2, int type) throws SystemException {
 		for (AssetLink assetLink : findByE2_T(entryId2, type)) {
-			remove(assetLink);
+			assetLinkPersistence.remove(assetLink);
 		}
 	}
 
@@ -2765,7 +2765,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	public void removeByE_E_T(long entryId1, long entryId2, int type)
 		throws SystemException {
 		for (AssetLink assetLink : findByE_E_T(entryId1, entryId2, type)) {
-			remove(assetLink);
+			assetLinkPersistence.remove(assetLink);
 		}
 	}
 
@@ -2776,7 +2776,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 	 */
 	public void removeAll() throws SystemException {
 		for (AssetLink assetLink : findAll()) {
-			remove(assetLink);
+			assetLinkPersistence.remove(assetLink);
 		}
 	}
 

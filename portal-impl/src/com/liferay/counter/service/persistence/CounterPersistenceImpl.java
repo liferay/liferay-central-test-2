@@ -182,7 +182,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 					name);
 			}
 
-			return remove(counter);
+			return counterPersistence.remove(counter);
 		}
 		catch (NoSuchCounterException nsee) {
 			throw nsee;
@@ -462,7 +462,7 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	 */
 	public void removeAll() throws SystemException {
 		for (Counter counter : findAll()) {
-			remove(counter);
+			counterPersistence.remove(counter);
 		}
 	}
 

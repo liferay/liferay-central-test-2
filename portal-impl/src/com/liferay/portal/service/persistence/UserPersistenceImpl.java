@@ -379,7 +379,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					userId);
 			}
 
-			return remove(user);
+			return userPersistence.remove(user);
 		}
 		catch (NoSuchUserException nsee) {
 			throw nsee;
@@ -3467,7 +3467,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (User user : findByUuid(uuid)) {
-			remove(user);
+			userPersistence.remove(user);
 		}
 	}
 
@@ -3479,7 +3479,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (User user : findByCompanyId(companyId)) {
-			remove(user);
+			userPersistence.remove(user);
 		}
 	}
 
@@ -3493,7 +3493,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		throws NoSuchUserException, SystemException {
 		User user = findByContactId(contactId);
 
-		remove(user);
+		userPersistence.remove(user);
 	}
 
 	/**
@@ -3505,7 +3505,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	public void removeByEmailAddress(String emailAddress)
 		throws SystemException {
 		for (User user : findByEmailAddress(emailAddress)) {
-			remove(user);
+			userPersistence.remove(user);
 		}
 	}
 
@@ -3519,7 +3519,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		throws NoSuchUserException, SystemException {
 		User user = findByPortraitId(portraitId);
 
-		remove(user);
+		userPersistence.remove(user);
 	}
 
 	/**
@@ -3533,7 +3533,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		throws NoSuchUserException, SystemException {
 		User user = findByC_U(companyId, userId);
 
-		remove(user);
+		userPersistence.remove(user);
 	}
 
 	/**
@@ -3547,7 +3547,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		throws NoSuchUserException, SystemException {
 		User user = findByC_DU(companyId, defaultUser);
 
-		remove(user);
+		userPersistence.remove(user);
 	}
 
 	/**
@@ -3561,7 +3561,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		throws NoSuchUserException, SystemException {
 		User user = findByC_SN(companyId, screenName);
 
-		remove(user);
+		userPersistence.remove(user);
 	}
 
 	/**
@@ -3575,7 +3575,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		throws NoSuchUserException, SystemException {
 		User user = findByC_EA(companyId, emailAddress);
 
-		remove(user);
+		userPersistence.remove(user);
 	}
 
 	/**
@@ -3589,7 +3589,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		throws NoSuchUserException, SystemException {
 		User user = findByC_FID(companyId, facebookId);
 
-		remove(user);
+		userPersistence.remove(user);
 	}
 
 	/**
@@ -3603,7 +3603,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		throws NoSuchUserException, SystemException {
 		User user = findByC_O(companyId, openId);
 
-		remove(user);
+		userPersistence.remove(user);
 	}
 
 	/**
@@ -3616,7 +3616,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	public void removeByC_A(long companyId, boolean active)
 		throws SystemException {
 		for (User user : findByC_A(companyId, active)) {
-			remove(user);
+			userPersistence.remove(user);
 		}
 	}
 
@@ -3627,7 +3627,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 */
 	public void removeAll() throws SystemException {
 		for (User user : findAll()) {
-			remove(user);
+			userPersistence.remove(user);
 		}
 	}
 

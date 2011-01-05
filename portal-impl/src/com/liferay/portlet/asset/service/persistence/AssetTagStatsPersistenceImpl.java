@@ -233,7 +233,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 					tagStatsId);
 			}
 
-			return remove(assetTagStats);
+			return assetTagStatsPersistence.remove(assetTagStats);
 		}
 		catch (NoSuchTagStatsException nsee) {
 			throw nsee;
@@ -1374,7 +1374,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 */
 	public void removeByTagId(long tagId) throws SystemException {
 		for (AssetTagStats assetTagStats : findByTagId(tagId)) {
-			remove(assetTagStats);
+			assetTagStatsPersistence.remove(assetTagStats);
 		}
 	}
 
@@ -1386,7 +1386,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 */
 	public void removeByClassNameId(long classNameId) throws SystemException {
 		for (AssetTagStats assetTagStats : findByClassNameId(classNameId)) {
-			remove(assetTagStats);
+			assetTagStatsPersistence.remove(assetTagStats);
 		}
 	}
 
@@ -1401,7 +1401,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		throws NoSuchTagStatsException, SystemException {
 		AssetTagStats assetTagStats = findByT_C(tagId, classNameId);
 
-		remove(assetTagStats);
+		assetTagStatsPersistence.remove(assetTagStats);
 	}
 
 	/**
@@ -1411,7 +1411,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 	 */
 	public void removeAll() throws SystemException {
 		for (AssetTagStats assetTagStats : findAll()) {
-			remove(assetTagStats);
+			assetTagStatsPersistence.remove(assetTagStats);
 		}
 	}
 

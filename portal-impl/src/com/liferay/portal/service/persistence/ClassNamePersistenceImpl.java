@@ -194,7 +194,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 					classNameId);
 			}
 
-			return remove(className);
+			return classNamePersistence.remove(className);
 		}
 		catch (NoSuchClassNameException nsee) {
 			throw nsee;
@@ -643,7 +643,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		throws NoSuchClassNameException, SystemException {
 		ClassName className = findByValue(value);
 
-		remove(className);
+		classNamePersistence.remove(className);
 	}
 
 	/**
@@ -653,7 +653,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 	 */
 	public void removeAll() throws SystemException {
 		for (ClassName className : findAll()) {
-			remove(className);
+			classNamePersistence.remove(className);
 		}
 	}
 

@@ -195,7 +195,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 					repositoryId);
 			}
 
-			return remove(repository);
+			return repositoryPersistence.remove(repository);
 		}
 		catch (NoSuchRepositoryException nsee) {
 			throw nsee;
@@ -821,7 +821,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (Repository repository : findByGroupId(groupId)) {
-			remove(repository);
+			repositoryPersistence.remove(repository);
 		}
 	}
 
@@ -832,7 +832,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	 */
 	public void removeAll() throws SystemException {
 		for (Repository repository : findAll()) {
-			remove(repository);
+			repositoryPersistence.remove(repository);
 		}
 	}
 

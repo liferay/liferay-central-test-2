@@ -206,7 +206,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 					statsId);
 			}
 
-			return remove(ratingsStats);
+			return ratingsStatsPersistence.remove(ratingsStats);
 		}
 		catch (NoSuchStatsException nsee) {
 			throw nsee;
@@ -669,7 +669,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		throws NoSuchStatsException, SystemException {
 		RatingsStats ratingsStats = findByC_C(classNameId, classPK);
 
-		remove(ratingsStats);
+		ratingsStatsPersistence.remove(ratingsStats);
 	}
 
 	/**
@@ -679,7 +679,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 	 */
 	public void removeAll() throws SystemException {
 		for (RatingsStats ratingsStats : findAll()) {
-			remove(ratingsStats);
+			ratingsStatsPersistence.remove(ratingsStats);
 		}
 	}
 

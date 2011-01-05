@@ -243,7 +243,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 					passwordPolicyRelId);
 			}
 
-			return remove(passwordPolicyRel);
+			return passwordPolicyRelPersistence.remove(passwordPolicyRel);
 		}
 		catch (NoSuchPasswordPolicyRelException nsee) {
 			throw nsee;
@@ -1228,7 +1228,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		throws SystemException {
 		for (PasswordPolicyRel passwordPolicyRel : findByPasswordPolicyId(
 				passwordPolicyId)) {
-			remove(passwordPolicyRel);
+			passwordPolicyRelPersistence.remove(passwordPolicyRel);
 		}
 	}
 
@@ -1243,7 +1243,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		throws NoSuchPasswordPolicyRelException, SystemException {
 		PasswordPolicyRel passwordPolicyRel = findByC_C(classNameId, classPK);
 
-		remove(passwordPolicyRel);
+		passwordPolicyRelPersistence.remove(passwordPolicyRel);
 	}
 
 	/**
@@ -1259,7 +1259,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		PasswordPolicyRel passwordPolicyRel = findByP_C_C(passwordPolicyId,
 				classNameId, classPK);
 
-		remove(passwordPolicyRel);
+		passwordPolicyRelPersistence.remove(passwordPolicyRel);
 	}
 
 	/**
@@ -1269,7 +1269,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 	 */
 	public void removeAll() throws SystemException {
 		for (PasswordPolicyRel passwordPolicyRel : findAll()) {
-			remove(passwordPolicyRel);
+			passwordPolicyRelPersistence.remove(passwordPolicyRel);
 		}
 	}
 

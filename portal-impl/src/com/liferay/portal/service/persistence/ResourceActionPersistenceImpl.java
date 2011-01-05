@@ -213,7 +213,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 					resourceActionId);
 			}
 
-			return remove(resourceAction);
+			return resourceActionPersistence.remove(resourceAction);
 		}
 		catch (NoSuchResourceActionException nsee) {
 			throw nsee;
@@ -1070,7 +1070,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 */
 	public void removeByName(String name) throws SystemException {
 		for (ResourceAction resourceAction : findByName(name)) {
-			remove(resourceAction);
+			resourceActionPersistence.remove(resourceAction);
 		}
 	}
 
@@ -1085,7 +1085,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		throws NoSuchResourceActionException, SystemException {
 		ResourceAction resourceAction = findByN_A(name, actionId);
 
-		remove(resourceAction);
+		resourceActionPersistence.remove(resourceAction);
 	}
 
 	/**
@@ -1095,7 +1095,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 */
 	public void removeAll() throws SystemException {
 		for (ResourceAction resourceAction : findAll()) {
-			remove(resourceAction);
+			resourceActionPersistence.remove(resourceAction);
 		}
 	}
 

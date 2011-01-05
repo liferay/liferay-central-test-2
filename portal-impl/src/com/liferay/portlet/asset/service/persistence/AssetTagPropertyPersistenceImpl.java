@@ -249,7 +249,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 					tagPropertyId);
 			}
 
-			return remove(assetTagProperty);
+			return assetTagPropertyPersistence.remove(assetTagProperty);
 		}
 		catch (NoSuchTagPropertyException nsee) {
 			throw nsee;
@@ -1800,7 +1800,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (AssetTagProperty assetTagProperty : findByCompanyId(companyId)) {
-			remove(assetTagProperty);
+			assetTagPropertyPersistence.remove(assetTagProperty);
 		}
 	}
 
@@ -1812,7 +1812,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	 */
 	public void removeByTagId(long tagId) throws SystemException {
 		for (AssetTagProperty assetTagProperty : findByTagId(tagId)) {
-			remove(assetTagProperty);
+			assetTagPropertyPersistence.remove(assetTagProperty);
 		}
 	}
 
@@ -1826,7 +1826,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	public void removeByC_K(long companyId, String key)
 		throws SystemException {
 		for (AssetTagProperty assetTagProperty : findByC_K(companyId, key)) {
-			remove(assetTagProperty);
+			assetTagPropertyPersistence.remove(assetTagProperty);
 		}
 	}
 
@@ -1841,7 +1841,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 		throws NoSuchTagPropertyException, SystemException {
 		AssetTagProperty assetTagProperty = findByT_K(tagId, key);
 
-		remove(assetTagProperty);
+		assetTagPropertyPersistence.remove(assetTagProperty);
 	}
 
 	/**
@@ -1851,7 +1851,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 	 */
 	public void removeAll() throws SystemException {
 		for (AssetTagProperty assetTagProperty : findAll()) {
-			remove(assetTagProperty);
+			assetTagPropertyPersistence.remove(assetTagProperty);
 		}
 	}
 

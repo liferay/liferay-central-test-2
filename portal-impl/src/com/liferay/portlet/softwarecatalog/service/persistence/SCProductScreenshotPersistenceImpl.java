@@ -252,7 +252,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 					productScreenshotId);
 			}
 
-			return remove(scProductScreenshot);
+			return scProductScreenshotPersistence.remove(scProductScreenshot);
 		}
 		catch (NoSuchProductScreenshotException nsee) {
 			throw nsee;
@@ -1364,7 +1364,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		throws SystemException {
 		for (SCProductScreenshot scProductScreenshot : findByProductEntryId(
 				productEntryId)) {
-			remove(scProductScreenshot);
+			scProductScreenshotPersistence.remove(scProductScreenshot);
 		}
 	}
 
@@ -1378,7 +1378,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		throws NoSuchProductScreenshotException, SystemException {
 		SCProductScreenshot scProductScreenshot = findByThumbnailId(thumbnailId);
 
-		remove(scProductScreenshot);
+		scProductScreenshotPersistence.remove(scProductScreenshot);
 	}
 
 	/**
@@ -1391,7 +1391,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		throws NoSuchProductScreenshotException, SystemException {
 		SCProductScreenshot scProductScreenshot = findByFullImageId(fullImageId);
 
-		remove(scProductScreenshot);
+		scProductScreenshotPersistence.remove(scProductScreenshot);
 	}
 
 	/**
@@ -1406,7 +1406,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		SCProductScreenshot scProductScreenshot = findByP_P(productEntryId,
 				priority);
 
-		remove(scProductScreenshot);
+		scProductScreenshotPersistence.remove(scProductScreenshot);
 	}
 
 	/**
@@ -1416,7 +1416,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 	 */
 	public void removeAll() throws SystemException {
 		for (SCProductScreenshot scProductScreenshot : findAll()) {
-			remove(scProductScreenshot);
+			scProductScreenshotPersistence.remove(scProductScreenshot);
 		}
 	}
 

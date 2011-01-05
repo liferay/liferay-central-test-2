@@ -260,7 +260,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 					entryId);
 			}
 
-			return remove(assetEntry);
+			return assetEntryPersistence.remove(assetEntry);
 		}
 		catch (NoSuchEntryException nsee) {
 			throw nsee;
@@ -1272,7 +1272,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (AssetEntry assetEntry : findByCompanyId(companyId)) {
-			remove(assetEntry);
+			assetEntryPersistence.remove(assetEntry);
 		}
 	}
 
@@ -1287,7 +1287,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = findByG_CU(groupId, classUuid);
 
-		remove(assetEntry);
+		assetEntryPersistence.remove(assetEntry);
 	}
 
 	/**
@@ -1301,7 +1301,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		throws NoSuchEntryException, SystemException {
 		AssetEntry assetEntry = findByC_C(classNameId, classPK);
 
-		remove(assetEntry);
+		assetEntryPersistence.remove(assetEntry);
 	}
 
 	/**
@@ -1311,7 +1311,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	 */
 	public void removeAll() throws SystemException {
 		for (AssetEntry assetEntry : findAll()) {
-			remove(assetEntry);
+			assetEntryPersistence.remove(assetEntry);
 		}
 	}
 

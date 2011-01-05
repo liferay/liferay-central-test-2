@@ -197,7 +197,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 					userTrackerPathId);
 			}
 
-			return remove(userTrackerPath);
+			return userTrackerPathPersistence.remove(userTrackerPath);
 		}
 		catch (NoSuchUserTrackerPathException nsee) {
 			throw nsee;
@@ -823,7 +823,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 		throws SystemException {
 		for (UserTrackerPath userTrackerPath : findByUserTrackerId(
 				userTrackerId)) {
-			remove(userTrackerPath);
+			userTrackerPathPersistence.remove(userTrackerPath);
 		}
 	}
 
@@ -834,7 +834,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	 */
 	public void removeAll() throws SystemException {
 		for (UserTrackerPath userTrackerPath : findAll()) {
-			remove(userTrackerPath);
+			userTrackerPathPersistence.remove(userTrackerPath);
 		}
 	}
 

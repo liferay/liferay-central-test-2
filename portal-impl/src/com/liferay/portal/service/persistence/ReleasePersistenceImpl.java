@@ -194,7 +194,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 					releaseId);
 			}
 
-			return remove(release);
+			return releasePersistence.remove(release);
 		}
 		catch (NoSuchReleaseException nsee) {
 			throw nsee;
@@ -648,7 +648,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		throws NoSuchReleaseException, SystemException {
 		Release release = findByServletContextName(servletContextName);
 
-		remove(release);
+		releasePersistence.remove(release);
 	}
 
 	/**
@@ -658,7 +658,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	 */
 	public void removeAll() throws SystemException {
 		for (Release release : findAll()) {
-			remove(release);
+			releasePersistence.remove(release);
 		}
 	}
 

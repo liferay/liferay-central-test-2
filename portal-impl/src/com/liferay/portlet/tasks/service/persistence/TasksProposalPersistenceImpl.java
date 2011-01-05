@@ -240,7 +240,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 					proposalId);
 			}
 
-			return remove(tasksProposal);
+			return tasksProposalPersistence.remove(tasksProposal);
 		}
 		catch (NoSuchProposalException nsee) {
 			throw nsee;
@@ -1691,7 +1691,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (TasksProposal tasksProposal : findByGroupId(groupId)) {
-			remove(tasksProposal);
+			tasksProposalPersistence.remove(tasksProposal);
 		}
 	}
 
@@ -1705,7 +1705,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
 		for (TasksProposal tasksProposal : findByG_U(groupId, userId)) {
-			remove(tasksProposal);
+			tasksProposalPersistence.remove(tasksProposal);
 		}
 	}
 
@@ -1720,7 +1720,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 		throws NoSuchProposalException, SystemException {
 		TasksProposal tasksProposal = findByC_C(classNameId, classPK);
 
-		remove(tasksProposal);
+		tasksProposalPersistence.remove(tasksProposal);
 	}
 
 	/**
@@ -1730,7 +1730,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	 */
 	public void removeAll() throws SystemException {
 		for (TasksProposal tasksProposal : findAll()) {
-			remove(tasksProposal);
+			tasksProposalPersistence.remove(tasksProposal);
 		}
 	}
 

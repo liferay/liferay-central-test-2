@@ -215,7 +215,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 					categoryId);
 			}
 
-			return remove(shoppingCategory);
+			return shoppingCategoryPersistence.remove(shoppingCategory);
 		}
 		catch (NoSuchCategoryException nsee) {
 			throw nsee;
@@ -1476,7 +1476,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (ShoppingCategory shoppingCategory : findByGroupId(groupId)) {
-			remove(shoppingCategory);
+			shoppingCategoryPersistence.remove(shoppingCategory);
 		}
 	}
 
@@ -1491,7 +1491,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 		throws SystemException {
 		for (ShoppingCategory shoppingCategory : findByG_P(groupId,
 				parentCategoryId)) {
-			remove(shoppingCategory);
+			shoppingCategoryPersistence.remove(shoppingCategory);
 		}
 	}
 
@@ -1502,7 +1502,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 	 */
 	public void removeAll() throws SystemException {
 		for (ShoppingCategory shoppingCategory : findAll()) {
-			remove(shoppingCategory);
+			shoppingCategoryPersistence.remove(shoppingCategory);
 		}
 	}
 

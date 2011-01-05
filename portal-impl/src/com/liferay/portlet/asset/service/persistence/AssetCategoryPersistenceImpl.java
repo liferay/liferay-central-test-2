@@ -339,7 +339,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 					categoryId);
 			}
 
-			return remove(assetCategory);
+			return assetCategoryPersistence.remove(assetCategory);
 		}
 		catch (NoSuchCategoryException nsee) {
 			throw nsee;
@@ -3703,7 +3703,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	 */
 	public void removeByUuid(String uuid) throws SystemException {
 		for (AssetCategory assetCategory : findByUuid(uuid)) {
-			remove(assetCategory);
+			assetCategoryPersistence.remove(assetCategory);
 		}
 	}
 
@@ -3718,7 +3718,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		throws NoSuchCategoryException, SystemException {
 		AssetCategory assetCategory = findByUUID_G(uuid, groupId);
 
-		remove(assetCategory);
+		assetCategoryPersistence.remove(assetCategory);
 	}
 
 	/**
@@ -3729,7 +3729,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (AssetCategory assetCategory : findByGroupId(groupId)) {
-			remove(assetCategory);
+			assetCategoryPersistence.remove(assetCategory);
 		}
 	}
 
@@ -3743,7 +3743,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		throws SystemException {
 		for (AssetCategory assetCategory : findByParentCategoryId(
 				parentCategoryId)) {
-			remove(assetCategory);
+			assetCategoryPersistence.remove(assetCategory);
 		}
 	}
 
@@ -3756,7 +3756,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	public void removeByVocabularyId(long vocabularyId)
 		throws SystemException {
 		for (AssetCategory assetCategory : findByVocabularyId(vocabularyId)) {
-			remove(assetCategory);
+			assetCategoryPersistence.remove(assetCategory);
 		}
 	}
 
@@ -3770,7 +3770,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	public void removeByP_N(long parentCategoryId, String name)
 		throws SystemException {
 		for (AssetCategory assetCategory : findByP_N(parentCategoryId, name)) {
-			remove(assetCategory);
+			assetCategoryPersistence.remove(assetCategory);
 		}
 	}
 
@@ -3785,7 +3785,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		throws SystemException {
 		for (AssetCategory assetCategory : findByP_V(parentCategoryId,
 				vocabularyId)) {
-			remove(assetCategory);
+			assetCategoryPersistence.remove(assetCategory);
 		}
 	}
 
@@ -3799,7 +3799,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	public void removeByN_V(String name, long vocabularyId)
 		throws SystemException {
 		for (AssetCategory assetCategory : findByN_V(name, vocabularyId)) {
-			remove(assetCategory);
+			assetCategoryPersistence.remove(assetCategory);
 		}
 	}
 
@@ -3816,7 +3816,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		AssetCategory assetCategory = findByP_N_V(parentCategoryId, name,
 				vocabularyId);
 
-		remove(assetCategory);
+		assetCategoryPersistence.remove(assetCategory);
 	}
 
 	/**
@@ -3826,7 +3826,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	 */
 	public void removeAll() throws SystemException {
 		for (AssetCategory assetCategory : findAll()) {
-			remove(assetCategory);
+			assetCategoryPersistence.remove(assetCategory);
 		}
 	}
 

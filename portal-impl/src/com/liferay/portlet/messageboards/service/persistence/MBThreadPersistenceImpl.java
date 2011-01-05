@@ -305,7 +305,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 					threadId);
 			}
 
-			return remove(mbThread);
+			return mbThreadPersistence.remove(mbThread);
 		}
 		catch (NoSuchThreadException nsee) {
 			throw nsee;
@@ -3857,7 +3857,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (MBThread mbThread : findByGroupId(groupId)) {
-			remove(mbThread);
+			mbThreadPersistence.remove(mbThread);
 		}
 	}
 
@@ -3871,7 +3871,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public void removeByG_C(long groupId, long categoryId)
 		throws SystemException {
 		for (MBThread mbThread : findByG_C(groupId, categoryId)) {
-			remove(mbThread);
+			mbThreadPersistence.remove(mbThread);
 		}
 	}
 
@@ -3885,7 +3885,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public void removeByG_NotC(long groupId, long categoryId)
 		throws SystemException {
 		for (MBThread mbThread : findByG_NotC(groupId, categoryId)) {
-			remove(mbThread);
+			mbThreadPersistence.remove(mbThread);
 		}
 	}
 
@@ -3898,7 +3898,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 */
 	public void removeByG_S(long groupId, int status) throws SystemException {
 		for (MBThread mbThread : findByG_S(groupId, status)) {
-			remove(mbThread);
+			mbThreadPersistence.remove(mbThread);
 		}
 	}
 
@@ -3912,7 +3912,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public void removeByC_P(long categoryId, double priority)
 		throws SystemException {
 		for (MBThread mbThread : findByC_P(categoryId, priority)) {
-			remove(mbThread);
+			mbThreadPersistence.remove(mbThread);
 		}
 	}
 
@@ -3927,7 +3927,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public void removeByG_C_L(long groupId, long categoryId, Date lastPostDate)
 		throws SystemException {
 		for (MBThread mbThread : findByG_C_L(groupId, categoryId, lastPostDate)) {
-			remove(mbThread);
+			mbThreadPersistence.remove(mbThread);
 		}
 	}
 
@@ -3942,7 +3942,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public void removeByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		for (MBThread mbThread : findByG_C_S(groupId, categoryId, status)) {
-			remove(mbThread);
+			mbThreadPersistence.remove(mbThread);
 		}
 	}
 
@@ -3957,7 +3957,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	public void removeByG_NotC_S(long groupId, long categoryId, int status)
 		throws SystemException {
 		for (MBThread mbThread : findByG_NotC_S(groupId, categoryId, status)) {
-			remove(mbThread);
+			mbThreadPersistence.remove(mbThread);
 		}
 	}
 
@@ -3968,7 +3968,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 */
 	public void removeAll() throws SystemException {
 		for (MBThread mbThread : findAll()) {
-			remove(mbThread);
+			mbThreadPersistence.remove(mbThread);
 		}
 	}
 

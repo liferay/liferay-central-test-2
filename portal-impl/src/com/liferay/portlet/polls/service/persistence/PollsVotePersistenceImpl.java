@@ -229,7 +229,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 					voteId);
 			}
 
-			return remove(pollsVote);
+			return pollsVotePersistence.remove(pollsVote);
 		}
 		catch (NoSuchVoteException nsee) {
 			throw nsee;
@@ -1352,7 +1352,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	 */
 	public void removeByQuestionId(long questionId) throws SystemException {
 		for (PollsVote pollsVote : findByQuestionId(questionId)) {
-			remove(pollsVote);
+			pollsVotePersistence.remove(pollsVote);
 		}
 	}
 
@@ -1364,7 +1364,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	 */
 	public void removeByChoiceId(long choiceId) throws SystemException {
 		for (PollsVote pollsVote : findByChoiceId(choiceId)) {
-			remove(pollsVote);
+			pollsVotePersistence.remove(pollsVote);
 		}
 	}
 
@@ -1379,7 +1379,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		throws NoSuchVoteException, SystemException {
 		PollsVote pollsVote = findByQ_U(questionId, userId);
 
-		remove(pollsVote);
+		pollsVotePersistence.remove(pollsVote);
 	}
 
 	/**
@@ -1389,7 +1389,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	 */
 	public void removeAll() throws SystemException {
 		for (PollsVote pollsVote : findAll()) {
-			remove(pollsVote);
+			pollsVotePersistence.remove(pollsVote);
 		}
 	}
 

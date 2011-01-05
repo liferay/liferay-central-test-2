@@ -263,7 +263,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					roleId);
 			}
 
-			return remove(role);
+			return rolePersistence.remove(role);
 		}
 		catch (NoSuchRoleException nsee) {
 			throw nsee;
@@ -2434,7 +2434,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Role role : findByCompanyId(companyId)) {
-			remove(role);
+			rolePersistence.remove(role);
 		}
 	}
 
@@ -2446,7 +2446,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 */
 	public void removeBySubtype(String subtype) throws SystemException {
 		for (Role role : findBySubtype(subtype)) {
-			remove(role);
+			rolePersistence.remove(role);
 		}
 	}
 
@@ -2461,7 +2461,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		throws NoSuchRoleException, SystemException {
 		Role role = findByC_N(companyId, name);
 
-		remove(role);
+		rolePersistence.remove(role);
 	}
 
 	/**
@@ -2473,7 +2473,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 */
 	public void removeByT_S(int type, String subtype) throws SystemException {
 		for (Role role : findByT_S(type, subtype)) {
-			remove(role);
+			rolePersistence.remove(role);
 		}
 	}
 
@@ -2489,7 +2489,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		throws NoSuchRoleException, SystemException {
 		Role role = findByC_C_C(companyId, classNameId, classPK);
 
-		remove(role);
+		rolePersistence.remove(role);
 	}
 
 	/**
@@ -2499,7 +2499,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 */
 	public void removeAll() throws SystemException {
 		for (Role role : findAll()) {
-			remove(role);
+			rolePersistence.remove(role);
 		}
 	}
 

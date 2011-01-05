@@ -209,7 +209,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 					resourceId);
 			}
 
-			return remove(resource);
+			return resourcePersistence.remove(resource);
 		}
 		catch (NoSuchResourceException nsee) {
 			throw nsee;
@@ -1011,7 +1011,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 */
 	public void removeByCodeId(long codeId) throws SystemException {
 		for (Resource resource : findByCodeId(codeId)) {
-			remove(resource);
+			resourcePersistence.remove(resource);
 		}
 	}
 
@@ -1026,7 +1026,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		throws NoSuchResourceException, SystemException {
 		Resource resource = findByC_P(codeId, primKey);
 
-		remove(resource);
+		resourcePersistence.remove(resource);
 	}
 
 	/**
@@ -1036,7 +1036,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 */
 	public void removeAll() throws SystemException {
 		for (Resource resource : findAll()) {
-			remove(resource);
+			resourcePersistence.remove(resource);
 		}
 	}
 

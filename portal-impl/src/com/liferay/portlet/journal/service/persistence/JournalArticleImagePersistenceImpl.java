@@ -277,7 +277,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 					articleImageId);
 			}
 
-			return remove(journalArticleImage);
+			return journalArticleImagePersistence.remove(journalArticleImage);
 		}
 		catch (NoSuchArticleImageException nsee) {
 			throw nsee;
@@ -1954,7 +1954,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 */
 	public void removeByGroupId(long groupId) throws SystemException {
 		for (JournalArticleImage journalArticleImage : findByGroupId(groupId)) {
-			remove(journalArticleImage);
+			journalArticleImagePersistence.remove(journalArticleImage);
 		}
 	}
 
@@ -1967,7 +1967,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	public void removeByTempImage(boolean tempImage) throws SystemException {
 		for (JournalArticleImage journalArticleImage : findByTempImage(
 				tempImage)) {
-			remove(journalArticleImage);
+			journalArticleImagePersistence.remove(journalArticleImage);
 		}
 	}
 
@@ -1983,7 +1983,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		throws SystemException {
 		for (JournalArticleImage journalArticleImage : findByG_A_V(groupId,
 				articleId, version)) {
-			remove(journalArticleImage);
+			journalArticleImagePersistence.remove(journalArticleImage);
 		}
 	}
 
@@ -2004,7 +2004,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		JournalArticleImage journalArticleImage = findByG_A_V_E_E_L(groupId,
 				articleId, version, elInstanceId, elName, languageId);
 
-		remove(journalArticleImage);
+		journalArticleImagePersistence.remove(journalArticleImage);
 	}
 
 	/**
@@ -2014,7 +2014,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 */
 	public void removeAll() throws SystemException {
 		for (JournalArticleImage journalArticleImage : findAll()) {
-			remove(journalArticleImage);
+			journalArticleImagePersistence.remove(journalArticleImage);
 		}
 	}
 

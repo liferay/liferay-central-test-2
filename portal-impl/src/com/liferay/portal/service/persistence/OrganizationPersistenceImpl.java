@@ -255,7 +255,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 					organizationId);
 			}
 
-			return remove(organization);
+			return organizationPersistence.remove(organization);
 		}
 		catch (NoSuchOrganizationException nsee) {
 			throw nsee;
@@ -2210,7 +2210,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 */
 	public void removeByCompanyId(long companyId) throws SystemException {
 		for (Organization organization : findByCompanyId(companyId)) {
-			remove(organization);
+			organizationPersistence.remove(organization);
 		}
 	}
 
@@ -2222,7 +2222,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 */
 	public void removeByLocations(long companyId) throws SystemException {
 		for (Organization organization : findByLocations(companyId)) {
-			remove(organization);
+			organizationPersistence.remove(organization);
 		}
 	}
 
@@ -2237,7 +2237,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		throws SystemException {
 		for (Organization organization : findByC_P(companyId,
 				parentOrganizationId)) {
-			remove(organization);
+			organizationPersistence.remove(organization);
 		}
 	}
 
@@ -2252,7 +2252,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		throws NoSuchOrganizationException, SystemException {
 		Organization organization = findByC_N(companyId, name);
 
-		remove(organization);
+		organizationPersistence.remove(organization);
 	}
 
 	/**
@@ -2262,7 +2262,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 */
 	public void removeAll() throws SystemException {
 		for (Organization organization : findAll()) {
-			remove(organization);
+			organizationPersistence.remove(organization);
 		}
 	}
 
