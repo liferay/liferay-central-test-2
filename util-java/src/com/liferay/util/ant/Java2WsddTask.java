@@ -16,19 +16,23 @@ package com.liferay.util.ant;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.util.xml.XMLFormatter;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.io.File;
-import java.io.IOException;
+
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.apache.axis.tools.ant.wsdl.Java2WsdlAntTask;
 import org.apache.axis.tools.ant.wsdl.NamespaceMapping;
 import org.apache.axis.tools.ant.wsdl.Wsdl2javaAntTask;
 import org.apache.tools.ant.Project;
-
-import org.dom4j.DocumentException;
 
 /**
  * @author Brian Wing Shun Chan
@@ -36,7 +40,7 @@ import org.dom4j.DocumentException;
 public class Java2WsddTask {
 
 	public static String[] generateWsdd(String className, String serviceName)
-		throws IOException {
+		throws Exception {
 
 		// Create temp directory
 
@@ -125,17 +129,53 @@ public class Java2WsddTask {
 		return new String[] {deployContent, undeployContent};
 	}
 
-	private static String _format(String content) throws IOException {
+	private static String _format(String content) throws Exception {
 		content = HtmlUtil.stripComments(content);
 
-		try {
-			content = XMLFormatter.toString(content);
-		}
-		catch (DocumentException de) {
-			de.printStackTrace();
+		Document document = SAXReaderUtil.read(content);
+
+		Element rootElement = document.getRootElement();
+
+		Element serviceElement = rootElement.element("service");
+
+		Map<String, Element> operationElementsById =
+			new TreeMap<String, Element>();
+
+		List<Element> operationElements = serviceElement.elements("operation");
+
+		for (Element operationElement : operationElements) {
+			operationElement.detach();
+
+			StringBundler sb = new StringBundler();
+
+			String name = operationElement.attributeValue("name");
+
+			sb.append(name);
+			sb.append("_METHOD_");
+
+			List<Element> parameterElements = operationElement.elements(
+				"parameter");
+
+			for (Element parameterElement : parameterElements) {
+				String type = parameterElement.attributeValue("type");
+
+				sb.append(type);
+				sb.append("_PARAMETER_");
+			}
+
+			operationElementsById.put(sb.toString(), operationElement);
 		}
 
-		content = StringUtil.replace(content, "\"/>", "\" />");
+		for (Map.Entry<String, Element> entry :
+				operationElementsById.entrySet()) {
+
+			Element operationElement = entry.getValue();
+
+			serviceElement.add(operationElement);
+		}
+
+		content = StringUtil.replace(
+			document.formattedString(), "\"/>", "\" />");
 
 		return content;
 	}

@@ -24,7 +24,6 @@ import com.liferay.portal.util.InitUtil;
 import com.liferay.util.ant.Java2WsddTask;
 
 import java.io.File;
-import java.io.IOException;
 
 import java.util.Iterator;
 import java.util.List;
@@ -117,7 +116,7 @@ public class WSDDBuilder {
 		}
 	}
 
-	private void _createServiceWSDD(String entityName) throws IOException {
+	private void _createServiceWSDD(String entityName) throws Exception {
 		String className =
 			_packagePath + ".service.http." + entityName + "ServiceSoap";
 
