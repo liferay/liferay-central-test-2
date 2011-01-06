@@ -254,6 +254,18 @@ public class SocialRelationLocalServiceWrapper
 		_socialRelationLocalService.deleteRelations(userId);
 	}
 
+	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getInverseRelations(
+		long userId, int type, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialRelationLocalService.getInverseRelations(userId, type,
+			start, end);
+	}
+
+	public int getInverseRelationsCount(long userId, int type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _socialRelationLocalService.getInverseRelationsCount(userId, type);
+	}
+
 	public com.liferay.portlet.social.model.SocialRelation getRelation(
 		long relationId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -277,18 +289,6 @@ public class SocialRelationLocalServiceWrapper
 	public int getRelationsCount(long userId, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialRelationLocalService.getRelationsCount(userId, type);
-	}
-
-	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getInverseRelations(
-		long userId, int type, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _socialRelationLocalService.getInverseRelations(userId, type,
-			start, end);
-	}
-
-	public int getInverseRelationsCount(long userId, int type)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _socialRelationLocalService.getInverseRelationsCount(userId, type);
 	}
 
 	public boolean hasRelation(long userId1, long userId2, int type)
