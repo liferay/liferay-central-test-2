@@ -17,7 +17,7 @@ package com.liferay.portal.upgrade.v6_1_0.util;
 import java.sql.Types;
 
 /**
- * @author	  Shuyang Zhou
+ * @author	  Brian Wing Shun Chan
  * @generated
  */
 public class MBThreadTable {

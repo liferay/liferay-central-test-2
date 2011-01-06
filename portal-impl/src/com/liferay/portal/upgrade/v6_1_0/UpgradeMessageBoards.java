@@ -24,13 +24,9 @@ import java.sql.ResultSet;
 /**
  * @author Shuyang Zhou
  */
-public class UpgradeMBThread extends UpgradeProcess {
+public class UpgradeMessageBoards extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		updateCompanyIdAndRootMessageUserId();
-	}
-
-	protected void updateCompanyIdAndRootMessageUserId() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -39,9 +35,9 @@ public class UpgradeMBThread extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select MBThread.threadId, MBMessage.companyId, "
-					+ "MBMessage.userId from MBThread inner join MBMessage on "
-					+ "MBThread.rootMessageId = MBMessage.messageId ");
+				"select MBThread.threadId, MBMessage.companyId, " +
+					"MBMessage.userId from MBThread inner join MBMessage on " +
+						"MBThread.rootMessageId = MBMessage.messageId");
 
 			rs = ps.executeQuery();
 
