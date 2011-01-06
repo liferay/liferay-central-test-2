@@ -2429,7 +2429,7 @@
 	</library>
 	<library>
 		<file-name>portal/quartz.jar</file-name>
-		<version>1.7.2</version>
+		<version>1.8.4</version>
 		<project-name>Quartz</project-name>
 		<project-url>http://www.quartz-scheduler.org</project-url>
 		<licenses>
@@ -2437,10 +2437,6 @@
 				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
-		<comments>
-			This includes modifications to remove the weekly update check. See
-			LPS-7862.
-		</comments>
 	</library>
 	<library>
 		<file-name>portal/rdffilter.jar</file-name>

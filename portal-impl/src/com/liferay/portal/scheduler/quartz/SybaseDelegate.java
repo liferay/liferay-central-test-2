@@ -21,6 +21,8 @@ import java.sql.SQLException;
 
 import org.quartz.impl.jdbcjobstore.MSSQLDelegate;
 
+import org.slf4j.Logger;
+
 /**
  * <p>
  * See http://issues.liferay.com/browse/LPS-14611.
@@ -31,17 +33,16 @@ import org.quartz.impl.jdbcjobstore.MSSQLDelegate;
 public class SybaseDelegate extends MSSQLDelegate {
 
 	public SybaseDelegate(
-		org.apache.commons.logging.Log log, String tablePrefix,
-		String instanceId) {
+		Logger logger, String tablePrefix, String instanceId) {
 
-		super(log, tablePrefix, instanceId);
+		super(logger, tablePrefix, instanceId);
 	}
 
 	public SybaseDelegate(
-		org.apache.commons.logging.Log log, String tablePrefix,
-		String instanceId, Boolean useProperties) {
+		Logger logger, String tablePrefix, String instanceId,
+		Boolean useProperties) {
 
-		super(log, tablePrefix, instanceId, useProperties);
+		super(logger, tablePrefix, instanceId, useProperties);
 	}
 
 	protected void setBytes(
