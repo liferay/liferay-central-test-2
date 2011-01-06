@@ -58,6 +58,7 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
@@ -228,6 +229,7 @@ public class DataFactory {
 		mbCategory.setUserId(userId);
 		mbCategory.setName(name);
 		mbCategory.setDescription(description);
+		mbCategory.setDisplayStyle(MBCategoryConstants.DEFAULT_DISPLAY_STYLE);
 		mbCategory.setThreadCount(threadCount);
 		mbCategory.setMessageCount(messageCount);
 
