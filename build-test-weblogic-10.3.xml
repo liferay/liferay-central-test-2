@@ -46,9 +46,9 @@
 		</exec>
 
 		<replace file="setDomainEnv.cmd">
+			<replacefilter token="set JAVA_PROPERTIES=%JAVA_PROPERTIES% %EXTRA_JAVA_PROPERTIES%" value="set JAVA_PROPERTIES=-Dfile.encoding=UTF8 %JAVA_PROPERTIES% %EXTRA_JAVA_PROPERTIES%" />
 			<replacefilter token="set MEM_MAX_PERM_SIZE_32BIT=-XX:MaxPermSize=128m" value="set MEM_MAX_PERM_SIZE_32BIT=-XX:MaxPermSize=256m" />
 			<replacefilter token="set WLS_MEM_ARGS_32BIT=-Xms256m -Xmx512m" value="set WLS_MEM_ARGS_32BIT=-Xms256m -Xmx1024m" />
-			<replacefilter token="set JAVA_PROPERTIES=%JAVA_PROPERTIES% %EXTRA_JAVA_PROPERTIES%" value="set JAVA_PROPERTIES=-Dfile.encoding=UTF8 %JAVA_PROPERTIES% %EXTRA_JAVA_PROPERTIES%" />
 		</replace>
 
 		<exec executable="${pscp.executable}">
