@@ -207,6 +207,15 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		LayoutSet layoutSet = layoutSetPersistence.findByG_P(
 			groupId, privateLayout);
 
+		if (Validator.isNull(themeId)) {
+			themeId = ThemeImpl.getDefaultRegularThemeId(
+				layoutSet.getCompanyId());
+		}
+
+		if (Validator.isNull(colorSchemeId)) {
+			colorSchemeId = ColorSchemeImpl.getDefaultRegularColorSchemeId();
+		}
+
 		if (wapTheme) {
 			layoutSet.setWapThemeId(themeId);
 			layoutSet.setWapColorSchemeId(colorSchemeId);
