@@ -410,10 +410,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	* Gets the parent struts path of the portlet.
-	*
-	* @return the parent struts path of the portlet.
-	*/
+	 * Gets the parent struts path of the portlet.
+	 *
+	 * @return the parent struts path of the portlet.
+	 */
 	public String getParentStrutsPath() {
 		return _parentStrutsPath;
 	}
