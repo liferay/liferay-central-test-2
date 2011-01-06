@@ -123,21 +123,15 @@ public class AddWebContent3Test extends BaseTestCase {
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Web1 Content1 Name1"),
 			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Approved"),
-			selenium.getText("//td[5]/a"));
+			selenium.getText("//td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Web2 Content2 Name2"),
 			selenium.getText("//tr[4]/td[3]/a"));
-		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//tr[4]/td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Approved"),
-			selenium.getText("//tr[4]/td[5]/a"));
+			selenium.getText("//tr[4]/td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Web3 Content3 Name3"),
 			selenium.getText("//tr[5]/td[3]/a"));
-		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//tr[5]/td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Approved"),
-			selenium.getText("//tr[5]/td[5]/a"));
+			selenium.getText("//tr[5]/td[4]/a"));
 	}
 }

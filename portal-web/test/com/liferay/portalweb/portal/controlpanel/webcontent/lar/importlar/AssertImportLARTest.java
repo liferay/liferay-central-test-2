@@ -47,18 +47,24 @@ public class AssertImportLARTest extends BaseTestCase {
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
+		assertTrue(selenium.isElementPresent("//td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Test Web Content Article"),
 			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Approved"),
-			selenium.getText("//td[5]/a"));
+			selenium.getText("//td[4]/a"));
+		assertTrue(selenium.isElementPresent("//td[5]/a"));
+		assertTrue(selenium.isElementPresent("//td[6]/a"));
+		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
+			selenium.getText("//td[7]/a"));
+		assertTrue(selenium.isElementPresent("//tr[4]/td[2]/a"));
 		assertEquals(RuntimeVariables.replace("Test Web Content Article 2"),
 			selenium.getText("//tr[4]/td[3]/a"));
-		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//tr[4]/td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Approved"),
-			selenium.getText("//tr[4]/td[5]/a"));
+			selenium.getText("//tr[4]/td[4]/a"));
+		assertTrue(selenium.isElementPresent("//tr[4]/td[5]/a"));
+		assertTrue(selenium.isElementPresent("//tr[4]/td[6]/a"));
+		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
+			selenium.getText("//tr[4]/td[7]/a"));
 		selenium.clickAt("link=Structures", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

@@ -49,10 +49,8 @@ public class ExpireWebContentApprovedTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace("Web Content Name Approved"),
 			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Approved"),
-			selenium.getText("//td[5]/a"));
+			selenium.getText("//td[4]/a"));
 		assertFalse(selenium.isChecked("_15_rowIds"));
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("_15_rowIds", RuntimeVariables.replace(""));
@@ -68,9 +66,7 @@ public class ExpireWebContentApprovedTest extends BaseTestCase {
 			selenium.getText("//section/div/div/div/div"));
 		assertEquals(RuntimeVariables.replace("Web Content Name Approved"),
 			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//td[4]/a"));
 		assertEquals(RuntimeVariables.replace("Expired"),
-			selenium.getText("//td[5]/a"));
+			selenium.getText("//td[4]/a"));
 	}
 }
