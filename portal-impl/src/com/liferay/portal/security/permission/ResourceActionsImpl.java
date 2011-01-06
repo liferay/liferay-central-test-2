@@ -344,10 +344,11 @@ public class ResourceActionsImpl implements ResourceActions {
 			if (communityDefaultActions == null) {
 				communityDefaultActions = new UniqueList<String>();
 
-				_portletResourceCommunityDefaultActions.put(
-					name, communityDefaultActions);
-
 				checkPortletCommunityDefaultActions(communityDefaultActions);
+
+				_portletResourceCommunityDefaultActions.put(
+					name,
+					Collections.unmodifiableList(communityDefaultActions));
 			}
 
 			List<String> guestDefaultActions =
@@ -356,10 +357,11 @@ public class ResourceActionsImpl implements ResourceActions {
 			if (guestDefaultActions == null) {
 				guestDefaultActions = new UniqueList<String>();
 
-				_portletResourceGuestDefaultActions.put(
-					name, guestDefaultActions);
-
 				checkPortletGuestDefaultActions(guestDefaultActions);
+
+				_portletResourceGuestDefaultActions.put(
+					name,
+					Collections.unmodifiableList(guestDefaultActions));
 			}
 
 			List<String> layoutManagerActions =
@@ -368,11 +370,14 @@ public class ResourceActionsImpl implements ResourceActions {
 			if (layoutManagerActions == null) {
 				layoutManagerActions = new UniqueList<String>();
 
-				_portletResourceLayoutManagerActions.put(
-					name, layoutManagerActions);
-
 				checkPortletLayoutManagerActions(layoutManagerActions);
+
+				_portletResourceLayoutManagerActions.put(
+					name,
+					Collections.unmodifiableList(layoutManagerActions));
 			}
+
+			actions = setActions(_portletResourceActions, name, actions);
 		}
 
 		return actions;
@@ -416,9 +421,13 @@ public class ResourceActionsImpl implements ResourceActions {
 		// defaults of CONFIGURATION, PREFERENCES, and VIEW.
 
 		if (actions.isEmpty()) {
+			actions = new UniqueList<String>();
+
 			actions.add(ActionKeys.CONFIGURATION);
 			actions.add(ActionKeys.PREFERENCES);
 			actions.add(ActionKeys.VIEW);
+
+			setActions(_portletResourceLayoutManagerActions, name, actions);
 		}
 
 		return actions;
@@ -809,7 +818,9 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
-	protected void readActionKeys(Element parentElement, List<String> actions) {
+	protected List<String> readActionKeys(Element parentElement) {
+		List<String> actions = new ArrayList<String>();
+
 		for (Element actionKeyElement : parentElement.elements("action-key")) {
 			String actionKey = actionKeyElement.getTextTrim();
 
@@ -819,30 +830,37 @@ public class ResourceActionsImpl implements ResourceActions {
 
 			actions.add(actionKey);
 		}
+
+		return actions;
 	}
 
 	protected void readCommunityDefaultActions(
 		Element parentElement, Map<String, List<String>> actionsMap,
 		String name) {
 
-		List<String> communityDefaultActions = getActions(actionsMap, name);
+		List<String> communityDefaultActions = new UniqueList<String>(
+			getActions(actionsMap, name));
 
 		Element communityDefaultsElement = getPermissionsChildElement(
 			parentElement, "community-defaults");
 
-		readActionKeys(communityDefaultsElement, communityDefaultActions);
+		communityDefaultActions.addAll(
+			readActionKeys(communityDefaultsElement));
+
+		setActions(actionsMap, name, communityDefaultActions);
 	}
 
 	protected List<String> readGuestDefaultActions(
 		Element parentElement, Map<String, List<String>> actionsMap,
 		String name) {
 
-		List<String> guestDefaultActions = getActions(actionsMap, name);
+		List<String> guestDefaultActions = new UniqueList<String>(
+			getActions(actionsMap, name));
 
 		Element guestDefaultsElement = getPermissionsChildElement(
 			parentElement, "guest-defaults");
 
-		readActionKeys(guestDefaultsElement, guestDefaultActions);
+		guestDefaultActions.addAll(readActionKeys(guestDefaultsElement));
 
 		return guestDefaultActions;
 	}
@@ -851,32 +869,38 @@ public class ResourceActionsImpl implements ResourceActions {
 		Element parentElement, Map<String, List<String>> actionsMap,
 		String name, List<String> guestDefaultActions) {
 
-		List<String> guestUnsupportedActions = getActions(actionsMap, name);
+		List<String> guestUnsupportedActions = new UniqueList<String>(
+			getActions(actionsMap, name));
 
 		Element guestUnsupportedElement = getPermissionsChildElement(
 			parentElement, "guest-unsupported");
 
-		readActionKeys(guestUnsupportedElement, guestUnsupportedActions);
+		guestUnsupportedActions.addAll(readActionKeys(guestUnsupportedElement));
 
 		checkGuestUnsupportedActions(
 			guestUnsupportedActions, guestDefaultActions);
+
+		setActions(actionsMap, name, guestUnsupportedActions);
 	}
 
 	protected void readLayoutManagerActions(
 		Element parentElement, Map<String, List<String>> actionsMap,
 		String name, List<String> supportsActions) {
 
-		List<String> layoutManagerActions = getActions(actionsMap, name);
+		List<String> layoutManagerActions = new UniqueList<String>(
+			getActions(actionsMap, name));
 
 		Element layoutManagerElement = getPermissionsChildElement(
 			parentElement, "layout-manager");
 
 		if (layoutManagerElement != null) {
-			readActionKeys(layoutManagerElement, layoutManagerActions);
+			layoutManagerActions.addAll(readActionKeys(layoutManagerElement));
 		}
 		else {
 			layoutManagerActions.addAll(supportsActions);
 		}
+
+		setActions(actionsMap, name, layoutManagerActions);
 	}
 
 	protected void readModelResource(
@@ -930,6 +954,8 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		checkModelActions(supportsActions);
 
+		setActions(_modelResourceActions, name, supportsActions);
+
 		readCommunityDefaultActions(
 			modelResourceElement, _modelResourceCommunityDefaultActions,  name);
 
@@ -939,6 +965,9 @@ public class ResourceActionsImpl implements ResourceActions {
 		readGuestUnsupportedActions(
 			modelResourceElement, _modelResourceGuestUnsupportedActions, name,
 			guestDefaultActions);
+
+		setActions(
+			_modelResourceGuestDefaultActions, name, guestDefaultActions);
 
 		readOwnerDefaultActions(
 			modelResourceElement, _modelResourceOwnerDefaultActions, name);
@@ -950,7 +979,8 @@ public class ResourceActionsImpl implements ResourceActions {
 		Element parentElement, Map<String, List<String>> actionsMap,
 		String name) {
 
-		List<String> ownerDefaultActions = getActions(actionsMap, name);
+		List<String> ownerDefaultActions = new UniqueList<String>(
+			getActions(actionsMap, name));
 
 		Element ownerDefaultsElement = getPermissionsChildElement(
 			parentElement, "owner-defaults");
@@ -959,7 +989,9 @@ public class ResourceActionsImpl implements ResourceActions {
 			return;
 		}
 
-		readActionKeys(ownerDefaultsElement, ownerDefaultActions);
+		ownerDefaultActions.addAll(readActionKeys(ownerDefaultsElement));
+
+		setActions(actionsMap, name, ownerDefaultActions);
 	}
 
 	protected void readPortletResource(
@@ -983,6 +1015,9 @@ public class ResourceActionsImpl implements ResourceActions {
 			checkPortletActions(supportsActions);
 		}
 
+		supportsActions = setActions(
+			_portletResourceActions, name, supportsActions);
+
 		readCommunityDefaultActions(
 			portletResourceElement, _portletResourceCommunityDefaultActions,
 			name);
@@ -993,6 +1028,9 @@ public class ResourceActionsImpl implements ResourceActions {
 		readGuestUnsupportedActions(
 			portletResourceElement, _portletResourceGuestUnsupportedActions,
 			name, guestDefaultActions);
+
+		setActions(
+			_portletResourceGuestDefaultActions, name, guestDefaultActions);
 
 		readLayoutManagerActions(
 			portletResourceElement, _portletResourceLayoutManagerActions, name,
@@ -1078,14 +1116,26 @@ public class ResourceActionsImpl implements ResourceActions {
 		Element parentElement, Map<String, List<String>> actionsMap,
 		String name) {
 
-		List<String> supportsActions = getActions(actionsMap, name);
+		List<String> supportsActions = new UniqueList<String>(
+			getActions(actionsMap, name));
 
 		Element supportsElement = getPermissionsChildElement(
 			parentElement, "supports");
 
-		readActionKeys(supportsElement, supportsActions);
+		supportsActions.addAll(readActionKeys(supportsElement));
 
 		return supportsActions;
+	}
+
+	protected List<String> setActions(
+		Map<String, List<String>> actionsMap, String name,
+		List<String> actions) {
+
+		actions = Collections.unmodifiableList(actions);
+
+		actionsMap.put(name, actions);
+
+		return actions;
 	}
 
 	protected Portal portal;

@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Permission;
@@ -639,6 +640,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		List<String> actionIds = ResourceActionsUtil.getModelResourceActions(
 			resource.getName());
 
+		actionIds = ListUtil.copy(actionIds);
+
 		filterOwnerActions(resource.getName(), actionIds);
 
 		resourcePermissionLocalService.setResourcePermissions(
@@ -786,6 +789,8 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		else {
 			actionIds = ResourceActionsUtil.getModelResourceActions(
 				resource.getName());
+
+			actionIds = ListUtil.copy(actionIds);
 
 			filterOwnerActions(resource.getName(), actionIds);
 		}
