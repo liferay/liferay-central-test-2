@@ -35,22 +35,24 @@ public class SQLTransformer {
 	private SQLTransformer() {
 		DB db = DBFactoryUtil.getDB();
 
-		if (db.getType().equals(DB.TYPE_DB2)) {
+		String dbType = db.getType();
+
+		if (dbType.equals(DB.TYPE_DB2)) {
 			_vendorDB2 = true;
 		}
-		else if (db.getType().equals(DB.TYPE_DERBY)) {
+		else if (dbType.equals(DB.TYPE_DERBY)) {
 			_vendorDerby = true;
 		}
-		else if (db.getType().equals(DB.TYPE_MYSQL)) {
+		else if (dbType.equals(DB.TYPE_MYSQL)) {
 			_vendorMySQL = true;
 		}
-		else if (db.getType().equals(DB.TYPE_POSTGRESQL)) {
+		else if (dbType.equals(DB.TYPE_POSTGRESQL)) {
 			_vendorPostgreSQL = true;
 		}
-		else if (db.getType().equals(DB.TYPE_SQLSERVER)) {
+		else if (dbType.equals(DB.TYPE_SQLSERVER)) {
 			_vendorSQLServer = true;
 		}
-		else if (db.getType().equals(DB.TYPE_SYBASE)) {
+		else if (dbType.equals(DB.TYPE_SYBASE)) {
 			_vendorSybase = true;
 		}
 	}

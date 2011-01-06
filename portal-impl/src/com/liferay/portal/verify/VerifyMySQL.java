@@ -58,7 +58,9 @@ public class VerifyMySQL extends VerifyProcess {
 	protected void doVerify() throws Exception {
 		DB db = DBFactoryUtil.getDB();
 
-		if (!db.getType().equals(DB.TYPE_MYSQL)) {
+		String dbType = db.getType();
+
+		if (!dbType.equals(DB.TYPE_MYSQL)) {
 			return;
 		}
 

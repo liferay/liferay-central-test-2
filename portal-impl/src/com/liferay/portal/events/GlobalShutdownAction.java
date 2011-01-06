@@ -143,7 +143,9 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		DB db = DBFactoryUtil.getDB();
 
-		if (db.getType().equals(DB.TYPE_HYPERSONIC)) {
+		String dbType = db.getType();
+
+		if (dbType.equals(DB.TYPE_HYPERSONIC)) {
 			try {
 				Connection connection = DataAccess.getConnection();
 

@@ -145,7 +145,9 @@ public class VerifySQLServer extends VerifyProcess {
 	protected void doVerify() throws Exception {
 		DB db = DBFactoryUtil.getDB();
 
-		if (!db.getType().equals(DB.TYPE_SQLSERVER)) {
+		String dbType = db.getType();
+
+		if (!dbType.equals(DB.TYPE_SQLSERVER)) {
 			return;
 		}
 

@@ -150,7 +150,9 @@ public class VerifyJournal extends VerifyProcess {
 	protected void verifyOracleNewLine() throws Exception {
 		DB db = DBFactoryUtil.getDB();
 
-		if (!db.getType().equals(DB.TYPE_ORACLE)) {
+		String dbType = db.getType();
+
+		if (!dbType.equals(DB.TYPE_ORACLE)) {
 			return;
 		}
 
