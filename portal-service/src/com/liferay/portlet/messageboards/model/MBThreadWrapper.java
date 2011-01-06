@@ -83,6 +83,24 @@ public class MBThreadWrapper implements MBThread {
 	}
 
 	/**
+	* Gets the company ID of this message boards thread.
+	*
+	* @return the company ID of this message boards thread
+	*/
+	public long getCompanyId() {
+		return _mbThread.getCompanyId();
+	}
+
+	/**
+	* Sets the company ID of this message boards thread.
+	*
+	* @param companyId the company ID of this message boards thread
+	*/
+	public void setCompanyId(long companyId) {
+		_mbThread.setCompanyId(companyId);
+	}
+
+	/**
 	* Gets the category ID of this message boards thread.
 	*
 	* @return the category ID of this message boards thread
@@ -116,6 +134,44 @@ public class MBThreadWrapper implements MBThread {
 	*/
 	public void setRootMessageId(long rootMessageId) {
 		_mbThread.setRootMessageId(rootMessageId);
+	}
+
+	/**
+	* Gets the root message user ID of this message boards thread.
+	*
+	* @return the root message user ID of this message boards thread
+	*/
+	public long getRootMessageUserId() {
+		return _mbThread.getRootMessageUserId();
+	}
+
+	/**
+	* Sets the root message user ID of this message boards thread.
+	*
+	* @param rootMessageUserId the root message user ID of this message boards thread
+	*/
+	public void setRootMessageUserId(long rootMessageUserId) {
+		_mbThread.setRootMessageUserId(rootMessageUserId);
+	}
+
+	/**
+	* Gets the root message user uuid of this message boards thread.
+	*
+	* @return the root message user uuid of this message boards thread
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.lang.String getRootMessageUserUuid()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _mbThread.getRootMessageUserUuid();
+	}
+
+	/**
+	* Sets the root message user uuid of this message boards thread.
+	*
+	* @param rootMessageUserUuid the root message user uuid of this message boards thread
+	*/
+	public void setRootMessageUserUuid(java.lang.String rootMessageUserUuid) {
+		_mbThread.setRootMessageUserUuid(rootMessageUserUuid);
 	}
 
 	/**

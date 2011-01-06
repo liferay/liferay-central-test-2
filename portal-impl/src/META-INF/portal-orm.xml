@@ -2053,8 +2053,10 @@
 		<attributes>
 			<id name="threadId" />
 			<basic name="groupId" />
+			<basic name="companyId" />
 			<basic name="categoryId" />
 			<basic name="rootMessageId" />
+			<basic name="rootMessageUserId" />
 			<basic name="messageCount" />
 			<basic name="viewCount" />
 			<basic name="lastPostByUserId" />
@@ -2070,6 +2072,7 @@
 			</basic>
 			<transient name="lastPostByUserUuid" />
 			<transient name="primaryKey" />
+			<transient name="rootMessageUserUuid" />
 			<transient name="statusByUserUuid" />
 		</attributes>
 	</mapped-superclass>

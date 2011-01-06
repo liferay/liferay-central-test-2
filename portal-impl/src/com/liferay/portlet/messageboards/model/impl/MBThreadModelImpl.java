@@ -65,8 +65,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "threadId", new Integer(Types.BIGINT) },
 			{ "groupId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.BIGINT) },
 			{ "categoryId", new Integer(Types.BIGINT) },
 			{ "rootMessageId", new Integer(Types.BIGINT) },
+			{ "rootMessageUserId", new Integer(Types.BIGINT) },
 			{ "messageCount", new Integer(Types.INTEGER) },
 			{ "viewCount", new Integer(Types.INTEGER) },
 			{ "lastPostByUserId", new Integer(Types.BIGINT) },
@@ -77,7 +79,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,groupId LONG,categoryId LONG,rootMessageId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,groupId LONG,companyId LONG,categoryId LONG,rootMessageId LONG,rootMessageUserId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBThread";
 	public static final String ORDER_BY_JPQL = " ORDER BY mbThread.priority DESC, mbThread.lastPostDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY MBThread.priority DESC, MBThread.lastPostDate DESC";
@@ -102,8 +104,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 		model.setThreadId(soapModel.getThreadId());
 		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
 		model.setCategoryId(soapModel.getCategoryId());
 		model.setRootMessageId(soapModel.getRootMessageId());
+		model.setRootMessageUserId(soapModel.getRootMessageUserId());
 		model.setMessageCount(soapModel.getMessageCount());
 		model.setViewCount(soapModel.getViewCount());
 		model.setLastPostByUserId(soapModel.getLastPostByUserId());
@@ -167,6 +171,14 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		_groupId = groupId;
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -181,6 +193,23 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	public void setRootMessageId(long rootMessageId) {
 		_rootMessageId = rootMessageId;
+	}
+
+	public long getRootMessageUserId() {
+		return _rootMessageUserId;
+	}
+
+	public void setRootMessageUserId(long rootMessageUserId) {
+		_rootMessageUserId = rootMessageUserId;
+	}
+
+	public String getRootMessageUserUuid() throws SystemException {
+		return PortalUtil.getUserValue(getRootMessageUserId(), "uuid",
+			_rootMessageUserUuid);
+	}
+
+	public void setRootMessageUserUuid(String rootMessageUserUuid) {
+		_rootMessageUserUuid = rootMessageUserUuid;
 	}
 
 	public int getMessageCount() {
@@ -333,7 +362,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	public ExpandoBridge getExpandoBridge() {
 		if (_expandoBridge == null) {
-			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(0,
+			_expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 					MBThread.class.getName(), getPrimaryKey());
 		}
 
@@ -349,8 +378,10 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 		clone.setThreadId(getThreadId());
 		clone.setGroupId(getGroupId());
+		clone.setCompanyId(getCompanyId());
 		clone.setCategoryId(getCategoryId());
 		clone.setRootMessageId(getRootMessageId());
+		clone.setRootMessageUserId(getRootMessageUserId());
 		clone.setMessageCount(getMessageCount());
 		clone.setViewCount(getViewCount());
 		clone.setLastPostByUserId(getLastPostByUserId());
@@ -423,16 +454,20 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{threadId=");
 		sb.append(getThreadId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", companyId=");
+		sb.append(getCompanyId());
 		sb.append(", categoryId=");
 		sb.append(getCategoryId());
 		sb.append(", rootMessageId=");
 		sb.append(getRootMessageId());
+		sb.append(", rootMessageUserId=");
+		sb.append(getRootMessageUserId());
 		sb.append(", messageCount=");
 		sb.append(getMessageCount());
 		sb.append(", viewCount=");
@@ -457,7 +492,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.messageboards.model.MBThread");
@@ -472,12 +507,20 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>companyId</column-name><column-value><![CDATA[");
+		sb.append(getCompanyId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>categoryId</column-name><column-value><![CDATA[");
 		sb.append(getCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>rootMessageId</column-name><column-value><![CDATA[");
 		sb.append(getRootMessageId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>rootMessageUserId</column-name><column-value><![CDATA[");
+		sb.append(getRootMessageUserId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>messageCount</column-name><column-value><![CDATA[");
@@ -523,8 +566,11 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	private long _threadId;
 	private long _groupId;
+	private long _companyId;
 	private long _categoryId;
 	private long _rootMessageId;
+	private long _rootMessageUserId;
+	private String _rootMessageUserUuid;
 	private int _messageCount;
 	private int _viewCount;
 	private long _lastPostByUserId;

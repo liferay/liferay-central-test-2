@@ -34,8 +34,10 @@ public class MBThreadJSONSerializer {
 
 		jsonObject.put("threadId", model.getThreadId());
 		jsonObject.put("groupId", model.getGroupId());
+		jsonObject.put("companyId", model.getCompanyId());
 		jsonObject.put("categoryId", model.getCategoryId());
 		jsonObject.put("rootMessageId", model.getRootMessageId());
+		jsonObject.put("rootMessageUserId", model.getRootMessageUserId());
 		jsonObject.put("messageCount", model.getMessageCount());
 		jsonObject.put("viewCount", model.getViewCount());
 		jsonObject.put("lastPostByUserId", model.getLastPostByUserId());

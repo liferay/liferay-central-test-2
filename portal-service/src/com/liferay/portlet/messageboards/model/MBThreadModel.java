@@ -88,6 +88,20 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	public void setGroupId(long groupId);
 
 	/**
+	 * Gets the company ID of this message boards thread.
+	 *
+	 * @return the company ID of this message boards thread
+	 */
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this message boards thread.
+	 *
+	 * @param companyId the company ID of this message boards thread
+	 */
+	public void setCompanyId(long companyId);
+
+	/**
 	 * Gets the category ID of this message boards thread.
 	 *
 	 * @return the category ID of this message boards thread
@@ -114,6 +128,35 @@ public interface MBThreadModel extends BaseModel<MBThread> {
 	 * @param rootMessageId the root message ID of this message boards thread
 	 */
 	public void setRootMessageId(long rootMessageId);
+
+	/**
+	 * Gets the root message user ID of this message boards thread.
+	 *
+	 * @return the root message user ID of this message boards thread
+	 */
+	public long getRootMessageUserId();
+
+	/**
+	 * Sets the root message user ID of this message boards thread.
+	 *
+	 * @param rootMessageUserId the root message user ID of this message boards thread
+	 */
+	public void setRootMessageUserId(long rootMessageUserId);
+
+	/**
+	 * Gets the root message user uuid of this message boards thread.
+	 *
+	 * @return the root message user uuid of this message boards thread
+	 * @throws SystemException if a system exception occurred
+	 */
+	public String getRootMessageUserUuid() throws SystemException;
+
+	/**
+	 * Sets the root message user uuid of this message boards thread.
+	 *
+	 * @param rootMessageUserUuid the root message user uuid of this message boards thread
+	 */
+	public void setRootMessageUserUuid(String rootMessageUserUuid);
 
 	/**
 	 * Gets the message count of this message boards thread.

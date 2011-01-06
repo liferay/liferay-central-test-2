@@ -954,8 +954,10 @@ create table MBStatsUser (
 create table MBThread (
 	threadId LONG not null primary key,
 	groupId LONG,
+	companyId LONG,
 	categoryId LONG,
 	rootMessageId LONG,
+	rootMessageUserId LONG,
 	messageCount INTEGER,
 	viewCount INTEGER,
 	lastPostByUserId LONG,

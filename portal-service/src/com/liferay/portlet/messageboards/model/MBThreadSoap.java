@@ -36,8 +36,10 @@ public class MBThreadSoap implements Serializable {
 
 		soapModel.setThreadId(model.getThreadId());
 		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCategoryId(model.getCategoryId());
 		soapModel.setRootMessageId(model.getRootMessageId());
+		soapModel.setRootMessageUserId(model.getRootMessageUserId());
 		soapModel.setMessageCount(model.getMessageCount());
 		soapModel.setViewCount(model.getViewCount());
 		soapModel.setLastPostByUserId(model.getLastPostByUserId());
@@ -115,6 +117,14 @@ public class MBThreadSoap implements Serializable {
 		_groupId = groupId;
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	public long getCategoryId() {
 		return _categoryId;
 	}
@@ -129,6 +139,14 @@ public class MBThreadSoap implements Serializable {
 
 	public void setRootMessageId(long rootMessageId) {
 		_rootMessageId = rootMessageId;
+	}
+
+	public long getRootMessageUserId() {
+		return _rootMessageUserId;
+	}
+
+	public void setRootMessageUserId(long rootMessageUserId) {
+		_rootMessageUserId = rootMessageUserId;
 	}
 
 	public int getMessageCount() {
@@ -205,8 +223,10 @@ public class MBThreadSoap implements Serializable {
 
 	private long _threadId;
 	private long _groupId;
+	private long _companyId;
 	private long _categoryId;
 	private long _rootMessageId;
+	private long _rootMessageUserId;
 	private int _messageCount;
 	private int _viewCount;
 	private long _lastPostByUserId;
