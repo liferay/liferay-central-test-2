@@ -327,7 +327,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.addZipEntry(path, article);
 	}
 
-	protected static String exportDLFileEntries(
+	public static String exportDLFileEntries(
 			PortletDataContext portletDataContext, Element foldersElement,
 			Element fileEntriesElement, Element fileRanksElement,
 			Element entityElement, String content, boolean checkDateRange)
@@ -547,7 +547,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.addZipEntry(path, feed);
 	}
 
-	protected static String exportIGImages(
+	public static String exportIGImages(
 			PortletDataContext portletDataContext, Element foldersElement,
 			Element imagesElement, Element entityElement, String content,
 			boolean checkDateRange)
@@ -700,7 +700,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected static String exportLayoutFriendlyURLs(
+	public static String exportLayoutFriendlyURLs(
 		PortletDataContext portletDataContext, String content) {
 
 		Group group = null;
@@ -830,7 +830,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected static String exportLinksToLayout(
+	public static String exportLinksToLayout(
 			PortletDataContext portletDataContext, String content)
 		throws Exception {
 
@@ -1534,14 +1534,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
-	protected static String importDLFileEntries(
+	public static String importDLFileEntries(
 			PortletDataContext portletDataContext, Element parentElement,
 			String content)
 		throws Exception {
-
-		Map<Long, Long> fileEntryPKs =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				DLFileEntry.class);
 
 		List<Element> dlReferenceElements = parentElement.elements(
 			"dl-reference");
@@ -1565,11 +1561,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				continue;
 			}
 
-			long fileEntryId = MapUtil.getLong(
-				fileEntryPKs, fileEntry.getFileEntryId(),
-				fileEntry.getFileEntryId());
-
-			fileEntry = DLFileEntryUtil.fetchByPrimaryKey(fileEntryId);
+			fileEntry = DLFileEntryUtil.fetchByUUID_G(
+				fileEntry.getUuid(), portletDataContext.getGroupId());
 
 			if (fileEntry == null) {
 				continue;
@@ -1736,14 +1729,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
-	protected static String importIGImages(
+	public static String importIGImages(
 			PortletDataContext portletDataContext, Element parentElement,
 			String content)
 		throws Exception {
-
-		Map<Long, Long> imagePKs =
-			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-				IGImage.class);
 
 		List<Element> igReferenceElements = parentElement.elements(
 			"ig-reference");
@@ -1767,10 +1756,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				continue;
 			}
 
-			long imageId = MapUtil.getLong(
-				imagePKs, image.getImageId(), image.getImageId());
-
-			image = IGImageUtil.fetchByPrimaryKey(imageId);
+			image = IGImageUtil.fetchByUUID_G(
+				image.getUuid(), portletDataContext.getGroupId());
 
 			if (image == null) {
 				continue;
@@ -1793,7 +1780,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return content;
 	}
 
-	protected static String importLinksToLayout(
+	public static String importLinksToLayout(
 			PortletDataContext portletDataContext, String content)
 		throws Exception {
 
