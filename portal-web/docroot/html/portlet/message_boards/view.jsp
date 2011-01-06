@@ -25,6 +25,8 @@ MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CA
 
 long categoryId = MBUtil.getCategoryId(request, category);
 
+String displayStyle = BeanPropertiesUtil.getString(category, "displayStyle", MBCategoryConstants.DEFAULT_DISPLAY_STYLE);
+
 MBCategoryDisplay categoryDisplay = new MBCategoryDisplayImpl(scopeGroupId, categoryId);
 
 Set<Long> categorySubscriptionClassPKs = null;
@@ -202,14 +204,6 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 				title="<%= category.getName() %>"
 			/>
 		</c:if>
-
-		<%
-		String displayStyle = BeanPropertiesUtil.getString(category, "displayStyle");
-
-		if (Validator.isNull(displayStyle)) {
-			displayStyle = MBCategoryConstants.DEFAULT_DISPLAY_STYLE;
-		}
-		%>
 
 		<div class="displayStyle-<%= displayStyle %>">
 			<liferay-util:include page='<%= "/html/portlet/message_boards/view_category_" + displayStyle + ".jsp" %>' />
