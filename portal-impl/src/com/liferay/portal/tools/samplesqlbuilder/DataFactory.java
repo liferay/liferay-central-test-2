@@ -285,16 +285,18 @@ public class DataFactory {
 	}
 
 	public MBThread addMBThread(
-			long threadId, long groupId, long categoryId, long rootMessageId,
-			int messageCount, long lastPostByUserId)
+			long threadId, long groupId, long companyId, long categoryId,
+			long rootMessageId, int messageCount, long lastPostByUserId)
 		throws Exception {
 
 		MBThread mbThread = new MBThreadImpl();
 
 		mbThread.setThreadId(threadId);
 		mbThread.setGroupId(groupId);
+		mbThread.setCompanyId(companyId);
 		mbThread.setCategoryId(categoryId);
 		mbThread.setRootMessageId(rootMessageId);
+		mbThread.setRootMessageUserId(lastPostByUserId);
 		mbThread.setMessageCount(messageCount);
 		mbThread.setLastPostByUserId(lastPostByUserId);
 

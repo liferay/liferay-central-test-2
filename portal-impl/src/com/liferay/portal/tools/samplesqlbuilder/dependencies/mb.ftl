@@ -39,7 +39,7 @@
 					</#if>
 				</#list>
 
-				<#assign mbThread = dataFactory.addMBThread(threadId, mbCategory.groupId, categoryId, rootMessageId, maxMBCategoryCount, firstUserId)>
+				<#assign mbThread = dataFactory.addMBThread(threadId, mbCategory.groupId, companyId, categoryId, rootMessageId, maxMBCategoryCount, firstUserId)>
 
 				${sampleSQLBuilder.insertMBThread(mbThread)}
 

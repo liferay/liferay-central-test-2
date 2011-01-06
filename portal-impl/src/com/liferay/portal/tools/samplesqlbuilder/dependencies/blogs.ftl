@@ -14,7 +14,7 @@
 
 		${sampleSQLBuilder.insertMBMessage(mbRootMessage)}
 
-		<#assign mbThread = dataFactory.addMBThread(mbThreadId, mbGroupId, mbCategoryId, mbRootMessage.messageId, maxBlogsEntryCommentCount, mbUserId)>
+		<#assign mbThread = dataFactory.addMBThread(mbThreadId, mbGroupId, companyId, mbCategoryId, mbRootMessage.messageId, maxBlogsEntryCommentCount, mbUserId)>
 
 		${sampleSQLBuilder.insertMBThread(mbThread)}
 

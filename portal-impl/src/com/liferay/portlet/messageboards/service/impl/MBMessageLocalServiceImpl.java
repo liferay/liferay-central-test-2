@@ -258,8 +258,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread = mbThreadPersistence.create(threadId);
 
 			thread.setGroupId(groupId);
+			thread.setCompanyId(user.getCompanyId());
 			thread.setCategoryId(categoryId);
 			thread.setRootMessageId(messageId);
+			thread.setRootMessageUserId(user.getUserId());
 			thread.setStatus(WorkflowConstants.STATUS_DRAFT);
 			thread.setStatusByUserId(user.getUserId());
 			thread.setStatusByUserName(userName);
@@ -621,6 +623,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					mbMessagePersistence.update(childMessage, false);
 
 					thread.setRootMessageId(childMessage.getMessageId());
+					thread.setRootMessageUserId(childMessage.getUserId());
 
 					mbThreadPersistence.update(thread, false);
 				}

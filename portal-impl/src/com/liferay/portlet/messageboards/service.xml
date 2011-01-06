@@ -407,10 +407,15 @@
 
 		<column name="groupId" type="long" />
 
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		
 		<!-- Other fields -->
 
 		<column name="categoryId" type="long" />
 		<column name="rootMessageId" type="long" />
+		<column name="rootMessageUserId" type="long" />
 		<column name="messageCount" type="int" />
 		<column name="viewCount" type="int" />
 		<column name="lastPostByUserId" type="long" />

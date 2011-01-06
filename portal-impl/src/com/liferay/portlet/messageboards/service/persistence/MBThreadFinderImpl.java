@@ -36,6 +36,7 @@ import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class MBThreadFinderImpl
 	extends BasePersistenceImpl<MBThread> implements MBThreadFinder {
@@ -43,17 +44,11 @@ public class MBThreadFinderImpl
 	public static String COUNT_BY_G_C =
 		MBThreadFinder.class.getName() + ".countByG_C";
 
-	public static String COUNT_BY_G_C_S =
-		MBThreadFinder.class.getName() + ".countByG_C_S";
-
 	public static String COUNT_BY_S_G_U_C_S =
 		MBThreadFinder.class.getName() + ".countByS_G_U_C_S";
 
 	public static String FIND_BY_G_C =
 		MBThreadFinder.class.getName() + ".findByG_C";
-
-	public static String FIND_BY_G_C_S =
-		MBThreadFinder.class.getName() + ".findByG_C_S";
 
 	public static String FIND_BY_S_G_U_C_S =
 		MBThreadFinder.class.getName() + ".findByS_G_U_C_S";
@@ -86,8 +81,8 @@ public class MBThreadFinderImpl
 			String sql = CustomSQLUtil.get(COUNT_BY_G_C);
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBMessage.class.getName(), "MBMessage.messageId",
-				"MBMessage.userId", groupId);
+				sql, MBMessage.class.getName(), "MBThread.rootMessageId",
+				"MBThread.rootMessageUserId", groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -147,8 +142,8 @@ public class MBThreadFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_G_C);
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBMessage.class.getName(), "MBMessage.messageId",
-				"MBMessage.userId", groupId);
+				sql, MBMessage.class.getName(), "MBThread.rootMessageId",
+				"MBThread.rootMessageUserId", groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -219,7 +214,7 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_C_S);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
@@ -227,8 +222,8 @@ public class MBThreadFinderImpl
 			}
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBMessage.class.getName(), "MBMessage.messageId",
-				"MBMessage.userId", groupId);
+				sql, MBMessage.class.getName(), "MBThread.rootMessageId",
+				"MBThread.rootMessageUserId", groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -294,8 +289,8 @@ public class MBThreadFinderImpl
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "MBMessage.messageId",
-					"MBMessage.userId", groupId);
+					sql, MBMessage.class.getName(), "MBThread.rootMessageId",
+					"MBThread.rootMessageUserId", groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -352,7 +347,7 @@ public class MBThreadFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_C_S);
+			String sql = CustomSQLUtil.get(FIND_BY_G_C);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				sql = CustomSQLUtil.appendCriteria(
@@ -360,8 +355,8 @@ public class MBThreadFinderImpl
 			}
 
 			sql = InlineSQLHelperUtil.replacePermissionCheck(
-				sql, MBMessage.class.getName(), "MBMessage.messageId",
-				"MBMessage.userId", groupId);
+				sql, MBMessage.class.getName(), "MBThread.rootMessageId",
+				"MBThread.rootMessageUserId", groupId);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -417,8 +412,8 @@ public class MBThreadFinderImpl
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, MBMessage.class.getName(), "MBMessage.messageId",
-					"MBMessage.userId", groupId);
+					sql, MBMessage.class.getName(), "MBThread.rootMessageId",
+					"MBThread.rootMessageUserId", groupId);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);

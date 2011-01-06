@@ -22,7 +22,7 @@
 
 				${sampleSQLBuilder.insertMBMessage(mbRootMessage)}
 
-				<#assign mbThread = dataFactory.addMBThread(mbThreadId, mbGroupId, mbCategoryId, mbRootMessage.messageId, maxWikiPageCommentCount, mbUserId)>
+				<#assign mbThread = dataFactory.addMBThread(mbThreadId, mbGroupId, companyId, mbCategoryId, mbRootMessage.messageId, maxWikiPageCommentCount, mbUserId)>
 
 				${sampleSQLBuilder.insertMBThread(mbThread)}
 

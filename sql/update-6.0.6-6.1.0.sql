@@ -77,6 +77,12 @@ COMMIT_TRANSACTION;
 
 update MBCategory set displayStyle = 'default';
 
+alter table MBThread add companyId LONG null, add rootMessageUserId LONG null;
+
+COMMIT_TRANSACTION;
+
+update MBThread set companyId = 0, rootMessageUserId = 0;
+
 alter table MBMessage add format VARCHAR(75) null;
 
 COMMIT_TRANSACTION;

@@ -143,23 +143,6 @@
 				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
 			FROM
 				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBThread.rootMessageId)
-			WHERE
-				(MBThread.groupId = ?) AND
-				(MBThread.categoryId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByG_C_S">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT MBThread.threadId) AS COUNT_VALUE
-			FROM
-				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBThread.rootMessageId)
 			WHERE
 				(MBThread.groupId = ?) AND
 				(MBThread.categoryId = ?)
@@ -172,11 +155,8 @@
 			FROM
 				MBThread
 			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBThread.rootMessageId)
-			INNER JOIN
 				Subscription ON
-					(Subscription.companyId = MBMessage.companyId) AND
+					(Subscription.companyId = MBThread.companyId) AND
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
@@ -191,26 +171,6 @@
 				DISTINCT {MBThread.*}
 			FROM
 				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBThread.rootMessageId)
-			WHERE
-				(MBThread.groupId = ?) AND
-				(MBThread.categoryId = ?)
-			ORDER BY
-				MBThread.priority DESC,
-				MBThread.lastPostDate DESC
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.findByG_C_S">
-		<![CDATA[
-			SELECT
-				DISTINCT {MBThread.*}
-			FROM
-				MBThread
-			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBThread.rootMessageId)
 			WHERE
 				(MBThread.groupId = ?) AND
 				(MBThread.categoryId = ?)
@@ -226,11 +186,8 @@
 			FROM
 				MBThread
 			INNER JOIN
-				MBMessage ON
-					(MBMessage.messageId = MBThread.rootMessageId)
-			INNER JOIN
 				Subscription ON
-					(Subscription.companyId = MBMessage.companyId) AND
+					(Subscription.companyId = MBThread.companyId) AND
 					(Subscription.classNameId = ?) AND
 					(Subscription.classPK = MBThread.threadId)
 			WHERE
