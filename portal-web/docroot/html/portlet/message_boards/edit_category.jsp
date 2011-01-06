@@ -25,6 +25,12 @@ long categoryId = MBUtil.getCategoryId(request, category);
 
 long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
+String displayStyle = BeanParamUtil.getString(category, request, "displayStyle");
+
+if (Validator.isNull(displayStyle)) {
+	displayStyle = MBCategoryConstants.DEFAULT_DISPLAY_STYLE;
+}
+
 MBMailingList mailingList = null;
 
 try {
@@ -109,12 +115,10 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 		<aui:select name="displayStyle">
 
 			<%
-			String selectedDisplayStyle = (category != null) ? category.getDisplayStyle() : MBCategoryConstants.DEFAULT_DISPLAY_STYLE;
-
 			for (int i = 0; i < MBCategoryConstants.DISPLAY_STYLES.length; i++) {
 			%>
 
-				<aui:option label="<%= MBCategoryConstants.DISPLAY_STYLES[i] %>" selected="<%= MBCategoryConstants.DISPLAY_STYLES[i].equals(selectedDisplayStyle) %>" />
+				<aui:option label="<%= MBCategoryConstants.DISPLAY_STYLES[i] %>" selected="<%= displayStyle.equals(MBCategoryConstants.DISPLAY_STYLES[i]) %>" />
 
 			<%
 			}

@@ -23,10 +23,10 @@ import com.liferay.portal.kernel.util.PropsUtil;
  */
 public class MBCategoryConstants {
 
-	public static long DEFAULT_PARENT_CATEGORY_ID = 0;
-
 	public static final String DEFAULT_DISPLAY_STYLE = PropsUtil.get(
 		PropsKeys.MESSAGE_BOARDS_CATEGORY_DISPLAY_STYLES_DEFAULT);
+
+	public static long DEFAULT_PARENT_CATEGORY_ID = 0;
 
 	public static long DISCUSSION_CATEGORY_ID = -1;
 
