@@ -74,7 +74,7 @@ public class AddUserTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div[1]"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals("selenium01", selenium.getValue("_125_screenName"));
 		assertEquals("test01@selenium.com",
 			selenium.getValue("_125_emailAddress"));

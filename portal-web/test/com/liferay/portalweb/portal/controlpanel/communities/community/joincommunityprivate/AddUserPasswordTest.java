@@ -106,7 +106,7 @@ public class AddUserPasswordTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				assertEquals(RuntimeVariables.replace(
 						"Your request completed successfully."),
-					selenium.getText("//section/div/div/div/div[1]"));
+					selenium.getText("//div[@class='portlet-msg-success']"));
 
 			case 100:
 				label = -1;

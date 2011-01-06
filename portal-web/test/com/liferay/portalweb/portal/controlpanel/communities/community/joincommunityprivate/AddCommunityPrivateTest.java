@@ -62,7 +62,7 @@ public class AddCommunityPrivateTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("Test Private Community"),
 			selenium.getText("//tr[4]/td[1]"));
 		assertEquals(RuntimeVariables.replace("Private"),

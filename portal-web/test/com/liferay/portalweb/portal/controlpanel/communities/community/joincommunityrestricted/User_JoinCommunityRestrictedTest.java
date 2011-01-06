@@ -131,7 +131,7 @@ public class User_JoinCommunityRestrictedTest extends BaseTestCase {
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
-			selenium.getText("//section/div/div/div/div"));
+			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace(
 				"Your request was sent. You will receive a reply by email."),
 			selenium.getText("//section/div/div/div/div[2]"));

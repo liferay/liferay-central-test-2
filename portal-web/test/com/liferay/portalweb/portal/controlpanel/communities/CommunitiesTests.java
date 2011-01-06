@@ -16,7 +16,9 @@ package com.liferay.portalweb.portal.controlpanel.communities;
 
 import com.liferay.portalweb.portal.BaseTests;
 import com.liferay.portalweb.portal.controlpanel.communities.community.CommunityTests;
-import com.liferay.portalweb.portal.controlpanel.communities.general.GeneralTests;
+import com.liferay.portalweb.portal.controlpanel.communities.communitypage.CommunityPageTests;
+import com.liferay.portalweb.portal.controlpanel.communities.communitypageportlet.CommunityPagePortletTests;
+import com.liferay.portalweb.portal.controlpanel.communities.lar.LARTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -30,7 +32,9 @@ public class CommunitiesTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(CommunityTests.suite());
-		testSuite.addTest(GeneralTests.suite());
+		testSuite.addTest(CommunityPageTests.suite());
+		testSuite.addTest(CommunityPagePortletTests.suite());
+		testSuite.addTest(LARTests.suite());
 
 		return testSuite;
 	}
