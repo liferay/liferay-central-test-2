@@ -333,6 +333,10 @@ Liferay.Service.registerClass(
 	{
 		addTeam: true,
 		deleteTeam: true,
+		getGroupTeams: true,
+		getTeam: true,
+		getUserTeams: true,
+		hasUserTeam: true,
 		updateTeam: true
 	}
 );
