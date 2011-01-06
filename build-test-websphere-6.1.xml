@@ -45,6 +45,20 @@
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c move C:\Progra~1\IBM\WebSphere\AppServer\lib\ext\portlet.jar C:\Progra~1\IBM\WebSphere\AppServer\java\jre\lib\ext" />
 		</exec>
 
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host}:/Progra~1/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/liferay-ead7385Node01Cell/nodes/liferay-ead7385Node01/servers/server1/server.xml server.xml" />
+		</exec>
+
+		<replace file="server.xml">
+			<replacefilter token="genericJvmArguments=&quot;&quot;" value="genericJvmArguments=&quot;-Dfile.encoding=UTF8&quot;" />
+		</replace>
+
+		<exec executable="${pscp.executable}">
+			<arg line="-pw ${vm.password} server.xml ${vm.username}@${vm.host}:/Progra~1/IBM/WebSphere/AppServer/profiles/AppSrv01/config/cells/liferay-ead7385Node01Cell/nodes/liferay-ead7385Node01/servers/server1/server.xml" />
+		</exec>
+
+		<delete file="server.xml" />
+
 		<exec executable="${plink.executable}">
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\startServer.bat server1" />
 		</exec>
