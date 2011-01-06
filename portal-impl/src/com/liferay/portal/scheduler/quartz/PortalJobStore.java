@@ -61,7 +61,7 @@ public class PortalJobStore extends JobStoreTX {
 				driverDelegateClass = MSSQLDelegate.class;
 			}
 			else if (db instanceof SybaseDB) {
-				driverDelegateClass = MSSQLDelegate.class;
+				driverDelegateClass = SybaseDelegate.class;
 			}
 
 			if (_log.isDebugEnabled()) {
