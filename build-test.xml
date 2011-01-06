@@ -1351,6 +1351,12 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="properties-users-screen-name-allow-numeric" />
+			<param name="test.ant.script.properties" value="users.screen.name.allow.numeric=true" />
+			<param name="test.ant.script.suite" value="PropertiesUsersScreenNameAllowNumericTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="smoke-test" />
 			<param name="test.ant.script.suite" value="SmokeTestSuite" />
 		</antcall>
