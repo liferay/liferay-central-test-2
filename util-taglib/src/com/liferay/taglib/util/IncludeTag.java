@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CustomJspRegistryUtil;
@@ -82,19 +83,33 @@ public class IncludeTag
 
 			callSetAttributes();
 
-			if (!FileAvailabilityUtil.isAvailable(getServletContext(), page)) {
-				try {
-					return processEndTag();
-				}
-				catch(Exception e) {
-					throw new JspException(e);
-				}
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+
+			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
+
+			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
+				ThemeUtil.insertTilesVariables(request);
+
+				ThemeUtil.include(
+					servletContext, request, getServletResponse(), pageContext,
+					page, theme);
+
+				return EVAL_PAGE;
+			}
+			else if (!FileAvailabilityUtil.isAvailable(
+						getServletContext(), page)) {
+
+				return processEndTag();
 			}
 			else {
 				_doInclude(page);
 
 				return EVAL_PAGE;
 			}
+		}
+		catch (Exception e) {
+			throw new JspException(e);
 		}
 		finally {
 			_dynamicAttributes.clear();
@@ -117,18 +132,34 @@ public class IncludeTag
 
 		callSetAttributes();
 
-		if (!FileAvailabilityUtil.isAvailable(getServletContext(), page)) {
-			try {
+		ServletContext servletContext = getServletContext();
+		HttpServletRequest request = getServletRequest();
+
+		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
+
+		try {
+			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
+				ThemeUtil.insertTilesVariables(request);
+
+				ThemeUtil.include(
+					servletContext, request, getServletResponse(), pageContext,
+					page, theme);
+
+				return EVAL_BODY_INCLUDE;
+			}
+			else if (!FileAvailabilityUtil.isAvailable(
+						getServletContext(), page)) {
+
 				return processStartTag();
 			}
-			catch(Exception e) {
-				throw new JspException(e);
+			else {
+				_doInclude(page);
+
+				return EVAL_BODY_INCLUDE;
 			}
 		}
-		else {
-			_doInclude(page);
-
-			return EVAL_BODY_INCLUDE;
+		catch (Exception e) {
+			throw new JspException(e);
 		}
 	}
 

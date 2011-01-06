@@ -23,6 +23,7 @@ import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Brian Wing Shun Chan
@@ -124,6 +125,13 @@ public class ParamAndPropertyAncestorTagImpl
 		}
 
 		return request;
+	}
+
+	public HttpServletResponse getServletResponse() {
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		return response;
 	}
 
 	public void setServletContext(ServletContext servletContext) {

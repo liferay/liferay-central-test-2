@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
@@ -37,10 +38,11 @@ import com.liferay.portal.velocity.VelocityVariables;
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
 import freemarker.ext.servlet.ServletContextHashModel;
-
 import freemarker.template.ObjectWrapper;
 
 import java.io.Writer;
+
+import java.net.URL;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.RequestDispatcher;
@@ -60,6 +62,43 @@ import org.apache.struts.tiles.ComponentContext;
  * @author Shuyang Zhou
  */
 public class ThemeUtil {
+
+	public static String getResourcePath(Theme theme, String page) {
+		String extension = theme.getTemplateExtension();
+
+		String servletContextName = GetterUtil.getString(
+			theme.getServletContextName());
+
+		int pos = page.lastIndexOf(CharPool.PERIOD);
+
+		StringBundler sb = new StringBundler(7);
+
+		sb.append(servletContextName);
+
+		if (extension.equals(_TEMPLATE_EXTENSION_FTL)) {
+			sb.append(theme.getFreeMarkerTemplateLoader());
+			sb.append(theme.getTemplatesPath());
+			sb.append(StringPool.SLASH);
+			sb.append(page.substring(0, pos));
+			sb.append(StringPool.PERIOD);
+			sb.append(_TEMPLATE_EXTENSION_FTL);
+
+			return sb.toString();
+		}
+		else if (extension.equals(_TEMPLATE_EXTENSION_VM)) {
+			sb.append(theme.getVelocityResourceListener());
+			sb.append(theme.getTemplatesPath());
+			sb.append(StringPool.SLASH);
+			sb.append(page.substring(0, pos));
+			sb.append(StringPool.PERIOD);
+			sb.append(_TEMPLATE_EXTENSION_VM);
+
+			return sb.toString();
+		}
+		else {
+			return page;
+		}
+	}
 
 	public static void include(
 			ServletContext servletContext, HttpServletRequest request,
@@ -105,22 +144,10 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		int pos = page.lastIndexOf(CharPool.PERIOD);
+		String resource = getResourcePath(theme, page);
 
-		StringBundler sb = new StringBundler(7);
-
-		sb.append(servletContextName);
-		sb.append(theme.getFreeMarkerTemplateLoader());
-		sb.append(theme.getTemplatesPath());
-		sb.append(StringPool.SLASH);
-		sb.append(page.substring(0, pos));
-		sb.append(StringPool.PERIOD);
-		sb.append(_TEMPLATE_EXTENSION_FTL);
-
-		String source = sb.toString();
-
-		if (!FreeMarkerEngineUtil.resourceExists(source)) {
-			_log.error(source + " does not exist");
+		if (!FreeMarkerEngineUtil.resourceExists(resource)) {
+			_log.error(resource + " does not exist");
 
 			return null;
 		}
@@ -193,7 +220,7 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		FreeMarkerEngineUtil.mergeTemplate(source, freeMarkerContext, writer);
+		FreeMarkerEngineUtil.mergeTemplate(resource, freeMarkerContext, writer);
 
 		if (write) {
 			return null;
@@ -205,7 +232,7 @@ public class ThemeUtil {
 
 	public static void includeJSP(
 			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response, String path, Theme theme)
+			HttpServletResponse response, String page, Theme theme)
 		throws Exception {
 
 		if (theme.isWARFile()) {
@@ -219,12 +246,12 @@ public class ThemeUtil {
 			}
 			else {
 				RequestDispatcher requestDispatcher =
-					themeServletContext.getRequestDispatcher(path);
+					themeServletContext.getRequestDispatcher(page);
 
 				if (requestDispatcher == null) {
 					_log.error(
 						"Theme " + theme.getThemeId() + " does not have " +
-							path);
+							page);
 				}
 				else {
 					requestDispatcher.include(request, response);
@@ -233,11 +260,11 @@ public class ThemeUtil {
 		}
 		else {
 			RequestDispatcher requestDispatcher =
-				servletContext.getRequestDispatcher(path);
+				servletContext.getRequestDispatcher(page);
 
 			if (requestDispatcher == null) {
 				_log.error(
-					"Theme " + theme.getThemeId() + " does not have " + path);
+					"Theme " + theme.getThemeId() + " does not have " + page);
 			}
 			else {
 				requestDispatcher.include(request, response);
@@ -267,22 +294,10 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		int pos = page.lastIndexOf(CharPool.PERIOD);
+		String resource = getResourcePath(theme, page);
 
-		StringBundler sb = new StringBundler(7);
-
-		sb.append(servletContextName);
-		sb.append(theme.getVelocityResourceListener());
-		sb.append(theme.getTemplatesPath());
-		sb.append(StringPool.SLASH);
-		sb.append(page.substring(0, pos));
-		sb.append(StringPool.PERIOD);
-		sb.append(_TEMPLATE_EXTENSION_VM);
-
-		String source = sb.toString();
-
-		if (!VelocityEngineUtil.resourceExists(source)) {
-			_log.error(source + " does not exist");
+		if (!VelocityEngineUtil.resourceExists(resource)) {
+			_log.error(resource + " does not exist");
 
 			return null;
 		}
@@ -327,10 +342,9 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		VelocityEngineUtil.mergeTemplate(source, velocityContext, writer);
+		VelocityEngineUtil.mergeTemplate(resource, velocityContext, writer);
 
 		if (write) {
-
 			return null;
 		}
 		else {
@@ -358,6 +372,47 @@ public class ThemeUtil {
 		themeDisplay.setTilesTitle(tilesTitle);
 		themeDisplay.setTilesContent(tilesContent);
 		themeDisplay.setTilesSelectable(tilesSelectable);
+	}
+
+	public static boolean resourceExists(
+			ServletContext servletContext, Theme theme, String page)
+		throws Exception {
+
+		//_log.error(page);
+
+		if (Validator.isNull(page)) {
+			return false;
+		}
+
+		String resource = getResourcePath(theme, page);
+		String extension = theme.getTemplateExtension();
+
+		if (extension.equals(_TEMPLATE_EXTENSION_FTL)) {
+			return FreeMarkerEngineUtil.resourceExists(resource);
+		}
+		else if (extension.equals(_TEMPLATE_EXTENSION_VM)) {
+			return VelocityEngineUtil.resourceExists(resource);
+		}
+		else {
+			URL url = null;
+
+			if (theme.isWARFile()) {
+				ServletContext themeServletContext = servletContext.getContext(
+					theme.getContextPath());
+
+				url = themeServletContext.getResource(resource);
+			}
+			else {
+				url = servletContext.getResource(resource);
+			}
+
+			if (url == null) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
 	}
 
 	private static final String _TEMPLATE_EXTENSION_FTL = "ftl";
