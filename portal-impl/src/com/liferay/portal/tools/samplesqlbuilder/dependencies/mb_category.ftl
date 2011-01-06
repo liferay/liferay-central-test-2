@@ -1,6 +1,6 @@
 <#setting number_format = "0">
 
-insert into MBCategory values ('${portalUUIDUtil.generate()}', ${mbCategory.categoryId}, ${mbCategory.groupId}, ${mbCategory.companyId}, ${mbCategory.userId}, '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, '${mbCategory.name}', '${mbCategory.description}', ${mbCategory.threadCount}, ${mbCategory.messageCount}, CURRENT_TIMESTAMP);
+insert into MBCategory values ('${portalUUIDUtil.generate()}', ${mbCategory.categoryId}, ${mbCategory.groupId}, ${mbCategory.companyId}, ${mbCategory.userId}, '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0, '${mbCategory.name}', '${mbCategory.description}', '${mbCategory.displayStyle}', ${mbCategory.threadCount}, ${mbCategory.messageCount}, CURRENT_TIMESTAMP);
 
 <#if (mbCategory.categoryId != 0)>
 	${sampleSQLBuilder.insertSecurity("com.liferay.portlet.messageboards.model.MBCategory", mbCategory.categoryId)}
