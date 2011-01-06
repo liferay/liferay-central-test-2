@@ -286,6 +286,17 @@ public class SocialRelationLocalServiceUtil {
 		return getService().getRelationsCount(userId, type);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> getInverseRelations(
+		long userId, int type, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getInverseRelations(userId, type, start, end);
+	}
+
+	public static int getInverseRelationsCount(long userId, int type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getInverseRelationsCount(userId, type);
+	}
+
 	public static boolean hasRelation(long userId1, long userId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().hasRelation(userId1, userId2, type);

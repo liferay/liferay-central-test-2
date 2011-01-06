@@ -32,6 +32,8 @@ public class SocialRelationConstants {
 
 	public static final int TYPE_UNI_CHILD = 6;
 
+	public static final int TYPE_UNI_FOLLOWER = 8;
+
 	public static final int TYPE_UNI_PARENT = 7;
 
 	public static boolean isTypeBi(int type) {
@@ -40,6 +42,7 @@ public class SocialRelationConstants {
 
 	public static boolean isTypeUni(int type) {
 		if ((type == SocialRelationConstants.TYPE_UNI_CHILD) ||
+			(type == SocialRelationConstants.TYPE_UNI_FOLLOWER) ||
 			(type == SocialRelationConstants.TYPE_UNI_PARENT)) {
 
 			return true;

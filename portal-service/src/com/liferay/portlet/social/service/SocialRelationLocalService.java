@@ -253,6 +253,15 @@ public interface SocialRelationLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getInverseRelations(
+		long userId, int type, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getInverseRelationsCount(long userId, int type)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean hasRelation(long userId1, long userId2, int type)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
