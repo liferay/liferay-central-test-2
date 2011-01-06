@@ -14,11 +14,6 @@
 
 package com.liferay.portal.scheduler.quartz;
 
-import com.liferay.portal.dao.db.DB2DB;
-import com.liferay.portal.dao.db.HypersonicDB;
-import com.liferay.portal.dao.db.PostgreSQLDB;
-import com.liferay.portal.dao.db.SQLServerDB;
-import com.liferay.portal.dao.db.SybaseDB;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -48,19 +43,21 @@ public class PortalJobStore extends JobStoreTX {
 
 			DB db = DBFactoryUtil.getDB();
 
-			if (db instanceof DB2DB) {
+			String dbType = db.getType();
+
+			if (dbType.equals(DB.TYPE_DB2)) {
 				driverDelegateClass = DB2v8Delegate.class;
 			}
-			else if (db instanceof HypersonicDB) {
+			else if (dbType.equals(DB.TYPE_HYPERSONIC)) {
 				driverDelegateClass = HSQLDBDelegate.class;
 			}
-			else if (db instanceof PostgreSQLDB) {
+			else if (dbType.equals(DB.TYPE_POSTGRESQL)) {
 				driverDelegateClass = PostgreSQLDelegate.class;
 			}
-			else if (db instanceof SQLServerDB) {
+			else if (dbType.equals(DB.TYPE_SQLSERVER)) {
 				driverDelegateClass = MSSQLDelegate.class;
 			}
-			else if (db instanceof SybaseDB) {
+			else if (dbType.equals(DB.TYPE_SYBASE)) {
 				driverDelegateClass = SybaseDelegate.class;
 			}
 
