@@ -38,6 +38,7 @@ public class JSONFactoryImpl implements JSONFactory {
 
 		 try {
 			 _serializer.registerDefaultSerializers();
+			 _serializer.registerSerializer(new MessageSerializer());
 		 }
 		 catch (Exception e) {
 			 _log.error(e, e);
