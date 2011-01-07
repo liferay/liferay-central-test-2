@@ -77,12 +77,10 @@ public class EditUserAction
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String newPassword = ParamUtil.getString(actionRequest, "password1");
+		String requestPassword = ParamUtil.getString(
+			actionRequest, "password0");
 
-		if (Validator.isNotNull(newPassword)) {
-			String requestPassword = ParamUtil.getString(
-				actionRequest, "password0");
-
+		if (Validator.isNotNull(requestPassword)) {
 			Company company = PortalUtil.getCompany(actionRequest);
 
 			String authType = company.getAuthType();
@@ -107,6 +105,14 @@ public class EditUserAction
 			if (!validPassword) {
 				throw new UserPasswordException(
 					UserPasswordException.PASSWORD_INVALID);
+			}
+
+			String newPassword = ParamUtil.getString(
+				actionRequest, "password1");
+
+			if (Validator.isNull(newPassword)) {
+				throw new UserPasswordException(
+					UserPasswordException.PASSWORD_LENGTH);
 			}
 		}
 
