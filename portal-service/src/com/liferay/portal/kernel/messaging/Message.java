@@ -121,6 +121,10 @@ public class Message implements Serializable {
 		return GetterUtil.getString(String.valueOf(get(key)));
 	}
 
+	public Map<String, Object> getValues() {
+		return _values;
+	}
+
 	public void put(String key, Object value) {
 		if (_values == null) {
 			 _values = new HashMap<String, Object>();
@@ -147,6 +151,10 @@ public class Message implements Serializable {
 
 	public void setResponseId(String responseId) {
 		_responseId = responseId;
+	}
+
+	public void setValues(Map<String, Object> values) {
+		_values = values;
 	}
 
 	public String toString() {
