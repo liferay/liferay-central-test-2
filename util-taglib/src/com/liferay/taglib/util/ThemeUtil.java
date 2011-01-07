@@ -38,6 +38,7 @@ import com.liferay.portal.velocity.VelocityVariables;
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
 import freemarker.ext.servlet.ServletContextHashModel;
+
 import freemarker.template.ObjectWrapper;
 
 import java.io.Writer;
@@ -63,23 +64,23 @@ import org.apache.struts.tiles.ComponentContext;
  */
 public class ThemeUtil {
 
-	public static String getResourcePath(Theme theme, String page) {
-		String extension = theme.getTemplateExtension();
+	public static String getResourcePath(Theme theme, String path) {
+		StringBundler sb = new StringBundler(7);
 
 		String servletContextName = GetterUtil.getString(
 			theme.getServletContextName());
 
-		int pos = page.lastIndexOf(CharPool.PERIOD);
-
-		StringBundler sb = new StringBundler(7);
-
 		sb.append(servletContextName);
+
+		int pos = path.lastIndexOf(CharPool.PERIOD);
+
+		String extension = theme.getTemplateExtension();
 
 		if (extension.equals(_TEMPLATE_EXTENSION_FTL)) {
 			sb.append(theme.getFreeMarkerTemplateLoader());
 			sb.append(theme.getTemplatesPath());
 			sb.append(StringPool.SLASH);
-			sb.append(page.substring(0, pos));
+			sb.append(path.substring(0, pos));
 			sb.append(StringPool.PERIOD);
 			sb.append(_TEMPLATE_EXTENSION_FTL);
 
@@ -89,14 +90,14 @@ public class ThemeUtil {
 			sb.append(theme.getVelocityResourceListener());
 			sb.append(theme.getTemplatesPath());
 			sb.append(StringPool.SLASH);
-			sb.append(page.substring(0, pos));
+			sb.append(path.substring(0, pos));
 			sb.append(StringPool.PERIOD);
 			sb.append(_TEMPLATE_EXTENSION_VM);
 
 			return sb.toString();
 		}
 		else {
-			return page;
+			return path;
 		}
 	}
 
@@ -124,7 +125,7 @@ public class ThemeUtil {
 
 	public static String includeFTL(
 			ServletContext servletContext, HttpServletRequest request,
-			PageContext pageContext, String page, Theme theme, boolean write)
+			PageContext pageContext, String path, Theme theme, boolean write)
 		throws Exception {
 
 		// The servlet context name will be null when the theme is deployed to
@@ -144,10 +145,10 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		String resource = getResourcePath(theme, page);
+		String resourcePath = getResourcePath(theme, path);
 
-		if (!FreeMarkerEngineUtil.resourceExists(resource)) {
-			_log.error(resource + " does not exist");
+		if (!FreeMarkerEngineUtil.resourceExists(resourcePath)) {
+			_log.error(resourcePath + " does not exist");
 
 			return null;
 		}
@@ -220,7 +221,8 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		FreeMarkerEngineUtil.mergeTemplate(resource, freeMarkerContext, writer);
+		FreeMarkerEngineUtil.mergeTemplate(
+			resourcePath, freeMarkerContext, writer);
 
 		if (write) {
 			return null;
@@ -232,7 +234,7 @@ public class ThemeUtil {
 
 	public static void includeJSP(
 			ServletContext servletContext, HttpServletRequest request,
-			HttpServletResponse response, String page, Theme theme)
+			HttpServletResponse response, String path, Theme theme)
 		throws Exception {
 
 		if (theme.isWARFile()) {
@@ -246,12 +248,12 @@ public class ThemeUtil {
 			}
 			else {
 				RequestDispatcher requestDispatcher =
-					themeServletContext.getRequestDispatcher(page);
+					themeServletContext.getRequestDispatcher(path);
 
 				if (requestDispatcher == null) {
 					_log.error(
 						"Theme " + theme.getThemeId() + " does not have " +
-							page);
+							path);
 				}
 				else {
 					requestDispatcher.include(request, response);
@@ -260,11 +262,11 @@ public class ThemeUtil {
 		}
 		else {
 			RequestDispatcher requestDispatcher =
-				servletContext.getRequestDispatcher(page);
+				servletContext.getRequestDispatcher(path);
 
 			if (requestDispatcher == null) {
 				_log.error(
-					"Theme " + theme.getThemeId() + " does not have " + page);
+					"Theme " + theme.getThemeId() + " does not have " + path);
 			}
 			else {
 				requestDispatcher.include(request, response);
@@ -294,10 +296,10 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		String resource = getResourcePath(theme, page);
+		String resourcePath = getResourcePath(theme, page);
 
-		if (!VelocityEngineUtil.resourceExists(resource)) {
-			_log.error(resource + " does not exist");
+		if (!VelocityEngineUtil.resourceExists(resourcePath)) {
+			_log.error(resourcePath + " does not exist");
 
 			return null;
 		}
@@ -342,7 +344,7 @@ public class ThemeUtil {
 
 		// Merge templates
 
-		VelocityEngineUtil.mergeTemplate(resource, velocityContext, writer);
+		VelocityEngineUtil.mergeTemplate(resourcePath, velocityContext, writer);
 
 		if (write) {
 			return null;
@@ -375,23 +377,22 @@ public class ThemeUtil {
 	}
 
 	public static boolean resourceExists(
-			ServletContext servletContext, Theme theme, String page)
+			ServletContext servletContext, Theme theme, String path)
 		throws Exception {
 
-		//_log.error(page);
-
-		if (Validator.isNull(page)) {
+		if (Validator.isNull(path)) {
 			return false;
 		}
 
-		String resource = getResourcePath(theme, page);
+		String resourcePath = getResourcePath(theme, path);
+
 		String extension = theme.getTemplateExtension();
 
 		if (extension.equals(_TEMPLATE_EXTENSION_FTL)) {
-			return FreeMarkerEngineUtil.resourceExists(resource);
+			return FreeMarkerEngineUtil.resourceExists(resourcePath);
 		}
 		else if (extension.equals(_TEMPLATE_EXTENSION_VM)) {
-			return VelocityEngineUtil.resourceExists(resource);
+			return VelocityEngineUtil.resourceExists(resourcePath);
 		}
 		else {
 			URL url = null;
@@ -400,10 +401,10 @@ public class ThemeUtil {
 				ServletContext themeServletContext = servletContext.getContext(
 					theme.getContextPath());
 
-				url = themeServletContext.getResource(resource);
+				url = themeServletContext.getResource(resourcePath);
 			}
 			else {
-				url = servletContext.getResource(resource);
+				url = servletContext.getResource(resourcePath);
 			}
 
 			if (url == null) {

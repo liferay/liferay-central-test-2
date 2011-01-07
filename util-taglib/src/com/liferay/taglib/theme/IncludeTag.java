@@ -27,10 +27,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class IncludeTag extends com.liferay.taglib.util.IncludeTag {
 
-	protected String getCustomPage() {
-		return null;
-	}
-
 	protected void include(String page) throws Exception {
 		ServletContext servletContext = getServletContext();
 		HttpServletRequest request = getServletRequest();

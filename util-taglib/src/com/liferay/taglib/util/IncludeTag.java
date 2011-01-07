@@ -71,7 +71,11 @@ public class IncludeTag
 
 	public int doEndTag() throws JspException {
 		try {
-			String page = getCustomPage();
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			HttpServletResponse response = getServletResponse();
+
+			String page = getCustomPage(servletContext, request);
 
 			if (Validator.isNull(page)) {
 				page = getPage();
@@ -83,23 +87,18 @@ public class IncludeTag
 
 			callSetAttributes();
 
-			ServletContext servletContext = getServletContext();
-			HttpServletRequest request = getServletRequest();
-
 			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
 			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
 				ThemeUtil.insertTilesVariables(request);
 
 				ThemeUtil.include(
-					servletContext, request, getServletResponse(), pageContext,
+					servletContext, request, response, pageContext,
 					page, theme);
 
 				return EVAL_PAGE;
 			}
-			else if (!FileAvailabilityUtil.isAvailable(
-						getServletContext(), page)) {
-
+			else if (!FileAvailabilityUtil.isAvailable(servletContext, page)) {
 				return processEndTag();
 			}
 			else {
@@ -128,28 +127,27 @@ public class IncludeTag
 	}
 
 	public int doStartTag() throws JspException {
-		String page = getStartPage();
-
-		callSetAttributes();
-
-		ServletContext servletContext = getServletContext();
-		HttpServletRequest request = getServletRequest();
-
-		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
-
 		try {
+			ServletContext servletContext = getServletContext();
+			HttpServletRequest request = getServletRequest();
+			HttpServletResponse response = getServletResponse();
+
+			String page = getStartPage();
+
+			callSetAttributes();
+
+			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
+
 			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
 				ThemeUtil.insertTilesVariables(request);
 
 				ThemeUtil.include(
-					servletContext, request, getServletResponse(), pageContext,
-					page, theme);
+					servletContext, request, response, pageContext, page,
+					theme);
 
 				return EVAL_BODY_INCLUDE;
 			}
-			else if (!FileAvailabilityUtil.isAvailable(
-						getServletContext(), page)) {
-
+			else if (!FileAvailabilityUtil.isAvailable(servletContext, page)) {
 				return processStartTag();
 			}
 			else {
@@ -261,8 +259,8 @@ public class IncludeTag
 		}
 	}
 
-	protected String getCustomPage() {
-		HttpServletRequest request = getServletRequest();
+	protected String getCustomPage(
+		ServletContext servletContext, HttpServletRequest request) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -296,7 +294,7 @@ public class IncludeTag
 		String customPage = CustomJspRegistryUtil.getCustomJspFileName(
 			customJspServletContextName, page);
 
-		if (FileAvailabilityUtil.isAvailable(getServletContext(), customPage)) {
+		if (FileAvailabilityUtil.isAvailable(servletContext, customPage)) {
 			return customPage;
 		}
 
