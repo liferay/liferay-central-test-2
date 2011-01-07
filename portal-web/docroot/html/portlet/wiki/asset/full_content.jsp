@@ -21,15 +21,20 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 PortletURL viewPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
 
+viewPageURL.setWindowState(WindowState.MAXIMIZED);
 viewPageURL.setPortletMode(PortletMode.VIEW);
 
 viewPageURL.setParameter("struts_action", "/wiki/view");
+viewPageURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
 
 PortletURL editPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
 
+editPageURL.setWindowState(WindowState.MAXIMIZED);
 editPageURL.setPortletMode(PortletMode.VIEW);
 
 editPageURL.setParameter("struts_action", "/wiki/edit_page");
+editPageURL.setParameter("redirect", currentURL);
+editPageURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
 
 String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
 
