@@ -48,7 +48,113 @@ import java.util.Map;
  */
 public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 
-	public void checkQuartzJobDetails() {
+	public void checkQuartzTables() throws SystemException {
+		createQuartzTables();
+		updateQuartzJobDetails();
+		updateQuartzTriggers();
+	}
+
+	protected byte[] convertMessageToJSON(byte[] jobData)
+		throws Exception {
+
+		ObjectInputStream objectInputStream =
+			new BackwardCompatibleObjectInputStream(
+				new UnsyncByteArrayInputStream(jobData));
+
+		Map<Object, Object> jobDataMap =
+			(Map<Object, Object>)objectInputStream.readObject();
+
+		objectInputStream.close();
+
+		Map<Object, Object> tempJobDataMap = new HashMap<Object, Object>(
+			jobDataMap);
+
+		jobDataMap.clear();
+
+		boolean modifiedKeys = false;
+
+		for (Map.Entry<Object, Object> entry : tempJobDataMap.entrySet()) {
+			Object key = entry.getKey();
+
+			if (key instanceof String) {
+				key = ((String)key).toUpperCase();
+
+				modifiedKeys = true;
+			}
+
+			jobDataMap.put(key, entry.getValue());
+		}
+
+		Object object = jobDataMap.get(SchedulerEngine.MESSAGE);
+
+		if ((object == null) || (object instanceof String) || !modifiedKeys) {
+			return null;
+		}
+
+		Message message = null;
+
+		if (object instanceof Message) {
+			message = (Message)object;
+		}
+		else {
+			message = new Message();
+
+			message.setPayload(object);
+		}
+
+		String messageJSON = JSONFactoryUtil.serialize(message);
+
+		jobDataMap.put(SchedulerEngine.MESSAGE, messageJSON);
+
+		UnsyncByteArrayOutputStream newJobDataOutputStream =
+			new UnsyncByteArrayOutputStream();
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+			newJobDataOutputStream);
+
+		objectOutputStream.writeObject(jobDataMap);
+
+		objectOutputStream.close();
+
+		return newJobDataOutputStream.toByteArray();
+	}
+
+	protected void createQuartzTables() throws SystemException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select count(*) from QUARTZ_JOB_DETAILS");
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return;
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+
+		DB db = DBFactoryUtil.getDB();
+
+		try {
+			db.runSQLTemplate("quartz-tables.sql", false);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
+
+	protected void updateQuartzJobDetails() {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -121,104 +227,81 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 		}
 	}
 
-	public void checkQuartzTables() throws SystemException {
+	protected void updateQuartzTriggers() {
+		DB db = DBFactoryUtil.getDB();
+
+		String dbType = db.getType();
+
+		if (!dbType.equals(DB.TYPE_SYBASE)) {
+			return;
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+
+		List<Object[]> arrays = new ArrayList<Object[]>();
 
 		try {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select count(*) from QUARTZ_JOB_DETAILS");
+				"select JOB_NAME, JOB_GROUP, JOB_DATA from QUARTZ_TRIGGERS");
 
 			rs = ps.executeQuery();
 
-			if (rs.next()) {
-				return;
+			while (rs.next()) {
+				String jobName = rs.getString("JOB_NAME");
+				String jobGroup = rs.getString("JOB_GROUP");
+				byte[] jobData = rs.getBytes("JOB_DATA");
+
+				if ((jobData == null) || (jobData.length > 0)) {
+					continue;
+				}
+
+				Object[] array = new Object[2];
+
+				array[0] = jobName;
+				array[1] = jobGroup;
+
+				arrays.add(array);
 			}
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
+			_log.error(e, e);
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 
-		DB db = DBFactoryUtil.getDB();
+		if (arrays.isEmpty()) {
+			return;
+		}
 
 		try {
-			db.runSQLTemplate("quartz-tables.sql", false);
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update QUARTZ_TRIGGERS set JOB_DATA = ? where JOB_NAME = ? " +
+					"and JOB_GROUP = ?");
+
+			for (Object[] array : arrays) {
+				String jobName = (String)array[0];
+				String jobGroup = (String)array[1];
+
+				ps.setBytes(1, null);
+				ps.setString(2, jobName);
+				ps.setString(3, jobGroup);
+
+				ps.executeUpdate();
+			}
 		}
 		catch (Exception e) {
-			throw new SystemException(e);
+			_log.error(e, e);
 		}
-	}
-
-	protected byte[] convertMessageToJSON(byte[] jobData)
-		throws Exception {
-
-		ObjectInputStream objectInputStream =
-			new BackwardCompatibleObjectInputStream(
-				new UnsyncByteArrayInputStream(jobData));
-
-		Map<Object, Object> jobDataMap =
-			(Map<Object, Object>)objectInputStream.readObject();
-
-		objectInputStream.close();
-
-		Map<Object, Object> tempJobDataMap = new HashMap<Object, Object>(
-			jobDataMap);
-
-		jobDataMap.clear();
-
-		boolean modifiedKeys = false;
-
-		for (Map.Entry<Object, Object> entry : tempJobDataMap.entrySet()) {
-			Object key = entry.getKey();
-
-			if (key instanceof String) {
-				key = ((String)key).toUpperCase();
-
-				modifiedKeys = true;
-			}
-
-			jobDataMap.put(key, entry.getValue());
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		Object object = jobDataMap.get(SchedulerEngine.MESSAGE);
-
-		if ((object == null) || (object instanceof String) || !modifiedKeys) {
-			return null;
-		}
-
-		Message message = null;
-
-		if (object instanceof Message) {
-			message = (Message)object;
-		}
-		else {
-			message = new Message();
-
-			message.setPayload(object);
-		}
-
-		String messageJSON = JSONFactoryUtil.serialize(message);
-
-		jobDataMap.put(SchedulerEngine.MESSAGE, messageJSON);
-
-		UnsyncByteArrayOutputStream newJobDataOutputStream =
-			new UnsyncByteArrayOutputStream();
-		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-			newJobDataOutputStream);
-
-		objectOutputStream.writeObject(jobDataMap);
-
-		objectOutputStream.close();
-
-		return newJobDataOutputStream.toByteArray();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

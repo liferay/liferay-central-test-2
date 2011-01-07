@@ -66,13 +66,12 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 
 		try {
+			quartzLocalService.checkQuartzTables();
+
 			StdSchedulerFactory schedulerFactory = new StdSchedulerFactory();
 
 			schedulerFactory.initialize(
 				PropsUtil.getProperties("org.quartz.", false));
-
-			quartzLocalService.checkQuartzTables();
-			quartzLocalService.checkQuartzJobDetails();
 
 			_scheduler = schedulerFactory.getScheduler();
 
