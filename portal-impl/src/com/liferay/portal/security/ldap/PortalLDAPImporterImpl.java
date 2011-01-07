@@ -223,10 +223,10 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 		throws Exception {
 
 		long ldapServerId = PortalLDAPUtil.getLdapServerId(
-			companyId, screenName);
+			companyId, StringPool.BLANK, screenName);
 
 		SearchResult result = (SearchResult)PortalLDAPUtil.getUser(
-			ldapServerId, companyId, screenName);
+			ldapServerId, companyId, StringPool.BLANK, screenName);
 
 		if (result == null) {
 			if (_log.isWarnEnabled()) {
@@ -571,7 +571,8 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 				companyId, PropsKeys.LDAP_BASE_DN + postfix);
 
 			Binding binding = PortalLDAPUtil.getUser(
-				ldapServerId, companyId, user.getScreenName());
+				ldapServerId, companyId, user.getEmailAddress(),
+				user.getScreenName());
 
 			String fullUserDN = PortalLDAPUtil.getNameInNamespace(
 				ldapServerId, companyId, binding);

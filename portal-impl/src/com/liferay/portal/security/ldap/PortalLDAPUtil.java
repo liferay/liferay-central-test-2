@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -275,14 +276,15 @@ public class PortalLDAPUtil {
 			companyId, PropsKeys.LDAP_GROUPS_DN + postfix);
 	}
 
-	public static long getLdapServerId(long companyId, String screenName)
+	public static long getLdapServerId(long companyId, String emailAddress,
+			String screenName)
 		throws Exception {
 
 		long[] ldapServerIds = StringUtil.split(
 			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
 
 		for (long ldapServerId : ldapServerIds) {
-			if (hasUser(ldapServerId, companyId, screenName)) {
+			if (hasUser(ldapServerId, companyId, emailAddress, screenName)) {
 				return ldapServerId;
 			}
 		}
@@ -301,7 +303,7 @@ public class PortalLDAPUtil {
 
 			hasProperties = true;
 
-			if (hasUser(ldapServerId, companyId, screenName)) {
+			if (hasUser(ldapServerId, companyId, emailAddress, screenName)) {
 				return ldapServerId;
 			}
 		}
@@ -393,7 +395,8 @@ public class PortalLDAPUtil {
 	}
 
 	public static Binding getUser(
-			long ldapServerId, long companyId, String screenName)
+			long ldapServerId, long companyId, String emailAddress,
+			String screenName)
 		throws Exception {
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
@@ -418,15 +421,35 @@ public class PortalLDAPUtil {
 			Properties userMappings = LDAPSettingsUtil.getUserMappings(
 				ldapServerId, companyId);
 
+			String login = null;
+			String loginMapping = null;
+
+			String authType = PrefsPropsUtil.getString(
+				companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
+				PropsValues.COMPANY_SECURITY_AUTH_TYPE);
+
+			if (authType.equals(CompanyConstants.AUTH_TYPE_SN) &&
+				!PrefsPropsUtil.getBoolean(
+					companyId,
+					PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
+
+				login = screenName;
+				loginMapping = userMappings.getProperty("screenName");
+			}
+			else {
+				login = emailAddress;
+				loginMapping = userMappings.getProperty("emailAddress");
+			}
+
 			if (Validator.isNotNull(userFilter)) {
 				StringBundler sb = new StringBundler(11);
 
 				sb.append(StringPool.OPEN_PARENTHESIS);
 				sb.append(StringPool.AMPERSAND);
 				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(userMappings.getProperty("screenName"));
+				sb.append(loginMapping);
 				sb.append(StringPool.EQUAL);
-				sb.append(screenName);
+				sb.append(login);
 				sb.append(StringPool.CLOSE_PARENTHESIS);
 				sb.append(StringPool.OPEN_PARENTHESIS);
 				sb.append(userFilter);
@@ -439,9 +462,9 @@ public class PortalLDAPUtil {
 				StringBundler sb = new StringBundler(5);
 
 				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(userMappings.getProperty("screenName"));
+				sb.append(loginMapping);
 				sb.append(StringPool.EQUAL);
-				sb.append(screenName);
+				sb.append(login);
 				sb.append(StringPool.CLOSE_PARENTHESIS);
 
 				filter = sb.toString();
@@ -569,10 +592,12 @@ public class PortalLDAPUtil {
 	}
 
 	public static boolean hasUser(
-			long ldapServerId, long companyId, String screenName)
+			long ldapServerId, long companyId, String emailAddress,
+			String screenName)
 		throws Exception {
 
-		if (getUser(ldapServerId, companyId, screenName) != null) {
+		if (getUser(
+				ldapServerId, companyId, emailAddress, screenName) != null) {
 			return true;
 		}
 		else {

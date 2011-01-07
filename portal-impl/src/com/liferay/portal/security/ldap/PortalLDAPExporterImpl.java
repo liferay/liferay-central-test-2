@@ -58,7 +58,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 			contact.getContactId());
 
 		long ldapServerId = PortalLDAPUtil.getLdapServerId(
-			companyId, user.getScreenName());
+			companyId, user.getEmailAddress(), user.getScreenName());
 
 		LdapContext ldapContext = PortalLDAPUtil.getContext(
 			ldapServerId, companyId);
@@ -75,7 +75,8 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 					ldapServerId, companyId);
 
 			Binding binding = PortalLDAPUtil.getUser(
-				ldapServerId, contact.getCompanyId(), user.getScreenName());
+				ldapServerId, contact.getCompanyId(), user.getEmailAddress(),
+				user.getScreenName());
 
 			if (binding == null) {
 				Properties userMappings = LDAPSettingsUtil.getUserMappings(
@@ -127,7 +128,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		}
 
 		long ldapServerId = PortalLDAPUtil.getLdapServerId(
-			companyId, user.getScreenName());
+			companyId, user.getEmailAddress(), user.getScreenName());
 
 		LdapContext ldapContext = PortalLDAPUtil.getContext(
 			ldapServerId, companyId);
@@ -144,7 +145,8 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 					ldapServerId, companyId);
 
 			Binding binding = PortalLDAPUtil.getUser(
-				ldapServerId, user.getCompanyId(), user.getScreenName());
+				ldapServerId, user.getCompanyId(), user.getEmailAddress(),
+				user.getScreenName());
 
 			if (binding == null) {
 				binding = addUser(
@@ -193,7 +195,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		}
 
 		long ldapServerId = PortalLDAPUtil.getLdapServerId(
-			companyId, user.getScreenName());
+			companyId, user.getEmailAddress(), user.getScreenName());
 
 		LdapContext ldapContext = PortalLDAPUtil.getContext(
 			ldapServerId, companyId);
@@ -292,7 +294,8 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		ldapContext.bind(name, new PortalLDAPContext(attributes));
 
 		Binding binding = PortalLDAPUtil.getUser(
-			ldapServerId, user.getCompanyId(), user.getScreenName());
+			ldapServerId, user.getCompanyId(), user.getEmailAddress(),
+			user.getScreenName());
 
 		return binding;
 	}
