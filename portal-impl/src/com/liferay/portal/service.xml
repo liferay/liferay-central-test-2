@@ -1551,7 +1551,7 @@
 		</finder>
 		<finder name="C_N" return-type="Role" unique="true">
 			<finder-column name="companyId" />
-			<finder-column name="name" />
+			<finder-column name="name" case-sensitive="false" />
 		</finder>
 		<finder name="T_S" return-type="Collection">
 			<finder-column name="type" />
