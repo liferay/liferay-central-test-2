@@ -23,6 +23,7 @@ import com.liferay.portalweb.portal.controlpanel.communities.community.addcommun
 import com.liferay.portalweb.portal.controlpanel.communities.community.addcommunitynamenumber.AddCommunityNameNumberTests;
 import com.liferay.portalweb.portal.controlpanel.communities.community.addcommunitynamestar.AddCommunityNameStarTests;
 import com.liferay.portalweb.portal.controlpanel.communities.community.assignmemberscommunity.AssignMembersCommunityTests;
+import com.liferay.portalweb.portal.controlpanel.communities.community.autoapprovependingmembers.AutoApprovePendingMembersTests;
 import com.liferay.portalweb.portal.controlpanel.communities.community.deactivatestagingcommunity.DeactivateStagingCommunityTests;
 import com.liferay.portalweb.portal.controlpanel.communities.community.deactivatestagingcommunitynavigatingstaging.DeactivateStagingCommunityNavigatingStagingTests;
 import com.liferay.portalweb.portal.controlpanel.communities.community.deletecommunity.DeleteCommunityTests;
@@ -56,6 +57,7 @@ public class CommunityTests extends BaseTests {
 		testSuite.addTest(AddCommunityNameNumberTests.suite());
 		testSuite.addTest(AddCommunityNameStarTests.suite());
 		testSuite.addTest(AssignMembersCommunityTests.suite());
+		testSuite.addTest(AutoApprovePendingMembersTests.suite());
 		testSuite.addTest(DeactivateStagingCommunityTests.suite());
 		testSuite.addTest(
 			DeactivateStagingCommunityNavigatingStagingTests.suite());
