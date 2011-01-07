@@ -276,15 +276,15 @@ public class PortalLDAPUtil {
 			companyId, PropsKeys.LDAP_GROUPS_DN + postfix);
 	}
 
-	public static long getLdapServerId(long companyId, String emailAddress,
-			String screenName)
+	public static long getLdapServerId(
+			long companyId, String screenName, String emailAddress)
 		throws Exception {
 
 		long[] ldapServerIds = StringUtil.split(
 			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
 
 		for (long ldapServerId : ldapServerIds) {
-			if (hasUser(ldapServerId, companyId, emailAddress, screenName)) {
+			if (hasUser(ldapServerId, companyId, screenName, emailAddress)) {
 				return ldapServerId;
 			}
 		}
@@ -303,7 +303,7 @@ public class PortalLDAPUtil {
 
 			hasProperties = true;
 
-			if (hasUser(ldapServerId, companyId, emailAddress, screenName)) {
+			if (hasUser(ldapServerId, companyId, screenName, emailAddress)) {
 				return ldapServerId;
 			}
 		}
@@ -395,8 +395,8 @@ public class PortalLDAPUtil {
 	}
 
 	public static Binding getUser(
-			long ldapServerId, long companyId, String emailAddress,
-			String screenName)
+			long ldapServerId, long companyId, String screenName,
+			String emailAddress)
 		throws Exception {
 
 		String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
@@ -597,7 +597,8 @@ public class PortalLDAPUtil {
 		throws Exception {
 
 		if (getUser(
-				ldapServerId, companyId, emailAddress, screenName) != null) {
+				ldapServerId, companyId, screenName, emailAddress) != null) {
+
 			return true;
 		}
 		else {
