@@ -30,6 +30,7 @@ public class VirtualHostingTests extends BaseTests {
 		testSuite.addTestSuite(AddVirtualHostingCommunityTest.class);
 		testSuite.addTestSuite(AddVirtualHostingPublicPageTest.class);
 		testSuite.addTestSuite(AddVirtualHostingPrivatePageTest.class);
+		testSuite.addTestSuite(EditFriendlyURLSlashesTest.class);
 		testSuite.addTestSuite(EditFriendlyURLTest.class);
 		testSuite.addTestSuite(AssertPublicPageFriendlyURLTest.class);
 		testSuite.addTestSuite(AssertPrivatePageFriendlyURLTest.class);
