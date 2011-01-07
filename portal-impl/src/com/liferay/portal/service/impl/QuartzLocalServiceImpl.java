@@ -255,7 +255,11 @@ public class QuartzLocalServiceImpl extends QuartzLocalServiceBaseImpl {
 				String jobGroup = rs.getString("JOB_GROUP");
 				byte[] jobData = rs.getBytes("JOB_DATA");
 
-				if ((jobData == null) || (jobData.length > 0)) {
+				if ((jobData == null) || (jobData.length != 1)) {
+					continue;
+				}
+
+				if (jobData[0] != 0) {
 					continue;
 				}
 
