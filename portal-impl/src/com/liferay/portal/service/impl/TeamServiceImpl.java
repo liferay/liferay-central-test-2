@@ -107,10 +107,10 @@ public class TeamServiceImpl extends TeamServiceBaseImpl {
 
 		Team team = teamPersistence.findByPrimaryKey(teamId);
 
-		if (GroupPermissionUtil.contains(
+		if (!GroupPermissionUtil.contains(
 				permissionChecker, team.getGroupId(),
-				ActionKeys.MANAGE_TEAMS) ||
-			UserPermissionUtil.contains(
+				ActionKeys.MANAGE_TEAMS) &&
+			!UserPermissionUtil.contains(
 				permissionChecker, userId, ActionKeys.UPDATE)) {
 
 			throw new PrincipalException();
