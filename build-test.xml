@@ -631,6 +631,13 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-audit" />
+			<param name="test.ant.script.plugin.hooks" value="audit-hook" />
+			<param name="test.ant.script.plugin.portlets" value="audit-portlet" />
+			<param name="test.ant.script.suite" value="PluginsAuditTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-bible-gateway" />
 			<param name="test.ant.script.plugin.portlets" value="bible-gateway-portlet" />
 			<param name="test.ant.script.suite" value="PluginsBibleGatewayTestSuite" />
