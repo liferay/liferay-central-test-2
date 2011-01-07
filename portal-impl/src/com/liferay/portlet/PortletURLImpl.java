@@ -763,6 +763,9 @@ public class PortletURLImpl
 				if (layout != null) {
 					_layoutFriendlyURL = GetterUtil.getString(
 						PortalUtil.getLayoutFriendlyURL(layout, themeDisplay));
+
+					_layoutFriendlyURL = HttpUtil.protocolize(
+						_layoutFriendlyURL, _secure);
 				}
 			}
 		}
