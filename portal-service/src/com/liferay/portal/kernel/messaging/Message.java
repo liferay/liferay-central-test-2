@@ -38,7 +38,7 @@ public class Message implements Serializable {
 	}
 
 	public boolean getBoolean(String key) {
-		boolean value;
+		boolean value = false;
 
 		Object object = get(key);
 
@@ -57,7 +57,7 @@ public class Message implements Serializable {
 	}
 
 	public double getDouble(String key) {
-		double value;
+		double value = 0;
 
 		Object object = get(key);
 
@@ -72,7 +72,7 @@ public class Message implements Serializable {
 	}
 
 	public int getInteger(String key) {
-		int value;
+		int value = 0;
 
 		Object object = get(key);
 
@@ -87,7 +87,7 @@ public class Message implements Serializable {
 	}
 
 	public long getLong(String key) {
-		long value;
+		long value = 0;
 
 		Object object = get(key);
 
