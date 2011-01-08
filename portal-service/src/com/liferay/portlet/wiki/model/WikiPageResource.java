@@ -17,10 +17,6 @@ package com.liferay.portlet.wiki.model;
 /**
  * The model interface for the WikiPageResource service. Represents a row in the &quot;WikiPageResource&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see WikiPageResourceModel
  * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
@@ -31,6 +27,6 @@ public interface WikiPageResource extends WikiPageResourceModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a wiki page resource model instance should use the {@link WikiPageResource} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

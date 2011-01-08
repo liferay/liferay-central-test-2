@@ -17,10 +17,6 @@ package com.liferay.portlet.asset.model;
 /**
  * The model interface for the AssetTag service. Represents a row in the &quot;AssetTag&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetTagImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AssetTagModel
  * @see com.liferay.portlet.asset.model.impl.AssetTagImpl
@@ -31,6 +27,6 @@ public interface AssetTag extends AssetTagModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a asset tag model instance should use the {@link AssetTag} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetTagImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

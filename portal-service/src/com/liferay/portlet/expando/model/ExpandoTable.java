@@ -17,10 +17,6 @@ package com.liferay.portlet.expando.model;
 /**
  * The model interface for the ExpandoTable service. Represents a row in the &quot;ExpandoTable&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.expando.model.impl.ExpandoTableImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ExpandoTableModel
  * @see com.liferay.portlet.expando.model.impl.ExpandoTableImpl
@@ -31,7 +27,7 @@ public interface ExpandoTable extends ExpandoTableModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a expando table model instance should use the {@link ExpandoTable} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.expando.model.impl.ExpandoTableImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public boolean isDefaultTable();
 }

@@ -17,10 +17,6 @@ package com.liferay.portlet.messageboards.model;
 /**
  * The model interface for the MBCategory service. Represents a row in the &quot;MBCategory&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBCategoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see MBCategoryModel
  * @see com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
@@ -31,7 +27,7 @@ public interface MBCategory extends MBCategoryModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a message boards category model instance should use the {@link MBCategory} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBCategoryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.util.List<java.lang.Long> getAncestorCategoryIds()
 		throws com.liferay.portal.kernel.exception.PortalException,

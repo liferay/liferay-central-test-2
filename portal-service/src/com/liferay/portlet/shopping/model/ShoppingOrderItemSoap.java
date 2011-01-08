@@ -21,13 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portlet.shopping.service.http.ShoppingOrderItemServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.shopping.service.http.ShoppingOrderItemServiceSoap
  * @generated
  */
 public class ShoppingOrderItemSoap implements Serializable {

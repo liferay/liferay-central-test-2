@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the Role service. Represents a row in the &quot;Role_&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.RoleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see RoleModel
  * @see com.liferay.portal.model.impl.RoleImpl
@@ -31,7 +27,7 @@ public interface Role extends RoleModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a role model instance should use the {@link Role} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.RoleImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.lang.String getDescriptiveName()
 		throws com.liferay.portal.kernel.exception.PortalException,

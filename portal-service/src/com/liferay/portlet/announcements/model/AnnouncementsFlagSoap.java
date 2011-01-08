@@ -21,10 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services, specifically {@link com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap}.
  *
  * @author    Brian Wing Shun Chan
  * @see       com.liferay.portlet.announcements.service.http.AnnouncementsFlagServiceSoap

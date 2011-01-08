@@ -17,10 +17,6 @@ package com.liferay.portlet.announcements.model;
 /**
  * The model interface for the AnnouncementsEntry service. Represents a row in the &quot;AnnouncementsEntry&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AnnouncementsEntryModel
  * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
@@ -31,7 +27,7 @@ public interface AnnouncementsEntry extends AnnouncementsEntryModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a announcements entry model instance should use the {@link AnnouncementsEntry} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public long getGroupId()
 		throws com.liferay.portal.kernel.exception.PortalException,

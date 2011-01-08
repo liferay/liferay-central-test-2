@@ -17,10 +17,6 @@ package com.liferay.portlet.softwarecatalog.model;
 /**
  * The model interface for the SCProductVersion service. Represents a row in the &quot;SCProductVersion&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see SCProductVersionModel
  * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl
@@ -31,7 +27,7 @@ public interface SCProductVersion extends SCProductVersionModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a s c product version model instance should use the {@link SCProductVersion} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions()
 		throws com.liferay.portal.kernel.exception.SystemException;

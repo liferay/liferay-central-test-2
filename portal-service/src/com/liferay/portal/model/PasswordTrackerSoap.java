@@ -21,13 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portal.service.http.PasswordTrackerServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portal.service.http.PasswordTrackerServiceSoap
  * @generated
  */
 public class PasswordTrackerSoap implements Serializable {

@@ -17,10 +17,6 @@ package com.liferay.portlet.polls.model;
 /**
  * The model interface for the PollsChoice service. Represents a row in the &quot;PollsChoice&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.polls.model.impl.PollsChoiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see PollsChoiceModel
  * @see com.liferay.portlet.polls.model.impl.PollsChoiceImpl
@@ -31,7 +27,7 @@ public interface PollsChoice extends PollsChoiceModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a polls choice model instance should use the {@link PollsChoice} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.polls.model.impl.PollsChoiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public int getVotesCount()
 		throws com.liferay.portal.kernel.exception.SystemException;

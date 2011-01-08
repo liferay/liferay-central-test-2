@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the UserTrackerPath service. Represents a row in the &quot;UserTrackerPath&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.UserTrackerPathImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see UserTrackerPathModel
  * @see com.liferay.portal.model.impl.UserTrackerPathImpl
@@ -31,6 +27,6 @@ public interface UserTrackerPath extends UserTrackerPathModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a user tracker path model instance should use the {@link UserTrackerPath} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.UserTrackerPathImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

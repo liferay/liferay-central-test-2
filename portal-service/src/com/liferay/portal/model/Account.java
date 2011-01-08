@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the Account service. Represents a row in the &quot;Account_&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.AccountImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AccountModel
  * @see com.liferay.portal.model.impl.AccountImpl
@@ -31,6 +27,6 @@ public interface Account extends AccountModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a account model instance should use the {@link Account} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.AccountImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

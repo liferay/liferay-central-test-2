@@ -21,13 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portlet.messageboards.service.http.MBMailingListServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.messageboards.service.http.MBMailingListServiceSoap
  * @generated
  */
 public class MBMailingListSoap implements Serializable {

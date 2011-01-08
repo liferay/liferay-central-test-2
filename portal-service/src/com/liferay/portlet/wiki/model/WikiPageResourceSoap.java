@@ -20,13 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portlet.wiki.service.http.WikiPageResourceServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.wiki.service.http.WikiPageResourceServiceSoap
  * @generated
  */
 public class WikiPageResourceSoap implements Serializable {

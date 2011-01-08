@@ -17,10 +17,6 @@ package com.liferay.portlet.asset.model;
 /**
  * The model interface for the AssetTagStats service. Represents a row in the &quot;AssetTagStats&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetTagStatsImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see AssetTagStatsModel
  * @see com.liferay.portlet.asset.model.impl.AssetTagStatsImpl
@@ -31,6 +27,6 @@ public interface AssetTagStats extends AssetTagStatsModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a asset tag stats model instance should use the {@link AssetTagStats} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetTagStatsImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

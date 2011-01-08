@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the Contact service. Represents a row in the &quot;Contact_&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ContactImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ContactModel
  * @see com.liferay.portal.model.impl.ContactImpl
@@ -31,7 +27,7 @@ public interface Contact extends ContactModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a contact model instance should use the {@link Contact} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ContactImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.lang.String getFullName();
 }

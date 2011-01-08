@@ -17,10 +17,6 @@ package com.liferay.portlet.imagegallery.model;
 /**
  * The model interface for the IGFolder service. Represents a row in the &quot;IGFolder&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.imagegallery.model.impl.IGFolderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see IGFolderModel
  * @see com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
@@ -31,7 +27,7 @@ public interface IGFolder extends IGFolderModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a i g folder model instance should use the {@link IGFolder} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.imagegallery.model.impl.IGFolderImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getAncestors()
 		throws com.liferay.portal.kernel.exception.PortalException,

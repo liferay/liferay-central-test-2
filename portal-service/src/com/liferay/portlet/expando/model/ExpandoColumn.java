@@ -17,10 +17,6 @@ package com.liferay.portlet.expando.model;
 /**
  * The model interface for the ExpandoColumn service. Represents a row in the &quot;ExpandoColumn&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.expando.model.impl.ExpandoColumnImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ExpandoColumnModel
  * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
@@ -31,7 +27,7 @@ public interface ExpandoColumn extends ExpandoColumnModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a expando column model instance should use the {@link ExpandoColumn} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.expando.model.impl.ExpandoColumnImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.io.Serializable getDefaultValue();
 

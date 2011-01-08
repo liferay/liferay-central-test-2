@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the Release service. Represents a row in the &quot;Release_&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ReleaseImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ReleaseModel
  * @see com.liferay.portal.model.impl.ReleaseImpl
@@ -31,6 +27,6 @@ public interface Release extends ReleaseModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a release model instance should use the {@link Release} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ReleaseImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

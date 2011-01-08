@@ -17,10 +17,6 @@ package com.liferay.portlet.messageboards.model;
 /**
  * The model interface for the MBMailingList service. Represents a row in the &quot;MBMailingList&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBMailingListImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see MBMailingListModel
  * @see com.liferay.portlet.messageboards.model.impl.MBMailingListImpl
@@ -31,6 +27,6 @@ public interface MBMailingList extends MBMailingListModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a message boards mailing list model instance should use the {@link MBMailingList} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBMailingListImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

@@ -17,10 +17,6 @@ package com.liferay.portlet.polls.model;
 /**
  * The model interface for the PollsQuestion service. Represents a row in the &quot;PollsQuestion&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.polls.model.impl.PollsQuestionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see PollsQuestionModel
  * @see com.liferay.portlet.polls.model.impl.PollsQuestionImpl
@@ -31,7 +27,7 @@ public interface PollsQuestion extends PollsQuestionModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a polls question model instance should use the {@link PollsQuestion} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.polls.model.impl.PollsQuestionImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> getChoices()
 		throws com.liferay.portal.kernel.exception.SystemException;

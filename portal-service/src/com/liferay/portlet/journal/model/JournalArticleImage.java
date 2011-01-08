@@ -17,10 +17,6 @@ package com.liferay.portlet.journal.model;
 /**
  * The model interface for the JournalArticleImage service. Represents a row in the &quot;JournalArticleImage&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalArticleImageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see JournalArticleImageModel
  * @see com.liferay.portlet.journal.model.impl.JournalArticleImageImpl
@@ -31,6 +27,6 @@ public interface JournalArticleImage extends JournalArticleImageModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a journal article image model instance should use the {@link JournalArticleImage} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalArticleImageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

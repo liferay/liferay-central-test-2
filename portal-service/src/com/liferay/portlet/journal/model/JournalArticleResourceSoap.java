@@ -20,13 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portlet.journal.service.http.JournalArticleResourceServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.journal.service.http.JournalArticleResourceServiceSoap
  * @generated
  */
 public class JournalArticleResourceSoap implements Serializable {

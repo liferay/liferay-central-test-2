@@ -20,10 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portlet.expando.service.http.ExpandoValueServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services, specifically {@link com.liferay.portlet.expando.service.http.ExpandoValueServiceSoap}.
  *
  * @author    Brian Wing Shun Chan
  * @see       com.liferay.portlet.expando.service.http.ExpandoValueServiceSoap

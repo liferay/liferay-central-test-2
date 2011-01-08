@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the LayoutSet service. Represents a row in the &quot;LayoutSet&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutSetImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see LayoutSetModel
  * @see com.liferay.portal.model.impl.LayoutSetImpl
@@ -31,7 +27,7 @@ public interface LayoutSet extends LayoutSetModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a layout set model instance should use the {@link LayoutSet} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutSetImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portal.model.Theme getTheme()
 		throws com.liferay.portal.kernel.exception.SystemException;

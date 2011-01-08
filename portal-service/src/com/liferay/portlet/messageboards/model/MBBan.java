@@ -17,10 +17,6 @@ package com.liferay.portlet.messageboards.model;
 /**
  * The model interface for the MBBan service. Represents a row in the &quot;MBBan&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBBanImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see MBBanModel
  * @see com.liferay.portlet.messageboards.model.impl.MBBanImpl
@@ -31,6 +27,6 @@ public interface MBBan extends MBBanModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a message boards ban model instance should use the {@link MBBan} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.messageboards.model.impl.MBBanImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

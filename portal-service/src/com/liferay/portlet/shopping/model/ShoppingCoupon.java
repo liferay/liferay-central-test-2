@@ -17,10 +17,6 @@ package com.liferay.portlet.shopping.model;
 /**
  * The model interface for the ShoppingCoupon service. Represents a row in the &quot;ShoppingCoupon&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ShoppingCouponModel
  * @see com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl
@@ -31,7 +27,7 @@ public interface ShoppingCoupon extends ShoppingCouponModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a shopping coupon model instance should use the {@link ShoppingCoupon} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public boolean hasValidDateRange();
 

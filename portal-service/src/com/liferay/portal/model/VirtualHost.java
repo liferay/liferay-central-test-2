@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the VirtualHost service. Represents a row in the &quot;VirtualHost&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.VirtualHostImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see VirtualHostModel
  * @see com.liferay.portal.model.impl.VirtualHostImpl
@@ -31,6 +27,6 @@ public interface VirtualHost extends VirtualHostModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a virtual host model instance should use the {@link VirtualHost} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.VirtualHostImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

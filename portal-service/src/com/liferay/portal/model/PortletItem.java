@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the PortletItem service. Represents a row in the &quot;PortletItem&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PortletItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see PortletItemModel
  * @see com.liferay.portal.model.impl.PortletItemImpl
@@ -31,6 +27,6 @@ public interface PortletItem extends PortletItemModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a portlet item model instance should use the {@link PortletItem} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PortletItemImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

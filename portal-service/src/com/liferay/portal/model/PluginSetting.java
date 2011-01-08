@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the PluginSetting service. Represents a row in the &quot;PluginSetting&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PluginSettingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see PluginSettingModel
  * @see com.liferay.portal.model.impl.PluginSettingImpl
@@ -31,7 +27,7 @@ public interface PluginSetting extends PluginSettingModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a plugin setting model instance should use the {@link PluginSetting} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PluginSettingImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 
 	/**

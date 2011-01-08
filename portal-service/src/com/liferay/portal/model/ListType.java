@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the ListType service. Represents a row in the &quot;ListType&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ListTypeImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see ListTypeModel
  * @see com.liferay.portal.model.impl.ListTypeImpl
@@ -31,6 +27,6 @@ public interface ListType extends ListTypeModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a list type model instance should use the {@link ListType} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.ListTypeImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

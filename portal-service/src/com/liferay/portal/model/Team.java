@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the Team service. Represents a row in the &quot;Team&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.TeamImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see TeamModel
  * @see com.liferay.portal.model.impl.TeamImpl
@@ -31,7 +27,7 @@ public interface Team extends TeamModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a team model instance should use the {@link Team} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.TeamImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portal.model.Role getRole()
 		throws com.liferay.portal.kernel.exception.PortalException,

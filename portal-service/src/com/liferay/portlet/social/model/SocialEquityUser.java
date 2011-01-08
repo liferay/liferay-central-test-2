@@ -17,10 +17,6 @@ package com.liferay.portlet.social.model;
 /**
  * The model interface for the SocialEquityUser service. Represents a row in the &quot;SocialEquityUser&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityUserImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see SocialEquityUserModel
  * @see com.liferay.portlet.social.model.impl.SocialEquityUserImpl
@@ -31,7 +27,7 @@ public interface SocialEquityUser extends SocialEquityUserModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a social equity user model instance should use the {@link SocialEquityUser} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.social.model.impl.SocialEquityUserImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public double getContributionEquity();
 

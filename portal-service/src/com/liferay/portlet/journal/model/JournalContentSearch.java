@@ -17,10 +17,6 @@ package com.liferay.portlet.journal.model;
 /**
  * The model interface for the JournalContentSearch service. Represents a row in the &quot;JournalContentSearch&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalContentSearchImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see JournalContentSearchModel
  * @see com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
@@ -31,6 +27,6 @@ public interface JournalContentSearch extends JournalContentSearchModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a journal content search model instance should use the {@link JournalContentSearch} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalContentSearchImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

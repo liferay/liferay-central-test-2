@@ -20,13 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portlet.messageboards.service.http.MBDiscussionServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.messageboards.service.http.MBDiscussionServiceSoap
  * @generated
  */
 public class MBDiscussionSoap implements Serializable {

@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the Company service. Represents a row in the &quot;Company&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.CompanyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see CompanyModel
  * @see com.liferay.portal.model.impl.CompanyImpl
@@ -31,7 +27,7 @@ public interface Company extends CompanyModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a company model instance should use the {@link Company} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.CompanyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public int compareTo(com.liferay.portal.model.Company company);
 

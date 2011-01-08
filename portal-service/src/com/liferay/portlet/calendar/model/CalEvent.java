@@ -17,10 +17,6 @@ package com.liferay.portlet.calendar.model;
 /**
  * The model interface for the CalEvent service. Represents a row in the &quot;CalEvent&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.calendar.model.impl.CalEventImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see CalEventModel
  * @see com.liferay.portlet.calendar.model.impl.CalEventImpl
@@ -31,7 +27,7 @@ public interface CalEvent extends CalEventModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a cal event model instance should use the {@link CalEvent} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.calendar.model.impl.CalEventImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public com.liferay.portal.kernel.cal.TZSRecurrence getRecurrenceObj();
 

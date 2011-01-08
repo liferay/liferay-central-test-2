@@ -17,10 +17,6 @@ package com.liferay.portal.model;
 /**
  * The model interface for the PortletPreferences service. Represents a row in the &quot;PortletPreferences&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PortletPreferencesImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see PortletPreferencesModel
  * @see com.liferay.portal.model.impl.PortletPreferencesImpl
@@ -31,6 +27,6 @@ public interface PortletPreferences extends PortletPreferencesModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a portlet preferences model instance should use the {@link PortletPreferences} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.PortletPreferencesImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

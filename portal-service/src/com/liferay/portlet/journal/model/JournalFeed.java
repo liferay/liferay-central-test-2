@@ -17,10 +17,6 @@ package com.liferay.portlet.journal.model;
 /**
  * The model interface for the JournalFeed service. Represents a row in the &quot;JournalFeed&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalFeedImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see JournalFeedModel
  * @see com.liferay.portlet.journal.model.impl.JournalFeedImpl
@@ -31,6 +27,6 @@ public interface JournalFeed extends JournalFeedModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a journal feed model instance should use the {@link JournalFeed} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.journal.model.impl.JournalFeedImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 }

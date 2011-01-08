@@ -20,10 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portal.service.http.UserGroupServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services, specifically {@link com.liferay.portal.service.http.UserGroupServiceSoap}.
  *
  * @author    Brian Wing Shun Chan
  * @see       com.liferay.portal.service.http.UserGroupServiceSoap

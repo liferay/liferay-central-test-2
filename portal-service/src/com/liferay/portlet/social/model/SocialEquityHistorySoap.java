@@ -21,13 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portlet.social.service.http.SocialEquityHistoryServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.social.service.http.SocialEquityHistoryServiceSoap
  * @generated
  */
 public class SocialEquityHistorySoap implements Serializable {

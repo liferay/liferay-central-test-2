@@ -22,13 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portal.service.http.OrgGroupPermissionServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portal.service.http.OrgGroupPermissionServiceSoap
  * @generated
  */
 public class OrgGroupPermissionSoap implements Serializable {

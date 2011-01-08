@@ -21,13 +21,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link com.liferay.portlet.asset.service.http.AssetLinkServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services.
  *
  * @author    Brian Wing Shun Chan
- * @see       com.liferay.portlet.asset.service.http.AssetLinkServiceSoap
  * @generated
  */
 public class AssetLinkSoap implements Serializable {

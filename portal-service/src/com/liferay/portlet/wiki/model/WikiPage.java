@@ -17,10 +17,6 @@ package com.liferay.portlet.wiki.model;
 /**
  * The model interface for the WikiPage service. Represents a row in the &quot;WikiPage&quot; database table, with each column mapped to a property of this class.
  *
- * <p>
- * Never modify this interface directly. Add methods to {@link com.liferay.portlet.wiki.model.impl.WikiPageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
- * </p>
- *
  * @author Brian Wing Shun Chan
  * @see WikiPageModel
  * @see com.liferay.portlet.wiki.model.impl.WikiPageImpl
@@ -31,7 +27,7 @@ public interface WikiPage extends WikiPageModel {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never reference this interface directly. All methods that expect a wiki page model instance should use the {@link WikiPage} interface instead.
+	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.wiki.model.impl.WikiPageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
 	public java.lang.String getAttachmentsDir();
 
