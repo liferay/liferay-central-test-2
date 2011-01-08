@@ -783,7 +783,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 			breakiterator="yes"
 			classpathref="project.classpath"
 			destdir="${doc.java.dir}"
-			doctitle="Liferay ${lp.version} API Documentation"
+			doctitle="Liferay ${lp.version} Public API Documentation"
 			header="&lt;b&gt;Liferay ${lp.version}&lt;/b&gt;"
 			maxmemory="1024m"
 			noqualifier="java.*"
@@ -795,6 +795,48 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 			<doclet name="com.liferay.tools.doclets.standard.Standard" path="${project.dir}/lib/development/liferay-doclet.jar">
 				<param name="-linksource" />
 			</doclet>
+
+			<group title="Portal Services" packages="com.liferay.portal*:com.liferay.counter*:com.liferay.documentlibrary*:com.liferay.mail*" />
+			<group title="Portal Kernel" packages="com.liferay.portal.kernel*" />
+			<group title="Portlet Services" packages="com.liferay.portlet*" />
+			<group title="Portlet Bridges" packages="com.liferay.util.bridges*" />
+
+			<link href="http://docs.liferay.com/portlet-api/2.0/javadocs" />
+			<link href="http://java.sun.com/javase/6/docs/api" />
+			<link href="http://docs.liferay.com/portal/${lp.version.major}/javadocs" />
+			
+			<packageset dir="portal-service/src" />
+			<packageset dir="util-bridges/src" />
+			<packageset dir="util-java/src" />
+
+			<tag name="generated" description="" />
+		</javadoc>
+	</target>
+	
+	<target name="javadoc-all">
+		<property name="doc.java.dir" value="${doc.dir}/javadocs-all" />
+
+		<mkdir dir="${doc.java.dir}" />
+
+		<javadoc
+			breakiterator="yes"
+			classpathref="project.classpath"
+			destdir="${doc.java.dir}"
+			doctitle="Liferay ${lp.version} Internal API Documentation"
+			header="&lt;b&gt;Liferay ${lp.version}&lt;/b&gt;"
+			maxmemory="1024m"
+			noqualifier="java.*"
+			stylesheetfile="${project.dir}/tools/javadoc.css"
+			useexternalfile="yes"
+			use="yes"
+			windowtitle="Liferay ${lp.version} Internal API"
+		>
+			<doclet name="com.liferay.tools.doclets.standard.Standard" path="${project.dir}/lib/development/liferay-doclet.jar">
+				<param name="-linksource" />
+			</doclet>
+
+			<group title="Portal Services" packages="com.liferay.portal.service*" />
+			<group title="Portlet Services" packages="com.liferay.portlet*" />
 
 			<link href="http://docs.liferay.com/portlet-api/2.0/javadocs" />
 			<link href="http://java.sun.com/javase/6/docs/api" />
