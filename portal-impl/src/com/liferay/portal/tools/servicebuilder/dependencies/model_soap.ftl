@@ -11,13 +11,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <p>
- * This class is used by
- * {@link ${packagePath}.service.http.${entity.name}ServiceSoap}.
- * </p>
+ * This class is used by SOAP remote services<#if entity.hasRemoteService()>, specifically {@link ${packagePath}.service.http.${entity.name}ServiceSoap}</#if>.
  *
  * @author    ${author}
+<#if entity.hasRemoteService()>
  * @see       ${packagePath}.service.http.${entity.name}ServiceSoap
+</#if>
  * @generated
  */
 public class ${entity.name}Soap implements Serializable {
