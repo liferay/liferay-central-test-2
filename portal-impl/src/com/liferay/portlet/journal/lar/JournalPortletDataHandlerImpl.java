@@ -85,6 +85,7 @@ import java.io.File;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -125,6 +126,119 @@ import javax.portlet.PortletPreferences;
  * @see    com.liferay.portlet.journal.lar.JournalCreationStrategy
  */
 public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
+
+	public static String exportReferencedContent(
+			PortletDataContext portletDataContext, Element dlFoldersElement,
+			Element dlFileEntriesElement, Element dlFileRanksElement,
+			Element igFoldersElement, Element igImagesElement,
+			Element entityElement, String content, boolean checkDateRange)
+		throws Exception {
+
+		content = exportDLFileEntries(
+			portletDataContext, dlFoldersElement, dlFileEntriesElement,
+			dlFileRanksElement, entityElement, content, checkDateRange);
+		content = exportIGImages(
+			portletDataContext, igFoldersElement, igImagesElement,
+			entityElement, content, checkDateRange);
+		content = exportLayoutFriendlyURLs(portletDataContext, content);
+		content = exportLinksToLayout(portletDataContext, content);
+
+		content = StringUtil.replace(
+			content, StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
+
+		return null;
+	}
+
+	public static String importReferencedContent(
+			PortletDataContext portletDataContext, Element parentElement,
+			String content)
+		throws Exception {
+
+		content = importDLFileEntries(
+			portletDataContext, parentElement, content);
+		content = importIGImages(portletDataContext, parentElement, content);
+
+		Group group = GroupLocalServiceUtil.getGroup(
+			portletDataContext.getScopeGroupId());
+
+		content = StringUtil.replace(
+			content, "@data_handler_group_friendly_url@",
+			group.getFriendlyURL());
+
+		content = importLinksToLayout(portletDataContext, content);
+
+		return content;
+	}
+
+	public static void importReferencedData(
+			PortletDataContext portletDataContext, Element entityElement)
+		throws Exception {
+
+		Element dlFoldersElement = entityElement.element("dl-folders");
+
+		List<Element> dlFolderElements = Collections.emptyList();
+
+		if (dlFoldersElement != null) {
+			dlFolderElements = dlFoldersElement.elements("folder");
+		}
+
+		for (Element folderElement : dlFolderElements) {
+			DLPortletDataHandlerImpl.importFolder(
+				portletDataContext, folderElement);
+		}
+
+		Element dlFileEntriesElement = entityElement.element("dl-file-entries");
+
+		List<Element> dlFileEntryElements = Collections.emptyList();
+
+		if (dlFileEntriesElement != null) {
+			dlFileEntryElements = dlFileEntriesElement.elements("file-entry");
+		}
+
+		for (Element fileEntryElement : dlFileEntryElements) {
+			DLPortletDataHandlerImpl.importFileEntry(
+				portletDataContext, fileEntryElement);
+		}
+
+		Element dlFileRanksElement = entityElement.element("dl-file-ranks");
+
+		List<Element> dlFileRankElements = Collections.emptyList();
+
+		if (dlFileRanksElement != null) {
+			dlFileRankElements = dlFileRanksElement.elements("file-rank");
+		}
+
+		for (Element fileRankElement : dlFileRankElements) {
+			DLPortletDataHandlerImpl.importFileRank(
+				portletDataContext, fileRankElement);
+		}
+
+		Element igFoldersElement = entityElement.element("ig-folders");
+
+		List<Element> igFolderElements = Collections.emptyList();
+
+		if (igFoldersElement != null) {
+			igFolderElements = igFoldersElement.elements("folder");
+		}
+
+		for (Element folderElement : igFolderElements) {
+			IGPortletDataHandlerImpl.importFolder(
+				portletDataContext, folderElement);
+		}
+
+		Element igImagesElement = entityElement.element("ig-images");
+
+		List<Element> igImageElements = Collections.emptyList();
+
+		if (igImagesElement != null) {
+			igImageElements = igImagesElement.elements("image");
+		}
+
+		for (Element imageElement : igImageElements) {
+			IGPortletDataHandlerImpl.importImage(
+				portletDataContext, imageElement);
+		}
+	}
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
@@ -310,16 +424,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.getBooleanParameter(
 				_NAMESPACE, "embedded-assets")) {
 
-			String content = article.getContent();
-
-			content = exportDLFileEntries(
+			String content = exportReferencedContent(
 				portletDataContext, dlFoldersElement, dlFileEntriesElement,
-				dlFileRanksElement, articleElement, content, checkDateRange);
-			content = exportIGImages(
-				portletDataContext, igFoldersElement, igImagesElement,
-				articleElement, content, checkDateRange);
-			content = exportLayoutFriendlyURLs(portletDataContext, content);
-			content = exportLinksToLayout(portletDataContext, content);
+				dlFileRanksElement, igFoldersElement, igImagesElement,
+				articleElement, article.getContent(), checkDateRange);
 
 			article.setContent(content);
 		}
@@ -327,9 +435,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.addZipEntry(path, article);
 	}
 
-	public static String exportDLFileEntries(
-			PortletDataContext portletDataContext, Element foldersElement,
-			Element fileEntriesElement, Element fileRanksElement,
+	protected static String exportDLFileEntries(
+			PortletDataContext portletDataContext, Element dlFoldersElement,
+			Element dlFileEntriesElement, Element dlFileRanksElement,
 			Element entityElement, String content, boolean checkDateRange)
 		throws Exception {
 
@@ -483,8 +591,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				dlReferenceElement.addAttribute("path", path);
 
 				DLPortletDataHandlerImpl.exportFileEntry(
-					portletDataContext, foldersElement, fileEntriesElement,
-					fileRanksElement, fileEntry, checkDateRange);
+					portletDataContext, dlFoldersElement, dlFileEntriesElement,
+					dlFileRanksElement, fileEntry, checkDateRange);
 
 				String dlReference = "[$dl-reference=" + path + "$]";
 
@@ -547,9 +655,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.addZipEntry(path, feed);
 	}
 
-	public static String exportIGImages(
-			PortletDataContext portletDataContext, Element foldersElement,
-			Element imagesElement, Element entityElement, String content,
+	protected static String exportIGImages(
+			PortletDataContext portletDataContext, Element igFoldersElement,
+			Element igImagesElement, Element entityElement, String content,
 			boolean checkDateRange)
 		throws Exception {
 
@@ -681,8 +789,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				igReferenceElement.addAttribute("path", path);
 
 				IGPortletDataHandlerImpl.exportImage(
-					portletDataContext, foldersElement, imagesElement, image,
-					checkDateRange);
+					portletDataContext, igFoldersElement, igImagesElement,
+					image, checkDateRange);
 
 				String igReference = "[$ig-reference=" + path + "$]";
 
@@ -700,7 +808,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	public static String exportLayoutFriendlyURLs(
+	protected static String exportLayoutFriendlyURLs(
 		PortletDataContext portletDataContext, String content) {
 
 		Group group = null;
@@ -830,7 +938,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	public static String exportLinksToLayout(
+	protected static String exportLinksToLayout(
 			PortletDataContext portletDataContext, String content)
 		throws Exception {
 
@@ -943,18 +1051,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.getBooleanParameter(
 				_NAMESPACE, "embedded-assets")) {
 
-			String content = template.getXsl();
-
-			content = exportDLFileEntries(
+			String content = exportReferencedContent(
 				portletDataContext, dlFoldersElement, dlFileEntriesElement,
-				dlFileRanksElement, templateElement, content, checkDateRange);
-			content = exportIGImages(
-				portletDataContext, igFoldersElement, igImagesElement,
-				templateElement, content, checkDateRange);
-			content = exportLayoutFriendlyURLs(portletDataContext, content);
-
-			content = StringUtil.replace(
-				content, StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
+				dlFileRanksElement, igFoldersElement, igImagesElement,
+				templateElement, template.getXsl(), checkDateRange);
 
 			template.setXsl(content);
 		}
@@ -1534,7 +1634,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
-	public static String importDLFileEntries(
+	protected static String importDLFileEntries(
 			PortletDataContext portletDataContext, Element parentElement,
 			String content)
 		throws Exception {
@@ -1729,7 +1829,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 	}
 
-	public static String importIGImages(
+	protected static String importIGImages(
 			PortletDataContext portletDataContext, Element parentElement,
 			String content)
 		throws Exception {
@@ -1780,7 +1880,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return content;
 	}
 
-	public static String importLinksToLayout(
+	protected static String importLinksToLayout(
 			PortletDataContext portletDataContext, String content)
 		throws Exception {
 
@@ -2208,52 +2308,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element rootElement = document.getRootElement();
 
-		Element dlFoldersElement = rootElement.element("dl-folders");
-
-		List<Element> dlFolderElements = dlFoldersElement.elements("folder");
-
-		for (Element dlFolderElement : dlFolderElements) {
-			DLPortletDataHandlerImpl.importFolder(
-				portletDataContext, dlFolderElement);
-		}
-
-		Element dlFileEntriesElement = rootElement.element("dl-file-entries");
-
-		List<Element> dlFileEntryElements = dlFileEntriesElement.elements(
-			"file-entry");
-
-		for (Element dlFileEntryElement : dlFileEntryElements) {
-			DLPortletDataHandlerImpl.importFileEntry(
-				portletDataContext, dlFileEntryElement);
-		}
-
-		Element dlFileRanksElement = rootElement.element("dl-file-ranks");
-
-		List<Element> dlFileRankElements = dlFileRanksElement.elements(
-			"file-rank");
-
-		for (Element dlFileRankElement : dlFileRankElements) {
-			DLPortletDataHandlerImpl.importFileRank(
-				portletDataContext, dlFileRankElement);
-		}
-
-		Element igFoldersElement = rootElement.element("ig-folders");
-
-		List<Element> igFolderElements = igFoldersElement.elements("folder");
-
-		for (Element igFolderElement : igFolderElements) {
-			IGPortletDataHandlerImpl.importFolder(
-				portletDataContext, igFolderElement);
-		}
-
-		Element igImagesElement = rootElement.element("ig-images");
-
-		List<Element> igImageElements = igImagesElement.elements("image");
-
-		for (Element igImageElement : igImageElements) {
-			IGPortletDataHandlerImpl.importImage(
-				portletDataContext, igImageElement);
-		}
+		importReferencedData(portletDataContext, rootElement);
 
 		Element structuresElement = rootElement.element("structures");
 

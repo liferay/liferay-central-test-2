@@ -30,16 +30,12 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
-import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -195,70 +191,8 @@ public class JournalContentPortletDataHandlerImpl
 
 		Element rootElement = document.getRootElement();
 
-		Element dlFoldersElement = rootElement.element("dl-folders");
-
-		List<Element> dlFolderElements = Collections.emptyList();
-
-		if (dlFoldersElement != null) {
-			dlFolderElements = dlFoldersElement.elements("folder");
-		}
-
-		for (Element folderElement : dlFolderElements) {
-			DLPortletDataHandlerImpl.importFolder(
-				portletDataContext, folderElement);
-		}
-
-		Element dlFileEntriesElement = rootElement.element("dl-file-entries");
-
-		List<Element> dlFileEntryElements = Collections.emptyList();
-
-		if (dlFileEntriesElement != null) {
-			dlFileEntryElements = dlFileEntriesElement.elements("file-entry");
-		}
-
-		for (Element fileEntryElement : dlFileEntryElements) {
-			DLPortletDataHandlerImpl.importFileEntry(
-				portletDataContext, fileEntryElement);
-		}
-
-		Element dlFileRanksElement = rootElement.element("dl-file-ranks");
-
-		List<Element> dlFileRankElements = Collections.emptyList();
-
-		if (dlFileRanksElement != null) {
-			dlFileRankElements = dlFileRanksElement.elements("file-rank");
-		}
-
-		for (Element fileRankElement : dlFileRankElements) {
-			DLPortletDataHandlerImpl.importFileRank(
-				portletDataContext, fileRankElement);
-		}
-
-		Element igFoldersElement = rootElement.element("ig-folders");
-
-		List<Element> igFolderElements = Collections.emptyList();
-
-		if (igFoldersElement != null) {
-			igFolderElements = igFoldersElement.elements("folder");
-		}
-
-		for (Element folderElement : igFolderElements) {
-			IGPortletDataHandlerImpl.importFolder(
-				portletDataContext, folderElement);
-		}
-
-		Element igImagesElement = rootElement.element("ig-images");
-
-		List<Element> igImageElements = Collections.emptyList();
-
-		if (igImagesElement != null) {
-			igImageElements = igImagesElement.elements("image");
-		}
-
-		for (Element imageElement : igImageElements) {
-			IGPortletDataHandlerImpl.importImage(
-				portletDataContext, imageElement);
-		}
+		JournalPortletDataHandlerImpl.importReferencedData(
+			portletDataContext, rootElement);
 
 		Element structureElement = rootElement.element("structure");
 

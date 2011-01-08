@@ -26,20 +26,14 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
-import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
 import com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -90,17 +84,17 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
+		Element dlFoldersElement = pagesElement.addElement("dl-folders");
+		Element dlFileEntriesElement = pagesElement.addElement(
+			"dl-file-entries");
+		Element dlFileRanksElement = pagesElement.addElement("dl-file-ranks");
+		Element igFoldersElement = pagesElement.addElement("ig-folders");
+		Element igImagesElement = pagesElement.addElement("ig-images");
+
 		List<WikiPage> pages = WikiPageUtil.findByN_S(
 			node.getNodeId(), WorkflowConstants.STATUS_APPROVED,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			new PageVersionComparator(true));
-
-		Element dlFoldersElement = pagesElement.addElement("dl-folders");
-		Element dlFileEntriesElement = pagesElement.addElement(
-				"dl-file-entries");
-		Element dlFileRanksElement = pagesElement.addElement("dl-file-ranks");
-		Element igFoldersElement = pagesElement.addElement("ig-folders");
-		Element igImagesElement = pagesElement.addElement("ig-images");
 
 		for (WikiPage page : pages) {
 			exportPage(
@@ -194,22 +188,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		long nodeId = MapUtil.getLong(
 			nodePKs, page.getNodeId(), page.getNodeId());
 
-		String content = page.getContent();
-
-		content = JournalPortletDataHandlerImpl.importDLFileEntries(
-			portletDataContext, pageElement, content);
-		content = JournalPortletDataHandlerImpl.importIGImages(
-			portletDataContext, pageElement, content);
-
-		Group group = GroupLocalServiceUtil.getGroup(
-			portletDataContext.getScopeGroupId());
-
-		content = StringUtil.replace(
-			content, "@data_handler_group_friendly_url@",
-			group.getFriendlyURL());
-
-		content = JournalPortletDataHandlerImpl.importLinksToLayout(
-			portletDataContext, content);
+		String content = JournalPortletDataHandlerImpl.importReferencedContent(
+			portletDataContext, pageElement, page.getContent());
 
 		page.setContent(content);
 
@@ -405,10 +385,9 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		page = (WikiPage)page.clone();
 
 		Element pageElement = (Element)pagesElement.selectSingleNode(
-				"//page[@path='".concat(path).concat("']"));
+			"//page[@path='".concat(path).concat("']"));
 
 		if (portletDataContext.isPathNotProcessed(path)) {
-
 			if (pageElement == null) {
 				pageElement = pagesElement.addElement("page");
 			}
@@ -417,24 +396,17 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			page.setUserUuid(page.getUserUuid());
 
+			String content =
+				JournalPortletDataHandlerImpl.exportReferencedContent(
+					portletDataContext, dlFoldersElement, dlFileEntriesElement,
+					dlFileRanksElement, igFoldersElement, igImagesElement,
+					pageElement, page.getContent(), checkDateRange);
+
+			page.setContent(content);
+
 			String imagePath = getPageImagePath(portletDataContext, page);
 
 			pageElement.addAttribute("image-path", imagePath);
-
-			String content = page.getContent();
-
-			content = JournalPortletDataHandlerImpl.exportDLFileEntries(
-				portletDataContext, dlFoldersElement, dlFileEntriesElement,
-				dlFileRanksElement, pageElement, content, checkDateRange);
-			content = JournalPortletDataHandlerImpl.exportIGImages(
-				portletDataContext, igFoldersElement, igImagesElement,
-				pageElement, content, checkDateRange);
-			content = JournalPortletDataHandlerImpl.exportLayoutFriendlyURLs(
-				portletDataContext, content);
-			content = JournalPortletDataHandlerImpl.exportLinksToLayout(
-				portletDataContext, content);
-
-			page.setContent(content);
 
 			portletDataContext.addPermissions(
 				WikiPage.class, page.getResourcePrimKey());
@@ -631,52 +603,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element pagesElement = rootElement.element("pages");
 
-		Element dlFoldersElement = pagesElement.element("dl-folders");
-
-		List<Element> dlFolderElements = dlFoldersElement.elements("folder");
-
-		for (Element dlFolderElement : dlFolderElements) {
-			DLPortletDataHandlerImpl.importFolder(
-				portletDataContext, dlFolderElement);
-		}
-
-		Element dlFileEntriesElement = pagesElement.element("dl-file-entries");
-
-		List<Element> dlFileEntryElements = dlFileEntriesElement.elements(
-			"file-entry");
-
-		for (Element dlFileEntryElement : dlFileEntryElements) {
-			DLPortletDataHandlerImpl.importFileEntry(
-				portletDataContext, dlFileEntryElement);
-		}
-
-		Element dlFileRanksElement = pagesElement.element("dl-file-ranks");
-
-		List<Element> dlFileRankElements = dlFileRanksElement.elements(
-			"file-rank");
-
-		for (Element dlFileRankElement : dlFileRankElements) {
-			DLPortletDataHandlerImpl.importFileRank(
-				portletDataContext, dlFileRankElement);
-		}
-
-		Element igFoldersElement = pagesElement.element("ig-folders");
-
-		List<Element> igFolderElements = igFoldersElement.elements("folder");
-
-		for (Element igFolderElement : igFolderElements) {
-			IGPortletDataHandlerImpl.importFolder(
-				portletDataContext, igFolderElement);
-		}
-
-		Element igImagesElement = pagesElement.element("ig-images");
-
-		List<Element> igImageElements = igImagesElement.elements("image");
-
-		for (Element igImageElement : igImageElements) {
-			IGPortletDataHandlerImpl.importImage(
-				portletDataContext, igImageElement);
-		}
+		JournalPortletDataHandlerImpl.importReferencedData(
+			portletDataContext, pagesElement);
 
 		for (Element pageElement : pagesElement.elements("page")) {
 			String path = pageElement.attributeValue("path");
