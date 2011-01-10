@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/blogs/init.jsp" %>
 
 <%
+String redirect = currentURL;
+
 long categoryId = ParamUtil.getLong(request, "categoryId");
 
 String categoryName = null;
