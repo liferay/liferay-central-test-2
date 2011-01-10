@@ -91,5 +91,5 @@ private static Sort _getSort(String orderByCol, String orderByType) {
 	return new Sort(sortField, Sort.STRING_TYPE, !orderByType.equalsIgnoreCase("asc"));
 }
 
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.enterprise_admin.user_search_results_index.jspf");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.enterprise_admin.user_search_results_index_jspf");
 %>

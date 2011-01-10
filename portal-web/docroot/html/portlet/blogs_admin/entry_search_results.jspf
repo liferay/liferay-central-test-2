@@ -61,5 +61,5 @@ pageContext.setAttribute("total", total);
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.blogs_admin.entry_search_results.jspf");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.blogs_admin.entry_search_results_jspf");
 %>

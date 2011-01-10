@@ -320,5 +320,5 @@ catch (PluginPackageException ppe) {
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.plugin_installer.browse_repository_jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.plugin_installer.browse_repository_jspf");
 %>
