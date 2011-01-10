@@ -149,7 +149,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			// Action
 
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action.jsp");
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action_jsp");
 
 			// Add result row
 
@@ -191,5 +191,5 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "sea
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.document_library.search.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.document_library.search_jsp");
 %>

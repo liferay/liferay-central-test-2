@@ -173,5 +173,5 @@ boolean createNewPage = true;
 </c:if>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.wiki.search.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.wiki.search_jsp");
 %>

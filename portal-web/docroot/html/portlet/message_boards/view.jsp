@@ -582,5 +582,5 @@ request.setAttribute("view.jsp-portletURL", portletURL);
 </c:choose>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view_jsp");
 %>

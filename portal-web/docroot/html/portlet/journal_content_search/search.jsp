@@ -98,7 +98,7 @@
 
 					// Content
 
-					row.addJSP("/html/portlet/journal_content_search/article_content.jsp");
+					row.addJSP("/html/portlet/journal_content_search/article_content_jsp");
 
 					// Score
 
@@ -148,5 +148,5 @@
 </c:choose>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.journal_content_search.search.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.journal_content_search.search_jsp");
 %>

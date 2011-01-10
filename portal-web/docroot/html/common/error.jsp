@@ -79,5 +79,5 @@ String message = exception.getMessage();
 </center>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.common.error.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.common.error_jsp");
 %>

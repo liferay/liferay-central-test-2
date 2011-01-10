@@ -966,5 +966,5 @@ else {
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portal.render_portlet.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portal.render_portlet_jsp");
 %>

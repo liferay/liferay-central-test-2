@@ -144,7 +144,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			// Action
 
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/bookmarks/entry_action.jsp");
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/bookmarks/entry_action_jsp");
 
 			// Add result row
 
@@ -186,5 +186,5 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "sea
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.bookmarks.search.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.bookmarks.search_jsp");
 %>

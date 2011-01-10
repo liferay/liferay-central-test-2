@@ -102,5 +102,5 @@ catch (Exception e) {
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.xsl_content.view.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.xsl_content.view_jsp");
 %>

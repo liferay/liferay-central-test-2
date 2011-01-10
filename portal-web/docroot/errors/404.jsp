@@ -78,5 +78,5 @@ information on why this is necessary.
 </html>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.errors.404.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.errors.404_jsp");
 %>

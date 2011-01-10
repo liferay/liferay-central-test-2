@@ -92,5 +92,5 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, tabs
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.workflow_tasks.view.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.workflow_tasks.view_jsp");
 %>

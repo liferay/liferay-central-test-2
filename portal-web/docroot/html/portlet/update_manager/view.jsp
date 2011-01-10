@@ -184,7 +184,7 @@ List updatablePackageIds = new ArrayList();
 
 							// Actions
 
-							row.addJSP("/html/portlet/update_manager/plugin_package_action.jsp");
+							row.addJSP("/html/portlet/update_manager/plugin_package_action_jsp");
 
 							// Add result row
 
@@ -260,5 +260,5 @@ List updatablePackageIds = new ArrayList();
 </c:choose>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.update_manager.view.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.update_manager.view_jsp");
 %>

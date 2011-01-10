@@ -222,5 +222,5 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 </liferay-ui:panel-container>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view_category_default.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view_category_default_jsp");
 %>

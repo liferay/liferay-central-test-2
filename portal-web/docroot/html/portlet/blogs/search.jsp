@@ -144,5 +144,5 @@ if (Validator.isNotNull(keywords)) {
 %>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.blogs.search.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.blogs.search_jsp");
 %>
