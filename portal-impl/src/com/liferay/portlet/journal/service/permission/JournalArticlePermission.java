@@ -63,8 +63,9 @@ public class JournalArticlePermission {
 			int status, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, groupId, articleId, status,
-			actionId)) {
+		if (!contains(
+				permissionChecker, groupId, articleId, status, actionId)) {
+
 			throw new PrincipalException();
 		}
 	}
@@ -124,8 +125,8 @@ public class JournalArticlePermission {
 		throws PortalException, SystemException {
 
 		JournalArticle article =
-				JournalArticleLocalServiceUtil.getLatestArticle(groupId,
-					articleId, status);
+			JournalArticleLocalServiceUtil.getLatestArticle(groupId,
+				articleId, status);
 
 		return contains(permissionChecker, article, actionId);
 	}
