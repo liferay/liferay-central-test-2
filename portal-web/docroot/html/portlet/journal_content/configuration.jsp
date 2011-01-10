@@ -184,10 +184,6 @@ type = ParamUtil.getString(request, "type", type);
 
 		row.addText(curArticle.getTitle(), rowHREF);
 
-		// Version
-
-		row.addText(String.valueOf(curArticle.getVersion()), rowHREF);
-
 		// Modified date
 
 		row.addText(dateFormatDate.format(curArticle.getModifiedDate()), rowHREF);
