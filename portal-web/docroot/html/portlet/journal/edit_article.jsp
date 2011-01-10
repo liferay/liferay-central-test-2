@@ -684,7 +684,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				</c:if>
 
 				<c:if test="<%= (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-					<aui:button onClick='<%= renderResponse.getNamespace() + "deleteArticle();" %>' value="<%= deleteButtonLabel %>" />
+					<aui:button disabled="<%= !article.isApproved() %>" onClick='<%= renderResponse.getNamespace() + "deleteArticle();" %>' value="<%= deleteButtonLabel %>" />
 				</c:if>
 
 				<aui:button onClick="<%= redirect %>" type="cancel" />
