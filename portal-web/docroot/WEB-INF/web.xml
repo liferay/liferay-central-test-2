@@ -1280,6 +1280,14 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/ro/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
+		<url-pattern>/ro_RO/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>I18n Servlet</servlet-name>
 		<url-pattern>/ru/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -1568,6 +1576,8 @@
 			<url-pattern>/pt/c/portal/protected</url-pattern>
 			<url-pattern>/pt_BR/c/portal/protected</url-pattern>
 			<url-pattern>/pt_PT/c/portal/protected</url-pattern>
+			<url-pattern>/ro/c/portal/protected</url-pattern>
+			<url-pattern>/ro_RO/c/portal/protected</url-pattern>
 			<url-pattern>/ru/c/portal/protected</url-pattern>
 			<url-pattern>/ru_RU/c/portal/protected</url-pattern>
 			<url-pattern>/sk/c/portal/protected</url-pattern>
