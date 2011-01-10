@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/blogs/init.jsp" %>
 
 <%
-String redirect = (String)request.getAttribute("view_entry_content.jsp-redirect");
-
 SearchContainer searchContainer = (SearchContainer)request.getAttribute("view_entry_content.jsp-searchContainer");
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute("view_entry_content.jsp-entry");
@@ -104,10 +102,14 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 
 						<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 							<td>
+								<portlet:renderURL var="viewURL">
+									<portlet:param name="struts_action" value="/blogs/view" />
+								</portlet:renderURL>
+
 								<portlet:actionURL var="deleteEntryURL">
 									<portlet:param name="struts_action" value="/blogs/edit_entry" />
 									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-									<portlet:param name="redirect" value="<%= redirect %>" />
+									<portlet:param name="redirect" value="<%= viewURL %>" />
 									<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 								</portlet:actionURL>
 

@@ -97,8 +97,6 @@ for (Object result : results) {
 		continue;
 	}
 
-	request.setAttribute("view_entry_content.jsp-redirect", redirect);
-
 	request.setAttribute("view_entry_content.jsp-searchContainer", searchContainer);
 
 	request.setAttribute("view_entry_content.jsp-entry", entry);
