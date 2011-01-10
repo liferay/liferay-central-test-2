@@ -45,52 +45,6 @@ public class Time {
 
 	public static final String SHORT_TIMESTAMP_FORMAT = "yyyyMMddkkmm";
 
-	public static String getApproxDescription(long milliseconds) {
-		String s = StringPool.BLANK;
-
-		int x = 0;
-
-		if (milliseconds <= 0) {
-			s = "0 Seconds";
-		}
-		else if (milliseconds < MINUTE) {
-			x = (int)(milliseconds / SECOND);
-
-			s = x + " Second";
-		}
-		else if (milliseconds < HOUR) {
-			x = (int)(milliseconds / MINUTE);
-
-			s = x + " Minute";
-		}
-		else if (milliseconds < DAY) {
-			x = (int)(milliseconds / HOUR);
-
-			s = x + " Hour";
-		}
-		else if (milliseconds < MONTH) {
-			x = (int)(milliseconds / DAY);
-
-			s = x + " Day";
-		}
-		else if (milliseconds < YEAR) {
-			x = (int)(milliseconds / MONTH);
-
-			s = x + " Month";
-		}
-		else if (milliseconds >= YEAR) {
-			x = (int)(milliseconds / YEAR);
-
-			s = x + " Year";
-		}
-
-		if (x > 1) {
-			s += "s";
-		}
-
-		return s;
-	}
-
 	public static Date getDate(Calendar cal) {
 		Calendar adjustedCal = CalendarFactoryUtil.getCalendar();
 
@@ -120,34 +74,77 @@ public class Time {
 	}
 
 	public static String getDescription(long milliseconds) {
+		return getDescription(milliseconds, false);
+	}
+
+	public static String getDescription(
+		long milliseconds, boolean approximate) {
+
 		String s = StringPool.BLANK;
 
 		int x = 0;
 
-		if (milliseconds % WEEK == 0) {
-			x = (int)(milliseconds / WEEK);
+		if (approximate) {
+			if (milliseconds <= 0) {
+				s = "0 Seconds";
+			}
+			else if (milliseconds < MINUTE) {
+				x = (int)(milliseconds / SECOND);
 
-			s = x + " Week";
+				s = x + " Second";
+			}
+			else if (milliseconds < HOUR) {
+				x = (int)(milliseconds / MINUTE);
+
+				s = x + " Minute";
+			}
+			else if (milliseconds < DAY) {
+				x = (int)(milliseconds / HOUR);
+
+				s = x + " Hour";
+			}
+			else if (milliseconds < MONTH) {
+				x = (int)(milliseconds / DAY);
+
+				s = x + " Day";
+			}
+			else if (milliseconds < YEAR) {
+				x = (int)(milliseconds / MONTH);
+
+				s = x + " Month";
+			}
+			else if (milliseconds >= YEAR) {
+				x = (int)(milliseconds / YEAR);
+
+				s = x + " Year";
+			}
 		}
-		else if (milliseconds % DAY == 0) {
-			x = (int)(milliseconds / DAY);
+		else {
+			if (milliseconds % WEEK == 0) {
+				x = (int)(milliseconds / WEEK);
 
-			s = x + " Day";
-		}
-		else if (milliseconds % HOUR == 0) {
-			x = (int)(milliseconds / HOUR);
+				s = x + " Week";
+			}
+			else if (milliseconds % DAY == 0) {
+				x = (int)(milliseconds / DAY);
 
-			s = x + " Hour";
-		}
-		else if (milliseconds % MINUTE == 0) {
-			x = (int)(milliseconds / MINUTE);
+				s = x + " Day";
+			}
+			else if (milliseconds % HOUR == 0) {
+				x = (int)(milliseconds / HOUR);
 
-			s = x + " Minute";
-		}
-		else if (milliseconds % SECOND == 0) {
-			x = (int)(milliseconds / SECOND);
+				s = x + " Hour";
+			}
+			else if (milliseconds % MINUTE == 0) {
+				x = (int)(milliseconds / MINUTE);
 
-			s = x + " Second";
+				s = x + " Minute";
+			}
+			else if (milliseconds % SECOND == 0) {
+				x = (int)(milliseconds / SECOND);
+
+				s = x + " Second";
+			}
 		}
 
 		if (x > 1) {

@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -127,69 +126,6 @@ public class LanguageImpl implements Language {
 	}
 
 	public String format(
-		PageContext pageContext, String pattern, Object argument) {
-
-		return format(pageContext, pattern, new Object[] {argument}, true);
-	}
-
-	public String format(
-		PageContext pageContext, String pattern, Object argument,
-		boolean translateArguments) {
-
-		return format(
-			pageContext, pattern, new Object[] {argument}, translateArguments);
-	}
-
-	public String format(
-		PageContext pageContext, String pattern, Object[] arguments) {
-
-		return format(pageContext, pattern, arguments, true);
-	}
-
-	public String format(
-		PageContext pageContext, String pattern, Object[] arguments,
-		boolean translateArguments) {
-
-		if (PropsValues.TRANSLATIONS_DISABLED) {
-			return pattern;
-		}
-
-		String value = null;
-
-		try {
-			pattern = get(pageContext, pattern);
-
-			if (arguments != null) {
-				pattern = _escapePattern(pattern);
-
-				Object[] formattedArguments = new Object[arguments.length];
-
-				for (int i = 0; i < arguments.length; i++) {
-					if (translateArguments) {
-						formattedArguments[i] =
-							get(pageContext, arguments[i].toString());
-					}
-					else {
-						formattedArguments[i] = arguments[i];
-					}
-				}
-
-				value = MessageFormat.format(pattern, formattedArguments);
-			}
-			else {
-				value = pattern;
-			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
-		}
-
-		return value;
-	}
-
-	public String format(
 		PageContext pageContext, String pattern, LanguageWrapper argument) {
 
 		return format(
@@ -241,6 +177,69 @@ public class LanguageImpl implements Language {
 							arguments[i].getBefore() +
 							arguments[i].getText() +
 							arguments[i].getAfter();
+					}
+				}
+
+				value = MessageFormat.format(pattern, formattedArguments);
+			}
+			else {
+				value = pattern;
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return value;
+	}
+
+	public String format(
+		PageContext pageContext, String pattern, Object argument) {
+
+		return format(pageContext, pattern, new Object[] {argument}, true);
+	}
+
+	public String format(
+		PageContext pageContext, String pattern, Object argument,
+		boolean translateArguments) {
+
+		return format(
+			pageContext, pattern, new Object[] {argument}, translateArguments);
+	}
+
+	public String format(
+		PageContext pageContext, String pattern, Object[] arguments) {
+
+		return format(pageContext, pattern, arguments, true);
+	}
+
+	public String format(
+		PageContext pageContext, String pattern, Object[] arguments,
+		boolean translateArguments) {
+
+		if (PropsValues.TRANSLATIONS_DISABLED) {
+			return pattern;
+		}
+
+		String value = null;
+
+		try {
+			pattern = get(pageContext, pattern);
+
+			if (arguments != null) {
+				pattern = _escapePattern(pattern);
+
+				Object[] formattedArguments = new Object[arguments.length];
+
+				for (int i = 0; i < arguments.length; i++) {
+					if (translateArguments) {
+						formattedArguments[i] =
+							get(pageContext, arguments[i].toString());
+					}
+					else {
+						formattedArguments[i] = arguments[i];
 					}
 				}
 
@@ -326,10 +325,6 @@ public class LanguageImpl implements Language {
 		return value;
 	}
 
-	public void init() {
-		_instances.clear();
-	}
-
 	public String get(Locale locale, String key) {
 		return get(locale, key, key);
 	}
@@ -394,13 +389,6 @@ public class LanguageImpl implements Language {
 		return _getInstance()._getCharset(locale);
 	}
 
-	public String getLanguageId(PortletRequest portletRequest) {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		return getLanguageId(request);
-	}
-
 	public String getLanguageId(HttpServletRequest request) {
 		String languageId = ParamUtil.getString(request, "languageId");
 
@@ -421,33 +409,40 @@ public class LanguageImpl implements Language {
 		return LocaleUtil.toLanguageId(locale);
 	}
 
+	public String getLanguageId(PortletRequest portletRequest) {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		return getLanguageId(request);
+	}
+
 	public Locale getLocale(String languageCode) {
 		return _getInstance()._getLocale(languageCode);
 	}
 
-	public String getApproxTimeDescription(
-		PageContext pageContext, Long milliseconds) {
-
-		return getApproxTimeDescription(pageContext, milliseconds.longValue());
-	}
-
-	public String getApproxTimeDescription(
+	public String getTimeDescription(
 		PageContext pageContext, long milliseconds) {
 
-		String desc = Time.getApproxDescription(milliseconds);
+		return getTimeDescription(pageContext, milliseconds, false);
+	}
+
+	public String getTimeDescription(
+		PageContext pageContext, long milliseconds, boolean approximate) {
+
+		String description = Time.getDescription(milliseconds);
 
 		String value = null;
 
 		try {
-			int pos = desc.indexOf(CharPool.SPACE);
+			int pos = description.indexOf(CharPool.SPACE);
 
-			int x = GetterUtil.getInteger(desc.substring(0, pos));
+			String x = description.substring(0, pos);
 
-			value =
-				x + " " +
+			value = x.concat(StringPool.SPACE).concat(
 				get(
 					pageContext,
-					desc.substring(pos + 1, desc.length()).toLowerCase());
+					description.substring(
+						pos + 1, description.length()).toLowerCase()));
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -464,31 +459,8 @@ public class LanguageImpl implements Language {
 		return getTimeDescription(pageContext, milliseconds.longValue());
 	}
 
-	public String getTimeDescription(
-		PageContext pageContext, long milliseconds) {
-
-		String desc = Time.getDescription(milliseconds);
-
-		String value = null;
-
-		try {
-			int pos = desc.indexOf(CharPool.SPACE);
-
-			int x = GetterUtil.getInteger(desc.substring(0, pos));
-
-			value =
-				x + " " +
-				get(
-					pageContext,
-					desc.substring(pos + 1, desc.length()).toLowerCase());
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
-		}
-
-		return value;
+	public void init() {
+		_instances.clear();
 	}
 
 	public boolean isAvailableLocale(Locale locale) {

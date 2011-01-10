@@ -98,12 +98,6 @@ public interface Language {
 		PortletConfig portletConfig, Locale locale, String key,
 		String defaultValue);
 
-	public String getApproxTimeDescription(
-		PageContext pageContext, long milliseconds);
-
-	public String getApproxTimeDescription(
-		PageContext pageContext, Long milliseconds);
-
 	public Locale[] getAvailableLocales();
 
 	public String getCharset(Locale locale);
@@ -118,6 +112,9 @@ public interface Language {
 
 	public String getTimeDescription(
 		PageContext pageContext, long milliseconds);
+
+	public String getTimeDescription(
+		PageContext pageContext, long milliseconds, boolean approximate);
 
 	public String getTimeDescription(
 		PageContext pageContext, Long milliseconds);
