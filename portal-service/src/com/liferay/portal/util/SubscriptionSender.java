@@ -155,6 +155,10 @@ public class SubscriptionSender implements Serializable {
 		MessageBusUtil.sendMessage(DestinationNames.SUBSCRIPTION_SENDER, this);
 	}
 
+	public Object getContextAttribute(String key) {
+		return _context.get(key);
+	}
+
 	public void initialize() throws PortalException, SystemException {
 		if (_initialized) {
 			return;
