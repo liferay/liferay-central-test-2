@@ -16,6 +16,7 @@ package com.liferay.portal.tools.deploy;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -520,13 +521,12 @@ public class PortletDeployer extends BaseDeployer {
 	}
 
 	public void updateDeployDirectory(File srcFile) throws Exception {
-		try {
-			if (!PrefsPropsUtil.getBoolean(
-					PropsKeys.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
-					PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
+		boolean customPortletXML = false;
 
-				return;
-			}
+		try {
+			customPortletXML = PrefsPropsUtil.getBoolean(
+				PropsKeys.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
+				PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML);
 		}
 		catch (Exception e) {
 
@@ -534,9 +534,15 @@ public class PortletDeployer extends BaseDeployer {
 			// classical way where the WAR file is actually massaged and
 			// packaged.
 
-			if (!PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML) {
-				return;
-			}
+			customPortletXML = PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML;
+		}
+
+		customPortletXML = GetterUtil.getBoolean(
+			System.getProperty("deployer.custom.portlet.xml"),
+			customPortletXML);
+
+		if (!customPortletXML) {
+			return;
 		}
 
 		File portletXML = new File(
