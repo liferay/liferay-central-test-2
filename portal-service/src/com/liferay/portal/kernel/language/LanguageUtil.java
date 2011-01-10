@@ -173,6 +173,20 @@ public class LanguageUtil {
 		return getLanguage().get(portletConfig, locale, key, defaultValue);
 	}
 
+	public static String getApproxTimeDescription(
+		PageContext pageContext, long milliseconds) {
+
+		return getLanguage().getApproxTimeDescription(
+			pageContext, milliseconds);
+	}
+
+	public static String getApproxDescription(
+		PageContext pageContext, Long milliseconds) {
+
+		return getLanguage().getApproxTimeDescription(
+			pageContext, milliseconds);
+	}
+
 	public static Locale[] getAvailableLocales() {
 		return getLanguage().getAvailableLocales();
 	}

@@ -98,6 +98,12 @@ public interface Language {
 		PortletConfig portletConfig, Locale locale, String key,
 		String defaultValue);
 
+	public String getApproxTimeDescription(
+		PageContext pageContext, long milliseconds);
+
+	public String getApproxTimeDescription(
+		PageContext pageContext, Long milliseconds);
+
 	public Locale[] getAvailableLocales();
 
 	public String getCharset(Locale locale);

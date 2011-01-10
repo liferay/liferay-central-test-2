@@ -425,6 +425,39 @@ public class LanguageImpl implements Language {
 		return _getInstance()._getLocale(languageCode);
 	}
 
+	public String getApproxTimeDescription(
+		PageContext pageContext, Long milliseconds) {
+
+		return getApproxTimeDescription(pageContext, milliseconds.longValue());
+	}
+
+	public String getApproxTimeDescription(
+		PageContext pageContext, long milliseconds) {
+
+		String desc = Time.getApproxDescription(milliseconds);
+
+		String value = null;
+
+		try {
+			int pos = desc.indexOf(CharPool.SPACE);
+
+			int x = GetterUtil.getInteger(desc.substring(0, pos));
+
+			value =
+				x + " " +
+				get(
+					pageContext,
+					desc.substring(pos + 1, desc.length()).toLowerCase());
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return value;
+	}
+
 	public String getTimeDescription(
 		PageContext pageContext, Long milliseconds) {
 

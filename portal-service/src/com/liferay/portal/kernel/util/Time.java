@@ -35,11 +35,61 @@ public class Time {
 
 	public static final long WEEK = DAY * 7;
 
+	public static final long MONTH = DAY * 30;
+
+	public static final long YEAR = DAY * 365;
+
 	public static final String RFC822_FORMAT = "EEE, dd MMM yyyy HH:mm:ss Z";
 
 	public static final String TIMESTAMP_FORMAT = "yyyyMMddkkmmssSSS";
 
 	public static final String SHORT_TIMESTAMP_FORMAT = "yyyyMMddkkmm";
+
+	public static String getApproxDescription(long milliseconds) {
+		String s = StringPool.BLANK;
+
+		int x = 0;
+
+		if (milliseconds <= 0) {
+			s = "0 Seconds";
+		}
+		else if (milliseconds < MINUTE) {
+			x = (int)(milliseconds / SECOND);
+
+			s = x + " Second";
+		}
+		else if (milliseconds < HOUR) {
+			x = (int)(milliseconds / MINUTE);
+
+			s = x + " Minute";
+		}
+		else if (milliseconds < DAY) {
+			x = (int)(milliseconds / HOUR);
+
+			s = x + " Hour";
+		}
+		else if (milliseconds < MONTH) {
+			x = (int)(milliseconds / DAY);
+
+			s = x + " Day";
+		}
+		else if (milliseconds < YEAR) {
+			x = (int)(milliseconds / MONTH);
+
+			s = x + " Month";
+		}
+		else if (milliseconds >= YEAR) {
+			x = (int)(milliseconds / YEAR);
+
+			s = x + " Year";
+		}
+
+		if (x > 1) {
+			s += "s";
+		}
+
+		return s;
+	}
 
 	public static Date getDate(Calendar cal) {
 		Calendar adjustedCal = CalendarFactoryUtil.getCalendar();
