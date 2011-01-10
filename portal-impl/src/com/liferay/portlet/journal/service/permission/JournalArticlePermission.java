@@ -58,6 +58,17 @@ public class JournalArticlePermission {
 		}
 	}
 
+	public static void check(
+			PermissionChecker permissionChecker, long groupId, String articleId,
+			int status, String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, groupId, articleId, status,
+			actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
 	public static boolean contains(
 		PermissionChecker permissionChecker, JournalArticle article,
 		String actionId) {
@@ -103,6 +114,18 @@ public class JournalArticlePermission {
 
 		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
 			groupId, articleId);
+
+		return contains(permissionChecker, article, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, String articleId,
+			int status, String actionId)
+		throws PortalException, SystemException {
+
+		JournalArticle article =
+				JournalArticleLocalServiceUtil.getLatestArticle(groupId,
+					articleId, status);
 
 		return contains(permissionChecker, article, actionId);
 	}

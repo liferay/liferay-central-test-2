@@ -216,7 +216,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
-			getPermissionChecker(), groupId, articleId, ActionKeys.VIEW);
+			getPermissionChecker(), groupId, articleId, status,
+			ActionKeys.VIEW);
 
 		return journalArticleLocalService.getLatestArticle(
 			groupId, articleId, status);
