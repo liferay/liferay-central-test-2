@@ -54,7 +54,7 @@ public class ValidatorTag extends BaseBodyTagSupport implements BodyTag {
 			this, InputTag.class);
 
 		ValidatorTag validatorTag = new ValidatorTag(
-				_name, _errorMessage, _body);
+			_name, _errorMessage, _body);
 
 		inputTag.addValidatorTag(_name, validatorTag);
 
