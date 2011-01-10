@@ -76,6 +76,10 @@ public interface HttpHeaders {
 	public static final String CACHE_CONTROL_DEFAULT_VALUE =
 		"max-age=315360000, public";
 
+	public static final String CACHE_CONTROL_NO_CACHE_VALUE = "no-cache";
+
+	public static final String CACHE_CONTROL_NO_CACHE_NO_STORE_VALUE = "no-cache, no-store";
+
 	public static final String CACHE_CONTROL_PUBLIC_VALUE = "public";
 
 	/**
