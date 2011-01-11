@@ -28,7 +28,7 @@ AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-asse
 String title = (String)request.getAttribute("view.jsp-title");
 
 if (Validator.isNull(title)) {
-	title = assetRenderer.getTitle();
+	title = assetRenderer.getTitle(locale);
 }
 
 boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();

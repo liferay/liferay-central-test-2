@@ -132,7 +132,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					<liferay-ui:flags
 						className="<%= assetEntry.getClassName() %>"
 						classPK="<%= assetEntry.getClassPK() %>"
-						contentTitle="<%= assetRenderer.getTitle() %>"
+						contentTitle="<%= assetRenderer.getTitle(locale) %>"
 						reportedUserId="<%= assetRenderer.getUserId() %>"
 					/>
 				</div>
@@ -167,7 +167,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 					formName='<%= "fm" + assetEntry.getClassPK() %>'
 					ratingsEnabled="<%= enableCommentRatings %>"
 					redirect="<%= currentURL %>"
-					subject="<%= assetRenderer.getTitle() %>"
+					subject="<%= assetRenderer.getTitle(locale) %>"
 					userId="<%= assetRenderer.getUserId() %>"
 				/>
 			</c:if>

@@ -32,6 +32,7 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
+import java.util.Locale;
 
 /**
  * @author Julio Camarero
@@ -51,11 +52,11 @@ public class IGImageAssetRenderer extends BaseAssetRenderer {
 		return _image.getGroupId();
 	}
 
-	public String getSummary() {
+	public String getSummary(Locale locale) {
 		return HtmlUtil.stripHtml(_image.getDescription());
 	}
 
-	public String getTitle() {
+	public String getTitle(Locale locale) {
 		return _image.getName();
 	}
 

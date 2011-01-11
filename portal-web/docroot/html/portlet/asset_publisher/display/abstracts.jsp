@@ -32,7 +32,7 @@ request.setAttribute("view.jsp-showIconLabel", true);
 String title = (String)request.getAttribute("view.jsp-title");
 
 if (Validator.isNull(title)) {
-	title = assetRenderer.getTitle();
+	title = assetRenderer.getTitle(locale);
 }
 
 PortletURL viewFullContentURL = renderResponse.createRenderURL();
@@ -49,7 +49,7 @@ if (Validator.isNotNull(assetRenderer.getUrlTitle())) {
 	viewFullContentURL.setParameter("urlTitle", assetRenderer.getUrlTitle());
 }
 
-String summary = StringUtil.shorten(assetRenderer.getSummary(), abstractLength);
+String summary = StringUtil.shorten(assetRenderer.getSummary(locale), abstractLength);
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext((LiferayPortletRequest)renderRequest, (LiferayPortletResponse)renderResponse, viewFullContentURL.toString()) : viewFullContentURL.toString();
 String viewURLMessage = viewInContext ? assetRenderer.getViewInContextMessage() : "read-more-x-about-x";
 
@@ -93,7 +93,7 @@ viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
 
 			<c:if test="<%= Validator.isNotNull(viewURL) %>">
 				<div class="asset-more">
-					<a href="<%= viewURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", HtmlUtil.escape(assetRenderer.getTitle())} %>' key="<%= viewURLMessage %>" /> &raquo; </a>
+					<a href="<%= viewURL %>"><liferay-ui:message arguments='<%= new Object[] {"aui-helper-hidden-accessible", HtmlUtil.escape(assetRenderer.getTitle(locale))} %>' key="<%= viewURLMessage %>" /> &raquo; </a>
 				</div>
 			</c:if>
 		</div>

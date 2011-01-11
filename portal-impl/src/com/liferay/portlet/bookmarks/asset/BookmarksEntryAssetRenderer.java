@@ -29,6 +29,7 @@ import com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import java.util.Locale;
 
 /**
  * @author Julio Camarero
@@ -48,11 +49,11 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getGroupId();
 	}
 
-	public String getSummary() {
+	public String getSummary(Locale locale) {
 		return HtmlUtil.stripHtml(_entry.getDescription());
 	}
 
-	public String getTitle() {
+	public String getTitle(Locale locale) {
 		return _entry.getName();
 	}
 

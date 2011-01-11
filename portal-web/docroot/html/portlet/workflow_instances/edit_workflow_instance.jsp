@@ -119,7 +119,7 @@ if (assetEntry != null) {
 					</div>
 
 					<h3 class="task-content-title">
-						<img src="<%= workflowHandler.getIconPath((LiferayPortletRequest)renderRequest) %>" alt="" /> <%= workflowHandler.getTitle(classPK) %>
+						<img src="<%= workflowHandler.getIconPath((LiferayPortletRequest)renderRequest) %>" alt="" /> <%= workflowHandler.getTitle(classPK, locale) %>
 					</h3>
 
 					<%
@@ -131,7 +131,7 @@ if (assetEntry != null) {
 
 					<c:choose>
 						<c:when test="<%= path == null %>">
-							<%= workflowHandler.getSummary(classPK) %>
+							<%= workflowHandler.getSummary(classPK, locale) %>
 						</c:when>
 						<c:otherwise>
 							<liferay-util:include page="<%= path %>" portletId="<%= assetRendererFactory.getPortletId() %>" />

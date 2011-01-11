@@ -31,6 +31,7 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import java.util.Locale;
 
 /**
  * @author Julio Camarero
@@ -65,7 +66,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		return _page.getGroupId();
 	}
 
-	public String getSummary() {
+	public String getSummary(Locale locale) {
 		String content = _page.getContent();
 
 		if (_page.getFormat().equals("html")) {
@@ -75,7 +76,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		return content;
 	}
 
-	public String getTitle() {
+	public String getTitle(Locale locale) {
 		return _page.getTitle();
 	}
 

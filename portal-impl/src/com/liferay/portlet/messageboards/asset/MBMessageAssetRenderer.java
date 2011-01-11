@@ -32,6 +32,7 @@ import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import java.util.Locale;
 
 /**
  * @author Julio Camarero
@@ -51,11 +52,11 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		return _message.getGroupId();
 	}
 
-	public String getSummary() {
+	public String getSummary(Locale locale) {
 		return HtmlUtil.stripHtml(_message.getBody());
 	}
 
-	public String getTitle() {
+	public String getTitle(Locale locale) {
 		return _message.getSubject();
 	}
 

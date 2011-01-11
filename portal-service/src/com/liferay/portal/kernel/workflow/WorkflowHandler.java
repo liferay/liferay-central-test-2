@@ -47,9 +47,9 @@ public interface WorkflowHandler {
 
 	public String getIconPath(LiferayPortletRequest liferayPortletRequest);
 
-	public String getSummary(long classPK);
+	public String getSummary(long classPK, Locale locale);
 
-	public String getTitle(long classPK);
+	public String getTitle(long classPK, Locale locale);
 
 	public String getType(Locale locale);
 

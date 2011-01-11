@@ -29,6 +29,7 @@ import com.liferay.portlet.calendar.service.permission.CalEventPermission;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import java.util.Locale;
 
 /**
  * @author Juan Fernández
@@ -56,11 +57,11 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return _event.getGroupId();
 	}
 
-	public String getSummary() {
+	public String getSummary(Locale locale) {
 		return _event.getTitle();
 	}
 
-	public String getTitle() {
+	public String getTitle(Locale locale) {
 		return _event.getTitle();
 	}
 

@@ -23,10 +23,10 @@ AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-asse
 String title = (String)request.getAttribute("view.jsp-title");
 
 if (Validator.isNull(title)) {
-	title = assetRenderer.getTitle();
+	title = assetRenderer.getTitle(locale);
 }
 
-String summary = StringUtil.shorten(assetRenderer.getSummary(), abstractLength);
+String summary = StringUtil.shorten(assetRenderer.getSummary(locale), abstractLength);
 
 PortalUtil.setPageSubtitle(title, request);
 PortalUtil.setPageDescription(summary, request);

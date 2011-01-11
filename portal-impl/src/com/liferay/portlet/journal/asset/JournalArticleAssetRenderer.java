@@ -35,6 +35,7 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import java.util.Locale;
 
 /**
  * @author Julio Camarero
@@ -75,11 +76,11 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return _article.getGroupId();
 	}
 
-	public String getSummary() {
+	public String getSummary(Locale locale) {
 		return HtmlUtil.stripHtml(_article.getContent());
 	}
 
-	public String getTitle() {
+	public String getTitle(Locale locale) {
 			return _article.getTitle();
 	}
 

@@ -29,6 +29,7 @@ import com.liferay.portlet.asset.model.AssetRendererFactory;
 
 import java.io.Serializable;
 
+import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.PortletURL;
@@ -71,12 +72,12 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		return getIconPath(themeDisplay);
 	}
 
-	public String getSummary(long classPK) {
+	public String getSummary(long classPK, Locale locale) {
 		try {
 			AssetRenderer assetRenderer = getAssetRenderer(classPK);
 
 			if (assetRenderer != null) {
-				return assetRenderer.getSummary();
+				return assetRenderer.getSummary(locale);
 			}
 		}
 		catch (Exception e) {
@@ -88,12 +89,12 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		return null;
 	}
 
-	public String getTitle(long classPK) {
+	public String getTitle(long classPK, Locale locale) {
 		try {
 			AssetRenderer assetRenderer = getAssetRenderer(classPK);
 
 			if (assetRenderer != null) {
-				return assetRenderer.getTitle();
+				return assetRenderer.getTitle(locale);
 			}
 		}
 		catch (Exception e) {

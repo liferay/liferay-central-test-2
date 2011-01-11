@@ -34,6 +34,7 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import java.util.Locale;
 
 /**
  * @author Julio Camarero
@@ -73,11 +74,11 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return _fileEntry.getRepositoryId();
 	}
 
-	public String getSummary() {
+	public String getSummary(Locale locale) {
 		return HtmlUtil.stripHtml(_fileEntry.getDescription());
 	}
 
-	public String getTitle() {
+	public String getTitle(Locale locale) {
 		return _fileEntry.getTitle();
 	}
 

@@ -31,6 +31,7 @@ import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import java.util.Locale;
 
 /**
  * @author Jorge Ferrer
@@ -59,11 +60,11 @@ public class BlogsEntryAssetRenderer extends BaseAssetRenderer {
 		return _entry.getGroupId();
 	}
 
-	public String getSummary() {
+	public String getSummary(Locale locale) {
 		return HtmlUtil.stripHtml(_entry.getContent());
 	}
 
-	public String getTitle() {
+	public String getTitle(Locale locale) {
 		return _entry.getTitle();
 	}
 
