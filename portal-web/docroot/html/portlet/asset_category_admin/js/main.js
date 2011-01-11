@@ -98,6 +98,9 @@ AUI().add(
 									instance._feedVocabularySelect(instance._vocabularies, instance._selectedVocabularyId);
 									instance._showToolBarCategorySection();
 								}
+								else {
+									instance._categoryForm.reset();
+								}
 							}
 						);
 
@@ -132,6 +135,9 @@ AUI().add(
 							function(event) {
 								if (event.newVal) {
 									instance._showToolBarVocabularySection();
+								}
+								else {
+									instance._vocabularyForm.reset();									
 								}
 							}
 						);
@@ -1149,8 +1155,6 @@ AUI().add(
 
 						if(vocabularyId) {
 							var categoryForm = instance._categoryForm;
-
-							var portletId = instance.portletId;
 
 							var vocabularyElId = ["#", instance._prefixedPortletId, 'vocabularyId'].join('');
 							var parentCategoryElId = ["#", instance._prefixedPortletId, 'parentCategoryId'].join('');
