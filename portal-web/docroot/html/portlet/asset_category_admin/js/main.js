@@ -1612,7 +1612,7 @@ AUI().add(
 					_showVocabularyPanelEdit: function(){
 						var instance = this;
 
-						var forceStart = true;
+						var forceStart = false;
 						var vocabularyPanelEdit = instance._vocabularyPanelEdit;
 
 						if (!vocabularyPanelEdit){
