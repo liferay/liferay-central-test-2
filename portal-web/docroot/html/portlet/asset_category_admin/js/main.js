@@ -283,9 +283,7 @@ AUI().add(
 						var vocabularyContent = instance._vocabularyContent;
 						var vocabularyContentXY = vocabularyContent.getXY();
 
-						panel.move(
-							vocabularyContentXY[0] + vocabularyContent.get('docScrollX'),
-							vocabularyContentXY[1] + vocabularyContent.get('docScrollY'));
+						panel.set("xy", vocabularyContentXY);
 					},
 
 					_alternateRows: function() {
@@ -1318,9 +1316,9 @@ AUI().add(
 						vocabularyPanelPermissionsChange.set('bodyContent',
 							['<iframe frameborder="no" src="', url, '" width="98%" height="98%"></iframe>'].join(''));
 
-						instance._alignPanel(vocabularyPanelPermissionsChange);
-
 						vocabularyPanelPermissionsChange.show();
+
+						instance._alignPanel(vocabularyPanelPermissionsChange);
 
 						/**
 						 * workaroung - without this code, permissions panel shows below vocabulary edit panel
@@ -1576,16 +1574,16 @@ AUI().add(
 								}
 							);
 								
-							instance._alignPanel(categoryPanelAdd);
-
 							categoryPanelAdd.show();
+
+							instance._alignPanel(categoryPanelAdd);
 						}
 						else {
-							instance._alignPanel(categoryPanelAdd);
-
 							instance._feedVocabularySelect(instance._vocabularies, instance._selectedVocabularyId);
 
 							categoryPanelAdd.show();
+
+							instance._alignPanel(categoryPanelAdd);
 
 							instance._focusCategoryPanelAdd();
 						}						
@@ -1649,14 +1647,14 @@ AUI().add(
 								}
 							);
 
-							instance._alignPanel(vocabularyPanelAdd);
-
 							vocabularyPanelAdd.show();
+
+							instance._alignPanel(vocabularyPanelAdd);
 						}
 						else {
-							instance._alignPanel(vocabularyPanelAdd);
-
 							vocabularyPanelAdd.show();
+
+							instance._alignPanel(vocabularyPanelAdd);
 
 							instance._focusVocabularyPanelAdd();
 						}
@@ -1690,9 +1688,9 @@ AUI().add(
 							vocabularyPanelEdit.io.start();
 						}
 
-						instance._alignPanel(vocabularyPanelEdit);
-
 						vocabularyPanelEdit.show();
+
+						instance._alignPanel(vocabularyPanelEdit);
 					},
 
 					_unselectAllVocabularies: function() {
