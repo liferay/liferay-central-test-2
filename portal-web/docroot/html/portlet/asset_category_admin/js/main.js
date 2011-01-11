@@ -88,7 +88,6 @@ AUI().add(
 						instance._container = A.one('.vocabulary-container');
 						instance._vocabularyContent = A.one('.vocabulary-content');
 						instance._categoryViewContainer = A.one('.category-view');
-						instance._categoryViewDataContainer = A.one('.category-view-data');
 
 						instance._portletMessageContainer = Node.create('<div class="aui-helper-hidden lfr-message-response" id="vocabulary-messages" />');
 						instance._categoryMessageContainer = Node.create('<div class="aui-helper-hidden lfr-message-response" id="vocabulary-category-messages" />');
@@ -324,10 +323,9 @@ AUI().add(
 												var nodeId = event.target.get('id');
 												var categoryId = nodeId.replace('categoryNode', '');
 												var viewContainer = instance._categoryViewContainer;
-												var viewDataContainer = instance._categoryViewDataContainer;
 
 												instance._selectCategory(categoryId);
-												instance._showLoading(viewDataContainer);
+												instance._showLoading(viewContainer);
 												instance._vocabularyContent.addClass(CSS_VOCABULARY_EDIT_CATEGORY);
 												instance._showSection(viewContainer);
 
@@ -1436,10 +1434,12 @@ AUI().add(
 
 						instance._alignPanel(panelPermissionsChange);
 
-						/**
-						 * workaroung - without this code, permissions panel shows below edit panel
-						 */
-						panelPermissionsChange.set('zIndex', parseInt(instance._panelEdit.get('zIndex'), 10) + 2 );
+						if (instance._panelEdit){
+							/**
+							 * workaroung - without this code, permissions panel shows below edit panel
+							 */
+							panelPermissionsChange.set('zIndex', parseInt(instance._panelEdit.get('zIndex'), 10) + 2 );
+						}
 					},
 
 					/**
@@ -1656,6 +1656,11 @@ AUI().add(
 
 							instance._onCategoryDelete();
 						}
+						else if(targetId === 'category-change-permissions'){
+							event.halt();
+
+							instance._onCategoryChangePermissions();
+						}
 					},
 
 					/**
@@ -1683,7 +1688,7 @@ AUI().add(
 					_onCategoryViewSuccess: function(response){
 						var instance = this;
 
-						instance._categoryViewDataContainer.html(response);
+						instance._categoryViewContainer.html(response);
 					},
 
 					/**
@@ -2242,7 +2247,7 @@ AUI().add(
 							instance._currentPanelEditInitHandler.detach();
 						}
 
-						categoryPanelEdit.set('title', Liferay.Language.get('edit-category'));
+						categoryPanelEdit.set('title', Liferay.Language.get('category-details'));
 
 						var categoryEditURL = instance._createURL(CATEGORY, ACTION_EDIT);
 

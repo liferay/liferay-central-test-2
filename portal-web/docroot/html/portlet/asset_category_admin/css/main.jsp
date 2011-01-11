@@ -264,10 +264,6 @@
 	cursor: pointer;
 }
 
-.portlet-asset-category-admin .category-view-toolbar {
-	padding-left: 0.5em;
-}
-
 .portlet-asset-category-admin .vocabulary-property-row {
 	white-space: nowrap;
 }
@@ -341,6 +337,26 @@
 	background-position: 5px 50%;
 	padding-left: 25px;
 	width: 250px;
+}
+
+.portlet-asset-category-admin .view-category {
+	margin: 1em;
+}
+
+.portlet-asset-category-admin .view-category .category-description {
+	color: #444;
+	font-style: italic;
+	margin: 0.5em auto 2em;
+}
+
+.portlet-asset-category-admin .view-category label {
+	display: block;
+	font-weight: bold;
+}
+
+.portlet-asset-category-admin .view-category .category-field {
+	clear: left;
+	margin: 1em auto;
 }
 
 .lfr-panel-container {

@@ -77,14 +77,6 @@
 				</div>
 
 				<div class="category-view">
-					<div class="category-view-toolbar">
-						<span class="category-view-actions">
-							<button id="category-edit-button"><liferay-ui:message key="edit" /></button>
-							<button id="category-delete-button"><liferay-ui:message key="delete" /></button>
-						</span>
-					</div>
-					<div class="category-view-data">
-					</div>
 				</div>
 			</div>
 		</div>

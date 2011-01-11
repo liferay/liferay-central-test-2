@@ -224,6 +224,8 @@
 
 		<action path="/asset_category_admin/view" forward="portlet.asset_category_admin.view" />
 
+		<action path="/asset_category_admin/view_category" forward="portlet.asset_category_admin.view_category" />
+
 		<!-- Asset Categories Navigation -->
 
 		<action path="/asset_categories_navigation/view" forward="portlet.asset_categories_navigation.view" />
