@@ -61,10 +61,10 @@ public class FilterChainImpl implements FilterChain {
 		throws IOException, PortletException {
 
 		if (_portletFilters.size() > _pos) {
-			ActionFilter portletFilter = (ActionFilter)_portletFilters.get(
+			ActionFilter actionFilter = (ActionFilter)_portletFilters.get(
 				_pos++);
 
-			portletFilter.doFilter(actionRequest, actionResponse, this);
+			actionFilter.doFilter(actionRequest, actionResponse, this);
 		}
 		else {
 			_portlet.processAction(actionRequest, actionResponse);
@@ -75,10 +75,9 @@ public class FilterChainImpl implements FilterChain {
 		throws IOException, PortletException {
 
 		if (_portletFilters.size() > _pos) {
-			EventFilter portletFilter = (EventFilter)_portletFilters.get(
-				_pos++);
+			EventFilter eventFilter = (EventFilter)_portletFilters.get(_pos++);
 
-			portletFilter.doFilter(eventRequest, eventResponse, this);
+			eventFilter.doFilter(eventRequest, eventResponse, this);
 		}
 		else {
 			EventPortlet eventPortlet = (EventPortlet)_portlet;
@@ -92,10 +91,10 @@ public class FilterChainImpl implements FilterChain {
 		throws IOException, PortletException {
 
 		if (_portletFilters.size() > _pos) {
-			RenderFilter portletFilter = (RenderFilter)_portletFilters.get(
+			RenderFilter renderFilter = (RenderFilter)_portletFilters.get(
 				_pos++);
 
-			portletFilter.doFilter(renderRequest, renderResponse, this);
+			renderFilter.doFilter(renderRequest, renderResponse, this);
 		}
 		else {
 			_portlet.render(renderRequest, renderResponse);
@@ -107,10 +106,10 @@ public class FilterChainImpl implements FilterChain {
 		throws IOException, PortletException {
 
 		if (_portletFilters.size() > _pos) {
-			ResourceFilter portletFilter = (ResourceFilter)_portletFilters.get(
+			ResourceFilter resourceFilter = (ResourceFilter)_portletFilters.get(
 				_pos++);
 
-			portletFilter.doFilter(resourceRequest, resourceResponse, this);
+			resourceFilter.doFilter(resourceRequest, resourceResponse, this);
 		}
 		else {
 			ResourceServingPortlet resourceServingPortlet =
