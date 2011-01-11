@@ -987,11 +987,11 @@ public class ServicePreAction extends Action {
 
 		String companyLogo = sb.toString();
 
-		Image companyLogoImage = ImageLocalServiceUtil.getCompanyLogo(
-			company.getLogoId());
-
 		int companyLogoHeight = 0;
 		int companyLogoWidth = 0;
+
+		Image companyLogoImage = ImageLocalServiceUtil.getCompanyLogo(
+			company.getLogoId());
 
 		if (companyLogoImage != null) {
 			companyLogoHeight = companyLogoImage.getHeight();
