@@ -149,10 +149,8 @@ public class PortletExporter {
 			exportPortletData = true;
 		}
 
-		long lastPublishDate = System.currentTimeMillis();
-
-		if (endDate != null) {
-			lastPublishDate = endDate.getTime();
+		if (endDate == null) {
+			endDate = new Date();
 		}
 
 		StopWatch stopWatch = null;
@@ -284,12 +282,7 @@ public class PortletExporter {
 			throw new SystemException(ioe);
 		}
 
-		try {
-			return zipWriter.getFile();
-		}
-		finally {
-			updateLastPublishDate(layout, portletId, lastPublishDate);
-		}
+		return zipWriter.getFile();
 	}
 
 	protected void exportCategories(PortletDataContext context)
@@ -722,6 +715,17 @@ public class PortletExporter {
 			return;
 		}
 
+		long lastPublishDate = GetterUtil.getLong(
+			jxPreferences.getValue("last-publish-date", StringPool.BLANK));
+
+		Date startDate = context.getStartDate();
+
+		if ((lastPublishDate > 0) && (startDate != null) &&
+			(lastPublishDate < startDate.getTime())) {
+
+			context.setStartDate(new Date(lastPublishDate));
+		}
+
 		String data = null;
 
 		long groupId = context.getGroupId();
@@ -737,6 +741,7 @@ public class PortletExporter {
 		}
 		finally {
 			context.setGroupId(groupId);
+			context.setStartDate(startDate);
 		}
 
 		if (Validator.isNull(data)) {
@@ -754,6 +759,19 @@ public class PortletExporter {
 		portletDataEl.addAttribute("path", path);
 
 		context.addZipEntry(path, data);
+
+		if (context.getEndDate() != null) {
+			try {
+				jxPreferences.setValue(
+					"last-publish-date",
+					String.valueOf(context.getEndDate().getTime()));
+
+				jxPreferences.store();
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
 	}
 
 	protected void exportPortletPreference(
@@ -1106,20 +1124,6 @@ public class PortletExporter {
 		sb.append(".xml");
 
 		return sb.toString();
-	}
-
-	protected void updateLastPublishDate(
-			Layout layout, String portletId, long lastPublishDate)
-		throws Exception {
-
-		javax.portlet.PortletPreferences jxPreferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				layout, portletId, StringPool.BLANK);
-
-		jxPreferences.setValue(
-			"last-publish-date", String.valueOf(lastPublishDate));
-
-		jxPreferences.store();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletExporter.class);

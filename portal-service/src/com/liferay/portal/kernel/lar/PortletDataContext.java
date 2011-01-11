@@ -245,6 +245,8 @@ public interface PortletDataContext extends Serializable {
 
 	public void setSourceGroupId(long sourceGroupId);
 
+	public void setStartDate(Date startDate);
+
 	public String toXML(Object object);
 
 }

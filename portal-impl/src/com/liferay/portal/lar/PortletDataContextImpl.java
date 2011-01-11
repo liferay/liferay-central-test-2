@@ -999,6 +999,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _xStream.toXML(object);
 	}
 
+	public void setStartDate(Date startDate) {
+		_startDate = startDate;
+	}
+
 	protected String getActionIds(
 			Role role, String className, String primKey)
 		throws PortalException, SystemException {
