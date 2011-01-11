@@ -14,11 +14,14 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
+
+import java.lang.reflect.Proxy;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -50,14 +53,18 @@ public class PortalClassLoaderFilter
 			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
+			FilterChain contextClassLoaderFilterChain =
+				(FilterChain)Proxy.newProxyInstance(
+					contextClassLoader, new Class[] {FilterChain.class},
+					new ClassLoaderBeanHandler(
+						filterChain, contextClassLoader));
+
 			_filter.doFilter(
-				servletRequest, servletResponse, new DummyFilterChain());
+				servletRequest, servletResponse, contextClassLoaderFilterChain);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
-
-		filterChain.doFilter(servletRequest, servletResponse);
 	}
 
 	public void init(FilterConfig filterConfig) {
