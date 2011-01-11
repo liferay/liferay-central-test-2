@@ -39,7 +39,7 @@ long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
 				<aui:input type="hidden" name="vocabularyId" />
 				<aui:input type="hidden" name="parentCategoryId" />
 
-				<aui:input label="name" name="title" />
+				<aui:input label="name" name="title" cssClass="category-name"/>
 
 				<aui:input name="description" />
 

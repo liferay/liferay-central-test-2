@@ -126,11 +126,6 @@
 			</div>
 		</div>
 	</div>
-	<div class="vocabulary-footer">
-		<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-vocabulary" />" />
-
-		<input class="permissions-vocabulary-button" type="button" value="<liferay-ui:message key="edit-vocabulary-permissions" />" />
-	</div>
 </div>
 
 </form>

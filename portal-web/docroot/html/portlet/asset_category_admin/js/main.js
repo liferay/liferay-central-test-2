@@ -46,8 +46,6 @@ AUI().add(
 						instance._container = A.one('.vocabulary-container');
 						instance._vocabularyContent = A.one('.vocabulary-content');
 
-						var categoryURL = instance._createURL(CATEGORY);
-
 						A.all('.vocabulary-close').on(
 							'click',
 							function() {
@@ -68,7 +66,7 @@ AUI().add(
 						instance._container.placeBefore(instance._portletMessageContainer);
 						childrenContainer.placeBefore(instance._categoryMessageContainer);
 
-						instance._toolbarCategoryPanel = new A.Dialog(
+						instance._categoryPanel = new A.Dialog(
 							{
 								after: {
 									hide: A.bind(instance._hideFloatingPanels, instance)
@@ -81,33 +79,20 @@ AUI().add(
 						/**
 						 * If visible: false in configuration properties does not work
 						 */
-						instance._toolbarCategoryPanel.hide();
+						instance._categoryPanel.hide();
 
-						instance._toolbarCategoryPanel.plug(
-							A.Plugin.IO,
-							{
-								uri: categoryURL.toString(),
-								after: {
-									success: A.bind(instance._initializeCategoryPanel, instance)
-								}
-							}
-						);
+						instance._bindCloseEvent(instance._categoryPanel);
 
-						instance._bindCloseEvent(instance._toolbarCategoryPanel);
-
-						instance._toolbarCategoryPanel.after(
+						instance._categoryPanel.after(
 							'visibleChange',
 							function(event) {
-								if (event.newVal) {
-									instance._showToolBarCategorySection();
-								}
-								else {
+								if (!event.newVal) {
 									instance._categoryForm.reset();
 								}
 							}
 						);
 
-						instance._vocabularyCategoryPanel = new A.Dialog(
+						instance._vocabularyPanel = new A.Dialog(
 							{
 								after: {
 									hide: A.bind(instance._hideFloatingPanels, instance)
@@ -120,17 +105,14 @@ AUI().add(
 						/**
 						 * visible: false in configuration properties does not work
 						 */
-						instance._vocabularyCategoryPanel.hide();
+						instance._vocabularyPanel.hide();
 
-						instance._bindCloseEvent(instance._vocabularyCategoryPanel);
+						instance._bindCloseEvent(instance._vocabularyPanel);
 
-						instance._vocabularyCategoryPanel.after(
+						instance._vocabularyPanel.after(
 							'visibleChange',
 							function(event) {
-								if (event.newVal) {
-									instance._showToolBarVocabularySection();
-								}
-								else {
+								if (!event.newVal) {
 									instance._vocabularyForm.reset();									
 								}
 							}
@@ -152,28 +134,7 @@ AUI().add(
 									submitForm(document.hrefFm, portletURL.toString());
 								}
 								else {
-									instance._showToolBarCategorySection();
-								}
-							}
-						);
-
-						A.one('.permissions-vocabulary-button').on(
-							'click',
-							function() {
-								var vocabularyName = instance._selectedVocabularyName;
-								var vocabularyId = instance._selectedVocabularyId;
-
-								if (vocabularyName && vocabularyId) {
-									var portletURL = instance._createPermissionURL(
-										'com.liferay.portlet.asset.model.AssetVocabulary',
-										vocabularyName,
-										vocabularyId
-									);
-
-									submitForm(document.hrefFm, portletURL.toString());
-								}
-								else {
-									instance._showToolBarVocabularySection();
+									instance._showCategorySection();
 								}
 							}
 						);
@@ -222,37 +183,6 @@ AUI().add(
 							}
 						);
 
-						A.one('input.vocabulary-delete-list-button').on(
-							'click',
-							function() {
-								if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-list'))) {
-									instance._deleteVocabulary(
-										instance._selectedVocabularyId,
-										function(message) {
-											var errorKey;
-											var exception = message.exception;
-
-											if (!exception) {
-												instance._closeEditSection();
-												instance._hideToolbarSections();
-												instance._loadData();
-											}
-											else {
-												if (exception.indexOf(EXC_PRINCIPAL) > -1) {
-													errorKey = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
-												}
-												else {
-													errorKey = Liferay.Language.get('your-request-failed-to-complete');
-												}
-
-												instance._sendMessage(MSG_TYPE_ERROR, errorKey);
-											}
-										}
-									);
-								}
-							}
-						);
-
 						A.all('.close-panel').on(
 							'click',
 							function() {
@@ -275,13 +205,11 @@ AUI().add(
 						instance._hideMessageTask = new A.DelayedTask(
 							function() {
 								instance._portletMessageContainer.hide();
-
-								//instance._toolbarCategoryPanel.refreshAlign();
-								//instance._vocabularyCategoryPanel.refreshAlign();
 							}
 						);
 
-						A.one('.vocabulary-list').on('mousedown', instance._onVocabularyListClick, instance);
+						A.one('.vocabulary-list').on('mousedown', instance._onVocabularyList, instance);
+						A.one('#add-category-button').on('click', instance._onShowCategoryPanel, instance, ACTION_ADD);
 						A.one('#add-vocabulary-button').on('click', instance._onShowVocabularyPanel, instance, ACTION_ADD);
 
 						instance._loadData();
@@ -543,7 +471,7 @@ AUI().add(
 						return portletURL;
 					},
 
-					_createURL: function(target, action) {
+					_createURL: function(type, action) {
 						var instance = this;
 
 						var path = '';
@@ -552,18 +480,20 @@ AUI().add(
 						url.setPortletId(instance.portletId);
 						url.setWindowState('exclusive');
 
-						if (target == VOCABULARY) {
+						if (type == VOCABULARY) {
 							path = '/asset_category_admin/edit_vocabulary';
+
+							if (action === ACTION_EDIT){
+								url.setParameter('vocabularyId', instance._selectedVocabularyId);
+							}
 						}
-						else if (target == CATEGORY) {
+						else if (type == CATEGORY) {
 							path = '/asset_category_admin/edit_category';
+
+							url.setParameter('vocabularyId', instance._selectedVocabularyId);
 						}
 
 						url.setParameter('struts_action', path);
-
-						if (action === ACTION_EDIT){
-							url.setParameter('vocabularyId', instance._selectedVocabularyId);
-						}
 
 						return url;
 					},
@@ -779,23 +709,26 @@ AUI().add(
 					_initializeCategoryPanel: function() {
 						var instance = this;
 
-						var categoryForm = instance._toolbarCategoryPanel.get('contentBox').one('form.update-category-form');
+						var categoryForm = instance._categoryPanel.get('contentBox').one('form.update-category-form');
 
 						categoryForm.detach('submit');
-
 						categoryForm.on('submit', instance._onCategoryFormSubmit, instance);
 
 						var closeButton = categoryForm.one('.aui-button-input-cancel');
 
 						closeButton.on('click', instance._onCategoryButtonClose, instance);
 
+						var inputCategoryNameNode = categoryForm.one('.category-name input');
+
+						Liferay.Util.focusFormField(inputCategoryNameNode);
+
 						instance._categoryForm = categoryForm;
 					},
 
-					_initializeVocabularyCategoryPanel: function() {
+					_initializeVocabularyPanel: function() {
 						var instance = this;
 
-						var vocabularyForm = instance._vocabularyCategoryPanel.get('contentBox').one('form.update-vocabulary-form');
+						var vocabularyForm = instance._vocabularyPanel.get('contentBox').one('form.update-vocabulary-form');
 
 						vocabularyForm.detach('submit');
 
@@ -805,7 +738,13 @@ AUI().add(
 
 						closeButton.on('click', instance._onVocabularyButtonClose, instance);
 
+						var inputVocabularyNameNode = vocabularyForm.one('.vocabulary-name input');
+
 						instance._vocabularyForm = vocabularyForm;
+
+						instance._prepareDeleteVocabulary();
+
+						Liferay.Util.focusFormField(inputVocabularyNameNode);
 					},
 
 					_filterCategory: function(categories, parentCategoryId) {
@@ -972,8 +911,8 @@ AUI().add(
 					_hideToolbarSections: function() {
 						var instance = this;
 
-						instance._toolbarCategoryPanel.hide();
-						instance._vocabularyCategoryPanel.hide();
+						instance._categoryPanel.hide();
+						instance._vocabularyPanel.hide();
 					},
 
 					_loadData: function() {
@@ -1051,7 +990,7 @@ AUI().add(
 					_onCategoryButtonClose: function(event) {
 						var instance = this;
 
-						instance._toolbarCategoryPanel.hide();
+						instance._categoryPanel.hide();
 					},
 
 					_onCategoryFormSubmit: function(event) {
@@ -1077,8 +1016,48 @@ AUI().add(
 						}
 					},
 
+					_onDeleteVocabulary: function(){
+						var instance = this;
+
+						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-list'))) {
+							instance._deleteVocabulary(
+								instance._selectedVocabularyId,
+								function(message) {
+									var errorKey;
+									var exception = message.exception;
+
+									if (!exception) {
+										instance._closeEditSection();
+										instance._hideToolbarSections();
+										instance._loadData();
+									}
+									else {
+										if (exception.indexOf(EXC_PRINCIPAL) > -1) {
+											errorKey = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
+										}
+										else {
+											errorKey = Liferay.Language.get('your-request-failed-to-complete');
+										}
+
+										instance._sendMessage(MSG_TYPE_ERROR, errorKey);
+									}
+								}
+							);
+						}
+					},
+
+					_onShowCategoryPanel: function(event, action){
+						var instance = this;
+
+						instance._vocabularyPanel.hide();
+
+						instance._showCategoryPanel(action);
+					},
+
 					_onShowVocabularyPanel: function(event, action){
 						var instance = this;
+
+						instance._categoryPanel.hide();
 
 						instance._showVocabularyPanel(action);
 					},
@@ -1141,7 +1120,7 @@ AUI().add(
 					_onVocabularyButtonClose: function(event) {
 						var instance = this;
 
-						instance._vocabularyCategoryPanel.hide();
+						instance._vocabularyPanel.hide();
 					},
 
 					_onVocabularyFormSubmit: function(event) {
@@ -1152,7 +1131,7 @@ AUI().add(
 						instance._addVocabulary();
 					},
 
-					_onVocabularyListClick: function(event){
+					_onVocabularyList: function(event){
 						var instance = this;
 
 						var target = event.target;
@@ -1162,6 +1141,20 @@ AUI().add(
 
 						if (target.hasClass('vocabulary-item-actions-trigger')){
 							instance._showVocabularyPanel(ACTION_EDIT);
+						}
+					},
+
+					_prepareDeleteVocabulary: function(event){
+						var instance = this;
+
+						var buttonDeleteVocabulary = instance._vocabularyForm.one('.vocabulary-delete-button');
+
+						if (buttonDeleteVocabulary){
+							buttonDeleteVocabulary.on(
+								'click',
+								instance._onDeleteVocabulary,
+								instance
+							);
 						}
 					},
 
@@ -1239,7 +1232,7 @@ AUI().add(
 
 						A.all('.vocabulary-actions input[type=text]').val('');
 
-						instance._vocabularyCategoryPanel.hide();
+						instance._vocabularyPanel.hide();
 					},
 
 					_resetInputLocalized: function(autoFieldsInstance, panelInstance) {
@@ -1266,16 +1259,6 @@ AUI().add(
 
 						instance._updateCategory(categoryId, vocabularyId, parentCategoryId, categoryName, categoryProperties);
 						instance._displayVocabularyCategories(vocabularyId);
-					},
-
-					_selectCurrentVocabulary: function(value) {
-						var instance = this;
-
-						var option = A.one('select.vocabulary-select-list option[value="' + value + '"]');
-
-						if (option) {
-							option.set('selected', true);
-						}
 					},
 
 					_selectCategory: function(categoryId) {
@@ -1320,6 +1303,16 @@ AUI().add(
 						return category;
 					},
 
+					_selectCurrentVocabulary: function(value) {
+						var instance = this;
+
+						var option = A.one('select.vocabulary-select-list option[value="' + value + '"]');
+
+						if (option) {
+							option.set('selected', true);
+						}
+					},
+
 					_selectVocabulary: function(vocabularyId) {
 						var instance = this;
 
@@ -1361,6 +1354,53 @@ AUI().add(
 						instance._hideMessageTask.delay(7000);
 					},
 
+					_showCategoryPanel: function(action){
+						var instance = this;
+
+						var forceStart = false;
+						var vocabularyContent = instance._vocabularyContent;
+						var vocabularyContentXY = vocabularyContent.getXY();
+
+						var categoryPanel = instance._categoryPanel;
+						var categoryURL = instance._createURL(CATEGORY, action);
+
+						switch (action){
+							case ACTION_ADD:
+								categoryPanel.set('title', Liferay.Language.get('add-category'));
+								break;
+							case ACTION_EDIT:
+								categoryPanel.set('title', Liferay.Language.get('edit-category'));
+								break;
+							default:
+								throw 'Internal error. No default action specified.';
+						}
+
+						if (categoryPanel.hasPlugin('io')){
+							forceStart = true;
+							instance._categoryForm.purge(true);
+						}
+
+						categoryPanel.plug(
+							A.Plugin.IO,
+							{
+								uri: categoryURL.toString(),
+								after: {
+									success: A.bind(instance._initializeCategoryPanel, instance)
+								}
+							}
+						);
+
+						categoryPanel.move(
+							vocabularyContentXY[0] + vocabularyContent.get('docScrollX'),
+							vocabularyContentXY[1] + vocabularyContent.get('docScrollY'));
+
+						if (forceStart){
+							categoryPanel.io.start();
+						}
+
+						categoryPanel.show();
+					},
+
 					_showLoading: function(container) {
 						var instance = this;
 
@@ -1382,91 +1422,51 @@ AUI().add(
 						}
 					},
 
-					_showToolBarCategorySection: function() {
-						var instance = this;
-
-						var categoryPanel = instance._toolbarCategoryPanel;
-
-						if (!instance._selectedVocabularyName) {
-							instance._resetActionValues();
-
-							categoryPanel.hide();
-
-							instance._sendMessage('info', Liferay.Language.get('you-must-first-add-a-vocabulary'));
-
-							instance._showToolBarVocabularySection();
-
-							return;
-						}
-
-						//categoryPanel.refreshAlign();
-
-						instance._vocabularyCategoryPanel.hide();
-
-						var inputCategoryNameNode = categoryPanel.get('contentBox').one('.vocabulary-category-name input');
-
-						Liferay.Util.focusFormField(inputCategoryNameNode);
-					},
-
-					_showToolBarVocabularySection: function() {
-						var instance = this;
-
-						var vocabularyCategoryPanel = instance._vocabularyCategoryPanel;
-
-						//vocabularyCategoryPanel.refreshAlign();
-
-						instance._toolbarCategoryPanel.hide();
-
-						var inputVocabularyNameNode = vocabularyCategoryPanel.get('contentBox').one('.vocabulary-name input');
-
-						Liferay.Util.focusFormField(inputVocabularyNameNode);
-					},
-
 					_showVocabularyPanel: function(action){
 						var instance = this;
 
 						var forceStart = false;
-						var vocabularyContext = instance._vocabularyContent;
-						var vocabularyContextXY = vocabularyContext.getXY();
+						var vocabularyContent = instance._vocabularyContent;
+						var vocabularyContentXY = vocabularyContent.getXY();
 
-						var vocabularyCategoryPanel = instance._vocabularyCategoryPanel;
+						var vocabularyPanel = instance._vocabularyPanel;
 						var vocabularyURL = instance._createURL(VOCABULARY, action);
 
 						switch (action){
 							case ACTION_ADD:
-								vocabularyCategoryPanel.set('title', Liferay.Language.get('add-vocabulary'));
+								vocabularyPanel.set('title', Liferay.Language.get('add-vocabulary'));
 								break;
 							case ACTION_EDIT:
-								vocabularyCategoryPanel.set('title', Liferay.Language.get('edit-vocabulary'));
+								vocabularyPanel.set('title', Liferay.Language.get('edit-vocabulary'));
 								break;
 							default:
 								throw 'Internal error. No default action specified.';
 						}
 
-						if (vocabularyCategoryPanel.hasPlugin('io')){
+						if (vocabularyPanel.hasPlugin('io')){
 							forceStart = true;
 							instance._vocabularyForm.purge(true);
 						}
 
-						vocabularyCategoryPanel.plug(
+						vocabularyPanel.plug(
 							A.Plugin.IO,
 							{
 								uri: vocabularyURL.toString(),
 								after: {
-									success: A.bind(instance._initializeVocabularyCategoryPanel, instance)
+									success: A.bind(instance._initializeVocabularyPanel, instance)
 								}
 							}
 						);
 
-						vocabularyCategoryPanel.move(
-							vocabularyContextXY[0] + vocabularyContext.get('docScrollX'),
-							vocabularyContextXY[1] + vocabularyContext.get('docScrollY'));
+						vocabularyPanel.move(
+							vocabularyContentXY[0] + vocabularyContent.get('docScrollX'),
+							vocabularyContentXY[1] + vocabularyContent.get('docScrollY'));
 
 						if (forceStart){
-							vocabularyCategoryPanel.io.start();
+							vocabularyPanel.io.start();
 						}
 
-						vocabularyCategoryPanel.show();
+						vocabularyPanel.show();
 					},
 
 					_unselectAllVocabularies: function() {

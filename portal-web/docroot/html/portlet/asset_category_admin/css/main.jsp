@@ -172,12 +172,14 @@
 }
 
 .portlet-asset-category-admin .vocabulary-categories {
+	border-bottom: 1px solid #D3D7DB;
 	border-right: 1px solid #D3D7DB;
 	height: 300px;
 	overflow: auto;
 }
 
 .portlet-asset-category-admin .vocabulary-list {
+	border-bottom: 1px #D3D7DB solid;
 	border-left: 1px #D3D7DB solid;
 	border-right: 1px #D3D7DB solid;
 	height: 300px;

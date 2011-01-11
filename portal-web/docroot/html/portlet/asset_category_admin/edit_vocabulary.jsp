@@ -48,7 +48,22 @@ AssetVocabulary vocabulary = (AssetVocabulary)request.getAttribute(WebKeys.ASSET
 				</c:choose>
 
 				<aui:button-row>
-					<aui:button type="submit" />
+					<aui:button type="submit"/>
+
+					<c:if test="<%= vocabulary != null && permissionChecker.hasPermission(scopeGroupId, AssetVocabulary.class.getName(), vocabulary.getVocabularyId(), ActionKeys.DELETE) %>" >
+						<aui:button value="delete" cssClass="vocabulary-delete-button" />
+					</c:if>
+
+					<c:if test="<%= vocabulary != null && permissionChecker.hasPermission(scopeGroupId, AssetVocabulary.class.getName(), vocabulary.getVocabularyId(), ActionKeys.PERMISSIONS) %>" >
+						<liferay-security:permissionsURL
+							modelResource="<%= AssetVocabulary.class.getName() %>"
+							modelResourceDescription="<%= vocabulary.getTitle(locale) %>"
+							resourcePrimKey="<%= String.valueOf(vocabulary.getVocabularyId()) %>"
+							var="permissionsURL"
+						/>
+
+						<aui:button value="permissions" onClick="<%= permissionsURL %>" />
+					</c:if>
 
 					<aui:button cssClass="close-panel" type="cancel" value="close" />
 				</aui:button-row>
