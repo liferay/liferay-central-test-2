@@ -429,7 +429,7 @@ public class LanguageImpl implements Language {
 	public String getTimeDescription(
 		PageContext pageContext, long milliseconds, boolean approximate) {
 
-		String description = Time.getDescription(milliseconds);
+		String description = Time.getDescription(milliseconds, approximate);
 
 		String value = null;
 
