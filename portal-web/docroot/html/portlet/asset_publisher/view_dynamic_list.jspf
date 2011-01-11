@@ -108,6 +108,8 @@ else if (!groupByClass) {
 <%
 }
 else {
+	int maxGroupTotal = 0;
+
 	for (long classNameId : classNameIds) {
 		long[] groupClassNameIds = {classNameId};
 
@@ -122,9 +124,11 @@ else {
 
 		int groupTotal = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
-		total += groupTotal;
+		if (groupTotal > maxGroupTotal) {
+			maxGroupTotal = groupTotal;
+		}
 
-		searchContainer.setTotal(groupTotal);
+		total += groupTotal;
 
 		List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 
@@ -142,6 +146,8 @@ else {
 <%
 		}
 	}
+
+	searchContainer.setTotal(maxGroupTotal);
 }
 
 if (total == 0) {
