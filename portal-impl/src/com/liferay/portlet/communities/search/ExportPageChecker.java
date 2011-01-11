@@ -32,15 +32,17 @@ public class ExportPageChecker extends RowChecker {
 		String formName, String allRowsId, String rowId) {
 
 		super(
-			renderResponse, align, valign, COLSPAN, formName, allRowsId, rowId);
+			renderResponse, align, valign, COLSPAN, CSS_CLASS, formName,
+			allRowsId, rowId);
 	}
 
 	public ExportPageChecker(
 		RenderResponse renderResponse, String align, String valign, int colspan,
-		String formName, String allRowsId, String rowId) {
+		String cssClass, String formName, String allRowsId, String rowId) {
 
 		super(
-			renderResponse, align, valign, colspan, formName, allRowsId, rowId);
+			renderResponse, align, valign, colspan, cssClass, formName,
+			allRowsId, rowId);
 	}
 
 	public boolean isChecked(Object obj) {

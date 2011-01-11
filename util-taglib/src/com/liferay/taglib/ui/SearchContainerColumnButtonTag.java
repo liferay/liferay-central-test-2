@@ -46,8 +46,8 @@ public class SearchContainerColumnButtonTag<R>
 			}
 
 			row.addButton(
-				index, getAlign(), getValign(), getColspan(), getName(),
-				(String)getHref());
+				index, getAlign(), getValign(), getColspan(), getCssClass(),
+				getName(), (String)getHref());
 
 			return EVAL_PAGE;
 		}
@@ -57,6 +57,7 @@ public class SearchContainerColumnButtonTag<R>
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
 				colspan = SearchEntry.DEFAULT_COLSPAN;
+				cssClass = SearchEntry.DEFAULT_CSS_CLASS;
 				_href = null;
 				name = StringPool.BLANK;
 				valign = SearchEntry.DEFAULT_VALIGN;

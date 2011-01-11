@@ -24,13 +24,14 @@ public class ButtonSearchEntry extends TextSearchEntry {
 	public ButtonSearchEntry(
 		String align, String valign, String name, String href) {
 
-		this(align, valign, DEFAULT_COLSPAN, name, href);
+		this(align, valign, DEFAULT_COLSPAN, DEFAULT_CSS_CLASS, name, href);
 	}
 
 	public ButtonSearchEntry(
-		String align, String valign, int colspan, String name, String href) {
+		String align, String valign, int colspan, String cssClass, String name,
+		String href) {
 
-		super(align, valign, colspan, name, href);
+		super(align, valign, colspan, cssClass, name, href);
 	}
 
 	public void print(PageContext pageContext) throws Exception {
@@ -48,7 +49,8 @@ public class ButtonSearchEntry extends TextSearchEntry {
 
 	public Object clone() {
 		return new ButtonSearchEntry(
-			getAlign(), getValign(), getColspan(), getName(), getHref());
+			getAlign(), getValign(), getColspan(), getCssClass(), getName(),
+			getHref());
 	}
 
 }

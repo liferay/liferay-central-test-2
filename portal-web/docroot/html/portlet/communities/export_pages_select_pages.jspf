@@ -41,7 +41,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 searchContainer.setTotal(total);
 searchContainer.setResults(results);
-searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "exportPagesFm", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
+searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, RowChecker.CSS_CLASS, "exportPagesFm", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
 
 List resultRows = searchContainer.getResultRows();
 
@@ -53,7 +53,7 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText("left", "top", curLayout.getName(locale));
 
 	if (proposalId <= 0) {
-		row.addJSP("left", "top", 1, "/html/portlet/communities/export_page_options.jsp");
+		row.addJSP("left", "top", 1, SearchEntry.DEFAULT_CSS_CLASS, "/html/portlet/communities/export_page_options.jsp");
 	}
 
 	row.addText("left", "top", LanguageUtil.get(pageContext, StringUtil.replace(curLayout.getType(), "_", "-")));

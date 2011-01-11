@@ -28,21 +28,23 @@ import javax.servlet.jsp.PageContext;
 public class JSPSearchEntry extends SearchEntry {
 
 	public JSPSearchEntry(String align, String valign, String path) {
-		this(align, valign, DEFAULT_COLSPAN, path, null, null, null);
+		this(align, valign, DEFAULT_COLSPAN, DEFAULT_CSS_CLASS, path, null,
+			null, null);
 	}
 
 	public JSPSearchEntry(
-		String align, String valign, int colspan, String path) {
+		String align, String valign, int colspan, String cssClass,
+		String path) {
 
-		this(align, valign, colspan, path, null, null, null);
+		this(align, valign, colspan, cssClass, path, null, null, null);
 	}
 
 	public JSPSearchEntry(
-		String align, String valign, int colspan, String path,
+		String align, String valign, int colspan, String cssClass, String path,
 		ServletContext servletContext, HttpServletRequest request,
 		HttpServletResponse response) {
 
-		super(align, valign, colspan);
+		super(align, valign, colspan, cssClass);
 
 		_path = path;
 		_servletContext = servletContext;
@@ -73,8 +75,8 @@ public class JSPSearchEntry extends SearchEntry {
 
 	public Object clone() {
 		return new JSPSearchEntry(
-			getAlign(), getValign(), getColspan(), getPath(), _servletContext,
-			_request, _response);
+			getAlign(), getValign(), getColspan(), getCssClass(), getPath(),
+			_servletContext, _request, _response);
 	}
 
 	private String _path;

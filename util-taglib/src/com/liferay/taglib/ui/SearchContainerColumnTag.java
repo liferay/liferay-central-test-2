@@ -39,6 +39,10 @@ public abstract class SearchContainerColumnTag
 		return colspan;
 	}
 
+	public String getCssClass() {
+		return cssClass;
+	}
+
 	public int getIndex() {
 		return index;
 	}
@@ -59,6 +63,10 @@ public abstract class SearchContainerColumnTag
 		this.colspan = colspan;
 	}
 
+	public void setCssClass(String cssClass) {
+		this.cssClass = cssClass;
+	}
+
 	public void setIndex(int index) {
 		this.index = index;
 	}
@@ -73,6 +81,7 @@ public abstract class SearchContainerColumnTag
 
 	protected String align = SearchEntry.DEFAULT_ALIGN;
 	protected int colspan = SearchEntry.DEFAULT_COLSPAN;
+	protected String cssClass = SearchEntry.DEFAULT_CSS_CLASS;
 	protected int index = -1;
 	protected String name = StringPool.BLANK;
 	protected String valign = SearchEntry.DEFAULT_VALIGN;

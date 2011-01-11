@@ -30,6 +30,8 @@ public class RowChecker {
 
 	public static final int COLSPAN = 1;
 
+	public static final String CSS_CLASS = StringPool.BLANK;
+
 	public static final String FORM_NAME = "fm";
 
 	public static final String ALL_ROW_IDS = "allRowIds";
@@ -38,8 +40,8 @@ public class RowChecker {
 
 	public RowChecker(RenderResponse renderResponse) {
 		this(
-			renderResponse, ALIGN, VALIGN, COLSPAN, FORM_NAME, ALL_ROW_IDS,
-			ROW_IDS);
+			renderResponse, ALIGN, VALIGN, COLSPAN, CSS_CLASS, FORM_NAME,
+			ALL_ROW_IDS, ROW_IDS);
 	}
 
 	public RowChecker(
@@ -47,16 +49,18 @@ public class RowChecker {
 		String formName, String allRowsId, String rowId) {
 
 		this(
-			renderResponse, align, valign, COLSPAN, formName, allRowsId, rowId);
+			renderResponse, align, valign, COLSPAN, CSS_CLASS, formName,
+			allRowsId, rowId);
 	}
 
 	public RowChecker(
 		RenderResponse renderResponse, String align, String valign, int colspan,
-		String formName, String allRowsId, String rowId) {
+		String cssClass, String formName, String allRowsId, String rowId) {
 
 		_align = align;
 		_valign = valign;
 		_colspan = colspan;
+		_cssClass = cssClass;
 		_formName = renderResponse.getNamespace() + formName;
 
 		if (Validator.isNotNull(allRowsId)) {
@@ -76,6 +80,10 @@ public class RowChecker {
 
 	public int getColspan() {
 		return _colspan;
+	}
+
+	public String getCssClass() {
+		return _cssClass;
 	}
 
 	public String getFormName() {
@@ -148,6 +156,7 @@ public class RowChecker {
 	private String _align;
 	private String _valign;
 	private int _colspan;
+	private String _cssClass;
 	private String _formName;
 	private String _allRowsId;
 	private String _rowId;

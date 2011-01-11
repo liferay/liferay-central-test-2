@@ -43,8 +43,8 @@ public class SearchContainerColumnJSPTag<R> extends SearchContainerColumnTag {
 			}
 
 			row.addJSP(
-				index, getAlign(), getValign(), getColspan(), getPath(),
-				pageContext.getServletContext(), getServletRequest(),
+				index, getAlign(), getValign(), getColspan(), getCssClass(),
+				getPath(), pageContext.getServletContext(), getServletRequest(),
 				new PipingServletResponse(pageContext));
 
 			return EVAL_PAGE;
@@ -55,6 +55,7 @@ public class SearchContainerColumnJSPTag<R> extends SearchContainerColumnTag {
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
 				colspan = SearchEntry.DEFAULT_COLSPAN;
+				cssClass = SearchEntry.DEFAULT_CSS_CLASS;
 				name = StringPool.BLANK;
 				_path = null;
 				valign = SearchEntry.DEFAULT_VALIGN;
