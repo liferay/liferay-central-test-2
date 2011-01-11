@@ -34,6 +34,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -156,12 +157,16 @@ public class ZipReaderImpl implements ZipReader {
 
 	public List<String> getFolderEntries(String path) {
 		if (Validator.isNull(path)) {
-			return null;
+			return Collections.EMPTY_LIST;
 		}
 
 		List<String> folderEntries = new ArrayList<String>();
 
 		File directory = new File(_zipFile.getPath() + StringPool.SLASH + path);
+
+		if (!directory.exists()) {
+			return folderEntries;
+		}
 
 		File[] files = (File[])directory.listFiles();
 
