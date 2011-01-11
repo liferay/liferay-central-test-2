@@ -499,12 +499,12 @@ public class ServicePreAction extends Action {
 			return new Object[] {layout, layouts};
 		}
 
-		boolean replaceLayout = true;
+		boolean layoutViewPermission = false;
 
 		if (LayoutPermissionUtil.contains(
 				permissionChecker, layout, ActionKeys.VIEW)) {
 
-			replaceLayout = false;
+			layoutViewPermission = true;
 		}
 
 		List<Layout> accessibleLayouts = new ArrayList<Layout>();
@@ -516,7 +516,7 @@ public class ServicePreAction extends Action {
 				LayoutPermissionUtil.contains(
 					permissionChecker, curLayout, ActionKeys.VIEW)) {
 
-				if ((accessibleLayouts.size() == 0) && replaceLayout) {
+				if ((accessibleLayouts.size() == 0) && !layoutViewPermission) {
 					layout = curLayout;
 				}
 
@@ -527,8 +527,10 @@ public class ServicePreAction extends Action {
 		if (accessibleLayouts.size() == 0) {
 			layouts = null;
 
-			SessionErrors.add(
-				request, LayoutPermissionException.class.getName());
+			if (!layoutViewPermission) {
+				SessionErrors.add(
+					request, LayoutPermissionException.class.getName());
+			}
 		}
 		else {
 			layouts = accessibleLayouts;
