@@ -500,7 +500,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		}
 
 		function <%= randomNamespace %>scrollIntoView(messageId) {
-			document.getElementById("<%= namespace %>messageScroll" + messageId).scrollIntoView();
+			document.getElementById("<%= randomNamespace %>messageScroll" + messageId).scrollIntoView();
 		}
 
 		function <%= randomNamespace %>showForm(rowId, textAreaId) {
