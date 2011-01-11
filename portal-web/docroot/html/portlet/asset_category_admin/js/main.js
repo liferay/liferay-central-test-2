@@ -881,33 +881,30 @@ AUI().add(
 						var instance = this;
 
 						if (instance._categoryFormAdd){
-							var select = instance._categoryFormAdd.one('.vocabulary-select-list');
+							var selectEl = instance._categoryFormAdd.one('.vocabulary-select-list');
 
-							if (select) {
-								var buffer = [];
-
+							if (selectEl) {
 								selectedVocabularyId = parseInt(selectedVocabularyId, 10);
+
+								selectEl.empty();
 
 								A.each(
 									vocabularies,
 									function(item, index, collection) {
-										buffer.push('<option');
-
-										if (item.vocabularyId == selectedVocabularyId) {
-											buffer.push(' selected');
+										var vocabularyEl = document.createElement('option');
+										
+										if( item.vocabularyId == selectedVocabularyId ){
+											vocabularyEl.selected = true;
 										}
+										
+										vocabularyEl.value = item.vocabularyId;
 
-										buffer.push(' value="');
-										buffer.push(item.vocabularyId);
-										buffer.push('">');
-										buffer.push(item.name);
-										buffer.push('</option>');
+										var vocabularyTextEl = document.createTextNode(item.name);
+										vocabularyEl.appendChild(vocabularyTextEl);
+
+										selectEl.appendChild(vocabularyEl);
 									}
 									);
-
-								buffer = buffer.join('');
-
-								select.html(buffer);
 							}
 						}
 					},
