@@ -1,12 +1,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ViewWebContentCompletedTest</title>
+<title>ViewWebContentDeletedTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">ViewWebContentCompletedTest</td></tr>
+<tr><td rowspan="1" colspan="3">ViewWebContentDeletedTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
@@ -50,31 +50,11 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[1]/a</td>
-	<td>Review</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td>There are no completed tasks.</td>
 </tr>
 <tr>
-	<td>assertText</td>
-	<td>//td[2]/a</td>
-	<td>Web Content Name</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[3]/a</td>
-	<td>Web Content</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//td[4]/a</td>
-	<td>Last Activity Date</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[5]/a</td>
-	<td>Never</td>
-</tr>
-<tr>
-	<td>clickAtAndWait</td>
+	<td>clickAndWait</td>
 	<td>link=My Submissions</td>
 	<td></td>
 </tr>
@@ -95,33 +75,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[1]/a</td>
-	<td>Single Approver</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[2]/a</td>
-	<td>Web Content Name</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[3]/a</td>
-	<td>Web Content</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[4]/a</td>
-	<td>Approved</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//td[5]/a</td>
-	<td>Last Activity Date</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//td[6]/a</td>
-	<td>End Date</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td>There are no completed publications requested by me.</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -129,34 +84,9 @@
 	<td></td>
 </tr>
 <tr>
-	<td>assertElementPresent</td>
-	<td>//td[2]/a</td>
-	<td>Web Content ID</td>
-</tr>
-<tr>
 	<td>assertText</td>
-	<td>//td[3]/a</td>
-	<td>Web Content Name</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[4]/a</td>
-	<td>Approved</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//td[5]/a</td>
-	<td>Modified Date</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//td[6]/a</td>
-	<td>Display Date</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[7]/a</td>
-	<td>Joe Bloggs</td>
+	<td>//form/div[4]</td>
+	<td>No Web Content was found.</td>
 </tr>
 <tr>
 	<td>clickAtAndWait</td>
@@ -185,33 +115,8 @@
 </tr>
 <tr>
 	<td>assertText</td>
-	<td>//td[1]/a</td>
-	<td>Single Approver</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[2]/a</td>
-	<td>Web Content Name</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[3]/a</td>
-	<td>Web Content</td>
-</tr>
-<tr>
-	<td>assertText</td>
-	<td>//td[4]/a</td>
-	<td>Approved</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//td[5]/a</td>
-	<td>Last Activity Date</td>
-</tr>
-<tr>
-	<td>assertElementPresent</td>
-	<td>//td[6]/a</td>
-	<td>End Date</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td>There are no completed publication requests.</td>
 </tr>
 
 </tbody></table>

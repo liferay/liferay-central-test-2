@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class ViewWebContentCompletedTest extends BaseTestCase {
-	public void testViewWebContentCompleted() throws Exception {
+public class ViewWebContentDeletedTest extends BaseTestCase {
+	public void testViewWebContentDeleted() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -59,16 +59,9 @@ public class ViewWebContentCompletedTest extends BaseTestCase {
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Review"),
-			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("Web Content Name"),
-			selenium.getText("//td[2]/a"));
-		assertEquals(RuntimeVariables.replace("Web Content"),
-			selenium.getText("//td[3]/a"));
-		assertTrue(selenium.isElementPresent("//td[4]/a"));
-		assertEquals(RuntimeVariables.replace("Never"),
-			selenium.getText("//td[5]/a"));
-		selenium.clickAt("link=My Submissions", RuntimeVariables.replace(""));
+		assertEquals(RuntimeVariables.replace("There are no completed tasks."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
+		selenium.click(RuntimeVariables.replace("link=My Submissions"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		selenium.clickAt("link=Pending", RuntimeVariables.replace(""));
@@ -80,28 +73,14 @@ public class ViewWebContentCompletedTest extends BaseTestCase {
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Single Approver"),
-			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("Web Content Name"),
-			selenium.getText("//td[2]/a"));
-		assertEquals(RuntimeVariables.replace("Web Content"),
-			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("Approved"),
-			selenium.getText("//td[4]/a"));
-		assertTrue(selenium.isElementPresent("//td[5]/a"));
-		assertTrue(selenium.isElementPresent("//td[6]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"There are no completed publications requested by me."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
 		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isElementPresent("//td[2]/a"));
-		assertEquals(RuntimeVariables.replace("Web Content Name"),
-			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("Approved"),
-			selenium.getText("//td[4]/a"));
-		assertTrue(selenium.isElementPresent("//td[5]/a"));
-		assertTrue(selenium.isElementPresent("//td[6]/a"));
-		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
-			selenium.getText("//td[7]/a"));
+		assertEquals(RuntimeVariables.replace("No Web Content was found."),
+			selenium.getText("//form/div[4]"));
 		selenium.clickAt("link=Workflow", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
@@ -117,15 +96,8 @@ public class ViewWebContentCompletedTest extends BaseTestCase {
 		selenium.clickAt("link=Completed", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertEquals(RuntimeVariables.replace("Single Approver"),
-			selenium.getText("//td[1]/a"));
-		assertEquals(RuntimeVariables.replace("Web Content Name"),
-			selenium.getText("//td[2]/a"));
-		assertEquals(RuntimeVariables.replace("Web Content"),
-			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("Approved"),
-			selenium.getText("//td[4]/a"));
-		assertTrue(selenium.isElementPresent("//td[5]/a"));
-		assertTrue(selenium.isElementPresent("//td[6]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"There are no completed publication requests."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }

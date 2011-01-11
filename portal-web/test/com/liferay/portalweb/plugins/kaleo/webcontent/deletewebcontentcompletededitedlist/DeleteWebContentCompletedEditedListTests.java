@@ -33,7 +33,7 @@ public class DeleteWebContentCompletedEditedListTests extends BaseTests {
 		testSuite.addTestSuite(ApproveWebContentActionsTest.class);
 		testSuite.addTestSuite(EditWebContentCompletedActionsTest.class);
 		testSuite.addTestSuite(DeleteWebContentCompletedEditedListTest.class);
-		testSuite.addTestSuite(ViewWebContentCompletedTest.class);
+		testSuite.addTestSuite(ViewWebContentDeletedTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);
 		testSuite.addTestSuite(TearDownWorkflowConfigurationTest.class);
 

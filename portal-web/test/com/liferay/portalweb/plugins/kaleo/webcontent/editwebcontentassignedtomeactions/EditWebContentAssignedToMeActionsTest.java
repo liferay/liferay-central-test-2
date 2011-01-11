@@ -56,7 +56,7 @@ public class EditWebContentAssignedToMeActionsTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("//td[6]/a"));
 		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
 			selenium.getText("//td[7]/a"));
-		selenium.clickAt("//td[9]/span/ul/li/strong/a",
+		selenium.clickAt("//td[8]/span/ul/li/strong/a",
 			RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
