@@ -1,6 +1,18 @@
+/**
+ * Provides Categories portlet
+ *
+ * Categories portlet allows creation of vocabularies and categories.
+ * One vocabulary might have multiple categories and categories might be organized in tree.
+ *
+ */
+
 AUI().add(
 	'liferay-category-admin',
 	function(A) {
+		/**
+		 * Constants declaration
+		 */
+
 		var ACTION_ADD = 0;
 
 		var ACTION_EDIT = 1;
@@ -27,17 +39,45 @@ AUI().add(
 
 		var VOCABULARY = 1;
 
+		/**
+		 * AssetCategoryAdmin implementation.
+		 *
+		 * @class AssetCategoryAdmin
+		 * @extends A.Base
+		 */
+
 		var AssetCategoryAdmin = A.Component.create(
 			{
 				NAME: 'assetcategoryadmin',
 
 				EXTENDS: A.Base,
 
+				/**
+				 * Constructor function
+				 *
+				 * @param config {Object} Configuration properties
+				 * <dl>
+				 *		<dt>portletId</dt>
+				 *			<dd>The ID of the portlet</dd>
+				 * </dl>
+				 */
+
 				constructor: function() {
 					AssetCategoryAdmin.superclass.constructor.apply(this, arguments);
 				},
 
 				prototype: {
+					/**
+					 * Initializer lifecycle implementation for AssetCategoryAdmin portlet
+					 *
+					 * Set up listeners, prepares searching by using A.LiveSearch,
+					 * loads the Vocabularies from server
+					 *
+					 * @method initializer
+					 * @protected
+					 * @param config {Object} Contains configuration properties
+					 */
+
 					initializer: function(config) {
 						var instance = this;
 
@@ -90,6 +130,16 @@ AUI().add(
 						instance.after('drop:exit', instance._afterDragExit);
 					},
 
+					/**
+					 * Add or update category data, depending on the form content
+					 * In order to update category, categoryId must be present
+					 * in a hidden field. Otherwise, a new category will be created.
+					 *
+					 * @method _addCategory
+					 * @protected
+					 * @param form {A.Node} The data, extracted from this form will be send to server
+					 */
+
 					_addCategory: function(form) {
 						var instance = this;
 
@@ -113,36 +163,15 @@ AUI().add(
 						A.io.request(uri, config);
 					},
 
-					_addCategoryProperty: function(baseNode, key, value) {
-						var instance = this;
-
-						var baseCategoryProperty = A.one('div.vocabulary-property-row');
-
-						if (baseCategoryProperty) {
-							var newCategoryProperty = baseCategoryProperty.clone();
-
-							var propertyKeyNode = newCategoryProperty.one('.category-property-key');
-							var propertyValueNode = newCategoryProperty.one('.category-property-value');
-
-							if (propertyKeyNode) {
-								propertyKeyNode.val(key);
-							}
-
-							if (propertyValueNode) {
-								propertyValueNode.val(value);
-							}
-
-							baseNode.placeAfter(newCategoryProperty);
-
-							newCategoryProperty.show();
-
-							if (!key && !value) {
-								newCategoryProperty.one('input').focus();
-							}
-
-							instance._attachCategoryPropertyIconEvents(newCategoryProperty);
-						}
-					},
+					/**
+					 * Add or update vocabulary data, depending on the form content.
+					 * In order to update vocabulary, vocabularyId must be present in a hidden field.
+					 * Otherwise, a new vocabulary will be created.
+					 *
+					 * @method _addVocabulary
+					 * @protected
+					 * @param form {A.Node} The data, extracted from this form will be send to server
+					 */
 
 					_addVocabulary: function(form) {
 						var instance = this;
@@ -167,6 +196,14 @@ AUI().add(
 						A.io.request(uri, config);
 					},
 
+					/**
+					 * Moves a Category to another Vocabulary
+					 *
+					 * @method _afterDragDrop
+					 * @protected
+					 * @param event {Event} custom event
+					 */
+
 					_afterDragDrop: function(event) {
 						var instance = this;
 
@@ -186,6 +223,14 @@ AUI().add(
 						dropNode.removeClass('active-area');
 					},
 
+					/*
+					 * Mark the current drop node as active
+					 *
+					 * @method _afterDragEnter
+					 * @protected
+					 * @param event {Event} custom event, contains the current drop node
+					 */
+
 					_afterDragEnter: function(event) {
 						var instance = this;
 
@@ -194,6 +239,14 @@ AUI().add(
 						dropNode.addClass('active-area');
 					},
 
+					/*
+					 * Removes active status from the current drop node
+					 *
+					 * @method _afterDragExit
+					 * @protected
+					 * @param event {Event} custom event, contains the current drop node
+					 */
+
 					_afterDragExit: function(event) {
 						var instance = this;
 
@@ -201,6 +254,14 @@ AUI().add(
 
 						dropNode.removeClass('active-area');
 					},
+
+					/*
+					 * Aligns a panel to top/left position of main vocabulary content element
+					 *
+					 * @method _alignPanel
+					 * @protected
+					 * @param panel {A.Panel or an inheritor} The panel to be aligned
+					 */
 
 					_alignPanel: function(panel){
 						var instance = this;
@@ -211,41 +272,14 @@ AUI().add(
 						panel.set("xy", vocabularyContentXY);
 					},
 
-					_alternateRows: function() {
-						var instance = this;
-
-						var categoriesScope = A.all(instance._categoryContainerSelector);
-
-						var allRows = categoriesScope.all('li');
-
-						allRows.removeClass('alt');
-						allRows.odd().addClass('alt');
-					},
-
-					_attachCategoryPropertyIconEvents: function(categoryProperty) {
-						var instance = this;
-
-						var addProperty = categoryProperty.one('.add-category-property');
-						var deleteProperty = categoryProperty.one('.delete-category-property');
-
-						if (addProperty) {
-							addProperty.on(
-								'click',
-								function() {
-									instance._addCategoryProperty(categoryProperty, '', '');
-								}
-							);
-						}
-
-						if (deleteProperty) {
-							deleteProperty.on(
-								'click',
-								function() {
-									instance._removeCategoryProperty(categoryProperty);
-								}
-							);
-						}
-					},
+					/*
+					 * Binds Escape key (ASCII code 27) to the bounding box of a panel.
+					 * Pressing this key will hide the panel.
+					 *
+					 * @method _bindCloseEvent
+					 * @protected
+					 * @param contextPanel {A.Panel or an inheritor} The panel, to which Esc key should be bound
+					 */
 
 					_bindCloseEvent: function(contextPanel) {
 						var instance = this;
@@ -256,6 +290,17 @@ AUI().add(
 							'up:27'
 						);
 					},
+
+					/**
+					 * Builds tree structure of all available Categories. Each Category is one A.TreeNode instance.
+					 * Sets listener to select event on each node in order to load category data.
+					 *
+					 * @method _buildCategoryTreeview
+					 * @protected
+					 * @param categories {Array} Array with categories
+					 * @param parentCategoryId {Number} Parent category ID
+					 * @return {Number} The number of children in the current category
+					 */
 
 					_buildCategoryTreeview: function(categories, parentCategoryId) {
 						var instance = this;
@@ -322,28 +367,14 @@ AUI().add(
 						return children.length;
 					},
 
-					_buildCategoryProperties: function() {
-						var instance = this;
-
-						var buffer = [];
-
-						A.all('.vocabulary-property-row').each(
-							function(item, index, collection) {
-								if (!item.hasClass('aui-helper-hidden')) {
-									var keyNode = item.one('input.category-property-key');
-									var valueNode = item.one('input.category-property-value');
-
-									if (keyNode && valueNode) {
-										var rowValue = [keyNode.val(), ':', valueNode.val(), ','].join('');
-
-										buffer.push(rowValue);
-									}
-								}
-							}
-						);
-
-						return buffer.join('');
-					},
+					/**
+					 * Hides the section with Category data and updates the corresponding
+					 * styles of the parent container.
+					 * If there is selected category, this function unselects it.
+					 *
+					 * @method _closeEditSection
+					 * @protected
+					 */
 
 					_closeEditSection: function() {
 						var instance = this;
@@ -356,6 +387,14 @@ AUI().add(
 							instance._selectedCategory.unselect();
 						}
 					},
+
+					/**
+					 * Creates a panel (instance of A.Dialog) which allows adding a new Category.
+					 *
+					 * @method _createCategoryPanelAdd
+					 * @protected
+					 * @return {A.Dialog} The instance of the panel
+					 */
 
 					_createCategoryPanelAdd: function(){
 						var instance = this;
@@ -391,6 +430,14 @@ AUI().add(
 
 						return instance._categoryPanelAdd;
 					},
+
+					/**
+					 * Creates and populates a TreeView with list of categories
+					 *
+					 * @method _createCategoryTreeView
+					 * @protected
+					 * @param categories {Array} Array with categories
+					 */
 
 					_createCategoryTreeView: function(categories){
 						var instance = this;
@@ -432,18 +479,13 @@ AUI().add(
 						instance._buildCategoryTreeview(categories, 0);
 					},
 
-					_createPermissionURL: function(modelResource, modelResourceDescription, resourcePrimKey) {
-						var instance = this;
-
-						var portletURL = Liferay.PortletURL.createPermissionURL(
-							instance.portletId,
-							modelResource,
-							modelResourceDescription,
-							resourcePrimKey
-						);
-
-						return portletURL;
-					},
+					/**
+					 * Creates a panel (instance of A.Dialog) which allows adding a new Vocabulary.
+					 *
+					 * @method _createVocabularyPanelAdd
+					 * @protected
+					 * @return {A.Dialog} The instance of the panel
+					 */
 
 					_createVocabularyPanelAdd: function(){
 						var instance = this;
@@ -480,6 +522,16 @@ AUI().add(
 						return instance._vocabularyPanelAdd;
 					},
 
+					/**
+					 * Creates a panel in order to edit Vocabulary or Category.
+					 *
+					 * @method _createPanelEdit
+					 * @protected
+					 * @param config {Object} Configuration properties as required by A.Dialog
+					 * They will be merged with default properties (resizable: false, width: 550px, zIndex: 1000)
+					 * @return {A.Dialog} The instance of the panel
+					 */
+
 					_createPanelEdit: function(config){
 						var instance = this;
 
@@ -489,7 +541,7 @@ AUI().add(
 							zIndex: 1000
 						};
 
-						if(A.Lang.isObject(config)){
+						if (A.Lang.isObject(config)){
 							config = A.merge(defaultConfig, config);
 						}
 						else {
@@ -519,6 +571,16 @@ AUI().add(
 
 						return instance._panelEdit;
 					},
+
+					/**
+					 * Creates a panel in order to edit permissions of Vocabulary or Category.
+					 * The function will create a new panel only if there is no any created already.
+					 * Otherwise, it returns the available panel instance.
+					 *
+					 * @method _createPanelPermissions
+					 * @protected
+					 * @return {A.Dialog} The newly created instance of the panel or the existing one
+					 */
 
 					_createPanelPermissions: function(){
 						var instance = this;
@@ -557,6 +619,31 @@ AUI().add(
 						return panelPermissionsChange;
 					},
 
+					/**
+					 * Creates a URL depending on the type and action specified as arguments.
+					 * The type can be VOCABULARY or CATEGORY and action can be ACTION_ADD, ACTION_EDIT or ACTION_VIEW.
+					 *
+					 * @method _createURL
+					 * @protected
+					 * @param type {Number} The type of resource. Can be one the following values:
+					 *  <dl>
+					 *		<dt>CATEGORY or 0</dt>
+					 *			<dd>Creates URL for Category</dd>
+					 *		<dt>VOCABULARY or 1</dt>
+					 *			<dd>Creates URL for Vocabulary</dd>
+					 *  </dl>
+					 *  @param action {Number} The type of action. Can be one the following values:
+					 *  <dl>
+					 *		<dt>ACTION_ADD or 0</dt>
+					 *			<dd>Creates a URL to add the specified type of resource</dd>
+					 *		<dt>ACTION_EDIT or 1</dt>
+					 *			<dd>Creates a URL to edit the specified type of resource</dd>
+					 *		<dt>ACTION_VIEW or 2</dt>
+					 *			<dd>Creates a URL to view the data of specified resource type</dd>
+					 *  </dl>
+					 *  @return {PortletURL} The created URL
+					 */
+
 					_createURL: function(type, action) {
 						var instance = this;
 
@@ -594,6 +681,15 @@ AUI().add(
 						return url;
 					},
 
+					/**
+					 * Deletes a Category.
+					 *
+					 * @method _deleteCategory
+					 * @protected
+					 * @param categoryId {Number} The ID of Category which have to be deleted.
+					 * @param callback {Function} (optional) Callback function to be invoked once the process of deletion finishes.
+					 */
+
 					_deleteCategory: function(categoryId, callback) {
 						var instance = this;
 
@@ -605,6 +701,15 @@ AUI().add(
 						);
 					},
 
+					/**
+					 * Deletes a Vocabulary.
+					 *
+					 * @method _deleteVocabulary
+					 * @protected
+					 * @param vocabularyId {Number} The ID of Vocabulary which have to be deleted.
+					 * @param callback {Function} (optional) Callback function to be invoked once the process of deletion finishes.
+					 */
+
 					_deleteVocabulary: function(vocabularyId, callback) {
 						var instance = this;
 
@@ -615,6 +720,17 @@ AUI().add(
 							callback
 						);
 					},
+
+					/**
+					 * Renders all Categories of given vocabulary in a TreeView.
+					 * Also, makes all items in Vocabulary container drop targets and
+					 * loads A.LiveSearch with new data.
+					 *
+					 * @method _displayVocabularyCategoriesImpl
+					 * @protected
+					 * @param categories {Array} Array with available categories.
+					 * @param callback {Function} (optional) Callback function to be invoked once the process finishes.
+					 */
 
 					_displayVocabularyCategoriesImpl: function(categories, callback) {
 						var instance = this;
@@ -652,6 +768,14 @@ AUI().add(
 							callback();
 						}
 					},
+
+					/**
+					 * Creates an unordered list with all Vocabularies and invokes an (optional) callback
+					 *
+					 * @method _displayList
+					 * @protected
+					 * @param callback {Function} (optional) Callback function to be invoked once the process finishes.
+					 */
 
 					_displayList: function(callback) {
 						var instance = this;
@@ -706,7 +830,6 @@ AUI().add(
 										buffer.push('</div>');
 										buffer.push('</div>');
 
-									    
 										buffer.push('</li>');
 									}
 								);
@@ -721,7 +844,7 @@ AUI().add(
 
 								instance._selectedVocabularyName = vocabularyName;
 								instance._selectedVocabularyId = vocabularyId;
-								
+
 								if (callback) {
 									callback();
 								}
@@ -729,36 +852,16 @@ AUI().add(
 						);
 					},
 
-					_displayCategoryProperties: function(categoryId) {
-						var instance = this;
-
-						instance._getCategoryProperties(
-							categoryId,
-							function(categoryProperties) {
-								if (!categoryProperties.length) {
-									categoryProperties = [{key: '', value: ''}];
-								}
-
-								var total = categoryProperties.length;
-								var totalRendered = A.all('div.vocabulary-property-row').size();
-
-								if (totalRendered > total) {
-									return;
-								}
-
-								A.each(
-									categoryProperties,
-									function(item, index, collection) {
-										var baseCategoryRows = A.all('div.vocabulary-property-row');
-										var lastIndex = baseCategoryRows.size() - 1;
-										var baseRow = baseCategoryRows.item(lastIndex);
-
-										instance._addCategoryProperty(baseRow, item.key, item.value);
-									}
-								);
-							}
-						);
-					},
+					/**
+					 * Sends a request to the server in order to load all categories which belong to the vocabulary,
+					 * specified by its ID in the first argument.
+					 * Also, invokes an (optional) callback once the process finishes.
+					 *
+					 * @method _displayVocabularyCategories
+					 * @protected
+					 * @param vocabularyId {Number} The ID of vocabulary whose categories should be loaded.
+					 * @param callback {Function} (optional) Callback function to be invoked once the process finishes.
+					 */
 
 					_displayVocabularyCategories: function(vocabularyId, callback) {
 						var instance = this;
@@ -776,6 +879,16 @@ AUI().add(
 							}
 						);
 					},
+
+					/**
+					 * Initializes the panel for adding a new Category. The function detaches the default form action
+					 * and replaces it with custom event.
+					 * Also, invokes an (optional) callback function once the process finishes.
+					 *
+					 * @method _initializeCategoryPanelAdd
+					 * @protected
+					 * @param callback {Function} (optional) Callback function to be invoked once the process finishes.
+					 */
 
 					_initializeCategoryPanelAdd: function(callback) {
 						var instance = this;
@@ -796,6 +909,15 @@ AUI().add(
 							callback.call(instance);
 						}
 					},
+
+					/**
+					 * Initializes the panel for editing Category. The function detaches the default form action and
+					 * replaces it with custom event. Adds listeners to some input elements like delete and permissions buttons.
+					 * Also, invokes an (optional) callback function once the process finishes.
+					 *
+					 * @method _initializeCategoryPanelAdd
+					 * @protected
+					 */
 
 					_initializeCategoryPanelEdit: function(){
 						var instance = this;
@@ -837,6 +959,16 @@ AUI().add(
 						Liferay.Util.focusFormField(inputCategoryNameNode);
 					},
 
+					/**
+					 * Initializes the panel for adding a new Vocabulary. The function detaches default form action
+					 * and replaces it with custom event.
+					 * Also, invokes an (optional) callback function once the process finishes.
+					 *
+					 * @method _initializeVocabularyPanelAdd
+					 * @protected
+					 * @param callback {Function} (optional) Callback function to be invoked once the process finishes.
+					 */
+
 					_initializeVocabularyPanelAdd: function(callback) {
 						var instance = this;
 
@@ -859,7 +991,16 @@ AUI().add(
 						}
 					},
 
-					_initializeVocabularyPanelEdit: function(callback) {
+					/**
+					 * Initializes the panel for editing Vocabulary. The function detaches default form action and
+					 * replaces it with custom event. Adds listeners to some input elements like delete and close buttons.
+					 * Also, invokes an (optional) callback function once the process finishes.
+					 *
+					 * @method _initializeVocabularyPanelEdit
+					 * @protected
+					 */
+
+					_initializeVocabularyPanelEdit: function() {
 						var instance = this;
 
 						var vocabularyFormEdit = instance._panelEdit.get('contentBox').one('form.update-vocabulary-form');
@@ -883,7 +1024,7 @@ AUI().add(
 								instance
 							);
 						}
-						
+
 						var buttonChangeVocabularyPermissions = vocabularyFormEdit.one('#vocabulary-change-permissions');
 
 						if (buttonChangeVocabularyPermissions){
@@ -898,6 +1039,16 @@ AUI().add(
 
 						Liferay.Util.focusFormField(inputVocabularyEditNameNode);
 					},
+
+					/**
+					 * Populates the vocabulary list in Category edit panel and selects the
+					 * vocabulary to which the current Category belongs.
+					 *
+					 * @method _feedVocabularySelect
+					 * @protected
+					 * @method vocabularies {Array} Array with available vocabularies.
+					 * @param selectedVocabularyId {Number} The ID of the currently selected Vocabulary.
+					 */
 
 					_feedVocabularySelect: function(vocabularies, selectedVocabularyId) {
 						var instance = this;
@@ -914,11 +1065,11 @@ AUI().add(
 									vocabularies,
 									function(item, index, collection) {
 										var vocabularyEl = document.createElement('option');
-										
-										if( item.vocabularyId == selectedVocabularyId ){
+
+										if ( item.vocabularyId == selectedVocabularyId ){
 											vocabularyEl.selected = true;
 										}
-										
+
 										vocabularyEl.value = item.vocabularyId;
 
 										var vocabularyTextEl = document.createTextNode(item.name);
@@ -931,6 +1082,16 @@ AUI().add(
 						}
 					},
 
+					/**
+					 * Filters the categories, which belong to specific Category
+					 *
+					 * @method _filterCategory
+					 * @protected
+					 * @param categories {Array} Array with Categories
+					 * @param parentCategoryId {Number} The ID of the Category whose children should be extracted
+					 * @return {Array} New array with filtered Categories
+					 */
+
 					_filterCategory: function(categories, parentCategoryId) {
 						var instance = this;
 
@@ -942,6 +1103,13 @@ AUI().add(
 						);
 					},
 
+					/**
+					 * Set the name of the Category on focus.
+					 *
+					 * @method _focusCategoryPanelAdd
+					 * @protected
+					 */
+
 					_focusCategoryPanelAdd: function(){
 						var instance = this;
 
@@ -950,6 +1118,13 @@ AUI().add(
 
 						Liferay.Util.focusFormField(inputCategoryAddNameNode);
 					},
+
+					/**
+					 * Set the name of Vocabulary on focus.
+					 *
+					 * @method _focusVocabularyPanelAdd
+					 * @protected
+					 */
 
 					_focusVocabularyPanelAdd: function(){
 						var instance = this;
@@ -960,11 +1135,29 @@ AUI().add(
 						Liferay.Util.focusFormField(inputVocabularyAddNameNode);
 					},
 
+					/**
+					 * Returns a <code>Widget</code> instance, which belongs to the Category with ID, specified as first argument.
+					 *
+					 * @method _getCategory
+					 * @protected
+					 * @param categoryId {Number} The ID of the category, which should be returned
+					 * @return {Widget} The <code>Widget</code> instance of the Category found.
+					 */
+
 					_getCategory: function(categoryId) {
 						var instance = this;
 
 						return A.Widget.getByNode('#categoryNode' + categoryId);
 					},
+
+					/**
+					 * Returns the ID of Category. The function extracts it from the ID of some <code>A.Node</code> node
+					 *
+					 * @method _getCategoryId
+					 * @protected
+					 * @param node {A.Node} The node, which contains the ID of the Category.
+					 * @return {String} The ID of the Category.
+					 */
 
 					_getCategoryId: function(node) {
 						var instance = this;
@@ -979,11 +1172,31 @@ AUI().add(
 						return categoryId;
 					},
 
+					/**
+					 * Returns the name of Category. The function extracts it from the label attribute of some <code>A.Node</code> node
+					 *
+					 * @method _getCategoryName
+					 * @protected
+					 * @param node {A.Node} The node, which contains the name of the Category.
+					 * @return {String} The name of the Category.
+					 */
+
 					_getCategoryName: function(node) {
 						var instance = this;
 
 						return node.get('label');
 					},
+
+					/**
+					 * Returns the ID of parent Category.
+					 * The function finds the parentNode of the node, specified as te first argument and
+					 * invokes <code>_getCategoryId</code> function in order to extract the ID.
+					 *
+					 * @method _getParentCategoryId
+					 * @protected
+					 * @param node {A.Node} The node, where searching for the parent Category should begin.
+					 * @return {String} The parent category ID.
+					 */
 
 					_getParentCategoryId: function(node) {
 						var instance = this;
@@ -993,34 +1206,14 @@ AUI().add(
 						return instance._getCategoryId(parentNode);
 					},
 
-					_getPermissionsEnabled: function(vocabularyType, type) {
-						var instance = this;
-
-						var buffer = [];
-						var permissionsActions = A.one('.' + vocabularyType + '-permissions-actions');
-						var permissions = permissionsActions.all('[name$=' + type + 'Permissions]');
-
-						permissions.each(
-							function(item, index, collection) {
-								if (item.get('checked')) {
-									buffer.push(item.val());
-								}
-							}
-						);
-
-						return buffer.join(',');
-					},
-
-					_getCategoryProperties: function(categoryId, callback) {
-						var instance = this;
-
-						Liferay.Service.Asset.AssetCategoryProperty.getCategoryProperties(
-							{
-								categoryId: categoryId
-							},
-							callback
-						);
-					},
+					/**
+					 * Loads vocabularies from the server and invokes an (optional) callback function.
+					 *
+					 * @method _getVocabularies
+					 * @protected
+					 * @param callback {Function} (optional) Callback function to be invoked once the process finishes.
+					 * @return {Array} Array with vocabularies.
+					 */
 
 					_getVocabularies: function(callback) {
 						var instance = this;
@@ -1033,11 +1226,31 @@ AUI().add(
 						);
 					},
 
+					/**
+					 * Returns an A.Node instance, which represents the vocabulary with ID, specified by the first argument.
+					 *
+					 * @method _getVocabulary
+					 * @protected
+					 * @param vocabularyId {String|Number} The ID of the vocabulary.
+					 * @return {A.Node} The found vocabulary or null.
+					 */
+
 					_getVocabulary: function(vocabularyId) {
 						var instance = this;
 
 						return A.one('li[data-vocabularyId="' + vocabularyId + '"]');
 					},
+
+					/**
+					 * Returns the categories, which belong to Vocabulary, specified by the first argument.
+					 * Invokes an (optional) function once the process finishes.
+					 *
+					 * @method _getVocabularyCategories
+					 * @protected
+					 * @param vocabularyId {String} The ID if the vocabulary
+					 * @param callback {Function} (optional) Callback function to be invoked once the process finishes.
+					 * @return {Array} Array with categories
+					 */
 
 					_getVocabularyCategories: function(vocabularyId, callback) {
 						var instance = this;
@@ -1055,11 +1268,29 @@ AUI().add(
 						);
 					},
 
+					/**
+					 * Extract vocabulary ID from Node's data-* HTML5 attribute
+					 *
+					 * @method _getVocabularyId
+					 * @protected
+					 * @param exp {String} An expression (CSS selector), which will be used by <code>A.one</code> function.
+					 * @return {String} The ID of the vocabulary or null.
+					 */
+
 					_getVocabularyId: function(exp) {
 						var instance = this;
 
 						return A.one(exp).attr('data-vocabularyId');
 					},
+
+					/**
+					 * Extract vocabulary name from Node's data-* HTML5 attribute.
+					 *
+					 * @method _getVocabularyName
+					 * @protected
+					 * @param exp {String} An expression (CSS selector), which will be used by <code>A.one</code> function
+					 * @return {String} The name of the vocabulary or null
+					 */
 
 					_getVocabularyName: function(exp) {
 						var instance = this;
@@ -1067,11 +1298,26 @@ AUI().add(
 						return A.one(exp).attr('data-vocabulary');
 					},
 
+					/**
+					 * Invokes hide() method of a node, which has class 'lfr-message-response'
+					 *
+					 * @method _hideAllMessages
+					 * @protected
+					 */
+
 					_hideAllMessages: function() {
 						var instance = this;
 
 						instance._container.one('.lfr-message-response').hide();
 					},
+
+					/**
+					 * Hides all 'floating' panels (instances of Liferay.PanelFloating).
+					 *
+					 * @method _hideFloatingPanels
+					 * @protected
+					 * @param event {Event} custom event
+					 */
 
 					_hideFloatingPanels: function(event) {
 						var instance = this;
@@ -1090,11 +1336,13 @@ AUI().add(
 						);
 					},
 
-					_hideLoading: function(exp) {
-						var instance = this;
-
-						instance._container.one('div.loading-animation').remove();
-					},
+					/**
+					 * Invokes hide() method of node's parentNode, specified as first argument.
+					 *
+					 * @method _hideSection
+					 * @protected
+					 * @param exp {String} An expression (CSS selector), which will be used by A.one function.
+					 */
 
 					_hideSection: function(exp) {
 						var instance = this;
@@ -1110,11 +1358,26 @@ AUI().add(
 						}
 					},
 
+					/**
+					 * Invokes hide() function of panel, specified by the first argument.
+					 *
+					 * @method _hidePanel
+					 * @protected
+					 * @param panel {Panel} The panel to hide.
+					 */
+
 					_hidePanel: function(panel) {
-						if(panel && panel.get('visible')){
+						if (panel && panel.get('visible')){
 							panel.hide();
 						}
 					},
+
+					/**
+					 * Hides all panels, used in the portlet - for adding, editing and permissions changing.
+					 *
+					 * @method _hidePanels
+					 * @protected
+					 */
 
 					_hidePanels: function() {
 						var instance = this;
@@ -1124,6 +1387,13 @@ AUI().add(
 						instance._hidePanel(instance._panelEdit);
 						instance._hidePanel(instance._panelPermissionsChange);
 					},
+
+					/**
+					 * The main function, which loads the list with Vocabularies from server.
+					 *
+					 * @method _loadData
+					 * @protected
+					 */
 
 					_loadData: function() {
 						var instance = this;
@@ -1136,6 +1406,17 @@ AUI().add(
 							}
 						);
 					},
+
+					/**
+					 * Sets the url, specified as first argument to the iframe, which is responsible for editing the permissions.
+					 * Also, sets an animation during the process of loading,
+					 * shows the permissions panel once the loading process finishes and
+					 * updates its zIndex in order to set this panel on top of edit panel.
+					 *
+					 * @method _loadPermissions
+					 * @protected
+					 * @param url {String} The url of the page, which is responsible for editing the permissions.
+					 */
 
 					_loadPermissions: function(url){
 						var instance = this;
@@ -1161,21 +1442,50 @@ AUI().add(
 						panelPermissionsChange.set('zIndex', parseInt(instance._panelEdit.get('zIndex'), 10) + 2 );
 					},
 
+					/**
+					 * Updates a Category's position in the tree with Categories.
+					 *
+					 * @method _merge
+					 * @protected
+					 * @param fromCategoryId {String} The ID of src node
+					 * @param fromCategoryName {String} The name of src node
+					 * @param toCategoryId {String} The ID of destination category or an empty string
+					 * @param vocabularyId {String} The ID of the vocabulary to which the category belongs
+					 */
+
 					_merge: function(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId) {
 						var instance = this;
 
-						var categoryProperties = instance._buildCategoryProperties();
+						// TODO: update the logic of dealing with category properties - they are now loaded from server
+						var categoryProperties = '';
 
 						vocabularyId = vocabularyId || instance._selectedVocabularyId;
 
 						instance._updateCategory(fromCategoryId, vocabularyId, toCategoryId, fromCategoryName, categoryProperties);
 					},
 
+					/**
+					 * Displays error message in case of error on adding Category
+					 *
+					 * @method _onCategoryAddFailure
+					 * @protected
+					 * @param response {Object} The server response
+					 */
+
 					_onCategoryAddFailure: function(response) {
 						var instance = this;
 
 						instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get('your-request-failed-to-complete'));
 					},
+
+					/**
+					 * The function checks the server respone and either displays a message in case of error
+					 * or selects the current Vocabulary and loads its Categories.
+					 *
+					 * @metod _onCategoryAddSuccess
+					 * @protected
+					 * @param response {Object} The server response
+					 */
 
 					_onCategoryAddSuccess: function(response) {
 						var instance = this;
@@ -1220,11 +1530,28 @@ AUI().add(
 						}
 					},
 
+					/**
+					 * Closes Category add panel.
+					 *
+					 * @method _onCategoryAddButtonClose
+					 * @protected
+					 * @param event {Event} custom event
+					 */
+
 					_onCategoryAddButtonClose: function(event) {
 						var instance = this;
 
 						instance._hidePanel(instance._categoryPanelAdd);
 					},
+
+					/**
+					 * Listener to change category permissions button.
+					 * The function prepares an URL to the page with permissions.
+					 *
+					 * @method _onCategoryChangePermissions
+					 * @protected
+					 * @param event {Event} custom event
+					 */
 
 					_onCategoryChangePermissions: function(event){
 						var instance = this;
@@ -1234,6 +1561,15 @@ AUI().add(
 
 						instance._loadPermissions(url);
 					},
+
+					/**
+					 * Listener to delete Category button.
+					 * Invokes <code>_deleteCategory</code> function in order to delete the Category.
+					 *
+					 * @method _onCategoryDelete
+					 * @protected
+					 * @param event {Event} custom event
+					 */
 
 					_onCategoryDelete: function(event){
 						var instance = this;
@@ -1265,6 +1601,16 @@ AUI().add(
 						}
 					},
 
+					/**
+					 * Listener to Category submit button. This function either creates a new Category
+					 * or updates the data of the existing one.
+					 *
+					 * @method _onCategoryFormSubmit
+					 * @protected
+					 * @param event {Event} custom event
+					 * @param form {A.Node} The form, which data should be send to server
+					 */
+
 					_onCategoryFormSubmit: function(event, form) {
 						var instance = this;
 
@@ -1274,7 +1620,7 @@ AUI().add(
 
 						var vocabularyId = (vocabularySelectNode && vocabularySelectNode.val()) || instance._selectedVocabularyId;
 
-						if(vocabularyId) {
+						if (vocabularyId) {
 							var vocabularyElId = ["#", instance._prefixedPortletId, 'vocabularyId'].join('');
 							var parentCategoryElId = ["#", instance._prefixedPortletId, 'parentCategoryId'].join('');
 
@@ -1285,9 +1631,18 @@ AUI().add(
 						}
 					},
 
+					/**
+					 * Listener to click event on Category view container.
+					 * This function displays edit panel, or deletes the current category.
+					 *
+					 * @method _onCategoryViewContainerClick
+					 * @protected
+					 * @param event {Event} custom event
+					 */
+
 					_onCategoryViewContainerClick: function(event){
 						var instance = this;
-						
+
 						var targetId = event.target.get('id');
 
 						if (targetId === 'category-edit-button'){
@@ -1296,12 +1651,20 @@ AUI().add(
 							instance._hidePanels();
 							instance._showCategoryPanel(ACTION_EDIT);
 						}
-						else if(targetId === 'category-delete-button'){
+						else if (targetId === 'category-delete-button'){
 							event.halt();
 
 							instance._onCategoryDelete();
 						}
 					},
+
+					/**
+					 * Displays messsage in case of failure on viewing a Category.
+					 *
+					 * @method _onCategoryViewFailure
+					 * @protected
+					 * @param response {Object} The server response
+					 */
 
 					_onCategoryViewFailure: function(response){
 						var instance = this;
@@ -1309,17 +1672,50 @@ AUI().add(
 						instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get('your-request-failed-to-complete'));
 					},
 
+					/**
+					 * Loads the data, returned from server to the view container.
+					 *
+					 * @method _onCategoryViewSuccess
+					 * @protected
+					 * @param response {Object} The server response
+					 */
+
 					_onCategoryViewSuccess: function(response){
 						var instance = this;
 
 						instance._categoryViewDataContainer.html(response);
 					},
 
+					/**
+					 * Listener to load event of the iframe in permissions panel.
+					 * This function invokes <code>_tunePermissionsPanel</code> method
+					 *
+					 * @method _onPermissionsPanelLoad
+					 * @protected
+					 * @param event {Event} custom event
+					 */
+
 					_onPermissionsPanelLoad: function(event){
 						var instance = this;
 
 						instance._tunePermissionsPanel();
 					},
+
+					/**
+					 * Shows Category panel. Depending on the action, either the panel for
+					 * adding or panel for editing will be opened.
+					 *
+					 * @method _onShowCategoryPanel
+					 * @protected
+					 * @param event {Event} custom event
+					 * @param action {Number} Can be one of these:
+					 * <dl>
+					 *		<dt>ACTION_ADD or 0</dt>
+					 *			<dd>Add a new category</dd>
+					 *		<dt>ACTION_EDIT or 1</dt>
+					 *			<dd>Edit an existing category</dd>
+					 * </dl>
+					 */
 
 					_onShowCategoryPanel: function(event, action){
 						var instance = this;
@@ -1329,6 +1725,22 @@ AUI().add(
 						instance._showCategoryPanel(action);
 					},
 
+					/**
+					 * Shows Vocabulary panel. Depending on the action, specified as second argument,
+					 * either the panel for adding or panel for editing will be opened.
+					 *
+					 * @method _onShowVocabularyPanel
+					 * @protected
+					 * @param event {Event} custom event
+					 * @param action {Number} Can be one of these:
+					 * <dl>
+					 *		<dt>ACTION_ADD or 0</dt>
+					 *			<dd>Add a new category</dd>
+					 *		<dt>ACTION_EDIT or 1</dt>
+					 *			<dd>Edit an existing category</dd>
+					 * </dl>
+					 */
+
 					_onShowVocabularyPanel: function(event, action){
 						var instance = this;
 
@@ -1337,11 +1749,28 @@ AUI().add(
 						instance._showVocabularyPanel(action);
 					},
 
+					/**
+					 * Displays an error message in case of Vocabulary add failure
+					 *
+					 * @method _onVocabularyAddFailure
+					 * @protected
+					 * @param response {Object} The response from the server
+					 */
+
 					_onVocabularyAddFailure: function(response) {
 						var instance = this;
 
 						instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get('your-request-failed-to-complete'));
 					},
+
+					/**
+					 * The function checks the server respone and either displays a message
+					 * in case of error, or loads the categories to the current Vocabulary.
+					 *
+					 * @metod _onVocabularyAddSuccess
+					 * @protected
+					 * @param response {Object} The server response
+					 */
 
 					_onVocabularyAddSuccess: function(response) {
 						var instance = this;
@@ -1392,6 +1821,15 @@ AUI().add(
 						}
 					},
 
+					/**
+					 * Listener to change Vocabulary permissions button.
+					 * The function prepares an URL to the page with permissions.
+					 *
+					 * @method _onVocabularyChangePermissions
+					 * @protected
+					 * @param event {Event} custom event
+					 */
+
 					_onVocabularyChangePermissions: function(event){
 						var instance = this;
 
@@ -1400,6 +1838,14 @@ AUI().add(
 
 						instance._loadPermissions(url);
 					},
+
+					/**
+					 * Listener to delete Vocabulary button.
+					 * Invokes <code>_deleteVocabulary</code> function in order to delete Vocabulary.
+					 *
+					 * @method _onVocabularyDelete
+					 * @protected
+					 */
 
 					_onVocabularyDelete: function(){
 						var instance = this;
@@ -1431,6 +1877,16 @@ AUI().add(
 						}
 					},
 
+					/**
+					 * Listener to Vocabulary submit button. This function either
+					 * creates a new Vocabulary, or updates the data of an existing one.
+					 *
+					 * @method _onVocabularyFormSubmit
+					 * @protected
+					 * @param event {Event} custom event
+					 * @param form {A.Node} The form, which data should be send to server
+					 */
+
 					_onVocabularyFormSubmit: function(event, form) {
 						var instance = this;
 
@@ -1438,6 +1894,15 @@ AUI().add(
 
 						instance._addVocabulary(form);
 					},
+
+					/**
+					 * Listener to user's action on Vocabulary panel.
+					 * Selects a Vocabulary or shows edit panel, depending of the target node.
+					 *
+					 * @method _onVocabularyList
+					 * @protected
+					 * @param event {Event} custom event
+					 */
 
 					_onVocabularyList: function(event){
 						var instance = this;
@@ -1451,6 +1916,14 @@ AUI().add(
 							instance._showVocabularyPanel(ACTION_EDIT);
 						}
 					},
+
+					/**
+					 * Updates permissions panel in order to avoid unneeded vertical scrollbar.
+					 * Also, hides the loading mask before to show the panel.
+					 *
+					 * @method _tunePermissionsPanel
+					 * @protected
+					 */
 
 					_tunePermissionsPanel: function(){
 						var instance = this;
@@ -1466,6 +1939,13 @@ AUI().add(
 						instance._permissionsPanelMaskEl.hide();
 						instance._permissionsPanelContentEl.show();
 					},
+
+					/**
+					 * Creates a new instance of A.LiveSearch and populates it with data.
+					 *
+					 * @method _reloadSearch
+					 * @protected
+					 */
 
 					_reloadSearch: function() {
 						var	instance = this;
@@ -1528,13 +2008,14 @@ AUI().add(
 						instance.liveSearch = new A.LiveSearch(options);
 					},
 
-					_removeCategoryProperty: function(categoryProperty) {
-						var instance = this;
-
-						if (A.all('div.vocabulary-property-row').size() > 2) {
-							categoryProperty.remove();
-						}
-					},
+					/**
+					 * Resets the data in Liferay.AutoFields instance.
+					 *
+					 * @method _resetInputLocalized
+					 * @protected
+					 * @param autoFieldsInstance {Liferay.AutoFields} The AutoFields instance to reset
+					 * @param panelInstance {Liferay.PanelFloating} The container in which <code>autoFieldsInstance</code> argument is rendered
+					 */
 
 					_resetInputLocalized: function(autoFieldsInstance, panelInstance) {
 						var instance = this;
@@ -1548,19 +2029,15 @@ AUI().add(
 						}
 					},
 
-					_saveCategoryProperties: function() {
-						var instance = this;
-
-						var categoryId = instance._selectedCategoryId;
-						var categoryNameNode = A.one('input.category-name');
-						var categoryName = (categoryNameNode && categoryNameNode.val()) || instance._selectedCategoryName;
-						var parentCategoryId = instance._selectedParentCategoryId;
-						var categoryProperties = instance._buildCategoryProperties();
-						var vocabularyId = instance._selectedVocabularyId;
-
-						instance._updateCategory(categoryId, vocabularyId, parentCategoryId, categoryName, categoryProperties);
-						instance._displayVocabularyCategories(vocabularyId);
-					},
+					/**
+					 * Marks a Category as selected and stores its ID, name and parentCategory ID
+					 * to the current instance of the portlet.
+					 *
+					 * @method _selectCategory
+					 * @protected
+					 * @param categoryId {String} The ID of the category, which should be selected.
+					 * @return {Widget} The Widget instance of the Category found.
+					 */
 
 					_selectCategory: function(categoryId) {
 						var instance = this;
@@ -1584,6 +2061,14 @@ AUI().add(
 						return category;
 					},
 
+					/**
+					 * Marks Vocabulary as selected.
+					 *
+					 * @method _selectCurrentVocabulary
+					 * @protected
+					 * @param value {String} The value (ID) of the vocabulary, which should be selected
+					 */
+
 					_selectCurrentVocabulary: function(value) {
 						var instance = this;
 
@@ -1593,6 +2078,15 @@ AUI().add(
 							option.set('selected', true);
 						}
 					},
+
+					/**
+					 * Marks a Vocabulary as selected and loads its Categories.
+					 *
+					 * @method _selectVocabulary
+					 * @protected
+					 * @param vocabularyId {String} The ID of the vocabulary, which should be selected.
+					 * @return {A.Node} The found Vocabulary or null
+					 */
 
 					_selectVocabulary: function(vocabularyId) {
 						var instance = this;
@@ -1621,6 +2115,21 @@ AUI().add(
 						return vocabulary;
 					},
 
+					/**
+					 * Displays a message and sets A.DelayedTask in order to hide the message after some amount of time.
+					 *
+					 * @method _sendMessage
+					 * @protected
+					 * @param type {String} The type of the message. Can be one of the following:
+					 * <dl>
+					 *		<dt>MSG_TYPE_ERROR or 'error'</dt>
+					 *			<dd>Message type error</dd>
+					 *		<dt>MSG_TYPE_SUCCESS or 'success'</dt>
+					 *			<dd>Message type success</dd>
+					 * </dl>
+					 * @param message {String} Message text
+					 */
+
 					_sendMessage: function(type, message) {
 						var instance = this;
 
@@ -1634,6 +2143,20 @@ AUI().add(
 
 						instance._hideMessageTask.delay(7000);
 					},
+
+					/**
+					 * Shows a panel in order to add a new Category or edit an existing one.
+					 *
+					 * @method _showCategoryPanel
+					 * @protected
+					 * @param action {Number} Can be one of these:
+					 * <dl>
+					 *		<dt>ACTION_ADD or 0</dt>
+					 *			<dd>Add a new category</dd>
+					 *		<dt>ACTION_EDIT or 1</dt>
+					 *			<dd>Edit an existing category</dd>
+					 * </dl>
+					 */
 
 					_showCategoryPanel: function(action){
 						var instance = this;
@@ -1649,6 +2172,14 @@ AUI().add(
 								throw 'Internal error. No default action specified.';
 						}
 					},
+
+					/**
+					 * Shows a panel for adding Category.
+					 * Creates a new panel if there is no existing one already.
+					 *
+					 * @method _showCategoryPanelAdd
+					 * @protected
+					 */
 
 					_showCategoryPanelAdd: function(){
 						var instance = this;
@@ -1673,7 +2204,7 @@ AUI().add(
 									}
 								}
 							);
-								
+
 							categoryPanelAdd.show();
 
 							instance._alignPanel(categoryPanelAdd);
@@ -1686,8 +2217,15 @@ AUI().add(
 							instance._alignPanel(categoryPanelAdd);
 
 							instance._focusCategoryPanelAdd();
-						}						
+						}
 					},
+
+					/**
+					 * Creates and shows a new panel for editing Category or reuses a previously created one.
+					 *
+					 * @method _showCategoryPanelEdit
+					 * @protected
+					 */
 
 					_showCategoryPanelEdit: function(){
 						var instance = this;
@@ -1697,7 +2235,8 @@ AUI().add(
 
 						if (!categoryPanelEdit){
 							categoryPanelEdit = instance._createPanelEdit();
-						} else {
+						}
+						else {
 							forceStart = true;
 
 							instance._currentPanelEditInitHandler.detach();
@@ -1729,11 +2268,27 @@ AUI().add(
 						instance._alignPanel(categoryPanelEdit);
 					},
 
+					/**
+					 * Replaces the content of a node(s) specified by the first argument with an animation.
+					 *
+					 * @method _showLoading
+					 * @protected
+					 * @param container {String} Selector CSS string.
+					 */
+
 					_showLoading: function(container) {
 						var instance = this;
 
 						A.all(container).html('<div class="loading-animation" />');
 					},
+
+					/**
+					 * Shows a section specified by the CSS selector in the first argument.
+					 *
+					 * @method _showSection
+					 * @protected
+					 * @param exp {String} Selector CSS string.
+					 */
 
 					_showSection: function(exp) {
 						var instance = this;
@@ -1754,6 +2309,20 @@ AUI().add(
 						}
 					},
 
+					/**
+					 * Shows a panel in order to add a new Vocabulary or edit an existing one.
+					 *
+					 * @method _showVocabularyPanel
+					 * @protected
+					 * @param action {Number} Can be one of these:
+					 * <dl>
+					 *		<dt>ACTION_ADD or 0</dt>
+					 *			<dd>Add a new vocabulary</dd>
+					 *		<dt>ACTION_EDIT or 1</dt>
+					 *			<dd>Edit an existing vocabulary</dd>
+					 * </dl>
+					 */
+
 					_showVocabularyPanel: function(action){
 						var instance = this;
 
@@ -1768,6 +2337,14 @@ AUI().add(
 								throw 'Internal error. No default action specified.';
 						}
 					},
+
+					/**
+					 * Shows a panel for adding Vocabulary.
+					 * Creates a new panel if there is no existing one.
+					 *
+					 * @method _showVocabularyPanelAdd
+					 * @protected
+					 */
 
 					_showVocabularyPanelAdd: function(){
 						var instance = this;
@@ -1804,6 +2381,14 @@ AUI().add(
 						}
 					},
 
+					/**
+					 * Shows a panel for editing Vocabulary.
+					 * Creates a new panel if there is no existing one.
+					 *
+					 * @method _showVocabularyPanelEdit
+					 * @protected
+					 */
+
 					_showVocabularyPanelEdit: function(){
 						var instance = this;
 
@@ -1812,7 +2397,8 @@ AUI().add(
 
 						if (!vocabularyPanelEdit){
 							vocabularyPanelEdit = instance._createPanelEdit();
-						} else {
+						}
+						else {
 							forceStart = true;
 
 							instance._currentPanelEditInitHandler.detach();
@@ -1841,11 +2427,30 @@ AUI().add(
 						instance._alignPanel(vocabularyPanelEdit);
 					},
 
+					/**
+					 * Removes 'selected' class from all vocabulary nodes
+					 *
+					 * @method _unselectAllVocabularies
+					 * @protected
+					 */
+
 					_unselectAllVocabularies: function() {
 						var instance = this;
 
 						A.all(instance._vocabularyItemSelector).removeClass('selected');
 					},
+
+					/**
+					 * Updates Category data.
+					 *
+					 * @method _updateCategory
+					 * @protected
+					 * @param categoryId {String} The ID of Category
+					 * @param vocabularyId {String} The ID of Vocabulary
+					 * @param name {String} The name vof the Category
+					 * @param categoryProperties {Array} The properties of Category
+					 * @param callback {Function} (optional) Callback function to be invoked once the process of finishes
+					 */
 
 					_updateCategory: function(categoryId, vocabularyId, parentCategoryId, name, categoryProperties, callback) {
 						var instance = this;
@@ -1908,28 +2513,6 @@ AUI().add(
 						);
 					},
 
-					_updateVocabulary: function(vocabularyId, vocabularyName, callback) {
-						var titleMap = {};
-
-						titleMap[themeDisplay.getDefaultLanguageId()] = vocabularyName;
-
-						Liferay.Service.Asset.AssetVocabulary.updateVocabulary(
-							{
-								vocabularyId: vocabularyId,
-								title: '',
-								titleMap: JSON.stringify(titleMap),
-								description: '',
-								settings: '',
-								serviceContext: JSON.stringify(
-									{
-										scopeGroupId: themeDisplay.getParentGroupId()
-									}
-								)
-							},
-							callback
-						);
-					},
-
 					_categoryItemSelector: '.vocabulary-categories .aui-tree-node',
 					_categoryContainerSelector: '.vocabulary-categories',
 					_selectedCategoryName: null,
@@ -1943,6 +2526,11 @@ AUI().add(
 			}
 		);
 
+		/**
+		 * Provides VocabularyTree component.
+		 *
+		 * @extends TreeViewDD
+		 */
 		var VocabularyTree = A.Component.create(
 			{
 				NAME: 'VocabularyTree',
