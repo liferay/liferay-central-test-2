@@ -32,9 +32,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ASSET_PUBLISHER_ABSTRACT_LENGTH = "ASSET_PUBLISHER_ABSTRACT_LENGTH";
 
-    public static final String ASSET_VOCABULARIES = "ASSET_VOCABULARIES";
-
-	public static final String ASSET_VOCABULARY = "ASSET_VOCABULARY";
+    public static final String ASSET_VOCABULARY = "ASSET_VOCABULARY";
 
 	public static final String ASSOCIATE_KEY = LiferayConfigureListener.ASSOCIATE_KEY;
 

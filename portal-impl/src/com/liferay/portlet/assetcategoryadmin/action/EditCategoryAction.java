@@ -86,7 +86,6 @@ public class EditCategoryAction extends PortletAction {
 		throws Exception {
 
 		ActionUtil.getCategory(renderRequest);
-		ActionUtil.getAllVocabularies(renderRequest);
 
 		return mapping.findForward(
 			getForward(

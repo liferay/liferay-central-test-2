@@ -40,9 +40,6 @@ AUI().add(
 		var AutoFields = A.Component.create(
 			{
 				EXTENDS: A.Base,
-
-				NAME: 'autofields',
-
 				prototype: {
 
 					initializer: function(config) {
@@ -145,8 +142,6 @@ AUI().add(
 						);
 
 						instance._attachSubmitListener();
-
-						return instance;
 					},
 
 					addRow: function(node) {
@@ -204,20 +199,6 @@ AUI().add(
 								}
 							);
 						}
-					},
-
-					reset: function() {
-						var instance = this;
-
-						var contentBox = instance._contentBox;
-
-						contentBox.all('.lfr-form-row').each(
-							function(item, index, collection) {
-								instance.deleteRow(item);
-							}
-						);
-
-						instance._undoManager.clear();
 					},
 
 					save: function(form) {

@@ -17,22 +17,15 @@
 <%@ include file="/html/portlet/asset_category_admin/init.jsp" %>
 
 <%
-String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_asset_category_admin_edit_vocabulary");
-
 AssetVocabulary vocabulary = (AssetVocabulary)request.getAttribute(WebKeys.ASSET_VOCABULARY);
-
-long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
-
-String formName = randomNamespace + "_fm";
 %>
 
 <portlet:actionURL var="editVocabularyURL">
 	<portlet:param name="struts_action" value="/asset_category_admin/edit_vocabulary" />
 </portlet:actionURL>
 
-<aui:form action='<%=editVocabularyURL%>' cssClass="update-vocabulary-form" method="get" name="<%= formName %>">
+<aui:form action='<%=editVocabularyURL%>' cssClass="update-vocabulary-form" method="get" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= vocabulary == null ? Constants.ADD : Constants.UPDATE %>" />
-	<aui:input name="vocabularyId" type="hidden" value="<%= vocabulary != null ? vocabulary.getVocabularyId() : StringPool.BLANK %>" />
 
 	<aui:model-context bean="<%= vocabulary %>" model="<%= AssetVocabulary.class %>" />
 
@@ -54,23 +47,7 @@ String formName = randomNamespace + "_fm";
 				</c:choose>
 
 				<aui:button-row>
-					<aui:button type="submit"/>
-
-					<c:if test="<%= vocabulary != null && permissionChecker.hasPermission(scopeGroupId, AssetVocabulary.class.getName(), vocabulary.getVocabularyId(), ActionKeys.DELETE) %>" >
-						<aui:button value="delete" id="vocabulary-delete-button" />
-					</c:if>
-
-					<c:if test="<%= vocabulary != null && permissionChecker.hasPermission(scopeGroupId, AssetVocabulary.class.getName(), vocabulary.getVocabularyId(), ActionKeys.PERMISSIONS) %>" >
-						<liferay-security:permissionsURL
-							modelResource="<%= AssetVocabulary.class.getName() %>"
-							modelResourceDescription="<%= vocabulary.getTitle(locale) %>"
-							resourcePrimKey="<%= String.valueOf(vocabulary.getVocabularyId()) %>"
-							var="permissionsURL"
-							windowState="pop_up"
-						/>
-
-						<aui:button value="permissions" id="vocabulary-change-permissions" data-url="<%= permissionsURL %>" />
-					</c:if>
+					<aui:button type="submit" />
 
 					<aui:button cssClass="close-panel" type="cancel" value="close" />
 				</aui:button-row>
