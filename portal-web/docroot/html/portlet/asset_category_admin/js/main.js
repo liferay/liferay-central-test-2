@@ -17,7 +17,9 @@ AUI().add(
 
 		var ACTION_EDIT = 1;
 
-		var ACTION_VIEW = 2;
+		var ACTION_MOVE = 2;
+
+		var ACTION_VIEW = 3;
 
 		var CATEGORY = 0;
 
@@ -30,6 +32,10 @@ AUI().add(
 		var EXC_PRINCIPAL = 'auth.PrincipalException';
 
 		var EXC_VOCABULARY_NAME = 'VocabularyNameException';
+
+		var LIFECYCLE_RENDER = 0;
+
+		var LIFECYCLE_PROCESS = 1;
 
 		var MSG_TYPE_ERROR = 'error';
 
@@ -213,9 +219,8 @@ AUI().add(
 
 						var vocabularyId = dropNode.attr('data-vocabularyid');
 						var fromCategoryId = instance._getCategoryId(node);
-						var fromCategoryName = instance._getCategoryName(node);
 
-						instance._merge(fromCategoryId, fromCategoryName, 0, vocabularyId);
+						instance._merge(fromCategoryId, 0, vocabularyId);
 
 						instance._selectVocabulary(vocabularyId);
 
@@ -329,7 +334,7 @@ AUI().add(
 												instance._vocabularyContent.addClass(CSS_VOCABULARY_EDIT_CATEGORY);
 												instance._showSection(viewContainer);
 
-												var categoryURL = instance._createURL(CATEGORY, ACTION_VIEW);
+												var categoryURL = instance._createURL(CATEGORY, ACTION_VIEW, LIFECYCLE_RENDER);
 
 												var config = {
 													dataType: 'html',
@@ -413,7 +418,7 @@ AUI().add(
 
 						instance._bindCloseEvent(instance._categoryPanelAdd);
 
-						instance._categoryPanelAdd.after(
+						instance._categoryPanelAdd.on(
 							'visibleChange',
 							function(event) {
 								if (!event.newVal) {
@@ -453,21 +458,19 @@ AUI().add(
 									dropAppend: function(event) {
 										var tree = event.tree;
 										var fromCategoryId = instance._getCategoryId(tree.dragNode);
-										var fromCategoryName = instance._getCategoryName(tree.dragNode);
 										var toCategoryId = instance._getCategoryId(tree.dropNode);
 										var vocabularyId = instance._selectedVocabularyId;
 
-										instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
+										instance._merge(fromCategoryId, toCategoryId, vocabularyId);
 									},
 									dropInsert: function(event) {
 										var tree = event.tree;
 										var parentNode = tree.dropNode.get('parentNode');
 										var fromCategoryId = instance._getCategoryId(tree.dragNode);
-										var fromCategoryName = instance._getCategoryName(tree.dragNode);
 										var toCategoryId = instance._getCategoryId(parentNode);
 										var vocabularyId = instance._selectedVocabularyId;
 
-										instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
+										instance._merge(fromCategoryId, toCategoryId, vocabularyId);
 									}
 								},
 								type: 'normal'
@@ -504,7 +507,7 @@ AUI().add(
 
 						instance._bindCloseEvent(instance._vocabularyPanelAdd);
 
-						instance._vocabularyPanelAdd.after(
+						instance._vocabularyPanelAdd.on(
 							'visibleChange',
 							function(event) {
 								if (!event.newVal) {
@@ -619,7 +622,8 @@ AUI().add(
 
 					/**
 					 * Creates a URL depending on the type and action specified as arguments.
-					 * The type can be VOCABULARY or CATEGORY and action can be ACTION_ADD, ACTION_EDIT or ACTION_VIEW.
+					 * The type can be VOCABULARY or CATEGORY and action can be:
+					 * ACTION_ADD, ACTION_EDIT, ACTION_MOVE or ACTION_VIEW.
 					 *
 					 * @method _createURL
 					 * @protected
@@ -636,17 +640,37 @@ AUI().add(
 					 *			<dd>Creates a URL to add the specified type of resource</dd>
 					 *		<dt>ACTION_EDIT or 1</dt>
 					 *			<dd>Creates a URL to edit the specified type of resource</dd>
-					 *		<dt>ACTION_VIEW or 2</dt>
+					 *		<dt>ACTION_MOVE or 2</dt>
+					 *			<dd>Creates a URL to move the specified type of resource</dd>
+					 *		<dt>ACTION_VIEW or 3</dt>
 					 *			<dd>Creates a URL to view the data of specified resource type</dd>
 					 *  </dl>
+					 *  @param lifecycle {Object} Portlet lifecycle. Can be one the following values:
+					 *  <dl>
+					 *		<dt>LIFECYCLE_RENDER or 0</dt>
+					 *			<dd>Render lifecycle</dd>
+					 *		<dt>LIFECYCLE_PROCESS or 1</dt>
+					 *			<dd>Process lifecycle</dd>
+					 *  @param params {Object} Map of additional parameters, which should be passed to Liferay.PortletURL
 					 *  @return {PortletURL} The created URL
 					 */
 
-					_createURL: function(type, action) {
+					_createURL: function(type, action, lifecycle, params) {
 						var instance = this;
 
 						var path = '/asset_category_admin/';
-						var url = Liferay.PortletURL.createRenderURL();
+
+						var url;
+
+						if (lifecycle === LIFECYCLE_RENDER){
+							url = Liferay.PortletURL.createRenderURL();
+						}
+						else if (lifecycle === LIFECYCLE_PROCESS){
+							url = Liferay.PortletURL.createActionURL();
+						}
+						else {
+							throw 'Internal error. Unimplemented lifecycle.';
+						}
 
 						url.setPortletId(instance.portletId);
 						url.setWindowState('exclusive');
@@ -659,22 +683,38 @@ AUI().add(
 							}
 						}
 						else if (type == CATEGORY) {
-							url.setParameter('vocabularyId', instance._selectedVocabularyId);
-
 							if (action === ACTION_ADD){
 								path += 'edit_category';
+								url.setParameter('vocabularyId', instance._selectedVocabularyId);
 							}
 							else if (action === ACTION_EDIT){
 								path += 'edit_category';
 								url.setParameter('categoryId', instance._selectedCategoryId);
+								url.setParameter('vocabularyId', instance._selectedVocabularyId);
+							}
+							else if (action === ACTION_MOVE){
+								path += 'edit_category';
+								url.setParameter('categoryId', instance._selectedCategoryId);
+								url.setParameter('cmd', 'move');
 							}
 							else if (action === ACTION_VIEW){
 								path += 'view_category';
 								url.setParameter('categoryId', instance._selectedCategoryId);
+								url.setParameter('vocabularyId', instance._selectedVocabularyId);
 							}
 						}
 
 						url.setParameter('struts_action', path);
+
+						if (params){
+							var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+							for (var key in params){
+								if (hasOwnProperty.call(params, key)){
+									url.setParameter(key, params[key]);
+								}
+							}
+						}
 
 						return url;
 					},
@@ -1171,21 +1211,6 @@ AUI().add(
 					},
 
 					/**
-					 * Returns the name of Category. The function extracts it from the label attribute of some <code>A.Node</code> node
-					 *
-					 * @method _getCategoryName
-					 * @protected
-					 * @param node {A.Node} The node, which contains the name of the Category.
-					 * @return {String} The name of the Category.
-					 */
-
-					_getCategoryName: function(node) {
-						var instance = this;
-
-						return node.get('label');
-					},
-
-					/**
 					 * Returns the ID of parent Category.
 					 * The function finds the parentNode of the node, specified as te first argument and
 					 * invokes <code>_getCategoryId</code> function in order to extract the ID.
@@ -1448,20 +1473,16 @@ AUI().add(
 					 * @method _merge
 					 * @protected
 					 * @param fromCategoryId {String} The ID of src node
-					 * @param fromCategoryName {String} The name of src node
 					 * @param toCategoryId {String} The ID of destination category or an empty string
 					 * @param vocabularyId {String} The ID of the vocabulary to which the category belongs
 					 */
 
-					_merge: function(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId) {
+					_merge: function(fromCategoryId, toCategoryId, vocabularyId) {
 						var instance = this;
-
-						// TODO: update the logic of dealing with category properties - they are now loaded from server
-						var categoryProperties = '';
 
 						vocabularyId = vocabularyId || instance._selectedVocabularyId;
 
-						instance._updateCategory(fromCategoryId, vocabularyId, toCategoryId, fromCategoryName, categoryProperties);
+						instance._updateCategory(fromCategoryId, toCategoryId, vocabularyId);
 					},
 
 					/**
@@ -1636,6 +1657,50 @@ AUI().add(
 						}
 					},
 
+					_onCategoryMoveFailure: function(event){
+						var instance = this;
+
+						instance._sendMessage(MSG_TYPE_ERROR, Liferay.Language.get('your-request-failed-to-complete'));
+					},
+
+					_onCategoryMoveSuccess: function(response){
+						var instance = this;
+
+						var exception = response.exception;
+
+						if (!exception) {
+							instance._closeEditSection();
+							instance._sendMessage(MSG_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
+						}
+						else {
+							var errorKey;
+
+							if (exception.indexOf('AssetCategoryNameException') > -1) {
+								errorKey = Liferay.Language.get('please-enter-a-valid-category-name');
+							}
+							else if (exception.indexOf('DuplicateCategoryException') > -1) {
+								errorKey = Liferay.Language.get('there-is-another-category-with-the-same-name-and-the-same-parent');
+							}
+							else if (exception.indexOf(EXC_NO_SUCH_VOCABULARY) > -1) {
+								errorKey = Liferay.Language.get('that-vocabulary-does-not-exist');
+							}
+							else if (exception.indexOf('NoSuchCategoryException') > -1) {
+								errorKey = Liferay.Language.get('that-parent-category-does-not-exist');
+							}
+							else if (exception.indexOf(EXC_PRINCIPAL) > -1) {
+								errorKey = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
+							}
+							else if (exception.indexOf('Exception') > -1) {
+								errorKey = Liferay.Language.get('one-of-your-fields-contains-invalid-characters');
+							}
+							else {
+								errorKey = Liferay.Language.get('your-request-failed-to-complete');
+							}
+
+							instance._sendMessage(MSG_TYPE_ERROR, errorKey);
+						}
+					},
+
 					/**
 					 * Listener to click event on Category view container.
 					 * This function displays edit panel, or deletes the current category.
@@ -1661,7 +1726,7 @@ AUI().add(
 
 							instance._onCategoryDelete();
 						}
-						else if(targetId === 'category-change-permissions'){
+						else if (targetId === 'category-change-permissions'){
 							event.halt();
 
 							instance._onCategoryChangePermissions();
@@ -2023,6 +2088,7 @@ AUI().add(
 						instance.liveSearch = new A.LiveSearch(options);
 					},
 
+
 					/**
 					 * Resets the data in Liferay.AutoFields instance.
 					 *
@@ -2044,6 +2110,7 @@ AUI().add(
 						}
 					},
 
+
 					/**
 					 * Marks a Category as selected and stores its ID, name and parentCategory ID
 					 * to the current instance of the portlet.
@@ -2058,13 +2125,11 @@ AUI().add(
 						var instance = this;
 
 						var category = instance._getCategory(categoryId);
-						var categoryName = instance._getCategoryName(category);
 						var parentCategoryId = instance._getParentCategoryId(category);
 
 						categoryId = instance._getCategoryId(category);
 
 						instance._selectedCategoryId = categoryId;
-						instance._selectedCategoryName = categoryName;
 						instance._selectedParentCategoryId = parentCategoryId || 0;
 
 						if (!categoryId) {
@@ -2204,7 +2269,7 @@ AUI().add(
 						if (!categoryPanelAdd){
 							categoryPanelAdd = instance._createCategoryPanelAdd();
 
-							var categoryURL = instance._createURL(CATEGORY, ACTION_ADD);
+							var categoryURL = instance._createURL(CATEGORY, ACTION_ADD, LIFECYCLE_RENDER);
 
 							categoryPanelAdd.plug(
 								A.Plugin.IO,
@@ -2259,7 +2324,7 @@ AUI().add(
 
 						categoryPanelEdit.set('title', Liferay.Language.get('edit-category'));
 
-						var categoryEditURL = instance._createURL(CATEGORY, ACTION_EDIT);
+						var categoryEditURL = instance._createURL(CATEGORY, ACTION_EDIT, LIFECYCLE_RENDER);
 
 						categoryPanelEdit.plug(
 							A.Plugin.IO,
@@ -2369,7 +2434,7 @@ AUI().add(
 						if (!vocabularyPanelAdd){
 							vocabularyPanelAdd = instance._createVocabularyPanelAdd();
 
-							var vocabularyURL = instance._createURL(VOCABULARY, ACTION_ADD);
+							var vocabularyURL = instance._createURL(VOCABULARY, ACTION_ADD, LIFECYCLE_RENDER);
 
 							vocabularyPanelAdd.plug(
 								A.Plugin.IO,
@@ -2421,7 +2486,7 @@ AUI().add(
 
 						vocabularyPanelEdit.set('title', Liferay.Language.get('edit-vocabulary'));
 
-						var vocabularyEditURL = instance._createURL(VOCABULARY, ACTION_EDIT);
+						var vocabularyEditURL = instance._createURL(VOCABULARY, ACTION_EDIT, LIFECYCLE_RENDER);
 
 						vocabularyPanelEdit.plug(
 							A.Plugin.IO,
@@ -2456,81 +2521,48 @@ AUI().add(
 					},
 
 					/**
-					 * Updates Category data.
+					 * Moves Category to another Vocabulary or makes it child of another Category
 					 *
 					 * @method _updateCategory
 					 * @protected
 					 * @param categoryId {String} The ID of Category
+					 * @param parentCategoryId {String} The ID of Category to which source Category should be moved.
 					 * @param vocabularyId {String} The ID of Vocabulary
-					 * @param name {String} The name vof the Category
-					 * @param categoryProperties {Array} The properties of Category
-					 * @param callback {Function} (optional) Callback function to be invoked once the process of finishes
 					 */
 
-					_updateCategory: function(categoryId, vocabularyId, parentCategoryId, name, categoryProperties, callback) {
+					_updateCategory: function(categoryId, parentCategoryId, vocabularyId) {
 						var instance = this;
 
-						var descriptionMap = {};
-						var titleMap = {};
+						var moveURL = instance._createURL(CATEGORY, ACTION_MOVE, LIFECYCLE_PROCESS);
 
-						titleMap[themeDisplay.getDefaultLanguageId()] = name;
+						var prefix = instance._prefixedPortletId;
 
-						Liferay.Service.Asset.AssetCategory.updateCategory(
-							{
-								categoryId: categoryId,
-								parentCategoryId: parentCategoryId,
-								titleMap: JSON.stringify(titleMap),
-								descriptionMap: JSON.stringify(descriptionMap),
-								vocabularyId: vocabularyId,
-								properties: categoryProperties,
-								serviceContext: null
-							},
-							function(message) {
-								var exception = message.exception;
+						var data = [
+							prefix, 'categoryId', '=', categoryId,
+							'&', prefix, 'parentCategoryId', '=', parentCategoryId,
+							'&', prefix, 'vocabularyId', '=', vocabularyId
+						].join('');
 
-								if (!exception) {
-									instance._selectedCategory.set('label', name);
+						var config = {
+							data: data,
+							dataType: 'json',
+							on: {
+								success: function(event, id, obj) {
+									var response = this.get('responseData');
 
-									instance._closeEditSection();
-								}
-								else {
-									var errorKey;
-
-									if (exception.indexOf('AssetCategoryNameException') > -1) {
-										errorKey = Liferay.Language.get('please-enter-a-valid-category-name');
-									}
-									else if (exception.indexOf('DuplicateCategoryException') > -1) {
-										errorKey = Liferay.Language.get('there-is-another-category-with-the-same-name-and-the-same-parent');
-									}
-									else if (exception.indexOf(EXC_NO_SUCH_VOCABULARY) > -1) {
-										errorKey = Liferay.Language.get('that-vocabulary-does-not-exist');
-									}
-									else if (exception.indexOf('NoSuchCategoryException') > -1) {
-										errorKey = Liferay.Language.get('that-parent-category-does-not-exist');
-									}
-									else if (exception.indexOf(EXC_PRINCIPAL) > -1) {
-										errorKey = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
-									}
-									else if (exception.indexOf('Exception') > -1) {
-										errorKey = Liferay.Language.get('one-of-your-fields-contains-invalid-characters');
-									}
-									else {
-										errorKey = Liferay.Language.get('your-request-failed-to-complete');
-									}
-
-									instance._sendMessage(MSG_TYPE_ERROR, errorKey);
-								}
-
-								if (callback) {
-									callback(message);
+									instance._onCategoryMoveSuccess(response);
+								},
+								failure: function(event, id, obj) {
+									instance._onCategoryMoveFailure(obj);
 								}
 							}
-						);
+						};
+
+						A.io.request(moveURL.toString(), config);
 					},
 
 					_categoryItemSelector: '.vocabulary-categories .aui-tree-node',
 					_categoryContainerSelector: '.vocabulary-categories',
-					_selectedCategoryName: null,
 					_selectedVocabulary: null,
 					_selectedVocabularyId: null,
 					_selectedVocabularyName: null,
