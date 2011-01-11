@@ -960,7 +960,6 @@ AUI().add(
 								}
 							);
 
-							instance._resetActionValues();
 							instance._hideToolbarSections();
 						}
 						else {
@@ -1092,7 +1091,7 @@ AUI().add(
 								}
 							);
 
-							instance._resetActionValues();
+							instance._hideToolbarSections();
 						}
 						else {
 							var errorKey = '';
@@ -1225,14 +1224,6 @@ AUI().add(
 						if (A.all('div.vocabulary-property-row').size() > 2) {
 							categoryProperty.remove();
 						}
-					},
-
-					_resetActionValues: function() {
-						var instance = this;
-
-						A.all('.vocabulary-actions input[type=text]').val('');
-
-						instance._vocabularyPanel.hide();
 					},
 
 					_resetInputLocalized: function(autoFieldsInstance, panelInstance) {
