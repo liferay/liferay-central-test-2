@@ -28,11 +28,12 @@ import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
 
+import java.util.Locale;
+
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
-import java.util.Locale;
 
 /**
  * @author Julio Camarero

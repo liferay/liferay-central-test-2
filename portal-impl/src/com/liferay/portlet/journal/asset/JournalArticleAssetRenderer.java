@@ -32,10 +32,11 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 
+import java.util.Locale;
+
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import java.util.Locale;
 
 /**
  * @author Julio Camarero

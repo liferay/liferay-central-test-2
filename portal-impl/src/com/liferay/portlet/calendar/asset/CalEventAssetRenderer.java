@@ -26,10 +26,11 @@ import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.permission.CalEventPermission;
 
+import java.util.Locale;
+
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import java.util.Locale;
 
 /**
  * @author Juan Fernández
