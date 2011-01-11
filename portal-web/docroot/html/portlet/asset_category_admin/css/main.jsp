@@ -128,7 +128,6 @@
 .portlet-asset-category-admin .vocabulary-content li.vocabulary-category,
 .portlet-asset-category-admin li.vocabulary-item,
 .vocabulary-item.portlet-asset-category-admin-helper {
-	border-bottom: 1px solid #D3D7DB;
 	font-weight: bold;
 	list-style: none;
 }
@@ -191,19 +190,16 @@
 }
 
 .portlet-asset-category-admin .vocabulary-categories {
-	border-bottom: 1px solid #D3D7DB;
-	border-right: 1px solid #D3D7DB;
-	height: 300px;
 	overflow: auto;
 }
 
 .portlet-asset-category-admin .vocabulary-list {
-	border-bottom: 1px #D3D7DB solid;
-	border-left: 1px #D3D7DB solid;
-	border-right: 1px #D3D7DB solid;
-	height: 300px;
 	overflow: auto;
 	overflow-x: hidden;
+}
+
+.portlet-asset-category-admin .vocabulary-list .vocabulary-content-wrapper {
+	background-color: #F5F5F5;
 }
 
 .portlet-asset-category-admin .vocabulary-list .vocabulary-content-wrapper:hover {
@@ -254,7 +250,6 @@
 }
 
 .portlet-asset-category-admin .vocabulary-edit-category .category-view {
-	height: 300px;
 	padding: 0 5px 0 0px;
 }
 
