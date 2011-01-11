@@ -14,9 +14,8 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portalweb.plugins.alfresco.AlfrescoTests;
-import com.liferay.portalweb.plugins.alfrescocontent.AlfrescoContentTests;
 import com.liferay.portalweb.plugins.analogclock.AnalogClockTests;
+import com.liferay.portalweb.plugins.assetmanagementsystem.AssetManagementSystemTests;
 import com.liferay.portalweb.plugins.biblegateway.BibleGatewayTests;
 import com.liferay.portalweb.plugins.chat.ChatTests;
 import com.liferay.portalweb.plugins.flash.FlashTests;
@@ -28,6 +27,7 @@ import com.liferay.portalweb.plugins.journalpolice.JournalPoliceTests;
 import com.liferay.portalweb.plugins.mail.MailTests;
 import com.liferay.portalweb.plugins.novellcollaboration.NovellCollaborationTests;
 import com.liferay.portalweb.plugins.opensocial.OpenSocialTests;
+import com.liferay.portalweb.plugins.privatemessaging.PrivateMessagingTests;
 import com.liferay.portalweb.plugins.randombibleverse.RandomBibleVerseTests;
 import com.liferay.portalweb.plugins.releasetools.ReleaseToolsTests;
 import com.liferay.portalweb.plugins.rubyconsole.RubyConsoleTests;
@@ -63,9 +63,8 @@ public class Plugins1TestSuite extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTest(LoginTests.suite());
-		testSuite.addTest(AlfrescoTests.suite());
-		testSuite.addTest(AlfrescoContentTests.suite());
 		testSuite.addTest(AnalogClockTests.suite());
+		testSuite.addTest(AssetManagementSystemTests.suite());
 		testSuite.addTest(BibleGatewayTests.suite());
 		testSuite.addTest(ChatTests.suite());
 		testSuite.addTest(FlashTests.suite());
@@ -77,6 +76,7 @@ public class Plugins1TestSuite extends BaseTests {
 		testSuite.addTest(MailTests.suite());
 		testSuite.addTest(NovellCollaborationTests.suite());
 		testSuite.addTest(OpenSocialTests.suite());
+		testSuite.addTest(PrivateMessagingTests.suite());
 		testSuite.addTest(RandomBibleVerseTests.suite());
 		testSuite.addTest(ReleaseToolsTests.suite());
 		testSuite.addTest(RubyConsoleTests.suite());
