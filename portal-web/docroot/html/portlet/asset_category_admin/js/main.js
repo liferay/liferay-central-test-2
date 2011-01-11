@@ -3,8 +3,9 @@ AUI().add(
 	function(A) {
 		var CATEGORY = 0;
 
+		var CSS_VOCABULARY_EDIT_CATEGORY = 'vocabulary-content-edit-category';
+
 		var JSON = A.JSON;
-		var Node = A.Node;
 
 		var EXC_NO_SUCH_VOCABULARY = 'NoSuchVocabularyException';
 
@@ -15,6 +16,8 @@ AUI().add(
 		var MSG_TYPE_ERROR = 'error';
 
 		var MSG_TYPE_SUCCESS = 'success';
+
+		var Node = A.Node;
 
 		var VOCABULARY = 1;
 
@@ -37,6 +40,7 @@ AUI().add(
 						instance.portletId = config.portletId;
 						instance._prefixedPortletId = ['_', config.portletId, '_'].join('');
 						instance._container = A.one('.vocabulary-container');
+						instance._vocabularyContent = A.one( '.vocabulary-content' );
 
 						var categoryRenderURL = instance._createRenderURL(CATEGORY);
 						var vocabularyRenderURL = instance._createRenderURL(VOCABULARY);
@@ -444,6 +448,7 @@ AUI().add(
 												var editContainer = A.one('.vocabulary-edit');
 
 												instance._selectCategory(categoryId);
+												instance._vocabularyContent.addClass(CSS_VOCABULARY_EDIT_CATEGORY);
 												instance._showSection(editContainer);
 											}
 										}
@@ -492,7 +497,7 @@ AUI().add(
 
 						instance._hideSection('.vocabulary-edit');
 
-						A.all(instance._categoryContainerCellsSelector).setStyle('width', 'auto');
+						instance._vocabularyContent.removeClass(CSS_VOCABULARY_EDIT_CATEGORY);
 					},
 
 					_createPermissionURL: function(modelResource, modelResourceDescription, resourcePrimKey) {
@@ -1383,8 +1388,6 @@ AUI().add(
 							if (parentNode) {
 								parentNode.show();
 								element.one('input').focus();
-
-								A.all(instance._categoryContainerCellsSelector).setStyle('width', '33%');
 							}
 						}
 					},
@@ -1519,7 +1522,6 @@ AUI().add(
 					},
 
 					_categoryItemSelector: '.vocabulary-categories .aui-tree-node',
-					_categoryContainerCellsSelector: '.portlet-categories-admin .vocabulary-content td',
 					_categoryContainerSelector: '.vocabulary-categories',
 					_selectedCategoryName: null,
 					_selectedVocabulary: null,
