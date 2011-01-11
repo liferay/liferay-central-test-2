@@ -15,8 +15,8 @@
 --%>
 
 .taglib-asset-tags-summary .tag {
-	background: url(<%= themeImagesPath %>/common/tag.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/common/tag.png) no-repeat 6px 50% #DEE7F8;
 	margin-bottom: 3px;
 	margin-right: 3px;
-	padding: 2px 5px 2px 20px;
+	padding: 3px 5px 3px 25px;
 }

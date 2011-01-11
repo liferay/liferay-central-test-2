@@ -58,7 +58,7 @@ if (assetTagNames.length == 0) {
 				for (int i = 0; i < assetTagNames.length; i++) {
 				%>
 
-					<span class="tag"><%= assetTagNames[i] %></span>
+					<span class="tag aui-textboxlistentry"><%= assetTagNames[i] %></span>
 
 				<%
 				}
