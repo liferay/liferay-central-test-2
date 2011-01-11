@@ -15,6 +15,7 @@
 package com.liferay.portlet.assetcategoryadmin.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.AssetCategory;
@@ -25,12 +26,35 @@ import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @author Iliyan Peychev
  * @author Julio Camarero
  */
 public class ActionUtil {
+
+	public static void getAllVocabularies(HttpServletRequest request)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		List<AssetVocabulary> vocabularies =
+			AssetVocabularyServiceUtil.getGroupVocabularies(
+				themeDisplay.getScopeGroupId());
+
+		request.setAttribute(WebKeys.ASSET_VOCABULARIES, vocabularies);
+	}
+
+	public static void getAllVocabularies(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getAllVocabularies(request);
+	}
 
 	public static void getCategory(HttpServletRequest request)
 		throws Exception {

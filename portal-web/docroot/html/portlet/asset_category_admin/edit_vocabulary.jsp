@@ -26,6 +26,7 @@ AssetVocabulary vocabulary = (AssetVocabulary)request.getAttribute(WebKeys.ASSET
 
 <aui:form action='<%=editVocabularyURL%>' cssClass="update-vocabulary-form" method="get" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= vocabulary == null ? Constants.ADD : Constants.UPDATE %>" />
+	<aui:input name="vocabularyId" type="hidden" value="<%= vocabulary != null ? vocabulary.getVocabularyId() : StringPool.BLANK %>" />
 
 	<aui:model-context bean="<%= vocabulary %>" model="<%= AssetVocabulary.class %>" />
 
