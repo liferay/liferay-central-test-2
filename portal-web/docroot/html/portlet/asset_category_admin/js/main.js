@@ -1627,6 +1627,11 @@ AUI().add(
 							form.one(vocabularyElId).set("value", vocabularyId);
 							form.one(parentCategoryElId).set("value", 0);
 
+							Liferay.fire('saveAutoFields', {
+								form: form
+							}
+							);
+
 							instance._addCategory(form);
 						}
 					},
@@ -1896,6 +1901,11 @@ AUI().add(
 						var instance = this;
 
 						event.halt();
+
+						Liferay.fire('saveAutoFields', {
+							form: form
+						}
+						);
 
 						instance._addVocabulary(form);
 					},
