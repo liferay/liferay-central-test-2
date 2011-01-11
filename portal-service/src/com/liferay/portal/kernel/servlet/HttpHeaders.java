@@ -78,7 +78,8 @@ public interface HttpHeaders {
 
 	public static final String CACHE_CONTROL_NO_CACHE_VALUE = "no-cache";
 
-	public static final String CACHE_CONTROL_NO_CACHE_NO_STORE_VALUE = "no-cache, no-store";
+	public static final String CACHE_CONTROL_NO_CACHE_NO_STORE_VALUE =
+		"no-cache, no-store";
 
 	public static final String CACHE_CONTROL_PUBLIC_VALUE = "public";
 
