@@ -51,6 +51,9 @@ public class PortletDataHandlerKeys {
 
 	public static final String PERMISSIONS = "PERMISSIONS";
 
+	public static final String PERFORM_DIRECT_BINARY_IMPORT =
+		"PERFORM_DIRECT_BINARY_IMPORT";
+
 	public static final String PORTLET_ARCHIVED_SETUPS =
 		"PORTLET_ARCHIVED_SETUPS";
 

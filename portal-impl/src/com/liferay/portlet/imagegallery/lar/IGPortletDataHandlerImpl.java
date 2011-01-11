@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -77,46 +78,54 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String path = getImagePath(portletDataContext, image);
 
-		if (portletDataContext.isPathNotProcessed(path)) {
-			Element imageElement = imagesElement.addElement("image");
-
-			imageElement.addAttribute("path", path);
-			imageElement.addAttribute(
-				"bin-path", getImageBinPath(portletDataContext, image));
-
-			if (portletDataContext.getBooleanParameter(
-					_NAMESPACE, "categories")) {
-
-				portletDataContext.addAssetCategories(
-					IGImage.class, image.getImageId());
-			}
-
-			if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-				portletDataContext.addRatingsEntries(
-					IGImage.class, image.getImageId());
-			}
-
-			if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-				portletDataContext.addAssetTags(
-					IGImage.class, image.getImageId());
-			}
-
-			image.setUserUuid(image.getUserUuid());
-
-			Image largeImage = ImageUtil.findByPrimaryKey(
-				image.getLargeImageId());
-
-			image.setImageType(largeImage.getType());
-
-			portletDataContext.addPermissions(
-				IGImage.class, image.getImageId());
-
-			portletDataContext.addZipEntry(
-				getImageBinPath(portletDataContext, image),
-				largeImage.getTextObj());
-
-			portletDataContext.addZipEntry(path, image);
+		if (!portletDataContext.isPathNotProcessed(path)) {
+			return;
 		}
+
+		Element imageElement = imagesElement.addElement("image");
+
+		imageElement.addAttribute("path", path);
+
+		if (portletDataContext.getBooleanParameter(
+				_NAMESPACE, "categories")) {
+
+			portletDataContext.addAssetCategories(
+				IGImage.class, image.getImageId());
+		}
+
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
+			portletDataContext.addRatingsEntries(
+				IGImage.class, image.getImageId());
+		}
+
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
+			portletDataContext.addAssetTags(
+				IGImage.class, image.getImageId());
+		}
+
+		image.setUserUuid(image.getUserUuid());
+
+		Image largeImage = ImageUtil.findByPrimaryKey(
+			image.getLargeImageId());
+
+		image.setImageType(largeImage.getType());
+
+		portletDataContext.addPermissions(
+			IGImage.class, image.getImageId());
+
+		boolean performDirectBinaryImport = MapUtil.getBoolean(
+			portletDataContext.getParameterMap(),
+			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
+
+		if (!performDirectBinaryImport) {
+			String binPath = getImageBinPath(portletDataContext, image);
+
+			imageElement.addAttribute("bin-path", binPath);
+
+			portletDataContext.addZipEntry(binPath, largeImage.getTextObj());
+		}
+
+		portletDataContext.addZipEntry(path, image);
 	}
 
 	public static String getImagePath(
@@ -283,9 +292,23 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, image.getFolderId(), image.getFolderId());
 
+		boolean performDirectBinaryImport = MapUtil.getBoolean(
+			portletDataContext.getParameterMap(),
+			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
+
 		File imageFile = null;
 
-		byte[] bytes = portletDataContext.getZipEntryAsByteArray(binPath);
+		byte[] bytes = null;
+
+		if (Validator.isNull(binPath) && performDirectBinaryImport) {
+			Image largeImage = ImageUtil.findByPrimaryKey(
+				image.getLargeImageId());
+
+			bytes = largeImage.getTextObj();
+		}
+		else {
+			bytes = portletDataContext.getZipEntryAsByteArray(binPath);
+		}
 
 		if (bytes == null) {
 			_log.error(

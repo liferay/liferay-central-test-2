@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -88,47 +89,55 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String path = getFileEntryPath(portletDataContext, fileEntry);
 
-		if (portletDataContext.isPathNotProcessed(path)) {
-			Element fileEntryElement = fileEntriesElement.addElement(
-				"file-entry");
+		if (!portletDataContext.isPathNotProcessed(path)) {
+			return;
+		}
 
-			fileEntryElement.addAttribute("path", path);
+		Element fileEntryElement = fileEntriesElement.addElement(
+			"file-entry");
 
+		fileEntryElement.addAttribute("path", path);
+
+		fileEntry.prepare();
+
+		portletDataContext.addLocks(
+			FileEntry.class, String.valueOf(fileEntry.getFileEntryId()));
+
+		portletDataContext.addPermissions(
+			FileEntry.class, fileEntry.getFileEntryId());
+
+		if (portletDataContext.getBooleanParameter(
+				_NAMESPACE, "categories")) {
+
+			portletDataContext.addAssetCategories(
+				FileEntry.class, fileEntry.getFileEntryId());
+		}
+
+		if (portletDataContext.getBooleanParameter(
+				_NAMESPACE, "comments")) {
+
+			portletDataContext.addComments(
+				FileEntry.class, fileEntry.getFileEntryId());
+		}
+
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
+			portletDataContext.addRatingsEntries(
+				FileEntry.class, fileEntry.getFileEntryId());
+		}
+
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
+			portletDataContext.addAssetTags(
+				FileEntry.class, fileEntry.getFileEntryId());
+		}
+
+		boolean performDirectBinaryImport = MapUtil.getBoolean(
+			portletDataContext.getParameterMap(),
+			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
+
+		if (!performDirectBinaryImport) {
 			String binPath = getFileEntryBinPath(portletDataContext, fileEntry);
 
 			fileEntryElement.addAttribute("bin-path", binPath);
-
-			fileEntry.prepare();
-
-			portletDataContext.addLocks(
-				FileEntry.class, String.valueOf(fileEntry.getFileEntryId()));
-
-			portletDataContext.addPermissions(
-				FileEntry.class, fileEntry.getFileEntryId());
-
-			if (portletDataContext.getBooleanParameter(
-					_NAMESPACE, "categories")) {
-
-				portletDataContext.addAssetCategories(
-					FileEntry.class, fileEntry.getFileEntryId());
-			}
-
-			if (portletDataContext.getBooleanParameter(
-					_NAMESPACE, "comments")) {
-
-				portletDataContext.addComments(
-					FileEntry.class, fileEntry.getFileEntryId());
-			}
-
-			if (portletDataContext.getBooleanParameter(_NAMESPACE, "ratings")) {
-				portletDataContext.addRatingsEntries(
-					FileEntry.class, fileEntry.getFileEntryId());
-			}
-
-			if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-				portletDataContext.addAssetTags(
-					FileEntry.class, fileEntry.getFileEntryId());
-			}
 
 			InputStream is = FileEntryUtil.getContentStream(fileEntry);
 
@@ -145,8 +154,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 
 			try {
-				portletDataContext.addZipEntry(
-					getFileEntryBinPath(portletDataContext, fileEntry), is);
+				portletDataContext.addZipEntry(binPath, is);
 			}
 			finally {
 				try {
@@ -156,17 +164,17 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					_log.error(ioe, ioe);
 				}
 			}
+		}
 
-			portletDataContext.addZipEntry(path, fileEntry);
+		portletDataContext.addZipEntry(path, fileEntry);
 
-			if (portletDataContext.getBooleanParameter(_NAMESPACE, "ranks")) {
-				List<DLFileRank> fileRanks = DLFileRankUtil.findByFileEntryId(
-					fileEntry.getFileEntryId());
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ranks")) {
+			List<DLFileRank> fileRanks = DLFileRankUtil.findByFileEntryId(
+				fileEntry.getFileEntryId());
 
-				for (DLFileRank fileRank : fileRanks) {
-					exportFileRank(
-						portletDataContext, fileRanksElement, fileRank);
-				}
+			for (DLFileRank fileRank : fileRanks) {
+				exportFileRank(
+					portletDataContext, fileRanksElement, fileRank);
 			}
 		}
 	}
@@ -200,8 +208,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		FileEntry fileEntry = (FileEntry)portletDataContext.getZipEntryAsObject(
 			path);
 
-		String binPath = fileEntryElement.attributeValue("bin-path");
-
 		long userId = portletDataContext.getUserId(fileEntry.getUserUuid());
 
 		Map<Long, Long> folderPKs =
@@ -234,7 +240,20 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(fileEntry.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
-		InputStream is = portletDataContext.getZipEntryAsInputStream(binPath);
+		boolean performDirectBinaryImport = MapUtil.getBoolean(
+			portletDataContext.getParameterMap(),
+			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
+
+		String binPath = fileEntryElement.attributeValue("bin-path");
+
+		InputStream is = null;
+
+		if (Validator.isNull(binPath) && performDirectBinaryImport) {
+			is = FileEntryUtil.getContentStream(fileEntry);
+		}
+		else {
+			is = portletDataContext.getZipEntryAsInputStream(binPath);
+		}
 
 		if ((folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == fileEntry.getFolderId())) {

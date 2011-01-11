@@ -713,6 +713,10 @@ public class StagingImpl implements Staging {
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
 		throws Exception {
 
+		parameterMap.put(
+			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT,
+			new String[] {String.valueOf(true)});
+
 		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			sourceGroupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
