@@ -67,10 +67,15 @@ AUI().add(
 
 						instance._toolbarCategoryPanel = new A.OverlayContextPanel(
 							{
+								after: {
+									hide: A.bind(instance._hideFloatingPanels, instance)
+								},
 								align: {
 									points: ['tr', 'br']
 								},
-								trigger: '.add-category-button'
+								hideOnDocumentClick: false,
+								trigger: '.add-category-button',
+								zIndex: 1000
 							}
 						).render();
 
@@ -84,6 +89,8 @@ AUI().add(
 							}
 						);
 
+						instance._bindCloseEvent(instance._toolbarCategoryPanel);
+
 						instance._toolbarCategoryPanel.after(
 							'visibleChange',
 							function(event) {
@@ -96,12 +103,19 @@ AUI().add(
 
 						instance._vocabularyCategoryPanel = new A.OverlayContextPanel(
 							{
+								after: {
+									hide: A.bind(instance._hideFloatingPanels, instance)
+								},
 								align: {
 									points: ['tr', 'br']
 								},
-								trigger: '.add-vocabulary-button'
+								hideOnDocumentClick: false,
+								trigger: '.add-vocabulary-button',
+								zIndex: 1000
 							}
 						).render();
+
+						instance._bindCloseEvent(instance._vocabularyCategoryPanel);
 
 						instance._vocabularyCategoryPanel.plug(
 							A.Plugin.IO,
@@ -422,6 +436,19 @@ AUI().add(
 								}
 							);
 						}
+					},
+
+					_bindCloseEvent: function(contextPanel) {
+						var instance = this;
+
+						A.on(
+							'key',
+							function(event) {
+								contextPanel.hide();
+							},
+							[contextPanel.get('boundingBox')],
+							'down:27'
+						);
 					},
 
 					_buildCategoryTreeview: function(categories, parentCategoryId) {
@@ -988,6 +1015,23 @@ AUI().add(
 						instance._container.one('.lfr-message-response').hide();
 					},
 
+					_hideFloatingPanels: function(event) {
+						var instance = this;
+
+						var contextPanel = event.currentTarget;
+						var boundingBox = contextPanel.get('boundingBox');
+						var autoFieldsTriggers = boundingBox.all('.lfr-floating-trigger');
+
+						autoFieldsTriggers.each(
+							function(item, index, collection) {
+								var autoFieldsInstance = item.getData('autoFieldsInstance');
+								var panelInstance = item.getData('panelInstance');
+
+								instance._resetInputLocalized(autoFieldsInstance, panelInstance);
+							}
+						);
+					},
+
 					_hideLoading: function(exp) {
 						var instance = this;
 
@@ -1262,6 +1306,18 @@ AUI().add(
 						A.all('.vocabulary-actions input[type=text]').val('');
 
 						instance._vocabularyCategoryPanel.hide();
+					},
+
+					_resetInputLocalized: function(autoFieldsInstance, panelInstance) {
+						var instance = this;
+
+						if (autoFieldsInstance) {
+							autoFieldsInstance.reset();
+						}
+
+						if (panelInstance) {
+							panelInstance.hide();
+						}
 					},
 
 					_saveCategoryProperties: function() {

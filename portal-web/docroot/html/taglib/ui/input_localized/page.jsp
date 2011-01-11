@@ -179,7 +179,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 	};
 
 	<c:if test="<%= !disabled %>">
-		new Liferay.AutoFields(
+		var autoFields = new Liferay.AutoFields(
 			{
 				contentBox: '#<%= randomNamespace %>languageSelector .lfr-panel-content',
 				on: {
@@ -234,4 +234,11 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 			}
 		}
 	);
+
+	var languageSelectorTrigger = A.one('#<%= randomNamespace %>languageSelectorTrigger');
+
+	if (languageSelectorTrigger) {
+		languageSelectorTrigger.setData('autoFieldsInstance', autoFields);
+		languageSelectorTrigger.setData('panelInstance', panel);
+	}
 </aui:script>
