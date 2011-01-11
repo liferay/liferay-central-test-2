@@ -66,9 +66,10 @@ String formName = randomNamespace + "_fm";
 							modelResourceDescription="<%= vocabulary.getTitle(locale) %>"
 							resourcePrimKey="<%= String.valueOf(vocabulary.getVocabularyId()) %>"
 							var="permissionsURL"
+							windowState="pop_up"
 						/>
 
-						<aui:button value="permissions" onClick="<%= permissionsURL %>" />
+						<aui:button value="permissions" id="vocabulary-change-permissions" data-url="<%= permissionsURL %>" />
 					</c:if>
 
 					<aui:button cssClass="close-panel" type="cancel" value="close" />

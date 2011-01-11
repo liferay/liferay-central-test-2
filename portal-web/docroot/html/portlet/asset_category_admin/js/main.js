@@ -558,6 +558,30 @@ AUI().add(
 						return instance._vocabularyPanelEdit;
 					},
 
+					_createVocabularyPanelPermissions: function(){
+						var instance = this;
+
+						var vocabularyPanelPermissionsChange = instance._vocabularyPanelPermissionsChange;
+
+						if (!vocabularyPanelPermissionsChange){
+							vocabularyPanelPermissionsChange = new A.Dialog(
+								{
+									title: Liferay.Language.get('edit-permissions'),
+									width: "600px"
+								}
+							).render();
+
+							/**
+							 * visible: false in configuration properties does not work
+							 */
+							vocabularyPanelPermissionsChange.hide();
+
+							instance._vocabularyPanelPermissionsChange = vocabularyPanelPermissionsChange;
+						}
+
+						return vocabularyPanelPermissionsChange;
+					},
+
 					_createURL: function(type, action) {
 						var instance = this;
 
@@ -825,7 +849,27 @@ AUI().add(
 							instance._hidePanel(panel);
 						}, instance, instance._vocabularyPanelEdit);
 
-						instance._prepareDeleteVocabulary(vocabularyFormEdit);
+						var buttonDeleteVocabulary = vocabularyFormEdit.one('.vocabulary-delete-button');
+
+						if (buttonDeleteVocabulary){
+							buttonDeleteVocabulary.on(
+								'click',
+								instance._onDeleteVocabulary,
+								instance
+							);
+						}
+						
+						instance._createVocabularyPanelPermissions(vocabularyFormEdit);
+
+						var buttonChangeVocabularyPermissions = vocabularyFormEdit.one('#vocabulary-change-permissions');
+
+						if (buttonChangeVocabularyPermissions){
+							buttonChangeVocabularyPermissions.on(
+								'click',
+								instance._onVocabularyChangePermissions,
+								instance
+							);
+						}
 
 						var inputVocabularyEditNameNode = vocabularyFormEdit.one('.vocabulary-name input');
 
@@ -1058,6 +1102,7 @@ AUI().add(
 						instance._hidePanel(instance._categoryPanelAdd);
 						instance._hidePanel(instance._vocabularyPanelAdd);
 						instance._hidePanel(instance._vocabularyPanelEdit);
+						instance._hidePanel(instance._vocabularyPanelPermissionsChange);
 					},
 
 					_loadData: function() {
@@ -1134,7 +1179,7 @@ AUI().add(
 					_onCategoryAddButtonClose: function(event) {
 						var instance = this;
 
-						instance.hidePanel(instance._categoryPanelAdd);
+						instance._hidePanel(instance._categoryPanelAdd);
 					},
 
 					_onCategoryFormAddSubmit: function(event) {
@@ -1261,6 +1306,28 @@ AUI().add(
 						}
 					},
 
+					_onVocabularyChangePermissions: function(event){
+						var instance = this;
+
+						var buttonChangeVocabularyPermissions = A.one('#vocabulary-change-permissions');
+
+						var vocabularyPanelPermissionsChange = instance._vocabularyPanelPermissionsChange;
+
+						var url = buttonChangeVocabularyPermissions.getAttribute("data-url");
+
+						vocabularyPanelPermissionsChange.set('bodyContent',
+							['<iframe frameborder="no" src="', url, '" width="98%" height="98%"></iframe>'].join(''));
+
+						instance._alignPanel(vocabularyPanelPermissionsChange);
+
+						vocabularyPanelPermissionsChange.show();
+
+						/**
+						 * workaroung - without this code, permissions panel shows below vocabulary edit panel
+						 */
+						vocabularyPanelPermissionsChange.set('zIndex', parseInt(instance._vocabularyPanelEdit.get('zIndex'), 10) + 2 );
+					},
+
 					_onVocabularyFormSubmit: function(event, form) {
 						var instance = this;
 
@@ -1279,20 +1346,6 @@ AUI().add(
 
 						if (target.hasClass('vocabulary-item-actions-trigger')){
 							instance._showVocabularyPanel(ACTION_EDIT);
-						}
-					},
-
-					_prepareDeleteVocabulary: function(form){
-						var instance = this;
-
-						var buttonDeleteVocabulary = form.one('.vocabulary-delete-button');
-
-						if (buttonDeleteVocabulary){
-							buttonDeleteVocabulary.on(
-								'click',
-								instance._onDeleteVocabulary,
-								instance
-							);
 						}
 					},
 
@@ -1621,12 +1674,12 @@ AUI().add(
 							forceStart = true;
 						}
 
-						var vocabularyURL = instance._createURL(VOCABULARY, ACTION_EDIT);
+						var vocabularyEditURL = instance._createURL(VOCABULARY, ACTION_EDIT);
 
 						vocabularyPanelEdit.plug(
 							A.Plugin.IO,
 							{
-								uri: vocabularyURL.toString(),
+								uri: vocabularyEditURL.toString(),
 								after: {
 									success: A.bind(instance._initializeVocabularyPanelEdit, instance)
 								}
