@@ -153,7 +153,7 @@ AUI().add(
 							}
 						);
 
-						A.one('.vocabulary-list').on('mousedown', instance._onVocabularyList, instance);
+						A.one(instance._vocabularyContainerSelector).on('mousedown', instance._onVocabularyList, instance);
 						A.one('#add-category-button').on('click', instance._onShowCategoryPanel, instance, ACTION_ADD);
 						A.one('#add-vocabulary-button').on('click', instance._onShowVocabularyPanel, instance, ACTION_ADD);
 
@@ -448,6 +448,46 @@ AUI().add(
 						return instance._categoryPanelAdd;
 					},
 
+					_createCategoryTreeView: function(categories){
+						var instance = this;
+
+						var childrenList = A.one(instance._categoryContainerSelector);
+						var boundingBox = Node.create('<div class="vocabulary-treeview-container" id="vocabularyTreeContainer"></div>');
+
+						childrenList.empty();
+						childrenList.append(boundingBox);
+
+						instance.treeView = new VocabularyTree(
+							{
+								boundingBox: boundingBox,
+								on: {
+									dropAppend: function(event) {
+										var tree = event.tree;
+										var fromCategoryId = instance._getCategoryId(tree.dragNode);
+										var fromCategoryName = instance._getCategoryName(tree.dragNode);
+										var toCategoryId = instance._getCategoryId(tree.dropNode);
+										var vocabularyId = instance._selectedVocabularyId;
+
+										instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
+									},
+									dropInsert: function(event) {
+										var tree = event.tree;
+										var parentNode = tree.dropNode.get('parentNode');
+										var fromCategoryId = instance._getCategoryId(tree.dragNode);
+										var fromCategoryName = instance._getCategoryName(tree.dragNode);
+										var toCategoryId = instance._getCategoryId(parentNode);
+										var vocabularyId = instance._selectedVocabularyId;
+
+										instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
+									}
+								},
+								type: 'normal'
+							}
+						).render();
+
+						instance._buildCategoryTreeview(categories, 0);
+					},
+
 					_createPermissionURL: function(modelResource, modelResourceDescription, resourcePrimKey) {
 						var instance = this;
 
@@ -570,45 +610,20 @@ AUI().add(
 					_displayVocabularyCategoriesImpl: function(categories, callback) {
 						var instance = this;
 
-						var childrenList = A.one(instance._categoryContainerSelector);
-						var boundingBox = Node.create('<div class="vocabulary-treeview-container" id="vocabularyTreeContainer"></div>');
-
-						childrenList.empty();
-						childrenList.append(boundingBox);
-
 						if (instance.treeView) {
 							instance.treeView.destroy();
 						}
 
-						instance.treeView = new VocabularyTree(
-							{
-								boundingBox: boundingBox,
-								on: {
-									dropAppend: function(event) {
-										var tree = event.tree;
-										var fromCategoryId = instance._getCategoryId(tree.dragNode);
-										var fromCategoryName = instance._getCategoryName(tree.dragNode);
-										var toCategoryId = instance._getCategoryId(tree.dropNode);
-										var vocabularyId = instance._selectedVocabularyId;
+						instance._createCategoryTreeView(categories);
 
-										instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
-									},
-									dropInsert: function(event) {
-										var tree = event.tree;
-										var parentNode = tree.dropNode.get('parentNode');
-										var fromCategoryId = instance._getCategoryId(tree.dragNode);
-										var fromCategoryName = instance._getCategoryName(tree.dragNode);
-										var toCategoryId = instance._getCategoryId(parentNode);
-										var vocabularyId = instance._selectedVocabularyId;
+						if (categories.length <= 0){
+							var categoryMessages = A.one('#vocabulary-category-messages');
 
-										instance._merge(fromCategoryId, fromCategoryName, toCategoryId, vocabularyId);
-									}
-								},
-								type: 'normal'
-							}
-						).render();
-
-						instance._buildCategoryTreeview(categories, 0);
+							categoryMessages.removeClass('portlet-msg-error').removeClass('portlet-msg-success');
+							categoryMessages.addClass('portlet-msg-info');
+							categoryMessages.html(Liferay.Language.get('there-are-no-categories'));
+							categoryMessages.show();
+						}
 
 						instance._reloadSearch();
 
@@ -1148,7 +1163,7 @@ AUI().add(
 					_onDeleteVocabulary: function(){
 						var instance = this;
 
-						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-list'))) {
+						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-vocabulary'))) {
 							instance._deleteVocabulary(
 								instance._selectedVocabularyId,
 								function(message) {

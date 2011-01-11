@@ -297,6 +297,7 @@
 
 .portlet-asset-category-admin #vocabulary-category-messages {
 	margin: 10px;
+	position: absolute;
 }
 
 .portlet-asset-category-admin .aui-tree-node-selected .aui-tree-label {

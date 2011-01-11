@@ -63,8 +63,6 @@
 					<liferay-ui:message key="categories" />
 				</div>
 
-				<div class="lfr-message-response" id="vocabulary-category-messages" style="display: none;"></div>
-
 				<div class="vocabulary-categories"></div>
 			</div>
 			<div class="aui-helper-hidden vocabulary-edit-category column">
