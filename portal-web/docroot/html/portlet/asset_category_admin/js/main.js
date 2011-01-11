@@ -565,19 +565,26 @@ AUI().add(
 						var vocabularyPanelPermissionsChange = instance._vocabularyPanelPermissionsChange;
 
 						if (!vocabularyPanelPermissionsChange){
+							instance._permissionsPanelContentId = A.guid();
+
 							vocabularyPanelPermissionsChange = new A.Dialog(
 								{
+									bodyContent: [
+										'<div class="vocabulary-permissions-container">',
+										'<iframe frameborder="0" id="', instance._permissionsPanelContentId, '" ',
+											'width="100%" height="100%" scrolling="', A.UA.ie > 0 ? 'auto' : 'no', '"></iframe>',
+										'</div>'
+									].join(''),
+									height: '350',
 									title: Liferay.Language.get('edit-permissions'),
-									width: "600px"
+									xy: [-10000, -10000],
+									width: '600'
 								}
 							).render();
 
-							/**
-							 * visible: false in configuration properties does not work
-							 */
-							vocabularyPanelPermissionsChange.hide();
-
 							instance._vocabularyPanelPermissionsChange = vocabularyPanelPermissionsChange;
+							instance._permissionsPanelContentEl = A.one('#' + instance._permissionsPanelContentId);
+							instance._permissionsPanelContentEl.on('load', instance._onPermissionsPanelLoad, instance);
 						}
 
 						return vocabularyPanelPermissionsChange;
@@ -860,8 +867,6 @@ AUI().add(
 							);
 						}
 						
-						instance._createVocabularyPanelPermissions(vocabularyFormEdit);
-
 						var buttonChangeVocabularyPermissions = vocabularyFormEdit.one('#vocabulary-change-permissions');
 
 						if (buttonChangeVocabularyPermissions){
@@ -1233,6 +1238,12 @@ AUI().add(
 						}
 					},
 
+					_onPermissionsPanelLoad: function(event){
+						var instance = this;
+
+						instance._tunePermissionsPanel();
+					},
+
 					_onShowCategoryPanel: function(event, action){
 						var instance = this;
 
@@ -1311,10 +1322,13 @@ AUI().add(
 
 						var vocabularyPanelPermissionsChange = instance._vocabularyPanelPermissionsChange;
 
+						if (!instance._vocabularyPanelPermissionsChange){
+							vocabularyPanelPermissionsChange = instance._createVocabularyPanelPermissions();
+						}
+
 						var url = buttonChangeVocabularyPermissions.getAttribute("data-url");
 
-						vocabularyPanelPermissionsChange.set('bodyContent',
-							['<iframe frameborder="no" src="', url, '" width="98%" height="98%"></iframe>'].join(''));
+						instance._permissionsPanelContentEl.set('src', url);
 
 						vocabularyPanelPermissionsChange.show();
 
@@ -1345,6 +1359,18 @@ AUI().add(
 						if (target.hasClass('vocabulary-item-actions-trigger')){
 							instance._showVocabularyPanel(ACTION_EDIT);
 						}
+					},
+
+					_tunePermissionsPanel: function(){
+						var instance = this;
+
+						var elHTML = A.Node.getDOMNode(instance._permissionsPanelContentEl).contentWindow.document.getElementsByTagName('html')[0];
+						var elHTMLStyle = elHTML.style;
+
+						elHTMLStyle.overflowX = 'auto';
+						elHTMLStyle.overflowY = 'auto';
+
+						instance._permissionsPanelContentEl.setAttribute('scrolling', 'auto');
 					},
 
 					_reloadSearch: function() {
