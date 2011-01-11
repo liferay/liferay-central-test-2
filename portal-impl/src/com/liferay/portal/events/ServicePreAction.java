@@ -990,8 +990,13 @@ public class ServicePreAction extends Action {
 		Image companyLogoImage = ImageLocalServiceUtil.getCompanyLogo(
 			company.getLogoId());
 
-		int companyLogoHeight = companyLogoImage.getHeight();
-		int companyLogoWidth = companyLogoImage.getWidth();
+		int companyLogoHeight = 0;
+		int companyLogoWidth = 0;
+
+		if (companyLogoImage != null) {
+			companyLogoHeight = companyLogoImage.getHeight();
+			companyLogoWidth = companyLogoImage.getWidth();
+		}
 
 		String realCompanyLogo = companyLogo;
 		int realCompanyLogoHeight = companyLogoHeight;
