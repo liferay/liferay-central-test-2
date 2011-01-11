@@ -65,7 +65,11 @@
 
 .portlet-asset-category-admin .vocabulary-item-actions-container {
 	display: inline-block;
-	padding-left: 2px
+	padding-left: 2px;
+}
+
+.ie6 .portlet-asset-category-admin .vocabulary-item-actions-container {
+	padding-left: 0px;
 }
 
 .portlet-asset-category-admin .vocabulary-item-actions-trigger {
@@ -81,7 +85,11 @@
 }
 
 .portlet-asset-category-admin .vocabulary-container .results-row .vocabulary-item-actions a {
-	padding: 0 0 0 0;
+	padding-left: 2px;
+}
+
+.ie6 .portlet-asset-category-admin .vocabulary-container .results-row .vocabulary-item-actions a {
+	padding-left: 0px;
 }
 
 .portlet-asset-category-admin .vocabulary-item-column {
@@ -150,6 +158,10 @@
 	zoom: 1;
 }
 
+.portlet-asset-category-admin .vocabulary-list li {
+	border: 1px solid transparent;
+}
+
 .portlet-asset-category-admin .vocabulary-item a,
 .vocabulary-item.portlet-asset-category-admin-helper a {
 	display: block;
@@ -185,12 +197,12 @@
 	color: #fff;
 }
 
-.portlet-asset-category-admin .vocabulary-categories .active-area {
-	background: #ffc;
-}
-
 .portlet-asset-category-admin .vocabulary-categories {
 	overflow: auto;
+}
+
+.portlet-asset-category-admin .vocabulary-list .active-area {
+	border: 1px solid #90EE90;
 }
 
 .portlet-asset-category-admin .vocabulary-list {
