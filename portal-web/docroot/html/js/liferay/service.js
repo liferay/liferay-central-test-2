@@ -474,6 +474,7 @@ Liferay.Service.registerClass(
 		getVocabularyCategories: true,
 		getVocabularyRootCategories: true,
 		search: true,
+		moveCategory: true,
 		updateCategory: true
 	}
 );

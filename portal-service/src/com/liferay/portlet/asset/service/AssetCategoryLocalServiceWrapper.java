@@ -391,6 +391,15 @@ public class AssetCategoryLocalServiceWrapper
 		_assetCategoryLocalService.mergeCategories(fromCategoryId, toCategoryId);
 	}
 
+	public com.liferay.portlet.asset.model.AssetCategory moveCategory(
+		long categoryId, long parentCategoryId, long vocabularyId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetCategoryLocalService.moveCategory(categoryId,
+			parentCategoryId, vocabularyId, serviceContext);
+	}
+
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> search(
 		long groupId, java.lang.String name,
 		java.lang.String[] categoryProperties, int start, int end)

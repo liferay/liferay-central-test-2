@@ -210,5 +210,22 @@ public class AssetCategoryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.asset.model.AssetCategorySoap moveCategory(
+		long categoryId, long parentCategoryId, long vocabularyId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.asset.model.AssetCategory returnValue = AssetCategoryServiceUtil.moveCategory(categoryId,
+					parentCategoryId, vocabularyId, serviceContext);
+
+			return com.liferay.portlet.asset.model.AssetCategorySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(AssetCategoryServiceSoap.class);
 }

@@ -113,6 +113,15 @@ public class AssetCategoryServiceWrapper implements AssetCategoryService {
 			start, end);
 	}
 
+	public com.liferay.portlet.asset.model.AssetCategory moveCategory(
+		long categoryId, long parentCategoryId, long vocabularyId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetCategoryService.moveCategory(categoryId, parentCategoryId,
+			vocabularyId, serviceContext);
+	}
+
 	public com.liferay.portlet.asset.model.AssetCategory updateCategory(
 		long categoryId, long parentCategoryId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
