@@ -421,6 +421,7 @@ AUI().add(
 								},
 								title: Liferay.Language.get('add-category'),
 								resizable: false,
+								width: '550px',
 								zIndex: 1000
 							}
 						).render();
@@ -509,6 +510,7 @@ AUI().add(
 								},
 								title: Liferay.Language.get('add-vocabulary'),
 								resizable: false,
+								width: '550px',
 								zIndex: 1000
 							}
 						).render();
@@ -544,6 +546,7 @@ AUI().add(
 								},
 								title: Liferay.Language.get('edit-vocabulary'),
 								resizable: false,
+								width: '550px',
 								zIndex: 1000
 							}
 						).render();
