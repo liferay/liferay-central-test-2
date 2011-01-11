@@ -1363,6 +1363,8 @@ public interface PropsKeys {
 
 	public static final String PORTAL_IMPERSONATION_ENABLE = "portal.impersonation.enable";
 
+	public static final String PORTAL_JAAS_AUTH_TYPE = "portal.jaas.auth.type";
+
 	public static final String PORTAL_JAAS_ENABLE = "portal.jaas.enable";
 
 	public static final String PORTAL_JAAS_IMPL = "portal.jaas.impl";

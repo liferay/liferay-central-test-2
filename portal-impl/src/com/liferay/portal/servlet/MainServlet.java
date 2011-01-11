@@ -1224,8 +1224,10 @@ public class MainServlet extends ActionServlet {
 
 		String name = String.valueOf(userId);
 
-		if (remoteUser != null) {
-			name = remoteUser;
+		if (!PropsValues.PORTAL_JAAS_ENABLE) {
+			if (remoteUser != null) {
+				name = remoteUser;
+			}
 		}
 
 		PrincipalThreadLocal.setName(name);
