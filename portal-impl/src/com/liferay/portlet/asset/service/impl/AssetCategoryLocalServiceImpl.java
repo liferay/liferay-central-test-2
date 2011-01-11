@@ -352,11 +352,16 @@ public class AssetCategoryLocalServiceImpl
 			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
 		}
 
-		assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
+		if (vocabularyId != category.getVocabularyId()) {
+			assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
+
+			category.setVocabularyId(vocabularyId);
+
+			updateChildrenVocabularyId(category, vocabularyId);
+		}
 
 		category.setModifiedDate(new Date());
 		category.setParentCategoryId(parentCategoryId);
-		category.setVocabularyId(vocabularyId);
 
 		assetCategoryPersistence.update(category, false);
 
@@ -393,17 +398,22 @@ public class AssetCategoryLocalServiceImpl
 			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
 		}
 
-		assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
-
 		AssetCategory category = assetCategoryPersistence.findByPrimaryKey(
 			categoryId);
+
+		if (vocabularyId != category.getVocabularyId()) {
+			assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
+
+			category.setVocabularyId(vocabularyId);
+
+			updateChildrenVocabularyId(category, vocabularyId);
+		}
 
 		category.setModifiedDate(new Date());
 		category.setParentCategoryId(parentCategoryId);
 		category.setName(name);
 		category.setTitleMap(titleMap);
 		category.setDescriptionMap(descriptionMap);
-		category.setVocabularyId(vocabularyId);
 
 		assetCategoryPersistence.update(category, false);
 
@@ -449,6 +459,26 @@ public class AssetCategoryLocalServiceImpl
 
 	protected String[] getCategoryNames(List<AssetCategory> categories) {
 		return StringUtil.split(ListUtil.toString(categories, "name"));
+	}
+
+	protected void updateChildrenVocabularyId (
+			AssetCategory category, long vocabularyId)
+		throws SystemException {
+
+		List<AssetCategory> childrenCategories =
+			assetCategoryPersistence.findByParentCategoryId(
+				category.getCategoryId());
+
+		if (!childrenCategories.isEmpty()) {
+			for (AssetCategory childCategory : childrenCategories) {
+				childCategory.setVocabularyId(vocabularyId);
+				childCategory.setModifiedDate(new Date());
+
+				assetCategoryPersistence.update(childCategory, false);
+
+				updateChildrenVocabularyId (childCategory, vocabularyId);
+			}
+		}
 	}
 
 	protected void validate(
