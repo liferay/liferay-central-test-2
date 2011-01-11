@@ -57,7 +57,7 @@ String formName = randomNamespace + "_fm";
 					<aui:button type="submit"/>
 
 					<c:if test="<%= vocabulary != null && permissionChecker.hasPermission(scopeGroupId, AssetVocabulary.class.getName(), vocabulary.getVocabularyId(), ActionKeys.DELETE) %>" >
-						<aui:button value="delete" cssClass="vocabulary-delete-button" />
+						<aui:button value="delete" id="vocabulary-delete-button" />
 					</c:if>
 
 					<c:if test="<%= vocabulary != null && permissionChecker.hasPermission(scopeGroupId, AssetVocabulary.class.getName(), vocabulary.getVocabularyId(), ActionKeys.PERMISSIONS) %>" >

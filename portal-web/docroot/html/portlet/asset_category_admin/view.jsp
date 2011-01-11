@@ -66,59 +66,24 @@
 				<div class="vocabulary-categories"></div>
 			</div>
 			<div class="aui-helper-hidden vocabulary-edit-category column">
-				<div class="results-header"><liferay-ui:message key="edit-category" /></div>
-
-				<div class="vocabulary-edit">
-					<div class="vocabulary-close">
-						<span>
-							<liferay-ui:icon
-								image="close"
-							/>
+				<div class="results-header"><liferay-ui:message key="edit-category" />
+					<div class="category-view-close">
+					   <span>
+						   <liferay-ui:icon
+								image="close" id="category-view-close"
+						   />
 						</span>
 					</div>
+				</div>
 
-					<div class="vocabulary-label">
-						<liferay-ui:message key="name" />:
+				<div class="category-view">
+					<div class="category-view-toolbar">
+						<span class="category-view-actions">
+							<button id="category-edit-button"><liferay-ui:message key="edit" /></button>
+							<button id="category-delete-button"><liferay-ui:message key="delete" /></button>
+						</span>
 					</div>
-
-					<input class="category-name" name="category-name" type="text" />
-
-					<br /><br />
-
-					<div class="vocabulary-properties">
-						<liferay-ui:message key="properties" />:
-
-						<liferay-ui:icon-help
-							message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-category"
-						/>
-
-						<div class="aui-helper-hidden vocabulary-property-row">
-							<input class="category-property-key" type="text" />
-
-							<input class="category-property-value" type="text" />
-
-							<span class="add-category-property">
-								<liferay-ui:icon
-									image="add"
-								/>
-							</span>
-
-							<span class="delete-category-property">
-								<liferay-ui:icon
-									image="delete"
-								/>
-							</span>
-						</div>
-
-						<br />
-
-						<input class="vocabulary-save-category-properties" type="button" value="<liferay-ui:message key="save" />" />
-
-						<input class="vocabulary-close" type="button" value="<liferay-ui:message key="close" />" />
-
-						<input class="vocabulary-delete-categories-button" type="button" value="<liferay-ui:message key="delete" />" />
-
-						<input class="permissions-categories-button" type="button" value="<liferay-ui:message key="edit-category-permissions" />" />
+					<div class="category-view-data">
 					</div>
 				</div>
 			</div>

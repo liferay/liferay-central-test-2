@@ -42,6 +42,7 @@
 	font-weight: bold;
 	margin: 2px 0;
 	padding: 5px 10px;
+	position: relative;
 }
 
 .portlet-asset-category-admin .vocabulary-content {
@@ -252,20 +253,24 @@
 	width: 350px;
 }
 
-.portlet-asset-category-admin .vocabulary-edit-category .vocabulary-edit {
-	padding: 5px 5px 10px 10px;
+.portlet-asset-category-admin .vocabulary-edit-category .category-view {
+	height: 300px;
+	padding: 0 5px 0 0px;
 }
 
-.portlet-asset-category-admin .vocabulary-editing-tag .vocabulary-edit, .portlet-asset-category-admin .vocabulary-editing-tag .results-header {
-	display: block;
-}
-
-.portlet-asset-category-admin div.vocabulary-close {
+.portlet-asset-category-admin .category-view-close {
+	position: absolute;
+	right: 2px;
 	text-align: right;
+	top: 4px;
 }
 
-.portlet-asset-category-admin div.vocabulary-close span {
+.portlet-asset-category-admin .category-view-close span {
 	cursor: pointer;
+}
+
+.portlet-asset-category-admin .category-view-toolbar {
+	padding-left: 0.5em;
 }
 
 .portlet-asset-category-admin .vocabulary-property-row {
@@ -338,11 +343,27 @@
 	width: 250px;
 }
 
+.lfr-panel-container {
+	background-color: none;
+	border: none;
+}
+
 .lfr-position-helper {
 	z-index: 10000;
 }
 
-.vocabulary-permissions-container {
-	width: 100%;
+.permissions-change .aui-dialog-bd {
+	overflow: hidden;
+}
+
+.permissions-container {
 	height: 100%;
+	position: relative;
+	width: 100%;
+}
+
+.permissions-container-mask {
+	height: 100%;
+	position: absolute;
+	width: 100%
 }
