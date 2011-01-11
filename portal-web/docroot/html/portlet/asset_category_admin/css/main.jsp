@@ -16,9 +16,18 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-asset-category-admin .column,
+.portlet-asset-category-admin .vocabulary-item-column {
+	display: inline-block;
+	letter-spacing: normal;
+	vertical-align: top;
+	word-spacing: normal;
+}
+
 .portlet-asset-category-admin .vocabulary-categories-container,
 .portlet-asset-category-admin .vocabulary-container,
-.portlet-asset-category-admin .vocabulary-content-wrapper {
+.portlet-asset-category-admin .vocabulary-content-wrapper,
+.vocabulary-item {
 	width: 100%;
 }
 
@@ -29,11 +38,46 @@
 	padding: 5px 10px;
 }
 
-.portlet-asset-category-admin .column {
+.portlet-asset-category-admin .vocabulary-content {
+	letter-spacing: -0.31em;
+	padding-left: 150px;
+	padding-right: 0px;
+	word-spacing: -0.43em;
+}
+
+
+.portlet-asset-category-admin .vocabulary-item-actions {
+	margin-right: -20px;
+	width: 20px;
+	vertical-align: middle;
+}
+
+.portlet-asset-category-admin .vocabulary-item-actions-container {
 	display: inline-block;
-	letter-spacing: normal;
-	vertical-align: top;
-	word-spacing: normal;
+	padding-left: 2px
+}
+
+.portlet-asset-category-admin .vocabulary-item-actions-trigger {
+	background-image: url(<%= themeImagesPath %>/common/edit.png);
+	background-repeat: no-repeat;
+	display: inline-block;
+	height: 20px;
+	width: 20px;
+}
+
+.portlet-asset-category-admin .vocabulary-container .results-row .vocabulary-item-actions a {
+	padding: 0 0 0 0;
+}
+
+.portlet-asset-category-admin .vocabulary-item-column {
+	vertical-align: middle;
+}
+
+.portlet-asset-category-admin .vocabulary-item-container {
+	letter-spacing: -0.31em;
+	padding-right: 20px;
+	padding-left: 0px;
+	word-spacing: -0.43em;
 }
 
 .portlet-asset-category-admin .vocabulary-list-container {
@@ -54,13 +98,6 @@
 	color: #fff;
 }
 
-.portlet-asset-category-admin .vocabulary-content {
-	letter-spacing: -0.31em;
-	padding-left: 150px;
-	padding-right: 0px;
-	word-spacing: -0.43em;
-}
-
 .portlet-asset-category-admin .vocabulary-content-edit-category {
 	padding-right: 350px;
 }
@@ -69,7 +106,9 @@
 	padding: 1px 0;
 }
 
-.portlet-asset-category-admin .vocabulary-content li.vocabulary-category, .portlet-asset-category-admin li.vocabulary-item, .vocabulary-item.portlet-asset-category-admin-helper {
+.portlet-asset-category-admin .vocabulary-content li.vocabulary-category,
+.portlet-asset-category-admin li.vocabulary-item,
+.vocabulary-item.portlet-asset-category-admin-helper {
 	border-bottom: 1px solid #D3D7DB;
 	font-weight: bold;
 	list-style: none;
@@ -79,7 +118,8 @@
 	background: #F0F2F4;
 }
 
-.portlet-asset-category-admin .vocabulary-container .results-row a, .vocabulary-item.results-row a {
+.portlet-asset-category-admin .vocabulary-container .results-row a,
+.vocabulary-item.results-row a {
 	padding: 8px 0 8px 10px;
 }
 
@@ -92,12 +132,14 @@
 	zoom: 1;
 }
 
-.portlet-asset-category-admin .vocabulary-item a, .vocabulary-item.portlet-asset-category-admin-helper a {
+.portlet-asset-category-admin .vocabulary-item a,
+.vocabulary-item.portlet-asset-category-admin-helper a {
 	display: block;
 	padding-left: 20px;
 }
 
-.portlet-asset-category-admin .vocabulary-item.selected, .vocabulary-item.portlet-asset-category-admin-helper.selected {
+.portlet-asset-category-admin .vocabulary-item.selected,
+.vocabulary-item.portlet-asset-category-admin-helper.selected {
 	background: #aeb9be;
 }
 
@@ -110,17 +152,19 @@
 	text-decoration: none;
 }
 
+.portlet-asset-category-admin .vocabulary-list .selected a:hover {
+	color: #FFB683;
+}
+
 .portlet-asset-category-admin .vocabulary-category-item.selected > span {
 	font-weight: bold;
 }
 
-.portlet-asset-category-admin .vocabulary-list .selected a {
+.portlet-asset-category-admin .vocabulary-list .selected a,
+.portlet-asset-category-admin .vocabulary-list .selected .vocabulary-content-wrapper,
+.portlet-asset-category-admin .vocabulary-list .selected .vocabulary-content-wrapper:hover {
 	background: #6F7D83;
 	color: #fff;
-}
-
-.portlet-asset-category-admin .vocabulary-list .selected a:hover {
-	background: #878F93;
 }
 
 .portlet-asset-category-admin .vocabulary-categories .active-area {
@@ -141,7 +185,7 @@
 	overflow-x: hidden;
 }
 
-.portlet-asset-category-admin .vocabulary-list a:hover, .portlet-asset-category-admin .vocabulary-categories a:hover {
+.portlet-asset-category-admin .vocabulary-list .vocabulary-content-wrapper:hover {
 	background: #D3DADD;
 }
 
