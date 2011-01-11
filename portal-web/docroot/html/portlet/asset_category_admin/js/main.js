@@ -351,6 +351,10 @@ AUI().add(
 						instance._hideSection(instance._categoryViewContainer);
 
 						instance._vocabularyContent.removeClass(CSS_VOCABULARY_EDIT_CATEGORY);
+
+						if (instance._selectedCategory){
+							instance._selectedCategory.unselect();
+						}
 					},
 
 					_createCategoryPanelAdd: function(){
