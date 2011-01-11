@@ -2247,7 +2247,7 @@ AUI().add(
 							instance._currentPanelEditInitHandler.detach();
 						}
 
-						categoryPanelEdit.set('title', Liferay.Language.get('category-details'));
+						categoryPanelEdit.set('title', Liferay.Language.get('edit-category'));
 
 						var categoryEditURL = instance._createURL(CATEGORY, ACTION_EDIT);
 

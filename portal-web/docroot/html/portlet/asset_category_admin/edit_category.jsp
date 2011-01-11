@@ -80,14 +80,14 @@ String formName = randomNamespace + "_fm";
 	<aui:fieldset>
 		<div>
 			<div class="add-category-layer asset-category-layer">
-				<aui:input type="hidden" name="vocabularyId" />
-				<aui:input type="hidden" name="parentCategoryId" />
+				<aui:input type="hidden" name="categoryId" value="<%= category != null ? category.getCategoryId() : StringPool.BLANK %>" />
+				<aui:input type="hidden" name="parentCategoryId" value="<%= category != null ? category.getParentCategoryId() : StringPool.BLANK %>" />
 
 				<aui:input label="name" name="title" cssClass="category-name"/>
 
 				<aui:input name="description" />
 
-				<aui:select label="to-vocabulary" name="vocabulary-select-list" inputCssClass="vocabulary-select-list">
+				<aui:select label="to-vocabulary" name="vocabularyId" inputCssClass="vocabulary-select-list">
 
 					<%
 					for (AssetVocabulary vocabulary : vocabularies) {
@@ -134,7 +134,7 @@ String formName = randomNamespace + "_fm";
 							}
 							%>
 
-							<aui:input name="propertiesIndexes" type="hidden" value="<%= StringUtil.merge(propertiesIndexes) %>" />
+							<aui:input name="categoryPropertiesIndexes" type="hidden" value="<%= StringUtil.merge(propertiesIndexes) %>" />
 						</aui:fieldset>
 					</liferay-ui:panel>
 				</liferay-ui:panel-container>
@@ -169,7 +169,7 @@ String formName = randomNamespace + "_fm";
 	new Liferay.AutoFields(
 		{
 			contentBox: 'fieldset#categoryProperties',
-			fieldIndexes: '<portlet:namespace />propertiesIndexes'
+			fieldIndexes: '<portlet:namespace />categoryPropertiesIndexes'
 		}
 	).render();
 </aui:script>
