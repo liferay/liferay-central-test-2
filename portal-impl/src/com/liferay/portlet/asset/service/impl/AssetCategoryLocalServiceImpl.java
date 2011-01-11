@@ -335,6 +335,34 @@ public class AssetCategoryLocalServiceImpl
 		deleteCategory(fromCategoryId);
 	}
 
+	public AssetCategory moveCategory(
+			long categoryId, long parentCategoryId, long vocabularyId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		// Category
+
+		AssetCategory category = assetCategoryPersistence.findByPrimaryKey(
+			categoryId);
+
+		validate(
+			categoryId, parentCategoryId, category.getName(), vocabularyId);
+
+		if (parentCategoryId > 0) {
+			assetCategoryPersistence.findByPrimaryKey(parentCategoryId);
+		}
+
+		assetVocabularyPersistence.findByPrimaryKey(vocabularyId);
+
+		category.setModifiedDate(new Date());
+		category.setParentCategoryId(parentCategoryId);
+		category.setVocabularyId(vocabularyId);
+
+		assetCategoryPersistence.update(category, false);
+
+		return category;
+	}
+
 	public List<AssetCategory> search(
 			long groupId, String name, String[] categoryProperties, int start,
 			int end)

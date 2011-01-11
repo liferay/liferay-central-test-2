@@ -62,6 +62,9 @@ public class EditCategoryAction extends PortletAction {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				jsonObject = updateCategory(actionRequest);
 			}
+			else if (cmd.equals(Constants.MOVE)) {
+				jsonObject = moveCategory(actionRequest);
+			}
 		}
 		catch (Exception e) {
 			jsonObject.put("exception", e.getClass() + e.getMessage());
@@ -150,6 +153,28 @@ public class EditCategoryAction extends PortletAction {
 				categoryId, parentCategoryId, titleMap, descriptionMap,
 				vocabularyId, categoryProperties, serviceContext);
 		}
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("categoryId", category.getCategoryId());
+
+		return jsonObject;
+	}
+
+	protected JSONObject moveCategory(ActionRequest actionRequest)
+		throws Exception {
+
+		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+
+		long parentCategoryId = ParamUtil.getLong(
+			actionRequest, "parentCategoryId");
+		long vocabularyId = ParamUtil.getLong(actionRequest, "vocabularyId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			AssetCategory.class.getName(), actionRequest);
+
+		AssetCategory category = AssetCategoryServiceUtil.moveCategory(
+			categoryId, parentCategoryId, vocabularyId, serviceContext);
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 

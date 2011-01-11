@@ -138,6 +138,18 @@ public class AssetCategoryServiceImpl extends AssetCategoryServiceBaseImpl {
 		return Autocomplete.listToJson(categories, "name", "name");
 	}
 
+	public AssetCategory moveCategory(
+			long categoryId, long parentCategoryId, long vocabularyId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		AssetCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.UPDATE);
+
+		return assetCategoryLocalService.moveCategory(
+			categoryId, parentCategoryId, vocabularyId, serviceContext);
+	}
+
 	public AssetCategory updateCategory(
 			long categoryId, long parentCategoryId,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
