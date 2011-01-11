@@ -22,6 +22,12 @@
 	letter-spacing: normal;
 	vertical-align: top;
 	word-spacing: normal;
+	zoom: 1;
+}
+
+.ie .portlet-asset-category-admin .column,
+.ie .portlet-asset-category-admin .vocabulary-item-column {
+	*display: inline;
 }
 
 .portlet-asset-category-admin .vocabulary-categories-container,
@@ -45,6 +51,10 @@
 	word-spacing: -0.43em;
 }
 
+.ie .portlet-asset-category-admin .vocabulary-content {
+	*letter-spacing: normal;
+}
+
 
 .portlet-asset-category-admin .vocabulary-item-actions {
 	margin-right: -20px;
@@ -65,6 +75,10 @@
 	width: 20px;
 }
 
+.ie .portlet-asset-category-admin .vocabulary-item-actions-trigger {
+	*cursor: pointer;
+}
+
 .portlet-asset-category-admin .vocabulary-container .results-row .vocabulary-item-actions a {
 	padding: 0 0 0 0;
 }
@@ -78,6 +92,10 @@
 	padding-right: 20px;
 	padding-left: 0px;
 	word-spacing: -0.43em;
+}
+
+.ie .portlet-asset-category-admin .vocabulary-item-container {
+	*letter-spacing: normal;
 }
 
 .portlet-asset-category-admin .vocabulary-list-container {
