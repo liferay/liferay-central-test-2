@@ -313,6 +313,11 @@
 	margin-top: 10px;
 }
 
+.aui-tree-node .aui-tree-node-selected .aui-tree-label {
+    background-color: #6F7D83;
+    color: #FFFFFF;
+}
+
 .asset-category-layer .aui-overlay {
 	overflow: visible;
 	width: 230px;
