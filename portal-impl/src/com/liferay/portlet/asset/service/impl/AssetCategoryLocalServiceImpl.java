@@ -340,8 +340,6 @@ public class AssetCategoryLocalServiceImpl
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Category
-
 		AssetCategory category = assetCategoryPersistence.findByPrimaryKey(
 			categoryId);
 
