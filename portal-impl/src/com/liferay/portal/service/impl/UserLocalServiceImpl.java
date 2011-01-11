@@ -1057,9 +1057,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	public void deleteUser(User user)
+	public void deleteUser(long userId)
 		throws PortalException, SystemException {
 
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		deleteUser(user);
+	}
+
+	public void deleteUser(User user) throws PortalException, SystemException {
 		if (!PropsValues.USERS_DELETE) {
 			throw new RequiredUserException();
 		}
@@ -1171,19 +1177,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// User
 
-		userPersistence.remove(user.getUserId());
+		userPersistence.remove(user);
 
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
-	}
-
-	public void deleteUser(long userId)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		deleteUser(user);
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

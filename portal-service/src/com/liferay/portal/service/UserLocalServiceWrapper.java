@@ -68,7 +68,7 @@ public class UserLocalServiceWrapper implements UserLocalService {
 	* Deletes the user from the database. Also notifies the appropriate model listeners.
 	*
 	* @param user the user to delete
-	* @throws PortalException 
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteUser(com.liferay.portal.model.User user)

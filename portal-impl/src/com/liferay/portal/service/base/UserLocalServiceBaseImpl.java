@@ -292,8 +292,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteUser(User user)
-		throws PortalException, SystemException {
+	public void deleteUser(User user) throws PortalException, SystemException {
 		userPersistence.remove(user);
 	}
 
