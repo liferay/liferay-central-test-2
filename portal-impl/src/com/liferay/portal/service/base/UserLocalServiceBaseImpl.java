@@ -289,9 +289,11 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 	 * Deletes the user from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param user the user to delete
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteUser(User user) throws SystemException {
+	public void deleteUser(User user)
+		throws PortalException, SystemException {
 		userPersistence.remove(user);
 	}
 

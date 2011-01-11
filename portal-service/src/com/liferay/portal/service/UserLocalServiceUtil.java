@@ -78,10 +78,12 @@ public class UserLocalServiceUtil {
 	* Deletes the user from the database. Also notifies the appropriate model listeners.
 	*
 	* @param user the user to delete
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteUser(com.liferay.portal.model.User user)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteUser(user);
 	}
 

@@ -1057,14 +1057,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	public void deleteUser(long userId)
+	public void deleteUser(User user)
 		throws PortalException, SystemException {
 
 		if (!PropsValues.USERS_DELETE) {
 			throw new RequiredUserException();
 		}
-
-		User user = userPersistence.findByPrimaryKey(userId);
 
 		// Indexer
 
@@ -1074,7 +1072,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Browser tracker
 
-		browserTrackerLocalService.deleteUserBrowserTracker(userId);
+		browserTrackerLocalService.deleteUserBrowserTracker(user.getUserId());
 
 		// Group
 
@@ -1091,63 +1089,66 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Password policy relation
 
 		passwordPolicyRelLocalService.deletePasswordPolicyRel(
-			User.class.getName(), userId);
+			User.class.getName(), user.getUserId());
 
 		// Old passwords
 
-		passwordTrackerLocalService.deletePasswordTrackers(userId);
+		passwordTrackerLocalService.deletePasswordTrackers(user.getUserId());
 
 		// Subscriptions
 
-		subscriptionLocalService.deleteSubscriptions(userId);
+		subscriptionLocalService.deleteSubscriptions(user.getUserId());
 
 		// External user ids
 
-		userIdMapperLocalService.deleteUserIdMappers(userId);
+		userIdMapperLocalService.deleteUserIdMappers(user.getUserId());
 
 		// Announcements
 
-		announcementsDeliveryLocalService.deleteDeliveries(userId);
+		announcementsDeliveryLocalService.deleteDeliveries(user.getUserId());
 
 		// Asset
 
-		assetEntryLocalService.deleteEntry(User.class.getName(), userId);
+		assetEntryLocalService.deleteEntry(
+			User.class.getName(), user.getUserId());
 
 		// Blogs
 
-		blogsStatsUserLocalService.deleteStatsUserByUserId(userId);
+		blogsStatsUserLocalService.deleteStatsUserByUserId(user.getUserId());
 
 		// Document library
 
-		dlFileRankLocalService.deleteFileRanksByUserId(userId);
+		dlFileRankLocalService.deleteFileRanksByUserId(user.getUserId());
 
 		// Expando
 
-		expandoValueLocalService.deleteValues(User.class.getName(), userId);
+		expandoValueLocalService.deleteValues(
+			User.class.getName(), user.getUserId());
 
 		// Message boards
 
-		mbBanLocalService.deleteBansByBanUserId(userId);
-		mbMessageFlagLocalService.deleteFlags(userId);
-		mbStatsUserLocalService.deleteStatsUsersByUserId(userId);
+		mbBanLocalService.deleteBansByBanUserId(user.getUserId());
+		mbMessageFlagLocalService.deleteFlags(user.getUserId());
+		mbStatsUserLocalService.deleteStatsUsersByUserId(user.getUserId());
 
 		// Membership requests
 
-		membershipRequestLocalService.deleteMembershipRequestsByUserId(userId);
+		membershipRequestLocalService.deleteMembershipRequestsByUserId(
+			user.getUserId());
 
 		// Shopping cart
 
-		shoppingCartLocalService.deleteUserCarts(userId);
+		shoppingCartLocalService.deleteUserCarts(user.getUserId());
 
 		// Social
 
-		socialActivityLocalService.deleteUserActivities(userId);
-		socialRequestLocalService.deleteReceiverUserRequests(userId);
-		socialRequestLocalService.deleteUserRequests(userId);
+		socialActivityLocalService.deleteUserActivities(user.getUserId());
+		socialRequestLocalService.deleteReceiverUserRequests(user.getUserId());
+		socialRequestLocalService.deleteUserRequests(user.getUserId());
 
 		// Mail
 
-		mailService.deleteUser(user.getCompanyId(), userId);
+		mailService.deleteUser(user.getCompanyId(), user.getUserId());
 
 		// Contact
 
@@ -1165,15 +1166,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// Group roles
 
-		userGroupRoleLocalService.deleteUserGroupRolesByUserId(userId);
+		userGroupRoleLocalService.deleteUserGroupRolesByUserId(
+			user.getUserId());
 
 		// User
 
-		userPersistence.remove(userId);
+		userPersistence.remove(user.getUserId());
 
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+	}
+
+	public void deleteUser(long userId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		deleteUser(user);
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

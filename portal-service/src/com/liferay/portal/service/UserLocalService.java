@@ -76,10 +76,12 @@ public interface UserLocalService {
 	* Deletes the user from the database. Also notifies the appropriate model listeners.
 	*
 	* @param user the user to delete
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteUser(com.liferay.portal.model.User user)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.
