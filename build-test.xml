@@ -631,6 +631,12 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-asset-management-system" />
+			<param name="test.ant.script.plugin.portlets" value="ams-portlet" />
+			<param name="test.ant.script.suite" value="PluginsAssetManagementSystemTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-audit" />
 			<param name="test.ant.script.plugin.hooks" value="audit-hook" />
 			<param name="test.ant.script.plugin.portlets" value="audit-portlet" />
@@ -728,6 +734,12 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-logos-reftagger" />
+			<param name="test.ant.script.plugin.portlets" value="logos-reftagger-portlet" />
+			<param name="test.ant.script.suite" value="PluginsLogosReftaggerTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-mail" />
 			<param name="test.ant.script.plugin.portlets" value="mail-portlet" />
 			<param name="test.ant.script.suite" value="PluginsMailTestSuite" />
@@ -749,6 +761,12 @@
 			<param name="test.ant.script.command" value="plugins-opensocial" />
 			<param name="test.ant.script.plugin.portlets" value="opensocial-portlet" />
 			<param name="test.ant.script.suite" value="PluginsOpenSocialTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-private-messaging" />
+			<param name="test.ant.script.plugin.portlets" value="private-messaging-portlet" />
+			<param name="test.ant.script.suite" value="PluginsPrivateMessagingTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -986,18 +1004,6 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-ssh-term" />
-			<param name="test.ant.script.plugin.portlets" value="ssh-term-portlet" />
-			<param name="test.ant.script.suite" value="PluginsSSHTermTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-ssh-vnc" />
-			<param name="test.ant.script.plugin.portlets" value="ssh-vnc-portlet" />
-			<param name="test.ant.script.suite" value="PluginsSSHVncTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-stocks" />
 			<param name="test.ant.script.plugin.portlets" value="stocks-portlet" />
 			<param name="test.ant.script.suite" value="PluginsStocksTestSuite" />
@@ -1046,6 +1052,12 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="plugins-todays-events" />
+			<param name="test.ant.script.plugin.portlets" value="todays-events-portlet" />
+			<param name="test.ant.script.suite" value="PluginsTodaysEventsTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-twitter" />
 			<param name="test.ant.script.plugin.portlets" value="twitter-portlet" />
 			<param name="test.ant.script.suite" value="PluginsTwitterTestSuite" />
@@ -1062,12 +1074,6 @@
 			<param name="test.ant.script.command" value="plugins-weather" />
 			<param name="test.ant.script.plugin.portlets" value="weather-portlet" />
 			<param name="test.ant.script.suite" value="PluginsWeatherTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="plugins-webcam" />
-			<param name="test.ant.script.plugin.portlets" value="webcam-portlet" />
-			<param name="test.ant.script.suite" value="PluginsWebcamTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
