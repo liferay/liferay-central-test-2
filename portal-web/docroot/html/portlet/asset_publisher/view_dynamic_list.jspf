@@ -92,23 +92,12 @@ else if (!groupByClass) {
 		assetEntryQuery.setClassNameIds(classNameIds);
 	}
 
-	List results = null;
-
-	boolean filterByCategories = ((assetEntryQuery.getAllCategoryIds().length > 0) ||
-		(assetEntryQuery.getAnyCategoryIds().length > 0));
-
-	boolean hasViewableCategories = ((assetEntryQuery.getAllCategoryIds().length > 0) ||
-		(assetEntryQuery.getAnyCategoryIds().length > 0));
-
-	if (filterByCategories && !hasViewableCategories) {
-		results = new ArrayList<AssetEntry>();
-	}
-	else {
-		results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
-		total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
-	}
+	total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
 	searchContainer.setTotal(total);
+
+	List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
+
 	searchContainer.setResults(results);
 
 	request.setAttribute("view.jsp-results", results);
@@ -131,25 +120,14 @@ else {
 
 		AssetRendererFactory groupAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(groupClassName);
 
-		List results = null;
+		int groupTotal = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 
-		boolean filterByCategories = ((assetEntryQuery.getAllCategoryIds().length > 0) ||
-			(assetEntryQuery.getAnyCategoryIds().length > 0));
-
-		boolean hasViewableCategories = ((assetEntryQuery.getAllCategoryIds().length > 0) ||
-			(assetEntryQuery.getAnyCategoryIds().length > 0));
-
-		int groupTotal = 0;
-
-		if (filterByCategories && !hasViewableCategories) {
-			results = new ArrayList<AssetEntry>();
-		} else {
-			results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
-			groupTotal = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
-			total += groupTotal;
-		}
+		total += groupTotal;
 
 		searchContainer.setTotal(groupTotal);
+
+		List results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
+
 		searchContainer.setResults(results);
 
 		request.setAttribute("view.jsp-results", results);
