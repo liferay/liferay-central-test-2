@@ -18,10 +18,6 @@
 
 <%
 AssetCategory category = (AssetCategory)request.getAttribute(WebKeys.ASSET_CATEGORY);
-
-List<AssetVocabulary> vocabularies = (List<AssetVocabulary>)request.getAttribute(WebKeys.ASSET_VOCABULARIES);
-
-long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
 %>
 
 <portlet:actionURL var="editCategoryURL">
@@ -44,17 +40,6 @@ long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
 				<aui:input name="description" />
 
 				<aui:select label="to-vocabulary" name="vocabulary-select-list" inputCssClass="vocabulary-select-list">
-
-				<%
-				for (AssetVocabulary vocabulary : vocabularies) {
-				%>
-
-					<aui:option label="<%= vocabulary.getTitle(locale) %>" selected="<%= vocabulary.getVocabularyId() == vocabularyId %>" value="<%= vocabulary.getVocabularyId() %>" />
-
-				<%
-				}
-				%>
-
 				</aui:select>
 
 				<c:choose>
