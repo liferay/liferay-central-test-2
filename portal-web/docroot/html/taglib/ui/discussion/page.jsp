@@ -97,8 +97,8 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			%>
 
 			<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.ADD_DISCUSSION) %>">
-				<aui:fieldset cssClass="add-comment" id='<%= namespace + "messageScroll0" %>'>
-					<div id="<%= namespace %>messageScroll<%= message.getMessageId() %>">
+				<aui:fieldset cssClass="add-comment" id='<%= randomNamespace + "messageScroll0" %>'>
+					<div id="<%= randomNamespace %>messageScroll<%= message.getMessageId() %>">
 						<aui:input name='<%= "messageId" + i %>' type="hidden" value="<%= message.getMessageId() %>" />
 						<aui:input name='<%= "parentMessageId" + i %>' type="hidden" value="<%= message.getMessageId() %>" />
 					</div>
@@ -266,7 +266,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					%>
 
 						<aui:layout>
-							<div id="<%= namespace %>messageScroll<%= message.getMessageId() %>">
+							<div id="<%= randomNamespace %>messageScroll<%= message.getMessageId() %>">
 								<a name="<%= randomNamespace %>message_<%= message.getMessageId() %>"></a>
 
 								<aui:input name='<%= "messageId" + i %>' type="hidden" value="<%= message.getMessageId() %>" />
@@ -499,7 +499,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		}
 
 		function <%= randomNamespace %>scrollIntoView(messageId) {
-			document.getElementById("<%= namespace %>messageScroll" + messageId).scrollIntoView();
+			document.getElementById("<%= randomNamespace %>messageScroll" + messageId).scrollIntoView();
 		}
 
 		function <%= randomNamespace %>showForm(rowId, textAreaId) {
