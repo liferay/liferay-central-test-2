@@ -496,7 +496,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.ADD %>";
 			document.<%= namespace %><%= formName %>.<%= namespace %>parentMessageId.value = parentMessageId;
 			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
-			submitForm(document.<%= namespace %><%= formName %>);
 		}
 
 		function <%= randomNamespace %>scrollIntoView(messageId) {
@@ -530,7 +529,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 			document.<%= namespace %><%= formName %>.<%= namespace %>messageId.value = messageId;
 			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
-			submitForm(document.<%= namespace %><%= formName %>);
 		}
 	</aui:script>
 
