@@ -41,6 +41,10 @@ public class FileEntryUtil extends LiferayBase {
 		DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByG_F_T(
 			repositoryId, folderId, title);
 
+		if (dlFileEntry == null) {
+			return null;
+		}
+
 		return new LiferayFileEntry(dlFileEntry);
 	}
 
@@ -49,6 +53,10 @@ public class FileEntryUtil extends LiferayBase {
 
 		DLFileEntry dlFileEntry = DLFileEntryUtil.fetchByUUID_G(
 			uuid, repositoryId);
+
+		if (dlFileEntry == null) {
+			return null;
+		}
 
 		return new LiferayFileEntry(dlFileEntry);
 	}

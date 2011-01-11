@@ -36,6 +36,10 @@ public class FolderUtil extends LiferayBase {
 		DLFolder dlFolder = DLFolderUtil.fetchByG_P_N(
 			groupId, parentFolderId, name);
 
+		if (dlFolder == null) {
+			return null;
+		}
+
 		return new LiferayFolder(dlFolder);
 	}
 
@@ -43,6 +47,10 @@ public class FolderUtil extends LiferayBase {
 		throws SystemException {
 
 		DLFolder dlFolder = DLFolderUtil.fetchByUUID_G(uuid, repositoryId);
+
+		if (dlFolder == null) {
+			return null;
+		}
 
 		return new LiferayFolder(dlFolder);
 	}
