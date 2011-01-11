@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -56,10 +55,6 @@ public class PortalClassLoaderFilter
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
-
-		if (!_delegateFilterChain) {
-			filterChain.doFilter(servletRequest, servletResponse);
-		}
 	}
 
 	public void init(FilterConfig filterConfig) {
@@ -98,12 +93,8 @@ public class PortalClassLoaderFilter
 		_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
 
 		_filter.init(_filterConfig);
-
-		_delegateFilterChain = GetterUtil.getBoolean(
-			_filterConfig.getInitParameter("delegate-filter-chain"), true);
 	}
 
-	private boolean _delegateFilterChain;
 	private Filter _filter;
 	private FilterConfig _filterConfig;
 

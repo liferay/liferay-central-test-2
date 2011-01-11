@@ -64,9 +64,6 @@ public abstract class BaseFilter implements Filter {
 
 			_servlet24Dispatcher = true;
 		}
-
-		_delegateFilterChain = GetterUtil.getBoolean(
-			filterConfig.getInitParameter("delegate-filter-chain"), true);
 	}
 
 	public void doFilter(
@@ -196,9 +193,7 @@ public abstract class BaseFilter implements Filter {
 					filterClass.getName() + " " + path);
 		}
 
-		if (_delegateFilterChain) {
-			filterChain.doFilter(request, response);
-		}
+		filterChain.doFilter(request, response);
 
 		if (log.isDebugEnabled()) {
 			long endTime = System.currentTimeMillis();
@@ -226,7 +221,6 @@ public abstract class BaseFilter implements Filter {
 
 	private static final String _SERVLET_24_DISPATCHER_REQUEST = "REQUEST";
 
-	private boolean _delegateFilterChain;
 	private FilterConfig _filterConfig;
 	private Class<?> _filterClass = getClass();
 	private boolean _filterEnabled = true;
