@@ -92,8 +92,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		// Tags
 
 		for (AssetTag tag : tags) {
-			assetTagLocalService.decrementAssetCount(
-				tag.getTagId(), entry.getClassNameId());
+			if (entry.isVisible()) {
+				assetTagLocalService.decrementAssetCount(
+					tag.getTagId(), entry.getClassNameId());
+			}
 		}
 
 		// Social
@@ -566,32 +568,34 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 				}
 			}
 
-			List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
-				entry.getEntryId());
+			if (entry.getVisible()) {
+				List<AssetTag> oldTags = assetEntryPersistence.getAssetTags(
+					entry.getEntryId());
 
-			assetEntryPersistence.setAssetTags(entry.getEntryId(), tags);
-
-			if (entry.isNew()) {
-				for (AssetTag tag : tags) {
-					assetTagLocalService.incrementAssetCount(
-						tag.getTagId(), classNameId);
-				}
-			}
-			else {
-				for (AssetTag oldTag : oldTags) {
-					if (!tags.contains(oldTag)) {
-						assetTagLocalService.decrementAssetCount(
-							oldTag.getTagId(), classNameId);
-					}
-				}
-
-				for (AssetTag tag : tags) {
-					if (!oldTags.contains(tag)) {
+				if (entry.isNew()) {
+					for (AssetTag tag : tags) {
 						assetTagLocalService.incrementAssetCount(
 							tag.getTagId(), classNameId);
 					}
 				}
+				else {
+					for (AssetTag oldTag : oldTags) {
+						if (!tags.contains(oldTag)) {
+							assetTagLocalService.decrementAssetCount(
+								oldTag.getTagId(), classNameId);
+						}
+					}
+
+					for (AssetTag tag : tags) {
+						if (!oldTags.contains(tag)) {
+							assetTagLocalService.incrementAssetCount(
+								tag.getTagId(), classNameId);
+						}
+					}
+				}
 			}
+
+			assetEntryPersistence.setAssetTags(entry.getEntryId(), tags);
 		}
 
 		// Update entry after tags so that entry listeners have access to the
@@ -668,6 +672,22 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 		AssetEntry entry = assetEntryPersistence.findByC_C(
 			classNameId, classPK);
+
+		List<AssetTag> tags = assetEntryPersistence.getAssetTags(
+			entry.getEntryId());
+
+		if (visible && !entry.getVisible()) {
+			for (AssetTag tag : tags) {
+				assetTagLocalService.incrementAssetCount(
+					tag.getTagId(), classNameId);
+			}
+		}
+		else if (!visible && entry.getVisible()) {
+			for (AssetTag tag : tags) {
+				assetTagLocalService.decrementAssetCount(
+					tag.getTagId(), classNameId);
+			}
+		}
 
 		entry.setVisible(visible);
 

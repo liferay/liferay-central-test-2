@@ -452,8 +452,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Asset
 
-		assetEntryLocalService.deleteEntry(
-			WikiPage.class.getName(), page.getPrimaryKey());
+		List<WikiPage> pageVersions = wikiPagePersistence.findByN_T(
+			page.getNodeId(), page.getTitle());
+
+		for (WikiPage pageVersion : pageVersions) {
+			assetEntryLocalService.deleteEntry(
+				WikiPage.class.getName(), pageVersion.getPrimaryKey());
+		}
+
 		assetEntryLocalService.deleteEntry(
 			WikiPage.class.getName(), page.getResourcePrimKey());
 
@@ -1278,6 +1284,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 						null, ContentTypes.TEXT_HTML, page.getTitle(), null,
 						null, null, 0, 0, null, false);
 
+					assetEntryLocalService.deleteEntry(
+						draftAssetEntry.getEntryId());
 				}
 				catch (NoSuchEntryException nsee) {
 				}
