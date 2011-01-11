@@ -110,6 +110,10 @@ public class SQLServerDB extends BaseDB {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
+	public boolean isSupportsInlineDistinct() {
+		return _SUPPORTS_INLINE_DISTINCT;
+	}
+
 	protected SQLServerDB() {
 		super(TYPE_SQLSERVER);
 	}
@@ -200,6 +204,8 @@ public class SQLServerDB extends BaseDB {
 	private static final int _SQL_SERVER_2000 = 8;
 
 	private static final boolean _SUPPORTS_ALTER_COLUMN_TYPE = false;
+
+	private static final boolean _SUPPORTS_INLINE_DISTINCT = false;
 
 	private static SQLServerDB _instance = new SQLServerDB();
 
