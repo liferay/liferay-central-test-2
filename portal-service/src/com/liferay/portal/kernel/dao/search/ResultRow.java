@@ -131,28 +131,25 @@ public class ResultRow {
 	public void addText(int index, String name) {
 		addText(
 			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,
-			SearchEntry.DEFAULT_COLSPAN, SearchEntry.DEFAULT_CSS_CLASS, name);
+			SearchEntry.DEFAULT_COLSPAN, name);
 	}
 
 	public void addText(String align, String valign, String name) {
 		addText(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
-			SearchEntry.DEFAULT_CSS_CLASS, name);
+			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name);
 	}
 
 	public void addText(
-		String align, String valign, int colspan, String cssClass,
-		String name) {
+		String align, String valign, int colspan, String name) {
 
-		addText(_entries.size(), align, valign, colspan, cssClass, name);
+		addText(_entries.size(), align, valign, colspan, name);
 	}
 
 	public void addText(
-		int index, String align, String valign, int colspan, String cssClass,
-		String name) {
+		int index, String align, String valign, int colspan, String name) {
 
 		_entries.add(
-			index, new TextSearchEntry(align, valign, colspan, cssClass, name));
+			index, new TextSearchEntry(align, valign, colspan, name));
 	}
 
 	// Text with name and href
@@ -164,34 +161,31 @@ public class ResultRow {
 	public void addText(int index, String name, String href) {
 		addText(
 			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,
-			SearchEntry.DEFAULT_COLSPAN, SearchEntry.DEFAULT_CSS_CLASS, name,
-			href);
+			SearchEntry.DEFAULT_COLSPAN, name, href);
 	}
 
 	public void addText(String align, String valign, String name, String href) {
 		addText(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
-			SearchEntry.DEFAULT_CSS_CLASS, name, href);
+			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name,
+			href);
 	}
 
 	public void addText(
-		String align, String valign, int colspan, String cssClass, String name,
+		String align, String valign, int colspan, String name, String href) {
+
+		addText(_entries.size(), align, valign, colspan, name, href);
+	}
+
+	public void addText(
+		int index, String align, String valign, int colspan, String name,
 		String href) {
-
-		addText(_entries.size(), align, valign, colspan, cssClass, name, href);
-	}
-
-	public void addText(
-		int index, String align, String valign, int colspan, String cssClass,
-		String name, String href) {
 
 		if (_restricted) {
 			href = null;
 		}
 
 		_entries.add(
-			index, new TextSearchEntry(align, valign, colspan, cssClass, name,
-				href));
+			index, new TextSearchEntry(align, valign, colspan, name, href));
 	}
 
 	// Text with name and portlet URL
@@ -218,33 +212,30 @@ public class ResultRow {
 		String align, String valign, String name, PortletURL portletURL) {
 
 		addText(
-			align, valign, SearchEntry.DEFAULT_COLSPAN,
-			SearchEntry.DEFAULT_CSS_CLASS, name, portletURL);
+			align, valign, SearchEntry.DEFAULT_COLSPAN, name, portletURL);
 	}
 
 	public void addText(
-		String align, String valign, int colspan, String cssClass, String name,
+		String align, String valign, int colspan, String name,
 		PortletURL portletURL) {
 
 		if (portletURL == null) {
-			addText(align, valign, colspan, cssClass, name);
+			addText(align, valign, colspan, name);
 		}
 		else {
-			addText(align, valign, colspan, cssClass, name,
-				portletURL.toString());
+			addText(align, valign, colspan, name, portletURL.toString());
 		}
 	}
 
 	public void addText(
-		int index, String align, String valign, int colspan, String cssClass,
-		String name, PortletURL portletURL) {
+		int index, String align, String valign, int colspan, String name,
+		PortletURL portletURL) {
 
 		if (portletURL == null) {
-			addText(index, align, valign, colspan, cssClass, name);
+			addText(index, align, valign, colspan, name);
 		}
 		else {
-			addText(index, align, valign, colspan, cssClass, name,
-				portletURL.toString());
+			addText(index, align, valign, colspan, name, portletURL.toString());
 		}
 	}
 
@@ -275,37 +266,33 @@ public class ResultRow {
 	public void addButton(int index, String name, String href) {
 		addButton(
 			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,
-			SearchEntry.DEFAULT_COLSPAN, SearchEntry.DEFAULT_CSS_CLASS, name,
-			href);
+			SearchEntry.DEFAULT_COLSPAN, name, href);
 	}
 
 	public void addButton(
 		String align, String valign, String name, String href) {
 
 		addButton(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
-			SearchEntry.DEFAULT_CSS_CLASS, name, href);
-	}
-
-	public void addButton(
-		String align, String valign, int colspan, String cssClass, String name,
-		String href) {
-
-		addButton(_entries.size(), align, valign, colspan, cssClass, name,
+			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name,
 			href);
 	}
 
 	public void addButton(
-		int index, String align, String valign, int colspan, String cssClass,
-		String name, String href) {
+		String align, String valign, int colspan, String name, String href) {
+
+		addButton(_entries.size(), align, valign, colspan, name, href);
+	}
+
+	public void addButton(
+		int index, String align, String valign, int colspan, String name,
+		String href) {
 
 		if (_restricted) {
 			href = null;
 		}
 
 		_entries.add(
-			index, new ButtonSearchEntry(align, valign, colspan, cssClass, name,
-			href));
+			index, new ButtonSearchEntry(align, valign, colspan, name, href));
 	}
 
 	// JSP
@@ -316,28 +303,23 @@ public class ResultRow {
 
 	public void addJSP(String align, String valign, String path) {
 		addJSP(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
-			SearchEntry.DEFAULT_CSS_CLASS, path);
+			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, path);
 	}
 
-	public void addJSP(String align, String valign, int colspan,
-   		String cssClass, String path) {
-
-		addJSP(_entries.size(), align, valign, colspan, cssClass, path);
+	public void addJSP(String align, String valign, int colspan, String path) {
+		addJSP(_entries.size(), align, valign, colspan, path);
 	}
 
 	public void addJSP(int index, String path) {
 		addJSP(
 			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,
-			SearchEntry.DEFAULT_COLSPAN, SearchEntry.DEFAULT_CSS_CLASS, path);
+			SearchEntry.DEFAULT_COLSPAN, path);
 	}
 
 	public void addJSP(
-		int index, String align, String valign, int colspan, String cssClass,
-		String path) {
+		int index, String align, String valign, int colspan, String path) {
 
-		_entries.add(index, new JSPSearchEntry(align, valign, colspan, cssClass,
-			path));
+		_entries.add(index, new JSPSearchEntry(align, valign, colspan, path));
 	}
 
 	// JSP with portlet context
@@ -354,19 +336,18 @@ public class ResultRow {
 		HttpServletRequest request, HttpServletResponse response) {
 
 		addJSP(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
-			SearchEntry.DEFAULT_CSS_CLASS, path, servletContext, request,
-			response);
+			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, path,
+			servletContext, request, response);
 	}
 
 	public void addJSP(
-		String align, String valign, int colspan, String cssClass, String path,
+		String align, String valign, int colspan, String path,
 		ServletContext servletContext, HttpServletRequest request,
 		HttpServletResponse response) {
 
 		addJSP(
-			_entries.size(), align, valign, colspan, cssClass, path,
-			servletContext, request, response);
+			_entries.size(), align, valign, colspan, path, servletContext,
+			request, response);
 	}
 
 	public void addJSP(
@@ -375,19 +356,19 @@ public class ResultRow {
 
 		addJSP(
 			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,
-			SearchEntry.DEFAULT_COLSPAN, SearchEntry.DEFAULT_CSS_CLASS, path,
-			servletContext, request, response);
+			SearchEntry.DEFAULT_COLSPAN, path, servletContext, request,
+			response);
 	}
 
 	public void addJSP(
-		int index, String align, String valign, int colspan, String cssClass,
-		String path, ServletContext servletContext, HttpServletRequest request,
+		int index, String align, String valign, int colspan, String path,
+		ServletContext servletContext, HttpServletRequest request,
 		HttpServletResponse response) {
 
 		_entries.add(
 			index,
 			new JSPSearchEntry(
-				align, valign, colspan, cssClass, path, servletContext, request,
+				align, valign, colspan, path, servletContext, request,
 				response));
 	}
 

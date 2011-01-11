@@ -230,7 +230,7 @@ List<String> primaryKeys = new ArrayList<String>();
 					allRowsIsChecked = false;
 				}
 
-				row.addText(0, rowChecker.getAlign(), rowChecker.getValign(), rowChecker.getColspan(), rowChecker.getCssClass(), rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
+				row.addText(0, rowChecker.getAlign(), rowChecker.getValign(), rowChecker.getColspan(), rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
 			}
 		%>
 
@@ -248,20 +248,20 @@ List<String> primaryKeys = new ArrayList<String>();
 
 				request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY, entry);
 
-				String columnClassName = entry.getCssClass();
+				String columnClassName = StringPool.BLANK;
 
 				if (entries.size() == 1) {
-					columnClassName += " only";
+					columnClassName = " only";
 				}
 				else if (j == 0) {
-					columnClassName += " first";
+					columnClassName = " first";
 				}
 				else if ((j + 1) == entries.size()) {
-					columnClassName += " last";
+					columnClassName = " last";
 				}
 			%>
 
-				<td class="align-<%= entry.getAlign() %> col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %> <%= columnClassName %> valign-<%= entry.getValign() %>" colspan="<%= entry.getColspan() %>"
+				<td class="align-<%= entry.getAlign() %> col-<%= j + 1 %><%= row.isBold() ? " taglib-search-iterator-highlighted" : "" %><%= columnClassName %> valign-<%= entry.getValign() %>" colspan="<%= entry.getColspan() %>"
 					<c:if test="<%= (headerNames != null) && (headerNames.size() >= (j + 1)) %>">
 						headers="<%= randomId %>_col-<%= (j + 1) %>"
 					</c:if>

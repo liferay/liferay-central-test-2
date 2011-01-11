@@ -27,44 +27,39 @@ import javax.servlet.jsp.PageContext;
 public class TextSearchEntry extends SearchEntry {
 
 	public TextSearchEntry(String align, String valign, String name) {
-		this(align, valign, DEFAULT_COLSPAN, SearchEntry.DEFAULT_CSS_CLASS,
-			name, null);
+		this(align, valign, DEFAULT_COLSPAN, name, null);
 	}
 
 	public TextSearchEntry(
-		String align, String valign, int colspan, String cssClass,
-		String name) {
+		String align, String valign, int colspan, String name) {
 
-		this(align, valign, colspan, cssClass, name, null);
+		this(align, valign, colspan, name, null);
 	}
 
 	public TextSearchEntry(
 		String align, String valign, String name, String href) {
 
-		this(align, valign, DEFAULT_COLSPAN, SearchEntry.DEFAULT_CSS_CLASS,
-			name, href, null, null);
+		this(align, valign, DEFAULT_COLSPAN, name, href, null, null);
 	}
 
 	public TextSearchEntry(
-		String align, String valign, int colspan, String cssClass, String name,
-		String href) {
+		String align, String valign, int colspan, String name, String href) {
 
-		this(align, valign, colspan, cssClass, name, href, null, null);
+		this(align, valign, colspan, name, href, null, null);
 	}
 
 	public TextSearchEntry(
 		String align, String valign, String name, String href, String target,
 		String title) {
 
-		this(align, valign, DEFAULT_COLSPAN, SearchEntry.DEFAULT_CSS_CLASS,
-			name, href, target, title);
+		this(align, valign, DEFAULT_COLSPAN, name, href, target, title);
 	}
 
 	public TextSearchEntry(
-		String align, String valign, int colspan, String cssClass, String name,
-		String href, String target, String title) {
+		String align, String valign, int colspan, String name, String href,
+		String target, String title) {
 
-		super(align, valign, colspan, cssClass);
+		super(align, valign, colspan);
 
 		_name = name;
 		_href = href;
@@ -139,8 +134,8 @@ public class TextSearchEntry extends SearchEntry {
 
 	public Object clone() {
 		return new TextSearchEntry(
-			getAlign(), getValign(), getColspan(), getCssClass(), getName(),
-			getHref(), getTarget(), getTitle());
+			getAlign(), getValign(), getColspan(), getName(), getHref(),
+			getTarget(), getTitle());
 	}
 
 	private String _name;
