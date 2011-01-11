@@ -119,8 +119,6 @@ else if (!groupByClass) {
 <%
 }
 else {
-	int maxGroupTotal = 0;
-
 	for (long classNameId : classNameIds) {
 		long[] groupClassNameIds = {classNameId};
 
@@ -143,19 +141,15 @@ else {
 
 		int groupTotal = 0;
 
-		if (groupTotal > maxGroupTotal) {
-			maxGroupTotal = groupTotal;
-		}
-
 		if (filterByCategories && !hasViewableCategories) {
 			results = new ArrayList<AssetEntry>();
-		}
-		else {
+		} else {
 			results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 			groupTotal = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 			total += groupTotal;
 		}
 
+		searchContainer.setTotal(groupTotal);
 		searchContainer.setResults(results);
 
 		request.setAttribute("view.jsp-results", results);
@@ -170,8 +164,6 @@ else {
 <%
 		}
 	}
-
-	searchContainer.setTotal(groupTotal);
 }
 
 if (total == 0) {
