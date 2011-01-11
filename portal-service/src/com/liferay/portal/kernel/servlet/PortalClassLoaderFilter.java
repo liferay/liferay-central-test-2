@@ -31,7 +31,7 @@ import javax.servlet.ServletResponse;
  * @author Brian Wing Shun Chan
  */
 public class PortalClassLoaderFilter
-	extends BasePortalLifecycle implements Filter{
+	extends BasePortalLifecycle implements Filter {
 
 	public void destroy() {
 		portalDestroy();
@@ -50,11 +50,14 @@ public class PortalClassLoaderFilter
 			currentThread.setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			_filter.doFilter(servletRequest, servletResponse, filterChain);
+			_filter.doFilter(
+				servletRequest, servletResponse, new DummyFilterChain());
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
+
+		filterChain.doFilter(servletRequest, servletResponse);
 	}
 
 	public void init(FilterConfig filterConfig) {
