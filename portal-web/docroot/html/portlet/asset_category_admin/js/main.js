@@ -427,6 +427,7 @@ AUI().add(
 									}
 
 									instance._hideFloatingPanels(event);
+									instance._resetCategoriesProperties(event);
 								}
 							}
 						);
@@ -2088,6 +2089,25 @@ AUI().add(
 						instance.liveSearch = new A.LiveSearch(options);
 					},
 
+					/**
+					 * Invokes reset() method of AutoFileds in order to remove all data
+					 * from the panel with properties and delete the rows inside.
+					 *
+					 * @method _resetCategoriesProperties
+					 * @protected
+					 * @param event {Event} custom event
+					 */
+
+					_resetCategoriesProperties: function(event){
+						var instance = this;
+
+						var contextPanel = event.currentTarget;
+						var boundingBox = contextPanel.get('boundingBox');
+						var propertiesTrigger = boundingBox.one('fieldset#categoryProperties');
+
+						var autoFieldsInstance = propertiesTrigger.getData('autoFieldsInstance');
+						autoFieldsInstance.reset();
+					},
 
 					/**
 					 * Resets the data in Liferay.AutoFields instance.

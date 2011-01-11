@@ -166,10 +166,16 @@ String formName = randomNamespace + "_fm";
 </aui:form>
 
 <aui:script use="liferay-auto-fields">
-	new Liferay.AutoFields(
+	var autoFields = new Liferay.AutoFields(
 		{
 			contentBox: 'fieldset#categoryProperties',
 			fieldIndexes: '<portlet:namespace />categoryPropertiesIndexes'
 		}
 	).render();
+
+	var propertiesTrigger = A.one('fieldset#categoryProperties');
+
+	if (propertiesTrigger) {
+		propertiesTrigger.setData('autoFieldsInstance', autoFields);
+	}
 </aui:script>
