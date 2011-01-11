@@ -215,7 +215,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			HttpUtil.URLtoString(servletContext.getResource("/WEB-INF/web.xml"))
 		};
 
-		if (xmls[0] == null) {
+		if ((xmls[0] == null) && (xmls[1] == null)) {
 			return;
 		}
 
