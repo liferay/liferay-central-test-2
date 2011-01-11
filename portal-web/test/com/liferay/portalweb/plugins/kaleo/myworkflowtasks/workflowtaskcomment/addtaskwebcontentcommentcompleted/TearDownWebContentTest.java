@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.addworkflowcommentassignedtomyroles;
+package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtaskcomment.addtaskwebcontentcommentcompleted;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;

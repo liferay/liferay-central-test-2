@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.addworkflowcommentassignedtome;
+package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtaskcomment.addtaskwebcontentcommentassignedtome;
 
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -22,7 +22,7 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddWorkflowCommentAssignedToMeTests extends BaseTests {
+public class AddTaskWebContentCommentAssignedToMeTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
@@ -30,7 +30,7 @@ public class AddWorkflowCommentAssignedToMeTests extends BaseTests {
 		testSuite.addTestSuite(ConfigureWebContentSingleApproverTest.class);
 		testSuite.addTestSuite(AddWebContentSingleApproverTest.class);
 		testSuite.addTestSuite(AssignToMeWebContentActionsTest.class);
-		testSuite.addTestSuite(AddWorkflowCommentAssignedToMeTest.class);
+		testSuite.addTestSuite(AddTaskWebContentCommentAssignedToMeTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);
 		testSuite.addTestSuite(TearDownWorkflowConfigurationTest.class);
 

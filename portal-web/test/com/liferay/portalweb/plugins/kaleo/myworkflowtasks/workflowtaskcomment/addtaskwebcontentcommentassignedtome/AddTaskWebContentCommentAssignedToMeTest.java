@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.addworkflowcommentassignedtomyroles;
+package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtaskcomment.addtaskwebcontentcommentassignedtome;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddWorkflowCommentAssignedToMyRolesTest extends BaseTestCase {
-	public void testAddWorkflowCommentAssignedToMyRoles()
+public class AddTaskWebContentCommentAssignedToMeTest extends BaseTestCase {
+	public void testAddTaskWebContentCommentAssignedToMe()
 		throws Exception {
 		selenium.open("/web/guest/home/");
 

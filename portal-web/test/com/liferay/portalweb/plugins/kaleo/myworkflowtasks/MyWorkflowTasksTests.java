@@ -14,9 +14,7 @@
 
 package com.liferay.portalweb.plugins.kaleo.myworkflowtasks;
 
-import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.addworkflowcommentassignedtome.AddWorkflowCommentAssignedToMeTests;
-import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.addworkflowcommentassignedtomyroles.AddWorkflowCommentAssignedToMyRolesTests;
-import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.addworkflowcommentcompleted.AddWorkflowCommentCompletedTests;
+import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtaskcomment.WorkflowTaskCommentTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -30,9 +28,7 @@ public class MyWorkflowTasksTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddWorkflowCommentAssignedToMeTests.suite());
-		testSuite.addTest(AddWorkflowCommentAssignedToMyRolesTests.suite());
-		testSuite.addTest(AddWorkflowCommentCompletedTests.suite());
+		testSuite.addTest(WorkflowTaskCommentTests.suite());
 
 		return testSuite;
 	}

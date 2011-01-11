@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.addworkflowcommentcompleted;
+package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtaskcomment.addtaskwebcontentcommentcompleted;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddWorkflowCommentCompletedTest extends BaseTestCase {
-	public void testAddWorkflowCommentCompleted() throws Exception {
+public class AddTaskWebContentCommentCompletedTest extends BaseTestCase {
+	public void testAddTaskWebContentCommentCompleted()
+		throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

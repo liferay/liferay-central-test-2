@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.addworkflowcommentcompleted;
+package com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtaskcomment.addtaskwebcontentcommentcompleted;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddWebContentSingleApproverTest extends BaseTestCase {
-	public void testAddWebContentSingleApprover() throws Exception {
+public class AssignToMeWebContentActionsTest extends BaseTestCase {
+	public void testAssignToMeWebContentActions() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {
@@ -44,16 +44,22 @@ public class AddWebContentSingleApproverTest extends BaseTestCase {
 		selenium.clickAt("link=Control Panel", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("link=Web Content", RuntimeVariables.replace(""));
+		selenium.click(RuntimeVariables.replace("link=My Workflow Tasks"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Add Web Content']",
-			RuntimeVariables.replace(""));
-		selenium.waitForPageToLoad("30000");
-		selenium.saveScreenShotAndSource();
-		selenium.type("_15_title", RuntimeVariables.replace("Web Content Name"));
-		selenium.saveScreenShotAndSource();
-		Thread.sleep(5000);
+		assertEquals(RuntimeVariables.replace(
+				"There are no pending tasks assigned to you."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
+		assertEquals(RuntimeVariables.replace("Review"),
+			selenium.getText("//td[1]/a"));
+		assertEquals(RuntimeVariables.replace("Web Content Name"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("Web Content"),
+			selenium.getText("//td[3]/a"));
+		assertTrue(selenium.isElementPresent("//td[4]/a"));
+		assertEquals(RuntimeVariables.replace("Never"),
+			selenium.getText("//td[5]/a"));
+		selenium.clickAt("//strong/a", RuntimeVariables.replace("Actions"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -61,40 +67,8 @@ public class AddWebContentSingleApproverTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"_15_structure_el_TextAreaField_content")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("cke_contents_CKEditor1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//textarea")) {
+				if (selenium.isVisible(
+							"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a")) {
 					break;
 				}
 			}
@@ -105,29 +79,45 @@ public class AddWebContentSingleApproverTest extends BaseTestCase {
 		}
 
 		selenium.saveScreenShotAndSource();
-		selenium.selectFrame(
-			"//iframe[@id='_15_structure_el_TextAreaField_content']");
-		selenium.selectFrame("//td[@id='cke_contents_CKEditor1']/iframe");
-		selenium.type("//body", RuntimeVariables.replace("Web Content Content"));
-		selenium.selectFrame("relative=top");
+		assertEquals(RuntimeVariables.replace("Assign to Me"),
+			selenium.getText(
+				"//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a"));
+		selenium.click("//div[@class='lfr-component lfr-menu-list']/ul/li[1]/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isVisible("//div/button[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.saveScreenShotAndSource();
-		selenium.clickAt("//input[@value='Submit for Publication']",
-			RuntimeVariables.replace(""));
+		selenium.clickAt("//div/button[1]", RuntimeVariables.replace("OK"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
 				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
-		assertTrue(selenium.isElementPresent("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("Review"),
+			selenium.getText("//td[1]/a"));
 		assertEquals(RuntimeVariables.replace("Web Content Name"),
+			selenium.getText("//td[2]/a"));
+		assertEquals(RuntimeVariables.replace("Web Content"),
 			selenium.getText("//td[3]/a"));
-		assertEquals(RuntimeVariables.replace("1.0"),
-			selenium.getText("//td[4]/a"));
-		assertEquals(RuntimeVariables.replace("Pending"),
+		assertTrue(selenium.isElementPresent("//td[4]/a"));
+		assertEquals(RuntimeVariables.replace("Never"),
 			selenium.getText("//td[5]/a"));
-		assertTrue(selenium.isElementPresent("//td[6]/a"));
-		assertTrue(selenium.isElementPresent("//td[7]/a"));
-		assertEquals(RuntimeVariables.replace("Joe Bloggs"),
-			selenium.getText("//td[8]/a"));
+		assertEquals(RuntimeVariables.replace(
+				"There are no pending tasks assigned to your roles."),
+			selenium.getText("//div[@class='portlet-msg-info']"));
 	}
 }
