@@ -131,11 +131,6 @@ td.user-info {
 	padding: 15px;
 }
 
-.portlet-message-boards .tags {
-	margin-bottom: 0.4em;
-	margin-top: 0.5em;
-}
-
 .ie .portlet-message-boards .message-container .thread-body table {
 	table-layout: auto;
 }
