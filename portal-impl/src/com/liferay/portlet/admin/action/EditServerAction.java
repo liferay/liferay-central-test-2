@@ -387,19 +387,24 @@ public class EditServerAction extends PortletAction {
 			captcha = new SimpleCaptchaImpl();
 		}
 
-		preferences.setValue(
-			PropsKeys.CAPTCHA_ENGINE_IMPL, captcha.getClass().getName());
-		preferences.setValue(
-			PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE,
-			reCaptchaPrivateKey);
-		preferences.setValue(
-			PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC, reCaptchaPublicKey);
+		validateCaptcha(actionRequest);
 
-		preferences.store();
+		if (SessionErrors.isEmpty(actionRequest)) {
+			preferences.setValue(
+				PropsKeys.CAPTCHA_ENGINE_IMPL, captcha.getClass().getName());
+			preferences.setValue(
+				PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE,
+				reCaptchaPrivateKey);
+			preferences.setValue(
+				PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC,
+				reCaptchaPublicKey);
 
-		CaptchaImpl captchaImpl = (CaptchaImpl)CaptchaUtil.getCaptcha();
+			preferences.store();
 
-		captchaImpl.setCaptcha(captcha);
+			CaptchaImpl captchaImpl = (CaptchaImpl)CaptchaUtil.getCaptcha();
+
+			captchaImpl.setCaptcha(captcha);
+		}
 	}
 
 	protected void updateFileUploads(
@@ -583,6 +588,30 @@ public class EditServerAction extends PortletAction {
 			PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(port));
 
 		preferences.store();
+	}
+
+	protected void validateCaptcha(ActionRequest actionRequest)
+		throws Exception {
+
+		boolean reCaptchaEnabled = ParamUtil.getBoolean(
+			actionRequest, "reCaptchaEnabled");
+
+		if (reCaptchaEnabled) {
+			String reCaptchaPrivateKey = ParamUtil.getString(
+				actionRequest, "reCaptchaPrivateKey");
+
+			String reCaptchaPublicKey = ParamUtil.getString(
+				actionRequest, "reCaptchaPublicKey");
+
+
+			if (Validator.isNull(reCaptchaPublicKey)) {
+				SessionErrors.add(actionRequest, "reCaptchaPublicKey");
+			}
+
+			if (Validator.isNull(reCaptchaPrivateKey)) {
+				SessionErrors.add(actionRequest, "reCaptchaPrivateKey");
+			}
+		}
 	}
 
 	protected void verifyPluginTables() throws Exception {

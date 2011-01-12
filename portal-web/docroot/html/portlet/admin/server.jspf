@@ -318,7 +318,11 @@ numberFormat.setMinimumIntegerDigits(2);
 				<aui:fieldset>
 					<aui:input inlineLabel="right" label="enable-recaptcha" name="reCaptchaEnabled" type="checkbox" value="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_IMPL, PropsValues.CAPTCHA_ENGINE_IMPL).equals(ReCaptchaImpl.class.getName()) %>" />
 
+					<liferay-ui:error key="reCaptchaPublicKey" message="the-recaptcha-public-key-can-not-be-empty" />
+
 					<aui:input cssClass="lfr-input-text-container" label="recaptcha-public-key" name="reCaptchaPublicKey" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC, PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PUBLIC) %>" />
+
+					<liferay-ui:error key="reCaptchaPrivateKey" message="the-recaptcha-private-key-can-not-be-empty" />
 
 					<aui:input cssClass="lfr-input-text-container" label="recaptcha-private-key" name="reCaptchaPrivateKey" type="text" value="<%= PrefsPropsUtil.getString(PropsKeys.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE, PropsValues.CAPTCHA_ENGINE_RECAPTCHA_KEY_PRIVATE) %>" />
 				</aui:fieldset>
