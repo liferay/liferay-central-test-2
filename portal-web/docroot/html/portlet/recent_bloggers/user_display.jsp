@@ -26,15 +26,15 @@ String rowHREF = (String)objArray[1];
 %>
 
 <liferay-ui:user-display userId="<%= statsUser.getUserId() %>" url="<%= rowHREF %>">
-	<div class="blogger-posts">
-		<label><liferay-ui:message key="posts" />:</label> <%= statsUser.getEntryCount() %>
+	<div class="blogger-post-count">
+		<span><liferay-ui:message key="posts" />:</span> <%= statsUser.getEntryCount() %>
 	</div>
 
 	<div class="blogger-stars">
-		<label><liferay-ui:message key="stars" />:</label> <%= statsUser.getRatingsTotalEntries()  %>
+		<span><liferay-ui:message key="stars" />:</span> <%= statsUser.getRatingsTotalEntries()  %>
 	</div>
 
 	<div class="blogger-date">
-		<label><liferay-ui:message key="date" />:</label> <%= dateFormatDate.format(statsUser.getLastPostDate()) %>
+		<span><liferay-ui:message key="date" />:</span> <%= dateFormatDate.format(statsUser.getLastPostDate()) %>
 	</div>
 </liferay-ui:user-display>

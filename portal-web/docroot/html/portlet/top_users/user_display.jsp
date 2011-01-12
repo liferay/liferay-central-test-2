@@ -28,15 +28,15 @@ SocialEquityUser socialEquityUser = (SocialEquityUser)row.getObject();
 >
 	<c:if test="<%= userDisplay != null %>">
 		<div class="user-rank">
-			<label><liferay-ui:message key="rank" />:</label> <%= socialEquityUser.getRank() %>
+			<span><liferay-ui:message key="rank" />:</span> <%= socialEquityUser.getRank() %>
 		</div>
 
 		<div class="user-contribution-score">
-			<label><liferay-ui:message key="contribution-score" />:</label> <%= Math.round(socialEquityUser.getContributionEquity()) %>
+			<span><liferay-ui:message key="contribution-score" />:</span> <%= Math.round(socialEquityUser.getContributionEquity()) %>
 		</div>
 
 		<div class="user-participation-score">
-			<label><liferay-ui:message key="participation-score" />:</label> <%= Math.round(socialEquityUser.getParticipationEquity()) %>
+			<span><liferay-ui:message key="participation-score" />:</span> <%= Math.round(socialEquityUser.getParticipationEquity()) %>
 		</div>
 	</c:if>
 </liferay-ui:user-display>

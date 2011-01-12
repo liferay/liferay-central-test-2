@@ -14,7 +14,7 @@
  */
 --%>
 
-.taglib-user-display .user-details .user-name {
+.taglib-user-display .user-details .user-name, .taglib-user-display .user-profile-image {
 	clear: both;
 	display: block;
 	text-align: center;
