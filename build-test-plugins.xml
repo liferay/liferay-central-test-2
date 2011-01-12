@@ -65,11 +65,7 @@ plugins.includes=${plugins.includes}</echo>
 	</target>
 
 	<target name="test-service-builder">
-		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.tomcat.dir}
-app.server.lib.global.dir=${app.server.tomcat.lib.global.dir}
-app.server.portal.dir=${app.server.tomcat.portal.dir}
-
-auto.deploy.dir=$${user.home}/liferay/deploy</echo>
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.tomcat.dir}</echo>
 
 		<delete dir="${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF/service" />
 
