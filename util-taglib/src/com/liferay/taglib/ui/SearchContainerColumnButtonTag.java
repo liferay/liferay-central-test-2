@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.dao.search.ButtonSearchEntry;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
 import com.liferay.portal.kernel.util.ServerDetector;
@@ -45,9 +46,15 @@ public class SearchContainerColumnButtonTag<R>
 				index = row.getEntries().size();
 			}
 
-			row.addButton(
-				index, getAlign(), getValign(), getColspan(), getName(),
-				(String)getHref());
+			ButtonSearchEntry buttonSearchEntry = new ButtonSearchEntry();
+
+			buttonSearchEntry.setAlign(getAlign());
+			buttonSearchEntry.setColspan(getColspan());
+			buttonSearchEntry.setHref((String)getHref());
+			buttonSearchEntry.setName(getName());
+			buttonSearchEntry.setValign(getValign());
+
+			row.addSearchEntry(index, buttonSearchEntry);
 
 			return EVAL_PAGE;
 		}

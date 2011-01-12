@@ -14,14 +14,16 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.dao.search.JSPSearchEntry;
 import com.liferay.portal.kernel.dao.search.ResultRow;
 import com.liferay.portal.kernel.dao.search.SearchEntry;
-import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspTagException;
 
@@ -42,10 +44,19 @@ public class SearchContainerColumnJSPTag<R> extends SearchContainerColumnTag {
 				index = row.getEntries().size();
 			}
 
-			row.addJSP(
-				index, getAlign(), getValign(), getColspan(), getPath(),
-				pageContext.getServletContext(), getServletRequest(),
-				new PipingServletResponse(pageContext));
+			JSPSearchEntry jspSearchEntry = new JSPSearchEntry();
+
+			jspSearchEntry.setAlign(getAlign());
+			jspSearchEntry.setColspan(getColspan());
+			jspSearchEntry.setPath(getPath());
+			jspSearchEntry.setRequest(
+				(HttpServletRequest)pageContext.getRequest());
+			jspSearchEntry.setResponse(
+				(HttpServletResponse)pageContext.getResponse());
+			jspSearchEntry.setServletContext(pageContext.getServletContext());
+			jspSearchEntry.setValign(getValign());
+
+			row.addSearchEntry(index, jspSearchEntry);
 
 			return EVAL_PAGE;
 		}

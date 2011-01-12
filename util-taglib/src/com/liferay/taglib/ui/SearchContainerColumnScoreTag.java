@@ -15,6 +15,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.dao.search.ResultRow;
+import com.liferay.portal.kernel.dao.search.ScoreSearchEntry;
 import com.liferay.portal.kernel.util.ServerDetector;
 
 import java.util.List;
@@ -41,7 +42,11 @@ public class SearchContainerColumnScoreTag<R> extends SearchContainerColumnTag {
 				index = row.getEntries().size();
 			}
 
-			row.addScore(index, getScore());
+			ScoreSearchEntry scoreSearchEntry = new ScoreSearchEntry();
+
+			scoreSearchEntry.setScore(getScore());
+
+			row.addSearchEntry(index, scoreSearchEntry);
 
 			return EVAL_PAGE;
 		}

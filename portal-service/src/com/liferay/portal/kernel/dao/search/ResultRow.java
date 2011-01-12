@@ -192,6 +192,10 @@ public class ResultRow {
 		_searchEntries.add(index, scoreSearchEntry);
 	}
 
+	public void addSearchEntry(int index, SearchEntry searchEntry) {
+		_searchEntries.add(index, searchEntry);
+	}
+
 	public void addText(int index, String name) {
 		addText(
 			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,

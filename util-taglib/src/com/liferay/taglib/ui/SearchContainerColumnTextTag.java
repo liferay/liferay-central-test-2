@@ -83,7 +83,7 @@ public class SearchContainerColumnTextTag<R>
 			textSearchEntry.setTitle(getTitle());
 			textSearchEntry.setValign(getValign());
 
-			row.addText(index, textSearchEntry);
+			row.addSearchEntry(index, textSearchEntry);
 
 			return EVAL_PAGE;
 		}
