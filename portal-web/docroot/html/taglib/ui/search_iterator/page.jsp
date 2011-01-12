@@ -230,7 +230,15 @@ List<String> primaryKeys = new ArrayList<String>();
 					allRowsIsChecked = false;
 				}
 
-				row.addText(0, rowChecker.getAlign(), rowChecker.getValign(), rowChecker.getColspan(), rowChecker.getCssClass(), rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
+				TextSearchEntry textSearchEntry = new TextSearchEntry();
+
+				textSearchEntry.setAlign(rowChecker.getAlign());
+				textSearchEntry.setColspan(rowChecker.getColspan());
+				textSearchEntry.setCssClass(rowChecker.getCssClass());
+				textSearchEntry.setName(rowChecker.getRowCheckBox(rowIsChecked, row.getPrimaryKey()));
+				textSearchEntry.setValign(rowChecker.getValign());
+
+				row.addSearchEntry(0, textSearchEntry);
 			}
 		%>
 

@@ -60,7 +60,14 @@ for (int i = 0; i < results.size(); i++) {
 	row.addText("left", "top", curLayout.getName(locale));
 
 	if (proposalId <= 0) {
-		row.addJSP("left", "top", 1, SearchEntry.DEFAULT_CSS_CLASS, "/html/portlet/communities/export_page_options.jsp");
+		JSPSearchEntry jspSearchEntry = new JSPSearchEntry();
+
+		jspSearchEntry.setAlign("left");
+		jspSearchEntry.setColspan(1);
+		jspSearchEntry.setPath("/html/portlet/communities/export_page_options.jsp");
+		jspSearchEntry.setValign("top");
+
+		row.addSearchEntry(jspSearchEntry);
 	}
 
 	row.addText("left", "top", LanguageUtil.get(pageContext, StringUtil.replace(curLayout.getType(), "_", "-")));

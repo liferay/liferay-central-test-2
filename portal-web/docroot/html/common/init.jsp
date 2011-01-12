@@ -55,6 +55,7 @@
 <%@ page import="com.liferay.portal.kernel.dao.search.AlwaysTrueRowChecker" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.DAOParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.JSPSearchEntry" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.RowChecker" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.ScoreSearchEntry" %>
