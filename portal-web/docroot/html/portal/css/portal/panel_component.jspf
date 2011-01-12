@@ -37,15 +37,6 @@
 	overflow: hidden;
 }
 
-.lfr-panel .lfr-panel-titlebar a {
-	color: #000;
-	text-decoration: none;
-}
-
-.lfr-panel .lfr-panel-titlebar a:hover {
-	text-decoration: underline;
-}
-
 .lfr-panel.lfr-collapsible .lfr-panel-titlebar {
 	background: url(<%= themeImagesPath %>/arrows/05_down.png) no-repeat 2px 50%;
 	cursor: pointer;

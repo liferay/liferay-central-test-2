@@ -116,17 +116,10 @@ AUI().add(
 							}
 						);
 
-						instance._panelTitles.on(
-							'click',
-							function(event) {
-								instance.fire(
-									'collapse',
-									{
-										panelTitle: event.currentTarget
-									}
-								);
-							}
-						);
+						instance._panelTitles.attr('tabIndex', 0);
+
+						instance._panelTitles.on('click', instance._onTitleClick, instance);
+						instance._panelTitles.on('key', instance._onTitleClick, 'down:13', instance);
 					},
 
 					_defCollapseFn: function(event) {
@@ -164,6 +157,17 @@ AUI().add(
 						instance._saveState(panelId, state);
 
 						instance.fire('titleClick');
+					},
+
+					_onTitleClick: function(event) {
+						var instance = this;
+
+						instance.fire(
+							'collapse',
+							{
+								panelTitle: event.currentTarget
+							}
+						);
 					},
 
 					_saveState: function (id, state) {
