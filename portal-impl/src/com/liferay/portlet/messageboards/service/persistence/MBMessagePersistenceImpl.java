@@ -605,9 +605,6 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		mbMessageImpl.setUserName(mbMessage.getUserName());
 		mbMessageImpl.setCreateDate(mbMessage.getCreateDate());
 		mbMessageImpl.setModifiedDate(mbMessage.getModifiedDate());
-		mbMessageImpl.setUserEmail(mbMessage.getUserEmail());
-		mbMessageImpl.setUserIP(mbMessage.getUserIP());
-		mbMessageImpl.setUserURL(mbMessage.getUserURL());
 		mbMessageImpl.setClassNameId(mbMessage.getClassNameId());
 		mbMessageImpl.setClassPK(mbMessage.getClassPK());
 		mbMessageImpl.setCategoryId(mbMessage.getCategoryId());

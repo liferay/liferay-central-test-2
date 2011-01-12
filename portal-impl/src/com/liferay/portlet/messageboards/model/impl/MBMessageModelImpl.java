@@ -71,9 +71,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "userEmail", new Integer(Types.VARCHAR) },
-			{ "userIP", new Integer(Types.VARCHAR) },
-			{ "userURL", new Integer(Types.VARCHAR) },
 			{ "classNameId", new Integer(Types.BIGINT) },
 			{ "classPK", new Integer(Types.BIGINT) },
 			{ "categoryId", new Integer(Types.BIGINT) },
@@ -92,7 +89,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 			{ "statusByUserName", new Integer(Types.VARCHAR) },
 			{ "statusDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,userEmail VARCHAR(75) null,userIP VARCHAR(75) null,userURL VARCHAR(75) null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,rootMessageId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,format VARCHAR(75) null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,allowPingbacks BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table MBMessage (uuid_ VARCHAR(75) null,messageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,categoryId LONG,threadId LONG,rootMessageId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,format VARCHAR(75) null,attachments BOOLEAN,anonymous BOOLEAN,priority DOUBLE,allowPingbacks BOOLEAN,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBMessage";
 	public static final String ORDER_BY_JPQL = " ORDER BY mbMessage.createDate ASC, mbMessage.messageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY MBMessage.createDate ASC, MBMessage.messageId ASC";
@@ -123,9 +120,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setUserEmail(soapModel.getUserEmail());
-		model.setUserIP(soapModel.getUserIP());
-		model.setUserURL(soapModel.getUserURL());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
 		model.setCategoryId(soapModel.getCategoryId());
@@ -279,45 +273,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
-	}
-
-	public String getUserEmail() {
-		if (_userEmail == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _userEmail;
-		}
-	}
-
-	public void setUserEmail(String userEmail) {
-		_userEmail = userEmail;
-	}
-
-	public String getUserIP() {
-		if (_userIP == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _userIP;
-		}
-	}
-
-	public void setUserIP(String userIP) {
-		_userIP = userIP;
-	}
-
-	public String getUserURL() {
-		if (_userURL == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _userURL;
-		}
-	}
-
-	public void setUserURL(String userURL) {
-		_userURL = userURL;
 	}
 
 	public String getClassName() {
@@ -582,9 +537,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setUserEmail(getUserEmail());
-		clone.setUserIP(getUserIP());
-		clone.setUserURL(getUserURL());
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setCategoryId(getCategoryId());
@@ -661,7 +613,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(57);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -679,12 +631,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
-		sb.append(", userEmail=");
-		sb.append(getUserEmail());
-		sb.append(", userIP=");
-		sb.append(getUserIP());
-		sb.append(", userURL=");
-		sb.append(getUserURL());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
 		sb.append(", classPK=");
@@ -725,7 +671,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(88);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.messageboards.model.MBMessage");
@@ -762,18 +708,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		sb.append(
 			"<column><column-name>modifiedDate</column-name><column-value><![CDATA[");
 		sb.append(getModifiedDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>userEmail</column-name><column-value><![CDATA[");
-		sb.append(getUserEmail());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>userIP</column-name><column-value><![CDATA[");
-		sb.append(getUserIP());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>userURL</column-name><column-value><![CDATA[");
-		sb.append(getUserURL());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
@@ -861,9 +795,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private String _userEmail;
-	private String _userIP;
-	private String _userURL;
 	private long _classNameId;
 	private long _classPK;
 	private long _categoryId;

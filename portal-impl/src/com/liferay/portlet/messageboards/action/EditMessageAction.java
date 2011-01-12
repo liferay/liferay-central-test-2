@@ -317,8 +317,7 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					groupId, categoryId, subject, body, format, files,
-					anonymous, null, null, null, priority, allowPingbacks,
-					serviceContext);
+					anonymous, priority, allowPingbacks, serviceContext);
 
 				if (question) {
 					MBMessageFlagLocalServiceUtil.addQuestionFlag(
@@ -331,8 +330,8 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					groupId, categoryId, threadId, parentMessageId, subject,
-					body, format, files, anonymous, null, null, null, priority,
-					allowPingbacks, serviceContext);
+					body, format, files, anonymous, priority, allowPingbacks,
+					serviceContext);
 			}
 		}
 		else {

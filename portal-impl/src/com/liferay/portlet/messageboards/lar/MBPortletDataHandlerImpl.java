@@ -764,10 +764,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 					userId, userName, portletDataContext.getScopeGroupId(),
 					categoryId, threadId, parentMessageId, message.getSubject(),
 					message.getBody(), message.getFormat(), files,
-					message.getAnonymous(), message.getUserEmail(),
-					message.getUserName(), message.getUserURL(),
-					message.getPriority(), message.getAllowPingbacks(),
-					serviceContext);
+					message.getAnonymous(), message.getPriority(),
+					message.getAllowPingbacks(), serviceContext);
 			}
 			else {
 				importedMessage = MBMessageLocalServiceUtil.updateMessage(
@@ -782,9 +780,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				userId, userName, portletDataContext.getScopeGroupId(),
 				categoryId, threadId, parentMessageId, message.getSubject(),
 				message.getBody(), message.getFormat(), files,
-				message.getAnonymous(), message.getUserEmail(),
-				message.getUserName(), message.getUserURL(),
-				message.getPriority(),
+				message.getAnonymous(), message.getPriority(),
 				message.getAllowPingbacks(), serviceContext);
 		}
 

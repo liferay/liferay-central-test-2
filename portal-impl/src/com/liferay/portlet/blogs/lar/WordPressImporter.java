@@ -199,7 +199,7 @@ public class WordPressImporter {
 			defaultUser.getUserId(), commentAuthor, context.getGroupId(),
 			BlogsEntry.class.getName(), entry.getEntryId(),
 			thread.getThreadId(), commentParentId, null, commentContent,
-			null, null, null, serviceContext);
+			serviceContext);
 
 		messageIdMap.put(commentId, message.getMessageId());
 	}
