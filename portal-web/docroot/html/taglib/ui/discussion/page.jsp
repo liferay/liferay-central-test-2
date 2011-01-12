@@ -89,6 +89,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			<aui:input name="parentMessageId" type="hidden" />
 			<aui:input name="body" type="hidden" />
 			<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
+			<aui:input name="randomNamespace" type="hidden" value="<%= randomNamespace %>" />
 
 			<%
 			int i = 0;

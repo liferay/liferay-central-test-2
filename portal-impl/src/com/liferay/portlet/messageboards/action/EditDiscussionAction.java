@@ -66,8 +66,11 @@ public class EditDiscussionAction extends PortletAction {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				MBMessage message = updateMessage(actionRequest);
 
+				String randomNamespace = ParamUtil.getString(
+					actionRequest, "randomNamespace");
+
 				redirect +=
-					"#" + actionResponseImpl.getNamespace() + "messageScroll" +
+					"#" + randomNamespace + "messageScroll" +
 						message.getMessageId();
 			}
 			else if (cmd.equals(Constants.DELETE)) {
