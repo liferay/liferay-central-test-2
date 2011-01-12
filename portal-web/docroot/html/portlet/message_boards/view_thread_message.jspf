@@ -39,17 +39,22 @@
 						%>
 
 						<c:if test="<%= Validator.isNotNull(ranks[1]) %>">
-							<span class="thread-user-role-<%= ranks[1].toLowerCase() %>"><%= ranks[1] %></span>
+							<div class="thread-user-role thread-user-role-<%= ranks[1].toLowerCase() %>"><%= ranks[1] %></div>
 						</c:if>
 
 						<c:if test="<%= Validator.isNotNull(ranks[0]) %>">
-							<span class="thread-user-rank"><liferay-ui:message key="rank" />: <%= ranks[0] %></span>
+							<div class="thread-user-rank">
+								<label><liferay-ui:message key="rank" />:</label> <%= ranks[0] %>
+							</div>
 						</c:if>
 
-						<liferay-ui:message key="posts" />: <%= posts %><br />
-						<liferay-ui:message key="join-date" />: <%= dateFormatDate.format(userDisplay.getCreateDate()) %><br />
+						<div class="thread-user-posts">
+							<label><liferay-ui:message key="posts" />:</label> <%= posts %>
+						</div>
 
-						<br />
+						<div class="thread-user-join-date">
+							<label><liferay-ui:message key="join-date" />:</label> <%= dateFormatDate.format(userDisplay.getCreateDate()) %>
+						</div>
 
 						<portlet:renderURL var="recentPostsURL">
 							<portlet:param name="struts_action" value="/message_boards/view" />
