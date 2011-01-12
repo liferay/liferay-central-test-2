@@ -14,6 +14,7 @@
 
 package com.liferay.portalweb.plugins.kaleo.myworkflowtasks;
 
+import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.WorkflowTaskTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtaskcomment.WorkflowTaskCommentTests;
 import com.liferay.portalweb.portal.BaseTests;
 
@@ -28,6 +29,7 @@ public class MyWorkflowTasksTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
+		testSuite.addTest(WorkflowTaskTests.suite());
 		testSuite.addTest(WorkflowTaskCommentTests.suite());
 
 		return testSuite;

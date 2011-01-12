@@ -17,7 +17,6 @@ package com.liferay.portalweb.plugins.kaleo;
 import com.liferay.portalweb.plugins.kaleo.assetpublisher.AssetPublisherTests;
 import com.liferay.portalweb.plugins.kaleo.mysubmissions.MySubmissionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.MyWorkflowTasksTests;
-import com.liferay.portalweb.plugins.kaleo.scope.ScopeTests;
 import com.liferay.portalweb.plugins.kaleo.webcontent.WebContentTests;
 import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.WebContentDisplayTests;
 import com.liferay.portalweb.plugins.kaleo.workflow.WorkflowTests;
@@ -38,7 +37,6 @@ public class KaleoTests extends BaseTests {
 		testSuite.addTest(AssetPublisherTests.suite());
 		testSuite.addTest(MySubmissionsTests.suite());
 		testSuite.addTest(MyWorkflowTasksTests.suite());
-		testSuite.addTest(ScopeTests.suite());
 		testSuite.addTest(WebContentTests.suite());
 		testSuite.addTest(WebContentDisplayTests.suite());
 		testSuite.addTest(WorkflowTests.suite());

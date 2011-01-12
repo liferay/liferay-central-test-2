@@ -63,7 +63,7 @@ public class DeleteWebContentCompletedEditedListTest extends BaseTestCase {
 						   .matches("^Are you sure you want to delete the selected web content[\\s\\S]$"));
 		selenium.saveScreenShotAndSource();
 		assertEquals(RuntimeVariables.replace(
-				"Your request processed successfully."),
+				"Your request completed successfully."),
 			selenium.getText("//div[@class='portlet-msg-success']"));
 		assertEquals(RuntimeVariables.replace("No Web Content was found."),
 			selenium.getText("//div[@class='portlet-msg-info']"));
