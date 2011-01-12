@@ -16,8 +16,7 @@ package com.liferay.portal.lar;
 
 /**
  * @author     Bruno Farache
- * @deprecated This class has been repackaged at
- *             <code>com.liferay.portal.kernel.lar</code>.
+ * @deprecated Moved to {@link com.liferay.portal.kernel.lar.UserIdStrategy}
  */
 public interface UserIdStrategy
 	extends com.liferay.portal.kernel.lar.UserIdStrategy {

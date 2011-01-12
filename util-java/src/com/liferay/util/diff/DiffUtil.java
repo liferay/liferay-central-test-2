@@ -38,8 +38,7 @@ import org.incava.util.diff.Difference;
  * </p>
  *
  * @author     Bruno Farache
- * @deprecated This class has been repackaged at
- *             <code>com.liferay.portal.kernel.util</code>.
+ * @deprecated Moved to {@link com.liferay.portal.kernel.util.DiffUtil}
  */
 public class DiffUtil {
 

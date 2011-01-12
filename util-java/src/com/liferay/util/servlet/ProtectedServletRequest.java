@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author     Brian Wing Shun Chan
- * @deprecated This class has been repackaged at
- *             <code>com.liferay.portal.kernel.servlet</code>.
+ * @deprecated Moved to {@link
+ *             com.liferay.portal.kernel.servlet.ProtectedServletRequest}
  */
 public class ProtectedServletRequest
 	extends com.liferay.portal.kernel.servlet.ProtectedServletRequest {

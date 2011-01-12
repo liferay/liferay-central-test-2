@@ -1818,7 +1818,7 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated {@link getValue(long, long, String, String, long)}
+	 * @deprecated {@link #getValue(long, long, String, String, long)}
 	 */
 	public ExpandoValue getValue(
 			long classNameId, String tableName, String columnName, long classPK)
@@ -1840,7 +1840,7 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated {@link getValue(long, String, String, String, long)}
+	 * @deprecated {@link #getValue(long, String, String, String, long)}
 	 */
 	public ExpandoValue getValue(
 			String className, String tableName, String columnName, long classPK)

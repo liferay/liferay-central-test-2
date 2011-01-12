@@ -1221,7 +1221,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	}
 
 	/**
-	* @deprecated {@link getValue(long, long, String, String, long)}
+	* @deprecated {@link #getValue(long, long, String, String, long)}
 	*/
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long classNameId, java.lang.String tableName,
@@ -1240,7 +1240,7 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 	}
 
 	/**
-	* @deprecated {@link getValue(long, String, String, String, long)}
+	* @deprecated {@link #getValue(long, String, String, String, long)}
 	*/
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		java.lang.String className, java.lang.String tableName,

@@ -18,8 +18,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 
 /**
  * @author     Brian Wing Shun Chan
- * @deprecated This class has been repackaged at
- *             <code>com.liferay.portal.kernel.util</code>.
+ * @deprecated Moved to {@link com.liferay.portal.kernel.util.Constants}
  */
 public class Constants
 	implements com.liferay.portal.kernel.util.Constants, ContentTypes {

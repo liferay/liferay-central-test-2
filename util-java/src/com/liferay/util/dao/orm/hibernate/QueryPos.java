@@ -20,8 +20,7 @@ import org.hibernate.Query;
 
 /**
  * @author     Brian Wing Shun Chan
- * @deprecated This class has been repackaged at
- *             <code>com.liferay.portal.kernel.dao.orm</code>.
+ * @deprecated Moved to {@link com.liferay.portal.kernel.dao.orm.QueryPos}
  */
 public class QueryPos {
 

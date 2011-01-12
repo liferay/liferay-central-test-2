@@ -16,8 +16,7 @@ package com.liferay.util;
 
 /**
  * @author     Brian Wing Shun Chan
- * @deprecated This class has been repackaged at
- *             <code>com.liferay.portal.kernel.util</code>.
+ * @deprecated Moved to {@link com.liferay.portal.kernel.util.SetUtil}
  */
 public class SetUtil extends com.liferay.portal.kernel.util.SetUtil {
 }

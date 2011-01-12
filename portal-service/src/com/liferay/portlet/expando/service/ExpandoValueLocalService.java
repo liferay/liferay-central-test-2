@@ -968,7 +968,7 @@ public interface ExpandoValueLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* @deprecated {@link getValue(long, long, String, String, long)}
+	* @deprecated {@link #getValue(long, long, String, String, long)}
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
@@ -983,7 +983,7 @@ public interface ExpandoValueLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* @deprecated {@link getValue(long, String, String, String, long)}
+	* @deprecated {@link #getValue(long, String, String, String, long)}
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(

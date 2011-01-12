@@ -16,8 +16,7 @@ package com.liferay.portal.lar;
 
 /**
  * @author     Raymond Augé
- * @deprecated This class has been repackaged at
- *             <code>com.liferay.portal.kernel.lar</code>.
+ * @deprecated Moved to {@link com.liferay.portal.kernel.lar.PortletDataContext}
  */
 public interface PortletDataContext
 	extends com.liferay.portal.kernel.lar.PortletDataContext {

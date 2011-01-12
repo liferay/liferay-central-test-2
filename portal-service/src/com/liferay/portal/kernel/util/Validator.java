@@ -883,7 +883,7 @@ public class Validator {
 	/**
 	 * Determines if the character is whitespace, meaning it is either the
 	 * <code>null</code> character '0' or whitespace according to {@link
-	 * java.lang.Character.isWhiteSpace(char)}.
+	 * java.lang.Character#isWhitespace(char)}.
 	 *
 	 * @param  c the character to check
 	 * @return <code>true</code> if the character is whitespace;

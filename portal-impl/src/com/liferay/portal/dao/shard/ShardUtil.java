@@ -16,8 +16,7 @@ package com.liferay.portal.dao.shard;
 
 /**
  * @author     Alexander Chow
- * @deprecated This class has been repackaged at
- *             <code>com.liferay.portal.kernel.dao.shard</code>.
+ * @deprecated Moved to {@link com.liferay.portal.kernel.dao.shard.ShardUtil}
  */
 public class ShardUtil extends com.liferay.portal.kernel.dao.shard.ShardUtil {
 }
