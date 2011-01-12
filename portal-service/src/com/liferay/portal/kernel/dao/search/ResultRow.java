@@ -47,7 +47,7 @@ public class ResultRow {
 		_primaryKey = primaryKey;
 		_pos = pos;
 		_bold = bold;
-		_entries = new ArrayList<SearchEntry>();
+		_searchEntries = new ArrayList<SearchEntry>();
 	}
 
 	public void addButton(int index, String name, String href) {
@@ -72,25 +72,25 @@ public class ResultRow {
 		buttonSearchEntry.setName(name);
 		buttonSearchEntry.setValign(valign);
 
-		_entries.add(index, buttonSearchEntry);
+		_searchEntries.add(index, buttonSearchEntry);
 	}
 
 	public void addButton(String name, String href) {
-		addButton(_entries.size(), name, href);
+		addButton(_searchEntries.size(), name, href);
 	}
 
 	public void addButton(
 		String align, String valign, int colspan, String name, String href) {
 
-		addButton(_entries.size(), align, valign, colspan, name, href);
+		addButton(_searchEntries.size(), align, valign, colspan, name, href);
 	}
 
 	public void addButton(
 		String align, String valign, String name, String href) {
 
 		addButton(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name,
-			href);
+			_searchEntries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
+			name, href);
 	}
 
 	public void addJSP(int index, String path) {
@@ -119,7 +119,7 @@ public class ResultRow {
 		jspSearchEntry.setPath(path);
 		jspSearchEntry.setValign(valign);
 
-		_entries.add(index, jspSearchEntry);
+		_searchEntries.add(index, jspSearchEntry);
 	}
 
 	public void addJSP(
@@ -137,22 +137,22 @@ public class ResultRow {
 		jspSearchEntry.setServletContext(servletContext);
 		jspSearchEntry.setValign(valign);
 
-		_entries.add(index, jspSearchEntry);
+		_searchEntries.add(index, jspSearchEntry);
 	}
 
 	public void addJSP(String path) {
-		addJSP(_entries.size(), path);
+		addJSP(_searchEntries.size(), path);
 	}
 
 	public void addJSP(
 		String path, ServletContext servletContext, HttpServletRequest request,
 		HttpServletResponse response) {
 
-		addJSP(_entries.size(), path, servletContext, request, response);
+		addJSP(_searchEntries.size(), path, servletContext, request, response);
 	}
 
 	public void addJSP(String align, String valign, int colspan, String path) {
-		addJSP(_entries.size(), align, valign, colspan, path);
+		addJSP(_searchEntries.size(), align, valign, colspan, path);
 	}
 
 	public void addJSP(
@@ -161,13 +161,14 @@ public class ResultRow {
 		HttpServletResponse response) {
 
 		addJSP(
-			_entries.size(), align, valign, colspan, path, servletContext,
+			_searchEntries.size(), align, valign, colspan, path, servletContext,
 			request, response);
 	}
 
 	public void addJSP(String align, String valign, String path) {
 		addJSP(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, path);
+			_searchEntries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
+			path);
 	}
 
 	public void addJSP(
@@ -175,12 +176,12 @@ public class ResultRow {
 		HttpServletRequest request, HttpServletResponse response) {
 
 		addJSP(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, path,
-			servletContext, request, response);
+			_searchEntries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
+			path, servletContext, request, response);
 	}
 
 	public void addScore(float score) {
-		addScore(_entries.size(), score);
+		addScore(_searchEntries.size(), score);
 	}
 
 	public void addScore(int index, float score) {
@@ -188,7 +189,7 @@ public class ResultRow {
 
 		scoreSearchEntry.setScore(score);
 
-		_entries.add(index, scoreSearchEntry);
+		_searchEntries.add(index, scoreSearchEntry);
 	}
 
 	public void addText(int index, String name) {
@@ -222,7 +223,7 @@ public class ResultRow {
 		textSearchEntry.setName(name);
 		textSearchEntry.setValign(valign);
 
-		_entries.add(index, textSearchEntry);
+		_searchEntries.add(index, textSearchEntry);
 	}
 
 	public void addText(
@@ -253,7 +254,7 @@ public class ResultRow {
 		textSearchEntry.setName(name);
 		textSearchEntry.setValign(valign);
 
-		_entries.add(index, textSearchEntry);
+		_searchEntries.add(index, textSearchEntry);
 	}
 
 	public void addText(int index, TextSearchEntry searchEntry) {
@@ -261,11 +262,11 @@ public class ResultRow {
 			searchEntry.setHref(null);
 		}
 
-		_entries.add(index, searchEntry);
+		_searchEntries.add(index, searchEntry);
 	}
 
 	public void addText(String name) {
-		addText(_entries.size(), name);
+		addText(_searchEntries.size(), name);
 	}
 
 	public void addText(String name, PortletURL portletURL) {
@@ -278,13 +279,13 @@ public class ResultRow {
 	}
 
 	public void addText(String name, String href) {
-		addText(_entries.size(), name, href);
+		addText(_searchEntries.size(), name, href);
 	}
 
 	public void addText(
 		String align, String valign, int colspan, String name) {
 
-		addText(_entries.size(), align, valign, colspan, name);
+		addText(_searchEntries.size(), align, valign, colspan, name);
 	}
 
 	public void addText(
@@ -302,12 +303,13 @@ public class ResultRow {
 	public void addText(
 		String align, String valign, int colspan, String name, String href) {
 
-		addText(_entries.size(), align, valign, colspan, name, href);
+		addText(_searchEntries.size(), align, valign, colspan, name, href);
 	}
 
 	public void addText(String align, String valign, String name) {
 		addText(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name);
+			_searchEntries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
+			name);
 	}
 
 	public void addText(
@@ -319,8 +321,8 @@ public class ResultRow {
 
 	public void addText(String align, String valign, String name, String href) {
 		addText(
-			_entries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN, name,
-			href);
+			_searchEntries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
+			name, href);
 	}
 
 	public void addText(TextSearchEntry searchEntry) {
@@ -328,7 +330,7 @@ public class ResultRow {
 			searchEntry.setHref(null);
 		}
 
-		_entries.add(_entries.size(), searchEntry);
+		_searchEntries.add(_searchEntries.size(), searchEntry);
 	}
 
 	public String getClassHoverName() {
@@ -340,7 +342,7 @@ public class ResultRow {
 	}
 
 	public List<SearchEntry> getEntries() {
-		return _entries;
+		return _searchEntries;
 	}
 
 	public Object getObject() {
@@ -406,7 +408,7 @@ public class ResultRow {
 	private boolean _bold;
 	private String _classHoverName;
 	private String _className;
-	private List<SearchEntry> _entries;
+	private List<SearchEntry> _searchEntries;
 	private Object _obj;
 	private Map<String, Object> _params;
 	private int _pos;
