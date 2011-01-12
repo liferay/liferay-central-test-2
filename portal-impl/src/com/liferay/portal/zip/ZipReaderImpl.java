@@ -157,7 +157,7 @@ public class ZipReaderImpl implements ZipReader {
 
 	public List<String> getFolderEntries(String path) {
 		if (Validator.isNull(path)) {
-			return Collections.EMPTY_LIST;
+			return Collections.emptyList();
 		}
 
 		List<String> folderEntries = new ArrayList<String>();
