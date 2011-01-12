@@ -117,7 +117,7 @@ AUI().add(
 						);
 
 						instance._panelTitles.on(
-							'mousedown',
+							'click',
 							function(event) {
 								instance.fire(
 									'collapse',

@@ -19,9 +19,9 @@
 <div class="lfr-panel <%= cssClass %>" id="<%= id %>">
 	<div class="lfr-panel-titlebar">
 		<div class="lfr-panel-title">
-			<span>
+			<a href="javascript:;">
 				<liferay-ui:message key="<%= title %>" />
-			</span>
+			</a>
 
 			<c:if test="<%= Validator.isNotNull(helpMessage) %>">
 				<liferay-ui:icon-help message="<%= helpMessage %>" />
