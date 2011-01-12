@@ -68,9 +68,15 @@ plugins.includes=${plugins.includes}</echo>
 		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.tomcat.dir}</echo>
 
 		<delete dir="${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF/service" />
-
 		<delete dir="${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF/src/META-INF" />
 
 		<ant antfile="${lp.plugins.dir}/portlets/sample-service-builder-portlet/build.xml" target="build-service" inheritAll="false" />
+
+		<delete dir="${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF/service" />
+		<delete dir="${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF/src/META-INF" />
+
+		<exec executable="cmd.exe">
+			<arg line="/c svn --username ${svn.username} --password ${svn.password} update ${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF" />
+		</exec>
 	</target>
 </project>
