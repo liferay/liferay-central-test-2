@@ -596,21 +596,20 @@ public class EditServerAction extends PortletAction {
 		boolean reCaptchaEnabled = ParamUtil.getBoolean(
 			actionRequest, "reCaptchaEnabled");
 
-		if (reCaptchaEnabled) {
-			String reCaptchaPrivateKey = ParamUtil.getString(
-				actionRequest, "reCaptchaPrivateKey");
+		if (!reCaptchaEnabled) {
+			return;
+		}
 
-			String reCaptchaPublicKey = ParamUtil.getString(
-				actionRequest, "reCaptchaPublicKey");
+		String reCaptchaPrivateKey = ParamUtil.getString(
+			actionRequest, "reCaptchaPrivateKey");
+		String reCaptchaPublicKey = ParamUtil.getString(
+			actionRequest, "reCaptchaPublicKey");
 
-
-			if (Validator.isNull(reCaptchaPublicKey)) {
-				SessionErrors.add(actionRequest, "reCaptchaPublicKey");
-			}
-
-			if (Validator.isNull(reCaptchaPrivateKey)) {
-				SessionErrors.add(actionRequest, "reCaptchaPrivateKey");
-			}
+		if (Validator.isNull(reCaptchaPublicKey)) {
+			SessionErrors.add(actionRequest, "reCaptchaPublicKey");
+		}
+		else if (Validator.isNull(reCaptchaPrivateKey)) {
+			SessionErrors.add(actionRequest, "reCaptchaPrivateKey");
 		}
 	}
 
