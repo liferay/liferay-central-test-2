@@ -245,8 +245,6 @@
 		<java
 			classname="com.liferay.portal.tools.servicebuilder.ServiceBuilder"
 			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
 		>
 			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
