@@ -495,16 +495,16 @@ public class ServicePreAction extends Action {
 			List<Layout> layouts)
 		throws PortalException, SystemException {
 
-		if ((layouts == null) || (layouts.size() == 0)) {
+		if ((layouts == null) || layouts.isEmpty()) {
 			return new Object[] {layout, layouts};
 		}
 
-		boolean layoutViewPermission = false;
+		boolean hasUpdateLayoutPermission = false;
 
 		if (LayoutPermissionUtil.contains(
 				permissionChecker, layout, ActionKeys.VIEW)) {
 
-			layoutViewPermission = true;
+			hasUpdateLayoutPermission = true;
 		}
 
 		List<Layout> accessibleLayouts = new ArrayList<Layout>();
@@ -516,7 +516,7 @@ public class ServicePreAction extends Action {
 				LayoutPermissionUtil.contains(
 					permissionChecker, curLayout, ActionKeys.VIEW)) {
 
-				if ((accessibleLayouts.size() == 0) && !layoutViewPermission) {
+				if (accessibleLayouts.isEmpty() && !hasUpdateLayoutPermission) {
 					layout = curLayout;
 				}
 
@@ -524,10 +524,10 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		if (accessibleLayouts.size() == 0) {
+		if (accessibleLayouts.isEmpty()) {
 			layouts = null;
 
-			if (!layoutViewPermission) {
+			if (!hasUpdateLayoutPermission) {
 				SessionErrors.add(
 					request, LayoutPermissionException.class.getName());
 			}
