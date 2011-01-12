@@ -152,7 +152,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 					</aui:a>
 				</c:when>
 				<c:otherwise>
-						<span class="taglib-icon"><%= linkContent %></span>
+					<span class="taglib-icon"><%= linkContent %></span>
 				</c:otherwise>
 			</c:choose>
 		</li>
@@ -166,7 +166,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 					</aui:a>
 				</c:when>
 				<c:otherwise>
-						<span class="taglib-icon"><%= linkContent %></span>
+					<span class="taglib-icon"><%= linkContent %></span>
 				</c:otherwise>
 			</c:choose>
 		</li>
@@ -180,7 +180,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 					</aui:a>
 				</c:when>
 				<c:otherwise>
-						<span class="taglib-icon"><%= linkContent %></span>
+					<span class="taglib-icon"><%= linkContent %></span>
 				</c:otherwise>
 			</c:choose>
 		</span>
