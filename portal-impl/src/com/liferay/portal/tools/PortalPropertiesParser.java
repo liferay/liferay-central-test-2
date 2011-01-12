@@ -1,8 +1,8 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import jodd.io.StreamUtil;
-import jodd.util.StringUtil;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.DTDHandler;
@@ -275,7 +275,7 @@ public class PortalPropertiesParser implements XMLReader {
 
 		List<PropertyData> propertyDataList = new ArrayList<PropertyData>();
 
-		String[] lines = StringUtil.splitc(content, '\n');
+		String[] lines = StringUtil.split(content, "\n");
 
 		PropertyData propertyData = new PropertyData();
 
@@ -287,7 +287,7 @@ public class PortalPropertiesParser implements XMLReader {
 
 			hidden = false;
 
-			if (StringUtil.startsWithChar(line, '#')) {
+			if ((line.length() >= 1) && (line.charAt(0) == '#')) {
 				// comments
 
 				if ((line.length() >= 2) && (line.charAt(1) != ' ')) {
@@ -434,8 +434,7 @@ public class PortalPropertiesParser implements XMLReader {
 	}
 
 	private String nameToAnchor(String name) {
-		return StringUtil.replaceChars(
-				name, " ".toCharArray(), "+".toCharArray());
+		return name.replace(' ', '+');
 	}
 
 	private static class PropertyData {
