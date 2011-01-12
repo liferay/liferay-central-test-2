@@ -15,6 +15,7 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.struts.StrutsAction;
+import com.liferay.portal.kernel.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,31 +28,32 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Mika Koivisto
  */
-public class StrutsWrapperAction extends Action {
+public class ActionAdapter extends Action {
 
-	public StrutsWrapperAction(StrutsAction action) {
-		_strutsAction = action;
+	public ActionAdapter(StrutsAction strutsAction) {
+		_strutsAction = strutsAction;
 	}
 
 	public ActionForward execute(
-		ActionMapping mapping, ActionForm form, HttpServletRequest request,
-		HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		String forward = _strutsAction.execute(request, response);
 
-		if (forward != null) {
-			ActionForward actionForward = mapping.findForward(forward);
-
-			if (actionForward == null) {
-				actionForward = new ActionForward(forward);
-			}
-
-			return actionForward;
+		if (Validator.isNull(forward)) {
+			return null;
 		}
 
-		return null;
+		ActionForward actionForward = actionMapping.findForward(forward);
+
+		if (actionForward == null) {
+			actionForward = new ActionForward(forward);
+		}
+
+		return actionForward;
 	}
 
 	private StrutsAction _strutsAction;
+
 }

@@ -29,14 +29,17 @@ public interface StrutsPortletAction {
 
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,
-			ActionResponse actionResponse) throws Exception;
+			ActionResponse actionResponse)
+		throws Exception;
 
 	public String render(
 			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse) throws Exception;
+			RenderResponse renderResponse)
+		throws Exception;
 
 	public void serveResource(
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
-			ResourceResponse resourceResponse) throws Exception;
+			ResourceResponse resourceResponse)
+		throws Exception;
 
 }

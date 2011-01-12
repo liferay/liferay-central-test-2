@@ -65,6 +65,7 @@ import org.apache.struts.action.ActionServlet;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesRequestProcessor;
+import org.apache.struts.util.MessageResources;
 
 /**
  * @author Brian Wing Shun Chan
@@ -122,28 +123,31 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			actionResponse);
 
-		ActionMapping mapping = processMapping(request, response, path);
+		ActionMapping actionMapping = processMapping(request, response, path);
 
-		if (mapping == null) {
+		if (actionMapping == null) {
 			return;
 		}
 
-		if (!processRoles(request, response, mapping, true)) {
+		if (!processRoles(request, response, actionMapping, true)) {
 			return;
 		}
 
-		ActionForm form = processActionForm(request, response, mapping);
+		ActionForm actionForm = processActionForm(
+			request, response, actionMapping);
 
-		processPopulate(request, response, form, mapping);
+		processPopulate(request, response, actionForm, actionMapping);
 
-		if (!processValidateAction(request, response, form, mapping)) {
+		if (!processValidateAction(
+				request, response, actionForm, actionMapping)) {
+
 			return;
 		}
 
-		PortletAction action =
-			(PortletAction)processActionCreate(request, response, mapping);
+		PortletAction portletAction = (PortletAction)processActionCreate(
+			request, response, actionMapping);
 
-		if (action == null) {
+		if (portletAction == null) {
 			return;
 		}
 
@@ -152,7 +156,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		try {
-			if (action.isCheckMethodOnProcessAction()) {
+			if (portletAction.isCheckMethodOnProcessAction()) {
 				if (!PortalUtil.isMethodPost(actionRequest)) {
 					String currentURL = PortalUtil.getCurrentURL(actionRequest);
 
@@ -166,8 +170,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				}
 			}
 
-			action.processAction(
-				mapping, form, portletConfigImpl, actionRequest,
+			portletAction.processAction(
+				actionMapping, actionForm, portletConfigImpl, actionRequest,
 				actionResponse);
 		}
 		catch (Exception e) {
@@ -191,7 +195,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				forward = forward.substring(0, pos);
 			}
 
-			ActionForward actionForward = mapping.findForward(forward);
+			ActionForward actionForward = actionMapping.findForward(forward);
 
 			if ((actionForward != null) && (actionForward.getRedirect())) {
 				String forwardPath = actionForward.getPath();
@@ -249,11 +253,11 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		PortletConfigImpl portletConfig =
+		PortletConfigImpl portletConfigImpl =
 			(PortletConfigImpl)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		PortletContext portletContext = portletConfig.getPortletContext();
+		PortletContext portletContext = portletConfigImpl.getPortletContext();
 
 		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
@@ -288,55 +292,57 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 	protected Action processActionCreate(
 			HttpServletRequest request, HttpServletResponse response,
-			ActionMapping mapping)
+			ActionMapping actionMapping)
 		throws IOException {
 
-		Action action =
-			StrutsActionWrapperRegistry.getAction(mapping.getPath());
+		Action action = StrutsActionRegistry.getAction(actionMapping.getPath());
 
-		if (action == null) {
-			action = super.processActionCreate(request, response, mapping);
+		if (action != null) {
+			return action;
 		}
 
-		return action;
+		return super.processActionCreate(request, response, actionMapping);
 	}
 
 	protected ActionForm processActionForm(
 		HttpServletRequest request, HttpServletResponse response,
-		ActionMapping mapping) {
+		ActionMapping actionMapping) {
 
-		ActionForm form = super.processActionForm(request, response, mapping);
+		ActionForm actionForm = super.processActionForm(
+			request, response, actionMapping);
 
-		if (form instanceof InitializableActionForm) {
-			InitializableActionForm initForm = (InitializableActionForm)form;
+		if (actionForm instanceof InitializableActionForm) {
+			InitializableActionForm initializableActionForm =
+				(InitializableActionForm)actionForm;
 
-			initForm.init(request, response, mapping);
+			initializableActionForm.init(request, response, actionMapping);
 		}
 
-		return form;
+		return actionForm;
 	}
 
 	protected ActionForward processActionPerform(
 			HttpServletRequest request, HttpServletResponse response,
-			Action action, ActionForm form, ActionMapping mapping)
+			Action action, ActionForm actionForm, ActionMapping actionMapping)
 		throws IOException, ServletException {
 
-		PortletConfigImpl portletConfig =
+		PortletConfigImpl portletConfigImpl =
 			(PortletConfigImpl)request.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		String exceptionId =
 			WebKeys.PORTLET_STRUTS_EXCEPTION + StringPool.PERIOD +
-				portletConfig.getPortletId();
+				portletConfigImpl.getPortletId();
 
 		Exception e = (Exception)request.getAttribute(exceptionId);
 
 		if (e != null) {
-			return processException(request, response, e, form, mapping);
+			return processException(
+				request, response, e, actionForm, actionMapping);
 		}
 		else {
 			return super.processActionPerform(
-				request, response, action, form, mapping);
+				request, response, action, actionForm, actionMapping);
 		}
 	}
 
@@ -368,7 +374,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			return null;
 		}
 
-		ActionMapping mapping = null;
+		ActionMapping actionMapping = null;
 
 		long companyId = PortalUtil.getCompanyId(request);
 
@@ -380,19 +386,21 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				companyId, portletConfigImpl.getPortletId());
 
-			if (StrutsActionWrapperRegistry.getAction(path) != null) {
-				mapping = (ActionMapping)moduleConfig.findActionConfig(path);
+			if (StrutsActionRegistry.getAction(path) != null) {
+				actionMapping = (ActionMapping)moduleConfig.findActionConfig(
+					path);
 
-				if (mapping == null) {
-					mapping = new ActionMapping();
-					mapping.setPath(path);
-					mapping.setModuleConfig(moduleConfig);
+				if (actionMapping == null) {
+					actionMapping = new ActionMapping();
 
-					request.setAttribute(Globals.MAPPING_KEY, mapping);
+					actionMapping.setModuleConfig(moduleConfig);
+					actionMapping.setPath(path);
+
+					request.setAttribute(Globals.MAPPING_KEY, actionMapping);
 				}
 			}
 			else if (moduleConfig.findActionConfig(path) != null) {
-				mapping = super.processMapping(request, response, path);
+				actionMapping = super.processMapping(request, response, path);
 			}
 			else if (Validator.isNotNull(portlet.getParentStrutsPath())) {
 				int pos = path.indexOf(StringPool.SLASH, 1);
@@ -401,19 +409,22 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 					StringPool.SLASH + portlet.getParentStrutsPath() +
 						path.substring(pos, path.length());
 
-				if (StrutsActionWrapperRegistry.getAction(parentPath) != null) {
-					mapping = (ActionMapping)moduleConfig.findActionConfig(path);
+				if (StrutsActionRegistry.getAction(parentPath) != null) {
+					actionMapping =
+						(ActionMapping)moduleConfig.findActionConfig(path);
 
-					if (mapping == null) {
-						mapping = new ActionMapping();
-						mapping.setPath(parentPath);
-						mapping.setModuleConfig(moduleConfig);
+					if (actionMapping == null) {
+						actionMapping = new ActionMapping();
 
-						request.setAttribute(Globals.MAPPING_KEY, mapping);
+						actionMapping.setModuleConfig(moduleConfig);
+						actionMapping.setPath(parentPath);
+
+						request.setAttribute(
+							Globals.MAPPING_KEY, actionMapping);
 					}
 				}
 				else if (moduleConfig.findActionConfig(parentPath) != null) {
-					mapping = super.processMapping(
+					actionMapping = super.processMapping(
 						request, response, parentPath);
 				}
 			}
@@ -421,8 +432,10 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		catch (Exception e) {
 		}
 
-		if (mapping == null) {
-			String msg = getInternal().getMessage("processInvalid");
+		if (actionMapping == null) {
+			MessageResources messageResources = getInternal();
+
+			String msg = messageResources.getMessage("processInvalid");
 
 			_log.error("User ID " + request.getRemoteUser());
 			_log.error("Current URL " + PortalUtil.getCurrentURL(request));
@@ -432,7 +445,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			_log.error(msg + " " + path);
 		}
 
-		return mapping;
+		return actionMapping;
 	}
 
 	protected HttpServletRequest processMultipart(HttpServletRequest request) {
@@ -460,12 +473,12 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 
 		if (path == null) {
-			PortletConfigImpl portletConfig =
+			PortletConfigImpl portletConfigImpl =
 				(PortletConfigImpl)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			_log.error(
-				portletConfig.getPortletName() +
+				portletConfigImpl.getPortletName() +
 					" does not have any paths specified");
 		}
 		else {
@@ -479,28 +492,28 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 	protected boolean processRoles(
 			HttpServletRequest request, HttpServletResponse response,
-			ActionMapping mapping)
+			ActionMapping actionMapping)
 		throws IOException, ServletException {
 
-		return processRoles(request, response, mapping, false);
+		return processRoles(request, response, actionMapping, false);
 	}
 
 	protected boolean processRoles(
 			HttpServletRequest request, HttpServletResponse response,
-			ActionMapping mapping, boolean action)
+			ActionMapping actionMapping, boolean action)
 		throws IOException, ServletException {
 
 		long companyId = PortalUtil.getCompanyId(request);
 
-		String path = mapping.getPath();
+		String path = actionMapping.getPath();
 
 		try {
-			PortletConfigImpl portletConfig =
+			PortletConfigImpl portletConfigImpl =
 				(PortletConfigImpl)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_CONFIG);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				companyId, portletConfig.getPortletId());
+				companyId, portletConfigImpl.getPortletId());
 
 			if (portlet == null) {
 				return false;
@@ -543,7 +556,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			}
 			else if (!portlet.isActive()) {
 				ForwardConfig forwardConfig =
-					mapping.findForward(_PATH_PORTAL_PORTLET_INACTIVE);
+					actionMapping.findForward(_PATH_PORTAL_PORTLET_INACTIVE);
 
 				if (!action) {
 					processForwardConfig(request, response, forwardConfig);
@@ -558,7 +571,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			}
 
 			ForwardConfig forwardConfig =
-				mapping.findForward(_PATH_PORTAL_PORTLET_ACCESS_DENIED);
+				actionMapping.findForward(_PATH_PORTAL_PORTLET_ACCESS_DENIED);
 
 			if (!action) {
 				processForwardConfig(request, response, forwardConfig);
@@ -572,9 +585,9 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 	protected boolean processValidateAction(
 		HttpServletRequest request, HttpServletResponse response,
-		ActionForm form, ActionMapping mapping) {
+		ActionForm actionForm, ActionMapping actionMapping) {
 
-		if (form == null) {
+		if (actionForm == null) {
 			return true;
 		}
 
@@ -582,21 +595,21 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			return true;
 		}
 
-		if (!mapping.getValidate()) {
+		if (!actionMapping.getValidate()) {
 			return true;
 		}
 
-		ActionErrors errors = form.validate(mapping, request);
+		ActionErrors errors = actionForm.validate(actionMapping, request);
 
 		if ((errors == null) || errors.isEmpty()) {
 			return true;
 		}
 
-		if (form.getMultipartRequestHandler() != null) {
-			form.getMultipartRequestHandler().rollback();
+		if (actionForm.getMultipartRequestHandler() != null) {
+			actionForm.getMultipartRequestHandler().rollback();
 		}
 
-		String input = mapping.getInput();
+		String input = actionMapping.getInput();
 
 		if (input == null) {
 			_log.error("Validation failed but no input form is available");

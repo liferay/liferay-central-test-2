@@ -32,52 +32,54 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Mika Koivisto
  */
-public class StrutsWrapperPortletAction extends PortletAction {
+public class PortletActionAdapter extends PortletAction {
 
-	public StrutsWrapperPortletAction(StrutsPortletAction action) {
-		_strutsAction = action;
+	public PortletActionAdapter(StrutsPortletAction strutsPortletAction) {
+		_strutsPortletAction = strutsPortletAction;
 	}
 
 	public void processAction(
-		ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-		ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		_strutsAction.processAction(
+		_strutsPortletAction.processAction(
 			portletConfig, actionRequest, actionResponse);
 	}
 
-
 	public ActionForward render(
-		ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-		RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
-		String forward = _strutsAction.render(
+		String forward = _strutsPortletAction.render(
 			portletConfig, renderRequest, renderResponse);
 
-		if (Validator.isNotNull(forward)) {
-			ActionForward actionForward = mapping.findForward(forward);
-
-			if (actionForward == null) {
-				actionForward = new ActionForward(forward);
-			}
-
-			return actionForward;
+		if (Validator.isNull(forward)) {
+			return null;
 		}
 
-		return null;
+		ActionForward actionForward = actionMapping.findForward(forward);
+
+		if (actionForward == null) {
+			actionForward = new ActionForward(forward);
+		}
+
+		return actionForward;
 	}
 
-
 	public void serveResource(
-		ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-		ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
 
-		_strutsAction.serveResource(
+		_strutsPortletAction.serveResource(
 			portletConfig, resourceRequest, resourceResponse);
 	}
 
-	private StrutsPortletAction _strutsAction;
+	private StrutsPortletAction _strutsPortletAction;
+
 }

@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.struts.LastPath;
-import com.liferay.portal.kernel.struts.StrutsAction;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -74,7 +73,6 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -95,6 +93,7 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.tiles.TilesRequestProcessor;
+import org.apache.struts.util.MessageResources;
 
 /**
  * @author Brian Wing Shun Chan
@@ -141,12 +140,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		String path = super.processPath(request, response);
 
-		ActionMapping mapping = (ActionMapping)moduleConfig.findActionConfig(
-			path);
+		ActionMapping actionMapping =
+			(ActionMapping)moduleConfig.findActionConfig(path);
 
-		Action action = StrutsActionWrapperRegistry.getAction(path);
+		Action action = StrutsActionRegistry.getAction(path);
 
-		if (mapping == null && action == null) {
+		if ((actionMapping == null) && (action == null)) {
 			String lastPath = getLastPath(request);
 
 			if (_log.isDebugEnabled()) {
@@ -201,10 +200,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	protected boolean callParentProcessRoles(
 			HttpServletRequest request, HttpServletResponse response,
-			ActionMapping mapping)
+			ActionMapping actionMapping)
 		throws IOException, ServletException {
 
-		return super.processRoles(request, response, mapping);
+		return super.processRoles(request, response, actionMapping);
 	}
 
 	protected void cleanUp(HttpServletRequest request) throws Exception {
@@ -411,11 +410,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// user accessed a layout directly instead of through its friendly URL
 
 		if (lastPath.getContextPath().equals(themeDisplay.getPathMain())) {
-			ActionMapping mapping =
+			ActionMapping actionMapping =
 				(ActionMapping)moduleConfig.findActionConfig(
 					lastPath.getPath());
 
-			if ((mapping == null) || (parameterMap == null)) {
+			if ((actionMapping == null) || (parameterMap == null)) {
 				return sb.toString();
 			}
 		}
@@ -458,17 +457,16 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	protected Action processActionCreate(
 			HttpServletRequest request, HttpServletResponse response,
-			ActionMapping mapping)
+			ActionMapping actionMapping)
 		throws IOException {
 
-		Action action =
-			StrutsActionWrapperRegistry.getAction(mapping.getPath());
+		Action action = StrutsActionRegistry.getAction(actionMapping.getPath());
 
-		if (action == null) {
-			action = super.processActionCreate(request, response, mapping);
+		if (action != null) {
+			return action;
 		}
 
-		return action;
+		return super.processActionCreate(request, response, actionMapping);
 	}
 
 	protected ActionMapping processMapping(
@@ -480,29 +478,31 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return null;
 		}
 
-		ActionMapping mapping = null;
-
-		Action action = StrutsActionWrapperRegistry.getAction(path);
+		Action action = StrutsActionRegistry.getAction(path);
 
 		if (action != null) {
-			mapping = (ActionMapping)moduleConfig.findActionConfig(path);
+			ActionMapping actionMapping =
+				(ActionMapping)moduleConfig.findActionConfig(path);
 
-			if (mapping == null) {
-				mapping = new ActionMapping();
+			if (actionMapping == null) {
+				actionMapping = new ActionMapping();
 
-				mapping.setPath(path);
-				mapping.setModuleConfig(moduleConfig);
+				actionMapping.setModuleConfig(moduleConfig);
+				actionMapping.setPath(path);
 
-				request.setAttribute(Globals.MAPPING_KEY, mapping);
+				request.setAttribute(Globals.MAPPING_KEY, actionMapping);
 			}
 
-			return mapping;
+			return actionMapping;
 		}
 
-		mapping = super.processMapping(request, response, path);
+		ActionMapping actionMapping = super.processMapping(
+			request, response, path);
 
-		if (mapping == null) {
-			String msg = getInternal().getMessage("processInvalid");
+		if (actionMapping == null) {
+			MessageResources messageResources = getInternal();
+
+			String msg = messageResources.getMessage("processInvalid");
 
 			_log.error("User ID " + request.getRemoteUser());
 			_log.error("Current URL " + PortalUtil.getCurrentURL(request));
@@ -512,7 +512,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			_log.error(msg + " " + path);
 		}
 
-		return mapping;
+		return actionMapping;
 	}
 
 	protected HttpServletRequest processMultipart(HttpServletRequest request) {
@@ -717,18 +717,18 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			}
 		}
 
-		ActionMapping mapping =
+		ActionMapping actionMapping =
 			(ActionMapping)moduleConfig.findActionConfig(path);
 
-		if (mapping == null) {
-			Action strutsAction = StrutsActionWrapperRegistry.getAction(path);
+		if (actionMapping == null) {
+			Action strutsAction = StrutsActionRegistry.getAction(path);
 
 			if (strutsAction == null) {
 				return null;
 			}
 		}
 		else {
-			path = mapping.getPath();
+			path = actionMapping.getPath();
 		}
 
 		// Define the portlet objects
@@ -777,10 +777,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	protected boolean processRoles(
 			HttpServletRequest request, HttpServletResponse response,
-			ActionMapping mapping)
+			ActionMapping actionMapping)
 		throws IOException, ServletException {
 
-		String path = mapping.getPath();
+		String path = actionMapping.getPath();
 
 		if (isPublicPath(path)) {
 			return true;
@@ -859,7 +859,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		if (!authorized) {
 			ForwardConfig forwardConfig =
-				mapping.findForward(_PATH_PORTAL_ERROR);
+				actionMapping.findForward(_PATH_PORTAL_ERROR);
 
 			processForwardConfig(request, response, forwardConfig);
 

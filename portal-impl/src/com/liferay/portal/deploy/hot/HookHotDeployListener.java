@@ -92,7 +92,7 @@ import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
-import com.liferay.portal.struts.StrutsActionWrapperRegistry;
+import com.liferay.portal.struts.StrutsActionRegistry;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
 import com.liferay.portal.util.CustomJspRegistryUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
@@ -629,31 +629,30 @@ public class HookHotDeployListener
 			}
 		}
 
-		StrutsActionContainer strutsActionContainer = _strutsActionContainerMap.get(servletContextName);
+		StrutsActionsContainer strutsActionContainer =
+			_strutsActionsContainerMap.get(servletContextName);
 
 		if (strutsActionContainer == null) {
-			strutsActionContainer = new StrutsActionContainer();
+			strutsActionContainer = new StrutsActionsContainer();
 
-			_strutsActionContainerMap.put(servletContextName, strutsActionContainer);
+			_strutsActionsContainerMap.put(
+				servletContextName, strutsActionContainer);
 		}
 
-		List<Element> actionElements = rootElement.elements("action");
+		List<Element> strutsActionElements = rootElement.elements(
+			"struts-action");
 
-		for (Element actionElement : actionElements) {
-			String actionPath = actionElement.elementText("action-path");
-			String actionImpl = actionElement.elementText("action-impl");
+		for (Element strutsActionElement : strutsActionElements) {
+			String strutsActionPath = strutsActionElement.elementText(
+				"struts-action-path");
+			String strutsActionImpl = strutsActionElement.elementText(
+				"struts-action-impl");
 
-			Object strutsAction =
-				initStrutsAction(actionPath, actionImpl, portletClassLoader);
+			Object strutsAction = initStrutsAction(
+				strutsActionPath, strutsActionImpl, portletClassLoader);
 
-			if (strutsAction instanceof StrutsPortletAction) {
-				strutsActionContainer.registerStrutsAction(
-					actionPath, (StrutsPortletAction)strutsAction);
-			}
-			else {
-				strutsActionContainer.registerStrutsAction(
-					actionPath, (StrutsAction)strutsAction);
-			}
+			strutsActionContainer.registerStrutsAction(
+				strutsActionPath, strutsAction);
 		}
 
 		// Begin backwards compatibility for 5.1.0
@@ -805,8 +804,8 @@ public class HookHotDeployListener
 
 		destroyServices(servletContextName);
 
-		StrutsActionContainer strutsActionContainer = 
-			_strutsActionContainerMap.remove(servletContextName);
+		StrutsActionsContainer strutsActionContainer =
+			_strutsActionsContainerMap.remove(servletContextName);
 
 		if (strutsActionContainer != null) {
 			strutsActionContainer.unregisterStrutsActions();
@@ -1495,18 +1494,18 @@ public class HookHotDeployListener
 			ClassLoader portletClassLoader)
 		throws Exception {
 
-		Object instance = InstanceFactory.newInstance(
+		Object strutsAction = InstanceFactory.newInstance(
 			portletClassLoader, strutsActionClassName);
 
-		if (instance instanceof StrutsAction) {
+		if (strutsAction instanceof StrutsAction) {
 			return Proxy.newProxyInstance(
 				portletClassLoader, new Class[] {StrutsAction.class},
-				new ClassLoaderBeanHandler(instance, portletClassLoader));
+				new ClassLoaderBeanHandler(strutsAction, portletClassLoader));
 		}
 		else {
 			return Proxy.newProxyInstance(
 				portletClassLoader, new Class[] {StrutsPortletAction.class},
-				new ClassLoaderBeanHandler(instance, portletClassLoader));
+				new ClassLoaderBeanHandler(strutsAction, portletClassLoader));
 		}
 	}
 
@@ -1804,8 +1803,8 @@ public class HookHotDeployListener
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, StringArraysContainer> _stringArraysContainerMap =
 		new HashMap<String, StringArraysContainer>();
-	private Map<String, StrutsActionContainer> _strutsActionContainerMap =
-		new HashMap<String, StrutsActionContainer>();
+	private Map<String, StrutsActionsContainer> _strutsActionsContainerMap =
+		new HashMap<String, StrutsActionsContainer>();
 
 	private class AuthenticatorsContainer {
 
@@ -2228,25 +2227,30 @@ public class HookHotDeployListener
 
 	}
 
-	private class StrutsActionContainer {
+	private class StrutsActionsContainer {
 
-		public void registerStrutsAction(String path, StrutsPortletAction action) {
-			StrutsActionWrapperRegistry.registerMapping(path, action);
-			_strutsPaths.add(path);
-		}
+		public void registerStrutsAction(String path, Object strutsAction) {
+			if (strutsAction instanceof StrutsAction) {
+				StrutsActionRegistry.register(path, (StrutsAction)strutsAction);
+			}
+			else {
+				StrutsActionRegistry.register(
+					path, (StrutsPortletAction)strutsAction);
+			}
 
-		public void registerStrutsAction(String path, StrutsAction action) {
-			StrutsActionWrapperRegistry.registerMapping(path, action);
-			_strutsPaths.add(path);
+			_paths.add(path);
 		}
 
 		public void unregisterStrutsActions() {
-			for (String path : _strutsPaths) {
-				StrutsActionWrapperRegistry.unregisterMapping(path);
+			for (String path : _paths) {
+				StrutsActionRegistry.unregister(path);
 			}
-			_strutsPaths.clear();
+
+			_paths.clear();
 		}
 
-		private List<String> _strutsPaths = new ArrayList<String>();
+		private List<String> _paths = new ArrayList<String>();
+
 	}
+
 }
