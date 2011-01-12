@@ -286,6 +286,21 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
+	protected Action processActionCreate(
+			HttpServletRequest request, HttpServletResponse response,
+			ActionMapping mapping)
+		throws IOException {
+
+		Action action =
+			StrutsActionWrapperRegistry.getAction(mapping.getPath());
+
+		if (action == null) {
+			action = super.processActionCreate(request, response, mapping);
+		}
+
+		return action;
+	}
+
 	protected ActionForm processActionForm(
 		HttpServletRequest request, HttpServletResponse response,
 		ActionMapping mapping) {
@@ -365,7 +380,18 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				companyId, portletConfigImpl.getPortletId());
 
-			if (moduleConfig.findActionConfig(path) != null) {
+			if (StrutsActionWrapperRegistry.getAction(path) != null) {
+				mapping = (ActionMapping)moduleConfig.findActionConfig(path);
+
+				if (mapping == null) {
+					mapping = new ActionMapping();
+					mapping.setPath(path);
+					mapping.setModuleConfig(moduleConfig);
+
+					request.setAttribute(Globals.MAPPING_KEY, mapping);
+				}
+			}
+			else if (moduleConfig.findActionConfig(path) != null) {
 				mapping = super.processMapping(request, response, path);
 			}
 			else if (Validator.isNotNull(portlet.getParentStrutsPath())) {
@@ -375,7 +401,18 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 					StringPool.SLASH + portlet.getParentStrutsPath() +
 						path.substring(pos, path.length());
 
-				if (moduleConfig.findActionConfig(parentPath) != null) {
+				if (StrutsActionWrapperRegistry.getAction(parentPath) != null) {
+					mapping = (ActionMapping)moduleConfig.findActionConfig(path);
+
+					if (mapping == null) {
+						mapping = new ActionMapping();
+						mapping.setPath(parentPath);
+						mapping.setModuleConfig(moduleConfig);
+
+						request.setAttribute(Globals.MAPPING_KEY, mapping);
+					}
+				}
+				else if (moduleConfig.findActionConfig(parentPath) != null) {
 					mapping = super.processMapping(
 						request, response, parentPath);
 				}

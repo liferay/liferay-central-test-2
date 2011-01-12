@@ -44,12 +44,15 @@ import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
+import com.liferay.portal.kernel.struts.StrutsAction;
+import com.liferay.portal.kernel.struts.StrutsPortletAction;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -89,6 +92,7 @@ import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
+import com.liferay.portal.struts.StrutsActionWrapperRegistry;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
 import com.liferay.portal.util.CustomJspRegistryUtil;
 import com.liferay.portal.util.JavaScriptBundleUtil;
@@ -132,6 +136,7 @@ import org.springframework.aop.target.SingletonTargetSource;
  * @author Bruno Farache
  * @author Wesley Gong
  * @author Ryan Park
+ * @author Mika Koivisto
  */
 public class HookHotDeployListener
 	extends BaseHotDeployListener implements PropsKeys {
@@ -624,6 +629,33 @@ public class HookHotDeployListener
 			}
 		}
 
+		StrutsActionContainer strutsActionContainer = _strutsActionContainerMap.get(servletContextName);
+
+		if (strutsActionContainer == null) {
+			strutsActionContainer = new StrutsActionContainer();
+
+			_strutsActionContainerMap.put(servletContextName, strutsActionContainer);
+		}
+
+		List<Element> actionElements = rootElement.elements("action");
+
+		for (Element actionElement : actionElements) {
+			String actionPath = actionElement.elementText("action-path");
+			String actionImpl = actionElement.elementText("action-impl");
+
+			Object strutsAction =
+				initStrutsAction(actionPath, actionImpl, portletClassLoader);
+
+			if (strutsAction instanceof StrutsPortletAction) {
+				strutsActionContainer.registerStrutsAction(
+					actionPath, (StrutsPortletAction)strutsAction);
+			}
+			else {
+				strutsActionContainer.registerStrutsAction(
+					actionPath, (StrutsAction)strutsAction);
+			}
+		}
+
 		// Begin backwards compatibility for 5.1.0
 
 		ModelListenersContainer modelListenersContainer =
@@ -772,6 +804,13 @@ public class HookHotDeployListener
 		}
 
 		destroyServices(servletContextName);
+
+		StrutsActionContainer strutsActionContainer = 
+			_strutsActionContainerMap.remove(servletContextName);
+
+		if (strutsActionContainer != null) {
+			strutsActionContainer.unregisterStrutsActions();
+		}
 
 		unregisterClpMessageListeners(servletContext);
 
@@ -1451,6 +1490,26 @@ public class HookHotDeployListener
 			serviceTypeClass, serviceImplConstructor, previousService);
 	}
 
+	protected Object initStrutsAction(
+			String path, String strutsActionClassName,
+			ClassLoader portletClassLoader)
+		throws Exception {
+
+		Object instance = InstanceFactory.newInstance(
+			portletClassLoader, strutsActionClassName);
+
+		if (instance instanceof StrutsAction) {
+			return Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {StrutsAction.class},
+				new ClassLoaderBeanHandler(instance, portletClassLoader));
+		}
+		else {
+			return Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {StrutsPortletAction.class},
+				new ClassLoaderBeanHandler(instance, portletClassLoader));
+		}
+	}
+
 	protected void resetPortalProperties(
 			String servletContextName, Properties portalProperties,
 			boolean initPhase)
@@ -1745,6 +1804,8 @@ public class HookHotDeployListener
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, StringArraysContainer> _stringArraysContainerMap =
 		new HashMap<String, StringArraysContainer>();
+	private Map<String, StrutsActionContainer> _strutsActionContainerMap =
+		new HashMap<String, StrutsActionContainer>();
 
 	private class AuthenticatorsContainer {
 
@@ -2167,4 +2228,25 @@ public class HookHotDeployListener
 
 	}
 
+	private class StrutsActionContainer {
+
+		public void registerStrutsAction(String path, StrutsPortletAction action) {
+			StrutsActionWrapperRegistry.registerMapping(path, action);
+			_strutsPaths.add(path);
+		}
+
+		public void registerStrutsAction(String path, StrutsAction action) {
+			StrutsActionWrapperRegistry.registerMapping(path, action);
+			_strutsPaths.add(path);
+		}
+
+		public void unregisterStrutsActions() {
+			for (String path : _strutsPaths) {
+				StrutsActionWrapperRegistry.unregisterMapping(path);
+			}
+			_strutsPaths.clear();
+		}
+
+		private List<String> _strutsPaths = new ArrayList<String>();
+	}
 }

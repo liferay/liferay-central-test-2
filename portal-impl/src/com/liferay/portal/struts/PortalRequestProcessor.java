@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.struts.LastPath;
+import com.liferay.portal.kernel.struts.StrutsAction;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -73,6 +74,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -88,6 +90,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.struts.Globals;
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.tiles.TilesRequestProcessor;
@@ -96,6 +100,7 @@ import org.apache.struts.tiles.TilesRequestProcessor;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Wesley Gong
+ * @author Mika Koivisto
  */
 public class PortalRequestProcessor extends TilesRequestProcessor {
 
@@ -139,7 +144,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		ActionMapping mapping = (ActionMapping)moduleConfig.findActionConfig(
 			path);
 
-		if (mapping == null) {
+		Action action = StrutsActionWrapperRegistry.getAction(path);
+
+		if (mapping == null && action == null) {
 			String lastPath = getLastPath(request);
 
 			if (_log.isDebugEnabled()) {
@@ -449,6 +456,21 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
+	protected Action processActionCreate(
+			HttpServletRequest request, HttpServletResponse response,
+			ActionMapping mapping)
+		throws IOException {
+
+		Action action =
+			StrutsActionWrapperRegistry.getAction(mapping.getPath());
+
+		if (action == null) {
+			action = super.processActionCreate(request, response, mapping);
+		}
+
+		return action;
+	}
+
 	protected ActionMapping processMapping(
 			HttpServletRequest request, HttpServletResponse response,
 			String path)
@@ -458,7 +480,26 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return null;
 		}
 
-		ActionMapping mapping = super.processMapping(request, response, path);
+		ActionMapping mapping = null;
+
+		Action action = StrutsActionWrapperRegistry.getAction(path);
+
+		if (action != null) {
+			mapping = (ActionMapping)moduleConfig.findActionConfig(path);
+
+			if (mapping == null) {
+				mapping = new ActionMapping();
+
+				mapping.setPath(path);
+				mapping.setModuleConfig(moduleConfig);
+
+				request.setAttribute(Globals.MAPPING_KEY, mapping);
+			}
+
+			return mapping;
+		}
+
+		mapping = super.processMapping(request, response, path);
 
 		if (mapping == null) {
 			String msg = getInternal().getMessage("processInvalid");
@@ -679,7 +720,16 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		ActionMapping mapping =
 			(ActionMapping)moduleConfig.findActionConfig(path);
 
-		path = mapping.getPath();
+		if (mapping == null) {
+			Action strutsAction = StrutsActionWrapperRegistry.getAction(path);
+
+			if (strutsAction == null) {
+				return null;
+			}
+		}
+		else {
+			path = mapping.getPath();
+		}
 
 		// Define the portlet objects
 

@@ -7,7 +7,7 @@ This is the DTD for the Hook parameters for Liferay Portal.
 -->
 
 <!ELEMENT hook (portal-properties?, language-properties*, custom-jsp-dir?,
-custom-jsp-global?, service*)>
+custom-jsp-global?, service*, action*)>
 
 <!--
 Not all portal properties can be overridden via a hook. The supported properties
@@ -103,3 +103,9 @@ value.object.listener.*
 <!ELEMENT service-type (#PCDATA)>
 
 <!ELEMENT service-impl (#PCDATA)>
+
+<!ELEMENT action (action-path, action-impl)>
+
+<!ELEMENT action-path (#PCDATA)>
+
+<!ELEMENT action-impl (#PCDATA)>
