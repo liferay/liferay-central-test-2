@@ -935,6 +935,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return !addPrimaryKey(String.class, path);
 	}
 
+	public boolean isPerformDirectBinaryImport() {
+		return MapUtil.getBoolean(
+			_parameterMap, PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
+	}
+
 	public boolean isPrivateLayout() {
 		return _privateLayout;
 	}

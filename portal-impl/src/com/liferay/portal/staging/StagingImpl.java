@@ -715,7 +715,7 @@ public class StagingImpl implements Staging {
 
 		parameterMap.put(
 			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT,
-			new String[] {String.valueOf(true)});
+			new String[] {Boolean.TRUE.toString()});
 
 		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			sourceGroupId, privateLayout, layoutIds, parameterMap, startDate,

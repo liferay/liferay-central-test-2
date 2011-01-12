@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -86,9 +85,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		imageElement.addAttribute("path", path);
 
-		if (portletDataContext.getBooleanParameter(
-				_NAMESPACE, "categories")) {
-
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
 			portletDataContext.addAssetCategories(
 				IGImage.class, image.getImageId());
 		}
@@ -99,25 +96,18 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
-			portletDataContext.addAssetTags(
-				IGImage.class, image.getImageId());
+			portletDataContext.addAssetTags(IGImage.class, image.getImageId());
 		}
 
 		image.setUserUuid(image.getUserUuid());
 
-		Image largeImage = ImageUtil.findByPrimaryKey(
-			image.getLargeImageId());
+		Image largeImage = ImageUtil.findByPrimaryKey(image.getLargeImageId());
 
 		image.setImageType(largeImage.getType());
 
-		portletDataContext.addPermissions(
-			IGImage.class, image.getImageId());
+		portletDataContext.addPermissions(IGImage.class, image.getImageId());
 
-		boolean performDirectBinaryImport = MapUtil.getBoolean(
-			portletDataContext.getParameterMap(),
-			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
-
-		if (!performDirectBinaryImport) {
+		if (!portletDataContext.isPerformDirectBinaryImport()) {
 			String binPath = getImageBinPath(portletDataContext, image);
 
 			imageElement.addAttribute("bin-path", binPath);
@@ -292,15 +282,11 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		long folderId = MapUtil.getLong(
 			folderPKs, image.getFolderId(), image.getFolderId());
 
-		boolean performDirectBinaryImport = MapUtil.getBoolean(
-			portletDataContext.getParameterMap(),
-			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
-
-		File imageFile = null;
-
 		byte[] bytes = null;
 
-		if (Validator.isNull(binPath) && performDirectBinaryImport) {
+		if (Validator.isNull(binPath) &&
+			portletDataContext.isPerformDirectBinaryImport()) {
+
 			Image largeImage = ImageUtil.findByPrimaryKey(
 				image.getLargeImageId());
 
@@ -316,13 +302,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			return;
 		}
-		else {
-			imageFile = File.createTempFile(
-				String.valueOf(image.getPrimaryKey()),
-				StringPool.PERIOD + image.getImageType());
 
-			FileUtil.write(imageFile, bytes);
-		}
+		File imageFile = File.createTempFile(
+			String.valueOf(image.getPrimaryKey()),
+			StringPool.PERIOD + image.getImageType());
+
+		FileUtil.write(imageFile, bytes);
 
 		long[] assetCategoryIds = null;
 		String[] assetTagNames = null;

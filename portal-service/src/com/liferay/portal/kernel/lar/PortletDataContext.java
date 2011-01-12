@@ -220,6 +220,8 @@ public interface PortletDataContext extends Serializable {
 
 	public boolean isPathNotProcessed(String path);
 
+	public boolean isPerformDirectBinaryImport();
+
 	public boolean isPrivateLayout();
 
 	public boolean isWithinDateRange(Date modifiedDate);

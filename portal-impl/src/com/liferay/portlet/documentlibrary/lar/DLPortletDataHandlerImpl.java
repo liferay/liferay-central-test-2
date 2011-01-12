@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -93,8 +92,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
-		Element fileEntryElement = fileEntriesElement.addElement(
-			"file-entry");
+		Element fileEntryElement = fileEntriesElement.addElement("file-entry");
 
 		fileEntryElement.addAttribute("path", path);
 
@@ -106,16 +104,12 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.addPermissions(
 			FileEntry.class, fileEntry.getFileEntryId());
 
-		if (portletDataContext.getBooleanParameter(
-				_NAMESPACE, "categories")) {
-
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
 			portletDataContext.addAssetCategories(
 				FileEntry.class, fileEntry.getFileEntryId());
 		}
 
-		if (portletDataContext.getBooleanParameter(
-				_NAMESPACE, "comments")) {
-
+		if (portletDataContext.getBooleanParameter(_NAMESPACE, "comments")) {
 			portletDataContext.addComments(
 				FileEntry.class, fileEntry.getFileEntryId());
 		}
@@ -130,11 +124,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				FileEntry.class, fileEntry.getFileEntryId());
 		}
 
-		boolean performDirectBinaryImport = MapUtil.getBoolean(
-			portletDataContext.getParameterMap(),
-			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
-
-		if (!performDirectBinaryImport) {
+		if (!portletDataContext.isPerformDirectBinaryImport()) {
 			String binPath = getFileEntryBinPath(portletDataContext, fileEntry);
 
 			fileEntryElement.addAttribute("bin-path", binPath);
@@ -240,15 +230,13 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(fileEntry.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
-		boolean performDirectBinaryImport = MapUtil.getBoolean(
-			portletDataContext.getParameterMap(),
-			PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
-
 		String binPath = fileEntryElement.attributeValue("bin-path");
 
 		InputStream is = null;
 
-		if (Validator.isNull(binPath) && performDirectBinaryImport) {
+		if (Validator.isNull(binPath) &&
+			portletDataContext.isPerformDirectBinaryImport()) {
+
 			is = FileEntryUtil.getContentStream(fileEntry);
 		}
 		else {
