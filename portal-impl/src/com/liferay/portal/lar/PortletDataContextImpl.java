@@ -309,7 +309,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			else if ((type == RoleConstants.TYPE_PROVIDER) && role.isTeam()) {
 				Team team = TeamLocalServiceUtil.getTeam(role.getClassPK());
 
-				if (team.getGroupId() != _groupId) {
+				if (team.getGroupId() == _groupId) {
 					String name =
 						PermissionExporter.ROLE_TEAM_PREFIX + team.getName();
 					String actionIds = getActionIds(
