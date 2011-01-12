@@ -305,12 +305,16 @@ if (assetEntry != null) {
 										}
 										else {
 											previousActorName = curRole.getDescriptiveName();
+										%>
+
+											<div>
+												<%= LanguageUtil.format(pageContext, "task-initially-assigned-to-the-x-role", new Object[] {actorName}) %>
+											</div>
+
+										<%
 										}
 										%>
 
-										<div>
-											<%= LanguageUtil.format(pageContext, "task-initially-assigned-to-the-x-role", new Object[] {actorName}) %>
-										</div>
 									</c:otherwise>
 								</c:choose>
 							</c:otherwise>
