@@ -78,5 +78,9 @@ plugins.includes=${plugins.includes}</echo>
 		<exec executable="cmd.exe">
 			<arg line="/c svn --username ${svn.username} --password ${svn.password} update ${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF" />
 		</exec>
+
+		<exec executable="cmd.exe">
+			<arg line="/c svn revert --recursive ${lp.plugins.dir}/portlets/sample-service-builder-portlet" />
+		</exec>
 	</target>
 </project>
