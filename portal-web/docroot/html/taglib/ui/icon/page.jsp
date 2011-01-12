@@ -152,7 +152,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 					</aui:a>
 				</c:when>
 				<c:otherwise>
-						<%= linkContent %>
+						<span class="taglib-icon"><%= linkContent %></span>
 				</c:otherwise>
 			</c:choose>
 		</li>
@@ -161,12 +161,12 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 		<li <%= cssClassHtml %>>
 			<c:choose>
 				<c:when test="<%= urlIsNotNull %>">
-					<aui:a href="<%= url %>" id="<%= id %>" lang="<%= lang %>" target="<%= target %>">
+					<aui:a cssClass="taglib-icon" href="<%= url %>" id="<%= id %>" lang="<%= lang %>" target="<%= target %>">
 						<%= linkContent %>
 					</aui:a>
 				</c:when>
 				<c:otherwise>
-						<%= linkContent %>
+						<span class="taglib-icon"><%= linkContent %></span>
 				</c:otherwise>
 			</c:choose>
 		</li>
@@ -180,7 +180,7 @@ boolean urlIsNotNull = Validator.isNotNull(url);
 					</aui:a>
 				</c:when>
 				<c:otherwise>
-						<%= linkContent %>
+						<span class="taglib-icon"><%= linkContent %></span>
 				</c:otherwise>
 			</c:choose>
 		</span>

@@ -256,7 +256,11 @@ AUI().add(
 		};
 
 		Menu._targetLink = function(event, action) {
-			event.currentTarget.one('a')[action]();
+			var anchor = event.currentTarget.one('a');
+
+			if (anchor) {
+				anchor[action]();
+			}
 		};
 
 		Liferay.Menu = Menu;
