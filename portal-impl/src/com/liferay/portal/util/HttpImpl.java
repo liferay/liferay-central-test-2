@@ -909,7 +909,11 @@ public class HttpImpl implements Http {
 		Cookie cookie = new Cookie(
 			commonsCookie.getName(), commonsCookie.getValue());
 
-		cookie.setDomain(commonsCookie.getDomain());
+		String domain = commonsCookie.getDomain();
+
+		if (Validator.isNotNull(domain)) {
+			cookie.setDomain(commonsCookie.getDomain());
+		}
 
 		Date expiryDate = commonsCookie.getExpiryDate();
 
@@ -924,7 +928,12 @@ public class HttpImpl implements Http {
 			}
 		}
 
-		cookie.setPath(commonsCookie.getPath());
+		String path = commonsCookie.getPath();
+
+		if (Validator.isNotNull(path)) {
+			cookie.setPath(path);
+		}
+
 		cookie.setSecure(commonsCookie.getSecure());
 		cookie.setVersion(commonsCookie.getVersion());
 
