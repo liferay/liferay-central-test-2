@@ -324,7 +324,7 @@ public class PortalPropertiesParser implements XMLReader {
 			propertyData.value = value;
 
 			// check previous property for alternative values
-			if (propertyData.description.isEmpty()) {
+			if (propertyData.description.length() == 0) {
 
 				if (propertyDataList.isEmpty() == false) {
 
@@ -369,7 +369,7 @@ public class PortalPropertiesParser implements XMLReader {
 					prev.alternativeValues.isEmpty() &&
 					curr.alternativeValues.isEmpty() &&
 					prev.prefix.equals(curr.prefix) &&
-					curr.description.isEmpty()
+					(curr.description.length() == 0)
 					) {
 
 				// group founded
