@@ -760,11 +760,12 @@ public class PortletExporter {
 
 		context.addZipEntry(path, data);
 
-		if (context.getEndDate() != null) {
+		Date endDate = context.getEndDate();
+
+		if (endDate != null) {
 			try {
 				jxPreferences.setValue(
-					"last-publish-date",
-					String.valueOf(context.getEndDate().getTime()));
+					"last-publish-date", String.valueOf(endDate.getTime()));
 
 				jxPreferences.store();
 			}
