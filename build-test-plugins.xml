@@ -63,4 +63,18 @@ plugins.includes=${plugins.includes}</echo>
 			/>
 		</copy>
 	</target>
+
+	<target name="test-service-builder">
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.tomcat.dir}
+app.server.lib.global.dir=${app.server.tomcat.lib.global.dir}
+app.server.portal.dir=${app.server.tomcat.portal.dir}
+
+auto.deploy.dir=$${user.home}/liferay/deploy</echo>
+
+		<delete dir="${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF/service" />
+
+		<delete dir="${lp.plugins.dir}/portlets/sample-service-builder-portlet/docroot/WEB-INF/src/META-INF" />
+
+		<ant antfile="${lp.plugins.dir}/portlets/sample-service-builder-portlet/build.xml" target="build-service" inheritAll="false" />
+	</target>
 </project>

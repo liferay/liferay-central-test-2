@@ -1480,9 +1480,7 @@
 				<equals arg1="${skip.prepare-bundle}" arg2="true" />
 			</not>
 			<then>
-				<antcall target="clean" />
-
-				<antcall target="start" />
+				<antcall target="all" />
 			</then>
 		</if>
 	</target>
@@ -2352,6 +2350,8 @@ file.
 		</ant>
 
 		<ant dir="portal-service" target="test" inheritAll="false" />
+
+		<ant antfile="build-test-plugins.xml" target="test-service-builder" inheritAll="false" />
 
 		<!--<ant dir="util-java" target="test" inheritAll="false" />-->
 	</target>
