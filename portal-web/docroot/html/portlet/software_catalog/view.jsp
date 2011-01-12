@@ -492,7 +492,12 @@ portletURL.setParameter("tabs1", tabs1);
 
 			String rowHREF = frameworkVersion.getUrl();
 
-			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, frameworkVersion.getName(), rowHREF, "_blank", frameworkVersion.getName());
+			TextSearchEntry rowTextEntry = new TextSearchEntry();
+
+			rowTextEntry.setHref(rowHREF);
+			rowTextEntry.setName(frameworkVersion.getName());
+			rowTextEntry.setTarget("_blank");
+			rowTextEntry.setTitle(frameworkVersion.getName());
 
 			// Name
 
@@ -585,7 +590,12 @@ portletURL.setParameter("tabs1", tabs1);
 
 			String rowHREF = license.getUrl();
 
-			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, license.getName(), rowHREF, "_blank", license.getName());
+			TextSearchEntry rowTextEntry = new TextSearchEntry();
+
+			rowTextEntry.setHref(rowHREF);
+			rowTextEntry.setName(license.getName());
+			rowTextEntry.setTarget("_blank");
+			rowTextEntry.setTitle(license.getName());
 
 			// Name
 

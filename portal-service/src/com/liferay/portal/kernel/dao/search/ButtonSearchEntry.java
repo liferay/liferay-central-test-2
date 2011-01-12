@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -21,16 +23,33 @@ import javax.servlet.jsp.PageContext;
  */
 public class ButtonSearchEntry extends TextSearchEntry {
 
+	public ButtonSearchEntry() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public ButtonSearchEntry(
 		String align, String valign, String name, String href) {
 
 		this(align, valign, DEFAULT_COLSPAN, name, href);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public ButtonSearchEntry(
 		String align, String valign, int colspan, String name, String href) {
 
 		super(align, valign, colspan, name, href);
+	}
+
+	public Object clone() {
+		ButtonSearchEntry buttonSearchEntry = new ButtonSearchEntry();
+
+		BeanPropertiesUtil.copyProperties(this, buttonSearchEntry);
+
+		return buttonSearchEntry;
 	}
 
 	public void print(PageContext pageContext) throws Exception {
@@ -44,11 +63,6 @@ public class ButtonSearchEntry extends TextSearchEntry {
 		sb.append("\">");
 
 		pageContext.getOut().print(sb.toString());
-	}
-
-	public Object clone() {
-		return new ButtonSearchEntry(
-			getAlign(), getValign(), getColspan(), getName(), getHref());
 	}
 
 }

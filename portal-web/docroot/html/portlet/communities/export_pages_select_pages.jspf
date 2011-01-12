@@ -41,7 +41,14 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 searchContainer.setTotal(total);
 searchContainer.setResults(results);
-searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "exportPagesFm", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
+
+RowChecker rowChecker = new AlwaysTrueRowChecker(renderResponse);
+
+rowChecker.setAlign("left");
+rowChecker.setFormName("exportPagesFm");
+rowChecker.setValign("top");
+
+searchContainer.setRowChecker(rowChecker);
 
 List resultRows = searchContainer.getResultRows();
 

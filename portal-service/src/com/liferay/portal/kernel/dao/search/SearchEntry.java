@@ -23,57 +23,63 @@ public abstract class SearchEntry implements Cloneable {
 
 	public static final String DEFAULT_ALIGN = "left";
 
-	public static final String DEFAULT_VALIGN = "middle";
-
 	public static final int DEFAULT_COLSPAN = 1;
 
+	public static final String DEFAULT_VALIGN = "middle";
+
+	/**
+	 * @deprecated
+	 */
 	public SearchEntry() {
 		this(DEFAULT_ALIGN, DEFAULT_VALIGN, DEFAULT_COLSPAN);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public SearchEntry(String align, String valign, int colspan) {
 		_align = align;
 		_valign = valign;
 		_colspan = colspan;
 	}
 
-	public int getIndex() {
-		return _index;
-	}
-
-	public void setIndex(int index) {
-		_index = index;
-	}
-
 	public String getAlign() {
 		return _align;
-	}
-
-	public void setAlign(String align) {
-		_align = align;
-	}
-
-	public String getValign() {
-		return _valign;
-	}
-
-	public void setValign(String valign) {
-		_valign = valign;
 	}
 
 	public int getColspan() {
 		return _colspan;
 	}
 
-	public void setColspan(int colspan) {
-		_colspan = colspan;
+	public int getIndex() {
+		return _index;
+	}
+
+	public String getValign() {
+		return _valign;
 	}
 
 	public abstract void print(PageContext pageContext) throws Exception;
 
+	public void setAlign(String align) {
+		_align = align;
+	}
+
+	public void setColspan(int colspan) {
+		_colspan = colspan;
+	}
+
+	public void setIndex(int index) {
+		_index = index;
+	}
+
+	public void setValign(String valign) {
+		_valign = valign;
+	}
+
+	private String _align = DEFAULT_ALIGN;
+	private int _colspan = DEFAULT_COLSPAN;
 	private int _index;
-	private String _align;
-	private String _valign;
-	private int _colspan;
+	private String _valign = DEFAULT_VALIGN;
 
 }

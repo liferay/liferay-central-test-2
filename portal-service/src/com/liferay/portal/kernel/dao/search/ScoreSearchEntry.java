@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
+
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -21,24 +23,34 @@ import javax.servlet.jsp.PageContext;
  */
 public class ScoreSearchEntry extends SearchEntry {
 
+	public ScoreSearchEntry() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public ScoreSearchEntry(float score) {
 		_score = score;
+	}
+
+	public Object clone() {
+		ScoreSearchEntry scoreSearchEntry = new ScoreSearchEntry();
+
+		BeanPropertiesUtil.copyProperties(this, scoreSearchEntry);
+
+		return scoreSearchEntry;
 	}
 
 	public float getScore() {
 		return _score;
 	}
 
-	public void setScore(float score) {
-		_score = score;
-	}
-
 	public void print(PageContext pageContext) throws Exception {
 		pageContext.include("/html/taglib/ui/search_iterator/score.jsp");
 	}
 
-	public Object clone() {
-		return new ScoreSearchEntry(getScore());
+	public void setScore(float score) {
+		_score = score;
 	}
 
 	private float _score;

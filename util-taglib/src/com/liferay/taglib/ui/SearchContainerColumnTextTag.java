@@ -73,11 +73,17 @@ public class SearchContainerColumnTextTag<R>
 				_href = null;
 			}
 
-			row.addText(
-				index,
-				new TextSearchEntry(
-					getAlign(), getValign(), getColspan(), getValue(),
-					(String)getHref(), getTarget(), getTitle()));
+			TextSearchEntry textSearchEntry = new TextSearchEntry();
+
+			textSearchEntry.setAlign(getAlign());
+			textSearchEntry.setColspan(getColspan());
+			textSearchEntry.setHref((String)getHref());
+			textSearchEntry.setName(getValue());
+			textSearchEntry.setTarget(getTarget());
+			textSearchEntry.setTitle(getTitle());
+			textSearchEntry.setValign(getValign());
+
+			row.addText(index, textSearchEntry);
 
 			return EVAL_PAGE;
 		}

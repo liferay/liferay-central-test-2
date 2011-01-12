@@ -237,8 +237,6 @@ try {
 
 		// Trusted
 
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, pluginPackageTags, null, null, null);
-
 		if (PluginPackageUtil.isTrusted(pluginPackageRepositoryURL)) {
 			row.addText(LanguageUtil.get(pageContext, "yes"));
 		}
@@ -247,6 +245,10 @@ try {
 		}
 
 		// Tags
+
+		TextSearchEntry rowTextEntry = new TextSearchEntry();
+
+		rowTextEntry.setName(pluginPackageTags);
 
 		row.addText(rowTextEntry);
 

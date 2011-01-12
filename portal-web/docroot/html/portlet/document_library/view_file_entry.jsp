@@ -313,7 +313,11 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			searchContainer.setHeaderNames(headerNames);
 
 			if (comparableFileEntry) {
-				searchContainer.setRowChecker(new RowChecker(renderResponse, RowChecker.ALIGN, RowChecker.VALIGN, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS));
+				RowChecker rowChecker = new RowChecker(renderResponse);
+
+				rowChecker.setAllRowIds(null);
+
+				searchContainer.setRowChecker(rowChecker);
 			}
 
 			int status = WorkflowConstants.STATUS_APPROVED;

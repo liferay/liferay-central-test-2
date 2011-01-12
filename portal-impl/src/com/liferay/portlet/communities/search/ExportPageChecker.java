@@ -19,7 +19,8 @@ import com.liferay.portal.kernel.dao.search.RowChecker;
 import javax.portlet.RenderResponse;
 
 /**
- * @author Raymond Augé
+ * @author     Raymond Augé
+ * @deprecated
  */
 public class ExportPageChecker extends RowChecker {
 

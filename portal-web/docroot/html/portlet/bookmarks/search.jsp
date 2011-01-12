@@ -128,7 +128,12 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			String rowHREF = themeDisplay.getPathMain().concat("/bookmarks/open_entry?entryId=").concat(String.valueOf(entry.getEntryId()));
 
-			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, folder.getName(), rowHREF, "_blank", entry.getDescription());
+			TextSearchEntry rowTextEntry = new TextSearchEntry();
+
+			rowTextEntry.setHref(rowHREF);
+			rowTextEntry.setName(folder.getName());
+			rowTextEntry.setTarget("_blank");
+			rowTextEntry.setTitle(entry.getDescription());
 
 			row.addText(rowTextEntry);
 

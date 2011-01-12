@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 
 import javax.servlet.RequestDispatcher;
@@ -27,16 +28,28 @@ import javax.servlet.jsp.PageContext;
  */
 public class JSPSearchEntry extends SearchEntry {
 
+	public JSPSearchEntry() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public JSPSearchEntry(String align, String valign, String path) {
 		this(align, valign, DEFAULT_COLSPAN, path, null, null, null);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public JSPSearchEntry(
 		String align, String valign, int colspan, String path) {
 
 		this(align, valign, colspan, path, null, null, null);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public JSPSearchEntry(
 		String align, String valign, int colspan, String path,
 		ServletContext servletContext, HttpServletRequest request,
@@ -50,12 +63,28 @@ public class JSPSearchEntry extends SearchEntry {
 		_response = response;
 	}
 
+	public Object clone() {
+		JSPSearchEntry jspSearchEntry = new JSPSearchEntry();
+
+		BeanPropertiesUtil.copyProperties(this, jspSearchEntry);
+
+		return jspSearchEntry;
+	}
+
 	public String getPath() {
 		return _path;
 	}
 
-	public void setPath(String path) {
-		_path = path;
+	public HttpServletRequest getRequest() {
+		return _request;
+	}
+
+	public HttpServletResponse getResponse() {
+		return _response;
+	}
+
+	public ServletContext getServletContext() {
+		return _servletContext;
 	}
 
 	public void print(PageContext pageContext) throws Exception {
@@ -71,15 +100,25 @@ public class JSPSearchEntry extends SearchEntry {
 		}
 	}
 
-	public Object clone() {
-		return new JSPSearchEntry(
-			getAlign(), getValign(), getColspan(), getPath(), _servletContext,
-			_request, _response);
+	public void setPath(String path) {
+		_path = path;
+	}
+
+	public void setRequest(HttpServletRequest request) {
+		_request = request;
+	}
+
+	public void setResponse(HttpServletResponse response) {
+		_response = response;
+	}
+
+	public void setServletContext(ServletContext servletContext) {
+		_servletContext = servletContext;
 	}
 
 	private String _path;
-	private ServletContext _servletContext;
 	private HttpServletRequest _request;
 	private HttpServletResponse _response;
+	private ServletContext _servletContext;
 
 }

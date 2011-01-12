@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
@@ -26,28 +27,46 @@ import javax.servlet.jsp.PageContext;
  */
 public class TextSearchEntry extends SearchEntry {
 
+	public TextSearchEntry() {
+	}
+
+	/**
+	 * @deprecated
+	 */
 	public TextSearchEntry(String align, String valign, String name) {
 		this(align, valign, DEFAULT_COLSPAN, name, null);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public TextSearchEntry(
 		String align, String valign, int colspan, String name) {
 
 		this(align, valign, colspan, name, null);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public TextSearchEntry(
 		String align, String valign, String name, String href) {
 
 		this(align, valign, DEFAULT_COLSPAN, name, href, null, null);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public TextSearchEntry(
 		String align, String valign, int colspan, String name, String href) {
 
 		this(align, valign, colspan, name, href, null, null);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public TextSearchEntry(
 		String align, String valign, String name, String href, String target,
 		String title) {
@@ -55,6 +74,9 @@ public class TextSearchEntry extends SearchEntry {
 		this(align, valign, DEFAULT_COLSPAN, name, href, target, title);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public TextSearchEntry(
 		String align, String valign, int colspan, String name, String href,
 		String target, String title) {
@@ -67,36 +89,28 @@ public class TextSearchEntry extends SearchEntry {
 		_title = title;
 	}
 
-	public String getName() {
-		return _name;
-	}
+	public Object clone() {
+		TextSearchEntry textSearchEntry = new TextSearchEntry();
 
-	public void setName(String name) {
-		_name = name;
+		BeanPropertiesUtil.copyProperties(this, textSearchEntry);
+
+		return textSearchEntry;
 	}
 
 	public String getHref() {
 		return _href;
 	}
 
-	public void setHref(String href) {
-		_href = href;
+	public String getName() {
+		return _name;
 	}
 
 	public String getTarget() {
 		return _target;
 	}
 
-	public void setTarget(String target) {
-		_target = target;
-	}
-
 	public String getTitle() {
 		return _title;
-	}
-
-	public void setTitle(String title) {
-		_title = title;
 	}
 
 	public void print(PageContext pageContext) throws Exception {
@@ -132,14 +146,24 @@ public class TextSearchEntry extends SearchEntry {
 		}
 	}
 
-	public Object clone() {
-		return new TextSearchEntry(
-			getAlign(), getValign(), getColspan(), getName(), getHref(),
-			getTarget(), getTitle());
+	public void setHref(String href) {
+		_href = href;
 	}
 
-	private String _name;
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setTarget(String target) {
+		_target = target;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
 	private String _href;
+	private String _name;
 	private String _target;
 	private String _title;
 

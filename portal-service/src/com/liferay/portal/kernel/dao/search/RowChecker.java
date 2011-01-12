@@ -26,52 +26,84 @@ public class RowChecker {
 
 	public static final String ALIGN = "left";
 
-	public static final String VALIGN = "middle";
+	public static final String ALL_ROW_IDS = "allRowIds";
 
 	public static final int COLSPAN = 1;
 
 	public static final String FORM_NAME = "fm";
 
-	public static final String ALL_ROW_IDS = "allRowIds";
-
 	public static final String ROW_IDS = "rowIds";
 
+	public static final String VALIGN = "middle";
+
 	public RowChecker(RenderResponse renderResponse) {
-		this(
-			renderResponse, ALIGN, VALIGN, COLSPAN, FORM_NAME, ALL_ROW_IDS,
-			ROW_IDS);
+		_renderResponse = renderResponse;
+
+		_allRowIds = _renderResponse.getNamespace() + ALL_ROW_IDS;
+		_formName = _renderResponse.getNamespace() + FORM_NAME;
+		_rowIds = _renderResponse.getNamespace() + ROW_IDS;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public RowChecker(
 		RenderResponse renderResponse, String align, String valign,
-		String formName, String allRowsId, String rowId) {
+		String formName, String allRowIds, String rowIds) {
 
 		this(
-			renderResponse, align, valign, COLSPAN, formName, allRowsId, rowId);
+			renderResponse, align, valign, COLSPAN, formName, allRowIds,
+			rowIds);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public RowChecker(
 		RenderResponse renderResponse, String align, String valign, int colspan,
-		String formName, String allRowsId, String rowId) {
+		String formName, String allRowIds, String rowIds) {
 
-		_align = align;
-		_valign = valign;
-		_colspan = colspan;
-		_formName = renderResponse.getNamespace() + formName;
+		this(renderResponse);
 
-		if (Validator.isNotNull(allRowsId)) {
-			_allRowsId = renderResponse.getNamespace() + allRowsId;
-		}
-
-		_rowId = renderResponse.getNamespace() + rowId;
+		setAlign(align);
+		setValign(valign);
+		setColspan(colspan);
+		setFormName(formName);
+		setAllRowIds(allRowIds);
+		setRowIds(rowIds);
 	}
 
 	public String getAlign() {
 		return _align;
 	}
 
-	public String getValign() {
-		return _valign;
+	public String getAllRowsCheckBox() {
+		if (Validator.isNull(_allRowIds)) {
+			return StringPool.BLANK;
+		}
+		else {
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("<input name=\"");
+			sb.append(_allRowIds);
+			sb.append("\" type=\"checkbox\" ");
+			sb.append("onClick=\"Liferay.Util.checkAll(");
+			sb.append("AUI().one(this).ancestor('");
+			sb.append("table.taglib-search-iterator'), '");
+			sb.append(_rowIds);
+			sb.append("', this");
+			sb.append(");\">");
+
+			return sb.toString();
+		}
+	}
+
+	public String getAllRowIds() {
+		return _allRowIds;
+	}
+
+	public String getAllRowsId() {
+		return getAllRowIds();
 	}
 
 	public int getColspan() {
@@ -80,35 +112,6 @@ public class RowChecker {
 
 	public String getFormName() {
 		return _formName;
-	}
-
-	public String getAllRowsId() {
-		return _allRowsId;
-	}
-
-	public String getRowId() {
-		return _rowId;
-	}
-
-	public String getAllRowsCheckBox() {
-		if (Validator.isNull(_allRowsId)) {
-			return StringPool.BLANK;
-		}
-		else {
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("<input name=\"");
-			sb.append(_allRowsId);
-			sb.append("\" type=\"checkbox\" ");
-			sb.append("onClick=\"Liferay.Util.checkAll(");
-			sb.append("AUI().one(this).ancestor('");
-			sb.append("table.taglib-search-iterator'), '");
-			sb.append(_rowId);
-			sb.append("', this");
-			sb.append(");\">");
-
-			return sb.toString();
-		}
 	}
 
 	public String getRowCheckBox(boolean checked, String primaryKey) {
@@ -121,18 +124,18 @@ public class RowChecker {
 		}
 
 		sb.append("name=\"");
-		sb.append(_rowId);
+		sb.append(_rowIds);
 		sb.append("\" type=\"checkbox\" value=\"");
 		sb.append(primaryKey);
 		sb.append("\" ");
 
-		if (Validator.isNotNull(_allRowsId)) {
+		if (Validator.isNotNull(_allRowIds)) {
 			sb.append("onClick=\"Liferay.Util.checkAllBox(");
 			sb.append("AUI().one(this).ancestor('");
 			sb.append("table.taglib-search-iterator'), '");
-			sb.append(_rowId);
+			sb.append(_rowIds);
 			sb.append("', ");
-			sb.append(_allRowsId);
+			sb.append(_allRowIds);
 			sb.append(");\"");
 		}
 
@@ -141,15 +144,65 @@ public class RowChecker {
 		return sb.toString();
 	}
 
+	public String getRowId() {
+		return getRowIds();
+	}
+
+	public String getRowIds() {
+		return _rowIds;
+	}
+
+	public String getValign() {
+		return _valign;
+	}
+
 	public boolean isChecked(Object obj) {
 		return false;
 	}
 
-	private String _align;
-	private String _valign;
-	private int _colspan;
+	public void setAlign(String align) {
+		_align = align;
+	}
+
+	public void setAllRowIds(String allRowIds) {
+		_allRowIds = getNamespacedValue(allRowIds);
+	}
+
+	public void setColspan(int colspan) {
+		_colspan = colspan;
+	}
+
+	public void setFormName(String formName) {
+		_formName = getNamespacedValue(formName);
+	}
+
+	public void setRowIds(String rowIds) {
+		_rowIds = getNamespacedValue(rowIds);
+	}
+
+	public void setValign(String valign) {
+		_valign = valign;
+	}
+
+	protected String getNamespacedValue(String value) {
+		if (Validator.isNull(value)) {
+			return StringPool.BLANK;
+		}
+		else {
+			if (!value.startsWith(_renderResponse.getNamespace())) {
+				value = _renderResponse.getNamespace() + value;
+			}
+
+			return value;
+		}
+	}
+
+	private String _align = ALIGN;
+	private String _allRowIds;
+	private int _colspan = COLSPAN;
 	private String _formName;
-	private String _allRowsId;
-	private String _rowId;
+	private RenderResponse _renderResponse;
+	private String _rowIds;
+	private String _valign = VALIGN;
 
 }

@@ -126,7 +126,11 @@ double version = ParamUtil.getDouble(request, "version", -1);
 				target = "_blank";
 			}
 
-			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, article.getArticleId(), rowHREF, target, null);
+			TextSearchEntry rowTextEntry = new TextSearchEntry();
+
+			rowTextEntry.setHref(rowHREF);
+			rowTextEntry.setName(article.getArticleId());
+			rowTextEntry.setTarget(target);
 
 			/*// Article id
 

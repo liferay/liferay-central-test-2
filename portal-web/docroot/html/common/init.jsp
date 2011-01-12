@@ -52,6 +52,7 @@
 <%@ page import="com.liferay.portal.kernel.cal.Recurrence" %>
 <%@ page import="com.liferay.portal.kernel.configuration.Filter" %>
 <%@ page import="com.liferay.portal.kernel.dao.orm.QueryUtil" %>
+<%@ page import="com.liferay.portal.kernel.dao.search.AlwaysTrueRowChecker" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.DAOParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.DisplayTerms" %>
 <%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>

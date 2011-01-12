@@ -152,7 +152,11 @@ searchContainer.setOrderByCol(orderByCol);
 searchContainer.setOrderByType(orderByType);
 
 if (type.equals("history")) {
-	searchContainer.setRowChecker(new RowChecker(renderResponse, RowChecker.ALIGN, RowChecker.VALIGN, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS));
+	RowChecker rowChecker = new RowChecker(renderResponse);
+
+	rowChecker.setAllRowIds(null);
+
+	searchContainer.setRowChecker(rowChecker);
 }
 
 int total = 0;

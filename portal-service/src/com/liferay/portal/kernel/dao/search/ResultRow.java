@@ -148,8 +148,14 @@ public class ResultRow {
 	public void addText(
 		int index, String align, String valign, int colspan, String name) {
 
-		_entries.add(
-			index, new TextSearchEntry(align, valign, colspan, name));
+		TextSearchEntry textSearchEntry = new TextSearchEntry();
+
+		textSearchEntry.setAlign(align);
+		textSearchEntry.setColspan(colspan);
+		textSearchEntry.setName(name);
+		textSearchEntry.setValign(valign);
+
+		_entries.add(index, textSearchEntry);
 	}
 
 	// Text with name and href
@@ -184,8 +190,15 @@ public class ResultRow {
 			href = null;
 		}
 
-		_entries.add(
-			index, new TextSearchEntry(align, valign, colspan, name, href));
+		TextSearchEntry textSearchEntry = new TextSearchEntry();
+
+		textSearchEntry.setAlign(align);
+		textSearchEntry.setColspan(colspan);
+		textSearchEntry.setHref(href);
+		textSearchEntry.setName(name);
+		textSearchEntry.setValign(valign);
+
+		_entries.add(index, textSearchEntry);
 	}
 
 	// Text with name and portlet URL
@@ -291,8 +304,15 @@ public class ResultRow {
 			href = null;
 		}
 
-		_entries.add(
-			index, new ButtonSearchEntry(align, valign, colspan, name, href));
+		ButtonSearchEntry buttonSearchEntry = new ButtonSearchEntry();
+
+		buttonSearchEntry.setAlign(align);
+		buttonSearchEntry.setColspan(colspan);
+		buttonSearchEntry.setHref(href);
+		buttonSearchEntry.setName(name);
+		buttonSearchEntry.setValign(valign);
+
+		_entries.add(index, buttonSearchEntry);
 	}
 
 	// JSP
@@ -319,7 +339,14 @@ public class ResultRow {
 	public void addJSP(
 		int index, String align, String valign, int colspan, String path) {
 
-		_entries.add(index, new JSPSearchEntry(align, valign, colspan, path));
+		JSPSearchEntry jspSearchEntry = new JSPSearchEntry();
+
+		jspSearchEntry.setAlign(align);
+		jspSearchEntry.setColspan(colspan);
+		jspSearchEntry.setPath(path);
+		jspSearchEntry.setValign(valign);
+
+		_entries.add(index, jspSearchEntry);
 	}
 
 	// JSP with portlet context
@@ -365,11 +392,17 @@ public class ResultRow {
 		ServletContext servletContext, HttpServletRequest request,
 		HttpServletResponse response) {
 
-		_entries.add(
-			index,
-			new JSPSearchEntry(
-				align, valign, colspan, path, servletContext, request,
-				response));
+		JSPSearchEntry jspSearchEntry = new JSPSearchEntry();
+
+		jspSearchEntry.setAlign(align);
+		jspSearchEntry.setColspan(colspan);
+		jspSearchEntry.setPath(path);
+		jspSearchEntry.setRequest(request);
+		jspSearchEntry.setResponse(response);
+		jspSearchEntry.setServletContext(servletContext);
+		jspSearchEntry.setValign(valign);
+
+		_entries.add(index, jspSearchEntry);
 	}
 
 	// Score
@@ -379,7 +412,11 @@ public class ResultRow {
 	}
 
 	public void addScore(int index, float score) {
-		_entries.add(index, new ScoreSearchEntry(score));
+		ScoreSearchEntry scoreSearchEntry = new ScoreSearchEntry();
+
+		scoreSearchEntry.setScore(score);
+
+		_entries.add(index, scoreSearchEntry);
 	}
 
 	private Object _obj;
