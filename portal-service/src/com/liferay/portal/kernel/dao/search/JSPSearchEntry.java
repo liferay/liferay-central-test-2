@@ -28,41 +28,6 @@ import javax.servlet.jsp.PageContext;
  */
 public class JSPSearchEntry extends SearchEntry {
 
-	public JSPSearchEntry() {
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public JSPSearchEntry(String align, String valign, String path) {
-		this(align, valign, DEFAULT_COLSPAN, path, null, null, null);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public JSPSearchEntry(
-		String align, String valign, int colspan, String path) {
-
-		this(align, valign, colspan, path, null, null, null);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public JSPSearchEntry(
-		String align, String valign, int colspan, String path,
-		ServletContext servletContext, HttpServletRequest request,
-		HttpServletResponse response) {
-
-		super(align, valign, colspan);
-
-		_path = path;
-		_servletContext = servletContext;
-		_request = request;
-		_response = response;
-	}
-
 	public Object clone() {
 		JSPSearchEntry jspSearchEntry = new JSPSearchEntry();
 

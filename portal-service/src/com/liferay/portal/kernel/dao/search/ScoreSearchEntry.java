@@ -23,16 +23,6 @@ import javax.servlet.jsp.PageContext;
  */
 public class ScoreSearchEntry extends SearchEntry {
 
-	public ScoreSearchEntry() {
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public ScoreSearchEntry(float score) {
-		_score = score;
-	}
-
 	public Object clone() {
 		ScoreSearchEntry scoreSearchEntry = new ScoreSearchEntry();
 

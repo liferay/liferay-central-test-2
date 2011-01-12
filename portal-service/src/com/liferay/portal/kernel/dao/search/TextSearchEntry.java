@@ -27,68 +27,6 @@ import javax.servlet.jsp.PageContext;
  */
 public class TextSearchEntry extends SearchEntry {
 
-	public TextSearchEntry() {
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public TextSearchEntry(String align, String valign, String name) {
-		this(align, valign, DEFAULT_COLSPAN, name, null);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public TextSearchEntry(
-		String align, String valign, int colspan, String name) {
-
-		this(align, valign, colspan, name, null);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public TextSearchEntry(
-		String align, String valign, String name, String href) {
-
-		this(align, valign, DEFAULT_COLSPAN, name, href, null, null);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public TextSearchEntry(
-		String align, String valign, int colspan, String name, String href) {
-
-		this(align, valign, colspan, name, href, null, null);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public TextSearchEntry(
-		String align, String valign, String name, String href, String target,
-		String title) {
-
-		this(align, valign, DEFAULT_COLSPAN, name, href, target, title);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public TextSearchEntry(
-		String align, String valign, int colspan, String name, String href,
-		String target, String title) {
-
-		super(align, valign, colspan);
-
-		_name = name;
-		_href = href;
-		_target = target;
-		_title = title;
-	}
-
 	public Object clone() {
 		TextSearchEntry textSearchEntry = new TextSearchEntry();
 

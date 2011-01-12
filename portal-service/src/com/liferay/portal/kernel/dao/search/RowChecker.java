@@ -44,35 +44,6 @@ public class RowChecker {
 		_rowIds = _renderResponse.getNamespace() + ROW_IDS;
 	}
 
-	/**
-	 * @deprecated
-	 */
-	public RowChecker(
-		RenderResponse renderResponse, String align, String valign,
-		String formName, String allRowIds, String rowIds) {
-
-		this(
-			renderResponse, align, valign, COLSPAN, formName, allRowIds,
-			rowIds);
-	}
-
-	/**
-	 * @deprecated
-	 */
-	public RowChecker(
-		RenderResponse renderResponse, String align, String valign, int colspan,
-		String formName, String allRowIds, String rowIds) {
-
-		this(renderResponse);
-
-		setAlign(align);
-		setValign(valign);
-		setColspan(colspan);
-		setFormName(formName);
-		setAllRowIds(allRowIds);
-		setRowIds(rowIds);
-	}
-
 	public String getAlign() {
 		return _align;
 	}
