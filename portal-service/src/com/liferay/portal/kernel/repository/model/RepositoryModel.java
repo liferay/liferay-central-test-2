@@ -14,21 +14,26 @@
 
 package com.liferay.portal.kernel.repository.model;
 
+import java.io.Serializable;
+import java.util.Map;
+
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
  * @author Alexander Chow
  */
 public interface RepositoryModel<T> {
-	
+
+	public Map<String, Serializable> getAttributes();
+
 	public Object getModel();
-	
+
 	public long getPrimaryKey();
-	
+
 	public boolean isEscapedModel();
 
 	public void prepare() throws SystemException;
-	
+
 	public T toEscapedModel();
-	
+
 }

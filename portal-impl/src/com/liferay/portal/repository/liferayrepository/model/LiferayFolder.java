@@ -20,8 +20,10 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Alexander Chow
@@ -39,6 +41,10 @@ public class LiferayFolder extends LiferayModel implements Folder {
 
 	public List<Folder> getAncestors() throws PortalException, SystemException {
 		return toFolders(_dlFolder.getAncestors());
+	}
+
+	public Map<String, Serializable> getAttributes() {
+		return _dlFolder.getExpandoBridge().getAttributes();
 	}
 
 	public long getCompanyId() {

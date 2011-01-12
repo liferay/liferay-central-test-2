@@ -23,9 +23,11 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 import java.io.InputStream;
+import java.io.Serializable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Alexander Chow
@@ -39,6 +41,10 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	public LiferayFileEntry(DLFileEntry fileEntry, boolean escapedModel) {
 		_dlFileEntry = fileEntry;
 		_escapedModel = escapedModel;
+	}
+
+	public Map<String, Serializable> getAttributes() {
+		return _dlFileEntry.getExpandoBridge().getAttributes();
 	}
 
 	public long getCompanyId() {
