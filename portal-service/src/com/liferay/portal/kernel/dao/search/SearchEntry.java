@@ -27,11 +27,7 @@ public abstract class SearchEntry implements Cloneable {
 
 	public static final String DEFAULT_VALIGN = "middle";
 
-	/**
-	 * @deprecated
-	 */
 	public SearchEntry() {
-		this(DEFAULT_ALIGN, DEFAULT_VALIGN, DEFAULT_COLSPAN);
 	}
 
 	/**
