@@ -19,8 +19,10 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +46,9 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public Map<String, Serializable> getAttributes() {
-		return _dlFolder.getExpandoBridge().getAttributes();
+		ExpandoBridge expandoBridge = _dlFolder.getExpandoBridge();
+
+		return expandoBridge.getAttributes();
 	}
 
 	public long getCompanyId() {

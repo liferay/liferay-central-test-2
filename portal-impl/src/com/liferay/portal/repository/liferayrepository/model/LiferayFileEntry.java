@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.model.Lock;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -44,7 +45,9 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	}
 
 	public Map<String, Serializable> getAttributes() {
-		return _dlFileEntry.getExpandoBridge().getAttributes();
+		ExpandoBridge expandoBridge = _dlFileEntry.getExpandoBridge();
+
+		return expandoBridge.getAttributes();
 	}
 
 	public long getCompanyId() {

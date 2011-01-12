@@ -22,6 +22,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
+
 import java.util.Date;
 import java.util.Map;
 
@@ -42,7 +43,9 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 	}
 
 	public Map<String, Serializable> getAttributes() {
-		return _dlFileVersion.getExpandoBridge().getAttributes();
+		ExpandoBridge expandoBridge = _dlFileVersion.getExpandoBridge();
+
+		return expandoBridge.getAttributes();
 	}
 
 	public String getChangeLog() {
