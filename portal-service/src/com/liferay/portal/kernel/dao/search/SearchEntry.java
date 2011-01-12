@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.dao.search;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -25,6 +27,8 @@ public abstract class SearchEntry implements Cloneable {
 
 	public static final int DEFAULT_COLSPAN = 1;
 
+	public static final String DEFAULT_CSS_CLASS = StringPool.BLANK;
+
 	public static final String DEFAULT_VALIGN = "middle";
 
 	public String getAlign() {
@@ -33,6 +37,10 @@ public abstract class SearchEntry implements Cloneable {
 
 	public int getColspan() {
 		return _colspan;
+	}
+
+	public String getCssClass() {
+		return _cssClass;
 	}
 
 	public int getIndex() {
@@ -53,6 +61,10 @@ public abstract class SearchEntry implements Cloneable {
 		_colspan = colspan;
 	}
 
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
+	}
+
 	public void setIndex(int index) {
 		_index = index;
 	}
@@ -63,6 +75,7 @@ public abstract class SearchEntry implements Cloneable {
 
 	private String _align = DEFAULT_ALIGN;
 	private int _colspan = DEFAULT_COLSPAN;
+	private String _cssClass = DEFAULT_CSS_CLASS;
 	private int _index;
 	private String _valign = DEFAULT_VALIGN;
 

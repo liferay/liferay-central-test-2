@@ -77,6 +77,7 @@ public class SearchContainerColumnTextTag<R>
 
 			textSearchEntry.setAlign(getAlign());
 			textSearchEntry.setColspan(getColspan());
+			textSearchEntry.setCssClass(getCssClass());
 			textSearchEntry.setHref((String)getHref());
 			textSearchEntry.setName(getValue());
 			textSearchEntry.setTarget(getTarget());
@@ -95,6 +96,7 @@ public class SearchContainerColumnTextTag<R>
 				align = SearchEntry.DEFAULT_ALIGN;
 				_buffer = null;
 				colspan = SearchEntry.DEFAULT_COLSPAN;
+				cssClass = SearchEntry.DEFAULT_CSS_CLASS;
 				_href = null;
 				name = null;
 				_orderable = false;

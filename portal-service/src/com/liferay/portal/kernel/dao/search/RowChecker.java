@@ -30,6 +30,8 @@ public class RowChecker {
 
 	public static final int COLSPAN = 1;
 
+	public static final String CSS_CLASS = StringPool.BLANK;
+
 	public static final String FORM_NAME = "fm";
 
 	public static final String ROW_IDS = "rowIds";
@@ -79,6 +81,10 @@ public class RowChecker {
 
 	public int getColspan() {
 		return _colspan;
+	}
+
+	public String getCssClass() {
+		return _cssClass;
 	}
 
 	public String getFormName() {
@@ -143,6 +149,10 @@ public class RowChecker {
 		_colspan = colspan;
 	}
 
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
+	}
+
 	public void setFormName(String formName) {
 		_formName = getNamespacedValue(formName);
 	}
@@ -171,6 +181,7 @@ public class RowChecker {
 	private String _align = ALIGN;
 	private String _allRowIds;
 	private int _colspan = COLSPAN;
+	private String _cssClass = CSS_CLASS;
 	private String _formName;
 	private RenderResponse _renderResponse;
 	private String _rowIds;

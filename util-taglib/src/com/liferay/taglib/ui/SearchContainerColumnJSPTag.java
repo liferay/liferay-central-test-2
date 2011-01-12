@@ -48,6 +48,7 @@ public class SearchContainerColumnJSPTag<R> extends SearchContainerColumnTag {
 
 			jspSearchEntry.setAlign(getAlign());
 			jspSearchEntry.setColspan(getColspan());
+			jspSearchEntry.setCssClass(getCssClass());
 			jspSearchEntry.setPath(getPath());
 			jspSearchEntry.setRequest(
 				(HttpServletRequest)pageContext.getRequest());
@@ -66,6 +67,7 @@ public class SearchContainerColumnJSPTag<R> extends SearchContainerColumnTag {
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
 				colspan = SearchEntry.DEFAULT_COLSPAN;
+				cssClass = SearchEntry.DEFAULT_CSS_CLASS;
 				name = StringPool.BLANK;
 				_path = null;
 				valign = SearchEntry.DEFAULT_VALIGN;

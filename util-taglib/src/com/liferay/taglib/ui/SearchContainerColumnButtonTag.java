@@ -50,6 +50,7 @@ public class SearchContainerColumnButtonTag<R>
 
 			buttonSearchEntry.setAlign(getAlign());
 			buttonSearchEntry.setColspan(getColspan());
+			buttonSearchEntry.setCssClass(getCssClass());
 			buttonSearchEntry.setHref((String)getHref());
 			buttonSearchEntry.setName(getName());
 			buttonSearchEntry.setValign(getValign());
@@ -64,6 +65,7 @@ public class SearchContainerColumnButtonTag<R>
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
 				colspan = SearchEntry.DEFAULT_COLSPAN;
+				cssClass = SearchEntry.DEFAULT_CSS_CLASS;
 				_href = null;
 				name = StringPool.BLANK;
 				valign = SearchEntry.DEFAULT_VALIGN;
