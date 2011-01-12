@@ -86,102 +86,302 @@ public interface Portal {
 		"TEMP_OBFUSCATION_VALUE";
 
 	/**
-	 * Adds the description for a page. This appends to the existing page
-	 * description.
+	 * Appends the description to the current meta description of the page.
+	 *
+	 * @param description the description to append to the current meta
+	 *        description
+	 * @param request the servlet request for the page
 	 */
 	public void addPageDescription(
 		String description, HttpServletRequest request);
 
 	/**
-	 * Adds the keywords for a page. This appends to the existing page keywords.
+	 * Adds the keywords to the current meta keywords of the page.
+	 *
+	 * @param keywords the keywords to add to the current meta keywords
+	 *        (comma-separated)
+	 * @param request the servlet request for the page
 	 */
 	public void addPageKeywords(String keywords, HttpServletRequest request);
 
 	/**
-	 * Adds the subtitle for a page. This appends to the existing page subtitle.
+	 * Appends the subtitle to the current subtitle of the page.
+	 *
+	 * @param subtitle the subtitle to append to the current subtitle
+	 * @param request the servlet request for the page
 	 */
 	public void addPageSubtitle(String subtitle, HttpServletRequest request);
 
 	/**
-	 * Adds the whole title for a page. This appends to the existing page whole
-	 * title.
+	 * Appends the title to the current title of the page.
+	 *
+	 * @param title the title to append to the current title
+	 * @param request the servlet request for the page
 	 */
 	public void addPageTitle(String title, HttpServletRequest request);
 
+	/**
+	 * Adds the portal port event listener to the portal. The listener will be
+	 * notified whenever the portal port is set.
+	 *
+	 * @param portalPortEventListener the portal port event listener to add
+	 */
 	public void addPortalPortEventListener(
 		PortalPortEventListener portalPortEventListener);
 
+	/**
+	 * Adds an entry to the portlet breadcrumbs for the page.
+	 *
+	 * @param request the servlet request for the page
+	 * @param title the title of the new breakcrumb entry
+	 * @param url the URL of the new breadcrumb entry
+	 */
 	public void addPortletBreadcrumbEntry(
 		HttpServletRequest request, String title, String url);
 
+	/**
+	 * Adds the default resource permissions for the portlet to the page.
+	 *
+	 * @param  request the servlet request for the page
+	 * @param  portlet the portlet to add the default resource permissions for
+	 * @throws PortalException if adding the default resource permissions failed
+	 * @throws SystemException if a system exception occurred
+	 */
 	public void addPortletDefaultResource(
 			HttpServletRequest request, Portlet portlet)
 		throws PortalException, SystemException;
 
 	/**
-	 * Adds preserved parameters such as doAsGroupId, doAsUserId,
-	 * doAsUserLanguageId, and referrerPlid that should always be preserved as
-	 * the user navigates through the portal. If doAsUser is <code>false</code>,
-	 * then doAsUserId and doAsUserLanguageId will never be added.
+	 * Adds the preserved parameters doAsGroupId and refererPlid to the URL,
+	 * optionally adding doAsUserId and doAsUserLanguageId as well.
+	 *
+	 * <p>
+	 * Preserved parameters are parameters that should be sent with every
+	 * request as the user navigates the portal.
+	 * </p>
+	 *
+	 * @param  themeDisplay the current theme display
+	 * @param  layout the current layout
+	 * @param  url the URL to add the preserved parameters to
+	 * @param  doAsUser whether to include doAsUserId and doAsLanguageId in the
+	 *         URL if they are available. If <code>false</code>, doAsUserId and
+	 *         doAsUserLanguageId will never be added.
+	 * @return the URL with the preserved parameters added
 	 */
 	public String addPreservedParameters(
 		ThemeDisplay themeDisplay, Layout layout, String url, boolean doAsUser);
 
 	/**
-	 * Adds preserved parameters such as doAsGroupId, doAsUserId,
-	 * doAsUserLanguageId, and referrerPlid that should always be preserved as
-	 * the user navigates through the portal.
+	 * Adds the preserved parameters doAsUserId, doAsUserLanguageId,
+	 * doAsGroupId, and refererPlid to the URL.
+	 *
+	 * @param  themeDisplay the current theme display
+	 * @param  url the URL to add the preserved parameters to
+	 * @return the URL with the preserved parameters added
 	 */
 	public String addPreservedParameters(
 		ThemeDisplay themeDisplay, String url);
 
+	/**
+	 * Clears the render parameters in the request if the portlet is in the
+	 * action phase.
+	 *
+	 * @param renderRequest the render request to clear the render parameters of
+	 */
 	public void clearRequestParameters(RenderRequest renderRequest);
 
+	/**
+	 * Copies the request parameters to the render parameters, unless a
+	 * parameter with that name already exists in the render parameters.
+	 *
+	 * @param actionRequest the request to get the request parameters from
+	 * @param actionResponse the response to put the render parameters in
+	 */
 	public void copyRequestParameters(
 		ActionRequest actionRequest, ActionResponse actionResponse);
 
+	/**
+	 * Escapes the URL for use in a redirect and checks that security settings
+	 * allow the URL to be redirected to.
+	 *
+	 * @param  url the URL to escape
+	 * @return the escaped URL, or <code>null</code> if the URL is not an
+	 *         allowed for redirects
+	 */
 	public String escapeRedirect(String url);
 
+	/**
+	 * Generates a random key to identify the request based on the input string.
+	 *
+	 * @param  request the servlet request for the page
+	 * @param  input the input to generate the key from
+	 * @return the generated key
+	 */
 	public String generateRandomKey(HttpServletRequest request, String input);
 
+	/**
+	 * Gets the set of struts actions that should not be checked for an
+	 * authentication token.
+	 *
+	 * @return the set of struts actions that should not be checked for an
+	 *         authentication token
+	 */
 	public Set<String> getAuthTokenIgnoreActions();
 
+	/**
+	 * Gets the set of IDs of portlets that should not be checked for an
+	 * authentication token.
+	 *
+	 * @return the set of IDs of portlets that should not be checked for an
+	 *         authentication token
+	 */
 	public Set<String> getAuthTokenIgnorePortlets();
 
+	/**
+	 * Gets the base model instance for the resource.
+	 *
+	 * @param  resource the resource to get the base model instance for
+	 * @return the base model instance, or <code>null</code> if the resource
+	 *         does not have a base model instance (such as if its a portlet)
+	 * @throws PortalException if a base model instance for the resource could
+	 *         not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public BaseModel<?> getBaseModel(Resource resource)
 		throws PortalException, SystemException;
 
+	/**
+	 * Gets the base model instance for the resource permission.
+	 *
+	 * @param  resourcePermission the resource permission to get the base model
+	 *         instance for
+	 * @return the base model instance, or <code>null</code> if the resource
+	 *         permission does not have a base model instance (such as if its a
+	 *         portlet)
+	 * @throws PortalException if a base model instance for the resource
+	 *         permission could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public BaseModel<?> getBaseModel(ResourcePermission resourcePermission)
 		throws PortalException, SystemException;
 
+	/**
+	 * Gets the base model instance for the model name and primary key.
+	 *
+	 * @param  modelName the fully qualified class name of the model
+	 * @param  primKey the primary key of the model instance to get
+	 * @return the base model instance, or <code>null</code> if the model does
+	 *         not have a base model instance (such as if its a portlet)
+	 * @throws PortalException if a base model instance with the primary key
+	 *         could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
 	public BaseModel<?> getBaseModel(String modelName, String primKey)
 		throws PortalException, SystemException;
 
+	/**
+	 * Gets the user's ID from the HTTP authentication headers after validating
+	 * their credentials.
+	 *
+	 * @param  request the servlet request to retrieve the HTTP authentication
+	 *         headers from
+	 * @return the user's ID if HTTP authentication headers are present and
+	 *         their credentials are valid; 0 otherwise
+	 * @throws PortalException if an authentication exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
 	public long getBasicAuthUserId(HttpServletRequest request)
 		throws PortalException, SystemException;
 
+	/**
+	 * Gets the user's ID from the HTTP authentication headers after validation
+	 * their credentials.
+	 *
+	 * @param  request the servlet request to retrieve the HTTP authentication
+	 *         headers from
+	 * @param  companyId unused
+	 * @return the user's ID if HTTP authentication headers are present and
+	 *         their credentials are valid; 0 otherwise
+	 * @throws PortalException if an authentication exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
 	public long getBasicAuthUserId(HttpServletRequest request, long companyId)
 		throws PortalException, SystemException;
 
 	/**
-	 * @deprecated {@link #getCDNHost(boolean)}
+	 * @deprecated Replaced by the more general {@link #getCDNHost(boolean)}
 	 */
 	public String getCDNHost();
 
+	/**
+	 * Gets the secure (HTTPS) or insecure (HTTP) content distribution network
+	 * (CDN) host address for this portal.
+	 *
+	 * @param  secure whether to get the secure or insecure CDN host address
+	 * @return the CDN host address
+	 */
 	public String getCDNHost(boolean secure);
 
+	/**
+	 * Gets the insecure (HTTP) content distribution network (CDN) host address
+	 *
+	 * @return the CDN host address
+	 */
 	public String getCDNHostHttp();
 
+	/**
+	 * Gets the secure (HTTPS) content distribution network (CDN) host address
+	 *
+	 * @return the CDN host address
+	 */
 	public String getCDNHostHttps();
 
+	/**
+	 * Gets the fully qualified name of the class from its ID.
+	 *
+	 * @param  classNameId the ID of the class
+	 * @return the fully qualified name of the class
+	 */
 	public String getClassName(long classNameId);
 
+	/**
+	 * Gets the ID of the class from its class object.
+	 *
+	 * @param  classObj the class object
+	 * @return the ID of the class
+	 */
 	public long getClassNameId(Class<?> classObj);
 
+	/**
+	 * Gets the ID of the class from its fully qualified name.
+	 *
+	 * @param  value the fully qualified name of the class
+	 * @return the ID of the class
+	 */
 	public long getClassNameId(String value);
 
+	/**
+	 * Gets the ID of certain portlets from the fully qualified name of one of
+	 * their classes. The portlets this method supports are: blogs, bookmarks,
+	 * calendar, document library, image gallery, journal, message boards, and
+	 * wiki.
+	 *
+	 * @param  className the fully qualified name of a class in a portlet
+	 * @return the ID of the portlet the class is a part of, or an empty string
+	 *         if the class is not supported
+	 */
 	public String getClassNamePortletId(String className);
 
+	/**
+	 * Gets the URL of the login page for the current community if one is
+	 * available.
+	 *
+	 * @param  themeDisplay the theme display for the current page
+	 * @return the URL of the login page for the current community, or
+	 *         <code>null</code> if one is not available
+	 * @throws PortalException if a portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
 	public String getCommunityLoginURL(ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
