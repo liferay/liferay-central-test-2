@@ -3299,12 +3299,11 @@ public class PortalImpl implements Portal {
 		}
 
 		if (Validator.isNotNull(jRemoteUser)) {
-			userIdObj = Long.valueOf(jRemoteUser);
+			userIdObj = GetterUtil.getLong(jRemoteUser);
 		}
 		else {
 			userIdObj = (Long)session.getAttribute(WebKeys.USER_ID);
 		}
-
 
 		if (userIdObj != null) {
 			request.setAttribute(WebKeys.USER_ID, userIdObj);
