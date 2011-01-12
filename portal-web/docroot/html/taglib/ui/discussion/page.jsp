@@ -16,6 +16,7 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.portal.util.PropsValues" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBCategory" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBDiscussion" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
@@ -72,6 +73,8 @@ else {
 }
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
+
+boolean showGuestFields = !themeDisplay.isSignedIn() && MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.ADD_DISCUSSION);
 %>
 
 <c:if test="<%= (messagesCount > 1) || MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW) %>">
@@ -128,29 +131,56 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					String subscriptionURL = "javascript:" + randomNamespace + "subscribeToComments(" + !subscribed + ");";
 					%>
 
-					<c:choose>
-						<c:when test="<%= subscribed %>">
-							<liferay-ui:icon
-								cssClass="subscribe-link"
-								image="unsubscribe"
-								label="<%= true %>"
-								message = '<%= LanguageUtil.get(pageContext, "unsubscribe-from-comments") %>'
-								url="<%= subscriptionURL %>"
-							/>
-						</c:when>
-						<c:otherwise>
-							<liferay-ui:icon
-								cssClass="subscribe-link"
-								image="subscribe"
-								label="<%= true %>"
-								message = '<%= LanguageUtil.get(pageContext, "subscribe-to-comments") %>'
-								url="<%= subscriptionURL %>"
-							/>
-						</c:otherwise>
-					</c:choose>
+					<c:if test="<%= themeDisplay.isSignedIn() %>">
+						<c:choose>
+							<c:when test="<%= subscribed %>">
+								<liferay-ui:icon
+									cssClass="subscribe-link"
+									image="unsubscribe"
+									label="<%= true %>"
+									message = '<%= LanguageUtil.get(pageContext, "unsubscribe-from-comments") %>'
+									url="<%= subscriptionURL %>"
+								/>
+							</c:when>
+							<c:otherwise>
+								<liferay-ui:icon
+									cssClass="subscribe-link"
+									image="subscribe"
+									label="<%= true %>"
+									message = '<%= LanguageUtil.get(pageContext, "subscribe-to-comments") %>'
+									url="<%= subscriptionURL %>"
+								/>
+							</c:otherwise>
+						</c:choose>
+					</c:if>
 
 					<div id="<%= randomNamespace %>postReplyForm<%= i %>" style="display: none;">
-						<aui:input type="textarea" id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' wrap="soft" />
+
+						<c:if test="<%= showGuestFields %>">
+							<aui:input label="name" name="guestName" type="text" style='<%= "width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>'>
+								<c:if test="<%= PropsValues.DISCUSSION_GUEST_NAME_REQUIRED %>">
+									<aui:validator name="required" />
+								</c:if>
+							</aui:input>
+
+							<aui:input label="email" name="guestEmail" type="text" style='<%= "width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>'>
+								<c:if test="<%= PropsValues.DISCUSSION_GUEST_EMAIL_REQUIRED %>">
+									<aui:validator name="required" />
+								</c:if>
+								<aui:validator name="email" />
+							</aui:input>
+
+							<aui:input label="web" name="guestURL" type="text" style='<%= "width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>'>
+								<c:if test="<%= PropsValues.DISCUSSION_GUEST_WEB_REQUIRED %>">
+									<aui:validator name="required" />
+								</c:if>
+								<aui:validator name="url" />
+							</aui:input>
+						</c:if>
+
+						<aui:input type="textarea" id='<%= randomNamespace + "postReplyBody" + i %>' label="comment" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' wrap="soft">
+							<aui:validator name="required" />
+						</aui:input>
 
 						<%
 						String postReplyButtonLabel = LanguageUtil.get(pageContext, "reply");
@@ -160,12 +190,12 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						}
 						%>
 
-						<c:if test="<%= !subscribed %>">
+						<c:if test="<%= !subscribed && !showGuestFields %>">
 							<aui:input helpMessage="comments-subscribe-me-help" label="subscribe-me" name="subscribe" type="checkbox" value="<%= PropsValues.DISCUSSION_SUBSCRIBE_BY_DEFAULT %>" />
 						</c:if>
 
 						<aui:button-row>
-							<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' type="submit" value="<%= postReplyButtonLabel %>"  />
+							<aui:button id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' type="submit" value="<%= postReplyButtonLabel %>"  />
 
 							<%
 							String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');";
@@ -264,6 +294,12 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						if ((!message.isApproved() && (message.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) || !MBDiscussionPermission.contains(permissionChecker, company.getCompanyId(), scopeGroupId, permissionClassName, permissionClassPK, userId, ActionKeys.VIEW)) {
 							continue;
 						}
+
+						String userURL = StringPool.BLANK;
+
+						if (message.isAnonymous() && Validator.isNotNull(message.getUserURL())) {
+							userURL = message.getUserURL();
+						}
 					%>
 
 						<aui:layout>
@@ -278,6 +314,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 								<liferay-ui:user-display
 									userId="<%= message.getUserId() %>"
 									userName="<%= HtmlUtil.escape(message.getUserName()) %>"
+									url="<%= userURL %>"
 									displayStyle="<%= 2 %>"
 								/>
 							</aui:column>
@@ -419,7 +456,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<aui:input id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' type="textarea"  wrap="soft" />
 
 									<aui:button-row>
-										<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' type="submit" value="reply" />
+										<aui:button id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' type="submit" value="reply" />
 
 										<%
 										String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');";
@@ -532,41 +569,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
 		}
 	</aui:script>
-
-	<aui:script use="aui-event-input">
-		var form = A.one(document.<%= namespace %><%= formName %>);
-
-		if (form) {
-			var textareas = form.all('textarea');
-
-			if (textareas) {
-				textareas.on(
-					'input',
-					function(event) {
-						var textarea = event.currentTarget;
-						var currentValue = A.Lang.trim(textarea.val());
-
-						var id = textarea.get('id');
-						var buttonId = id.replace(/Body/, 'Button');
-						var button = A.one('#' + buttonId);
-
-						if (button) {
-							button.set('disabled', !currentValue.length);
-
-							if (currentValue.length) {
-								button.ancestor('.aui-button').removeClass('aui-button-disabled');
-							}
-							else {
-								button.ancestor('.aui-button').addClass('aui-button-disabled');
-							}
-						}
-					}
-				);
-			}
-		}
-	</aui:script>
 </c:if>
-
 <%!
 private RatingsEntry getRatingsEntry(List<RatingsEntry> ratingEntries, long classPK) {
 	for (RatingsEntry ratingsEntry : ratingEntries) {

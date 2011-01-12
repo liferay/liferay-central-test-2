@@ -378,6 +378,12 @@ public class PropsValues {
 
 	public static final boolean DIRECT_SERVLET_CONTEXT_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DIRECT_SERVLET_CONTEXT_ENABLED));
 
+	public static final boolean DISCUSSION_GUEST_EMAIL_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DISCUSSION_GUEST_EMAIL_REQUIRED));
+
+	public static final boolean DISCUSSION_GUEST_NAME_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DISCUSSION_GUEST_NAME_REQUIRED));
+
+	public static final boolean DISCUSSION_GUEST_WEB_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DISCUSSION_GUEST_WEB_REQUIRED));
+
 	public static final boolean DISCUSSION_SUBSCRIBE_BY_DEFAULT = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DISCUSSION_SUBSCRIBE_BY_DEFAULT));
 
 	public static final String DISCUSSION_THREAD_VIEW = PropsUtil.get(PropsKeys.DISCUSSION_THREAD_VIEW);

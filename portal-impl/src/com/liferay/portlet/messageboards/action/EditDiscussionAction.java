@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.action;
 
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
+import com.liferay.portal.EmailAddressException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -31,7 +32,10 @@ import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
+import com.liferay.portlet.messageboards.RequiredEmailException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
+import com.liferay.portlet.messageboards.RequiredNameException;
+import com.liferay.portlet.messageboards.RequiredWebException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 
@@ -47,6 +51,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Juan Fernández
  */
 public class EditDiscussionAction extends PortletAction {
 
@@ -94,8 +99,12 @@ public class EditDiscussionAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.message_boards.error");
 			}
-			else if (e instanceof FileNameException ||
+			else if (e instanceof EmailAddressException ||
+					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
+					 e instanceof RequiredEmailException ||
+					 e instanceof RequiredNameException ||
+					 e instanceof RequiredWebException ||
 					 e instanceof MessageBodyException ||
 					 e instanceof MessageSubjectException) {
 
@@ -180,6 +189,10 @@ public class EditDiscussionAction extends PortletAction {
 		String subject = ParamUtil.getString(actionRequest, "subject");
 		String body = ParamUtil.getString(actionRequest, "body");
 
+		String guestEmail = ParamUtil.getString(actionRequest, "guestEmail");
+		String guestName = ParamUtil.getString(actionRequest, "guestName");
+		String guestURL = ParamUtil.getString(actionRequest, "guestURL");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBMessage.class.getName(), actionRequest);
 
@@ -192,7 +205,8 @@ public class EditDiscussionAction extends PortletAction {
 			message = MBMessageServiceUtil.addDiscussionMessage(
 				serviceContext.getScopeGroupId(), className, classPK,
 				permissionClassName, permissionClassPK, permissionOwnerId,
-				threadId, parentMessageId, subject, body, serviceContext);
+				threadId, parentMessageId, subject, body, guestEmail, guestName,
+				guestURL, serviceContext);
 		}
 		else {
 
