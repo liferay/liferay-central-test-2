@@ -14,15 +14,12 @@
 
 package com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment;
 
-import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.addtaskwebcontentcommentassignedtome.AddTaskWebContentCommentAssignedToMeTests;
-import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.addtaskwebcontentcommentassignedtomyroles.AddTaskWebContentCommentAssignedToMyRolesTests;
-import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.addtaskwebcontentcommentcompleted.AddTaskWebContentCommentCompletedTests;
+import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.addwebcontenttaskcommentassignedtome.AddWebContentTaskCommentAssignedToMeTests;
+import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.addwebcontenttaskcommentassignedtomyroles.AddWebContentTaskCommentAssignedToMyRolesTests;
+import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.addwebcontenttaskcommentcompleted.AddWebContentTaskCommentCompletedTests;
 import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.assertnoworkflowaddtaskcommentassignedtome.AssertNoWorkflowAddTaskCommentAssignedToMeTests;
 import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.assertnoworkflowaddtaskcommentassigntomyroles.AssertNoWorkflowAddTaskCommentAssignToMyRolesTests;
 import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.assertnoworkflowaddtaskcommentcompleted.AssertNoWorkflowAddTaskCommentCompletedTests;
-import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.viewtaskwebcontentcommentassignedtome.ViewTaskWebContentCommentAssignedToMeTests;
-import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.viewtaskwebcontentcommentassignedtomyroles.ViewTaskWebContentCommentAssignedToMyRolesTests;
-import com.liferay.portalweb.plugins.kaleo.mysubmissions.workflowtaskcomment.viewtaskwebcontentcommentcompleted.ViewTaskWebContentCommentCompletedTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -36,19 +33,15 @@ public class WorkflowTaskCommentTests extends BaseTests {
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(AddTaskWebContentCommentAssignedToMeTests.suite());
+		testSuite.addTest(AddWebContentTaskCommentAssignedToMeTests.suite());
 		testSuite.addTest(
-			AddTaskWebContentCommentAssignedToMyRolesTests.suite());
-		testSuite.addTest(AddTaskWebContentCommentCompletedTests.suite());
+			AddWebContentTaskCommentAssignedToMyRolesTests.suite());
+		testSuite.addTest(AddWebContentTaskCommentCompletedTests.suite());
 		testSuite.addTest(
 			AssertNoWorkflowAddTaskCommentAssignedToMeTests.suite());
 		testSuite.addTest(
 			AssertNoWorkflowAddTaskCommentAssignToMyRolesTests.suite());
 		testSuite.addTest(AssertNoWorkflowAddTaskCommentCompletedTests.suite());
-		testSuite.addTest(ViewTaskWebContentCommentAssignedToMeTests.suite());
-		testSuite.addTest(
-			ViewTaskWebContentCommentAssignedToMyRolesTests.suite());
-		testSuite.addTest(ViewTaskWebContentCommentCompletedTests.suite());
 
 		return testSuite;
 	}

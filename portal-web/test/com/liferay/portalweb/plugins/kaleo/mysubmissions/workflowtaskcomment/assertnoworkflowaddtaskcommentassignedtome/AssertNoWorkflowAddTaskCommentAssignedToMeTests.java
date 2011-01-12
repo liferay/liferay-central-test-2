@@ -30,7 +30,7 @@ public class AssertNoWorkflowAddTaskCommentAssignedToMeTests extends BaseTests {
 		testSuite.addTestSuite(ConfigureWebContentSingleApproverTest.class);
 		testSuite.addTestSuite(AddWebContentSingleApproverTest.class);
 		testSuite.addTestSuite(AssignToMeTaskWebContentDetailsTest.class);
-		testSuite.addTestSuite(AddTaskWebContentCommentAssignedToMeTest.class);
+		testSuite.addTestSuite(AddWebContentTaskCommentAssignedToMeTest.class);
 		testSuite.addTestSuite(
 			AssertNoWorkflowAddTaskCommentAssignedToMeTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);
