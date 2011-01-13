@@ -72,11 +72,11 @@ public class ExportPagesAction extends PortletAction {
 			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(
 				actionRequest, "privateLayout");
+			long[] layoutIds = ParamUtil.getLongValues(
+				actionRequest, "layoutIds");
 			String fileName = ParamUtil.getString(
 				actionRequest, "exportFileName");
 			String range = ParamUtil.getString(actionRequest, "range");
-			long[] layoutIds = ParamUtil.getLongValues(
-				actionRequest, "layoutIds");
 
 			Date startDate = null;
 			Date endDate = null;
