@@ -912,7 +912,7 @@ public class HttpImpl implements Http {
 		String domain = commonsCookie.getDomain();
 
 		if (Validator.isNotNull(domain)) {
-			cookie.setDomain(commonsCookie.getDomain());
+			cookie.setDomain(domain);
 		}
 
 		Date expiryDate = commonsCookie.getExpiryDate();
