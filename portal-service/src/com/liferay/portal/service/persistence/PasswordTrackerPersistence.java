@@ -35,8 +35,6 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PasswordTrackerUtil} to access the password tracker persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public PasswordTracker remove(PasswordTracker passwordTracker)
-		throws SystemException;
 
 	/**
 	* Caches the password tracker in the entity cache if it is enabled.
@@ -286,4 +284,7 @@ public interface PasswordTrackerPersistence extends BasePersistence<PasswordTrac
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public PasswordTracker remove(PasswordTracker passwordTracker)
+		throws SystemException;
 }

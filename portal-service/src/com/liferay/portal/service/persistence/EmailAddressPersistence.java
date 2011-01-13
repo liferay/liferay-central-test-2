@@ -35,8 +35,6 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link EmailAddressUtil} to access the email address persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public EmailAddress remove(EmailAddress emailAddress)
-		throws SystemException;
 
 	/**
 	* Caches the email address in the entity cache if it is enabled.
@@ -832,4 +830,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public EmailAddress remove(EmailAddress emailAddress)
+		throws SystemException;
 }

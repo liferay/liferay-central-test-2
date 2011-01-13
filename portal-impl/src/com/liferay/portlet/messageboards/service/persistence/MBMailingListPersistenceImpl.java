@@ -273,9 +273,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 	/**
 	 * Removes the message boards mailing list from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the message boards mailing list to remove
+	 * @param mbMailingList the message boards mailing list to remove
 	 * @return the message boards mailing list that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a message boards mailing list with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBMailingList remove(MBMailingList mbMailingList)

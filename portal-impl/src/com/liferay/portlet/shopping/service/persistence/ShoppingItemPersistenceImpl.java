@@ -286,9 +286,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl<ShoppingIte
 	/**
 	 * Removes the shopping item from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the shopping item to remove
+	 * @param shoppingItem the shopping item to remove
 	 * @return the shopping item that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a shopping item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ShoppingItem remove(ShoppingItem shoppingItem)

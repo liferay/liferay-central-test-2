@@ -37,8 +37,6 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AnnouncementsFlagUtil} to access the announcements flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public AnnouncementsFlag remove(AnnouncementsFlag announcementsFlag)
-		throws SystemException;
 
 	/**
 	* Caches the announcements flag in the entity cache if it is enabled.
@@ -354,4 +352,7 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public AnnouncementsFlag remove(AnnouncementsFlag announcementsFlag)
+		throws SystemException;
 }

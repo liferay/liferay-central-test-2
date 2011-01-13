@@ -35,8 +35,6 @@ public interface PortletItemPersistence extends BasePersistence<PortletItem> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PortletItemUtil} to access the portlet item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public PortletItem remove(PortletItem portletItem)
-		throws SystemException;
 
 	/**
 	* Caches the portlet item in the entity cache if it is enabled.
@@ -509,4 +507,7 @@ public interface PortletItemPersistence extends BasePersistence<PortletItem> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public PortletItem remove(PortletItem portletItem)
+		throws SystemException;
 }

@@ -268,9 +268,8 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	/**
 	 * Removes the email address from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the email address to remove
+	 * @param emailAddress the email address to remove
 	 * @return the email address that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a email address with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public EmailAddress remove(EmailAddress emailAddress)

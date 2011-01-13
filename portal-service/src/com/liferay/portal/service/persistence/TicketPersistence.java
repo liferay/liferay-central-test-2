@@ -35,7 +35,6 @@ public interface TicketPersistence extends BasePersistence<Ticket> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link TicketUtil} to access the ticket persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Ticket remove(Ticket ticket) throws SystemException;
 
 	/**
 	* Caches the ticket in the entity cache if it is enabled.
@@ -209,4 +208,6 @@ public interface TicketPersistence extends BasePersistence<Ticket> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Ticket remove(Ticket ticket) throws SystemException;
 }

@@ -209,9 +209,8 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	/**
 	 * Removes the list type from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the list type to remove
+	 * @param listType the list type to remove
 	 * @return the list type that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a list type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ListType remove(ListType listType) throws SystemException {

@@ -228,9 +228,8 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 	/**
 	 * Removes the layout prototype from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the layout prototype to remove
+	 * @param layoutPrototype the layout prototype to remove
 	 * @return the layout prototype that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a layout prototype with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public LayoutPrototype remove(LayoutPrototype layoutPrototype)

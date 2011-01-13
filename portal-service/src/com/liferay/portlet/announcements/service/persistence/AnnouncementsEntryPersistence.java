@@ -37,8 +37,6 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AnnouncementsEntryUtil} to access the announcements entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public AnnouncementsEntry remove(AnnouncementsEntry announcementsEntry)
-		throws SystemException;
 
 	/**
 	* Caches the announcements entry in the entity cache if it is enabled.
@@ -924,4 +922,7 @@ public interface AnnouncementsEntryPersistence extends BasePersistence<Announcem
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public AnnouncementsEntry remove(AnnouncementsEntry announcementsEntry)
+		throws SystemException;
 }

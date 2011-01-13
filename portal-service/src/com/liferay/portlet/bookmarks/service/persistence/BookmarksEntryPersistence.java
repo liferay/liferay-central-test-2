@@ -37,8 +37,6 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BookmarksEntryUtil} to access the bookmarks entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public BookmarksEntry remove(BookmarksEntry bookmarksEntry)
-		throws SystemException;
 
 	/**
 	* Caches the bookmarks entry in the entity cache if it is enabled.
@@ -1047,4 +1045,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public BookmarksEntry remove(BookmarksEntry bookmarksEntry)
+		throws SystemException;
 }

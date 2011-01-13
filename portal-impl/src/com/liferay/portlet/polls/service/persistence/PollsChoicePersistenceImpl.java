@@ -253,9 +253,8 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 	/**
 	 * Removes the polls choice from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the polls choice to remove
+	 * @param pollsChoice the polls choice to remove
 	 * @return the polls choice that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a polls choice with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public PollsChoice remove(PollsChoice pollsChoice)

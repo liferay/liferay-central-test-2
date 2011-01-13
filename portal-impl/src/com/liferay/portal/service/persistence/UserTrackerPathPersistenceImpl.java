@@ -213,9 +213,8 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 	/**
 	 * Removes the user tracker path from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the user tracker path to remove
+	 * @param userTrackerPath the user tracker path to remove
 	 * @return the user tracker path that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a user tracker path with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserTrackerPath remove(UserTrackerPath userTrackerPath)

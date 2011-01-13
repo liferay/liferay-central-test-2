@@ -37,8 +37,6 @@ public interface MBStatsUserPersistence extends BasePersistence<MBStatsUser> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MBStatsUserUtil} to access the message boards stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public MBStatsUser remove(MBStatsUser mbStatsUser)
-		throws SystemException;
 
 	/**
 	* Caches the message boards stats user in the entity cache if it is enabled.
@@ -605,4 +603,7 @@ public interface MBStatsUserPersistence extends BasePersistence<MBStatsUser> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public MBStatsUser remove(MBStatsUser mbStatsUser)
+		throws SystemException;
 }

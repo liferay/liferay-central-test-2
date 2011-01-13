@@ -37,7 +37,6 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MBMessageUtil} to access the message-boards message persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public MBMessage remove(MBMessage mbMessage) throws SystemException;
 
 	/**
 	* Caches the message-boards message in the entity cache if it is enabled.
@@ -3240,4 +3239,6 @@ public interface MBMessagePersistence extends BasePersistence<MBMessage> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public MBMessage remove(MBMessage mbMessage) throws SystemException;
 }

@@ -37,8 +37,6 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	 *
 	 * Never modify or reference this interface directly. Always use {@link JournalStructureUtil} to access the journal structure persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public JournalStructure remove(JournalStructure journalStructure)
-		throws SystemException;
 
 	/**
 	* Caches the journal structure in the entity cache if it is enabled.
@@ -905,4 +903,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public JournalStructure remove(JournalStructure journalStructure)
+		throws SystemException;
 }

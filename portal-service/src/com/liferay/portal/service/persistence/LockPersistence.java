@@ -35,7 +35,6 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link LockUtil} to access the lock persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Lock remove(Lock lock) throws SystemException;
 
 	/**
 	* Caches the lock in the entity cache if it is enabled.
@@ -464,4 +463,6 @@ public interface LockPersistence extends BasePersistence<Lock> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Lock remove(Lock lock) throws SystemException;
 }

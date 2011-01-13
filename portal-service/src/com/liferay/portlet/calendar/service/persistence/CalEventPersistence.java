@@ -37,7 +37,6 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CalEventUtil} to access the cal event persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public CalEvent remove(CalEvent calEvent) throws SystemException;
 
 	/**
 	* Caches the cal event in the entity cache if it is enabled.
@@ -1161,4 +1160,6 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public CalEvent remove(CalEvent calEvent) throws SystemException;
 }

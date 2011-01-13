@@ -240,9 +240,8 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	/**
 	 * Removes the lock from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the lock to remove
+	 * @param lock the lock to remove
 	 * @return the lock that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a lock with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Lock remove(Lock lock) throws SystemException {

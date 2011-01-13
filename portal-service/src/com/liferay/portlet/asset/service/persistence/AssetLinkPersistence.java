@@ -37,7 +37,6 @@ public interface AssetLinkPersistence extends BasePersistence<AssetLink> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetLinkUtil} to access the asset link persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public AssetLink remove(AssetLink assetLink) throws SystemException;
 
 	/**
 	* Caches the asset link in the entity cache if it is enabled.
@@ -944,4 +943,6 @@ public interface AssetLinkPersistence extends BasePersistence<AssetLink> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public AssetLink remove(AssetLink assetLink) throws SystemException;
 }

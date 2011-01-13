@@ -35,7 +35,6 @@ public interface RegionPersistence extends BasePersistence<Region> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RegionUtil} to access the region persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Region remove(Region region) throws SystemException;
 
 	/**
 	* Caches the region in the entity cache if it is enabled.
@@ -534,4 +533,6 @@ public interface RegionPersistence extends BasePersistence<Region> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Region remove(Region region) throws SystemException;
 }

@@ -265,9 +265,8 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 	/**
 	 * Removes the d l file rank from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the d l file rank to remove
+	 * @param dlFileRank the d l file rank to remove
 	 * @return the d l file rank that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a d l file rank with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException {

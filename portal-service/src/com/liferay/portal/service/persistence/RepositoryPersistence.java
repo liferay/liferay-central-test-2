@@ -35,7 +35,6 @@ public interface RepositoryPersistence extends BasePersistence<Repository> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RepositoryUtil} to access the repository persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Repository remove(Repository repository) throws SystemException;
 
 	/**
 	* Caches the repository in the entity cache if it is enabled.
@@ -283,4 +282,6 @@ public interface RepositoryPersistence extends BasePersistence<Repository> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Repository remove(Repository repository) throws SystemException;
 }

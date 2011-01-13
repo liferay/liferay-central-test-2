@@ -284,9 +284,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 	/**
 	 * Removes the bookmarks entry from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the bookmarks entry to remove
+	 * @param bookmarksEntry the bookmarks entry to remove
 	 * @return the bookmarks entry that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a bookmarks entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public BookmarksEntry remove(BookmarksEntry bookmarksEntry)

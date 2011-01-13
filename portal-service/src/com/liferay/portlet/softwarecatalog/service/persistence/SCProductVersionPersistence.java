@@ -37,8 +37,6 @@ public interface SCProductVersionPersistence extends BasePersistence<SCProductVe
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SCProductVersionUtil} to access the s c product version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SCProductVersion remove(SCProductVersion scProductVersion)
-		throws SystemException;
 
 	/**
 	* Caches the s c product version in the entity cache if it is enabled.
@@ -536,4 +534,7 @@ public interface SCProductVersionPersistence extends BasePersistence<SCProductVe
 	public void setSCFrameworkVersions(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SCProductVersion remove(SCProductVersion scProductVersion)
+		throws SystemException;
 }

@@ -274,9 +274,8 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	/**
 	 * Removes the journal feed from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the journal feed to remove
+	 * @param journalFeed the journal feed to remove
 	 * @return the journal feed that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a journal feed with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public JournalFeed remove(JournalFeed journalFeed)

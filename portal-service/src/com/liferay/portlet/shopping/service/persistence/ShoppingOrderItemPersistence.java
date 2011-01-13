@@ -37,8 +37,6 @@ public interface ShoppingOrderItemPersistence extends BasePersistence<ShoppingOr
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ShoppingOrderItemUtil} to access the shopping order item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ShoppingOrderItem remove(ShoppingOrderItem shoppingOrderItem)
-		throws SystemException;
 
 	/**
 	* Caches the shopping order item in the entity cache if it is enabled.
@@ -290,4 +288,7 @@ public interface ShoppingOrderItemPersistence extends BasePersistence<ShoppingOr
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ShoppingOrderItem remove(ShoppingOrderItem shoppingOrderItem)
+		throws SystemException;
 }

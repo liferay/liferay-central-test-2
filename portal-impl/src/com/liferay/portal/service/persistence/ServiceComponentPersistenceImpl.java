@@ -234,9 +234,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	/**
 	 * Removes the service component from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the service component to remove
+	 * @param serviceComponent the service component to remove
 	 * @return the service component that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a service component with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ServiceComponent remove(ServiceComponent serviceComponent)

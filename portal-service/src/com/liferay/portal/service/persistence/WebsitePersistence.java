@@ -35,7 +35,6 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link WebsiteUtil} to access the website persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Website remove(Website website) throws SystemException;
 
 	/**
 	* Caches the website in the entity cache if it is enabled.
@@ -826,4 +825,6 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Website remove(Website website) throws SystemException;
 }

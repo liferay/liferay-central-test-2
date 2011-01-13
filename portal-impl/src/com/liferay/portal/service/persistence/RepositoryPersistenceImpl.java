@@ -211,9 +211,8 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	/**
 	 * Removes the repository from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the repository to remove
+	 * @param repository the repository to remove
 	 * @return the repository that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a repository with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Repository remove(Repository repository) throws SystemException {

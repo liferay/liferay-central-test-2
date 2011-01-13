@@ -37,8 +37,6 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetTagPropertyUtil} to access the asset tag property persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public AssetTagProperty remove(AssetTagProperty assetTagProperty)
-		throws SystemException;
 
 	/**
 	* Caches the asset tag property in the entity cache if it is enabled.
@@ -605,4 +603,7 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public AssetTagProperty remove(AssetTagProperty assetTagProperty)
+		throws SystemException;
 }

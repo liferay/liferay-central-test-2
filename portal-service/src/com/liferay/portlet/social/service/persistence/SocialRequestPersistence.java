@@ -37,8 +37,6 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialRequestUtil} to access the social request persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SocialRequest remove(SocialRequest socialRequest)
-		throws SystemException;
 
 	/**
 	* Caches the social request in the entity cache if it is enabled.
@@ -1387,4 +1385,7 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SocialRequest remove(SocialRequest socialRequest)
+		throws SystemException;
 }

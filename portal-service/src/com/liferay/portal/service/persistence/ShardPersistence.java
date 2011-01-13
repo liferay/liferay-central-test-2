@@ -35,7 +35,6 @@ public interface ShardPersistence extends BasePersistence<Shard> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ShardUtil} to access the shard persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Shard remove(Shard shard) throws SystemException;
 
 	/**
 	* Caches the shard in the entity cache if it is enabled.
@@ -269,4 +268,6 @@ public interface ShardPersistence extends BasePersistence<Shard> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Shard remove(Shard shard) throws SystemException;
 }

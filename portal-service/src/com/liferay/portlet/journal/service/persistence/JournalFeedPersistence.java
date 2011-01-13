@@ -37,8 +37,6 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link JournalFeedUtil} to access the journal feed persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public JournalFeed remove(JournalFeed journalFeed)
-		throws SystemException;
 
 	/**
 	* Caches the journal feed in the entity cache if it is enabled.
@@ -587,4 +585,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public JournalFeed remove(JournalFeed journalFeed)
+		throws SystemException;
 }

@@ -278,9 +278,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	/**
 	 * Removes the message boards category from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the message boards category to remove
+	 * @param mbCategory the message boards category to remove
 	 * @return the message boards category that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a message boards category with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBCategory remove(MBCategory mbCategory) throws SystemException {

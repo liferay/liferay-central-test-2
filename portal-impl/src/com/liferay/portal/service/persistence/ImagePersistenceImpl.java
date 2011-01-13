@@ -209,9 +209,8 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	/**
 	 * Removes the image from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the image to remove
+	 * @param image the image to remove
 	 * @return the image that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Image remove(Image image) throws SystemException {

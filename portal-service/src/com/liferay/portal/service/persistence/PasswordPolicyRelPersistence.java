@@ -35,8 +35,6 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PasswordPolicyRelUtil} to access the password policy rel persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public PasswordPolicyRel remove(PasswordPolicyRel passwordPolicyRel)
-		throws SystemException;
 
 	/**
 	* Caches the password policy rel in the entity cache if it is enabled.
@@ -416,4 +414,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public PasswordPolicyRel remove(PasswordPolicyRel passwordPolicyRel)
+		throws SystemException;
 }

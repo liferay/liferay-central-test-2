@@ -35,7 +35,6 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link TeamUtil} to access the team persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Team remove(Team team) throws SystemException;
 
 	/**
 	* Caches the team in the entity cache if it is enabled.
@@ -583,4 +582,6 @@ public interface TeamPersistence extends BasePersistence<Team> {
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Team remove(Team team) throws SystemException;
 }

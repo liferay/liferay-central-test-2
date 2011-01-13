@@ -37,8 +37,6 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SCProductEntryUtil} to access the s c product entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SCProductEntry remove(SCProductEntry scProductEntry)
-		throws SystemException;
 
 	/**
 	* Caches the s c product entry in the entity cache if it is enabled.
@@ -918,4 +916,7 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	public void setSCLicenses(long pk,
 		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SCProductEntry remove(SCProductEntry scProductEntry)
+		throws SystemException;
 }

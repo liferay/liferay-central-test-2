@@ -37,7 +37,6 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetEntryUtil} to access the asset entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public AssetEntry remove(AssetEntry assetEntry) throws SystemException;
 
 	/**
 	* Caches the asset entry in the entity cache if it is enabled.
@@ -788,4 +787,6 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	public void setAssetTags(long pk,
 		java.util.List<com.liferay.portlet.asset.model.AssetTag> assetTags)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public AssetEntry remove(AssetEntry assetEntry) throws SystemException;
 }

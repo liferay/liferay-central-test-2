@@ -35,8 +35,6 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link UserIdMapperUtil} to access the user ID mapper persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public UserIdMapper remove(UserIdMapper userIdMapper)
-		throws SystemException;
 
 	/**
 	* Caches the user ID mapper in the entity cache if it is enabled.
@@ -405,4 +403,7 @@ public interface UserIdMapperPersistence extends BasePersistence<UserIdMapper> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public UserIdMapper remove(UserIdMapper userIdMapper)
+		throws SystemException;
 }

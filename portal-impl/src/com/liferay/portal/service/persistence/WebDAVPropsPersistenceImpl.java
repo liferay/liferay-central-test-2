@@ -217,9 +217,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 	/**
 	 * Removes the web d a v props from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the web d a v props to remove
+	 * @param webDAVProps the web d a v props to remove
 	 * @return the web d a v props that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a web d a v props with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public WebDAVProps remove(WebDAVProps webDAVProps)

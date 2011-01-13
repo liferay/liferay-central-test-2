@@ -37,9 +37,6 @@ public interface SocialEquityAssetEntryPersistence extends BasePersistence<Socia
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialEquityAssetEntryUtil} to access the social equity asset entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SocialEquityAssetEntry remove(
-		SocialEquityAssetEntry socialEquityAssetEntry)
-		throws SystemException;
 
 	/**
 	* Caches the social equity asset entry in the entity cache if it is enabled.
@@ -222,4 +219,8 @@ public interface SocialEquityAssetEntryPersistence extends BasePersistence<Socia
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SocialEquityAssetEntry remove(
+		SocialEquityAssetEntry socialEquityAssetEntry)
+		throws SystemException;
 }

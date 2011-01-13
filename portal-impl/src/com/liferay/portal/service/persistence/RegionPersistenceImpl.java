@@ -234,9 +234,8 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	/**
 	 * Removes the region from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the region to remove
+	 * @param region the region to remove
 	 * @return the region that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a region with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Region remove(Region region) throws SystemException {

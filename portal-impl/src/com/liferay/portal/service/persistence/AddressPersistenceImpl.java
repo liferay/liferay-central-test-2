@@ -283,9 +283,8 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 	/**
 	 * Removes the address from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the address to remove
+	 * @param address the address to remove
 	 * @return the address that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a address with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Address remove(Address address) throws SystemException {

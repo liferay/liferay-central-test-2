@@ -37,8 +37,6 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DLFileEntryUtil} to access the d l file entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public DLFileEntry remove(DLFileEntry dlFileEntry)
-		throws SystemException;
 
 	/**
 	* Caches the d l file entry in the entity cache if it is enabled.
@@ -1647,4 +1645,7 @@ public interface DLFileEntryPersistence extends BasePersistence<DLFileEntry> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public DLFileEntry remove(DLFileEntry dlFileEntry)
+		throws SystemException;
 }

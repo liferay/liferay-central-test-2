@@ -35,7 +35,6 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ReleaseUtil} to access the release persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Release remove(Release release) throws SystemException;
 
 	/**
 	* Caches the release in the entity cache if it is enabled.
@@ -211,4 +210,6 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Release remove(Release release) throws SystemException;
 }

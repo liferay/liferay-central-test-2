@@ -37,8 +37,6 @@ public interface SocialActivityPersistence extends BasePersistence<SocialActivit
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialActivityUtil} to access the social activity persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SocialActivity remove(SocialActivity socialActivity)
-		throws SystemException;
 
 	/**
 	* Caches the social activity in the entity cache if it is enabled.
@@ -1207,4 +1205,7 @@ public interface SocialActivityPersistence extends BasePersistence<SocialActivit
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SocialActivity remove(SocialActivity socialActivity)
+		throws SystemException;
 }

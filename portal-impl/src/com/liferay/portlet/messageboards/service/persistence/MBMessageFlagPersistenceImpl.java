@@ -313,9 +313,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 	/**
 	 * Removes the message boards message flag from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the message boards message flag to remove
+	 * @param mbMessageFlag the message boards message flag to remove
 	 * @return the message boards message flag that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a message boards message flag with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBMessageFlag remove(MBMessageFlag mbMessageFlag)

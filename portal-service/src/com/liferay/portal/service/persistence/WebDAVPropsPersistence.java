@@ -35,8 +35,6 @@ public interface WebDAVPropsPersistence extends BasePersistence<WebDAVProps> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link WebDAVPropsUtil} to access the web d a v props persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public WebDAVProps remove(WebDAVProps webDAVProps)
-		throws SystemException;
 
 	/**
 	* Caches the web d a v props in the entity cache if it is enabled.
@@ -220,4 +218,7 @@ public interface WebDAVPropsPersistence extends BasePersistence<WebDAVProps> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public WebDAVProps remove(WebDAVProps webDAVProps)
+		throws SystemException;
 }

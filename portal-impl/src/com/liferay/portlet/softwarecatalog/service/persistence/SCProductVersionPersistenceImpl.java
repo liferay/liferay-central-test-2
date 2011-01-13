@@ -241,9 +241,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 	/**
 	 * Removes the s c product version from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the s c product version to remove
+	 * @param scProductVersion the s c product version to remove
 	 * @return the s c product version that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a s c product version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public SCProductVersion remove(SCProductVersion scProductVersion)

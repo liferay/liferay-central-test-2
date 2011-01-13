@@ -256,9 +256,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 	/**
 	 * Removes the tasks proposal from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the tasks proposal to remove
+	 * @param tasksProposal the tasks proposal to remove
 	 * @return the tasks proposal that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a tasks proposal with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public TasksProposal remove(TasksProposal tasksProposal)

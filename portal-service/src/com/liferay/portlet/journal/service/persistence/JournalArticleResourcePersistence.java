@@ -37,9 +37,6 @@ public interface JournalArticleResourcePersistence extends BasePersistence<Journ
 	 *
 	 * Never modify or reference this interface directly. Always use {@link JournalArticleResourceUtil} to access the journal article resource persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public JournalArticleResource remove(
-		JournalArticleResource journalArticleResource)
-		throws SystemException;
 
 	/**
 	* Caches the journal article resource in the entity cache if it is enabled.
@@ -535,4 +532,8 @@ public interface JournalArticleResourcePersistence extends BasePersistence<Journ
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public JournalArticleResource remove(
+		JournalArticleResource journalArticleResource)
+		throws SystemException;
 }

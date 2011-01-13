@@ -35,8 +35,6 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link UserTrackerUtil} to access the user tracker persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public UserTracker remove(UserTracker userTracker)
-		throws SystemException;
 
 	/**
 	* Caches the user tracker in the entity cache if it is enabled.
@@ -530,4 +528,7 @@ public interface UserTrackerPersistence extends BasePersistence<UserTracker> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public UserTracker remove(UserTracker userTracker)
+		throws SystemException;
 }

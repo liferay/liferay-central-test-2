@@ -233,9 +233,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 	/**
 	 * Removes the expando row from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the expando row to remove
+	 * @param expandoRow the expando row to remove
 	 * @return the expando row that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a expando row with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ExpandoRow remove(ExpandoRow expandoRow) throws SystemException {

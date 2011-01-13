@@ -202,9 +202,8 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 	/**
 	 * Removes the social equity history from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the social equity history to remove
+	 * @param socialEquityHistory the social equity history to remove
 	 * @return the social equity history that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a social equity history with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public SocialEquityHistory remove(SocialEquityHistory socialEquityHistory)

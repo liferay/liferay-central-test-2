@@ -395,9 +395,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	/**
 	 * Removes the user from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the user to remove
+	 * @param user the user to remove
 	 * @return the user that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public User remove(User user) throws SystemException {

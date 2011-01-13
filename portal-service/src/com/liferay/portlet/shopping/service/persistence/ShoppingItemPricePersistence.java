@@ -37,8 +37,6 @@ public interface ShoppingItemPricePersistence extends BasePersistence<ShoppingIt
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ShoppingItemPriceUtil} to access the shopping item price persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ShoppingItemPrice remove(ShoppingItemPrice shoppingItemPrice)
-		throws SystemException;
 
 	/**
 	* Caches the shopping item price in the entity cache if it is enabled.
@@ -289,4 +287,7 @@ public interface ShoppingItemPricePersistence extends BasePersistence<ShoppingIt
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ShoppingItemPrice remove(ShoppingItemPrice shoppingItemPrice)
+		throws SystemException;
 }

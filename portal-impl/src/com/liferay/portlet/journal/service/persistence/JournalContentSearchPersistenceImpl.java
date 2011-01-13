@@ -336,9 +336,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	/**
 	 * Removes the journal content search from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the journal content search to remove
+	 * @param journalContentSearch the journal content search to remove
 	 * @return the journal content search that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a journal content search with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public JournalContentSearch remove(

@@ -37,7 +37,6 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DLFileRankUtil} to access the d l file rank persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException;
 
 	/**
 	* Caches the d l file rank in the entity cache if it is enabled.
@@ -609,4 +608,6 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException;
 }

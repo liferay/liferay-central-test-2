@@ -37,8 +37,6 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BlogsStatsUserUtil} to access the blogs stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public BlogsStatsUser remove(BlogsStatsUser blogsStatsUser)
-		throws SystemException;
 
 	/**
 	* Caches the blogs stats user in the entity cache if it is enabled.
@@ -869,4 +867,7 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public BlogsStatsUser remove(BlogsStatsUser blogsStatsUser)
+		throws SystemException;
 }

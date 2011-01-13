@@ -37,7 +37,6 @@ public interface IGImagePersistence extends BasePersistence<IGImage> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link IGImageUtil} to access the i g image persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public IGImage remove(IGImage igImage) throws SystemException;
 
 	/**
 	* Caches the i g image in the entity cache if it is enabled.
@@ -1469,4 +1468,6 @@ public interface IGImagePersistence extends BasePersistence<IGImage> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public IGImage remove(IGImage igImage) throws SystemException;
 }

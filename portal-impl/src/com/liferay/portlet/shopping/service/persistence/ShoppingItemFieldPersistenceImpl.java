@@ -216,9 +216,8 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	/**
 	 * Removes the shopping item field from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the shopping item field to remove
+	 * @param shoppingItemField the shopping item field to remove
 	 * @return the shopping item field that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a shopping item field with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ShoppingItemField remove(ShoppingItemField shoppingItemField)

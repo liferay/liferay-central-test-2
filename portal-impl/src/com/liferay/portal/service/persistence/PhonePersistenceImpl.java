@@ -264,9 +264,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	/**
 	 * Removes the phone from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the phone to remove
+	 * @param phone the phone to remove
 	 * @return the phone that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a phone with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Phone remove(Phone phone) throws SystemException {

@@ -37,7 +37,6 @@ public interface CounterPersistence extends BasePersistence<Counter> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CounterUtil} to access the counter persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Counter remove(Counter counter) throws SystemException;
 
 	/**
 	* Caches the counter in the entity cache if it is enabled.
@@ -161,4 +160,6 @@ public interface CounterPersistence extends BasePersistence<Counter> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Counter remove(Counter counter) throws SystemException;
 }

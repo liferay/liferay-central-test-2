@@ -35,7 +35,6 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ListTypeUtil} to access the list type persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ListType remove(ListType listType) throws SystemException;
 
 	/**
 	* Caches the list type in the entity cache if it is enabled.
@@ -281,4 +280,6 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ListType remove(ListType listType) throws SystemException;
 }

@@ -271,9 +271,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	/**
 	 * Removes the organization from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the organization to remove
+	 * @param organization the organization to remove
 	 * @return the organization that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a organization with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Organization remove(Organization organization)

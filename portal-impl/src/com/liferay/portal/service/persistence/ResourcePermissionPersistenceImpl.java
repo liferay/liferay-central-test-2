@@ -299,9 +299,8 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	/**
 	 * Removes the resource permission from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the resource permission to remove
+	 * @param resourcePermission the resource permission to remove
 	 * @return the resource permission that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a resource permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ResourcePermission remove(ResourcePermission resourcePermission)

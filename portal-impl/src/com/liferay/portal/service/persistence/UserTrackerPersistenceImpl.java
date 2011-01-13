@@ -233,9 +233,8 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	/**
 	 * Removes the user tracker from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the user tracker to remove
+	 * @param userTracker the user tracker to remove
 	 * @return the user tracker that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public UserTracker remove(UserTracker userTracker)

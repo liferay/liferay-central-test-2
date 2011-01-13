@@ -37,7 +37,6 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ExpandoRowUtil} to access the expando row persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ExpandoRow remove(ExpandoRow expandoRow) throws SystemException;
 
 	/**
 	* Caches the expando row in the entity cache if it is enabled.
@@ -345,4 +344,6 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ExpandoRow remove(ExpandoRow expandoRow) throws SystemException;
 }

@@ -305,9 +305,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	/**
 	 * Removes the cal event from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the cal event to remove
+	 * @param calEvent the cal event to remove
 	 * @return the cal event that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public CalEvent remove(CalEvent calEvent) throws SystemException {

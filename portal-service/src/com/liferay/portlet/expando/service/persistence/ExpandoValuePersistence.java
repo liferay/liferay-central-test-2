@@ -37,8 +37,6 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ExpandoValueUtil} to access the expando value persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ExpandoValue remove(ExpandoValue expandoValue)
-		throws SystemException;
 
 	/**
 	* Caches the expando value in the entity cache if it is enabled.
@@ -1328,4 +1326,7 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ExpandoValue remove(ExpandoValue expandoValue)
+		throws SystemException;
 }

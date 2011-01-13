@@ -496,9 +496,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	/**
 	 * Removes the message-boards message from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the message-boards message to remove
+	 * @param mbMessage the message-boards message to remove
 	 * @return the message-boards message that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBMessage remove(MBMessage mbMessage) throws SystemException {

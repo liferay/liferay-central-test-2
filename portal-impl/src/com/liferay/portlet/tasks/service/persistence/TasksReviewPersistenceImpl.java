@@ -293,9 +293,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 	/**
 	 * Removes the tasks review from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the tasks review to remove
+	 * @param tasksReview the tasks review to remove
 	 * @return the tasks review that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a tasks review with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public TasksReview remove(TasksReview tasksReview)

@@ -37,9 +37,6 @@ public interface SocialEquityGroupSettingPersistence extends BasePersistence<Soc
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialEquityGroupSettingUtil} to access the social equity group setting persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SocialEquityGroupSetting remove(
-		SocialEquityGroupSetting socialEquityGroupSetting)
-		throws SystemException;
 
 	/**
 	* Caches the social equity group setting in the entity cache if it is enabled.
@@ -232,4 +229,8 @@ public interface SocialEquityGroupSettingPersistence extends BasePersistence<Soc
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SocialEquityGroupSetting remove(
+		SocialEquityGroupSetting socialEquityGroupSetting)
+		throws SystemException;
 }

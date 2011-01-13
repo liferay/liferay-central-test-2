@@ -37,8 +37,6 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RatingsEntryUtil} to access the ratings entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public RatingsEntry remove(RatingsEntry ratingsEntry)
-		throws SystemException;
 
 	/**
 	* Caches the ratings entry in the entity cache if it is enabled.
@@ -361,4 +359,7 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public RatingsEntry remove(RatingsEntry ratingsEntry)
+		throws SystemException;
 }

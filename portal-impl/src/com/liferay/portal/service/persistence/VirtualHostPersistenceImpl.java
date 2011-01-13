@@ -231,9 +231,8 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 	/**
 	 * Removes the virtual host from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the virtual host to remove
+	 * @param virtualHost the virtual host to remove
 	 * @return the virtual host that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a virtual host with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public VirtualHost remove(VirtualHost virtualHost)

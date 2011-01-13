@@ -37,8 +37,6 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialRelationUtil} to access the social relation persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SocialRelation remove(SocialRelation socialRelation)
-		throws SystemException;
 
 	/**
 	* Caches the social relation in the entity cache if it is enabled.
@@ -1246,4 +1244,7 @@ public interface SocialRelationPersistence extends BasePersistence<SocialRelatio
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SocialRelation remove(SocialRelation socialRelation)
+		throws SystemException;
 }

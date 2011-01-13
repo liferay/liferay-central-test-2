@@ -209,9 +209,8 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 	/**
 	 * Removes the contact from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the contact to remove
+	 * @param contact the contact to remove
 	 * @return the contact that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a contact with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Contact remove(Contact contact) throws SystemException {

@@ -35,8 +35,6 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link VirtualHostUtil} to access the virtual host persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public VirtualHost remove(VirtualHost virtualHost)
-		throws SystemException;
 
 	/**
 	* Caches the virtual host in the entity cache if it is enabled.
@@ -275,4 +273,7 @@ public interface VirtualHostPersistence extends BasePersistence<VirtualHost> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public VirtualHost remove(VirtualHost virtualHost)
+		throws SystemException;
 }

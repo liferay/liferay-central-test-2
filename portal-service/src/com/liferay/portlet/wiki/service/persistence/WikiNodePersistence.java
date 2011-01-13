@@ -37,7 +37,6 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link WikiNodeUtil} to access the wiki node persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public WikiNode remove(WikiNode wikiNode) throws SystemException;
 
 	/**
 	* Caches the wiki node in the entity cache if it is enabled.
@@ -708,4 +707,6 @@ public interface WikiNodePersistence extends BasePersistence<WikiNode> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public WikiNode remove(WikiNode wikiNode) throws SystemException;
 }

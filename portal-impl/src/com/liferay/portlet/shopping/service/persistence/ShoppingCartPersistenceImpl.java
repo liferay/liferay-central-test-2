@@ -246,9 +246,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	/**
 	 * Removes the shopping cart from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the shopping cart to remove
+	 * @param shoppingCart the shopping cart to remove
 	 * @return the shopping cart that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a shopping cart with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ShoppingCart remove(ShoppingCart shoppingCart)

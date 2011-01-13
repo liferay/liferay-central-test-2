@@ -37,8 +37,6 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ShoppingItemUtil} to access the shopping item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ShoppingItem remove(ShoppingItem shoppingItem)
-		throws SystemException;
 
 	/**
 	* Caches the shopping item in the entity cache if it is enabled.
@@ -658,4 +656,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	*/
 	public boolean containsShoppingItemPrices(long pk)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ShoppingItem remove(ShoppingItem shoppingItem)
+		throws SystemException;
 }

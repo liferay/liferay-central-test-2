@@ -523,9 +523,8 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 	/**
 	 * Removes the wiki page from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the wiki page to remove
+	 * @param wikiPage the wiki page to remove
 	 * @return the wiki page that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a wiki page with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public WikiPage remove(WikiPage wikiPage) throws SystemException {

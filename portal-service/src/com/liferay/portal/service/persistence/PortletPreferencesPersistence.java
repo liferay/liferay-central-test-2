@@ -35,8 +35,6 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PortletPreferencesUtil} to access the portlet preferences persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public PortletPreferences remove(PortletPreferences portletPreferences)
-		throws SystemException;
 
 	/**
 	* Caches the portlet preferences in the entity cache if it is enabled.
@@ -632,4 +630,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public PortletPreferences remove(PortletPreferences portletPreferences)
+		throws SystemException;
 }

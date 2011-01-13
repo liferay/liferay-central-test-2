@@ -37,8 +37,6 @@ public interface RatingsStatsPersistence extends BasePersistence<RatingsStats> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RatingsStatsUtil} to access the ratings stats persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public RatingsStats remove(RatingsStats ratingsStats)
-		throws SystemException;
 
 	/**
 	* Caches the ratings stats in the entity cache if it is enabled.
@@ -224,4 +222,7 @@ public interface RatingsStatsPersistence extends BasePersistence<RatingsStats> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public RatingsStats remove(RatingsStats ratingsStats)
+		throws SystemException;
 }

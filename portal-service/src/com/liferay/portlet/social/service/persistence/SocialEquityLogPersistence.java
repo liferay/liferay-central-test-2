@@ -37,8 +37,6 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialEquityLogUtil} to access the social equity log persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SocialEquityLog remove(SocialEquityLog socialEquityLog)
-		throws SystemException;
 
 	/**
 	* Caches the social equity log in the entity cache if it is enabled.
@@ -1066,4 +1064,7 @@ public interface SocialEquityLogPersistence extends BasePersistence<SocialEquity
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SocialEquityLog remove(SocialEquityLog socialEquityLog)
+		throws SystemException;
 }

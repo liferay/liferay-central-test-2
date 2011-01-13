@@ -35,7 +35,6 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link LayoutUtil} to access the layout persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Layout remove(Layout layout) throws SystemException;
 
 	/**
 	* Caches the layout in the entity cache if it is enabled.
@@ -1442,4 +1441,6 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Layout remove(Layout layout) throws SystemException;
 }

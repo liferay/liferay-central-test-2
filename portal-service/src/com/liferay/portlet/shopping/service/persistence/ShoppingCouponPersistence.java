@@ -37,8 +37,6 @@ public interface ShoppingCouponPersistence extends BasePersistence<ShoppingCoupo
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ShoppingCouponUtil} to access the shopping coupon persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ShoppingCoupon remove(ShoppingCoupon shoppingCoupon)
-		throws SystemException;
 
 	/**
 	* Caches the shopping coupon in the entity cache if it is enabled.
@@ -345,4 +343,7 @@ public interface ShoppingCouponPersistence extends BasePersistence<ShoppingCoupo
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ShoppingCoupon remove(ShoppingCoupon shoppingCoupon)
+		throws SystemException;
 }

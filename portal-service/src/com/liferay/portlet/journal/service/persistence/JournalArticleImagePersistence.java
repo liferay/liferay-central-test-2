@@ -37,8 +37,6 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	 *
 	 * Never modify or reference this interface directly. Always use {@link JournalArticleImageUtil} to access the journal article image persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public JournalArticleImage remove(JournalArticleImage journalArticleImage)
-		throws SystemException;
 
 	/**
 	* Caches the journal article image in the entity cache if it is enabled.
@@ -648,4 +646,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public JournalArticleImage remove(JournalArticleImage journalArticleImage)
+		throws SystemException;
 }

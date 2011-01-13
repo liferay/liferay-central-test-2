@@ -37,8 +37,6 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetVocabularyUtil} to access the asset vocabulary persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public AssetVocabulary remove(AssetVocabulary assetVocabulary)
-		throws SystemException;
 
 	/**
 	* Caches the asset vocabulary in the entity cache if it is enabled.
@@ -715,4 +713,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public AssetVocabulary remove(AssetVocabulary assetVocabulary)
+		throws SystemException;
 }

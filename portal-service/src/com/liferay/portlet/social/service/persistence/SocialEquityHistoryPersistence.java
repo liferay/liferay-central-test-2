@@ -37,8 +37,6 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialEquityHistoryUtil} to access the social equity history persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SocialEquityHistory remove(SocialEquityHistory socialEquityHistory)
-		throws SystemException;
 
 	/**
 	* Caches the social equity history in the entity cache if it is enabled.
@@ -166,4 +164,7 @@ public interface SocialEquityHistoryPersistence extends BasePersistence<SocialEq
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SocialEquityHistory remove(SocialEquityHistory socialEquityHistory)
+		throws SystemException;
 }

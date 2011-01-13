@@ -35,8 +35,6 @@ public interface ResourceCodePersistence extends BasePersistence<ResourceCode> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ResourceCodeUtil} to access the resource code persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ResourceCode remove(ResourceCode resourceCode)
-		throws SystemException;
 
 	/**
 	* Caches the resource code in the entity cache if it is enabled.
@@ -471,4 +469,7 @@ public interface ResourceCodePersistence extends BasePersistence<ResourceCode> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ResourceCode remove(ResourceCode resourceCode)
+		throws SystemException;
 }

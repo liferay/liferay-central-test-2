@@ -37,8 +37,6 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ShoppingItemFieldUtil} to access the shopping item field persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ShoppingItemField remove(ShoppingItemField shoppingItemField)
-		throws SystemException;
 
 	/**
 	* Caches the shopping item field in the entity cache if it is enabled.
@@ -289,4 +287,7 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ShoppingItemField remove(ShoppingItemField shoppingItemField)
+		throws SystemException;
 }

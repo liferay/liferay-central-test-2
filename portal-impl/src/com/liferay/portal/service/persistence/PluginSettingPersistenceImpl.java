@@ -246,9 +246,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	/**
 	 * Removes the plugin setting from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the plugin setting to remove
+	 * @param pluginSetting the plugin setting to remove
 	 * @return the plugin setting that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a plugin setting with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public PluginSetting remove(PluginSetting pluginSetting)

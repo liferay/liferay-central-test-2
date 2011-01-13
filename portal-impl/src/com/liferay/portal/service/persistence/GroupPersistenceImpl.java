@@ -375,9 +375,8 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	/**
 	 * Removes the group from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the group to remove
+	 * @param group the group to remove
 	 * @return the group that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Group remove(Group group) throws SystemException {

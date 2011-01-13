@@ -37,7 +37,6 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MBBanUtil} to access the message boards ban persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public MBBan remove(MBBan mbBan) throws SystemException;
 
 	/**
 	* Caches the message boards ban in the entity cache if it is enabled.
@@ -591,4 +590,6 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public MBBan remove(MBBan mbBan) throws SystemException;
 }

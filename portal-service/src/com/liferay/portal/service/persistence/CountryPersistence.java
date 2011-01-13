@@ -35,7 +35,6 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CountryUtil} to access the country persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Country remove(Country country) throws SystemException;
 
 	/**
 	* Caches the country in the entity cache if it is enabled.
@@ -437,4 +436,6 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Country remove(Country country) throws SystemException;
 }

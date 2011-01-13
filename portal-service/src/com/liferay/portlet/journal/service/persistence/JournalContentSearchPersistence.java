@@ -37,8 +37,6 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	 *
 	 * Never modify or reference this interface directly. Always use {@link JournalContentSearchUtil} to access the journal content search persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public JournalContentSearch remove(
-		JournalContentSearch journalContentSearch) throws SystemException;
 
 	/**
 	* Caches the journal content search in the entity cache if it is enabled.
@@ -1077,4 +1075,7 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public JournalContentSearch remove(
+		JournalContentSearch journalContentSearch) throws SystemException;
 }

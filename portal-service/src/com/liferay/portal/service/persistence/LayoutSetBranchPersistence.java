@@ -35,8 +35,6 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	 *
 	 * Never modify or reference this interface directly. Always use {@link LayoutSetBranchUtil} to access the layout set branch persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public LayoutSetBranch remove(LayoutSetBranch layoutSetBranch)
-		throws SystemException;
 
 	/**
 	* Caches the layout set branch in the entity cache if it is enabled.
@@ -604,4 +602,7 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public LayoutSetBranch remove(LayoutSetBranch layoutSetBranch)
+		throws SystemException;
 }

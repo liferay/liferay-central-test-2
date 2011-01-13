@@ -37,8 +37,6 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence<AssetC
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetCategoryPropertyUtil} to access the asset category property persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public AssetCategoryProperty remove(
-		AssetCategoryProperty assetCategoryProperty) throws SystemException;
 
 	/**
 	* Caches the asset category property in the entity cache if it is enabled.
@@ -606,4 +604,7 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence<AssetC
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public AssetCategoryProperty remove(
+		AssetCategoryProperty assetCategoryProperty) throws SystemException;
 }

@@ -246,9 +246,8 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	/**
 	 * Removes the company from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the company to remove
+	 * @param company the company to remove
 	 * @return the company that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a company with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Company remove(Company company) throws SystemException {

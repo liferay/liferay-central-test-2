@@ -277,9 +277,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 	/**
 	 * Removes the wiki node from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the wiki node to remove
+	 * @param wikiNode the wiki node to remove
 	 * @return the wiki node that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a wiki node with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public WikiNode remove(WikiNode wikiNode) throws SystemException {

@@ -37,7 +37,6 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MBThreadUtil} to access the message boards thread persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public MBThread remove(MBThread mbThread) throws SystemException;
 
 	/**
 	* Caches the message boards thread in the entity cache if it is enabled.
@@ -1374,4 +1373,6 @@ public interface MBThreadPersistence extends BasePersistence<MBThread> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public MBThread remove(MBThread mbThread) throws SystemException;
 }

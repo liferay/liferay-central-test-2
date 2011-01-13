@@ -37,8 +37,6 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ExpandoTableUtil} to access the expando table persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ExpandoTable remove(ExpandoTable expandoTable)
-		throws SystemException;
 
 	/**
 	* Caches the expando table in the entity cache if it is enabled.
@@ -364,4 +362,7 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ExpandoTable remove(ExpandoTable expandoTable)
+		throws SystemException;
 }

@@ -35,8 +35,6 @@ public interface WorkflowInstanceLinkPersistence extends BasePersistence<Workflo
 	 *
 	 * Never modify or reference this interface directly. Always use {@link WorkflowInstanceLinkUtil} to access the workflow instance link persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public WorkflowInstanceLink remove(
-		WorkflowInstanceLink workflowInstanceLink) throws SystemException;
 
 	/**
 	* Caches the workflow instance link in the entity cache if it is enabled.
@@ -317,4 +315,7 @@ public interface WorkflowInstanceLinkPersistence extends BasePersistence<Workflo
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public WorkflowInstanceLink remove(
+		WorkflowInstanceLink workflowInstanceLink) throws SystemException;
 }

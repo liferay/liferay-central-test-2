@@ -35,7 +35,6 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PermissionUtil} to access the permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Permission remove(Permission permission) throws SystemException;
 
 	/**
 	* Caches the permission in the entity cache if it is enabled.
@@ -910,4 +909,6 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Permission remove(Permission permission) throws SystemException;
 }

@@ -37,8 +37,6 @@ public interface AnnouncementsDeliveryPersistence extends BasePersistence<Announ
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AnnouncementsDeliveryUtil} to access the announcements delivery persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public AnnouncementsDelivery remove(
-		AnnouncementsDelivery announcementsDelivery) throws SystemException;
 
 	/**
 	* Caches the announcements delivery in the entity cache if it is enabled.
@@ -349,4 +347,7 @@ public interface AnnouncementsDeliveryPersistence extends BasePersistence<Announ
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public AnnouncementsDelivery remove(
+		AnnouncementsDelivery announcementsDelivery) throws SystemException;
 }

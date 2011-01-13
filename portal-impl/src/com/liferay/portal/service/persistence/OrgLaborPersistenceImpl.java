@@ -209,9 +209,8 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 	/**
 	 * Removes the org labor from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the org labor to remove
+	 * @param orgLabor the org labor to remove
 	 * @return the org labor that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a org labor with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public OrgLabor remove(OrgLabor orgLabor) throws SystemException {

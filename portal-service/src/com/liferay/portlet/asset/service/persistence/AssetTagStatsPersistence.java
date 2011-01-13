@@ -37,8 +37,6 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetTagStatsUtil} to access the asset tag stats persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public AssetTagStats remove(AssetTagStats assetTagStats)
-		throws SystemException;
 
 	/**
 	* Caches the asset tag stats in the entity cache if it is enabled.
@@ -471,4 +469,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public AssetTagStats remove(AssetTagStats assetTagStats)
+		throws SystemException;
 }

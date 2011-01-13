@@ -37,7 +37,6 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BlogsEntryUtil} to access the blogs entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public BlogsEntry remove(BlogsEntry blogsEntry) throws SystemException;
 
 	/**
 	* Caches the blogs entry in the entity cache if it is enabled.
@@ -2621,4 +2620,6 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public BlogsEntry remove(BlogsEntry blogsEntry) throws SystemException;
 }

@@ -37,8 +37,6 @@ public interface PollsChoicePersistence extends BasePersistence<PollsChoice> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PollsChoiceUtil} to access the polls choice persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public PollsChoice remove(PollsChoice pollsChoice)
-		throws SystemException;
 
 	/**
 	* Caches the polls choice in the entity cache if it is enabled.
@@ -471,4 +469,7 @@ public interface PollsChoicePersistence extends BasePersistence<PollsChoice> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public PollsChoice remove(PollsChoice pollsChoice)
+		throws SystemException;
 }

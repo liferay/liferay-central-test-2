@@ -37,8 +37,6 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialEquityUserUtil} to access the social equity user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public SocialEquityUser remove(SocialEquityUser socialEquityUser)
-		throws SystemException;
 
 	/**
 	* Caches the social equity user in the entity cache if it is enabled.
@@ -852,4 +850,7 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public SocialEquityUser remove(SocialEquityUser socialEquityUser)
+		throws SystemException;
 }

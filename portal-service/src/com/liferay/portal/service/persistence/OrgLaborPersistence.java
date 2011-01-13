@@ -35,7 +35,6 @@ public interface OrgLaborPersistence extends BasePersistence<OrgLabor> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link OrgLaborUtil} to access the org labor persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public OrgLabor remove(OrgLabor orgLabor) throws SystemException;
 
 	/**
 	* Caches the org labor in the entity cache if it is enabled.
@@ -281,4 +280,6 @@ public interface OrgLaborPersistence extends BasePersistence<OrgLabor> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public OrgLabor remove(OrgLabor orgLabor) throws SystemException;
 }

@@ -35,7 +35,6 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link UserGroupUtil} to access the user group persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public UserGroup remove(UserGroup userGroup) throws SystemException;
 
 	/**
 	* Caches the user group in the entity cache if it is enabled.
@@ -970,4 +969,6 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public UserGroup remove(UserGroup userGroup) throws SystemException;
 }

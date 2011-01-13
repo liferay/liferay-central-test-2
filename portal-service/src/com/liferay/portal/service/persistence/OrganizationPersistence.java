@@ -35,8 +35,6 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link OrganizationUtil} to access the organization persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Organization remove(Organization organization)
-		throws SystemException;
 
 	/**
 	* Caches the organization in the entity cache if it is enabled.
@@ -1166,4 +1164,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	*/
 	public void rebuildTree(long companyId, boolean force)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Organization remove(Organization organization)
+		throws SystemException;
 }

@@ -37,8 +37,6 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ExpandoColumnUtil} to access the expando column persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ExpandoColumn remove(ExpandoColumn expandoColumn)
-		throws SystemException;
 
 	/**
 	* Caches the expando column in the entity cache if it is enabled.
@@ -405,4 +403,7 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ExpandoColumn remove(ExpandoColumn expandoColumn)
+		throws SystemException;
 }

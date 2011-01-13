@@ -35,8 +35,6 @@ public interface OrgGroupRolePersistence extends BasePersistence<OrgGroupRole> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link OrgGroupRoleUtil} to access the org group role persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public OrgGroupRole remove(OrgGroupRole orgGroupRole)
-		throws SystemException;
 
 	/**
 	* Caches the org group role in the entity cache if it is enabled.
@@ -411,4 +409,7 @@ public interface OrgGroupRolePersistence extends BasePersistence<OrgGroupRole> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public OrgGroupRole remove(OrgGroupRole orgGroupRole)
+		throws SystemException;
 }

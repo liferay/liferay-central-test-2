@@ -35,7 +35,6 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PhoneUtil} to access the phone persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Phone remove(Phone phone) throws SystemException;
 
 	/**
 	* Caches the phone in the entity cache if it is enabled.
@@ -825,4 +824,6 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Phone remove(Phone phone) throws SystemException;
 }

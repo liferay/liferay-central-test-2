@@ -240,9 +240,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 	/**
 	 * Removes the announcements delivery from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the announcements delivery to remove
+	 * @param announcementsDelivery the announcements delivery to remove
 	 * @return the announcements delivery that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a announcements delivery with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public AnnouncementsDelivery remove(

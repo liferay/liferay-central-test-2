@@ -355,9 +355,8 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 	/**
 	 * Removes the asset category from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the asset category to remove
+	 * @param assetCategory the asset category to remove
 	 * @return the asset category that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a asset category with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public AssetCategory remove(AssetCategory assetCategory)

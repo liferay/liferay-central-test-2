@@ -37,7 +37,6 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MBCategoryUtil} to access the message boards category persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public MBCategory remove(MBCategory mbCategory) throws SystemException;
 
 	/**
 	* Caches the message boards category in the entity cache if it is enabled.
@@ -977,4 +976,6 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public MBCategory remove(MBCategory mbCategory) throws SystemException;
 }

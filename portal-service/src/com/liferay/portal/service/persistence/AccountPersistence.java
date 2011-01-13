@@ -35,7 +35,6 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AccountUtil} to access the account persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Account remove(Account account) throws SystemException;
 
 	/**
 	* Caches the account in the entity cache if it is enabled.
@@ -156,4 +155,6 @@ public interface AccountPersistence extends BasePersistence<Account> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Account remove(Account account) throws SystemException;
 }

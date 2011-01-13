@@ -37,8 +37,6 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ShoppingCategoryUtil} to access the shopping category persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ShoppingCategory remove(ShoppingCategory shoppingCategory)
-		throws SystemException;
 
 	/**
 	* Caches the shopping category in the entity cache if it is enabled.
@@ -540,4 +538,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ShoppingCategory remove(ShoppingCategory shoppingCategory)
+		throws SystemException;
 }

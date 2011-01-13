@@ -378,9 +378,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	/**
 	 * Removes the layout from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the layout to remove
+	 * @param layout the layout to remove
 	 * @return the layout that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a layout with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Layout remove(Layout layout) throws SystemException {

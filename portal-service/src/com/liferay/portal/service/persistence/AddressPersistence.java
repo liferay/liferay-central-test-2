@@ -35,7 +35,6 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AddressUtil} to access the address persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Address remove(Address address) throws SystemException;
 
 	/**
 	* Caches the address in the entity cache if it is enabled.
@@ -979,4 +978,6 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Address remove(Address address) throws SystemException;
 }

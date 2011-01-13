@@ -226,9 +226,8 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl<OrgGr
 	/**
 	 * Removes the org group permission from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the org group permission to remove
+	 * @param orgGroupPermission the org group permission to remove
 	 * @return the org group permission that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a org group permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public OrgGroupPermission remove(OrgGroupPermission orgGroupPermission)

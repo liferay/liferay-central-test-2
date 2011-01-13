@@ -231,9 +231,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 	/**
 	 * Removes the shopping coupon from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the shopping coupon to remove
+	 * @param shoppingCoupon the shopping coupon to remove
 	 * @return the shopping coupon that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a shopping coupon with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ShoppingCoupon remove(ShoppingCoupon shoppingCoupon)

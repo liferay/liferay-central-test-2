@@ -255,9 +255,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 	/**
 	 * Removes the polls question from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the polls question to remove
+	 * @param pollsQuestion the polls question to remove
 	 * @return the polls question that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a polls question with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public PollsQuestion remove(PollsQuestion pollsQuestion)

@@ -35,8 +35,6 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link UserGroupRoleUtil} to access the user group role persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public UserGroupRole remove(UserGroupRole userGroupRole)
-		throws SystemException;
 
 	/**
 	* Caches the user group role in the entity cache if it is enabled.
@@ -802,4 +800,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public UserGroupRole remove(UserGroupRole userGroupRole)
+		throws SystemException;
 }

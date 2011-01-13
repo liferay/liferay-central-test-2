@@ -35,7 +35,6 @@ public interface ClassNamePersistence extends BasePersistence<ClassName> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ClassNameUtil} to access the class name persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public ClassName remove(ClassName className) throws SystemException;
 
 	/**
 	* Caches the class name in the entity cache if it is enabled.
@@ -213,4 +212,6 @@ public interface ClassNamePersistence extends BasePersistence<ClassName> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public ClassName remove(ClassName className) throws SystemException;
 }

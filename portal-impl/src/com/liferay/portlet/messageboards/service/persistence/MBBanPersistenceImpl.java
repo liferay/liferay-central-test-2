@@ -252,9 +252,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 	/**
 	 * Removes the message boards ban from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the message boards ban to remove
+	 * @param mbBan the message boards ban to remove
 	 * @return the message boards ban that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a message boards ban with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBBan remove(MBBan mbBan) throws SystemException {

@@ -255,9 +255,8 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 	/**
 	 * Removes the social equity setting from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the social equity setting to remove
+	 * @param socialEquitySetting the social equity setting to remove
 	 * @return the social equity setting that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a social equity setting with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public SocialEquitySetting remove(SocialEquitySetting socialEquitySetting)

@@ -353,9 +353,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 	/**
 	 * Removes the expando value from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the expando value to remove
+	 * @param expandoValue the expando value to remove
 	 * @return the expando value that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a expando value with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ExpandoValue remove(ExpandoValue expandoValue)

@@ -239,9 +239,8 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	/**
 	 * Removes the membership request from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the membership request to remove
+	 * @param membershipRequest the membership request to remove
 	 * @return the membership request that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a membership request with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MembershipRequest remove(MembershipRequest membershipRequest)

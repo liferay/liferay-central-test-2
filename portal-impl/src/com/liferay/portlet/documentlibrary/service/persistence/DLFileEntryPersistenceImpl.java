@@ -364,9 +364,8 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 	/**
 	 * Removes the d l file entry from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the d l file entry to remove
+	 * @param dlFileEntry the d l file entry to remove
 	 * @return the d l file entry that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a d l file entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public DLFileEntry remove(DLFileEntry dlFileEntry)

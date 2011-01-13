@@ -35,8 +35,6 @@ public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracke
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BrowserTrackerUtil} to access the browser tracker persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public BrowserTracker remove(BrowserTracker browserTracker)
-		throws SystemException;
 
 	/**
 	* Caches the browser tracker in the entity cache if it is enabled.
@@ -214,4 +212,7 @@ public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracke
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public BrowserTracker remove(BrowserTracker browserTracker)
+		throws SystemException;
 }

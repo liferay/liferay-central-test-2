@@ -340,9 +340,8 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	/**
 	 * Removes the social equity log from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the social equity log to remove
+	 * @param socialEquityLog the social equity log to remove
 	 * @return the social equity log that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public SocialEquityLog remove(SocialEquityLog socialEquityLog)

@@ -35,8 +35,6 @@ public interface MembershipRequestPersistence extends BasePersistence<Membership
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MembershipRequestUtil} to access the membership request persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public MembershipRequest remove(MembershipRequest membershipRequest)
-		throws SystemException;
 
 	/**
 	* Caches the membership request in the entity cache if it is enabled.
@@ -543,4 +541,7 @@ public interface MembershipRequestPersistence extends BasePersistence<Membership
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public MembershipRequest remove(MembershipRequest membershipRequest)
+		throws SystemException;
 }

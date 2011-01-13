@@ -37,7 +37,6 @@ public interface IGFolderPersistence extends BasePersistence<IGFolder> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link IGFolderUtil} to access the i g folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public IGFolder remove(IGFolder igFolder) throws SystemException;
 
 	/**
 	* Caches the i g folder in the entity cache if it is enabled.
@@ -912,4 +911,6 @@ public interface IGFolderPersistence extends BasePersistence<IGFolder> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public IGFolder remove(IGFolder igFolder) throws SystemException;
 }

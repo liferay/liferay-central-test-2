@@ -226,9 +226,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	/**
 	 * Removes the shard from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the shard to remove
+	 * @param shard the shard to remove
 	 * @return the shard that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a shard with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Shard remove(Shard shard) throws SystemException {

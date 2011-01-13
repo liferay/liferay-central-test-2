@@ -247,9 +247,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 	/**
 	 * Removes the message boards discussion from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the message boards discussion to remove
+	 * @param mbDiscussion the message boards discussion to remove
 	 * @return the message boards discussion that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a message boards discussion with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public MBDiscussion remove(MBDiscussion mbDiscussion)

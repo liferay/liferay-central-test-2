@@ -246,9 +246,8 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 	/**
 	 * Removes the country from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the country to remove
+	 * @param country the country to remove
 	 * @return the country that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a country with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public Country remove(Country country) throws SystemException {

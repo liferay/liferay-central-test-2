@@ -37,7 +37,6 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link WikiPageUtil} to access the wiki page persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public WikiPage remove(WikiPage wikiPage) throws SystemException;
 
 	/**
 	* Caches the wiki page in the entity cache if it is enabled.
@@ -2510,4 +2509,6 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public WikiPage remove(WikiPage wikiPage) throws SystemException;
 }

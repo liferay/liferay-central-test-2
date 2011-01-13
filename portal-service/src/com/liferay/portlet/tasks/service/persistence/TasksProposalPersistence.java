@@ -37,8 +37,6 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link TasksProposalUtil} to access the tasks proposal persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public TasksProposal remove(TasksProposal tasksProposal)
-		throws SystemException;
 
 	/**
 	* Caches the tasks proposal in the entity cache if it is enabled.
@@ -598,4 +596,7 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 	*/
 	public int countAll()
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public TasksProposal remove(TasksProposal tasksProposal)
+		throws SystemException;
 }

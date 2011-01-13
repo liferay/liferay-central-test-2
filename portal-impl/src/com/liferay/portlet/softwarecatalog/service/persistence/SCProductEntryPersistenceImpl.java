@@ -279,9 +279,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 	/**
 	 * Removes the s c product entry from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the s c product entry to remove
+	 * @param scProductEntry the s c product entry to remove
 	 * @return the s c product entry that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a s c product entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public SCProductEntry remove(SCProductEntry scProductEntry)

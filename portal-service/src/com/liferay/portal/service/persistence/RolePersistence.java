@@ -35,7 +35,6 @@ public interface RolePersistence extends BasePersistence<Role> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RoleUtil} to access the role persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
-	public Role remove(Role role) throws SystemException;
 
 	/**
 	* Caches the role in the entity cache if it is enabled.
@@ -1402,4 +1401,6 @@ public interface RolePersistence extends BasePersistence<Role> {
 	public void setUsers(long pk,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public Role remove(Role role) throws SystemException;
 }
