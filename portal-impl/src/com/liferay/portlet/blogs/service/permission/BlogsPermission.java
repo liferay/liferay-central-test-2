@@ -38,15 +38,17 @@ public class BlogsPermission {
 		PermissionChecker permissionChecker, long groupId, String actionId) {
 
 		Boolean hasPermission = StagingPermissionUtil.hasPermission(
-			permissionChecker, groupId, "com.liferay.portlet.blogs", groupId,
-			PortletKeys.BLOGS, actionId);
+			permissionChecker, groupId, _CLASS_NAME, groupId, PortletKeys.BLOGS,
+			actionId);
 
 		if (hasPermission != null) {
 			return hasPermission.booleanValue();
 		}
 
 		return permissionChecker.hasPermission(
-			groupId, "com.liferay.portlet.blogs", groupId, actionId);
+			groupId, _CLASS_NAME, groupId, actionId);
 	}
+
+	private static final String _CLASS_NAME = "com.liferay.portlet.blogs";
 
 }
