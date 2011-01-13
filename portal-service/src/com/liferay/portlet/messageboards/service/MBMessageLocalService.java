@@ -235,6 +235,8 @@ public interface MBMessageLocalService {
 		long userId, java.lang.String userName, long groupId,
 		java.lang.String className, long classPK, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
+		java.lang.String guestEmail, java.lang.String guestName,
+		java.lang.String guestURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -244,7 +246,9 @@ public interface MBMessageLocalService {
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body, java.lang.String format,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, double priority, boolean allowPingbacks,
+		boolean anonymous, java.lang.String guestEmail,
+		java.lang.String guestName, java.lang.String guestURL, double priority,
+		boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -254,7 +258,9 @@ public interface MBMessageLocalService {
 		java.lang.String subject, java.lang.String body,
 		java.lang.String format,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, double priority, boolean allowPingbacks,
+		boolean anonymous, java.lang.String guestEmail,
+		java.lang.String guestName, java.lang.String guestURL, double priority,
+		boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

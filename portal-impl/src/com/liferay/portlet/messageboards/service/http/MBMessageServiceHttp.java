@@ -59,6 +59,8 @@ public class MBMessageServiceHttp {
 		long classPK, java.lang.String permissionClassName,
 		long permissionClassPK, long permissionOwnerId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
+		java.lang.String guestEmail, java.lang.String guestName,
+		java.lang.String guestURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -69,7 +71,7 @@ public class MBMessageServiceHttp {
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, permissionClassName, permissionClassPK,
 					permissionOwnerId, threadId, parentMessageId, subject,
-					body, serviceContext);
+					body, guestEmail, guestName, guestURL, serviceContext);
 
 			Object returnObj = null;
 
@@ -102,7 +104,9 @@ public class MBMessageServiceHttp {
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body, java.lang.String format,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, double priority, boolean allowPingbacks,
+		boolean anonymous, java.lang.String guestEmail,
+		java.lang.String guestName, java.lang.String guestURL, double priority,
+		boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -112,8 +116,8 @@ public class MBMessageServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, threadId, parentMessageId, subject, body,
-					format, files, anonymous, priority, allowPingbacks,
-					serviceContext);
+					format, files, anonymous, guestEmail, guestName, guestURL,
+					priority, allowPingbacks, serviceContext);
 
 			Object returnObj = null;
 
@@ -146,7 +150,9 @@ public class MBMessageServiceHttp {
 		java.lang.String subject, java.lang.String body,
 		java.lang.String format,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, double priority, boolean allowPingbacks,
+		boolean anonymous, java.lang.String guestEmail,
+		java.lang.String guestName, java.lang.String guestURL, double priority,
+		boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -156,7 +162,8 @@ public class MBMessageServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					categoryId, subject, body, format, files, anonymous,
-					priority, allowPingbacks, serviceContext);
+					guestEmail, guestName, guestURL, priority, allowPingbacks,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -828,19 +835,23 @@ public class MBMessageServiceHttp {
 			long.class, java.lang.String.class, long.class,
 			java.lang.String.class, long.class, long.class, long.class,
 			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addMessageParameterTypes1 = new Class[] {
 			long.class, long.class, long.class, long.class,
 			java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, java.util.List.class, boolean.class,
-			double.class, boolean.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, double.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addMessageParameterTypes2 = new Class[] {
 			long.class, long.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class, java.util.List.class,
-			boolean.class, double.class, boolean.class,
+			boolean.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, double.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteDiscussionMessageParameterTypes3 = new Class[] {

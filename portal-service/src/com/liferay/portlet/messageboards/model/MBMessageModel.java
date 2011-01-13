@@ -189,6 +189,51 @@ public interface MBMessageModel extends BaseModel<MBMessage> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Gets the user email of this message-boards message.
+	 *
+	 * @return the user email of this message-boards message
+	 */
+	@AutoEscape
+	public String getUserEmail();
+
+	/**
+	 * Sets the user email of this message-boards message.
+	 *
+	 * @param userEmail the user email of this message-boards message
+	 */
+	public void setUserEmail(String userEmail);
+
+	/**
+	 * Gets the user i p of this message-boards message.
+	 *
+	 * @return the user i p of this message-boards message
+	 */
+	@AutoEscape
+	public String getUserIP();
+
+	/**
+	 * Sets the user i p of this message-boards message.
+	 *
+	 * @param userIP the user i p of this message-boards message
+	 */
+	public void setUserIP(String userIP);
+
+	/**
+	 * Gets the user u r l of this message-boards message.
+	 *
+	 * @return the user u r l of this message-boards message
+	 */
+	@AutoEscape
+	public String getUserURL();
+
+	/**
+	 * Sets the user u r l of this message-boards message.
+	 *
+	 * @param userURL the user u r l of this message-boards message
+	 */
+	public void setUserURL(String userURL);
+
+	/**
 	 * Gets the class name of the model instance this message-boards message is polymorphically associated with.
 	 *
 	 * @return the class name of the model instance this message-boards message is polymorphically associated with
