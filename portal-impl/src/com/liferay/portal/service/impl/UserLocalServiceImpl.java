@@ -68,11 +68,13 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.ResourceConstants;
@@ -101,6 +103,7 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.pwd.PwdAuthenticator;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
@@ -150,12 +153,22 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Set<Long> groupIdsSet = new HashSet<Long>();
 
+		long companyId = user.getCompanyId();
+
 		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
-			user.getCompanyId(), PropsKeys.ADMIN_DEFAULT_GROUP_NAMES,
-			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
+			companyId, PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
+			PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
 
 		for (String defaultGroupName : defaultGroupNames) {
 			try {
+				Company company = CompanyLocalServiceUtil.getCompany(companyId);
+
+				Account account = company.getAccount();
+
+				if (defaultGroupName.equals(account.getName())) {
+					defaultGroupName = GroupConstants.GUEST;
+				}
+
 				Group group = groupPersistence.findByC_N(
 					user.getCompanyId(), defaultGroupName);
 
