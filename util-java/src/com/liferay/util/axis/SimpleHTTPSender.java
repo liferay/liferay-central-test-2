@@ -18,9 +18,6 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InitialThreadLocal;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.SystemProperties;
 
 import java.io.InputStream;
@@ -36,17 +33,12 @@ import java.util.regex.Pattern;
 import org.apache.axis.AxisFault;
 import org.apache.axis.Message;
 import org.apache.axis.MessageContext;
-import org.apache.axis.transport.http.HTTPConstants;
 import org.apache.axis.transport.http.HTTPSender;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class SimpleHTTPSender extends HTTPSender {
-
-	public static String getCurrentCookie() {
-		return _currentCookie.get();
-	}
 
 	public void invoke(MessageContext ctx) throws AxisFault {
 		String url = ctx.getStrProp(MessageContext.TRANS_URL);
@@ -59,13 +51,7 @@ public class SimpleHTTPSender extends HTTPSender {
 			_invoke(ctx, url);
 		}
 		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug("No match was found for " + url);
-			}
-
 			super.invoke(ctx);
-
-			_registerCurrentCookie(ctx);
 		}
 	}
 
@@ -115,20 +101,6 @@ public class SimpleHTTPSender extends HTTPSender {
 		ctx.setResponseMessage(response);
 	}
 
-	private void _registerCurrentCookie(MessageContext ctx) {
-		String cookie = StringPool.BLANK;
-
-		try {
-			cookie = GetterUtil.getString(
-				ctx.getStrProp(HTTPConstants.HEADER_COOKIE));
-		}
-		catch (Throwable t) {
-			_log.warn(t);
-		}
-
-		_currentCookie.set(cookie);
-	}
-
 	private void _writeToConnection(URLConnection urlc, MessageContext ctx)
 		throws Exception {
 
@@ -154,9 +126,6 @@ public class SimpleHTTPSender extends HTTPSender {
 
 	private static Log _log = LogFactoryUtil.getLog(SimpleHTTPSender.class);
 
-	private static ThreadLocal<String> _currentCookie =
-		new InitialThreadLocal<String>(
-			SimpleHTTPSender.class + "._currentCookie", StringPool.BLANK);
 	private static Pattern _pattern = Pattern.compile(
 		SystemProperties.get(
 			SimpleHTTPSender.class.getName() + ".regexp.pattern"));
