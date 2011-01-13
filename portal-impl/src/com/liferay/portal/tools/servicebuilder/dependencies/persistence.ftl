@@ -30,6 +30,8 @@ public interface ${entity.name}Persistence extends BasePersistence<${entity.name
 	 * Never modify or reference this interface directly. Always use {@link ${entity.name}Util} to access the ${entity.humanName} persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
 
+	public ${entity.name} remove(${entity.name} ${entity.varName}) throws SystemException;
+
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method) && !serviceBuilder.isBasePersistenceMethod(method)>
 			${serviceBuilder.getJavadocComment(method)}
