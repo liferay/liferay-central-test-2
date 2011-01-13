@@ -130,6 +130,7 @@ if (row == null) {
 		<portlet:renderURL var="editImageURL">
 			<portlet:param name="struts_action" value="/image_gallery/edit_image" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
