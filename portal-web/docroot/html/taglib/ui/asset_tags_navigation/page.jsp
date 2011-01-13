@@ -100,12 +100,6 @@ private String _buildTagsNavigation(long groupId, String selectedTagName, Portle
 
 		int count = tag.getAssetCount();
 
-		if (classNameId > 0) {
-			AssetTagStats tagStats = AssetTagStatsLocalServiceUtil.getTagStats(tag.getTagId(), classNameId);
-
-			count = tagStats.getAssetCount();
-		}
-
 		int popularity = (int)(1 + ((maxCount - (maxCount - (count - minCount))) * multiplier));
 
 		if (!showZeroAssetCount && (count == 0)) {
