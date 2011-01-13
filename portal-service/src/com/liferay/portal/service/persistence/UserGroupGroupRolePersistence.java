@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.UserGroupGroupRole;
 
 /**
@@ -34,6 +35,8 @@ public interface UserGroupGroupRolePersistence extends BasePersistence<UserGroup
 	 *
 	 * Never modify or reference this interface directly. Always use {@link UserGroupGroupRoleUtil} to access the user group group role persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public UserGroupGroupRole remove(UserGroupGroupRole userGroupGroupRole)
+		throws SystemException;
 
 	/**
 	* Caches the user group group role in the entity cache if it is enabled.

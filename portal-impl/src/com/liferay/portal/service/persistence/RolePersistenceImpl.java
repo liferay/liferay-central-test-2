@@ -276,6 +276,18 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
+	/**
+	 * Removes the role from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the role to remove
+	 * @return the role that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Role remove(Role role) throws SystemException {
+		return super.remove(role);
+	}
+
 	protected Role removeImpl(Role role) throws SystemException {
 		role = toUnwrappedModel(role);
 

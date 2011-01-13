@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Organization;
 
 /**
@@ -34,6 +35,8 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link OrganizationUtil} to access the organization persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Organization remove(Organization organization)
+		throws SystemException;
 
 	/**
 	* Caches the organization in the entity cache if it is enabled.

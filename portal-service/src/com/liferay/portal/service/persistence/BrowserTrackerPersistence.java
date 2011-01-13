@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.BrowserTracker;
 
 /**
@@ -34,6 +35,8 @@ public interface BrowserTrackerPersistence extends BasePersistence<BrowserTracke
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BrowserTrackerUtil} to access the browser tracker persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public BrowserTracker remove(BrowserTracker browserTracker)
+		throws SystemException;
 
 	/**
 	* Caches the browser tracker in the entity cache if it is enabled.

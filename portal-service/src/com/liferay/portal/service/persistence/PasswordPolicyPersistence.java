@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.PasswordPolicy;
 
 /**
@@ -34,6 +35,8 @@ public interface PasswordPolicyPersistence extends BasePersistence<PasswordPolic
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PasswordPolicyUtil} to access the password policy persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public PasswordPolicy remove(PasswordPolicy passwordPolicy)
+		throws SystemException;
 
 	/**
 	* Caches the password policy in the entity cache if it is enabled.

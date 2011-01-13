@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.OrgLabor;
 
 /**
@@ -34,6 +35,7 @@ public interface OrgLaborPersistence extends BasePersistence<OrgLabor> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link OrgLaborUtil} to access the org labor persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public OrgLabor remove(OrgLabor orgLabor) throws SystemException;
 
 	/**
 	* Caches the org labor in the entity cache if it is enabled.

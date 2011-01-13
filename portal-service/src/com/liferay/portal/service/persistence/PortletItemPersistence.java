@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.PortletItem;
 
 /**
@@ -34,6 +35,8 @@ public interface PortletItemPersistence extends BasePersistence<PortletItem> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PortletItemUtil} to access the portlet item persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public PortletItem remove(PortletItem portletItem)
+		throws SystemException;
 
 	/**
 	* Caches the portlet item in the entity cache if it is enabled.

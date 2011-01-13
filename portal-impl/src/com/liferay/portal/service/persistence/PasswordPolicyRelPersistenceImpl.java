@@ -256,6 +256,19 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		}
 	}
 
+	/**
+	 * Removes the password policy rel from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the password policy rel to remove
+	 * @return the password policy rel that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a password policy rel with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PasswordPolicyRel remove(PasswordPolicyRel passwordPolicyRel)
+		throws SystemException {
+		return super.remove(passwordPolicyRel);
+	}
+
 	protected PasswordPolicyRel removeImpl(PasswordPolicyRel passwordPolicyRel)
 		throws SystemException {
 		passwordPolicyRel = toUnwrappedModel(passwordPolicyRel);

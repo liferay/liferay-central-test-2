@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.asset.model.AssetTagProperty;
@@ -36,6 +37,8 @@ public interface AssetTagPropertyPersistence extends BasePersistence<AssetTagPro
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetTagPropertyUtil} to access the asset tag property persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public AssetTagProperty remove(AssetTagProperty assetTagProperty)
+		throws SystemException;
 
 	/**
 	* Caches the asset tag property in the entity cache if it is enabled.

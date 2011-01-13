@@ -290,6 +290,19 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	/**
+	 * Removes the journal article image from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the journal article image to remove
+	 * @return the journal article image that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a journal article image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticleImage remove(JournalArticleImage journalArticleImage)
+		throws SystemException {
+		return super.remove(journalArticleImage);
+	}
+
 	protected JournalArticleImage removeImpl(
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage = toUnwrappedModel(journalArticleImage);

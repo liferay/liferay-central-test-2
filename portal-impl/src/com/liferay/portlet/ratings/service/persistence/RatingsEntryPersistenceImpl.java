@@ -241,6 +241,19 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		}
 	}
 
+	/**
+	 * Removes the ratings entry from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the ratings entry to remove
+	 * @return the ratings entry that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a ratings entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public RatingsEntry remove(RatingsEntry ratingsEntry)
+		throws SystemException {
+		return super.remove(ratingsEntry);
+	}
+
 	protected RatingsEntry removeImpl(RatingsEntry ratingsEntry)
 		throws SystemException {
 		ratingsEntry = toUnwrappedModel(ratingsEntry);

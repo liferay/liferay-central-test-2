@@ -313,6 +313,18 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		}
 	}
 
+	/**
+	 * Removes the d l folder from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the d l folder to remove
+	 * @return the d l folder that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a d l folder with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFolder remove(DLFolder dlFolder) throws SystemException {
+		return super.remove(dlFolder);
+	}
+
 	protected DLFolder removeImpl(DLFolder dlFolder) throws SystemException {
 		dlFolder = toUnwrappedModel(dlFolder);
 

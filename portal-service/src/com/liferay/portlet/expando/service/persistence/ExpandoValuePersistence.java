@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.expando.model.ExpandoValue;
@@ -36,6 +37,8 @@ public interface ExpandoValuePersistence extends BasePersistence<ExpandoValue> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ExpandoValueUtil} to access the expando value persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ExpandoValue remove(ExpandoValue expandoValue)
+		throws SystemException;
 
 	/**
 	* Caches the expando value in the entity cache if it is enabled.

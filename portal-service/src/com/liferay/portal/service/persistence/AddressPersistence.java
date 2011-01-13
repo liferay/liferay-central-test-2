@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Address;
 
 /**
@@ -34,6 +35,7 @@ public interface AddressPersistence extends BasePersistence<Address> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AddressUtil} to access the address persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Address remove(Address address) throws SystemException;
 
 	/**
 	* Caches the address in the entity cache if it is enabled.

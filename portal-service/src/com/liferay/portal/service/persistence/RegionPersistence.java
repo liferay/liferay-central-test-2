@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Region;
 
 /**
@@ -34,6 +35,7 @@ public interface RegionPersistence extends BasePersistence<Region> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RegionUtil} to access the region persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Region remove(Region region) throws SystemException;
 
 	/**
 	* Caches the region in the entity cache if it is enabled.

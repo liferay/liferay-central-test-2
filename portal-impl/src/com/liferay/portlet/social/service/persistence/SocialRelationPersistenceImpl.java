@@ -338,6 +338,19 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 		}
 	}
 
+	/**
+	 * Removes the social relation from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the social relation to remove
+	 * @return the social relation that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a social relation with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SocialRelation remove(SocialRelation socialRelation)
+		throws SystemException {
+		return super.remove(socialRelation);
+	}
+
 	protected SocialRelation removeImpl(SocialRelation socialRelation)
 		throws SystemException {
 		socialRelation = toUnwrappedModel(socialRelation);

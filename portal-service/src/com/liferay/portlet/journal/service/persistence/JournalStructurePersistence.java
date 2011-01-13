@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -36,6 +37,8 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	 *
 	 * Never modify or reference this interface directly. Always use {@link JournalStructureUtil} to access the journal structure persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public JournalStructure remove(JournalStructure journalStructure)
+		throws SystemException;
 
 	/**
 	* Caches the journal structure in the entity cache if it is enabled.

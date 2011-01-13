@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.social.model.SocialRequest;
@@ -36,6 +37,8 @@ public interface SocialRequestPersistence extends BasePersistence<SocialRequest>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialRequestUtil} to access the social request persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public SocialRequest remove(SocialRequest socialRequest)
+		throws SystemException;
 
 	/**
 	* Caches the social request in the entity cache if it is enabled.

@@ -304,6 +304,19 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		}
 	}
 
+	/**
+	 * Removes the journal structure from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the journal structure to remove
+	 * @return the journal structure that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a journal structure with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalStructure remove(JournalStructure journalStructure)
+		throws SystemException {
+		return super.remove(journalStructure);
+	}
+
 	protected JournalStructure removeImpl(JournalStructure journalStructure)
 		throws SystemException {
 		journalStructure = toUnwrappedModel(journalStructure);

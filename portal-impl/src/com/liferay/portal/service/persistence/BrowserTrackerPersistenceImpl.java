@@ -212,6 +212,19 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		}
 	}
 
+	/**
+	 * Removes the browser tracker from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the browser tracker to remove
+	 * @return the browser tracker that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a browser tracker with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public BrowserTracker remove(BrowserTracker browserTracker)
+		throws SystemException {
+		return super.remove(browserTracker);
+	}
+
 	protected BrowserTracker removeImpl(BrowserTracker browserTracker)
 		throws SystemException {
 		browserTracker = toUnwrappedModel(browserTracker);

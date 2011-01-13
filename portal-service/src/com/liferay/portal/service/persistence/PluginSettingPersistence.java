@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.PluginSetting;
 
 /**
@@ -34,6 +35,8 @@ public interface PluginSettingPersistence extends BasePersistence<PluginSetting>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PluginSettingUtil} to access the plugin setting persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public PluginSetting remove(PluginSetting pluginSetting)
+		throws SystemException;
 
 	/**
 	* Caches the plugin setting in the entity cache if it is enabled.

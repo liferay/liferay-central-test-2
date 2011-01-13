@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.asset.model.AssetCategoryProperty;
@@ -36,6 +37,8 @@ public interface AssetCategoryPropertyPersistence extends BasePersistence<AssetC
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetCategoryPropertyUtil} to access the asset category property persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public AssetCategoryProperty remove(
+		AssetCategoryProperty assetCategoryProperty) throws SystemException;
 
 	/**
 	* Caches the asset category property in the entity cache if it is enabled.

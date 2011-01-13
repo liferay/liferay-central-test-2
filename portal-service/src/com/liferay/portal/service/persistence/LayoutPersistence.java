@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Layout;
 
 /**
@@ -34,6 +35,7 @@ public interface LayoutPersistence extends BasePersistence<Layout> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link LayoutUtil} to access the layout persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Layout remove(Layout layout) throws SystemException;
 
 	/**
 	* Caches the layout in the entity cache if it is enabled.

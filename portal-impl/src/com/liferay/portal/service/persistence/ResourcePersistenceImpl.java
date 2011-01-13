@@ -222,6 +222,18 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		}
 	}
 
+	/**
+	 * Removes the resource from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the resource to remove
+	 * @return the resource that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a resource with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Resource remove(Resource resource) throws SystemException {
+		return super.remove(resource);
+	}
+
 	protected Resource removeImpl(Resource resource) throws SystemException {
 		resource = toUnwrappedModel(resource);
 

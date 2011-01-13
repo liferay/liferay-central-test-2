@@ -255,6 +255,19 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 		}
 	}
 
+	/**
+	 * Removes the message boards stats user from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the message boards stats user to remove
+	 * @return the message boards stats user that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a message boards stats user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MBStatsUser remove(MBStatsUser mbStatsUser)
+		throws SystemException {
+		return super.remove(mbStatsUser);
+	}
+
 	protected MBStatsUser removeImpl(MBStatsUser mbStatsUser)
 		throws SystemException {
 		mbStatsUser = toUnwrappedModel(mbStatsUser);

@@ -246,6 +246,19 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 		}
 	}
 
+	/**
+	 * Removes the asset tag stats from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the asset tag stats to remove
+	 * @return the asset tag stats that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a asset tag stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetTagStats remove(AssetTagStats assetTagStats)
+		throws SystemException {
+		return super.remove(assetTagStats);
+	}
+
 	protected AssetTagStats removeImpl(AssetTagStats assetTagStats)
 		throws SystemException {
 		assetTagStats = toUnwrappedModel(assetTagStats);

@@ -192,6 +192,18 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 		}
 	}
 
+	/**
+	 * Removes the account from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the account to remove
+	 * @return the account that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a account with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Account remove(Account account) throws SystemException {
+		return super.remove(account);
+	}
+
 	protected Account removeImpl(Account account) throws SystemException {
 		account = toUnwrappedModel(account);
 

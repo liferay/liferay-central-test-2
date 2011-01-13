@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.model.JournalFeed;
@@ -36,6 +37,8 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link JournalFeedUtil} to access the journal feed persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public JournalFeed remove(JournalFeed journalFeed)
+		throws SystemException;
 
 	/**
 	* Caches the journal feed in the entity cache if it is enabled.

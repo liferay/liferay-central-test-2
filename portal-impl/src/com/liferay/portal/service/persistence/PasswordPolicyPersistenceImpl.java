@@ -240,6 +240,19 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		}
 	}
 
+	/**
+	 * Removes the password policy from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the password policy to remove
+	 * @return the password policy that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a password policy with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PasswordPolicy remove(PasswordPolicy passwordPolicy)
+		throws SystemException {
+		return super.remove(passwordPolicy);
+	}
+
 	protected PasswordPolicy removeImpl(PasswordPolicy passwordPolicy)
 		throws SystemException {
 		passwordPolicy = toUnwrappedModel(passwordPolicy);

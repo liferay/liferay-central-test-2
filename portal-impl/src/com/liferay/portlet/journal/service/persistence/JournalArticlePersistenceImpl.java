@@ -459,6 +459,19 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		}
 	}
 
+	/**
+	 * Removes the journal article from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the journal article to remove
+	 * @return the journal article that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a journal article with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalArticle remove(JournalArticle journalArticle)
+		throws SystemException {
+		return super.remove(journalArticle);
+	}
+
 	protected JournalArticle removeImpl(JournalArticle journalArticle)
 		throws SystemException {
 		journalArticle = toUnwrappedModel(journalArticle);

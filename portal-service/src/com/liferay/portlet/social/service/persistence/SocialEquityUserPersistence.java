@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.social.model.SocialEquityUser;
@@ -36,6 +37,8 @@ public interface SocialEquityUserPersistence extends BasePersistence<SocialEquit
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialEquityUserUtil} to access the social equity user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public SocialEquityUser remove(SocialEquityUser socialEquityUser)
+		throws SystemException;
 
 	/**
 	* Caches the social equity user in the entity cache if it is enabled.

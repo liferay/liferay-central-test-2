@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
@@ -36,6 +37,8 @@ public interface AnnouncementsDeliveryPersistence extends BasePersistence<Announ
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AnnouncementsDeliveryUtil} to access the announcements delivery persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public AnnouncementsDelivery remove(
+		AnnouncementsDelivery announcementsDelivery) throws SystemException;
 
 	/**
 	* Caches the announcements delivery in the entity cache if it is enabled.

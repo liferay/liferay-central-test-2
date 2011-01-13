@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Resource;
 
 /**
@@ -34,6 +35,7 @@ public interface ResourcePersistence extends BasePersistence<Resource> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ResourceUtil} to access the resource persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Resource remove(Resource resource) throws SystemException;
 
 	/**
 	* Caches the resource in the entity cache if it is enabled.

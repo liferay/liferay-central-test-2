@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
@@ -36,6 +37,8 @@ public interface BlogsStatsUserPersistence extends BasePersistence<BlogsStatsUse
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BlogsStatsUserUtil} to access the blogs stats user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public BlogsStatsUser remove(BlogsStatsUser blogsStatsUser)
+		throws SystemException;
 
 	/**
 	* Caches the blogs stats user in the entity cache if it is enabled.

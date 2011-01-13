@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.tasks.model.TasksProposal;
@@ -36,6 +37,8 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link TasksProposalUtil} to access the tasks proposal persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public TasksProposal remove(TasksProposal tasksProposal)
+		throws SystemException;
 
 	/**
 	* Caches the tasks proposal in the entity cache if it is enabled.

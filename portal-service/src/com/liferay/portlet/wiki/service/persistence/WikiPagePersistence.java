@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -36,6 +37,7 @@ public interface WikiPagePersistence extends BasePersistence<WikiPage> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link WikiPageUtil} to access the wiki page persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public WikiPage remove(WikiPage wikiPage) throws SystemException;
 
 	/**
 	* Caches the wiki page in the entity cache if it is enabled.

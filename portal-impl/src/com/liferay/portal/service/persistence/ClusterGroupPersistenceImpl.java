@@ -194,6 +194,19 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 		}
 	}
 
+	/**
+	 * Removes the cluster group from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the cluster group to remove
+	 * @return the cluster group that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a cluster group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ClusterGroup remove(ClusterGroup clusterGroup)
+		throws SystemException {
+		return super.remove(clusterGroup);
+	}
+
 	protected ClusterGroup removeImpl(ClusterGroup clusterGroup)
 		throws SystemException {
 		clusterGroup = toUnwrappedModel(clusterGroup);

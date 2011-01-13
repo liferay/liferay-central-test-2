@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.UserGroup;
 
 /**
@@ -34,6 +35,7 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link UserGroupUtil} to access the user group persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public UserGroup remove(UserGroup userGroup) throws SystemException;
 
 	/**
 	* Caches the user group in the entity cache if it is enabled.

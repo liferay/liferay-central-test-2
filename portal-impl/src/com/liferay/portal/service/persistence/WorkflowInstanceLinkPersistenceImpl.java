@@ -214,6 +214,19 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		}
 	}
 
+	/**
+	 * Removes the workflow instance link from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the workflow instance link to remove
+	 * @return the workflow instance link that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a workflow instance link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public WorkflowInstanceLink remove(
+		WorkflowInstanceLink workflowInstanceLink) throws SystemException {
+		return super.remove(workflowInstanceLink);
+	}
+
 	protected WorkflowInstanceLink removeImpl(
 		WorkflowInstanceLink workflowInstanceLink) throws SystemException {
 		workflowInstanceLink = toUnwrappedModel(workflowInstanceLink);

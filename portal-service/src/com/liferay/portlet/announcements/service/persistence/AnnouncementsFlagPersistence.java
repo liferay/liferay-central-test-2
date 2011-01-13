@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
@@ -36,6 +37,8 @@ public interface AnnouncementsFlagPersistence extends BasePersistence<Announceme
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AnnouncementsFlagUtil} to access the announcements flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public AnnouncementsFlag remove(AnnouncementsFlag announcementsFlag)
+		throws SystemException;
 
 	/**
 	* Caches the announcements flag in the entity cache if it is enabled.

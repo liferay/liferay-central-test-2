@@ -348,6 +348,19 @@ public class SocialActivityPersistenceImpl extends BasePersistenceImpl<SocialAct
 		}
 	}
 
+	/**
+	 * Removes the social activity from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the social activity to remove
+	 * @return the social activity that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a social activity with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SocialActivity remove(SocialActivity socialActivity)
+		throws SystemException {
+		return super.remove(socialActivity);
+	}
+
 	protected SocialActivity removeImpl(SocialActivity socialActivity)
 		throws SystemException {
 		socialActivity = toUnwrappedModel(socialActivity);

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.EmailAddress;
 
 /**
@@ -34,6 +35,8 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link EmailAddressUtil} to access the email address persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public EmailAddress remove(EmailAddress emailAddress)
+		throws SystemException;
 
 	/**
 	* Caches the email address in the entity cache if it is enabled.

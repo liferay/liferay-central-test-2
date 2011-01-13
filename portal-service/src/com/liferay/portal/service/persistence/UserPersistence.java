@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.User;
 
 /**
@@ -34,6 +35,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link UserUtil} to access the user persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public User remove(User user) throws SystemException;
 
 	/**
 	* Caches the user in the entity cache if it is enabled.

@@ -269,6 +269,19 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		}
 	}
 
+	/**
+	 * Removes the subscription from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the subscription to remove
+	 * @return the subscription that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a subscription with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Subscription remove(Subscription subscription)
+		throws SystemException {
+		return super.remove(subscription);
+	}
+
 	protected Subscription removeImpl(Subscription subscription)
 		throws SystemException {
 		subscription = toUnwrappedModel(subscription);

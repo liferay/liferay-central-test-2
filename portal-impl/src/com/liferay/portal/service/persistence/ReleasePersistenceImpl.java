@@ -207,6 +207,18 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		}
 	}
 
+	/**
+	 * Removes the release from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the release to remove
+	 * @return the release that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a release with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Release remove(Release release) throws SystemException {
+		return super.remove(release);
+	}
+
 	protected Release removeImpl(Release release) throws SystemException {
 		release = toUnwrappedModel(release);
 

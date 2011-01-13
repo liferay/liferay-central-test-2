@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.LayoutSetPrototype;
 
 /**
@@ -34,6 +35,8 @@ public interface LayoutSetPrototypePersistence extends BasePersistence<LayoutSet
 	 *
 	 * Never modify or reference this interface directly. Always use {@link LayoutSetPrototypeUtil} to access the layout set prototype persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public LayoutSetPrototype remove(LayoutSetPrototype layoutSetPrototype)
+		throws SystemException;
 
 	/**
 	* Caches the layout set prototype in the entity cache if it is enabled.

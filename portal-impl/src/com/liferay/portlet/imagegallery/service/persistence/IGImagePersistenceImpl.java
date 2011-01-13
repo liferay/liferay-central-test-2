@@ -342,6 +342,18 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		}
 	}
 
+	/**
+	 * Removes the i g image from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the i g image to remove
+	 * @return the i g image that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a i g image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public IGImage remove(IGImage igImage) throws SystemException {
+		return super.remove(igImage);
+	}
+
 	protected IGImage removeImpl(IGImage igImage) throws SystemException {
 		igImage = toUnwrappedModel(igImage);
 

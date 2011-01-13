@@ -249,6 +249,19 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 		}
 	}
 
+	/**
+	 * Removes the d l file version from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the d l file version to remove
+	 * @return the d l file version that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a d l file version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileVersion remove(DLFileVersion dlFileVersion)
+		throws SystemException {
+		return super.remove(dlFileVersion);
+	}
+
 	protected DLFileVersion removeImpl(DLFileVersion dlFileVersion)
 		throws SystemException {
 		dlFileVersion = toUnwrappedModel(dlFileVersion);

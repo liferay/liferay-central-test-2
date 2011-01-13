@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.polls.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.polls.model.PollsQuestion;
@@ -36,6 +37,8 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PollsQuestionUtil} to access the polls question persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public PollsQuestion remove(PollsQuestion pollsQuestion)
+		throws SystemException;
 
 	/**
 	* Caches the polls question in the entity cache if it is enabled.

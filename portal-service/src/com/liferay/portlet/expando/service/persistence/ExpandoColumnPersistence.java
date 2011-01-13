@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -36,6 +37,8 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ExpandoColumnUtil} to access the expando column persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ExpandoColumn remove(ExpandoColumn expandoColumn)
+		throws SystemException;
 
 	/**
 	* Caches the expando column in the entity cache if it is enabled.

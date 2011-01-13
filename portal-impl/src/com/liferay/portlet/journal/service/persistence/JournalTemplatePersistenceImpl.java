@@ -320,6 +320,19 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		}
 	}
 
+	/**
+	 * Removes the journal template from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the journal template to remove
+	 * @return the journal template that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a journal template with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public JournalTemplate remove(JournalTemplate journalTemplate)
+		throws SystemException {
+		return super.remove(journalTemplate);
+	}
+
 	protected JournalTemplate removeImpl(JournalTemplate journalTemplate)
 		throws SystemException {
 		journalTemplate = toUnwrappedModel(journalTemplate);

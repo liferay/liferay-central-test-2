@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.social.model.SocialActivity;
@@ -36,6 +37,8 @@ public interface SocialActivityPersistence extends BasePersistence<SocialActivit
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialActivityUtil} to access the social activity persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public SocialActivity remove(SocialActivity socialActivity)
+		throws SystemException;
 
 	/**
 	* Caches the social activity in the entity cache if it is enabled.

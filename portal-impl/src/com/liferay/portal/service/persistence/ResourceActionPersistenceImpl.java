@@ -226,6 +226,19 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		}
 	}
 
+	/**
+	 * Removes the resource action from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the resource action to remove
+	 * @return the resource action that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a resource action with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ResourceAction remove(ResourceAction resourceAction)
+		throws SystemException {
+		return super.remove(resourceAction);
+	}
+
 	protected ResourceAction removeImpl(ResourceAction resourceAction)
 		throws SystemException {
 		resourceAction = toUnwrappedModel(resourceAction);

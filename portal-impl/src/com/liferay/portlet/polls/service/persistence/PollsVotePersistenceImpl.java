@@ -242,6 +242,18 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 		}
 	}
 
+	/**
+	 * Removes the polls vote from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the polls vote to remove
+	 * @return the polls vote that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a polls vote with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PollsVote remove(PollsVote pollsVote) throws SystemException {
+		return super.remove(pollsVote);
+	}
+
 	protected PollsVote removeImpl(PollsVote pollsVote)
 		throws SystemException {
 		pollsVote = toUnwrappedModel(pollsVote);

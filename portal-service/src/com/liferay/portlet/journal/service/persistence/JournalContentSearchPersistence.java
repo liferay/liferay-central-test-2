@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.model.JournalContentSearch;
@@ -36,6 +37,8 @@ public interface JournalContentSearchPersistence extends BasePersistence<Journal
 	 *
 	 * Never modify or reference this interface directly. Always use {@link JournalContentSearchUtil} to access the journal content search persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public JournalContentSearch remove(
+		JournalContentSearch journalContentSearch) throws SystemException;
 
 	/**
 	* Caches the journal content search in the entity cache if it is enabled.

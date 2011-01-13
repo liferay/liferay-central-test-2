@@ -232,6 +232,18 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 		}
 	}
 
+	/**
+	 * Removes the s c license from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the s c license to remove
+	 * @return the s c license that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a s c license with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SCLicense remove(SCLicense scLicense) throws SystemException {
+		return super.remove(scLicense);
+	}
+
 	protected SCLicense removeImpl(SCLicense scLicense)
 		throws SystemException {
 		scLicense = toUnwrappedModel(scLicense);

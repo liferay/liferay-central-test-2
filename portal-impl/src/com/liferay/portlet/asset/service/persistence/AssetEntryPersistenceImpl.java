@@ -273,6 +273,18 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 		}
 	}
 
+	/**
+	 * Removes the asset entry from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the asset entry to remove
+	 * @return the asset entry that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a asset entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetEntry remove(AssetEntry assetEntry) throws SystemException {
+		return super.remove(assetEntry);
+	}
+
 	protected AssetEntry removeImpl(AssetEntry assetEntry)
 		throws SystemException {
 		assetEntry = toUnwrappedModel(assetEntry);

@@ -220,6 +220,19 @@ public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl<OrgGroupRol
 		}
 	}
 
+	/**
+	 * Removes the org group role from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the org group role to remove
+	 * @return the org group role that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a org group role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public OrgGroupRole remove(OrgGroupRole orgGroupRole)
+		throws SystemException {
+		return super.remove(orgGroupRole);
+	}
+
 	protected OrgGroupRole removeImpl(OrgGroupRole orgGroupRole)
 		throws SystemException {
 		orgGroupRole = toUnwrappedModel(orgGroupRole);

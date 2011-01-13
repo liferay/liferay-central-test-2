@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Country;
 
 /**
@@ -34,6 +35,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CountryUtil} to access the country persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Country remove(Country country) throws SystemException;
 
 	/**
 	* Caches the country in the entity cache if it is enabled.

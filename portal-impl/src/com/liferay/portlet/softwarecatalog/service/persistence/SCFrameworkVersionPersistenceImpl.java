@@ -249,6 +249,19 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 		}
 	}
 
+	/**
+	 * Removes the s c framework version from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the s c framework version to remove
+	 * @return the s c framework version that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a s c framework version with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SCFrameworkVersion remove(SCFrameworkVersion scFrameworkVersion)
+		throws SystemException {
+		return super.remove(scFrameworkVersion);
+	}
+
 	protected SCFrameworkVersion removeImpl(
 		SCFrameworkVersion scFrameworkVersion) throws SystemException {
 		scFrameworkVersion = toUnwrappedModel(scFrameworkVersion);

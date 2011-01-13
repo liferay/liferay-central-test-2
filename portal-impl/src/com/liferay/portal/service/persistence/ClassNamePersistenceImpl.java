@@ -207,6 +207,18 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 		}
 	}
 
+	/**
+	 * Removes the class name from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the class name to remove
+	 * @return the class name that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a class name with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ClassName remove(ClassName className) throws SystemException {
+		return super.remove(className);
+	}
+
 	protected ClassName removeImpl(ClassName className)
 		throws SystemException {
 		className = toUnwrappedModel(className);

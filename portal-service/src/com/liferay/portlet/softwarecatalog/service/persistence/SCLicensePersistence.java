@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
@@ -36,6 +37,7 @@ public interface SCLicensePersistence extends BasePersistence<SCLicense> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SCLicenseUtil} to access the s c license persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public SCLicense remove(SCLicense scLicense) throws SystemException;
 
 	/**
 	* Caches the s c license in the entity cache if it is enabled.

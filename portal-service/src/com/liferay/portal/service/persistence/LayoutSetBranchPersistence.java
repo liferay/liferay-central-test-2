@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.LayoutSetBranch;
 
 /**
@@ -34,6 +35,8 @@ public interface LayoutSetBranchPersistence extends BasePersistence<LayoutSetBra
 	 *
 	 * Never modify or reference this interface directly. Always use {@link LayoutSetBranchUtil} to access the layout set branch persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public LayoutSetBranch remove(LayoutSetBranch layoutSetBranch)
+		throws SystemException;
 
 	/**
 	* Caches the layout set branch in the entity cache if it is enabled.

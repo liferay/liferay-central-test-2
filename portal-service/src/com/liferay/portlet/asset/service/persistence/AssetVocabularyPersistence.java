@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -36,6 +37,8 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetVocabularyUtil} to access the asset vocabulary persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public AssetVocabulary remove(AssetVocabulary assetVocabulary)
+		throws SystemException;
 
 	/**
 	* Caches the asset vocabulary in the entity cache if it is enabled.

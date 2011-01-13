@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -36,6 +37,8 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BookmarksEntryUtil} to access the bookmarks entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public BookmarksEntry remove(BookmarksEntry bookmarksEntry)
+		throws SystemException;
 
 	/**
 	* Caches the bookmarks entry in the entity cache if it is enabled.

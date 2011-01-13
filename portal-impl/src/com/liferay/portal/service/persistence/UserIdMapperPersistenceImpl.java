@@ -253,6 +253,19 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		}
 	}
 
+	/**
+	 * Removes the user ID mapper from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the user ID mapper to remove
+	 * @return the user ID mapper that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a user ID mapper with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public UserIdMapper remove(UserIdMapper userIdMapper)
+		throws SystemException {
+		return super.remove(userIdMapper);
+	}
+
 	protected UserIdMapper removeImpl(UserIdMapper userIdMapper)
 		throws SystemException {
 		userIdMapper = toUnwrappedModel(userIdMapper);

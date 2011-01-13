@@ -228,6 +228,19 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 		}
 	}
 
+	/**
+	 * Removes the shopping category from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the shopping category to remove
+	 * @return the shopping category that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a shopping category with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ShoppingCategory remove(ShoppingCategory shoppingCategory)
+		throws SystemException {
+		return super.remove(shoppingCategory);
+	}
+
 	protected ShoppingCategory removeImpl(ShoppingCategory shoppingCategory)
 		throws SystemException {
 		shoppingCategory = toUnwrappedModel(shoppingCategory);

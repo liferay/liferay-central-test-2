@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.LayoutRevision;
 
 /**
@@ -34,6 +35,8 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	 *
 	 * Never modify or reference this interface directly. Always use {@link LayoutRevisionUtil} to access the layout revision persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public LayoutRevision remove(LayoutRevision layoutRevision)
+		throws SystemException;
 
 	/**
 	* Caches the layout revision in the entity cache if it is enabled.

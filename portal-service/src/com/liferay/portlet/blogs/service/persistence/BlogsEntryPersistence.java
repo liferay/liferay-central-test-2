@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.blogs.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -36,6 +37,7 @@ public interface BlogsEntryPersistence extends BasePersistence<BlogsEntry> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BlogsEntryUtil} to access the blogs entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public BlogsEntry remove(BlogsEntry blogsEntry) throws SystemException;
 
 	/**
 	* Caches the blogs entry in the entity cache if it is enabled.

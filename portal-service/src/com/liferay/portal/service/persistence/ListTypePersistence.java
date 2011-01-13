@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ListType;
 
 /**
@@ -34,6 +35,7 @@ public interface ListTypePersistence extends BasePersistence<ListType> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ListTypeUtil} to access the list type persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ListType remove(ListType listType) throws SystemException;
 
 	/**
 	* Caches the list type in the entity cache if it is enabled.

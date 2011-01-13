@@ -213,6 +213,19 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistenceImpl<Shoppi
 		}
 	}
 
+	/**
+	 * Removes the shopping order item from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the shopping order item to remove
+	 * @return the shopping order item that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a shopping order item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ShoppingOrderItem remove(ShoppingOrderItem shoppingOrderItem)
+		throws SystemException {
+		return super.remove(shoppingOrderItem);
+	}
+
 	protected ShoppingOrderItem removeImpl(ShoppingOrderItem shoppingOrderItem)
 		throws SystemException {
 		shoppingOrderItem = toUnwrappedModel(shoppingOrderItem);

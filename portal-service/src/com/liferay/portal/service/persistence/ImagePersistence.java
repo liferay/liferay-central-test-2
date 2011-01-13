@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Image;
 
 /**
@@ -34,6 +35,7 @@ public interface ImagePersistence extends BasePersistence<Image> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ImageUtil} to access the image persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Image remove(Image image) throws SystemException;
 
 	/**
 	* Caches the image in the entity cache if it is enabled.

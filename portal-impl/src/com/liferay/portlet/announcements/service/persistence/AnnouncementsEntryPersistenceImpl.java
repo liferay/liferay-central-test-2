@@ -269,6 +269,19 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 		}
 	}
 
+	/**
+	 * Removes the announcements entry from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the announcements entry to remove
+	 * @return the announcements entry that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a announcements entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AnnouncementsEntry remove(AnnouncementsEntry announcementsEntry)
+		throws SystemException {
+		return super.remove(announcementsEntry);
+	}
+
 	protected AnnouncementsEntry removeImpl(
 		AnnouncementsEntry announcementsEntry) throws SystemException {
 		announcementsEntry = toUnwrappedModel(announcementsEntry);

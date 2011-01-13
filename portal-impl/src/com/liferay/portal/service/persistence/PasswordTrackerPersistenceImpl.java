@@ -210,6 +210,19 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 		}
 	}
 
+	/**
+	 * Removes the password tracker from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the password tracker to remove
+	 * @return the password tracker that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a password tracker with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PasswordTracker remove(PasswordTracker passwordTracker)
+		throws SystemException {
+		return super.remove(passwordTracker);
+	}
+
 	protected PasswordTracker removeImpl(PasswordTracker passwordTracker)
 		throws SystemException {
 		passwordTracker = toUnwrappedModel(passwordTracker);

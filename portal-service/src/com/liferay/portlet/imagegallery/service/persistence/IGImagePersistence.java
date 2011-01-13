@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -36,6 +37,7 @@ public interface IGImagePersistence extends BasePersistence<IGImage> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link IGImageUtil} to access the i g image persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public IGImage remove(IGImage igImage) throws SystemException;
 
 	/**
 	* Caches the i g image in the entity cache if it is enabled.

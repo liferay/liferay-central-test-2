@@ -229,6 +229,18 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 		}
 	}
 
+	/**
+	 * Removes the portlet from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the portlet to remove
+	 * @return the portlet that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a portlet with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Portlet remove(Portlet portlet) throws SystemException {
+		return super.remove(portlet);
+	}
+
 	protected Portlet removeImpl(Portlet portlet) throws SystemException {
 		portlet = toUnwrappedModel(portlet);
 

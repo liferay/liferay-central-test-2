@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.model.MBBan;
@@ -36,6 +37,7 @@ public interface MBBanPersistence extends BasePersistence<MBBan> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MBBanUtil} to access the message boards ban persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public MBBan remove(MBBan mbBan) throws SystemException;
 
 	/**
 	* Caches the message boards ban in the entity cache if it is enabled.

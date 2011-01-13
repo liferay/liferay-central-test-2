@@ -288,6 +288,19 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
+	/**
+	 * Removes the blogs stats user from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the blogs stats user to remove
+	 * @return the blogs stats user that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a blogs stats user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public BlogsStatsUser remove(BlogsStatsUser blogsStatsUser)
+		throws SystemException {
+		return super.remove(blogsStatsUser);
+	}
+
 	protected BlogsStatsUser removeImpl(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		blogsStatsUser = toUnwrappedModel(blogsStatsUser);

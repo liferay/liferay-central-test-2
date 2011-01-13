@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Website;
 
 /**
@@ -34,6 +35,7 @@ public interface WebsitePersistence extends BasePersistence<Website> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link WebsiteUtil} to access the website persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Website remove(Website website) throws SystemException;
 
 	/**
 	* Caches the website in the entity cache if it is enabled.

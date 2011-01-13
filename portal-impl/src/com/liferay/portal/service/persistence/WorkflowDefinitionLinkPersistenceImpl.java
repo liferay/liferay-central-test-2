@@ -255,6 +255,20 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		}
 	}
 
+	/**
+	 * Removes the workflow definition link from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the workflow definition link to remove
+	 * @return the workflow definition link that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a workflow definition link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public WorkflowDefinitionLink remove(
+		WorkflowDefinitionLink workflowDefinitionLink)
+		throws SystemException {
+		return super.remove(workflowDefinitionLink);
+	}
+
 	protected WorkflowDefinitionLink removeImpl(
 		WorkflowDefinitionLink workflowDefinitionLink)
 		throws SystemException {

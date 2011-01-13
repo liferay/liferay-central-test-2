@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.WorkflowDefinitionLink;
 
 /**
@@ -34,6 +35,9 @@ public interface WorkflowDefinitionLinkPersistence extends BasePersistence<Workf
 	 *
 	 * Never modify or reference this interface directly. Always use {@link WorkflowDefinitionLinkUtil} to access the workflow definition link persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public WorkflowDefinitionLink remove(
+		WorkflowDefinitionLink workflowDefinitionLink)
+		throws SystemException;
 
 	/**
 	* Caches the workflow definition link in the entity cache if it is enabled.

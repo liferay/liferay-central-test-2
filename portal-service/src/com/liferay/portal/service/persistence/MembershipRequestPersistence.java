@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.MembershipRequest;
 
 /**
@@ -34,6 +35,8 @@ public interface MembershipRequestPersistence extends BasePersistence<Membership
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MembershipRequestUtil} to access the membership request persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public MembershipRequest remove(MembershipRequest membershipRequest)
+		throws SystemException;
 
 	/**
 	* Caches the membership request in the entity cache if it is enabled.

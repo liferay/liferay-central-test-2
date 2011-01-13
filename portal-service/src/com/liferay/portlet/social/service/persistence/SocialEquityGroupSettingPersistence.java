@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.social.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.social.model.SocialEquityGroupSetting;
@@ -36,6 +37,9 @@ public interface SocialEquityGroupSettingPersistence extends BasePersistence<Soc
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SocialEquityGroupSettingUtil} to access the social equity group setting persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public SocialEquityGroupSetting remove(
+		SocialEquityGroupSetting socialEquityGroupSetting)
+		throws SystemException;
 
 	/**
 	* Caches the social equity group setting in the entity cache if it is enabled.

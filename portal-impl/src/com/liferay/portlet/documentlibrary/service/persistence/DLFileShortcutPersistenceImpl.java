@@ -285,6 +285,19 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		}
 	}
 
+	/**
+	 * Removes the d l file shortcut from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the d l file shortcut to remove
+	 * @return the d l file shortcut that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a d l file shortcut with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFileShortcut remove(DLFileShortcut dlFileShortcut)
+		throws SystemException {
+		return super.remove(dlFileShortcut);
+	}
+
 	protected DLFileShortcut removeImpl(DLFileShortcut dlFileShortcut)
 		throws SystemException {
 		dlFileShortcut = toUnwrappedModel(dlFileShortcut);

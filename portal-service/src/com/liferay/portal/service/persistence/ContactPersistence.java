@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Contact;
 
 /**
@@ -34,6 +35,7 @@ public interface ContactPersistence extends BasePersistence<Contact> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ContactUtil} to access the contact persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Contact remove(Contact contact) throws SystemException;
 
 	/**
 	* Caches the contact in the entity cache if it is enabled.

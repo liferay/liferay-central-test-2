@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -36,6 +37,8 @@ public interface ExpandoTablePersistence extends BasePersistence<ExpandoTable> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ExpandoTableUtil} to access the expando table persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ExpandoTable remove(ExpandoTable expandoTable)
+		throws SystemException;
 
 	/**
 	* Caches the expando table in the entity cache if it is enabled.

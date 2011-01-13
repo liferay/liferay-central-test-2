@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.model.ShoppingItemField;
@@ -36,6 +37,8 @@ public interface ShoppingItemFieldPersistence extends BasePersistence<ShoppingIt
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ShoppingItemFieldUtil} to access the shopping item field persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ShoppingItemField remove(ShoppingItemField shoppingItemField)
+		throws SystemException;
 
 	/**
 	* Caches the shopping item field in the entity cache if it is enabled.

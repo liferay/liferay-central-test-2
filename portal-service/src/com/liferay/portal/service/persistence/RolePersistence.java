@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Role;
 
 /**
@@ -34,6 +35,7 @@ public interface RolePersistence extends BasePersistence<Role> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RoleUtil} to access the role persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Role remove(Role role) throws SystemException;
 
 	/**
 	* Caches the role in the entity cache if it is enabled.

@@ -227,6 +227,18 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		}
 	}
 
+	/**
+	 * Removes the team from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the team to remove
+	 * @return the team that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a team with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Team remove(Team team) throws SystemException {
+		return super.remove(team);
+	}
+
 	protected Team removeImpl(Team team) throws SystemException {
 		team = toUnwrappedModel(team);
 

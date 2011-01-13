@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
@@ -36,6 +37,8 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MBMessageFlagUtil} to access the message boards message flag persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public MBMessageFlag remove(MBMessageFlag mbMessageFlag)
+		throws SystemException;
 
 	/**
 	* Caches the message boards message flag in the entity cache if it is enabled.

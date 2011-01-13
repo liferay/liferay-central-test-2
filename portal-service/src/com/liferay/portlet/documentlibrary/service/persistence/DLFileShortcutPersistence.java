@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
@@ -36,6 +37,8 @@ public interface DLFileShortcutPersistence extends BasePersistence<DLFileShortcu
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DLFileShortcutUtil} to access the d l file shortcut persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public DLFileShortcut remove(DLFileShortcut dlFileShortcut)
+		throws SystemException;
 
 	/**
 	* Caches the d l file shortcut in the entity cache if it is enabled.

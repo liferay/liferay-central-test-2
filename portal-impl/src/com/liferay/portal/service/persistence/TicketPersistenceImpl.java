@@ -207,6 +207,18 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		}
 	}
 
+	/**
+	 * Removes the ticket from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the ticket to remove
+	 * @return the ticket that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a ticket with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Ticket remove(Ticket ticket) throws SystemException {
+		return super.remove(ticket);
+	}
+
 	protected Ticket removeImpl(Ticket ticket) throws SystemException {
 		ticket = toUnwrappedModel(ticket);
 

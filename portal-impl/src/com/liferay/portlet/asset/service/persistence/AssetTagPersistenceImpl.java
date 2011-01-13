@@ -219,6 +219,18 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 	}
 
+	/**
+	 * Removes the asset tag from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the asset tag to remove
+	 * @return the asset tag that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a asset tag with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public AssetTag remove(AssetTag assetTag) throws SystemException {
+		return super.remove(assetTag);
+	}
+
 	protected AssetTag removeImpl(AssetTag assetTag) throws SystemException {
 		assetTag = toUnwrappedModel(assetTag);
 

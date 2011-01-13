@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -36,6 +37,8 @@ public interface JournalTemplatePersistence extends BasePersistence<JournalTempl
 	 *
 	 * Never modify or reference this interface directly. Always use {@link JournalTemplateUtil} to access the journal template persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public JournalTemplate remove(JournalTemplate journalTemplate)
+		throws SystemException;
 
 	/**
 	* Caches the journal template in the entity cache if it is enabled.

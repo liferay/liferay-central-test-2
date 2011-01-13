@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.ratings.model.RatingsEntry;
@@ -36,6 +37,8 @@ public interface RatingsEntryPersistence extends BasePersistence<RatingsEntry> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RatingsEntryUtil} to access the ratings entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public RatingsEntry remove(RatingsEntry ratingsEntry)
+		throws SystemException;
 
 	/**
 	* Caches the ratings entry in the entity cache if it is enabled.

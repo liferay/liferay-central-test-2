@@ -318,6 +318,18 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	/**
+	 * Removes the message boards thread from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the message boards thread to remove
+	 * @return the message boards thread that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a message boards thread with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MBThread remove(MBThread mbThread) throws SystemException {
+		return super.remove(mbThread);
+	}
+
 	protected MBThread removeImpl(MBThread mbThread) throws SystemException {
 		mbThread = toUnwrappedModel(mbThread);
 

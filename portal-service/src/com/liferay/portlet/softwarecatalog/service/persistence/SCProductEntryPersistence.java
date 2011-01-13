@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
@@ -36,6 +37,8 @@ public interface SCProductEntryPersistence extends BasePersistence<SCProductEntr
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SCProductEntryUtil} to access the s c product entry persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public SCProductEntry remove(SCProductEntry scProductEntry)
+		throws SystemException;
 
 	/**
 	* Caches the s c product entry in the entity cache if it is enabled.

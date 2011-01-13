@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ResourceCode;
 
 /**
@@ -34,6 +35,8 @@ public interface ResourceCodePersistence extends BasePersistence<ResourceCode> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ResourceCodeUtil} to access the resource code persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ResourceCode remove(ResourceCode resourceCode)
+		throws SystemException;
 
 	/**
 	* Caches the resource code in the entity cache if it is enabled.

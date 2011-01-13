@@ -243,6 +243,19 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 		}
 	}
 
+	/**
+	 * Removes the expando table from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the expando table to remove
+	 * @return the expando table that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a expando table with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ExpandoTable remove(ExpandoTable expandoTable)
+		throws SystemException {
+		return super.remove(expandoTable);
+	}
+
 	protected ExpandoTable removeImpl(ExpandoTable expandoTable)
 		throws SystemException {
 		expandoTable = toUnwrappedModel(expandoTable);

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -36,6 +37,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DLFileRankUtil} to access the d l file rank persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public DLFileRank remove(DLFileRank dlFileRank) throws SystemException;
 
 	/**
 	* Caches the d l file rank in the entity cache if it is enabled.

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ClassName;
 
 /**
@@ -34,6 +35,7 @@ public interface ClassNamePersistence extends BasePersistence<ClassName> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ClassNameUtil} to access the class name persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ClassName remove(ClassName className) throws SystemException;
 
 	/**
 	* Caches the class name in the entity cache if it is enabled.

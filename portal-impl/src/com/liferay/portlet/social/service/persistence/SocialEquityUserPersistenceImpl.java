@@ -285,6 +285,19 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 		}
 	}
 
+	/**
+	 * Removes the social equity user from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the social equity user to remove
+	 * @return the social equity user that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a social equity user with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SocialEquityUser remove(SocialEquityUser socialEquityUser)
+		throws SystemException {
+		return super.remove(socialEquityUser);
+	}
+
 	protected SocialEquityUser removeImpl(SocialEquityUser socialEquityUser)
 		throws SystemException {
 		socialEquityUser = toUnwrappedModel(socialEquityUser);

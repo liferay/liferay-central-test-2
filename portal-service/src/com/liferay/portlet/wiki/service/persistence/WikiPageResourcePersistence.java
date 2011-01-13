@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
@@ -36,6 +37,8 @@ public interface WikiPageResourcePersistence extends BasePersistence<WikiPageRes
 	 *
 	 * Never modify or reference this interface directly. Always use {@link WikiPageResourceUtil} to access the wiki page resource persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public WikiPageResource remove(WikiPageResource wikiPageResource)
+		throws SystemException;
 
 	/**
 	* Caches the wiki page resource in the entity cache if it is enabled.

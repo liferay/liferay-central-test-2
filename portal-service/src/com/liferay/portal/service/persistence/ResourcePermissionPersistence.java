@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ResourcePermission;
 
 /**
@@ -34,6 +35,8 @@ public interface ResourcePermissionPersistence extends BasePersistence<ResourceP
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ResourcePermissionUtil} to access the resource permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ResourcePermission remove(ResourcePermission resourcePermission)
+		throws SystemException;
 
 	/**
 	* Caches the resource permission in the entity cache if it is enabled.

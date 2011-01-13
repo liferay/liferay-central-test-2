@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.ServiceComponent;
 
 /**
@@ -34,6 +35,8 @@ public interface ServiceComponentPersistence extends BasePersistence<ServiceComp
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ServiceComponentUtil} to access the service component persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ServiceComponent remove(ServiceComponent serviceComponent)
+		throws SystemException;
 
 	/**
 	* Caches the service component in the entity cache if it is enabled.

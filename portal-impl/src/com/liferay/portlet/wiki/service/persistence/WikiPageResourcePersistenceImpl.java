@@ -242,6 +242,19 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		}
 	}
 
+	/**
+	 * Removes the wiki page resource from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the wiki page resource to remove
+	 * @return the wiki page resource that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a wiki page resource with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public WikiPageResource remove(WikiPageResource wikiPageResource)
+		throws SystemException {
+		return super.remove(wikiPageResource);
+	}
+
 	protected WikiPageResource removeImpl(WikiPageResource wikiPageResource)
 		throws SystemException {
 		wikiPageResource = toUnwrappedModel(wikiPageResource);

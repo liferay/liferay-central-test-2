@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Company;
 
 /**
@@ -34,6 +35,7 @@ public interface CompanyPersistence extends BasePersistence<Company> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CompanyUtil} to access the company persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Company remove(Company company) throws SystemException;
 
 	/**
 	* Caches the company in the entity cache if it is enabled.

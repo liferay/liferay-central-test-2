@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.asset.model.AssetTagStats;
@@ -36,6 +37,8 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetTagStatsUtil} to access the asset tag stats persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public AssetTagStats remove(AssetTagStats assetTagStats)
+		throws SystemException;
 
 	/**
 	* Caches the asset tag stats in the entity cache if it is enabled.

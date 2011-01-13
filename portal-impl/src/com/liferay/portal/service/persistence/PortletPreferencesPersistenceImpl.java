@@ -273,6 +273,19 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		}
 	}
 
+	/**
+	 * Removes the portlet preferences from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the portlet preferences to remove
+	 * @return the portlet preferences that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a portlet preferences with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public PortletPreferences remove(PortletPreferences portletPreferences)
+		throws SystemException {
+		return super.remove(portletPreferences);
+	}
+
 	protected PortletPreferences removeImpl(
 		PortletPreferences portletPreferences) throws SystemException {
 		portletPreferences = toUnwrappedModel(portletPreferences);

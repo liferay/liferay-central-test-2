@@ -265,6 +265,19 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		}
 	}
 
+	/**
+	 * Removes the s c product screenshot from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the s c product screenshot to remove
+	 * @return the s c product screenshot that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a s c product screenshot with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SCProductScreenshot remove(SCProductScreenshot scProductScreenshot)
+		throws SystemException {
+		return super.remove(scProductScreenshot);
+	}
+
 	protected SCProductScreenshot removeImpl(
 		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshot = toUnwrappedModel(scProductScreenshot);

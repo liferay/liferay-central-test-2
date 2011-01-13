@@ -219,6 +219,19 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 		}
 	}
 
+	/**
+	 * Removes the ratings stats from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the ratings stats to remove
+	 * @return the ratings stats that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a ratings stats with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public RatingsStats remove(RatingsStats ratingsStats)
+		throws SystemException {
+		return super.remove(ratingsStats);
+	}
+
 	protected RatingsStats removeImpl(RatingsStats ratingsStats)
 		throws SystemException {
 		ratingsStats = toUnwrappedModel(ratingsStats);

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.tasks.model.TasksReview;
@@ -36,6 +37,8 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link TasksReviewUtil} to access the tasks review persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public TasksReview remove(TasksReview tasksReview)
+		throws SystemException;
 
 	/**
 	* Caches the tasks review in the entity cache if it is enabled.

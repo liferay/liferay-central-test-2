@@ -248,6 +248,19 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		}
 	}
 
+	/**
+	 * Removes the resource code from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the resource code to remove
+	 * @return the resource code that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a resource code with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ResourceCode remove(ResourceCode resourceCode)
+		throws SystemException {
+		return super.remove(resourceCode);
+	}
+
 	protected ResourceCode removeImpl(ResourceCode resourceCode)
 		throws SystemException {
 		resourceCode = toUnwrappedModel(resourceCode);

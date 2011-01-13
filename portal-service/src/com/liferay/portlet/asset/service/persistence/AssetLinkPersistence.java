@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.asset.model.AssetLink;
@@ -36,6 +37,7 @@ public interface AssetLinkPersistence extends BasePersistence<AssetLink> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link AssetLinkUtil} to access the asset link persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public AssetLink remove(AssetLink assetLink) throws SystemException;
 
 	/**
 	* Caches the asset link in the entity cache if it is enabled.

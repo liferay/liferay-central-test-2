@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.calendar.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.calendar.model.CalEvent;
@@ -36,6 +37,7 @@ public interface CalEventPersistence extends BasePersistence<CalEvent> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CalEventUtil} to access the cal event persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public CalEvent remove(CalEvent calEvent) throws SystemException;
 
 	/**
 	* Caches the cal event in the entity cache if it is enabled.

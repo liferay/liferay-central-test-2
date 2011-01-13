@@ -304,6 +304,18 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		}
 	}
 
+	/**
+	 * Removes the i g folder from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the i g folder to remove
+	 * @return the i g folder that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a i g folder with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public IGFolder remove(IGFolder igFolder) throws SystemException {
+		return super.remove(igFolder);
+	}
+
 	protected IGFolder removeImpl(IGFolder igFolder) throws SystemException {
 		igFolder = toUnwrappedModel(igFolder);
 

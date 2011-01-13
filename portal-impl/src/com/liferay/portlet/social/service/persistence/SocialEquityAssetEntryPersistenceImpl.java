@@ -218,6 +218,20 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 		}
 	}
 
+	/**
+	 * Removes the social equity asset entry from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the social equity asset entry to remove
+	 * @return the social equity asset entry that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a social equity asset entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public SocialEquityAssetEntry remove(
+		SocialEquityAssetEntry socialEquityAssetEntry)
+		throws SystemException {
+		return super.remove(socialEquityAssetEntry);
+	}
+
 	protected SocialEquityAssetEntry removeImpl(
 		SocialEquityAssetEntry socialEquityAssetEntry)
 		throws SystemException {

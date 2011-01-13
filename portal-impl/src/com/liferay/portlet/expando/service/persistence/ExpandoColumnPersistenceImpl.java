@@ -238,6 +238,19 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 		}
 	}
 
+	/**
+	 * Removes the expando column from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the expando column to remove
+	 * @return the expando column that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a expando column with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public ExpandoColumn remove(ExpandoColumn expandoColumn)
+		throws SystemException {
+		return super.remove(expandoColumn);
+	}
+
 	protected ExpandoColumn removeImpl(ExpandoColumn expandoColumn)
 		throws SystemException {
 		expandoColumn = toUnwrappedModel(expandoColumn);

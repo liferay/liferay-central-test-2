@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
@@ -36,6 +37,8 @@ public interface DLFileVersionPersistence extends BasePersistence<DLFileVersion>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DLFileVersionUtil} to access the d l file version persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public DLFileVersion remove(DLFileVersion dlFileVersion)
+		throws SystemException;
 
 	/**
 	* Caches the d l file version in the entity cache if it is enabled.

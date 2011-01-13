@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.model.MBMailingList;
@@ -36,6 +37,8 @@ public interface MBMailingListPersistence extends BasePersistence<MBMailingList>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MBMailingListUtil} to access the message boards mailing list persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public MBMailingList remove(MBMailingList mbMailingList)
+		throws SystemException;
 
 	/**
 	* Caches the message boards mailing list in the entity cache if it is enabled.

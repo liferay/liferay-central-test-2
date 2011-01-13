@@ -233,6 +233,18 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		}
 	}
 
+	/**
+	 * Removes the permission from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the permission to remove
+	 * @return the permission that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a permission with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Permission remove(Permission permission) throws SystemException {
+		return super.remove(permission);
+	}
+
 	protected Permission removeImpl(Permission permission)
 		throws SystemException {
 		permission = toUnwrappedModel(permission);

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -36,6 +37,8 @@ public interface BookmarksFolderPersistence extends BasePersistence<BookmarksFol
 	 *
 	 * Never modify or reference this interface directly. Always use {@link BookmarksFolderUtil} to access the bookmarks folder persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public BookmarksFolder remove(BookmarksFolder bookmarksFolder)
+		throws SystemException;
 
 	/**
 	* Caches the bookmarks folder in the entity cache if it is enabled.

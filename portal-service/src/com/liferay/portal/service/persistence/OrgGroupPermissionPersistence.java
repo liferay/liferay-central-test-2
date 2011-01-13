@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.OrgGroupPermission;
 
 /**
@@ -34,6 +35,8 @@ public interface OrgGroupPermissionPersistence extends BasePersistence<OrgGroupP
 	 *
 	 * Never modify or reference this interface directly. Always use {@link OrgGroupPermissionUtil} to access the org group permission persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public OrgGroupPermission remove(OrgGroupPermission orgGroupPermission)
+		throws SystemException;
 
 	/**
 	* Caches the org group permission in the entity cache if it is enabled.

@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.expando.model.ExpandoRow;
@@ -36,6 +37,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ExpandoRowUtil} to access the expando row persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ExpandoRow remove(ExpandoRow expandoRow) throws SystemException;
 
 	/**
 	* Caches the expando row in the entity cache if it is enabled.

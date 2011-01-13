@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Phone;
 
 /**
@@ -34,6 +35,7 @@ public interface PhonePersistence extends BasePersistence<Phone> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link PhoneUtil} to access the phone persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Phone remove(Phone phone) throws SystemException;
 
 	/**
 	* Caches the phone in the entity cache if it is enabled.

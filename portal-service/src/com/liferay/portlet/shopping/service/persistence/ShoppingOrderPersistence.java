@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.model.ShoppingOrder;
@@ -36,6 +37,8 @@ public interface ShoppingOrderPersistence extends BasePersistence<ShoppingOrder>
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ShoppingOrderUtil} to access the shopping order persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public ShoppingOrder remove(ShoppingOrder shoppingOrder)
+		throws SystemException;
 
 	/**
 	* Caches the shopping order in the entity cache if it is enabled.

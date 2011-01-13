@@ -263,6 +263,18 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 		}
 	}
 
+	/**
+	 * Removes the website from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the website to remove
+	 * @return the website that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a website with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Website remove(Website website) throws SystemException {
+		return super.remove(website);
+	}
+
 	protected Website removeImpl(Website website) throws SystemException {
 		website = toUnwrappedModel(website);
 

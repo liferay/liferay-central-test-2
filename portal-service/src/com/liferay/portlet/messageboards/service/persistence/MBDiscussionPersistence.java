@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.model.MBDiscussion;
@@ -36,6 +37,8 @@ public interface MBDiscussionPersistence extends BasePersistence<MBDiscussion> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link MBDiscussionUtil} to access the message boards discussion persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public MBDiscussion remove(MBDiscussion mbDiscussion)
+		throws SystemException;
 
 	/**
 	* Caches the message boards discussion in the entity cache if it is enabled.

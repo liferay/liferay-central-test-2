@@ -466,6 +466,18 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 	}
 
+	/**
+	 * Removes the blogs entry from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the blogs entry to remove
+	 * @return the blogs entry that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a blogs entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public BlogsEntry remove(BlogsEntry blogsEntry) throws SystemException {
+		return super.remove(blogsEntry);
+	}
+
 	protected BlogsEntry removeImpl(BlogsEntry blogsEntry)
 		throws SystemException {
 		blogsEntry = toUnwrappedModel(blogsEntry);

@@ -16,6 +16,7 @@ package com.liferay.counter.service.persistence;
 
 import com.liferay.counter.model.Counter;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 /**
@@ -36,6 +37,7 @@ public interface CounterPersistence extends BasePersistence<Counter> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link CounterUtil} to access the counter persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Counter remove(Counter counter) throws SystemException;
 
 	/**
 	* Caches the counter in the entity cache if it is enabled.

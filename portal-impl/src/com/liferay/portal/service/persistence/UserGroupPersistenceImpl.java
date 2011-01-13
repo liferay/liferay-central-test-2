@@ -244,6 +244,18 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 	}
 
+	/**
+	 * Removes the user group from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the user group to remove
+	 * @return the user group that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a user group with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public UserGroup remove(UserGroup userGroup) throws SystemException {
+		return super.remove(userGroup);
+	}
+
 	protected UserGroup removeImpl(UserGroup userGroup)
 		throws SystemException {
 		userGroup = toUnwrappedModel(userGroup);

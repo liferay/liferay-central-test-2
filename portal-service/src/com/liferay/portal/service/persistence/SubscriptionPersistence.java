@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Subscription;
 
 /**
@@ -34,6 +35,8 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link SubscriptionUtil} to access the subscription persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Subscription remove(Subscription subscription)
+		throws SystemException;
 
 	/**
 	* Caches the subscription in the entity cache if it is enabled.

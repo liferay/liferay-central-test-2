@@ -262,6 +262,19 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 		}
 	}
 
+	/**
+	 * Removes the user group group role from the database. Also notifies the appropriate model listeners.
+	 *
+	 * @param the user group group role to remove
+	 * @return the user group group role that was removed
+	 * @throws com.liferay.portal.NoSuchModelException if a user group group role with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public UserGroupGroupRole remove(UserGroupGroupRole userGroupGroupRole)
+		throws SystemException {
+		return super.remove(userGroupGroupRole);
+	}
+
 	protected UserGroupGroupRole removeImpl(
 		UserGroupGroupRole userGroupGroupRole) throws SystemException {
 		userGroupGroupRole = toUnwrappedModel(userGroupGroupRole);

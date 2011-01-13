@@ -14,6 +14,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Release;
 
 /**
@@ -34,6 +35,7 @@ public interface ReleasePersistence extends BasePersistence<Release> {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link ReleaseUtil} to access the release persistence. Modify <code>service.xml</code> and rerun ServiceBuilder to regenerate this interface.
 	 */
+	public Release remove(Release release) throws SystemException;
 
 	/**
 	* Caches the release in the entity cache if it is enabled.
