@@ -158,16 +158,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
 
 		for (String defaultGroupName : defaultGroupNames) {
+			Company company = companyPersistence.findByPrimaryKey(
+				user.getCompanyId());
+
+			Account account = company.getAccount();
+
+			if (defaultGroupName.equals(account.getName())) {
+				defaultGroupName = GroupConstants.GUEST;
+			}
+
 			try {
-				Company company = CompanyLocalServiceUtil.getCompany(
-					user.getCompanyId());
-
-				Account account = company.getAccount();
-
-				if (defaultGroupName.equals(account.getName())) {
-					defaultGroupName = GroupConstants.GUEST;
-				}
-
 				Group group = groupPersistence.findByC_N(
 					user.getCompanyId(), defaultGroupName);
 
