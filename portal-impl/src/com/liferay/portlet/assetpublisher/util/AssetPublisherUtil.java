@@ -140,7 +140,7 @@ public class AssetPublisherUtil {
 			"assetEntryXml", new String[0]);
 
 		String assetEntryXml = _getAssetEntryXml(
-			assetEntryType, assetRenderer.getUuid());
+			assetEntryType, assetEntry.getClassUuid());
 
 		if (assetEntryOrder > -1) {
 			assetEntryXmls[assetEntryOrder] = assetEntryXml;
