@@ -25,6 +25,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.struts.JSONAction;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -45,7 +46,7 @@ public class JSONServlet extends HttpServlet {
 		_portletClassLoader = (ClassLoader)servletContext.getAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER);
 
-		JSONServiceAction jsonAction = new JSONServiceAction();
+		JSONAction jsonAction = new JSONServiceAction();
 
 		jsonAction.setServletContext(servletContext);
 

@@ -116,7 +116,6 @@ Liferay = window.Liferay || {};
 		registerClass: function(serviceName, className, prototype) {
 			var module = serviceName || {};
 			var moduleClassName = module[className] = {};
-			var servletContextName = module.servletContextName;
 
 			moduleClassName.serviceClassName = module.servicePackage + className + Service.classNameSuffix;
 
@@ -130,8 +129,8 @@ Liferay = window.Liferay || {};
 							params.serviceClassName = moduleClassName.serviceClassName;
 							params.serviceMethodName = index;
 
-							if (servletContextName) {
-								params.servletContextName = servletContextName;
+							if (module.servletContextName) {
+								params.servletContextName = module.servletContextName;
 							}
 
 							return Service.ajax(params, callback);

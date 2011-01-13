@@ -14,9 +14,8 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.kernel.bean.BeanLocator;
-import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -46,32 +45,8 @@ public abstract class JSONAction extends Action {
 			HttpServletResponse response)
 		throws Exception {
 
-		ServletContext servletContext = getServletContext(request);
-
-		String servletContextNameParam = ParamUtil.getString(
-			request, "servletContextName");
-
-		String servletContextName = GetterUtil.getString(
-			servletContext.getServletContextName());
-
-		if (Validator.isNotNull(servletContextNameParam) &&
-			!servletContextNameParam.equals(servletContextName)) {
-
-			BeanLocator beanLocator = PortletBeanLocatorUtil.getBeanLocator(
-				servletContextNameParam);
-
-			servletContext = beanLocator.getServletContext();
-
-			if (servletContext != null) {
-				RequestDispatcher requestDispatcher =
-					servletContext.getRequestDispatcher("/json");
-
-				if (requestDispatcher != null) {
-					requestDispatcher.forward(request, response);
-
-					return null;
-				}
-			}
+		if (rerouteExecute(request, response)) {
+			return null;
 		}
 
 		String callback = ParamUtil.getString(request, "callback");
@@ -116,16 +91,51 @@ public abstract class JSONAction extends Action {
 			HttpServletResponse response)
 		throws Exception;
 
-	public ServletContext getServletContext(HttpServletRequest request) {
-		if (_servletContext == null) {
-			return (ServletContext)request.getAttribute(WebKeys.CTX);
-		}
-
-		return _servletContext;
-	}
-
 	public void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
+	}
+
+	protected boolean rerouteExecute(
+			HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+
+		String requestServletContextName = ParamUtil.getString(
+			request, "servletContextName");
+
+		if (Validator.isNull(requestServletContextName)) {
+			return false;
+		}
+
+		ServletContext servletContext = _servletContext;
+
+		if (servletContext == null) {
+			servletContext = (ServletContext)request.getAttribute(WebKeys.CTX);
+		}
+
+		String servletContextName = GetterUtil.getString(
+			servletContext.getServletContextName());
+
+		if (servletContextName.equals(requestServletContextName)) {
+			return false;
+		}
+
+		ServletContext requestServletContext = ServletContextPool.get(
+			requestServletContextName);
+
+		if (requestServletContext == null) {
+			return false;
+		}
+
+		RequestDispatcher requestDispatcher =
+			requestServletContext.getRequestDispatcher("/json");
+
+		if (requestDispatcher == null) {
+			return false;
+		}
+
+		requestDispatcher.forward(request, response);
+
+		return true;
 	}
 
 	protected ServletContext _servletContext;
