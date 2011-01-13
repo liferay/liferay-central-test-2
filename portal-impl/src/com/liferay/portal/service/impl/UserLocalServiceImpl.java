@@ -153,15 +153,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Set<Long> groupIdsSet = new HashSet<Long>();
 
-		long companyId = user.getCompanyId();
-
 		String[] defaultGroupNames = PrefsPropsUtil.getStringArray(
-			companyId, PropsKeys.ADMIN_DEFAULT_GROUP_NAMES, StringPool.NEW_LINE,
-			PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
+			user.getCompanyId(), PropsKeys.ADMIN_DEFAULT_GROUP_NAMES,
+			StringPool.NEW_LINE, PropsValues.ADMIN_DEFAULT_GROUP_NAMES);
 
 		for (String defaultGroupName : defaultGroupNames) {
 			try {
-				Company company = CompanyLocalServiceUtil.getCompany(companyId);
+				Company company = CompanyLocalServiceUtil.getCompany(
+					user.getCompanyId());
 
 				Account account = company.getAccount();
 
@@ -3080,22 +3079,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			return;
 		}
 
-		long companyId = user.getCompanyId();
-
-		Company company = companyPersistence.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(
+			user.getCompanyId());
 
 		String fromName = PrefsPropsUtil.getString(
-			companyId, PropsKeys.ADMIN_EMAIL_FROM_NAME);
+			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_NAME);
 		String fromAddress = PrefsPropsUtil.getString(
-			companyId, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
+			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
 
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
 
 		String subject = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT);
+			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT);
 		String body = PrefsPropsUtil.getContent(
-			companyId, PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
+			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
 
 		subject = StringUtil.replace(
 			subject,
