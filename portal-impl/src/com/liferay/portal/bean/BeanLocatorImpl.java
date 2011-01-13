@@ -28,6 +28,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.WebApplicationContext;
 
 /**
  * @author Brian Wing Shun Chan
@@ -53,6 +54,17 @@ public class BeanLocatorImpl implements BeanLocator {
 
 	public String[] getNames() {
 		return _applicationContext.getBeanDefinitionNames();
+	}
+
+	public javax.servlet.ServletContext getServletContext() {
+		if (_applicationContext instanceof WebApplicationContext) {
+			WebApplicationContext webApplicationContext =
+				(WebApplicationContext)_applicationContext;
+
+			return webApplicationContext.getServletContext();
+		}
+
+		return null;
 	}
 
 	public Class<?> getType(String name) {
