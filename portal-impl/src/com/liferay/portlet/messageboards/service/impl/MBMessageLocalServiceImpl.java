@@ -17,6 +17,7 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
+import com.liferay.portal.kernel.audit.AuditRequestThreadLocal;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -62,7 +63,10 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
+import com.liferay.portlet.messageboards.RequiredEmailException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
+import com.liferay.portlet.messageboards.RequiredNameException;
+import com.liferay.portlet.messageboards.RequiredWebException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
@@ -128,7 +132,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		try {
 			return addDiscussionMessage(
 				userId, userName, groupId, className, classPK, threadId,
-				parentMessageId, subject, body, serviceContext);
+				parentMessageId, subject, body, null, null, null,
+				serviceContext);
 		}
 		finally {
 			WorkflowThreadLocal.setEnabled(workflowEnabled);
@@ -138,7 +143,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	public MBMessage addDiscussionMessage(
 			long userId, String userName, long groupId, String className,
 			long classPK, long threadId, long parentMessageId, String subject,
-			String body, ServiceContext serviceContext)
+			String body, String guestEmail, String guestName, String guestURL,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Message
@@ -163,7 +169,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		MBMessage message = addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
 			subject, body, MBMessageConstants.DEFAULT_FORMAT, files, anonymous,
-			priority, allowPingbacks, serviceContext);
+			guestEmail, guestName, guestURL, priority, allowPingbacks,
+			serviceContext);
 
 		// Discussion
 
@@ -186,7 +193,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long groupId, long categoryId,
 			long threadId, long parentMessageId, String subject, String body,
 			String format, List<ObjectValuePair<String, byte[]>> files,
-			boolean anonymous, double priority, boolean allowPingbacks,
+			boolean anonymous, String guestEmail, String guestName,
+			String guestURL, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -232,6 +240,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setStatusByUserId(user.getUserId());
 		message.setStatusByUserName(userName);
 		message.setStatusDate(serviceContext.getModifiedDate(now));
+
+		// Anonymous
+
+		if (anonymous) {
+
+			AuditRequestThreadLocal auditRequestThreadLocal =
+				AuditRequestThreadLocal.getAuditThreadLocal();
+
+			String guestIP = auditRequestThreadLocal.getClientIP();
+
+			validateGuest(guestName, guestEmail, guestURL);
+
+			message.setUserEmail(guestEmail);
+			message.setUserIP(guestIP);
+			message.setUserName(guestName);
+			message.setUserURL(guestURL);
+		}
 
 		// Thread
 
@@ -400,6 +425,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			long userId, String userName, long groupId, long categoryId,
 			String subject, String body, String format,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			String guestEmail, String guestName, String guestURL,
 			double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -409,7 +435,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		return addMessage(
 			userId, userName, groupId, categoryId, threadId, parentMessageId,
-			subject, body, format, files, anonymous, priority, allowPingbacks,
+			subject, body, format, files, anonymous, guestEmail, guestName,
+			guestURL, priority, allowPingbacks,
 			serviceContext);
 	}
 
@@ -863,7 +890,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message = addDiscussionMessage(
 					userId, null, groupId, className, classPK, 0,
 					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID, subject,
-					subject, new ServiceContext());
+					subject, null, null, null, new ServiceContext());
 			}
 			catch (SystemException se) {
 				if (_log.isWarnEnabled()) {
@@ -1973,6 +2000,26 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (Validator.isNull(body)) {
 			throw new MessageBodyException();
+		}
+	}
+
+	protected void validateGuest (
+			String guestName, String guestEmail, String guestWeb)
+		throws PortalException {
+
+		if (PropsValues.DISCUSSION_GUEST_NAME_REQUIRED &&
+			Validator.isNull(guestName)) {
+			throw new RequiredNameException();
+		}
+
+		if (PropsValues.DISCUSSION_GUEST_EMAIL_REQUIRED &&
+			Validator.isNull(guestEmail)) {
+			throw new RequiredEmailException();
+		}
+
+		if (PropsValues.DISCUSSION_GUEST_WEB_REQUIRED &&
+			Validator.isNull(guestWeb)) {
+			throw new RequiredWebException();
 		}
 	}
 

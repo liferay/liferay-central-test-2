@@ -483,6 +483,12 @@ public interface PropsKeys {
 
 	public static final String DISCUSSION_EMAIL_SUBJECT = "discussion.email.subject";
 
+	public static final String DISCUSSION_GUEST_EMAIL_REQUIRED = "discussion.guest.email.required";
+
+	public static final String DISCUSSION_GUEST_NAME_REQUIRED = "discussion.guest.name.required";
+
+	public static final String DISCUSSION_GUEST_WEB_REQUIRED = "discussion.guest.web.required";
+
 	public static final String DISCUSSION_SUBSCRIBE_BY_DEFAULT = "discussion.subscribe.by.default";
 
 	public static final String DISCUSSION_THREAD_VIEW = "discussion.thread.view";
