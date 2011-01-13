@@ -66,8 +66,8 @@ public abstract class JSONAction extends Action {
 			getServletContext().getServletContextName();
 
 		if (Validator.isNotNull(servletContextName) &&
-			Validator.isNull(currentServletContextName) ||
-			(!currentServletContextName.equals(servletContextName))) {
+			(Validator.isNull(currentServletContextName) ||
+			(!servletContextName.equals(currentServletContextName)))) {
 
 			BeanLocator beanLocator = PortletBeanLocatorUtil.getBeanLocator(
 				servletContextName);
