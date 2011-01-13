@@ -354,9 +354,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	/**
 	 * Removes the ${entity.humanName} from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param the ${entity.humanName} to remove
+	 * @param ${entity.varName} the ${entity.humanName} to remove
 	 * @return the ${entity.humanName} that was removed
-	 * @throws com.liferay.portal.NoSuchModelException if a ${entity.humanName} with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public ${entity.name} remove(${entity.name} ${entity.varName}) throws SystemException {
