@@ -14,6 +14,8 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.bean.BeanLocator;
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -82,6 +84,8 @@ public class JSONServiceAction extends JSONAction {
 			HttpServletResponse response)
 		throws Exception {
 
+		String servletContextName = ParamUtil.getString(
+			request, "servletContextName");
 		String className = ParamUtil.getString(request, "serviceClassName");
 		String methodName = ParamUtil.getString(request, "serviceMethodName");
 		String[] serviceParameters = getStringArrayFromJSON(
@@ -97,7 +101,18 @@ public class JSONServiceAction extends JSONAction {
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		Class<?> classObj = contextClassLoader.loadClass(className);
+		ClassLoader serviceClassloader = contextClassLoader;
+
+		if (Validator.isNotNull(servletContextName)) {
+			BeanLocator beanLocator = PortletBeanLocatorUtil.getBeanLocator(
+				servletContextName);
+
+			serviceClassloader = beanLocator.getClassLoader();
+
+			currentThread.setContextClassLoader(serviceClassloader);
+		}
+
+		Class<?> classObj = serviceClassloader.loadClass(className);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
 			classObj, methodName, serviceParameters, serviceParameterTypes);
@@ -151,6 +166,11 @@ public class JSONServiceAction extends JSONAction {
 				}
 
 				return jsonObject.toString();
+			}
+			finally {
+				if (serviceClassloader != contextClassLoader) {
+					currentThread.setContextClassLoader(contextClassLoader);
+				}
 			}
 		}
 
