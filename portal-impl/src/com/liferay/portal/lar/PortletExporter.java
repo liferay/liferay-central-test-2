@@ -149,10 +149,6 @@ public class PortletExporter {
 			exportPortletData = true;
 		}
 
-		if (endDate == null) {
-			endDate = new Date();
-		}
-
 		StopWatch stopWatch = null;
 
 		if (_log.isInfoEnabled()) {
