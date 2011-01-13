@@ -45,11 +45,7 @@ public class JSONServlet extends HttpServlet {
 		_portletClassLoader = (ClassLoader)servletContext.getAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER);
 
-		JSONServiceAction jsonAction = new JSONServiceAction();
-
-		jsonAction.setServletContext(servletContext);
-
-		_action = jsonAction;
+		_action = new JSONServiceAction();
 	}
 
 	public void service(

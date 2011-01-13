@@ -22,6 +22,8 @@ Liferay = window.Liferay || {};
 	var Service = {
 		actionUrl: themeDisplay.getPathMain() + '/portal/json_service',
 
+		tunnelUrl: themeDisplay.getPathContext() + '/tunnel-web/secure/json',
+
 		classNameSuffix: 'ServiceUtil',
 
 		ajax: function(options, callback) {
@@ -31,6 +33,22 @@ Liferay = window.Liferay || {};
 
 			if (Liferay.PropsValues.NTLM_AUTH_ENABLED && Liferay.Browser.isIe()) {
 				type = 'GET';
+			}
+
+			var serviceUrl = instance.actionUrl;
+
+			var tunnelEnabled = (Liferay.ServiceAuth && Liferay.ServiceAuth.header);
+
+			if (tunnelEnabled) {
+				serviceUrl = instance.tunnelUrl;
+			}
+
+			if (options.servletContextName) {
+				serviceUrl = '/' + options.servletContextName + '/json';
+
+				if (tunnelEnabled) {
+					serviceUrl = '/' + options.servletContextName + '/secure/json';
+				}
 			}
 
 			options.serviceParameters = Service.getParameters(options);
@@ -53,6 +71,12 @@ Liferay = window.Liferay || {};
 				config.on.success = function(event, id, obj) {
 					callback.call(this, this.get('responseData'), obj);
 				};
+
+				if (tunnelEnabled) {
+					config.headers = {
+						Authorization: Liferay.ServiceAuth.header
+					};
+				}
 			}
 			else {
 				config.on.success = function(event, id, obj) {
@@ -62,7 +86,7 @@ Liferay = window.Liferay || {};
 				config.sync = true;
 			}
 
-			A.io.request(instance.actionUrl, config);
+			A.io.request(serviceUrl, config);
 
 			if (xHR) {
 				return eval('(' + xHR.responseText + ')');
@@ -116,7 +140,6 @@ Liferay = window.Liferay || {};
 		registerClass: function(serviceName, className, prototype) {
 			var module = serviceName || {};
 			var moduleClassName = module[className] = {};
-			var servletContextName = module.servletContextName;
 
 			moduleClassName.serviceClassName = module.servicePackage + className + Service.classNameSuffix;
 
@@ -129,10 +152,7 @@ Liferay = window.Liferay || {};
 						handler = function(params, callback) {
 							params.serviceClassName = moduleClassName.serviceClassName;
 							params.serviceMethodName = index;
-
-							if (servletContextName) {
-								params.servletContextName = servletContextName;
-							}
+							params.servletContextName = module.servletContextName;
 
 							return Service.ajax(params, callback);
 						};

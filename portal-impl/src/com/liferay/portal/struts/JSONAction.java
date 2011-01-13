@@ -14,8 +14,6 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.kernel.bean.BeanLocator;
-import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -24,8 +22,6 @@ import com.liferay.portal.util.PortalUtil;
 
 import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -33,58 +29,16 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionServlet;
 
 /**
  * @author Ming-Gih Lam
  */
 public abstract class JSONAction extends Action {
 
-	public void setServlet(ActionServlet servlet) {
-		super.setServlet(servlet);
-
-		_servletContext = servlet.getServletContext();
-	}
-
-	public ServletContext getServletContext() {
-		return _servletContext;
-	}
-
-	public void setServletContext(ServletContext servletContext) {
-		_servletContext = servletContext;
-	}
-
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception {
-
-		String servletContextName = ParamUtil.getString(
-			request, "servletContextName");
-
-		String currentServletContextName =
-			getServletContext().getServletContextName();
-
-		if (Validator.isNotNull(servletContextName) &&
-			(Validator.isNull(currentServletContextName) ||
-			(!servletContextName.equals(currentServletContextName)))) {
-
-			BeanLocator beanLocator = PortletBeanLocatorUtil.getBeanLocator(
-				servletContextName);
-
-			ServletContext servletContext = beanLocator.getServletContext();
-
-			if (servletContext != null) {
-				RequestDispatcher requestDispatcher =
-					servletContext.getRequestDispatcher("/json");
-
-				if (requestDispatcher != null) {
-					requestDispatcher.forward(request, response);
-
-					return null;
-				}
-			}
-		}
 
 		String callback = ParamUtil.getString(request, "callback");
 		String instance = ParamUtil.getString(request, "inst");
@@ -127,7 +81,5 @@ public abstract class JSONAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception;
-
-	protected ServletContext _servletContext;
 
 }

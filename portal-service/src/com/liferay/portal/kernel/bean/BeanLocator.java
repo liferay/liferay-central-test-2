@@ -19,8 +19,6 @@ package com.liferay.portal.kernel.bean;
  */
 public interface BeanLocator {
 
-	public javax.servlet.ServletContext getServletContext();
-
 	public ClassLoader getClassLoader();
 
 	public String[] getNames();
