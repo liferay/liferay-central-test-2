@@ -146,7 +146,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		content = StringUtil.replace(
 			content, StringPool.AMPERSAND_ENCODED, StringPool.AMPERSAND);
 
-		return null;
+		return content;
 	}
 
 	public static String importReferencedContent(
