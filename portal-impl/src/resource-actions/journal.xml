@@ -89,6 +89,7 @@
 				<action-key>VIEW</action-key>
 			</guest-defaults>
 			<guest-unsupported>
+				<action-key>DELETE_DISCUSSION</action-key>
 				<action-key>EXPIRE</action-key>
 				<action-key>UPDATE</action-key>
 				<action-key>UPDATE_DISCUSSION</action-key>

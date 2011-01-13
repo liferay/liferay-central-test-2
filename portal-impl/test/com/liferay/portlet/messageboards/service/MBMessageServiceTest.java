@@ -153,7 +153,7 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 			MBMessageServiceUtil.addMessage(
 				_category.getGroupId(), _category.getCategoryId(), _subject,
 				body, MBMessageConstants.DEFAULT_FORMAT, files, anonymous,
-				null, null, null, priority, allowPingbacks, serviceContext);
+				priority, allowPingbacks, serviceContext);
 		}
 
 		private String _subject;

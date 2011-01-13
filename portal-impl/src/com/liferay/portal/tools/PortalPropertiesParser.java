@@ -2,21 +2,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-
-import java.io.IOException;
-import java.io.InputStream;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-
 import jodd.io.StreamUtil;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.DTDHandler;
@@ -27,11 +13,21 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.AttributesImpl;
 
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <a href="PortalProperties2Doc.java.html"><b><i>View Source</i></b></a>
  */
 public class PortalPropertiesParser implements XMLReader {
-
+	
 	public static final boolean PARAM_FULL_TOC = false;
 	public static final int PARAM_MIN_LEFT = 2;
 	public static final int PARAM_DEEP_RIGHT = 1;
@@ -214,6 +210,7 @@ public class PortalPropertiesParser implements XMLReader {
 			prefix = "";
 		}
 
+
 		while (deepRight > 0) {
 			ndx = name.lastIndexOf('.');
 			if (ndx == -1) {
@@ -224,7 +221,7 @@ public class PortalPropertiesParser implements XMLReader {
 		}
 		return prefix + name;
 	}
-
+	
 	private void _parse(String p) throws SAXException {
 
 		_contentHandler.startDocument();
@@ -236,7 +233,7 @@ public class PortalPropertiesParser implements XMLReader {
 		_tagStart("properties");
 
 		int ndx = 0;
-		while (true) {
+		while(true) {
 			ndx = p.indexOf("## ", ndx);
 
 			if (ndx == -1) {
@@ -261,9 +258,9 @@ public class PortalPropertiesParser implements XMLReader {
 			String content = p.substring(titleEndNdx, sectionEndNdx);
 
 			section.propertyDataList = _parseContent(content);
-
+			
 			_resolveGroups(section.propertyDataList);
-
+			
 			_createSection(section);
 
 			ndx = sectionEndNdx;
@@ -322,6 +319,7 @@ public class PortalPropertiesParser implements XMLReader {
 				i++;
 				value += lines[i].trim();
 			}
+
 
 			propertyData.value = value;
 
@@ -388,7 +386,7 @@ public class PortalPropertiesParser implements XMLReader {
 			}
 
 		}
-
+		
 	}
 
 	private void _tag(String tagName, String text) throws SAXException {

@@ -1646,9 +1646,6 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="userEmail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="userIP" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="userURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="categoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

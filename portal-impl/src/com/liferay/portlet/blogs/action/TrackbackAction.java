@@ -171,7 +171,7 @@ public class TrackbackAction extends PortletAction {
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
 			userId, blogName, groupId, className, classPK, threadId,
-			parentMessageId, title, body, null, null, null, serviceContext);
+			parentMessageId, title, body, serviceContext);
 
 		String entryURL =
 			PortalUtil.getLayoutFullURL(themeDisplay) +

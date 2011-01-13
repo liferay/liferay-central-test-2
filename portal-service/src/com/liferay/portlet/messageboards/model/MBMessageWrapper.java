@@ -211,60 +211,6 @@ public class MBMessageWrapper implements MBMessage {
 	}
 
 	/**
-	* Gets the user email of this message-boards message.
-	*
-	* @return the user email of this message-boards message
-	*/
-	public java.lang.String getUserEmail() {
-		return _mbMessage.getUserEmail();
-	}
-
-	/**
-	* Sets the user email of this message-boards message.
-	*
-	* @param userEmail the user email of this message-boards message
-	*/
-	public void setUserEmail(java.lang.String userEmail) {
-		_mbMessage.setUserEmail(userEmail);
-	}
-
-	/**
-	* Gets the user i p of this message-boards message.
-	*
-	* @return the user i p of this message-boards message
-	*/
-	public java.lang.String getUserIP() {
-		return _mbMessage.getUserIP();
-	}
-
-	/**
-	* Sets the user i p of this message-boards message.
-	*
-	* @param userIP the user i p of this message-boards message
-	*/
-	public void setUserIP(java.lang.String userIP) {
-		_mbMessage.setUserIP(userIP);
-	}
-
-	/**
-	* Gets the user u r l of this message-boards message.
-	*
-	* @return the user u r l of this message-boards message
-	*/
-	public java.lang.String getUserURL() {
-		return _mbMessage.getUserURL();
-	}
-
-	/**
-	* Sets the user u r l of this message-boards message.
-	*
-	* @param userURL the user u r l of this message-boards message
-	*/
-	public void setUserURL(java.lang.String userURL) {
-		_mbMessage.setUserURL(userURL);
-	}
-
-	/**
 	* Gets the class name of the model instance this message-boards message is polymorphically associated with.
 	*
 	* @return the class name of the model instance this message-boards message is polymorphically associated with

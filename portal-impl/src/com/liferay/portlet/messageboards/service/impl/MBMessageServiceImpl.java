@@ -70,8 +70,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			long groupId, String className, long classPK,
 			String permissionClassName, long permissionClassPK,
 			long permissionOwnerId, long threadId, long parentMessageId,
-			String subject, String body, String guestEmail, String guestName,
-			String guestURL, ServiceContext serviceContext)
+			String subject, String body, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = getGuestOrUser();
@@ -83,15 +82,13 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addDiscussionMessage(
 			user.getUserId(), null, groupId, className, classPK, threadId,
-			parentMessageId, subject, body, guestEmail, guestName, 	guestURL,
-			serviceContext);
+			parentMessageId, subject, body, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long groupId, long categoryId, long threadId, long parentMessageId,
 			String subject, String body, String format,
 			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
-			String guestEmail, String guestName, String guestURL,
 			double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -120,16 +117,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, threadId,
-			parentMessageId, subject, body, format, files, anonymous,
-			guestEmail, guestName, guestURL, priority, allowPingbacks,
-			serviceContext);
+			parentMessageId, subject, body, format, files, anonymous, priority,
+			allowPingbacks, serviceContext);
 	}
 
 	public MBMessage addMessage(
 			long groupId, long categoryId, String subject, String body,
 			String format, List<ObjectValuePair<String, byte[]>> files,
-			boolean anonymous, String guestEmail, String guestName,
-			String guestURL, double priority, boolean allowPingbacks,
+			boolean anonymous, double priority, boolean allowPingbacks,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -153,8 +148,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		return mbMessageLocalService.addMessage(
 			getGuestOrUserId(), null, groupId, categoryId, subject, body,
-			format, files, anonymous, guestEmail, guestName, guestURL, priority,
-			allowPingbacks, serviceContext);
+			format, files, anonymous, priority, allowPingbacks, serviceContext);
 	}
 
 	public void deleteDiscussionMessage(

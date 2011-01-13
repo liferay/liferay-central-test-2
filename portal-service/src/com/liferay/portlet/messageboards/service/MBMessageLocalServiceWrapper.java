@@ -250,14 +250,12 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		long userId, java.lang.String userName, long groupId,
 		java.lang.String className, long classPK, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.lang.String guestEmail, java.lang.String guestName,
-		java.lang.String guestURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.addDiscussionMessage(userId, userName,
 			groupId, className, classPK, threadId, parentMessageId, subject,
-			body, guestEmail, guestName, guestURL, serviceContext);
+			body, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -265,16 +263,13 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		long threadId, long parentMessageId, java.lang.String subject,
 		java.lang.String body, java.lang.String format,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, java.lang.String guestEmail,
-		java.lang.String guestName, java.lang.String guestURL, double priority,
-		boolean allowPingbacks,
+		boolean anonymous, double priority, boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.addMessage(userId, userName, groupId,
 			categoryId, threadId, parentMessageId, subject, body, format,
-			files, anonymous, guestEmail, guestName, guestURL, priority,
-			allowPingbacks, serviceContext);
+			files, anonymous, priority, allowPingbacks, serviceContext);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -282,15 +277,13 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		java.lang.String subject, java.lang.String body,
 		java.lang.String format,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<java.lang.String, byte[]>> files,
-		boolean anonymous, java.lang.String guestEmail,
-		java.lang.String guestName, java.lang.String guestURL, double priority,
-		boolean allowPingbacks,
+		boolean anonymous, double priority, boolean allowPingbacks,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessageLocalService.addMessage(userId, userName, groupId,
-			categoryId, subject, body, format, files, anonymous, guestEmail,
-			guestName, guestURL, priority, allowPingbacks, serviceContext);
+			categoryId, subject, body, format, files, anonymous, priority,
+			allowPingbacks, serviceContext);
 	}
 
 	public void addMessageResources(long messageId,

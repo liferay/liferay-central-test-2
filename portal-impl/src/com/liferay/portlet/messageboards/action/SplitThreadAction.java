@@ -171,8 +171,8 @@ public class SplitThreadAction extends PortletAction {
 			MBMessageServiceUtil.addMessage(
 				message.getGroupId(), message.getCategoryId(), oldThreadId,
 				oldParentMessageId, subject, body, format,
-				new ArrayList<ObjectValuePair<String, byte[]>>(), false, null,
-				null, null, MBThreadConstants.PRIORITY_NOT_GIVEN,
+				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
+				MBThreadConstants.PRIORITY_NOT_GIVEN,
 				message.getAllowPingbacks(), serviceContext);
 		}
 

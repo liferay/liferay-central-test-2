@@ -229,14 +229,14 @@ public class MailingListMessageListener extends BaseMessageListener {
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, subject, collector.getBody(),
 				MBMessageConstants.DEFAULT_FORMAT, collector.getFiles(),
-				anonymous, null, null, null, 0.0, true, serviceContext);
+				anonymous, 0.0, true, serviceContext);
 		}
 		else {
 			MBMessageServiceUtil.addMessage(
 				groupId, categoryId, parentMessage.getThreadId(),
 				parentMessage.getMessageId(), subject, collector.getBody(),
 				MBMessageConstants.DEFAULT_FORMAT, collector.getFiles(),
-				anonymous, null, null, null, 0.0, true, serviceContext);
+				anonymous, 0.0, true, serviceContext);
 		}
 	}
 

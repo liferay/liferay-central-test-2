@@ -731,8 +731,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 								userId, message.getUserName(), groupId,
 								classObj.getName(), newClassPK, threadId,
 								parentMessageId, message.getSubject(),
-								message.getBody(), null, null, null,
-								serviceContext);
+								message.getBody(), serviceContext);
 					}
 					else {
 						importedMessage =
@@ -749,8 +748,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 							userId, message.getUserName(), groupId,
 							classObj.getName(), newClassPK, threadId,
 							parentMessageId, message.getSubject(),
-							message.getBody(), null, null, null,
-							serviceContext);
+							message.getBody(), serviceContext);
 				}
 
 				messagePKs.put(

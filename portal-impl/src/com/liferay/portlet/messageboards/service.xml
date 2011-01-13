@@ -186,9 +186,6 @@
 		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
-		<column name="userEmail" type="String" />
-		<column name="userIP" type="String" />
-		<column name="userURL" type="String" />
 
 		<!-- Other fields -->
 
@@ -495,10 +492,7 @@
 		<exception>MailingListOutServerName</exception>
 		<exception>MailingListOutUserName</exception>
 		<exception>MessageSubject</exception>
-		<exception>RequiredEmail</exception>
 		<exception>RequiredMessage</exception>
-		<exception>RequiredName</exception>
-		<exception>RequiredWeb</exception>
 		<exception>SplitThread</exception>
 	</exceptions>
 </service-builder>

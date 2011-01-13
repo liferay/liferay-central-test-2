@@ -78,9 +78,6 @@ COMMIT_TRANSACTION;
 update MBCategory set displayStyle = 'default';
 
 alter table MBMessage add format VARCHAR(75) null;
-alter table MBMessage add userEmail VARCHAR(75) null;
-alter table MBMessage add userIP VARCHAR(75) null;
-alter table MBMessage add userURL VARCHAR(75) null;
 
 COMMIT_TRANSACTION;
 

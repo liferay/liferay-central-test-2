@@ -1592,9 +1592,6 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="userEmail" type="String" />
-		<field name="userIP" type="String" />
-		<field name="userURL" type="String" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
 		<field name="categoryId" type="long" />
