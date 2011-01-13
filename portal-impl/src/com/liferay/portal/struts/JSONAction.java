@@ -14,14 +14,20 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.bean.BeanLocator;
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -39,6 +45,34 @@ public abstract class JSONAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception {
+
+		ServletContext servletContext = getServletContext(request);
+
+		String servletContextNameParam = ParamUtil.getString(
+			request, "servletContextName");
+
+		String servletContextName = GetterUtil.getString(
+			servletContext.getServletContextName());
+
+		if (Validator.isNotNull(servletContextNameParam) &&
+			!servletContextNameParam.equals(servletContextName)) {
+
+			BeanLocator beanLocator = PortletBeanLocatorUtil.getBeanLocator(
+				servletContextNameParam);
+
+			servletContext = beanLocator.getServletContext();
+
+			if (servletContext != null) {
+				RequestDispatcher requestDispatcher =
+					servletContext.getRequestDispatcher("/json");
+
+				if (requestDispatcher != null) {
+					requestDispatcher.forward(request, response);
+
+					return null;
+				}
+			}
+		}
 
 		String callback = ParamUtil.getString(request, "callback");
 		String instance = ParamUtil.getString(request, "inst");
@@ -81,5 +115,19 @@ public abstract class JSONAction extends Action {
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception;
+
+	public ServletContext getServletContext(HttpServletRequest request) {
+		if (_servletContext == null) {
+			return (ServletContext)request.getAttribute(WebKeys.CTX);
+		}
+
+		return _servletContext;
+	}
+
+	public void setServletContext(ServletContext servletContext) {
+		_servletContext = servletContext;
+	}
+
+	protected ServletContext _servletContext;
 
 }
