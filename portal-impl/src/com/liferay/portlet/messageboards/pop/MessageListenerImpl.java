@@ -184,14 +184,14 @@ public class MessageListenerImpl implements MessageListener {
 				MBMessageServiceUtil.addMessage(
 					groupId, categoryId, subject, collector.getBody(),
 					MBMessageConstants.DEFAULT_FORMAT, collector.getFiles(),
-					false, 0.0, true, serviceContext);
+					false, null, null, null, 0.0, true, serviceContext);
 			}
 			else {
 				MBMessageServiceUtil.addMessage(
 					groupId, categoryId, parentMessage.getThreadId(),
 					parentMessage.getMessageId(), subject, collector.getBody(),
 					MBMessageConstants.DEFAULT_FORMAT, collector.getFiles(),
-					false, 0.0, true, serviceContext);
+					false, null, null, null, 0.0, true, serviceContext);
 			}
 
 			if (_log.isDebugEnabled()) {
