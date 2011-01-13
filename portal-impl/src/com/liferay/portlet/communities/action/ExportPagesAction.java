@@ -75,6 +75,8 @@ public class ExportPagesAction extends PortletAction {
 			String fileName = ParamUtil.getString(
 				actionRequest, "exportFileName");
 			String range = ParamUtil.getString(actionRequest, "range");
+			long[] layoutIds = ParamUtil.getLongValues(
+				actionRequest, "layoutIds");
 
 			Date startDate = null;
 			Date endDate = null;
@@ -156,8 +158,8 @@ public class ExportPagesAction extends PortletAction {
 			}
 
 			File file = LayoutServiceUtil.exportLayoutsAsFile(
-				groupId, privateLayout, null, actionRequest.getParameterMap(),
-				startDate, endDate);
+				groupId, privateLayout, layoutIds,
+				actionRequest.getParameterMap(), startDate, endDate);
 
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
