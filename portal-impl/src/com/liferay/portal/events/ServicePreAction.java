@@ -1577,6 +1577,12 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLHome(urlHome);
 
+		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+				companyId, GroupConstants.CONTROL_PANEL);
+
+		long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
+			controlPanelGroup.getGroupId(), true);
+
 		if (layout != null) {
 			if (layout.isTypePortlet()) {
 				boolean freeformLayout =
@@ -1625,10 +1631,10 @@ public class ServicePreAction extends Action {
 				themeDisplay.setShowPageSettingsIcon(true);
 
 				PortletURL pageSettingsURL = new PortletURLImpl(
-					request, PortletKeys.LAYOUT_MANAGEMENT, plid,
+					request, PortletKeys.LAYOUT_MANAGEMENT, controlPanelPlid,
 					PortletRequest.RENDER_PHASE);
 
-				pageSettingsURL.setWindowState(WindowState.MAXIMIZED);
+				pageSettingsURL.setWindowState(LiferayWindowState.POP_UP);
 				pageSettingsURL.setPortletMode(PortletMode.VIEW);
 
 				pageSettingsURL.setParameter(
@@ -1714,12 +1720,6 @@ public class ServicePreAction extends Action {
 
 			String myAccountRedirect = ParamUtil.getString(
 				request, myAccountNamespace.concat("backURL"), currentURL);
-
-			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
-				companyId, GroupConstants.CONTROL_PANEL);
-
-			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
-				controlPanelGroup.getGroupId(), true);
 
 			PortletURLImpl myAccountURL = new PortletURLImpl(
 				request, PortletKeys.MY_ACCOUNT, controlPanelPlid,

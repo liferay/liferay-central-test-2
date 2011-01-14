@@ -112,8 +112,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 					<div class="aui-menu-content">
 						<ul>
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
-								<li class="first manage-page">
-									<aui:a href="<%= themeDisplay.getURLPageSettings().toString() %>" label="page" />
+								<li class="first manage-page pop-up">
+									<aui:a href="<%= themeDisplay.getURLPageSettings().toString() %>" label="page" title="manage-page" />
 								</li>
 							</c:if>
 
@@ -126,8 +126,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 							</c:if>
 
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
-								<li class="sitemap">
-									<aui:a href='<%= HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "selPlid", "-1") %>' label="sitemap" />
+								<li class="sitemap pop-up">
+									<aui:a href='<%= HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "selPlid", "-1") %>' label="sitemap" title="manage-sitemap" />
 								</li>
 							</c:if>
 
@@ -140,8 +140,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 								pageSettingsURL = HttpUtil.setParameter(pageSettingsURL, PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) + "tabs1", "settings");
 								%>
 
-								<li class="settings">
-									<aui:a href="<%= pageSettingsURL %>" label="settings" />
+								<li class="settings pop-up">
+									<aui:a href="<%= pageSettingsURL %>" label="settings" title="manage-settings" />
 								</li>
 							</c:if>
 

@@ -530,6 +530,25 @@ AUI().add(
 					);
 				}
 
+				var manageContentBoundingBox = manageContent.get('boundingBox');
+
+				manageContentBoundingBox.delegate(
+					'click',
+					function(event) {
+						var item = event.currentTarget;
+
+						manageContent.hide();
+
+						var href = item.attr('href');
+						var title = item.attr('title');
+
+						Liferay.Util.openControlPanelPopUp('','', href, namespace, title);
+
+						event.preventDefault();
+					},
+					'.pop-up a'
+				);
+
 				var pageTemplate = A.one('#pageTemplate');
 
 				if (pageTemplate) {
