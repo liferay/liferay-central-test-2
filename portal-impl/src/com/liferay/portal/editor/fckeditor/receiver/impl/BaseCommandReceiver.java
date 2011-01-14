@@ -390,10 +390,12 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		return fileName.substring(fileName.lastIndexOf(CharPool.PERIOD) + 1);
 	}
 
-	private void _writeDocument(Document document, HttpServletResponse response) {
+	private void _writeDocument(
+		Document document, HttpServletResponse response) {
+
 		try {
 			Element documentElement = document.getDocumentElement();
-			
+
 			documentElement.normalize();
 
 			TransformerFactory transformerFactory =
