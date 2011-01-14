@@ -24,7 +24,6 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -126,13 +125,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setPrivateLayout(privateLayout);
 		layout.setLayoutId(layoutId);
 		layout.setParentLayoutId(parentLayoutId);
+		layout.setNameMap(nameMap);
+		layout.setTitleMap(titleMap);
 		layout.setDescription(description);
 		layout.setType(type);
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
 		layout.setPriority(priority);
-		layout.setNameMap(nameMap);
-		layout.setTitleMap(titleMap);
 
 		if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 			LayoutTypePortlet layoutTypePortlet =
@@ -811,12 +810,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		layout.setParentLayoutId(parentLayoutId);
+		layout.setNameMap(nameMap);
+		layout.setTitleMap(titleMap);
 		layout.setDescription(description);
 		layout.setType(type);
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
-		layout.setNameMap(nameMap);
-		layout.setTitleMap(titleMap);
 
 		if (iconImage != null) {
 			layout.setIconImage(iconImage.booleanValue());
