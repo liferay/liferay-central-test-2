@@ -15,9 +15,14 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutModel;
 import com.liferay.portal.model.LayoutSoap;
@@ -34,6 +39,8 @@ import java.sql.Types;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * The base model implementation for the Layout service. Represents a row in the &quot;Layout&quot; database table, with each column mapped to a property of this class.
@@ -277,8 +284,74 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	public String getName(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId);
+	}
+
+	public String getName(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId, useDefault);
+	}
+
+	public String getName(String languageId) {
+		String value = LocalizationUtil.getLocalization(getName(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getName(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getName(), languageId,
+				useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getNameMap() {
+		return LocalizationUtil.getLocalizationMap(getName());
+	}
+
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public void setName(Locale locale, String name) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(name)) {
+			setName(LocalizationUtil.updateLocalization(getName(), "Name",
+					name, languageId));
+		}
+		else {
+			setName(LocalizationUtil.removeLocalization(getName(), "Name",
+					languageId));
+		}
+	}
+
+	public void setNameMap(Map<Locale, String> nameMap) {
+		if (nameMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String name = nameMap.get(locale);
+
+			setName(locale, name);
+		}
 	}
 
 	public String getTitle() {
@@ -290,8 +363,74 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	public String getTitle(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId);
+	}
+
+	public String getTitle(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId, useDefault);
+	}
+
+	public String getTitle(String languageId) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getTitle(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId,
+				useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getTitleMap() {
+		return LocalizationUtil.getLocalizationMap(getTitle());
+	}
+
 	public void setTitle(String title) {
 		_title = title;
+	}
+
+	public void setTitle(Locale locale, String title) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(title)) {
+			setTitle(LocalizationUtil.updateLocalization(getTitle(), "Title",
+					title, languageId));
+		}
+		else {
+			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
+					languageId));
+		}
+	}
+
+	public void setTitleMap(Map<Locale, String> titleMap) {
+		if (titleMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String title = titleMap.get(locale);
+
+			setTitle(locale, title);
+		}
 	}
 
 	public String getDescription() {

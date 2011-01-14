@@ -244,8 +244,8 @@ public class LayoutLocalServiceUtil {
 
 	public static com.liferay.portal.model.Layout addLayout(long userId,
 		long groupId, boolean privateLayout, long parentLayoutId,
-		java.util.Map<java.util.Locale, java.lang.String> localeNamesMap,
-		java.util.Map<java.util.Locale, java.lang.String> localeTitlesMap,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -253,8 +253,8 @@ public class LayoutLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addLayout(userId, groupId, privateLayout, parentLayoutId,
-			localeNamesMap, localeTitlesMap, description, type, hidden,
-			friendlyURL, serviceContext);
+			nameMap, titleMap, description, type, hidden, friendlyURL,
+			serviceContext);
 	}
 
 	public static com.liferay.portal.model.Layout addLayout(long userId,
@@ -516,8 +516,8 @@ public class LayoutLocalServiceUtil {
 
 	public static com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId,
-		java.util.Map<java.util.Locale, java.lang.String> localeNamesMap,
-		java.util.Map<java.util.Locale, java.lang.String> localeTitlesMap,
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL, java.lang.Boolean iconImage,
 		byte[] iconBytes,
@@ -526,8 +526,8 @@ public class LayoutLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateLayout(groupId, privateLayout, layoutId,
-			parentLayoutId, localeNamesMap, localeTitlesMap, description, type,
-			hidden, friendlyURL, iconImage, iconBytes, serviceContext);
+			parentLayoutId, nameMap, titleMap, description, type, hidden,
+			friendlyURL, iconImage, iconBytes, serviceContext);
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(long groupId,

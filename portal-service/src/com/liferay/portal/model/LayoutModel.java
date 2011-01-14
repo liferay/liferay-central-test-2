@@ -21,6 +21,9 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Locale;
+import java.util.Map;
+
 /**
  * The base model interface for the Layout service. Represents a row in the &quot;Layout&quot; database table, with each column mapped to a property of this class.
  *
@@ -166,8 +169,48 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 *
 	 * @return the name of this layout
 	 */
-	@AutoEscape
 	public String getName();
+
+	/**
+	 * Gets the localized name of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized name for
+	 * @return the localized name of this layout
+	 */
+	public String getName(Locale locale);
+
+	/**
+	 * Gets the localized name of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized name for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getName(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized name of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized name for
+	 * @return the localized name of this layout
+	 */
+	public String getName(String languageId);
+
+	/**
+	 * Gets the localized name of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized name for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this layout
+	 */
+	public String getName(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized name of this layout.
+	 *
+	 * @return the locales and localized name
+	 */
+	public Map<Locale, String> getNameMap();
 
 	/**
 	 * Sets the name of this layout.
@@ -177,12 +220,67 @@ public interface LayoutModel extends BaseModel<Layout> {
 	public void setName(String name);
 
 	/**
+	 * Sets the localized name of this layout.
+	 *
+	 * @param locale the locale to set the localized name for
+	 * @param name the localized name of this layout
+	 */
+	public void setName(Locale locale, String name);
+
+	/**
+	 * Sets the localized names of this layout from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this layout
+	 */
+	public void setNameMap(Map<Locale, String> nameMap);
+
+	/**
 	 * Gets the title of this layout.
 	 *
 	 * @return the title of this layout
 	 */
-	@AutoEscape
 	public String getTitle();
+
+	/**
+	 * Gets the localized title of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized title for
+	 * @return the localized title of this layout
+	 */
+	public String getTitle(Locale locale);
+
+	/**
+	 * Gets the localized title of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized title for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getTitle(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized title of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized title for
+	 * @return the localized title of this layout
+	 */
+	public String getTitle(String languageId);
+
+	/**
+	 * Gets the localized title of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized title for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this layout
+	 */
+	public String getTitle(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized title of this layout.
+	 *
+	 * @return the locales and localized title
+	 */
+	public Map<Locale, String> getTitleMap();
 
 	/**
 	 * Sets the title of this layout.
@@ -190,6 +288,21 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param title the title of this layout
 	 */
 	public void setTitle(String title);
+
+	/**
+	 * Sets the localized title of this layout.
+	 *
+	 * @param locale the locale to set the localized title for
+	 * @param title the localized title of this layout
+	 */
+	public void setTitle(Locale locale, String title);
+
+	/**
+	 * Sets the localized titles of this layout from the map of locales and localized titles.
+	 *
+	 * @param titleMap the locales and localized titles of this layout
+	 */
+	public void setTitleMap(Map<Locale, String> titleMap);
 
 	/**
 	 * Gets the description of this layout.

@@ -74,15 +74,6 @@ public interface Layout extends LayoutModel {
 
 	public com.liferay.portal.model.LayoutType getLayoutType();
 
-	public java.lang.String getName(java.util.Locale locale);
-
-	public java.lang.String getName(java.util.Locale locale, boolean useDefault);
-
-	public java.lang.String getName(java.lang.String localeLanguageId);
-
-	public java.lang.String getName(java.lang.String localeLanguageId,
-		boolean useDefault);
-
 	public long getParentPlid()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -111,15 +102,6 @@ public interface Layout extends LayoutModel {
 	public com.liferay.portal.model.Theme getTheme()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	public java.lang.String getTitle(java.util.Locale locale);
-
-	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault);
-
-	public java.lang.String getTitle(java.lang.String localeLanguageId);
-
-	public java.lang.String getTitle(java.lang.String localeLanguageId,
-		boolean useDefault);
 
 	public java.lang.String getTypeSettings();
 
@@ -177,10 +159,6 @@ public interface Layout extends LayoutModel {
 	public boolean isTypePortlet();
 
 	public boolean isTypeURL();
-
-	public void setName(java.lang.String name, java.util.Locale locale);
-
-	public void setTitle(java.lang.String title, java.util.Locale locale);
 
 	public void setTypeSettings(java.lang.String typeSettings);
 
