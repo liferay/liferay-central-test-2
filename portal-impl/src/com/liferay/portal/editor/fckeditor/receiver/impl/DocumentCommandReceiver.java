@@ -172,12 +172,12 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 	private Folder _getFolder(long groupId, String folderName)
 		throws Exception {
 
-		DLFolder dolFolder = new DLFolderImpl();
+		DLFolder dlFolder = new DLFolderImpl();
 
-		dolFolder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-		dolFolder.setGroupId(groupId);
+		dlFolder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		dlFolder.setGroupId(groupId);
 
-		Folder folder = new LiferayFolder(dolFolder);
+		Folder folder = new LiferayFolder(dlFolder);
 
 		if (folderName.equals(StringPool.SLASH)) {
 			return folder;
