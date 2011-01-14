@@ -606,8 +606,8 @@
 		<!-- Enterprise Admin -->
 
 		<action path="/enterprise_admin/edit_company" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyAction">
+			<forward name="portlet.enterprise_admin.edit_company" path="portlet.enterprise_admin.edit_company" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-			<forward name="portlet.enterprise_admin.view" path="portlet.enterprise_admin.edit_company" />
 		</action>
 
 		<action path="/enterprise_admin/edit_company_logo" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyLogoAction">

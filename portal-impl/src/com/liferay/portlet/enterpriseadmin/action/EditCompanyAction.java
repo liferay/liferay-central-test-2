@@ -108,7 +108,8 @@ public class EditCompanyAction extends PortletAction {
 					SessionErrors.add(actionRequest, e.getClass().getName(), e);
 				}
 
-				setForward(actionRequest, "portlet.enterprise_admin.view");
+				setForward(
+					actionRequest, "portlet.enterprise_admin.edit_company");
 			}
 			else {
 				throw e;
@@ -121,8 +122,8 @@ public class EditCompanyAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(getForward(
-			renderRequest, "portlet.enterprise_admin.view"));
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.enterprise_admin.edit_company"));
 	}
 
 	protected void updateCompany(ActionRequest actionRequest) throws Exception {

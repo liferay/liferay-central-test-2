@@ -160,8 +160,6 @@
 	line-height: 12px;
 }
 
-
-
 .portlet-enterprise-admin .form-navigator .user-info, .portlet-enterprise-admin .form-navigator .organization-info, .portlet-enterprise-admin .form-navigator .company-info {
 	font-weight: bold;
 	margin-bottom: 15px;
