@@ -473,6 +473,10 @@
 
 	<definition name="portlet.enterprise_admin" extends="portlet" />
 
+	<definition name="portlet.enterprise_admin.edit_company" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/edit_settings.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.edit_company_logo" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/edit_company_logo.jsp" />
 	</definition>

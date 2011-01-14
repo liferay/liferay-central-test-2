@@ -23,77 +23,63 @@ String[] configurationSections = PropsValues.COMPANY_SETTINGS_FORM_CONFIGURATION
 String[] identificationSections = PropsValues.COMPANY_SETTINGS_FORM_IDENTIFICATION;
 String[] miscellaneousSections = PropsValues.COMPANY_SETTINGS_FORM_MISCELLANEOUS;
 
-
-String[] allSections = ArrayUtil.append(configurationSections, ArrayUtil.append(identificationSections, miscellaneousSections));
 String[][] categorySections = {configurationSections, identificationSections, miscellaneousSections};
 
-String curSection = configurationSections[0];
+request.setAttribute("addresses.className", Account.class.getName());
+request.setAttribute("emailAddresses.className", Account.class.getName());
+request.setAttribute("phones.className", Account.class.getName());
+request.setAttribute("websites.className", Account.class.getName());
 
-String historyKey = ParamUtil.getString(request, "historyKey");
-
-if (Validator.isNotNull(historyKey)) {
-	curSection = historyKey;
-}
+request.setAttribute("addresses.classPK", company.getAccountId());
+request.setAttribute("emailAddresses.classPK", company.getAccountId());
+request.setAttribute("phones.classPK", company.getAccountId());
+request.setAttribute("websites.classPK", company.getAccountId());
 %>
 
-<div id="<portlet:namespace />sectionsContainer">
-	<table class="user-table" width="100%">
-	<tr>
-		<td>
+<portlet:actionURL var="editCompanyURL">
+	<portlet:param name="struts_action" value="/enterprise_admin/edit_company" />
+</portlet:actionURL>
 
-			<%
-			request.setAttribute("addresses.className", Account.class.getName());
-			request.setAttribute("emailAddresses.className", Account.class.getName());
-			request.setAttribute("phones.className", Account.class.getName());
-			request.setAttribute("websites.className", Account.class.getName());
+<aui:form action="<%= editCompanyURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveCompany();" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="redirect" type="hidden" />
 
-			request.setAttribute("addresses.classPK", company.getAccountId());
-			request.setAttribute("emailAddresses.classPK", company.getAccountId());
-			request.setAttribute("phones.classPK", company.getAccountId());
-			request.setAttribute("websites.classPK", company.getAccountId());
+	<liferay-util:buffer var="htmlTop">
+		<div class="company-info">
+			<p class="float-container">
+				<img alt="<liferay-ui:message key="logo" />" class="company-logo" src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(company.getLogoId()) %>" /><br />
 
-			for (String section : allSections) {
-				String sectionId = _getSectionId(section);
-				String sectionJsp = "/html/portlet/enterprise_admin/settings/" + _getSectionJsp(section) + ".jsp";
-			%>
+				<span class="company-name"><%= company.getName() %></span>
+			</p>
+		</div>
+	</liferay-util:buffer>
 
-				<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
-					<liferay-util:include page="<%= sectionJsp %>" />
-				</div>
+	<liferay-ui:form-navigator
+		categoryNames="<%= _CATEGORY_NAMES %>"
+		categorySections="<%= categorySections %>"
+		htmlTop="<%= htmlTop %>"
+		jspPath="/html/portlet/enterprise_admin/settings/"
+	/>
+</aui:form>
 
-			<%
-			}
-			%>
+<aui:script>
+	function <portlet:namespace />saveCompany() {
+			document.<portlet:namespace />fm.method = "post";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 
-			<div class="lfr-component form-navigation">
-				<div class="user-info">
-					<p class="float-container">
-						<img alt="<liferay-ui:message key="logo" />" class="company-logo" src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(company.getLogoId()) %>" /><br />
+			var redirect = "<portlet:renderURL><portlet:param name="struts_action" value="/enterprise_admin/edit_company" /></portlet:renderURL>";
 
-						<span><%= company.getName() %></span>
-					</p>
-				</div>
+			redirect += Liferay.Util.getHistoryParam('<portlet:namespace />');
 
-				<%
-				String[] categoryNames = _CATEGORY_NAMES;
-				%>
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 
-				<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
+			<portlet:namespace />saveLdap();
+			<portlet:namespace />saveEmails();
 
-				<div class="aui-button-holder">
-					<aui:button onClick='<%= renderResponse.getNamespace() + "saveCompany();" %>' value="save" />
+			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/enterprise_admin/edit_company" /></portlet:actionURL>");
+		}
 
-					<%
-					PortletURL portletURL = new PortletURLImpl(request, PortletKeys.ENTERPRISE_ADMIN_SETTINGS, plid, PortletRequest.RENDER_PHASE);
-					%>
-
-					<aui:button onClick="<%= portletURL.toString() %>" type="cancel" />
-				</div>
-			</div>
-		</td>
-	</tr>
-	</table>
-</div>
+</aui:script>
 
 <%!
 private static String[] _CATEGORY_NAMES = {"configuration", "identification", "miscellaneous"};
