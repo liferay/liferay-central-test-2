@@ -3088,10 +3088,22 @@ public class ServiceBuilder {
 		// Write file
 
 		File ejbFile = new File(
-			_outputPath + "/service/http/" + entity.getName() +
+			_serviceOutputPath + "/service/http/" + entity.getName() +
 				"JSONSerializer.java");
 
 		writeFile(ejbFile, content, _author);
+
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			ejbFile = new File(
+				_outputPath + "/service/http/" + entity.getName() +
+					"JSONSerializer.java");
+
+			if (ejbFile.exists()) {
+				System.out.println("Relocating " + ejbFile);
+
+				ejbFile.delete();
+			}
+		}
 	}
 
 	private void _createServiceSoap(Entity entity) throws Exception {
