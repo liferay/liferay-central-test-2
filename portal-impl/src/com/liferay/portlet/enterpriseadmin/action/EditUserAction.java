@@ -630,7 +630,7 @@ public class EditUserAction extends PortletAction {
 
 			session.removeAttribute(Globals.LOCALE_KEY);
 
-			Locale locale = LanguageUtil.getLocale(languageId);
+			Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 			LanguageUtil.updateCookie(request, response, locale);
 
