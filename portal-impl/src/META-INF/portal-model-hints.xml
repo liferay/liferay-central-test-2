@@ -218,11 +218,11 @@
 		<field name="layoutId" type="long" />
 		<field name="parentLayoutId" type="long" />
 		<field name="name" type="String">
-			<hint-collection name="TEXTAREA" />
+			<hint name="max-length">4000</hint>
 			<validator name="required" />
 		</field>
 		<field name="title" type="String">
-			<hint-collection name="TEXTAREA" />
+			<hint name="max-length">4000</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
