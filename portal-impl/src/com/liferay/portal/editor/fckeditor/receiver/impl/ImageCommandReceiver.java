@@ -47,22 +47,23 @@ import org.w3c.dom.Node;
  */
 public class ImageCommandReceiver extends BaseCommandReceiver {
 
-	protected String createFolder(CommandArgument arg) {
+	protected String createFolder(CommandArgument commandArgument) {
 		try {
-			Group group = arg.getCurrentGroup();
+			Group group = commandArgument.getCurrentGroup();
 
-			IGFolder folder = _getFolder(
-				group.getGroupId(), StringPool.SLASH + arg.getCurrentFolder());
+			IGFolder igFolder = _getFolder(
+				group.getGroupId(),
+				StringPool.SLASH + commandArgument.getCurrentFolder());
 
-			long parentFolderId = folder.getFolderId();
-			String name = arg.getNewFolder();
+			long parentFolderId = igFolder.getFolderId();
+			String name = commandArgument.getNewFolder();
 			String description = StringPool.BLANK;
 
 			ServiceContext serviceContext = new ServiceContext();
 
 			serviceContext.setAddCommunityPermissions(true);
 			serviceContext.setAddGuestPermissions(true);
-			serviceContext.setPlid(arg.getPlid());
+			serviceContext.setPlid(commandArgument.getPlid());
 			serviceContext.setScopeGroupId(group.getGroupId());
 
 			IGFolderServiceUtil.addFolder(
@@ -76,16 +77,18 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 	}
 
 	protected String fileUpload(
-		CommandArgument arg, String fileName, File file, String extension) {
+		CommandArgument commandArgument, String fileName, File file,
+		String extension) {
 
 		try {
-			Group group = arg.getCurrentGroup();
+			Group group = commandArgument.getCurrentGroup();
 
 			long groupId = group.getGroupId();
 
-			IGFolder folder = _getFolder(groupId, arg.getCurrentFolder());
+			IGFolder igFolder = _getFolder(
+				groupId, commandArgument.getCurrentFolder());
 
-			long folderId = folder.getFolderId();
+			long folderId = igFolder.getFolderId();
 			String name = fileName;
 			String description = StringPool.BLANK;
 			String contentType = extension.toLowerCase();
@@ -106,9 +109,11 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
-	protected void getFolders(CommandArgument arg, Document doc, Node root) {
+	protected void getFolders(
+		CommandArgument commandArgument, Document document, Node rootNode) {
+
 		try {
-			_getFolders(arg, doc, root);
+			_getFolders(commandArgument, document, rootNode);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -116,11 +121,11 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 	}
 
 	protected void getFoldersAndFiles(
-		CommandArgument arg, Document doc, Node root) {
+		CommandArgument commandArgument, Document document, Node rootNode) {
 
 		try {
-			_getFolders(arg, doc, root);
-			_getFiles(arg, doc, root);
+			_getFolders(commandArgument, document, rootNode);
+			_getFiles(commandArgument, document, rootNode);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -131,24 +136,25 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		return group.isStagedPortlet(PortletKeys.IMAGE_GALLERY);
 	}
 
-	private void _getFiles(CommandArgument arg, Document doc, Node root)
+	private void _getFiles(
+			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
 
-		Element filesEl = doc.createElement("Files");
+		Element filesElement = document.createElement("Files");
 
-		root.appendChild(filesEl);
+		rootNode.appendChild(filesElement);
 
-		if (Validator.isNull(arg.getCurrentGroupName())) {
+		if (Validator.isNull(commandArgument.getCurrentGroupName())) {
 			return;
 		}
 
-		Group group = arg.getCurrentGroup();
+		Group group = commandArgument.getCurrentGroup();
 
-		IGFolder folder = _getFolder(
-			group.getGroupId(), arg.getCurrentFolder());
+		IGFolder igFolder = _getFolder(
+			group.getGroupId(), commandArgument.getCurrentFolder());
 
 		List<IGImage> images = IGImageServiceUtil.getImages(
-			folder.getGroupId(), folder.getFolderId());
+			igFolder.getGroupId(), igFolder.getFolderId());
 
 		for (IGImage image : images) {
 			long largeImageId = image.getLargeImageId();
@@ -156,40 +162,40 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			Image portalImage = ImageLocalServiceUtil.getImageOrDefault(
 				largeImageId);
 
-			Element fileEl = doc.createElement("File");
+			Element fileElement = document.createElement("File");
 
-			filesEl.appendChild(fileEl);
+			filesElement.appendChild(fileElement);
 
-			fileEl.setAttribute("name", image.getNameWithExtension());
-			fileEl.setAttribute("desc", image.getNameWithExtension());
-			fileEl.setAttribute("size", getSize(portalImage.getSize()));
+			fileElement.setAttribute("name", image.getNameWithExtension());
+			fileElement.setAttribute("desc", image.getNameWithExtension());
+			fileElement.setAttribute("size", getSize(portalImage.getSize()));
 
 			StringBundler url = new StringBundler(7);
 
-			ThemeDisplay themeDisplay = arg.getThemeDisplay();
+			ThemeDisplay themeDisplay = commandArgument.getThemeDisplay();
 
 			url.append(themeDisplay.getPathImage());
 			url.append("/image_gallery?uuid=");
 			url.append(image.getUuid());
 			url.append("&groupId=");
-			url.append(folder.getGroupId());
+			url.append(igFolder.getGroupId());
 			url.append("&t=");
 			url.append(ImageServletTokenUtil.getToken(largeImageId));
 
-			fileEl.setAttribute("url", url.toString());
+			fileElement.setAttribute("url", url.toString());
 		}
 	}
 
 	private IGFolder _getFolder(long groupId, String folderName)
 		throws Exception {
 
-		IGFolder folder = new IGFolderImpl();
+		IGFolder igFolder = new IGFolderImpl();
 
-		folder.setFolderId(IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-		folder.setGroupId(groupId);
+		igFolder.setFolderId(IGFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		igFolder.setGroupId(groupId);
 
 		if (folderName.equals(StringPool.SLASH)) {
-			return folder;
+			return igFolder;
 		}
 
 		StringTokenizer st = new StringTokenizer(folderName, StringPool.SLASH);
@@ -197,46 +203,47 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		while (st.hasMoreTokens()) {
 			String curFolderName = st.nextToken();
 
-			List<IGFolder> folders = IGFolderServiceUtil.getFolders(
-				groupId, folder.getFolderId());
+			List<IGFolder> igFolders = IGFolderServiceUtil.getFolders(
+				groupId, igFolder.getFolderId());
 
-			for (IGFolder curFolder : folders) {
-				if (curFolder.getName().equals(curFolderName)) {
-					folder = curFolder;
+			for (IGFolder curIGFolder : igFolders) {
+				if (curIGFolder.getName().equals(curFolderName)) {
+					igFolder = curIGFolder;
 
 					break;
 				}
 			}
 		}
 
-		return folder;
+		return igFolder;
 	}
 
-	private void _getFolders(CommandArgument arg, Document doc, Node root)
+	private void _getFolders(
+			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
 
-		Element foldersEl = doc.createElement("Folders");
+		Element foldersElement = document.createElement("Folders");
 
-		root.appendChild(foldersEl);
+		rootNode.appendChild(foldersElement);
 
-		if (arg.getCurrentFolder().equals(StringPool.SLASH)) {
-			getRootFolders(arg, doc, foldersEl);
+		if (commandArgument.getCurrentFolder().equals(StringPool.SLASH)) {
+			getRootFolders(commandArgument, document, foldersElement);
 		}
 		else {
-			Group group = arg.getCurrentGroup();
+			Group group = commandArgument.getCurrentGroup();
 
-			IGFolder folder = _getFolder(
-				group.getGroupId(), arg.getCurrentFolder());
+			IGFolder igFolder = _getFolder(
+				group.getGroupId(), commandArgument.getCurrentFolder());
 
-			List<IGFolder> folders = IGFolderServiceUtil.getFolders(
-				group.getGroupId(), folder.getFolderId());
+			List<IGFolder> igFolders = IGFolderServiceUtil.getFolders(
+				group.getGroupId(), igFolder.getFolderId());
 
-			for (IGFolder curFolder : folders) {
-				Element folderEl = doc.createElement("Folder");
+			for (IGFolder curIGFolder : igFolders) {
+				Element folderElement = document.createElement("Folder");
 
-				foldersEl.appendChild(folderEl);
+				foldersElement.appendChild(folderElement);
 
-				folderEl.setAttribute("name", curFolder.getName());
+				folderElement.setAttribute("name", curIGFolder.getName());
 			}
 		}
 	}

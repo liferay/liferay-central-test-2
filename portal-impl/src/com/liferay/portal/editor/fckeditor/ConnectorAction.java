@@ -62,7 +62,7 @@ public class ConnectorAction extends Action {
 
 			Command commandModel = CommandFactory.getCommand(command);
 
-			commandModel.execute(argument, request, response);
+			commandModel.execute(commandArgument, request, response);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

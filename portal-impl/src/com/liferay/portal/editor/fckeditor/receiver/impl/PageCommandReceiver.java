@@ -36,19 +36,22 @@ import org.w3c.dom.Node;
  */
 public class PageCommandReceiver extends BaseCommandReceiver {
 
-	protected String createFolder(CommandArgument arg) {
+	protected String createFolder(CommandArgument commandArgument) {
 		return "0";
 	}
 
 	protected String fileUpload(
-		CommandArgument arg, String fileName, File file, String extension) {
+		CommandArgument commandArgument, String fileName, File file,
+		String extension) {
 
 		return "0";
 	}
 
-	protected void getFolders(CommandArgument arg, Document doc, Node root) {
+	protected void getFolders(
+		CommandArgument commandArgument, Document document, Node rootNode) {
+
 		try {
-			_getFolders(arg, doc, root);
+			_getFolders(commandArgument, document, rootNode);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -56,11 +59,11 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 	}
 
 	protected void getFoldersAndFiles(
-		CommandArgument arg, Document doc, Node root) {
+		CommandArgument commandArgument, Document document, Node rootNode) {
 
 		try {
-			_getFolders(arg, doc, root);
-			_getFiles(arg, doc, root);
+			_getFolders(commandArgument, document, rootNode);
+			_getFiles(commandArgument, document, rootNode);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -107,42 +110,44 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		return layoutName;
 	}
 
-	private void _getFiles(CommandArgument arg, Document doc, Node root)
+	private void _getFiles(
+			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
 
-		if (arg.getCurrentFolder().equals(StringPool.SLASH)) {
+		if (commandArgument.getCurrentFolder().equals(StringPool.SLASH)) {
 			return;
 		}
 
-		Element filesEl = doc.createElement("Files");
+		Element filesElement = document.createElement("Files");
 
-		root.appendChild(filesEl);
+		rootNode.appendChild(filesElement);
 
-		Group group = arg.getCurrentGroup();
+		Group group = commandArgument.getCurrentGroup();
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			group.getGroupId(), false,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-		if (("/" + arg.getCurrentGroupName() + "/").equals(
-				arg.getCurrentFolder())) {
+		if (("/" + commandArgument.getCurrentGroupName() + "/").equals(
+				commandArgument.getCurrentFolder())) {
 
 			for (Layout layout : layouts) {
-				Element fileEl = doc.createElement("File");
+				Element fileElement = document.createElement("File");
 
-				filesEl.appendChild(fileEl);
+				filesElement.appendChild(fileElement);
 
-				fileEl.setAttribute("name", _getLayoutName(layout));
-				fileEl.setAttribute("desc", _getLayoutName(layout));
-				fileEl.setAttribute("size", StringPool.BLANK);
-				fileEl.setAttribute(
+				fileElement.setAttribute("name", _getLayoutName(layout));
+				fileElement.setAttribute("desc", _getLayoutName(layout));
+				fileElement.setAttribute("size", StringPool.BLANK);
+				fileElement.setAttribute(
 					"url",
 					PortalUtil.getLayoutURL(
-						layout,arg.getThemeDisplay(), false));
+						layout,commandArgument.getThemeDisplay(), false));
 			}
 		}
 		else {
-			String layoutName = _getLayoutName(arg.getCurrentFolder());
+			String layoutName = _getLayoutName(
+				commandArgument.getCurrentFolder());
 
 			Layout layout = null;
 
@@ -163,52 +168,54 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			for (int i = 0; i < layoutChildren.size(); i++) {
 				layout = layoutChildren.get(i);
 
-				Element fileEl = doc.createElement("File");
+				Element fileElement = document.createElement("File");
 
-				filesEl.appendChild(fileEl);
+				filesElement.appendChild(fileElement);
 
-				fileEl.setAttribute("name", _getLayoutName(layout));
-				fileEl.setAttribute("desc", _getLayoutName(layout));
-				fileEl.setAttribute("size", getSize());
-				fileEl.setAttribute(
+				fileElement.setAttribute("name", _getLayoutName(layout));
+				fileElement.setAttribute("desc", _getLayoutName(layout));
+				fileElement.setAttribute("size", getSize());
+				fileElement.setAttribute(
 					"url",
 					PortalUtil.getLayoutURL(
-						layout, arg.getThemeDisplay(), false));
+						layout, commandArgument.getThemeDisplay(), false));
 			}
 		}
 	}
 
-	private void _getFolders(CommandArgument arg, Document doc, Node root)
+	private void _getFolders(
+			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
 
-		Element foldersEl = doc.createElement("Folders");
+		Element foldersElement = document.createElement("Folders");
 
-		root.appendChild(foldersEl);
+		rootNode.appendChild(foldersElement);
 
-		if (arg.getCurrentFolder().equals(StringPool.SLASH)) {
-			getRootFolders(arg, doc, foldersEl);
+		if (commandArgument.getCurrentFolder().equals(StringPool.SLASH)) {
+			getRootFolders(commandArgument, document, foldersElement);
 		}
 		else {
-			Group group = arg.getCurrentGroup();
+			Group group = commandArgument.getCurrentGroup();
 
 			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 				group.getGroupId(), false,
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
-			if (("/" + arg.getCurrentGroupName() + "/").equals(
-					arg.getCurrentFolder())) {
+			if (("/" + commandArgument.getCurrentGroupName() + "/").equals(
+					commandArgument.getCurrentFolder())) {
 
 				for (Layout layout : layouts) {
-					Element folderEl = doc.createElement("Folder");
+					Element folderElement = document.createElement("Folder");
 
-					foldersEl.appendChild(folderEl);
+					foldersElement.appendChild(folderElement);
 
-					folderEl.setAttribute(
+					folderElement.setAttribute(
 						"name", "~" + _getLayoutName(layout).replace('/', '>'));
 				}
 			}
 			else {
-				String layoutName = _getLayoutName(arg.getCurrentFolder());
+				String layoutName = _getLayoutName(
+					commandArgument.getCurrentFolder());
 
 				Layout layout = null;
 
@@ -226,11 +233,12 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 					for (int i = 0; i < layoutChildren.size(); i++) {
 						layout = layoutChildren.get(i);
 
-						Element folderEl = doc.createElement("Folder");
+						Element folderElement = document.createElement(
+							"Folder");
 
-						foldersEl.appendChild(folderEl);
+						foldersElement.appendChild(folderElement);
 
-						folderEl.setAttribute(
+						folderElement.setAttribute(
 							"name",
 							"~" + _getLayoutName(layout).replace('/', '>'));
 					}
