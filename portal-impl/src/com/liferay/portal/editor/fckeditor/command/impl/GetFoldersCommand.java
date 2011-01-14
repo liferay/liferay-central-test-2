@@ -28,13 +28,14 @@ import javax.servlet.http.HttpServletResponse;
 public class GetFoldersCommand implements Command {
 
 	public void execute(
-		CommandArgument argument, HttpServletRequest request,
+		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {
 
-		CommandReceiver receiver = CommandReceiverFactory.getCommandReceiver(
-			argument.getType());
+		CommandReceiver commandReceiver =
+			CommandReceiverFactory.getCommandReceiver(
+				commandArgument.getType());
 
-		receiver.getFolders(argument, request, response);
+		commandReceiver.getFolders(commandArgument, request, response);
 	}
 
 }

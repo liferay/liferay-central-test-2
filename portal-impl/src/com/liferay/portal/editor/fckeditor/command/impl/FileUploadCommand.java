@@ -28,13 +28,14 @@ import javax.servlet.http.HttpServletResponse;
 public class FileUploadCommand implements Command {
 
 	public void execute(
-		CommandArgument argument, HttpServletRequest request,
+		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {
 
-		CommandReceiver receiver = CommandReceiverFactory.getCommandReceiver(
-			argument.getType());
+		CommandReceiver commandReceiver =
+			CommandReceiverFactory.getCommandReceiver(
+				commandArgument.getType());
 
-		receiver.fileUpload(argument, request, response);
+		commandReceiver.fileUpload(commandArgument, request, response);
 	}
 
 }
