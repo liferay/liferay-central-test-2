@@ -159,14 +159,6 @@ create index IX_51556082 on DLFolder (parentFolderId, name);
 create index IX_CBC408D8 on DLFolder (uuid_);
 create unique index IX_3CC1DED2 on DLFolder (uuid_, groupId);
 
-create unique index IX_290C26BF on DeletionEntry (classNameId, classPK);
-create index IX_AE7AEDFE on DeletionEntry (companyId);
-create index IX_2D42DC00 on DeletionEntry (groupId);
-create index IX_71FB9D4E on DeletionEntry (groupId, classNameId);
-create index IX_67E538E7 on DeletionEntry (groupId, classNameId, parentId);
-create index IX_D141B350 on DeletionEntry (groupId, createDate, classNameId);
-create index IX_B8D13469 on DeletionEntry (groupId, createDate, classNameId, parentId);
-
 create index IX_1BB072CA on EmailAddress (companyId);
 create index IX_49D2DEC4 on EmailAddress (companyId, classNameId);
 create index IX_551A519F on EmailAddress (companyId, classNameId, classPK);

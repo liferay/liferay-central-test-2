@@ -1165,16 +1165,6 @@
 		<field name="firstReminder" type="int" />
 		<field name="secondReminder" type="int" />
 	</model>
-	<model name="com.liferay.portlet.deletion.model.DeletionEntry">
-		<field name="entryId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="createDate" type="Date" />
-		<field name="classNameId" type="long" />
-		<field name="classPK" type="long" />
-		<field name="classUuid" type="String" />
-		<field name="parentId" type="long" />
-	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileEntry">
 		<field name="uuid" type="String" />
 		<field name="fileEntryId" type="long" />

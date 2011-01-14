@@ -25,17 +25,6 @@ drop index IX_94E784D2 on DLFileVersion;
 drop index IX_2F8FED9C on DLFileVersion;
 alter table DLFileVersion add fileEntryId LONG;
 
-create table DeletionEntry (
-	entryId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	createDate DATE null,
-	classNameId LONG,
-	classPK LONG,
-	classUuid VARCHAR(75) null,
-	parentId LONG
-);
-
 update Group_ set type_ = 3 where type_ = 0;
 
 alter table Layout drop column dlFolderId;

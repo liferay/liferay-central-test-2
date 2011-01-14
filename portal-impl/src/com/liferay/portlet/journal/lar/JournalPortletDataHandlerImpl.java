@@ -51,8 +51,6 @@ import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.deletion.model.DeletionEntry;
-import com.liferay.portlet.deletion.service.DeletionEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
@@ -64,8 +62,6 @@ import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
-import com.liferay.portlet.journal.RequiredStructureException;
-import com.liferay.portlet.journal.RequiredTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleImage;
@@ -2298,34 +2294,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
-	protected void doExportDeletions(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences)
-		throws Exception {
-
-		Date startDate = portletDataContext.getStartDate();
-
-		portletDataContext.addDeletionEntries(
-			DeletionEntryLocalServiceUtil.getEntries(
-				portletDataContext.getScopeGroupId(),
-				startDate, JournalStructure.class.getName()));
-
-		portletDataContext.addDeletionEntries(
-			DeletionEntryLocalServiceUtil.getEntries(
-				portletDataContext.getScopeGroupId(),
-				startDate, JournalTemplate.class.getName()));
-
-		portletDataContext.addDeletionEntries(
-			DeletionEntryLocalServiceUtil.getEntries(
-				portletDataContext.getScopeGroupId(),
-				startDate, JournalFeed.class.getName()));
-
-		portletDataContext.addDeletionEntries(
-			DeletionEntryLocalServiceUtil.getEntries(
-				portletDataContext.getScopeGroupId(),
-				startDate, JournalArticleResource.class.getName()));
-	}
-
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)
@@ -2378,110 +2346,6 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		return portletPreferences;
-	}
-
-	protected void doImportDeletions(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences, String data)
-		throws Exception {
-
-		List<String> paths = portletDataContext.getDeletionEntries(
-			JournalStructure.class.getName());
-
-		for (String path : paths) {
-			if (portletDataContext.isPathNotProcessed(path)) {
-				DeletionEntry deletionEntry =
-					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
-
-				JournalStructure structure = JournalStructureUtil.fetchByUUID_G(
-					deletionEntry.getClassUuid(),
-					portletDataContext.getScopeGroupId());
-
-				if (structure != null) {
-					try {
-						JournalStructureLocalServiceUtil.deleteStructure(
-							structure.getGroupId(), structure.getStructureId());
-					}
-					catch (RequiredStructureException rse) {
-						_log.warn(
-							"A structure that is still being used was queued " +
-								"for deletion: " + structure.toString());
-					}
-				}
-			}
-		}
-
-		paths = portletDataContext.getDeletionEntries(
-			JournalTemplate.class.getName());
-
-		for (String path : paths) {
-			if (portletDataContext.isPathNotProcessed(path)) {
-				DeletionEntry deletionEntry =
-					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
-
-				JournalTemplate template = JournalTemplateUtil.fetchByUUID_G(
-					deletionEntry.getClassUuid(),
-					portletDataContext.getScopeGroupId());
-
-				if (template != null) {
-					try {
-						JournalTemplateLocalServiceUtil.deleteTemplate(
-							template.getGroupId(), template.getTemplateId());
-					}
-					catch (RequiredTemplateException rte) {
-						_log.warn(
-							"A template that is still being used was queued " +
-								"for deletion: " + template.toString());
-					}
-				}
-			}
-		}
-
-		paths = portletDataContext.getDeletionEntries(
-			JournalFeed.class.getName());
-
-		for (String path : paths) {
-			if (portletDataContext.isPathNotProcessed(path)) {
-				DeletionEntry deletionEntry =
-					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
-
-				JournalFeed feed = JournalFeedUtil.fetchByUUID_G(
-					deletionEntry.getClassUuid(),
-					portletDataContext.getScopeGroupId());
-
-				if (feed != null) {
-					JournalFeedLocalServiceUtil.deleteFeed(
-						feed.getGroupId(), feed.getFeedId());
-				}
-			}
-		}
-
-		paths = portletDataContext.getDeletionEntries(
-			JournalArticleResource.class.getName());
-
-		for (String path : paths) {
-			if (portletDataContext.isPathNotProcessed(path)) {
-				DeletionEntry deletionEntry =
-					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
-
-				JournalArticleResource articleResource =
-					JournalArticleResourceUtil.fetchByUUID_G(
-						deletionEntry.getClassUuid(),
-						portletDataContext.getScopeGroupId());
-
-				if (articleResource != null) {
-					List<JournalArticle> articles =
-						JournalArticleLocalServiceUtil.getArticles(
-							articleResource.getGroupId(),
-							articleResource.getArticleId());
-
-					for (JournalArticle article : articles) {
-						JournalArticleLocalServiceUtil.deleteArticle(
-							article.getGroupId(), article.getArticleId(), null);
-					}
-				}
-			}
-		}
 	}
 
 	private static final boolean _ALWAYS_EXPORTABLE = true;

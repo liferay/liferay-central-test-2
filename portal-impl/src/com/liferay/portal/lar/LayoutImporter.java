@@ -74,7 +74,6 @@ import com.liferay.portlet.asset.DuplicateVocabularyException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
-import com.liferay.portlet.deletion.model.DeletionEntry;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 import java.io.File;
@@ -294,23 +293,6 @@ public class LayoutImporter {
 		_portletImporter.readTags(context, rootElement);
 
 		// Layouts
-
-		List<String> deletedLayouts = context.getDeletionEntries(
-			Layout.class.getName());
-
-		for (String path : deletedLayouts) {
-			if (context.isPathNotProcessed(path)) {
-				DeletionEntry deletedLayout =
-					(DeletionEntry)context.getZipEntryAsObject(path);
-
-				Layout layout = LayoutUtil.fetchByUUID_G(
-					deletedLayout.getClassUuid(), deletedLayout.getGroupId());
-
-				if (layout != null) {
-					LayoutLocalServiceUtil.deleteLayout(layout.getPlid());
-				}
-			}
-		}
 
 		List<Layout> previousLayouts = LayoutUtil.findByG_P(
 			groupId, privateLayout);

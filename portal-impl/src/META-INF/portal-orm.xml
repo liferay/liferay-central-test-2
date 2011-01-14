@@ -1464,21 +1464,6 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.deletion.model.impl.DeletionEntryModelImpl">
-		<attributes>
-			<id name="entryId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="classUuid" />
-			<basic name="parentId" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl">
 		<attributes>
 			<id name="fileEntryId" />
@@ -3202,10 +3187,6 @@
 		<attributes>
 			<transient name="recurrenceObj" />
 		</attributes>
-	</entity>
-	<entity class="com.liferay.portlet.deletion.model.impl.DeletionEntryImpl" name="DeletionEntry">
-		<table name="DeletionEntry" />
-		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" name="DLFileEntry">
 		<table name="DLFileEntry" />

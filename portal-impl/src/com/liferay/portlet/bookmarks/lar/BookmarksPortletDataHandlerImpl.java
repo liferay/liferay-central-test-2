@@ -32,10 +32,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
-import com.liferay.portlet.deletion.model.DeletionEntry;
-import com.liferay.portlet.deletion.service.DeletionEntryLocalServiceUtil;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -122,24 +119,6 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
-	protected void doExportDeletions(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences)
-		throws Exception {
-
-		Date startDate = portletDataContext.getStartDate();
-
-		portletDataContext.addDeletionEntries(
-			DeletionEntryLocalServiceUtil.getEntries(
-				portletDataContext.getScopeGroupId(),
-				startDate, BookmarksFolder.class.getName()));
-
-		portletDataContext.addDeletionEntries(
-			DeletionEntryLocalServiceUtil.getEntries(
-				portletDataContext.getScopeGroupId(),
-				startDate, BookmarksEntry.class.getName()));
-	}
-
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)
@@ -185,52 +164,6 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		return null;
-	}
-
-	protected void doImportDeletions(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences, String data)
-		throws Exception {
-
-		List<String> paths = portletDataContext.getDeletionEntries(
-			BookmarksFolder.class.getName());
-
-		for (String path : paths) {
-			if (portletDataContext.isPathNotProcessed(path)) {
-				DeletionEntry deletionEntry =
-					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
-
-				BookmarksFolder bookmarksFolder =
-					BookmarksFolderUtil.fetchByUUID_G(
-						deletionEntry.getClassUuid(),
-						portletDataContext.getScopeGroupId());
-
-				if (bookmarksFolder != null) {
-					BookmarksFolderLocalServiceUtil.deleteFolder(
-						bookmarksFolder.getFolderId());
-				}
-			}
-		}
-
-		paths = portletDataContext.getDeletionEntries(
-			BookmarksEntry.class.getName());
-
-		for (String path : paths) {
-			if (portletDataContext.isPathNotProcessed(path)) {
-				DeletionEntry deletionEntry =
-					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
-
-				BookmarksEntry bookmarksEntry =
-					BookmarksEntryUtil.fetchByUUID_G(
-						deletionEntry.getClassUuid(),
-						portletDataContext.getScopeGroupId());
-
-				if (bookmarksEntry != null) {
-					BookmarksEntryLocalServiceUtil.deleteEntry(
-						bookmarksEntry.getEntryId());
-				}
-			}
-		}
 	}
 
 	protected void exportFolder(

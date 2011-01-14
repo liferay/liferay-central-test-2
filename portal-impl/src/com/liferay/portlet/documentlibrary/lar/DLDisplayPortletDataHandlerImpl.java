@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -96,19 +95,6 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element fileRanksElement = rootElement.addElement("file-ranks");
 
 		if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLPortletDataHandlerImpl.exportDeletions(
-				portletDataContext, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-			List<FileEntry> fileEntries = FileEntryUtil.findByR_F(
-				portletDataContext.getScopeGroupId(),
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-
-			for (FileEntry fileEntry : fileEntries) {
-				DLPortletDataHandlerImpl.exportFileEntry(
-					portletDataContext, foldersElement, fileEntriesElement,
-					fileRanksElement, fileEntry, true);
-			}
-
 			List<Folder> folders = FolderUtil.findByRepositoryId(
 				portletDataContext.getScopeGroupId());
 
@@ -203,14 +189,6 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		return portletPreferences;
-	}
-
-	protected void doImportDeletions(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences, String data)
-		throws Exception {
-
-		DLPortletDataHandlerImpl.importDeletions(portletDataContext);
 	}
 
 	private static final String _NAMESPACE = "document_library";

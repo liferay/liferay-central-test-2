@@ -467,17 +467,6 @@ create table DLFolder (
 	lastPostDate DATE null
 );
 
-create table DeletionEntry (
-	entryId LONG not null primary key,
-	groupId LONG,
-	companyId LONG,
-	createDate DATE null,
-	classNameId LONG,
-	classPK LONG,
-	classUuid VARCHAR(75) null,
-	parentId LONG
-);
-
 create table EmailAddress (
 	emailAddressId LONG not null primary key,
 	companyId LONG,

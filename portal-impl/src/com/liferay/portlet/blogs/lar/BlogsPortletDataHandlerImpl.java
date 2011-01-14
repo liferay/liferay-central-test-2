@@ -35,13 +35,10 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-import com.liferay.portlet.deletion.model.DeletionEntry;
-import com.liferay.portlet.deletion.service.DeletionEntryLocalServiceUtil;
 
 import java.io.File;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
@@ -105,19 +102,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
-	protected void doExportDeletions(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences)
-		throws Exception {
-
-		Date startDate = portletDataContext.getStartDate();
-
-		portletDataContext.addDeletionEntries(
-			DeletionEntryLocalServiceUtil.getEntries(
-				portletDataContext.getScopeGroupId(), startDate,
-				BlogsEntry.class.getName()));
-	}
-
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)
@@ -149,31 +133,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		return null;
-	}
-
-	protected void doImportDeletions(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences, String data)
-		throws Exception {
-
-		List<String> paths = portletDataContext.getDeletionEntries(
-			BlogsEntry.class.getName());
-
-		for (String path : paths) {
-			if (portletDataContext.isPathNotProcessed(path)) {
-				DeletionEntry deletionEntry =
-					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
-
-				BlogsEntry blogsEntry = BlogsEntryUtil.fetchByUUID_G(
-					deletionEntry.getClassUuid(),
-					portletDataContext.getScopeGroupId());
-
-				if (blogsEntry != null) {
-					BlogsEntryLocalServiceUtil.deleteEntry(
-						blogsEntry.getEntryId());
-				}
-			}
-		}
 	}
 
 	protected void exportEntry(

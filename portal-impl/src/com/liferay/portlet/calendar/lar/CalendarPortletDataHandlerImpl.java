@@ -30,8 +30,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
-import com.liferay.portlet.deletion.model.DeletionEntry;
-import com.liferay.portlet.deletion.service.DeletionEntryLocalServiceUtil;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -102,19 +100,6 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
-	protected void doExportDeletions(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences)
-		throws Exception {
-
-		Date startDate = portletDataContext.getStartDate();
-
-		portletDataContext.addDeletionEntries(
-			DeletionEntryLocalServiceUtil.getEntries(
-				portletDataContext.getScopeGroupId(), startDate,
-				CalEvent.class.getName()));
-	}
-
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)
@@ -143,31 +128,6 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		return null;
-	}
-
-	protected void doImportDeletions(
-			PortletDataContext portletDataContext, String portletId,
-			PortletPreferences portletPreferences, String data)
-		throws Exception {
-
-		List<String> paths = portletDataContext.getDeletionEntries(
-			CalEvent.class.getName());
-
-		for (String path : paths) {
-			if (portletDataContext.isPathNotProcessed(path)) {
-				DeletionEntry deletionEntry =
-					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
-
-				CalEvent calEvent = CalEventUtil.fetchByUUID_G(
-					deletionEntry.getClassUuid(),
-					portletDataContext.getScopeGroupId());
-
-				if (calEvent != null) {
-					CalEventLocalServiceUtil.deleteEvent(
-						calEvent.getEventId());
-				}
-			}
-		}
 	}
 
 	protected void exportEvent(
