@@ -36,17 +36,7 @@ if (organization != null) {
 	miscellaneousSections = PropsUtil.getArray(PropsKeys.ORGANIZATIONS_FORM_UPDATE_MISCELLANEOUS, new Filter(organization.getType()));
 }
 
-String[] allSections = ArrayUtil.append(mainSections, ArrayUtil.append(identificationSections, miscellaneousSections));
-
 String[][] categorySections = {mainSections, identificationSections, miscellaneousSections};
-
-String curSection = mainSections[0];
-
-String historyKey = ParamUtil.getString(request, "historyKey");
-
-if (Validator.isNotNull(historyKey)) {
-	curSection = historyKey;
-}
 %>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/organization/toolbar.jsp">
@@ -68,66 +58,40 @@ if (Validator.isNotNull(historyKey)) {
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
 
-	<div id="<portlet:namespace />sectionsContainer">
-		<table class="organization-table" width="100%">
-		<tr>
-			<td>
+	<%
+	request.setAttribute("addresses.className", Organization.class.getName());
+	request.setAttribute("addresses.classPK", organizationId);
+	request.setAttribute("emailAddresses.className", Organization.class.getName());
+	request.setAttribute("emailAddresses.classPK", organizationId);
+	request.setAttribute("phones.className", Organization.class.getName());
+	request.setAttribute("phones.classPK", organizationId);
+	request.setAttribute("websites.className", Organization.class.getName());
+	request.setAttribute("websites.classPK", organizationId);
+	%>
 
-				<%
-				request.setAttribute("addresses.className", Organization.class.getName());
-				request.setAttribute("addresses.classPK", organizationId);
-				request.setAttribute("emailAddresses.className", Organization.class.getName());
-				request.setAttribute("emailAddresses.classPK", organizationId);
-				request.setAttribute("phones.className", Organization.class.getName());
-				request.setAttribute("phones.classPK", organizationId);
-				request.setAttribute("websites.className", Organization.class.getName());
-				request.setAttribute("websites.classPK", organizationId);
+	<liferay-util:buffer var="htmlTop">
+		<c:if test="<%= organization != null %>">
 
-				for (String section : allSections) {
-					String sectionId = _getSectionId(section);
-					String sectionJsp = "/html/portlet/enterprise_admin/organization/" + _getSectionJsp(section) + ".jsp";
-				%>
+			<%
+			long logoId = organization.getLogoId();
+			%>
 
-					<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
-						<liferay-util:include page="<%= sectionJsp %>" />
-					</div>
+			<div class="organization-info">
+				<div class="float-container">
+					<img alt="<%= HtmlUtil.escape(organization.getName()) %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
 
-				<%
-				}
-				%>
-
-				<div class="lfr-component form-navigation">
-					<div class="organization-info">
-						<p class="float-container">
-							<c:if test="<%= organization != null %>">
-
-								<%
-								long logoId = organization.getLogoId();
-								%>
-
-								<img alt="<%= HtmlUtil.escape(organization.getName()) %>" class="avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
-
-								<span><%= HtmlUtil.escape(organization.getName()) %></span>
-							</c:if>
-						</p>
-					</div>
-
-					<%
-					String[] categoryNames = _CATEGORY_NAMES;
-					%>
-
-					<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
-
-					<aui:button-row>
-						<aui:button type="submit" />
-
-						<aui:button onClick="<%= backURL %>" type="cancel" />
-					</aui:button-row>
+					<span class="organization-name"><%= HtmlUtil.escape(organization.getName()) %></span>
 				</div>
-			</td>
-		</tr>
-		</table>
-	</div>
+			</div>
+		</c:if>
+	</liferay-util:buffer>
+
+	<liferay-ui:form-navigator
+		categoryNames="<%= _CATEGORY_NAMES %>"
+		categorySections="<%= categorySections %>"
+		htmlTop="<%= htmlTop %>"
+		jspPath="/html/portlet/enterprise_admin/organization/"
+	/>
 </aui:form>
 
 <aui:script>
