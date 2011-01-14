@@ -221,7 +221,6 @@ public class BBCodeUtil {
 				sb.append(preTag);
 			}
 
-			sb.append(preTag);
 			sb.append("<a href='mailto: ");
 			sb.append(mailto);
 			sb.append("'>");
