@@ -288,27 +288,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return new LayoutTypePortletImpl(this);
 	}
 
-	public String getName(Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getName(localeLanguageId);
-	}
-
-	public String getName(Locale locale, boolean useDefault) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getName(localeLanguageId, useDefault);
-	}
-
-	public String getName(String localeLanguageId) {
-		return LocalizationUtil.getLocalization(getName(), localeLanguageId);
-	}
-
-	public String getName(String localeLanguageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(
-			getName(), localeLanguageId, useDefault);
-	}
-
 	public long getParentPlid() throws PortalException, SystemException {
 		if (getParentLayoutId() == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 			return 0;
@@ -363,27 +342,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return ThemeLocalServiceUtil.getTheme(
 				getCompanyId(), getThemeId(), false);
 		}
-	}
-
-	public String getTitle(Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getTitle(localeLanguageId);
-	}
-
-	public String getTitle(Locale locale, boolean useDefault) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getTitle(localeLanguageId, useDefault);
-	}
-
-	public String getTitle(String localeLanguageId) {
-		return LocalizationUtil.getLocalization(getTitle(), localeLanguageId);
-	}
-
-	public String getTitle(String localeLanguageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(
-			getTitle(), localeLanguageId, useDefault);
 	}
 
 	public String getTypeSettings() {
@@ -609,36 +567,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 		else {
 			return false;
-		}
-	}
-
-	public void setName(String name, Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		if (Validator.isNotNull(name)) {
-			setName(
-				LocalizationUtil.updateLocalization(
-					getName(), "name", name, localeLanguageId));
-		}
-		else {
-			setName(
-				LocalizationUtil.removeLocalization(
-					getName(), "name", localeLanguageId));
-		}
-	}
-
-	public void setTitle(String title, Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		if (Validator.isNotNull(title)) {
-			setTitle(
-				LocalizationUtil.updateLocalization(
-					getTitle(), "title", title, localeLanguageId));
-		}
-		else {
-			setTitle(
-				LocalizationUtil.removeLocalization(
-					getTitle(), "title", localeLanguageId));
 		}
 	}
 
