@@ -1577,12 +1577,6 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLHome(urlHome);
 
-		Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
-				companyId, GroupConstants.CONTROL_PANEL);
-
-		long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
-			controlPanelGroup.getGroupId(), true);
-
 		if (layout != null) {
 			if (layout.isTypePortlet()) {
 				boolean freeformLayout =
@@ -1626,6 +1620,12 @@ public class ServicePreAction extends Action {
 					hasManageLayoutsPermission = false;
 				}
 			}
+
+			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
+				companyId, GroupConstants.CONTROL_PANEL);
+
+			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
+				controlPanelGroup.getGroupId(), true);
 
 			if (hasManageLayoutsPermission) {
 				themeDisplay.setShowPageSettingsIcon(true);
