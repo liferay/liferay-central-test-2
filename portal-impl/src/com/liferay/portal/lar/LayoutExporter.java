@@ -63,10 +63,13 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
+import com.liferay.portlet.deletion.model.DeletionEntry;
+import com.liferay.portlet.deletion.service.DeletionEntryLocalServiceUtil;
 import com.liferay.util.ContentUtil;
 
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -275,8 +278,15 @@ public class LayoutExporter {
 			new LinkedHashMap<String, Object[]>();
 
 		List<Layout> layouts = null;
+		List<DeletionEntry> deletedLayouts = new ArrayList<DeletionEntry>();
 
 		if ((layoutIds == null) || (layoutIds.length == 0)) {
+			List<DeletionEntry> curDeletedLayouts =
+				DeletionEntryLocalServiceUtil.getEntries(
+					groupId, Layout.class.getName(), 0);
+
+			deletedLayouts.addAll(curDeletedLayouts);
+
 			layouts = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout);
 		}
 		else {
@@ -335,8 +345,8 @@ public class LayoutExporter {
 		for (Layout layout : layouts) {
 			exportLayout(
 				context, layoutConfigurationPortlet, layoutCache, portletIds,
-				exportPermissions, exportUserPermissions, layout,
-				layoutsElement);
+				deletedLayouts, exportPermissions, exportUserPermissions,
+				layout, layoutsElement);
 		}
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM < 5) {
@@ -382,6 +392,10 @@ public class LayoutExporter {
 		}
 
 		context.setScopeGroupId(previousScopeGroupId);
+
+		// Deletions
+
+		context.addDeletionEntries(deletedLayouts);
 
 		// Categories
 
@@ -479,8 +493,9 @@ public class LayoutExporter {
 	protected void exportLayout(
 			PortletDataContext context, Portlet layoutConfigurationPortlet,
 			LayoutCache layoutCache, Map<String, Object[]> portletIds,
-			boolean exportPermissions, boolean exportUserPermissions,
-			Layout layout, Element layoutsElement)
+			List<DeletionEntry> deletedLayouts, boolean exportPermissions,
+			boolean exportUserPermissions, Layout layout,
+			Element layoutsElement)
 		throws Exception {
 
 		String path = context.getLayoutPath(
@@ -517,6 +532,12 @@ public class LayoutExporter {
 
 			return;
 		}
+
+		List<DeletionEntry> curDeletedLayouts =
+			DeletionEntryLocalServiceUtil.getEntries(
+				layout.getGroupId(), Layout.class.getName(), layout.getPlid());
+
+		deletedLayouts.addAll(curDeletedLayouts);
 
 		context.setPlid(layout.getPlid());
 
@@ -599,8 +620,8 @@ public class LayoutExporter {
 
 					exportLayout(
 						context, layoutConfigurationPortlet, layoutCache,
-						portletIds,	exportPermissions, exportUserPermissions,
-						linkedToLayout, layoutsElement);
+						portletIds, deletedLayouts,	exportPermissions,
+						exportUserPermissions, linkedToLayout, layoutsElement);
 				}
 				catch (NoSuchLayoutException nsle) {
 				}

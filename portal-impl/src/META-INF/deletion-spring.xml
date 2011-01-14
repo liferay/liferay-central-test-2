@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+
+<beans
+	default-destroy-method="destroy"
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+>
+	<bean id="com.liferay.portal.deletion.DeletionAdvice" class="com.liferay.portal.deletion.DeletionAdvice" />
+
+	<aop:config>
+		<aop:aspect ref="com.liferay.portal.deletion.DeletionAdvice">
+			<aop:around pointcut="execution(* com.liferay.portal.service.GroupLocalService.deleteGroup(long))" method="clearGroupDeletions" />
+			<aop:around pointcut="execution(* com.liferay.portal.service.persistence.LayoutPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.asset.service.persistence.AssetTagPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.asset.service.persistence.AssetVocabularyPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.calendar.service.persistence.CalEventPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService.deleteFileEntry(long))" method="trackDLFileEntryDeletion" />
+			<aop:around pointcut="execution(* com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService.deleteFolder(long))" method="trackDLFolderDeletion" />
+			<aop:around pointcut="execution(* com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.remove(..)) and args(model)" method="trackDeletion" />
+			<aop:around pointcut="execution(* com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.remove(..)) and args(model)" method="trackDeletion"/>
+			<aop:around pointcut="execution(* com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.remove(..)) and args(model)" method="trackDeletion"/>
+		</aop:aspect>
+	</aop:config>
+</beans>

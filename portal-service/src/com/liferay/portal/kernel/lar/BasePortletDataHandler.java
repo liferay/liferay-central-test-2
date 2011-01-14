@@ -41,6 +41,9 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			doExportDeletions(
+				portletDataContext, portletId, portletPreferences);
+
 			return doExportData(
 				portletDataContext, portletId, portletPreferences);
 		}
@@ -71,6 +74,9 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
+			doImportDeletions(
+				portletDataContext, portletId, portletPreferences, data);
+
 			return doImportData(
 				portletDataContext, portletId, portletPreferences, data);
 		}
@@ -95,12 +101,24 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		return null;
 	}
 
+	protected void doExportDeletions(
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
+		throws Exception {
+	}
+
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)
 		throws Exception {
 
 		return null;
+	}
+
+	protected void doImportDeletions(
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
+		throws Exception {
 	}
 
 	private static final boolean _ALWAYS_EXPORTABLE = false;

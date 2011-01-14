@@ -15,6 +15,8 @@
 package com.liferay.portlet.documentlibrary.lar;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -38,10 +40,13 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.deletion.model.DeletionEntry;
+import com.liferay.portlet.deletion.service.DeletionEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
@@ -50,6 +55,7 @@ import com.liferay.util.PwdGenerator;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -61,6 +67,28 @@ import javax.portlet.PortletPreferences;
  * @author Raymond Augé
  */
 public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
+
+	public static void exportDeletions(
+			PortletDataContext portletDataContext, long folderId)
+		throws PortalException, SystemException {
+
+		Date startDate = portletDataContext.getStartDate();
+
+		portletDataContext.addDeletionEntries(
+			DeletionEntryLocalServiceUtil.getEntries(
+				portletDataContext.getScopeGroupId(), startDate,
+				Folder.class.getName(), folderId));
+
+		portletDataContext.addDeletionEntries(
+			DeletionEntryLocalServiceUtil.getEntries(
+				portletDataContext.getScopeGroupId(), startDate,
+				FileEntry.class.getName(), folderId));
+
+		portletDataContext.addDeletionEntries(
+			DeletionEntryLocalServiceUtil.getEntries(
+				portletDataContext.getScopeGroupId(), startDate,
+				DLFileShortcut.class.getName(), folderId));
+	}
 
 	public static void exportFileEntry(
 			PortletDataContext portletDataContext, Element foldersElement,
@@ -183,6 +211,68 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		sb.append(".xml");
 
 		return sb.toString();
+	}
+
+	public static void importDeletions(PortletDataContext portletDataContext)
+		throws PortalException, SystemException {
+
+		List<String> paths = portletDataContext.getDeletionEntries(
+			Folder.class.getName());
+
+		for (String path : paths) {
+			if (portletDataContext.isPathNotProcessed(path)) {
+				DeletionEntry deletionEntry =
+					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
+
+				Folder folder = FolderUtil.fetchByUUID_R(
+					deletionEntry.getClassUuid(),
+					portletDataContext.getScopeGroupId());
+
+				if (folder != null) {
+					DLAppLocalServiceUtil.deleteFolder(folder.getFolderId());
+				}
+			}
+		}
+
+		paths = portletDataContext.getDeletionEntries(
+			FileEntry.class.getName());
+
+		for (String path : paths) {
+			if (portletDataContext.isPathNotProcessed(path)) {
+				DeletionEntry deletionEntry =
+					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
+
+				FileEntry fileEntry =
+					FileEntryUtil.fetchByUUID_R(
+						deletionEntry.getClassUuid(),
+						portletDataContext.getScopeGroupId());
+
+				if (fileEntry != null) {
+					DLAppLocalServiceUtil.deleteFileEntry(
+						fileEntry.getFileEntryId());
+				}
+			}
+		}
+
+		paths = portletDataContext.getDeletionEntries(
+			DLFileShortcut.class.getName());
+
+		for (String path : paths) {
+			if (portletDataContext.isPathNotProcessed(path)) {
+				DeletionEntry deletionEntry =
+					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
+
+				DLFileShortcut dlFileShortcut =
+					DLFileShortcutUtil.fetchByUUID_G(
+						deletionEntry.getClassUuid(),
+						portletDataContext.getScopeGroupId());
+
+				if (dlFileShortcut != null) {
+					DLFileShortcutLocalServiceUtil.deleteFileShortcut(
+						dlFileShortcut.getFileShortcutId());
+				}
+			}
+		}
 	}
 
 	public static void importFileEntry(
@@ -508,6 +598,8 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element fileEntriesElement, Element fileShortcutsElement,
 			Element fileRanksElement, Folder folder, boolean recurse)
 		throws Exception {
+
+		exportDeletions(portletDataContext, folder.getFolderId());
 
 		if (portletDataContext.isWithinDateRange(folder.getModifiedDate())) {
 			exportParentFolder(
@@ -947,6 +1039,9 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			"com.liferay.portlet.documentlibrary",
 			portletDataContext.getScopeGroupId());
 
+		exportDeletions(
+			portletDataContext, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement("documentlibrary-data");
@@ -1068,6 +1163,14 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		return portletPreferences;
+	}
+
+	protected void doImportDeletions(
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
+		throws Exception {
+
+		importDeletions(portletDataContext);
 	}
 
 	private static final boolean _ALWAYS_EXPORTABLE = true;

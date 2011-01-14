@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -61,6 +62,8 @@ import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
+import com.liferay.portlet.deletion.model.DeletionEntry;
+import com.liferay.portlet.deletion.service.DeletionEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
@@ -248,6 +251,20 @@ public class PortletDataContextImpl implements PortletDataContext {
 		String className, long classPK, List<MBMessage> messages) {
 
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
+	}
+
+	public void addDeletionEntries(List<DeletionEntry> deletionEntries)
+		throws SystemException, PortalException {
+
+		for (DeletionEntry deletionEntry : deletionEntries) {
+			String path = getDeletionEntryPath(
+				deletionEntry.getClassNameId(), deletionEntry.getClassPK());
+
+			addZipEntry(path, deletionEntry);
+
+			DeletionEntryLocalServiceUtil.deleteDeletionEntry(
+				deletionEntry.getEntryId());
+		}
 	}
 
 	public void addLocks(Class<?> classObj, String key)
@@ -497,6 +514,58 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public String getDataStrategy() {
 		return _dataStrategy;
+	}
+
+	public List<String> getDeletionEntries(long classNameId) {
+		String path = getDeletionEntryRootPath(classNameId);
+
+		return getZipFolderEntries(path);
+	}
+
+	public List<String> getDeletionEntries(String className) {
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getDeletionEntries(classNameId);
+	}
+
+	public String getDeletionEntryPath(long classNameId, long classPK) {
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(getDeletionEntryRootPath(classNameId));
+		sb.append(classPK);
+		sb.append(StringPool.PERIOD);
+		sb.append("xml");
+
+		return sb.toString();
+	}
+
+	public String getDeletionEntryPath(String className, long classPK) {
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getDeletionEntryPath(classNameId, classPK);
+	}
+
+	public String getDeletionEntryRootPath(long classNameId) {
+		StringBundler sb = new StringBundler(4);
+
+		if (_zipReader != null) {
+			sb.append(getSourceRootPath());
+		}
+		else {
+			sb.append(getRootPath());
+		}
+
+		sb.append(ROOT_PATH_DELETIONS);
+		sb.append(classNameId);
+		sb.append(StringPool.SLASH);
+
+		return sb.toString();
+	}
+
+	public String getDeletionEntryRootPath(String className) {
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getDeletionEntryRootPath(classNameId);
 	}
 
 	public Date getEndDate() {

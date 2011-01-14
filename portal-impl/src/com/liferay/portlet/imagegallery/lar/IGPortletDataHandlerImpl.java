@@ -34,6 +34,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.deletion.model.DeletionEntry;
+import com.liferay.portlet.deletion.service.DeletionEntryLocalServiceUtil;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGFolderConstants;
@@ -46,6 +48,7 @@ import com.liferay.util.PwdGenerator;
 
 import java.io.File;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -660,6 +663,24 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		return document.formattedString();
 	}
 
+	protected void doExportDeletions(
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences)
+		throws Exception {
+
+		Date startDate = portletDataContext.getStartDate();
+
+		portletDataContext.addDeletionEntries(
+			DeletionEntryLocalServiceUtil.getEntries(
+				portletDataContext.getScopeGroupId(), startDate,
+				IGFolder.class.getName()));
+
+		portletDataContext.addDeletionEntries(
+			DeletionEntryLocalServiceUtil.getEntries(
+				portletDataContext.getScopeGroupId(), startDate,
+				IGImage.class.getName()));
+	}
+
 	protected PortletPreferences doImportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)
@@ -711,6 +732,48 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		return null;
+	}
+
+	protected void doImportDeletions(
+			PortletDataContext portletDataContext, String portletId,
+			PortletPreferences portletPreferences, String data)
+		throws Exception {
+
+		List<String> paths = portletDataContext.getDeletionEntries(
+			IGFolder.class.getName());
+
+		for (String path : paths) {
+			if (portletDataContext.isPathNotProcessed(path)) {
+				DeletionEntry deletionEntry =
+					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
+
+				IGFolder folder = IGFolderUtil.fetchByUUID_G(
+					deletionEntry.getClassUuid(),
+					portletDataContext.getScopeGroupId());
+
+				if (folder != null) {
+					IGFolderLocalServiceUtil.deleteFolder(folder.getFolderId());
+				}
+			}
+		}
+
+		paths = portletDataContext.getDeletionEntries(
+			IGImage.class.getName());
+
+		for (String path : paths) {
+			if (portletDataContext.isPathNotProcessed(path)) {
+				DeletionEntry deletionEntry =
+					(DeletionEntry)portletDataContext.getZipEntryAsObject(path);
+
+				IGImage image = IGImageUtil.fetchByUUID_G(
+					deletionEntry.getClassUuid(),
+					portletDataContext.getScopeGroupId());
+
+				if (image != null) {
+					IGImageLocalServiceUtil.deleteImage(image.getImageId());
+				}
+			}
+		}
 	}
 
 	private static final boolean _ALWAYS_EXPORTABLE = true;

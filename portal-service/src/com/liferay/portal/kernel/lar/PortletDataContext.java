@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Lock;
+import com.liferay.portlet.deletion.model.DeletionEntry;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
@@ -41,6 +42,8 @@ import java.util.Set;
  * @author Raymond Augé
  */
 public interface PortletDataContext extends Serializable {
+
+	public static final String ROOT_PATH_DELETIONS = "/deletions/";
 
 	public static final String ROOT_PATH_GROUPS = "/groups/";
 
@@ -65,6 +68,9 @@ public interface PortletDataContext extends Serializable {
 
 	public void addComments(
 		String className, long classPK, List<MBMessage> messages);
+
+	public void addDeletionEntries(List<DeletionEntry> deletionEntries)
+		throws PortalException, SystemException;
 
 	public void addLocks(Class<?> classObj, String key)
 		throws PortalException, SystemException;
@@ -124,6 +130,18 @@ public interface PortletDataContext extends Serializable {
 	public long getCompanyId();
 
 	public String getDataStrategy();
+
+	public List<String> getDeletionEntries(long classNameId);
+
+	public List<String> getDeletionEntries(String className);
+
+	public String getDeletionEntryPath(long classNameId, long classPK);
+
+	public String getDeletionEntryPath(String className, long classPK);
+
+	public String getDeletionEntryRootPath(long classNameId);
+
+	public String getDeletionEntryRootPath(String className);
 
 	public Date getEndDate();
 
