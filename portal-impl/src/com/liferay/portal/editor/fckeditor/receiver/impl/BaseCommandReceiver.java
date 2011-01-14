@@ -376,12 +376,12 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		rootElement.setAttribute("command", command);
 		rootElement.setAttribute("resourceType", resourceType);
 
-		Element element = document.createElement("CurrentFolder");
+		Element currentFolderElement = document.createElement("CurrentFolder");
 
-		rootElement.appendChild(element);
+		rootElement.appendChild(currentFolderElement);
 
-		element.setAttribute("path", path);
-		element.setAttribute("url", url);
+		currentFolderElement.setAttribute("path", path);
+		currentFolderElement.setAttribute("url", url);
 
 		return rootElement;
 	}
