@@ -74,23 +74,23 @@ import org.w3c.dom.Node;
 public abstract class BaseCommandReceiver implements CommandReceiver {
 
 	public void createFolder(
-		CommandArgument argument, HttpServletRequest request,
+		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {
 
-		Document doc = _createDocument();
+		Document document = _createDocument();
 
-		Node root = _createRoot(
-			doc, argument.getCommand(), argument.getType(),
-			argument.getCurrentFolder(), StringPool.BLANK);
+		Node rootNode = _createRoot(
+			document, commandArgument.getCommand(), commandArgument.getType(),
+			commandArgument.getCurrentFolder(), StringPool.BLANK);
 
-		Element errorEl = doc.createElement("Error");
+		Element errorElement = document.createElement("Error");
 
-		root.appendChild(errorEl);
+		rootNode.appendChild(errorElement);
 
 		String returnValue = "0";
 
 		try {
-			returnValue = createFolder(argument);
+			returnValue = createFolder(commandArgument);
 		}
 		catch (FCKException fcke) {
 			Throwable cause = fcke.getCause();
@@ -115,43 +115,43 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			}
 		}
 
-		errorEl.setAttribute("number", returnValue);
+		errorElement.setAttribute("number", returnValue);
 
-		_writeDocument(doc, response);
+		_writeDocument(document, response);
 	}
 
 	public void getFolders(
-		CommandArgument argument, HttpServletRequest request,
+		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {
 
-		Document doc = _createDocument();
+		Document document = _createDocument();
 
-		Node root = _createRoot(
-			doc, argument.getCommand(), argument.getType(),
-			argument.getCurrentFolder(), getPath(argument));
+		Node rootNode = _createRoot(
+			document, commandArgument.getCommand(), commandArgument.getType(),
+			commandArgument.getCurrentFolder(), getPath(commandArgument));
 
-		getFolders(argument, doc, root);
+		getFolders(commandArgument, document, rootNode);
 
-		_writeDocument(doc, response);
+		_writeDocument(document, response);
 	}
 
 	public void getFoldersAndFiles(
-		CommandArgument argument, HttpServletRequest request,
+		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {
 
-		Document doc = _createDocument();
+		Document document = _createDocument();
 
-		Node root = _createRoot(
-			doc, argument.getCommand(), argument.getType(),
-			argument.getCurrentFolder(), getPath(argument));
+		Node rootNode = _createRoot(
+			document, commandArgument.getCommand(), commandArgument.getType(),
+			commandArgument.getCurrentFolder(), getPath(commandArgument));
 
-		getFoldersAndFiles(argument, doc, root);
+		getFoldersAndFiles(commandArgument, document, rootNode);
 
-		_writeDocument(doc, response);
+		_writeDocument(document, response);
 	}
 
 	public void fileUpload(
-		CommandArgument argument, HttpServletRequest request,
+		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {
 
 		String returnValue = null;
@@ -192,7 +192,8 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			String extension = _getExtension(fileName);
 
 			returnValue = fileUpload(
-				argument, fileName, diskFileItem.getStoreLocation(), extension);
+				commandArgument, fileName, diskFileItem.getStoreLocation(),
+				extension);
 		}
 		catch (Exception e) {
 			FCKException fcke = null;
@@ -244,33 +245,35 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		_writeUploadResponse(returnValue, response);
 	}
 
-	protected abstract String createFolder(CommandArgument argument);
+	protected abstract String createFolder(CommandArgument commandArgument);
 
 	protected abstract String fileUpload(
-		CommandArgument argument, String fileName, File file, String extension);
+		CommandArgument commandArgument, String fileName, File file,
+		String extension);
 
 	protected abstract void getFolders(
-		CommandArgument argument, Document doc, Node root);
+		CommandArgument commandArgument, Document document, Node rootNode);
 
 	protected abstract void getFoldersAndFiles(
-		CommandArgument argument, Document doc, Node root);
+		CommandArgument commandArgument, Document document, Node rootNode);
 
 	protected void getRootFolders(
-			CommandArgument argument, Document doc, Element foldersEl)
+			CommandArgument commandArgument, Document document,
+			Element foldersElement)
 		throws Exception {
 
 		LinkedHashMap<String, Object> groupParams =
 			new LinkedHashMap<String, Object>();
 
-		groupParams.put("usersGroups", new Long(argument.getUserId()));
+		groupParams.put("usersGroups", new Long(commandArgument.getUserId()));
 
 		List<Group> groups = GroupLocalServiceUtil.search(
-			argument.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS);
+			commandArgument.getCompanyId(), null, null, groupParams,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		List<Organization> userOrgs =
 			OrganizationLocalServiceUtil.getUserOrganizations(
-				argument.getUserId(), true);
+				commandArgument.getUserId(), true);
 
 		for (Organization organization : userOrgs) {
 			groups.add(0, organization.getGroup());
@@ -280,28 +283,28 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
 
 			Group userGroup = GroupLocalServiceUtil.getUserGroup(
-				argument.getCompanyId(), argument.getUserId());
+				commandArgument.getCompanyId(), commandArgument.getUserId());
 
 			groups.add(0, userGroup);
 		}
 
 		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
-			argument.getCompanyId());
+			commandArgument.getCompanyId());
 
 		groups.add(0, companyGroup);
 
-		ThemeDisplay themeDisplay = argument.getThemeDisplay();
+		ThemeDisplay themeDisplay = commandArgument.getThemeDisplay();
 
 		long scopeGroupId = themeDisplay.getScopeGroupId();
 
-		HttpServletRequest request = argument.getHttpServletRequest();
+		HttpServletRequest request = commandArgument.getHttpServletRequest();
 
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		for (Group group : groups) {
-			Element folderEl = doc.createElement("Folder");
+			Element folderElement = document.createElement("Folder");
 
-			foldersEl.appendChild(folderEl);
+			foldersElement.appendChild(folderElement);
 
 			boolean setNameAttribute = false;
 
@@ -312,7 +315,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 					group.isStagedPortlet(portletId) &&
 					!group.isStagedRemotely() && isStagedData(group)) {
 
-					folderEl.setAttribute(
+					folderElement.setAttribute(
 						"name",
 						stagingGroup.getGroupId() + " - " +
 							HtmlUtil.escape(
@@ -323,7 +326,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			}
 
 			if (!setNameAttribute) {
-				folderEl.setAttribute(
+				folderElement.setAttribute(
 					"name",
 					group.getGroupId() + " - " +
 						HtmlUtil.escape(group.getDescriptiveName()));
@@ -331,7 +334,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		}
 	}
 
-	protected String getPath(CommandArgument argument) {
+	protected String getPath(CommandArgument commandArgument) {
 		return StringPool.BLANK;
 	}
 
@@ -349,18 +352,13 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 	private Document _createDocument() {
 		try {
-			Document doc = null;
-
-			DocumentBuilderFactory factory =
+			DocumentBuilderFactory documentBuilderFactory =
 				DocumentBuilderFactory.newInstance();
 
-			DocumentBuilder builder = null;
+			DocumentBuilder documentBuilder =
+				documentBuilderFactory.newDocumentBuilder();
 
-			builder = factory.newDocumentBuilder();
-
-			doc = builder.newDocument();
-
-			return doc;
+			return documentBuilder.newDocument();
 		}
 		catch (ParserConfigurationException pce) {
 			throw new FCKException(pce);
@@ -368,58 +366,60 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 	}
 
 	private Node _createRoot(
-		Document doc, String commandStr, String typeStr, String currentPath,
-		String currentUrl) {
+		Document document, String command, String resourceType,
+		String path, String url) {
 
-		Element root = doc.createElement("Connector");
+		Element rootElement = document.createElement("Connector");
 
-		doc.appendChild(root);
+		document.appendChild(rootElement);
 
-		root.setAttribute("command", commandStr);
-		root.setAttribute("resourceType", typeStr);
+		rootElement.setAttribute("command", command);
+		rootElement.setAttribute("resourceType", resourceType);
 
-		Element el = doc.createElement("CurrentFolder");
+		Element element = document.createElement("CurrentFolder");
 
-		root.appendChild(el);
+		rootElement.appendChild(element);
 
-		el.setAttribute("path", currentPath);
-		el.setAttribute("url", currentUrl);
+		element.setAttribute("path", path);
+		element.setAttribute("url", url);
 
-		return root;
+		return rootElement;
 	}
 
 	private String _getExtension(String fileName) {
 		return fileName.substring(fileName.lastIndexOf(CharPool.PERIOD) + 1);
 	}
 
-	private void _writeDocument(Document doc, HttpServletResponse response) {
+	private void _writeDocument(Document document, HttpServletResponse response) {
 		try {
-			doc.getDocumentElement().normalize();
+			Element documentElement = document.getDocumentElement();
+			
+			documentElement.normalize();
 
 			TransformerFactory transformerFactory =
 				TransformerFactory.newInstance();
 
 			Transformer transformer = transformerFactory.newTransformer();
 
-			DOMSource source = new DOMSource(doc);
+			DOMSource domSource = new DOMSource(document);
 
 			if (_log.isDebugEnabled()) {
-				StreamResult result = new StreamResult(System.out);
+				StreamResult streamResult = new StreamResult(System.out);
 
-				transformer.transform(source, result);
+				transformer.transform(domSource, streamResult);
 			}
 
 			response.setContentType("text/xml; charset=UTF-8");
 			response.setHeader("Cache-Control", "no-cache");
 
-			PrintWriter out = response.getWriter();
+			PrintWriter printWriter = response.getWriter();
 
-			StreamResult result = new StreamResult(out);
+			StreamResult streamResult = new StreamResult(printWriter);
 
-			transformer.transform(source, result);
+			transformer.transform(domSource, streamResult);
 
-			out.flush();
-			out.close();
+			printWriter.flush();
+			printWriter.close();
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -445,14 +445,14 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			response.setContentType("text/html; charset=UTF-8");
 			response.setHeader("Cache-Control", "no-cache");
 
-			PrintWriter out = null;
+			PrintWriter printWriter = null;
 
-			out = response.getWriter();
+			printWriter = response.getWriter();
 
-			out.print(sb.toString());
+			printWriter.print(sb.toString());
 
-			out.flush();
-			out.close();
+			printWriter.flush();
+			printWriter.close();
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

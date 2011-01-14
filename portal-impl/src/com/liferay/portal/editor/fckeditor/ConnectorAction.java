@@ -57,12 +57,12 @@ public class ConnectorAction extends Action {
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-			CommandArgument argument = new CommandArgument(
+			CommandArgument commandArgument = new CommandArgument(
 				command, type, currentFolder, newFolder, themeDisplay, request);
 
-			Command commandObj = CommandFactory.getCommand(command);
+			Command commandModel = CommandFactory.getCommand(command);
 
-			commandObj.execute(argument, request, response);
+			commandModel.execute(argument, request, response);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

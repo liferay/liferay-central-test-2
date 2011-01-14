@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 public interface Command {
 
 	public void execute(
-		CommandArgument argument, HttpServletRequest request,
+		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response);
 
 }
