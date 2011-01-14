@@ -172,18 +172,18 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 	private Folder _getFolder(long groupId, String folderName)
 		throws Exception {
 
+		DLFolder dolFolder = new DLFolderImpl();
+
+		dolFolder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		dolFolder.setGroupId(groupId);
+
+		Folder folder = new LiferayFolder(dolFolder);
+
 		if (folderName.equals(StringPool.SLASH)) {
-			DLFolder dolFolder = new DLFolderImpl();
-
-			dolFolder.setFolderId(DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
-			dolFolder.setGroupId(groupId);
-
-			return new LiferayFolder(dolFolder);
+			return folder;
 		}
 
 		StringTokenizer st = new StringTokenizer(folderName, StringPool.SLASH);
-
-		Folder folder = null;
 
 		while (st.hasMoreTokens()) {
 			String curFolderName = st.nextToken();
