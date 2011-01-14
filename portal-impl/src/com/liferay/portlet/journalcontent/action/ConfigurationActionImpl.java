@@ -36,6 +36,10 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
+		String[] extensions = actionRequest.getParameterValues("extensions");
+
+		setPreference(actionRequest, "extensions", extensions);
+
 		super.processAction(portletConfig, actionRequest, actionResponse);
 
 		if (SessionErrors.isEmpty(actionRequest)) {
