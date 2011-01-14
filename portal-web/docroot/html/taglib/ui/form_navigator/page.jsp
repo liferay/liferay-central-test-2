@@ -17,7 +17,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String backURL = (String)request.getAttribute("liferay-ui:form-navigator:backUrl");
+String backURL = (String)request.getAttribute("liferay-ui:form-navigator:backURL");
 String[][] categorySections = (String[][])request.getAttribute("liferay-ui:form-navigator:categorySections");
 String[] categoryNames = (String[])request.getAttribute("liferay-ui:form-navigator:categoryNames");
 String htmlBottom = (String)request.getAttribute("liferay-ui:form-navigator:htmlBottom");
@@ -64,7 +64,6 @@ if (Validator.isNotNull(historyKey)) {
 				%>
 
 				<div class="lfr-component form-navigator">
-
 					<%= Validator.isNotNull(htmlTop) ? htmlTop : StringPool.BLANK  %>
 
 					<%

@@ -625,7 +625,7 @@
 		<tag-class>com.liferay.taglib.ui.FormNavigatorTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>backUrl</name>
+			<name>backURL</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

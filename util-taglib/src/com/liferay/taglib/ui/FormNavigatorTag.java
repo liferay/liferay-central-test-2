@@ -27,8 +27,8 @@ public class FormNavigatorTag extends IncludeTag {
 		return EVAL_BODY_INCLUDE;
 	}
 
-	public void setBackUrl(String backUrl) {
-		_backUrl = backUrl;
+	public void setBackURL(String backURL) {
+		_backURL = backURL;
 	}
 
 	public void setCategoryNames(String[] categoryNames) {
@@ -52,7 +52,7 @@ public class FormNavigatorTag extends IncludeTag {
 	}
 
 	protected void cleanUp() {
-		_backUrl = null;
+		_backURL = null;
 		_categoryNames = null;
 		_categorySections = null;
 		_htmlBottom = null;
@@ -65,22 +65,21 @@ public class FormNavigatorTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
-		request.setAttribute("liferay-ui:form-navigator:backUrl", _backUrl);
+		request.setAttribute("liferay-ui:form-navigator:backURL", _backURL);
 		request.setAttribute(
 			"liferay-ui:form-navigator:categoryNames", _categoryNames);
 		request.setAttribute(
 			"liferay-ui:form-navigator:categorySections", _categorySections);
 		request.setAttribute(
-					"liferay-ui:form-navigator:htmlBottom", _htmlBottom);
-		request.setAttribute(
-			"liferay-ui:form-navigator:htmlTop", _htmlTop);
+			"liferay-ui:form-navigator:htmlBottom", _htmlBottom);
+		request.setAttribute("liferay-ui:form-navigator:htmlTop", _htmlTop);
 		request.setAttribute("liferay-ui:form-navigator:jspPath", _jspPath);
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/form_navigator/page.jsp";
 
-	private String _backUrl;
+	private String _backURL;
 	private String[] _categoryNames;
 	private String[][] _categorySections;
 	private String _htmlBottom;
