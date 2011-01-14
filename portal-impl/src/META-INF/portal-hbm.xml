@@ -83,6 +83,7 @@
 	<import class="com.liferay.portlet.bookmarks.model.BookmarksEntry" />
 	<import class="com.liferay.portlet.bookmarks.model.BookmarksFolder" />
 	<import class="com.liferay.portlet.calendar.model.CalEvent" />
+	<import class="com.liferay.portlet.deletion.model.DeletionEntry" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLApp" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLAppHelper" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLFileEntry" />
@@ -1253,6 +1254,19 @@
 		<property name="remindBy" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="firstReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="secondReminder" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.liferay.portlet.deletion.model.impl.DeletionEntryImpl" table="DeletionEntry">
+		<cache usage="read-write" />
+		<id name="entryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classUuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="parentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" table="DLFileEntry">
 		<cache usage="read-write" />

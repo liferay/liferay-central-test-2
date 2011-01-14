@@ -1049,3 +1049,5 @@ Liferay.Service.registerClass(
 		updatePage: true
 	}
 );
+
+Liferay.Service.register("Liferay.Service.Deletion", "com.liferay.portlet.deletion.service");
