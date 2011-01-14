@@ -160,135 +160,24 @@
 	line-height: 12px;
 }
 
-.portlet-enterprise-admin .form-navigation {
-	background-color: #D7F1FF;
-	border: 1px solid #88C5D9;
-	float: right;
-	margin: 0 0 0 15px;
-	padding: 10px;
-	width: 30%;
-}
 
-.portlet-enterprise-admin .form-navigation h3 {
-	color: #036;
-	font-size: 14px;
-	font-weight: bold;
-	margin: 0;
-}
 
-.portlet-enterprise-admin .form-navigation ul {
-	margin-bottom: 10px;
-}
-
-.portlet-enterprise-admin .form-navigation li {
-}
-
-.portlet-enterprise-admin .form-navigation li a {
-	cursor: pointer;
-	display: block;
-	padding: 2px 0 2px 5px;
-}
-
-.portlet-enterprise-admin .form-navigation li a:hover {
-	background-color: #88C5D9;
-	text-decoration: none;
-}
-
-.portlet-enterprise-admin .form-navigation li.selected {
-	background: url(<%= themeImagesPath %>/control_panel/selected.png) no-repeat 0 50%;
-	font-weight: bold;
-	left: -22px;
-	margin-right: -22px;
-	padding: 0;
-	position: relative;
-}
-
-.portlet-enterprise-admin .form-navigation li.selected a {
-	background-color: #5C696E;
-	color: #FFF;
-	display: block;
-	margin: 0 0 0 11px;
-	overflow: hidden;
-	padding: 2px 10px;
-	text-decoration: none;
-}
-
-.ie6 .portlet-enterprise-admin .form-navigation li.selected a:hover {
-	background-color: #5C696E;
-}
-
-.portlet-enterprise-admin .form-navigation .modified-notice {
-	display: none;
-	font-weight: bold;
-}
-
-.portlet-enterprise-admin .form-navigation .section-modified .modified-notice {
-	color: #090;
-	display: inline;
-}
-
-.portlet-enterprise-admin .form-navigation .selected.section-modified .modified-notice {
-	color: #9F3;
-	display: inline;
-}
-
-.portlet-enterprise-admin .form-navigation li.section-error a {
-	background-image: url(<%= themeImagesPath %>/messages/alert.png);
-	background-position: 5px 50%;
-	background-repeat: no-repeat;
-	color: #F00;
-	font-weight: bold;
-	padding-left: 25px;
-}
-
-.portlet-enterprise-admin .form-navigation li.selected.section-error a {
-	background-position: 15px 50%;
-	color: #F99;
-	margin-left: 11px;
-	padding-left: 35px;
-}
-
-.portlet-enterprise-admin .form-navigation li a .error-notice {
-	display: none;
-}
-
-.portlet-enterprise-admin .form-navigation .user-info, .portlet-enterprise-admin .form-navigation .organization-info {
+.portlet-enterprise-admin .form-navigator .user-info, .portlet-enterprise-admin .form-navigator .organization-info, .portlet-enterprise-admin .form-navigator .company-info {
 	font-weight: bold;
 	margin-bottom: 15px;
 }
 
-.portlet-enterprise-admin .form-navigation .user-info p span, .portlet-enterprise-admin .form-navigation .organization-info p span {
+.portlet-enterprise-admin .form-navigator .user-info .user-name, .portlet-enterprise-admin .form-navigator .organization-info .organization-name, .portlet-enterprise-admin .form-navigator .company-info .company-name {
 	color: #036;
 	display: block;
 	font-size: 14px;
 }
 
-.portlet-enterprise-admin .form-navigation .user-info .avatar, .portlet-enterprise-admin .form-navigation .organization-info .avatar {
+.portlet-enterprise-admin .form-navigator .user-info .avatar, .portlet-enterprise-admin .form-navigator .organization-info .avatar {
 	float: left;
 	margin-right: 10px;
 	padding: 0;
 	width: 35px;
-}
-
-.portlet-enterprise-admin .form-navigation .aui-button-holder {
-	margin-top: 20px;
-}
-
-.portlet-enterprise-admin .form-section {
-	float: left;
-	width: 63%;
-}
-
-.ie6 .portlet-enterprise-admin .form-section {
-	width: 60%;
-}
-
-.portlet-enterprise-admin .form-section h3 {
-	border-bottom: 1px solid #000;
-	clear: both;
-	font-size: 14px;
-	font-weight: 700;
-	margin: 10px 0;
 }
 
 .portlet-enterprise-admin .instant-messenger, .portlet-enterprise-admin .social-network {
@@ -355,10 +244,6 @@
 }
 
 .portlet-enterprise-admin .aui-form .row-container {
-}
-
-.portlet-enterprise-admin .user-table, .portlet-enterprise-admin .organization-table {
-	border-collapse: collapse;
 }
 
 .portlet-enterprise-admin .permission-scopes {
