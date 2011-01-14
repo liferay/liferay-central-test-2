@@ -45,15 +45,16 @@ import org.w3c.dom.Node;
  */
 public class DocumentCommandReceiver extends BaseCommandReceiver {
 
-	protected String createFolder(CommandArgument arg) {
+	protected String createFolder(CommandArgument commandArgument) {
 		try {
-			Group group = arg.getCurrentGroup();
+			Group group = commandArgument.getCurrentGroup();
 
 			Folder folder = _getFolder(
-				group.getGroupId(), StringPool.SLASH + arg.getCurrentFolder());
+				group.getGroupId(),
+				StringPool.SLASH + commandArgument.getCurrentFolder());
 
 			long parentFolderId = folder.getFolderId();
-			String name = arg.getNewFolder();
+			String name = commandArgument.getNewFolder();
 			String description = StringPool.BLANK;
 
 			ServiceContext serviceContext = new ServiceContext();
@@ -73,13 +74,14 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 	}
 
 	protected String fileUpload(
-		CommandArgument arg, String fileName, File file, String extension) {
+		CommandArgument commandArgument, String fileName, File file,
+		String extension) {
 
 		try {
-			Group group = arg.getCurrentGroup();
+			Group group = commandArgument.getCurrentGroup();
 
 			Folder folder = _getFolder(
-				group.getGroupId(), arg.getCurrentFolder());
+				group.getGroupId(), commandArgument.getCurrentFolder());
 
 			long folderId = folder.getFolderId();
 			String title = fileName;
@@ -102,9 +104,11 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return "0";
 	}
 
-	protected void getFolders(CommandArgument arg, Document doc, Node root) {
+	protected void getFolders(
+		CommandArgument commandArgument, Document document, Node rootNode) {
+
 		try {
-			_getFolders(arg, doc, root);
+			_getFolders(commandArgument, document, rootNode);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -112,11 +116,11 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 	}
 
 	protected void getFoldersAndFiles(
-		CommandArgument arg, Document doc, Node root) {
+		CommandArgument commandArgument, Document document, Node rootNode) {
 
 		try {
-			_getFolders(arg, doc, root);
-			_getFiles(arg, doc, root);
+			_getFolders(commandArgument, document, rootNode);
+			_getFiles(commandArgument, document, rootNode);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -127,37 +131,38 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return group.isStagedPortlet(PortletKeys.DOCUMENT_LIBRARY);
 	}
 
-	private void _getFiles(CommandArgument arg, Document doc, Node root)
+	private void _getFiles(
+			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
 
-		Element filesEl = doc.createElement("Files");
+		Element filesElement = document.createElement("Files");
 
-		root.appendChild(filesEl);
+		rootNode.appendChild(filesElement);
 
-		if (Validator.isNull(arg.getCurrentGroupName())) {
+		if (Validator.isNull(commandArgument.getCurrentGroupName())) {
 			return;
 		}
 
-		Group group = arg.getCurrentGroup();
+		Group group = commandArgument.getCurrentGroup();
 
 		Folder folder = _getFolder(
-			group.getGroupId(), arg.getCurrentFolder());
+			group.getGroupId(), commandArgument.getCurrentFolder());
 
 		List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
 			group.getGroupId(), folder.getFolderId());
 
 		for (FileEntry fileEntry : fileEntries) {
-			Element fileEl = doc.createElement("File");
+			Element fileElement = document.createElement("File");
 
-			filesEl.appendChild(fileEl);
+			filesElement.appendChild(fileElement);
 
-			fileEl.setAttribute("name", fileEntry.getTitle());
-			fileEl.setAttribute("desc", fileEntry.getTitle());
-			fileEl.setAttribute("size", getSize(fileEntry.getSize()));
+			fileElement.setAttribute("name", fileEntry.getTitle());
+			fileElement.setAttribute("desc", fileEntry.getTitle());
+			fileElement.setAttribute("size", getSize(fileEntry.getSize()));
 
 			StringBundler url = new StringBundler(5);
 
-			ThemeDisplay themeDisplay = arg.getThemeDisplay();
+			ThemeDisplay themeDisplay = commandArgument.getThemeDisplay();
 
 			url.append(themeDisplay.getPathMain());
 			url.append("/document_library/get_file?uuid=");
@@ -165,7 +170,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			url.append("&groupId=");
 			url.append(group.getGroupId());
 
-			fileEl.setAttribute("url", url.toString());
+			fileElement.setAttribute("url", url.toString());
 		}
 	}
 
@@ -203,31 +208,32 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		return folder;
 	}
 
-	private void _getFolders(CommandArgument arg, Document doc, Node root)
+	private void _getFolders(
+			CommandArgument commandArgument, Document document, Node rootNode)
 		throws Exception {
 
-		Element foldersEl = doc.createElement("Folders");
+		Element foldersElement = document.createElement("Folders");
 
-		root.appendChild(foldersEl);
+		rootNode.appendChild(foldersElement);
 
-		if (arg.getCurrentFolder().equals(StringPool.SLASH)) {
-			getRootFolders(arg, doc, foldersEl);
+		if (commandArgument.getCurrentFolder().equals(StringPool.SLASH)) {
+			getRootFolders(commandArgument, document, foldersElement);
 		}
 		else {
-			Group group = arg.getCurrentGroup();
+			Group group = commandArgument.getCurrentGroup();
 
 			Folder folder = _getFolder(
-				group.getGroupId(), arg.getCurrentFolder());
+				group.getGroupId(), commandArgument.getCurrentFolder());
 
 			List<Folder> folders = DLAppServiceUtil.getFolders(
 				group.getGroupId(), folder.getFolderId());
 
 			for (Folder curFolder : folders) {
-				Element folderEl = doc.createElement("Folder");
+				Element folderElement = document.createElement("Folder");
 
-				foldersEl.appendChild(folderEl);
+				foldersElement.appendChild(folderElement);
 
-				folderEl.setAttribute("name", curFolder.getName());
+				folderElement.setAttribute("name", curFolder.getName());
 			}
 		}
 	}
