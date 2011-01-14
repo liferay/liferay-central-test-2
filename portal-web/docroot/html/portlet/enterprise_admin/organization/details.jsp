@@ -352,33 +352,6 @@ if (parentOrganization != null) {
 		},
 		['liferay-search-container']
 	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />trackChanges',
-		function() {
-			var A = AUI();
-
-			A.fire(
-				'enterpriseAdmin:trackChanges',
-				A.one('.selected .modify-link')
-			);
-		},
-		['aui-base']
-	);
-</aui:script>
-
-<aui:script use="aui-base">
-	var modifyLinks = A.all('span.modify-link');
-
-	if (modifyLinks) {
-		modifyLinks.on(
-			'click',
-			function() {
-				<portlet:namespace />trackChanges();
-			}
-		);
-	}
 </aui:script>
 
 <aui:script use="liferay-dynamic-select,liferay-search-container">

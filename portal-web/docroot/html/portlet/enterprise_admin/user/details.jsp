@@ -225,19 +225,3 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 		['aui-base']
 	);
 </aui:script>
-
-<aui:script use="aui-base">
-	var modifyLinks = A.all('span.modify-link');
-
-	if (modifyLinks) {
-		modifyLinks.on(
-			'click',
-			function() {
-				A.fire(
-					'enterpriseAdmin:trackChanges',
-					A.one('.selected .modify-link')
-				);
-			}
-		);
-	}
-</aui:script>

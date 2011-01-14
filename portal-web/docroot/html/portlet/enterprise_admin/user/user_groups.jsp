@@ -99,20 +99,6 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 		},
 		['liferay-search-container']
 	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />trackChanges',
-		function() {
-			var A = AUI();
-
-			A.fire(
-				'enterpriseAdmin:trackChanges',
-				A.one('.selected .modify-link')
-			);
-		},
-		['aui-base']
-	);
 </aui:script>
 
 <aui:script use="liferay-search-container">

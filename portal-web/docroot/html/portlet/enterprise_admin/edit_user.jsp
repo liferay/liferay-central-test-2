@@ -158,17 +158,7 @@ if (selUser != null) {
 	}
 }
 
-String[] allSections = ArrayUtil.append(mainSections, ArrayUtil.append(identificationSections, miscellaneousSections));
-
 String[][] categorySections = {mainSections, identificationSections, miscellaneousSections};
-
-String curSection = mainSections[0];
-
-String historyKey = ParamUtil.getString(request, "historyKey");
-
-if (Validator.isNotNull(historyKey)) {
-	curSection = historyKey;
-}
 %>
 
 <liferay-ui:error exception="<%= CompanyMaxUsersException.class %>" message="unable-to-create-user-account-because-the-maximum-number-of-users-has-been-reached" />
@@ -194,101 +184,70 @@ String taglibOnSubmit = "event.preventDefault(); " + renderResponse.getNamespace
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="p_u_i_d" type="hidden" value="<%= (selUser != null) ? selUser.getUserId() : 0 %>" />
 
-	<div id="<portlet:namespace />sectionsContainer">
-		<table class="user-table" width="100%">
-		<tr>
-			<td>
+	<%
+	request.setAttribute("user.selUser", selUser);
+	request.setAttribute("user.selContact", selContact);
+	request.setAttribute("user.passwordPolicy", passwordPolicy);
+	request.setAttribute("user.groups", groups);
+	request.setAttribute("user.organizations", organizations);
+	request.setAttribute("user.roles", roles);
+	request.setAttribute("user.communityRoles", communityRoles);
+	request.setAttribute("user.organizationRoles", organizationRoles);
+	request.setAttribute("user.userGroups", userGroups);
+	request.setAttribute("user.allGroups", allGroups);
 
-				<%
-				request.setAttribute("user.selUser", selUser);
-				request.setAttribute("user.selContact", selContact);
-				request.setAttribute("user.passwordPolicy", passwordPolicy);
-				request.setAttribute("user.groups", groups);
-				request.setAttribute("user.organizations", organizations);
-				request.setAttribute("user.roles", roles);
-				request.setAttribute("user.communityRoles", communityRoles);
-				request.setAttribute("user.organizationRoles", organizationRoles);
-				request.setAttribute("user.userGroups", userGroups);
-				request.setAttribute("user.allGroups", allGroups);
+	request.setAttribute("addresses.className", Contact.class.getName());
+	request.setAttribute("emailAddresses.className", Contact.class.getName());
+	request.setAttribute("phones.className", Contact.class.getName());
+	request.setAttribute("websites.className", Contact.class.getName());
 
-				request.setAttribute("addresses.className", Contact.class.getName());
-				request.setAttribute("emailAddresses.className", Contact.class.getName());
-				request.setAttribute("phones.className", Contact.class.getName());
-				request.setAttribute("websites.className", Contact.class.getName());
+	if (selContact != null) {
+		request.setAttribute("addresses.classPK", selContact.getContactId());
+		request.setAttribute("emailAddresses.classPK", selContact.getContactId());
+		request.setAttribute("phones.classPK", selContact.getContactId());
+		request.setAttribute("websites.classPK", selContact.getContactId());
+	}
+	else {
+		request.setAttribute("addresses.classPK", 0L);
+		request.setAttribute("emailAddresses.classPK", 0L);
+		request.setAttribute("phones.classPK", 0L);
+		request.setAttribute("websites.classPK", 0L);
+	}
+	%>
 
-				if (selContact != null) {
-					request.setAttribute("addresses.classPK", selContact.getContactId());
-					request.setAttribute("emailAddresses.classPK", selContact.getContactId());
-					request.setAttribute("phones.classPK", selContact.getContactId());
-					request.setAttribute("websites.classPK", selContact.getContactId());
-				}
-				else {
-					request.setAttribute("addresses.classPK", 0L);
-					request.setAttribute("emailAddresses.classPK", 0L);
-					request.setAttribute("phones.classPK", 0L);
-					request.setAttribute("websites.classPK", 0L);
-				}
+	<liferay-util:buffer var="htmlTop">
+		<c:if test="<%= selUser != null %>">
+			<div class="user-info">
+				<div class="float-container">
+					<img alt="<%= HtmlUtil.escape(selUser.getFullName()) %>" class="avatar" src="<%= selUser.getPortraitURL(themeDisplay) %>" />
 
-				for (String section : allSections) {
-					String sectionId = _getSectionId(section);
-					String sectionJsp = "/html/portlet/enterprise_admin/user/" + _getSectionJsp(section) + ".jsp";
-				%>
-
-					<!-- Begin fragment <%= sectionId %> -->
-
-					<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
-						<liferay-util:include page="<%= sectionJsp %>" />
-					</div>
-
-					<!-- End fragment <%= sectionId %> -->
-
-				<%
-				}
-				%>
-
-				<div class="lfr-component form-navigation">
-					<div class="user-info">
-						<p class="float-container">
-							<c:if test="<%= selUser != null %>">
-								<img alt="<%= HtmlUtil.escape(selUser.getFullName()) %>" class="avatar" src="<%= selUser.getPortraitURL(themeDisplay) %>" />
-
-								<span><%= HtmlUtil.escape(selUser.getFullName()) %></span>
-							</c:if>
-						</p>
-					</div>
-
-					<%
-					String[] categoryNames = _CATEGORY_NAMES;
-					%>
-
-					<%@ include file="/html/portlet/enterprise_admin/categories_navigation.jspf" %>
-
-					<aui:button-row>
-						<aui:button type="submit" />
-
-						<%
-						String taglibOnClick = Validator.isNull(backURL) ? "location.href = '';" : backURL;
-						%>
-
-						<aui:button onClick="<%= taglibOnClick %>" type="cancel" />
-					</aui:button-row>
-
-					<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">
-						<aui:button-row>
-							<div class="portlet-msg-alert"><liferay-ui:message key="this-user-account-has-been-locked-due-to-excessive-failed-login-attempts" /></div>
-
-							<%
-							String taglibOnClick = renderResponse.getNamespace() + "saveUser('unlock');";
-							%>
-
-							<aui:button onClick="<%= taglibOnClick %>" value="unlock" />
-						</aui:button-row>
-					</c:if>
+					<span class="user-name"><%= HtmlUtil.escape(selUser.getFullName()) %></span>
 				</div>
-			</td>
-		</tr>
-		</table>
-	</div>
+			</div>
+		</c:if>
+	</liferay-util:buffer>
+
+	<liferay-util:buffer var="htmlBottom">
+		<c:if test="<%= (selUser != null) && (passwordPolicy != null) && selUser.getLockout() %>">
+			<aui:button-row>
+				<div class="portlet-msg-alert"><liferay-ui:message key="this-user-account-has-been-locked-due-to-excessive-failed-login-attempts" /></div>
+
+				<%
+				String taglibOnClick = renderResponse.getNamespace() + "saveUser('unlock');";
+				%>
+
+				<aui:button onClick="<%= taglibOnClick %>" value="unlock" />
+			</aui:button-row>
+		</c:if>
+	</liferay-util:buffer>
+
+	<liferay-ui:form-navigator
+		categoryNames="<%= _CATEGORY_NAMES %>"
+		categorySections="<%= categorySections %>"
+		htmlBottom="<%= htmlBottom %>"
+		htmlTop="<%= htmlTop %>"
+		jspPath="/html/portlet/enterprise_admin/user/"
+	/>
 </aui:form>
 
 <%

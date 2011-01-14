@@ -366,20 +366,6 @@ userGroupRoles.addAll(organizationRoles);
 		},
 		['liferay-search-container']
 	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />trackChanges',
-		function() {
-			var A = AUI();
-
-			A.fire(
-				'enterpriseAdmin:trackChanges',
-				A.one('.selected .modify-link')
-			);
-		},
-		['aui-base']
-	);
 </aui:script>
 
 <aui:script use="liferay-search-container">
