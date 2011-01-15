@@ -18,125 +18,70 @@
 
 <form id="<portlet:namespace />fm">
 
-<table class="vocabulary-container">
-<tr>
-	<td colspan="3">
-		<div class="vocabulary-toolbar">
-			<span id="vocabulary-search-bar">
-				<input id="vocabulary-search-input" type="text" value="" />
+<div class="vocabulary-container">
+	<div class="vocabulary-toolbar">
+		<span id="vocabulary-search-bar">
+			<input id="vocabulary-search-input" type="text" value="" />
 
-				<select class="vocabulary-select-search" id="vocabulary-select-search">
-					<option value="categories" selected><liferay-ui:message key="categories" /></option>
-					<option value="vocabularies"><liferay-ui:message key="vocabularies" /></option>
-				</select>
-			</span>
+			<select class="vocabulary-select-search" id="vocabulary-select-search">
+				<option value="categories" selected><liferay-ui:message key="categories" /></option>
+				<option value="vocabularies"><liferay-ui:message key="vocabularies" /></option>
+			</select>
+		</span>
 
-			<span class="vocabulary-actions">
-				<c:if test="<%= AssetPermission.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.ADD_VOCABULARY) %>">
-					<input class="add-vocabulary-button" id="add-vocabulary-button" name="add-vocabulary-button" type="button" value="<liferay-ui:message key="add-vocabulary" />">
-				</c:if>
+		<span class="vocabulary-actions">
+			<c:if test="<%= AssetPermission.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.ADD_VOCABULARY) %>">
+				<input class="add-vocabulary-button" id="add-vocabulary-button" name="add-vocabulary-button" type="button" value="<liferay-ui:message key="add-vocabulary" />">
+			</c:if>
 
-				<c:if test="<%= AssetPermission.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.ADD_CATEGORY) %>">
-					<input class="add-category-button" id="add-category-button" name="add-category-button" type="button" value="<liferay-ui:message key="add-category" />">
-				</c:if>
+			<c:if test="<%= AssetPermission.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.ADD_CATEGORY) %>">
+				<input class="add-category-button" id="add-category-button" name="add-category-button" type="button" value="<liferay-ui:message key="add-category" />">
+			</c:if>
 
-				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.PERMISSIONS) %>">
-					<liferay-security:permissionsURL
-						modelResource="com.liferay.portlet.asset"
-						modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
-						resourcePrimKey="<%= String.valueOf(themeDisplay.getParentGroupId()) %>"
-						var="permissionsURL"
-					/>
-
-					<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
-				</c:if>
-			</span>
-		</div>
-	</td>
-</tr>
-<tr class="vocabulary-content">
-	<td class="vocabulary-list-container">
-		<div class="results-header"><liferay-ui:message key="vocabularies" /></div>
-
-		<div class="vocabulary-list lfr-component"></div>
-	</td>
-	<td class="vocabulary-categories-container">
-		<div class="results-header">
-			<liferay-ui:message key="categories" />
-		</div>
-
-		<div class="lfr-message-response" id="vocabulary-category-messages" style="display: none;"></div>
-
-		<div class="vocabulary-categories"></div>
-	</td>
-	<td class="aui-helper-hidden vocabulary-edit-category">
-		<div class="results-header"><liferay-ui:message key="edit-category" /></div>
-
-		<div class="vocabulary-edit">
-			<div class="vocabulary-close">
-				<span>
-					<liferay-ui:icon
-						image="close"
-					/>
-				</span>
-			</div>
-
-			<div class="vocabulary-label">
-				<liferay-ui:message key="name" />:
-			</div>
-
-			<input class="category-name" name="category-name" type="text" />
-
-			<br /><br />
-
-			<div class="vocabulary-properties">
-				<liferay-ui:message key="properties" />:
-
-				<liferay-ui:icon-help
-					message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-category"
+			<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.PERMISSIONS) %>">
+				<liferay-security:permissionsURL
+					modelResource="com.liferay.portlet.asset"
+					modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
+					resourcePrimKey="<%= String.valueOf(themeDisplay.getParentGroupId()) %>"
+					var="permissionsURL"
 				/>
 
-				<div class="aui-helper-hidden vocabulary-property-row">
-					<input class="category-property-key" type="text" />
+				<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+			</c:if>
+		</span>
+	</div>
 
-					<input class="category-property-value" type="text" />
+	<div class="vocabulary-content-wrapper">
+		<div class="vocabulary-content">
+			<div class="vocabulary-list-container column">
+				<div class="results-header"><liferay-ui:message key="vocabularies" /></div>
 
-					<span class="add-category-property">
-						<liferay-ui:icon
-							image="add"
-						/>
-					</span>
-
-					<span class="delete-category-property">
-						<liferay-ui:icon
-							image="delete"
-						/>
-					</span>
+				<div class="vocabulary-list lfr-component"></div>
+			</div>
+			<div class="vocabulary-categories-container column">
+				<div class="results-header">
+					<liferay-ui:message key="categories" />
 				</div>
 
-				<br />
+				<div class="vocabulary-categories"></div>
+			</div>
+			<div class="aui-helper-hidden vocabulary-edit-category column">
+				<div class="results-header"><liferay-ui:message key="category-details" />
+					<div class="category-view-close">
+					   <span>
+						   <liferay-ui:icon
+								image="close" id="category-view-close"
+						   />
+						</span>
+					</div>
+				</div>
 
-				<input class="vocabulary-save-category-properties" type="button" value="<liferay-ui:message key="save" />" />
-
-				<input class="vocabulary-close" type="button" value="<liferay-ui:message key="close" />" />
-
-				<input class="vocabulary-delete-categories-button" type="button" value="<liferay-ui:message key="delete" />" />
-
-				<input class="permissions-categories-button" type="button" value="<liferay-ui:message key="edit-category-permissions" />" />
+				<div class="category-view">
+				</div>
 			</div>
 		</div>
-	</td>
-</tr>
-<tr>
-	<td colspan="3">
-		<div class="vocabulary-footer">
-			<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-vocabulary" />" />
-
-			<input class="permissions-vocabulary-button" type="button" value="<liferay-ui:message key="edit-vocabulary-permissions" />" />
-		</div>
-	</td>
-</tr>
-</table>
+	</div>
+</div>
 
 </form>
 

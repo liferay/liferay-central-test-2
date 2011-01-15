@@ -115,6 +115,15 @@ AUI().add(
 						}
 					},
 
+					clear: function(event) {
+						var instance = this;
+
+						instance._undoCache.clear();
+
+						instance.fire('update');
+						instance.fire('clearList');
+					},
+
 					undo: function(limit) {
 						var instance = this;
 
@@ -161,10 +170,7 @@ AUI().add(
 					_onActionClear: function(event) {
 						var instance = this;
 
-						instance._undoCache.clear();
-
-						instance.fire('update');
-						instance.fire('clearList');
+						instance.clear();
 					},
 
 					_onActionUndo: function(event) {
