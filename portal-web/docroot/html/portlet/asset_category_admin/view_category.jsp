@@ -20,10 +20,6 @@
 <%
 long categoryId = ParamUtil.getLong(request, "categoryId");
 AssetCategory category = AssetCategoryServiceUtil.getCategory(categoryId);
-
-//long vocabularyId = category.getVocabularyId();
-//AssetVocabulary vocabulary = AssetVocabularyServiceUtil.getVocabulary(vocabularyId);
-
 List<AssetCategoryProperty> properties = AssetCategoryPropertyServiceUtil.getCategoryProperties(category.getCategoryId());
 %>
 

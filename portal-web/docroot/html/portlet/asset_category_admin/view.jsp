@@ -16,26 +16,26 @@
 
 <%@ include file="/html/portlet/asset_category_admin/init.jsp" %>
 
-<form id="<portlet:namespace />fm">
+<aui:form name="fm">
 
 <div class="vocabulary-container">
 	<div class="vocabulary-toolbar">
-		<span id="vocabulary-search-bar">
-			<input id="vocabulary-search-input" type="text" value="" />
+		<span class="vocabulary-search-bar">
+			<aui:input cssClass="vocabulary-search" label="" name="vocabularySearchInput" />
 
-			<select class="vocabulary-select-search" id="vocabulary-select-search">
-				<option value="categories" selected><liferay-ui:message key="categories" /></option>
-				<option value="vocabularies"><liferay-ui:message key="vocabularies" /></option>
-			</select>
+			<aui:select cssClass="vocabulary-select-search" label="" name="vocabularySelectSearch">
+				<aui:option label="categories" selected="<%= true %>" />
+				<aui:option label="vocabularies" />
+			</aui:select>
 		</span>
 
-		<span class="vocabulary-actions">
+		<aui:button-row cssClass="vocabulary-actions">
 			<c:if test="<%= AssetPermission.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.ADD_VOCABULARY) %>">
-				<input class="add-vocabulary-button" id="add-vocabulary-button" name="add-vocabulary-button" type="button" value="<liferay-ui:message key="add-vocabulary" />">
+				<aui:button cssClass="add-vocabulary-button" name="addVocabularyButton" value="add-vocabulary" />
 			</c:if>
 
 			<c:if test="<%= AssetPermission.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.ADD_CATEGORY) %>">
-				<input class="add-category-button" id="add-category-button" name="add-category-button" type="button" value="<liferay-ui:message key="add-category" />">
+				<aui:button cssClass="add-category-button" name="addCategoryButton" value="add-category" />
 			</c:if>
 
 			<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, themeDisplay.getParentGroupId(), ActionKeys.PERMISSIONS) %>">
@@ -46,31 +46,34 @@
 					var="permissionsURL"
 				/>
 
-				<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionsURL %>';" />
+				<aui:button name="categoryPermissionsButton" onClick="location.href = '<%= permissionsURL %>';" value="permissions" />
 			</c:if>
-		</span>
+		</aui:button-row>
 	</div>
 
 	<div class="vocabulary-content-wrapper">
-		<div class="vocabulary-content">
-			<div class="vocabulary-list-container column">
+		<aui:layout cssClass="vocabulary-content">
+			<aui:column columnWidth="25" cssClass="vocabulary-list-container">
 				<div class="results-header"><liferay-ui:message key="vocabularies" /></div>
 
 				<div class="vocabulary-list lfr-component"></div>
-			</div>
-			<div class="vocabulary-categories-container column">
-				<div class="results-header">
-					<liferay-ui:message key="categories" />
-				</div>
+			</aui:column>
+
+			<aui:column columnWidth="75" cssClass="vocabulary-categories-container">
+				<div class="results-header"><liferay-ui:message key="categories" /></div>
 
 				<div class="vocabulary-categories"></div>
-			</div>
-			<div class="aui-helper-hidden vocabulary-edit-category column">
-				<div class="results-header"><liferay-ui:message key="category-details" />
+			</aui:column>
+
+			<aui:column columnWidth="35" cssClass="aui-helper-hidden vocabulary-edit-category">
+				<div class="results-header">
+					<liferay-ui:message key="category-details" />
+
 					<div class="category-view-close">
 					   <span>
 						   <liferay-ui:icon
-								image="close" id="category-view-close"
+								id="category-view-close"
+								image="close"
 						   />
 						</span>
 					</div>
@@ -78,12 +81,12 @@
 
 				<div class="category-view">
 				</div>
-			</div>
-		</div>
+			</aui:column>
+		</aui:layout>
 	</div>
 </div>
 
-</form>
+</aui:form>
 
 <aui:script use="liferay-category-admin">
 	new Liferay.Portlet.AssetCategoryAdmin(
