@@ -102,7 +102,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setBoolean(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -124,7 +124,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setBooleanArray(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -146,7 +146,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setDate(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -168,7 +168,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setDateArray(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -190,7 +190,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setDouble(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -212,7 +212,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setDoubleArray(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -234,7 +234,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setFloat(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -256,7 +256,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setFloatArray(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -278,7 +278,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setInteger(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -300,7 +300,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setIntegerArray(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -322,7 +322,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setLong(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -344,7 +344,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setLongArray(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -360,82 +360,82 @@ public class ExpandoValueLocalServiceImpl
 		int type = column.getType();
 
 		if (type == ExpandoColumnConstants.BOOLEAN) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				((Boolean)data).booleanValue());
 		}
 		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(boolean[])data);
 		}
 		else if (type == ExpandoColumnConstants.DATE) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(Date)data);
 		}
 		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(Date[])data);
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				((Double)data).doubleValue());
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(double[])data);
 		}
 		else if (type == ExpandoColumnConstants.FLOAT) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				((Float)data).floatValue());
 		}
 		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(float[])data);
 		}
 		else if (type == ExpandoColumnConstants.INTEGER) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				((Integer)data).intValue());
 		}
 		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(int[])data);
 		}
 		else if (type == ExpandoColumnConstants.LONG) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				((Long)data).longValue());
 		}
 		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(long[])data);
 		}
 		else if (type == ExpandoColumnConstants.SHORT) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				((Short)data).shortValue());
 		}
 		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(short[])data);
 		}
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(String[])data);
 		}
 		else {
-			return addValue(
+			return expandoValueLocalService.addValue(
 				companyId, className, tableName, columnName, classPK,
 				(String)data);
 		}
@@ -458,7 +458,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setShort(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -480,7 +480,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setShortArray(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -502,7 +502,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setString(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -524,7 +524,7 @@ public class ExpandoValueLocalServiceImpl
 		value.setColumnId(column.getColumnId());
 		value.setStringArray(data);
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
 			classPK, value.getData());
 	}
@@ -540,7 +540,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -555,7 +555,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -569,7 +569,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -583,7 +583,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -598,7 +598,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -613,7 +613,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -628,7 +628,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -643,7 +643,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -657,7 +657,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -671,7 +671,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -685,7 +685,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -699,7 +699,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -713,7 +713,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -728,7 +728,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -743,7 +743,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -758,7 +758,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -773,7 +773,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return addValue(
+		return expandoValueLocalService.addValue(
 			companyId, className, tableName, columnName, classPK, data);
 	}
 
@@ -883,7 +883,8 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		deleteValue(companyId, classNameId, tableName, columnName, classPK);
+		expandoValueLocalService.deleteValue(
+			companyId, classNameId, tableName, columnName, classPK);
 	}
 
 	public void deleteValues(long classNameId, long classPK)
@@ -897,7 +898,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		deleteValues(classNameId, classPK);
+		expandoValueLocalService.deleteValues(classNameId, classPK);
 	}
 
 	public List<ExpandoValue> getColumnValues(long columnId, int start, int end)
@@ -911,22 +912,8 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, int start, int end)
 		throws SystemException {
 
-		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
-			companyId, classNameId, tableName);
-
-		if (table == null) {
-			return Collections.emptyList();
-		}
-
-		ExpandoColumn column = expandoColumnPersistence.fetchByT_N(
-			table.getTableId(), columnName);
-
-		if (column == null) {
-			return Collections.emptyList();
-		}
-
-		return expandoValuePersistence.findByT_C(
-			table.getTableId(), column.getColumnId(), start, end);
+		return expandoValueLocalService.getColumnValues(
+			companyId, classNameId, tableName, columnName, null, start, end);
 	}
 
 	public List<ExpandoValue> getColumnValues(
@@ -948,8 +935,14 @@ public class ExpandoValueLocalServiceImpl
 			return Collections.emptyList();
 		}
 
-		return expandoValuePersistence.findByT_C_D(
-			table.getTableId(), column.getColumnId(), data, start, end);
+		if (data == null) {
+			return expandoValuePersistence.findByT_C(
+				table.getTableId(), column.getColumnId(), start, end);
+		}
+		else {
+			return expandoValuePersistence.findByT_C_D(
+				table.getTableId(), column.getColumnId(), data, start, end);
+		}
 	}
 
 	public List<ExpandoValue> getColumnValues(
@@ -959,7 +952,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getColumnValues(
+		return expandoValueLocalService.getColumnValues(
 			companyId, classNameId, tableName, columnName, start, end);
 	}
 
@@ -970,7 +963,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getColumnValues(
+		return expandoValueLocalService.getColumnValues(
 			companyId, classNameId, tableName, columnName, data, start, end);
 	}
 
@@ -985,7 +978,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getColumnValues(
+		return expandoValueLocalService.getColumnValues(
 			companyId, className, tableName, columnName, data, start, end);
 	}
 
@@ -998,22 +991,8 @@ public class ExpandoValueLocalServiceImpl
 			String columnName)
 		throws SystemException {
 
-		ExpandoTable table = expandoTablePersistence.fetchByC_C_N(
-			companyId, classNameId, tableName);
-
-		if (table == null) {
-			return 0;
-		}
-
-		ExpandoColumn column = expandoColumnPersistence.fetchByT_N(
-			table.getTableId(), columnName);
-
-		if (column == null) {
-			return 0;
-		}
-
-		return expandoValuePersistence.countByT_C(
-			table.getTableId(), column.getColumnId());
+		return expandoValueLocalService.getColumnValuesCount(
+			companyId, classNameId, tableName, columnName, null);
 	}
 
 	public int getColumnValuesCount(
@@ -1035,8 +1014,14 @@ public class ExpandoValueLocalServiceImpl
 			return 0;
 		}
 
-		return expandoValuePersistence.countByT_C_D(
-			table.getTableId(), column.getColumnId(), data);
+		if (data == null) {
+			return expandoValuePersistence.countByT_C(
+				table.getTableId(), column.getColumnId());
+		}
+		else {
+			return expandoValuePersistence.countByT_C_D(
+				table.getTableId(), column.getColumnId(), data);
+		}
 	}
 
 	public int getColumnValuesCount(
@@ -1046,7 +1031,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getColumnValuesCount(
+		return expandoValueLocalService.getColumnValuesCount(
 			companyId, classNameId, tableName, columnName);
 	}
 
@@ -1057,7 +1042,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getColumnValuesCount(
+		return expandoValueLocalService.getColumnValuesCount(
 			companyId, classNameId, tableName, columnName, data);
 	}
 
@@ -1071,7 +1056,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getColumnValuesCount(
+		return expandoValueLocalService.getColumnValuesCount(
 			companyId, className, tableName, columnName, data);
 	}
 
@@ -1091,82 +1076,82 @@ public class ExpandoValueLocalServiceImpl
 		int type = column.getType();
 
 		if (type == ExpandoColumnConstants.BOOLEAN) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getBoolean());
 		}
 		else if (type == ExpandoColumnConstants.BOOLEAN_ARRAY) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getBooleanArray());
 		}
 		else if (type == ExpandoColumnConstants.DATE) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getDate());
 		}
 		else if (type == ExpandoColumnConstants.DATE_ARRAY) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getDateArray());
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getDouble());
 		}
 		else if (type == ExpandoColumnConstants.DOUBLE_ARRAY) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getDoubleArray());
 		}
 		else if (type == ExpandoColumnConstants.FLOAT) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getFloat());
 		}
 		else if (type == ExpandoColumnConstants.FLOAT_ARRAY) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getFloatArray());
 		}
 		else if (type == ExpandoColumnConstants.INTEGER) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getInteger());
 		}
 		else if (type == ExpandoColumnConstants.INTEGER_ARRAY) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getIntegerArray());
 		}
 		else if (type == ExpandoColumnConstants.LONG) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getLong());
 		}
 		else if (type == ExpandoColumnConstants.LONG_ARRAY) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getLongArray());
 		}
 		else if (type == ExpandoColumnConstants.SHORT) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getShort());
 		}
 		else if (type == ExpandoColumnConstants.SHORT_ARRAY) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getShortArray());
 		}
 		else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getStringArray());
 		}
 		else {
-			return getData(
+			return expandoValueLocalService.getData(
 				companyId, className, tableName, columnName, classPK,
 				value.getString());
 		}
@@ -1177,7 +1162,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, boolean defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1193,7 +1178,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, boolean[] defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1209,7 +1194,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, Date defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1225,7 +1210,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, Date[] defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1241,7 +1226,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, double defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1257,7 +1242,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, double[] defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1273,7 +1258,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, float defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1289,7 +1274,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, float[] defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1305,7 +1290,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, int defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1321,7 +1306,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, int[] defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1337,7 +1322,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, long defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1353,7 +1338,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, long[] defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1369,7 +1354,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, short defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1385,7 +1370,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, short[] defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1401,7 +1386,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, String defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1417,7 +1402,7 @@ public class ExpandoValueLocalServiceImpl
 			String columnName, long classPK, String[] defaultData)
 		throws PortalException, SystemException {
 
-		ExpandoValue value = getValue(
+		ExpandoValue value = expandoValueLocalService.getValue(
 			companyId, className, tableName, columnName, classPK);
 
 		if (value == null) {
@@ -1437,7 +1422,8 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(companyId, className, tableName, columnName, classPK);
+		return expandoValueLocalService.getData(
+			companyId, className, tableName, columnName, classPK);
 	}
 
 	/**
@@ -1451,7 +1437,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1466,7 +1452,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1480,7 +1466,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1494,7 +1480,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1509,7 +1495,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1524,7 +1510,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1538,7 +1524,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1552,7 +1538,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1566,7 +1552,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1580,7 +1566,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1594,7 +1580,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1608,7 +1594,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1622,7 +1608,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1636,7 +1622,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1651,7 +1637,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1666,7 +1652,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getData(
+		return expandoValueLocalService.getData(
 			companyId, className, tableName, columnName, classPK, defaultData);
 	}
 
@@ -1675,7 +1661,7 @@ public class ExpandoValueLocalServiceImpl
 			int end)
 		throws SystemException {
 
-		return getColumnValues(
+		return expandoValueLocalService.getColumnValues(
 			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME,
 			columnName, start, end);
 	}
@@ -1687,7 +1673,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getDefaultTableColumnValues(
+		return expandoValueLocalService.getDefaultTableColumnValues(
 			companyId, classNameId, columnName, start, end);
 	}
 
@@ -1695,7 +1681,7 @@ public class ExpandoValueLocalServiceImpl
 			long companyId, long classNameId, String columnName)
 		throws SystemException {
 
-		return getColumnValuesCount(
+		return expandoValueLocalService.getColumnValuesCount(
 			companyId, classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME,
 			columnName);
 	}
@@ -1706,7 +1692,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getDefaultTableColumnValuesCount(
+		return expandoValueLocalService.getDefaultTableColumnValuesCount(
 			companyId, classNameId, columnName);
 	}
 
@@ -1743,7 +1729,7 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getRowValues(
+		return expandoValueLocalService.getRowValues(
 			companyId, classNameId, tableName, classPK, start, end);
 	}
 
@@ -1772,7 +1758,8 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getRowValuesCount(companyId, classNameId, tableName, classPK);
+		return expandoValueLocalService.getRowValuesCount(
+			companyId, classNameId, tableName, classPK);
 	}
 
 	public ExpandoValue getValue(long valueId)
@@ -1826,7 +1813,8 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getValue(companyId, classNameId, tableName, columnName, classPK);
+		return expandoValueLocalService.getValue(
+			companyId, classNameId, tableName, columnName, classPK);
 	}
 
 	public ExpandoValue getValue(
@@ -1836,7 +1824,8 @@ public class ExpandoValueLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getValue(companyId, classNameId, tableName, columnName, classPK);
+		return expandoValueLocalService.getValue(
+			companyId, classNameId, tableName, columnName, classPK);
 	}
 
 	/**
@@ -1848,7 +1837,8 @@ public class ExpandoValueLocalServiceImpl
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		return getValue(companyId, className, tableName, columnName, classPK);
+		return expandoValueLocalService.getValue(
+			companyId, className, tableName, columnName, classPK);
 	}
 
 }
