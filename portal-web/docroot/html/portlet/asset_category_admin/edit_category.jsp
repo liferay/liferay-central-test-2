@@ -73,7 +73,7 @@ else {
 	<portlet:param name="struts_action" value="/asset_category_admin/edit_category" />
 </portlet:actionURL>
 
-<aui:form action="<%= editCategoryURL %>" cssClass="update-category-form" method="get" name='<%= randomNamespace %> + "fm" %>'>
+<aui:form action="<%= editCategoryURL %>" cssClass="update-category-form" method="get" name='<%= randomNamespace + "fm" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= category == null ? Constants.ADD : Constants.UPDATE %>" />
 
 	<aui:model-context bean="<%= category %>" model="<%= AssetCategory.class %>" />
