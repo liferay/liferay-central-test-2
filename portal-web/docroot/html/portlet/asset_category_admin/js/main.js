@@ -768,13 +768,13 @@ AUI().add(
 							instance._panelEdit
 						);
 
-						var buttonDeleteCategory = categoryFormEdit.one('#category-delete-button');
+						var buttonDeleteCategory = categoryFormEdit.one('#deleteCategoryButton');
 
 						if (buttonDeleteCategory) {
 							buttonDeleteCategory.on('click', instance._onCategoryDelete, instance);
 						}
 
-						var buttonChangeCategoryPermissions = categoryFormEdit.one('#category-change-permissions');
+						var buttonChangeCategoryPermissions = categoryFormEdit.one('#updateCategoryPermissions');
 
 						if (buttonChangeCategoryPermissions) {
 							buttonChangeCategoryPermissions.on('click', instance._onCategoryChangePermissions, instance);
@@ -832,7 +832,7 @@ AUI().add(
 							instance._panelEdit
 						);
 
-						var buttonDeleteVocabulary = vocabularyFormEdit.one('#vocabulary-delete-button');
+						var buttonDeleteVocabulary = vocabularyFormEdit.one('#deleteVocabularyButton');
 
 						if (buttonDeleteVocabulary) {
 							buttonDeleteVocabulary.on('click', instance._onVocabularyDelete, instance);
@@ -1139,7 +1139,7 @@ AUI().add(
 					_onCategoryChangePermissions: function(event) {
 						var instance = this;
 
-						var buttonChangeCategoryPermissions = A.one('#category-change-permissions');
+						var buttonChangeCategoryPermissions = A.one('#updateCategoryPermissions');
 						var url = buttonChangeCategoryPermissions.attr('data-url');
 
 						instance._loadPermissions(url);
@@ -1251,18 +1251,18 @@ AUI().add(
 
 						var targetId = event.target.get('id');
 
-						if (targetId == 'category-edit-button') {
+						if (targetId == 'editCategoryButton') {
 							event.halt();
 
 							instance._hidePanels();
 							instance._showCategoryPanel(ACTION_EDIT);
 						}
-						else if (targetId == 'category-delete-button') {
+						else if (targetId == 'deleteCategoryButton') {
 							event.halt();
 
 							instance._onCategoryDelete();
 						}
-						else if (targetId == 'category-change-permissions') {
+						else if (targetId == 'updateCategoryPermissions') {
 							event.halt();
 
 							instance._onCategoryChangePermissions();

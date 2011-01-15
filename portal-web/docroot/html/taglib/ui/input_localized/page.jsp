@@ -178,7 +178,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 		}
 	};
 
-	var autoFields;
+	var autoFields = null;
 
 	<c:if test="<%= !disabled %>">
 		autoFields = new Liferay.AutoFields(

@@ -23,38 +23,17 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 
+import java.util.List;
+
 import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @author Iliyan Peychev
  * @author Julio Camarero
  */
 public class ActionUtil {
-
-	public static void getAllVocabularies(HttpServletRequest request)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		List<AssetVocabulary> vocabularies =
-			AssetVocabularyServiceUtil.getGroupVocabularies(
-				themeDisplay.getScopeGroupId());
-
-		request.setAttribute(WebKeys.ASSET_VOCABULARIES, vocabularies);
-	}
-
-	public static void getAllVocabularies(PortletRequest portletRequest)
-		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		getAllVocabularies(request);
-	}
 
 	public static void getCategory(HttpServletRequest request)
 		throws Exception {
@@ -77,6 +56,28 @@ public class ActionUtil {
 			portletRequest);
 
 		getCategory(request);
+	}
+
+	public static void getVocabularies(HttpServletRequest request)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		List<AssetVocabulary> vocabularies =
+			AssetVocabularyServiceUtil.getGroupVocabularies(
+				themeDisplay.getScopeGroupId());
+
+		request.setAttribute(WebKeys.ASSET_VOCABULARIES, vocabularies);
+	}
+
+	public static void getVocabularies(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getVocabularies(request);
 	}
 
 	public static void getVocabulary(HttpServletRequest request)

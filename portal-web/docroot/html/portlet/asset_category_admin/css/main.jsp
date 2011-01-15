@@ -196,7 +196,7 @@
 }
 
 .portlet-asset-category-admin .vocabulary-treeview-container .aui-tree-label {
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .portlet-asset-category-admin .vocabulary-treeview-container .aui-tree-label:hover {
@@ -205,7 +205,7 @@
 
 .portlet-asset-category-admin .vocabulary-treeview-container .aui-tree-node-selected .aui-tree-label {
 	background-color: #6F7D83;
-    color: #FFF;
+	color: #FFF;
 	cursor: move;
 }
 

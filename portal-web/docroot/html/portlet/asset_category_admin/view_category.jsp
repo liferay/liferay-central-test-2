@@ -19,7 +19,9 @@
 
 <%
 long categoryId = ParamUtil.getLong(request, "categoryId");
+
 AssetCategory category = AssetCategoryServiceUtil.getCategory(categoryId);
+
 List<AssetCategoryProperty> properties = AssetCategoryPropertyServiceUtil.getCategoryProperties(category.getCategoryId());
 %>
 
@@ -28,32 +30,33 @@ List<AssetCategoryProperty> properties = AssetCategoryPropertyServiceUtil.getCat
 		title="<%= category.getTitle(locale) %>"
 	/>
 
-	<c:if test="<%= category != null && permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.UPDATE)%>">
-		<aui:button value="edit" id="category-edit-button" />
-	</c:if>
+	<c:if test="<%= category != null %>">
+		<c:if test="<%= permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.UPDATE) %>">
+			<aui:button id="editCategoryButton" value="edit" />
+		</c:if>
 
-	<c:if test="<%= category != null && permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.DELETE)%>">
-		<aui:button value="delete" id="category-delete-button" />
-	</c:if>
+		<c:if test="<%= permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.DELETE) %>">
+			<aui:button id="deleteCategoryButton" value="delete" />
+		</c:if>
 
-	<c:if test="<%= category != null && permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.PERMISSIONS) %>" >
-		<liferay-security:permissionsURL
-			modelResource="<%= AssetCategory.class.getName() %>"
-			modelResourceDescription="<%= category.getTitle(locale) %>"
-			resourcePrimKey="<%= String.valueOf(category.getCategoryId()) %>"
-			var="permissionsURL"
-			windowState="pop_up"
-		/>
+		<c:if test="<%= permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.PERMISSIONS) %>">
+			<liferay-security:permissionsURL
+				modelResource="<%= AssetCategory.class.getName() %>"
+				modelResourceDescription="<%= category.getTitle(locale) %>"
+				resourcePrimKey="<%= String.valueOf(category.getCategoryId()) %>"
+				var="permissionsURL"
+				windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+			/>
 
-		<aui:button value="permissions" id="category-change-permissions" data-url="<%= permissionsURL %>" />
+			<aui:button data-url="<%= permissionsURL %>" id="updateCategoryPermissions" value="permissions" />
+		</c:if>
 	</c:if>
 
 	<div class="category-field">
-		<label><liferay-ui:message key="description" />:</label>
-		<%= category.getDescription(locale) %>
+		<label><liferay-ui:message key="description" />:</label> <%= category.getDescription(locale) %>
 	</div>
 
-	<c:if test="<%= properties.size() > 0 %>">
+	<c:if test="<%= !properties.isEmpty() %>">
 		<div class="category-field">
 			<label><liferay-ui:message key="properties" />:</label>
 
@@ -61,11 +64,12 @@ List<AssetCategoryProperty> properties = AssetCategoryPropertyServiceUtil.getCat
 			for (AssetCategoryProperty property : properties) {
 			%>
 
-				<span class="property-key"><%= property.getKey() %></span> : <span class="property-value"><%= property.getValue() %></span> <br />
+				<span class="property-key"><%= property.getKey() %></span>: <span class="property-value"><%= property.getValue() %></span><br />
 
 			<%
 			}
 			%>
+
 		</div>
 	</c:if>
 </div>

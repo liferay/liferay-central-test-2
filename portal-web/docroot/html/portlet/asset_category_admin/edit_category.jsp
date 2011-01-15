@@ -17,62 +17,63 @@
 <%@ include file="/html/portlet/asset_category_admin/init.jsp" %>
 
 <%
+String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_asset_category_admin_edit_category") + StringPool.UNDERLINE;
+
 AssetCategory category = (AssetCategory)request.getAttribute(WebKeys.ASSET_CATEGORY);
+
+long categoryId = BeanParamUtil.getLong(category, request, "categoryId");
+
+long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId");
 
 List<AssetVocabulary> vocabularies = (List<AssetVocabulary>)request.getAttribute(WebKeys.ASSET_VOCABULARIES);
 
 long vocabularyId = ParamUtil.getLong(request, "vocabularyId");
 
-int[] propertiesIndexes = null;
+int[] categoryPropertiesIndexes = null;
 
-List<AssetCategoryProperty> properties = Collections.emptyList();
+List<AssetCategoryProperty> categoryProperties = Collections.emptyList();
 
-String propertiesIndexesParam = ParamUtil.getString(request, "propertiesIndexes");
+String categoryPropertiesIndexesParam = ParamUtil.getString(request, "categoryPropertiesIndexes");
 
-if (Validator.isNotNull(propertiesIndexesParam)) {
-	properties = new ArrayList<AssetCategoryProperty>();
+if (Validator.isNotNull(categoryPropertiesIndexesParam)) {
+	categoryProperties = new ArrayList<AssetCategoryProperty>();
 
-	propertiesIndexes = StringUtil.split(propertiesIndexesParam, 0);
+	categoryPropertiesIndexes = StringUtil.split(categoryPropertiesIndexesParam, 0);
 
-	for (int propertiesIndex : propertiesIndexes) {
-		properties.add(new AssetCategoryPropertyImpl());
+	for (int categoryPropertiesIndex : categoryPropertiesIndexes) {
+		categoryProperties.add(new AssetCategoryPropertyImpl());
 	}
 }
 else {
 	if (category != null) {
+		categoryProperties = AssetCategoryPropertyServiceUtil.getCategoryProperties(category.getCategoryId());
 
-		properties = AssetCategoryPropertyServiceUtil.getCategoryProperties(category.getCategoryId());
+		categoryPropertiesIndexes = new int[categoryProperties.size()];
 
-		propertiesIndexes = new int[properties.size()];
-
-
-		for (int i = 0; i < properties.size(); i++) {
-			propertiesIndexes[i] = i;
+		for (int i = 0; i < categoryProperties.size(); i++) {
+			categoryPropertiesIndexes[i] = i;
 		}
 	}
 
-	if (properties.isEmpty()) {
-		properties = new ArrayList<AssetCategoryProperty>();
+	if (categoryProperties.isEmpty()) {
+		categoryProperties = new ArrayList<AssetCategoryProperty>();
 
-		properties.add(new AssetCategoryPropertyImpl());
+		categoryProperties.add(new AssetCategoryPropertyImpl());
 
-		propertiesIndexes = new int[] {0};
+		categoryPropertiesIndexes = new int[] {0};
 	}
 
-	if (propertiesIndexes == null) {
-		propertiesIndexes = new int[0];
+	if (categoryPropertiesIndexes == null) {
+		categoryPropertiesIndexes = new int[0];
 	}
 }
-
-String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_asset_category_admin_edit_category");
-String formName = randomNamespace + "_fm";
 %>
 
 <portlet:actionURL var="editCategoryURL">
 	<portlet:param name="struts_action" value="/asset_category_admin/edit_category" />
 </portlet:actionURL>
 
-<aui:form action='<%=editCategoryURL%>' cssClass="update-category-form" method="get" name="<%= formName %>">
+<aui:form action="<%= editCategoryURL %>" cssClass="update-category-form" method="get" name='<%= randomNamespace %> + "fm" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= category == null ? Constants.ADD : Constants.UPDATE %>" />
 
 	<aui:model-context bean="<%= category %>" model="<%= AssetCategory.class %>" />
@@ -80,14 +81,14 @@ String formName = randomNamespace + "_fm";
 	<aui:fieldset>
 		<div>
 			<div class="add-category-layer asset-category-layer">
-				<aui:input type="hidden" name="categoryId" value="<%= category != null ? category.getCategoryId() : StringPool.BLANK %>" />
-				<aui:input type="hidden" name="parentCategoryId" value="<%= category != null ? category.getParentCategoryId() : StringPool.BLANK %>" />
+				<aui:input name="categoryId" type="hidden" value="<%= categoryId %>" />
+				<aui:input name="parentCategoryId" type="hidden" value="<%= parentCategoryId %>" />
 
-				<aui:input label="name" name="title" cssClass="category-name"/>
+				<aui:input cssClass="category-name" label="name" name="title" />
 
 				<aui:input name="description" />
 
-				<aui:select label="to-vocabulary" name="vocabularyId" inputCssClass="vocabulary-select-list">
+				<aui:select inputCssClass="vocabulary-select-list" label="to-vocabulary" name="vocabularyId">
 
 					<%
 					for (AssetVocabulary vocabulary : vocabularies) {
@@ -110,23 +111,23 @@ String formName = randomNamespace + "_fm";
 						</liferay-ui:panel>
 					</c:if>
 
-					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" helpMessage="properties-are-a-way-to-add-more-detailed-information-to-a-specific-category" id="assetCategoryPropertiesPanel" persistState="<%= true %>" title="properties">
-						<aui:fieldset cssClass="category-properties" id="categoryProperties">
+					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" helpMessage="categoryProperties-are-a-way-to-add-more-detailed-information-to-a-specific-category" id="assetCategoryPropertiesPanel" persistState="<%= true %>" title="categoryProperties">
+						<aui:fieldset cssClass="category-categoryProperties" id="categoryProperties">
 
 							<%
-							for (int i = 0; i < propertiesIndexes.length; i++) {
-								int propertiesIndex = propertiesIndexes[i];
+							for (int i = 0; i < categoryPropertiesIndexes.length; i++) {
+								int categoryPropertiesIndex = categoryPropertiesIndexes[i];
 
-								AssetCategoryProperty property = properties.get(i);
+								AssetCategoryProperty categoryProperty = categoryProperties.get(i);
 							%>
 
-								<aui:model-context bean="<%= property %>" model="<%= AssetCategoryProperty.class %>" />
+								<aui:model-context bean="<%= categoryProperty %>" model="<%= AssetCategoryProperty.class %>" />
 
 								<div class="lfr-form-row lfr-form-row-inline">
 									<div class="row-fields">
-										<aui:input fieldParam='<%= "key" + propertiesIndex %>' name="key" />
+										<aui:input fieldParam='<%= "key" + categoryPropertiesIndex %>' name="key" />
 
-										<aui:input fieldParam='<%= "value" + propertiesIndex %>' name="value" />
+										<aui:input fieldParam='<%= "value" + categoryPropertiesIndex %>' name="value" />
 									</div>
 								</div>
 
@@ -134,7 +135,7 @@ String formName = randomNamespace + "_fm";
 							}
 							%>
 
-							<aui:input name="categoryPropertiesIndexes" type="hidden" value="<%= StringUtil.merge(propertiesIndexes) %>" />
+							<aui:input name="categoryPropertiesIndexes" type="hidden" value="<%= StringUtil.merge(categoryPropertiesIndexes) %>" />
 						</aui:fieldset>
 					</liferay-ui:panel>
 				</liferay-ui:panel-container>
@@ -142,20 +143,22 @@ String formName = randomNamespace + "_fm";
 				<aui:button-row>
 					<aui:button type="submit" />
 
-					<c:if test="<%= category != null && permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.DELETE)%>">
-						<aui:button value="delete" id="category-delete-button" />
-					</c:if>
+					<c:if test="<%= category != null %>">
+						<c:if test="<%= permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.DELETE) %>">
+							<aui:button id="deleteCategoryButton" value="delete" />
+						</c:if>
 
-					<c:if test="<%= category != null && permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.PERMISSIONS) %>" >
-						<liferay-security:permissionsURL
-							modelResource="<%= AssetCategory.class.getName() %>"
-							modelResourceDescription="<%= category.getTitle(locale) %>"
-							resourcePrimKey="<%= String.valueOf(category.getCategoryId()) %>"
-							var="permissionsURL"
-							windowState="pop_up"
-						/>
+						<c:if test="<%= permissionChecker.hasPermission(scopeGroupId, AssetCategory.class.getName(), category.getCategoryId(), ActionKeys.PERMISSIONS) %>">
+							<liferay-security:permissionsURL
+								modelResource="<%= AssetCategory.class.getName() %>"
+								modelResourceDescription="<%= category.getTitle(locale) %>"
+								resourcePrimKey="<%= String.valueOf(category.getCategoryId()) %>"
+								var="permissionsURL"
+								windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+							/>
 
-						<aui:button value="permissions" id="category-change-permissions" data-url="<%= permissionsURL %>" />
+							<aui:button data-url="<%= permissionsURL %>" id="updateCategoryPermissions" value="permissions" />
+						</c:if>
 					</c:if>
 
 					<aui:button cssClass="close-panel" type="cancel" value="close" />
@@ -173,9 +176,9 @@ String formName = randomNamespace + "_fm";
 		}
 	).render();
 
-	var propertiesTrigger = A.one('fieldset#categoryProperties');
+	var categoryPropertiesTrigger = A.one('fieldset#categoryProperties');
 
-	if (propertiesTrigger) {
-		propertiesTrigger.setData('autoFieldsInstance', autoFields);
+	if (categoryPropertiesTrigger) {
+		categoryPropertiesTrigger.setData('autoFieldsInstance', autoFields);
 	}
 </aui:script>
