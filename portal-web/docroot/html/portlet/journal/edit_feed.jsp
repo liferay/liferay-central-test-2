@@ -376,7 +376,7 @@ if (feed != null) {
 			String taglibPreviewButton = "window.open('" + feedURL + "', 'feed');";
 			%>
 
-			<aui:button value="preview" onClick="<%= taglibPreviewButton %>" />
+			<aui:button onClick="<%= taglibPreviewButton %>" value="preview" />
 		</c:if>
 
 		<aui:button onClick="<%= redirect %>" type="cancel" />
