@@ -43,7 +43,8 @@
 .portlet-asset-category-admin .vocabulary-item-actions-trigger {
 	background-image: url(<%= themeImagesPath %>/common/edit.png);
 	background-repeat: no-repeat;
-	display: none;
+	clip: rect(0pt 0pt 0pt 0pt);
+	display: block;
 	height: 16px;
 	margin-top: -8px;
 	padding: 0;
@@ -54,11 +55,11 @@
 }
 
 .ie6 .portlet-asset-category-admin .vocabulary-item-actions-trigger {
-	display: inline-block;
+	clip: auto;
 }
 
-.portlet-asset-category-admin .vocabulary-category:hover .vocabulary-item-actions-trigger {
-	display: inline-block;
+.portlet-asset-category-admin .vocabulary-category:hover .vocabulary-item-actions-trigger, .portlet-asset-category-admin .vocabulary-category:focus .vocabulary-item-actions-trigger, .portlet-asset-category-admin .vocabulary-category .vocabulary-item-actions-trigger:focus {
+	clip: auto;
 }
 
 .ie6 .portlet-asset-category-admin .vocabulary-item-actions-trigger, .ie7 .portlet-asset-category-admin .vocabulary-item-actions-trigger {

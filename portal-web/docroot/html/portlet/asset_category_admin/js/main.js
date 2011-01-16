@@ -40,7 +40,7 @@ AUI().add(
 
 		var TPL_MESSAGES_VOCABULARY = '<div class="aui-helper-hidden lfr-message-response" id="vocabulary-messages" />';
 
-		var TPL_VOCABULARY_LIST = '<li class="vocabulary-category results-row {cssClassSelected}" data-vocabulary="{name}" data-vocabularyId="{vocabularyId}">' +
+		var TPL_VOCABULARY_LIST = '<li class="vocabulary-category results-row {cssClassSelected}" data-vocabulary="{name}" data-vocabularyId="{vocabularyId}" tabIndex="0">' +
 			'<div class="vocabulary-content-wrapper">' +
 					'<span class="vocabulary-item">' +
 						'<a href="javascript:;" data-vocabularyId="{vocabularyId}">{name}</a>' +
@@ -112,7 +112,7 @@ AUI().add(
 							}
 						);
 
-						A.one(instance._vocabularyContainerSelector).on('mousedown', instance._onVocabularyList, instance);
+						A.one(instance._vocabularyContainerSelector).on('click', instance._onVocabularyList, instance);
 						A.one('#' + namespace + 'addCategoryButton').on('click', instance._onShowCategoryPanel, instance, ACTION_ADD);
 						A.one('#' + namespace + 'addVocabularyButton').on('click', instance._onShowVocabularyPanel, instance, ACTION_ADD);
 
