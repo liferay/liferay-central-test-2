@@ -475,8 +475,10 @@ AUI().add(
 						url.setParameter('struts_action', path);
 
 						if (params) {
+							var hasOwnProperty = Object.prototype.hasOwnProperty;
+
 							for (var key in params) {
-								if (params.hasOwnProperty(key)) {
+								if (hasOwnProperty.call(params, key)) {
 									url.setParameter(key, params[key]);
 								}
 							}
