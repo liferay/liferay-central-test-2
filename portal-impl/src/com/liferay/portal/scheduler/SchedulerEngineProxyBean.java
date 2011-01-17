@@ -17,106 +17,88 @@ package com.liferay.portal.scheduler;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
-import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
 
 import java.util.List;
 
 /**
- *
  * @author Tina Tian
  */
 public class SchedulerEngineProxyBean
 	extends BaseProxyBean implements SchedulerEngine {
 
-	public void delete(String groupName) throws SchedulerException {
+	public void delete(String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void delete(String jobName, String groupName)
-		throws SchedulerException {
-
+	public void delete(String jobName, String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public SchedulerResponse getScheduledJob(String jobName, String groupName)
-		throws SchedulerException {
-
+	public SchedulerResponse getScheduledJob(String jobName, String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<SchedulerResponse> getScheduledJobs()
-		throws SchedulerException {
-
+	public List<SchedulerResponse> getScheduledJobs() {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<SchedulerResponse> getScheduledJobs(String groupName)
-		throws SchedulerException {
-
+	public List<SchedulerResponse> getScheduledJobs(String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void pause(String groupName) throws SchedulerException {
+	public void pause(String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void pause(String jobName, String groupName)
-		throws SchedulerException {
-
+	public void pause(String jobName, String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void resume(String groupName) throws SchedulerException {
+	public void resume(String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void resume(String jobName, String groupName)
-		throws SchedulerException {
+	public void resume(String jobName, String groupName) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void schedule(
+		Trigger trigger, String description, String destinationName,
+		Message message) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void schedule(Trigger trigger, String description,
-			String destinationName, Message message)
-		throws SchedulerException {
-
+	public void shutdown() {
 		throw new UnsupportedOperationException();
 	}
 
-	public void shutdown() throws SchedulerException {
+	public void start() {
 		throw new UnsupportedOperationException();
 	}
 
-	public void start() throws SchedulerException {
+	public void suppressError(String jobName, String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void suppressError(String jobName, String groupName)
-		throws SchedulerException {
-
+	public void unschedule(String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void unschedule(String groupName) throws SchedulerException {
-		throw new UnsupportedOperationException();
-	}
-
-	public void unschedule(String jobName, String groupName)
-		throws SchedulerException {
-
+	public void unschedule(String jobName, String groupName) {
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * @deprecated {@link #unschedule(String, String)}
 	 */
-	public void unschedule(Trigger trigger) throws SchedulerException {
+	public void unschedule(Trigger trigger) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void update(Trigger trigger) throws SchedulerException {
+	public void update(Trigger trigger) {
 		throw new UnsupportedOperationException();
 	}
 

@@ -160,22 +160,29 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			handleJobState(jobName, groupName, message, trigger);
 
 			if (trigger == null) {
-				schedulerResponse =
-					SchedulerResponse.createRetrieveResponse(
-						jobName, groupName, description, destinationName,
-						message);
+				schedulerResponse = new SchedulerResponse();
+
+				schedulerResponse.setDescription(description);
+				schedulerResponse.setDestinationName(destinationName);
+				schedulerResponse.setGroupName(groupName);
+				schedulerResponse.setJobName(jobName);
+				schedulerResponse.setMessage(message);
 			}
 			else {
 				if (CronTrigger.class.isAssignableFrom(trigger.getClass())) {
+
 					CronTrigger cronTrigger = CronTrigger.class.cast(trigger);
 
-					schedulerResponse =
-						SchedulerResponse.createRetrieveResponse(
-							new com.liferay.portal.kernel.scheduler.CronTrigger(
-								jobName, groupName, cronTrigger.getStartTime(),
-								cronTrigger.getEndTime(),
-								cronTrigger.getCronExpression()),
-							description, destinationName, message);
+					schedulerResponse = new SchedulerResponse();
+
+					schedulerResponse.setDescription(description);
+					schedulerResponse.setDestinationName(destinationName);
+					schedulerResponse.setMessage(message);
+					schedulerResponse.setTrigger(
+						new com.liferay.portal.kernel.scheduler.CronTrigger(
+							jobName, groupName, cronTrigger.getStartTime(),
+							cronTrigger.getEndTime(),
+							cronTrigger.getCronExpression()));
 				}
 				else if (SimpleTrigger.class.isAssignableFrom(
 							trigger.getClass())) {
@@ -183,14 +190,16 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 					SimpleTrigger simpleTrigger = SimpleTrigger.class.cast(
 						trigger);
 
-					schedulerResponse =
-						SchedulerResponse.createRetrieveResponse(
-							new IntervalTrigger(
-								jobName, groupName,
-								simpleTrigger.getStartTime(),
-								simpleTrigger.getEndTime(),
-								simpleTrigger.getRepeatInterval()),
-							description, destinationName, message);
+					schedulerResponse = new SchedulerResponse();
+
+					schedulerResponse.setDescription(description);
+					schedulerResponse.setDestinationName(destinationName);
+					schedulerResponse.setMessage(message);
+					schedulerResponse.setTrigger(
+						new IntervalTrigger(
+							jobName, groupName, simpleTrigger.getStartTime(),
+							simpleTrigger.getEndTime(),
+							simpleTrigger.getRepeatInterval()));
 				}
 			}
 

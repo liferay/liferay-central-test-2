@@ -40,12 +40,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	SchedulerResponse schedulerResponse = results.get(i);
 
-	String jobName = schedulerResponse.getJobName();
-
-	Date startDate = SchedulerEngineUtil.getStartTime(schedulerResponse);
-	Date endDate = SchedulerEngineUtil.getEndTime(schedulerResponse);
-
-	ResultRow row = new ResultRow(schedulerResponse, jobName, i);
+	ResultRow row = new ResultRow(schedulerResponse, schedulerResponse.getJobName(), i);
 
 	// Description
 
@@ -53,9 +48,13 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Start date
 
+	Date startDate = SchedulerEngineUtil.getStartTime(schedulerResponse);
+
 	row.addText(dateFormatDateTime.format(startDate));
 
 	// End date
+
+	Date endDate = SchedulerEngineUtil.getEndTime(schedulerResponse);
 
 	if (endDate != null) {
 		row.addText(dateFormatDateTime.format(endDate));
@@ -70,7 +69,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	sb.append(portletDisplay.getNamespace());
 	sb.append("unschedulePublishEvent('");
-	sb.append(jobName);
+	sb.append(schedulerResponse.getJobName());
 	sb.append("');");
 
 	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "delete"), sb.toString());

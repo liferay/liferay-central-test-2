@@ -25,39 +25,6 @@ import java.io.Serializable;
  */
 public class SchedulerResponse implements Serializable {
 
-	public static SchedulerResponse createRetrieveResponse() {
-		return new SchedulerResponse();
-	}
-
-	public static SchedulerResponse createRetrieveResponse(
-		String jobName, String groupName, String description,
-		String destinationName, Message message) {
-
-		SchedulerResponse schedulerResponse = new SchedulerResponse();
-
-		schedulerResponse._description = description;
-		schedulerResponse._destinationName = destinationName;
-		schedulerResponse._groupName = groupName;
-		schedulerResponse._jobName = jobName;
-		schedulerResponse._message = message;
-
-		return schedulerResponse;
-	}
-
-	public static SchedulerResponse createRetrieveResponse(
-		Trigger trigger, String description, String destinationName,
-		Message message) {
-
-		SchedulerResponse schedulerResponse = new SchedulerResponse();
-
-		schedulerResponse._description = description;
-		schedulerResponse._destinationName = destinationName;
-		schedulerResponse._message = message;
-		schedulerResponse._trigger = trigger;
-
-		return schedulerResponse;
-	}
-
 	public String getDescription() {
 		return _description;
 	}
@@ -70,7 +37,7 @@ public class SchedulerResponse implements Serializable {
 		if (_trigger != null) {
 			return _trigger.getGroupName();
 		}
-		
+
 		return _groupName;
 	}
 
@@ -78,7 +45,7 @@ public class SchedulerResponse implements Serializable {
 		if (_trigger != null) {
 			return _trigger.getJobName();
 		}
-		
+
 		return _jobName;
 	}
 
@@ -90,7 +57,28 @@ public class SchedulerResponse implements Serializable {
 		return _trigger;
 	}
 
-	private SchedulerResponse() {
+	public void setDescription(String description) {
+		_description = description;
+	}
+
+	public void setDestinationName(String destinationName) {
+		_destinationName = destinationName;
+	}
+
+	public void setGroupName(String groupName) {
+		_groupName = groupName;
+	}
+
+	public void setJobName(String jobName) {
+		_jobName = jobName;
+	}
+
+	public void setMessage(Message message) {
+		_message = message;
+	}
+
+	public void setTrigger(Trigger trigger) {
+		_trigger = trigger;
 	}
 
 	private String _description;
