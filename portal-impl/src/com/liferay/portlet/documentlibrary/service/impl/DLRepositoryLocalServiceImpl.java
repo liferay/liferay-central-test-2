@@ -279,7 +279,6 @@ public class DLRepositoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		Group group = groupLocalService.getGroup(groupId);
-		long companyId = group.getCompanyId();
 
 		List<DLFolder> folders = dlFolderPersistence.findByG_P(
 			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
@@ -292,7 +291,7 @@ public class DLRepositoryLocalServiceImpl
 
 		try {
 			dlLocalService.deleteDirectory(
-				companyId, PortletKeys.DOCUMENT_LIBRARY, groupId,
+				group.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY, groupId,
 				StringPool.BLANK);
 		}
 		catch (NoSuchDirectoryException nsde) {
