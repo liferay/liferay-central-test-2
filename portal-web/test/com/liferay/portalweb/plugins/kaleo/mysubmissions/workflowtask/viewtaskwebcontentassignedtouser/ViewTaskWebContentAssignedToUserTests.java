@@ -28,7 +28,7 @@ public class ViewTaskWebContentAssignedToUserTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ConfigureWebContentSingleApproverTest.class);
-		testSuite.addTestSuite(AddWebContentSingleApproverTest.class);
+		testSuite.addTestSuite(AddWebContentTest.class);
 		testSuite.addTestSuite(AddUserTest.class);
 		testSuite.addTestSuite(
 			AssignMembersRolePortalContentReviewerTest.class);

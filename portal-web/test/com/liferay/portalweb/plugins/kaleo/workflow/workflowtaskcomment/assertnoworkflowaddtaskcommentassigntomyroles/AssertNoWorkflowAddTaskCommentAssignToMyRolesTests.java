@@ -29,7 +29,7 @@ public class AssertNoWorkflowAddTaskCommentAssignToMyRolesTests
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ConfigureWebContentSingleApproverTest.class);
-		testSuite.addTestSuite(AddWebContentSingleApproverTest.class);
+		testSuite.addTestSuite(AddWebContentTest.class);
 		testSuite.addTestSuite(
 			AddWebContentTaskCommentAssignedToMyRolesTest.class);
 		testSuite.addTestSuite(

@@ -28,7 +28,7 @@ public class AssertNoActionsTaskDetailsTests extends BaseTests {
 		TestSuite testSuite = new TestSuite();
 
 		testSuite.addTestSuite(ConfigureWebContentSingleApproverTest.class);
-		testSuite.addTestSuite(AddWebContentSingleApproverTest.class);
+		testSuite.addTestSuite(AddWebContentTest.class);
 		testSuite.addTestSuite(AssertNoAssignToMeTaskDetailsTest.class);
 		testSuite.addTestSuite(AssignToMeTaskWebContentDetailsTest.class);
 		testSuite.addTestSuite(RejectTaskWebContentDetailsTest.class);
