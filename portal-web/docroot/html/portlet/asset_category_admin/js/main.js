@@ -43,7 +43,7 @@ AUI().add(
 		var TPL_VOCABULARY_LIST = '<li class="vocabulary-category results-row {cssClassSelected}" data-vocabulary="{name}" data-vocabularyId="{vocabularyId}" tabIndex="0">' +
 			'<div class="vocabulary-content-wrapper">' +
 					'<span class="vocabulary-item">' +
-						'<a href="javascript:;" data-vocabularyId="{vocabularyId}">{name}</a>' +
+						'<a href="javascript:;" data-vocabularyId="{vocabularyId}" tabIndex="-1">{name}</a>' +
 					'</span>' +
 					'<a href="javascript:;" class="vocabulary-item-actions-trigger" data-vocabularyId="{vocabularyId}"></a>' +
 			'</div>' +
@@ -112,7 +112,10 @@ AUI().add(
 							}
 						);
 
-						A.one(instance._vocabularyContainerSelector).on('click', instance._onVocabularyList, instance);
+						var vocabularyList = A.one(instance._vocabularyContainerSelector);
+
+						vocabularyList.on('click', instance._onVocabularyListClick, instance);
+						vocabularyList.on('key', instance._onVocabularyListKey, "up:13", instance);
 						A.one('#' + namespace + 'addCategoryButton').on('click', instance._onShowCategoryPanel, instance, ACTION_ADD);
 						A.one('#' + namespace + 'addVocabularyButton').on('click', instance._onShowVocabularyPanel, instance, ACTION_ADD);
 
@@ -1408,7 +1411,7 @@ AUI().add(
 						instance._addVocabulary(form);
 					},
 
-					_onVocabularyList: function(event) {
+					_onVocabularyListClick: function(event) {
 						var instance = this;
 
 						var target = event.target;
@@ -1419,6 +1422,14 @@ AUI().add(
 						if (target.hasClass('vocabulary-item-actions-trigger')) {
 							instance._showVocabularyPanel(ACTION_EDIT);
 						}
+					},
+
+					_onVocabularyListKey: function(event){
+						var instance = this;
+
+						var vocabularyId = instance._getVocabularyId(event.target);
+
+						instance._selectVocabulary(vocabularyId);
 					},
 
 					_reloadSearch: function() {
