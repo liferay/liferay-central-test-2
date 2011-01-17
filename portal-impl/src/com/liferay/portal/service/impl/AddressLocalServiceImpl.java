@@ -81,16 +81,16 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		return address;
 	}
 
+	public void deleteAddress(Address address) throws SystemException {
+		addressPersistence.remove(address);
+	}
+
 	public void deleteAddress(long addressId)
 		throws PortalException, SystemException {
 
 		Address address = addressPersistence.findByPrimaryKey(addressId);
 
 		deleteAddress(address);
-	}
-
-	public void deleteAddress(Address address) throws SystemException {
-		addressPersistence.remove(address);
 	}
 
 	public void deleteAddresses(long companyId, String className, long classPK)
@@ -151,41 +151,6 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 	protected void validate(
 			long addressId, long companyId, long classNameId, long classPK,
-			String street1, String city, String zip, long regionId,
-			long countryId, int typeId, boolean mailing, boolean primary)
-		throws PortalException, SystemException {
-
-		if (Validator.isNull(street1)) {
-			throw new AddressStreetException();
-		}
-		else if (Validator.isNull(city)) {
-			throw new AddressCityException();
-		}
-		else if (Validator.isNull(zip)) {
-			throw new AddressZipException();
-		}
-
-		if (addressId > 0) {
-			Address address = addressPersistence.findByPrimaryKey(addressId);
-
-			companyId = address.getCompanyId();
-			classNameId = address.getClassNameId();
-			classPK = address.getClassPK();
-		}
-
-		if ((classNameId == PortalUtil.getClassNameId(Account.class)) ||
-			(classNameId == PortalUtil.getClassNameId(Contact.class)) ||
-			(classNameId == PortalUtil.getClassNameId(Organization.class))) {
-
-			listTypeService.validate(
-				typeId, classNameId, ListTypeConstants.ADDRESS);
-		}
-
-		validate(addressId, companyId, classNameId, classPK, mailing, primary);
-	}
-
-	protected void validate(
-			long addressId, long companyId, long classNameId, long classPK,
 			boolean mailing, boolean primary)
 		throws SystemException {
 
@@ -228,6 +193,41 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 				}
 			}
 		}
+	}
+
+	protected void validate(
+			long addressId, long companyId, long classNameId, long classPK,
+			String street1, String city, String zip, long regionId,
+			long countryId, int typeId, boolean mailing, boolean primary)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(street1)) {
+			throw new AddressStreetException();
+		}
+		else if (Validator.isNull(city)) {
+			throw new AddressCityException();
+		}
+		else if (Validator.isNull(zip)) {
+			throw new AddressZipException();
+		}
+
+		if (addressId > 0) {
+			Address address = addressPersistence.findByPrimaryKey(addressId);
+
+			companyId = address.getCompanyId();
+			classNameId = address.getClassNameId();
+			classPK = address.getClassPK();
+		}
+
+		if ((classNameId == PortalUtil.getClassNameId(Account.class)) ||
+			(classNameId == PortalUtil.getClassNameId(Contact.class)) ||
+			(classNameId == PortalUtil.getClassNameId(Organization.class))) {
+
+			listTypeService.validate(
+				typeId, classNameId, ListTypeConstants.ADDRESS);
+		}
+
+		validate(addressId, companyId, classNameId, classPK, mailing, primary);
 	}
 
 }
