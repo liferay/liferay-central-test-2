@@ -680,11 +680,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				socialEquityLogLocalService.addEquityLogs(
 					userId, BlogsEntry.class.getName(), entryId,
 					ActionKeys.ADD_ENTRY, StringPool.BLANK);
-
-				// Subscriptions
-
-				notifySubscribers(entry, serviceContext);
 			}
+
+			// Subscriptions
+
+			notifySubscribers(entry, serviceContext);
 
 			// Indexer
 
