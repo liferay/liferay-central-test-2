@@ -33,29 +33,32 @@ headerNames.add(StringPool.BLANK);
 searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("there-are-no-scheduled-events");
 
-List<SchedulerRequest> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(destinationName, groupId));
+List<SchedulerResponse> results = SchedulerEngineUtil.getScheduledJobs(StagingUtil.getSchedulerGroupName(destinationName, groupId));
 
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
-	SchedulerRequest schedulerRequest = results.get(i);
+	SchedulerResponse schedulerResponse = results.get(i);
 
-	Trigger trigger = schedulerRequest.getTrigger();
+	String jobName = schedulerResponse.getJobName();
 
-	ResultRow row = new ResultRow(schedulerRequest, trigger.getJobName(), i);
+	Date startDate = SchedulerEngineUtil.getStartTime(schedulerResponse);
+	Date endDate = SchedulerEngineUtil.getEndTime(schedulerResponse);
+
+	ResultRow row = new ResultRow(schedulerResponse, jobName, i);
 
 	// Description
 
-	row.addText(schedulerRequest.getDescription());
+	row.addText(schedulerResponse.getDescription());
 
 	// Start date
 
-	row.addText(dateFormatDateTime.format(trigger.getStartDate()));
+	row.addText(dateFormatDateTime.format(startDate));
 
 	// End date
 
-	if (trigger.getEndDate() != null) {
-		row.addText(dateFormatDateTime.format(trigger.getEndDate()));
+	if (endDate != null) {
+		row.addText(dateFormatDateTime.format(endDate));
 	}
 	else {
 		row.addText(LanguageUtil.get(pageContext, "no-end-date"));
@@ -67,7 +70,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	sb.append(portletDisplay.getNamespace());
 	sb.append("unschedulePublishEvent('");
-	sb.append(trigger.getJobName());
+	sb.append(jobName);
 	sb.append("');");
 
 	row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "delete"), sb.toString());

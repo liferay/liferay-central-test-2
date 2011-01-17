@@ -15,7 +15,9 @@
 package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
+import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
 
 import java.util.List;
 
@@ -70,13 +72,16 @@ public interface SchedulerEngine {
 	public void delete(String jobName, String groupName)
 		throws SchedulerException;
 
-	public SchedulerRequest getScheduledJob(String jobName, String groupName)
+	@MessagingProxy(mode = ProxyMode.SYNC)
+	public SchedulerResponse getScheduledJob(String jobName, String groupName)
 		throws SchedulerException;
 
-	public List<SchedulerRequest> getScheduledJobs()
+	@MessagingProxy(mode = ProxyMode.SYNC)
+	public List<SchedulerResponse> getScheduledJobs()
 		throws SchedulerException;
 
-	public List<SchedulerRequest> getScheduledJobs(String groupName)
+	@MessagingProxy(mode = ProxyMode.SYNC)
+	public List<SchedulerResponse> getScheduledJobs(String groupName)
 		throws SchedulerException;
 
 	public void pause(String groupName) throws SchedulerException;
@@ -94,21 +99,26 @@ public interface SchedulerEngine {
 			Message message)
 		throws SchedulerException;
 
+	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void shutdown() throws SchedulerException;
 
+	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void start() throws SchedulerException;
 
 	public void suppressError(String jobName, String groupName)
 		throws SchedulerException;
 
+	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void unschedule(String groupName) throws SchedulerException;
 
+	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void unschedule(String jobName, String groupName)
 		throws SchedulerException;
 
 	/**
 	 * @deprecated {@link #unschedule(String, String)}
 	 */
+	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void unschedule(Trigger trigger) throws SchedulerException;
 
 	public void update(Trigger trigger) throws SchedulerException;
