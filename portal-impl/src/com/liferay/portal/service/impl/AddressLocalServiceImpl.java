@@ -98,7 +98,12 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		addressPersistence.removeByC_C_C(companyId, classNameId, classPK);
+		List<Address> addresses = addressPersistence.findByC_C_C(
+			companyId, classNameId, classPK);
+
+		for (Address address : addresses) {
+			deleteAddress(address);
+		}
 	}
 
 	public Address getAddress(long addressId)
