@@ -1764,6 +1764,26 @@ public class ServiceBuilder {
 		}
 	}
 
+	public boolean isHBMCamelCasePropertyAccessor(String propertyName) {
+		if (propertyName.length() < 3) {
+			return false;
+		}
+
+		char[] chars = propertyName.toCharArray();
+
+		char c0 = chars[0];
+		char c1 = chars[1];
+		char c2 = chars[2];
+
+		if (Character.isLowerCase(c0) && Character.isUpperCase(c1) &&
+			Character.isLowerCase(c2)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isServiceReadOnlyMethod(
 		JavaMethod method, List<String> txRequiredList) {
 

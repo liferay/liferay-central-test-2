@@ -28,6 +28,10 @@
 							type="org.hibernate.type.TimestampType"
 						</#if>
 
+						<#if serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
+							access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+						</#if>
+
 						/>
 					</#list>
 				</composite-id>
@@ -39,7 +43,13 @@
 						column="${column.DBName}"
 					</#if>
 
-					type="<#if !entity.hasPrimitivePK()>java.lang.</#if>${column.type}">
+					type="<#if !entity.hasPrimitivePK()>java.lang.</#if>${column.type}"
+
+					<#if serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
+						access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
+					</#if>
+
+					>
 
 					<#if column.idType??>
 						<#assign class = serviceBuilder.getGeneratorClass("${column.idType}")>
@@ -84,6 +94,10 @@
 						<#else>
 							type="org.hibernate.type.${column.type}Type"
 						</#if>
+					</#if>
+
+					<#if serviceBuilder.isHBMCamelCasePropertyAccessor(column.name)>
+						access="com.liferay.portal.dao.orm.hibernate.CamelCasePropertyAccessor"
 					</#if>
 
 					/>
