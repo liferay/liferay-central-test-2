@@ -32,6 +32,10 @@
 	position: relative;
 }
 
+.ie6 .portlet-asset-category-admin .vocabulary-content-wrapper {
+	width: 100%;
+}
+
 .portlet-asset-category-admin .vocabulary-item a {
 	padding: 8px 20px 8px 10px;
 }
@@ -43,7 +47,7 @@
 .portlet-asset-category-admin .vocabulary-item-actions-trigger {
 	background-image: url(<%= themeImagesPath %>/common/edit.png);
 	background-repeat: no-repeat;
-	clip: rect(0pt 0pt 0pt 0pt);
+	clip: rect(0pt, 0pt, 0pt, 0pt);
 	display: block;
 	height: 16px;
 	margin-top: -8px;
@@ -52,10 +56,6 @@
 	right: 0;
 	top: 50%;
 	width: 16px;
-}
-
-.ie6 .portlet-asset-category-admin .vocabulary-item-actions-trigger {
-	clip: auto;
 }
 
 .portlet-asset-category-admin .vocabulary-category:hover .vocabulary-item-actions-trigger, .portlet-asset-category-admin .vocabulary-category:focus .vocabulary-item-actions-trigger, .portlet-asset-category-admin .vocabulary-category .vocabulary-item-actions-trigger:focus {
