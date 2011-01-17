@@ -51,7 +51,7 @@ public class InputLocalizedTag extends IncludeTag {
 	protected void cleanUp() {
 		_cssClass = null;
 		_disabled = false;
-		_formName = "fm";
+		_formName = null;
 		_name = null;
 		_type = "input";
 		_xml = null;
@@ -85,7 +85,7 @@ public class InputLocalizedTag extends IncludeTag {
 
 	private String _cssClass;
 	private boolean _disabled;
-	private String _formName = "fm";
+	private String _formName;
 	private String _name;
 	private String _type = "input";
 	private String _xml;
