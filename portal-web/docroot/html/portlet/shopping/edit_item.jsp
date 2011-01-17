@@ -467,7 +467,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 				<aui:input label="" name="smallFile" type="file" />
 
-				<aui:input label="use-small-image" name="smallImage" type="checkbox" checked="<%= item != null && item.getSmallImage() ? true : false %>" />
+				<aui:input checked="<%= ((item != null) && item.isSmallImage()) ? true : false %>" label="use-small-image" name="smallImage" type="checkbox" />
 
 				<aui:input label="medium-image-url" name="mediumImageURL" />
 
