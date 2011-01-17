@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
@@ -277,6 +278,9 @@ public class DLRepositoryLocalServiceImpl
 	public void deleteAll(long groupId)
 		throws PortalException, SystemException {
 
+		Group group = groupLocalService.getGroup(groupId);
+		long companyId = group.getCompanyId();
+
 		List<DLFolder> folders = dlFolderPersistence.findByG_P(
 			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
@@ -285,6 +289,17 @@ public class DLRepositoryLocalServiceImpl
 		}
 
 		deleteFileEntries(groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+		try {
+			dlLocalService.deleteDirectory(
+				companyId, PortletKeys.DOCUMENT_LIBRARY, groupId,
+				StringPool.BLANK);
+		}
+		catch (NoSuchDirectoryException nsde) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(nsde.getMessage());
+			}
+		}
 	}
 
 	public void deleteFileEntry(long fileEntryId)
