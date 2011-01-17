@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,13 +62,19 @@ public class InputLocalizedTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
+		String formName = _formName;
+
+		if (Validator.isNull(formName)) {
+			formName = "fm";
+		}
+
 		request.setAttribute("liferay-ui:input-localized:cssClass", _cssClass);
 		request.setAttribute(
 			"liferay-ui:input-localized:disabled", String.valueOf(_disabled));
 		request.setAttribute(
 			"liferay-ui:input-localized:dynamicAttributes",
 			getDynamicAttributes());
-		request.setAttribute("liferay-ui:input-localized:formName", _formName);
+		request.setAttribute("liferay-ui:input-localized:formName", formName);
 		request.setAttribute("liferay-ui:input-localized:name", _name);
 		request.setAttribute("liferay-ui:input-localized:type", _type);
 		request.setAttribute("liferay-ui:input-localized:xml", _xml);
