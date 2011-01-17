@@ -682,13 +682,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 					ActionKeys.ADD_ENTRY, StringPool.BLANK);
 			}
 
-			// Subscriptions
-
-			notifySubscribers(entry, serviceContext);
-
 			// Indexer
 
 			indexer.reindex(entry);
+
+			// Subscriptions
+
+			notifySubscribers(entry, serviceContext);
 
 			// Ping
 
