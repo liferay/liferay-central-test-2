@@ -84,7 +84,13 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 	public void deleteAddress(long addressId)
 		throws PortalException, SystemException {
 
-		addressPersistence.remove(addressId);
+		Address address = addressPersistence.findByPrimaryKey(addressId);
+
+		deleteAddress(address);
+	}
+
+	public void deleteAddress(Address address) throws SystemException {
+		addressPersistence.remove(address);
 	}
 
 	public void deleteAddresses(long companyId, String className, long classPK)
