@@ -115,7 +115,7 @@ AUI().add(
 						var vocabularyList = A.one(instance._vocabularyContainerSelector);
 
 						vocabularyList.on('click', instance._onVocabularyListClick, instance);
-						vocabularyList.on('key', instance._onVocabularyListKey, 'up:13', instance);
+						vocabularyList.on('key', instance._onVocabularyListSelect, 'up:13', instance);
 
 						A.one('#' + namespace + 'addCategoryButton').on('click', instance._onShowCategoryPanel, instance, ACTION_ADD);
 						A.one('#' + namespace + 'addVocabularyButton').on('click', instance._onShowVocabularyPanel, instance, ACTION_ADD);
@@ -1415,17 +1415,14 @@ AUI().add(
 					_onVocabularyListClick: function(event) {
 						var instance = this;
 
-						var target = event.target;
-						var vocabularyId = instance._getVocabularyId(target);
+						instance._onVocabularyListSelect(event);
 
-						instance._selectVocabulary(vocabularyId);
-
-						if (target.hasClass('vocabulary-item-actions-trigger')) {
+						if (event.target.hasClass('vocabulary-item-actions-trigger')) {
 							instance._showVocabularyPanel(ACTION_EDIT);
 						}
 					},
 
-					_onVocabularyListKey: function(event){
+					_onVocabularyListSelect: function(event){
 						var instance = this;
 
 						var vocabularyId = instance._getVocabularyId(event.target);
