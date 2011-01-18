@@ -530,22 +530,24 @@ AUI().add(
 					);
 				}
 
-				manageContent.get('boundingBox').delegate(
-					'click',
-					function(event) {
-						event.preventDefault();
+				if (manageContent){
+					manageContent.get('boundingBox').delegate(
+						'click',
+						function(event) {
+							event.preventDefault();
 
-						var item = event.currentTarget;
+							var item = event.currentTarget;
 
-						manageContent.hide();
+							manageContent.hide();
 
-						var href = item.attr('href');
-						var title = item.attr('title');
+							var href = item.attr('href');
+							var title = item.attr('title');
 
-						Liferay.Util.openControlPanelPopUp('', '', href, namespace, title);
-					},
-					'.use-dialog a'
-				);
+							Liferay.Util.openControlPanelPopUp('', '', href, namespace, title);
+						},
+						'.use-dialog a'
+					);
+				}
 
 				var pageTemplate = A.one('#pageTemplate');
 
