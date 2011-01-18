@@ -111,7 +111,7 @@ else {
 						</liferay-ui:panel>
 					</c:if>
 
-					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" helpMessage="categoryProperties-are-a-way-to-add-more-detailed-information-to-a-specific-category" id="assetCategoryPropertiesPanel" persistState="<%= true %>" title="categoryProperties">
+					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" helpMessage="properties-are-a-way-to-add-more-detailed-information-to-a-specific-category" id="assetCategoryPropertiesPanel" persistState="<%= true %>" title="properties">
 						<aui:fieldset cssClass="category-categoryProperties" id="categoryProperties">
 
 							<%
