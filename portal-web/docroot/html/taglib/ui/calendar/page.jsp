@@ -70,7 +70,7 @@ int weekNumber = 1;
 
 		<tr class="calendar-header">
 			<th colspan="7">
-				<%= dateFormat.format(selCal.getTime()) %>
+				<%= dateFormat.format(Time.getDate(selCal.getTime(), timeZone)) %>
 			</th>
 		</tr>
 	</c:if>
