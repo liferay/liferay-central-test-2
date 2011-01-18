@@ -92,6 +92,7 @@ import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.autologin.AutoLoginFilter;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
+import com.liferay.portal.struts.AuthPublicPathRegistry;
 import com.liferay.portal.struts.StrutsActionRegistry;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
 import com.liferay.portal.util.CustomJspRegistryUtil;
@@ -146,6 +147,7 @@ public class HookHotDeployListener
 		"admin.default.role.names",
 		"admin.default.user.group.names",
 		"auth.forward.by.last.path",
+		"auth.public.paths",
 		"auto.deploy.listeners",
 		"application.startup.events",
 		"auth.failure",
@@ -746,6 +748,13 @@ public class HookHotDeployListener
 			authFailuresContainer.unregisterAuthFailures();
 		}
 
+		AuthPublicPathsContainer authPublicPathsContainer =
+			_authPublicPathsContainerMap.remove(servletContextName);
+
+		if (authPublicPathsContainer != null) {
+			authPublicPathsContainer.unregisterPaths();
+		}
+
 		AutoDeployListenersContainer autoDeployListenersContainer =
 			_autoDeployListenersContainerMap.remove(servletContextName);
 
@@ -977,6 +986,22 @@ public class HookHotDeployListener
 		initAuthFailures(
 			portletClassLoader, portalProperties, AUTH_MAX_FAILURES,
 			authFailuresContainer);
+	}
+
+	protected void initAuthPublicPaths(
+			String servletContextName, Properties portalProperties)
+		throws Exception {
+
+		AuthPublicPathsContainer authPublicPathsContainer =
+			new AuthPublicPathsContainer();
+
+		_authPublicPathsContainerMap.put(
+			servletContextName, authPublicPathsContainer);
+
+		String[] publicPaths = StringUtil.split(
+			portalProperties.getProperty(AUTH_PUBLIC_PATHS));
+
+		authPublicPathsContainer.registerPaths(publicPaths);
 	}
 
 	protected void initAutoDeployListeners(
@@ -1268,6 +1293,10 @@ public class HookHotDeployListener
 		}
 
 		resetPortalProperties(servletContextName, portalProperties, true);
+
+		if (portalProperties.containsKey(PropsKeys.AUTH_PUBLIC_PATHS)) {
+			initAuthPublicPaths(servletContextName, portalProperties);
+		}
 
 		if (portalProperties.containsKey(PropsKeys.AUTH_TOKEN_IMPL)) {
 			String authTokenClassName = portalProperties.getProperty(
@@ -1781,6 +1810,8 @@ public class HookHotDeployListener
 		new HashMap<String, AuthenticatorsContainer>();
 	private Map<String, AuthFailuresContainer> _authFailuresContainerMap =
 		new HashMap<String, AuthFailuresContainer>();
+	private Map<String, AuthPublicPathsContainer> _authPublicPathsContainerMap =
+		new HashMap<String, AuthPublicPathsContainer>();
 	private Map<String, AutoDeployListenersContainer>
 		_autoDeployListenersContainerMap =
 			new HashMap<String, AutoDeployListenersContainer>();
@@ -1874,6 +1905,27 @@ public class HookHotDeployListener
 		Map<String, List<AuthFailure>> _authFailures =
 			new HashMap<String, List<AuthFailure>>();
 
+	}
+
+	private class AuthPublicPathsContainer {
+
+		public void registerPaths(String[] paths) {
+			for (String path : paths) {
+				_paths.add(path);
+			}
+
+			AuthPublicPathRegistry.register(paths);
+		}
+
+		public void unregisterPaths() {
+			for (String path : _paths) {
+				AuthPublicPathRegistry.unregister(path);
+			}
+
+			_paths.clear();
+		}
+
+		Set<String> _paths = new HashSet<String>();
 	}
 
 	private class AutoDeployListenersContainer {

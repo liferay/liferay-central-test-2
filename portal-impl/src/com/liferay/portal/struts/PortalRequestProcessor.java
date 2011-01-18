@@ -446,7 +446,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	protected boolean isPublicPath(String path) {
 		if ((path != null) &&
 			(_publicPaths.contains(path)) ||
-			(path.startsWith(_PATH_COMMON))) {
+			(path.startsWith(_PATH_COMMON)) ||
+			AuthPublicPathRegistry.contains(path)) {
 
 			return true;
 		}
