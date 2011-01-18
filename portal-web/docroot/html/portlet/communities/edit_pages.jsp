@@ -492,7 +492,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 		<c:if test='<%= tabs3.equals("page") %>'>
 			<portlet:namespace />updateLanguage();
-			<portlet:namespace />updateMetaLanguage();
 		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);

@@ -26,11 +26,11 @@
 	String w3cCurrentLanguageId = LocaleUtil.toW3cLanguageId(currentLanguageId);
 	String w3cDefaultLanguageId = LocaleUtil.toW3cLanguageId(defaultLanguageId);
 
-	String metaRobots = layout.getTypeSettingsProperties().getProperty("meta-robots_" + currentLanguageId);
+	String metaRobots = layout.getRobots(locale, false);
 	String metaRobotsLanguageId = w3cCurrentLanguageId;
 
 	if (Validator.isNull(metaRobots)) {
-		metaRobots = layout.getTypeSettingsProperties().getProperty("meta-robots_" + defaultLanguageId);
+		metaRobots = layout.getRobots();
 		metaRobotsLanguageId = w3cDefaultLanguageId;
 	}
 	%>
@@ -40,11 +40,11 @@
 	</c:if>
 
 	<%
-	String metaDescription = layout.getTypeSettingsProperties().getProperty("meta-description_" + currentLanguageId);
+	String metaDescription = layout.getDescription(locale, false);
 	String metaDescriptionLanguageId = w3cCurrentLanguageId;
 
 	if (Validator.isNull(metaDescription)) {
-		metaDescription = layout.getTypeSettingsProperties().getProperty("meta-description_" + defaultLanguageId);
+		metaDescription = layout.getDescription();
 		metaDescriptionLanguageId = w3cDefaultLanguageId;
 	}
 
@@ -72,11 +72,11 @@
 	</c:if>
 
 	<%
-	String metaKeywords = layout.getTypeSettingsProperties().getProperty("meta-keywords_" + currentLanguageId);
+	String metaKeywords = layout.getKeywords(locale, false);
 	String metaKeywordsLanguageId = w3cCurrentLanguageId;
 
 	if (Validator.isNull(metaKeywords)) {
-		metaKeywords = layout.getTypeSettingsProperties().getProperty("meta-keywords_" + defaultLanguageId);
+		metaKeywords = layout.getKeywords();
 		metaKeywordsLanguageId = w3cDefaultLanguageId;
 	}
 
