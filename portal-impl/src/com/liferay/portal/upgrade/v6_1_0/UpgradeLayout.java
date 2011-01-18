@@ -15,18 +15,23 @@
 package com.liferay.portal.upgrade.v6_1_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.util.Locale;
+
 /**
  * @author Julio Camarero
  */
-public class UpgradeLayout extends UpgradeProcess {
+public class UpgradeLayout extends com.liferay.portal.upgrade.v4_4_0.UpgradeLayout {
 
 	protected void doUpgrade() throws Exception {
 		Connection con = null;
@@ -36,14 +41,20 @@ public class UpgradeLayout extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement("select plid, name, title from Layout");
+			ps = con.prepareStatement(
+				"select plid, name, title, typeSettings from Layout");
 
 			rs = ps.executeQuery();
+
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+			Locale defaultLocale = LocaleUtil.getDefault();
+			String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 			while (rs.next()) {
 				long plid = rs.getLong("plid");
 				String name = rs.getString("name");
 				String title = rs.getString("title");
+				String typeSettings = rs.getString("typeSettings");
 
 				if (Validator.isNotNull(name)) {
 					name = StringUtil.replace(name,
@@ -71,6 +82,45 @@ public class UpgradeLayout extends UpgradeProcess {
 						});
 
 					updateTitle(plid, title);
+				}
+
+				if (Validator.isNotNull(typeSettings)) {
+					UnicodeProperties typeSettingsProperties =
+						new UnicodeProperties(true);
+
+					typeSettingsProperties.load(typeSettings);
+
+					String defaultDescription =
+						typeSettingsProperties.getProperty(
+							"meta-description_" + defaultLanguageId);
+
+					if (Validator.isNotNull(defaultDescription)) {
+						typeSettingsProperties = updateMetaField(
+							plid, locales, typeSettingsProperties,
+							"meta-description_", "Description", "description");
+					}
+
+					String defaultKeywords =
+						typeSettingsProperties.getProperty(
+							"meta-keywords_" + defaultLanguageId);
+
+					if (Validator.isNotNull(defaultKeywords)) {
+						typeSettingsProperties = updateMetaField(
+							plid, locales, typeSettingsProperties,
+							"meta-keywords_", "Keywords", "keywords");
+					}
+
+					String defaultRobots =
+						typeSettingsProperties.getProperty(
+							"meta-robots_" + defaultLanguageId);
+
+					if (Validator.isNotNull(defaultRobots)) {
+						typeSettingsProperties = updateMetaField(
+							plid, locales, typeSettingsProperties,
+							"meta-robots_", "Robots", "robots");
+					}
+
+					updateTypeSettings(plid, typeSettingsProperties.toString());
 				}
 			}
 		}
@@ -119,6 +169,48 @@ public class UpgradeLayout extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps);
 		}
+	}
+
+	protected UnicodeProperties updateMetaField (
+			long plid, Locale[] locales,
+			UnicodeProperties typeSettingsProperties, String propertyName,
+			String xmlName, String columName)
+		throws Exception {
+
+		String xml = null;
+
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
+
+			String value =
+				typeSettingsProperties.getProperty(propertyName + languageId);
+
+			if (Validator.isNotNull(value)) {
+				xml = LocalizationUtil.updateLocalization(
+					xml, xmlName, value, languageId);
+
+				typeSettingsProperties.remove(propertyName + languageId);
+			}
+		}
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update Layout set " + columName + " = ? where plid = " + plid);
+
+			ps.setString(1, xml);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+
+		return typeSettingsProperties;
 	}
 
 }

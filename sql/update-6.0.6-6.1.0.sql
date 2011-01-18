@@ -1,3 +1,6 @@
+alter table Layout add keywords STRING null;
+alter table Layout add robots STRING null;
+
 alter table AssetCategory add description STRING null;
 
 alter table BlogsEntry add description STRING null;
