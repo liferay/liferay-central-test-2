@@ -449,7 +449,6 @@ public class EditPagesAction extends PortletAction {
 		long layoutId = ParamUtil.getLong(actionRequest, "layoutId");
 		long parentLayoutId = ParamUtil.getLong(
 			uploadRequest, "parentLayoutId");
-		String description = ParamUtil.getString(uploadRequest, "description");
 		String type = ParamUtil.getString(uploadRequest, "type");
 		boolean hidden = ParamUtil.getBoolean(uploadRequest, "hidden");
 		String friendlyURL = ParamUtil.getString(uploadRequest, "friendlyURL");
@@ -464,10 +463,16 @@ public class EditPagesAction extends PortletAction {
 
 		long copyLayoutId = ParamUtil.getLong(uploadRequest, "copyLayoutId");
 
-		Map<Locale, String> localeNamesMap =
+		Map<Locale, String> nameMap =
 			LocalizationUtil.getLocalizationMap(actionRequest, "name");
-		Map<Locale, String> localeTitlesMap =
+		Map<Locale, String> titleMap =
 			LocalizationUtil.getLocalizationMap(actionRequest, "title");
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
+		Map<Locale, String> keywordsMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "keywords");
+		Map<Locale, String> robotsMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "robots");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Layout.class.getName(), actionRequest);
@@ -484,9 +489,10 @@ public class EditPagesAction extends PortletAction {
 					groupId, privateLayout, parentLayoutId);
 
 				layout = LayoutServiceUtil.addLayout(
-					groupId, privateLayout, parentLayoutId, localeNamesMap,
-					localeTitlesMap, description, parentLayout.getType(),
-					hidden, friendlyURL, serviceContext);
+					groupId, privateLayout, parentLayoutId, nameMap,
+					titleMap, descriptionMap, keywordsMap, robotsMap,
+					parentLayout.getType(), hidden, friendlyURL,
+					serviceContext);
 
 				LayoutServiceUtil.updateLayout(
 					layout.getGroupId(), layout.isPrivateLayout(),
@@ -507,9 +513,10 @@ public class EditPagesAction extends PortletAction {
 				Layout layoutPrototypeLayout = layoutPrototype.getLayout();
 
 				layout = LayoutServiceUtil.addLayout(
-					groupId, privateLayout, parentLayoutId, localeNamesMap,
-					localeTitlesMap, description, LayoutConstants.TYPE_PORTLET,
-					false, friendlyURL, serviceContext);
+					groupId, privateLayout, parentLayoutId, nameMap,
+					titleMap, descriptionMap, keywordsMap, robotsMap,
+					LayoutConstants.TYPE_PORTLET, false, friendlyURL,
+					serviceContext);
 
 				LayoutServiceUtil.updateLayout(
 					layout.getGroupId(), layout.isPrivateLayout(),
@@ -526,9 +533,9 @@ public class EditPagesAction extends PortletAction {
 			}
 			else {
 				LayoutServiceUtil.addLayout(
-					groupId, privateLayout, parentLayoutId, localeNamesMap,
-					localeTitlesMap, description, type, hidden, friendlyURL,
-					serviceContext);
+					groupId, privateLayout, parentLayoutId, nameMap,
+					titleMap, descriptionMap, keywordsMap, robotsMap, type,
+					hidden, friendlyURL, serviceContext);
 			}
 		}
 		else {
@@ -542,9 +549,9 @@ public class EditPagesAction extends PortletAction {
 
 			layout = LayoutServiceUtil.updateLayout(
 				groupId, privateLayout, layoutId, layout.getParentLayoutId(),
-				localeNamesMap, localeTitlesMap, description, type, hidden,
-				friendlyURL, Boolean.valueOf(iconImage), iconBytes,
-				serviceContext);
+				nameMap, titleMap, descriptionMap, keywordsMap, robotsMap,
+				type, hidden, friendlyURL, Boolean.valueOf(iconImage),
+				iconBytes, serviceContext);
 
 			if (oldFriendlyURL.equals(layout.getFriendlyURL())) {
 				oldFriendlyURL = StringPool.BLANK;

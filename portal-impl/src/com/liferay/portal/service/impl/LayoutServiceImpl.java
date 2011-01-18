@@ -54,9 +54,10 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	public Layout addLayout(
 			long groupId, boolean privateLayout, long parentLayoutId,
 			Map<Locale, String> localeNamesMap,
-			Map<Locale, String> localeTitlesMap, String description,
-			String type, boolean hidden, String friendlyURL,
-			ServiceContext serviceContext)
+			Map<Locale, String> localeTitlesMap,
+			Map<Locale, String> descriptionMap, Map<Locale, String> keywordsMap,
+			Map<Locale, String> robotsMap, String type, boolean hidden,
+			String friendlyURL, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -64,8 +65,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return layoutLocalService.addLayout(
 			getUserId(), groupId, privateLayout, parentLayoutId, localeNamesMap,
-			localeTitlesMap, description, type, hidden, friendlyURL,
-			serviceContext);
+			localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type,
+			hidden, friendlyURL, serviceContext);
 	}
 
 	public Layout addLayout(
@@ -82,8 +83,9 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return addLayout(
 			groupId, privateLayout, parentLayoutId, localeNamesMap,
-			new HashMap<Locale, String>(), description, type, hidden,
-			friendlyURL, serviceContext);
+			new HashMap<Locale, String>(), new HashMap<Locale, String>(),
+			new HashMap<Locale, String>(), new HashMap<Locale, String>(),
+			type, hidden, friendlyURL, serviceContext);
 	}
 
 	public void deleteLayout(long plid)
@@ -417,26 +419,10 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
-			Map<Locale, String> localeTitlesMap, String description,
-			String type, boolean hidden, String friendlyURL, Boolean iconImage,
-			byte[] iconBytes, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		LayoutPermissionUtil.check(
-			getPermissionChecker(), groupId, privateLayout, layoutId,
-			ActionKeys.UPDATE);
-
-		return layoutLocalService.updateLayout(
-			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
-			localeTitlesMap, description, type, hidden, friendlyURL, iconImage,
-			iconBytes, serviceContext);
-	}
-
-	public Layout updateLayout(
-			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map<Locale, String> localeNamesMap,
-			Map<Locale, String> localeTitlesMap, String description,
-			String type, boolean hidden, String friendlyURL,
+			Map<Locale, String> localeTitlesMap,
+			Map<Locale, String> descriptionMap, Map<Locale, String> keywordsMap,
+			Map<Locale, String> robotsMap, String type, boolean hidden,
+			String friendlyURL, Boolean iconImage, byte[] iconBytes,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -446,8 +432,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return layoutLocalService.updateLayout(
 			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
-			localeTitlesMap, description, type, hidden, friendlyURL,
-			serviceContext);
+			localeTitlesMap, descriptionMap, keywordsMap, robotsMap, type,
+			hidden, friendlyURL, iconImage, iconBytes, serviceContext);
 	}
 
 	public Layout updateLayout(

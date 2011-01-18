@@ -95,7 +95,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
 			long parentLayoutId, Map<Locale, String> nameMap,
-			Map<Locale, String> titleMap, String description,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			Map<Locale, String> keywordsMap, Map<Locale, String> robotsMap,
 			String type, boolean hidden, String friendlyURL,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -127,7 +128,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setParentLayoutId(parentLayoutId);
 		layout.setNameMap(nameMap);
 		layout.setTitleMap(titleMap);
-		layout.setDescription(description);
+		layout.setDescriptionMap(descriptionMap);
+		layout.setKeywordsMap(keywordsMap);
+		layout.setRobotsMap(robotsMap);
 		layout.setType(type);
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
@@ -185,8 +188,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
-			new HashMap<Locale, String>(), description, type, hidden,
-			friendlyURL, serviceContext);
+			new HashMap<Locale, String>(), new HashMap<Locale, String>(),
+			new HashMap<Locale, String>(), new HashMap<Locale, String>(),
+			type, hidden, friendlyURL, serviceContext);
 	}
 
 	public void deleteLayout(Layout layout, boolean updateLayoutSet)
@@ -781,7 +785,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, Map<Locale, String> nameMap,
-			Map<Locale, String> titleMap, String description,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			Map<Locale, String> keywordsMap, Map<Locale, String> robotsMap,
 			String type, boolean hidden, String friendlyURL, Boolean iconImage,
 			byte[] iconBytes, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -812,7 +817,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layout.setParentLayoutId(parentLayoutId);
 		layout.setNameMap(nameMap);
 		layout.setTitleMap(titleMap);
-		layout.setDescription(description);
+		layout.setDescriptionMap(descriptionMap);
+		layout.setKeywordsMap(keywordsMap);
+		layout.setRobotsMap(robotsMap);
 		layout.setType(type);
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
@@ -852,20 +859,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		expandoBridge.setAttributes(serviceContext);
 
 		return layout;
-	}
-
-	public Layout updateLayout(
-			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map<Locale, String> localeNamesMap,
-			Map<Locale, String> localeTitlesMap, String description,
-			String type, boolean hidden, String friendlyURL,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		return updateLayout(
-			groupId, privateLayout, layoutId, parentLayoutId, localeNamesMap,
-			localeTitlesMap, description, type, hidden, friendlyURL, null,
-			null, serviceContext);
 	}
 
 	public Layout updateLayout(
