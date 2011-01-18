@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public interface StrutsAction {
 
 	public String execute(
-			StrutsAction originalAction, HttpServletRequest request,
+			StrutsAction originalStrutsAction, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception;
 

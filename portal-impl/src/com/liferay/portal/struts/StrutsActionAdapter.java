@@ -30,11 +30,11 @@ import org.apache.struts.action.ActionMapping;
 public class StrutsActionAdapter extends BaseStrutsAction {
 
 	public StrutsActionAdapter(
-		Action action, ActionMapping mapping, ActionForm form) {
+		Action action, ActionMapping actionMapping, ActionForm actionForm) {
 
 		_action = action;
-		_actionMapping = mapping;
-		_actionForm = form;
+		_actionMapping = actionMapping;
+		_actionForm = actionForm;
 	}
 
 	public String execute(

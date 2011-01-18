@@ -470,8 +470,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				actionMapping.getPath());
 
 			if (actionConfig != null) {
-				Action originalAction =
-					super.processActionCreate(request, response, actionMapping);
+				Action originalAction = super.processActionCreate(
+					request, response, actionMapping);
 
 				actionAdapter.setOriginalAction(originalAction);
 			}

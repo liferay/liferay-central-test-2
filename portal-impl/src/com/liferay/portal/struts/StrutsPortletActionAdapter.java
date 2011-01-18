@@ -34,11 +34,12 @@ import org.apache.struts.action.ActionMapping;
 public class StrutsPortletActionAdapter extends BaseStrutsPortletAction {
 
 	public StrutsPortletActionAdapter(
-		PortletAction portletAction, ActionMapping mapping, ActionForm form) {
+		PortletAction portletAction, ActionMapping actionMapping,
+		ActionForm actionForm) {
 
-		_actionForm = form;
-		_actionMapping = mapping;
 		_portletAction = portletAction;
+		_actionMapping = actionMapping;
+		_actionForm = actionForm;
 	}
 
 	public void processAction(
@@ -56,12 +57,12 @@ public class StrutsPortletActionAdapter extends BaseStrutsPortletAction {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		ActionForward forward = _portletAction.render(
+		ActionForward actionForward = _portletAction.render(
 			_actionMapping, _actionForm, portletConfig, renderRequest,
 			renderResponse);
 
-		if (forward != null) {
-			return forward.getPath();
+		if (actionForward != null) {
+			return actionForward.getPath();
 		}
 
 		return null;

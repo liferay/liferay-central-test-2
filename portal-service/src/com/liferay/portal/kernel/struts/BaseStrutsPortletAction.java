@@ -28,49 +28,47 @@ import javax.portlet.ResourceResponse;
 public class BaseStrutsPortletAction implements StrutsPortletAction {
 
 	public void processAction(
-		PortletConfig portletConfig, ActionRequest actionRequest,
-		ActionResponse actionResponse)
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
-
 	}
 
 	public void processAction(
-		StrutsPortletAction originalStrutsPortletAction,
-		PortletConfig portletConfig, ActionRequest actionRequest,
-		ActionResponse actionResponse)
+			StrutsPortletAction originalStrutsPortletAction,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		processAction(portletConfig, actionRequest, actionResponse);
 	}
 
 	public String render(
-		PortletConfig portletConfig, RenderRequest renderRequest,
-		RenderResponse renderResponse)
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		return null;
 	}
 
 	public String render(
-		StrutsPortletAction originalStrutsPortletAction,
-		PortletConfig portletConfig, RenderRequest renderRequest,
-		RenderResponse renderResponse)
+			StrutsPortletAction originalStrutsPortletAction,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		return render(portletConfig, renderRequest, renderResponse);
 	}
 
 	public void serveResource(
-		PortletConfig portletConfig, ResourceRequest resourceRequest,
-		ResourceResponse resourceResponse)
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
-
 	}
 
 	public void serveResource(
-		StrutsPortletAction originalStrutsPortletAction,
-		PortletConfig portletConfig, ResourceRequest resourceRequest,
-		ResourceResponse resourceResponse)
+			StrutsPortletAction originalStrutsPortletAction,
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
 
 		serveResource(portletConfig, resourceRequest, resourceResponse);

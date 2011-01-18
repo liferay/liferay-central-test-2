@@ -23,15 +23,14 @@ import javax.servlet.http.HttpServletResponse;
 public class BaseStrutsAction implements StrutsAction {
 
 	public String execute(
-			HttpServletRequest request,
-			HttpServletResponse response)
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		return null;
 	}
 
 	public String execute(
-			StrutsAction originalAction, HttpServletRequest request,
+			StrutsAction originalStrutsAction, HttpServletRequest request,
 			HttpServletResponse response)
 		throws Exception {
 

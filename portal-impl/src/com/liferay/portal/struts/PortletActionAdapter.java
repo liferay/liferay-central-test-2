@@ -44,16 +44,15 @@ public class PortletActionAdapter extends PortletAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		StrutsPortletAction originalPortletAction = null;
+		StrutsPortletAction originalStrutsPortletAction = null;
 
 		if (_originalPortletAction != null) {
-			originalPortletAction =
-				new StrutsPortletActionAdapter(
-					_originalPortletAction, actionMapping, actionForm);
+			originalStrutsPortletAction = new StrutsPortletActionAdapter(
+				_originalPortletAction, actionMapping, actionForm);
 		}
 
 		_strutsPortletAction.processAction(
-			originalPortletAction, portletConfig, actionRequest,
+			originalStrutsPortletAction, portletConfig, actionRequest,
 			actionResponse);
 	}
 
@@ -63,16 +62,15 @@ public class PortletActionAdapter extends PortletAction {
 			RenderResponse renderResponse)
 		throws Exception {
 
-		StrutsPortletAction originalPortletAction = null;
+		StrutsPortletAction originalStrutsPortletAction = null;
 
 		if (_originalPortletAction != null) {
-			originalPortletAction =
-				new StrutsPortletActionAdapter(
-					_originalPortletAction, actionMapping, actionForm);
+			originalStrutsPortletAction = new StrutsPortletActionAdapter(
+				_originalPortletAction, actionMapping, actionForm);
 		}
 
 		String forward = _strutsPortletAction.render(
-			originalPortletAction, portletConfig, renderRequest,
+			originalStrutsPortletAction, portletConfig, renderRequest,
 			renderResponse);
 
 		if (Validator.isNull(forward)) {
@@ -94,16 +92,15 @@ public class PortletActionAdapter extends PortletAction {
 			ResourceResponse resourceResponse)
 		throws Exception {
 
-		StrutsPortletAction originalPortletAction = null;
+		StrutsPortletAction originalStrutsPortletAction = null;
 
 		if (_originalPortletAction != null) {
-			originalPortletAction =
-				new StrutsPortletActionAdapter(
-					_originalPortletAction, actionMapping, actionForm);
+			originalStrutsPortletAction = new StrutsPortletActionAdapter(
+				_originalPortletAction, actionMapping, actionForm);
 		}
 
 		_strutsPortletAction.serveResource(
-			originalPortletAction, portletConfig, resourceRequest,
+			originalStrutsPortletAction, portletConfig, resourceRequest,
 			resourceResponse);
 	}
 
