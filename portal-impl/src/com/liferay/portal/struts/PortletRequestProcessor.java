@@ -62,6 +62,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
+import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesRequestProcessor;
@@ -295,10 +296,23 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			ActionMapping actionMapping)
 		throws IOException {
 
-		Action action = StrutsActionRegistry.getAction(actionMapping.getPath());
+		PortletActionAdapter portletActionAdapter =
+			(PortletActionAdapter)StrutsActionRegistry.getAction(
+				actionMapping.getPath());
 
-		if (action != null) {
-			return action;
+		if (portletActionAdapter != null) {
+			ActionConfig actionConfig = moduleConfig.findActionConfig(
+				actionMapping.getPath());
+
+			if (actionConfig != null) {
+				PortletAction originalAction =
+					(PortletAction)super.processActionCreate(
+						request, response, actionMapping);
+
+				portletActionAdapter.setOriginalPortletAction(originalAction);
+			}
+
+			return portletActionAdapter;
 		}
 
 		return super.processActionCreate(request, response, actionMapping);
