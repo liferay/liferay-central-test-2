@@ -110,7 +110,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		},
 
 		getLocalizedLabel: function(locale, xmlDoc) {
-			var schema = TreeUtil.getSchema('label', 'name[@language-id="' + locale + '"]');
+			var schema = TreeUtil.getSchema('label', 'Name[@language-id="' + locale + '"]');
 			var localizedLabel = TreeUtil.mergeSchema(schema, xmlDoc);
 
 			return localizedLabel.label;
