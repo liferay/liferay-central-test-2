@@ -371,12 +371,268 @@ public class LayoutWrapper implements Layout {
 	}
 
 	/**
+	* Gets the localized description of this layout. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale to get the localized description for
+	* @return the localized description of this layout
+	*/
+	public java.lang.String getDescription(java.util.Locale locale) {
+		return _layout.getDescription(locale);
+	}
+
+	/**
+	* Gets the localized description of this layout, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local to get the localized description for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	public java.lang.String getDescription(java.util.Locale locale,
+		boolean useDefault) {
+		return _layout.getDescription(locale, useDefault);
+	}
+
+	/**
+	* Gets the localized description of this layout. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized description for
+	* @return the localized description of this layout
+	*/
+	public java.lang.String getDescription(java.lang.String languageId) {
+		return _layout.getDescription(languageId);
+	}
+
+	/**
+	* Gets the localized description of this layout, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized description for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized description of this layout
+	*/
+	public java.lang.String getDescription(java.lang.String languageId,
+		boolean useDefault) {
+		return _layout.getDescription(languageId, useDefault);
+	}
+
+	/**
+	* Gets a map of the locales and localized description of this layout.
+	*
+	* @return the locales and localized description
+	*/
+	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
+		return _layout.getDescriptionMap();
+	}
+
+	/**
 	* Sets the description of this layout.
 	*
 	* @param description the description of this layout
 	*/
 	public void setDescription(java.lang.String description) {
 		_layout.setDescription(description);
+	}
+
+	/**
+	* Sets the localized description of this layout.
+	*
+	* @param locale the locale to set the localized description for
+	* @param description the localized description of this layout
+	*/
+	public void setDescription(java.util.Locale locale,
+		java.lang.String description) {
+		_layout.setDescription(locale, description);
+	}
+
+	/**
+	* Sets the localized descriptions of this layout from the map of locales and localized descriptions.
+	*
+	* @param descriptionMap the locales and localized descriptions of this layout
+	*/
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
+		_layout.setDescriptionMap(descriptionMap);
+	}
+
+	/**
+	* Gets the keywords of this layout.
+	*
+	* @return the keywords of this layout
+	*/
+	public java.lang.String getKeywords() {
+		return _layout.getKeywords();
+	}
+
+	/**
+	* Gets the localized keywords of this layout. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale to get the localized keywords for
+	* @return the localized keywords of this layout
+	*/
+	public java.lang.String getKeywords(java.util.Locale locale) {
+		return _layout.getKeywords(locale);
+	}
+
+	/**
+	* Gets the localized keywords of this layout, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local to get the localized keywords for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized keywords of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	public java.lang.String getKeywords(java.util.Locale locale,
+		boolean useDefault) {
+		return _layout.getKeywords(locale, useDefault);
+	}
+
+	/**
+	* Gets the localized keywords of this layout. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized keywords for
+	* @return the localized keywords of this layout
+	*/
+	public java.lang.String getKeywords(java.lang.String languageId) {
+		return _layout.getKeywords(languageId);
+	}
+
+	/**
+	* Gets the localized keywords of this layout, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized keywords for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized keywords of this layout
+	*/
+	public java.lang.String getKeywords(java.lang.String languageId,
+		boolean useDefault) {
+		return _layout.getKeywords(languageId, useDefault);
+	}
+
+	/**
+	* Gets a map of the locales and localized keywords of this layout.
+	*
+	* @return the locales and localized keywords
+	*/
+	public java.util.Map<java.util.Locale, java.lang.String> getKeywordsMap() {
+		return _layout.getKeywordsMap();
+	}
+
+	/**
+	* Sets the keywords of this layout.
+	*
+	* @param keywords the keywords of this layout
+	*/
+	public void setKeywords(java.lang.String keywords) {
+		_layout.setKeywords(keywords);
+	}
+
+	/**
+	* Sets the localized keywords of this layout.
+	*
+	* @param locale the locale to set the localized keywords for
+	* @param keywords the localized keywords of this layout
+	*/
+	public void setKeywords(java.util.Locale locale, java.lang.String keywords) {
+		_layout.setKeywords(locale, keywords);
+	}
+
+	/**
+	* Sets the localized keywordses of this layout from the map of locales and localized keywordses.
+	*
+	* @param keywordsMap the locales and localized keywordses of this layout
+	*/
+	public void setKeywordsMap(
+		java.util.Map<java.util.Locale, java.lang.String> keywordsMap) {
+		_layout.setKeywordsMap(keywordsMap);
+	}
+
+	/**
+	* Gets the robots of this layout.
+	*
+	* @return the robots of this layout
+	*/
+	public java.lang.String getRobots() {
+		return _layout.getRobots();
+	}
+
+	/**
+	* Gets the localized robots of this layout. Uses the default language if no localization exists for the requested language.
+	*
+	* @param locale the locale to get the localized robots for
+	* @return the localized robots of this layout
+	*/
+	public java.lang.String getRobots(java.util.Locale locale) {
+		return _layout.getRobots(locale);
+	}
+
+	/**
+	* Gets the localized robots of this layout, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param locale the local to get the localized robots for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized robots of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	*/
+	public java.lang.String getRobots(java.util.Locale locale,
+		boolean useDefault) {
+		return _layout.getRobots(locale, useDefault);
+	}
+
+	/**
+	* Gets the localized robots of this layout. Uses the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized robots for
+	* @return the localized robots of this layout
+	*/
+	public java.lang.String getRobots(java.lang.String languageId) {
+		return _layout.getRobots(languageId);
+	}
+
+	/**
+	* Gets the localized robots of this layout, optionally using the default language if no localization exists for the requested language.
+	*
+	* @param languageId the id of the language to get the localized robots for
+	* @param useDefault whether to use the default language if no localization exists for the requested language
+	* @return the localized robots of this layout
+	*/
+	public java.lang.String getRobots(java.lang.String languageId,
+		boolean useDefault) {
+		return _layout.getRobots(languageId, useDefault);
+	}
+
+	/**
+	* Gets a map of the locales and localized robots of this layout.
+	*
+	* @return the locales and localized robots
+	*/
+	public java.util.Map<java.util.Locale, java.lang.String> getRobotsMap() {
+		return _layout.getRobotsMap();
+	}
+
+	/**
+	* Sets the robots of this layout.
+	*
+	* @param robots the robots of this layout
+	*/
+	public void setRobots(java.lang.String robots) {
+		_layout.setRobots(robots);
+	}
+
+	/**
+	* Sets the localized robots of this layout.
+	*
+	* @param locale the locale to set the localized robots for
+	* @param robots the localized robots of this layout
+	*/
+	public void setRobots(java.util.Locale locale, java.lang.String robots) {
+		_layout.setRobots(locale, robots);
+	}
+
+	/**
+	* Sets the localized robotses of this layout from the map of locales and localized robotses.
+	*
+	* @param robotsMap the locales and localized robotses of this layout
+	*/
+	public void setRobotsMap(
+		java.util.Map<java.util.Locale, java.lang.String> robotsMap) {
+		_layout.setRobotsMap(robotsMap);
 	}
 
 	/**

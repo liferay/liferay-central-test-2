@@ -72,6 +72,8 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		newLayout.setName(randomString());
 		newLayout.setTitle(randomString());
 		newLayout.setDescription(randomString());
+		newLayout.setKeywords(randomString());
+		newLayout.setRobots(randomString());
 		newLayout.setType(randomString());
 		newLayout.setTypeSettings(randomString());
 		newLayout.setHidden(randomBoolean());
@@ -102,6 +104,8 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingLayout.getName(), newLayout.getName());
 		assertEquals(existingLayout.getTitle(), newLayout.getTitle());
 		assertEquals(existingLayout.getDescription(), newLayout.getDescription());
+		assertEquals(existingLayout.getKeywords(), newLayout.getKeywords());
+		assertEquals(existingLayout.getRobots(), newLayout.getRobots());
 		assertEquals(existingLayout.getType(), newLayout.getType());
 		assertEquals(existingLayout.getTypeSettings(),
 			newLayout.getTypeSettings());
@@ -200,6 +204,8 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		layout.setName(randomString());
 		layout.setTitle(randomString());
 		layout.setDescription(randomString());
+		layout.setKeywords(randomString());
+		layout.setRobots(randomString());
 		layout.setType(randomString());
 		layout.setTypeSettings(randomString());
 		layout.setHidden(randomBoolean());

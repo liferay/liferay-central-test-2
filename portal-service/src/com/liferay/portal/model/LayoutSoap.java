@@ -40,6 +40,8 @@ public class LayoutSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setKeywords(model.getKeywords());
+		soapModel.setRobots(model.getRobots());
 		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
 		soapModel.setHidden(model.getHidden());
@@ -189,6 +191,22 @@ public class LayoutSoap implements Serializable {
 		_description = description;
 	}
 
+	public String getKeywords() {
+		return _keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		_keywords = keywords;
+	}
+
+	public String getRobots() {
+		return _robots;
+	}
+
+	public void setRobots(String robots) {
+		_robots = robots;
+	}
+
 	public String getType() {
 		return _type;
 	}
@@ -311,6 +329,8 @@ public class LayoutSoap implements Serializable {
 	private String _name;
 	private String _title;
 	private String _description;
+	private String _keywords;
+	private String _robots;
 	private String _type;
 	private String _typeSettings;
 	private boolean _hidden;

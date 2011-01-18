@@ -74,6 +74,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
+			{ "keywords", new Integer(Types.VARCHAR) },
+			{ "robots", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.VARCHAR) },
 			{ "typeSettings", new Integer(Types.CLOB) },
 			{ "hidden_", new Integer(Types.BOOLEAN) },
@@ -88,7 +90,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 			{ "priority", new Integer(Types.INTEGER) },
 			{ "layoutPrototypeId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Layout (uuid_ VARCHAR(75) null,plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,layoutPrototypeId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Layout (uuid_ VARCHAR(75) null,plid LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,layoutId LONG,parentLayoutId LONG,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,type_ VARCHAR(75) null,typeSettings TEXT null,hidden_ BOOLEAN,friendlyURL VARCHAR(255) null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,priority INTEGER,layoutPrototypeId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Layout";
 	public static final String ORDER_BY_JPQL = " ORDER BY layout.parentLayoutId ASC, layout.priority ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Layout.parentLayoutId ASC, Layout.priority ASC";
@@ -121,6 +123,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		model.setName(soapModel.getName());
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
+		model.setKeywords(soapModel.getKeywords());
+		model.setRobots(soapModel.getRobots());
 		model.setType(soapModel.getType());
 		model.setTypeSettings(soapModel.getTypeSettings());
 		model.setHidden(soapModel.getHidden());
@@ -442,8 +446,234 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		}
 	}
 
+	public String getDescription(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDescription(languageId);
+	}
+
+	public String getDescription(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDescription(languageId, useDefault);
+	}
+
+	public String getDescription(String languageId) {
+		String value = LocalizationUtil.getLocalization(getDescription(),
+				languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getDescription(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getDescription(),
+				languageId, useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getDescriptionMap() {
+		return LocalizationUtil.getLocalizationMap(getDescription());
+	}
+
 	public void setDescription(String description) {
 		_description = description;
+	}
+
+	public void setDescription(Locale locale, String description) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(description)) {
+			setDescription(LocalizationUtil.updateLocalization(
+					getDescription(), "Description", description, languageId));
+		}
+		else {
+			setDescription(LocalizationUtil.removeLocalization(
+					getDescription(), "Description", languageId));
+		}
+	}
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
+		if (descriptionMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String description = descriptionMap.get(locale);
+
+			setDescription(locale, description);
+		}
+	}
+
+	public String getKeywords() {
+		if (_keywords == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _keywords;
+		}
+	}
+
+	public String getKeywords(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getKeywords(languageId);
+	}
+
+	public String getKeywords(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getKeywords(languageId, useDefault);
+	}
+
+	public String getKeywords(String languageId) {
+		String value = LocalizationUtil.getLocalization(getKeywords(),
+				languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getKeywords(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getKeywords(),
+				languageId, useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getKeywordsMap() {
+		return LocalizationUtil.getLocalizationMap(getKeywords());
+	}
+
+	public void setKeywords(String keywords) {
+		_keywords = keywords;
+	}
+
+	public void setKeywords(Locale locale, String keywords) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(keywords)) {
+			setKeywords(LocalizationUtil.updateLocalization(getKeywords(),
+					"Keywords", keywords, languageId));
+		}
+		else {
+			setKeywords(LocalizationUtil.removeLocalization(getKeywords(),
+					"Keywords", languageId));
+		}
+	}
+
+	public void setKeywordsMap(Map<Locale, String> keywordsMap) {
+		if (keywordsMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String keywords = keywordsMap.get(locale);
+
+			setKeywords(locale, keywords);
+		}
+	}
+
+	public String getRobots() {
+		if (_robots == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _robots;
+		}
+	}
+
+	public String getRobots(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getRobots(languageId);
+	}
+
+	public String getRobots(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getRobots(languageId, useDefault);
+	}
+
+	public String getRobots(String languageId) {
+		String value = LocalizationUtil.getLocalization(getRobots(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getRobots(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getRobots(),
+				languageId, useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getRobotsMap() {
+		return LocalizationUtil.getLocalizationMap(getRobots());
+	}
+
+	public void setRobots(String robots) {
+		_robots = robots;
+	}
+
+	public void setRobots(Locale locale, String robots) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(robots)) {
+			setRobots(LocalizationUtil.updateLocalization(getRobots(),
+					"Robots", robots, languageId));
+		}
+		else {
+			setRobots(LocalizationUtil.removeLocalization(getRobots(),
+					"Robots", languageId));
+		}
+	}
+
+	public void setRobotsMap(Map<Locale, String> robotsMap) {
+		if (robotsMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String robots = robotsMap.get(locale);
+
+			setRobots(locale, robots);
+		}
 	}
 
 	public String getType() {
@@ -652,6 +882,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		clone.setName(getName());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
+		clone.setKeywords(getKeywords());
+		clone.setRobots(getRobots());
 		clone.setType(getType());
 		clone.setTypeSettings(getTypeSettings());
 		clone.setHidden(getHidden());
@@ -732,7 +964,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -754,6 +986,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		sb.append(getTitle());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", keywords=");
+		sb.append(getKeywords());
+		sb.append(", robots=");
+		sb.append(getRobots());
 		sb.append(", type=");
 		sb.append(getType());
 		sb.append(", typeSettings=");
@@ -786,7 +1022,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.Layout");
@@ -831,6 +1067,14 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>keywords</column-name><column-value><![CDATA[");
+		sb.append(getKeywords());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>robots</column-name><column-value><![CDATA[");
+		sb.append(getRobots());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>type</column-name><column-value><![CDATA[");
@@ -907,6 +1151,8 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	private String _name;
 	private String _title;
 	private String _description;
+	private String _keywords;
+	private String _robots;
 	private String _type;
 	private String _typeSettings;
 	private boolean _hidden;

@@ -579,6 +579,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		layoutImpl.setName(layout.getName());
 		layoutImpl.setTitle(layout.getTitle());
 		layoutImpl.setDescription(layout.getDescription());
+		layoutImpl.setKeywords(layout.getKeywords());
+		layoutImpl.setRobots(layout.getRobots());
 		layoutImpl.setType(layout.getType());
 		layoutImpl.setTypeSettings(layout.getTypeSettings());
 		layoutImpl.setHidden(layout.isHidden());

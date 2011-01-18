@@ -39,6 +39,8 @@ public class LayoutJSONSerializer {
 		jsonObject.put("name", model.getName());
 		jsonObject.put("title", model.getTitle());
 		jsonObject.put("description", model.getDescription());
+		jsonObject.put("keywords", model.getKeywords());
+		jsonObject.put("robots", model.getRobots());
 		jsonObject.put("type", model.getType());
 		jsonObject.put("typeSettings", model.getTypeSettings());
 		jsonObject.put("hidden", model.getHidden());

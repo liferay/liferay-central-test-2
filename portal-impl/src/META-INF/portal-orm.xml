@@ -255,6 +255,8 @@
 			<basic name="name" />
 			<basic name="title" />
 			<basic name="description" />
+			<basic name="keywords" />
+			<basic name="robots" />
 			<basic name="type">
 				<column name="TYPE_" />
 			</basic>
@@ -272,7 +274,12 @@
 			<basic name="css" />
 			<basic name="priority" />
 			<basic name="layoutPrototypeId" />
+			<transient name="descriptionMap" />
+			<transient name="keywordsMap" />
+			<transient name="nameMap" />
 			<transient name="primaryKey" />
+			<transient name="robotsMap" />
+			<transient name="titleMap" />
 		</attributes>
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.LayoutPrototypeModelImpl">

@@ -309,8 +309,48 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 *
 	 * @return the description of this layout
 	 */
-	@AutoEscape
 	public String getDescription();
+
+	/**
+	 * Gets the localized description of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized description for
+	 * @return the localized description of this layout
+	 */
+	public String getDescription(Locale locale);
+
+	/**
+	 * Gets the localized description of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized description for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getDescription(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized description of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized description for
+	 * @return the localized description of this layout
+	 */
+	public String getDescription(String languageId);
+
+	/**
+	 * Gets the localized description of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized description for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this layout
+	 */
+	public String getDescription(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized description of this layout.
+	 *
+	 * @return the locales and localized description
+	 */
+	public Map<Locale, String> getDescriptionMap();
 
 	/**
 	 * Sets the description of this layout.
@@ -318,6 +358,161 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param description the description of this layout
 	 */
 	public void setDescription(String description);
+
+	/**
+	 * Sets the localized description of this layout.
+	 *
+	 * @param locale the locale to set the localized description for
+	 * @param description the localized description of this layout
+	 */
+	public void setDescription(Locale locale, String description);
+
+	/**
+	 * Sets the localized descriptions of this layout from the map of locales and localized descriptions.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this layout
+	 */
+	public void setDescriptionMap(Map<Locale, String> descriptionMap);
+
+	/**
+	 * Gets the keywords of this layout.
+	 *
+	 * @return the keywords of this layout
+	 */
+	public String getKeywords();
+
+	/**
+	 * Gets the localized keywords of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized keywords for
+	 * @return the localized keywords of this layout
+	 */
+	public String getKeywords(Locale locale);
+
+	/**
+	 * Gets the localized keywords of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized keywords for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized keywords of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getKeywords(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized keywords of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized keywords for
+	 * @return the localized keywords of this layout
+	 */
+	public String getKeywords(String languageId);
+
+	/**
+	 * Gets the localized keywords of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized keywords for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized keywords of this layout
+	 */
+	public String getKeywords(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized keywords of this layout.
+	 *
+	 * @return the locales and localized keywords
+	 */
+	public Map<Locale, String> getKeywordsMap();
+
+	/**
+	 * Sets the keywords of this layout.
+	 *
+	 * @param keywords the keywords of this layout
+	 */
+	public void setKeywords(String keywords);
+
+	/**
+	 * Sets the localized keywords of this layout.
+	 *
+	 * @param locale the locale to set the localized keywords for
+	 * @param keywords the localized keywords of this layout
+	 */
+	public void setKeywords(Locale locale, String keywords);
+
+	/**
+	 * Sets the localized keywordses of this layout from the map of locales and localized keywordses.
+	 *
+	 * @param keywordsMap the locales and localized keywordses of this layout
+	 */
+	public void setKeywordsMap(Map<Locale, String> keywordsMap);
+
+	/**
+	 * Gets the robots of this layout.
+	 *
+	 * @return the robots of this layout
+	 */
+	public String getRobots();
+
+	/**
+	 * Gets the localized robots of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized robots for
+	 * @return the localized robots of this layout
+	 */
+	public String getRobots(Locale locale);
+
+	/**
+	 * Gets the localized robots of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized robots for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized robots of this layout. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getRobots(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized robots of this layout. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized robots for
+	 * @return the localized robots of this layout
+	 */
+	public String getRobots(String languageId);
+
+	/**
+	 * Gets the localized robots of this layout, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized robots for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized robots of this layout
+	 */
+	public String getRobots(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized robots of this layout.
+	 *
+	 * @return the locales and localized robots
+	 */
+	public Map<Locale, String> getRobotsMap();
+
+	/**
+	 * Sets the robots of this layout.
+	 *
+	 * @param robots the robots of this layout
+	 */
+	public void setRobots(String robots);
+
+	/**
+	 * Sets the localized robots of this layout.
+	 *
+	 * @param locale the locale to set the localized robots for
+	 * @param robots the localized robots of this layout
+	 */
+	public void setRobots(Locale locale, String robots);
+
+	/**
+	 * Sets the localized robotses of this layout from the map of locales and localized robotses.
+	 *
+	 * @param robotsMap the locales and localized robotses of this layout
+	 */
+	public void setRobotsMap(Map<Locale, String> robotsMap);
 
 	/**
 	 * Gets the type of this layout.
