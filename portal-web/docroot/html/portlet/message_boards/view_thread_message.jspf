@@ -134,7 +134,7 @@
 							message="answer"
 						/>
 
-						<c:if test="<%= message.getRootMessageId()!= 0 && MBMessagePermission.contains(permissionChecker, message.getRootMessageId(), ActionKeys.UPDATE) %>">
+						<c:if test="<%= (message.getRootMessageId() != MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) && MBMessagePermission.contains(permissionChecker, message.getRootMessageId(), ActionKeys.UPDATE) %>">
 							(<a href="javascript:<portlet:namespace />deleteAnswerFlag('<%= message.getMessageId() %>');"><liferay-ui:message key="unmark" /></a>)
 						</c:if>
 					</div>
