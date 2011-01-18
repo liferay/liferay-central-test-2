@@ -1868,7 +1868,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		Map<String, List<Authenticator>> _authenticators =
+		private Map<String, List<Authenticator>> _authenticators =
 			new HashMap<String, List<Authenticator>>();
 
 	}
@@ -1902,7 +1902,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		Map<String, List<AuthFailure>> _authFailures =
+		private Map<String, List<AuthFailure>> _authFailures =
 			new HashMap<String, List<AuthFailure>>();
 
 	}
@@ -1925,7 +1925,8 @@ public class HookHotDeployListener
 			_paths.clear();
 		}
 
-		Set<String> _paths = new HashSet<String>();
+		private Set<String> _paths = new HashSet<String>();
+
 	}
 
 	private class AutoDeployListenersContainer {
@@ -1977,7 +1978,7 @@ public class HookHotDeployListener
 			}
 		}
 
-		List<AutoLogin> _autoLogins = new ArrayList<AutoLogin>();
+		private List<AutoLogin> _autoLogins = new ArrayList<AutoLogin>();
 
 	}
 
