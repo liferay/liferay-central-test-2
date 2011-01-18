@@ -751,17 +751,17 @@ public class DLRepositoryLocalServiceImpl
 
 		boolean addDraftAssetEntry = false;
 
-		String version = dlFileVersion.getVersion();
+		if ((dlFileVersion != null) && !dlFileVersion.isApproved()) {
+			String version = dlFileVersion.getVersion();
 
-		if ((dlFileVersion != null) && !dlFileVersion.isApproved() &&
-			!version.equals(DLFileEntryConstants.DEFAULT_VERSION)) {
+			if (!version.equals(DLFileEntryConstants.DEFAULT_VERSION)) {
+				int approvedArticlesCount = dlFileVersionPersistence.countByF_S(
+					dlFileEntry.getFileEntryId(),
+					WorkflowConstants.STATUS_APPROVED);
 
-			int approvedArticlesCount = dlFileVersionPersistence.countByF_S(
-				dlFileEntry.getFileEntryId(),
-				WorkflowConstants.STATUS_APPROVED);
-
-			if (approvedArticlesCount > 0) {
-				addDraftAssetEntry = true;
+				if (approvedArticlesCount > 0) {
+					addDraftAssetEntry = true;
+				}
 			}
 		}
 
