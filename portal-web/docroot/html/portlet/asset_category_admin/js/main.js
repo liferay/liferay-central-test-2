@@ -115,7 +115,7 @@ AUI().add(
 						var vocabularyList = A.one(instance._vocabularyContainerSelector);
 
 						vocabularyList.on('click', instance._onVocabularyListClick, instance);
-						vocabularyList.on('key', instance._onVocabularyListKey, "up:13", instance);
+						vocabularyList.on('key', instance._onVocabularyListKey, 'up:13', instance);
 
 						A.one('#' + namespace + 'addCategoryButton').on('click', instance._onShowCategoryPanel, instance, ACTION_ADD);
 						A.one('#' + namespace + 'addVocabularyButton').on('click', instance._onShowVocabularyPanel, instance, ACTION_ADD);
