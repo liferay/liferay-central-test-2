@@ -516,6 +516,9 @@ public class EditPagesAction extends PortletAction {
 					layout.getLayoutId(),
 					layoutPrototypeLayout.getTypeSettings());
 
+				ActionUtil.copyPortletPermissions(
+					actionRequest, layout, layoutPrototypeLayout);
+
 				ActionUtil.copyPreferences(
 					actionRequest, layout, layoutPrototypeLayout);
 
