@@ -305,11 +305,12 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				actionMapping.getPath());
 
 			if (actionConfig != null) {
-				PortletAction originalAction =
+				PortletAction originalPortletAction =
 					(PortletAction)super.processActionCreate(
 						request, response, actionMapping);
 
-				portletActionAdapter.setOriginalPortletAction(originalAction);
+				portletActionAdapter.setOriginalPortletAction(
+					originalPortletAction);
 			}
 
 			return portletActionAdapter;
