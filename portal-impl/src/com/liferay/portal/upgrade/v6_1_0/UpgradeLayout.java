@@ -31,7 +31,8 @@ import java.util.Locale;
 /**
  * @author Julio Camarero
  */
-public class UpgradeLayout extends com.liferay.portal.upgrade.v4_4_0.UpgradeLayout {
+public class UpgradeLayout
+	extends com.liferay.portal.upgrade.v4_4_0.UpgradeLayout {
 
 	protected void doUpgrade() throws Exception {
 		Connection con = null;
@@ -46,82 +47,13 @@ public class UpgradeLayout extends com.liferay.portal.upgrade.v4_4_0.UpgradeLayo
 
 			rs = ps.executeQuery();
 
-			Locale[] locales = LanguageUtil.getAvailableLocales();
-			Locale defaultLocale = LocaleUtil.getDefault();
-			String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
 			while (rs.next()) {
 				long plid = rs.getLong("plid");
 				String name = rs.getString("name");
 				String title = rs.getString("title");
 				String typeSettings = rs.getString("typeSettings");
 
-				if (Validator.isNotNull(name)) {
-					name = StringUtil.replace(name,
-						new String[] {
-							"<name",
-							"</name>"
-						},
-						new String[] {
-							"<Name",
-							"</Name>"
-						});
-
-					updateName(plid, name);
-				}
-
-				if (Validator.isNotNull(title)) {
-					title = StringUtil.replace(title,
-						new String[] {
-							"<title",
-							"</title>"
-						},
-						new String[] {
-							"<Title",
-							"</Title>"
-						});
-
-					updateTitle(plid, title);
-				}
-
-				if (Validator.isNotNull(typeSettings)) {
-					UnicodeProperties typeSettingsProperties =
-						new UnicodeProperties(true);
-
-					typeSettingsProperties.load(typeSettings);
-
-					String defaultDescription =
-						typeSettingsProperties.getProperty(
-							"meta-description_" + defaultLanguageId);
-
-					if (Validator.isNotNull(defaultDescription)) {
-						typeSettingsProperties = updateMetaField(
-							plid, locales, typeSettingsProperties,
-							"meta-description_", "Description", "description");
-					}
-
-					String defaultKeywords =
-						typeSettingsProperties.getProperty(
-							"meta-keywords_" + defaultLanguageId);
-
-					if (Validator.isNotNull(defaultKeywords)) {
-						typeSettingsProperties = updateMetaField(
-							plid, locales, typeSettingsProperties,
-							"meta-keywords_", "Keywords", "keywords");
-					}
-
-					String defaultRobots =
-						typeSettingsProperties.getProperty(
-							"meta-robots_" + defaultLanguageId);
-
-					if (Validator.isNotNull(defaultRobots)) {
-						typeSettingsProperties = updateMetaField(
-							plid, locales, typeSettingsProperties,
-							"meta-robots_", "Robots", "robots");
-					}
-
-					updateTypeSettings(plid, typeSettingsProperties.toString());
-				}
+				updateLayout(plid, name, title, typeSettings);
 			}
 		}
 		finally {
@@ -129,61 +61,80 @@ public class UpgradeLayout extends com.liferay.portal.upgrade.v4_4_0.UpgradeLayo
 		}
 	}
 
-	protected void updateName(long plid, String name)
+	protected void updateLayout(
+			long plid, String name, String title, String typeSettings)
 		throws Exception {
 
-		Connection con = null;
-		PreparedStatement ps = null;
+		if (Validator.isNotNull(name)) {
+			name = StringUtil.replace(
+				name, new String[] {"<name", "</name>"},
+				new String[] {"<Name", "</Name>"});
 
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"update Layout set name = ? where plid = " + plid);
-
-			ps.setString(1, name);
-
-			ps.executeUpdate();
+			updateName(plid, name);
 		}
-		finally {
-			DataAccess.cleanUp(con, ps);
+
+		if (Validator.isNotNull(title)) {
+			title = StringUtil.replace(
+				title, new String[] {"<title", "</title>"},
+				new String[] {"<Title", "</Title>"});
+
+			updateTitle(plid, title);
+		}
+
+		if (Validator.isNotNull(typeSettings)) {
+			Locale defaultLocale = LocaleUtil.getDefault();
+			String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+			UnicodeProperties typeSettingsProperties = new UnicodeProperties(
+				true);
+
+			typeSettingsProperties.load(typeSettings);
+
+			String defaultDescription = typeSettingsProperties.getProperty(
+				"meta-description_" + defaultLanguageId);
+
+			if (Validator.isNotNull(defaultDescription)) {
+				typeSettingsProperties = updateMetaField(
+					plid, typeSettingsProperties, "meta-description_",
+					"Description", "description");
+			}
+
+			String defaultKeywords = typeSettingsProperties.getProperty(
+				"meta-keywords_" + defaultLanguageId);
+
+			if (Validator.isNotNull(defaultKeywords)) {
+				typeSettingsProperties = updateMetaField(
+					plid, typeSettingsProperties, "meta-keywords_", "Keywords",
+					"keywords");
+			}
+
+			String defaultRobots = typeSettingsProperties.getProperty(
+				"meta-robots_" + defaultLanguageId);
+
+			if (Validator.isNotNull(defaultRobots)) {
+				typeSettingsProperties = updateMetaField(
+					plid, typeSettingsProperties, "meta-robots_", "Robots",
+					"robots");
+			}
+
+			updateTypeSettings(plid, typeSettingsProperties.toString());
 		}
 	}
 
-	protected void updateTitle(long plid, String title)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"update Layout set title = ? where plid = " + plid);
-
-			ps.setString(1, title);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
-	}
-
-	protected UnicodeProperties updateMetaField (
-			long plid, Locale[] locales,
-			UnicodeProperties typeSettingsProperties, String propertyName,
-			String xmlName, String columName)
+	protected UnicodeProperties updateMetaField(
+			long plid, UnicodeProperties typeSettingsProperties,
+			String propertyName, String xmlName, String columName)
 		throws Exception {
 
 		String xml = null;
 
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
 		for (Locale locale : locales) {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
-			String value =
-				typeSettingsProperties.getProperty(propertyName + languageId);
+			String value = typeSettingsProperties.getProperty(
+				propertyName + languageId);
 
 			if (Validator.isNotNull(value)) {
 				xml = LocalizationUtil.updateLocalization(
@@ -211,6 +162,46 @@ public class UpgradeLayout extends com.liferay.portal.upgrade.v4_4_0.UpgradeLayo
 		}
 
 		return typeSettingsProperties;
+	}
+
+	protected void updateName(long plid, String name)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update Layout set name = ? where plid = " + plid);
+
+			ps.setString(1, name);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected void updateTitle(long plid, String title) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"update Layout set title = ? where plid = " + plid);
+
+			ps.setString(1, title);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
 	}
 
 }

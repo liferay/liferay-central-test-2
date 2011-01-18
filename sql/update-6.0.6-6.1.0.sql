@@ -1,6 +1,3 @@
-alter table Layout add keywords STRING null;
-alter table Layout add robots STRING null;
-
 alter table AssetCategory add description STRING null;
 
 alter table BlogsEntry add description STRING null;
@@ -30,6 +27,8 @@ alter table DLFileVersion add fileEntryId LONG;
 
 update Group_ set type_ = 3 where type_ = 0;
 
+alter table Layout add keywords STRING null;
+alter table Layout add robots STRING null;
 alter table Layout drop column dlFolderId;
 
 create table LayoutRevision (
