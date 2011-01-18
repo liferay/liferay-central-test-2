@@ -50,11 +50,11 @@ public class JournalArticlePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId, String articleId,
-			int status, String actionId)
+			double version, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
-				permissionChecker, groupId, articleId, status, actionId)) {
+				permissionChecker, groupId, articleId, version, actionId)) {
 
 			throw new PrincipalException();
 		}
@@ -62,11 +62,11 @@ public class JournalArticlePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, long groupId, String articleId,
-			double version, String actionId)
+			int status, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
-				permissionChecker, groupId, articleId, version, actionId)) {
+				permissionChecker, groupId, articleId, status, actionId)) {
 
 			throw new PrincipalException();
 		}
@@ -122,6 +122,17 @@ public class JournalArticlePermission {
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, long groupId, String articleId,
+			double version, String actionId)
+		throws PortalException, SystemException {
+
+		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
+			groupId, articleId, version);
+
+		return contains(permissionChecker, article, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, String articleId,
 			int status, String actionId)
 		throws PortalException, SystemException {
 
@@ -139,17 +150,6 @@ public class JournalArticlePermission {
 
 		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
 			groupId, articleId);
-
-		return contains(permissionChecker, article, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId, String articleId,
-			double version, String actionId)
-		throws PortalException, SystemException {
-
-		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(
-			groupId, articleId, version);
 
 		return contains(permissionChecker, article, actionId);
 	}
