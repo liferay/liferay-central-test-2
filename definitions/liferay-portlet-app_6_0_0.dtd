@@ -139,7 +139,7 @@ a message at a regular interval specified by the trigger element.
 <!ELEMENT scheduler-event-listener-class (#PCDATA)>
 
 <!--
-The trigger element contains configuration data to indictate when to trigger the
+The trigger element contains configuration data to indicate when to trigger the
 class specified in scheduler-event-listener-class.
 -->
 <!ELEMENT trigger (cron | simple)>
