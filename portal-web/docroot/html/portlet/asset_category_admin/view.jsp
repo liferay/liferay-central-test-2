@@ -46,7 +46,7 @@
 					var="permissionsURL"
 				/>
 
-				<aui:button name="categoryPermissionsButton" onClick="location.href = '<%= permissionsURL %>';" value="permissions" />
+				<aui:button name="categoryPermissionsButton" onClick="<%= permissionsURL %>" value="permissions" />
 			</c:if>
 		</aui:button-row>
 	</div>
