@@ -815,6 +815,8 @@ public class LayoutImporter {
 		importedLayout.setName(layout.getName());
 		importedLayout.setTitle(layout.getTitle());
 		importedLayout.setDescription(layout.getDescription());
+		importedLayout.setKeywords(layout.getKeywords());
+		importedLayout.setRobots(layout.getRobots());
 		importedLayout.setType(layout.getType());
 
 		if (layout.isTypePortlet() &&

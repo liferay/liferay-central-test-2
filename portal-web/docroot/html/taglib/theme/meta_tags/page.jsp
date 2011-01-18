@@ -30,7 +30,7 @@
 	String metaRobotsLanguageId = w3cCurrentLanguageId;
 
 	if (Validator.isNull(metaRobots)) {
-		metaRobots = layout.getRobots();
+		metaRobots = layout.getRobots(defaultLocale);
 		metaRobotsLanguageId = w3cDefaultLanguageId;
 	}
 	%>
@@ -44,7 +44,7 @@
 	String metaDescriptionLanguageId = w3cCurrentLanguageId;
 
 	if (Validator.isNull(metaDescription)) {
-		metaDescription = layout.getDescription();
+		metaDescription = layout.getDescription(defaultLocale);
 		metaDescriptionLanguageId = w3cDefaultLanguageId;
 	}
 
@@ -76,7 +76,7 @@
 	String metaKeywordsLanguageId = w3cCurrentLanguageId;
 
 	if (Validator.isNull(metaKeywords)) {
-		metaKeywords = layout.getKeywords();
+		metaKeywords = layout.getKeywords(defaultLocale);
 		metaKeywordsLanguageId = w3cDefaultLanguageId;
 	}
 
