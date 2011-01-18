@@ -14,8 +14,7 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.kernel.struts.StrutsAction;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.struts.BaseStrutsAction;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,46 +27,28 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Mika Koivisto
  */
-public class ActionAdapter extends Action {
+public class StrutsActionAdapter extends BaseStrutsAction {
 
-	public ActionAdapter(StrutsAction strutsAction) {
-		_strutsAction = strutsAction;
+	public StrutsActionAdapter(
+		Action action, ActionMapping mapping, ActionForm form) {
+
+		_action = action;
+		_actionMapping = mapping;
+		_actionForm = form;
 	}
 
-	public ActionForward execute(
-			ActionMapping actionMapping, ActionForm actionForm,
+	public String execute(
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		StrutsAction originalAction = null;
+		ActionForward actionForward = _action.execute(
+			_actionMapping, _actionForm, request, response);
 
-		if (_originalAction != null) {
-			originalAction =
-				new StrutsActionAdapter(
-					_originalAction, actionMapping, actionForm);
-		}
-
-		String forward = _strutsAction.execute(
-			originalAction, request, response);
-
-		if (Validator.isNull(forward)) {
-			return null;
-		}
-
-		ActionForward actionForward = actionMapping.findForward(forward);
-
-		if (actionForward == null) {
-			actionForward = new ActionForward(forward);
-		}
-
-		return actionForward;
+		return actionForward.getPath();
 	}
 
-	public void setOriginalAction(Action action) {
-		_originalAction = action;
-	}
-
-	private Action _originalAction;
-	private StrutsAction _strutsAction;
+	private Action _action;
+	private ActionForm _actionForm;
+	private ActionMapping _actionMapping;
 
 }

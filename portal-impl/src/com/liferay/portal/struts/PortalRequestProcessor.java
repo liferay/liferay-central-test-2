@@ -91,6 +91,7 @@ import javax.servlet.jsp.PageContext;
 import org.apache.struts.Globals;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.config.ActionConfig;
 import org.apache.struts.config.ForwardConfig;
 import org.apache.struts.tiles.TilesRequestProcessor;
 import org.apache.struts.util.MessageResources;
@@ -461,10 +462,22 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			ActionMapping actionMapping)
 		throws IOException {
 
-		Action action = StrutsActionRegistry.getAction(actionMapping.getPath());
+		ActionAdapter actionAdapter =
+			(ActionAdapter)StrutsActionRegistry.getAction(
+				actionMapping.getPath());
 
-		if (action != null) {
-			return action;
+		if (actionAdapter != null) {
+			ActionConfig actionConfig = moduleConfig.findActionConfig(
+				actionMapping.getPath());
+
+			if (actionConfig != null) {
+				Action originalAction =
+					super.processActionCreate(request, response, actionMapping);
+
+				actionAdapter.setOriginalAction(originalAction);
+			}
+
+			return actionAdapter;
 		}
 
 		return super.processActionCreate(request, response, actionMapping);

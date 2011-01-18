@@ -12,7 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.kernel.struts;
+package com.liferay.portal.struts;
+
+import com.liferay.portal.kernel.struts.BaseStrutsPortletAction;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -22,27 +24,61 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+
 /**
  * @author Mika Koivisto
  */
-public interface StrutsPortletAction {
+public class StrutsPortletActionAdapter extends BaseStrutsPortletAction {
+
+	public StrutsPortletActionAdapter(
+		PortletAction portletAction, ActionMapping mapping, ActionForm form) {
+
+		_actionForm = form;
+		_actionMapping = mapping;
+		_portletAction = portletAction;
+	}
 
 	public void processAction(
-			StrutsPortletAction originalStrutsPortletAction,
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
-		throws Exception;
+		throws Exception {
+
+		_portletAction.processAction(
+			_actionMapping, _actionForm, portletConfig, actionRequest,
+			actionResponse);
+	}
 
 	public String render(
-			StrutsPortletAction originalStrutsPortletAction,
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse)
-		throws Exception;
+		throws Exception {
+
+		ActionForward forward = _portletAction.render(
+			_actionMapping, _actionForm, portletConfig, renderRequest,
+			renderResponse);
+
+		if (forward != null) {
+			return forward.getPath();
+		}
+
+		return null;
+	}
 
 	public void serveResource(
-			StrutsPortletAction originalStrutsPortletAction,
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
 			ResourceResponse resourceResponse)
-		throws Exception;
+		throws Exception {
+
+		_portletAction.serveResource(
+			_actionMapping, _actionForm, portletConfig, resourceRequest,
+			resourceResponse);
+	}
+
+	private ActionForm _actionForm;
+	private ActionMapping _actionMapping;
+	private PortletAction _portletAction;
 
 }

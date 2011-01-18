@@ -44,8 +44,17 @@ public class PortletActionAdapter extends PortletAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
+		StrutsPortletAction originalPortletAction = null;
+
+		if (_originalPortletAction != null) {
+			originalPortletAction =
+				new StrutsPortletActionAdapter(
+					_originalPortletAction, actionMapping, actionForm);
+		}
+
 		_strutsPortletAction.processAction(
-			portletConfig, actionRequest, actionResponse);
+			originalPortletAction, portletConfig, actionRequest,
+			actionResponse);
 	}
 
 	public ActionForward render(
@@ -54,8 +63,17 @@ public class PortletActionAdapter extends PortletAction {
 			RenderResponse renderResponse)
 		throws Exception {
 
+		StrutsPortletAction originalPortletAction = null;
+
+		if (_originalPortletAction != null) {
+			originalPortletAction =
+				new StrutsPortletActionAdapter(
+					_originalPortletAction, actionMapping, actionForm);
+		}
+
 		String forward = _strutsPortletAction.render(
-			portletConfig, renderRequest, renderResponse);
+			originalPortletAction, portletConfig, renderRequest,
+			renderResponse);
 
 		if (Validator.isNull(forward)) {
 			return null;
@@ -76,10 +94,24 @@ public class PortletActionAdapter extends PortletAction {
 			ResourceResponse resourceResponse)
 		throws Exception {
 
+		StrutsPortletAction originalPortletAction = null;
+
+		if (_originalPortletAction != null) {
+			originalPortletAction =
+				new StrutsPortletActionAdapter(
+					_originalPortletAction, actionMapping, actionForm);
+		}
+
 		_strutsPortletAction.serveResource(
-			portletConfig, resourceRequest, resourceResponse);
+			originalPortletAction, portletConfig, resourceRequest,
+			resourceResponse);
 	}
 
+	public void setOriginalPortletAction(PortletAction portletAction) {
+		_originalPortletAction = portletAction;
+	}
+
+	private PortletAction _originalPortletAction;
 	private StrutsPortletAction _strutsPortletAction;
 
 }

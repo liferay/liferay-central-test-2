@@ -18,14 +18,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Brian Wing Shun Chan
  * @author Mika Koivisto
  */
-public interface StrutsAction {
+public class BaseStrutsAction implements StrutsAction {
+
+	public String execute(
+			HttpServletRequest request,
+			HttpServletResponse response)
+		throws Exception {
+
+		return null;
+	}
 
 	public String execute(
 			StrutsAction originalAction, HttpServletRequest request,
 			HttpServletResponse response)
-		throws Exception;
+		throws Exception {
+
+		return execute(request, response);
+	}
 
 }
