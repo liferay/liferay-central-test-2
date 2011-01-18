@@ -31,6 +31,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
@@ -145,6 +146,12 @@ public class FriendlyURLServlet extends HttpServlet {
 		throws Exception {
 
 		if (Validator.isNull(path) || !path.startsWith(StringPool.SLASH)) {
+			return mainPath;
+		}
+
+		if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH &&
+			(request.getRemoteUser() != null)) {
+
 			return mainPath;
 		}
 
