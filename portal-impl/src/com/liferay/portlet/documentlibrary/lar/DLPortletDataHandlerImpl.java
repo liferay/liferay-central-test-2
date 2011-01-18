@@ -35,9 +35,11 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -331,10 +333,15 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 					userId, existingFileEntry, latestFileVersion,
 					assetCategoryIds, assetTagNames);
 
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
-					FileEntry.class);
+				if (existingFileEntry instanceof LiferayFileEntry) {
+					LiferayFileEntry liferayFileEntry =
+						(LiferayFileEntry)existingFileEntry;
 
-				indexer.reindex(existingFileEntry);
+					Indexer indexer = IndexerRegistryUtil.getIndexer(
+						DLFileEntry.class);
+
+					indexer.reindex(liferayFileEntry.getModel());
+				}
 
 				importedFileEntry = existingFileEntry;
 			}
