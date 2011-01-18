@@ -413,7 +413,7 @@ public class LayoutExporter {
 
 		// Look and feel
 
-		if (exportTheme) {
+		if (exportTheme && !context.isPerformDirectBinaryImport()) {
 			exportTheme(layoutSet, zipWriter);
 		}
 

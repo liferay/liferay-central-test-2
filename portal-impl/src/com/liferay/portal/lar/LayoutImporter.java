@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
@@ -248,8 +249,12 @@ public class LayoutImporter {
 
 		// Look and feel
 
-		String themeId = headerElement.attributeValue("theme-id");
-		String colorSchemeId = headerElement.attributeValue("color-scheme-id");
+		Attribute themeIdAttribute = headerElement.attribute("theme-id");
+		Attribute colorSchemeIdAttribute = headerElement.attribute(
+			"color-scheme-id");
+
+		String themeId = layoutSet.getThemeId();
+		String colorSchemeId = layoutSet.getColorSchemeId();
 		String css = GetterUtil.getString(headerElement.elementText("css"));
 
 		boolean useThemeZip = false;
@@ -268,6 +273,15 @@ public class LayoutImporter {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Importing theme takes " + stopWatch.getTime() + " ms");
+			}
+		}
+		else {
+			if (themeIdAttribute != null) {
+				themeId = themeIdAttribute.getValue();
+			}
+
+			if (colorSchemeIdAttribute != null) {
+				colorSchemeId = colorSchemeIdAttribute.getValue();
 			}
 		}
 
