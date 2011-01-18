@@ -144,7 +144,7 @@ public class FriendlyURLServlet extends HttpServlet {
 			Map<String, String[]> params)
 		throws Exception {
 
-		if ((Validator.isNull(path)) || (!path.startsWith(StringPool.SLASH))) {
+		if (Validator.isNull(path) || !path.startsWith(StringPool.SLASH)) {
 			return mainPath;
 		}
 
