@@ -38,7 +38,6 @@ import com.liferay.portal.velocity.VelocityVariables;
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
 import freemarker.ext.servlet.ServletContextHashModel;
-
 import freemarker.template.ObjectWrapper;
 
 import java.io.Writer;
@@ -317,6 +316,7 @@ public class ThemeUtil {
 			servletContextName);
 
 		velocityContext.put("themeServletContext", themeServletContext);
+		velocityContext.put("pageContext", pageContext);
 
 		// Tag libraries
 
