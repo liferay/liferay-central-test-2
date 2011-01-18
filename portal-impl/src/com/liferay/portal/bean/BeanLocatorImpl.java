@@ -18,11 +18,10 @@ import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 
 import java.lang.reflect.Proxy;
 
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -89,18 +88,14 @@ public class BeanLocatorImpl implements BeanLocator {
 
 				Class<?>[] interfaces = bean.getClass().getInterfaces();
 
-				List<Class<?>> interfacesList = ListUtil.fromArray(interfaces);
+				List<Class<?>> interfacesList = new ArrayList<Class<?>>();
 
-				Iterator<Class<?>> itr = interfacesList.iterator();
-
-				while (itr.hasNext()) {
-					Class<?> classObj = itr.next();
-
+				for (Class<?> classObj : interfaces) {
 					try {
-						_classLoader.loadClass(classObj.getName());
+						interfacesList.add(_classLoader.loadClass(
+							classObj.getName()));
 					}
-					catch (Exception e) {
-						itr.remove();
+					catch (ClassNotFoundException e) {
 					}
 				}
 
