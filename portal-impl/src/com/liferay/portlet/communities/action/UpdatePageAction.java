@@ -170,8 +170,8 @@ public class UpdatePageAction extends JSONAction {
 				layout.getGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), layoutPrototypeLayout.getTypeSettings());
 
-			ActionUtil.copyPortletPermissions(request, layout,
-				layoutPrototypeLayout);
+			ActionUtil.copyPortletPermissions(
+				request, layout, layoutPrototypeLayout);
 
 			ActionUtil.copyPreferences(request, layout, layoutPrototypeLayout);
 		}

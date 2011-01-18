@@ -74,10 +74,11 @@ public class ActionUtil
 
 		long companyId = targetLayout.getCompanyId();
 
+		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
+
 		LayoutTypePortlet sourceLayoutTypePortlet =
 			(LayoutTypePortlet)sourceLayout.getLayoutType();
 
-		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
 		List<String> sourcePortletIds = sourceLayoutTypePortlet.getPortletIds();
 
 		for (String sourcePortletId : sourcePortletIds) {
@@ -86,18 +87,20 @@ public class ActionUtil
 
 			String sourceResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
 				sourceLayout.getPlid(), sourcePortletId);
-			
+
 			String targetResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
 				targetLayout.getPlid(), sourcePortletId);
 
 			List<String> actionIds =
 				ResourceActionsUtil.getPortletResourceActions(resourceName);
 
-			for(Role role : roles) {
-				if (role.getName().equals(RoleConstants.ADMINISTRATOR)) {
+			for (Role role : roles) {
+				String roleName = role.getName();
+
+				if (roleName.equals(RoleConstants.ADMINISTRATOR)) {
 					continue;
 				}
-				
+
 				List<String> actions =
 					ResourcePermissionLocalServiceUtil.
 						getAvailableResourcePermissionActionIds(
@@ -107,8 +110,8 @@ public class ActionUtil
 
 				 ResourcePermissionLocalServiceUtil.setResourcePermissions(
 					companyId, resourceName, ResourceConstants.SCOPE_INDIVIDUAL,
-					targetResourcePrimKey, role.getRoleId(), actions.toArray(
-						new String[actions.size()]));
+					targetResourcePrimKey, role.getRoleId(),
+					actions.toArray(new String[actions.size()]));
 			 }
 		}
 	}
