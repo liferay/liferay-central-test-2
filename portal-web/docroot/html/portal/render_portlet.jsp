@@ -725,7 +725,9 @@ if (portlet.isActive() && portlet.isReady() && access && supportsMimeType) {
 	catch (UnavailableException ue) {
 		portletException = true;
 
-		PortletInstanceFactoryUtil.destroy(portlet);
+		if (ue.isPermanent()) {
+			PortletInstanceFactoryUtil.destroy(portlet);
+		}
 	}
 	catch (Exception e) {
 		portletException = true;
