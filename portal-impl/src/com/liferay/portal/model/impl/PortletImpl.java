@@ -2759,11 +2759,22 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		PublicRenderParameter publicRenderParameter) {
 
 		_publicRenderParameters.add(publicRenderParameter);
+
+		String identifier = publicRenderParameter.getIdentifier();
+
 		_publicRenderParametersByIdentifier.put(
-			publicRenderParameter.getIdentifier(), publicRenderParameter);
+			identifier, publicRenderParameter);
+
+		QName qName = publicRenderParameter.getQName();
+
 		_publicRenderParametersByQName.put(
-			PortletQNameUtil.getKey(publicRenderParameter.getQName()),
-			publicRenderParameter);
+			PortletQNameUtil.getKey(qName), publicRenderParameter);
+
+		String publicRenderParameterName =
+			PortletQNameUtil.getPublicRenderParameterName(qName);
+
+		PortletQNameUtil.setPublicRenderParameterIdentifier(
+			publicRenderParameterName, identifier);
 	}
 
 	/**

@@ -908,14 +908,16 @@ public class LayoutAction extends Action {
 				continue;
 			}
 
+			String publicRenderParameterName =
+				PortletQNameUtil.getPublicRenderParameterName(qName);
+
 			if (name.startsWith(
 					PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
 
-				publicRenderParameters.put(
-					PortletQNameUtil.getKey(qName), values);
+				publicRenderParameters.put(publicRenderParameterName, values);
 			}
 			else {
-				publicRenderParameters.remove(PortletQNameUtil.getKey(qName));
+				publicRenderParameters.remove(publicRenderParameterName);
 			}
 		}
 	}

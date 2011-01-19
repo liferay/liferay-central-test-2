@@ -64,7 +64,6 @@ import java.io.Writer;
 import java.security.Key;
 
 import java.util.Collections;
-import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -732,6 +731,18 @@ public class PortletURLImpl
 		sb.append(StringPool.AMPERSAND);
 	}
 
+	protected void appendNamespace(String name, StringBundler sb) {
+		String namespace = getNamespace();
+
+		if (!PortalUtil.isReservedParameter(name) &&
+			!name.startsWith(
+				PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
+				!name.startsWith(namespace)) {
+
+			sb.append(namespace);
+		}
+	}
+
 	protected void clearCache() {
 		_reservedParameters = null;
 		_toString = null;
@@ -950,27 +961,12 @@ public class PortletURLImpl
 			sb.append(StringPool.AMPERSAND);
 		}
 
+		if (_copyCurrentPublicRenderParameters) {
+			mergePublicRenderParameters();
+		}
+
 		if (_copyCurrentRenderParameters) {
-			Enumeration<String> enu = _request.getParameterNames();
-
-			while (enu.hasMoreElements()) {
-				String name = enu.nextElement();
-
-				String[] oldValues = _request.getParameterValues(name);
-				String[] newValues = _params.get(name);
-
-				if (newValues == null) {
-					_params.put(name, oldValues);
-				}
-				else if (isBlankValue(newValues)) {
-					_params.remove(name);
-				}
-				else {
-					newValues = ArrayUtil.append(newValues, oldValues);
-
-					_params.put(name, newValues);
-				}
-			}
+			mergeRenderParameters();
 		}
 
 		itr = _params.entrySet().iterator();
@@ -981,61 +977,20 @@ public class PortletURLImpl
 			String name = entry.getKey();
 			String[] values = entry.getValue();
 
-			String identifier = null;
-
-			if (portlet != null) {
-				PublicRenderParameter publicRenderParameter =
-					portlet.getPublicRenderParameter(name);
-
-				if (publicRenderParameter != null) {
-					QName qName = publicRenderParameter.getQName();
-
-					if (_copyCurrentPublicRenderParameters) {
-						String[] oldValues = _request.getParameterValues(name);
-
-						if (oldValues != null) {
-							if (values == null) {
-								values = oldValues;
-							}
-							else {
-								values = ArrayUtil.append(values, oldValues);
-							}
-						}
-					}
-
-					identifier = name;
-
-					name = PortletQNameUtil.getPublicRenderParameterName(qName);
-
-					PortletQNameUtil.setPublicRenderParameterIdentifier(
-						name, identifier);
-				}
+			if (isParameterIncludedInPath(name)) {
+				continue;
 			}
 
-			// LEP-7495
+			String publicRenderParameterName = getPublicRenderParameterName(
+				name);
 
-			//if (isBlankValue(values)) {
-			//	continue;
-			//}
+			if (Validator.isNotNull(publicRenderParameterName)) {
+				name = publicRenderParameterName;
+			}
+
+			appendNamespace(name, sb);
 
 			for (int i = 0; i < values.length; i++) {
-				String parameterName = name;
-
-				if (identifier != null) {
-					parameterName = identifier;
-				}
-
-				if (isParameterIncludedInPath(parameterName)) {
-					continue;
-				}
-
-				if (!PortalUtil.isReservedParameter(name) &&
-					!name.startsWith(
-						PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
-
-					sb.append(getNamespace());
-				}
-
 				sb.append(name);
 				sb.append(StringPool.EQUAL);
 				sb.append(processValue(key, values[i]));
@@ -1176,27 +1131,12 @@ public class PortletURLImpl
 			}
 		}
 
+		if (_copyCurrentPublicRenderParameters) {
+			mergePublicRenderParameters();
+		}
+
 		if (_copyCurrentRenderParameters) {
-			Enumeration<String> enu = _request.getParameterNames();
-
-			while (enu.hasMoreElements()) {
-				String name = enu.nextElement();
-
-				String[] oldValues = _request.getParameterValues(name);
-				String[] newValues = _params.get(name);
-
-				if (newValues == null) {
-					_params.put(name, oldValues);
-				}
-				else if (isBlankValue(newValues)) {
-					_params.remove(name);
-				}
-				else {
-					newValues = ArrayUtil.append(newValues, oldValues);
-
-					_params.put(name, newValues);
-				}
-			}
+			mergeRenderParameters();
 		}
 
 		StringBundler parameterSb = new StringBundler();
@@ -1210,55 +1150,20 @@ public class PortletURLImpl
 			String name = entry.getKey();
 			String[] values = entry.getValue();
 
-			String identifier = null;
-
-			if (portlet != null) {
-				PublicRenderParameter publicRenderParameter =
-					portlet.getPublicRenderParameter(name);
-
-				if (publicRenderParameter != null) {
-					QName qName = publicRenderParameter.getQName();
-
-					if (_copyCurrentPublicRenderParameters) {
-						String[] oldValues = _request.getParameterValues(name);
-
-						if (oldValues != null) {
-							if (values == null) {
-								values = oldValues;
-							}
-							else {
-								values = ArrayUtil.append(values, oldValues);
-							}
-						}
-					}
-
-					identifier = name;
-
-					name = PortletQNameUtil.getPublicRenderParameterName(qName);
-
-					PortletQNameUtil.setPublicRenderParameterIdentifier(
-						name, identifier);
-				}
+			if (isParameterIncludedInPath(name)) {
+				continue;
 			}
 
+			String publicRenderParameterName = getPublicRenderParameterName(
+				name);
+
+			if (Validator.isNotNull(publicRenderParameterName)) {
+				name = publicRenderParameterName;
+			}
+
+			appendNamespace(name, sb);
+
 			for (int i = 0; i < values.length; i++) {
-				String parameterName = name;
-
-				if (identifier != null) {
-					parameterName = identifier;
-				}
-
-				if (isParameterIncludedInPath(parameterName)) {
-					continue;
-				}
-
-				if (!PortalUtil.isReservedParameter(name) &&
-					!name.startsWith(
-						PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
-
-					parameterSb.append(getNamespace());
-				}
-
 				parameterSb.append(name);
 				parameterSb.append(StringPool.EQUAL);
 				parameterSb.append(HttpUtil.encodeURL(values[i]));
@@ -1295,6 +1200,26 @@ public class PortletURLImpl
 		return sb.toString();
 	}
 
+	protected String getPublicRenderParameterName(String name) {
+		Portlet portlet = getPortlet();
+
+		String publicRenderParameterName = null;
+
+		if (portlet != null) {
+			PublicRenderParameter publicRenderParameter =
+				portlet.getPublicRenderParameter(name);
+
+			if (publicRenderParameter != null) {
+				QName qName = publicRenderParameter.getQName();
+
+				publicRenderParameterName =
+					PortletQNameUtil.getPublicRenderParameterName(qName);
+			}
+		}
+
+		return publicRenderParameterName;
+	}
+
 	protected boolean isBlankValue(String[] value) {
 		if ((value != null) && (value.length == 1) &&
 			(value[0].equals(StringPool.BLANK))) {
@@ -1303,6 +1228,66 @@ public class PortletURLImpl
 		}
 		else {
 			return false;
+		}
+	}
+
+	protected void mergePublicRenderParameters() {
+		Map<String, String[]> publicRenderParameters =
+			PublicRenderParametersPool.get(_request, _layout.getPlid());
+
+		Iterator<Map.Entry<String, String[]>> itr =
+			publicRenderParameters.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<String, String[]> entry = itr.next();
+
+			String name = entry.getKey();
+
+			name = PortletQNameUtil.getPublicRenderParameterIdentifier(name);
+
+			String[] oldValues = entry.getValue();
+			String[] newValues = _params.get(name);
+
+			if (newValues == null) {
+				_params.put(name, oldValues);
+			}
+			else if (isBlankValue(newValues)) {
+				_params.remove(name);
+			}
+			else {
+				newValues = ArrayUtil.append(newValues, oldValues);
+
+				_params.put(name, newValues);
+			}
+		}
+	}
+
+	protected void mergeRenderParameters() {
+		Map<String, String[]> renderParameters = RenderParametersPool.get(
+			_request, _layout.getPlid(), getPortlet().getPortletId());
+
+		Iterator<Map.Entry<String, String[]>> itr =
+			renderParameters.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<String, String[]> entry = itr.next();
+
+			String name = entry.getKey();
+
+			String[] oldValues = entry.getValue();
+			String[] newValues = _params.get(name);
+
+			if (newValues == null) {
+				_params.put(name, oldValues);
+			}
+			else if (isBlankValue(newValues)) {
+				_params.remove(name);
+			}
+			else {
+				newValues = ArrayUtil.append(newValues, oldValues);
+
+				_params.put(name, newValues);
+			}
 		}
 	}
 

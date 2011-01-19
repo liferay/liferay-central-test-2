@@ -642,8 +642,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			}
 		}
 
-		mergePublicRenderParameters(
-			dynamicRequest, preferences, plid, renderParameters);
+		mergePublicRenderParameters(dynamicRequest, preferences, plid);
 
 		_request = dynamicRequest;
 		_originalRequest = request;
@@ -698,7 +697,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 	protected void mergePublicRenderParameters(
 		DynamicServletRequest dynamicRequest, PortletPreferences preferences,
-		long plid, Map<String, String[]> renderParameters) {
+		long plid) {
 
 		Enumeration<PublicRenderParameter> publicRenderParameters =
 			Collections.enumeration(_portlet.getPublicRenderParameters());
@@ -739,7 +738,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 				QName qName = publicRenderParameter.getQName();
 
 				String[] values = _publicRenderParameters.get(
-					PortletQNameUtil.getKey(qName));
+					PortletQNameUtil.getPublicRenderParameterName(qName));
 
 				if ((values) == null || (values.length == 0) ||
 					(Validator.isNull(values[0]))) {
