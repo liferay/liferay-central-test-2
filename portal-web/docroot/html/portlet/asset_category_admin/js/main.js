@@ -270,6 +270,7 @@ AUI().add(
 						var instance = this;
 
 						var childrenList = A.one(instance._categoryContainerSelector);
+
 						childrenList.empty();
 
 						if (categories.length <= 0) {
