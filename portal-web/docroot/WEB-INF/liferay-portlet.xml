@@ -860,8 +860,8 @@
 	</portlet>
 	<portlet>
 		<portlet-name>99</portlet-name>
-		<icon>/html/icons/asset_tags_admin.png</icon>
-		<struts-path>asset_tags_admin</struts-path>
+		<icon>/html/icons/asset_tag_admin.png</icon>
+		<struts-path>asset_tag_admin</struts-path>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>11.0</control-panel-entry-weight>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
@@ -869,9 +869,9 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
-		<header-portlet-css>/html/portlet/asset_tags_admin/css/main.jsp</header-portlet-css>
+		<header-portlet-css>/html/portlet/asset_tag_admin/css/main.jsp</header-portlet-css>
 		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
-		<footer-portlet-javascript>/html/portlet/asset_tags_admin/js/main.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/html/portlet/asset_tag_admin/js/main.js</footer-portlet-javascript>
 		<css-class-wrapper>portlet-asset-tags-admin</css-class-wrapper>
 	</portlet>
 	<portlet>

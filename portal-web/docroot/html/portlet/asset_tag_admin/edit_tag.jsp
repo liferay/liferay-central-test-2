@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/asset_tags_admin/init.jsp" %>
+<%@ include file="/html/portlet/asset_tag_admin/init.jsp" %>
 
 <%
 String randomNamespace = PortalUtil.generateRandomKey(request, "portlet_asset_tad_admin_edit_tag") + StringPool.UNDERLINE;

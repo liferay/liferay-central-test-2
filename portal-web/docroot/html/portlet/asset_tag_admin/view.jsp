@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/asset_tags_admin/init.jsp" %>
+<%@ include file="/html/portlet/asset_tag_admin/init.jsp" %>
 
 <form id="<portlet:namespace />fm">
 

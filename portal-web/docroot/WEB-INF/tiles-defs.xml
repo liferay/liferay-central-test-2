@@ -190,11 +190,11 @@
 	<definition name="portlet.asset_tag_admin" extends="portlet" />
 
 	<definition name="portlet.asset_tag_admin.edit_tag" extends="portlet.asset_tag_admin">
-		<put name="portlet_content" value="/portlet/asset_tags_admin/edit_tag.jsp" />
+		<put name="portlet_content" value="/portlet/asset_tag_admin/edit_tag.jsp" />
 	</definition>
 
 	<definition name="portlet.asset_tag_admin.view" extends="portlet.asset_tag_admin">
-		<put name="portlet_content" value="/portlet/asset_tags_admin/view.jsp" />
+		<put name="portlet_content" value="/portlet/asset_tag_admin/view.jsp" />
 	</definition>
 
 	<definition name="portlet.asset_tag_admin.view_tag" extends="portlet.asset_tag_admin">

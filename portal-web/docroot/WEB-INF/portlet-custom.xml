@@ -1323,7 +1323,7 @@
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/asset_tags_admin/view</value>
+			<value>/asset_tag_admin/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
