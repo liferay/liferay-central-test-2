@@ -1,0 +1,5 @@
+#set ($panelsMinimized = $sessionClicks.get($request, "control-panel-sidebar-minimized", "false"))
+
+#if ($panelsMinimized == true)
+	#set ($css_class = "${css_class} panels-minimized")
+#end

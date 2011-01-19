@@ -51,6 +51,8 @@
 
 			$theme.wrapPortlet("portlet.vm", $content_include)
 		#end
+
+		<div class="clear"></div>
 	</div>
 </body>
 
