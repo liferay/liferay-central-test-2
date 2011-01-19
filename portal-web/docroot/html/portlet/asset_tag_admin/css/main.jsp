@@ -161,6 +161,20 @@
 	padding: 10px 0 0;
 }
 
+.portlet-asset-tags-admin .view-tag {
+	margin: 1em;
+}
+
+.portlet-asset-tags-admin .view-tag label {
+	display: block;
+	font-weight: bold;
+}
+
+.portlet-asset-tags-admin .view-tag .tag-field {
+	clear: left;
+	margin: 1em auto;
+}
+
 .add-tag-layer-wrapper {
 	display: none;
 }
