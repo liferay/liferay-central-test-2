@@ -347,17 +347,16 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 					resultRows.add(row);
 				}
 				catch (Exception e) {
-					_log.error("Error retrieving individual search result " + portlet.getOpenSearchClass(), e);
+					_log.error("Error retrieving individual search result of type " + portlet.getOpenSearchClass(), e);
 
 					total--;
-					continue;
 				}
 			}
 
 			searchContainer.setTotal(total);
 		}
 		catch (Exception e) {
-			_log.error("Error displaying content of type " + portlet.getOpenSearchClass() + ": " + e);
+			_log.error("Error displaying content of type " + portlet.getOpenSearchClass(), + e);
 		}
 	%>
 
