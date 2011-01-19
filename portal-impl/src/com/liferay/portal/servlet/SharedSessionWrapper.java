@@ -26,7 +26,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -63,11 +62,13 @@ public class SharedSessionWrapper implements HttpSession {
 		if (session == _portletSession) {
 			List<String> namesList = Collections.list(namesEnu);
 
-			Set<String> sharedSessionAttributes =
-				_sharedSessionAttributes.keySet();
+			Enumeration<String> portalSessionNamesEnu =
+				_portalSession.getAttributeNames();
 
-			for (String name : sharedSessionAttributes) {
-				if (_portalSession.getAttribute(name) != null) {
+			while (portalSessionNamesEnu.hasMoreElements()) {
+				String name = portalSessionNamesEnu.nextElement();
+
+				if (containsSharedAttribute(name)) {
 					namesList.add(name);
 				}
 			}
@@ -160,7 +161,7 @@ public class SharedSessionWrapper implements HttpSession {
 		if (_sharedSessionAttributesExcludes.containsKey(name)) {
 			return _portletSession;
 		}
-		else if (_sharedSessionAttributes.containsKey(name)) {
+		else if (containsSharedAttribute(name)) {
 			return _portalSession;
 		}
 		else {
@@ -169,21 +170,24 @@ public class SharedSessionWrapper implements HttpSession {
 
 	}
 
+	protected boolean containsSharedAttribute(String name) {
+		for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
+			if (name.startsWith(sharedName)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(SharedSessionWrapper.class);
 
-	private static Map<String, String> _sharedSessionAttributes;
 	private static Map<String, String> _sharedSessionAttributesExcludes;
 
 	private HttpSession _portalSession;
 	private HttpSession _portletSession;
 
 	static {
-		_sharedSessionAttributes = new HashMap<String, String>();
-
-		for (String name : PropsValues.SHARED_SESSION_ATTRIBUTES) {
-			_sharedSessionAttributes.put(name, name);
-		}
-
 		_sharedSessionAttributesExcludes = new HashMap<String, String>();
 
 		for (String name : PropsValues.SHARED_SESSION_ATTRIBUTES_EXCLUDES) {
