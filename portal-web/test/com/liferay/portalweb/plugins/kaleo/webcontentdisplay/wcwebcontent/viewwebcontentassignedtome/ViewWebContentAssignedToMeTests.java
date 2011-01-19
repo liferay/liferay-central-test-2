@@ -34,7 +34,7 @@ public class ViewWebContentAssignedToMeTests extends BaseTests {
 		testSuite.addTestSuite(AssignToMeWebContentActionsTest.class);
 		testSuite.addTestSuite(ViewWebContentAssignedToMeTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
-		testSuite.addTestSuite(ViewWebContentAssignedToMeGuestTest.class);
+		testSuite.addTestSuite(Guest_ViewWebContentAssignedToMeTest.class);
 		testSuite.addTestSuite(SignInTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);

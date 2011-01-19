@@ -19,6 +19,11 @@ import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.wcwebcontent.viewwe
 import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.wcwebcontent.viewwebcontentcompleted.ViewWebContentCompletedTests;
 import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.wcwebcontent.viewwebcontentrejected.ViewWebContentRejectedTests;
 import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.wcwebcontent.viewwebcontentresubmitted.ViewWebContentResubmittedTests;
+import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.wcwebcontent.viewwebcontentversion2assignedtome.ViewWebContentVersion2AssignedToMeTests;
+import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.wcwebcontent.viewwebcontentversion2assignedtomyroles.ViewWebContentVersion2AssignedToMyRolesTests;
+import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.wcwebcontent.viewwebcontentversion2completed.ViewWebContentVersion2CompletedTests;
+import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.wcwebcontent.viewwebcontentversion2rejected.ViewWebContentVersion2RejectedTests;
+import com.liferay.portalweb.plugins.kaleo.webcontentdisplay.wcwebcontent.viewwebcontentversion2resubmitted.ViewWebContentVersion2ResubmittedTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -37,6 +42,11 @@ public class WCWebContentTests extends BaseTests {
 		testSuite.addTest(ViewWebContentCompletedTests.suite());
 		testSuite.addTest(ViewWebContentRejectedTests.suite());
 		testSuite.addTest(ViewWebContentResubmittedTests.suite());
+		testSuite.addTest(ViewWebContentVersion2AssignedToMeTests.suite());
+		testSuite.addTest(ViewWebContentVersion2AssignedToMyRolesTests.suite());
+		testSuite.addTest(ViewWebContentVersion2CompletedTests.suite());
+		testSuite.addTest(ViewWebContentVersion2RejectedTests.suite());
+		testSuite.addTest(ViewWebContentVersion2ResubmittedTests.suite());
 
 		return testSuite;
 	}

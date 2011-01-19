@@ -36,7 +36,7 @@ public class ViewWebContentResubmittedTests extends BaseTests {
 		testSuite.addTestSuite(ResubmitWebContentActionsTest.class);
 		testSuite.addTestSuite(ViewWebContentResubmittedTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
-		testSuite.addTestSuite(ViewWebContentResubmittedGuestTest.class);
+		testSuite.addTestSuite(Guest_ViewWebContentResubmittedTest.class);
 		testSuite.addTestSuite(SignInTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);

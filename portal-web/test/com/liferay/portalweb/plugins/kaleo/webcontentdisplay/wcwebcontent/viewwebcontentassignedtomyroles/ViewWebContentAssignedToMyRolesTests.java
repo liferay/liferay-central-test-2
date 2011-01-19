@@ -33,7 +33,7 @@ public class ViewWebContentAssignedToMyRolesTests extends BaseTests {
 		testSuite.addTestSuite(AddWCDWebContentTest.class);
 		testSuite.addTestSuite(ViewWebContentAssignedToMyRolesTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
-		testSuite.addTestSuite(ViewWebContentAssignedToMyRolesGuestTest.class);
+		testSuite.addTestSuite(Guest_ViewWebContentAssignedToMyRolesTest.class);
 		testSuite.addTestSuite(SignInTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);

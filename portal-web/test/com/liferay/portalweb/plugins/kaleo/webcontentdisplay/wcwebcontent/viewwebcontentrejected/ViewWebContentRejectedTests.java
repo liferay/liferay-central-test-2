@@ -35,7 +35,7 @@ public class ViewWebContentRejectedTests extends BaseTests {
 		testSuite.addTestSuite(RejectWebContentActionsTest.class);
 		testSuite.addTestSuite(ViewWebContentRejectedTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
-		testSuite.addTestSuite(ViewWebContentRejectedGuestTest.class);
+		testSuite.addTestSuite(Guest_ViewWebContentRejectedTest.class);
 		testSuite.addTestSuite(SignInTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);

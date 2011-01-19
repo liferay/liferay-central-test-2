@@ -35,7 +35,7 @@ public class ViewWebContentCompletedTests extends BaseTests {
 		testSuite.addTestSuite(ApproveWebContentActionsTest.class);
 		testSuite.addTestSuite(ViewWebContentCompletedTest.class);
 		testSuite.addTestSuite(SignOutTest.class);
-		testSuite.addTestSuite(ViewWebContentCompletedGuestTest.class);
+		testSuite.addTestSuite(Guest_ViewWebContentCompletedTest.class);
 		testSuite.addTestSuite(SignInTest.class);
 		testSuite.addTestSuite(TearDownPageTest.class);
 		testSuite.addTestSuite(TearDownWebContentTest.class);

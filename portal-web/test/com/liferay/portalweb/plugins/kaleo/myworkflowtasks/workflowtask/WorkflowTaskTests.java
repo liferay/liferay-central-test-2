@@ -27,6 +27,7 @@ import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.approvew
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.approvewebcontentscopeguest.ApproveWebContentScopeGuestTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.approvewebcontentscopemycommunity.ApproveWebContentScopeMyCommunityTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.approvewebcontentscopeorganization.ApproveWebContentScopeOrganizationTests;
+import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.approvewebcontentversion2actions.ApproveWebContentVersion2ActionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.assigntomecommentwebcontentactions.AssignToMeCommentWebContentActionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.assigntomecommentwebcontentdetails.AssignToMeCommentWebContentDetailsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.assigntomecommentwebcontentrmenu.AssignToMeCommentWebContentRMenuTests;
@@ -42,11 +43,14 @@ import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.assignto
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.assigntomewebcontentscopeguest.AssignToMeWebContentScopeGuestTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.assigntomewebcontentscopemycommunity.AssignToMeWebContentScopeMyCommunityTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.assigntomewebcontentscopeorganization.AssignToMeWebContentScopeOrganizationTests;
+import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.assigntomewebcontentversion2actions.AssignToMeWebContentVersion2ActionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.assigntouserwebcontentactions.AssignToUserWebContentActionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.rejectwebcontentactions.RejectWebContentActionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.rejectwebcontentrmenu.RejectWebContentRMenuTests;
+import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.rejectwebcontentversion2actions.RejectWebContentVersion2ActionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.resubmitwebcontentactions.ResubmitWebContentActionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.resubmitwebcontentrmenu.ResubmitWebContentRMenuTests;
+import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.resubmitwebcontentversion2actions.ResubmitWebContentVersion2ActionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.submitforpublicationwebcontentdraft.SubmitForPublicationWebContentDraftTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.updateduedatewebcontentassignedtomeactions.UpdateDueDateWebContentAssignedToMeActionsTests;
 import com.liferay.portalweb.plugins.kaleo.myworkflowtasks.workflowtask.updateduedatewebcontentassignedtomyrolesactions.UpdateDueDateWebContentAssignedToMyRolesActionsTests;
@@ -82,6 +86,7 @@ public class WorkflowTaskTests extends BaseTests {
 		testSuite.addTest(ApproveWebContentScopeGuestTests.suite());
 		testSuite.addTest(ApproveWebContentScopeMyCommunityTests.suite());
 		testSuite.addTest(ApproveWebContentScopeOrganizationTests.suite());
+		testSuite.addTest(ApproveWebContentVersion2ActionsTests.suite());
 		testSuite.addTest(AssignToMeCommentWebContentActionsTests.suite());
 		testSuite.addTest(AssignToMeCommentWebContentDetailsTests.suite());
 		testSuite.addTest(AssignToMeCommentWebContentRMenuTests.suite());
@@ -97,11 +102,14 @@ public class WorkflowTaskTests extends BaseTests {
 		testSuite.addTest(AssignToMeWebContentScopeGuestTests.suite());
 		testSuite.addTest(AssignToMeWebContentScopeMyCommunityTests.suite());
 		testSuite.addTest(AssignToMeWebContentScopeOrganizationTests.suite());
+		testSuite.addTest(AssignToMeWebContentVersion2ActionsTests.suite());
 		testSuite.addTest(AssignToUserWebContentActionsTests.suite());
 		testSuite.addTest(RejectWebContentActionsTests.suite());
 		testSuite.addTest(RejectWebContentRMenuTests.suite());
+		testSuite.addTest(RejectWebContentVersion2ActionsTests.suite());
 		testSuite.addTest(ResubmitWebContentActionsTests.suite());
 		testSuite.addTest(ResubmitWebContentRMenuTests.suite());
+		testSuite.addTest(ResubmitWebContentVersion2ActionsTests.suite());
 		testSuite.addTest(SubmitForPublicationWebContentDraftTests.suite());
 		testSuite.addTest(
 			UpdateDueDateWebContentAssignedToMeActionsTests.suite());
