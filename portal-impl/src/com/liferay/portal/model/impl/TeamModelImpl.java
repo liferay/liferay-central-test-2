@@ -123,6 +123,8 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 
 	public static final String MAPPING_TABLE_USERS_TEAMS_NAME = com.liferay.portal.model.impl.UserModelImpl.MAPPING_TABLE_USERS_TEAMS_NAME;
 	public static final boolean FINDER_CACHE_ENABLED_USERS_TEAMS = com.liferay.portal.model.impl.UserModelImpl.FINDER_CACHE_ENABLED_USERS_TEAMS;
+	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_NAME = com.liferay.portal.model.impl.UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME;
+	public static final boolean FINDER_CACHE_ENABLED_USERGROUPS_TEAMS = com.liferay.portal.model.impl.UserGroupModelImpl.FINDER_CACHE_ENABLED_USERGROUPS_TEAMS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Team"));
 

@@ -82,6 +82,7 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupGroupChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupTeamChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserTeamChecker" %>

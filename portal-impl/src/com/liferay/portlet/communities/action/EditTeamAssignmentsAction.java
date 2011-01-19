@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 
@@ -49,6 +50,9 @@ public class EditTeamAssignmentsAction extends PortletAction {
 		try {
 			if (cmd.equals("team_users")) {
 				updateTeamUsers(actionRequest);
+			}
+			else if (cmd.equals("team_user_groups")) {
+				updateTeamUserGroups(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
@@ -111,4 +115,17 @@ public class EditTeamAssignmentsAction extends PortletAction {
 		UserServiceUtil.unsetTeamUsers(teamId, removeUserIds);
 	}
 
+	protected void updateTeamUserGroups(ActionRequest actionRequest)
+		throws Exception {
+
+		long teamId = ParamUtil.getLong(actionRequest, "teamId");
+
+		long[] addUserGroupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "addUserGroupIds"), 0L);
+		long[] removeUserGroupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "removeUserGroupIds"), 0L);
+
+		UserGroupServiceUtil.addTeamUserGroups(teamId, addUserGroupIds);
+		UserGroupServiceUtil.unsetTeamUserGroups(teamId, removeUserGroupIds);
+	}
 }

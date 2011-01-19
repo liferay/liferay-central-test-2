@@ -970,5 +970,194 @@ public interface UserGroupPersistence extends BasePersistence<UserGroup> {
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets all the teams associated with the user group.
+	*
+	* @param pk the primary key of the user group to get the associated teams for
+	* @return the teams associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.Team> getTeams(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets a range of all the teams associated with the user group.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the user group to get the associated teams for
+	* @param start the lower bound of the range of user groups to return
+	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @return the range of teams associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.Team> getTeams(long pk,
+		int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets an ordered range of all the teams associated with the user group.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the user group to get the associated teams for
+	* @param start the lower bound of the range of user groups to return
+	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of teams associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.Team> getTeams(long pk,
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets the number of teams associated with the user group.
+	*
+	* @param pk the primary key of the user group to get the number of associated teams for
+	* @return the number of teams associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public int getTeamsSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Determines if the team is associated with the user group.
+	*
+	* @param pk the primary key of the user group
+	* @param teamPK the primary key of the team
+	* @return <code>true</code> if the team is associated with the user group; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	public boolean containsTeam(long pk, long teamPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Determines if the user group has any teams associated with it.
+	*
+	* @param pk the primary key of the user group to check for associations with teams
+	* @return <code>true</code> if the user group has any teams associated with it; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	public boolean containsTeams(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param teamPK the primary key of the team
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addTeam(long pk, long teamPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param team the team
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addTeam(long pk, com.liferay.portal.model.Team team)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param teamPKs the primary keys of the teams
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addTeams(long pk, long[] teamPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param teams the teams
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addTeams(long pk,
+		java.util.List<com.liferay.portal.model.Team> teams)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Clears all associations between the user group and its teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group to clear the associated teams from
+	* @throws SystemException if a system exception occurred
+	*/
+	public void clearTeams(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param teamPK the primary key of the team
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeTeam(long pk, long teamPK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param team the team
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeTeam(long pk, com.liferay.portal.model.Team team)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param teamPKs the primary keys of the teams
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeTeams(long pk, long[] teamPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param teams the teams
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeTeams(long pk,
+		java.util.List<com.liferay.portal.model.Team> teams)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Sets the teams associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group to set the associations for
+	* @param teamPKs the primary keys of the teams to be associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public void setTeams(long pk, long[] teamPKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Sets the teams associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group to set the associations for
+	* @param teams the teams to be associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public void setTeams(long pk,
+		java.util.List<com.liferay.portal.model.Team> teams)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public UserGroup remove(UserGroup userGroup) throws SystemException;
 }

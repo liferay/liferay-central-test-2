@@ -17,7 +17,8 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "current");
+String tabs1 = ParamUtil.getString(request, "tabs1", "users");
+String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 
 int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
 
@@ -37,8 +38,24 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/communities/edit_team_assignments");
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
+
+request.setAttribute("edit_team_assignments.jsp-tabs1", tabs1);
+request.setAttribute("edit_team_assignments.jsp-tabs2", tabs2);
+
+request.setAttribute("edit_team_assignments.jsp-cur", cur);
+
+request.setAttribute("edit_team_assignments.jsp-redirect", redirect);
+
+request.setAttribute("edit_team_assignments.jsp-team", team);
+
+request.setAttribute("edit_team_assignments.jsp-group", group);
+
+request.setAttribute("edit_team_assignments.jsp-organization", organization);
+
+request.setAttribute("edit_team_assignments.jsp-portletURL", portletURL);
 %>
 
 <liferay-ui:header
@@ -47,9 +64,9 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 />
 
 <liferay-ui:tabs
-	names="current,available"
-	param="tabs1"
-	url="<%= portletURL.toString() %>"
+    names="users,user-groups"
+    param="tabs1"
+    url="<%= portletURL.toString() %>"
 />
 
 <portlet:actionURL var="editAssignmentsURL">
@@ -59,69 +76,18 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 <aui:form action="<%= editAssignmentsURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="teamId" type="hidden" value="<%= String.valueOf(team.getTeamId()) %>" />
-	<aui:input name="addUserIds" type="hidden" />
-	<aui:input name="removeUserIds" type="hidden" />
 
-	<liferay-ui:search-container
-		rowChecker="<%= new UserTeamChecker(renderResponse, team) %>"
-		searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
-	>
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/user_search.jsp"
-		/>
-
-		<%
-		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-		LinkedHashMap userParams = new LinkedHashMap();
-
-		if (group.isOrganization()) {
-			userParams.put("usersOrgs", organization.getOrganizationId());
-		}
-		else {
-			userParams.put("usersGroups", team.getGroupId());
-		}
-
-		if (tabs1.equals("current")) {
-			userParams.put("usersTeams", team.getTeamId());
-		}
-		%>
-
-		<liferay-ui:search-container-results>
-			<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-		</liferay-ui:search-container-results>
-
-		<liferay-ui:search-container-row
-			className="com.liferay.portal.model.User"
-			escapedModel="<%= true %>"
-			keyProperty="userId"
-			modelVar="user2"
-		>
-			<liferay-ui:search-container-column-text
-				name="name"
-				property="fullName"
-			/>
-
-			<liferay-ui:search-container-column-text
-				name="screen-name"
-				property="screenName"
-			/>
-		</liferay-ui:search-container-row>
-
-		<div class="separator"><!-- --></div>
-
-		<%
-		String taglibOnClick = renderResponse.getNamespace() + "updateTeamUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
-		%>
-
-		<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
-
-		<br /><br />
-
-		<liferay-ui:search-iterator />
-	</liferay-ui:search-container>
+	<c:choose>
+		<c:when test='<%= tabs1.equals("users") %>'>
+            <liferay-util:include page="/html/portlet/communities/edit_team_assignments_users.jsp" />
+		</c:when>
+		<c:when test='<%= tabs1.equals("user-groups") %>'>
+			<liferay-util:include page="/html/portlet/communities/edit_team_assignments_user_groups.jsp" />
+		</c:when>
+	</c:choose>
 </aui:form>
 
 <aui:script>
@@ -133,6 +99,19 @@ portletURL.setParameter("teamId", String.valueOf(team.getTeamId()));
 			document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
 			document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+			submitForm(document.<portlet:namespace />fm);
+		},
+		['liferay-util-list-fields']
+	);
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />updateTeamUserGroups',
+		function(assignmentsRedirect) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "team_user_groups";
+			document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
+			document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+			document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm);
 		},
 		['liferay-util-list-fields']

@@ -230,6 +230,12 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 			description);
 	}
 
+	public void addTeamUserGroups(long teamId, long[] userGroupIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_userGroupLocalService.addTeamUserGroups(teamId, userGroupIds);
+	}
+
 	public void clearUserUserGroups(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userGroupLocalService.clearUserUserGroups(userId);
@@ -283,6 +289,11 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 		return _userGroupLocalService.hasGroupUserGroup(groupId, userGroupId);
 	}
 
+	public boolean hasTeamUserGroup(long teamId, long userGroupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _userGroupLocalService.hasTeamUserGroup(teamId, userGroupId);
+	}
+
 	public java.util.List<com.liferay.portal.model.UserGroup> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
@@ -309,6 +320,12 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userGroupLocalService.unsetGroupUserGroups(groupId, userGroupIds);
+	}
+
+	public void unsetTeamUserGroups(long teamId, long[] userGroupIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_userGroupLocalService.unsetTeamUserGroups(teamId, userGroupIds);
 	}
 
 	public com.liferay.portal.model.UserGroup updateUserGroup(long companyId,
