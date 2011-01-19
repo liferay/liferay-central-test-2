@@ -162,7 +162,7 @@ public class AssetCategoryFinderImpl
 
 			qPos.add(entryId);
 
-			return (List<AssetCategory>) QueryUtil.list(
+			return (List<AssetCategory>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {

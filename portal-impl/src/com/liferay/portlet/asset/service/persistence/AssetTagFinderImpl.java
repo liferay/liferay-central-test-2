@@ -163,7 +163,7 @@ public class AssetTagFinderImpl
 
 			qPos.add(entryId);
 
-			return (List<AssetTag>) QueryUtil.list(
+			return (List<AssetTag>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {
@@ -249,7 +249,7 @@ public class AssetTagFinderImpl
 
 			qPos.add(entry.getEntryId());
 
-			return (List<AssetTag>) QueryUtil.list(
+			return (List<AssetTag>)QueryUtil.list(
 				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {

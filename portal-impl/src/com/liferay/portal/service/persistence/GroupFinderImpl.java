@@ -465,7 +465,7 @@ public class GroupFinderImpl
 				qPos.add(description);
 			}
 
-			List<Long> groupIds = (List<Long>) QueryUtil.list(
+			List<Long> groupIds = (List<Long>)QueryUtil.list(
 				q, getDialect(), start, end);
 
 			List<Group> groups = new ArrayList<Group>(groupIds.size());
