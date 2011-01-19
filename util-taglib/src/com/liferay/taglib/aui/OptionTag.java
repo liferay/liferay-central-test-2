@@ -30,6 +30,10 @@ public class OptionTag extends IncludeTag {
 		_cssClass = cssClass;
 	}
 
+	public void setDisabled(boolean disabled) {
+		_disabled = disabled;
+	}
+
 	public void setLabel(Object label) {
 		_label = String.valueOf(label);
 	}
@@ -48,6 +52,7 @@ public class OptionTag extends IncludeTag {
 
 	protected void cleanUp() {
 		_cssClass = null;
+		_disabled = false;
 		_label = null;
 		_selected = false;
 		_style = null;
@@ -83,6 +88,8 @@ public class OptionTag extends IncludeTag {
 
 		request.setAttribute("aui:option:cssClass", _cssClass);
 		request.setAttribute(
+			"aui:option:disabled", String.valueOf(_disabled));
+		request.setAttribute(
 			"aui:option:dynamicAttributes", getDynamicAttributes());
 		request.setAttribute("aui:option:label", _label);
 		request.setAttribute(
@@ -99,6 +106,7 @@ public class OptionTag extends IncludeTag {
 		"/html/taglib/aui/option/start.jsp";
 
 	private String _cssClass;
+	private boolean _disabled;
 	private String _label;
 	private boolean _selected;
 	private String _style;
