@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.util.servlet;
+package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.util.ServerDetector;
-
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -29,51 +27,49 @@ import javax.servlet.http.HttpSession;
 public class SharedSessionServletRequest extends HttpServletRequestWrapper {
 
 	public SharedSessionServletRequest(
-		HttpServletRequest request, Map<String, Object> sharedSessionAttributes,
-		boolean shared) {
+		HttpServletRequest request, boolean shared) {
 
 		super(request);
 
-		_sharedSessionAttributes = sharedSessionAttributes;
-
-		_session = getSharedSessionWrapper(request.getSession());
+		_portalSession = request.getSession();
 		_shared = shared;
 	}
 
 	public HttpSession getSession() {
 		if (_shared) {
-			return _session;
+			return _portalSession;
 		}
 		else {
-			return getSharedSessionWrapper(super.getSession());
+			return getSharedSessionWrapper(_portalSession, super.getSession());
 		}
 	}
 
 	public HttpSession getSession(boolean create) {
 		if (_shared) {
-			return _session;
+			return _portalSession;
 		}
 		else {
-			return getSharedSessionWrapper(super.getSession(create));
+			return getSharedSessionWrapper(
+				_portalSession, super.getSession(create));
 		}
 	}
 
 	public HttpSession getSharedSession() {
-		return _session;
+		return _portalSession;
 	}
 
-	protected HttpSession getSharedSessionWrapper(HttpSession session) {
+	protected HttpSession getSharedSessionWrapper(
+		HttpSession portalSession, HttpSession portletSession) {
+
 		if (ServerDetector.isJetty()) {
-			return new JettySharedSessionWrapper(
-				session, _sharedSessionAttributes);
+			return new JettySharedSessionWrapper(portalSession, portletSession);
 		}
 		else {
-			return new SharedSessionWrapper(session, _sharedSessionAttributes);
+			return new SharedSessionWrapper(portalSession, portletSession);
 		}
 	}
 
-	private HttpSession _session;
-	private Map<String, Object> _sharedSessionAttributes;
+	private HttpSession _portalSession;
 	private boolean _shared;
 
 }

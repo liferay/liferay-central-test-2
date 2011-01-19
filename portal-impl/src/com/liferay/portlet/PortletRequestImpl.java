@@ -38,13 +38,12 @@ import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
-import com.liferay.portal.servlet.SharedSessionUtil;
+import com.liferay.portal.servlet.SharedSessionServletRequest;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration;
 import com.liferay.util.servlet.DynamicServletRequest;
-import com.liferay.util.servlet.SharedSessionServletRequest;
 
 import java.lang.reflect.Method;
 
@@ -540,9 +539,6 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 		String portletNamespace = PortalUtil.getPortletNamespace(_portletName);
 
-		Map<String, Object> sharedSessionAttributes =
-			SharedSessionUtil.getSharedSessionAttributes(request);
-
 		boolean portalSessionShared = false;
 
 		PortletApp portletApp = portlet.getPortletApp();
@@ -551,8 +547,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 			portalSessionShared = true;
 		}
 
-		request = new SharedSessionServletRequest(
-			request, sharedSessionAttributes, portalSessionShared);
+		request = new SharedSessionServletRequest(request, portalSessionShared);
 
 		DynamicServletRequest dynamicRequest = null;
 

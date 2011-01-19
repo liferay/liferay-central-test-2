@@ -12,9 +12,7 @@
  * details.
  */
 
-package com.liferay.util.servlet;
-
-import java.util.Map;
+package com.liferay.portal.servlet;
 
 import javax.servlet.http.HttpSession;
 
@@ -26,24 +24,14 @@ import org.mortbay.jetty.servlet.AbstractSessionManager;
 public class JettySharedSessionWrapper
 	extends SharedSessionWrapper implements AbstractSessionManager.SessionIf {
 
-	public JettySharedSessionWrapper(HttpSession session) {
-		super(session);
-
-		_session = session;
-	}
-
 	public JettySharedSessionWrapper(
-		HttpSession session, Map<String, Object> sharedAttributes) {
+		HttpSession portalSession, HttpSession portletSession) {
 
-		super(session, sharedAttributes);
-
-		_session = session;
+		super(portalSession, portletSession);
 	}
 
 	public AbstractSessionManager.Session getSession() {
-		return (AbstractSessionManager.Session)_session;
+		return (AbstractSessionManager.Session)getSessionDelegate();
 	}
-
-	private HttpSession _session;
 
 }

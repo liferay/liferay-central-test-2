@@ -16,7 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.servlet.SharedSessionServletRequest;
+import com.liferay.portal.servlet.SharedSessionServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
