@@ -122,7 +122,8 @@ AUI().add(
 
 						instance.after('drop:enter', instance._afterDragEnter);
 						instance.after('drop:exit', instance._afterDragExit);
-						instance.on('drop:hit', instance._afterDragDrop);
+
+						instance.on('drop:hit', instance._onDragDrop);
 					},
 
 					_addCategory: function(form) {
@@ -145,24 +146,6 @@ AUI().add(
 						ioVocabulary.set('uri', form.attr('action'));
 
 						ioVocabulary.start();
-					},
-
-					_afterDragDrop: function(event) {
-						var instance = this;
-
-						var dragNode = event.drag.get('node');
-						var dropNode = event.drop.get('node');
-
-						var node = A.Widget.getByNode(dragNode);
-
-						var vocabularyId = dropNode.attr('data-vocabularyid');
-						var fromCategoryId = instance._getCategoryId(node);
-
-						instance._merge(fromCategoryId, 0, vocabularyId);
-
-						instance._selectVocabulary(vocabularyId);
-
-						dropNode.removeClass(CSS_ACTIVE_AREA);
 					},
 
 					_afterDragEnter: function(event) {
@@ -1285,6 +1268,24 @@ AUI().add(
 						var instance = this;
 
 						instance._categoryViewContainer.html(response);
+					},
+
+					_onDragDrop: function(event) {
+						var instance = this;
+
+						var dragNode = event.drag.get('node');
+						var dropNode = event.drop.get('node');
+
+						var node = A.Widget.getByNode(dragNode);
+
+						var vocabularyId = dropNode.attr('data-vocabularyid');
+						var fromCategoryId = instance._getCategoryId(node);
+
+						instance._merge(fromCategoryId, 0, vocabularyId);
+
+						instance._selectVocabulary(vocabularyId);
+
+						dropNode.removeClass(CSS_ACTIVE_AREA);
 					},
 
 					_onShowCategoryPanel: function(event, action) {
