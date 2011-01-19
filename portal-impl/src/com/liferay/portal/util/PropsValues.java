@@ -564,6 +564,8 @@ public class PropsValues {
 
 	public static final String[] JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = PropsUtil.getArray(PropsKeys.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
+	public static final boolean JOURNAL_TEMPLATE_XSL_SECURE_PROCESSING_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE_XSL_SECURE_PROCESSING_ENABLED));
+
 	public static final String[] JPA_CONFIGS = PropsUtil.getArray(PropsKeys.JPA_CONFIGS);
 
 	public static final String JPA_DATABASE_PLATFORM = PropsUtil.get(PropsKeys.JPA_DATABASE_PLATFORM);

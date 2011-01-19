@@ -815,6 +815,8 @@ public interface PropsKeys {
 
 	public static final String JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = "journal.template.velocity.restricted.variables";
 
+	public static final String JOURNAL_TEMPLATE_XSL_SECURE_PROCESSING_ENABLED = "journal.template.xsl.secure.processing.enabled";
+
 	public static final String JOURNAL_TRANSFORMER_LISTENER = "journal.transformer.listener";
 
 	public static final String JPA_CONFIGS = "jpa.configs";
