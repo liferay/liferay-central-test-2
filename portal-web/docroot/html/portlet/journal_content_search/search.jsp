@@ -98,7 +98,7 @@
 
 					// Content
 
-					row.addJSP("/html/portlet/journal_content_search/article_content_jsp");
+					row.addJSP("/html/portlet/journal_content_search/article_content.jsp");
 
 					// Score
 
