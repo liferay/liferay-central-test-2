@@ -230,10 +230,10 @@ public class DLAppServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.Folder getFolder(
-		long folderId)
+		long repositoryId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFolder(folderId);
+		return getService().getFolder(repositoryId, folderId);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.Folder getFolder(

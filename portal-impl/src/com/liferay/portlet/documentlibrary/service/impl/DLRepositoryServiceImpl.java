@@ -89,7 +89,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			String description, ServiceContext serviceContext)
 		throws PortalException, RemoteException, SystemException {
 
-		DLFolder srcFolder = getFolder(sourceFolderId);
+		DLFolder srcFolder = getFolder(groupId, sourceFolderId);
 
 		DLFolder destFolder = addFolder(
 			groupId, parentFolderId, name, description, serviceContext);
@@ -264,13 +264,17 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		}
 	}
 
-	public DLFolder getFolder(long folderId)
+	public DLFolder getFolder(long groupId, long folderId)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlRepositoryLocalService.getFolder(folderId);
+		DLFolder folder = null;
 
 		DLFolderPermission.check(
-			getPermissionChecker(), folder, ActionKeys.VIEW);
+			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
+
+		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			folder = dlRepositoryLocalService.getFolder(folderId);
+		}
 
 		return folder;
 	}

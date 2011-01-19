@@ -233,9 +233,10 @@ public class DLRepositoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
-		long folderId) throws RemoteException {
+		long groupId, long folderId) throws RemoteException {
 		try {
-			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLRepositoryServiceUtil.getFolder(folderId);
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLRepositoryServiceUtil.getFolder(groupId,
+					folderId);
 
 			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}

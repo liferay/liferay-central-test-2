@@ -151,10 +151,10 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
-		long folderId)
+		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryService.getFolder(folderId);
+		return _dlRepositoryService.getFolder(groupId, folderId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder getFolder(

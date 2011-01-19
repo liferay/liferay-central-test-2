@@ -912,14 +912,15 @@ public class DLAppServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.Folder getFolder(
-		HttpPrincipal httpPrincipal, long folderId)
+		HttpPrincipal httpPrincipal, long repositoryId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class.getName(),
 					"getFolder", _getFolderParameterTypes23);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, folderId);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					repositoryId, folderId);
 
 			Object returnObj = null;
 
@@ -2315,7 +2316,7 @@ public class DLAppServiceHttp {
 			long.class
 		};
 	private static final Class<?>[] _getFolderParameterTypes23 = new Class[] {
-			long.class
+			long.class, long.class
 		};
 	private static final Class<?>[] _getFolderParameterTypes24 = new Class[] {
 			long.class, long.class, java.lang.String.class

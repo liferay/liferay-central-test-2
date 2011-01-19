@@ -165,10 +165,10 @@ public class DLRepositoryServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
-		long folderId)
+		long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFolder(folderId);
+		return getService().getFolder(groupId, folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
