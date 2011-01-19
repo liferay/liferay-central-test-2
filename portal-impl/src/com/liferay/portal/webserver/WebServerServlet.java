@@ -45,6 +45,7 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -68,6 +69,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Alexander Chow
@@ -133,8 +135,10 @@ public class WebServerServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
+		User user = null;
+
 		try {
-			User user = _getUser(request);
+			user = _getUser(request);
 
 			PrincipalThreadLocal.setName(user.getUserId());
 
@@ -167,6 +171,9 @@ public class WebServerServlet extends HttpServlet {
 			PortalUtil.sendError(
 				HttpServletResponse.SC_NOT_FOUND, nsfee, request, response);
 		}
+		catch (PrincipalException pe) {
+			processPrincipalException(pe, user, request, response);
+		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, request, response);
 		}
@@ -195,6 +202,29 @@ public class WebServerServlet extends HttpServlet {
 
 			return DLAppServiceUtil.getFileEntry(groupId, folderId, fileName);
 		}
+	}
+
+	protected void processPrincipalException(
+			Throwable t, User user, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException {
+
+		if (! user.isDefaultUser() && user.getUserId() > 0) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_UNAUTHORIZED, (Exception)t,
+				request, response);
+
+			return;
+		}
+
+		String redirect =
+			request.getContextPath() + Portal.PATH_MAIN + "/portal/login";
+
+		String currentURL = PortalUtil.getCurrentURL(request);
+
+		redirect = HttpUtil.addParameter(redirect, "redirect", currentURL);
+
+		response.sendRedirect(redirect);
 	}
 
 	protected void sendDocumentLibrary(
@@ -480,6 +510,21 @@ public class WebServerServlet extends HttpServlet {
 			Company company = CompanyLocalServiceUtil.getCompany(companyId);
 
 			user = company.getDefaultUser();
+
+			HttpSession session = request.getSession();
+
+			if (session != null) {
+				String userIdString =
+					(String)session.getAttribute("j_username");
+				String passwordString =
+					(String)session.getAttribute("j_password");
+
+				if (userIdString != null && passwordString != null) {
+					long userId = Long.valueOf(userIdString).longValue();
+
+					user = UserLocalServiceUtil.getUser(userId);
+				}
+			}
 		}
 
 		return user;
