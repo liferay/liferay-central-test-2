@@ -67,13 +67,19 @@ public interface SchedulerEngine {
 
 	public static final String START_TIME = "START_TIME";
 
-	public void delete(String groupName) throws SchedulerException;
+	public void delete(
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
+		throws SchedulerException;
 
-	public void delete(String jobName, String groupName)
+	public void delete(
+			@StringLimiter(maxLength=JOB_NAME_MAX_LENGTH) String jobName,
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
 		throws SchedulerException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
-	public SchedulerResponse getScheduledJob(String jobName, String groupName)
+	public SchedulerResponse getScheduledJob(
+			@StringLimiter(maxLength=JOB_NAME_MAX_LENGTH) String jobName,
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
 		throws SchedulerException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
@@ -81,21 +87,32 @@ public interface SchedulerEngine {
 		throws SchedulerException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
-	public List<SchedulerResponse> getScheduledJobs(String groupName)
+	public List<SchedulerResponse> getScheduledJobs(
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
 		throws SchedulerException;
 
-	public void pause(String groupName) throws SchedulerException;
-
-	public void pause(String jobName, String groupName)
+	public void pause(
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
 		throws SchedulerException;
 
-	public void resume(String groupName) throws SchedulerException;
+	public void pause(
+			@StringLimiter(maxLength=JOB_NAME_MAX_LENGTH) String jobName,
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
+		throws SchedulerException;
 
-	public void resume(String jobName, String groupName)
+	public void resume(
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
+		throws SchedulerException;
+
+	public void resume(
+			@StringLimiter(maxLength=JOB_NAME_MAX_LENGTH) String jobName,
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
 		throws SchedulerException;
 
 	public void schedule(
-			Trigger trigger, String description, String destinationName,
+			Trigger trigger,
+			@StringLimiter(maxLength=DESCRIPTION_MAX_LENGTH) String description,
+			String destinationName,
 			Message message)
 		throws SchedulerException;
 
@@ -105,14 +122,20 @@ public interface SchedulerEngine {
 	@MessagingProxy(mode = ProxyMode.SYNC)
 	public void start() throws SchedulerException;
 
-	public void suppressError(String jobName, String groupName)
+	public void suppressError(
+			@StringLimiter(maxLength=JOB_NAME_MAX_LENGTH) String jobName,
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
 		throws SchedulerException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
-	public void unschedule(String groupName) throws SchedulerException;
+	public void unschedule(
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
+		throws SchedulerException;
 
 	@MessagingProxy(mode = ProxyMode.SYNC)
-	public void unschedule(String jobName, String groupName)
+	public void unschedule(
+			@StringLimiter(maxLength=JOB_NAME_MAX_LENGTH) String jobName,
+			@StringLimiter(maxLength=GROUP_NAME_MAX_LENGTH) String groupName)
 		throws SchedulerException;
 
 	/**

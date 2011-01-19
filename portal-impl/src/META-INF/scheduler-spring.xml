@@ -11,8 +11,12 @@
 
 	<!-- Advice -->
 
+	<bean id="schedulerProxyAdvice" class="com.liferay.portal.scheduler.SchedulerProxyAdvice"/>
 	<aop:config>
-		<aop:aspect ref="messagingProxyAdvice">
+		<aop:aspect ref="schedulerProxyAdvice" order="1">
+			<aop:around pointcut="bean(com.liferay.portal.scheduler.SchedulerEngineProxyBean)" method="invoke" />
+		</aop:aspect>
+		<aop:aspect ref="messagingProxyAdvice" order="2">
 			<aop:around pointcut="bean(com.liferay.portal.scheduler.SchedulerEngineProxyBean)" method="invoke" />
 		</aop:aspect>
 	</aop:config>
