@@ -83,8 +83,8 @@ AUI().add(
 						childrenContainer.placeBefore(instance._categoryMessageContainer);
 
 						instance._dialogAlignConfig = {
-							node: instance._vocabularyContent,
-							points: ['tl', 'tl']
+							node: childrenContainer,
+							points: ['tc', 'tc']
 						};
 
 						var namespace = instance._prefixedPortletId;
