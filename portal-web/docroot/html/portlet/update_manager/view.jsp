@@ -184,7 +184,7 @@ List updatablePackageIds = new ArrayList();
 
 							// Actions
 
-							row.addJSP("/html/portlet/update_manager/plugin_package_action_jsp");
+							row.addJSP("/html/portlet/update_manager/plugin_package_action.jsp");
 
 							// Add result row
 
