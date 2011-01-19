@@ -49,6 +49,8 @@ public interface Constants {
 
 	public static final String MANAGE = "manage";
 
+	public static final String MERGE = "merge";
+
 	public static final String MOVE = "move";
 
 	public static final String PREVIEW = "preview";
