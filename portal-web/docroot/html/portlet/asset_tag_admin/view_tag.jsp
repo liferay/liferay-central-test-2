@@ -52,7 +52,14 @@ List<AssetTagProperty> tagProperties = AssetTagPropertyServiceUtil.getTagPropert
 	</c:if>
 
 	<div class="tag-field">
-		<label><liferay-ui:message key="count" />:</label> <liferay-ui:message key="used-in-x-assets" arguments="<%= tag.getAssetCount() %>" />
+		<c:choose>
+			<c:when test="<%= tag.getAssetCount() > 0 %>">
+				<label><liferay-ui:message key="count" />:</label> <liferay-ui:message key="used-in-x-assets" arguments="<%= tag.getAssetCount() %>" />
+			</c:when>
+			<c:otherwise>
+				<div class="portlet-msg-info"><liferay-ui:message key="this-tag-is-not-used" /></div>
+			</c:otherwise>
+		</c:choose>
 	</div>
 
 	<c:if test="<%= !tagProperties.isEmpty() %>">

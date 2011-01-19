@@ -52,9 +52,11 @@ List<AssetCategoryProperty> categoryProperties = AssetCategoryPropertyServiceUti
 		</c:if>
 	</c:if>
 
-	<div class="category-field">
-		<label><liferay-ui:message key="description" />:</label> <%= category.getDescription(locale) %>
-	</div>
+	<c:if test="<%= Validator.isNotNull(category.getDescription(locale)) %>">
+		<div class="category-field">
+			<label><liferay-ui:message key="description" />:</label> <%= category.getDescription(locale) %>
+		</div>
+	</c:if>
 
 	<c:if test="<%= !categoryProperties.isEmpty() %>">
 		<div class="category-field">
