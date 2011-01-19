@@ -24,7 +24,7 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-events-on-this-day");
 
-List results = CalEventLocalServiceUtil.getEvents(scopeGroupId, selCal, eventType);
+List results = CalEventLocalServiceUtil.getEvents(scopeGroupId, curCal, eventType);
 
 results = ListUtil.sort(results, new EventTimeComparator(timeZone, locale));
 
@@ -91,9 +91,9 @@ boolean showPermissionsButton = GroupPermissionUtil.contains(permissionChecker, 
 			<portlet:param name="struts_action" value="/calendar/edit_event" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="backURL" value="<%= currentURL %>" />
-			<portlet:param name="month" value="<%= String.valueOf(selMonth) %>" />
-			<portlet:param name="day" value="<%= String.valueOf(selDay) %>" />
-			<portlet:param name="year" value="<%= String.valueOf(selYear) %>" />
+			<portlet:param name="month" value="<%= String.valueOf(curMonth) %>" />
+			<portlet:param name="day" value="<%= String.valueOf(curDay) %>" />
+			<portlet:param name="year" value="<%= String.valueOf(curYear) %>" />
 		</portlet:renderURL>
 
 		<aui:button onClick="<%= editEventURL %>" value="add-event" />
