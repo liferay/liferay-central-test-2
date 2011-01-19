@@ -15,7 +15,7 @@
 --%>
 
 <%
-int maxDayOfMonth = curCal.getActualMaximum(Calendar.DATE);
+int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
 
 Set data = new HashSet();
 
