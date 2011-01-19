@@ -536,7 +536,8 @@ public class JournalArticleFinderImpl
 			qPos.add(reviewDate_TS);
 			qPos.add(reviewDate_TS);
 
-			return q.list();
+			return (List<JournalArticle>)QueryUtil.list(
+				q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
