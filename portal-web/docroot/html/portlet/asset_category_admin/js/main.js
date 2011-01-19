@@ -122,9 +122,9 @@ AUI().add(
 
 						instance._loadData();
 
-						instance.after('drop:hit', instance._afterDragDrop);
 						instance.after('drop:enter', instance._afterDragEnter);
 						instance.after('drop:exit', instance._afterDragExit);
+						instance.on('drop:hit', instance._afterDragDrop);
 					},
 
 					_addCategory: function(form) {
