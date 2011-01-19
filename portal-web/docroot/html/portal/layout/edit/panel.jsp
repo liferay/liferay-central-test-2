@@ -18,14 +18,10 @@
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
 <%
-UnicodeProperties layoutTypeSettings = null;
+UnicodeProperties typeSettingsProperties = selLayout.getTypeSettingsProperties();
 
-if (selLayout != null) {
-	layoutTypeSettings = selLayout.getTypeSettingsProperties();
-}
-
-String description = layoutTypeSettings.getProperty("description", StringPool.BLANK);
-String panelSelectedPortlets = layoutTypeSettings.getProperty("panelSelectedPortlets", StringPool.BLANK);
+String description = typeSettingsProperties.getProperty("description", StringPool.BLANK);
+String panelSelectedPortlets = typeSettingsProperties.getProperty("panelSelectedPortlets", StringPool.BLANK);
 %>
 
 <aui:input cssClass="lfr-textarea-container" label="description" name="TypeSettingsProperties--description--" type="textarea" value="<%= description %>" wrap="soft" />

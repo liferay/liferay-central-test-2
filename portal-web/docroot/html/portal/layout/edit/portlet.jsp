@@ -16,10 +16,12 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<aui:button name="copyPortletsBtn" value="copy-portlets-from-page" />
+<aui:button name="copyPortletsButton" value="copy-portlets-from-page" />
 
 <div id="<portlet:namespace />copyPortletsFromPage" class="aui-helper-hidden">
-	<p><liferay-ui:message key="the-portlets-in-the-page-x-will-be-replaced-by-the-portlets-in-the-page-you-select-below" arguments="<%= selLayout.getName(locale) %>" /></p>
+	<p>
+		<liferay-ui:message key="the-portlets-in-page-x-will-be-replaced-with-the-portlets-in-the-page-you-select-below" arguments="<%= selLayout.getName(locale) %>" />
+	</p>
 
 	<aui:select label="copy-from-page" name="copyLayoutId" showEmptyOption="<%= true %>">
 
@@ -70,12 +72,12 @@
 	</aui:select>
 
 	<aui:button-row>
-		<aui:button name="copySubmitBtn" value="copy" />
+		<aui:button name="copySubmitButton" value="copy" />
 	</aui:button-row>
 </div>
 
 <aui:script use="aui-dialog">
-	var button = A.one('#<portlet:namespace />copyPortletsBtn');
+	var button = A.one('#<portlet:namespace />copyPortletsButton');
 
 	if (button) {
 		button.on(
@@ -95,7 +97,7 @@
 
 				content.show();
 
-				var submitButton = popup.get('contentBox').one('#<portlet:namespace />copySubmitBtn');
+				var submitButton = popup.get('contentBox').one('#<portlet:namespace />copySubmitButton');
 
 				if (submitButton) {
 					submitButton.on(
@@ -118,6 +120,4 @@
 			}
 		);
 	}
-
-
 </aui:script>

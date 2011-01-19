@@ -20,7 +20,9 @@
 <aui:input name="TypeSettingsProperties--privateLayout--" type="hidden" value="<%= selLayout.isPrivateLayout() %>" />
 
 <%
-long linkToLayoutId = GetterUtil.getLong(selLayout.getTypeSettingsProperties().getProperty("linkToLayoutId", StringPool.BLANK));
+UnicodeProperties typeSettingsProperties = selLayout.getTypeSettingsProperties();
+
+long linkToLayoutId = GetterUtil.getLong(typeSettingsProperties.getProperty("linkToLayoutId", StringPool.BLANK));
 %>
 
 <aui:select label="link-to-layout" name="TypeSettingsProperties--linkToLayoutId--" showEmptyOption="<%= true %>">

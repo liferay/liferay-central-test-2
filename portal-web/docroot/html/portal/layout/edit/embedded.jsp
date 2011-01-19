@@ -17,14 +17,10 @@
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
 <%
-UnicodeProperties layoutTypeSettings = null;
+UnicodeProperties typeSettingsProperties = selLayout.getTypeSettingsProperties();
 
-if (selLayout != null) {
-	layoutTypeSettings = selLayout.getTypeSettingsProperties();
-}
-
-String url = layoutTypeSettings.getProperty("url", StringPool.BLANK);
-String description = layoutTypeSettings.getProperty("description", StringPool.BLANK);
+String url = typeSettingsProperties.getProperty("url", StringPool.BLANK);
+String description = typeSettingsProperties.getProperty("description", StringPool.BLANK);
 %>
 
 <aui:input cssClass="lfr-input-text-container" label="url" name="TypeSettingsProperties--url--" type="text" value="<%= url %>" />

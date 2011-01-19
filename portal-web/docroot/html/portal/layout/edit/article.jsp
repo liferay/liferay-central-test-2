@@ -17,13 +17,9 @@
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
 <%
-UnicodeProperties layoutTypeSettings = null;
+UnicodeProperties typeSettingsProperties = selLayout.getTypeSettingsProperties();
 
-if (selLayout != null) {
-	layoutTypeSettings = selLayout.getTypeSettingsProperties();
-}
-
-String articleId = layoutTypeSettings.getProperty("article-id", StringPool.BLANK);
+String articleId = typeSettingsProperties.getProperty("article-id", StringPool.BLANK);
 %>
 
 <aui:input cssClass="lfr-input-text-container" label="web-content-id" name="TypeSettingsProperties--article-id--" type="text" value="<%= articleId %>" />
