@@ -16,13 +16,14 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="web-content-id" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="TypeSettingsProperties--article-id--" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />" />
-	</td>
-</tr>
-</table>
+<%
+UnicodeProperties layoutTypeSettings = null;
+
+if (selLayout != null) {
+	layoutTypeSettings = selLayout.getTypeSettingsProperties();
+}
+
+String articleId = layoutTypeSettings.getProperty("article-id", StringPool.BLANK);
+%>
+
+<aui:input cssClass="lfr-input-text-container" label="web-content-id" name="TypeSettingsProperties--article-id--" type="text" value="<%= articleId %>" />

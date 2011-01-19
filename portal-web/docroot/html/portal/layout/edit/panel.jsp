@@ -17,24 +17,24 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<textarea class="lfr-textarea" name="TypeSettingsProperties--description--" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
-	</td>
-</tr>
-</table>
+<%
+UnicodeProperties layoutTypeSettings = null;
 
-<br />
+if (selLayout != null) {
+	layoutTypeSettings = selLayout.getTypeSettingsProperties();
+}
+
+String description = layoutTypeSettings.getProperty("description", StringPool.BLANK);
+String panelSelectedPortlets = layoutTypeSettings.getProperty("panelSelectedPortlets", StringPool.BLANK);
+%>
+
+<aui:input cssClass="lfr-textarea-container" label="description" name="TypeSettingsProperties--description--" type="textarea" value="<%= description %>" wrap="soft" />
 
 <div class="portlet-msg-info">
 	<liferay-ui:message key="select-the-applications-that-will-be-available-in-the-panel" />
 </div>
 
-<input id="<portlet:namespace />panelSelectedPortlets" name="TypeSettingsProperties--panelSelectedPortlets--" type="hidden" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />" />
+<aui:input id="panelSelectedPortlets" name="TypeSettingsProperties--panelSelectedPortlets--" type="hidden" value="<%= panelSelectedPortlets %>" />
 
 <%
 String panelTreeKey = "panelSelectedPortletsPanelTree";

@@ -16,60 +16,108 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="copy-page" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />copyLayoutId">
-			<option value=""></option>
+<aui:button name="copyPortletsBtn" value="copy-portlets-from-page" />
 
-			<%
-			List layoutList = (List)request.getAttribute(WebKeys.LAYOUT_LISTER_LIST);
+<div id="<portlet:namespace />copyPortletsFromPage" class="aui-helper-hidden">
+	<p><liferay-ui:message key="the-portlets-in-the-page-x-will-be-replaced-by-the-portlets-in-the-page-you-select-below" arguments="<%= selLayout.getName(locale) %>" /></p>
 
-			for (int i = 0; i < layoutList.size(); i++) {
+	<aui:select label="copy-from-page" name="copyLayoutId" showEmptyOption="<%= true %>">
 
-				// id | parentId | ls | obj id | name | img | depth
+		<%
+		List layoutList = (List)request.getAttribute(WebKeys.LAYOUT_LISTER_LIST);
 
-				String layoutDesc = (String)layoutList.get(i);
+		for (int i = 0; i < layoutList.size(); i++) {
 
-				String[] nodeValues = StringUtil.split(layoutDesc, "|");
+			// id | parentId | ls | obj id | name | img | depth
 
-				long objId = GetterUtil.getLong(nodeValues[3]);
-				String name = nodeValues[4];
+			String layoutDesc = (String)layoutList.get(i);
 
-				int depth = 0;
+			String[] nodeValues = StringUtil.split(layoutDesc, "|");
 
-				if (i != 0) {
-					depth = GetterUtil.getInteger(nodeValues[6]);
-				}
+			long objId = GetterUtil.getLong(nodeValues[3]);
+			String name = nodeValues[4];
 
-				name = HtmlUtil.escape(name);
+			int depth = 0;
 
-				for (int j = 0; j < depth; j++) {
-					name = "-&nbsp;" + name;
-				}
-
-				Layout copiableLayout = null;
-
-				try {
-					copiableLayout = LayoutLocalServiceUtil.getLayout(objId);
-				}
-				catch (Exception e) {
-				}
-
-				if (copiableLayout != null) {
-			%>
-
-					<option value="<%= copiableLayout.getLayoutId() %>"><%= name %></option>
-
-			<%
-				}
+			if (i != 0) {
+				depth = GetterUtil.getInteger(nodeValues[6]);
 			}
-			%>
 
-		</select>
-	</td>
-</tr>
-</table>
+			name = HtmlUtil.escape(name);
+
+			for (int j = 0; j < depth; j++) {
+				name = "-&nbsp;" + name;
+			}
+
+			Layout copiableLayout = null;
+
+			try {
+				copiableLayout = LayoutLocalServiceUtil.getLayout(objId);
+			}
+			catch (Exception e) {
+			}
+
+			if (copiableLayout != null) {
+		%>
+
+				<aui:option disabled="<%= selLayout.getPlid() == copiableLayout.getPlid() %>" label="<%= name %>" value="<%= copiableLayout.getLayoutId() %>" />
+
+		<%
+			}
+		}
+		%>
+
+	</aui:select>
+
+	<aui:button-row>
+		<aui:button name="copySubmitBtn" value="copy" />
+	</aui:button-row>
+</div>
+
+<aui:script use="aui-dialog">
+	var button = A.one('#<portlet:namespace />copyPortletsBtn');
+
+	if (button) {
+		button.on(
+			'click',
+			function(event) {
+				var content = A.one('#<portlet:namespace />copyPortletsFromPage');
+
+				var popup = new A.Dialog(
+					{
+						bodyContent: content,
+						centered: true,
+						title: '<liferay-ui:message key="copy-portlets-from-page" />',
+						modal: true,
+						width: 500
+					}
+				).render();
+
+				content.show();
+
+				var submitButton = popup.get('contentBox').one('#<portlet:namespace />copySubmitBtn');
+
+				if (submitButton) {
+					submitButton.on(
+						'click',
+						function(event) {
+							popup.close();
+
+							var form = A.one('#<portlet:namespace />fm');
+
+							if (form) {
+								form.append(content);
+							}
+
+							<portlet:namespace />savePage();
+						}
+					);
+				}
+
+				event.preventDefault();
+			}
+		);
+	}
+
+
+</aui:script>

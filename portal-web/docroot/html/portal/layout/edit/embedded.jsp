@@ -16,21 +16,17 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="url" />
-	</td>
-	<td>
-		<input class="lfr-input-text" name="TypeSettingsProperties--url--" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(url)" />" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="description" />
-	</td>
-	<td>
-		<textarea class="lfr-textarea" name="TypeSettingsProperties--description--" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
-	</td>
-</tr>
-</table>
+<%
+UnicodeProperties layoutTypeSettings = null;
+
+if (selLayout != null) {
+	layoutTypeSettings = selLayout.getTypeSettingsProperties();
+}
+
+String url = layoutTypeSettings.getProperty("url", StringPool.BLANK);
+String description = layoutTypeSettings.getProperty("description", StringPool.BLANK);
+%>
+
+<aui:input cssClass="lfr-input-text-container" label="url" name="TypeSettingsProperties--url--" type="text" value="<%= url %>" />
+
+<aui:input cssClass="lfr-textarea-container" label="description" name="TypeSettingsProperties--description--" type="textarea" value="<%= description %>" wrap="soft" />
