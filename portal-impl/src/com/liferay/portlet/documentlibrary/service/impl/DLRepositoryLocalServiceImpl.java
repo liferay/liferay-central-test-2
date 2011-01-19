@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -1406,12 +1405,9 @@ public class DLRepositoryLocalServiceImpl
 
 		DLFileVersion dlFileVersion = null;
 
-		String extension = null;
+		String extension = (String)serviceContext.getAttribute("extension");
 
-		if (Validator.isNotNull(sourceFileName)) {
-			extension = FileUtil.getExtension(sourceFileName);
-		}
-		else {
+		if (Validator.isNull(extension)) {
 			extension = dlFileEntry.getExtension();
 		}
 

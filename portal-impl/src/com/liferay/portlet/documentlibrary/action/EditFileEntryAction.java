@@ -282,13 +282,11 @@ public class EditFileEntryAction extends PortletAction {
 				fileEntry.getFileEntryId(), -1);
 		}
 		else {
-			if (Validator.isNull(sourceFileName)) {
-				sourceFileName = title;
+			if (Validator.isNotNull(sourceFileName)) {
+				String extension = FileUtil.getExtension(sourceFileName);
+
+				serviceContext.setAttribute("extension", extension);
 			}
-
-			String extension = FileUtil.getExtension(sourceFileName);
-
-			serviceContext.setAttribute("extension", extension);
 
 			// Update file entry
 
