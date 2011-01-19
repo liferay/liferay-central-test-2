@@ -209,10 +209,10 @@ public class WebServerServlet extends HttpServlet {
 			HttpServletResponse response)
 		throws IOException, ServletException {
 
-		if (! user.isDefaultUser() && user.getUserId() > 0) {
+		if (!user.isDefaultUser()) {
 			PortalUtil.sendError(
-				HttpServletResponse.SC_UNAUTHORIZED, (Exception)t,
-				request, response);
+				HttpServletResponse.SC_UNAUTHORIZED, (Exception)t, request,
+				response);
 
 			return;
 		}
@@ -504,27 +504,26 @@ public class WebServerServlet extends HttpServlet {
 	private static User _getUser(HttpServletRequest request) throws Exception {
 		User user = PortalUtil.getUser(request);
 
-		if (user == null) {
+		if (user != null) {
+			return user;
+		}
+
+		HttpSession session = request.getSession();
+
+		String userIdString = (String)session.getAttribute("j_username");
+		String password = (String)session.getAttribute("j_password");
+
+		if ((userIdString != null) && (password != null)) {
+			long userId = GetterUtil.getLong(userIdString);
+
+			user = UserLocalServiceUtil.getUser(userId);
+		}
+		else {
 			long companyId = PortalUtil.getCompanyId(request);
 
 			Company company = CompanyLocalServiceUtil.getCompany(companyId);
 
 			user = company.getDefaultUser();
-
-			HttpSession session = request.getSession();
-
-			if (session != null) {
-				String userIdString =
-					(String)session.getAttribute("j_username");
-				String passwordString =
-					(String)session.getAttribute("j_password");
-
-				if (userIdString != null && passwordString != null) {
-					long userId = Long.valueOf(userIdString).longValue();
-
-					user = UserLocalServiceUtil.getUser(userId);
-				}
-			}
 		}
 
 		return user;
