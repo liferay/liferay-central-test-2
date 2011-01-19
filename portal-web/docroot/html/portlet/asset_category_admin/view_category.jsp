@@ -22,7 +22,7 @@ long categoryId = ParamUtil.getLong(request, "categoryId");
 
 AssetCategory category = AssetCategoryServiceUtil.getCategory(categoryId);
 
-List<AssetCategoryProperty> properties = AssetCategoryPropertyServiceUtil.getCategoryProperties(category.getCategoryId());
+List<AssetCategoryProperty> categoryProperties = AssetCategoryPropertyServiceUtil.getCategoryProperties(category.getCategoryId());
 %>
 
 <div class="view-category">
@@ -56,15 +56,15 @@ List<AssetCategoryProperty> properties = AssetCategoryPropertyServiceUtil.getCat
 		<label><liferay-ui:message key="description" />:</label> <%= category.getDescription(locale) %>
 	</div>
 
-	<c:if test="<%= !properties.isEmpty() %>">
+	<c:if test="<%= !categoryProperties.isEmpty() %>">
 		<div class="category-field">
 			<label><liferay-ui:message key="properties" />:</label>
 
 			<%
-			for (AssetCategoryProperty property : properties) {
+			for (AssetCategoryProperty categoryProperty : categoryProperties) {
 			%>
 
-				<span class="property-key"><%= property.getKey() %></span>: <span class="property-value"><%= property.getValue() %></span><br />
+				<span class="property-key"><%= categoryProperty.getKey() %></span>: <span class="property-value"><%= categoryProperty.getValue() %></span><br />
 
 			<%
 			}
