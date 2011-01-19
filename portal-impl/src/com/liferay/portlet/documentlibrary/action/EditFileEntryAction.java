@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -266,12 +265,7 @@ public class EditFileEntryAction extends PortletAction {
 		if (cmd.equals(Constants.ADD)) {
 			String extension = FileUtil.getExtension(sourceFileName);
 
-			if (Validator.isNotNull(title)) {
-				if (!title.endsWith(StringPool.PERIOD + extension)) {
-					title += StringPool.PERIOD + extension;
-				}
-			}
-			else {
+			if (Validator.isNull(title)) {
 				title = sourceFileName;
 			}
 

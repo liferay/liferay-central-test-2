@@ -98,10 +98,10 @@ public class DLRepositoryLocalServiceImpl
 		folderId = getFolderId(user.getCompanyId(), folderId);
 		String name = String.valueOf(
 			counterLocalService.increment(DLFileEntry.class.getName()));
-		String extension = FileUtil.getExtension(title);
+		String extension = (String)serviceContext.getAttribute("extension");
 		Date now = new Date();
 
-		validateFile(groupId, folderId, title, is);
+		validateFile(groupId, folderId, title, extension, is);
 
 		long fileEntryId = counterLocalService.increment();
 
@@ -1604,16 +1604,18 @@ public class DLRepositoryLocalServiceImpl
 				sourceFileName, extension, sourceFileName, true, is);
 		}
 
-		dlLocalService.validate(title, true);
+		dlLocalService.validate(title, false);
 
 		validateFile(groupId, folderId, fileEntryId, title);
 	}
 
 	protected void validateFile(
-			long groupId, long folderId, String title, InputStream is)
+			long groupId, long folderId, String title, String extension,
+			InputStream is)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(title, true, is);
+		dlLocalService.validate(
+			title + StringPool.PERIOD + extension, true, is);
 
 		validateFile(groupId, folderId, 0, title);
 	}
