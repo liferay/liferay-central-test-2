@@ -292,9 +292,14 @@ AUI().add(
 						var instance = this;
 
 						var childrenList = A.one(instance._categoryContainerSelector);
+						childrenList.empty();
+
+						if (categories.length <= 0) {
+							return;
+						}
+
 						var boundingBox = Node.create(TPL_VOCABULARY_TREE_CONTAINER);
 
-						childrenList.empty();
 						childrenList.append(boundingBox);
 
 						instance.treeView = new VocabularyTree(
