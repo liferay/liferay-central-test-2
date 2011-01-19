@@ -178,172 +178,180 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 			resultRows = searchContainer.getResultRows();
 
 			for (int j = 0; j < entries.size(); j++) {
-				Element el = (Element)entries.get(j);
+				try {
+					Element el = entries.get(j);
 
-				ResultRow row = new ResultRow(doc, String.valueOf(j), j);
+					ResultRow row = new ResultRow(doc, String.valueOf(j), j);
 
-				// Position
+					// Position
 
-				//row.addText(SearchEntry.DEFAULT_ALIGN, "top", searchContainer.getStart() + j + 1 + StringPool.PERIOD);
+					//row.addText(SearchEntry.DEFAULT_ALIGN, "top", searchContainer.getStart() + j + 1 + StringPool.PERIOD);
 
-				// Summary
+					// Summary
 
-				String entryClassName = el.elementText("entryClassName");
-				String entryTitle = el.elementText("title");
-				String entryHref = el.element("link").attributeValue("href");
-				String summary = el.elementText("summary");
+					String entryClassName = el.elementText("entryClassName");
+					String entryTitle = el.elementText("title");
+					String entryHref = el.element("link").attributeValue("href");
+					String summary = el.elementText("summary");
 
-				long nodeId = WikiUtil.getNodeIdFromUri(entryHref);
+					long nodeId = WikiUtil.getNodeIdFromUri(entryHref);
 
-				if (nodeId > 0) {
-					WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(nodeId, entryTitle);
+					if (nodeId > 0) {
+						WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(nodeId, entryTitle);
 
-					String newSummary = WikiUtil.getSummary(wikiPage);
+						String newSummary = WikiUtil.getSummary(wikiPage);
 
-					if (newSummary != null) {
-						summary = newSummary;
-					}
-				}
-
-				// Group id
-
-				long entryScopeGroupId = GetterUtil.getLong(el.elementText(OpenSearchUtil.getQName("scopeGroupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
-
-				if (Validator.isNotNull(entryScopeGroupId) && (inactiveGroupsCount > 0)) {
-					Group entryGroup = GroupServiceUtil.getGroup(entryScopeGroupId);
-
-					if (entryGroup.isLayout()) {
-						entryGroup = GroupLocalServiceUtil.getGroup(entryGroup.getParentGroupId());
+						if (newSummary != null) {
+							summary = newSummary;
+						}
 					}
 
-					if (!entryGroup.isActive()) {
-						total--;
+					// Group id
 
-						continue;
-					}
-				}
+					long entryScopeGroupId = GetterUtil.getLong(el.elementText(OpenSearchUtil.getQName("scopeGroupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
 
-				String portletId = portlet.getPortletId();
+					if (Validator.isNotNull(entryScopeGroupId) && (inactiveGroupsCount > 0)) {
+						Group entryGroup = GroupServiceUtil.getGroup(entryScopeGroupId);
 
-				if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(DLFileEntryConstants.getClassName()))) {
-					long fileEntryId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_fileEntryId", false));
+						if (entryGroup.isLayout()) {
+							entryGroup = GroupLocalServiceUtil.getGroup(entryGroup.getParentGroupId());
+						}
 
-					FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
+						if (!entryGroup.isActive()) {
+							total--;
 
-					entryTitle = fileEntry.getTitle();
-
-					if (portletId.equals(PortletKeys.SEARCH)) {
-						entryTitle = PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, locale) + " " + CharPool.RAQUO + " " + entryTitle;
+							continue;
+						}
 					}
 
-					if (dlLinkToViewURL) {
-						long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getRepositoryId(), PortletKeys.DOCUMENT_LIBRARY);
+					String portletId = portlet.getPortletId();
 
-						PortletURL viewURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, dlPlid, PortletRequest.RENDER_PHASE);
+					if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(DLFileEntryConstants.getClassName()))) {
+						long fileEntryId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_fileEntryId", false));
 
-						viewURL.setParameter("struts_action", "/document_library/view_file_entry");
-						viewURL.setParameter("redirect", currentURL);
-						viewURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
+						FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 
-						entryHref = viewURL.toString();
-					}
-				}
+						entryTitle = fileEntry.getTitle();
 
-				StringBundler rowSB = new StringBundler();
+						if (portletId.equals(PortletKeys.SEARCH)) {
+							entryTitle = PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, locale) + " " + CharPool.RAQUO + " " + entryTitle;
+						}
 
-				if (portletId.equals(PortletKeys.JOURNAL) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(JournalArticle.class.getName()))) {
-					String articleId = el.elementText(OpenSearchUtil.getQName(Field.ENTRY_CLASS_PK, OpenSearchUtil.LIFERAY_NAMESPACE));
+						if (dlLinkToViewURL) {
+							long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getRepositoryId(), PortletKeys.DOCUMENT_LIBRARY);
 
-					JournalArticle article = JournalArticleLocalServiceUtil.getArticle(entryScopeGroupId, articleId);
+							PortletURL viewURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, dlPlid, PortletRequest.RENDER_PHASE);
 
-					if (DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {
-						total--;
+							viewURL.setParameter("struts_action", "/document_library/view_file_entry");
+							viewURL.setParameter("redirect", currentURL);
+							viewURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
-						continue;
-					}
-
-					rowSB.append("<a class=\"entry-title\" href=\"");
-					rowSB.append(entryHref);
-					rowSB.append("\" target=\"_blank\">");
-				}
-				else {
-					rowSB.append("<a class=\"entry-title\" href=\"");
-					rowSB.append(entryHref);
-					rowSB.append("\">");
-				}
-
-				rowSB.append(StringUtil.highlight(HtmlUtil.escape(entryTitle), queryTerms));
-				rowSB.append("</a>");
-
-				if (Validator.isNotNull(summary)) {
-					rowSB.append("<br />");
-					rowSB.append(StringUtil.highlight(HtmlUtil.escape(summary), queryTerms));
-				}
-
-				rowSB.append("<br />");
-
-				// Tags
-
-				String tagsString = el.elementText("tags");
-
-				tagsString = tagsString.replaceAll("[\\[\\]]","");
-
-				String[] tags = StringUtil.split(tagsString);
-
-				String[] tagsQueryTerms = queryTerms;
-
-				if (StringUtil.startsWith(keywords, Field.ASSET_TAG_NAMES + StringPool.COLON)) {
-					tagsQueryTerms = new String[] {StringUtil.replace(keywords, Field.ASSET_TAG_NAMES + StringPool.COLON, StringPool.BLANK)};
-				}
-
-				for (int k = 0; k < tags.length; k++) {
-					String tag = tags[k];
-
-					String newKeywords = tag.trim();
-
-					if (newKeywords.matches(".+\\s.+")) {
-						newKeywords = StringPool.QUOTE + tag + StringPool.QUOTE;
+							entryHref = viewURL.toString();
+						}
 					}
 
-					PortletURL tagURL = PortletURLUtil.clone(portletURL, renderResponse);
+					StringBundler rowSB = new StringBundler();
 
-					tagURL.setParameter("keywords", Field.ASSET_TAG_NAMES + StringPool.COLON + newKeywords);
-					tagURL.setParameter("format", format);
+					if (portletId.equals(PortletKeys.JOURNAL) || (portletId.equals(PortletKeys.SEARCH) && entryClassName.equals(JournalArticle.class.getName()))) {
+						String articleId = el.elementText(OpenSearchUtil.getQName(Field.ENTRY_CLASS_PK, OpenSearchUtil.LIFERAY_NAMESPACE));
 
-					if (k == 0) {
-						rowSB.append("<div class=\"entry-tags\">");
-						rowSB.append("<div class=\"taglib-asset-tags-summary\">");
+						JournalArticle article = JournalArticleLocalServiceUtil.getArticle(entryScopeGroupId, articleId);
+
+						if (DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0) {
+							total--;
+
+							continue;
+						}
+
+						rowSB.append("<a class=\"entry-title\" href=\"");
+						rowSB.append(entryHref);
+						rowSB.append("\" target=\"_blank\">");
+					}
+					else {
+						rowSB.append("<a class=\"entry-title\" href=\"");
+						rowSB.append(entryHref);
+						rowSB.append("\">");
 					}
 
-					rowSB.append("<a class=\"tag\" href=\"");
-					rowSB.append(tagURL.toString());
-					rowSB.append("\">");
-					rowSB.append(StringUtil.highlight(tag, tagsQueryTerms));
+					rowSB.append(StringUtil.highlight(HtmlUtil.escape(entryTitle), queryTerms));
 					rowSB.append("</a>");
 
-					if ((k + 1) == tags.length) {
-						rowSB.append("</div>");
-						rowSB.append("</div>");
+					if (Validator.isNotNull(summary)) {
+						rowSB.append("<br />");
+						rowSB.append(StringUtil.highlight(HtmlUtil.escape(summary), queryTerms));
 					}
+
+					rowSB.append("<br />");
+
+					// Tags
+
+					String tagsString = el.elementText("tags");
+
+					tagsString = tagsString.replaceAll("[\\[\\]]","");
+
+					String[] tags = StringUtil.split(tagsString);
+
+					String[] tagsQueryTerms = queryTerms;
+
+					if (StringUtil.startsWith(keywords, Field.ASSET_TAG_NAMES + StringPool.COLON)) {
+						tagsQueryTerms = new String[] {StringUtil.replace(keywords, Field.ASSET_TAG_NAMES + StringPool.COLON, StringPool.BLANK)};
+					}
+
+					for (int k = 0; k < tags.length; k++) {
+						String tag = tags[k];
+
+						String newKeywords = tag.trim();
+
+						if (newKeywords.matches(".+\\s.+")) {
+							newKeywords = StringPool.QUOTE + tag + StringPool.QUOTE;
+						}
+
+						PortletURL tagURL = PortletURLUtil.clone(portletURL, renderResponse);
+
+						tagURL.setParameter("keywords", Field.ASSET_TAG_NAMES + StringPool.COLON + newKeywords);
+						tagURL.setParameter("format", format);
+
+						if (k == 0) {
+							rowSB.append("<div class=\"entry-tags\">");
+							rowSB.append("<div class=\"taglib-asset-tags-summary\">");
+						}
+
+						rowSB.append("<a class=\"tag\" href=\"");
+						rowSB.append(tagURL.toString());
+						rowSB.append("\">");
+						rowSB.append(StringUtil.highlight(tag, tagsQueryTerms));
+						rowSB.append("</a>");
+
+						if ((k + 1) == tags.length) {
+							rowSB.append("</div>");
+							rowSB.append("</div>");
+						}
+					}
+
+					row.addText(rowSB.toString());
+
+					// Ratings
+
+					//String ratings = el.elementText("ratings");
+
+					//row.addText(ratings);
+
+					// Score
+
+					//String score = el.elementText(OpenSearchUtil.getQName("score", OpenSearchUtil.RELEVANCE_NAMESPACE));
+
+					//row.addText(score);
+
+					// Add result row
+
+					resultRows.add(row);
 				}
+				catch (Exception e) {
+					_log.error("Error retrieving individual search result " + portlet.getOpenSearchClass(), e);
 
-				row.addText(rowSB.toString());
-
-				// Ratings
-
-				//String ratings = el.elementText("ratings");
-
-				//row.addText(ratings);
-
-				// Score
-
-				//String score = el.elementText(OpenSearchUtil.getQName("score", OpenSearchUtil.RELEVANCE_NAMESPACE));
-
-				//row.addText(score);
-
-				// Add result row
-
-				resultRows.add(row);
+					total--;
+					continue;
+				}
 			}
 
 			searchContainer.setTotal(total);
