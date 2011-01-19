@@ -1319,7 +1319,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>99</portlet-name>
-		<display-name>Asset Tags Admin</display-name>
+		<display-name>Asset Tag Admin</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>

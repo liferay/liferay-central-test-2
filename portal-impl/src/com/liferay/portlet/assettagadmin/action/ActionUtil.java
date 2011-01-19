@@ -29,9 +29,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getTag(HttpServletRequest request)
-		throws Exception {
-
+	public static void getTag(HttpServletRequest request) throws Exception {
 		long tagId = ParamUtil.getLong(request, "tagId");
 
 		AssetTag tag = null;
@@ -43,9 +41,7 @@ public class ActionUtil {
 		request.setAttribute(WebKeys.ASSET_TAG, tag);
 	}
 
-	public static void getTag(PortletRequest portletRequest)
-		throws Exception {
-
+	public static void getTag(PortletRequest portletRequest) throws Exception {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 

@@ -88,16 +88,14 @@ public class EditTagAction extends PortletAction {
 		ActionUtil.getTag(renderRequest);
 
 		return mapping.findForward(
-			getForward(
-				renderRequest, "portlet.asset_tag_admin.edit_tag"));
+			getForward(renderRequest, "portlet.asset_tag_admin.edit_tag"));
 	}
 
 	protected String[] getTagProperties(ActionRequest actionRequest) {
 		int[] tagPropertiesIndexes = StringUtil.split(
 			ParamUtil.getString(actionRequest, "tagPropertiesIndexes"), 0);
 
-		String[] tagProperties =
-			new String[tagPropertiesIndexes.length];
+		String[] tagProperties = new String[tagPropertiesIndexes.length];
 
 		for (int i = 0; i < tagPropertiesIndexes.length; i++) {
 			int tagPropertiesIndex = tagPropertiesIndexes[i];
@@ -116,6 +114,21 @@ public class EditTagAction extends PortletAction {
 		}
 
 		return tagProperties;
+	}
+
+	protected JSONObject mergeTag(ActionRequest actionRequest)
+		throws Exception {
+
+		long fromTagId = ParamUtil.getLong(actionRequest, "fromTagId");
+		long toTagId = ParamUtil.getLong(actionRequest, "toTagId");
+
+		AssetTagServiceUtil.mergeTags(fromTagId, toTagId);
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("tagId", toTagId);
+
+		return jsonObject;
 	}
 
 	protected JSONObject updateTag(ActionRequest actionRequest)
@@ -150,22 +163,6 @@ public class EditTagAction extends PortletAction {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("tagId", tag.getTagId());
-
-		return jsonObject;
-	}
-
-	protected JSONObject mergeTag(ActionRequest actionRequest)
-		throws Exception {
-
-		long fromTagId = ParamUtil.getLong(actionRequest, "fromTagId");
-
-		long toTagId = ParamUtil.getLong(actionRequest, "toTagId");
-
-		AssetTagServiceUtil.mergeTags(fromTagId, toTagId);
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		jsonObject.put("tagId", toTagId);
 
 		return jsonObject;
 	}

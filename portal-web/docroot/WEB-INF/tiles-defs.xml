@@ -185,7 +185,7 @@
 		<put name="portlet_content" value="/portlet/asset_publisher/view_content.jsp" />
 	</definition>
 
-	<!-- Asset Tags Admin -->
+	<!-- Asset Tag Admin -->
 
 	<definition name="portlet.asset_tag_admin" extends="portlet" />
 
