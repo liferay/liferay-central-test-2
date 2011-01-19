@@ -187,31 +187,33 @@ public class LocalizationImpl implements Localization {
 						languageId.equals(priorityLanguageId) ||
 						languageId.equals(requestedLanguageId)) {
 
+						StringBuilder sb = new StringBuilder();
+
 						while (xmlStreamReader.hasNext()) {
 							event = xmlStreamReader.next();
 
 							if (event == XMLStreamConstants.CHARACTERS ||
 								event == XMLStreamConstants.CDATA) {
 
-								String text = xmlStreamReader.getText();
-
-								if (languageId.equals(defaultLanguageId)) {
-									defaultValue = text;
-								}
-
-								if (languageId.equals(priorityLanguageId)) {
-									priorityValue = text;
-								}
-
-								if (languageId.equals(requestedLanguageId)) {
-									value = text;
-								}
-
-								break;
+								sb.append(xmlStreamReader.getText());
 							}
 							else if (event == XMLStreamConstants.END_ELEMENT) {
 								break;
 							}
+						}
+
+						String text = sb.toString();
+
+						if (languageId.equals(defaultLanguageId)) {
+							defaultValue = text;
+						}
+
+						if (languageId.equals(priorityLanguageId)) {
+							priorityValue = text;
+						}
+
+						if (languageId.equals(requestedLanguageId)) {
+							value = text;
 						}
 
 						if (Validator.isNotNull(value)) {
