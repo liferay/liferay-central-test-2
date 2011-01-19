@@ -20,8 +20,6 @@ AUI().add(
 
 		var CSS_COLUMN_WIDTH_CATEGORY_FULL = 'aui-w75';
 
-		var CSS_VOCABULARY_EDIT_CATEGORY = 'vocabulary-content-edit-category';
-
 		var EXCEPTION_NO_SUCH_VOCABULARY = 'NoSuchVocabularyException';
 
 		var EXCEPTION_PRINCIPAL = 'auth.PrincipalException';
@@ -214,7 +212,6 @@ AUI().add(
 
 												instance._selectCategory(categoryId);
 												instance._showLoading(viewContainer);
-												instance._vocabularyContent.addClass(CSS_VOCABULARY_EDIT_CATEGORY);
 												instance._showSection(viewContainer);
 
 												var categoryURL = instance._createURL(CATEGORY, ACTION_VIEW, LIFECYCLE_RENDER);
@@ -245,8 +242,6 @@ AUI().add(
 						var instance = this;
 
 						instance._hideSection(instance._categoryViewContainer);
-
-						instance._vocabularyContent.removeClass(CSS_VOCABULARY_EDIT_CATEGORY);
 
 						if (instance._selectedCategory) {
 							instance._selectedCategory.unselect();
