@@ -3,6 +3,12 @@ Liferay.Util.portletTitleEdit = function() {
 
 AUI().use('aui-io-request', 'aui-live-search', 'aui-overlay-context-panel', 'event-mouseenter', 'node-focusmanager', 'transition',
 	function(A) {
+		var body = A.getBody();
+
+		if (body.hasClass('portal-popup')) {
+			return;
+		}
+
 		var portletInformationEl = A.one('#cpContextPanelTemplate');
 		var portletInformationIcon = A.one('#cpPortletTitleHelpIcon');
 
@@ -21,7 +27,6 @@ AUI().use('aui-io-request', 'aui-live-search', 'aui-overlay-context-panel', 'eve
 			sessionData.doAsUserId = themeDisplay.getDoAsUserIdEncoded();
 		}
 
-		var body = A.getBody();
 		var trim = A.Lang.trim;
 
 		var ATTR_DATA_NODE_STATUS = 'data-nodeStatus';

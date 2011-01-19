@@ -9,6 +9,10 @@ body {
 	font-size: 12px;
 }
 
+body.portal-popup {
+	height: auto;
+}
+
 a {
 	color: #5C85AD;
 }
