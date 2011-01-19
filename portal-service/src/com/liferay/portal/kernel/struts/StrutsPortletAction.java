@@ -28,15 +28,30 @@ import javax.portlet.ResourceResponse;
 public interface StrutsPortletAction {
 
 	public void processAction(
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
+		throws Exception;
+
+	public void processAction(
 			StrutsPortletAction originalStrutsPortletAction,
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
 		throws Exception;
 
 	public String render(
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
+		throws Exception;
+
+	public String render(
 			StrutsPortletAction originalStrutsPortletAction,
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse)
+		throws Exception;
+
+	public void serveResource(
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception;
 
 	public void serveResource(
