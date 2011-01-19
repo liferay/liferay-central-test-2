@@ -872,7 +872,7 @@
 		<header-portlet-css>/html/portlet/asset_tag_admin/css/main.jsp</header-portlet-css>
 		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
 		<footer-portlet-javascript>/html/portlet/asset_tag_admin/js/main.js</footer-portlet-javascript>
-		<css-class-wrapper>portlet-asset-tags-admin</css-class-wrapper>
+		<css-class-wrapper>portlet-asset-tag-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>100</portlet-name>

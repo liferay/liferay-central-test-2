@@ -16,19 +16,19 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-asset-tags-admin .tags-admin-container {
+.portlet-asset-tag-admin .tags-admin-container {
 	border-bottom: 1px solid #D3D7DB;
 	width: 100%;
 }
 
-.portlet-asset-tags-admin .tags-admin-container .results-header {
+.portlet-asset-tag-admin .tags-admin-container .results-header {
 	background: #AEB9BE;
 	font-weight: bold;
 	margin: 2px 0;
 	padding: 5px 10px;
 }
 
-.ie6 .portlet-asset-tags-admin .tags-admin-container {
+.ie6 .portlet-asset-tag-admin .tags-admin-container {
 	width: 300px;
 }
 
@@ -36,88 +36,88 @@
 	background: #AEB9BE;
 }
 
-.portlet-asset-tags-admin .tag-edit-container .results-header {
+.portlet-asset-tag-admin .tag-edit-container .results-header {
 	background: #6F7D83;
 	color: #fff;
 	display: none;
 }
 
-.portlet-asset-tags-admin .tags-admin-content td {
+.portlet-asset-tag-admin .tags-admin-content td {
 	vertical-align: top;
 }
 
-.portlet-asset-tags-admin li.tag-item, .tag-item.portlet-tags-admin-helper {
+.portlet-asset-tag-admin li.tag-item, .tag-item.portlet-tags-admin-helper {
 	border-bottom: 1px solid #D3D7DB;
 	font-weight: bold;
 	list-style: none;
 }
 
-.portlet-asset-tags-admin .tag-item.alt {
+.portlet-asset-tag-admin .tag-item.alt {
 	background: #F0F2F4;
 }
 
-.portlet-asset-tags-admin .tags-admin-container .results-row a, .tag-item.results-row a {
+.portlet-asset-tag-admin .tags-admin-container .results-row a, .tag-item.results-row a {
 	padding: 8px 0 8px 10px;
 }
 
-.portlet-asset-tags-admin .tag-item a, .tag-item.portlet-tags-admin-helper a {
+.portlet-asset-tag-admin .tag-item a, .tag-item.portlet-tags-admin-helper a {
 	display: block;
 	padding-left: 20px;
 }
 
-.portlet-asset-tags-admin .tag-item.selected, .tag-item.portlet-tags-admin-helper {
+.portlet-asset-tag-admin .tag-item.selected, .tag-item.portlet-tags-admin-helper {
 	background: #aeb9be;
 }
 
-.portlet-asset-tags-admin .tag-item.selected a {
+.portlet-asset-tag-admin .tag-item.selected a {
 	color: #000;
 	text-decoration: none;
 }
 
-.portlet-asset-tags-admin .tag-category-item.selected > span {
+.portlet-asset-tag-admin .tag-category-item.selected > span {
 	font-weight: bold;
 }
 
-.portlet-asset-tags-admin .tags .active-area {
+.portlet-asset-tag-admin .tags .active-area {
 	background: #ffc;
 }
 
-.portlet-asset-tags-admin .tags .yui-dd-dragging {
+.portlet-asset-tag-admin .tags .yui-dd-dragging {
 	visibility: hidden;
 }
 
-.portlet-asset-tags-admin .tag-container {
+.portlet-asset-tag-admin .tag-container {
 	border-bottom: 1px #D3D7DB solid;
 	border-left: 1px #D3D7DB solid;
 	border-right: 1px #D3D7DB solid;
 }
 
-.portlet-asset-tags-admin .tags {
+.portlet-asset-tag-admin .tags {
 	height: 300px;
 	overflow: auto;
 	overflow-x: hidden;
 }
 
-.portlet-asset-tags-admin .tags a:hover {
+.portlet-asset-tag-admin .tags a:hover {
 	background: #D3DADD;
 }
 
-.portlet-asset-tags-admin .tags-admin-search-bar {
+.portlet-asset-tag-admin .tags-admin-search-bar {
 	float: left;
 }
 
-.portlet-asset-tags-admin .tags-admin-toolbar {
+.portlet-asset-tag-admin .tags-admin-toolbar {
 	background: #F6F8FB;
 	border-bottom: 1px solid #dedede;
 	overflow: hidden;
 	padding: 5px 0;
 }
 
-.portlet-asset-tags-admin .tags-admin-actions {
+.portlet-asset-tag-admin .tags-admin-actions {
 	float: right;
 }
 
-.portlet-asset-tags-admin .tag-buttons .button {
+.portlet-asset-tag-admin .tag-buttons .button {
 	background: url(<%= themeImagesPath %>/common/page.png) no-repeat scroll 10px 50%;
 	color: #9EA8AD;
 	cursor: pointer;
@@ -129,48 +129,48 @@
 	padding: 5px 5px 5px 30px;
 }
 
-.portlet-asset-tags-admin .tag-buttons .selected {
+.portlet-asset-tag-admin .tag-buttons .selected {
 	background-color: #CFD5D7;
 	color: #0F0F0F;
 }
 
-.portlet-asset-tags-admin .tag-edit-container .tag-edit {
+.portlet-asset-tag-admin .tag-edit-container .tag-edit {
 	border-right: 1px solid #D3D7DB;
 	padding: 5px 5px 10px 10px;
 }
 
-.portlet-asset-tags-admin .tag-editing .tag-edit, .portlet-asset-tags-admin .tag-editing .results-header {
+.portlet-asset-tag-admin .tag-editing .tag-edit, .portlet-asset-tag-admin .tag-editing .results-header {
 	display: block;
 }
 
-.portlet-asset-tags-admin div.tag-close {
+.portlet-asset-tag-admin div.tag-close {
 	text-align: right;
 }
 
-.portlet-asset-tags-admin div.tag-close span {
+.portlet-asset-tag-admin div.tag-close span {
 	cursor: pointer;
 }
 
-.portlet-asset-tags-admin .tag-property-row {
+.portlet-asset-tag-admin .tag-property-row {
 	white-space: nowrap;
 }
 
-.portlet-asset-tags-admin .tag-footer {
+.portlet-asset-tag-admin .tag-footer {
 	border-top: 1px solid #dedede;
 	margin-top: 5px;
 	padding: 10px 0 0;
 }
 
-.portlet-asset-tags-admin .view-tag {
+.portlet-asset-tag-admin .view-tag {
 	margin: 1em;
 }
 
-.portlet-asset-tags-admin .view-tag label {
+.portlet-asset-tag-admin .view-tag label {
 	display: block;
 	font-weight: bold;
 }
 
-.portlet-asset-tags-admin .view-tag .tag-field {
+.portlet-asset-tag-admin .view-tag .tag-field {
 	clear: left;
 	margin: 1em auto;
 }
@@ -205,15 +205,15 @@
 	margin-top: 10px;
 }
 
-.portlet-asset-tags-admin #tag-messages {
+.portlet-asset-tag-admin #tag-messages {
 	margin: 10px;
 }
 
-.portlet-asset-tags-admin .tags-admin-container .tag-name {
+.portlet-asset-tag-admin .tags-admin-container .tag-name {
 	width: 300px;
 }
 
-.portlet-asset-tags-admin #tags-admin-search-input {
+.portlet-asset-tag-admin #tags-admin-search-input {
 	background-image: url(<%= themeImagesPath %>/common/search.png);
 	background-repeat: no-repeat;
 	background-position: 5px 50%;
