@@ -33,16 +33,6 @@ import java.util.List;
  */
 public abstract class LiferayBase {
 
-	public FileEntry toFileEntry(DLFileEntry dlFileEntry) {
-		FileEntry fileEntry = null;
-
-		if (dlFileEntry != null) {
-			fileEntry = new LiferayFileEntry(dlFileEntry);
-		}
-
-		return fileEntry;
-	}
-
 	public List<FileEntry> toFileEntries(List<DLFileEntry> dlFileEntries) {
 		List<FileEntry> fileEntries = new ArrayList<FileEntry>(
 			dlFileEntries.size());
@@ -93,6 +83,16 @@ public abstract class LiferayBase {
 		else {
 			return fileEntriesAndFolders;
 		}
+	}
+
+	public FileEntry toFileEntry(DLFileEntry dlFileEntry) {
+		FileEntry fileEntry = null;
+
+		if (dlFileEntry != null) {
+			fileEntry = new LiferayFileEntry(dlFileEntry);
+		}
+
+		return fileEntry;
 	}
 
 	public FileVersion toFileVersion(DLFileVersion dlFileVersion) {

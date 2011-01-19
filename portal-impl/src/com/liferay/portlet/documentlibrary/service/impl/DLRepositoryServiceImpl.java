@@ -267,16 +267,16 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public DLFolder getFolder(long groupId, long folderId)
 		throws PortalException, SystemException {
 
-		DLFolder folder = null;
-
 		DLFolderPermission.check(
 			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
 
+		DLFolder dlFolder = null;
+
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			folder = dlRepositoryLocalService.getFolder(folderId);
+			dlFolder = dlRepositoryLocalService.getFolder(folderId);
 		}
 
-		return folder;
+		return dlFolder;
 	}
 
 	public DLFolder getFolder(long groupId, long parentFolderId, String name)

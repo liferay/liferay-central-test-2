@@ -84,9 +84,9 @@ public class ActionUtil {
 			WebKeys.THEME_DISPLAY);
 
 		long folderId = ParamUtil.getLong(request, "folderId");
-		long groupId = themeDisplay.getScopeGroupId();
 
-		Folder folder = DLAppServiceUtil.getFolder(groupId, folderId);
+		Folder folder = DLAppServiceUtil.getFolder(
+			themeDisplay.getScopeGroupId(), folderId);
 
 		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER, folder);
 	}
