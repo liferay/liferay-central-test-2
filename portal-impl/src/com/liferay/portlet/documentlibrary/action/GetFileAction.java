@@ -17,13 +17,19 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -33,12 +39,14 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -86,6 +94,11 @@ public class GetFileAction extends PortletAction {
 
 			return null;
 		}
+		catch (PrincipalException pe) {
+			processPrincipalException(pe, request, response);
+
+			return null;
+		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, request, response);
 
@@ -97,6 +110,11 @@ public class GetFileAction extends PortletAction {
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+		HttpServletResponse response = PortalUtil.getHttpServletResponse(
+			actionResponse);
 
 		try {
 			long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
@@ -119,11 +137,6 @@ public class GetFileAction extends PortletAction {
 			long groupId = ParamUtil.getLong(
 				actionRequest, "groupId", themeDisplay.getScopeGroupId());
 
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				actionRequest);
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				actionResponse);
-
 			getFile(
 				fileEntryId, folderId, title, version, fileShortcutId, uuid,
 				groupId, targetExtension, themeDisplay, request, response);
@@ -134,6 +147,9 @@ public class GetFileAction extends PortletAction {
 			PortalUtil.sendError(
 				HttpServletResponse.SC_NOT_FOUND, nsfee, actionRequest,
 				actionResponse);
+		}
+		catch (PrincipalException pe) {
+			processPrincipalException(pe, request, response);
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, actionRequest, actionResponse);
@@ -150,14 +166,10 @@ public class GetFileAction extends PortletAction {
 		FileEntry fileEntry = null;
 
 		if (Validator.isNotNull(uuid) && (groupId > 0)) {
-			try {
-				fileEntry = DLAppServiceUtil.getFileEntryByUuidAndRepositoryId(
-					uuid, groupId);
+			fileEntry = DLAppServiceUtil.getFileEntryByUuidAndRepositoryId(
+				uuid, groupId);
 
-				folderId = fileEntry.getFolderId();
-			}
-			catch (Exception e) {
-			}
+			folderId = fileEntry.getFolderId();
 		}
 
 		if (fileEntryId > 0) {
@@ -234,6 +246,45 @@ public class GetFileAction extends PortletAction {
 
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
+	protected void processPrincipalException(
+			Throwable t, HttpServletRequest request,
+			HttpServletResponse response)
+		throws IOException, ServletException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		long userId = permissionChecker.getUserId();
+
+		User user = null;
+
+		try {
+			user = UserLocalServiceUtil.getUser(userId);
+		}
+		catch (Exception e) {
+		}
+
+		if ((user != null) && !user.isDefaultUser()) {
+			PortalUtil.sendError(
+				HttpServletResponse.SC_UNAUTHORIZED, (Exception)t, request,
+				response);
+
+			return;
+		}
+
+		String redirect =
+			request.getContextPath() + Portal.PATH_MAIN + "/portal/login";
+
+		String currentURL = PortalUtil.getCurrentURL(request);
+
+		redirect = HttpUtil.addParameter(redirect, "redirect", currentURL);
+
+		response.sendRedirect(redirect);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
