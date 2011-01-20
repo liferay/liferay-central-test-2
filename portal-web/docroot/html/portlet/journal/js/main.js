@@ -48,8 +48,8 @@ AUI().add(
 									'</span>' +
 								'</span>' +
 							'</span>' +
-							'{editBtnTemplateHTML}' +
-							'{repeatableBtnTemplateHTML}' +
+							'{editButtonTemplateHTML}' +
+							'{repeatableButtonTemplateHTML}' +
 						'</div>' +
 					'</div>' +
 					'<ul class="folder-droppable"></ul>' +
@@ -621,18 +621,18 @@ AUI().add(
 
 				A.getBody().removeClass('portlet-journal-edit-mode');
 
-				var editStructureBtn = instance.getById('editStructureBtn');
+				var editStructureButton = instance.getById('editStructureButton');
 				var journalComponentList = instance.getById('#journalComponentList');
-				var saveStructureBtn = instance.getById('saveStructureBtn');
+				var saveStructureButton = instance.getById('saveStructureButton');
 
 				instance.closeEditFieldOptions();
 
-				saveStructureBtn.ancestor('.aui-button').hide();
+				saveStructureButton.ancestor('.aui-button').hide();
 				journalComponentList.hide();
 
-				var structureBtnText = Liferay.Language.get('edit');
+				var structureButtonText = Liferay.Language.get('edit');
 
-				editStructureBtn.val(structureBtnText);
+				editStructureButton.val(structureButtonText);
 
 				A.all('input.journal-list-label').attr('disabled', 'disabled');
 
@@ -704,20 +704,20 @@ AUI().add(
 
 				A.getBody().addClass('portlet-journal-edit-mode');
 
-				var editStructureBtn = instance.getById('editStructureBtn');
+				var editStructureButton = instance.getById('editStructureButton');
 				var journalComponentList = instance.getById('#journalComponentList');
-				var saveStructureBtn = instance.getById('saveStructureBtn');
+				var saveStructureButton = instance.getById('saveStructureButton');
 
 				instance.editContainerNormalMode();
 
-				saveStructureBtn.ancestor('.aui-button').show();
+				saveStructureButton.ancestor('.aui-button').show();
 
 				journalComponentList.show();
 
 				var structureTree = instance.getById('#structureTree');
-				var structureBtnText = Liferay.Language.get('stop-editing');
+				var structureButtonText = Liferay.Language.get('stop-editing');
 
-				editStructureBtn.val(structureBtnText);
+				editStructureButton.val(structureButtonText);
 
 				structureTree.all('.journal-list-label').attr('disabled', '');
 
@@ -1450,7 +1450,7 @@ AUI().add(
 						30000
 					);
 
-					instance.getById('selectTemplateBtn').focus();
+					instance.getById('selectTemplateButton').focus();
 				}
 				else {
 					if (!cmd) {
@@ -2218,10 +2218,10 @@ AUI().add(
 				var editButtons = instance.getEditButtons();
 				var repeatableButtons = instance.getRepeatableButtons();
 				var defaultLanguageIdSelect = instance.getById('defaultLanguageIdSelect');
-				var downloadArticleContentBtn = instance.getById('downloadArticleContentBtn');
+				var downloadArticleContentButton = instance.getById('downloadArticleContentButton');
 				var fieldsContainer = instance.getById('journalArticleContainer');
 				var languageIdSelect = instance.getById('languageIdSelect');
-				var previewArticleBtn = instance.getById('previewArticleBtn');
+				var previewArticleButton = instance.getById('previewArticleButton');
 				var publishButton = instance.getById('publishButton');
 				var saveButton = instance.getById('saveButton');
 
@@ -2287,10 +2287,10 @@ AUI().add(
 					);
 				}
 
-				if (downloadArticleContentBtn) {
-					downloadArticleContentBtn.detach('click');
+				if (downloadArticleContentButton) {
+					downloadArticleContentButton.detach('click');
 
-					downloadArticleContentBtn.on(
+					downloadArticleContentButton.on(
 						'click',
 						function() {
 							instance.downloadArticleContent();
@@ -2298,10 +2298,10 @@ AUI().add(
 					);
 				}
 
-				if (previewArticleBtn) {
-					previewArticleBtn.detach('click');
+				if (previewArticleButton) {
+					previewArticleButton.detach('click');
 
-					previewArticleBtn.on(
+					previewArticleButton.on(
 						'click',
 						function() {
 							instance.previewArticle();
@@ -2323,19 +2323,19 @@ AUI().add(
 					}
 				);
 
-				var changeStructureBtn = instance.getById('changeStructureBtn');
-				var changeTemplateBtn = instance.getById('changeTemplateBtn');
-				var editStructureBtn = instance.getById('editStructureBtn');
-				var loadDefaultStructureBtn = instance.getById('loadDefaultStructure');
-				var saveStructureBtn = instance.getById('saveStructureBtn');
+				var changeStructureButton = instance.getById('changeStructureButton');
+				var changeTemplateButton = instance.getById('changeTemplateButton');
+				var editStructureButton = instance.getById('editStructureButton');
+				var loadDefaultStructureButton = instance.getById('loadDefaultStructure');
+				var saveStructureButton = instance.getById('saveStructureButton');
 				var saveStructureTriggers = A.one('.journal-save-structure-trigger');
 
-				changeStructureBtn.detach('click');
-				editStructureBtn.detach('click');
-				saveStructureBtn.detach('click');
+				changeStructureButton.detach('click');
+				editStructureButton.detach('click');
+				saveStructureButton.detach('click');
 				saveStructureTriggers.detach('click');
 
-				changeStructureBtn.on(
+				changeStructureButton.on(
 					'click',
 					function(event) {
 						if (confirm(Liferay.Language.get('selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates'))) {
@@ -2345,10 +2345,10 @@ AUI().add(
 					}
 				);
 
-				if (changeTemplateBtn) {
-					changeTemplateBtn.detach('click');
+				if (changeTemplateButton) {
+					changeTemplateButton.detach('click');
 
-					changeTemplateBtn.on(
+					changeTemplateButton.on(
 						'click',
 						function(event) {
 							if (confirm(Liferay.Language.get('selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates'))) {
@@ -2359,10 +2359,10 @@ AUI().add(
 					);
 				}
 
-				if (loadDefaultStructureBtn) {
-					loadDefaultStructureBtn.detach('click');
+				if (loadDefaultStructureButton) {
+					loadDefaultStructureButton.detach('click');
 
-					loadDefaultStructureBtn.on(
+					loadDefaultStructureButton.on(
 						'click',
 						function() {
 							instance.loadDefaultStructure();
@@ -2370,7 +2370,7 @@ AUI().add(
 					);
 				}
 
-				saveStructureBtn.on(
+				saveStructureButton.on(
 					'click',
 					function() {
 						instance.openSaveStructureDialog();
@@ -2382,13 +2382,13 @@ AUI().add(
 					function(event) {
 						event.preventDefault();
 
-						saveStructureBtn.simulate('click');
+						saveStructureButton.simulate('click');
 					}
 				);
 
 				var body = A.getBody();
 
-				editStructureBtn.on(
+				editStructureButton.on(
 					'click',
 					function(event) {
 						if (body.hasClass('portlet-journal-edit-mode')) {
@@ -3097,11 +3097,11 @@ AUI().add(
 
 							var optionsEditable = instance.get('optionsEditable');
 
-							var editBtnTemplate = instance.getById('editBtnTemplate');
-							var editBtnTemplateHTML = '';
+							var editButtonTemplate = instance.getById('editButtonTemplate');
+							var editButtonTemplateHTML = '';
 
-							if (editBtnTemplate) {
-								editBtnTemplateHTML = editBtnTemplate.html();
+							if (editButtonTemplate) {
+								editButtonTemplateHTML = editButtonTemplate.html();
 							}
 
 							var articleButtonsRowCSSClass = '';
@@ -3110,11 +3110,11 @@ AUI().add(
 								articleButtonsRowCSSClass = 'aui-helper-hidden';
 							}
 
-							var repeatableBtnTemplate = instance.getById('repeatableBtnTemplate');
-							var repeatableBtnTemplateHTML = '';
+							var repeatableButtonTemplate = instance.getById('repeatableButtonTemplate');
+							var repeatableButtonTemplateHTML = '';
 
-							if (repeatableBtnTemplate) {
-								repeatableBtnTemplateHTML = repeatableBtnTemplate.html();
+							if (repeatableButtonTemplate) {
+								repeatableButtonTemplateHTML = repeatableButtonTemplate.html();
 							}
 
 							var fieldType = instance.get('fieldType');
@@ -3126,12 +3126,12 @@ AUI().add(
 								TPL_FIELD_CONTAINER,
 								{
 									articleButtonsRowCSSClass: articleButtonsRowCSSClass,
-									editBtnTemplateHTML: editBtnTemplateHTML,
+									editButtonTemplateHTML: editButtonTemplateHTML,
 									fieldLabel: fieldLabel,
 									localizedLabelLanguage: localizedLabelLanguage,
 									instanceId: randomInstanceId,
 									portletNamespace: instance.portletNamespace,
-									repeatableBtnTemplateHTML: repeatableBtnTemplateHTML,
+									repeatableButtonTemplateHTML: repeatableButtonTemplateHTML,
 									requiredFieldLanguage: requiredFieldLanguage,
 									variableName: variableName,
 									variableNameLanguage: variableNameLanguage

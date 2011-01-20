@@ -260,10 +260,10 @@
 	</aui:fieldset>
 </div>
 
-<div class="aui-html-template" id="<portlet:namespace />editBtnTemplate">
+<div class="aui-html-template" id="<portlet:namespace />editButtonTemplate">
 	<aui:button cssClass="edit-button" value="edit-options" />
 </div>
 
-<div class="aui-html-template" id="<portlet:namespace />repeatableBtnTemplate">
+<div class="aui-html-template" id="<portlet:namespace />repeatableButtonTemplate">
 	<aui:button cssClass="repeatable-button aui-helper-hidden" value="repeat" />
 </div>

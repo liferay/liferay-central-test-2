@@ -66,7 +66,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
 
 	<aui:button-row>
-		<aui:button name="publishBtn" type="submit" value="publish" />
+		<aui:button name="publishButton" type="submit" value="publish" />
 
 		<aui:button onClick="AUI().DialogManager.closeByChild(this);" type="cancel" />
 	</aui:button-row>

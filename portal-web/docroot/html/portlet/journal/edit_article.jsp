@@ -672,11 +672,11 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				</c:if>
 
 				<c:if test="<%= Validator.isNotNull(structureId) %>">
-					<aui:button name="previewArticleBtn" value="preview" />
+					<aui:button name="previewArticleButton" value="preview" />
 				</c:if>
 
 				<c:if test="<%= structure != null %>">
-					<aui:button name="downloadArticleContentBtn" value="download" />
+					<aui:button name="downloadArticleContentButton" value="download" />
 				</c:if>
 
 				<c:if test="<%= (article != null) && !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
