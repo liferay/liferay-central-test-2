@@ -589,11 +589,6 @@
 	width: 350px;
 }
 
-.portlet-journal-edit-mode .journal-article-header-edit, .portlet-journal-edit-mode #journalAbstractPanel, .portlet-journal-edit-mode #journalCategorizationPanel, .portlet-journal-edit-mode #journalSchedulePanel, .portlet-journal-edit-mode .journal-article-button-row, .portlet-journal-edit-mode .panel-page-menu, .portlet-journal-edit-mode .journal-article-permissions, .portlet-journal-edit-mode .repeatable-field-image, .portlet-journal-edit-mode .structure-tree li.structure-field .journal-article-instructions-container, .portlet-journal-edit-mode .structure-tree li.parent-structure-field .journal-article-close, .portlet-journal-edit-mode .structure-tree li.parent-structure-field .journal-delete-field, .portlet-journal-edit-mode .structure-tree li.repeated-field .journal-edit-field-control, .portlet-journal-edit-mode .structure-tree li.repeated-field .journal-delete-field {
+.portlet-journal-edit-mode .journal-article-header-edit, .portlet-journal-edit-mode #journalAbstractPanel, .portlet-journal-edit-mode #journalCategorizationPanel, .portlet-journal-edit-mode #journalSchedulePanel, .portlet-journal-edit-mode .journal-article-button-row, .portlet-journal-edit-mode .journal-article-permissions, .portlet-journal-edit-mode .repeatable-field-image, .portlet-journal-edit-mode .structure-tree li.structure-field .journal-article-instructions-container, .portlet-journal-edit-mode .structure-tree li.parent-structure-field .journal-article-close, .portlet-journal-edit-mode .structure-tree li.parent-structure-field .journal-delete-field, .portlet-journal-edit-mode .structure-tree li.repeated-field .journal-edit-field-control, .portlet-journal-edit-mode .structure-tree li.repeated-field .journal-delete-field {
 	display: none;
-}
-
-.portlet-journal-edit-mode .panel-page-application {
-	float: none;
-	width: 100%;
 }

@@ -2340,6 +2340,7 @@ AUI().add(
 					function(event) {
 						if (confirm(Liferay.Language.get('selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates'))) {
 							var url = event.target.attr('dataChangeStructureUrl');
+
 							instance.openPopupWindow(url, 'ChangeStructure');
 						}
 					}
@@ -2392,9 +2393,11 @@ AUI().add(
 					'click',
 					function(event) {
 						if (body.hasClass('portlet-journal-edit-mode')) {
+							Liferay.reset('controlPanelSidebarHidden');
 							instance.disableEditMode();
 						}
 						else {
+							Liferay.set('controlPanelSidebarHidden', true);
 							instance.enableEditMode();
 						}
 					}

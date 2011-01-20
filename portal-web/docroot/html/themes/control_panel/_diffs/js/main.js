@@ -39,6 +39,10 @@ AUI().use('aui-io-request', 'aui-live-search', 'aui-overlay-context-panel', 'eve
 
 		var CSS_SEARCH_PANEL_ACTIVE = 'search-panel-active';
 
+		var EVENT_DATA_SIDEBAR = {
+			persist: true
+		};
+
 		var SELECTOR_SEARCH_NODES = '#controlPanelMenuAddContentPanelContainer ul li a';
 
 		var TPL_CANCEL_SEARCH_BUTTON = '<a class="cancel-search" href="javascript:;"></a>';
@@ -184,7 +188,7 @@ AUI().use('aui-io-request', 'aui-live-search', 'aui-overlay-context-panel', 'eve
 			_afterHiddenChange: function(event) {
 				var instance = this;
 
-				instance._uiSetHidden(event.newVal);
+				instance._uiSetHidden(event.newVal, event.persist);
 			},
 
 			_bindUI: function() {
@@ -341,7 +345,7 @@ AUI().use('aui-io-request', 'aui-live-search', 'aui-overlay-context-panel', 'eve
 
 				instance._searchPanelInput.selectText();
 
-				Liferay.set('controlPanelSidebarHidden', false);
+				Liferay.set('controlPanelSidebarHidden', false, EVENT_DATA_SIDEBAR);
 			},
 
 			_renderUI: function() {
@@ -383,13 +387,13 @@ AUI().use('aui-io-request', 'aui-live-search', 'aui-overlay-context-panel', 'eve
 			_setVisible: function(event) {
 				var instance = this;
 
-				Liferay.set('controlPanelSidebarHidden', false);
+				Liferay.set('controlPanelSidebarHidden', false, EVENT_DATA_SIDEBAR);
 			},
 
 			_toggleHidden: function(event) {
 				var instance = this;
 
-				Liferay.set('controlPanelSidebarHidden', !Liferay.get('controlPanelSidebarHidden'));
+				Liferay.set('controlPanelSidebarHidden', !Liferay.get('controlPanelSidebarHidden'), EVENT_DATA_SIDEBAR);
 			},
 
 			_togglePanelsAction: function(event) {
@@ -408,7 +412,7 @@ AUI().use('aui-io-request', 'aui-live-search', 'aui-overlay-context-panel', 'eve
 				);
 			},
 
-			_uiSetHidden: function(newVal) {
+			_uiSetHidden: function(newVal, persist) {
 				var instance = this;
 
 				var panelCfg = instance._panelCfg;
@@ -440,12 +444,14 @@ AUI().use('aui-io-request', 'aui-live-search', 'aui-overlay-context-panel', 'eve
 						duration: 0.2
 					},
 					function() {
-						instance._saveData.set(
-							'data',
-							{
-								'control-panel-sidebar-minimized': newVal
-							}
-						).start();
+						if (persist) {
+							instance._saveData.set(
+								'data',
+								{
+									'control-panel-sidebar-minimized': newVal
+								}
+							).start();
+						}
 
 						body.toggleClass(CSS_PANELS_MINIMIZED, newVal);
 
