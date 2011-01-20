@@ -87,9 +87,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return;
 		}
 
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			String[] jobNames = _scheduler.getJobNames(groupName);
 
 			for (String jobName : jobNames) {
@@ -108,10 +108,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return;
 		}
 
-		jobName = fixArgumentMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			SchedulerContext schedulerContext = _scheduler.getContext();
 
 			schedulerContext.remove(getFullName(jobName, groupName));
@@ -144,10 +144,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return null;
 		}
 
-		jobName = fixArgumentMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			JobDetail jobDetail = _scheduler.getJobDetail(
 				jobName, groupName);
 
@@ -249,9 +249,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return null;
 		}
 
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			List<SchedulerResponse> schedulerResponses =
 				new ArrayList<SchedulerResponse>();
 
@@ -278,9 +278,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return;
 		}
 
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			String[] jobNames = _scheduler.getJobNames(groupName);
 
 			for (String jobName : jobNames) {
@@ -305,10 +305,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return;
 		}
 
-		jobName = fixArgumentMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			JobState jobState = getJobState(jobName, groupName);
 
 			if (jobState != null) {
@@ -327,9 +327,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return;
 		}
 
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			String[] jobNames = _scheduler.getJobNames(groupName);
 
 			for (String jobName : jobNames) {
@@ -354,10 +354,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return;
 		}
 
-		jobName = fixArgumentMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			JobState jobState = getJobState(jobName, groupName);
 
 			if (jobState != null) {
@@ -387,7 +387,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 				return;
 			}
 
-			description = fixArgumentMaxLength(
+			description = fixMaxLength(
 				description, DESCRIPTION_MAX_LENGTH);
 
 			if (message == null){
@@ -450,10 +450,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return;
 		}
 
-		jobName = fixArgumentMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			JobState jobState = getJobState(jobName, groupName);
 
 			if (jobState != null) {
@@ -479,9 +479,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return;
 		}
 
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			String[] jobNames = _scheduler.getJobNames(groupName);
 
 			for (String jobName : jobNames) {
@@ -500,10 +500,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return;
 		}
 
-		jobName = fixArgumentMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixArgumentMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
-
 		try {
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
+
 			JobDetail jobDetail = _scheduler.getJobDetail(jobName, groupName);
 
 			if (jobDetail == null) {
@@ -622,7 +622,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 		}
 	}
 
-	protected String fixArgumentMaxLength(String argument, int maxLength) {
+	protected String fixMaxLength(String argument, int maxLength) {
 		if (argument == null) {
 			return null;
 		}
@@ -663,9 +663,9 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			return null;
 		}
 
-		String jobName = fixArgumentMaxLength(
+		String jobName = fixMaxLength(
 			trigger.getJobName(), JOB_NAME_MAX_LENGTH);
-		String groupName = fixArgumentMaxLength(
+		String groupName = fixMaxLength(
 			trigger.getGroupName(), GROUP_NAME_MAX_LENGTH);
 
 		Trigger quartzTrigger = null;
