@@ -19,7 +19,12 @@
 <%@ include file="/html/portal/layout/view/embedded_js.jspf" %>
 
 <div id="iframe">
-	<iframe frameborder="0" height="100%" src="<%= layout.getTypeSettingsProperties().getProperty("url") %>" width="100%" onLoad="resizeIframe();"></iframe>
+
+	<%
+	UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
+	%>
+
+	<iframe frameborder="0" height="100%" src="<%= typeSettingsProperties.getProperty("url") %>" width="100%" onLoad="resizeIframe();"></iframe>
 </div>
 
 <%@ include file="/html/portal/layout/view/common.jspf" %>

@@ -23,6 +23,7 @@ boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLa
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
 String type = BeanParamUtil.getString(selLayout, request, "type");
+UnicodeProperties typeSettingsProperties = selLayout.getTypeSettingsProperties();
 String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 
 String currentLanguageId = LanguageUtil.getLanguageId(request);
@@ -260,7 +261,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 						<td colspan="3">
 
 							<%
-							String queryString = selLayout.getTypeSettingsProperties().getProperty("query-string");
+							String queryString = typeSettingsProperties.getProperty("query-string");
 
 							if (queryString == null) {
 								queryString = StringPool.BLANK;
@@ -310,7 +311,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 				<td>
 
 					<%
-					String curTarget = (String)selLayout.getTypeSettingsProperties().getProperty("target");
+					String curTarget = typeSettingsProperties.getProperty("target");
 
 					if (curTarget == null) {
 						curTarget = StringPool.BLANK;

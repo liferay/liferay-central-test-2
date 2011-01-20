@@ -50,7 +50,9 @@ if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutType
 	RuntimePortletUtil.processTemplate(application, request, response, pageContext, out, ppid, velocityTemplateId, velocityTemplateContent);
 }
 else {
-	String description = layout.getTypeSettingsProperties().getProperty("description");
+	UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
+
+	String description = typeSettingsProperties.getProperty("description");
 
 	if (Validator.isNull(description)) {
 		description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");

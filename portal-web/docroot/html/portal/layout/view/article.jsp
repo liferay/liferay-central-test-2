@@ -17,7 +17,10 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-String articleId = layout.getTypeSettingsProperties().getProperty("article-id");
+UnicodeProperties typeSettingsProperties = layout.getTypeSettingsProperties();
+
+String articleId = typeSettingsProperties.getProperty("article-id");
+
 String languageId = LanguageUtil.getLanguageId(request);
 
 String content = JournalContentUtil.getContent(scopeGroupId, articleId, null, languageId, themeDisplay);

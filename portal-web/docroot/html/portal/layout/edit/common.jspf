@@ -70,8 +70,8 @@
 		<liferay-ui:panel defaultState="closed" extended="<%= true %>" id="layoutRobotsPanel" persistState="<%= true %>" title="robots">
 
 			<%
-			boolean include = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("sitemap-include"), true);
-			String changeFrequency = selLayout.getTypeSettingsProperties().getProperty("sitemap-changefreq", "daily");
+			boolean include = GetterUtil.getBoolean(typeSettingsProperties.getProperty("sitemap-include"), true);
+			String changeFrequency = typeSettingsProperties.getProperty("sitemap-changefreq", "daily");
 			%>
 
 			<table class="lfr-table">
