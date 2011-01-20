@@ -31,11 +31,11 @@ List<AssetTagProperty> tagProperties = AssetTagPropertyServiceUtil.getTagPropert
 
 	<c:if test="<%= tag != null %>">
 		<c:if test="<%= permissionChecker.hasPermission(scopeGroupId, AssetTag.class.getName(), tag.getTagId(), ActionKeys.UPDATE) %>">
-			<aui:button id="editCategoryButton" value="edit" />
+			<aui:button id="editTagButton" value="edit" />
 		</c:if>
 
 		<c:if test="<%= permissionChecker.hasPermission(scopeGroupId, AssetTag.class.getName(), tag.getTagId(), ActionKeys.DELETE) %>">
-			<aui:button id="deleteCategoryButton" value="delete" />
+			<aui:button id="deleteTagButton" value="delete" />
 		</c:if>
 
 		<c:if test="<%= permissionChecker.hasPermission(scopeGroupId, AssetTag.class.getName(), tag.getTagId(), ActionKeys.PERMISSIONS) %>">
