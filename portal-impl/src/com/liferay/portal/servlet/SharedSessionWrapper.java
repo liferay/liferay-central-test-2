@@ -51,7 +51,9 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public Object getAttribute(String name) {
-		return getSessionDelegate(name).getAttribute(name);
+		HttpSession session = getSessionDelegate(name);
+
+		return session.getAttribute(name);
 	}
 
 	public Enumeration<String> getAttributeNames() {
@@ -80,30 +82,42 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public long getCreationTime() {
-		return getSessionDelegate().getCreationTime();
+		HttpSession session = getSessionDelegate();
+
+		return session.getCreationTime();
 	}
 
 	public String getId() {
-		return getSessionDelegate().getId();
+		HttpSession session = getSessionDelegate();
+
+		return session.getId();
 	}
 
 	public long getLastAccessedTime() {
-		return getSessionDelegate().getLastAccessedTime();
+		HttpSession session = getSessionDelegate();
+
+		return session.getLastAccessedTime();
 	}
 
 	public int getMaxInactiveInterval() {
-		return getSessionDelegate().getMaxInactiveInterval();
+		HttpSession session = getSessionDelegate();
+
+		return session.getMaxInactiveInterval();
 	}
 
 	public ServletContext getServletContext() {
-		return getSessionDelegate().getServletContext();
+		HttpSession session = getSessionDelegate();
+
+		return session.getServletContext();
 	}
 
 	/**
 	 * @deprecated
 	 */
 	public javax.servlet.http.HttpSessionContext getSessionContext() {
-		return getSessionDelegate().getSessionContext();
+		HttpSession session = getSessionDelegate();
+
+		return session.getSessionContext();
 	}
 
 	public Object getValue(String name) {
@@ -117,11 +131,15 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void invalidate() {
-		getSessionDelegate().invalidate();
+		HttpSession session = getSessionDelegate();
+
+		session.invalidate();
 	}
 
 	public boolean isNew() {
-		return getSessionDelegate().isNew();
+		HttpSession session = getSessionDelegate();
+
+		return session.isNew();
 	}
 
 	public void putValue(String name, Object value) {
@@ -129,7 +147,9 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void removeAttribute(String name) {
-		getSessionDelegate(name).removeAttribute(name);
+		HttpSession session = getSessionDelegate(name);
+
+		session.removeAttribute(name);
 	}
 
 	public void removeValue(String name) {
@@ -137,11 +157,25 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public void setAttribute(String name, Object value) {
-		getSessionDelegate(name).setAttribute(name, value);
+		HttpSession session = getSessionDelegate(name);
+
+		session.setAttribute(name, value);
 	}
 
 	public void setMaxInactiveInterval(int maxInactiveInterval) {
-		getSessionDelegate().setMaxInactiveInterval(maxInactiveInterval);
+		HttpSession session = getSessionDelegate();
+
+		session.setMaxInactiveInterval(maxInactiveInterval);
+	}
+
+	protected boolean containsSharedAttribute(String name) {
+		for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
+			if (name.startsWith(sharedName)) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	protected HttpSession getSessionDelegate() {
@@ -167,25 +201,11 @@ public class SharedSessionWrapper implements HttpSession {
 		else {
 			return _portletSession;
 		}
-
-	}
-
-	protected boolean containsSharedAttribute(String name) {
-		for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
-			if (name.startsWith(sharedName)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SharedSessionWrapper.class);
 
 	private static Map<String, String> _sharedSessionAttributesExcludes;
-
-	private HttpSession _portalSession;
-	private HttpSession _portletSession;
 
 	static {
 		_sharedSessionAttributesExcludes = new HashMap<String, String>();
@@ -194,5 +214,8 @@ public class SharedSessionWrapper implements HttpSession {
 			_sharedSessionAttributesExcludes.put(name, name);
 		}
 	}
+
+	private HttpSession _portalSession;
+	private HttpSession _portletSession;
 
 }
