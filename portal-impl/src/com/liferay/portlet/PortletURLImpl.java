@@ -735,9 +735,8 @@ public class PortletURLImpl
 		String namespace = getNamespace();
 
 		if (!PortalUtil.isReservedParameter(name) &&
-			!name.startsWith(
-				PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
-				!name.startsWith(namespace)) {
+			!name.startsWith(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
+			!name.startsWith(namespace)) {
 
 			sb.append(namespace);
 		}
