@@ -28,7 +28,7 @@ boolean showAllPotentialWeeks = GetterUtil.getBoolean((String)request.getAttribu
 Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 selCal.set(Calendar.MONTH, month);
-selCal.set(Calendar.DATE, day);
+selCal.set(Calendar.DATE, day == 0 ? 1 : day);
 selCal.set(Calendar.YEAR, year);
 
 int selMonth = selCal.get(Calendar.MONTH);
@@ -41,11 +41,9 @@ selCal.set(Calendar.DATE, 1);
 int dayOfWeek = selCal.get(Calendar.DAY_OF_WEEK);
 selCal.set(Calendar.DATE, selDay);
 
-Calendar curCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-int curMonth = curCal.get(Calendar.MONTH);
-int curDay = curCal.get(Calendar.DATE);
-int curYear = curCal.get(Calendar.YEAR);
+if (day == 0) {
+	selDay = 0;
+}
 
 Calendar prevCal = (Calendar)selCal.clone();
 
@@ -152,10 +150,7 @@ int weekNumber = 1;
 
 			String className = "";
 
-			if ((selMonth == curMonth) &&
-				(i == curDay) &&
-				(selYear == curYear)) {
-
+			if (i == selDay) {
 				className = "calendar-current-day portlet-section-selected";
 			}
 

@@ -120,11 +120,17 @@
 					data.add(new Integer(i));
 				}
 			}
+
+			int day = 0;
+
+			if ((selYear == year) && (selMonth == month)) {
+				day = selDay;
+			}
 			%>
 
 			<liferay-ui:calendar
 				month="<%= month %>"
-				day="<%= 1 %>"
+				day="<%= day %>"
 				year="<%= year %>"
 				headerPattern="MMMM"
 				data="<%= data %>"
