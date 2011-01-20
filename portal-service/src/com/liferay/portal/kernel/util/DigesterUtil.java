@@ -28,6 +28,14 @@ public class DigesterUtil {
 		return getDigester().digest(algorithm, text);
 	}
 
+	public static String digestBase64(String text) {
+		return getDigester().digestBase64(text);
+	}
+
+	public static String digestBase64(String algorithm, String... text) {
+		return getDigester().digestBase64(algorithm, text);
+	}
+
 	public static String digestHex(String text) {
 		return getDigester().digestHex(text);
 	}

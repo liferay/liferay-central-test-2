@@ -39,15 +39,22 @@ public class DigesterImpl implements Digester {
 	}
 
 	public String digest(String algorithm, String... text) {
-
 		if (_BASE_64) {
-			byte[] bytes = digestRaw(algorithm, text);
-
-			return Base64.encode(bytes);
+			return digestBase64(algorithm, text);
 		}
 		else {
 			return digestHex(algorithm, text);
 		}
+	}
+
+	public String digestBase64(String text) {
+		return digestBase64(Digester.DEFAULT_ALGORITHM, text);
+	}
+
+	public String digestBase64(String algorithm, String... text) {
+		byte[] bytes = digestRaw(algorithm, text);
+
+		return Base64.encode(bytes);
 	}
 
 	public String digestHex(String text) {

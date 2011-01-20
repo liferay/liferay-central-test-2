@@ -32,6 +32,10 @@ public interface Digester {
 
 	public String digest(String algorithm, String... text);
 
+	public String digestBase64(String text);
+
+	public String digestBase64(String algorithm, String... text);
+
 	public String digestHex(String text);
 
 	public String digestHex(String algorithm, String... text);
