@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.freemarker.JournalTemplateLoader;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
@@ -36,7 +35,6 @@ import com.liferay.util.ContentUtil;
 import com.liferay.util.PwdGenerator;
 
 import freemarker.core.ParseException;
-
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
@@ -110,9 +108,32 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 					freeMarkerTemplateId, script, freeMarkerContext,
 					unsyncStringWriter);
 			}
-			catch (SystemException se) {
-				if (se.getCause() instanceof TemplateException) {
-					TemplateException te = (TemplateException)se.getCause();
+			catch (Exception e) {
+				if (e instanceof ParseException) {
+					ParseException pe = (ParseException)e;
+
+					freeMarkerContext.put("exception", pe.getMessage());
+					freeMarkerContext.put("script", script);
+
+					freeMarkerContext.put("column", new Integer(
+						pe.getColumnNumber()));
+					freeMarkerContext.put("line", new Integer(
+						pe.getLineNumber()));
+
+					String freeMarkerTemplateId =
+						PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
+					String freemarkerTemplateContent =
+						ContentUtil.get(
+							PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
+
+					unsyncStringWriter = new UnsyncStringWriter();
+
+					load = FreeMarkerEngineUtil.mergeTemplate(
+						freeMarkerTemplateId, freemarkerTemplateContent,
+						freeMarkerContext, unsyncStringWriter);
+				}
+				if (e instanceof TemplateException) {
+					TemplateException te = (TemplateException)e;
 
 					freeMarkerContext.put("exception", te.getMessage());
 					freeMarkerContext.put("script", script);
@@ -130,29 +151,8 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 						freeMarkerContext, unsyncStringWriter);
 				}
 				else {
-					throw se;
+					throw e;
 				}
-			}
-			catch (ParseException pe) {
-				freeMarkerContext.put("exception", pe.getMessage());
-				freeMarkerContext.put("script", script);
-
-				freeMarkerContext.put("column", new Integer(
-					pe.getColumnNumber()));
-				freeMarkerContext.put("line", new Integer(
-					pe.getLineNumber()));
-
-				String freeMarkerTemplateId =
-					PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
-				String freemarkerTemplateContent =
-					ContentUtil.get(
-						PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER);
-
-				unsyncStringWriter = new UnsyncStringWriter();
-
-				load = FreeMarkerEngineUtil.mergeTemplate(
-					freeMarkerTemplateId, freemarkerTemplateContent,
-					freeMarkerContext, unsyncStringWriter);
 			}
 		}
 		catch (Exception e) {
