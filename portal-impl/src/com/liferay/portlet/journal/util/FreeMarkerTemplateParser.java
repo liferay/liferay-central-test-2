@@ -35,6 +35,7 @@ import com.liferay.util.ContentUtil;
 import com.liferay.util.PwdGenerator;
 
 import freemarker.core.ParseException;
+
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
@@ -112,13 +113,10 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 				if (e instanceof ParseException) {
 					ParseException pe = (ParseException)e;
 
+					freeMarkerContext.put("column", pe.getColumnNumber());
 					freeMarkerContext.put("exception", pe.getMessage());
+					freeMarkerContext.put("line", pe.getLineNumber());
 					freeMarkerContext.put("script", script);
-
-					freeMarkerContext.put("column", new Integer(
-						pe.getColumnNumber()));
-					freeMarkerContext.put("line", new Integer(
-						pe.getLineNumber()));
 
 					String freeMarkerTemplateId =
 						PropsValues.JOURNAL_ERROR_TEMPLATE_FREEMARKER;
@@ -132,7 +130,7 @@ public class FreeMarkerTemplateParser extends VelocityTemplateParser {
 						freeMarkerTemplateId, freemarkerTemplateContent,
 						freeMarkerContext, unsyncStringWriter);
 				}
-				if (e instanceof TemplateException) {
+				else if (e instanceof TemplateException) {
 					TemplateException te = (TemplateException)e;
 
 					freeMarkerContext.put("exception", te.getMessage());
