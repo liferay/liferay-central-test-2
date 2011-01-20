@@ -421,8 +421,11 @@ public class LayoutImporter {
 
 			String scopeLayoutUuid = GetterUtil.getString(
 				portletElement.attributeValue("scope-layout-uuid"));
+			String scopeType = GetterUtil.getString(
+				portletElement.attributeValue("scope-type"));
 
 			context.setScopeLayoutUuid(scopeLayoutUuid);
+			context.setScopeType(scopeType);
 
 			// Portlet data
 

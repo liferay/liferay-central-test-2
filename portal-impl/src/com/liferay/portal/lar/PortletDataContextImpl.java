@@ -571,6 +571,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _scopeLayoutUuid;
 	}
 
+	public String getScopeType() {
+		return _scopeType;
+	}
+
 	public long getSourceGroupId() {
 		return _sourceGroupId;
 	}
@@ -996,6 +1000,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_scopeLayoutUuid = scopeLayoutUuid;
 	}
 
+	public void setScopeType(String scopeType) {
+		_scopeType = scopeType;
+	}
+
 	public void setSourceGroupId(long sourceGroupId) {
 		_sourceGroupId = sourceGroupId;
 	}
@@ -1141,6 +1149,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		new HashMap<String, List<RatingsEntry>>();
 	private long _scopeGroupId;
 	private String _scopeLayoutUuid;
+	private String _scopeType;
 	private long _sourceGroupId;
 	private Date _startDate;
 	private UserIdStrategy _userIdStrategy;
