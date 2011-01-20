@@ -46,6 +46,34 @@ public class LocalizationImplTest extends BaseTestCase {
 		_germanId = LocaleUtil.toLanguageId(_german);
 	}
 
+	public void testChunkedText() {
+		StringBundler sb = new StringBundler();
+
+		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
+
+		sb.append("<root available-locales=\"en_US,es_ES\" ");
+		sb.append("default-locale=\"en_US\">");
+		sb.append("<static-content language-id=\"es_ES\">");
+		sb.append("foo&amp;bar");
+		sb.append("</static-content>");
+		sb.append("<static-content language-id=\"en_US\">");
+		sb.append("<![CDATA[Example in English]]>");
+		sb.append("</static-content>");
+		sb.append("</root>");
+
+		String translation = LocalizationUtil.getLocalization(
+			sb.toString(), "es_ES");
+
+		assertNotNull(translation);
+		assertEquals("foo&bar", translation);
+		assertEquals(7, translation.length());
+
+		translation = LocalizationUtil.getLocalization(sb.toString(), "en_US");
+
+		assertNotNull(translation);
+		assertEquals(18, translation.length());
+	}
+
 	public void testLocalizationsXML() {
 		String xml = StringPool.BLANK;
 
@@ -59,7 +87,6 @@ public class LocalizationImplTest extends BaseTestCase {
 		assertEquals(
 			_germanHello, LocalizationUtil.getLocalization(xml, _germanId));
 	}
-
 
 	public void testLongTranslationText() {
 		StringBundler sb = new StringBundler();
@@ -149,35 +176,6 @@ public class LocalizationImplTest extends BaseTestCase {
 			_germanHello,
 			LocalizationUtil.getPreferencesValue(
 				preferences, "greeting", _germanId));
-	}
-
-	public void testTruncationText() {
-		StringBundler sb = new StringBundler();
-
-		sb.append("<?xml version='1.0' encoding='UTF-8'?>");
-
-		sb.append("<root available-locales=\"en_US,es_ES\" ");
-		sb.append("default-locale=\"en_US\">");
-		sb.append("<static-content language-id=\"es_ES\">");
-		sb.append("foo&amp;bar");
-		sb.append("</static-content>");
-		sb.append("<static-content language-id=\"en_US\">");
-		sb.append("<![CDATA[Example in English]]>");
-		sb.append("</static-content>");
-		sb.append("</root>");
-
-		String translation = LocalizationUtil.getLocalization(
-			sb.toString(), "es_ES");
-
-		assertNotNull(translation);
-		assertEquals("foo&bar", translation);
-		assertEquals(7, translation.length());
-
-		translation = LocalizationUtil.getLocalization(sb.toString(), "en_US");
-
-		assertNotNull(translation);
-		assertEquals(18, translation.length());
-
 	}
 
 	private Locale _english;
