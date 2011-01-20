@@ -153,8 +153,7 @@ public class PortletPermissionImpl implements PortletPermission {
 			primKey = getPrimaryKey(plid, portletId);
 
 			Boolean hasPermission = StagingPermissionUtil.hasPermission(
-				permissionChecker, groupId, name, groupId,
-				name, actionId);
+				permissionChecker, groupId, name, groupId, name, actionId);
 
 			if (hasPermission != null) {
 				return hasPermission.booleanValue();
