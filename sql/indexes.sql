@@ -624,6 +624,9 @@ create index IX_887A2C95 on UserGroupRole (roleId);
 create index IX_887BE56A on UserGroupRole (userId);
 create index IX_4D040680 on UserGroupRole (userId, groupId);
 
+create index IX_31FB0B08 on UserGroups_Teams (teamId);
+create index IX_7F187E63 on UserGroups_Teams (userGroupId);
+
 create unique index IX_41A32E0D on UserIdMapper (type_, externalUserId);
 create index IX_E60EA987 on UserIdMapper (userId);
 create unique index IX_D1C44A6E on UserIdMapper (userId, type_);

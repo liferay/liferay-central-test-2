@@ -47,6 +47,9 @@ public class TeamFinderImpl
 	public static String FIND_BY_G_N_D =
 		TeamFinder.class.getName() + ".findByG_N_D";
 
+	public static String FIND_BY_U_G =
+		TeamFinder.class.getName() + ".findByU_G";
+
 	public static String JOIN_BY_USERS_TEAMS =
 		TeamFinder.class.getName() + ".joinByUsersTeams";
 
@@ -133,6 +136,36 @@ public class TeamFinderImpl
 			qPos.add(name);
 			qPos.add(description);
 			qPos.add(description);
+
+			return (List<Team>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Team> findByU_G(
+			long userId, long groupId, int start, int end)
+		throws SystemException{
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_U_G);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Team", TeamImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(userId);
 
 			return (List<Team>)QueryUtil.list(q, getDialect(), start, end);
 		}
@@ -251,5 +284,4 @@ public class TeamFinderImpl
 			}
 		}
 	}
-
 }

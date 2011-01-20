@@ -91,6 +91,14 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userGroup;
 	}
 
+	public void addTeamUserGroups(long teamId, long[] userGroupIds)
+		throws PortalException, SystemException {
+
+		teamPersistence.addUserGroups(teamId, userGroupIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void clearUserUserGroups(long userId) throws SystemException {
 		userPersistence.clearUserGroups(userId);
 
@@ -238,6 +246,12 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return groupPersistence.containsUserGroup(groupId, userGroupId);
 	}
 
+	public boolean hasTeamUserGroup(long teamId, long userGroupId)
+		throws SystemException {
+
+		return teamPersistence.containsUserGroup(teamId, userGroupId);
+	}
+
 	public List<UserGroup> search(
 			long companyId, String name, String description,
 			LinkedHashMap<String, Object> params, int start, int end,
@@ -277,7 +291,17 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		userGroupGroupRoleLocalService.deleteUserGroupGroupRoles(
 			userGroupIds, groupId);
 
+		teamLocalService.unsetGroupTeamUserGroups(groupId, userGroupIds);
+
 		groupPersistence.removeUserGroups(groupId, userGroupIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void unsetTeamUserGroups(long teamId, long[] userGroupIds)
+		throws PortalException, SystemException {
+
+		teamPersistence.removeUserGroups(teamId, userGroupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -421,5 +445,4 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		catch (NoSuchUserGroupException nsuge) {
 		}
 	}
-
 }
