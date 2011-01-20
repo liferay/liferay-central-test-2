@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.staging.permission.StagingPermissionUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -150,6 +151,14 @@ public class PortletPermissionImpl implements PortletPermission {
 			groupId = layout.getGroupId();
 			name = PortletConstants.getRootPortletId(portletId);
 			primKey = getPrimaryKey(plid, portletId);
+
+			Boolean hasPermission = StagingPermissionUtil.hasPermission(
+				permissionChecker, groupId, name, groupId,
+				name, actionId);
+
+			if (hasPermission != null) {
+				return hasPermission.booleanValue();
+			}
 
 			if ((layout.isPrivateLayout() &&
 				 !PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) ||
