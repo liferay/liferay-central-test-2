@@ -23,6 +23,9 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
@@ -59,7 +62,7 @@ public class LiferayLocalRepository
 			userId, getGroupId(), toFolderId(folderId), title, description,
 			changeLog, is, size, serviceContext);
 
-		return toFileEntry(dlFileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public Folder addFolder(
@@ -71,7 +74,7 @@ public class LiferayLocalRepository
 			userId, getGroupId(), toFolderId(parentFolderId), title,
 			description, serviceContext);
 
-		return toFolder(dlFolder);
+		return new LiferayFolder(dlFolder);
 	}
 
 	public void addRepository(
@@ -137,7 +140,7 @@ public class LiferayLocalRepository
 		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
 			fileEntryId);
 
-		return toFileEntry(dlFileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public FileEntry getFileEntry(long folderId, String title)
@@ -146,7 +149,7 @@ public class LiferayLocalRepository
 		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
 			getGroupId(), toFolderId(folderId), title);
 
-		return toFileEntry(dlFileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public FileEntry getFileEntryByUuid(String uuid)
@@ -156,7 +159,7 @@ public class LiferayLocalRepository
 			DLRepositoryLocalServiceUtil.getFileEntryByUuidAndGroupId(
 				uuid, getGroupId());
 
-		return toFileEntry(dlFileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public FileVersion getFileVersion(long fileVersionId)
@@ -165,7 +168,7 @@ public class LiferayLocalRepository
 		DLFileVersion dlFileVersion =
 			DLRepositoryLocalServiceUtil.getFileVersion(fileVersionId);
 
-		return toFileVersion(dlFileVersion);
+		return new LiferayFileVersion(dlFileVersion);
 	}
 
 	public Folder getFolder(long folderId)
@@ -173,7 +176,7 @@ public class LiferayLocalRepository
 
 		DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(folderId);
 
-		return toFolder(dlFolder);
+		return new LiferayFolder(dlFolder);
 	}
 
 	public Folder getFolder(long parentFolderId, String title)
@@ -182,7 +185,7 @@ public class LiferayLocalRepository
 		DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
 			getGroupId(), toFolderId(parentFolderId), title);
 
-		return toFolder(dlFolder);
+		return new LiferayFolder(dlFolder);
 	}
 
 	public List<Folder> getFolders(long parentFolderId, int start, int end)
@@ -271,7 +274,7 @@ public class LiferayLocalRepository
 		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.moveFileEntry(
 			userId, fileEntryId, toFolderId(newFolderId), serviceContext);
 
-		return toFileEntry(dlFileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public void updateAsset(
@@ -297,7 +300,7 @@ public class LiferayLocalRepository
 			userId, fileEntryId, sourceFileName, title, description, changeLog,
 			majorVersion, is, size, serviceContext);
 
-		return toFileEntry(dlFileEntry);
+		return new LiferayFileEntry(dlFileEntry);
 	}
 
 	public Folder updateFolder(
@@ -309,7 +312,7 @@ public class LiferayLocalRepository
 			toFolderId(folderId), toFolderId(parentFolderId), title,
 			description, serviceContext);
 
-		return toFolder(dlFolder);
+		return new LiferayFolder(dlFolder);
 	}
 
 	public UnicodeProperties updateRepository(

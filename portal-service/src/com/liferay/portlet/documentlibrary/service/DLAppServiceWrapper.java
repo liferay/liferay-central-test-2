@@ -212,10 +212,10 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public com.liferay.portal.kernel.repository.model.Folder getFolder(
-		long repositoryId, long folderId)
+		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.getFolder(repositoryId, folderId);
+		return _dlAppService.getFolder(folderId);
 	}
 
 	public com.liferay.portal.kernel.repository.model.Folder getFolder(

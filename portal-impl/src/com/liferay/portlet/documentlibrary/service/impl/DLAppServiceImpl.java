@@ -280,10 +280,10 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return dlFileShortcutService.getFileShortcut(fileShortcutId);
 	}
 
-	public Folder getFolder(long repositoryId, long folderId)
+	public Folder getFolder(long folderId)
 		throws PortalException, SystemException {
 
-		Repository repository = getRepository(repositoryId);
+		Repository repository = getRepository(folderId, 0, 0);
 
 		return repository.getFolder(folderId);
 	}

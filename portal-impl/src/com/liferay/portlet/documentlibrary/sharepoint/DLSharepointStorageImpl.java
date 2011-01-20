@@ -145,7 +145,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		long folderId = getLastFolderId(
 			groupId, folderPath, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		Folder folder = DLAppServiceUtil.getFolder(groupId, folderId);
+		Folder folder = DLAppServiceUtil.getFolder(folderId);
 
 		return getFolderTree(folder, parentFolderPath);
 	}
@@ -212,7 +212,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 				groupId, parentFolderPath,
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-			folder = DLAppServiceUtil.getFolder(groupId, parentFolderId);
+			folder = DLAppServiceUtil.getFolder(parentFolderId);
 		}
 		catch (Exception e1) {
 			if (e1 instanceof NoSuchFolderException) {
@@ -345,7 +345,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 				groupId, parentFolderPath,
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-			folder = DLAppServiceUtil.getFolder(groupId, parentFolderId);
+			folder = DLAppServiceUtil.getFolder(parentFolderId);
 		}
 		catch (Exception e1) {
 			if (e1 instanceof NoSuchFolderException) {
