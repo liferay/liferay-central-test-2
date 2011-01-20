@@ -49,13 +49,13 @@
 
 			<div class="structure-controls">
 				<span class="structure-buttons">
-					<aui:button cssClass="save-structure-button aui-helper-hidden" name="saveStructureButton" value="save" />
+					<aui:button cssClass="save-structure-button aui-helper-hidden" name="saveStructureBtn" value="save" />
 
-					<aui:button cssClass="edit-structure-button" name="editStructureButton" value="edit" />
+					<aui:button cssClass="edit-structure-button" name="editStructureBtn" value="edit" />
 				</span>
 
 				<span class="structure-links">
-					<a dataChangeStructureUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" /></portlet:renderURL>" href="javascript:;" id="<portlet:namespace />changeStructureButton">
+					<a dataChangeStructureUrl="<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(themeDisplay.getParentGroupId()) %>" /></portlet:renderURL>" href="javascript:;" id="<portlet:namespace />changeStructureBtn">
 						<liferay-ui:message key="choose" />
 					</a>
 				</span>
@@ -139,7 +139,7 @@
 
 							<div id="selectTemplateMessage"></div>
 
-							<aui:button name="selectTemplateButton" onClick='<%= renderResponse.getNamespace() + "openTemplateSelector();" %>' value="select" />
+							<aui:button name="selectTemplateBtn" onClick='<%= renderResponse.getNamespace() + "openTemplateSelector();" %>' value="select" />
 						</c:when>
 						<c:otherwise>
 							<aui:field-wrapper label="template">
