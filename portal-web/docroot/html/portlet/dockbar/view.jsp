@@ -70,10 +70,14 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 												<%
 												for (int i = 0; i < portlets.size(); i++) {
 													Portlet portlet = portlets.get(i);
+
+													boolean portletInstanceable = portlet.isInstanceable();
+													boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
+													boolean portletLocked = (!portletInstanceable && portletUsed);
 												%>
 
 													<li class="<%= (i == 0) ? "first" : "" %>">
-														<a class="app-shortcut" data-portlet-id="<%= portlet.getPortletId() %>" href="javascript:;">
+														<a class="app-shortcut <c:if test="<%= portletLocked %>">lfr-portlet-used</c:if> <c:if test="<%= portletInstanceable %>">lfr-instanceable</c:if>" data-portlet-id="<%= portlet.getPortletId() %>" href="javascript:;" <c:if test="<%= portletLocked %>">tabIndex="-1"</c:if>>
 															<liferay-portlet:icon-portlet portlet="<%= portlet %>" />
 
 															<%= PortalUtil.getPortletTitle(portlet.getPortletId(), locale) %>

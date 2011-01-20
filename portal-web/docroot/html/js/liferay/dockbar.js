@@ -308,6 +308,8 @@ AUI().add(
 				dockBar.one('.pin-dockbar').on(
 					'click',
 					function(event) {
+						event.halt();
+
 						BODY.toggleClass('lfr-dockbar-pinned');
 
 						var pinned = BODY.hasClass('lfr-dockbar-pinned');
@@ -320,8 +322,6 @@ AUI().add(
 								}
 							}
 						);
-
-						event.halt();
 
 						Liferay.fire(
 							'dockbar:pinned',
@@ -396,22 +396,34 @@ AUI().add(
 						}
 					);
 
-					var addContentBoundingBox = addContent.get('boundingBox');
+					var addContentNode = addContent.get('contentBox');
 
-					var commonItems = addContentBoundingBox.one('.common-items');
+					instance._addContentNode = addContentNode;
+
+					var commonItems = addContentNode.one('.common-items');
 
 					if (commonItems) {
 						commonItems.removeClass('aui-menu-item');
 					}
 
-					addContentBoundingBox.delegate(
+					addContentNode.delegate(
 						'click',
 						function(event) {
+							event.halt();
+
 							var item = event.currentTarget;
+
+							if (item.hasClass('lfr-portlet-used')) {
+								return;
+							}
 
 							var portletId = item.attr('data-portlet-id');
 
 							if ((/^\d+$/).test(portletId)) {
+								if (!item.hasClass('lfr-instanceable')) {
+									instance._toggleAppShortcut(item, true);
+								}
+
 								Portlet.add(
 									{
 										portletId: portletId
@@ -422,10 +434,21 @@ AUI().add(
 							if (!event.shiftKey) {
 								MenuManager.hideAll();
 							}
-
-							event.halt();
 						},
 						'.app-shortcut'
+					);
+
+					addContentNode.focusManager.set('descendants', 'a:not(.lfr-portlet-used)');
+
+					Liferay.on(
+						'closePortlet',
+						function(event) {
+							var item = addContentNode.one('.app-shortcut[data-portlet-id=' + event.portletId + ']');
+
+							if (item) {
+								instance._toggleAppShortcut(item, false);
+							}
+						}
 					);
 				}
 
@@ -594,6 +617,14 @@ AUI().add(
 					},
 					'.aui-toolbar a'
 				);
+			},
+
+			_toggleAppShortcut: function(item, force) {
+				var instance = this;
+
+				item.toggleClass('lfr-portlet-used', force);
+
+				instance._addContentNode.focusManager.refresh();
 			},
 
 			_updateMenu: function(event, item) {

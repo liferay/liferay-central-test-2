@@ -296,6 +296,11 @@ html > .lfr-dockbar-pinned {
 	padding-left: 25px;
 }
 
+.add-content-menu a.lfr-portlet-used {
+	color: #999;
+	cursor: auto;
+}
+
 .manage-content-menu li a {
 	background: url() no-repeat 3px 50%;
 	padding-left: 25px;
