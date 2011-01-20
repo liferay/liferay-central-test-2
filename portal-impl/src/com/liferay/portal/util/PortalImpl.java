@@ -223,6 +223,7 @@ import org.apache.struts.Globals;
  * @author Raymond Augé
  * @author Eduardo Lundgren
  * @author Wesley Gong
+ * @author Hugo Huijser
  */
 public class PortalImpl implements Portal {
 
@@ -2803,15 +2804,29 @@ public class PortalImpl implements Portal {
 						PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 							layout, portletId);
 
-					String scopeLayoutUuid = GetterUtil.getString(
-						portletSetup.getValue("lfr-scope-layout-uuid", null));
+					String scopeType = GetterUtil.getString(
+						portletSetup.getValue("lfr-scope-type", null));
 
-					if (Validator.isNotNull(scopeLayoutUuid)) {
-						Layout scopeLayout =
-							LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-								scopeLayoutUuid, layout.getGroupId());
+					if (Validator.isNotNull(scopeType)) {
+						if (scopeType.equals(GroupConstants.GLOBAL)) {
+							Group globalGroup =
+								GroupLocalServiceUtil.getCompanyGroup(
+									layout.getScopeGroup().getCompanyId());
 
-						return scopeLayout.getScopeGroup().getGroupId();
+							return globalGroup.getGroupId();
+						}
+						else {
+							String scopeLayoutUuid = GetterUtil.getString(
+								portletSetup.getValue(
+									"lfr-scope-layout-uuid", null));
+
+							Layout scopeLayout =
+								LayoutLocalServiceUtil.
+									getLayoutByUuidAndGroupId(
+										scopeLayoutUuid, layout.getGroupId());
+
+							return scopeLayout.getScopeGroup().getGroupId();
+						}
 					}
 				}
 				catch (Exception e) {

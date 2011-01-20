@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -54,6 +55,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Jesper Weissglas
  * @author Jorge Ferrer
+ * @author Hugo Huijser
  */
 public class EditScopeAction extends EditConfigurationAction {
 
@@ -153,52 +155,77 @@ public class EditScopeAction extends EditConfigurationAction {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		String scopeLayoutUuid = ParamUtil.getString(
-			actionRequest, "scopeLayoutUuid");
-		String oldScopeLayoutUuid = GetterUtil.getString(
-			preferences.getValue("lfr-scope-layout-uuid", null));
+		String scopeType = ParamUtil.getString(actionRequest, "scopeType");
+		String oldScopeType =
+			GetterUtil.getString(preferences.getValue("lfr-scope-type", null));
+		String scopeLayoutUuid = StringPool.BLANK;
 		String title = getPortletTitle(actionRequest, portlet, preferences);
 		String newTitle = title;
 
 		// Remove old scope suffix from the title if present
 
-		if (Validator.isNotNull(oldScopeLayoutUuid)) {
-			try {
-				Layout oldScopeLayout =
-					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-						oldScopeLayoutUuid, layout.getGroupId());
+		if (Validator.isNotNull(oldScopeType)) {
+			String scopeName = null;
 
-				StringBundler sb = new StringBundler(4);
+			if (oldScopeType.equals(GroupConstants.GLOBAL)) {
+				scopeName = themeDisplay.translate("global");
+			}
+			else {
+				String oldScopeLayoutUuid = GetterUtil.getString(
+					preferences.getValue("lfr-scope-layout-uuid", null));
 
-				sb.append(StringPool.SPACE);
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(oldScopeLayout.getName(themeDisplay.getLocale()));
-				sb.append(StringPool.CLOSE_PARENTHESIS);
+				try {
+					Layout oldScopeLayout =
+						LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+							oldScopeLayoutUuid, layout.getGroupId());
 
-				String suffix = sb.toString();
-
-				if (newTitle.endsWith(suffix)) {
-					newTitle = newTitle.substring(
-						0, title.length() - suffix.length());
+					scopeName =
+						oldScopeLayout.getName(themeDisplay.getLocale());
+				}
+				catch (NoSuchLayoutException nsle) {
 				}
 			}
-			catch (NoSuchLayoutException nsle) {
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(StringPool.SPACE);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(scopeName);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			String suffix = sb.toString();
+
+			if (newTitle.endsWith(suffix)) {
+				newTitle = newTitle.substring(
+					0, title.length() - suffix.length());
 			}
 		}
 
 		// Add new scope suffix to the title
 
-		if (Validator.isNotNull(scopeLayoutUuid)) {
-			Layout scopeLayout =
-				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-					scopeLayoutUuid, layout.getGroupId());
+		if (Validator.isNotNull(scopeType)) {
+			String scopeName = null;
 
-			if (!scopeLayout.hasScopeGroup()) {
-				String name = String.valueOf(scopeLayout.getPlid());
+			if (scopeType.equals(GroupConstants.GLOBAL)) {
+				scopeName = themeDisplay.translate("global");
+			}
+			else {
+				scopeLayoutUuid =
+					ParamUtil.getString(actionRequest, "scopeLayoutUuid");
 
-				GroupLocalServiceUtil.addGroup(
-					themeDisplay.getUserId(), Layout.class.getName(),
-					scopeLayout.getPlid(), name, null, 0, null, true, null);
+				Layout scopeLayout =
+					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+						scopeLayoutUuid, layout.getGroupId());
+
+				if (!scopeLayout.hasScopeGroup()) {
+					String name = String.valueOf(scopeLayout.getPlid());
+
+					GroupLocalServiceUtil.addGroup(
+						themeDisplay.getUserId(), Layout.class.getName(),
+						scopeLayout.getPlid(), name, null, 0, null, true, null);
+				}
+
+				scopeName = scopeLayout.getName(themeDisplay.getLocale());
 			}
 
 			StringBundler sb = new StringBundler(5);
@@ -206,13 +233,14 @@ public class EditScopeAction extends EditConfigurationAction {
 			sb.append(newTitle);
 			sb.append(StringPool.SPACE);
 			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(scopeLayout.getName(themeDisplay.getLocale()));
+			sb.append(scopeName);
 			sb.append(StringPool.CLOSE_PARENTHESIS);
 
 			newTitle = sb.toString();
 		}
 
 		preferences.setValue("lfr-scope-layout-uuid", scopeLayoutUuid);
+		preferences.setValue("lfr-scope-type", scopeType);
 
 		if (!newTitle.equals(title)) {
 			preferences.setValue(

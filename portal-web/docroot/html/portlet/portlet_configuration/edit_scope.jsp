@@ -23,6 +23,7 @@ String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL")
 PortletPreferences preferences = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
 String scopeLayoutUuid = GetterUtil.getString(preferences.getValue("lfr-scope-layout-uuid", null));
+String scopeType = GetterUtil.getString(preferences.getValue("lfr-scope-type", null));
 
 Group group = layout.getGroup();
 %>
@@ -42,28 +43,39 @@ Group group = layout.getGroup();
 	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 
 	<aui:fieldset>
-		<aui:select label="scope" name="scopeLayoutUuid">
-			<aui:option label="default" selected="<%= Validator.isNull(scopeLayoutUuid) %>" value="" />
-			<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= scopeLayoutUuid.equals(layout.getUuid()) %>" value="<%= layout.getUuid() %>" />
-
-			<%
-			for (Layout curLayout : LayoutLocalServiceUtil.getScopeGroupLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
-				if (curLayout.getPlid() == layout.getPlid()) {
-					continue;
-				}
-
-			%>
-
-				<aui:option label="<%= HtmlUtil.escape(curLayout.getName(locale)) %>" selected="<%= scopeLayoutUuid.equals(curLayout.getUuid()) %>" value="<%= curLayout.getUuid() %>" />
-
-			<%
-			}
-			%>
-
+		<aui:select label="scope" name="scopeType">
+			<aui:option label="default" selected="<%= Validator.isNull(scopeType) %>" value="" />
+			<aui:option label="global" selected="<%= scopeType.equals(GroupConstants.GLOBAL) %>" value="<%= GroupConstants.GLOBAL %>" />
+			<aui:option label="select-layout" selected="<%= scopeType.equals(LayoutConstants.TYPE_LAYOUT) %>" value="<%= LayoutConstants.TYPE_LAYOUT %>" />
 		</aui:select>
+
+		<div id="<portlet:namespace />scopeLayouts">
+			<aui:select label="scope-layout" name="scopeLayoutUuid">
+				<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= scopeLayoutUuid.equals(layout.getUuid()) %>" value="<%= layout.getUuid() %>" />
+
+				<%
+				for (Layout curLayout : LayoutLocalServiceUtil.getScopeGroupLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
+					if (curLayout.getPlid() == layout.getPlid()) {
+						continue;
+					}
+
+				%>
+
+					<aui:option label="<%= HtmlUtil.escape(curLayout.getName(locale)) %>" selected="<%= scopeLayoutUuid.equals(curLayout.getUuid()) %>" value="<%= curLayout.getUuid() %>" />
+
+				<%
+				}
+				%>
+
+			</aui:select>
+		</div>
 	</aui:fieldset>
 
 	<aui:button-row>
 		<aui:button type="submit" />
 	</aui:button-row>
 </aui:form>
+
+<aui:script>
+	Liferay.Util.toggleSelectBox('<portlet:namespace />scopeType','<%= LayoutConstants.TYPE_LAYOUT %>','<portlet:namespace />scopeLayouts');
+</aui:script>
