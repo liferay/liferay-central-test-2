@@ -115,14 +115,14 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 
 			String key = StringPool.BLANK;
 
-			if (tagProperty.length > 1) {
-				key = GetterUtil.getString(tagProperty[1]);
+			if (tagProperty.length > 0) {
+				key = GetterUtil.getString(tagProperty[0]);
 			}
 
 			String value = StringPool.BLANK;
 
-			if (tagProperty.length > 2) {
-				value = GetterUtil.getString(tagProperty[2]);
+			if (tagProperty.length > 1) {
+				value = GetterUtil.getString(tagProperty[1]);
 			}
 
 			if (Validator.isNotNull(key)) {
