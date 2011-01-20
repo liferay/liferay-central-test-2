@@ -94,6 +94,10 @@ if (Validator.isNotNull(roleTypesParam)) {
 	roleTypes = StringUtil.split(roleTypesParam, 0);
 }
 
+if (group.isCompany()) {
+	roleTypes = new int[] {RoleConstants.TYPE_REGULAR};
+}
+
 PortletURL actionPortletURL = renderResponse.createActionURL();
 
 actionPortletURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
