@@ -1391,6 +1391,12 @@ public class DLRepositoryLocalServiceImpl
 			}
 		}
 
+		String extension = (String)serviceContext.getAttribute("extension");
+
+		if (Validator.isNull(extension)) {
+			extension = dlFileEntry.getExtension();
+		}
+
 		Date now = new Date();
 
 		validateFile(
@@ -1404,12 +1410,6 @@ public class DLRepositoryLocalServiceImpl
 			dlFileEntry, majorVersion, serviceContext.getWorkflowAction());
 
 		DLFileVersion dlFileVersion = null;
-
-		String extension = (String)serviceContext.getAttribute("extension");
-
-		if (Validator.isNull(extension)) {
-			extension = dlFileEntry.getExtension();
-		}
 
 		boolean updatedFileVersion = false;
 
