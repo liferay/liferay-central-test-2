@@ -228,7 +228,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 			groupId = group.getGroupId();
 			categoryId = MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID;
-			name = group.getName();
+			name = group.getDescriptiveName();
 			description = group.getDescription();
 		}
 
