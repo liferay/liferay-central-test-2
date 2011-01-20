@@ -18,6 +18,9 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.proxy.MessagingProxy;
 import com.liferay.portal.kernel.messaging.proxy.ProxyMode;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 
 import java.util.List;
 
@@ -31,7 +34,8 @@ public interface SchedulerEngine {
 
 	public static final String DESCRIPTION = "DESCRIPTION";
 
-	public static final int DESCRIPTION_MAX_LENGTH = 120;
+	public static final int DESCRIPTION_MAX_LENGTH = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.SCHEDULER_DESCRIPTION_MAX_LENGTH));
 
 	public static final String DESTINATION_NAME = "DESTINATION_NAME";
 
@@ -43,9 +47,11 @@ public interface SchedulerEngine {
 
 	public static final String FINAL_FIRE_TIME = "FINAL_FIRE_TIME";
 
-	public static final int GROUP_NAME_MAX_LENGTH = 80;
+	public static final int GROUP_NAME_MAX_LENGTH = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.SCHEDULER_GROUP_NAME_MAX_LENGTH));
 
-	public static final int JOB_NAME_MAX_LENGTH = 80;
+	public static final int JOB_NAME_MAX_LENGTH = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.SCHEDULER_JOB_NAME_MAX_LENGTH));
 
 	public static final String JOB_STATE = "JOB_STATE";
 
