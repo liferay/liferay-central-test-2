@@ -222,10 +222,6 @@
 		<filter-class>com.liferay.portal.servlet.filters.strip.StripFilter</filter-class>
 	</filter>
 	<filter>
-		<filter-name>Theme Template Filter</filter-name>
-		<filter-class>com.liferay.portal.servlet.filters.theme.ThemeTemplateFilter</filter-class>
-	</filter>
-	<filter>
 		<filter-name>Thread Dump Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.threaddump.ThreadDumpFilter</filter-class>
 	</filter>
@@ -836,10 +832,6 @@
 		<url-pattern>/web/*</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>REQUEST</dispatcher>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Theme Template Filter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
 	<listener>
 		<listener-class>com.liferay.portal.spring.context.PortalContextLoaderListener</listener-class>

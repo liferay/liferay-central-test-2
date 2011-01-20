@@ -427,6 +427,7 @@ public class VelocityVariables {
 				"permissionChecker", themeDisplay.getPermissionChecker());
 			velocityContext.put("locale", themeDisplay.getLocale());
 			velocityContext.put("timeZone", themeDisplay.getTimeZone());
+			velocityContext.put("theme", theme);
 			velocityContext.put("colorScheme", themeDisplay.getColorScheme());
 			velocityContext.put(
 				"portletDisplay", themeDisplay.getPortletDisplay());
@@ -444,33 +445,7 @@ public class VelocityVariables {
 				velocityContext.put("navItems", navItems);
 			}
 
-			// Init
-
-			velocityContext.put(
-				"init",
-				themeDisplay.getPathContext() +
-					VelocityResourceListener.SERVLET_SEPARATOR +
-						"/html/themes/_unstyled/templates/init.vm");
-
-			// Deprecated
-
-			velocityContext.put(
-				"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
-		}
-
-		// Theme
-
-		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
-
-		if ((theme == null) && (themeDisplay != null)) {
-			theme = themeDisplay.getTheme();
-		}
-
-		if (theme != null) {
-
 			// Full css and templates path
-
-			velocityContext.put("theme", theme);
 
 			String servletContextName = GetterUtil.getString(
 				theme.getServletContextName());
@@ -484,6 +459,19 @@ public class VelocityVariables {
 				"fullTemplatesPath",
 				servletContextName + theme.getVelocityResourceListener() +
 					theme.getTemplatesPath());
+
+			// Init
+
+			velocityContext.put(
+				"init",
+				themeDisplay.getPathContext() +
+					VelocityResourceListener.SERVLET_SEPARATOR +
+						"/html/themes/_unstyled/templates/init.vm");
+
+			// Deprecated
+
+			velocityContext.put(
+				"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
 		}
 
 		// Tiles attributes
