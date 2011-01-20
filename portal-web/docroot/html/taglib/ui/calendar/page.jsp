@@ -28,7 +28,7 @@ boolean showAllPotentialWeeks = GetterUtil.getBoolean((String)request.getAttribu
 Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 selCal.set(Calendar.MONTH, month);
-selCal.set(Calendar.DATE, day == 0 ? 1 : day);
+selCal.set(Calendar.DATE, (day == 0) ? 1 : day);
 selCal.set(Calendar.YEAR, year);
 
 int selMonth = selCal.get(Calendar.MONTH);
