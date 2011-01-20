@@ -63,9 +63,6 @@ public class UserGroupFinderImpl
 	public static String JOIN_BY_USER_GROUPS_ROLES =
 		UserGroupFinder.class.getName() + ".joinByUserGroupsRoles";
 
-	public static String JOIN_BY_USER_GROUPS_TEAMS =
-		UserGroupFinder.class.getName() + ".joinByUserGroupsTeams";
-
 	public int countByC_N_D(
 			long companyId, String name, String description,
 			LinkedHashMap<String, Object> params)
@@ -244,9 +241,6 @@ public class UserGroupFinderImpl
 		else if (key.equals("userGroupsRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_ROLES);
 		}
-		else if (key.equals("userGroupsTeams")) {
-			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_TEAMS);
-		}
 
 		if (Validator.isNotNull(join)) {
 			int pos = join.indexOf("WHERE");
@@ -296,9 +290,6 @@ public class UserGroupFinderImpl
 		}
 		else if (key.equals("userGroupsRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_ROLES);
-		}
-		else if (key.equals("userGroupsTeams")) {
-			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_TEAMS);
 		}
 
 		if (Validator.isNotNull(join)) {
@@ -353,4 +344,5 @@ public class UserGroupFinderImpl
 			}
 		}
 	}
+
 }

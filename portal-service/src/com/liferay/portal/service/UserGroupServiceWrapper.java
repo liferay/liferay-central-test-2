@@ -34,12 +34,6 @@ public class UserGroupServiceWrapper implements UserGroupService {
 		_userGroupService.addGroupUserGroups(groupId, userGroupIds);
 	}
 
-	public void addTeamUserGroups(long teamId, long[] userGroupIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_userGroupService.addTeamUserGroups(teamId, userGroupIds);
-	}
-
 	public com.liferay.portal.model.UserGroup addUserGroup(
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -75,12 +69,6 @@ public class UserGroupServiceWrapper implements UserGroupService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_userGroupService.unsetGroupUserGroups(groupId, userGroupIds);
-	}
-
-	public void unsetTeamUserGroups(long teamId, long[] userGroupIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_userGroupService.unsetTeamUserGroups(teamId, userGroupIds);
 	}
 
 	public com.liferay.portal.model.UserGroup updateUserGroup(

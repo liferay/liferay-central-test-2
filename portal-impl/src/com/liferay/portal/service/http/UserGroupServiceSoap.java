@@ -76,18 +76,6 @@ public class UserGroupServiceSoap {
 		}
 	}
 
-	public static void addTeamUserGroups(long teamId, long[] userGroupIds)
-		throws RemoteException {
-		try {
-			UserGroupServiceUtil.addTeamUserGroups(teamId, userGroupIds);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portal.model.UserGroupSoap addUserGroup(
 		java.lang.String name, java.lang.String description)
 		throws RemoteException {
@@ -162,18 +150,6 @@ public class UserGroupServiceSoap {
 		throws RemoteException {
 		try {
 			UserGroupServiceUtil.unsetGroupUserGroups(groupId, userGroupIds);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void unsetTeamUserGroups(long teamId, long[] userGroupIds)
-		throws RemoteException {
-		try {
-			UserGroupServiceUtil.unsetTeamUserGroups(teamId, userGroupIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -398,13 +398,11 @@ Liferay.Service.registerClass(
 	Liferay.Service.Portal, "UserGroup",
 	{
 		addGroupUserGroups: true,
-		addTeamUserGroups: true,
 		addUserGroup: true,
 		deleteUserGroup: true,
 		getUserGroup: true,
 		getUserUserGroups: true,
 		unsetGroupUserGroups: true,
-		unsetTeamUserGroups: true,
 		updateUserGroup: true
 	}
 );

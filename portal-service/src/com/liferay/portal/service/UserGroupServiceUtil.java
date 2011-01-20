@@ -43,12 +43,6 @@ public class UserGroupServiceUtil {
 		getService().addGroupUserGroups(groupId, userGroupIds);
 	}
 
-	public static void addTeamUserGroups(long teamId, long[] userGroupIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().addTeamUserGroups(teamId, userGroupIds);
-	}
-
 	public static com.liferay.portal.model.UserGroup addUserGroup(
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -85,12 +79,6 @@ public class UserGroupServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().unsetGroupUserGroups(groupId, userGroupIds);
-	}
-
-	public static void unsetTeamUserGroups(long teamId, long[] userGroupIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().unsetTeamUserGroups(teamId, userGroupIds);
 	}
 
 	public static com.liferay.portal.model.UserGroup updateUserGroup(

@@ -450,20 +450,10 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) ||
 			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6)) {
 
-			List<Team> userTeams = TeamLocalServiceUtil.getUserTeams(
+			List<Team> teams = TeamLocalServiceUtil.getUserTeams(
 				userId, group.getGroupId());
 
-			List<Team> userGroupTeams = TeamLocalServiceUtil.getUserGroupTeams(
-				userId, group.getGroupId());
-
-			for (Team team : userTeams) {
-				Role role = RoleLocalServiceUtil.getTeamRole(
-					team.getCompanyId(), team.getTeamId());
-
-				roles.add(role);
-			}
-
-			for (Team team : userGroupTeams) {
+			for (Team team : teams) {
 				Role role = RoleLocalServiceUtil.getTeamRole(
 					team.getCompanyId(), team.getTeamId());
 

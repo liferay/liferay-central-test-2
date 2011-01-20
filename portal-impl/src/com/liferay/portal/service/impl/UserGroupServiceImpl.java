@@ -22,7 +22,6 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.UserGroupServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
-import com.liferay.portal.service.permission.TeamPermissionUtil;
 import com.liferay.portal.service.permission.UserGroupPermissionUtil;
 
 import java.util.List;
@@ -39,15 +38,6 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ASSIGN_MEMBERS);
 
 		userGroupLocalService.addGroupUserGroups(groupId, userGroupIds);
-	}
-
-	public void addTeamUserGroups(long teamId, long[] userGroupIds)
-		throws PortalException, SystemException {
-
-		TeamPermissionUtil.check(
-			getPermissionChecker(), teamId, ActionKeys.ASSIGN_MEMBERS);
-
-		userGroupLocalService.addTeamUserGroups(teamId, userGroupIds);
 	}
 
 	public UserGroup addUserGroup(String name, String description)
@@ -111,15 +101,6 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		userGroupLocalService.unsetGroupUserGroups(groupId, userGroupIds);
 	}
 
-	public void unsetTeamUserGroups(long teamId, long[] userGroupIds)
-		throws PortalException, SystemException {
-
-		TeamPermissionUtil.check(
-			getPermissionChecker(), teamId, ActionKeys.ASSIGN_MEMBERS);
-
-		userGroupLocalService.unsetTeamUserGroups(teamId, userGroupIds);
-	}
-
 	public UserGroup updateUserGroup(
 			long userGroupId, String name, String description)
 		throws PortalException, SystemException {
@@ -132,4 +113,5 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		return userGroupLocalService.updateUserGroup(
 			user.getCompanyId(), userGroupId, name, description);
 	}
+
 }

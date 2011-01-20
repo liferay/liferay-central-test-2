@@ -1270,22 +1270,6 @@
 				Team.name ASC
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.TeamFinder.findByU_G">
-		<![CDATA[
-			SELECT
-			    DISTINCT {Team.*}
-			FROM
-			    Team
-            INNER JOIN
-                UserGroups_Teams ON
-                    (Team.teamId = UserGroups_Teams.teamId) AND
-                    (Team.groupId = ?)
-            INNER JOIN
-                Users_UserGroups ON
-                    (UserGroups_Teams.userGroupId = Users_UserGroups.userGroupId) AND
-                    (Users_UserGroups.userId = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portal.service.persistence.TeamFinder.joinByUsersTeams">
 		<![CDATA[
 			INNER JOIN
@@ -1293,15 +1277,6 @@
 					(Users_Teams.teamId = Team.teamId)
 			WHERE
 				(Users_Teams.userId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.TeamFinder.joinByUserGroupsTeams">
-		<![CDATA[
-			INNER JOIN
-				UserGroups_Teams ON
-					(UserGroups_Teams.teamId = Team.teamId)
-			WHERE
-				(UserGroups_Teams.userGroupId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.countByUser">
@@ -1658,15 +1633,6 @@
 			WHERE
 				(Group_.classNameId = [$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USERGROUP$]) AND
 				(Groups_Roles.roleId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.joinByUserGroupsTeams">
-		<![CDATA[
-			INNER JOIN
-				UserGroups_Teams ON
-					(UserGroups_Teams.userGroupId = UserGroup.userGroupId)
-			WHERE
-				(UserGroups_Teams.teamId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserGroupRoleFinder.findByUserUserGroupGroupRole">
