@@ -57,7 +57,7 @@ public class LoginAction extends Action {
 			WebKeys.THEME_DISPLAY);
 
 		String login = ParamUtil.getString(request, "login");
-		String password = ParamUtil.getString(request, "password");
+		String password = ParamUtil.getString(request, "password", false);
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 		String authType = ParamUtil.getString(request, "authType");
 

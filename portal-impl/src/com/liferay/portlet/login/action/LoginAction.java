@@ -127,7 +127,7 @@ public class LoginAction extends PortletAction {
 			actionResponse);
 
 		String login = ParamUtil.getString(actionRequest, "login");
-		String password = ParamUtil.getString(actionRequest, "password");
+		String password = ParamUtil.getString(actionRequest, "password", false);
 		boolean rememberMe = ParamUtil.getBoolean(actionRequest, "rememberMe");
 
 		String authType = preferences.getValue("authType", null);

@@ -81,14 +81,21 @@ public class ParamUtil {
 	public static String get(
 		HttpServletRequest request, String param, String defaultValue) {
 
-		String returnValue =
-			GetterUtil.get(request.getParameter(param), defaultValue);
+		return get(request, param, defaultValue, true);
+	}
 
-		if (returnValue != null) {
+	public static String get(
+		HttpServletRequest request, String param, String defaultValue,
+		boolean trim) {
+
+		String returnValue =
+			GetterUtil.get(request.getParameter(param), defaultValue, trim);
+
+		if (returnValue != null && trim) {
 			return returnValue.trim();
 		}
 
-		return null;
+		return returnValue;
 	}
 
 	public static boolean get(
@@ -138,14 +145,22 @@ public class ParamUtil {
 	public static String get(
 		PortletRequest portletRequest, String param, String defaultValue) {
 
-		String returnValue =
-			GetterUtil.get(portletRequest.getParameter(param), defaultValue);
+		return get(portletRequest, param, defaultValue, true);
+	}
 
-		if (returnValue != null) {
+	public static String get(
+		PortletRequest portletRequest, String param, String defaultValue,
+		boolean trim) {
+
+		String returnValue =
+			GetterUtil.get(
+				portletRequest.getParameter(param), defaultValue, trim);
+
+		if (returnValue != null && trim) {
 			return returnValue.trim();
 		}
 
-		return null;
+		return returnValue;
 	}
 
 	public static boolean get(
@@ -195,14 +210,22 @@ public class ParamUtil {
 	public static String get(
 		ServiceContext serviceContext, String param, String defaultValue) {
 
-		String returnValue =
-			GetterUtil.get(serviceContext.getAttribute(param), defaultValue);
+		return get(serviceContext, param, defaultValue, true);
+	}
 
-		if (returnValue != null) {
+	public static String get(
+		ServiceContext serviceContext, String param, String defaultValue,
+		boolean trim) {
+
+		String returnValue =
+			GetterUtil.get(
+				serviceContext.getAttribute(param), defaultValue, trim);
+
+		if (returnValue != null && trim) {
 			return returnValue.trim();
 		}
 
-		return null;
+		return returnValue;
 	}
 
 	public static boolean getBoolean(HttpServletRequest request, String param) {
@@ -715,9 +738,22 @@ public class ParamUtil {
 	}
 
 	public static String getString(
+		HttpServletRequest request, String param, boolean trim) {
+
+		return GetterUtil.getString(request.getParameter(param), trim);
+	}
+
+	public static String getString(
 		HttpServletRequest request, String param, String defaultValue) {
 
 		return get(request, param, defaultValue);
+	}
+
+	public static String getString(
+		HttpServletRequest request, String param, String defaultValue,
+		boolean trim) {
+
+			return get(request, param, defaultValue, trim);
 	}
 
 	public static String getString(
@@ -727,9 +763,23 @@ public class ParamUtil {
 	}
 
 	public static String getString(
+		PortletRequest portletRequest, String param, boolean trim) {
+
+		return GetterUtil.getString(
+			portletRequest.getParameter(param), trim);
+	}
+
+	public static String getString(
 		PortletRequest portletRequest, String param, String defaultValue) {
 
 		return get(portletRequest, param, defaultValue);
+	}
+
+	public static String getString(
+		PortletRequest portletRequest, String param, String defaultValue,
+		boolean trim) {
+
+		return get(portletRequest, param, defaultValue, trim);
 	}
 
 	public static String getString(
@@ -739,9 +789,22 @@ public class ParamUtil {
 	}
 
 	public static String getString(
+		ServiceContext serviceContext, String param, boolean trim) {
+
+		return GetterUtil.getString(serviceContext.getAttribute(param), trim);
+	}
+
+	public static String getString(
 		ServiceContext serviceContext, String param, String defaultValue) {
 
 		return get(serviceContext, param, defaultValue);
+	}
+
+	public static String getString(
+		ServiceContext serviceContext, String param, String defaultValue,
+		boolean trim) {
+
+		return get(serviceContext, param, defaultValue, trim);
 	}
 
 	public static void print(HttpServletRequest request) {

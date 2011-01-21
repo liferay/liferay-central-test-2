@@ -25,7 +25,7 @@ String baseProviderURL = ParamUtil.getString(request, "baseProviderURL");
 String baseDN = ParamUtil.getString(request, "baseDN");
 String principal = ParamUtil.getString(request, "principal");
 
-String credentials = ParamUtil.getString(request, "credentials");
+String credentials = ParamUtil.getString(request, "credentials", false);
 
 if (credentials.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
 	credentials = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_SECURITY_CREDENTIALS + postfix);

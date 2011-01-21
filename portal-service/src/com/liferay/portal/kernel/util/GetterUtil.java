@@ -213,12 +213,18 @@ public class GetterUtil {
 	}
 
 	public static String get(Serializable value, String defaultValue) {
+		return get(value, defaultValue, true);
+	}
+
+	public static String get(
+		Serializable value, String defaultValue, boolean trim) {
+
 		if (value == null) {
 			return defaultValue;
 		}
 
 		if (value instanceof String) {
-			return get((String)value, defaultValue);
+			return get((String)value, defaultValue, trim);
 		}
 
 		return defaultValue;
@@ -321,8 +327,17 @@ public class GetterUtil {
 	}
 
 	public static String get(String value, String defaultValue) {
+		return get(value, defaultValue, true);
+	}
+
+	public static String get(String value, String defaultValue, boolean trim) {
 		if (value == null) {
 			return defaultValue;
+		}
+
+		if (!trim) {
+			 return StringUtil.replace(
+				value, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
 		}
 
 		return StringUtil.replace(
@@ -776,16 +791,36 @@ public class GetterUtil {
 		return getString(value, DEFAULT_STRING);
 	}
 
+	public static String getString(Serializable value, boolean trim) {
+		return getString(value, DEFAULT_STRING, trim);
+	}
+
 	public static String getString(Serializable value, String defaultValue) {
 		return get(value, defaultValue);
+	}
+
+	public static String getString(
+		Serializable value, String defaultValue, boolean trim) {
+
+		return get(value, defaultValue, trim);
 	}
 
 	public static String getString(String value) {
 		return getString(value, DEFAULT_STRING);
 	}
 
+	public static String getString(String value, boolean trim) {
+		return getString(value, DEFAULT_STRING, trim);
+	}
+
 	public static String getString(String value, String defaultValue) {
 		return get(value, defaultValue);
+	}
+
+	public static String getString(
+		String value, String defaultValue, boolean trim) {
+
+		return get(value, defaultValue, trim);
 	}
 
 	private static int _parseInt(String value, int defaultValue) {

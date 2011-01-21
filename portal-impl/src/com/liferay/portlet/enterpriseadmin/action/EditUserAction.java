@@ -307,8 +307,10 @@ public class EditUserAction extends PortletAction {
 
 		boolean autoPassword = ParamUtil.getBoolean(
 			actionRequest, "autoPassword", true);
-		String password1 = ParamUtil.getString(actionRequest, "password1");
-		String password2 = ParamUtil.getString(actionRequest, "password2");
+		String password1 = ParamUtil.getString(
+			actionRequest, "password1", false);
+		String password2 = ParamUtil.getString(
+			actionRequest, "password2", false);
 
 		String reminderQueryQuestion = ParamUtil.getString(
 			actionRequest, "reminderQueryQuestion");
@@ -503,8 +505,10 @@ public class EditUserAction extends PortletAction {
 
 		String oldPassword = AdminUtil.getUpdateUserPassword(
 			actionRequest, user.getUserId());
-		String newPassword1 = ParamUtil.getString(actionRequest, "password1");
-		String newPassword2 = ParamUtil.getString(actionRequest, "password2");
+		String newPassword1 = ParamUtil.getString(
+			actionRequest, "password1", false);
+		String newPassword2 = ParamUtil.getString(
+			actionRequest, "password2", false);
 		boolean passwordReset = ParamUtil.getBoolean(
 			actionRequest, "passwordReset");
 
