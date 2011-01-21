@@ -32,7 +32,7 @@
 	position: relative;
 }
 
-.ie6 .portlet-asset-category-admin .vocabulary-content-wrapper {
+.ie6 .portlet-asset-category-admin .vocabulary-content-wrapper, .ie7 .portlet-asset-category-admin .vocabulary-content-wrapper {
 	width: 100%;
 }
 
