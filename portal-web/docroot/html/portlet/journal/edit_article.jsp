@@ -286,6 +286,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
 			<liferay-ui:error exception="<%= ArticleVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-and-try-again" />
 			<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
+
 			<liferay-ui:asset-tags-error />
 
 			<table class="lfr-table journal-article-header-edit" id="<portlet:namespace />articleHeaderEdit">

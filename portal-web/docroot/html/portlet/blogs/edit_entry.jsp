@@ -61,6 +61,7 @@ boolean allowTrackbacks = PropsValues.BLOGS_TRACKBACK_ENABLED && BeanParamUtil.g
 	<aui:input name="workflowAction" type="hidden" value="<%= WorkflowConstants.ACTION_PUBLISH %>" />
 
 	<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
+
 	<liferay-ui:asset-tags-error />
 
 	<aui:model-context bean="<%= entry %>" model="<%= BlogsEntry.class %>" />
