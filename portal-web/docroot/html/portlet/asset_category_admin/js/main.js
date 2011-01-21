@@ -117,6 +117,7 @@ AUI().add(
 
 						A.one('#' + namespace + 'addCategoryButton').on('click', instance._onShowCategoryPanel, instance, ACTION_ADD);
 						A.one('#' + namespace + 'addVocabularyButton').on('click', instance._onShowVocabularyPanel, instance, ACTION_ADD);
+						A.one('#' + namespace + 'categoryPermissionsButton').on('click', instance._onChangePermissions, instance);
 
 						instance._loadData();
 
@@ -767,7 +768,7 @@ AUI().add(
 						var buttonChangeCategoryPermissions = categoryFormEdit.one('#updateCategoryPermissions');
 
 						if (buttonChangeCategoryPermissions) {
-							buttonChangeCategoryPermissions.on('click', instance._onCategoryChangePermissions, instance);
+							buttonChangeCategoryPermissions.on('click', instance._onChangePermissions, instance);
 						}
 
 						var inputCategoryNameNode = categoryFormEdit.one('.category-name input');
@@ -831,7 +832,7 @@ AUI().add(
 						var buttonChangeVocabularyPermissions = vocabularyFormEdit.one('#vocabulary-change-permissions');
 
 						if (buttonChangeVocabularyPermissions) {
-							buttonChangeVocabularyPermissions.on('click', instance._onVocabularyChangePermissions, instance);
+							buttonChangeVocabularyPermissions.on('click', instance._onChangePermissions, instance);
 						}
 
 						var inputVocabularyEditNameNode = vocabularyFormEdit.one('.vocabulary-name input');
@@ -1126,15 +1127,6 @@ AUI().add(
 						instance._categoryPanelAdd.hide();
 					},
 
-					_onCategoryChangePermissions: function(event) {
-						var instance = this;
-
-						var buttonChangeCategoryPermissions = A.one('#updateCategoryPermissions');
-						var url = buttonChangeCategoryPermissions.attr('data-url');
-
-						instance._loadPermissions(url);
-					},
-
 					_onCategoryDelete: function(event) {
 						var instance = this;
 
@@ -1255,7 +1247,7 @@ AUI().add(
 						else if (targetId == 'updateCategoryPermissions') {
 							event.halt();
 
-							instance._onCategoryChangePermissions();
+							instance._onChangePermissions(event);
 						}
 					},
 
@@ -1269,6 +1261,14 @@ AUI().add(
 						var instance = this;
 
 						instance._categoryViewContainer.html(response);
+					},
+
+					_onChangePermissions: function(event) {
+						var instance = this;
+
+						var url = event.target.attr('data-url');
+
+						instance._loadPermissions(url);
 					},
 
 					_onDragDrop: function(event) {
@@ -1358,15 +1358,6 @@ AUI().add(
 
 							instance._sendMessage(MESSAGE_TYPE_ERROR, errorKey);
 						}
-					},
-
-					_onVocabularyChangePermissions: function(event) {
-						var instance = this;
-
-						var buttonChangeVocabularyPermissions = A.one('#vocabulary-change-permissions');
-						var url = buttonChangeVocabularyPermissions.attr('data-url');
-
-						instance._loadPermissions(url);
 					},
 
 					_onVocabularyDelete: function() {

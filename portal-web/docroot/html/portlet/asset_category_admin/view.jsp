@@ -44,9 +44,10 @@
 					modelResourceDescription="<%= themeDisplay.getScopeGroupName() %>"
 					resourcePrimKey="<%= String.valueOf(themeDisplay.getParentGroupId()) %>"
 					var="permissionsURL"
+					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
 				/>
 
-				<aui:button name="categoryPermissionsButton" onClick="<%= permissionsURL %>" value="permissions" />
+				<aui:button name="categoryPermissionsButton" data-url="<%= permissionsURL %>" value="permissions" />
 			</c:if>
 		</aui:button-row>
 	</div>
