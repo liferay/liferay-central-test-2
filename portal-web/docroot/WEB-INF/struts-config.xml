@@ -975,8 +975,8 @@
 		<!-- Enterprise Admin Settings -->
 
 		<action path="/enterprise_admin_settings/edit_company" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyAction">
-			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 			<forward name="portlet.enterprise_admin.edit_company" path="portlet.enterprise_admin.edit_company" />
+			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
 		<action path="/enterprise_admin_settings/edit_company_logo" type="com.liferay.portlet.enterpriseadmin.action.EditCompanyLogoAction">
