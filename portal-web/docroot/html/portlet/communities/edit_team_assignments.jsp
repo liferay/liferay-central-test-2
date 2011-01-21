@@ -64,9 +64,9 @@ request.setAttribute("edit_team_assignments.jsp-portletURL", portletURL);
 />
 
 <liferay-ui:tabs
-    names="users,user-groups"
-    param="tabs1"
-    url="<%= portletURL.toString() %>"
+	names="users,user-groups"
+	param="tabs1"
+	url="<%= portletURL.toString() %>"
 />
 
 <portlet:actionURL var="editAssignmentsURL">
@@ -82,7 +82,7 @@ request.setAttribute("edit_team_assignments.jsp-portletURL", portletURL);
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("users") %>'>
-            <liferay-util:include page="/html/portlet/communities/edit_team_assignments_users.jsp" />
+			<liferay-util:include page="/html/portlet/communities/edit_team_assignments_users.jsp" />
 		</c:when>
 		<c:when test='<%= tabs1.equals("user-groups") %>'>
 			<liferay-util:include page="/html/portlet/communities/edit_team_assignments_user_groups.jsp" />
@@ -93,12 +93,12 @@ request.setAttribute("edit_team_assignments.jsp-portletURL", portletURL);
 <aui:script>
 	Liferay.provide(
 		window,
-		'<portlet:namespace />updateTeamUsers',
+		'<portlet:namespace />updateTeamUserGroups',
 		function(assignmentsRedirect) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "team_users";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "team_user_groups";
 			document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-			document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+			document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+			document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm);
 		},
 		['liferay-util-list-fields']
@@ -106,12 +106,12 @@ request.setAttribute("edit_team_assignments.jsp-portletURL", portletURL);
 
 	Liferay.provide(
 		window,
-		'<portlet:namespace />updateTeamUserGroups',
+		'<portlet:namespace />updateTeamUsers',
 		function(assignmentsRedirect) {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "team_user_groups";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "team_users";
 			document.<portlet:namespace />fm.<portlet:namespace />assignmentsRedirect.value = assignmentsRedirect;
-			document.<portlet:namespace />fm.<portlet:namespace />addUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			document.<portlet:namespace />fm.<portlet:namespace />removeUserGroupIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+			document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+			document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm);
 		},
 		['liferay-util-list-fields']

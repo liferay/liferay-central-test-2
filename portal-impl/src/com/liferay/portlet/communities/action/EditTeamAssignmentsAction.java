@@ -48,11 +48,11 @@ public class EditTeamAssignmentsAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals("team_users")) {
-				updateTeamUsers(actionRequest);
-			}
-			else if (cmd.equals("team_user_groups")) {
+			if (cmd.equals("team_user_groups")) {
 				updateTeamUserGroups(actionRequest);
+			}
+			else if (cmd.equals("team_users")) {
+				updateTeamUsers(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
@@ -101,6 +101,20 @@ public class EditTeamAssignmentsAction extends PortletAction {
 			renderRequest, "portlet.communities.edit_team_assignments"));
 	}
 
+	protected void updateTeamUserGroups(ActionRequest actionRequest)
+		throws Exception {
+
+		long teamId = ParamUtil.getLong(actionRequest, "teamId");
+
+		long[] addUserGroupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "addUserGroupIds"), 0L);
+		long[] removeUserGroupIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "removeUserGroupIds"), 0L);
+
+		UserGroupServiceUtil.addTeamUserGroups(teamId, addUserGroupIds);
+		UserGroupServiceUtil.unsetTeamUserGroups(teamId, removeUserGroupIds);
+	}
+
 	protected void updateTeamUsers(ActionRequest actionRequest)
 		throws Exception {
 
@@ -115,17 +129,4 @@ public class EditTeamAssignmentsAction extends PortletAction {
 		UserServiceUtil.unsetTeamUsers(teamId, removeUserIds);
 	}
 
-	protected void updateTeamUserGroups(ActionRequest actionRequest)
-		throws Exception {
-
-		long teamId = ParamUtil.getLong(actionRequest, "teamId");
-
-		long[] addUserGroupIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "addUserGroupIds"), 0L);
-		long[] removeUserGroupIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "removeUserGroupIds"), 0L);
-
-		UserGroupServiceUtil.addTeamUserGroups(teamId, addUserGroupIds);
-		UserGroupServiceUtil.unsetTeamUserGroups(teamId, removeUserGroupIds);
-	}
 }

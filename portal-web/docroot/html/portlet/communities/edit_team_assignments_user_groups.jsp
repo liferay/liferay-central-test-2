@@ -17,7 +17,6 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-
 String tabs2 = (String)request.getAttribute("edit_team_assignments.jsp-tabs2");
 
 int cur = (Integer)request.getAttribute("edit_team_assignments.jsp-cur");
@@ -31,15 +30,14 @@ Organization organization = (Organization)request.getAttribute("edit_team_assign
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.jsp-portletURL");
 %>
 
+<aui:input name="addUserGroupIds" type="hidden" />
+<aui:input name="removeUserGroupIds" type="hidden" />
 
 <liferay-ui:tabs
 	names="current,available"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
-
-<aui:input name="addUserGroupIds" type="hidden" />
-<aui:input name="removeUserGroupIds" type="hidden" />
 
 <liferay-ui:search-container
 	rowChecker="<%= new UserGroupTeamChecker(renderResponse, team) %>"
@@ -54,7 +52,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 
 	LinkedHashMap userGroupParams = new LinkedHashMap();
 
-    userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
+	userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
 
 	if (tabs2.equals("current")) {
 		userGroupParams.put("userGroupsTeams", new Long(team.getTeamId()));
@@ -85,15 +83,15 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 		/>
 	</liferay-ui:search-container-row>
 
-    <div class="separator"><!-- --></div>
+	<div class="separator"><!-- --></div>
 
-    <%
-    String taglibOnClick = renderResponse.getNamespace() + "updateTeamUserGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
-    %>
+	<%
+	String taglibOnClick = renderResponse.getNamespace() + "updateTeamUserGroups('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	%>
 
-    <aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
+	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
 
-    <br /><br />
+	<br /><br />
 
-    <liferay-ui:search-iterator />
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>

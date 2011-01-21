@@ -1270,20 +1270,13 @@
 				Team.name ASC
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.TeamFinder.findByU_G">
+	<sql id="com.liferay.portal.service.persistence.TeamFinder.joinByUsersUserGroups">
 		<![CDATA[
-			SELECT
-			    DISTINCT {Team.*}
-			FROM
-			    Team
-            INNER JOIN
-                UserGroups_Teams ON
-                    (Team.teamId = UserGroups_Teams.teamId) AND
-                    (Team.groupId = ?)
-            INNER JOIN
-                Users_UserGroups ON
-                    (UserGroups_Teams.userGroupId = Users_UserGroups.userGroupId) AND
-                    (Users_UserGroups.userId = ?)
+			INNER JOIN
+				Users_UserGroups ON
+					(UserGroups_Teams.userGroupId = Users_UserGroups.userGroupId)
+			WHERE
+				(Users_UserGroups.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.TeamFinder.joinByUsersTeams">
@@ -1293,15 +1286,6 @@
 					(Users_Teams.teamId = Team.teamId)
 			WHERE
 				(Users_Teams.userId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.TeamFinder.joinByUserGroupsTeams">
-		<![CDATA[
-			INNER JOIN
-				UserGroups_Teams ON
-					(UserGroups_Teams.teamId = Team.teamId)
-			WHERE
-				(UserGroups_Teams.userGroupId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.countByUser">

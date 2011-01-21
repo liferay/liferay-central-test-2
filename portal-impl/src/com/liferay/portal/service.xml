@@ -1716,7 +1716,7 @@
 		<!-- Relationships -->
 
 		<column name="users" type="Collection" entity="User" mapping-table="Users_Teams" />
-        <column name="userGroups" type="Collection" entity="UserGroup" mapping-table="UserGroups_Teams" />
+		<column name="userGroups" type="Collection" entity="UserGroup" mapping-table="UserGroups_Teams" />
 
 		<!-- Order -->
 
@@ -1870,8 +1870,8 @@
 		<!-- Relationships -->
 
 		<column name="groups" type="Collection" entity="Group" mapping-table="Groups_UserGroups" />
+		<column name="teams" type="Collection" entity="Team" mapping-table="UserGroups_Teams" />
 		<column name="users" type="Collection" entity="User" mapping-table="Users_UserGroups" />
-        <column name="teams" type="Collection" entity="Team" mapping-table="UserGroups_Teams" />
 
 		<!-- Order -->
 

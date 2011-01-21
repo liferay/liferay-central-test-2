@@ -38,12 +38,6 @@ public class TeamFinderUtil {
 			obc);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Team> findByU_G(
-		long userId, long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByU_G(userId, groupId, start, end);
-	}
-
 	public static TeamFinder getFinder() {
 		if (_finder == null) {
 			_finder = (TeamFinder)PortalBeanLocatorUtil.locate(TeamFinder.class.getName());

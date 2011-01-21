@@ -209,12 +209,11 @@ public interface UserGroupLocalService {
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void addTeamUserGroups(long teamId, long[] userGroupIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portal.model.UserGroup addUserGroup(long userId,
 		long companyId, java.lang.String name, java.lang.String description)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public void addTeamUserGroups(long teamId, long[] userGroupIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -283,8 +282,7 @@ public interface UserGroupLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void unsetTeamUserGroups(long teamId, long[] userGroupIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.UserGroup updateUserGroup(long companyId,
 		long userGroupId, java.lang.String name, java.lang.String description)

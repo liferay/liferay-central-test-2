@@ -999,229 +999,6 @@ public class UserGroupUtil {
 	}
 
 	/**
-	* Gets all the users associated with the user group.
-	*
-	* @param pk the primary key of the user group to get the associated users for
-	* @return the users associated with the user group
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portal.model.User> getUsers(
-		long pk) throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getUsers(pk);
-	}
-
-	/**
-	* Gets a range of all the users associated with the user group.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param pk the primary key of the user group to get the associated users for
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
-	* @return the range of users associated with the user group
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portal.model.User> getUsers(
-		long pk, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getUsers(pk, start, end);
-	}
-
-	/**
-	* Gets an ordered range of all the users associated with the user group.
-	*
-	* <p>
-	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	* </p>
-	*
-	* @param pk the primary key of the user group to get the associated users for
-	* @param start the lower bound of the range of user groups to return
-	* @param end the upper bound of the range of user groups to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
-	* @return the ordered range of users associated with the user group
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portal.model.User> getUsers(
-		long pk, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getUsers(pk, start, end, orderByComparator);
-	}
-
-	/**
-	* Gets the number of users associated with the user group.
-	*
-	* @param pk the primary key of the user group to get the number of associated users for
-	* @return the number of users associated with the user group
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int getUsersSize(long pk)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().getUsersSize(pk);
-	}
-
-	/**
-	* Determines if the user is associated with the user group.
-	*
-	* @param pk the primary key of the user group
-	* @param userPK the primary key of the user
-	* @return <code>true</code> if the user is associated with the user group; <code>false</code> otherwise
-	* @throws SystemException if a system exception occurred
-	*/
-	public static boolean containsUser(long pk, long userPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().containsUser(pk, userPK);
-	}
-
-	/**
-	* Determines if the user group has any users associated with it.
-	*
-	* @param pk the primary key of the user group to check for associations with users
-	* @return <code>true</code> if the user group has any users associated with it; <code>false</code> otherwise
-	* @throws SystemException if a system exception occurred
-	*/
-	public static boolean containsUsers(long pk)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().containsUsers(pk);
-	}
-
-	/**
-	* Adds an association between the user group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group
-	* @param userPK the primary key of the user
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void addUser(long pk, long userPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().addUser(pk, userPK);
-	}
-
-	/**
-	* Adds an association between the user group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group
-	* @param user the user
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void addUser(long pk, com.liferay.portal.model.User user)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().addUser(pk, user);
-	}
-
-	/**
-	* Adds an association between the user group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group
-	* @param userPKs the primary keys of the users
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void addUsers(long pk, long[] userPKs)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().addUsers(pk, userPKs);
-	}
-
-	/**
-	* Adds an association between the user group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group
-	* @param users the users
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void addUsers(long pk,
-		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().addUsers(pk, users);
-	}
-
-	/**
-	* Clears all associations between the user group and its users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group to clear the associated users from
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void clearUsers(long pk)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().clearUsers(pk);
-	}
-
-	/**
-	* Removes the association between the user group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group
-	* @param userPK the primary key of the user
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeUser(long pk, long userPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeUser(pk, userPK);
-	}
-
-	/**
-	* Removes the association between the user group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group
-	* @param user the user
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeUser(long pk, com.liferay.portal.model.User user)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeUser(pk, user);
-	}
-
-	/**
-	* Removes the association between the user group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group
-	* @param userPKs the primary keys of the users
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeUsers(long pk, long[] userPKs)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeUsers(pk, userPKs);
-	}
-
-	/**
-	* Removes the association between the user group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group
-	* @param users the users
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeUsers(long pk,
-		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeUsers(pk, users);
-	}
-
-	/**
-	* Sets the users associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group to set the associations for
-	* @param userPKs the primary keys of the users to be associated with the user group
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void setUsers(long pk, long[] userPKs)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().setUsers(pk, userPKs);
-	}
-
-	/**
-	* Sets the users associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	*
-	* @param pk the primary key of the user group to set the associations for
-	* @param users the users to be associated with the user group
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void setUsers(long pk,
-		java.util.List<com.liferay.portal.model.User> users)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().setUsers(pk, users);
-	}
-
-	/**
 	* Gets all the teams associated with the user group.
 	*
 	* @param pk the primary key of the user group to get the associated teams for
@@ -1442,6 +1219,229 @@ public class UserGroupUtil {
 		java.util.List<com.liferay.portal.model.Team> teams)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence().setTeams(pk, teams);
+	}
+
+	/**
+	* Gets all the users associated with the user group.
+	*
+	* @param pk the primary key of the user group to get the associated users for
+	* @return the users associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		long pk) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getUsers(pk);
+	}
+
+	/**
+	* Gets a range of all the users associated with the user group.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the user group to get the associated users for
+	* @param start the lower bound of the range of user groups to return
+	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @return the range of users associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		long pk, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getUsers(pk, start, end);
+	}
+
+	/**
+	* Gets an ordered range of all the users associated with the user group.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the user group to get the associated users for
+	* @param start the lower bound of the range of user groups to return
+	* @param end the upper bound of the range of user groups to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by
+	* @return the ordered range of users associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		long pk, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getUsers(pk, start, end, orderByComparator);
+	}
+
+	/**
+	* Gets the number of users associated with the user group.
+	*
+	* @param pk the primary key of the user group to get the number of associated users for
+	* @return the number of users associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int getUsersSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().getUsersSize(pk);
+	}
+
+	/**
+	* Determines if the user is associated with the user group.
+	*
+	* @param pk the primary key of the user group
+	* @param userPK the primary key of the user
+	* @return <code>true</code> if the user is associated with the user group; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean containsUser(long pk, long userPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().containsUser(pk, userPK);
+	}
+
+	/**
+	* Determines if the user group has any users associated with it.
+	*
+	* @param pk the primary key of the user group to check for associations with users
+	* @return <code>true</code> if the user group has any users associated with it; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean containsUsers(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().containsUsers(pk);
+	}
+
+	/**
+	* Adds an association between the user group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param userPK the primary key of the user
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addUser(long pk, long userPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addUser(pk, userPK);
+	}
+
+	/**
+	* Adds an association between the user group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param user the user
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addUser(long pk, com.liferay.portal.model.User user)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addUser(pk, user);
+	}
+
+	/**
+	* Adds an association between the user group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param userPKs the primary keys of the users
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addUsers(long pk, long[] userPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addUsers(pk, userPKs);
+	}
+
+	/**
+	* Adds an association between the user group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param users the users
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().addUsers(pk, users);
+	}
+
+	/**
+	* Clears all associations between the user group and its users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group to clear the associated users from
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void clearUsers(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().clearUsers(pk);
+	}
+
+	/**
+	* Removes the association between the user group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param userPK the primary key of the user
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeUser(long pk, long userPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeUser(pk, userPK);
+	}
+
+	/**
+	* Removes the association between the user group and the user. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param user the user
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeUser(long pk, com.liferay.portal.model.User user)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeUser(pk, user);
+	}
+
+	/**
+	* Removes the association between the user group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param userPKs the primary keys of the users
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeUsers(long pk, long[] userPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeUsers(pk, userPKs);
+	}
+
+	/**
+	* Removes the association between the user group and the users. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group
+	* @param users the users
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeUsers(pk, users);
+	}
+
+	/**
+	* Sets the users associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group to set the associations for
+	* @param userPKs the primary keys of the users to be associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void setUsers(long pk, long[] userPKs)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().setUsers(pk, userPKs);
+	}
+
+	/**
+	* Sets the users associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the user group to set the associations for
+	* @param users the users to be associated with the user group
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void setUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().setUsers(pk, users);
 	}
 
 	public static UserGroupPersistence getPersistence() {

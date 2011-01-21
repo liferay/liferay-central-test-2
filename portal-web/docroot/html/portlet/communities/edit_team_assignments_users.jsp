@@ -17,7 +17,6 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-
 String tabs2 = (String)request.getAttribute("edit_team_assignments.jsp-tabs2");
 
 int cur = (Integer)request.getAttribute("edit_team_assignments.jsp-cur");
@@ -31,6 +30,8 @@ Organization organization = (Organization)request.getAttribute("edit_team_assign
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.jsp-portletURL");
 %>
 
+<aui:input name="addUserIds" type="hidden" />
+<aui:input name="removeUserIds" type="hidden" />
 
 <liferay-ui:tabs
 	names="current,available"
@@ -38,64 +39,61 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_team_assignments.
 	url="<%= portletURL.toString() %>"
 />
 
-<aui:input name="addUserIds" type="hidden" />
-<aui:input name="removeUserIds" type="hidden" />
-
 <liferay-ui:search-container
-    rowChecker="<%= new UserTeamChecker(renderResponse, team) %>"
-    searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
+	rowChecker="<%= new UserTeamChecker(renderResponse, team) %>"
+	searchContainer="<%= new UserSearch(renderRequest, portletURL) %>"
 >
-    <liferay-ui:search-form
-        page="/html/portlet/enterprise_admin/user_search.jsp"
-    />
+	<liferay-ui:search-form
+		page="/html/portlet/enterprise_admin/user_search.jsp"
+	/>
 
-    <%
-    UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+	<%
+	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-    LinkedHashMap userParams = new LinkedHashMap();
+	LinkedHashMap userParams = new LinkedHashMap();
 
-    if (group.isOrganization()) {
-        userParams.put("usersOrgs", organization.getOrganizationId());
-    }
-    else {
-        userParams.put("usersGroups", team.getGroupId());
-    }
+	if (group.isOrganization()) {
+		userParams.put("usersOrgs", organization.getOrganizationId());
+	}
+	else {
+		userParams.put("usersGroups", team.getGroupId());
+	}
 
-    if (tabs2.equals("current")) {
-        userParams.put("usersTeams", team.getTeamId());
-    }
-    %>
+	if (tabs2.equals("current")) {
+		userParams.put("usersTeams", team.getTeamId());
+	}
+	%>
 
-    <liferay-ui:search-container-results>
-        <%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
-    </liferay-ui:search-container-results>
+	<liferay-ui:search-container-results>
+		<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+	</liferay-ui:search-container-results>
 
-    <liferay-ui:search-container-row
-        className="com.liferay.portal.model.User"
-        escapedModel="<%= true %>"
-        keyProperty="userId"
-        modelVar="user2"
-    >
-        <liferay-ui:search-container-column-text
-            name="name"
-            property="fullName"
-        />
+	<liferay-ui:search-container-row
+		className="com.liferay.portal.model.User"
+		escapedModel="<%= true %>"
+		keyProperty="userId"
+		modelVar="user2"
+	>
+		<liferay-ui:search-container-column-text
+			name="name"
+			property="fullName"
+		/>
 
-        <liferay-ui:search-container-column-text
-            name="screen-name"
-            property="screenName"
-        />
-    </liferay-ui:search-container-row>
+		<liferay-ui:search-container-column-text
+			name="screen-name"
+			property="screenName"
+		/>
+	</liferay-ui:search-container-row>
 
-    <div class="separator"><!-- --></div>
+	<div class="separator"><!-- --></div>
 
-    <%
-    String taglibOnClick = renderResponse.getNamespace() + "updateTeamUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
-    %>
+	<%
+	String taglibOnClick = renderResponse.getNamespace() + "updateTeamUsers('" + portletURL.toString() + StringPool.AMPERSAND + renderResponse.getNamespace() + "cur=" + cur + "');";
+	%>
 
-    <aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
+	<aui:button onClick="<%= taglibOnClick %>" value="update-associations" />
 
-    <br /><br />
+	<br /><br />
 
-    <liferay-ui:search-iterator />
+	<liferay-ui:search-iterator />
 </liferay-ui:search-container>

@@ -104,6 +104,12 @@ create table Repository (
 
 alter table SocialEquityLog add extraData VARCHAR(255) null;
 
+create table UserGroups_Teams (
+	userGroupId LONG not null,
+	teamId LONG not null,
+	primary key (userGroupId, teamId)
+);
+
 create table VirtualHost (
 	virtualHostId LONG not null primary key,
 	companyId LONG,

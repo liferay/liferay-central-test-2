@@ -15,6 +15,7 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.NoSuchResourceException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -50,6 +51,7 @@ import com.liferay.util.UniqueList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -453,15 +455,21 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			List<Team> userTeams = TeamLocalServiceUtil.getUserTeams(
 				userId, group.getGroupId());
 
-			List<Team> userGroupTeams = TeamLocalServiceUtil.getUserGroupTeams(
-				userId, group.getGroupId());
-
 			for (Team team : userTeams) {
 				Role role = RoleLocalServiceUtil.getTeamRole(
 					team.getCompanyId(), team.getTeamId());
 
 				roles.add(role);
 			}
+
+			LinkedHashMap<String, Object> teamParams =
+				new LinkedHashMap<String, Object>();
+
+			teamParams.put("usersUserGroups", userId);
+
+			List<Team> userGroupTeams = TeamLocalServiceUtil.search(
+				group.getGroupId(), null, null, teamParams, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS, null);
 
 			for (Team team : userGroupTeams) {
 				Role role = RoleLocalServiceUtil.getTeamRole(

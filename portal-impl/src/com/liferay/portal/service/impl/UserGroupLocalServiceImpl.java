@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.Team;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupConstants;
@@ -52,6 +53,14 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		groupPersistence.addUserGroups(groupId, userGroupIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
+	public void addTeamUserGroups(long teamId, long[] userGroupIds)
+		throws SystemException {
+
+		teamPersistence.addUserGroups(teamId, userGroupIds);
 
 		PermissionCacheUtil.clearCache();
 	}
@@ -89,14 +98,6 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			userGroup.getUserGroupId(), false, false, false);
 
 		return userGroup;
-	}
-
-	public void addTeamUserGroups(long teamId, long[] userGroupIds)
-		throws PortalException, SystemException {
-
-		teamPersistence.addUserGroups(teamId, userGroupIds);
-
-		PermissionCacheUtil.clearCache();
 	}
 
 	public void clearUserUserGroups(long userId) throws SystemException {
@@ -192,7 +193,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			userGroup.getCompanyId(), UserGroup.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, userGroup.getUserGroupId());
 
-		// User Group
+		// User group
 
 		userGroupPersistence.remove(userGroupId);
 
@@ -288,10 +289,14 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws SystemException {
 
+		List<Team> teams = teamPersistence.findByGroupId(groupId);
+
+		for (Team team : teams) {
+			teamPersistence.removeUserGroups(team.getTeamId(), userGroupIds);
+		}
+
 		userGroupGroupRoleLocalService.deleteUserGroupGroupRoles(
 			userGroupIds, groupId);
-
-		teamLocalService.unsetGroupTeamUserGroups(groupId, userGroupIds);
 
 		groupPersistence.removeUserGroups(groupId, userGroupIds);
 
@@ -299,7 +304,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public void unsetTeamUserGroups(long teamId, long[] userGroupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		teamPersistence.removeUserGroups(teamId, userGroupIds);
 
@@ -307,8 +312,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	}
 
 	public UserGroup updateUserGroup(
-			long companyId, long userGroupId, String name,
-			String description)
+			long companyId, long userGroupId, String name, String description)
 		throws PortalException, SystemException {
 
 		validate(userGroupId, companyId, name);
@@ -445,4 +449,5 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		catch (NoSuchUserGroupException nsuge) {
 		}
 	}
+
 }

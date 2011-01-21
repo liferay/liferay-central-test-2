@@ -270,16 +270,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 
 		try {
-			clearUsers.clear(userGroup.getPrimaryKey());
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
-		}
-
-		try {
 			clearTeams.clear(userGroup.getPrimaryKey());
 		}
 		catch (Exception e) {
@@ -287,6 +277,16 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 		finally {
 			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+
+		try {
+			clearUsers.clear(userGroup.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERS_USERGROUPS_NAME);
 		}
 
 		Session session = null;
@@ -2548,6 +2548,467 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	/**
+	 * Gets all the teams associated with the user group.
+	 *
+	 * @param pk the primary key of the user group to get the associated teams for
+	 * @return the teams associated with the user group
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<com.liferay.portal.model.Team> getTeams(long pk)
+		throws SystemException {
+		return getTeams(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	/**
+	 * Gets a range of all the teams associated with the user group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the user group to get the associated teams for
+	 * @param start the lower bound of the range of user groups to return
+	 * @param end the upper bound of the range of user groups to return (not inclusive)
+	 * @return the range of teams associated with the user group
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<com.liferay.portal.model.Team> getTeams(long pk, int start,
+		int end) throws SystemException {
+		return getTeams(pk, start, end, null);
+	}
+
+	public static final FinderPath FINDER_PATH_GET_TEAMS = new FinderPath(com.liferay.portal.model.impl.TeamModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupModelImpl.FINDER_CACHE_ENABLED_USERGROUPS_TEAMS,
+			UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME, "getTeams",
+			new String[] {
+				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+
+	/**
+	 * Gets an ordered range of all the teams associated with the user group.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param pk the primary key of the user group to get the associated teams for
+	 * @param start the lower bound of the range of user groups to return
+	 * @param end the upper bound of the range of user groups to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of teams associated with the user group
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<com.liferay.portal.model.Team> getTeams(long pk, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				pk, String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<com.liferay.portal.model.Team> list = (List<com.liferay.portal.model.Team>)FinderCacheUtil.getResult(FINDER_PATH_GET_TEAMS,
+				finderArgs, this);
+
+		if (list == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				String sql = null;
+
+				if (orderByComparator != null) {
+					sql = _SQL_GETTEAMS.concat(ORDER_BY_CLAUSE)
+									   .concat(orderByComparator.getOrderBy());
+				}
+				else {
+					sql = _SQL_GETTEAMS.concat(com.liferay.portal.model.impl.TeamModelImpl.ORDER_BY_SQL);
+				}
+
+				SQLQuery q = session.createSQLQuery(sql);
+
+				q.addEntity("Team", com.liferay.portal.model.impl.TeamImpl.class);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pk);
+
+				list = (List<com.liferay.portal.model.Team>)QueryUtil.list(q,
+						getDialect(), start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_GET_TEAMS,
+						finderArgs);
+				}
+				else {
+					teamPersistence.cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_GET_TEAMS,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	public static final FinderPath FINDER_PATH_GET_TEAMS_SIZE = new FinderPath(com.liferay.portal.model.impl.TeamModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupModelImpl.FINDER_CACHE_ENABLED_USERGROUPS_TEAMS,
+			UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME,
+			"getTeamsSize", new String[] { Long.class.getName() });
+
+	/**
+	 * Gets the number of teams associated with the user group.
+	 *
+	 * @param pk the primary key of the user group to get the number of associated teams for
+	 * @return the number of teams associated with the user group
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getTeamsSize(long pk) throws SystemException {
+		Object[] finderArgs = new Object[] { pk };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_TEAMS_SIZE,
+				finderArgs, this);
+
+		if (count == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				SQLQuery q = session.createSQLQuery(_SQL_GETTEAMSSIZE);
+
+				q.addScalar(COUNT_COLUMN_NAME,
+					com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(pk);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_GET_TEAMS_SIZE,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	public static final FinderPath FINDER_PATH_CONTAINS_TEAM = new FinderPath(com.liferay.portal.model.impl.TeamModelImpl.ENTITY_CACHE_ENABLED,
+			UserGroupModelImpl.FINDER_CACHE_ENABLED_USERGROUPS_TEAMS,
+			UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME,
+			"containsTeam",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Determines if the team is associated with the user group.
+	 *
+	 * @param pk the primary key of the user group
+	 * @param teamPK the primary key of the team
+	 * @return <code>true</code> if the team is associated with the user group; <code>false</code> otherwise
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean containsTeam(long pk, long teamPK) throws SystemException {
+		Object[] finderArgs = new Object[] { pk, teamPK };
+
+		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_TEAM,
+				finderArgs, this);
+
+		if (value == null) {
+			try {
+				value = Boolean.valueOf(containsTeam.contains(pk, teamPK));
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (value == null) {
+					value = Boolean.FALSE;
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_TEAM,
+					finderArgs, value);
+			}
+		}
+
+		return value.booleanValue();
+	}
+
+	/**
+	 * Determines if the user group has any teams associated with it.
+	 *
+	 * @param pk the primary key of the user group to check for associations with teams
+	 * @return <code>true</code> if the user group has any teams associated with it; <code>false</code> otherwise
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean containsTeams(long pk) throws SystemException {
+		if (getTeamsSize(pk) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Adds an association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group
+	 * @param teamPK the primary key of the team
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addTeam(long pk, long teamPK) throws SystemException {
+		try {
+			addTeam.add(pk, teamPK);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Adds an association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group
+	 * @param team the team
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addTeam(long pk, com.liferay.portal.model.Team team)
+		throws SystemException {
+		try {
+			addTeam.add(pk, team.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Adds an association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group
+	 * @param teamPKs the primary keys of the teams
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addTeams(long pk, long[] teamPKs) throws SystemException {
+		try {
+			for (long teamPK : teamPKs) {
+				addTeam.add(pk, teamPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Adds an association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group
+	 * @param teams the teams
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addTeams(long pk, List<com.liferay.portal.model.Team> teams)
+		throws SystemException {
+		try {
+			for (com.liferay.portal.model.Team team : teams) {
+				addTeam.add(pk, team.getPrimaryKey());
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Clears all associations between the user group and its teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group to clear the associated teams from
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearTeams(long pk) throws SystemException {
+		try {
+			clearTeams.clear(pk);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Removes the association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group
+	 * @param teamPK the primary key of the team
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeTeam(long pk, long teamPK) throws SystemException {
+		try {
+			removeTeam.remove(pk, teamPK);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Removes the association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group
+	 * @param team the team
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeTeam(long pk, com.liferay.portal.model.Team team)
+		throws SystemException {
+		try {
+			removeTeam.remove(pk, team.getPrimaryKey());
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Removes the association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group
+	 * @param teamPKs the primary keys of the teams
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeTeams(long pk, long[] teamPKs) throws SystemException {
+		try {
+			for (long teamPK : teamPKs) {
+				removeTeam.remove(pk, teamPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Removes the association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group
+	 * @param teams the teams
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeTeams(long pk, List<com.liferay.portal.model.Team> teams)
+		throws SystemException {
+		try {
+			for (com.liferay.portal.model.Team team : teams) {
+				removeTeam.remove(pk, team.getPrimaryKey());
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Sets the teams associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group to set the associations for
+	 * @param teamPKs the primary keys of the teams to be associated with the user group
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setTeams(long pk, long[] teamPKs) throws SystemException {
+		try {
+			Set<Long> teamPKSet = SetUtil.fromArray(teamPKs);
+
+			List<com.liferay.portal.model.Team> teams = getTeams(pk);
+
+			for (com.liferay.portal.model.Team team : teams) {
+				if (!teamPKSet.remove(team.getPrimaryKey())) {
+					removeTeam.remove(pk, team.getPrimaryKey());
+				}
+			}
+
+			for (Long teamPK : teamPKSet) {
+				addTeam.add(pk, teamPK);
+			}
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
+	 * Sets the teams associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	 *
+	 * @param pk the primary key of the user group to set the associations for
+	 * @param teams the teams to be associated with the user group
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setTeams(long pk, List<com.liferay.portal.model.Team> teams)
+		throws SystemException {
+		try {
+			long[] teamPKs = new long[teams.size()];
+
+			for (int i = 0; i < teams.size(); i++) {
+				com.liferay.portal.model.Team team = teams.get(i);
+
+				teamPKs[i] = team.getPrimaryKey();
+			}
+
+			setTeams(pk, teamPKs);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
+		}
+	}
+
+	/**
 	 * Gets all the users associated with the user group.
 	 *
 	 * @param pk the primary key of the user group to get the associated users for
@@ -3010,467 +3471,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	}
 
 	/**
-	 * Gets all the teams associated with the user group.
-	 *
-	 * @param pk the primary key of the user group to get the associated teams for
-	 * @return the teams associated with the user group
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<com.liferay.portal.model.Team> getTeams(long pk)
-		throws SystemException {
-		return getTeams(pk, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	/**
-	 * Gets a range of all the teams associated with the user group.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param pk the primary key of the user group to get the associated teams for
-	 * @param start the lower bound of the range of user groups to return
-	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @return the range of teams associated with the user group
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<com.liferay.portal.model.Team> getTeams(long pk, int start,
-		int end) throws SystemException {
-		return getTeams(pk, start, end, null);
-	}
-
-	public static final FinderPath FINDER_PATH_GET_TEAMS = new FinderPath(com.liferay.portal.model.impl.TeamModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupModelImpl.FINDER_CACHE_ENABLED_USERGROUPS_TEAMS,
-			UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME, "getTeams",
-			new String[] {
-				Long.class.getName(), "java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-
-	/**
-	 * Gets an ordered range of all the teams associated with the user group.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
-	 * </p>
-	 *
-	 * @param pk the primary key of the user group to get the associated teams for
-	 * @param start the lower bound of the range of user groups to return
-	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
-	 * @return the ordered range of teams associated with the user group
-	 * @throws SystemException if a system exception occurred
-	 */
-	public List<com.liferay.portal.model.Team> getTeams(long pk, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
-		Object[] finderArgs = new Object[] {
-				pk, String.valueOf(start), String.valueOf(end),
-				String.valueOf(orderByComparator)
-			};
-
-		List<com.liferay.portal.model.Team> list = (List<com.liferay.portal.model.Team>)FinderCacheUtil.getResult(FINDER_PATH_GET_TEAMS,
-				finderArgs, this);
-
-		if (list == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				String sql = null;
-
-				if (orderByComparator != null) {
-					sql = _SQL_GETTEAMS.concat(ORDER_BY_CLAUSE)
-									   .concat(orderByComparator.getOrderBy());
-				}
-				else {
-					sql = _SQL_GETTEAMS.concat(com.liferay.portal.model.impl.TeamModelImpl.ORDER_BY_SQL);
-				}
-
-				SQLQuery q = session.createSQLQuery(sql);
-
-				q.addEntity("Team", com.liferay.portal.model.impl.TeamImpl.class);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(pk);
-
-				list = (List<com.liferay.portal.model.Team>)QueryUtil.list(q,
-						getDialect(), start, end);
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_GET_TEAMS,
-						finderArgs);
-				}
-				else {
-					teamPersistence.cacheResult(list);
-
-					FinderCacheUtil.putResult(FINDER_PATH_GET_TEAMS,
-						finderArgs, list);
-				}
-
-				closeSession(session);
-			}
-		}
-
-		return list;
-	}
-
-	public static final FinderPath FINDER_PATH_GET_TEAMS_SIZE = new FinderPath(com.liferay.portal.model.impl.TeamModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupModelImpl.FINDER_CACHE_ENABLED_USERGROUPS_TEAMS,
-			UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME,
-			"getTeamsSize", new String[] { Long.class.getName() });
-
-	/**
-	 * Gets the number of teams associated with the user group.
-	 *
-	 * @param pk the primary key of the user group to get the number of associated teams for
-	 * @return the number of teams associated with the user group
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int getTeamsSize(long pk) throws SystemException {
-		Object[] finderArgs = new Object[] { pk };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_GET_TEAMS_SIZE,
-				finderArgs, this);
-
-		if (count == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				SQLQuery q = session.createSQLQuery(_SQL_GETTEAMSSIZE);
-
-				q.addScalar(COUNT_COLUMN_NAME,
-					com.liferay.portal.kernel.dao.orm.Type.LONG);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(pk);
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_GET_TEAMS_SIZE,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	public static final FinderPath FINDER_PATH_CONTAINS_TEAM = new FinderPath(com.liferay.portal.model.impl.TeamModelImpl.ENTITY_CACHE_ENABLED,
-			UserGroupModelImpl.FINDER_CACHE_ENABLED_USERGROUPS_TEAMS,
-			UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME,
-			"containsTeam",
-			new String[] { Long.class.getName(), Long.class.getName() });
-
-	/**
-	 * Determines if the team is associated with the user group.
-	 *
-	 * @param pk the primary key of the user group
-	 * @param teamPK the primary key of the team
-	 * @return <code>true</code> if the team is associated with the user group; <code>false</code> otherwise
-	 * @throws SystemException if a system exception occurred
-	 */
-	public boolean containsTeam(long pk, long teamPK) throws SystemException {
-		Object[] finderArgs = new Object[] { pk, teamPK };
-
-		Boolean value = (Boolean)FinderCacheUtil.getResult(FINDER_PATH_CONTAINS_TEAM,
-				finderArgs, this);
-
-		if (value == null) {
-			try {
-				value = Boolean.valueOf(containsTeam.contains(pk, teamPK));
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (value == null) {
-					value = Boolean.FALSE;
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_CONTAINS_TEAM,
-					finderArgs, value);
-			}
-		}
-
-		return value.booleanValue();
-	}
-
-	/**
-	 * Determines if the user group has any teams associated with it.
-	 *
-	 * @param pk the primary key of the user group to check for associations with teams
-	 * @return <code>true</code> if the user group has any teams associated with it; <code>false</code> otherwise
-	 * @throws SystemException if a system exception occurred
-	 */
-	public boolean containsTeams(long pk) throws SystemException {
-		if (getTeamsSize(pk) > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	/**
-	 * Adds an association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group
-	 * @param teamPK the primary key of the team
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void addTeam(long pk, long teamPK) throws SystemException {
-		try {
-			addTeam.add(pk, teamPK);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Adds an association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group
-	 * @param team the team
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void addTeam(long pk, com.liferay.portal.model.Team team)
-		throws SystemException {
-		try {
-			addTeam.add(pk, team.getPrimaryKey());
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Adds an association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group
-	 * @param teamPKs the primary keys of the teams
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void addTeams(long pk, long[] teamPKs) throws SystemException {
-		try {
-			for (long teamPK : teamPKs) {
-				addTeam.add(pk, teamPK);
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Adds an association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group
-	 * @param teams the teams
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void addTeams(long pk, List<com.liferay.portal.model.Team> teams)
-		throws SystemException {
-		try {
-			for (com.liferay.portal.model.Team team : teams) {
-				addTeam.add(pk, team.getPrimaryKey());
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Clears all associations between the user group and its teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group to clear the associated teams from
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void clearTeams(long pk) throws SystemException {
-		try {
-			clearTeams.clear(pk);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Removes the association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group
-	 * @param teamPK the primary key of the team
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeTeam(long pk, long teamPK) throws SystemException {
-		try {
-			removeTeam.remove(pk, teamPK);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Removes the association between the user group and the team. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group
-	 * @param team the team
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeTeam(long pk, com.liferay.portal.model.Team team)
-		throws SystemException {
-		try {
-			removeTeam.remove(pk, team.getPrimaryKey());
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Removes the association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group
-	 * @param teamPKs the primary keys of the teams
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeTeams(long pk, long[] teamPKs) throws SystemException {
-		try {
-			for (long teamPK : teamPKs) {
-				removeTeam.remove(pk, teamPK);
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Removes the association between the user group and the teams. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group
-	 * @param teams the teams
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeTeams(long pk, List<com.liferay.portal.model.Team> teams)
-		throws SystemException {
-		try {
-			for (com.liferay.portal.model.Team team : teams) {
-				removeTeam.remove(pk, team.getPrimaryKey());
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Sets the teams associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group to set the associations for
-	 * @param teamPKs the primary keys of the teams to be associated with the user group
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void setTeams(long pk, long[] teamPKs) throws SystemException {
-		try {
-			Set<Long> teamPKSet = SetUtil.fromArray(teamPKs);
-
-			List<com.liferay.portal.model.Team> teams = getTeams(pk);
-
-			for (com.liferay.portal.model.Team team : teams) {
-				if (!teamPKSet.remove(team.getPrimaryKey())) {
-					removeTeam.remove(pk, team.getPrimaryKey());
-				}
-			}
-
-			for (Long teamPK : teamPKSet) {
-				addTeam.add(pk, teamPK);
-			}
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
-	 * Sets the teams associated with the user group, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
-	 *
-	 * @param pk the primary key of the user group to set the associations for
-	 * @param teams the teams to be associated with the user group
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void setTeams(long pk, List<com.liferay.portal.model.Team> teams)
-		throws SystemException {
-		try {
-			long[] teamPKs = new long[teams.size()];
-
-			for (int i = 0; i < teams.size(); i++) {
-				com.liferay.portal.model.Team team = teams.get(i);
-
-				teamPKs[i] = team.getPrimaryKey();
-			}
-
-			setTeams(pk, teamPKs);
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			FinderCacheUtil.clearCache(UserGroupModelImpl.MAPPING_TABLE_USERGROUPS_TEAMS_NAME);
-		}
-	}
-
-	/**
 	 * Initializes the user group persistence.
 	 */
 	public void afterPropertiesSet() {
@@ -3500,17 +3500,17 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		clearGroups = new ClearGroups(this);
 		removeGroup = new RemoveGroup(this);
 
-		containsUser = new ContainsUser(this);
-
-		addUser = new AddUser(this);
-		clearUsers = new ClearUsers(this);
-		removeUser = new RemoveUser(this);
-
 		containsTeam = new ContainsTeam(this);
 
 		addTeam = new AddTeam(this);
 		clearTeams = new ClearTeams(this);
 		removeTeam = new RemoveTeam(this);
+
+		containsUser = new ContainsUser(this);
+
+		addUser = new AddUser(this);
+		clearUsers = new ClearUsers(this);
+		removeUser = new RemoveUser(this);
 	}
 
 	public void destroy() {
@@ -3639,14 +3639,14 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	protected AddGroup addGroup;
 	protected ClearGroups clearGroups;
 	protected RemoveGroup removeGroup;
-	protected ContainsUser containsUser;
-	protected AddUser addUser;
-	protected ClearUsers clearUsers;
-	protected RemoveUser removeUser;
 	protected ContainsTeam containsTeam;
 	protected AddTeam addTeam;
 	protected ClearTeams clearTeams;
 	protected RemoveTeam removeTeam;
+	protected ContainsUser containsUser;
+	protected AddUser addUser;
+	protected ClearUsers clearUsers;
+	protected RemoveUser removeUser;
 
 	protected class ContainsGroup {
 		protected ContainsGroup(UserGroupPersistenceImpl persistenceImpl) {
@@ -3804,171 +3804,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 				for (ModelListener<com.liferay.portal.model.Group> listener : groupListeners) {
 					listener.onAfterRemoveAssociation(groupId,
-						UserGroup.class.getName(), userGroupId);
-				}
-			}
-		}
-
-		private SqlUpdate _sqlUpdate;
-		private UserGroupPersistenceImpl _persistenceImpl;
-	}
-
-	protected class ContainsUser {
-		protected ContainsUser(UserGroupPersistenceImpl persistenceImpl) {
-			super();
-
-			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
-					_SQL_CONTAINSUSER,
-					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
-					RowMapper.COUNT);
-		}
-
-		protected boolean contains(long userGroupId, long userId) {
-			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
-						new Long(userGroupId), new Long(userId)
-					});
-
-			if (results.size() > 0) {
-				Integer count = results.get(0);
-
-				if (count.intValue() > 0) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		private MappingSqlQuery<Integer> _mappingSqlQuery;
-	}
-
-	protected class AddUser {
-		protected AddUser(UserGroupPersistenceImpl persistenceImpl) {
-			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"INSERT INTO Users_UserGroups (userGroupId, userId) VALUES (?, ?)",
-					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
-		}
-
-		protected void add(long userGroupId, long userId)
-			throws SystemException {
-			if (!_persistenceImpl.containsUser.contains(userGroupId, userId)) {
-				ModelListener<com.liferay.portal.model.User>[] userListeners = userPersistence.getListeners();
-
-				for (ModelListener<UserGroup> listener : listeners) {
-					listener.onBeforeAddAssociation(userGroupId,
-						com.liferay.portal.model.User.class.getName(), userId);
-				}
-
-				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-					listener.onBeforeAddAssociation(userId,
-						UserGroup.class.getName(), userGroupId);
-				}
-
-				_sqlUpdate.update(new Object[] {
-						new Long(userGroupId), new Long(userId)
-					});
-
-				for (ModelListener<UserGroup> listener : listeners) {
-					listener.onAfterAddAssociation(userGroupId,
-						com.liferay.portal.model.User.class.getName(), userId);
-				}
-
-				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-					listener.onAfterAddAssociation(userId,
-						UserGroup.class.getName(), userGroupId);
-				}
-			}
-		}
-
-		private SqlUpdate _sqlUpdate;
-		private UserGroupPersistenceImpl _persistenceImpl;
-	}
-
-	protected class ClearUsers {
-		protected ClearUsers(UserGroupPersistenceImpl persistenceImpl) {
-			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"DELETE FROM Users_UserGroups WHERE userGroupId = ?",
-					new int[] { java.sql.Types.BIGINT });
-		}
-
-		protected void clear(long userGroupId) throws SystemException {
-			ModelListener<com.liferay.portal.model.User>[] userListeners = userPersistence.getListeners();
-
-			List<com.liferay.portal.model.User> users = null;
-
-			if ((listeners.length > 0) || (userListeners.length > 0)) {
-				users = getUsers(userGroupId);
-
-				for (com.liferay.portal.model.User user : users) {
-					for (ModelListener<UserGroup> listener : listeners) {
-						listener.onBeforeRemoveAssociation(userGroupId,
-							com.liferay.portal.model.User.class.getName(),
-							user.getPrimaryKey());
-					}
-
-					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
-							UserGroup.class.getName(), userGroupId);
-					}
-				}
-			}
-
-			_sqlUpdate.update(new Object[] { new Long(userGroupId) });
-
-			if ((listeners.length > 0) || (userListeners.length > 0)) {
-				for (com.liferay.portal.model.User user : users) {
-					for (ModelListener<UserGroup> listener : listeners) {
-						listener.onAfterRemoveAssociation(userGroupId,
-							com.liferay.portal.model.User.class.getName(),
-							user.getPrimaryKey());
-					}
-
-					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-						listener.onAfterRemoveAssociation(user.getPrimaryKey(),
-							UserGroup.class.getName(), userGroupId);
-					}
-				}
-			}
-		}
-
-		private SqlUpdate _sqlUpdate;
-	}
-
-	protected class RemoveUser {
-		protected RemoveUser(UserGroupPersistenceImpl persistenceImpl) {
-			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
-					"DELETE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?",
-					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
-			_persistenceImpl = persistenceImpl;
-		}
-
-		protected void remove(long userGroupId, long userId)
-			throws SystemException {
-			if (_persistenceImpl.containsUser.contains(userGroupId, userId)) {
-				ModelListener<com.liferay.portal.model.User>[] userListeners = userPersistence.getListeners();
-
-				for (ModelListener<UserGroup> listener : listeners) {
-					listener.onBeforeRemoveAssociation(userGroupId,
-						com.liferay.portal.model.User.class.getName(), userId);
-				}
-
-				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-					listener.onBeforeRemoveAssociation(userId,
-						UserGroup.class.getName(), userGroupId);
-				}
-
-				_sqlUpdate.update(new Object[] {
-						new Long(userGroupId), new Long(userId)
-					});
-
-				for (ModelListener<UserGroup> listener : listeners) {
-					listener.onAfterRemoveAssociation(userGroupId,
-						com.liferay.portal.model.User.class.getName(), userId);
-				}
-
-				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
-					listener.onAfterRemoveAssociation(userId,
 						UserGroup.class.getName(), userGroupId);
 				}
 			}
@@ -4143,6 +3978,171 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		private UserGroupPersistenceImpl _persistenceImpl;
 	}
 
+	protected class ContainsUser {
+		protected ContainsUser(UserGroupPersistenceImpl persistenceImpl) {
+			super();
+
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSUSER,
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
+					RowMapper.COUNT);
+		}
+
+		protected boolean contains(long userGroupId, long userId) {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
+						new Long(userGroupId), new Long(userId)
+					});
+
+			if (results.size() > 0) {
+				Integer count = results.get(0);
+
+				if (count.intValue() > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private MappingSqlQuery<Integer> _mappingSqlQuery;
+	}
+
+	protected class AddUser {
+		protected AddUser(UserGroupPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO Users_UserGroups (userGroupId, userId) VALUES (?, ?)",
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void add(long userGroupId, long userId)
+			throws SystemException {
+			if (!_persistenceImpl.containsUser.contains(userGroupId, userId)) {
+				ModelListener<com.liferay.portal.model.User>[] userListeners = userPersistence.getListeners();
+
+				for (ModelListener<UserGroup> listener : listeners) {
+					listener.onBeforeAddAssociation(userGroupId,
+						com.liferay.portal.model.User.class.getName(), userId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
+					listener.onBeforeAddAssociation(userId,
+						UserGroup.class.getName(), userGroupId);
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(userGroupId), new Long(userId)
+					});
+
+				for (ModelListener<UserGroup> listener : listeners) {
+					listener.onAfterAddAssociation(userGroupId,
+						com.liferay.portal.model.User.class.getName(), userId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
+					listener.onAfterAddAssociation(userId,
+						UserGroup.class.getName(), userGroupId);
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private UserGroupPersistenceImpl _persistenceImpl;
+	}
+
+	protected class ClearUsers {
+		protected ClearUsers(UserGroupPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Users_UserGroups WHERE userGroupId = ?",
+					new int[] { java.sql.Types.BIGINT });
+		}
+
+		protected void clear(long userGroupId) throws SystemException {
+			ModelListener<com.liferay.portal.model.User>[] userListeners = userPersistence.getListeners();
+
+			List<com.liferay.portal.model.User> users = null;
+
+			if ((listeners.length > 0) || (userListeners.length > 0)) {
+				users = getUsers(userGroupId);
+
+				for (com.liferay.portal.model.User user : users) {
+					for (ModelListener<UserGroup> listener : listeners) {
+						listener.onBeforeRemoveAssociation(userGroupId,
+							com.liferay.portal.model.User.class.getName(),
+							user.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
+						listener.onBeforeRemoveAssociation(user.getPrimaryKey(),
+							UserGroup.class.getName(), userGroupId);
+					}
+				}
+			}
+
+			_sqlUpdate.update(new Object[] { new Long(userGroupId) });
+
+			if ((listeners.length > 0) || (userListeners.length > 0)) {
+				for (com.liferay.portal.model.User user : users) {
+					for (ModelListener<UserGroup> listener : listeners) {
+						listener.onAfterRemoveAssociation(userGroupId,
+							com.liferay.portal.model.User.class.getName(),
+							user.getPrimaryKey());
+					}
+
+					for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
+						listener.onAfterRemoveAssociation(user.getPrimaryKey(),
+							UserGroup.class.getName(), userGroupId);
+					}
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+	}
+
+	protected class RemoveUser {
+		protected RemoveUser(UserGroupPersistenceImpl persistenceImpl) {
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?",
+					new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
+			_persistenceImpl = persistenceImpl;
+		}
+
+		protected void remove(long userGroupId, long userId)
+			throws SystemException {
+			if (_persistenceImpl.containsUser.contains(userGroupId, userId)) {
+				ModelListener<com.liferay.portal.model.User>[] userListeners = userPersistence.getListeners();
+
+				for (ModelListener<UserGroup> listener : listeners) {
+					listener.onBeforeRemoveAssociation(userGroupId,
+						com.liferay.portal.model.User.class.getName(), userId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
+					listener.onBeforeRemoveAssociation(userId,
+						UserGroup.class.getName(), userGroupId);
+				}
+
+				_sqlUpdate.update(new Object[] {
+						new Long(userGroupId), new Long(userId)
+					});
+
+				for (ModelListener<UserGroup> listener : listeners) {
+					listener.onAfterRemoveAssociation(userGroupId,
+						com.liferay.portal.model.User.class.getName(), userId);
+				}
+
+				for (ModelListener<com.liferay.portal.model.User> listener : userListeners) {
+					listener.onAfterRemoveAssociation(userId,
+						UserGroup.class.getName(), userGroupId);
+				}
+			}
+		}
+
+		private SqlUpdate _sqlUpdate;
+		private UserGroupPersistenceImpl _persistenceImpl;
+	}
+
 	private static final String _SQL_SELECT_USERGROUP = "SELECT userGroup FROM UserGroup userGroup";
 	private static final String _SQL_SELECT_USERGROUP_WHERE = "SELECT userGroup FROM UserGroup userGroup WHERE ";
 	private static final String _SQL_COUNT_USERGROUP = "SELECT COUNT(userGroup) FROM UserGroup userGroup";
@@ -4150,12 +4150,12 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_UserGroups ON (Groups_UserGroups.groupId = Group_.groupId) WHERE (Groups_UserGroups.userGroupId = ?)";
 	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE userGroupId = ?";
 	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_UserGroups WHERE userGroupId = ? AND groupId = ?";
-	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_UserGroups ON (Users_UserGroups.userId = User_.userId) WHERE (Users_UserGroups.userGroupId = ?)";
-	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ?";
-	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?";
 	private static final String _SQL_GETTEAMS = "SELECT {Team.*} FROM Team INNER JOIN UserGroups_Teams ON (UserGroups_Teams.teamId = Team.teamId) WHERE (UserGroups_Teams.userGroupId = ?)";
 	private static final String _SQL_GETTEAMSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM UserGroups_Teams WHERE userGroupId = ?";
 	private static final String _SQL_CONTAINSTEAM = "SELECT COUNT(*) AS COUNT_VALUE FROM UserGroups_Teams WHERE userGroupId = ? AND teamId = ?";
+	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_UserGroups ON (Users_UserGroups.userId = User_.userId) WHERE (Users_UserGroups.userGroupId = ?)";
+	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ?";
+	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "userGroup.companyId = ?";
 	private static final String _FINDER_COLUMN_C_P_COMPANYID_2 = "userGroup.companyId = ? AND ";
 	private static final String _FINDER_COLUMN_C_P_PARENTUSERGROUPID_2 = "userGroup.parentUserGroupId = ?";

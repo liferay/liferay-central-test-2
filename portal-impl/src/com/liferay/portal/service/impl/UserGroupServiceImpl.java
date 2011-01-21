@@ -132,4 +132,5 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 		return userGroupLocalService.updateUserGroup(
 			user.getCompanyId(), userGroupId, name, description);
 	}
+
 }

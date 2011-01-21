@@ -28,8 +28,4 @@ public interface TeamFinder {
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portal.model.Team> findByU_G(
-		long userId, long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
 }

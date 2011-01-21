@@ -127,19 +127,6 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		return teamPersistence.findByG_N(groupId, name);
 	}
 
-	public List<Team> getUserGroupTeams(long userId, long groupId)
-		throws SystemException {
-
-		return getUserGroupTeams(userId, groupId, 0, Integer.MAX_VALUE);
-	}
-
-	public List<Team> getUserGroupTeams(
-			long userId, long groupId, int start, int end)
-		throws SystemException {
-
-		return teamFinder.findByU_G(userId, groupId, start, end);
-	}
-
 	public List<Team> getUserTeams(long userId) throws SystemException {
 		return userPersistence.getTeams(userId);
 	}
@@ -161,30 +148,6 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 		throws SystemException {
 
 		return userPersistence.containsTeam(userId, teamId);
-	}
-
-	public void unsetGroupTeamUserGroups(long groupId, long[] userGroupIds)
-		throws SystemException {
-
-		List<Team> teams = teamLocalService.getGroupTeams(groupId);
-
-		for (Team team : teams) {
-			unsetUserGroups(team.getTeamId(), userGroupIds);
-		}
-	}
-
-	public void unsetUserGroup(long teamId, long userGroupId)
-		throws SystemException {
-
-		long[] userGroupIds = {userGroupId};
-
-		unsetUserGroups(teamId, userGroupIds);
-	}
-
-	public void unsetUserGroups(long teamId, long[] userGroupIds)
-		throws SystemException {
-
-		teamPersistence.removeUserGroups(teamId, userGroupIds);
 	}
 
 	public List<Team> search(
@@ -242,4 +205,5 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 			}
 		}
 	}
+
 }

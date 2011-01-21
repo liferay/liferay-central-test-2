@@ -1717,12 +1717,6 @@ create table Ticket (
 	expirationDate DATE null
 );
 
-create table UserGroups_Teams (
-	userGroupId LONG not null,
-	teamId LONG not null,
-	primary key (userGroupId, teamId)
-);
-
 create table User_ (
 	uuid_ VARCHAR(75) null,
 	userId LONG not null primary key,
@@ -1784,6 +1778,12 @@ create table UserGroupRole (
 	groupId LONG not null,
 	roleId LONG not null,
 	primary key (userId, groupId, roleId)
+);
+
+create table UserGroups_Teams (
+	userGroupId LONG not null,
+	teamId LONG not null,
+	primary key (userGroupId, teamId)
 );
 
 create table UserIdMapper (
