@@ -146,7 +146,7 @@ public class ${entity.name}Util {
 	public static ${entity.name}Persistence getPersistence() {
 		if (_persistence == null) {
 			<#if pluginName != "">
-				_persistence = (${entity.name}Persistence)PortletBeanLocatorUtil.locate(${packagePath}.service.ClpSerializer.SERVLET_CONTEXT_NAME, ${entity.name}Persistence.class.getName());
+				_persistence = (${entity.name}Persistence)PortletBeanLocatorUtil.locate(${packagePath}.service.ClpSerializer.getServletContextName(), ${entity.name}Persistence.class.getName());
 			<#else>
 				_persistence = (${entity.name}Persistence)PortalBeanLocatorUtil.locate(${entity.name}Persistence.class.getName());
 			</#if>

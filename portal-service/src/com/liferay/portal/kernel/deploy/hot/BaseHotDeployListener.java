@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.ProxyFactory;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +44,41 @@ public abstract class BaseHotDeployListener implements HotDeployListener {
 		String servletContextName = servletContext.getServletContextName();
 
 		throw new HotDeployException(msg + servletContextName, t);
+	}
+
+	protected String getClpServletContextName(
+			Class<?> clpMessageListenerClass,
+			MessageListener clpMessageListener)
+		throws Exception {
+
+		Exception e = null;
+
+		try {
+			Method servletContextNameMethod =
+				clpMessageListenerClass.getMethod("getServletContextName");
+
+			String clpServletContextName =
+				(String)servletContextNameMethod.invoke(null);
+
+			return clpServletContextName;
+		}
+		catch (Exception e1) {
+			e = e1;
+		}
+
+		try {
+			Field servletContextNameField = clpMessageListenerClass.getField(
+				"SERVLET_CONTEXT_NAME");
+
+			String clpServletContextName = servletContextNameField.get(
+				clpMessageListener).toString();
+
+			return clpServletContextName;
+		}
+		catch (Exception e2) {
+		}
+
+		throw e;
 	}
 
 	protected Object newInstance(
@@ -88,12 +124,8 @@ public abstract class BaseHotDeployListener implements HotDeployListener {
 				MessageListener clpMessageListener =
 					(MessageListener)clpMessageListenerClass.newInstance();
 
-				Field servletContextNameField =
-					clpMessageListenerClass.getField(
-						"SERVLET_CONTEXT_NAME");
-
-				String clpServletContextName = servletContextNameField.get(
-					clpMessageListener).toString();
+				String clpServletContextName = getClpServletContextName(
+					clpMessageListenerClass, clpMessageListener);
 
 				if (clpServletContextName.equals(
 						servletContext.getServletContextName())) {
