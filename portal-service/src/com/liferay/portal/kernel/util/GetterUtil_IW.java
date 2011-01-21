@@ -61,11 +61,6 @@ public class GetterUtil_IW {
 		return GetterUtil.get(value, defaultValue);
 	}
 
-	public java.lang.String get(java.io.Serializable value,
-		java.lang.String defaultValue, boolean trim) {
-		return GetterUtil.get(value, defaultValue, trim);
-	}
-
 	public boolean get(java.lang.String value, boolean defaultValue) {
 		return GetterUtil.get(value, defaultValue);
 	}
@@ -98,11 +93,6 @@ public class GetterUtil_IW {
 	public java.lang.String get(java.lang.String value,
 		java.lang.String defaultValue) {
 		return GetterUtil.get(value, defaultValue);
-	}
-
-	public java.lang.String get(java.lang.String value,
-		java.lang.String defaultValue, boolean trim) {
-		return GetterUtil.get(value, defaultValue, trim);
 	}
 
 	public boolean getBoolean(java.io.Serializable value) {
@@ -376,37 +366,18 @@ public class GetterUtil_IW {
 		return GetterUtil.getString(value);
 	}
 
-	public java.lang.String getString(
-		java.io.Serializable value, boolean trim) {
-		return GetterUtil.getString(value, trim);
-	}
-
 	public java.lang.String getString(java.io.Serializable value,
 		java.lang.String defaultValue) {
 		return GetterUtil.getString(value, defaultValue);
-	}
-
-	public java.lang.String getString(java.io.Serializable value,
-		java.lang.String defaultValue, boolean trim) {
-		return GetterUtil.getString(value, defaultValue, trim);
 	}
 
 	public java.lang.String getString(java.lang.String value) {
 		return GetterUtil.getString(value);
 	}
 
-	public java.lang.String getString(java.lang.String value, boolean trim) {
-		return GetterUtil.getString(value, trim);
-	}
-
 	public java.lang.String getString(java.lang.String value,
 		java.lang.String defaultValue) {
 		return GetterUtil.getString(value, defaultValue);
-	}
-
-	public java.lang.String getString(java.lang.String value,
-		java.lang.String defaultValue, boolean trim) {
-		return GetterUtil.getString(value, defaultValue, trim);
 	}
 
 	private GetterUtil_IW() {

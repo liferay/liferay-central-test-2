@@ -63,11 +63,6 @@ public class ParamUtil_IW {
 		return ParamUtil.get(request, param, defaultValue);
 	}
 
-	public java.lang.String get(javax.servlet.http.HttpServletRequest request,
-		java.lang.String param, java.lang.String defaultValue, boolean trim) {
-		return ParamUtil.get(request, param, defaultValue, trim);
-	}
-
 	public boolean get(javax.portlet.PortletRequest portletRequest,
 		java.lang.String param, boolean defaultValue) {
 		return ParamUtil.get(portletRequest, param, defaultValue);
@@ -107,11 +102,6 @@ public class ParamUtil_IW {
 	public java.lang.String get(javax.portlet.PortletRequest portletRequest,
 		java.lang.String param, java.lang.String defaultValue) {
 		return ParamUtil.get(portletRequest, param, defaultValue);
-	}
-
-	public java.lang.String get(javax.portlet.PortletRequest portletRequest,
-		java.lang.String param, java.lang.String defaultValue, boolean trim) {
-		return ParamUtil.get(portletRequest, param, defaultValue, trim);
 	}
 
 	public boolean get(
@@ -157,12 +147,6 @@ public class ParamUtil_IW {
 		com.liferay.portal.service.ServiceContext serviceContext,
 		java.lang.String param, java.lang.String defaultValue) {
 		return ParamUtil.get(serviceContext, param, defaultValue);
-	}
-
-	public java.lang.String get(
-		com.liferay.portal.service.ServiceContext serviceContext,
-		java.lang.String param, java.lang.String defaultValue, boolean trim) {
-		return ParamUtil.get(serviceContext, param, defaultValue, trim);
 	}
 
 	public boolean getBoolean(javax.servlet.http.HttpServletRequest request,
@@ -638,21 +622,8 @@ public class ParamUtil_IW {
 
 	public java.lang.String getString(
 		javax.servlet.http.HttpServletRequest request, java.lang.String param,
-		boolean trim) {
-
-		return ParamUtil.getString(request, param, trim);
-	}
-
-	public java.lang.String getString(
-		javax.servlet.http.HttpServletRequest request, java.lang.String param,
 		java.lang.String defaultValue) {
 		return ParamUtil.getString(request, param, defaultValue);
-	}
-
-	public java.lang.String getString(
-		javax.servlet.http.HttpServletRequest request, java.lang.String param,
-		java.lang.String defaultValue, boolean trim) {
-		return ParamUtil.getString(request, param, defaultValue, trim);
 	}
 
 	public java.lang.String getString(
@@ -662,20 +633,8 @@ public class ParamUtil_IW {
 
 	public java.lang.String getString(
 		javax.portlet.PortletRequest portletRequest, java.lang.String param,
-		boolean trim) {
-		return ParamUtil.getString(portletRequest, param, trim);
-	}
-
-	public java.lang.String getString(
-		javax.portlet.PortletRequest portletRequest, java.lang.String param,
 		java.lang.String defaultValue) {
 		return ParamUtil.getString(portletRequest, param, defaultValue);
-	}
-
-	public java.lang.String getString(
-		javax.portlet.PortletRequest portletRequest, java.lang.String param,
-		java.lang.String defaultValue, boolean trim) {
-		return ParamUtil.getString(portletRequest, param, defaultValue, trim);
 	}
 
 	public java.lang.String getString(
@@ -686,20 +645,8 @@ public class ParamUtil_IW {
 
 	public java.lang.String getString(
 		com.liferay.portal.service.ServiceContext serviceContext,
-		java.lang.String param, boolean trim) {
-		return ParamUtil.getString(serviceContext, param, trim);
-	}
-
-	public java.lang.String getString(
-		com.liferay.portal.service.ServiceContext serviceContext,
 		java.lang.String param, java.lang.String defaultValue) {
 		return ParamUtil.getString(serviceContext, param, defaultValue);
-	}
-
-	public java.lang.String getString(
-		com.liferay.portal.service.ServiceContext serviceContext,
-		java.lang.String param, java.lang.String defaultValue, boolean trim) {
-		return ParamUtil.getString(serviceContext, param, defaultValue, trim);
 	}
 
 	public void print(javax.servlet.http.HttpServletRequest request) {
