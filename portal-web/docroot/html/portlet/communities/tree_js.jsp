@@ -59,7 +59,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		},
 
 		createLink: function(label, plid) {
-			return '<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" %>'+ plid +'">'+ Liferay.Util.unescapeHTML(label) +'</a>';
+			return '<a href="<%= portletURL + StringPool.AMPERSAND + portletDisplay.getNamespace() + "selPlid=" %>'+ plid +'">'+ Liferay.Util.escapeHTML(label) +'</a>';
 		},
 
 		extractLayoutId: function(node) {
@@ -219,7 +219,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 	var getLayoutsURL = themeDisplay.getPathMain() + '/layout_management/get_layouts';
 	var rootId = TreeUtil.createId(TreeUtil.DEFAULT_PARENT_LAYOUT_ID, 0);
-	var rootLabel = '<%= HtmlUtil.escape(rootNodeName) %>';
+	var rootLabel = '<%= HtmlUtil.escapeJS(rootNodeName) %>';
 	var treeElId = '<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output';
 
 	var RootNodeType = A.TreeNodeTask;
