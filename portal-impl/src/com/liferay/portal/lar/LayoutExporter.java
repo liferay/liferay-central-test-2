@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -311,7 +310,7 @@ public class LayoutExporter {
 					new Object[] {
 						portletId, firstLayout.getPlid(),
 						firstLayout.getScopeGroup().getGroupId(),
-						firstLayout.getUuid(), StringPool.BLANK
+						StringPool.BLANK, firstLayout.getUuid()
 					}
 				);
 			}
@@ -360,19 +359,35 @@ public class LayoutExporter {
 		for (Map.Entry<String, Object[]> portletIdsEntry :
 				portletIds.entrySet()) {
 
-			String portletId = (String)portletIdsEntry.getValue()[0];
-			long plid = (Long)portletIdsEntry.getValue()[1];
-			long scopeGroupId = (Long)portletIdsEntry.getValue()[2];
-			String scopeLayoutUuid = (String)portletIdsEntry.getValue()[3];
-			String scopeType = (String)portletIdsEntry.getValue()[4];
+			Object[] portletObjects = portletIdsEntry.getValue();
+
+			String portletId = null;
+			long plid = 0;
+			long scopeGroupId = 0;
+			String scopeType = StringPool.BLANK;
+			String scopeLayoutUuid = null;
+
+			if (portletObjects.length == 4) {
+				portletId = (String)portletIdsEntry.getValue()[0];
+				plid = (Long)portletIdsEntry.getValue()[1];
+				scopeGroupId = (Long)portletIdsEntry.getValue()[2];
+				scopeLayoutUuid = (String)portletIdsEntry.getValue()[3];
+			}
+			else {
+				portletId = (String)portletIdsEntry.getValue()[0];
+				plid = (Long)portletIdsEntry.getValue()[1];
+				scopeGroupId = (Long)portletIdsEntry.getValue()[2];
+				scopeType = (String)portletIdsEntry.getValue()[3];
+				scopeLayoutUuid = (String)portletIdsEntry.getValue()[4];
+			}
 
 			Layout layout = LayoutUtil.findByPrimaryKey(plid);
 
 			context.setPlid(layout.getPlid());
 			context.setOldPlid(layout.getPlid());
 			context.setScopeGroupId(scopeGroupId);
-			context.setScopeLayoutUuid(scopeLayoutUuid);
 			context.setScopeType(scopeType);
+			context.setScopeLayoutUuid(scopeLayoutUuid);
 
 			boolean[] exportPortletControls = getExportPortletControls(
 				companyId, portletId, context, parameterMap);
@@ -557,31 +572,34 @@ public class LayoutExporter {
 					PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 						layout, portletId);
 
-				String scopeLayoutUuid = GetterUtil.getString(
-					jxPreferences.getValue("lfr-scope-layout-uuid", null));
 				String scopeType = GetterUtil.getString(
 					jxPreferences.getValue("lfr-scope-type", null));
+				String scopeLayoutUuid = GetterUtil.getString(
+					jxPreferences.getValue("lfr-scope-layout-uuid", null));
 
 				long scopeGroupId = context.getScopeGroupId();
 
 				if (Validator.isNotNull(scopeType)) {
 					Group scopeGroup = null;
 
-					if (scopeType.equals(GroupConstants.GLOBAL)) {
-						scopeGroup =
-							GroupLocalServiceUtil.getCompanyGroup(
-								layout.getScopeGroup().getCompanyId());
+					if (scopeType.equals("company")) {
+						scopeGroup = GroupLocalServiceUtil.getCompanyGroup(
+							layout.getCompanyId());
 					}
-					else {
+					else if (scopeType.equals("layout")) {
 						Layout scopeLayout =
 							LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
 								scopeLayoutUuid, context.getGroupId());
 
 						scopeGroup = scopeLayout.getScopeGroup();
+					}
+					else {
+						throw new IllegalArgumentException(
+							"Scope type " + scopeType + " is invalid");
+					}
 
-						if (scopeGroup != null) {
-							scopeGroupId = scopeGroup.getGroupId();
-						}
+					if (scopeGroup != null) {
+						scopeGroupId = scopeGroup.getGroupId();
 					}
 				}
 
@@ -591,8 +609,8 @@ public class LayoutExporter {
 				portletIds.put(
 					key,
 					new Object[] {
-						portletId, layout.getPlid(), scopeGroupId,
-						scopeLayoutUuid, scopeType
+						portletId, layout.getPlid(), scopeGroupId, scopeType,
+						scopeLayoutUuid
 					}
 				);
 			}

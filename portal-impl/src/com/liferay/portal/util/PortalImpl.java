@@ -2057,6 +2057,29 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
+	public String getNewPortletTitle(
+		String portletTitle, String oldScopeName, String newScopeName) {
+
+		if (portletTitle.endsWith(" (" + oldScopeName + ")")) {
+			int pos = portletTitle.lastIndexOf(" " + oldScopeName);
+
+			if (Validator.isNotNull(newScopeName)) {
+				return portletTitle.substring(0, pos) + " " + newScopeName;
+			}
+			else {
+				return portletTitle.substring(0, pos);
+			}
+		}
+		else {
+			if (Validator.isNotNull(newScopeName)) {
+				return portletTitle + " " + newScopeName;
+			}
+			else {
+				return portletTitle;
+			}
+		}
+	}
+
 	public String getNetvibesURL(
 			Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -2794,45 +2817,46 @@ public class PortalImpl implements Portal {
 	}
 
 	public long getScopeGroupId(Layout layout, String portletId) {
-		if (layout == null) {
-			return 0;
-		}
-		else {
-			if (Validator.isNotNull(portletId)) {
-				try {
-					PortletPreferences portletSetup =
-						PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-							layout, portletId);
-
-					String scopeType = GetterUtil.getString(
-						portletSetup.getValue("lfr-scope-type", null));
-
-					if (Validator.isNotNull(scopeType)) {
-						if (scopeType.equals(GroupConstants.GLOBAL)) {
-							Group globalGroup =
-								GroupLocalServiceUtil.getCompanyGroup(
-									layout.getScopeGroup().getCompanyId());
-
-							return globalGroup.getGroupId();
-						}
-						else {
-							String scopeLayoutUuid = GetterUtil.getString(
-								portletSetup.getValue(
-									"lfr-scope-layout-uuid", null));
-
-							Layout scopeLayout =
-								LayoutLocalServiceUtil.
-									getLayoutByUuidAndGroupId(
-										scopeLayoutUuid, layout.getGroupId());
-
-							return scopeLayout.getScopeGroup().getGroupId();
-						}
-					}
-				}
-				catch (Exception e) {
-				}
+		try {
+			if (layout == null) {
+				return 0;
 			}
 
+			if (Validator.isNull(portletId)) {
+				return layout.getGroupId();
+			}
+
+			PortletPreferences portletSetup =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					layout, portletId);
+
+			String scopeType = GetterUtil.getString(
+				portletSetup.getValue("lfr-scope-type", null));
+
+			if (Validator.isNull(scopeType)) {
+				return layout.getGroupId();
+			}
+
+			if (scopeType.equals("company")) {
+				Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+					layout.getCompanyId());
+
+				return companyGroup.getGroupId();
+			}
+			else {
+				String scopeLayoutUuid = GetterUtil.getString(
+					portletSetup.getValue("lfr-scope-layout-uuid", null));
+
+				Layout scopeLayout =
+					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+						scopeLayoutUuid, layout.getGroupId());
+
+				Group scopeGroup = scopeLayout.getScopeGroup();
+
+				return scopeGroup.getGroupId();
+			}
+		}
+		catch (Exception e) {
 			return layout.getGroupId();
 		}
 	}

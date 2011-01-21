@@ -629,6 +629,9 @@ public interface Portal {
 
 	public String getMailId(String mx, String popPortletPrefix, Object... ids);
 
+	public String getNewPortletTitle(
+		String portletTitle, String oldScopeName, String newScopeName);
+
 	public String getNetvibesURL(Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 

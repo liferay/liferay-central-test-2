@@ -22,8 +22,8 @@ String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL")
 
 PortletPreferences preferences = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
-String scopeLayoutUuid = GetterUtil.getString(preferences.getValue("lfr-scope-layout-uuid", null));
 String scopeType = GetterUtil.getString(preferences.getValue("lfr-scope-type", null));
+String scopeLayoutUuid = GetterUtil.getString(preferences.getValue("lfr-scope-layout-uuid", null));
 
 Group group = layout.getGroup();
 %>
@@ -45,11 +45,11 @@ Group group = layout.getGroup();
 	<aui:fieldset>
 		<aui:select label="scope" name="scopeType">
 			<aui:option label="default" selected="<%= Validator.isNull(scopeType) %>" value="" />
-			<aui:option label="global" selected="<%= scopeType.equals(GroupConstants.GLOBAL) %>" value="<%= GroupConstants.GLOBAL %>" />
-			<aui:option label="select-layout" selected="<%= scopeType.equals(LayoutConstants.TYPE_LAYOUT) %>" value="<%= LayoutConstants.TYPE_LAYOUT %>" />
+			<aui:option label="global" selected='<%= scopeType.equals("company") %>' value="company" />
+			<aui:option label="select-layout" selected='<%= scopeType.equals("layout") %>' value="layout" />
 		</aui:select>
 
-		<div id="<portlet:namespace />scopeLayouts">
+		<div id="<portlet:namespace />scopeLayoutUuidContainer">
 			<aui:select label="scope-layout" name="scopeLayoutUuid">
 				<aui:option label='<%= LanguageUtil.get(pageContext,"current-page") + " (" + HtmlUtil.escape(layout.getName(locale)) + ")" %>' selected="<%= scopeLayoutUuid.equals(layout.getUuid()) %>" value="<%= layout.getUuid() %>" />
 
@@ -77,5 +77,5 @@ Group group = layout.getGroup();
 </aui:form>
 
 <aui:script>
-	Liferay.Util.toggleSelectBox('<portlet:namespace />scopeType','<%= LayoutConstants.TYPE_LAYOUT %>','<portlet:namespace />scopeLayouts');
+	Liferay.Util.toggleSelectBox('<portlet:namespace />scopeType', 'layout', '<portlet:namespace />scopeLayoutUuidContainer');
 </aui:script>

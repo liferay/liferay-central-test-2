@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Lock;
@@ -181,15 +180,15 @@ public class PortletExporter {
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portletId);
 
-		String scopeLayoutUuid = GetterUtil.getString(
-			jxPreferences.getValue("lfr-scope-layout-uuid", null));
 		String scopeType = GetterUtil.getString(
 			jxPreferences.getValue("lfr-scope-type", null));
+		String scopeLayoutUuid = GetterUtil.getString(
+			jxPreferences.getValue("lfr-scope-layout-uuid", null));
 
 		if (Validator.isNotNull(scopeType)) {
 			Group scopeGroup = null;
 
-			if (scopeType.equals(GroupConstants.GLOBAL)) {
+			if (scopeType.equals("company")) {
 				scopeGroup = GroupLocalServiceUtil.getCompanyGroup(companyId);
 			}
 			else if (Validator.isNotNull(scopeLayoutUuid)) {
@@ -210,8 +209,8 @@ public class PortletExporter {
 
 		context.setPlid(plid);
 		context.setOldPlid(plid);
-		context.setScopeLayoutUuid(scopeLayoutUuid);
 		context.setScopeType(scopeType);
+		context.setScopeLayoutUuid(scopeLayoutUuid);
 
 		// Build compatibility
 
@@ -543,9 +542,9 @@ public class PortletExporter {
 		portletEl.addAttribute(
 			"root-portlet-id", PortletConstants.getRootPortletId(portletId));
 		portletEl.addAttribute("old-plid", String.valueOf(layout.getPlid()));
+		portletEl.addAttribute("scope-layout-type", context.getScopeType());
 		portletEl.addAttribute(
 			"scope-layout-uuid", context.getScopeLayoutUuid());
-		portletEl.addAttribute("scope-layout-type", context.getScopeType());
 
 		// Data
 
@@ -556,8 +555,8 @@ public class PortletExporter {
 		if (exportPortletData) {
 			if (!portlet.isPreferencesUniquePerLayout()) {
 				String dataKey =
-					portletId + StringPool.AT + context.getScopeLayoutUuid()
-					+ context.getScopeType();
+					portletId + StringPool.AT + context.getScopeType() +
+						StringPool.AT + context.getScopeLayoutUuid();
 
 				if (!context.hasNotUniquePerLayout(dataKey)) {
 					context.putNotUniquePerLayout(dataKey);

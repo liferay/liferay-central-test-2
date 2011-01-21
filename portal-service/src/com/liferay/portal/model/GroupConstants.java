@@ -29,8 +29,6 @@ public class GroupConstants {
 
 	public static final String DEFAULT = "default";
 
-	public static final String GLOBAL = "global";
-
 	public static final String GUEST = "Guest";
 
 	public static final String[] SYSTEM_GROUPS = {

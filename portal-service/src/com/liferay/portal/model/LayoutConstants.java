@@ -23,8 +23,6 @@ public class LayoutConstants {
 
 	public static final long DEFAULT_PARENT_LAYOUT_ID = 0;
 
-	public static final String TYPE_LAYOUT = "layout";
-
 	public static final String TYPE_PORTLET = "portlet";
 
 	public static final String TYPE_PANEL = "panel";

@@ -21,16 +21,15 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigFactoryUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -116,6 +115,98 @@ public class EditScopeAction extends EditConfigurationAction {
 			renderRequest, "portlet.portlet_configuration.edit_scope"));
 	}
 
+	protected String getNewScopeName(ActionRequest actionRequest)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		String scopeType = ParamUtil.getString(actionRequest, "scopeType");
+
+		if (Validator.isNull(scopeType)) {
+			return null;
+		}
+
+		String scopeName = null;
+
+		if (scopeType.equals("company")) {
+			scopeName = themeDisplay.translate("global");
+		}
+		else if (scopeType.equals("layout")) {
+			String scopeLayoutUuid = ParamUtil.getString(
+				actionRequest, "scopeLayoutUuid");
+
+			Layout scopeLayout =
+				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+					scopeLayoutUuid, layout.getGroupId());
+
+			if (!scopeLayout.hasScopeGroup()) {
+				String name = String.valueOf(scopeLayout.getPlid());
+
+				GroupLocalServiceUtil.addGroup(
+					themeDisplay.getUserId(), Layout.class.getName(),
+					scopeLayout.getPlid(), name, null, 0, null, true, null);
+			}
+
+			scopeName = scopeLayout.getName(themeDisplay.getLocale());
+		}
+		else {
+			throw new IllegalArgumentException(
+				"Scope type " + scopeType + " is invalid");
+		}
+
+		return scopeName;
+	}
+
+	protected String getOldScopeName(
+			ActionRequest actionRequest, Portlet portlet)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		PortletPreferences preferences =
+			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+				layout, portlet.getPortletId());
+
+		String scopeType = GetterUtil.getString(
+			preferences.getValue("lfr-scope-type", null));
+
+		if (Validator.isNull(scopeType)) {
+			return null;
+		}
+
+		String scopeName = null;
+
+		if (scopeType.equals("company")) {
+			scopeName = themeDisplay.translate("global");
+		}
+		else if (scopeType.equals("layout")) {
+			String scopeLayoutUuid = GetterUtil.getString(
+				preferences.getValue("lfr-scope-layout-uuid", null));
+
+			try {
+				Layout scopeLayout =
+					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+						scopeLayoutUuid, layout.getGroupId());
+
+				scopeName = scopeLayout.getName(themeDisplay.getLocale());
+			}
+			catch (NoSuchLayoutException nsle) {
+			}
+		}
+		else {
+			throw new IllegalArgumentException(
+				"Scope type " + scopeType + " is invalid");
+		}
+
+		return scopeName;
+	}
+
 	protected String getPortletTitle(
 		PortletRequest portletRequest, Portlet portlet,
 		PortletPreferences preferences) {
@@ -156,97 +247,33 @@ public class EditScopeAction extends EditConfigurationAction {
 				layout, portlet.getPortletId());
 
 		String scopeType = ParamUtil.getString(actionRequest, "scopeType");
-		String oldScopeType =
-			GetterUtil.getString(preferences.getValue("lfr-scope-type", null));
-		String scopeLayoutUuid = StringPool.BLANK;
-		String title = getPortletTitle(actionRequest, portlet, preferences);
-		String newTitle = title;
 
-		// Remove old scope suffix from the title if present
+		preferences.setValue("lfr-scope-type", scopeType);
 
-		if (Validator.isNotNull(oldScopeType)) {
-			String scopeName = null;
+		String scopeLayoutUuid = ParamUtil.getString(
+			actionRequest, "scopeLayoutUuid");
 
-			if (oldScopeType.equals(GroupConstants.GLOBAL)) {
-				scopeName = themeDisplay.translate("global");
-			}
-			else {
-				String oldScopeLayoutUuid = GetterUtil.getString(
-					preferences.getValue("lfr-scope-layout-uuid", null));
-
-				try {
-					Layout oldScopeLayout =
-						LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-							oldScopeLayoutUuid, layout.getGroupId());
-
-					scopeName =
-						oldScopeLayout.getName(themeDisplay.getLocale());
-				}
-				catch (NoSuchLayoutException nsle) {
-				}
-			}
-
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(scopeName);
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			String suffix = sb.toString();
-
-			if (newTitle.endsWith(suffix)) {
-				newTitle = newTitle.substring(
-					0, title.length() - suffix.length());
-			}
-		}
-
-		// Add new scope suffix to the title
-
-		if (Validator.isNotNull(scopeType)) {
-			String scopeName = null;
-
-			if (scopeType.equals(GroupConstants.GLOBAL)) {
-				scopeName = themeDisplay.translate("global");
-			}
-			else {
-				scopeLayoutUuid =
-					ParamUtil.getString(actionRequest, "scopeLayoutUuid");
-
-				Layout scopeLayout =
-					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-						scopeLayoutUuid, layout.getGroupId());
-
-				if (!scopeLayout.hasScopeGroup()) {
-					String name = String.valueOf(scopeLayout.getPlid());
-
-					GroupLocalServiceUtil.addGroup(
-						themeDisplay.getUserId(), Layout.class.getName(),
-						scopeLayout.getPlid(), name, null, 0, null, true, null);
-				}
-
-				scopeName = scopeLayout.getName(themeDisplay.getLocale());
-			}
-
-			StringBundler sb = new StringBundler(5);
-
-			sb.append(newTitle);
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(scopeName);
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			newTitle = sb.toString();
+		if (!scopeType.equals("layout")) {
+			scopeLayoutUuid = StringPool.BLANK;
 		}
 
 		preferences.setValue("lfr-scope-layout-uuid", scopeLayoutUuid);
-		preferences.setValue("lfr-scope-type", scopeType);
 
-		if (!newTitle.equals(title)) {
+		String portletTitle = getPortletTitle(
+			actionRequest, portlet, preferences);
+
+		String oldScopeName = getOldScopeName(actionRequest, portlet);
+		String newScopeName = getNewScopeName(actionRequest);
+
+		String newPortletTitle = PortalUtil.getNewPortletTitle(
+			portletTitle, oldScopeName, newScopeName);
+
+		if (!newPortletTitle.equals(portletTitle)) {
 			preferences.setValue(
 				"portlet-setup-title-" + themeDisplay.getLanguageId(),
-				newTitle);
-			preferences.setValue("portlet-setup-use-custom-title", "true");
+				newPortletTitle);
+			preferences.setValue(
+				"portlet-setup-use-custom-title", Boolean.TRUE.toString());
 		}
 
 		preferences.store();
