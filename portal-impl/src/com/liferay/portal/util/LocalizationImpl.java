@@ -404,6 +404,13 @@ public class LocalizationImpl implements Localization {
 	public String removeLocalization(
 		String xml, String key, String requestedLanguageId, boolean cdata) {
 
+		return removeLocalization(xml, key, requestedLanguageId, cdata, false);
+	}
+
+	public String removeLocalization(
+		String xml, String key, String requestedLanguageId, boolean cdata,
+		boolean localized) {
+
 		if (Validator.isNull(xml)) {
 			return StringPool.BLANK;
 		}
@@ -467,10 +474,13 @@ public class LocalizationImpl implements Localization {
 
 				xmlStreamWriter.writeStartDocument();
 				xmlStreamWriter.writeStartElement(_ROOT);
-				xmlStreamWriter.writeAttribute(
-					_AVAILABLE_LOCALES, availableLocales);
-				xmlStreamWriter.writeAttribute(
-					_DEFAULT_LOCALE, defaultLanguageId);
+
+				if (localized) {
+					xmlStreamWriter.writeAttribute(
+						_AVAILABLE_LOCALES, availableLocales);
+					xmlStreamWriter.writeAttribute(
+						_DEFAULT_LOCALE, defaultLanguageId);
+				}
 
 				_copyNonExempt(
 					xmlStreamReader, xmlStreamWriter, requestedLanguageId,
@@ -577,6 +587,15 @@ public class LocalizationImpl implements Localization {
 		String xml, String key, String value, String requestedLanguageId,
 		String defaultLanguageId, boolean cdata) {
 
+		return updateLocalization(
+			xml, key, value, requestedLanguageId, defaultLanguageId, cdata,
+			false);
+	}
+
+	public String updateLocalization(
+		String xml, String key, String value, String requestedLanguageId,
+		String defaultLanguageId, boolean cdata, boolean localized) {
+
 		xml = _sanitizeXML(xml);
 
 		XMLStreamReader xmlStreamReader = null;
@@ -628,29 +647,33 @@ public class LocalizationImpl implements Localization {
 
 			xmlStreamWriter.writeStartDocument();
 			xmlStreamWriter.writeStartElement(_ROOT);
-			xmlStreamWriter.writeAttribute(
-				_AVAILABLE_LOCALES, availableLocales);
-			xmlStreamWriter.writeAttribute(_DEFAULT_LOCALE, defaultLanguageId);
+
+			if (localized) {
+				xmlStreamWriter.writeAttribute(
+					_AVAILABLE_LOCALES, availableLocales);
+				xmlStreamWriter.writeAttribute(
+					_DEFAULT_LOCALE, defaultLanguageId);
+			}
 
 			_copyNonExempt(
 				xmlStreamReader, xmlStreamWriter, requestedLanguageId,
 				defaultLanguageId, cdata);
 
-			if (cdata) {
-				xmlStreamWriter.writeStartElement(key);
+			xmlStreamWriter.writeStartElement(key);
+
+			if (localized) {
 				xmlStreamWriter.writeAttribute(
 					_LANGUAGE_ID, requestedLanguageId);
-				xmlStreamWriter.writeCData(value);
-				xmlStreamWriter.writeEndElement();
-			}
-			else {
-				xmlStreamWriter.writeStartElement(key);
-				xmlStreamWriter.writeAttribute(
-					_LANGUAGE_ID, requestedLanguageId);
-				xmlStreamWriter.writeCharacters(value);
-				xmlStreamWriter.writeEndElement();
 			}
 
+			if (cdata) {
+				xmlStreamWriter.writeCData(value);
+			}
+			else {
+				xmlStreamWriter.writeCharacters(value);
+			}
+
+			xmlStreamWriter.writeEndElement();
 			xmlStreamWriter.writeEndElement();
 			xmlStreamWriter.writeEndDocument();
 

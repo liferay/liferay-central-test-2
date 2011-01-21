@@ -1478,6 +1478,8 @@ AUI().add(
 							articleIdInput.val(newArticleIdInput.val());
 						}
 
+						instance._updateLocaleCheckboxes();
+
 						var content = instance.getArticleContentXML();
 
 						contentInput.val(content);
@@ -2680,6 +2682,21 @@ AUI().add(
 				return errorText;
 			},
 
+			_updateLocaleCheckboxes: function() {
+				var instance = this;
+				var fields = instance.getFields();
+
+				fields.each(
+					function(item, index, collection) {
+						var checkbox = item.one('.journal-article-localized-checkbox .aui-field-input-choice');
+						
+						if (checkbox && checkbox.get('checked')) {
+							instance._updateLocaleState(item, checkbox);
+						}
+					}
+				);
+			},
+
 			_updateLocaleState: function(source, checkbox) {
 				var instance = this;
 
@@ -2785,7 +2802,7 @@ AUI().add(
 					},
 
 					localizedValue: {
-						valueFn: function() {
+						getter: function() {
 							var instance = this;
 
 							return instance.getLocalizedValue();

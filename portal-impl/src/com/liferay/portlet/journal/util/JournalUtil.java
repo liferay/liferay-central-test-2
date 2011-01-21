@@ -1253,6 +1253,12 @@ public class JournalUtil {
 		String newLanguageId = newContentElement.attributeValue("language-id");
 		String newValue = newContentElement.getText();
 
+		boolean localized = false;
+
+		if (Validator.isNotNull(newLanguageId)){
+			localized = true;
+		}
+
 		String indexType = newElement.attributeValue("index-type");
 
 		if (Validator.isNotNull(indexType)) {
@@ -1310,7 +1316,13 @@ public class JournalUtil {
 					"language-id");
 
 				if (Validator.isNull(curLanguageId)) {
-					curContentElement.detach();
+					if (localized) {
+						curContentElement.addAttribute(
+							"language-id",defaultLocale);
+					}
+					else {
+						curContentElement.detach();
+					}
 				}
 
 				curElement.add(newContentElement.createCopy());

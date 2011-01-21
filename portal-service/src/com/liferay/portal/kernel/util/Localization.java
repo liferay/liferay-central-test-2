@@ -263,6 +263,23 @@ public interface Localization {
 		String xml, String key, String requestedLanguageId, boolean cdata);
 
 	/**
+	 * Removes the localization for the language from the localizations XML,
+	 * optionally storing the localized strings as CDATA in the XML.
+	 *
+	 * @param  xml the localizations XML to remove the localization for the
+	 *         language from
+	 * @param  key the name of the localized string, such as &quot;Title&quot;
+	 * @param  requestedLanguageId the ID of the language to remove from the
+	 *         localizations XML
+	 * @param  cdata whether to store localized strings as CDATA in the XML
+	 * @param  localized if there is a localized field
+	 * @return the localizations XML with the language removed
+	 */
+	public String removeLocalization(
+		String xml, String key, String requestedLanguageId, boolean cdata,
+		boolean localized);
+
+	/**
 	 * Sets the localized preferences values for the parameter in the portlet
 	 * request.
 	 *
@@ -369,5 +386,24 @@ public interface Localization {
 	public String updateLocalization(
 		String xml, String key, String value, String requestedLanguageId,
 		String defaultLanguageId, boolean cdata);
+
+	/**
+	 * Updates the localized string for the language in the localizations XML
+	 * and changes the default language, optionally storing the localized
+	 * strings as CDATA in the XML.
+	 *
+	 * @param  xml the localizations XML to update the localized string in
+	 * @param  key the name of the localized string, such as &quot;Title&quot;
+	 * @param  value the localized string
+	 * @param  requestedLanguageId the ID of the language to update the
+	 *         localization for
+	 * @param  defaultLanguageId the ID of the default language
+	 * @param  cdata whether to store localized strings as CDATA in the XML
+	 * @param  localized if there is a localized field
+	 * @return the updated localizations XML
+	 */
+	public String updateLocalization(
+		String xml, String key, String value, String requestedLanguageId,
+		String defaultLanguageId, boolean cdata, boolean localized);
 
 }

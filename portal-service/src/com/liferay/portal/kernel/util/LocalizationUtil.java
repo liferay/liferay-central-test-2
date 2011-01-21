@@ -157,6 +157,14 @@ public class LocalizationUtil {
 			xml, key, requestedLanguageId, cdata);
 	}
 
+	public static String removeLocalization(
+		String xml, String key, String requestedLanguageId, boolean cdata,
+		boolean localized) {
+
+		return getLocalization().removeLocalization(
+			xml, key, requestedLanguageId, cdata, localized);
+	}
+
 	public static void setLocalizedPreferencesValues (
 			PortletRequest portletRequest, PortletPreferences preferences,
 			String parameter)
@@ -211,6 +219,15 @@ public class LocalizationUtil {
 
 		return getLocalization().updateLocalization(
 			xml, key, value, requestedLanguageId, defaultLanguageId, cdata);
+	}
+
+	public static String updateLocalization(
+		String xml, String key, String value, String requestedLanguageId,
+		String defaultLanguageId, boolean cdata, boolean localized) {
+
+		return getLocalization().updateLocalization(
+			xml, key, value, requestedLanguageId, defaultLanguageId, cdata,
+			localized);
 	}
 
 	public void setLocalization(Localization localization) {

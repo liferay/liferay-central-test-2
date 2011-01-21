@@ -275,7 +275,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
 
 	<%
-	boolean localizationEnabled = GetterUtil.getBoolean(SessionClicks.get(request, "liferay_journal_localization_enabled", Boolean.TRUE.toString()));
+	boolean localizationEnabled = GetterUtil.getBoolean(SessionClicks.get(request, "liferay_journal_localization", Boolean.TRUE.toString()));
 	%>
 
 	<table class="lfr-table <%= localizationEnabled ? StringPool.BLANK : "localization-disabled" %>" id="<portlet:namespace />journalArticleWrapper" width="100%">
