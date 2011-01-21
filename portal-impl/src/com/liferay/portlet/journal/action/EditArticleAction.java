@@ -433,6 +433,7 @@ public class EditArticleAction extends PortletAction {
 		String structureId = ParamUtil.getString(uploadRequest, "structureId");
 		String templateId = ParamUtil.getString(uploadRequest, "templateId");
 
+		boolean localized = ParamUtil.getBoolean(uploadRequest, "localized");
 		String lastLanguageId = ParamUtil.getString(
 			uploadRequest, "lastLanguageId");
 		String defaultLanguageId = ParamUtil.getString(
@@ -488,7 +489,6 @@ public class EditArticleAction extends PortletAction {
 			uploadRequest, "reviewDateAmPm");
 		boolean neverReview = ParamUtil.getBoolean(
 			uploadRequest, "neverReview");
-		boolean localized = ParamUtil.getBoolean(uploadRequest, "localized");
 
 		if (reviewDateAmPm == Calendar.PM) {
 			reviewDateHour += 12;

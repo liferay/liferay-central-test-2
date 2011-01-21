@@ -272,7 +272,7 @@ public interface Localization {
 	 * @param  requestedLanguageId the ID of the language to remove from the
 	 *         localizations XML
 	 * @param  cdata whether to store localized strings as CDATA in the XML
-	 * @param  localized if there is a localized field
+	 * @param  localized whether there is a localized field
 	 * @return the localizations XML with the language removed
 	 */
 	public String removeLocalization(
@@ -399,7 +399,7 @@ public interface Localization {
 	 *         localization for
 	 * @param  defaultLanguageId the ID of the default language
 	 * @param  cdata whether to store localized strings as CDATA in the XML
-	 * @param  localized if there is a localized field
+	 * @param  localized whether there is a localized field
 	 * @return the updated localizations XML
 	 */
 	public String updateLocalization(
