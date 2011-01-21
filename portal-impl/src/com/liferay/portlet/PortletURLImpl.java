@@ -753,8 +753,6 @@ public class PortletURLImpl
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Portlet portlet = getPortlet();
-
 		String portalURL = null;
 
 		if (themeDisplay.isFacebook()) {
@@ -1070,8 +1068,6 @@ public class PortletURLImpl
 
 	protected String generateWSRPToString() {
 		StringBundler sb = new StringBundler("wsrp_rewrite?");
-
-		Portlet portlet = getPortlet();
 
 		sb.append("wsrp-urlType");
 		sb.append(StringPool.EQUAL);
