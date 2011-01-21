@@ -15,6 +15,8 @@
 package com.liferay.portlet.imagegallery.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.imagegallery.model.IGFolder;
@@ -22,6 +24,7 @@ import com.liferay.portlet.imagegallery.model.IGFolderConstants;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
+import com.liferay.portlet.imagegallery.service.permission.IGPermission;
 
 import javax.portlet.PortletRequest;
 
@@ -33,6 +36,9 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getFolder(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long folderId = ParamUtil.getLong(request, "folderId");
 
 		IGFolder folder = null;
@@ -41,6 +47,11 @@ public class ActionUtil {
 			(folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
 			folder = IGFolderServiceUtil.getFolder(folderId);
+		}
+		else {
+			IGPermission.check(
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), ActionKeys.VIEW);
 		}
 
 		request.setAttribute(WebKeys.IMAGE_GALLERY_FOLDER, folder);

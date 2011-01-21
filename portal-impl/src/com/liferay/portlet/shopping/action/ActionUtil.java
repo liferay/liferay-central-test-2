@@ -15,6 +15,7 @@
 package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -27,6 +28,7 @@ import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
+import com.liferay.portlet.shopping.service.permission.ShoppingPermission;
 
 import javax.portlet.PortletRequest;
 
@@ -40,6 +42,9 @@ public class ActionUtil {
 	public static void getCategory(HttpServletRequest request)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long categoryId = ParamUtil.getLong(request, "categoryId");
 
 		ShoppingCategory category = null;
@@ -49,6 +54,11 @@ public class ActionUtil {
 				ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			category = ShoppingCategoryServiceUtil.getCategory(categoryId);
+		}
+		else {
+			ShoppingPermission.check(
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), ActionKeys.VIEW);
 		}
 
 		request.setAttribute(WebKeys.SHOPPING_CATEGORY, category);

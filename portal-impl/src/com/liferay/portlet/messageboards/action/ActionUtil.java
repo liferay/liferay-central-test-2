@@ -15,6 +15,7 @@
 package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -26,6 +27,7 @@ import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.permission.MBPermission;
 
 import javax.portlet.PortletRequest;
 
@@ -38,9 +40,6 @@ public class ActionUtil {
 
 	public static void getCategory(HttpServletRequest request)
 		throws Exception {
-
-		// Add redundant check here because the JSP does not check permissions
-		// on the initial search container
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -56,6 +55,11 @@ public class ActionUtil {
 			(categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			category = MBCategoryServiceUtil.getCategory(categoryId);
+		}
+		else {
+			MBPermission.check(
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), ActionKeys.VIEW);
 		}
 
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY, category);

@@ -34,7 +34,9 @@
 				<action-key>PERMISSIONS</action-key>
 				<action-key>VIEW</action-key>
 			</supports>
-			<community-defaults />
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
 			<guest-defaults>
 				<action-key>VIEW</action-key>
 			</guest-defaults>

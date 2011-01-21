@@ -57,9 +57,14 @@
 				<action-key>REPLY_TO_MESSAGE</action-key>
 				<action-key>SUBSCRIBE</action-key>
 				<action-key>UPDATE_THREAD_PRIORITY</action-key>
+				<action-key>VIEW</action-key>
 			</supports>
-			<community-defaults />
-			<guest-defaults />
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
 			<guest-unsupported>
 				<action-key>ADD_CATEGORY</action-key>
 				<action-key>ADD_FILE</action-key>

@@ -17,11 +17,14 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
+import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 
 import javax.portlet.PortletRequest;
 
@@ -80,6 +83,9 @@ public class ActionUtil {
 	}
 
 	public static void getFolder(HttpServletRequest request) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long folderId = ParamUtil.getLong(request, "folderId");
 
 		Folder folder = null;
@@ -88,6 +94,11 @@ public class ActionUtil {
 			(folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
 
 			folder = DLAppServiceUtil.getFolder(folderId);
+		}
+		else {
+			DLPermission.check(
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), ActionKeys.VIEW);
 		}
 
 		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER, folder);

@@ -38,7 +38,9 @@
 			<community-defaults>
 				<action-key>VIEW</action-key>
 			</community-defaults>
-			<guest-defaults />
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
 			<guest-unsupported>
 				<action-key>ADD_DOCUMENT</action-key>
 				<action-key>ADD_FOLDER</action-key>

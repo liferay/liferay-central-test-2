@@ -32,9 +32,14 @@
 				<action-key>MANAGE_COUPONS</action-key>
 				<action-key>MANAGE_ORDERS</action-key>
 				<action-key>PERMISSIONS</action-key>
+				<action-key>VIEW</action-key>
 			</supports>
-			<community-defaults />
-			<guest-defaults />
+			<community-defaults>
+				<action-key>VIEW</action-key>
+			</community-defaults>
+			<guest-defaults>
+				<action-key>VIEW</action-key>
+			</guest-defaults>
 			<guest-unsupported>
 				<action-key>ADD_CATEGORY</action-key>
 				<action-key>ADD_ITEM</action-key>
