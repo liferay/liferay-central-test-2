@@ -39,6 +39,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 
 import java.util.List;
@@ -88,10 +89,11 @@ public class EditGroupAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.communities.error");
 			}
-			else if (e instanceof DuplicateGroupException ||
-					 e instanceof GroupFriendlyURLException ||
-					 e instanceof GroupNameException ||
-					 e instanceof RequiredGroupException) {
+			else if (e instanceof AssetTagException ||
+				e instanceof DuplicateGroupException ||
+				e instanceof GroupFriendlyURLException ||
+				e instanceof GroupNameException ||
+				e instanceof RequiredGroupException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 

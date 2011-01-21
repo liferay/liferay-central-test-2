@@ -51,6 +51,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	<liferay-ui:error exception="<%= DuplicateGroupException.class %>" message="please-enter-a-unique-name" />
 	<liferay-ui:error exception="<%= GroupNameException.class %>" message="please-enter-a-valid-name" />
 	<liferay-ui:error exception="<%= RequiredGroupException.class %>" message="old-group-name-is-a-required-system-group" />
+	<liferay-ui:asset-tags-error />
 
 	<aui:model-context bean="<%= group %>" model="<%= Group.class %>" />
 
