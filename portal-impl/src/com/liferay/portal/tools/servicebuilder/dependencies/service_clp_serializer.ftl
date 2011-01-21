@@ -32,8 +32,6 @@ public class ClpSerializer {
 			}
 
 			try {
-				String propsUtilServletContextName = PropsUtil.get("${pluginName}-deployment-context");
-
 				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
 
 				Class<?> portletPropsClass = classLoader.loadClass("com.liferay.util.portlet.PortletProps");
@@ -45,12 +43,22 @@ public class ClpSerializer {
 				if (Validator.isNotNull(portletPropsServletContextName)) {
 					_servletContextName = portletPropsServletContextName;
 				}
-				else if (Validator.isNotNull(propsUtilServletContextName)) {
-					_servletContextName = propsUtilServletContextName;
-				}
 			}
 			catch (Exception e) {
 				_log.error(e, e);
+			}
+
+			if (Validator.isNull(_servletContextName)) {
+				try {
+					String propsUtilServletContextName = PropsUtil.get("${pluginName}-deployment-context");
+
+					if (Validator.isNotNull(propsUtilServletContextName)) {
+						_servletContextName = propsUtilServletContextName;
+					}
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
 			}
 
 			if (Validator.isNull(_servletContextName)) {
