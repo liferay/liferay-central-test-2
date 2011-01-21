@@ -1,8 +1,37 @@
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.sax.SAXSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+
 import jodd.io.StreamUtil;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.DTDHandler;
@@ -13,32 +42,34 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.AttributesImpl;
 
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.sax.SAXSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <a href="PortalProperties2Doc.java.html"><b><i>View Source</i></b></a>
  */
 public class PortalPropertiesParser implements XMLReader {
-	
-	public static final boolean PARAM_FULL_TOC = false;
-	public static final int PARAM_MIN_LEFT = 2;
+
 	public static final int PARAM_DEEP_RIGHT = 1;
+	public static final int PARAM_MIN_LEFT = 2;
 
 	public static void main(String[] args) throws Exception {
 
+		PortalPropertiesParser parser = new PortalPropertiesParser();
+
+		String destinationHtml = "properties-doc.html";
+
+		if (args.length >= 1) {
+			destinationHtml = args[0];
+		}
+
+		if (args.length >= 2) {
+			boolean fullToc = GetterUtil.getBoolean(args[1]);
+
+			parser.setGenerateFullToc(fullToc);
+		}
+
 		InputStream props =
 				ClassLoader.getSystemResourceAsStream("portal.properties");
-		InputSource inputSource = new InputSource(props);
 
-		XMLReader parser = new PortalPropertiesParser();
+		InputSource inputSource = new InputSource(props);
 
 		SAXSource saxSource = new SAXSource(parser, inputSource);
 
@@ -46,11 +77,12 @@ public class PortalPropertiesParser implements XMLReader {
 
 		InputStream xsl = ClassLoader.getSystemResourceAsStream(
 				"com/liferay/portal/tools/dependencies/properties-html.xsl");
+
 		StreamSource xslSource = new StreamSource(xsl);
 
 		Transformer transformer = factory.newTransformer(xslSource);
 
-		StreamResult result = new StreamResult("properties.html");
+		StreamResult result = new StreamResult(destinationHtml);
 
 		transformer.transform(saxSource, result);
 
@@ -82,6 +114,10 @@ public class PortalPropertiesParser implements XMLReader {
 		return null;
 	}
 
+	public boolean isGenerateFullToc() {
+		return _generateFullToc;
+	}
+
 	public void parse(InputSource source) throws IOException, SAXException {
 		InputStream is = source.getByteStream();
 
@@ -109,6 +145,10 @@ public class PortalPropertiesParser implements XMLReader {
 	}
 
 	public void setFeature(String s, boolean b) {
+	}
+
+	public void setGenerateFullToc(boolean generateFullToc) {
+		this._generateFullToc = generateFullToc;
 	}
 
 	public void setProperty(String s, Object o) {
@@ -210,7 +250,6 @@ public class PortalPropertiesParser implements XMLReader {
 			prefix = "";
 		}
 
-
 		while (deepRight > 0) {
 			ndx = name.lastIndexOf('.');
 			if (ndx == -1) {
@@ -221,19 +260,19 @@ public class PortalPropertiesParser implements XMLReader {
 		}
 		return prefix + name;
 	}
-	
+
 	private void _parse(String p) throws SAXException {
 
 		_contentHandler.startDocument();
 
 		_tagStart("params");
-		_tag("fullToc", String.valueOf(PARAM_FULL_TOC));
+		_tag("fullToc", String.valueOf(_generateFullToc));
 		_tagEnd("params");
 
 		_tagStart("properties");
 
 		int ndx = 0;
-		while(true) {
+		while (true) {
 			ndx = p.indexOf("## ", ndx);
 
 			if (ndx == -1) {
@@ -258,9 +297,9 @@ public class PortalPropertiesParser implements XMLReader {
 			String content = p.substring(titleEndNdx, sectionEndNdx);
 
 			section.propertyDataList = _parseContent(content);
-			
+
 			_resolveGroups(section.propertyDataList);
-			
+
 			_createSection(section);
 
 			ndx = sectionEndNdx;
@@ -320,7 +359,6 @@ public class PortalPropertiesParser implements XMLReader {
 				value += lines[i].trim();
 			}
 
-
 			propertyData.value = value;
 
 			// check previous property for alternative values
@@ -350,7 +388,7 @@ public class PortalPropertiesParser implements XMLReader {
 
 		}
 
-	    return propertyDataList;
+		return propertyDataList;
 
 	}
 
@@ -386,7 +424,7 @@ public class PortalPropertiesParser implements XMLReader {
 			}
 
 		}
-		
+
 	}
 
 	private void _tag(String tagName, String text) throws SAXException {
@@ -438,30 +476,32 @@ public class PortalPropertiesParser implements XMLReader {
 	}
 
 	private static class PropertyData {
-		public String name = "";
+		public List<String> alternativeValues = new ArrayList<String>();
 		public String anchor = "";
-		public String prefix = "";
-		public String value = "";
 		public String description = "";
-		public boolean hidden;
 		public int group;
 		public boolean groupStart;
-		public List<String> alternativeValues = new ArrayList<String>();
+		public boolean hidden;
+		public String name = "";
+		public String prefix = "";
+		public String value = "";
 	}
 
 	private static class Section {
 
-		public String title;
-
 		public String anchor;
 
 		public List<PropertyData> propertyDataList;
+
+		public String title;
 
 	}
 
 	private AttributesImpl _attributes = new AttributesImpl();
 
 	private ContentHandler _contentHandler;
+
+	private boolean _generateFullToc = false;
 
 	private String _namespaceURI = "";
 
