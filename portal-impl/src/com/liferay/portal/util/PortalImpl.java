@@ -2066,20 +2066,19 @@ public class PortalImpl implements Portal {
 			portletTitle = portletTitle.substring(0, pos);
 		}
 
-		if (Validator.isNotNull(newScopeName)) {
-			StringBundler sb = new StringBundler(5);
-
-			sb.append(portletTitle);
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(newScopeName);
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			return sb.toString();
-		}
-		else {
+		if (Validator.isNull(newScopeName)) {
 			return portletTitle;
 		}
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(portletTitle);
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.OPEN_PARENTHESIS);
+		sb.append(newScopeName);
+		sb.append(StringPool.CLOSE_PARENTHESIS);
+
+		return sb.toString();
 	}
 
 	public String getNetvibesURL(
