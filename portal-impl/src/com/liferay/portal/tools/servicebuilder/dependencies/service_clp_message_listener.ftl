@@ -17,16 +17,14 @@ import com.liferay.portal.kernel.messaging.Message;
 
 public class ClpMessageListener extends BaseMessageListener {
 
-	public static String getServletContextName() {
-		return ClpSerializer.getServletContextName();
-	}
+	public static final String SERVLET_CONTEXT_NAME = ClpSerializer.SERVLET_CONTEXT_NAME;
 
 	protected void doReceive(Message message) throws Exception {
 		String command = message.getString("command");
 		String servletContextName = message.getString("servletContextName");
 
 		if (command.equals("undeploy") &&
-			servletContextName.equals(getServletContextName())) {
+			servletContextName.equals(SERVLET_CONTEXT_NAME)) {
 
 			<#list entities as entity>
 				<#if entity.hasLocalService()>
