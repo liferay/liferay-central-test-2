@@ -38,7 +38,7 @@
 					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
 				/>
 
-				<aui:button name="tagsPermissionsButton" data-url="<%= permissionsURL %>" value="permissions" />
+				<aui:button data-url="<%= permissionsURL %>" name="tagsPermissionsButton" value="permissions" />
 			</c:if>
 		</aui:button-row>
 	</div>
@@ -56,8 +56,7 @@
 					<liferay-ui:message key="tag-details" />
 				</div>
 
-				<div class="tag-view-container">
-				</div>
+				<div class="tag-view-container"></div>
 			</aui:column>
 		</aui:layout>
 	</div>

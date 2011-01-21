@@ -80,8 +80,7 @@
 					</div>
 				</div>
 
-				<div class="category-view">
-				</div>
+				<div class="category-view"></div>
 			</aui:column>
 		</aui:layout>
 	</div>
