@@ -2061,22 +2061,24 @@ public class PortalImpl implements Portal {
 		String portletTitle, String oldScopeName, String newScopeName) {
 
 		if (portletTitle.endsWith(" (" + oldScopeName + ")")) {
-			int pos = portletTitle.lastIndexOf(" " + oldScopeName);
+			int pos = portletTitle.lastIndexOf(" (" + oldScopeName + ")");
 
-			if (Validator.isNotNull(newScopeName)) {
-				return portletTitle.substring(0, pos) + " " + newScopeName;
-			}
-			else {
-				return portletTitle.substring(0, pos);
-			}
+			portletTitle = portletTitle.substring(0, pos);
+		}
+
+		if (Validator.isNotNull(newScopeName)) {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append(portletTitle);
+			sb.append(StringPool.SPACE);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(newScopeName);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			return sb.toString();
 		}
 		else {
-			if (Validator.isNotNull(newScopeName)) {
-				return portletTitle + " " + newScopeName;
-			}
-			else {
-				return portletTitle;
-			}
+			return portletTitle;
 		}
 	}
 
