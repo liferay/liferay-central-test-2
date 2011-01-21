@@ -90,10 +90,10 @@ public class EditGroupAction extends PortletAction {
 				setForward(actionRequest, "portlet.communities.error");
 			}
 			else if (e instanceof AssetTagException ||
-				e instanceof DuplicateGroupException ||
-				e instanceof GroupFriendlyURLException ||
-				e instanceof GroupNameException ||
-				e instanceof RequiredGroupException) {
+					 e instanceof DuplicateGroupException ||
+					 e instanceof GroupFriendlyURLException ||
+					 e instanceof GroupNameException ||
+					 e instanceof RequiredGroupException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 
