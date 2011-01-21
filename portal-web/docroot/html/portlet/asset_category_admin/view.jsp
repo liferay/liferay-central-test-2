@@ -47,7 +47,7 @@
 					windowState="<%= LiferayWindowState.POP_UP.toString() %>"
 				/>
 
-				<aui:button name="categoryPermissionsButton" data-url="<%= permissionsURL %>" value="permissions" />
+				<aui:button data-url="<%= permissionsURL %>" name="categoryPermissionsButton" value="permissions" />
 			</c:if>
 		</aui:button-row>
 	</div>
