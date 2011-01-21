@@ -62,13 +62,9 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 			</c:if>
 
 			<c:if test="<%= showFacebookConnectIcon %>">
-				<portlet:renderURL var="facebookRedirectURL">
-					<portlet:param name="struts_action" value="/login/facebook_connect_add_user" />
-				</portlet:renderURL>
-
 				<portlet:actionURL var="facebookConnectURL">
 					<portlet:param name="struts_action" value="/login/facebook_connect" />
-					<portlet:param name="redirect" value="<%= facebookRedirectURL %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon

@@ -83,9 +83,17 @@ public class FacebookConnectAction extends PortletAction {
 				FacebookConnectUtil.getAuthURL(companyId), "client_id",
 				FacebookConnectUtil.getAppId(companyId));
 
+			String facebookRedirect = ParamUtil.getString(
+				actionRequest, "redirect");
+
+			String redirect_uri = FacebookConnectUtil.getRedirectURL(
+				companyId);
+
+			redirect_uri = HttpUtil.addParameter(
+				redirect_uri, "redirect", facebookRedirect);
+
 			redirect = HttpUtil.addParameter(
-				redirect, "redirect_uri",
-				FacebookConnectUtil.getRedirectURL(companyId));
+				redirect, "redirect_uri", redirect_uri);
 
 			redirect = HttpUtil.addParameter(redirect, "scope", "email");
 
@@ -103,13 +111,15 @@ public class FacebookConnectAction extends PortletAction {
 
 		long companyId = themeDisplay.getCompanyId();
 
+		String redirect = ParamUtil.getString(request, "redirect");
+
 		if (!FacebookConnectUtil.isEnabled(companyId)) {
 			return null;
 		}
 
 		String code = ParamUtil.get(request, "code", StringPool.BLANK);
 
-		String token = getAccessToken(companyId, code);
+		String token = getAccessToken(companyId, code, redirect);
 
 		if (Validator.isNotNull(token)) {
 			HttpSession session = request.getSession();
@@ -119,7 +129,7 @@ public class FacebookConnectAction extends PortletAction {
 			setFacebookCredentials(session, companyId, token);
 		}
 
-		String redirect = getRedirect(request, themeDisplay);
+		redirect = getRedirect(request, themeDisplay);
 
 		response.sendRedirect(redirect);
 
@@ -204,7 +214,7 @@ public class FacebookConnectAction extends PortletAction {
 
 		session.setAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);
 
-		String redirect = themeDisplay.getPathContext();
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 		if (Validator.isNull(redirect)) {
 			redirect = StringPool.SLASH;
@@ -213,7 +223,8 @@ public class FacebookConnectAction extends PortletAction {
 		actionResponse.sendRedirect(redirect);
 	}
 
-	protected String getAccessToken(long companyId, String code)
+	protected String getAccessToken(
+			long companyId, String code, String redirect)
 		throws Exception {
 
 		String url = HttpUtil.addParameter(
@@ -222,6 +233,15 @@ public class FacebookConnectAction extends PortletAction {
 
 		url = HttpUtil.addParameter(url, "redirect_uri",
 			FacebookConnectUtil.getRedirectURL(companyId));
+
+		String redirect_uri = FacebookConnectUtil.getRedirectURL(
+			companyId);
+
+		redirect_uri = HttpUtil.addParameter(
+			redirect_uri, "redirect", redirect);
+
+		url = HttpUtil.addParameter(
+			url, "redirect_uri", redirect_uri);
 
 		url = HttpUtil.addParameter(url, "client_secret",
 			FacebookConnectUtil.getAppSecret(companyId));
@@ -288,13 +308,16 @@ public class FacebookConnectAction extends PortletAction {
 			HttpServletRequest request, ThemeDisplay themeDisplay)
 		throws Exception {
 
+		String redirect = ParamUtil.getString(
+			request, "redirect", themeDisplay.getPathContext());
+
 		HttpSession session = request.getSession();
 
 		if ((session.getAttribute(WebKeys.FACEBOOK_ACCESS_TOKEN) != null) &&
 			(session.getAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS) !=
 				null)) {
 
-			return themeDisplay.getPathContext();
+			return redirect;
 		}
 		else {
 			PortletURL portletURL = PortletURLFactoryUtil.create(
@@ -306,6 +329,7 @@ public class FacebookConnectAction extends PortletAction {
 
 			portletURL.setParameter(
 				"struts_action", "/login/facebook_connect_add_user");
+			portletURL.setParameter("redirect", redirect);
 
 			return portletURL.toString();
 		}
