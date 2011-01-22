@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.License;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -1405,6 +1406,60 @@ public class BaseDeployer implements Deployer {
 		}
 	}
 
+	public String updateLiferayWebXml(File srcFile, String webXmlContent)
+		throws Exception {
+
+		webXmlContent = WebXMLBuilder.organizeWebXML(webXmlContent);
+
+		int x = webXmlContent.indexOf("<filter>");
+		int y = webXmlContent.lastIndexOf("</filter-mapping>");
+
+		if ((x == -1) || (y == -1)) {
+			return webXmlContent;
+		}
+
+		String filterContent = webXmlContent.substring(x, y + 17);
+
+		String liferayWebXmlContent = FileUtil.read(
+			DeployUtil.getResourcePath("web.xml"));
+
+		int z = liferayWebXmlContent.indexOf("</web-app>");
+
+		liferayWebXmlContent =
+			liferayWebXmlContent.substring(0, z) + filterContent +
+				liferayWebXmlContent.substring(z);
+
+		liferayWebXmlContent = WebXMLBuilder.organizeWebXML(
+			liferayWebXmlContent);
+
+		FileUtil.write(
+			srcFile + "/WEB-INF/liferay-web.xml", liferayWebXmlContent);
+
+		StringBundler sb = new StringBundler();
+
+		sb.append("<filter>");
+		sb.append("<filter-name>Invoker Filter</filter-name>");
+		sb.append("<filter-class>");
+		sb.append(InvokerFilter.class.getName());
+		sb.append("</filter-class>");
+		sb.append("</filter>");
+
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Invoker Filter</filter-name>");
+		sb.append("<url-pattern>/*</url-pattern>");
+		sb.append("<dispatcher>ERROR</dispatcher>");
+		sb.append("<dispatcher>FORWARD</dispatcher>");
+		sb.append("<dispatcher>INCLUDE</dispatcher>");
+		sb.append("<dispatcher>REQUEST</dispatcher>");
+		sb.append("</filter-mapping>");
+
+		webXmlContent =
+			webXmlContent.substring(0, x) + sb.toString() +
+				webXmlContent.substring(y + 17);
+
+		return webXmlContent;
+	}
+
 	public void updateWebXml(
 			File webXml, File srcFile, String displayName,
 			PluginPackage pluginPackage)
@@ -1436,24 +1491,6 @@ public class BaseDeployer implements Deployer {
 		String extraContent = getExtraContent(
 			webXmlVersion, srcFile, displayName);
 
-		if (webXmlVersion > 2.3) {
-			while (true) {
-				int pos = extraContent.indexOf(
-					"<param-name>servlet-2.4-dispatcher</param-name>");
-
-				if (pos == -1) {
-					break;
-				}
-
-				x = extraContent.lastIndexOf("<init-param>", pos);
-				int y = extraContent.indexOf("</init-param>", pos);
-
-				extraContent =
-					extraContent.substring(0, x) +
-						extraContent.substring(y + 13);
-			}
-		}
-
 		int pos = content.indexOf("</web-app>");
 
 		String newContent =
@@ -1465,6 +1502,12 @@ public class BaseDeployer implements Deployer {
 		newContent = StringUtil.replace(
 			newContent, "com.liferay.portal.shared.",
 			"com.liferay.portal.kernel.");
+
+		// Update liferay-web.xml
+
+		newContent = updateLiferayWebXml(srcFile, newContent);
+
+		// Update web.xml
 
 		newContent = WebXMLBuilder.organizeWebXML(newContent);
 

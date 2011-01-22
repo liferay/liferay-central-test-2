@@ -55,15 +55,6 @@ public abstract class BaseFilter implements Filter {
 		if (Validator.isNotNull(urlRegexIgnorePattern)) {
 			_urlRegexIgnorePattern = Pattern.compile(urlRegexIgnorePattern);
 		}
-
-		String servlet24Dispatcher = GetterUtil.getString(
-			filterConfig.getInitParameter("servlet-2.4-dispatcher"));
-
-		if (servlet24Dispatcher.equalsIgnoreCase(
-				_SERVLET_24_DISPATCHER_REQUEST)) {
-
-			_servlet24Dispatcher = true;
-		}
 	}
 
 	public void doFilter(
@@ -89,7 +80,7 @@ public abstract class BaseFilter implements Filter {
 
 		boolean filterEnabled = isFilterEnabled();
 
-		if (filterEnabled && _servlet24Dispatcher && (requestURL == null)) {
+		if (filterEnabled && (requestURL == null)) {
 			filterEnabled = false;
 		}
 
@@ -219,12 +210,9 @@ public abstract class BaseFilter implements Filter {
 
 	private static final String _DEPTHER = "DEPTHER";
 
-	private static final String _SERVLET_24_DISPATCHER_REQUEST = "REQUEST";
-
 	private FilterConfig _filterConfig;
 	private Class<?> _filterClass = getClass();
 	private boolean _filterEnabled = true;
-	private boolean _servlet24Dispatcher;
 	private Pattern _urlRegexIgnorePattern;
 	private Pattern _urlRegexPattern;
 

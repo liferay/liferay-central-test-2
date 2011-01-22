@@ -49,6 +49,9 @@ public interface JavaConstants {
 	public static final String JAVAX_SERVLET_ERROR_MESSAGE =
 		"javax.servlet.error.message";
 
+	public static final String JAVAX_SERVLET_ERROR_REQUEST_URI =
+		"javax.servlet.error.request_uri";
+
 	public static final String JAVAX_SERVLET_FORWARD_CONTEXT_PATH =
 		"javax.servlet.forward.context_path";
 
