@@ -731,17 +731,6 @@ public class PortletURLImpl
 		sb.append(StringPool.AMPERSAND);
 	}
 
-	protected void appendNamespace(String name, StringBundler sb) {
-		String namespace = getNamespace();
-
-		if (!PortalUtil.isReservedParameter(name) &&
-			!name.startsWith(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
-			!name.startsWith(namespace)) {
-
-			sb.append(namespace);
-		}
-	}
-
 	protected void clearCache() {
 		_reservedParameters = null;
 		_toString = null;
@@ -985,7 +974,7 @@ public class PortletURLImpl
 				name = publicRenderParameterName;
 			}
 
-			appendNamespace(name, sb);
+			name = prependNamespace(name);
 
 			for (int i = 0; i < values.length; i++) {
 				sb.append(name);
@@ -1156,7 +1145,7 @@ public class PortletURLImpl
 				name = publicRenderParameterName;
 			}
 
-			appendNamespace(name, sb);
+			name = prependNamespace(name);
 
 			for (int i = 0; i < values.length; i++) {
 				parameterSb.append(name);
@@ -1258,6 +1247,8 @@ public class PortletURLImpl
 	}
 
 	protected void mergeRenderParameters() {
+		String namespace = getNamespace();
+		
 		Map<String, String[]> renderParameters = RenderParametersPool.get(
 			_request, _layout.getPlid(), getPortlet().getPortletId());
 
@@ -1268,7 +1259,11 @@ public class PortletURLImpl
 			Map.Entry<String, String[]> entry = itr.next();
 
 			String name = entry.getKey();
-
+			
+			if (name.indexOf(namespace) != -1) {
+				name = name.substring(namespace.length());
+			}
+			
 			String[] oldValues = entry.getValue();
 			String[] newValues = _params.get(name);
 
@@ -1283,6 +1278,20 @@ public class PortletURLImpl
 
 				_params.put(name, newValues);
 			}
+		}
+	}
+
+	protected String prependNamespace(String name) {
+		String namespace = getNamespace();
+
+		if (!PortalUtil.isReservedParameter(name) &&
+			!name.startsWith(PortletQName.PUBLIC_RENDER_PARAMETER_NAMESPACE) &&
+			!name.startsWith(namespace)) {
+
+			return namespace.concat(name);
+		}
+		else {
+			return name;
 		}
 	}
 
