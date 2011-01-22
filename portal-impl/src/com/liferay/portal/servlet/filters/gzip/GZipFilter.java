@@ -54,6 +54,10 @@ public class GZipFilter extends BasePortalFilter {
 		}
 	}
 
+	public boolean isFilterEnabled() {
+		return _filterEnabled;
+	}
+
 	protected boolean isAlreadyFiltered(HttpServletRequest request) {
 		if (request.getAttribute(SKIP_FILTER) != null) {
 			return true;
@@ -70,10 +74,6 @@ public class GZipFilter extends BasePortalFilter {
 		else {
 			return false;
 		}
-	}
-
-	protected boolean isFilterEnabled() {
-		return _filterEnabled;
 	}
 
 	protected boolean isInclude(HttpServletRequest request) {

@@ -46,7 +46,7 @@ public class MonitoringFilter extends BasePortalFilter {
 		_monitoringPortalRequest = monitoringPortalRequest;
 	}
 
-	protected boolean isFilterEnabled() {
+	public boolean isFilterEnabled() {
 		if (!super.isFilterEnabled()) {
 			return false;
 		}

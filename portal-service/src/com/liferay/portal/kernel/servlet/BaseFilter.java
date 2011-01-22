@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -37,24 +36,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author Raymond Augé
  * @author Eduardo Lundgren
  */
-public abstract class BaseFilter implements Filter {
+public abstract class BaseFilter implements LiferayFilter {
 
-	public void init(FilterConfig filterConfig) {
-		_filterConfig = filterConfig;
-
-		String urlRegexPattern = GetterUtil.getString(
-			filterConfig.getInitParameter("url-regex-pattern"));
-
-		if (Validator.isNotNull(urlRegexPattern)) {
-			_urlRegexPattern = Pattern.compile(urlRegexPattern);
-		}
-
-		String urlRegexIgnorePattern = GetterUtil.getString(
-			filterConfig.getInitParameter("url-regex-ignore-pattern"));
-
-		if (Validator.isNotNull(urlRegexIgnorePattern)) {
-			_urlRegexIgnorePattern = Pattern.compile(urlRegexIgnorePattern);
-		}
+	public void destroy() {
 	}
 
 	public void doFilter(
@@ -132,19 +116,29 @@ public abstract class BaseFilter implements Filter {
 		return _filterConfig;
 	}
 
-	public void destroy() {
+	public void init(FilterConfig filterConfig) {
+		_filterConfig = filterConfig;
+
+		String urlRegexPattern = GetterUtil.getString(
+			filterConfig.getInitParameter("url-regex-pattern"));
+
+		if (Validator.isNotNull(urlRegexPattern)) {
+			_urlRegexPattern = Pattern.compile(urlRegexPattern);
+		}
+
+		String urlRegexIgnorePattern = GetterUtil.getString(
+			filterConfig.getInitParameter("url-regex-ignore-pattern"));
+
+		if (Validator.isNotNull(urlRegexIgnorePattern)) {
+			_urlRegexIgnorePattern = Pattern.compile(urlRegexIgnorePattern);
+		}
 	}
 
-	protected abstract Log getLog();
-
-	protected boolean isFilterEnabled() {
+	public boolean isFilterEnabled() {
 		return _filterEnabled;
 	}
 
-	protected abstract void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
-		throws Exception;
+	protected abstract Log getLog();
 
 	protected void processFilter(
 			Class<?> filterClass, HttpServletRequest request,
@@ -208,10 +202,15 @@ public abstract class BaseFilter implements Filter {
 		}
 	}
 
+	protected abstract void processFilter(
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws Exception;
+
 	private static final String _DEPTHER = "DEPTHER";
 
-	private FilterConfig _filterConfig;
 	private Class<?> _filterClass = getClass();
+	private FilterConfig _filterConfig;
 	private boolean _filterEnabled = true;
 	private Pattern _urlRegexIgnorePattern;
 	private Pattern _urlRegexPattern;

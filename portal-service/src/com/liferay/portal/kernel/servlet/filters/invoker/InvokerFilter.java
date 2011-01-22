@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.servlet.filters.invoker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.LiferayFilter;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.Validator;
@@ -134,7 +135,22 @@ public class InvokerFilter implements Filter {
 
 		filter.init(filterConfig);
 
-		_filters.put(filterName, filter);
+		boolean filterEnabled = true;
+
+		if (filter instanceof LiferayFilter) {
+			LiferayFilter liferayFilter = (LiferayFilter)filter;
+
+			filterEnabled = liferayFilter.isFilterEnabled();
+		}
+
+		if (filterEnabled) {
+			_filters.put(filterName, filter);
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Removing disabled filter " + filter.getClass());
+			}
+		}
 	}
 
 	protected void initFilterMapping(

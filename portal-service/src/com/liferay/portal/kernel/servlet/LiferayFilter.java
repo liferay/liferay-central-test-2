@@ -12,30 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.servlet.filters;
+package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.BaseFilter;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.PropsUtil;
+import javax.servlet.Filter;
 
 /**
  * @author Brian Wing Shun Chan
  */
-public abstract class BasePortalFilter extends BaseFilter {
+public interface LiferayFilter extends Filter {
 
-	public boolean isFilterEnabled() {
-		return _filterEnabled;
-	}
-
-	protected Log getLog() {
-		return _log;
-	}
-
-	private Log _log = LogFactoryUtil.getLog(getClass());
-
-	private boolean _filterEnabled = GetterUtil.getBoolean(
-		PropsUtil.get(getClass().getName()), true);
+	public boolean isFilterEnabled();
 
 }

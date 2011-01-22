@@ -39,8 +39,8 @@ import javax.servlet.http.HttpSession;
  */
 public class AbsoluteRedirectsFilter extends BasePortalFilter {
 
-	protected boolean isFilterEnabled() {
-		return true;
+	public boolean isFilterEnabled() {
+		return _FILTER_ENABLED;
 	}
 
 	protected void processFilter(
@@ -85,6 +85,8 @@ public class AbsoluteRedirectsFilter extends BasePortalFilter {
 		processFilter(
 			AbsoluteRedirectsFilter.class, request, response, filterChain);
 	}
+
+	private static final boolean _FILTER_ENABLED = true;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		AbsoluteRedirectsFilter.class);
