@@ -12,11 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.servlet.filters.charbufferpool;
-
-import com.liferay.portal.kernel.servlet.TryFinallyFilter;
-import com.liferay.portal.kernel.util.CharBufferPool;
-import com.liferay.portal.servlet.filters.BasePortalFilter;
+package com.liferay.portal.kernel.servlet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,22 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Brian Wing Shun Chan
  */
-public class CharBufferPoolFilter
-	extends BasePortalFilter implements TryFinallyFilter {
+public interface WrapHttpServletResponseFilter extends DirectCallFilter {
 
-	public void doFilterFinally(
-		HttpServletRequest request, HttpServletResponse response,
-		Object object) {
-
-		CharBufferPool.cleanUp();
-	}
-
-	public Object doFilterTry(
-		HttpServletRequest request, HttpServletResponse response) {
-
-		CharBufferPool.setEnabled(true);
-
-		return null;
-	}
+	public HttpServletResponse getWrappedHttpServletResponse(
+		HttpServletRequest request, HttpServletResponse response);
 
 }

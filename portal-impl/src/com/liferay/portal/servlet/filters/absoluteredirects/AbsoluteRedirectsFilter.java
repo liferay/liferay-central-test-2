@@ -16,13 +16,14 @@ package com.liferay.portal.servlet.filters.absoluteredirects;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.TryFilter;
+import com.liferay.portal.kernel.servlet.WrapHttpServletResponseFilter;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
-import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -36,24 +37,18 @@ import javax.servlet.http.HttpSession;
  * </p>
  *
  * @author Minhchau Dang
+ * @author Brian Wing Shun Chan
  */
-public class AbsoluteRedirectsFilter extends BasePortalFilter {
+public class AbsoluteRedirectsFilter
+	extends BasePortalFilter
+	implements TryFilter, WrapHttpServletResponseFilter {
 
-	public boolean isFilterEnabled() {
-		return _FILTER_ENABLED;
-	}
-
-	protected void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
+	public Object doFilterTry(
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		request.setCharacterEncoding(StringPool.UTF8);
 		//response.setContentType(ContentTypes.TEXT_HTML_UTF8);
-
-		// Make sure all redirects issued by the portal are absolute
-
-		response = new AbsoluteRedirectsResponse(request, response);
 
 		// Company id needs to always be called here so that it's properly set
 		// in subsequent calls
@@ -81,9 +76,18 @@ public class AbsoluteRedirectsFilter extends BasePortalFilter {
 				_log.debug("Setting httpsInitial to " + httpsInitial);
 			}
 		}
+		System.out.println("## absolute redirect");
+		return null;
+	}
 
-		processFilter(
-			AbsoluteRedirectsFilter.class, request, response, filterChain);
+	public HttpServletResponse getWrappedHttpServletResponse(
+		HttpServletRequest request, HttpServletResponse response) {
+System.out.println("## getWrappedHttpServletResponse");
+		return new AbsoluteRedirectsResponse(request, response);
+	}
+
+	public boolean isFilterEnabled() {
+		return _FILTER_ENABLED;
 	}
 
 	private static final boolean _FILTER_ENABLED = true;

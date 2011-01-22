@@ -14,9 +14,9 @@
 
 package com.liferay.portal.servlet.filters.sessionid;
 
+import com.liferay.portal.kernel.servlet.WrapHttpServletRequestFilter;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
-import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -28,18 +28,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  */
-public class SessionIdFilter extends BasePortalFilter {
+public class SessionIdFilter
+	extends BasePortalFilter implements WrapHttpServletRequestFilter {
 
-	protected void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
-		throws Exception {
+	public HttpServletRequest getWrappedHttpServletRequest(
+		HttpServletRequest request, HttpServletResponse response) {
 
-		SessionIdServletRequest sessionIdRequest = new SessionIdServletRequest(
-			request, response);
-
-		processFilter(
-			SessionIdFilter.class, sessionIdRequest, response, filterChain);
+		return new SessionIdServletRequest(request, response);
 	}
 
 }

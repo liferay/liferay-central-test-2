@@ -16,7 +16,12 @@ package com.liferay.portal.kernel.servlet.filters.invoker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.DirectCallFilter;
 import com.liferay.portal.kernel.servlet.LiferayFilter;
+import com.liferay.portal.kernel.servlet.TryFilter;
+import com.liferay.portal.kernel.servlet.TryFinallyFilter;
+import com.liferay.portal.kernel.servlet.WrapHttpServletRequestFilter;
+import com.liferay.portal.kernel.servlet.WrapHttpServletResponseFilter;
 
 import java.io.IOException;
 
@@ -68,7 +73,23 @@ public class InvokerFilterChain implements FilterChain {
 			}
 
 			if (filterEnabled) {
-				filter.doFilter(request, response, this);
+				if (filter instanceof DirectCallFilter) {
+					try {
+						processDirectCallFilter(filter, request, response);
+					}
+					catch (IOException ioe) {
+						throw ioe;
+					}
+					catch (ServletException se) {
+						throw se;
+					}
+					catch (Exception e) {
+						throw new ServletException(e);
+					}
+				}
+				else {
+					filter.doFilter(request, response, this);
+				}
 			}
 			else {
 				if (_log.isDebugEnabled()) {
@@ -77,6 +98,54 @@ public class InvokerFilterChain implements FilterChain {
 
 				doFilter(request, response);
 			}
+		}
+	}
+
+	protected void processDirectCallFilter(
+			Filter filter, HttpServletRequest request,
+			HttpServletResponse response)
+		throws Exception {
+
+		if (filter instanceof WrapHttpServletRequestFilter) {
+			WrapHttpServletRequestFilter wrapHttpServletRequestFilter =
+				(WrapHttpServletRequestFilter)filter;
+
+			request = wrapHttpServletRequestFilter.getWrappedHttpServletRequest(
+				request, response);
+		}
+
+		if (filter instanceof WrapHttpServletResponseFilter) {
+			WrapHttpServletResponseFilter wrapHttpServletResponseFilter =
+				(WrapHttpServletResponseFilter)filter;
+
+			response =
+				wrapHttpServletResponseFilter.getWrappedHttpServletResponse(
+					request, response);
+		}
+
+		if (filter instanceof TryFinallyFilter) {
+			TryFinallyFilter tryFinallyFilter = (TryFinallyFilter)filter;
+
+			Object object = null;
+
+			try {
+				object = tryFinallyFilter.doFilterTry(request, response);
+
+				doFilter(request, response);
+			}
+			finally {
+				tryFinallyFilter.doFilterFinally(request, response, object);
+			}
+		}
+		else if (filter instanceof TryFilter) {
+			TryFilter tryFilter = (TryFilter)filter;
+
+			tryFilter.doFilterTry(request, response);
+
+			doFilter(request, response);
+		}
+		else {
+			doFilter(request, response);
 		}
 	}
 

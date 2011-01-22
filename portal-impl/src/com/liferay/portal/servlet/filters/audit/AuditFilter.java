@@ -15,22 +15,22 @@
 package com.liferay.portal.servlet.filters.audit;
 
 import com.liferay.portal.kernel.audit.AuditRequestThreadLocal;
+import com.liferay.portal.kernel.servlet.TryFilter;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
-import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
-public class AuditFilter extends BasePortalFilter {
+public class AuditFilter extends BasePortalFilter implements TryFilter {
 
-	protected void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
+	public Object doFilterTry(
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		AuditRequestThreadLocal auditRequestThreadLocal =
@@ -52,9 +52,9 @@ public class AuditFilter extends BasePortalFilter {
 			request.getRequestURL().toString());
 		auditRequestThreadLocal.setServerName(request.getServerName());
 		auditRequestThreadLocal.setServerPort(request.getServerPort());
-		auditRequestThreadLocal.setSessionID(request.getSession().getId());
+		auditRequestThreadLocal.setSessionID(session.getId());
 
-		processFilter(AuditFilter.class, request, response, filterChain);
+		return null;
 	}
 
 }

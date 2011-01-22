@@ -14,6 +14,7 @@
 
 package com.liferay.portal.servlet.filters.threaddump;
 
+import com.liferay.portal.kernel.servlet.TryFinallyFilter;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PropsValues;
 
@@ -22,7 +23,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,25 +30,26 @@ import javax.servlet.http.HttpServletResponse;
  * @author Shuyang Zhou
  * @author Brian Wing Shun Chan
  */
-public class ThreadDumpFilter extends BasePortalFilter {
+public class ThreadDumpFilter
+	extends BasePortalFilter implements TryFinallyFilter {
 
-	protected void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
-		throws Exception {
+	public void doFilterFinally(
+		HttpServletRequest request, HttpServletResponse response,
+		Object object) {
 
-		ScheduledFuture<?> scheduledFuture =
-			_scheduledExecutorService.schedule(
-				_threadDumper, PropsValues.THREAD_DUMP_SPEED_THRESHOLD,
-				TimeUnit.SECONDS);
+		ScheduledFuture<?> scheduledFuture = (ScheduledFuture<?>)object;
 
-		try {
-			processFilter(
-				ThreadDumpFilter.class, request, response, filterChain);
-		}
-		finally {
-			scheduledFuture.cancel(true);
-		}
+		scheduledFuture.cancel(true);
+	}
+
+	public Object doFilterTry(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		ScheduledFuture<?> scheduledFuture = _scheduledExecutorService.schedule(
+			_threadDumper, PropsValues.THREAD_DUMP_SPEED_THRESHOLD,
+			TimeUnit.SECONDS);
+
+		return scheduledFuture;
 	}
 
 	private static int _MAX_THREAD_DUMPERS = 5;

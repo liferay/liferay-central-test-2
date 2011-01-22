@@ -142,10 +142,15 @@ public abstract class BaseFilter implements LiferayFilter {
 		}
 	}
 
-	protected abstract void processFilter(
+	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
-		throws Exception;
+		throws Exception {
+
+		throw new UnsupportedOperationException(
+			"Please implement processFilter(HttpServletRequest, " +
+				"HttpServletResponse, FilterChain)");
+	}
 
 	private static final String _DEPTHER = "DEPTHER";
 
