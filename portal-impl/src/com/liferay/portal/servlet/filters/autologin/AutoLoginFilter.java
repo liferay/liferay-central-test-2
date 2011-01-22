@@ -76,62 +76,60 @@ public class AutoLoginFilter extends BasePortalFilter {
 			HttpSession session, String[] credentials)
 		throws Exception {
 
-		if ((credentials != null) && (credentials.length == 3)) {
-			String jUsername = credentials[0];
-			String jPassword = credentials[1];
-			boolean encPassword = GetterUtil.getBoolean(credentials[2]);
+		if ((credentials == null) || (credentials.length != 3)) {
+			return null;
+		}
 
-			if (Validator.isNotNull(jUsername) &&
-				Validator.isNotNull(jPassword)) {
+		String jUsername = credentials[0];
+		String jPassword = credentials[1];
+		boolean encPassword = GetterUtil.getBoolean(credentials[2]);
 
-				try {
-					long userId = GetterUtil.getLong(jUsername);
+		if (Validator.isNull(jUsername) || Validator.isNull(jPassword)) {
+			return null;
+		}
 
-					if (userId > 0) {
-						User user = UserLocalServiceUtil.getUserById(userId);
+		try {
+			long userId = GetterUtil.getLong(jUsername);
 
-						if (user.isLockout()) {
-							return null;
-						}
-					}
-					else {
-						return null;
-					}
-				}
-				catch (NoSuchUserException nsue) {
+			if (userId > 0) {
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				if (user.isLockout()) {
 					return null;
 				}
+			}
+			else {
+				return null;
+			}
+		}
+		catch (NoSuchUserException nsue) {
+			return null;
+		}
 
-				session.setAttribute("j_username", jUsername);
+		session.setAttribute("j_username", jUsername);
 
-				// Not having access to the unencrypted password
-				// will not allow you to connect to external
-				// resources that require it (mail server)
+		// Not having access to the unencrypted password will not allow you to
+		// connect to external resources that require it (mail server)
 
-				if (encPassword) {
-					session.setAttribute("j_password", jPassword);
-				}
-				else {
-					session.setAttribute(
-						"j_password", PwdEncryptor.encrypt(jPassword));
+		if (encPassword) {
+			session.setAttribute("j_password", jPassword);
+		}
+		else {
+			session.setAttribute("j_password", PwdEncryptor.encrypt(jPassword));
 
-					if (PropsValues.SESSION_STORE_PASSWORD) {
-						session.setAttribute(WebKeys.USER_PASSWORD, jPassword);
-					}
-				}
-
-				session.setAttribute("j_remoteuser", jUsername);
-
-				if (PropsValues.PORTAL_JAAS_ENABLE) {
-					response.sendRedirect(
-						PortalUtil.getPathMain() + "/portal/touch_protected");
-				}
-
-				return jUsername;
+			if (PropsValues.SESSION_STORE_PASSWORD) {
+				session.setAttribute(WebKeys.USER_PASSWORD, jPassword);
 			}
 		}
 
-		return null;
+		session.setAttribute("j_remoteuser", jUsername);
+
+		if (PropsValues.PORTAL_JAAS_ENABLE) {
+			response.sendRedirect(
+				PortalUtil.getPathMain() + "/portal/touch_protected");
+		}
+
+		return jUsername;
 	}
 
 	protected void processFilter(
