@@ -15,14 +15,9 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -46,60 +41,11 @@ public abstract class BaseFilter implements LiferayFilter {
 			FilterChain filterChain)
 		throws IOException, ServletException {
 
-		Log log = getLog();
-
-		if (log.isDebugEnabled()) {
-			if (isFilterEnabled()) {
-				log.debug(_filterClass + " is enabled");
-			}
-			else {
-				log.debug(_filterClass + " is disabled");
-			}
-		}
-
-		HttpServletRequest request = (HttpServletRequest)servletRequest;
-		HttpServletResponse response = (HttpServletResponse)servletResponse;
-
-		StringBuffer requestURL = request.getRequestURL();
-
-		boolean filterEnabled = isFilterEnabled();
-
-		if (filterEnabled && (requestURL == null)) {
-			filterEnabled = false;
-		}
-
-		if (filterEnabled &&
-			((_urlRegexPattern != null) ||
-			 (_urlRegexIgnorePattern != null))) {
-
-			String url = requestURL.toString();
-
-			String queryString = request.getQueryString();
-
-			if (Validator.isNotNull(queryString)) {
-				url = url.concat(StringPool.QUESTION).concat(queryString);
-			}
-
-			if (_urlRegexPattern != null) {
-				Matcher matcher = _urlRegexPattern.matcher(url);
-
-				filterEnabled = matcher.find();
-			}
-
-			if (filterEnabled && (_urlRegexIgnorePattern != null)) {
-				Matcher matcher = _urlRegexIgnorePattern.matcher(url);
-
-				filterEnabled = !matcher.find();
-			}
-		}
-
 		try {
-			if (filterEnabled) {
-				processFilter(request, response, filterChain);
-			}
-			else {
-				processFilter(_filterClass, request, response, filterChain);
-			}
+			HttpServletRequest request = (HttpServletRequest)servletRequest;
+			HttpServletResponse response = (HttpServletResponse)servletResponse;
+
+			processFilter(request, response, filterChain);
 		}
 		catch (IOException ioe) {
 			throw ioe;
@@ -108,7 +54,9 @@ public abstract class BaseFilter implements LiferayFilter {
 			throw se;
 		}
 		catch (Exception e) {
-			getLog().error(e, e);
+			Log log = getLog();
+
+			log.error(e, e);
 		}
 	}
 
@@ -118,20 +66,6 @@ public abstract class BaseFilter implements LiferayFilter {
 
 	public void init(FilterConfig filterConfig) {
 		_filterConfig = filterConfig;
-
-		String urlRegexPattern = GetterUtil.getString(
-			filterConfig.getInitParameter("url-regex-pattern"));
-
-		if (Validator.isNotNull(urlRegexPattern)) {
-			_urlRegexPattern = Pattern.compile(urlRegexPattern);
-		}
-
-		String urlRegexIgnorePattern = GetterUtil.getString(
-			filterConfig.getInitParameter("url-regex-ignore-pattern"));
-
-		if (Validator.isNotNull(urlRegexIgnorePattern)) {
-			_urlRegexIgnorePattern = Pattern.compile(urlRegexIgnorePattern);
-		}
 	}
 
 	public boolean isFilterEnabled() {
@@ -215,10 +149,7 @@ public abstract class BaseFilter implements LiferayFilter {
 
 	private static final String _DEPTHER = "DEPTHER";
 
-	private Class<?> _filterClass = getClass();
 	private FilterConfig _filterConfig;
 	private boolean _filterEnabled = true;
-	private Pattern _urlRegexIgnorePattern;
-	private Pattern _urlRegexPattern;
 
 }

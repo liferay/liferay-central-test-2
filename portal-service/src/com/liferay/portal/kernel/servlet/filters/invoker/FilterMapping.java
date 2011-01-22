@@ -14,9 +14,20 @@
 
 package com.liferay.portal.kernel.servlet.filters.invoker;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterConfig;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Mika Koivisto
@@ -25,11 +36,61 @@ import java.util.List;
 public class FilterMapping {
 
 	public FilterMapping(
-		String filterName, List<String> urlPatterns, List<String> dispatchers) {
+		Filter filter, FilterConfig filterConfig, List<String> urlPatterns,
+		List<String> dispatchers) {
 
-		_filterName = filterName;
+		_filter = filter;
 		_urlPatterns = urlPatterns;
 
+		initFilterConfig(filterConfig);
+		initDispatchers(dispatchers);
+	}
+
+	public Filter getFilter() {
+		return _filter;
+	}
+
+	public boolean isMatch(
+		HttpServletRequest request, Dispatcher dispatcher, String uri) {
+
+		if (!isMatchDispatcher(dispatcher)) {
+			return false;
+		}
+
+		boolean matchURLPattern = false;
+
+		for (String urlPattern : _urlPatterns) {
+			if (isMatchURLPattern(uri, urlPattern)) {
+				matchURLPattern = true;
+
+				break;
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			if (matchURLPattern) {
+				_log.debug(
+					_filter.getClass() + " has a pattern match with " + uri);
+			}
+			else {
+				_log.debug(
+					_filter.getClass() +
+						" does not have a pattern match with " + uri);
+			}
+		}
+
+		if (!matchURLPattern) {
+			return false;
+		}
+
+		if (isMatchURLRegexPattern(request)) {
+			return true;
+		}
+
+		return false;
+	}
+
+	protected void initDispatchers(List<String> dispatchers) {
 		for (String dispatcher : dispatchers) {
 			if (dispatcher.equals("ERROR")) {
 				_dispatcherError = true;
@@ -52,25 +113,23 @@ public class FilterMapping {
 		}
 	}
 
-	public String getFilterName() {
-		return _filterName;
-	}
+	protected void initFilterConfig(FilterConfig filterConfig) {
+		String urlRegexPattern = GetterUtil.getString(
+			filterConfig.getInitParameter("url-regex-pattern"));
 
-	public boolean isMatch(Dispatcher dispatcher, String uri) {
-		if (!isMatch(dispatcher)) {
-			return false;
+		if (Validator.isNotNull(urlRegexPattern)) {
+			_urlRegexPattern = Pattern.compile(urlRegexPattern);
 		}
 
-		for (String urlPattern : _urlPatterns) {
-			if (isMatch(uri, urlPattern)) {
-				return true;
-			}
-		}
+		String urlRegexIgnorePattern = GetterUtil.getString(
+			filterConfig.getInitParameter("url-regex-ignore-pattern"));
 
-		return false;
+		if (Validator.isNotNull(urlRegexIgnorePattern)) {
+			_urlRegexIgnorePattern = Pattern.compile(urlRegexIgnorePattern);
+		}
 	}
 
-	protected boolean isMatch(Dispatcher dispatcher) {
+	protected boolean isMatchDispatcher(Dispatcher dispatcher) {
 		if (((dispatcher == Dispatcher.ERROR) && _dispatcherError) ||
 			((dispatcher == Dispatcher.FORWARD) && _dispatcherForward) ||
 			((dispatcher == Dispatcher.INCLUDE) && _dispatcherInclude) ||
@@ -83,7 +142,7 @@ public class FilterMapping {
 		}
 	}
 
-	protected boolean isMatch(String uri, String urlPattern) {
+	protected boolean isMatchURLPattern(String uri, String urlPattern) {
 		if (urlPattern.equals(uri)) {
 			return true;
 		}
@@ -123,14 +182,67 @@ public class FilterMapping {
 		return false;
 	}
 
+	protected boolean isMatchURLRegexPattern(HttpServletRequest request) {
+		StringBuffer requestURL = request.getRequestURL();
+
+		if (requestURL == null) {
+			return false;
+		}
+
+		if ((_urlRegexPattern == null) && (_urlRegexIgnorePattern == null)) {
+			return true;
+		}
+
+		String url = requestURL.toString();
+
+		String queryString = request.getQueryString();
+
+		if (Validator.isNotNull(queryString)) {
+			url = url.concat(StringPool.QUESTION).concat(queryString);
+		}
+
+		boolean matchURLRegexPattern = true;
+
+		if (_urlRegexPattern != null) {
+			Matcher matcher = _urlRegexPattern.matcher(url);
+
+			matchURLRegexPattern = matcher.find();
+		}
+
+		if (matchURLRegexPattern && (_urlRegexIgnorePattern != null)) {
+			Matcher matcher = _urlRegexIgnorePattern.matcher(url);
+
+			matchURLRegexPattern = !matcher.find();
+		}
+
+		if (_log.isDebugEnabled()) {
+			if (matchURLRegexPattern) {
+				_log.debug(
+					_filter.getClass() + " has a regex match with " + url);
+			}
+			else {
+				_log.debug(
+					_filter.getClass() + " does not have a regex match with " +
+						url);
+			}
+		}
+
+		return matchURLRegexPattern;
+	}
+
 	private static final String _SLASH_STAR = "/*";
+
 	private static final String _STAR_PERIOD = "*.";
+
+	private static Log _log = LogFactoryUtil.getLog(FilterMapping.class);
 
 	private boolean _dispatcherError;
 	private boolean _dispatcherForward;
 	private boolean _dispatcherInclude;
 	private boolean _dispatcherRequest;
-	private String _filterName;
+	private Filter _filter;
 	private List<String> _urlPatterns;
+	private Pattern _urlRegexIgnorePattern;
+	private Pattern _urlRegexPattern;
 
 }

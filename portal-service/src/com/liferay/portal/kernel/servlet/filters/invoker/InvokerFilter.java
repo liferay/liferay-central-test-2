@@ -60,6 +60,7 @@ public class InvokerFilter implements Filter {
 			}
 		}
 
+		_filterConfigs.clear();
 		_filterMappings.clear();
 		_filters.clear();
 	}
@@ -97,8 +98,8 @@ public class InvokerFilter implements Filter {
 			filterChain);
 
 		for (FilterMapping filterMapping : _filterMappings) {
-			if (filterMapping.isMatch(dispatcher, uri)) {
-				Filter filter = _filters.get(filterMapping.getFilterName());
+			if (filterMapping.isMatch(request, dispatcher, uri)) {
+				Filter filter = filterMapping.getFilter();
 
 				invokerFilterChain.addFilter(filter);
 			}
@@ -144,6 +145,7 @@ public class InvokerFilter implements Filter {
 		}
 
 		if (filterEnabled) {
+			_filterConfigs.put(filterName, filterConfig);
 			_filters.put(filterName, filter);
 		}
 		else {
@@ -156,12 +158,22 @@ public class InvokerFilter implements Filter {
 	protected void initFilterMapping(
 		String filterName, List<String> urlPatterns, List<String> dispatchers) {
 
-		if (_filters.containsKey(filterName)) {
-			FilterMapping filterMapping = new FilterMapping(
-				filterName, urlPatterns, dispatchers);
+		Filter filter = _filters.get(filterName);
 
-			_filterMappings.add(filterMapping);
+		if (filter == null) {
+			return;
 		}
+
+		FilterConfig filterConfig = _filterConfigs.get(filterName);
+
+		if (filterConfig == null) {
+			return;
+		}
+
+		FilterMapping filterMapping = new FilterMapping(
+			filter, filterConfig, urlPatterns, dispatchers);
+
+		_filterMappings.add(filterMapping);
 	}
 
 	protected void readLiferayFilterWebXML(
@@ -235,6 +247,8 @@ public class InvokerFilter implements Filter {
 
 	private static Log _log = LogFactoryUtil.getLog(InvokerFilter.class);
 
+	private Map<String, FilterConfig> _filterConfigs =
+		new HashMap<String, FilterConfig>();
 	private List<FilterMapping> _filterMappings =
 		new CopyOnWriteArrayList<FilterMapping>();
 	private Map<String, Filter> _filters = new HashMap<String, Filter>();
