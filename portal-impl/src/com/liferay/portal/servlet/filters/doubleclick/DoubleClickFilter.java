@@ -53,23 +53,25 @@ public class DoubleClickFilter extends BasePortalFilter {
 				DoubleClickFilter.class, request, response, filterChain);
 		}
 		else {
-			DoubleClickController controller = null;
+			DoubleClickController doubleClickController = null;
 
 			synchronized (session) {
-				controller = (DoubleClickController)session.getAttribute(
-					_CONTROLLER_KEY);
+				doubleClickController =
+					(DoubleClickController)session.getAttribute(
+						_CONTROLLER_KEY);
 
-				if (controller == null) {
-					controller = new DoubleClickController();
+				if (doubleClickController == null) {
+					doubleClickController = new DoubleClickController();
 
-					session.setAttribute(_CONTROLLER_KEY, controller);
+					session.setAttribute(
+						_CONTROLLER_KEY, doubleClickController);
 				}
 			}
 
 			boolean ok = false;
 
 			try {
-				controller.control(request, response, filterChain);
+				doubleClickController.control(request, response, filterChain);
 
 				ok = true;
 			}
