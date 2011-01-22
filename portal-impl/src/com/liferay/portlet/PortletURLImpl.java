@@ -1248,7 +1248,7 @@ public class PortletURLImpl
 
 	protected void mergeRenderParameters() {
 		String namespace = getNamespace();
-		
+
 		Map<String, String[]> renderParameters = RenderParametersPool.get(
 			_request, _layout.getPlid(), getPortlet().getPortletId());
 
@@ -1259,11 +1259,11 @@ public class PortletURLImpl
 			Map.Entry<String, String[]> entry = itr.next();
 
 			String name = entry.getKey();
-			
+
 			if (name.indexOf(namespace) != -1) {
 				name = name.substring(namespace.length());
 			}
-			
+
 			String[] oldValues = entry.getValue();
 			String[] newValues = _params.get(name);
 
