@@ -79,7 +79,9 @@ public class CacheFilter extends BasePortalFilter {
 		}
 	}
 
-	public boolean isFilterEnabled(HttpServletRequest request) {
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		if (isCacheableRequest(request) && !isInclude(request) &&
 			!isAlreadyFiltered(request)) {
 

@@ -62,6 +62,19 @@ public class VirtualHostFilter extends BasePortalFilter {
 		_servletContext = filterConfig.getServletContext();
 	}
 
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		StringBuffer requestURL = request.getRequestURL();
+
+		if (isValidRequestURL(requestURL)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected boolean isValidFriendlyURL(String friendlyURL) {
 		friendlyURL = friendlyURL.toLowerCase();
 
@@ -130,19 +143,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 		throws Exception {
 
 		long companyId = PortalInstances.getCompanyId(request);
-
-		StringBuffer requestURL = request.getRequestURL();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Received " + requestURL);
-		}
-
-		if (!isValidRequestURL(requestURL)) {
-			processFilter(
-				VirtualHostFilter.class, request, response, filterChain);
-
-			return;
-		}
 
 		String contextPath = PortalUtil.getPathContext();
 

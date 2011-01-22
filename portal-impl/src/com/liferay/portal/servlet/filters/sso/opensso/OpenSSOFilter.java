@@ -38,6 +38,39 @@ import javax.servlet.http.HttpSession;
  */
 public class OpenSSOFilter extends BasePortalFilter {
 
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			long companyId = PortalUtil.getCompanyId(request);
+
+			boolean enabled = PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
+				PropsValues.OPEN_SSO_AUTH_ENABLED);
+			String loginUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.OPEN_SSO_LOGIN_URL,
+				PropsValues.OPEN_SSO_LOGIN_URL);
+			String logoutUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.OPEN_SSO_LOGOUT_URL,
+				PropsValues.OPEN_SSO_LOGOUT_URL);
+			String serviceUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.OPEN_SSO_SERVICE_URL,
+				PropsValues.OPEN_SSO_SERVICE_URL);
+
+			if (enabled && Validator.isNotNull(loginUrl) &&
+				Validator.isNotNull(logoutUrl) &&
+				Validator.isNotNull(serviceUrl)) {
+
+				return true;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return false;
+	}
+
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
@@ -45,9 +78,6 @@ public class OpenSSOFilter extends BasePortalFilter {
 
 		long companyId = PortalUtil.getCompanyId(request);
 
-		boolean enabled = PrefsPropsUtil.getBoolean(
-			companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
-			PropsValues.OPEN_SSO_AUTH_ENABLED);
 		String loginUrl = PrefsPropsUtil.getString(
 			companyId, PropsKeys.OPEN_SSO_LOGIN_URL,
 			PropsValues.OPEN_SSO_LOGIN_URL);
@@ -58,14 +88,6 @@ public class OpenSSOFilter extends BasePortalFilter {
 			companyId, PropsKeys.OPEN_SSO_SERVICE_URL,
 			PropsValues.OPEN_SSO_SERVICE_URL);
 
-		if (!enabled || Validator.isNull(loginUrl) ||
-			Validator.isNull(logoutUrl) || Validator.isNull(serviceUrl)) {
-
-			processFilter(OpenSSOFilter.class, request, response, filterChain);
-
-			return;
-		}
-
 		String requestURI = GetterUtil.getString(request.getRequestURI());
 
 		if (requestURI.endsWith("/portal/logout")) {
@@ -74,79 +96,77 @@ public class OpenSSOFilter extends BasePortalFilter {
 			session.invalidate();
 
 			response.sendRedirect(logoutUrl);
+
+			return;
 		}
-		else {
-			boolean authenticated = false;
 
-			try {
+		boolean authenticated = false;
 
-				// LEP-5943
+		try {
 
-				authenticated = OpenSSOUtil.isAuthenticated(
-					request, serviceUrl);
+			// LEP-5943
+
+			authenticated = OpenSSOUtil.isAuthenticated(request, serviceUrl);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			processFilter(OpenSSOFilter.class, request, response, filterChain);
+
+			return;
+		}
+
+		if (authenticated) {
+
+			// LEP-5943
+
+			String newSubjectId = OpenSSOUtil.getSubjectId(request, serviceUrl);
+
+			HttpSession session = request.getSession();
+
+			String oldSubjectId = (String)session.getAttribute(_SUBJECT_ID_KEY);
+
+			if (oldSubjectId == null) {
+				session.setAttribute(_SUBJECT_ID_KEY, newSubjectId);
 			}
-			catch (Exception e) {
-				_log.error(e, e);
+			else if (!newSubjectId.equals(oldSubjectId)) {
+				session.invalidate();
 
-				processFilter(
-					OpenSSOFilter.class, request, response, filterChain);
+				session = request.getSession();
 
-				return;
+				session.setAttribute(_SUBJECT_ID_KEY, newSubjectId);
 			}
 
-			if (authenticated) {
+			processFilter(OpenSSOFilter.class, request, response, filterChain);
 
-				// LEP-5943
+			return;
+		}
 
-				String newSubjectId = OpenSSOUtil.getSubjectId(
-					request, serviceUrl);
+		if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH ||
+			!loginUrl.contains("/portal/login")) {
 
-				HttpSession session = request.getSession();
+			response.sendRedirect(loginUrl);
 
-				String oldSubjectId = (String)session.getAttribute(
-					_SUBJECT_ID_KEY);
+			return;
+		}
 
-				if (oldSubjectId == null) {
-					session.setAttribute(_SUBJECT_ID_KEY, newSubjectId);
-				}
-				else if (!newSubjectId.equals(oldSubjectId)) {
-					session.invalidate();
+		String currentURL = PortalUtil.getCurrentURL(request);
 
-					session = request.getSession();
+		String redirect = currentURL;
 
-					session.setAttribute(_SUBJECT_ID_KEY, newSubjectId);
-				}
+		if (currentURL.contains("/portal/login")) {
+			redirect = ParamUtil.getString(request, "redirect");
 
-				processFilter(
-					OpenSSOFilter.class, request, response, filterChain);
-			}
-			else {
-				if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH ||
-					!loginUrl.contains("/portal/login")) {
-
-					response.sendRedirect(loginUrl);
-
-					return;
-				}
-
-				String currentURL = PortalUtil.getCurrentURL(request);
-
-				String redirect = currentURL;
-
-				if (currentURL.contains("/portal/login")) {
-					redirect = ParamUtil.getString(request, "redirect");
-
-					if (Validator.isNull(redirect)) {
-						redirect = PortalUtil.getPathMain();
-					}
-				}
-
-				response.sendRedirect(
-					loginUrl +
-						HttpUtil.encodeURL(
-							"?redirect=" + HttpUtil.encodeURL(redirect)));
+			if (Validator.isNull(redirect)) {
+				redirect = PortalUtil.getPathMain();
 			}
 		}
+
+		redirect =
+			loginUrl +
+				HttpUtil.encodeURL("?redirect=" + HttpUtil.encodeURL(redirect));
+
+		response.sendRedirect(redirect);
 	}
 
 	private static final String _SUBJECT_ID_KEY = "open.sso.subject.id";

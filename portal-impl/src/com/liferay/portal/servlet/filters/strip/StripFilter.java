@@ -65,7 +65,9 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
-	public boolean isFilterEnabled(HttpServletRequest request) {
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		if (isStrip(request) && !isInclude(request) &&
 			!isAlreadyFiltered(request)) {
 

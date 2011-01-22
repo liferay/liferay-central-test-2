@@ -34,6 +34,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ThemePreviewFilter extends BasePortalFilter {
 
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		if (isThemePreview(request)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected String getContent(HttpServletRequest request, String content) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -69,25 +80,18 @@ public class ThemePreviewFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		if (isThemePreview(request)) {
-			request.setAttribute(StripFilter.SKIP_FILTER, Boolean.TRUE);
+		request.setAttribute(StripFilter.SKIP_FILTER, Boolean.TRUE);
 
-			StringServletResponse stringServerResponse =
-				new StringServletResponse(response);
+		StringServletResponse stringServerResponse =
+			new StringServletResponse(response);
 
-			processFilter(
-				ThemePreviewFilter.class, request, stringServerResponse,
-				filterChain);
+		processFilter(
+			ThemePreviewFilter.class, request, stringServerResponse,
+			filterChain);
 
-			String content = getContent(
-				request, stringServerResponse.getString());
+		String content = getContent(request, stringServerResponse.getString());
 
-			ServletResponseUtil.write(response, content);
-		}
-		else {
-			processFilter(
-				ThemePreviewFilter.class, request, response, filterChain);
-		}
+		ServletResponseUtil.write(response, content);
 	}
 
 	private static final String _THEME_PREVIEW = "themePreview";

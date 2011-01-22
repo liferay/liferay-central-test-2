@@ -61,6 +61,17 @@ public class I18nFilter extends BasePortalFilter {
 		_languageIds = Collections.unmodifiableSet(_languageIds);
 	}
 
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		if (!isAlreadyFiltered(request) && !isForwardedByI18nServlet(request)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected String getRedirect(HttpServletRequest request) throws Exception {
 		if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 0) {
 			return null;
@@ -207,12 +218,6 @@ public class I18nFilter extends BasePortalFilter {
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
-
-		if (isAlreadyFiltered(request) || isForwardedByI18nServlet(request)) {
-			processFilter(I18nFilter.class, request, response, filterChain);
-
-			return;
-		}
 
 		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 

@@ -14,6 +14,10 @@
 
 package com.liferay.portal.kernel.servlet.filters.invoker;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.LiferayFilter;
+
 import java.io.IOException;
 
 import java.util.LinkedList;
@@ -24,6 +28,8 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Mika Koivisto
@@ -47,11 +53,34 @@ public class InvokerFilterChain implements FilterChain {
 			_filterChain.doFilter(servletRequest, servletResponse);
 		}
 		else {
+			HttpServletRequest request = (HttpServletRequest)servletRequest;
+			HttpServletResponse response = (HttpServletResponse)servletResponse;
+
 			Filter filter = _filters.remove();
 
-			filter.doFilter(servletRequest, servletResponse, this);
+			boolean filterEnabled = true;
+
+			if (filter instanceof LiferayFilter) {
+				LiferayFilter liferayFilter = (LiferayFilter)filter;
+
+				filterEnabled = liferayFilter.isFilterEnabled(
+					request, response);
+			}
+
+			if (filterEnabled) {
+				filter.doFilter(request, response, this);
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Skip disabled filter " + filter.getClass());
+				}
+
+				doFilter(request, response);
+			}
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(InvokerFilterChain.class);
 
 	private FilterChain _filterChain;
 	private Queue<Filter> _filters = new LinkedList<Filter>();

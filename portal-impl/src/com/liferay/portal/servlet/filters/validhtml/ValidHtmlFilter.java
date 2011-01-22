@@ -38,6 +38,19 @@ public class ValidHtmlFilter extends BasePortalFilter {
 	public static final String SKIP_FILTER =
 		ValidHtmlFilter.class.getName() + "SKIP_FILTER";
 
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		if (isEnsureValidHtml(request, response) &&
+			!isAlreadyFiltered(request)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected String getContent(HttpServletRequest request, String content) {
 		content = StringUtil.replaceLast(
 			content, _CLOSE_BODY, StringPool.BLANK);
@@ -76,39 +89,23 @@ public class ValidHtmlFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		if (isEnsureValidHtml(request, response) &&
-			!isAlreadyFiltered(request)) {
+		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
+		if (_log.isDebugEnabled()) {
+			String completeURL = HttpUtil.getCompleteURL(request);
 
-			if (_log.isDebugEnabled()) {
-				String completeURL = HttpUtil.getCompleteURL(request);
-
-				_log.debug("Ensuring valid HTML " + completeURL);
-			}
-
-			StringServletResponse stringServerResponse =
-				new StringServletResponse(response);
-
-			processFilter(
-				ValidHtmlFilter.class, request, stringServerResponse,
-				filterChain);
-
-			String content = getContent(
-				request, stringServerResponse.getString());
-
-			ServletResponseUtil.write(response, content);
+			_log.debug("Ensuring valid HTML " + completeURL);
 		}
-		else {
-			if (_log.isDebugEnabled()) {
-				String completeURL = HttpUtil.getCompleteURL(request);
 
-				_log.debug("Not ensuring valid HTML " + completeURL);
-			}
+		StringServletResponse stringServerResponse = new StringServletResponse(
+			response);
 
-			processFilter(
-				ValidHtmlFilter.class, request, response, filterChain);
-		}
+		processFilter(
+			ValidHtmlFilter.class, request, stringServerResponse, filterChain);
+
+		String content = getContent(request, stringServerResponse.getString());
+
+		ServletResponseUtil.write(response, content);
 	}
 
 	private static final String _CLOSE_BODY = "</body>";

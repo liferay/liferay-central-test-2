@@ -55,6 +55,26 @@ public class CASFilter extends BasePortalFilter {
 		_ticketValidators.remove(companyId);
 	}
 
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			long companyId = PortalUtil.getCompanyId(request);
+
+			if (PrefsPropsUtil.getBoolean(
+					companyId, PropsKeys.CAS_AUTH_ENABLED,
+					PropsValues.CAS_AUTH_ENABLED)) {
+
+				return true;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return false;
+	}
+
 	protected Log getLog() {
 		return _log;
 	}
@@ -97,79 +117,71 @@ public class CASFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
+		HttpSession session = request.getSession();
+
 		long companyId = PortalUtil.getCompanyId(request);
 
-		if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.CAS_AUTH_ENABLED,
-				PropsValues.CAS_AUTH_ENABLED)) {
+		String pathInfo = request.getPathInfo();
 
-			HttpSession session = request.getSession();
+		if (pathInfo.indexOf("/portal/logout") != -1) {
+			session.invalidate();
 
-			String pathInfo = request.getPathInfo();
+			String logoutUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CAS_LOGOUT_URL,
+				PropsValues.CAS_LOGOUT_URL);
 
-			if (pathInfo.indexOf("/portal/logout") != -1) {
-				session.invalidate();
+			response.sendRedirect(logoutUrl);
 
-				String logoutUrl = PrefsPropsUtil.getString(
-					companyId, PropsKeys.CAS_LOGOUT_URL,
-					PropsValues.CAS_LOGOUT_URL);
+			return;
+		}
+		else {
+			String login = (String)session.getAttribute(LOGIN);
 
-				response.sendRedirect(logoutUrl);
+			String serverName = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CAS_SERVER_NAME,
+				PropsValues.CAS_SERVER_NAME);
+
+			String serviceUrl = PrefsPropsUtil.getString(
+				companyId, PropsKeys.CAS_SERVICE_URL,
+				PropsValues.CAS_SERVICE_URL);
+
+			if (Validator.isNull(serviceUrl)) {
+				serviceUrl = CommonUtils.constructServiceUrl(
+					request, response, serviceUrl, serverName, "ticket", false);
+			}
+
+			String ticket = ParamUtil.getString(request, "ticket");
+
+			if (Validator.isNull(ticket)) {
+				if (Validator.isNotNull(login)) {
+					processFilter(
+						CASFilter.class, request, response, filterChain);
+				}
+				else {
+					String loginUrl = PrefsPropsUtil.getString(
+						companyId, PropsKeys.CAS_LOGIN_URL,
+						PropsValues.CAS_LOGIN_URL);
+
+					loginUrl = HttpUtil.addParameter(
+						loginUrl, "service", serviceUrl);
+
+					response.sendRedirect(loginUrl);
+				}
 
 				return;
 			}
-			else {
-				String login = (String)session.getAttribute(LOGIN);
 
-				String serverName = PrefsPropsUtil.getString(
-					companyId, PropsKeys.CAS_SERVER_NAME,
-					PropsValues.CAS_SERVER_NAME);
+			TicketValidator ticketValidator = getTicketValidator(companyId);
 
-				String serviceUrl = PrefsPropsUtil.getString(
-					companyId, PropsKeys.CAS_SERVICE_URL,
-					PropsValues.CAS_SERVICE_URL);
+			Assertion assertion = ticketValidator.validate(ticket, serviceUrl);
 
-				if (Validator.isNull(serviceUrl)) {
-					serviceUrl = CommonUtils.constructServiceUrl(
-						request, response, serviceUrl, serverName, "ticket",
-						false);
-				}
+			if (assertion != null) {
+				AttributePrincipal attributePrincipal =
+					assertion.getPrincipal();
 
-				String ticket = ParamUtil.getString(request, "ticket");
+				login = attributePrincipal.getName();
 
-				if (Validator.isNull(ticket)) {
-					if (Validator.isNotNull(login)) {
-						processFilter(
-							CASFilter.class, request, response, filterChain);
-					}
-					else {
-						String loginUrl = PrefsPropsUtil.getString(
-							companyId, PropsKeys.CAS_LOGIN_URL,
-							PropsValues.CAS_LOGIN_URL);
-
-						loginUrl = HttpUtil.addParameter(
-							loginUrl, "service", serviceUrl);
-
-						response.sendRedirect(loginUrl);
-					}
-
-					return;
-				}
-
-				TicketValidator ticketValidator = getTicketValidator(
-					companyId);
-
-				Assertion assertion = ticketValidator.validate(
-					ticket, serviceUrl);
-
-				if (assertion != null) {
-					AttributePrincipal attributePrincipal =
-						assertion.getPrincipal();
-
-					login = attributePrincipal.getName();
-
-					session.setAttribute(LOGIN, login);
-				}
+				session.setAttribute(LOGIN, login);
 			}
 		}
 

@@ -138,7 +138,9 @@ public abstract class BaseFilter implements LiferayFilter {
 		return _filterEnabled;
 	}
 
-	public boolean isFilterEnabled(HttpServletRequest request) {
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		return _filterEnabled;
 	}
 

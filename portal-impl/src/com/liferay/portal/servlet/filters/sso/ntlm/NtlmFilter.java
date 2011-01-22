@@ -87,6 +87,23 @@ public class NtlmFilter extends BasePortalFilter {
 		}
 	}
 
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		try {
+			long companyId = PortalInstances.getCompanyId(request);
+
+			if (AuthSettingsUtil.isNtlmEnabled(companyId)) {
+				return true;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return false;
+	}
+
 	protected Log getLog() {
 		return _log;
 	}
@@ -144,117 +161,73 @@ public class NtlmFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
+		// Type 1 NTLM requests from browser can (and should) always immediately
+		// be replied to with an Type 2 NTLM response, no matter whether we're
+		// yet logging in or whether it is much later in the session.
+
+		HttpSession session = request.getSession(false);
+
 		long companyId = PortalInstances.getCompanyId(request);
 
-		if (AuthSettingsUtil.isNtlmEnabled(companyId)) {
+		String authorization = GetterUtil.getString(
+			request.getHeader(HttpHeaders.AUTHORIZATION));
 
-			// Type 1 NTLM requests from browser can (and should) always
-			// immediately be replied to with an Type 2 NTLM response, no
-			// matter whether we're yet logging in or whether it is much
-			// later in the session.
+		if (authorization.startsWith("NTLM")) {
+			NtlmManager ntlmManager = getNtlmManager(companyId);
 
-			HttpSession session = request.getSession(false);
+			byte[] src = Base64.decode(authorization.substring(5));
 
-			String authorization = GetterUtil.getString(
-				request.getHeader(HttpHeaders.AUTHORIZATION));
+			if (src[8] == 1) {
+				byte[] serverChallenge = new byte[8];
 
-			if (authorization.startsWith("NTLM")) {
-				NtlmManager ntlmManager = getNtlmManager(companyId);
+				_secureRandom.nextBytes(serverChallenge);
 
-				byte[] src = Base64.decode(authorization.substring(5));
+				byte[] challengeMessage = ntlmManager.negotiate(
+					src, serverChallenge);
 
-				if (src[8] == 1) {
-					byte[] serverChallenge = new byte[8];
+				authorization = Base64.encode(challengeMessage);
 
-					_secureRandom.nextBytes(serverChallenge);
+				response.setHeader(
+					HttpHeaders.WWW_AUTHENTICATE, "NTLM " + authorization);
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				response.setContentLength(0);
 
-					byte[] challengeMessage = ntlmManager.negotiate(
-						src, serverChallenge);
+				response.flushBuffer();
 
-					authorization = Base64.encode(challengeMessage);
+				_serverChallenges.put(request.getRemoteAddr(), serverChallenge);
 
-					response.setHeader(
-						HttpHeaders.WWW_AUTHENTICATE, "NTLM " + authorization);
+				// Interrupt filter chain, send response. Browser will
+				// immediately post a new request.
+
+				return;
+			}
+			else {
+				byte[] serverChallenge = (byte[])_serverChallenges.get(
+					request.getRemoteAddr());
+
+				if (serverChallenge == null) {
+					response.setHeader(HttpHeaders.WWW_AUTHENTICATE, "NTLM");
 					response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 					response.setContentLength(0);
 
 					response.flushBuffer();
 
-					_serverChallenges.put(
-						request.getRemoteAddr(), serverChallenge);
-
-					// Interrupt filter chain, send response. Browser will
-					// immediately post a new request.
-
 					return;
 				}
-				else {
-					byte[] serverChallenge = (byte[])_serverChallenges.get(
-						request.getRemoteAddr());
 
-					if (serverChallenge == null) {
-						response.setHeader(
-							HttpHeaders.WWW_AUTHENTICATE, "NTLM");
-						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-						response.setContentLength(0);
-
-						response.flushBuffer();
-
-						return;
-					}
-
-					NtlmUserAccount ntlmUserAccount = null;
-
-					try {
-						ntlmUserAccount = ntlmManager.authenticate(
-							src, serverChallenge);
-					}
-					catch (Exception e) {
-						if (_log.isErrorEnabled()) {
-							_log.error(
-								"Unable to perform NTLM authentication", e);
-						}
-					}
-					finally {
-						_serverChallenges.remove(request.getRemoteAddr());
-					}
-
-					if (ntlmUserAccount == null) {
-						response.setHeader(
-							HttpHeaders.WWW_AUTHENTICATE, "NTLM");
-						response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-						response.setContentLength(0);
-
-						response.flushBuffer();
-
-						return;
-					}
-
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"NTLM remote user " +
-								ntlmUserAccount.getUserName());
-					}
-
-					request.setAttribute(
-						WebKeys.NTLM_REMOTE_USER,
-						ntlmUserAccount.getUserName());
-
-					if (session != null) {
-						session.setAttribute(
-							WebKeys.NTLM_USER_ACCOUNT, ntlmUserAccount);
-					}
-				}
-			}
-
-			String path = request.getPathInfo();
-
-			if ((path != null) && path.endsWith("/login")) {
 				NtlmUserAccount ntlmUserAccount = null;
 
-				if (session != null) {
-					ntlmUserAccount = (NtlmUserAccount)session.getAttribute(
-						WebKeys.NTLM_USER_ACCOUNT);
+				try {
+					ntlmUserAccount = ntlmManager.authenticate(
+						src, serverChallenge);
+				}
+				catch (Exception e) {
+					if (_log.isErrorEnabled()) {
+						_log.error("Unable to perform NTLM authentication", e);
+					}
+				}
+				finally {
+					_serverChallenges.remove(request.getRemoteAddr());
 				}
 
 				if (ntlmUserAccount == null) {
@@ -266,6 +239,40 @@ public class NtlmFilter extends BasePortalFilter {
 
 					return;
 				}
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"NTLM remote user " + ntlmUserAccount.getUserName());
+				}
+
+				request.setAttribute(
+					WebKeys.NTLM_REMOTE_USER, ntlmUserAccount.getUserName());
+
+				if (session != null) {
+					session.setAttribute(
+						WebKeys.NTLM_USER_ACCOUNT, ntlmUserAccount);
+				}
+			}
+		}
+
+		String path = request.getPathInfo();
+
+		if ((path != null) && path.endsWith("/login")) {
+			NtlmUserAccount ntlmUserAccount = null;
+
+			if (session != null) {
+				ntlmUserAccount = (NtlmUserAccount)session.getAttribute(
+					WebKeys.NTLM_USER_ACCOUNT);
+			}
+
+			if (ntlmUserAccount == null) {
+				response.setHeader(HttpHeaders.WWW_AUTHENTICATE, "NTLM");
+				response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+				response.setContentLength(0);
+
+				response.flushBuffer();
+
+				return;
 			}
 		}
 

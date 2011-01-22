@@ -100,17 +100,7 @@ public class InvokerFilter implements Filter {
 			if (filterMapping.isMatch(dispatcher, uri)) {
 				Filter filter = _filters.get(filterMapping.getFilterName());
 
-				boolean filterEnabled = true;
-
-				if (filter instanceof LiferayFilter) {
-					LiferayFilter liferayFilter = (LiferayFilter)filter;
-
-					filterEnabled = liferayFilter.isFilterEnabled(request);
-				}
-
-				if (filterEnabled) {
-					invokerFilterChain.addFilter(filter);
-				}
+				invokerFilterChain.addFilter(filter);
 			}
 		}
 

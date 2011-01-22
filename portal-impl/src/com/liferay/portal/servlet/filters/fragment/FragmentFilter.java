@@ -35,6 +35,17 @@ public class FragmentFilter extends BasePortalFilter {
 	public static final String SKIP_FILTER =
 		FragmentFilter.class.getName() + "SKIP_FILTER";
 
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		if (isFragment(request, response) && !isAlreadyFiltered(request)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected String getContent(HttpServletRequest request, String content) {
 		String fragmentId = ParamUtil.getString(request, "p_f_id");
 
@@ -77,36 +88,23 @@ public class FragmentFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		if (isFragment(request, response) && !isAlreadyFiltered(request)) {
-			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
+		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-			if (_log.isDebugEnabled()) {
-				String completeURL = HttpUtil.getCompleteURL(request);
+		if (_log.isDebugEnabled()) {
+			String completeURL = HttpUtil.getCompleteURL(request);
 
-				_log.debug("Fragmenting " + completeURL);
-			}
-
-			StringServletResponse stringServerResponse =
-				new StringServletResponse(response);
-
-			processFilter(
-				FragmentFilter.class, request, stringServerResponse,
-				filterChain);
-
-			String content = getContent(
-				request, stringServerResponse.getString());
-
-			ServletResponseUtil.write(response, content);
+			_log.debug("Fragmenting " + completeURL);
 		}
-		else {
-			if (_log.isDebugEnabled()) {
-				String completeURL = HttpUtil.getCompleteURL(request);
 
-				_log.debug("Not fragmenting " + completeURL);
-			}
+		StringServletResponse stringServerResponse = new StringServletResponse(
+			response);
 
-			processFilter(FragmentFilter.class, request, response, filterChain);
-		}
+		processFilter(
+			FragmentFilter.class, request, stringServerResponse, filterChain);
+
+		String content = getContent(request, stringServerResponse.getString());
+
+		ServletResponseUtil.write(response, content);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(FragmentFilter.class);

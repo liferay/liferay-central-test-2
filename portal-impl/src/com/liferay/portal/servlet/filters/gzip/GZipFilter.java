@@ -58,7 +58,9 @@ public class GZipFilter extends BasePortalFilter {
 		return _filterEnabled;
 	}
 
-	public boolean isFilterEnabled(HttpServletRequest request) {
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		if (isCompress(request) && !isInclude(request) &&
 			BrowserSnifferUtil.acceptsGzip(request) &&
 			!isAlreadyFiltered(request)) {

@@ -31,27 +31,31 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ETagFilter extends BasePortalFilter {
 
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		if (ParamUtil.getBoolean(request, _ETAG, true)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected void processFilter(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
 
-		boolean etag = ParamUtil.getBoolean(request, _ETAG, true);
+		ByteBufferServletResponse byteBufferResponse =
+			new ByteBufferServletResponse(response);
 
-		if (etag) {
-			ByteBufferServletResponse byteBufferResponse =
-				new ByteBufferServletResponse(response);
+		processFilter(
+			ETagFilter.class, request, byteBufferResponse, filterChain);
 
-			processFilter(
-				ETagFilter.class, request, byteBufferResponse, filterChain);
-
-			if (!ETagUtil.processETag(request, response, byteBufferResponse)) {
-				ServletResponseUtil.write(
-					response, byteBufferResponse.getByteBuffer());
-			}
-		}
-		else {
-			processFilter(ETagFilter.class, request, response, filterChain);
+		if (!ETagUtil.processETag(request, response, byteBufferResponse)) {
+			ServletResponseUtil.write(
+				response, byteBufferResponse.getByteBuffer());
 		}
 	}
 
