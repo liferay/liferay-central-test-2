@@ -138,6 +138,10 @@ public abstract class BaseFilter implements LiferayFilter {
 		return _filterEnabled;
 	}
 
+	public boolean isFilterEnabled(HttpServletRequest request) {
+		return _filterEnabled;
+	}
+
 	protected abstract Log getLog();
 
 	protected void processFilter(

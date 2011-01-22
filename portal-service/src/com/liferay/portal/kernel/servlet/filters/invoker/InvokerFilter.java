@@ -100,7 +100,17 @@ public class InvokerFilter implements Filter {
 			if (filterMapping.isMatch(dispatcher, uri)) {
 				Filter filter = _filters.get(filterMapping.getFilterName());
 
-				invokerFilterChain.addFilter(filter);
+				boolean filterEnabled = true;
+
+				if (filter instanceof LiferayFilter) {
+					LiferayFilter liferayFilter = (LiferayFilter)filter;
+
+					filterEnabled = liferayFilter.isFilterEnabled(request);
+				}
+
+				if (filterEnabled) {
+					invokerFilterChain.addFilter(filter);
+				}
 			}
 		}
 
@@ -156,16 +166,12 @@ public class InvokerFilter implements Filter {
 	protected void initFilterMapping(
 		String filterName, List<String> urlPatterns, List<String> dispatchers) {
 
-		if (!_filters.containsKey(filterName)) {
-			_log.error("No filter exists with the name " + filterName);
+		if (_filters.containsKey(filterName)) {
+			FilterMapping filterMapping = new FilterMapping(
+				filterName, urlPatterns, dispatchers);
 
-			return;
+			_filterMappings.add(filterMapping);
 		}
-
-		FilterMapping filterMapping = new FilterMapping(
-			filterName, urlPatterns, dispatchers);
-
-		_filterMappings.add(filterMapping);
 	}
 
 	protected void readLiferayFilterWebXML(

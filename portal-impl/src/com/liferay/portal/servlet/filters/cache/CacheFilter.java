@@ -79,6 +79,17 @@ public class CacheFilter extends BasePortalFilter {
 		}
 	}
 
+	public boolean isFilterEnabled(HttpServletRequest request) {
+		if (isCacheableRequest(request) && !isInclude(request) &&
+			!isAlreadyFiltered(request)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected String getCacheKey(HttpServletRequest request) {
 		StringBundler sb = new StringBundler(13);
 
@@ -364,82 +375,70 @@ public class CacheFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		if (isCacheableRequest(request) && !isInclude(request) &&
-			!isAlreadyFiltered(request)) {
+		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
+		String key = getCacheKey(request);
 
-			String key = getCacheKey(request);
+		long companyId = PortalInstances.getCompanyId(request);
 
-			long companyId = PortalInstances.getCompanyId(request);
+		CacheResponseData cacheResponseData = CacheUtil.getCacheResponseData(
+			companyId, key);
 
-			CacheResponseData cacheResponseData =
-				CacheUtil.getCacheResponseData(companyId, key);
-
-			if (cacheResponseData == null) {
-				if (!isCacheableData(companyId, request)) {
-					if (_log.isDebugEnabled()) {
-						_log.debug("Request is not cacheable " + key);
-					}
-
-					processFilter(
-						CacheFilter.class, request, response, filterChain);
-
-					return;
+		if (cacheResponseData == null) {
+			if (!isCacheableData(companyId, request)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Request is not cacheable " + key);
 				}
-
-				if (_log.isInfoEnabled()) {
-					_log.info("Caching request " + key);
-				}
-
-				ByteBufferServletResponse byteBufferResponse =
-					new ByteBufferServletResponse(response);
 
 				processFilter(
-					CacheFilter.class, request, byteBufferResponse,
-					filterChain);
+					CacheFilter.class, request, response, filterChain);
 
-				cacheResponseData = new CacheResponseData(byteBufferResponse);
-
-				LastPath lastPath = (LastPath)request.getAttribute(
-					WebKeys.LAST_PATH);
-
-				if (lastPath != null) {
-					cacheResponseData.setAttribute(WebKeys.LAST_PATH, lastPath);
-				}
-
-				// Cache the result if and only if there is a result and the
-				// request is cacheable. We have to test the cacheability of a
-				// request twice because the user could have been authenticated
-				// after the initial test.
-
-				if (isCacheableRequest(request) &&
-					isCacheableResponse(byteBufferResponse)) {
-
-					CacheUtil.putCacheResponseData(
-						companyId, key, cacheResponseData);
-				}
-			}
-			else {
-				LastPath lastPath = (LastPath)cacheResponseData.getAttribute(
-					WebKeys.LAST_PATH);
-
-				if (lastPath != null) {
-					HttpSession session = request.getSession();
-
-					session.setAttribute(WebKeys.LAST_PATH, lastPath);
-				}
+				return;
 			}
 
-			CacheResponseUtil.write(response, cacheResponseData);
+			if (_log.isInfoEnabled()) {
+				_log.info("Caching request " + key);
+			}
+
+			ByteBufferServletResponse byteBufferResponse =
+				new ByteBufferServletResponse(response);
+
+			processFilter(
+				CacheFilter.class, request, byteBufferResponse, filterChain);
+
+			cacheResponseData = new CacheResponseData(byteBufferResponse);
+
+			LastPath lastPath = (LastPath)request.getAttribute(
+				WebKeys.LAST_PATH);
+
+			if (lastPath != null) {
+				cacheResponseData.setAttribute(WebKeys.LAST_PATH, lastPath);
+			}
+
+			// Cache the result if and only if there is a result and the request
+			// is cacheable. We have to test the cacheability of a request
+			// twice because the user could have been authenticated after the
+			// initial test.
+
+			if (isCacheableRequest(request) &&
+				isCacheableResponse(byteBufferResponse)) {
+
+				CacheUtil.putCacheResponseData(
+					companyId, key, cacheResponseData);
+			}
 		}
 		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Request is not cacheable");
-			}
+			LastPath lastPath = (LastPath)cacheResponseData.getAttribute(
+				WebKeys.LAST_PATH);
 
-			processFilter(CacheFilter.class, request, response, filterChain);
+			if (lastPath != null) {
+				HttpSession session = request.getSession();
+
+				session.setAttribute(WebKeys.LAST_PATH, lastPath);
+			}
 		}
+
+		CacheResponseUtil.write(response, cacheResponseData);
 	}
 
 	private static final int _PATTERN_FRIENDLY = 0;

@@ -65,6 +65,17 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
+	public boolean isFilterEnabled(HttpServletRequest request) {
+		if (isStrip(request) && !isInclude(request) &&
+			!isAlreadyFiltered(request)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected String extractContent(CharBuffer charBuffer, int length) {
 
 		// See LPS-10545
@@ -244,69 +255,53 @@ public class StripFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		if (isStrip(request) && !isInclude(request) &&
-			!isAlreadyFiltered(request)) {
+		if (_log.isDebugEnabled()) {
+			String completeURL = HttpUtil.getCompleteURL(request);
 
-			if (_log.isDebugEnabled()) {
-				String completeURL = HttpUtil.getCompleteURL(request);
+			_log.debug("Stripping " + completeURL);
+		}
 
-				_log.debug("Stripping " + completeURL);
-			}
+		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
+		StringServletResponse stringResponse = new StringServletResponse(
+			response);
 
-			StringServletResponse stringResponse = new StringServletResponse(
-				response);
+		processFilter(StripFilter.class, request, stringResponse, filterChain);
 
-			processFilter(
-				StripFilter.class, request, stringResponse, filterChain);
+		String contentType = GetterUtil.getString(
+			stringResponse.getContentType()).toLowerCase();
 
-			String contentType = GetterUtil.getString(
-				stringResponse.getContentType()).toLowerCase();
+		if (_log.isDebugEnabled()) {
+			_log.debug("Stripping content of type " + contentType);
+		}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Stripping content of type " + contentType);
-			}
+		response.setContentType(contentType);
 
-			response.setContentType(contentType);
+		if (contentType.startsWith(ContentTypes.TEXT_HTML)) {
+			CharBuffer oldCharBuffer = CharBuffer.wrap(
+				stringResponse.getString());
 
-			if (contentType.startsWith(ContentTypes.TEXT_HTML)) {
-				CharBuffer oldCharBuffer = CharBuffer.wrap(
-					stringResponse.getString());
+			boolean ensureContentLength = ParamUtil.getBoolean(
+				request, _ENSURE_CONTENT_LENGTH);
 
-				boolean ensureContentLength = ParamUtil.getBoolean(
-					request, _ENSURE_CONTENT_LENGTH);
+			if (ensureContentLength) {
+				UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
+					new UnsyncByteArrayOutputStream();
 
-				if (ensureContentLength) {
-					UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
-						new UnsyncByteArrayOutputStream();
+				strip(
+					oldCharBuffer,
+					new OutputStreamWriter(unsyncByteArrayOutputStream));
 
-					strip(
-						oldCharBuffer,
-						new OutputStreamWriter(unsyncByteArrayOutputStream));
+				response.setContentLength(unsyncByteArrayOutputStream.size());
 
-					response.setContentLength(
-						unsyncByteArrayOutputStream.size());
-
-					unsyncByteArrayOutputStream.writeTo(
-						response.getOutputStream());
-				}
-				else {
-					strip(oldCharBuffer, response.getWriter());
-				}
+				unsyncByteArrayOutputStream.writeTo(response.getOutputStream());
 			}
 			else {
-				ServletResponseUtil.write(response, stringResponse);
+				strip(oldCharBuffer, response.getWriter());
 			}
 		}
 		else {
-			if (_log.isDebugEnabled()) {
-				String completeURL = HttpUtil.getCompleteURL(request);
-
-				_log.debug("Not stripping " + completeURL);
-			}
-
-			processFilter(StripFilter.class, request, response, filterChain);
+			ServletResponseUtil.write(response, stringResponse);
 		}
 	}
 

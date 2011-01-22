@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.servlet;
 
 import javax.servlet.Filter;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
@@ -22,5 +23,7 @@ import javax.servlet.Filter;
 public interface LiferayFilter extends Filter {
 
 	public boolean isFilterEnabled();
+
+	public boolean isFilterEnabled(HttpServletRequest request);
 
 }

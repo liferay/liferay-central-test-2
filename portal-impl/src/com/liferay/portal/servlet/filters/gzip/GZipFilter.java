@@ -58,6 +58,18 @@ public class GZipFilter extends BasePortalFilter {
 		return _filterEnabled;
 	}
 
+	public boolean isFilterEnabled(HttpServletRequest request) {
+		if (isCompress(request) && !isInclude(request) &&
+			BrowserSnifferUtil.acceptsGzip(request) &&
+			!isAlreadyFiltered(request)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	protected boolean isAlreadyFiltered(HttpServletRequest request) {
 		if (request.getAttribute(SKIP_FILTER) != null) {
 			return true;
@@ -93,34 +105,19 @@ public class GZipFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		if (isCompress(request) && !isInclude(request) &&
-			BrowserSnifferUtil.acceptsGzip(request) &&
-			!isAlreadyFiltered(request)) {
+		if (_log.isDebugEnabled()) {
+			String completeURL = HttpUtil.getCompleteURL(request);
 
-			if (_log.isDebugEnabled()) {
-				String completeURL = HttpUtil.getCompleteURL(request);
-
-				_log.debug("Compressing " + completeURL);
-			}
-
-			request.setAttribute(SKIP_FILTER, Boolean.TRUE);
-
-			GZipResponse gZipResponse = new GZipResponse(response);
-
-			processFilter(GZipFilter.class, request, gZipResponse, filterChain);
-
-			gZipResponse.finishResponse();
+			_log.debug("Compressing " + completeURL);
 		}
-		else {
-			if (_log.isDebugEnabled()) {
-				String completeURL = HttpUtil.getCompleteURL(request);
 
-				_log.debug("Not compressing " + completeURL);
-			}
+		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-			processFilter(
-				GZipFilter.class, request, response, filterChain);
-		}
+		GZipResponse gZipResponse = new GZipResponse(response);
+
+		processFilter(GZipFilter.class, request, gZipResponse, filterChain);
+
+		gZipResponse.finishResponse();
 	}
 
 	private static final String _COMPRESS = "compress";
