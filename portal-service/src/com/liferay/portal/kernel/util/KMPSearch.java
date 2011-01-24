@@ -210,7 +210,11 @@ public class KMPSearch {
 		int j = 0;
 
 		while (i < length && j < patternLength) {
-			if ((j == -1) || (text.charAt(i + offset) == pattern.charAt(j))) {
+			if ((j == -1) ||
+				(text.charAt(i + offset) == pattern.charAt(j)) ||
+				(text.charAt(i + offset) == Character.toUpperCase(
+					pattern.charAt(j)))) {
+
 				i++;
 				j++;
 			}
