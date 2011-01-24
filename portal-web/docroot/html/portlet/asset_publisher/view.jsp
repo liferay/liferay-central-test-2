@@ -31,7 +31,11 @@ if (mergeUrlTags) {
 	if ((compilerTagNames != null) && (compilerTagNames.length > 0)) {
 		String[] newAssetTagNames = ArrayUtil.append(allAssetTagNames, compilerTagNames);
 
-		allAssetTagNames = newAssetTagNames;
+		allAssetTagNames = ArrayUtil.distinct(newAssetTagNames, new StringComparator());
+
+		long[] allAssetTagIds = AssetTagLocalServiceUtil.getTagIds(scopeGroupId, allAssetTagNames);
+
+		assetEntryQuery.setAllTagIds(allAssetTagIds);
 
 		titleEntry = compilerTagNames[compilerTagNames.length - 1];
 	}
@@ -42,8 +46,9 @@ if (mergeUrlTags) {
 
 	renderResponse.setTitle(portletTitle);
 }
-
-allAssetTagNames = ArrayUtil.distinct(allAssetTagNames, new StringComparator());
+else {
+	allAssetTagNames = ArrayUtil.distinct(allAssetTagNames, new StringComparator());
+}
 
 for (String curAssetTagName : allAssetTagNames) {
 	try {
