@@ -107,6 +107,10 @@ public class InvokerFilterChain implements FilterChain {
 		throws Exception {
 
 		if (filter instanceof WrapHttpServletRequestFilter) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Wrap response with filter " + filter.getClass());
+			}
+
 			WrapHttpServletRequestFilter wrapHttpServletRequestFilter =
 				(WrapHttpServletRequestFilter)filter;
 
@@ -115,6 +119,10 @@ public class InvokerFilterChain implements FilterChain {
 		}
 
 		if (filter instanceof WrapHttpServletResponseFilter) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Wrap request with filter " + filter.getClass());
+			}
+
 			WrapHttpServletResponseFilter wrapHttpServletResponseFilter =
 				(WrapHttpServletResponseFilter)filter;
 
@@ -129,16 +137,29 @@ public class InvokerFilterChain implements FilterChain {
 			Object object = null;
 
 			try {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Invoke try for filter " + filter.getClass());
+				}
+
 				object = tryFinallyFilter.doFilterTry(request, response);
 
 				doFilter(request, response);
 			}
 			finally {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Invoke finally for filter " + filter.getClass());
+				}
+
 				tryFinallyFilter.doFilterFinally(request, response, object);
 			}
 		}
 		else if (filter instanceof TryFilter) {
 			TryFilter tryFilter = (TryFilter)filter;
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Invoke try for filter " + filter.getClass());
+			}
 
 			tryFilter.doFilterTry(request, response);
 
