@@ -44,30 +44,32 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 		</c:when>
 	</c:choose>
 
-	<img alt="<%= defaultLocale.getDisplayName() %>" class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= defaultLanguageId %>.png" />
+	<div class="flag-selector nobr">
+		<img alt="<%= defaultLocale.getDisplayName() %>" class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= defaultLanguageId %>.png" />
 
-	<%
-	List<String> languageIds = new ArrayList<String>();
+		<%
+		List<String> languageIds = new ArrayList<String>();
 
-	if (Validator.isNotNull(xml)) {
-		for (int i = 0; i < locales.length; i++) {
-			if (locales[i].equals(defaultLocale)) {
-				continue;
-			}
+		if (Validator.isNotNull(xml)) {
+			for (int i = 0; i < locales.length; i++) {
+				if (locales[i].equals(defaultLocale)) {
+					continue;
+				}
 
-			String languageId = LocaleUtil.toLanguageId(locales[i]);
-			String languageValue = LocalizationUtil.getLocalization(xml, languageId, false);
+				String languageId = LocaleUtil.toLanguageId(locales[i]);
+				String languageValue = LocalizationUtil.getLocalization(xml, languageId, false);
 
-			if (Validator.isNotNull(languageValue) || (request.getParameter(name + StringPool.UNDERLINE + languageId) != null)) {
-				languageIds.add(languageId);
+				if (Validator.isNotNull(languageValue) || (request.getParameter(name + StringPool.UNDERLINE + languageId) != null)) {
+					languageIds.add(languageId);
+				}
 			}
 		}
-	}
-	%>
+		%>
 
-	<a class="lfr-floating-trigger" href="javascript:;" id="<%= randomNamespace %>languageSelectorTrigger">
-		<liferay-ui:message key="other-languages" /> (<%= languageIds.size() %>)
-	</a>
+		<a class="lfr-floating-trigger" href="javascript:;" id="<%= randomNamespace %>languageSelectorTrigger">
+			<liferay-ui:message key="other-languages" /> (<%= languageIds.size() %>)
+		</a>
+	</div>
 
 	<%
 	if (languageIds.isEmpty()) {

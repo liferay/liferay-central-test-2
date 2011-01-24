@@ -17,3 +17,7 @@
 .lfr-language-selector input, .lfr-language-selector textarea {
 	width: 200px;
 }
+
+.taglib-input-localized .flag-selector {
+    display: inline;
+}
