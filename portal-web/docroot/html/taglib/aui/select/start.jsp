@@ -26,6 +26,7 @@ Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribut
 boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:select:first"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:select:helpMessage"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:select:id"));
+boolean ignoreRequestValue = GetterUtil.getBoolean((String)request.getAttribute("aui:select:ignoreRequestValue"));
 boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:select:inlineField"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:select:inlineLabel"));
 String inputCssClass = GetterUtil.getString((String)request.getAttribute("aui:select:inputCssClass"));
@@ -58,6 +59,20 @@ else if (Validator.isNotNull(title)) {
 
 String fieldCss = AUIUtil.buildCss(AUIUtil.FIELD_PREFIX, "select", inlineField, disabled, false, first, last, cssClass);
 String inputCss = AUIUtil.buildCss(AUIUtil.INPUT_PREFIX, "select", false, false, false, false, false, inputCssClass);
+
+if (Validator.isNull(listType)) {
+	String value = StringPool.BLANK;
+
+	if (bean != null) {
+		value = BeanPropertiesUtil.getStringSilent(bean, name, value);
+	}
+
+	if (!ignoreRequestValue) {
+		value = ParamUtil.getString(request, name, value);
+	}
+
+	request.setAttribute("aui:select:value", value);
+}
 %>
 
 <span class="<%= fieldCss %>">
@@ -91,7 +106,7 @@ String inputCss = AUIUtil.buildCss(AUIUtil.INPUT_PREFIX, "select", false, false,
 				<c:if test="<%= Validator.isNotNull(listType) %>">
 
 					<%
-					int listTypeId = ParamUtil.getInteger(request, (String)request.getAttribute("aui:select:name"), BeanParamUtil.getInteger(bean, request, listTypeFieldName));
+					int listTypeId = ParamUtil.getInteger(request, name, BeanParamUtil.getInteger(bean, request, listTypeFieldName));
 
 					List<ListType> listTypeModels = ListTypeServiceUtil.getListTypes(listType);
 

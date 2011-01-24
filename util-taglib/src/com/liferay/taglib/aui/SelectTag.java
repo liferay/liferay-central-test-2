@@ -62,6 +62,10 @@ public class SelectTag extends IncludeTag {
 		_id = id;
 	}
 
+	public void setIgnoreRequestValue(boolean ignoreRequestValue) {
+		_ignoreRequestValue = ignoreRequestValue;
+	}
+
 	public void setInlineField(boolean inlineField) {
 		_inlineField = inlineField;
 	}
@@ -129,10 +133,11 @@ public class SelectTag extends IncludeTag {
 		_data = null;
 		_first = false;
 		_helpMessage = null;
+		_id = null;
+		_ignoreRequestValue = false;
 		_inlineField = false;
 		_inlineLabel = null;
 		_inputCssClass = null;
-		_id = null;
 		_label = null;
 		_last = false;
 		_listType = null;
@@ -206,6 +211,9 @@ public class SelectTag extends IncludeTag {
 		request.setAttribute("aui:select:helpMessage", _helpMessage);
 		request.setAttribute("aui:select:id", id);
 		request.setAttribute(
+			"aui:select:ignoreRequestValue", String.valueOf(
+				_ignoreRequestValue));
+		request.setAttribute(
 			"aui:select:inlineField", String.valueOf(_inlineField));
 		request.setAttribute("aui:select:inlineLabel", _inlineLabel);
 		request.setAttribute("aui:select:inputCssClass", _inputCssClass);
@@ -239,6 +247,7 @@ public class SelectTag extends IncludeTag {
 	private boolean _first;
 	private String _helpMessage;
 	private String _id;
+	private boolean _ignoreRequestValue;
 	private boolean _inlineField;
 	private String _inlineLabel;
 	private String _inputCssClass;

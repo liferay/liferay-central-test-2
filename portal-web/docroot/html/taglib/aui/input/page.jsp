@@ -33,6 +33,7 @@ boolean first = GetterUtil.getBoolean((String)request.getAttribute("aui:input:fi
 String formName = GetterUtil.getString((String)request.getAttribute("aui:input:formName"));
 String helpMessage = GetterUtil.getString((String)request.getAttribute("aui:input:helpMessage"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:input:id"));
+boolean ignoreRequestValue = GetterUtil.getBoolean((String)request.getAttribute("aui:input:ignoreRequestValue"));
 boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:input:inlineField"));
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:input:inlineLabel"));
 String inputCssClass = GetterUtil.getString((String)request.getAttribute("aui:input:inputCssClass"));
@@ -169,19 +170,17 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 	<c:when test='<%= type.equals("checkbox") %>'>
 
 		<%
-		String valueString = StringPool.BLANK;
-
-		if (value != null) {
-			valueString = value.toString();
-		}
-
 		boolean booleanValue = checked;
 
 		if (value != null) {
+			String valueString =  value.toString();
+
 			booleanValue = GetterUtil.getBoolean(valueString);
 		}
 
-		booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
+		if (!ignoreRequestValue) {
+			booleanValue = ParamUtil.getBoolean(request, name, booleanValue);
+		}
 		%>
 
 		<input id="<%= id %>" name="<%= namespace + name %>" type="hidden" value="<%= booleanValue %>" />
@@ -191,14 +190,22 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 	<c:when test='<%= type.equals("radio") %>'>
 
 		<%
+		boolean booleanValue = checked;
+
 		String valueString = StringPool.BLANK;
 
 		if (value != null) {
 			valueString = value.toString();
+
+			if (!ignoreRequestValue) {
+				String requestValue = ParamUtil.getString(request, name);
+
+				booleanValue = valueString.equals(requestValue);
+			}
 		}
 		%>
 
-		<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> type="radio" value="<%= valueString %>" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
+		<input <%= booleanValue ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> type="radio" value="<%= valueString %>" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
 	</c:when>
 	<c:when test='<%= type.equals("timeZone") %>'>
 		<span class="<%= fieldCss %>">
@@ -231,34 +238,22 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 		if (value != null) {
 			valueString = value.toString();
 		}
-		else if (type.equals("hidden") || type.equals("text") || type.equals("textarea")) {
-			valueString = BeanParamUtil.getStringSilent(bean, request, name);
+
+		if (!ignoreRequestValue && (type.equals("text") || type.equals("textarea"))) {
+			valueString = BeanParamUtil.getStringSilent(bean, request, name, valueString);
 
 			if (Validator.isNotNull(fieldParam)) {
-				String fieldParamValue = request.getParameter(fieldParam);
-
-				if (Validator.isNotNull(fieldParamValue)) {
-					valueString = fieldParamValue;
-				}
-			}
-		}
-
-		if (Validator.isNotNull(valueString)) {
-			if (type.equals("textarea")) {
-				valueString = HtmlUtil.escape(valueString);
-			}
-			else {
-				valueString = HtmlUtil.escapeAttribute(valueString);
+				valueString = ParamUtil.getString(request, fieldParam, valueString);
 			}
 		}
 		%>
 
 		<c:choose>
 			<c:when test='<%= type.equals("textarea") %>'>
-				<textarea class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>><%= valueString %></textarea>
+				<textarea class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>><%= HtmlUtil.escape(valueString) %></textarea>
 			</c:when>
 			<c:otherwise>
-				<input class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> type="<%= Validator.isNull(type) ? "text" : type %>" value="<%= valueString %>" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
+				<input class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> type="<%= Validator.isNull(type) ? "text" : type %>" value="<%= HtmlUtil.escapeAttribute(valueString) %>" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
 			</c:otherwise>
 		</c:choose>
 	</c:otherwise>

@@ -101,6 +101,10 @@ public class InputTag extends IncludeTag {
 		_id = id;
 	}
 
+	public void setIgnoreRequestValue(boolean ignoreRequestValue) {
+		_ignoreRequestValue = ignoreRequestValue;
+	}
+
 	public void setInlineField(boolean inlineField) {
 		_inlineField = inlineField;
 	}
@@ -218,6 +222,7 @@ public class InputTag extends IncludeTag {
 		_formName = null;
 		_helpMessage = null;
 		_id = null;
+		_ignoreRequestValue = false;
 		_inlineField = false;
 		_inlineLabel = null;
 		_inputCssClass = null;
@@ -322,6 +327,9 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:helpMessage", _helpMessage);
 		request.setAttribute("aui:input:id", id);
 		request.setAttribute(
+			"aui:input:ignoreRequestValue", String.valueOf(
+				_ignoreRequestValue));
+		request.setAttribute(
 			"aui:input:inlineField", String.valueOf(_inlineField));
 		request.setAttribute("aui:input:inlineLabel", _inlineLabel);
 		request.setAttribute("aui:input:inputCssClass", _inputCssClass);
@@ -374,6 +382,7 @@ public class InputTag extends IncludeTag {
 	private String _formName;
 	private String _helpMessage;
 	private String _id;
+	private boolean _ignoreRequestValue;
 	private boolean _inlineField;
 	private String _inlineLabel;
 	private String _inputCssClass;
