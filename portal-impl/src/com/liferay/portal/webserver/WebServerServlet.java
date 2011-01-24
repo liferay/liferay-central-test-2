@@ -58,6 +58,8 @@ import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.portlet.documentlibrary.util.PDFProcessorUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -323,14 +325,7 @@ public class WebServerServlet extends HttpServlet {
 			throw new NoSuchFileEntryException();
 		}
 
-		String fileName = fileEntry.getTitle();
-
 		String version = ParamUtil.getString(request, "version");
-
-		String targetExtension = ParamUtil.getString(
-			request, "targetExtension");
-
-		boolean thumbnail = ParamUtil.getBoolean(request, "thumbnail");
 
 		if (Validator.isNull(version)) {
 			if (Validator.isNotNull(fileEntry.getVersion())) {
@@ -341,9 +336,14 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 
+		String tempFileId = DLUtil.getTempFileId(
+			fileEntry.getFileEntryId(), version);
+
+		InputStream inputStream = fileEntry.getContentStream(version);
+
 		FileVersion fileVersion = fileEntry.getFileVersion(version);
 
-		fileName = fileVersion.getTitle();
+		String fileName = fileVersion.getTitle();
 
 		String extension = GetterUtil.getString(
 			FileUtil.getExtension(fileName));
@@ -354,30 +354,29 @@ public class WebServerServlet extends HttpServlet {
 			fileName += StringPool.PERIOD + fileVersion.getExtension();
 		}
 
-		InputStream inputStream = fileEntry.getContentStream(version);
-
-		String tempFileId = DLUtil.getTempFileId(
-			fileEntry.getFileEntryId(), version);
-
 		boolean converted = false;
 
+		String targetExtension = ParamUtil.getString(
+			request, "targetExtension");
+		boolean thumbnail = ParamUtil.getBoolean(request, "thumbnail");
+
 		if (Validator.isNotNull(targetExtension)) {
-			InputStream convertedInputStream = DocumentConversionUtil.convert(
+			File convertedFile = DocumentConversionUtil.convert(
 				tempFileId, inputStream, extension, targetExtension);
 
-			if ((convertedInputStream != null) &&
-				(convertedInputStream != inputStream)) {
-
+			if (convertedFile != null) {
 				fileName = FileUtil.stripExtension(fileName).concat(
 					StringPool.PERIOD).concat(targetExtension);
 
-				inputStream = convertedInputStream;
+				inputStream = new FileInputStream(convertedFile);
 
 				converted = true;
 			}
 		}
 		else if (thumbnail) {
-			inputStream = PDFProcessorUtil.getThumbnail(tempFileId);
+			File thumbnailFile = PDFProcessorUtil.getThumbnailFile(tempFileId);
+
+			inputStream = new FileInputStream(thumbnailFile);
 
 			fileName = FileUtil.stripExtension(fileName).concat(
 				StringPool.PERIOD).concat(PDFProcessorUtil.THUMBNAIL_TYPE);

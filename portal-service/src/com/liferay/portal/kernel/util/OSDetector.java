@@ -23,9 +23,9 @@ public class OSDetector {
 
 	public static boolean isAIX() {
 		if (_aix == null) {
-			String osName = System.getProperty("os.name");
+			String osName = System.getProperty("os.name").toLowerCase();
 
-			if (osName.equalsIgnoreCase("aix")) {
+			if (osName.equals("aix")) {
 				_aix = Boolean.TRUE;
 			}
 			else {
@@ -34,6 +34,21 @@ public class OSDetector {
 		}
 
 		return _aix.booleanValue();
+	}
+
+	public static boolean isApple() {
+		if (_apple == null) {
+			String osName = System.getProperty("os.name").toLowerCase();
+
+			if (osName.contains("mac")) {
+				_apple = Boolean.TRUE;
+			}
+			else {
+				_apple = Boolean.FALSE;
+			}
+		}
+
+		return _apple.booleanValue();
 	}
 
 	public static boolean isUnix() {
@@ -63,6 +78,7 @@ public class OSDetector {
 	}
 
 	private static Boolean _aix;
+	private static Boolean _apple;
 	private static Boolean _unix;
 	private static Boolean _windows;
 

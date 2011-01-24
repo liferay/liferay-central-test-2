@@ -21,7 +21,7 @@ import java.io.InputStream;
  */
 public class DocumentConversionUtil {
 
-	public static InputStream convert(
+	public static File convert(
 			String id, InputStream inputStream, String sourceExtension,
 			String targetExtension)
 		throws Exception {
@@ -31,7 +31,7 @@ public class DocumentConversionUtil {
 			targetExtension);
 
 		if (returnObj != null) {
-			return (InputStream)returnObj;
+			return (File)returnObj;
 		}
 		else {
 			return null;

@@ -40,7 +40,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -55,21 +54,12 @@ import java.util.Map;
  */
 public class DocumentConversionUtil {
 
-	public static InputStream convert(
+	public static File convert(
 			String id, InputStream inputStream, String sourceExtension,
 			String targetExtension)
 		throws IOException, SystemException {
 
 		return _instance._convert(
-			id, inputStream, sourceExtension, targetExtension);
-	}
-
-	public static File convertToFile(
-			String id, InputStream inputStream, String sourceExtension,
-			String targetExtension)
-		throws IOException, SystemException {
-
-		return _instance._convertToFile(
 			id, inputStream, sourceExtension, targetExtension);
 	}
 
@@ -160,16 +150,7 @@ public class DocumentConversionUtil {
 		_populateConversionsMap("text");
 	}
 
-	private InputStream _convert(
-			String id, InputStream inputStream, String sourceExtension,
-			String targetExtension)
-		throws IOException, SystemException {
-
-		return new FileInputStream(
-			_convertToFile(id, inputStream, sourceExtension, targetExtension));
-	}
-
-	private File _convertToFile(
+	private File _convert(
 			String id, InputStream inputStream, String sourceExtension,
 			String targetExtension)
 		throws IOException, SystemException {

@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -42,14 +43,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDDocumentCatalog;
 import org.apache.pdfbox.pdmodel.PDPage;
 
 import org.im4java.core.ConvertCmd;
@@ -63,48 +64,12 @@ public class PDFProcessorUtil {
 
 	public static final String THUMBNAIL_TYPE = ImageProcessor.TYPE_JPEG;
 
-	public static void generateThumbnail(FileEntry fileEntry, File file)
-		throws IOException, PortalException, SystemException {
-
-		_instance._generateThumbnail(fileEntry, file);
-	}
-
-	public static void generateThumbnail(FileEntry fileEntry, InputStream is)
-		throws IOException, PortalException, SystemException {
-
-		_instance._generateThumbnail(fileEntry, is);
-	}
-
 	public static void generateThumbnails() {
 		_instance._generateThumbnails();
 	}
 
-	public static File getFile(String id) {
-		String fileName = getFilePath(id);
-
-		File thumbnail = new File(fileName);
-
-		if (thumbnail.getParent() != null) {
-			FileUtil.mkdirs(thumbnail.getParent());
-		}
-
-		return thumbnail;
-	}
-
-	public static String getFilePath(String id) {
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
-		sb.append("/liferay/document_thumbnail/");
-		sb.append(id);
-		sb.append(StringPool.PERIOD);
-		sb.append(THUMBNAIL_TYPE);
-
-		return sb.toString();
-	}
-
-	public static InputStream getThumbnail(String id) throws IOException {
-		return _instance._getThumbnail(id);
+	public static File getThumbnailFile(String id) {
+		return _instance._getThumbnailFile(id);
 	}
 
 	public static boolean hasThumbnail(FileEntry fileEntry) {
@@ -112,29 +77,29 @@ public class PDFProcessorUtil {
 	}
 
 	private PDFProcessorUtil() {
-		if (PropsValues.IMAGEMAGICK_ENABLED) {
-			String os = System.getProperty("os.name").toLowerCase();
-
-			String filterName;
-
-			if (os.indexOf("mac") >= 0) {
-				filterName = "apple";
-			}
-			else if (os.indexOf("win") >= 0) {
-				filterName = "windows";
-			}
-			else {
-				filterName = "unix";
-			}
-
-			String path = PropsUtil.get(
-				PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH,
-				new Filter(filterName));
-
-			ProcessStarter.setGlobalSearchPath(path);
-
-			_convertCommand = new ConvertCmd();
+		if (!PropsValues.IMAGEMAGICK_ENABLED) {
+			return;
 		}
+
+		String filterName = null;
+
+		if (OSDetector.isApple()) {
+			filterName = "apple";
+		}
+		else if (OSDetector.isWindows()) {
+			filterName = "windows";
+		}
+		else {
+			filterName = "unix";
+		}
+
+		String globalSearchPath = PropsUtil.get(
+			PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH,
+			new Filter(filterName));
+
+		ProcessStarter.setGlobalSearchPath(globalSearchPath);
+
+		_convertCmd = new ConvertCmd();
 	}
 
 	private void _generateThumbnail(FileEntry fileEntry, File file)
@@ -143,19 +108,23 @@ public class PDFProcessorUtil {
 		String id = DLUtil.getTempFileId(
 			fileEntry.getFileEntryId(), fileEntry.getVersion());
 
-		if (getFile(id).exists()) {
+		File thumbnailFile = _getThumbnailFile(id);
+
+		if (thumbnailFile.exists()) {
 			return;
 		}
 
 		if (PropsValues.IMAGEMAGICK_ENABLED) {
-			IMOperation op = new IMOperation();
+			IMOperation imOperation = new IMOperation();
 
-			op.addImage(file.getPath() + "[0]");
-			op.scale(_DIMENSION, _DIMENSION);
-			op.addImage(getFilePath(id));
+			imOperation.addImage(file.getPath() + "[0]");
+
+			imOperation.scale(_DIMENSION, _DIMENSION);
+
+			imOperation.addImage(_getThumbnailFilePath(id));
 
 			try {
-				_convertCommand.run(op);
+				_convertCmd.run(imOperation);
 			}
 			catch (IOException ioe) {
 				throw ioe;
@@ -169,21 +138,22 @@ public class PDFProcessorUtil {
 		}
 	}
 
-	private void _generateThumbnail(FileEntry fileEntry, InputStream is)
+	private void _generateThumbnail(
+			FileEntry fileEntry, InputStream inputStream)
 		throws IOException, PortalException, SystemException {
 
 		String id = DLUtil.getTempFileId(
 			fileEntry.getFileEntryId(), fileEntry.getVersion());
 
-		File thumbnail = getFile(id);
+		File thumbnailFile = _getThumbnailFile(id);
 
-		if (thumbnail.exists()) {
+		if (thumbnailFile.exists()) {
 			return;
 		}
 
 		if (PropsValues.IMAGEMAGICK_ENABLED) {
 			if (fileEntry.getExtension().equals("pdf")) {
-				InputStream tempIs =
+				InputStream tempInputStream =
 					DLRepositoryLocalServiceUtil.getFileAsStream(
 						fileEntry.getUserId(), fileEntry.getFileEntryId(),
 						fileEntry.getVersion());
@@ -193,7 +163,7 @@ public class PDFProcessorUtil {
 				File file = new File(filePath);
 
 				try {
-					FileUtil.write(file, tempIs);
+					FileUtil.write(file, tempInputStream);
 
 					_generateThumbnail(fileEntry, file);
 				}
@@ -202,37 +172,40 @@ public class PDFProcessorUtil {
 				}
 			}
 			else {
-				File file = DocumentConversionUtil.convertToFile(
-					id, is, fileEntry.getExtension(), "pdf");
+				File file = DocumentConversionUtil.convert(
+					id, inputStream, fileEntry.getExtension(), "pdf");
 
 				_generateThumbnail(fileEntry, file);
 			}
 		}
 		else {
-			PDDocument document = null;
+			PDDocument pdDocument = null;
 
 			try {
-				document = PDDocument.load(is);
+				pdDocument = PDDocument.load(inputStream);
 
-				List pages = document.getDocumentCatalog().getAllPages();
+				PDDocumentCatalog pdDocumentCatalog =
+					pdDocument.getDocumentCatalog();
 
-				PDPage page = (PDPage) pages.get(0);
+				List<PDPage> pddPages = pdDocumentCatalog.getAllPages();
 
-				RenderedImage renderedImage = page.convertToImage(
+				PDPage pddPage = pddPages.get(0);
+
+				RenderedImage renderedImage = pddPage.convertToImage(
 					BufferedImage.TYPE_USHORT_565_RGB, 72);
 
 				RenderedImage thumbnailImage = ImageProcessorUtil.scale(
 					renderedImage, _DIMENSION, _DIMENSION);
 
-				thumbnail.createNewFile();
+				thumbnailFile.createNewFile();
 
 				ImageIO.write(
 					thumbnailImage, THUMBNAIL_TYPE,
-					new FileOutputStream(thumbnail));
+					new FileOutputStream(thumbnailFile));
 			}
 			finally {
-				if (document != null) {
-					document.close();
+				if (pdDocument != null) {
+					pdDocument.close();
 				}
 			}
 		}
@@ -258,30 +231,30 @@ public class PDFProcessorUtil {
 			FileEntry fileEntry = _fileEntries.remove(0);
 
 			try {
-				if (fileEntry.getExtension().equals("pdf")) {
-					InputStream is =
+				String extension = fileEntry.getExtension();
+
+				if (extension.equals("pdf")) {
+					InputStream inputStream =
 						DLRepositoryLocalServiceUtil.getFileAsStream(
-							fileEntry.getUserId(),
-							fileEntry.getFileEntryId(),
+							fileEntry.getUserId(), fileEntry.getFileEntryId(),
 							fileEntry.getVersion());
 
-					_generateThumbnail(fileEntry, is);
+					_generateThumbnail(fileEntry, inputStream);
 				}
 				else if (PrefsPropsUtil.getBoolean(
-						PropsKeys.OPENOFFICE_SERVER_ENABLED,
-						PropsValues.OPENOFFICE_SERVER_ENABLED)) {
+							PropsKeys.OPENOFFICE_SERVER_ENABLED,
+							PropsValues.OPENOFFICE_SERVER_ENABLED)) {
 
-					InputStream is =
+					InputStream inputStream =
 						DLRepositoryLocalServiceUtil.getFileAsStream(
-							fileEntry.getUserId(),
-							fileEntry.getFileEntryId(),
+							fileEntry.getUserId(), fileEntry.getFileEntryId(),
 							fileEntry.getVersion());
 
 					String id = DLUtil.getTempFileId(
 						fileEntry.getFileEntryId(), fileEntry.getVersion());
 
-					File file = DocumentConversionUtil.convertToFile(
-						id, is, fileEntry.getExtension(), "pdf");
+					File file = DocumentConversionUtil.convert(
+						id, inputStream, fileEntry.getExtension(), "pdf");
 
 					_generateThumbnail(fileEntry, file);
 				}
@@ -292,17 +265,35 @@ public class PDFProcessorUtil {
 		}
 	}
 
-	private InputStream _getThumbnail(String id) throws IOException {
-		String fileName = getFilePath(id);
+	private File _getThumbnailFile(String id) {
+		String filePath = _getThumbnailFilePath(id);
 
-		return new FileInputStream(new File(fileName));
+		File file = new File(filePath);
+
+		if (file.getParent() != null) {
+			FileUtil.mkdirs(file.getParent());
+		}
+
+		return file;
+	}
+
+	private String _getThumbnailFilePath(String id) {
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
+		sb.append("/liferay/document_thumbnail/");
+		sb.append(id);
+		sb.append(StringPool.PERIOD);
+		sb.append(THUMBNAIL_TYPE);
+
+		return sb.toString();
 	}
 
 	private boolean _hasThumbnail(FileEntry fileEntry) {
 		String id = DLUtil.getTempFileId(
 			fileEntry.getFileEntryId(), fileEntry.getVersion());
 
-		String fileName = getFilePath(id);
+		String fileName = _getThumbnailFilePath(id);
 
 		File file = new File(fileName);
 
@@ -311,7 +302,9 @@ public class PDFProcessorUtil {
 		if (PropsValues.DL_GENERATE_THUMBNAILS && !hasThumbnail &&
 			!_fileEntries.contains(fileEntry)) {
 
-			if (fileEntry.getExtension().equals("pdf")) {
+			String extension = fileEntry.getExtension();
+
+			if (extension.equals("pdf")) {
 				_fileEntries.add(fileEntry);
 			}
 			else {
@@ -333,13 +326,11 @@ public class PDFProcessorUtil {
 
 	private static final int _DIMENSION = 128;
 
-	private static ConvertCmd _convertCommand;
-
-	private static List<FileEntry> _fileEntries =
-		Collections.synchronizedList(new ArrayList<FileEntry>());
-
 	private static Log _log = LogFactoryUtil.getLog(PDFProcessorUtil.class);
 
 	private static PDFProcessorUtil _instance = new PDFProcessorUtil();
+
+	private ConvertCmd _convertCmd;
+	private List<FileEntry> _fileEntries = new Vector<FileEntry>();
 
 }

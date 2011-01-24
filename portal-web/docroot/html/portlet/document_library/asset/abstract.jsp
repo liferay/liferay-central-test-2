@@ -30,7 +30,7 @@ FileEntry fileEntry = fileVersion.getFileEntry();
 		<c:choose>
 			<c:when test="<%= PDFProcessorUtil.hasThumbnail(fileEntry) %>">
 				<div>
-					<img src='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1" %>' />
+					<img src="<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1" %>" />
 
 					<%= fileVersion.getTitle() %>
 				</div>

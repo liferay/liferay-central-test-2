@@ -39,6 +39,8 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -211,15 +213,15 @@ public class GetFileAction extends PortletAction {
 
 			String sourceExtension = FileUtil.getExtension(fileName);
 
-			InputStream convertedIS = DocumentConversionUtil.convert(
+			File convertedFile = DocumentConversionUtil.convert(
 				id, is, sourceExtension, targetExtension);
 
-			if ((convertedIS != null) && (convertedIS != is)) {
+			if (convertedFile != null) {
 				fileName = FileUtil.stripExtension(
 					fileEntry.getTitle()).concat(StringPool.PERIOD).concat(
 						targetExtension);
 
-				is = convertedIS;
+				is = new FileInputStream(convertedFile);
 
 				converted = true;
 			}

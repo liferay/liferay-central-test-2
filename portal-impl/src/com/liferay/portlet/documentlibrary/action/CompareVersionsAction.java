@@ -35,6 +35,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
@@ -124,10 +125,12 @@ public class CompareVersionsAction extends PortletAction {
 			String targetTempFileId = DLUtil.getTempFileId(
 				fileEntryId, targetVersion);
 
-			sourceIs = DocumentConversionUtil.convert(
-				sourceTempFileId, sourceIs, extension, "txt");
-			targetIs = DocumentConversionUtil.convert(
-				targetTempFileId, targetIs, extension, "txt");
+			sourceIs = new FileInputStream(
+				DocumentConversionUtil.convert(
+					sourceTempFileId, sourceIs, extension, "txt"));
+			targetIs = new FileInputStream(
+				DocumentConversionUtil.convert(
+					targetTempFileId, targetIs, extension, "txt"));
 		}
 
 		List<DiffResult>[] diffResults = DiffUtil.diff(

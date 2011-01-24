@@ -36,6 +36,8 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
@@ -149,14 +151,14 @@ public class ExportArticleAction extends PortletAction {
 					articleDisplay.getId(),
 					String.valueOf(articleDisplay.getVersion()), languageId);
 
-				InputStream convertedIS = DocumentConversionUtil.convert(
+				File convertedFile = DocumentConversionUtil.convert(
 					id, is, sourceExtension, targetExtension);
 
-				if ((convertedIS != null) && (convertedIS != is)) {
+				if (convertedFile != null) {
 					fileName = title.concat(StringPool.PERIOD).concat(
 						targetExtension);
 
-					is = convertedIS;
+					is = new FileInputStream(convertedFile);
 				}
 			}
 

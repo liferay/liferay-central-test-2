@@ -37,6 +37,8 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 
 import javax.portlet.ActionRequest;
@@ -173,14 +175,14 @@ public class ExportPageAction extends PortletAction {
 		if (Validator.isNotNull(targetExtension)) {
 			String id = page.getUuid();
 
-			InputStream convertedIS = DocumentConversionUtil.convert(
+			File convertedFile = DocumentConversionUtil.convert(
 				id, is, sourceExtension, targetExtension);
 
-			if ((convertedIS != null) && (convertedIS != is)) {
+			if (convertedFile != null) {
 				fileName = title.concat(StringPool.PERIOD).concat(
 					targetExtension);
 
-				is = convertedIS;
+				is = new FileInputStream(convertedFile);
 			}
 		}
 
