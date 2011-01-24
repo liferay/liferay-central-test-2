@@ -24,12 +24,6 @@ String label = GetterUtil.getString((String)request.getAttribute("aui:option:lab
 boolean selected = GetterUtil.getBoolean((String)request.getAttribute("aui:option:selected"));
 String style = GetterUtil.getString((String)request.getAttribute("aui:option:style"));
 String value = GetterUtil.getString((String)request.getAttribute("aui:option:value"));
-
-String selectValue = GetterUtil.getString((String)request.getAttribute("aui:select:value"));
-
-if (Validator.isNotNull(selectValue)) {
-	selected = selectValue.equals(value);
-}
 %>
 
 <option <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= disabled ? "disabled" : StringPool.BLANK %> <%= selected ? "selected" : StringPool.BLANK %> <%= Validator.isNotNull(style) ? "style=\"" + style + "\"" : StringPool.BLANK %> value="<%= value %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>

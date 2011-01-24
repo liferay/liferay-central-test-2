@@ -14,7 +14,10 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
@@ -199,6 +202,18 @@ public class SelectTag extends IncludeTag {
 			listTypeFieldName = "typeId";
 		}
 
+		String value = StringPool.BLANK;
+
+		if (Validator.isNull(_listType)) {
+			if (bean != null) {
+				value = BeanPropertiesUtil.getStringSilent(bean, name, value);
+			}
+
+			if (!_ignoreRequestValue) {
+				value = ParamUtil.getString(request, name, value);
+			}
+		}
+
 		request.setAttribute("aui:select:bean", bean);
 		request.setAttribute(
 			"aui:select:changesContext", String.valueOf(_changesContext));
@@ -210,9 +225,6 @@ public class SelectTag extends IncludeTag {
 		request.setAttribute("aui:select:first", String.valueOf(_first));
 		request.setAttribute("aui:select:helpMessage", _helpMessage);
 		request.setAttribute("aui:select:id", id);
-		request.setAttribute(
-			"aui:select:ignoreRequestValue", String.valueOf(
-				_ignoreRequestValue));
 		request.setAttribute(
 			"aui:select:inlineField", String.valueOf(_inlineField));
 		request.setAttribute("aui:select:inlineLabel", _inlineLabel);
@@ -230,6 +242,7 @@ public class SelectTag extends IncludeTag {
 			"aui:select:showEmptyOption", String.valueOf(_showEmptyOption));
 		request.setAttribute("aui:select:suffix", _suffix);
 		request.setAttribute("aui:select:title", _title);
+		request.setAttribute("aui:select:value", value);
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = true;

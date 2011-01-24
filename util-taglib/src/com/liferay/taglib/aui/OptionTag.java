@@ -14,6 +14,8 @@
 
 package com.liferay.taglib.aui;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,14 +88,22 @@ public class OptionTag extends IncludeTag {
 			value = _label;
 		}
 
+		boolean selected = _selected;
+
+		String selectValue = GetterUtil.getString(
+			(String)request.getAttribute("aui:select:value"));
+
+		if (Validator.isNotNull(selectValue)) {
+			selected = selectValue.equals(value);
+		}
+
 		request.setAttribute("aui:option:cssClass", _cssClass);
 		request.setAttribute(
 			"aui:option:disabled", String.valueOf(_disabled));
 		request.setAttribute(
 			"aui:option:dynamicAttributes", getDynamicAttributes());
 		request.setAttribute("aui:option:label", _label);
-		request.setAttribute(
-			"aui:option:selected", String.valueOf(_selected));
+		request.setAttribute("aui:option:selected", String.valueOf(selected));
 		request.setAttribute("aui:option:style", _style);
 		request.setAttribute("aui:option:value", value);
 	}

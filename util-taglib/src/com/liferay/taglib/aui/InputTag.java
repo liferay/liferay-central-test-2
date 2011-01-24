@@ -327,8 +327,8 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:helpMessage", _helpMessage);
 		request.setAttribute("aui:input:id", id);
 		request.setAttribute(
-			"aui:input:ignoreRequestValue", String.valueOf(
-				_ignoreRequestValue));
+			"aui:input:ignoreRequestValue",
+			String.valueOf(_ignoreRequestValue));
 		request.setAttribute(
 			"aui:input:inlineField", String.valueOf(_inlineField));
 		request.setAttribute("aui:input:inlineLabel", _inlineLabel);
