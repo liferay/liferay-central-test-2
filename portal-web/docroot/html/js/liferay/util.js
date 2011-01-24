@@ -287,7 +287,7 @@
 			return !!(window.Array && object.constructor == window.Array);
 		},
 
-		openControlPanelPopUp: function(portlet, portletId, controlPanelURL, namespacedId, title) {
+		openIframePopUp: function(portlet, portletId, portletURL, namespacedId, title) {
 			var instance = this;
 
 			var parentUtil = Util;
@@ -296,10 +296,10 @@
 				parentUtil = window.parent.Liferay.Util;
 			}
 
-			return parentUtil._controlPanelPopup(
+			return parentUtil._iframePopup(
 				portlet,
 				portletId,
-				controlPanelURL,
+				portletURL,
 				namespacedId,
 				title,
 				window
@@ -1436,9 +1436,9 @@
 
 	Liferay.provide(
 		Util,
-		'_controlPanelPopup',
-		function(portlet, portletId, controlPanelURL, namespacedId, title, openingWindow) {
-			if (controlPanelURL) {
+		'_iframePopup',
+		function(portlet, portletId, portletURL, namespacedId, title, openingWindow) {
+			if (portletURL) {
 				var iframeId = namespacedId + 'controlPanelIframe';
 
 				var dialog = new A.Dialog(
@@ -1460,12 +1460,12 @@
 						},
 						iframeCssClass: 'control-panel-frame',
 						iframeId: iframeId,
-						uri: controlPanelURL
+						uri: portletURL
 					}
 				).render();
 
 				var handle = Liferay.on(
-					'assetAdded',
+					namespacedId + 'closeAndRefresh',
 					function(event) {
 						if (event.frame == dialog.iframe.node.get('contentWindow').getDOM()) {
 							dialog.hide();

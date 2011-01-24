@@ -22,7 +22,7 @@ Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId
 
 <aui:script use="aui-base">
 	window.parent.Liferay.fire(
-		'assetAdded',
+		'<%= renderResponse.getNamespace() %>closeAndRefresh',
 		{
 			frame: window,
 			portletAjaxable: '<%= selPortlet.isAjaxable() %>',
