@@ -1310,16 +1310,24 @@ public class JournalUtil {
 					"language-id");
 
 				if (Validator.isNull(curLanguageId)) {
-					if (Validator.isNotNull(newLanguageId)){
-						curContentElement.addAttribute(
-							"language-id", defaultLocale);
-					}
-					else {
-						curContentElement.detach();
-					}
-				}
+					if (newLanguageId.equals(defaultLocale)) {
+						curContentElement.clearContent();
 
-				curElement.add(newContentElement.createCopy());
+						if (newContentElement.element("option") != null) {
+							_addElementOptions(
+								curContentElement, newContentElement);
+						}
+						else {
+							curContentElement.addCDATA(newValue);
+						}
+					}
+
+					curContentElement.addAttribute(
+						"language-id", defaultLocale);
+				}
+				else {
+					curElement.add(newContentElement.createCopy());
+				}
 			}
 		}
 	}
