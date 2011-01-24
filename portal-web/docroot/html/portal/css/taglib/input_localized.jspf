@@ -19,5 +19,5 @@
 }
 
 .taglib-input-localized .flag-selector {
-    display: inline;
+	display: inline;
 }
