@@ -76,13 +76,13 @@ public class AbsoluteRedirectsFilter
 				_log.debug("Setting httpsInitial to " + httpsInitial);
 			}
 		}
-		System.out.println("## absolute redirect");
+
 		return null;
 	}
 
 	public HttpServletResponse getWrappedHttpServletResponse(
 		HttpServletRequest request, HttpServletResponse response) {
-System.out.println("## getWrappedHttpServletResponse");
+
 		return new AbsoluteRedirectsResponse(request, response);
 	}
 
