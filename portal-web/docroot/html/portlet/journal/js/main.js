@@ -2684,12 +2684,13 @@ AUI().add(
 
 			_updateLocaleCheckboxes: function() {
 				var instance = this;
+
 				var fields = instance.getFields();
 
 				fields.each(
 					function(item, index, collection) {
 						var checkbox = item.one('.journal-article-localized-checkbox .aui-field-input-choice');
-						
+
 						if (checkbox && checkbox.get('checked')) {
 							instance._updateLocaleState(item, checkbox);
 						}
