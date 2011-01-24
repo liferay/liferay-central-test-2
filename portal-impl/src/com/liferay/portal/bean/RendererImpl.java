@@ -32,9 +32,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
+import com.liferay.portal.kernel.velocity.VelocityVariablesUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.ContentUtil;
 
@@ -143,7 +143,7 @@ public class RendererImpl implements Renderer {
 		// Velocity variables
 
 		try {
-			VelocityVariables.insertVariables(velocityContext, request);
+			VelocityVariablesUtil.insertVariables(velocityContext, request);
 		}
 		catch (Exception e) {
 			throw new RendererException(e);

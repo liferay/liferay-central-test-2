@@ -253,7 +253,11 @@ public class BaseDeployer implements Deployer {
 			String jarName = jarFullName.substring(
 				jarFullName.lastIndexOf("/") + 1, jarFullName.length());
 
-			if ((!appServerType.equals(ServerDetector.TOMCAT_ID)) ||
+			if (jarName.endsWith(".jsp")) {
+				FileUtil.copyFile(
+					jarFullName, srcFile + "/WEB-INF/jsp/" + jarName, true);
+			}
+			else if ((!appServerType.equals(ServerDetector.TOMCAT_ID)) ||
 				(appServerType.equals(ServerDetector.TOMCAT_ID) &&
 					!jarFullName.equals("util-java.jar"))) {
 
@@ -1143,6 +1147,31 @@ public class BaseDeployer implements Deployer {
 		}
 
 		return sb.toString();
+	}
+
+	public String getServletContextIncludeFiltersContent(File srcFile)
+		throws Exception {
+
+		boolean servletContextIncludeFiltersEnabled = true;
+
+		Properties properties = getPluginPackageProperties(srcFile);
+
+		if (properties != null) {
+			servletContextIncludeFiltersEnabled = GetterUtil.getBoolean(
+				properties.getProperty(
+					"servlet-context-include-filters-enabled"), true);
+		}
+
+		if (servletContextIncludeFiltersEnabled) {
+			String servletContextIncludeFiltersContent = FileUtil.read(
+				DeployUtil.getResourcePath(
+					"servlet-context-include-filters-web.xml"));
+
+			return servletContextIncludeFiltersContent;
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	public String getSpeedFiltersContent(File srcFile) throws Exception {

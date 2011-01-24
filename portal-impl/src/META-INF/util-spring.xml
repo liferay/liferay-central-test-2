@@ -108,6 +108,10 @@
 	<bean id="com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil" class="com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil">
 		<property name="freeMarkerEngine" ref="com.liferay.portal.kernel.freemarker.FreeMarkerEngine" />
 	</bean>
+	<bean id="com.liferay.portal.kernel.freemarker.FreeMarkerVariables" class="com.liferay.portal.freemarker.FreeMarkerVariablesImpl" />
+	<bean id="com.liferay.portal.kernel.freemarker.FreeMarkerVariablesUtil" class="com.liferay.portal.kernel.freemarker.FreeMarkerVariablesUtil">
+		<property name="freeMarkerVariables" ref="com.liferay.portal.kernel.freemarker.FreeMarkerVariables" />
+	</bean>
 	<bean id="com.liferay.portal.kernel.googleapps.GoogleAppsFactoryUtil" class="com.liferay.portal.kernel.googleapps.GoogleAppsFactoryUtil">
 		<property name="googleAppsFactory">
 			<bean class="com.liferay.portal.googleapps.GoogleAppsFactoryImpl" />
@@ -178,11 +182,11 @@
 			<bean class="com.liferay.portal.staging.StagingImpl" />
 		</property>
 	</bean>
-    <bean id="com.liferay.portal.kernel.staging.permission.StagingPermissionUtil" class="com.liferay.portal.kernel.staging.permission.StagingPermissionUtil">
-        <property name="stagingPermission">
-            <bean class="com.liferay.portal.staging.permission.StagingPermissionImpl" />
-        </property>
-    </bean>
+	<bean id="com.liferay.portal.kernel.staging.permission.StagingPermissionUtil" class="com.liferay.portal.kernel.staging.permission.StagingPermissionUtil">
+		<property name="stagingPermission">
+			<bean class="com.liferay.portal.staging.permission.StagingPermissionImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil" class="com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil">
 		<property name="upgradeTableFactory">
 			<bean class="com.liferay.portal.upgrade.util.DefaultUpgradeTableFactoryImpl" />
@@ -265,6 +269,10 @@
 	<bean id="com.liferay.portal.kernel.velocity.VelocityEngine" class="com.liferay.portal.velocity.VelocityEngineImpl" />
 	<bean id="com.liferay.portal.kernel.velocity.VelocityEngineUtil" class="com.liferay.portal.kernel.velocity.VelocityEngineUtil">
 		<property name="velocityEngine" ref="com.liferay.portal.kernel.velocity.VelocityEngine" />
+	</bean>
+	<bean id="com.liferay.portal.kernel.velocity.VelocityVariables" class="com.liferay.portal.velocity.VelocityVariablesImpl" />
+	<bean id="com.liferay.portal.kernel.velocity.VelocityVariablesUtil" class="com.liferay.portal.kernel.velocity.VelocityVariablesUtil">
+		<property name="velocityVariables" ref="com.liferay.portal.kernel.velocity.VelocityVariables" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.webcache.WebCachePoolUtil" class="com.liferay.portal.kernel.webcache.WebCachePoolUtil">
 		<property name="webCachePool">

@@ -89,9 +89,14 @@ public class IncludeTag
 
 			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
-			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
-				ThemeUtil.insertTilesVariables(request);
+			if (_log.isDebugEnabled() && Validator.isNotNull(page)) {
+				String resourcePath = ThemeUtil.getResourcePath(
+					servletContext, theme, page);
 
+				_log.debug(resourcePath);
+			}
+
+			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
 				ThemeUtil.include(
 					servletContext, request, response, pageContext,
 					page, theme);
@@ -138,9 +143,12 @@ public class IncludeTag
 
 			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
-			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
-				ThemeUtil.insertTilesVariables(request);
+			if (_log.isDebugEnabled() && Validator.isNotNull(page)) {
+				_log.debug(
+					ThemeUtil.getResourcePath(servletContext, theme, page));
+			}
 
+			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
 				ThemeUtil.include(
 					servletContext, request, response, pageContext, page,
 					theme);

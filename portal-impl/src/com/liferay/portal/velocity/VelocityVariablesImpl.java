@@ -12,9 +12,10 @@
  * details.
  */
 
-package com.liferay.portal.freemarker;
+package com.liferay.portal.velocity;
 
-import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
+import com.liferay.portal.kernel.audit.AuditMessageFactoryUtil;
+import com.liferay.portal.kernel.audit.AuditRouterUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
@@ -32,13 +33,14 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil_IW;
 import com.liferay.portal.kernel.util.Randomizer_IW;
 import com.liferay.portal.kernel.util.StaticFieldGetter;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.TimeZoneUtil_IW;
 import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.Validator_IW;
-import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.velocity.VelocityContext;
+import com.liferay.portal.kernel.velocity.VelocityVariables;
+import com.liferay.portal.kernel.xml.SAXReader;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.permission.AccountPermissionUtil;
@@ -60,9 +62,6 @@ import com.liferay.portal.util.PrefsPropsUtil_IW;
 import com.liferay.portal.util.PropsUtil_IW;
 import com.liferay.portal.util.SessionClicks_IW;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portal.velocity.ServiceLocator;
-import com.liferay.portal.velocity.UtilLocator;
-import com.liferay.portal.velocity.VelocityPortletPreferences;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
@@ -84,219 +83,274 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.taglib.tiles.ComponentConstants;
 import org.apache.struts.tiles.ComponentContext;
+import org.apache.velocity.tools.generic.DateTool;
+import org.apache.velocity.tools.generic.EscapeTool;
+import org.apache.velocity.tools.generic.IteratorTool;
+import org.apache.velocity.tools.generic.ListTool;
+import org.apache.velocity.tools.generic.MathTool;
+import org.apache.velocity.tools.generic.NumberTool;
+import org.apache.velocity.tools.generic.SortTool;
 
 /**
- * @author Mika Koivisto
+ * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
-public class FreeMarkerVariables {
+public class VelocityVariablesImpl implements VelocityVariables {
 
-	public static void insertHelperUtilities(
-		FreeMarkerContext freeMarkerContext, String[] restrictedVariables) {
+	public void insertHelperUtilities(
+		VelocityContext velocityContext, String[] restrictedVariables) {
 
 		// Array util
 
-		freeMarkerContext.put("arrayUtil", ArrayUtil_IW.getInstance());
+		velocityContext.put("arrayUtil", ArrayUtil_IW.getInstance());
+
+		// Audit message factory
+
+		velocityContext.put(
+			"auditMessageFactoryUtil",
+			AuditMessageFactoryUtil.getAuditMessageFactory());
+
+		// Audit router util
+
+		velocityContext.put(
+			"auditRouterUtil", AuditRouterUtil.getAuditRouter());
 
 		// Browser sniffer
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"browserSniffer", BrowserSnifferUtil.getBrowserSniffer());
 
 		// Date format
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"dateFormatFactory",
 			FastDateFormatFactoryUtil.getFastDateFormatFactory());
 
+		// Date tool
+
+		velocityContext.put("dateTool", new DateTool());
+
 		// Date util
 
-		freeMarkerContext.put("dateUtil", DateUtil_IW.getInstance());
+		velocityContext.put("dateUtil", DateUtil_IW.getInstance());
+
+		// Escape tool
+
+		velocityContext.put("escapeTool", new EscapeTool());
 
 		// Expando column service
 
 		ServiceLocator serviceLocator = ServiceLocator.getInstance();
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"expandoColumnLocalService",
 			serviceLocator.findService(
 				ExpandoColumnLocalService.class.getName()));
 
 		// Expando row service
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"expandoRowLocalService",
 			serviceLocator.findService(ExpandoRowLocalService.class.getName()));
 
 		// Expando table service
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"expandoTableLocalService",
 			serviceLocator.findService(
 				ExpandoTableLocalService.class.getName()));
 
 		// Expando value service
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"expandoValueLocalService",
 			serviceLocator.findService(
 				ExpandoValueLocalService.class.getName()));
 
 		// Getter util
 
-		freeMarkerContext.put("getterUtil", GetterUtil_IW.getInstance());
+		velocityContext.put("getterUtil", GetterUtil_IW.getInstance());
 
 		// Html util
 
-		freeMarkerContext.put("htmlUtil", HtmlUtil.getHtml());
+		velocityContext.put("htmlUtil", HtmlUtil.getHtml());
 
 		// Http util
 
-		freeMarkerContext.put("httpUtil", HttpUtil.getHttp());
+		velocityContext.put("httpUtil", HttpUtil.getHttp());
 
 		// Image servlet token
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"imageToken", ImageServletTokenUtil.getImageServletToken());
+
+		// Iterator tool
+
+		velocityContext.put("iteratorTool", new IteratorTool());
 
 		// Journal content util
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"journalContentUtil", JournalContentUtil.getJournalContent());
 
 		// Language util
 
-		freeMarkerContext.put("languageUtil", LanguageUtil.getLanguage());
-		freeMarkerContext.put(
+		velocityContext.put("languageUtil", LanguageUtil.getLanguage());
+		velocityContext.put(
 			"unicodeLanguageUtil", UnicodeLanguageUtil.getUnicodeLanguage());
+
+		// List tool
+
+		velocityContext.put("listTool", new ListTool());
 
 		// Locale util
 
-		freeMarkerContext.put("localeUtil", LocaleUtil.getInstance());
+		velocityContext.put("localeUtil", LocaleUtil.getInstance());
+
+		// Math tool
+
+		velocityContext.put("mathTool", new MathTool());
+
+		// Number tool
+
+		velocityContext.put("numberTool", new NumberTool());
 
 		// Param util
 
-		freeMarkerContext.put("paramUtil", ParamUtil_IW.getInstance());
+		velocityContext.put("paramUtil", ParamUtil_IW.getInstance());
 
 		// Portal util
 
 		_insertHelperUtility(
-			freeMarkerContext, restrictedVariables, "portalUtil",
+			velocityContext, restrictedVariables, "portalUtil",
 			PortalUtil.getPortal());
 		_insertHelperUtility(
-			freeMarkerContext, restrictedVariables, "portal",
+			velocityContext, restrictedVariables, "portal",
 			PortalUtil.getPortal());
 
 		// Prefs props util
 
 		_insertHelperUtility(
-			freeMarkerContext, restrictedVariables, "prefsPropsUtil",
+			velocityContext, restrictedVariables, "prefsPropsUtil",
 			PrefsPropsUtil_IW.getInstance());
 
 		// Props util
 
 		_insertHelperUtility(
-			freeMarkerContext, restrictedVariables, "propsUtil",
+			velocityContext, restrictedVariables, "propsUtil",
 			PropsUtil_IW.getInstance());
 
 		// Portlet URL factory
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"portletURLFactory", PortletURLFactoryUtil.getPortletURLFactory());
 
 		// Portlet preferences
 
 		_insertHelperUtility(
-			freeMarkerContext, restrictedVariables,
-			"freeMarkerPortletPreferences", new VelocityPortletPreferences());
+			velocityContext, restrictedVariables, "velocityPortletPreferences",
+			new VelocityPortletPreferences());
 
 		// Randomizer
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"randomizer", Randomizer_IW.getInstance().getWrappedInstance());
 
 		// SAX reader util
 
 		UtilLocator utilLocator = UtilLocator.getInstance();
 
-		freeMarkerContext.put(
-			"saxReaderUtil",
-			utilLocator.findUtil(SAXReaderUtil.class.getName()));
+		velocityContext.put(
+			"saxReaderUtil", utilLocator.findUtil(SAXReader.class.getName()));
 
 		// Service locator
 
 		_insertHelperUtility(
-			freeMarkerContext, restrictedVariables, "serviceLocator",
+			velocityContext, restrictedVariables, "serviceLocator",
 			serviceLocator);
 
 		// Session clicks
 
 		_insertHelperUtility(
-			freeMarkerContext, restrictedVariables, "sessionClicks",
+			velocityContext, restrictedVariables, "sessionClicks",
 			SessionClicks_IW.getInstance());
+
+		// Sort tool
+
+		velocityContext.put("sortTool", new SortTool());
 
 		// Static field getter
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"staticFieldGetter", StaticFieldGetter.getInstance());
 
 		// String util
 
-		freeMarkerContext.put("stringUtil", StringUtil_IW.getInstance());
+		velocityContext.put("stringUtil", StringUtil_IW.getInstance());
 
 		// Time zone util
 
-		freeMarkerContext.put("timeZoneUtil", TimeZoneUtil_IW.getInstance());
+		velocityContext.put("timeZoneUtil", TimeZoneUtil_IW.getInstance());
 
 		// Util locator
 
 		_insertHelperUtility(
-			freeMarkerContext, restrictedVariables, "utilLocator", utilLocator);
+			velocityContext, restrictedVariables, "utilLocator", utilLocator);
 
 		// Unicode formatter
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"unicodeFormatter", UnicodeFormatter_IW.getInstance());
 
 		// Validator
 
-		freeMarkerContext.put("validator", Validator_IW.getInstance());
+		velocityContext.put("validator", Validator_IW.getInstance());
 
 		// Permissions
 
-		freeMarkerContext.put(
+		velocityContext.put(
 			"accountPermission", AccountPermissionUtil.getAccountPermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"commonPermission", CommonPermissionUtil.getCommonPermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"groupPermission", GroupPermissionUtil.getGroupPermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"layoutPermission", LayoutPermissionUtil.getLayoutPermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"organizationPermission",
 			OrganizationPermissionUtil.getOrganizationPermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"passwordPolicyPermission",
 			PasswordPolicyPermissionUtil.getPasswordPolicyPermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"portalPermission", PortalPermissionUtil.getPortalPermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"portletPermission", PortletPermissionUtil.getPortletPermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"rolePermission", RolePermissionUtil.getRolePermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"userGroupPermission",
 			UserGroupPermissionUtil.getUserGroupPermission());
-		freeMarkerContext.put(
+		velocityContext.put(
 			"userPermission", UserPermissionUtil.getUserPermission());
+
+		// Deprecated
+
+		velocityContext.put(
+			"dateFormats",
+			FastDateFormatFactoryUtil.getFastDateFormatFactory());
+		velocityContext.put(
+			"locationPermission",
+			OrganizationPermissionUtil.getOrganizationPermission());
 	}
 
-	public static void insertVariables(
-			FreeMarkerContext freeMarkerContext, HttpServletRequest request)
+	public void insertVariables(
+			VelocityContext velocityContext, HttpServletRequest request)
 		throws Exception {
 
 		// Request
 
-		freeMarkerContext.put("request", request);
+		velocityContext.put("request", request);
 
 		// Portlet config
 
@@ -305,7 +359,7 @@ public class FreeMarkerVariables {
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
 		if (portletConfigImpl != null) {
-			freeMarkerContext.put("portletConfig", portletConfigImpl);
+			velocityContext.put("portletConfig", portletConfigImpl);
 		}
 
 		// Render request
@@ -316,7 +370,7 @@ public class FreeMarkerVariables {
 
 		if (portletRequest != null) {
 			if (portletRequest instanceof RenderRequest) {
-				freeMarkerContext.put("renderRequest", portletRequest);
+				velocityContext.put("renderRequest", portletRequest);
 			}
 		}
 
@@ -328,14 +382,14 @@ public class FreeMarkerVariables {
 
 		if (portletResponse != null) {
 			if (portletResponse instanceof RenderResponse) {
-				freeMarkerContext.put("renderResponse", portletResponse);
+				velocityContext.put("renderResponse", portletResponse);
 			}
 		}
 
 		// XML request
 
 		if ((portletRequest != null) && (portletResponse != null)) {
-			freeMarkerContext.put(
+			velocityContext.put(
 				"xmlRequest",
 				new Object() {
 
@@ -359,25 +413,23 @@ public class FreeMarkerVariables {
 			Layout layout = themeDisplay.getLayout();
 			List<Layout> layouts = themeDisplay.getLayouts();
 
-			freeMarkerContext.put("themeDisplay", themeDisplay);
-			freeMarkerContext.put("company", themeDisplay.getCompany());
-			freeMarkerContext.put("user", themeDisplay.getUser());
-			freeMarkerContext.put("realUser", themeDisplay.getRealUser());
-			freeMarkerContext.put("layout", layout);
-			freeMarkerContext.put("layouts", layouts);
-			freeMarkerContext.put(
-				"plid", String.valueOf(themeDisplay.getPlid()));
-			freeMarkerContext.put(
+			velocityContext.put("themeDisplay", themeDisplay);
+			velocityContext.put("company", themeDisplay.getCompany());
+			velocityContext.put("user", themeDisplay.getUser());
+			velocityContext.put("realUser", themeDisplay.getRealUser());
+			velocityContext.put("layout", layout);
+			velocityContext.put("layouts", layouts);
+			velocityContext.put("plid", String.valueOf(themeDisplay.getPlid()));
+			velocityContext.put(
 				"layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
-			freeMarkerContext.put(
+			velocityContext.put(
 				"scopeGroupId", new Long(themeDisplay.getScopeGroupId()));
-			freeMarkerContext.put(
+			velocityContext.put(
 				"permissionChecker", themeDisplay.getPermissionChecker());
-			freeMarkerContext.put("locale", themeDisplay.getLocale());
-			freeMarkerContext.put("timeZone", themeDisplay.getTimeZone());
-			freeMarkerContext.put("theme", theme);
-			freeMarkerContext.put("colorScheme", themeDisplay.getColorScheme());
-			freeMarkerContext.put(
+			velocityContext.put("locale", themeDisplay.getLocale());
+			velocityContext.put("timeZone", themeDisplay.getTimeZone());
+			velocityContext.put("colorScheme", themeDisplay.getColorScheme());
+			velocityContext.put(
 				"portletDisplay", themeDisplay.getPortletDisplay());
 
 			// Navigation items
@@ -390,101 +442,114 @@ public class FreeMarkerVariables {
 				List<NavItem> navItems = NavItem.fromLayouts(
 					requestVars, layouts);
 
-				freeMarkerContext.put("navItems", navItems);
+				velocityContext.put("navItems", navItems);
 			}
 
+			// Init
+
+			velocityContext.put(
+				"init",
+				themeDisplay.getPathContext() +
+					VelocityResourceListener.SERVLET_SEPARATOR +
+						"/html/themes/_unstyled/templates/init.vm");
+
+			// Deprecated
+
+			velocityContext.put(
+				"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
+		}
+
+		// Theme
+
+		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
+
+		if ((theme == null) && (themeDisplay != null)) {
+			theme = themeDisplay.getTheme();
+		}
+
+		if (theme != null) {
+
 			// Full css and templates path
+
+			velocityContext.put("theme", theme);
 
 			String servletContextName = GetterUtil.getString(
 				theme.getServletContextName());
 
-			freeMarkerContext.put(
+			velocityContext.put(
 				"fullCssPath",
-				StringPool.SLASH + servletContextName +
-					theme.getFreeMarkerTemplateLoader() + theme.getCssPath());
+				servletContextName + theme.getVelocityResourceListener() +
+					theme.getCssPath());
 
-			freeMarkerContext.put(
+			velocityContext.put(
 				"fullTemplatesPath",
-				StringPool.SLASH + servletContextName +
-					theme.getFreeMarkerTemplateLoader() +
-						theme.getTemplatesPath());
-
-			// Init
-
-			freeMarkerContext.put(
-				"init",
-				StringPool.SLASH + themeDisplay.getPathContext() +
-					FreeMarkerTemplateLoader.SERVLET_SEPARATOR +
-						"/html/themes/_unstyled/templates/init.ftl");
-
-			// Deprecated
-
-			freeMarkerContext.put(
-				"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
+				servletContextName + theme.getVelocityResourceListener() +
+					theme.getTemplatesPath());
 		}
 
 		// Tiles attributes
 
-		_insertTilesVariables(
-			freeMarkerContext, request, "tilesTitle", "title");
-		_insertTilesVariables(
-			freeMarkerContext, request, "tilesContent", "content");
-		_insertTilesVariables(
-			freeMarkerContext, request, "tilesSelectable", "selectable");
+		_insertTilesVariables(velocityContext, request);
 
 		// Page title and subtitle
 
-		if (request.getAttribute(WebKeys.PAGE_TITLE) != null) {
-			freeMarkerContext.put(
-				"pageTitle", request.getAttribute(WebKeys.PAGE_TITLE));
-		}
+		velocityContext.put(
+			"pageTitle", request.getAttribute(WebKeys.PAGE_TITLE));
+		velocityContext.put(
+			"pageSubtitle", request.getAttribute(WebKeys.PAGE_SUBTITLE));
 
-		if (request.getAttribute(WebKeys.PAGE_SUBTITLE) != null) {
-			freeMarkerContext.put(
-				"pageSubtitle", request.getAttribute(WebKeys.PAGE_SUBTITLE));
-		}
+		// Insert custom vm variables
 
-		// Insert custom ftl variables
+		Map<String, Object> vmVariables =
+			(Map<String, Object>)request.getAttribute(WebKeys.VM_VARIABLES);
 
-		Map<String, Object> ftlVariables =
-			(Map<String, Object>)request.getAttribute(WebKeys.FTL_VARIABLES);
-
-		if (ftlVariables != null) {
-			for (Map.Entry<String, Object> entry : ftlVariables.entrySet()) {
+		if (vmVariables != null) {
+			for (Map.Entry<String, Object> entry : vmVariables.entrySet()) {
 				String key = entry.getKey();
 				Object value = entry.getValue();
 
 				if (Validator.isNotNull(key)) {
-					freeMarkerContext.put(key, value);
+					velocityContext.put(key, value);
 				}
 			}
 		}
 	}
 
 	private static void _insertHelperUtility(
-		FreeMarkerContext freeMarkerContext, String[] restrictedVariables,
+		VelocityContext velocityContext, String[] restrictedVariables,
 		String key, Object value) {
 
 		if (!ArrayUtil.contains(restrictedVariables, key)) {
-			freeMarkerContext.put(key, value);
+			velocityContext.put(key, value);
 		}
 	}
 
 	private static void _insertTilesVariables(
-		FreeMarkerContext freeMarkerContext, HttpServletRequest request,
-		String attributeId, String attributeName) {
+		VelocityContext velocityContext, HttpServletRequest request) {
 
 		ComponentContext componentContext =
 			(ComponentContext)request.getAttribute(
 				ComponentConstants.COMPONENT_CONTEXT);
 
-		if (componentContext != null) {
-			String value = (String)componentContext.getAttribute(attributeName);
-
-			if (value != null) {
-				freeMarkerContext.put(attributeId, value);
-			}
+		if (componentContext == null) {
+			return;
 		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String tilesTitle = (String)componentContext.getAttribute("title");
+		String tilesContent = (String)componentContext.getAttribute("content");
+		boolean tilesSelectable = GetterUtil.getBoolean(
+			(String)componentContext.getAttribute("selectable"));
+
+		themeDisplay.setTilesTitle(tilesTitle);
+		themeDisplay.setTilesContent(tilesContent);
+		themeDisplay.setTilesSelectable(tilesSelectable);
+
+		velocityContext.put("tilesTitle", tilesTitle);
+		velocityContext.put("tilesContent", tilesContent);
+		velocityContext.put("tilesSelectable", tilesSelectable);
 	}
 
 }

@@ -172,6 +172,10 @@ public class PortletDeployer extends BaseDeployer {
 
 		sb.append(getSpeedFiltersContent(srcFile));
 
+		// Servlet Context Include filters
+
+		sb.append(getServletContextIncludeFiltersContent(srcFile));
+
 		return sb.toString();
 	}
 

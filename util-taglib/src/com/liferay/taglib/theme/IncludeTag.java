@@ -39,8 +39,6 @@ public class IncludeTag extends com.liferay.taglib.util.IncludeTag {
 
 		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
-		ThemeUtil.insertTilesVariables(request);
-
 		ThemeUtil.include(
 			servletContext, request, new PipingServletResponse(pageContext),
 			pageContext, page, theme);

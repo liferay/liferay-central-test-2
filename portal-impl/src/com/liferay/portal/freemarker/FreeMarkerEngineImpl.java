@@ -16,6 +16,7 @@ package com.liferay.portal.freemarker;
 
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngine;
+import com.liferay.portal.kernel.freemarker.FreeMarkerVariablesUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -26,7 +27,6 @@ import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.StringTemplateLoader;
 import freemarker.cache.TemplateLoader;
-
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
@@ -84,13 +84,14 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 
 		_restrictedToolsContext = new FreeMarkerContextImpl();
 
-		FreeMarkerVariables.insertHelperUtilities(
+		FreeMarkerVariablesUtil.insertHelperUtilities(
 			_restrictedToolsContext,
 			PropsValues.JOURNAL_TEMPLATE_FREEMARKER_RESTRICTED_VARIABLES);
 
 		_standardToolsContext = new FreeMarkerContextImpl();
 
-		FreeMarkerVariables.insertHelperUtilities(_standardToolsContext, null);
+		FreeMarkerVariablesUtil.insertHelperUtilities(
+			_standardToolsContext, null);
 	}
 
 	public boolean mergeTemplate(

@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngine;
+import com.liferay.portal.kernel.velocity.VelocityVariablesUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -129,13 +130,14 @@ public class VelocityEngineImpl implements VelocityEngine {
 
 		_restrictedToolsContext = new VelocityContextImpl();
 
-		VelocityVariables.insertHelperUtilities(
+		VelocityVariablesUtil.insertHelperUtilities(
 			_restrictedToolsContext,
 			PropsValues.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
 		_standardToolsContext = new VelocityContextImpl();
 
-		VelocityVariables.insertHelperUtilities(_standardToolsContext, null);
+		VelocityVariablesUtil.insertHelperUtilities(
+			_standardToolsContext, null);
 	}
 
 	public boolean mergeTemplate(

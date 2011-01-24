@@ -71,6 +71,7 @@ public class PortletAutoDeployer
 			addRequiredJar(jars, "util-bridges.jar");
 			addRequiredJar(jars, "util-java.jar");
 			addRequiredJar(jars, "util-taglib.jar");
+			addRequiredJar(jars, "_servlet_context_include.jsp");
 
 			this.jars = jars;
 

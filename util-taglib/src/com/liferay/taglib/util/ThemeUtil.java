@@ -14,9 +14,10 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.freemarker.FreeMarkerVariables;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
+import com.liferay.portal.kernel.freemarker.FreeMarkerVariablesUtil;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
@@ -31,14 +32,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
+import com.liferay.portal.kernel.velocity.VelocityVariablesUtil;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.velocity.VelocityVariables;
 
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
 import freemarker.ext.servlet.ServletContextHashModel;
-
 import freemarker.template.ObjectWrapper;
 
 import java.io.Writer;
@@ -64,23 +64,40 @@ import org.apache.struts.tiles.ComponentContext;
  */
 public class ThemeUtil {
 
-	public static String getResourcePath(Theme theme, String path) {
-		StringBundler sb = new StringBundler(7);
+	public static String getResourcePath(
+		ServletContext servletContext, Theme theme, String path) {
 
-		String servletContextName = GetterUtil.getString(
+		StringBundler sb = new StringBundler(9);
+
+		String themeContextName = GetterUtil.getString(
 			theme.getServletContextName());
 
-		sb.append(servletContextName);
+		sb.append(themeContextName);
 
-		int pos = path.lastIndexOf(CharPool.PERIOD);
+		String servletContextName = GetterUtil.getString(
+			servletContext.getServletContextName());
+
+		int start = 0;
+
+		if (path.startsWith(StringPool.SLASH)) {
+			start = 1;
+		}
+
+		int end = path.lastIndexOf(CharPool.PERIOD);
 
 		String extension = theme.getTemplateExtension();
 
 		if (extension.equals(_TEMPLATE_EXTENSION_FTL)) {
 			sb.append(theme.getFreeMarkerTemplateLoader());
 			sb.append(theme.getTemplatesPath());
+
+			if (Validator.isNotNull(servletContextName)) {
+				sb.append(StringPool.SLASH);
+				sb.append(servletContextName);
+			}
+
 			sb.append(StringPool.SLASH);
-			sb.append(path.substring(0, pos));
+			sb.append(path.substring(start, end));
 			sb.append(StringPool.PERIOD);
 			sb.append(_TEMPLATE_EXTENSION_FTL);
 
@@ -89,8 +106,14 @@ public class ThemeUtil {
 		else if (extension.equals(_TEMPLATE_EXTENSION_VM)) {
 			sb.append(theme.getVelocityResourceListener());
 			sb.append(theme.getTemplatesPath());
+
+			if (Validator.isNotNull(servletContextName)) {
+				sb.append(StringPool.SLASH);
+				sb.append(servletContextName);
+			}
+
 			sb.append(StringPool.SLASH);
-			sb.append(path.substring(0, pos));
+			sb.append(path.substring(start, end));
 			sb.append(StringPool.PERIOD);
 			sb.append(_TEMPLATE_EXTENSION_VM);
 
@@ -145,7 +168,7 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		String resourcePath = getResourcePath(theme, path);
+		String resourcePath = getResourcePath(servletContext, theme, path);
 
 		if (!FreeMarkerEngineUtil.resourceExists(resourcePath)) {
 			_log.error(resourcePath + " does not exist");
@@ -158,7 +181,7 @@ public class ThemeUtil {
 
 		// FreeMarker variables
 
-		FreeMarkerVariables.insertVariables(freeMarkerContext, request);
+		FreeMarkerVariablesUtil.insertVariables(freeMarkerContext, request);
 
 		// Theme servlet context
 
@@ -237,6 +260,8 @@ public class ThemeUtil {
 			HttpServletResponse response, String path, Theme theme)
 		throws Exception {
 
+		insertTilesVariables(request);
+
 		if (theme.isWARFile()) {
 			ServletContext themeServletContext = servletContext.getContext(
 				theme.getContextPath());
@@ -296,7 +321,7 @@ public class ThemeUtil {
 			ServletContextPool.put(servletContextName, servletContext);
 		}
 
-		String resourcePath = getResourcePath(theme, page);
+		String resourcePath = getResourcePath(servletContext, theme, page);
 
 		if (!VelocityEngineUtil.resourceExists(resourcePath)) {
 			_log.error(resourcePath + " does not exist");
@@ -309,7 +334,7 @@ public class ThemeUtil {
 
 		// Velocity variables
 
-		VelocityVariables.insertVariables(velocityContext, request);
+		VelocityVariablesUtil.insertVariables(velocityContext, request);
 
 		// Page context
 
@@ -358,7 +383,9 @@ public class ThemeUtil {
 		}
 	}
 
-	public static void insertTilesVariables(HttpServletRequest request) {
+	public static void insertTilesVariables(HttpServletRequest request)
+		throws SystemException {
+
 		ComponentContext componentContext =
 			(ComponentContext)request.getAttribute(
 				ComponentConstants.COMPONENT_CONTEXT);
@@ -388,7 +415,7 @@ public class ThemeUtil {
 			return false;
 		}
 
-		String resourcePath = getResourcePath(theme, path);
+		String resourcePath = getResourcePath(servletContext, theme, path);
 
 		String extension = theme.getTemplateExtension();
 

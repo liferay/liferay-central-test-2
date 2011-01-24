@@ -1,0 +1,12 @@
+<filter>
+	<filter-name>Servlet Context Include Filter</filter-name>
+	<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+	<init-param>
+		<param-name>filter-class</param-name>
+		<param-value>com.liferay.portal.servlet.filters.theme.ServletContextIncludeFilter</param-value>
+	</init-param>
+</filter>
+<filter-mapping>
+	<filter-name>Servlet Context Include Filter</filter-name>
+	<url-pattern>*.jsp</url-pattern>
+</filter-mapping>
