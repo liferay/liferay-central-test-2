@@ -156,6 +156,7 @@
 	<classpathentry kind="lib" path="lib/portal/htmlparser.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ical4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/icq.jar"/>
+	<classpathentry kind="lib" path="lib/portal/im4java.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jabsorb.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-core.jar"/>

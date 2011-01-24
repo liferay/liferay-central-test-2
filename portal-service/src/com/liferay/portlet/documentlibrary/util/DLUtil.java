@@ -23,8 +23,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -238,6 +240,28 @@ public class DLUtil {
 
 	public static String getGenericName(String extension) {
 		return _instance._getGenericName(extension);
+	}
+
+	public static String getTempFileId(long id, String version) {
+		return getTempFileId(id, version, null);
+	}
+
+	public static String getTempFileId(
+		long id, String version, String languageId) {
+
+		if (Validator.isNull(languageId)) {
+			return String.valueOf(id).concat(StringPool.PERIOD).concat(version);
+		}
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(id);
+		sb.append(StringPool.PERIOD);
+		sb.append(version);
+		sb.append(StringPool.PERIOD);
+		sb.append(languageId);
+
+		return sb.toString();
 	}
 
 	private DLUtil() {

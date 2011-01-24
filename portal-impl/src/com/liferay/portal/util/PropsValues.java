@@ -400,6 +400,8 @@ public class PropsValues {
 
 	public static final boolean DL_FILE_RANK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_RANK_ENABLED));
 
+	public static final boolean DL_GENERATE_THUMBNAILS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_GENERATE_THUMBNAILS));
+
 	public static String DL_HOOK_IMPL = PropsUtil.get(PropsKeys.DL_HOOK_IMPL);
 
 	public static final int DL_HOOK_JCR_FETCH_DELAY = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_HOOK_JCR_FETCH_DELAY));
@@ -511,6 +513,8 @@ public class PropsValues {
 	public static final String IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR = PropsUtil.get(PropsKeys.IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR);
 
 	public static String IMAGE_HOOK_IMPL = PropsUtil.get(PropsKeys.IMAGE_HOOK_IMPL);
+
+	public static final boolean IMAGEMAGICK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.IMAGEMAGICK_ENABLED));
 
 	public static final int INDEX_ON_STARTUP_DELAY = GetterUtil.getInteger(PropsUtil.get(PropsKeys.INDEX_ON_STARTUP_DELAY));
 

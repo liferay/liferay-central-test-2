@@ -65,6 +65,7 @@
 <%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLPermission" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
+<%@ page import="com.liferay.portlet.documentlibrary.util.PDFProcessorUtil" %>
 <%@ page import="com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>

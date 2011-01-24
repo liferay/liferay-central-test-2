@@ -64,6 +64,15 @@ public class DocumentConversionUtil {
 			id, inputStream, sourceExtension, targetExtension);
 	}
 
+	public static File convertToFile(
+			String id, InputStream inputStream, String sourceExtension,
+			String targetExtension)
+		throws IOException, SystemException {
+
+		return _instance._convertToFile(
+			id, inputStream, sourceExtension, targetExtension);
+	}
+
 	public static void disconnect() {
 		_instance._disconnect();
 	}
@@ -72,24 +81,14 @@ public class DocumentConversionUtil {
 		return _instance._getConversions(extension);
 	}
 
-	public static String getTempFileId(long id, String version) {
-		return getTempFileId(id, version, null);
-	}
-
-	public static String getTempFileId(
-		long id, String version, String languageId) {
-
-		if (Validator.isNull(languageId)) {
-			return String.valueOf(id).concat(StringPool.PERIOD).concat(version);
-		}
-
+	public static String getFilePath(String id, String targetExtension) {
 		StringBundler sb = new StringBundler(5);
 
+		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
+		sb.append("/liferay/document_conversion/");
 		sb.append(id);
 		sb.append(StringPool.PERIOD);
-		sb.append(version);
-		sb.append(StringPool.PERIOD);
-		sb.append(languageId);
+		sb.append(targetExtension);
 
 		return sb.toString();
 	}
@@ -166,6 +165,15 @@ public class DocumentConversionUtil {
 			String targetExtension)
 		throws IOException, SystemException {
 
+		return new FileInputStream(
+			_convertToFile(id, inputStream, sourceExtension, targetExtension));
+	}
+
+	private File _convertToFile(
+			String id, InputStream inputStream, String sourceExtension,
+			String targetExtension)
+		throws IOException, SystemException {
+
 		if (!PrefsPropsUtil.getBoolean(
 				PropsKeys.OPENOFFICE_SERVER_ENABLED,
 				PropsValues.OPENOFFICE_SERVER_ENABLED)) {
@@ -176,15 +184,7 @@ public class DocumentConversionUtil {
 		sourceExtension = _fixExtension(sourceExtension);
 		targetExtension = _fixExtension(targetExtension);
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append(SystemProperties.get(SystemProperties.TMP_DIR));
-		sb.append("/liferay/document_conversion/");
-		sb.append(id);
-		sb.append(StringPool.PERIOD);
-		sb.append(targetExtension);
-
-		String fileName = sb.toString();
+		String fileName = getFilePath(id, targetExtension);
 
 		File file = new File(fileName);
 
@@ -227,7 +227,7 @@ public class DocumentConversionUtil {
 				unsyncByteArrayOutputStream.size());
 		}
 
-		return new FileInputStream(file);
+		return file;
 	}
 
 	private void _disconnect() {

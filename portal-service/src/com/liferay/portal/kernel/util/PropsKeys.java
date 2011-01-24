@@ -509,6 +509,8 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_RANK_ENABLED = "dl.file.rank.enabled";
 
+	public static final String DL_GENERATE_THUMBNAILS = "dl.generate.thumbnails";
+
 	public static final String DL_HOOK_FILE_SYSTEM_ROOT_DIR = "dl.hook.file.system.root.dir";
 
 	public static final String DL_HOOK_IMPL = "dl.hook.impl";
@@ -668,6 +670,10 @@ public interface PropsKeys {
 	public static final String IMAGE_HOOK_FILE_SYSTEM_ROOT_DIR = "image.hook.file.system.root.dir";
 
 	public static final String IMAGE_HOOK_IMPL = "image.hook.impl";
+
+	public static final String IMAGEMAGICK_ENABLED = "imagemagick.enabled";
+
+	public static final String IMAGEMAGICK_GLOBAL_SEARCH_PATH = "imagemagick.global.search.path";
 
 	public static final String INDEX_FILTER_SEARCH_LIMIT = "index.filter.search.limit";
 

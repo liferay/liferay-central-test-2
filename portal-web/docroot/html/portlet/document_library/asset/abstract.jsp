@@ -27,12 +27,23 @@ FileEntry fileEntry = fileVersion.getFileEntry();
 
 <c:if test="<%= fileVersion.isApproved() %>">
 	<div class="asset-resource-info">
-		<liferay-ui:icon
-			image='<%= "../file_system/small/" + fileVersion.getIcon() %>'
-			label="<%= true %>"
-			message="<%= HtmlUtil.escape(fileVersion.getTitle()) %>"
-			url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getRepositoryId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'
-		/>
+		<c:choose>
+			<c:when test="<%= PDFProcessorUtil.hasThumbnail(fileEntry) %>">
+				<div>
+					<img src='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1" %>' />
+
+					<%= fileVersion.getTitle() %>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:icon
+					image='<%= "../file_system/small/" + fileVersion.getIcon() %>'
+					label="<%= true %>"
+					message="<%= HtmlUtil.escape(fileVersion.getTitle()) %>"
+					url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getRepositoryId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'
+				/>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </c:if>
 

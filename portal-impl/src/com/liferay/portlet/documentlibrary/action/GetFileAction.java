@@ -206,7 +206,7 @@ public class GetFileAction extends PortletAction {
 		String fileName = fileEntry.getTitle();
 
 		if (Validator.isNotNull(targetExtension)) {
-			String id = DocumentConversionUtil.getTempFileId(
+			String id = DLUtil.getTempFileId(
 				fileEntry.getFileEntryId(), version);
 
 			String sourceExtension = FileUtil.getExtension(fileName);

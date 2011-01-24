@@ -30,6 +30,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
@@ -144,7 +145,7 @@ public class ExportArticleAction extends PortletAction {
 			if (Validator.isNotNull(targetExtension) &&
 				ArrayUtil.contains(allowedExtensions, targetExtension)) {
 
-				String id = DocumentConversionUtil.getTempFileId(
+				String id = DLUtil.getTempFileId(
 					articleDisplay.getId(),
 					String.valueOf(articleDisplay.getVersion()), languageId);
 

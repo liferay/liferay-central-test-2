@@ -55,6 +55,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
+import com.liferay.portlet.documentlibrary.util.PDFProcessorUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
@@ -329,6 +330,8 @@ public class WebServerServlet extends HttpServlet {
 		String targetExtension = ParamUtil.getString(
 			request, "targetExtension");
 
+		boolean thumbnail = ParamUtil.getBoolean(request, "thumbnail");
+
 		if (Validator.isNull(version)) {
 			if (Validator.isNotNull(fileEntry.getVersion())) {
 				version = fileEntry.getVersion();
@@ -353,16 +356,14 @@ public class WebServerServlet extends HttpServlet {
 
 		InputStream inputStream = fileEntry.getContentStream(version);
 
+		String tempFileId = DLUtil.getTempFileId(
+			fileEntry.getFileEntryId(), version);
+
 		boolean converted = false;
 
 		if (Validator.isNotNull(targetExtension)) {
-			String id = DocumentConversionUtil.getTempFileId(
-				fileEntry.getFileEntryId(), version);
-
-			String sourceExtension = FileUtil.getExtension(fileName);
-
 			InputStream convertedInputStream = DocumentConversionUtil.convert(
-				id, inputStream, sourceExtension, targetExtension);
+				tempFileId, inputStream, extension, targetExtension);
 
 			if ((convertedInputStream != null) &&
 				(convertedInputStream != inputStream)) {
@@ -374,6 +375,14 @@ public class WebServerServlet extends HttpServlet {
 
 				converted = true;
 			}
+		}
+		else if (thumbnail) {
+			inputStream = PDFProcessorUtil.getThumbnail(tempFileId);
+
+			fileName = FileUtil.stripExtension(fileName).concat(
+				StringPool.PERIOD).concat(PDFProcessorUtil.THUMBNAIL_TYPE);
+
+			converted = true;
 		}
 
 		int contentLength = 0;

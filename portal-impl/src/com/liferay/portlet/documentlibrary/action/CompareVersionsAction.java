@@ -32,6 +32,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 
 import java.io.InputStream;
@@ -118,9 +119,9 @@ public class CompareVersionsAction extends PortletAction {
 				PropsValues.OPENOFFICE_SERVER_ENABLED) &&
 			DocumentConversionUtil.isConvertBeforeCompare(extension)) {
 
-			String sourceTempFileId = DocumentConversionUtil.getTempFileId(
+			String sourceTempFileId = DLUtil.getTempFileId(
 				fileEntryId, sourceVersion);
-			String targetTempFileId = DocumentConversionUtil.getTempFileId(
+			String targetTempFileId = DLUtil.getTempFileId(
 				fileEntryId, targetVersion);
 
 			sourceIs = DocumentConversionUtil.convert(

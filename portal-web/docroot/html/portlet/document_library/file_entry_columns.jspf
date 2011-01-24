@@ -64,11 +64,22 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 				index="<%= j %>"
 				name="<%= fileEntryColumn %>"
 			>
-				<liferay-ui:icon
-					image='<%= "../file_system/small/" + fileEntry.getIcon() %>'
-					label="<%= true %>"
-					message="<%= fileEntry.getTitle() %>"
-				/>
+				<c:choose>
+					<c:when test="<%= PDFProcessorUtil.hasThumbnail(fileEntry) %>">
+						<div>
+							<img src='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1" %>' />
+
+							<%= fileEntry.getTitle() %>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:icon
+							image='<%= "../file_system/large/" + DLUtil.getGenericName(fileEntry.getExtension()) %>'
+							label="<%= true %>"
+							message="<%= fileEntry.getTitle() %>"
+						/>
+					</c:otherwise>
+				</c:choose>
 
 				<c:if test="<%= fileEntry.getFileVersion().isPending() %>">
 					<div class="workflow-status-pending">
