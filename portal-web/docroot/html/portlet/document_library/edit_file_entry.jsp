@@ -34,15 +34,6 @@ long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String extension = BeanParamUtil.getString(fileEntry, request, "extension");
-String title = BeanParamUtil.getString(fileEntry, request, "title");
-
-String assetTagNames = ParamUtil.getString(request, "assetTagNames");
-
-String[] conversions = new String[0];
-
-if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED)) {
-	conversions = (String[])DocumentConversionUtil.getConversions(extension);
-}
 
 Folder folder = null;
 

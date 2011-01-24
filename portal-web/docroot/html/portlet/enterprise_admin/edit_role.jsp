@@ -26,13 +26,6 @@ long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
 int type = ParamUtil.getInteger(request, "type");
 String subtype = BeanParamUtil.getString(role, request, "subtype");
-
-String currentLanguageId = LanguageUtil.getLanguageId(request);
-Locale currentLocale = LocaleUtil.fromLanguageId(currentLanguageId);
-Locale defaultLocale = LocaleUtil.getDefault();
-String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
-Locale[] locales = LanguageUtil.getAvailableLocales();
 %>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/role/toolbar.jsp">

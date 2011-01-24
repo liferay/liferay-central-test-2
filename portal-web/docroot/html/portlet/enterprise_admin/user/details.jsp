@@ -26,10 +26,6 @@ if (selUser != null) {
 	displayEmailAddress = selUser.getDisplayEmailAddress();
 }
 
-int prefixId = BeanParamUtil.getInteger(selContact, request, "prefixId");
-int suffixId = BeanParamUtil.getInteger(selContact, request, "suffixId");
-boolean male = BeanParamUtil.getBoolean(selContact, request, "male", true);
-
 Calendar birthday = CalendarFactoryUtil.getCalendar();
 
 birthday.set(Calendar.MONTH, Calendar.JANUARY);
@@ -183,7 +179,7 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 	<c:if test="<%= PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_CONTACT_MALE) %>">
 		<aui:select bean="<%= selContact %>" label="gender" model="<%= Contact.class %>" name="male">
 			<aui:option label="male" value="1" />
-			<aui:option label="female" selected="<%= !male %>" value="0" />
+			<aui:option label="female" value="0" />
 		</aui:select>
 	</c:if>
 

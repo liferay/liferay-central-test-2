@@ -23,7 +23,6 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 long groupId = BeanParamUtil.getLong(group, request, "groupId");
 
-int type = BeanParamUtil.getInteger(group, request, "type");
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 %>
 
@@ -75,9 +74,9 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 		<aui:input name="description" />
 
 		<aui:select name="type">
-			<aui:option label="open" selected="<%= (type == GroupConstants.TYPE_COMMUNITY_OPEN) %>" value="<%= GroupConstants.TYPE_COMMUNITY_OPEN %>" />
-			<aui:option label="restricted" selected="<%= (type == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>" value="<%= GroupConstants.TYPE_COMMUNITY_RESTRICTED %>" />
-			<aui:option label="private" selected="<%= (type == GroupConstants.TYPE_COMMUNITY_PRIVATE) %>" value="<%= GroupConstants.TYPE_COMMUNITY_PRIVATE %>" />
+			<aui:option label="open" value="<%= GroupConstants.TYPE_COMMUNITY_OPEN %>" />
+			<aui:option label="restricted" value="<%= GroupConstants.TYPE_COMMUNITY_RESTRICTED %>" />
+			<aui:option label="private" value="<%= GroupConstants.TYPE_COMMUNITY_PRIVATE %>" />
 		</aui:select>
 
 		<aui:input inlineLabel="left" name="active" value="<%= true %>" />

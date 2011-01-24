@@ -25,14 +25,6 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute(WebKeys.PAS
 long passwordPolicyId = BeanParamUtil.getLong(passwordPolicy, request, "passwordPolicyId");
 
 boolean defaultPolicy = BeanParamUtil.getBoolean(passwordPolicy, request, "defaultPolicy");
-long minAge = BeanParamUtil.getLong(passwordPolicy, request, "minAge");
-int historyCount = BeanParamUtil.getInteger(passwordPolicy, request, "historyCount");
-long maxAge = BeanParamUtil.getLong(passwordPolicy, request, "maxAge");
-long warningTime = BeanParamUtil.getLong(passwordPolicy, request, "warningTime");
-long resetFailureCount = BeanParamUtil.getLong(passwordPolicy, request, "resetFailureCount");
-boolean requireUnlock = BeanParamUtil.getBoolean(passwordPolicy, request, "requireUnlock");
-long lockoutDuration = BeanParamUtil.getLong(passwordPolicy, request, "lockoutDuration");
-long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTicketMaxAge");
 %>
 
 <liferay-util:include page="/html/portlet/enterprise_admin/password_policy/toolbar.jsp">
@@ -71,13 +63,13 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 					<aui:input helpMessage="change-required-help" inlineLabel="left" name="changeRequired" />
 
 					<aui:select helpMessage="minimum-age-help" label="minimum-age" name="minAge">
-						<aui:option label="none" selected="<%= (minAge == 0) %>" value="0" />
+						<aui:option label="none" value="0" />
 
 						<%
 						for (int i = 0; i < 15; i++) {
 						%>
 
-							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (minAge == _DURATIONS[i]) %>" value="<%= _DURATIONS[i] %>" />
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" value="<%= _DURATIONS[i] %>" />
 
 						<%
 						}
@@ -87,13 +79,13 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 				</div>
 
 				<aui:select helpMessage="reset-ticket-max-age-help" name="resetTicketMaxAge">
-					<aui:option label="eternal" selected="<%= (resetTicketMaxAge == 0) %>" value="0" />
+					<aui:option label="eternal" value="0" />
 
 					<%
 					for (int i = 0; i < 15; i++) {
 					%>
 
-						<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (resetTicketMaxAge == _DURATIONS[i]) %>" value="<%= _DURATIONS[i] %>" />
+						<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" value="<%= _DURATIONS[i] %>" />
 
 					<%
 					}
@@ -138,7 +130,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 						for (int i = 2; i < 25; i++) {
 						%>
 
-							<aui:option label="<%= i %>" selected="<%= (historyCount == i) %>" />
+							<aui:option label="<%= i %>" />
 
 						<%
 						}
@@ -161,7 +153,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 						for (int i = 15; i < _DURATIONS.length; i++) {
 						%>
 
-							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (maxAge == _DURATIONS[i]) %>" value="<%= _DURATIONS[i] %>" />
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" value="<%= _DURATIONS[i] %>" />
 
 						<%
 						}
@@ -175,7 +167,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 						for (int i = 7; i < 16; i++) {
 						%>
 
-							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" value="<%= _DURATIONS[i] %>" selected="<%= (warningTime == _DURATIONS[i]) %>" />
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" value="<%= _DURATIONS[i] %>" />
 
 						<%
 						}
@@ -201,7 +193,7 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 						for (int i = 0; i < 15; i++) {
 						%>
 
-							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (resetFailureCount == _DURATIONS[i]) %>" value="<%= _DURATIONS[i] %>" />
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" value="<%= _DURATIONS[i] %>" />
 
 						<%
 						}
@@ -210,13 +202,13 @@ long resetTicketMaxAge = BeanParamUtil.getLong(passwordPolicy, request, "resetTi
 					</aui:select>
 
 					<aui:select helpMessage="lockout-duration-help" name="lockoutDuration">
-						<aui:option label="until-unlocked-by-an-administrator" selected="<%= (requireUnlock) %>" value="0" />
+						<aui:option label="until-unlocked-by-an-administrator" value="0" />
 
 						<%
 						for (int i = 0; i < 15; i++) {
 						%>
 
-							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" selected="<%= (!requireUnlock && (lockoutDuration == _DURATIONS[i])) %>" value="<%= _DURATIONS[i] %>" />
+							<aui:option label="<%= LanguageUtil.getTimeDescription(pageContext, _DURATIONS[i] * 1000) %>" value="<%= _DURATIONS[i] %>" />
 
 						<%
 						}

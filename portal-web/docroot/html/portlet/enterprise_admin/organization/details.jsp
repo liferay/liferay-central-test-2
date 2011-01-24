@@ -34,7 +34,6 @@ if (parentOrganizationId <= 0) {
 String type = BeanParamUtil.getString(organization, request, "type", PropsValues.ORGANIZATIONS_TYPES[0]);
 long regionId = BeanParamUtil.getLong(organization, request, "regionId");
 long countryId = BeanParamUtil.getLong(organization, request, "countryId");
-int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 
 boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 

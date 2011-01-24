@@ -29,22 +29,11 @@ IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
 long folderId = BeanParamUtil.getLong(image, request, "folderId");
-String name = BeanParamUtil.getString(image, request, "name");
-
-String extension = StringPool.BLANK;
-
-if (image != null) {
-	extension = StringPool.PERIOD + image.getImageType();
-}
-
-String assetTagNames = ParamUtil.getString(request, "assetTagNames");
 
 IGFolder folder = null;
-Image largeImage = null;
 
 if (image != null) {
 	folder = image.getFolder();
-	largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 }
 %>
 

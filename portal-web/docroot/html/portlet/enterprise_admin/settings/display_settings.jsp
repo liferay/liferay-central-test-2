@@ -24,14 +24,14 @@ String[] languageIds = LocaleUtil.toLanguageIds(locales);
 
 String timeZoneId = ParamUtil.getString(request, "timeZoneId", user2.getTimeZoneId());
 String languageId = ParamUtil.getString(request, "languageId", user2.getLanguageId());
-String availableLocales = ParamUtil.getString(request, "settings--" + PropsKeys.LOCALES + "--", StringUtil.merge(languageIds));
+String availableLocales = StringUtil.merge(languageIds);
 
-boolean companySecurityCommunityLogo = ParamUtil.getBoolean(request, "settings--" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + "--", company.isCommunityLogo());
+boolean companySecurityCommunityLogo = company.isCommunityLogo();
 boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 
-String defaultRegularThemeId = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_REGULAR_THEME_ID + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_REGULAR_THEME_ID, PropsValues.DEFAULT_REGULAR_THEME_ID));
-String defaultWapThemeId = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_WAP_THEME_ID + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_WAP_THEME_ID, PropsValues.DEFAULT_WAP_THEME_ID));
-String defaultControlPanelThemeId = ParamUtil.getString(request, "settings--" + PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID));
+String defaultRegularThemeId = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_REGULAR_THEME_ID, PropsValues.DEFAULT_REGULAR_THEME_ID);
+String defaultWapThemeId = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_WAP_THEME_ID, PropsValues.DEFAULT_WAP_THEME_ID);
+String defaultControlPanelThemeId = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID, PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
 %>
 
 <h3><liferay-ui:message key="language-and-time-zone" /></h3>

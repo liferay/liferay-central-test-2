@@ -17,52 +17,52 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String companySecurityAuthType = ParamUtil.getString(request, "settings--" + PropsKeys.COMPANY_SECURITY_AUTH_TYPE + "--", company.getAuthType());
-boolean companySecurityAutoLogin = ParamUtil.getBoolean(request, "settings--" + PropsKeys.COMPANY_SECURITY_AUTO_LOGIN + "--", company.isAutoLogin());
-boolean companySecuritySendPassword = ParamUtil.getBoolean(request, "settings--" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD + "--", company.isSendPassword());
-boolean companySecuritySendPasswordResetLink = ParamUtil.getBoolean(request, "settings--" + PropsKeys.COMPANY_SECURITY_SEND_PASSWORD_RESET_LINK + "--", company.isSendPasswordResetLink());
-boolean companySecurityStrangers = ParamUtil.getBoolean(request, "settings--" + PropsKeys.COMPANY_SECURITY_STRANGERS + "--", company.isStrangers());
-boolean companySecurityStrangersWithMx = ParamUtil.getBoolean(request, "settings--" + PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX + "--", company.isStrangersWithMx());
-boolean companySecurityStrangersVerify = ParamUtil.getBoolean(request, "settings--" + PropsKeys.COMPANY_SECURITY_STRANGERS_VERIFY + "--", company.isStrangersVerify());
+String companySecurityAuthType = company.getAuthType();
+boolean companySecurityAutoLogin = company.isAutoLogin();
+boolean companySecuritySendPassword = company.isSendPassword();
+boolean companySecuritySendPasswordResetLink = company.isSendPasswordResetLink();
+boolean companySecurityStrangers = company.isStrangers();
+boolean companySecurityStrangersWithMx = company.isStrangersWithMx();
+boolean companySecurityStrangersVerify = company.isStrangersVerify();
 
-boolean casAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.CAS_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_AUTH_ENABLED, PropsValues.CAS_AUTH_ENABLED));
-boolean casImportFromLdap = ParamUtil.getBoolean(request, "settings--" + PropsKeys.CAS_IMPORT_FROM_LDAP + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_IMPORT_FROM_LDAP, PropsValues.CAS_IMPORT_FROM_LDAP));
-String casLoginUrl = ParamUtil.getString(request, "settings--" + PropsKeys.CAS_LOGIN_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGIN_URL, PropsValues.CAS_LOGIN_URL));
-String casLogoutUrl = ParamUtil.getString(request, "settings--" + PropsKeys.CAS_LOGOUT_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGOUT_URL, PropsValues.CAS_LOGOUT_URL));
-String casServerName = ParamUtil.getString(request, "settings--" + PropsKeys.CAS_SERVER_NAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_NAME, PropsValues.CAS_SERVER_NAME));
-String casServerUrl = ParamUtil.getString(request, "settings--" + PropsKeys.CAS_SERVER_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_URL, PropsValues.CAS_SERVER_URL));
-String casServiceUrl = ParamUtil.getString(request, "settings--" + PropsKeys.CAS_SERVICE_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL, PropsValues.CAS_SERVICE_URL));
+boolean casAuthEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_AUTH_ENABLED, PropsValues.CAS_AUTH_ENABLED);
+boolean casImportFromLdap = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.CAS_IMPORT_FROM_LDAP, PropsValues.CAS_IMPORT_FROM_LDAP);
+String casLoginUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGIN_URL, PropsValues.CAS_LOGIN_URL);
+String casLogoutUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_LOGOUT_URL, PropsValues.CAS_LOGOUT_URL);
+String casServerName = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_NAME, PropsValues.CAS_SERVER_NAME);
+String casServerUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_URL, PropsValues.CAS_SERVER_URL);
+String casServiceUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL, PropsValues.CAS_SERVICE_URL);
 
-boolean facebookConnectAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_AUTH_ENABLED + "--", FacebookConnectUtil.isEnabled(company.getCompanyId()));
-String facebookConnectAppId = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_APP_ID + "--", FacebookConnectUtil.getAppId(company.getCompanyId()));
-String facebookConnectAppSecret = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_APP_SECRET + "--", FacebookConnectUtil.getAppSecret(company.getCompanyId()));
-String facebookConnectGraphURL = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_GRAPH_URL + "--", FacebookConnectUtil.getGraphURL(company.getCompanyId()));
-String facebookConnectOauthAuthURL = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_OAUTH_AUTH_URL + "--", FacebookConnectUtil.getAuthURL(company.getCompanyId()));
-String facebookConnectOauthTokenURL = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_OAUTH_TOKEN_URL + "--", FacebookConnectUtil.getAccessTokenURL(company.getCompanyId()));
-String facebookConnectRedirectURL = ParamUtil.getString(request, "settings--" + PropsKeys.FACEBOOK_CONNECT_OAUTH_REDIRECT_URL + "--", FacebookConnectUtil.getRedirectURL(company.getCompanyId()));
+boolean facebookConnectAuthEnabled = FacebookConnectUtil.isEnabled(company.getCompanyId());
+String facebookConnectAppId = FacebookConnectUtil.getAppId(company.getCompanyId());
+String facebookConnectAppSecret = FacebookConnectUtil.getAppSecret(company.getCompanyId());
+String facebookConnectGraphURL = FacebookConnectUtil.getGraphURL(company.getCompanyId());
+String facebookConnectOauthAuthURL = FacebookConnectUtil.getAuthURL(company.getCompanyId());
+String facebookConnectOauthTokenURL = FacebookConnectUtil.getAccessTokenURL(company.getCompanyId());
+String facebookConnectRedirectURL = FacebookConnectUtil.getRedirectURL(company.getCompanyId());
 
-boolean ntlmAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.NTLM_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED));
-String ntlmDomainController = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_DOMAIN_CONTROLLER + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER, PropsValues.NTLM_DOMAIN_CONTROLLER));
+boolean ntlmAuthEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED);
+String ntlmDomainController = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER, PropsValues.NTLM_DOMAIN_CONTROLLER);
 String ntlmDomainControllerName = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN_CONTROLLER_NAME, PropsValues.NTLM_DOMAIN_CONTROLLER_NAME));
-String ntlmDomain = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_DOMAIN + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN));
-String ntlmServiceAccount = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_SERVICE_ACCOUNT + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_SERVICE_ACCOUNT, PropsValues.NTLM_SERVICE_ACCOUNT));
-String ntlmServicePassword = ParamUtil.getString(request, "settings--" + PropsKeys.NTLM_SERVICE_PASSWORD + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_SERVICE_PASSWORD, PropsValues.NTLM_SERVICE_PASSWORD));
+String ntlmDomain = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_DOMAIN, PropsValues.NTLM_DOMAIN);
+String ntlmServiceAccount = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_SERVICE_ACCOUNT, PropsValues.NTLM_SERVICE_ACCOUNT);
+String ntlmServicePassword = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.NTLM_SERVICE_PASSWORD, PropsValues.NTLM_SERVICE_PASSWORD);
 
-boolean openIdAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.OPEN_ID_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_ID_AUTH_ENABLED, PropsValues.OPEN_ID_AUTH_ENABLED));
+boolean openIdAuthEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_ID_AUTH_ENABLED, PropsValues.OPEN_ID_AUTH_ENABLED);
 
-boolean openSsoAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.OPEN_SSO_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_SSO_AUTH_ENABLED, PropsValues.OPEN_SSO_AUTH_ENABLED));
-boolean openSsoLdapImportEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.OPEN_SSO_LDAP_IMPORT_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_SSO_LDAP_IMPORT_ENABLED, PropsValues.OPEN_SSO_LDAP_IMPORT_ENABLED));
-String openSsoLoginUrl = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_LOGIN_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LOGIN_URL, PropsValues.OPEN_SSO_LOGIN_URL));
-String openSsoLogoutUrl = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_LOGOUT_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LOGOUT_URL, PropsValues.OPEN_SSO_LOGOUT_URL));
-String openSsoServiceUrl = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_SERVICE_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_SERVICE_URL, PropsValues.OPEN_SSO_SERVICE_URL));
-String openSsoScreenNameAttr = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR, PropsValues.OPEN_SSO_SCREEN_NAME_ATTR));
-String openSsoEmailAddressAttr = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR, PropsValues.OPEN_SSO_EMAIL_ADDRESS_ATTR));
-String openSsoFirstNameAttr = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_FIRST_NAME_ATTR + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_FIRST_NAME_ATTR, PropsValues.OPEN_SSO_FIRST_NAME_ATTR));
-String openSsoLastNameAttr = ParamUtil.getString(request, "settings--" + PropsKeys.OPEN_SSO_LAST_NAME_ATTR + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LAST_NAME_ATTR, PropsValues.OPEN_SSO_LAST_NAME_ATTR));
+boolean openSsoAuthEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_SSO_AUTH_ENABLED, PropsValues.OPEN_SSO_AUTH_ENABLED);
+boolean openSsoLdapImportEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.OPEN_SSO_LDAP_IMPORT_ENABLED, PropsValues.OPEN_SSO_LDAP_IMPORT_ENABLED);
+String openSsoLoginUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LOGIN_URL, PropsValues.OPEN_SSO_LOGIN_URL);
+String openSsoLogoutUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LOGOUT_URL, PropsValues.OPEN_SSO_LOGOUT_URL);
+String openSsoServiceUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_SERVICE_URL, PropsValues.OPEN_SSO_SERVICE_URL);
+String openSsoScreenNameAttr = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_SCREEN_NAME_ATTR, PropsValues.OPEN_SSO_SCREEN_NAME_ATTR);
+String openSsoEmailAddressAttr = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR, PropsValues.OPEN_SSO_EMAIL_ADDRESS_ATTR);
+String openSsoFirstNameAttr = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_FIRST_NAME_ATTR, PropsValues.OPEN_SSO_FIRST_NAME_ATTR);
+String openSsoLastNameAttr = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.OPEN_SSO_LAST_NAME_ATTR, PropsValues.OPEN_SSO_LAST_NAME_ATTR);
 
-boolean siteminderAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.SITEMINDER_AUTH_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SITEMINDER_AUTH_ENABLED, PropsValues.SITEMINDER_AUTH_ENABLED));
-boolean siteminderImportFromLdap = ParamUtil.getBoolean(request, "settings--" + PropsKeys.SITEMINDER_IMPORT_FROM_LDAP + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SITEMINDER_IMPORT_FROM_LDAP, PropsValues.SITEMINDER_IMPORT_FROM_LDAP));
-String siteminderUserHeader = ParamUtil.getString(request, "settings--" + PropsKeys.SITEMINDER_USER_HEADER + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.SITEMINDER_USER_HEADER, PropsValues.SITEMINDER_USER_HEADER));
+boolean siteminderAuthEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SITEMINDER_AUTH_ENABLED, PropsValues.SITEMINDER_AUTH_ENABLED);
+boolean siteminderImportFromLdap = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.SITEMINDER_IMPORT_FROM_LDAP, PropsValues.SITEMINDER_IMPORT_FROM_LDAP);
+String siteminderUserHeader = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.SITEMINDER_USER_HEADER, PropsValues.SITEMINDER_USER_HEADER);
 %>
 
 <h3><liferay-ui:message key="authentication" /></h3>

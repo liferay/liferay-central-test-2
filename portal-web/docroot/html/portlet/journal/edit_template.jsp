@@ -69,9 +69,6 @@ boolean cacheable = BeanParamUtil.getBoolean(template, request, "cacheable");
 if (template == null) {
 	cacheable = true;
 }
-
-boolean smallImage = BeanParamUtil.getBoolean(template, request, "smallImage");
-String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL");
 %>
 
 <aui:form method="post" name="fm2">

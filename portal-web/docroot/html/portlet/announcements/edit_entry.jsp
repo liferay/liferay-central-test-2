@@ -23,8 +23,6 @@ AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(WebKeys.ANNO
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
-String type = BeanParamUtil.getString(entry, request, "type");
-
 Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
 if (entry != null) {
@@ -42,8 +40,6 @@ if (entry != null) {
 		expirationDate.setTime(entry.getExpirationDate());
 	}
 }
-
-int priority = BeanParamUtil.getInteger(entry, request, "priority");
 %>
 
 <aui:form method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEntry();" %>'>
@@ -111,7 +107,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 			for (String curType : AnnouncementsEntryConstants.TYPES) {
 			%>
 
-				<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
+				<aui:option label="<%= curType %>" />
 
 			<%
 			}
@@ -120,8 +116,8 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 		</aui:select>
 
 		<aui:select name="priority">
-			<aui:option label="normal" selected="<%= priority == 0 %>" value="0" />
-			<aui:option label="important" selected="<%= priority == 1 %>" value="1" />
+			<aui:option label="normal" value="0" />
+			<aui:option label="important" value="1" />
 		</aui:select>
 
 		<aui:input name="displayDate" value="<%= displayDate %>" />

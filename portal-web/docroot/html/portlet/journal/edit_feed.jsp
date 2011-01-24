@@ -25,7 +25,6 @@ long groupId = BeanParamUtil.getLong(feed, request, "groupId", scopeGroupId);
 
 String feedId = BeanParamUtil.getString(feed, request, "feedId");
 String newFeedId = ParamUtil.getString(request, "newFeedId");
-String type = BeanParamUtil.getString(feed, request, "type");
 
 String structureId = BeanParamUtil.getString(feed, request, "structureId");
 
@@ -79,9 +78,6 @@ if (Validator.isNull(contentField) || ((structure == null) && !contentField.equa
 
 String feedType = BeanParamUtil.getString(feed, request, "feedType", RSSUtil.DEFAULT_TYPE);
 double feedVersion = BeanParamUtil.getDouble(feed, request, "feedVersion", RSSUtil.DEFAULT_VERSION);
-
-String orderByCol = BeanParamUtil.getString(feed, request, "orderByCol");
-String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 
 ResourceURL feedURL = null;
 
@@ -177,7 +173,7 @@ if (feed != null) {
 					for (String curType : JournalArticleConstants.TYPES) {
 					%>
 
-						<aui:option label="<%= curType %>" selected="<%= type.equals(curType) %>" />
+						<aui:option label="<%= curType %>" />
 
 					<%
 					}
@@ -310,58 +306,37 @@ if (feed != null) {
 				<aui:select label="feed-type" name="feedTypeAndVersion">
 
 					<%
-					StringBundler sb = new StringBundler();
-
 					for (int i = 4; i < RSSUtil.RSS_VERSIONS.length; i++) {
-						sb.append("<option ");
+					%>
 
-						if (feedType.equals(RSSUtil.RSS) && (feedVersion == RSSUtil.RSS_VERSIONS[i])) {
-							sb.append("selected ");
-						}
+						<aui:option label="<%= LanguageUtil.get(pageContext, RSSUtil.RSS) + StringPool.SPACE + RSSUtil.RSS_VERSIONS[i] %>" selected="<%= feedType.equals(RSSUtil.RSS) && (feedVersion == RSSUtil.RSS_VERSIONS[i]) %>" value="<%= RSSUtil.RSS + StringPool.COLON + RSSUtil.RSS_VERSIONS[i]%>" />
 
-						sb.append("value=\"");
-						sb.append(RSSUtil.RSS);
-						sb.append(":");
-						sb.append(RSSUtil.RSS_VERSIONS[i]);
-						sb.append("\">");
-						sb.append(LanguageUtil.get(pageContext, RSSUtil.RSS));
-						sb.append(" ");
-						sb.append(RSSUtil.RSS_VERSIONS[i]);
-						sb.append("</option>");
-					}
-
-					for (int i = 1; i < RSSUtil.ATOM_VERSIONS.length; i++) {
-						sb.append("<option ");
-
-						if (feedType.equals(RSSUtil.ATOM) && (feedVersion == RSSUtil.ATOM_VERSIONS[i])) {
-							sb.append("selected ");
-						}
-
-						sb.append("value=\"");
-						sb.append(RSSUtil.ATOM);
-						sb.append(":");
-						sb.append(RSSUtil.ATOM_VERSIONS[i]);
-						sb.append("\">");
-						sb.append(LanguageUtil.get(pageContext, RSSUtil.ATOM));
-						sb.append(" ");
-						sb.append(RSSUtil.ATOM_VERSIONS[i]);
-						sb.append("</option>");
+					<%
 					}
 					%>
 
-					<%= sb.toString() %>
+					<%
+					for (int i = 1; i < RSSUtil.ATOM_VERSIONS.length; i++) {
+					%>
+
+						<aui:option label="<%= LanguageUtil.get(pageContext, RSSUtil.ATOM) + StringPool.SPACE + RSSUtil.ATOM_VERSIONS[i] %>" selected="<%= feedType.equals(RSSUtil.ATOM) && (feedVersion == RSSUtil.ATOM_VERSIONS[i]) %>" value="<%= RSSUtil.ATOM + StringPool.COLON + RSSUtil.ATOM_VERSIONS[i]%>" />
+
+					<%
+					}
+					%>
+
 				</aui:select>
 
 				<aui:input label="maximum-items-to-display" name="delta" value="10" />
 
 				<aui:select label="order-by-column" name="orderByCol">
-					<aui:option label="modified-date" selected='<%=orderByCol.equals("modified-date") %>' />
-					<aui:option label="display-date" selected='<%= orderByCol.equals("display-date") %>' />
+					<aui:option label="modified-date" />
+					<aui:option label="display-date" />
 				</aui:select>
 
 				<aui:select name="orderByType">
-					<aui:option label="ascending" selected='<%= orderByType.equals("asc") %>' value="asc" />
-					<aui:option label="descending" selected='<%= orderByType.equals("desc") %>' value="desc" />
+					<aui:option label="ascending" value="asc" />
+					<aui:option label="descending" value="desc" />
 				</aui:select>
 			</aui:fieldset>
 		</liferay-ui:panel>

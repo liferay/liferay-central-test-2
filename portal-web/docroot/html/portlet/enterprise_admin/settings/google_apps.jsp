@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String googleAppsUsername = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_USERNAME + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_USERNAME));
+String googleAppsUsername = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_USERNAME);
 
-String googleAppsPassword = ParamUtil.getString(request, "settings--" + PropsKeys.GOOGLE_APPS_PASSWORD + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_PASSWORD));
+String googleAppsPassword = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.GOOGLE_APPS_PASSWORD);
 
 if (Validator.isNotNull(googleAppsPassword)) {
 	googleAppsPassword = Portal.TEMP_OBFUSCATION_VALUE;

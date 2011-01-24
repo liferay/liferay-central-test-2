@@ -58,7 +58,6 @@ endDate.set(Calendar.SECOND, 59);
 
 int durationHour = BeanParamUtil.getInteger(event, request, "durationHour", 1);
 int durationMinute = BeanParamUtil.getInteger(event, request, "durationMinute");
-String type = BeanParamUtil.getString(event, request, "type");
 boolean repeating = BeanParamUtil.getBoolean(event, request, "repeating");
 
 Recurrence recurrence = null;
@@ -169,7 +168,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			for (int i = 0; i < CalEventConstants.TYPES.length; i++) {
 			%>
 
-				<aui:option label="<%= CalEventConstants.TYPES[i] %>" selected="<%= type.equals(CalEventConstants.TYPES[i]) %>" />
+				<aui:option label="<%= CalEventConstants.TYPES[i] %>" />
 
 			<%
 			}

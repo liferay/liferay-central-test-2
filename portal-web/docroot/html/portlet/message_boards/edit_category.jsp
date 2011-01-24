@@ -36,8 +36,6 @@ try {
 }
 catch (NoSuchMailingListException nsmle) {
 }
-
-boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "active");
 %>
 
 <liferay-ui:header
@@ -146,7 +144,7 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 
 				<aui:model-context bean="<%= mailingList %>" model="<%= MBMailingList.class %>" />
 
-				<aui:input inlineLabel="left" label="active" name="mailingListActive" type="checkbox" value="<%= mailingListActive %>" />
+				<aui:input label="active" name="mailingListActive" type="checkbox" />
 
 				<div id="<portlet:namespace />mailingListSettings">
 					<aui:input name="emailAddress" />

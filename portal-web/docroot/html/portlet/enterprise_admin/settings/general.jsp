@@ -25,8 +25,8 @@ try {
 catch (Exception e) {
 }
 
-String defaultLandingPagePath = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_LANDING_PAGE_PATH + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH, PropsValues.DEFAULT_LANDING_PAGE_PATH));
-String defaultLogoutPagePath = ParamUtil.getString(request, "settings--" + PropsKeys.DEFAULT_LOGOUT_PAGE_PATH + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LOGOUT_PAGE_PATH, PropsValues.DEFAULT_LOGOUT_PAGE_PATH));
+String defaultLandingPagePath = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LANDING_PAGE_PATH, PropsValues.DEFAULT_LANDING_PAGE_PATH);
+String defaultLogoutPagePath = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.DEFAULT_LOGOUT_PAGE_PATH, PropsValues.DEFAULT_LOGOUT_PAGE_PATH);
 %>
 
 <liferay-ui:error-marker key="errorSection" value="general" />

@@ -17,13 +17,13 @@
 <%
 String authenticationURL = currentURL + "#_LFR_FN_authentication";
 
-boolean ldapAuthEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.LDAP_AUTH_ENABLED + "--", AuthSettingsUtil.isLDAPAuthEnabled(company.getCompanyId()));
-boolean ldapAuthRequired = ParamUtil.getBoolean(request, "settings--" + PropsKeys.LDAP_AUTH_REQUIRED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_AUTH_REQUIRED));
-boolean ldapImportEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.LDAP_IMPORT_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ENABLED, PropsValues.LDAP_IMPORT_ENABLED));
-boolean ldapImportOnStartup = ParamUtil.getBoolean(request, "settings--" + PropsKeys.LDAP_IMPORT_ON_STARTUP + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ON_STARTUP));
-boolean ldapExportEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.LDAP_EXPORT_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_EXPORT_ENABLED, PropsValues.LDAP_EXPORT_ENABLED));
-boolean ldapPasswordPolicyEnabled = ParamUtil.getBoolean(request, "settings--" + PropsKeys.LDAP_PASSWORD_POLICY_ENABLED + "--", PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_PASSWORD_POLICY_ENABLED));
-long[] ldapServerIds = StringUtil.split(ParamUtil.getString(request, "settings--ldap.server.ids--", PrefsPropsUtil.getString(company.getCompanyId(), "ldap.server.ids")), 0L);
+boolean ldapAuthEnabled = AuthSettingsUtil.isLDAPAuthEnabled(company.getCompanyId());
+boolean ldapAuthRequired = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_AUTH_REQUIRED);
+boolean ldapImportEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ENABLED, PropsValues.LDAP_IMPORT_ENABLED);
+boolean ldapImportOnStartup = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_IMPORT_ON_STARTUP);
+boolean ldapExportEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_EXPORT_ENABLED, PropsValues.LDAP_EXPORT_ENABLED);
+boolean ldapPasswordPolicyEnabled = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.LDAP_PASSWORD_POLICY_ENABLED);
+long[] ldapServerIds = StringUtil.split(PrefsPropsUtil.getString(company.getCompanyId(), "ldap.server.ids"), 0L);
 
 if (ldapAuthEnabled && (ldapServerIds.length <= 0) && Validator.isNull(PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.LDAP_BASE_PROVIDER_URL + ".0", StringPool.BLANK))) {
 	String ldapServerName = themeDisplay.translate("default");
