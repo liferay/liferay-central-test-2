@@ -671,10 +671,10 @@ AUI().add(
 									autoLoad: false,
 									dataType: 'json',
 									on: {
-										success: function(event, id, obj) {
+										success: function(event, id, obj, args) {
 											var response = this.get('responseData');
 
-											instance._onCategoryMoveSuccess(response);
+											instance._onCategoryMoveSuccess(response, args.success);
 										},
 										failure: function(event, id, obj) {
 											instance._onCategoryMoveFailure(obj);
@@ -1190,7 +1190,7 @@ AUI().add(
 						instance._sendMessage(MESSAGE_TYPE_ERROR, Liferay.Language.get('your-request-failed-to-complete'));
 					},
 
-					_onCategoryMoveSuccess: function(response) {
+					_onCategoryMoveSuccess: function(response, vocabularyId) {
 						var instance = this;
 
 						var exception = response.exception;
@@ -1198,6 +1198,8 @@ AUI().add(
 						if (!exception) {
 							instance._closeEditSection();
 							instance._sendMessage(MESSAGE_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
+
+							instance._selectVocabulary(vocabularyId);
 						}
 						else {
 							var errorKey;
@@ -1283,8 +1285,6 @@ AUI().add(
 						var fromCategoryId = instance._getCategoryId(node);
 
 						instance._merge(fromCategoryId, 0, vocabularyId);
-
-						instance._selectVocabulary(vocabularyId);
 
 						dropNode.removeClass(CSS_ACTIVE_AREA);
 					},
@@ -1823,6 +1823,9 @@ AUI().add(
 
 						ioCategoryUpdate.set('data', data);
 						ioCategoryUpdate.set('uri', moveURL.toString());
+						ioCategoryUpdate.set('arguments', {
+						   success: vocabularyId
+						});
 
 						ioCategoryUpdate.start();
 					},
