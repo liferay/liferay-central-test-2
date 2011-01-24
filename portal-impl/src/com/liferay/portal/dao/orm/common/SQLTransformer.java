@@ -46,6 +46,9 @@ public class SQLTransformer {
 		else if (dbType.equals(DB.TYPE_MYSQL)) {
 			_vendorMySQL = true;
 		}
+		else if (db.getType().equals(DB.TYPE_ORACLE)) {
+			_vendorOracle = true;
+		}
 		else if (dbType.equals(DB.TYPE_POSTGRESQL)) {
 			_vendorPostgreSQL = true;
 		}
@@ -123,6 +126,9 @@ public class SQLTransformer {
 		if (_vendorMySQL) {
 			return matcher.replaceAll("$1 DIV $2");
 		}
+		else if (_vendorOracle) {
+			return matcher.replaceAll("TRUNC($1 / $2)");
+		}
 		else {
 			return matcher.replaceAll("$1 / $2");
 		}
@@ -192,6 +198,7 @@ public class SQLTransformer {
 	private boolean _vendorDB2;
 	private boolean _vendorDerby;
 	private boolean _vendorMySQL;
+	private boolean _vendorOracle;
 	private boolean _vendorPostgreSQL;
 	private boolean _vendorSQLServer;
 	private boolean _vendorSybase;
