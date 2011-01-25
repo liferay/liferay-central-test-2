@@ -18,12 +18,10 @@
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%@ page import="com.liferay.portal.kernel.log.Log" %>
-<%@ page import="com.liferay.portal.kernel.log.LogFactoryUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
 
 <%
-String path = (String)request.getAttribute("path");
+String path = (String)request.getAttribute(WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_PATH);
 String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
 %>
 

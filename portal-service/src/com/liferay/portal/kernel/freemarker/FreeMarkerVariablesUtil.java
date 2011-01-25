@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.freemarker;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="FreeMarkerVariablesUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class FreeMarkerVariablesUtil {

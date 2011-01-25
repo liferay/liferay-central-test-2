@@ -253,11 +253,7 @@ public class BaseDeployer implements Deployer {
 			String jarName = jarFullName.substring(
 				jarFullName.lastIndexOf("/") + 1, jarFullName.length());
 
-			if (jarName.endsWith(".jsp")) {
-				FileUtil.copyFile(
-					jarFullName, srcFile + "/WEB-INF/jsp/" + jarName, true);
-			}
-			else if ((!appServerType.equals(ServerDetector.TOMCAT_ID)) ||
+			if ((!appServerType.equals(ServerDetector.TOMCAT_ID)) ||
 				(appServerType.equals(ServerDetector.TOMCAT_ID) &&
 					!jarFullName.equals("util-java.jar"))) {
 

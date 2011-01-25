@@ -221,22 +221,22 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		// Portal util
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			velocityContext, restrictedVariables, "portalUtil",
 			PortalUtil.getPortal());
-		_insertHelperUtility(
+		insertHelperUtility(
 			velocityContext, restrictedVariables, "portal",
 			PortalUtil.getPortal());
 
 		// Prefs props util
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			velocityContext, restrictedVariables, "prefsPropsUtil",
 			PrefsPropsUtil_IW.getInstance());
 
 		// Props util
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			velocityContext, restrictedVariables, "propsUtil",
 			PropsUtil_IW.getInstance());
 
@@ -247,7 +247,7 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		// Portlet preferences
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			velocityContext, restrictedVariables, "velocityPortletPreferences",
 			new VelocityPortletPreferences());
 
@@ -265,13 +265,13 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		// Service locator
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			velocityContext, restrictedVariables, "serviceLocator",
 			serviceLocator);
 
 		// Session clicks
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			velocityContext, restrictedVariables, "sessionClicks",
 			SessionClicks_IW.getInstance());
 
@@ -294,7 +294,7 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		// Util locator
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			velocityContext, restrictedVariables, "utilLocator", utilLocator);
 
 		// Unicode formatter
@@ -408,8 +408,6 @@ public class VelocityVariablesImpl implements VelocityVariables {
 			WebKeys.THEME_DISPLAY);
 
 		if (themeDisplay != null) {
-			Theme theme = themeDisplay.getTheme();
-
 			Layout layout = themeDisplay.getLayout();
 			List<Layout> layouts = themeDisplay.getLayouts();
 
@@ -489,7 +487,7 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		// Tiles attributes
 
-		_insertTilesVariables(velocityContext, request);
+		insertTilesVariables(velocityContext, request);
 
 		// Page title and subtitle
 
@@ -515,7 +513,7 @@ public class VelocityVariablesImpl implements VelocityVariables {
 		}
 	}
 
-	private static void _insertHelperUtility(
+	protected void insertHelperUtility(
 		VelocityContext velocityContext, String[] restrictedVariables,
 		String key, Object value) {
 
@@ -524,7 +522,7 @@ public class VelocityVariablesImpl implements VelocityVariables {
 		}
 	}
 
-	private static void _insertTilesVariables(
+	protected void insertTilesVariables(
 		VelocityContext velocityContext, HttpServletRequest request) {
 
 		ComponentContext componentContext =
@@ -539,16 +537,22 @@ public class VelocityVariablesImpl implements VelocityVariables {
 			WebKeys.THEME_DISPLAY);
 
 		String tilesTitle = (String)componentContext.getAttribute("title");
+
+		themeDisplay.setTilesTitle(tilesTitle);
+
+		velocityContext.put("tilesTitle", tilesTitle);
+
 		String tilesContent = (String)componentContext.getAttribute("content");
+
+		themeDisplay.setTilesContent(tilesContent);
+
+		velocityContext.put("tilesContent", tilesContent);
+
 		boolean tilesSelectable = GetterUtil.getBoolean(
 			(String)componentContext.getAttribute("selectable"));
 
-		themeDisplay.setTilesTitle(tilesTitle);
-		themeDisplay.setTilesContent(tilesContent);
 		themeDisplay.setTilesSelectable(tilesSelectable);
 
-		velocityContext.put("tilesTitle", tilesTitle);
-		velocityContext.put("tilesContent", tilesContent);
 		velocityContext.put("tilesSelectable", tilesSelectable);
 	}
 

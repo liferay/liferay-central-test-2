@@ -93,6 +93,10 @@ public interface WebKeys {
 
 	public static final String SEARCH_SEARCH_RESULTS = "SEARCH_SEARCH_RESULTS";
 
+	public static final String SERVLET_CONTEXT_INCLUDE_FILTER_PATH = "SERVLET_CONTEXT_INCLUDE_FILTER_PATH"; 
+
+	public static final String SERVLET_CONTEXT_INCLUDE_FILTER_THEME = "SERVLET_CONTEXT_INCLUDE_FILTER_THEME"; 
+
 	public static final String SERVLET_PATH = "SERVLET_PATH";
 
 	public static final String THEME = "THEME";

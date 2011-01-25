@@ -34,6 +34,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
@@ -318,16 +319,19 @@ public class MVCPortlet extends LiferayPortlet {
 
 		checkJSPPath(path);
 
+		PortletContext portletContext = getPortletContext();
+
 		PortletRequestDispatcher portletRequestDispatcher = null;
 
 		if (path.endsWith(".jsp")) {
-			portletRequest.setAttribute("path", path);
+			portletRequest.setAttribute(
+				WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_PATH, path);
 
-			portletRequestDispatcher = getPortletContext().getRequestDispatcher(
+			portletRequestDispatcher = portletContext.getRequestDispatcher(
 				"/WEB-INF/jsp/_servlet_context_include.jsp");
 		}
 		else {
-			portletRequestDispatcher = getPortletContext().getRequestDispatcher(
+			portletRequestDispatcher = portletContext.getRequestDispatcher(
 				path);
 		}
 

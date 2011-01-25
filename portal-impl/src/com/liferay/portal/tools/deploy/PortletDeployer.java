@@ -110,6 +110,9 @@ public class PortletDeployer extends BaseDeployer {
 		if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
 			copyDependencyXml("context.xml", srcFile + "/META-INF");
 		}
+
+		copyDependencyXml(
+			"_servlet_context_include.jsp", srcFile + "/WEB-INF/jsp");
 	}
 
 	public String getExtraContent(
@@ -172,7 +175,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		sb.append(getSpeedFiltersContent(srcFile));
 
-		// Servlet Context Include filters
+		// Servlet context include filters
 
 		sb.append(getServletContextIncludeFiltersContent(srcFile));
 

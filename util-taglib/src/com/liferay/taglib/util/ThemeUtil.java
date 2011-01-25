@@ -14,7 +14,6 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.freemarker.FreeMarkerVariablesUtil;
@@ -39,6 +38,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.ext.servlet.HttpRequestHashModel;
 import freemarker.ext.servlet.ServletContextHashModel;
+
 import freemarker.template.ObjectWrapper;
 
 import java.io.Writer;
@@ -383,9 +383,7 @@ public class ThemeUtil {
 		}
 	}
 
-	public static void insertTilesVariables(HttpServletRequest request)
-		throws SystemException {
-
+	public static void insertTilesVariables(HttpServletRequest request) {
 		ComponentContext componentContext =
 			(ComponentContext)request.getAttribute(
 				ComponentConstants.COMPONENT_CONTEXT);

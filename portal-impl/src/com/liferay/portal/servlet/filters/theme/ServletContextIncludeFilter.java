@@ -29,94 +29,114 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="ServletContextIncludeFilter.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ServletContextIncludeFilter extends BasePortalFilter {
 
-	protected void processFilter(
-			HttpServletRequest request, HttpServletResponse response,
-			FilterChain filterChain)
-		throws Exception {
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
 
-		String path = request.getRequestURI();
+		try {
+			if (request.getAttribute(
+					WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_THEME) != null) {
 
+				return true;
+			}
+
+			Theme theme = getTheme(request);
+
+			if (theme != null) {
+				request.setAttribute(
+					WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_THEME, theme);
+
+				return true;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return false;
+	}
+
+	protected Theme getTheme(HttpServletRequest request) throws Exception {
 		String themeId = ParamUtil.getString(request, "themeId");
+
+		if (Validator.isNotNull(themeId)) {
+			long companyId = PortalUtil.getCompanyId(request);
+
+			return ThemeLocalServiceUtil.getTheme(companyId, themeId, false);
+		}
+
 		long plid = ParamUtil.getLong(request, "plid");
 
 		if (plid <= 0) {
 			plid = ParamUtil.getLong(request, "p_l_id");
 		}
 
-		Theme theme = null;
-
-		if (Validator.isNotNull(themeId)) {
-			long companyId = PortalUtil.getCompanyId(request);
-
-			theme = ThemeLocalServiceUtil.getTheme(
-				companyId, themeId, false);
-		}
-		else if (plid > 0) {
+		if (plid > 0) {
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-			theme = layout.getTheme();
-			themeId = theme.getThemeId();
-		}
-		else if (request.getAttribute(WebKeys.THEME) != null) {
-			theme = (Theme)request.getAttribute(WebKeys.THEME);
-			themeId = theme.getThemeId();
-		}
-		else if (request.getAttribute(WebKeys.THEME_DISPLAY) != null) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			theme = themeDisplay.getTheme();
-			themeId = theme.getThemeId();
-		}
-		else if (request.getAttribute(
-					WebKeys.VIRTUAL_HOST_LAYOUT_SET) != null) {
-
-			LayoutSet layoutSet = (LayoutSet)request.getAttribute(
-				WebKeys.VIRTUAL_HOST_LAYOUT_SET);
-
-			theme = layoutSet.getTheme();
-			themeId = theme.getThemeId();
+			return layout.getTheme();
 		}
 
-		_log.debug("{themeId: " + themeId + ", path: " + path + "}");
+		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
-		if (theme == null) {
-			processFilter(
-				ServletContextIncludeFilter.class, request, response,
-				filterChain);
+		if (theme != null) {
+			return theme;
 		}
-		else {
-			ServletContext servletContext =
-				getFilterConfig().getServletContext();
 
-			request.setAttribute(WebKeys.THEME, theme);
-			request.setAttribute("path", path);
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-			RequestDispatcher requestDispatcher =
-				servletContext.getRequestDispatcher(_WRAPPER_PATH);
-
-			if (requestDispatcher != null) {
-				requestDispatcher.include(request, response);
-			}
+		if (themeDisplay != null) {
+			return themeDisplay.getTheme();
 		}
+
+		LayoutSet layoutSet = (LayoutSet)request.getAttribute(
+			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
+
+		if (layoutSet != null) {
+			return layoutSet.getTheme();
+		}
+
+		return null;
+	}
+
+	protected void processFilter(
+			HttpServletRequest request, HttpServletResponse response,
+			FilterChain filterChain)
+		throws Exception {
+
+		FilterConfig filterConfig = getFilterConfig();
+
+		ServletContext servletContext = filterConfig.getServletContext();
+
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(
+				"/WEB-INF/jsp/_servlet_context_include.jsp");
+
+		String path = request.getRequestURI();
+
+		request.setAttribute(
+			WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_PATH, path);
+
+		Theme theme = (Theme)request.getAttribute(
+			WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_THEME);
+
+		request.setAttribute(WebKeys.THEME, theme);
+
+		requestDispatcher.include(request, response);
 	}
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		ServletContextIncludeFilter.class);
-
-	private static final String _WRAPPER_PATH =
-		"/WEB-INF/jsp/_servlet_context_include.jsp";
 
 }

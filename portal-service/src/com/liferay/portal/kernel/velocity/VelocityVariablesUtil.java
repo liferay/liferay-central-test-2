@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.velocity;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="VelocityVariablesUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class VelocityVariablesUtil {

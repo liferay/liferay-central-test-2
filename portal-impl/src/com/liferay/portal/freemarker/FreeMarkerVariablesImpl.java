@@ -181,22 +181,22 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 
 		// Portal util
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			freeMarkerContext, restrictedVariables, "portalUtil",
 			PortalUtil.getPortal());
-		_insertHelperUtility(
+		insertHelperUtility(
 			freeMarkerContext, restrictedVariables, "portal",
 			PortalUtil.getPortal());
 
 		// Prefs props util
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			freeMarkerContext, restrictedVariables, "prefsPropsUtil",
 			PrefsPropsUtil_IW.getInstance());
 
 		// Props util
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			freeMarkerContext, restrictedVariables, "propsUtil",
 			PropsUtil_IW.getInstance());
 
@@ -207,7 +207,7 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 
 		// Portlet preferences
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			freeMarkerContext, restrictedVariables,
 			"freeMarkerPortletPreferences", new VelocityPortletPreferences());
 
@@ -226,13 +226,13 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 
 		// Service locator
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			freeMarkerContext, restrictedVariables, "serviceLocator",
 			serviceLocator);
 
 		// Session clicks
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			freeMarkerContext, restrictedVariables, "sessionClicks",
 			SessionClicks_IW.getInstance());
 
@@ -251,7 +251,7 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 
 		// Util locator
 
-		_insertHelperUtility(
+		insertHelperUtility(
 			freeMarkerContext, restrictedVariables, "utilLocator", utilLocator);
 
 		// Unicode formatter
@@ -427,7 +427,7 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 
 		// Tiles attributes
 
-		_insertTilesVariables(freeMarkerContext, request);
+		insertTilesVariables(freeMarkerContext, request);
 
 		// Page title and subtitle
 
@@ -458,7 +458,7 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 		}
 	}
 
-	private static void _insertHelperUtility(
+	protected void insertHelperUtility(
 		FreeMarkerContext freeMarkerContext, String[] restrictedVariables,
 		String key, Object value) {
 
@@ -467,7 +467,7 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 		}
 	}
 
-	private static void _insertTilesVariables(
+	protected void insertTilesVariables(
 		FreeMarkerContext freeMarkerContext, HttpServletRequest request) {
 
 		ComponentContext componentContext =
@@ -482,21 +482,25 @@ public class FreeMarkerVariablesImpl implements FreeMarkerVariables {
 			WebKeys.THEME_DISPLAY);
 
 		String tilesTitle = (String)componentContext.getAttribute("title");
-		String tilesContent = (String)componentContext.getAttribute("content");
-		boolean tilesSelectable = GetterUtil.getBoolean(
-			(String)componentContext.getAttribute("selectable"));
 
 		themeDisplay.setTilesTitle(tilesTitle);
-		themeDisplay.setTilesContent(tilesContent);
-		themeDisplay.setTilesSelectable(tilesSelectable);
 
 		if (tilesTitle != null) {
 			freeMarkerContext.put("tilesTitle", tilesTitle);
 		}
 
+		String tilesContent = (String)componentContext.getAttribute("content");
+
+		themeDisplay.setTilesContent(tilesContent);
+
 		if (tilesContent != null) {
 			freeMarkerContext.put("tilesContent", tilesContent);
 		}
+
+		boolean tilesSelectable = GetterUtil.getBoolean(
+			(String)componentContext.getAttribute("selectable"));
+
+		themeDisplay.setTilesSelectable(tilesSelectable);
 
 		freeMarkerContext.put("tilesSelectable", tilesSelectable);
 	}
