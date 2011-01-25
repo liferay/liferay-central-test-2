@@ -61,15 +61,15 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	 */
 	public static final String TABLE_NAME = "AssetCategoryProperty";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "categoryPropertyId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "categoryId", new Integer(Types.BIGINT) },
-			{ "key_", new Integer(Types.VARCHAR) },
-			{ "value", new Integer(Types.VARCHAR) }
+			{ "categoryPropertyId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "categoryId", Types.BIGINT },
+			{ "key_", Types.VARCHAR },
+			{ "value", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AssetCategoryProperty (categoryPropertyId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,key_ VARCHAR(75) null,value VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table AssetCategoryProperty";

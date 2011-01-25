@@ -63,21 +63,21 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	 */
 	public static final String TABLE_NAME = "MBThread";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "threadId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "categoryId", new Integer(Types.BIGINT) },
-			{ "rootMessageId", new Integer(Types.BIGINT) },
-			{ "rootMessageUserId", new Integer(Types.BIGINT) },
-			{ "messageCount", new Integer(Types.INTEGER) },
-			{ "viewCount", new Integer(Types.INTEGER) },
-			{ "lastPostByUserId", new Integer(Types.BIGINT) },
-			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
-			{ "priority", new Integer(Types.DOUBLE) },
-			{ "status", new Integer(Types.INTEGER) },
-			{ "statusByUserId", new Integer(Types.BIGINT) },
-			{ "statusByUserName", new Integer(Types.VARCHAR) },
-			{ "statusDate", new Integer(Types.TIMESTAMP) }
+			{ "threadId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "categoryId", Types.BIGINT },
+			{ "rootMessageId", Types.BIGINT },
+			{ "rootMessageUserId", Types.BIGINT },
+			{ "messageCount", Types.INTEGER },
+			{ "viewCount", Types.INTEGER },
+			{ "lastPostByUserId", Types.BIGINT },
+			{ "lastPostDate", Types.TIMESTAMP },
+			{ "priority", Types.DOUBLE },
+			{ "status", Types.INTEGER },
+			{ "statusByUserId", Types.BIGINT },
+			{ "statusByUserName", Types.VARCHAR },
+			{ "statusDate", Types.TIMESTAMP }
 		};
 	public static final String TABLE_SQL_CREATE = "create table MBThread (threadId LONG not null primary key,groupId LONG,companyId LONG,categoryId LONG,rootMessageId LONG,rootMessageUserId LONG,messageCount INTEGER,viewCount INTEGER,lastPostByUserId LONG,lastPostDate DATE null,priority DOUBLE,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBThread";

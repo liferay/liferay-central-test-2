@@ -53,10 +53,10 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	 */
 	public static final String TABLE_NAME = "Shard";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "shardId", new Integer(Types.BIGINT) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) }
+			{ "shardId", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "name", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Shard (shardId LONG not null primary key,classNameId LONG,classPK LONG,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Shard";

@@ -69,18 +69,18 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 	 */
 	public static final String TABLE_NAME = "PollsQuestion";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", new Integer(Types.VARCHAR) },
-			{ "questionId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "title", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) },
-			{ "expirationDate", new Integer(Types.TIMESTAMP) },
-			{ "lastVoteDate", new Integer(Types.TIMESTAMP) }
+			{ "uuid_", Types.VARCHAR },
+			{ "questionId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "title", Types.VARCHAR },
+			{ "description", Types.VARCHAR },
+			{ "expirationDate", Types.TIMESTAMP },
+			{ "lastVoteDate", Types.TIMESTAMP }
 		};
 	public static final String TABLE_SQL_CREATE = "create table PollsQuestion (uuid_ VARCHAR(75) null,questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title STRING null,description STRING null,expirationDate DATE null,lastVoteDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table PollsQuestion";

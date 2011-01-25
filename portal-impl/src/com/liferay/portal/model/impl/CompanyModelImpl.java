@@ -57,15 +57,15 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	 */
 	public static final String TABLE_NAME = "Company";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "accountId", new Integer(Types.BIGINT) },
-			{ "webId", new Integer(Types.VARCHAR) },
-			{ "key_", new Integer(Types.CLOB) },
-			{ "mx", new Integer(Types.VARCHAR) },
-			{ "homeURL", new Integer(Types.VARCHAR) },
-			{ "logoId", new Integer(Types.BIGINT) },
-			{ "system", new Integer(Types.BOOLEAN) },
-			{ "maxUsers", new Integer(Types.INTEGER) }
+			{ "companyId", Types.BIGINT },
+			{ "accountId", Types.BIGINT },
+			{ "webId", Types.VARCHAR },
+			{ "key_", Types.CLOB },
+			{ "mx", Types.VARCHAR },
+			{ "homeURL", Types.VARCHAR },
+			{ "logoId", Types.BIGINT },
+			{ "system", Types.BOOLEAN },
+			{ "maxUsers", Types.INTEGER }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,mx VARCHAR(75) null,homeURL STRING null,logoId LONG,system BOOLEAN,maxUsers INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table Company";

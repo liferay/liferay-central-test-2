@@ -61,17 +61,17 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	 */
 	public static final String TABLE_NAME = "EmailAddress";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "emailAddressId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "address", new Integer(Types.VARCHAR) },
-			{ "typeId", new Integer(Types.INTEGER) },
-			{ "primary_", new Integer(Types.BOOLEAN) }
+			{ "emailAddressId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "address", Types.VARCHAR },
+			{ "typeId", Types.INTEGER },
+			{ "primary_", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table EmailAddress (emailAddressId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,address VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table EmailAddress";

@@ -60,13 +60,13 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	 */
 	public static final String TABLE_NAME = "AnnouncementsDelivery";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "deliveryId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "type_", new Integer(Types.VARCHAR) },
-			{ "email", new Integer(Types.BOOLEAN) },
-			{ "sms", new Integer(Types.BOOLEAN) },
-			{ "website", new Integer(Types.BOOLEAN) }
+			{ "deliveryId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "type_", Types.VARCHAR },
+			{ "email", Types.BOOLEAN },
+			{ "sms", Types.BOOLEAN },
+			{ "website", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AnnouncementsDelivery (deliveryId LONG not null primary key,companyId LONG,userId LONG,type_ VARCHAR(75) null,email BOOLEAN,sms BOOLEAN,website BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table AnnouncementsDelivery";

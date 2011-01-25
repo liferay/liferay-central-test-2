@@ -54,14 +54,14 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	 */
 	public static final String TABLE_NAME = "JournalArticleImage";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "articleImageId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "articleId", new Integer(Types.VARCHAR) },
-			{ "version", new Integer(Types.DOUBLE) },
-			{ "elInstanceId", new Integer(Types.VARCHAR) },
-			{ "elName", new Integer(Types.VARCHAR) },
-			{ "languageId", new Integer(Types.VARCHAR) },
-			{ "tempImage", new Integer(Types.BOOLEAN) }
+			{ "articleImageId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "articleId", Types.VARCHAR },
+			{ "version", Types.DOUBLE },
+			{ "elInstanceId", Types.VARCHAR },
+			{ "elName", Types.VARCHAR },
+			{ "languageId", Types.VARCHAR },
+			{ "tempImage", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table JournalArticleImage (articleImageId LONG not null primary key,groupId LONG,articleId VARCHAR(75) null,version DOUBLE,elInstanceId VARCHAR(75) null,elName VARCHAR(75) null,languageId VARCHAR(75) null,tempImage BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table JournalArticleImage";

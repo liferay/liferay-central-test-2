@@ -56,18 +56,18 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	 */
 	public static final String TABLE_NAME = "SocialEquityLog";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "equityLogId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "assetEntryId", new Integer(Types.BIGINT) },
-			{ "actionId", new Integer(Types.VARCHAR) },
-			{ "actionDate", new Integer(Types.INTEGER) },
-			{ "active_", new Integer(Types.BOOLEAN) },
-			{ "expiration", new Integer(Types.INTEGER) },
-			{ "type_", new Integer(Types.INTEGER) },
-			{ "value", new Integer(Types.INTEGER) },
-			{ "extraData", new Integer(Types.VARCHAR) }
+			{ "equityLogId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "assetEntryId", Types.BIGINT },
+			{ "actionId", Types.VARCHAR },
+			{ "actionDate", Types.INTEGER },
+			{ "active_", Types.BOOLEAN },
+			{ "expiration", Types.INTEGER },
+			{ "type_", Types.INTEGER },
+			{ "value", Types.INTEGER },
+			{ "extraData", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SocialEquityLog (equityLogId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,actionId VARCHAR(75) null,actionDate INTEGER,active_ BOOLEAN,expiration INTEGER,type_ INTEGER,value INTEGER,extraData VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityLog";

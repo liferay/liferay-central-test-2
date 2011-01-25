@@ -55,16 +55,16 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 	 */
 	public static final String TABLE_NAME = "SocialEquitySetting";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "equitySettingId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "actionId", new Integer(Types.VARCHAR) },
-			{ "dailyLimit", new Integer(Types.INTEGER) },
-			{ "lifespan", new Integer(Types.INTEGER) },
-			{ "type_", new Integer(Types.INTEGER) },
-			{ "uniqueEntry", new Integer(Types.BOOLEAN) },
-			{ "value", new Integer(Types.INTEGER) }
+			{ "equitySettingId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "actionId", Types.VARCHAR },
+			{ "dailyLimit", Types.INTEGER },
+			{ "lifespan", Types.INTEGER },
+			{ "type_", Types.INTEGER },
+			{ "uniqueEntry", Types.BOOLEAN },
+			{ "value", Types.INTEGER }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SocialEquitySetting (equitySettingId LONG not null primary key,groupId LONG,companyId LONG,classNameId LONG,actionId VARCHAR(75) null,dailyLimit INTEGER,lifespan INTEGER,type_ INTEGER,uniqueEntry BOOLEAN,value INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquitySetting";

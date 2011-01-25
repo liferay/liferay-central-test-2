@@ -50,10 +50,10 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	 */
 	public static final String TABLE_NAME = "ExpandoRow";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "rowId_", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "tableId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) }
+			{ "rowId_", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "tableId", Types.BIGINT },
+			{ "classPK", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ExpandoRow (rowId_ LONG not null primary key,companyId LONG,tableId LONG,classPK LONG)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoRow";

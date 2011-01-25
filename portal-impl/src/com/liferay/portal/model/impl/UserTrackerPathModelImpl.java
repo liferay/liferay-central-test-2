@@ -55,10 +55,10 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 	 */
 	public static final String TABLE_NAME = "UserTrackerPath";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "userTrackerPathId", new Integer(Types.BIGINT) },
-			{ "userTrackerId", new Integer(Types.BIGINT) },
-			{ "path_", new Integer(Types.VARCHAR) },
-			{ "pathDate", new Integer(Types.TIMESTAMP) }
+			{ "userTrackerPathId", Types.BIGINT },
+			{ "userTrackerId", Types.BIGINT },
+			{ "path_", Types.VARCHAR },
+			{ "pathDate", Types.TIMESTAMP }
 		};
 	public static final String TABLE_SQL_CREATE = "create table UserTrackerPath (userTrackerPathId LONG not null primary key,userTrackerId LONG,path_ STRING null,pathDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table UserTrackerPath";

@@ -57,12 +57,12 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 	 */
 	public static final String TABLE_NAME = "SocialEquityHistory";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "equityHistoryId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "personalEquity", new Integer(Types.INTEGER) }
+			{ "equityHistoryId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "personalEquity", Types.INTEGER }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SocialEquityHistory (equityHistoryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,personalEquity INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityHistory";

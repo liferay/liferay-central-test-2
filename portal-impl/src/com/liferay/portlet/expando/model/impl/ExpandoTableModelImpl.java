@@ -52,10 +52,10 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	 */
 	public static final String TABLE_NAME = "ExpandoTable";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "tableId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) }
+			{ "tableId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "name", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ExpandoTable (tableId LONG not null primary key,companyId LONG,classNameId LONG,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoTable";

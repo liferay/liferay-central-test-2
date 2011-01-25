@@ -55,12 +55,12 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 	 */
 	public static final String TABLE_NAME = "RatingsStats";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "statsId", new Integer(Types.BIGINT) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "totalEntries", new Integer(Types.INTEGER) },
-			{ "totalScore", new Integer(Types.DOUBLE) },
-			{ "averageScore", new Integer(Types.DOUBLE) }
+			{ "statsId", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "totalEntries", Types.INTEGER },
+			{ "totalScore", Types.DOUBLE },
+			{ "averageScore", Types.DOUBLE }
 		};
 	public static final String TABLE_SQL_CREATE = "create table RatingsStats (statsId LONG not null primary key,classNameId LONG,classPK LONG,totalEntries INTEGER,totalScore DOUBLE,averageScore DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table RatingsStats";

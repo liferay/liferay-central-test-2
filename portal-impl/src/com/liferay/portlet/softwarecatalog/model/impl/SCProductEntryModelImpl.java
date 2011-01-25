@@ -62,22 +62,22 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	 */
 	public static final String TABLE_NAME = "SCProductEntry";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "productEntryId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "type_", new Integer(Types.VARCHAR) },
-			{ "tags", new Integer(Types.VARCHAR) },
-			{ "shortDescription", new Integer(Types.VARCHAR) },
-			{ "longDescription", new Integer(Types.VARCHAR) },
-			{ "pageURL", new Integer(Types.VARCHAR) },
-			{ "author", new Integer(Types.VARCHAR) },
-			{ "repoGroupId", new Integer(Types.VARCHAR) },
-			{ "repoArtifactId", new Integer(Types.VARCHAR) }
+			{ "productEntryId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "name", Types.VARCHAR },
+			{ "type_", Types.VARCHAR },
+			{ "tags", Types.VARCHAR },
+			{ "shortDescription", Types.VARCHAR },
+			{ "longDescription", Types.VARCHAR },
+			{ "pageURL", Types.VARCHAR },
+			{ "author", Types.VARCHAR },
+			{ "repoGroupId", Types.VARCHAR },
+			{ "repoArtifactId", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SCProductEntry (productEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,type_ VARCHAR(75) null,tags VARCHAR(255) null,shortDescription STRING null,longDescription STRING null,pageURL STRING null,author VARCHAR(75) null,repoGroupId VARCHAR(75) null,repoArtifactId VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table SCProductEntry";

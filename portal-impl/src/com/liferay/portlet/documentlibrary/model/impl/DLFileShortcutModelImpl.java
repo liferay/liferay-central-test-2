@@ -62,20 +62,20 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	 */
 	public static final String TABLE_NAME = "DLFileShortcut";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", new Integer(Types.VARCHAR) },
-			{ "fileShortcutId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "folderId", new Integer(Types.BIGINT) },
-			{ "toFileEntryId", new Integer(Types.BIGINT) },
-			{ "status", new Integer(Types.INTEGER) },
-			{ "statusByUserId", new Integer(Types.BIGINT) },
-			{ "statusByUserName", new Integer(Types.VARCHAR) },
-			{ "statusDate", new Integer(Types.TIMESTAMP) }
+			{ "uuid_", Types.VARCHAR },
+			{ "fileShortcutId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "folderId", Types.BIGINT },
+			{ "toFileEntryId", Types.BIGINT },
+			{ "status", Types.INTEGER },
+			{ "statusByUserId", Types.BIGINT },
+			{ "statusByUserName", Types.VARCHAR },
+			{ "statusDate", Types.TIMESTAMP }
 		};
 	public static final String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFileEntryId LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileShortcut";

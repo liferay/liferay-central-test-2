@@ -58,12 +58,12 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	 */
 	public static final String TABLE_NAME = "DLFileRank";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "fileRankId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "fileEntryId", new Integer(Types.BIGINT) }
+			{ "fileRankId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "fileEntryId", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table DLFileRank (fileRankId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,fileEntryId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table DLFileRank";

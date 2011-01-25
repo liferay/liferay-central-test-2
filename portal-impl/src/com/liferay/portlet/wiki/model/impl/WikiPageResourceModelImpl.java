@@ -54,10 +54,10 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	 */
 	public static final String TABLE_NAME = "WikiPageResource";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", new Integer(Types.VARCHAR) },
-			{ "resourcePrimKey", new Integer(Types.BIGINT) },
-			{ "nodeId", new Integer(Types.BIGINT) },
-			{ "title", new Integer(Types.VARCHAR) }
+			{ "uuid_", Types.VARCHAR },
+			{ "resourcePrimKey", Types.BIGINT },
+			{ "nodeId", Types.BIGINT },
+			{ "title", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table WikiPageResource (uuid_ VARCHAR(75) null,resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table WikiPageResource";

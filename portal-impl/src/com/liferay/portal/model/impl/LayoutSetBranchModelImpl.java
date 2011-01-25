@@ -60,16 +60,16 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	 */
 	public static final String TABLE_NAME = "LayoutSetBranch";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "layoutSetBranchId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "privateLayout", new Integer(Types.BOOLEAN) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) }
+			{ "layoutSetBranchId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "privateLayout", Types.BOOLEAN },
+			{ "name", Types.VARCHAR },
+			{ "description", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table LayoutSetBranch (layoutSetBranchId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,privateLayout BOOLEAN,name VARCHAR(75) null,description STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutSetBranch";

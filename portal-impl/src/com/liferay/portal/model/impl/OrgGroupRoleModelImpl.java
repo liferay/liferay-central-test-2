@@ -49,9 +49,9 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	 */
 	public static final String TABLE_NAME = "OrgGroupRole";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "organizationId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "roleId", new Integer(Types.BIGINT) }
+			{ "organizationId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "roleId", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table OrgGroupRole (organizationId LONG not null,groupId LONG not null,roleId LONG not null,primary key (organizationId, groupId, roleId))";
 	public static final String TABLE_SQL_DROP = "drop table OrgGroupRole";

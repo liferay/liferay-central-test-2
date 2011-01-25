@@ -57,11 +57,11 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	 */
 	public static final String TABLE_NAME = "MBStatsUser";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "statsUserId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "messageCount", new Integer(Types.INTEGER) },
-			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
+			{ "statsUserId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "messageCount", Types.INTEGER },
+			{ "lastPostDate", Types.TIMESTAMP }
 		};
 	public static final String TABLE_SQL_CREATE = "create table MBStatsUser (statsUserId LONG not null primary key,groupId LONG,userId LONG,messageCount INTEGER,lastPostDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table MBStatsUser";

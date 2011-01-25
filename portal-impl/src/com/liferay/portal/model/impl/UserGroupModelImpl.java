@@ -57,11 +57,11 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	 */
 	public static final String TABLE_NAME = "UserGroup";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "userGroupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "parentUserGroupId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) }
+			{ "userGroupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "parentUserGroupId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "description", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table UserGroup (userGroupId LONG not null primary key,companyId LONG,parentUserGroupId LONG,name VARCHAR(75) null,description STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table UserGroup";
@@ -115,8 +115,8 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_USERGROUPS = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_USERGROUPS;
 	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_NAME = "UserGroups_Teams";
 	public static final Object[][] MAPPING_TABLE_USERGROUPS_TEAMS_COLUMNS = {
-			{ "userGroupId", new Integer(Types.BIGINT) },
-			{ "teamId", new Integer(Types.BIGINT) }
+			{ "userGroupId", Types.BIGINT },
+			{ "teamId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_SQL_CREATE = "create table UserGroups_Teams (userGroupId LONG not null,teamId LONG not null,primary key (userGroupId, teamId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERGROUPS_TEAMS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(

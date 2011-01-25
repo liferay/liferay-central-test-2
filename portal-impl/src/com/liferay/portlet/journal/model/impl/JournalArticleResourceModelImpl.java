@@ -54,10 +54,10 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	 */
 	public static final String TABLE_NAME = "JournalArticleResource";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", new Integer(Types.VARCHAR) },
-			{ "resourcePrimKey", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "articleId", new Integer(Types.VARCHAR) }
+			{ "uuid_", Types.VARCHAR },
+			{ "resourcePrimKey", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "articleId", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table JournalArticleResource (uuid_ VARCHAR(75) null,resourcePrimKey LONG not null primary key,groupId LONG,articleId VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table JournalArticleResource";

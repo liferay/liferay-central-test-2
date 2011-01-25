@@ -55,15 +55,15 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 	 */
 	public static final String TABLE_NAME = "SocialEquityUser";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "equityUserId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "contributionK", new Integer(Types.DOUBLE) },
-			{ "contributionB", new Integer(Types.DOUBLE) },
-			{ "participationK", new Integer(Types.DOUBLE) },
-			{ "participationB", new Integer(Types.DOUBLE) },
-			{ "rank", new Integer(Types.INTEGER) }
+			{ "equityUserId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "contributionK", Types.DOUBLE },
+			{ "contributionB", Types.DOUBLE },
+			{ "participationK", Types.DOUBLE },
+			{ "participationB", Types.DOUBLE },
+			{ "rank", Types.INTEGER }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SocialEquityUser (equityUserId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,contributionK DOUBLE,contributionB DOUBLE,participationK DOUBLE,participationB DOUBLE,rank INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityUser";

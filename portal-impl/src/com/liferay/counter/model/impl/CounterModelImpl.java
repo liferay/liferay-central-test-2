@@ -51,8 +51,8 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 	 */
 	public static final String TABLE_NAME = "Counter";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "currentId", new Integer(Types.BIGINT) }
+			{ "name", Types.VARCHAR },
+			{ "currentId", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Counter (name VARCHAR(75) not null primary key,currentId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Counter";

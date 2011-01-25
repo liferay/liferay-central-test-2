@@ -55,14 +55,14 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	 */
 	public static final String TABLE_NAME = "Release_";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "releaseId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "servletContextName", new Integer(Types.VARCHAR) },
-			{ "buildNumber", new Integer(Types.INTEGER) },
-			{ "buildDate", new Integer(Types.TIMESTAMP) },
-			{ "verified", new Integer(Types.BOOLEAN) },
-			{ "testString", new Integer(Types.VARCHAR) }
+			{ "releaseId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "servletContextName", Types.VARCHAR },
+			{ "buildNumber", Types.INTEGER },
+			{ "buildDate", Types.TIMESTAMP },
+			{ "verified", Types.BOOLEAN },
+			{ "testString", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Release_ (releaseId LONG not null primary key,createDate DATE null,modifiedDate DATE null,servletContextName VARCHAR(75) null,buildNumber INTEGER,buildDate DATE null,verified BOOLEAN,testString VARCHAR(1024) null)";
 	public static final String TABLE_SQL_DROP = "drop table Release_";

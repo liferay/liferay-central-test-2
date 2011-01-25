@@ -55,13 +55,13 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	 */
 	public static final String TABLE_NAME = "ExpandoColumn";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "columnId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "tableId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "type_", new Integer(Types.INTEGER) },
-			{ "defaultData", new Integer(Types.VARCHAR) },
-			{ "typeSettings", new Integer(Types.CLOB) }
+			{ "columnId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "tableId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "type_", Types.INTEGER },
+			{ "defaultData", Types.VARCHAR },
+			{ "typeSettings", Types.CLOB }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ExpandoColumn (columnId LONG not null primary key,companyId LONG,tableId LONG,name VARCHAR(75) null,type_ INTEGER,defaultData STRING null,typeSettings TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoColumn";

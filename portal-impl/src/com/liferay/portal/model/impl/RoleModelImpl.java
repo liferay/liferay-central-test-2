@@ -64,15 +64,15 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	 */
 	public static final String TABLE_NAME = "Role_";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "roleId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "title", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) },
-			{ "type_", new Integer(Types.INTEGER) },
-			{ "subtype", new Integer(Types.VARCHAR) }
+			{ "roleId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "title", Types.VARCHAR },
+			{ "description", Types.VARCHAR },
+			{ "type_", Types.INTEGER },
+			{ "subtype", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,title STRING null,description STRING null,type_ INTEGER,subtype VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Role_";
@@ -130,8 +130,8 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	public static final boolean FINDER_CACHE_ENABLED_GROUPS_ROLES = com.liferay.portal.model.impl.GroupModelImpl.FINDER_CACHE_ENABLED_GROUPS_ROLES;
 	public static final String MAPPING_TABLE_ROLES_PERMISSIONS_NAME = "Roles_Permissions";
 	public static final Object[][] MAPPING_TABLE_ROLES_PERMISSIONS_COLUMNS = {
-			{ "roleId", new Integer(Types.BIGINT) },
-			{ "permissionId", new Integer(Types.BIGINT) }
+			{ "roleId", Types.BIGINT },
+			{ "permissionId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_ROLES_PERMISSIONS_SQL_CREATE = "create table Roles_Permissions (roleId LONG not null,permissionId LONG not null,primary key (roleId, permissionId))";
 	public static final boolean FINDER_CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(

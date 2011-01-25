@@ -55,11 +55,11 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	 */
 	public static final String TABLE_NAME = "UserIdMapper";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "userIdMapperId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "type_", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) },
-			{ "externalUserId", new Integer(Types.VARCHAR) }
+			{ "userIdMapperId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "type_", Types.VARCHAR },
+			{ "description", Types.VARCHAR },
+			{ "externalUserId", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table UserIdMapper (userIdMapperId LONG not null primary key,userId LONG,type_ VARCHAR(75) null,description VARCHAR(75) null,externalUserId VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table UserIdMapper";

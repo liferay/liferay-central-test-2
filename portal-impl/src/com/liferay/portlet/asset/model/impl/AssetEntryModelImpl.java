@@ -61,30 +61,30 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	 */
 	public static final String TABLE_NAME = "AssetEntry";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "entryId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "classUuid", new Integer(Types.VARCHAR) },
-			{ "visible", new Integer(Types.BOOLEAN) },
-			{ "startDate", new Integer(Types.TIMESTAMP) },
-			{ "endDate", new Integer(Types.TIMESTAMP) },
-			{ "publishDate", new Integer(Types.TIMESTAMP) },
-			{ "expirationDate", new Integer(Types.TIMESTAMP) },
-			{ "mimeType", new Integer(Types.VARCHAR) },
-			{ "title", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) },
-			{ "summary", new Integer(Types.VARCHAR) },
-			{ "url", new Integer(Types.VARCHAR) },
-			{ "height", new Integer(Types.INTEGER) },
-			{ "width", new Integer(Types.INTEGER) },
-			{ "priority", new Integer(Types.DOUBLE) },
-			{ "viewCount", new Integer(Types.INTEGER) }
+			{ "entryId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "classUuid", Types.VARCHAR },
+			{ "visible", Types.BOOLEAN },
+			{ "startDate", Types.TIMESTAMP },
+			{ "endDate", Types.TIMESTAMP },
+			{ "publishDate", Types.TIMESTAMP },
+			{ "expirationDate", Types.TIMESTAMP },
+			{ "mimeType", Types.VARCHAR },
+			{ "title", Types.VARCHAR },
+			{ "description", Types.VARCHAR },
+			{ "summary", Types.VARCHAR },
+			{ "url", Types.VARCHAR },
+			{ "height", Types.INTEGER },
+			{ "width", Types.INTEGER },
+			{ "priority", Types.DOUBLE },
+			{ "viewCount", Types.INTEGER }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AssetEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,classUuid VARCHAR(75) null,visible BOOLEAN,startDate DATE null,endDate DATE null,publishDate DATE null,expirationDate DATE null,mimeType VARCHAR(75) null,title VARCHAR(255) null,description STRING null,summary STRING null,url STRING null,height INTEGER,width INTEGER,priority DOUBLE,viewCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table AssetEntry";
@@ -154,8 +154,8 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_NAME = "AssetEntries_AssetCategories";
 	public static final Object[][] MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_COLUMNS =
 		{
-			{ "entryId", new Integer(Types.BIGINT) },
-			{ "categoryId", new Integer(Types.BIGINT) }
+			{ "entryId", Types.BIGINT },
+			{ "categoryId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_SQL_CREATE =
 		"create table AssetEntries_AssetCategories (entryId LONG not null,categoryId LONG not null,primary key (entryId, categoryId))";
@@ -165,8 +165,8 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 			true);
 	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME = "AssetEntries_AssetTags";
 	public static final Object[][] MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_COLUMNS = {
-			{ "entryId", new Integer(Types.BIGINT) },
-			{ "tagId", new Integer(Types.BIGINT) }
+			{ "entryId", Types.BIGINT },
+			{ "tagId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_SQL_CREATE = "create table AssetEntries_AssetTags (entryId LONG not null,tagId LONG not null,primary key (entryId, tagId))";
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETTAGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(

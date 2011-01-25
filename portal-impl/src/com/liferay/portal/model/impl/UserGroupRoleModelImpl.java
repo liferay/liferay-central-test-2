@@ -55,9 +55,9 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
 	 */
 	public static final String TABLE_NAME = "UserGroupRole";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "roleId", new Integer(Types.BIGINT) }
+			{ "userId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "roleId", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table UserGroupRole (userId LONG not null,groupId LONG not null,roleId LONG not null,primary key (userId, groupId, roleId))";
 	public static final String TABLE_SQL_DROP = "drop table UserGroupRole";

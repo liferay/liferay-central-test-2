@@ -61,16 +61,16 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	 */
 	public static final String TABLE_NAME = "MembershipRequest";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "membershipRequestId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "comments", new Integer(Types.VARCHAR) },
-			{ "replyComments", new Integer(Types.VARCHAR) },
-			{ "replyDate", new Integer(Types.TIMESTAMP) },
-			{ "replierUserId", new Integer(Types.BIGINT) },
-			{ "statusId", new Integer(Types.INTEGER) }
+			{ "membershipRequestId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "groupId", Types.BIGINT },
+			{ "comments", Types.VARCHAR },
+			{ "replyComments", Types.VARCHAR },
+			{ "replyDate", Types.TIMESTAMP },
+			{ "replierUserId", Types.BIGINT },
+			{ "statusId", Types.INTEGER }
 		};
 	public static final String TABLE_SQL_CREATE = "create table MembershipRequest (membershipRequestId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,groupId LONG,comments STRING null,replyComments STRING null,replyDate DATE null,replierUserId LONG,statusId INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table MembershipRequest";

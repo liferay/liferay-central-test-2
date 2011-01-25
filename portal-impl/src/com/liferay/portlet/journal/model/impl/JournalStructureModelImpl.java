@@ -61,19 +61,19 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	 */
 	public static final String TABLE_NAME = "JournalStructure";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", new Integer(Types.VARCHAR) },
-			{ "id_", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "structureId", new Integer(Types.VARCHAR) },
-			{ "parentStructureId", new Integer(Types.VARCHAR) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) },
-			{ "xsd", new Integer(Types.CLOB) }
+			{ "uuid_", Types.VARCHAR },
+			{ "id_", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "structureId", Types.VARCHAR },
+			{ "parentStructureId", Types.VARCHAR },
+			{ "name", Types.VARCHAR },
+			{ "description", Types.VARCHAR },
+			{ "xsd", Types.CLOB }
 		};
 	public static final String TABLE_SQL_CREATE = "create table JournalStructure (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,parentStructureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table JournalStructure";

@@ -56,13 +56,13 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	 */
 	public static final String TABLE_NAME = "WebDAVProps";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "webDavPropsId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "props", new Integer(Types.CLOB) }
+			{ "webDavPropsId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "props", Types.CLOB }
 		};
 	public static final String TABLE_SQL_CREATE = "create table WebDAVProps (webDavPropsId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,props TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table WebDAVProps";

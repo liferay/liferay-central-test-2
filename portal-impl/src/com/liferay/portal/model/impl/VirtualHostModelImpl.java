@@ -53,10 +53,10 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	 */
 	public static final String TABLE_NAME = "VirtualHost";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "virtualHostId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "layoutSetId", new Integer(Types.BIGINT) },
-			{ "hostname", new Integer(Types.VARCHAR) }
+			{ "virtualHostId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "layoutSetId", Types.BIGINT },
+			{ "hostname", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table VirtualHost (virtualHostId LONG not null primary key,companyId LONG,layoutSetId LONG,hostname VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table VirtualHost";

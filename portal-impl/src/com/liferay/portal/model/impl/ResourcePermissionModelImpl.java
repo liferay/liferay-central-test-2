@@ -57,13 +57,13 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	 */
 	public static final String TABLE_NAME = "ResourcePermission";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "resourcePermissionId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "scope", new Integer(Types.INTEGER) },
-			{ "primKey", new Integer(Types.VARCHAR) },
-			{ "roleId", new Integer(Types.BIGINT) },
-			{ "actionIds", new Integer(Types.BIGINT) }
+			{ "resourcePermissionId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "scope", Types.INTEGER },
+			{ "primKey", Types.VARCHAR },
+			{ "roleId", Types.BIGINT },
+			{ "actionIds", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ResourcePermission (resourcePermissionId LONG not null primary key,companyId LONG,name VARCHAR(255) null,scope INTEGER,primKey VARCHAR(255) null,roleId LONG,actionIds LONG)";
 	public static final String TABLE_SQL_DROP = "drop table ResourcePermission";

@@ -55,12 +55,12 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 	 */
 	public static final String TABLE_NAME = "SocialEquityGroupSetting";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "equityGroupSettingId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "type_", new Integer(Types.INTEGER) },
-			{ "enabled", new Integer(Types.BOOLEAN) }
+			{ "equityGroupSettingId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "type_", Types.INTEGER },
+			{ "enabled", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SocialEquityGroupSetting (equityGroupSettingId LONG not null primary key,groupId LONG,companyId LONG,classNameId LONG,type_ INTEGER,enabled BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityGroupSetting";

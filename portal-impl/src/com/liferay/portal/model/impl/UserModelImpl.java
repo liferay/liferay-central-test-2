@@ -59,44 +59,44 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	 */
 	public static final String TABLE_NAME = "User_";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", new Integer(Types.VARCHAR) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "defaultUser", new Integer(Types.BOOLEAN) },
-			{ "contactId", new Integer(Types.BIGINT) },
-			{ "password_", new Integer(Types.VARCHAR) },
-			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
-			{ "passwordReset", new Integer(Types.BOOLEAN) },
-			{ "passwordModifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "digest", new Integer(Types.VARCHAR) },
-			{ "reminderQueryQuestion", new Integer(Types.VARCHAR) },
-			{ "reminderQueryAnswer", new Integer(Types.VARCHAR) },
-			{ "graceLoginCount", new Integer(Types.INTEGER) },
-			{ "screenName", new Integer(Types.VARCHAR) },
-			{ "emailAddress", new Integer(Types.VARCHAR) },
-			{ "facebookId", new Integer(Types.BIGINT) },
-			{ "openId", new Integer(Types.VARCHAR) },
-			{ "portraitId", new Integer(Types.BIGINT) },
-			{ "languageId", new Integer(Types.VARCHAR) },
-			{ "timeZoneId", new Integer(Types.VARCHAR) },
-			{ "greeting", new Integer(Types.VARCHAR) },
-			{ "comments", new Integer(Types.VARCHAR) },
-			{ "firstName", new Integer(Types.VARCHAR) },
-			{ "middleName", new Integer(Types.VARCHAR) },
-			{ "lastName", new Integer(Types.VARCHAR) },
-			{ "jobTitle", new Integer(Types.VARCHAR) },
-			{ "loginDate", new Integer(Types.TIMESTAMP) },
-			{ "loginIP", new Integer(Types.VARCHAR) },
-			{ "lastLoginDate", new Integer(Types.TIMESTAMP) },
-			{ "lastLoginIP", new Integer(Types.VARCHAR) },
-			{ "lastFailedLoginDate", new Integer(Types.TIMESTAMP) },
-			{ "failedLoginAttempts", new Integer(Types.INTEGER) },
-			{ "lockout", new Integer(Types.BOOLEAN) },
-			{ "lockoutDate", new Integer(Types.TIMESTAMP) },
-			{ "agreedToTermsOfUse", new Integer(Types.BOOLEAN) },
-			{ "active_", new Integer(Types.BOOLEAN) }
+			{ "uuid_", Types.VARCHAR },
+			{ "userId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "defaultUser", Types.BOOLEAN },
+			{ "contactId", Types.BIGINT },
+			{ "password_", Types.VARCHAR },
+			{ "passwordEncrypted", Types.BOOLEAN },
+			{ "passwordReset", Types.BOOLEAN },
+			{ "passwordModifiedDate", Types.TIMESTAMP },
+			{ "digest", Types.VARCHAR },
+			{ "reminderQueryQuestion", Types.VARCHAR },
+			{ "reminderQueryAnswer", Types.VARCHAR },
+			{ "graceLoginCount", Types.INTEGER },
+			{ "screenName", Types.VARCHAR },
+			{ "emailAddress", Types.VARCHAR },
+			{ "facebookId", Types.BIGINT },
+			{ "openId", Types.VARCHAR },
+			{ "portraitId", Types.BIGINT },
+			{ "languageId", Types.VARCHAR },
+			{ "timeZoneId", Types.VARCHAR },
+			{ "greeting", Types.VARCHAR },
+			{ "comments", Types.VARCHAR },
+			{ "firstName", Types.VARCHAR },
+			{ "middleName", Types.VARCHAR },
+			{ "lastName", Types.VARCHAR },
+			{ "jobTitle", Types.VARCHAR },
+			{ "loginDate", Types.TIMESTAMP },
+			{ "loginIP", Types.VARCHAR },
+			{ "lastLoginDate", Types.TIMESTAMP },
+			{ "lastLoginIP", Types.VARCHAR },
+			{ "lastFailedLoginDate", Types.TIMESTAMP },
+			{ "failedLoginAttempts", Types.INTEGER },
+			{ "lockout", Types.BOOLEAN },
+			{ "lockoutDate", Types.TIMESTAMP },
+			{ "agreedToTermsOfUse", Types.BOOLEAN },
+			{ "active_", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table User_ (uuid_ VARCHAR(75) null,userId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,defaultUser BOOLEAN,contactId LONG,password_ VARCHAR(75) null,passwordEncrypted BOOLEAN,passwordReset BOOLEAN,passwordModifiedDate DATE null,digest VARCHAR(255) null,reminderQueryQuestion VARCHAR(75) null,reminderQueryAnswer VARCHAR(75) null,graceLoginCount INTEGER,screenName VARCHAR(75) null,emailAddress VARCHAR(75) null,facebookId LONG,openId VARCHAR(1024) null,portraitId LONG,languageId VARCHAR(75) null,timeZoneId VARCHAR(75) null,greeting VARCHAR(255) null,comments STRING null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,jobTitle VARCHAR(100) null,loginDate DATE null,loginIP VARCHAR(75) null,lastLoginDate DATE null,lastLoginIP VARCHAR(75) null,lastFailedLoginDate DATE null,failedLoginAttempts INTEGER,lockout BOOLEAN,lockoutDate DATE null,agreedToTermsOfUse BOOLEAN,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table User_";
@@ -179,48 +179,48 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 	public static final String MAPPING_TABLE_USERS_GROUPS_NAME = "Users_Groups";
 	public static final Object[][] MAPPING_TABLE_USERS_GROUPS_COLUMNS = {
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) }
+			{ "userId", Types.BIGINT },
+			{ "groupId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_USERS_GROUPS_SQL_CREATE = "create table Users_Groups (userId LONG not null,groupId LONG not null,primary key (userId, groupId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Groups"), true);
 	public static final String MAPPING_TABLE_USERS_ORGS_NAME = "Users_Orgs";
 	public static final Object[][] MAPPING_TABLE_USERS_ORGS_COLUMNS = {
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "organizationId", new Integer(Types.BIGINT) }
+			{ "userId", Types.BIGINT },
+			{ "organizationId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_USERS_ORGS_SQL_CREATE = "create table Users_Orgs (userId LONG not null,organizationId LONG not null,primary key (userId, organizationId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Orgs"), true);
 	public static final String MAPPING_TABLE_USERS_PERMISSIONS_NAME = "Users_Permissions";
 	public static final Object[][] MAPPING_TABLE_USERS_PERMISSIONS_COLUMNS = {
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "permissionId", new Integer(Types.BIGINT) }
+			{ "userId", Types.BIGINT },
+			{ "permissionId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_USERS_PERMISSIONS_SQL_CREATE = "create table Users_Permissions (userId LONG not null,permissionId LONG not null,primary key (userId, permissionId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Permissions"), true);
 	public static final String MAPPING_TABLE_USERS_ROLES_NAME = "Users_Roles";
 	public static final Object[][] MAPPING_TABLE_USERS_ROLES_COLUMNS = {
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "roleId", new Integer(Types.BIGINT) }
+			{ "userId", Types.BIGINT },
+			{ "roleId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_USERS_ROLES_SQL_CREATE = "create table Users_Roles (userId LONG not null,roleId LONG not null,primary key (userId, roleId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Roles"), true);
 	public static final String MAPPING_TABLE_USERS_TEAMS_NAME = "Users_Teams";
 	public static final Object[][] MAPPING_TABLE_USERS_TEAMS_COLUMNS = {
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "teamId", new Integer(Types.BIGINT) }
+			{ "userId", Types.BIGINT },
+			{ "teamId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_USERS_TEAMS_SQL_CREATE = "create table Users_Teams (userId LONG not null,teamId LONG not null,primary key (userId, teamId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_TEAMS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Teams"), true);
 	public static final String MAPPING_TABLE_USERS_USERGROUPS_NAME = "Users_UserGroups";
 	public static final Object[][] MAPPING_TABLE_USERS_USERGROUPS_COLUMNS = {
-			{ "userGroupId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) }
+			{ "userGroupId", Types.BIGINT },
+			{ "userId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_USERS_USERGROUPS_SQL_CREATE = "create table Users_UserGroups (userGroupId LONG not null,userId LONG not null,primary key (userGroupId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(

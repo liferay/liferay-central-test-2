@@ -61,15 +61,15 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 	 */
 	public static final String TABLE_NAME = "AssetTag";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "tagId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "assetCount", new Integer(Types.INTEGER) }
+			{ "tagId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "name", Types.VARCHAR },
+			{ "assetCount", Types.INTEGER }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AssetTag (tagId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,assetCount INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table AssetTag";

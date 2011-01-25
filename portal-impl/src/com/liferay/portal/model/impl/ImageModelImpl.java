@@ -57,13 +57,13 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	 */
 	public static final String TABLE_NAME = "Image";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "imageId", new Integer(Types.BIGINT) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "text_", new Integer(Types.CLOB) },
-			{ "type_", new Integer(Types.VARCHAR) },
-			{ "height", new Integer(Types.INTEGER) },
-			{ "width", new Integer(Types.INTEGER) },
-			{ "size_", new Integer(Types.INTEGER) }
+			{ "imageId", Types.BIGINT },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "text_", Types.CLOB },
+			{ "type_", Types.VARCHAR },
+			{ "height", Types.INTEGER },
+			{ "width", Types.INTEGER },
+			{ "size_", Types.INTEGER }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Image (imageId LONG not null primary key,modifiedDate DATE null,text_ TEXT null,type_ VARCHAR(75) null,height INTEGER,width INTEGER,size_ INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table Image";

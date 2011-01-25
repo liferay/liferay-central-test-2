@@ -64,12 +64,12 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	 */
 	public static final String TABLE_NAME = "LayoutSetPrototype";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "layoutSetPrototypeId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) },
-			{ "settings_", new Integer(Types.VARCHAR) },
-			{ "active_", new Integer(Types.BOOLEAN) }
+			{ "layoutSetPrototypeId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "description", Types.VARCHAR },
+			{ "settings_", Types.VARCHAR },
+			{ "active_", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table LayoutSetPrototype (layoutSetPrototypeId LONG not null primary key,companyId LONG,name STRING null,description STRING null,settings_ STRING null,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutSetPrototype";

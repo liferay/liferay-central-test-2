@@ -61,20 +61,20 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	 */
 	public static final String TABLE_NAME = "IGImage";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", new Integer(Types.VARCHAR) },
-			{ "imageId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "folderId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) },
-			{ "smallImageId", new Integer(Types.BIGINT) },
-			{ "largeImageId", new Integer(Types.BIGINT) },
-			{ "custom1ImageId", new Integer(Types.BIGINT) },
-			{ "custom2ImageId", new Integer(Types.BIGINT) }
+			{ "uuid_", Types.VARCHAR },
+			{ "imageId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "folderId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "description", Types.VARCHAR },
+			{ "smallImageId", Types.BIGINT },
+			{ "largeImageId", Types.BIGINT },
+			{ "custom1ImageId", Types.BIGINT },
+			{ "custom2ImageId", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(75) null,description STRING null,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table IGImage";

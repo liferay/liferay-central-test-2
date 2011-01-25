@@ -54,10 +54,10 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	 */
 	public static final String TABLE_NAME = "PasswordPolicyRel";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "passwordPolicyRelId", new Integer(Types.BIGINT) },
-			{ "passwordPolicyId", new Integer(Types.BIGINT) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) }
+			{ "passwordPolicyRelId", Types.BIGINT },
+			{ "passwordPolicyId", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table PasswordPolicyRel (passwordPolicyRelId LONG not null primary key,passwordPolicyId LONG,classNameId LONG,classPK LONG)";
 	public static final String TABLE_SQL_DROP = "drop table PasswordPolicyRel";

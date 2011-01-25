@@ -68,18 +68,18 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	 */
 	public static final String TABLE_NAME = "AssetVocabulary";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "uuid_", new Integer(Types.VARCHAR) },
-			{ "vocabularyId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "title", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) },
-			{ "settings_", new Integer(Types.VARCHAR) }
+			{ "uuid_", Types.VARCHAR },
+			{ "vocabularyId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "name", Types.VARCHAR },
+			{ "title", Types.VARCHAR },
+			{ "description", Types.VARCHAR },
+			{ "settings_", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table AssetVocabulary (uuid_ VARCHAR(75) null,vocabularyId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,title STRING null,description STRING null,settings_ STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table AssetVocabulary";

@@ -55,13 +55,13 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 	 */
 	public static final String TABLE_NAME = "SocialEquityAssetEntry";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "equityAssetEntryId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "assetEntryId", new Integer(Types.BIGINT) },
-			{ "informationK", new Integer(Types.DOUBLE) },
-			{ "informationB", new Integer(Types.DOUBLE) }
+			{ "equityAssetEntryId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "assetEntryId", Types.BIGINT },
+			{ "informationK", Types.DOUBLE },
+			{ "informationB", Types.DOUBLE }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SocialEquityAssetEntry (equityAssetEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,assetEntryId LONG,informationK DOUBLE,informationB DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table SocialEquityAssetEntry";

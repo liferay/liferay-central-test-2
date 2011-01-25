@@ -56,14 +56,14 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	 */
 	public static final String TABLE_NAME = "ExpandoValue";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "valueId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "tableId", new Integer(Types.BIGINT) },
-			{ "columnId", new Integer(Types.BIGINT) },
-			{ "rowId_", new Integer(Types.BIGINT) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "data_", new Integer(Types.VARCHAR) }
+			{ "valueId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "tableId", Types.BIGINT },
+			{ "columnId", Types.BIGINT },
+			{ "rowId_", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "data_", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ExpandoValue (valueId LONG not null primary key,companyId LONG,tableId LONG,columnId LONG,rowId_ LONG,classNameId LONG,classPK LONG,data_ STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoValue";

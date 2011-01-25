@@ -55,10 +55,10 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 	 */
 	public static final String TABLE_NAME = "MBDiscussion";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "discussionId", new Integer(Types.BIGINT) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "threadId", new Integer(Types.BIGINT) }
+			{ "discussionId", Types.BIGINT },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "threadId", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table MBDiscussion (discussionId LONG not null primary key,classNameId LONG,classPK LONG,threadId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table MBDiscussion";

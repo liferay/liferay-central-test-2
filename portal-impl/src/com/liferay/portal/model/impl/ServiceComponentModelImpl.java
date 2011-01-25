@@ -53,11 +53,11 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	 */
 	public static final String TABLE_NAME = "ServiceComponent";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "serviceComponentId", new Integer(Types.BIGINT) },
-			{ "buildNamespace", new Integer(Types.VARCHAR) },
-			{ "buildNumber", new Integer(Types.BIGINT) },
-			{ "buildDate", new Integer(Types.BIGINT) },
-			{ "data_", new Integer(Types.CLOB) }
+			{ "serviceComponentId", Types.BIGINT },
+			{ "buildNamespace", Types.VARCHAR },
+			{ "buildNumber", Types.BIGINT },
+			{ "buildDate", Types.BIGINT },
+			{ "data_", Types.CLOB }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ServiceComponent (serviceComponentId LONG not null primary key,buildNamespace VARCHAR(75) null,buildNumber LONG,buildDate LONG,data_ TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table ServiceComponent";

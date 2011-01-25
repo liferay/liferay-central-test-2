@@ -62,19 +62,19 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview>
 	 */
 	public static final String TABLE_NAME = "TasksReview";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "reviewId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "proposalId", new Integer(Types.BIGINT) },
-			{ "assignedByUserId", new Integer(Types.BIGINT) },
-			{ "assignedByUserName", new Integer(Types.VARCHAR) },
-			{ "stage", new Integer(Types.INTEGER) },
-			{ "completed", new Integer(Types.BOOLEAN) },
-			{ "rejected", new Integer(Types.BOOLEAN) }
+			{ "reviewId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "proposalId", Types.BIGINT },
+			{ "assignedByUserId", Types.BIGINT },
+			{ "assignedByUserName", Types.VARCHAR },
+			{ "stage", Types.INTEGER },
+			{ "completed", Types.BOOLEAN },
+			{ "rejected", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table TasksReview (reviewId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,proposalId LONG,assignedByUserId LONG,assignedByUserName VARCHAR(75) null,stage INTEGER,completed BOOLEAN,rejected BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table TasksReview";

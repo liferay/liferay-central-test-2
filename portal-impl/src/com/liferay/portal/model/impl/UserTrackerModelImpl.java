@@ -57,14 +57,14 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	 */
 	public static final String TABLE_NAME = "UserTracker";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "userTrackerId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "sessionId", new Integer(Types.VARCHAR) },
-			{ "remoteAddr", new Integer(Types.VARCHAR) },
-			{ "remoteHost", new Integer(Types.VARCHAR) },
-			{ "userAgent", new Integer(Types.VARCHAR) }
+			{ "userTrackerId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "sessionId", Types.VARCHAR },
+			{ "remoteAddr", Types.VARCHAR },
+			{ "remoteHost", Types.VARCHAR },
+			{ "userAgent", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table UserTracker (userTrackerId LONG not null primary key,companyId LONG,userId LONG,modifiedDate DATE null,sessionId VARCHAR(200) null,remoteAddr VARCHAR(75) null,remoteHost VARCHAR(75) null,userAgent VARCHAR(200) null)";
 	public static final String TABLE_SQL_DROP = "drop table UserTracker";

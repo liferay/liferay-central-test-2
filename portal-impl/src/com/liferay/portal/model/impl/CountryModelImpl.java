@@ -57,13 +57,13 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	 */
 	public static final String TABLE_NAME = "Country";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "countryId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "a2", new Integer(Types.VARCHAR) },
-			{ "a3", new Integer(Types.VARCHAR) },
-			{ "number_", new Integer(Types.VARCHAR) },
-			{ "idd_", new Integer(Types.VARCHAR) },
-			{ "active_", new Integer(Types.BOOLEAN) }
+			{ "countryId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "a2", Types.VARCHAR },
+			{ "a3", Types.VARCHAR },
+			{ "number_", Types.VARCHAR },
+			{ "idd_", Types.VARCHAR },
+			{ "active_", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Country (countryId LONG not null primary key,name VARCHAR(75) null,a2 VARCHAR(75) null,a3 VARCHAR(75) null,number_ VARCHAR(75) null,idd_ VARCHAR(75) null,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Country";

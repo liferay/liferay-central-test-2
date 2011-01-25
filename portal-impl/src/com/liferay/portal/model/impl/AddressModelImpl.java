@@ -61,24 +61,24 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 	 */
 	public static final String TABLE_NAME = "Address";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "addressId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "userId", new Integer(Types.BIGINT) },
-			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "street1", new Integer(Types.VARCHAR) },
-			{ "street2", new Integer(Types.VARCHAR) },
-			{ "street3", new Integer(Types.VARCHAR) },
-			{ "city", new Integer(Types.VARCHAR) },
-			{ "zip", new Integer(Types.VARCHAR) },
-			{ "regionId", new Integer(Types.BIGINT) },
-			{ "countryId", new Integer(Types.BIGINT) },
-			{ "typeId", new Integer(Types.INTEGER) },
-			{ "mailing", new Integer(Types.BOOLEAN) },
-			{ "primary_", new Integer(Types.BOOLEAN) }
+			{ "addressId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "userId", Types.BIGINT },
+			{ "userName", Types.VARCHAR },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "street1", Types.VARCHAR },
+			{ "street2", Types.VARCHAR },
+			{ "street3", Types.VARCHAR },
+			{ "city", Types.VARCHAR },
+			{ "zip", Types.VARCHAR },
+			{ "regionId", Types.BIGINT },
+			{ "countryId", Types.BIGINT },
+			{ "typeId", Types.INTEGER },
+			{ "mailing", Types.BOOLEAN },
+			{ "primary_", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Address (addressId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,street1 VARCHAR(75) null,street2 VARCHAR(75) null,street3 VARCHAR(75) null,city VARCHAR(75) null,zip VARCHAR(75) null,regionId LONG,countryId LONG,typeId INTEGER,mailing BOOLEAN,primary_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Address";

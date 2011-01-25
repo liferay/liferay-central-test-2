@@ -57,9 +57,9 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 	 */
 	public static final String TABLE_NAME = "Resource_";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "resourceId", new Integer(Types.BIGINT) },
-			{ "codeId", new Integer(Types.BIGINT) },
-			{ "primKey", new Integer(Types.VARCHAR) }
+			{ "resourceId", Types.BIGINT },
+			{ "codeId", Types.BIGINT },
+			{ "primKey", Types.VARCHAR }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Resource_ (resourceId LONG not null primary key,codeId LONG,primKey VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table Resource_";

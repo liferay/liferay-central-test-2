@@ -58,17 +58,17 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	 */
 	public static final String TABLE_NAME = "Repository";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "repositoryId", new Integer(Types.BIGINT) },
-			{ "groupId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "description", new Integer(Types.VARCHAR) },
-			{ "portletId", new Integer(Types.VARCHAR) },
-			{ "type_", new Integer(Types.INTEGER) },
-			{ "typeSettings", new Integer(Types.VARCHAR) },
-			{ "dlFolderId", new Integer(Types.BIGINT) }
+			{ "repositoryId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "modifiedDate", Types.TIMESTAMP },
+			{ "name", Types.VARCHAR },
+			{ "description", Types.VARCHAR },
+			{ "portletId", Types.VARCHAR },
+			{ "type_", Types.INTEGER },
+			{ "typeSettings", Types.VARCHAR },
+			{ "dlFolderId", Types.BIGINT }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Repository (repositoryId LONG not null primary key,groupId LONG,companyId LONG,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null,portletId VARCHAR(75) null,type_ INTEGER,typeSettings VARCHAR(75) null,dlFolderId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Repository";

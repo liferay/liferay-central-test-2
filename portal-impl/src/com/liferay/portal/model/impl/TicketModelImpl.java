@@ -56,13 +56,13 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	 */
 	public static final String TABLE_NAME = "Ticket";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "ticketId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "createDate", new Integer(Types.TIMESTAMP) },
-			{ "classNameId", new Integer(Types.BIGINT) },
-			{ "classPK", new Integer(Types.BIGINT) },
-			{ "key_", new Integer(Types.VARCHAR) },
-			{ "expirationDate", new Integer(Types.TIMESTAMP) }
+			{ "ticketId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "createDate", Types.TIMESTAMP },
+			{ "classNameId", Types.BIGINT },
+			{ "classPK", Types.BIGINT },
+			{ "key_", Types.VARCHAR },
+			{ "expirationDate", Types.TIMESTAMP }
 		};
 	public static final String TABLE_SQL_CREATE = "create table Ticket (ticketId LONG not null primary key,companyId LONG,createDate DATE null,classNameId LONG,classPK LONG,key_ VARCHAR(75) null,expirationDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table Ticket";

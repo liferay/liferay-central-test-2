@@ -57,12 +57,12 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	 */
 	public static final String TABLE_NAME = "PluginSetting";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "pluginSettingId", new Integer(Types.BIGINT) },
-			{ "companyId", new Integer(Types.BIGINT) },
-			{ "pluginId", new Integer(Types.VARCHAR) },
-			{ "pluginType", new Integer(Types.VARCHAR) },
-			{ "roles", new Integer(Types.VARCHAR) },
-			{ "active_", new Integer(Types.BOOLEAN) }
+			{ "pluginSettingId", Types.BIGINT },
+			{ "companyId", Types.BIGINT },
+			{ "pluginId", Types.VARCHAR },
+			{ "pluginType", Types.VARCHAR },
+			{ "roles", Types.VARCHAR },
+			{ "active_", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table PluginSetting (pluginSettingId LONG not null primary key,companyId LONG,pluginId VARCHAR(75) null,pluginType VARCHAR(75) null,roles STRING null,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table PluginSetting";

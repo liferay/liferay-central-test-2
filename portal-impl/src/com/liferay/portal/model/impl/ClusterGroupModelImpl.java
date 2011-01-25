@@ -53,10 +53,10 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	 */
 	public static final String TABLE_NAME = "ClusterGroup";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "clusterGroupId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "clusterNodeIds", new Integer(Types.VARCHAR) },
-			{ "wholeCluster", new Integer(Types.BOOLEAN) }
+			{ "clusterGroupId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "clusterNodeIds", Types.VARCHAR },
+			{ "wholeCluster", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table ClusterGroup (clusterGroupId LONG not null primary key,name VARCHAR(75) null,clusterNodeIds VARCHAR(75) null,wholeCluster BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table ClusterGroup";

@@ -58,12 +58,12 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	 */
 	public static final String TABLE_NAME = "SCLicense";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "licenseId", new Integer(Types.BIGINT) },
-			{ "name", new Integer(Types.VARCHAR) },
-			{ "url", new Integer(Types.VARCHAR) },
-			{ "openSource", new Integer(Types.BOOLEAN) },
-			{ "active_", new Integer(Types.BOOLEAN) },
-			{ "recommended", new Integer(Types.BOOLEAN) }
+			{ "licenseId", Types.BIGINT },
+			{ "name", Types.VARCHAR },
+			{ "url", Types.VARCHAR },
+			{ "openSource", Types.BOOLEAN },
+			{ "active_", Types.BOOLEAN },
+			{ "recommended", Types.BOOLEAN }
 		};
 	public static final String TABLE_SQL_CREATE = "create table SCLicense (licenseId LONG not null primary key,name VARCHAR(75) null,url STRING null,openSource BOOLEAN,active_ BOOLEAN,recommended BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table SCLicense";
@@ -117,8 +117,8 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	public static final String MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_NAME = "SCLicenses_SCProductEntries";
 	public static final Object[][] MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_COLUMNS =
 		{
-			{ "licenseId", new Integer(Types.BIGINT) },
-			{ "productEntryId", new Integer(Types.BIGINT) }
+			{ "licenseId", Types.BIGINT },
+			{ "productEntryId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_SCLICENSES_SCPRODUCTENTRIES_SQL_CREATE =
 		"create table SCLicenses_SCProductEntries (licenseId LONG not null,productEntryId LONG not null,primary key (licenseId, productEntryId))";
