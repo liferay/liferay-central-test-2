@@ -44,7 +44,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 		</c:when>
 	</c:choose>
 
-	<div class="flag-selector nobr">
+	<span class="flag-selector nobr">
 		<img alt="<%= defaultLocale.getDisplayName() %>" class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= defaultLanguageId %>.png" />
 
 		<%
@@ -69,7 +69,7 @@ String defaultLanguageValue = ParamUtil.getString(request, name + StringPool.UND
 		<a class="lfr-floating-trigger" href="javascript:;" id="<%= randomNamespace %>languageSelectorTrigger">
 			<liferay-ui:message key="other-languages" /> (<%= languageIds.size() %>)
 		</a>
-	</div>
+	</span>
 
 	<%
 	if (languageIds.isEmpty()) {
