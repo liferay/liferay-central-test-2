@@ -74,7 +74,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			<#list entity.getRegularColList() as column>
 				<#assign sqlType = serviceBuilder.getSqlType(packagePath + ".model." + entity.getName(), column.getName(), column.getType())>
 
-				{"${column.DBName}", new Integer(Types.${sqlType})}
+				{"${column.DBName}", Types.${sqlType}}
 
 				<#if column_has_next>
 					,
@@ -203,7 +203,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 						<#list serviceBuilder.getMappingEntities(column.mappingTable) as mapColumn>
 							<#assign sqlType = serviceBuilder.getSqlType(mapColumn.getType())>
 
-							{"${mapColumn.DBName}", new Integer(Types.${sqlType})}
+							{"${mapColumn.DBName}", Types.${sqlType}}
 
 							<#if mapColumn_has_next>
 								,
