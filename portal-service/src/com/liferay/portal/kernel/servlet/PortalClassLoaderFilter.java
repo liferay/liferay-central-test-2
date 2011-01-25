@@ -73,6 +73,10 @@ public class PortalClassLoaderFilter
 		registerPortalLifecycle();
 	}
 
+	public Filter getWrappedFilter() {
+		return _filter;
+	}
+
 	protected void doPortalDestroy() {
 		Thread currentThread = Thread.currentThread();
 

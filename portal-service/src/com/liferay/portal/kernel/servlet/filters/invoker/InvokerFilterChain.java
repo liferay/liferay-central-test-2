@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.DirectCallFilter;
 import com.liferay.portal.kernel.servlet.LiferayFilter;
+import com.liferay.portal.kernel.servlet.PortalClassLoaderFilter;
 import com.liferay.portal.kernel.servlet.TryFilter;
 import com.liferay.portal.kernel.servlet.TryFinallyFilter;
 import com.liferay.portal.kernel.servlet.WrapHttpServletRequestFilter;
@@ -64,6 +65,21 @@ public class InvokerFilterChain implements FilterChain {
 			Filter filter = _filters.remove();
 
 			boolean filterEnabled = true;
+
+			if (filter instanceof PortalClassLoaderFilter) {
+				PortalClassLoaderFilter portalClassLoaderFilter =
+					(PortalClassLoaderFilter)filter;
+
+				if (portalClassLoaderFilter.getWrappedFilter()
+						instanceof LiferayFilter) {
+
+					LiferayFilter liferayFilter =
+						(LiferayFilter)portalClassLoaderFilter.getWrappedFilter();
+
+					filterEnabled = liferayFilter.isFilterEnabled(
+						request, response);
+				}
+			}
 
 			if (filter instanceof LiferayFilter) {
 				LiferayFilter liferayFilter = (LiferayFilter)filter;
