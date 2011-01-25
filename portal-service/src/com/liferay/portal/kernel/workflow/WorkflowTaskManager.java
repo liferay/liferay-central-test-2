@@ -124,8 +124,9 @@ public interface WorkflowTaskManager {
 
 	public List<WorkflowTask> search(
 			long companyId, long userId, String taskName, String assetType,
-			Date dueDateGT, Date dueDateLT, Boolean completed,
-			Boolean searchByUserRoles, boolean andOperator, int start, int end,
+			Long assetPrimaryKey, Date dueDateGT, Date dueDateLT,
+			Boolean completed, Boolean searchByUserRoles,
+			boolean andOperator, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException;
 
@@ -136,8 +137,9 @@ public interface WorkflowTaskManager {
 
 	public int searchCount(
 			long companyId, long userId, String taskName, String assetType,
-			Date dueDateGT, Date dueDateLT, Boolean completed,
-			Boolean searchByUserRoles, boolean andOperator)
+			Long assetPrimaryKey, Date dueDateGT,
+			Date dueDateLT, Boolean completed, Boolean searchByUserRoles,
+			boolean andOperator)
 		throws WorkflowException;
 
 	public WorkflowTask updateDueDate(

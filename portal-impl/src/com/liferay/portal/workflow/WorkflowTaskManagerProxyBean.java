@@ -16,6 +16,7 @@ package com.liferay.portal.workflow;
 
 import com.liferay.portal.kernel.messaging.proxy.BaseProxyBean;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.kernel.workflow.WorkflowTask;
 import com.liferay.portal.kernel.workflow.WorkflowTaskManager;
 
@@ -158,11 +159,11 @@ public class WorkflowTaskManagerProxyBean
 
 	public List<WorkflowTask> search(
 		long companyId, long userId, String taskName, String assetType,
-		Date dueDateGT, Date dueDateLT, Boolean completed,
+		Long assetPrimaryKey, Date dueDateGT, Date dueDateLT, Boolean completed,
 		Boolean searchByUserRoles, boolean andOperator, int start, int end,
 		OrderByComparator orderByComparator) {
-
 		throw new UnsupportedOperationException();
+
 	}
 
 	public int searchCount(
@@ -174,10 +175,10 @@ public class WorkflowTaskManagerProxyBean
 
 	public int searchCount(
 		long companyId, long userId, String taskName, String assetType,
-		Date dueDateGT, Date dueDateLT, Boolean completed,
+		Long assetPrimaryKey, Date dueDateGT, Date dueDateLT, Boolean completed,
 		Boolean searchByUserRoles, boolean andOperator) {
-
 		throw new UnsupportedOperationException();
+
 	}
 
 	public WorkflowTask updateDueDate(

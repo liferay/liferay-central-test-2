@@ -205,15 +205,16 @@ public class WorkflowTaskManagerUtil {
 
 	public static List<WorkflowTask> search(
 			long companyId, long userId, String taskName, String assetType,
-			Date dueDateGT, Date dueDateLT, Boolean completed,
-			Boolean searchByUserRoles, boolean andOperator, int start, int end,
+			Long assetPrimaryKey, Date dueDateGT, Date dueDateLT,
+			Boolean completed, Boolean searchByUserRoles,
+			boolean andOperator, int start, int end,
 			OrderByComparator orderByComparator)
 		throws WorkflowException {
 
 		return _workflowTaskManager.search(
-			companyId, userId, taskName, assetType, dueDateGT, dueDateLT,
-			completed, searchByUserRoles, andOperator, start, end,
-			orderByComparator);
+			companyId, userId, taskName, assetType, assetPrimaryKey,
+			dueDateGT, dueDateLT, completed, searchByUserRoles,
+			andOperator, start, end, orderByComparator);
 	}
 
 	public static int searchCount(
@@ -227,13 +228,13 @@ public class WorkflowTaskManagerUtil {
 
 	public static int searchCount(
 		long companyId, long userId, String taskName, String assetType,
-			Date dueDateGT, Date dueDateLT, Boolean completed,
-			Boolean searchByUserRoles, boolean andOperator)
+			Long assetPrimaryKey, Date dueDateGT, Date dueDateLT,
+			Boolean completed, Boolean searchByUserRoles, boolean andOperator)
 		throws WorkflowException {
 
 		return _workflowTaskManager.searchCount(
-			companyId, userId, taskName, assetType, dueDateGT, dueDateLT,
-			completed, searchByUserRoles, andOperator);
+			companyId, userId, taskName, assetType, assetPrimaryKey,
+			dueDateGT, dueDateLT, completed, searchByUserRoles, andOperator);
 	}
 
 	public static WorkflowTask updateDueDate(
