@@ -81,6 +81,8 @@ AUI().add(
 						instance._tagsList.on(EVENT_CLICK, instance._onTagsListClick, instance);
 						instance._tagsList.on('key', instance._onTagsListSelect, 'up:13', instance);
 
+						instance._tagsList.delegate(EVENT_CLICK, instance._onTagsListItemClick, 'li', instance);
+
 						instance._tagViewContainer.on(EVENT_CLICK, instance._onTagViewContainerClick, instance);
 
 						var namespace = instance._prefixedPortletId;
@@ -164,6 +166,55 @@ AUI().add(
 						var instance = this;
 
 						contextPanel.get('boundingBox').on('key', contextPanel.hide, 'up:27', contextPanel);
+					},
+
+					_getDDHandler: function() {
+						var instance = this;
+
+						var ddHandler = instance._ddHandler;
+
+						if (!ddHandler) {
+							ddHandler = new A.DD.Delegate(
+								{
+									container: '.tags-admin-list',
+									nodes: 'li',
+									target: true
+								}
+							);
+
+							var dd = ddHandler.dd;
+
+							dd.addTarget(instance);
+
+							dd.plug(
+								A.Plugin.DDProxy,
+								{
+									borderStyle: '0',
+									moveOnEnd: false
+								}
+							);
+
+							dd.plug(
+								A.Plugin.DDConstrained,
+								{
+									constrain2node: instance._tagsList
+								}
+							);
+
+							dd.plug(
+								A.Plugin.DDNodeScroll,
+								{
+									node: instance._tagsList,
+									scrollDelay: 100
+								}
+							);
+
+							dd.removeInvalid('a');
+
+							instance._ddHandler = ddHandler;
+						}
+
+						return ddHandler;
 					},
 
 					_createTagPanelAdd: function() {
@@ -702,6 +753,14 @@ AUI().add(
 						}
 					},
 
+					_onTagsListItemClick: function(event) {
+						var instance = this;
+
+						var tagId = instance._getTagId(event.currentTarget);
+
+						instance._selectTag(tagId);
+					},
+
 					_onTagsListSelect: function(event) {
 						var instance = this;
 
@@ -838,64 +897,12 @@ AUI().add(
 						}
 
 						instance._reloadSearch();
-						instance._prepareTagsMerge();
+
+						instance._getDDHandler().syncTargets();
 
 						if (callback) {
 							callback();
 						}
-					},
-
-					_prepareTagsMerge: function() {
-						var instance = this;
-
-						var	tagsItems = A.all(instance._tagsItemsSelector);
-						var tagsContainer = instance._tagsList;
-
-						tagsItems.on(
-							EVENT_CLICK,
-							function(event) {
-								var tagId = instance._getTagId(event.currentTarget);
-
-								instance._selectTag(tagId);
-							}
-						);
-
-						tagsItems.each(
-							function(item, index, collection) {
-								var dd = new A.DD.Drag(
-									{
-										bubbleTargets: instance,
-										node: item,
-										target: true
-									}
-								);
-
-								dd.plug(
-									A.Plugin.DDProxy,
-									{
-										borderStyle: '0',
-										moveOnEnd: false
-									}
-								);
-
-								dd.plug(
-									A.Plugin.DDConstrained,
-									{
-										constrain2node: tagsContainer
-									}
-								);
-
-								dd.plug(
-									A.Plugin.DDNodeScroll,
-									{
-										node: tagsContainer,
-										scrollDelay: 100
-									}
-								);
-
-								dd.removeInvalid('a');
-							}
-						);
 					},
 
 					_reloadSearch: function() {
