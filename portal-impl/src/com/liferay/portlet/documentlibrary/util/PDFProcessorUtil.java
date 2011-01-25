@@ -187,11 +187,11 @@ public class PDFProcessorUtil {
 				PDDocumentCatalog pdDocumentCatalog =
 					pdDocument.getDocumentCatalog();
 
-				List<PDPage> pddPages = pdDocumentCatalog.getAllPages();
+				List pdPages = pdDocumentCatalog.getAllPages();
 
-				PDPage pddPage = pddPages.get(0);
+				PDPage pdPage = (PDPage)pdPages.get(0);
 
-				RenderedImage renderedImage = pddPage.convertToImage(
+				RenderedImage renderedImage = pdPage.convertToImage(
 					BufferedImage.TYPE_USHORT_565_RGB, 72);
 
 				RenderedImage thumbnailImage = ImageProcessorUtil.scale(

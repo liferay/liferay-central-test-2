@@ -14,6 +14,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -62,14 +63,12 @@ public class BrowserLauncher implements Runnable {
 	}
 
 	protected void launchBrowser() throws Exception {
-		String os = System.getProperty("os.name").toLowerCase();
-
 		Runtime runtime = Runtime.getRuntime();
 
-		if (os.indexOf("mac") >= 0) {
+		if (OSDetector.isApple()) {
 			launchBrowserApple(runtime);
 		}
-		else if (os.indexOf("win") >= 0) {
+		else if (OSDetector.isWindows()) {
 			launchBrowserWindows(runtime);
 		}
 		else {
