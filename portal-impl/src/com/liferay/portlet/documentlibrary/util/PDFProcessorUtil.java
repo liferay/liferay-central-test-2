@@ -187,7 +187,7 @@ public class PDFProcessorUtil {
 				PDDocumentCatalog pdDocumentCatalog =
 					pdDocument.getDocumentCatalog();
 
-				List pdPages = pdDocumentCatalog.getAllPages();
+				List<?> pdPages = pdDocumentCatalog.getAllPages();
 
 				PDPage pdPage = (PDPage)pdPages.get(0);
 
