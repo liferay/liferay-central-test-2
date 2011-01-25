@@ -1274,10 +1274,10 @@
 		<![CDATA[
 			INNER JOIN
 				UserGroups_Teams ON
-				    (UserGroups_Teams.teamId = Team.teamId)
-            INNER JOIN
-                Users_UserGroups ON
-                    (Users_UserGroups.userGroupId = UserGroups_Teams.userGroupId)
+					(UserGroups_Teams.teamId = Team.teamId)
+			INNER JOIN
+				Users_UserGroups ON
+					(Users_UserGroups.userGroupId = UserGroups_Teams.userGroupId)
 			WHERE
 				(Users_UserGroups.userId = ?)
 		]]>
