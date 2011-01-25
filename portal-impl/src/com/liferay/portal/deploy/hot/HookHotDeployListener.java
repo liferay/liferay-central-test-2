@@ -43,6 +43,11 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
+import com.liferay.portal.kernel.servlet.LiferayFilter;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
+import com.liferay.portal.kernel.servlet.filters.invoker.FilterMapping;
+import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter;
+import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilterConfig;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.struts.StrutsAction;
 import com.liferay.portal.kernel.struts.StrutsPortletAction;
@@ -126,6 +131,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 
 import org.springframework.aop.TargetSource;
@@ -657,6 +664,95 @@ public class HookHotDeployListener
 				strutsActionPath, strutsAction);
 		}
 
+		ServletFiltersContainer servletFiltersContainer =
+			_servletFiltersContainerMap.get(servletContextName);
+
+		if (servletFiltersContainer == null) {
+			servletFiltersContainer = new ServletFiltersContainer();
+
+			_servletFiltersContainerMap.put(
+				servletContextName, servletFiltersContainer);
+		}
+
+		List<Element> servletFilterElements = rootElement.elements(
+			"servlet-filter");
+
+		for (Element servletFilterElement : servletFilterElements) {
+			String servletFilterName = servletFilterElement.elementText(
+				"servlet-filter-name");
+			String servletFilterImpl = servletFilterElement.elementText(
+				"servlet-filter-impl");
+
+			List<Element> initParamElements = servletFilterElement.elements(
+				"init-param");
+
+			Map<String, String> initParamMap = new HashMap<String, String>();
+
+			for (Element initParamElement : initParamElements) {
+				String paramName = initParamElement.elementText("param-name");
+				String paramValue = initParamElement.elementText("param-value");
+
+				initParamMap.put(paramName, paramValue);
+			}
+
+			initServletFilter(
+				servletFilterName, servletFilterImpl, initParamMap,
+				servletContext, portletClassLoader, servletFiltersContainer);
+		}
+
+		List<Element> servletFilterMappingElements = rootElement.elements(
+			"servlet-filter-mapping");
+
+		for (Element servletFilterMappingElement : servletFilterMappingElements) {
+			String servletFilterName = servletFilterMappingElement.elementText(
+				"servlet-filter-name");
+
+			String afterFilter = servletFilterMappingElement.elementText(
+				"after-filter");
+
+			String beforeFilter = servletFilterMappingElement.elementText(
+				"before-filter");
+
+			String positionFilterName = null;
+			boolean after = false;
+
+			if (Validator.isNotNull(afterFilter)) {
+				positionFilterName = afterFilter;
+				after = true;
+			}
+			else {
+				positionFilterName = beforeFilter;
+			}
+
+			List<Element> urlPatternElements =
+				servletFilterMappingElement.elements("url-pattern");
+
+			List<String> urlPatterns = new ArrayList<String>();
+
+			for (Element urlPatternElement : urlPatternElements) {
+				String urlPattern = urlPatternElement.getTextTrim();
+
+				urlPatterns.add(urlPattern);
+			}
+
+			List<Element> dispatcherElements =
+				servletFilterMappingElement.elements("dispatcher");
+
+			List<String> dispatchers = new ArrayList<String>();
+
+			for (Element dispatcherElement : dispatcherElements) {
+				String dispatcher = dispatcherElement.getTextTrim();
+
+				dispatcher = dispatcher.toUpperCase();
+
+				dispatchers.add(dispatcher);
+			}
+
+			servletFiltersContainer.registerFilterMapping(
+				servletFilterName, urlPatterns, dispatchers, positionFilterName,
+				after);
+		}
+
 		// Begin backwards compatibility for 5.1.0
 
 		ModelListenersContainer modelListenersContainer =
@@ -812,6 +908,13 @@ public class HookHotDeployListener
 		}
 
 		destroyServices(servletContextName);
+
+		ServletFiltersContainer servletFiltersContainer =
+			_servletFiltersContainerMap.remove(servletContextName);
+
+		if (servletFiltersContainer != null) {
+			servletFiltersContainer.unregister();
+		}
 
 		StrutsActionsContainer strutsActionContainer =
 			_strutsActionsContainerMap.remove(servletContextName);
@@ -1518,6 +1621,37 @@ public class HookHotDeployListener
 			serviceTypeClass, serviceImplConstructor, previousService);
 	}
 
+	protected void initServletFilter(
+			String filterName, String filterClassName,
+			Map<String, String> initParams, ServletContext servletContext,
+			ClassLoader portletClassLoader,
+			ServletFiltersContainer servletFiltersContainer)
+		throws Exception {
+
+		Filter filter = (Filter)InstanceFactory.newInstance(
+			portletClassLoader, filterClassName);
+
+		FilterConfig filterConfig = new InvokerFilterConfig(
+			servletContext, filterName, initParams);
+
+		filter.init(filterConfig);
+
+		Filter filterProxy = null;
+		if (filter instanceof LiferayFilter) {
+			filterProxy = (Filter)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {LiferayFilter.class},
+				new ClassLoaderBeanHandler(filter, portletClassLoader));
+		}
+		else {
+			filterProxy = (Filter)Proxy.newProxyInstance(
+				portletClassLoader, new Class[] {Filter.class},
+				new ClassLoaderBeanHandler(filter, portletClassLoader));
+		}
+
+		servletFiltersContainer.registerFilter(
+			filterName, filter, filterConfig);
+	}
+
 	protected Object initStrutsAction(
 			String path, String strutsActionClassName,
 			ClassLoader portletClassLoader)
@@ -1834,6 +1968,8 @@ public class HookHotDeployListener
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, StringArraysContainer> _stringArraysContainerMap =
 		new HashMap<String, StringArraysContainer>();
+	private Map<String, ServletFiltersContainer> _servletFiltersContainerMap =
+		new HashMap<String, ServletFiltersContainer>();
 	private Map<String, StrutsActionsContainer> _strutsActionsContainerMap =
 		new HashMap<String, StrutsActionsContainer>();
 
@@ -2278,6 +2414,89 @@ public class HookHotDeployListener
 		private Map<String, String[]> _pluginStringArrayMap =
 			new HashMap<String, String[]>();
 
+	}
+
+	private class ServletFiltersContainer {
+
+		public void registerFilter(
+			String filterName, Filter filter, FilterConfig filterConfig) {
+
+			InvokerFilter invokerFilter = getInvokerFilter();
+
+			Filter originalFilter = invokerFilter.registerFilter(
+				filterName, filter);
+
+			_filterConfigs.put(filterName, filterConfig);
+			_filters.put(filterName, originalFilter);
+		}
+
+		public void registerFilterMapping(
+			String filterName, List<String> urlPatterns,
+			List<String> dispatchers, String positionFilterName,
+			boolean after) {
+
+			InvokerFilter invokerFilter = getInvokerFilter();
+
+			Filter filter = invokerFilter.getFilter(filterName);
+
+			FilterConfig filterConfig = _filterConfigs.get(filterName);
+
+			if (filterConfig == null) {
+				filterConfig = invokerFilter.getFilterConfig(filterName);
+			}
+
+			if (filter == null) {
+				_log.warn(
+					"Trying to register filter mapping for non existent filter "
+					+ filterName);
+
+				return;
+			}
+
+			FilterMapping filterMapping = new FilterMapping(
+				filter, filterConfig, urlPatterns, dispatchers);
+
+			invokerFilter.registerFilterMapping(
+				filterMapping, positionFilterName, after);
+		}
+		
+		public void unregister() {
+			InvokerFilter invokerFilter = getInvokerFilter();
+
+			for (String filterName : _filters.keySet()) {
+				Filter originalFilter = _filters.get(filterName);
+
+				Filter currentFilter = invokerFilter.registerFilter(
+					filterName, originalFilter);
+
+				currentFilter.destroy();
+			}
+
+			for (FilterMapping filterMapping : _filterMappings) {
+				invokerFilter.unregister(filterMapping);
+
+				filterMapping.setFilter(null);
+			}
+		}
+
+		private InvokerFilter getInvokerFilter() {
+			String portalCtxPath = PropsUtil.get(PropsKeys.PORTAL_CTX);
+			String portalCtxName = portalCtxPath.substring(1);
+			ServletContext portalServletContext = ServletContextPool.get(
+				portalCtxName);
+
+			InvokerFilter invokerFilter =
+				(InvokerFilter)portalServletContext.getAttribute(
+					InvokerFilter.class.getName());
+
+			return invokerFilter;
+		}
+
+		private Map<String, Filter> _filters = new HashMap<String, Filter>();
+		private Map<String, FilterConfig> _filterConfigs =
+			new HashMap<String, FilterConfig>();
+		private List<FilterMapping> _filterMappings =
+			new ArrayList<FilterMapping>();
 	}
 
 	private class StrutsActionsContainer {

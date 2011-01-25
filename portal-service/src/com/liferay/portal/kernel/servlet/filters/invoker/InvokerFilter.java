@@ -108,15 +108,74 @@ public class InvokerFilter implements Filter {
 		invokerFilterChain.doFilter(servletRequest, servletResponse);
 	}
 
+	public Filter getFilter(String filterName) {
+		return _filters.get(filterName);
+	}
+
+	public FilterConfig getFilterConfig(String filterName) {
+		return _filterConfigs.get(filterName);
+	}
+
 	public void init(FilterConfig filterConfig) throws ServletException {
 		try {
 			ServletContext servletContext = filterConfig.getServletContext();
 
 			readLiferayFilterWebXML(servletContext, "/WEB-INF/liferay-web.xml");
+
+			servletContext.setAttribute(getClass().getName(), this);
 		}
 		catch (Exception e) {
 			throw new ServletException(e);
 		}
+	}
+
+	public Filter registerFilter(String filterName, Filter filter) {
+		Filter originalFilter = _filters.put(filterName, filter);
+
+		if (originalFilter != null) {
+			for (FilterMapping filterMapping : _filterMappings) {
+				if (filterMapping.getFilter() == originalFilter) {
+					if (filter != null) {
+						filterMapping.setFilter(filter);
+					}
+					else {
+						_filterMappings.remove(filterMapping);
+						_filterConfigs.remove(filterName);
+					}
+				}
+			}
+		}
+
+		return originalFilter;
+	}
+
+	public void registerFilterMapping(
+		FilterMapping filterMapping, String filterName,
+		boolean after) {
+
+		int idx = 0;
+
+		if (Validator.isNotNull(filterName)) {
+			Filter filter = _filters.get(filterName);
+
+			if (filter != null) {
+				for (; idx < _filterMappings.size(); idx++) {
+					if (_filterMappings.get(idx).getFilter() == filter) {
+						break;
+					}
+				}
+			}
+		}
+
+		if (after) {
+			idx++;
+		}
+
+		_filterMappings.add(idx, filterMapping);
+	}
+
+	public void unregister(FilterMapping filterMapping) {
+		_filterMappings.remove(filterMapping);
 	}
 
 	protected void initFilter(

@@ -90,6 +90,10 @@ public class FilterMapping {
 		return false;
 	}
 
+	public void setFilter(Filter filter) {
+		_filter = filter;
+	}
+
 	protected void initDispatchers(List<String> dispatchers) {
 		for (String dispatcher : dispatchers) {
 			if (dispatcher.equals("ERROR")) {
