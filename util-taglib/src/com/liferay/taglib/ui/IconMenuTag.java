@@ -228,8 +228,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 					jspWriter.write("<span class=\"taglib-text\">");
 					jspWriter.write(LanguageUtil.get(pageContext, _message));
-					jspWriter.write("</span>");
-					jspWriter.write("</a></strong>");
+					jspWriter.write("</span></a></strong>");
 				}
 
 				jspWriter.write("<ul>");
