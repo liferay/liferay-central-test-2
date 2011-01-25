@@ -242,6 +242,10 @@
 			<forward name="portlet.message_boards.error" path="portlet.blogs.error" />
 		</action>
 
+		<action path="/asset_publisher/edit_event_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.calendar.error" />
+		</action>
+
 		<action path="/asset_publisher/edit_file_entry_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.document_library.error" />
 		</action>
