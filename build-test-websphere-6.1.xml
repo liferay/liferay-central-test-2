@@ -63,43 +63,28 @@
 			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\startServer.bat server1" />
 		</exec>
 
-		<echo file="wsadmin.py">print AdminApp.list()
+		<echo file="wsadmin.jacl">$AdminApp uninstall DefaultApplication
 
-print AdminApp.uninstall('DefaultApplication')
+$AdminConfig save
 
-print AdminConfig.save()
+$AdminApp install "C:/liferay-portal-${lp.version}.war" {-appname liferay-portal -contextroot /}
 
-print AdminApp.install('C:/liferay-portal-${lp.version}.war', '[-appname liferay-portal -contextroot /]')
+$AdminConfig save
 
-print AdminConfig.save()
+$AdminApp install "C:/tunnel-web.war" {-appname liferay-tunnel-web -contextroot /tunnel-web}
 
-print AdminApp.list()
+$AdminConfig save
 
-print AdminApp.install('C:/tunnel-web.war', '[-appname liferay-tunnel-web -contextroot /tunnel-web]')
-
-print AdminConfig.save()
-
-print AdminApp.list()
-
-applicationManager = AdminControl.queryNames('type=ApplicationManager,process=server1,*')
-
-print applicationManager
-
-print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-portal')
-print AdminControl.invoke(applicationManager, 'startApplication', 'liferay-tunnel-web')</echo>
+$AdminControl stopServer server1</echo>
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} wsadmin.py ${vm.username}@${vm.host}:/" />
+			<arg line="-pw ${vm.password} wsadmin.jacl ${vm.username}@${vm.host}:/" />
 		</exec>
 
-		<delete file="wsadmin.py" />
+		<delete file="wsadmin.jacl" />
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\bin\wsadmin.bat -f C:\wsadmin.py" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\profiles\AppSrv01\bin\stopServer.bat server1" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\IBM\WebSphere\AppServer\bin\wsadmin.bat -f C:\wsadmin.jacl" />
 		</exec>
 
 		<antcall target="revert-test-properties" />
