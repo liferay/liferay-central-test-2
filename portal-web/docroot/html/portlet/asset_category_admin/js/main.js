@@ -673,6 +673,7 @@ AUI().add(
 							ioCategoryUpdate = A.io.request(
 								null,
 								{
+									arguments: {},
 									autoLoad: false,
 									dataType: 'json',
 									on: {
@@ -1829,12 +1830,7 @@ AUI().add(
 						ioCategoryUpdate.set('data', data);
 						ioCategoryUpdate.set('uri', moveURL.toString());
 
-						ioCategoryUpdate.set(
-							'arguments',
-							{
-							   success: vocabularyId
-							}
-						);
+						ioCategoryUpdate.set('arguments.success', vocabularyId);
 
 						ioCategoryUpdate.start();
 					},
