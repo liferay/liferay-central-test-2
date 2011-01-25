@@ -22,7 +22,6 @@
 
 	<property name="fckeditor.file" value="FCKeditor_2.6.3.zip" />
 	<property name="tinymce.file" value="tinymce_3_2_1.zip" />
-	<property name="tinymce.language.pack.file" value="tinymce_language_pack.zip" />
 	<property name="vaadin.file" value="vaadin-6.4.6.zip" />
 
 	<path id="jspc.common.classpath">
@@ -533,13 +532,10 @@
 				<delete dir="docroot/html/js/editor/tinymce" />
 
 				<unzip src="third-party/${tinymce.file}" dest="docroot/html/js/editor" />
-				<unzip src="third-party/${tinymce.language.pack.file}" dest="docroot/html/js/editor" />
 
 				<move file="docroot/html/js/editor/tinymce/jscripts/tiny_mce" todir="docroot/html/js/editor" />
-				<move file="docroot/html/js/editor/tinymce_language_pack/langs" todir="docroot/html/js/editor/tiny_mce" />
 
 				<delete dir="docroot/html/js/editor/tinymce" />
-				<delete dir="docroot/html/js/editor/tinymce_language_pack" />
 			</then>
 		</if>
 	</target>
