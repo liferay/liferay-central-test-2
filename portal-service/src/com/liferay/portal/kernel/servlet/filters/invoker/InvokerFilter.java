@@ -130,37 +130,40 @@ public class InvokerFilter implements Filter {
 	}
 
 	public Filter registerFilter(String filterName, Filter filter) {
-		Filter originalFilter = _filters.put(filterName, filter);
+		Filter previousFilter = _filters.put(filterName, filter);
 
-		if (originalFilter != null) {
-			for (FilterMapping filterMapping : _filterMappings) {
-				if (filterMapping.getFilter() == originalFilter) {
-					if (filter != null) {
-						filterMapping.setFilter(filter);
-					}
-					else {
-						_filterMappings.remove(filterMapping);
-						_filterConfigs.remove(filterName);
-					}
+		if (previousFilter == null) {
+			return null;
+		}
+
+		for (FilterMapping filterMapping : _filterMappings) {
+			if (filterMapping.getFilter() == previousFilter) {
+				if (filter != null) {
+					filterMapping.setFilter(filter);
+				}
+				else {
+					_filterMappings.remove(filterMapping);
+					_filterConfigs.remove(filterName);
 				}
 			}
 		}
 
-		return originalFilter;
+		return previousFilter;
 	}
 
 	public void registerFilterMapping(
-		FilterMapping filterMapping, String filterName,
-		boolean after) {
+		FilterMapping filterMapping, String filterName, boolean after) {
 
-		int idx = 0;
+		int i = 0;
 
 		if (Validator.isNotNull(filterName)) {
 			Filter filter = _filters.get(filterName);
 
 			if (filter != null) {
-				for (; idx < _filterMappings.size(); idx++) {
-					if (_filterMappings.get(idx).getFilter() == filter) {
+				for (; i < _filterMappings.size(); i++) {
+					FilterMapping currentFilterMapping = _filterMappings.get(i);
+
+					if (currentFilterMapping.getFilter() == filter) {
 						break;
 					}
 				}
@@ -168,13 +171,13 @@ public class InvokerFilter implements Filter {
 		}
 
 		if (after) {
-			idx++;
+			i++;
 		}
 
-		_filterMappings.add(idx, filterMapping);
+		_filterMappings.add(i, filterMapping);
 	}
 
-	public void unregister(FilterMapping filterMapping) {
+	public void unregisterFilterMapping(FilterMapping filterMapping) {
 		_filterMappings.remove(filterMapping);
 	}
 
@@ -269,8 +272,7 @@ public class InvokerFilter implements Filter {
 			}
 
 			initFilter(
-				servletContext, filterName, filterClassName,
-				initParameterMap);
+				servletContext, filterName, filterClassName, initParameterMap);
 		}
 
 		List<Element> filterMappingElements = rootElement.elements(
