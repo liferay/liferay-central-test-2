@@ -36,7 +36,6 @@ import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
-
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -404,7 +403,7 @@ public class LocalizationImpl implements Localization {
 	public String removeLocalization(
 		String xml, String key, String requestedLanguageId, boolean cdata) {
 
-		return removeLocalization(xml, key, requestedLanguageId, cdata, false);
+		return removeLocalization(xml, key, requestedLanguageId, cdata, true);
 	}
 
 	public String removeLocalization(
@@ -589,7 +588,7 @@ public class LocalizationImpl implements Localization {
 
 		return updateLocalization(
 			xml, key, value, requestedLanguageId, defaultLanguageId, cdata,
-			false);
+			true);
 	}
 
 	public String updateLocalization(
@@ -736,8 +735,8 @@ public class LocalizationImpl implements Localization {
 					while (xmlStreamReader.hasNext()) {
 						event = xmlStreamReader.next();
 
-						if (event == XMLStreamConstants.CHARACTERS ||
-							event == XMLStreamConstants.CDATA) {
+						if ((event == XMLStreamConstants.CHARACTERS) ||
+							(event == XMLStreamConstants.CDATA)) {
 
 							String text = xmlStreamReader.getText();
 
