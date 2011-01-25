@@ -19,7 +19,6 @@
 
 <%
 String cssPath = ParamUtil.getString(request, "cssPath");
-String languageId = ParamUtil.getString(request, "languageId");
 %>
 
 CKEDITOR.addStylesSet(
@@ -47,8 +46,6 @@ CKEDITOR.addStylesSet(
 	{name : 'Error Message', element : 'div', attributes : {'class' : 'portlet-msg-error'}}
 	]
 );
-
-CKEDITOR.config.language = '<%= languageId %>';
 
 CKEDITOR.config.contentsCss = '<%= HtmlUtil.escape(cssPath) %>/main.css';
 

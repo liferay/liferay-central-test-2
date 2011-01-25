@@ -17,15 +17,10 @@
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
-<%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
-<%@ page import="java.util.Locale" %>
 
 <%
 String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
-String languageId = ParamUtil.getString(request, "languageId");
-Locale locale =  LocaleUtil.fromLanguageId(languageId);
-languageId = locale.getLanguage();
 %>
 
 <html>
@@ -53,8 +48,7 @@ languageId = locale.getLanguage();
 			theme_advanced_buttons3_add_before : "tablecontrols,separator",
 			theme_advanced_disable : "formatselect,styleselect,help",
 			theme_advanced_toolbar_align : "left",
-			theme_advanced_toolbar_location : "top",
-			language : "<%= languageId %>"
+			theme_advanced_toolbar_location : "top"
 		});
 
 		function fileBrowserCallback(field_name, url, type) {

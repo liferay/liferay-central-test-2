@@ -31,7 +31,6 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
-String languageId = ParamUtil.getString(request, "languageId");
 
 // To upgrade FCKEditor, download the latest version and unzip it to fckeditor.
 // Add custom configuration to fckeditor/fckconfig.jsp. Copy
@@ -75,7 +74,7 @@ String languageId = ParamUtil.getString(request, "languageId");
 
 				var fckEditor = new FCKeditor("FCKeditor1");
 
-				fckEditor.Config["CustomConfigurationsPath"] = "<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses)%>&languageId=<%= HttpUtil.encodeURL(languageId)%>";
+				fckEditor.Config["CustomConfigurationsPath"] = "<%= PortalUtil.getPathContext() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>";
 
 				fckEditor.BasePath = "fckeditor/";
 				fckEditor.Width = "100%";
