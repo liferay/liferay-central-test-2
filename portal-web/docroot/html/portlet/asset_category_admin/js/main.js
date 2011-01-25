@@ -528,7 +528,7 @@ AUI().add(
 						if (instance.treeView) {
 							bubbleTargets.push(instance.treeView);
 						}
-// console.log(bubbleTargets);
+
 						listLinks.plug(
 							A.Plugin.Drop,
 							{
