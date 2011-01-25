@@ -1273,8 +1273,11 @@
 	<sql id="com.liferay.portal.service.persistence.TeamFinder.joinByUsersUserGroups">
 		<![CDATA[
 			INNER JOIN
-				Users_UserGroups ON
-					(UserGroups_Teams.userGroupId = Users_UserGroups.userGroupId)
+				UserGroups_Teams ON
+				    (UserGroups_Teams.teamId = Team.teamId)
+            INNER JOIN
+                Users_UserGroups ON
+                    (Users_UserGroups.userGroupId = UserGroups_Teams.userGroupId)
 			WHERE
 				(Users_UserGroups.userId = ?)
 		]]>
