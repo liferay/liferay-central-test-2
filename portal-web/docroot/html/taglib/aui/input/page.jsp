@@ -200,7 +200,9 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 			if (!ignoreRequestValue) {
 				String requestValue = ParamUtil.getString(request, name);
 
-				valueBoolean = valueString.equals(requestValue);
+				if (Validator.isNotNull(requestValue)) {
+					valueBoolean = valueString.equals(requestValue);
+				}
 			}
 		}
 		%>
