@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.ThemeHelper;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
@@ -187,9 +188,9 @@ public class FilterMapping {
 	}
 
 	protected boolean isMatchURLRegexPattern(HttpServletRequest request) {
-		StringBuffer requestURL = request.getRequestURL();
+		String requestPath = ThemeHelper.getRequestPath(request);
 
-		if (requestURL == null) {
+		if (Validator.isNull(requestPath)) {
 			return false;
 		}
 
@@ -197,24 +198,23 @@ public class FilterMapping {
 			return true;
 		}
 
-		String url = requestURL.toString();
-
 		String queryString = request.getQueryString();
 
 		if (Validator.isNotNull(queryString)) {
-			url = url.concat(StringPool.QUESTION).concat(queryString);
+			requestPath = requestPath.concat(StringPool.QUESTION).concat(
+				queryString);
 		}
 
 		boolean matchURLRegexPattern = true;
 
 		if (_urlRegexPattern != null) {
-			Matcher matcher = _urlRegexPattern.matcher(url);
+			Matcher matcher = _urlRegexPattern.matcher(requestPath);
 
 			matchURLRegexPattern = matcher.find();
 		}
 
 		if (matchURLRegexPattern && (_urlRegexIgnorePattern != null)) {
-			Matcher matcher = _urlRegexIgnorePattern.matcher(url);
+			Matcher matcher = _urlRegexIgnorePattern.matcher(requestPath);
 
 			matchURLRegexPattern = !matcher.find();
 		}
@@ -222,12 +222,13 @@ public class FilterMapping {
 		if (_log.isDebugEnabled()) {
 			if (matchURLRegexPattern) {
 				_log.debug(
-					_filter.getClass() + " has a regex match with " + url);
+					_filter.getClass() + " has a regex match with " +
+						requestPath);
 			}
 			else {
 				_log.debug(
 					_filter.getClass() + " does not have a regex match with " +
-						url);
+						requestPath);
 			}
 		}
 

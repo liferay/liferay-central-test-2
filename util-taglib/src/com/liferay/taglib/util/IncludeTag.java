@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.ThemeHelper;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -90,13 +91,13 @@ public class IncludeTag
 			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
 			if (_log.isDebugEnabled() && Validator.isNotNull(page)) {
-				String resourcePath = ThemeUtil.getResourcePath(
+				String resourcePath = ThemeHelper.getResourcePath(
 					servletContext, theme, page);
 
 				_log.debug(resourcePath);
 			}
 
-			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
+			if (ThemeHelper.resourceExists(servletContext, theme, page)) {
 				ThemeUtil.include(
 					servletContext, request, response, pageContext,
 					page, theme);
@@ -145,10 +146,10 @@ public class IncludeTag
 
 			if (_log.isDebugEnabled() && Validator.isNotNull(page)) {
 				_log.debug(
-					ThemeUtil.getResourcePath(servletContext, theme, page));
+					ThemeHelper.getResourcePath(servletContext, theme, page));
 			}
 
-			if (ThemeUtil.resourceExists(servletContext, theme, page)) {
+			if (ThemeHelper.resourceExists(servletContext, theme, page)) {
 				ThemeUtil.include(
 					servletContext, request, response, pageContext, page,
 					theme);

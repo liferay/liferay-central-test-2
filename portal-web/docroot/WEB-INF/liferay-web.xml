@@ -188,6 +188,10 @@
 	<filter>
 		<filter-name>Servlet Context Include Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.servletcontextinclude.ServletContextIncludeFilter</filter-class>
+		<init-param>
+			<param-name>url-regex-ignore-pattern</param-name>
+			<param-value>.*/WEB-INF/jsp/_servlet_context_include.jsp</param-value>
+		</init-param>
 	</filter>
 	<filter>
 		<filter-name>Session Id Filter</filter-name>
@@ -805,6 +809,7 @@
 		<filter-name>Servlet Context Include Filter</filter-name>
 		<url-pattern>*.jsp</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
 		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
