@@ -165,10 +165,60 @@ td.user-info {
 	margin: 1em;
 }
 
-.portlet-message-boards .statistics-panel-content dt{
+.portlet-message-boards .statistics-panel-content dt {
 	float: left;
 	font-weight: bold;
 	margin-right: 1em;
+}
+
+.portlet-message-boards .status {
+	display: block;
+	float: left;
+	height: 38px;
+	margin: 0 3px 0 0;
+	padding: 5px;
+	text-align: center;
+	width: 48px;
+}
+
+.portlet-message-boards .views {
+	color: #999;
+	display: block;
+	float: left;
+	height: 38px;
+	margin: 0 3px 0 0;
+	padding: 5px 0 5px 4px;
+	text-align: center;
+	width: 40px;
+}
+
+.portlet-message-boards .votes {
+	background: none repeat scroll 0 0 #EEE;
+	color: #555;
+	display: block;
+	float: left;
+	height: 38px;
+	margin: 0 3px 0 0;
+	padding: 5px;
+	text-align: center;
+	width: 40px;
+}
+
+.portlet-message-boards .answered {
+	background: none repeat scroll 0 0 #75845C;
+	color: white;
+}
+
+.portlet-message-boards .unanswered {
+	background: none repeat scroll 0 0 #9A4444;
+	color: white;
+}
+
+.portlet-message-boards .count {
+	display: block;
+	font-size: 190%;
+	font-weight: bold;
+	height: 25px;
 }
 
 .portlet-message-boards .toggle_id_message_boards_view_message_thread {
@@ -241,6 +291,61 @@ td.user-info {
 
 .portlet-message-boards .threads-panel {
 	margin-top: 2em;
+}
+
+.portlet-message-boards .displayStyle-question .action-question .taglib-text {
+	display: none;
+}
+
+.portlet-message-boards .displayStyle-question .action-question .lfr-actions .lfr-trigger strong {
+	min-width: 0;
+}
+
+.portlet-message-boards .displayStyle-question .last-post {
+	margin-left: 1em;
+	width: 15%;
+}
+
+.portlet-message-boards .displayStyle-question .stats {
+	width: 20%;
+}
+
+.portlet-message-boards .displayStyle-question .question {
+	width: 65%;
+}
+
+.portlet-message-boards .displayStyle-question .last-post .portrait {
+	text-align: center;
+}
+
+.portlet-message-boards .displayStyle-question .username {
+	text-align: center;
+}
+
+.portlet-message-boards .displayStyle-question .time {
+	color: #666;
+	font-weight: bold;
+	margin-top: 0.5em;
+	text-align: center;
+}
+
+.portlet-message-boards .displayStyle-question .tags {
+	float: left;
+	margin-top: 0.5em;
+}
+
+.portlet-message-boards .displayStyle-question .question-subject {
+	color: #06C;
+	font-size: 125%;
+}
+
+.portlet-message-boards .displayStyle-question .question-subject #a {
+	color: #06C;
+}
+
+.portlet-message-boards .displayStyle-question .summary {
+	color: #4F4F4F;
+	font-size: 120%;
 }
 
 .portlet-message-boards .top-links .category-search {

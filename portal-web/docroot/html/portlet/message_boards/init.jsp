@@ -81,6 +81,8 @@
 <%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.util.ThreadHits" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
+<%@ page import="com.liferay.portlet.ratings.model.RatingsStats" %>
+<%@ page import="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%
