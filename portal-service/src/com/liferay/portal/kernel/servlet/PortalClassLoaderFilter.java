@@ -29,12 +29,14 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Brian Wing Shun Chan
  */
 public class PortalClassLoaderFilter
-	extends BasePortalLifecycle implements Filter {
+	extends BasePortalLifecycle implements LiferayFilter {
 
 	public void destroy() {
 		portalDestroy();
@@ -73,8 +75,27 @@ public class PortalClassLoaderFilter
 		registerPortalLifecycle();
 	}
 
-	public Filter getWrappedFilter() {
-		return _filter;
+	public boolean isFilterEnabled() {
+
+		if (_filter instanceof LiferayFilter) {
+			LiferayFilter liferayFilter = (LiferayFilter)_filter;
+
+			return liferayFilter.isFilterEnabled();
+		}
+
+		return true;
+	}
+
+	public boolean isFilterEnabled(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		if (_filter instanceof LiferayFilter) {
+			LiferayFilter liferayFilter = (LiferayFilter)_filter;
+
+			return liferayFilter.isFilterEnabled(request, response);
+		}
+
+		return true;
 	}
 
 	protected void doPortalDestroy() {

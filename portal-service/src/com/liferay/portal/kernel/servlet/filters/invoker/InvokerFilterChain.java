@@ -66,21 +66,6 @@ public class InvokerFilterChain implements FilterChain {
 
 			boolean filterEnabled = true;
 
-			if (filter instanceof PortalClassLoaderFilter) {
-				PortalClassLoaderFilter portalClassLoaderFilter =
-					(PortalClassLoaderFilter)filter;
-
-				if (portalClassLoaderFilter.getWrappedFilter()
-						instanceof LiferayFilter) {
-
-					LiferayFilter liferayFilter =
-						(LiferayFilter)portalClassLoaderFilter.getWrappedFilter();
-
-					filterEnabled = liferayFilter.isFilterEnabled(
-						request, response);
-				}
-			}
-
 			if (filter instanceof LiferayFilter) {
 				LiferayFilter liferayFilter = (LiferayFilter)filter;
 
