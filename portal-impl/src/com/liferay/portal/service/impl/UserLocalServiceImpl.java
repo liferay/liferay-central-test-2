@@ -162,7 +162,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			Account account = company.getAccount();
 
-			if (defaultGroupName.equals(account.getName())) {
+			if (defaultGroupName.equalsIgnoreCase(account.getName())) {
 				defaultGroupName = GroupConstants.GUEST;
 			}
 
