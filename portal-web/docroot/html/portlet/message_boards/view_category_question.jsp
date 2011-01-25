@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,7 +26,6 @@ long categoryId = MBUtil.getCategoryId(request, category);
 MBCategoryDisplay categoryDisplay = (MBCategoryDisplay)request.getAttribute("view.jsp-categoryDisplay");
 
 Set<Long> categorySubscriptionClassPKs = (Set<Long>)request.getAttribute("view.jsp-threadSubscriptionClassPKs");
-
 Set<Long> threadSubscriptionClassPKs = (Set<Long>)request.getAttribute("view.jsp-threadSubscriptionClassPKs");
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -128,25 +127,23 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 
 			<%
 			int replies = MBMessageServiceUtil.getThreadMessagesCount(scopeGroupId, categoryId, thread.getThreadId(), WorkflowConstants.STATUS_ANY) - 1;
+
 			RatingsStats ratingsStats = RatingsStatsLocalServiceUtil.getStats(MBMessage.class.getName(), message.getMessageId());
+
 			int ratingScore = (int)ratingsStats.getTotalScore();
 			%>
 
 			<span class= "votes">
-				<span class= "count"><%= String.valueOf(ratingScore) %></span>
-				<span><%= LanguageUtil.get(pageContext, "votes") %></span>
+				<span class="count"><%= String.valueOf(ratingScore) %></span> <span><%= LanguageUtil.get(pageContext, "votes") %></span>
 			</span>
 
 			<span class="status <%= (replies != 0) ? "answered" : " unanswered" %> ">
-				<span class="count"><%= replies %></span>
-				<span><%= LanguageUtil.get(pageContext, "answers") %></span>
+				<span class="count"><%= replies %></span> <span><%= LanguageUtil.get(pageContext, "answers") %></span>
 			</span>
 
 			<span class="views">
-				<span class="count"><%= thread.getViewCount() %></span>
-				<span><%= LanguageUtil.get(pageContext, "views") %></span>
+				<span class="count"><%= thread.getViewCount() %></span> <span><%= LanguageUtil.get(pageContext, "views") %></span>
 			</span>
-
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-jsp
@@ -174,5 +171,5 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 </liferay-ui:search-container>
 
 <%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view_category_question_jsp");
 %>

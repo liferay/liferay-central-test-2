@@ -25,30 +25,26 @@ MBMessage message = (MBMessage)objArray[0];
 
 MBThread thread = message.getThread();
 
-Date now = new Date();
-
-long lastPostAgo = now.getTime() - thread.getLastPostDate().getTime();
-
-String lastPostByUserName = HtmlUtil.escape(PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK));
-
 User userDisplay = UserLocalServiceUtil.getUserById(thread.getLastPostByUserId());
-
-String portraitURL = userDisplay.getPortraitURL(themeDisplay);
-String displayURL = userDisplay.getDisplayURL(themeDisplay);
-
-String portraitAlt = (userDisplay != null) ? HtmlUtil.escapeAttribute(userDisplay.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait");
 %>
 
 <div class="user-info">
 	<div class="portrait">
-		<a href="<%= displayURL %>"><img class="avatar" src=" <%= portraitURL %>" alt="<%= portraitAlt %>" width="60" /></a>
+		<a href="<%= userDisplay.getDisplayURL(themeDisplay) %>"><img alt="<%= (userDisplay != null) ? HtmlUtil.escapeAttribute(userDisplay.getFullName()) : LanguageUtil.get(pageContext, "generic-portrait") %>" class="avatar" src=" <%= userDisplay.getPortraitURL(themeDisplay) %>" width="60" /></a>
 	</div>
 
 	<div class="username">
-		<a href="<%= displayURL %>"><%= lastPostByUserName %></a>
+		<a href="<%= userDisplay.getDisplayURL(themeDisplay) %>"><%= HtmlUtil.escape(PortalUtil.getUserName(thread.getLastPostByUserId(), StringPool.BLANK)) %></a>
 	</div>
 
 	<div class="time">
+
+		<%
+		Date now = new Date();
+
+		long lastPostAgo = now.getTime() - thread.getLastPostDate().getTime();
+		%>
+
 		<liferay-ui:icon
 			image="../aui/clock"
 			label="<%= true %>"
