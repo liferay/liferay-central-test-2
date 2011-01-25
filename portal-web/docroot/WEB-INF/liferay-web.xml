@@ -187,7 +187,7 @@
 	</filter>
 	<filter>
 		<filter-name>Servlet Context Include Filter</filter-name>
-		<filter-class>com.liferay.portal.servlet.filters.theme.ServletContextIncludeFilter</filter-class>
+		<filter-class>com.liferay.portal.servlet.filters.servletcontextinclude.ServletContextIncludeFilter</filter-class>
 	</filter>
 	<filter>
 		<filter-name>Session Id Filter</filter-name>
