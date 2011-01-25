@@ -19,8 +19,6 @@ COMMIT_TRANSACTION;
 
 update MBMessage set rootMessageId = (select rootMessageId from MBThread where MBThread.threadId = MBMessage.threadId);
 
-alter table PasswordPolicy add minSymbols INTEGER;
-
 drop table SocialEquityAssetEntry;
 create table SocialEquityAssetEntry (
 	equityAssetEntryId LONG not null primary key,
