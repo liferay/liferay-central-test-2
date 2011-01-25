@@ -503,6 +503,8 @@ AUI().add(
 
 						if (instance.treeView) {
 							instance.treeView.destroy();
+
+							instance._selectedCategory = null;
 						}
 
 						instance._createCategoryTreeView(categories);
@@ -524,10 +526,16 @@ AUI().add(
 
 						listLinks.unplug(A.Plugin.Drop);
 
+						var bubbleTargets = [instance];
+
+						if (instance.treeView) {
+							bubbleTargets.push(instance.treeView);
+						}
+// console.log(bubbleTargets);
 						listLinks.plug(
 							A.Plugin.Drop,
 							{
-								bubbleTargets: [instance, instance.treeView]
+								bubbleTargets: bubbleTargets
 							}
 						);
 

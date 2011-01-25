@@ -53,7 +53,7 @@ AUI().add(
 
 						instance._renderIcons();
 
-						instance.inputContainer.hide('aui-helper-hidden-accessible');
+						instance.inputContainer.addClass('aui-helper-hidden-accessible');
 					},
 
 					bindUI: function() {
