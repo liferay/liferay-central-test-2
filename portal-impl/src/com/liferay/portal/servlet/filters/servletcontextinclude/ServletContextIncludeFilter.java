@@ -48,6 +48,10 @@ public class ServletContextIncludeFilter extends BasePortalFilter {
 			String requestPath = ThemeHelper.getRequestPath(
 				getFilterConfig().getServletContext(), request);
 
+			if (!requestPath.endsWith(".jsp")) {
+				return false;
+			}
+
 			String servletContextIncludePath = (String)request.getAttribute(
 				WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_PATH);
 
@@ -64,14 +68,10 @@ public class ServletContextIncludeFilter extends BasePortalFilter {
 				theme = getTheme(request);
 			}
 
-			if (!ThemeHelper.resourceExists(
-					getFilterConfig().getServletContext(),
-					theme, requestPath)) {
+			boolean resourceExists = ThemeHelper.resourceExists(
+				getFilterConfig().getServletContext(), theme, requestPath);
 
-				return false;
-			}
-
-			if (theme != null) {
+			if ((theme != null) && resourceExists) {
 				request.setAttribute(
 					WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_THEME, theme);
 

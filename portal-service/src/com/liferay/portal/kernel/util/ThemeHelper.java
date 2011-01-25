@@ -51,7 +51,7 @@ public class ThemeHelper {
 			requestPath = requestURI;
 		}
 
-		if (requestPath.startsWith(StringPool.SLASH)) {
+		if (!requestPath.startsWith(StringPool.SLASH)) {
 			requestPath = StringPool.SLASH.concat(requestPath);
 		}
 
