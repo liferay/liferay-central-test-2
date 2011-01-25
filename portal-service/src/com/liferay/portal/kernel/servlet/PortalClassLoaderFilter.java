@@ -76,11 +76,8 @@ public class PortalClassLoaderFilter
 	}
 
 	public boolean isFilterEnabled() {
-
-		if (_filter instanceof LiferayFilter) {
-			LiferayFilter liferayFilter = (LiferayFilter)_filter;
-
-			return liferayFilter.isFilterEnabled();
+		if (_liferayFilter != null) {
+			return _liferayFilter.isFilterEnabled();
 		}
 
 		return true;
@@ -89,10 +86,8 @@ public class PortalClassLoaderFilter
 	public boolean isFilterEnabled(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		if (_filter instanceof LiferayFilter) {
-			LiferayFilter liferayFilter = (LiferayFilter)_filter;
-
-			return liferayFilter.isFilterEnabled(request, response);
+		if (_liferayFilter != null) {
+			return _liferayFilter.isFilterEnabled(request, response);
 		}
 
 		return true;
@@ -128,9 +123,14 @@ public class PortalClassLoaderFilter
 		_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
 
 		_filter.init(_filterConfig);
+
+		if (_filter instanceof LiferayFilter) {
+			_liferayFilter = (LiferayFilter)_filter;
+		}
 	}
 
 	private Filter _filter;
 	private FilterConfig _filterConfig;
+	private LiferayFilter _liferayFilter;
 
 }
