@@ -614,7 +614,6 @@ AUI().add(
 									node.remove();
 
 									instance._selectTag(toTagId);
-									instance._alternateRows();
 								}
 							);
 						}
