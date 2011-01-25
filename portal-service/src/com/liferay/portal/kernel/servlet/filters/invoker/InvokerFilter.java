@@ -79,8 +79,6 @@ public class InvokerFilter implements Filter {
 			JavaConstants.JAVAX_SERVLET_ERROR_REQUEST_URI);
 		String forwardRequestURI = (String)request.getAttribute(
 			JavaConstants.JAVAX_SERVLET_FORWARD_REQUEST_URI);
-		String includeRequestURI = (String)request.getAttribute(
-			JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
 
 		if (Validator.isNotNull(errorRequestURI)) {
 			dispatcher = Dispatcher.ERROR;
@@ -88,10 +86,6 @@ public class InvokerFilter implements Filter {
 		}
 		else if (Validator.isNotNull(forwardRequestURI)) {
 			dispatcher = Dispatcher.FORWARD;
-		}
-		else if (Validator.isNotNull(includeRequestURI)) {
-			dispatcher = Dispatcher.INCLUDE;
-			uri = includeRequestURI;
 		}
 
 		InvokerFilterChain invokerFilterChain = new InvokerFilterChain(
@@ -298,6 +292,12 @@ public class InvokerFilter implements Filter {
 			for (Element dispatcherElement : dispatcherElements) {
 				String dispatcher =
 					dispatcherElement.getTextTrim().toUpperCase();
+
+				if (dispatcher.equals("INCLUDE")) {
+					_log.warn("InvokerFilter ignored INCLUDE dispatcher for "+
+						filterName);
+					continue;
+				}
 
 				dispatchers.add(dispatcher);
 			}
