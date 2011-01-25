@@ -1,6 +1,7 @@
 AUI().add(
 	'liferay-tags-admin',
 	function(A) {
+		var Lang = A.Lang;
 		var Node = A.Node;
 
 		var ACTION_ADD = 0;
@@ -30,7 +31,7 @@ AUI().add(
 		var NODE = 'node';
 
 		var TPL_PORTLET_MESSAGES = '<div class="aui-helper-hidden lfr-message-response" id="portletMessages" />';
-	
+
 		var TPL_TAG_LIST = '<li class="tag-item-container results-row {cssClassSelected}" data-tag="{name}" data-tagId="{tagId}" tabIndex="0">' +
 			'<div class="tags-admin-content-wrapper">' +
 					'<span class="tag-item">' +
@@ -47,10 +48,6 @@ AUI().add(
 				NAME: 'assettagsadmin',
 
 				EXTENDS: A.Base,
-
-				constructor: function(config) {
-					AssetTagsAdmin.superclass.constructor.apply(this, arguments);
-				},
 
 				prototype: {
 					initializer: function(config) {
@@ -215,6 +212,7 @@ AUI().add(
 							function(event) {
 								if (!event.newVal) {
 									var body = instance._tagPanelEdit.getStdModNode(A.WidgetStdMod.BODY);
+
 									body.empty();
 								}
 							}
@@ -270,7 +268,7 @@ AUI().add(
 
 						url.setPortletId(instance.portletId);
 						url.setWindowState('exclusive');
-						
+
 						if (action == ACTION_ADD) {
 							path += 'edit_tag';
 						}
@@ -329,9 +327,11 @@ AUI().add(
 					_displayTags: function(callback) {
 						var instance = this;
 
-						instance._getTags(function(tags) {
-							instance._prepareTags(tags, callback);
-						});
+						instance._getTags(
+							function(tags) {
+								instance._prepareTags(tags, callback);
+							}
+						);
 					},
 
 					_focusTagPanelAdd: function() {
@@ -420,13 +420,14 @@ AUI().add(
 						var instance = this;
 
 						var elem = expr;
+						var attr;
 
 						if (!expr instanceof Node) {
 							elem = instance._tagsList.one(expr);
 						}
 
 						if (elem) {
-							var attr = elem.attr('data-tagId');
+							attr = elem.attr('data-tagId');
 						}
 
 						return attr;
@@ -436,13 +437,14 @@ AUI().add(
 						var instance = this;
 
 						var elem = expr;
+						var attr;
 
 						if (!expr instanceof Node) {
 							elem = instance._tagsList.one(expr);
 						}
 
 						if (elem) {
-							var attr = elem.attr('data-tag');
+							attr = elem.attr('data-tag');
 						}
 
 						return attr;
@@ -565,7 +567,7 @@ AUI().add(
 
 						instance._displayTags(
 							function() {
-						 		instance._displayTagData();
+								instance._displayTagData();
 							}
 						);
 					},
@@ -610,6 +612,7 @@ AUI().add(
 								toTagId,
 								function() {
 									node.remove();
+
 									instance._selectTag(toTagId);
 									instance._alternateRows();
 								}
@@ -625,6 +628,161 @@ AUI().add(
 							},
 							callback
 						);
+					},
+
+					_onDeleteTag: function(event) {
+						var instance = this;
+
+						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag'))) {
+							instance._deleteTag(
+								instance._selectedTagId,
+								function(message) {
+									var exception = message.exception;
+
+									if (!exception) {
+										instance._sendMessage(MESSAGE_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
+
+										instance._hidePanels();
+										instance._loadData();
+									}
+									else {
+										var errorText;
+
+										if (exception.indexOf('auth.PrincipalException') > -1) {
+											errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
+										}
+										else {
+											errorText = Liferay.Language.get('your-request-failed-to-complete');
+										}
+
+										instance._sendMessage(MESSAGE_TYPE_ERROR, errorText);
+									}
+								}
+							);
+						}
+					},
+
+					_onShowTagPanel: function(event, action) {
+						var instance = this;
+
+						instance._hidePanels();
+
+						instance._showTagPanel(action);
+					},
+
+					_onTagChangePermissions: function(event) {
+						var instance = this;
+
+						var url = event.target.attr('data-url');
+
+						instance._loadPermissions(url);
+					},
+
+					_onTagFormSubmit: function(event, form) {
+						var instance = this;
+
+						event.halt();
+
+						Liferay.fire(
+							'saveAutoFields',
+							{
+								form: form
+							}
+						);
+
+						instance._updateTag(form);
+					},
+
+					_onTagsListClick: function(event) {
+						var instance = this;
+
+						instance._onTagsListSelect(event);
+
+						if (event.target.hasClass('tag-item-actions-trigger')) {
+							instance._onShowTagPanel(event, ACTION_EDIT);
+						}
+					},
+
+					_onTagsListSelect: function(event) {
+						var instance = this;
+
+						var tagId = instance._getTagId(event.target);
+
+						instance._selectTag(tagId);
+					},
+
+					_onTagUpdateFailure: function(response) {
+						var instance = this;
+
+						instance._sendMessage(MESSAGE_TYPE_ERROR, Liferay.Language.get('your-request-failed-to-complete'));
+					},
+
+					_onTagUpdateSuccess: function(response) {
+						var instance = this;
+
+						instance._hideAllMessages();
+
+						var exception = response.exception;
+
+						if (!response.exception) {
+							instance._sendMessage(MESSAGE_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
+
+							instance._displayTags(
+								function() {
+									instance._unselectAllTags();
+									instance._selectTag(response.tagId);
+								}
+							);
+
+							instance._hidePanels();
+						}
+						else {
+							var errorText;
+
+							if (exception.indexOf('DuplicateTagException') > -1) {
+								errorText = Liferay.Language.get('that-tag-already-exists');
+							}
+							else if ((exception.indexOf('TagNameException') > -1) ||
+									 (exception.indexOf('AssetTagException') > -1)) {
+								errorText = Liferay.Language.get('one-of-your-fields-contains-invalid-characters');
+							}
+							else if (exception.indexOf('auth.PrincipalException') > -1) {
+								errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
+							}
+							else {
+								errorText = Liferay.Language.get('your-request-failed-to-complete');
+							}
+
+							instance._sendMessage(MESSAGE_TYPE_ERROR, errorText);
+						}
+					},
+
+					_onTagViewContainerClick: function(event) {
+						var instance = this;
+
+						var targetId = event.target.get('id');
+
+						if (targetId == 'editTagButton') {
+							instance._onShowTagPanel(event, ACTION_EDIT);
+						}
+						else if (targetId == 'deleteTagButton') {
+							instance._onDeleteTag(event);
+						}
+						else if (targetId == 'updateTagPermissions') {
+							instance._onTagChangePermissions(event);
+						}
+					},
+
+					_onTagViewFailure: function() {
+						var instance = this;
+
+						instance._sendMessage(MESSAGE_TYPE_ERROR, Liferay.Language.get('your-request-failed-to-complete'));
+					},
+
+					_onTagViewSuccess: function(response) {
+						var instance = this;
+
+						instance._tagViewContainer.html(response);
 					},
 
 					_resetTagsProperties: function(event) {
@@ -657,7 +815,7 @@ AUI().add(
 										item.cssClassSelected = '';
 									}
 
-									buffer.push(A.Lang.sub(TPL_TAG_LIST, item));
+									buffer.push(Lang.sub(TPL_TAG_LIST, item));
 								}
 							);
 
@@ -808,161 +966,6 @@ AUI().add(
 						A.all(container).html('<div class="loading-animation" />');
 					},
 
-					_onDeleteTag: function(event) {
-						var instance = this;
-
-						if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag'))) {
-							instance._deleteTag(
-								instance._selectedTagId,
-								function(message) {
-									var exception = message.exception;
-
-									if (!exception) {
-										instance._sendMessage(MESSAGE_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
-
-										instance._hidePanels();
-										instance._loadData();
-									}
-									else {
-										var errorText;
-
-										if (exception.indexOf('auth.PrincipalException') > -1) {
-											errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
-										}
-										else {
-											errorText = Liferay.Language.get('your-request-failed-to-complete');
-										}
-
-										instance._sendMessage(MESSAGE_TYPE_ERROR, errorText);
-									}
-								}
-							);
-						}
-					},
-
-					_onTagChangePermissions: function(event) {
-						var instance = this;
-
-						var url = event.target.attr('data-url');
-
-						instance._loadPermissions(url);
-					},
-
-					_onTagFormSubmit: function(event, form) {
-						var instance = this;
-
-						event.halt();
-
-						Liferay.fire(
-							'saveAutoFields',
-							{
-								form: form
-							}
-						);
-
-						instance._updateTag(form);
-					},
-
-					_onTagsListClick: function(event) {
-						var instance = this;
-
-						instance._onTagsListSelect(event);
-
-						if (event.target.hasClass('tag-item-actions-trigger')) {
-							instance._onShowTagPanel(event, ACTION_EDIT);
-						}
-					},
-
-					_onTagsListSelect: function(event) {
-						var instance = this;
-
-						var tagId = instance._getTagId(event.target);
-
-						instance._selectTag(tagId);
-					},
-
-					_onTagUpdateFailure: function(response) {
-						var instance = this;
-
-						instance._sendMessage(MESSAGE_TYPE_ERROR, Liferay.Language.get('your-request-failed-to-complete'));
-					},
-
-					_onTagUpdateSuccess: function(response) {
-						var instance = this;
-
-						instance._hideAllMessages();
-
-						var exception = response.exception;
-
-						if (!response.exception) {
-							instance._sendMessage(MESSAGE_TYPE_SUCCESS, Liferay.Language.get('your-request-processed-successfully'));
-
-							instance._displayTags(
-								function() {
-									instance._unselectAllTags();
-									instance._selectTag(response.tagId);
-								}
-							);
-
-							instance._hidePanels();
-						}
-						else {
-							var errorText;
-
-							if (exception.indexOf('DuplicateTagException') > -1) {
-								errorText = Liferay.Language.get('that-tag-already-exists');
-							}
-							else if ((exception.indexOf('TagNameException') > -1) ||
-									 (exception.indexOf('AssetTagException') > -1)) {
-								errorText = Liferay.Language.get('one-of-your-fields-contains-invalid-characters');
-							}
-							else if (exception.indexOf('auth.PrincipalException') > -1) {
-								errorText = Liferay.Language.get('you-do-not-have-permission-to-access-the-requested-resource');
-							}
-							else {
-								errorText = Liferay.Language.get('your-request-failed-to-complete');
-							}
-
-							instance._sendMessage(MESSAGE_TYPE_ERROR, errorText);
-						}
-					},
-
-					_onShowTagPanel: function(event, action) {
-						var instance = this;
-
-						instance._hidePanels();
-
-						instance._showTagPanel(action);
-					},
-
-					_onTagViewContainerClick: function(event) {
-						var instance = this;
-
-						var targetId = event.target.get('id');
-
-						if (targetId == 'editTagButton') {
-							instance._onShowTagPanel(event, ACTION_EDIT);
-						}
-						else if (targetId == 'deleteTagButton') {
-							instance._onDeleteTag(event);
-						}
-						else if (targetId == 'updateTagPermissions') {
-							instance._onTagChangePermissions(event);
-						}
-					},
-
-					_onTagViewFailure: function() {
-						var instance = this;
-
-						instance._sendMessage(MESSAGE_TYPE_ERROR, Liferay.Language.get('your-request-failed-to-complete'));
-					},
-
-					_onTagViewSuccess: function(response) {
-						var instance = this;
-
-						instance._tagViewContainer.html(response);
-					},
-
 					_showTagPanel: function(action) {
 						var instance = this;
 
@@ -1042,10 +1045,7 @@ AUI().add(
 						tagPanelEdit.plug(
 							A.Plugin.IO,
 							{
-								uri: tagEditURL.toString(),
-								after: {
-									success: instance._currentPanelEditInitListener
-								}
+								uri: tagEditURL.toString()
 							}
 						);
 
