@@ -139,7 +139,7 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 				</span>
 
 				<span class="status <%= (replies != 0) ? "answered" : " unanswered" %> ">
-					<span class="count"><%= replies %></span> <span><%= LanguageUtil.get(pageContext, "answers") %></span>
+					<span class="count"><%= replies %></span> <span><%= LanguageUtil.get(pageContext, (replies != 1) ? "answers" : "answer") %></span>
 				</span>
 
 				<span class="views">
