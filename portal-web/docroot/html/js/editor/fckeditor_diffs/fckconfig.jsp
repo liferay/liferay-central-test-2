@@ -42,7 +42,7 @@ response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 
 FCKConfig.AutoDetectLanguage = false;
 
-FCKConfig.DefaultLanguage = '<%= languageId %>' ;
+FCKConfig.DefaultLanguage = '<%= HtmlUtil.escape(languageId) %>' ;
 
 FCKConfig.IncludeLatinEntities	= false ;
 

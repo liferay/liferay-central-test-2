@@ -53,7 +53,7 @@ languageId = locale.getLanguage();
 			theme_advanced_disable : "formatselect,styleselect,help,strikethrough",
 			theme_advanced_toolbar_align : "left",
 			theme_advanced_toolbar_location : "top",
-			language : "<%= languageId %>"
+			language : "<%= HtmlUtil.escape(languageId) %>"
 		});
 
 		function fileBrowserCallback(field_name, url, type) {

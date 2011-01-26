@@ -48,7 +48,7 @@ CKEDITOR.addStylesSet(
 	]
 );
 
-CKEDITOR.config.language = '<%= languageId %>';
+CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
 
 CKEDITOR.config.contentsCss = '<%= HtmlUtil.escape(cssPath) %>/main.css';
 
