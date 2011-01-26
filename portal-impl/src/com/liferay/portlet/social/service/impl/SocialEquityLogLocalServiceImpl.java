@@ -497,7 +497,7 @@ public class SocialEquityLogLocalServiceImpl
 	protected void addEquityLog(
 			User user, AssetEntry assetEntry, User assetEntryUser,
 			SocialEquitySetting equitySetting, String extraData)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (!isAddEquityLog(user, assetEntry, equitySetting, extraData)) {
 			return;
