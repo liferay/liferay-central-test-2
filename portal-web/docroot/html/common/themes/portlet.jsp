@@ -53,10 +53,8 @@ if (portletDecorateObj != null) {
 
 String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, themeDisplay.getLanguageId());
 
-if (portletDisplay.isAccess() && portletDisplay.isActive()) {
-	if (portletTitle == null) {
-		portletTitle = renderResponseImpl.getTitle();
-	}
+if (portletDisplay.isAccess() && portletDisplay.isActive() && (portletTitle == null)) {
+	portletTitle = renderResponseImpl.getTitle();
 }
 
 ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
