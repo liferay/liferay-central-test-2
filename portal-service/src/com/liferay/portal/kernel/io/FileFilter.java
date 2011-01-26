@@ -29,7 +29,7 @@ public class FileFilter implements java.io.FileFilter {
 	}
 
 	public FileFilter(String regex) {
-        _pattern = Pattern.compile(regex);
+		_pattern = Pattern.compile(regex);
 	}
 
 	public boolean accept(File file) {
@@ -38,9 +38,9 @@ public class FileFilter implements java.io.FileFilter {
 				return true;
 			}
 			else {
-		        Matcher matcher = _pattern.matcher(file.getName());
+				Matcher matcher = _pattern.matcher(file.getName());
 
-		        return matcher.matches();
+				return matcher.matches();
 			}
 		}
 		else {
