@@ -48,17 +48,37 @@ CKEDITOR.addStylesSet(
 	]
 );
 
-CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
-
 CKEDITOR.config.contentsCss = '<%= HtmlUtil.escape(cssPath) %>/main.css';
 
 CKEDITOR.config.entities = false;
 
-CKEDITOR.config.resize_enabled = false;
-
 CKEDITOR.config.height = 265;
 
+CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
+
+CKEDITOR.config.resize_enabled = false;
+
 CKEDITOR.config.stylesCombo_stylesSet = 'liferayStyles';
+
+CKEDITOR.config.toolbar_editInPlace = [
+	['Styles'],
+	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['Subscript', 'Superscript', 'SpecialChar'],
+	['Undo', 'Redo'],
+	['SpellChecker', 'Scayt'],
+	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'], ['Source', 'RemoveFormat'],
+];
+
+CKEDITOR.config.toolbar_email = [
+	['FontSize', 'TextColor', 'BGColor', '-', 'Bold', 'Italic', 'Underline', 'StrikeThrough'],
+	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+	['SpellChecker', 'Scayt'],
+	'/',
+	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
+	['Source'],
+	['Link', 'Unlink'],
+	['Image']
+];
 
 CKEDITOR.config.toolbar_liferay = [
 	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
@@ -88,24 +108,4 @@ CKEDITOR.config.toolbar_liferayArticle = [
 	['Source'],
 	['Link', 'Unlink', 'Anchor'],
 	['Image', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar', 'LiferayPageBreak']
-];
-
-CKEDITOR.config.toolbar_editInPlace = [
-	['Styles'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['Subscript', 'Superscript', 'SpecialChar'],
-	['Undo', 'Redo'],
-	['SpellChecker', 'Scayt'],
-	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'], ['Source', 'RemoveFormat'],
-];
-
-CKEDITOR.config.toolbar_email = [
-	['FontSize', 'TextColor', 'BGColor', '-', 'Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-	['SpellChecker', 'Scayt'],
-	'/',
-	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
-	['Source'],
-	['Link', 'Unlink'],
-	['Image']
 ];

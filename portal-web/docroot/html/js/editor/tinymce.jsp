@@ -23,8 +23,11 @@
 <%
 String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
+
 String languageId = ParamUtil.getString(request, "languageId");
+
 Locale locale =  LocaleUtil.fromLanguageId(languageId);
+
 languageId = locale.getLanguage();
 %>
 
@@ -38,24 +41,26 @@ languageId = locale.getLanguage();
 	<script type="text/javascript">
 		var onChangeCallbackCounter = 0;
 
-		tinyMCE.init({
-			mode : "textareas",
-			theme : "advanced",
-			extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
-			file_browser_callback : "fileBrowserCallback",
-			init_instance_callback : "initInstanceCallback",
-			invalid_elements: "script",
-			onchange_callback : "onChangeCallback",
-			plugins : "table,advhr,advimage,advlink,iespell,preview,media,searchreplace,print,contextmenu",
-			theme_advanced_buttons1_add_before : "fontselect,fontsizeselect,forecolor,backcolor,separator",
-			theme_advanced_buttons2_add : "separator,media,advhr,separator,preview,print",
-			theme_advanced_buttons2_add_before: "cut,copy,paste,search,replace",
-			theme_advanced_buttons3_add_before : "tablecontrols,separator",
-			theme_advanced_disable : "formatselect,styleselect,help",
-			theme_advanced_toolbar_align : "left",
-			theme_advanced_toolbar_location : "top",
-			language : "<%= HtmlUtil.escape(languageId) %>"
-		});
+		tinyMCE.init(
+			{
+				mode : "textareas",
+				theme : "advanced",
+				extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
+				file_browser_callback : "fileBrowserCallback",
+				init_instance_callback : "initInstanceCallback",
+				invalid_elements: "script",
+				onchange_callback : "onChangeCallback",
+				plugins : "table,advhr,advimage,advlink,iespell,preview,media,searchreplace,print,contextmenu",
+				theme_advanced_buttons1_add_before : "fontselect,fontsizeselect,forecolor,backcolor,separator",
+				theme_advanced_buttons2_add : "separator,media,advhr,separator,preview,print",
+				theme_advanced_buttons2_add_before: "cut,copy,paste,search,replace",
+				theme_advanced_buttons3_add_before : "tablecontrols,separator",
+				theme_advanced_disable : "formatselect,styleselect,help",
+				theme_advanced_toolbar_align : "left",
+				theme_advanced_toolbar_location : "top",
+				language : "<%= HtmlUtil.escape(languageId) %>"
+			}
+		);
 
 		function fileBrowserCallback(field_name, url, type) {
 		}

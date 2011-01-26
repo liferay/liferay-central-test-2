@@ -35,8 +35,11 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
 
 String languageId = ParamUtil.getString(request, "languageId");
+
 Locale locale =  LocaleUtil.fromLanguageId(languageId);
+
 languageId = locale.getLanguage();
+
 response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 %>
 
