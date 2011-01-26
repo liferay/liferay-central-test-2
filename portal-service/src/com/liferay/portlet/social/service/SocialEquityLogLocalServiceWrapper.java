@@ -314,26 +314,26 @@ public class SocialEquityLogLocalServiceWrapper
 	}
 
 	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
-		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(assetEntryId,
-			socialEquityValue);
+			socialEquityPayload);
 	}
 
 	public void incrementSocialEquityUser_CQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.incrementSocialEquityUser_CQ(groupId,
-			userId, socialEquityValue);
+			userId, socialEquityPayload);
 	}
 
 	public void incrementSocialEquityUser_PQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.incrementSocialEquityUser_PQ(groupId,
-			userId, socialEquityValue);
+			userId, socialEquityPayload);
 	}
 
 	public void updateRanks() {

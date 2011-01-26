@@ -271,16 +271,16 @@ public interface SocialEquityLogLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
-		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void incrementSocialEquityUser_CQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void incrementSocialEquityUser_PQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityValue socialEquityValue)
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
