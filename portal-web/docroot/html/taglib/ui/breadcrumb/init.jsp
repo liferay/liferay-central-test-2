@@ -88,6 +88,10 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, Por
 private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portletURL, ThemeDisplay themeDisplay, StringBundler sb) throws Exception {
 	Group group = layoutSet.getGroup();
 
+	if (group.isControlPanel()) {
+		return;
+	}
+
 	if (group.isOrganization()) {
 		Organization organization = OrganizationLocalServiceUtil.getOrganization(group.getOrganizationId());
 
