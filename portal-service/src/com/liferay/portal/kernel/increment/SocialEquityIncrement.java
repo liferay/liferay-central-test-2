@@ -14,53 +14,61 @@
 
 package com.liferay.portal.kernel.increment;
 
+import com.liferay.portlet.social.model.SocialEquityIncrementPayload;
 import com.liferay.portlet.social.model.SocialEquityValue;
 
 /**
  * @author Zsolt Berentey
  */
-public class SocialEquityIncrement implements Increment<SocialEquityValue> {
+public class SocialEquityIncrement
+	implements Increment<SocialEquityIncrementPayload> {
 
-	public SocialEquityIncrement(SocialEquityValue value) {
-		_value = value;
+	public SocialEquityIncrement(SocialEquityIncrementPayload value) {
+		_payload = value;
 	}
 
-	public void decrease(SocialEquityValue delta) {
-		_value.subtract(delta);
+	public void decrease(SocialEquityIncrementPayload delta) {
+		_payload.getEquityValue().subtract(delta.getEquityValue());
 	}
 
-	public Increment<SocialEquityValue> decreaseForNew(
-		SocialEquityValue delta) {
+	public Increment<SocialEquityIncrementPayload> decreaseForNew(
+		SocialEquityIncrementPayload delta) {
 
-		return new SocialEquityIncrement(
-			new SocialEquityValue(
-				_value.getK() - delta.getK(),
-				_value.getB() - delta.getB()
-			)
-		);
+		SocialEquityIncrementPayload payload = _payload.clone();
+
+		payload.setEquityValue(new SocialEquityValue(
+			_payload.getEquityValue().getK() - delta.getEquityValue().getK(),
+			_payload.getEquityValue().getB() - delta.getEquityValue().getB()
+		));
+
+		return new SocialEquityIncrement(payload);
 	}
 
-	public SocialEquityValue getValue() {
-		return _value;
+	public SocialEquityIncrementPayload getValue() {
+		return _payload;
 	}
 
-	public void increase(SocialEquityValue delta) {
-		_value.add(delta);
+	public void increase(SocialEquityIncrementPayload delta) {
+		_payload.getEquityValue().add(delta.getEquityValue());
 	}
 
-	public Increment<SocialEquityValue> increaseForNew(
-		SocialEquityValue delta) {
+	public Increment<SocialEquityIncrementPayload> increaseForNew(
+		SocialEquityIncrementPayload delta) {
 
-		SocialEquityValue value = new SocialEquityValue(
-			_value.getK() + delta.getK(), _value.getB() + delta.getB());
+		SocialEquityIncrementPayload payload = _payload.clone();
 
-		return new SocialEquityIncrement(value);
+		payload.setEquityValue(new SocialEquityValue(
+			_payload.getEquityValue().getK() + delta.getEquityValue().getK(),
+			_payload.getEquityValue().getB() + delta.getEquityValue().getB()
+		));
+
+		return new SocialEquityIncrement(payload);
 	}
 
-	public void setValue(SocialEquityValue value) {
-		_value = value;
+	public void setValue(SocialEquityIncrementPayload value) {
+		_payload = value;
 	}
 
-	private SocialEquityValue _value;
+	private SocialEquityIncrementPayload _payload;
 
 }

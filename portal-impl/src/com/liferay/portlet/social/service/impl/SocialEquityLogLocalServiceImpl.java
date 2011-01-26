@@ -32,6 +32,7 @@ import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.social.NoSuchEquityAssetEntryException;
 import com.liferay.portlet.social.model.SocialEquityAssetEntry;
+import com.liferay.portlet.social.model.SocialEquityIncrementPayload;
 import com.liferay.portlet.social.model.SocialEquityLog;
 import com.liferay.portlet.social.model.SocialEquitySetting;
 import com.liferay.portlet.social.model.SocialEquitySettingConstants;
@@ -238,7 +239,9 @@ public class SocialEquityLogLocalServiceImpl
 
 				incrementSocialEquityUser_CQ(
 					equityAssetEntry.getGroupId(), user.getUserId(),
-					socialEquityValue);
+					new SocialEquityIncrementPayload(
+						user, null, socialEquityValue)
+				);
 			}
 		}
 		catch (NoSuchUserException nsue) {
@@ -322,13 +325,13 @@ public class SocialEquityLogLocalServiceImpl
 
 	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityAssetEntry_IQ(
-			long assetEntryId, SocialEquityValue socialEquityValue)
+			long assetEntryId, SocialEquityIncrementPayload socialEquityPayload)
 		throws SystemException {
 
-		AssetEntry assetEntry = assetEntryPersistence.fetchByPrimaryKey(
-			assetEntryId);
+		AssetEntry assetEntry = socialEquityPayload.getAssetEntry();
 
-		assetEntry.updateSocialInformationEquity(socialEquityValue.getValue());
+		assetEntry.updateSocialInformationEquity(
+			socialEquityPayload.getEquityValue().getValue());
 
 		int count = socialEquityAssetEntryPersistence.countByAssetEntryId(
 			assetEntryId);
@@ -353,8 +356,8 @@ public class SocialEquityLogLocalServiceImpl
 			},
 			new String[] {
 				String.valueOf(assetEntryId),
-				String.valueOf(socialEquityValue.getB()),
-				String.valueOf(socialEquityValue.getK())
+				String.valueOf(socialEquityPayload.getEquityValue().getB()),
+				String.valueOf(socialEquityPayload.getEquityValue().getK())
 			});
 
 		runSQL(sql);
@@ -362,10 +365,11 @@ public class SocialEquityLogLocalServiceImpl
 
 	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityUser_CQ(
-			long groupId, long userId, SocialEquityValue socialEquityValue)
+			long groupId, long userId,
+			SocialEquityIncrementPayload socialEquityPayload)
 		throws PortalException, SystemException {
 
-		User user = userLocalService.getUser(userId);
+		User user = socialEquityPayload.getUser();
 
 		int count = socialEquityUserPersistence.countByG_U(groupId, userId);
 
@@ -378,7 +382,7 @@ public class SocialEquityLogLocalServiceImpl
 		}
 
 		user.updateSocialContributionEquity(
-			groupId, socialEquityValue.getValue());
+			groupId, socialEquityPayload.getEquityValue().getValue());
 
 		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_CQ);
 
@@ -391,8 +395,8 @@ public class SocialEquityLogLocalServiceImpl
 				"[$USER_ID$]"
 			},
 			new String[] {
-				String.valueOf(socialEquityValue.getB()),
-				String.valueOf(socialEquityValue.getK()),
+				String.valueOf(socialEquityPayload.getEquityValue().getB()),
+				String.valueOf(socialEquityPayload.getEquityValue().getK()),
 				String.valueOf(groupId),
 				String.valueOf(userId)
 			});
@@ -402,10 +406,11 @@ public class SocialEquityLogLocalServiceImpl
 
 	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityUser_PQ(
-			long groupId, long userId, SocialEquityValue socialEquityValue)
+			long groupId, long userId,
+			SocialEquityIncrementPayload socialEquityPayload)
 		throws PortalException, SystemException {
 
-		User user = userLocalService.getUser(userId);
+		User user = socialEquityPayload.getUser();
 
 		int count = socialEquityUserPersistence.countByG_U(groupId, userId);
 
@@ -418,7 +423,7 @@ public class SocialEquityLogLocalServiceImpl
 		}
 
 		user.updateSocialParticipationEquity(
-			groupId, socialEquityValue.getValue());
+			groupId, socialEquityPayload.getEquityValue().getValue());
 
 		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_PQ);
 
@@ -432,8 +437,8 @@ public class SocialEquityLogLocalServiceImpl
 			},
 			new String[] {
 				String.valueOf(groupId),
-				String.valueOf(socialEquityValue.getB()),
-				String.valueOf(socialEquityValue.getK()),
+				String.valueOf(socialEquityPayload.getEquityValue().getB()),
+				String.valueOf(socialEquityPayload.getEquityValue().getK()),
 				String.valueOf(userId)
 			});
 
@@ -502,16 +507,20 @@ public class SocialEquityLogLocalServiceImpl
 
 		SocialEquityValue socialEquity = new SocialEquityValue(k, b);
 
+		SocialEquityIncrementPayload payload = new SocialEquityIncrementPayload(
+			user, assetEntry, socialEquity
+		);
+
 		if (equitySetting.getType() ==
 				SocialEquitySettingConstants.TYPE_INFORMATION) {
 
 			socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
-				assetEntry.getEntryId(), socialEquity);
+				assetEntry.getEntryId(), payload);
 
 			if ((assetEntryUser != null) && !assetEntryUser.isDefaultUser()) {
 				socialEquityLogLocalService.incrementSocialEquityUser_CQ(
 					assetEntry.getGroupId(), assetEntryUser.getUserId(),
-					socialEquity);
+					payload);
 			}
 		}
 		else if (equitySetting.getType() ==
@@ -519,7 +528,7 @@ public class SocialEquityLogLocalServiceImpl
 
 			if (!user.isDefaultUser()) {
 				socialEquityLogLocalService.incrementSocialEquityUser_PQ(
-					assetEntry.getGroupId(), user.getUserId(), socialEquity);
+					assetEntry.getGroupId(), user.getUserId(), payload);
 			}
 		}
 
@@ -568,6 +577,9 @@ public class SocialEquityLogLocalServiceImpl
 			AssetEntry assetEntry = assetEntryLocalService.getEntry(
 				equityLog.getAssetEntryId());
 
+			User user = userPersistence.findByPrimaryKey(
+				assetEntry.getUserId());
+
 			if (!isSocialEquityEnabled(
 					assetEntry.getGroupId(), assetEntry.getClassName(),
 					equityLog.getType())) {
@@ -584,20 +596,22 @@ public class SocialEquityLogLocalServiceImpl
 			socialEquityValue.setValue(0,0);
 			socialEquityValue.subtract(k,b);
 
+			SocialEquityIncrementPayload payload =
+				new SocialEquityIncrementPayload(
+					user, assetEntry, socialEquityValue);
+
 			if (equityLog.getType() ==
 					SocialEquitySettingConstants.TYPE_INFORMATION) {
 
 				socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
-					assetEntry.getEntryId(), socialEquityValue);
+					assetEntry.getEntryId(), payload);
 
 				socialEquityLogLocalService.incrementSocialEquityUser_CQ(
-					assetEntry.getGroupId(), assetEntry.getUserId(),
-					socialEquityValue);
+					assetEntry.getGroupId(), assetEntry.getUserId(), payload);
 			}
 			else {
 				socialEquityLogLocalService.incrementSocialEquityUser_PQ(
-					equityLog.getGroupId(), equityLog.getUserId(),
-					socialEquityValue);
+					equityLog.getGroupId(), equityLog.getUserId(), payload);
 			}
 
 			socialEquityLogPersistence.remove(equityLog);
