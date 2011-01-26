@@ -51,20 +51,6 @@ public class MBMessageServiceUtil {
 			threadId, parentMessageId, subject, body, serviceContext);
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		long userId, long groupId, java.lang.String className, long classPK,
-		java.lang.String permissionClassName, long permissionClassPK,
-		long permissionOwnerId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addDiscussionMessage(userId, groupId, className, classPK,
-			permissionClassName, permissionClassPK, permissionOwnerId,
-			threadId, parentMessageId, subject, body, serviceContext);
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,

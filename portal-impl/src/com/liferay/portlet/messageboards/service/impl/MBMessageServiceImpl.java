@@ -75,21 +75,6 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		User user = getGuestOrUser();
 
-		return addDiscussionMessage(
-			user.getUserId(), groupId, className, classPK, permissionClassName,
-			permissionClassPK, permissionOwnerId, threadId, parentMessageId,
-			subject, body, serviceContext);
-	}
-
-	public MBMessage addDiscussionMessage(
-			long userId, long groupId, String className, long classPK,
-			String permissionClassName, long permissionClassPK,
-			long permissionOwnerId, long threadId, long parentMessageId,
-			String subject, String body, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		User user = userLocalService.getUser(userId);
-
 		MBDiscussionPermission.check(
 			getPermissionChecker(), user.getCompanyId(),
 			serviceContext.getScopeGroupId(), permissionClassName,

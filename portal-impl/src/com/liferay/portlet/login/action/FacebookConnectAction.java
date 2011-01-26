@@ -100,14 +100,6 @@ public class FacebookConnectAction extends PortletAction {
 		}
 	}
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
-		throws Exception {
-
-		return mapping.findForward("portlet.login.facebook_login");
-	}
-
 	public ActionForward strutsExecute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
