@@ -87,6 +87,28 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap addDiscussionMessage(
+		long userId, long groupId, java.lang.String className, long classPK,
+		java.lang.String permissionClassName, long permissionClassPK,
+		long permissionOwnerId, long threadId, long parentMessageId,
+		java.lang.String subject, java.lang.String body,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addDiscussionMessage(userId,
+					groupId, className, classPK, permissionClassName,
+					permissionClassPK, permissionOwnerId, threadId,
+					parentMessageId, subject, body, serviceContext);
+
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		long groupId, long categoryId, long threadId, long parentMessageId,
 		java.lang.String subject, java.lang.String body,
