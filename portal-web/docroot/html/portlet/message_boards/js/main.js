@@ -347,7 +347,7 @@ AUI().add(
 						align: {
 							 points: ['tr', 'br']
 						},
-						contentBox: instance._emoticons.item(0),
+						contentBox: instance._emoticons,
 						hideDelay: 500,
 						trigger: emoticonButton.item(0)
 					}
