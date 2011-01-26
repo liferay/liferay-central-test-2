@@ -67,7 +67,7 @@ CKEDITOR.config.toolbar_liferay = [
 	'/',
 	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
 	['Find', 'Replace', 'SpellChecker', 'Scayt'],
-	['OrderedList', 'UnorderedList', '-', 'Outdent', 'Indent'],
+	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
 	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
 	'/',
 	['Source'],
@@ -96,7 +96,7 @@ CKEDITOR.config.toolbar_editInPlace = [
 	['Subscript', 'Superscript', 'SpecialChar'],
 	['Undo', 'Redo'],
 	['SpellChecker', 'Scayt'],
-	['OrderedList', 'UnorderedList', '-', 'Outdent', 'Indent'], ['Source', 'RemoveFormat'],
+	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'], ['Source', 'RemoveFormat'],
 ];
 
 CKEDITOR.config.toolbar_email = [
