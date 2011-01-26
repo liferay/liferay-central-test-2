@@ -57,6 +57,7 @@ password
 path
 primary
 private
+procedure
 protected
 public
 read
