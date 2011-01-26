@@ -94,6 +94,9 @@ if (portlet != null) {
 sb.append("&amp;cssClasses=");
 sb.append(HttpUtil.encodeURL(cssClasses));
 
+sb.append("&amp;languageId=");
+sb.append(LocaleUtil.toLanguageId(locale));
+
 String editorURL = sb.toString();
 %>
 

@@ -19,7 +19,9 @@
 <%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.PropsKeys" %>
+<%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
+<%@ page import="java.util.Locale" %>
 
 <%
 long plid = ParamUtil.getLong(request, "p_l_id");
@@ -32,8 +34,15 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 
 String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
 
+String languageId = ParamUtil.getString(request, "languageId");
+Locale locale =  LocaleUtil.fromLanguageId(languageId);
+languageId = locale.getLanguage();
 response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 %>
+
+FCKConfig.AutoDetectLanguage = false;
+
+FCKConfig.DefaultLanguage = '<%= languageId %>' ;
 
 FCKConfig.IncludeLatinEntities	= false ;
 

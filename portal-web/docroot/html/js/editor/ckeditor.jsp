@@ -32,6 +32,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
+String languageId = ParamUtil.getString(request, "languageId");
 %>
 
 <html>
@@ -123,7 +124,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 	CKEDITOR.replace(
 		'CKEditor1',
 		{
-			customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>',
+			customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/ckconfig.jsp?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses)%>&languageId=<%= HttpUtil.encodeURL(languageId)%>',
 			filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
 			filebrowserUploadUrl: null,
 			toolbar: '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>'
