@@ -317,8 +317,6 @@ public class MVCPortlet extends LiferayPortlet {
 			PortletResponse portletResponse, String lifecycle)
 		throws IOException, PortletException {
 
-		checkJSPPath(path);
-
 		PortletContext portletContext = getPortletContext();
 
 		PortletRequestDispatcher portletRequestDispatcher =
@@ -328,6 +326,8 @@ public class MVCPortlet extends LiferayPortlet {
 			_log.error(path + " is not a valid include");
 		}
 		else {
+			checkJSPPath(path);
+
 			portletRequestDispatcher.include(portletRequest, portletResponse);
 		}
 
