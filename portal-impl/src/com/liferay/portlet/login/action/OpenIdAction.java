@@ -289,6 +289,7 @@ public class OpenIdAction extends PortletAction {
 			int birthdayDay = 1;
 			int birthdayYear = 1970;
 			String jobTitle = StringPool.BLANK;
+			boolean active = true;
 			long[] groupIds = null;
 			long[] organizationIds = null;
 			long[] roleIds = null;
@@ -302,8 +303,8 @@ public class OpenIdAction extends PortletAction {
 				autoScreenName, screenName, emailAddress, facebookId, openId,
 				locale, firstName, middleName, lastName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-				serviceContext);
+				active, groupIds, organizationIds, roleIds, userGroupIds,
+				sendEmail, serviceContext);
 		}
 
 		session.setAttribute(WebKeys.OPEN_ID_LOGIN, new Long(user.getUserId()));

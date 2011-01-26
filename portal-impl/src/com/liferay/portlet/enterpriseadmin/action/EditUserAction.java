@@ -352,6 +352,7 @@ public class EditUserAction extends PortletAction {
 		String twitterSn = ParamUtil.getString(actionRequest, "twitterSn");
 		String ymSn = ParamUtil.getString(actionRequest, "ymSn");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
+		boolean active = true;
 		long[] groupIds = getLongArray(
 			actionRequest, "groupsSearchContainerPrimaryKeys");
 		long[] organizationIds = getLongArray(
@@ -382,7 +383,7 @@ public class EditUserAction extends PortletAction {
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			LocaleUtil.getDefault(), firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
+			active, groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
 			addresses, emailAddresses, phones, websites,
 			announcementsDeliveries, serviceContext);
 

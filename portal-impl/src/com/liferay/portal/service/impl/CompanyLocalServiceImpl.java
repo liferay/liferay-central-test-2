@@ -331,6 +331,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			int birthdayDay = 1;
 			int birthdayYear = 1970;
 			String jobTitle = StringPool.BLANK;
+			boolean active = true;
 
 			Group guestGroup = groupLocalService.getGroup(
 				companyId, GroupConstants.GUEST);
@@ -358,8 +359,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				autoScreenName, screenName, emailAddress, facebookId, openId,
 				locale, firstName, middleName, lastName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-				serviceContext);
+				active, groupIds, organizationIds, roleIds, userGroupIds,
+				sendEmail, serviceContext);
 		}
 
 		// Portlets
