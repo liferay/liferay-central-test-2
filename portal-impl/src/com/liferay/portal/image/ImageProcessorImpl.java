@@ -238,7 +238,9 @@ public class ImageProcessorImpl implements ImageProcessor {
 		BufferedImage scaledBufferedImage = new BufferedImage(
 			scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
 
-		scaledBufferedImage.getGraphics().drawImage(scaledImage, 0, 0, null);
+		Graphics graphics = scaledBufferedImage.getGraphics();
+
+		graphics.drawImage(scaledImage, 0, 0, null);
 
 		return scaledBufferedImage;
 	}
@@ -275,7 +277,9 @@ public class ImageProcessorImpl implements ImageProcessor {
 		BufferedImage scaledBufferedImage = new BufferedImage(
 			scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
 
-		scaledBufferedImage.getGraphics().drawImage(scaledImage, 0, 0, null);
+		Graphics graphics = scaledBufferedImage.getGraphics();
+
+		graphics.drawImage(scaledImage, 0, 0, null);
 
 		return scaledBufferedImage;
 	}

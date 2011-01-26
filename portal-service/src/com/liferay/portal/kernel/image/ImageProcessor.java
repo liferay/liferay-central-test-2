@@ -56,8 +56,26 @@ public interface ImageProcessor {
 
 	public ImageBag read(byte[] bytes) throws IOException;
 
+	/**
+	 * Scales the image based on the given width with the height calculated to
+	 * preserve aspect ratio.
+	 *
+	 * @param  renderedImage image to scale
+	 * @param  width used as new width and to calculate for new height
+	 * @return scaled image
+	 */
 	public RenderedImage scale(RenderedImage renderedImage, int width);
 
+	/**
+	 * Scales the image based on the maximum height and width given while
+	 * preserving the aspect ratio. If the image is already larger in both
+	 * dimensions, the image will not be scaled.
+	 *
+	 * @param  renderedImage image to scale
+	 * @param  maxHeight maximum height allowed for image
+	 * @param  maxWidth maximum width allowed for image
+	 * @return scaled image
+	 */
 	public RenderedImage scale(
 		RenderedImage renderedImage, int maxHeight, int maxWidth);
 
