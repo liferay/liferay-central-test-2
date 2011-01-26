@@ -1474,6 +1474,7 @@ public class BaseDeployer implements Deployer {
 		sb.append("<url-pattern>/*</url-pattern>");
 		sb.append("<dispatcher>ERROR</dispatcher>");
 		sb.append("<dispatcher>FORWARD</dispatcher>");
+		sb.append("<dispatcher>INCLUDE</dispatcher>");
 		sb.append("<dispatcher>REQUEST</dispatcher>");
 		sb.append("</filter-mapping>");
 
