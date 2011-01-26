@@ -30,7 +30,7 @@ public class DirectoryFilter implements FileFilter {
 	}
 
 	public DirectoryFilter(String regex) {
-        _pattern = Pattern.compile(regex);
+		_pattern = Pattern.compile(regex);
 	}
 
 	public boolean accept(File file) {
@@ -39,9 +39,9 @@ public class DirectoryFilter implements FileFilter {
 				return true;
 			}
 			else {
-		        Matcher matcher = _pattern.matcher(file.getName());
+				Matcher matcher = _pattern.matcher(file.getName());
 
-		        return matcher.matches();
+				return matcher.matches();
 			}
 		}
 		else {
