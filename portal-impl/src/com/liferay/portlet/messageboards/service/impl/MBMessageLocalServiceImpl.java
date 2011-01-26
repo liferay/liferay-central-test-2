@@ -1256,8 +1256,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		User user = userPersistence.findByPrimaryKey(userId);
-
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
 		Date now = new Date();
@@ -1269,10 +1267,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setBody(body);
 		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
 		message.setAllowPingbacks(allowPingbacks);
-		message.setStatus(serviceContext.getWorkflowAction());
-		message.setStatusByUserId(user.getUserId());
-		message.setStatusByUserName(user.getFullName());
-		message.setStatusDate(serviceContext.getModifiedDate(now));
 
 		if (priority != MBThreadConstants.PRIORITY_NOT_GIVEN) {
 			message.setPriority(priority);

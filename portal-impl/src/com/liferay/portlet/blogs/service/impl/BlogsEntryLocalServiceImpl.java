@@ -534,8 +534,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		Date now = new Date();
-
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, user.getTimeZone(),
@@ -572,8 +570,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		entry.setSmallImageURL(smallImageURL);
-		entry.setStatus(serviceContext.getWorkflowAction());
-		entry.setStatusDate(serviceContext.getModifiedDate(now));
 		entry.setExpandoBridgeAttributes(serviceContext);
 
 		blogsEntryPersistence.update(entry, false);
