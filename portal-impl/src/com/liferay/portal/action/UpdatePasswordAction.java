@@ -147,8 +147,8 @@ public class UpdatePasswordAction extends Action {
 			userId = themeDisplay.getUserId();
 		}
 
-		String password1 = ParamUtil.getString(request, "password1");
-		String password2 = ParamUtil.getString(request, "password2");
+		String password1 = request.getParameter("password1");
+		String password2 = request.getParameter("password2");
 		boolean passwordReset = false;
 
 		UserLocalServiceUtil.updatePassword(

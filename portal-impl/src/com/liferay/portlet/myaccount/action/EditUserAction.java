@@ -77,12 +77,10 @@ public class EditUserAction
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String requestPassword = ParamUtil.getString(
-			actionRequest, "password0");
+		String requestPassword = actionRequest.getParameter("password0");
 
 		if (Validator.isNotNull(requestPassword)) {
-			String newPassword = ParamUtil.getString(
-				actionRequest, "password1");
+			String newPassword = actionRequest.getParameter("password1");
 
 			if (Validator.isNull(newPassword)) {
 				throw new UserPasswordException(
