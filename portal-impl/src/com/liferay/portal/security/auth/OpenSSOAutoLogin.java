@@ -181,7 +181,6 @@ public class OpenSSOAutoLogin implements AutoLogin {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = StringPool.BLANK;
-		boolean active = true;
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
@@ -193,9 +192,8 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			locale, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, active,
-			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-			serviceContext);
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(OpenSSOAutoLogin.class);

@@ -260,9 +260,8 @@ public class UserServiceHttp {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, boolean active, long[] groupIds,
-		long[] organizationIds, long[] roleIds, long[] userGroupIds,
-		boolean sendEmail,
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -275,8 +274,8 @@ public class UserServiceHttp {
 					autoScreenName, screenName, emailAddress, facebookId,
 					openId, locale, firstName, middleName, lastName, prefixId,
 					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					jobTitle, active, groupIds, organizationIds, roleIds,
-					userGroupIds, sendEmail, serviceContext);
+					jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
+					sendEmail, serviceContext);
 
 			Object returnObj = null;
 
@@ -313,9 +312,8 @@ public class UserServiceHttp {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, boolean active, long[] groupIds,
-		long[] organizationIds, long[] roleIds, long[] userGroupIds,
-		boolean sendEmail,
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
 		java.util.List<com.liferay.portal.model.Address> addresses,
 		java.util.List<com.liferay.portal.model.EmailAddress> emailAddresses,
 		java.util.List<com.liferay.portal.model.Phone> phones,
@@ -333,9 +331,9 @@ public class UserServiceHttp {
 					autoScreenName, screenName, emailAddress, facebookId,
 					openId, locale, firstName, middleName, lastName, prefixId,
 					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					jobTitle, active, groupIds, organizationIds, roleIds,
-					userGroupIds, sendEmail, addresses, emailAddresses, phones,
-					websites, announcementsDelivers, serviceContext);
+					jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
+					sendEmail, addresses, emailAddresses, phones, websites,
+					announcementsDelivers, serviceContext);
 
 			Object returnObj = null;
 
@@ -1672,8 +1670,8 @@ public class UserServiceHttp {
 			java.util.Locale.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class, int.class, int.class,
 			boolean.class, int.class, int.class, int.class,
-			java.lang.String.class, boolean.class, long[].class, long[].class,
-			long[].class, long[].class, boolean.class,
+			java.lang.String.class, long[].class, long[].class, long[].class,
+			long[].class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addUserParameterTypes7 = new Class[] {
@@ -1683,8 +1681,8 @@ public class UserServiceHttp {
 			java.util.Locale.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class, int.class, int.class,
 			boolean.class, int.class, int.class, int.class,
-			java.lang.String.class, boolean.class, long[].class, long[].class,
-			long[].class, long[].class, boolean.class, java.util.List.class,
+			java.lang.String.class, long[].class, long[].class, long[].class,
+			long[].class, boolean.class, java.util.List.class,
 			java.util.List.class, java.util.List.class, java.util.List.class,
 			java.util.List.class,
 			com.liferay.portal.service.ServiceContext.class

@@ -31,10 +31,6 @@ import java.util.Map;
  */
 public class LDAPUser {
 
-	public boolean getActive() {
-		return _user.getActive();
-	}
-
 	public String getAimSn() {
 		return _contact.getAimSn();
 	}
@@ -217,10 +213,6 @@ public class LDAPUser {
 
 	public boolean isUpdatePassword() {
 		return _updatePassword;
-	}
-
-	public void setActive(boolean active) {
-		_user.setActive(active);
 	}
 
 	public void setAimSn(String aimSn) {

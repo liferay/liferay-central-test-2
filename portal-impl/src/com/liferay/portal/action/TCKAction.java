@@ -158,7 +158,6 @@ public class TCKAction extends Action {
 			int birthdayDay = 1;
 			int birthdayYear = 1970;
 			String jobTitle = StringPool.BLANK;
-			boolean active = true;
 			long[] groupIds = null;
 			long[] organizationIds = null;
 			long[] roleIds = null;
@@ -172,8 +171,8 @@ public class TCKAction extends Action {
 				autoScreenName, screenName, emailAddress, facebookId, openId,
 				locale, firstName, middleName, lastName, prefixId, suffixId,
 				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-				active, groupIds, organizationIds, roleIds, userGroupIds,
-				sendEmail, serviceContext);
+				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
+				serviceContext);
 		}
 	}
 

@@ -357,9 +357,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String openId, Locale locale, String firstName, String middleName,
 			String lastName, int prefixId, int suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, boolean active, long[] groupIds,
-			long[] organizationIds, long[] roleIds, long[] userGroupIds,
-			boolean sendEmail, ServiceContext serviceContext)
+			String jobTitle, long[] groupIds, long[] organizationIds,
+			long[] roleIds, long[] userGroupIds, boolean sendEmail,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// User
@@ -465,7 +465,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setMiddleName(middleName);
 		user.setLastName(lastName);
 		user.setJobTitle(jobTitle);
-		user.setActive(active);
+		user.setActive(true);
 
 		userPersistence.update(user, false, serviceContext);
 

@@ -67,7 +67,6 @@ public class UserServiceHttpTest extends BaseServiceHttpTestCase {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = StringPool.BLANK;
-		boolean active = true;
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
@@ -81,7 +80,7 @@ public class UserServiceHttpTest extends BaseServiceHttpTestCase {
 			password1, password2, autoScreenName, screenName, emailAddress,
 			facebookId, openId, locale, firstName, middleName, lastName,
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-			jobTitle, active, groupIds, organizationIds, roleIds, userGroupIds,
+			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
 			sendMail, serviceContext);
 	}
 

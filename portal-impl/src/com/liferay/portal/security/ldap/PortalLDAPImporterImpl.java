@@ -339,10 +339,9 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			ldapUser.getMiddleName(), ldapUser.getLastName(),
 			ldapUser.getPrefixId(), ldapUser.getSuffixId(), ldapUser.isMale(),
 			birthdayMonth, birthdayDay, birthdayYear, ldapUser.getJobTitle(),
-			ldapUser.getActive() ,ldapUser.getGroupIds(),
-			ldapUser.getOrganizationIds(), ldapUser.getRoleIds(),
-			ldapUser.getUserGroupIds(),	ldapUser.isSendEmail(),
-			ldapUser.getServiceContext());
+			ldapUser.getGroupIds(), ldapUser.getOrganizationIds(),
+			ldapUser.getRoleIds(), ldapUser.getUserGroupIds(),
+			ldapUser.isSendEmail(), ldapUser.getServiceContext());
 	}
 
 	protected String escapeValue(String value) {

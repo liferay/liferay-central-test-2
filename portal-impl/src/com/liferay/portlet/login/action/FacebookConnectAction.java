@@ -44,8 +44,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
@@ -196,7 +194,6 @@ public class FacebookConnectAction extends PortletAction {
 		int birthdayDay = 1;
 		int birthdayYear = 1970;
 		String jobTitle = StringPool.BLANK;
-		boolean active = true;
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
@@ -209,9 +206,8 @@ public class FacebookConnectAction extends PortletAction {
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			locale, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, active,
-			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-			serviceContext);
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 
 		session.setAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);
 

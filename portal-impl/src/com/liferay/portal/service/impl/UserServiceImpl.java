@@ -194,7 +194,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String emailAddress, long facebookId, String openId, Locale locale,
 			String firstName, String middleName, String lastName, int prefixId,
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String jobTitle, boolean active, long[] groupIds,
+			int birthdayYear, String jobTitle, long[] groupIds,
 			long[] organizationIds, long[] roleIds, long[] userGroupIds,
 			boolean sendEmail, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -232,9 +232,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			locale, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, active,
-			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-			serviceContext);
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 	}
 
 	public User addUser(
@@ -243,7 +242,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String emailAddress, long facebookId, String openId, Locale locale,
 			String firstName, String middleName, String lastName, int prefixId,
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String jobTitle, boolean active, long[] groupIds,
+			int birthdayYear, String jobTitle, long[] groupIds,
 			long[] organizationIds, long[] roleIds, long[] userGroupIds,
 			boolean sendEmail, List<Address> addresses,
 			List<EmailAddress> emailAddresses, List<Phone> phones,
@@ -256,8 +255,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			companyId, autoPassword, password1, password2, autoScreenName,
 			screenName, emailAddress, facebookId, openId, locale, firstName,
 			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, active, groupIds,
-			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
+			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
+			roleIds, userGroupIds, sendEmail, serviceContext);
 
 		EnterpriseAdminUtil.updateAddresses(
 			Contact.class.getName(), user.getContactId(), addresses);

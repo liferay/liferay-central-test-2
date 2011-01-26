@@ -207,7 +207,6 @@ public class CreateAccountAction extends PortletAction {
 		int birthdayDay = ParamUtil.getInteger(actionRequest, "birthdayDay");
 		int birthdayYear = ParamUtil.getInteger(actionRequest, "birthdayYear");
 		String jobTitle = ParamUtil.getString(actionRequest, "jobTitle");
-		boolean active = true;
 		long[] groupIds = null;
 		long[] organizationIds = null;
 		long[] roleIds = null;
@@ -246,7 +245,7 @@ public class CreateAccountAction extends PortletAction {
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			themeDisplay.getLocale(), firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			active, groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
+			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
 			serviceContext);
 
 		if (openIdPending) {
