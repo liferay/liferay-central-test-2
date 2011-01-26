@@ -273,8 +273,7 @@ public class SocialEquityLogLocalServiceUtil {
 	}
 
 	public static void deactivateEquityLogs(long assetEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deactivateEquityLogs(assetEntryId);
 	}
 
@@ -318,27 +317,22 @@ public class SocialEquityLogLocalServiceUtil {
 	}
 
 	public static void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
-		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService()
-			.incrementSocialEquityAssetEntry_IQ(assetEntryId,
-			socialEquityPayload);
+			.incrementSocialEquityAssetEntry_IQ(assetEntryId, equityPayload);
 	}
 
 	public static void incrementSocialEquityUser_CQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.incrementSocialEquityUser_CQ(groupId, userId, socialEquityPayload);
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().incrementSocialEquityUser_CQ(groupId, userId, equityPayload);
 	}
 
 	public static void incrementSocialEquityUser_PQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.incrementSocialEquityUser_PQ(groupId, userId, socialEquityPayload);
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().incrementSocialEquityUser_PQ(groupId, userId, equityPayload);
 	}
 
 	public static void updateRanks() {

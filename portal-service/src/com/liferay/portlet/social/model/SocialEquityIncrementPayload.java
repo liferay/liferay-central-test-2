@@ -22,20 +22,15 @@ import com.liferay.portlet.asset.model.AssetEntry;
  */
 public class SocialEquityIncrementPayload {
 
-	public SocialEquityIncrementPayload() {
-	}
-
-	public SocialEquityIncrementPayload(
-		User user, AssetEntry assetEntry, SocialEquityValue equityValue) {
-
-		_user = user;
-		_assetEntry = assetEntry;
-		_equityValue = equityValue;
-	}
-
 	public SocialEquityIncrementPayload clone() {
-		return new SocialEquityIncrementPayload(
-			_user, _assetEntry, _equityValue);
+		SocialEquityIncrementPayload socialEquityIncrementPayload =
+			new SocialEquityIncrementPayload();
+
+		socialEquityIncrementPayload.setAssetEntry(getAssetEntry());
+		socialEquityIncrementPayload.setEquityValue(getEquityValue());
+		socialEquityIncrementPayload.setUser(getUser());
+
+		return socialEquityIncrementPayload;
 	}
 
 	public AssetEntry getAssetEntry() {

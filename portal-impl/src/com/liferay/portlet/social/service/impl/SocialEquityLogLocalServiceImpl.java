@@ -205,9 +205,7 @@ public class SocialEquityLogLocalServiceImpl
 		updateRanks();
 	}
 
-	public void deactivateEquityLogs(long assetEntryId)
-		throws PortalException, SystemException {
-
+	public void deactivateEquityLogs(long assetEntryId) throws SystemException {
 		if (!PropsValues.SOCIAL_EQUITY_EQUITY_LOG_ENABLED) {
 			return;
 		}
@@ -233,15 +231,19 @@ public class SocialEquityLogLocalServiceImpl
 				equityAssetEntry.getUserId());
 
 			if (!user.isDefaultUser()) {
-				SocialEquityValue socialEquityValue = new SocialEquityValue(
+				SocialEquityValue equityValue = new SocialEquityValue(
 					-equityAssetEntry.getInformationK(),
 					-equityAssetEntry.getInformationB());
 
+				SocialEquityIncrementPayload equityIncrementPayload =
+					new SocialEquityIncrementPayload();
+
+				equityIncrementPayload.setEquityValue(equityValue);
+				equityIncrementPayload.setUser(user);
+
 				incrementSocialEquityUser_CQ(
 					equityAssetEntry.getGroupId(), user.getUserId(),
-					new SocialEquityIncrementPayload(
-						user, null, socialEquityValue)
-				);
+					equityIncrementPayload);
 			}
 		}
 		catch (NoSuchUserException nsue) {
@@ -325,13 +327,14 @@ public class SocialEquityLogLocalServiceImpl
 
 	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityAssetEntry_IQ(
-			long assetEntryId, SocialEquityIncrementPayload socialEquityPayload)
+			long assetEntryId, SocialEquityIncrementPayload equityPayload)
 		throws SystemException {
 
-		AssetEntry assetEntry = socialEquityPayload.getAssetEntry();
+		AssetEntry assetEntry = equityPayload.getAssetEntry();
 
-		assetEntry.updateSocialInformationEquity(
-			socialEquityPayload.getEquityValue().getValue());
+		SocialEquityValue equityValue = equityPayload.getEquityValue();
+
+		assetEntry.updateSocialInformationEquity(equityValue.getValue());
 
 		int count = socialEquityAssetEntryPersistence.countByAssetEntryId(
 			assetEntryId);
@@ -356,8 +359,8 @@ public class SocialEquityLogLocalServiceImpl
 			},
 			new String[] {
 				String.valueOf(assetEntryId),
-				String.valueOf(socialEquityPayload.getEquityValue().getB()),
-				String.valueOf(socialEquityPayload.getEquityValue().getK())
+				String.valueOf(equityValue.getB()),
+				String.valueOf(equityValue.getK())
 			});
 
 		runSQL(sql);
@@ -366,10 +369,10 @@ public class SocialEquityLogLocalServiceImpl
 	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityUser_CQ(
 			long groupId, long userId,
-			SocialEquityIncrementPayload socialEquityPayload)
-		throws PortalException, SystemException {
+			SocialEquityIncrementPayload equityPayload)
+		throws SystemException {
 
-		User user = socialEquityPayload.getUser();
+		User user = equityPayload.getUser();
 
 		int count = socialEquityUserPersistence.countByG_U(groupId, userId);
 
@@ -381,8 +384,9 @@ public class SocialEquityLogLocalServiceImpl
 			}
 		}
 
-		user.updateSocialContributionEquity(
-			groupId, socialEquityPayload.getEquityValue().getValue());
+		SocialEquityValue equityValue = equityPayload.getEquityValue();
+
+		user.updateSocialContributionEquity(groupId, equityValue.getValue());
 
 		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_CQ);
 
@@ -395,8 +399,8 @@ public class SocialEquityLogLocalServiceImpl
 				"[$USER_ID$]"
 			},
 			new String[] {
-				String.valueOf(socialEquityPayload.getEquityValue().getB()),
-				String.valueOf(socialEquityPayload.getEquityValue().getK()),
+				String.valueOf(equityValue.getB()),
+				String.valueOf(equityValue.getK()),
 				String.valueOf(groupId),
 				String.valueOf(userId)
 			});
@@ -407,10 +411,10 @@ public class SocialEquityLogLocalServiceImpl
 	@BufferedIncrement(incrementClass = SocialEquityIncrement.class)
 	public void incrementSocialEquityUser_PQ(
 			long groupId, long userId,
-			SocialEquityIncrementPayload socialEquityPayload)
-		throws PortalException, SystemException {
+			SocialEquityIncrementPayload equityPayload)
+		throws SystemException {
 
-		User user = socialEquityPayload.getUser();
+		User user = equityPayload.getUser();
 
 		int count = socialEquityUserPersistence.countByG_U(groupId, userId);
 
@@ -422,8 +426,9 @@ public class SocialEquityLogLocalServiceImpl
 			}
 		}
 
-		user.updateSocialParticipationEquity(
-			groupId, socialEquityPayload.getEquityValue().getValue());
+		SocialEquityValue equityValue = equityPayload.getEquityValue();
+
+		user.updateSocialParticipationEquity(groupId, equityValue.getValue());
 
 		String sql = CustomSQLUtil.get(_UPDATE_SOCIAL_EQUITY_USER_PQ);
 
@@ -437,8 +442,8 @@ public class SocialEquityLogLocalServiceImpl
 			},
 			new String[] {
 				String.valueOf(groupId),
-				String.valueOf(socialEquityPayload.getEquityValue().getB()),
-				String.valueOf(socialEquityPayload.getEquityValue().getK()),
+				String.valueOf(equityValue.getB()),
+				String.valueOf(equityValue.getK()),
 				String.valueOf(userId)
 			});
 
@@ -498,6 +503,11 @@ public class SocialEquityLogLocalServiceImpl
 			return;
 		}
 
+		SocialEquityIncrementPayload equityIncrementPayload =
+			new SocialEquityIncrementPayload();
+
+		equityIncrementPayload.setAssetEntry(assetEntry);
+
 		int actionDate = getEquityDate();
 
 		double k = calculateK(
@@ -505,22 +515,22 @@ public class SocialEquityLogLocalServiceImpl
 		double b = calculateB(
 			actionDate, equitySetting.getValue(), equitySetting.getLifespan());
 
-		SocialEquityValue socialEquity = new SocialEquityValue(k, b);
+		SocialEquityValue equityValue = new SocialEquityValue(k, b);
 
-		SocialEquityIncrementPayload payload = new SocialEquityIncrementPayload(
-			user, assetEntry, socialEquity
-		);
+		equityIncrementPayload.setEquityValue(equityValue);
+
+		equityIncrementPayload.setUser(user);
 
 		if (equitySetting.getType() ==
 				SocialEquitySettingConstants.TYPE_INFORMATION) {
 
 			socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
-				assetEntry.getEntryId(), payload);
+				assetEntry.getEntryId(), equityIncrementPayload);
 
 			if ((assetEntryUser != null) && !assetEntryUser.isDefaultUser()) {
 				socialEquityLogLocalService.incrementSocialEquityUser_CQ(
 					assetEntry.getGroupId(), assetEntryUser.getUserId(),
-					payload);
+					equityIncrementPayload);
 			}
 		}
 		else if (equitySetting.getType() ==
@@ -528,7 +538,8 @@ public class SocialEquityLogLocalServiceImpl
 
 			if (!user.isDefaultUser()) {
 				socialEquityLogLocalService.incrementSocialEquityUser_PQ(
-					assetEntry.getGroupId(), user.getUserId(), payload);
+					assetEntry.getGroupId(), user.getUserId(),
+					equityIncrementPayload);
 			}
 		}
 
@@ -571,7 +582,7 @@ public class SocialEquityLogLocalServiceImpl
 	protected void deactivateEquityLogs(List<SocialEquityLog> equityLogs)
 		throws PortalException, SystemException {
 
-		SocialEquityValue socialEquityValue = new SocialEquityValue();
+		SocialEquityValue equityValue = new SocialEquityValue();
 
 		for (SocialEquityLog equityLog : equityLogs) {
 			AssetEntry assetEntry = assetEntryLocalService.getEntry(
@@ -587,31 +598,38 @@ public class SocialEquityLogLocalServiceImpl
 				continue;
 			}
 
+			SocialEquityIncrementPayload equityIncrementPayload =
+				new SocialEquityIncrementPayload();
+
+			equityIncrementPayload.setAssetEntry(assetEntry);
+
 			double k = calculateK(
 				equityLog.getValue(),equityLog.getLifespan());
 			double b = calculateB(
 				equityLog.getActionDate(), equityLog.getValue(),
 				equityLog.getLifespan());
 
-			socialEquityValue.setValue(0,0);
-			socialEquityValue.subtract(k,b);
+			equityValue.setValue(0,0);
+			equityValue.subtract(k,b);
 
-			SocialEquityIncrementPayload payload =
-				new SocialEquityIncrementPayload(
-					user, assetEntry, socialEquityValue);
+			equityIncrementPayload.setEquityValue(equityValue);
+
+			equityIncrementPayload.setUser(user);
 
 			if (equityLog.getType() ==
 					SocialEquitySettingConstants.TYPE_INFORMATION) {
 
 				socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(
-					assetEntry.getEntryId(), payload);
+					assetEntry.getEntryId(), equityIncrementPayload);
 
 				socialEquityLogLocalService.incrementSocialEquityUser_CQ(
-					assetEntry.getGroupId(), assetEntry.getUserId(), payload);
+					assetEntry.getGroupId(), assetEntry.getUserId(),
+					equityIncrementPayload);
 			}
 			else {
 				socialEquityLogLocalService.incrementSocialEquityUser_PQ(
-					equityLog.getGroupId(), equityLog.getUserId(), payload);
+					equityLog.getGroupId(), equityLog.getUserId(),
+					equityIncrementPayload);
 			}
 
 			socialEquityLogPersistence.remove(equityLog);

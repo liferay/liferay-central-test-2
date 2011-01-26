@@ -240,8 +240,7 @@ public interface SocialEquityLogLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deactivateEquityLogs(long assetEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* @deprecated {@link #deactivateEquityLogs(long, long, String, String)}
@@ -271,18 +270,16 @@ public interface SocialEquityLogLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
-		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void incrementSocialEquityUser_CQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void incrementSocialEquityUser_PQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void updateRanks();
 

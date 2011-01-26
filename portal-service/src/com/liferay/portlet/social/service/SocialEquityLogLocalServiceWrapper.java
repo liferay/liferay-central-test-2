@@ -269,8 +269,7 @@ public class SocialEquityLogLocalServiceWrapper
 	}
 
 	public void deactivateEquityLogs(long assetEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.deactivateEquityLogs(assetEntryId);
 	}
 
@@ -314,26 +313,24 @@ public class SocialEquityLogLocalServiceWrapper
 	}
 
 	public void incrementSocialEquityAssetEntry_IQ(long assetEntryId,
-		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.incrementSocialEquityAssetEntry_IQ(assetEntryId,
-			socialEquityPayload);
+			equityPayload);
 	}
 
 	public void incrementSocialEquityUser_CQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.incrementSocialEquityUser_CQ(groupId,
-			userId, socialEquityPayload);
+			userId, equityPayload);
 	}
 
 	public void incrementSocialEquityUser_PQ(long groupId, long userId,
-		com.liferay.portlet.social.model.SocialEquityIncrementPayload socialEquityPayload)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portlet.social.model.SocialEquityIncrementPayload equityPayload)
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialEquityLogLocalService.incrementSocialEquityUser_PQ(groupId,
-			userId, socialEquityPayload);
+			userId, equityPayload);
 	}
 
 	public void updateRanks() {
