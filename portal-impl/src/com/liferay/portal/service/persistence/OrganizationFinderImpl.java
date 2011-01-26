@@ -365,11 +365,7 @@ public class OrganizationFinderImpl
 			params = new LinkedHashMap<String, Object>();
 		}
 
-		Long userId = null;
-
-		if (PropsValues.ORGANIZATIONS_USER_GROUP_MEMBERSHIP_ENABLED) {
-			userId = (Long)params.get("usersOrgs");
-		}
+		Long userId = (Long)params.get("usersOrgs");
 
 		LinkedHashMap<String, Object> params1 = params;
 
