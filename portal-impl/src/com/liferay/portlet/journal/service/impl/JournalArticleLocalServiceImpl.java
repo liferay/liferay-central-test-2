@@ -2476,8 +2476,9 @@ public class JournalArticleLocalServiceImpl
 				latestExpirationDate = article.getExpirationDate();
 			}
 
-			if (expiringArticle && (article.getExpirationDate() == null)) {
-				latestExpirationDate = null;
+			if (expiringArticle && (article.getExpirationDate() == null) &&
+				(latestExpirationDate != null)) {
+
 				expiringArticle = false;
 			}
 		}
