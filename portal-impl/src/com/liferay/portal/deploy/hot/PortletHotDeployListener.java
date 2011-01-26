@@ -369,6 +369,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		registerClpMessageListeners(servletContext, portletClassLoader);
 
+		DirectServletRegistry.clearServlets();
+
 		// Variables
 
 		_vars.put(
@@ -435,8 +437,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portletCategory.separate(portletIds);
 			}
 		}
-
-		DirectServletRegistry.flushServlets();
 
 		PortletResourceBundles.remove(servletContextName);
 
@@ -600,8 +600,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		for (String resourceActionConfig : resourceActionConfigs) {
 			ResourceActionsUtil.read(
-				servletContextName, portletClassLoader,
-				resourceActionConfig);
+				servletContextName, portletClassLoader, resourceActionConfig);
 		}
 	}
 

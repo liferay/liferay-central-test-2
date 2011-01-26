@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
+import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.servlet.LiferayFilter;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.filters.invoker.FilterMapping;
@@ -814,6 +815,7 @@ public class HookHotDeployListener
 
 		registerClpMessageListeners(servletContext, portletClassLoader);
 
+		DirectServletRegistry.clearServlets();
 		FileAvailabilityUtil.reset();
 
 		if (_log.isInfoEnabled()) {

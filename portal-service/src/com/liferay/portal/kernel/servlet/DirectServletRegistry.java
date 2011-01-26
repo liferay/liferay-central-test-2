@@ -33,8 +33,8 @@ import javax.servlet.ServletContext;
  */
 public class DirectServletRegistry {
 
-	public static void flushServlets() {
-		_instance._flushServlets();
+	public static void clearServlets() {
+		_instance._clearServlets();
 	}
 
 	public static Servlet getServlet(String path) {
@@ -48,7 +48,7 @@ public class DirectServletRegistry {
 	private DirectServletRegistry() {
 	}
 
-	private void _flushServlets() {
+	private void _clearServlets() {
 		_servletInfos.clear();
 	}
 
