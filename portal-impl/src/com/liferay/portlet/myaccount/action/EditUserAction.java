@@ -15,7 +15,6 @@
 package com.liferay.portlet.myaccount.action;
 
 import com.liferay.portal.UserPasswordException;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
