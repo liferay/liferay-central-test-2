@@ -15,19 +15,14 @@
 package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.Theme;
 
 import java.net.URL;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="ThemeHelper.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class ThemeHelper {
@@ -35,41 +30,6 @@ public class ThemeHelper {
 	public static final String TEMPLATE_EXTENSION_FTL = "ftl";
 
 	public static final String TEMPLATE_EXTENSION_VM = "vm";
-
-	public static String getRequestPath(HttpServletRequest request) {
-		return getRequestPath(null, request);
-	}
-
-	public static String getRequestPath(
-		ServletContext servletContext, HttpServletRequest request) {
-
-		String requestPath = request.getPathInfo();
-
-		String requestURI = request.getRequestURI();
-
-		if (Validator.isNull(requestPath) && Validator.isNotNull(requestURI)) {
-			requestPath = requestURI;
-		}
-
-		if (!requestPath.startsWith(StringPool.SLASH)) {
-			requestPath = StringPool.SLASH.concat(requestPath);
-		}
-
-		if (servletContext != null) {
-			String servletContextName = GetterUtil.getString(
-				servletContext.getServletContextName());
-
-			if (Validator.isNotNull(servletContextName) &&
-				requestPath.startsWith(
-					StringPool.SLASH.concat(servletContextName))) {
-
-				requestPath = requestPath.substring(
-					servletContextName.length() + 1);
-			}
-		}
-
-		return requestPath;
-	}
 
 	public static String getResourcePath(
 		ServletContext servletContext, Theme theme, String path) {
@@ -170,7 +130,5 @@ public class ThemeHelper {
 			}
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(ThemeHelper.class);
 
 }

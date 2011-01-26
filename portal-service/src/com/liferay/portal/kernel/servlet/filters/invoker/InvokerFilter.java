@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.servlet.LiferayFilter;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -93,6 +94,8 @@ public class InvokerFilter implements Filter {
 			dispatcher = Dispatcher.INCLUDE;
 			uri = includeRequestURI;
 		}
+
+		request.setAttribute(WebKeys.INVOKER_FILTER_URI, uri);
 
 		InvokerFilterChain invokerFilterChain = new InvokerFilterChain(
 			filterChain);

@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.ThemeHelper;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.List;
@@ -84,7 +83,7 @@ public class FilterMapping {
 			return false;
 		}
 
-		if (isMatchURLRegexPattern(request)) {
+		if (isMatchURLRegexPattern(request, uri)) {
 			return true;
 		}
 
@@ -187,34 +186,27 @@ public class FilterMapping {
 		return false;
 	}
 
-	protected boolean isMatchURLRegexPattern(HttpServletRequest request) {
-		String requestPath = ThemeHelper.getRequestPath(request);
+	protected boolean isMatchURLRegexPattern(
+		HttpServletRequest request, String uri) {
 
-		if (Validator.isNull(requestPath)) {
-			return false;
-		}
-
-		if ((_urlRegexPattern == null) && (_urlRegexIgnorePattern == null)) {
-			return true;
-		}
+		String url = uri;
 
 		String queryString = request.getQueryString();
 
 		if (Validator.isNotNull(queryString)) {
-			requestPath = requestPath.concat(StringPool.QUESTION).concat(
-				queryString);
+			url = url.concat(StringPool.QUESTION).concat(queryString);
 		}
 
 		boolean matchURLRegexPattern = true;
 
 		if (_urlRegexPattern != null) {
-			Matcher matcher = _urlRegexPattern.matcher(requestPath);
+			Matcher matcher = _urlRegexPattern.matcher(url);
 
 			matchURLRegexPattern = matcher.find();
 		}
 
 		if (matchURLRegexPattern && (_urlRegexIgnorePattern != null)) {
-			Matcher matcher = _urlRegexIgnorePattern.matcher(requestPath);
+			Matcher matcher = _urlRegexIgnorePattern.matcher(url);
 
 			matchURLRegexPattern = !matcher.find();
 		}
@@ -222,13 +214,12 @@ public class FilterMapping {
 		if (_log.isDebugEnabled()) {
 			if (matchURLRegexPattern) {
 				_log.debug(
-					_filter.getClass() + " has a regex match with " +
-						requestPath);
+					_filter.getClass() + " has a regex match with " + url);
 			}
 			else {
 				_log.debug(
 					_filter.getClass() + " does not have a regex match with " +
-						requestPath);
+						url);
 			}
 		}
 

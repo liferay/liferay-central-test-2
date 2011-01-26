@@ -45,35 +45,24 @@ public class ServletContextIncludeFilter extends BasePortalFilter {
 		HttpServletRequest request, HttpServletResponse response) {
 
 		try {
-			String requestPath = ThemeHelper.getRequestPath(
-				getFilterConfig().getServletContext(), request);
-
-			if (!requestPath.endsWith(".jsp")) {
-				return false;
-			}
-
-			String servletContextIncludePath = (String)request.getAttribute(
-				WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_PATH);
-
-			if ((servletContextIncludePath != null) &&
-				servletContextIncludePath.equals(requestPath)) {
-
-				return false;
-			}
-
-			Theme theme = (Theme)request.getAttribute(
-				WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_THEME);
+			Theme theme = getTheme(request);
 
 			if (theme == null) {
-				theme = getTheme(request);
+				return false;
 			}
 
-			boolean resourceExists = ThemeHelper.resourceExists(
-				getFilterConfig().getServletContext(), theme, requestPath);
+			FilterConfig filterConfig = getFilterConfig();
 
-			if ((theme != null) && resourceExists) {
+			ServletContext servletContext = filterConfig.getServletContext();
+
+			String uri = (String)request.getAttribute(
+				WebKeys.INVOKER_FILTER_URI);
+
+			if (ThemeHelper.resourceExists(servletContext, theme, uri)) {
 				request.setAttribute(
 					WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_THEME, theme);
+				request.setAttribute(
+					WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_PATH, uri);
 
 				return true;
 			}
@@ -134,6 +123,11 @@ public class ServletContextIncludeFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
+		Theme theme = (Theme)request.getAttribute(
+			WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_THEME);
+
+		request.setAttribute(WebKeys.THEME, theme);
+
 		FilterConfig filterConfig = getFilterConfig();
 
 		ServletContext servletContext = filterConfig.getServletContext();
@@ -141,21 +135,6 @@ public class ServletContextIncludeFilter extends BasePortalFilter {
 		RequestDispatcher requestDispatcher =
 			servletContext.getRequestDispatcher(
 				"/WEB-INF/jsp/_servlet_context_include.jsp");
-
-		String requestPath = ThemeHelper.getRequestPath(
-			servletContext, request);
-
-		Theme theme = (Theme)request.getAttribute(
-			WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_THEME);
-
-		if (!ThemeHelper.resourceExists(servletContext, theme, requestPath)) {
-			return;
-		}
-
-		request.setAttribute(
-			WebKeys.SERVLET_CONTEXT_INCLUDE_FILTER_PATH, requestPath);
-
-		request.setAttribute(WebKeys.THEME, theme);
 
 		requestDispatcher.include(request, response);
 	}
