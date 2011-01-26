@@ -33,6 +33,10 @@ import javax.servlet.ServletContext;
  */
 public class DirectServletRegistry {
 
+	public static void flushServlets() {
+		_instance._flushServlets();
+	}
+
 	public static Servlet getServlet(String path) {
 		return _instance._getServlet(path);
 	}
@@ -42,6 +46,10 @@ public class DirectServletRegistry {
 	}
 
 	private DirectServletRegistry() {
+	}
+
+	private void _flushServlets() {
+		_servletInfos.clear();
 	}
 
 	private long _getJspFileLastModified(String path, Servlet servlet) {

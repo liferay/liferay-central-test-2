@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ClassUtil;
@@ -434,6 +435,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 				portletCategory.separate(portletIds);
 			}
 		}
+
+		DirectServletRegistry.flushServlets();
 
 		PortletResourceBundles.remove(servletContextName);
 
