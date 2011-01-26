@@ -47,9 +47,9 @@ public class ActionUtil {
 
 		String topLink = ParamUtil.getString(request, "topLink");
 
-		if (topLink.equals("banned-users") && 
+		if (topLink.equals("banned-users") &&
 			!MBPermission.contains(
-				themeDisplay.getPermissionChecker(), 
+				themeDisplay.getPermissionChecker(),
 				themeDisplay.getScopeGroupId(), ActionKeys.BAN_USER)) {
 
 			throw new PrincipalException();
