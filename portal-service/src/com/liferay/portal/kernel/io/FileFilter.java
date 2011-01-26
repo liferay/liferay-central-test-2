@@ -16,18 +16,38 @@ package com.liferay.portal.kernel.io;
 
 import java.io.File;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 public class FileFilter implements java.io.FileFilter {
 
+	public FileFilter() {
+	}
+
+	public FileFilter(String regex) {
+        _pattern = Pattern.compile(regex);
+	}
+
 	public boolean accept(File file) {
 		if (file.isFile()) {
-			return true;
+			if (_pattern == null) {
+				return true;
+			}
+			else {
+		        Matcher matcher = _pattern.matcher(file.getName());
+
+		        return matcher.matches();
+			}
 		}
 		else {
 			return false;
 		}
 	}
+
+	private Pattern _pattern;
 
 }

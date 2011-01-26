@@ -56,6 +56,8 @@ public interface ImageProcessor {
 
 	public ImageBag read(byte[] bytes) throws IOException;
 
+	public RenderedImage scale(RenderedImage renderedImage, int width);
+
 	public RenderedImage scale(
 		RenderedImage renderedImage, int maxHeight, int maxWidth);
 

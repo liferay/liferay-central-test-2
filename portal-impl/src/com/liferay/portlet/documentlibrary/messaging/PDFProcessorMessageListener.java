@@ -24,7 +24,7 @@ import com.liferay.portlet.documentlibrary.util.PDFProcessorUtil;
 public class PDFProcessorMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
-		PDFProcessorUtil.generateThumbnails();
+		PDFProcessorUtil.generateImages();
 	}
 
 }

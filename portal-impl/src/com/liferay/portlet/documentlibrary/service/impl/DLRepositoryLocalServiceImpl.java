@@ -336,10 +336,17 @@ public class DLRepositoryLocalServiceImpl
 			long userId, long fileEntryId, String version)
 		throws PortalException, SystemException {
 
+		return getFileAsStream(userId, fileEntryId, version, true);
+	}
+
+	public InputStream getFileAsStream(
+			long userId, long fileEntryId, String version, boolean count)
+		throws PortalException, SystemException {
+
 		DLFileEntry dlFileEntry = dlFileEntryPersistence.findByPrimaryKey(
 			fileEntryId);
 
-		if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED) {
+		if (PropsValues.DL_FILE_ENTRY_READ_COUNT_ENABLED && count) {
 			dlFileEntry.setReadCount(dlFileEntry.getReadCount() + 1);
 
 			dlFileEntryPersistence.update(dlFileEntry, false);

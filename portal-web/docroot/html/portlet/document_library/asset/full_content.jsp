@@ -25,7 +25,7 @@ FileEntry fileEntry = fileVersion.getFileEntry();
 <div class="asset-resource-info">
 	<aui:a href='<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + fileVersion.getRepositoryId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileVersion.getTitle())) %>'>
 		<c:choose>
-			<c:when test="<%= PDFProcessorUtil.hasThumbnail(fileEntry) %>">
+			<c:when test="<%= PDFProcessorUtil.hasImages(fileEntry) %>">
 				<div>
 					<img src="<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1" %>" />
 

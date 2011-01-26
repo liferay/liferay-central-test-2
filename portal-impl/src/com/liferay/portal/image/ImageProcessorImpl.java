@@ -217,6 +217,32 @@ public class ImageProcessorImpl implements ImageProcessor {
 		return new ImageBag(renderedImage, type);
 	}
 
+	public RenderedImage scale(RenderedImage renderedImage, int width) {
+		if (width <= 0) {
+			return renderedImage;
+		}
+
+		int imageHeight = renderedImage.getHeight();
+		int imageWidth = renderedImage.getWidth();
+
+		double factor = (double) width / imageWidth;
+
+		int scaledHeight = (int)(factor * imageHeight);
+		int scaledWidth = width;
+
+		BufferedImage bufferedImage = getBufferedImage(renderedImage);
+
+		Image scaledImage = bufferedImage.getScaledInstance(
+			scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
+
+		BufferedImage scaledBufferedImage = new BufferedImage(
+			scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+
+		scaledBufferedImage.getGraphics().drawImage(scaledImage, 0, 0, null);
+
+		return scaledBufferedImage;
+	}
+
 	public RenderedImage scale(
 		RenderedImage renderedImage, int maxHeight, int maxWidth) {
 

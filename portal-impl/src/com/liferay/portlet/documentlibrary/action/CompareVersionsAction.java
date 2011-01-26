@@ -115,9 +115,7 @@ public class CompareVersionsAction extends PortletAction {
 				escapedTarget.getBytes(StringPool.UTF8));
 		}
 
-		if (PrefsPropsUtil.getBoolean(
-				PropsKeys.OPENOFFICE_SERVER_ENABLED,
-				PropsValues.OPENOFFICE_SERVER_ENABLED) &&
+		if (DocumentConversionUtil.isEnabled() &&
 			DocumentConversionUtil.isConvertBeforeCompare(extension)) {
 
 			String sourceTempFileId = DLUtil.getTempFileId(

@@ -28,7 +28,7 @@ FileEntry fileEntry = fileVersion.getFileEntry();
 <c:if test="<%= fileVersion.isApproved() %>">
 	<div class="asset-resource-info">
 		<c:choose>
-			<c:when test="<%= PDFProcessorUtil.hasThumbnail(fileEntry) %>">
+			<c:when test="<%= PDFProcessorUtil.hasImages(fileEntry) %>">
 				<div>
 					<img src="<%= themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&thumbnail=1" %>" />
 

@@ -161,6 +161,57 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</c:if>
 		</div>
 
+		<c:if test="<%= PropsValues.DL_GENERATE_PREVIEWS %>">
+			<div>
+				<%
+				int pageCount = PDFProcessorUtil.getPreviewPageCount(fileEntry);
+
+				String pagePreviewUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&previewPage=";
+
+				if (pageCount == 0) {
+				%>
+					<liferay-ui:message key="generating-preview-will-take-a-few-minutes" />
+				<%
+				}
+				else {
+				%>
+					<div>
+						[<a href="javascript:<portlet:namespace />prev()">Prev</a>] [<a href="javascript:<portlet:namespace />next()">Next</a>]
+						<span id="<portlet:namespace />page">1</span> of <span><%= pageCount %></span>
+					</div>
+					<div>
+						<img id="<portlet:namespace />pagePreview" width="500px" src="<%= pagePreviewUrl + "1" %>" />
+					</div>
+
+					<script type="text/javascript">
+						var <portlet:namespace />currentPage = 1;
+						var <portlet:namespace />lastPage = <%= pageCount %>;
+						var <portlet:namespace />pagePreviewUrl = "<%= pagePreviewUrl %>";
+
+						function <portlet:namespace />prev() {
+							if (<portlet:namespace />currentPage > 1) {
+								<portlet:namespace />currentPage--;
+							}
+
+							document.getElementById("<portlet:namespace/>pagePreview").src = <portlet:namespace />pagePreviewUrl + <portlet:namespace />currentPage;
+							document.getElementById("<portlet:namespace/>page").innerHTML = <portlet:namespace />currentPage;
+						}
+
+						function <portlet:namespace />next() {
+							if (<portlet:namespace />lastPage > <portlet:namespace />currentPage) {
+								<portlet:namespace />currentPage++;
+							}
+
+							document.getElementById("<portlet:namespace/>pagePreview").src = <portlet:namespace />pagePreviewUrl + <portlet:namespace />currentPage;
+							document.getElementById("<portlet:namespace/>page").innerHTML = <portlet:namespace />currentPage;
+						}
+					</script>
+				<%
+				}
+				%>
+			</div>
+		</c:if>
+
 		<div class="lfr-asset-categories">
 			<liferay-ui:asset-categories-summary
 				className="<%= DLFileEntryConstants.getClassName() %>"

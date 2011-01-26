@@ -509,6 +509,8 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_RANK_ENABLED = "dl.file.rank.enabled";
 
+	public static final String DL_GENERATE_PREVIEWS = "dl.generate.previews";
+
 	public static final String DL_GENERATE_THUMBNAILS = "dl.generate.thumbnails";
 
 	public static final String DL_HOOK_FILE_SYSTEM_ROOT_DIR = "dl.hook.file.system.root.dir";

@@ -359,6 +359,7 @@ public class WebServerServlet extends HttpServlet {
 		String targetExtension = ParamUtil.getString(
 			request, "targetExtension");
 		boolean thumbnail = ParamUtil.getBoolean(request, "thumbnail");
+		int previewPage = ParamUtil.getInteger(request, "previewPage");
 
 		if (Validator.isNotNull(targetExtension)) {
 			File convertedFile = DocumentConversionUtil.convert(
@@ -380,6 +381,17 @@ public class WebServerServlet extends HttpServlet {
 
 			fileName = FileUtil.stripExtension(fileName).concat(
 				StringPool.PERIOD).concat(PDFProcessorUtil.THUMBNAIL_TYPE);
+
+			converted = true;
+		}
+		else if (previewPage > 0) {
+			File previewFile = PDFProcessorUtil.getPreviewFile(
+				tempFileId, previewPage);
+
+			inputStream = new FileInputStream(previewFile);
+
+			fileName = FileUtil.stripExtension(fileName).concat(
+				StringPool.PERIOD).concat(PDFProcessorUtil.PREVIEW_TYPE);
 
 			converted = true;
 		}

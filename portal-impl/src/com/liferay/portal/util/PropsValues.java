@@ -400,6 +400,8 @@ public class PropsValues {
 
 	public static final boolean DL_FILE_RANK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_RANK_ENABLED));
 
+	public static final boolean DL_GENERATE_PREVIEWS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_GENERATE_PREVIEWS));
+
 	public static final boolean DL_GENERATE_THUMBNAILS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_GENERATE_THUMBNAILS));
 
 	public static String DL_HOOK_IMPL = PropsUtil.get(PropsKeys.DL_HOOK_IMPL);

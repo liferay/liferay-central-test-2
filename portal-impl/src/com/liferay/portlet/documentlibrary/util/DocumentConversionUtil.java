@@ -110,11 +110,7 @@ public class DocumentConversionUtil {
 		}
 
 		try {
-			if (PrefsPropsUtil.getBoolean(
-					PropsKeys.OPENOFFICE_SERVER_ENABLED,
-					PropsValues.OPENOFFICE_SERVER_ENABLED) &&
-				isConvertBeforeCompare(extension)) {
-
+			if (isEnabled() && isConvertBeforeCompare(extension)) {
 				return true;
 			}
 		}
@@ -143,6 +139,18 @@ public class DocumentConversionUtil {
 		return false;
 	}
 
+	public static boolean isEnabled() {
+		try {
+			return PrefsPropsUtil.getBoolean(
+				PropsKeys.OPENOFFICE_SERVER_ENABLED,
+				PropsValues.OPENOFFICE_SERVER_ENABLED);
+		}
+		catch (Exception e) {
+		}
+
+		return false;
+	}
+
 	private DocumentConversionUtil() {
 		_populateConversionsMap("drawing");
 		_populateConversionsMap("presentation");
@@ -155,10 +163,7 @@ public class DocumentConversionUtil {
 			String targetExtension)
 		throws IOException, SystemException {
 
-		if (!PrefsPropsUtil.getBoolean(
-				PropsKeys.OPENOFFICE_SERVER_ENABLED,
-				PropsValues.OPENOFFICE_SERVER_ENABLED)) {
-
+		if (!isEnabled()) {
 			return null;
 		}
 
