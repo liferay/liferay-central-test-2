@@ -178,29 +178,21 @@ td.user-info {
 
 .portlet-message-boards .views {
 	color: #999;
-	clear: both;
-	float: left;
-	padding: 5px 0;
-	text-align: center;
-	width: 100%;
+	height: 38px;
 }
 
-.portlet-message-boards .votes, .portlet-message-boards .status {
+.portlet-message-boards .votes, .portlet-message-boards .status, .portlet-message-boards .views {
 	display: block;
 	float: left;
 	height: 38px;
 	margin: 0 3px 0 0;
-	padding: 5px;
+	padding: 5px 1px;
 	text-align: center;
+	width: 48px;
 }
 
 .portlet-message-boards .votes {
 	color: #555;
-	width: 40px;
-}
-
-.portlet-message-boards .status {
-	width: 48px;
 }
 
 .portlet-message-boards .answered {
@@ -218,11 +210,6 @@ td.user-info {
 	font-size: 190%;
 	font-weight: bold;
 	height: 25px;
-}
-
-.portlet-message-boards .views .count {
-	display: inline;
-	font-size: 1em;
 }
 
 .portlet-message-boards .toggle_id_message_boards_view_message_thread {
