@@ -194,11 +194,14 @@ public class JournalIndexer extends BaseIndexer {
 	protected void doReindex(Object obj) throws Exception {
 		JournalArticle article = (JournalArticle)obj;
 
+		Document document = getDocument(article);
+
 		if (!article.isApproved() || !article.isIndexable()) {
+			SearchEngineUtil.deleteDocument(
+				article.getCompanyId(), document.get(Field.UID));
+
 			return;
 		}
-
-		Document document = getDocument(article);
 
 		SearchEngineUtil.updateDocument(article.getCompanyId(), document);
 	}
