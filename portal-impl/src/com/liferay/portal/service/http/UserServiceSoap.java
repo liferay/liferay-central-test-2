@@ -145,8 +145,9 @@ public class UserServiceSoap {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds, boolean sendEmail,
+		java.lang.String jobTitle, boolean active, long[] groupIds,
+		long[] organizationIds, long[] roleIds, long[] userGroupIds,
+		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -155,7 +156,7 @@ public class UserServiceSoap {
 					screenName, emailAddress, facebookId, openId,
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
-					birthdayDay, birthdayYear, jobTitle, groupIds,
+					birthdayDay, birthdayYear, jobTitle, active, groupIds,
 					organizationIds, roleIds, userGroupIds, sendEmail,
 					serviceContext);
 
@@ -176,9 +177,9 @@ public class UserServiceSoap {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds, boolean sendEmail,
-		com.liferay.portal.model.AddressSoap[] addresses,
+		java.lang.String jobTitle, boolean active, long[] groupIds,
+		long[] organizationIds, long[] roleIds, long[] userGroupIds,
+		boolean sendEmail, com.liferay.portal.model.AddressSoap[] addresses,
 		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
 		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites,
@@ -191,7 +192,7 @@ public class UserServiceSoap {
 					screenName, emailAddress, facebookId, openId,
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
 					lastName, prefixId, suffixId, male, birthdayMonth,
-					birthdayDay, birthdayYear, jobTitle, groupIds,
+					birthdayDay, birthdayYear, jobTitle, active, groupIds,
 					organizationIds, roleIds, userGroupIds, sendEmail,
 					com.liferay.portal.model.impl.AddressModelImpl.toModels(
 						addresses),

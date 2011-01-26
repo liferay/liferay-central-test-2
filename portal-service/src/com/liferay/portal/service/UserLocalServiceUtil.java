@@ -323,8 +323,9 @@ public class UserLocalServiceUtil {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
-		long[] roleIds, long[] userGroupIds, boolean sendEmail,
+		java.lang.String jobTitle, boolean active, long[] groupIds,
+		long[] organizationIds, long[] roleIds, long[] userGroupIds,
+		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -333,8 +334,8 @@ public class UserLocalServiceUtil {
 			password2, autoScreenName, screenName, emailAddress, facebookId,
 			openId, locale, firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-			groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
-			serviceContext);
+			active, groupIds, organizationIds, roleIds, userGroupIds,
+			sendEmail, serviceContext);
 	}
 
 	public static void addUserGroupUsers(long userGroupId, long[] userIds)
