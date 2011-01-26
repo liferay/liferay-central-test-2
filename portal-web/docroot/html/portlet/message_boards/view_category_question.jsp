@@ -133,16 +133,18 @@ portletURL.setParameter("mbCategoryId", String.valueOf(categoryId));
 			int ratingScore = (int)ratingsStats.getTotalScore();
 			%>
 
-			<span class= "votes">
-				<span class="count"><%= String.valueOf(ratingScore) %></span> <span><%= LanguageUtil.get(pageContext, "votes") %></span>
-			</span>
+			<span class="question-details">
+				<span class= "votes">
+					<span class="count"><%= String.valueOf(ratingScore) %></span> <span><%= LanguageUtil.get(pageContext, "votes") %></span>
+				</span>
 
-			<span class="status <%= (replies != 0) ? "answered" : " unanswered" %> ">
-				<span class="count"><%= replies %></span> <span><%= LanguageUtil.get(pageContext, "answers") %></span>
-			</span>
+				<span class="status <%= (replies != 0) ? "answered" : " unanswered" %> ">
+					<span class="count"><%= replies %></span> <span><%= LanguageUtil.get(pageContext, "answers") %></span>
+				</span>
 
-			<span class="views">
-				<span class="count"><%= thread.getViewCount() %></span> <span><%= LanguageUtil.get(pageContext, "views") %></span>
+				<span class="views">
+					<span class="count"><%= thread.getViewCount() %></span> <span><%= LanguageUtil.get(pageContext, "views") %></span>
+				</span>
 			</span>
 		</liferay-ui:search-container-column-text>
 

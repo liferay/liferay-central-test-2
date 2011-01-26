@@ -171,47 +171,46 @@ td.user-info {
 	margin-right: 1em;
 }
 
-.portlet-message-boards .status {
+.portlet-message-boards .question-details {
 	display: block;
 	float: left;
-	height: 38px;
-	margin: 0 3px 0 0;
-	padding: 5px;
-	text-align: center;
-	width: 48px;
 }
 
 .portlet-message-boards .views {
 	color: #999;
-	display: block;
+	clear: both;
 	float: left;
-	height: 38px;
-	margin: 0 3px 0 0;
-	padding: 5px 0 5px 4px;
+	padding: 5px 0;
 	text-align: center;
-	width: 40px;
+	width: 100%;
 }
 
-.portlet-message-boards .votes {
-	background: none repeat scroll 0 0 #EEE;
-	color: #555;
+.portlet-message-boards .votes, .portlet-message-boards .status {
 	display: block;
 	float: left;
 	height: 38px;
 	margin: 0 3px 0 0;
 	padding: 5px;
 	text-align: center;
+}
+
+.portlet-message-boards .votes {
+	color: #555;
 	width: 40px;
 }
 
+.portlet-message-boards .status {
+	width: 48px;
+}
+
 .portlet-message-boards .answered {
-	background: none repeat scroll 0 0 #75845C;
-	color: white;
+	background-color: #5BA018;
+	color: #FFF;
 }
 
 .portlet-message-boards .unanswered {
-	background: none repeat scroll 0 0 #9A4444;
-	color: white;
+	background-color: #CF4937;
+	color: #FFF;
 }
 
 .portlet-message-boards .count {
@@ -219,6 +218,11 @@ td.user-info {
 	font-size: 190%;
 	font-weight: bold;
 	height: 25px;
+}
+
+.portlet-message-boards .views .count {
+	display: inline;
+	font-size: 1em;
 }
 
 .portlet-message-boards .toggle_id_message_boards_view_message_thread {
@@ -311,6 +315,7 @@ td.user-info {
 }
 
 .portlet-message-boards .displayStyle-question .question {
+	vertical-align: top;
 	width: 65%;
 }
 
@@ -323,7 +328,8 @@ td.user-info {
 }
 
 .portlet-message-boards .displayStyle-question .time {
-	color: #666;
+	color: #777;
+	font-size: 0.9em;
 	font-weight: bold;
 	margin-top: 0.5em;
 	text-align: center;
@@ -335,7 +341,6 @@ td.user-info {
 }
 
 .portlet-message-boards .displayStyle-question .question-subject {
-	color: #06C;
 	font-size: 125%;
 }
 
@@ -344,7 +349,7 @@ td.user-info {
 }
 
 .portlet-message-boards .displayStyle-question .summary {
-	color: #4F4F4F;
+	color: #444;
 	font-size: 120%;
 }
 
