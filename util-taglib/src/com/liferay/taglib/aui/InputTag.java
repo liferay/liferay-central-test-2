@@ -121,6 +121,10 @@ public class InputTag extends IncludeTag {
 		_label = label;
 	}
 
+	public void setLanguageId(String languageId) {
+		_languageId = languageId;
+	}
+
 	public void setLast(boolean last) {
 		_last = last;
 	}
@@ -227,6 +231,7 @@ public class InputTag extends IncludeTag {
 		_inlineLabel = null;
 		_inputCssClass = null;
 		_label = null;
+		_languageId = null;
 		_last = false;
 		_model = null;
 		_name = null;
@@ -334,6 +339,7 @@ public class InputTag extends IncludeTag {
 		request.setAttribute("aui:input:inlineLabel", _inlineLabel);
 		request.setAttribute("aui:input:inputCssClass", _inputCssClass);
 		request.setAttribute("aui:input:label", label);
+		request.setAttribute("aui:input:languageId", _languageId);
 		request.setAttribute("aui:input:last", String.valueOf(_last));
 		request.setAttribute("aui:input:model", model);
 		request.setAttribute("aui:input:name", _name);
@@ -387,6 +393,7 @@ public class InputTag extends IncludeTag {
 	private String _inlineLabel;
 	private String _inputCssClass;
 	private String _label;
+	private String _languageId;
 	private boolean _last;
 	private Class<?> _model;
 	private String _name;

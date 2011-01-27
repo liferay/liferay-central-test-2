@@ -38,6 +38,7 @@ boolean inlineField = GetterUtil.getBoolean((String)request.getAttribute("aui:in
 String inlineLabel = GetterUtil.getString((String)request.getAttribute("aui:input:inlineLabel"));
 String inputCssClass = GetterUtil.getString((String)request.getAttribute("aui:input:inputCssClass"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:input:label"));
+String languageId = GetterUtil.getString((String)request.getAttribute("aui:input:languageId"));
 boolean last = GetterUtil.getBoolean((String)request.getAttribute("aui:input:last"));
 Class<?> model = (Class<?>)request.getAttribute("aui:input:model");
 String name = GetterUtil.getString((String)request.getAttribute("aui:input:name"));
@@ -164,6 +165,7 @@ String labelTag = AUIUtil.buildLabel(inlineLabel, showForLabel, forLabel);
 			fieldParam='<%= fieldParam %>'
 			format='<%= (Format)dynamicAttributes.get("format") %>'
 			formName="<%= formName %>"
+			languageId="<%= languageId %>"
 			model="<%= model %>"
 		/>
 	</c:when>
