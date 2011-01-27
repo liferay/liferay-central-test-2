@@ -33,22 +33,21 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class ConcurrentLRUCache<K, V> {
 
-	public ConcurrentLRUCache(int maxCacheSize) {
-		this(maxCacheSize, 0.75F);
+	public ConcurrentLRUCache(int maxSize) {
+		this(maxSize, 0.75F);
 	}
 
-	public ConcurrentLRUCache(int maxCacheSize, float expectLoadFactor) {
-		if ((maxCacheSize <= 0) || (expectLoadFactor <= 0F) ||
-			(expectLoadFactor >= 1)) {
+	public ConcurrentLRUCache(int maxSize, float loadFactor) {
+		if ((maxSize <= 0) || (loadFactor <= 0) || (loadFactor >= 1)) {
 			throw new IllegalArgumentException();
 		}
 
-		_maxSize = maxCacheSize;
-		_expectSize = (int) (maxCacheSize * expectLoadFactor);
-		if (_expectSize == 0) {
+		_maxSize = maxSize;
+		_expectedSize = (int)(maxSize * loadFactor);
+
+		if (_expectedSize == 0) {
 			throw new IllegalArgumentException(
-				"maxCacheSize and expectLoadFactor are too small, the result "
-				+ "expectSize is 0");
+				"maxSize and loadFactor are too small");
 		}
 
 		_readLock = _readWriteLock.readLock();
@@ -61,11 +60,15 @@ public class ConcurrentLRUCache<K, V> {
 
 	public V get(K key) {
 		_readLock.lock();
+
 		try {
-			ValueWrapper<V> valueWrapper = _cache.get(key);
+			ValueWrapper valueWrapper = _cache.get(key);
+
 			if (valueWrapper != null) {
 				valueWrapper._hitCount.getAndIncrement();
+
 				_hitCount.getAndIncrement();
+
 				return valueWrapper._value;
 			}
 		}
@@ -78,8 +81,8 @@ public class ConcurrentLRUCache<K, V> {
 		return null;
 	}
 
-	public int expectSize() {
-		return _expectSize;
+	public int expectedSize() {
+		return _expectedSize;
 	}
 
 	public long hitCount() {
@@ -99,12 +102,12 @@ public class ConcurrentLRUCache<K, V> {
 			throw new NullPointerException("Key is null");
 		}
 
-		ValueWrapper<V> valueWrapper = new ValueWrapper<V>(value);
+		ValueWrapper valueWrapper = new ValueWrapper(value);
 
 		_writeLock.lock();
 		try {
 			if (!_cache.containsKey(key) && (_cache.size() >= _maxSize)) {
-				cleanUp();
+				_cleanUp();
 			}
 
 			_cache.put(key, valueWrapper);
@@ -122,6 +125,7 @@ public class ConcurrentLRUCache<K, V> {
 
 	public int size() {
 		_readLock.lock();
+
 		try {
 			return _cache.size();
 		}
@@ -135,8 +139,8 @@ public class ConcurrentLRUCache<K, V> {
 
 		sb.append("{evictCount=");
 		sb.append(_evictCount.get());
-		sb.append(", expectSize=");
-		sb.append(_expectSize);
+		sb.append(", expectedSize=");
+		sb.append(_expectedSize);
 		sb.append(", hitCount=");
 		sb.append(_hitCount.get());
 		sb.append(", maxSize=");
@@ -152,26 +156,31 @@ public class ConcurrentLRUCache<K, V> {
 		return sb.toString();
 	}
 
-	private void cleanUp() {
-		List<Entry<K, ValueWrapper<V>>> entryList =
-			new ArrayList<Entry<K, ValueWrapper<V>>>(_cache.entrySet());
-		Collections.sort(entryList, _entryComparator);
+	private void _cleanUp() {
+		List<Entry<K, ValueWrapper>> valueWrappers =
+			new ArrayList<Entry<K, ValueWrapper>>(_cache.entrySet());
 
-		int freeUpCount = _cache.size() - _expectSize;
-		_evictCount.getAndAdd(freeUpCount);
-		Iterator<Entry<K, ValueWrapper<V>>> sortedIterator =
-			entryList.iterator();
-		while (freeUpCount-- > 0 && sortedIterator.hasNext()) {
-			Entry<K, ValueWrapper<V>> entry = sortedIterator.next();
+		Collections.sort(valueWrappers, _entryComparator);
+
+		int cleanUpSize = _cache.size() - _expectedSize;
+
+		_evictCount.getAndAdd(cleanUpSize);
+
+		Iterator<Entry<K, ValueWrapper>> itr = valueWrappers.iterator();
+
+		while (cleanUpSize-- > 0 && itr.hasNext()) {
+			Entry<K, ValueWrapper> entry = itr.next();
+
 			_cache.remove(entry.getKey());
-			sortedIterator.remove();
+
+			itr.remove();
 		}
 	}
 
-	private Map<K, ValueWrapper<V>> _cache = new HashMap<K, ValueWrapper<V>>();
+	private Map<K, ValueWrapper> _cache = new HashMap<K, ValueWrapper>();
 	private final EntryComparator _entryComparator = new EntryComparator();
 	private final AtomicLong _evictCount = new AtomicLong();
-	private final int _expectSize;
+	private final int _expectedSize;
 	private final AtomicLong _hitCount = new AtomicLong();
 	private final int _maxSize;
 	private final AtomicLong _missCount = new AtomicLong();
@@ -182,25 +191,31 @@ public class ConcurrentLRUCache<K, V> {
 	private final Lock _writeLock;
 
 	private class EntryComparator
-		implements Comparator<Entry<K, ValueWrapper<V>>> {
+		implements Comparator<Entry<K, ValueWrapper>> {
 
 		public int compare(
-			Entry<K, ValueWrapper<V>> entry1,
-			Entry<K, ValueWrapper<V>> entry2) {
-			long hitCount1 = entry1.getValue()._hitCount.get();
-			long hitCount2 = entry2.getValue()._hitCount.get();
+			Entry<K, ValueWrapper> entry1, Entry<K, ValueWrapper> entry2) {
 
-			return (int) (hitCount1 - hitCount2);
+			ValueWrapper valueWrapper1 = entry1.getValue();
+			ValueWrapper valueWrapper2 = entry2.getValue();
+
+			long hitCount1 = valueWrapper1._hitCount.get();
+			long hitCount2 = valueWrapper2._hitCount.get();
+
+			return (int)(hitCount1 - hitCount2);
 		}
+
 	}
 
-	private class ValueWrapper<V> {
+	private class ValueWrapper {
 
 		public ValueWrapper(V v) {
 			_value = v;
 		}
+
 		private final AtomicLong _hitCount = new AtomicLong();
 		private final V _value;
+
 	}
 
 }

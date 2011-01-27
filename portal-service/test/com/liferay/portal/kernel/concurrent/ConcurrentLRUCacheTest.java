@@ -20,80 +20,100 @@ import com.liferay.portal.kernel.test.TestCase;
  * @author Shuyang Zhou
  */
 public class ConcurrentLRUCacheTest extends TestCase {
+
 	public void testConstruct() {
-		// maxCacheSize is 0
+
+		// maxSize is 0
+
 		try {
-			new ConcurrentLRUCache(0);
+			new ConcurrentLRUCache<Object, Object>(0);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
 		try {
-			new ConcurrentLRUCache(0, 0.9F);
+			new ConcurrentLRUCache<Object, Object>(0, 0.9F);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// maxCacheSize is less than 0
+		// maxSize is less than 0
+
 		try {
-			new ConcurrentLRUCache(-1);
+			new ConcurrentLRUCache<Object, Object>(-1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
 		try {
-			new ConcurrentLRUCache(-1, 0.9F);
+			new ConcurrentLRUCache<Object, Object>(-1, 0.9F);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// expectLoadFactor is 0F
+		// loadFactor is 0
+
 		try {
-			new ConcurrentLRUCache(10, 0F);
+			new ConcurrentLRUCache<Object, Object>(10, 0);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// expectLoadFactor is less than 0F
+		// loadFactor is less than 0
+
 		try {
-			new ConcurrentLRUCache(10, -1F);
+			new ConcurrentLRUCache<Object, Object>(10, -1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// expectLoadFactor is 1F
+		// loadFactor is 1
+
 		try {
-			new ConcurrentLRUCache(10, 1F);
+			new ConcurrentLRUCache<Object, Object>(10, 1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// expectLoadFactor is greater than 1F
+		// loadFactor is greater than 1
+
 		try {
-			new ConcurrentLRUCache(10, 1.1F);
+			new ConcurrentLRUCache<Object, Object>(10, 1.1F);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// Small expectLoadFactor causes _expectSize equals to 0
+		// Small loadFactor causes _expectSize to be 0
+
 		try {
-			new ConcurrentLRUCache(1, 0.9F);
+			new ConcurrentLRUCache<Object, Object>(1, 0.9F);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// Small maxCacheSize causes _expectSize equals to 0
+		// Small maxSize causes _expectSize to be 0
+
 		try {
-			new ConcurrentLRUCache(10, 0.09F);
+			new ConcurrentLRUCache<Object, Object>(10, 0.09F);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
