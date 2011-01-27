@@ -91,8 +91,7 @@ public class PanelTag extends IncludeTag {
 			id = PwdGenerator.getPassword(PwdGenerator.KEY3, 4);
 		}
 
-		request.setAttribute(
-			"aui:panel:collapsed", String.valueOf(_collapsed));
+		request.setAttribute("aui:panel:collapsed", String.valueOf(_collapsed));
 		request.setAttribute(
 			"aui:panel:collapsible", String.valueOf(_collapsible));
 		request.setAttribute("aui:panel:id", id);
@@ -107,8 +106,8 @@ public class PanelTag extends IncludeTag {
 	private static final String _START_PAGE =
 		"/html/taglib/aui/panel/start.jsp";
 
-	private boolean _collapsible;
 	private boolean _collapsed;
+	private boolean _collapsible;
 	private String _id;
 	private String _label;
 	private List<ToolTag> _toolTags;

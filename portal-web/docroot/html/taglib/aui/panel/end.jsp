@@ -19,8 +19,8 @@
 <%@ page import="com.liferay.taglib.aui.ToolTag" %>
 
 <%
-boolean collapsible = GetterUtil.getBoolean((String)request.getAttribute("aui:panel:collapsible"));
 boolean collapsed = GetterUtil.getBoolean((String)request.getAttribute("aui:panel:collapsed"));
+boolean collapsible = GetterUtil.getBoolean((String)request.getAttribute("aui:panel:collapsible"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:panel:label"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:panel:id"));
 List<ToolTag> toolTags = (List<ToolTag>)request.getAttribute("aui:panel:toolTags");
