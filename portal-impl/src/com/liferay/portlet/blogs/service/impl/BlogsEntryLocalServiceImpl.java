@@ -572,10 +572,6 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setSmallImageURL(smallImageURL);
 		entry.setExpandoBridgeAttributes(serviceContext);
 
-		if (!entry.isPending()) {
-			entry.setStatus(WorkflowConstants.STATUS_DRAFT);
-		}
-
 		blogsEntryPersistence.update(entry, false);
 
 		// Resources
