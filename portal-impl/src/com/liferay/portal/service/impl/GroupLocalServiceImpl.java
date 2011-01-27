@@ -128,7 +128,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			classNameId = groupClassNameId;
 			classPK = groupId;
 		}
-		if (GroupConstants.USER_PERSONAL_COMMUNITY.equals(name)) {
+		else if (GroupConstants.USER_PERSONAL_COMMUNITY.equals(name)) {
 			name = String.valueOf(classPK);
 		}
 
