@@ -47,8 +47,8 @@ import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.servlet.LiferayFilter;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.servlet.filters.invoker.FilterMapping;
-import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter;
 import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilterConfig;
+import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilterHelper;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.struts.StrutsAction;
 import com.liferay.portal.kernel.struts.StrutsPortletAction;
@@ -2374,12 +2374,23 @@ public class HookHotDeployListener
 
 	private class ServletFiltersContainer {
 
+		public InvokerFilterHelper getInvokerFilterHelper() {
+			ServletContext portalServletContext = ServletContextPool.get(
+				PortalUtil.getPathContext());
+
+			InvokerFilterHelper invokerFilterHelper =
+				(InvokerFilterHelper)portalServletContext.getAttribute(
+					InvokerFilterHelper.class.getName());
+
+			return invokerFilterHelper;
+		}
+
 		public void registerFilter(
 			String filterName, Filter filter, FilterConfig filterConfig) {
 
-			InvokerFilter invokerFilter = getInvokerFilter();
+			InvokerFilterHelper invokerFilterHelper = getInvokerFilterHelper();
 
-			Filter previousFilter = invokerFilter.registerFilter(
+			Filter previousFilter = invokerFilterHelper.registerFilter(
 				filterName, filter);
 
 			_filterConfigs.put(filterName, filterConfig);
@@ -2391,14 +2402,14 @@ public class HookHotDeployListener
 			List<String> dispatchers, String positionFilterName,
 			boolean after) {
 
-			InvokerFilter invokerFilter = getInvokerFilter();
+			InvokerFilterHelper invokerFilterHelper = getInvokerFilterHelper();
 
-			Filter filter = invokerFilter.getFilter(filterName);
+			Filter filter = invokerFilterHelper.getFilter(filterName);
 
 			FilterConfig filterConfig = _filterConfigs.get(filterName);
 
 			if (filterConfig == null) {
-				filterConfig = invokerFilter.getFilterConfig(filterName);
+				filterConfig = invokerFilterHelper.getFilterConfig(filterName);
 			}
 
 			if (filter == null) {
@@ -2413,38 +2424,27 @@ public class HookHotDeployListener
 			FilterMapping filterMapping = new FilterMapping(
 				filter, filterConfig, urlPatterns, dispatchers);
 
-			invokerFilter.registerFilterMapping(
+			invokerFilterHelper.registerFilterMapping(
 				filterMapping, positionFilterName, after);
 		}
 
 		public void unregisterFilterMappings() {
-			InvokerFilter invokerFilter = getInvokerFilter();
+			InvokerFilterHelper invokerFilterHelper = getInvokerFilterHelper();
 
 			for (String filterName : _filters.keySet()) {
 				Filter filter = _filters.get(filterName);
 
-				Filter previousFilter = invokerFilter.registerFilter(
+				Filter previousFilter = invokerFilterHelper.registerFilter(
 					filterName, filter);
 
 				previousFilter.destroy();
 			}
 
 			for (FilterMapping filterMapping : _filterMappings) {
-				invokerFilter.unregisterFilterMapping(filterMapping);
+				invokerFilterHelper.unregisterFilterMapping(filterMapping);
 
 				filterMapping.setFilter(null);
 			}
-		}
-
-		private InvokerFilter getInvokerFilter() {
-			ServletContext portalServletContext = ServletContextPool.get(
-				PortalUtil.getPathContext());
-
-			InvokerFilter invokerFilter =
-				(InvokerFilter)portalServletContext.getAttribute(
-					InvokerFilter.class.getName());
-
-			return invokerFilter;
 		}
 
 		private Map<String, FilterConfig> _filterConfigs =

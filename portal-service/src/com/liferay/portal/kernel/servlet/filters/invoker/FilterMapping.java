@@ -108,6 +108,10 @@ public class FilterMapping {
 			else if (dispatcher.equals("REQUEST")) {
 				_dispatcherRequest = true;
 			}
+			else {
+				throw new IllegalArgumentException(
+					"Invalid dispatcher " + dispatcher);
+			}
 		}
 
 		if (!_dispatcherError && !_dispatcherForward && !_dispatcherInclude &&

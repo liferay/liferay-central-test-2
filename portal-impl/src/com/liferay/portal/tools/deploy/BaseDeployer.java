@@ -1048,6 +1048,48 @@ public class BaseDeployer implements Deployer {
 		}
 	}
 
+	public String getInvokerFilterContent() {
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(getInvokerFilterContent("ERROR"));
+		sb.append(getInvokerFilterContent("FORWARD"));
+		sb.append(getInvokerFilterContent("INCLUDE"));
+		sb.append(getInvokerFilterContent("REQUEST"));
+
+		return sb.toString();
+	}
+
+	public String getInvokerFilterContent(String dispatcher) {
+		StringBundler sb = new StringBundler(23);
+
+		sb.append("<filter>");
+		sb.append("<filter-name>Invoker Filter - ");
+		sb.append(dispatcher);
+		sb.append("</filter-name>");
+		sb.append("<filter-class>");
+		sb.append(InvokerFilter.class.getName());
+		sb.append("</filter-class>");
+		sb.append("<init-param>");
+		sb.append("<param-name>dispatcher</param-name>");
+		sb.append("<param-value>");
+		sb.append(dispatcher);
+		sb.append("</param-value>");
+		sb.append("</init-param>");
+		sb.append("</filter>");
+
+		sb.append("<filter-mapping>");
+		sb.append("<filter-name>Invoker Filter - ");
+		sb.append(dispatcher);
+		sb.append("</filter-name>");
+		sb.append("<url-pattern>/*</url-pattern>");
+		sb.append("<dispatcher>");
+		sb.append(dispatcher);
+		sb.append("</dispatcher>");
+		sb.append("</filter-mapping>");
+
+		return sb.toString();
+	}
+
 	public String getPluginPackageLicensesXml(List<License> licenses) {
 		if (licenses.isEmpty()) {
 			return StringPool.BLANK;
@@ -1460,26 +1502,8 @@ public class BaseDeployer implements Deployer {
 		FileUtil.write(
 			srcFile + "/WEB-INF/liferay-web.xml", liferayWebXmlContent);
 
-		StringBundler sb = new StringBundler();
-
-		sb.append("<filter>");
-		sb.append("<filter-name>Invoker Filter</filter-name>");
-		sb.append("<filter-class>");
-		sb.append(InvokerFilter.class.getName());
-		sb.append("</filter-class>");
-		sb.append("</filter>");
-
-		sb.append("<filter-mapping>");
-		sb.append("<filter-name>Invoker Filter</filter-name>");
-		sb.append("<url-pattern>/*</url-pattern>");
-		sb.append("<dispatcher>ERROR</dispatcher>");
-		sb.append("<dispatcher>FORWARD</dispatcher>");
-		sb.append("<dispatcher>INCLUDE</dispatcher>");
-		sb.append("<dispatcher>REQUEST</dispatcher>");
-		sb.append("</filter-mapping>");
-
 		webXmlContent =
-			webXmlContent.substring(0, x) + sb.toString() +
+			webXmlContent.substring(0, x) + getInvokerFilterContent() +
 				webXmlContent.substring(y + 17);
 
 		return webXmlContent;
