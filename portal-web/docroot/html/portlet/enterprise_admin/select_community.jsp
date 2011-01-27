@@ -54,7 +54,7 @@ portletURL.setParameter("target", target);
 			long[] classNameIds = new long[] {PortalUtil.getClassNameId(Group.class.getName())};
 
 			if (includeUserPersonalCommunity) {
-				classNameIds = new long[] {PortalUtil.getClassNameId(Group.class.getName()), PortalUtil.getClassNameId(GroupConstants.USER_PERSONAL_COMMUNITY)};
+				classNameIds = new long[] {PortalUtil.getClassNameId(Group.class.getName()), PortalUtil.getClassNameId(UserPersonalCommunity.class)};
 			}
 
 			results = GroupLocalServiceUtil.search(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
