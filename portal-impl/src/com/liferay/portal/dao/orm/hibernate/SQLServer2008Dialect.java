@@ -32,7 +32,7 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 	public String getLimitString(String sql, int offset, int limit) {
 		String sqlLowerCase = sql.toLowerCase();
 
-		String limitString;
+		String limitString = null;
 
 		if (sqlLowerCase.contains(" union ")) {
 			limitString = getLimitStringUnion(sql, sqlLowerCase, offset, limit);
@@ -44,6 +44,10 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 		return limitString;
 	}
 
+	public boolean supportsLimitOffset() {
+		return _SUPPORTS_LIMIT_OFFSET;
+	}
+
 	protected String getLimitString(
 		String sql, String sqlLowerCase, int offset, int limit) {
 
@@ -52,9 +56,9 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 		if (orderByPos < 0) {
 			return super.getLimitString(sql, offset, limit);
 		}
-		
+
 		String orderByString = sql.substring(orderByPos + 9, sql.length());
-		
+
 		String[] orderByArray = StringUtil.split(
 			orderByString, StringPool.COMMA);
 
@@ -92,7 +96,7 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 			orderByArray[i] = orderByColumn.concat(
 				StringPool.SPACE).concat(orderByType);
 		}
-		
+
 		String selectFromWhere = sql.substring(fromPos, orderByPos);
 
 		StringBundler sb = new StringBundler(11);
@@ -179,9 +183,6 @@ public class SQLServer2008Dialect extends SQLServerDialect {
 		return sb.toString();
 	}
 
-	public boolean supportsLimitOffset() {
-		return _SUPPORTS_LIMIT_OFFSET;
-	}
-
 	private static final boolean _SUPPORTS_LIMIT_OFFSET = true;
+
 }
