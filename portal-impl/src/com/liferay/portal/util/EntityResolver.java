@@ -515,6 +515,21 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 
 	private static KeyValuePair[] _SYSTEM_IDS = {
 		new KeyValuePair(
+			"http://java.sun.com/xml/ns/j2ee/j2ee_1_4.xsd",
+			"j2ee_1_4.xsd"
+		),
+
+		new KeyValuePair(
+			"http://java.sun.com/xml/ns/j2ee/jsp_2_0.xsd",
+			"jsp_2_0.xsd"
+		),
+
+		new KeyValuePair(
+			"http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd",
+			"web-app_2_4.xsd"
+		),
+
+		new KeyValuePair(
 			"http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd",
 			"portlet-app_1_0.xsd"
 		),
