@@ -193,7 +193,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		groupParams.put("rolePermissions", rolePermissions);
 
-		groups = GroupLocalServiceUtil.search(company.getCompanyId(), new long[] {PortalUtil.getClassNameId(Group.class), PortalUtil.getClassNameId(Organization.class)}, null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		groups = GroupLocalServiceUtil.search(company.getCompanyId(), new long[] {PortalUtil.getClassNameId(Group.class), PortalUtil.getClassNameId(Organization.class), PortalUtil.getClassNameId(GroupConstants.USER_PERSONAL_COMMUNITY)}, null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		if (groups.isEmpty()) {
 			scope = ResourceConstants.SCOPE_COMPANY;

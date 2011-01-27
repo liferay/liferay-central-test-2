@@ -31,8 +31,14 @@ public class GroupConstants {
 
 	public static final String GUEST = "Guest";
 
+	public static final String USER_PERSONAL_COMMUNITY =
+		"User Personal Community";
+
+	public static final String USER_PERSONAL_COMMUNITY_FRIENDLY_URL =
+		"/personal_community";
+
 	public static final String[] SYSTEM_GROUPS = {
-		CONTROL_PANEL, GUEST
+		CONTROL_PANEL, GUEST, USER_PERSONAL_COMMUNITY
 	};
 
 	public static final int TYPE_COMMUNITY_OPEN = 1;

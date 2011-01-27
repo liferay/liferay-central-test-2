@@ -17,6 +17,7 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.Role;
@@ -197,13 +198,6 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 				}
 
 				organizationId = organization.getParentOrganizationId();
-			}
-		}
-		else if (group.isUser()) {
-			long userId = group.getClassPK();
-
-			if (userId == _userId) {
-				return true;
 			}
 		}
 

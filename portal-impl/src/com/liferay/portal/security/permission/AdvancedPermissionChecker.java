@@ -319,6 +319,13 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 			if (groupId > 0) {
 				group = GroupLocalServiceUtil.getGroup(groupId);
 
+				if (group.isUser() && (group.getClassPK() == getUserId())) {
+					group = GroupLocalServiceUtil.getGroup(
+						getCompanyId(), GroupConstants.USER_PERSONAL_COMMUNITY);
+
+					groupId = group.getGroupId();
+				}
+
 				if (group.isLayout()) {
 					Layout layout = LayoutLocalServiceUtil.getLayout(
 						group.getClassPK());

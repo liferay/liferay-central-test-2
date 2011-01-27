@@ -29,6 +29,7 @@ Boolean supportsFilterByGroup = (Boolean)objArray[5];
 	<portlet:renderURL var="selectCommunityURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 		<portlet:param name="struts_action" value="/enterprise_admin/select_community" />
 		<portlet:param name="target" value="<%= target %>" />
+		<portlet:param name="includeUserPersonalCommunity" value="<%= Boolean.TRUE.toString() %>" />
 	</portlet:renderURL>
 
 	<%

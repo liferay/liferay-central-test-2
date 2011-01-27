@@ -128,7 +128,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			classNameId = groupClassNameId;
 			classPK = groupId;
 		}
-		else {
+		else if (!(Validator.isNotNull(name) &&
+			name.equals(GroupConstants.USER_PERSONAL_COMMUNITY))) {
+
 			name = String.valueOf(classPK);
 		}
 
@@ -290,6 +292,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 			}
 			catch (NoSuchGroupException nsge) {
+				String className = null;
+				long classPK = 0;
 				int type = GroupConstants.TYPE_COMMUNITY_OPEN;
 				String friendlyURL = null;
 
@@ -300,10 +304,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				else if (name.equals(GroupConstants.GUEST)) {
 					friendlyURL = "/guest";
 				}
+				else if (name.equals(GroupConstants.USER_PERSONAL_COMMUNITY)) {
+					className = GroupConstants.USER_PERSONAL_COMMUNITY;
+					classPK = defaultUserId;
+					type = GroupConstants.TYPE_COMMUNITY_PRIVATE;
+					friendlyURL =
+						GroupConstants.USER_PERSONAL_COMMUNITY_FRIENDLY_URL;
+				}
 
 				group = groupLocalService.addGroup(
-					defaultUserId, null, 0, name, null, type, friendlyURL,
-					true, null);
+					defaultUserId, className, classPK, name, null, type,
+					friendlyURL, true, null);
 			}
 
 			if (group.isControlPanel()) {

@@ -18,6 +18,7 @@
 
 <%
 String target = ParamUtil.getString(request, "target");
+boolean includeUserPersonalCommunity = ParamUtil.getBoolean(request, "includeUserPersonalCommunity");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -50,8 +51,14 @@ portletURL.setParameter("target", target);
 				groupParams.put("usersGroups", user.getUserId());
 			}
 
-			results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
+			long[] classNameIds = new long[] {PortalUtil.getClassNameId(Group.class.getName())};
+
+			if (includeUserPersonalCommunity) {
+				classNameIds = new long[] {PortalUtil.getClassNameId(Group.class.getName()), PortalUtil.getClassNameId(GroupConstants.USER_PERSONAL_COMMUNITY)};
+			}
+
+			results = GroupLocalServiceUtil.search(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 			pageContext.setAttribute("results", results);
 			pageContext.setAttribute("total", total);
