@@ -2166,18 +2166,6 @@
 		<field name="completed" type="boolean" />
 		<field name="rejected" type="boolean" />
 	</model>
-	<model name="com.liferay.portlet.usernotifications.model.UserNotificationEvent">
-		<field name="uuid" type="String" />
-		<field name="userNotificationEventId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="type" type="String" />
-		<field name="userId" type="long" />
-		<field name="payload" type="String">
-			<hint-collection name="CLOB" />
-		</field>
-		<field name="timestamp" type="long" />
-		<field name="deliverBy" type="long" />
-	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiNode">
 		<field name="uuid" type="String" />
 		<field name="nodeId" type="long" />

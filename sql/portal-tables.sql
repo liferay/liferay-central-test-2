@@ -986,17 +986,6 @@ create table MembershipRequest (
 	statusId INTEGER
 );
 
-create table NotificationEvent (
-	uuid_ VARCHAR(75) null,
-	userNotificationId LONG not null primary key,
-	companyId LONG,
-	type_ VARCHAR(75) null,
-	userId LONG,
-	data_ VARCHAR(75) null,
-	timestamp LONG,
-	deliverBy LONG
-);
-
 create table Organization_ (
 	organizationId LONG not null primary key,
 	companyId LONG,
@@ -1728,28 +1717,6 @@ create table Ticket (
 	classPK LONG,
 	key_ VARCHAR(75) null,
 	expirationDate DATE null
-);
-
-create table UserEvent (
-	uuid_ VARCHAR(75) null,
-	userEventId LONG not null primary key,
-	companyId LONG,
-	type_ VARCHAR(75) null,
-	userId LONG,
-	data_ VARCHAR(75) null,
-	timestamp LONG,
-	deliverBy LONG
-);
-
-create table UserNotificationEvent (
-	uuid_ VARCHAR(75) null,
-	userNotificationEventId LONG not null primary key,
-	companyId LONG,
-	type_ VARCHAR(75) null,
-	userId LONG,
-	payload TEXT null,
-	timestamp LONG,
-	deliverBy LONG
 );
 
 create table User_ (

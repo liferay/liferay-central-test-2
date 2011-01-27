@@ -379,9 +379,6 @@ create index IX_8A1CC4B on MembershipRequest (groupId);
 create index IX_C28C72EC on MembershipRequest (groupId, statusId);
 create index IX_66D70879 on MembershipRequest (userId);
 
-create index IX_C9A7A1ED on NotificationEvent (companyId, userId);
-create index IX_9C0ECFBF on NotificationEvent (uuid_);
-
 create index IX_A425F71A on OrgGroupPermission (groupId);
 create index IX_6C53DA4E on OrgGroupPermission (permissionId);
 
@@ -611,9 +608,6 @@ create unique index IX_143DC786 on Team (groupId, name);
 
 create index IX_B2468446 on Ticket (key_);
 
-create index IX_377A4CCD on UserEvent (companyId, userId);
-create index IX_C762CA9F on UserEvent (uuid_);
-
 create index IX_524FEFCE on UserGroup (companyId);
 create unique index IX_23EAD0D on UserGroup (companyId, name);
 create index IX_69771487 on UserGroup (companyId, parentUserGroupId);
@@ -636,9 +630,6 @@ create index IX_7F187E63 on UserGroups_Teams (userGroupId);
 create unique index IX_41A32E0D on UserIdMapper (type_, externalUserId);
 create index IX_E60EA987 on UserIdMapper (userId);
 create unique index IX_D1C44A6E on UserIdMapper (userId, type_);
-
-create index IX_4B73B998 on UserNotificationEvent (companyId, userId);
-create index IX_ECD8CFEA on UserNotificationEvent (uuid_);
 
 create index IX_29BA1CF5 on UserTracker (companyId);
 create index IX_46B0AE8E on UserTracker (sessionId);

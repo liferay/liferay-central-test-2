@@ -1051,9 +1051,3 @@ Liferay.Service.registerClass(
 		updatePage: true
 	}
 );
-
-Liferay.Service.register("Liferay.Service.Channel", "com.liferay.portlet.channel.service");
-
-Liferay.Service.register("Liferay.Service.UserChannel", "com.liferay.portlet.userchannel.service");
-
-Liferay.Service.register("Liferay.Service.UserNotifications", "com.liferay.portlet.usernotifications.service");

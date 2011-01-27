@@ -404,12 +404,6 @@
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-usernotifications">
-		<antcall target="build-service">
-			<param name="service.file" value="${basedir}/src/com/liferay/portlet/usernotifications/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlet-wiki">
 		<antcall target="build-service">
 			<param name="service.file" value="${basedir}/src/com/liferay/portlet/wiki/service.xml" />
@@ -434,7 +428,6 @@
 		<antcall target="build-service-portlet-social" />
 		<antcall target="build-service-portlet-softwarecatalog" />
 		<antcall target="build-service-portlet-tasks" />
-		<antcall target="build-service-portlet-usernotifications" />
 		<antcall target="build-service-portlet-wiki" />
 	</target>
 
