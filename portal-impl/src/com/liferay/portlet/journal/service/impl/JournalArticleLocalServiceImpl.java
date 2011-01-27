@@ -207,6 +207,12 @@ public class JournalArticleLocalServiceImpl
 		article.setStructureId(structureId);
 		article.setTemplateId(templateId);
 		article.setDisplayDate(displayDate);
+		article.setExpirationDate(expirationDate);
+		article.setReviewDate(reviewDate);
+		article.setIndexable(indexable);
+		article.setSmallImage(smallImage);
+		article.setSmallImageId(counterLocalService.increment());
+		article.setSmallImageURL(smallImageURL);
 
 		if ((expirationDate == null) || expirationDate.after(now)) {
 			article.setStatus(WorkflowConstants.STATUS_DRAFT);
@@ -214,13 +220,6 @@ public class JournalArticleLocalServiceImpl
 		else {
 			article.setStatus(WorkflowConstants.STATUS_EXPIRED);
 		}
-
-		article.setExpirationDate(expirationDate);
-		article.setReviewDate(reviewDate);
-		article.setIndexable(indexable);
-		article.setSmallImage(smallImage);
-		article.setSmallImageId(counterLocalService.increment());
-		article.setSmallImageURL(smallImageURL);
 
 		journalArticlePersistence.update(article, false);
 
@@ -520,13 +519,13 @@ public class JournalArticleLocalServiceImpl
 		newArticle.setStructureId(oldArticle.getStructureId());
 		newArticle.setTemplateId(oldArticle.getTemplateId());
 		newArticle.setDisplayDate(oldArticle.getDisplayDate());
-		newArticle.setStatus(oldArticle.getStatus());
 		newArticle.setExpirationDate(oldArticle.getExpirationDate());
 		newArticle.setReviewDate(oldArticle.getReviewDate());
 		newArticle.setIndexable(oldArticle.isIndexable());
 		newArticle.setSmallImage(oldArticle.isSmallImage());
 		newArticle.setSmallImageId(counterLocalService.increment());
 		newArticle.setSmallImageURL(oldArticle.getSmallImageURL());
+		newArticle.setStatus(oldArticle.getStatus());
 
 		journalArticlePersistence.update(newArticle, false);
 
@@ -1763,17 +1762,6 @@ public class JournalArticleLocalServiceImpl
 		article.setStructureId(structureId);
 		article.setTemplateId(templateId);
 		article.setDisplayDate(displayDate);
-
-		if (oldArticle.isPending()) {
-			article.setStatus(oldArticle.getStatus());
-		}
-		else if (!expired) {
-			article.setStatus(WorkflowConstants.STATUS_DRAFT);
-		}
-		else {
-			article.setStatus(WorkflowConstants.STATUS_EXPIRED);
-		}
-
 		article.setExpirationDate(expirationDate);
 		article.setReviewDate(reviewDate);
 		article.setIndexable(indexable);
@@ -1784,6 +1772,16 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		article.setSmallImageURL(smallImageURL);
+
+		if (oldArticle.isPending()) {
+			article.setStatus(oldArticle.getStatus());
+		}
+		else if (!expired) {
+			article.setStatus(WorkflowConstants.STATUS_DRAFT);
+		}
+		else {
+			article.setStatus(WorkflowConstants.STATUS_EXPIRED);
+		}
 
 		journalArticlePersistence.update(article, false);
 
@@ -1909,21 +1907,23 @@ public class JournalArticleLocalServiceImpl
 		// Article
 
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
-		article.setStatus(status);
-		article.setStatusByUserId(user.getUserId());
-		article.setStatusByUserName(user.getFullName());
-		article.setStatusDate(serviceContext.getModifiedDate(now));
 
-		if ((status == WorkflowConstants.STATUS_APPROVED) &&
-			(article.getExpirationDate() != null) &&
-			(article.getExpirationDate().before(now))) {
+		if (status == WorkflowConstants.STATUS_APPROVED) {
+			Date expirationDate = article.getExpirationDate();
 
-			article.setExpirationDate(null);
+			if ((expirationDate != null) && expirationDate.before(now)) {
+				article.setExpirationDate(null);
+			}
 		}
 
 		if (status == WorkflowConstants.STATUS_EXPIRED) {
 			article.setExpirationDate(now);
 		}
+
+		article.setStatus(status);
+		article.setStatusByUserId(user.getUserId());
+		article.setStatusByUserName(user.getFullName());
+		article.setStatusDate(serviceContext.getModifiedDate(now));
 
 		journalArticlePersistence.update(article, false);
 
