@@ -54,7 +54,6 @@ import org.springframework.web.context.ContextLoaderListener;
 public class PortalContextLoaderListener extends ContextLoaderListener {
 
 	public void contextInitialized(ServletContextEvent event) {
-		DirectServletRegistry.clearServlets();
 		HotDeployUtil.reset();
 		InstancePool.reset();
 		MethodCache.reset();
@@ -63,6 +62,8 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		ReferenceRegistry.releaseReferences();
 
 		InitUtil.init();
+
+		DirectServletRegistry.clearServlets();
 
 		super.contextInitialized(event);
 
