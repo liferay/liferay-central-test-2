@@ -64,20 +64,20 @@ import org.im4java.process.ProcessStarter;
  */
 public class PDFProcessorUtil {
 
-	public static final String THUMBNAIL_TYPE = ImageProcessor.TYPE_JPEG;
-
 	public static final String PREVIEW_TYPE = ImageProcessor.TYPE_PNG;
+
+	public static final String THUMBNAIL_TYPE = ImageProcessor.TYPE_JPEG;
 
 	public static void generateImages() {
 		_instance._generateImages();
 	}
 
-	public static File getPreviewFile(String id, int previewPage) {
-		return _instance._getPreviewFile(id, previewPage);
+	public static File getPreviewFile(String id, int index) {
+		return _instance._getPreviewFile(id, index);
 	}
 
-	public static int getPreviewPageCount(FileEntry fileEntry) {
-		return _instance._getPreviewPageCount(fileEntry);
+	public static int getPreviewFileCount(FileEntry fileEntry) {
+		return _instance._getPreviewFileCount(fileEntry);
 	}
 
 	public static File getThumbnailFile(String id) {
@@ -179,9 +179,12 @@ public class PDFProcessorUtil {
 
 			if (_isGeneratePreview(id)) {
 				_generateImagesIM(
-					file, id, _PREVIEW_DPI, _PREVIEW_WIDTH_DIMENSION, 0, false);
+					file, id, PropsValues.DL_FILE_ENTRY_PREVIEW_DEPTH,
+					PropsValues.DL_FILE_ENTRY_PREVIEW_DPI,
+					PropsValues.DL_FILE_ENTRY_PREVIEW_HEIGHT,
+					PropsValues.DL_FILE_ENTRY_PREVIEW_WIDTH, false);
 
-				// ImageMagick converts single-page PDFs without appending an
+				// ImageMagick converts single page PDFs without appending an
 				// index. Rename file for consistency.
 
 				File singlePagePreviewFile = _getPreviewFile(id, -1);
@@ -193,15 +196,17 @@ public class PDFProcessorUtil {
 				if (_log.isInfoEnabled()) {
 					_log.info(
 						"ImageMagick generated " +
-							_getPreviewPageCount(fileEntry) +
-							" preview pages for " + id);
+							_getPreviewFileCount(fileEntry) +
+								" preview pages for " + id);
 				}
 			}
 
 			if (_isGenerateThumbnail(id)) {
 				_generateImagesIM(
-					file, id, _THUMBNAIL_DPI, _THUMBNAIL_DIMENSION,
-					_THUMBNAIL_DIMENSION, true);
+					file, id, PropsValues.DL_FILE_ENTRY_THUMBNAIL_DEPTH,
+					PropsValues.DL_FILE_ENTRY_THUMBNAIL_DPI,
+					PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT,
+					PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH, true);
 
 				if (_log.isInfoEnabled()) {
 					_log.info("ImageMagick generated a thumbnail for " + id);
@@ -261,8 +266,9 @@ public class PDFProcessorUtil {
 
 					if (generateThumbnail && (i == 0)) {
 						_generateImagesPB(
-							pdPage, id, _THUMBNAIL_DPI, _THUMBNAIL_DIMENSION,
-							_THUMBNAIL_DIMENSION, true, 0);
+							pdPage, id, PropsValues.DL_FILE_ENTRY_THUMBNAIL_DPI,
+							PropsValues.DL_FILE_ENTRY_THUMBNAIL_HEIGHT,
+							PropsValues.DL_FILE_ENTRY_THUMBNAIL_WIDTH, true, 0);
 
 						if (_log.isInfoEnabled()) {
 							_log.info("PDFBox generated a thumbnail for " + id);
@@ -274,16 +280,16 @@ public class PDFProcessorUtil {
 					}
 
 					_generateImagesPB(
-						pdPage, id, _PREVIEW_DPI, _PREVIEW_WIDTH_DIMENSION, 0,
-						false, i + 1);
+						pdPage, id, PropsValues.DL_FILE_ENTRY_PREVIEW_DPI,
+						PropsValues.DL_FILE_ENTRY_PREVIEW_HEIGHT,
+						PropsValues.DL_FILE_ENTRY_PREVIEW_WIDTH, false, i + 1);
 				}
 
 				if (_log.isInfoEnabled() && generatePreview) {
 					_log.info(
-						"PDFBox generated " + _getPreviewPageCount(fileEntry) +
+						"PDFBox generated " + _getPreviewFileCount(fileEntry) +
 							" preview pages for " + id);
 				}
-
 			}
 			finally {
 				if (pdDocument != null) {
@@ -294,7 +300,7 @@ public class PDFProcessorUtil {
 	}
 
 	private void _generateImagesIM(
-			File file, String id, int dpi, int width, int height,
+			File file, String id, int depth, int dpi, int height, int width,
 			boolean thumbnail)
 		throws IOException, SystemException {
 
@@ -309,16 +315,14 @@ public class PDFProcessorUtil {
 			imOperation.adaptiveResize(width);
 		}
 
-		imOperation.depth(_IMAGE_DEPTH);
+		imOperation.depth(depth);
 
 		if (thumbnail) {
 			imOperation.addImage(file.getPath() + "[0]");
-
 			imOperation.addImage(_getThumbnailFilePath(id));
 		}
 		else {
 			imOperation.addImage(file.getPath());
-
 			imOperation.addImage(_getPreviewFilePath(id, -1));
 		}
 
@@ -334,12 +338,13 @@ public class PDFProcessorUtil {
 	}
 
 	private void _generateImagesPB(
-			PDPage pdPage, String id, int dpi, int width, int height,
-			boolean thumbnail, int page)
+			PDPage pdPage, String id, int dpi, int height, int width,
+			boolean thumbnail, int index)
 		throws IOException, FileNotFoundException {
 
 		RenderedImage renderedImage = pdPage.convertToImage(
-			BufferedImage.TYPE_INT_RGB, _THUMBNAIL_DPI);
+			BufferedImage.TYPE_INT_RGB,
+			PropsValues.DL_FILE_ENTRY_THUMBNAIL_DPI);
 
 		if (height != 0) {
 			renderedImage = ImageProcessorUtil.scale(
@@ -358,7 +363,7 @@ public class PDFProcessorUtil {
 				renderedImage, THUMBNAIL_TYPE, new FileOutputStream(file));
 		}
 		else {
-			File file = _getPreviewFile(id, page);
+			File file = _getPreviewFile(id, index);
 
 			file.createNewFile();
 
@@ -367,16 +372,16 @@ public class PDFProcessorUtil {
 		}
 	}
 
-	private File _getPreviewFile(String id, int previewPage) {
-		String filePath = _getPreviewFilePath(id, previewPage);
+	private File _getPreviewFile(String id, int index) {
+		String filePath = _getPreviewFilePath(id, index);
 
 		return new File(filePath);
 	}
 
-	private String _getPreviewFilePath(String id, int previewPage) {
+	private String _getPreviewFilePath(String id, int index) {
 		StringBundler sb;
 
-		if (previewPage <= 0 ) {
+		if (index <= 0 ) {
 			sb = new StringBundler(4);
 		}
 		else {
@@ -386,9 +391,9 @@ public class PDFProcessorUtil {
 		sb.append(_PREVIEW_PATH);
 		sb.append(id);
 
-		if (previewPage > 0) {
+		if (index > 0) {
 			sb.append(StringPool.DASH);
-			sb.append(previewPage - 1);
+			sb.append(index - 1);
 		}
 
 		sb.append(StringPool.PERIOD);
@@ -397,7 +402,7 @@ public class PDFProcessorUtil {
 		return sb.toString();
 	}
 
-	private int _getPreviewPageCount(FileEntry fileEntry) {
+	private int _getPreviewFileCount(FileEntry fileEntry) {
 		String id = DLUtil.getTempFileId(
 			fileEntry.getFileEntryId(), fileEntry.getVersion());
 
@@ -447,17 +452,21 @@ public class PDFProcessorUtil {
 
 		File thumbnailFile = _getThumbnailFile(id);
 
-		if (PropsValues.DL_GENERATE_PREVIEWS &&
-			PropsValues.DL_GENERATE_THUMBNAILS) {
+		if (PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED &&
+			PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED) {
 
 			if (previewFile.exists() && thumbnailFile.exists()) {
 				return true;
 			}
 		}
-		else  if (PropsValues.DL_GENERATE_PREVIEWS && previewFile.exists()) {
+		else  if (PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED &&
+				  previewFile.exists()) {
+
 			return true;
 		}
-		else if (PropsValues.DL_GENERATE_THUMBNAILS && thumbnailFile.exists()) {
+		else if (PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED &&
+				 thumbnailFile.exists()) {
+
 			return true;
 		}
 
@@ -487,7 +496,9 @@ public class PDFProcessorUtil {
 	private boolean _isGeneratePreview(String id) {
 		File previewFile = _getPreviewFile(id, 1);
 
-		if (PropsValues.DL_GENERATE_PREVIEWS && !previewFile.exists()) {
+		if (PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED &&
+			!previewFile.exists()) {
+
 			return true;
 		}
 		else {
@@ -498,7 +509,9 @@ public class PDFProcessorUtil {
 	private boolean _isGenerateThumbnail(String id) {
 		File thumbnailFile = _getThumbnailFile(id);
 
-		if (PropsValues.DL_GENERATE_THUMBNAILS && !thumbnailFile.exists()) {
+		if (PropsValues.DL_FILE_ENTRY_THUMBNAIL_ENABLED &&
+			!thumbnailFile.exists()) {
+
 			return true;
 		}
 		else {
@@ -506,19 +519,9 @@ public class PDFProcessorUtil {
 		}
 	}
 
-	private static final int _IMAGE_DEPTH = 8;
-
-	private static final int _PREVIEW_WIDTH_DIMENSION = 1000;
-
-	private static final int _PREVIEW_DPI = 300;
-
 	private static final String _PREVIEW_PATH =
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/document_preview/";
-
-	private static final int _THUMBNAIL_DIMENSION = 128;
-
-	private static final int _THUMBNAIL_DPI = 72;
 
 	private static final String _THUMBNAIL_PATH =
 		SystemProperties.get(SystemProperties.TMP_DIR) +

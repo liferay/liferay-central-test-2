@@ -359,7 +359,8 @@ public class WebServerServlet extends HttpServlet {
 		String targetExtension = ParamUtil.getString(
 			request, "targetExtension");
 		boolean thumbnail = ParamUtil.getBoolean(request, "thumbnail");
-		int previewPage = ParamUtil.getInteger(request, "previewPage");
+		int previewFileIndex = ParamUtil.getInteger(
+			request, "previewFileIndex");
 
 		if (Validator.isNotNull(targetExtension)) {
 			File convertedFile = DocumentConversionUtil.convert(
@@ -384,9 +385,9 @@ public class WebServerServlet extends HttpServlet {
 
 			converted = true;
 		}
-		else if (previewPage > 0) {
+		else if (previewFileIndex > 0) {
 			File previewFile = PDFProcessorUtil.getPreviewFile(
-				tempFileId, previewPage);
+				tempFileId, previewFileIndex);
 
 			inputStream = new FileInputStream(previewFile);
 

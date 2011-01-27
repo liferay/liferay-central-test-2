@@ -388,7 +388,27 @@ public class PropsValues {
 
 	public static boolean DL_FILE_ENTRY_DRAFTS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_DRAFTS_ENABLED));
 
+	public static final int DL_FILE_ENTRY_PREVIEW_DEPTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_PREVIEW_DEPTH));
+
+	public static final int DL_FILE_ENTRY_PREVIEW_DPI = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_PREVIEW_DPI));
+
+	public static final int DL_FILE_ENTRY_PREVIEW_HEIGHT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_PREVIEW_HEIGHT));
+
+	public static final boolean DL_FILE_ENTRY_PREVIEW_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_PREVIEW_ENABLED));
+
+	public static final int DL_FILE_ENTRY_PREVIEW_WIDTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_PREVIEW_WIDTH));
+
 	public static final boolean DL_FILE_ENTRY_READ_COUNT_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_READ_COUNT_ENABLED));
+
+	public static final int DL_FILE_ENTRY_THUMBNAIL_DEPTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_DEPTH));
+
+	public static final int DL_FILE_ENTRY_THUMBNAIL_DPI = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_DPI));
+
+	public static final int DL_FILE_ENTRY_THUMBNAIL_HEIGHT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_HEIGHT));
+
+	public static final int DL_FILE_ENTRY_THUMBNAIL_WIDTH = GetterUtil.getInteger(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_WIDTH));
+
+	public static final boolean DL_FILE_ENTRY_THUMBNAIL_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_ENABLED));
 
 	public static final String[] DL_FILE_EXTENSIONS = PropsUtil.getArray(PropsKeys.DL_FILE_EXTENSIONS);
 
@@ -399,10 +419,6 @@ public class PropsValues {
 	public static final long DL_FILE_MAX_SIZE = GetterUtil.getLong(PropsUtil.get(PropsKeys.DL_FILE_MAX_SIZE));
 
 	public static final boolean DL_FILE_RANK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_FILE_RANK_ENABLED));
-
-	public static final boolean DL_GENERATE_PREVIEWS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_GENERATE_PREVIEWS));
-
-	public static final boolean DL_GENERATE_THUMBNAILS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.DL_GENERATE_THUMBNAILS));
 
 	public static String DL_HOOK_IMPL = PropsUtil.get(PropsKeys.DL_HOOK_IMPL);
 
@@ -602,9 +618,9 @@ public class PropsValues {
 
 	public static final boolean LAYOUT_GUEST_SHOW_MAX_ICON = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_GUEST_SHOW_MAX_ICON));
 
-	public static final int LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN = GetterUtil.getInteger(PropsUtil.get(PropsKeys.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN));
-
 	public static final boolean LAYOUT_GUEST_SHOW_MIN_ICON = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_GUEST_SHOW_MIN_ICON));
+
+	public static final int LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN = GetterUtil.getInteger(PropsUtil.get(PropsKeys.LAYOUT_MANAGE_PAGES_INITIAL_CHILDREN));
 
 	public static final boolean LAYOUT_PARALLEL_RENDER_ENABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_PARALLEL_RENDER_ENABLE));
 
@@ -1098,11 +1114,11 @@ public class PropsValues {
 
 	public static boolean SPRING_HIBERNATE_SESSION_DELEGATED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.SPRING_HIBERNATE_SESSION_DELEGATED));
 
-	public static final int SQL_DATA_MAX_PARAMETERS = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SQL_DATA_MAX_PARAMETERS));
-
 	public static final String SPRITE_FILE_NAME = PropsUtil.get(PropsKeys.SPRITE_FILE_NAME);
 
 	public static final String SPRITE_PROPERTIES_FILE_NAME = PropsUtil.get(PropsKeys.SPRITE_PROPERTIES_FILE_NAME);
+
+	public static final int SQL_DATA_MAX_PARAMETERS = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SQL_DATA_MAX_PARAMETERS));
 
 	public static final String[] STRIP_IGNORE_PATHS = PropsUtil.getArray(PropsKeys.STRIP_IGNORE_PATHS);
 

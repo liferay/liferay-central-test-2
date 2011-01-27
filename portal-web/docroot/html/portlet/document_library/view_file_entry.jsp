@@ -161,54 +161,53 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</c:if>
 		</div>
 
-		<c:if test="<%= PropsValues.DL_GENERATE_PREVIEWS %>">
+		<c:if test="<%= PropsValues.DL_FILE_ENTRY_PREVIEW_ENABLED %>">
 			<div>
+
 				<%
-				int pageCount = PDFProcessorUtil.getPreviewPageCount(fileEntry);
+				int previewFileCount = PDFProcessorUtil.getPreviewFileCount(fileEntry);
 
-				String pagePreviewUrl = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&previewPage=";
-
-				if (pageCount == 0) {
+				String previewFileURL = themeDisplay.getPortalURL() + themeDisplay.getPathContext() + "/documents/" + themeDisplay.getScopeGroupId() + StringPool.SLASH + fileEntry.getFolderId() + StringPool.SLASH + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getTitle())) + "?version=" + fileEntry.getVersion() + "&previewFileIndex=";
 				%>
-					<liferay-ui:message key="generating-preview-will-take-a-few-minutes" />
-				<%
-				}
-				else {
-				%>
-					<div>
-						[<a href="javascript:<portlet:namespace />prev()">Prev</a>] [<a href="javascript:<portlet:namespace />next()">Next</a>]
-						<span id="<portlet:namespace />page">1</span> of <span><%= pageCount %></span>
-					</div>
-					<div>
-						<img id="<portlet:namespace />pagePreview" width="500px" src="<%= pagePreviewUrl + "1" %>" />
-					</div>
 
-					<script type="text/javascript">
-						var <portlet:namespace />currentPage = 1;
-						var <portlet:namespace />lastPage = <%= pageCount %>;
-						var <portlet:namespace />pagePreviewUrl = "<%= pagePreviewUrl %>";
+				<c:choose>
+					<c:when test="<%= previewFileCount == 0 %>">
+						<liferay-ui:message key="generating-preview-will-take-a-few-minutes" />
+					</c:when>
+					<c:otherwise>
+						<div>
+							[<a href="javascript:<portlet:namespace />previous();"><liferay-ui:message key="previous" /></a>] [<a href="javascript:<portlet:namespace />next();"><liferay-ui:message key="next" /></a>]
 
-						function <portlet:namespace />prev() {
-							if (<portlet:namespace />currentPage > 1) {
-								<portlet:namespace />currentPage--;
+							<span id="<portlet:namespace />previewFileIndex">1</span> of <span><%= previewFileCount %></span>
+						</div>
+
+						<div>
+							<img id="<portlet:namespace />previewFile" src="<%= previewFileURL + "1" %>" width="500px" />
+						</div>
+
+						<script type="text/javascript">
+							var <portlet:namespace />previewFileIndex = 1;
+
+							function <portlet:namespace />next() {
+								if (<portlet:namespace />previewFileIndex < <%= previewFileCount %>) {
+									<portlet:namespace />previewFileIndex++;
+								}
+
+								document.getElementById('<portlet:namespace/>previewFile').src = '<%= previewFileURL %>' + <portlet:namespace />previewFileIndex;
+								document.getElementById('<portlet:namespace/>previewFileIndex').innerHTML = <portlet:namespace />previewFileIndex;
 							}
 
-							document.getElementById("<portlet:namespace/>pagePreview").src = <portlet:namespace />pagePreviewUrl + <portlet:namespace />currentPage;
-							document.getElementById("<portlet:namespace/>page").innerHTML = <portlet:namespace />currentPage;
-						}
+							function <portlet:namespace />previous() {
+								if (<portlet:namespace />previewFileIndex > 1) {
+									<portlet:namespace />previewFileIndex--;
+								}
 
-						function <portlet:namespace />next() {
-							if (<portlet:namespace />lastPage > <portlet:namespace />currentPage) {
-								<portlet:namespace />currentPage++;
+								document.getElementById('<portlet:namespace/>previewFile').src = '<%= previewFileURL %>' + <portlet:namespace />previewFileIndex;
+								document.getElementById('<portlet:namespace/>previewFileIndex').innerHTML = <portlet:namespace />previewFileIndex;
 							}
-
-							document.getElementById("<portlet:namespace/>pagePreview").src = <portlet:namespace />pagePreviewUrl + <portlet:namespace />currentPage;
-							document.getElementById("<portlet:namespace/>page").innerHTML = <portlet:namespace />currentPage;
-						}
-					</script>
-				<%
-				}
-				%>
+						</script>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</c:if>
 

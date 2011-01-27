@@ -473,9 +473,9 @@ public interface PropsKeys {
 
 	public static final String DEFAULT_WAP_THEME_ID = "default.wap.theme.id";
 
-	public static final String DIRECT_SERVLET_CONTEXT_RELOAD = "direct.servlet.context.reload";
-
 	public static final String DIRECT_SERVLET_CONTEXT_ENABLED = "direct.servlet.context.enabled";
+
+	public static final String DIRECT_SERVLET_CONTEXT_RELOAD = "direct.servlet.context.reload";
 
 	public static final String DISCUSSION_EMAIL_BODY = "discussion.email.body";
 
@@ -493,7 +493,27 @@ public interface PropsKeys {
 
 	public static final String DL_FILE_ENTRY_DRAFTS_ENABLED = "dl.file.entry.drafts.enabled";
 
+	public static final String DL_FILE_ENTRY_PREVIEW_DEPTH = "dl.file.entry.preview.depth";
+
+	public static final String DL_FILE_ENTRY_PREVIEW_DPI = "dl.file.entry.preview.dpi";
+
+	public static final String DL_FILE_ENTRY_PREVIEW_ENABLED = "dl.file.entry.preview.enabled";
+
+	public static final String DL_FILE_ENTRY_PREVIEW_HEIGHT = "dl.file.entry.preview.height";
+
+	public static final String DL_FILE_ENTRY_PREVIEW_WIDTH = "dl.file.entry.preview.width";
+
 	public static final String DL_FILE_ENTRY_READ_COUNT_ENABLED = "dl.file.entry.read.count.enabled";
+
+	public static final String DL_FILE_ENTRY_THUMBNAIL_DEPTH = "dl.file.entry.thumbnail.depth";
+
+	public static final String DL_FILE_ENTRY_THUMBNAIL_DPI = "dl.file.entry.thumbnail.dpi";
+
+	public static final String DL_FILE_ENTRY_THUMBNAIL_ENABLED = "dl.file.entry.thumbnail.enabled";
+
+	public static final String DL_FILE_ENTRY_THUMBNAIL_HEIGHT = "dl.file.entry.thumbnail.height";
+
+	public static final String DL_FILE_ENTRY_THUMBNAIL_WIDTH = "dl.file.entry.thumbnail.width";
 
 	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
 
@@ -508,10 +528,6 @@ public interface PropsKeys {
 	public static final String DL_FILE_MAX_SIZE = "dl.file.max.size";
 
 	public static final String DL_FILE_RANK_ENABLED = "dl.file.rank.enabled";
-
-	public static final String DL_GENERATE_PREVIEWS = "dl.generate.previews";
-
-	public static final String DL_GENERATE_THUMBNAILS = "dl.generate.thumbnails";
 
 	public static final String DL_HOOK_FILE_SYSTEM_ROOT_DIR = "dl.hook.file.system.root.dir";
 
@@ -1603,6 +1619,10 @@ public interface PropsKeys {
 
 	public static final String SPRING_HIBERNATE_SESSION_FACTORY = "spring.hibernate.session.factory";
 
+	public static final String SPRITE_FILE_NAME = "sprite.file.name";
+
+	public static final String SPRITE_PROPERTIES_FILE_NAME = "sprite.properties.file.name";
+
 	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_COUNTRY_COUNTRY_ID = "sql.data.com.liferay.portal.model.Country.country.id";
 
 	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_LISTTYPE_ACCOUNT_ADDRESS = "sql.data.com.liferay.portal.model.ListType.account.address";
@@ -1616,10 +1636,6 @@ public interface PropsKeys {
 	public static final String SQL_DATA_COM_LIFERAY_PORTAL_MODEL_REGION_REGION_ID = "sql.data.com.liferay.portal.model.Region.region.id";
 
 	public static final String SQL_DATA_MAX_PARAMETERS = "sql.data.max.parameters";
-
-	public static final String SPRITE_FILE_NAME = "sprite.file.name";
-
-	public static final String SPRITE_PROPERTIES_FILE_NAME = "sprite.properties.file.name";
 
 	public static final String STRIP_IGNORE_PATHS = "strip.ignore.paths";
 
