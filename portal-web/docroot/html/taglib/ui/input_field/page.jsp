@@ -23,6 +23,7 @@
 <%
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-field:cssClass"));
 String formName = (String)request.getAttribute("liferay-ui:input-field:formName");
+String languageId = (String)request.getAttribute("liferay-ui:input-field:languageId");
 String model = (String)request.getAttribute("liferay-ui:input-field:model");
 Object bean = request.getAttribute("liferay-ui:input-field:bean");
 String field = (String)request.getAttribute("liferay-ui:input-field:field");
@@ -328,7 +329,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 					<c:choose>
 						<c:when test="<%= localized %>">
-							<liferay-ui:input-localized cssClass="<%= cssClass %>" disabled="<%= disabled %>" formName="<%= formName %>" name="<%= fieldParam %>" style='<%= "width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") + "; " + (upperCase ? "text-transform: uppercase;" : "" ) %>' xml="<%= BeanPropertiesUtil.getString(bean, field) %>" />
+							<liferay-ui:input-localized cssClass="<%= cssClass %>" disabled="<%= disabled %>" formName="<%= formName %>" languageId="<%= languageId %>" name="<%= fieldParam %>" style='<%= "width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") + "; " + (upperCase ? "text-transform: uppercase;" : "" ) %>' xml="<%= BeanPropertiesUtil.getString(bean, field) %>" />
 						</c:when>
 						<c:otherwise>
 							<input <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace %><%= fieldParam %>" name="<%= namespace %><%= fieldParam %>" style="width: <%= displayWidth %><%= Validator.isDigit(displayWidth) ? "px" : "" %>; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="<%= secret ? "password" : "text" %>" value="<%= autoEscape ? HtmlUtil.escape(value) : value %>" />
@@ -338,7 +339,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 				<c:otherwise>
 					<c:choose>
 						<c:when test="<%= localized %>">
-							<liferay-ui:input-localized cssClass="<%= cssClass %>" disabled="<%= disabled %>" formName="<%= formName %>" name="<%= fieldParam %>" onKeyDown='<%= (checkTab ? "Liferay.Util.checkTab(this); " : "") + "Liferay.Util.disableEsc();" %>' style='<%= "height: " + displayHeight + (Validator.isDigit(displayHeight) ? "px" : "" ) + "; " + "width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") +";" %>' type="textarea" wrap="soft" xml="<%= BeanPropertiesUtil.getString(bean, field) %>" />
+							<liferay-ui:input-localized cssClass="<%= cssClass %>" disabled="<%= disabled %>" formName="<%= formName %>" languageId="<%= languageId %>" name="<%= fieldParam %>" onKeyDown='<%= (checkTab ? "Liferay.Util.checkTab(this); " : "") + "Liferay.Util.disableEsc();" %>' style='<%= "height: " + displayHeight + (Validator.isDigit(displayHeight) ? "px" : "" ) + "; " + "width: " + displayWidth + (Validator.isDigit(displayWidth) ? "px" : "") +";" %>' type="textarea" wrap="soft" xml="<%= BeanPropertiesUtil.getString(bean, field) %>" />
 						</c:when>
 						<c:otherwise>
 							<textarea <%= Validator.isNotNull(cssClass) ? "class=\"" + cssClass + "\"" : StringPool.BLANK %> <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace %><%= fieldParam %>" name="<%= namespace %><%= fieldParam %>" style="height: <%= displayHeight %><%= Validator.isDigit(displayHeight) ? "px" : "" %>; width: <%= displayWidth %><%= Validator.isDigit(displayWidth) ? "px" : "" %>;" wrap="soft" onKeyDown="<%= checkTab ? "Liferay.Util.checkTab(this); " : "" %> Liferay.Util.disableEsc();"><%= autoEscape ? HtmlUtil.escape(value) : value %></textarea>
