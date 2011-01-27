@@ -22,4 +22,5 @@
 	<resource file="resource-actions/tasks.xml" />
 	<resource file="resource-actions/wiki.xml" />
 	<resource file="resource-actions/workflow.xml" />
+	<resource file="resource-actions/xslcontent.xml" />
 </resource-action-mapping>
