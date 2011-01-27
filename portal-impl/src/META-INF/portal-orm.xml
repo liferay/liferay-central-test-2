@@ -2788,6 +2788,24 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.usernotifications.model.impl.UserNotificationEventModelImpl">
+		<attributes>
+			<id name="userNotificationEventId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="companyId" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="userId" />
+			<basic name="payload" />
+			<basic name="timestamp" />
+			<basic name="deliverBy" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.liferay.portal.model.impl.AccountImpl" name="Account">
 		<table name="Account_" />
 		<attributes />
@@ -3473,6 +3491,10 @@
 	</entity>
 	<entity class="com.liferay.counter.model.impl.CounterImpl" name="Counter">
 		<table name="Counter" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.usernotifications.model.impl.UserNotificationEventImpl" name="UserNotificationEvent">
+		<table name="UserNotificationEvent" />
 		<attributes />
 	</entity>
 </entity-mappings>
