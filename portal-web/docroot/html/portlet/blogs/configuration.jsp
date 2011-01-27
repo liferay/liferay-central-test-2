@@ -355,7 +355,6 @@ String editorContent = emailBody;
 		window,
 		'<portlet:namespace />saveConfiguration',
 		function() {
-
 			<c:if test='<%= tabs2.startsWith("entry-") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
 			</c:if>
