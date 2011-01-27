@@ -16,7 +16,14 @@ package com.liferay.portal.kernel.concurrent;
 
 import com.liferay.portal.kernel.util.StringBundler;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -26,14 +33,26 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 public class ConcurrentLRUCache<K, V> {
 
-	public ConcurrentLRUCache(int maxSize) {
-		_maxSize = maxSize;
+	public ConcurrentLRUCache(int maxCacheSize) {
+		this(maxCacheSize, 0.75F);
+	}
+
+	public ConcurrentLRUCache(int maxCacheSize, float expectLoadFactor) {
+		if ((maxCacheSize <= 0) || (expectLoadFactor <= 0F) ||
+			(expectLoadFactor >= 1)) {
+			throw new IllegalArgumentException();
+		}
+
+		_maxSize = maxCacheSize;
+		_expectSize = (int) (maxCacheSize * expectLoadFactor);
+		if (_expectSize == 0) {
+			throw new IllegalArgumentException(
+				"maxCacheSize and expectLoadFactor are too small, the result "
+				+ "expectSize is 0");
+		}
 
 		_readLock = _readWriteLock.readLock();
 		_writeLock = _readWriteLock.writeLock();
-
-		_headEntry._nextEntry = _lastEntry;
-		_lastEntry._previousEntry = _headEntry;
 	}
 
 	public long evictCount() {
@@ -41,51 +60,26 @@ public class ConcurrentLRUCache<K, V> {
 	}
 
 	public V get(K key) {
-		Entry<K, V> matchEntry = null;
-
-		boolean requiresMove = false;
-
 		_readLock.lock();
-
 		try {
-			matchEntry = _lastEntry._previousEntry;
-
-			while (matchEntry != _headEntry) {
-				if (matchEntry._key.equals(key)) {
-					if (matchEntry._nextEntry != _lastEntry) {
-						requiresMove = true;
-					}
-
-					_hitCount.getAndIncrement();
-
-					return matchEntry._value;
-				}
-
-				matchEntry = matchEntry._previousEntry;
+			ValueWrapper<V> valueWrapper = _cache.get(key);
+			if (valueWrapper != null) {
+				valueWrapper._hitCount.getAndIncrement();
+				_hitCount.getAndIncrement();
+				return valueWrapper._value;
 			}
 		}
 		finally {
 			_readLock.unlock();
-
-			if (requiresMove) {
-				_writeLock.lock();
-
-				try {
-					if (matchEntry._key != null) {
-						_detachEntry(matchEntry);
-
-						_insertEntryBefore(_lastEntry, matchEntry);
-					}
-				}
-				finally {
-					_writeLock.unlock();
-				}
-			}
 		}
 
 		_missCount.getAndIncrement();
 
 		return null;
+	}
+
+	public int expectSize() {
+		return _expectSize;
 	}
 
 	public long hitCount() {
@@ -105,38 +99,21 @@ public class ConcurrentLRUCache<K, V> {
 			throw new NullPointerException("Key is null");
 		}
 
-		_putCount.getAndIncrement();
+		ValueWrapper<V> valueWrapper = new ValueWrapper<V>(value);
+
 		_writeLock.lock();
-
 		try {
-			Entry<K, V> currentEntry = _lastEntry._previousEntry;
-
-			while (currentEntry != _headEntry) {
-				if (currentEntry._key.equals(key)) {
-					currentEntry._value = value;
-
-					if (currentEntry._nextEntry != _lastEntry) {
-						_detachEntry(currentEntry);
-						_insertEntryBefore(_lastEntry, currentEntry);
-					}
-
-					return;
-				}
-
-				currentEntry = currentEntry._previousEntry;
+			if (!_cache.containsKey(key) && (_cache.size() >= _maxSize)) {
+				cleanUp();
 			}
 
-			while (_size.get() >= _maxSize) {
-				_removeHeadEntry();
-			}
-
-			_insertEntryBefore(_lastEntry, new Entry<K, V>(key, value));
-
-			_size.getAndIncrement();
+			_cache.put(key, valueWrapper);
 		}
 		finally {
 			_writeLock.unlock();
 		}
+
+		_putCount.getAndIncrement();
 	}
 
 	public long putCount() {
@@ -144,82 +121,86 @@ public class ConcurrentLRUCache<K, V> {
 	}
 
 	public int size() {
-		return _size.get();
+		_readLock.lock();
+		try {
+			return _cache.size();
+		}
+		finally {
+			_readLock.unlock();
+		}
 	}
 
 	public String toString() {
 		StringBundler sb = new StringBundler();
 
 		sb.append("{evictCount=");
-		sb.append(_evictCount);
+		sb.append(_evictCount.get());
+		sb.append(", expectSize=");
+		sb.append(_expectSize);
 		sb.append(", hitCount=");
-		sb.append(_hitCount);
+		sb.append(_hitCount.get());
 		sb.append(", maxSize=");
 		sb.append(_maxSize);
 		sb.append(", missCount=");
-		sb.append(_missCount);
+		sb.append(_missCount.get());
 		sb.append(", putCount=");
-		sb.append(_putCount);
+		sb.append(_putCount.get());
 		sb.append(", size=");
-		sb.append(_size);
+		sb.append(size());
 		sb.append("}");
 
 		return sb.toString();
 	}
 
-	private void _detachEntry(Entry<K, V> entry) {
-		entry._previousEntry._nextEntry = entry._nextEntry;
-		entry._nextEntry._previousEntry = entry._previousEntry;
-		entry._nextEntry = entry._previousEntry = null;
+	private void cleanUp() {
+		List<Entry<K, ValueWrapper<V>>> entryList =
+			new ArrayList<Entry<K, ValueWrapper<V>>>(_cache.entrySet());
+		Collections.sort(entryList, _entryComparator);
+
+		int freeUpCount = _cache.size() - _expectSize;
+		_evictCount.getAndAdd(freeUpCount);
+		Iterator<Entry<K, ValueWrapper<V>>> sortedIterator =
+			entryList.iterator();
+		while (freeUpCount-- > 0 && sortedIterator.hasNext()) {
+			Entry<K, ValueWrapper<V>> entry = sortedIterator.next();
+			_cache.remove(entry.getKey());
+			sortedIterator.remove();
+		}
 	}
 
-	private void _insertEntryBefore(
-		Entry<K, V> referenceEntry, Entry<K, V> insertEntry) {
-
-		insertEntry._previousEntry = referenceEntry._previousEntry;
-		insertEntry._nextEntry = referenceEntry;
-
-		referenceEntry._previousEntry._nextEntry = insertEntry;
-		referenceEntry._previousEntry = insertEntry;
-	}
-
-	private void _removeHeadEntry() {
-		Entry<K, V> entry = _headEntry._nextEntry;
-
-		_detachEntry(entry);
-
-		entry._key = null;
-		entry._value = null;
-
-		_size.getAndDecrement();
-		_evictCount.getAndIncrement();
-	}
-
-	private final AtomicLong _evictCount = new AtomicLong(0);
-	private final Entry<K, V> _headEntry = new Entry<K, V>(null, null);
-	private final AtomicLong _hitCount = new AtomicLong(0);
-	private final Entry<K, V> _lastEntry = new Entry<K, V>(null, null);
+	private Map<K, ValueWrapper<V>> _cache = new HashMap<K, ValueWrapper<V>>();
+	private final EntryComparator _entryComparator = new EntryComparator();
+	private final AtomicLong _evictCount = new AtomicLong();
+	private final int _expectSize;
+	private final AtomicLong _hitCount = new AtomicLong();
 	private final int _maxSize;
-	private final AtomicLong _missCount = new AtomicLong(0);
-	private final AtomicLong _putCount = new AtomicLong(0);
+	private final AtomicLong _missCount = new AtomicLong();
+	private final AtomicLong _putCount = new AtomicLong();
 	private final Lock _readLock;
 	private final ReentrantReadWriteLock _readWriteLock =
 		new ReentrantReadWriteLock();
-	private final AtomicInteger _size = new AtomicInteger(0);
 	private final Lock _writeLock;
 
-	private static class Entry<K, V> {
+	private class EntryComparator
+		implements Comparator<Entry<K, ValueWrapper<V>>> {
 
-		public Entry(K key, V value) {
-			_key = key;
-			_value = value;
+		public int compare(
+			Entry<K, ValueWrapper<V>> entry1,
+			Entry<K, ValueWrapper<V>> entry2) {
+			long hitCount1 = entry1.getValue()._hitCount.get();
+			long hitCount2 = entry2.getValue()._hitCount.get();
+
+			return (int) (hitCount1 - hitCount2);
 		}
+	}
 
-		private K _key;
-		private Entry<K, V> _nextEntry;
-		private Entry<K, V> _previousEntry;
-		private V _value;
+	private class ValueWrapper<V> {
 
+		public ValueWrapper(V v) {
+			_value = v;
+		}
+		private final AtomicLong _hitCount = new AtomicLong();
+		private final V _value;
 	}
 
 }
