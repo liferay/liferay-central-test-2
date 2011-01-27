@@ -31,7 +31,6 @@ import com.liferay.util.PwdGenerator;
 import java.util.Locale;
 import java.util.Map;
 
-import javax.xml.XMLConstants;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
@@ -68,10 +67,6 @@ public class XSLTemplateParser extends BaseTemplateParser {
 
 		TransformerFactory transformerFactory =
 			TransformerFactory.newInstance();
-
-		transformerFactory.setFeature(
-			XMLConstants.FEATURE_SECURE_PROCESSING,
-			PropsValues.JOURNAL_TEMPLATE_XSL_SECURE_PROCESSING_ENABLED);
 
 		transformerFactory.setURIResolver(new URIResolver(tokens, languageId));
 		transformerFactory.setErrorListener(xslErrorListener);
