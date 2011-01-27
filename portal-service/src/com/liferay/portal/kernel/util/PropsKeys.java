@@ -713,6 +713,8 @@ public interface PropsKeys {
 
 	public static final String INVITATION_EMAIL_MESSAGE_SUBJECT = "invitation.email.message.subject";
 
+	public static final String INVOKER_FILTER_CHAIN_SIZE = "invoker.filter.chain.cache.size";
+
 	public static final String JAVASCRIPT_BAREBONE_ENABLED = "javascript.barebone.enabled";
 
 	public static final String JAVASCRIPT_BAREBONE_FILES = "javascript.barebone.files";

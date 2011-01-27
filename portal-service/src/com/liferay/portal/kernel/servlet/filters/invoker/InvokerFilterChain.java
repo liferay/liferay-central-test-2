@@ -101,6 +101,15 @@ public class InvokerFilterChain implements FilterChain {
 		}
 	}
 
+	public InvokerFilterChain fastCopy(FilterChain filterChain) {
+		InvokerFilterChain invokerFilterChain =
+			new InvokerFilterChain(filterChain);
+
+		invokerFilterChain._filters.addAll(_filters);
+
+		return invokerFilterChain;
+	}
+
 	protected void processDirectCallFilter(
 			Filter filter, HttpServletRequest request,
 			HttpServletResponse response)

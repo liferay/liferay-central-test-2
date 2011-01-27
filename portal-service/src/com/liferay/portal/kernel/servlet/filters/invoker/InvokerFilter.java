@@ -14,11 +14,15 @@
 
 package com.liferay.portal.kernel.servlet.filters.invoker;
 
+import com.liferay.portal.kernel.concurrent.ConcurrentLRUCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.LiferayFilter;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Document;
@@ -97,16 +101,8 @@ public class InvokerFilter implements Filter {
 
 		request.setAttribute(WebKeys.INVOKER_FILTER_URI, uri);
 
-		InvokerFilterChain invokerFilterChain = new InvokerFilterChain(
-			filterChain);
-
-		for (FilterMapping filterMapping : _filterMappings) {
-			if (filterMapping.isMatch(request, dispatcher, uri)) {
-				Filter filter = filterMapping.getFilter();
-
-				invokerFilterChain.addFilter(filter);
-			}
-		}
+		InvokerFilterChain invokerFilterChain =
+			getInvokerFilterChain(request, filterChain, uri, dispatcher);
 
 		invokerFilterChain.doFilter(servletRequest, servletResponse);
 	}
@@ -184,6 +180,45 @@ public class InvokerFilter implements Filter {
 
 	public void unregisterFilterMapping(FilterMapping filterMapping) {
 		_filterMappings.remove(filterMapping);
+	}
+
+	protected InvokerFilterChain createInvokerFilterChain(
+		HttpServletRequest request, FilterChain filterChain, String uri,
+		Dispatcher dispatcher) {
+		InvokerFilterChain invokerFilterChain =
+			new InvokerFilterChain(filterChain);
+
+		for (FilterMapping filterMapping : _filterMappings) {
+			if (filterMapping.isMatch(request, dispatcher, uri)) {
+				Filter filter = filterMapping.getFilter();
+
+				invokerFilterChain.addFilter(filter);
+			}
+		}
+
+		return invokerFilterChain;
+	}
+
+	protected InvokerFilterChain getInvokerFilterChain(
+		HttpServletRequest request, FilterChain filterChain, String uri,
+		Dispatcher dispatcher) {
+		if (_filterChainCache == null) {
+			return createInvokerFilterChain(
+				request, filterChain, uri, dispatcher);
+		}
+
+		Integer cacheKey = uri.hashCode() * 31 + dispatcher.ordinal();
+
+		InvokerFilterChain invokerFilterChain = _filterChainCache.get(cacheKey);
+
+		if (invokerFilterChain == null) {
+			invokerFilterChain = createInvokerFilterChain(
+				request, filterChain, uri, dispatcher);
+
+			_filterChainCache.put(cacheKey, invokerFilterChain);
+		}
+
+		return invokerFilterChain.fastCopy(filterChain);
 	}
 
 	protected void initFilter(
@@ -312,6 +347,19 @@ public class InvokerFilter implements Filter {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(InvokerFilter.class);
+
+	private static ConcurrentLRUCache<Integer, InvokerFilterChain>
+		_filterChainCache;
+
+	static {
+		int cacheSize = GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.INVOKER_FILTER_CHAIN_SIZE));
+
+		if (cacheSize > 0) {
+			_filterChainCache =
+				new ConcurrentLRUCache<Integer, InvokerFilterChain>(cacheSize);
+		}
+	}
 
 	private Map<String, FilterConfig> _filterConfigs =
 		new HashMap<String, FilterConfig>();
