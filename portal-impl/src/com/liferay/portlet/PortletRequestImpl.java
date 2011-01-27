@@ -524,6 +524,10 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 		_windowState = windowState;
 	}
 
+	public boolean isTriggeredByActionURL() {
+		return _triggeredByActionURL;
+	}
+
 	protected void init(
 		HttpServletRequest request, Portlet portlet,
 		InvokerPortlet invokerPortlet, PortletContext portletContext,
@@ -579,13 +583,16 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 				portletFocus = true;
 			}
-			else if (themeDisplay.isLifecycleAction() &&
-					 getLifecycle().equals(PortletRequest.ACTION_PHASE)) {
+			else if (themeDisplay.isLifecycleAction()) {
+				_triggeredByActionURL = true;
 
-				// Request was triggered by an action URL and is being processed
-				// by com.liferay.portlet.ActionRequestImpl
+				if (getLifecycle().equals(PortletRequest.ACTION_PHASE)) {
 
-			   portletFocus = true;
+					// Request was triggered by an action URL and is being
+					// processed by com.liferay.portlet.ActionRequestImpl
+
+					portletFocus = true;
+				}
 			}
 		}
 
@@ -790,5 +797,6 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	private Locale _locale;
 	private long _plid;
 	private Map<String, String[]> _publicRenderParameters;
+	private boolean _triggeredByActionURL;
 
 }
