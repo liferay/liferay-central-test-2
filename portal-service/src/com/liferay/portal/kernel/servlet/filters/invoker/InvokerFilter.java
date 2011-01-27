@@ -149,6 +149,8 @@ public class InvokerFilter implements Filter {
 			}
 		}
 
+		_filterChainCache.flush();
+
 		return previousFilter;
 	}
 
@@ -176,10 +178,14 @@ public class InvokerFilter implements Filter {
 		}
 
 		_filterMappings.add(i, filterMapping);
+
+		_filterChainCache.flush();
 	}
 
 	public void unregisterFilterMapping(FilterMapping filterMapping) {
 		_filterMappings.remove(filterMapping);
+
+		_filterChainCache.flush();
 	}
 
 	protected InvokerFilterChain createInvokerFilterChain(

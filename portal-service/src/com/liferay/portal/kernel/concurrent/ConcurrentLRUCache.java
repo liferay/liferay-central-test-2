@@ -58,6 +58,17 @@ public class ConcurrentLRUCache<K, V> {
 		return _evictCount.get();
 	}
 
+	public void flush() {
+		_writeLock.lock();
+
+		try {
+			_cache.clear();
+		}
+		finally {
+			_writeLock.unlock();
+		}
+	}
+
 	public V get(K key) {
 		_readLock.lock();
 
