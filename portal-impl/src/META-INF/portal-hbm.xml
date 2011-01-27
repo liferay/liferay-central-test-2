@@ -381,6 +381,8 @@
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="keywords" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="robots" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="typeSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="iconImage" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="iconImageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

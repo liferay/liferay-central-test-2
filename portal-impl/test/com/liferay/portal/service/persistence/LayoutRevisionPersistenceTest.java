@@ -77,6 +77,8 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		newLayoutRevision.setName(randomString());
 		newLayoutRevision.setTitle(randomString());
 		newLayoutRevision.setDescription(randomString());
+		newLayoutRevision.setKeywords(randomString());
+		newLayoutRevision.setRobots(randomString());
 		newLayoutRevision.setTypeSettings(randomString());
 		newLayoutRevision.setIconImage(randomBoolean());
 		newLayoutRevision.setIconImageId(nextLong());
@@ -124,6 +126,10 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 			newLayoutRevision.getTitle());
 		assertEquals(existingLayoutRevision.getDescription(),
 			newLayoutRevision.getDescription());
+		assertEquals(existingLayoutRevision.getKeywords(),
+			newLayoutRevision.getKeywords());
+		assertEquals(existingLayoutRevision.getRobots(),
+			newLayoutRevision.getRobots());
 		assertEquals(existingLayoutRevision.getTypeSettings(),
 			newLayoutRevision.getTypeSettings());
 		assertEquals(existingLayoutRevision.getIconImage(),
@@ -235,6 +241,8 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		layoutRevision.setName(randomString());
 		layoutRevision.setTitle(randomString());
 		layoutRevision.setDescription(randomString());
+		layoutRevision.setKeywords(randomString());
+		layoutRevision.setRobots(randomString());
 		layoutRevision.setTypeSettings(randomString());
 		layoutRevision.setIconImage(randomBoolean());
 		layoutRevision.setIconImageId(nextLong());

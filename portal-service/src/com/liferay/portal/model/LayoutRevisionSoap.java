@@ -45,6 +45,8 @@ public class LayoutRevisionSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setKeywords(model.getKeywords());
+		soapModel.setRobots(model.getRobots());
 		soapModel.setTypeSettings(model.getTypeSettings());
 		soapModel.setIconImage(model.getIconImage());
 		soapModel.setIconImageId(model.getIconImageId());
@@ -225,6 +227,22 @@ public class LayoutRevisionSoap implements Serializable {
 		_description = description;
 	}
 
+	public String getKeywords() {
+		return _keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		_keywords = keywords;
+	}
+
+	public String getRobots() {
+		return _robots;
+	}
+
+	public void setRobots(String robots) {
+		_robots = robots;
+	}
+
 	public String getTypeSettings() {
 		return _typeSettings;
 	}
@@ -339,6 +357,8 @@ public class LayoutRevisionSoap implements Serializable {
 	private String _name;
 	private String _title;
 	private String _description;
+	private String _keywords;
+	private String _robots;
 	private String _typeSettings;
 	private boolean _iconImage;
 	private long _iconImageId;

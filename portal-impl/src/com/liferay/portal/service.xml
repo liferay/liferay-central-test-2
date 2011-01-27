@@ -584,9 +584,18 @@
 		<column name="parentLayoutRevisionId" type="long" />
 		<column name="head" type="boolean" />
 		<column name="plid" type="long" />
-		<column name="name" type="String" />
-		<column name="title" type="String" />
-		<column name="description" type="String" />
+		<column name="status" type="int" />
+		<column name="statusByUserId" type="long" />
+		<column name="statusByUserName" type="String" />
+		<column name="statusDate" type="Date" />
+
+		<!-- Versionned fields -->
+
+		<column name="name" type="String" localized="true" />
+		<column name="title" type="String" localized="true" />
+		<column name="description" type="String" localized="true" />
+		<column name="keywords" type="String" localized="true" />
+		<column name="robots" type="String" localized="true" />
 		<column name="typeSettings" type="String" />
 		<column name="iconImage" type="boolean" />
 		<column name="iconImageId" type="long" />
@@ -595,10 +604,6 @@
 		<column name="wapThemeId" type="String" />
 		<column name="wapColorSchemeId" type="String" />
 		<column name="css" type="String" />
-		<column name="status" type="int" />
-		<column name="statusByUserId" type="long" />
-		<column name="statusByUserName" type="String" />
-		<column name="statusDate" type="Date" />
 
 		<!-- Order -->
 

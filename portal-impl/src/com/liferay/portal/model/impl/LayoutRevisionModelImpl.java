@@ -16,9 +16,14 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutRevisionModel;
@@ -38,6 +43,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * The base model implementation for the LayoutRevision service. Represents a row in the &quot;LayoutRevision&quot; database table, with each column mapped to a property of this class.
@@ -75,6 +82,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "name", Types.VARCHAR },
 			{ "title", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
+			{ "keywords", Types.VARCHAR },
+			{ "robots", Types.VARCHAR },
 			{ "typeSettings", Types.CLOB },
 			{ "iconImage", Types.BOOLEAN },
 			{ "iconImageId", Types.BIGINT },
@@ -88,7 +97,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutSetBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,plid LONG,name STRING null,title STRING null,description STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutSetBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,plid LONG,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutRevision";
 	public static final String ORDER_BY_JPQL = " ORDER BY layoutRevision.layoutRevisionId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY LayoutRevision.layoutRevisionId DESC";
@@ -125,6 +134,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		model.setName(soapModel.getName());
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
+		model.setKeywords(soapModel.getKeywords());
+		model.setRobots(soapModel.getRobots());
 		model.setTypeSettings(soapModel.getTypeSettings());
 		model.setIconImage(soapModel.getIconImage());
 		model.setIconImageId(soapModel.getIconImageId());
@@ -319,8 +330,74 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	public String getName(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId);
+	}
+
+	public String getName(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getName(languageId, useDefault);
+	}
+
+	public String getName(String languageId) {
+		String value = LocalizationUtil.getLocalization(getName(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getName(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getName(), languageId,
+				useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getNameMap() {
+		return LocalizationUtil.getLocalizationMap(getName());
+	}
+
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public void setName(Locale locale, String name) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(name)) {
+			setName(LocalizationUtil.updateLocalization(getName(), "Name",
+					name, languageId));
+		}
+		else {
+			setName(LocalizationUtil.removeLocalization(getName(), "Name",
+					languageId));
+		}
+	}
+
+	public void setNameMap(Map<Locale, String> nameMap) {
+		if (nameMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String name = nameMap.get(locale);
+
+			setName(locale, name);
+		}
 	}
 
 	public String getTitle() {
@@ -332,8 +409,74 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	public String getTitle(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId);
+	}
+
+	public String getTitle(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getTitle(languageId, useDefault);
+	}
+
+	public String getTitle(String languageId) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getTitle(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getTitle(), languageId,
+				useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getTitleMap() {
+		return LocalizationUtil.getLocalizationMap(getTitle());
+	}
+
 	public void setTitle(String title) {
 		_title = title;
+	}
+
+	public void setTitle(Locale locale, String title) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(title)) {
+			setTitle(LocalizationUtil.updateLocalization(getTitle(), "Title",
+					title, languageId));
+		}
+		else {
+			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
+					languageId));
+		}
+	}
+
+	public void setTitleMap(Map<Locale, String> titleMap) {
+		if (titleMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String title = titleMap.get(locale);
+
+			setTitle(locale, title);
+		}
 	}
 
 	public String getDescription() {
@@ -345,8 +488,234 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		}
 	}
 
+	public String getDescription(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDescription(languageId);
+	}
+
+	public String getDescription(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getDescription(languageId, useDefault);
+	}
+
+	public String getDescription(String languageId) {
+		String value = LocalizationUtil.getLocalization(getDescription(),
+				languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getDescription(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getDescription(),
+				languageId, useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getDescriptionMap() {
+		return LocalizationUtil.getLocalizationMap(getDescription());
+	}
+
 	public void setDescription(String description) {
 		_description = description;
+	}
+
+	public void setDescription(Locale locale, String description) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(description)) {
+			setDescription(LocalizationUtil.updateLocalization(
+					getDescription(), "Description", description, languageId));
+		}
+		else {
+			setDescription(LocalizationUtil.removeLocalization(
+					getDescription(), "Description", languageId));
+		}
+	}
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
+		if (descriptionMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String description = descriptionMap.get(locale);
+
+			setDescription(locale, description);
+		}
+	}
+
+	public String getKeywords() {
+		if (_keywords == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _keywords;
+		}
+	}
+
+	public String getKeywords(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getKeywords(languageId);
+	}
+
+	public String getKeywords(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getKeywords(languageId, useDefault);
+	}
+
+	public String getKeywords(String languageId) {
+		String value = LocalizationUtil.getLocalization(getKeywords(),
+				languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getKeywords(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getKeywords(),
+				languageId, useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getKeywordsMap() {
+		return LocalizationUtil.getLocalizationMap(getKeywords());
+	}
+
+	public void setKeywords(String keywords) {
+		_keywords = keywords;
+	}
+
+	public void setKeywords(Locale locale, String keywords) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(keywords)) {
+			setKeywords(LocalizationUtil.updateLocalization(getKeywords(),
+					"Keywords", keywords, languageId));
+		}
+		else {
+			setKeywords(LocalizationUtil.removeLocalization(getKeywords(),
+					"Keywords", languageId));
+		}
+	}
+
+	public void setKeywordsMap(Map<Locale, String> keywordsMap) {
+		if (keywordsMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String keywords = keywordsMap.get(locale);
+
+			setKeywords(locale, keywords);
+		}
+	}
+
+	public String getRobots() {
+		if (_robots == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _robots;
+		}
+	}
+
+	public String getRobots(Locale locale) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getRobots(languageId);
+	}
+
+	public String getRobots(Locale locale, boolean useDefault) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		return getRobots(languageId, useDefault);
+	}
+
+	public String getRobots(String languageId) {
+		String value = LocalizationUtil.getLocalization(getRobots(), languageId);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public String getRobots(String languageId, boolean useDefault) {
+		String value = LocalizationUtil.getLocalization(getRobots(),
+				languageId, useDefault);
+
+		if (isEscapedModel()) {
+			return HtmlUtil.escape(value);
+		}
+		else {
+			return value;
+		}
+	}
+
+	public Map<Locale, String> getRobotsMap() {
+		return LocalizationUtil.getLocalizationMap(getRobots());
+	}
+
+	public void setRobots(String robots) {
+		_robots = robots;
+	}
+
+	public void setRobots(Locale locale, String robots) {
+		String languageId = LocaleUtil.toLanguageId(locale);
+
+		if (Validator.isNotNull(robots)) {
+			setRobots(LocalizationUtil.updateLocalization(getRobots(),
+					"Robots", robots, languageId));
+		}
+		else {
+			setRobots(LocalizationUtil.removeLocalization(getRobots(),
+					"Robots", languageId));
+		}
+	}
+
+	public void setRobotsMap(Map<Locale, String> robotsMap) {
+		if (robotsMap == null) {
+			return;
+		}
+
+		Locale[] locales = LanguageUtil.getAvailableLocales();
+
+		for (Locale locale : locales) {
+			String robots = robotsMap.get(locale);
+
+			setRobots(locale, robots);
+		}
 	}
 
 	public String getTypeSettings() {
@@ -577,6 +946,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		clone.setName(getName());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
+		clone.setKeywords(getKeywords());
+		clone.setRobots(getRobots());
 		clone.setTypeSettings(getTypeSettings());
 		clone.setIconImage(getIconImage());
 		clone.setIconImageId(getIconImageId());
@@ -644,7 +1015,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(57);
 
 		sb.append("{layoutRevisionId=");
 		sb.append(getLayoutRevisionId());
@@ -674,6 +1045,10 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(getTitle());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", keywords=");
+		sb.append(getKeywords());
+		sb.append(", robots=");
+		sb.append(getRobots());
 		sb.append(", typeSettings=");
 		sb.append(getTypeSettings());
 		sb.append(", iconImage=");
@@ -704,7 +1079,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(88);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.LayoutRevision");
@@ -765,6 +1140,14 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>keywords</column-name><column-value><![CDATA[");
+		sb.append(getKeywords());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>robots</column-name><column-value><![CDATA[");
+		sb.append(getRobots());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>typeSettings</column-name><column-value><![CDATA[");
@@ -841,6 +1224,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	private String _name;
 	private String _title;
 	private String _description;
+	private String _keywords;
+	private String _robots;
 	private String _typeSettings;
 	private boolean _iconImage;
 	private long _iconImageId;

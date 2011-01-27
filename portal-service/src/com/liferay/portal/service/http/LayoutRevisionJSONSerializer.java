@@ -64,6 +64,8 @@ public class LayoutRevisionJSONSerializer {
 		jsonObject.put("name", model.getName());
 		jsonObject.put("title", model.getTitle());
 		jsonObject.put("description", model.getDescription());
+		jsonObject.put("keywords", model.getKeywords());
+		jsonObject.put("robots", model.getRobots());
 		jsonObject.put("typeSettings", model.getTypeSettings());
 		jsonObject.put("iconImage", model.getIconImage());
 		jsonObject.put("iconImageId", model.getIconImageId());

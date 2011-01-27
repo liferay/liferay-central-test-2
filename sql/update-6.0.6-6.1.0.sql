@@ -46,6 +46,8 @@ create table LayoutRevision (
 	name STRING null,
 	title STRING null,
 	description STRING null,
+	keywords STRING null,
+	robots STRING null,
 	typeSettings TEXT null,
 	iconImage BOOLEAN,
 	iconImageId LONG,

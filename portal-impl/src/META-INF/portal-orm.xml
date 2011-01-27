@@ -318,6 +318,8 @@
 			<basic name="name" />
 			<basic name="title" />
 			<basic name="description" />
+			<basic name="keywords" />
+			<basic name="robots" />
 			<basic name="typeSettings" />
 			<basic name="iconImage" />
 			<basic name="iconImageId" />
@@ -332,8 +334,13 @@
 			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<transient name="descriptionMap" />
+			<transient name="keywordsMap" />
+			<transient name="nameMap" />
 			<transient name="primaryKey" />
+			<transient name="robotsMap" />
 			<transient name="statusByUserUuid" />
+			<transient name="titleMap" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>

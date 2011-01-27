@@ -23,6 +23,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * The base model interface for the LayoutRevision service. Represents a row in the &quot;LayoutRevision&quot; database table, with each column mapped to a property of this class.
@@ -240,8 +242,48 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	 *
 	 * @return the name of this layout revision
 	 */
-	@AutoEscape
 	public String getName();
+
+	/**
+	 * Gets the localized name of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized name for
+	 * @return the localized name of this layout revision
+	 */
+	public String getName(Locale locale);
+
+	/**
+	 * Gets the localized name of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized name for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getName(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized name of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized name for
+	 * @return the localized name of this layout revision
+	 */
+	public String getName(String languageId);
+
+	/**
+	 * Gets the localized name of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized name for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized name of this layout revision
+	 */
+	public String getName(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized name of this layout revision.
+	 *
+	 * @return the locales and localized name
+	 */
+	public Map<Locale, String> getNameMap();
 
 	/**
 	 * Sets the name of this layout revision.
@@ -251,12 +293,67 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setName(String name);
 
 	/**
+	 * Sets the localized name of this layout revision.
+	 *
+	 * @param locale the locale to set the localized name for
+	 * @param name the localized name of this layout revision
+	 */
+	public void setName(Locale locale, String name);
+
+	/**
+	 * Sets the localized names of this layout revision from the map of locales and localized names.
+	 *
+	 * @param nameMap the locales and localized names of this layout revision
+	 */
+	public void setNameMap(Map<Locale, String> nameMap);
+
+	/**
 	 * Gets the title of this layout revision.
 	 *
 	 * @return the title of this layout revision
 	 */
-	@AutoEscape
 	public String getTitle();
+
+	/**
+	 * Gets the localized title of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized title for
+	 * @return the localized title of this layout revision
+	 */
+	public String getTitle(Locale locale);
+
+	/**
+	 * Gets the localized title of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized title for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getTitle(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized title of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized title for
+	 * @return the localized title of this layout revision
+	 */
+	public String getTitle(String languageId);
+
+	/**
+	 * Gets the localized title of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized title for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized title of this layout revision
+	 */
+	public String getTitle(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized title of this layout revision.
+	 *
+	 * @return the locales and localized title
+	 */
+	public Map<Locale, String> getTitleMap();
 
 	/**
 	 * Sets the title of this layout revision.
@@ -266,12 +363,67 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setTitle(String title);
 
 	/**
+	 * Sets the localized title of this layout revision.
+	 *
+	 * @param locale the locale to set the localized title for
+	 * @param title the localized title of this layout revision
+	 */
+	public void setTitle(Locale locale, String title);
+
+	/**
+	 * Sets the localized titles of this layout revision from the map of locales and localized titles.
+	 *
+	 * @param titleMap the locales and localized titles of this layout revision
+	 */
+	public void setTitleMap(Map<Locale, String> titleMap);
+
+	/**
 	 * Gets the description of this layout revision.
 	 *
 	 * @return the description of this layout revision
 	 */
-	@AutoEscape
 	public String getDescription();
+
+	/**
+	 * Gets the localized description of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized description for
+	 * @return the localized description of this layout revision
+	 */
+	public String getDescription(Locale locale);
+
+	/**
+	 * Gets the localized description of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized description for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getDescription(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized description of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized description for
+	 * @return the localized description of this layout revision
+	 */
+	public String getDescription(String languageId);
+
+	/**
+	 * Gets the localized description of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized description for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized description of this layout revision
+	 */
+	public String getDescription(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized description of this layout revision.
+	 *
+	 * @return the locales and localized description
+	 */
+	public Map<Locale, String> getDescriptionMap();
 
 	/**
 	 * Sets the description of this layout revision.
@@ -279,6 +431,161 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	 * @param description the description of this layout revision
 	 */
 	public void setDescription(String description);
+
+	/**
+	 * Sets the localized description of this layout revision.
+	 *
+	 * @param locale the locale to set the localized description for
+	 * @param description the localized description of this layout revision
+	 */
+	public void setDescription(Locale locale, String description);
+
+	/**
+	 * Sets the localized descriptions of this layout revision from the map of locales and localized descriptions.
+	 *
+	 * @param descriptionMap the locales and localized descriptions of this layout revision
+	 */
+	public void setDescriptionMap(Map<Locale, String> descriptionMap);
+
+	/**
+	 * Gets the keywords of this layout revision.
+	 *
+	 * @return the keywords of this layout revision
+	 */
+	public String getKeywords();
+
+	/**
+	 * Gets the localized keywords of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized keywords for
+	 * @return the localized keywords of this layout revision
+	 */
+	public String getKeywords(Locale locale);
+
+	/**
+	 * Gets the localized keywords of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized keywords for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized keywords of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getKeywords(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized keywords of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized keywords for
+	 * @return the localized keywords of this layout revision
+	 */
+	public String getKeywords(String languageId);
+
+	/**
+	 * Gets the localized keywords of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized keywords for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized keywords of this layout revision
+	 */
+	public String getKeywords(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized keywords of this layout revision.
+	 *
+	 * @return the locales and localized keywords
+	 */
+	public Map<Locale, String> getKeywordsMap();
+
+	/**
+	 * Sets the keywords of this layout revision.
+	 *
+	 * @param keywords the keywords of this layout revision
+	 */
+	public void setKeywords(String keywords);
+
+	/**
+	 * Sets the localized keywords of this layout revision.
+	 *
+	 * @param locale the locale to set the localized keywords for
+	 * @param keywords the localized keywords of this layout revision
+	 */
+	public void setKeywords(Locale locale, String keywords);
+
+	/**
+	 * Sets the localized keywordses of this layout revision from the map of locales and localized keywordses.
+	 *
+	 * @param keywordsMap the locales and localized keywordses of this layout revision
+	 */
+	public void setKeywordsMap(Map<Locale, String> keywordsMap);
+
+	/**
+	 * Gets the robots of this layout revision.
+	 *
+	 * @return the robots of this layout revision
+	 */
+	public String getRobots();
+
+	/**
+	 * Gets the localized robots of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the locale to get the localized robots for
+	 * @return the localized robots of this layout revision
+	 */
+	public String getRobots(Locale locale);
+
+	/**
+	 * Gets the localized robots of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param locale the local to get the localized robots for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized robots of this layout revision. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
+	 */
+	public String getRobots(Locale locale, boolean useDefault);
+
+	/**
+	 * Gets the localized robots of this layout revision. Uses the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized robots for
+	 * @return the localized robots of this layout revision
+	 */
+	public String getRobots(String languageId);
+
+	/**
+	 * Gets the localized robots of this layout revision, optionally using the default language if no localization exists for the requested language.
+	 *
+	 * @param languageId the id of the language to get the localized robots for
+	 * @param useDefault whether to use the default language if no localization exists for the requested language
+	 * @return the localized robots of this layout revision
+	 */
+	public String getRobots(String languageId, boolean useDefault);
+
+	/**
+	 * Gets a map of the locales and localized robots of this layout revision.
+	 *
+	 * @return the locales and localized robots
+	 */
+	public Map<Locale, String> getRobotsMap();
+
+	/**
+	 * Sets the robots of this layout revision.
+	 *
+	 * @param robots the robots of this layout revision
+	 */
+	public void setRobots(String robots);
+
+	/**
+	 * Sets the localized robots of this layout revision.
+	 *
+	 * @param locale the locale to set the localized robots for
+	 * @param robots the localized robots of this layout revision
+	 */
+	public void setRobots(Locale locale, String robots);
+
+	/**
+	 * Sets the localized robotses of this layout revision from the map of locales and localized robotses.
+	 *
+	 * @param robotsMap the locales and localized robotses of this layout revision
+	 */
+	public void setRobotsMap(Map<Locale, String> robotsMap);
 
 	/**
 	 * Gets the type settings of this layout revision.
