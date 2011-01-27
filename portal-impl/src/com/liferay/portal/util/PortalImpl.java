@@ -623,11 +623,13 @@ public class PortalImpl implements Portal {
 	}
 
 	public void clearRequestParameters(RenderRequest renderRequest) {
-		RenderRequestImpl renderRequestImpl =
-			((RenderRequestImpl)renderRequest);
+		RenderRequestImpl renderRequestImpl = (RenderRequestImpl)renderRequest;
 
 		if (renderRequestImpl.isTriggeredByActionURL()) {
-			renderRequestImpl.getRenderParameters().clear();
+			Map<String, String[]> renderParameters =
+				renderRequestImpl.getRenderParameters();
+
+			renderParameters.clear();
 		}
 	}
 
