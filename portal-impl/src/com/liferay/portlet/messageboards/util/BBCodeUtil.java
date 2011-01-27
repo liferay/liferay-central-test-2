@@ -440,7 +440,10 @@ public class BBCodeUtil {
 			int cb = remainder.indexOf("]");
 			int end = _getEndTagPos(remainder, begTag, endTag);
 
-			if (cb > 0 && remainder.startsWith("=")) {
+			if (cb < 0 || end < 0) {
+
+			}
+			else if (cb > 0 && remainder.startsWith("=")) {
 				tag.setParameter(remainder.substring(1, cb));
 				tag.setElement(remainder.substring(cb + 1, end));
 			}
