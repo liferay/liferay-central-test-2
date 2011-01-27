@@ -15,8 +15,6 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
@@ -59,7 +57,5 @@ public class PublishPagesAction extends PortletAction {
 		return mapping.findForward(
 			getForward(renderRequest, "portlet.communities.publish_pages"));
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(PublishPagesAction.class);
 
 }
