@@ -128,9 +128,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			classNameId = groupClassNameId;
 			classPK = groupId;
 		}
-		else if (!(Validator.isNotNull(name) &&
-			name.equals(GroupConstants.USER_PERSONAL_COMMUNITY))) {
-
+		if (GroupConstants.USER_PERSONAL_COMMUNITY.equals(name)) {
 			name = String.valueOf(classPK);
 		}
 
