@@ -32,9 +32,11 @@ Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 Locale[] locales = LanguageUtil.getAvailableLocales();
 
+boolean onlyOneLanguage = Validator.isNotNull(languageId);
+
 String mainLanguageId = defaultLanguageId;
 
-if (Validator.isNotNull(languageId)) {
+if (onlyOneLanguage) {
 	mainLanguageId = languageId;
 }
 
@@ -51,7 +53,7 @@ String mainLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERL
 		</c:when>
 	</c:choose>
 
-	<c:if test="<%= Validator.isNull(languageId) %>">
+	<c:if test="<%= !onlyOneLanguage %>">
 		<span class="flag-selector nobr">
 			<img alt="<%= defaultLocale.getDisplayName() %>" class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= mainLanguageId %>.png" />
 
@@ -158,7 +160,7 @@ String mainLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERL
 	</c:if>
 </span>
 
-<c:if test="<%= Validator.isNull(languageId) %>">
+<c:if test="<%= !onlyOneLanguage %>">
 	<aui:script use="liferay-auto-fields,liferay-panel-floating">
 		var updateLanguageFlag = function(event) {
 			var target = event.target;
