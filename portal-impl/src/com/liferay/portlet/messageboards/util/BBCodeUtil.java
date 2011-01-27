@@ -440,18 +440,20 @@ public class BBCodeUtil {
 			int cb = remainder.indexOf("]");
 			int end = _getEndTagPos(remainder, begTag, endTag);
 
-			if (cb > 0 && remainder.startsWith("=")) {
-				tag.setParameter(remainder.substring(1, cb));
-				tag.setElement(remainder.substring(cb + 1, end));
-			}
-			else if (cb == 0) {
-				try {
-					tag.setElement(remainder.substring(1, end));
+			if (end > 0) {
+				if (cb > 0 && remainder.startsWith("=")) {
+					tag.setParameter(remainder.substring(1, cb));
+					tag.setElement(remainder.substring(cb + 1, end));
 				}
-				catch (StringIndexOutOfBoundsException sioobe) {
-					_log.error(bbcode);
+				else if (cb == 0) {
+					try {
+						tag.setElement(remainder.substring(1, end));
+					}
+					catch (StringIndexOutOfBoundsException sioobe) {
+						_log.error(bbcode);
 
-					throw sioobe;
+						throw sioobe;
+					}
 				}
 			}
 		}
