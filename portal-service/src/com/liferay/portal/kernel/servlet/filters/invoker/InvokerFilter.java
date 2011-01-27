@@ -72,6 +72,10 @@ public class InvokerFilter implements Filter {
 			}
 		}
 
+		if (_filterChains != null) {
+			_filterChains.clear();
+		}
+
 		_filterConfigs.clear();
 		_filterMappings.clear();
 		_filters.clear();
@@ -156,7 +160,9 @@ public class InvokerFilter implements Filter {
 			}
 		}
 
-		_filterChains.clear();
+		if (_filterChains != null) {
+			_filterChains.clear();
+		}
 
 		return previousFilter;
 	}
@@ -186,13 +192,17 @@ public class InvokerFilter implements Filter {
 
 		_filterMappings.add(i, filterMapping);
 
-		_filterChains.clear();
+		if (_filterChains != null) {
+			_filterChains.clear();
+		}
 	}
 
 	public void unregisterFilterMapping(FilterMapping filterMapping) {
 		_filterMappings.remove(filterMapping);
 
-		_filterChains.clear();
+		if (_filterChains != null) {
+			_filterChains.clear();
+		}
 	}
 
 	protected InvokerFilterChain createInvokerFilterChain(
