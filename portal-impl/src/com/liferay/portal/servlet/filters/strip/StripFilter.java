@@ -57,6 +57,13 @@ public class StripFilter extends BasePortalFilter {
 	public static final String SKIP_FILTER =
 		StripFilter.class.getName() + "SKIP_FILTER";
 
+	public StripFilter() {
+		if (PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE > 0) {
+			_minifierCache = new ConcurrentLRUCache<String, String>(
+				PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE);
+		}
+	}
+
 	public void init(FilterConfig filterConfig) {
 		super.init(filterConfig);
 
@@ -538,9 +545,8 @@ public class StripFilter extends BasePortalFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(StripFilter.class);
 
-	private ConcurrentLRUCache<String, String> _minifierCache =
-		new ConcurrentLRUCache<String, String>(
-			PropsValues.MINIFIER_INLINE_CONTENT_CACHE_SIZE);
+	private ConcurrentLRUCache<String, String> _minifierCache;
+
 	private Set<String> _ignorePaths = new HashSet<String>();
 
 }
