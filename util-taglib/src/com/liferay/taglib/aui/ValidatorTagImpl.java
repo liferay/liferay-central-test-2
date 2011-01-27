@@ -15,6 +15,7 @@
 package com.liferay.taglib.aui;
 
 import com.liferay.portal.kernel.servlet.taglib.BaseBodyTagSupport;
+import com.liferay.portal.kernel.servlet.taglib.aui.ValidatorTag;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.PwdGenerator;
@@ -26,17 +27,25 @@ import javax.servlet.jsp.tagext.BodyTag;
  * @author Julio Camarero
  * @author Brian Wing Shun Chan
  */
-public class ValidatorTag extends BaseBodyTagSupport implements BodyTag {
+public class ValidatorTagImpl
+	extends BaseBodyTagSupport implements BodyTag, ValidatorTag {
 
-	public ValidatorTag() {
+	public ValidatorTagImpl() {
 	}
 
-	public ValidatorTag(String name, String errorMessage, String body) {
+	public ValidatorTagImpl(String name, String errorMessage, String body) {
 		_name = name;
 		_errorMessage = errorMessage;
 		_body = body;
 
 		processCustom();
+	}
+
+	public void cleanUp() {
+		_body = null;
+		_custom = false;
+		_errorMessage = null;
+		_name = null;
 	}
 
 	public int doAfterBody(){
@@ -53,7 +62,7 @@ public class ValidatorTag extends BaseBodyTagSupport implements BodyTag {
 		InputTag inputTag = (InputTag)findAncestorWithClass(
 			this, InputTag.class);
 
-		ValidatorTag validatorTag = new ValidatorTag(
+		ValidatorTag validatorTag = new ValidatorTagImpl(
 			_name, _errorMessage, _body);
 
 		inputTag.addValidatorTag(_name, validatorTag);
@@ -95,13 +104,6 @@ public class ValidatorTag extends BaseBodyTagSupport implements BodyTag {
 
 	public void setName(String name) {
 		_name = name;
-	}
-
-	protected void cleanUp() {
-		_body = null;
-		_custom = false;
-		_errorMessage = null;
-		_name = null;
 	}
 
 	protected void processCustom() {

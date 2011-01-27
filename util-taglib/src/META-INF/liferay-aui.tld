@@ -672,7 +672,7 @@
 	</tag>
 	<tag>
 		<name>validator</name>
-		<tag-class>com.liferay.taglib.aui.ValidatorTag</tag-class>
+		<tag-class>com.liferay.taglib.aui.ValidatorTagImpl</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
 			<name>errorMessage</name>
