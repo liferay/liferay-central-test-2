@@ -35,7 +35,7 @@ public class SerializableSessionAttributeListener
 	extends BasePortalLifecycle implements HttpSessionAttributeListener {
 
 	public void attributeAdded(HttpSessionBindingEvent event) {
-		if (!_SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE) {
+		if (!_sessionVerifySerializableAttribute) {
 			return;
 		}
 
@@ -78,16 +78,15 @@ public class SerializableSessionAttributeListener
 	}
 
 	protected void doPortalInit() throws Exception {
-		_SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE = GetterUtil.getBoolean(
+		_sessionVerifySerializableAttribute = GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE),
 			true);
 	}
-
-	private static boolean _SESSION_VERIFY_SERIALIZABLE_ATTRIBUTE;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		SerializableSessionAttributeListener.class);
 
 	private Boolean _requiresSerializable;
+	private boolean _sessionVerifySerializableAttribute;
 
 }
