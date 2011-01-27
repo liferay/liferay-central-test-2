@@ -355,10 +355,6 @@ String editorContent = emailBody;
 		window,
 		'<portlet:namespace />saveConfiguration',
 		function() {
-			<c:if test='<%= tabs2.equals("display-settings") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace />visibleNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentVisibleNodes);
-				document.<portlet:namespace />fm.<portlet:namespace />hiddenNodes.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />availableVisibleNodes);
-			</c:if>
 
 			<c:if test='<%= tabs2.startsWith("entry-") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = window.<portlet:namespace />editor.getHTML();
