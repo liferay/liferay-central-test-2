@@ -53,6 +53,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class InvokerFilter implements Filter {
 
+	public InvokerFilter() {
+		if (_INVOKER_FILTER_CHAIN_SIZE > 0) {
+			_filterChains = new ConcurrentLRUCache<Integer, InvokerFilterChain>(
+				_INVOKER_FILTER_CHAIN_SIZE);
+		}
+	}
+
 	public void destroy() {
 		for (Map.Entry<String, Filter> entry : _filters.entrySet()) {
 			Filter filter = entry.getValue();
@@ -101,8 +108,8 @@ public class InvokerFilter implements Filter {
 
 		request.setAttribute(WebKeys.INVOKER_FILTER_URI, uri);
 
-		InvokerFilterChain invokerFilterChain =
-			getInvokerFilterChain(request, filterChain, uri, dispatcher);
+		InvokerFilterChain invokerFilterChain = getInvokerFilterChain(
+			request, dispatcher, uri, filterChain);
 
 		invokerFilterChain.doFilter(servletRequest, servletResponse);
 	}
@@ -149,7 +156,7 @@ public class InvokerFilter implements Filter {
 			}
 		}
 
-		_filterChainCache.flush();
+		_filterChains.clear();
 
 		return previousFilter;
 	}
@@ -179,20 +186,21 @@ public class InvokerFilter implements Filter {
 
 		_filterMappings.add(i, filterMapping);
 
-		_filterChainCache.flush();
+		_filterChains.clear();
 	}
 
 	public void unregisterFilterMapping(FilterMapping filterMapping) {
 		_filterMappings.remove(filterMapping);
 
-		_filterChainCache.flush();
+		_filterChains.clear();
 	}
 
 	protected InvokerFilterChain createInvokerFilterChain(
-		HttpServletRequest request, FilterChain filterChain, String uri,
-		Dispatcher dispatcher) {
-		InvokerFilterChain invokerFilterChain =
-			new InvokerFilterChain(filterChain);
+		HttpServletRequest request, Dispatcher dispatcher, String uri,
+		FilterChain filterChain) {
+
+		InvokerFilterChain invokerFilterChain = new InvokerFilterChain(
+			filterChain);
 
 		for (FilterMapping filterMapping : _filterMappings) {
 			if (filterMapping.isMatch(request, dispatcher, uri)) {
@@ -206,25 +214,26 @@ public class InvokerFilter implements Filter {
 	}
 
 	protected InvokerFilterChain getInvokerFilterChain(
-		HttpServletRequest request, FilterChain filterChain, String uri,
-		Dispatcher dispatcher) {
-		if (_filterChainCache == null) {
+		HttpServletRequest request, Dispatcher dispatcher, String uri,
+		FilterChain filterChain) {
+
+		if (_filterChains == null) {
 			return createInvokerFilterChain(
-				request, filterChain, uri, dispatcher);
+				request, dispatcher, uri, filterChain);
 		}
 
-		Integer cacheKey = uri.hashCode() * 31 + dispatcher.ordinal();
+		Integer key = uri.hashCode() * 31 + dispatcher.ordinal();
 
-		InvokerFilterChain invokerFilterChain = _filterChainCache.get(cacheKey);
+		InvokerFilterChain invokerFilterChain = _filterChains.get(key);
 
 		if (invokerFilterChain == null) {
 			invokerFilterChain = createInvokerFilterChain(
-				request, filterChain, uri, dispatcher);
+				request, dispatcher, uri, filterChain);
 
-			_filterChainCache.put(cacheKey, invokerFilterChain);
+			_filterChains.put(key, invokerFilterChain);
 		}
 
-		return invokerFilterChain.fastCopy(filterChain);
+		return invokerFilterChain.clone(filterChain);
 	}
 
 	protected void initFilter(
@@ -352,21 +361,12 @@ public class InvokerFilter implements Filter {
 		}
 	}
 
+	private static final int _INVOKER_FILTER_CHAIN_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(PropsKeys.INVOKER_FILTER_CHAIN_SIZE));
+
 	private static Log _log = LogFactoryUtil.getLog(InvokerFilter.class);
 
-	private static ConcurrentLRUCache<Integer, InvokerFilterChain>
-		_filterChainCache;
-
-	static {
-		int cacheSize = GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.INVOKER_FILTER_CHAIN_SIZE));
-
-		if (cacheSize > 0) {
-			_filterChainCache =
-				new ConcurrentLRUCache<Integer, InvokerFilterChain>(cacheSize);
-		}
-	}
-
+	private ConcurrentLRUCache<Integer, InvokerFilterChain> _filterChains;
 	private Map<String, FilterConfig> _filterConfigs =
 		new HashMap<String, FilterConfig>();
 	private List<FilterMapping> _filterMappings =

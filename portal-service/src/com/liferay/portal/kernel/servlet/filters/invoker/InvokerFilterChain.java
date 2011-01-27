@@ -50,6 +50,15 @@ public class InvokerFilterChain implements FilterChain {
 		_filters.add(filter);
 	}
 
+	public InvokerFilterChain clone(FilterChain filterChain) {
+		InvokerFilterChain invokerFilterChain = new InvokerFilterChain(
+			filterChain);
+
+		invokerFilterChain._filters.addAll(_filters);
+
+		return invokerFilterChain;
+	}
+
 	public void doFilter(
 			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {
@@ -99,15 +108,6 @@ public class InvokerFilterChain implements FilterChain {
 				doFilter(request, response);
 			}
 		}
-	}
-
-	public InvokerFilterChain fastCopy(FilterChain filterChain) {
-		InvokerFilterChain invokerFilterChain =
-			new InvokerFilterChain(filterChain);
-
-		invokerFilterChain._filters.addAll(_filters);
-
-		return invokerFilterChain;
 	}
 
 	protected void processDirectCallFilter(

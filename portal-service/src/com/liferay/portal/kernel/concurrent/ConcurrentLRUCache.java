@@ -54,11 +54,7 @@ public class ConcurrentLRUCache<K, V> {
 		_writeLock = _readWriteLock.writeLock();
 	}
 
-	public long evictCount() {
-		return _evictCount.get();
-	}
-
-	public void flush() {
+	public void clear() {
 		_writeLock.lock();
 
 		try {
@@ -67,6 +63,10 @@ public class ConcurrentLRUCache<K, V> {
 		finally {
 			_writeLock.unlock();
 		}
+	}
+
+	public long evictCount() {
+		return _evictCount.get();
 	}
 
 	public V get(K key) {
