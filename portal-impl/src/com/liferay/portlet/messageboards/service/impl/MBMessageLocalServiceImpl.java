@@ -1268,13 +1268,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
 		message.setAllowPingbacks(allowPingbacks);
 
-		 if (!message.isPending()) {
-			message.setStatus(WorkflowConstants.STATUS_DRAFT);
-	 	}
-
 		if (priority != MBThreadConstants.PRIORITY_NOT_GIVEN) {
 			message.setPriority(priority);
 		}
+
+		if (!message.isPending()) {
+			message.setStatus(WorkflowConstants.STATUS_DRAFT);
+	 	}
 
 		// Attachments
 
