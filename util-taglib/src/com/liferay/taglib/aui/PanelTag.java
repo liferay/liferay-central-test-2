@@ -41,6 +41,10 @@ public class PanelTag extends IncludeTag {
 		return _toolTags;
 	}
 
+	public void setCollapsed(boolean collapsed) {
+		_collapsed  = collapsed;
+	}
+
 	public void setCollapsible(boolean collapsible) {
 		_collapsible = collapsible;
 	}
@@ -54,6 +58,7 @@ public class PanelTag extends IncludeTag {
 	}
 
 	protected void cleanUp() {
+		_collapsed = false;
 		_collapsible = false;
 		_id = null;
 		_label = null;
@@ -87,6 +92,8 @@ public class PanelTag extends IncludeTag {
 		}
 
 		request.setAttribute(
+			"aui:panel:collapsed", String.valueOf(_collapsed));
+		request.setAttribute(
 			"aui:panel:collapsible", String.valueOf(_collapsible));
 		request.setAttribute("aui:panel:id", id);
 		request.setAttribute("aui:panel:label", _label);
@@ -101,6 +108,7 @@ public class PanelTag extends IncludeTag {
 		"/html/taglib/aui/panel/start.jsp";
 
 	private boolean _collapsible;
+	private boolean _collapsed;
 	private String _id;
 	private String _label;
 	private List<ToolTag> _toolTags;

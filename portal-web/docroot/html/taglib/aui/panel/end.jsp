@@ -20,6 +20,7 @@
 
 <%
 boolean collapsible = GetterUtil.getBoolean((String)request.getAttribute("aui:panel:collapsible"));
+boolean collapsed = GetterUtil.getBoolean((String)request.getAttribute("aui:panel:collapsed"));
 String label = GetterUtil.getString((String)request.getAttribute("aui:panel:label"));
 String id = namespace + GetterUtil.getString((String)request.getAttribute("aui:panel:id"));
 List<ToolTag> toolTags = (List<ToolTag>)request.getAttribute("aui:panel:toolTags");
@@ -31,6 +32,7 @@ List<ToolTag> toolTags = (List<ToolTag>)request.getAttribute("aui:panel:toolTags
 	var container = new A.Panel(
 		{
 			bodyContent: A.one('#<%= id %>bodyContent'),
+			collapsed: <%= collapsed %>,
 			collapsible: <%= collapsible %>,
 			contentBox: '#<%= id %>',
 			headerContent: '<liferay-ui:message key="<%= label %>" />'

@@ -484,6 +484,11 @@
 		<tag-class>com.liferay.taglib.aui.PanelTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
+			<name>collapsed</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>collapsible</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
