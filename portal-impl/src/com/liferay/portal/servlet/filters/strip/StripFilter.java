@@ -545,8 +545,7 @@ public class StripFilter extends BasePortalFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(StripFilter.class);
 
-	private ConcurrentLRUCache<String, String> _minifierCache;
-
 	private Set<String> _ignorePaths = new HashSet<String>();
+	private ConcurrentLRUCache<String, String> _minifierCache;
 
 }
