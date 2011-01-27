@@ -128,6 +128,8 @@ public class InvokerFilter implements Filter {
 			servletContext.setAttribute(getClass().getName(), this);
 		}
 		catch (Exception e) {
+			_log.error(e, e);
+
 			throw new ServletException(e);
 		}
 	}
