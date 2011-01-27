@@ -78,8 +78,9 @@ public class ThemeMergeMojo extends AbstractMojo {
 			parentThemeArtifactId = parentThemeArray[1];
 			parentThemeVersion = parentThemeArray[2];
 
-			includes = null;
 			excludes = new String[] {"WEB-INF/**"};
+
+			includes = null;
 		}
 
 		Artifact artifact = artifactFactory.createArtifact(
