@@ -251,7 +251,7 @@ public class InvokerFilter implements Filter {
 			return;
 		}
 
-		Document document = SAXReaderUtil.read(inputStream, true);
+		Document document = SAXReaderUtil.read(inputStream, false);
 
 		Element rootElement = document.getRootElement();
 
