@@ -456,7 +456,6 @@
 
 		<action path="/communities/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
-			<forward name="portlet.communities.export_pages" path="portlet.communities.export_pages" />
 		</action>
 
 		<action path="/communities/import_pages" type="com.liferay.portlet.communities.action.ImportPagesAction">
@@ -472,6 +471,10 @@
 		</action>
 
 		<action path="/communities/publish_portlet" forward="portlet.communities.publish_portlet" />
+
+		<action path="/communities/publish_pages" type="com.liferay.portlet.communities.action.PublishPagesAction">
+			<forward name="portlet.communities.publish_pages" path="portlet.communities.publish_pages" />
+		</action>
 
 		<action path="/communities/reply_membership_request" type="com.liferay.portlet.communities.action.ReplyMembershipRequestAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
@@ -719,7 +722,6 @@
 
 		<action path="/enterprise_admin/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
-			<forward name="portlet.communities.export_pages" path="portlet.communities.export_pages" />
 		</action>
 
 		<action path="/enterprise_admin/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
@@ -727,6 +729,11 @@
 		<action path="/enterprise_admin/import_pages" type="com.liferay.portlet.communities.action.ImportPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/enterprise_admin/publish_pages" type="com.liferay.portlet.communities.action.PublishPagesAction">
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+			<forward name="portlet.communities.publish_pages" path="portlet.communities.publish_pages" />
 		</action>
 
 		<action path="/enterprise_admin/select_community" forward="portlet.enterprise_admin.select_community" />
@@ -796,7 +803,6 @@
 
 		<action path="/enterprise_admin_communities/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
-			<forward name="portlet.communities.export_pages" path="portlet.communities.export_pages" />
 		</action>
 
 		<action path="/enterprise_admin_communities/import_pages" type="com.liferay.portlet.communities.action.ImportPagesAction">
@@ -809,6 +815,11 @@
 		<action path="/enterprise_admin_communities/post_membership_request" type="com.liferay.portlet.communities.action.PostMembershipRequestAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 			<forward name="portlet.communities.post_membership_request" path="portlet.communities.post_membership_request" />
+		</action>
+
+		<action path="/enterprise_admin_communities/publish_pages" type="com.liferay.portlet.communities.action.PublishPagesAction">
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+			<forward name="portlet.communities.publish_pages" path="portlet.communities.publish_pages" />
 		</action>
 
 		<action path="/enterprise_admin_communities/publish_portlet" forward="portlet.communities.publish_portlet" />
@@ -896,12 +907,16 @@
 
 		<action path="/enterprise_admin_organizations/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
-			<forward name="portlet.communities.export_pages" path="portlet.communities.export_pages" />
 		</action>
 
 		<action path="/enterprise_admin_organizations/import_pages" type="com.liferay.portlet.communities.action.ImportPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/enterprise_admin_organizations/publish_pages" type="com.liferay.portlet.communities.action.PublishPagesAction">
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+			<forward name="portlet.communities.publish_pages" path="portlet.communities.publish_pages" />
 		</action>
 
 		<action path="/enterprise_admin_organizations/select_community" forward="portlet.enterprise_admin.select_community" />
@@ -1025,16 +1040,20 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_user_groups/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
-
 		<action path="/enterprise_admin_user_groups/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
-			<forward name="portlet.communities.export_pages" path="portlet.communities.export_pages" />
 		</action>
+
+		<action path="/enterprise_admin_user_groups/get_users_count" type="com.liferay.portlet.enterpriseadmin.action.GetUsersCountAction" />
 
 		<action path="/enterprise_admin_user_groups/import_pages" type="com.liferay.portlet.communities.action.ImportPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/enterprise_admin_user_groups/publish_pages" type="com.liferay.portlet.communities.action.PublishPagesAction">
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+			<forward name="portlet.communities.publish_pages" path="portlet.communities.publish_pages" />
 		</action>
 
 		<action path="/enterprise_admin_user_groups/view" forward="portlet.enterprise_admin.view" />
@@ -1122,7 +1141,6 @@
 
 		<action path="/group_pages/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
-			<forward name="portlet.communities.export_pages" path="portlet.communities.export_pages" />
 		</action>
 
 		<action path="/group_pages/get_layouts" type="com.liferay.portlet.communities.action.GetLayoutsAction" />
@@ -1130,6 +1148,11 @@
 		<action path="/group_pages/import_pages" type="com.liferay.portlet.communities.action.ImportPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/group_pages/publish_pages" type="com.liferay.portlet.communities.action.PublishPagesAction">
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+			<forward name="portlet.communities.publish_pages" path="portlet.communities.publish_pages" />
 		</action>
 
 		<action path="/group_pages/publish_portlet" forward="portlet.communities.publish_portlet" />
@@ -1341,10 +1364,14 @@
 
 		<action path="/layout_management/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
-			<forward name="portlet.communities.export_pages" path="portlet.communities.export_pages" />
 		</action>
 
 		<action path="/layout_management/get_layouts" type="com.liferay.portlet.communities.action.GetLayoutsAction" />
+
+		<action path="/layout_management/publish_pages" type="com.liferay.portlet.communities.action.PublishPagesAction">
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+			<forward name="portlet.communities.publish_pages" path="portlet.communities.publish_pages" />
+		</action>
 
 		<action path="/layout_management/publish_portlet" forward="portlet.communities.publish_portlet" />
 
@@ -1382,12 +1409,16 @@
 
 		<action path="/layout_set_prototypes/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
-			<forward name="portlet.communities.export_pages" path="portlet.communities.export_pages" />
 		</action>
 
 		<action path="/layout_set_prototypes/import_pages" type="com.liferay.portlet.communities.action.ImportPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/layout_set_prototypes/publish_pages" type="com.liferay.portlet.communities.action.PublishPagesAction">
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+			<forward name="portlet.communities.publish_pages" path="portlet.communities.publish_pages" />
 		</action>
 
 		<action path="/layout_set_prototypes/view" forward="portlet.layout_set_prototypes.view" />
@@ -1609,7 +1640,9 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
-		<action path="/my_pages/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction" />
+		<action path="/my_pages/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">
+			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
 
 		<action path="/my_pages/import_pages" type="com.liferay.portlet.communities.action.ImportPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />

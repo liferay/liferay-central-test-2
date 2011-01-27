@@ -273,7 +273,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	Layout proposedLayout = null;
 
 	if (className.equals(Layout.class.getName())) {
-		publishToLiveURL.setParameter("struts_action", "/communities/export_pages");
+		publishToLiveURL.setParameter("struts_action", "/communities/publish_pages");
 		publishToLiveURL.setParameter(Constants.CMD, "publish-to-live");
 
 		proposedLayoutPlid = GetterUtil.getLong(proposal.getClassPK());

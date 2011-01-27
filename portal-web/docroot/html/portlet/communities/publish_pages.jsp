@@ -182,7 +182,7 @@ else {
 PortletURL selectURL = renderResponse.createRenderURL();
 
 selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-selectURL.setParameter("struts_action", "/communities/export_pages");
+selectURL.setParameter("struts_action", "/communities/publish_pages");
 selectURL.setParameter(Constants.CMD, cmd);
 selectURL.setParameter("pagesRedirect", pagesRedirect);
 selectURL.setParameter("groupId", String.valueOf(selGroupId));
@@ -344,22 +344,22 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 				<liferay-ui:panel-container cssClass="export-pages-panel-container" extended="<%= true %>" persistState="<%= true %>">
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="pages">
-						<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>
+						<%@ include file="/html/portlet/communities/publish_pages_select_pages.jspf" %>
 					</liferay-ui:panel>
 
 					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title="options">
-						<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
+						<%@ include file="/html/portlet/communities/publish_pages_options.jspf" %>
 					</liferay-ui:panel>
 
 					<c:if test="<%= !localPublishing %>">
 						<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title="remote-live-connection-settings">
-							<%@ include file="/html/portlet/communities/export_pages_remote_options.jspf" %>
+							<%@ include file="/html/portlet/communities/publish_pages_remote_options.jspf" %>
 						</liferay-ui:panel>
 					</c:if>
 
 					<c:if test="<%= proposalId <= 0 && schedule %>">
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="schedule">
-							<%@ include file="/html/portlet/communities/export_pages_scheduler.jspf" %>
+							<%@ include file="/html/portlet/communities/publish_pages_scheduler.jspf" %>
 						</liferay-ui:panel>
 					</c:if>
 				</liferay-ui:panel-container>
