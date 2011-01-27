@@ -158,7 +158,7 @@ String mainLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERL
 	</c:if>
 </span>
 
-<c:if test="<%= Validator.isNotNull(languageId) %>">
+<c:if test="<%= Validator.isNull(languageId) %>">
 	<aui:script use="liferay-auto-fields,liferay-panel-floating">
 		var updateLanguageFlag = function(event) {
 			var target = event.target;
