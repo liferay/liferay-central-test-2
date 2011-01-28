@@ -205,7 +205,7 @@ public class WorkflowTaskManagerUtil {
 
 	public static List<WorkflowTask> search(
 			long companyId, long userId, String taskName, String assetType,
-			Long assetPrimaryKey, Date dueDateGT, Date dueDateLT,
+			Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT,
 			Boolean completed, Boolean searchByUserRoles, boolean andOperator,
 			int start, int end, OrderByComparator orderByComparator)
 		throws WorkflowException {
@@ -227,7 +227,7 @@ public class WorkflowTaskManagerUtil {
 
 	public static int searchCount(
 		long companyId, long userId, String taskName, String assetType,
-			Long assetPrimaryKey, Date dueDateGT, Date dueDateLT,
+			Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT,
 			Boolean completed, Boolean searchByUserRoles, boolean andOperator)
 		throws WorkflowException {
 
