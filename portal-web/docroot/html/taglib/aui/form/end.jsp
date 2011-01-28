@@ -16,7 +16,7 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.taglib.aui.ValidatorTag" %>
+<%@ page import="com.liferay.portal.kernel.servlet.taglib.aui.ValidatorTag" %>
 
 <%
 String name = GetterUtil.getString((String)request.getAttribute("aui:form:name"));
