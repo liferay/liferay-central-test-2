@@ -158,9 +158,9 @@ public class WorkflowTaskManagerProxyBean
 
 	public List<WorkflowTask> search(
 		long companyId, long userId, String taskName, String assetType,
-		Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT, Boolean completed,
-		Boolean searchByUserRoles, boolean andOperator, int start, int end,
-		OrderByComparator orderByComparator) {
+		Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT,
+		Boolean completed, Boolean searchByUserRoles, boolean andOperator,
+		int start, int end, OrderByComparator orderByComparator) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -174,8 +174,8 @@ public class WorkflowTaskManagerProxyBean
 
 	public int searchCount(
 		long companyId, long userId, String taskName, String assetType,
-		Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT, Boolean completed,
-		Boolean searchByUserRoles, boolean andOperator) {
+		Long[] assetPrimaryKey, Date dueDateGT, Date dueDateLT,
+		Boolean completed, Boolean searchByUserRoles, boolean andOperator) {
 
 		throw new UnsupportedOperationException();
 	}
