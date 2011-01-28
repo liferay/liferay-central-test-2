@@ -56,8 +56,8 @@ public class ClpSerializer {
 						_servletContextName = propsUtilServletContextName;
 					}
 				}
-				catch (Exception e) {
-					_log.warn("Unable to locate deployment context from portal properties", e);
+				catch (Throwable t) {
+					_log.warn("Unable to locate deployment context from portal properties", t);
 				}
 			}
 
