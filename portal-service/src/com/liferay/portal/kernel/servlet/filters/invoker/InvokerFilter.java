@@ -162,9 +162,6 @@ public class InvokerFilter implements Filter {
 			return (String)request.getAttribute(
 				JavaConstants.JAVAX_SERVLET_ERROR_REQUEST_URI);
 		}
-		else if (_dispatcher == Dispatcher.FORWARD) {
-			return request.getRequestURI();
-		}
 		else if (_dispatcher == Dispatcher.INCLUDE) {
 			return (String)request.getAttribute(
 				JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
