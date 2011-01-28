@@ -132,7 +132,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 							<liferay-ui:message key="name" />
 						</td>
 						<td>
-							<input id="<portlet:namespace />name_<%= defaultLanguageId %>" name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getName(defaultLocale) %>" />
+							<input id="<portlet:namespace />name_<%= defaultLanguageId %>" name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= HtmlUtil.escape(selLayout.getName(defaultLocale)) %>" />
 						</td>
 						<td>
 
@@ -143,7 +143,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 								}
 							%>
 
-								<input id="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= selLayout.getName(locales[i], false) %>" />
+								<input id="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />name_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= HtmlUtil.escape(selLayout.getName(locales[i], false)) %>" />
 
 							<%
 							}
@@ -157,7 +157,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 							<liferay-ui:message key="html-title" />
 						</td>
 						<td>
-							<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= selLayout.getTitle(defaultLocale) %>" />
+							<input id="<portlet:namespace />title_<%= defaultLanguageId %>" name="<portlet:namespace />title_<%= defaultLanguageId %>" size="30" type="text" value="<%= HtmlUtil.escape(selLayout.getTitle(defaultLocale)) %>" />
 						</td>
 						<td>
 
@@ -168,7 +168,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 								}
 							%>
 
-								<input id="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= selLayout.getTitle(locales[i], false) %>" />
+								<input id="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="<portlet:namespace />title_<%= LocaleUtil.toLanguageId(locales[i]) %>" type="hidden" value="<%= HtmlUtil.escape(selLayout.getTitle(locales[i], false)) %>" />
 
 							<%
 							}
@@ -184,7 +184,7 @@ Locale[] locales = LanguageUtil.getAvailableLocales();
 					</tr>
 				</c:when>
 				<c:otherwise>
-					<input id="<portlet:namespace />name_<%= defaultLanguageId %>" name="<portlet:namespace />name_<%= defaultLanguageId %>" type="hidden" value="<%= selLayout.getName(defaultLocale) %>" />
+					<input id="<portlet:namespace />name_<%= defaultLanguageId %>" name="<portlet:namespace />name_<%= defaultLanguageId %>" type="hidden" value="<%= HtmlUtil.escape(selLayout.getName(defaultLocale)) %>" />
 				</c:otherwise>
 			</c:choose>
 
