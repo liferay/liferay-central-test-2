@@ -33,54 +33,52 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ThreadPoolExecutorTest extends TestCase {
 
-	/**
-	 * Bad arguments
-	 */
 	public void testAdjustPoolSize1() {
-		// newCorePoolSize is less than 0
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			5, 10, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 10);
+
 		try {
 			threadPoolExecutor.adjustPoolSize(-1, 10);
+
 			fail();
 		}
 		catch (IllegalArgumentException ise) {
 		}
 
-		// newMaxPoolSize is less than 0
 		threadPoolExecutor = new ThreadPoolExecutor(
 			5, 10, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 10);
+
 		try {
 			threadPoolExecutor.adjustPoolSize(1, -1);
+
 			fail();
 		}
 		catch (IllegalArgumentException ise) {
 		}
 
-		// newMaxPoolSize is 0
 		threadPoolExecutor = new ThreadPoolExecutor(
 			5, 10, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 10);
+
 		try {
 			threadPoolExecutor.adjustPoolSize(1, 0);
+
 			fail();
 		}
 		catch (IllegalArgumentException ise) {
 		}
 
-		// newMaxPoolSize is less than newCorePoolSize
 		threadPoolExecutor = new ThreadPoolExecutor(
 			5, 10, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 10);
+
 		try {
 			threadPoolExecutor.adjustPoolSize(2, 1);
+
 			fail();
 		}
 		catch (IllegalArgumentException ise) {
 		}
 	}
 
-	/**
-	 * Adjust idle executor, increase size
-	 */
 	public void testAdjustPoolSize2() {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			5, 10, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 10);
@@ -94,9 +92,6 @@ public class ThreadPoolExecutorTest extends TestCase {
 		assertEquals(20, threadPoolExecutor.getMaxPoolSize());
 	}
 
-	/**
-	 * Adjust idle executor, decrease size
-	 */
 	public void testAdjustPoolSize3() {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			10, 20, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 10);
@@ -110,9 +105,6 @@ public class ThreadPoolExecutorTest extends TestCase {
 		assertEquals(10, threadPoolExecutor.getMaxPoolSize());
 	}
 
-	/**
-	 * Decrease corePoolSize size, _poolSize > newCorePoolSize
-	 */
 	public void testAdjustPoolSize4() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			2, 3, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, false, 10);
@@ -120,11 +112,13 @@ public class ThreadPoolExecutorTest extends TestCase {
 		try {
 			MarkerBlockingJob markerBlockingJob1 = new MarkerBlockingJob(true);
 			MarkerBlockingJob markerBlockingJob2 = new MarkerBlockingJob(true);
+
 			threadPoolExecutor.execute(markerBlockingJob1);
 			threadPoolExecutor.execute(markerBlockingJob2);
-			TestUtil.waitUtilBlock(markerBlockingJob1, markerBlockingJob2);
-			TestUtil.unBlock(markerBlockingJob1, markerBlockingJob2);
-			TestUtil.waitUtilEnded(markerBlockingJob1, markerBlockingJob2);
+
+			TestUtil.waitUntilBlock(markerBlockingJob1, markerBlockingJob2);
+			TestUtil.unblock(markerBlockingJob1, markerBlockingJob2);
+			TestUtil.waitUntilEnded(markerBlockingJob1, markerBlockingJob2);
 
 			assertEquals(2, threadPoolExecutor.getPoolSize());
 			assertEquals(0, threadPoolExecutor.getActiveCount());
@@ -144,9 +138,6 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Decrease maxPoolSize size, _poolSize > newMaxPoolSize
-	 */
 	public void testAdjustPoolSize5() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			2, 3, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, false, 10);
@@ -155,14 +146,16 @@ public class ThreadPoolExecutorTest extends TestCase {
 			MarkerBlockingJob markerBlockingJob1 = new MarkerBlockingJob(true);
 			MarkerBlockingJob markerBlockingJob2 = new MarkerBlockingJob(true);
 			MarkerBlockingJob markerBlockingJob3 = new MarkerBlockingJob(true);
+
 			threadPoolExecutor.execute(markerBlockingJob1);
 			threadPoolExecutor.execute(markerBlockingJob2);
 			threadPoolExecutor.execute(markerBlockingJob3);
-			TestUtil.waitUtilBlock(
+
+			TestUtil.waitUntilBlock(
 				markerBlockingJob1, markerBlockingJob2, markerBlockingJob3);
-			TestUtil.unBlock(
+			TestUtil.unblock(
 				markerBlockingJob1, markerBlockingJob2, markerBlockingJob3);
-			TestUtil.waitUtilEnded(
+			TestUtil.waitUntilEnded(
 				markerBlockingJob1, markerBlockingJob2, markerBlockingJob3);
 
 			Thread.sleep(TestUtil.SHORT_WAIT);
@@ -190,16 +183,15 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Increase corePoolSize size, _taskQueue is empty
-	 */
 	public void testAdjustPoolSize6() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, false, 10);
 
 		try {
 			MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob(true);
+
 			threadPoolExecutor.execute(markerBlockingJob);
+
 			markerBlockingJob.waitUntilBlock();
 
 			assertEquals(1, threadPoolExecutor.getPoolSize());
@@ -220,9 +212,6 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Increase corePoolSize size, _taskQueue is not empty
-	 */
 	public void testAdjustPoolSize7() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, false, 10);
@@ -230,8 +219,10 @@ public class ThreadPoolExecutorTest extends TestCase {
 		try {
 			MarkerBlockingJob markerBlockingJob1 = new MarkerBlockingJob(true);
 			MarkerBlockingJob markerBlockingJob2 = new MarkerBlockingJob(true);
+
 			threadPoolExecutor.execute(markerBlockingJob1);
 			threadPoolExecutor.execute(markerBlockingJob2);
+
 			markerBlockingJob1.waitUntilBlock();
 
 			assertEquals(1, threadPoolExecutor.getPoolSize());
@@ -254,22 +245,22 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * AllowCoreThreadTimeOut is on
-	 */
 	public void testAutoResizePool1() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			5, 10, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 10);
+
 		try {
 			Queue<MarkerBlockingJob> markerBlockingJobQueue =
 				new LinkedList<MarkerBlockingJob>();
 
-			// Increase pool size first
 			assertEquals(0, threadPoolExecutor.getPoolSize());
+
 			for (int i = 0; i < 10; i++) {
-				MarkerBlockingJob markerBlockingJob =
-					new MarkerBlockingJob(true);
+				MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob(
+					true);
+
 				markerBlockingJobQueue.add(markerBlockingJob);
+
 				threadPoolExecutor.execute(markerBlockingJob);
 
 				markerBlockingJob.waitUntilBlock();
@@ -279,11 +270,12 @@ public class ThreadPoolExecutorTest extends TestCase {
 				assertEquals(i + 1, threadPoolExecutor.getTaskCount());
 			}
 
-			// Pool is full, queue up
 			for (int i = 0; i < 10; i++) {
-				MarkerBlockingJob markerBlockingJob =
-					new MarkerBlockingJob(true);
+				MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob(
+					true);
+
 				markerBlockingJobQueue.add(markerBlockingJob);
+
 				threadPoolExecutor.execute(markerBlockingJob);
 
 				assertEquals(10, threadPoolExecutor.getPoolSize());
@@ -292,27 +284,30 @@ public class ThreadPoolExecutorTest extends TestCase {
 				assertEquals(i + 11, threadPoolExecutor.getTaskCount());
 			}
 
-			// Queue is full, start reject
 			for (int i = 0; i < 10; i++) {
 				try {
 					threadPoolExecutor.execute(new MarkerBlockingJob(true));
+
 					fail();
 				}
 				catch (RejectedExecutionException ree) {
 				}
+
 				assertEquals(10, threadPoolExecutor.getPoolSize());
 				assertEquals(10, threadPoolExecutor.getLargestPoolSize());
 				assertEquals(10, threadPoolExecutor.getPendingTaskCount());
 				assertEquals(20, threadPoolExecutor.getTaskCount());
 			}
 
-			// Finish running jobs
 			assertEquals(20, markerBlockingJobQueue.size());
+
 			for (int i = 0; i < 10; i++) {
 				MarkerBlockingJob markerBlockingJob =
 					markerBlockingJobQueue.remove();
+
 				markerBlockingJob.unBlock();
-				TestUtil.waitUtilEnded(markerBlockingJob);
+
+				TestUtil.waitUntilEnded(markerBlockingJob);
 
 				assertEquals(10, threadPoolExecutor.getPoolSize());
 				assertEquals(10, threadPoolExecutor.getLargestPoolSize());
@@ -321,12 +316,13 @@ public class ThreadPoolExecutorTest extends TestCase {
 				assertEquals(i + 1, threadPoolExecutor.getCompletedTaskCount());
 			}
 
-			// Finish all jobs which will cause threads timeout
 			for (int i = 0; i < 10; i++) {
 				MarkerBlockingJob markerBlockingJob =
 					markerBlockingJobQueue.remove();
+
 				markerBlockingJob.unBlock();
-				TestUtil.waitUtilEnded(markerBlockingJob);
+
+				TestUtil.waitUntilEnded(markerBlockingJob);
 
 				Thread.sleep(TestUtil.KEEPALIVE_WAIT);
 
@@ -343,22 +339,22 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * AllowCoreThreadTimeOut is off
-	 */
 	public void testAutoResizePool2() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			5, 10, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, false, 10);
+
 		try {
 			Queue<MarkerBlockingJob> markerBlockingJobQueue =
 				new LinkedList<MarkerBlockingJob>();
 
-			// Increase pool size first
 			assertEquals(0, threadPoolExecutor.getPoolSize());
+
 			for (int i = 0; i < 10; i++) {
-				MarkerBlockingJob markerBlockingJob =
-					new MarkerBlockingJob(true);
+				MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob(
+					true);
+
 				markerBlockingJobQueue.add(markerBlockingJob);
+
 				threadPoolExecutor.execute(markerBlockingJob);
 
 				markerBlockingJob.waitUntilBlock();
@@ -368,11 +364,12 @@ public class ThreadPoolExecutorTest extends TestCase {
 				assertEquals(i + 1, threadPoolExecutor.getTaskCount());
 			}
 
-			// Pool is full, queue up
 			for (int i = 0; i < 10; i++) {
-				MarkerBlockingJob markerBlockingJob =
-					new MarkerBlockingJob(true);
+				MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob(
+					true);
+
 				markerBlockingJobQueue.add(markerBlockingJob);
+
 				threadPoolExecutor.execute(markerBlockingJob);
 
 				assertEquals(10, threadPoolExecutor.getPoolSize());
@@ -381,27 +378,30 @@ public class ThreadPoolExecutorTest extends TestCase {
 				assertEquals(i + 11, threadPoolExecutor.getTaskCount());
 			}
 
-			// Queue is full, start reject
 			for (int i = 0; i < 10; i++) {
 				try {
 					threadPoolExecutor.execute(new MarkerBlockingJob(true));
+
 					fail();
 				}
 				catch (RejectedExecutionException ree) {
 				}
+
 				assertEquals(10, threadPoolExecutor.getPoolSize());
 				assertEquals(10, threadPoolExecutor.getLargestPoolSize());
 				assertEquals(10, threadPoolExecutor.getPendingTaskCount());
 				assertEquals(20, threadPoolExecutor.getTaskCount());
 			}
 
-			// Finish running jobs
 			assertEquals(20, markerBlockingJobQueue.size());
+
 			for (int i = 0; i < 10; i++) {
 				MarkerBlockingJob markerBlockingJob =
 					markerBlockingJobQueue.remove();
+
 				markerBlockingJob.unBlock();
-				TestUtil.waitUtilEnded(markerBlockingJob);
+
+				TestUtil.waitUntilEnded(markerBlockingJob);
 
 				assertEquals(10, threadPoolExecutor.getPoolSize());
 				assertEquals(10, threadPoolExecutor.getLargestPoolSize());
@@ -410,17 +410,18 @@ public class ThreadPoolExecutorTest extends TestCase {
 				assertEquals(i + 1, threadPoolExecutor.getCompletedTaskCount());
 			}
 
-			// Finish all jobs which will cause threads timeout
 			for (int i = 0; i < 10; i++) {
 				MarkerBlockingJob markerBlockingJob =
 					markerBlockingJobQueue.remove();
+
 				markerBlockingJob.unBlock();
-				TestUtil.waitUtilEnded(markerBlockingJob);
+
+				TestUtil.waitUntilEnded(markerBlockingJob);
 
 				Thread.sleep(TestUtil.KEEPALIVE_WAIT);
 
-				int expectPoolSize = i > 4 ? 5 : 9 - i;
-				assertEquals(expectPoolSize, threadPoolExecutor.getPoolSize());
+				assertEquals(
+					(i > 4) ? 5 : 9 - i, threadPoolExecutor.getPoolSize());
 				assertEquals(10, threadPoolExecutor.getLargestPoolSize());
 				assertEquals(0, threadPoolExecutor.getPendingTaskCount());
 				assertEquals(20, threadPoolExecutor.getTaskCount());
@@ -433,60 +434,49 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Await on a non-shutdown executor, should timeout
-	 */
 	public void testAwaitTermination1() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3);
 
 		long startTime = System.currentTimeMillis();
 
-		assertFalse(threadPoolExecutor.awaitTermination(
-			TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS));
+		assertFalse(
+			threadPoolExecutor.awaitTermination(
+				TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS));
 
 		long waitTime = System.currentTimeMillis() - startTime;
 
 		assertTrue(waitTime >= TestUtil.KEEPALIVE_TIME);
 	}
 
-	/**
-	 * timeout time is 0, should timeout immediately
-	 */
 	public void testAwaitTermination2() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3);
 
 		long startTime = System.currentTimeMillis();
 
-		assertFalse(threadPoolExecutor.awaitTermination(
-			0, TimeUnit.MILLISECONDS));
+		assertFalse(
+			threadPoolExecutor.awaitTermination(0, TimeUnit.MILLISECONDS));
 
 		long waitTime = System.currentTimeMillis() - startTime;
 
 		assertTrue(waitTime < TestUtil.SHORT_WAIT);
 	}
 
-	/**
-	 * timeout time is less than 0, should timeout immediately
-	 */
 	public void testAwaitTermination3() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3);
 
 		long startTime = System.currentTimeMillis();
 
-		assertFalse(threadPoolExecutor.awaitTermination(
-			0, TimeUnit.MILLISECONDS));
+		assertFalse(
+			threadPoolExecutor.awaitTermination(0, TimeUnit.MILLISECONDS));
 
 		long waitTime = System.currentTimeMillis() - startTime;
 
 		assertTrue(waitTime < TestUtil.SHORT_WAIT);
 	}
 
-	/**
-	 * Success termination
-	 */
 	public void testAwaitTermination4() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, 1, TimeUnit.SECONDS, true, 3);
@@ -495,190 +485,183 @@ public class ThreadPoolExecutorTest extends TestCase {
 
 		long startTime = System.currentTimeMillis();
 
-		assertTrue(threadPoolExecutor.awaitTermination(
-			10, TimeUnit.MILLISECONDS));
+		assertTrue(
+			threadPoolExecutor.awaitTermination(10, TimeUnit.MILLISECONDS));
 
 		long waitTime = System.currentTimeMillis() - startTime;
 
 		assertTrue(waitTime < TestUtil.SHORT_WAIT);
 	}
 
-	/**
-	 * Bad arguments
-	 */
 	public void testConstructor1() {
-		// corePoolSize is less than 0
 		try {
 			new ThreadPoolExecutor(
 				-1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// maxPoolSize is less than 0
 		try {
 			new ThreadPoolExecutor(
 				1, -1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// maxPoolSize is 0
 		try {
 			new ThreadPoolExecutor(
 				1, 0, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// corePoolSize is greater than maxPoolSize
 		try {
 			new ThreadPoolExecutor(
 				2, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// keepAliveTime is less than 0
 		try {
 			new ThreadPoolExecutor(1, 1, -1, TimeUnit.MILLISECONDS, true, 1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// maxQueueSize is less than 0
 		try {
 			new ThreadPoolExecutor(
 				1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, -1);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// maxQueueSize is 0
 		try {
 			new ThreadPoolExecutor(
 				1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 0);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// rejectedExecutionHandler is null
 		try {
 			new ThreadPoolExecutor(
 				1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-				null,
-				Executors.defaultThreadFactory(),
+				null, Executors.defaultThreadFactory(),
 				new ThreadPoolHandlerAdapter());
+
 			fail();
 		}
 		catch (NullPointerException npe) {
 		}
 
-		// threadFactory is null
 		try {
 			new ThreadPoolExecutor(
 				1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-				new AbortPolicy(),
-				null,
-				new ThreadPoolHandlerAdapter());
+				new AbortPolicy(), null, new ThreadPoolHandlerAdapter());
+
 			fail();
 		}
 		catch (NullPointerException npe) {
 		}
 
-		// threadPoolHandler is null
 		try {
 			new ThreadPoolExecutor(
 				1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-				new AbortPolicy(),
-				Executors.defaultThreadFactory(),
-				null);
+				new AbortPolicy(), Executors.defaultThreadFactory(), null);
+
 			fail();
 		}
 		catch (NullPointerException npe) {
 		}
 	}
 
-	/**
-	 * Normal construct 1
-	 */
 	public void testConstructor2() {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(1, 2);
 
 		assertEquals(1, threadPoolExecutor.getCorePoolSize());
 		assertEquals(2, threadPoolExecutor.getMaxPoolSize());
-		assertEquals(60 * 1000000000L,
+		assertEquals(
+			60 * 1000000000L,
 			threadPoolExecutor.getKeepAliveTime(TimeUnit.NANOSECONDS));
 		assertEquals(false, threadPoolExecutor.isAllowCoreThreadTimeOut());
 		assertEquals(
-			Integer.MAX_VALUE, 
+			Integer.MAX_VALUE,
 			threadPoolExecutor.getRemainingTaskQueueCapacity());
+
 		RejectedExecutionHandler rejectedExecutionHandler =
 			threadPoolExecutor.getRejectedExecutionHandler();
-		assertTrue(
-			rejectedExecutionHandler instanceof AbortPolicy);
+
+		assertTrue(rejectedExecutionHandler instanceof AbortPolicy);
+
 		ThreadPoolHandler threadPoolHandler =
 			threadPoolExecutor.getThreadPoolHandler();
-		assertTrue(
-			threadPoolHandler instanceof ThreadPoolHandlerAdapter);
+
+		assertTrue(threadPoolHandler instanceof ThreadPoolHandlerAdapter);
 		assertFalse(threadPoolExecutor.isShutdown());
 		assertFalse(threadPoolExecutor.isTerminating());
 		assertFalse(threadPoolExecutor.isTerminated());
 	}
-	
-	/**
-	 * Normal construct 2
-	 */
+
 	public void testConstructor3() {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3);
 
 		assertEquals(1, threadPoolExecutor.getCorePoolSize());
 		assertEquals(2, threadPoolExecutor.getMaxPoolSize());
-		assertEquals(TestUtil.KEEPALIVE_TIME * 1000000,
+		assertEquals(
+			TestUtil.KEEPALIVE_TIME * 1000000,
 			threadPoolExecutor.getKeepAliveTime(TimeUnit.NANOSECONDS));
 		assertEquals(true, threadPoolExecutor.isAllowCoreThreadTimeOut());
 		assertEquals(3, threadPoolExecutor.getRemainingTaskQueueCapacity());
+
 		RejectedExecutionHandler rejectedExecutionHandler =
 			threadPoolExecutor.getRejectedExecutionHandler();
-		assertTrue(
-			rejectedExecutionHandler instanceof AbortPolicy);
+
+		assertTrue(rejectedExecutionHandler instanceof AbortPolicy);
+
 		ThreadPoolHandler threadPoolHandler =
 			threadPoolExecutor.getThreadPoolHandler();
-		assertTrue(
-			threadPoolHandler instanceof ThreadPoolHandlerAdapter);
+
+		assertTrue(threadPoolHandler instanceof ThreadPoolHandlerAdapter);
 		assertFalse(threadPoolExecutor.isShutdown());
 		assertFalse(threadPoolExecutor.isTerminating());
 		assertFalse(threadPoolExecutor.isTerminated());
 	}
 
-	/**
-	 * Normal construct 3
-	 */
 	public void testConstructor4() {
 		RejectedExecutionHandler rejectedExecutionHandler =
 			new CallerRunsPolicy();
+
 		ThreadFactory threadFactory = Executors.defaultThreadFactory();
+
 		ThreadPoolHandler threadPoolHandler = new ThreadPoolHandlerAdapter();
+
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3,
-			rejectedExecutionHandler,
-			threadFactory,
-			threadPoolHandler);
+			rejectedExecutionHandler, threadFactory, threadPoolHandler);
+
 		assertEquals(1, threadPoolExecutor.getCorePoolSize());
 		assertEquals(2, threadPoolExecutor.getMaxPoolSize());
-		assertEquals(TestUtil.KEEPALIVE_TIME * 1000000,
+		assertEquals(
+			TestUtil.KEEPALIVE_TIME * 1000000,
 			threadPoolExecutor.getKeepAliveTime(TimeUnit.NANOSECONDS));
 		assertEquals(true, threadPoolExecutor.isAllowCoreThreadTimeOut());
 		assertEquals(3, threadPoolExecutor.getRemainingTaskQueueCapacity());
-		assertSame(rejectedExecutionHandler,
+		assertSame(
+			rejectedExecutionHandler,
 			threadPoolExecutor.getRejectedExecutionHandler());
 		assertSame(threadFactory, threadPoolExecutor.getThreadFactory());
 		assertSame(
@@ -688,15 +671,13 @@ public class ThreadPoolExecutorTest extends TestCase {
 		assertFalse(threadPoolExecutor.isTerminated());
 	}
 
-	/**
-	 * Null job
-	 */
 	public void testExecute1() {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3);
 
 		try {
 			threadPoolExecutor.execute(null);
+
 			fail();
 		}
 		catch (NullPointerException npe) {
@@ -706,17 +687,65 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Fail to execute because of _SHUTDOWN executor
-	 */
+	public void testExecute10() throws InterruptedException {
+		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1);
+
+		MarkerBlockingJob markerBlockingJob1 = new MarkerBlockingJob(true);
+
+		threadPoolExecutor.execute(markerBlockingJob1);
+
+		markerBlockingJob1.waitUntilBlock();
+
+		ReentrantLock mainLock = threadPoolExecutor.getMainLock();
+
+		TaskQueue<Runnable> taskQueue = threadPoolExecutor.getTaskQueue();
+
+		ReentrantLock takeLock = taskQueue.getTakeLock();
+
+		takeLock.lock();
+
+		try {
+			markerBlockingJob1.unBlock();
+
+			while (!takeLock.hasQueuedThreads()) {
+				Thread.sleep(1);
+			}
+
+			mainLock.lock();
+		}
+		finally {
+			takeLock.unlock();
+		}
+
+		MarkerBlockingJob markerBlockingJob2 = new MarkerBlockingJob(true);
+
+		try {
+			while (!mainLock.hasQueuedThreads()) {
+				Thread.sleep(1);
+			}
+
+			threadPoolExecutor.execute(markerBlockingJob2);
+		}
+		finally {
+			mainLock.unlock();
+		}
+
+		markerBlockingJob2.waitUntilBlock();
+		markerBlockingJob2.unBlock();
+
+		TestUtil.closePool(threadPoolExecutor);
+
+		assertTrue(markerBlockingJob2.isEnded());
+	}
+
 	public void testExecute2() {
 		RecordRejectedExecutionHandler recordRejectedExecutionHandler =
 			new RecordRejectedExecutionHandler();
 
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3,
-			recordRejectedExecutionHandler,
-			Executors.defaultThreadFactory(),
+			recordRejectedExecutionHandler, Executors.defaultThreadFactory(),
 			new ThreadPoolHandlerAdapter());
 
 		threadPoolExecutor.shutdown();
@@ -726,36 +755,37 @@ public class ThreadPoolExecutorTest extends TestCase {
 		threadPoolExecutor.execute(markerBlockingJob);
 
 		assertFalse(markerBlockingJob.isStarted());
+
 		List<Runnable> rejectedList =
 			recordRejectedExecutionHandler.getRejectedList();
+
 		assertEquals(1, rejectedList.size());
 		assertSame(markerBlockingJob, rejectedList.get(0));
 	}
 
-	/**
-	 * Fail to execute because of _taskQueue is full
-	 */
 	public void testExecute3() {
 		RecordRejectedExecutionHandler recordRejectedExecutionHandler =
 			new RecordRejectedExecutionHandler();
 
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-			recordRejectedExecutionHandler,
-			Executors.defaultThreadFactory(),
+			recordRejectedExecutionHandler, Executors.defaultThreadFactory(),
 			new ThreadPoolHandlerAdapter());
+
 		try {
 			List<Runnable> rejectedList =
 				recordRejectedExecutionHandler.getRejectedList();
-			// Consume the single pool thread
+
 			threadPoolExecutor.execute(new MarkerBlockingJob(true));
-			assertEquals(0, rejectedList.size());
-			// Consume the single _taskQueue slot
-			threadPoolExecutor.execute(new MarkerBlockingJob(true));
+
 			assertEquals(0, rejectedList.size());
 
-			// Check reject
+			threadPoolExecutor.execute(new MarkerBlockingJob(true));
+
+			assertEquals(0, rejectedList.size());
+
 			MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 			threadPoolExecutor.execute(markerBlockingJob);
 
 			assertEquals(1, rejectedList.size());
@@ -767,38 +797,34 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Execute with a concurrent shutdown, successfully rollback job
-	 */
 	public void testExecute4() throws InterruptedException {
 		RecordRejectedExecutionHandler recordRejectedExecutionHandler =
 			new RecordRejectedExecutionHandler();
 
 		final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3,
-			recordRejectedExecutionHandler,
-			Executors.defaultThreadFactory(),
+			recordRejectedExecutionHandler, Executors.defaultThreadFactory(),
 			new ThreadPoolHandlerAdapter());
+
 		final TaskQueue<Runnable> taskQueue = threadPoolExecutor.getTaskQueue();
 
 		final CountDownLatch executeLatch = new CountDownLatch(1);
 
-		// Concurrent shutdown thread
-		new Thread() {
+		Thread thread = new Thread() {
 
 			public void run() {
 				try {
 					ReentrantLock putLock = taskQueue.getPutLock();
+
 					putLock.lock();
+
 					executeLatch.countDown();
+
 					try {
-						// Spin waiting until offer thread try to lock up take
-						// lock
 						while (!putLock.hasQueuedThreads()) {
 							Thread.sleep(1);
 						}
-						// Shutdown after submit thread saw executor is in
-						// _RUNNING state, before it finishes enqueue.
+
 						threadPoolExecutor.shutdown();
 					}
 					finally {
@@ -809,14 +835,17 @@ public class ThreadPoolExecutorTest extends TestCase {
 				}
 			}
 
-		}.start();
+		};
+
+		thread.start();
 
 		executeLatch.await();
 
-		MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
-
 		try {
+			MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 			threadPoolExecutor.execute(markerBlockingJob);
+
 			List<Runnable> rejectedList =
 				recordRejectedExecutionHandler.getRejectedList();
 
@@ -829,41 +858,36 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Execute with a concurrent shutdown, fail to rollback job
-	 */
 	public void testExecute5() throws InterruptedException {
 		RecordRejectedExecutionHandler recordRejectedExecutionHandler =
 			new RecordRejectedExecutionHandler();
 
 		final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3,
-			recordRejectedExecutionHandler,
-			Executors.defaultThreadFactory(),
+			recordRejectedExecutionHandler, Executors.defaultThreadFactory(),
 			new ThreadPoolHandlerAdapter());
+
 		final TaskQueue<Runnable> taskQueue = threadPoolExecutor.getTaskQueue();
 
 		final CountDownLatch executeLatch = new CountDownLatch(1);
 
-		// Concurrent shutdown thread
-		new Thread() {
+		Thread thread = new Thread() {
 
 			public void run() {
 				try {
 					ReentrantLock takeLock = taskQueue.getTakeLock();
+
 					takeLock.lock();
+
 					executeLatch.countDown();
+
 					try {
-						// Spin waiting until offer thread try to lock up take
-						// lock
 						while (!takeLock.hasQueuedThreads()) {
 							Thread.sleep(1);
 						}
-						// Steal the job before concurrent shutdown
+
 						assertNotNull(taskQueue.take());
 
-						// Shutdown after submit thread saw executor is in
-						// _RUNNING state, before it finishes offering.
 						threadPoolExecutor.shutdown();
 					}
 					finally {
@@ -874,14 +898,17 @@ public class ThreadPoolExecutorTest extends TestCase {
 				}
 			}
 
-		}.start();
+		};
+
+		thread.start();
 
 		executeLatch.await();
 
-		MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
-
 		try {
+			MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 			threadPoolExecutor.execute(markerBlockingJob);
+
 			assertTrue(
 				recordRejectedExecutionHandler.getRejectedList().isEmpty());
 		}
@@ -890,51 +917,54 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Bad job kills worker threads
-	 */
 	public void testExecute6() throws InterruptedException {
 		SetRecordUncaughtExceptionThreadFactory threadFactory =
 			new SetRecordUncaughtExceptionThreadFactory();
+
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 10,
-			new AbortPolicy(),
-			threadFactory,
-			new ThreadPoolHandlerAdapter());
+			new AbortPolicy(), threadFactory, new ThreadPoolHandlerAdapter());
+
 		RecordUncaughtExceptionHandler recordUncaughtExceptionHandler =
 			threadFactory.getRecordUncaughtExceptionHandler();
+
 		Queue<MarkerBlockingJob> markerBlockingJobQueue =
 			new LinkedList<MarkerBlockingJob>();
+
 		try {
 			for (int i = 0; i < 10; i++) {
 				MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob(
 					false, true);
+
 				markerBlockingJobQueue.add(markerBlockingJob);
+
 				threadPoolExecutor.execute(markerBlockingJob);
 			}
 		}
 		finally {
 			TestUtil.closePool(threadPoolExecutor);
-			// Wait to allow worker threads finalizing
+
 			Thread.sleep(TestUtil.SHORT_WAIT);
 		}
+
 		assertEquals(1, threadPoolExecutor.getLargestPoolSize());
-		assertEquals(10,
+		assertEquals(
+			10,
 			recordUncaughtExceptionHandler.getUncaughtMap().size());
+
 		for (MarkerBlockingJob markerBlockingJob : markerBlockingJobQueue) {
 			assertTrue(markerBlockingJob.isStarted());
 			assertFalse(markerBlockingJob.isEnded());
 		}
 	}
 
-	/**
-	 * Success execute
-	 */
 	public void testExecute7() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3);
-		MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 		try {
+			MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 			threadPoolExecutor.execute(markerBlockingJob);
 
 			Thread.sleep(10);
@@ -946,18 +976,17 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Fast consumer, slow producer, allowCoreThreadTimeOut is on
-	 */
 	public void testExecute8() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3);
+
 		try {
 			assertEquals(0, threadPoolExecutor.getActiveCount());
 			assertEquals(0, threadPoolExecutor.getPoolSize());
 
 			for (int i = 0; i < 10; i++) {
 				MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 				threadPoolExecutor.execute(markerBlockingJob);
 
 				markerBlockingJob.waitUntilEnded();
@@ -975,18 +1004,17 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Fast consumer, slow producer, allowCoreThreadTimeOut is off
-	 */
 	public void testExecute9() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, false, 3);
+
 		try {
 			assertEquals(0, threadPoolExecutor.getActiveCount());
 			assertEquals(0, threadPoolExecutor.getPoolSize());
 
 			for (int i = 0; i < 10; i++) {
 				MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 				threadPoolExecutor.execute(markerBlockingJob);
 
 				markerBlockingJob.waitUntilEnded();
@@ -1004,176 +1032,105 @@ public class ThreadPoolExecutorTest extends TestCase {
 		}
 	}
 
-	/**
-	 * Enqueue new task right after _taskQueue polls timeout, before enters
-	 * exit checking block
-	 */
-	public void testExecute10() throws InterruptedException {
-		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
-			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1);
-
-		MarkerBlockingJob markerBlockingJob1 = new MarkerBlockingJob(true);
-		// Consume the single core thread
-		threadPoolExecutor.execute(markerBlockingJob1);
-		markerBlockingJob1.waitUntilBlock();
-
-		ReentrantLock mainLock = threadPoolExecutor.getMainLock();
-		ReentrantLock takeLock =
-			threadPoolExecutor.getTaskQueue().getTakeLock();
-		// Lock up _taskQueue's takeLock
-		takeLock.lock();
-		try {
-			// Unblock the current running job.
-			markerBlockingJob1.unBlock();
-
-			// Wait until the core thread starts polling job from _taskQueue.
-			while (!takeLock.hasQueuedThreads()) {
-				Thread.sleep(1);
-			}
-
-			// Lock up mainLock before letting core thread finishes polling
-			mainLock.lock();
-		}
-		finally {
-			// Unlock _taskQueue's takeLock, core thread starts timeout polling
-			takeLock.unlock();
-		}
-
-		MarkerBlockingJob markerBlockingJob2 = new MarkerBlockingJob(true);
-
-		try {
-			// Wait to ensure core thread returns from timeout polling and
-			// enters exit check block
-			while (!mainLock.hasQueuedThreads()) {
-				Thread.sleep(1);
-			}
-
-			// add a new task
-			threadPoolExecutor.execute(markerBlockingJob2);
-		}
-		finally {
-			mainLock.unlock();
-		}
-
-		markerBlockingJob2.waitUntilBlock();
-		markerBlockingJob2.unBlock();
-
-		TestUtil.closePool(threadPoolExecutor);
-		assertTrue(markerBlockingJob2.isEnded());
-	}
-
 	public void testFinalize() {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3);
+
 		assertFalse(threadPoolExecutor.isShutdown());
+
 		threadPoolExecutor.finalize();
+
 		assertTrue(threadPoolExecutor.isShutdown());
 	}
 
-	/**
-	 * ShutdownNow happens after _getTask() return, before WorkTask start
-	 */
 	public void testShutdownNow1() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, false, 1);
 
 		MarkerBlockingJob markerBlockingJob1 = new MarkerBlockingJob(true);
 		MarkerBlockingJob markerBlockingJob2 = new MarkerBlockingJob(true);
-		// Consume the single core thread
+
 		threadPoolExecutor.execute(markerBlockingJob1);
+
 		markerBlockingJob1.waitUntilBlock();
-		// Consume the single _taskQueue slot
+
 		threadPoolExecutor.execute(markerBlockingJob2);
 
-		TaskQueue taskQueue = threadPoolExecutor.getTaskQueue();
+		TaskQueue<Runnable> taskQueue = threadPoolExecutor.getTaskQueue();
+
 		AbstractQueuedSynchronizer headWorkerTask = null;
-		// Lock up _taskQueue's takeLock
+
 		ReentrantLock takeLock = taskQueue.getTakeLock();
+
 		takeLock.lock();
 		try {
-			// Unblock the current running job.
 			markerBlockingJob1.unBlock();
 
-			// Wait until the core thread starts taking job from _taskQueue.
 			while (!takeLock.hasQueuedThreads()) {
 				Thread.sleep(1);
 			}
 
-			// Get the core thread's WorkerTask.
-			Set<? extends AbstractQueuedSynchronizer> workerSet =
-				threadPoolExecutor.getWorkerTaskSet();
-			assertEquals(1, workerSet.size());
-			headWorkerTask = workerSet.iterator().next();
+			Set<? extends AbstractQueuedSynchronizer> workerTasks =
+				threadPoolExecutor.getWorkerTasks();
 
-			// Lock up the WorkTask
+			assertEquals(1, workerTasks.size());
+
+			headWorkerTask = workerTasks.iterator().next();
+
 			headWorkerTask.acquire(1);
 		}
 		finally {
-			// Unlock _taskQueue's takeLock
 			takeLock.unlock();
 		}
 
-		// Wait until core thread blocks at the begine of _runTask()
 		while (!headWorkerTask.hasQueuedThreads()) {
 			Thread.sleep(1);
 		}
 
-		// Call shutdownNow
 		threadPoolExecutor.shutdownNow();
 
-		// Unblock the core thread
 		headWorkerTask.release(1);
 
-		// Wait until executor fully terminated
 		assertTrue(threadPoolExecutor.awaitTermination(1, TimeUnit.SECONDS));
-
-		// markerBlockingJob2 should be interrupted
 		assertTrue(markerBlockingJob2.isInterrupted());
 	}
 
-	/**
-	 * ShutdownNow happens after _taskQueue.poll() timeout return,
-	 * before exit checking block
-	 */
 	public void testShutdownNow2() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1);
 
 		MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob(true);
-		// Consume the single core thread
+
 		threadPoolExecutor.execute(markerBlockingJob);
+
 		markerBlockingJob.waitUntilBlock();
 
 		ReentrantLock mainLock = threadPoolExecutor.getMainLock();
-		ReentrantLock takeLock =
-			threadPoolExecutor.getTaskQueue().getTakeLock();
-		// Lock up _taskQueue's takeLock
+
+		TaskQueue<Runnable> taskQueue = threadPoolExecutor.getTaskQueue();
+
+		ReentrantLock takeLock = taskQueue.getTakeLock();
+
 		takeLock.lock();
+
 		try {
-			// Unblock the current running job.
 			markerBlockingJob.unBlock();
 
-			// Wait until the core thread starts polling job from _taskQueue.
 			while (!takeLock.hasQueuedThreads()) {
 				Thread.sleep(1);
 			}
 
-			// Lock up mainLock before letting core thread finishes polling
 			mainLock.lock();
 		}
 		finally {
-			// Unlock _taskQueue's takeLock, core thread starts timeout polling
 			takeLock.unlock();
 		}
 
 		try {
-			// Wait to ensure core thread returns from timeout polling and
-			// enters exit check block
 			while (!mainLock.hasQueuedThreads()) {
 				Thread.sleep(1);
 			}
 
-			// Change the _runState to _STOP
 			threadPoolExecutor.shutdownNow();
 		}
 		finally {

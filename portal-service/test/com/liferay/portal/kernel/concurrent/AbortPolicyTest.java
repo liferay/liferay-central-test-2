@@ -28,14 +28,14 @@ public class AbortPolicyTest extends TestCase {
 	public void testAbortPolicy() {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3,
-			new AbortPolicy(),
-			Executors.defaultThreadFactory(),
+			new AbortPolicy(), Executors.defaultThreadFactory(),
 			new ThreadPoolHandlerAdapter());
 
 		threadPoolExecutor.shutdown();
 
 		try {
 			threadPoolExecutor.execute(new MarkerBlockingJob());
+
 			fail();
 		}
 		catch (RejectedExecutionException ree) {

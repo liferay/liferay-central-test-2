@@ -20,14 +20,14 @@ package com.liferay.portal.kernel.concurrent;
  */
 public interface ThreadPoolHandler {
 
-	void beforeThreadStart(Thread thread);
+	public void afterExecute(Runnable runnable, Throwable throwable);
 
-	void beforeThreadEnd(Thread thread);
+	public void beforeExecute(Thread thread, Runnable runnable);
 
-	void beforeExecute(Thread thread, Runnable runnable);
+	public void beforeThreadEnd(Thread thread);
 
-	void afterExecute(Runnable runnable, Throwable throwable);
+	public void beforeThreadStart(Thread thread);
 
-	void terminated();
+	public void terminated();
 
 }

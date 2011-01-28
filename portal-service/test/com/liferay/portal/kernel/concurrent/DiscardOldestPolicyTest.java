@@ -24,53 +24,46 @@ import java.util.concurrent.TimeUnit;
  */
 public class DiscardOldestPolicyTest extends TestCase {
 
-	/**
-	 * On a shutdown executor
-	 */
 	public void testDiscardOldestPolicy1() {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-			new DiscardOldestPolicy(),
-			Executors.defaultThreadFactory(),
+			new DiscardOldestPolicy(), Executors.defaultThreadFactory(),
 			new ThreadPoolHandlerAdapter());
+
 		threadPoolExecutor.shutdown();
 
 		MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 		threadPoolExecutor.execute(markerBlockingJob);
 
 		assertFalse(markerBlockingJob.isStarted());
 	}
 
-	/**
-	 * On an overloaded executor
-	 * */
 	public void testDiscardOldestPolicy2() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-			new DiscardOldestPolicy(),
-			Executors.defaultThreadFactory(),
+			new DiscardOldestPolicy(), Executors.defaultThreadFactory(),
 			new ThreadPoolHandlerAdapter());
+
 		try {
 			MarkerBlockingJob markerBlockingJob1 = new MarkerBlockingJob(true);
 			MarkerBlockingJob markerBlockingJob2 = new MarkerBlockingJob(true);
 			MarkerBlockingJob markerBlockingJob3 = new MarkerBlockingJob();
 
-			// Consume the single pool thread
 			threadPoolExecutor.execute(markerBlockingJob1);
 
 			markerBlockingJob1.waitUntilBlock();
 
-			// Consume the single _taskQueue slot
 			threadPoolExecutor.execute(markerBlockingJob2);
 
 			assertEquals(1, threadPoolExecutor.getActiveCount());
 			assertEquals(1, threadPoolExecutor.getPendingTaskCount());
 
-			// Add a new job which will cause markerBlockingJob2 be discard
 			threadPoolExecutor.execute(markerBlockingJob3);
 
 			markerBlockingJob1.unBlock();
-			TestUtil.waitUtilEnded(markerBlockingJob1);
+
+			TestUtil.waitUntilEnded(markerBlockingJob1);
 
 			assertEquals(0, threadPoolExecutor.getActiveCount());
 			assertEquals(0, threadPoolExecutor.getPendingTaskCount());

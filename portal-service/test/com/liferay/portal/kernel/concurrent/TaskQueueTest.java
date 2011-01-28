@@ -29,65 +29,70 @@ import java.util.concurrent.locks.ReentrantLock;
 public class TaskQueueTest extends TestCase {
 
 	public void testConstructor() {
-		// capacity is 0
 		try {
-			new TaskQueue(0);
+			new TaskQueue<Object>(0);
+
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// capacity is less than 0
 		try {
-			new TaskQueue(-1);
+			new TaskQueue<Object>(-1);
 			fail();
 		}
 		catch (IllegalArgumentException iae) {
 		}
 
-		// capacity is 10
-		TaskQueue taskQueue = new TaskQueue(10);
+		TaskQueue<Object> taskQueue = new TaskQueue<Object>(10);
+
 		assertEquals(10, taskQueue.remainingCapacity());
 
-		// default capacity
-		taskQueue = new TaskQueue();
+		taskQueue = new TaskQueue<Object>();
+
 		assertEquals(Integer.MAX_VALUE, taskQueue.remainingCapacity());
 	}
 
 	public void testDrainTo() {
-		// Test drainTo empty collection
-		TaskQueue taskQueue = new TaskQueue();
+		TaskQueue<Object> taskQueue = new TaskQueue<Object>();
+
 		try {
 			taskQueue.drainTo(null);
+
 			fail();
 		}
 		catch (NullPointerException npe) {
 		}
 
-		// Success drainTo
 		Object object1 = new Object();
 		Object object2 = new Object();
 		Object object3 = new Object();
 		Object object4 = new Object();
-		taskQueue = new TaskQueue();
+
+		taskQueue = new TaskQueue<Object>();
+
 		assertTrue(taskQueue.offer(object1, new boolean[1]));
 		assertTrue(taskQueue.offer(object2, new boolean[1]));
 		assertTrue(taskQueue.offer(object3, new boolean[1]));
 		assertTrue(taskQueue.offer(object4, new boolean[1]));
+
 		Set<Object> set = new HashSet<Object>();
+
 		taskQueue.drainTo(set);
+
 		assertEquals(4, set.size());
 		assertTrue(set.contains(object1));
 		assertTrue(set.contains(object2));
 		assertTrue(set.contains(object3));
 		assertTrue(set.contains(object4));
 
-		// Fail drainTo
 		object1 = new Object();
 		object2 = new Object();
 		object3 = new Object();
 		object4 = new Object();
-		taskQueue = new TaskQueue();
+
+		taskQueue = new TaskQueue<Object>();
+
 		assertTrue(taskQueue.offer(object1, new boolean[1]));
 		assertTrue(taskQueue.offer(object2, new boolean[1]));
 		assertTrue(taskQueue.offer(object3, new boolean[1]));
@@ -99,6 +104,7 @@ public class TaskQueueTest extends TestCase {
 				if (size() >= 2) {
 					throw new IllegalStateException();
 				}
+
 				return super.add(e);
 			}
 
@@ -106,6 +112,7 @@ public class TaskQueueTest extends TestCase {
 
 		try {
 			taskQueue.drainTo(list);
+
 			fail();
 		}
 		catch (IllegalStateException ise) {
@@ -120,88 +127,95 @@ public class TaskQueueTest extends TestCase {
 	}
 
 	public void testIsEmpty() {
-		TaskQueue taskQueue = new TaskQueue();
-		assertTrue(taskQueue.isEmpty());
+		TaskQueue<Object> taskQueue = new TaskQueue<Object>();
 
+		assertTrue(taskQueue.isEmpty());
 		assertTrue(taskQueue.offer(new Object(), new boolean[1]));
 		assertFalse(taskQueue.isEmpty());
-
 		assertNotNull(taskQueue.poll());
 		assertTrue(taskQueue.isEmpty());
 	}
 
 	public void testOffer() throws InterruptedException {
-		// element is null
-		TaskQueue taskQueue = new TaskQueue(10);
+		TaskQueue<Object> taskQueue = new TaskQueue<Object>(10);
+
 		try {
 			taskQueue.offer(null, new boolean[1]);
+
 			fail();
 		}
 		catch (NullPointerException npe) {
 		}
 
-		// hasWaiterMarker is null
-		taskQueue = new TaskQueue(10);
+		taskQueue = new TaskQueue<Object>(10);
+
 		try {
 			taskQueue.offer(new Object(), null);
+
 			fail();
 		}
 		catch (NullPointerException npe) {
 		}
 
-		// hasWaiterMarker is 0 length
-		taskQueue = new TaskQueue(10);
+		taskQueue = new TaskQueue<Object>(10);
+
 		try {
 			taskQueue.offer(new Object(), new boolean[0]);
+
 			fail();
 		}
 		catch (IllegalArgumentException npe) {
 		}
 
-		// Success offer with no waiter
-		taskQueue = new TaskQueue(10);
+		taskQueue = new TaskQueue<Object>(10);
+
 		boolean[] hasWaiterMarker = new boolean[1];
+
 		boolean result = taskQueue.offer(new Object(), hasWaiterMarker);
+
 		assertTrue(result);
 		assertFalse(hasWaiterMarker[0]);
 
-		// Success offer with waiters
-		final TaskQueue taskQueue2 = new TaskQueue(10);
+		final TaskQueue<Object> taskQueue2 = new TaskQueue<Object>(10);
+
 		hasWaiterMarker = new boolean[1];
-		new Thread() {
+
+		Thread thread = new Thread() {
 
 			public void run() {
 				try {
 					taskQueue2.take();
 				}
-				catch (InterruptedException ex) {
+				catch (InterruptedException ie) {
 					fail();
 				}
 			}
 
-		}.start();
+		};
+
+		thread.start();
 
 		Thread.sleep(100);
 
 		result = taskQueue2.offer(new Object(), hasWaiterMarker);
+
 		assertTrue(result);
 		assertTrue(hasWaiterMarker[0]);
 
-		// Success offer with concurrent taker
-		final TaskQueue taskQueue3 = new TaskQueue(10);
-		new Thread() {
+		final TaskQueue<Object> taskQueue3 = new TaskQueue<Object>(10);
+
+		thread = new Thread() {
 			public void run() {
 				try {
 					ReentrantLock takeLock = taskQueue3.getTakeLock();
+
 					takeLock.lock();
+
 					try {
-						// Spin waiting until offer thread try to lock up take
-						// lock
 						while (!takeLock.hasQueuedThreads()) {
 							Thread.sleep(1);
 						}
-						// Do a concurrent take after the offer thread enqueue
-						// the new object, before it checks spare waiter.
+
 						assertNotNull(taskQueue3.take());
 					}
 					finally {
@@ -212,74 +226,88 @@ public class TaskQueueTest extends TestCase {
 					fail();
 				}
 			}
-		}.start();
+
+		};
+
+		thread.start();
+
 		hasWaiterMarker = new boolean[1];
 
 		Thread.sleep(100);
 
 		result = taskQueue3.offer(new Object(), hasWaiterMarker);
+
 		assertTrue(result);
 		assertTrue(hasWaiterMarker[0]);
 
-		// Fail offer because of full
-		taskQueue = new TaskQueue(1);
+		taskQueue = new TaskQueue<Object>(1);
+
 		result = taskQueue.offer(new Object(), hasWaiterMarker);
+
 		assertTrue(result);
 		assertFalse(hasWaiterMarker[0]);
+
 		result = taskQueue.offer(new Object(), hasWaiterMarker);
+
 		assertFalse(result);
 		assertFalse(hasWaiterMarker[0]);
 	}
 
 	public void testPoll() throws InterruptedException {
-		// Poll from empty queue
-		TaskQueue taskQueue = new TaskQueue();
+		TaskQueue<Object> taskQueue = new TaskQueue<Object>();
+
 		assertNull(taskQueue.poll());
 
-		// Poll without propagate not empty signal
-		taskQueue = new TaskQueue();
-		Object object = new Object();
-		assertTrue(taskQueue.offer(object, new boolean[1]));
-		assertSame(object, taskQueue.poll());
+		taskQueue = new TaskQueue<Object>();
 
-		// Poll with propagate not empty signal
-		taskQueue = new TaskQueue();
-		object = new Object();
+		Object object1 = new Object();
+
+		assertTrue(taskQueue.offer(object1, new boolean[1]));
+		assertSame(object1, taskQueue.poll());
+
+		taskQueue = new TaskQueue<Object>();
+
+		object1 = new Object();
 		Object object2 = new Object();
-		assertTrue(taskQueue.offer(object, new boolean[1]));
-		assertTrue(taskQueue.offer(object2, new boolean[1]));
-		assertSame(object, taskQueue.poll());
 
-		// Poll from empty queue with 0 wait time
-		taskQueue = new TaskQueue();
+		assertTrue(taskQueue.offer(object1, new boolean[1]));
+		assertTrue(taskQueue.offer(object2, new boolean[1]));
+		assertSame(object1, taskQueue.poll());
+
+		taskQueue = new TaskQueue<Object>();
+
 		assertNull(taskQueue.poll(0, TimeUnit.MILLISECONDS));
 
-		// Poll from empty queue with less than 0 wait time
-		taskQueue = new TaskQueue();
+		taskQueue = new TaskQueue<Object>();
+
 		assertNull(taskQueue.poll(-1, TimeUnit.MILLISECONDS));
 
-		// Poll from empty queue with timeout
-		taskQueue = new TaskQueue();
+		taskQueue = new TaskQueue<Object>();
+
 		assertNull(taskQueue.poll(100, TimeUnit.MILLISECONDS));
 
-		// Poll without propagate not empty signal
-		taskQueue = new TaskQueue();
-		object = new Object();
-		assertTrue(taskQueue.offer(object, new boolean[1]));
-		assertSame(object, taskQueue.poll(100, TimeUnit.MILLISECONDS));
+		taskQueue = new TaskQueue<Object>();
 
-		// Poll with propagate not empty signal
-		taskQueue = new TaskQueue();
-		object = new Object();
+		object1 = new Object();
+
+		assertTrue(taskQueue.offer(object1, new boolean[1]));
+		assertSame(object1, taskQueue.poll(100, TimeUnit.MILLISECONDS));
+
+		taskQueue = new TaskQueue<Object>();
+
+		object1 = new Object();
 		object2 = new Object();
-		assertTrue(taskQueue.offer(object, new boolean[1]));
+
+		assertTrue(taskQueue.offer(object1, new boolean[1]));
 		assertTrue(taskQueue.offer(object2, new boolean[1]));
-		assertSame(object, taskQueue.poll(100, TimeUnit.MILLISECONDS));
+		assertSame(object1, taskQueue.poll(100, TimeUnit.MILLISECONDS));
 	}
 
 	public void testRemainingCapacity() {
-		TaskQueue taskQueue = new TaskQueue(10);
+		TaskQueue<Object> taskQueue = new TaskQueue<Object>(10);
+
 		assertEquals(10, taskQueue.remainingCapacity());
+
 		for (int i = 1; i <= 10; i++) {
 			assertTrue(taskQueue.offer(new Object(), new boolean[1]));
 			assertEquals(10 - i, taskQueue.remainingCapacity());
@@ -287,17 +315,15 @@ public class TaskQueueTest extends TestCase {
 	}
 
 	public void testRemove() {
-		// Element is null
-		TaskQueue taskQueue = new TaskQueue(10);
-		assertFalse(taskQueue.remove(null));
+		TaskQueue<Object> taskQueue = new TaskQueue<Object>(10);
 
-		// Remove non-exist element
+		assertFalse(taskQueue.remove(null));
 		assertFalse(taskQueue.remove(new Object()));
 
-		// Remove exist elements
 		Object object1 = new Object();
 		Object object2 = new Object();
 		Object object3 = new Object();
+
 		assertTrue(taskQueue.offer(object1, new boolean[1]));
 		assertTrue(taskQueue.offer(object2, new boolean[1]));
 		assertTrue(taskQueue.offer(object3, new boolean[1]));
@@ -311,8 +337,10 @@ public class TaskQueueTest extends TestCase {
 	}
 
 	public void testSize() {
-		TaskQueue taskQueue = new TaskQueue(10);
+		TaskQueue<Object> taskQueue = new TaskQueue<Object>(10);
+
 		assertEquals(0, taskQueue.size());
+
 		for (int i = 1; i <= 10; i++) {
 			assertTrue(taskQueue.offer(new Object(), new boolean[1]));
 			assertEquals(i, taskQueue.size());
@@ -320,15 +348,36 @@ public class TaskQueueTest extends TestCase {
 	}
 
 	public void testTake() throws InterruptedException {
-		// Take without blocking
-		final TaskQueue taskQueue = new TaskQueue();
+		final TaskQueue<Object> taskQueue = new TaskQueue<Object>();
 		final Object object = new Object();
+
 		assertTrue(taskQueue.offer(object, new boolean[1]));
 		assertSame(object, taskQueue.take());
 
-		// Take with blocking, but not propagate not empty signal
-		long startTime = System.currentTimeMillis();
-		new Thread() {
+		//long startTime = System.currentTimeMillis();
+
+		Thread thread = new Thread() {
+
+			public void run() {
+				try {
+					Thread.sleep(100);
+				}
+				catch (InterruptedException ie) {
+				}
+
+				assertTrue(taskQueue.offer(object, new boolean[1]));
+			}
+
+		};
+
+		thread.start();
+
+		assertSame(object, taskQueue.take());
+		//assertTrue(System.currentTimeMillis() - startTime > 100);
+
+		//startTime = System.currentTimeMillis();
+
+		thread = new Thread() {
 
 			public void run() {
 				try {
@@ -336,31 +385,17 @@ public class TaskQueueTest extends TestCase {
 				}
 				catch (InterruptedException ex) {
 				}
+
+				assertTrue(taskQueue.offer(object, new boolean[1]));
 				assertTrue(taskQueue.offer(object, new boolean[1]));
 			}
 
-		}.start();
+		};
+
+		thread.start();
+
 		assertSame(object, taskQueue.take());
-		assertTrue(System.currentTimeMillis() - startTime > 100);
-
-		// Take with blocking, propagate not empty signal
-		startTime = System.currentTimeMillis();
-		new Thread() {
-
-			public void run() {
-				try {
-					Thread.sleep(100);
-				}
-				catch (InterruptedException ex) {
-				}
-				assertTrue(taskQueue.offer(object, new boolean[1]));
-				// Not guaranteed, take() may happen at this window time
-				assertTrue(taskQueue.offer(object, new boolean[1]));
-			}
-
-		}.start();
-		assertSame(object, taskQueue.take());
-		assertTrue(System.currentTimeMillis() - startTime > 100);
+		//assertTrue(System.currentTimeMillis() - startTime > 100);
 	}
 
 }

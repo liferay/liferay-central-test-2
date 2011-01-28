@@ -21,24 +21,29 @@ public class CallerRunsPolicy implements RejectedExecutionHandler {
 
 	public void rejectedExecution(
 		Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
-		if (!threadPoolExecutor.isShutdown()) {
-			ThreadPoolHandler threadPoolHandler =
-				threadPoolExecutor.getThreadPoolHandler();
 
-			RuntimeException exception = null;
+		if (threadPoolExecutor.isShutdown()) {
+			return;
+		}
 
-			threadPoolHandler.beforeExecute(
-				Thread.currentThread(), runnable);
-			try {
-				runnable.run();
-			}
-			catch (RuntimeException re) {
-				exception = re;
-				throw re;
-			}
-			finally {
-				threadPoolHandler.afterExecute(runnable, exception);
-			}
+		ThreadPoolHandler threadPoolHandler =
+			threadPoolExecutor.getThreadPoolHandler();
+
+		Throwable throwable = null;
+
+		threadPoolHandler.beforeExecute(
+			Thread.currentThread(), runnable);
+
+		try {
+			runnable.run();
+		}
+		catch (RuntimeException re) {
+			throwable = re;
+
+			throw re;
+		}
+		finally {
+			threadPoolHandler.afterExecute(runnable, throwable);
 		}
 	}
 

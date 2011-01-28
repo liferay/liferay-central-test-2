@@ -29,13 +29,15 @@ public class SetRecordUncaughtExceptionThreadFactory
 
 	public Thread newThread(Runnable runnable) {
 		Thread thread = _threadFactory.newThread(runnable);
+
 		thread.setUncaughtExceptionHandler(recordUncaughtExceptionHandler);
+
 		return thread;
 	}
 
-	private final RecordUncaughtExceptionHandler
-		recordUncaughtExceptionHandler = new RecordUncaughtExceptionHandler();
 	private final ThreadFactory _threadFactory =
 		Executors.defaultThreadFactory();
+	private final RecordUncaughtExceptionHandler
+		recordUncaughtExceptionHandler = new RecordUncaughtExceptionHandler();
 
 }

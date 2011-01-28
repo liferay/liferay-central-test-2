@@ -24,56 +24,47 @@ import java.util.concurrent.TimeUnit;
  */
 public class DiscardPolicyTest extends TestCase {
 
-	/**
-	 * On a shutdown executor
-	 */
 	public void testDiscardPolicy1() {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-			new DiscardPolicy(),
-			Executors.defaultThreadFactory(),
+			new DiscardPolicy(), Executors.defaultThreadFactory(),
 			new ThreadPoolHandlerAdapter());
+
 		threadPoolExecutor.shutdown();
 
 		MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 		threadPoolExecutor.execute(markerBlockingJob);
 
 		assertFalse(markerBlockingJob.isEnded());
 	}
 
-	/**
-	 * On an overloaded executor
-	 */
 	public void testDiscardPolicy2() throws InterruptedException {
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-			new DiscardPolicy(),
-			Executors.defaultThreadFactory(),
+			new DiscardPolicy(), Executors.defaultThreadFactory(),
 			new ThreadPoolHandlerAdapter());
+
 		try {
 			MarkerBlockingJob markerBlockingJob1 = new MarkerBlockingJob(true);
 			MarkerBlockingJob markerBlockingJob2 = new MarkerBlockingJob(true);
 			MarkerBlockingJob markerBlockingJob3 = new MarkerBlockingJob();
 
-			// Consume the single pool thread
 			threadPoolExecutor.execute(markerBlockingJob1);
 
 			markerBlockingJob1.waitUntilBlock();
 
-			// Consume the single _taskQueue slot
 			threadPoolExecutor.execute(markerBlockingJob2);
 
 			assertEquals(1, threadPoolExecutor.getActiveCount());
 			assertEquals(1, threadPoolExecutor.getPendingTaskCount());
 
-			// Add the discard job
 			threadPoolExecutor.execute(markerBlockingJob3);
 
 			assertFalse(markerBlockingJob3.isStarted());
 			assertEquals(1, threadPoolExecutor.getActiveCount());
 			assertEquals(1, threadPoolExecutor.getPendingTaskCount());
 
-			// Unblock markerBlockingJob1 and wait markerBlockingJob2 start
 			markerBlockingJob1.unBlock();
 			markerBlockingJob2.waitUntilBlock();
 
@@ -81,9 +72,9 @@ public class DiscardPolicyTest extends TestCase {
 			assertEquals(1, threadPoolExecutor.getActiveCount());
 			assertEquals(0, threadPoolExecutor.getPendingTaskCount());
 
-			// Unblock markerBlockingJob2
 			markerBlockingJob2.unBlock();
-			TestUtil.waitUtilEnded(markerBlockingJob2);
+
+			TestUtil.waitUntilEnded(markerBlockingJob2);
 
 			assertEquals(0, threadPoolExecutor.getActiveCount());
 			assertEquals(0, threadPoolExecutor.getPendingTaskCount());

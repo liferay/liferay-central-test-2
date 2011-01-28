@@ -19,50 +19,50 @@ package com.liferay.portal.kernel.concurrent;
  */
 public class MarkerThreadPoolHandler implements ThreadPoolHandler {
 
-	public void beforeThreadStart(Thread thread) {
-		_beforeThreadStart = true;
-	}
-
-	public void beforeThreadEnd(Thread thread) {
-		_beforeThreadEnd = true;
+	public void afterExecute(Runnable runnable, Throwable throwable) {
+		_afterExecute = true;
 	}
 
 	public void beforeExecute(Thread thread, Runnable runnable) {
 		_beforeExecute = true;
 	}
 
-	public void afterExecute(Runnable runnable, Throwable throwable) {
-		_afterExecute = true;
+	public void beforeThreadEnd(Thread thread) {
+		_beforeThreadEnd = true;
 	}
 
-	public void terminated() {
-		_terminated = true;
-	}
-
-	public boolean isBeforeThreadStartRan() {
-		return _beforeThreadStart;
-	}
-
-	public boolean isBeforeThreadEndRan() {
-		return _beforeThreadEnd;
-	}
-
-	public boolean isBeforeExecuteRan() {
-		return _beforeExecute;
+	public void beforeThreadStart(Thread thread) {
+		_beforeThreadStart = true;
 	}
 
 	public boolean isAfterExecuteRan() {
 		return _afterExecute;
 	}
 
+	public boolean isBeforeExecuteRan() {
+		return _beforeExecute;
+	}
+
+	public boolean isBeforeThreadEndRan() {
+		return _beforeThreadEnd;
+	}
+
+	public boolean isBeforeThreadStartRan() {
+		return _beforeThreadStart;
+	}
+
 	public boolean isTerminatedRan() {
 		return _terminated;
 	}
 
-	private volatile boolean _beforeThreadStart;
-	private volatile boolean _beforeThreadEnd;
-	private volatile boolean _beforeExecute;
+	public void terminated() {
+		_terminated = true;
+	}
+
 	private volatile boolean _afterExecute;
+	private volatile boolean _beforeExecute;
+	private volatile boolean _beforeThreadEnd;
+	private volatile boolean _beforeThreadStart;
 	private volatile boolean _terminated;
 
 }

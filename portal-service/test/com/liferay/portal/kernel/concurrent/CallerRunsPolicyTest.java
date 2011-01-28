@@ -24,20 +24,19 @@ import java.util.concurrent.TimeUnit;
  */
 public class CallerRunsPolicyTest extends TestCase {
 
-	/**
-	 * On a shutdown executor
-	 */
 	public void testCallerRunsPolicy1() {
 		MarkerThreadPoolHandler markerThreadPoolHandler =
 			new MarkerThreadPoolHandler();
+
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 2, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 3,
-			new CallerRunsPolicy(),
-			Executors.defaultThreadFactory(),
+			new CallerRunsPolicy(), Executors.defaultThreadFactory(),
 			markerThreadPoolHandler);
+
 		threadPoolExecutor.shutdown();
 
 		MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
+
 		threadPoolExecutor.execute(markerBlockingJob);
 
 		assertFalse(markerBlockingJob.isStarted());
@@ -45,22 +44,17 @@ public class CallerRunsPolicyTest extends TestCase {
 		assertFalse(markerThreadPoolHandler.isAfterExecuteRan());
 	}
 
-	/**
-	 * On an overloaded executor
-	 */
-	public void testCallerRunsPolicy2() throws InterruptedException {
+	public void testCallerRunsPolicy2() {
 		MarkerThreadPoolHandler markerThreadPoolHandler =
 			new MarkerThreadPoolHandler();
+
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-			new CallerRunsPolicy(),
-			Executors.defaultThreadFactory(),
+			new CallerRunsPolicy(), Executors.defaultThreadFactory(),
 			markerThreadPoolHandler);
 
 		try {
-			// Consume the single pool thread
 			threadPoolExecutor.execute(new MarkerBlockingJob(true));
-			// Consume the single _taskQueue slot
 			threadPoolExecutor.execute(new MarkerBlockingJob(true));
 
 			MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob();
@@ -76,32 +70,30 @@ public class CallerRunsPolicyTest extends TestCase {
 		}
 	}
 
-	/**
-	 * On an overloaded executor and throw exception
-	 */
-	public void testCallerRunsPolicy3() throws InterruptedException {
+	public void testCallerRunsPolicy3() {
 		MarkerThreadPoolHandler markerThreadPoolHandler =
 			new MarkerThreadPoolHandler();
+
 		ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
 			1, 1, TestUtil.KEEPALIVE_TIME, TimeUnit.MILLISECONDS, true, 1,
-			new CallerRunsPolicy(),
-			Executors.defaultThreadFactory(),
+			new CallerRunsPolicy(), Executors.defaultThreadFactory(),
 			markerThreadPoolHandler);
 
 		try {
-			// Consume the single pool thread
 			threadPoolExecutor.execute(new MarkerBlockingJob(true));
-			// Consume the single _taskQueue slot
 			threadPoolExecutor.execute(new MarkerBlockingJob(true));
 
-			MarkerBlockingJob markerBlockingJob =
-				new MarkerBlockingJob(false, true);
+			MarkerBlockingJob markerBlockingJob = new MarkerBlockingJob(
+				false, true);
+
 			try {
 				threadPoolExecutor.execute(markerBlockingJob);
+
 				fail();
 			}
 			catch (RuntimeException re) {
 			}
+
 			assertTrue(markerBlockingJob.isStarted());
 			assertFalse(markerBlockingJob.isEnded());
 			assertTrue(markerThreadPoolHandler.isBeforeExecuteRan());

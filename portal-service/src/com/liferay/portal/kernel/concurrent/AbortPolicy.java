@@ -23,6 +23,7 @@ public class AbortPolicy implements RejectedExecutionHandler {
 
 	public void rejectedExecution(
 		Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
+
 		throw new RejectedExecutionException();
 	}
 

@@ -23,13 +23,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class RecordRejectedExecutionHandler
 	implements RejectedExecutionHandler {
 
-	public void rejectedExecution(
-		Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
-		_rejectedList.add(runnable);
-	}
-
 	public List<Runnable> getRejectedList() {
 		return _rejectedList;
+	}
+
+	public void rejectedExecution(
+		Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
+
+		_rejectedList.add(runnable);
 	}
 
 	private List<Runnable> _rejectedList =

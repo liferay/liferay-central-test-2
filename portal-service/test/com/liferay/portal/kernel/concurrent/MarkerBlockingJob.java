@@ -54,16 +54,18 @@ public class MarkerBlockingJob implements Runnable {
 		_runThread = Thread.currentThread();
 
 		if (_started) {
-			throw new IllegalStateException("This job has ran.");
+			throw new IllegalStateException("Job already started");
 		}
+
 		_started = true;
 
 		if (_blocking) {
 			_waitBlockingLatch.countDown();
+
 			try {
 				_blockingLatch.await();
 			}
-			catch (InterruptedException ex) {
+			catch (InterruptedException ie) {
 				_interrupted = true;
 			}
 		}
@@ -73,6 +75,7 @@ public class MarkerBlockingJob implements Runnable {
 		}
 
 		_ended = true;
+
 		_endedLatch.countDown();
 	}
 
@@ -82,8 +85,9 @@ public class MarkerBlockingJob implements Runnable {
 
 	public void waitUntilBlock() throws InterruptedException {
 		if (!_blocking) {
-			throw new IllegalStateException("Blocking is not enabled.");
+			throw new IllegalStateException("Blocking is not enabled");
 		}
+
 		_waitBlockingLatch.await();
 	}
 

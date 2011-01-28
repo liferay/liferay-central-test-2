@@ -21,65 +21,66 @@ import java.util.concurrent.TimeUnit;
  */
 public class TestUtil {
 
+	public static final long KEEPALIVE_TIME = 50;
+
+	public static final long KEEPALIVE_WAIT = KEEPALIVE_TIME * 2;
+
+	public static final long LONG_WAIT = 30 * 1000;
+
+	public static final long SHORT_WAIT = 10;
+
 	public static void closePool(ThreadPoolExecutor threadPoolExecutor) {
 		closePool(threadPoolExecutor, false);
 	}
 
 	public static void closePool(
-		ThreadPoolExecutor threadPoolExecutor, boolean forciblely) {
+		ThreadPoolExecutor threadPoolExecutor, boolean force) {
+
 		try {
-			if (forciblely) {
+			if (force) {
 				threadPoolExecutor.shutdownNow();
 			}
 			else {
 				threadPoolExecutor.shutdown();
 			}
+
 			if (!threadPoolExecutor.awaitTermination(
-				LONG_WAIT, TimeUnit.MILLISECONDS)) {
-				throw new IllegalStateException(
-					"Failed to terminate ThreadPoolExecutor.");
+					LONG_WAIT, TimeUnit.MILLISECONDS)) {
+
+				throw new IllegalStateException();
 			}
+
 			if (!threadPoolExecutor.isTerminated()) {
-				throw new IllegalStateException(
-					"awaitTermination failed to transfer ThreadPoolExecutor to "
-						+ "terminated state.");
+				throw new IllegalStateException();
 			}
 		}
 		catch (InterruptedException ie) {
-			throw new RuntimeException("Failed to close ThreadPoolExecutor");
+			throw new RuntimeException();
 		}
 	}
 
-	public static void unBlock(MarkerBlockingJob... markerBlockingJobs)
-		throws InterruptedException {
+	public static void unblock(MarkerBlockingJob... markerBlockingJobs) {
 		for (MarkerBlockingJob markerBlockingJob : markerBlockingJobs) {
 			markerBlockingJob.unBlock();
 		}
 	}
 
-	public static void waitUtilBlock(MarkerBlockingJob... markerBlockingJobs)
+	public static void waitUntilBlock(MarkerBlockingJob... markerBlockingJobs)
 		throws InterruptedException {
+
 		for (MarkerBlockingJob markerBlockingJob : markerBlockingJobs) {
 			markerBlockingJob.waitUntilBlock();
 		}
 	}
 
-	public static void waitUtilEnded(MarkerBlockingJob... markerBlockingJobs)
+	public static void waitUntilEnded(MarkerBlockingJob... markerBlockingJobs)
 		throws InterruptedException {
+
 		for (MarkerBlockingJob markerBlockingJob : markerBlockingJobs) {
 			markerBlockingJob.waitUntilEnded();
 		}
 
 		Thread.sleep(SHORT_WAIT);
 	}
-
-	// 50 milliseconds
-	public static final long KEEPALIVE_TIME = 50;
-	// 100 milliseconds
-	public static final long KEEPALIVE_WAIT = KEEPALIVE_TIME * 2;
-	// 30 seconds, 30000 milliseconds
-	public static final long LONG_WAIT = 30 * 1000;
-	// 10 milliseconds
-	public static final long SHORT_WAIT = 10;
 
 }

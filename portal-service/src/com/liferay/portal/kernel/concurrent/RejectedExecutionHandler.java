@@ -19,7 +19,7 @@ package com.liferay.portal.kernel.concurrent;
  */
 public interface RejectedExecutionHandler {
 
-	void rejectedExecution(
+	public void rejectedExecution(
 		Runnable runnable, ThreadPoolExecutor threadPoolExecutor);
 
 }

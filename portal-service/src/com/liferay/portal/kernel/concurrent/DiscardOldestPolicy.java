@@ -21,10 +21,16 @@ public class DiscardOldestPolicy implements RejectedExecutionHandler {
 
 	public void rejectedExecution(
 		Runnable runnable, ThreadPoolExecutor threadPoolExecutor) {
-		if (!threadPoolExecutor.isShutdown()) {
-			threadPoolExecutor.getTaskQueue().poll();
-			threadPoolExecutor.execute(runnable);
+
+		if (threadPoolExecutor.isShutdown()) {
+			return;
 		}
+
+		TaskQueue<Runnable> taskQueue = threadPoolExecutor.getTaskQueue();
+
+		taskQueue.poll();
+
+		threadPoolExecutor.execute(runnable);
 	}
 
 }
