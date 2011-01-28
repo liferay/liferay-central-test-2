@@ -354,48 +354,37 @@ public class TaskQueueTest extends TestCase {
 		assertTrue(taskQueue.offer(object, new boolean[1]));
 		assertSame(object, taskQueue.take());
 
-		//long startTime = System.currentTimeMillis();
-
-		Thread thread = new Thread() {
+		Thread takeThread = new Thread() {
 
 			public void run() {
 				try {
-					Thread.sleep(100);
+					for (int i = 0; i < 10; i++) {
+						assertEquals(i, taskQueue.take());
+					}
+				}
+				catch (InterruptedException ie) {
+					fail();
+				}
+				try {
+					taskQueue.take();
+					fail();
 				}
 				catch (InterruptedException ie) {
 				}
-
-				assertTrue(taskQueue.offer(object, new boolean[1]));
 			}
 
 		};
 
-		thread.start();
+		takeThread.start();
 
-		assertSame(object, taskQueue.take());
-		//assertTrue(System.currentTimeMillis() - startTime > 100);
+		for (int i = 0; i < 10; i++) {
+			assertTrue(taskQueue.offer(i, new boolean[1]));
+		}
 
-		//startTime = System.currentTimeMillis();
+		Thread.sleep(TestUtil.SHORT_WAIT);
 
-		thread = new Thread() {
-
-			public void run() {
-				try {
-					Thread.sleep(100);
-				}
-				catch (InterruptedException ex) {
-				}
-
-				assertTrue(taskQueue.offer(object, new boolean[1]));
-				assertTrue(taskQueue.offer(object, new boolean[1]));
-			}
-
-		};
-
-		thread.start();
-
-		assertSame(object, taskQueue.take());
-		//assertTrue(System.currentTimeMillis() - startTime > 100);
+		takeThread.interrupt();
+		takeThread.join();
 	}
 
 }
