@@ -354,7 +354,7 @@ public class TaskQueueTest extends TestCase {
 		assertTrue(taskQueue.offer(object, new boolean[1]));
 		assertSame(object, taskQueue.take());
 
-		Thread takeThread = new Thread() {
+		Thread thread = new Thread() {
 
 			public void run() {
 				try {
@@ -375,7 +375,7 @@ public class TaskQueueTest extends TestCase {
 
 		};
 
-		takeThread.start();
+		thread.start();
 
 		for (int i = 0; i < 10; i++) {
 			assertTrue(taskQueue.offer(i, new boolean[1]));
@@ -383,8 +383,8 @@ public class TaskQueueTest extends TestCase {
 
 		Thread.sleep(TestUtil.SHORT_WAIT);
 
-		takeThread.interrupt();
-		takeThread.join();
+		thread.interrupt();
+		thread.join();
 	}
 
 }
