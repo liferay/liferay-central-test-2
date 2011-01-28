@@ -114,6 +114,7 @@ public class JournalIndexer extends BaseIndexer {
 		long groupId = getParentGroupId(article.getGroupId());
 		long scopeGroupId = article.getGroupId();
 		long userId = article.getUserId();
+		Date modifiedDate = article.getModifiedDate();
 		long resourcePrimKey = article.getResourcePrimKey();
 		String articleId = article.getArticleId();
 		double version = article.getVersion();
@@ -144,7 +145,7 @@ public class JournalIndexer extends BaseIndexer {
 		}
 
 		String templateId = article.getTemplateId();
-		Date modifiedDate = article.getModifiedDate();
+		Date displayDate = article.getDisplayDate();
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			JournalArticle.class.getName(), resourcePrimKey);
@@ -185,6 +186,7 @@ public class JournalIndexer extends BaseIndexer {
 
 		document.addKeyword("structureId", structureId);
 		document.addKeyword("templateId", templateId);
+		document.addDate("displayDate", displayDate);
 
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
