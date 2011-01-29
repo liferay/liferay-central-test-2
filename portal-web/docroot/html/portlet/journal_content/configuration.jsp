@@ -248,6 +248,9 @@ type = ParamUtil.getString(request, "type", type);
 
 			<aui:input name="preferences--enableCommentRatings--" type="checkbox" value="<%= enableCommentRatings %>" />
 		</c:if>
+
+		<aui:input name="preferences--disableViewCountIncrement--" type="checkbox" value="<%= disableViewCountIncrement %>" />
+
 	</aui:fieldset>
 
 	<aui:button-row>

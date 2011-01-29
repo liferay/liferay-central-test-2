@@ -49,7 +49,9 @@ try {
 		<c:when test="<%= ((articleDisplay != null) && !expired) %>">
 
 			<%
-			AssetEntryServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
+			if (!disableViewCountIncrement) {
+				AssetEntryServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
+			}
 
 			RuntimeLogic portletLogic = new PortletLogic(application, request, response, renderRequest, renderResponse);
 			RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);

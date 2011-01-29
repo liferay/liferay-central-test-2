@@ -69,6 +69,7 @@ boolean enablePrint = GetterUtil.getBoolean(preferences.getValue("enablePrint", 
 boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enableRatings", null));
 boolean enableComments = PropsValues.JOURNAL_ARTICLE_COMMENTS_ENABLED && GetterUtil.getBoolean(preferences.getValue("enableComments", null));
 boolean enableCommentRatings = GetterUtil.getBoolean(preferences.getValue("enableCommentRatings", null));
+boolean disableViewCountIncrement = GetterUtil.getBoolean(preferences.getValue("disableViewCountIncrement", null));
 
 String[] conversions = DocumentConversionUtil.getConversions("html");
 
