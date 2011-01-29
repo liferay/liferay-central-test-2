@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutSetBranch;
@@ -81,7 +82,7 @@ public class LayoutRevisionHandler implements InvocationHandler {
 				}
 
 				return Proxy.newProxyInstance(
-					Layout.class.getClassLoader(),
+					PortalClassLoaderUtil.getClassLoader(),
 					new Class[] {Layout.class},
 					new LayoutRevisionHandler(_layout, _layoutRevision, null));
 			}
