@@ -49,7 +49,7 @@ try {
 		<c:when test="<%= ((articleDisplay != null) && !expired) %>">
 
 			<%
-			if (!disableViewCountIncrement) {
+			if (enableViewCountIncrement) {
 				AssetEntryServiceUtil.incrementViewCounter(JournalArticle.class.getName(), articleDisplay.getResourcePrimKey());
 			}
 
