@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -26,6 +26,7 @@ import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextThreadLocal;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -39,23 +40,10 @@ import java.util.Set;
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */
-public class LayoutRevisionHandler implements InvocationHandler {
+public class LayoutStagingHandler implements InvocationHandler {
 
-	public LayoutRevisionHandler(
-		Layout layout, LayoutRevision layoutRevision,
-		ServiceContext serviceContext) {
-
-		_layout = layout;
-
-		try {
-			_layoutRevision = _getLayoutRevision(
-				layout, layoutRevision, serviceContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new IllegalStateException();
-		}
+	public LayoutStagingHandler(Layout layout) {
+		this(layout, null);
 	}
 
 	public Layout getLayout() {
@@ -81,10 +69,7 @@ public class LayoutRevisionHandler implements InvocationHandler {
 					return this;
 				}
 
-				return Proxy.newProxyInstance(
-					PortalClassLoaderUtil.getClassLoader(),
-					new Class[] {Layout.class},
-					new LayoutRevisionHandler(_layout, _layoutRevision, null));
+				return _toEscapedModel();
 			}
 
 			Object bean = _layout;
@@ -100,18 +85,31 @@ public class LayoutRevisionHandler implements InvocationHandler {
 		}
 	}
 
+	private LayoutStagingHandler(
+		Layout layout, LayoutRevision layoutRevision) {
+
+		_layout = layout;
+
+		try {
+			_layoutRevision = _getLayoutRevision(layout, layoutRevision);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new IllegalStateException();
+		}
+	}
+
 	private LayoutRevision _getLayoutRevision(
-			Layout layout, LayoutRevision layoutRevision,
-			ServiceContext serviceContext)
+			Layout layout, LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
 
 		if (layoutRevision != null) {
 			return layoutRevision;
 		}
 
-		if (serviceContext == null) {
-			throw new IllegalArgumentException("Service context is null");
-		}
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
 
 		long layoutRevisionId = ParamUtil.getLong(
 			serviceContext, "layoutRevisionId");
@@ -137,8 +135,16 @@ public class LayoutRevisionHandler implements InvocationHandler {
 			layoutSetBranch.getLayoutSetBranchId(), layout.getPlid(), true);
 	}
 
+	private Object _toEscapedModel() {
+		return Proxy.newProxyInstance(
+			PortalClassLoaderUtil.getClassLoader(),
+			new Class[] {Layout.class},
+			new LayoutStagingHandler(
+				_layout.toEscapedModel(), _layoutRevision.toEscapedModel()));
+	}
+
 	private static final Log _log = LogFactoryUtil.getLog(
-		LayoutRevisionHandler.class);
+		LayoutStagingHandler.class);
 
 	private static Set<String> _layoutRevisionMethodNames =
 		new HashSet<String>();
