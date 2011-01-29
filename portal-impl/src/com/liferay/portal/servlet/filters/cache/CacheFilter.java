@@ -43,8 +43,10 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.upload.LiferayInputStream;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.filters.CacheResponseData;
@@ -352,7 +354,9 @@ public class CacheFilter extends BasePortalFilter {
 	protected boolean isCacheableResponse(
 		ByteBufferServletResponse byteBufferResponse) {
 
-		if (byteBufferResponse.getStatus() == HttpServletResponse.SC_OK) {
+		if ((byteBufferResponse.getStatus() == HttpServletResponse.SC_OK) &&
+			(byteBufferResponse.getBufferSize() < _THRESHOLD_SIZE)) {
+
 			return true;
 		}
 		else {
@@ -448,6 +452,9 @@ public class CacheFilter extends BasePortalFilter {
 	private static final int _PATTERN_LAYOUT = 1;
 
 	private static final int _PATTERN_RESOURCE = 2;
+
+	private static final int _THRESHOLD_SIZE = GetterUtil.getInteger(
+		PropsUtil.get(CacheFilter.class.getName() + ".threshold.size"));
 
 	private static Log _log = LogFactoryUtil.getLog(CacheFilter.class);
 
