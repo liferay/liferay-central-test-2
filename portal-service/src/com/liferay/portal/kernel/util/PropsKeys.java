@@ -223,6 +223,8 @@ public interface PropsKeys {
 
 	public static final String BUFFERED_INCREMENT_SERIAL_QUEUE_SIZE = "buffered.increment.serial.queue.size";
 
+	public static final String CACHE_CONTENT_THRESHOLD_SIZE = "cache.content.threshold.size";
+
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_BODY = "calendar.email.event.reminder.body";
 
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_ENABLED = "calendar.email.event.reminder.enabled";
