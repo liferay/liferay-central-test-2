@@ -6,7 +6,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.absoluteredirects.AbsoluteRedirectsFilter</filter-class>
 		<init-param>
 			<param-name>url-regex-ignore-pattern</param-name>
-			<param-value>^/html/.+\.(jpg|css|js|ico|png|gif|html)(\?.*)?$</param-value>
+			<param-value>^/html/.+\.(css|gif|html|ico|jpg|js|png)(\?.*)?$</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -14,7 +14,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.audit.AuditFilter</filter-class>
 		<init-param>
 			<param-name>url-regex-ignore-pattern</param-name>
-			<param-value>^/html/.+\.(jpg|css|js|ico|png|gif|html)(\?.*)?$</param-value>
+			<param-value>^/html/.+\.(css|gif|html|ico|jpg|js|png)(\?.*)?$</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -230,7 +230,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.threaddump.ThreadDumpFilter</filter-class>
 		<init-param>
 			<param-name>url-regex-ignore-pattern</param-name>
-			<param-value>^/html/.+\.(jpg|css|js|ico|png|gif|html)(\?.*)?$</param-value>
+			<param-value>^/html/.+\.(css|gif|html|ico|jpg|js|png)(\?.*)?$</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -238,7 +238,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.threadlocal.ThreadLocalFilter</filter-class>
 		<init-param>
 			<param-name>url-regex-ignore-pattern</param-name>
-			<param-value>^/html/.+\.(jpg|css|js|ico|png|gif|html)(\?.*)?$</param-value>
+			<param-value>^/html/.+\.(css|gif|html|ico|jpg|js|png)(\?.*)?$</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -246,7 +246,7 @@
 		<filter-class>com.liferay.portal.servlet.filters.virtualhost.VirtualHostFilter</filter-class>
 		<init-param>
 			<param-name>url-regex-ignore-pattern</param-name>
-			<param-value>^/html/.+\.(jpg|css|js|ico|png|gif|html)(\?.*)?$</param-value>
+			<param-value>^/html/.+\.(css|gif|html|ico|jpg|js|png)(\?.*)?$</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -262,7 +262,7 @@
 		</init-param>
 		<init-param>
 			<param-name>url-regex-ignore-pattern</param-name>
-			<param-value>^/html/.+\.(jpg|css|js|ico|png|gif|html)(\?.*)?$</param-value>
+			<param-value>^/html/.+\.(css|gif|html|ico|jpg|js|png)(\?.*)?$</param-value>
 		</init-param>
 	</filter>
 	<filter>
@@ -282,7 +282,7 @@
 		</init-param>
 		<init-param>
 			<param-name>url-regex-ignore-pattern</param-name>
-			<param-value>^/html/.+\.(jpg|css|js|ico|png|gif|html)(\?.*)?$</param-value>
+			<param-value>^/html/.+\.(css|gif|html|ico|jpg|js|png)(\?.*)?$</param-value>
 		</init-param>
 	</filter>
 	<filter>
