@@ -14,6 +14,9 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.kernel.concurrent.RejectedExecutionHandler;
+import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
+import com.liferay.portal.kernel.concurrent.ThreadPoolHandlerAdapter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
@@ -21,9 +24,6 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -86,11 +86,11 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		destinationStatistics.setLargestThreadCount(
 			_threadPoolExecutor.getLargestPoolSize());
 		destinationStatistics.setMaxThreadPoolSize(
-			_threadPoolExecutor.getMaximumPoolSize());
+			_threadPoolExecutor.getMaxPoolSize());
 		destinationStatistics.setMinThreadPoolSize(
 			_threadPoolExecutor.getCorePoolSize());
 		destinationStatistics.setPendingMessageCount(
-			_threadPoolExecutor.getQueue().size());
+			_threadPoolExecutor.getPendingTaskCount());
 		destinationStatistics.setSentMessageCount(
 			_threadPoolExecutor.getCompletedTaskCount());
 
@@ -113,18 +113,16 @@ public abstract class BaseAsyncDestination extends BaseDestination {
 		if ((_threadPoolExecutor == null) || _threadPoolExecutor.isShutdown()) {
 			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
-			_threadPoolExecutor = new ThreadPoolExecutor(
-				_workersCoreSize, _workersMaxSize, 0L, TimeUnit.MILLISECONDS,
-				new LinkedBlockingQueue<Runnable>(_maximumQueueSize),
-				new NamedThreadFactory(
-					getName(), Thread.NORM_PRIORITY, classLoader));
-
 			if (_rejectedExecutionHandler == null) {
 				_rejectedExecutionHandler = createRejectionExecutionHandler();
 			}
 
-			_threadPoolExecutor.setRejectedExecutionHandler(
-				_rejectedExecutionHandler);
+			_threadPoolExecutor = new ThreadPoolExecutor(
+				_workersCoreSize, _workersMaxSize, 60L, TimeUnit.SECONDS, false,
+				_maximumQueueSize, _rejectedExecutionHandler,
+				new NamedThreadFactory(
+					getName(), Thread.NORM_PRIORITY, classLoader),
+				new ThreadPoolHandlerAdapter());
 		}
 	}
 

@@ -15,13 +15,12 @@
 package com.liferay.portal.increment;
 
 import com.liferay.portal.kernel.concurrent.BatchablePipe;
+import com.liferay.portal.kernel.concurrent.RejectedExecutionHandler;
+import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageRunnable;
-
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @author Shuyang Zhou
