@@ -294,6 +294,7 @@
 	<#assign dir_include = "/html" />
 </#if>
 
+<#assign body_top_include = "${dir_include}/common/themes/body_top.jsp" />
 <#assign bottom_include = "${dir_include}/common/themes/bottom.jsp" />
 <#assign bottom_ext_include = bottom_include/>
 <#assign content_include = "${dir_include}${tilesContent}" />
