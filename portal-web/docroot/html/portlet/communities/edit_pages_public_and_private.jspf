@@ -49,121 +49,114 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 	</c:if>
 </liferay-ui:error>
 
-<c:choose>
-	<c:when test="<%= liveGroup.isStaged() %>">
-		<div class="portlet-msg-alert">
-			<liferay-ui:message key="the-staging-environment-is-activated-changes-have-to-be-published-to-make-them-available-to-end-users" />
-		</div>
+<c:if test="<%= (pagesCount > 0) && (liveGroup.isStaged() || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup() || portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES)) %>">
+	<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var groupWindow = window.open('<%= viewPagesURL %>'); void(''); groupWindow.focus();" />
+</c:if>
 
-		<c:if test="<%= !liveGroup.isStagedRemotely() && (pagesCount > 0) %>">
-			<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var stagingGroupWindow = window.open('<%= viewPagesURL %>'); void(''); stagingGroupWindow.focus();" />
-		</c:if>
+<c:if test="<%= liveGroup.isStaged() %>">
+	<div class="portlet-msg-alert">
+		<liferay-ui:message key="the-staging-environment-is-activated-changes-have-to-be-published-to-make-them-available-to-end-users" />
+	</div>
 
-		<c:choose>
-			<c:when test="<%= workflowEnabled %>">
-				<c:if test="<%= (selPlid > 0) && (proposal == null) %>">
-					<portlet:actionURL var="proposalURL">
-						<portlet:param name="struts_action" value="/communities/edit_proposal" />
-						<portlet:param name="tabs1" value="<%= tabs1 %>" />
-						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
-						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
-						<portlet:param name="className" value="<%= Layout.class.getName() %>" />
-						<portlet:param name="classPK" value="<%= String.valueOf(selPlid) %>" />
-					</portlet:actionURL>
+	<c:choose>
+		<c:when test="<%= workflowEnabled %>">
+			<c:if test="<%= (selPlid > 0) && (proposal == null) %>">
+				<portlet:actionURL var="proposalURL">
+					<portlet:param name="struts_action" value="/communities/edit_proposal" />
+					<portlet:param name="tabs1" value="<%= tabs1 %>" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+					<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
+					<portlet:param name="className" value="<%= Layout.class.getName() %>" />
+					<portlet:param name="classPK" value="<%= String.valueOf(selPlid) %>" />
+				</portlet:actionURL>
 
-					<%
-					JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
+				<%
+				JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
 
-					Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
+				Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
 
-					LinkedHashMap userParams = new LinkedHashMap();
+				LinkedHashMap userParams = new LinkedHashMap();
 
-					if (liveGroup.isOrganization()) {
-						userParams.put("usersOrgs", new Long(liveGroup.getOrganizationId()));
+				if (liveGroup.isOrganization()) {
+					userParams.put("usersOrgs", new Long(liveGroup.getOrganizationId()));
+				}
+				else {
+					userParams.put("usersGroups", new Long(liveGroupId));
+				}
+
+				userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
+
+				List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+
+				if (reviewers.isEmpty()) {
+					if (liveGroup.isCommunity()) {
+						role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
 					}
 					else {
-						userParams.put("usersGroups", new Long(liveGroupId));
+						role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
 					}
 
 					userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
 
-					List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+					reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+				}
 
-					if (reviewers.isEmpty()) {
-						if (liveGroup.isCommunity()) {
-							role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
-						}
-						else {
-							role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
-						}
+				for (User reviewer : reviewers) {
+					JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
 
-						userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
+					jsonReviewer.put("userId", reviewer.getUserId());
+					jsonReviewer.put("fullName", reviewer.getFullName());
 
-						reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
-					}
+					jsonReviewers.put(jsonReviewer);
+				}
+				%>
 
-					for (User reviewer : reviewers) {
-						JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
+				<input type="button" value="<liferay-ui:message key="propose-publication" />" onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposalURL.toString().replace('"','\'') %>', namespace: '<portlet:namespace />', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
+			</c:if>
 
-						jsonReviewer.put("userId", reviewer.getUserId());
-						jsonReviewer.put("fullName", reviewer.getFullName());
+			<c:if test="<%= liveGroup.isStagedRemotely() && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
+				<input type="button" value="<liferay-ui:message key="publish-to-remote-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote-live") %>', url: '<%= publishToRemoteURL %>'});" />
+			</c:if>
+		</c:when>
+		<c:otherwise>
+			<c:if test="<%= !liveGroup.isStagedRemotely() %>">
+				<input type="button" value="<liferay-ui:message key="publish-to-live-now" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-live-now") %>', url: '<%= publishToLiveURL %>'});" />
 
-						jsonReviewers.put(jsonReviewer);
-					}
-					%>
+				<%
+				publishToLiveURL.setParameter("schedule", String.valueOf(true));
+				%>
 
-					<input type="button" value="<liferay-ui:message key="propose-publication" />" onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposalURL.toString().replace('"','\'') %>', namespace: '<portlet:namespace />', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
-				</c:if>
+				<input type="button" value="<liferay-ui:message key="schedule-publication-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "schedule-publication-to-live") %>', url: '<%= publishToLiveURL %>'});" />
+			</c:if>
 
-				<c:if test="<%= liveGroup.isStagedRemotely() && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
-					<input type="button" value="<liferay-ui:message key="publish-to-remote-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote-live") %>', url: '<%= publishToRemoteURL %>'});" />
-				</c:if>
-			</c:when>
-			<c:otherwise>
-				<c:if test="<%= !liveGroup.isStagedRemotely() %>">
-					<input type="button" value="<liferay-ui:message key="publish-to-live-now" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-live-now") %>', url: '<%= publishToLiveURL %>'});" />
+			<c:if test="<%= liveGroup.isStagedRemotely() %>">
+				<input type="button" value="<liferay-ui:message key="publish-to-remote-live-now" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote-live-now") %>', url: '<%= publishToRemoteURL %>'});" />
 
-					<%
-					publishToLiveURL.setParameter("schedule", String.valueOf(true));
-					%>
+				<%
+				publishToRemoteURL.setParameter("schedule", String.valueOf(true));
+				%>
 
-					<input type="button" value="<liferay-ui:message key="schedule-publication-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "schedule-publication-to-live") %>', url: '<%= publishToLiveURL %>'});" />
-				</c:if>
+				<input type="button" value="<liferay-ui:message key="schedule-publication-to-remote-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "schedule-publication-to-remote-live") %>', url: '<%= publishToRemoteURL %>'});" />
+			</c:if>
+		</c:otherwise>
+	</c:choose>
 
-				<c:if test="<%= liveGroup.isStagedRemotely() %>">
-					<input type="button" value="<liferay-ui:message key="publish-to-remote-live-now" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "publish-to-remote-live-now") %>', url: '<%= publishToRemoteURL %>'});" />
+	<c:if test="<%= !liveGroup.isStagedRemotely() %>">
+		<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
+			<portlet:param name="struts_action" value="/communities/publish_pages" />
+			<portlet:param name="<%= Constants.CMD %>" value="copy_from_live" />
+			<portlet:param name="tabs1" value="<%= tabs1 %>" />
+			<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+			<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
+		</portlet:renderURL>
 
-					<%
-					publishToRemoteURL.setParameter("schedule", String.valueOf(true));
-					%>
+		<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "copy-from-live") %>', url: '<%= importLayoutsURL %>'});" />
+	</c:if>
 
-					<input type="button" value="<liferay-ui:message key="schedule-publication-to-remote-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "schedule-publication-to-remote-live") %>', url: '<%= publishToRemoteURL %>'});" />
-				</c:if>
-			</c:otherwise>
-		</c:choose>
-
-		<c:if test="<%= !liveGroup.isStagedRemotely() %>">
-			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
-				<portlet:param name="struts_action" value="/communities/publish_pages" />
-				<portlet:param name="<%= Constants.CMD %>" value="copy_from_live" />
-				<portlet:param name="tabs1" value="<%= tabs1 %>" />
-				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
-				<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
-			</portlet:renderURL>
-
-			<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="Liferay.LayoutExporter.publishToLive({title: '<%= UnicodeLanguageUtil.get(pageContext, "copy-from-live") %>', url: '<%= importLayoutsURL %>'});" />
-		</c:if>
-
-		<br /><br />
-	</c:when>
-	<c:when test="<%= (portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES) || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup()) && (pagesCount > 0) %>">
-		<input type="button" value="<liferay-ui:message key="view-pages" />" onClick="var liveGroupWindow = window.open('<%= viewPagesURL %>'); void(''); liveGroupWindow.focus();" />
-
-		<br /><br />
-	</c:when>
-</c:choose>
+	<br /><br />
+</c:if>
 
 <table class="lfr-table" width="100%">
 <tr>
