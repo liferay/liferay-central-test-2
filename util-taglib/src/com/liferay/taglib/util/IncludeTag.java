@@ -66,10 +66,6 @@ import javax.servlet.jsp.tagext.DynamicAttributes;
 public class IncludeTag
 	extends ParamAndPropertyAncestorTagImpl implements DynamicAttributes {
 
-	public CustomAttributes getCustomAttributes() {
-		return _customAttributes;
-	}
-
 	public int doEndTag() throws JspException {
 		try {
 			ServletContext servletContext = getServletContext();
@@ -170,6 +166,10 @@ public class IncludeTag
 		}
 	}
 
+	public CustomAttributes getCustomAttributes() {
+		return _customAttributes;
+	}
+
 	public ServletContext getServletContext() {
 		ServletContext servletContext = super.getServletContext();
 
@@ -203,6 +203,19 @@ public class IncludeTag
 		}
 	}
 
+	public void runEndTag() throws JspException {
+		doEndTag();
+	}
+
+	public void runStartTag() throws JspException {
+		doStartTag();
+	}
+
+	public void runTag() throws JspException {
+		doStartTag();
+		doEndTag();
+	}
+
 	public void setCustomAttributes(CustomAttributes customAttributes) {
 		_customAttributes = customAttributes;
 	}
@@ -219,19 +232,6 @@ public class IncludeTag
 
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
-	}
-
-	public void runEndTag() throws JspException {
-		doEndTag();
-	}
-
-	public void runStartTag() throws JspException {
-		doStartTag();
-	}
-
-	public void runTag() throws JspException {
-		doStartTag();
-		doEndTag();
 	}
 
 	protected void callSetAttributes() {
