@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.concurrent;
 
 /**
- *
  * @author Shuyang Zhou
  */
 public interface ThreadPoolHandler {
