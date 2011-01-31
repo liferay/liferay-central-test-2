@@ -39,577 +39,6 @@ public class PortletDisplay implements Serializable {
 		}
 	}
 
-	public ThemeDisplay getThemeDisplay() {
-		return _themeDisplay;
-	}
-
-	public void setThemeDisplay(ThemeDisplay themeDisplay) {
-		_themeDisplay = themeDisplay;
-	}
-
-	public String getId() {
-		return _id;
-	}
-
-	public void setId(String id) {
-		_id = id;
-	}
-
-	public String getRootPortletId() {
-		return _rootPortletId;
-	}
-
-	public void setRootPortletId(String rootPortletId) {
-		_rootPortletId = rootPortletId;
-	}
-
-	public String getInstanceId() {
-		return _instanceId;
-	}
-
-	public void setInstanceId(String instanceId) {
-		_instanceId = instanceId;
-	}
-
-	public String getResourcePK() {
-		return _resourcePK;
-	}
-
-	public void setResourcePK(String resourcePK) {
-		_resourcePK = resourcePK;
-	}
-
-	public String getPortletName() {
-		return _portletName;
-	}
-
-	public void setPortletName(String portletName) {
-		_portletName = portletName;
-	}
-
-	public String getNamespace() {
-		return _namespace;
-	}
-
-	public void setNamespace(String namespace) {
-		_namespace = namespace;
-	}
-
-	public String getTitle() {
-		return _title;
-	}
-
-	public void setTitle(String title) {
-		title = HtmlUtil.escape(title);
-
-		_title = title;
-
-		// LEP-5317
-
-		if (Validator.isNull(_id)) {
-			setId(_themeDisplay.getTilesTitle());
-		}
-	}
-
-	public String getDescription() {
-		return _description;
-	}
-
-	public void setDescription(String description) {
-		description = HtmlUtil.escape(description);
-
-		_description = description;
-	}
-
-	public String getCustomCSSClassName() {
-		return _customCSSClassName;
-	}
-
-	public void setCustomCSSClassName(String customCSSClassName) {
-		_customCSSClassName = customCSSClassName;
-	}
-
-	public boolean isAccess() {
-		return _access;
-	}
-
-	public void setAccess(boolean access) {
-		_access = access;
-	}
-
-	public boolean isActive() {
-		return _active;
-	}
-
-	public void setActive(boolean active) {
-		_active = active;
-	}
-
-	public String getColumnId() {
-		return _columnId;
-	}
-
-	public void setColumnId(String columnId) {
-		_columnId = columnId;
-	}
-
-	public int getColumnPos() {
-		return _columnPos;
-	}
-
-	public void setColumnPos(int columnPos) {
-		_columnPos = columnPos;
-	}
-
-	public int getColumnCount() {
-		return _columnCount;
-	}
-
-	public void setColumnCount(int columnCount) {
-		_columnCount = columnCount;
-	}
-
-	public boolean isStateExclusive() {
-		return _stateExclusive;
-	}
-
-	public void setStateExclusive(boolean stateExclusive) {
-		_stateExclusive = stateExclusive;
-	}
-
-	public boolean isStateMax() {
-		return _stateMax;
-	}
-
-	public void setStateMax(boolean stateMax) {
-		_stateMax = stateMax;
-	}
-
-	public boolean isStateMin() {
-		return _stateMin;
-	}
-
-	public void setStateMin(boolean stateMin) {
-		_stateMin = stateMin;
-	}
-
-	public boolean isStateNormal() {
-		return _stateNormal;
-	}
-
-	public void setStateNormal(boolean stateNormal) {
-		_stateNormal = stateNormal;
-	}
-
-	public boolean isStatePopUp() {
-		return _statePopUp;
-	}
-
-	public void setStatePopUp(boolean statePopUp) {
-		_statePopUp = statePopUp;
-	}
-
-	public boolean isModeAbout() {
-		return _modeAbout;
-	}
-
-	public void setModeAbout(boolean modeAbout) {
-		_modeAbout = modeAbout;
-	}
-
-	public boolean isModeConfig() {
-		return _modeConfig;
-	}
-
-	public void setModeConfig(boolean modeConfig) {
-		_modeConfig = modeConfig;
-	}
-
-	public boolean isModeEdit() {
-		return _modeEdit;
-	}
-
-	public void setModeEdit(boolean modeEdit) {
-		_modeEdit = modeEdit;
-	}
-
-	public boolean isModeEditDefaults() {
-		return _modeEditDefaults;
-	}
-
-	public void setModeEditDefaults(boolean modeEditDefaults) {
-		_modeEditDefaults = modeEditDefaults;
-	}
-
-	public boolean isModeEditGuest() {
-		return _modeEditGuest;
-	}
-
-	public void setModeEditGuest(boolean modeEditGuest) {
-		_modeEditGuest = modeEditGuest;
-	}
-
-	public boolean isModeHelp() {
-		return _modeHelp;
-	}
-
-	public void setModeHelp(boolean modeHelp) {
-		_modeHelp = modeHelp;
-	}
-
-	public boolean isModePreview() {
-		return _modePreview;
-	}
-
-	public void setModePreview(boolean modePreview) {
-		_modePreview = modePreview;
-	}
-
-	public boolean isModePrint() {
-		return _modePrint;
-	}
-
-	public void setModePrint(boolean modePrint) {
-		_modePrint = modePrint;
-	}
-
-	public boolean isShowBackIcon() {
-		return _showBackIcon;
-	}
-
-	public void setShowBackIcon(boolean showBackIcon) {
-		_showBackIcon = showBackIcon;
-	}
-
-	public boolean isShowCloseIcon() {
-		return _showCloseIcon;
-	}
-
-	public void setShowCloseIcon(boolean showCloseIcon) {
-		_showCloseIcon = showCloseIcon;
-	}
-
-	public boolean isShowConfigurationIcon() {
-		return _showConfigurationIcon;
-	}
-
-	public void setShowConfigurationIcon(boolean showConfigurationIcon) {
-		_showConfigurationIcon = showConfigurationIcon;
-	}
-
-	public boolean isShowEditIcon() {
-		return _showEditIcon;
-	}
-
-	public void setShowEditIcon(boolean showEditIcon) {
-		_showEditIcon = showEditIcon;
-	}
-
-	public boolean isShowEditDefaultsIcon() {
-		return _showEditDefaultsIcon;
-	}
-
-	public void setShowEditDefaultsIcon(boolean showEditDefaultsIcon) {
-		_showEditDefaultsIcon = showEditDefaultsIcon;
-	}
-
-	public boolean isShowEditGuestIcon() {
-		return _showEditGuestIcon;
-	}
-
-	public void setShowEditGuestIcon(boolean showEditGuestIcon) {
-		_showEditGuestIcon = showEditGuestIcon;
-	}
-
-	public boolean isShowExportImportIcon() {
-		return _showExportImportIcon;
-	}
-
-	public void setShowExportImportIcon(boolean showExportImportIcon) {
-		_showExportImportIcon = showExportImportIcon;
-	}
-
-	public boolean isShowHelpIcon() {
-		return _showHelpIcon;
-	}
-
-	public void setShowHelpIcon(boolean showHelpIcon) {
-		_showHelpIcon = showHelpIcon;
-	}
-
-	public boolean isShowMaxIcon() {
-		return _showMaxIcon;
-	}
-
-	public void setShowMaxIcon(boolean showMaxIcon) {
-		_showMaxIcon = showMaxIcon;
-	}
-
-	public boolean isShowMinIcon() {
-		return _showMinIcon;
-	}
-
-	public void setShowMinIcon(boolean showMinIcon) {
-		_showMinIcon = showMinIcon;
-	}
-
-	public boolean isShowMoveIcon() {
-		return _showMoveIcon;
-	}
-
-	public void setShowMoveIcon(boolean showMoveIcon) {
-		_showMoveIcon = showMoveIcon;
-	}
-
-	public boolean isShowPortletCssIcon() {
-		return _showPortletCssIcon;
-	}
-
-	public void setShowPortletCssIcon(boolean showPortletCssIcon) {
-		_showPortletCssIcon = showPortletCssIcon;
-	}
-
-	public boolean isShowPortletIcon() {
-		return _showPortletIcon;
-	}
-
-	public void setShowPortletIcon(boolean showPortletIcon) {
-		_showPortletIcon = showPortletIcon;
-	}
-
-	public boolean isShowPrintIcon() {
-		return _showPrintIcon;
-	}
-
-	public void setShowPrintIcon(boolean showPrintIcon) {
-		_showPrintIcon = showPrintIcon;
-	}
-
-	public boolean isShowRefreshIcon() {
-		return _showRefreshIcon;
-	}
-
-	public void setShowRefreshIcon(boolean showRefreshIcon) {
-		_showRefreshIcon = showRefreshIcon;
-	}
-
-	public String getURLBack() {
-		return _urlBack;
-	}
-
-	public void setURLBack(String urlBack) {
-		_urlBack = urlBack;
-	}
-
-	public String getURLClose() {
-		return _urlClose;
-	}
-
-	public void setURLClose(String urlClose) {
-		_urlClose = urlClose;
-	}
-
-	public String getURLConfiguration() {
-		return _urlConfiguration;
-	}
-
-	public void setURLConfiguration(String urlConfiguration) {
-		_urlConfiguration = urlConfiguration;
-	}
-
-	public String getURLEdit() {
-		return _urlEdit;
-	}
-
-	public void setURLEdit(String urlEdit) {
-		_urlEdit = urlEdit;
-	}
-
-	public String getURLEditDefaults() {
-		return _urlEditDefaults;
-	}
-
-	public void setURLEditDefaults(String urlEditDefaults) {
-		_urlEditDefaults = urlEditDefaults;
-	}
-
-	public String getURLEditGuest() {
-		return _urlEditGuest;
-	}
-
-	public void setURLEditGuest(String urlEditGuest) {
-		_urlEditGuest = urlEditGuest;
-	}
-
-	public String getURLExportImport() {
-		return _urlExportImport;
-	}
-
-	public void setURLExportImport(String urlExportImport) {
-		_urlExportImport = urlExportImport;
-	}
-
-	public String getURLHelp() {
-		return _urlHelp;
-	}
-
-	public void setURLHelp(String urlHelp) {
-		_urlHelp = urlHelp;
-	}
-
-	public String getURLMax() {
-		return _urlMax;
-	}
-
-	public void setURLMax(String urlMax) {
-		_urlMax = urlMax;
-	}
-
-	public String getURLMin() {
-		return _urlMin;
-	}
-
-	public void setURLMin(String urlMin) {
-		_urlMin = urlMin;
-	}
-
-	public String getURLPortlet() {
-		return _urlPortlet;
-	}
-
-	public void setURLPortlet(String urlPortlet) {
-		_urlPortlet = urlPortlet;
-	}
-
-	public String getURLPortletCss() {
-		return _urlPortletCss;
-	}
-
-	public void setURLPortletCss(String urlPortletCss) {
-		_urlPortletCss = urlPortletCss;
-	}
-
-	public String getURLPrint() {
-		return _urlPrint;
-	}
-
-	public void setURLPrint(String urlPrint) {
-		_urlPrint = urlPrint;
-	}
-
-	public String getURLRefresh() {
-		return _urlRefresh;
-	}
-
-	public void setURLRefresh(String urlRefresh) {
-		_urlRefresh = urlRefresh;
-	}
-
-	public boolean isWebDAVEnabled() {
-		return _webDAVEnabled;
-	}
-
-	public void setWebDAVEnabled(boolean webDAVEnabled) {
-		_webDAVEnabled = webDAVEnabled;
-	}
-
-	public boolean isRestoreCurrentView() {
-		return _restoreCurrentView;
-	}
-
-	public void setRestoreCurrentView(boolean restoreCurrentView) {
-		_restoreCurrentView = restoreCurrentView;
-	}
-
-	public StringBundler getContent() {
-		return _content;
-	}
-
-	public void setContent(StringBundler content) {
-		if (content == null) {
-			_content = _blankStringBundler;
-		}
-		else {
-			_content = content;
-		}
-	}
-
-	public void writeContent(Writer writer) throws IOException {
-		_content.writeTo(writer);
-	}
-
-	public PortletPreferences getPortletSetup() {
-		return _portletSetup;
-	}
-
-	public void setPortletSetup(PortletPreferences portletSetup) {
-		_portletSetup = portletSetup;
-	}
-
-	public void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
-		_id = StringPool.BLANK;
-		_rootPortletId = StringPool.BLANK;
-		_instanceId = StringPool.BLANK;
-		_resourcePK = StringPool.BLANK;
-		_portletName = StringPool.BLANK;
-		_namespace = StringPool.BLANK;
-		_title = StringPool.BLANK;
-		_description = StringPool.BLANK;
-		_customCSSClassName = StringPool.BLANK;
-		_access = false;
-		_active = false;
-		_columnId = StringPool.BLANK;
-		_stateExclusive = false;
-		_stateMax = false;
-		_stateMin = false;
-		_stateNormal = false;
-		_statePopUp = false;
-		_modeAbout = false;
-		_modeConfig = false;
-		_modeEdit = false;
-		_modeEditDefaults = false;
-		_modeEditGuest = false;
-		_modeHelp = false;
-		_modePreview = false;
-		_modePrint = false;
-		_showBackIcon = false;
-		_showCloseIcon = false;
-		_showConfigurationIcon = false;
-		_showEditIcon = false;
-		_showEditDefaultsIcon = false;
-		_showEditGuestIcon = false;
-		_showHelpIcon = false;
-		_showMaxIcon = false;
-		_showMinIcon = false;
-		_showMoveIcon = false;
-		_showPortletCssIcon = false;
-		_showPortletIcon = false;
-		_showPrintIcon = false;
-		_showRefreshIcon = false;
-		_urlBack = StringPool.BLANK;
-		_urlClose = StringPool.BLANK;
-		_urlConfiguration = StringPool.BLANK;
-		_urlEdit = StringPool.BLANK;
-		_urlEditDefaults = StringPool.BLANK;
-		_urlEditGuest = StringPool.BLANK;
-		_urlExportImport = StringPool.BLANK;
-		_urlHelp = StringPool.BLANK;
-		_urlMax = StringPool.BLANK;
-		_urlMin = StringPool.BLANK;
-		_urlPortlet = StringPool.BLANK;
-		_urlPortletCss = StringPool.BLANK;
-		_urlPrint = StringPool.BLANK;
-		_urlRefresh = StringPool.BLANK;
-		_webDAVEnabled = false;
-		_restoreCurrentView = false;
-		_content.setIndex(0);
-		_portletSetup = null;
-	}
-
 	public void copyFrom(PortletDisplay master) {
 		_themeDisplay = master.getThemeDisplay();
 		_id = master.getId();
@@ -731,31 +160,592 @@ public class PortletDisplay implements Serializable {
 		slave.setPortletSetup(_portletSetup);
 	}
 
+	public int getColumnCount() {
+		return _columnCount;
+	}
+
+	public String getColumnId() {
+		return _columnId;
+	}
+
+	public int getColumnPos() {
+		return _columnPos;
+	}
+
+	public StringBundler getContent() {
+		return _content;
+	}
+
+	public String getCustomCSSClassName() {
+		return _customCSSClassName;
+	}
+
+	public String getDescription() {
+		return _description;
+	}
+
+	public String getId() {
+		return _id;
+	}
+
+	public String getInstanceId() {
+		return _instanceId;
+	}
+
+	public String getNamespace() {
+		return _namespace;
+	}
+
+	public String getPortletName() {
+		return _portletName;
+	}
+
+	public PortletPreferences getPortletSetup() {
+		return _portletSetup;
+	}
+
+	public String getResourcePK() {
+		return _resourcePK;
+	}
+
+	public String getRootPortletId() {
+		return _rootPortletId;
+	}
+
+	public ThemeDisplay getThemeDisplay() {
+		return _themeDisplay;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public String getURLBack() {
+		return _urlBack;
+	}
+
+	public String getURLClose() {
+		return _urlClose;
+	}
+
+	public String getURLConfiguration() {
+		return _urlConfiguration;
+	}
+
+	public String getURLEdit() {
+		return _urlEdit;
+	}
+
+	public String getURLEditDefaults() {
+		return _urlEditDefaults;
+	}
+
+	public String getURLEditGuest() {
+		return _urlEditGuest;
+	}
+
+	public String getURLExportImport() {
+		return _urlExportImport;
+	}
+
+	public String getURLHelp() {
+		return _urlHelp;
+	}
+
+	public String getURLMax() {
+		return _urlMax;
+	}
+
+	public String getURLMin() {
+		return _urlMin;
+	}
+
+	public String getURLPortlet() {
+		return _urlPortlet;
+	}
+
+	public String getURLPortletCss() {
+		return _urlPortletCss;
+	}
+
+	public String getURLPrint() {
+		return _urlPrint;
+	}
+
+	public String getURLRefresh() {
+		return _urlRefresh;
+	}
+
+	public boolean isAccess() {
+		return _access;
+	}
+
+	public boolean isActive() {
+		return _active;
+	}
+
+	public boolean isModeAbout() {
+		return _modeAbout;
+	}
+
+	public boolean isModeConfig() {
+		return _modeConfig;
+	}
+
+	public boolean isModeEdit() {
+		return _modeEdit;
+	}
+
+	public boolean isModeEditDefaults() {
+		return _modeEditDefaults;
+	}
+
+	public boolean isModeEditGuest() {
+		return _modeEditGuest;
+	}
+
+	public boolean isModeHelp() {
+		return _modeHelp;
+	}
+
+	public boolean isModePreview() {
+		return _modePreview;
+	}
+
+	public boolean isModePrint() {
+		return _modePrint;
+	}
+
+	public boolean isRestoreCurrentView() {
+		return _restoreCurrentView;
+	}
+
+	public boolean isShowBackIcon() {
+		return _showBackIcon;
+	}
+
+	public boolean isShowCloseIcon() {
+		return _showCloseIcon;
+	}
+
+	public boolean isShowConfigurationIcon() {
+		return _showConfigurationIcon;
+	}
+
+	public boolean isShowEditDefaultsIcon() {
+		return _showEditDefaultsIcon;
+	}
+
+	public boolean isShowEditGuestIcon() {
+		return _showEditGuestIcon;
+	}
+
+	public boolean isShowEditIcon() {
+		return _showEditIcon;
+	}
+
+	public boolean isShowExportImportIcon() {
+		return _showExportImportIcon;
+	}
+
+	public boolean isShowHelpIcon() {
+		return _showHelpIcon;
+	}
+
+	public boolean isShowMaxIcon() {
+		return _showMaxIcon;
+	}
+
+	public boolean isShowMinIcon() {
+		return _showMinIcon;
+	}
+
+	public boolean isShowMoveIcon() {
+		return _showMoveIcon;
+	}
+
+	public boolean isShowPortletCssIcon() {
+		return _showPortletCssIcon;
+	}
+
+	public boolean isShowPortletIcon() {
+		return _showPortletIcon;
+	}
+
+	public boolean isShowPrintIcon() {
+		return _showPrintIcon;
+	}
+
+	public boolean isShowRefreshIcon() {
+		return _showRefreshIcon;
+	}
+
+	public boolean isStateExclusive() {
+		return _stateExclusive;
+	}
+
+	public boolean isStateMax() {
+		return _stateMax;
+	}
+
+	public boolean isStateMin() {
+		return _stateMin;
+	}
+
+	public boolean isStateNormal() {
+		return _stateNormal;
+	}
+
+	public boolean isStatePopUp() {
+		return _statePopUp;
+	}
+
+	public boolean isWebDAVEnabled() {
+		return _webDAVEnabled;
+	}
+
+	public void recycle() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Recycling instance " + hashCode());
+		}
+
+		_id = StringPool.BLANK;
+		_rootPortletId = StringPool.BLANK;
+		_instanceId = StringPool.BLANK;
+		_resourcePK = StringPool.BLANK;
+		_portletName = StringPool.BLANK;
+		_namespace = StringPool.BLANK;
+		_title = StringPool.BLANK;
+		_description = StringPool.BLANK;
+		_customCSSClassName = StringPool.BLANK;
+		_access = false;
+		_active = false;
+		_columnId = StringPool.BLANK;
+		_stateExclusive = false;
+		_stateMax = false;
+		_stateMin = false;
+		_stateNormal = false;
+		_statePopUp = false;
+		_modeAbout = false;
+		_modeConfig = false;
+		_modeEdit = false;
+		_modeEditDefaults = false;
+		_modeEditGuest = false;
+		_modeHelp = false;
+		_modePreview = false;
+		_modePrint = false;
+		_showBackIcon = false;
+		_showCloseIcon = false;
+		_showConfigurationIcon = false;
+		_showEditIcon = false;
+		_showEditDefaultsIcon = false;
+		_showEditGuestIcon = false;
+		_showHelpIcon = false;
+		_showMaxIcon = false;
+		_showMinIcon = false;
+		_showMoveIcon = false;
+		_showPortletCssIcon = false;
+		_showPortletIcon = false;
+		_showPrintIcon = false;
+		_showRefreshIcon = false;
+		_urlBack = StringPool.BLANK;
+		_urlClose = StringPool.BLANK;
+		_urlConfiguration = StringPool.BLANK;
+		_urlEdit = StringPool.BLANK;
+		_urlEditDefaults = StringPool.BLANK;
+		_urlEditGuest = StringPool.BLANK;
+		_urlExportImport = StringPool.BLANK;
+		_urlHelp = StringPool.BLANK;
+		_urlMax = StringPool.BLANK;
+		_urlMin = StringPool.BLANK;
+		_urlPortlet = StringPool.BLANK;
+		_urlPortletCss = StringPool.BLANK;
+		_urlPrint = StringPool.BLANK;
+		_urlRefresh = StringPool.BLANK;
+		_webDAVEnabled = false;
+		_restoreCurrentView = false;
+		_content.setIndex(0);
+		_portletSetup = null;
+	}
+
+	public void setAccess(boolean access) {
+		_access = access;
+	}
+
+	public void setActive(boolean active) {
+		_active = active;
+	}
+
+	public void setColumnCount(int columnCount) {
+		_columnCount = columnCount;
+	}
+
+	public void setColumnId(String columnId) {
+		_columnId = columnId;
+	}
+
+	public void setColumnPos(int columnPos) {
+		_columnPos = columnPos;
+	}
+
+	public void setContent(StringBundler content) {
+		if (content == null) {
+			_content = _blankStringBundler;
+		}
+		else {
+			_content = content;
+		}
+	}
+
+	public void setCustomCSSClassName(String customCSSClassName) {
+		_customCSSClassName = customCSSClassName;
+	}
+
+	public void setDescription(String description) {
+		description = HtmlUtil.escape(description);
+
+		_description = description;
+	}
+
+	public void setId(String id) {
+		_id = id;
+	}
+
+	public void setInstanceId(String instanceId) {
+		_instanceId = instanceId;
+	}
+
+	public void setModeAbout(boolean modeAbout) {
+		_modeAbout = modeAbout;
+	}
+
+	public void setModeConfig(boolean modeConfig) {
+		_modeConfig = modeConfig;
+	}
+
+	public void setModeEdit(boolean modeEdit) {
+		_modeEdit = modeEdit;
+	}
+
+	public void setModeEditDefaults(boolean modeEditDefaults) {
+		_modeEditDefaults = modeEditDefaults;
+	}
+
+	public void setModeEditGuest(boolean modeEditGuest) {
+		_modeEditGuest = modeEditGuest;
+	}
+
+	public void setModeHelp(boolean modeHelp) {
+		_modeHelp = modeHelp;
+	}
+
+	public void setModePreview(boolean modePreview) {
+		_modePreview = modePreview;
+	}
+
+	public void setModePrint(boolean modePrint) {
+		_modePrint = modePrint;
+	}
+
+	public void setNamespace(String namespace) {
+		_namespace = namespace;
+	}
+
+	public void setPortletName(String portletName) {
+		_portletName = portletName;
+	}
+
+	public void setPortletSetup(PortletPreferences portletSetup) {
+		_portletSetup = portletSetup;
+	}
+
+	public void setResourcePK(String resourcePK) {
+		_resourcePK = resourcePK;
+	}
+
+	public void setRestoreCurrentView(boolean restoreCurrentView) {
+		_restoreCurrentView = restoreCurrentView;
+	}
+
+	public void setRootPortletId(String rootPortletId) {
+		_rootPortletId = rootPortletId;
+	}
+
+	public void setShowBackIcon(boolean showBackIcon) {
+		_showBackIcon = showBackIcon;
+	}
+
+	public void setShowCloseIcon(boolean showCloseIcon) {
+		_showCloseIcon = showCloseIcon;
+	}
+
+	public void setShowConfigurationIcon(boolean showConfigurationIcon) {
+		_showConfigurationIcon = showConfigurationIcon;
+	}
+
+	public void setShowEditDefaultsIcon(boolean showEditDefaultsIcon) {
+		_showEditDefaultsIcon = showEditDefaultsIcon;
+	}
+
+	public void setShowEditGuestIcon(boolean showEditGuestIcon) {
+		_showEditGuestIcon = showEditGuestIcon;
+	}
+
+	public void setShowEditIcon(boolean showEditIcon) {
+		_showEditIcon = showEditIcon;
+	}
+
+	public void setShowExportImportIcon(boolean showExportImportIcon) {
+		_showExportImportIcon = showExportImportIcon;
+	}
+
+	public void setShowHelpIcon(boolean showHelpIcon) {
+		_showHelpIcon = showHelpIcon;
+	}
+
+	public void setShowMaxIcon(boolean showMaxIcon) {
+		_showMaxIcon = showMaxIcon;
+	}
+
+	public void setShowMinIcon(boolean showMinIcon) {
+		_showMinIcon = showMinIcon;
+	}
+
+	public void setShowMoveIcon(boolean showMoveIcon) {
+		_showMoveIcon = showMoveIcon;
+	}
+
+	public void setShowPortletCssIcon(boolean showPortletCssIcon) {
+		_showPortletCssIcon = showPortletCssIcon;
+	}
+
+	public void setShowPortletIcon(boolean showPortletIcon) {
+		_showPortletIcon = showPortletIcon;
+	}
+
+	public void setShowPrintIcon(boolean showPrintIcon) {
+		_showPrintIcon = showPrintIcon;
+	}
+
+	public void setShowRefreshIcon(boolean showRefreshIcon) {
+		_showRefreshIcon = showRefreshIcon;
+	}
+
+	public void setStateExclusive(boolean stateExclusive) {
+		_stateExclusive = stateExclusive;
+	}
+
+	public void setStateMax(boolean stateMax) {
+		_stateMax = stateMax;
+	}
+
+	public void setStateMin(boolean stateMin) {
+		_stateMin = stateMin;
+	}
+
+	public void setStateNormal(boolean stateNormal) {
+		_stateNormal = stateNormal;
+	}
+
+	public void setStatePopUp(boolean statePopUp) {
+		_statePopUp = statePopUp;
+	}
+
+	public void setThemeDisplay(ThemeDisplay themeDisplay) {
+		_themeDisplay = themeDisplay;
+	}
+
+	public void setTitle(String title) {
+		title = HtmlUtil.escape(title);
+
+		_title = title;
+
+		// LEP-5317
+
+		if (Validator.isNull(_id)) {
+			setId(_themeDisplay.getTilesTitle());
+		}
+	}
+
+	public void setURLBack(String urlBack) {
+		_urlBack = urlBack;
+	}
+
+	public void setURLClose(String urlClose) {
+		_urlClose = urlClose;
+	}
+
+	public void setURLConfiguration(String urlConfiguration) {
+		_urlConfiguration = urlConfiguration;
+	}
+
+	public void setURLEdit(String urlEdit) {
+		_urlEdit = urlEdit;
+	}
+
+	public void setURLEditDefaults(String urlEditDefaults) {
+		_urlEditDefaults = urlEditDefaults;
+	}
+
+	public void setURLEditGuest(String urlEditGuest) {
+		_urlEditGuest = urlEditGuest;
+	}
+
+	public void setURLExportImport(String urlExportImport) {
+		_urlExportImport = urlExportImport;
+	}
+
+	public void setURLHelp(String urlHelp) {
+		_urlHelp = urlHelp;
+	}
+
+	public void setURLMax(String urlMax) {
+		_urlMax = urlMax;
+	}
+
+	public void setURLMin(String urlMin) {
+		_urlMin = urlMin;
+	}
+
+	public void setURLPortlet(String urlPortlet) {
+		_urlPortlet = urlPortlet;
+	}
+
+	public void setURLPortletCss(String urlPortletCss) {
+		_urlPortletCss = urlPortletCss;
+	}
+
+	public void setURLPrint(String urlPrint) {
+		_urlPrint = urlPrint;
+	}
+
+	public void setURLRefresh(String urlRefresh) {
+		_urlRefresh = urlRefresh;
+	}
+
+	public void setWebDAVEnabled(boolean webDAVEnabled) {
+		_webDAVEnabled = webDAVEnabled;
+	}
+
+	public void writeContent(Writer writer) throws IOException {
+		_content.writeTo(writer);
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PortletDisplay.class);
 
 	private static StringBundler _blankStringBundler = new StringBundler(
 		StringPool.BLANK);
 
-	private ThemeDisplay _themeDisplay;
-	private String _id = StringPool.BLANK;
-	private String _rootPortletId = StringPool.BLANK;
-	private String _instanceId = StringPool.BLANK;
-	private String _resourcePK = StringPool.BLANK;
-	private String _portletName = StringPool.BLANK;
-	private String _namespace = StringPool.BLANK;
-	private String _title = StringPool.BLANK;
-	private String _description = StringPool.BLANK;
-	private String _customCSSClassName = StringPool.BLANK;
 	private boolean _access;
 	private boolean _active;
+	private int _columnCount;
 	private String _columnId = StringPool.BLANK;
 	private int _columnPos;
-	private int _columnCount;
-	private boolean _stateExclusive;
-	private boolean _stateMax;
-	private boolean _stateMin;
-	private boolean _stateNormal;
-	private boolean _statePopUp;
+	private StringBundler _content = _blankStringBundler;
+	private String _customCSSClassName = StringPool.BLANK;
+	private String _description = StringPool.BLANK;
+	private String _id = StringPool.BLANK;
+	private String _instanceId = StringPool.BLANK;
 	private boolean _modeAbout;
 	private boolean _modeConfig;
 	private boolean _modeEdit;
@@ -764,12 +754,18 @@ public class PortletDisplay implements Serializable {
 	private boolean _modeHelp;
 	private boolean _modePreview;
 	private boolean _modePrint;
+	private String _namespace = StringPool.BLANK;
+	private String _portletName = StringPool.BLANK;
+	private PortletPreferences _portletSetup;
+	private String _resourcePK = StringPool.BLANK;
+	private boolean _restoreCurrentView;
+	private String _rootPortletId = StringPool.BLANK;
 	private boolean _showBackIcon;
 	private boolean _showCloseIcon;
 	private boolean _showConfigurationIcon;
-	private boolean _showEditIcon;
 	private boolean _showEditDefaultsIcon;
 	private boolean _showEditGuestIcon;
+	private boolean _showEditIcon;
 	private boolean _showExportImportIcon;
 	private boolean _showHelpIcon;
 	private boolean _showMaxIcon;
@@ -779,6 +775,13 @@ public class PortletDisplay implements Serializable {
 	private boolean _showPortletIcon;
 	private boolean _showPrintIcon;
 	private boolean _showRefreshIcon;
+	private boolean _stateExclusive;
+	private boolean _stateMax;
+	private boolean _stateMin;
+	private boolean _stateNormal;
+	private boolean _statePopUp;
+	private ThemeDisplay _themeDisplay;
+	private String _title = StringPool.BLANK;
 	private String _urlBack = StringPool.BLANK;
 	private String _urlClose = StringPool.BLANK;
 	private String _urlConfiguration = StringPool.BLANK;
@@ -794,8 +797,5 @@ public class PortletDisplay implements Serializable {
 	private String _urlPrint = StringPool.BLANK;
 	private String _urlRefresh = StringPool.BLANK;
 	private boolean _webDAVEnabled;
-	private boolean _restoreCurrentView;
-	private StringBundler _content = _blankStringBundler;
-	private PortletPreferences _portletSetup;
 
 }
