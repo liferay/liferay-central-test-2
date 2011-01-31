@@ -72,7 +72,11 @@ public class IncludeTag
 			HttpServletRequest request = getServletRequest();
 			HttpServletResponse response = getServletResponse();
 
-			String page = getCustomPage(servletContext, request);
+			String page = null;
+
+			if (_useCustomPage) {
+				page = getCustomPage(servletContext, request);
+			}
 
 			if (Validator.isNull(page)) {
 				page = getPage();
@@ -122,6 +126,7 @@ public class IncludeTag
 
 			if (!ServerDetector.isResin()) {
 				setPage(null);
+				setUseCustomPage(true);
 
 				cleanUp();
 			}
@@ -232,6 +237,10 @@ public class IncludeTag
 
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
+	}
+
+	public void setUseCustomPage(boolean useCustomPage) {
+		_useCustomPage = useCustomPage;
 	}
 
 	protected void callSetAttributes() {
@@ -459,5 +468,6 @@ public class IncludeTag
 	private String _page;
 	private String _portletId;
 	private TrackedServletRequest _trackedRequest;
+	private boolean _useCustomPage = true;
 
 }
