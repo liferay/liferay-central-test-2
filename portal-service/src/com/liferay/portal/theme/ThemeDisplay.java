@@ -636,6 +636,14 @@ public class ThemeDisplay implements Serializable {
 		_widget = widget;
 	}
 
+	public boolean isAddSessionIdToURL() {
+		return _addSessionIdToURL;
+	}
+
+	public void setAddSessionIdToURL(boolean addSessionIdToURL) {
+		_addSessionIdToURL = addSessionIdToURL;
+	}
+
 	public String getCDNHost() {
 		return _cdnHost;
 	}
@@ -1000,6 +1008,14 @@ public class ThemeDisplay implements Serializable {
 		_urlUpdateManager = urlUpdateManager;
 	}
 
+	public String getSessionId() {
+		return _sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		_sessionId = sessionId;
+	}
+
 	public String getTilesTitle() {
 		return _tilesTitle;
 	}
@@ -1167,6 +1183,7 @@ public class ThemeDisplay implements Serializable {
 		_urlSignIn = StringPool.BLANK;
 		_urlSignOut = StringPool.BLANK;
 		_urlUpdateManager = null;
+		_sessionId = StringPool.BLANK;
 		_tilesTitle = StringPool.BLANK;
 		_tilesContent = StringPool.BLANK;
 		_tilesSelectable = false;
@@ -1233,6 +1250,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _facebook;
 	private String _facebookCanvasPageURL;
 	private boolean _widget;
+	private boolean _addSessionIdToURL = false;
 	private String _cdnHost = StringPool.BLANK;
 	private String _portalURL = StringPool.BLANK;
 	private String _pathApplet = StringPool.BLANK;
@@ -1276,6 +1294,7 @@ public class ThemeDisplay implements Serializable {
 	private String _urlSignIn = StringPool.BLANK;
 	private String _urlSignOut = StringPool.BLANK;
 	private transient PortletURL _urlUpdateManager = null;
+	private String _sessionId = StringPool.BLANK;
 	private String _tilesTitle = StringPool.BLANK;
 	private String _tilesContent = StringPool.BLANK;
 	private boolean _tilesSelectable;
