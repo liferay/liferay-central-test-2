@@ -44,23 +44,22 @@ languageId = locale.getLanguage();
 		tinyMCE.init(
 			{
 				convert_urls : false,
-				relative_urls : false,
-				remove_script_host : false,
-				mode : "textareas",
-				theme : "advanced",
 				extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
 				file_browser_callback : "fileBrowserCallback",
 				init_instance_callback : "initInstanceCallback",
-				invalid_elements: "script",
+				language : "<%= HtmlUtil.escape(languageId) %>",
+				mode : "textareas",
 				onchange_callback : "onChangeCallback",
 				plugins : "preview,print,contextmenu",
+				relative_urls : false,
+				remove_script_host : false,
+				theme : "advanced",
 				theme_advanced_buttons1_add : "code,preview,print",
 				theme_advanced_buttons2: "",
 				theme_advanced_buttons3: "",
 				theme_advanced_disable : "formatselect,styleselect,help,strikethrough",
 				theme_advanced_toolbar_align : "left",
-				theme_advanced_toolbar_location : "top",
-				language : "<%= HtmlUtil.escape(languageId) %>"
+				theme_advanced_toolbar_location : "top"
 			}
 		);
 
