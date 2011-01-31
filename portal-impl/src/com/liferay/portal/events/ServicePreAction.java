@@ -1533,11 +1533,6 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignOutIcon(signedIn);
 		themeDisplay.setShowStagingIcon(false);
 
-		if (!CookieKeys.hasSessionId(request)) {
-			themeDisplay.setAddSessionIdToURL(true);
-			themeDisplay.setSessionId(request.getSession().getId());
-		}
-
 		String urlControlPanel = friendlyURLPrivateGroupPath.concat(
 			GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 
@@ -1558,11 +1553,6 @@ public class ServicePreAction extends Action {
 		else if (plid > 0) {
 			urlControlPanel = HttpUtil.addParameter(
 				urlControlPanel, "refererPlid", plid);
-		}
-
-		if (themeDisplay.isAddSessionIdToURL()) {
-			urlControlPanel = PortalUtil.getURLWithSessionId(
-				urlControlPanel, themeDisplay.getSessionId());
 		}
 
 		themeDisplay.setURLControlPanel(urlControlPanel);

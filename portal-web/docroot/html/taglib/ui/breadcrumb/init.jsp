@@ -47,10 +47,6 @@ private void _buildGuestGroupBreadcrumb(ThemeDisplay themeDisplay, StringBundler
 
 		String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
 
-		if (themeDisplay.isAddSessionIdToURL()) {
-			layoutSetFriendlyURL = PortalUtil.getURLWithSessionId(layoutSetFriendlyURL, themeDisplay.getSessionId());
-		}
-
 		sb.append("<li><span><a href=\"");
 		sb.append(layoutSetFriendlyURL);
 		sb.append("\">");
@@ -64,10 +60,6 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, Por
 	String target = PortalUtil.getLayoutTarget(selLayout);
 
 	StringBundler breadcrumbSB = new StringBundler(7);
-
-	if (themeDisplay.isAddSessionIdToURL()) {
-		layoutURL = PortalUtil.getURLWithSessionId(layoutURL, themeDisplay.getSessionId());
-	}
 
 	breadcrumbSB.append("<li><span><a href=\"");
 	breadcrumbSB.append(layoutURL);
@@ -141,10 +133,6 @@ private void _buildParentGroupsBreadcrumb(LayoutSet layoutSet, PortletURL portle
 	if ((layoutsPageCount > 0) && !group.getName().equals(GroupConstants.GUEST)) {
 		String layoutSetFriendlyURL = PortalUtil.getLayoutSetFriendlyURL(layoutSet, themeDisplay);
 
-		if (themeDisplay.isAddSessionIdToURL()) {
-			layoutSetFriendlyURL = PortalUtil.getURLWithSessionId(layoutSetFriendlyURL, themeDisplay.getSessionId());
-		}
-
 		sb.append("<li><span><a href=\"");
 		sb.append(layoutSetFriendlyURL);
 		sb.append("\">");
@@ -163,13 +151,6 @@ private void _buildPortletBreadcrumb(HttpServletRequest request, StringBundler s
 	for (KeyValuePair portletBreadcrumb : portletBreadcrumbs) {
 		String breadcrumbText = portletBreadcrumb.getKey();
 		String breadcrumbURL = portletBreadcrumb.getValue();
-
-
-		if ((!CookieKeys.hasSessionId(request)) &&
-			(Validator.isNotNull(breadcrumbURL))) {
-
-			breadcrumbURL = PortalUtil.getURLWithSessionId(breadcrumbURL, request.getSession().getId());
-		}
 
 		sb.append("<li><span>");
 

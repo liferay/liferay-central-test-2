@@ -211,11 +211,6 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 				}
 
 				backURL = PortalUtil.getLayoutURL(refererLayout, themeDisplay);
-
-				if (!CookieKeys.hasSessionId(request)) {
-					backURL = PortalUtil.getURLWithSessionId(backURL, request.getSession().getId());
-				}
-
 			}
 			else {
 				refererGroupDescriptiveName = themeDisplay.getAccount().getName();
