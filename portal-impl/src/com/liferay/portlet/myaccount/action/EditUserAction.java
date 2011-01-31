@@ -112,6 +112,10 @@ public class EditUserAction
 					UserPasswordException.PASSWORD_INVALID);
 			}
 		}
+		else {
+			throw new UserPasswordException(
+				UserPasswordException.PASSWORD_INVALID);
+		} 
 
 		return super.updateUser(actionRequest, actionResponse);
 	}
