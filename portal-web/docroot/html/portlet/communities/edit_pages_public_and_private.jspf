@@ -14,24 +14,6 @@
  */
 --%>
 
-<%
-PortletURL publishToLiveURL = renderResponse.createRenderURL();
-
-publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-publishToLiveURL.setPortletMode(PortletMode.VIEW);
-
-publishToLiveURL.setParameter("struts_action", "/communities/publish_pages");
-publishToLiveURL.setParameter(Constants.CMD, "publish_to_live");
-publishToLiveURL.setParameter("tabs1", tabs1);
-publishToLiveURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
-publishToLiveURL.setParameter("groupId", String.valueOf(groupId));
-publishToLiveURL.setParameter("selPlid", String.valueOf(selPlid));
-
-PortletURL publishToRemoteURL = PortletURLUtil.clone(publishToLiveURL, renderResponse);
-
-publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
-%>
-
 <c:if test="<%= liveGroup.isStaged() %>">
 	<liferay-util:include page="/html/portlet/communities/edit_pages_staging_toolbar.jsp" />
 </c:if>
@@ -43,15 +25,17 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 		<aui:script use="aui-button-item">
 			var viewPagesButton = new A.ButtonItem(
 				{
-					label: '<liferay-ui:message key="view-pages" />',
-					icon: 'search',
 					handler: function(event) {
 						var groupWindow = window.open('<%= viewPagesURL %>');
+
 						void('');
+
 						groupWindow.focus();
-					}
+					},
+					icon: 'search',
+					label: '<liferay-ui:message key="view-pages" />'
 				}
-			).render('#viewPagesButton');;
+			).render('#viewPagesButton');
 		</aui:script>
 	</c:if>
 
@@ -74,8 +58,8 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 					{
 						bodyContent: A.one('#<portlet:namespace />importPage').show(),
 						centered: true,
-						title: '<liferay-ui:message key="import" />',
 						modal: true,
+						title: '<liferay-ui:message key="import" />',
 						width: 600
 					}
 				).render();
@@ -111,53 +95,58 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 					activeState: false,
 					children: [
 						{
-							label: '<liferay-ui:message key="export" />',
-							icon: 'arrowthick-1-b',
 							handler: function(event) {
 								var exportPopup = new A.Dialog(
 									{
 										centered: true,
-										title: '<liferay-ui:message key="export" />',
 										modal: true,
+										title: '<liferay-ui:message key="export" />',
 										width: 600
 									}
 								).render();
 
-								exportPopup.plug(A.Plugin.IO, {
-									after:
+								exportPopup.plug(
+									A.Plugin.IO,
 									{
-										success : function() {
-											exportPopup._syncUIPosAlign();
-										}
-									},
-									uri: '<%= exportPagesURL %>'
-								});
-							}
+										after:
+										{
+											success : function() {
+												exportPopup._syncUIPosAlign();
+											}
+										},
+										uri: '<%= exportPagesURL %>'
+									}
+								);
+							},
+							icon: 'arrowthick-1-b',
+							label: '<liferay-ui:message key="export" />'
 						},
 						{
-							label: '<liferay-ui:message key="import" />',
-							icon: 'arrowthick-1-t',
 							handler: function(event) {
 								var importPopup = new A.Dialog(
 									{
 										centered: true,
-										title: '<liferay-ui:message key="import" />',
 										modal: true,
+										title: '<liferay-ui:message key="import" />',
 										width: 600
 									}
 								).render();
 
-								importPopup.plug(A.Plugin.IO, {
-									after:
+								importPopup.plug(
+									A.Plugin.IO,
 									{
-										success : function() {
-											importPopup._syncUIPosAlign();
-										}
-									},
-									uri: '<%= importPagesURL %>'
-								});
-
-							}
+										after:
+										{
+											success : function() {
+												importPopup._syncUIPosAlign();
+											}
+										},
+										uri: '<%= importPagesURL %>'
+									}
+								);
+							},
+							label: '<liferay-ui:message key="import" />',
+							icon: 'arrowthick-1-t'
 						}
 					]
 				}

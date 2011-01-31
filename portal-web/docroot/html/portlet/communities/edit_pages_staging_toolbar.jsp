@@ -62,7 +62,7 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 <div class="portlet-msg-alert">
 	<liferay-ui:message key="the-staging-environment-is-activated-changes-have-to-be-published-to-make-them-available-to-end-users" />
 
-	<div id="stagingToobar"></div>
+	<div id="<portlet:namespace />stagingToobar"></div>
 </div>
 
 <aui:script use="aui-toolbar">
@@ -70,201 +70,198 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 		{
 			activeState: false,
 			children: [
+				<c:choose>
+					<c:when test="<%= liveGroup.isWorkflowEnabled() %>">
+						<c:if test="<%= selPlid > 0 %>">
 
-		<c:choose>
-			<c:when test="<%= liveGroup.isWorkflowEnabled() %>">
-				<c:if test="<%= selPlid > 0 %>">
+							<%
+							TasksProposal proposal = null;
 
-					<%
-					TasksProposal proposal = null;
-
-					try {
-						proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), String.valueOf(selPlid));
-					}
-					catch (NoSuchProposalException nspe) {
-					}
-					%>
-
-					<c:if test="<%= proposal == null %>">
-						<portlet:actionURL var="proposalURL">
-							<portlet:param name="struts_action" value="/communities/edit_proposal" />
-							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-							<portlet:param name="redirect" value="<%= currentURL %>" />
-							<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
-							<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
-							<portlet:param name="className" value="<%= Layout.class.getName() %>" />
-							<portlet:param name="classPK" value="<%= String.valueOf(selPlid) %>" />
-						</portlet:actionURL>
-
-						<%
-						int workflowStages = ParamUtil.getInteger(request, "workflowStages", liveGroup.getWorkflowStages());
-						String[] workflowRoleNames = StringUtil.split(ParamUtil.getString(request, "workflowRoleNames", liveGroup.getWorkflowRoleNames()));
-
-						JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
-
-						Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
-
-						LinkedHashMap userParams = new LinkedHashMap();
-
-						if (liveGroup.isOrganization()) {
-							userParams.put("usersOrgs", new Long(liveGroup.getOrganizationId()));
-						}
-						else {
-							userParams.put("usersGroups", new Long(liveGroupId));
-						}
-
-						userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
-
-						List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
-
-						if (reviewers.isEmpty()) {
-							if (liveGroup.isCommunity()) {
-								role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
+							try {
+								proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), String.valueOf(selPlid));
 							}
-							else {
-								role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
+							catch (NoSuchProposalException nspe) {
 							}
+							%>
 
-							userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
+							<c:if test="<%= proposal == null %>">
+								<portlet:actionURL var="proposalURL">
+									<portlet:param name="struts_action" value="/communities/edit_proposal" />
+									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+									<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
+									<portlet:param name="className" value="<%= Layout.class.getName() %>" />
+									<portlet:param name="classPK" value="<%= String.valueOf(selPlid) %>" />
+								</portlet:actionURL>
 
-							reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
-						}
+								<%
+								int workflowStages = ParamUtil.getInteger(request, "workflowStages", liveGroup.getWorkflowStages());
+								String[] workflowRoleNames = StringUtil.split(ParamUtil.getString(request, "workflowRoleNames", liveGroup.getWorkflowRoleNames()));
 
-						for (User reviewer : reviewers) {
-							JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
+								JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
 
-							jsonReviewer.put("userId", reviewer.getUserId());
-							jsonReviewer.put("fullName", reviewer.getFullName());
+								Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
 
-							jsonReviewers.put(jsonReviewer);
-						}
-						%>
+								LinkedHashMap userParams = new LinkedHashMap();
 
-						{
-							label: '<liferay-ui:message key="propose-publication" />',
-							icon: 'clipboard',
-							handler: function (event) {
-								Liferay.LayoutExporter.proposeLayout(
-									{
-										url: '<%= proposalURL.toString().replace('"','\'') %>',
-										namespace: '<portlet:namespace />',
-										reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>,
-										title: '<liferay-ui:message key="propose-publication" />'
+								if (liveGroup.isOrganization()) {
+									userParams.put("usersOrgs", new Long(liveGroup.getOrganizationId()));
+								}
+								else {
+									userParams.put("usersGroups", new Long(liveGroupId));
+								}
+
+								userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
+
+								List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+
+								if (reviewers.isEmpty()) {
+									if (liveGroup.isCommunity()) {
+										role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
 									}
-								);
-							}
-						},
+									else {
+										role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
+									}
 
-					</c:if>
-				</c:if>
+									userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
 
-				<c:if test="<%= liveGroup.isStagedRemotely() && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
-					{
-						label: '<liferay-ui:message key="publish-to-remote-live" />',
-						icon: 'arrowreturnthick-1-t',
-						handler: function (event) {
-							Liferay.LayoutExporter.publishToLive(
-								{
-									title: '<liferay-ui:message key="publish-to-remote-live" />',
-									url: '<%= publishToRemoteURL %>'
+									reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 								}
-							);
-						}
-					},
-				</c:if>
-			</c:when>
-			<c:otherwise>
+
+								for (User reviewer : reviewers) {
+									JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
+
+									jsonReviewer.put("userId", reviewer.getUserId());
+									jsonReviewer.put("fullName", reviewer.getFullName());
+
+									jsonReviewers.put(jsonReviewer);
+								}
+								%>
+
+								{
+									handler: function (event) {
+										Liferay.LayoutExporter.proposeLayout(
+											{
+												url: '<%= proposalURL.toString().replace('"','\'') %>',
+												namespace: '<portlet:namespace />',
+												reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>,
+												title: '<liferay-ui:message key="propose-publication" />'
+											}
+										);
+									},
+									icon: 'clipboard',
+									label: '<liferay-ui:message key="propose-publication" />'
+								},
+
+							</c:if>
+						</c:if>
+
+						<c:if test="<%= liveGroup.isStagedRemotely() && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
+							{
+								handler: function (event) {
+									Liferay.LayoutExporter.publishToLive(
+										{
+											title: '<liferay-ui:message key="publish-to-remote-live" />',
+											url: '<%= publishToRemoteURL %>'
+										}
+									);
+								},
+								icon: 'arrowreturnthick-1-t',
+								label: '<liferay-ui:message key="publish-to-remote-live" />'
+							},
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<c:if test="<%= !liveGroup.isStagedRemotely() %>">
+							{
+								handler: function (event) {
+									Liferay.LayoutExporter.publishToLive(
+										{
+											title: '<liferay-ui:message key="publish-to-live-now" />',
+											url: '<%= publishToLiveURL %>'
+										}
+									);
+								},
+								icon: 'arrowreturnthick-1-t',
+								label: '<liferay-ui:message key="publish-to-live-now" />'
+							},
+
+							<%
+							publishToLiveURL.setParameter("schedule", String.valueOf(true));
+							%>
+
+							{
+								handler: function (event) {
+									Liferay.LayoutExporter.publishToLive(
+										{
+											title: '<liferay-ui:message key="schedule-publication-to-live" />',
+											url: '<%= publishToLiveURL %>'
+										}
+									);
+								},
+								icon: 'clock',
+								label: '<liferay-ui:message key="schedule-publication-to-live" />'
+							},
+						</c:if>
+
+						<c:if test="<%= liveGroup.isStagedRemotely() %>">
+							{
+								handler: function (event) {
+									Liferay.LayoutExporter.publishToLive(
+										{
+											title: '<liferay-ui:message key="publish-to-remote-live-now" />',
+											url: '<%= publishToRemoteURL %>'
+										}
+									);
+								},
+								icon: 'arrowreturnthick-1-t',
+								label: '<liferay-ui:message key="publish-to-remote-live-now" />'
+							},
+
+							<%
+							publishToRemoteURL.setParameter("schedule", String.valueOf(true));
+							%>
+
+							{
+								handler: function (event) {
+									Liferay.LayoutExporter.publishToLive(
+										{
+											title: '<liferay-ui:message key="schedule-publication-to-remote-live" />',
+											url: '<%= publishToRemoteURL %>'
+										}
+									);
+								},
+								icon: 'clock',
+								label: '<liferay-ui:message key="schedule-publication-to-remote-live" />'
+							},
+						</c:if>
+					</c:otherwise>
+				</c:choose>
+
 				<c:if test="<%= !liveGroup.isStagedRemotely() %>">
+					<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
+						<portlet:param name="struts_action" value="/communities/publish_pages" />
+						<portlet:param name="<%= Constants.CMD %>" value="copy_from_live" />
+						<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
+						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
+					</portlet:renderURL>
+
 					{
-						label: '<liferay-ui:message key="publish-to-live-now" />',
-						icon: 'arrowreturnthick-1-t',
 						handler: function (event) {
 							Liferay.LayoutExporter.publishToLive(
 								{
-									title: '<liferay-ui:message key="publish-to-live-now" />',
-									url: '<%= publishToLiveURL %>'
+									title: '<liferay-ui:message key="copy-from-live" />',
+									url: '<%= importLayoutsURL %>'
 								}
 							);
-						}
-					},
+						},
+						icon: 'copy',
+						label: '<liferay-ui:message key="copy-from-live" />'
+					}
 
-					<%
-					publishToLiveURL.setParameter("schedule", String.valueOf(true));
-					%>
-
-					{
-						label: '<liferay-ui:message key="schedule-publication-to-live" />',
-						icon: 'clock',
-						handler: function (event) {
-							Liferay.LayoutExporter.publishToLive(
-								{
-									title: '<liferay-ui:message key="schedule-publication-to-live" />',
-									url: '<%= publishToLiveURL %>'
-								}
-							);
-						}
-					},
 				</c:if>
-
-				<c:if test="<%= liveGroup.isStagedRemotely() %>">
-					{
-						label: '<liferay-ui:message key="publish-to-remote-live-now" />',
-						icon: 'arrowreturnthick-1-t',
-						handler: function (event) {
-							Liferay.LayoutExporter.publishToLive(
-								{
-									title: '<liferay-ui:message key="publish-to-remote-live-now" />',
-									url: '<%= publishToRemoteURL %>'
-								}
-							);
-						}
-					},
-
-					<%
-					publishToRemoteURL.setParameter("schedule", String.valueOf(true));
-					%>
-
-					{
-						label: '<liferay-ui:message key="schedule-publication-to-remote-live" />',
-						icon: 'clock',
-						handler: function (event) {
-							Liferay.LayoutExporter.publishToLive(
-								{
-									title: '<liferay-ui:message key="schedule-publication-to-remote-live" />',
-									url: '<%= publishToRemoteURL %>'
-								}
-							);
-						}
-					},
-				</c:if>
-			</c:otherwise>
-		</c:choose>
-
-		<c:if test="<%= !liveGroup.isStagedRemotely() %>">
-			<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
-				<portlet:param name="struts_action" value="/communities/publish_pages" />
-				<portlet:param name="<%= Constants.CMD %>" value="copy_from_live" />
-				<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
-				<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
-			</portlet:renderURL>
-
-			{
-				label: '<liferay-ui:message key="copy-from-live" />',
-				icon: 'copy',
-				handler: function (event) {
-					Liferay.LayoutExporter.publishToLive(
-						{
-							title: '<liferay-ui:message key="copy-from-live" />',
-							url: '<%= importLayoutsURL %>'
-						}
-					);
-				}
-			}
-
-		</c:if>
-
-
 			]
 		}
-	).render('#stagingToobar');
+	).render('#<portlet:namespace />stagingToobar');
 </aui:script>

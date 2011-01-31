@@ -19,7 +19,7 @@
 		<aui:input disabled="<%= true %>" inlineLabel="right" name="pages" type="checkbox" value="<%= true %>" />
 	</li>
 
-	<c:if test='<%= cmd.equals(Constants.IMPORT) %>'>
+	<c:if test="<%= cmd.equals(Constants.IMPORT) %>">
 		<li class="tree-item">
 			<aui:input helpMessage="delete-missing-layouts-help" inlineLabel="right" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" value="<%= false %>" />
 		</li>
@@ -43,7 +43,7 @@
 			</li>
 			<li class="tree-item">
 				<c:choose>
-					<c:when test='<%= cmd.equals(Constants.IMPORT) %>'>
+					<c:when test="<%= cmd.equals(Constants.IMPORT) %>">
 
 						<%
 						String taglibToggleDataStrategies = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataStrategies');";
@@ -310,7 +310,7 @@
 <br />
 
 <c:choose>
-	<c:when test='<%= cmd.equals(Constants.EXPORT) %>'>
+	<c:when test="<%= cmd.equals(Constants.EXPORT) %>">
 		<div id="<portlet:namespace />exportMoreDiv">
 			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "exportMore();" %>' label="more-options"> &raquo;</aui:a>
 		</div>

@@ -22,15 +22,19 @@ String redirectWindowState = ParamUtil.getString(request, "redirectWindowState")
 String cmd = ParamUtil.getString(request, Constants.CMD, Constants.EXPORT);
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
+
+long groupId = ParamUtil.getLong(request, "groupId");
+
 Group liveGroup = group;
 
 if (group.isStagingGroup()) {
 	liveGroup = group.getLiveGroup();
 }
 
-long groupId = ParamUtil.getLong(request, "groupId");
 long liveGroupId = ParamUtil.getLong(request, "liveGroupId");
+
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+
 String rootNodeName = ParamUtil.getString(request, "rootNodeName");
 
 List portletsList = new ArrayList();
@@ -80,7 +84,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 	<aui:fieldset>
 		<c:choose>
-			<c:when test='<%= cmd.equals(Constants.EXPORT) %>'>
+			<c:when test="<%= cmd.equals(Constants.EXPORT) %>">
 				<aui:input label="export-the-selected-data-to-the-given-lar-file-name" name="exportFileName" size="50" value='<%= HtmlUtil.escape(StringUtil.replace(rootNodeName, " ", "_")) + "-" + Time.getShortTimestamp() + ".lar" %>' />
 
 				<aui:field-wrapper label="what-would-you-like-to-export">
@@ -91,7 +95,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 					<aui:button type="submit" value="export" />
 				</aui:button-row>
 			</c:when>
-			<c:when test='<%= cmd.equals(Constants.IMPORT) %>'>
+			<c:when test="<%= cmd.equals(Constants.IMPORT) %>">
 				<liferay-ui:error exception="<%= LARFileException.class %>" message="please-specify-a-lar-file-to-import" />
 				<liferay-ui:error exception="<%= LARTypeException.class %>" message="please-import-a-lar-file-of-the-correct-type" />
 				<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
@@ -117,7 +121,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 	</aui:fieldset>
 </aui:form>
 
-<aui:script use="aui-loading-mask">
+<aui:script use="aui-base,aui-loading-mask,selector-css3">
 	var form = A.one('#<portlet:namespace />fm1');
 
 	form.on(
@@ -142,17 +146,21 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 						<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
 					</portlet:actionURL>
 
-					form.plug(A.LoadingMask, { background: '#000' });
+					form.plug(
+						A.LoadingMask,
+						{
+							background: '#000'
+						}
+					);
 
 					form.attr('encoding', 'multipart/form-data');
+
 					submitForm(form, '<%= importPagesURL %>');
 				</c:otherwise>
 			</c:choose>
 		}
 	);
-</aui:script>
 
-<aui:script use="aui-base,selector-css3">
 	var toggleHandlerControl = function(item, index, collection) {
 		var container = item.ancestor('.<portlet:namespace />handler-control').one('ul');
 
