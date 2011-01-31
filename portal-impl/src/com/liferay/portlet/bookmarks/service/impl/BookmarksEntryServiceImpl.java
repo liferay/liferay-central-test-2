@@ -72,8 +72,7 @@ public class BookmarksEntryServiceImpl extends BookmarksEntryServiceBaseImpl {
 			groupId, folderId, start, end, orderByComparator);
 	}
 
-	public int getEntriesCount(
-			long groupId, long folderId)
+	public int getEntriesCount(long groupId, long folderId)
 		throws SystemException {
 
 		return bookmarksEntryPersistence.filterCountByG_F(groupId, folderId);
