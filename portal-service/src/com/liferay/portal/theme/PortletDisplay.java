@@ -40,24 +40,14 @@ public class PortletDisplay implements Serializable {
 	}
 
 	public void copyFrom(PortletDisplay master) {
-		_themeDisplay = master.getThemeDisplay();
-		_id = master.getId();
-		_rootPortletId = master.getRootPortletId();
-		_instanceId = master.getInstanceId();
-		_resourcePK = master.getResourcePK();
-		_portletName = master.getPortletName();
-		_namespace = master.getNamespace();
-		_title = master.getTitle();
-		_description = master.getDescription();
-		_customCSSClassName = master.getCustomCSSClassName();
 		_access = master.isAccess();
 		_active = master.isActive();
 		_columnId = master.getColumnId();
-		_stateExclusive = master.isStateExclusive();
-		_stateMax = master.isStateMax();
-		_stateMin = master.isStateMin();
-		_stateNormal = master.isStateNormal();
-		_statePopUp = master.isStatePopUp();
+		_content = master.getContent();
+		_customCSSClassName = master.getCustomCSSClassName();
+		_description = master.getDescription();
+		_id = master.getId();
+		_instanceId = master.getInstanceId();
 		_modeAbout = master.isModeAbout();
 		_modeConfig = master.isModeConfig();
 		_modeEdit = master.isModeEdit();
@@ -66,12 +56,18 @@ public class PortletDisplay implements Serializable {
 		_modeHelp = master.isModeHelp();
 		_modePreview = master.isModePreview();
 		_modePrint = master.isModePrint();
+		_namespace = master.getNamespace();
+		_portletName = master.getPortletName();
+		_portletSetup = master.getPortletSetup();
+		_resourcePK = master.getResourcePK();
+		_restoreCurrentView = master.isRestoreCurrentView();
+		_rootPortletId = master.getRootPortletId();
 		_showBackIcon = master.isShowBackIcon();
 		_showCloseIcon = master.isShowCloseIcon();
 		_showConfigurationIcon = master.isShowConfigurationIcon();
-		_showEditIcon = master.isShowEditIcon();
 		_showEditDefaultsIcon = master.isShowEditDefaultsIcon();
 		_showEditGuestIcon = master.isShowEditGuestIcon();
+		_showEditIcon = master.isShowEditIcon();
 		_showHelpIcon = master.isShowHelpIcon();
 		_showMaxIcon = master.isShowMaxIcon();
 		_showMinIcon = master.isShowMinIcon();
@@ -80,6 +76,13 @@ public class PortletDisplay implements Serializable {
 		_showPortletIcon = master.isShowPortletIcon();
 		_showPrintIcon = master.isShowPrintIcon();
 		_showRefreshIcon = master.isShowRefreshIcon();
+		_stateExclusive = master.isStateExclusive();
+		_stateMax = master.isStateMax();
+		_stateMin = master.isStateMin();
+		_stateNormal = master.isStateNormal();
+		_statePopUp = master.isStatePopUp();
+		_themeDisplay = master.getThemeDisplay();
+		_title = master.getTitle();
 		_urlBack = master.getURLBack();
 		_urlClose = master.getURLClose();
 		_urlConfiguration = master.getURLConfiguration();
@@ -94,30 +97,17 @@ public class PortletDisplay implements Serializable {
 		_urlPrint = master.getURLPrint();
 		_urlRefresh = master.getURLRefresh();
 		_webDAVEnabled = master.isWebDAVEnabled();
-		_restoreCurrentView = master.isRestoreCurrentView();
-		_content = master.getContent();
-		_portletSetup = master.getPortletSetup();
 	}
 
 	public void copyTo(PortletDisplay slave) {
-		slave.setThemeDisplay(_themeDisplay);
-		slave.setId(_id);
-		slave.setRootPortletId(_rootPortletId);
-		slave.setInstanceId(_instanceId);
-		slave.setResourcePK(_resourcePK);
-		slave.setPortletName(_portletName);
-		slave.setNamespace(_namespace);
-		slave.setTitle(_title);
-		slave.setDescription(_description);
-		slave.setCustomCSSClassName(_customCSSClassName);
 		slave.setAccess(_access);
 		slave.setActive(_active);
 		slave.setColumnId(_columnId);
-		slave.setStateExclusive(_stateExclusive);
-		slave.setStateMax(_stateMax);
-		slave.setStateMin(_stateMin);
-		slave.setStateNormal(_stateNormal);
-		slave.setStatePopUp(_statePopUp);
+		slave.setContent(_content);
+		slave.setCustomCSSClassName(_customCSSClassName);
+		slave.setDescription(_description);
+		slave.setId(_id);
+		slave.setInstanceId(_instanceId);
 		slave.setModeAbout(_modeAbout);
 		slave.setModeConfig(_modeConfig);
 		slave.setModeEdit(_modeEdit);
@@ -126,12 +116,18 @@ public class PortletDisplay implements Serializable {
 		slave.setModeHelp(_modeHelp);
 		slave.setModePreview(_modePreview);
 		slave.setModePrint(_modePrint);
+		slave.setNamespace(_namespace);
+		slave.setPortletName(_portletName);
+		slave.setPortletSetup(_portletSetup);
+		slave.setResourcePK(_resourcePK);
+		slave.setRestoreCurrentView(_restoreCurrentView);
+		slave.setRootPortletId(_rootPortletId);
 		slave.setShowBackIcon(_showBackIcon);
 		slave.setShowCloseIcon(_showCloseIcon);
 		slave.setShowConfigurationIcon(_showConfigurationIcon);
-		slave.setShowEditIcon(_showEditIcon);
 		slave.setShowEditDefaultsIcon(_showEditDefaultsIcon);
 		slave.setShowEditGuestIcon(_showEditGuestIcon);
+		slave.setShowEditIcon(_showEditIcon);
 		slave.setShowHelpIcon(_showHelpIcon);
 		slave.setShowMaxIcon(_showMaxIcon);
 		slave.setShowMinIcon(_showMinIcon);
@@ -140,6 +136,13 @@ public class PortletDisplay implements Serializable {
 		slave.setShowPortletIcon(_showPortletIcon);
 		slave.setShowPrintIcon(_showPrintIcon);
 		slave.setShowRefreshIcon(_showRefreshIcon);
+		slave.setStateExclusive(_stateExclusive);
+		slave.setStateMax(_stateMax);
+		slave.setStateMin(_stateMin);
+		slave.setStateNormal(_stateNormal);
+		slave.setStatePopUp(_statePopUp);
+		slave.setThemeDisplay(_themeDisplay);
+		slave.setTitle(_title);
 		slave.setURLBack(_urlBack);
 		slave.setURLClose(_urlClose);
 		slave.setURLConfiguration(_urlConfiguration);
@@ -155,9 +158,6 @@ public class PortletDisplay implements Serializable {
 		slave.setURLPrint(_urlPrint);
 		slave.setURLRefresh(_urlRefresh);
 		slave.setWebDAVEnabled(_webDAVEnabled);
-		slave.setRestoreCurrentView(_restoreCurrentView);
-		slave.setContent(_content);
-		slave.setPortletSetup(_portletSetup);
 	}
 
 	public int getColumnCount() {
@@ -409,23 +409,14 @@ public class PortletDisplay implements Serializable {
 			_log.debug("Recycling instance " + hashCode());
 		}
 
-		_id = StringPool.BLANK;
-		_rootPortletId = StringPool.BLANK;
-		_instanceId = StringPool.BLANK;
-		_resourcePK = StringPool.BLANK;
-		_portletName = StringPool.BLANK;
-		_namespace = StringPool.BLANK;
-		_title = StringPool.BLANK;
-		_description = StringPool.BLANK;
-		_customCSSClassName = StringPool.BLANK;
 		_access = false;
 		_active = false;
 		_columnId = StringPool.BLANK;
-		_stateExclusive = false;
-		_stateMax = false;
-		_stateMin = false;
-		_stateNormal = false;
-		_statePopUp = false;
+		_content.setIndex(0);
+		_customCSSClassName = StringPool.BLANK;
+		_description = StringPool.BLANK;
+		_id = StringPool.BLANK;
+		_instanceId = StringPool.BLANK;
 		_modeAbout = false;
 		_modeConfig = false;
 		_modeEdit = false;
@@ -434,12 +425,18 @@ public class PortletDisplay implements Serializable {
 		_modeHelp = false;
 		_modePreview = false;
 		_modePrint = false;
+		_namespace = StringPool.BLANK;
+		_portletName = StringPool.BLANK;
+		_portletSetup = null;
+		_resourcePK = StringPool.BLANK;
+		_restoreCurrentView = false;
+		_rootPortletId = StringPool.BLANK;
 		_showBackIcon = false;
 		_showCloseIcon = false;
 		_showConfigurationIcon = false;
-		_showEditIcon = false;
 		_showEditDefaultsIcon = false;
 		_showEditGuestIcon = false;
+		_showEditIcon = false;
 		_showHelpIcon = false;
 		_showMaxIcon = false;
 		_showMinIcon = false;
@@ -448,6 +445,12 @@ public class PortletDisplay implements Serializable {
 		_showPortletIcon = false;
 		_showPrintIcon = false;
 		_showRefreshIcon = false;
+		_stateExclusive = false;
+		_stateMax = false;
+		_stateMin = false;
+		_stateNormal = false;
+		_statePopUp = false;
+		_title = StringPool.BLANK;
 		_urlBack = StringPool.BLANK;
 		_urlClose = StringPool.BLANK;
 		_urlConfiguration = StringPool.BLANK;
@@ -463,9 +466,6 @@ public class PortletDisplay implements Serializable {
 		_urlPrint = StringPool.BLANK;
 		_urlRefresh = StringPool.BLANK;
 		_webDAVEnabled = false;
-		_restoreCurrentView = false;
-		_content.setIndex(0);
-		_portletSetup = null;
 	}
 
 	public void setAccess(boolean access) {
