@@ -76,11 +76,7 @@ public class IncludeTag
 			HttpServletRequest request = getServletRequest();
 			HttpServletResponse response = getServletResponse();
 
-			String page = null;
-
-			if (!_portalPage) {
-				page = getCustomPage(servletContext, request);
-			}
+			String page = getCustomPage(servletContext, request);
 
 			if (Validator.isNull(page)) {
 				page = getPage();
@@ -219,10 +215,6 @@ public class IncludeTag
 
 	public void setPage(String page) {
 		_page = page;
-	}
-
-	public void setPortalPage(boolean portalPage) {
-		_portalPage = portalPage;
 	}
 
 	public void setPortletId(String portletId) {
@@ -464,7 +456,6 @@ public class IncludeTag
 	private CustomAttributes _customAttributes;
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
-	private boolean _portalPage;
 	private String _page;
 	private String _portletId;
 	private TrackedServletRequest _trackedRequest;
