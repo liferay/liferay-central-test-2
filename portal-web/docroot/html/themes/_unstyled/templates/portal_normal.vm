@@ -12,8 +12,6 @@
 
 <body class="$css_class">
 
-$theme.include($body_top_include)
-
 #if($is_signed_in)
 	#dockbar()
 #end

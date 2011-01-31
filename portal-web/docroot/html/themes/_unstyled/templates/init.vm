@@ -289,7 +289,6 @@
 	#set ($dir_include = "/html")
 #end
 
-#set ($body_top_include = "$dir_include/common/themes/body_top.jsp")
 #set ($bottom_include = "$dir_include/common/themes/bottom.jsp")
 #set ($bottom_ext_include = $bottom_include)
 #set ($content_include = "$dir_include$tilesContent")
