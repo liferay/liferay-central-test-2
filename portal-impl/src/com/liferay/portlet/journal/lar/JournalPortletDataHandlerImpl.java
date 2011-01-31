@@ -52,9 +52,8 @@ import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.lar.FileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
@@ -1645,10 +1644,10 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		for (Element dlReferenceElement : dlReferenceElements) {
 			String dlReferencePath = dlReferenceElement.attributeValue("path");
 
-			DLFileEntry fileEntry = null;
+			FileEntry fileEntry = null;
 
 			try {
-				fileEntry = (DLFileEntry)portletDataContext.getZipEntryAsObject(
+				fileEntry = (FileEntry)portletDataContext.getZipEntryAsObject(
 					dlReferencePath);
 			}
 			catch (Exception e) {
@@ -1661,7 +1660,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				continue;
 			}
 
-			fileEntry = DLFileEntryUtil.fetchByUUID_G(
+			fileEntry = FileEntryUtil.fetchByUUID_R(
 				fileEntry.getUuid(), portletDataContext.getGroupId());
 
 			if (fileEntry == null) {
