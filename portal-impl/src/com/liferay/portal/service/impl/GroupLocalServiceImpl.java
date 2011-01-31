@@ -53,7 +53,6 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
@@ -62,9 +61,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserPersonalCommunity;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
-import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.FriendlyURLNormalizer;
@@ -317,10 +314,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				group = groupLocalService.addGroup(
 					defaultUserId, className, classPK, name, null, type,
 					friendlyURL, true, null);
-
-				if (name.equals(GroupConstants.USER_PERSONAL_COMMUNITY)) {
-					initUserPersonalCommunityPermissions(group);
-				}
 			}
 
 			if (group.isControlPanel()) {
@@ -1283,162 +1276,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return realName;
-	}
-
-	protected void initUserPersonalCommunityPermissions(Group group)
-		throws PortalException, SystemException {
-
-		// I was tempted to script this whole method but I wasn't sure if we had
-		// precedent anywhere in the portal.
-
-		// User role
-
-		Role role = roleLocalService.getRole(
-			group.getCompanyId(), RoleConstants.USER);
-
-		Map<String, String[]> rolePermissions = new HashMap<String, String[]>();
-
-		List<Portlet> portlets = portletLocalService.getPortlets(
-			group.getCompanyId());
-
-		for (Portlet portlet : portlets) {
-			if (!portlet.isSystem()) {
-				rolePermissions.put(
-					portlet.getPortletId(), new String[] {ActionKeys.VIEW});
-			}
-		}
-
-		rolePermissions.put(
-			Layout.class.getName(), new String[] {ActionKeys.VIEW});
-		rolePermissions.put(
-			"com.liferay.portlet.blogs",
-			new String[] {
-				ActionKeys.ADD_ENTRY, ActionKeys.PERMISSIONS,
-				ActionKeys.SUBSCRIBE});
-		rolePermissions.put(
-			"com.liferay.portlet.calendar",
-			new String[] {
-				ActionKeys.ADD_EVENT, ActionKeys.EXPORT_ALL_EVENTS,
-				ActionKeys.PERMISSIONS});
-
-		for (Map.Entry<String, String[]> entry : rolePermissions.entrySet()) {
-			String name = entry.getKey();
-			String[] actionIds = entry.getValue();
-
-			setRolePermissions(group, role, name, actionIds);
-		}
-
-		// Power User role
-
-		role = roleLocalService.getRole(
-			group.getCompanyId(), RoleConstants.POWER_USER);
-
-		rolePermissions.clear();
-
-		for (Portlet portlet : portlets) {
-			List<String> actions =
-				ResourceActionsUtil.getPortletResourceActions(
-					portlet.getPortletId());
-
-			if (!portlet.isSystem() &&
-				actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
-
-				rolePermissions.put(
-					portlet.getPortletId(), new String[] {
-						ActionKeys.ACCESS_IN_CONTROL_PANEL});
-			}
-		}
-
-		rolePermissions.put(
-			Group.class.getName(), new String[] {ActionKeys.MANAGE_LAYOUTS});
-
-		List<String> actions = ResourceActionsUtil.getModelResourceActions(
-			"com.liferay.portlet.asset");
-
-		rolePermissions.put(
-			"com.liferay.portlet.asset",
-			actions.toArray(new String[actions.size()]));
-
-		actions = ResourceActionsUtil.getModelResourceActions(
-			"com.liferay.portlet.blogs");
-
-		rolePermissions.put(
-			"com.liferay.portlet.blogs",
-			actions.toArray(new String[actions.size()]));
-
-		actions = ResourceActionsUtil.getModelResourceActions(
-			"com.liferay.portlet.bookmarks");
-
-		rolePermissions.put(
-			"com.liferay.portlet.bookmarks",
-			actions.toArray(new String[actions.size()]));
-
-		actions = ResourceActionsUtil.getModelResourceActions(
-			"com.liferay.portlet.calendar");
-
-		rolePermissions.put(
-			"com.liferay.portlet.calendar",
-			actions.toArray(new String[actions.size()]));
-
-		actions = ResourceActionsUtil.getModelResourceActions(
-			"com.liferay.portlet.documentlibrary");
-
-		rolePermissions.put(
-			"com.liferay.portlet.documentlibrary",
-			actions.toArray(new String[actions.size()]));
-
-		actions = ResourceActionsUtil.getModelResourceActions(
-			"com.liferay.portlet.imagegallery");
-
-		rolePermissions.put(
-			"com.liferay.portlet.imagegallery",
-			actions.toArray(new String[actions.size()]));
-
-		actions = ResourceActionsUtil.getModelResourceActions(
-			"com.liferay.portlet.messageboards");
-
-		rolePermissions.put(
-			"com.liferay.portlet.messageboards",
-			actions.toArray(new String[actions.size()]));
-
-		actions = ResourceActionsUtil.getModelResourceActions(
-			"com.liferay.portlet.polls");
-
-		rolePermissions.put(
-			"com.liferay.portlet.polls",
-			actions.toArray(new String[actions.size()]));
-
-		actions = ResourceActionsUtil.getModelResourceActions(
-			"com.liferay.portlet.wiki");
-
-		rolePermissions.put(
-			"com.liferay.portlet.wiki",
-			actions.toArray(new String[actions.size()]));
-
-		for (Map.Entry<String, String[]> entry : rolePermissions.entrySet()) {
-			String name = entry.getKey();
-			String[] actionIds = entry.getValue();
-
-			setRolePermissions(group, role, name, actionIds);
-		}
-	}
-
-	protected void setRolePermissions(
-			Group group, Role role, String name, String[] actionIds)
-		throws PortalException, SystemException {
-
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
-			resourcePermissionLocalService.setResourcePermissions(
-				group.getCompanyId(), name, ResourceConstants.SCOPE_GROUP,
-				String.valueOf(group.getGroupId()), role.getRoleId(),
-				actionIds);
-		}
-		else {
-			permissionLocalService.setRolePermissions(
-				role.getRoleId(), group.getCompanyId(), name,
-				ResourceConstants.SCOPE_GROUP,
-				String.valueOf(group.getGroupId()), actionIds);
-		}
 	}
 
 	protected void initImportLARFile() {
