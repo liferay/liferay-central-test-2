@@ -427,7 +427,7 @@ public class SAXReaderImpl implements SAXReader {
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"XSD validation is diasabled because " + e.getMessage());
+					"XSD validation is disabled because " + e.getMessage());
 			}
 
 			reader = new org.dom4j.io.SAXReader(false);
