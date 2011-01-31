@@ -56,8 +56,8 @@ OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(
 			pageContext.setAttribute("total", total);
 		}
 		else {
-			results = BookmarksEntryLocalServiceUtil.getEntries(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
-			total = BookmarksEntryLocalServiceUtil.getEntriesCount(scopeGroupId, folderId);
+			results = BookmarksEntryServiceUtil.getEntries(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
+			total = BookmarksEntryServiceUtil.getEntriesCount(scopeGroupId, folderId);
 		}
 
 		pageContext.setAttribute("results", results);

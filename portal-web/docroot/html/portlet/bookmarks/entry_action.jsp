@@ -29,7 +29,7 @@ if (row != null) {
 	if (result instanceof AssetEntry) {
 		AssetEntry assetEntry = (AssetEntry)result;
 
-		entry = BookmarksEntryLocalServiceUtil.getBookmarksEntry(assetEntry.getClassPK());
+		entry = BookmarksEntryServiceUtil.getEntry(assetEntry.getClassPK());
 	}
 	else {
 		entry = (BookmarksEntry)result;

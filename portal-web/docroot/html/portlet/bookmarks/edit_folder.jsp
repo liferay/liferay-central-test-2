@@ -55,7 +55,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", B
 				String parentFolderName = StringPool.BLANK;
 
 				try {
-					BookmarksFolder parentFolder = BookmarksFolderLocalServiceUtil.getFolder(parentFolderId);
+					BookmarksFolder parentFolder = BookmarksFolderServiceUtil.getFolder(parentFolderId);
 
 					parentFolderName = parentFolder.getName();
 				}

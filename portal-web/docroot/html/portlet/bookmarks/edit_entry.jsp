@@ -65,7 +65,7 @@ long folderId = BeanParamUtil.getLong(entry, request, "folderId");
 					String folderName = StringPool.BLANK;
 
 					if (folderId > 0) {
-						BookmarksFolder folder = BookmarksFolderLocalServiceUtil.getFolder(folderId);
+						BookmarksFolder folder = BookmarksFolderServiceUtil.getFolder(folderId);
 
 						folderId = folder.getFolderId();
 						folderName = folder.getName();

@@ -16,6 +16,7 @@ package com.liferay.portlet.bookmarks.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 
@@ -94,12 +95,138 @@ public class BookmarksEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap[] getEntries(
+		long groupId, long folderId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> returnValue =
+				BookmarksEntryServiceUtil.getEntries(groupId, folderId, start,
+					end);
+
+			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap[] getEntries(
+		long groupId, long folderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> returnValue =
+				BookmarksEntryServiceUtil.getEntries(groupId, folderId, start,
+					end, orderByComparator);
+
+			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getEntriesCount(long groupId, long folderId)
+		throws RemoteException {
+		try {
+			int returnValue = BookmarksEntryServiceUtil.getEntriesCount(groupId,
+					folderId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap getEntry(
 		long entryId) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.getEntry(entryId);
 
 			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getFoldersEntriesCount(long groupId, Long[] folderIds)
+		throws RemoteException {
+		try {
+			int returnValue = BookmarksEntryServiceUtil.getFoldersEntriesCount(groupId,
+					ListUtil.toList(folderIds));
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap[] getGroupEntries(
+		long groupId, int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> returnValue =
+				BookmarksEntryServiceUtil.getGroupEntries(groupId, start, end);
+
+			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap[] getGroupEntries(
+		long groupId, long userId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> returnValue =
+				BookmarksEntryServiceUtil.getGroupEntries(groupId, userId,
+					start, end);
+
+			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getGroupEntriesCount(long groupId)
+		throws RemoteException {
+		try {
+			int returnValue = BookmarksEntryServiceUtil.getGroupEntriesCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getGroupEntriesCount(long groupId, long userId)
+		throws RemoteException {
+		try {
+			int returnValue = BookmarksEntryServiceUtil.getGroupEntriesCount(groupId,
+					userId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -22,6 +22,8 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
 
+import java.util.List;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -62,6 +64,50 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 			getPermissionChecker(), folder, ActionKeys.VIEW);
 
 		return folder;
+	}
+
+	public List<BookmarksFolder> getFolders(long groupId)
+		throws SystemException {
+
+		return bookmarksFolderPersistence.filterFindByGroupId(groupId);
+	}
+
+	public List<BookmarksFolder> getFolders(long groupId, long parentFolderId)
+		throws SystemException {
+
+		return bookmarksFolderPersistence.filterFindByG_P(
+			groupId, parentFolderId);
+	}
+
+	public List<BookmarksFolder> getFolders(
+			long groupId, long parentFolderId, int start, int end)
+		throws SystemException {
+
+		return bookmarksFolderPersistence.filterFindByG_P(
+			groupId, parentFolderId, start, end);
+	}
+
+	public int getFoldersCount(long groupId, long parentFolderId)
+		throws SystemException {
+
+		return bookmarksFolderPersistence.filterCountByG_P(
+			groupId, parentFolderId);
+	}
+
+	public void getSubfolderIds(
+			List<Long> folderIds, long groupId, long folderId)
+		throws SystemException {
+
+		List<BookmarksFolder> folders =
+			bookmarksFolderPersistence.filterFindByG_P(
+				groupId, folderId);
+
+		for (BookmarksFolder folder : folders) {
+			folderIds.add(folder.getFolderId());
+
+			getSubfolderIds(
+				folderIds, folder.getGroupId(), folder.getFolderId());
+		}
 	}
 
 	public BookmarksFolder updateFolder(

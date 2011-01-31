@@ -34,7 +34,7 @@ else {
 
 	folderIds.add(new Long(searchFolderIds));
 
-	BookmarksFolderLocalServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
+	BookmarksFolderServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
 
 	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
 }
@@ -112,7 +112,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 			BookmarksEntry entry = null;
 
 			try {
-				entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
+				entry = BookmarksEntryServiceUtil.getEntry(entryId);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

@@ -572,7 +572,12 @@ Liferay.Service.registerClass(
 	{
 		addEntry: true,
 		deleteEntry: true,
+		getEntries: true,
+		getEntriesCount: true,
 		getEntry: true,
+		getFoldersEntriesCount: true,
+		getGroupEntries: true,
+		getGroupEntriesCount: true,
 		openEntry: true,
 		updateEntry: true
 	}
@@ -584,6 +589,9 @@ Liferay.Service.registerClass(
 		addFolder: true,
 		deleteFolder: true,
 		getFolder: true,
+		getFolders: true,
+		getFoldersCount: true,
+		getSubfolderIds: true,
 		updateFolder: true
 	}
 );
@@ -915,6 +923,9 @@ Liferay.Service.registerClass(
 		addCategory: true,
 		deleteCategory: true,
 		getCategory: true,
+		getCategories: true,
+		getCategoriesCount: true,
+		getSubcategoryIds: true,
 		updateCategory: true
 	}
 );

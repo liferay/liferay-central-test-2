@@ -37,8 +37,8 @@
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolder" %>
 <%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolderConstants" %>
-<%@ page import="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil" %>
+<%@ page import="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil" %>
 <%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission" %>
 <%@ page import="com.liferay.portlet.bookmarks.util.BookmarksUtil" %>
@@ -66,7 +66,7 @@ String rootFolderName = StringPool.BLANK;
 
 if (rootFolderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 	try {
-		rootFolder = BookmarksFolderLocalServiceUtil.getFolder(rootFolderId);
+		rootFolder = BookmarksFolderServiceUtil.getFolder(rootFolderId);
 
 		rootFolderName = rootFolder.getName();
 	}

@@ -52,6 +52,36 @@ public class BookmarksFolderServiceWrapper implements BookmarksFolderService {
 		return _bookmarksFolderService.getFolder(folderId);
 	}
 
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookmarksFolderService.getFolders(groupId);
+	}
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookmarksFolderService.getFolders(groupId, parentFolderId);
+	}
+
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
+		long groupId, long parentFolderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookmarksFolderService.getFolders(groupId, parentFolderId,
+			start, end);
+	}
+
+	public int getFoldersCount(long groupId, long parentFolderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _bookmarksFolderService.getFoldersCount(groupId, parentFolderId);
+	}
+
+	public void getSubfolderIds(java.util.List<java.lang.Long> folderIds,
+		long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_bookmarksFolderService.getSubfolderIds(folderIds, groupId, folderId);
+	}
+
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder,
