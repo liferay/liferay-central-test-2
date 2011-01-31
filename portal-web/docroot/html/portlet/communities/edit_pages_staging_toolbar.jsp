@@ -66,7 +66,7 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 </div>
 
 <aui:script use="aui-toolbar">
-	var component = new A.Toolbar(
+	var stagingToolbar = new A.Toolbar(
 		{
 			activeState: false,
 			children: [

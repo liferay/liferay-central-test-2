@@ -118,7 +118,7 @@ if (Validator.isNull(tabs2) && !tabs1.equals("settings")) {
 	tabs2 = "pages";
 }
 
-if (tabs1.endsWith("-pages") && !tabs2.equals("pages") && !tabs2.equals("look-and-feel") && !tabs2.equals("export-import") && !tabs2.equals("proposals")) {
+if (tabs1.endsWith("-pages") && !tabs2.equals("pages") && !tabs2.equals("look-and-feel") && !tabs2.equals("proposals")) {
 	tabs2 = "pages";
 }
 else if (tabs1.equals("settings") && !tabs2.equals("virtual-host") && !tabs2.equals("logo") && !tabs2.equals("sitemap") && !tabs2.equals("monitoring") && !tabs2.equals("merge-pages") && !tabs2.equals("staging")) {
@@ -386,10 +386,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				}
 			}
 
-			if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
-				tabs2Names += ",export-import";
-			}
-
 			if (workflowEnabled) {
 				tabs2Names += ",proposals";
 			}
@@ -429,9 +425,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				<c:when test='<%= tabs2.equals("look-and-feel") %>'>
 					<liferay-util:include page="/html/portlet/communities/edit_pages_look_and_feel.jsp" />
 				</c:when>
-				<c:when test='<%= tabs2.equals("export-import") %>'>
-					<liferay-util:include page="/html/portlet/communities/edit_pages_export_import.jsp" />
-				</c:when>
 				<c:when test='<%= tabs2.equals("proposals") %>'>
 					<liferay-util:include page="/html/portlet/communities/edit_pages_proposals.jsp" />
 				</c:when>
@@ -461,15 +454,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				}
 			</c:otherwise>
 		</c:choose>
-	}
-
-	function <portlet:namespace />exportPages() {
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>&etag=0", false);
-	}
-
-	function <portlet:namespace />importPages() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="backURL" value="<%= backURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />savePage() {

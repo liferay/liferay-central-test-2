@@ -17,12 +17,15 @@ package com.liferay.portlet.communities.action;
 import com.liferay.portal.LARFileException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.File;
@@ -30,15 +33,18 @@ import java.io.File;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Alexander Chow
  * @author Raymond Augé
  */
-public class ImportPagesAction extends EditPagesAction {
+public class ImportPagesAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -76,6 +82,33 @@ public class ImportPagesAction extends EditPagesAction {
 					actionRequest, LayoutImportException.class.getName());
 			}
 		}
+
+		setForward(actionRequest, "portlet.communities.edit_pages");
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws Exception {
+
+		try {
+			ActionUtil.getGroup(renderRequest);
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchGroupException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(renderRequest, e.getClass().getName());
+
+				return mapping.findForward("portlet.communities.error");
+			}
+			else {
+				throw e;
+			}
+		}
+
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.communities.export_pages"));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ImportPagesAction.class);

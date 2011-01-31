@@ -17,24 +17,22 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs4 = (String)request.getAttribute("edit_pages.jsp-tab4");
+String redirectWindowState = ParamUtil.getString(request, "redirectWindowState");
 
-String redirect = ParamUtil.getString(request, "redirect");
+String cmd = ParamUtil.getString(request, Constants.CMD, Constants.EXPORT);
 
-Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
-long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
-long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
-boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
-UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-liveGroupTypeSettings");
+Group group = (Group)request.getAttribute(WebKeys.GROUP);
+Group liveGroup = group;
 
-String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
+if (group.isStagingGroup()) {
+	liveGroup = group.getLiveGroup();
+}
 
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
-%>
+long groupId = ParamUtil.getLong(request, "groupId");
+long liveGroupId = ParamUtil.getLong(request, "liveGroupId");
+boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+String rootNodeName = ParamUtil.getString(request, "rootNodeName");
 
-<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
-
-<%
 List portletsList = new ArrayList();
 Set portletIdsSet = new HashSet();
 
@@ -75,61 +73,84 @@ for (Portlet alwaysExportablePortlet : alwaysExportablePortlets) {
 }
 
 portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(application, locale));
-
-String tabs4Names = "export,import";
-
-if (!StringUtil.contains(tabs4Names, tabs4)) {
-	tabs4 = "export";
-}
 %>
 
-<aui:fieldset>
-	<liferay-ui:tabs
-		names="<%= tabs4Names %>"
-		param="tabs4"
-		url="<%= portletURL.toString() %>"
-	/>
+<aui:form method="post" name="fm1">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
 
-	<liferay-ui:error exception="<%= LARFileException.class %>" message="please-specify-a-lar-file-to-import" />
-	<liferay-ui:error exception="<%= LARTypeException.class %>" message="please-import-a-lar-file-of-the-correct-type" />
-	<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
+	<aui:fieldset>
+		<c:choose>
+			<c:when test='<%= cmd.equals(Constants.EXPORT) %>'>
+				<aui:input label="export-the-selected-data-to-the-given-lar-file-name" name="exportFileName" size="50" value='<%= HtmlUtil.escape(StringUtil.replace(rootNodeName, " ", "_")) + "-" + Time.getShortTimestamp() + ".lar" %>' />
 
-	<c:choose>
-		<c:when test='<%= tabs4.equals("export") %>'>
-			<aui:input label="export-the-selected-data-to-the-given-lar-file-name" name="exportFileName" size="50" value='<%= HtmlUtil.escape(StringUtil.replace(rootNodeName, " ", "_")) + "-" + Time.getShortTimestamp() + ".lar" %>' />
+				<aui:field-wrapper label="what-would-you-like-to-export">
+					<%@ include file="/html/portlet/communities/edit_pages_export_import_options.jspf" %>
+				</aui:field-wrapper>
 
-			<aui:field-wrapper label="what-would-you-like-to-export">
-				<%@ include file="/html/portlet/communities/edit_pages_export_import_options.jspf" %>
-			</aui:field-wrapper>
+				<aui:button-row>
+					<aui:button type="submit" value="export" />
+				</aui:button-row>
+			</c:when>
+			<c:when test='<%= cmd.equals(Constants.IMPORT) %>'>
+				<liferay-ui:error exception="<%= LARFileException.class %>" message="please-specify-a-lar-file-to-import" />
+				<liferay-ui:error exception="<%= LARTypeException.class %>" message="please-import-a-lar-file-of-the-correct-type" />
+				<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 
-			<aui:button-row>
-				<aui:button onClick='<%= renderResponse.getNamespace() + "exportPages();" %>' value="export" />
+				<c:choose>
+					<c:when test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
+						<aui:input label="import-a-lar-file-to-overwrite-the-selected-data" name="importFileName" size="50" type="file" />
 
-				<aui:button onClick="<%= redirect %>" type="cancel" />
-			</aui:button-row>
-		</c:when>
-		<c:when test='<%= tabs4.equals("import") %>'>
+						<aui:field-wrapper label="what-would-you-like-to-import">
+							<%@ include file="/html/portlet/communities/edit_pages_export_import_options.jspf" %>
+						</aui:field-wrapper>
+
+						<aui:button-row>
+							<aui:button type="submit" value="import" />
+						</aui:button-row>
+					</c:when>
+					<c:otherwise>
+						<liferay-ui:message key="import-from-within-the-target-community-can-cause-conflicts" />
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+		</c:choose>
+	</aui:fieldset>
+</aui:form>
+
+<aui:script use="aui-loading-mask">
+	var form = A.one('#<portlet:namespace />fm1');
+
+	form.on(
+		'submit',
+		function(event) {
+			event.preventDefault();
+
 			<c:choose>
-				<c:when test="<%= (layout.getGroupId() != groupId) || (layout.isPrivateLayout() != privateLayout) %>">
-					<aui:input label="import-a-lar-file-to-overwrite-the-selected-data" name="importFileName" size="50" type="file" />
+				<c:when test="<%= cmd.equals(Constants.EXPORT) %>">
+					<portlet:actionURL var="exportPagesURL">
+						<portlet:param name="struts_action" value="/communities/export_pages" />
+						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
+						<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
+					</portlet:actionURL>
 
-					<aui:field-wrapper label="what-would-you-like-to-import">
-						<%@ include file="/html/portlet/communities/edit_pages_export_import_options.jspf" %>
-					</aui:field-wrapper>
-
-					<aui:button-row>
-						<aui:button onClick='<%= renderResponse.getNamespace() + "importPages();" %>' value="import" />
-
-						<aui:button onClick="<%= redirect %>" type="cancel" />
-					</aui:button-row>
+					submitForm(form, '<%= exportPagesURL + "&etag=0" %>', false);
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:message key="import-from-within-the-target-community-can-cause-conflicts" />
+					<portlet:actionURL windowState="<%= redirectWindowState %>" var="importPagesURL">
+						<portlet:param name="struts_action" value="/communities/import_pages" />
+						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+						<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
+					</portlet:actionURL>
+
+					form.plug(A.LoadingMask, { background: '#000' });
+
+					form.attr('encoding', 'multipart/form-data');
+					submitForm(form, '<%= importPagesURL %>');
 				</c:otherwise>
 			</c:choose>
-		</c:when>
-	</c:choose>
-</aui:fieldset>
+		}
+	);
+</aui:script>
 
 <aui:script use="aui-base,selector-css3">
 	var toggleHandlerControl = function(item, index, collection) {

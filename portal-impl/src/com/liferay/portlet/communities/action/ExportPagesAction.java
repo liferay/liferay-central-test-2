@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -24,6 +25,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
@@ -42,11 +44,14 @@ import java.util.Date;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -177,6 +182,31 @@ public class ExportPagesAction extends PortletAction {
 
 			sendRedirect(actionRequest, actionResponse, pagesRedirect);
 		}
+	}
+
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
+		throws Exception {
+
+		try {
+			ActionUtil.getGroup(renderRequest);
+		}
+		catch (Exception e) {
+			if (e instanceof NoSuchGroupException ||
+				e instanceof PrincipalException) {
+
+				SessionErrors.add(renderRequest, e.getClass().getName());
+
+				return mapping.findForward("portlet.communities.error");
+			}
+			else {
+				throw e;
+			}
+		}
+
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.communities.export_pages"));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ExportPagesAction.class);

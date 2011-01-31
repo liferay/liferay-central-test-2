@@ -347,6 +347,10 @@
 		<put name="portlet_content" value="/portlet/communities/error.jsp" />
 	</definition>
 
+	<definition name="portlet.communities.export_pages" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_pages_export_import.jsp" />
+	</definition>
+
 	<definition name="portlet.communities.post_membership_request" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/post_membership_request.jsp" />
 	</definition>

@@ -19,7 +19,7 @@
 		<aui:input disabled="<%= true %>" inlineLabel="right" name="pages" type="checkbox" value="<%= true %>" />
 	</li>
 
-	<c:if test='<%= tabs4.equals("import") %>'>
+	<c:if test='<%= cmd.equals(Constants.IMPORT) %>'>
 		<li class="tree-item">
 			<aui:input helpMessage="delete-missing-layouts-help" inlineLabel="right" label="delete-missing-layouts" name="<%= PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS %>" type="checkbox" value="<%= false %>" />
 		</li>
@@ -43,7 +43,7 @@
 			</li>
 			<li class="tree-item">
 				<c:choose>
-					<c:when test='<%= tabs4.equals("import") %>'>
+					<c:when test='<%= cmd.equals(Constants.IMPORT) %>'>
 
 						<%
 						String taglibToggleDataStrategies = renderResponse.getNamespace() + "toggleChildren(this, '" + renderResponse.getNamespace() + "portletDataStrategies');";
@@ -208,7 +208,7 @@
 								try {
 									PortletDataHandlerControl[] controls = null;
 
-									if (tabs4.equals("import")) {
+									if (cmd.equals(Constants.IMPORT)) {
 										controls = portletDataHandler.getImportControls();
 									}
 									else {
@@ -240,7 +240,7 @@
 
 											<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>_<%= rootPortletId %>Controls">
 												<li class="<%= renderResponse.getNamespace() %>handler-control">
-													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup "name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
+													<aui:input disabled="<%= !checked %>" inlineLabel="right" label="setup" name="<%= PortletDataHandlerKeys.PORTLET_SETUP + StringPool.UNDERLINE + rootPortletId %>" type="checkbox" value="<%= true %>" />
 												</li>
 
 												<c:if test="<%= showRenderControls %>">
@@ -310,7 +310,7 @@
 <br />
 
 <c:choose>
-	<c:when test='<%= tabs4.equals("export") || tabs4.equals("export-live") %>'>
+	<c:when test='<%= cmd.equals(Constants.EXPORT) %>'>
 		<div id="<portlet:namespace />exportMoreDiv">
 			<aui:a href='<%= "javascript:" + renderResponse.getNamespace() + "exportMore();" %>' label="more-options"> &raquo;</aui:a>
 		</div>
