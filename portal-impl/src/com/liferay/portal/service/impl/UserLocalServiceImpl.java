@@ -971,15 +971,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			passwordPolicy.isChangeRequired()) {
 
 			if (user.getLastLoginDate() == null) {
-				boolean passwordReset = false;
-
-				if (passwordPolicy.isChangeable() &&
-					passwordPolicy.isChangeRequired()) {
-
-					passwordReset = true;
-				}
-
-				user.setPasswordReset(passwordReset);
+				user.setPasswordReset(true);
 
 				userPersistence.update(user, false);
 			}
