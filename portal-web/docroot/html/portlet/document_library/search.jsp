@@ -149,7 +149,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			// Action
 
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action_jsp");
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_entry_action.jsp");
 
 			// Add result row
 

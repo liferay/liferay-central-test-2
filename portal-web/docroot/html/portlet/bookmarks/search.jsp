@@ -149,7 +149,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 			// Action
 
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/bookmarks/entry_action_jsp");
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/bookmarks/entry_action.jsp");
 
 			// Add result row
 
