@@ -161,7 +161,7 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 			 */
 			public void set${column.methodName}(String ${column.name}, Locale locale);
 
-		    public void set${column.methodName}(String ${column.name}, Locale locale, Locale defaultLocale);
+			public void set${column.methodName}(String ${column.name}, Locale locale, Locale defaultLocale);
 
 			/**
 			 * Sets the localized ${column.humanNames} of this ${entity.humanName} from the map of locales and localized ${column.humanNames}.
