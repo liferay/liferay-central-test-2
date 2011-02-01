@@ -47,6 +47,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.liferay.portal.NoSuchUserException;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
@@ -55,10 +57,15 @@ import javax.servlet.http.HttpSession;
  */
 public class CASAutoLogin implements AutoLogin {
 
+	public static String NO_SUCH_USER_ATTRIBUTE = "NO_SUCH_USER";
+	public static String FIRST_TIME_WITH_NO_SUCH_USER = "FIRST_TIME_WITH_NO_SUCH_USER";
+
 	public String[] login(
 		HttpServletRequest request, HttpServletResponse response) {
 
 		String[] credentials = null;
+
+		HttpSession session = request.getSession();
 
 		try {
 			long companyId = PortalUtil.getCompanyId(request);
@@ -66,15 +73,25 @@ public class CASAutoLogin implements AutoLogin {
 			if (!PrefsPropsUtil.getBoolean(
 					companyId, PropsKeys.CAS_AUTH_ENABLED,
 					PropsValues.CAS_AUTH_ENABLED)) {
-
 				return credentials;
 			}
-
-			HttpSession session = request.getSession();
 
 			String login = (String)session.getAttribute(CASFilter.LOGIN);
 
 			if (Validator.isNull(login)) {
+				if (session.getAttribute(CASAutoLogin.NO_SUCH_USER_ATTRIBUTE) != null) {
+		
+					session.removeAttribute(CASAutoLogin.NO_SUCH_USER_ATTRIBUTE);
+					session.setAttribute(FIRST_TIME_WITH_NO_SUCH_USER, "");
+
+					String redirect = PrefsPropsUtil.getString(
+					companyId, PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL,
+					PropsKeys.CAS_LOGOUT_URL);
+			
+					request.setAttribute(AutoLogin.AUTO_LOGIN_REDIRECT, redirect);
+					return credentials;
+				}
+
 				return credentials;
 			}
 
@@ -126,7 +143,11 @@ public class CASAutoLogin implements AutoLogin {
 			credentials[2] = Boolean.TRUE.toString();
 
 			return credentials;
-		}
+		} 
+		catch (NoSuchUserException e) {
+			session.setAttribute(NO_SUCH_USER_ATTRIBUTE, "");
+			session.setAttribute(CASFilter.LOGIN, "");
+		} 
 		catch (Exception e) {
 			_log.error(e, e);
 		}

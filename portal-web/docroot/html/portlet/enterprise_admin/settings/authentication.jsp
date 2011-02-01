@@ -32,6 +32,7 @@ String casLogoutUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys
 String casServerName = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_NAME, PropsValues.CAS_SERVER_NAME);
 String casServerUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVER_URL, PropsValues.CAS_SERVER_URL);
 String casServiceUrl = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_SERVICE_URL, PropsValues.CAS_SERVICE_URL);
+String casNoSuchUserRedirectUrl = ParamUtil.getString(request, "settings--" + PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL + "--", PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL, PropsValues.CAS_NO_SUCH_USER_REDIRECT_URL));
 
 boolean facebookConnectAuthEnabled = FacebookConnectUtil.isEnabled(company.getCompanyId());
 String facebookConnectAppId = FacebookConnectUtil.getAppId(company.getCompanyId());
@@ -65,6 +66,8 @@ boolean siteminderImportFromLdap = PrefsPropsUtil.getBoolean(company.getCompanyI
 String siteminderUserHeader = PrefsPropsUtil.getString(company.getCompanyId(), PropsKeys.SITEMINDER_USER_HEADER, PropsValues.SITEMINDER_USER_HEADER);
 %>
 
+<liferay-ui:error-marker key="errorSection" value="authentication" />
+
 <h3><liferay-ui:message key="authentication" /></h3>
 
 <liferay-ui:tabs
@@ -97,19 +100,52 @@ String siteminderUserHeader = PrefsPropsUtil.getString(company.getCompanyId(), P
 	</liferay-ui:section>
 	<liferay-ui:section>
 		<aui:fieldset>
+		
 			<aui:input inlineLabel="left" label="enabled" name='<%= "settings--" + PropsKeys.CAS_AUTH_ENABLED + "--" %>' type="checkbox" value="<%= casAuthEnabled %>" />
 
 			<aui:input inlineLabel="left" helpMessage="import-cas-users-from-ldap-help" label="import-cas-users-from-ldap" name='<%= "settings--" + PropsKeys.CAS_IMPORT_FROM_LDAP + "--" %>' type="checkbox" value="<%= casImportFromLdap %>" />
 
-			<aui:input cssClass="lfr-input-text-container" label="login-url" name='<%= "settings--" + PropsKeys.CAS_LOGIN_URL + "--" %>' type="text" value="<%= casLoginUrl %>" />
+			<aui:input cssClass="lfr-input-text-container" helpMessage="cas-login-url-help" label="login-url" name='<%= "settings--" + PropsKeys.CAS_LOGIN_URL + "--" %>' type="text" value="<%= casLoginUrl %>" />
 
-			<aui:input cssClass="lfr-input-text-container" label="logout-url" name='<%= "settings--" + PropsKeys.CAS_LOGOUT_URL + "--" %>' type="text" value="<%= casLogoutUrl %>" />
+			<liferay-ui:error key="casLoginUrlIsBlank" message="cas-error-login-url-cannot-be-blank" />
+			<liferay-ui:error key="casLoginUrlInvalid" message="cas-error-login-url-invalid" />
 
-			<aui:input cssClass="lfr-input-text-container" label="server-name" name='<%= "settings--" + PropsKeys.CAS_SERVER_NAME + "--" %>' type="text" value="<%= casServerName %>" />
+			<aui:input cssClass="lfr-input-text-container" helpMessage="cas-logout-url-help" label="logout-url" name='<%= "settings--" + PropsKeys.CAS_LOGOUT_URL + "--" %>' type="text" value="<%= casLogoutUrl %>" />
 
-			<aui:input cssClass="lfr-input-text-container" label="server-url" name='<%= "settings--" + PropsKeys.CAS_SERVER_URL + "--" %>' type="text" value="<%= casServerUrl %>" />
+			<liferay-ui:error key="casLogoutUrlIsBlank" message="cas-error-logout-url-cannot-be-blank" />
+			<liferay-ui:error key="casLogoutUrlInvalid" message="cas-error-logout-url-invalid" />
 
-			<aui:input cssClass="lfr-input-text-container" label="service-url" name='<%= "settings--" + PropsKeys.CAS_SERVICE_URL + "--" %>' type="text" value="<%= casServiceUrl %>" />
+			<aui:input cssClass="lfr-input-text-container" helpMessage="cas-server-name-help" label="server-name" name='<%= "settings--" + PropsKeys.CAS_SERVER_NAME + "--" %>' type="text" value="<%= casServerName %>" />
+
+			<liferay-ui:error key="casServerNameIsBlank" message="cas-error-server-name-cannot-be-blank" />
+
+			<aui:input cssClass="lfr-input-text-container" helpMessage="cas-server-url-help" label="server-url" name='<%= "settings--" + PropsKeys.CAS_SERVER_URL + "--" %>' type="text" value="<%= casServerUrl %>" />
+
+			<liferay-ui:error key="casServerUrlServiceUrlBothCannotBeSet" message="cas-error-both-server-url-and-service-url-can-not-be-set" />
+			<liferay-ui:error key="casServerUrlServiceUrlNeitherIsSet" message="cas-error-one-of-server-url-and-service-url-must-be-set" />
+
+			<liferay-ui:error key="casServerUrlInvalid" message="cas-error-server-url-invalid" />
+
+			<aui:input cssClass="lfr-input-text-container" helpMessage="cas-service-url-help" label="service-url" name='<%= "settings--" + PropsKeys.CAS_SERVICE_URL + "--" %>' type="text" value="<%= casServiceUrl %>" />
+					
+			<liferay-ui:error key="casServiceUrlInvalid" message="cas-error-service-url-invalid" />
+					
+			<aui:input cssClass="lfr-input-text-container" helpMessage="cas-no-such-user-redirect-url-help" label="cas-no-such-user-redirect-url" name='<%= "settings--" + PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL + "--" %>' type="text" value="<%= casNoSuchUserRedirectUrl %>" />
+
+			<liferay-ui:error key="casNoSuchUserUrlInvalid" message="cas-error-no-such-user-redirect-url-invalid" />
+
+			<aui:input name="casHidden" type="hidden" value="casHidden" />
+			
+			<aui:button-row>
+
+				<%
+				String taglibOnClick = renderResponse.getNamespace() + "testSettings('casConfiguration');";
+				%>
+
+				<aui:button onClick='<%= taglibOnClick %>' value="cas-configuration-test-button" />
+			</aui:button-row>
+			
+
 		</aui:fieldset>
 	</liferay-ui:section>
 	<liferay-ui:section>
@@ -198,7 +234,7 @@ String siteminderUserHeader = PrefsPropsUtil.getString(company.getCompanyId(), P
 			var A = AUI();
 
 			var url = null;
-
+			var windowTitle = "";
 			var data = {};
 
 			if (type == "openssoConfiguration") {
@@ -211,6 +247,19 @@ String siteminderUserHeader = PrefsPropsUtil.getString(company.getCompanyId(), P
 				data.<portlet:namespace />openSsoEmailAddressAttr = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_EMAIL_ADDRESS_ATTR %>--'].value;
 				data.<portlet:namespace />openSsoFirstNameAttr = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_FIRST_NAME_ATTR %>--'].value;
 				data.<portlet:namespace />openSsoLastNameAttr = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.OPEN_SSO_LAST_NAME_ATTR %>--'].value;
+				windowTitle = 'OpenSSO';
+			} else {
+			  if (type == "casConfiguration") {
+			  	url = "<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/test_cas_configuration" /></portlet:renderURL>";
+
+				data.<portlet:namespace />casLoginUrl = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.CAS_LOGIN_URL %>--'].value;
+				data.<portlet:namespace />casLogoutUrl = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.CAS_LOGOUT_URL %>--'].value;
+				data.<portlet:namespace />casServerUrl = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.CAS_SERVER_URL %>--'].value;
+				data.<portlet:namespace />casServiceUrl = document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.CAS_SERVICE_URL %>--'].value;
+
+			  	windowTitle = 'CAS';
+			  
+			  }
 			}
 
 			if (url != null) {
@@ -219,7 +268,7 @@ String siteminderUserHeader = PrefsPropsUtil.getString(company.getCompanyId(), P
 						centered: true,
 						destroyOnClose: true,
 						modal: true,
-						title: Liferay.Language.get('OpenSSO'),
+						title: Liferay.Language.get(windowTitle),
 						width: 600
 					}
 				).render();

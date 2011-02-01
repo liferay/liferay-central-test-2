@@ -70,6 +70,7 @@
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.liveusers.LiveUsers" %>
 <%@ page import="com.liferay.portal.security.auth.AuthSettingsUtil" %>
+<%@ page import="com.liferay.portal.security.cas.CasUtil" %>
 <%@ page import="com.liferay.portal.security.ldap.LDAPSettingsUtil" %>
 <%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
