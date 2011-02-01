@@ -405,7 +405,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 		ShoppingItem item = null;
 
 		try {
-			item = ShoppingItemLocalServiceUtil.getItem(ShoppingUtil.getItemId(orderItem.getItemId()));
+			item = ShoppingItemServiceUtil.getItem(ShoppingUtil.getItemId(orderItem.getItemId()));
 		}
 		catch (Exception e) {
 		}

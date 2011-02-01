@@ -16,6 +16,7 @@ package com.liferay.portlet.shopping.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -75,6 +76,12 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 		shoppingItemLocalService.deleteItem(itemId);
 	}
 
+	public int getCategoriesItemsCount(long groupId, List<Long> categoryIds)
+		throws SystemException {
+
+		return shoppingItemFinder.filterCountByG_C(groupId, categoryIds);
+	}
+
 	public ShoppingItem getItem(long itemId)
 		throws PortalException, SystemException {
 
@@ -82,6 +89,37 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 			getPermissionChecker(), itemId, ActionKeys.VIEW);
 
 		return shoppingItemLocalService.getItem(itemId);
+	}
+
+	public List<ShoppingItem> getItems(long groupId, long categoryId)
+		throws SystemException {
+
+		return shoppingItemPersistence.filterFindByG_C(groupId, categoryId);
+	}
+
+	public List<ShoppingItem> getItems(
+			long groupId, long categoryId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return shoppingItemPersistence.filterFindByG_C(
+			groupId, categoryId, start, end, obc);
+	}
+
+	public int getItemsCount(long groupId, long categoryId)
+		throws SystemException {
+
+		return shoppingItemPersistence.filterCountByG_C(groupId, categoryId);
+	}
+
+	public ShoppingItem[] getItemsPrevAndNext(
+			long itemId, OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
+
+		return shoppingItemPersistence.filterFindByG_C_PrevAndNext(
+			item.getItemId(), item.getGroupId(), item.getCategoryId(), obc);
 	}
 
 	public ShoppingItem updateItem(

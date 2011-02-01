@@ -114,7 +114,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 				String categoryName = "";
 
 				if (categoryId != ShoppingCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-					ShoppingCategory category = ShoppingCategoryLocalServiceUtil.getCategory(categoryId);
+					ShoppingCategory category = ShoppingCategoryServiceUtil.getCategory(categoryId);
 
 					category = category.toEscapedModel();
 

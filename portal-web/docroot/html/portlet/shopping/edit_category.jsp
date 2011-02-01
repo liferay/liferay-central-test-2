@@ -59,7 +59,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 				String parentCategoryName = "";
 
 				try {
-					ShoppingCategory parentCategory = ShoppingCategoryLocalServiceUtil.getCategory(parentCategoryId);
+					ShoppingCategory parentCategory = ShoppingCategoryServiceUtil.getCategory(parentCategoryId);
 
 					parentCategoryName = parentCategory.getName();
 				}

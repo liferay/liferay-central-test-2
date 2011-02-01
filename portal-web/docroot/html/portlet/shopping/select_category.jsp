@@ -48,11 +48,11 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", Shoppin
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = ShoppingCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+	int total = ShoppingCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
 	searchContainer.setTotal(total);
 
-	List results = ShoppingCategoryLocalServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
+	List results = ShoppingCategoryServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -85,10 +85,10 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", Shoppin
 
 		subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
-		ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
+		ShoppingCategoryServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 		int categoriesCount = subcategoryIds.size() - 1;
-		int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
+		int itemsCount = ShoppingItemServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
 
 		row.addText(String.valueOf(categoriesCount), rowURL);
 		row.addText(String.valueOf(itemsCount), rowURL);

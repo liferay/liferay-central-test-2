@@ -22,6 +22,8 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.service.base.ShoppingCategoryServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
 
+import java.util.List;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -63,6 +65,42 @@ public class ShoppingCategoryServiceImpl
 			getPermissionChecker(), category, ActionKeys.VIEW);
 
 		return category;
+	}
+
+	public List<ShoppingCategory> getCategories(long groupId)
+		throws SystemException {
+
+		return shoppingCategoryPersistence.filterFindByGroupId(groupId);
+	}
+
+	public List<ShoppingCategory> getCategories(
+			long groupId, long parentCategoryId, int start, int end)
+		throws SystemException {
+
+		return shoppingCategoryPersistence.filterFindByG_P(
+			groupId, parentCategoryId, start, end);
+	}
+
+	public int getCategoriesCount(long groupId, long parentCategoryId)
+		throws SystemException {
+
+		return shoppingCategoryPersistence.filterCountByG_P(
+			groupId, parentCategoryId);
+	}
+
+	public void getSubcategoryIds(
+			List<Long> categoryIds, long groupId, long categoryId)
+		throws SystemException {
+
+		List<ShoppingCategory> categories =
+			shoppingCategoryPersistence.filterFindByG_P(groupId, categoryId);
+
+		for (ShoppingCategory category : categories) {
+			categoryIds.add(category.getCategoryId());
+
+			getSubcategoryIds(
+				categoryIds, category.getGroupId(), category.getCategoryId());
+		}
 	}
 
 	public ShoppingCategory updateCategory(

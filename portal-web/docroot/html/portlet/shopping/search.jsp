@@ -34,7 +34,7 @@ else {
 
 	categoryIds.add(new Long(searchCategoryIds));
 
-	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, scopeGroupId, searchCategoryIds);
+	ShoppingCategoryServiceUtil.getSubcategoryIds(categoryIds, scopeGroupId, searchCategoryIds);
 
 	categoryIdsArray = StringUtil.split(StringUtil.merge(categoryIds), 0L);
 }

@@ -16,6 +16,7 @@ package com.liferay.portlet.shopping.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
 
@@ -101,6 +102,66 @@ public class ShoppingCategoryServiceSoap {
 			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.getCategory(categoryId);
 
 			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap[] getCategories(
+		long groupId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> returnValue =
+				ShoppingCategoryServiceUtil.getCategories(groupId);
+
+			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap[] getCategories(
+		long groupId, long parentCategoryId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> returnValue =
+				ShoppingCategoryServiceUtil.getCategories(groupId,
+					parentCategoryId, start, end);
+
+			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getCategoriesCount(long groupId, long parentCategoryId)
+		throws RemoteException {
+		try {
+			int returnValue = ShoppingCategoryServiceUtil.getCategoriesCount(groupId,
+					parentCategoryId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void getSubcategoryIds(Long[] categoryIds, long groupId,
+		long categoryId) throws RemoteException {
+		try {
+			ShoppingCategoryServiceUtil.getSubcategoryIds(ListUtil.toList(
+					categoryIds), groupId, categoryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

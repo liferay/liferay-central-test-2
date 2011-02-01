@@ -31,7 +31,7 @@ String orderByType = portalPreferences.getValue(PortletKeys.SHOPPING, "items-ord
 
 OrderByComparator orderByComparator = ShoppingUtil.getItemOrderByComparator(orderByCol, orderByType);
 
-ShoppingItem[] prevAndNext = ShoppingItemLocalServiceUtil.getItemsPrevAndNext(item.getItemId(), orderByComparator);
+ShoppingItem[] prevAndNext = ShoppingItemServiceUtil.getItemsPrevAndNext(item.getItemId(), orderByComparator);
 %>
 
 <portlet:actionURL var="cartURL">

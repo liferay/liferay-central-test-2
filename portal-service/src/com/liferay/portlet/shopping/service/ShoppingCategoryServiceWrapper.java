@@ -52,6 +52,32 @@ public class ShoppingCategoryServiceWrapper implements ShoppingCategoryService {
 		return _shoppingCategoryService.getCategory(categoryId);
 	}
 
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingCategoryService.getCategories(groupId);
+	}
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
+		long groupId, long parentCategoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingCategoryService.getCategories(groupId,
+			parentCategoryId, start, end);
+	}
+
+	public int getCategoriesCount(long groupId, long parentCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingCategoryService.getCategoriesCount(groupId,
+			parentCategoryId);
+	}
+
+	public void getSubcategoryIds(java.util.List<java.lang.Long> categoryIds,
+		long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_shoppingCategoryService.getSubcategoryIds(categoryIds, groupId,
+			categoryId);
+	}
+
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentCategory,

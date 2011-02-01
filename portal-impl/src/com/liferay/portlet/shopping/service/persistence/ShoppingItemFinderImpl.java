@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
@@ -43,48 +44,7 @@ public class ShoppingItemFinderImpl
 	public int countByG_C(long groupId, List<Long> categoryIds)
 		throws SystemException {
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_C);
-
-			sql = StringUtil.replace(
-				sql, "[$CATEGORY_ID$]", getCategoryIds(categoryIds));
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-
-			for (int i = 0; i < categoryIds.size(); i++) {
-				Long categoryId = categoryIds.get(i);
-
-				qPos.add(categoryId);
-			}
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doCountByG_C(groupId, categoryIds, false);
 	}
 
 	public int countByFeatured(long groupId, long[] categoryIds)
@@ -290,6 +250,12 @@ public class ShoppingItemFinderImpl
 		}
 	}
 
+	public int filterCountByG_C(long groupId, List<Long> categoryIds)
+		throws SystemException {
+
+		return doCountByG_C(groupId, categoryIds, true);
+	}
+
 	public List<ShoppingItem> findByFeatured(
 			long groupId, long[] categoryIds, int numOfItems)
 		throws SystemException {
@@ -464,6 +430,60 @@ public class ShoppingItemFinderImpl
 
 			return (List<ShoppingItem>)QueryUtil.randomList(
 				q, getDialect(), countBySale, numOfItems);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected int doCountByG_C(
+			long groupId, List<Long> categoryIds, boolean inlineSQLHelper)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, ShoppingItem.class.getName(), "ShoppingItem.itemId",
+					"ShoppingItem.userId", groupId);
+			}
+
+			sql = StringUtil.replace(
+				sql, "[$CATEGORY_ID$]", getCategoryIds(categoryIds));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			for (int i = 0; i < categoryIds.size(); i++) {
+				Long categoryId = categoryIds.get(i);
+
+				qPos.add(categoryId);
+			}
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

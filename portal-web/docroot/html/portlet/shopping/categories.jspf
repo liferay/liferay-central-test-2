@@ -51,11 +51,11 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = ShoppingCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
+		int total = ShoppingCategoryServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
 		searchContainer.setTotal(total);
 
-		List results = ShoppingCategoryLocalServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = ShoppingCategoryServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -88,10 +88,10 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
-			ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
+			ShoppingCategoryServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 			int categoriesCount = subcategoryIds.size() - 1;
-			int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
+			int itemsCount = ShoppingItemServiceUtil.getCategoriesItemsCount(scopeGroupId, subcategoryIds);
 
 			row.addText(String.valueOf(categoriesCount), rowURL);
 			row.addText(String.valueOf(itemsCount), rowURL);
@@ -207,11 +207,11 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		searchContainer.setOrderByCol(orderByCol);
 		searchContainer.setOrderByType(orderByType);
 
-		int total = ShoppingItemLocalServiceUtil.getItemsCount(scopeGroupId, categoryId);
+		int total = ShoppingItemServiceUtil.getItemsCount(scopeGroupId, categoryId);
 
 		searchContainer.setTotal(total);
 
-		List results = ShoppingItemLocalServiceUtil.getItems(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
+		List results = ShoppingItemServiceUtil.getItems(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 
 		searchContainer.setResults(results);
 

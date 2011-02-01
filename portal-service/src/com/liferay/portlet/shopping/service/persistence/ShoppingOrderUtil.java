@@ -374,6 +374,30 @@ public class ShoppingOrderUtil {
 	}
 
 	/**
+	* Filters the shopping orders before and after the current shopping order in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param orderId the primary key of the current shopping order
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.shopping.model.ShoppingOrder[] filterFindByGroupId_PrevAndNext(
+		long orderId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.shopping.NoSuchOrderException {
+		return getPersistence()
+				   .filterFindByGroupId_PrevAndNext(orderId, groupId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds the shopping order where number = &#63; or throws a {@link com.liferay.portlet.shopping.NoSuchOrderException} if it could not be found.
 	*
 	* @param number the number to search with
@@ -658,6 +682,33 @@ public class ShoppingOrderUtil {
 		return getPersistence()
 				   .filterFindByG_U_PPPS(groupId, userId, ppPaymentStatus,
 			start, end, orderByComparator);
+	}
+
+	/**
+	* Filters the shopping orders before and after the current shopping order in the ordered set where groupId = &#63; and userId = &#63; and ppPaymentStatus = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param orderId the primary key of the current shopping order
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param ppPaymentStatus the pp payment status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next shopping order
+	* @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.shopping.model.ShoppingOrder[] filterFindByG_U_PPPS_PrevAndNext(
+		long orderId, long groupId, long userId,
+		java.lang.String ppPaymentStatus,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.shopping.NoSuchOrderException {
+		return getPersistence()
+				   .filterFindByG_U_PPPS_PrevAndNext(orderId, groupId, userId,
+			ppPaymentStatus, orderByComparator);
 	}
 
 	/**

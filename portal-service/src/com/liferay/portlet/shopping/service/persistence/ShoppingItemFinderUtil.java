@@ -43,6 +43,12 @@ public class ShoppingItemFinderUtil {
 		return getFinder().countBySale(groupId, categoryIds);
 	}
 
+	public static int filterCountByG_C(long groupId,
+		java.util.List<java.lang.Long> categoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterCountByG_C(groupId, categoryIds);
+	}
+
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByFeatured(
 		long groupId, long[] categoryIds, int numOfItems)
 		throws com.liferay.portal.kernel.exception.SystemException {

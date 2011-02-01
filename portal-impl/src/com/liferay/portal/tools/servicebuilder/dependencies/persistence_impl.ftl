@@ -1560,6 +1560,224 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 				}
 
+				/**
+				 * Filters the ${entity.humanNames} before and after the current ${entity.humanName} in the ordered set where ${finder.getHumanConditions(false)}.
+				 *
+				 * <p>
+				 * <#include "range_comment.ftl">
+				 * </p>
+				 *
+				 * @param ${entity.PKVarName} the primary key of the current ${entity.humanName}
+				<#list finderColsList as finderCol>
+				 * @param ${finderCol.name} the ${finderCol.humanName} to search with
+				</#list>
+				 * @param orderByComparator the comparator to order the set by
+				 * @return the previous, current, and next ${entity.humanName}
+				 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
+				 * @throws SystemException if a system exception occurred
+				 */
+				public ${entity.name}[] filterFindBy${finder.name}_PrevAndNext(${entity.PKClassName} ${entity.PKVarName},
+	
+				<#list finderColsList as finderCol>
+					${finderCol.type} ${finderCol.name},
+				</#list>
+	
+				OrderByComparator orderByComparator) throws ${noSuchEntity}Exception, SystemException {			
+					if (!InlineSQLHelperUtil.isEnabled(<#if finder.hasColumn("groupId")>groupId</#if>)) {
+						return findBy${finder.name}_PrevAndNext(${entity.PKVarName},
+	
+						<#list finderColsList as finderCol>
+							${finderCol.name},
+						</#list>
+	
+						orderByComparator);
+					}
+	
+					${entity.name} ${entity.varName} = findByPrimaryKey(${entity.PKVarName});
+	
+					Session session = null;
+	
+					try {
+						session = openSession();
+	
+						${entity.name}[] array = new ${entity.name}Impl[3];
+	
+						array[0] =
+							filterGetBy${finder.name}_PrevAndNext(
+								session, ${entity.varName},
+	
+								<#list finderColsList as finderCol>
+									${finderCol.name},
+								</#list>
+	
+								orderByComparator, true);
+	
+						array[1] = ${entity.varName};
+	
+						array[2] =
+							filterGetBy${finder.name}_PrevAndNext(
+								session, ${entity.varName},
+	
+								<#list finderColsList as finderCol>
+									${finderCol.name},
+								</#list>
+	
+								orderByComparator, false);
+	
+						return array;
+					}
+					catch (Exception e) {
+						throw processException(e);
+					}
+					finally {
+						closeSession(session);
+					}
+				}
+	
+				protected ${entity.name} filterGetBy${finder.name}_PrevAndNext(
+					Session session, ${entity.name} ${entity.varName},
+	
+					<#list finderColsList as finderCol>
+						${finderCol.type} ${finderCol.name},
+					</#list>
+	
+					OrderByComparator orderByComparator, boolean previous) {
+	
+					StringBundler query = null;
+	
+					if (orderByComparator != null) {
+						query = new StringBundler(6 + (orderByComparator.getOrderByFields().length * 6));
+					}
+					else {
+						query = new StringBundler(3);
+					}
+	
+					if (getDB().isSupportsInlineDistinct()) {
+						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
+					}
+					else {
+						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE_1);
+					}
+
+					<#include "persistence_impl_finder_cols.ftl">
+
+					if (!getDB().isSupportsInlineDistinct()) {
+						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_NO_INLINE_DISTINCT_WHERE_2);
+					}
+
+					if (orderByComparator != null) {
+						String[] orderByFields = orderByComparator.getOrderByFields();
+	
+						if (orderByFields.length > 0) {
+							query.append(WHERE_AND);
+						}
+	
+						for (int i = 0; i < orderByFields.length; i++) {
+							if (getDB().isSupportsInlineDistinct()) {
+								query.append(_ORDER_BY_ENTITY_ALIAS);
+							}
+							else {
+								query.append(_ORDER_BY_ENTITY_TABLE);
+							}
+
+							query.append(orderByFields[i]);
+	
+							if ((i + 1) < orderByFields.length) {
+								if (orderByComparator.isAscending() ^ previous) {
+									query.append(WHERE_GREATER_THAN_HAS_NEXT);
+								}
+								else {
+									query.append(WHERE_LESSER_THAN_HAS_NEXT);
+								}
+							}
+							else {
+								if (orderByComparator.isAscending() ^ previous) {
+									query.append(WHERE_GREATER_THAN);
+								}
+								else {
+									query.append(WHERE_LESSER_THAN);
+								}
+							}
+						}
+	
+						query.append(ORDER_BY_CLAUSE);
+	
+						for (int i = 0; i < orderByFields.length; i++) {
+							if (getDB().isSupportsInlineDistinct()) {
+								query.append(_ORDER_BY_ENTITY_ALIAS);
+							}
+							else {
+								query.append(_ORDER_BY_ENTITY_TABLE);
+							}
+
+							query.append(orderByFields[i]);
+	
+							if ((i + 1) < orderByFields.length) {
+								if (orderByComparator.isAscending() ^ previous) {
+									query.append(ORDER_BY_ASC_HAS_NEXT);
+								}
+								else {
+									query.append(ORDER_BY_DESC_HAS_NEXT);
+								}
+							}
+							else {
+								if (orderByComparator.isAscending() ^ previous) {
+									query.append(ORDER_BY_ASC);
+								}
+								else {
+									query.append(ORDER_BY_DESC);
+								}
+							}
+						}
+					}
+	
+					<#if entity.getOrder()??>
+						else {
+							if (getDB().isSupportsInlineDistinct()) {
+								query.append(${entity.name}ModelImpl.ORDER_BY_JPQL);
+							}
+							else {
+								query.append(${entity.name}ModelImpl.ORDER_BY_SQL);
+							}
+						}
+					</#if>
+
+					String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(), ${entity.name}.class.getName(), _FILTER_COLUMN_PK, _FILTER_COLUMN_USERID<#if finder.hasColumn("groupId")>, groupId</#if>);
+
+					SQLQuery q = session.createSQLQuery(sql);
+
+					q.setFirstResult(0);
+					q.setMaxResults(2);
+
+					if (getDB().isSupportsInlineDistinct()) {
+						q.addEntity(_FILTER_ENTITY_ALIAS, ${entity.name}Impl.class);
+					}
+					else {
+						q.addEntity(_FILTER_ENTITY_TABLE, ${entity.name}Impl.class);
+					}
+
+					QueryPos qPos = QueryPos.getInstance(q);
+
+					<#include "persistence_impl_finder_qpos.ftl">
+
+					if (orderByComparator != null) {
+						Object[] values = orderByComparator.getOrderByValues(${entity.varName});
+	
+						for (Object value : values) {
+							qPos.add(value);
+						}
+					}
+	
+					List<${entity.name}> list = q.list();
+	
+					if (list.size() == 2) {
+						return list.get(1);
+					}
+					else {
+						return null;
+					}
+				}
+
 				<#if finder.hasArrayableOperator()>
 					/**
 					 * Filters by the user's permissions and finds all the ${entity.humanNames} where ${finder.getHumanConditions(true)}.

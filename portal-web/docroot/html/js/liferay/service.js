@@ -946,7 +946,11 @@ Liferay.Service.registerClass(
 	{
 		addBookItems: true,
 		deleteItem: true,
-		getItem: true
+		getCategoriesItemsCount: true,
+		getItem: true,
+		getItems: true,
+		getItemsCount: true,
+		getItemsPrevAndNext: true
 	}
 );
 
