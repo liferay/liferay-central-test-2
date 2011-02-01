@@ -172,11 +172,11 @@ public class SQLTransformer {
 				newSQL = _removeLower(newSQL);
 			}
 		}
-		else if (_vendorSQLServer || _vendorSybase) {
-			newSQL = _replaceMod(newSQL);
-		}
 		else if (_vendorPostgreSQL) {
 			newSQL = _replaceNegativeComparison(newSQL);
+		}
+		else if (_vendorSQLServer || _vendorSybase) {
+			newSQL = _replaceMod(newSQL);
 		}
 		if (_log.isDebugEnabled()) {
 			_log.debug("Original SQL " + sql);
@@ -200,10 +200,10 @@ public class SQLTransformer {
 		"INTEGER_DIV\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _modPattern = Pattern.compile(
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
-	private static Pattern _unionAllPattern = Pattern.compile(
-		"SELECT \\* FROM(.*)TEMP_TABLE(.*)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _negativeComparisonPattern = Pattern.compile(
 		"(!= )?(-([0-9]+)?)", Pattern.CASE_INSENSITIVE);
+	private static Pattern _unionAllPattern = Pattern.compile(
+		"SELECT \\* FROM(.*)TEMP_TABLE(.*)", Pattern.CASE_INSENSITIVE);
 
 	private boolean _vendorDB2;
 	private boolean _vendorDerby;
