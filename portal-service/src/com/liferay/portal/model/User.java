@@ -190,6 +190,8 @@ public interface User extends UserModel {
 
 	public boolean hasReminderQuery();
 
+	public boolean isActive();
+
 	public boolean isFemale()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

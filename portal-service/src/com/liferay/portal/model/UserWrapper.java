@@ -1108,6 +1108,10 @@ public class UserWrapper implements User {
 		return _user.hasReminderQuery();
 	}
 
+	public boolean isActive() {
+		return _user.isActive();
+	}
+
 	public boolean isFemale()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
