@@ -53,8 +53,6 @@ import java.io.IOException;
 
 import java.util.Date;
 
-import javax.portlet.PortletPreferences;
-
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -130,11 +128,8 @@ public class ImageServlet extends HttpServlet {
 			Image image, long igImageId)
 		throws PortalException, SystemException {
 
-		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
-
-		long igThumbnailMaxDimension = GetterUtil.getLong(
-			preferences.getValue(
-				PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION, null));
+		long igThumbnailMaxDimension =
+			PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
 
 		if ((image.getHeight() > igThumbnailMaxDimension) ||
 			(image.getWidth() > igThumbnailMaxDimension)) {
