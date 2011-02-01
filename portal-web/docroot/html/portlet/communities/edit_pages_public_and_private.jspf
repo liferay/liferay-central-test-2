@@ -18,14 +18,8 @@
 	<liferay-util:include page="/html/portlet/communities/edit_pages_staging_toolbar.jsp" />
 </c:if>
 
-<%
-boolean manageableLayouts = (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS));
-
-boolean viewablePages = (pagesCount > 0) && (liveGroup.isStaged() || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup() || portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES));
-%>
-
 <aui:button-row id='<%= renderResponse.getNamespace() + "communityPagesToolbar" %>'>
-	<c:if test="<%= manageableLayouts %>">
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
 		<c:if test="<%= SessionErrors.contains(renderRequest, LayoutImportException.class.getName()) || SessionErrors.contains(renderRequest, LARFileException.class.getName()) || SessionErrors.contains(renderRequest, LARTypeException.class.getName()) %>">
 			<liferay-util:html-top>
 				<div class="aui-helper-hidden" id="<portlet:namespace />importPage">
@@ -60,7 +54,7 @@ boolean viewablePages = (pagesCount > 0) && (liveGroup.isStaged() || selGroup.is
 			activeState: false,
 			boundingBox: '#<portlet:namespace />communityPagesToolbar',
 			children: [
-				<c:if test="<%= viewablePages %>">
+				<c:if test="<%= (pagesCount > 0) && (liveGroup.isStaged() || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup() || portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES)) %>">
 					{
 						handler: function(event) {
 							var groupWindow = window.open('<%= viewPagesURL %>');
@@ -71,16 +65,16 @@ boolean viewablePages = (pagesCount > 0) && (liveGroup.isStaged() || selGroup.is
 						},
 						icon: 'search',
 						label: '<liferay-ui:message key="view-pages" />'
-					}
-				</c:if>
 
-				<c:if test="<%= viewablePages && manageableLayouts %>">
-					,{
-						type: 'ToolbarSpacer'
+						<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
+							},
+							{
+								type: 'ToolbarSpacer'
+						</c:if>
 					},
 				</c:if>
 
-				<c:if test="<%= manageableLayouts %>">
+				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
 					{
 						handler: function(event) {
 							var exportPopup = new A.Dialog(
