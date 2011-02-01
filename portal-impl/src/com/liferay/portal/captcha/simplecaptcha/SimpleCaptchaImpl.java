@@ -154,7 +154,7 @@ public class SimpleCaptchaImpl implements Captcha {
 			HttpSession session = request.getSession();
 
 			_checkMaxChallenges(
-					(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
+				(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
 		}
 	}
 
@@ -164,7 +164,7 @@ public class SimpleCaptchaImpl implements Captcha {
 			PortletSession session = portletRequest.getPortletSession();
 
 			_checkMaxChallenges(
-					(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
+				(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
 		}
 	}
 
@@ -364,8 +364,8 @@ public class SimpleCaptchaImpl implements Captcha {
 
 		if (captchaText == null) {
 			_log.error(
-					"Captcha text is null. User " + request.getRemoteUser() +
-							" may be trying to circumvent the captcha.");
+				"Captcha text is null. User " + request.getRemoteUser() +
+					" may be trying to circumvent the captcha.");
 
 			throw new CaptchaTextException();
 		}
@@ -389,8 +389,8 @@ public class SimpleCaptchaImpl implements Captcha {
 
 		if (captchaText == null) {
 			_log.error(
-					"Captcha text is null. User " + request.getRemoteUser() +
-							" may be trying to circumvent the captcha.");
+				"Captcha text is null. User " + request.getRemoteUser() +
+					" may be trying to circumvent the captcha.");
 
 			throw new CaptchaTextException();
 		}
