@@ -102,13 +102,13 @@ public class CatalinaCometProcessor
 	protected void doEvent(CometEvent cometEvent) throws Exception {
 		CometEvent.EventType eventType = cometEvent.getEventType();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(session.getId() + " " + eventType);
-		}
-
 		HttpServletRequest request = cometEvent.getHttpServletRequest();
 
 		HttpSession session = request.getSession();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(session.getId() + " " + eventType);
+		}
 
 		if (eventType.equals(CometEvent.EventType.BEGIN)) {
 			startCometHandler(cometEvent, request, session);
