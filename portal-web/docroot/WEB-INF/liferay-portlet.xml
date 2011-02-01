@@ -222,15 +222,6 @@
 		<configuration-action-class>com.liferay.portlet.documentlibrary.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.documentlibrary.util.DLIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.documentlibrary.util.DLOpenSearchImpl</open-search-class>
-		<scheduler-entry>
-			<scheduler-event-listener-class>com.liferay.portlet.documentlibrary.messaging.PDFProcessorMessageListener</scheduler-event-listener-class>
-			<trigger>
-				<simple>
-					<property-key>dl.pdf.process.job.interval</property-key>
-					<time-unit>minute</time-unit>
-				</simple>
-			</trigger>
-		</scheduler-entry>
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>document_library</friendly-url-mapping>
 		<friendly-url-routes>com/liferay/portlet/documentlibrary/document-library-friendly-url-routes.xml</friendly-url-routes>

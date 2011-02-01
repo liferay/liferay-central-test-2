@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.messaging;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portlet.documentlibrary.util.PDFProcessorUtil;
 
 /**
@@ -23,8 +24,10 @@ import com.liferay.portlet.documentlibrary.util.PDFProcessorUtil;
  */
 public class PDFProcessorMessageListener extends BaseMessageListener {
 
-	protected void doReceive(Message message) throws Exception {
-		PDFProcessorUtil.generateImages();
+	protected void doReceive(Message message) {
+		FileEntry fileEntry = (FileEntry)message.getPayload();
+
+		PDFProcessorUtil.generateImages(fileEntry);
 	}
 
 }

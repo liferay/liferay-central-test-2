@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
-import com.liferay.ibm.icu.util.Calendar;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -23,6 +22,8 @@ import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.io.FileFilter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.OSDetector;
@@ -45,9 +46,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
@@ -66,10 +65,10 @@ public class PDFProcessorUtil {
 
 	public static final String PREVIEW_TYPE = ImageProcessor.TYPE_PNG;
 
-	public static final String THUMBNAIL_TYPE = ImageProcessor.TYPE_JPEG;
+	public static final String THUMBNAIL_TYPE = ImageProcessor.TYPE_PNG;
 
-	public static void generateImages() {
-		_instance._generateImages();
+	public static void generateImages(FileEntry fileEntry) {
+		_instance._generateImages(fileEntry);
 	}
 
 	public static File getPreviewFile(String id, int index) {
@@ -85,7 +84,13 @@ public class PDFProcessorUtil {
 	}
 
 	public static boolean hasImages(FileEntry fileEntry) {
-		return _instance._hasImages(fileEntry);
+		boolean hasImages = _instance._hasImages(fileEntry);
+
+		if (!hasImages) {
+			_instance._queueGeneration(fileEntry);
+		}
+
+		return hasImages;
 	}
 
 	private PDFProcessorUtil() {
@@ -117,56 +122,41 @@ public class PDFProcessorUtil {
 		_convertCmd = new ConvertCmd();
 	}
 
-	private void _generateImages() {
+	private void _generateImages(FileEntry fileEntry) {
+		if (_hasImages(fileEntry)) {
+			return;
+		}
 
-		// At most, occupy thread for one minute at a time
+		try {
+			String extension = fileEntry.getExtension();
 
-		Calendar cal = Calendar.getInstance();
+			if (extension.equals("pdf")) {
+				InputStream inputStream =
+					DLRepositoryLocalServiceUtil.getFileAsStream(
+						fileEntry.getUserId(), fileEntry.getFileEntryId(),
+						fileEntry.getVersion(), false);
 
-		cal.add(Calendar.MINUTE, 1);
-
-		Date expiration = cal.getTime();
-
-		while (!_fileEntries.isEmpty()) {
-			Date now = new Date();
-
-			if (now.after(expiration)) {
-				break;
+				_generateImages(fileEntry, inputStream);
 			}
+			else if (DocumentConversionUtil.isEnabled()) {
+				InputStream inputStream =
+					DLRepositoryLocalServiceUtil.getFileAsStream(
+						fileEntry.getUserId(), fileEntry.getFileEntryId(),
+						fileEntry.getVersion(), false);
 
-			FileEntry fileEntry = _fileEntries.remove(0);
+				String id = DLUtil.getTempFileId(
+					fileEntry.getFileEntryId(), fileEntry.getVersion());
 
-			try {
-				String extension = fileEntry.getExtension();
+				File file = DocumentConversionUtil.convert(
+					id, inputStream, fileEntry.getExtension(), "pdf");
 
-				if (extension.equals("pdf")) {
-					InputStream inputStream =
-						DLRepositoryLocalServiceUtil.getFileAsStream(
-							fileEntry.getUserId(), fileEntry.getFileEntryId(),
-							fileEntry.getVersion(), false);
-
-					_generateImages(fileEntry, inputStream);
-				}
-				else if (DocumentConversionUtil.isEnabled()) {
-					InputStream inputStream =
-						DLRepositoryLocalServiceUtil.getFileAsStream(
-							fileEntry.getUserId(), fileEntry.getFileEntryId(),
-							fileEntry.getVersion(), false);
-
-					String id = DLUtil.getTempFileId(
-						fileEntry.getFileEntryId(), fileEntry.getVersion());
-
-					File file = DocumentConversionUtil.convert(
-						id, inputStream, fileEntry.getExtension(), "pdf");
-
-					_generateImages(fileEntry, file);
-				}
+				_generateImages(fileEntry, file);
 			}
-			catch (NoSuchFileEntryException nsfee) {
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -470,26 +460,6 @@ public class PDFProcessorUtil {
 			return true;
 		}
 
-		if (!_fileEntries.contains(fileEntry)) {
-			String extension = fileEntry.getExtension();
-
-			if (extension.equals("pdf")) {
-				_fileEntries.add(fileEntry);
-			}
-			else if (DocumentConversionUtil.isEnabled()){
-				String[] conversions = DocumentConversionUtil.getConversions(
-					fileEntry.getExtension());
-
-				for (String conversion : conversions) {
-					if (conversion.equals("pdf")) {
-						_fileEntries.add(fileEntry);
-
-						break;
-					}
-				}
-			}
-		}
-
 		return false;
 	}
 
@@ -519,6 +489,33 @@ public class PDFProcessorUtil {
 		}
 	}
 
+	private void _queueGeneration(FileEntry fileEntry) {
+		boolean generateImages = false;
+
+		String extension = fileEntry.getExtension();
+
+		if (extension.equals("pdf")) {
+			generateImages = true;
+		}
+		else if (DocumentConversionUtil.isEnabled()) {
+			String[] conversions = DocumentConversionUtil.getConversions(
+				fileEntry.getExtension());
+
+			for (String conversion : conversions) {
+				if (conversion.equals("pdf")) {
+					generateImages = true;
+
+					break;
+				}
+			}
+		}
+
+		if (generateImages) {
+			MessageBusUtil.sendMessage(
+				DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR, fileEntry);
+		}
+	}
+
 	private static final String _PREVIEW_PATH =
 		SystemProperties.get(SystemProperties.TMP_DIR) +
 			"/liferay/document_preview/";
@@ -532,6 +529,5 @@ public class PDFProcessorUtil {
 	private static PDFProcessorUtil _instance = new PDFProcessorUtil();
 
 	private ConvertCmd _convertCmd;
-	private List<FileEntry> _fileEntries = new Vector<FileEntry>();
 
 }
