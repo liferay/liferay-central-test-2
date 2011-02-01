@@ -23,17 +23,17 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 %>
 
 <%
+String title = StringPool.BLANK;
 boolean approved = false;
 boolean expired = true;
-String title = StringPool.BLANK;
 
 try {
 	if (articleDisplay != null) {
 		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleId, WorkflowConstants.STATUS_ANY);
 
+		title = article.getTitle();
 		approved = article.isApproved();
 		expired = article.isExpired();
-		title = article.getTitle();
 
 		if (!expired) {
 			Date expirationDate = article.getExpirationDate();
