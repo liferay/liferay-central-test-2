@@ -1757,7 +1757,7 @@ create table User_ (
 	lockout BOOLEAN,
 	lockoutDate DATE null,
 	agreedToTermsOfUse BOOLEAN,
-	active_ BOOLEAN
+	status INTEGER
 );
 
 create table UserGroup (

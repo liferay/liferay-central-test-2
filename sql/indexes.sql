@@ -644,6 +644,7 @@ create unique index IX_615E9F7A on User_ (companyId, emailAddress);
 create index IX_1D731F03 on User_ (companyId, facebookId);
 create index IX_89509087 on User_ (companyId, openId);
 create unique index IX_C5806019 on User_ (companyId, screenName);
+create index IX_F6039434 on User_ (companyId, status);
 create unique index IX_9782AD88 on User_ (companyId, userId);
 create unique index IX_5ADBE171 on User_ (contactId);
 create index IX_762F63C6 on User_ (emailAddress);

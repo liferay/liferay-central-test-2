@@ -901,48 +901,48 @@ public class UserUtil {
 	}
 
 	/**
-	* Finds all the users where companyId = &#63; and active = &#63;.
+	* Finds all the users where companyId = &#63; and status = &#63;.
 	*
 	* @param companyId the company ID to search with
-	* @param active the active to search with
+	* @param status the status to search with
 	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portal.model.User> findByC_A(
-		long companyId, boolean active)
+		long companyId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_A(companyId, active);
+		return getPersistence().findByC_A(companyId, status);
 	}
 
 	/**
-	* Finds a range of all the users where companyId = &#63; and active = &#63;.
+	* Finds a range of all the users where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param active the active to search with
+	* @param status the status to search with
 	* @param start the lower bound of the range of users to return
 	* @param end the upper bound of the range of users to return (not inclusive)
 	* @return the range of matching users
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portal.model.User> findByC_A(
-		long companyId, boolean active, int start, int end)
+		long companyId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_A(companyId, active, start, end);
+		return getPersistence().findByC_A(companyId, status, start, end);
 	}
 
 	/**
-	* Finds an ordered range of all the users where companyId = &#63; and active = &#63;.
+	* Finds an ordered range of all the users where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param active the active to search with
+	* @param status the status to search with
 	* @param start the lower bound of the range of users to return
 	* @param end the upper bound of the range of users to return (not inclusive)
 	* @param orderByComparator the comparator to order the results by
@@ -950,61 +950,61 @@ public class UserUtil {
 	* @throws SystemException if a system exception occurred
 	*/
 	public static java.util.List<com.liferay.portal.model.User> findByC_A(
-		long companyId, boolean active, int start, int end,
+		long companyId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_A(companyId, active, start, end, orderByComparator);
+				   .findByC_A(companyId, status, start, end, orderByComparator);
 	}
 
 	/**
-	* Finds the first user in the ordered set where companyId = &#63; and active = &#63;.
+	* Finds the first user in the ordered set where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param active the active to search with
+	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the first matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User findByC_A_First(
-		long companyId, boolean active,
+		long companyId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_A_First(companyId, active, orderByComparator);
+				   .findByC_A_First(companyId, status, orderByComparator);
 	}
 
 	/**
-	* Finds the last user in the ordered set where companyId = &#63; and active = &#63;.
+	* Finds the last user in the ordered set where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param active the active to search with
+	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the last matching user
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User findByC_A_Last(long companyId,
-		boolean active,
+		int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_A_Last(companyId, active, orderByComparator);
+				   .findByC_A_Last(companyId, status, orderByComparator);
 	}
 
 	/**
-	* Finds the users before and after the current user in the ordered set where companyId = &#63; and active = &#63;.
+	* Finds the users before and after the current user in the ordered set where companyId = &#63; and status = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1012,19 +1012,19 @@ public class UserUtil {
 	*
 	* @param userId the primary key of the current user
 	* @param companyId the company ID to search with
-	* @param active the active to search with
+	* @param status the status to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next user
 	* @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public static com.liferay.portal.model.User[] findByC_A_PrevAndNext(
-		long userId, long companyId, boolean active,
+		long userId, long companyId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_A_PrevAndNext(userId, companyId, active,
+				   .findByC_A_PrevAndNext(userId, companyId, status,
 			orderByComparator);
 	}
 
@@ -1214,15 +1214,15 @@ public class UserUtil {
 	}
 
 	/**
-	* Removes all the users where companyId = &#63; and active = &#63; from the database.
+	* Removes all the users where companyId = &#63; and status = &#63; from the database.
 	*
 	* @param companyId the company ID to search with
-	* @param active the active to search with
+	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByC_A(long companyId, boolean active)
+	public static void removeByC_A(long companyId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByC_A(companyId, active);
+		getPersistence().removeByC_A(companyId, status);
 	}
 
 	/**
@@ -1374,16 +1374,16 @@ public class UserUtil {
 	}
 
 	/**
-	* Counts all the users where companyId = &#63; and active = &#63;.
+	* Counts all the users where companyId = &#63; and status = &#63;.
 	*
 	* @param companyId the company ID to search with
-	* @param active the active to search with
+	* @param status the status to search with
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByC_A(long companyId, boolean active)
+	public static int countByC_A(long companyId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByC_A(companyId, active);
+		return getPersistence().countByC_A(companyId, status);
 	}
 
 	/**

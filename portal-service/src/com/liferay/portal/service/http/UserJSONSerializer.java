@@ -131,7 +131,7 @@ public class UserJSONSerializer {
 
 		jsonObject.put("lockoutDate", lockoutDateJSON);
 		jsonObject.put("agreedToTermsOfUse", model.getAgreedToTermsOfUse());
-		jsonObject.put("active", model.getActive());
+		jsonObject.put("status", model.getStatus());
 
 		return jsonObject;
 	}

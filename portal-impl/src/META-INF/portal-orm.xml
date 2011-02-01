@@ -916,9 +916,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="agreedToTermsOfUse" />
-			<basic name="active">
-				<column name="ACTIVE_" />
-			</basic>
+			<basic name="status" />
 			<transient name="primaryKey" />
 			<transient name="userUuid" />
 		</attributes>

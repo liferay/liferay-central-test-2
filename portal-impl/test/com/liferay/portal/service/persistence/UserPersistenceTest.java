@@ -100,7 +100,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		newUser.setLockout(randomBoolean());
 		newUser.setLockoutDate(nextDate());
 		newUser.setAgreedToTermsOfUse(randomBoolean());
-		newUser.setActive(randomBoolean());
+		newUser.setStatus(nextInt());
 
 		_persistence.update(newUser, false);
 
@@ -158,7 +158,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newUser.getLockoutDate()));
 		assertEquals(existingUser.getAgreedToTermsOfUse(),
 			newUser.getAgreedToTermsOfUse());
-		assertEquals(existingUser.getActive(), newUser.getActive());
+		assertEquals(existingUser.getStatus(), newUser.getStatus());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -268,7 +268,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		user.setLockout(randomBoolean());
 		user.setLockoutDate(nextDate());
 		user.setAgreedToTermsOfUse(randomBoolean());
-		user.setActive(randomBoolean());
+		user.setStatus(nextInt());
 
 		_persistence.update(user, false);
 

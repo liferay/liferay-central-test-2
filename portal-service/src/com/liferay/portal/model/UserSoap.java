@@ -68,7 +68,7 @@ public class UserSoap implements Serializable {
 		soapModel.setLockout(model.getLockout());
 		soapModel.setLockoutDate(model.getLockoutDate());
 		soapModel.setAgreedToTermsOfUse(model.getAgreedToTermsOfUse());
-		soapModel.setActive(model.getActive());
+		soapModel.setStatus(model.getStatus());
 
 		return soapModel;
 	}
@@ -437,16 +437,12 @@ public class UserSoap implements Serializable {
 		_agreedToTermsOfUse = agreedToTermsOfUse;
 	}
 
-	public boolean getActive() {
-		return _active;
+	public int getStatus() {
+		return _status;
 	}
 
-	public boolean isActive() {
-		return _active;
-	}
-
-	public void setActive(boolean active) {
-		_active = active;
+	public void setStatus(int status) {
+		_status = status;
 	}
 
 	private String _uuid;
@@ -486,5 +482,5 @@ public class UserSoap implements Serializable {
 	private boolean _lockout;
 	private Date _lockoutDate;
 	private boolean _agreedToTermsOfUse;
-	private boolean _active;
+	private int _status;
 }

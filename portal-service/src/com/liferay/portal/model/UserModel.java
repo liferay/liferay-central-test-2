@@ -645,25 +645,18 @@ public interface UserModel extends BaseModel<User> {
 	public void setAgreedToTermsOfUse(boolean agreedToTermsOfUse);
 
 	/**
-	 * Gets the active of this user.
+	 * Gets the status of this user.
 	 *
-	 * @return the active of this user
+	 * @return the status of this user
 	 */
-	public boolean getActive();
+	public int getStatus();
 
 	/**
-	 * Determines if this user is active.
+	 * Sets the status of this user.
 	 *
-	 * @return <code>true</code> if this user is active; <code>false</code> otherwise
+	 * @param status the status of this user
 	 */
-	public boolean isActive();
-
-	/**
-	 * Sets whether this user is active.
-	 *
-	 * @param active the active of this user
-	 */
-	public void setActive(boolean active);
+	public void setStatus(int status);
 
 	public boolean isNew();
 

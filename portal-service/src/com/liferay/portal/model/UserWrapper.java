@@ -778,30 +778,21 @@ public class UserWrapper implements User {
 	}
 
 	/**
-	* Gets the active of this user.
+	* Gets the status of this user.
 	*
-	* @return the active of this user
+	* @return the status of this user
 	*/
-	public boolean getActive() {
-		return _user.getActive();
+	public int getStatus() {
+		return _user.getStatus();
 	}
 
 	/**
-	* Determines if this user is active.
+	* Sets the status of this user.
 	*
-	* @return <code>true</code> if this user is active; <code>false</code> otherwise
+	* @param status the status of this user
 	*/
-	public boolean isActive() {
-		return _user.isActive();
-	}
-
-	/**
-	* Sets whether this user is active.
-	*
-	* @param active the active of this user
-	*/
-	public void setActive(boolean active) {
-		_user.setActive(active);
+	public void setStatus(int status) {
+		_user.setStatus(status);
 	}
 
 	public boolean isNew() {

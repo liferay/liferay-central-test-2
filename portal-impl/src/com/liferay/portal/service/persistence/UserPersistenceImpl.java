@@ -191,7 +191,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByC_A",
 			new String[] {
-				Long.class.getName(), Boolean.class.getName(),
+				Long.class.getName(), Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
@@ -199,7 +199,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	public static final FinderPath FINDER_PATH_COUNT_BY_C_A = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByC_A",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
+			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -769,7 +769,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		userImpl.setLockout(user.isLockout());
 		userImpl.setLockoutDate(user.getLockoutDate());
 		userImpl.setAgreedToTermsOfUse(user.isAgreedToTermsOfUse());
-		userImpl.setActive(user.isActive());
+		userImpl.setStatus(user.getStatus());
 
 		return userImpl;
 	}
@@ -3012,57 +3012,57 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	/**
-	 * Finds all the users where companyId = &#63; and active = &#63;.
+	 * Finds all the users where companyId = &#63; and status = &#63;.
 	 *
 	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param status the status to search with
 	 * @return the matching users
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<User> findByC_A(long companyId, boolean active)
+	public List<User> findByC_A(long companyId, int status)
 		throws SystemException {
-		return findByC_A(companyId, active, QueryUtil.ALL_POS,
+		return findByC_A(companyId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Finds a range of all the users where companyId = &#63; and active = &#63;.
+	 * Finds a range of all the users where companyId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param status the status to search with
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
 	 * @return the range of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<User> findByC_A(long companyId, boolean active, int start,
-		int end) throws SystemException {
-		return findByC_A(companyId, active, start, end, null);
+	public List<User> findByC_A(long companyId, int status, int start, int end)
+		throws SystemException {
+		return findByC_A(companyId, status, start, end, null);
 	}
 
 	/**
-	 * Finds an ordered range of all the users where companyId = &#63; and active = &#63;.
+	 * Finds an ordered range of all the users where companyId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param status the status to search with
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
 	 * @param orderByComparator the comparator to order the results by
 	 * @return the ordered range of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<User> findByC_A(long companyId, boolean active, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+	public List<User> findByC_A(long companyId, int status, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
-				companyId, active,
+				companyId, status,
 				
 				String.valueOf(start), String.valueOf(end),
 				String.valueOf(orderByComparator)
@@ -3086,7 +3086,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_A_STATUS_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -3106,7 +3106,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				qPos.add(companyId);
 
-				qPos.add(active);
+				qPos.add(status);
 
 				list = (List<User>)QueryUtil.list(q, getDialect(), start, end);
 			}
@@ -3133,23 +3133,23 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	/**
-	 * Finds the first user in the ordered set where companyId = &#63; and active = &#63;.
+	 * Finds the first user in the ordered set where companyId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the first matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public User findByC_A_First(long companyId, boolean active,
+	public User findByC_A_First(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserException, SystemException {
-		List<User> list = findByC_A(companyId, active, 0, 1, orderByComparator);
+		List<User> list = findByC_A(companyId, status, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3159,8 +3159,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			msg.append("companyId=");
 			msg.append(companyId);
 
-			msg.append(", active=");
-			msg.append(active);
+			msg.append(", status=");
+			msg.append(status);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -3172,25 +3172,25 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	/**
-	 * Finds the last user in the ordered set where companyId = &#63; and active = &#63;.
+	 * Finds the last user in the ordered set where companyId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the last matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public User findByC_A_Last(long companyId, boolean active,
+	public User findByC_A_Last(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserException, SystemException {
-		int count = countByC_A(companyId, active);
+		int count = countByC_A(companyId, status);
 
-		List<User> list = findByC_A(companyId, active, count - 1, count,
+		List<User> list = findByC_A(companyId, status, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -3201,8 +3201,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			msg.append("companyId=");
 			msg.append(companyId);
 
-			msg.append(", active=");
-			msg.append(active);
+			msg.append(", status=");
+			msg.append(status);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -3214,7 +3214,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	/**
-	 * Finds the users before and after the current user in the ordered set where companyId = &#63; and active = &#63;.
+	 * Finds the users before and after the current user in the ordered set where companyId = &#63; and status = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -3222,14 +3222,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 *
 	 * @param userId the primary key of the current user
 	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param status the status to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next user
 	 * @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	public User[] findByC_A_PrevAndNext(long userId, long companyId,
-		boolean active, OrderByComparator orderByComparator)
+		int status, OrderByComparator orderByComparator)
 		throws NoSuchUserException, SystemException {
 		User user = findByPrimaryKey(userId);
 
@@ -3240,12 +3240,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 			User[] array = new UserImpl[3];
 
-			array[0] = getByC_A_PrevAndNext(session, user, companyId, active,
+			array[0] = getByC_A_PrevAndNext(session, user, companyId, status,
 					orderByComparator, true);
 
 			array[1] = user;
 
-			array[2] = getByC_A_PrevAndNext(session, user, companyId, active,
+			array[2] = getByC_A_PrevAndNext(session, user, companyId, status,
 					orderByComparator, false);
 
 			return array;
@@ -3259,7 +3259,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	protected User getByC_A_PrevAndNext(Session session, User user,
-		long companyId, boolean active, OrderByComparator orderByComparator,
+		long companyId, int status, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
 
@@ -3275,7 +3275,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 		query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+		query.append(_FINDER_COLUMN_C_A_STATUS_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -3342,7 +3342,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 		qPos.add(companyId);
 
-		qPos.add(active);
+		qPos.add(status);
 
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByValues(user);
@@ -3618,15 +3618,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	/**
-	 * Removes all the users where companyId = &#63; and active = &#63; from the database.
+	 * Removes all the users where companyId = &#63; and status = &#63; from the database.
 	 *
 	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByC_A(long companyId, boolean active)
+	public void removeByC_A(long companyId, int status)
 		throws SystemException {
-		for (User user : findByC_A(companyId, active)) {
+		for (User user : findByC_A(companyId, status)) {
 			userPersistence.remove(user);
 		}
 	}
@@ -4323,16 +4323,15 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	}
 
 	/**
-	 * Counts all the users where companyId = &#63; and active = &#63;.
+	 * Counts all the users where companyId = &#63; and status = &#63;.
 	 *
 	 * @param companyId the company ID to search with
-	 * @param active the active to search with
+	 * @param status the status to search with
 	 * @return the number of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByC_A(long companyId, boolean active)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { companyId, active };
+	public int countByC_A(long companyId, int status) throws SystemException {
+		Object[] finderArgs = new Object[] { companyId, status };
 
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_A,
 				finderArgs, this);
@@ -4344,7 +4343,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_C_A_ACTIVE_2);
+			query.append(_FINDER_COLUMN_C_A_STATUS_2);
 
 			String sql = query.toString();
 
@@ -4359,7 +4358,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 				qPos.add(companyId);
 
-				qPos.add(active);
+				qPos.add(status);
 
 				count = (Long)q.uniqueResult();
 			}
@@ -8523,7 +8522,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	private static final String _FINDER_COLUMN_C_O_OPENID_2 = "user.openId = ?";
 	private static final String _FINDER_COLUMN_C_O_OPENID_3 = "(user.openId IS NULL OR user.openId = ?)";
 	private static final String _FINDER_COLUMN_C_A_COMPANYID_2 = "user.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_A_ACTIVE_2 = "user.active = ?";
+	private static final String _FINDER_COLUMN_C_A_STATUS_2 = "user.status = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "user.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No User exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No User exists with the key {";

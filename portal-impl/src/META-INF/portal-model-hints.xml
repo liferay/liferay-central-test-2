@@ -777,7 +777,7 @@
 		<field name="lockout" type="boolean" />
 		<field name="lockoutDate" type="Date" />
 		<field name="agreedToTermsOfUse" type="boolean" />
-		<field name="active" type="boolean" />
+		<field name="status" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.UserGroup">
 		<field name="userGroupId" type="long" />
