@@ -128,8 +128,8 @@ public class ImageServlet extends HttpServlet {
 			Image image, long igImageId)
 		throws PortalException, SystemException {
 
-		long igThumbnailMaxDimension =
-			PrefsPropsUtil.getLong(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
+		long igThumbnailMaxDimension = PrefsPropsUtil.getLong(
+			PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
 
 		if ((image.getHeight() > igThumbnailMaxDimension) ||
 			(image.getWidth() > igThumbnailMaxDimension)) {
