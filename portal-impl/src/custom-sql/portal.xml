@@ -1303,7 +1303,7 @@
 				(User_.userId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.countByC_FN_MN_LN_SN_EA_A">
+	<sql id="com.liferay.portal.service.persistence.UserFinder.countByC_FN_MN_LN_SN_EA_S">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT User_.userId) AS COUNT_VALUE
@@ -1320,7 +1320,7 @@
 					(lower(User_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.screenName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
-				) AND (User_.active_ = ?)
+				) AND (User_.status = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.findByNoAnnouncementsDeliveries">
@@ -1380,7 +1380,7 @@
 				(defaultUser = [$FALSE$])
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.findByC_FN_MN_LN_SN_EA_A">
+	<sql id="com.liferay.portal.service.persistence.UserFinder.findByC_FN_MN_LN_SN_EA_S">
 		<![CDATA[
 			SELECT
 				DISTINCT {User_.*}
@@ -1397,7 +1397,7 @@
 					(lower(User_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.screenName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
-				) AND (User_.active_ = ?)
+				) AND (User_.status = ?)
 			ORDER BY
 				User_.firstName ASC,
 				User_.middleName ASC,

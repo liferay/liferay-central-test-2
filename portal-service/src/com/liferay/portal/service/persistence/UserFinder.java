@@ -27,7 +27,7 @@ public interface UserFinder {
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByC_FN_MN_LN_SN_EA_A(long companyId,
+	public int countByC_FN_MN_LN_SN_EA_S(long companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
 		java.lang.String emailAddress, int status,
@@ -35,7 +35,7 @@ public interface UserFinder {
 		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public int countByC_FN_MN_LN_SN_EA_A(long companyId,
+	public int countByC_FN_MN_LN_SN_EA_S(long companyId,
 		java.lang.String[] firstNames, java.lang.String[] middleNames,
 		java.lang.String[] lastNames, java.lang.String[] screenNames,
 		java.lang.String[] emailAddresses, int status,
@@ -59,7 +59,7 @@ public interface UserFinder {
 	public java.util.List<com.liferay.portal.model.User> findByNoGroups()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
+	public java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_S(
 		long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress, int status,
@@ -68,7 +68,7 @@ public interface UserFinder {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
+	public java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_S(
 		long companyId, java.lang.String[] firstNames,
 		java.lang.String[] middleNames, java.lang.String[] lastNames,
 		java.lang.String[] screenNames, java.lang.String[] emailAddresses,

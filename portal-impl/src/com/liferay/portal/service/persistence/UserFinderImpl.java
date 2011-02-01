@@ -48,8 +48,8 @@ public class UserFinderImpl
 	public static String COUNT_BY_USER =
 		UserFinder.class.getName() + ".countByUser";
 
-	public static String COUNT_BY_C_FN_MN_LN_SN_EA_A =
-		UserFinder.class.getName() + ".countByC_FN_MN_LN_SN_EA_A";
+	public static String COUNT_BY_C_FN_MN_LN_SN_EA_S =
+		UserFinder.class.getName() + ".countByC_FN_MN_LN_SN_EA_S";
 
 	public static String FIND_BY_NO_ANNOUNCEMENTS_DELIVERIES =
 		UserFinder.class.getName() + ".findByNoAnnouncementsDeliveries";
@@ -60,8 +60,8 @@ public class UserFinderImpl
 	public static String FIND_BY_NO_GROUPS =
 		UserFinder.class.getName() + ".findByNoGroups";
 
-	public static String FIND_BY_C_FN_MN_LN_SN_EA_A =
-		UserFinder.class.getName() + ".findByC_FN_MN_LN_SN_EA_A";
+	public static String FIND_BY_C_FN_MN_LN_SN_EA_S =
+		UserFinder.class.getName() + ".findByC_FN_MN_LN_SN_EA_S";
 
 	public static String JOIN_BY_CONTACT_TWITTER_SN =
 		UserFinder.class.getName() + ".joinByContactTwitterSN";
@@ -173,25 +173,25 @@ public class UserFinderImpl
 			andOperator = true;
 		}
 
-		return countByC_FN_MN_LN_SN_EA_A(
+		return countByC_FN_MN_LN_SN_EA_S(
 			companyId, firstNames, middleNames, lastNames, screenNames,
 			emailAddresses, status, params, andOperator);
 	}
 
-	public int countByC_FN_MN_LN_SN_EA_A(
+	public int countByC_FN_MN_LN_SN_EA_S(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			int status, LinkedHashMap<String, Object> params,
 			boolean andOperator)
 		throws SystemException {
 
-		return countByC_FN_MN_LN_SN_EA_A(
+		return countByC_FN_MN_LN_SN_EA_S(
 			companyId, new String[] {firstName}, new String[] {middleName},
 			new String[] {lastName}, new String[] {screenName},
 			new String[] {emailAddress}, status, params, andOperator);
 	}
 
-	public int countByC_FN_MN_LN_SN_EA_A(
+	public int countByC_FN_MN_LN_SN_EA_S(
 			long companyId, String[] firstNames, String[] middleNames,
 			String[] lastNames, String[] screenNames, String[] emailAddresses,
 			int status, LinkedHashMap<String, Object> params,
@@ -209,7 +209,7 @@ public class UserFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_FN_MN_LN_SN_EA_A);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_FN_MN_LN_SN_EA_S);
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(User_.firstName)", StringPool.LIKE, false,
@@ -298,7 +298,7 @@ public class UserFinderImpl
 			andOperator = true;
 		}
 
-		return findByC_FN_MN_LN_SN_EA_A(
+		return findByC_FN_MN_LN_SN_EA_S(
 			companyId, firstNames, middleNames, lastNames, screenNames,
 			emailAddresses, status, params, andOperator, start, end, obc);
 	}
@@ -375,21 +375,21 @@ public class UserFinderImpl
 		}
 	}
 
-	public List<User> findByC_FN_MN_LN_SN_EA_A(
+	public List<User> findByC_FN_MN_LN_SN_EA_S(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
 			int status, LinkedHashMap<String, Object> params,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return findByC_FN_MN_LN_SN_EA_A(
+		return findByC_FN_MN_LN_SN_EA_S(
 			companyId, new String[] {firstName}, new String[] {middleName},
 			new String[] {lastName}, new String[] {screenName},
 			new String[] {emailAddress}, status, params, andOperator, start,
 			end, obc);
 	}
 
-	public List<User> findByC_FN_MN_LN_SN_EA_A(
+	public List<User> findByC_FN_MN_LN_SN_EA_S(
 			long companyId, String[] firstNames, String[] middleNames,
 			String[] lastNames, String[] screenNames, String[] emailAddresses,
 			int status, LinkedHashMap<String, Object> params,
@@ -407,7 +407,7 @@ public class UserFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_SN_EA_A);
+			String sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_SN_EA_S);
 
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(User_.firstName)", StringPool.LIKE, false,

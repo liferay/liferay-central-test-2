@@ -34,7 +34,7 @@ public class UserFinderUtil {
 		return getFinder().countByKeywords(companyId, keywords, status, params);
 	}
 
-	public static int countByC_FN_MN_LN_SN_EA_A(long companyId,
+	public static int countByC_FN_MN_LN_SN_EA_S(long companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
 		java.lang.String emailAddress, int status,
@@ -42,11 +42,11 @@ public class UserFinderUtil {
 		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .countByC_FN_MN_LN_SN_EA_A(companyId, firstName, middleName,
+				   .countByC_FN_MN_LN_SN_EA_S(companyId, firstName, middleName,
 			lastName, screenName, emailAddress, status, params, andOperator);
 	}
 
-	public static int countByC_FN_MN_LN_SN_EA_A(long companyId,
+	public static int countByC_FN_MN_LN_SN_EA_S(long companyId,
 		java.lang.String[] firstNames, java.lang.String[] middleNames,
 		java.lang.String[] lastNames, java.lang.String[] screenNames,
 		java.lang.String[] emailAddresses, int status,
@@ -54,7 +54,7 @@ public class UserFinderUtil {
 		boolean andOperator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .countByC_FN_MN_LN_SN_EA_A(companyId, firstNames,
+				   .countByC_FN_MN_LN_SN_EA_S(companyId, firstNames,
 			middleNames, lastNames, screenNames, emailAddresses, status,
 			params, andOperator);
 	}
@@ -85,7 +85,7 @@ public class UserFinderUtil {
 		return getFinder().findByNoGroups();
 	}
 
-	public static java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
+	public static java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_S(
 		long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String screenName, java.lang.String emailAddress, int status,
@@ -94,12 +94,12 @@ public class UserFinderUtil {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findByC_FN_MN_LN_SN_EA_A(companyId, firstName, middleName,
+				   .findByC_FN_MN_LN_SN_EA_S(companyId, firstName, middleName,
 			lastName, screenName, emailAddress, status, params, andOperator,
 			start, end, obc);
 	}
 
-	public static java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
+	public static java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_S(
 		long companyId, java.lang.String[] firstNames,
 		java.lang.String[] middleNames, java.lang.String[] lastNames,
 		java.lang.String[] screenNames, java.lang.String[] emailAddresses,
@@ -109,7 +109,7 @@ public class UserFinderUtil {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findByC_FN_MN_LN_SN_EA_A(companyId, firstNames,
+				   .findByC_FN_MN_LN_SN_EA_S(companyId, firstNames,
 			middleNames, lastNames, screenNames, emailAddresses, status,
 			params, andOperator, start, end, obc);
 	}

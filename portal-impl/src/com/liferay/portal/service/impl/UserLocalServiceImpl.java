@@ -1731,7 +1731,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			boolean andSearch, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return userFinder.findByC_FN_MN_LN_SN_EA_A(
+		return userFinder.findByC_FN_MN_LN_SN_EA_S(
 			companyId, firstName, middleName, lastName, screenName,
 			emailAddress, status, params, andSearch, start, end, obc);
 	}
@@ -1788,7 +1788,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			boolean andSearch)
 		throws SystemException {
 
-		return userFinder.countByC_FN_MN_LN_SN_EA_A(
+		return userFinder.countByC_FN_MN_LN_SN_EA_S(
 			companyId, firstName, middleName, lastName, screenName,
 			emailAddress, status, params, andSearch);
 	}
