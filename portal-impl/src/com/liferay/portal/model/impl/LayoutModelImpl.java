@@ -331,12 +331,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_name = name;
 	}
 
-	public void setName(Locale locale, String name) {
+	public void setName(String name, Locale locale) {
+		setName(name, locale, LocaleUtil.getDefault());
+	}
+
+	public void setName(String name, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		if (Validator.isNotNull(name)) {
 			setName(LocalizationUtil.updateLocalization(getName(), "Name",
-					name, languageId));
+					name, languageId, defaultLanguageId));
 		}
 		else {
 			setName(LocalizationUtil.removeLocalization(getName(), "Name",
@@ -345,6 +350,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setNameMap(Map<Locale, String> nameMap) {
+		setNameMap(nameMap, LocaleUtil.getDefault());
+	}
+
+	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale) {
 		if (nameMap == null) {
 			return;
 		}
@@ -354,7 +363,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		for (Locale locale : locales) {
 			String name = nameMap.get(locale);
 
-			setName(locale, name);
+			setName(name, locale, defaultLocale);
 		}
 	}
 
@@ -410,12 +419,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_title = title;
 	}
 
-	public void setTitle(Locale locale, String title) {
+	public void setTitle(String title, Locale locale) {
+		setTitle(title, locale, LocaleUtil.getDefault());
+	}
+
+	public void setTitle(String title, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		if (Validator.isNotNull(title)) {
 			setTitle(LocalizationUtil.updateLocalization(getTitle(), "Title",
-					title, languageId));
+					title, languageId, defaultLanguageId));
 		}
 		else {
 			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
@@ -424,6 +438,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setTitleMap(Map<Locale, String> titleMap) {
+		setTitleMap(titleMap, LocaleUtil.getDefault());
+	}
+
+	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale) {
 		if (titleMap == null) {
 			return;
 		}
@@ -433,7 +451,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		for (Locale locale : locales) {
 			String title = titleMap.get(locale);
 
-			setTitle(locale, title);
+			setTitle(title, locale, defaultLocale);
 		}
 	}
 
@@ -490,12 +508,19 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_description = description;
 	}
 
-	public void setDescription(Locale locale, String description) {
+	public void setDescription(String description, Locale locale) {
+		setDescription(description, locale, LocaleUtil.getDefault());
+	}
+
+	public void setDescription(String description, Locale locale,
+		Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		if (Validator.isNotNull(description)) {
 			setDescription(LocalizationUtil.updateLocalization(
-					getDescription(), "Description", description, languageId));
+					getDescription(), "Description", description, languageId,
+					defaultLanguageId));
 		}
 		else {
 			setDescription(LocalizationUtil.removeLocalization(
@@ -504,6 +529,11 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
+		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
+	}
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap,
+		Locale defaultLocale) {
 		if (descriptionMap == null) {
 			return;
 		}
@@ -513,7 +543,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		for (Locale locale : locales) {
 			String description = descriptionMap.get(locale);
 
-			setDescription(locale, description);
+			setDescription(description, locale, defaultLocale);
 		}
 	}
 
@@ -570,12 +600,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_keywords = keywords;
 	}
 
-	public void setKeywords(Locale locale, String keywords) {
+	public void setKeywords(String keywords, Locale locale) {
+		setKeywords(keywords, locale, LocaleUtil.getDefault());
+	}
+
+	public void setKeywords(String keywords, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		if (Validator.isNotNull(keywords)) {
 			setKeywords(LocalizationUtil.updateLocalization(getKeywords(),
-					"Keywords", keywords, languageId));
+					"Keywords", keywords, languageId, defaultLanguageId));
 		}
 		else {
 			setKeywords(LocalizationUtil.removeLocalization(getKeywords(),
@@ -584,6 +619,11 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setKeywordsMap(Map<Locale, String> keywordsMap) {
+		setKeywordsMap(keywordsMap, LocaleUtil.getDefault());
+	}
+
+	public void setKeywordsMap(Map<Locale, String> keywordsMap,
+		Locale defaultLocale) {
 		if (keywordsMap == null) {
 			return;
 		}
@@ -593,7 +633,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		for (Locale locale : locales) {
 			String keywords = keywordsMap.get(locale);
 
-			setKeywords(locale, keywords);
+			setKeywords(keywords, locale, defaultLocale);
 		}
 	}
 
@@ -649,12 +689,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		_robots = robots;
 	}
 
-	public void setRobots(Locale locale, String robots) {
+	public void setRobots(String robots, Locale locale) {
+		setRobots(robots, locale, LocaleUtil.getDefault());
+	}
+
+	public void setRobots(String robots, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		if (Validator.isNotNull(robots)) {
 			setRobots(LocalizationUtil.updateLocalization(getRobots(),
-					"Robots", robots, languageId));
+					"Robots", robots, languageId, defaultLanguageId));
 		}
 		else {
 			setRobots(LocalizationUtil.removeLocalization(getRobots(),
@@ -663,6 +708,10 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setRobotsMap(Map<Locale, String> robotsMap) {
+		setRobotsMap(robotsMap, LocaleUtil.getDefault());
+	}
+
+	public void setRobotsMap(Map<Locale, String> robotsMap, Locale defaultLocale) {
 		if (robotsMap == null) {
 			return;
 		}
@@ -672,7 +721,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		for (Locale locale : locales) {
 			String robots = robotsMap.get(locale);
 
-			setRobots(locale, robots);
+			setRobots(robots, locale, defaultLocale);
 		}
 	}
 

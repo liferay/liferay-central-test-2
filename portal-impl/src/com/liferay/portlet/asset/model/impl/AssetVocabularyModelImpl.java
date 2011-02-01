@@ -328,12 +328,17 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		_title = title;
 	}
 
-	public void setTitle(Locale locale, String title) {
+	public void setTitle(String title, Locale locale) {
+		setTitle(title, locale, LocaleUtil.getDefault());
+	}
+
+	public void setTitle(String title, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		if (Validator.isNotNull(title)) {
 			setTitle(LocalizationUtil.updateLocalization(getTitle(), "Title",
-					title, languageId));
+					title, languageId, defaultLanguageId));
 		}
 		else {
 			setTitle(LocalizationUtil.removeLocalization(getTitle(), "Title",
@@ -342,6 +347,10 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	}
 
 	public void setTitleMap(Map<Locale, String> titleMap) {
+		setTitleMap(titleMap, LocaleUtil.getDefault());
+	}
+
+	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale) {
 		if (titleMap == null) {
 			return;
 		}
@@ -351,7 +360,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		for (Locale locale : locales) {
 			String title = titleMap.get(locale);
 
-			setTitle(locale, title);
+			setTitle(title, locale, defaultLocale);
 		}
 	}
 
@@ -408,12 +417,19 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		_description = description;
 	}
 
-	public void setDescription(Locale locale, String description) {
+	public void setDescription(String description, Locale locale) {
+		setDescription(description, locale, LocaleUtil.getDefault());
+	}
+
+	public void setDescription(String description, Locale locale,
+		Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		if (Validator.isNotNull(description)) {
 			setDescription(LocalizationUtil.updateLocalization(
-					getDescription(), "Description", description, languageId));
+					getDescription(), "Description", description, languageId,
+					defaultLanguageId));
 		}
 		else {
 			setDescription(LocalizationUtil.removeLocalization(
@@ -422,6 +438,11 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	}
 
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
+		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
+	}
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap,
+		Locale defaultLocale) {
 		if (descriptionMap == null) {
 			return;
 		}
@@ -431,7 +452,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 		for (Locale locale : locales) {
 			String description = descriptionMap.get(locale);
 
-			setDescription(locale, description);
+			setDescription(description, locale, defaultLocale);
 		}
 	}
 

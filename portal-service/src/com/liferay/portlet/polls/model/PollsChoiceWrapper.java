@@ -192,12 +192,17 @@ public class PollsChoiceWrapper implements PollsChoice {
 	/**
 	* Sets the localized description of this polls choice.
 	*
-	* @param locale the locale to set the localized description for
 	* @param description the localized description of this polls choice
+	* @param locale the locale to set the localized description for
 	*/
-	public void setDescription(java.util.Locale locale,
-		java.lang.String description) {
-		_pollsChoice.setDescription(locale, description);
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale) {
+		_pollsChoice.setDescription(description, locale);
+	}
+
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_pollsChoice.setDescription(description, locale, defaultLocale);
 	}
 
 	/**
@@ -208,6 +213,12 @@ public class PollsChoiceWrapper implements PollsChoice {
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_pollsChoice.setDescriptionMap(descriptionMap);
+	}
+
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.util.Locale defaultLocale) {
+		_pollsChoice.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	public boolean isNew() {

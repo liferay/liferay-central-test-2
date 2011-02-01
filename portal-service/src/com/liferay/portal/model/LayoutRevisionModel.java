@@ -295,10 +295,12 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	/**
 	 * Sets the localized name of this layout revision.
 	 *
-	 * @param locale the locale to set the localized name for
 	 * @param name the localized name of this layout revision
+	 * @param locale the locale to set the localized name for
 	 */
-	public void setName(Locale locale, String name);
+	public void setName(String name, Locale locale);
+
+	public void setName(String name, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized names of this layout revision from the map of locales and localized names.
@@ -306,6 +308,8 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	 * @param nameMap the locales and localized names of this layout revision
 	 */
 	public void setNameMap(Map<Locale, String> nameMap);
+
+	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale);
 
 	/**
 	 * Gets the title of this layout revision.
@@ -365,10 +369,12 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	/**
 	 * Sets the localized title of this layout revision.
 	 *
-	 * @param locale the locale to set the localized title for
 	 * @param title the localized title of this layout revision
+	 * @param locale the locale to set the localized title for
 	 */
-	public void setTitle(Locale locale, String title);
+	public void setTitle(String title, Locale locale);
+
+	public void setTitle(String title, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized titles of this layout revision from the map of locales and localized titles.
@@ -376,6 +382,8 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	 * @param titleMap the locales and localized titles of this layout revision
 	 */
 	public void setTitleMap(Map<Locale, String> titleMap);
+
+	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale);
 
 	/**
 	 * Gets the description of this layout revision.
@@ -435,10 +443,13 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	/**
 	 * Sets the localized description of this layout revision.
 	 *
-	 * @param locale the locale to set the localized description for
 	 * @param description the localized description of this layout revision
+	 * @param locale the locale to set the localized description for
 	 */
-	public void setDescription(Locale locale, String description);
+	public void setDescription(String description, Locale locale);
+
+	public void setDescription(String description, Locale locale,
+		Locale defaultLocale);
 
 	/**
 	 * Sets the localized descriptions of this layout revision from the map of locales and localized descriptions.
@@ -446,6 +457,9 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	 * @param descriptionMap the locales and localized descriptions of this layout revision
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap,
+		Locale defaultLocale);
 
 	/**
 	 * Gets the keywords of this layout revision.
@@ -505,10 +519,12 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	/**
 	 * Sets the localized keywords of this layout revision.
 	 *
-	 * @param locale the locale to set the localized keywords for
 	 * @param keywords the localized keywords of this layout revision
+	 * @param locale the locale to set the localized keywords for
 	 */
-	public void setKeywords(Locale locale, String keywords);
+	public void setKeywords(String keywords, Locale locale);
+
+	public void setKeywords(String keywords, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized keywordses of this layout revision from the map of locales and localized keywordses.
@@ -516,6 +532,9 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	 * @param keywordsMap the locales and localized keywordses of this layout revision
 	 */
 	public void setKeywordsMap(Map<Locale, String> keywordsMap);
+
+	public void setKeywordsMap(Map<Locale, String> keywordsMap,
+		Locale defaultLocale);
 
 	/**
 	 * Gets the robots of this layout revision.
@@ -575,10 +594,12 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	/**
 	 * Sets the localized robots of this layout revision.
 	 *
-	 * @param locale the locale to set the localized robots for
 	 * @param robots the localized robots of this layout revision
+	 * @param locale the locale to set the localized robots for
 	 */
-	public void setRobots(Locale locale, String robots);
+	public void setRobots(String robots, Locale locale);
+
+	public void setRobots(String robots, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized robotses of this layout revision from the map of locales and localized robotses.
@@ -586,6 +607,8 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	 * @param robotsMap the locales and localized robotses of this layout revision
 	 */
 	public void setRobotsMap(Map<Locale, String> robotsMap);
+
+	public void setRobotsMap(Map<Locale, String> robotsMap, Locale defaultLocale);
 
 	/**
 	 * Gets the type settings of this layout revision.

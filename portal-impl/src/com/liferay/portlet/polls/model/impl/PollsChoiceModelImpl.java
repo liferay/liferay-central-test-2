@@ -212,12 +212,19 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 		_description = description;
 	}
 
-	public void setDescription(Locale locale, String description) {
+	public void setDescription(String description, Locale locale) {
+		setDescription(description, locale, LocaleUtil.getDefault());
+	}
+
+	public void setDescription(String description, Locale locale,
+		Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		if (Validator.isNotNull(description)) {
 			setDescription(LocalizationUtil.updateLocalization(
-					getDescription(), "Description", description, languageId));
+					getDescription(), "Description", description, languageId,
+					defaultLanguageId));
 		}
 		else {
 			setDescription(LocalizationUtil.removeLocalization(
@@ -226,6 +233,11 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	}
 
 	public void setDescriptionMap(Map<Locale, String> descriptionMap) {
+		setDescriptionMap(descriptionMap, LocaleUtil.getDefault());
+	}
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap,
+		Locale defaultLocale) {
 		if (descriptionMap == null) {
 			return;
 		}
@@ -235,7 +247,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 		for (Locale locale : locales) {
 			String description = descriptionMap.get(locale);
 
-			setDescription(locale, description);
+			setDescription(description, locale, defaultLocale);
 		}
 	}
 

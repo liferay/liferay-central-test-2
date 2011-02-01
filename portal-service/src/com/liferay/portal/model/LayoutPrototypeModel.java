@@ -144,10 +144,12 @@ public interface LayoutPrototypeModel extends BaseModel<LayoutPrototype> {
 	/**
 	 * Sets the localized name of this layout prototype.
 	 *
-	 * @param locale the locale to set the localized name for
 	 * @param name the localized name of this layout prototype
+	 * @param locale the locale to set the localized name for
 	 */
-	public void setName(Locale locale, String name);
+	public void setName(String name, Locale locale);
+
+	public void setName(String name, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized names of this layout prototype from the map of locales and localized names.
@@ -155,6 +157,8 @@ public interface LayoutPrototypeModel extends BaseModel<LayoutPrototype> {
 	 * @param nameMap the locales and localized names of this layout prototype
 	 */
 	public void setNameMap(Map<Locale, String> nameMap);
+
+	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale);
 
 	/**
 	 * Gets the description of this layout prototype.

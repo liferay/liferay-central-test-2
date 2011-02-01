@@ -175,10 +175,13 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	/**
 	 * Sets the localized description of this polls choice.
 	 *
-	 * @param locale the locale to set the localized description for
 	 * @param description the localized description of this polls choice
+	 * @param locale the locale to set the localized description for
 	 */
-	public void setDescription(Locale locale, String description);
+	public void setDescription(String description, Locale locale);
+
+	public void setDescription(String description, Locale locale,
+		Locale defaultLocale);
 
 	/**
 	 * Sets the localized descriptions of this polls choice from the map of locales and localized descriptions.
@@ -186,6 +189,9 @@ public interface PollsChoiceModel extends BaseModel<PollsChoice> {
 	 * @param descriptionMap the locales and localized descriptions of this polls choice
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap,
+		Locale defaultLocale);
 
 	public boolean isNew();
 

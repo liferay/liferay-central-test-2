@@ -346,11 +346,16 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	/**
 	* Sets the localized name of this layout revision.
 	*
-	* @param locale the locale to set the localized name for
 	* @param name the localized name of this layout revision
+	* @param locale the locale to set the localized name for
 	*/
-	public void setName(java.util.Locale locale, java.lang.String name) {
-		_layoutRevision.setName(locale, name);
+	public void setName(java.lang.String name, java.util.Locale locale) {
+		_layoutRevision.setName(name, locale);
+	}
+
+	public void setName(java.lang.String name, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_layoutRevision.setName(name, locale, defaultLocale);
 	}
 
 	/**
@@ -361,6 +366,12 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	public void setNameMap(
 		java.util.Map<java.util.Locale, java.lang.String> nameMap) {
 		_layoutRevision.setNameMap(nameMap);
+	}
+
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Locale defaultLocale) {
+		_layoutRevision.setNameMap(nameMap, defaultLocale);
 	}
 
 	/**
@@ -436,11 +447,16 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	/**
 	* Sets the localized title of this layout revision.
 	*
-	* @param locale the locale to set the localized title for
 	* @param title the localized title of this layout revision
+	* @param locale the locale to set the localized title for
 	*/
-	public void setTitle(java.util.Locale locale, java.lang.String title) {
-		_layoutRevision.setTitle(locale, title);
+	public void setTitle(java.lang.String title, java.util.Locale locale) {
+		_layoutRevision.setTitle(title, locale);
+	}
+
+	public void setTitle(java.lang.String title, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_layoutRevision.setTitle(title, locale, defaultLocale);
 	}
 
 	/**
@@ -451,6 +467,12 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_layoutRevision.setTitleMap(titleMap);
+	}
+
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Locale defaultLocale) {
+		_layoutRevision.setTitleMap(titleMap, defaultLocale);
 	}
 
 	/**
@@ -527,12 +549,17 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	/**
 	* Sets the localized description of this layout revision.
 	*
-	* @param locale the locale to set the localized description for
 	* @param description the localized description of this layout revision
+	* @param locale the locale to set the localized description for
 	*/
-	public void setDescription(java.util.Locale locale,
-		java.lang.String description) {
-		_layoutRevision.setDescription(locale, description);
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale) {
+		_layoutRevision.setDescription(description, locale);
+	}
+
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_layoutRevision.setDescription(description, locale, defaultLocale);
 	}
 
 	/**
@@ -543,6 +570,12 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_layoutRevision.setDescriptionMap(descriptionMap);
+	}
+
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.util.Locale defaultLocale) {
+		_layoutRevision.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	/**
@@ -619,11 +652,16 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	/**
 	* Sets the localized keywords of this layout revision.
 	*
-	* @param locale the locale to set the localized keywords for
 	* @param keywords the localized keywords of this layout revision
+	* @param locale the locale to set the localized keywords for
 	*/
-	public void setKeywords(java.util.Locale locale, java.lang.String keywords) {
-		_layoutRevision.setKeywords(locale, keywords);
+	public void setKeywords(java.lang.String keywords, java.util.Locale locale) {
+		_layoutRevision.setKeywords(keywords, locale);
+	}
+
+	public void setKeywords(java.lang.String keywords, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_layoutRevision.setKeywords(keywords, locale, defaultLocale);
 	}
 
 	/**
@@ -634,6 +672,12 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	public void setKeywordsMap(
 		java.util.Map<java.util.Locale, java.lang.String> keywordsMap) {
 		_layoutRevision.setKeywordsMap(keywordsMap);
+	}
+
+	public void setKeywordsMap(
+		java.util.Map<java.util.Locale, java.lang.String> keywordsMap,
+		java.util.Locale defaultLocale) {
+		_layoutRevision.setKeywordsMap(keywordsMap, defaultLocale);
 	}
 
 	/**
@@ -710,11 +754,16 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	/**
 	* Sets the localized robots of this layout revision.
 	*
-	* @param locale the locale to set the localized robots for
 	* @param robots the localized robots of this layout revision
+	* @param locale the locale to set the localized robots for
 	*/
-	public void setRobots(java.util.Locale locale, java.lang.String robots) {
-		_layoutRevision.setRobots(locale, robots);
+	public void setRobots(java.lang.String robots, java.util.Locale locale) {
+		_layoutRevision.setRobots(robots, locale);
+	}
+
+	public void setRobots(java.lang.String robots, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_layoutRevision.setRobots(robots, locale, defaultLocale);
 	}
 
 	/**
@@ -725,6 +774,12 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	public void setRobotsMap(
 		java.util.Map<java.util.Locale, java.lang.String> robotsMap) {
 		_layoutRevision.setRobotsMap(robotsMap);
+	}
+
+	public void setRobotsMap(
+		java.util.Map<java.util.Locale, java.lang.String> robotsMap,
+		java.util.Locale defaultLocale) {
+		_layoutRevision.setRobotsMap(robotsMap, defaultLocale);
 	}
 
 	/**

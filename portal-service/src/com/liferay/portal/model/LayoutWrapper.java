@@ -254,11 +254,16 @@ public class LayoutWrapper implements Layout {
 	/**
 	* Sets the localized name of this layout.
 	*
-	* @param locale the locale to set the localized name for
 	* @param name the localized name of this layout
+	* @param locale the locale to set the localized name for
 	*/
-	public void setName(java.util.Locale locale, java.lang.String name) {
-		_layout.setName(locale, name);
+	public void setName(java.lang.String name, java.util.Locale locale) {
+		_layout.setName(name, locale);
+	}
+
+	public void setName(java.lang.String name, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_layout.setName(name, locale, defaultLocale);
 	}
 
 	/**
@@ -269,6 +274,12 @@ public class LayoutWrapper implements Layout {
 	public void setNameMap(
 		java.util.Map<java.util.Locale, java.lang.String> nameMap) {
 		_layout.setNameMap(nameMap);
+	}
+
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Locale defaultLocale) {
+		_layout.setNameMap(nameMap, defaultLocale);
 	}
 
 	/**
@@ -344,11 +355,16 @@ public class LayoutWrapper implements Layout {
 	/**
 	* Sets the localized title of this layout.
 	*
-	* @param locale the locale to set the localized title for
 	* @param title the localized title of this layout
+	* @param locale the locale to set the localized title for
 	*/
-	public void setTitle(java.util.Locale locale, java.lang.String title) {
-		_layout.setTitle(locale, title);
+	public void setTitle(java.lang.String title, java.util.Locale locale) {
+		_layout.setTitle(title, locale);
+	}
+
+	public void setTitle(java.lang.String title, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_layout.setTitle(title, locale, defaultLocale);
 	}
 
 	/**
@@ -359,6 +375,12 @@ public class LayoutWrapper implements Layout {
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_layout.setTitleMap(titleMap);
+	}
+
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Locale defaultLocale) {
+		_layout.setTitleMap(titleMap, defaultLocale);
 	}
 
 	/**
@@ -435,12 +457,17 @@ public class LayoutWrapper implements Layout {
 	/**
 	* Sets the localized description of this layout.
 	*
-	* @param locale the locale to set the localized description for
 	* @param description the localized description of this layout
+	* @param locale the locale to set the localized description for
 	*/
-	public void setDescription(java.util.Locale locale,
-		java.lang.String description) {
-		_layout.setDescription(locale, description);
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale) {
+		_layout.setDescription(description, locale);
+	}
+
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_layout.setDescription(description, locale, defaultLocale);
 	}
 
 	/**
@@ -451,6 +478,12 @@ public class LayoutWrapper implements Layout {
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_layout.setDescriptionMap(descriptionMap);
+	}
+
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.util.Locale defaultLocale) {
+		_layout.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	/**
@@ -527,11 +560,16 @@ public class LayoutWrapper implements Layout {
 	/**
 	* Sets the localized keywords of this layout.
 	*
-	* @param locale the locale to set the localized keywords for
 	* @param keywords the localized keywords of this layout
+	* @param locale the locale to set the localized keywords for
 	*/
-	public void setKeywords(java.util.Locale locale, java.lang.String keywords) {
-		_layout.setKeywords(locale, keywords);
+	public void setKeywords(java.lang.String keywords, java.util.Locale locale) {
+		_layout.setKeywords(keywords, locale);
+	}
+
+	public void setKeywords(java.lang.String keywords, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_layout.setKeywords(keywords, locale, defaultLocale);
 	}
 
 	/**
@@ -542,6 +580,12 @@ public class LayoutWrapper implements Layout {
 	public void setKeywordsMap(
 		java.util.Map<java.util.Locale, java.lang.String> keywordsMap) {
 		_layout.setKeywordsMap(keywordsMap);
+	}
+
+	public void setKeywordsMap(
+		java.util.Map<java.util.Locale, java.lang.String> keywordsMap,
+		java.util.Locale defaultLocale) {
+		_layout.setKeywordsMap(keywordsMap, defaultLocale);
 	}
 
 	/**
@@ -618,11 +662,16 @@ public class LayoutWrapper implements Layout {
 	/**
 	* Sets the localized robots of this layout.
 	*
-	* @param locale the locale to set the localized robots for
 	* @param robots the localized robots of this layout
+	* @param locale the locale to set the localized robots for
 	*/
-	public void setRobots(java.util.Locale locale, java.lang.String robots) {
-		_layout.setRobots(locale, robots);
+	public void setRobots(java.lang.String robots, java.util.Locale locale) {
+		_layout.setRobots(robots, locale);
+	}
+
+	public void setRobots(java.lang.String robots, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_layout.setRobots(robots, locale, defaultLocale);
 	}
 
 	/**
@@ -633,6 +682,12 @@ public class LayoutWrapper implements Layout {
 	public void setRobotsMap(
 		java.util.Map<java.util.Locale, java.lang.String> robotsMap) {
 		_layout.setRobotsMap(robotsMap);
+	}
+
+	public void setRobotsMap(
+		java.util.Map<java.util.Locale, java.lang.String> robotsMap,
+		java.util.Locale defaultLocale) {
+		_layout.setRobotsMap(robotsMap, defaultLocale);
 	}
 
 	/**

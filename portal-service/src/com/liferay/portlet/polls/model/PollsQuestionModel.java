@@ -248,10 +248,12 @@ public interface PollsQuestionModel extends BaseModel<PollsQuestion> {
 	/**
 	 * Sets the localized title of this polls question.
 	 *
-	 * @param locale the locale to set the localized title for
 	 * @param title the localized title of this polls question
+	 * @param locale the locale to set the localized title for
 	 */
-	public void setTitle(Locale locale, String title);
+	public void setTitle(String title, Locale locale);
+
+	public void setTitle(String title, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized titles of this polls question from the map of locales and localized titles.
@@ -259,6 +261,8 @@ public interface PollsQuestionModel extends BaseModel<PollsQuestion> {
 	 * @param titleMap the locales and localized titles of this polls question
 	 */
 	public void setTitleMap(Map<Locale, String> titleMap);
+
+	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale);
 
 	/**
 	 * Gets the description of this polls question.
@@ -318,10 +322,13 @@ public interface PollsQuestionModel extends BaseModel<PollsQuestion> {
 	/**
 	 * Sets the localized description of this polls question.
 	 *
-	 * @param locale the locale to set the localized description for
 	 * @param description the localized description of this polls question
+	 * @param locale the locale to set the localized description for
 	 */
-	public void setDescription(Locale locale, String description);
+	public void setDescription(String description, Locale locale);
+
+	public void setDescription(String description, Locale locale,
+		Locale defaultLocale);
 
 	/**
 	 * Sets the localized descriptions of this polls question from the map of locales and localized descriptions.
@@ -329,6 +336,9 @@ public interface PollsQuestionModel extends BaseModel<PollsQuestion> {
 	 * @param descriptionMap the locales and localized descriptions of this polls question
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap,
+		Locale defaultLocale);
 
 	/**
 	 * Gets the expiration date of this polls question.

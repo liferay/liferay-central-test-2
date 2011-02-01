@@ -355,11 +355,16 @@ public class AssetCategoryWrapper implements AssetCategory {
 	/**
 	* Sets the localized title of this asset category.
 	*
-	* @param locale the locale to set the localized title for
 	* @param title the localized title of this asset category
+	* @param locale the locale to set the localized title for
 	*/
-	public void setTitle(java.util.Locale locale, java.lang.String title) {
-		_assetCategory.setTitle(locale, title);
+	public void setTitle(java.lang.String title, java.util.Locale locale) {
+		_assetCategory.setTitle(title, locale);
+	}
+
+	public void setTitle(java.lang.String title, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_assetCategory.setTitle(title, locale, defaultLocale);
 	}
 
 	/**
@@ -370,6 +375,12 @@ public class AssetCategoryWrapper implements AssetCategory {
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_assetCategory.setTitleMap(titleMap);
+	}
+
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Locale defaultLocale) {
+		_assetCategory.setTitleMap(titleMap, defaultLocale);
 	}
 
 	/**
@@ -446,12 +457,17 @@ public class AssetCategoryWrapper implements AssetCategory {
 	/**
 	* Sets the localized description of this asset category.
 	*
-	* @param locale the locale to set the localized description for
 	* @param description the localized description of this asset category
+	* @param locale the locale to set the localized description for
 	*/
-	public void setDescription(java.util.Locale locale,
-		java.lang.String description) {
-		_assetCategory.setDescription(locale, description);
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale) {
+		_assetCategory.setDescription(description, locale);
+	}
+
+	public void setDescription(java.lang.String description,
+		java.util.Locale locale, java.util.Locale defaultLocale) {
+		_assetCategory.setDescription(description, locale, defaultLocale);
 	}
 
 	/**
@@ -462,6 +478,12 @@ public class AssetCategoryWrapper implements AssetCategory {
 	public void setDescriptionMap(
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
 		_assetCategory.setDescriptionMap(descriptionMap);
+	}
+
+	public void setDescriptionMap(
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.util.Locale defaultLocale) {
+		_assetCategory.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	/**

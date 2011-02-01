@@ -205,12 +205,17 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		_name = name;
 	}
 
-	public void setName(Locale locale, String name) {
+	public void setName(String name, Locale locale) {
+		setName(name, locale, LocaleUtil.getDefault());
+	}
+
+	public void setName(String name, Locale locale, Locale defaultLocale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
+		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		if (Validator.isNotNull(name)) {
 			setName(LocalizationUtil.updateLocalization(getName(), "Name",
-					name, languageId));
+					name, languageId, defaultLanguageId));
 		}
 		else {
 			setName(LocalizationUtil.removeLocalization(getName(), "Name",
@@ -219,6 +224,10 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	}
 
 	public void setNameMap(Map<Locale, String> nameMap) {
+		setNameMap(nameMap, LocaleUtil.getDefault());
+	}
+
+	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale) {
 		if (nameMap == null) {
 			return;
 		}
@@ -228,7 +237,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		for (Locale locale : locales) {
 			String name = nameMap.get(locale);
 
-			setName(locale, name);
+			setName(name, locale, defaultLocale);
 		}
 	}
 

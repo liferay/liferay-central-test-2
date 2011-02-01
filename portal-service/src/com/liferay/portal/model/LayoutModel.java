@@ -222,10 +222,12 @@ public interface LayoutModel extends BaseModel<Layout> {
 	/**
 	 * Sets the localized name of this layout.
 	 *
-	 * @param locale the locale to set the localized name for
 	 * @param name the localized name of this layout
+	 * @param locale the locale to set the localized name for
 	 */
-	public void setName(Locale locale, String name);
+	public void setName(String name, Locale locale);
+
+	public void setName(String name, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized names of this layout from the map of locales and localized names.
@@ -233,6 +235,8 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param nameMap the locales and localized names of this layout
 	 */
 	public void setNameMap(Map<Locale, String> nameMap);
+
+	public void setNameMap(Map<Locale, String> nameMap, Locale defaultLocale);
 
 	/**
 	 * Gets the title of this layout.
@@ -292,10 +296,12 @@ public interface LayoutModel extends BaseModel<Layout> {
 	/**
 	 * Sets the localized title of this layout.
 	 *
-	 * @param locale the locale to set the localized title for
 	 * @param title the localized title of this layout
+	 * @param locale the locale to set the localized title for
 	 */
-	public void setTitle(Locale locale, String title);
+	public void setTitle(String title, Locale locale);
+
+	public void setTitle(String title, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized titles of this layout from the map of locales and localized titles.
@@ -303,6 +309,8 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param titleMap the locales and localized titles of this layout
 	 */
 	public void setTitleMap(Map<Locale, String> titleMap);
+
+	public void setTitleMap(Map<Locale, String> titleMap, Locale defaultLocale);
 
 	/**
 	 * Gets the description of this layout.
@@ -362,10 +370,13 @@ public interface LayoutModel extends BaseModel<Layout> {
 	/**
 	 * Sets the localized description of this layout.
 	 *
-	 * @param locale the locale to set the localized description for
 	 * @param description the localized description of this layout
+	 * @param locale the locale to set the localized description for
 	 */
-	public void setDescription(Locale locale, String description);
+	public void setDescription(String description, Locale locale);
+
+	public void setDescription(String description, Locale locale,
+		Locale defaultLocale);
 
 	/**
 	 * Sets the localized descriptions of this layout from the map of locales and localized descriptions.
@@ -373,6 +384,9 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param descriptionMap the locales and localized descriptions of this layout
 	 */
 	public void setDescriptionMap(Map<Locale, String> descriptionMap);
+
+	public void setDescriptionMap(Map<Locale, String> descriptionMap,
+		Locale defaultLocale);
 
 	/**
 	 * Gets the keywords of this layout.
@@ -432,10 +446,12 @@ public interface LayoutModel extends BaseModel<Layout> {
 	/**
 	 * Sets the localized keywords of this layout.
 	 *
-	 * @param locale the locale to set the localized keywords for
 	 * @param keywords the localized keywords of this layout
+	 * @param locale the locale to set the localized keywords for
 	 */
-	public void setKeywords(Locale locale, String keywords);
+	public void setKeywords(String keywords, Locale locale);
+
+	public void setKeywords(String keywords, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized keywordses of this layout from the map of locales and localized keywordses.
@@ -443,6 +459,9 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param keywordsMap the locales and localized keywordses of this layout
 	 */
 	public void setKeywordsMap(Map<Locale, String> keywordsMap);
+
+	public void setKeywordsMap(Map<Locale, String> keywordsMap,
+		Locale defaultLocale);
 
 	/**
 	 * Gets the robots of this layout.
@@ -502,10 +521,12 @@ public interface LayoutModel extends BaseModel<Layout> {
 	/**
 	 * Sets the localized robots of this layout.
 	 *
-	 * @param locale the locale to set the localized robots for
 	 * @param robots the localized robots of this layout
+	 * @param locale the locale to set the localized robots for
 	 */
-	public void setRobots(Locale locale, String robots);
+	public void setRobots(String robots, Locale locale);
+
+	public void setRobots(String robots, Locale locale, Locale defaultLocale);
 
 	/**
 	 * Sets the localized robotses of this layout from the map of locales and localized robotses.
@@ -513,6 +534,8 @@ public interface LayoutModel extends BaseModel<Layout> {
 	 * @param robotsMap the locales and localized robotses of this layout
 	 */
 	public void setRobotsMap(Map<Locale, String> robotsMap);
+
+	public void setRobotsMap(Map<Locale, String> robotsMap, Locale defaultLocale);
 
 	/**
 	 * Gets the type of this layout.

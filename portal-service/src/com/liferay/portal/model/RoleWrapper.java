@@ -218,11 +218,16 @@ public class RoleWrapper implements Role {
 	/**
 	* Sets the localized title of this role.
 	*
-	* @param locale the locale to set the localized title for
 	* @param title the localized title of this role
+	* @param locale the locale to set the localized title for
 	*/
-	public void setTitle(java.util.Locale locale, java.lang.String title) {
-		_role.setTitle(locale, title);
+	public void setTitle(java.lang.String title, java.util.Locale locale) {
+		_role.setTitle(title, locale);
+	}
+
+	public void setTitle(java.lang.String title, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_role.setTitle(title, locale, defaultLocale);
 	}
 
 	/**
@@ -233,6 +238,12 @@ public class RoleWrapper implements Role {
 	public void setTitleMap(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
 		_role.setTitleMap(titleMap);
+	}
+
+	public void setTitleMap(
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Locale defaultLocale) {
+		_role.setTitleMap(titleMap, defaultLocale);
 	}
 
 	/**

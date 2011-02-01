@@ -155,11 +155,16 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 	/**
 	* Sets the localized name of this layout prototype.
 	*
-	* @param locale the locale to set the localized name for
 	* @param name the localized name of this layout prototype
+	* @param locale the locale to set the localized name for
 	*/
-	public void setName(java.util.Locale locale, java.lang.String name) {
-		_layoutPrototype.setName(locale, name);
+	public void setName(java.lang.String name, java.util.Locale locale) {
+		_layoutPrototype.setName(name, locale);
+	}
+
+	public void setName(java.lang.String name, java.util.Locale locale,
+		java.util.Locale defaultLocale) {
+		_layoutPrototype.setName(name, locale, defaultLocale);
 	}
 
 	/**
@@ -170,6 +175,12 @@ public class LayoutPrototypeWrapper implements LayoutPrototype {
 	public void setNameMap(
 		java.util.Map<java.util.Locale, java.lang.String> nameMap) {
 		_layoutPrototype.setNameMap(nameMap);
+	}
+
+	public void setNameMap(
+		java.util.Map<java.util.Locale, java.lang.String> nameMap,
+		java.util.Locale defaultLocale) {
+		_layoutPrototype.setNameMap(nameMap, defaultLocale);
 	}
 
 	/**
