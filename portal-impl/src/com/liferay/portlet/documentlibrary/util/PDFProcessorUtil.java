@@ -47,6 +47,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.imageio.ImageIO;
 
@@ -123,11 +124,11 @@ public class PDFProcessorUtil {
 	}
 
 	private void _generateImages(FileEntry fileEntry) {
-		if (_hasImages(fileEntry)) {
-			return;
-		}
-
 		try {
+			if (_hasImages(fileEntry)) {
+				return;
+			}
+
 			String extension = fileEntry.getExtension();
 
 			if (extension.equals("pdf")) {
@@ -157,6 +158,9 @@ public class PDFProcessorUtil {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+		finally {
+			_fileEntries.remove(fileEntry.getFileEntryId());
 		}
 	}
 
@@ -490,29 +494,33 @@ public class PDFProcessorUtil {
 	}
 
 	private void _queueGeneration(FileEntry fileEntry) {
-		boolean generateImages = false;
+		if (!_fileEntries.contains(fileEntry.getFileEntryId())) {
+			boolean generateImages = false;
 
-		String extension = fileEntry.getExtension();
+			String extension = fileEntry.getExtension();
 
-		if (extension.equals("pdf")) {
-			generateImages = true;
-		}
-		else if (DocumentConversionUtil.isEnabled()) {
-			String[] conversions = DocumentConversionUtil.getConversions(
-				fileEntry.getExtension());
+			if (extension.equals("pdf")) {
+				generateImages = true;
+			}
+			else if (DocumentConversionUtil.isEnabled()) {
+				String[] conversions = DocumentConversionUtil.getConversions(
+					fileEntry.getExtension());
 
-			for (String conversion : conversions) {
-				if (conversion.equals("pdf")) {
-					generateImages = true;
+				for (String conversion : conversions) {
+					if (conversion.equals("pdf")) {
+						generateImages = true;
 
-					break;
+						break;
+					}
 				}
 			}
-		}
 
-		if (generateImages) {
-			MessageBusUtil.sendMessage(
-				DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR, fileEntry);
+			if (generateImages) {
+				_fileEntries.add(fileEntry.getFileEntryId());
+
+				MessageBusUtil.sendMessage(
+					DestinationNames.DOCUMENT_LIBRARY_PDF_PROCESSOR, fileEntry);
+			}
 		}
 	}
 
@@ -529,5 +537,6 @@ public class PDFProcessorUtil {
 	private static PDFProcessorUtil _instance = new PDFProcessorUtil();
 
 	private ConvertCmd _convertCmd;
+	private List<Long> _fileEntries = new Vector<Long>();
 
 }
