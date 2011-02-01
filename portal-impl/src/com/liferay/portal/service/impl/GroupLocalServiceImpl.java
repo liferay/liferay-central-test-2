@@ -53,6 +53,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
@@ -61,7 +62,9 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserPersonalCommunity;
 import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.FriendlyURLNormalizer;
@@ -314,6 +317,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				group = groupLocalService.addGroup(
 					defaultUserId, className, classPK, name, null, type,
 					friendlyURL, true, null);
+
+				if (name.equals(GroupConstants.USER_PERSONAL_COMMUNITY)) {
+					initUserPersonalCommunityPermissions(group);
+				}
 			}
 
 			if (group.isControlPanel()) {
@@ -1302,12 +1309,110 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
+	protected void initUserPersonalCommunityPermissions(Group group)
+		throws PortalException, SystemException {
+
+		// User role
+
+		Role role = roleLocalService.getRole(
+			group.getCompanyId(), RoleConstants.USER);
+
+		List<Portlet> portlets = portletLocalService.getPortlets(
+			group.getCompanyId());
+
+		for (Portlet portlet : portlets) {
+			if (!portlet.isSystem()) {
+				setRolePermissions(
+					group, role, portlet.getPortletId(),
+					new String[] {ActionKeys.VIEW});
+			}
+		}
+
+		setRolePermissions(
+			group, role, Layout.class.getName(),
+			new String[] {ActionKeys.VIEW});
+
+		setRolePermissions(
+			group, role, "com.liferay.portlet.blogs",
+			new String[] {
+				ActionKeys.ADD_ENTRY, ActionKeys.PERMISSIONS,
+				ActionKeys.SUBSCRIBE});
+
+		setRolePermissions(
+			group, role, "com.liferay.portlet.calendar",
+			new String[] {
+				ActionKeys.ADD_EVENT, ActionKeys.EXPORT_ALL_EVENTS,
+				ActionKeys.PERMISSIONS});
+
+		// Power User role
+
+		role = roleLocalService.getRole(
+			group.getCompanyId(), RoleConstants.POWER_USER);
+
+		for (Portlet portlet : portlets) {
+			List<String> actions =
+				ResourceActionsUtil.getPortletResourceActions(
+					portlet.getPortletId());
+
+			if (!portlet.isSystem() &&
+				actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
+
+				setRolePermissions(
+					group, role, portlet.getPortletId(),
+					new String[] {ActionKeys.ACCESS_IN_CONTROL_PANEL});
+			}
+		}
+
+		setRolePermissions(
+			group, role, Group.class.getName(),
+			new String[] {ActionKeys.MANAGE_LAYOUTS});
+
+		setRolePermissions(group, role, "com.liferay.portlet.asset");
+		setRolePermissions(group, role, "com.liferay.portlet.asset");
+		setRolePermissions(group, role, "com.liferay.portlet.blogs");
+		setRolePermissions(group, role, "com.liferay.portlet.bookmarks");
+		setRolePermissions(group, role, "com.liferay.portlet.calendar");
+		setRolePermissions(group, role, "com.liferay.portlet.documentlibrary");
+		setRolePermissions(group, role, "com.liferay.portlet.imagegallery");
+		setRolePermissions(group, role, "com.liferay.portlet.messageboards");
+		setRolePermissions(group, role, "com.liferay.portlet.polls");
+		setRolePermissions(group, role, "com.liferay.portlet.wiki");
+	}
+
 	protected boolean isStaging(ServiceContext serviceContext) {
 		if (serviceContext != null) {
 			return ParamUtil.getBoolean(serviceContext, "staging");
 		}
 
 		return false;
+	}
+
+	protected void setRolePermissions(Group group, Role role, String name)
+		throws PortalException, SystemException {
+
+		List<String> actions = ResourceActionsUtil.getModelResourceActions(
+			name);
+
+		setRolePermissions(
+			group, role, name, actions.toArray(new String[actions.size()]));
+	}
+
+	protected void setRolePermissions(
+			Group group, Role role, String name, String[] actionIds)
+		throws PortalException, SystemException {
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+			resourcePermissionLocalService.setResourcePermissions(
+				group.getCompanyId(), name, ResourceConstants.SCOPE_GROUP,
+				String.valueOf(group.getGroupId()), role.getRoleId(),
+				actionIds);
+		}
+		else {
+			permissionLocalService.setRolePermissions(
+				role.getRoleId(), group.getCompanyId(), name,
+				ResourceConstants.SCOPE_GROUP,
+				String.valueOf(group.getGroupId()), actionIds);
+		}
 	}
 
 	protected void unscheduleStaging(Group group) {
