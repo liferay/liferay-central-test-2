@@ -106,6 +106,18 @@ create table Repository (
 
 alter table SocialEquityLog add extraData VARCHAR(255) null;
 
+drop index IX_5204C37B on User_;
+
+alter table User_ add status int;
+
+COMMIT_TRANSACTION;
+
+update User_ set status = 0;
+
+update User_ set status = 2 where active_ = 0;
+
+alter table User_ drop column active_;
+
 create table UserGroups_Teams (
 	userGroupId LONG not null,
 	teamId LONG not null,
