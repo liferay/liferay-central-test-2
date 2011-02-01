@@ -922,9 +922,9 @@ Liferay.Service.registerClass(
 	{
 		addCategory: true,
 		deleteCategory: true,
-		getCategory: true,
 		getCategories: true,
 		getCategoriesCount: true,
+		getCategory: true,
 		getSubcategoryIds: true,
 		updateCategory: true
 	}

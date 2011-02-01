@@ -96,20 +96,6 @@ public class ShoppingCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap getCategory(
-		long categoryId) throws RemoteException {
-		try {
-			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.getCategory(categoryId);
-
-			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap[] getCategories(
 		long groupId) throws RemoteException {
 		try {
@@ -149,6 +135,20 @@ public class ShoppingCategoryServiceSoap {
 					parentCategoryId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap getCategory(
+		long categoryId) throws RemoteException {
+		try {
+			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.getCategory(categoryId);
+
+			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

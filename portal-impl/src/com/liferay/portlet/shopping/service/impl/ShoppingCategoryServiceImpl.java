@@ -55,18 +55,6 @@ public class ShoppingCategoryServiceImpl
 		shoppingCategoryLocalService.deleteCategory(categoryId);
 	}
 
-	public ShoppingCategory getCategory(long categoryId)
-		throws PortalException, SystemException {
-
-		ShoppingCategory category = shoppingCategoryLocalService.getCategory(
-			categoryId);
-
-		ShoppingCategoryPermission.check(
-			getPermissionChecker(), category, ActionKeys.VIEW);
-
-		return category;
-	}
-
 	public List<ShoppingCategory> getCategories(long groupId)
 		throws SystemException {
 
@@ -86,6 +74,18 @@ public class ShoppingCategoryServiceImpl
 
 		return shoppingCategoryPersistence.filterCountByG_P(
 			groupId, parentCategoryId);
+	}
+
+	public ShoppingCategory getCategory(long categoryId)
+		throws PortalException, SystemException {
+
+		ShoppingCategory category = shoppingCategoryLocalService.getCategory(
+			categoryId);
+
+		ShoppingCategoryPermission.check(
+			getPermissionChecker(), category, ActionKeys.VIEW);
+
+		return category;
 	}
 
 	public void getSubcategoryIds(

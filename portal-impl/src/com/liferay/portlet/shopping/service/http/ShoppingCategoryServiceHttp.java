@@ -126,49 +126,12 @@ public class ShoppingCategoryServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
-		HttpPrincipal httpPrincipal, long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategory", _getCategoryParameterTypes2);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					categoryId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portlet.shopping.model.ShoppingCategory)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
 		HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategories", _getCategoriesParameterTypes3);
+					"getCategories", _getCategoriesParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId);
 
@@ -200,7 +163,7 @@ public class ShoppingCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategories", _getCategoriesParameterTypes4);
+					"getCategories", _getCategoriesParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentCategoryId, start, end);
@@ -232,7 +195,7 @@ public class ShoppingCategoryServiceHttp {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
-					"getCategoriesCount", _getCategoriesCountParameterTypes5);
+					"getCategoriesCount", _getCategoriesCountParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					parentCategoryId);
@@ -251,6 +214,43 @@ public class ShoppingCategoryServiceHttp {
 			}
 
 			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
+		HttpPrincipal httpPrincipal, long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(ShoppingCategoryServiceUtil.class.getName(),
+					"getCategory", _getCategoryParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					categoryId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.shopping.model.ShoppingCategory)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -337,17 +337,17 @@ public class ShoppingCategoryServiceHttp {
 	private static final Class<?>[] _deleteCategoryParameterTypes1 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _getCategoryParameterTypes2 = new Class[] {
+	private static final Class<?>[] _getCategoriesParameterTypes2 = new Class[] {
 			long.class
 		};
 	private static final Class<?>[] _getCategoriesParameterTypes3 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getCategoriesParameterTypes4 = new Class[] {
 			long.class, long.class, int.class, int.class
 		};
-	private static final Class<?>[] _getCategoriesCountParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getCategoriesCountParameterTypes4 = new Class[] {
 			long.class, long.class
+		};
+	private static final Class<?>[] _getCategoryParameterTypes5 = new Class[] {
+			long.class
 		};
 	private static final Class<?>[] _getSubcategoryIdsParameterTypes6 = new Class[] {
 			java.util.List.class, long.class, long.class

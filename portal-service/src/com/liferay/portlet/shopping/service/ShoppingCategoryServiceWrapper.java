@@ -45,13 +45,6 @@ public class ShoppingCategoryServiceWrapper implements ShoppingCategoryService {
 		_shoppingCategoryService.deleteCategory(categoryId);
 	}
 
-	public com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
-		long categoryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _shoppingCategoryService.getCategory(categoryId);
-	}
-
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
 		long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -69,6 +62,13 @@ public class ShoppingCategoryServiceWrapper implements ShoppingCategoryService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _shoppingCategoryService.getCategoriesCount(groupId,
 			parentCategoryId);
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _shoppingCategoryService.getCategory(categoryId);
 	}
 
 	public void getSubcategoryIds(java.util.List<java.lang.Long> categoryIds,

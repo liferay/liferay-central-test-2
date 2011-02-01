@@ -1577,53 +1577,53 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				 * @throws SystemException if a system exception occurred
 				 */
 				public ${entity.name}[] filterFindBy${finder.name}_PrevAndNext(${entity.PKClassName} ${entity.PKVarName},
-	
+
 				<#list finderColsList as finderCol>
 					${finderCol.type} ${finderCol.name},
 				</#list>
-	
-				OrderByComparator orderByComparator) throws ${noSuchEntity}Exception, SystemException {			
+
+				OrderByComparator orderByComparator) throws ${noSuchEntity}Exception, SystemException {
 					if (!InlineSQLHelperUtil.isEnabled(<#if finder.hasColumn("groupId")>groupId</#if>)) {
 						return findBy${finder.name}_PrevAndNext(${entity.PKVarName},
-	
+
 						<#list finderColsList as finderCol>
 							${finderCol.name},
 						</#list>
-	
+
 						orderByComparator);
 					}
-	
+
 					${entity.name} ${entity.varName} = findByPrimaryKey(${entity.PKVarName});
-	
+
 					Session session = null;
-	
+
 					try {
 						session = openSession();
-	
+
 						${entity.name}[] array = new ${entity.name}Impl[3];
-	
+
 						array[0] =
 							filterGetBy${finder.name}_PrevAndNext(
 								session, ${entity.varName},
-	
+
 								<#list finderColsList as finderCol>
 									${finderCol.name},
 								</#list>
-	
+
 								orderByComparator, true);
-	
+
 						array[1] = ${entity.varName};
-	
+
 						array[2] =
 							filterGetBy${finder.name}_PrevAndNext(
 								session, ${entity.varName},
-	
+
 								<#list finderColsList as finderCol>
 									${finderCol.name},
 								</#list>
-	
+
 								orderByComparator, false);
-	
+
 						return array;
 					}
 					catch (Exception e) {
@@ -1633,25 +1633,25 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						closeSession(session);
 					}
 				}
-	
+
 				protected ${entity.name} filterGetBy${finder.name}_PrevAndNext(
 					Session session, ${entity.name} ${entity.varName},
-	
+
 					<#list finderColsList as finderCol>
 						${finderCol.type} ${finderCol.name},
 					</#list>
-	
+
 					OrderByComparator orderByComparator, boolean previous) {
-	
+
 					StringBundler query = null;
-	
+
 					if (orderByComparator != null) {
 						query = new StringBundler(6 + (orderByComparator.getOrderByFields().length * 6));
 					}
 					else {
 						query = new StringBundler(3);
 					}
-	
+
 					if (getDB().isSupportsInlineDistinct()) {
 						query.append(_FILTER_SQL_SELECT_${entity.alias?upper_case}_WHERE);
 					}
@@ -1667,11 +1667,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					if (orderByComparator != null) {
 						String[] orderByFields = orderByComparator.getOrderByFields();
-	
+
 						if (orderByFields.length > 0) {
 							query.append(WHERE_AND);
 						}
-	
+
 						for (int i = 0; i < orderByFields.length; i++) {
 							if (getDB().isSupportsInlineDistinct()) {
 								query.append(_ORDER_BY_ENTITY_ALIAS);
@@ -1681,7 +1681,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							}
 
 							query.append(orderByFields[i]);
-	
+
 							if ((i + 1) < orderByFields.length) {
 								if (orderByComparator.isAscending() ^ previous) {
 									query.append(WHERE_GREATER_THAN_HAS_NEXT);
@@ -1699,9 +1699,9 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 								}
 							}
 						}
-	
+
 						query.append(ORDER_BY_CLAUSE);
-	
+
 						for (int i = 0; i < orderByFields.length; i++) {
 							if (getDB().isSupportsInlineDistinct()) {
 								query.append(_ORDER_BY_ENTITY_ALIAS);
@@ -1711,7 +1711,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							}
 
 							query.append(orderByFields[i]);
-	
+
 							if ((i + 1) < orderByFields.length) {
 								if (orderByComparator.isAscending() ^ previous) {
 									query.append(ORDER_BY_ASC_HAS_NEXT);
@@ -1730,7 +1730,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							}
 						}
 					}
-	
+
 					<#if entity.getOrder()??>
 						else {
 							if (getDB().isSupportsInlineDistinct()) {
@@ -1762,14 +1762,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					if (orderByComparator != null) {
 						Object[] values = orderByComparator.getOrderByValues(${entity.varName});
-	
+
 						for (Object value : values) {
 							qPos.add(value);
 						}
 					}
-	
+
 					List<${entity.name}> list = q.list();
-	
+
 					if (list.size() == 2) {
 						return list.get(1);
 					}
