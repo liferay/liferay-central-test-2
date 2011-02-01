@@ -102,10 +102,19 @@ public abstract class BasePortalCacheClusterChannel
 			}
 		}
 
-		try {
-			_eventQueue.put(portalCacheClusterEvent);
+		if (_destroy) {
+			dispatchEvent(portalCacheClusterEvent);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Directly sends PortalCacheClusterEvent " +
+					portalCacheClusterEvent);
+			}
 		}
-		catch (InterruptedException ie) {
+		else {
+			try {
+				_eventQueue.put(portalCacheClusterEvent);
+			}
+			catch (InterruptedException ie) {
+			}
 		}
 	}
 
