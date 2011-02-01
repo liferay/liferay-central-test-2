@@ -14,10 +14,10 @@
 
 package com.liferay.portlet.bookmarks.action;
 
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -37,6 +37,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -62,17 +63,9 @@ public class EditEntryAction extends PortletAction {
 				deleteEntry(actionRequest);
 			}
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+			WindowState windowState = actionRequest.getWindowState();
 
-			LayoutTypePortlet layoutTypePortlet =
-				themeDisplay.getLayoutTypePortlet();
-
-			if (layoutTypePortlet.hasPortletId(
-					portletConfig.getPortletName()) &&
-						!actionRequest.getWindowState().toString().equals(
-							"pop_up")) {
-
+			if (!windowState.equals(LiferayWindowState.POP_UP)) {
 				sendRedirect(actionRequest, actionResponse);
 			}
 			else {

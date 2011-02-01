@@ -19,6 +19,7 @@ import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.portal.DuplicateLockException;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -50,6 +51,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -89,7 +91,10 @@ public class EditFileEntryAction extends PortletAction {
 			else if (cmd.equals(Constants.UNLOCK)) {
 				unlockFileEntry(actionRequest);
 			}
-			if (!actionRequest.getWindowState().toString().equals("pop_up")) {
+
+			WindowState windowState = actionRequest.getWindowState();
+
+			if (!windowState.equals(LiferayWindowState.POP_UP)) {
 				sendRedirect(actionRequest, actionResponse);
 			}
 			else {

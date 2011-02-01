@@ -17,6 +17,7 @@ package com.liferay.portlet.blogs.action;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -26,7 +27,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -63,6 +63,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -84,9 +85,6 @@ public class EditEntryAction extends PortletAction {
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -181,14 +179,9 @@ public class EditEntryAction extends PortletAction {
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else {
-				LayoutTypePortlet layoutTypePortlet =
-					themeDisplay.getLayoutTypePortlet();
+				WindowState windowState = actionRequest.getWindowState();
 
-				if (layoutTypePortlet.hasPortletId(
-						portletConfig.getPortletName()) &&
-						!actionRequest.getWindowState().toString().equals(
-							"pop_up")) {
-
+				if (!windowState.equals(LiferayWindowState.POP_UP)) {
 					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {

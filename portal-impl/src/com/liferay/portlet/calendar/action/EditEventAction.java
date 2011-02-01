@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
@@ -51,6 +52,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -76,7 +78,9 @@ public class EditEventAction extends PortletAction {
 				deleteEvent(actionRequest);
 			}
 
-			if (!actionRequest.getWindowState().toString().equals("pop_up")) {
+			WindowState windowState = actionRequest.getWindowState();
+
+			if (!windowState.equals(LiferayWindowState.POP_UP)) {
 				sendRedirect(actionRequest, actionResponse);
 			}
 			else {
