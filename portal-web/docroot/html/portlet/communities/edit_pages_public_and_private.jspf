@@ -18,28 +18,14 @@
 	<liferay-util:include page="/html/portlet/communities/edit_pages_staging_toolbar.jsp" />
 </c:if>
 
-<aui:button-row>
-	<c:if test="<%= (pagesCount > 0) && (liveGroup.isStaged() || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup() || portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES)) %>">
-		<span id="viewPagesButton"></span>
+<%
+boolean manageableLayouts = (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS));
 
-		<aui:script use="aui-button-item">
-			var viewPagesButton = new A.ButtonItem(
-				{
-					handler: function(event) {
-						var groupWindow = window.open('<%= viewPagesURL %>');
+boolean viewablePages = (pagesCount > 0) && (liveGroup.isStaged() || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup() || portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES));
+%>
 
-						void('');
-
-						groupWindow.focus();
-					},
-					icon: 'search',
-					label: '<liferay-ui:message key="view-pages" />'
-				}
-			).render('#viewPagesButton');
-		</aui:script>
-	</c:if>
-
-	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
+<aui:button-row id='<%= renderResponse.getNamespace() + "communityPagesToolbar" %>'>
+	<c:if test="<%= manageableLayouts %>">
 		<c:if test="<%= SessionErrors.contains(renderRequest, LayoutImportException.class.getName()) || SessionErrors.contains(renderRequest, LARFileException.class.getName()) || SessionErrors.contains(renderRequest, LARTypeException.class.getName()) %>">
 			<liferay-util:html-top>
 				<div class="aui-helper-hidden" id="<portlet:namespace />importPage">
@@ -53,8 +39,8 @@
 				</div>
 			</liferay-util:html-top>
 
-			<aui:script use="aui-toolbar,aui-dialog">
-				var errorImportPopup = new A.Dialog(
+			<aui:script use="aui-dialog">
+				new A.Dialog(
 					{
 						bodyContent: A.one('#<portlet:namespace />importPage').show(),
 						centered: true,
@@ -65,95 +51,116 @@
 				).render();
 			</aui:script>
 		</c:if>
-
-		<portlet:renderURL var="exportPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-			<portlet:param name="struts_action" value="/communities/export_pages" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-			<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
-			<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
-		</portlet:renderURL>
-
-		<portlet:renderURL var="importPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-			<portlet:param name="struts_action" value="/communities/import_pages" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-			<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
-			<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="redirectWindowState" value="<%= renderRequest.getWindowState().toString() %>" />
-			<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
-		</portlet:renderURL>
-
-		<span id="exportImportToolbar"></span>
-
-		<aui:script use="aui-toolbar,aui-dialog">
-			var exportImportToolbar = new A.Toolbar(
-				{
-					activeState: false,
-					children: [
-						{
-							handler: function(event) {
-								var exportPopup = new A.Dialog(
-									{
-										centered: true,
-										modal: true,
-										title: '<liferay-ui:message key="export" />',
-										width: 600
-									}
-								).render();
-
-								exportPopup.plug(
-									A.Plugin.IO,
-									{
-										after:
-										{
-											success : function() {
-												exportPopup._syncUIPosAlign();
-											}
-										},
-										uri: '<%= exportPagesURL %>'
-									}
-								);
-							},
-							icon: 'arrowthick-1-b',
-							label: '<liferay-ui:message key="export" />'
-						},
-						{
-							handler: function(event) {
-								var importPopup = new A.Dialog(
-									{
-										centered: true,
-										modal: true,
-										title: '<liferay-ui:message key="import" />',
-										width: 600
-									}
-								).render();
-
-								importPopup.plug(
-									A.Plugin.IO,
-									{
-										after:
-										{
-											success : function() {
-												importPopup._syncUIPosAlign();
-											}
-										},
-										uri: '<%= importPagesURL %>'
-									}
-								);
-							},
-							label: '<liferay-ui:message key="import" />',
-							icon: 'arrowthick-1-t'
-						}
-					]
-				}
-			).render('#exportImportToolbar');
-		</aui:script>
 	</c:if>
 </aui:button-row>
+
+<aui:script use="aui-dialog,aui-toolbar">
+	var communityPagesToolbar = new A.Toolbar(
+		{
+			activeState: false,
+			boundingBox: '#<portlet:namespace />communityPagesToolbar',
+			children: [
+				<c:if test="<%= viewablePages %>">
+					{
+						handler: function(event) {
+							var groupWindow = window.open('<%= viewPagesURL %>');
+
+							void('');
+
+							groupWindow.focus();
+						},
+						icon: 'search',
+						label: '<liferay-ui:message key="view-pages" />'
+					}
+				</c:if>
+
+				<c:if test="<%= viewablePages && manageableLayouts %>">
+					,{
+						type: 'ToolbarSpacer'
+					},
+				</c:if>
+
+				<c:if test="<%= manageableLayouts %>">
+					{
+						handler: function(event) {
+							var exportPopup = new A.Dialog(
+								{
+									centered: true,
+									constrain: true,
+									modal: true,
+									title: '<liferay-ui:message key="export" />',
+									width: 600
+								}
+							).render();
+
+							<portlet:renderURL var="exportPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+								<portlet:param name="struts_action" value="/communities/export_pages" />
+								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
+								<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+								<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
+								<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
+							</portlet:renderURL>
+
+							exportPopup.plug(
+								A.Plugin.IO,
+								{
+									after: {
+										success: function() {
+											exportPopup._syncUIPosAlign();
+										}
+									},
+									uri: '<%= exportPagesURL.toString() %>'
+								}
+							);
+						},
+						icon: 'arrowthick-1-b',
+						label: '<liferay-ui:message key="export" />'
+					},
+					{
+						handler: function(event) {
+							var importPopup = new A.Dialog(
+								{
+									centered: true,
+									constrain: true,
+									modal: true,
+									title: '<liferay-ui:message key="import" />',
+									width: 600
+								}
+							).render();
+
+							<portlet:renderURL var="importPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+								<portlet:param name="struts_action" value="/communities/import_pages" />
+								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
+								<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+								<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
+								<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
+								<portlet:param name="redirect" value="<%= currentURL %>" />
+								<portlet:param name="redirectWindowState" value="<%= renderRequest.getWindowState().toString() %>" />
+								<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
+							</portlet:renderURL>
+
+							importPopup.plug(
+								A.Plugin.IO,
+								{
+									after: {
+										success: function() {
+											importPopup._syncUIPosAlign();
+										}
+									},
+									uri: '<%= importPagesURL.toString() %>'
+								}
+							);
+						},
+						icon: 'arrowthick-1-t',
+						label: '<liferay-ui:message key="import" />'
+					}
+				</c:if>
+			]
+		}
+	).render();
+</aui:script>
 
 <table class="lfr-table" width="100%">
 <tr>

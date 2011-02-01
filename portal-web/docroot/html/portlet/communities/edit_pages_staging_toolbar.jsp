@@ -66,9 +66,10 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 </div>
 
 <aui:script use="aui-toolbar">
-	var stagingToolbar = new A.Toolbar(
+	new A.Toolbar(
 		{
 			activeState: false,
+			boundingBox: '#<portlet:namespace />stagingToobar',
 			children: [
 				<c:choose>
 					<c:when test="<%= liveGroup.isWorkflowEnabled() %>">
@@ -263,5 +264,5 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 				</c:if>
 			]
 		}
-	).render('#<portlet:namespace />stagingToobar');
+	).render();
 </aui:script>
