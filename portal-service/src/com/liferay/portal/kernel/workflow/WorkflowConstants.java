@@ -70,6 +70,10 @@ public class WorkflowConstants {
 
 	public static final int STATUS_EXPIRED = 3;
 
+	public static final int STATUS_INACTIVE = 2;
+
+	public static final int STATUS_INCOMPLETE = 1;
+
 	public static final int STATUS_PENDING = 1;
 
 	public static String toLabel(int status) {

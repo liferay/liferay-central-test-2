@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
@@ -648,6 +649,10 @@ public class UserImpl extends UserModelImpl implements User {
 		else {
 			return false;
 		}
+	}
+
+	public boolean isActive() {
+		return (getStatus() == WorkflowConstants.STATUS_APPROVED);
 	}
 
 	public boolean isFemale() throws PortalException, SystemException {
