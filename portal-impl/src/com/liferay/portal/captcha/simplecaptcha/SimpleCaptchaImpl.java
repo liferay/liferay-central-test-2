@@ -59,122 +59,6 @@ public class SimpleCaptchaImpl implements Captcha {
 		initWordRenderers();
 	}
 
-	protected Integer _incrementCounter(Integer count) {
-		if (count == null) {
-			count = new Integer(1);
-		}
-		else {
-			count = new Integer(count.intValue() + 1);
-		}
-
-		return count;
-	}
-
-	public void incrementCounter(HttpServletRequest request)
-		throws CaptchaException {
-		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-			(Validator.isNotNull(request.getRemoteUser()))) {
-
-			HttpSession session = request.getSession();
-
-			Integer count = (Integer)session.getAttribute(
-				WebKeys.CAPTCHA_COUNT);
-
-			session.setAttribute(WebKeys.CAPTCHA_COUNT,
-				_incrementCounter(count));
-		}
-	}
-
-	public void incrementCounter(PortletRequest request)
-		throws CaptchaException {
-		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-			(Validator.isNotNull(request.getRemoteUser()))) {
-
-			PortletSession session = request.getPortletSession();
-
-			Integer count = (Integer)session.getAttribute(
-				WebKeys.CAPTCHA_COUNT);
-
-			session.setAttribute(WebKeys.CAPTCHA_COUNT,
-				_incrementCounter(count));
-		}
-	}
-
-	protected boolean validateChallenge(HttpServletRequest request)
-		throws CaptchaException {
-		HttpSession session = request.getSession();
-
-		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
-
-		if (captchaText == null) {
-			_log.error(
-				"Captcha text is null. User " + request.getRemoteUser() +
-					" may be trying to circumvent the captcha.");
-
-			throw new CaptchaTextException();
-		}
-
-		boolean checkResult = captchaText.equals(
-			ParamUtil.getString(request, "captchaText"));
-
-		if (checkResult) {
-			session.removeAttribute(WebKeys.CAPTCHA_TEXT);
-		}
-
-		return checkResult;
-	}
-
-	protected boolean validateChallenge(PortletRequest request)
-		throws CaptchaException {
-		PortletSession session = request.getPortletSession();
-
-		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
-
-		if (captchaText == null) {
-			_log.error(
-				"Captcha text is null. User " + request.getRemoteUser() +
-					" may be trying to circumvent the captcha.");
-
-			throw new CaptchaTextException();
-		}
-
-		boolean checkResult = captchaText.equals(
-			ParamUtil.getString(request, "captchaText"));
-
-		if (checkResult) {
-			session.removeAttribute(WebKeys.CAPTCHA_TEXT);
-		}
-
-		return checkResult;
-	}
-
-	protected void _checkMaxChallenges(Integer count)
-		throws CaptchaMaxChallengesException {
-		if (count != null && count > PropsValues.CAPTCHA_MAX_CHALLENGES) {
-			throw new CaptchaMaxChallengesException();
-		}
-	}
-
-	protected void checkMaxChallenges(HttpServletRequest request)
-		throws CaptchaMaxChallengesException {
-		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
-			HttpSession session = request.getSession();
-
-			_checkMaxChallenges(
-					(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
-		}
-	}
-
-	protected void checkMaxChallenges(PortletRequest portletRequest)
-		throws CaptchaMaxChallengesException {
-		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
-			PortletSession session = portletRequest.getPortletSession();
-
-			_checkMaxChallenges(
-					(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
-		}
-	}
-
 	public void check(HttpServletRequest request) throws CaptchaException {
 		if (!isEnabled(request)) {
 			return;
@@ -217,6 +101,7 @@ public class SimpleCaptchaImpl implements Captcha {
 
 	public boolean isEnabled(HttpServletRequest request)
 		throws CaptchaException {
+
 		checkMaxChallenges(request);
 
 		return (PropsValues.CAPTCHA_MAX_CHALLENGES >= 0);
@@ -261,6 +146,26 @@ public class SimpleCaptchaImpl implements Captcha {
 
 		CaptchaServletUtil.writeImage(
 			response.getOutputStream(), simpleCaptcha.getImage());
+	}
+
+	protected void checkMaxChallenges(HttpServletRequest request)
+		throws CaptchaMaxChallengesException {
+		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
+			HttpSession session = request.getSession();
+
+			_checkMaxChallenges(
+					(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
+		}
+	}
+
+	protected void checkMaxChallenges(PortletRequest portletRequest)
+		throws CaptchaMaxChallengesException {
+		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
+			PortletSession session = portletRequest.getPortletSession();
+
+			_checkMaxChallenges(
+					(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
+		}
 	}
 
 	protected BackgroundProducer getBackgroundProducer() {
@@ -344,6 +249,38 @@ public class SimpleCaptchaImpl implements Captcha {
 		return _wordRenderers[pos];
 	}
 
+	protected void incrementCounter(HttpServletRequest request)
+		throws CaptchaException {
+
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(request.getRemoteUser()))) {
+
+			HttpSession session = request.getSession();
+
+			Integer count = (Integer)session.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			session.setAttribute(WebKeys.CAPTCHA_COUNT,
+				_incrementCounter(count));
+		}
+	}
+
+	protected void incrementCounter(PortletRequest request)
+		throws CaptchaException {
+
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(request.getRemoteUser()))) {
+
+			PortletSession session = request.getPortletSession();
+
+			Integer count = (Integer)session.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			session.setAttribute(WebKeys.CAPTCHA_COUNT,
+				_incrementCounter(count));
+		}
+	}
+
 	protected void initBackgroundProducers() {
 		String[] backgroundProducerClassNames =
 			PropsValues.CAPTCHA_ENGINE_SIMPLECAPTCHA_BACKGROUND_PRODUCERS;
@@ -416,6 +353,75 @@ public class SimpleCaptchaImpl implements Captcha {
 			_wordRenderers[i] = (WordRenderer)InstancePool.get(
 				wordRendererClassName);
 		}
+	}
+
+	protected boolean validateChallenge(HttpServletRequest request)
+		throws CaptchaException {
+
+		HttpSession session = request.getSession();
+
+		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if (captchaText == null) {
+			_log.error(
+					"Captcha text is null. User " + request.getRemoteUser() +
+							" may be trying to circumvent the captcha.");
+
+			throw new CaptchaTextException();
+		}
+
+		boolean checkResult = captchaText.equals(
+				ParamUtil.getString(request, "captchaText"));
+
+		if (checkResult) {
+			session.removeAttribute(WebKeys.CAPTCHA_TEXT);
+		}
+
+		return checkResult;
+	}
+
+	protected boolean validateChallenge(PortletRequest request)
+		throws CaptchaException {
+
+		PortletSession session = request.getPortletSession();
+
+		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if (captchaText == null) {
+			_log.error(
+					"Captcha text is null. User " + request.getRemoteUser() +
+							" may be trying to circumvent the captcha.");
+
+			throw new CaptchaTextException();
+		}
+
+		boolean checkResult = captchaText.equals(
+				ParamUtil.getString(request, "captchaText"));
+
+		if (checkResult) {
+			session.removeAttribute(WebKeys.CAPTCHA_TEXT);
+		}
+
+		return checkResult;
+	}
+
+	protected void _checkMaxChallenges(Integer count)
+		throws CaptchaMaxChallengesException {
+
+		if (count != null && count > PropsValues.CAPTCHA_MAX_CHALLENGES) {
+			throw new CaptchaMaxChallengesException();
+		}
+	}
+
+	protected Integer _incrementCounter(Integer count) {
+		if (count == null) {
+			count = new Integer(1);
+		}
+		else {
+			count = new Integer(count.intValue() + 1);
+		}
+
+		return count;
 	}
 
 	private static final String _TAGLIB_PATH =
