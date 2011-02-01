@@ -385,11 +385,16 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		}
 
 		<#if column.localized>
-			public void set${column.methodName}(Locale locale, String ${column.name}) {
+			public void set${column.methodName}(String ${column.name}, Locale locale) {
+				set${column.methodName}(${column.name}, locale, LocaleUtil.getDefault());
+			}
+
+			public void set${column.methodName}(String ${column.name}, Locale locale, Locale defaultLocale) {
 				String languageId = LocaleUtil.toLanguageId(locale);
+				String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 				if (Validator.isNotNull(${column.name})) {
-					set${column.methodName}(LocalizationUtil.updateLocalization(get${column.methodName}(), "${column.methodName}", ${column.name}, languageId));
+					set${column.methodName}(LocalizationUtil.updateLocalization(get${column.methodName}(), "${column.methodName}", ${column.name}, languageId, defaultLanguageId));
 				}
 				else {
 					set${column.methodName}(LocalizationUtil.removeLocalization(get${column.methodName}(), "${column.methodName}", languageId));
@@ -397,6 +402,10 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			}
 
 			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map) {
+				set${column.methodName}Map(${column.name}Map, LocaleUtil.getDefault());
+			}
+
+			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map, Locale defaultLocale) {
 				if (${column.name}Map == null) {
 					return;
 				}
@@ -406,7 +415,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 				for (Locale locale : locales) {
 					String ${column.name} = ${column.name}Map.get(locale);
 
-					set${column.methodName}(locale, ${column.name});
+					set${column.methodName}(${column.name}, locale, defaultLocale);
 				}
 			}
 		</#if>

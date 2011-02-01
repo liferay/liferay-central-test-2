@@ -156,10 +156,12 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 			/**
 			 * Sets the localized ${column.humanName} of this ${entity.humanName}.
 			 *
-			 * @param locale the locale to set the localized ${column.humanName} for
 			 * @param ${column.name} the localized ${column.humanName} of this ${entity.humanName}
+			 * @param locale the locale to set the localized ${column.humanName} for
 			 */
-			public void set${column.methodName}(Locale locale, String ${column.name});
+			public void set${column.methodName}(String ${column.name}, Locale locale);
+
+		    public void set${column.methodName}(String ${column.name}, Locale locale, Locale defaultLocale);
 
 			/**
 			 * Sets the localized ${column.humanNames} of this ${entity.humanName} from the map of locales and localized ${column.humanNames}.
@@ -167,6 +169,8 @@ public interface ${entity.name}Model extends BaseModel<${entity.name}> {
 			 * @param ${column.name}Map the locales and localized ${column.humanNames} of this ${entity.humanName}
 			 */
 			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map);
+
+			public void set${column.methodName}Map(Map<Locale, String> ${column.name}Map, Locale defaultLocale);
 		</#if>
 
 		<#if column.userUuid>

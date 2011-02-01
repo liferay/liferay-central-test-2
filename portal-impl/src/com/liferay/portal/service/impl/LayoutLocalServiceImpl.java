@@ -904,7 +904,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		validateName(name, languageId);
 
-		layout.setName(LocaleUtil.fromLanguageId(languageId), name);
+		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
 
 		layoutPersistence.update(layout, false);
 
