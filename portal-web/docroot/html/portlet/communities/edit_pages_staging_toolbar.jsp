@@ -115,7 +115,7 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 
 								userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
 
-								List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+								List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, WorkflowConstants.STATUS_ANY, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
 								if (reviewers.isEmpty()) {
 									if (liveGroup.isCommunity()) {
@@ -127,7 +127,7 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 
 									userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
 
-									reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+									reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, WorkflowConstants.STATUS_ANY, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 								}
 
 								for (User reviewer : reviewers) {
