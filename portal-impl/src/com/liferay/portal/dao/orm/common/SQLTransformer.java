@@ -140,6 +140,12 @@ public class SQLTransformer {
 		return matcher.replaceAll("$1 % $2");
 	}
 
+	private String _replaceNegativeComparison(String sql) {
+		Matcher matcher = _negativeComparisonPattern.matcher(sql);
+
+		return matcher.replaceAll("$1 ($2)");
+	}
+
 	private String _replaceUnion(String sql) {
 		Matcher matcher = _unionAllPattern.matcher(sql);
 
@@ -169,7 +175,9 @@ public class SQLTransformer {
 		else if (_vendorSQLServer || _vendorSybase) {
 			newSQL = _replaceMod(newSQL);
 		}
-
+		else if (_vendorPostgreSQL) {
+			newSQL = _replaceNegativeComparison(newSQL);
+		}
 		if (_log.isDebugEnabled()) {
 			_log.debug("Original SQL " + sql);
 			_log.debug("Modified SQL " + newSQL);
@@ -194,6 +202,8 @@ public class SQLTransformer {
 		"MOD\\((.+?),(.+?)\\)", Pattern.CASE_INSENSITIVE);
 	private static Pattern _unionAllPattern = Pattern.compile(
 		"SELECT \\* FROM(.*)TEMP_TABLE(.*)", Pattern.CASE_INSENSITIVE);
+	private static Pattern _negativeComparisonPattern = Pattern.compile(
+		"(!= )?(-([0-9]+)?)", Pattern.CASE_INSENSITIVE);
 
 	private boolean _vendorDB2;
 	private boolean _vendorDerby;
