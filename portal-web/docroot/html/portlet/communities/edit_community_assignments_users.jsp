@@ -86,18 +86,16 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignm
 			>
 
 				<%
-				List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
+				List<UserGroupRole> userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
 
-				Iterator itr = userGroupRoles.iterator();
-
-				while (itr.hasNext()) {
-					UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+				for (int i = 0; i < userGroupRoles.size(); i++) {
+					UserGroupRole userGroupRole = userGroupRoles.get(i);
 
 					Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
 
 					buffer.append(HtmlUtil.escape(role.getTitle(locale)));
 
-					if (itr.hasNext()) {
+					if ((i + 1) < userGroupRoles.size()) {
 						buffer.append(StringPool.COMMA_AND_SPACE);
 					}
 				}

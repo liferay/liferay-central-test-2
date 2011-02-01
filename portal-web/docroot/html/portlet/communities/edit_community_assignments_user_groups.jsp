@@ -64,6 +64,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignm
 		keyProperty="userGroupId"
 		modelVar="userGroup"
 	>
+		<liferay-ui:search-container-row-parameter
+			name="group"
+			value="<%= group %>"
+		/>
+
 		<liferay-ui:search-container-column-text
 			name="name"
 			orderable="<%= true %>"
@@ -75,6 +80,36 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignm
 			orderable="<%= true %>"
 			property="description"
 		/>
+
+		<c:if test='<%= tabs2.equals("current") %>'>
+			<liferay-ui:search-container-column-text
+				buffer="buffer"
+				name="community-roles"
+			>
+
+				<%
+				List<UserGroupGroupRole> userGroupGroupRoles = UserGroupGroupRoleLocalServiceUtil.getUserGroupGroupRoles(userGroup.getUserGroupId(), group.getGroupId());
+
+				for (int i = 0; i < userGroupGroupRoles.size(); i++) {
+					UserGroupGroupRole userGroupGroupRole = userGroupGroupRoles.get(i);
+
+					Role role = RoleLocalServiceUtil.getRole(userGroupGroupRole.getRoleId());
+
+					buffer.append(HtmlUtil.escape(role.getTitle(locale)));
+
+					if ((i + 1) < userGroupGroupRoles.size()) {
+						buffer.append(StringPool.COMMA_AND_SPACE);
+					}
+				}
+				%>
+
+			</liferay-ui:search-container-column-text>
+
+			<liferay-ui:search-container-column-jsp
+				align="right"
+				path="/html/portlet/communities/user_group_action.jsp"
+			/>
+		</c:if>
 	</liferay-ui:search-container-row>
 
 	<div class="separator"><!-- --></div>
