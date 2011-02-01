@@ -104,10 +104,6 @@ public abstract class BasePortalCacheClusterChannel
 
 		if (_destroy) {
 			dispatchEvent(portalCacheClusterEvent);
-			if (_log.isDebugEnabled()) {
-				_log.debug("Directly sends PortalCacheClusterEvent " +
-					portalCacheClusterEvent);
-			}
 		}
 		else {
 			try {
