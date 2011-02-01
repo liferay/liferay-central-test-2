@@ -69,7 +69,9 @@ public class EditEntryAction extends PortletAction {
 				themeDisplay.getLayoutTypePortlet();
 
 			if (layoutTypePortlet.hasPortletId(
-					portletConfig.getPortletName())) {
+					portletConfig.getPortletName()) &&
+						!actionRequest.getWindowState().toString().equals(
+							"pop_up")) {
 
 				sendRedirect(actionRequest, actionResponse);
 			}

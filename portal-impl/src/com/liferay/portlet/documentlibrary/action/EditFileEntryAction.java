@@ -89,8 +89,15 @@ public class EditFileEntryAction extends PortletAction {
 			else if (cmd.equals(Constants.UNLOCK)) {
 				unlockFileEntry(actionRequest);
 			}
+			if (!actionRequest.getWindowState().toString().equals("pop_up")) {
+				sendRedirect(actionRequest, actionResponse);
+			}
+			else {
+				String redirect = ParamUtil.getString(
+					actionRequest, "redirect");
 
-			sendRedirect(actionRequest, actionResponse);
+				actionResponse.sendRedirect(redirect);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof DuplicateLockException ||

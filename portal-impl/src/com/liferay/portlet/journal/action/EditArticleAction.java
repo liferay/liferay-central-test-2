@@ -160,7 +160,14 @@ public class EditArticleAction extends PortletAction {
 					redirect = newRedirect;
 				}
 
-				sendRedirect(actionRequest, actionResponse, redirect);
+				if (!actionRequest.getWindowState().toString().equals(
+					"pop_up")) {
+
+					sendRedirect(actionRequest, actionResponse, redirect);
+				}
+				else {
+					actionResponse.sendRedirect(redirect);
+				}
 			}
 		}
 		catch (Exception e) {

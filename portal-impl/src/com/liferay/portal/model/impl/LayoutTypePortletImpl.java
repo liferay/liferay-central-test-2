@@ -581,9 +581,7 @@ public class LayoutTypePortletImpl
 			}
 		}
 
-		if (getLayout().isTypeControlPanel() &&
-			hasStateMaxPortletId(portletId)) {
-
+		if (getLayout().isTypeControlPanel()) {
 			return true;
 		}
 

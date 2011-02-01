@@ -72,7 +72,15 @@ public class EditImageAction extends PortletAction {
 				deleteImage(actionRequest);
 			}
 
-			sendRedirect(actionRequest, actionResponse);
+			if (!actionRequest.getWindowState().toString().equals("pop_up")) {
+				sendRedirect(actionRequest, actionResponse);
+			}
+			else {
+				String redirect = ParamUtil.getString(
+					actionRequest, "redirect");
+
+				actionResponse.sendRedirect(redirect);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchImageException ||
