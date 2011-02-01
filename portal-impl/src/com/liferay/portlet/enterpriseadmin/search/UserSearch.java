@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferences;
@@ -80,15 +81,13 @@ public class UserSearch extends SearchContainer<User> {
 			(!portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS)) &&
 			(!portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS))) {
 
-			displayTerms.setActive(true);
-			searchTerms.setActive(true);
+			displayTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
+			searchTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
 		}
 
-		if (displayTerms.hasActive()) {
-			iteratorURL.setParameter(
-				UserDisplayTerms.ACTIVE,
-				String.valueOf(displayTerms.isActive()));
-		}
+		iteratorURL.setParameter(
+			UserDisplayTerms.STATUS,
+			String.valueOf(displayTerms.getStatus()));
 
 		iteratorURL.setParameter(
 			UserDisplayTerms.EMAIL_ADDRESS, displayTerms.getEmailAddress());

@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -411,8 +412,9 @@ public class AnnouncementsEntryLocalServiceImpl
 		}
 		else {
 			users = userLocalService.search(
-				company.getCompanyId(), null, Boolean.TRUE, params,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+				company.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
+				params, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				(OrderByComparator)null);
 		}
 
 		if (_log.isDebugEnabled()) {

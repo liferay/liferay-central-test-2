@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.search.DisplayTerms;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import javax.portlet.PortletRequest;
 
@@ -25,8 +26,6 @@ import javax.portlet.PortletRequest;
  * @author Brian Wing Shun Chan
  */
 public class UserDisplayTerms extends DisplayTerms {
-
-	public static final String ACTIVE = "active";
 
 	public static final String EMAIL_ADDRESS = "emailAddress";
 
@@ -42,15 +41,17 @@ public class UserDisplayTerms extends DisplayTerms {
 
 	public static final String SCREEN_NAME = "screenName";
 
+	public static final String STATUS = "status";
+
 	public static final String USER_GROUP_ID = "userGroupId";
 
 	public UserDisplayTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		String activeString = ParamUtil.getString(portletRequest, ACTIVE);
+		String statusString = ParamUtil.getString(portletRequest, STATUS);
 
-		if (Validator.isNotNull(activeString)) {
-			active = GetterUtil.getBoolean(activeString);
+		if (Validator.isNotNull(statusString)) {
+			status = GetterUtil.getInteger(statusString);
 		}
 
 		emailAddress = ParamUtil.getString(portletRequest, EMAIL_ADDRESS);
@@ -61,10 +62,6 @@ public class UserDisplayTerms extends DisplayTerms {
 		roleId = ParamUtil.getLong(portletRequest, ROLE_ID);
 		screenName = ParamUtil.getString(portletRequest, SCREEN_NAME);
 		userGroupId = ParamUtil.getLong(portletRequest, USER_GROUP_ID);
-	}
-
-	public Boolean getActive() {
-		return active;
 	}
 
 	public String getEmailAddress() {
@@ -95,32 +92,22 @@ public class UserDisplayTerms extends DisplayTerms {
 		return screenName;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
 	public long getUserGroupId() {
 		return userGroupId;
 	}
 
-	public boolean hasActive() {
-		if (active == null) {
-			return false;
-		}
-		else {
-			return true;
-		}
-	}
-
 	public boolean isActive() {
-		if (active == null) {
-			return true;
-		}
-
-		return active.booleanValue();
+		return (status == WorkflowConstants.STATUS_APPROVED);
 	}
 
-	public void setActive(Boolean active) {
-		this.active = active;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
-	protected Boolean active;
 	protected String emailAddress;
 	protected String firstName;
 	protected String lastName;
@@ -128,6 +115,7 @@ public class UserDisplayTerms extends DisplayTerms {
 	protected long organizationId;
 	protected long roleId;
 	protected String screenName;
+	protected int status;
 	protected long userGroupId;
 
 }

@@ -48,9 +48,9 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
 	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-	if (!searchTerms.isAdvancedSearch() && !searchTerms.hasActive()) {
-		displayTerms.setActive(Boolean.TRUE);
-		searchTerms.setActive(Boolean.TRUE);
+	if (!searchTerms.isAdvancedSearch()) {
+		displayTerms.setStatus(displayTerms.getStatus());
+		searchTerms.setStatus(searchTerms.getStatus());
 	}
 
 	long organizationId = searchTerms.getOrganizationId();
@@ -204,7 +204,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	boolean hasButtons = false;
 	%>
 
-	<c:if test="<%= searchTerms.hasActive() && (searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE)) %>">
+	<c:if test="<%= (searchTerms.getStatus() != WorkflowConstants.STATUS_ANY) && (searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE)) %>">
 
 		<%
 		hasButtons = true;
@@ -215,7 +215,7 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 		<aui:button onClick="<%= taglibOnClick %>" value='<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>' />
 	</c:if>
 
-	<c:if test="<%= searchTerms.hasActive() && !searchTerms.isActive() %>">
+	<c:if test="<%= (searchTerms.getStatus() != WorkflowConstants.STATUS_ANY) && !searchTerms.isActive() %>">
 
 		<%
 		hasButtons = true;

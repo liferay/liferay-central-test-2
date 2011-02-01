@@ -290,7 +290,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		userParams.put("usersGroups", new Long(group.getGroupId()));
 
-		int membersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, Boolean.TRUE, userParams);
+		int membersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED, userParams);
 
 		row.addText(String.valueOf(membersCount));
 

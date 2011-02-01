@@ -17,6 +17,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 import com.liferay.portal.kernel.dao.search.DAOParamUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 
 import javax.portlet.PortletRequest;
 
@@ -28,10 +29,6 @@ public class UserSearchTerms extends UserDisplayTerms {
 	public UserSearchTerms(PortletRequest portletRequest) {
 		super(portletRequest);
 
-		if (Validator.isNotNull(ParamUtil.getString(portletRequest, ACTIVE))) {
-			active = ParamUtil.getBoolean(portletRequest, ACTIVE, true);
-		}
-
 		emailAddress = DAOParamUtil.getLike(portletRequest, EMAIL_ADDRESS);
 		firstName = DAOParamUtil.getLike(portletRequest, FIRST_NAME);
 		lastName = DAOParamUtil.getLike(portletRequest, LAST_NAME);
@@ -39,6 +36,8 @@ public class UserSearchTerms extends UserDisplayTerms {
 		organizationId = ParamUtil.getLong(portletRequest, ORGANIZATION_ID);
 		roleId = ParamUtil.getLong(portletRequest, ROLE_ID);
 		screenName = DAOParamUtil.getLike(portletRequest, SCREEN_NAME);
+		status = ParamUtil.getInteger(
+			portletRequest, STATUS, WorkflowConstants.STATUS_APPROVED);
 		userGroupId = ParamUtil.getLong(portletRequest, USER_GROUP_ID);
 	}
 

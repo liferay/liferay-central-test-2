@@ -44,10 +44,10 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 			<aui:input name="<%= displayTerms.LAST_NAME %>" size="20" value="<%= displayTerms.getLastName() %>" />
 
 			<c:if test="<%= showActiveUserSelect %>">
-				<aui:select name="<%= displayTerms.ACTIVE %>">
-					<aui:option selected="<%= (!displayTerms.hasActive()) %>" value="" />
-					<aui:option label="yes" selected="<%= (displayTerms.hasActive()) && displayTerms.isActive() %>" value="1" />
-					<aui:option label="no" selected="<%= (displayTerms.hasActive()) && !displayTerms.isActive() %>" value="0" />
+				<aui:select name="<%= displayTerms.STATUS %>">
+					<aui:option label="any-status" selected="<%= (displayTerms.getStatus() == WorkflowConstants.STATUS_ANY) %>" value="<%= WorkflowConstants.STATUS_ANY %>" />
+					<aui:option label="active" selected="<%= (displayTerms.getStatus() == WorkflowConstants.STATUS_APPROVED) %>" value="<%= WorkflowConstants.STATUS_APPROVED %>" />
+					<aui:option label="inactive" selected="<%= (displayTerms.getStatus() == WorkflowConstants.STATUS_INACTIVE) %>" value="<%= WorkflowConstants.STATUS_INACTIVE %>" />
 				</aui:select>
 			</c:if>
 		</aui:column>

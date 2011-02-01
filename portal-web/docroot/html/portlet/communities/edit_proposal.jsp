@@ -199,7 +199,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 						userParams.put("userGroupRole", new Long[] {new Long(liveGroupId), new Long(role.getRoleId())});
 
-						List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
+						List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, WorkflowConstants.STATUS_ANY, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 
 						for (User reviewer : reviewers) {
 							if (reviewer.getUserId() == review.getUserId()) {

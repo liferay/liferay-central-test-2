@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Team;
@@ -168,7 +169,8 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
 			userGroupId);
 
-		if (userLocalService.getUserGroupUsersCount(userGroupId, true) > 0) {
+		if (userLocalService.getUserGroupUsersCount(
+				userGroupId, WorkflowConstants.STATUS_APPROVED) > 0) {
 			throw new RequiredUserGroupException();
 		}
 

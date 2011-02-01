@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ProgressTracker;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -138,9 +139,7 @@ public class ExportUsersAction extends PortletAction {
 		UserSearchTerms searchTerms =
 			(UserSearchTerms)userSearch.getSearchTerms();
 
-		if (!searchTerms.isAdvancedSearch() && !searchTerms.hasActive()) {
-			searchTerms.setActive(Boolean.TRUE);
-		}
+		searchTerms.setStatus(WorkflowConstants.STATUS_APPROVED);
 
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
@@ -168,13 +167,13 @@ public class ExportUsersAction extends PortletAction {
 				themeDisplay.getCompanyId(), searchTerms.getFirstName(),
 				searchTerms.getMiddleName(), searchTerms.getLastName(),
 				searchTerms.getScreenName(), searchTerms.getEmailAddress(),
-				searchTerms.getActive(), params, searchTerms.isAndOperator(),
+				searchTerms.getStatus(), params, searchTerms.isAndOperator(),
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
 		}
 		else {
 			return UserLocalServiceUtil.search(
 				themeDisplay.getCompanyId(), searchTerms.getKeywords(),
-				searchTerms.getActive(), params, QueryUtil.ALL_POS,
+				searchTerms.getStatus(), params, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, (OrderByComparator)null);
 		}
 	}

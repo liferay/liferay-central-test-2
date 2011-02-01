@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
@@ -266,7 +267,8 @@ public class LayoutCache {
 
 				users = UserLocalServiceUtil.search(
 					companyId, null, null, null, user.getScreenName(), null,
-					Boolean.TRUE, params, true, 0, 1, (OrderByComparator)null);
+					WorkflowConstants.STATUS_APPROVED, params, true, 0, 1,
+					(OrderByComparator)null);
 
 			}
 			catch (PortalException pe) {

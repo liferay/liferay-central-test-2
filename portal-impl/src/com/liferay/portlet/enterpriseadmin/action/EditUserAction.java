@@ -53,6 +53,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.EmailAddress;
@@ -434,9 +435,13 @@ public class EditUserAction extends PortletAction {
 			if (cmd.equals(Constants.DEACTIVATE) ||
 				cmd.equals(Constants.RESTORE)) {
 
-				boolean active = !cmd.equals(Constants.DEACTIVATE);
+				int status = WorkflowConstants.STATUS_APPROVED;
 
-				UserServiceUtil.updateActive(deleteUserIds[i], active);
+				if (cmd.equals(Constants.DEACTIVATE)) {
+					status = WorkflowConstants.STATUS_INACTIVE;
+				}
+
+				UserServiceUtil.updateStatus(deleteUserIds[i], status);
 			}
 			else {
 				UserServiceUtil.deleteUser(deleteUserIds[i]);

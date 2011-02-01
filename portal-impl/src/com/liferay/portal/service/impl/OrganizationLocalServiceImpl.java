@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
@@ -239,7 +240,8 @@ public class OrganizationLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if ((userLocalService.getOrganizationUsersCount(
-				organization.getOrganizationId(), true) > 0) ||
+				organization.getOrganizationId(),
+				WorkflowConstants.STATUS_APPROVED) > 0) ||
 			(organizationPersistence.countByC_P(
 				organization.getCompanyId(),
 				organization.getOrganizationId()) > 0)) {

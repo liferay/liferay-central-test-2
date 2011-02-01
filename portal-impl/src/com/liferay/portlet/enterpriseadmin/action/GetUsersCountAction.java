@@ -44,22 +44,22 @@ public class GetUsersCountAction extends AJAXAction {
 
 		String className = ParamUtil.getString(request, "className");
 		long[] ids = StringUtil.split(ParamUtil.getString(request, "ids"), 0L);
-		boolean active = ParamUtil.getBoolean(request, "active");
+		int status = ParamUtil.getInteger(request, "status");
 
 		int count = 0;
 
 		if (className.equals(Organization.class.getName())) {
-			count = getOrganizationUsersCount(companyId, ids, active);
+			count = getOrganizationUsersCount(companyId, ids, status);
 		}
 		else if (className.equals(UserGroup.class.getName())) {
-			count = getUserGroupUsersCount(companyId, ids, active);
+			count = getUserGroupUsersCount(companyId, ids, status);
 		}
 
 		return String.valueOf(count);
 	}
 
 	protected int getOrganizationUsersCount(
-			long companyId, long[] organizationIds, boolean active)
+			long companyId, long[] organizationIds, int status)
 		throws Exception {
 
 		int count = 0;
@@ -71,14 +71,14 @@ public class GetUsersCountAction extends AJAXAction {
 			params.put("usersOrgs", organizationId);
 
 			count+= UserLocalServiceUtil.searchCount(
-				companyId, null, active, params);
+				companyId, null, status, params);
 		}
 
 		return count;
 	}
 
 	protected int getUserGroupUsersCount(
-			long companyId, long[] userGroupIds, boolean active)
+			long companyId, long[] userGroupIds, int status)
 		throws Exception {
 
 		int count = 0;
@@ -90,7 +90,7 @@ public class GetUsersCountAction extends AJAXAction {
 			params.put("usersUserGroups", userGroupId);
 
 			count+= UserLocalServiceUtil.searchCount(
-				companyId, null, active, params);
+				companyId, null, status, params);
 		}
 
 		return count;
