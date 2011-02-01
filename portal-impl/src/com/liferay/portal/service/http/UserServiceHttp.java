@@ -1140,16 +1140,16 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.model.User updateActive(
-		HttpPrincipal httpPrincipal, long userId, boolean active)
+	public static com.liferay.portal.model.User updateStatus(
+		HttpPrincipal httpPrincipal, long userId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
-					"updateActive", _updateActiveParameterTypes31);
+					"updateStatus", _updateStatusParameterTypes31);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
-					active);
+					status);
 
 			Object returnObj = null;
 
@@ -1756,8 +1756,8 @@ public class UserServiceHttp {
 	private static final Class<?>[] _unsetUserGroupUsersParameterTypes30 = new Class[] {
 			long.class, long[].class
 		};
-	private static final Class<?>[] _updateActiveParameterTypes31 = new Class[] {
-			long.class, boolean.class
+	private static final Class<?>[] _updateStatusParameterTypes31 = new Class[] {
+			long.class, int.class
 		};
 	private static final Class<?>[] _updateAgreedToTermsOfUseParameterTypes32 = new Class[] {
 			long.class, boolean.class

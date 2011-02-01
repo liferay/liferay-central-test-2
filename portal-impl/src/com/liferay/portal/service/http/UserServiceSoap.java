@@ -516,11 +516,11 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap updateActive(long userId,
-		boolean active) throws RemoteException {
+	public static com.liferay.portal.model.UserSoap updateStatus(long userId,
+		int status) throws RemoteException {
 		try {
-			com.liferay.portal.model.User returnValue = UserServiceUtil.updateActive(userId,
-					active);
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updateStatus(userId,
+					status);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

@@ -381,7 +381,7 @@ Liferay.Service.registerClass(
 		unsetRoleUsers: true,
 		unsetTeamUsers: true,
 		unsetUserGroupUsers: true,
-		updateActive: true,
+		updateStatus: true,
 		updateAgreedToTermsOfUse: true,
 		updateEmailAddress: true,
 		updateLockoutById: true,

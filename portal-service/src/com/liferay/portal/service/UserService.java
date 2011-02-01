@@ -202,8 +202,7 @@ public interface UserService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.User updateActive(long userId,
-		boolean active)
+	public com.liferay.portal.model.User updateStatus(long userId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

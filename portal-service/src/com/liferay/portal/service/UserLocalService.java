@@ -414,7 +414,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getGroupUsersCount(long groupId, boolean active)
+	public int getGroupUsersCount(long groupId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -445,7 +445,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getOrganizationUsersCount(long organizationId, boolean active)
+	public int getOrganizationUsersCount(long organizationId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -467,7 +467,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getRoleUsersCount(long roleId, boolean active)
+	public int getRoleUsersCount(long roleId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -578,7 +578,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public int getUserGroupUsersCount(long userGroupId, boolean active)
+	public int getUserGroupUsersCount(long userGroupId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -641,14 +641,14 @@ public interface UserLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> search(
-		long companyId, java.lang.String keywords, java.lang.Boolean active,
+		long companyId, java.lang.String keywords, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String keywords, java.lang.Boolean active,
+		java.lang.String keywords, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		int start, int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -657,8 +657,7 @@ public interface UserLocalService {
 	public java.util.List<com.liferay.portal.model.User> search(
 		long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.Boolean active,
+		java.lang.String screenName, java.lang.String emailAddress, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -668,7 +667,7 @@ public interface UserLocalService {
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.Boolean active,
+		java.lang.String emailAddress, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
@@ -676,15 +675,14 @@ public interface UserLocalService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long companyId, java.lang.String keywords,
-		java.lang.Boolean active,
+		int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int searchCount(long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.Boolean active,
+		java.lang.String screenName, java.lang.String emailAddress, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -731,11 +729,6 @@ public interface UserLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.User updateActive(long userId,
-		boolean active)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -843,6 +836,10 @@ public interface UserLocalService {
 
 	public com.liferay.portal.model.User updateScreenName(long userId,
 		java.lang.String screenName)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.User updateStatus(long userId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

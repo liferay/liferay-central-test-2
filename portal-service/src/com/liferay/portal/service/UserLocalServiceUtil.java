@@ -515,10 +515,10 @@ public class UserLocalServiceUtil {
 		return getService().getGroupUsersCount(groupId);
 	}
 
-	public static int getGroupUsersCount(long groupId, boolean active)
+	public static int getGroupUsersCount(long groupId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupUsersCount(groupId, active);
+		return getService().getGroupUsersCount(groupId, status);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getNoAnnouncementsDeliveries(
@@ -553,11 +553,10 @@ public class UserLocalServiceUtil {
 		return getService().getOrganizationUsersCount(organizationId);
 	}
 
-	public static int getOrganizationUsersCount(long organizationId,
-		boolean active)
+	public static int getOrganizationUsersCount(long organizationId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getOrganizationUsersCount(organizationId, active);
+		return getService().getOrganizationUsersCount(organizationId, status);
 	}
 
 	public static long[] getRoleUserIds(long roleId)
@@ -581,10 +580,10 @@ public class UserLocalServiceUtil {
 		return getService().getRoleUsersCount(roleId);
 	}
 
-	public static int getRoleUsersCount(long roleId, boolean active)
+	public static int getRoleUsersCount(long roleId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRoleUsersCount(roleId, active);
+		return getService().getRoleUsersCount(roleId, status);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
@@ -717,10 +716,10 @@ public class UserLocalServiceUtil {
 		return getService().getUserGroupUsersCount(userGroupId);
 	}
 
-	public static int getUserGroupUsersCount(long userGroupId, boolean active)
+	public static int getUserGroupUsersCount(long userGroupId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getUserGroupUsersCount(userGroupId, active);
+		return getService().getUserGroupUsersCount(userGroupId, status);
 	}
 
 	public static long getUserIdByEmailAddress(long companyId,
@@ -793,68 +792,66 @@ public class UserLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> search(
-		long companyId, java.lang.String keywords, java.lang.Boolean active,
+		long companyId, java.lang.String keywords, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .search(companyId, keywords, active, params, start, end, obc);
+				   .search(companyId, keywords, status, params, start, end, obc);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
-		java.lang.String keywords, java.lang.Boolean active,
+		java.lang.String keywords, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		int start, int end, com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .search(companyId, keywords, active, params, start, end, sort);
+				   .search(companyId, keywords, status, params, start, end, sort);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> search(
 		long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.Boolean active,
+		java.lang.String screenName, java.lang.String emailAddress, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .search(companyId, firstName, middleName, lastName,
-			screenName, emailAddress, active, params, andSearch, start, end, obc);
+			screenName, emailAddress, status, params, andSearch, start, end, obc);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String screenName,
-		java.lang.String emailAddress, java.lang.Boolean active,
+		java.lang.String emailAddress, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch, int start, int end,
 		com.liferay.portal.kernel.search.Sort sort)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .search(companyId, firstName, middleName, lastName,
-			screenName, emailAddress, active, params, andSearch, start, end,
+			screenName, emailAddress, status, params, andSearch, start, end,
 			sort);
 	}
 
 	public static int searchCount(long companyId, java.lang.String keywords,
-		java.lang.Boolean active,
+		int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().searchCount(companyId, keywords, active, params);
+		return getService().searchCount(companyId, keywords, status, params);
 	}
 
 	public static int searchCount(long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String screenName, java.lang.String emailAddress,
-		java.lang.Boolean active,
+		java.lang.String screenName, java.lang.String emailAddress, int status,
 		java.util.LinkedHashMap<java.lang.String, java.lang.Object> params,
 		boolean andSearch)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .searchCount(companyId, firstName, middleName, lastName,
-			screenName, emailAddress, active, params, andSearch);
+			screenName, emailAddress, status, params, andSearch);
 	}
 
 	public static void sendPassword(long companyId,
@@ -924,13 +921,6 @@ public class UserLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().unsetUserGroupUsers(userGroupId, userIds);
-	}
-
-	public static com.liferay.portal.model.User updateActive(long userId,
-		boolean active)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateActive(userId, active);
 	}
 
 	public static com.liferay.portal.model.User updateAgreedToTermsOfUse(
@@ -1091,6 +1081,13 @@ public class UserLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateScreenName(userId, screenName);
+	}
+
+	public static com.liferay.portal.model.User updateStatus(long userId,
+		int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateStatus(userId, status);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,

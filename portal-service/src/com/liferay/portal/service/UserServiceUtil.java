@@ -263,11 +263,11 @@ public class UserServiceUtil {
 		getService().unsetUserGroupUsers(userGroupId, userIds);
 	}
 
-	public static com.liferay.portal.model.User updateActive(long userId,
-		boolean active)
+	public static com.liferay.portal.model.User updateStatus(long userId,
+		int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateActive(userId, active);
+		return getService().updateStatus(userId, status);
 	}
 
 	public static com.liferay.portal.model.User updateAgreedToTermsOfUse(

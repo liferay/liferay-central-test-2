@@ -250,11 +250,10 @@ public class UserServiceWrapper implements UserService {
 		_userService.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
-	public com.liferay.portal.model.User updateActive(long userId,
-		boolean active)
+	public com.liferay.portal.model.User updateStatus(long userId, int status)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _userService.updateActive(userId, active);
+		return _userService.updateStatus(userId, status);
 	}
 
 	public com.liferay.portal.model.User updateAgreedToTermsOfUse(long userId,
