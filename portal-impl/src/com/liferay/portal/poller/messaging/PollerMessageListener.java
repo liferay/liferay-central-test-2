@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.poller.DefaultPollerResponse;
 import com.liferay.portal.kernel.poller.PollerException;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.poller.PollerRequest;
@@ -28,6 +29,7 @@ import com.liferay.portal.poller.PollerProcessorUtil;
 
 /**
  * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  */
 public class PollerMessageListener extends BaseMessageListener {
 
@@ -43,7 +45,7 @@ public class PollerMessageListener extends BaseMessageListener {
 				PollerProcessorUtil.getPollerProcessor(portletId);
 
 			if (pollerRequest.isReceiveRequest()) {
-				pollerResponse = new PollerResponse(
+				pollerResponse = new DefaultPollerResponse(
 					portletId, pollerRequest.getChunkId());
 
 				try {

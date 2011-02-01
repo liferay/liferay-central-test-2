@@ -12,29 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.kernel.poller;
-
-import com.liferay.portal.kernel.exception.PortalException;
+package com.liferay.portal.kernel.poller.comet;
 
 /**
+ * @author Edward Han
  * @author Brian Wing Shun Chan
  */
-public class PollerException extends PortalException {
+public enum CometState {
 
-	public PollerException() {
-		super();
-	}
-
-	public PollerException(String msg) {
-		super(msg);
-	}
-
-	public PollerException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public PollerException(Throwable cause) {
-		super(cause);
-	}
+	STATE_CLOSED, STATE_OPEN, STATE_READY
 
 }

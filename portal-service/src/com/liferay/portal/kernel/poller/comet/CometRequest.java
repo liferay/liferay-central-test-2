@@ -12,29 +12,37 @@
  * details.
  */
 
-package com.liferay.portal.kernel.poller;
+package com.liferay.portal.kernel.poller.comet;
 
-import com.liferay.portal.kernel.exception.PortalException;
+import java.util.Enumeration;
+import java.util.Map;
 
 /**
+ * @author Edward Han
  * @author Brian Wing Shun Chan
  */
-public class PollerException extends PortalException {
+public interface CometRequest {
 
-	public PollerException() {
-		super();
-	}
+	public long getCompanyId();
 
-	public PollerException(String msg) {
-		super(msg);
-	}
+	public String getParameter(String name);
 
-	public PollerException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+	public Map<String, String[]> getParameterMap();
 
-	public PollerException(Throwable cause) {
-		super(cause);
-	}
+	public Enumeration<String> getParameterNames();
+
+	public String getPathInfo();
+
+	public long getTimestamp();
+
+	public long getUserId();
+
+	public void setCompanyId(long companyId);
+
+	public void setPathInfo(String pathInfo);
+
+	public void setTimestamp(long timestamp);
+
+	public void setUserId(long userId);
 
 }

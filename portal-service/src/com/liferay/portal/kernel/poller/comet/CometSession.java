@@ -12,29 +12,28 @@
  * details.
  */
 
-package com.liferay.portal.kernel.poller;
-
-import com.liferay.portal.kernel.exception.PortalException;
+package com.liferay.portal.kernel.poller.comet;
 
 /**
+ * @author Edward Han
  * @author Brian Wing Shun Chan
  */
-public class PollerException extends PortalException {
+public interface CometSession {
 
-	public PollerException() {
-		super();
-	}
+	public void close() throws CometException;
 
-	public PollerException(String msg) {
-		super(msg);
-	}
+	public Object getAttribute(String name);
 
-	public PollerException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+	public CometRequest getCometRequest();
 
-	public PollerException(Throwable cause) {
-		super(cause);
-	}
+	public CometResponse getCometResponse();
+
+	public String getSessionId();
+
+	public void setCometRequest(CometRequest cometRequest);
+
+	public void setCometResponse(CometResponse cometResponse);
+
+	public void setSessionId(String sessionId);
 
 }
