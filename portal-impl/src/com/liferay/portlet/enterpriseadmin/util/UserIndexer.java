@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.FullNameGenerator;
@@ -146,7 +147,7 @@ public class UserIndexer extends BaseIndexer {
 		String middleName = user.getMiddleName();
 		String lastName = user.getLastName();
 		String jobTitle = user.getJobTitle();
-		boolean active = user.isActive();
+		int status = user.getStatus();
 		long[] groupIds = user.getGroupIds();
 		long[] organizationIds = user.getOrganizationIds();
 		long[] roleIds = user.getRoleIds();
@@ -182,7 +183,7 @@ public class UserIndexer extends BaseIndexer {
 		document.addKeyword("middleName", middleName, true);
 		document.addKeyword("lastName", lastName, true);
 		document.addKeyword("jobTitle", jobTitle);
-		document.addKeyword("active", active);
+		document.addKeyword("status", status);
 		document.addKeyword("groupIds", groupIds);
 		document.addKeyword("organizationIds", organizationIds);
 		document.addKeyword(
@@ -308,10 +309,10 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		Boolean active = (Boolean)searchContext.getAttribute("active");
+		int status = (Integer)searchContext.getAttribute("status");
 
-		if (active != null) {
-			contextQuery.addRequiredTerm("active", active);
+		if (status != WorkflowConstants.STATUS_ANY) {
+			contextQuery.addRequiredTerm("status", status);
 		}
 
 		LinkedHashMap<String, Object> params =
