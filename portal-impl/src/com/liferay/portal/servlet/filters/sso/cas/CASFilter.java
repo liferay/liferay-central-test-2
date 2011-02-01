@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.auth.CASAutoLogin;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -122,6 +123,18 @@ public class CASFilter extends BasePortalFilter {
 		long companyId = PortalUtil.getCompanyId(request);
 
 		String pathInfo = request.getPathInfo();
+
+		if (session.getAttribute(CASAutoLogin.FIRST_TIME_WITH_NO_SUCH_USER) != null) {
+
+			session.removeAttribute(CASAutoLogin.FIRST_TIME_WITH_NO_SUCH_USER);
+
+			String logoutUrl = PrefsPropsUtil.getString(
+					companyId, PropsKeys.CAS_LOGOUT_URL,
+					PropsValues.CAS_LOGOUT_URL);
+
+			response.sendRedirect(logoutUrl);
+			return;
+		}
 
 		if (pathInfo.indexOf("/portal/logout") != -1) {
 			session.invalidate();
