@@ -17,8 +17,8 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.xml.XMLFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +41,7 @@ public class GetStructureContentAction extends Action {
 		try {
 			String xml = ParamUtil.getString(request, "xml");
 
-			xml = JournalUtil.formatXML(xml);
+			xml = XMLFormatter.formatXML(xml);
 
 			String fileName = "structure.xml";
 			byte[] bytes = xml.getBytes();

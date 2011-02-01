@@ -45,6 +45,7 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.service.base.JournalTemplateLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.JournalUtil;
+import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
 import java.io.IOException;
@@ -79,7 +80,7 @@ public class JournalTemplateLocalServiceImpl
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {
-					xsl = JournalUtil.formatXML(xsl);
+					xsl = XMLFormatter.formatXML(xsl);
 				}
 			}
 		}
@@ -502,7 +503,7 @@ public class JournalTemplateLocalServiceImpl
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {
-					xsl = JournalUtil.formatXML(xsl);
+					xsl = XMLFormatter.formatXML(xsl);
 				}
 			}
 		}

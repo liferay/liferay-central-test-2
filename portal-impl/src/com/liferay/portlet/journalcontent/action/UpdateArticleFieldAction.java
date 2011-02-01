@@ -27,8 +27,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
-import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.xml.XMLFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -118,7 +118,7 @@ public class UpdateArticleFieldAction extends Action {
 
 		node.setText(fieldData);
 
-		content = JournalUtil.formatXML(doc);
+		content = XMLFormatter.formatXML(doc);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("After\n" + content);

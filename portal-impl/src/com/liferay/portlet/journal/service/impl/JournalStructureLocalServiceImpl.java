@@ -42,7 +42,7 @@ import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
-import com.liferay.portlet.journal.util.JournalUtil;
+import com.liferay.util.xml.XMLFormatter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,7 +71,7 @@ public class JournalStructureLocalServiceImpl
 		Date now = new Date();
 
 		try {
-			xsd = JournalUtil.formatXML(xsd);
+			xsd = XMLFormatter.formatXML(xsd);
 		}
 		catch (Exception e) {
 			throw new StructureXsdException();
@@ -411,7 +411,7 @@ public class JournalStructureLocalServiceImpl
 		structureId = structureId.trim().toUpperCase();
 
 		try {
-			xsd = JournalUtil.formatXML(xsd);
+			xsd = XMLFormatter.formatXML(xsd);
 		}
 		catch (Exception e) {
 			throw new StructureXsdException();

@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.util.xml.XMLFormatter;
 
 import java.util.Map;
 
@@ -73,7 +74,7 @@ public class ContentTransformerListener extends TransformerListener {
 
 			replace(root);
 
-			xml = JournalUtil.formatXML(doc);
+			xml = XMLFormatter.formatXML(doc);
 		}
 		catch (Exception e) {
 			_log.warn(e.getMessage());
