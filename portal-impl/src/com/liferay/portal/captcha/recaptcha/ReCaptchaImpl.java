@@ -25,11 +25,9 @@ import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
 
@@ -38,7 +36,6 @@ import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author Tagnaouti Boubker
@@ -47,11 +44,8 @@ import javax.servlet.http.HttpSession;
  */
 public class ReCaptchaImpl extends SimpleCaptchaImpl {
 
-	public void check(HttpServletRequest request) throws CaptchaException {
-		if (!isEnabled(request)) {
-			return;
-		}
-
+	protected boolean validateChallenge(HttpServletRequest request)
+		throws CaptchaException {
 		String reCaptchaChallenge = ParamUtil.getString(
 			request, "recaptcha_challenge_field");
 		String reCaptchaResponse = ParamUtil.getString(
@@ -102,38 +96,16 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 			throw new CaptchaTextException();
 		}
 
-		if (!GetterUtil.getBoolean(messages[0])) {
-			if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-				(Validator.isNotNull(request.getRemoteUser()))) {
-
-				HttpSession session = request.getSession();
-
-				Integer count = (Integer)session.getAttribute(
-					WebKeys.CAPTCHA_COUNT);
-
-				if (count == null) {
-					count = new Integer(1);
-				}
-				else {
-					count = new Integer(count.intValue() + 1);
-				}
-
-				session.setAttribute(WebKeys.CAPTCHA_COUNT, count);
-			}
-
-			throw new CaptchaTextException();
-		}
+		return GetterUtil.getBoolean(messages[0]);
 	}
 
-	public void check(PortletRequest portletRequest) throws CaptchaException {
-		if (!isEnabled(portletRequest)) {
-			return;
-		}
+	protected boolean validateChallenge(PortletRequest portletRequest)
+		throws CaptchaException {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
-		check(request);
+		return validateChallenge(request);
 	}
 
 	public String getTaglibPath() {

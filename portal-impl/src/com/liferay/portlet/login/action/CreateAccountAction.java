@@ -42,6 +42,7 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.WebsiteURLException;
+import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -103,6 +104,7 @@ public class CreateAccountAction extends PortletAction {
 				e instanceof AddressStreetException ||
 				e instanceof AddressZipException ||
 				e instanceof CaptchaTextException ||
+				e instanceof CaptchaMaxChallengesException ||
 				e instanceof CompanyMaxUsersException ||
 				e instanceof ContactFirstNameException ||
 				e instanceof ContactFullNameException ||

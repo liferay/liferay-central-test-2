@@ -59,11 +59,49 @@ public class SimpleCaptchaImpl implements Captcha {
 		initWordRenderers();
 	}
 
-	public void check(HttpServletRequest request) throws CaptchaException {
-		if (!isEnabled(request)) {
-			return;
+	protected Integer _incrementCounter(Integer count) {
+		if (count == null) {
+			count = new Integer(1);
+		}
+		else {
+			count = new Integer(count.intValue() + 1);
 		}
 
+		return count;
+	}
+
+	public void incrementCounter(HttpServletRequest request)
+		throws CaptchaException {
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(request.getRemoteUser()))) {
+
+			HttpSession session = request.getSession();
+
+			Integer count = (Integer)session.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			session.setAttribute(WebKeys.CAPTCHA_COUNT,
+				_incrementCounter(count));
+		}
+	}
+
+	public void incrementCounter(PortletRequest request)
+		throws CaptchaException {
+		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
+			(Validator.isNotNull(request.getRemoteUser()))) {
+
+			PortletSession session = request.getPortletSession();
+
+			Integer count = (Integer)session.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			session.setAttribute(WebKeys.CAPTCHA_COUNT,
+				_incrementCounter(count));
+		}
+	}
+
+	protected boolean validateChallenge(HttpServletRequest request)
+		throws CaptchaException {
 		HttpSession session = request.getSession();
 
 		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
@@ -76,22 +114,76 @@ public class SimpleCaptchaImpl implements Captcha {
 			throw new CaptchaTextException();
 		}
 
-		if (!captchaText.equals(ParamUtil.getString(request, "captchaText"))) {
-			if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-				(Validator.isNotNull(request.getRemoteUser()))) {
+		boolean checkResult = captchaText.equals(
+			ParamUtil.getString(request, "captchaText"));
 
-				Integer count = (Integer)session.getAttribute(
-					WebKeys.CAPTCHA_COUNT);
+		if (checkResult) {
+			session.removeAttribute(WebKeys.CAPTCHA_TEXT);
+		}
 
-				if (count == null) {
-					count = new Integer(1);
-				}
-				else {
-					count = new Integer(count.intValue() + 1);
-				}
+		return checkResult;
+	}
 
-				session.setAttribute(WebKeys.CAPTCHA_COUNT, count);
-			}
+	protected boolean validateChallenge(PortletRequest request)
+		throws CaptchaException {
+		PortletSession session = request.getPortletSession();
+
+		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
+
+		if (captchaText == null) {
+			_log.error(
+				"Captcha text is null. User " + request.getRemoteUser() +
+					" may be trying to circumvent the captcha.");
+
+			throw new CaptchaTextException();
+		}
+
+		boolean checkResult = captchaText.equals(
+			ParamUtil.getString(request, "captchaText"));
+
+		if (checkResult) {
+			session.removeAttribute(WebKeys.CAPTCHA_TEXT);
+		}
+
+		return checkResult;
+	}
+
+	protected void _checkMaxChallenges(Integer count)
+		throws CaptchaMaxChallengesException {
+		if (count != null && count > PropsValues.CAPTCHA_MAX_CHALLENGES) {
+			throw new CaptchaMaxChallengesException();
+		}
+	}
+
+	protected void checkMaxChallenges(HttpServletRequest request)
+		throws CaptchaMaxChallengesException {
+		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
+			HttpSession session = request.getSession();
+
+			_checkMaxChallenges(
+					(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
+		}
+	}
+
+	protected void checkMaxChallenges(PortletRequest portletRequest)
+		throws CaptchaMaxChallengesException {
+		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
+			PortletSession session = portletRequest.getPortletSession();
+
+			_checkMaxChallenges(
+					(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
+		}
+	}
+
+	public void check(HttpServletRequest request) throws CaptchaException {
+		if (!isEnabled(request)) {
+			return;
+		}
+
+		if (!validateChallenge(request)) {
+			incrementCounter(request);
+
+			checkMaxChallenges(request);
 
 			throw new CaptchaTextException();
 		}
@@ -99,8 +191,6 @@ public class SimpleCaptchaImpl implements Captcha {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Captcha text is valid");
 		}
-
-		session.removeAttribute(WebKeys.CAPTCHA_TEXT);
 	}
 
 	public void check(PortletRequest portletRequest) throws CaptchaException {
@@ -108,37 +198,10 @@ public class SimpleCaptchaImpl implements Captcha {
 			return;
 		}
 
-		PortletSession portletSession = portletRequest.getPortletSession();
+		if (!validateChallenge(portletRequest)) {
+			incrementCounter(portletRequest);
 
-		String captchaText = (String)portletSession.getAttribute(
-			WebKeys.CAPTCHA_TEXT);
-
-		if (captchaText == null) {
-			_log.error(
-				"Captcha text is null. User " + portletRequest.getRemoteUser() +
-					" may be trying to circumvent the captcha.");
-
-			throw new CaptchaTextException();
-		}
-
-		if (!captchaText.equals(
-				ParamUtil.getString(portletRequest, "captchaText"))) {
-
-			if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-				(Validator.isNotNull(portletRequest.getRemoteUser()))) {
-
-				Integer count = (Integer)portletSession.getAttribute(
-					WebKeys.CAPTCHA_COUNT);
-
-				if (count == null) {
-					count = new Integer(1);
-				}
-				else {
-					count = new Integer(count.intValue() + 1);
-				}
-
-				portletSession.setAttribute(WebKeys.CAPTCHA_COUNT, count);
-			}
+			checkMaxChallenges(portletRequest);
 
 			throw new CaptchaTextException();
 		}
@@ -146,8 +209,6 @@ public class SimpleCaptchaImpl implements Captcha {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Captcha text is valid");
 		}
-
-		portletSession.removeAttribute(WebKeys.CAPTCHA_TEXT);
 	}
 
 	public String getTaglibPath() {
@@ -156,62 +217,16 @@ public class SimpleCaptchaImpl implements Captcha {
 
 	public boolean isEnabled(HttpServletRequest request)
 		throws CaptchaException {
+		checkMaxChallenges(request);
 
-		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
-			HttpSession session = request.getSession();
-
-			Integer count = (Integer)session.getAttribute(
-				WebKeys.CAPTCHA_COUNT);
-
-			if (count != null && count >= PropsValues.CAPTCHA_MAX_CHALLENGES) {
-				throw new CaptchaMaxChallengesException();
-			}
-
-			if ((count != null) &&
-				(PropsValues.CAPTCHA_MAX_CHALLENGES <= count.intValue())) {
-
-				return false;
-			}
-			else {
-				return true;
-			}
-		}
-		else if (PropsValues.CAPTCHA_MAX_CHALLENGES < 0) {
-			return false;
-		}
-		else {
-			return true;
-		}
+		return (PropsValues.CAPTCHA_MAX_CHALLENGES >= 0);
 	}
 
 	public boolean isEnabled(PortletRequest portletRequest)
 		throws CaptchaException {
+		checkMaxChallenges(portletRequest);
 
-		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
-			PortletSession portletSession = portletRequest.getPortletSession();
-
-			Integer count = (Integer)portletSession.getAttribute(
-				WebKeys.CAPTCHA_COUNT);
-
-			if (count != null && count >= PropsValues.CAPTCHA_MAX_CHALLENGES) {
-				throw new CaptchaMaxChallengesException();
-			}
-
-			if ((count != null) &&
-				(PropsValues.CAPTCHA_MAX_CHALLENGES <= count.intValue())) {
-
-				return false;
-			}
-			else {
-				return true;
-			}
-		}
-		else if (PropsValues.CAPTCHA_MAX_CHALLENGES < 0) {
-			return false;
-		}
-		else {
-			return true;
-		}
+		return (PropsValues.CAPTCHA_MAX_CHALLENGES >= 0);
 	}
 
 	public void serveImage(
