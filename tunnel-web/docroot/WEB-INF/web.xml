@@ -1,202 +1,61 @@
 <?xml version="1.0"?>
-<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
 
-<web-app>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	<context-param>
 		<param-name>axis.servicesPath</param-name>
 		<param-value>/axis/</param-value>
 	</context-param>
 	<filter>
-		<filter-name>Axis Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<filter-name>Invoker Filter - ERROR</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter</filter-class>
 		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>axis.servlet.</param-value>
+			<param-name>dispatcher</param-name>
+			<param-value>ERROR</param-value>
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>JSON Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<filter-name>Invoker Filter - FORWARD</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter</filter-class>
 		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>json.servlet.</param-value>
+			<param-name>dispatcher</param-name>
+			<param-value>FORWARD</param-value>
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Liferay Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<filter-name>Invoker Filter - INCLUDE</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter</filter-class>
 		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>tunnel.servlet.</param-value>
+			<param-name>dispatcher</param-name>
+			<param-value>INCLUDE</param-value>
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Spring Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<filter-name>Invoker Filter - REQUEST</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilter</filter-class>
 		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>spring.remoting.servlet.</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>Thread Local Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.threadlocal.ThreadLocalFilter</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>WebDAV Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>webdav.servlet.</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>Secure Axis Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>basic_auth</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>axis.servlet.</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>Secure JSON Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>basic_auth</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>json.servlet.</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>Secure Liferay Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>basic_auth</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>tunnel.servlet.</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>Secure Spring Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>basic_auth</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>spring.remoting.servlet.</param-value>
-		</init-param>
-	</filter>
-	<filter>
-		<filter-name>Secure WebDAV Servlet Filter</filter-name>
-		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
-		<init-param>
-			<param-name>filter-class</param-name>
-			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
-		</init-param>
-		<init-param>
-			<param-name>digest_auth</param-name>
-			<param-value>true</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portal_property_prefix</param-name>
-			<param-value>webdav.servlet.</param-value>
+			<param-name>dispatcher</param-name>
+			<param-value>REQUEST</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>Thread Local Filter</filter-name>
+		<filter-name>Invoker Filter - ERROR</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Axis Servlet Filter</filter-name>
-		<url-pattern>/axis/*</url-pattern>
+		<filter-name>Invoker Filter - FORWARD</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>JSON Servlet Filter</filter-name>
-		<url-pattern>/json/*</url-pattern>
+		<filter-name>Invoker Filter - INCLUDE</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>INCLUDE</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Liferay Servlet Filter</filter-name>
-		<url-pattern>/liferay/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Spring Servlet Filter</filter-name>
-		<url-pattern>/spring/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>WebDAV Servlet Filter</filter-name>
-		<url-pattern>/webdav/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Secure Axis Servlet Filter</filter-name>
-		<url-pattern>/secure/axis/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Secure JSON Servlet Filter</filter-name>
-		<url-pattern>/secure/json/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Secure Liferay Servlet Filter</filter-name>
-		<url-pattern>/secure/liferay/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Secure Spring Servlet Filter</filter-name>
-		<url-pattern>/secure/spring/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Secure WebDAV Servlet Filter</filter-name>
-		<url-pattern>/secure/webdav/*</url-pattern>
+		<filter-name>Invoker Filter - REQUEST</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	<servlet>
 		<servlet-name>Axis Servlet</servlet-name>
