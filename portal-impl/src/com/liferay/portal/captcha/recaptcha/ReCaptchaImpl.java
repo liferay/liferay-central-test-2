@@ -41,11 +41,29 @@ import javax.servlet.http.HttpServletResponse;
  * @author Tagnaouti Boubker
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
+ * @author Daniel Sanz
  */
 public class ReCaptchaImpl extends SimpleCaptchaImpl {
 
+	public String getTaglibPath() {
+		return _TAGLIB_PATH;
+	}
+
+	public void serveImage(
+		HttpServletRequest request, HttpServletResponse response) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void serveImage(
+		PortletRequest portletRequest, PortletResponse portletResponse) {
+
+		throw new UnsupportedOperationException();
+	}
+
 	protected boolean validateChallenge(HttpServletRequest request)
 		throws CaptchaException {
+
 		String reCaptchaChallenge = ParamUtil.getString(
 			request, "recaptcha_challenge_field");
 		String reCaptchaResponse = ParamUtil.getString(
@@ -106,22 +124,6 @@ public class ReCaptchaImpl extends SimpleCaptchaImpl {
 			portletRequest);
 
 		return validateChallenge(request);
-	}
-
-	public String getTaglibPath() {
-		return _TAGLIB_PATH;
-	}
-
-	public void serveImage(
-		HttpServletRequest request, HttpServletResponse response) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public void serveImage(
-		PortletRequest portletRequest, PortletResponse portletResponse) {
-
-		throw new UnsupportedOperationException();
 	}
 
 	private static final String _TAGLIB_PATH =

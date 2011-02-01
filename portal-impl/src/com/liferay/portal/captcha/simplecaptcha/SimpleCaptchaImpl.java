@@ -48,6 +48,7 @@ import nl.captcha.text.renderer.WordRenderer;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Daniel Sanz
  */
 public class SimpleCaptchaImpl implements Captcha {
 
@@ -104,14 +105,25 @@ public class SimpleCaptchaImpl implements Captcha {
 
 		checkMaxChallenges(request);
 
-		return (PropsValues.CAPTCHA_MAX_CHALLENGES >= 0);
+		if (PropsValues.CAPTCHA_MAX_CHALLENGES >= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isEnabled(PortletRequest portletRequest)
 		throws CaptchaException {
+
 		checkMaxChallenges(portletRequest);
 
-		return (PropsValues.CAPTCHA_MAX_CHALLENGES >= 0);
+		if (PropsValues.CAPTCHA_MAX_CHALLENGES >= 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public void serveImage(
@@ -150,21 +162,35 @@ public class SimpleCaptchaImpl implements Captcha {
 
 	protected void checkMaxChallenges(HttpServletRequest request)
 		throws CaptchaMaxChallengesException {
+
 		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
 			HttpSession session = request.getSession();
 
-			_checkMaxChallenges(
-				(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
+			Integer count = (Integer)session.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			checkMaxChallenges(count);
+		}
+	}
+
+	protected void checkMaxChallenges(Integer count)
+		throws CaptchaMaxChallengesException {
+
+		if ((count != null) && (count > PropsValues.CAPTCHA_MAX_CHALLENGES)) {
+			throw new CaptchaMaxChallengesException();
 		}
 	}
 
 	protected void checkMaxChallenges(PortletRequest portletRequest)
 		throws CaptchaMaxChallengesException {
-		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
-			PortletSession session = portletRequest.getPortletSession();
 
-			_checkMaxChallenges(
-				(Integer)session.getAttribute(WebKeys.CAPTCHA_COUNT));
+		if (PropsValues.CAPTCHA_MAX_CHALLENGES > 0) {
+			PortletSession portletSession = portletRequest.getPortletSession();
+
+			Integer count = (Integer)portletSession.getAttribute(
+				WebKeys.CAPTCHA_COUNT);
+
+			checkMaxChallenges(count);
 		}
 	}
 
@@ -249,9 +275,7 @@ public class SimpleCaptchaImpl implements Captcha {
 		return _wordRenderers[pos];
 	}
 
-	protected void incrementCounter(HttpServletRequest request)
-		throws CaptchaException {
-
+	protected void incrementCounter(HttpServletRequest request) {
 		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
 			(Validator.isNotNull(request.getRemoteUser()))) {
 
@@ -261,23 +285,32 @@ public class SimpleCaptchaImpl implements Captcha {
 				WebKeys.CAPTCHA_COUNT);
 
 			session.setAttribute(WebKeys.CAPTCHA_COUNT,
-				_incrementCounter(count));
+				incrementCounter(count));
 		}
 	}
 
-	protected void incrementCounter(PortletRequest request)
-		throws CaptchaException {
+	protected Integer incrementCounter(Integer count) {
+		if (count == null) {
+			count = new Integer(1);
+		}
+		else {
+			count = new Integer(count.intValue() + 1);
+		}
 
+		return count;
+	}
+
+	protected void incrementCounter(PortletRequest portletRequest) {
 		if ((PropsValues.CAPTCHA_MAX_CHALLENGES > 0) &&
-			(Validator.isNotNull(request.getRemoteUser()))) {
+			(Validator.isNotNull(portletRequest.getRemoteUser()))) {
 
-			PortletSession session = request.getPortletSession();
+			PortletSession portletSession = portletRequest.getPortletSession();
 
-			Integer count = (Integer)session.getAttribute(
+			Integer count = (Integer)portletSession.getAttribute(
 				WebKeys.CAPTCHA_COUNT);
 
-			session.setAttribute(WebKeys.CAPTCHA_COUNT,
-				_incrementCounter(count));
+			portletSession.setAttribute(WebKeys.CAPTCHA_COUNT,
+				incrementCounter(count));
 		}
 	}
 
@@ -326,7 +359,6 @@ public class SimpleCaptchaImpl implements Captcha {
 				noiseProducerClassName);
 		}
 	}
-
 	protected void initTextProducers() {
 		String[] textProducerClassNames =
 			PropsValues.CAPTCHA_ENGINE_SIMPLECAPTCHA_TEXT_PRODUCERS;
@@ -340,7 +372,6 @@ public class SimpleCaptchaImpl implements Captcha {
 				textProducerClassName);
 		}
 	}
-
 	protected void initWordRenderers() {
 		String[] wordRendererClassNames =
 			PropsValues.CAPTCHA_ENGINE_SIMPLECAPTCHA_WORD_RENDERERS;
@@ -354,7 +385,6 @@ public class SimpleCaptchaImpl implements Captcha {
 				wordRendererClassName);
 		}
 	}
-
 	protected boolean validateChallenge(HttpServletRequest request)
 		throws CaptchaException {
 
@@ -370,58 +400,39 @@ public class SimpleCaptchaImpl implements Captcha {
 			throw new CaptchaTextException();
 		}
 
-		boolean checkResult = captchaText.equals(
-				ParamUtil.getString(request, "captchaText"));
+		boolean valid = captchaText.equals(
+			ParamUtil.getString(request, "captchaText"));
 
-		if (checkResult) {
+		if (valid) {
 			session.removeAttribute(WebKeys.CAPTCHA_TEXT);
 		}
 
-		return checkResult;
+		return valid;
 	}
-
-	protected boolean validateChallenge(PortletRequest request)
+	protected boolean validateChallenge(PortletRequest portletRequest)
 		throws CaptchaException {
 
-		PortletSession session = request.getPortletSession();
+		PortletSession portletSession = portletRequest.getPortletSession();
 
-		String captchaText = (String)session.getAttribute(WebKeys.CAPTCHA_TEXT);
+		String captchaText = (String)portletSession.getAttribute(
+			WebKeys.CAPTCHA_TEXT);
 
 		if (captchaText == null) {
 			_log.error(
-				"Captcha text is null. User " + request.getRemoteUser() +
+				"Captcha text is null. User " + portletRequest.getRemoteUser() +
 					" may be trying to circumvent the captcha.");
 
 			throw new CaptchaTextException();
 		}
 
-		boolean checkResult = captchaText.equals(
-				ParamUtil.getString(request, "captchaText"));
+		boolean valid = captchaText.equals(
+			ParamUtil.getString(portletRequest, "captchaText"));
 
-		if (checkResult) {
-			session.removeAttribute(WebKeys.CAPTCHA_TEXT);
+		if (valid) {
+			portletSession.removeAttribute(WebKeys.CAPTCHA_TEXT);
 		}
 
-		return checkResult;
-	}
-
-	protected void _checkMaxChallenges(Integer count)
-		throws CaptchaMaxChallengesException {
-
-		if (count != null && count > PropsValues.CAPTCHA_MAX_CHALLENGES) {
-			throw new CaptchaMaxChallengesException();
-		}
-	}
-
-	protected Integer _incrementCounter(Integer count) {
-		if (count == null) {
-			count = new Integer(1);
-		}
-		else {
-			count = new Integer(count.intValue() + 1);
-		}
-
-		return count;
+		return valid;
 	}
 
 	private static final String _TAGLIB_PATH =

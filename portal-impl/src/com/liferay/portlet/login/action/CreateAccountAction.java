@@ -84,6 +84,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Brian Wing Shun Chan
  * @author Amos Fong
+ * @author Daniel Sanz
  */
 public class CreateAccountAction extends PortletAction {
 

@@ -72,6 +72,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Daniel Sanz
  */
 public class EditMessageAction extends PortletAction {
 
@@ -131,8 +132,8 @@ public class EditMessageAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.message_boards.error");
 			}
-			else if (e instanceof CaptchaTextException ||
-					 e instanceof CaptchaMaxChallengesException ||
+			else if (e instanceof CaptchaMaxChallengesException ||
+					 e instanceof CaptchaTextException ||
 					 e instanceof FileNameException ||
 					 e instanceof FileSizeException ||
 					 e instanceof LockedThreadException ||

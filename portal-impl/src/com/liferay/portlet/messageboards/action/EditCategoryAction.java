@@ -51,6 +51,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Daniel Sanz
  */
 public class EditCategoryAction extends PortletAction {
 
@@ -85,8 +86,8 @@ public class EditCategoryAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.message_boards.error");
 			}
-			else if (e instanceof CaptchaTextException ||
-					 e instanceof CaptchaMaxChallengesException ||
+			else if (e instanceof CaptchaMaxChallengesException ||
+					 e instanceof CaptchaTextException ||
 					 e instanceof CategoryNameException ||
 					 e instanceof MailingListEmailAddressException ||
 					 e instanceof MailingListInServerNameException ||
