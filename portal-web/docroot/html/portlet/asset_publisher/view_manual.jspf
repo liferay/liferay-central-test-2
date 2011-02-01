@@ -57,7 +57,7 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(assetEntry.getClassName());
 	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetEntry.getClassPK());
 
-	String title = assetEntry.getTitle();
+	String title = assetRenderer.getTitle(locale);
 
 	boolean show = true;
 	boolean print = false;

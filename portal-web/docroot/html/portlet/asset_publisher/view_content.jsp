@@ -61,7 +61,7 @@ try {
 		assetRenderer = assetRendererFactory.getAssetRenderer(classPK, rendererType);
 	}
 
-	String title = assetEntry.getTitle();
+	String title = assetRenderer.getTitle(locale);
 	String summary = StringPool.BLANK;
 	String viewURL = StringPool.BLANK;
 	String viewURLMessage = StringPool.BLANK;

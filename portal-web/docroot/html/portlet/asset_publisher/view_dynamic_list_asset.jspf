@@ -29,7 +29,7 @@ for (int assetEntryIndex = 0; assetEntryIndex < results.size(); assetEntryIndex+
 
 	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(classPK);
 
-	String title = assetEntry.getTitle();
+	String title = assetRenderer.getTitle(locale);
 
 	boolean show = true;
 	boolean print = false;
