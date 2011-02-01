@@ -12,6 +12,8 @@
 
 <body class="${css_class}">
 
+${theme.include(body_top_include)}
+
 <#if is_signed_in>
 	<@liferay.dockbar/>
 </#if>
@@ -79,6 +81,8 @@
 		</p>
 	</footer>
 </div>
+
+${theme.include(body_bottom_include)}
 
 </body>
 
