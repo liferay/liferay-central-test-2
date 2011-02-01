@@ -104,8 +104,8 @@ public class CreateAccountAction extends PortletAction {
 			if (e instanceof AddressCityException ||
 				e instanceof AddressStreetException ||
 				e instanceof AddressZipException ||
-				e instanceof CaptchaTextException ||
 				e instanceof CaptchaMaxChallengesException ||
+				e instanceof CaptchaTextException ||
 				e instanceof CompanyMaxUsersException ||
 				e instanceof ContactFirstNameException ||
 				e instanceof ContactFullNameException ||
