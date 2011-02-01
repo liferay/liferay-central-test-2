@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
+import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilterChain;
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -61,8 +62,12 @@ public class PortalClassLoaderFilter
 					new ClassLoaderBeanHandler(
 						filterChain, contextClassLoader));
 
-			_filter.doFilter(
-				servletRequest, servletResponse, contextClassLoaderFilterChain);
+			InvokerFilterChain invokerFilterChain = new InvokerFilterChain(
+				contextClassLoaderFilterChain);
+
+			invokerFilterChain.addFilter(_filter);
+
+			invokerFilterChain.doFilter(servletRequest, servletResponse);
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
