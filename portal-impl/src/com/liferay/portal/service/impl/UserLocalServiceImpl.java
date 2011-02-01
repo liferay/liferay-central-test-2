@@ -68,6 +68,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
@@ -465,7 +466,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setMiddleName(middleName);
 		user.setLastName(lastName);
 		user.setJobTitle(jobTitle);
-		user.setActive(true);
+		user.setStatus(WorkflowConstants.STATUS_APPROVED);
 
 		userPersistence.update(user, false, serviceContext);
 
@@ -1250,7 +1251,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return groupPersistence.getUsersSize(groupId);
 	}
 
-	public int getGroupUsersCount(long groupId, boolean active)
+	public int getGroupUsersCount(long groupId, int status)
 		throws PortalException, SystemException {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
@@ -1260,7 +1261,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("usersGroups", new Long(groupId));
 
-		return searchCount(group.getCompanyId(), null, active, params);
+		return searchCount(group.getCompanyId(), null, status, params);
 	}
 
 	public List<User> getNoAnnouncementsDeliveries(String type)
@@ -1295,7 +1296,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return organizationPersistence.getUsersSize(organizationId);
 	}
 
-	public int getOrganizationUsersCount(long organizationId, boolean active)
+	public int getOrganizationUsersCount(long organizationId, int status)
 		throws PortalException, SystemException {
 
 		Organization organization = organizationPersistence.findByPrimaryKey(
@@ -1306,7 +1307,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("usersOrgs", new Long(organizationId));
 
-		return searchCount(organization.getCompanyId(), null, active, params);
+		return searchCount(organization.getCompanyId(), null, status, params);
 	}
 
 	public long[] getRoleUserIds(long roleId) throws SystemException {
@@ -1327,7 +1328,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return rolePersistence.getUsersSize(roleId);
 	}
 
-	public int getRoleUsersCount(long roleId, boolean active)
+	public int getRoleUsersCount(long roleId, int status)
 		throws PortalException, SystemException {
 
 		Role role = rolePersistence.findByPrimaryKey(
@@ -1338,7 +1339,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("usersRoles", new Long(roleId));
 
-		return searchCount(role.getCompanyId(), null, active, params);
+		return searchCount(role.getCompanyId(), null, status, params);
 	}
 
 	public List<User> getSocialUsers(
@@ -1352,7 +1353,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialRelationType", new Long[] {userId, new Long(type)});
 
-		return search(user.getCompanyId(), null, true, params, start, end, obc);
+		return search(
+			user.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
+			params, start, end, obc);
 	}
 
 	public List<User> getSocialUsers(
@@ -1367,7 +1370,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		params.put("socialRelation", new Long[] {userId});
 
 		return search(
-			user.getCompanyId(), null, true, params, start, end, obc);
+			user.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
+			params, start, end, obc);
 	}
 
 	public List<User> getSocialUsers(
@@ -1385,7 +1389,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			new Long[] {userId1, new Long(type), userId2, new Long(type)});
 
 		return search(
-			user1.getCompanyId(), null, true, params, start, end, obc);
+			user1.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
+			params, start, end, obc);
 	}
 
 	public List<User> getSocialUsers(
@@ -1401,7 +1406,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		params.put("socialMutualRelation", new Long[] {userId1, userId2});
 
 		return search(
-			user1.getCompanyId(), null, true, params, start, end, obc);
+			user1.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
+			params, start, end, obc);
 	}
 
 	public int getSocialUsersCount(long userId)
@@ -1414,7 +1420,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialRelation", new Long[] {userId});
 
-		return searchCount(user.getCompanyId(), null, true, params);
+		return searchCount(user.getCompanyId(), null,
+			WorkflowConstants.STATUS_APPROVED, params);
 	}
 
 	public int getSocialUsersCount(long userId, int type)
@@ -1427,7 +1434,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialRelationType", new Long[] {userId, new Long(type)});
 
-		return searchCount(user.getCompanyId(), null, true, params);
+		return searchCount(user.getCompanyId(), null,
+			WorkflowConstants.STATUS_APPROVED, params);
 	}
 
 	public int getSocialUsersCount(long userId1, long userId2)
@@ -1440,7 +1448,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("socialMutualRelation", new Long[] {userId1, userId2});
 
-		return searchCount(user1.getCompanyId(), null, true, params);
+		return searchCount(user1.getCompanyId(), null,
+			WorkflowConstants.STATUS_APPROVED, params);
 	}
 
 	public int getSocialUsersCount(long userId1, long userId2, int type)
@@ -1455,7 +1464,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			"socialMutualRelationType",
 			new Long[] {userId1, new Long(type), userId2, new Long(type)});
 
-		return searchCount(user1.getCompanyId(), null, true, params);
+		return searchCount(user1.getCompanyId(), null,
+			WorkflowConstants.STATUS_APPROVED, params);
 	}
 
 	public User getUserByContactId(long contactId)
@@ -1533,7 +1543,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return userGroupPersistence.getUsersSize(userGroupId);
 	}
 
-	public int getUserGroupUsersCount(long userGroupId, boolean active)
+	public int getUserGroupUsersCount(long userGroupId, int status)
 		throws PortalException, SystemException {
 
 		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
@@ -1544,7 +1554,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put("usersUserGroups", new Long(userGroupId));
 
-		return searchCount(userGroup.getCompanyId(), null, active, params);
+		return searchCount(userGroup.getCompanyId(), null, status, params);
 	}
 
 	public long getUserIdByEmailAddress(long companyId, String emailAddress)
@@ -1677,17 +1687,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public List<User> search(
-			long companyId, String keywords, Boolean active,
+			long companyId, String keywords, int status,
 			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
 		return userFinder.findByKeywords(
-			companyId, keywords, active, params, start, end, obc);
+			companyId, keywords, status, params, start, end, obc);
 	}
 
 	public Hits search(
-			long companyId, String keywords, Boolean active,
+			long companyId, String keywords, int status,
 			LinkedHashMap<String, Object> params, int start, int end, Sort sort)
 		throws SystemException {
 
@@ -1711,25 +1721,25 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		return search(
 			companyId, firstName, middleName, lastName, screenName,
-			emailAddress, active, params, andOperator, start, end, sort);
+			emailAddress, status, params, andOperator, start, end, sort);
 	}
 
 	public List<User> search(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap<String, Object> params,
+			int status, LinkedHashMap<String, Object> params,
 			boolean andSearch, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return userFinder.findByC_FN_MN_LN_SN_EA_A(
 			companyId, firstName, middleName, lastName, screenName,
-			emailAddress, active, params, andSearch, start, end, obc);
+			emailAddress, status, params, andSearch, start, end, obc);
 	}
 
 	public Hits search(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap<String, Object> params,
+			int status, LinkedHashMap<String, Object> params,
 			boolean andSearch, int start, int end, Sort sort)
 		throws SystemException {
 
@@ -1737,13 +1747,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			Map<String, Serializable> attributes =
 				new HashMap<String, Serializable>();
 
-			attributes.put("active", active);
 			attributes.put("emailAddress", emailAddress);
 			attributes.put("firstName", firstName);
 			attributes.put("lastName", lastName);
 			attributes.put("middleName", middleName);
 			attributes.put("params", params);
 			attributes.put("screenName", screenName);
+			attributes.put("status", status);
 
 			SearchContext searchContext = new SearchContext();
 
@@ -1764,23 +1774,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public int searchCount(
-			long companyId, String keywords, Boolean active,
+			long companyId, String keywords, int status,
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
-		return userFinder.countByKeywords(companyId, keywords, active, params);
+		return userFinder.countByKeywords(companyId, keywords, status, params);
 	}
 
 	public int searchCount(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap<String, Object> params,
+			int status, LinkedHashMap<String, Object> params,
 			boolean andSearch)
 		throws SystemException {
 
 		return userFinder.countByC_FN_MN_LN_SN_EA_A(
 			companyId, firstName, middleName, lastName, screenName,
-			emailAddress, active, params, andSearch);
+			emailAddress, status, params, andSearch);
 	}
 
 	public void sendPassword(
@@ -1927,22 +1937,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		indexer.reindex(userIds);
 
 		PermissionCacheUtil.clearCache();
-	}
-
-	public User updateActive(long userId, boolean active)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		user.setActive(active);
-
-		userPersistence.update(user, false);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
-
-		indexer.reindex(user);
-
-		return user;
 	}
 
 	public User updateAgreedToTermsOfUse(
@@ -2408,6 +2402,22 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		group.setFriendlyURL(StringPool.SLASH + screenName);
 
 		groupPersistence.update(group, false);
+
+		return user;
+	}
+
+	public User updateStatus(long userId, int status)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		user.setStatus(status);
+
+		userPersistence.update(user, false);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(user);
 
 		return user;
 	}
@@ -3255,7 +3265,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if ((company.getMaxUsers() > 0) &&
 			(company.getMaxUsers() <=
-				searchCount(companyId, null, true, null))) {
+				searchCount(
+					companyId, null, WorkflowConstants.STATUS_APPROVED,
+					null))) {
 
 			throw new CompanyMaxUsersException();
 		}

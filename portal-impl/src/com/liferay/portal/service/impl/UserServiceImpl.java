@@ -21,6 +21,7 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
@@ -542,17 +543,18 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		userLocalService.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
-	public User updateActive(long userId, boolean active)
+	public User updateStatus(long userId, int status)
 		throws PortalException, SystemException {
 
-		if ((getUserId() == userId) && !active) {
+		if ((getUserId() == userId) &&
+				(status != WorkflowConstants.STATUS_APPROVED)) {
 			throw new RequiredUserException();
 		}
 
 		UserPermissionUtil.check(
 			getPermissionChecker(), userId, ActionKeys.DELETE);
 
-		return userLocalService.updateActive(userId, active);
+		return userLocalService.updateStatus(userId, status);
 	}
 
 	public User updateAgreedToTermsOfUse(
