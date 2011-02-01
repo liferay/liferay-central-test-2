@@ -1783,7 +1783,7 @@
 		<column name="lockout" type="boolean" />
 		<column name="lockoutDate" type="Date" />
 		<column name="agreedToTermsOfUse" type="boolean" />
-		<column name="active" type="boolean" />
+		<column name="status" type="int" />
 
 		<!-- Relationships -->
 
@@ -1834,7 +1834,7 @@
 		</finder>
 		<finder name="C_A" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="active" />
+			<finder-column name="status" />
 		</finder>
 
 		<!-- References -->
