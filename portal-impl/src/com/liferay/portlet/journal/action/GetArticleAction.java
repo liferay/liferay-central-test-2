@@ -34,7 +34,6 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -84,7 +83,7 @@ public class GetArticleAction extends Action {
 
 			JournalUtil.addAllReservedEls(root, tokens, article);
 
-			xml = XMLFormatter.formatXML(doc);
+			xml = JournalUtil.formatXML(doc);
 
 			String contentType = ContentTypes.TEXT_XML_UTF8;
 

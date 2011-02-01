@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +45,7 @@ public class GetArticleContentAction extends Action {
 
 			String xml = ParamUtil.getString(uploadRequest, "xml");
 
-			xml = XMLFormatter.formatXML(xml);
+			xml = JournalUtil.formatXML(xml);
 
 			String fileName = "article.xml";
 			byte[] bytes = xml.getBytes();

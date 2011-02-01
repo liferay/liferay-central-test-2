@@ -32,7 +32,6 @@ import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PKParser;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.util.Iterator;
 
@@ -100,7 +99,7 @@ public class JournalArticleContentUpgradeColumnImpl
 				oldCompanyId, newCompanyId.longValue(), groupId.longValue(),
 				articleId, version.doubleValue(), root);
 
-			content = XMLFormatter.formatXML(doc);
+			content = JournalUtil.formatXML(doc);
 		}
 		catch (Exception e) {
 			_log.error(

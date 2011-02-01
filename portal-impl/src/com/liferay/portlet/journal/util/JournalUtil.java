@@ -93,6 +93,8 @@ public class JournalUtil {
 
 	public static final int MAX_STACK_SIZE = 20;
 
+	public static final String XML_INDENT = "  ";
+
 	public static void addAllReservedEls(
 		Element root, Map<String, String> tokens, JournalArticle article) {
 
@@ -277,6 +279,26 @@ public class JournalUtil {
 
 	public static String formatVM(String vm) {
 		return vm;
+	}
+
+	public static String formatXML(Document doc) throws IOException {
+		return doc.formattedString(XML_INDENT);
+	}
+
+	public static String formatXML(String xml)
+		throws org.dom4j.DocumentException, IOException {
+
+		// This is only supposed to format your xml, however, it will also
+		// unwantingly change &#169; and other characters like it into their
+		// respective readable versions
+
+		xml = StringUtil.replace(xml, "&#", "[$SPECIAL_CHARACTER$]");
+
+		xml = XMLFormatter.toString(xml, XML_INDENT);
+
+		xml = StringUtil.replace(xml, "[$SPECIAL_CHARACTER$]", "&#");
+
+		return xml;
 	}
 
 	public static OrderByComparator getArticleOrderByComparator(
@@ -784,7 +806,7 @@ public class JournalUtil {
 				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 			_mergeArticleContentDelete(curRoot, newDocument);
 
-			curContent = XMLFormatter.formatXML(curDocument);
+			curContent = JournalUtil.formatXML(curDocument);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -844,7 +866,7 @@ public class JournalUtil {
 
 			removeArticleLocale(root, languageId);
 
-			content = XMLFormatter.formatXML(doc);
+			content = formatXML(doc);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -866,7 +888,7 @@ public class JournalUtil {
 
 			_removeOldContent(path, contentRoot, xsdDoc);
 
-			content = XMLFormatter.formatXML(contentDoc);
+			content = formatXML(contentDoc);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

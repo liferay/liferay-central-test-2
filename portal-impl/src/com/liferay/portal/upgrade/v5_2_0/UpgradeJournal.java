@@ -21,8 +21,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -82,7 +82,7 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		addDynamicElementInstanceId(root);
 
-		return XMLFormatter.formatXML(doc);
+		return JournalUtil.formatXML(doc);
 	}
 
 	protected void addDynamicElementInstanceId(Element root) throws Exception {

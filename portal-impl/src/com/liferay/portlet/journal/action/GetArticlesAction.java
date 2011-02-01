@@ -39,7 +39,6 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.text.DateFormat;
 
@@ -192,7 +191,7 @@ public class GetArticlesAction extends Action {
 			JournalUtil.addAllReservedEls(resultEl, tokens, article);
 		}
 
-		return XMLFormatter.formatXML(resultsDoc).getBytes(StringPool.UTF8);
+		return JournalUtil.formatXML(resultsDoc).getBytes(StringPool.UTF8);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(GetArticlesAction.class);

@@ -21,7 +21,6 @@ import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.JS;
 import com.liferay.util.servlet.ServletResponseUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,7 +52,7 @@ public class GetTemplateContentAction extends Action {
 					xslContent = JournalUtil.formatVM(xslContent);
 				}
 				else {
-					xslContent = XMLFormatter.formatXML(xslContent);
+					xslContent = JournalUtil.formatXML(xslContent);
 				}
 			}
 

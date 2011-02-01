@@ -94,7 +94,6 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleIDComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
 import java.io.IOException;
@@ -922,7 +921,7 @@ public class JournalArticleLocalServiceImpl
 
 				JournalUtil.addAllReservedEls(root, tokens, article);
 
-				xml = XMLFormatter.formatXML(doc);
+				xml = JournalUtil.formatXML(doc);
 			}
 		}
 		catch (DocumentException de) {
@@ -2282,7 +2281,7 @@ public class JournalArticleLocalServiceImpl
 					groupId, articleId, version, incrementVersion, root,
 					images);
 
-				content = XMLFormatter.formatXML(doc);
+				content = JournalUtil.formatXML(doc);
 			}
 			catch (DocumentException de) {
 				_log.error(de);

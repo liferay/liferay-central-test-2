@@ -35,8 +35,6 @@ import org.dom4j.io.XMLWriter;
  * @author Alan Zimmerman
  */
 public class XMLFormatter {
-	
-	public static final String XML_INDENT = "  ";
 
 	public static String fixProlog(String xml) {
 
@@ -49,29 +47,6 @@ public class XMLFormatter {
 				xml = xml.substring(pos);
 			}
 		}
-
-		return xml;
-	}
-	
-
-	public static String formatXML(com.liferay.portal.kernel.xml.Document doc) 
-		throws IOException {
-
-		return doc.formattedString(XML_INDENT);
-	}
-
-	public static String formatXML(String xml)
-		throws org.dom4j.DocumentException, IOException {
-
-		// This is only supposed to format your xml, however, it will also
-		// unwantingly change &#169; and other characters like it into their
-		// respective readable versions
-
-		xml = StringUtil.replace(xml, "&#", "[$SPECIAL_CHARACTER$]");
-
-		xml = XMLFormatter.toString(xml, XML_INDENT);
-
-		xml = StringUtil.replace(xml, "[$SPECIAL_CHARACTER$]", "&#");
 
 		return xml;
 	}
