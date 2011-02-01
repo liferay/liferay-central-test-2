@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -150,7 +151,7 @@ public class UserFinderImpl
 	}
 
 	public int countByKeywords(
-			long companyId, String keywords, Boolean active,
+			long companyId, String keywords, int status,
 			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
@@ -174,26 +175,26 @@ public class UserFinderImpl
 
 		return countByC_FN_MN_LN_SN_EA_A(
 			companyId, firstNames, middleNames, lastNames, screenNames,
-			emailAddresses, active, params, andOperator);
+			emailAddresses, status, params, andOperator);
 	}
 
 	public int countByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap<String, Object> params,
+			int status, LinkedHashMap<String, Object> params,
 			boolean andOperator)
 		throws SystemException {
 
 		return countByC_FN_MN_LN_SN_EA_A(
 			companyId, new String[] {firstName}, new String[] {middleName},
 			new String[] {lastName}, new String[] {screenName},
-			new String[] {emailAddress}, active, params, andOperator);
+			new String[] {emailAddress}, status, params, andOperator);
 	}
 
 	public int countByC_FN_MN_LN_SN_EA_A(
 			long companyId, String[] firstNames, String[] middleNames,
 			String[] lastNames, String[] screenNames, String[] emailAddresses,
-			Boolean active, LinkedHashMap<String, Object> params,
+			int status, LinkedHashMap<String, Object> params,
 			boolean andOperator)
 		throws SystemException {
 
@@ -226,8 +227,8 @@ public class UserFinderImpl
 				sql, "lower(User_.emailAddress)", StringPool.LIKE, true,
 				emailAddresses);
 
-			if (active == null) {
-				sql = StringUtil.replace(sql, ACTIVE_SQL, StringPool.BLANK);
+			if (status == WorkflowConstants.STATUS_ANY) {
+				sql = StringUtil.replace(sql, STATUS_SQL, StringPool.BLANK);
 			}
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
@@ -249,8 +250,8 @@ public class UserFinderImpl
 			qPos.add(screenNames, 2);
 			qPos.add(emailAddresses, 2);
 
-			if (active != null) {
-				qPos.add(active);
+			if (status != WorkflowConstants.STATUS_ANY) {
+				qPos.add(status);
 			}
 
 			Iterator<Long> itr = q.list().iterator();
@@ -274,7 +275,7 @@ public class UserFinderImpl
 	}
 
 	public List<User> findByKeywords(
-			long companyId, String keywords, Boolean active,
+			long companyId, String keywords, int status,
 			LinkedHashMap<String, Object> params, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -299,7 +300,7 @@ public class UserFinderImpl
 
 		return findByC_FN_MN_LN_SN_EA_A(
 			companyId, firstNames, middleNames, lastNames, screenNames,
-			emailAddresses, active, params, andOperator, start, end, obc);
+			emailAddresses, status, params, andOperator, start, end, obc);
 	}
 
 	public List<User> findByNoAnnouncementsDeliveries(String type)
@@ -377,21 +378,21 @@ public class UserFinderImpl
 	public List<User> findByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
-			Boolean active, LinkedHashMap<String, Object> params,
+			int status, LinkedHashMap<String, Object> params,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return findByC_FN_MN_LN_SN_EA_A(
 			companyId, new String[] {firstName}, new String[] {middleName},
 			new String[] {lastName}, new String[] {screenName},
-			new String[] {emailAddress}, active, params, andOperator, start,
+			new String[] {emailAddress}, status, params, andOperator, start,
 			end, obc);
 	}
 
 	public List<User> findByC_FN_MN_LN_SN_EA_A(
 			long companyId, String[] firstNames, String[] middleNames,
 			String[] lastNames, String[] screenNames, String[] emailAddresses,
-			Boolean active, LinkedHashMap<String, Object> params,
+			int status, LinkedHashMap<String, Object> params,
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -424,8 +425,8 @@ public class UserFinderImpl
 				sql, "lower(User_.emailAddress)", StringPool.LIKE, true,
 				emailAddresses);
 
-			if (active == null) {
-				sql = StringUtil.replace(sql, ACTIVE_SQL, StringPool.BLANK);
+			if (status == WorkflowConstants.STATUS_ANY) {
+				sql = StringUtil.replace(sql, STATUS_SQL, StringPool.BLANK);
 			}
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(params));
@@ -448,8 +449,8 @@ public class UserFinderImpl
 			qPos.add(screenNames, 2);
 			qPos.add(emailAddresses, 2);
 
-			if (active != null) {
-				qPos.add(active);
+			if (status != WorkflowConstants.STATUS_ANY) {
+				qPos.add(status);
 			}
 
 			return (List<User>)QueryUtil.list(q, getDialect(), start, end);
@@ -752,6 +753,6 @@ public class UserFinderImpl
 		}
 	}
 
-	protected static String ACTIVE_SQL = "AND (User_.active_ = ?)";
+	protected static String STATUS_SQL = "AND (User_.status = ?)";
 
 }
