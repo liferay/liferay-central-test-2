@@ -46,15 +46,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletApp;
-import com.liferay.portal.model.PortletFilter;
-import com.liferay.portal.model.PortletURLListener;
-import com.liferay.portal.model.User;
+import com.liferay.portal.model.*;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -433,7 +425,7 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Set principal");
 		}
 
-		setPrincipalName(userId, remoteUser);
+		setPrincipalName(request, userId, remoteUser);
 
 		try {
 			if (_log.isDebugEnabled()) {
@@ -1217,9 +1209,21 @@ public class MainServlet extends ActionServlet {
 		PortalUtil.setPortalPort(request);
 	}
 
-	protected void setPrincipalName(long userId, String remoteUser) {
+	protected void setPrincipalName(
+		HttpServletRequest request, long userId, String remoteUser) {
+
 		if ((userId == 0) && (remoteUser == null)) {
-			return;
+			try {
+				long companyId = PortalUtil.getCompanyId(request);
+
+				Company company = CompanyLocalServiceUtil.getCompany(companyId);
+
+				User user = company.getDefaultUser();
+
+				userId = user.getUserId();
+			}
+			catch (Exception e) {
+			}
 		}
 
 		String name = String.valueOf(userId);
