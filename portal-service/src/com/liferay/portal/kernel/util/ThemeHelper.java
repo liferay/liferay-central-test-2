@@ -58,7 +58,9 @@ public class ThemeHelper {
 			sb.append(theme.getFreeMarkerTemplateLoader());
 			sb.append(theme.getTemplatesPath());
 
-			if (Validator.isNotNull(servletContextName)) {
+			if (Validator.isNotNull(servletContextName) &&
+				!path.startsWith(StringPool.SLASH.concat(servletContextName))) {
+
 				sb.append(StringPool.SLASH);
 				sb.append(servletContextName);
 			}
@@ -74,7 +76,9 @@ public class ThemeHelper {
 			sb.append(theme.getVelocityResourceListener());
 			sb.append(theme.getTemplatesPath());
 
-			if (Validator.isNotNull(servletContextName)) {
+			if (Validator.isNotNull(servletContextName) &&
+				!path.startsWith(StringPool.SLASH.concat(servletContextName))) {
+
 				sb.append(StringPool.SLASH);
 				sb.append(servletContextName);
 			}
