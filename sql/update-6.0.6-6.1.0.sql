@@ -111,7 +111,7 @@ alter table User_ add status int;
 COMMIT_TRANSACTION;
 
 update User_ set status = 0;
-update User_ set status = 2 where active_ = FALSE;
+update User_ set status = 5 where active_ = FALSE;
 alter table User_ drop column active_;
 
 create table UserGroups_Teams (
