@@ -232,6 +232,11 @@
 			<bean class="com.liferay.portal.util.FileImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.util.FormXSDUtil" class="com.liferay.portal.kernel.util.FormXSDUtil">
+		<property name="formXSD">
+			<bean class="com.liferay.portal.util.FormXSDImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.util.HashCodeFactoryUtil" class="com.liferay.portal.kernel.util.HashCodeFactoryUtil">
 		<property name="hashCodeFactory">
 			<bean class="com.liferay.portal.util.HashCodeFactoryImpl" />
