@@ -652,7 +652,12 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public boolean isActive() {
-		return (getStatus() == WorkflowConstants.STATUS_APPROVED);
+		if (getStatus() == WorkflowConstants.STATUS_APPROVED) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isFemale() throws PortalException, SystemException {

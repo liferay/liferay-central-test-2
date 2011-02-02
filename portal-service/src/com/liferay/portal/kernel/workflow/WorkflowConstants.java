@@ -70,9 +70,9 @@ public class WorkflowConstants {
 
 	public static final int STATUS_EXPIRED = 3;
 
-	public static final int STATUS_INACTIVE = 2;
+	public static final int STATUS_INACTIVE = 5;
 
-	public static final int STATUS_INCOMPLETE = 1;
+	public static final int STATUS_INCOMPLETE = 6;
 
 	public static final int STATUS_PENDING = 1;
 

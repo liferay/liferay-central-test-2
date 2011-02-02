@@ -1832,7 +1832,7 @@
 			<finder-column name="companyId" />
 			<finder-column name="openId" />
 		</finder>
-		<finder name="C_A" return-type="Collection">
+		<finder name="C_S" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="status" />
 		</finder>

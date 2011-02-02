@@ -309,9 +309,11 @@ public class UserIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		int status = (Integer)searchContext.getAttribute("status");
+		Integer status = (Integer)searchContext.getAttribute("status");
 
-		if (status != WorkflowConstants.STATUS_ANY) {
+		if ((status != null) &&
+			(status.intValue() != WorkflowConstants.STATUS_ANY)) {
+
 			contextQuery.addRequiredTerm("status", status);
 		}
 

@@ -543,20 +543,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		userLocalService.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
-	public User updateStatus(long userId, int status)
-		throws PortalException, SystemException {
-
-		if ((getUserId() == userId) &&
-				(status != WorkflowConstants.STATUS_APPROVED)) {
-			throw new RequiredUserException();
-		}
-
-		UserPermissionUtil.check(
-			getPermissionChecker(), userId, ActionKeys.DELETE);
-
-		return userLocalService.updateStatus(userId, status);
-	}
-
 	public User updateAgreedToTermsOfUse(
 			long userId, boolean agreedToTermsOfUse)
 		throws PortalException, SystemException {
@@ -645,6 +631,21 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
 		return userLocalService.updateScreenName(userId, screenName);
+	}
+
+	public User updateStatus(long userId, int status)
+		throws PortalException, SystemException {
+
+		if ((getUserId() == userId) &&
+			(status != WorkflowConstants.STATUS_APPROVED)) {
+
+			throw new RequiredUserException();
+		}
+
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.DELETE);
+
+		return userLocalService.updateStatus(userId, status);
 	}
 
 	public User updateUser(

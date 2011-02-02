@@ -171,6 +171,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		if (userLocalService.getUserGroupUsersCount(
 				userGroupId, WorkflowConstants.STATUS_APPROVED) > 0) {
+
 			throw new RequiredUserGroupException();
 		}
 
