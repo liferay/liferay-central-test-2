@@ -1118,6 +1118,11 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="portal-web-add-application" />
+			<param name="test.ant.script.suite" value="PortalWebAddApplicationTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-amazon-rankings" />
 			<param name="test.ant.script.suite" value="PortalWebAmazonRankingsTestSuite" />
 		</antcall>
