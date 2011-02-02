@@ -187,18 +187,18 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByC_O",
 			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FIND_BY_C_A = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_FIND_BY_C_S = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByC_A",
+			"findByC_S",
 			new String[] {
 				Long.class.getName(), Integer.class.getName(),
 				
 			"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_C_A = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
+	public static final FinderPath FINDER_PATH_COUNT_BY_C_S = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByC_A",
+			"countByC_S",
 			new String[] { Long.class.getName(), Integer.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(UserModelImpl.ENTITY_CACHE_ENABLED,
 			UserModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
@@ -3019,9 +3019,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @return the matching users
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<User> findByC_A(long companyId, int status)
+	public List<User> findByC_S(long companyId, int status)
 		throws SystemException {
-		return findByC_A(companyId, status, QueryUtil.ALL_POS,
+		return findByC_S(companyId, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -3039,9 +3039,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @return the range of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<User> findByC_A(long companyId, int status, int start, int end)
+	public List<User> findByC_S(long companyId, int status, int start, int end)
 		throws SystemException {
-		return findByC_A(companyId, status, start, end, null);
+		return findByC_S(companyId, status, start, end, null);
 	}
 
 	/**
@@ -3059,7 +3059,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @return the ordered range of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
-	public List<User> findByC_A(long companyId, int status, int start, int end,
+	public List<User> findByC_S(long companyId, int status, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		Object[] finderArgs = new Object[] {
 				companyId, status,
@@ -3068,7 +3068,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				String.valueOf(orderByComparator)
 			};
 
-		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_A,
+		List<User> list = (List<User>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_C_S,
 				finderArgs, this);
 
 		if (list == null) {
@@ -3084,9 +3084,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 			query.append(_SQL_SELECT_USER_WHERE);
 
-			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_C_A_STATUS_2);
+			query.append(_FINDER_COLUMN_C_S_STATUS_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -3115,13 +3115,13 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			}
 			finally {
 				if (list == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_A,
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_C_S,
 						finderArgs);
 				}
 				else {
 					cacheResult(list);
 
-					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_A,
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_C_S,
 						finderArgs, list);
 				}
 
@@ -3146,10 +3146,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public User findByC_A_First(long companyId, int status,
+	public User findByC_S_First(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserException, SystemException {
-		List<User> list = findByC_A(companyId, status, 0, 1, orderByComparator);
+		List<User> list = findByC_S(companyId, status, 0, 1, orderByComparator);
 
 		if (list.isEmpty()) {
 			StringBundler msg = new StringBundler(6);
@@ -3185,12 +3185,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public User findByC_A_Last(long companyId, int status,
+	public User findByC_S_Last(long companyId, int status,
 		OrderByComparator orderByComparator)
 		throws NoSuchUserException, SystemException {
-		int count = countByC_A(companyId, status);
+		int count = countByC_S(companyId, status);
 
-		List<User> list = findByC_A(companyId, status, count - 1, count,
+		List<User> list = findByC_S(companyId, status, count - 1, count,
 				orderByComparator);
 
 		if (list.isEmpty()) {
@@ -3228,7 +3228,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public User[] findByC_A_PrevAndNext(long userId, long companyId,
+	public User[] findByC_S_PrevAndNext(long userId, long companyId,
 		int status, OrderByComparator orderByComparator)
 		throws NoSuchUserException, SystemException {
 		User user = findByPrimaryKey(userId);
@@ -3240,12 +3240,12 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 			User[] array = new UserImpl[3];
 
-			array[0] = getByC_A_PrevAndNext(session, user, companyId, status,
+			array[0] = getByC_S_PrevAndNext(session, user, companyId, status,
 					orderByComparator, true);
 
 			array[1] = user;
 
-			array[2] = getByC_A_PrevAndNext(session, user, companyId, status,
+			array[2] = getByC_S_PrevAndNext(session, user, companyId, status,
 					orderByComparator, false);
 
 			return array;
@@ -3258,7 +3258,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		}
 	}
 
-	protected User getByC_A_PrevAndNext(Session session, User user,
+	protected User getByC_S_PrevAndNext(Session session, User user,
 		long companyId, int status, OrderByComparator orderByComparator,
 		boolean previous) {
 		StringBundler query = null;
@@ -3273,9 +3273,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 		query.append(_SQL_SELECT_USER_WHERE);
 
-		query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+		query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
 
-		query.append(_FINDER_COLUMN_C_A_STATUS_2);
+		query.append(_FINDER_COLUMN_C_S_STATUS_2);
 
 		if (orderByComparator != null) {
 			String[] orderByFields = orderByComparator.getOrderByFields();
@@ -3624,9 +3624,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param status the status to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByC_A(long companyId, int status)
+	public void removeByC_S(long companyId, int status)
 		throws SystemException {
-		for (User user : findByC_A(companyId, status)) {
+		for (User user : findByC_S(companyId, status)) {
 			userPersistence.remove(user);
 		}
 	}
@@ -4330,10 +4330,10 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @return the number of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByC_A(long companyId, int status) throws SystemException {
+	public int countByC_S(long companyId, int status) throws SystemException {
 		Object[] finderArgs = new Object[] { companyId, status };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_A,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_C_S,
 				finderArgs, this);
 
 		if (count == null) {
@@ -4341,9 +4341,9 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 
 			query.append(_SQL_COUNT_USER_WHERE);
 
-			query.append(_FINDER_COLUMN_C_A_COMPANYID_2);
+			query.append(_FINDER_COLUMN_C_S_COMPANYID_2);
 
-			query.append(_FINDER_COLUMN_C_A_STATUS_2);
+			query.append(_FINDER_COLUMN_C_S_STATUS_2);
 
 			String sql = query.toString();
 
@@ -4370,7 +4370,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_A, finderArgs,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_S, finderArgs,
 					count);
 
 				closeSession(session);
@@ -8521,8 +8521,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	private static final String _FINDER_COLUMN_C_O_OPENID_1 = "user.openId IS NULL";
 	private static final String _FINDER_COLUMN_C_O_OPENID_2 = "user.openId = ?";
 	private static final String _FINDER_COLUMN_C_O_OPENID_3 = "(user.openId IS NULL OR user.openId = ?)";
-	private static final String _FINDER_COLUMN_C_A_COMPANYID_2 = "user.companyId = ? AND ";
-	private static final String _FINDER_COLUMN_C_A_STATUS_2 = "user.status = ?";
+	private static final String _FINDER_COLUMN_C_S_COMPANYID_2 = "user.companyId = ? AND ";
+	private static final String _FINDER_COLUMN_C_S_STATUS_2 = "user.status = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "user.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No User exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No User exists with the key {";

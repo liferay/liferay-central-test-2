@@ -709,7 +709,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portal.model.User> findByC_A(
+	public java.util.List<com.liferay.portal.model.User> findByC_S(
 		long companyId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -727,7 +727,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	* @return the range of matching users
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portal.model.User> findByC_A(
+	public java.util.List<com.liferay.portal.model.User> findByC_S(
 		long companyId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -746,7 +746,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	* @return the ordered range of matching users
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portal.model.User> findByC_A(
+	public java.util.List<com.liferay.portal.model.User> findByC_S(
 		long companyId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -765,7 +765,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.User findByC_A_First(long companyId,
+	public com.liferay.portal.model.User findByC_S_First(long companyId,
 		int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
@@ -785,7 +785,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.User findByC_A_Last(long companyId,
+	public com.liferay.portal.model.User findByC_S_Last(long companyId,
 		int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
@@ -806,7 +806,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	* @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.User[] findByC_A_PrevAndNext(long userId,
+	public com.liferay.portal.model.User[] findByC_S_PrevAndNext(long userId,
 		long companyId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
@@ -974,7 +974,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByC_A(long companyId, int status)
+	public void removeByC_S(long companyId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -1109,7 +1109,7 @@ public interface UserPersistence extends BasePersistence<User> {
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByC_A(long companyId, int status)
+	public int countByC_S(long companyId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

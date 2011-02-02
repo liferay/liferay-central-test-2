@@ -381,7 +381,6 @@ Liferay.Service.registerClass(
 		unsetRoleUsers: true,
 		unsetTeamUsers: true,
 		unsetUserGroupUsers: true,
-		updateStatus: true,
 		updateAgreedToTermsOfUse: true,
 		updateEmailAddress: true,
 		updateLockoutById: true,
@@ -390,6 +389,7 @@ Liferay.Service.registerClass(
 		updatePassword: true,
 		updateReminderQuery: true,
 		updateScreenName: true,
+		updateStatus: true,
 		updateUser: true
 	}
 );

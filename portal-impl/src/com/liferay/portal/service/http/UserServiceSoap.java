@@ -516,21 +516,6 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap updateStatus(long userId,
-		int status) throws RemoteException {
-		try {
-			com.liferay.portal.model.User returnValue = UserServiceUtil.updateStatus(userId,
-					status);
-
-			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portal.model.UserSoap updateAgreedToTermsOfUse(
 		long userId, boolean agreedToTermsOfUse) throws RemoteException {
 		try {
@@ -656,6 +641,21 @@ public class UserServiceSoap {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateScreenName(userId,
 					screenName);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.UserSoap updateStatus(long userId,
+		int status) throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = UserServiceUtil.updateStatus(userId,
+					status);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

@@ -372,6 +372,30 @@ public class UserGroupUtil {
 	}
 
 	/**
+	* Filters the user groups before and after the current user group in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userGroupId the primary key of the current user group
+	* @param companyId the company ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next user group
+	* @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.UserGroup[] filterFindByCompanyId_PrevAndNext(
+		long userGroupId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByCompanyId_PrevAndNext(userGroupId, companyId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the user groups where companyId = &#63; and parentUserGroupId = &#63;.
 	*
 	* @param companyId the company ID to search with
@@ -560,6 +584,31 @@ public class UserGroupUtil {
 		return getPersistence()
 				   .filterFindByC_P(companyId, parentUserGroupId, start, end,
 			orderByComparator);
+	}
+
+	/**
+	* Filters the user groups before and after the current user group in the ordered set where companyId = &#63; and parentUserGroupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param userGroupId the primary key of the current user group
+	* @param companyId the company ID to search with
+	* @param parentUserGroupId the parent user group ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next user group
+	* @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.UserGroup[] filterFindByC_P_PrevAndNext(
+		long userGroupId, long companyId, long parentUserGroupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchUserGroupException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByC_P_PrevAndNext(userGroupId, companyId,
+			parentUserGroupId, orderByComparator);
 	}
 
 	/**

@@ -247,6 +247,26 @@ public interface RolePersistence extends BasePersistence<Role> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters the roles before and after the current role in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param roleId the primary key of the current role
+	* @param companyId the company ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next role
+	* @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Role[] filterFindByCompanyId_PrevAndNext(
+		long roleId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the roles where subtype = &#63;.
 	*
 	* @param subtype the subtype to search with
@@ -397,6 +417,26 @@ public interface RolePersistence extends BasePersistence<Role> {
 		java.lang.String subtype, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters the roles before and after the current role in the ordered set where subtype = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param roleId the primary key of the current role
+	* @param subtype the subtype to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next role
+	* @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Role[] filterFindBySubtype_PrevAndNext(
+		long roleId, java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Finds the role where companyId = &#63; and name = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.
@@ -596,6 +636,27 @@ public interface RolePersistence extends BasePersistence<Role> {
 		int type, java.lang.String subtype, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters the roles before and after the current role in the ordered set where type = &#63; and subtype = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param roleId the primary key of the current role
+	* @param type the type to search with
+	* @param subtype the subtype to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next role
+	* @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Role[] filterFindByT_S_PrevAndNext(
+		long roleId, int type, java.lang.String subtype,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchRoleException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Finds the role where companyId = &#63; and classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portal.NoSuchRoleException} if it could not be found.

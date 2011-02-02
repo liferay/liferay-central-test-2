@@ -263,13 +263,6 @@ public class UserServiceUtil {
 		getService().unsetUserGroupUsers(userGroupId, userIds);
 	}
 
-	public static com.liferay.portal.model.User updateStatus(long userId,
-		int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateStatus(userId, status);
-	}
-
 	public static com.liferay.portal.model.User updateAgreedToTermsOfUse(
 		long userId, boolean agreedToTermsOfUse)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -335,6 +328,13 @@ public class UserServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().updateScreenName(userId, screenName);
+	}
+
+	public static com.liferay.portal.model.User updateStatus(long userId,
+		int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateStatus(userId, status);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,

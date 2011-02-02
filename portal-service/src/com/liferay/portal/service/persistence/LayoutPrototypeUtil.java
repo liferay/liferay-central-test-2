@@ -375,6 +375,30 @@ public class LayoutPrototypeUtil {
 	}
 
 	/**
+	* Filters the layout prototypes before and after the current layout prototype in the ordered set where companyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param layoutPrototypeId the primary key of the current layout prototype
+	* @param companyId the company ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next layout prototype
+	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.LayoutPrototype[] filterFindByCompanyId_PrevAndNext(
+		long layoutPrototypeId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutPrototypeException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByCompanyId_PrevAndNext(layoutPrototypeId,
+			companyId, orderByComparator);
+	}
+
+	/**
 	* Finds all the layout prototypes where companyId = &#63; and active = &#63;.
 	*
 	* @param companyId the company ID to search with
@@ -558,6 +582,31 @@ public class LayoutPrototypeUtil {
 		return getPersistence()
 				   .filterFindByC_A(companyId, active, start, end,
 			orderByComparator);
+	}
+
+	/**
+	* Filters the layout prototypes before and after the current layout prototype in the ordered set where companyId = &#63; and active = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param layoutPrototypeId the primary key of the current layout prototype
+	* @param companyId the company ID to search with
+	* @param active the active to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next layout prototype
+	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.LayoutPrototype[] filterFindByC_A_PrevAndNext(
+		long layoutPrototypeId, long companyId, boolean active,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchLayoutPrototypeException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByC_A_PrevAndNext(layoutPrototypeId, companyId,
+			active, orderByComparator);
 	}
 
 	/**

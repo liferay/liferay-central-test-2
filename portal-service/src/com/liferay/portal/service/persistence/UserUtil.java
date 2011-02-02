@@ -908,10 +908,10 @@ public class UserUtil {
 	* @return the matching users
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portal.model.User> findByC_A(
+	public static java.util.List<com.liferay.portal.model.User> findByC_S(
 		long companyId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_A(companyId, status);
+		return getPersistence().findByC_S(companyId, status);
 	}
 
 	/**
@@ -928,10 +928,10 @@ public class UserUtil {
 	* @return the range of matching users
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portal.model.User> findByC_A(
+	public static java.util.List<com.liferay.portal.model.User> findByC_S(
 		long companyId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByC_A(companyId, status, start, end);
+		return getPersistence().findByC_S(companyId, status, start, end);
 	}
 
 	/**
@@ -949,12 +949,12 @@ public class UserUtil {
 	* @return the ordered range of matching users
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.liferay.portal.model.User> findByC_A(
+	public static java.util.List<com.liferay.portal.model.User> findByC_S(
 		long companyId, int status, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_A(companyId, status, start, end, orderByComparator);
+				   .findByC_S(companyId, status, start, end, orderByComparator);
 	}
 
 	/**
@@ -971,13 +971,13 @@ public class UserUtil {
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portal.model.User findByC_A_First(
+	public static com.liferay.portal.model.User findByC_S_First(
 		long companyId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_A_First(companyId, status, orderByComparator);
+				   .findByC_S_First(companyId, status, orderByComparator);
 	}
 
 	/**
@@ -994,13 +994,13 @@ public class UserUtil {
 	* @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portal.model.User findByC_A_Last(long companyId,
+	public static com.liferay.portal.model.User findByC_S_Last(long companyId,
 		int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_A_Last(companyId, status, orderByComparator);
+				   .findByC_S_Last(companyId, status, orderByComparator);
 	}
 
 	/**
@@ -1018,13 +1018,13 @@ public class UserUtil {
 	* @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.liferay.portal.model.User[] findByC_A_PrevAndNext(
+	public static com.liferay.portal.model.User[] findByC_S_PrevAndNext(
 		long userId, long companyId, int status,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchUserException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByC_A_PrevAndNext(userId, companyId, status,
+				   .findByC_S_PrevAndNext(userId, companyId, status,
 			orderByComparator);
 	}
 
@@ -1220,9 +1220,9 @@ public class UserUtil {
 	* @param status the status to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByC_A(long companyId, int status)
+	public static void removeByC_S(long companyId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByC_A(companyId, status);
+		getPersistence().removeByC_S(companyId, status);
 	}
 
 	/**
@@ -1381,9 +1381,9 @@ public class UserUtil {
 	* @return the number of matching users
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByC_A(long companyId, int status)
+	public static int countByC_S(long companyId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByC_A(companyId, status);
+		return getPersistence().countByC_S(companyId, status);
 	}
 
 	/**

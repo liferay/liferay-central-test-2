@@ -250,12 +250,6 @@ public class UserServiceWrapper implements UserService {
 		_userService.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
-	public com.liferay.portal.model.User updateStatus(long userId, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _userService.updateStatus(userId, status);
-	}
-
 	public com.liferay.portal.model.User updateAgreedToTermsOfUse(long userId,
 		boolean agreedToTermsOfUse)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -320,6 +314,12 @@ public class UserServiceWrapper implements UserService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _userService.updateScreenName(userId, screenName);
+	}
+
+	public com.liferay.portal.model.User updateStatus(long userId, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _userService.updateStatus(userId, status);
 	}
 
 	public com.liferay.portal.model.User updateUser(long userId,
