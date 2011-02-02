@@ -72,10 +72,19 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 			</c:if>
 
 			<c:if test="<%= showSignInIcon %>">
+
+				<%
+				String urlSignIn = themeDisplay.getURLSignIn();
+
+				if (portletName.equals(PortletKeys.FAST_LOGIN)) {
+					urlSignIn = HttpUtil.addParameter(urlSignIn, "windowState", LiferayWindowState.POP_UP.toString());
+				}
+				%>
+
 				<liferay-ui:icon
 					image="status_online"
 					message="sign-in"
-					url="<%= themeDisplay.getURLSignIn() %>"
+					url='<%= urlSignIn %>'
 				/>
 			</c:if>
 
