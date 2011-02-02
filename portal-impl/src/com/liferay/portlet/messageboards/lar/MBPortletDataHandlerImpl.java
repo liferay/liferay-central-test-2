@@ -36,6 +36,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
@@ -77,6 +78,14 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			_categoriesAndMessages, _attachments, _messageFlags, _userBans,
 			_ratings, _tags
 		};
+	}
+
+	public boolean isAlwaysExportable() {
+		return _ALWAYS_EXPORTABLE;
+	}
+
+	public boolean isPublishToLiveByDefault() {
+		return PropsValues.MESSAGE_BOARDS_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
 	protected PortletPreferences doDeleteData(
@@ -821,6 +830,8 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		MBMessageFlagLocalServiceUtil.addReadFlags(userId, thread);
 	}
+
+	private static final boolean _ALWAYS_EXPORTABLE = true;
 
 	private static final String _NAMESPACE = "message_board";
 

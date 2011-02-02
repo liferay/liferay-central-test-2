@@ -32,6 +32,7 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.ImageUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
@@ -60,6 +61,14 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		return new PortletDataHandlerControl[] {
 			_entries, _categories, _comments, _ratings, _tags, _wordpress
 		};
+	}
+
+	public boolean isAlwaysExportable() {
+		return _ALWAYS_EXPORTABLE;
+	}
+
+	public boolean isPublishToLiveByDefault() {
+		return PropsValues.BLOGS_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
 	protected PortletPreferences doDeleteData(
@@ -350,6 +359,8 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedEntry.getEntryId());
 		}
 	}
+
+	private static final boolean _ALWAYS_EXPORTABLE = true;
 
 	private static final String _NAMESPACE = "blogs";
 

@@ -207,6 +207,8 @@ public interface PropsKeys {
 
 	public static final String BLOGS_PINGBACK_ENABLED = "blogs.pingback.enabled";
 
+	public static final String BLOGS_PUBLISH_TO_LIVE_BY_DEFAULT = "blogs.publish.to.live.by.default";
+
 	public static final String BLOGS_RSS_ABSTRACT_LENGTH = "blogs.rss.abstract.length";
 
 	public static final String BLOGS_TRACKBACK_ENABLED = "blogs.trackback.enabled";
@@ -1184,6 +1186,8 @@ public interface PropsKeys {
 	public static final String MESSAGE_BOARDS_MESSAGE_FORMATS_DEFAULT = "message.boards.message.formats.default";
 
 	public static final String MESSAGE_BOARDS_PINGBACK_ENABLED = "message.boards.pingback.enabled";
+
+	public static final String MESSAGE_BOARDS_PUBLISH_TO_LIVE_BY_DEFAULT = "message.boards.publish.to.live.by.default";
 
 	public static final String MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH = "message.boards.rss.abstract.length";
 
