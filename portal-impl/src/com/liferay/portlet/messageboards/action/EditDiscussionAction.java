@@ -19,10 +19,14 @@ import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -46,6 +50,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Sergio González
  */
 public class EditDiscussionAction extends PortletAction {
 
@@ -176,19 +181,45 @@ public class EditDiscussionAction extends PortletAction {
 		String subject = ParamUtil.getString(actionRequest, "subject");
 		String body = ParamUtil.getString(actionRequest, "body");
 
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBMessage.class.getName(), actionRequest);
 
 		MBMessage message = null;
 
+		User user = null;
+
+		if (themeDisplay.isSignedIn()) {
+			user = themeDisplay.getUser();
+		}
+		else {
+			user = UserLocalServiceUtil.getUserByEmailAddress(
+				themeDisplay.getCompanyId(), emailAddress);
+
+			if ((user == null) ||
+				(user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE)) {
+
+				return  null;
+			}
+		}
+
 		if (messageId <= 0) {
 
 			// Add message
 
-			message = MBMessageServiceUtil.addDiscussionMessage(
-				serviceContext.getScopeGroupId(), className, classPK,
-				permissionClassName, permissionClassPK, permissionOwnerId,
-				threadId, parentMessageId, subject, body, serviceContext);
+			PrincipalThreadLocal.setName(user.getUserId());
+
+			try {
+				message = MBMessageServiceUtil.addDiscussionMessage(
+					serviceContext.getScopeGroupId(), className, classPK,
+					permissionClassName, permissionClassPK, permissionOwnerId,
+					threadId, parentMessageId, subject, body, serviceContext);
+			}
+			finally {
+				PrincipalThreadLocal.setName(null);
+			}
 		}
 		else {
 

@@ -128,44 +128,55 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					String subscriptionURL = "javascript:" + randomNamespace + "subscribeToComments(" + !subscribed + ");";
 					%>
 
-					<c:choose>
-						<c:when test="<%= subscribed %>">
-							<liferay-ui:icon
-								cssClass="subscribe-link"
-								image="unsubscribe"
-								label="<%= true %>"
-								message = '<%= LanguageUtil.get(pageContext, "unsubscribe-from-comments") %>'
-								url="<%= subscriptionURL %>"
-							/>
-						</c:when>
-						<c:otherwise>
-							<liferay-ui:icon
-								cssClass="subscribe-link"
-								image="subscribe"
-								label="<%= true %>"
-								message = '<%= LanguageUtil.get(pageContext, "subscribe-to-comments") %>'
-								url="<%= subscriptionURL %>"
-							/>
-						</c:otherwise>
-					</c:choose>
+					<c:if test="<%= themeDisplay.isSignedIn() %>">
+						<c:choose>
+							<c:when test="<%= subscribed %>">
+								<liferay-ui:icon
+									cssClass="subscribe-link"
+									image="unsubscribe"
+									label="<%= true %>"
+									message = '<%= LanguageUtil.get(pageContext, "unsubscribe-from-comments") %>'
+									url="<%= subscriptionURL %>"
+								/>
+							</c:when>
+							<c:otherwise>
+								<liferay-ui:icon
+									cssClass="subscribe-link"
+									image="subscribe"
+									label="<%= true %>"
+									message = '<%= LanguageUtil.get(pageContext, "subscribe-to-comments") %>'
+									url="<%= subscriptionURL %>"
+								/>
+							</c:otherwise>
+						</c:choose>
+					</c:if>
+
+					<aui:input name="emailAddress" type="hidden" />
 
 					<div id="<%= randomNamespace %>postReplyForm<%= i %>" style="display: none;">
-						<aui:input type="textarea" id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' wrap="soft" />
+
+						<aui:input type="textarea" id='<%= randomNamespace + "postReplyBody" + i %>' label="comment" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' wrap="soft">
+							<aui:validator name="required" />
+						</aui:input>
 
 						<%
 						String postReplyButtonLabel = LanguageUtil.get(pageContext, "reply");
+
+						if (!themeDisplay.isSignedIn()) {
+							postReplyButtonLabel = LanguageUtil.get(pageContext, "reply-as");
+						}
 
 						if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, MBDiscussion.class.getName())) {
 							postReplyButtonLabel = LanguageUtil.get(pageContext, "submit-for-publication");
 						}
 						%>
 
-						<c:if test="<%= !subscribed %>">
+						<c:if test="<%= !subscribed && themeDisplay.isSignedIn() %>">
 							<aui:input helpMessage="comments-subscribe-me-help" label="subscribe-me" name="subscribe" type="checkbox" value="<%= PropsValues.DISCUSSION_SUBSCRIBE_BY_DEFAULT %>" />
 						</c:if>
 
 						<aui:button-row>
-							<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' type="submit" value="<%= postReplyButtonLabel %>"  />
+							<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value="<%= postReplyButtonLabel %>"  />
 
 							<%
 							String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');";
@@ -419,7 +430,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<aui:input id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' type="textarea"  wrap="soft" />
 
 									<aui:button-row>
-										<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' type="submit" value="reply" />
+										<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value='<%= themeDisplay.isSignedIn() ? "reply" : "reply-as" %>' />
 
 										<%
 										String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');";
@@ -481,6 +492,20 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 		</aui:form>
 	</div>
 
+	<%
+	PortletURL portletURL = new PortletURLImpl(
+		request, PortletKeys.FAST_LOGIN, themeDisplay.getPlid(),
+		PortletRequest.RENDER_PHASE);
+
+	portletURL.setWindowState(LiferayWindowState.POP_UP);
+	portletURL.setPortletMode(PortletMode.VIEW);
+
+	portletURL.setParameter("saveLastPath", "0");
+	portletURL.setParameter("struts_action", "/login/login");
+
+	String loginURL = portletURL.toString();
+	%>
+
 	<aui:script>
 		function <%= randomNamespace %>deleteMessage(i) {
 			eval("var messageId = document.<%= namespace %><%= formName %>.<%= namespace %>messageId" + i + ".value;");
@@ -497,6 +522,15 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.ADD %>";
 			document.<%= namespace %><%= formName %>.<%= namespace %>parentMessageId.value = parentMessageId;
 			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
+
+			if (!themeDisplay.isSignedIn()) {
+				window.randomNamespace = '<%= randomNamespace %>';
+
+				Liferay.Util.openIframePopUp("","","<%= loginURL %>","<%= namespace %>", Liferay.Language.get('sign-in'));
+			}
+			else {
+				submitForm(document.<%= namespace %><%= formName %>);
+			}
 		}
 
 		function <%= randomNamespace %>scrollIntoView(messageId) {
@@ -564,6 +598,16 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				);
 			}
 		}
+
+		Liferay.provide(
+			window,
+			'<%= randomNamespace %>afterLogin',
+			function(emailAddress, randomNamespace){
+				document.<%= namespace %><%= formName %>.<%= namespace %>emailAddress.value = emailAddress;
+				submitForm(document.<portlet:namespace /><%= formName %>);
+			},
+			[]
+		);
 	</aui:script>
 </c:if>
 
