@@ -401,6 +401,26 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current bookmarks entry
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next bookmarks entry
+	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry[] filterFindByGroupId_PrevAndNext(
+		long entryId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
+
+	/**
 	* Finds all the bookmarks entries where groupId = &#63; and userId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -560,6 +580,27 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current bookmarks entry
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next bookmarks entry
+	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry[] filterFindByG_U_PrevAndNext(
+		long entryId, long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	/**
 	* Finds all the bookmarks entries where groupId = &#63; and folderId = &#63;.
@@ -775,6 +816,27 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters the bookmarks entries before and after the current bookmarks entry in the ordered set where groupId = &#63; and folderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current bookmarks entry
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next bookmarks entry
+	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry[] filterFindByG_F_PrevAndNext(
+		long entryId, long groupId, long folderId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.bookmarks.NoSuchEntryException;
 
 	/**
 	* Filters by the user's permissions and finds all the bookmarks entries where groupId = &#63; and folderId = any &#63;.

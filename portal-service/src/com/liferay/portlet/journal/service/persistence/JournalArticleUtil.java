@@ -660,6 +660,30 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByGroupId_PrevAndNext(
+		long id, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .filterFindByGroupId_PrevAndNext(id, groupId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the journal articles where companyId = &#63;.
 	*
 	* @param companyId the company ID to search with
@@ -1219,6 +1243,31 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63; and articleId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_A_PrevAndNext(
+		long id, long groupId, java.lang.String articleId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .filterFindByG_A_PrevAndNext(id, groupId, articleId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the journal articles where groupId = &#63; and structureId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1402,6 +1451,31 @@ public class JournalArticleUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .filterFindByG_S(groupId, structureId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63; and structureId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_S_PrevAndNext(
+		long id, long groupId, java.lang.String structureId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .filterFindByG_S_PrevAndNext(id, groupId, structureId,
 			orderByComparator);
 	}
 
@@ -1592,6 +1666,31 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63; and templateId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param templateId the template ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_T_PrevAndNext(
+		long id, long groupId, java.lang.String templateId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .filterFindByG_T_PrevAndNext(id, groupId, templateId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the journal articles where groupId = &#63; and urlTitle = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1778,6 +1877,31 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63; and urlTitle = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param urlTitle the url title to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_UT_PrevAndNext(
+		long id, long groupId, java.lang.String urlTitle,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .filterFindByG_UT_PrevAndNext(id, groupId, urlTitle,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the journal articles where groupId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1960,6 +2084,31 @@ public class JournalArticleUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .filterFindByG_ST(groupId, status, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_ST_PrevAndNext(
+		long id, long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .filterFindByG_ST_PrevAndNext(id, groupId, status,
 			orderByComparator);
 	}
 
@@ -2343,6 +2492,32 @@ public class JournalArticleUtil {
 	}
 
 	/**
+	* Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63; and articleId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param articleId the article ID to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_A_ST_PrevAndNext(
+		long id, long groupId, java.lang.String articleId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .filterFindByG_A_ST_PrevAndNext(id, groupId, articleId,
+			status, orderByComparator);
+	}
+
+	/**
 	* Finds all the journal articles where groupId = &#63; and urlTitle = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -2542,6 +2717,32 @@ public class JournalArticleUtil {
 		return getPersistence()
 				   .filterFindByG_UT_ST(groupId, urlTitle, status, start, end,
 			orderByComparator);
+	}
+
+	/**
+	* Filters the journal articles before and after the current journal article in the ordered set where groupId = &#63; and urlTitle = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal article
+	* @param groupId the group ID to search with
+	* @param urlTitle the url title to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal article
+	* @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.journal.model.JournalArticle[] filterFindByG_UT_ST_PrevAndNext(
+		long id, long groupId, java.lang.String urlTitle, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchArticleException {
+		return getPersistence()
+				   .filterFindByG_UT_ST_PrevAndNext(id, groupId, urlTitle,
+			status, orderByComparator);
 	}
 
 	/**

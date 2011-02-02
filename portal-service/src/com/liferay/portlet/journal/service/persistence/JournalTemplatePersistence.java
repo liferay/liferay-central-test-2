@@ -398,6 +398,26 @@ public interface JournalTemplatePersistence extends BasePersistence<JournalTempl
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters the journal templates before and after the current journal template in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal template
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal template
+	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.journal.model.JournalTemplate[] filterFindByGroupId_PrevAndNext(
+		long id, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchTemplateException;
+
+	/**
 	* Finds all the journal templates where templateId = &#63;.
 	*
 	* @param templateId the template ID to search with
@@ -735,6 +755,27 @@ public interface JournalTemplatePersistence extends BasePersistence<JournalTempl
 		long groupId, java.lang.String structureId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters the journal templates before and after the current journal template in the ordered set where groupId = &#63; and structureId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param id the primary key of the current journal template
+	* @param groupId the group ID to search with
+	* @param structureId the structure ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next journal template
+	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.journal.model.JournalTemplate[] filterFindByG_S_PrevAndNext(
+		long id, long groupId, java.lang.String structureId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.journal.NoSuchTemplateException;
 
 	/**
 	* Finds all the journal templates.

@@ -534,6 +534,30 @@ public class IGImageUtil {
 	}
 
 	/**
+	* Filters the i g images before and after the current i g image in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param imageId the primary key of the current i g image
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next i g image
+	* @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.imagegallery.model.IGImage[] filterFindByGroupId_PrevAndNext(
+		long imageId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		return getPersistence()
+				   .filterFindByGroupId_PrevAndNext(imageId, groupId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds the i g image where smallImageId = &#63; or throws a {@link com.liferay.portlet.imagegallery.NoSuchImageException} if it could not be found.
 	*
 	* @param smallImageId the small image ID to search with
@@ -888,6 +912,31 @@ public class IGImageUtil {
 	}
 
 	/**
+	* Filters the i g images before and after the current i g image in the ordered set where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param imageId the primary key of the current i g image
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next i g image
+	* @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.imagegallery.model.IGImage[] filterFindByG_U_PrevAndNext(
+		long imageId, long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		return getPersistence()
+				   .filterFindByG_U_PrevAndNext(imageId, groupId, userId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the i g images where groupId = &#63; and folderId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1131,6 +1180,31 @@ public class IGImageUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .filterFindByG_F(groupId, folderId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Filters the i g images before and after the current i g image in the ordered set where groupId = &#63; and folderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param imageId the primary key of the current i g image
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next i g image
+	* @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.imagegallery.model.IGImage[] filterFindByG_F_PrevAndNext(
+		long imageId, long groupId, long folderId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		return getPersistence()
+				   .filterFindByG_F_PrevAndNext(imageId, groupId, folderId,
 			orderByComparator);
 	}
 
@@ -1391,6 +1465,32 @@ public class IGImageUtil {
 		return getPersistence()
 				   .filterFindByG_F_N(groupId, folderId, name, start, end,
 			orderByComparator);
+	}
+
+	/**
+	* Filters the i g images before and after the current i g image in the ordered set where groupId = &#63; and folderId = &#63; and name = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param imageId the primary key of the current i g image
+	* @param groupId the group ID to search with
+	* @param folderId the folder ID to search with
+	* @param name the name to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next i g image
+	* @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.imagegallery.model.IGImage[] filterFindByG_F_N_PrevAndNext(
+		long imageId, long groupId, long folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException {
+		return getPersistence()
+				   .filterFindByG_F_N_PrevAndNext(imageId, groupId, folderId,
+			name, orderByComparator);
 	}
 
 	/**

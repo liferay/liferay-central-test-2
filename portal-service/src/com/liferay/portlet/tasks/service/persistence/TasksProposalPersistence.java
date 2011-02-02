@@ -256,6 +256,26 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Filters the tasks proposals before and after the current tasks proposal in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param proposalId the primary key of the current tasks proposal
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a tasks proposal with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.tasks.model.TasksProposal[] filterFindByGroupId_PrevAndNext(
+		long proposalId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.tasks.NoSuchProposalException;
+
+	/**
 	* Finds all the tasks proposals where groupId = &#63; and userId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -415,6 +435,27 @@ public interface TasksProposalPersistence extends BasePersistence<TasksProposal>
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters the tasks proposals before and after the current tasks proposal in the ordered set where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param proposalId the primary key of the current tasks proposal
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next tasks proposal
+	* @throws com.liferay.portlet.tasks.NoSuchProposalException if a tasks proposal with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.tasks.model.TasksProposal[] filterFindByG_U_PrevAndNext(
+		long proposalId, long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.tasks.NoSuchProposalException;
 
 	/**
 	* Finds the tasks proposal where classNameId = &#63; and classPK = &#63; or throws a {@link com.liferay.portlet.tasks.NoSuchProposalException} if it could not be found.

@@ -536,6 +536,30 @@ public class MBMessageUtil {
 	}
 
 	/**
+	* Filters the message-boards messages before and after the current message-boards message in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the primary key of the current message-boards message
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message-boards message
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBMessage[] filterFindByGroupId_PrevAndNext(
+		long messageId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .filterFindByGroupId_PrevAndNext(messageId, groupId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the message-boards messages where companyId = &#63;.
 	*
 	* @param companyId the company ID to search with
@@ -1205,6 +1229,31 @@ public class MBMessageUtil {
 	}
 
 	/**
+	* Filters the message-boards messages before and after the current message-boards message in the ordered set where groupId = &#63; and userId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the primary key of the current message-boards message
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message-boards message
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBMessage[] filterFindByG_U_PrevAndNext(
+		long messageId, long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .filterFindByG_U_PrevAndNext(messageId, groupId, userId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the message-boards messages where groupId = &#63; and categoryId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1391,6 +1440,31 @@ public class MBMessageUtil {
 	}
 
 	/**
+	* Filters the message-boards messages before and after the current message-boards message in the ordered set where groupId = &#63; and categoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the primary key of the current message-boards message
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message-boards message
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBMessage[] filterFindByG_C_PrevAndNext(
+		long messageId, long groupId, long categoryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .filterFindByG_C_PrevAndNext(messageId, groupId, categoryId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the message-boards messages where groupId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1573,6 +1647,31 @@ public class MBMessageUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .filterFindByG_S(groupId, status, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Filters the message-boards messages before and after the current message-boards message in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the primary key of the current message-boards message
+	* @param groupId the group ID to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message-boards message
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBMessage[] filterFindByG_S_PrevAndNext(
+		long messageId, long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .filterFindByG_S_PrevAndNext(messageId, groupId, status,
 			orderByComparator);
 	}
 
@@ -2416,6 +2515,32 @@ public class MBMessageUtil {
 	}
 
 	/**
+	* Filters the message-boards messages before and after the current message-boards message in the ordered set where groupId = &#63; and userId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the primary key of the current message-boards message
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message-boards message
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBMessage[] filterFindByG_U_S_PrevAndNext(
+		long messageId, long groupId, long userId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .filterFindByG_U_S_PrevAndNext(messageId, groupId, userId,
+			status, orderByComparator);
+	}
+
+	/**
 	* Finds all the message-boards messages where groupId = &#63; and categoryId = &#63; and threadId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -2616,6 +2741,32 @@ public class MBMessageUtil {
 	}
 
 	/**
+	* Filters the message-boards messages before and after the current message-boards message in the ordered set where groupId = &#63; and categoryId = &#63; and threadId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the primary key of the current message-boards message
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message-boards message
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBMessage[] filterFindByG_C_T_PrevAndNext(
+		long messageId, long groupId, long categoryId, long threadId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .filterFindByG_C_T_PrevAndNext(messageId, groupId,
+			categoryId, threadId, orderByComparator);
+	}
+
+	/**
 	* Finds all the message-boards messages where groupId = &#63; and categoryId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -2813,6 +2964,32 @@ public class MBMessageUtil {
 		return getPersistence()
 				   .filterFindByG_C_S(groupId, categoryId, status, start, end,
 			orderByComparator);
+	}
+
+	/**
+	* Filters the message-boards messages before and after the current message-boards message in the ordered set where groupId = &#63; and categoryId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the primary key of the current message-boards message
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message-boards message
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBMessage[] filterFindByG_C_S_PrevAndNext(
+		long messageId, long groupId, long categoryId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .filterFindByG_C_S_PrevAndNext(messageId, groupId,
+			categoryId, status, orderByComparator);
 	}
 
 	/**
@@ -3167,6 +3344,34 @@ public class MBMessageUtil {
 		return getPersistence()
 				   .filterFindByG_C_T_S(groupId, categoryId, threadId, status,
 			start, end, orderByComparator);
+	}
+
+	/**
+	* Filters the message-boards messages before and after the current message-boards message in the ordered set where groupId = &#63; and categoryId = &#63; and threadId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param messageId the primary key of the current message-boards message
+	* @param groupId the group ID to search with
+	* @param categoryId the category ID to search with
+	* @param threadId the thread ID to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next message-boards message
+	* @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.messageboards.model.MBMessage[] filterFindByG_C_T_S_PrevAndNext(
+		long messageId, long groupId, long categoryId, long threadId,
+		int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageException {
+		return getPersistence()
+				   .filterFindByG_C_T_S_PrevAndNext(messageId, groupId,
+			categoryId, threadId, status, orderByComparator);
 	}
 
 	/**

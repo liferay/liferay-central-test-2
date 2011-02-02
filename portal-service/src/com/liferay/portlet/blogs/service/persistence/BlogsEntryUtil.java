@@ -535,6 +535,30 @@ public class BlogsEntryUtil {
 	}
 
 	/**
+	* Filters the blogs entries before and after the current blogs entry in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current blogs entry
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next blogs entry
+	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] filterFindByGroupId_PrevAndNext(
+		long entryId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence()
+				   .filterFindByGroupId_PrevAndNext(entryId, groupId,
+			orderByComparator);
+	}
+
+	/**
 	* Finds all the blogs entries where companyId = &#63;.
 	*
 	* @param companyId the company ID to search with
@@ -1274,6 +1298,31 @@ public class BlogsEntryUtil {
 	}
 
 	/**
+	* Filters the blogs entries before and after the current blogs entry in the ordered set where groupId = &#63; and displayDate &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current blogs entry
+	* @param groupId the group ID to search with
+	* @param displayDate the display date to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next blogs entry
+	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] filterFindByG_LtD_PrevAndNext(
+		long entryId, long groupId, java.util.Date displayDate,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence()
+				   .filterFindByG_LtD_PrevAndNext(entryId, groupId,
+			displayDate, orderByComparator);
+	}
+
+	/**
 	* Finds all the blogs entries where groupId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1456,6 +1505,31 @@ public class BlogsEntryUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .filterFindByG_S(groupId, status, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Filters the blogs entries before and after the current blogs entry in the ordered set where groupId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current blogs entry
+	* @param groupId the group ID to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next blogs entry
+	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] filterFindByG_S_PrevAndNext(
+		long entryId, long groupId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence()
+				   .filterFindByG_S_PrevAndNext(entryId, groupId, status,
 			orderByComparator);
 	}
 
@@ -1939,6 +2013,32 @@ public class BlogsEntryUtil {
 	}
 
 	/**
+	* Filters the blogs entries before and after the current blogs entry in the ordered set where groupId = &#63; and userId = &#63; and displayDate &lt; &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current blogs entry
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param displayDate the display date to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next blogs entry
+	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] filterFindByG_U_LtD_PrevAndNext(
+		long entryId, long groupId, long userId, java.util.Date displayDate,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence()
+				   .filterFindByG_U_LtD_PrevAndNext(entryId, groupId, userId,
+			displayDate, orderByComparator);
+	}
+
+	/**
 	* Finds all the blogs entries where groupId = &#63; and userId = &#63; and status = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -2133,6 +2233,32 @@ public class BlogsEntryUtil {
 		return getPersistence()
 				   .filterFindByG_U_S(groupId, userId, status, start, end,
 			orderByComparator);
+	}
+
+	/**
+	* Filters the blogs entries before and after the current blogs entry in the ordered set where groupId = &#63; and userId = &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current blogs entry
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next blogs entry
+	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] filterFindByG_U_S_PrevAndNext(
+		long entryId, long groupId, long userId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence()
+				   .filterFindByG_U_S_PrevAndNext(entryId, groupId, userId,
+			status, orderByComparator);
 	}
 
 	/**
@@ -2335,6 +2461,32 @@ public class BlogsEntryUtil {
 		return getPersistence()
 				   .filterFindByG_LtD_S(groupId, displayDate, status, start,
 			end, orderByComparator);
+	}
+
+	/**
+	* Filters the blogs entries before and after the current blogs entry in the ordered set where groupId = &#63; and displayDate &lt; &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current blogs entry
+	* @param groupId the group ID to search with
+	* @param displayDate the display date to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next blogs entry
+	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] filterFindByG_LtD_S_PrevAndNext(
+		long entryId, long groupId, java.util.Date displayDate, int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence()
+				   .filterFindByG_LtD_S_PrevAndNext(entryId, groupId,
+			displayDate, status, orderByComparator);
 	}
 
 	/**
@@ -2553,6 +2705,34 @@ public class BlogsEntryUtil {
 		return getPersistence()
 				   .filterFindByG_U_LtD_S(groupId, userId, displayDate, status,
 			start, end, orderByComparator);
+	}
+
+	/**
+	* Filters the blogs entries before and after the current blogs entry in the ordered set where groupId = &#63; and userId = &#63; and displayDate &lt; &#63; and status = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param entryId the primary key of the current blogs entry
+	* @param groupId the group ID to search with
+	* @param userId the user ID to search with
+	* @param displayDate the display date to search with
+	* @param status the status to search with
+	* @param orderByComparator the comparator to order the set by
+	* @return the previous, current, and next blogs entry
+	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] filterFindByG_U_LtD_S_PrevAndNext(
+		long entryId, long groupId, long userId, java.util.Date displayDate,
+		int status,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.blogs.NoSuchEntryException {
+		return getPersistence()
+				   .filterFindByG_U_LtD_S_PrevAndNext(entryId, groupId, userId,
+			displayDate, status, orderByComparator);
 	}
 
 	/**
