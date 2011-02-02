@@ -47,6 +47,10 @@
 
 	List<Group> results = myPlaces;
 
+	if(permissionChecker.isCompanyAdmin()) {
+		results.add(0, GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyGroupId()));
+	}
+
 	searchContainer.setResults(results);
 
 	List resultRows = searchContainer.getResultRows();
@@ -57,6 +61,10 @@
 		ResultRow row = new ResultRow(group, group.getGroupId(), i);
 
 		String groupName = HtmlUtil.escape(group.getDescriptiveName());
+
+		if (group.isCompany()) {
+			groupName = LanguageUtil.get(pageContext, "global");
+		}
 
 		if (group.isUser()) {
 			groupName = LanguageUtil.get(pageContext, "my-community");
