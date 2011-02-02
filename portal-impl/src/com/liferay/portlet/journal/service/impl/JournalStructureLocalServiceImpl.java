@@ -30,7 +30,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
-import com.liferay.portlet.forms.util.FormsUtil;
+import com.liferay.portlet.forms.util.FormsXMLUtil;
 import com.liferay.portlet.journal.DuplicateStructureElementException;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -71,7 +71,7 @@ public class JournalStructureLocalServiceImpl
 		Date now = new Date();
 
 		try {
-			xsd = FormsUtil.formatXML(xsd);
+			xsd = FormsXMLUtil.formatXML(xsd);
 		}
 		catch (Exception e) {
 			throw new StructureXsdException();
@@ -411,7 +411,7 @@ public class JournalStructureLocalServiceImpl
 		structureId = structureId.trim().toUpperCase();
 
 		try {
-			xsd = FormsUtil.formatXML(xsd);
+			xsd = FormsXMLUtil.formatXML(xsd);
 		}
 		catch (Exception e) {
 			throw new StructureXsdException();

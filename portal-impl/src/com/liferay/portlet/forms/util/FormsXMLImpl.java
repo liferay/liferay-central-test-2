@@ -15,25 +15,23 @@
 package com.liferay.portlet.forms.util;
 
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 
 /**
  * @author Bruno Basto
+ * @author Brian Wing Shun Chan
  */
-public class FormsUtil {
+public class FormsXMLImpl implements FormsXML {
 
-	public static final String XML_INDENT = "  ";
-
-	public static String formatXML(com.liferay.portal.kernel.xml.Document doc)
-		throws IOException {
-
-		return doc.formattedString(XML_INDENT);
+	public String formatXML(Document document) throws IOException {
+		return document.formattedString(_XML_INDENT);
 	}
 
-	public static String formatXML(String xml)
-		throws org.dom4j.DocumentException, IOException {
+	public String formatXML(String xml) throws DocumentException, IOException {
 
 		// This is only supposed to format your xml, however, it will also
 		// unwantingly change &#169; and other characters like it into their
@@ -41,11 +39,18 @@ public class FormsUtil {
 
 		xml = StringUtil.replace(xml, "&#", "[$SPECIAL_CHARACTER$]");
 
-		xml = XMLFormatter.toString(xml, XML_INDENT);
+		try {
+			xml = XMLFormatter.toString(xml, _XML_INDENT);
+		}
+		catch (org.dom4j.DocumentException de) {
+			throw new DocumentException(de.getMessage());
+		}
 
 		xml = StringUtil.replace(xml, "[$SPECIAL_CHARACTER$]", "&#");
 
 		return xml;
 	}
+
+	private static final String _XML_INDENT = "  ";
 
 }
