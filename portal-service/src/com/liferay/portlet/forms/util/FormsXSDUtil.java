@@ -12,24 +12,39 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portlet.forms.util;
 
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
-import com.liferay.portal.kernel.xml.Element;
 
 /**
  * @author Eduardo Lundgren
+ * @author Brian Wing Shun Chan
  */
-public interface FormXSD {
+public class FormsXSDUtil {
 
-	public JSONArray getJSONArray(Document document) throws JSONException;
+	public static FormsXSD getFormsXSD() {
+		return _formsXSD;
+	}
 
-	public JSONArray getJSONArray(Element element) throws JSONException;
+	public static JSONArray getJSONArray(Document document)
+		throws JSONException {
 
-	public JSONArray getJSONArray(String xml)
-		throws DocumentException, JSONException;
+		return getFormsXSD().getJSONArray(document);
+	}
+
+	public static JSONArray getJSONArray(String xml)
+		throws DocumentException, JSONException {
+
+		return getFormsXSD().getJSONArray(xml);
+	}
+
+	public void setFormsXSD(FormsXSD formsXSD) {
+		_formsXSD = formsXSD;
+	}
+
+	private static FormsXSD _formsXSD;
 
 }

@@ -232,11 +232,6 @@
 			<bean class="com.liferay.portal.util.FileImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.util.FormXSDUtil" class="com.liferay.portal.kernel.util.FormXSDUtil">
-		<property name="formXSD">
-			<bean class="com.liferay.portal.util.FormXSDImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.util.HashCodeFactoryUtil" class="com.liferay.portal.kernel.util.HashCodeFactoryUtil">
 		<property name="hashCodeFactory">
 			<bean class="com.liferay.portal.util.HashCodeFactoryImpl" />
@@ -446,6 +441,11 @@
 	<bean id="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil" class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil">
 		<property name="expandoBridgeIndexer">
 			<bean class="com.liferay.portlet.expando.util.ExpandoBridgeIndexerImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.forms.util.FormsXSDUtil" class="com.liferay.portlet.forms.util.FormsXSDUtil">
+		<property name="formsXSD">
+			<bean class="com.liferay.portlet.forms.util.FormsXSDImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journalcontent.util.JournalContent" class="com.liferay.portlet.journalcontent.util.JournalContentImpl" />
