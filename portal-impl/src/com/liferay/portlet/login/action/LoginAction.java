@@ -72,13 +72,6 @@ public class LoginAction extends PortletAction {
 				PortletPreferencesFactoryUtil.getPortletSetup(actionRequest);
 
 			login(themeDisplay, actionRequest, actionResponse, preferences);
-
-			boolean doActionAfterLogin = ParamUtil.getBoolean(
-				actionRequest, "doActionAfterLogin");
-
-			if (doActionAfterLogin) {
-				setForward(actionRequest, "portlet.login.login_redirect");
-			}
 		}
 		catch (Exception e) {
 			if (e instanceof AuthException) {
@@ -116,8 +109,7 @@ public class LoginAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(
-			getForward(renderRequest, "portlet.login.login"));
+		return mapping.findForward("portlet.login.login");
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {
@@ -150,16 +142,10 @@ public class LoginAction extends PortletAction {
 		else {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-			boolean doActionAfterLogin = ParamUtil.getBoolean(
-				actionRequest, "doActionAfterLogin");
-
 			if (Validator.isNotNull(redirect)) {
 				redirect = PortalUtil.escapeRedirect(redirect);
 
 				actionResponse.sendRedirect(redirect);
-			}
-			else if (doActionAfterLogin) {
-				return;
 			}
 			else {
 				actionResponse.sendRedirect(themeDisplay.getPathMain());

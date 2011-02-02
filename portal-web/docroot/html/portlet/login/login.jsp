@@ -46,7 +46,6 @@
 		<portlet:actionURL secure="<%= PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS || request.isSecure() %>" var="loginURL">
 			<portlet:param name="saveLastPath" value="0" />
 			<portlet:param name="struts_action" value="/login/login" />
-			<portlet:param name="doActionAfterLogin" value="<%= portletName.equals(PortletKeys.FAST_LOGIN) ? String.valueOf(Boolean.TRUE.toString()) : String.valueOf(Boolean.FALSE.toString()) %>" />
 		</portlet:actionURL>
 
 		<aui:form action="<%= loginURL %>" method="post" name="fm">

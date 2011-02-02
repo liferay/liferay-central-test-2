@@ -1457,13 +1457,9 @@
 			<forward name="portlet.login.create_account" path="portlet.login.create_account" />
 		</action>
 
-		<action path="/login/create_anonymous_account" type="com.liferay.portlet.login.action.CreateAnonymousAccountAction">
-			<forward name="portlet.login.create_anonymous_account" path="portlet.login.create_anonymous_account" />
-		</action>
+		<action path="/login/facebook_connect" type="com.liferay.portlet.login.action.FacebookConnectAction" />
 
-		<action path="/login/facebook_connect" type="com.liferay.portlet.login.action.FacebookConnectAction">
-			<forward name="portlet.login.facebook_login" path="portlet.login.facebook_login" />
-		</action>
+		<action path="/login/facebook_connect_add_user" forward="portlet.login.facebook_add_user" />
 
 		<action path="/login/facebook_connect_oauth" type="com.liferay.portlet.login.action.FacebookConnectAction" />
 
@@ -1473,10 +1469,7 @@
 
 		<action path="/login/login" type="com.liferay.portlet.login.action.LoginAction">
 			<forward name="portlet.login.login" path="portlet.login.login" />
-			<forward name="portlet.login.login_redirect" path="portlet.login.login_redirect" />
 		</action>
-
-		<action path="/login/login_redirect" forward="portlet.login.login_redirect" />
 
 		<action path="/login/open_id" type="com.liferay.portlet.login.action.OpenIdAction">
 			<forward name="portlet.login.open_id" path="portlet.login.open_id" />

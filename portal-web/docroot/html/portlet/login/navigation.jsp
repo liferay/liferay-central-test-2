@@ -19,15 +19,9 @@
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
 
-boolean showAnonymousIcon = false;
-
-if (!strutsAction.startsWith("/login/create_anonymous_account") && portletName.equals(PortletKeys.FAST_LOGIN)) {
-	showAnonymousIcon = true;
-}
-
 boolean showCreateAccountIcon = false;
 
-if (!strutsAction.equals("/login/create_account") && company.isStrangers() && !portletName.equals(PortletKeys.FAST_LOGIN)) {
+if (!strutsAction.equals("/login/create_account") && company.isStrangers()) {
 	showCreateAccountIcon = true;
 }
 
@@ -56,56 +50,27 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 }
 %>
 
-<c:if test="<%= showAnonymousIcon || showCreateAccountIcon || showForgotPasswordIcon || showOpenIdIcon || showSignInIcon %>">
+<c:if test="<%= showCreateAccountIcon || showForgotPasswordIcon || showOpenIdIcon || showSignInIcon %>">
 	<div class="navigation">
 		<liferay-ui:icon-list>
-			<c:if test="<%= showAnonymousIcon %>">
-				<portlet:renderURL var="anonymousURL">
-					<portlet:param name="struts_action" value="/login/create_anonymous_account" />
-				</portlet:renderURL>
-
-				<liferay-ui:icon
-					message="anonymous"
-					src='<%= themeDisplay.getPathThemeImages() + "/common/user_icon.png" %>'
-					url="<%= anonymousURL %>"
-				/>
-			</c:if>
-
 			<c:if test="<%= showSignInIcon %>">
-
-				<%
-				String urlSignIn = themeDisplay.getURLSignIn();
-
-				if (portletName.equals(PortletKeys.FAST_LOGIN)) {
-					urlSignIn = HttpUtil.addParameter(urlSignIn, "windowState", LiferayWindowState.POP_UP.toString());
-				}
-				%>
-
 				<liferay-ui:icon
 					image="status_online"
 					message="sign-in"
-					url='<%= urlSignIn %>'
+					url="<%= themeDisplay.getURLSignIn() %>"
 				/>
 			</c:if>
 
 			<c:if test="<%= showFacebookConnectIcon %>">
-				<portlet:renderURL var="loginRedirect" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
-					<portlet:param name="struts_action" value="/login/login_redirect" />
-				</portlet:renderURL>
-
-				<portlet:renderURL var="facebookConnectURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+				<portlet:actionURL var="facebookConnectURL">
 					<portlet:param name="struts_action" value="/login/facebook_connect" />
-					<portlet:param name="redirect" value="<%= HtmlUtil.escapeURL(loginRedirect.toString()) %>" />
-				</portlet:renderURL>
-
-				<%
-				String taglibOpenFacebookConnectLoginWindow = "javascript:var facebookConnectLoginWindow = window.open('" + facebookConnectURL.toString() + "','facebook', 'align=center,directories=no,height=700,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=1000'); void(''); facebookConnectLoginWindow.focus();";
-				%>
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+				</portlet:actionURL>
 
 				<liferay-ui:icon
 					image="../social_bookmarks/facebook"
 					message="facebook"
-					url="<%= taglibOpenFacebookConnectLoginWindow %>"
+					url="<%= facebookConnectURL %>"
 				/>
 			</c:if>
 
