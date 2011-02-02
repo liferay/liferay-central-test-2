@@ -77,16 +77,14 @@ if (layout != null) {
 	Set<String> headerPortalCssSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		for (String headerPortalCss : portlet.getHeaderPortalCss()) {
-			if (!HttpUtil.hasProtocol(headerPortalCss)) {
-				headerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalCss, portlet.getTimestamp());
-			}
+		for (PortletResource headerPortalCss : portlet.getHeaderPortalCss()) {
+			String url = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext(), headerPortalCss, portlet.getTimestamp());
 
-			if (!headerPortalCssSet.contains(headerPortalCss)) {
-				headerPortalCssSet.add(headerPortalCss);
+			if (!headerPortalCssSet.contains(url)) {
+				headerPortalCssSet.add(url);
 	%>
 
-				<link href="<%= HtmlUtil.escape(headerPortalCss) %>" rel="stylesheet" type="text/css" />
+				<link href="<%= HtmlUtil.escape(url) %>" rel="stylesheet" type="text/css" />
 
 	<%
 			}
@@ -96,16 +94,14 @@ if (layout != null) {
 	Set<String> headerPortletCssSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		for (String headerPortletCss : portlet.getHeaderPortletCss()) {
-			if (!HttpUtil.hasProtocol(headerPortletCss)) {
-				headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletCss, portlet.getTimestamp());
-			}
+		for (PortletResource headerPortletCss : portlet.getHeaderPortletCss()) {
+			String url = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath(), headerPortletCss, portlet.getTimestamp());
 
-			if (!headerPortletCssSet.contains(headerPortletCss)) {
-				headerPortletCssSet.add(headerPortletCss);
+			if (!headerPortletCssSet.contains(url)) {
+				headerPortletCssSet.add(url);
 	%>
 
-				<link href="<%= HtmlUtil.escape(headerPortletCss) %>" rel="stylesheet" type="text/css" />
+				<link href="<%= HtmlUtil.escape(url) %>" rel="stylesheet" type="text/css" />
 
 	<%
 			}
@@ -128,16 +124,14 @@ if (layout != null) {
 	Set<String> headerPortalJavaScriptSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		for (String headerPortalJavaScript : portlet.getHeaderPortalJavaScript()) {
-			if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
-				headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalJavaScript, portlet.getTimestamp());
-			}
+		for (PortletResource headerPortalJavaScript : portlet.getHeaderPortalJavaScript()) {
+			String url = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext(), headerPortalJavaScript, portlet.getTimestamp());
 
-			if (!headerPortalJavaScriptSet.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
-				headerPortalJavaScriptSet.add(headerPortalJavaScript);
+			if (!headerPortalJavaScriptSet.contains(url) && !themeDisplay.isIncludedJs(url)) {
+				headerPortalJavaScriptSet.add(url);
 	%>
 
-				<script src="<%= HtmlUtil.escape(headerPortalJavaScript) %>" type="text/javascript"></script>
+				<script src="<%= HtmlUtil.escape(url) %>" type="text/javascript"></script>
 
 	<%
 			}
@@ -147,16 +141,14 @@ if (layout != null) {
 	Set<String> headerPortletJavaScriptSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		for (String headerPortletJavaScript : portlet.getHeaderPortletJavaScript()) {
-			if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
-				headerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletJavaScript, portlet.getTimestamp());
-			}
+		for (PortletResource headerPortletJavaScript : portlet.getHeaderPortletJavaScript()) {
+			String url = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath(), headerPortletJavaScript, portlet.getTimestamp());
 
-			if (!headerPortletJavaScriptSet.contains(headerPortletJavaScript)) {
-				headerPortletJavaScriptSet.add(headerPortletJavaScript);
+			if (!headerPortletJavaScriptSet.contains(url)) {
+				headerPortletJavaScriptSet.add(url);
 	%>
 
-				<script src="<%= HtmlUtil.escape(headerPortletJavaScript) %>" type="text/javascript"></script>
+				<script src="<%= HtmlUtil.escape(url) %>" type="text/javascript"></script>
 
 	<%
 			}

@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.PortletResource;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
@@ -732,6 +733,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portletId;
 	}
 
+	private PortletResource _getPortletResource(Element element) {
+		String path = element.getText();
+		boolean singleton = GetterUtil.getBoolean(
+			element.attributeValue("singleton"));
+
+		return new PortletResource(path, singleton);
+	}
+
 	private List<Portlet> _getPortletsByPortletName(
 		String portletName, String servletContextName,
 		Map<String, Portlet> portletsPool) {
@@ -1297,77 +1306,100 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletElement.elementText("ajaxable"),
 				portletModel.isAjaxable()));
 
-		List<String> headerPortalCssList =
+		List<PortletResource> headerPortalCssList =
 			portletModel.getHeaderPortalCss();
 
 		for (Element headerPortalCssElement :
 				portletElement.elements("header-portal-css")) {
 
-			headerPortalCssList.add(headerPortalCssElement.getText());
+			PortletResource portletResource = _getPortletResource(
+				headerPortalCssElement);
+
+			headerPortalCssList.add(portletResource);
 		}
 
-		List<String> headerPortletCssList = portletModel.getHeaderPortletCss();
+		List<PortletResource> headerPortletCssList =
+			portletModel.getHeaderPortletCss();
 
 		for (Element headerPortletCssElement :
 				portletElement.elements("header-portlet-css")) {
 
-			headerPortletCssList.add(headerPortletCssElement.getText());
+			PortletResource portletResource = _getPortletResource(
+				headerPortletCssElement);
+
+			headerPortletCssList.add(portletResource);
 		}
 
-		List<String> headerPortalJavaScriptList =
+		List<PortletResource> headerPortalJavaScriptList =
 			portletModel.getHeaderPortalJavaScript();
 
 		for (Element headerPortalJavaScriptElement :
 				portletElement.elements("header-portal-javascript")) {
 
-			headerPortalJavaScriptList.add(
-				headerPortalJavaScriptElement.getText());
+			PortletResource portletResource = _getPortletResource(
+				headerPortalJavaScriptElement);
+
+			headerPortalJavaScriptList.add(portletResource);
 		}
 
-		List<String> headerPortletJavaScriptList =
+		List<PortletResource> headerPortletJavaScriptList =
 			portletModel.getHeaderPortletJavaScript();
 
 		for (Element headerPortletJavaScriptElement :
 				portletElement.elements("header-portlet-javascript")) {
 
-			headerPortletJavaScriptList.add(
-				headerPortletJavaScriptElement.getText());
+			PortletResource portletResource = _getPortletResource(
+				headerPortletJavaScriptElement);
+
+			headerPortletJavaScriptList.add(portletResource);
 		}
 
-		List<String> footerPortalCssList = portletModel.getFooterPortalCss();
+		List<PortletResource> footerPortalCssList =
+			portletModel.getFooterPortalCss();
 
 		for (Element footerPortalCssElement :
 				portletElement.elements("footer-portal-css")) {
 
-			footerPortalCssList.add(footerPortalCssElement.getText());
+			PortletResource portletResource = _getPortletResource(
+				footerPortalCssElement);
+
+			footerPortalCssList.add(portletResource);
 		}
 
-		List<String> footerPortletCssList = portletModel.getFooterPortletCss();
+		List<PortletResource> footerPortletCssList =
+			portletModel.getFooterPortletCss();
 
 		for (Element footerPortletCssElement :
 				portletElement.elements("footer-portlet-css")) {
 
-			footerPortletCssList.add(footerPortletCssElement.getText());
+			PortletResource portletResource = _getPortletResource(
+				footerPortletCssElement);
+
+			footerPortletCssList.add(portletResource);
 		}
 
-		List<String> footerPortalJavaScriptList =
+		List<PortletResource> footerPortalJavaScriptList =
 			portletModel.getFooterPortalJavaScript();
 
 		for (Element footerPortalJavaScriptElement :
 				portletElement.elements("footer-portal-javascript")) {
 
-			footerPortalJavaScriptList.add(
-				footerPortalJavaScriptElement.getText());
+			PortletResource portletResource = _getPortletResource(
+				footerPortalJavaScriptElement);
+
+			footerPortalJavaScriptList.add(portletResource);
 		}
 
-		List<String> footerPortletJavaScriptList =
+		List<PortletResource> footerPortletJavaScriptList =
 			portletModel.getFooterPortletJavaScript();
 
 		for (Element footerPortletJavaScriptElement :
 				portletElement.elements("footer-portlet-javascript")) {
 
-			footerPortletJavaScriptList.add(
-				footerPortletJavaScriptElement.getText());
+			PortletResource portletResource = _getPortletResource(
+				footerPortletJavaScriptElement);
+
+			footerPortletJavaScriptList.add(portletResource);
 		}
 
 		portletModel.setCssClassWrapper(GetterUtil.getString(

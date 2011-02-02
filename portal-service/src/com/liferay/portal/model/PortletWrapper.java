@@ -1727,7 +1727,7 @@ public class PortletWrapper implements Portlet {
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portal's context path
 	*/
-	public java.util.List<java.lang.String> getHeaderPortalCss() {
+	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getHeaderPortalCss() {
 		return _portlet.getHeaderPortalCss();
 	}
 
@@ -1739,7 +1739,7 @@ public class PortletWrapper implements Portlet {
 	the page's header relative to the portal's context path
 	*/
 	public void setHeaderPortalCss(
-		java.util.List<java.lang.String> headerPortalCss) {
+		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> headerPortalCss) {
 		_portlet.setHeaderPortalCss(headerPortalCss);
 	}
 
@@ -1750,7 +1750,7 @@ public class PortletWrapper implements Portlet {
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portlet's context path
 	*/
-	public java.util.List<java.lang.String> getHeaderPortletCss() {
+	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getHeaderPortletCss() {
 		return _portlet.getHeaderPortletCss();
 	}
 
@@ -1762,7 +1762,7 @@ public class PortletWrapper implements Portlet {
 	the page's header relative to the portlet's context path
 	*/
 	public void setHeaderPortletCss(
-		java.util.List<java.lang.String> headerPortletCss) {
+		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> headerPortletCss) {
 		_portlet.setHeaderPortletCss(headerPortletCss);
 	}
 
@@ -1773,7 +1773,7 @@ public class PortletWrapper implements Portlet {
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portal's context path
 	*/
-	public java.util.List<java.lang.String> getHeaderPortalJavaScript() {
+	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getHeaderPortalJavaScript() {
 		return _portlet.getHeaderPortalJavaScript();
 	}
 
@@ -1786,7 +1786,7 @@ public class PortletWrapper implements Portlet {
 	path
 	*/
 	public void setHeaderPortalJavaScript(
-		java.util.List<java.lang.String> headerPortalJavaScript) {
+		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> headerPortalJavaScript) {
 		_portlet.setHeaderPortalJavaScript(headerPortalJavaScript);
 	}
 
@@ -1797,7 +1797,7 @@ public class PortletWrapper implements Portlet {
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portlet's context path
 	*/
-	public java.util.List<java.lang.String> getHeaderPortletJavaScript() {
+	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getHeaderPortletJavaScript() {
 		return _portlet.getHeaderPortletJavaScript();
 	}
 
@@ -1810,7 +1810,7 @@ public class PortletWrapper implements Portlet {
 	context path
 	*/
 	public void setHeaderPortletJavaScript(
-		java.util.List<java.lang.String> headerPortletJavaScript) {
+		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> headerPortletJavaScript) {
 		_portlet.setHeaderPortletJavaScript(headerPortletJavaScript);
 	}
 
@@ -1821,7 +1821,7 @@ public class PortletWrapper implements Portlet {
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portal's context path
 	*/
-	public java.util.List<java.lang.String> getFooterPortalCss() {
+	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getFooterPortalCss() {
 		return _portlet.getFooterPortalCss();
 	}
 
@@ -1833,7 +1833,7 @@ public class PortletWrapper implements Portlet {
 	the page's footer relative to the portal's context path
 	*/
 	public void setFooterPortalCss(
-		java.util.List<java.lang.String> footerPortalCss) {
+		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> footerPortalCss) {
 		_portlet.setFooterPortalCss(footerPortalCss);
 	}
 
@@ -1844,7 +1844,7 @@ public class PortletWrapper implements Portlet {
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portlet's context path
 	*/
-	public java.util.List<java.lang.String> getFooterPortletCss() {
+	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getFooterPortletCss() {
 		return _portlet.getFooterPortletCss();
 	}
 
@@ -1856,7 +1856,7 @@ public class PortletWrapper implements Portlet {
 	the page's footer relative to the portlet's context path
 	*/
 	public void setFooterPortletCss(
-		java.util.List<java.lang.String> footerPortletCss) {
+		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> footerPortletCss) {
 		_portlet.setFooterPortletCss(footerPortletCss);
 	}
 
@@ -1867,7 +1867,7 @@ public class PortletWrapper implements Portlet {
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portal's context path
 	*/
-	public java.util.List<java.lang.String> getFooterPortalJavaScript() {
+	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getFooterPortalJavaScript() {
 		return _portlet.getFooterPortalJavaScript();
 	}
 
@@ -1880,7 +1880,7 @@ public class PortletWrapper implements Portlet {
 	path
 	*/
 	public void setFooterPortalJavaScript(
-		java.util.List<java.lang.String> footerPortalJavaScript) {
+		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> footerPortalJavaScript) {
 		_portlet.setFooterPortalJavaScript(footerPortalJavaScript);
 	}
 
@@ -1891,7 +1891,7 @@ public class PortletWrapper implements Portlet {
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portlet's context path
 	*/
-	public java.util.List<java.lang.String> getFooterPortletJavaScript() {
+	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getFooterPortletJavaScript() {
 		return _portlet.getFooterPortletJavaScript();
 	}
 
@@ -1904,7 +1904,7 @@ public class PortletWrapper implements Portlet {
 	context path
 	*/
 	public void setFooterPortletJavaScript(
-		java.util.List<java.lang.String> footerPortletJavaScript) {
+		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> footerPortletJavaScript) {
 		_portlet.setFooterPortletJavaScript(footerPortletJavaScript);
 	}
 

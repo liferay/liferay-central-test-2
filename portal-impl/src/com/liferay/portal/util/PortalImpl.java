@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
+import com.liferay.portal.kernel.portlet.PortletResource;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.HttpMethods;
@@ -2934,15 +2935,34 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getStaticResourceURL(
+		HttpServletRequest request, String contextPath,
+		PortletResource portletResource, long timestamp) {
+
+		String url = portletResource.getPath();
+
+		if (!HttpUtil.hasProtocol(url)) {
+			if (portletResource.isSingleton()) {
+				timestamp = 0;
+			}
+
+			String uri = contextPath + portletResource.getPath();
+
+			url = PortalUtil.getStaticResourceURL(request,  uri, timestamp);
+		}
+
+		return url;
+	}
+
+	public String getStaticResourceURL(
 		HttpServletRequest request, String uri) {
 
-		return getStaticResourceURL(request, uri, null, 0);
+		return getStaticResourceURL(request, uri, (String)null, 0);
 	}
 
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri, long timestamp) {
 
-		return getStaticResourceURL(request, uri, null, timestamp);
+		return getStaticResourceURL(request, uri, (String)null, timestamp);
 	}
 
 	public String getStaticResourceURL(

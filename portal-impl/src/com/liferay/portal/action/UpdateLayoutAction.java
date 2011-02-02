@@ -16,10 +16,10 @@ package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.portlet.PortletResource;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -48,6 +48,7 @@ import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.portlet.PortletPreferences;
@@ -281,10 +282,33 @@ public class UpdateLayoutAction extends Action {
 		}
 	}
 
+	protected void addResourcePaths(
+		HttpServletRequest request, String contextPath,
+		List<PortletResource> portletResources, long timestamp,
+		boolean portletOnLayout, Set<String> resourcePaths) {
+
+		for (PortletResource portletResource : portletResources) {
+			if (portletOnLayout && portletResource.isSingleton()) {
+				continue;
+			}
+
+			String url = PortalUtil.getStaticResourceURL(
+				request, contextPath, portletResource, timestamp);
+
+			resourcePaths.add(url);
+		}
+	}
+
 	protected void populatePortletJSONObject(
 			HttpServletRequest request, StringServletResponse stringResponse,
 			Portlet portlet, JSONObject jsonObject)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		LayoutTypePortlet layoutTypePortlet =
+			themeDisplay.getLayoutTypePortlet();
 
 		jsonObject.put("refresh", false);
 		jsonObject.put("portletHTML", stringResponse.getString().trim());
@@ -294,97 +318,47 @@ public class UpdateLayoutAction extends Action {
 		Set<String> headerCssSet = new LinkedHashSet<String>();
 		Set<String> headerJavaScriptSet = new LinkedHashSet<String>();
 
-		for (String footerPortalCss : portlet.getFooterPortalCss()) {
-			if (!HttpUtil.hasProtocol(footerPortalCss)) {
-				footerPortalCss = PortalUtil.getStaticResourceURL(
-					request, PortalUtil.getPathContext() + footerPortalCss,
-					portlet.getTimestamp());
-			}
+		boolean portletOnLayout = false;
 
-			footerCssSet.add(footerPortalCss);
+		for (Portlet layoutPortlet : layoutTypePortlet.getAllPortlets()) {
+			String rootPortletId = portlet.getRootPortletId();
+			String layoutRootPortletId = layoutPortlet.getRootPortletId();
+
+			if (rootPortletId.equals(layoutRootPortletId)) {
+				portletOnLayout = true;
+
+				break;
+			}
 		}
 
-		for (String footerPortalJavaScript :
-				portlet.getFooterPortalJavaScript()) {
+		long timestamp = portlet.getTimestamp();
+		String portalContextPath = PortalUtil.getPathContext();
+		String portletContextPath = portlet.getStaticResourcePath();
 
-			if (!HttpUtil.hasProtocol(footerPortalJavaScript)) {
-				footerPortalJavaScript = PortalUtil.getStaticResourceURL(
-					request,
-					PortalUtil.getPathContext() + footerPortalJavaScript,
-					portlet.getTimestamp());
-			}
-
-			footerJavaScriptSet.add(footerPortalJavaScript);
-		}
-
-		for (String footerPortletCss : portlet.getFooterPortletCss()) {
-			if (!HttpUtil.hasProtocol(footerPortletCss)) {
-				footerPortletCss = PortalUtil.getStaticResourceURL(
-					request, portlet.getStaticResourcePath() + footerPortletCss,
-					portlet.getTimestamp());
-			}
-
-			footerCssSet.add(footerPortletCss);
-		}
-
-		for (String footerPortletJavaScript :
-				portlet.getFooterPortletJavaScript()) {
-
-			if (!HttpUtil.hasProtocol(footerPortletJavaScript)) {
-				footerPortletJavaScript = PortalUtil.getStaticResourceURL(
-					request,
-					portlet.getStaticResourcePath() + footerPortletJavaScript,
-					portlet.getTimestamp());
-			}
-
-			footerJavaScriptSet.add(footerPortletJavaScript);
-		}
-
-		for (String headerPortalCss : portlet.getHeaderPortalCss()) {
-			if (!HttpUtil.hasProtocol(headerPortalCss)) {
-				headerPortalCss = PortalUtil.getStaticResourceURL(
-					request, PortalUtil.getPathContext() + headerPortalCss,
-					portlet.getTimestamp());
-			}
-
-			headerCssSet.add(headerPortalCss);
-		}
-
-		for (String headerPortalJavaScript :
-				portlet.getHeaderPortalJavaScript()) {
-
-			if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
-				headerPortalJavaScript = PortalUtil.getStaticResourceURL(
-					request,
-					PortalUtil.getPathContext() + headerPortalJavaScript,
-					portlet.getTimestamp());
-			}
-
-			headerJavaScriptSet.add(headerPortalJavaScript);
-		}
-
-		for (String headerPortletCss : portlet.getHeaderPortletCss()) {
-			if (!HttpUtil.hasProtocol(headerPortletCss)) {
-				headerPortletCss = PortalUtil.getStaticResourceURL(
-					request, portlet.getStaticResourcePath() + headerPortletCss,
-					portlet.getTimestamp());
-			}
-
-			headerCssSet.add(headerPortletCss);
-		}
-
-		for (String headerPortletJavaScript :
-				portlet.getHeaderPortletJavaScript()) {
-
-			if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
-				headerPortletJavaScript = PortalUtil.getStaticResourceURL(
-					request,
-					portlet.getStaticResourcePath() + headerPortletJavaScript,
-					portlet.getTimestamp());
-			}
-
-			headerJavaScriptSet.add(headerPortletJavaScript);
-		}
+		addResourcePaths(
+			request, portalContextPath, portlet.getFooterPortalCss(),
+			timestamp, portletOnLayout, footerCssSet);
+		addResourcePaths(
+			request, portalContextPath, portlet.getFooterPortalJavaScript(),
+			timestamp, portletOnLayout, footerJavaScriptSet);
+		addResourcePaths(
+			request, portletContextPath, portlet.getFooterPortletCss(),
+			timestamp, portletOnLayout, footerCssSet);
+		addResourcePaths(
+			request, portletContextPath, portlet.getFooterPortletJavaScript(),
+			timestamp, portletOnLayout, footerJavaScriptSet);
+		addResourcePaths(
+			request, portalContextPath, portlet.getHeaderPortalCss(),
+			timestamp, portletOnLayout, headerCssSet);
+		addResourcePaths(
+			request, portalContextPath, portlet.getHeaderPortalJavaScript(),
+			timestamp, portletOnLayout, headerJavaScriptSet);
+		addResourcePaths(
+			request, portletContextPath, portlet.getHeaderPortletCss(),
+			timestamp, portletOnLayout, headerCssSet);
+		addResourcePaths(
+			request, portletContextPath, portlet.getHeaderPortletJavaScript(),
+			timestamp, portletOnLayout, headerJavaScriptSet);
 
 		String footerCssPaths = JSONFactoryUtil.serialize(
 			footerCssSet.toArray(new String[footerCssSet.size()]));
