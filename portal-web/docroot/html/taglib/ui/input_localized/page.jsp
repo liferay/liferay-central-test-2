@@ -64,11 +64,11 @@ String mainLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERL
 						continue;
 					}
 
-					languageId = LocaleUtil.toLanguageId(locales[i]);
-					String languageValue = LocalizationUtil.getLocalization(xml, languageId, false);
+					String selLanguageId = LocaleUtil.toLanguageId(locales[i]);
+					String languageValue = LocalizationUtil.getLocalization(xml, selLanguageId, false);
 
-					if (Validator.isNotNull(languageValue) || (request.getParameter(name + StringPool.UNDERLINE + languageId) != null)) {
-						languageIds.add(languageId);
+					if (Validator.isNotNull(languageValue) || (request.getParameter(name + StringPool.UNDERLINE + selLanguageId) != null)) {
+						languageIds.add(selLanguageId);
 					}
 				}
 			}
@@ -113,15 +113,15 @@ String mainLanguageValue = ParamUtil.getString(request, name + StringPool.UNDERL
 
 										String optionStyle = StringPool.BLANK;
 
-										languageId = LocaleUtil.toLanguageId(curLocale);
-										String languageValue = LocalizationUtil.getLocalization(xml, languageId, false);
+										String selLanguageId = LocaleUtil.toLanguageId(curLocale);
+										String languageValue = LocalizationUtil.getLocalization(xml, selLanguageId, false);
 
 										if ((Validator.isNotNull(xml)) && Validator.isNotNull(languageValue)) {
 											optionStyle = "style=\"font-weight: bold\"";
 										}
 									%>
 
-										<option <%= (curLanguageId.equals(languageId)) ? "selected" : "" %> <%= optionStyle %> value="<%= languageId %>"><%= curLocale.getDisplayName(locale) %></option>
+										<option <%= (curLanguageId.equals(selLanguageId)) ? "selected" : "" %> <%= optionStyle %> value="<%= selLanguageId %>"><%= curLocale.getDisplayName(locale) %></option>
 
 									<%
 									}
