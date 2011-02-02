@@ -294,7 +294,7 @@ public class LocalizationImpl implements Localization {
 		for (Locale locale : locales) {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
-			map.put(locale, getLocalization(xml, languageId));
+			map.put(locale, getLocalization(xml, languageId, false));
 		}
 
 		return map;
