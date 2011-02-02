@@ -1616,10 +1616,18 @@ public class StringUtil {
 			Matcher matcher = pattern.matcher(token);
 
 			if (matcher.find()) {
-				String highlightedToken = matcher.replaceAll(
-					highlight1 + matcher.group() + highlight2);
+				StringBuffer hightlighted = new StringBuffer();
 
-				sb.append(highlightedToken);
+				do {
+					matcher.appendReplacement(
+						hightlighted, highlight1 + matcher.group() +
+						highlight2);
+				}
+				while (matcher.find());
+
+				matcher.appendTail(hightlighted);
+
+				sb.append(hightlighted);
 			}
 			else {
 				sb.append(token);
