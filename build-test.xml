@@ -79,10 +79,21 @@
 			</then>
 		</if>
 
-		<antcall target="create-ant-script">
-			<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
-			<param name="ant.script.template" value="${test.ant.script.template}" />
-		</antcall>
+		<if>
+			<equals arg1="${test.ant.script.template}" arg2="ant-script-tck.xml" />
+			<then>
+				<antcall target="create-ant-script">
+					<param name="ant.script.file.name" value="build-test-${test.ant.script.command}-trunk.xml" />
+					<param name="ant.script.template" value="${test.ant.script.template}" />
+				</antcall>
+			</then>
+			<else>
+				<antcall target="create-ant-script">
+					<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
+					<param name="ant.script.template" value="${test.ant.script.template}" />
+				</antcall>
+			</else>
+		</if>
 	</target>
 
 	<target name="build-test-ant-script-db-upgrade">
