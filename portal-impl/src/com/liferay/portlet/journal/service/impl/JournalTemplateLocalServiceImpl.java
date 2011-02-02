@@ -32,6 +32,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.forms.util.FormsUtil;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.RequiredTemplateException;
@@ -79,7 +80,7 @@ public class JournalTemplateLocalServiceImpl
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {
-					xsl = JournalUtil.formatXML(xsl);
+					xsl = FormsUtil.formatXML(xsl);
 				}
 			}
 		}
@@ -502,7 +503,7 @@ public class JournalTemplateLocalServiceImpl
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {
-					xsl = JournalUtil.formatXML(xsl);
+					xsl = FormsUtil.formatXML(xsl);
 				}
 			}
 		}

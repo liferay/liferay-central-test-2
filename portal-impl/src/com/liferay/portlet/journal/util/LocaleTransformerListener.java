@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portlet.forms.util.FormsUtil;
 
 import java.util.List;
 
@@ -95,7 +96,7 @@ public class LocaleTransformerListener extends TransformerListener {
 
 			replace(root);
 
-			xml = JournalUtil.formatXML(doc);
+			xml = FormsUtil.formatXML(doc);
 		}
 		catch (Exception e) {
 			_log.error(e);

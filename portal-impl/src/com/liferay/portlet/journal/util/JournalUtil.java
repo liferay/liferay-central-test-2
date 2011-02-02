@@ -52,6 +52,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
+import com.liferay.portlet.forms.util.FormsUtil;
 import com.liferay.portlet.journal.TransformException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -68,9 +69,6 @@ import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleVersionComparator;
 import com.liferay.util.ContentUtil;
 import com.liferay.util.FiniteUniqueStack;
-import com.liferay.util.xml.XMLFormatter;
-
-import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -92,8 +90,6 @@ import javax.portlet.PortletSession;
 public class JournalUtil {
 
 	public static final int MAX_STACK_SIZE = 20;
-
-	public static final String XML_INDENT = "  ";
 
 	public static void addAllReservedEls(
 		Element root, Map<String, String> tokens, JournalArticle article) {
@@ -279,26 +275,6 @@ public class JournalUtil {
 
 	public static String formatVM(String vm) {
 		return vm;
-	}
-
-	public static String formatXML(Document doc) throws IOException {
-		return doc.formattedString(XML_INDENT);
-	}
-
-	public static String formatXML(String xml)
-		throws org.dom4j.DocumentException, IOException {
-
-		// This is only supposed to format your xml, however, it will also
-		// unwantingly change &#169; and other characters like it into their
-		// respective readable versions
-
-		xml = StringUtil.replace(xml, "&#", "[$SPECIAL_CHARACTER$]");
-
-		xml = XMLFormatter.toString(xml, XML_INDENT);
-
-		xml = StringUtil.replace(xml, "[$SPECIAL_CHARACTER$]", "&#");
-
-		return xml;
 	}
 
 	public static OrderByComparator getArticleOrderByComparator(
@@ -806,7 +782,7 @@ public class JournalUtil {
 				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 			_mergeArticleContentDelete(curRoot, newDocument);
 
-			curContent = JournalUtil.formatXML(curDocument);
+			curContent = FormsUtil.formatXML(curDocument);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -866,7 +842,7 @@ public class JournalUtil {
 
 			removeArticleLocale(root, languageId);
 
-			content = formatXML(doc);
+			content = FormsUtil.formatXML(doc);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -888,7 +864,7 @@ public class JournalUtil {
 
 			_removeOldContent(path, contentRoot, xsdDoc);
 
-			content = formatXML(contentDoc);
+			content = FormsUtil.formatXML(contentDoc);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

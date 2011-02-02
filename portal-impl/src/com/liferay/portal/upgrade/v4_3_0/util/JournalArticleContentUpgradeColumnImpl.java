@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.upgrade.util.Table;
+import com.liferay.portlet.forms.util.FormsUtil;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
-import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PKParser;
 
 import java.util.Iterator;
@@ -99,7 +99,7 @@ public class JournalArticleContentUpgradeColumnImpl
 				oldCompanyId, newCompanyId.longValue(), groupId.longValue(),
 				articleId, version.doubleValue(), root);
 
-			content = JournalUtil.formatXML(doc);
+			content = FormsUtil.formatXML(doc);
 		}
 		catch (Exception e) {
 			_log.error(

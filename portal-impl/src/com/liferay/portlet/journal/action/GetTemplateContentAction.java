@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.action;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.forms.util.FormsUtil;
 import com.liferay.portlet.journal.model.JournalTemplateConstants;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.JS;
@@ -52,7 +53,7 @@ public class GetTemplateContentAction extends Action {
 					xslContent = JournalUtil.formatVM(xslContent);
 				}
 				else {
-					xslContent = JournalUtil.formatXML(xslContent);
+					xslContent = FormsUtil.formatXML(xslContent);
 				}
 			}
 

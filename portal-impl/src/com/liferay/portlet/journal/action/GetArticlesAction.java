@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.forms.util.FormsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
@@ -191,7 +192,7 @@ public class GetArticlesAction extends Action {
 			JournalUtil.addAllReservedEls(resultEl, tokens, article);
 		}
 
-		return JournalUtil.formatXML(resultsDoc).getBytes(StringPool.UTF8);
+		return FormsUtil.formatXML(resultsDoc).getBytes(StringPool.UTF8);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(GetArticlesAction.class);
