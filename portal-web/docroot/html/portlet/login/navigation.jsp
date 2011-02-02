@@ -89,15 +89,23 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 			</c:if>
 
 			<c:if test="<%= showFacebookConnectIcon %>">
-				<portlet:actionURL var="facebookConnectURL">
+				<portlet:renderURL var="loginRedirect" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+					<portlet:param name="struts_action" value="/login/login_redirect" />
+				</portlet:renderURL>
+
+				<portlet:renderURL var="facebookConnectURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 					<portlet:param name="struts_action" value="/login/facebook_connect" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-				</portlet:actionURL>
+					<portlet:param name="redirect" value="<%= HtmlUtil.escapeURL(loginRedirect.toString()) %>" />
+				</portlet:renderURL>
+
+				<%
+				String taglibOpenFacebookConnectLoginWindow = "javascript:var facebookConnectLoginWindow = window.open('" + facebookConnectURL.toString() + "','facebook', 'align=center,directories=no,height=700,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=1000'); void(''); facebookConnectLoginWindow.focus();";
+				%>
 
 				<liferay-ui:icon
 					image="../social_bookmarks/facebook"
 					message="facebook"
-					url="<%= facebookConnectURL %>"
+					url="<%= taglibOpenFacebookConnectLoginWindow %>"
 				/>
 			</c:if>
 

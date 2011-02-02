@@ -600,7 +600,7 @@
 	<definition name="portlet.enterprise_admin.test_opensso_configuration" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_opensso_configuration.jsp" />
 	</definition>
-	
+
 	<definition name="portlet.enterprise_admin.test_cas_configuration" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_cas_configuration.jsp" />
 	</definition>
@@ -861,8 +861,8 @@
 		<put name="portlet_content" value="/portlet/login/create_anonymous_account.jsp" />
 	</definition>
 
-	<definition name="portlet.login.facebook_add_user" extends="portlet.login">
-		<put name="portlet_content" value="/portlet/login/facebook_add_user.jsp" />
+	<definition name="portlet.login.facebook_login" extends="portlet.login">
+		<put name="portlet_content" value="/portlet/login/facebook_login.jsp" />
 	</definition>
 
 	<definition name="portlet.login.forgot_password" extends="portlet.login">

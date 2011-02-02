@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.facebook.FacebookConnectUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -31,20 +30,14 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLFactoryUtil;
 
 import java.util.Calendar;
 import java.util.Locale;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletMode;
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletURL;
-import javax.portlet.WindowState;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,46 +49,23 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Wilson Man
+ * @author Sergio González
  */
 public class FacebookConnectAction extends PortletAction {
 
-	public void processAction(
+	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long companyId = themeDisplay.getCompanyId();
-
-		if (!FacebookConnectUtil.isEnabled(companyId)) {
-			return;
+		if (!FacebookConnectUtil.isEnabled(themeDisplay.getCompanyId())) {
+			return null;
 		}
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
-		if (cmd.equals(Constants.ADD)) {
-			addUser(actionRequest, actionResponse, themeDisplay);
-		}
-		else {
-			String facebookConnectRedirectURL =
-				FacebookConnectUtil.getRedirectURL(companyId);
-
-			facebookConnectRedirectURL = HttpUtil.addParameter(
-				facebookConnectRedirectURL, "redirect",
-				ParamUtil.getString(actionRequest, "redirect"));
-
-			String redirect = HttpUtil.addParameter(
-				FacebookConnectUtil.getAuthURL(companyId), "client_id",
-				FacebookConnectUtil.getAppId(companyId));
-
-			redirect = HttpUtil.addParameter(
-				redirect, "redirect_uri", facebookConnectRedirectURL);
-			redirect = HttpUtil.addParameter(redirect, "scope", "email");
-
-			actionResponse.sendRedirect(redirect);
-		}
+		return mapping.findForward("portlet.login.facebook_login");
 	}
 
 	public ActionForward strutsExecute(
@@ -126,7 +96,14 @@ public class FacebookConnectAction extends PortletAction {
 			setFacebookCredentials(session, companyId, token);
 		}
 
-		redirect = getRedirect(request, themeDisplay);
+		HttpSession session = request.getSession();
+
+		if ((session.getAttribute(WebKeys.FACEBOOK_ACCESS_TOKEN) == null) ||
+			(session.getAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS) ==
+				null)) {
+
+			addUser(request, themeDisplay);
+		}
 
 		response.sendRedirect(redirect);
 
@@ -134,12 +111,8 @@ public class FacebookConnectAction extends PortletAction {
 	}
 
 	protected void addUser(
-			ActionRequest actionRequest, ActionResponse actionResponse,
-			ThemeDisplay themeDisplay)
+			HttpServletRequest request, ThemeDisplay themeDisplay)
 		throws Exception {
-
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			actionRequest);
 
 		request = PortalUtil.getOriginalServletRequest(request);
 
@@ -210,14 +183,6 @@ public class FacebookConnectAction extends PortletAction {
 			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 
 		session.setAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);
-
-		String redirect = ParamUtil.getString(actionRequest, "redirect");
-
-		if (Validator.isNull(redirect)) {
-			redirect = StringPool.SLASH;
-		}
-
-		actionResponse.sendRedirect(redirect);
 	}
 
 	protected String getAccessToken(
@@ -296,37 +261,6 @@ public class FacebookConnectAction extends PortletAction {
 						WebKeys.FACEBOOK_USER_EMAIL_ADDRESS);
 				}
 			}
-		}
-	}
-
-	protected String getRedirect(
-			HttpServletRequest request, ThemeDisplay themeDisplay)
-		throws Exception {
-
-		HttpSession session = request.getSession();
-
-		String redirect = ParamUtil.getString(
-			request, "redirect", themeDisplay.getPathContext());
-
-		if ((session.getAttribute(WebKeys.FACEBOOK_ACCESS_TOKEN) != null) &&
-			(session.getAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS) !=
-				null)) {
-
-			return redirect;
-		}
-		else {
-			PortletURL portletURL = PortletURLFactoryUtil.create(
-				request, PortletKeys.LOGIN, themeDisplay.getPlid(),
-				PortletRequest.RENDER_PHASE);
-
-			portletURL.setWindowState(WindowState.MAXIMIZED);
-			portletURL.setPortletMode(PortletMode.VIEW);
-
-			portletURL.setParameter(
-				"struts_action", "/login/facebook_connect_add_user");
-			portletURL.setParameter("redirect", redirect);
-
-			return portletURL.toString();
 		}
 	}
 
