@@ -1712,6 +1712,20 @@
 		<header-portlet-css>/html/portlet/communities/css/main.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-communities</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>164</portlet-name>
+		<icon>/html/icons/login.png</icon>
+		<parent-struts-path>login</parent-struts-path>
+		<configuration-action-class>com.liferay.portlet.login.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-owned-by-group>true</preferences-owned-by-group>
+		<use-default-template>false</use-default-template>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>50</render-weight>
+		<header-portlet-css>/html/portlet/login/css/main.jsp</header-portlet-css>
+		<css-class-wrapper>portlet-login</css-class-wrapper>
+		<add-default-resource>true</add-default-resource>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
