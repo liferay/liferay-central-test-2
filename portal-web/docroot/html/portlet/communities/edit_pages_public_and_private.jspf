@@ -55,6 +55,12 @@
 			boundingBox: '#<portlet:namespace />communityPagesToolbar',
 			children: [
 				<c:if test="<%= (pagesCount > 0) && (liveGroup.isStaged() || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup() || portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES)) %>">
+					<liferay-portlet:actionURL plid="<%= plid %>" portletName="<%= PortletKeys.MY_PLACES %>" var="viewPagesURL">
+						<liferay-portlet:param name="struts_action" value="/my_places/view" />
+						<liferay-portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+						<liferay-portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
+					</liferay-portlet:actionURL>
+
 					{
 						handler: function(event) {
 							var groupWindow = window.open('<%= viewPagesURL %>');
@@ -102,7 +108,7 @@
 								{
 									after: {
 										success: function() {
-											exportPopup._syncUIPosAlign();
+											exportPopup.centered();
 										}
 									},
 									uri: '<%= exportPagesURL.toString() %>'
@@ -136,11 +142,27 @@
 							</portlet:renderURL>
 
 							importPopup.plug(
+								A.LoadingMask,
+								{
+									background: '#000'
+								}
+							);
+
+							importPopup.plug(
 								A.Plugin.IO,
 								{
 									after: {
 										success: function() {
-											importPopup._syncUIPosAlign();
+											importPopup.centered();
+
+											var form =  importPopup.get('contentBox').one('#<portlet:namespace />fm1');
+
+											form.on(
+												'submit',
+												function(event) {
+													importPopup.loadingmask.show();
+												}
+											);
 										}
 									},
 									uri: '<%= importPagesURL.toString() %>'

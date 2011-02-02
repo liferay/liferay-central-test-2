@@ -146,13 +146,6 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 						<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
 					</portlet:actionURL>
 
-					form.plug(
-						A.LoadingMask,
-						{
-							background: '#000'
-						}
-					);
-
 					form.attr('encoding', 'multipart/form-data');
 
 					submitForm(form, '<%= importPagesURL %>');

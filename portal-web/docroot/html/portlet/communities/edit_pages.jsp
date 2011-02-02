@@ -253,15 +253,6 @@ if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(Port
 
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 
-PortletURL viewPagesURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid, PortletRequest.ACTION_PHASE);
-
-viewPagesURL.setWindowState(WindowState.NORMAL);
-viewPagesURL.setPortletMode(PortletMode.VIEW);
-
-viewPagesURL.setParameter("struts_action", "/my_places/view");
-viewPagesURL.setParameter("groupId", String.valueOf(groupId));
-viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
-
 if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletKeys.MY_PAGES)) {
 	if (organization != null) {
 		EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
