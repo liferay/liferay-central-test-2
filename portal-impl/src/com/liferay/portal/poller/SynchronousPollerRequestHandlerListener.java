@@ -19,7 +19,7 @@ package com.liferay.portal.poller;
  */
 public class SynchronousPollerRequestHandlerListener
 	implements PollerRequestHandlerListener {
-	
+
 	public void waitNotification(long timeout) {
 		synchronized (this) {
 			try {

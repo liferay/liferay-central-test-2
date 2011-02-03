@@ -294,11 +294,15 @@ public class UpdateLayoutAction extends Action {
 		Set<String> headerCssSet = new LinkedHashSet<String>();
 		Set<String> headerJavaScriptSet = new LinkedHashSet<String>();
 
+		Portlet rootPortlet = portlet.getRootPortlet();
+
+		long timestamp = rootPortlet.getTimestamp();
+
 		for (String footerPortalCss : portlet.getFooterPortalCss()) {
 			if (!HttpUtil.hasProtocol(footerPortalCss)) {
 				footerPortalCss = PortalUtil.getStaticResourceURL(
 					request, PortalUtil.getPathContext() + footerPortalCss,
-					portlet.getTimestamp());
+					timestamp);
 			}
 
 			footerCssSet.add(footerPortalCss);
@@ -311,7 +315,7 @@ public class UpdateLayoutAction extends Action {
 				footerPortalJavaScript = PortalUtil.getStaticResourceURL(
 					request,
 					PortalUtil.getPathContext() + footerPortalJavaScript,
-					portlet.getTimestamp());
+					timestamp);
 			}
 
 			footerJavaScriptSet.add(footerPortalJavaScript);
@@ -321,7 +325,7 @@ public class UpdateLayoutAction extends Action {
 			if (!HttpUtil.hasProtocol(footerPortletCss)) {
 				footerPortletCss = PortalUtil.getStaticResourceURL(
 					request, portlet.getStaticResourcePath() + footerPortletCss,
-					portlet.getTimestamp());
+					timestamp);
 			}
 
 			footerCssSet.add(footerPortletCss);
@@ -334,7 +338,7 @@ public class UpdateLayoutAction extends Action {
 				footerPortletJavaScript = PortalUtil.getStaticResourceURL(
 					request,
 					portlet.getStaticResourcePath() + footerPortletJavaScript,
-					portlet.getTimestamp());
+					timestamp);
 			}
 
 			footerJavaScriptSet.add(footerPortletJavaScript);
@@ -344,7 +348,7 @@ public class UpdateLayoutAction extends Action {
 			if (!HttpUtil.hasProtocol(headerPortalCss)) {
 				headerPortalCss = PortalUtil.getStaticResourceURL(
 					request, PortalUtil.getPathContext() + headerPortalCss,
-					portlet.getTimestamp());
+					timestamp);
 			}
 
 			headerCssSet.add(headerPortalCss);
@@ -357,7 +361,7 @@ public class UpdateLayoutAction extends Action {
 				headerPortalJavaScript = PortalUtil.getStaticResourceURL(
 					request,
 					PortalUtil.getPathContext() + headerPortalJavaScript,
-					portlet.getTimestamp());
+					timestamp);
 			}
 
 			headerJavaScriptSet.add(headerPortalJavaScript);
@@ -367,7 +371,7 @@ public class UpdateLayoutAction extends Action {
 			if (!HttpUtil.hasProtocol(headerPortletCss)) {
 				headerPortletCss = PortalUtil.getStaticResourceURL(
 					request, portlet.getStaticResourcePath() + headerPortletCss,
-					portlet.getTimestamp());
+					timestamp);
 			}
 
 			headerCssSet.add(headerPortletCss);
@@ -380,7 +384,7 @@ public class UpdateLayoutAction extends Action {
 				headerPortletJavaScript = PortalUtil.getStaticResourceURL(
 					request,
 					portlet.getStaticResourcePath() + headerPortletJavaScript,
-					portlet.getTimestamp());
+					timestamp);
 			}
 
 			headerJavaScriptSet.add(headerPortletJavaScript);

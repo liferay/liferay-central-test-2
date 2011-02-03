@@ -38,6 +38,13 @@ public interface Portlet extends PortletModel {
 	public java.lang.String getRootPortletId();
 
 	/**
+	* Gets the root portlet represents this portlet instance.
+	*
+	* @return the root portlet represents this portlet instance
+	*/
+	public com.liferay.portal.model.Portlet getRootPortlet();
+
+	/**
 	* Gets the instance ID of the portlet.
 	*
 	* @return the instance ID of the portlet

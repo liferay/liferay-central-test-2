@@ -39,7 +39,7 @@ if (!casServerUrl.equals(StringPool.BLANK)) {
 %>
 <p>
 <liferay-ui:message key="server-url" />: <%=casServerUrl %> -  <liferay-ui:message key="<%=CasUtil.checkUrlAvailability(casServerUrl) %>" />
-</p>	
+</p>
 <%
 }
 %>
@@ -49,11 +49,10 @@ if (!casServiceUrl.equals(StringPool.BLANK)) {
 %>
 <p>
 <liferay-ui:message key="service-url" />: <%=casServiceUrl %> -  <liferay-ui:message key="<%=CasUtil.checkUrlAvailability(casServiceUrl) %>" />
-</p>	
+</p>
 <%
 }
 %>
-
 
 
 

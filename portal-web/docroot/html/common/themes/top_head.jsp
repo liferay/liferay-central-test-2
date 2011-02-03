@@ -79,7 +79,9 @@ if (layout != null) {
 	for (Portlet portlet : portlets) {
 		for (String headerPortalCss : portlet.getHeaderPortalCss()) {
 			if (!HttpUtil.hasProtocol(headerPortalCss)) {
-				headerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalCss, portlet.getTimestamp());
+				Portlet rootPortlet = portlet.getRootPortlet();
+
+				headerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalCss, rootPortlet.getTimestamp());
 			}
 
 			if (!headerPortalCssSet.contains(headerPortalCss)) {
@@ -98,7 +100,9 @@ if (layout != null) {
 	for (Portlet portlet : portlets) {
 		for (String headerPortletCss : portlet.getHeaderPortletCss()) {
 			if (!HttpUtil.hasProtocol(headerPortletCss)) {
-				headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletCss, portlet.getTimestamp());
+				Portlet rootPortlet = portlet.getRootPortlet();
+
+				headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletCss, rootPortlet.getTimestamp());
 			}
 
 			if (!headerPortletCssSet.contains(headerPortletCss)) {
@@ -130,7 +134,9 @@ if (layout != null) {
 	for (Portlet portlet : portlets) {
 		for (String headerPortalJavaScript : portlet.getHeaderPortalJavaScript()) {
 			if (!HttpUtil.hasProtocol(headerPortalJavaScript)) {
-				headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalJavaScript, portlet.getTimestamp());
+				Portlet rootPortlet = portlet.getRootPortlet();
+
+				headerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalJavaScript, rootPortlet.getTimestamp());
 			}
 
 			if (!headerPortalJavaScriptSet.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
@@ -149,7 +155,9 @@ if (layout != null) {
 	for (Portlet portlet : portlets) {
 		for (String headerPortletJavaScript : portlet.getHeaderPortletJavaScript()) {
 			if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
-				headerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletJavaScript, portlet.getTimestamp());
+				Portlet rootPortlet = portlet.getRootPortlet();
+
+				headerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletJavaScript, rootPortlet.getTimestamp());
 			}
 
 			if (!headerPortletJavaScriptSet.contains(headerPortletJavaScript)) {
