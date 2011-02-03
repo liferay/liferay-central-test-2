@@ -102,6 +102,23 @@ public class OpenSSOAutoLogin implements AutoLogin {
 
 			User user = null;
 
+			if (PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
+
+				try {
+					user = UserLocalServiceUtil.getUserByEmailAddress(
+						companyId, emailAddress);
+
+					ScreenNameGenerator screenNameGenerator =
+						ScreenNameGeneratorFactory.getInstance();
+
+					screenName = screenNameGenerator.generate(
+						companyId, user.getUserId(), emailAddress);
+				}
+				catch (NoSuchUserException nsue) {
+				}
+			}
+
 			if (ldapImportEnabled) {
 				user = PortalLDAPImporterUtil.importLDAPUserByScreenName(
 					companyId, screenName);
