@@ -216,6 +216,15 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
+	* Gets the root portlet represents this portlet instance.
+	*
+	* @return the root portlet represents this portlet instance
+	*/
+	public com.liferay.portal.model.Portlet getRootPortlet() {
+		return _portlet.getRootPortlet();
+	}
+
+	/**
 	* Gets the instance ID of the portlet.
 	*
 	* @return the instance ID of the portlet
