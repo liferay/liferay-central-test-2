@@ -26,6 +26,20 @@
 	margin-bottom: 10px;
 }
 
+.portlet-login .facebook-login {
+	clear: both;
+	margin-top: 300px;
+	text-align: center;
+}
+
+.portlet-login .facebook-login .button .aui-button-input {
+	background: url("<%= themeImagesPath %>/login/facebook_login_button.png") no-repeat scroll 0 50% transparent;
+	border: none;
+	color: #FFFFFF;
+	padding: 10px 10px 10px 30px;
+	text-shadow: none;
+}
+
 .portlet-login .navigation {
 	background: #eee;
 	border-top: 1px solid #BFBFBF;
