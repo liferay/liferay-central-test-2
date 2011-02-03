@@ -39,26 +39,26 @@ public class ValidatorTest extends TestCase {
 		}
 	}
 
-	public void testEmail() throws Exception {
-		String[] validEmails = {
+	public void testIsValidEmailAddress() throws Exception {
+		String[] validEmailAddresses = {
 			"email@domain.com", "firstname.lastname@domain.com",
 			"firstname+lastname@domain.com", "123456789@domain.com",
 			"email@domain-one.com", "____@domain.com", "email@domain.name",
 			"firstname-lastname@domain.com"
 		};
 
-		for (String validEmail : validEmails) {
-			assertTrue(Validator.isEmailAddress(validEmail));
+		for (String validEmailAddress : validEmailAddresses) {
+			assertTrue(Validator.isEmailAddress(validEmailAddress));
 		}
 
-		String[] invalidEmails = {
+		String[] invalidEmailAddresses = {
 			"domain",  "#$%^&.com", "joe smith <email@domain.com",
 			"email.domain.com", "email@domain@domain.com",
 			"email@domain.com (joe smith)", "email@domain"
 		};
 
-		for (String invalidEmail : invalidEmails) {
-			assertFalse(Validator.isEmailAddress(invalidEmail));
+		for (String invalidEmailAddress : invalidEmailAddresses) {
+			assertFalse(Validator.isEmailAddress(invalidEmailAddress));
 		}
 	}
 
