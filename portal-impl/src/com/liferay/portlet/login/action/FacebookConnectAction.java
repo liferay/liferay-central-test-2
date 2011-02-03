@@ -73,30 +73,27 @@ public class FacebookConnectAction extends PortletAction {
 			HttpServletResponse response)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long companyId = themeDisplay.getCompanyId();
-
-		if (!FacebookConnectUtil.isEnabled(companyId)) {
+		if (!FacebookConnectUtil.isEnabled(themeDisplay.getCompanyId())) {
 			return null;
 		}
+
+		HttpSession session = request.getSession();
 
 		String redirect = ParamUtil.getString(request, "redirect");
 
 		String code = ParamUtil.getString(request, "code");
 
-		String token = getAccessToken(companyId, redirect, code);
+		String token = getAccessToken(
+			themeDisplay.getCompanyId(), redirect, code);
 
 		if (Validator.isNotNull(token)) {
-			HttpSession session = request.getSession();
-
 			session.setAttribute(WebKeys.FACEBOOK_ACCESS_TOKEN, token);
 
-			setFacebookCredentials(session, companyId, token);
+			setFacebookCredentials(session, themeDisplay.getCompanyId(), token);
 		}
-
-		HttpSession session = request.getSession();
 
 		if ((session.getAttribute(WebKeys.FACEBOOK_ACCESS_TOKEN) == null) ||
 			(session.getAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS) ==
@@ -121,11 +118,10 @@ public class FacebookConnectAction extends PortletAction {
 		String token = (String)session.getAttribute(
 			WebKeys.FACEBOOK_ACCESS_TOKEN);
 
-		long companyId = themeDisplay.getCompanyId();
-
 		String url = HttpUtil.addParameter(
-			FacebookConnectUtil.getGraphURL(companyId) + "/me", "access_token",
-			token);
+			FacebookConnectUtil.getGraphURL(themeDisplay.getCompanyId()) +
+				"/me",
+			"access_token", token);
 
 		url = HttpUtil.addParameter(
 			url, "fields",
@@ -176,10 +172,10 @@ public class FacebookConnectAction extends PortletAction {
 		ServiceContext serviceContext = new ServiceContext();
 
 		UserLocalServiceUtil.addUser(
-			creatorUserId, companyId, autoPassword, password1, password2,
-			autoScreenName, screenName, emailAddress, facebookId, openId,
-			locale, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
+			creatorUserId, themeDisplay.getCompanyId(), autoPassword, password1,
+			password2, autoScreenName, screenName, emailAddress, facebookId,
+			openId, locale, firstName, middleName, lastName, prefixId, suffixId,
+			male, birthdayMonth, birthdayDay, birthdayYear, jobTitle, groupIds,
 			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 
 		session.setAttribute(WebKeys.FACEBOOK_USER_EMAIL_ADDRESS, emailAddress);

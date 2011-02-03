@@ -154,7 +154,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 					<aui:input name="emailAddress" type="hidden" />
 
 					<div id="<%= randomNamespace %>postReplyForm<%= i %>" style="display: none;">
-
 						<aui:input type="textarea" id='<%= randomNamespace + "postReplyBody" + i %>' label="comment" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' wrap="soft">
 							<aui:validator name="required" />
 						</aui:input>
@@ -493,20 +492,16 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 	</div>
 
 	<%
-	PortletURL portletURL = new PortletURLImpl(
-		request, PortletKeys.FAST_LOGIN, themeDisplay.getPlid(),
-		PortletRequest.RENDER_PHASE);
+	PortletURL loginURL = PortletURLFactoryUtil.create(request, PortletKeys.FAST_LOGIN, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-	portletURL.setWindowState(LiferayWindowState.POP_UP);
-	portletURL.setPortletMode(PortletMode.VIEW);
+	loginURL.setWindowState(LiferayWindowState.POP_UP);
+	loginURL.setPortletMode(PortletMode.VIEW);
 
-	portletURL.setParameter("saveLastPath", "0");
-	portletURL.setParameter("struts_action", "/login/login");
-
-	String loginURL = portletURL.toString();
+	loginURL.setParameter("saveLastPath", "0");
+	loginURL.setParameter("struts_action", "/login/login");
 	%>
 
-	<aui:script>
+	<aui:script use="aui-event-input">
 		function <%= randomNamespace %>deleteMessage(i) {
 			eval("var messageId = document.<%= namespace %><%= formName %>.<%= namespace %>messageId" + i + ".value;");
 
@@ -526,7 +521,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			if (!themeDisplay.isSignedIn()) {
 				window.randomNamespace = '<%= randomNamespace %>';
 
-				Liferay.Util.openIframePopUp("","","<%= loginURL %>","<%= namespace %>", Liferay.Language.get('sign-in'));
+				Liferay.Util.openIframePopUp('', '', '<%= loginURL.toString() %>', '<%= namespace %>', Liferay.Language.get('sign-in'));
 			}
 			else {
 				submitForm(document.<%= namespace %><%= formName %>);
@@ -565,9 +560,17 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.<%= namespace %><%= formName %>.<%= namespace %>messageId.value = messageId;
 			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
 		}
-	</aui:script>
 
-	<aui:script use="aui-event-input">
+		Liferay.provide(
+			window,
+			'<%= randomNamespace %>afterLogin',
+			function(emailAddress, randomNamespace){
+				document.<%= namespace %><%= formName %>.<%= namespace %>emailAddress.value = emailAddress;
+				submitForm(document.<portlet:namespace /><%= formName %>);
+			},
+			[]
+		);
+
 		var form = A.one(document.<%= namespace %><%= formName %>);
 
 		if (form) {
@@ -598,16 +601,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				);
 			}
 		}
-
-		Liferay.provide(
-			window,
-			'<%= randomNamespace %>afterLogin',
-			function(emailAddress, randomNamespace){
-				document.<%= namespace %><%= formName %>.<%= namespace %>emailAddress.value = emailAddress;
-				submitForm(document.<portlet:namespace /><%= formName %>);
-			},
-			[]
-		);
 	</aui:script>
 </c:if>
 

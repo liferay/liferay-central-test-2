@@ -150,19 +150,21 @@ public class LoginAction extends PortletAction {
 		else {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-			boolean doActionAfterLogin = ParamUtil.getBoolean(
-				actionRequest, "doActionAfterLogin");
-
 			if (Validator.isNotNull(redirect)) {
 				redirect = PortalUtil.escapeRedirect(redirect);
 
 				actionResponse.sendRedirect(redirect);
 			}
-			else if (doActionAfterLogin) {
-				return;
-			}
 			else {
-				actionResponse.sendRedirect(themeDisplay.getPathMain());
+				boolean doActionAfterLogin = ParamUtil.getBoolean(
+					actionRequest, "doActionAfterLogin");
+
+				if (doActionAfterLogin) {
+					return;
+				}
+				else {
+					actionResponse.sendRedirect(themeDisplay.getPathMain());
+				}
 			}
 		}
 	}

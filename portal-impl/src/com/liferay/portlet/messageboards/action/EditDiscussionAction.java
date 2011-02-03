@@ -181,33 +181,38 @@ public class EditDiscussionAction extends PortletAction {
 		String subject = ParamUtil.getString(actionRequest, "subject");
 		String body = ParamUtil.getString(actionRequest, "body");
 
-		String emailAddress = ParamUtil.getString(
-			actionRequest, "emailAddress");
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			MBMessage.class.getName(), actionRequest);
 
 		MBMessage message = null;
 
-		User user = null;
-
-		if (themeDisplay.isSignedIn()) {
-			user = themeDisplay.getUser();
-		}
-		else {
-			user = UserLocalServiceUtil.getUserByEmailAddress(
-				themeDisplay.getCompanyId(), emailAddress);
-
-			if ((user == null) ||
-				(user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE)) {
-
-				return  null;
-			}
-		}
-
 		if (messageId <= 0) {
 
 			// Add message
+
+			User user = null;
+
+			if (themeDisplay.isSignedIn()) {
+				user = themeDisplay.getUser();
+			}
+			else {
+				String emailAddress = ParamUtil.getString(
+					actionRequest, "emailAddress");
+
+				try {
+					user = UserLocalServiceUtil.getUserByEmailAddress(
+						themeDisplay.getCompanyId(), emailAddress);
+				}
+				catch (NoSuchUserException nsue) {
+					return null;
+				}
+
+				if (user.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
+					return  null;
+				}
+			}
+
+			String name = PrincipalThreadLocal.getName();
 
 			PrincipalThreadLocal.setName(user.getUserId());
 
@@ -218,7 +223,7 @@ public class EditDiscussionAction extends PortletAction {
 					threadId, parentMessageId, subject, body, serviceContext);
 			}
 			finally {
-				PrincipalThreadLocal.setName(null);
+				PrincipalThreadLocal.setName(name);
 			}
 		}
 		else {

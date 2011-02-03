@@ -26,7 +26,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.login.util.LoginUtil;
 
 import javax.portlet.PortletMode;
@@ -89,21 +89,11 @@ public class LoginAction extends Action {
 		}
 
 		if (Validator.isNull(redirect)) {
-			PortletURL portletURL = new PortletURLImpl(
+			PortletURL portletURL = PortletURLFactoryUtil.create(
 				request, PortletKeys.LOGIN, themeDisplay.getPlid(),
 				PortletRequest.RENDER_PHASE);
 
-			WindowState windowState = WindowState.MAXIMIZED;
-
-			String windowStateString = ParamUtil.getString(
-				request, "windowState");
-
-			if (Validator.isNotNull(windowStateString)) {
-				windowState = WindowStateFactory.getWindowState(
-					windowStateString);
-			}
-
-			portletURL.setWindowState(windowState);
+			portletURL.setWindowState(getWindowState(request));
 			portletURL.setPortletMode(PortletMode.VIEW);
 
 			portletURL.setParameter("saveLastPath", "0");
@@ -151,6 +141,20 @@ public class LoginAction extends Action {
 		response.sendRedirect(redirect);
 
 		return null;
+	}
+
+	protected WindowState getWindowState(HttpServletRequest request) {
+		WindowState windowState = WindowState.MAXIMIZED;
+
+		String windowStateString = ParamUtil.getString(
+			request, "windowState");
+
+		if (Validator.isNotNull(windowStateString)) {
+			windowState = WindowStateFactory.getWindowState(
+				windowStateString);
+		}
+
+		return windowState;
 	}
 
 }

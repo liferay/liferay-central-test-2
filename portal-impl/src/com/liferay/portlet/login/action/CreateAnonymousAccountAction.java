@@ -44,8 +44,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.PortletURLFactoryUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -85,9 +84,9 @@ public class CreateAnonymousAccountAction extends PortletAction {
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
 
-		PortletURL portletURL = new PortletURLImpl(
-			(ActionRequestImpl)actionRequest, PortletKeys.LOGIN,
-			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = PortletURLFactoryUtil.create(
+			actionRequest, PortletKeys.LOGIN, themeDisplay.getPlid(),
+			PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(LiferayWindowState.POP_UP);
 
@@ -116,18 +115,18 @@ public class CreateAnonymousAccountAction extends PortletAction {
 				}
 			}
 			else if (e instanceof CaptchaTextException ||
-				e instanceof CompanyMaxUsersException ||
-				e instanceof ContactFirstNameException ||
-				e instanceof ContactFullNameException ||
-				e instanceof ContactLastNameException ||
-				e instanceof EmailAddressException ||
-				e instanceof ReservedUserEmailAddressException ||
-				e instanceof UserEmailAddressException) {
+					 e instanceof CompanyMaxUsersException ||
+					 e instanceof ContactFirstNameException ||
+					 e instanceof ContactFullNameException ||
+					 e instanceof ContactLastNameException ||
+					 e instanceof EmailAddressException ||
+					 e instanceof ReservedUserEmailAddressException ||
+					 e instanceof UserEmailAddressException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName(), e);
 			}
 			else {
-				_log.error("Error creating anonymous account", e);
+				_log.error("Unable to create anonymous account", e);
 
 				PortalUtil.sendError(e, actionRequest, actionResponse);
 			}
@@ -142,8 +141,7 @@ public class CreateAnonymousAccountAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		renderResponse.setTitle(
-			themeDisplay.translate("anonymous-account"));
+		renderResponse.setTitle(themeDisplay.translate("anonymous-account"));
 
 		return mapping.findForward("portlet.login.create_anonymous_account");
 	}

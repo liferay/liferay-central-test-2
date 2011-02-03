@@ -74,28 +74,28 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 			<c:if test="<%= showSignInIcon %>">
 
 				<%
-				String urlSignIn = themeDisplay.getURLSignIn();
+				String signInURL = themeDisplay.getURLSignIn();
 
 				if (portletName.equals(PortletKeys.FAST_LOGIN)) {
-					urlSignIn = HttpUtil.addParameter(urlSignIn, "windowState", LiferayWindowState.POP_UP.toString());
+					signInURL = HttpUtil.addParameter(signInURL, "windowState", LiferayWindowState.POP_UP.toString());
 				}
 				%>
 
 				<liferay-ui:icon
 					image="status_online"
 					message="sign-in"
-					url='<%= urlSignIn %>'
+					url="<%= signInURL %>"
 				/>
 			</c:if>
 
 			<c:if test="<%= showFacebookConnectIcon %>">
-				<portlet:renderURL var="loginRedirect" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+				<portlet:renderURL var="loginRedirectURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 					<portlet:param name="struts_action" value="/login/login_redirect" />
 				</portlet:renderURL>
 
 				<portlet:renderURL var="facebookConnectURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 					<portlet:param name="struts_action" value="/login/facebook_connect" />
-					<portlet:param name="redirect" value="<%= HtmlUtil.escapeURL(loginRedirect.toString()) %>" />
+					<portlet:param name="redirect" value="<%= HtmlUtil.escapeURL(loginRedirectURL.toString()) %>" />
 				</portlet:renderURL>
 
 				<%
