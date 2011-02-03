@@ -16,6 +16,8 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 
+import javax.portlet.PortletRequest;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -29,6 +31,14 @@ public class PortletURLFactoryUtil {
 
 		return getPortletURLFactory().create(
 			request, portletName, plid, lifecycle);
+	}
+
+	public static LiferayPortletURL create(
+		PortletRequest portletRequest, String portletName, long plid,
+		String lifecycle) {
+
+		return getPortletURLFactory().create(
+			portletRequest, portletName, plid, lifecycle);
 	}
 
 	public static PortletURLFactory getPortletURLFactory() {
