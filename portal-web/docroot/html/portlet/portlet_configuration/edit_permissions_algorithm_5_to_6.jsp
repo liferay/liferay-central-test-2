@@ -51,7 +51,7 @@ if (Validator.isNull(modelResource)) {
 	selResourceName = LanguageUtil.get(pageContext, "portlet");
 }
 else {
-	PortalUtil.addPortletBreadcrumbEntry(request, selResourceDescription, null);
+	PortalUtil.addPortletBreadcrumbEntry(request, HtmlUtil.unescape(selResourceDescription), null);
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "permissions"), currentURL);
 }
 
@@ -150,7 +150,7 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			<c:otherwise>
 				<liferay-ui:header
 					backURL="<%= redirect %>"
-					title="<%= selResourceDescription %>"
+					title="<%= HtmlUtil.unescape(selResourceDescription) %>"
 			   />
 			</c:otherwise>
 		</c:choose>
