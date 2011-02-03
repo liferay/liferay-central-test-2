@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.poller;
 
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.Message;
 
 /**
  * @author Brian Wing Shun Chan
@@ -26,11 +27,15 @@ public interface PollerResponse {
 	public static final String POLLER_HINT_HIGH_CONNECTIVITY =
 		"pollerHintHighConnectivity";
 
-	public void setParameter(String name, JSONArray value);
+	public void close();
 
-	public void setParameter(String name, JSONObject value);
+	public void setParameter(String name, JSONArray value) throws PollerResponseClosedException;
 
-	public void setParameter(String name, String value);
+	public void setParameter(String name, JSONObject value) throws PollerResponseClosedException;
+
+	public void setParameter(String name, String value) throws PollerResponseClosedException;
+
+	public void setResponseMessage(Message responseMessage);
 
 	public JSONObject toJSONObject();
 

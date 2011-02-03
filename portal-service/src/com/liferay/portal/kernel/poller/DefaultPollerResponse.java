@@ -17,6 +17,8 @@ package com.liferay.portal.kernel.poller;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
@@ -33,16 +35,55 @@ public class DefaultPollerResponse implements PollerResponse {
 		_chunkId = chunkId;
 	}
 
-	public void setParameter(String name, JSONArray value) {
-		_parameterMap.put(name, value);
+	public void close() {
+		synchronized (this) {
+			if (Validator.isNotNull(_responseMessage)) {
+				MessageBusUtil.sendMessage(
+					_responseMessage.getDestinationName(), _responseMessage);
+
+				_responseMessage = null;
+			}
+		}
 	}
 
-	public void setParameter(String name, JSONObject value) {
-		_parameterMap.put(name, value);
+	public void setParameter(String name, JSONArray value)
+		throws PollerResponseClosedException {
+
+		synchronized (this) {
+			if (_responseMessage == null) {
+				throw new PollerResponseClosedException();
+			}
+
+			_parameterMap.put(name, value);
+		}
 	}
 
-	public void setParameter(String name, String value) {
-		_parameterMap.put(name, value);
+	public void setParameter(String name, JSONObject value)
+		throws PollerResponseClosedException {
+
+		synchronized (this) {
+			if (_responseMessage == null) {
+				throw new PollerResponseClosedException();
+			}
+
+			_parameterMap.put(name, value);
+		}
+	}
+
+	public void setParameter(String name, String value)
+		throws PollerResponseClosedException {
+		
+		synchronized (this) {
+			if (_responseMessage == null) {
+				throw new PollerResponseClosedException();
+			}
+
+			_parameterMap.put(name, value);
+		}
+	}
+
+	public void setResponseMessage(Message responseMessage) {
+		_responseMessage = responseMessage;
 	}
 
 	public JSONObject toJSONObject() {
@@ -85,5 +126,5 @@ public class DefaultPollerResponse implements PollerResponse {
 	private String _chunkId;
 	private Map<String, Object> _parameterMap = new HashMap<String, Object>();
 	private String _portletId;
-
+	private Message _responseMessage;
 }

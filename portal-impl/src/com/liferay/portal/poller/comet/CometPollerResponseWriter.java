@@ -20,56 +20,30 @@ import com.liferay.portal.kernel.poller.PollerException;
 import com.liferay.portal.kernel.poller.PollerResponse;
 import com.liferay.portal.kernel.poller.comet.CometResponse;
 import com.liferay.portal.kernel.poller.comet.CometSession;
+import com.liferay.portal.poller.JSONPollerResponseWriter;
 import com.liferay.portal.poller.PollerResponseWriter;
 
 /**
  * @author Edward Han
  * @author Brian Wing Shun Chan
  */
-public class CometPollerResponseWriter implements PollerResponseWriter {
+public class CometPollerResponseWriter extends JSONPollerResponseWriter {
 
 	public CometPollerResponseWriter(CometSession cometSession) {
 		_cometSession = cometSession;
 	}
 
-	public void close() throws PollerException {
+	@Override
+	protected void doClose() throws PollerException {
 		try {
-			_cometSession.close();
+			CometResponse cometResponse = _cometSession.getCometResponse();
+
+			cometResponse.writeData(getJSONArray().toString());
 		}
 		catch (Exception e) {
 			throw new PollerException(e);
 		}
 	}
 
-	public JSONArray getJSONArray() {
-		return null;
-	}
-
-	public void write(JSONArray jsonArray) throws PollerException {
-		write(jsonArray.toString());
-	}
-
-	public void write(JSONObject jsonObject) throws PollerException {
-		write(jsonObject.toString());
-	}
-
-	public void write(PollerResponse pollerResponse) throws PollerException {
-		write(pollerResponse.toJSONObject());
-	}
-
-	public void write(String data) throws PollerException {
-		synchronized (this) {
-			try {
-				CometResponse cometResponse = _cometSession.getCometResponse();
-
-				cometResponse.writeData(data);
-			}
-			catch (Exception e) {
-				throw new PollerException(e);
-			}
-		}
-	}
-
 	private CometSession _cometSession;
-
 }

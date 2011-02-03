@@ -22,9 +22,12 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -71,12 +74,26 @@ public class PollerServlet extends HttpServlet {
 		PollerResponseWriter pollerResponseWriter =
 			new JSONPollerResponseWriter();
 
+		SynchronousPollerRequestHandlerListener synchronousPollerRequestListener =
+			new SynchronousPollerRequestHandlerListener();
+
+		List<PollerRequestHandlerListener> listeners =
+			new ArrayList<PollerRequestHandlerListener>(1);
+
+		listeners.add(synchronousPollerRequestListener);
+
 		PollerRequestHandler pollerRequestHandler = new PollerRequestHandler(
-			request.getPathInfo(), pollerRequestString, pollerResponseWriter);
+			request.getPathInfo(), pollerRequestString, pollerResponseWriter,
+			listeners);
 
 		if (!pollerRequestHandler.processRequest()) {
 			return null;
 		}
+
+		synchronousPollerRequestListener.waitNotification(
+			PropsValues.POLLER_REQUEST_TIMEOUT);
+
+		pollerRequestHandler.shutdown();
 
 		JSONArray jsonArray = pollerResponseWriter.getJSONArray();
 
