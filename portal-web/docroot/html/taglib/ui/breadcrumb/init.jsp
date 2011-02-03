@@ -165,6 +165,8 @@ private void _buildPortletBreadcrumb(HttpServletRequest request, StringBundler s
 		String breadcrumbURL = portletBreadcrumb.getValue();
 
 		if (!CookieKeys.hasSessionId(request) && Validator.isNotNull(breadcrumbURL)) {
+			HttpSession session = request.getSession();
+
 			breadcrumbURL = PortalUtil.getURLWithSessionId(breadcrumbURL, session.getId());
 		}
 
