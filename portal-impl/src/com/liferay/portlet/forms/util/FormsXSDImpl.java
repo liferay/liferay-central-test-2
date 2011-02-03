@@ -143,13 +143,10 @@ public class FormsXSDImpl implements FormsXSD {
 		return getJSONArray(SAXReaderUtil.read(xml));
 	}
 
-	protected FreeMarkerContext getFreeMarkerContext(
+	protected Map<String, Object> getFieldContext(
 		Element dynamicElementElement) {
 
 		Map<String, Object> field = new HashMap<String, Object>();
-
-		FreeMarkerContext freeMarkerContext =
-			FreeMarkerEngineUtil.getWrappedRestrictedToolsContext();
 
 		Element metadataElement = dynamicElementElement.element("meta-data");
 
@@ -161,21 +158,32 @@ public class FormsXSDImpl implements FormsXSD {
 			}
 		}
 
-		FreeMarkerContext parentFreeMarkerContext = null;
-
-		Element parentElement = dynamicElementElement.getParent();
-
-		if (parentElement != null) {
-			parentFreeMarkerContext = getFreeMarkerContext(parentElement);
-		}
-
-		field.put("parentContext", parentFreeMarkerContext);
-
 		for (Attribute attribute : dynamicElementElement.attributes()) {
 			field.put(attribute.getName(), attribute.getValue());
 		}
 
-		freeMarkerContext.put("field", field);
+		return field;
+	}
+
+	protected FreeMarkerContext getFreeMarkerContext(
+		Element dynamicElementElement) {
+
+		Map<String, Object> fieldContext = getFieldContext(
+			dynamicElementElement);
+
+		FreeMarkerContext freeMarkerContext =
+			FreeMarkerEngineUtil.getWrappedRestrictedToolsContext();
+
+		Element parentElement = dynamicElementElement.getParent();
+
+		Map<String, Object> parentFieldContext = new HashMap<String, Object>();
+
+		if (parentElement != null) {
+			parentFieldContext = getFieldContext(parentElement);
+		}
+
+		freeMarkerContext.put("field", fieldContext);
+		freeMarkerContext.put("parentField", parentFieldContext);
 
 		return freeMarkerContext;
 	}
