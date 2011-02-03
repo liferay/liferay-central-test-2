@@ -336,6 +336,10 @@ public class ThemeDisplay implements Serializable {
 		return _serverPort;
 	}
 
+	public String getSessionId() {
+		return _sessionId;
+	}
+
 	public Theme getTheme() {
 		return _theme;
 	}
@@ -418,6 +422,10 @@ public class ThemeDisplay implements Serializable {
 
 	public long getUserId() {
 		return _user.getUserId();
+	}
+
+	public boolean isAddSessionIdToURL() {
+		return _addSessionIdToURL;
 	}
 
 	public boolean isFacebook() {
@@ -577,6 +585,10 @@ public class ThemeDisplay implements Serializable {
 
 	public void setAccount(Account account) {
 		_account = account;
+	}
+
+	public void setAddSessionIdToURL(boolean addSessionIdToURL) {
+		_addSessionIdToURL = addSessionIdToURL;
 	}
 
 	public void setCDNHost(String cdnHost) {
@@ -890,6 +902,10 @@ public class ThemeDisplay implements Serializable {
 		_serverPort = serverPort;
 	}
 
+	public void setSessionId(String sessionId) {
+		_sessionId = sessionId;
+	}
+
 	public void setShowAddContentIcon(boolean showAddContentIcon) {
 		_showAddContentIcon = showAddContentIcon;
 	}
@@ -1065,6 +1081,7 @@ public class ThemeDisplay implements Serializable {
 	private static Log _log = LogFactoryUtil.getLog(ThemeDisplay.class);
 
 	private Account _account;
+	private boolean _addSessionIdToURL = false;
 	private String _cdnHost = StringPool.BLANK;
 	private ColorScheme _colorScheme;
 	private Company _company;
@@ -1129,6 +1146,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _secure;
 	private String _serverName;
 	private int _serverPort;
+	private String _sessionId = StringPool.BLANK;
 	private boolean _showAddContentIcon;
 	private boolean _showAddContentIconPermission;
 	private boolean _showControlPanelIcon;
