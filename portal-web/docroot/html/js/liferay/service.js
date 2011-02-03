@@ -1067,3 +1067,16 @@ Liferay.Service.registerClass(
 		updatePage: true
 	}
 );
+
+Liferay.Service.register("Liferay.Service.Forms", "com.liferay.portlet.forms.service");
+
+Liferay.Service.registerClass(
+	Liferay.Service.Forms, "FormStructure",
+	{
+		addFormStructure: true,
+		deleteFormStructure: true,
+		fetchByG_F: true,
+		getFormStructure: true,
+		updateFormStructure: true
+	}
+);

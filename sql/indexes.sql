@@ -184,6 +184,19 @@ create index IX_CA9AFB7C on ExpandoValue (tableId, columnId);
 create unique index IX_D27B03E7 on ExpandoValue (tableId, columnId, classPK);
 create index IX_B71E92D5 on ExpandoValue (tableId, rowId_);
 
+create unique index IX_B80B8CE5 on FormStructure (formStructureId);
+create index IX_E629A755 on FormStructure (groupId);
+create unique index IX_70EC8285 on FormStructure (groupId, formStructureId);
+create index IX_20BB0B1F on FormStructure (uuid_);
+create unique index IX_E0EB7C6B on FormStructure (uuid_, groupId);
+
+create index IX_573FEE0B on FormStructureLink (formStructureId);
+create unique index IX_503C4CBB on FormStructureLink (formStructureId, className, classPK);
+create unique index IX_72DC1625 on FormStructureLink (formStructureLinkId);
+create index IX_20B7ABEF on FormStructureLink (structureId);
+create index IX_AD5983C5 on FormStructureLink (uuid_);
+create unique index IX_7AB35E85 on FormStructureLink (uuid_, groupId);
+
 create index IX_ABA5CEC2 on Group_ (companyId);
 create unique index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
 create unique index IX_5DE0BE11 on Group_ (companyId, classNameId, liveGroupId, name);
