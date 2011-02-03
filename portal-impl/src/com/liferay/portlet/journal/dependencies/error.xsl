@@ -19,7 +19,7 @@
 	<xsl:template match="/">
 		<div class="journal-template-error">
 			<span class="portlet-msg-error">
-				<xsl:value-of select="languageUtil:get($companyId, $locale, 'an-error-occurred-while-processing-the-template')" />
+				<xsl:value-of select="languageUtil:get($locale, 'an-error-occurred-while-processing-the-template')" />
 			</span>
 
 			<pre>
