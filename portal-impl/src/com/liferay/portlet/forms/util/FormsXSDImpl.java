@@ -168,15 +168,15 @@ public class FormsXSDImpl implements FormsXSD {
 	protected FreeMarkerContext getFreeMarkerContext(
 		Element dynamicElementElement) {
 
-		Map<String, Object> fieldContext = getFieldContext(
-			dynamicElementElement);
-
 		FreeMarkerContext freeMarkerContext =
 			FreeMarkerEngineUtil.getWrappedRestrictedToolsContext();
 
-		Element parentElement = dynamicElementElement.getParent();
+		Map<String, Object> fieldContext = getFieldContext(
+			dynamicElementElement);
 
 		Map<String, Object> parentFieldContext = new HashMap<String, Object>();
+
+		Element parentElement = dynamicElementElement.getParent();
 
 		if (parentElement != null) {
 			parentFieldContext = getFieldContext(parentElement);
