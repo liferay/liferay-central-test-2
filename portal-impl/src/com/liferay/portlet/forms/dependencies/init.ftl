@@ -1,4 +1,4 @@
-<#assign aui=PortalJspTagLibs["/WEB-INF/tld/liferay-aui.tld"] />
+<#assign aui = PortalJspTagLibs["/WEB-INF/tld/liferay-aui.tld"] />
 
 <#assign label = field.label!"">
 
@@ -6,8 +6,8 @@
 	<#assign label = "">
 </#if>
 
-<#assign parentType = "">
 <#assign parentName = "">
+<#assign parentType = "">
 
 <#if parentContext??>
 	<#assign parentName = parentContext.field.name!"">

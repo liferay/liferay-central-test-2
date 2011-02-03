@@ -161,14 +161,15 @@ public class FormsXSDImpl implements FormsXSD {
 			}
 		}
 
-		FreeMarkerContext parentContext = null;
+		FreeMarkerContext parentFreeMarkerContext = null;
+
 		Element parentElement = dynamicElementElement.getParent();
 
 		if (parentElement != null) {
-			parentContext = getFreeMarkerContext(parentElement);
+			parentFreeMarkerContext = getFreeMarkerContext(parentElement);
 		}
 
-		field.put("parentContext", parentContext);
+		field.put("parentContext", parentFreeMarkerContext);
 
 		for (Attribute attribute : dynamicElementElement.attributes()) {
 			field.put(attribute.getName(), attribute.getValue());
