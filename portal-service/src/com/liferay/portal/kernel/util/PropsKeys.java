@@ -296,7 +296,7 @@ public interface PropsKeys {
 	public static final String CAS_SERVICE_URL = "cas.service.url";
 
 	public static final String CAS_NO_SUCH_USER_REDIRECT_URL = "cas.no.such.user.redirect.url";
-	
+
 	public static final String CDN_HOST_HTTP = "cdn.host.http";
 
 	public static final String CDN_HOST_HTTPS = "cdn.host.https";
@@ -524,6 +524,10 @@ public interface PropsKeys {
 	public static final String DL_FILE_EXTENSIONS = "dl.file.extensions";
 
 	public static final String DL_FILE_EXTENSIONS_STRICT_CHECK = "dl.file.extensions.strict.check";
+
+	public static final String DL_FILE_GENERIC_EXTENSIONS = "dl.file.generic.extensions";
+
+	public static final String DL_FILE_GENERIC_NAMES = "dl.file.generic.names";
 
 	public static final String DL_FILE_ICONS = "dl.file.icons";
 

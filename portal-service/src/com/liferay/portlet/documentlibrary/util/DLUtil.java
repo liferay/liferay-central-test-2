@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
@@ -23,6 +24,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -265,8 +267,6 @@ public class DLUtil {
 	}
 
 	private DLUtil() {
-		_fileIcons = new HashSet<String>();
-
 		String[] fileIcons = null;
 
 		try {
@@ -294,55 +294,12 @@ public class DLUtil {
 			}
 		}
 
-		_genericNames = new HashMap<String, String>();
+		String[] genericNames = PropsUtil.getArray(
+			PropsKeys.DL_FILE_GENERIC_NAMES);
 
-		_genericNames.put("lar", "compressed");
-		_genericNames.put("rar", "compressed");
-		_genericNames.put("zip", "compressed");
-
-		_genericNames.put("doc", "document");
-		_genericNames.put("docx", "document");
-		_genericNames.put("rtf", "document");
-		_genericNames.put("odt", "document");
-
-		_genericNames.put("flv", "flash");
-		_genericNames.put("swf", "flash");
-
-		_genericNames.put("bmp", "image");
-		_genericNames.put("gif", "image");
-		_genericNames.put("jpeg", "image");
-		_genericNames.put("jpg", "image");
-		_genericNames.put("odg", "image");
-		_genericNames.put("png", "image");
-		_genericNames.put("svg", "image");
-
-		_genericNames.put("acc", "music");
-		_genericNames.put("mid", "music");
-		_genericNames.put("mp3", "music");
-		_genericNames.put("ogg", "music");
-		_genericNames.put("wav", "music");
-		_genericNames.put("wma", "music");
-
-		_genericNames.put("pdf", "pdf");
-
-		_genericNames.put("key", "presentation");
-		_genericNames.put("odp", "presentation");
-		_genericNames.put("pps", "presentation");
-		_genericNames.put("ppt", "presentation");
-		_genericNames.put("pptx", "presentation");
-
-		_genericNames.put("csv", "spreadsheet");
-		_genericNames.put("ods", "spreadsheet");
-		_genericNames.put("xls", "spreadsheet");
-		_genericNames.put("xlsx", "spreadsheet");
-
-		_genericNames.put("avi", "video");
-		_genericNames.put("mov", "video");
-		_genericNames.put("mp4", "video");
-		_genericNames.put("mpg", "video");
-		_genericNames.put("qt", "video");
-		_genericNames.put("rm", "video");
-		_genericNames.put("wmv", "video");
+		for (String genericName : genericNames) {
+			_populateGenericNamesMap(genericName);
+		}
 	}
 
 	private String _getFileIcon(String extension) {
@@ -363,6 +320,15 @@ public class DLUtil {
 		return genericName;
 	}
 
+	private void _populateGenericNamesMap(String genericName) {
+		String[] extensions = PropsUtil.getArray(
+			PropsKeys.DL_FILE_GENERIC_EXTENSIONS, new Filter(genericName));
+
+		for (String extension : extensions) {
+			_genericNames.put(extension, genericName);
+		}
+	}
+
 	private static final String _DEFAULT_GENERIC_NAME = "default";
 
 	private static final String _DEFAULT_FILE_ICON = "page";
@@ -371,7 +337,7 @@ public class DLUtil {
 
 	private static DLUtil _instance = new DLUtil();
 
-	private Map<String, String> _genericNames;
-	private Set<String> _fileIcons;
+	private Map<String, String> _genericNames = new HashMap<String, String>();
+	private Set<String> _fileIcons = new HashSet<String>();
 
 }

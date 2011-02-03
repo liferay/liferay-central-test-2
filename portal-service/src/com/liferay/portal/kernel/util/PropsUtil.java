@@ -66,7 +66,25 @@ public class PropsUtil {
 
 		try {
 			Object returnObj = PortalClassInvoker.invoke(
-				false, _getArrayMethodKey, key);
+				false, _getArrayMethodKey1, key);
+
+			if (returnObj != null) {
+				value = (String[])returnObj;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return value;
+	}
+
+	public static String[] getArray(String key, Filter filter) {
+		String[] value = null;
+
+		try {
+			Object returnObj = PortalClassInvoker.invoke(
+				false, _getArrayMethodKey2, key, filter);
 
 			if (returnObj != null) {
 				value = (String[])returnObj;
@@ -122,8 +140,10 @@ public class PropsUtil {
 
 	private static Log _log = LogFactoryUtil.getLog(PropsUtil.class);
 
-	private static MethodKey _getArrayMethodKey = new MethodKey(
+	private static MethodKey _getArrayMethodKey1 = new MethodKey(
 		_CLASS_NAME, "getArray", String.class);
+	private static MethodKey _getArrayMethodKey2 = new MethodKey(
+		_CLASS_NAME, "getArray", String.class, Filter.class);
 	private static MethodKey _getMethodKey1 = new MethodKey(
 		_CLASS_NAME, "get", String.class);
 	private static MethodKey _getMethodKey2 = new MethodKey(
