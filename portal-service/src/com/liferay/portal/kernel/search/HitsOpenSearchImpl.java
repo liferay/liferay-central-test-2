@@ -65,7 +65,12 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			SearchContext searchContext = SearchContextFactory.getInstance(
 				request);
 
-			searchContext.setGroupIds(new long[] {groupId});
+			if (groupId == 0) {
+				searchContext.setGroupIds(null);
+			}
+			else {
+				searchContext.setGroupIds(new long[] {groupId});
+			}
 
 			int end = startPage * itemsPerPage;
 
