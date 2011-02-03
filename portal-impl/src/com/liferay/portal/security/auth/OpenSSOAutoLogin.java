@@ -103,7 +103,8 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			User user = null;
 
 			if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
+					companyId,
+					PropsKeys.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE)) {
 
 				try {
 					user = UserLocalServiceUtil.getUserByEmailAddress(
