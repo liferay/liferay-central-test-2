@@ -118,14 +118,13 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_processingEvents = new HashSet<QName>();
 		_publishingEvents = new HashSet<QName>();
 		_publicRenderParameters = new HashSet<PublicRenderParameter>();
-		_rootPortlet = this;
 	}
 
 	/**
 	 * Constructs a portlet with the specified parameters.
 	 */
 	public PortletImpl(
-		String portletId, PluginPackage pluginPackage,
+		String portletId, Portlet rootPortlet, PluginPackage pluginPackage,
 		PluginSetting pluginSetting, long companyId, long timestamp,
 		String icon, String virtualPath, String strutsPath,
 		String parentStrutsPath, String portletName, String displayName,
@@ -166,9 +165,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
 		Set<QName> publishingEvents,
 		Set<PublicRenderParameter> publicRenderParameters,
-		PortletApp portletApp, Portlet rootPortlet) {
+		PortletApp portletApp) {
 
 		setPortletId(portletId);
+		_rootPortlet = rootPortlet;
 		_pluginPackage = pluginPackage;
 		_defaultPluginSetting = pluginSetting;
 		setCompanyId(companyId);
@@ -256,11 +256,19 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setPublishingEvents(publishingEvents);
 		setPublicRenderParameters(publicRenderParameters);
 		_portletApp = portletApp;
-		_rootPortlet = rootPortlet;
 
 		if (_instanceable) {
 			_clonedInstances = new Hashtable<String, Portlet>();
 		}
+	}
+
+	/**
+	 * Gets the root portlet of this portlet instance.
+	 *
+	 * @return the root portlet of this portlet instance
+	 */
+	public Portlet getRootPortlet() {
+		return _rootPortlet;
 	}
 
 	/**
@@ -270,15 +278,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public String getRootPortletId() {
 		return PortletConstants.getRootPortletId(getPortletId());
-	}
-
-	/**
-	 * Gets the root portlet represents this portlet instance.
-	 *
-	 * @return the root portlet represents this portlet instance
-	 */
-	public Portlet getRootPortlet() {
-		return _rootPortlet;
 	}
 
 	/**
@@ -3053,16 +3052,17 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public Object clone() {
 		Portlet portlet = new PortletImpl(
-			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
-			getCompanyId(), getTimestamp(), getIcon(), getVirtualPath(),
-			getStrutsPath(), getParentStrutsPath(), getPortletName(),
-			getDisplayName(), getPortletClass(), getConfigurationActionClass(),
-			getIndexerClass(), getOpenSearchClass(), getSchedulerEntries(),
-			getPortletURLClass(), getFriendlyURLMapperClass(),
-			getFriendlyURLMapping(), getFriendlyURLRoutes(),
-			getURLEncoderClass(), getPortletDataHandlerClass(),
-			getPortletLayoutListenerClass(), getPollerProcessorClass(),
-			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
+			getPortletId(), getRootPortlet(), getPluginPackage(),
+			getDefaultPluginSetting(), getCompanyId(), getTimestamp(),
+			getIcon(), getVirtualPath(), getStrutsPath(), getParentStrutsPath(),
+			getPortletName(), getDisplayName(), getPortletClass(),
+			getConfigurationActionClass(), getIndexerClass(),
+			getOpenSearchClass(), getSchedulerEntries(), getPortletURLClass(),
+			getFriendlyURLMapperClass(), getFriendlyURLMapping(),
+			getFriendlyURLRoutes(), getURLEncoderClass(),
+			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),
+			getPollerProcessorClass(), getPopMessageListenerClass(),
+			getSocialActivityInterpreterClass(),
 			getSocialRequestInterpreterClass(), getWebDAVStorageToken(),
 			getWebDAVStorageClass(), getXmlRpcMethodClass(),
 			getControlPanelEntryCategory(), getControlPanelEntryWeight(),
@@ -3088,7 +3088,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getWindowStates(), getSupportedLocales(), getResourceBundle(),
 			getPortletInfo(), getPortletFilters(), getProcessingEvents(),
 			getPublishingEvents(), getPublicRenderParameters(),
-			getPortletApp(), getRootPortlet());
+			getPortletApp());
 
 		portlet.setId(getId());
 
@@ -3130,6 +3130,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	private static Map<String, Boolean> _readyMap =
 		new ConcurrentHashMap<String, Boolean>();
+
+	/**
+	 * The root portlet of this portlet instance.
+	 */
+	private Portlet _rootPortlet = this;
 
 	/**
 	 * Package this plugin belongs to.
@@ -3628,10 +3633,5 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * <code>True</code> if the portlet is an undeployed portlet.
 	 */
 	private boolean _undeployedPortlet = false;
-
-	/**
-	 * The root portlet that represents this portlet instance.
-	 */
-	private Portlet _rootPortlet;
 
 }
