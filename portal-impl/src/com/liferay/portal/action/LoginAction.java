@@ -14,6 +14,7 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -92,7 +93,17 @@ public class LoginAction extends Action {
 				request, PortletKeys.LOGIN, themeDisplay.getPlid(),
 				PortletRequest.RENDER_PHASE);
 
-			portletURL.setWindowState(WindowState.MAXIMIZED);
+			WindowState windowState = WindowState.MAXIMIZED;
+
+			String windowStateString = ParamUtil.getString(
+				request, "windowState");
+
+			if (Validator.isNotNull(windowStateString)) {
+				windowState = WindowStateFactory.getWindowState(
+					windowStateString);
+			}
+
+			portletURL.setWindowState(windowState);
 			portletURL.setPortletMode(PortletMode.VIEW);
 
 			portletURL.setParameter("saveLastPath", "0");

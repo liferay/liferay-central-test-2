@@ -1473,6 +1473,7 @@
 
 		<action path="/login/login" type="com.liferay.portlet.login.action.LoginAction">
 			<forward name="portlet.login.login" path="portlet.login.login" />
+			<forward name="portlet.login.login_redirect" path="portlet.login.login_redirect" />
 		</action>
 
 		<action path="/login/login_redirect" forward="portlet.login.login_redirect" />
