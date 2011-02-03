@@ -19,9 +19,15 @@
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
 
+boolean showAnonymousIcon = false;
+
+if (!strutsAction.startsWith("/login/create_anonymous_account") && portletName.equals(PortletKeys.FAST_LOGIN)) {
+	showAnonymousIcon = true;
+}
+
 boolean showCreateAccountIcon = false;
 
-if (!strutsAction.equals("/login/create_account") && company.isStrangers()) {
+if (!strutsAction.equals("/login/create_account") && company.isStrangers() && !portletName.equals(PortletKeys.FAST_LOGIN)) {
 	showCreateAccountIcon = true;
 }
 
@@ -50,9 +56,21 @@ if (Validator.isNotNull(strutsAction) && !strutsAction.equals("/login/login")) {
 }
 %>
 
-<c:if test="<%= showCreateAccountIcon || showForgotPasswordIcon || showOpenIdIcon || showSignInIcon %>">
+<c:if test="<%= showAnonymousIcon || showCreateAccountIcon || showForgotPasswordIcon || showOpenIdIcon || showSignInIcon %>">
 	<div class="navigation">
 		<liferay-ui:icon-list>
+			<c:if test="<%= showAnonymousIcon %>">
+				<portlet:renderURL var="anonymousURL">
+					<portlet:param name="struts_action" value="/login/create_anonymous_account" />
+				</portlet:renderURL>
+
+				<liferay-ui:icon
+					message="anonymous"
+					src='<%= themeDisplay.getPathThemeImages() + "/common/user_icon.png" %>'
+					url="<%= anonymousURL %>"
+				/>
+			</c:if>
+
 			<c:if test="<%= showSignInIcon %>">
 				<liferay-ui:icon
 					image="status_online"
