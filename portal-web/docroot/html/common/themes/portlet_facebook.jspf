@@ -26,7 +26,9 @@ Set<String> headerPortalCssSet = new LinkedHashSet<String>();
 
 for (String headerPortalCss : portlet.getHeaderPortalCss()) {
 	if (!HttpUtil.hasProtocol(headerPortalCss)) {
-		headerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalCss, portlet.getTimestamp());
+		Portlet rootPortlet = portlet.getRootPortlet();
+
+		headerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalCss, rootPortlet.getTimestamp());
 	}
 
 	if (!headerPortalCssSet.contains(headerPortalCss)) {
@@ -43,7 +45,9 @@ Set<String> headerPortletCssSet = new LinkedHashSet<String>();
 
 for (String headerPortletCss : portlet.getHeaderPortletCss()) {
 	if (!HttpUtil.hasProtocol(headerPortletCss)) {
-		headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletCss, portlet.getTimestamp());
+		Portlet rootPortlet = portlet.getRootPortlet();
+
+		headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletCss, rootPortlet.getTimestamp());
 	}
 
 	if (!headerPortletCssSet.contains(headerPortletCss)) {
@@ -64,7 +68,9 @@ Set<String> footerPortalCssSet = new LinkedHashSet<String>();
 
 for (String footerPortalCss : portlet.getFooterPortalCss()) {
 	if (!HttpUtil.hasProtocol(footerPortalCss)) {
-		footerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalCss, portlet.getTimestamp());
+		Portlet rootPortlet = portlet.getRootPortlet();
+
+		footerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalCss, rootPortlet.getTimestamp());
 	}
 
 	if (!footerPortalCssSet.contains(footerPortalCss)) {
@@ -81,7 +87,9 @@ Set<String> footerPortletCssSet = new LinkedHashSet<String>();
 
 for (String footerPortletCss : portlet.getFooterPortletCss()) {
 	if (!HttpUtil.hasProtocol(footerPortletCss)) {
-		footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletCss, portlet.getTimestamp());
+		Portlet rootPortlet = portlet.getRootPortlet();
+
+		footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletCss, rootPortlet.getTimestamp());
 	}
 
 	if (!footerPortletCssSet.contains(footerPortletCss)) {

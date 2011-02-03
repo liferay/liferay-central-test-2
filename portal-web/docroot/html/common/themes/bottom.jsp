@@ -34,7 +34,9 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 	for (Portlet portlet : portlets) {
 		for (String footerPortalCss : portlet.getFooterPortalCss()) {
 			if (!HttpUtil.hasProtocol(footerPortalCss)) {
-				footerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalCss, portlet.getTimestamp());
+				Portlet rootPortlet = portlet.getRootPortlet();
+
+				footerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalCss, rootPortlet.getTimestamp());
 			}
 
 			if (!footerPortalCssSet.contains(footerPortalCss)) {
@@ -53,7 +55,9 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 	for (Portlet portlet : portlets) {
 		for (String footerPortletCss : portlet.getFooterPortletCss()) {
 			if (!HttpUtil.hasProtocol(footerPortletCss)) {
-				footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletCss, portlet.getTimestamp());
+				Portlet rootPortlet = portlet.getRootPortlet();
+
+				footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletCss, rootPortlet.getTimestamp());
 			}
 
 			if (!footerPortletCssSet.contains(footerPortletCss)) {
@@ -80,7 +84,9 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 	for (Portlet portlet : portlets) {
 		for (String footerPortalJavaScript : portlet.getFooterPortalJavaScript()) {
 			if (!HttpUtil.hasProtocol(footerPortalJavaScript)) {
-				footerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalJavaScript, portlet.getTimestamp());
+				Portlet rootPortlet = portlet.getRootPortlet();
+
+				footerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalJavaScript, rootPortlet.getTimestamp());
 			}
 
 			if (!footerPortalJavaScriptSet.contains(footerPortalJavaScript) && !themeDisplay.isIncludedJs(footerPortalJavaScript)) {
@@ -99,7 +105,9 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 	for (Portlet portlet : portlets) {
 		for (String footerPortletJavaScript : portlet.getFooterPortletJavaScript()) {
 			if (!HttpUtil.hasProtocol(footerPortletJavaScript)) {
-				footerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletJavaScript, portlet.getTimestamp());
+				Portlet rootPortlet = portlet.getRootPortlet();
+
+				footerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletJavaScript, rootPortlet.getTimestamp());
 			}
 
 			if (!footerPortletJavaScriptSet.contains(footerPortletJavaScript)) {

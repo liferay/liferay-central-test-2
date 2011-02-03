@@ -118,6 +118,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_processingEvents = new HashSet<QName>();
 		_publishingEvents = new HashSet<QName>();
 		_publicRenderParameters = new HashSet<PublicRenderParameter>();
+		_rootPortlet = this;
 	}
 
 	/**
@@ -165,7 +166,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
 		Set<QName> publishingEvents,
 		Set<PublicRenderParameter> publicRenderParameters,
-		PortletApp portletApp) {
+		PortletApp portletApp, Portlet rootPortlet) {
 
 		setPortletId(portletId);
 		_pluginPackage = pluginPackage;
@@ -255,6 +256,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setPublishingEvents(publishingEvents);
 		setPublicRenderParameters(publicRenderParameters);
 		_portletApp = portletApp;
+		_rootPortlet = rootPortlet;
 
 		if (_instanceable) {
 			_clonedInstances = new Hashtable<String, Portlet>();
@@ -268,6 +270,15 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public String getRootPortletId() {
 		return PortletConstants.getRootPortletId(getPortletId());
+	}
+
+	/**
+	 * Gets the root portlet represents this portlet instance.
+	 *
+	 * @return the root portlet represents this portlet instance
+	 */
+	public Portlet getRootPortlet() {
+		return _rootPortlet;
 	}
 
 	/**
@@ -3077,7 +3088,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getWindowStates(), getSupportedLocales(), getResourceBundle(),
 			getPortletInfo(), getPortletFilters(), getProcessingEvents(),
 			getPublishingEvents(), getPublicRenderParameters(),
-			getPortletApp());
+			getPortletApp(), getRootPortlet());
 
 		portlet.setId(getId());
 
@@ -3617,5 +3628,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * <code>True</code> if the portlet is an undeployed portlet.
 	 */
 	private boolean _undeployedPortlet = false;
+
+	/**
+	 * The root portlet that represents this portlet instance.
+	 */
+	private Portlet _rootPortlet;
 
 }
