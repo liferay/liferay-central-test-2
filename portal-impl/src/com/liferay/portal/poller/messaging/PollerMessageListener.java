@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.poller.PollerRequest;
 import com.liferay.portal.kernel.poller.PollerResponse;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.poller.PollerProcessorUtil;
-import com.liferay.portal.poller.RequestResponsePair;
 
 /**
  * @author Michael C. Han
@@ -35,53 +34,55 @@ import com.liferay.portal.poller.RequestResponsePair;
 public class PollerMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
-		RequestResponsePair requestResponsePair =
-			(RequestResponsePair)message.getPayload();
+		PollerResponse pollerResponse = null;
 
-		PollerRequest pollerRequest = requestResponsePair.getPollerRequest();
+		try {
+			PollerRequest pollerRequest = (PollerRequest)message.getPayload();
 
-		PollerResponse pollerResponse = requestResponsePair.getPollerResponse();
+			String portletId = pollerRequest.getPortletId();
 
-		String portletId = pollerRequest.getPortletId();
+			PollerProcessor pollerProcessor =
+				PollerProcessorUtil.getPollerProcessor(portletId);
 
-		PollerProcessor pollerProcessor =
-			PollerProcessorUtil.getPollerProcessor(portletId);
+			if (pollerRequest.isReceiveRequest()) {
+				pollerResponse = new DefaultPollerResponse(
+					portletId, pollerRequest.getChunkId());
 
-		if (pollerRequest.isReceiveRequest()) {
+				try {
+					pollerProcessor.receive(pollerRequest, pollerResponse);
+				}
+				catch (PollerException pe) {
+					_log.error(
+						"Unable to receive poller request " + pollerRequest,
+						pe);
+
+					pollerResponse.setParameter(
+						"pollerException", pe.getMessage());
+				}
+			}
+			else {
+				try {
+					pollerProcessor.send(pollerRequest);
+				}
+				catch (PollerException pe) {
+					_log.error(
+						"Unable to send poller request " + pollerRequest,
+						pe);
+				}
+			}
+		}
+		finally {
 			String responseDestinationName =
 				message.getResponseDestinationName();
 
-			if (Validator.isNotNull(responseDestinationName) &&
-				Validator.isNotNull(pollerResponse)) {
-
+			if (Validator.isNotNull(responseDestinationName)) {
 				Message responseMessage = MessageBusUtil.createResponseMessage(
 					message);
 
 				responseMessage.setPayload(pollerResponse);
 
-				pollerResponse.setResponseMessage(responseMessage);
-			}
-
-			try {
-				pollerProcessor.receive(pollerRequest, pollerResponse);
-			}
-			catch (PollerException pe) {
-				_log.error(
-					"Unable to receive poller request " + pollerRequest,
-					pe);
-
-				pollerResponse.setParameter(
-					"pollerException", pe.getMessage());
-			}
-		}
-		else {
-			try {
-				pollerProcessor.send(pollerRequest);
-			}
-			catch (PollerException pe) {
-				_log.error(
-					"Unable to send poller request " + pollerRequest,
-					pe);
+				MessageBusUtil.sendMessage(
+					responseDestinationName, responseMessage);
 			}
 		}
 	}

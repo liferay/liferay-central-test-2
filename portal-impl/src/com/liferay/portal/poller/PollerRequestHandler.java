@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.poller.DefaultPollerResponse;
 import com.liferay.portal.kernel.poller.PollerException;
 import com.liferay.portal.kernel.poller.PollerHeader;
 import com.liferay.portal.kernel.poller.PollerProcessor;
@@ -40,10 +39,8 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -56,18 +53,11 @@ public class PollerRequestHandler implements MessageListener {
 
 	public PollerRequestHandler(
 		String path, String pollerRequestString,
-		PollerResponseWriter pollerResponseWriter,
-		List<PollerRequestHandlerListener> listeners) {
+		PollerResponseWriter pollerResponseWriter) {
 
-		_listeners = listeners;
 		_path = path;
 		_pollerRequestString = fixPollerRequestString(pollerRequestString);
 		_pollerResponseWriter = pollerResponseWriter;
-		_receiveRequest = isReceiveRequest(_path);
-	}
-
-	public boolean isActive() {
-		return _active;
 	}
 
 	public boolean processRequest() throws Exception {
@@ -85,9 +75,11 @@ public class PollerRequestHandler implements MessageListener {
 			return false;
 		}
 
+		boolean receiveRequest = isReceiveRequest(_path);
+
 		Set<String> portletIdsWithChunks = null;
 
-		if (_receiveRequest) {
+		if (receiveRequest) {
 			portletIdsWithChunks = new HashSet<String>();
 
 			boolean suspendPolling = false;
@@ -130,16 +122,16 @@ public class PollerRequestHandler implements MessageListener {
 			try {
 				addPollerRequest(
 					portletIdsWithChunks, pollerHeader, portletId, parameterMap,
-					chunkId);
+					chunkId, receiveRequest);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 		}
 
-		processRequests();
+		processRequests(receiveRequest);
 
-		if (!_receiveRequest) {
+		if (!receiveRequest) {
 			return true;
 		}
 
@@ -153,17 +145,17 @@ public class PollerRequestHandler implements MessageListener {
 			try {
 				addPollerRequest(
 					portletIdsWithChunks, pollerHeader, portletId,
-					new HashMap<String, String>(), null);
+					new HashMap<String, String>(), null, receiveRequest);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
 			}
 		}
 
-		processRequests();
+		processRequests(receiveRequest);
 
-		if (!_receiveRequest) {
-			shutdown();
+		if (!receiveRequest) {
+			_pollerResponseWriter.close();
 		}
 
 		return true;
@@ -188,45 +180,23 @@ public class PollerRequestHandler implements MessageListener {
 		synchronized (this) {
 			_responseCount++;
 
-			if (_responseCount == _requestResponsePairs.size()) {
+			if (_responseCount == _pollerRequests.size()) {
 				try {
-					shutdown();
+					_pollerResponseWriter.close();
 				}
 				catch (PollerException pe) {
 					_log.error(pe, pe);
 				}
-			}
-		}
-	}
 
-	public void shutdown() throws PollerException {
-		synchronized (this) {
-			if (_active) {
-				if (_receiveRequest) {
-					for (RequestResponsePair requestResponsePair :
-						_requestResponsePairs.values()) {
-
-						requestResponsePair.getPollerResponse().close();
-					}
-
-					MessageBusUtil.unregisterMessageListener(
-						DestinationNames.POLLER_RESPONSE, this);
-
-					_pollerResponseWriter.close();
-				}
-
-				for (PollerRequestHandlerListener listener : _listeners) {
-					listener.notifyHandlingComplete();
-				}
-
-				_active = false;
+				notify();
 			}
 		}
 	}
 
 	protected void addPollerRequest(
 			Set<String> portletIdsWithChunks, PollerHeader pollerHeader,
-			String portletId, Map<String, String> parameterMap, String chunkId)
+			String portletId, Map<String, String> parameterMap, String chunkId,
+			boolean receiveRequest)
 		throws Exception {
 
 		PollerProcessor pollerProcessor =
@@ -239,21 +209,17 @@ public class PollerRequestHandler implements MessageListener {
 		}
 
 		PollerRequest pollerRequest = new PollerRequest(
-			pollerHeader, portletId, parameterMap, chunkId, _receiveRequest);
+			pollerHeader, portletId, parameterMap, chunkId, receiveRequest);
 
-		if (_receiveRequest) {
+		if (receiveRequest) {
 			portletIdsWithChunks.add(portletId);
 		}
 
-		RequestResponsePair requestResponsePair = new RequestResponsePair(
-			pollerRequest);
-
-		_requestResponsePairs.put(
-			pollerRequest.getPortletId(), requestResponsePair);
+		_pollerRequests.put(pollerRequest.getPortletId(), pollerRequest);
 	}
 
 	protected void clearRequests() {
-		_requestResponsePairs.clear();
+		_pollerRequests.clear();
 		_responseIds.clear();
 		_responseCount = 0;
 	}
@@ -352,7 +318,7 @@ public class PollerRequestHandler implements MessageListener {
 		return userId;
 	}
 
-	protected boolean isReceiveRequest(String path) {
+	protected boolean isReceiveRequest(String path) throws Exception {
 		if ((path != null) && path.endsWith(_PATH_RECEIVE)) {
 			return true;
 		}
@@ -361,41 +327,44 @@ public class PollerRequestHandler implements MessageListener {
 		}
 	}
 
-	protected void processRequests() {
-		if (_receiveRequest) {
+	protected void processRequests(boolean receiveRequest) {
+		if (receiveRequest) {
 			MessageBusUtil.registerMessageListener(
 				DestinationNames.POLLER_RESPONSE, this);
 		}
 
-		for (RequestResponsePair requestResponsePair :
-			_requestResponsePairs.values()) {
+		try {
+			for (PollerRequest pollerRequest : _pollerRequests.values()) {
+				Message message = new Message();
 
-			PollerRequest pollerRequest =
-				requestResponsePair.getPollerRequest();
-
-			if (_receiveRequest) {
-				PollerResponse pollerResponse = new DefaultPollerResponse(
-					pollerRequest.getPortletId(), pollerRequest.getChunkId());
-
-				requestResponsePair.setPollerResponse(pollerResponse);
-			}
-
-			Message message = new Message();
-
-			message.setPayload(requestResponsePair);
-
-			if (_receiveRequest) {
+				message.setPayload(pollerRequest);
 				message.setResponseDestinationName(
 					DestinationNames.POLLER_RESPONSE);
+
+				String responseId = PortalUUIDUtil.generate();
+
+				message.setResponseId(responseId);
+
+				_responseIds.put(responseId, responseId);
+
+				MessageBusUtil.sendMessage(DestinationNames.POLLER, message);
 			}
 
-			String responseId = PortalUUIDUtil.generate();
-
-			message.setResponseId(responseId);
-
-			_responseIds.put(responseId, responseId);
-
-			MessageBusUtil.sendMessage(DestinationNames.POLLER, message);
+			synchronized (this) {
+				if (_responseCount != _pollerRequests.size()) {
+					try {
+						this.wait(PropsValues.POLLER_REQUEST_TIMEOUT);
+					}
+					catch (InterruptedException ie) {
+					}
+				}
+			}
+		}
+		finally {
+			if (receiveRequest) {
+				MessageBusUtil.unregisterMessageListener(
+					DestinationNames.POLLER_RESPONSE, this);
+			}
 		}
 	}
 
@@ -413,15 +382,12 @@ public class PollerRequestHandler implements MessageListener {
 	private static Log _log = LogFactoryUtil.getLog(
 		PollerRequestHandler.class);
 
-	private boolean _active = true;
-	private List<PollerRequestHandlerListener> _listeners =
-		new ArrayList<PollerRequestHandlerListener>();
 	private String _path;
-	private Map<String, RequestResponsePair> _requestResponsePairs =
-		new HashMap<String, RequestResponsePair>();
+	private Map<String, PollerRequest> _pollerRequests =
+		new HashMap<String, PollerRequest>();
 	private String _pollerRequestString;
 	private PollerResponseWriter _pollerResponseWriter;
-	private boolean _receiveRequest;
 	private int _responseCount;
 	private Map<String, String> _responseIds = new HashMap<String, String>();
+
 }

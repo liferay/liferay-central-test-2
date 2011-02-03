@@ -17,9 +17,7 @@ package com.liferay.portal.poller;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.poller.PollerException;
 import com.liferay.portal.kernel.poller.PollerResponse;
-import com.liferay.portal.kernel.poller.PollerWriterClosedException;
 
 /**
  * @author Edward Han
@@ -31,62 +29,29 @@ public class JSONPollerResponseWriter implements PollerResponseWriter {
 		_jsonArray = JSONFactoryUtil.createJSONArray();
 	}
 
-	public void close() throws PollerException {
-		synchronized (this) {
-			if (!_closed) {
-				try {
-					doClose();
-				}
-				finally {
-					_closed = true;
-				}
-			}
-		}
+	public void close() {
 	}
 
 	public JSONArray getJSONArray() {
 		return _jsonArray;
 	}
 
-	public void write(JSONArray jsonArray) throws PollerException {
-		if (!_closed) {
-			_jsonArray.put(jsonArray);
-		}
-		else {
-			throw new PollerWriterClosedException();
-		}
+	public void write(JSONArray jsonArray) {
+		_jsonArray.put(jsonArray);
 	}
 
-	public void write(JSONObject jsonObject) throws PollerException {
-		if (!_closed) {
-			_jsonArray.put(jsonObject);
-		}
-		else {
-			throw new PollerWriterClosedException();
-		}
+	public void write(JSONObject jsonObject) {
+		_jsonArray.put(jsonObject);
 	}
 
-	public void write(PollerResponse pollerResponse) throws PollerException {
-		if (!_closed) {
-			_jsonArray.put(pollerResponse.toJSONObject());
-		}
-		else {
-			throw new PollerWriterClosedException();
-		}
+	public void write(PollerResponse pollerResponse) {
+		_jsonArray.put(pollerResponse.toJSONObject());
 	}
 
-	public void write(String string) throws PollerException {
-		if (!_closed) {
-			_jsonArray.put(string);
-		}
-		else {
-			throw new PollerWriterClosedException();
-		}
+	public void write(String string) {
+		_jsonArray.put(string);
 	}
 
-	protected void doClose() throws PollerException {
-	}
-
-	private boolean _closed = false;
 	private JSONArray _jsonArray;
+
 }

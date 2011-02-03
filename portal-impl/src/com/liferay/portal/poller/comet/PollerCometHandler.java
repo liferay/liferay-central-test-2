@@ -19,10 +19,7 @@ import com.liferay.portal.kernel.poller.comet.CometHandler;
 import com.liferay.portal.kernel.poller.comet.CometRequest;
 import com.liferay.portal.kernel.poller.comet.CometSession;
 import com.liferay.portal.poller.PollerRequestHandler;
-import com.liferay.portal.poller.PollerRequestHandlerListener;
 import com.liferay.portal.poller.PollerResponseWriter;
-
-import java.util.ArrayList;
 
 /**
  * @author Edward Han
@@ -32,11 +29,6 @@ public class PollerCometHandler extends BaseCometHandler {
 
 	public CometHandler clone() {
 		return new PollerCometHandler();
-	}
-
-	@Override
-	protected void doDestroy() throws Exception {
-		_pollerRequestHandler.shutdown();
 	}
 
 	public void receiveData(String data) {
@@ -50,13 +42,11 @@ public class PollerCometHandler extends BaseCometHandler {
 		PollerResponseWriter pollerResponseWriter =
 			new CometPollerResponseWriter(cometSession);
 
-		_pollerRequestHandler = new PollerRequestHandler(
+		PollerRequestHandler pollerRequestHandler = new PollerRequestHandler(
 			cometRequest.getPathInfo(), pollerRequestString,
-			pollerResponseWriter,
-			new ArrayList<PollerRequestHandlerListener>(0));
+			pollerResponseWriter);
 
-		_pollerRequestHandler.processRequest();
+		pollerRequestHandler.processRequest();
 	}
 
-	private PollerRequestHandler _pollerRequestHandler;
 }
