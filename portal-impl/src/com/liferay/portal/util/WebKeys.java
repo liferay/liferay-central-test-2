@@ -94,6 +94,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String FORM_NAME = "FORM_NAME";
 
+	public static final String FORM_STRUCTURE= "FORM_STRUCTURE";
+
 	public static final String FORM_NAVIGATOR_SECTION_SHOW = "FORM_NAVIGATOR_SECTION_SHOW_";
 
 	public static final String FORWARD_URL = "FORWARD_URL";

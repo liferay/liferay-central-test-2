@@ -637,6 +637,18 @@
 
 	<definition name="portlet.flags.edit_entry" path="/portlet/flags/edit_entry.jsp" />
 
+	<!-- Forms -->
+
+	<definition name="portlet.forms" extends="portlet" />
+
+	<definition name="portlet.forms.edit_form_structure" extends="portlet.forms">
+		<put name="portlet_content" value="/portlet/forms/edit_form_structure.jsp" />
+	</definition>
+
+	<definition name="portlet.forms.error" extends="portlet.forms">
+		<put name="portlet_content" value="/portlet/forms/error.jsp" />
+	</definition>
+
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />

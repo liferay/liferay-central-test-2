@@ -331,6 +331,12 @@
 			<param name="service.file" value="${basedir}/src/com/liferay/portlet/flags/service.xml" />
 		</antcall>
 	</target>
+	
+	<target name="build-service-portlet-forms">
+			<antcall target="build-service">
+			<param name="service.file" value="${basedir}/src/com/liferay/portlet/forms/service.xml" />
+		</antcall>
+	</target>
 
 	<target name="build-service-portlet-imagegallery">
 		<antcall target="build-service">

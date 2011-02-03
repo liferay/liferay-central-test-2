@@ -964,6 +964,32 @@
 
 	Liferay.provide(
 		Util,
+		'openFormBuilderPopUp',
+		function(portletId, namespace, title, callback) {
+			var instance = this;
+
+			var formBuilderURL = Liferay.PortletURL.createRenderURL();
+
+			formBuilderURL.setEscapeXML(false);
+			formBuilderURL.setParameter('callback', callback);
+			formBuilderURL.setParameter("struts_action", "/forms/edit_form_structure");
+			formBuilderURL.setParameter("resourceNamespace", namespace);
+			formBuilderURL.setPortletId(165);
+			formBuilderURL.setWindowState('pop_up');
+
+			instance.openIframePopUp(
+				'',
+				portletId,
+				formBuilderURL,
+				namespace,
+				title
+			);
+		},
+		['liferay-portlet-url']
+	);
+	
+	Liferay.provide(
+		Util,
 		'portletTitleEdit',
 		function(options) {
 			var obj = options.obj;
