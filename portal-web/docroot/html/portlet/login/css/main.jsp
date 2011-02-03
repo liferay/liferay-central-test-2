@@ -32,11 +32,17 @@
 	text-align: center;
 }
 
-.portlet-login .facebook-login .button .aui-button-input {
-	background: url("<%= themeImagesPath %>/login/facebook_login_button.png") no-repeat scroll 0 50% transparent;
-	border: none;
-	color: #FFFFFF;
-	padding: 10px 10px 10px 30px;
+.portlet-login .facebook-login-button .aui-button-content {
+	background: url(<%= themeImagesPath %>/login/facebook_login_button.png) no-repeat scroll 0 50%;
+	padding: 5px 5px 5px 30px;
+}
+
+.portlet-login .facebook-login-button .aui-button-input {
+	background: transparent none;
+	border-width: 0;
+	color: #FFF;
+	font-family: "lucida grande", Tahoma, Verdana, Arial, sans-serif;
+	padding: 0;
 	text-shadow: none;
 }
 

@@ -24,12 +24,10 @@ String facebookConnectRedirectURL =	FacebookConnectUtil.getRedirectURL(themeDisp
 facebookConnectRedirectURL = HttpUtil.addParameter(facebookConnectRedirectURL, "redirect", redirect);
 %>
 
-<aui:form action="<%= FacebookConnectUtil.getAuthURL(themeDisplay.getCompanyId()) %>" name="fm" useNamespace="false">
+<aui:form action="<%= FacebookConnectUtil.getAuthURL(themeDisplay.getCompanyId()) %>" cssClass="facebook-login" name="fm" useNamespace="false">
 	<aui:input name="client_id" type="hidden" value="<%= FacebookConnectUtil.getAppId(themeDisplay.getCompanyId()) %>" />
 	<aui:input name="redirect_uri" type="hidden" value="<%= facebookConnectRedirectURL %>" />
 	<aui:input name="scope" type="hidden" value="email" />
 
-	<div class="facebook-login">
-		<aui:button cssClass="button" type="submit" value="log-in-through-facebook" />
-	</div>
+	<aui:button cssClass="facebook-login-button" type="submit" value="log-in-with-facebook" />
 </aui:form>
