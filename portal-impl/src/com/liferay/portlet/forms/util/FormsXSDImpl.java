@@ -62,20 +62,22 @@ public class FormsXSDImpl implements FormsXSD {
 	public String getHTML(PageContext pageContext, Element element)
 		throws Exception {
 
-		List<Element> dynamicElements = element.elements("dynamic-element");
-
 		StringBundler sb = new StringBundler();
 
-		for (Element dynamicElement : dynamicElements) {
-			FreeMarkerContext freeMarkerContext =
-				getFreeMarkerContext(dynamicElement);
+		List<Element> dynamicElementElements = element.elements(
+			"dynamic-element");
+
+		for (Element dynamicElementElement : dynamicElementElements) {
+			FreeMarkerContext freeMarkerContext = getFreeMarkerContext(
+				dynamicElementElement);
 
 			Map<String, Object> field =
 				(Map<String, Object>)freeMarkerContext.get("field");
 
-			field.put("children", getHTML(pageContext, dynamicElement));
+			field.put("children", getHTML(pageContext, dynamicElementElement));
 
-			String type = dynamicElement.attributeValue("type");
+			String type = dynamicElementElement.attributeValue("type");
+
 			String resourcePath = _TPL_PATH.concat(
 				type.toLowerCase()).concat(_TPL_EXT);
 
@@ -86,7 +88,7 @@ public class FormsXSDImpl implements FormsXSD {
 	}
 
 	public String getHTML(PageContext pageContext, String xml)
-		throws DocumentException, Exception {
+		throws Exception {
 
 		return getHTML(pageContext, SAXReaderUtil.read(xml));
 	}
@@ -98,12 +100,14 @@ public class FormsXSDImpl implements FormsXSD {
 	public JSONArray getJSONArray(Element element) throws JSONException {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		List<Element> dynamicElements = element.elements("dynamic-element");
+		List<Element> dynamicElementElements = element.elements(
+			"dynamic-element");
 
-		for (Element dynamicElement : dynamicElements) {
+		for (Element dynamicElementElement : dynamicElementElements) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			Element metadataElement = dynamicElement.element("meta-data");
+			Element metadataElement = dynamicElementElement.element(
+				"meta-data");
 
 			if (metadataElement != null) {
 				for (Element metadataEntry : metadataElement.elements()) {
@@ -113,7 +117,7 @@ public class FormsXSDImpl implements FormsXSD {
 				}
 			}
 
-			for (Attribute attribute : dynamicElement.attributes()) {
+			for (Attribute attribute : dynamicElementElement.attributes()) {
 				jsonObject.put(attribute.getName(), attribute.getValue());
 			}
 
@@ -125,7 +129,7 @@ public class FormsXSDImpl implements FormsXSD {
 				key = "options";
 			}
 
-			jsonObject.put(key, getJSONArray(dynamicElement));
+			jsonObject.put(key, getJSONArray(dynamicElementElement));
 
 			jsonArray.put(jsonObject);
 		}
@@ -139,13 +143,15 @@ public class FormsXSDImpl implements FormsXSD {
 		return getJSONArray(SAXReaderUtil.read(xml));
 	}
 
-	protected FreeMarkerContext getFreeMarkerContext(Element dynamicElement) {
+	protected FreeMarkerContext getFreeMarkerContext(
+		Element dynamicElementElement) {
+
 		Map<String, Object> field = new HashMap<String, Object>();
 
 		FreeMarkerContext freeMarkerContext =
 			FreeMarkerEngineUtil.getWrappedRestrictedToolsContext();
 
-		Element metadataElement = dynamicElement.element("meta-data");
+		Element metadataElement = dynamicElementElement.element("meta-data");
 
 		if (metadataElement != null) {
 			for (Element metadataEntry : metadataElement.elements()) {
@@ -155,13 +161,15 @@ public class FormsXSDImpl implements FormsXSD {
 			}
 		}
 
-		Element parentElement = dynamicElement.getParent();
+		Element parentElement = dynamicElementElement.getParent();
 
 		if (parentElement != null) {
-			field.put("parentType", parentElement.attributeValue("type"));
+			String type = parentElement.attributeValue("type");
+
+			field.put("parentType", type);
 		}
 
-		for (Attribute attribute : dynamicElement.attributes()) {
+		for (Attribute attribute : dynamicElementElement.attributes()) {
 			field.put(attribute.getName(), attribute.getValue());
 		}
 
@@ -170,7 +178,10 @@ public class FormsXSDImpl implements FormsXSD {
 		return freeMarkerContext;
 	}
 
-	protected static String processFTL(
+	/**
+	 * @see {@link com.liferay.taglib.util.ThemeUtil#includeFTL}
+	 */
+	protected String processFTL(
 			PageContext pageContext, FreeMarkerContext freeMarkerContext,
 			String resourcePath)
 		throws Exception {

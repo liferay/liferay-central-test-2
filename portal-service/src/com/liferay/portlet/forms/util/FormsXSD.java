@@ -31,11 +31,10 @@ public interface FormsXSD {
 	public String getHTML(PageContext pageContext, Document document)
 		throws Exception;
 
-	public String getHTML(PageContext pageContext,Element element)
+	public String getHTML(PageContext pageContext, Element element)
 		throws Exception;
 
-	public String getHTML(PageContext pageContext, String xml)
-		throws DocumentException, Exception;
+	public String getHTML(PageContext pageContext, String xml) throws Exception;
 
 	public JSONArray getJSONArray(Document document) throws JSONException;
 

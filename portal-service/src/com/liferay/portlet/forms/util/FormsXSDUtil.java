@@ -45,7 +45,7 @@ public class FormsXSDUtil {
 	}
 
 	public static String getHTML(PageContext pageContext, String xml)
-		throws DocumentException, Exception {
+		throws Exception {
 
 		return getFormsXSD().getHTML(pageContext, xml);
 	}
