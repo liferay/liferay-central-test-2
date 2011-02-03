@@ -621,8 +621,6 @@ public interface PropsKeys {
 
 	public static final String FLAGS_REASONS = "flags.reasons";
 
-	public static final String FORM_STRUCTURE_FORCE_AUTOGENERATE_ID = "form.structure.force.autogenerate.id";
-
 	public static final String FREEMARKER_ENGINE_CACHE_ENABLED = "freemarker.engine.cache.enabled";
 
 	public static final String FREEMARKER_ENGINE_CACHE_STORAGE = "freemarker.engine.cache.storage";

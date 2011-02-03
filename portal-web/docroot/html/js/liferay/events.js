@@ -46,14 +46,4 @@ Liferay.detach = function(){};
 			A.augment(Liferay, A.Attribute, true);
 		}
 	);
-	
-	A.use(
-		'aui-base',
-		function(A) {
-			if (!Liferay.FormBuilderEvents) {
-				Liferay.FormBuilderEvents = new A.Base();
-			}
-		}
-	);
-	
 })(AUI(), Liferay);

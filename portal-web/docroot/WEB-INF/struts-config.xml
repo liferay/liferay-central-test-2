@@ -1132,13 +1132,6 @@
 			<forward name="portlet.flags.edit_entry" path="portlet.flags.edit_entry" />
 		</action>
 
-		<!-- Forms -->
-
-		<action path="/forms/edit_form_structure" type="com.liferay.portlet.forms.action.EditFormStructureAction">
-			<forward name="portlet.forms.edit_form_structure" path="portlet.forms.edit_form_structure" />
-			<forward name="portlet.forms.error" path="portlet.forms.error" />
-		</action>
-
 		<!-- Global Prayer Digest -->
 
 		<action path="/global_prayer_digest/view" type="com.liferay.portlet.globalprayerdigest.action.ViewAction">
