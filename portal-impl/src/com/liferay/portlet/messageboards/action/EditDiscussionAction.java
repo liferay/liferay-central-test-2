@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.action;
 
 import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.FileSizeException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
