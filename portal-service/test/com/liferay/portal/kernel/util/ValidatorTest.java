@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.test.TestCase;
 
 /**
  * @author Shuyang Zhou
+ * @author Shinn Lok
  */
 public class ValidatorTest extends TestCase {
 
@@ -48,7 +49,9 @@ public class ValidatorTest extends TestCase {
 		};
 
 		for (String validEmailAddress : validEmailAddresses) {
-			assertTrue(Validator.isEmailAddress(validEmailAddress));
+			if (!Validator.isEmailAddress(validEmailAddress)) {
+				fail(validEmailAddress);
+			}
 		}
 
 		String[] invalidEmailAddresses = {
@@ -58,7 +61,9 @@ public class ValidatorTest extends TestCase {
 		};
 
 		for (String invalidEmailAddress : invalidEmailAddresses) {
-			assertFalse(Validator.isEmailAddress(invalidEmailAddress));
+			if (Validator.isEmailAddress(invalidEmailAddress)) {
+				fail(invalidEmailAddress);
+			}
 		}
 	}
 
