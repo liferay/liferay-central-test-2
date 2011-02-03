@@ -88,7 +88,7 @@ public class SampleAppStartupAction extends SimpleAction {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		User paulUser = UserLocalServiceUtil.addUser(
+		User paulUser = UserLocalServiceUtil.addUserBypassWorkflow(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			locale, firstName, middleName, lastName, prefixId, suffixId, male,
@@ -105,7 +105,7 @@ public class SampleAppStartupAction extends SimpleAction {
 		emailAddress = "jane@liferay.com";
 		firstName = "Jane";
 
-		User janeUser = UserLocalServiceUtil.addUser(
+		User janeUser = UserLocalServiceUtil.addUserBypassWorkflow(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			locale, firstName, middleName, lastName, prefixId, suffixId, male,

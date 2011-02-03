@@ -69,6 +69,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
@@ -312,6 +314,37 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	public User addUserBypassWorkflow(
+			long creatorUserId, long companyId, boolean autoPassword,
+			String password1, String password2, boolean autoScreenName,
+			String screenName, String emailAddress, long facebookId,
+			String openId, Locale locale, String firstName, String middleName,
+			String lastName, int prefixId, int suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear,
+			String jobTitle, long[] groupIds, long[] organizationIds,
+			long[] roleIds, long[] userGroupIds, boolean sendEmail,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+			boolean oldWorkflowEnabled = WorkflowThreadLocal.isEnabled();
+
+			try {
+				WorkflowThreadLocal.setEnabled(false);
+
+				return addUser(
+					creatorUserId, companyId, autoPassword, password1,
+					password2, autoScreenName, screenName, emailAddress,
+					facebookId, openId, locale, firstName, middleName, lastName,
+					prefixId, suffixId, male, birthdayMonth, birthdayDay,
+					birthdayYear, jobTitle, groupIds, organizationIds,
+					roleIds, userGroupIds, sendEmail, serviceContext);
+			}
+			finally {
+				WorkflowThreadLocal.setEnabled(oldWorkflowEnabled);
+			}
+
+		}
+
 	/**
 	 * Adds a user to the database. Also notifies the appropriate model
 	 * listeners.
@@ -397,14 +430,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			autoScreenName, screenName, emailAddress, firstName, middleName,
 			lastName, organizationIds);
 
-		if (autoPassword) {
-			PasswordPolicy passwordPolicy =
-				passwordPolicyLocalService.getPasswordPolicy(
-					companyId, organizationIds);
-
-			password1 = PwdToolkitUtil.generate(passwordPolicy);
-		}
-		else {
+		if (!autoPassword) {
 			if (Validator.isNull(password1) || Validator.isNull(password2)) {
 				throw new UserPasswordException(
 					UserPasswordException.PASSWORD_INVALID);
@@ -450,8 +476,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setModifiedDate(now);
 		user.setDefaultUser(false);
 		user.setContactId(counterLocalService.increment());
-		user.setPassword(PwdEncryptor.encrypt(password1));
-		user.setPasswordUnencrypted(password1);
+		if (Validator.isNotNull(password1)) {
+			user.setPassword(PwdEncryptor.encrypt(password1));
+			user.setPasswordUnencrypted(password1);
+		}
 		user.setPasswordEncrypted(true);
 		user.setPasswordReset(false);
 		user.setDigest(StringPool.BLANK);
@@ -466,7 +494,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setMiddleName(middleName);
 		user.setLastName(lastName);
 		user.setJobTitle(jobTitle);
-		user.setStatus(WorkflowConstants.STATUS_APPROVED);
+		user.setStatus(WorkflowConstants.STATUS_DRAFT);
 
 		userPersistence.update(user, false, serviceContext);
 
@@ -579,16 +607,19 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setExpandoBridgeAttributes(serviceContext);
 
-		// Email
+		// Workflow
+		serviceContext.setAttribute(_NOTIFY_USER_CONTEXT_ATTR, sendEmail);
+		serviceContext.setAttribute(_AUTO_PASSWORD_CONTEXT_ATT, autoPassword);
 
-		if (sendEmail) {
-			try {
-				sendEmail(user, password1);
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+		long workflowUserId = creatorUserId;
+
+		if (workflowUserId == user.getUserId()) {
+			workflowUserId = defaultUser.getUserId();
 		}
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			companyId, workflowUserId, User.class.getName(),
+			user.getUserId(), user, serviceContext);
 
 		// Indexer
 
@@ -993,6 +1024,40 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void completeUserRegistration(
+			User user, ServiceContext serviceContext)
+		throws SystemException, PortalException {
+
+		boolean sendEmail = GetterUtil.getBoolean(
+			serviceContext.getAttribute(_NOTIFY_USER_CONTEXT_ATTR), false);
+
+		boolean autoPassword = GetterUtil.getBoolean(
+			serviceContext.getAttribute(_AUTO_PASSWORD_CONTEXT_ATT), false);
+
+		String password1 = null;
+
+        if (autoPassword) {
+			long companyId = user.getCompanyId();
+
+			long[] organizationIds = user.getOrganizationIds();
+
+			PasswordPolicy passwordPolicy =
+				passwordPolicyLocalService.getPasswordPolicy(
+					companyId, organizationIds);
+
+			password1 = PwdToolkitUtil.generate(passwordPolicy);
+		}
+
+		if (sendEmail) {
+			try {
+				sendEmail(user, password1);
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
+		}
+	}
+
 	public KeyValuePair decryptUserId(
 			long companyId, String name, String password)
 		throws PortalException, SystemException {
@@ -1178,6 +1243,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userGroupRoleLocalService.deleteUserGroupRolesByUserId(
 			user.getUserId());
+
+		// Workflow
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+			user.getCompanyId(), 0, User.class.getName(), user.getUserId());
 
 		// User
 
@@ -3093,8 +3162,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		String subject = PrefsPropsUtil.getContent(
 			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT);
-		String body = PrefsPropsUtil.getContent(
-			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
+
+		String body = null;
+		if (Validator.isNotNull(password)) {
+			body = PrefsPropsUtil.getContent(
+				user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
+		}
+		else {
+			body = PrefsPropsUtil.getContent(
+				user.getCompanyId(),
+				PropsKeys.ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY);
+		}
 
 		subject = StringUtil.replace(
 			subject,
@@ -3495,6 +3573,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 	}
+
+	private static final String _NOTIFY_USER_CONTEXT_ATTR = "notifyUser";
+	private static final String _AUTO_PASSWORD_CONTEXT_ATT = "autoPassword";
 
 	private static Log _log = LogFactoryUtil.getLog(UserLocalServiceImpl.class);
 

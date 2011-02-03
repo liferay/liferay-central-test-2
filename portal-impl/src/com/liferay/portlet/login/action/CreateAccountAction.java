@@ -50,6 +50,7 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Layout;
@@ -261,9 +262,17 @@ public class CreateAccountAction extends PortletAction {
 
 			// Session messages
 
-			SessionMessages.add(request, "user_added", user.getEmailAddress());
-			SessionMessages.add(
-				request, "user_added_password", user.getPasswordUnencrypted());
+			if (user.getStatus() == WorkflowConstants.STATUS_APPROVED) {
+				SessionMessages.add(
+					request, "user_added", user.getEmailAddress());
+				SessionMessages.add(
+					request, "user_added_password",
+					user.getPasswordUnencrypted());
+			}
+			else {
+				SessionMessages.add(
+					request, "user_pending", user.getEmailAddress());
+			}
 		}
 
 		// Send redirect

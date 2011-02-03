@@ -276,6 +276,29 @@ public class UserLocalServiceUtil {
 		getService().addTeamUsers(teamId, userIds);
 	}
 
+	public static com.liferay.portal.model.User addUserBypassWorkflow(
+		long creatorUserId, long companyId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean autoScreenName, java.lang.String screenName,
+		java.lang.String emailAddress, long facebookId,
+		java.lang.String openId, java.util.Locale locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addUserBypassWorkflow(creatorUserId, companyId,
+			autoPassword, password1, password2, autoScreenName, screenName,
+			emailAddress, facebookId, openId, locale, firstName, middleName,
+			lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
+			birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
+			userGroupIds, sendEmail, serviceContext);
+	}
+
 	/**
 	* Adds a user to the database. Also notifies the appropriate model
 	* listeners.
@@ -449,6 +472,14 @@ public class UserLocalServiceUtil {
 	public static void clearUserGroupUsers(long userGroupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().clearUserGroupUsers(userGroupId);
+	}
+
+	public static void completeUserRegistration(
+		com.liferay.portal.model.User user,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().completeUserRegistration(user, serviceContext);
 	}
 
 	public static com.liferay.portal.kernel.util.KeyValuePair decryptUserId(

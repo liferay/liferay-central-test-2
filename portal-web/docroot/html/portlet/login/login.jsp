@@ -69,6 +69,16 @@
 					</c:choose>
 				</div>
 			</c:if>
+			<c:if test='<%= SessionMessages.contains(request, "user_pending") %>'>
+
+				<%
+				String userEmailAddress = (String)SessionMessages.get(request, "user_pending");
+				%>
+
+				<div class="portlet-msg-success">
+						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-you-will-be-notified-via-email-at-x-when-your-account-has-been-approved", userEmailAddress) %>
+				</div>
+			</c:if>
 
 			<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
 			<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />

@@ -378,7 +378,7 @@ public class EditUserAction extends PortletAction {
 
 		User user = null;
 
-		user = UserServiceUtil.addUser(
+		user = UserServiceUtil.addUserBypassWorkflow(
 			themeDisplay.getCompanyId(), autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			LocaleUtil.getDefault(), firstName, middleName, lastName, prefixId,

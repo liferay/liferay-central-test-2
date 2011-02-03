@@ -137,6 +137,37 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.UserSoap addUserBypassWorkflow(
+		long companyId, boolean autoPassword, java.lang.String password1,
+		java.lang.String password2, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		long facebookId, java.lang.String openId, String locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = UserServiceUtil.addUserBypassWorkflow(companyId,
+					autoPassword, password1, password2, autoScreenName,
+					screenName, emailAddress, facebookId, openId,
+					LocaleUtil.fromLanguageId(locale), firstName, middleName,
+					lastName, prefixId, suffixId, male, birthdayMonth,
+					birthdayDay, birthdayYear, jobTitle, groupIds,
+					organizationIds, roleIds, userGroupIds, sendEmail,
+					serviceContext);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.UserSoap addUser(long companyId,
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
@@ -158,6 +189,51 @@ public class UserServiceSoap {
 					birthdayDay, birthdayYear, jobTitle, groupIds,
 					organizationIds, roleIds, userGroupIds, sendEmail,
 					serviceContext);
+
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.UserSoap addUserBypassWorkflow(
+		long companyId, boolean autoPassword, java.lang.String password1,
+		java.lang.String password2, boolean autoScreenName,
+		java.lang.String screenName, java.lang.String emailAddress,
+		long facebookId, java.lang.String openId, String locale,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
+		long[] roleIds, long[] userGroupIds, boolean sendEmail,
+		com.liferay.portal.model.AddressSoap[] addresses,
+		com.liferay.portal.model.EmailAddressSoap[] emailAddresses,
+		com.liferay.portal.model.PhoneSoap[] phones,
+		com.liferay.portal.model.WebsiteSoap[] websites,
+		com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap[] announcementsDelivers,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = UserServiceUtil.addUserBypassWorkflow(companyId,
+					autoPassword, password1, password2, autoScreenName,
+					screenName, emailAddress, facebookId, openId,
+					LocaleUtil.fromLanguageId(locale), firstName, middleName,
+					lastName, prefixId, suffixId, male, birthdayMonth,
+					birthdayDay, birthdayYear, jobTitle, groupIds,
+					organizationIds, roleIds, userGroupIds, sendEmail,
+					com.liferay.portal.model.impl.AddressModelImpl.toModels(
+						addresses),
+					com.liferay.portal.model.impl.EmailAddressModelImpl.toModels(
+						emailAddresses),
+					com.liferay.portal.model.impl.PhoneModelImpl.toModels(
+						phones),
+					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
+						websites),
+					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
+						announcementsDelivers), serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}

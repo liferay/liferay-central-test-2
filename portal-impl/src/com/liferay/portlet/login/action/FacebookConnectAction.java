@@ -202,7 +202,7 @@ public class FacebookConnectAction extends PortletAction {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		UserLocalServiceUtil.addUser(
+		UserLocalServiceUtil.addUserBypassWorkflow(
 			creatorUserId, companyId, autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			locale, firstName, middleName, lastName, prefixId, suffixId, male,

@@ -116,6 +116,8 @@
 		<indexer-class>com.liferay.portlet.directory.util.DirectoryIndexer</indexer-class>
 		<open-search-class>com.liferay.portlet.directory.util.DirectoryOpenSearchImpl</open-search-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<asset-renderer-factory>com.liferay.portlet.directory.asset.UserAssetRendererFactory</asset-renderer-factory>
+		<workflow-handler>com.liferay.portlet.directory.workflow.UserWorkflowHandler</workflow-handler>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
