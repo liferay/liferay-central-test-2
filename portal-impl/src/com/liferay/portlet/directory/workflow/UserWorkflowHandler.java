@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,8 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.workflow.BaseWorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.kernel.workflow.WorkflowEngineManagerUtil;
-import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -28,13 +26,13 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.io.Serializable;
+
 import java.util.Locale;
 import java.util.Map;
 
 /**
  * @author Michael C. Han
  */
-
 public class UserWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = User.class.getName();
@@ -65,8 +63,9 @@ public class UserWorkflowHandler extends BaseWorkflowHandler {
 		User user = UserLocalServiceUtil.getUser(userId);
 
 		if (((user.getStatus() == WorkflowConstants.STATUS_DRAFT) ||
-			(user.getStatus() == WorkflowConstants.STATUS_PENDING)) &&
+			 (user.getStatus() == WorkflowConstants.STATUS_PENDING)) &&
 			(status == WorkflowConstants.STATUS_APPROVED)) {
+
 			UserLocalServiceUtil.completeUserRegistration(user, serviceContext);
 		}
 

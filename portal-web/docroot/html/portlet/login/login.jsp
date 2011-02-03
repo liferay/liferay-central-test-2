@@ -51,34 +51,36 @@
 		<aui:form action="<%= loginURL %>" method="post" name="fm">
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
-			<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
+			<c:choose>
+				<c:when test='<%= SessionMessages.contains(request, "user_added") %>'>
 
-				<%
-				String userEmailAddress = (String)SessionMessages.get(request, "user_added");
-				String userPassword = (String)SessionMessages.get(request, "user_added_password");
-				%>
+					<%
+					String userEmailAddress = (String)SessionMessages.get(request, "user_added");
+					String userPassword = (String)SessionMessages.get(request, "user_added_password");
+					%>
 
-				<div class="portlet-msg-success">
-					<c:choose>
-						<c:when test="<%= company.isStrangersVerify() || Validator.isNull(userPassword) %>">
-							<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", userEmailAddress) %>
-						</c:when>
-						<c:otherwise>
-							<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {userPassword, userEmailAddress}, false) %>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</c:if>
-			<c:if test='<%= SessionMessages.contains(request, "user_pending") %>'>
+					<div class="portlet-msg-success">
+						<c:choose>
+							<c:when test="<%= company.isStrangersVerify() || Validator.isNull(userPassword) %>">
+								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", userEmailAddress) %>
+							</c:when>
+							<c:otherwise>
+								<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {userPassword, userEmailAddress}, false) %>
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</c:when>
+				<c:when test='<%= SessionMessages.contains(request, "user_pending") %>'>
 
-				<%
-				String userEmailAddress = (String)SessionMessages.get(request, "user_pending");
-				%>
+					<%
+					String userEmailAddress = (String)SessionMessages.get(request, "user_pending");
+					%>
 
-				<div class="portlet-msg-success">
-						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-you-will-be-notified-via-email-at-x-when-your-account-has-been-approved", userEmailAddress) %>
-				</div>
-			</c:if>
+					<div class="portlet-msg-success">
+						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account.-you-will-be-notified-via-email-at-x-when-your-account-has-been-approved", userEmailAddress) %>
+					</div>
+				</c:when>
+			</c:choose>
 
 			<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
 			<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />

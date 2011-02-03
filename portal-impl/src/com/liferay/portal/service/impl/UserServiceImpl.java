@@ -21,8 +21,8 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.workflow.WorkflowThreadLocal;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
@@ -181,16 +181,7 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		userLocalService.addTeamUsers(teamId, userIds);
 	}
 
-	public void addUserGroupUsers(long userGroupId, long[] userIds)
-		throws PortalException, SystemException {
-
-		UserGroupPermissionUtil.check(
-			getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_MEMBERS);
-
-		userLocalService.addUserGroupUsers(userGroupId, userIds);
-	}
-
-	public User addUserBypassWorkflow(
+	public User addUser(
 			long companyId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
 			String emailAddress, long facebookId, String openId, Locale locale,
@@ -198,26 +189,35 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 			int birthdayYear, String jobTitle, long[] groupIds,
 			long[] organizationIds, long[] roleIds, long[] userGroupIds,
-			boolean sendEmail, ServiceContext serviceContext)
+			boolean sendEmail, List<Address> addresses,
+			List<EmailAddress> emailAddresses, List<Phone> phones,
+			List<Website> websites,
+			List<AnnouncementsDelivery> announcementsDelivers,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		boolean oldWorkflowEnabled = WorkflowThreadLocal.isEnabled();
+		User user = addUser(
+			companyId, autoPassword, password1, password2, autoScreenName,
+			screenName, emailAddress, facebookId, openId, locale, firstName,
+			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
+			roleIds, userGroupIds, sendEmail, serviceContext);
 
-		try {
-			WorkflowThreadLocal.setEnabled(false);
+		EnterpriseAdminUtil.updateAddresses(
+			Contact.class.getName(), user.getContactId(), addresses);
 
-			return addUser(
-				companyId, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, facebookId,
-				openId, locale, firstName, middleName, lastName,
-				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, groupIds, organizationIds,
-				roleIds, userGroupIds, sendEmail, serviceContext);
-		}
-		finally {
-			WorkflowThreadLocal.setEnabled(oldWorkflowEnabled);
-		}
+		EnterpriseAdminUtil.updateEmailAddresses(
+			Contact.class.getName(), user.getContactId(), emailAddresses);
 
+		EnterpriseAdminUtil.updatePhones(
+			Contact.class.getName(), user.getContactId(), phones);
+
+		EnterpriseAdminUtil.updateWebsites(
+			Contact.class.getName(), user.getContactId(), websites);
+
+		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
+
+		return user;
 	}
 
 	public User addUser(
@@ -283,26 +283,25 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		boolean oldWorkflowEnabled = WorkflowThreadLocal.isEnabled();
+		boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
 
 		try {
 			WorkflowThreadLocal.setEnabled(false);
 
 			return addUser(
-				companyId, autoPassword, password1, password2,
-				autoScreenName, screenName, emailAddress, facebookId,
-				openId, locale, firstName, middleName, lastName,
-				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, groupIds, organizationIds,
+				companyId, autoPassword, password1, password2, autoScreenName,
+				screenName, emailAddress, facebookId, openId, locale, firstName,
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
 				roleIds, userGroupIds, sendEmail, addresses, emailAddresses,
 				phones, websites, announcementsDelivers, serviceContext);
 		}
 		finally {
-			WorkflowThreadLocal.setEnabled(oldWorkflowEnabled);
+			WorkflowThreadLocal.setEnabled(workflowEnabled);
 		}
 	}
 
-	public User addUser(
+	public User addUserBypassWorkflow(
 			long companyId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
 			String emailAddress, long facebookId, String openId, Locale locale,
@@ -310,35 +309,33 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 			int birthdayYear, String jobTitle, long[] groupIds,
 			long[] organizationIds, long[] roleIds, long[] userGroupIds,
-			boolean sendEmail, List<Address> addresses,
-			List<EmailAddress> emailAddresses, List<Phone> phones,
-			List<Website> websites,
-			List<AnnouncementsDelivery> announcementsDelivers,
-			ServiceContext serviceContext)
+			boolean sendEmail, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		User user = addUser(
-			companyId, autoPassword, password1, password2, autoScreenName,
-			screenName, emailAddress, facebookId, openId, locale, firstName,
-			middleName, lastName, prefixId, suffixId, male, birthdayMonth,
-			birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
-			roleIds, userGroupIds, sendEmail, serviceContext);
+		boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
 
-		EnterpriseAdminUtil.updateAddresses(
-			Contact.class.getName(), user.getContactId(), addresses);
+		try {
+			WorkflowThreadLocal.setEnabled(false);
 
-		EnterpriseAdminUtil.updateEmailAddresses(
-			Contact.class.getName(), user.getContactId(), emailAddresses);
+			return addUser(
+				companyId, autoPassword, password1, password2, autoScreenName,
+				screenName, emailAddress, facebookId, openId, locale, firstName,
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, groupIds, organizationIds,
+				roleIds, userGroupIds, sendEmail, serviceContext);
+		}
+		finally {
+			WorkflowThreadLocal.setEnabled(workflowEnabled);
+		}
+	}
 
-		EnterpriseAdminUtil.updatePhones(
-			Contact.class.getName(), user.getContactId(), phones);
+	public void addUserGroupUsers(long userGroupId, long[] userIds)
+		throws PortalException, SystemException {
 
-		EnterpriseAdminUtil.updateWebsites(
-			Contact.class.getName(), user.getContactId(), websites);
+		UserGroupPermissionUtil.check(
+			getPermissionChecker(), userGroupId, ActionKeys.ASSIGN_MEMBERS);
 
-		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
-
-		return user;
+		userLocalService.addUserGroupUsers(userGroupId, userIds);
 	}
 
 	public void deletePortrait(long userId)
@@ -727,6 +724,53 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String twitterSn, String ymSn, String jobTitle, long[] groupIds,
 			long[] organizationIds, long[] roleIds,
 			List<UserGroupRole> userGroupRoles, long[] userGroupIds,
+			List<Address> addresses, List<EmailAddress> emailAddresses,
+			List<Phone> phones, List<Website> websites,
+			List<AnnouncementsDelivery> announcementsDelivers,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		User user = updateUser(
+			userId, oldPassword, newPassword1, newPassword2, passwordReset,
+			reminderQueryQuestion, reminderQueryAnswer, screenName,
+			emailAddress, facebookId, openId, languageId, timeZoneId, greeting,
+			comments, firstName, middleName, lastName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
+			jobTitle, groupIds, organizationIds, roleIds,
+			userGroupRoles, userGroupIds, serviceContext);
+
+		EnterpriseAdminUtil.updateAddresses(
+			Contact.class.getName(), user.getContactId(), addresses);
+
+		EnterpriseAdminUtil.updateEmailAddresses(
+			Contact.class.getName(), user.getContactId(), emailAddresses);
+
+		EnterpriseAdminUtil.updatePhones(
+			Contact.class.getName(), user.getContactId(), phones);
+
+		EnterpriseAdminUtil.updateWebsites(
+			Contact.class.getName(), user.getContactId(), websites);
+
+		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
+
+		return user;
+	}
+
+	public User updateUser(
+			long userId, String oldPassword, String newPassword1,
+			String newPassword2, boolean passwordReset,
+			String reminderQueryQuestion, String reminderQueryAnswer,
+			String screenName, String emailAddress, long facebookId,
+			String openId, String languageId, String timeZoneId,
+			String greeting, String comments, String firstName,
+			String middleName, String lastName, int prefixId, int suffixId,
+			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
+			String smsSn, String aimSn, String facebookSn, String icqSn,
+			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
+			String twitterSn, String ymSn, String jobTitle, long[] groupIds,
+			long[] organizationIds, long[] roleIds,
+			List<UserGroupRole> userGroupRoles, long[] userGroupIds,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -776,53 +820,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
 			jobTitle, groupIds, organizationIds, roleIds, userGroupRoles,
 			userGroupIds, serviceContext);
-	}
-
-	public User updateUser(
-			long userId, String oldPassword, String newPassword1,
-			String newPassword2, boolean passwordReset,
-			String reminderQueryQuestion, String reminderQueryAnswer,
-			String screenName, String emailAddress, long facebookId,
-			String openId, String languageId, String timeZoneId,
-			String greeting, String comments, String firstName,
-			String middleName, String lastName, int prefixId, int suffixId,
-			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String smsSn, String aimSn, String facebookSn, String icqSn,
-			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
-			String twitterSn, String ymSn, String jobTitle, long[] groupIds,
-			long[] organizationIds, long[] roleIds,
-			List<UserGroupRole> userGroupRoles, long[] userGroupIds,
-			List<Address> addresses, List<EmailAddress> emailAddresses,
-			List<Phone> phones, List<Website> websites,
-			List<AnnouncementsDelivery> announcementsDelivers,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		User user = updateUser(
-			userId, oldPassword, newPassword1, newPassword2, passwordReset,
-			reminderQueryQuestion, reminderQueryAnswer, screenName,
-			emailAddress, facebookId, openId, languageId, timeZoneId, greeting,
-			comments, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
-			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, twitterSn, ymSn,
-			jobTitle, groupIds, organizationIds, roleIds,
-			userGroupRoles, userGroupIds, serviceContext);
-
-		EnterpriseAdminUtil.updateAddresses(
-			Contact.class.getName(), user.getContactId(), addresses);
-
-		EnterpriseAdminUtil.updateEmailAddresses(
-			Contact.class.getName(), user.getContactId(), emailAddresses);
-
-		EnterpriseAdminUtil.updatePhones(
-			Contact.class.getName(), user.getContactId(), phones);
-
-		EnterpriseAdminUtil.updateWebsites(
-			Contact.class.getName(), user.getContactId(), websites);
-
-		updateAnnouncementsDeliveries(user.getUserId(), announcementsDelivers);
-
-		return user;
 	}
 
 	protected long[] checkGroups(long userId, long[] groupIds)
@@ -996,16 +993,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		}
 	}
 
-	protected void validateScreenName(User user, String screenName)
-		throws PortalException, SystemException {
-
-		PermissionChecker permissionChecker = getPermissionChecker();
-
-		if (!EnterpriseAdminUtil.hasUpdateScreenName(permissionChecker, user)) {
-			throw new UserScreenNameException();
-		}
-	}
-
 	protected void validateOrganizationUsers(long[] userIds)
 		throws PortalException, SystemException {
 
@@ -1061,6 +1048,16 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			if (!allowed) {
 				throw new PrincipalException();
 			}
+		}
+	}
+
+	protected void validateScreenName(User user, String screenName)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker = getPermissionChecker();
+
+		if (!EnterpriseAdminUtil.hasUpdateScreenName(permissionChecker, user)) {
+			throw new UserScreenNameException();
 		}
 	}
 

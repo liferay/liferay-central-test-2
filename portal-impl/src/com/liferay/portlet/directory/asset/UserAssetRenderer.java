@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 2000-2010 Liferay, Inc. All rights reserved.
+/**
+ * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,10 +25,11 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 
+import java.util.Locale;
+
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-import java.util.Locale;
 
 /**
  * @author Michael C. Han
@@ -48,7 +49,6 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public long getGroupId() {
-		//TBD
 		return 0;
 	}
 
@@ -64,15 +64,14 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 		LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL editPortletURL = liferayPortletResponse.createRenderURL(
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
 			PortletKeys.ENTERPRISE_ADMIN_USERS);
 
-		editPortletURL.setParameter(
+		portletURL.setParameter(
 			"struts_action", "/enterprise_admin_users/edit_user");
-		editPortletURL.setParameter(
-			"p_u_i_d", String.valueOf(_user.getUserId()));
+		portletURL.setParameter("p_u_i_d", String.valueOf(_user.getUserId()));
 
-		return editPortletURL;
+		return portletURL;
 	}
 
 	public String getUrlTitle() {
@@ -89,8 +88,7 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 				WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPortalURL() + themeDisplay.getPathMain() +
-			"/directory/view_user?p_u_i_d=" +
-					_user.getUserId();
+			"/directory/view_user?p_u_i_d=" + _user.getUserId();
 	}
 
 	public long getUserId() {

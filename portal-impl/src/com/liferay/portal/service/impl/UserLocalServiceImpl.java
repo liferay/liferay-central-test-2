@@ -314,37 +314,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	public User addUserBypassWorkflow(
-			long creatorUserId, long companyId, boolean autoPassword,
-			String password1, String password2, boolean autoScreenName,
-			String screenName, String emailAddress, long facebookId,
-			String openId, Locale locale, String firstName, String middleName,
-			String lastName, int prefixId, int suffixId, boolean male,
-			int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, long[] groupIds, long[] organizationIds,
-			long[] roleIds, long[] userGroupIds, boolean sendEmail,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-			boolean oldWorkflowEnabled = WorkflowThreadLocal.isEnabled();
-
-			try {
-				WorkflowThreadLocal.setEnabled(false);
-
-				return addUser(
-					creatorUserId, companyId, autoPassword, password1,
-					password2, autoScreenName, screenName, emailAddress,
-					facebookId, openId, locale, firstName, middleName, lastName,
-					prefixId, suffixId, male, birthdayMonth, birthdayDay,
-					birthdayYear, jobTitle, groupIds, organizationIds,
-					roleIds, userGroupIds, sendEmail, serviceContext);
-			}
-			finally {
-				WorkflowThreadLocal.setEnabled(oldWorkflowEnabled);
-			}
-
-		}
-
 	/**
 	 * Adds a user to the database. Also notifies the appropriate model
 	 * listeners.
@@ -476,10 +445,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setModifiedDate(now);
 		user.setDefaultUser(false);
 		user.setContactId(counterLocalService.increment());
+
 		if (Validator.isNotNull(password1)) {
 			user.setPassword(PwdEncryptor.encrypt(password1));
 			user.setPasswordUnencrypted(password1);
 		}
+
 		user.setPasswordEncrypted(true);
 		user.setPasswordReset(false);
 		user.setDigest(StringPool.BLANK);
@@ -607,27 +578,58 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setExpandoBridgeAttributes(serviceContext);
 
-		// Workflow
-		serviceContext.setAttribute(_NOTIFY_USER_CONTEXT_ATTR, sendEmail);
-		serviceContext.setAttribute(_AUTO_PASSWORD_CONTEXT_ATT, autoPassword);
-
-		long workflowUserId = creatorUserId;
-
-		if (workflowUserId == user.getUserId()) {
-			workflowUserId = defaultUser.getUserId();
-		}
-
-		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			companyId, workflowUserId, User.class.getName(),
-			user.getUserId(), user, serviceContext);
-
 		// Indexer
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 
 		indexer.reindex(user);
 
+		// Workflow
+
+		long workflowUserId = creatorUserId;
+
+		if (workflowUserId == userId) {
+			workflowUserId = defaultUser.getUserId();
+		}
+
+		serviceContext.setAttribute("autoPassword", autoPassword);
+		serviceContext.setAttribute("sendEmail", sendEmail);
+
+		WorkflowHandlerRegistryUtil.startWorkflowInstance(
+			companyId, workflowUserId, User.class.getName(), userId, user,
+			serviceContext);
+
 		return user;
+	}
+
+	public User addUserBypassWorkflow(
+			long creatorUserId, long companyId, boolean autoPassword,
+			String password1, String password2, boolean autoScreenName,
+			String screenName, String emailAddress, long facebookId,
+			String openId, Locale locale, String firstName, String middleName,
+			String lastName, int prefixId, int suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear,
+			String jobTitle, long[] groupIds, long[] organizationIds,
+			long[] roleIds, long[] userGroupIds, boolean sendEmail,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
+
+		try {
+			WorkflowThreadLocal.setEnabled(false);
+
+			return addUser(
+				creatorUserId, companyId, autoPassword, password1, password2,
+				autoScreenName, screenName, emailAddress, facebookId, openId,
+				locale, firstName, middleName, lastName, prefixId, suffixId,
+				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				groupIds, organizationIds, roleIds, userGroupIds, sendEmail,
+				serviceContext);
+		}
+		finally {
+			WorkflowThreadLocal.setEnabled(workflowEnabled);
+		}
 	}
 
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
@@ -1026,31 +1028,27 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public void completeUserRegistration(
 			User user, ServiceContext serviceContext)
-		throws SystemException, PortalException {
-
-		boolean sendEmail = GetterUtil.getBoolean(
-			serviceContext.getAttribute(_NOTIFY_USER_CONTEXT_ATTR), false);
+		throws PortalException, SystemException {
 
 		boolean autoPassword = GetterUtil.getBoolean(
-			serviceContext.getAttribute(_AUTO_PASSWORD_CONTEXT_ATT), false);
+			serviceContext.getAttribute("autoPassword"));
 
-		String password1 = null;
+		String password = null;
 
-        if (autoPassword) {
-			long companyId = user.getCompanyId();
-
-			long[] organizationIds = user.getOrganizationIds();
-
+		if (autoPassword) {
 			PasswordPolicy passwordPolicy =
 				passwordPolicyLocalService.getPasswordPolicy(
-					companyId, organizationIds);
+					user.getCompanyId(), user.getOrganizationIds());
 
-			password1 = PwdToolkitUtil.generate(passwordPolicy);
+			password = PwdToolkitUtil.generate(passwordPolicy);
 		}
+
+		boolean sendEmail = GetterUtil.getBoolean(
+			serviceContext.getAttribute("sendEmail"));
 
 		if (sendEmail) {
 			try {
-				sendEmail(user, password1);
+				sendEmail(user, password);
 			}
 			catch (IOException ioe) {
 				throw new SystemException(ioe);
@@ -1244,10 +1242,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		userGroupRoleLocalService.deleteUserGroupRolesByUserId(
 			user.getUserId());
 
-		// Workflow
-		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
-			user.getCompanyId(), 0, User.class.getName(), user.getUserId());
-
 		// User
 
 		userPersistence.remove(user);
@@ -1255,6 +1249,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+
+		// Workflow
+
+		workflowInstanceLinkLocalService.deleteWorkflowInstanceLinks(
+			user.getCompanyId(), 0, User.class.getName(), user.getUserId());
 	}
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -3162,17 +3161,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		String subject = PrefsPropsUtil.getContent(
 			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT);
-
-		String body = null;
-		if (Validator.isNotNull(password)) {
-			body = PrefsPropsUtil.getContent(
-				user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
-		}
-		else {
-			body = PrefsPropsUtil.getContent(
-				user.getCompanyId(),
-				PropsKeys.ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY);
-		}
+		String body = PrefsPropsUtil.getContent(
+			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
 
 		subject = StringUtil.replace(
 			subject,
@@ -3573,9 +3563,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 	}
-
-	private static final String _NOTIFY_USER_CONTEXT_ATTR = "notifyUser";
-	private static final String _AUTO_PASSWORD_CONTEXT_ATT = "autoPassword";
 
 	private static Log _log = LogFactoryUtil.getLog(UserLocalServiceImpl.class);
 
