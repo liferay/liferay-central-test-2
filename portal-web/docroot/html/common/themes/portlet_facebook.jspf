@@ -24,14 +24,16 @@
 <%
 Set<String> headerPortalCssSet = new LinkedHashSet<String>();
 
-for (PortletResource headerPortalCss : portlet.getHeaderPortalCss()) {
-	String url = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext(), headerPortalCss, portlet.getTimestamp());
+for (String headerPortalCss : portlet.getHeaderPortalCss()) {
+	if (!HttpUtil.hasProtocol(headerPortalCss)) {
+		headerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + headerPortalCss, portlet.getTimestamp());
+	}
 
-	if (!headerPortalCssSet.contains(url)) {
-		headerPortalCssSet.add(url);
+	if (!headerPortalCssSet.contains(headerPortalCss)) {
+		headerPortalCssSet.add(headerPortalCss);
 %>
 
-		<link href="<%= HtmlUtil.escape(url) %>" rel="stylesheet" type="text/css" />
+		<link href="<%= HtmlUtil.escape(headerPortalCss) %>" rel="stylesheet" type="text/css" />
 
 <%
 	}
@@ -39,14 +41,16 @@ for (PortletResource headerPortalCss : portlet.getHeaderPortalCss()) {
 
 Set<String> headerPortletCssSet = new LinkedHashSet<String>();
 
-for (PortletResource headerPortletCss : portlet.getHeaderPortletCss()) {
-	String url = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath(), headerPortletCss, portlet.getTimestamp());
+for (String headerPortletCss : portlet.getHeaderPortletCss()) {
+	if (!HttpUtil.hasProtocol(headerPortletCss)) {
+		headerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + headerPortletCss, portlet.getTimestamp());
+	}
 
-	if (!headerPortletCssSet.contains(url)) {
-		headerPortletCssSet.add(url);
+	if (!headerPortletCssSet.contains(headerPortletCss)) {
+		headerPortletCssSet.add(headerPortletCss);
 %>
 
-		<link href="<%= HtmlUtil.escape(url) %>" rel="stylesheet" type="text/css" />
+		<link href="<%= HtmlUtil.escape(headerPortletCss) %>" rel="stylesheet" type="text/css" />
 
 <%
 	}
@@ -58,14 +62,16 @@ for (PortletResource headerPortletCss : portlet.getHeaderPortletCss()) {
 <%
 Set<String> footerPortalCssSet = new LinkedHashSet<String>();
 
-for (PortletResource footerPortalCss : portlet.getFooterPortalCss()) {
-	String url = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext(), footerPortalCss, portlet.getTimestamp());
+for (String footerPortalCss : portlet.getFooterPortalCss()) {
+	if (!HttpUtil.hasProtocol(footerPortalCss)) {
+		footerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalCss, portlet.getTimestamp());
+	}
 
-	if (!footerPortalCssSet.contains(url)) {
-		footerPortalCssSet.add(url);
+	if (!footerPortalCssSet.contains(footerPortalCss)) {
+		footerPortalCssSet.add(footerPortalCss);
 %>
 
-		<link href="<%= HtmlUtil.escape(url) %>" rel="stylesheet" type="text/css" />
+		<link href="<%= HtmlUtil.escape(footerPortalCss) %>" rel="stylesheet" type="text/css" />
 
 <%
 	}
@@ -73,14 +79,16 @@ for (PortletResource footerPortalCss : portlet.getFooterPortalCss()) {
 
 Set<String> footerPortletCssSet = new LinkedHashSet<String>();
 
-for (PortletResource footerPortletCss : portlet.getFooterPortletCss()) {
-	String url = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath(), footerPortletCss, portlet.getTimestamp());
+for (String footerPortletCss : portlet.getFooterPortletCss()) {
+	if (!HttpUtil.hasProtocol(footerPortletCss)) {
+		footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletCss, portlet.getTimestamp());
+	}
 
-	if (!footerPortletCssSet.contains(url)) {
-		footerPortletCssSet.add(url);
+	if (!footerPortletCssSet.contains(footerPortletCss)) {
+		footerPortletCssSet.add(footerPortletCss);
 %>
 
-		<link href="<%= HtmlUtil.escape(url) %>" rel="stylesheet" type="text/css" />
+		<link href="<%= HtmlUtil.escape(footerPortletCss) %>" rel="stylesheet" type="text/css" />
 
 <%
 	}

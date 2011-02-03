@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.portlet.PortletResource;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -948,14 +947,6 @@ public class PortalUtil {
 	 */
 	public static String[] getSocialEquityClassNames() {
 		return ResourceActionsUtil.getSocialEquityClassNames();
-	}
-
-	public static String getStaticResourceURL(
-		HttpServletRequest request, String contextPath,
-		PortletResource portletResource, long timestamp) {
-
-		return getPortal().getStaticResourceURL(
-			request, contextPath, portletResource, timestamp);
 	}
 
 	public static String getStaticResourceURL(

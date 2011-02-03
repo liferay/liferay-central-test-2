@@ -1247,7 +1247,7 @@ public interface Portlet extends PortletModel {
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portal's context path
 	*/
-	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getHeaderPortalCss();
+	public java.util.List<java.lang.String> getHeaderPortalCss();
 
 	/**
 	* Sets a list of CSS files that will be referenced from the page's header
@@ -1257,7 +1257,7 @@ public interface Portlet extends PortletModel {
 	the page's header relative to the portal's context path
 	*/
 	public void setHeaderPortalCss(
-		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> headerPortalCss);
+		java.util.List<java.lang.String> headerPortalCss);
 
 	/**
 	* Gets a list of CSS files that will be referenced from the page's header
@@ -1266,7 +1266,7 @@ public interface Portlet extends PortletModel {
 	* @return a list of CSS files that will be referenced from the page's
 	header relative to the portlet's context path
 	*/
-	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getHeaderPortletCss();
+	public java.util.List<java.lang.String> getHeaderPortletCss();
 
 	/**
 	* Sets a list of CSS files that will be referenced from the page's header
@@ -1276,7 +1276,7 @@ public interface Portlet extends PortletModel {
 	the page's header relative to the portlet's context path
 	*/
 	public void setHeaderPortletCss(
-		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> headerPortletCss);
+		java.util.List<java.lang.String> headerPortletCss);
 
 	/**
 	* Gets a list of JavaScript files that will be referenced from the page's
@@ -1285,7 +1285,7 @@ public interface Portlet extends PortletModel {
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portal's context path
 	*/
-	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getHeaderPortalJavaScript();
+	public java.util.List<java.lang.String> getHeaderPortalJavaScript();
 
 	/**
 	* Sets a list of JavaScript files that will be referenced from the page's
@@ -1296,7 +1296,7 @@ public interface Portlet extends PortletModel {
 	path
 	*/
 	public void setHeaderPortalJavaScript(
-		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> headerPortalJavaScript);
+		java.util.List<java.lang.String> headerPortalJavaScript);
 
 	/**
 	* Gets a list of JavaScript files that will be referenced from the page's
@@ -1305,7 +1305,7 @@ public interface Portlet extends PortletModel {
 	* @return a list of JavaScript files that will be referenced from the
 	page's header relative to the portlet's context path
 	*/
-	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getHeaderPortletJavaScript();
+	public java.util.List<java.lang.String> getHeaderPortletJavaScript();
 
 	/**
 	* Sets a list of JavaScript files that will be referenced from the page's
@@ -1316,7 +1316,7 @@ public interface Portlet extends PortletModel {
 	context path
 	*/
 	public void setHeaderPortletJavaScript(
-		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> headerPortletJavaScript);
+		java.util.List<java.lang.String> headerPortletJavaScript);
 
 	/**
 	* Gets a list of CSS files that will be referenced from the page's footer
@@ -1325,7 +1325,7 @@ public interface Portlet extends PortletModel {
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portal's context path
 	*/
-	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getFooterPortalCss();
+	public java.util.List<java.lang.String> getFooterPortalCss();
 
 	/**
 	* Sets a list of CSS files that will be referenced from the page's footer
@@ -1335,7 +1335,7 @@ public interface Portlet extends PortletModel {
 	the page's footer relative to the portal's context path
 	*/
 	public void setFooterPortalCss(
-		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> footerPortalCss);
+		java.util.List<java.lang.String> footerPortalCss);
 
 	/**
 	* Gets a list of CSS files that will be referenced from the page's footer
@@ -1344,7 +1344,7 @@ public interface Portlet extends PortletModel {
 	* @return a list of CSS files that will be referenced from the page's
 	footer relative to the portlet's context path
 	*/
-	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getFooterPortletCss();
+	public java.util.List<java.lang.String> getFooterPortletCss();
 
 	/**
 	* Sets a list of CSS files that will be referenced from the page's footer
@@ -1354,7 +1354,7 @@ public interface Portlet extends PortletModel {
 	the page's footer relative to the portlet's context path
 	*/
 	public void setFooterPortletCss(
-		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> footerPortletCss);
+		java.util.List<java.lang.String> footerPortletCss);
 
 	/**
 	* Gets a list of JavaScript files that will be referenced from the page's
@@ -1363,7 +1363,7 @@ public interface Portlet extends PortletModel {
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portal's context path
 	*/
-	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getFooterPortalJavaScript();
+	public java.util.List<java.lang.String> getFooterPortalJavaScript();
 
 	/**
 	* Sets a list of JavaScript files that will be referenced from the page's
@@ -1374,7 +1374,7 @@ public interface Portlet extends PortletModel {
 	path
 	*/
 	public void setFooterPortalJavaScript(
-		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> footerPortalJavaScript);
+		java.util.List<java.lang.String> footerPortalJavaScript);
 
 	/**
 	* Gets a list of JavaScript files that will be referenced from the page's
@@ -1383,7 +1383,7 @@ public interface Portlet extends PortletModel {
 	* @return a list of JavaScript files that will be referenced from the
 	page's footer relative to the portlet's context path
 	*/
-	public java.util.List<com.liferay.portal.kernel.portlet.PortletResource> getFooterPortletJavaScript();
+	public java.util.List<java.lang.String> getFooterPortletJavaScript();
 
 	/**
 	* Sets a list of JavaScript files that will be referenced from the page's
@@ -1394,7 +1394,7 @@ public interface Portlet extends PortletModel {
 	context path
 	*/
 	public void setFooterPortletJavaScript(
-		java.util.List<com.liferay.portal.kernel.portlet.PortletResource> footerPortletJavaScript);
+		java.util.List<java.lang.String> footerPortletJavaScript);
 
 	/**
 	* Gets the name of the CSS class that will be injected in the DIV that

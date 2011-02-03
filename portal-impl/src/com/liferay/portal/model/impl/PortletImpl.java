@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
-import com.liferay.portal.kernel.portlet.PortletResource;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.OpenSearch;
@@ -101,14 +100,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_assetRendererFactoryClasses = new ArrayList<String>();
 		_customAttributesDisplayClasses = new ArrayList<String>();
 		_workflowHandlerClasses = new ArrayList<String>();
-		_headerPortalCss = new ArrayList<PortletResource>();
-		_headerPortletCss = new ArrayList<PortletResource>();
-		_headerPortalJavaScript = new ArrayList<PortletResource>();
-		_headerPortletJavaScript = new ArrayList<PortletResource>();
-		_footerPortalCss = new ArrayList<PortletResource>();
-		_footerPortletCss = new ArrayList<PortletResource>();
-		_footerPortalJavaScript = new ArrayList<PortletResource>();
-		_footerPortletJavaScript = new ArrayList<PortletResource>();
+		_headerPortalCss = new ArrayList<String>();
+		_headerPortletCss = new ArrayList<String>();
+		_headerPortalJavaScript = new ArrayList<String>();
+		_headerPortletJavaScript = new ArrayList<String>();
+		_footerPortalCss = new ArrayList<String>();
+		_footerPortletCss = new ArrayList<String>();
+		_footerPortalJavaScript = new ArrayList<String>();
+		_footerPortletJavaScript = new ArrayList<String>();
 		_unlinkedRoles = new HashSet<String>();
 		_roleMappers = new LinkedHashMap<String, String>();
 		_initParams = new HashMap<String, String>();
@@ -151,24 +150,20 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
 		boolean remoteable, boolean scopeable, String userPrincipalStrategy,
 		boolean privateRequestAttributes, boolean privateSessionAttributes,
-		int renderWeight, boolean ajaxable,
-		List<PortletResource> headerPortalCss,
-		List<PortletResource> headerPortletCss,
-		List<PortletResource> headerPortalJavaScript,
-		List<PortletResource> headerPortletJavaScript,
-		List<PortletResource> footerPortalCss,
-		List<PortletResource> footerPortletCss,
-		List<PortletResource> footerPortalJavaScript,
-		List<PortletResource> footerPortletJavaScript, String cssClassWrapper,
+		int renderWeight, boolean ajaxable, List<String> headerPortalCss,
+		List<String> headerPortletCss, List<String> headerPortalJavaScript,
+		List<String> headerPortletJavaScript, List<String> footerPortalCss,
+		List<String> footerPortletCss, List<String> footerPortalJavaScript,
+		List<String> footerPortletJavaScript, String cssClassWrapper,
 		String facebookIntegration, boolean addDefaultResource, String roles,
 		Set<String> unlinkedRoles, Map<String, String> roleMappers,
 		boolean system, boolean active, boolean include,
 		Map<String, String> initParams, Integer expCache,
 		Map<String, Set<String>> portletModes,
-		Map<String, Set<String>> windowStates,
-		Set<String> supportedLocales, String resourceBundle,
-		PortletInfo portletInfo, Map<String, PortletFilter> portletFilters,
-		Set<QName> processingEvents, Set<QName> publishingEvents,
+		Map<String, Set<String>> windowStates, Set<String> supportedLocales,
+		String resourceBundle, PortletInfo portletInfo,
+		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
+		Set<QName> publishingEvents,
 		Set<PublicRenderParameter> publicRenderParameters,
 		PortletApp portletApp) {
 
@@ -1906,7 +1901,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return a list of CSS files that will be referenced from the page's
 	 *         header relative to the portal's context path
 	 */
-	public List<PortletResource> getHeaderPortalCss() {
+	public List<String> getHeaderPortalCss() {
 		return _headerPortalCss;
 	}
 
@@ -1917,7 +1912,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param headerPortalCss a list of CSS files that will be referenced from
 	 *        the page's header relative to the portal's context path
 	 */
-	public void setHeaderPortalCss(List<PortletResource> headerPortalCss) {
+	public void setHeaderPortalCss(List<String> headerPortalCss) {
 		_headerPortalCss = headerPortalCss;
 	}
 
@@ -1928,7 +1923,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return a list of CSS files that will be referenced from the page's
 	 *         header relative to the portlet's context path
 	 */
-	public List<PortletResource> getHeaderPortletCss() {
+	public List<String> getHeaderPortletCss() {
 		return _headerPortletCss;
 	}
 
@@ -1939,7 +1934,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param headerPortletCss a list of CSS files that will be referenced from
 	 *        the page's header relative to the portlet's context path
 	 */
-	public void setHeaderPortletCss(List<PortletResource> headerPortletCss) {
+	public void setHeaderPortletCss(List<String> headerPortletCss) {
 		_headerPortletCss = headerPortletCss;
 	}
 
@@ -1950,7 +1945,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return a list of JavaScript files that will be referenced from the
 	 *         page's header relative to the portal's context path
 	 */
-	public List<PortletResource> getHeaderPortalJavaScript() {
+	public List<String> getHeaderPortalJavaScript() {
 		return _headerPortalJavaScript;
 	}
 
@@ -1962,7 +1957,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *        referenced from the page's header relative to the portal's context
 	 *        path
 	 */
-	public void setHeaderPortalJavaScript(List<PortletResource> headerPortalJavaScript) {
+	public void setHeaderPortalJavaScript(List<String> headerPortalJavaScript) {
 		_headerPortalJavaScript = headerPortalJavaScript;
 	}
 
@@ -1973,7 +1968,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return a list of JavaScript files that will be referenced from the
 	 *         page's header relative to the portlet's context path
 	 */
-	public List<PortletResource> getHeaderPortletJavaScript() {
+	public List<String> getHeaderPortletJavaScript() {
 		return _headerPortletJavaScript;
 	}
 
@@ -1986,7 +1981,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *        context path
 	 */
 	public void setHeaderPortletJavaScript(
-		List<PortletResource> headerPortletJavaScript) {
+		List<String> headerPortletJavaScript) {
 
 		_headerPortletJavaScript = headerPortletJavaScript;
 	}
@@ -1998,7 +1993,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return a list of CSS files that will be referenced from the page's
 	 *         footer relative to the portal's context path
 	 */
-	public List<PortletResource> getFooterPortalCss() {
+	public List<String> getFooterPortalCss() {
 		return _footerPortalCss;
 	}
 
@@ -2009,7 +2004,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param footerPortalCss a list of CSS files that will be referenced from
 	 *        the page's footer relative to the portal's context path
 	 */
-	public void setFooterPortalCss(List<PortletResource> footerPortalCss) {
+	public void setFooterPortalCss(List<String> footerPortalCss) {
 		_footerPortalCss = footerPortalCss;
 	}
 
@@ -2020,7 +2015,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return a list of CSS files that will be referenced from the page's
 	 *         footer relative to the portlet's context path
 	 */
-	public List<PortletResource> getFooterPortletCss() {
+	public List<String> getFooterPortletCss() {
 		return _footerPortletCss;
 	}
 
@@ -2031,7 +2026,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param footerPortletCss a list of CSS files that will be referenced from
 	 *        the page's footer relative to the portlet's context path
 	 */
-	public void setFooterPortletCss(List<PortletResource> footerPortletCss) {
+	public void setFooterPortletCss(List<String> footerPortletCss) {
 		_footerPortletCss = footerPortletCss;
 	}
 
@@ -2042,7 +2037,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return a list of JavaScript files that will be referenced from the
 	 *         page's footer relative to the portal's context path
 	 */
-	public List<PortletResource> getFooterPortalJavaScript() {
+	public List<String> getFooterPortalJavaScript() {
 		return _footerPortalJavaScript;
 	}
 
@@ -2054,7 +2049,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *        referenced from the page's footer relative to the portal's context
 	 *        path
 	 */
-	public void setFooterPortalJavaScript(List<PortletResource> footerPortalJavaScript) {
+	public void setFooterPortalJavaScript(List<String> footerPortalJavaScript) {
 		_footerPortalJavaScript = footerPortalJavaScript;
 	}
 
@@ -2065,7 +2060,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return a list of JavaScript files that will be referenced from the
 	 *         page's footer relative to the portlet's context path
 	 */
-	public List<PortletResource> getFooterPortletJavaScript() {
+	public List<String> getFooterPortletJavaScript() {
 		return _footerPortletJavaScript;
 	}
 
@@ -2078,7 +2073,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *        context path
 	 */
 	public void setFooterPortletJavaScript(
-		List<PortletResource> footerPortletJavaScript) {
+		List<String> footerPortletJavaScript) {
 
 		_footerPortletJavaScript = footerPortletJavaScript;
 	}
@@ -3429,49 +3424,49 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * A list of CSS files that will be referenced from the page's header
 	 * relative to the portal's context path.
 	 */
-	private List<PortletResource> _headerPortalCss;
+	private List<String> _headerPortalCss;
 
 	/**
 	 * A list of CSS files that will be referenced from the page's header
 	 * relative to the portlet's context path.
 	 */
-	private List<PortletResource> _headerPortletCss;
+	private List<String> _headerPortletCss;
 
 	/**
 	 * A list of JavaScript files that will be referenced from the page's header
 	 * relative to the portal's context path.
 	 */
-	private List<PortletResource> _headerPortalJavaScript;
+	private List<String> _headerPortalJavaScript;
 
 	/**
 	 * A list of JavaScript files that will be referenced from the page's header
 	 * relative to the portlet's context path.
 	 */
-	private List<PortletResource> _headerPortletJavaScript;
+	private List<String> _headerPortletJavaScript;
 
 	/**
 	 * A list of CSS files that will be referenced from the page's footer
 	 * relative to the portal's context path.
 	 */
-	private List<PortletResource> _footerPortalCss;
+	private List<String> _footerPortalCss;
 
 	/**
 	 * A list of CSS files that will be referenced from the page's footer
 	 * relative to the portlet's context path.
 	 */
-	private List<PortletResource> _footerPortletCss;
+	private List<String> _footerPortletCss;
 
 	/**
 	 * A list of JavaScript files that will be referenced from the page's footer
 	 * relative to the portal's context path.
 	 */
-	private List<PortletResource> _footerPortalJavaScript;
+	private List<String> _footerPortalJavaScript;
 
 	/**
 	 * A list of JavaScript files that will be referenced from the page's footer
 	 * relative to the portlet's context path.
 	 */
-	private List<PortletResource> _footerPortletJavaScript;
+	private List<String> _footerPortletJavaScript;
 
 	/**
 	 * The name of the CSS class that will be injected in the DIV that wraps

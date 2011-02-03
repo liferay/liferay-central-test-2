@@ -17,7 +17,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
-import com.liferay.portal.kernel.portlet.PortletResource;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.KeyValuePair;
@@ -771,10 +770,6 @@ public interface Portal {
 
 	public ServletContext getServletContext(
 		Portlet portlet, ServletContext servletContext);
-
-	public String getStaticResourceURL(
-		HttpServletRequest request, String contextPath,
-		PortletResource portletResource, long timestamp);
 
 	public String getStaticResourceURL(
 		HttpServletRequest request, String uri);

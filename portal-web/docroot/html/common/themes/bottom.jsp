@@ -32,14 +32,16 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 	Set<String> footerPortalCssSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		for (PortletResource footerPortalCss : portlet.getFooterPortalCss()) {
-			String url = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext(), footerPortalCss, portlet.getTimestamp());
+		for (String footerPortalCss : portlet.getFooterPortalCss()) {
+			if (!HttpUtil.hasProtocol(footerPortalCss)) {
+				footerPortalCss = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalCss, portlet.getTimestamp());
+			}
 
-			if (!footerPortalCssSet.contains(url)) {
-				footerPortalCssSet.add(url);
+			if (!footerPortalCssSet.contains(footerPortalCss)) {
+				footerPortalCssSet.add(footerPortalCss);
 	%>
 
-				<link href="<%= HtmlUtil.escape(url) %>" rel="stylesheet" type="text/css" />
+				<link href="<%= HtmlUtil.escape(footerPortalCss) %>" rel="stylesheet" type="text/css" />
 
 	<%
 			}
@@ -49,14 +51,16 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 	Set<String> footerPortletCssSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		for (PortletResource footerPortletCss : portlet.getFooterPortletCss()) {
-			String url = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath(), footerPortletCss, portlet.getTimestamp());
+		for (String footerPortletCss : portlet.getFooterPortletCss()) {
+			if (!HttpUtil.hasProtocol(footerPortletCss)) {
+				footerPortletCss = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletCss, portlet.getTimestamp());
+			}
 
-			if (!footerPortletCssSet.contains(url)) {
-				footerPortletCssSet.add(url);
+			if (!footerPortletCssSet.contains(footerPortletCss)) {
+				footerPortletCssSet.add(footerPortletCss);
 	%>
 
-				<link href="<%= HtmlUtil.escape(url) %>" rel="stylesheet" type="text/css" />
+				<link href="<%= HtmlUtil.escape(footerPortletCss) %>" rel="stylesheet" type="text/css" />
 
 	<%
 			}
@@ -74,14 +78,16 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 	Set<String> footerPortalJavaScriptSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		for (PortletResource footerPortalJavaScript : portlet.getFooterPortalJavaScript()) {
-			String url = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext(), footerPortalJavaScript, portlet.getTimestamp());
+		for (String footerPortalJavaScript : portlet.getFooterPortalJavaScript()) {
+			if (!HttpUtil.hasProtocol(footerPortalJavaScript)) {
+				footerPortalJavaScript = PortalUtil.getStaticResourceURL(request, PortalUtil.getPathContext() + footerPortalJavaScript, portlet.getTimestamp());
+			}
 
-			if (!footerPortalJavaScriptSet.contains(url) && !themeDisplay.isIncludedJs(url)) {
-				footerPortalJavaScriptSet.add(url);
+			if (!footerPortalJavaScriptSet.contains(footerPortalJavaScript) && !themeDisplay.isIncludedJs(footerPortalJavaScript)) {
+				footerPortalJavaScriptSet.add(footerPortalJavaScript);
 	%>
 
-				<script src="<%= HtmlUtil.escape(url) %>" type="text/javascript"></script>
+				<script src="<%= HtmlUtil.escape(footerPortalJavaScript) %>" type="text/javascript"></script>
 
 	<%
 			}
@@ -91,14 +97,16 @@ List<Portlet> portlets = (List<Portlet>)request.getAttribute(WebKeys.LAYOUT_PORT
 	Set<String> footerPortletJavaScriptSet = new LinkedHashSet<String>();
 
 	for (Portlet portlet : portlets) {
-		for (PortletResource footerPortletJavaScript : portlet.getFooterPortletJavaScript()) {
-			String url = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath(), footerPortletJavaScript, portlet.getTimestamp());
+		for (String footerPortletJavaScript : portlet.getFooterPortletJavaScript()) {
+			if (!HttpUtil.hasProtocol(footerPortletJavaScript)) {
+				footerPortletJavaScript = PortalUtil.getStaticResourceURL(request, portlet.getStaticResourcePath() + footerPortletJavaScript, portlet.getTimestamp());
+			}
 
-			if (!footerPortletJavaScriptSet.contains(url)) {
-				footerPortletJavaScriptSet.add(url);
+			if (!footerPortletJavaScriptSet.contains(footerPortletJavaScript)) {
+				footerPortletJavaScriptSet.add(footerPortletJavaScript);
 	%>
 
-				<script src="<%= HtmlUtil.escape(url) %>" type="text/javascript"></script>
+				<script src="<%= HtmlUtil.escape(footerPortletJavaScript) %>" type="text/javascript"></script>
 
 	<%
 			}
