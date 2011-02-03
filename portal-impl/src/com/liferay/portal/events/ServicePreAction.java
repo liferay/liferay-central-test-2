@@ -1521,7 +1521,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setPathMain(mainPath);
 		themeDisplay.setPathSound(contextPath.concat("/html/sound"));
 
-		// URLs
+		// Icons
 
 		themeDisplay.setShowAddContentIcon(false);
 		themeDisplay.setShowControlPanelIcon(signedIn);
@@ -1533,10 +1533,14 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignOutIcon(signedIn);
 		themeDisplay.setShowStagingIcon(false);
 
+		// Session
+
 		if (!CookieKeys.hasSessionId(request)) {
 			themeDisplay.setAddSessionIdToURL(true);
-			themeDisplay.setSessionId(request.getSession().getId());
+			themeDisplay.setSessionId(session.getId());
 		}
+
+		// URLs
 
 		String urlControlPanel = friendlyURLPrivateGroupPath.concat(
 			GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
@@ -1562,7 +1566,7 @@ public class ServicePreAction extends Action {
 
 		if (themeDisplay.isAddSessionIdToURL()) {
 			urlControlPanel = PortalUtil.getURLWithSessionId(
-				urlControlPanel, themeDisplay.getSessionId());
+				urlControlPanel, session.getId());
 		}
 
 		themeDisplay.setURLControlPanel(urlControlPanel);

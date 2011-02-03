@@ -1081,7 +1081,7 @@ public class ThemeDisplay implements Serializable {
 	private static Log _log = LogFactoryUtil.getLog(ThemeDisplay.class);
 
 	private Account _account;
-	private boolean _addSessionIdToURL = false;
+	private boolean _addSessionIdToURL;
 	private String _cdnHost = StringPool.BLANK;
 	private ColorScheme _colorScheme;
 	private Company _company;

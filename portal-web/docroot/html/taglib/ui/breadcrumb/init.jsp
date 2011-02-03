@@ -164,11 +164,8 @@ private void _buildPortletBreadcrumb(HttpServletRequest request, StringBundler s
 		String breadcrumbText = portletBreadcrumb.getKey();
 		String breadcrumbURL = portletBreadcrumb.getValue();
 
-
-		if ((!CookieKeys.hasSessionId(request)) &&
-			(Validator.isNotNull(breadcrumbURL))) {
-
-			breadcrumbURL = PortalUtil.getURLWithSessionId(breadcrumbURL, request.getSession().getId());
+		if (!CookieKeys.hasSessionId(request) && Validator.isNotNull(breadcrumbURL)) {
+			breadcrumbURL = PortalUtil.getURLWithSessionId(breadcrumbURL, session.getId());
 		}
 
 		sb.append("<li><span>");
