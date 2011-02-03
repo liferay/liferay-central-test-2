@@ -20,11 +20,22 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 
+import javax.servlet.jsp.PageContext;
+
 /**
  * @author Eduardo Lundgren
  * @author Brian Wing Shun Chan
  */
 public interface FormsXSD {
+
+	public String getHTML(PageContext pageContext, Document document)
+		throws Exception;
+
+	public String getHTML(PageContext pageContext,Element element)
+		throws Exception;
+
+	public String getHTML(PageContext pageContext, String xml)
+		throws DocumentException, Exception;
 
 	public JSONArray getJSONArray(Document document) throws JSONException;
 

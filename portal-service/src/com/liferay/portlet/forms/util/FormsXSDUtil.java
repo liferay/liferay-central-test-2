@@ -18,6 +18,9 @@ import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author Eduardo Lundgren
@@ -27,6 +30,24 @@ public class FormsXSDUtil {
 
 	public static FormsXSD getFormsXSD() {
 		return _formsXSD;
+	}
+
+	public static String getHTML(PageContext pageContext, Document document)
+		throws Exception {
+
+		return getFormsXSD().getHTML(pageContext, document);
+	}
+
+	public static String getHTML(PageContext pageContext, Element element)
+		throws Exception {
+
+		return getFormsXSD().getHTML(pageContext, element);
+	}
+
+	public static String getHTML(PageContext pageContext, String xml)
+		throws DocumentException, Exception {
+
+		return getFormsXSD().getHTML(pageContext, xml);
 	}
 
 	public static JSONArray getJSONArray(Document document)

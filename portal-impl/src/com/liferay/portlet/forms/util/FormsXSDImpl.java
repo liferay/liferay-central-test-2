@@ -14,17 +14,37 @@
 
 package com.liferay.portlet.forms.util;
 
+import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
+import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
+import com.liferay.portal.kernel.freemarker.FreeMarkerVariablesUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
+import freemarker.ext.jsp.TaglibFactory;
+import freemarker.ext.servlet.HttpRequestHashModel;
+import freemarker.ext.servlet.ServletContextHashModel;
+
+import freemarker.template.ObjectWrapper;
+
+import java.io.Writer;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.GenericServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.PageContext;
 
 /**
  * @author Bruno Basto
@@ -32,6 +52,44 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  */
 public class FormsXSDImpl implements FormsXSD {
+
+	public String getHTML(PageContext pageContext, Document document)
+		throws Exception {
+
+		return getHTML(pageContext, document.getRootElement());
+	}
+
+	public String getHTML(PageContext pageContext, Element element)
+		throws Exception {
+
+		List<Element> dynamicElements = element.elements("dynamic-element");
+
+		StringBundler sb = new StringBundler();
+
+		for (Element dynamicElement : dynamicElements) {
+			FreeMarkerContext freeMarkerContext =
+				getFreeMarkerContext(dynamicElement);
+
+			Map<String, Object> field =
+				(Map<String, Object>)freeMarkerContext.get("field");
+
+			field.put("children", getHTML(pageContext, dynamicElement));
+
+			String type = dynamicElement.attributeValue("type");
+			String resourcePath = _TPL_PATH.concat(
+				type.toLowerCase()).concat(_TPL_EXT);
+
+			sb.append(processFTL(pageContext, freeMarkerContext, resourcePath));
+		}
+
+		return sb.toString();
+	}
+
+	public String getHTML(PageContext pageContext, String xml)
+		throws DocumentException, Exception {
+
+		return getHTML(pageContext, SAXReaderUtil.read(xml));
+	}
 
 	public JSONArray getJSONArray(Document document) throws JSONException {
 		return getJSONArray(document.getRootElement());
@@ -45,10 +103,6 @@ public class FormsXSDImpl implements FormsXSD {
 		for (Element dynamicElement : dynamicElements) {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			for (Attribute attribute : dynamicElement.attributes()) {
-				jsonObject.put(attribute.getName(), attribute.getValue());
-			}
-
 			Element metadataElement = dynamicElement.element("meta-data");
 
 			if (metadataElement != null) {
@@ -57,6 +111,10 @@ public class FormsXSDImpl implements FormsXSD {
 						metadataEntry.attributeValue("name"),
 						metadataEntry.getText());
 				}
+			}
+
+			for (Attribute attribute : dynamicElement.attributes()) {
+				jsonObject.put(attribute.getName(), attribute.getValue());
 			}
 
 			String type = jsonObject.getString("type");
@@ -80,6 +138,98 @@ public class FormsXSDImpl implements FormsXSD {
 
 		return getJSONArray(SAXReaderUtil.read(xml));
 	}
+
+	protected FreeMarkerContext getFreeMarkerContext(Element dynamicElement) {
+		Map<String, Object> field = new HashMap<String, Object>();
+
+		FreeMarkerContext freeMarkerContext =
+			FreeMarkerEngineUtil.getWrappedRestrictedToolsContext();
+
+		Element metadataElement = dynamicElement.element("meta-data");
+
+		if (metadataElement != null) {
+			for (Element metadataEntry : metadataElement.elements()) {
+				field.put(
+					metadataEntry.attributeValue("name"),
+					metadataEntry.getText());
+			}
+		}
+
+		Element parentElement = dynamicElement.getParent();
+
+		if (parentElement != null) {
+			field.put("parentType", parentElement.attributeValue("type"));
+		}
+
+		for (Attribute attribute : dynamicElement.attributes()) {
+			field.put(attribute.getName(), attribute.getValue());
+		}
+
+		freeMarkerContext.put("field", field);
+
+		return freeMarkerContext;
+	}
+
+	protected static String processFTL(
+			PageContext pageContext, FreeMarkerContext freeMarkerContext,
+			String resourcePath)
+		throws Exception {
+
+		if (!FreeMarkerEngineUtil.resourceExists(resourcePath)) {
+			resourcePath = _TPL_DEFAULT_PATH;
+		}
+
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		// FreeMarker variables
+
+		FreeMarkerVariablesUtil.insertVariables(
+			freeMarkerContext, request);
+
+		// Tag libraries
+
+		HttpServletResponse response =
+			(HttpServletResponse)pageContext.getResponse();
+
+		Writer writer = new UnsyncStringWriter();
+
+		// Portal JSP tag library factory
+
+		TaglibFactory portalTaglib = new TaglibFactory(
+			pageContext.getServletContext());
+
+		freeMarkerContext.put("PortalJspTagLibs", portalTaglib);
+
+		// FreeMarker JSP tag library support
+
+		ServletContextHashModel servletContextHashModel =
+			new ServletContextHashModel(
+				(GenericServlet)pageContext.getPage(),
+				ObjectWrapper.DEFAULT_WRAPPER);
+
+		freeMarkerContext.put("Application", servletContextHashModel);
+
+		HttpRequestHashModel httpRequestHashModel = new HttpRequestHashModel(
+			request, response, ObjectWrapper.DEFAULT_WRAPPER);
+
+		freeMarkerContext.put("Request", httpRequestHashModel);
+
+		// Merge templates
+
+		FreeMarkerEngineUtil.mergeTemplate(
+			resourcePath, freeMarkerContext, writer);
+
+		return ((UnsyncStringWriter)writer).toString();
+	}
+
+	private static final String _TPL_DEFAULT_PATH =
+		"com/liferay/portlet/forms/dependencies/text.ftl";
+
+	private static final String _TPL_EXT = ".ftl";
+
+	private static final String _TPL_PATH =
+		"com/liferay/portlet/forms/dependencies/";
 
 	private static final String _TYPE_RADIO = "radio";
 
