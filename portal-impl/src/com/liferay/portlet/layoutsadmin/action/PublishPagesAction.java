@@ -18,12 +18,12 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portlet.communities.action.ActionUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import com.liferay.portlet.communities.action.ActionUtil;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;

@@ -38,7 +38,6 @@ Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 Group liveGroup = null;
 Group stagingGroup = null;
 
-
 if (selGroup.isStagingGroup()) {
 	liveGroup = selGroup.getLiveGroup();
 	stagingGroup = selGroup;
@@ -301,4 +300,3 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<liferay-util:include page="/html/portlet/layouts_admin/edit_pages.jsp" />
 	</c:otherwise>
 </c:choose>
-

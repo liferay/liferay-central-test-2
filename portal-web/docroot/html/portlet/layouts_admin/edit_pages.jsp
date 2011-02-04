@@ -38,6 +38,7 @@ long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue(
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 UnicodeProperties groupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-groupTypeSettings");
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
+
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
 
 boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflowEnabled")).booleanValue();

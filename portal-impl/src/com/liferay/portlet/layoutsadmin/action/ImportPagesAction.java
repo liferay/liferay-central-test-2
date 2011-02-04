@@ -27,6 +27,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.communities.action.ActionUtil;
 
 import java.io.File;
 
@@ -36,7 +37,6 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import com.liferay.portlet.communities.action.ActionUtil;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
