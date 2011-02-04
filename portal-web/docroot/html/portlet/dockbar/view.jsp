@@ -141,7 +141,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 								String pageSettingsURL = themeDisplay.getURLPageSettings().toString();
 
 								pageSettingsURL = HttpUtil.removeParameter(pageSettingsURL, "tabs1");
-								pageSettingsURL = HttpUtil.setParameter(pageSettingsURL, PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) + "tabs1", "settings");
+								pageSettingsURL = HttpUtil.setParameter(pageSettingsURL, PortalUtil.getPortletNamespace(PortletKeys.LAYOUTS_ADMIN) + "tabs1", "settings");
 								%>
 
 								<li class="settings use-dialog">

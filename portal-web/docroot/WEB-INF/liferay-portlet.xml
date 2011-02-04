@@ -809,7 +809,7 @@
 	<portlet>
 		<portlet-name>88</portlet-name>
 		<icon>/html/icons/default.png</icon>
-		<struts-path>layout_management</struts-path>
+		<struts-path>layouts_admin</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>

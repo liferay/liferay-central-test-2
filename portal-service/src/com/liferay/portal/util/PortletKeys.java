@@ -110,7 +110,7 @@ public class PortletKeys {
 
 	public static final String LAYOUT_CONFIGURATION = "87";
 
-	public static final String LAYOUT_MANAGEMENT = "88";
+	public static final String LAYOUTS_ADMIN = "88";
 
 	public static final String LIFERAY_PORTAL = "LIFERAY_PORTAL";
 

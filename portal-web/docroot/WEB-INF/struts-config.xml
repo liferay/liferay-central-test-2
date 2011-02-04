@@ -1363,48 +1363,6 @@
 
 		<action path="/layout_configuration/view" forward="portlet.layout_configuration.view" />
 
-		<!-- Layout Management -->
-
-		<action path="/layout_management/edit_pages" type="com.liferay.portlet.layoutsadmin.action.EditPagesAction">
-			<forward name="portlet.layouts_admin.edit_pages" path="portlet.layouts_admin.edit_pages" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-		</action>
-
-		<action path="/layout_management/edit_proposal" type="com.liferay.portlet.layoutsadmin.action.EditProposalAction">
-			<forward name="portlet.layouts_admin.edit_proposal" path="portlet.layouts_admin.edit_proposal" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-		</action>
-
-		<action path="/layout_management/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
-		</action>
-
-		<action path="/layout_management/export_pages" type="com.liferay.portlet.layoutsadmin.action.ExportPagesAction">
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-			<forward name="portlet.layouts_admin.export_pages" path="portlet.layouts_admin.export_pages" />
-		</action>
-
-		<action path="/layout_management/get_layouts" type="com.liferay.portlet.layoutsadmin.action.GetLayoutsAction" />
-
-		<action path="/layout_management/import_pages" type="com.liferay.portlet.layoutsadmin.action.ImportPagesAction">
-			<forward name="portlet.layouts_admin.edit_pages" path="portlet.layouts_admin.edit_pages" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-			<forward name="portlet.layouts_admin.export_pages" path="portlet.layouts_admin.export_pages" />
-		</action>
-
-		<action path="/layout_management/publish_pages" type="com.liferay.portlet.layoutsadmin.action.PublishPagesAction">
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-			<forward name="portlet.layouts_admin.publish_pages" path="portlet.layouts_admin.publish_pages" />
-		</action>
-
-		<action path="/layout_management/publish_portlet" forward="portlet.layouts_admin.publish_portlet" />
-
-		<action path="/layout_management/robots" type="com.liferay.portlet.layoutsadmin.action.RobotsAction" />
-
-		<action path="/layout_management/sitemap" type="com.liferay.portlet.layoutsadmin.action.SitemapAction" />
-
-		<action path="/layout_management/update_page" type="com.liferay.portlet.layoutsadmin.action.UpdatePageAction" />
-
 		<!-- Layout Prototypes -->
 
 		<action path="/layout_prototypes/edit_layout_prototype" type="com.liferay.portlet.layoutprototypes.action.EditLayoutPrototypeAction">
@@ -1470,17 +1428,26 @@
 			<forward name="portlet.layouts_admin.export_pages" path="portlet.layouts_admin.export_pages" />
 		</action>
 
+		<action path="/layouts_admin/get_layouts" type="com.liferay.portlet.layoutsadmin.action.GetLayoutsAction" />
+
 		<action path="/layouts_admin/import_pages" type="com.liferay.portlet.layoutsadmin.action.ImportPagesAction">
 			<forward name="portlet.layouts_admin.edit_pages" path="portlet.layouts_admin.edit_pages" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 			<forward name="portlet.layouts_admin.export_pages" path="portlet.layouts_admin.export_pages" />
 		</action>
 
-		<action path="/layouts_admin/publish_portlet" forward="portlet.layouts_admin.publish_portlet" />
-
 		<action path="/layouts_admin/publish_pages" type="com.liferay.portlet.layoutsadmin.action.PublishPagesAction">
+			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 			<forward name="portlet.layouts_admin.publish_pages" path="portlet.layouts_admin.publish_pages" />
 		</action>
+
+		<action path="/layouts_admin/publish_portlet" forward="portlet.layouts_admin.publish_portlet" />
+
+		<action path="/layouts_admin/robots" type="com.liferay.portlet.layoutsadmin.action.RobotsAction" />
+
+		<action path="/layouts_admin/sitemap" type="com.liferay.portlet.layoutsadmin.action.SitemapAction" />
+
+		<action path="/layouts_admin/update_page" type="com.liferay.portlet.layoutsadmin.action.UpdatePageAction" />
 
 		<!-- Login -->
 

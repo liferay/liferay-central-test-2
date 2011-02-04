@@ -25,11 +25,11 @@ String tabs4 = ParamUtil.getString(request, "tabs4");
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
+if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	portletDisplay.setURLBack(backURL);
 }
 
-if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) && tabs1.equals("settings")) {
+if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) && tabs1.equals("settings")) {
 	renderResponse.setTitle(LanguageUtil.get(pageContext, "settings"));
 }
 
@@ -247,7 +247,7 @@ portletURL.setParameter("tabs3", tabs3);
 //portletURL.setParameter("tabs4", tabs4);
 portletURL.setParameter("redirect", redirect);
 
-if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
+if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	portletURL.setParameter("backURL", backURL);
 }
 
@@ -261,7 +261,7 @@ if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletK
 		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
 	}
 
-	if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) && tabs1.equals("settings")) {
+	if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) && tabs1.equals("settings")) {
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "settings"), currentURL);
 	}
 	else {

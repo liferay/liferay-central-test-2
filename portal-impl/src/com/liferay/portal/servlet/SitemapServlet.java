@@ -38,7 +38,7 @@ public class SitemapServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		try {
-			String redirect = Portal.PATH_MAIN + "/layout_management/sitemap";
+			String redirect = Portal.PATH_MAIN + "/layouts_admin/sitemap";
 
 			ServletContext servletContext = getServletContext();
 

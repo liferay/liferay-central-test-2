@@ -1645,14 +1645,14 @@ public class ServicePreAction extends Action {
 				themeDisplay.setShowPageSettingsIcon(true);
 
 				PortletURL pageSettingsURL = new PortletURLImpl(
-					request, PortletKeys.LAYOUT_MANAGEMENT, controlPanelPlid,
+					request, PortletKeys.LAYOUTS_ADMIN, controlPanelPlid,
 					PortletRequest.RENDER_PHASE);
 
 				pageSettingsURL.setWindowState(LiferayWindowState.POP_UP);
 				pageSettingsURL.setPortletMode(PortletMode.VIEW);
 
 				pageSettingsURL.setParameter(
-					"struts_action", "/layout_management/edit_pages");
+					"struts_action", "/layouts_admin/edit_pages");
 
 				if (layout.isPrivateLayout()) {
 					pageSettingsURL.setParameter("tabs1", "private-pages");
@@ -1702,7 +1702,7 @@ public class ServicePreAction extends Action {
 
 				if (hasPublishStagingPermission) {
 					PortletURL publishToLiveURL = new PortletURLImpl(
-						request, PortletKeys.LAYOUT_MANAGEMENT, plid,
+						request, PortletKeys.LAYOUTS_ADMIN, plid,
 						PortletRequest.RENDER_PHASE);
 
 					publishToLiveURL.setWindowState(
@@ -1710,7 +1710,7 @@ public class ServicePreAction extends Action {
 					publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
 					publishToLiveURL.setParameter(
-						"struts_action", "/layout_management/publish_pages");
+						"struts_action", "/layouts_admin/publish_pages");
 
 					if (layout.isPrivateLayout()) {
 						publishToLiveURL.setParameter("tabs1", "private-pages");

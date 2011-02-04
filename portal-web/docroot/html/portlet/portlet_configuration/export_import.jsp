@@ -208,11 +208,11 @@ if (layout.isTypeControlPanel()) {
 										<c:if test="<%= proposal == null %>">
 
 											<%
-											PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
+											PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUTS_ADMIN, layout.getPlid(), PortletRequest.ACTION_PHASE);
 
 											proposePublicationURL.setPortletMode(PortletMode.VIEW);
 
-											proposePublicationURL.setParameter("struts_action", "/layout_management/edit_proposal");
+											proposePublicationURL.setParameter("struts_action", "/layouts_admin/edit_proposal");
 											proposePublicationURL.setParameter(Constants.CMD, Constants.ADD);
 											proposePublicationURL.setParameter("redirect", currentURL);
 											proposePublicationURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
@@ -271,7 +271,7 @@ if (layout.isTypeControlPanel()) {
 												function <portlet:namespace />proposePublication() {
 													Liferay.LayoutExporter.proposeLayout(
 														{
-															namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>',
+															namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUTS_ADMIN) %>',
 															reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>,
 															title: '<liferay-ui:message key="proposal-description" />',
 															url: '<%= proposePublicationURL.toString() %>'

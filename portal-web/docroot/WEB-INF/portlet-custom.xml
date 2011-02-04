@@ -1249,11 +1249,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>88</portlet-name>
-		<display-name>Layout Management</display-name>
+		<display-name>Layouts Admin</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/layout_management/edit_pages</value>
+			<value>/layouts_admin/edit_pages</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

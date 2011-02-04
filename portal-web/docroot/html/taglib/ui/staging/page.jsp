@@ -123,12 +123,12 @@
 							<c:if test="<%= proposal == null %>">
 
 								<%
-								PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
+								PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUTS_ADMIN, layout.getPlid(), PortletRequest.ACTION_PHASE);
 
 								proposePublicationURL.setWindowState(WindowState.MAXIMIZED);
 								proposePublicationURL.setPortletMode(PortletMode.VIEW);
 
-								proposePublicationURL.setParameter("struts_action", "/layout_management/edit_proposal");
+								proposePublicationURL.setParameter("struts_action", "/layouts_admin/edit_proposal");
 								proposePublicationURL.setParameter(Constants.CMD, Constants.ADD);
 								proposePublicationURL.setParameter("redirect", currentURL);
 								proposePublicationURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
@@ -178,7 +178,7 @@
 								%>
 
 								<li class="page-settings">
-									<a href="javascript:Liferay.LayoutExporter.proposeLayout({namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />', url: '<%= proposePublicationURL.toString() %>'});"><liferay-ui:message key="propose-publication" /></a>
+									<a href="javascript:Liferay.LayoutExporter.proposeLayout({namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUTS_ADMIN) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />', url: '<%= proposePublicationURL.toString() %>'});"><liferay-ui:message key="propose-publication" /></a>
 								</li>
 							</c:if>
 						</c:when>
@@ -218,12 +218,12 @@
 					stagedLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layout.getUuid(), liveGroup.getGroupId());
 				}
 
-				PortletURL viewProposalsURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, stagedLayout.getPlid(), PortletRequest.RENDER_PHASE);
+				PortletURL viewProposalsURL = new PortletURLImpl(request, PortletKeys.LAYOUTS_ADMIN, stagedLayout.getPlid(), PortletRequest.RENDER_PHASE);
 
 				viewProposalsURL.setWindowState(WindowState.MAXIMIZED);
 				viewProposalsURL.setPortletMode(PortletMode.VIEW);
 
-				viewProposalsURL.setParameter("struts_action", "/layout_management/edit_pages");
+				viewProposalsURL.setParameter("struts_action", "/layouts_admin/edit_pages");
 				viewProposalsURL.setParameter("tabs2", "proposals");
 				viewProposalsURL.setParameter("redirect", currentURL);
 				viewProposalsURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));

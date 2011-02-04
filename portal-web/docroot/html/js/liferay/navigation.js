@@ -79,7 +79,7 @@ AUI().add(
 						var navBlock = instance.get('navBlock');
 
 						if (navBlock) {
-							instance._updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
+							instance._updateURL = themeDisplay.getPathMain() + '/layouts_admin/update_page';
 
 							var items = navBlock.all('> ul > li');
 							var layoutIds = instance.get('layoutIds');

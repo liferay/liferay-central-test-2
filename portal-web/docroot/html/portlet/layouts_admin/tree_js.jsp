@@ -169,7 +169,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		},
 
 		updateLayout: function(data) {
-			var updateURL = themeDisplay.getPathMain() + '/layout_management/update_page';
+			var updateURL = themeDisplay.getPathMain() + '/layouts_admin/update_page';
 
 			A.io.request(
 				updateURL,
@@ -217,7 +217,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		}
 	};
 
-	var getLayoutsURL = themeDisplay.getPathMain() + '/layout_management/get_layouts';
+	var getLayoutsURL = themeDisplay.getPathMain() + '/layouts_admin/get_layouts';
 	var rootId = TreeUtil.createId(TreeUtil.DEFAULT_PARENT_LAYOUT_ID, 0);
 	var rootLabel = '<%= HtmlUtil.escapeJS(rootNodeName) %>';
 	var treeElId = '<portlet:namespace /><%= HtmlUtil.escape(treeId) %>Output';
