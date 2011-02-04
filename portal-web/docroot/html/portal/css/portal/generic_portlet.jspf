@@ -75,6 +75,14 @@
 	padding-right: 0;
 }
 
+.lfr-table-grid .lfr-label {
+	font-weight: bold;
+}
+
+.lfr-table-grid .aui-field-hint {
+	float: none;
+}
+
 .lfr-control-links a {
 	margin-right: 1em;
 }

@@ -268,6 +268,34 @@ body.portlet {
 	text-align: left;
 }
 
+/* ---------- Message labels ---------- */
+
+.portlet-msg-info-label, .portlet-msg-error-label, .portlet-msg-alert-label, .portlet-msg-success-label {
+	background: none no-repeat 0 50%;
+	padding: 3px 3px 3px 20px;
+	font-weight: bold;
+}
+
+.portlet-msg-info-label {
+	background-image: url(../images/messages/info.png);
+	color: #34404F;
+}
+
+.portlet-msg-error-label {
+	background-image: url(../images/messages/error.png);
+	color: #900;
+}
+
+.portlet-msg-alert-label {
+	background-image: url(../images/messages/alert.png);
+	color: #663;
+}
+
+.portlet-msg-success-label {
+	background-image: url(../images/messages/success.png);
+	color: #384F34;
+}
+
 /* ---------- Sections ---------- */
 
 /* ---------- Table or section header ---------- */

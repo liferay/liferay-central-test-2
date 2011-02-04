@@ -23,42 +23,58 @@ String casServerURL = ParamUtil.getString(request, "casServerURL");
 String casServiceURL = ParamUtil.getString(request, "casServiceURL");
 %>
 
-<table class="lfr-table">
+<table class="lfr-table lfr-table-grid">
 <tr>
-	<td>
-		<b><liferay-ui:message key="login-url" />:</b>
+	<td class="lfr-label">
+		<liferay-ui:message key="login-url" />:
 	</td>
 	<td>
-		<liferay-ui:message key="<%= _testURL(casLoginURL) %>" />
+		<%
+		String casLoginURLResult = _testURL(casLoginURL);
+		String casLoginURLCssClass = _getCssClass(casLoginURLResult);
+		%>
+		<span class="<%= casLoginURLCssClass %>"><liferay-ui:message key="<%= casLoginURLResult %>" /></span> <span class="aui-field-hint"><%= casLoginURL %></span>
 	</td>
 </tr>
 <tr>
-	<td>
-		<b><liferay-ui:message key="logout-url" />:</b>
+	<td class="lfr-label">
+		<liferay-ui:message key="logout-url" />:
 	</td>
 	<td>
-		<liferay-ui:message key="<%= _testURL(casLogoutURL) %>" />
+		<%
+		String casLogoutURLResult = _testURL(casLogoutURL);
+		String casLogoutURLCssClass = _getCssClass(casLogoutURLResult);
+		%>
+		<span class="<%= casLogoutURLCssClass %>"><liferay-ui:message key="<%= casLogoutURLResult %>" /></span> <span class="aui-field-hint"><%= casLogoutURL %></span>
 	</td>
 </tr>
 
 <c:if test="<%= Validator.isNotNull(casServerURL) %>">
 	<tr>
-		<td>
-			<b><liferay-ui:message key="server-url" />:</b>
+		<td class="lfr-label">
+			<liferay-ui:message key="server-url" />:
 		</td>
 		<td>
-			<liferay-ui:message key="<%= _testURL(casServerURL) %>" />
+			<%
+			String casServerURLResult = _testURL(casServerURL);
+			String casServerURLCssClass = _getCssClass(casServerURLResult);
+			%>
+			<span class="<%= casServerURLCssClass %>"><liferay-ui:message key="<%= casServerURLResult %>" /></span> <span class="aui-field-hint"><%= casServerURL %></span>
 		</td>
 	</tr>
 </c:if>
 
 <c:if test="<%= Validator.isNotNull(casServiceURL) %>">
 	<tr>
-		<td>
-			<b><liferay-ui:message key="service-url" />:</b>
+		<td class="lfr-label">
+			<liferay-ui:message key="service-url" />:
 		</td>
 		<td>
-			<liferay-ui:message key="<%= _testURL(casServiceURL) %>" />
+			<%
+			String casServiceURLResult = _testURL(casServiceURL);
+			String casServiceURLCssClass = _getCssClass(casServiceURLResult);
+			%>
+			<span class="<%= casServiceURLCssClass %>"><liferay-ui:message key="<%= casServiceURLResult %>" /></span> <span class="aui-field-hint"><%= casServiceURL %></span>
 		</td>
 	</tr>
 </c:if>
@@ -66,6 +82,21 @@ String casServiceURL = ParamUtil.getString(request, "casServiceURL");
 </table>
 
 <%!
+private String _getCssClass(String result) {
+	String cssClass = "portlet-msg-";
+
+	if (result.equals("pass")) {
+		cssClass += "success";
+	}
+	else {
+		cssClass += "error";
+	}
+
+	cssClass += "-label";
+
+	return cssClass;
+}
+
 private String _testURL(String url) {
 	try {
 		URL urlObj = new URL(url);
