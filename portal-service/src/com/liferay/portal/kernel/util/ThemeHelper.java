@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.util.PortalUtil;
 
 import java.net.URL;
 
@@ -41,8 +42,14 @@ public class ThemeHelper {
 
 		sb.append(themeContextName);
 
-		String servletContextName = GetterUtil.getString(
-			servletContext.getServletContextName());
+		String servletContextName = StringPool.BLANK;
+		String contextPath = GetterUtil.getString(
+			servletContext.getContextPath(), StringPool.SLASH);
+
+		if (!contextPath.equals(PortalUtil.getPathContext())) {
+			servletContextName = GetterUtil.getString(
+				servletContext.getServletContextName());
+		}
 
 		int start = 0;
 
