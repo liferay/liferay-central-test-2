@@ -25,6 +25,7 @@ String adminEmailFromAddress = PrefsPropsUtil.getString(company.getCompanyId(), 
 boolean adminEmailUserAddedEnable = PrefsPropsUtil.getBoolean(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_ENABLED);
 String adminEmailUserAddedSubject = PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT);
 String adminEmailUserAddedBody = PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
+String adminEmailUserAddedNoPasswordBody = PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY);
 
 String adminEmailPasswordSentSubject = PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
 String adminEmailPasswordSentBody = PrefsPropsUtil.getContent(company.getCompanyId(), PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY);
@@ -60,10 +61,18 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 
 			<liferay-ui:error key="emailUserAddedBody" message="please-enter-a-valid-body" />
 
-			<aui:field-wrapper label="body">
+			<aui:field-wrapper label="with-password-body" helpMessage="account-created-generated-password-notification-help">
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailUserAddedBodyEditor" %>' name="emailUserAddedBody" toolbarSet="email" width="470" />
 
 				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY + "--" %>' type="hidden" value="<%= adminEmailUserAddedBody %>" />
+			</aui:field-wrapper>
+
+			<liferay-ui:error key="emailUserAddedNoPasswordBody" message="please-enter-a-valid-body" />
+
+			<aui:field-wrapper label="without-password-body" helpMessage="account-created-no-password-notification-help">
+				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" initMethod='<%= renderResponse.getNamespace() + "initEmailUserAddedNoPasswordBodyEditor" %>' name="emailUserAddedNoPasswordBody" toolbarSet="email" width="470" />
+
+				<aui:input name='<%= "settings--" + PropsKeys.ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY + "--" %>' type="hidden" value="<%= adminEmailUserAddedNoPasswordBody %>" />
 			</aui:field-wrapper>
 
 			<div class="terms email-user-add definition-of-terms">
@@ -116,6 +125,10 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 		return "<%= UnicodeFormatter.toString(adminEmailUserAddedBody) %>";
 	}
 
+	function <portlet:namespace />initEmailUserAddedNoPasswordBodyEditor() {
+		return "<%= UnicodeFormatter.toString(adminEmailUserAddedNoPasswordBody) %>";
+	}
+
 	function <portlet:namespace />initEmailPasswordSentBodyEditor() {
 		return "<%= UnicodeFormatter.toString(adminEmailPasswordSentBody) %>";
 	}
@@ -127,6 +140,7 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 	function <portlet:namespace />saveEmails() {
 		try {
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>--'].value = window.emailUserAddedBody.getHTML();
+			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY %>--'].value = window.emailUserAddedNoPasswordBody.getHTML();
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>--'].value = window.emailPasswordSentBody.getHTML();
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY %>--'].value = window.emailPasswordResetBody.getHTML();
 		}

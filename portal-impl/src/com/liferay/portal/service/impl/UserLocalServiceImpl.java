@@ -3161,8 +3161,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		String subject = PrefsPropsUtil.getContent(
 			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT);
-		String body = PrefsPropsUtil.getContent(
-			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
+
+		String body = null;
+		if (Validator.isNotNull(password)) {
+			body = PrefsPropsUtil.getContent(
+				user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);
+		}
+		else {
+			body = PrefsPropsUtil.getContent(
+				user.getCompanyId(),
+				PropsKeys.ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY);
+		}
 
 		subject = StringUtil.replace(
 			subject,
