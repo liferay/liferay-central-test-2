@@ -41,6 +41,10 @@ import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.WebAppPool;
+import com.liferay.portal.velocity.LiferayResourceCacheUtil;
+import com.liferay.portlet.PortletContextBagPool;
+import com.liferay.portlet.wiki.util.WikiCacheUtil;
 
 import java.beans.PropertyDescriptor;
 
@@ -50,10 +54,6 @@ import java.util.Map;
 
 import javax.servlet.ServletContextEvent;
 
-import com.liferay.portal.util.WebAppPool;
-import com.liferay.portal.velocity.LiferayResourceCacheUtil;
-import com.liferay.portlet.PortletContextBagPool;
-import com.liferay.portlet.wiki.util.WikiCacheUtil;
 import org.springframework.beans.CachedIntrospectionResults;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
@@ -90,10 +90,10 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		FinderCacheUtil.clearLocalCache();
 		EntityCacheUtil.clearCache();
 		EntityCacheUtil.clearLocalCache();
+		LiferayResourceCacheUtil.clear();
 		PermissionCacheUtil.clearCache();
 		PermissionCacheUtil.clearLocalCache();
 		WikiCacheUtil.clearCache(0);
-		LiferayResourceCacheUtil.clear();
 
 		ServletContextPool.clear();
 
@@ -101,7 +101,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		MultiVMPoolUtil.clear();
 		SingleVMPoolUtil.clear();
 		WebCachePoolUtil.clear();
-
 
 		ApplicationContext applicationContext =
 			ContextLoader.getCurrentWebApplicationContext();
