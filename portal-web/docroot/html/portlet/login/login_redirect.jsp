@@ -44,11 +44,12 @@ String emailAddress = ParamUtil.getString(request, "emailAddress");
 		afterLogin('<%= HtmlUtil.escape(emailAddress) %>');
 
 		window.parent.Liferay.fire(
-			'closeAndRefresh',
+			'close',
 			{
 				frame: window,
 				portletAjaxable: '<%= selPortlet.isAjaxable() %>',
-				portletId: '<%= portletDisplay.getId() %>'
+				portletId: '<%= portletDisplay.getId() %>',
+				refresh: true
 			}
 		);
 	}

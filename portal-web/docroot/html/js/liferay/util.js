@@ -1465,16 +1465,18 @@
 				).render();
 
 				var handle = Liferay.on(
-					namespacedId + 'closeAndRefresh',
+					namespacedId + 'close',
 					function(event) {
 						if (event.frame == dialog.iframe.node.get('contentWindow').getDOM()) {
 							dialog.hide();
 
-							if (!event.portletAjaxable) {
-								openingWindow.location.reload();
-							}
-							else {
-								openingWindow.Liferay.Portlet.refresh('#p_p_id_' + event.portletId + '_');
+							if (event.refresh === true) {
+								if (!event.portletAjaxable) {
+									openingWindow.location.reload();
+								}
+								else {
+									openingWindow.Liferay.Portlet.refresh('#p_p_id_' + event.portletId + '_');
+								}
 							}
 
 							setTimeout(
