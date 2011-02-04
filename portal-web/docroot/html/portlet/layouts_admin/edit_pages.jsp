@@ -25,79 +25,31 @@ String tabs4 = ParamUtil.getString(request, "tabs4");
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
-	portletDisplay.setURLBack(backURL);
-}
+long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
-if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) && tabs1.equals("settings")) {
-	renderResponse.setTitle(LanguageUtil.get(pageContext, "settings"));
-}
+Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
+Group stagingGroup = (Group)request.getAttribute("edit_pages.jsp-stagingGroup");
+Group group = (Group)request.getAttribute("edit_pages.jsp-group");
+Group selGroup = (Group)request.getAttribute("edit_pages.jsp-selGroup");
+long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
+long stagingGroupId = ((Long)request.getAttribute("edit_pages.jsp-stagingGroupId")).longValue();
+long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
+long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
+boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
+UnicodeProperties groupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-groupTypeSettings");
+Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
+String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
 
-Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
+boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflowEnabled")).booleanValue();
 
-Group liveGroup = null;
-Group stagingGroup = null;
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 
 int pagesCount = 0;
 
-if (selGroup.isStagingGroup()) {
-	liveGroup = selGroup.getLiveGroup();
-	stagingGroup = selGroup;
-}
-else {
-	liveGroup = selGroup;
-
-	if (selGroup.hasStagingGroup()) {
-		stagingGroup = selGroup.getStagingGroup();
-	}
-}
-
-Group group = null;
-
-if (stagingGroup != null) {
-	group = stagingGroup;
-}
-else {
-	group = liveGroup;
-}
-
-long groupId = liveGroup.getGroupId();
-
-if (group != null) {
-	groupId = group.getGroupId();
-}
-
-long liveGroupId = liveGroup.getGroupId();
-
-long stagingGroupId = 0;
-
-if (stagingGroup != null) {
-	stagingGroupId = stagingGroup.getGroupId();
-}
-
-long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
-long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
-UnicodeProperties groupTypeSettings = null;
-
-if (group != null) {
-	groupTypeSettings = group.getTypeSettingsProperties();
-}
-else {
-	groupTypeSettings = new UnicodeProperties();
-}
-
-UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
-
-Layout selLayout = null;
-
-try {
-	if (selPlid != LayoutConstants.DEFAULT_PLID) {
-		selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
-	}
-}
-catch (NoSuchLayoutException nsle) {
+if (selLayout != null) {
+	layoutId = selLayout.getLayoutId();
 }
 
 Layout refererLayout = null;
@@ -110,82 +62,6 @@ try {
 catch (NoSuchLayoutException nsle) {
 }
 
-if (selLayout != null) {
-	layoutId = selLayout.getLayoutId();
-}
-
-if (Validator.isNull(tabs2) && !tabs1.equals("settings")) {
-	tabs2 = "pages";
-}
-
-if (tabs1.endsWith("-pages") && !tabs2.equals("pages") && !tabs2.equals("look-and-feel") && !tabs2.equals("proposals")) {
-	tabs2 = "pages";
-}
-else if (tabs1.equals("settings") && !tabs2.equals("virtual-host") && !tabs2.equals("logo") && !tabs2.equals("sitemap") && !tabs2.equals("monitoring") && !tabs2.equals("merge-pages") && !tabs2.equals("staging")) {
-	tabs2 = "virtual-host";
-}
-
-if ((selLayout == null) && tabs2.equals("pages")) {
-	tabs3 = "children";
-}
-
-if (tabs2.equals("pages") && !tabs3.equals("look-and-feel") && (!tabs3.equals("children") || ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout)))) {
-	tabs3 = "page";
-}
-
-if (!tabs2.equals("export-import") && (tabs2.equals("look-and-feel") || tabs3.equals("look-and-feel"))) {
-	if (!tabs4.equals("regular-browsers") && !tabs4.equals("mobile-devices")) {
-		tabs4 = "regular-browsers";
-	}
-}
-
-long parentLayoutId = BeanParamUtil.getLong(selLayout, request, "parentLayoutId", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-
-Organization organization = null;
-User selUser = null;
-UserGroup userGroup = null;
-
-if (liveGroup.isOrganization()) {
-	organization = OrganizationLocalServiceUtil.getOrganization(liveGroup.getOrganizationId());
-}
-else if (liveGroup.isUser()) {
-	selUser = UserLocalServiceUtil.getUserById(liveGroup.getClassPK());
-}
-else if (liveGroup.isUserGroup()) {
-	userGroup = UserGroupLocalServiceUtil.getUserGroup(liveGroup.getClassPK());
-}
-
-String tabs1Names = "public-pages,private-pages";
-
-boolean privateLayout = tabs1.equals("private-pages");
-
-if (liveGroup.isUser()) {
-	boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(selUser.getUserId(), company.getCompanyId(), RoleConstants.POWER_USER, true);
-
-	boolean privateLayoutsModifiable = PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE && (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED || hasPowerUserRole);
-	boolean publicLayoutsModifiable = PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE && (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED || hasPowerUserRole);
-
-	if (privateLayoutsModifiable && publicLayoutsModifiable) {
-		tabs1Names = "public-pages,private-pages";
-	}
-	else if (privateLayoutsModifiable) {
-		tabs1Names = "private-pages";
-	}
-	else if (publicLayoutsModifiable) {
-		tabs1Names = "public-pages";
-	}
-
-	if (!publicLayoutsModifiable && privateLayoutsModifiable && !privateLayout) {
-		tabs1 = "private-pages";
-
-		privateLayout = true;
-	}
-}
-
-if (selGroup.isLayoutSetPrototype()) {
-	privateLayout = true;
-}
-
 if (privateLayout) {
 	if (group != null) {
 		pagesCount = group.getPrivateLayoutsPageCount();
@@ -196,108 +72,13 @@ else {
 		pagesCount = group.getPublicLayoutsPageCount();
 	}
 }
-
-LayoutLister layoutLister = new LayoutLister();
-
-String rootNodeName = liveGroup.getDescriptiveName();
-
-if (liveGroup.isOrganization()) {
-	rootNodeName = organization.getName();
-}
-else if (liveGroup.isUser()) {
-	rootNodeName = selUser.getFullName();
-}
-else if (liveGroup.isUserGroup()) {
-	rootNodeName = userGroup.getName();
-}
-else if (selGroup.isLayoutSetPrototype()) {
-	LayoutSetPrototype layoutSetPrototype = LayoutSetPrototypeLocalServiceUtil.getLayoutSetPrototype(selGroup.getClassPK());
-
-	rootNodeName = layoutSetPrototype.getName(user.getLanguageId());
-}
-
-LayoutView layoutView = layoutLister.getLayoutView(groupId, privateLayout, rootNodeName, locale);
-
-List layoutList = layoutView.getList();
-
-request.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutList);
-
-TasksProposal proposal = null;
-
-if (selLayout != null) {
-	if (liveGroup.isWorkflowEnabled()) {
-		try {
-			proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), String.valueOf(selPlid));
-		}
-		catch (NoSuchProposalException nspe) {
-		}
-	}
-}
-
-boolean workflowEnabled = liveGroup.isWorkflowEnabled();
-int workflowStages = ParamUtil.getInteger(request, "workflowStages", liveGroup.getWorkflowStages());
-String[] workflowRoleNames = StringUtil.split(ParamUtil.getString(request, "workflowRoleNames", liveGroup.getWorkflowRoleNames()));
-
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setParameter("struts_action", "/layouts_admin/edit_pages");
-portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("tabs2", tabs2);
-portletURL.setParameter("tabs3", tabs3);
-//portletURL.setParameter("tabs4", tabs4);
-portletURL.setParameter("redirect", redirect);
-
-if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
-	portletURL.setParameter("backURL", backURL);
-}
-
-portletURL.setParameter("groupId", String.valueOf(liveGroupId));
-
-if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletKeys.MY_PAGES)) {
-	if (organization != null) {
-		EnterpriseAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
-	}
-	else {
-		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
-	}
-
-	if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) && tabs1.equals("settings")) {
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "settings"), currentURL);
-	}
-	else {
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
-	}
-}
-
-request.setAttribute("edit_pages.jsp-tab4", tabs4);
-
-request.setAttribute("edit_pages.jsp-liveGroup", liveGroup);
-request.setAttribute("edit_pages.jsp-stagingGroup", stagingGroup);
-request.setAttribute("edit_pages.jsp-group", group);
-request.setAttribute("edit_pages.jsp-groupId", new Long(groupId));
-request.setAttribute("edit_pages.jsp-liveGroupId", new Long(liveGroupId));
-request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
-request.setAttribute("edit_pages.jsp-privateLayout", new Boolean(privateLayout));
-request.setAttribute("edit_pages.jsp-groupTypeSettings", groupTypeSettings);
-request.setAttribute("edit_pages.jsp-liveGroupTypeSettings", liveGroupTypeSettings);
-request.setAttribute("edit_pages.jsp-selLayout", selLayout);
-
-request.setAttribute("edit_pages.jsp-rootNodeName", rootNodeName);
-
-request.setAttribute("edit_pages.jsp-layoutList", layoutList);
-
-request.setAttribute("edit_pages.jsp-workflowEnabled", new Boolean(workflowEnabled));
-request.setAttribute("edit_pages.jsp-workflowStages", new Integer(workflowStages));
-request.setAttribute("edit_pages.jsp-workflowRoleNames", workflowRoleNames);
-
-request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 %>
 
 <portlet:actionURL var="editPagesURL">
 	<portlet:param name="struts_action" value="/layouts_admin/edit_pages" />
 </portlet:actionURL>
 
-<aui:form action="<%= editPagesURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>
+<aui:form action="<%= editPagesURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
@@ -312,44 +93,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<aui:input name="selPlid" type="hidden" value="<%= selPlid %>" />
 	<aui:input name="wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>' />
 	<aui:input name="<%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" />
-
-	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES) || portletName.equals(PortletKeys.MY_PAGES) %>">
-		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) %>">
-			<liferay-ui:header
-				backURL="<%= backURL %>"
-				title="<%= liveGroup.getDescriptiveName() %>"
-			/>
-		</c:if>
-
-		<%
-		String tabs1URL = portletURL.toString();
-
-		if (liveGroup.isUser()) {
-			PortletURL userTabs1URL = renderResponse.createRenderURL();
-
-			userTabs1URL.setParameter("struts_action", "/my_pages/edit_pages");
-			userTabs1URL.setParameter("tabs1", tabs1);
-			userTabs1URL.setParameter("backURL", backURL);
-			userTabs1URL.setParameter("groupId", String.valueOf(liveGroupId));
-
-			tabs1URL = userTabs1URL.toString();
-		}
-		else if (!liveGroup.isUserGroup() && ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)))) {
-			tabs1Names += ",settings";
-		}
-		%>
-
-		<liferay-ui:tabs
-			names="<%= tabs1Names %>"
-			param="tabs1"
-			value="<%= tabs1 %>"
-			url="<%= tabs1URL %>"
-		/>
-
-		<%
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), currentURL);
-		%>
-	</c:if>
 
 	<c:if test="<%= liveGroup.isUserGroup() %>">
 		<div class="portlet-msg-info">
@@ -448,15 +191,8 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	}
 
 	function <portlet:namespace />savePage() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
 
 		<c:choose>
-			<c:when test='<%= tabs2.equals("monitoring") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "monitoring";
-			</c:when>
-			<c:when test='<%= tabs2.equals("virtual-host") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
-			</c:when>
 			<c:when test='<%= tabs2.equals("merge-pages") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "merge_pages";
 			</c:when>
@@ -469,17 +205,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			<portlet:namespace />updateLanguage();
 		</c:if>
 
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />updateLogo() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "logo";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />updateRobots() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "robots";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -544,40 +269,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			}
 
 			submitForm(document.<portlet:namespace />fm);
-		},
-		['aui-base']
-	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />updateStaging',
-		function() {
-			var A = AUI();
-
-			var selectEl = A.one('#<portlet:namespace />stagingType');
-
-			var currentValue = null;
-
-			if (selectEl) {
-				currentValue = selectEl.val();
-			}
-
-			var ok = false;
-
-			if (0 == currentValue) {
-				ok = confirm('<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-deactivate-staging-for-x", liveGroup.getDescriptiveName()) %>');
-			}
-			else if (1 == currentValue) {
-				ok = confirm('<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-activate-local-staging-for-x", liveGroup.getDescriptiveName()) %>');
-			}
-			else if (2 == currentValue) {
-				ok = confirm('<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-activate-remote-staging-for-x", liveGroup.getDescriptiveName()) %>');
-			}
-
-			if (ok) {
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "staging";
-				submitForm(document.<portlet:namespace />fm);
-			}
 		},
 		['aui-base']
 	);

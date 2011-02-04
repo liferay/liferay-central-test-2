@@ -834,7 +834,7 @@
 	<definition name="portlet.layouts_admin" extends="portlet" />
 
 	<definition name="portlet.layouts_admin.edit_pages" extends="portlet.layouts_admin">
-		<put name="portlet_content" value="/portlet/layouts_admin/edit_pages.jsp" />
+		<put name="portlet_content" value="/portlet/layouts_admin/view.jsp" />
 	</definition>
 
 	<definition name="portlet.layouts_admin.edit_proposal" extends="portlet.layouts_admin">
