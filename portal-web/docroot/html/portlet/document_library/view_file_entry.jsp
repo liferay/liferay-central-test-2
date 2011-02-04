@@ -175,296 +175,37 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						<liferay-ui:message key="generating-preview-will-take-a-few-minutes" />
 					</c:when>
 					<c:otherwise>
-						<div class="lfr-file-preview" id="<portlet:namespace />filePreview">
-							<div class="lfr-file-preview-content" id="<portlet:namespace />filePreviewContent">
-								<div class="lfr-file-preview-image-container">
-									<img class="lfr-file-preview-image-current" id="<portlet:namespace />previewFile" src="<%= previewFileURL + "1" %>" />
+						<div>
+							[<a href="javascript:<portlet:namespace />previous();"><liferay-ui:message key="previous" /></a>] [<a href="javascript:<portlet:namespace />next();"><liferay-ui:message key="next" /></a>]
 
-									<span class="lfr-preview-actions aui-helper-hidden" id="<portlet:namespace />filePreviewActions">
-										<span class="aui-toolbar lfr-preview-toolbar" id="<portlet:namespace />previewToolbar">
-											<button class="aui-buttonitem aui-buttonitem-icon-only aui-toolbar-first aui-toolbar-item lfr-preview-left" id="<portlet:namespace />previewLeftButton">
-												<span class="aui-icon aui-icon-arrow-left"></span>
-											</button>
-											<button class="aui-buttonitem aui-buttonitem-icon-only aui-toolbar-item lfr-preview-zoom" id="<portlet:namespace />previewZoomButton">
-												<span class="aui-icon aui-icon-zoom"></span>
-											</button>
-											<button class="aui-buttonitem aui-buttonitem-icon-only aui-toolbar-last aui-toolbar-item lfr-preview-right" id="<portlet:namespace />previewRightButton">
-												<span class="aui-icon aui-icon-arrow-right"></span>
-											</button>
-										</span>
-
-										<span class="lfr-file-preview-info">
-											<span class="lfr-file-preview-index" id="<portlet:namespace />filePreviewIndex">1</span> of <span class="lfr-file-preview-count"><%= previewFileCount %></span>
-										</span>
-									</span>
-								</div>
-
-								<div class="lfr-file-preview-images">
-									<div class="lfr-file-preview-images-content" id="<portlet:namespace />previewImagesContent"></div>
-
-									<div class="lfr-preview-loading-indicator" id="<portlet:namespace />loadingIndicator"><liferay-ui:message key="loading" /></div>
-								</div>
-							</div>
+							<span id="<portlet:namespace />previewFileIndex">1</span> of <span><%= previewFileCount %></span>
 						</div>
 
-						<aui:script use="aui-base,aui-image-viewer-gallery">
-							var previewFileURL = '<%= previewFileURL %>';
-							var previewFileCount = <%= previewFileCount %>;
+						<div>
+							<img id="<portlet:namespace />previewFile" src="<%= previewFileURL + "1" %>" width="500px" />
+						</div>
 
-							var filePreview = A.one('#<portlet:namespace />filePreview');
-							var filePreviewContent = A.one('#<portlet:namespace />filePreviewContent');
+						<script type="text/javascript">
+							var <portlet:namespace />previewFileIndex = 1;
 
-							var previewFile = A.one('#<portlet:namespace />previewFile');
-							var filePreviewIndex = A.one('#<portlet:namespace />filePreviewIndex');
-
-							var filePreviewActions = A.one('#<portlet:namespace />filePreviewActions');
-							var previewToolbar = A.one('#<portlet:namespace />previewToolbar');
-
-							var previewLeftButton = A.one('#<portlet:namespace />previewLeftButton');
-							var previewRightButton = A.one('#<portlet:namespace />previewRightButton');
-							var previewZoomButton = A.one('#<portlet:namespace />previewZoomButton');
-
-							filePreviewActions.show();
-
-							var previewImagesContent = A.one('#<portlet:namespace />previewImagesContent');
-
-							// previewImagesContent.append(renderImages());
-
-							var loadingIndicator = A.one('#<portlet:namespace />loadingIndicator');
-
-							loadingIndicator.hide();
-
-							previewImagesContent.on('scroll', function(event) {
-								console.log('scrollTop: %d, scrollHeight: %d',previewImagesContent.get('scrollTop'), previewImagesContent.get('scrollHeight'));
-
-								if (previewImagesContent.get('scrollTop') < previewImagesContent.get('scrollHeight') - 700) {
-									return;
+							function <portlet:namespace />next() {
+								if (<portlet:namespace />previewFileIndex < <%= previewFileCount %>) {
+									<portlet:namespace />previewFileIndex++;
 								}
 
-								if (!loadingIndicator.hasClass('aui-helper-hidden')) {
-									return;
-								}
-/*
-
-								setTimeout(
-									function(event) {
-										var buffer = [];
-
-										// for (var i = 1; i <= previewFileCount; i++) {
-										for (var i = 1; i <= 10; i++) {
-											buffer[buffer.length] = '<a class="lfr-file-preview-image ' + (i == fileIndex ? 'lfr-file-preview-image-selected' : '') + '" href="' + previewFileURL + i + '"><img src="' + previewFileURL + i + '" /></a>';
-										}
-										previewImagesContent.append(buffer.join(''));
-									}, 350
-								);
-								return;
-*/
-
-								loadingIndicator.show();
-
-								loadMoreImages();
-							});
-
-							var previewFileCountDown = 0;
-
-							function loadMoreImages() {
-								setTimeout(loadImages, 350);
+								document.getElementById('<portlet:namespace/>previewFile').src = '<%= previewFileURL %>' + <portlet:namespace />previewFileIndex;
+								document.getElementById('<portlet:namespace/>previewFileIndex').innerHTML = <portlet:namespace />previewFileIndex;
 							}
 
-							function loadImages() {
-								var i = 0;
-								var buffer = [];
-
-								while(previewFileCountDown++ < previewFileCount && i++ < 10) {
-									// buffer[buffer.length] = '<a class="lfr-file-preview-image ' + (previewFileCountDown == fileIndex ? 'lfr-file-preview-image-selected' : '') + '" href="' + previewFileURL + previewFileCountDown + '"><img src="' + previewFileURL + previewFileCountDown + '" /></a>';
-									buffer[buffer.length] = '<a class="lfr-file-preview-image ' + (previewFileCountDown == fileIndex ? 'lfr-file-preview-image-selected' : '') + '" href="' + previewFileURL + previewFileCountDown + '"><img src="<%= themeDisplay.getPathThemeImages() %>/spacer.png" /></a>';
+							function <portlet:namespace />previous() {
+								if (<portlet:namespace />previewFileIndex > 1) {
+									<portlet:namespace />previewFileIndex--;
 								}
 
-								if (buffer.length) {
-									previewImagesContent.append(buffer.join(''));
-								}
-
-								loadingIndicator.hide();
+								document.getElementById('<portlet:namespace/>previewFile').src = '<%= previewFileURL %>' + <portlet:namespace />previewFileIndex;
+								document.getElementById('<portlet:namespace/>previewFileIndex').innerHTML = <portlet:namespace />previewFileIndex;
 							}
-
-							loadMoreImages();
-
-							// ------------
-/*							var NumberOfNewEntrySets = 1;
-
-
-							function OnDivScroll()
-							{  
-							  var el = document.getElementById('scrollContainer');
-							  if(el.scrollTop < el.scrollHeight - 800)
-							    return;
-
-
-							  var loading = document.getElementById('loadingDiv');
-							  if(loading.style.display == '')
-							    return; //already loading
-
-							  loading.style.display = '';
-
-							  LoadMoreElements();
-							}
-
-							function LoadMoreElements()
-							{
-							  //Do a server callback to load 
-							  //more elements
-
-							  setTimeout(LoadCallback, 350);
-							}
-
-							function LoadCallback()
-							{
-							  var el = document.getElementById('scrollContainer');
-							  var loading = document.getElementById('loadingDiv');
-
-							  loading.style.display = 'none';
-
-							  for(var i=1; i<=6; i++)
-							    el.innerHTML += "<div class='entry'>New Entry " + i 
-							        + " of Set " + NumberOfNewEntrySets + "</div>";
-							  NumberOfNewEntrySets++;
-							}*/
-
-							// ------------
-
-							var fileIndex = 1;
-
-							function updateIndex(increment) {
-								fileIndex += increment;
-								fileIndex = Math.min(Math.max(fileIndex, 1), previewFileCount);
-
-								updateIndexUI(fileIndex);
-							}
-
-							function updateIndexUI(index) {
-								previewFile.attr('src', previewFileURL + index);
-								filePreviewIndex.setContent(index);
-							}
-
-							function renderImages() {
-								var buffer = [];
-
-								// for (var i = 1; i <= previewFileCount; i++) {
-								for (var i = 1; i <= 10; i++) {
-									buffer[buffer.length] = '<a class="lfr-file-preview-image ' + (i == fileIndex ? 'lfr-file-preview-image-selected' : '') + '" href="' + previewFileURL + i + '"><img src="' + previewFileURL + i + '" /></a>';
-								}
-
-								return A.NodeList.create(buffer.join(''));
-							}
-
-							var gallery;
-
-							function loadGallery() {
-								// console.log(renderImages());
-								// return;
-								if (!gallery) {
-									var links = renderImages();
-									// A.getBody().append(links);
-
-									var viewportRegion = A.getDoc().get('viewportRegion');
-									var maxHeight = (viewportRegion.height * 0.5);
-									var maxWidth = (viewportRegion.width * 0.5);
-
-									gallery = new A.ImageGallery(
-										{
-											after: {
-												currentIndexChange: function(event) {
-													console.log(event.newVal);
-												}
-											},
-											links: links,
-											maxHeight: maxHeight,
-											maxWidth: maxWidth,
-											showPlayer: false
-										}
-									).render();
-								}
-// console.log(gallery);
-								// gallery.show();
-							}
-
-							previewToolbar.delegate(
-								'click',
-								function(event) {
-									var button = event.currentTarget;
-
-									var id = button.get('id');
-
-									if (/LeftButton$/.test(id)) {
-										updateIndex(-1);
-									}
-									else if (/RightButton$/.test(id)) {
-										updateIndex(1);
-									}
-									else if (/ZoomButton$/.test(id)) {
-										try {
-											loadGallery();
-											gallery.show();
-										}
-										catch (e) {
-											console.log(e);
-										}
-
-										console.log(gallery);
-									}
-								},
-								'button'
-							);
-						</aui:script>
-						<aui:script>
-
-/*
-							var viewportRegion = A.getDoc().get('viewportRegion');
-							var maxHeight = (viewportRegion.height * 0.5);
-							var maxWidth = (viewportRegion.width * 0.5);
-
-							var imageGallery = new A.ImageGallery(
-								{
-									after: {
-										render: function(event) {
-											var instance = this;
-											var footerNode = instance.footerNode;
-
-											instance._actions = A.Node.create('<div class="lfr-image-gallery-actions"></div>');
-
-											if (footerNode) {
-												footerNode.append(
-													instance._actions
-												);
-											}
-										},
-										request: function(event) {
-											var instance = this;
-
-											var currentLink = instance.getCurrentLink();
-											var largeImageId = currentLink.attr('largeImageId');
-											var actions = instance._actions;
-
-											if (actions) {
-												var action = A.one('#<portlet:namespace />buttonsContainer_' + largeImageId);
-
-												actions.empty();
-
-												actions.append(
-													action.clone().show()
-												);
-											}
-										}
-									},
-									delay: 5000,
-									links: '#imageGalleryAssetInfoPanelContainer .image-thumbnail',
-									maxHeight: maxHeight,
-									maxWidth: maxWidth,
-									playingLabel: '(<liferay-ui:message key="playing" />)'
-								}
-							).render();
-*/
-						</aui:script>
+						</script>
 					</c:otherwise>
 				</c:choose>
 			</div>
