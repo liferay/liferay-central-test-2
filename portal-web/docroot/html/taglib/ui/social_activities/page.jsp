@@ -55,8 +55,8 @@ Format timeFormatDate = FastDateFormatFactoryUtil.getTime(locale, timeZone);
 
 		syndFeed.setFeedType(RSSUtil.DEFAULT_FEED_TYPE);
 		syndFeed.setLink(feedLink);
-		syndFeed.setTitle(feedTitle);
-		syndFeed.setDescription(feedTitle);
+		syndFeed.setTitle(HtmlUtil.extractText(feedTitle));
+		syndFeed.setDescription(HtmlUtil.extractText(feedTitle));
 
 		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 
