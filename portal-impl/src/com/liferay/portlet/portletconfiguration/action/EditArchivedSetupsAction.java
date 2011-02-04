@@ -17,6 +17,7 @@ package com.liferay.portlet.portletconfiguration.action;
 import com.liferay.portal.NoSuchPortletItemException;
 import com.liferay.portal.PortletItemNameException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Portlet;
@@ -64,18 +65,12 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 		try {
 			if (cmd.equals(Constants.SAVE)) {
 				updateSetup(actionRequest, portlet);
-
-				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.RESTORE)) {
 				restoreSetup(actionRequest, portlet);
-
-				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteSetup(actionRequest);
-
-				sendRedirect(actionRequest, actionResponse);
 			}
 		}
 		catch (Exception e) {
@@ -95,6 +90,16 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 			else {
 				throw e;
 			}
+		}
+
+		if (SessionErrors.isEmpty(actionRequest)) {
+			SessionMessages.add(
+				actionRequest,
+				portletConfig.getPortletName() + ".doConfigure");
+
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+			actionResponse.sendRedirect(redirect);
 		}
 	}
 
