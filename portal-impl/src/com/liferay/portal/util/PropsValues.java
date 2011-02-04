@@ -212,14 +212,14 @@ public class PropsValues {
 
 	public static final String CAS_LOGOUT_URL = PropsUtil.get(PropsKeys.CAS_LOGOUT_URL);
 
+	public static final String CAS_NO_SUCH_USER_REDIRECT_URL = PropsUtil.get(PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL);
+
 	public static final String CAS_SERVER_NAME = PropsUtil.get(PropsKeys.CAS_SERVER_NAME);
 
 	public static final String CAS_SERVER_URL = PropsUtil.get(PropsKeys.CAS_SERVER_URL);
 
 	public static final String CAS_SERVICE_URL = PropsUtil.get(PropsKeys.CAS_SERVICE_URL);
 
-	public static final String CAS_NO_SUCH_USER_REDIRECT_URL = PropsUtil.get(PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL);
-	
 	public static final String CDN_HOST_HTTP = PropsUtil.get(PropsKeys.CDN_HOST_HTTP);
 
 	public static final String CDN_HOST_HTTPS = PropsUtil.get(PropsKeys.CDN_HOST_HTTPS);

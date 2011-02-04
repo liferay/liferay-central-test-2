@@ -20,11 +20,11 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.auth.CASAutoLogin;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,8 +49,6 @@ import org.jasig.cas.client.validation.TicketValidator;
  * @author Zsolt Balogh
  */
 public class CASFilter extends BasePortalFilter {
-
-	public static String LOGIN = CASFilter.class.getName() + "LOGIN";
 
 	public static void reload(long companyId) {
 		_ticketValidators.remove(companyId);
@@ -124,15 +122,17 @@ public class CASFilter extends BasePortalFilter {
 
 		String pathInfo = request.getPathInfo();
 
-		if (session.getAttribute(CASAutoLogin.FIRST_TIME_WITH_NO_SUCH_USER) != null) {
+		Object forceLogout = session.getAttribute(WebKeys.CAS_FORCE_LOGOUT);
 
-			session.removeAttribute(CASAutoLogin.FIRST_TIME_WITH_NO_SUCH_USER);
+		if (forceLogout != null) {
+			session.removeAttribute(WebKeys.CAS_FORCE_LOGOUT);
 
 			String logoutUrl = PrefsPropsUtil.getString(
-					companyId, PropsKeys.CAS_LOGOUT_URL,
-					PropsValues.CAS_LOGOUT_URL);
+				companyId, PropsKeys.CAS_LOGOUT_URL,
+				PropsValues.CAS_LOGOUT_URL);
 
 			response.sendRedirect(logoutUrl);
+
 			return;
 		}
 
@@ -148,7 +148,7 @@ public class CASFilter extends BasePortalFilter {
 			return;
 		}
 		else {
-			String login = (String)session.getAttribute(LOGIN);
+			String login = (String)session.getAttribute(WebKeys.CAS_LOGIN);
 
 			String serverName = PrefsPropsUtil.getString(
 				companyId, PropsKeys.CAS_SERVER_NAME,
@@ -194,7 +194,7 @@ public class CASFilter extends BasePortalFilter {
 
 				login = attributePrincipal.getName();
 
-				session.setAttribute(LOGIN, login);
+				session.setAttribute(WebKeys.CAS_LOGIN, login);
 			}
 		}
 

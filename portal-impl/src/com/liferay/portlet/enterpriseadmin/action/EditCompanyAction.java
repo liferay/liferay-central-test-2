@@ -63,9 +63,6 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditCompanyAction extends PortletAction {
 
-	private static final String SETTINGS_PREFIX = "settings--";
-	private static final String SETTINGS_POSTFIX = "--";
-
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			ActionRequest actionRequest, ActionResponse actionResponse)
@@ -75,15 +72,17 @@ public class EditCompanyAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-
 				validateCAS(actionRequest);
 
-				if (SessionErrors.isEmpty(actionRequest)) {
+				if (!SessionErrors.isEmpty(actionRequest)) {
+					setForward(
+						actionRequest, "portlet.enterprise_admin.edit_company");
+				}
+				else {
 					updateCompany(actionRequest);
 					updateDisplay(actionRequest);
-				} else {
-					setForward(
-							actionRequest, "portlet.enterprise_admin.edit_company");
+
+					sendRedirect(actionRequest, actionResponse);
 				}
 			}
 		}
@@ -182,7 +181,7 @@ public class EditCompanyAction extends PortletAction {
 
 		boolean communityLogo = ParamUtil.getBoolean(
 			actionRequest,
-			SETTINGS_PREFIX + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + SETTINGS_POSTFIX);
+			"settings--" + PropsKeys.COMPANY_SECURITY_COMMUNITY_LOGO + "--");
 
 		CompanyServiceUtil.updateSecurity(
 			company.getCompanyId(), company.getAuthType(),
@@ -197,70 +196,71 @@ public class EditCompanyAction extends PortletAction {
 		}
 	}
 
-	protected void validateCAS(ActionRequest actionRequest) 
-		throws Exception {
+	protected void validateCAS(ActionRequest actionRequest) throws Exception {
+		boolean casEnabled = ParamUtil.getBoolean(
+			actionRequest, "settings--" + PropsKeys.CAS_AUTH_ENABLED + "--");
 
-		String casEnabled = ParamUtil.getString(
-				actionRequest, SETTINGS_PREFIX + PropsKeys.CAS_AUTH_ENABLED + SETTINGS_POSTFIX);
-
-		if (casEnabled == null || casEnabled.equals("false")) {
+		if (!casEnabled) {
 			return;
 		}
-		
-		String casLoginUrl = ParamUtil.getString(
-				actionRequest, SETTINGS_PREFIX + PropsKeys.CAS_LOGIN_URL + SETTINGS_POSTFIX);
-		String casLogoutUrl = ParamUtil.getString(
-				actionRequest, SETTINGS_PREFIX + PropsKeys.CAS_LOGOUT_URL + SETTINGS_POSTFIX);
+
+		String casLoginURL = ParamUtil.getString(
+			actionRequest, "settings--" + PropsKeys.CAS_LOGIN_URL + "--");
+		String casLogoutURL = ParamUtil.getString(
+			actionRequest, "settings--" + PropsKeys.CAS_LOGOUT_URL + "--");
 		String casServerName = ParamUtil.getString(
-				actionRequest, SETTINGS_PREFIX + PropsKeys.CAS_SERVER_NAME + SETTINGS_POSTFIX);
-		String casServerUrl = ParamUtil.getString(
-				actionRequest, SETTINGS_PREFIX + PropsKeys.CAS_SERVER_URL + SETTINGS_POSTFIX);
-		String casServiceUrl = ParamUtil.getString(
-				actionRequest, SETTINGS_PREFIX + PropsKeys.CAS_SERVICE_URL + SETTINGS_POSTFIX);
-		String casNoSuchUserRedirectUrl = ParamUtil.getString(
-				actionRequest, SETTINGS_PREFIX + PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL + SETTINGS_POSTFIX);
+			actionRequest, "settings--" + PropsKeys.CAS_SERVER_NAME + "--");
+		String casServerURL = ParamUtil.getString(
+			actionRequest, "settings--" + PropsKeys.CAS_SERVER_URL + "--");
+		String casServiceURL = ParamUtil.getString(
+			actionRequest, "settings--" + PropsKeys.CAS_SERVICE_URL + "--");
+		String casNoSuchUserRedirectURL = ParamUtil.getString(
+			actionRequest, "settings--" +
+			PropsKeys.CAS_NO_SUCH_USER_REDIRECT_URL + "--");
 
-		if (casLoginUrl.equals("")) {
-			SessionErrors.add(actionRequest, "casLoginUrlIsBlank");
-		} else {
-			if (!Validator.isUrl(casLoginUrl)) {
-				SessionErrors.add(actionRequest, "casLoginUrlInvalid");
-		    }
+		if (!Validator.isUrl(casLoginURL)) {
+			SessionErrors.add(actionRequest, "casLoginURLInvalid");
 		}
 
-		if (casLogoutUrl.equals("")) {
-			SessionErrors.add(actionRequest, "casLogoutUrlIsBlank");
-		} else {
-			if (!Validator.isUrl(casLogoutUrl)) {
-				SessionErrors.add(actionRequest, "casLogoutUrlInvalid");
-		    }
+		if (!Validator.isUrl(casLogoutURL)) {
+			SessionErrors.add(actionRequest, "casLogoutURLInvalid");
 		}
 
-		if (casServerName.equals("")) {
-			SessionErrors.add(actionRequest, "casServerNameIsBlank");
+		if (Validator.isNull(casServerName)) {
+			SessionErrors.add(actionRequest, "casServerNameInvalid");
 		}
 
-		if (!casServerUrl.equals("") && !casServiceUrl.equals("")) {
-			SessionErrors.add(actionRequest, "casServerUrlServiceUrlBothCannotBeSet");
+		if (Validator.isNotNull(casServerURL) &&
+			Validator.isNotNull(casServiceURL)) {
+
+			SessionErrors.add(
+				actionRequest, "casServerURLAndServiceURLConflict");
+		}
+		else if (Validator.isNull(casServerURL) &&
+				 Validator.isNull(casServiceURL)) {
+
+			SessionErrors.add(
+				actionRequest, "casServerURLAndServiceURLNotSet");
+		}
+		else {
+			if (Validator.isNotNull(casServerURL) &&
+				!Validator.isUrl(casServerURL)) {
+
+				SessionErrors.add(actionRequest, "casServerURLInvalid");
+			}
+
+			if (Validator.isNotNull(casServiceURL) &&
+				!Validator.isUrl(casServiceURL)) {
+
+				SessionErrors.add(actionRequest, "casServiceURLInvalid");
+			}
 		}
 
-		if (casServerUrl.equals("") && casServiceUrl.equals("")) {
-			SessionErrors.add(actionRequest, "casServerUrlServiceUrlNeitherIsSet");
+		if (Validator.isNotNull(casNoSuchUserRedirectURL) &&
+			!Validator.isUrl(casNoSuchUserRedirectURL)) {
+
+			SessionErrors.add(actionRequest, "casNoSuchUserURLInvalid");
 		}
-		
-	    if (!casServerUrl.equals("") && !Validator.isUrl(casServerUrl)) {
-			SessionErrors.add(actionRequest, "casServerUrlInvalid");
-	    }
-
-	    if (!casServiceUrl.equals("") && !Validator.isUrl(casServiceUrl)) {
-			SessionErrors.add(actionRequest, "casServiceUrlInvalid");
-	    }
-
-	    if (!casNoSuchUserRedirectUrl.equals("") && !Validator.isUrl(casNoSuchUserRedirectUrl)) {
-			SessionErrors.add(actionRequest, "casNoSuchUserUrlInvalid");
-	    }
-	    
 	}
-
 
 }

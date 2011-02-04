@@ -585,6 +585,10 @@
 		<put name="portlet_content" value="/portlet/enterprise_admin/select_user_group.jsp" />
 	</definition>
 
+	<definition name="portlet.enterprise_admin.test_cas_configuration" extends="portlet.enterprise_admin">
+		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_cas_configuration.jsp" />
+	</definition>
+
 	<definition name="portlet.enterprise_admin.test_ldap_connection" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_ldap_connection.jsp" />
 	</definition>
@@ -599,10 +603,6 @@
 
 	<definition name="portlet.enterprise_admin.test_opensso_configuration" extends="portlet.enterprise_admin">
 		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_opensso_configuration.jsp" />
-	</definition>
-
-	<definition name="portlet.enterprise_admin.test_cas_configuration" extends="portlet.enterprise_admin">
-		<put name="portlet_content" value="/portlet/enterprise_admin/settings/test_cas_configuration.jsp" />
 	</definition>
 
 	<definition name="portlet.enterprise_admin.view" extends="portlet.enterprise_admin">

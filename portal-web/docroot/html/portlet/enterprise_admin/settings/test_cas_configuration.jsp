@@ -17,44 +17,77 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String casLoginUrl = ParamUtil.getString(request, "casLoginUrl");
-String casLogoutUrl = ParamUtil.getString(request, "casLogoutUrl");
-String casServerUrl = ParamUtil.getString(request, "casServerUrl");
-String casServiceUrl = ParamUtil.getString(request, "casServiceUrl");
+String casLoginURL = ParamUtil.getString(request, "casLoginURL");
+String casLogoutURL = ParamUtil.getString(request, "casLogoutURL");
+String casServerURL = ParamUtil.getString(request, "casServerURL");
+String casServiceURL = ParamUtil.getString(request, "casServiceURL");
 %>
 
-<p>
-Checking CAS Configuration URLs
-</p>
+<table class="lfr-table">
+<tr>
+	<td>
+		<b><liferay-ui:message key="login-url" />:</b>
+	</td>
+	<td>
+		<liferay-ui:message key="<%= _testURL(casLoginURL) %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<b><liferay-ui:message key="logout-url" />:</b>
+	</td>
+	<td>
+		<liferay-ui:message key="<%= _testURL(casLogoutURL) %>" />
+	</td>
+</tr>
 
-<p>
-<liferay-ui:message key="login-url" />:  <%=casLoginUrl %> - <liferay-ui:message key="<%=CasUtil.checkUrlAvailability(casLoginUrl) %>" />
-</p>
-<p>
-<liferay-ui:message key="logout-url" />: <%=casLogoutUrl %> -  <liferay-ui:message key="<%=CasUtil.checkUrlAvailability(casLogoutUrl) %>" />
-</p>
+<c:if test="<%= Validator.isNotNull(casServerURL) %>">
+	<tr>
+		<td>
+			<b><liferay-ui:message key="server-url" />:</b>
+		</td>
+		<td>
+			<liferay-ui:message key="<%= _testURL(casServerURL) %>" />
+		</td>
+	</tr>
+</c:if>
 
-<%
-if (!casServerUrl.equals(StringPool.BLANK)) {
-%>
-<p>
-<liferay-ui:message key="server-url" />: <%=casServerUrl %> -  <liferay-ui:message key="<%=CasUtil.checkUrlAvailability(casServerUrl) %>" />
-</p>	
-<%
+<c:if test="<%= Validator.isNotNull(casServiceURL) %>">
+	<tr>
+		<td>
+			<b><liferay-ui:message key="service-url" />:</b>
+		</td>
+		<td>
+			<liferay-ui:message key="<%= _testURL(casServiceURL) %>" />
+		</td>
+	</tr>
+</c:if>
+
+<%!
+private String _testURL(String url) {
+	try {
+		URL urlObj = new URL(url);
+
+		HttpURLConnection httpURLConnection = (HttpURLConnection)urlObj.openConnection();
+
+		httpURLConnection.setConnectTimeout(3000);
+
+		httpURLConnection.getResponseCode();
+	}
+	catch (MalformedURLException e) {
+		return "fail";
+	}
+	catch (Exception e) {
+		String message = GetterUtil.getString(e.getMessage());
+
+		if (message.contains("PKIX")) {
+			return "ssl-error";
+		}
+		else {
+			return "unreachable";
+		}
+	}
+
+	return "pass";
 }
 %>
-
-<%
-if (!casServiceUrl.equals(StringPool.BLANK)) {
-%>
-<p>
-<liferay-ui:message key="service-url" />: <%=casServiceUrl %> -  <liferay-ui:message key="<%=CasUtil.checkUrlAvailability(casServiceUrl) %>" />
-</p>	
-<%
-}
-%>
-
-
-
-
-

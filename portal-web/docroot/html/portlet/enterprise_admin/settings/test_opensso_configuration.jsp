@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String openSsoLoginUrl = ParamUtil.getString(request, "openSsoLoginUrl");
-String openSsoLogoutUrl = ParamUtil.getString(request, "openSsoLogoutUrl");
-String openSsoServiceUrl = ParamUtil.getString(request, "openSsoServiceUrl");
+String openSsoLoginURL = ParamUtil.getString(request, "openSsoLoginURL");
+String openSsoLogoutURL = ParamUtil.getString(request, "openSsoLogoutURL");
+String openSsoServiceURL = ParamUtil.getString(request, "openSsoServiceURL");
 String openSsoScreenNameAttr = ParamUtil.getString(request, "openSsoScreenNameAttr");
 String openSsoEmailAddressAttr = ParamUtil.getString(request, "openSsoEmailAddressAttr");
 String openSsoFirstNameAttr = ParamUtil.getString(request, "openSsoFirstNameAttr");
@@ -27,16 +27,16 @@ String openSsoLastNameAttr = ParamUtil.getString(request, "openSsoLastNameAttr")
 
 List<String> urls = new ArrayList<String>();
 
-urls.add(openSsoLoginUrl);
-urls.add(openSsoLogoutUrl);
-urls.add(openSsoServiceUrl);
+urls.add(openSsoLoginURL);
+urls.add(openSsoLogoutURL);
+urls.add(openSsoServiceURL);
 %>
 
 <c:choose>
-	<c:when test="<%= !OpenSSOUtil.isValidUrls(urls.toArray(new String[urls.size()])) %>">
+	<c:when test="<%= !OpenSSOUtil.isValidURLs(urls.toArray(new String[urls.size()])) %>">
 		<liferay-ui:message key="liferay-has-failed-to-connect-to-the-opensso-server" />
 	</c:when>
-	<c:when test="<%= !OpenSSOUtil.isValidServiceUrl(openSsoServiceUrl) %>">
+	<c:when test="<%= !OpenSSOUtil.isValidServiceURL(openSsoServiceURL) %>">
 		<liferay-ui:message key="liferay-has-failed-to-connect-to-the-opensso-services" />
 	</c:when>
 	<c:when test="<%= Validator.isNull(openSsoScreenNameAttr) || Validator.isNull(openSsoEmailAddressAttr) || Validator.isNull(openSsoFirstNameAttr) || Validator.isNull(openSsoLastNameAttr) %>">

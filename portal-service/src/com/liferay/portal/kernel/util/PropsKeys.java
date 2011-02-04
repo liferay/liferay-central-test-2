@@ -289,13 +289,13 @@ public interface PropsKeys {
 
 	public static final String CAS_LOGOUT_URL = "cas.logout.url";
 
+	public static final String CAS_NO_SUCH_USER_REDIRECT_URL = "cas.no.such.user.redirect.url";
+
 	public static final String CAS_SERVER_NAME = "cas.server.name";
 
 	public static final String CAS_SERVER_URL = "cas.server.url";
 
 	public static final String CAS_SERVICE_URL = "cas.service.url";
-
-	public static final String CAS_NO_SUCH_USER_REDIRECT_URL = "cas.no.such.user.redirect.url";
 
 	public static final String CDN_HOST_HTTP = "cdn.host.http";
 

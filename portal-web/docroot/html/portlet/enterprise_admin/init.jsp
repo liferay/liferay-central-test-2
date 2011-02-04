@@ -70,7 +70,6 @@
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.liveusers.LiveUsers" %>
 <%@ page import="com.liferay.portal.security.auth.AuthSettingsUtil" %>
-<%@ page import="com.liferay.portal.security.cas.CasUtil" %>
 <%@ page import="com.liferay.portal.security.ldap.LDAPSettingsUtil" %>
 <%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
@@ -124,6 +123,10 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserUserGroupChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 <%@ page import="com.liferay.util.ldap.LDAPUtil" %>
+
+<%@ page import="java.net.HttpURLConnection" %>
+<%@ page import="java.net.MalformedURLException" %>
+<%@ page import="java.net.URL" %>
 
 <%@ page import="javax.naming.NamingEnumeration" %>
 <%@ page import="javax.naming.directory.Attribute" %>
