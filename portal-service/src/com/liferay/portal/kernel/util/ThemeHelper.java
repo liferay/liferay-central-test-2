@@ -43,6 +43,7 @@ public class ThemeHelper {
 		sb.append(themeContextName);
 
 		String servletContextName = StringPool.BLANK;
+
 		String contextPath = GetterUtil.getString(
 			servletContext.getContextPath(), StringPool.SLASH);
 
