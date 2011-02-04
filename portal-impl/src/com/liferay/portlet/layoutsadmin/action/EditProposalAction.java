@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.layoutsadmin.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.staging.StagingUtil;
@@ -33,6 +33,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.portlet.tasks.DuplicateReviewUserIdException;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.ProposalDueDateException;

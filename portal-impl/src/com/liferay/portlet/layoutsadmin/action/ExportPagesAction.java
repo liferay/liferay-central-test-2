@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.layoutsadmin.action;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -33,6 +33,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.File;

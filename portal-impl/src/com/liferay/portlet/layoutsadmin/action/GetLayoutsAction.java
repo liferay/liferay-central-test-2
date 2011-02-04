@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.layoutsadmin.action;
 
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;

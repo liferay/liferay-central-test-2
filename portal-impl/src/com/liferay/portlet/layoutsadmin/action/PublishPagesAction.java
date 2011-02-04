@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.layoutsadmin.action;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -23,6 +23,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import com.liferay.portlet.communities.action.ActionUtil;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;

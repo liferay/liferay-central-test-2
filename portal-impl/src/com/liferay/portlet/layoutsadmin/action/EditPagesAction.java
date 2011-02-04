@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.layoutsadmin.action;
 
 import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.LayoutFriendlyURLException;
@@ -75,6 +75,7 @@ import com.liferay.portal.util.LayoutSettings;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.util.servlet.UploadException;

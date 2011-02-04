@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.communities.action;
+package com.liferay.portlet.layoutsadmin.action;
 
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -40,6 +40,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LayoutSettings;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 
 import javax.servlet.http.HttpServletRequest;
