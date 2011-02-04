@@ -323,14 +323,6 @@
 		<put name="portlet_content" value="/portlet/communities/edit_community_assignments.jsp" />
 	</definition>
 
-	<definition name="portlet.communities.edit_pages" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/layouts_admin/edit_pages.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.edit_proposal" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/layouts_admin/edit_proposal.jsp" />
-	</definition>
-
 	<definition name="portlet.communities.edit_team" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/edit_team.jsp" />
 	</definition>
@@ -347,20 +339,8 @@
 		<put name="portlet_content" value="/portlet/communities/error.jsp" />
 	</definition>
 
-	<definition name="portlet.communities.export_pages" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/layouts_admin/edit_pages_export_import.jsp" />
-	</definition>
-
 	<definition name="portlet.communities.post_membership_request" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/post_membership_request.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.publish_pages" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/layouts_admin/publish_pages.jsp" />
-	</definition>
-
-	<definition name="portlet.communities.publish_portlet" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/layouts_admin/publish_portlet.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.reply_membership_request" extends="portlet.communities">
@@ -847,6 +827,34 @@
 
 	<definition name="portlet.layout_set_prototypes.view" extends="portlet.layout_set_prototypes">
 		<put name="portlet_content" value="/portlet/layout_set_prototypes/view.jsp" />
+	</definition>
+
+	<!-- Layouts Admin -->
+
+	<definition name="portlet.layouts_admin" extends="portlet" />
+
+	<definition name="portlet.layouts_admin.edit_pages" extends="portlet.layouts_admin">
+		<put name="portlet_content" value="/portlet/layouts_admin/edit_pages.jsp" />
+	</definition>
+
+	<definition name="portlet.layouts_admin.edit_proposal" extends="portlet.layouts_admin">
+		<put name="portlet_content" value="/portlet/layouts_admin/edit_proposal.jsp" />
+	</definition>
+
+	<definition name="portlet.layouts_admin.export_pages" extends="portlet.layouts_admin">
+		<put name="portlet_content" value="/portlet/layouts_admin/edit_pages_export_import.jsp" />
+	</definition>
+
+	<definition name="portlet.layouts_admin.error" extends="portlet.layouts_admin">
+		<put name="portlet_content" value="/portlet/layouts_admin/error.jsp" />
+	</definition>
+
+	<definition name="portlet.layouts_admin.publish_pages" extends="portlet.layouts_admin">
+		<put name="portlet_content" value="/portlet/layouts_admin/publish_pages.jsp" />
+	</definition>
+
+	<definition name="portlet.layouts_admin.publish_portlet" extends="portlet.layouts_admin">
+		<put name="portlet_content" value="/portlet/layouts_admin/publish_portlet.jsp" />
 	</definition>
 
 	<!-- Login -->

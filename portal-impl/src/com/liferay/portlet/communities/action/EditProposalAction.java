@@ -103,7 +103,7 @@ public class EditProposalAction extends EditPagesAction {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
-				setForward(actionRequest, "portlet.communities.error");
+				setForward(actionRequest, "portlet.layouts_admin.error");
 			}
 			else if (e instanceof DuplicateReviewUserIdException ||
 					 e instanceof ProposalDueDateException ||
@@ -129,7 +129,7 @@ public class EditProposalAction extends EditPagesAction {
 			SessionErrors.add(
 				renderRequest, PrincipalException.class.getName());
 
-			return mapping.findForward("portlet.communities.error");
+			return mapping.findForward("portlet.layouts_admin.error");
 		}
 
 		try {
@@ -152,7 +152,7 @@ public class EditProposalAction extends EditPagesAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.communities.error");
+				return mapping.findForward("portlet.layouts_admin.error");
 			}
 			else {
 				throw e;
@@ -160,7 +160,7 @@ public class EditProposalAction extends EditPagesAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.communities.edit_proposal"));
+			getForward(renderRequest, "portlet.layouts_admin.edit_proposal"));
 	}
 
 	protected void approveReview(ActionRequest actionRequest) throws Exception {

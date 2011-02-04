@@ -83,7 +83,7 @@ public class ImportPagesAction extends PortletAction {
 			}
 		}
 
-		setForward(actionRequest, "portlet.communities.edit_pages");
+		setForward(actionRequest, "portlet.layouts_admin.edit_pages");
 	}
 
 	public ActionForward render(
@@ -100,7 +100,7 @@ public class ImportPagesAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.communities.error");
+				return mapping.findForward("portlet.layouts_admin.error");
 			}
 			else {
 				throw e;
@@ -108,7 +108,7 @@ public class ImportPagesAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.communities.export_pages"));
+			getForward(renderRequest, "portlet.layouts_admin.export_pages"));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ImportPagesAction.class);

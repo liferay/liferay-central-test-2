@@ -47,7 +47,7 @@ public class PublishPagesAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
 
-				return mapping.findForward("portlet.communities.error");
+				return mapping.findForward("portlet.layouts_admin.error");
 			}
 			else {
 				throw e;
@@ -55,7 +55,7 @@ public class PublishPagesAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.communities.publish_pages"));
+			getForward(renderRequest, "portlet.layouts_admin.publish_pages"));
 	}
 
 }
