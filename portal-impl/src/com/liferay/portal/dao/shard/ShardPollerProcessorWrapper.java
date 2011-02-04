@@ -29,6 +29,10 @@ public class ShardPollerProcessorWrapper implements PollerProcessor {
 		_pollerProcessor = pollerProcessor;
 	}
 
+	public boolean isAsynchronousProcessing() {
+		return false;
+	}
+
 	public void receive(
 			PollerRequest pollerRequest, PollerResponse pollerResponse)
 		throws PollerException {

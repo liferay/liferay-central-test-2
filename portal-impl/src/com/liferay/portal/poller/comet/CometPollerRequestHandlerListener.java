@@ -14,32 +14,34 @@
 
 package com.liferay.portal.poller.comet;
 
-import com.liferay.portal.kernel.poller.PollerException;
-import com.liferay.portal.kernel.poller.comet.CometResponse;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.poller.comet.CometException;
 import com.liferay.portal.kernel.poller.comet.CometSession;
-import com.liferay.portal.poller.JSONPollerResponseWriter;
+import com.liferay.portal.poller.PollerRequestHandlerListener;
 
 /**
  * @author Edward Han
- * @author Brian Wing Shun Chan
  */
-public class CometPollerResponseWriter extends JSONPollerResponseWriter {
-
-	public CometPollerResponseWriter(CometSession cometSession) {
+public class CometPollerRequestHandlerListener
+	implements PollerRequestHandlerListener {
+	public CometPollerRequestHandlerListener(CometSession cometSession) {
 		_cometSession = cometSession;
 	}
 
-	@Override
-	protected void doClose() throws PollerException {
+	public void notifyHandlingComplete() {
 		try {
-			CometResponse cometResponse = _cometSession.getCometResponse();
-
-			cometResponse.writeData(getJSONArray().toString());
+			_cometSession.close();
 		}
-		catch (Exception e) {
-			throw new PollerException(e);
+		catch (CometException e) {
+			if (_log.isErrorEnabled()) {
+				_log.error("Unable to notify handling complete", e);
+			}
 		}
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(
+		CometPollerRequestHandlerListener.class);
 
 	private CometSession _cometSession;
 }

@@ -12,19 +12,32 @@
  * details.
  */
 
-package com.liferay.portal.kernel.poller;
+package com.liferay.portal.poller;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Edward Han
  */
-public interface PollerProcessor {
+public class SynchronousPollerRequestHandlerListener
+	implements PollerRequestHandlerListener {
 
-	public boolean isAsynchronousProcessing();
+	public void waitNotification(long timeout) {
+		synchronized (this) {
+			try {
+				if (!_complete) {
+					this.wait(timeout);
+				}
+			}
+			catch (InterruptedException ie) {
+			}
+		}
+	}
 
-	public void receive(
-			PollerRequest pollerRequest, PollerResponse pollerResponse)
-		throws PollerException;
+	public void notifyHandlingComplete() {
+		synchronized (this) {
+			_complete = true;
+			this.notify();
+		}
+	}
 
-	public void send(PollerRequest pollerRequest) throws PollerException;
-
+	private boolean _complete = false;
 }

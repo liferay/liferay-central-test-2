@@ -17,7 +17,7 @@ package com.liferay.support.tomcat.poller.comet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.poller.comet.CometHandler;
-import com.liferay.portal.kernel.poller.comet.CometHandlerPool;
+import com.liferay.portal.kernel.poller.comet.CometHandlerPoolUtil;
 import com.liferay.portal.kernel.poller.comet.CometSession;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.InstanceFactory;
@@ -47,13 +47,6 @@ public class CatalinaCometProcessor
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Destroy comet processor");
-		}
-
-		try {
-			_cometHandlerPool.closeCometHandlers();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
 		}
 	}
 
@@ -94,7 +87,9 @@ public class CatalinaCometProcessor
 			_log.debug("Close comet connection " + session.getId());
 		}
 
-		_cometHandlerPool.closeCometHandler(session.getId());
+		String sessionId = CatalinaCometSessionUtil.getSessionId(cometEvent);
+
+		CometHandlerPoolUtil.closeCometHandler(sessionId);
 
 		cometEvent.close();
 	}
@@ -161,7 +156,7 @@ public class CatalinaCometProcessor
 			_log.debug("Read " + data);
 		}
 
-		CometHandler cometHandler = _cometHandlerPool.getCometHandler(
+		CometHandler cometHandler = CometHandlerPoolUtil.getCometHandler(
 			session.getId());
 
 		cometHandler.receiveData(data);
@@ -174,13 +169,15 @@ public class CatalinaCometProcessor
 
 		CometSession cometSession = new CatalinaCometSession(cometEvent);
 
+		String sessionId = CatalinaCometSessionUtil.getSessionId(cometEvent);
+
 		cometSession.setCometRequest(new CatalinaCometRequest(cometEvent));
 		cometSession.setCometResponse(new CatalinaCometResponse(cometEvent));
-		cometSession.setSessionId(session.getId());
+		cometSession.setSessionId(sessionId);
 
 		CometHandler cometHandler = _cometHandler.clone();
 
-		_cometHandlerPool.startCometHandler(cometSession, cometHandler);
+		CometHandlerPoolUtil.startCometHandler(cometSession, cometHandler);
 
 		HttpServletResponse response = cometEvent.getHttpServletResponse();
 
@@ -191,6 +188,5 @@ public class CatalinaCometProcessor
 		CatalinaCometProcessor.class);
 
 	private CometHandler _cometHandler;
-	private CometHandlerPool _cometHandlerPool = new CometHandlerPool();
 
 }

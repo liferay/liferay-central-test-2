@@ -15,16 +15,17 @@
 package com.liferay.portal.kernel.poller;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Edward Han
  */
-public interface PollerProcessor {
+public class PollerResponseClosedException extends PollerException {
+	public PollerResponseClosedException() {
+		super();
+	}
 
-	public boolean isAsynchronousProcessing();
+	@Override
+	public String getMessage() {
+		return MESSAGE;
+	}
 
-	public void receive(
-			PollerRequest pollerRequest, PollerResponse pollerResponse)
-		throws PollerException;
-
-	public void send(PollerRequest pollerRequest) throws PollerException;
-
+	private static final String MESSAGE = "Unable to write to PollerResponse, response is closed";
 }

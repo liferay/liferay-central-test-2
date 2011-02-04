@@ -21,10 +21,10 @@ package com.liferay.portal.kernel.poller.comet;
 public abstract class BaseCometSession implements CometSession {
 
 	public void close() throws CometException {
-		_cometResponse.close();
-
 		try {
 			doClose();
+
+			_cometResponse.close();
 		}
 		catch (CometException ce) {
 			throw ce;

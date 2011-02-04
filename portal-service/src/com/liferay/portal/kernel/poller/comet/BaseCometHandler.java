@@ -25,8 +25,6 @@ public abstract class BaseCometHandler implements CometHandler {
 	public void destroy() throws CometException {
 		_cometState = CometState.STATE_CLOSED;
 
-		_cometSession.close();
-
 		try {
 			doDestroy();
 		}

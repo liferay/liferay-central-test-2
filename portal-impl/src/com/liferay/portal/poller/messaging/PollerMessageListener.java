@@ -19,13 +19,13 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.poller.DefaultPollerResponse;
 import com.liferay.portal.kernel.poller.PollerException;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.poller.PollerRequest;
 import com.liferay.portal.kernel.poller.PollerResponse;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.poller.PollerProcessorUtil;
+import com.liferay.portal.poller.PollerRequestResponsePair;
 
 /**
  * @author Michael C. Han
@@ -34,55 +34,58 @@ import com.liferay.portal.poller.PollerProcessorUtil;
 public class PollerMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
-		PollerResponse pollerResponse = null;
+		PollerRequestResponsePair pollerRequestResponsePair =
+			(PollerRequestResponsePair)message.getPayload();
 
-		try {
-			PollerRequest pollerRequest = (PollerRequest)message.getPayload();
+		PollerRequest pollerRequest = pollerRequestResponsePair.getPollerRequest();
 
-			String portletId = pollerRequest.getPortletId();
+		PollerResponse pollerResponse = pollerRequestResponsePair.getPollerResponse();
 
-			PollerProcessor pollerProcessor =
-				PollerProcessorUtil.getPollerProcessor(portletId);
+		String portletId = pollerRequest.getPortletId();
 
-			if (pollerRequest.isReceiveRequest()) {
-				pollerResponse = new DefaultPollerResponse(
-					portletId, pollerRequest.getChunkId());
+		PollerProcessor pollerProcessor =
+			PollerProcessorUtil.getPollerProcessor(portletId);
 
-				try {
-					pollerProcessor.receive(pollerRequest, pollerResponse);
-				}
-				catch (PollerException pe) {
-					_log.error(
-						"Unable to receive poller request " + pollerRequest,
-						pe);
-
-					pollerResponse.setParameter(
-						"pollerException", pe.getMessage());
-				}
-			}
-			else {
-				try {
-					pollerProcessor.send(pollerRequest);
-				}
-				catch (PollerException pe) {
-					_log.error(
-						"Unable to send poller request " + pollerRequest,
-						pe);
-				}
-			}
-		}
-		finally {
+		if (pollerRequest.isReceiveRequest()) {
 			String responseDestinationName =
 				message.getResponseDestinationName();
 
-			if (Validator.isNotNull(responseDestinationName)) {
+			if (Validator.isNotNull(responseDestinationName) &&
+				Validator.isNotNull(pollerResponse)) {
+
 				Message responseMessage = MessageBusUtil.createResponseMessage(
 					message);
 
 				responseMessage.setPayload(pollerResponse);
 
-				MessageBusUtil.sendMessage(
-					responseDestinationName, responseMessage);
+				pollerResponse.setResponseMessage(responseMessage);
+			}
+
+			try {
+				pollerProcessor.receive(pollerRequest, pollerResponse);
+			}
+			catch (PollerException pe) {
+				_log.error(
+					"Unable to receive poller request " + pollerRequest,
+					pe);
+
+				pollerResponse.setParameter(
+					"pollerException", pe.getMessage());
+			}
+			finally {
+				if (!pollerProcessor.isAsynchronousProcessing()) {
+					pollerResponse.close();
+				}
+			}
+		}
+		else {
+			try {
+				pollerProcessor.send(pollerRequest);
+			}
+			catch (PollerException pe) {
+				_log.error(
+					"Unable to send poller request " + pollerRequest,
+					pe);
 			}
 		}
 	}

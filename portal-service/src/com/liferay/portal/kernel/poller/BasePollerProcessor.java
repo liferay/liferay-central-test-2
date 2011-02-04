@@ -21,6 +21,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
  */
 public abstract class BasePollerProcessor implements PollerProcessor {
 
+	public boolean isAsynchronousProcessing() {
+		return false;
+	}
+
 	public void receive(
 			PollerRequest pollerRequest, PollerResponse pollerResponse)
 		throws PollerException {
