@@ -82,6 +82,9 @@ public class ThemeUtil {
 		}
 	}
 
+	/**
+	 * @see {@link com.liferay.portlet.forms.util.FormsXSDImpl#processFTL}
+	 */
 	public static String includeFTL(
 			ServletContext servletContext, HttpServletRequest request,
 			PageContext pageContext, String path, Theme theme, boolean write)
