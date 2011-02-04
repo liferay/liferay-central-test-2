@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
 PortletDataHandlerControl[] controls = (PortletDataHandlerControl[])request.getAttribute("render_controls.jsp-controls");
@@ -43,7 +43,7 @@ for (int i = 0; i < controls.length; i++) {
 						request.setAttribute("render_controls.jsp-controls", children);
 						%>
 
-						<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
+						<liferay-util:include page="/html/portlet/layouts_admin/render_controls.jsp" />
 					</ul>
 				</c:if>
 			</c:when>

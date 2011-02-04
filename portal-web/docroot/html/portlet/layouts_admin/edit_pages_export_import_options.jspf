@@ -244,7 +244,7 @@
 												</li>
 
 												<c:if test="<%= showRenderControls %>">
-													<liferay-util:include page="/html/portlet/communities/render_controls.jsp" />
+													<liferay-util:include page="/html/portlet/layouts_admin/render_controls.jsp" />
 												</c:if>
 											</ul>
 										</li>

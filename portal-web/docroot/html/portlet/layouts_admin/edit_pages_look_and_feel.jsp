@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
 String tabs4 = (String)request.getAttribute("edit_pages.jsp-tab4");
@@ -81,7 +81,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), false);
 				%>
 
-				<%@ include file="/html/portlet/communities/edit_pages_look_and_feel_themes.jspf" %>
+				<%@ include file="/html/portlet/layouts_admin/edit_pages_look_and_feel_themes.jspf" %>
 			</liferay-ui:section>
 			<liferay-ui:section>
 
@@ -157,6 +157,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), true);
 		%>
 
-		<%@ include file="/html/portlet/communities/edit_pages_look_and_feel_themes.jspf" %>
+		<%@ include file="/html/portlet/layouts_admin/edit_pages_look_and_feel_themes.jspf" %>
 	</c:when>
 </c:choose>

@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
@@ -359,7 +359,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 	<c:choose>
 		<c:when test='<%= tabs1.equals("settings") %>'>
-			<liferay-util:include page="/html/portlet/communities/edit_pages_settings.jsp" />
+			<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_settings.jsp" />
 		</c:when>
 		<c:otherwise>
 
@@ -411,13 +411,13 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 			<c:choose>
 				<c:when test='<%= tabs2.equals("pages") %>'>
-					<%@ include file="/html/portlet/communities/edit_pages_public_and_private.jspf" %>
+					<%@ include file="/html/portlet/layouts_admin/edit_pages_public_and_private.jspf" %>
 				</c:when>
 				<c:when test='<%= tabs2.equals("look-and-feel") %>'>
-					<liferay-util:include page="/html/portlet/communities/edit_pages_look_and_feel.jsp" />
+					<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_look_and_feel.jsp" />
 				</c:when>
 				<c:when test='<%= tabs2.equals("proposals") %>'>
-					<liferay-util:include page="/html/portlet/communities/edit_pages_proposals.jsp" />
+					<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_proposals.jsp" />
 				</c:when>
 			</c:choose>
 

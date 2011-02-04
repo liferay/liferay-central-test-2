@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "settings");
@@ -133,7 +133,7 @@ if (!tabs2.equals("pages")) {
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("staging") %>'>
-		<liferay-util:include page="/html/portlet/communities/edit_pages_staging.jsp" />
+		<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_staging.jsp" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("virtual-host") %>'>
 		<liferay-ui:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />

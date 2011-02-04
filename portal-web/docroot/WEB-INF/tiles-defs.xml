@@ -324,11 +324,11 @@
 	</definition>
 
 	<definition name="portlet.communities.edit_pages" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_pages.jsp" />
+		<put name="portlet_content" value="/portlet/layouts_admin/edit_pages.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.edit_proposal" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_proposal.jsp" />
+		<put name="portlet_content" value="/portlet/layouts_admin/edit_proposal.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.edit_team" extends="portlet.communities">
@@ -348,7 +348,7 @@
 	</definition>
 
 	<definition name="portlet.communities.export_pages" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/edit_pages_export_import.jsp" />
+		<put name="portlet_content" value="/portlet/layouts_admin/edit_pages_export_import.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.post_membership_request" extends="portlet.communities">
@@ -356,11 +356,11 @@
 	</definition>
 
 	<definition name="portlet.communities.publish_pages" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/publish_pages.jsp" />
+		<put name="portlet_content" value="/portlet/layouts_admin/publish_pages.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.publish_portlet" extends="portlet.communities">
-		<put name="portlet_content" value="/portlet/communities/publish_portlet.jsp" />
+		<put name="portlet_content" value="/portlet/layouts_admin/publish_portlet.jsp" />
 	</definition>
 
 	<definition name="portlet.communities.reply_membership_request" extends="portlet.communities">
