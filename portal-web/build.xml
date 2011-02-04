@@ -701,8 +701,17 @@
 			<pathelement location="${project.dir}/lib/portal/axis.jar" />
 			<pathelement location="${project.dir}/lib/portal/cas-client-core.jar" />
 			<pathelement location="${project.dir}/lib/portal/commons-beanutils.jar" />
+			<pathelement location="${project.dir}/lib/portal/commons-configuration.jar" />
 			<pathelement location="${project.dir}/lib/portal/commons-digester.jar" />
 			<pathelement location="${project.dir}/lib/portal/commons-httpclient.jar" />
+			<pathelement location="${project.dir}/lib/portal/daisydiff.jar" />
+			<pathelement location="${project.dir}/lib/portal/easyconf.jar" />
+			<pathelement location="${project.dir}/lib/portal/ehcache.jar" />
+			<pathelement location="${project.dir}/lib/portal/flexjson.jar" />
+			<pathelement location="${project.dir}/lib/portal/freemarker.jar" />
+			<pathelement location="${project.dir}/lib/portal/jai_core.jar" />
+			<pathelement location="${project.dir}/lib/portal/java-diff.jar" />
+			<pathelement location="${project.dir}/lib/portal/mime-util.jar" />
 			<pathelement location="${project.dir}/lib/portal/pdfbox.jar" />
 			<pathelement location="${project.dir}/lib/portal/poi.jar" />
 			<pathelement location="${project.dir}/lib/portal/poi-scratchpad.jar" />
@@ -711,12 +720,18 @@
 			<pathelement location="${project.dir}/lib/portal/simplecaptcha.jar" />
 			<pathelement location="${project.dir}/lib/portal/slf4j-api.jar" />
 			<pathelement location="${project.dir}/lib/portal/slf4j-log4j12.jar" />
+			<pathelement location="${project.dir}/lib/portal/spring-asm.jar" />
 			<pathelement location="${project.dir}/lib/portal/spring-beans.jar" />
 			<pathelement location="${project.dir}/lib/portal/spring-context.jar" />
 			<pathelement location="${project.dir}/lib/portal/spring-core.jar" />
+			<pathelement location="${project.dir}/lib/portal/spring-expression.jar" />
 			<pathelement location="${project.dir}/lib/portal/spring-web.jar" />
 			<pathelement location="${project.dir}/lib/portal/struts-el.jar" />
+			<pathelement location="${project.dir}/lib/portal/tika-core.jar" />
 			<pathelement location="${project.dir}/lib/portal/urlrewrite.jar" />
+			<pathelement location="${project.dir}/lib/portal/velocity-tools.jar" />
+			<pathelement location="${project.dir}/lib/portal/xercesImpl.jar" />
+			<pathelement location="${project.dir}/lib/portal/xstream.jar" />
 		</path>
 
 		<copy file="docroot/WEB-INF/web.xml" tofile="docroot/WEB-INF/web.xml.bak" />
