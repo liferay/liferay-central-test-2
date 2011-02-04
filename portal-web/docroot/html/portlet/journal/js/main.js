@@ -602,6 +602,10 @@ AUI().add(
 
 					applyEvents(instance._nestedListComponents);
 				}
+				
+				if (nodes instanceof A.Node) {
+					nodes = A.all(nodes);
+				}
 
 				nodes.each(
 					function(item, index, collection) {
