@@ -29,10 +29,12 @@ String casServiceURL = ParamUtil.getString(request, "casServiceURL");
 		<liferay-ui:message key="login-url" />:
 	</td>
 	<td>
+
 		<%
 		String casLoginURLResult = _testURL(casLoginURL);
 		String casLoginURLCssClass = _getCssClass(casLoginURLResult);
 		%>
+
 		<span class="<%= casLoginURLCssClass %>"><liferay-ui:message key="<%= casLoginURLResult %>" /></span> <span class="aui-field-hint"><%= casLoginURL %></span>
 	</td>
 </tr>
@@ -41,10 +43,12 @@ String casServiceURL = ParamUtil.getString(request, "casServiceURL");
 		<liferay-ui:message key="logout-url" />:
 	</td>
 	<td>
+
 		<%
 		String casLogoutURLResult = _testURL(casLogoutURL);
 		String casLogoutURLCssClass = _getCssClass(casLogoutURLResult);
 		%>
+
 		<span class="<%= casLogoutURLCssClass %>"><liferay-ui:message key="<%= casLogoutURLResult %>" /></span> <span class="aui-field-hint"><%= casLogoutURL %></span>
 	</td>
 </tr>
@@ -55,10 +59,12 @@ String casServiceURL = ParamUtil.getString(request, "casServiceURL");
 			<liferay-ui:message key="server-url" />:
 		</td>
 		<td>
+
 			<%
 			String casServerURLResult = _testURL(casServerURL);
 			String casServerURLCssClass = _getCssClass(casServerURLResult);
 			%>
+
 			<span class="<%= casServerURLCssClass %>"><liferay-ui:message key="<%= casServerURLResult %>" /></span> <span class="aui-field-hint"><%= casServerURL %></span>
 		</td>
 	</tr>
@@ -70,10 +76,12 @@ String casServiceURL = ParamUtil.getString(request, "casServiceURL");
 			<liferay-ui:message key="service-url" />:
 		</td>
 		<td>
+
 			<%
 			String casServiceURLResult = _testURL(casServiceURL);
 			String casServiceURLCssClass = _getCssClass(casServiceURLResult);
 			%>
+
 			<span class="<%= casServiceURLCssClass %>"><liferay-ui:message key="<%= casServiceURLResult %>" /></span> <span class="aui-field-hint"><%= casServiceURL %></span>
 		</td>
 	</tr>
