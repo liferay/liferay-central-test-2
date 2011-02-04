@@ -28,6 +28,10 @@ import javax.servlet.ServletContext;
  */
 public class ServletContextPool {
 
+	public static void clear() {
+		_instance._servletContexts.clear();
+	}
+
 	public static boolean containsKey(String servletContextName) {
 		return _instance._containsKey(servletContextName);
 	}

@@ -22,6 +22,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class PortletContextBagPool {
 
+	public static void clear() {
+		_instance._portletContextBagPool.clear();
+	}
+
 	public static PortletContextBag get(String servletContextName) {
 		return _instance._get(servletContextName);
 	}

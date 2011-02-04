@@ -22,6 +22,10 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class WebAppPool {
 
+	public static void clear() {
+		_instance._webAppPool.clear();
+	}
+
 	public static Object get(String webAppId, String key) {
 		return _instance._get(webAppId, key);
 	}

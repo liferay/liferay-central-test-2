@@ -17,12 +17,19 @@ package com.liferay.portal.spring.context;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.cache.CacheRegistryUtil;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
+import com.liferay.portal.kernel.dao.orm.EntityCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.servlet.DirectServletRegistry;
+import com.liferay.portal.kernel.servlet.ServletContextPool;
+import com.liferay.portal.kernel.util.CharBufferPool;
 import com.liferay.portal.kernel.util.ClearThreadLocalUtil;
 import com.liferay.portal.kernel.util.ClearTimerThreadUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -30,6 +37,9 @@ import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
+import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.servlet.filters.cache.CacheUtil;
 import com.liferay.portal.util.InitUtil;
 
 import java.beans.PropertyDescriptor;
@@ -40,6 +50,10 @@ import java.util.Map;
 
 import javax.servlet.ServletContextEvent;
 
+import com.liferay.portal.util.WebAppPool;
+import com.liferay.portal.velocity.LiferayResourceCacheUtil;
+import com.liferay.portlet.PortletContextBagPool;
+import com.liferay.portlet.wiki.util.WikiCacheUtil;
 import org.springframework.beans.CachedIntrospectionResults;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
@@ -65,7 +79,29 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 		DirectServletRegistry.clearServlets();
 
+		CacheRegistryUtil.clear();
+		CharBufferPool.cleanUp();
+		PortletContextBagPool.clear();
+		WebAppPool.clear();
+
 		super.contextInitialized(event);
+
+		FinderCacheUtil.clearCache();
+		FinderCacheUtil.clearLocalCache();
+		EntityCacheUtil.clearCache();
+		EntityCacheUtil.clearLocalCache();
+		PermissionCacheUtil.clearCache();
+		PermissionCacheUtil.clearLocalCache();
+		WikiCacheUtil.clearCache(0);
+		LiferayResourceCacheUtil.clear();
+
+		ServletContextPool.clear();
+
+		CacheUtil.clearCache();
+		MultiVMPoolUtil.clear();
+		SingleVMPoolUtil.clear();
+		WebCachePoolUtil.clear();
+
 
 		ApplicationContext applicationContext =
 			ContextLoader.getCurrentWebApplicationContext();
