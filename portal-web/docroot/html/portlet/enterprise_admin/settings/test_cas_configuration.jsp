@@ -63,6 +63,8 @@ String casServiceURL = ParamUtil.getString(request, "casServiceURL");
 	</tr>
 </c:if>
 
+</table>
+
 <%!
 private String _testURL(String url) {
 	try {
