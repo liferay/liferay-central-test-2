@@ -47,7 +47,7 @@ long stagingGroupId = stagingGroup.getGroupId();
 
 PortletURL portletURL = renderResponse.createActionURL();
 
-portletURL.setParameter("struts_action", "/communities/edit_proposal");
+portletURL.setParameter("struts_action", "/layouts_admin/edit_proposal");
 portletURL.setParameter(Constants.CMD, Constants.PUBLISH);
 portletURL.setParameter("proposalId", String.valueOf(proposalId));
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));

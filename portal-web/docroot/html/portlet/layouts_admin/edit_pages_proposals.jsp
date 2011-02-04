@@ -63,7 +63,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setParameter("struts_action", "/communities/edit_proposal");
+	rowURL.setParameter("struts_action", "/layouts_admin/edit_proposal");
 	rowURL.setParameter("redirect", currentURL);
 	rowURL.setParameter("groupId", String.valueOf(proposal.getGroupId()));
 	rowURL.setParameter("proposalId", String.valueOf(proposal.getProposalId()));

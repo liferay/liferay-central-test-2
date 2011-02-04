@@ -165,7 +165,7 @@ long proposalId = ParamUtil.getLong(request, "proposalId");
 if (proposalId > 0) {
 	cmd = Constants.PUBLISH;
 
-	portletURL.setParameter("struts_action", "/communities/edit_proposal");
+	portletURL.setParameter("struts_action", "/layouts_admin/edit_proposal");
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 	portletURL.setParameter("proposalId", String.valueOf(proposalId));
 }
@@ -174,7 +174,7 @@ else {
 		cmd = "publish_to_remote";
 	}
 
-	portletURL.setParameter("struts_action", "/communities/edit_pages");
+	portletURL.setParameter("struts_action", "/layouts_admin/edit_pages");
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 	portletURL.setParameter("private", String.valueOf(privateLayout));
 }
@@ -182,7 +182,7 @@ else {
 PortletURL selectURL = renderResponse.createRenderURL();
 
 selectURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-selectURL.setParameter("struts_action", "/communities/publish_pages");
+selectURL.setParameter("struts_action", "/layouts_admin/publish_pages");
 selectURL.setParameter(Constants.CMD, cmd);
 selectURL.setParameter("pagesRedirect", pagesRedirect);
 selectURL.setParameter("groupId", String.valueOf(selGroupId));
@@ -408,7 +408,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 						function(event){
 							<c:choose>
 								<c:when test="<%= proposalId > 0 %>">
-									window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /><portlet:param name="tabs2" value="proposals" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /></portlet:renderURL>';
+									window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/layouts_admin/edit_pages" /><portlet:param name="tabs2" value="proposals" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /></portlet:renderURL>';
 								</c:when>
 								<c:otherwise>
 									window.location.reload(true);

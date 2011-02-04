@@ -132,7 +132,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 			<c:choose>
 				<c:when test="<%= cmd.equals(Constants.EXPORT) %>">
 					<portlet:actionURL var="exportPagesURL">
-						<portlet:param name="struts_action" value="/communities/export_pages" />
+						<portlet:param name="struts_action" value="/layouts_admin/export_pages" />
 						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 						<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
 					</portlet:actionURL>
@@ -141,7 +141,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 				</c:when>
 				<c:otherwise>
 					<portlet:actionURL windowState="<%= redirectWindowState %>" var="importPagesURL">
-						<portlet:param name="struts_action" value="/communities/import_pages" />
+						<portlet:param name="struts_action" value="/layouts_admin/import_pages" />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 						<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
 					</portlet:actionURL>

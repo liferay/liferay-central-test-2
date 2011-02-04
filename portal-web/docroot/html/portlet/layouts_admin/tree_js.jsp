@@ -14,7 +14,7 @@
  */
 --%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();

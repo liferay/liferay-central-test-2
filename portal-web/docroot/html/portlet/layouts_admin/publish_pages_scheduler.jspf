@@ -33,7 +33,7 @@ else if (cmd.equals("publish_to_remote")) {
 
 ResourceURL scheduledPublishEventsURL = renderResponse.createResourceURL();
 
-scheduledPublishEventsURL.setParameter("struts_action", "/communities/edit_pages");
+scheduledPublishEventsURL.setParameter("struts_action", "/layouts_admin/edit_pages");
 
 long targetGroupId = liveGroupId;
 

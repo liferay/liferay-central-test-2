@@ -240,7 +240,7 @@ String[] workflowRoleNames = StringUtil.split(ParamUtil.getString(request, "work
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/communities/edit_pages");
+portletURL.setParameter("struts_action", "/layouts_admin/edit_pages");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
@@ -294,7 +294,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 %>
 
 <portlet:actionURL var="editPagesURL">
-	<portlet:param name="struts_action" value="/communities/edit_pages" />
+	<portlet:param name="struts_action" value="/layouts_admin/edit_pages" />
 </portlet:actionURL>
 
 <aui:form action="<%= editPagesURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>

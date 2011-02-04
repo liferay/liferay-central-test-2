@@ -65,14 +65,14 @@ catch (NoSuchReviewException nsre) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/communities/edit_proposal");
+portletURL.setParameter("struts_action", "/layouts_admin/edit_proposal");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 portletURL.setParameter("proposalId", String.valueOf(proposalId));
 %>
 
 <portlet:actionURL var="editProposalURL">
-	<portlet:param name="struts_action" value="/communities/edit_proposal" />
+	<portlet:param name="struts_action" value="/layouts_admin/edit_proposal" />
 </portlet:actionURL>
 
 <aui:form action="<%= editProposalURL %>" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveProposal();" %>'>
@@ -273,7 +273,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	Layout proposedLayout = null;
 
 	if (className.equals(Layout.class.getName())) {
-		publishToLiveURL.setParameter("struts_action", "/communities/publish_pages");
+		publishToLiveURL.setParameter("struts_action", "/layouts_admin/publish_pages");
 		publishToLiveURL.setParameter(Constants.CMD, "publish-to-live");
 
 		proposedLayoutPlid = GetterUtil.getLong(proposal.getClassPK());
@@ -284,7 +284,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 		publishToLiveURL.setParameter("selPlid", String.valueOf(proposedLayoutPlid));
 	}
 	else if (className.equals(Portlet.class.getName())) {
-		publishToLiveURL.setParameter("struts_action", "/communities/publish_portlet");
+		publishToLiveURL.setParameter("struts_action", "/layouts_admin/publish_portlet");
 		publishToLiveURL.setParameter(Constants.CMD, "publish-to-live");
 
 		proposedLayoutPlid = GetterUtil.getLong(classPK.substring(0, classPK.indexOf(PortletConstants.LAYOUT_SEPARATOR)));
@@ -416,7 +416,7 @@ for (int i = 0; i < results.size(); i++) {
 <liferay-ui:header title="comments" />
 
 <portlet:actionURL var="discussionURL">
-	<portlet:param name="struts_action" value="/communities/edit_proposal_discussion" />
+	<portlet:param name="struts_action" value="/layouts_admin/edit_proposal_discussion" />
 </portlet:actionURL>
 
 <liferay-ui:discussion

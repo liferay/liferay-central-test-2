@@ -31,7 +31,7 @@ PortletURL publishToLiveURL = renderResponse.createRenderURL();
 publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
-publishToLiveURL.setParameter("struts_action", "/communities/publish_pages");
+publishToLiveURL.setParameter("struts_action", "/layouts_admin/publish_pages");
 publishToLiveURL.setParameter(Constants.CMD, "publish_to_live");
 publishToLiveURL.setParameter("pagesRedirect", portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid);
 publishToLiveURL.setParameter("groupId", String.valueOf(groupId));
@@ -87,7 +87,7 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 
 							<c:if test="<%= proposal == null %>">
 								<portlet:actionURL var="proposalURL">
-									<portlet:param name="struts_action" value="/communities/edit_proposal" />
+									<portlet:param name="struts_action" value="/layouts_admin/edit_proposal" />
 									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
 									<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
@@ -242,7 +242,7 @@ publishToRemoteURL.setParameter(Constants.CMD, "publish_to_remote");
 
 				<c:if test="<%= !liveGroup.isStagedRemotely() %>">
 					<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
-						<portlet:param name="struts_action" value="/communities/publish_pages" />
+						<portlet:param name="struts_action" value="/layouts_admin/publish_pages" />
 						<portlet:param name="<%= Constants.CMD %>" value="copy_from_live" />
 						<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
