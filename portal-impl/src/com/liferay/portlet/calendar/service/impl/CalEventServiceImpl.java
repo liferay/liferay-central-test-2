@@ -26,6 +26,8 @@ import com.liferay.portlet.calendar.service.permission.CalendarPermission;
 
 import java.io.File;
 
+import java.util.List;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -89,6 +91,30 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			getPermissionChecker(), eventId, ActionKeys.VIEW);
 
 		return calEventLocalService.getEvent(eventId);
+	}
+
+	public List<CalEvent> getEvents(
+			long groupId, String[] types, int start, int end)
+		throws SystemException {
+
+		if (types != null && types.length > 0) {
+			return calEventPersistence.filterFindByG_T(
+				groupId, types, start, end);
+		}
+		else {
+			return calEventPersistence.filterFindByGroupId(groupId, start, end);
+		}
+	}
+
+	public int getEventsCount(long groupId, String[] types)
+		throws SystemException {
+
+		if (types != null && types.length > 0) {
+			return calEventPersistence.filterCountByG_T(groupId, types);
+		}
+		else {
+			return calEventPersistence.filterCountByGroupId(groupId);
+		}
 	}
 
 	public void importICal4j(long groupId, File file)

@@ -568,22 +568,39 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			long groupId, String type, int start, int end)
 		throws SystemException {
 
-		if (Validator.isNull(type)) {
-			return calEventPersistence.findByGroupId(groupId, start, end);
+		return getEvents(groupId, new String[]{type}, start, end);
+	}
+
+	public List<CalEvent> getEvents(
+			long groupId, String[] types, int start, int end)
+		throws SystemException {
+
+		if (types != null && types.length > 0 &&
+			(types.length > 1 || Validator.isNotNull(types[0]))) {
+
+			return calEventPersistence.findByG_T(groupId, types, start, end);
 		}
 		else {
-			return calEventPersistence.findByG_T(groupId, type, start, end);
+			return calEventPersistence.findByGroupId(groupId, start, end);
 		}
 	}
 
 	public int getEventsCount(long groupId, String type)
 		throws SystemException {
 
-		if (Validator.isNull(type)) {
-			return calEventPersistence.countByGroupId(groupId);
+		return getEventsCount(groupId, new String[]{type});
+	}
+
+	public int getEventsCount(long groupId, String[] types)
+		throws SystemException {
+
+		if (types != null && types.length > 0 &&
+			(types.length > 1 || Validator.isNotNull(types[0]))) {
+
+			return calEventPersistence.countByG_T(groupId, types);
 		}
 		else {
-			return calEventPersistence.countByG_T(groupId, type);
+			return calEventPersistence.countByGroupId(groupId);
 		}
 	}
 
