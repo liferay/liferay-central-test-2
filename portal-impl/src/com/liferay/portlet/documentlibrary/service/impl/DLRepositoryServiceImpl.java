@@ -181,7 +181,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			getPermissionChecker(), fileEntryId, ActionKeys.VIEW);
 
 		return dlRepositoryLocalService.getFileAsStream(
-			getUserId(), fileEntryId, version);
+			getGuestOrUserId(), fileEntryId, version);
 	}
 
 	public List<DLFileEntry> getFileEntries(
