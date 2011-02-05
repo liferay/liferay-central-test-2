@@ -10,6 +10,8 @@ boolean conjunctionable = false;
 			query.append(StringPool.OPEN_PARENTHESIS);
 
 			for (int i = 0; i < ${finderCol.names}.length; i++) {
+				${finderCol.type} ${finderCol.name} = ${finderCol.names}[i];
+
 				<#include "persistence_impl_finder_arrayable_col.ftl">
 
 				if ((i + 1) < ${finderCol.names}.length) {
