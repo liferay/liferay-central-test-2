@@ -343,6 +343,24 @@ public class StringUtil {
 		return true;
 	}
 
+	public static boolean matchesIgnoreCase(String s, String pattern) {
+		s = s.toUpperCase();
+
+		String[] array = pattern.split("\\*");
+
+		for (int i = 0; i < array.length; i++) {
+			int pos = s.indexOf(array[i].toUpperCase());
+
+			if (pos == -1) {
+				return false;
+			}
+
+			s = s.substring(pos + array[i].length());
+		}
+
+		return true;
+	}
+
 	public static String merge(boolean[] array) {
 		return merge(array, StringPool.COMMA);
 	}
