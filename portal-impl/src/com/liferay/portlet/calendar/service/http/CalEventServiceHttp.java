@@ -56,11 +56,12 @@ import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 public class CalEventServiceHttp {
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
 		HttpPrincipal httpPrincipal, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
+		java.lang.String description, java.lang.String location,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating,
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
 		int firstReminder, int secondReminder,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -71,11 +72,12 @@ public class CalEventServiceHttp {
 					"addEvent", _addEventParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, title,
-					description, startDateMonth, startDateDay, startDateYear,
-					startDateHour, startDateMinute, endDateMonth, endDateDay,
-					endDateYear, durationHour, durationMinute, allDay,
-					timeZoneSensitive, type, repeating, recurrence, remindBy,
-					firstReminder, secondReminder, serviceContext);
+					description, location, startDateMonth, startDateDay,
+					startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear, durationHour,
+					durationMinute, allDay, timeZoneSensitive, type, repeating,
+					recurrence, remindBy, firstReminder, secondReminder,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -343,11 +345,12 @@ public class CalEventServiceHttp {
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
 		HttpPrincipal httpPrincipal, long eventId, java.lang.String title,
-		java.lang.String description, int startDateMonth, int startDateDay,
-		int startDateYear, int startDateHour, int startDateMinute,
-		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
-		int durationMinute, boolean allDay, boolean timeZoneSensitive,
-		java.lang.String type, boolean repeating,
+		java.lang.String description, java.lang.String location,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating,
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrence, int remindBy,
 		int firstReminder, int secondReminder,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -358,7 +361,7 @@ public class CalEventServiceHttp {
 					"updateEvent", _updateEventParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, eventId,
-					title, description, startDateMonth, startDateDay,
+					title, description, location, startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute,
 					endDateMonth, endDateDay, endDateYear, durationHour,
 					durationMinute, allDay, timeZoneSensitive, type, repeating,
@@ -393,10 +396,10 @@ public class CalEventServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(CalEventServiceHttp.class);
 	private static final Class<?>[] _addEventParameterTypes0 = new Class[] {
-			java.lang.String.class, java.lang.String.class, int.class, int.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
-			int.class, int.class, boolean.class, boolean.class,
-			java.lang.String.class, boolean.class,
+			boolean.class, boolean.class, java.lang.String.class, boolean.class,
 			com.liferay.portal.kernel.cal.TZSRecurrence.class, int.class,
 			int.class, int.class,
 			com.liferay.portal.service.ServiceContext.class
@@ -424,9 +427,9 @@ public class CalEventServiceHttp {
 		};
 	private static final Class<?>[] _updateEventParameterTypes8 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
-			int.class, int.class, int.class, int.class, boolean.class,
-			boolean.class, java.lang.String.class, boolean.class,
+			boolean.class, boolean.class, java.lang.String.class, boolean.class,
 			com.liferay.portal.kernel.cal.TZSRecurrence.class, int.class,
 			int.class, int.class,
 			com.liferay.portal.service.ServiceContext.class

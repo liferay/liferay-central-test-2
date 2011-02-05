@@ -219,6 +219,21 @@ public interface CalEventModel extends BaseModel<CalEvent> {
 	public void setDescription(String description);
 
 	/**
+	 * Gets the location of this cal event.
+	 *
+	 * @return the location of this cal event
+	 */
+	@AutoEscape
+	public String getLocation();
+
+	/**
+	 * Sets the location of this cal event.
+	 *
+	 * @param location the location of this cal event
+	 */
+	public void setLocation(String location);
+
+	/**
 	 * Gets the start date of this cal event.
 	 *
 	 * @return the start date of this cal event

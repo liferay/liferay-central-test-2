@@ -60,6 +60,7 @@ public class CalEventJSONSerializer {
 		jsonObject.put("modifiedDate", modifiedDateJSON);
 		jsonObject.put("title", model.getTitle());
 		jsonObject.put("description", model.getDescription());
+		jsonObject.put("location", model.getLocation());
 
 		Date startDate = model.getStartDate();
 

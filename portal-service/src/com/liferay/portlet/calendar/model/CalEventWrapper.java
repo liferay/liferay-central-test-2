@@ -247,6 +247,24 @@ public class CalEventWrapper implements CalEvent {
 	}
 
 	/**
+	* Gets the location of this cal event.
+	*
+	* @return the location of this cal event
+	*/
+	public java.lang.String getLocation() {
+		return _calEvent.getLocation();
+	}
+
+	/**
+	* Sets the location of this cal event.
+	*
+	* @param location the location of this cal event
+	*/
+	public void setLocation(java.lang.String location) {
+		_calEvent.setLocation(location);
+	}
+
+	/**
 	* Gets the start date of this cal event.
 	*
 	* @return the start date of this cal event

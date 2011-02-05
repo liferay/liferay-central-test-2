@@ -74,6 +74,7 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		newCalEvent.setModifiedDate(nextDate());
 		newCalEvent.setTitle(randomString());
 		newCalEvent.setDescription(randomString());
+		newCalEvent.setLocation(randomString());
 		newCalEvent.setStartDate(nextDate());
 		newCalEvent.setEndDate(nextDate());
 		newCalEvent.setDurationHour(nextInt());
@@ -104,6 +105,7 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingCalEvent.getTitle(), newCalEvent.getTitle());
 		assertEquals(existingCalEvent.getDescription(),
 			newCalEvent.getDescription());
+		assertEquals(existingCalEvent.getLocation(), newCalEvent.getLocation());
 		assertEquals(Time.getShortTimestamp(existingCalEvent.getStartDate()),
 			Time.getShortTimestamp(newCalEvent.getStartDate()));
 		assertEquals(Time.getShortTimestamp(existingCalEvent.getEndDate()),
@@ -206,6 +208,7 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		calEvent.setModifiedDate(nextDate());
 		calEvent.setTitle(randomString());
 		calEvent.setDescription(randomString());
+		calEvent.setLocation(randomString());
 		calEvent.setStartDate(nextDate());
 		calEvent.setEndDate(nextDate());
 		calEvent.setDurationHour(nextInt());

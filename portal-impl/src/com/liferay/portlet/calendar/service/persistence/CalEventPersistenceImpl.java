@@ -442,6 +442,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		calEventImpl.setModifiedDate(calEvent.getModifiedDate());
 		calEventImpl.setTitle(calEvent.getTitle());
 		calEventImpl.setDescription(calEvent.getDescription());
+		calEventImpl.setLocation(calEvent.getLocation());
 		calEventImpl.setStartDate(calEvent.getStartDate());
 		calEventImpl.setEndDate(calEvent.getEndDate());
 		calEventImpl.setDurationHour(calEvent.getDurationHour());

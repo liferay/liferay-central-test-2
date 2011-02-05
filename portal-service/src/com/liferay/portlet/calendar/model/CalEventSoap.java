@@ -41,6 +41,7 @@ public class CalEventSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
+		soapModel.setLocation(model.getLocation());
 		soapModel.setStartDate(model.getStartDate());
 		soapModel.setEndDate(model.getEndDate());
 		soapModel.setDurationHour(model.getDurationHour());
@@ -185,6 +186,14 @@ public class CalEventSoap implements Serializable {
 		_description = description;
 	}
 
+	public String getLocation() {
+		return _location;
+	}
+
+	public void setLocation(String location) {
+		_location = location;
+	}
+
 	public Date getStartDate() {
 		return _startDate;
 	}
@@ -303,6 +312,7 @@ public class CalEventSoap implements Serializable {
 	private Date _modifiedDate;
 	private String _title;
 	private String _description;
+	private String _location;
 	private Date _startDate;
 	private Date _endDate;
 	private int _durationHour;

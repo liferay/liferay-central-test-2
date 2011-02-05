@@ -72,6 +72,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "title", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
+			{ "location", Types.VARCHAR },
 			{ "startDate", Types.TIMESTAMP },
 			{ "endDate", Types.TIMESTAMP },
 			{ "durationHour", Types.INTEGER },
@@ -85,7 +86,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 			{ "firstReminder", Types.INTEGER },
 			{ "secondReminder", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table CalEvent (uuid_ VARCHAR(75) null,eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy INTEGER,firstReminder INTEGER,secondReminder INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table CalEvent (uuid_ VARCHAR(75) null,eventId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,description STRING null,location VARCHAR(75) null,startDate DATE null,endDate DATE null,durationHour INTEGER,durationMinute INTEGER,allDay BOOLEAN,timeZoneSensitive BOOLEAN,type_ VARCHAR(75) null,repeating BOOLEAN,recurrence TEXT null,remindBy INTEGER,firstReminder INTEGER,secondReminder INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table CalEvent";
 	public static final String ORDER_BY_JPQL = " ORDER BY calEvent.startDate ASC, calEvent.title ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY CalEvent.startDate ASC, CalEvent.title ASC";
@@ -118,6 +119,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
+		model.setLocation(soapModel.getLocation());
 		model.setStartDate(soapModel.getStartDate());
 		model.setEndDate(soapModel.getEndDate());
 		model.setDurationHour(soapModel.getDurationHour());
@@ -294,6 +296,19 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		_description = description;
 	}
 
+	public String getLocation() {
+		if (_location == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _location;
+		}
+	}
+
+	public void setLocation(String location) {
+		_location = location;
+	}
+
 	public Date getStartDate() {
 		return _startDate;
 	}
@@ -448,6 +463,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		clone.setModifiedDate(getModifiedDate());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
+		clone.setLocation(getLocation());
 		clone.setStartDate(getStartDate());
 		clone.setEndDate(getEndDate());
 		clone.setDurationHour(getDurationHour());
@@ -512,7 +528,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(47);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -534,6 +550,8 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		sb.append(getTitle());
 		sb.append(", description=");
 		sb.append(getDescription());
+		sb.append(", location=");
+		sb.append(getLocation());
 		sb.append(", startDate=");
 		sb.append(getStartDate());
 		sb.append(", endDate=");
@@ -564,7 +582,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(73);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.calendar.model.CalEvent");
@@ -609,6 +627,10 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		sb.append(
 			"<column><column-name>description</column-name><column-value><![CDATA[");
 		sb.append(getDescription());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>location</column-name><column-value><![CDATA[");
+		sb.append(getLocation());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>startDate</column-name><column-value><![CDATA[");
@@ -678,6 +700,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	private Date _modifiedDate;
 	private String _title;
 	private String _description;
+	private String _location;
 	private Date _startDate;
 	private Date _endDate;
 	private int _durationHour;
