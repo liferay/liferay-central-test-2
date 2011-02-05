@@ -21,23 +21,41 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class CalEventFinderUtil {
+	public static int countByG_SD_T(long groupId, java.util.Date startDateGT,
+		java.util.Date startDateLT, boolean timeZoneSensitive,
+		java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .countByG_SD_T(groupId, startDateGT, startDateLT,
+			timeZoneSensitive, types);
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByFutureReminders()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByFutureReminders();
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD_T(
+		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
+		boolean timeZoneSensitive, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByG_SD_T(groupId, startDateGT, startDateLT,
+			timeZoneSensitive, types);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD_T(
+		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
+		boolean timeZoneSensitive, java.lang.String[] types, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .findByG_SD_T(groupId, startDateGT, startDateLT,
+			timeZoneSensitive, types, start, end);
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByNoAssets();
-	}
-
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD(
-		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
-		boolean timeZoneSensitive)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder()
-				   .findByG_SD(groupId, startDateGT, startDateLT,
-			timeZoneSensitive);
 	}
 
 	public static CalEventFinder getFinder() {

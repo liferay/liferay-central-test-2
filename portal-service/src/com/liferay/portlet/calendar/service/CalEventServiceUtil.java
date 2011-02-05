@@ -83,6 +83,17 @@ public class CalEventServiceUtil {
 		return getService().getEvent(eventId);
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.lang.String[] types, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEvents(groupId, types, start, end);
+	}
+
+	public static int getEventsCount(long groupId, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEventsCount(groupId, types);
+	}
+
 	public static void importICal4j(long groupId, java.io.File file)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

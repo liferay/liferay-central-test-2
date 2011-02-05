@@ -165,6 +165,23 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByG_R",
 			new String[] { Long.class.getName(), Boolean.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_G_R_T = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
+			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByG_R_T",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_G_R_T = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
+			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByG_R_T",
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				String.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -2757,6 +2774,168 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	/**
+	 * Finds all the cal events where groupId = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param types the types to search with
+	 * @return the matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> findByG_T(long groupId, String[] types)
+		throws SystemException {
+		return findByG_T(groupId, types, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Finds a range of all the cal events where groupId = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param types the types to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @return the range of matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> findByG_T(long groupId, String[] types, int start,
+		int end) throws SystemException {
+		return findByG_T(groupId, types, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the cal events where groupId = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param types the types to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> findByG_T(long groupId, String[] types, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId, StringUtil.merge(types),
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_T,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = new StringBundler();
+
+			query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_T_GROUPID_5);
+
+			conjunctionable = true;
+
+			if ((types == null) || (types.length > 0)) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < types.length; i++) {
+					String type = types[i];
+
+					if (type == null) {
+						query.append(_FINDER_COLUMN_G_T_TYPE_4);
+					}
+					else {
+						if (type.equals(StringPool.BLANK)) {
+							query.append(_FINDER_COLUMN_G_T_TYPE_6);
+						}
+						else {
+							query.append(_FINDER_COLUMN_G_T_TYPE_5);
+						}
+					}
+
+					if ((i + 1) < types.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (types != null) {
+					qPos.add(types);
+				}
+
+				list = (List<CalEvent>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_T,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_T,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
 	 * Filters by the user's permissions and finds all the cal events where groupId = &#63; and type = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -3103,6 +3282,176 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 		else {
 			return null;
+		}
+	}
+
+	/**
+	 * Filters by the user's permissions and finds all the cal events where groupId = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param types the types to search with
+	 * @return the matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> filterFindByG_T(long groupId, String[] types)
+		throws SystemException {
+		return filterFindByG_T(groupId, types, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param types the types to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @return the range of matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> filterFindByG_T(long groupId, String[] types,
+		int start, int end) throws SystemException {
+		return filterFindByG_T(groupId, types, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param types the types to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> filterFindByG_T(long groupId, String[] types,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_T(groupId, types, start, end, orderByComparator);
+		}
+
+		StringBundler query = new StringBundler();
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean conjunctionable = false;
+
+		if (conjunctionable) {
+			query.append(WHERE_AND);
+		}
+
+		query.append(_FINDER_COLUMN_G_T_GROUPID_5);
+
+		conjunctionable = true;
+
+		if ((types == null) || (types.length > 0)) {
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(StringPool.OPEN_PARENTHESIS);
+
+			for (int i = 0; i < types.length; i++) {
+				String type = types[i];
+
+				if (type == null) {
+					query.append(_FINDER_COLUMN_G_T_TYPE_4);
+				}
+				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_G_T_TYPE_6);
+					}
+					else {
+						query.append(_FINDER_COLUMN_G_T_TYPE_5);
+					}
+				}
+
+				if ((i + 1) < types.length) {
+					query.append(WHERE_OR);
+				}
+			}
+
+			query.append(StringPool.CLOSE_PARENTHESIS);
+
+			conjunctionable = true;
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
+		}
+
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CalEvent.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CalEventImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CalEventImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (types != null) {
+				qPos.add(types);
+			}
+
+			return (List<CalEvent>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -3795,6 +4144,1136 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	/**
+	 * Finds all the cal events where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @return the matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> findByG_R_T(long groupId, boolean repeating,
+		String type) throws SystemException {
+		return findByG_R_T(groupId, repeating, type, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the cal events where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @return the range of matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> findByG_R_T(long groupId, boolean repeating,
+		String type, int start, int end) throws SystemException {
+		return findByG_R_T(groupId, repeating, type, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the cal events where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> findByG_R_T(long groupId, boolean repeating,
+		String type, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId, repeating, type,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_R_T,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_R_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_R_T_REPEATING_2);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_R_T_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_R_T_TYPE_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(repeating);
+
+				if (type != null) {
+					qPos.add(type);
+				}
+
+				list = (List<CalEvent>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_R_T,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R_T,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first cal event in the ordered set where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the first matching cal event
+	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public CalEvent findByG_R_T_First(long groupId, boolean repeating,
+		String type, OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		List<CalEvent> list = findByG_R_T(groupId, repeating, type, 0, 1,
+				orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", repeating=");
+			msg.append(repeating);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEventException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last cal event in the ordered set where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the last matching cal event
+	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public CalEvent findByG_R_T_Last(long groupId, boolean repeating,
+		String type, OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		int count = countByG_R_T(groupId, repeating, type);
+
+		List<CalEvent> list = findByG_R_T(groupId, repeating, type, count - 1,
+				count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", repeating=");
+			msg.append(repeating);
+
+			msg.append(", type=");
+			msg.append(type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEventException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the cal events before and after the current cal event in the ordered set where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param eventId the primary key of the current cal event
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next cal event
+	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public CalEvent[] findByG_R_T_PrevAndNext(long eventId, long groupId,
+		boolean repeating, String type, OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		CalEvent calEvent = findByPrimaryKey(eventId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CalEvent[] array = new CalEventImpl[3];
+
+			array[0] = getByG_R_T_PrevAndNext(session, calEvent, groupId,
+					repeating, type, orderByComparator, true);
+
+			array[1] = calEvent;
+
+			array[2] = getByG_R_T_PrevAndNext(session, calEvent, groupId,
+					repeating, type, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CalEvent getByG_R_T_PrevAndNext(Session session,
+		CalEvent calEvent, long groupId, boolean repeating, String type,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+		query.append(_FINDER_COLUMN_G_R_T_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_R_T_REPEATING_2);
+
+		if (type == null) {
+			query.append(_FINDER_COLUMN_G_R_T_TYPE_1);
+		}
+		else {
+			if (type.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(CalEventModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(repeating);
+
+		if (type != null) {
+			qPos.add(type);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(calEvent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CalEvent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Finds all the cal events where groupId = &#63; and repeating = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param types the types to search with
+	 * @return the matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> findByG_R_T(long groupId, boolean repeating,
+		String[] types) throws SystemException {
+		return findByG_R_T(groupId, repeating, types, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the cal events where groupId = &#63; and repeating = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param types the types to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @return the range of matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> findByG_R_T(long groupId, boolean repeating,
+		String[] types, int start, int end) throws SystemException {
+		return findByG_R_T(groupId, repeating, types, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the cal events where groupId = &#63; and repeating = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param types the types to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> findByG_R_T(long groupId, boolean repeating,
+		String[] types, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId, repeating, StringUtil.merge(types),
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<CalEvent> list = (List<CalEvent>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_G_R_T,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = new StringBundler();
+
+			query.append(_SQL_SELECT_CALEVENT_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_R_T_GROUPID_5);
+
+			conjunctionable = true;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_R_T_REPEATING_5);
+
+			conjunctionable = true;
+
+			if ((types == null) || (types.length > 0)) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < types.length; i++) {
+					String type = types[i];
+
+					if (type == null) {
+						query.append(_FINDER_COLUMN_G_R_T_TYPE_4);
+					}
+					else {
+						if (type.equals(StringPool.BLANK)) {
+							query.append(_FINDER_COLUMN_G_R_T_TYPE_6);
+						}
+						else {
+							query.append(_FINDER_COLUMN_G_R_T_TYPE_5);
+						}
+					}
+
+					if ((i + 1) < types.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(repeating);
+
+				if (types != null) {
+					qPos.add(types);
+				}
+
+				list = (List<CalEvent>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_G_R_T,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_G_R_T,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Filters by the user's permissions and finds all the cal events where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @return the matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> filterFindByG_R_T(long groupId, boolean repeating,
+		String type) throws SystemException {
+		return filterFindByG_R_T(groupId, repeating, type, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @return the range of matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> filterFindByG_R_T(long groupId, boolean repeating,
+		String type, int start, int end) throws SystemException {
+		return filterFindByG_R_T(groupId, repeating, type, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> filterFindByG_R_T(long groupId, boolean repeating,
+		String type, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_R_T(groupId, repeating, type, start, end,
+				orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(5 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(5);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_G_R_T_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_R_T_REPEATING_2);
+
+		if (type == null) {
+			query.append(_FINDER_COLUMN_G_R_T_TYPE_1);
+		}
+		else {
+			if (type.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_2);
+			}
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
+		}
+
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CalEvent.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CalEventImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CalEventImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(repeating);
+
+			if (type != null) {
+				qPos.add(type);
+			}
+
+			return (List<CalEvent>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Filters the cal events before and after the current cal event in the ordered set where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param eventId the primary key of the current cal event
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @param orderByComparator the comparator to order the set by
+	 * @return the previous, current, and next cal event
+	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public CalEvent[] filterFindByG_R_T_PrevAndNext(long eventId, long groupId,
+		boolean repeating, String type, OrderByComparator orderByComparator)
+		throws NoSuchEventException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_R_T_PrevAndNext(eventId, groupId, repeating, type,
+				orderByComparator);
+		}
+
+		CalEvent calEvent = findByPrimaryKey(eventId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CalEvent[] array = new CalEventImpl[3];
+
+			array[0] = filterGetByG_R_T_PrevAndNext(session, calEvent, groupId,
+					repeating, type, orderByComparator, true);
+
+			array[1] = calEvent;
+
+			array[2] = filterGetByG_R_T_PrevAndNext(session, calEvent, groupId,
+					repeating, type, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CalEvent filterGetByG_R_T_PrevAndNext(Session session,
+		CalEvent calEvent, long groupId, boolean repeating, String type,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_G_R_T_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_R_T_REPEATING_2);
+
+		if (type == null) {
+			query.append(_FINDER_COLUMN_G_R_T_TYPE_1);
+		}
+		else {
+			if (type.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_2);
+			}
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CalEvent.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, CalEventImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, CalEventImpl.class);
+		}
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		qPos.add(repeating);
+
+		if (type != null) {
+			qPos.add(type);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(calEvent);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CalEvent> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Filters by the user's permissions and finds all the cal events where groupId = &#63; and repeating = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param types the types to search with
+	 * @return the matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> filterFindByG_R_T(long groupId, boolean repeating,
+		String[] types) throws SystemException {
+		return filterFindByG_R_T(groupId, repeating, types, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the cal events where groupId = &#63; and repeating = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param types the types to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @return the range of matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> filterFindByG_R_T(long groupId, boolean repeating,
+		String[] types, int start, int end) throws SystemException {
+		return filterFindByG_R_T(groupId, repeating, types, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the cal events where groupId = &#63; and repeating = &#63; and type = any &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param types the types to search with
+	 * @param start the lower bound of the range of cal events to return
+	 * @param end the upper bound of the range of cal events to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by
+	 * @return the ordered range of matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<CalEvent> filterFindByG_R_T(long groupId, boolean repeating,
+		String[] types, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByG_R_T(groupId, repeating, types, start, end,
+				orderByComparator);
+		}
+
+		StringBundler query = new StringBundler();
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		boolean conjunctionable = false;
+
+		if (conjunctionable) {
+			query.append(WHERE_AND);
+		}
+
+		query.append(_FINDER_COLUMN_G_R_T_GROUPID_5);
+
+		conjunctionable = true;
+
+		if (conjunctionable) {
+			query.append(WHERE_AND);
+		}
+
+		query.append(_FINDER_COLUMN_G_R_T_REPEATING_5);
+
+		conjunctionable = true;
+
+		if ((types == null) || (types.length > 0)) {
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(StringPool.OPEN_PARENTHESIS);
+
+			for (int i = 0; i < types.length; i++) {
+				String type = types[i];
+
+				if (type == null) {
+					query.append(_FINDER_COLUMN_G_R_T_TYPE_4);
+				}
+				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_G_R_T_TYPE_6);
+					}
+					else {
+						query.append(_FINDER_COLUMN_G_R_T_TYPE_5);
+					}
+				}
+
+				if ((i + 1) < types.length) {
+					query.append(WHERE_OR);
+				}
+			}
+
+			query.append(StringPool.CLOSE_PARENTHESIS);
+
+			conjunctionable = true;
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
+		}
+
+		else {
+			if (getDB().isSupportsInlineDistinct()) {
+				query.append(CalEventModelImpl.ORDER_BY_JPQL);
+			}
+			else {
+				query.append(CalEventModelImpl.ORDER_BY_SQL);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CalEvent.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, CalEventImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, CalEventImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(repeating);
+
+			if (types != null) {
+				qPos.add(types);
+			}
+
+			return (List<CalEvent>)QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Finds all the cal events.
 	 *
 	 * @return the cal events
@@ -3988,6 +5467,21 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	public void removeByG_R(long groupId, boolean repeating)
 		throws SystemException {
 		for (CalEvent calEvent : findByG_R(groupId, repeating)) {
+			calEventPersistence.remove(calEvent);
+		}
+	}
+
+	/**
+	 * Removes all the cal events where groupId = &#63; and repeating = &#63; and type = &#63; from the database.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByG_R_T(long groupId, boolean repeating, String type)
+		throws SystemException {
+		for (CalEvent calEvent : findByG_R_T(groupId, repeating, type)) {
 			calEventPersistence.remove(calEvent);
 		}
 	}
@@ -4417,6 +5911,105 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	/**
+	 * Counts all the cal events where groupId = &#63; and type = any &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param types the types to search with
+	 * @return the number of matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_T(long groupId, String[] types)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, StringUtil.merge(types) };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_T,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler();
+
+			query.append(_SQL_COUNT_CALEVENT_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_T_GROUPID_5);
+
+			conjunctionable = true;
+
+			if ((types == null) || (types.length > 0)) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < types.length; i++) {
+					String type = types[i];
+
+					if (type == null) {
+						query.append(_FINDER_COLUMN_G_T_TYPE_4);
+					}
+					else {
+						if (type.equals(StringPool.BLANK)) {
+							query.append(_FINDER_COLUMN_G_T_TYPE_6);
+						}
+						else {
+							query.append(_FINDER_COLUMN_G_T_TYPE_5);
+						}
+					}
+
+					if ((i + 1) < types.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (types != null) {
+					qPos.add(types);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_T, finderArgs,
+					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Filters by the user's permissions and counts all the cal events where groupId = &#63; and type = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -4468,6 +6061,100 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			if (type != null) {
 				qPos.add(type);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the cal events where groupId = &#63; and type = any &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param types the types to search with
+	 * @return the number of matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByG_T(long groupId, String[] types)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByG_T(groupId, types);
+		}
+
+		StringBundler query = new StringBundler();
+
+		query.append(_FILTER_SQL_COUNT_CALEVENT_WHERE);
+
+		boolean conjunctionable = false;
+
+		if (conjunctionable) {
+			query.append(WHERE_AND);
+		}
+
+		query.append(_FINDER_COLUMN_G_T_GROUPID_5);
+
+		conjunctionable = true;
+
+		if ((types == null) || (types.length > 0)) {
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(StringPool.OPEN_PARENTHESIS);
+
+			for (int i = 0; i < types.length; i++) {
+				String type = types[i];
+
+				if (type == null) {
+					query.append(_FINDER_COLUMN_G_T_TYPE_4);
+				}
+				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_G_T_TYPE_6);
+					}
+					else {
+						query.append(_FINDER_COLUMN_G_T_TYPE_5);
+					}
+				}
+
+				if ((i + 1) < types.length) {
+					query.append(WHERE_OR);
+				}
+			}
+
+			query.append(StringPool.CLOSE_PARENTHESIS);
+
+			conjunctionable = true;
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CalEvent.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (types != null) {
+				qPos.add(types);
 			}
 
 			Long count = (Long)q.uniqueResult();
@@ -4596,6 +6283,370 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	}
 
 	/**
+	 * Counts all the cal events where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @return the number of matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_R_T(long groupId, boolean repeating, String type)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, repeating, type };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_R_T,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_CALEVENT_WHERE);
+
+			query.append(_FINDER_COLUMN_G_R_T_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_R_T_REPEATING_2);
+
+			if (type == null) {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_1);
+			}
+			else {
+				if (type.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_R_T_TYPE_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_R_T_TYPE_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(repeating);
+
+				if (type != null) {
+					qPos.add(type);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_R_T,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the cal events where groupId = &#63; and repeating = &#63; and type = any &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param types the types to search with
+	 * @return the number of matching cal events
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByG_R_T(long groupId, boolean repeating, String[] types)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				groupId, repeating, StringUtil.merge(types)
+			};
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_R_T,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler();
+
+			query.append(_SQL_COUNT_CALEVENT_WHERE);
+
+			boolean conjunctionable = false;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_R_T_GROUPID_5);
+
+			conjunctionable = true;
+
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(_FINDER_COLUMN_G_R_T_REPEATING_5);
+
+			conjunctionable = true;
+
+			if ((types == null) || (types.length > 0)) {
+				if (conjunctionable) {
+					query.append(WHERE_AND);
+				}
+
+				query.append(StringPool.OPEN_PARENTHESIS);
+
+				for (int i = 0; i < types.length; i++) {
+					String type = types[i];
+
+					if (type == null) {
+						query.append(_FINDER_COLUMN_G_R_T_TYPE_4);
+					}
+					else {
+						if (type.equals(StringPool.BLANK)) {
+							query.append(_FINDER_COLUMN_G_R_T_TYPE_6);
+						}
+						else {
+							query.append(_FINDER_COLUMN_G_R_T_TYPE_5);
+						}
+					}
+
+					if ((i + 1) < types.length) {
+						query.append(WHERE_OR);
+					}
+				}
+
+				query.append(StringPool.CLOSE_PARENTHESIS);
+
+				conjunctionable = true;
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(repeating);
+
+				if (types != null) {
+					qPos.add(types);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_R_T,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the cal events where groupId = &#63; and repeating = &#63; and type = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param type the type to search with
+	 * @return the number of matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByG_R_T(long groupId, boolean repeating, String type)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByG_R_T(groupId, repeating, type);
+		}
+
+		StringBundler query = new StringBundler(4);
+
+		query.append(_FILTER_SQL_COUNT_CALEVENT_WHERE);
+
+		query.append(_FINDER_COLUMN_G_R_T_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_G_R_T_REPEATING_2);
+
+		if (type == null) {
+			query.append(_FINDER_COLUMN_G_R_T_TYPE_1);
+		}
+		else {
+			if (type.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_G_R_T_TYPE_2);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CalEvent.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(repeating);
+
+			if (type != null) {
+				qPos.add(type);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the cal events where groupId = &#63; and repeating = &#63; and type = any &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @param repeating the repeating to search with
+	 * @param types the types to search with
+	 * @return the number of matching cal events that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByG_R_T(long groupId, boolean repeating,
+		String[] types) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByG_R_T(groupId, repeating, types);
+		}
+
+		StringBundler query = new StringBundler();
+
+		query.append(_FILTER_SQL_COUNT_CALEVENT_WHERE);
+
+		boolean conjunctionable = false;
+
+		if (conjunctionable) {
+			query.append(WHERE_AND);
+		}
+
+		query.append(_FINDER_COLUMN_G_R_T_GROUPID_5);
+
+		conjunctionable = true;
+
+		if (conjunctionable) {
+			query.append(WHERE_AND);
+		}
+
+		query.append(_FINDER_COLUMN_G_R_T_REPEATING_5);
+
+		conjunctionable = true;
+
+		if ((types == null) || (types.length > 0)) {
+			if (conjunctionable) {
+				query.append(WHERE_AND);
+			}
+
+			query.append(StringPool.OPEN_PARENTHESIS);
+
+			for (int i = 0; i < types.length; i++) {
+				String type = types[i];
+
+				if (type == null) {
+					query.append(_FINDER_COLUMN_G_R_T_TYPE_4);
+				}
+				else {
+					if (type.equals(StringPool.BLANK)) {
+						query.append(_FINDER_COLUMN_G_R_T_TYPE_6);
+					}
+					else {
+						query.append(_FINDER_COLUMN_G_R_T_TYPE_5);
+					}
+				}
+
+				if ((i + 1) < types.length) {
+					query.append(WHERE_OR);
+				}
+			}
+
+			query.append(StringPool.CLOSE_PARENTHESIS);
+
+			conjunctionable = true;
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				CalEvent.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(repeating);
+
+			if (types != null) {
+				qPos.add(types);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Counts all the cal events.
 	 *
 	 * @return the number of cal events
@@ -4701,11 +6752,45 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "calEvent.groupId = ?";
 	private static final String _FINDER_COLUMN_NOTREMINDBY_REMINDBY_2 = "calEvent.remindBy != ?";
 	private static final String _FINDER_COLUMN_G_T_GROUPID_2 = "calEvent.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_T_GROUPID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_T_GROUPID_2) + ")";
 	private static final String _FINDER_COLUMN_G_T_TYPE_1 = "calEvent.type IS NULL";
 	private static final String _FINDER_COLUMN_G_T_TYPE_2 = "calEvent.type = ?";
 	private static final String _FINDER_COLUMN_G_T_TYPE_3 = "(calEvent.type IS NULL OR calEvent.type = ?)";
+	private static final String _FINDER_COLUMN_G_T_TYPE_4 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_T_TYPE_1) + ")";
+	private static final String _FINDER_COLUMN_G_T_TYPE_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_T_TYPE_2) + ")";
+	private static final String _FINDER_COLUMN_G_T_TYPE_6 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_T_TYPE_3) + ")";
 	private static final String _FINDER_COLUMN_G_R_GROUPID_2 = "calEvent.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_R_REPEATING_2 = "calEvent.repeating = ?";
+	private static final String _FINDER_COLUMN_G_R_T_GROUPID_2 = "calEvent.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_G_R_T_GROUPID_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_R_T_GROUPID_2) + ")";
+	private static final String _FINDER_COLUMN_G_R_T_REPEATING_2 = "calEvent.repeating = ? AND ";
+	private static final String _FINDER_COLUMN_G_R_T_REPEATING_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_R_T_REPEATING_2) + ")";
+	private static final String _FINDER_COLUMN_G_R_T_TYPE_1 = "calEvent.type IS NULL";
+	private static final String _FINDER_COLUMN_G_R_T_TYPE_2 = "calEvent.type = ?";
+	private static final String _FINDER_COLUMN_G_R_T_TYPE_3 = "(calEvent.type IS NULL OR calEvent.type = ?)";
+	private static final String _FINDER_COLUMN_G_R_T_TYPE_4 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_R_T_TYPE_1) + ")";
+	private static final String _FINDER_COLUMN_G_R_T_TYPE_5 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_R_T_TYPE_2) + ")";
+	private static final String _FINDER_COLUMN_G_R_T_TYPE_6 = "(" +
+		_removeConjunction(_FINDER_COLUMN_G_R_T_TYPE_3) + ")";
+
+	private static String _removeConjunction(String sql) {
+		int pos = sql.indexOf(" AND ");
+
+		if (pos != -1) {
+			sql = sql.substring(0, pos);
+		}
+
+		return sql;
+	}
+
 	private static final String _FILTER_SQL_SELECT_CALEVENT_WHERE = "SELECT DISTINCT {calEvent.*} FROM CalEvent calEvent WHERE ";
 	private static final String _FILTER_SQL_SELECT_CALEVENT_NO_INLINE_DISTINCT_WHERE_1 =
 		"SELECT {CalEvent.*} FROM (SELECT DISTINCT calEvent.eventId FROM CalEvent calEvent WHERE ";

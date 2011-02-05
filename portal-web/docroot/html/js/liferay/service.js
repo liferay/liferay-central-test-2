@@ -605,6 +605,8 @@ Liferay.Service.registerClass(
 		addEvent: true,
 		deleteEvent: true,
 		getEvent: true,
+		getEvents: true,
+		getEventsCount: true,
 		updateEvent: true
 	}
 );

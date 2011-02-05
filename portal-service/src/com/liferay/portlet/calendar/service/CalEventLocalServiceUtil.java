@@ -372,14 +372,31 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.util.Calendar cal, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEvents(groupId, cal, types);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.lang.String type, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getEvents(groupId, type, start, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.lang.String[] types, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEvents(groupId, types, start, end);
+	}
+
 	public static int getEventsCount(long groupId, java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getEventsCount(groupId, type);
+	}
+
+	public static int getEventsCount(long groupId, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getEventsCount(groupId, types);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getNoAssetEvents()
@@ -393,6 +410,12 @@ public class CalEventLocalServiceUtil {
 		return getService().getRepeatingEvents(groupId);
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getRepeatingEvents(
+		long groupId, java.util.Calendar cal, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRepeatingEvents(groupId, cal, types);
+	}
+
 	public static boolean hasEvents(long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().hasEvents(groupId, cal);
@@ -402,6 +425,12 @@ public class CalEventLocalServiceUtil {
 		java.lang.String type)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().hasEvents(groupId, cal, type);
+	}
+
+	public static boolean hasEvents(long groupId, java.util.Calendar cal,
+		java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasEvents(groupId, cal, types);
 	}
 
 	public static void importICal4j(long userId, long groupId, java.io.File file)

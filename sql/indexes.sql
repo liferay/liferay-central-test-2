@@ -107,6 +107,7 @@ create unique index IX_E7B95510 on BrowserTracker (userId);
 create index IX_D6FD9496 on CalEvent (companyId);
 create index IX_12EE4898 on CalEvent (groupId);
 create index IX_4FDDD2BF on CalEvent (groupId, repeating);
+create index IX_5A86D236 on CalEvent (groupId, repeating, type_);
 create index IX_FCD7C63D on CalEvent (groupId, type_);
 create index IX_F6006202 on CalEvent (remindBy);
 create index IX_C1AD2122 on CalEvent (uuid_);

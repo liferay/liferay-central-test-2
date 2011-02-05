@@ -118,6 +118,36 @@ public class CalEventServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEventSoap[] getEvents(
+		long groupId, java.lang.String[] types, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.calendar.model.CalEvent> returnValue =
+				CalEventServiceUtil.getEvents(groupId, types, start, end);
+
+			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getEventsCount(long groupId, java.lang.String[] types)
+		throws RemoteException {
+		try {
+			int returnValue = CalEventServiceUtil.getEventsCount(groupId, types);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEventSoap updateEvent(
 		long eventId, java.lang.String title, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,

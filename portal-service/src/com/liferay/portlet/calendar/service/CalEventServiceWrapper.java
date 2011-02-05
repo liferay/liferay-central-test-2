@@ -72,6 +72,17 @@ public class CalEventServiceWrapper implements CalEventService {
 		return _calEventService.getEvent(eventId);
 	}
 
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
+		long groupId, java.lang.String[] types, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _calEventService.getEvents(groupId, types, start, end);
+	}
+
+	public int getEventsCount(long groupId, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _calEventService.getEventsCount(groupId, types);
+	}
+
 	public void importICal4j(long groupId, java.io.File file)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
