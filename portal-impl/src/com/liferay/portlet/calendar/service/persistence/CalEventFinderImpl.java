@@ -15,10 +15,15 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.CalendarUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.CalEventConstants;
@@ -29,6 +34,7 @@ import java.sql.Timestamp;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -38,14 +44,83 @@ import java.util.List;
 public class CalEventFinderImpl
 	extends BasePersistenceImpl<CalEvent> implements CalEventFinder {
 
+	public static String COUNT_BY_G_SD_T =
+			CalEventFinder.class.getName() + ".countByG_SD_T";
+
 	public static String FIND_BY_FUTURE_REMINDERS =
 		CalEventFinder.class.getName() + ".findByFutureReminders";
+
+	public static String FIND_BY_G_SD_T =
+			CalEventFinder.class.getName() + ".findByG_SD_T";
 
 	public static String FIND_BY_NO_ASSETS =
 		CalEventFinder.class.getName() + ".findByNoAssets";
 
-	public static String FIND_BY_G_SD =
-		CalEventFinder.class.getName() + ".findByG_SD";
+	public int countByG_SD_T(
+			long groupId, Date startDateGT, Date startDateLT,
+			boolean timeZoneSensitive, String[] types)
+		throws SystemException {
+
+		Timestamp startDateGT_TS = null;
+		Timestamp startDateLT_TS = null;
+
+		if (startDateGT != null && startDateLT!= null) {
+			startDateGT_TS = CalendarUtil.getTimestamp(startDateGT);
+			startDateLT_TS = CalendarUtil.getTimestamp(startDateLT);
+		}
+		else {
+			startDateGT_TS = Timestamp.valueOf("-1");
+			startDateLT_TS = Timestamp.valueOf("-1");
+		}
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_SD_T);
+
+			sql = StringUtil.replace(sql, "[$TYPE$]", getTypes(types));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("CalEvent", CalEventImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(startDateGT_TS);
+			qPos.add(startDateLT_TS);
+			qPos.add(timeZoneSensitive);
+			qPos.add(false);
+
+			if (types != null && types.length > 0 &&
+				!(types.length == 1 && Validator.isNull(types[0]))) {
+
+				for (String type : types) {
+					qPos.add(type);
+				}
+			}
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
 
 	public List<CalEvent> findByFutureReminders() throws SystemException {
 		Calendar calendar = Calendar.getInstance();
@@ -81,6 +156,63 @@ public class CalEventFinderImpl
 		}
 	}
 
+	public List<CalEvent> findByG_SD_T(
+			long groupId, Date startDateGT, Date startDateLT,
+			boolean timeZoneSensitive, String[] types)
+		throws SystemException {
+
+		return findByG_SD_T(
+			groupId, startDateGT, startDateLT, timeZoneSensitive, types,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List<CalEvent> findByG_SD_T(
+			long groupId, Date startDateGT, Date startDateLT,
+			boolean timeZoneSensitive, String[] types, int start, int end)
+		throws SystemException {
+
+		Timestamp startDateGT_TS = CalendarUtil.getTimestamp(startDateGT);
+		Timestamp startDateLT_TS = CalendarUtil.getTimestamp(startDateLT);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_SD_T);
+
+			sql = StringUtil.replace(sql, "[$TYPE$]", getTypes(types));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("CalEvent", CalEventImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(startDateGT_TS);
+			qPos.add(startDateLT_TS);
+			qPos.add(timeZoneSensitive);
+			qPos.add(false);
+
+			if (types != null && types.length > 0 &&
+				!(types.length == 1 && Validator.isNull(types[0]))) {
+
+				for (String type : types) {
+					qPos.add(type);
+				}
+			}
+
+			return (List<CalEvent>) QueryUtil.list(q, getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<CalEvent> findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -103,41 +235,28 @@ public class CalEventFinderImpl
 		}
 	}
 
-	public List<CalEvent> findByG_SD(
-			long groupId, Date startDateGT, Date startDateLT,
-			boolean timeZoneSensitive)
-		throws SystemException {
+	protected String getTypes(String[] types) {
+		if (types == null || types.length == 0 ||
+			(types.length == 1 && Validator.isNull(types[0]))) {
 
-		Timestamp startDateGT_TS = CalendarUtil.getTimestamp(startDateGT);
-		Timestamp startDateLT_TS = CalendarUtil.getTimestamp(startDateLT);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_G_SD);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("CalEvent", CalEventImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(startDateGT_TS);
-			qPos.add(startDateLT_TS);
-			qPos.add(timeZoneSensitive);
-			qPos.add(false);
-
-			return q.list();
+			return StringPool.BLANK;
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
+
+		StringBundler sb = new StringBundler(types.length * 2 + 1);
+
+		sb.append(" AND (");
+
+		for (int i = 0; i < types.length; i++) {
+			sb.append("type_ = ? ");
+
+			if ((i + 1) != types.length) {
+				sb.append("OR ");
+			}
 		}
-		finally {
-			closeSession(session);
-		}
+
+		sb.append(")");
+
+		return sb.toString();
 	}
 
 }

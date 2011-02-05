@@ -75,6 +75,7 @@ import java.io.OutputStream;
 import java.text.Format;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -462,10 +463,25 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public List<CalEvent> getEvents(long groupId, Calendar cal)
 		throws SystemException {
 
+		return getEvents(groupId, cal, new String[0]);
+	}
+
+	public List<CalEvent> getEvents(long groupId, Calendar cal, String type)
+		throws SystemException {
+
+		return getEvents(groupId, cal, new String[]{type});
+	}
+
+	public List<CalEvent> getEvents(long groupId, Calendar cal, String[] types)
+		throws SystemException {
+
 		Map<String, List<CalEvent>> eventsPool =
 			CalEventLocalUtil.getEventsPool(groupId);
 
-		String key = CalUtil.toString(cal);
+		types = ArrayUtil.distinct(types);
+		Arrays.sort(types);
+
+		String key = CalUtil.toString(cal, types);
 
 		List<CalEvent> events = eventsPool.get(key);
 
@@ -473,9 +489,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			// Time zone sensitive
 
-			List<CalEvent> events1 = calEventFinder.findByG_SD(
+			List<CalEvent> events1 = calEventFinder.findByG_SD_T(
 				groupId, CalendarUtil.getGTDate(cal),
-				CalendarUtil.getLTDate(cal), true);
+				CalendarUtil.getLTDate(cal), true, types);
 
 			// Time zone insensitive
 
@@ -483,9 +499,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
 				cal.get(Calendar.DATE));
 
-			List<CalEvent> events2 = calEventFinder.findByG_SD(
+			List<CalEvent> events2 = calEventFinder.findByG_SD_T(
 				groupId, CalendarUtil.getGTDate(tzICal),
-				CalendarUtil.getLTDate(tzICal), false);
+				CalendarUtil.getLTDate(tzICal), false, types);
 
 			// Create new list
 
@@ -496,40 +512,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			// Add repeating events
 
-			Iterator<CalEvent> itr = getRepeatingEvents(groupId).iterator();
-
-			while (itr.hasNext()) {
-				CalEvent event = itr.next();
-
-				TZSRecurrence recurrence = event.getRecurrenceObj();
-
-				try {
-
-					// LEP-3468
-
-					if ((recurrence.getFrequency() !=
-							Recurrence.NO_RECURRENCE) &&
-						(recurrence.getInterval() <= 0)) {
-
-						recurrence.setInterval(1);
-
-						event.setRecurrenceObj(recurrence);
-
-						event = calEventPersistence.update(event, false);
-
-						recurrence = event.getRecurrenceObj();
-					}
-
-					if (recurrence.isInRecurrence(
-							getRecurrenceCal(cal, tzICal, event))) {
-
-						events.add(event);
-					}
-				}
-				catch (Exception e) {
-					_log.error(e, e);
-				}
-			}
+			events.addAll(getRepeatingEvents(groupId, cal, types));
 
 			events = new UnmodifiableList<CalEvent>(events);
 
@@ -537,31 +520,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 
 		return events;
-	}
-
-	public List<CalEvent> getEvents(long groupId, Calendar cal, String type)
-		throws SystemException {
-
-		List<CalEvent> events = getEvents(groupId, cal);
-
-		if (Validator.isNull(type)) {
-			return events;
-		}
-		else {
-			events = new ArrayList<CalEvent>(events);
-
-			Iterator<CalEvent> itr = events.iterator();
-
-			while (itr.hasNext()) {
-				CalEvent event = itr.next();
-
-				if (!event.getType().equals(type)) {
-					itr.remove();
-				}
-			}
-
-			return events;
-		}
 	}
 
 	public List<CalEvent> getEvents(
@@ -611,6 +569,13 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public List<CalEvent> getRepeatingEvents(long groupId)
 		throws SystemException {
 
+		return getRepeatingEvents(groupId, null, null);
+	}
+
+	public List<CalEvent> getRepeatingEvents(
+			long groupId, Calendar cal, String[] types)
+		throws SystemException {
+
 		Map<String, List<CalEvent>> eventsPool =
 			CalEventLocalUtil.getEventsPool(groupId);
 
@@ -619,11 +584,55 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		List<CalEvent> events = eventsPool.get(key);
 
 		if (events == null) {
-			events = calEventPersistence.findByG_R(groupId, true);
+			events = calEventPersistence.findByG_R_T(groupId, true, types);
 
 			events = new UnmodifiableList<CalEvent>(events);
 
 			eventsPool.put(key, events);
+		}
+
+		if (cal != null) {
+			// Time zone insensitive
+
+			Calendar tzICal = CalendarFactoryUtil.getCalendar(
+				cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+				cal.get(Calendar.DATE));
+
+			Iterator<CalEvent> itr = events.iterator();
+
+			while (itr.hasNext()) {
+				CalEvent event = itr.next();
+
+				TZSRecurrence recurrence = event.getRecurrenceObj();
+
+				try {
+
+					// LEP-3468
+
+					if ((recurrence.getFrequency() !=
+							Recurrence.NO_RECURRENCE) &&
+						(recurrence.getInterval() <= 0)) {
+
+						recurrence.setInterval(1);
+
+						event.setRecurrenceObj(recurrence);
+
+						event = calEventPersistence.update(event, false);
+
+						recurrence = event.getRecurrenceObj();
+					}
+
+					if (recurrence.isInRecurrence(
+							getRecurrenceCal(cal, tzICal, event))) {
+
+						events.add(event);
+					}
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
+			}
+
 		}
 
 		return events;
@@ -632,13 +641,19 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public boolean hasEvents(long groupId, Calendar cal)
 		throws SystemException {
 
-		return hasEvents(groupId, cal, null);
+		return hasEvents(groupId, cal, new String[0]);
 	}
 
 	public boolean hasEvents(long groupId, Calendar cal, String type)
 		throws SystemException {
 
-		if (getEvents(groupId, cal, type).size() > 0) {
+		return hasEvents(groupId, cal, new String[]{type});
+	}
+
+	public boolean hasEvents(long groupId, Calendar cal, String[] types)
+		throws SystemException {
+
+		if (getEvents(groupId, cal, types).size() > 0) {
 			return true;
 		}
 		else {

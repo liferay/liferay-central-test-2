@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsUtil;
@@ -137,8 +138,9 @@ public class CalUtil {
 		return false;
 	}
 
-	public static String toString(Calendar cal) {
-		StringBundler sb = new StringBundler(7);
+	public static String toString(Calendar cal, String[] types) {
+
+		StringBundler sb = new StringBundler(9);
 
 		sb.append(cal.get(Calendar.YEAR));
 		sb.append(StringPool.PERIOD);
@@ -147,6 +149,11 @@ public class CalUtil {
 		sb.append(cal.get(Calendar.DATE));
 		sb.append(StringPool.PERIOD);
 		sb.append(cal.getTimeZone().getRawOffset());
+		sb.append(StringPool.PERIOD);
+
+		String mergedTypes = StringUtil.merge(types, StringPool.PERIOD);
+
+		sb.append(mergedTypes != null ? mergedTypes : StringPool.BLANK);
 
 		return sb.toString();
 	}

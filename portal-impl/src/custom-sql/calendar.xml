@@ -1,6 +1,21 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.coutByG_SD_T">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				CalEvent
+			WHERE
+				(groupId = ?) AND
+				(startDate >= ?) AND
+				(startDate <= ?) AND
+				(timeZoneSensitive = ?) AND
+				(repeating = ?)
+				[$TYPE$]
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.findByFutureReminders">
 		<![CDATA[
 			SELECT
@@ -38,7 +53,7 @@
 				))
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.findByG_SD">
+	<sql id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.findByG_SD_T">
 		<![CDATA[
 			SELECT
 				{CalEvent.*}
@@ -50,6 +65,7 @@
 				(startDate <= ?) AND
 				(timeZoneSensitive = ?) AND
 				(repeating = ?)
+				[$TYPE$]
 		]]>
 	</sql>
 </custom-sql>
