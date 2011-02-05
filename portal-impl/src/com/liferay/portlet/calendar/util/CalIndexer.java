@@ -96,6 +96,7 @@ public class CalIndexer extends BaseIndexer {
 		String userName = PortalUtil.getUserName(userId, event.getUserName());
 		String title = event.getTitle();
 		String description = HtmlUtil.extractText(event.getDescription());
+		String type = event.getType();
 		Date modifiedDate = event.getModifiedDate();
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
@@ -123,6 +124,7 @@ public class CalIndexer extends BaseIndexer {
 
 		document.addText(Field.TITLE, title);
 		document.addText(Field.DESCRIPTION, description);
+		document.addKeyword(Field.TYPE, type);
 		document.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
 		document.addKeyword(Field.ASSET_CATEGORY_NAMES, assetCategoryNames);
 		document.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
