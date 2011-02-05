@@ -162,6 +162,8 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 			<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 		</aui:field-wrapper>
 
+		<aui:input name="location" />
+
 		<aui:select name="type">
 
 			<%

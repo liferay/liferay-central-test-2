@@ -155,6 +155,7 @@ public class EditEventAction extends PortletAction {
 
 		String title = ParamUtil.getString(actionRequest, "title");
 		String description = ParamUtil.getString(actionRequest, "description");
+		String location = ParamUtil.getString(actionRequest, "location");
 
 		int startDateMonth = ParamUtil.getInteger(
 			actionRequest, "startDateMonth");
@@ -414,9 +415,9 @@ public class EditEventAction extends PortletAction {
 			// Add event
 
 			CalEvent event = CalEventServiceUtil.addEvent(
-				title, description, startDateMonth, startDateDay, startDateYear,
-				startDateHour, startDateMinute, endDateMonth, endDateDay,
-				endDateYear, durationHour, durationMinute, allDay,
+				title, description, location, startDateMonth, startDateDay,
+				startDateYear, startDateHour, startDateMinute, endDateMonth,
+				endDateDay, endDateYear, durationHour, durationMinute, allDay,
 				timeZoneSensitive, type, repeating, recurrence, remindBy,
 				firstReminder, secondReminder, serviceContext);
 
@@ -429,11 +430,12 @@ public class EditEventAction extends PortletAction {
 			// Update event
 
 			CalEventServiceUtil.updateEvent(
-				eventId, title, description, startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute, endDateMonth,
-				endDateDay, endDateYear, durationHour, durationMinute,
-				allDay, timeZoneSensitive, type, repeating, recurrence,
-				remindBy, firstReminder, secondReminder, serviceContext);
+				eventId, title, description, location, startDateMonth,
+				startDateDay, startDateYear, startDateHour, startDateMinute,
+				endDateMonth, endDateDay, endDateYear, durationHour,
+				durationMinute, allDay, timeZoneSensitive, type, repeating,
+				recurrence, remindBy, firstReminder, secondReminder,
+				serviceContext);
 		}
 	}
 

@@ -157,6 +157,18 @@ request.setAttribute("view_event.jsp-event", event);
 			<dd>
 				<span class="categories"><%= LanguageUtil.get(pageContext, event.getType()) %></span>
 			</dd>
+			<c:if test="<%= Validator.isNotNull(event.getLocation()) %>">
+				<dt>
+					<liferay-ui:icon
+						image="../common/view_locations"
+					/>
+
+					<liferay-ui:message key="location" />:
+				</dt>
+				<dd>
+					<span class="location"><%= event.getLocation() %></span>
+				</dd>
+			</c:if>
 		</dl>
 
 		<c:if test="<% recurrence.getOccurrence() != null %>">

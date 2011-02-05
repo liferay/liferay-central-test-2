@@ -108,6 +108,7 @@ import net.fortuna.ical4j.model.property.Description;
 import net.fortuna.ical4j.model.property.DtEnd;
 import net.fortuna.ical4j.model.property.DtStart;
 import net.fortuna.ical4j.model.property.Duration;
+import net.fortuna.ical4j.model.property.Location;
 import net.fortuna.ical4j.model.property.Method;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.RRule;
@@ -125,13 +126,13 @@ import net.fortuna.ical4j.model.property.Version;
 public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	public CalEvent addEvent(
-			long userId, String title, String description, int startDateMonth,
-			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int endDateMonth, int endDateDay,
-			int endDateYear, int durationHour, int durationMinute,
-			boolean allDay, boolean timeZoneSensitive, String type,
-			boolean repeating, TZSRecurrence recurrence, int remindBy,
-			int firstReminder, int secondReminder,
+			long userId, String title, String description, String location,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, TZSRecurrence recurrence,
+			int remindBy, int firstReminder, int secondReminder,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -199,6 +200,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setModifiedDate(serviceContext.getModifiedDate(now));
 		event.setTitle(title);
 		event.setDescription(description);
+		event.setLocation(location);
 		event.setStartDate(startDate.getTime());
 		event.setEndDate(endDate.getTime());
 		event.setDurationHour(durationHour);
@@ -716,9 +718,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	public CalEvent updateEvent(
 			long userId, long eventId, String title, String description,
-			int startDateMonth, int startDateDay, int startDateYear,
-			int startDateHour, int startDateMinute, int endDateMonth,
-			int endDateDay, int endDateYear, int durationHour,
+			String location, int startDateMonth, int startDateDay,
+			int startDateYear, int startDateHour, int startDateMinute,
+			int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
 			String type, boolean repeating, TZSRecurrence recurrence,
 			int remindBy, int firstReminder, int secondReminder,
@@ -779,6 +781,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setModifiedDate(serviceContext.getModifiedDate(null));
 		event.setTitle(title);
 		event.setDescription(description);
+		event.setLocation(location);
 		event.setStartDate(startDate.getTime());
 		event.setEndDate(endDate.getTime());
 		event.setDurationHour(durationHour);
@@ -949,6 +952,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			description = event.getDescription().getValue();
 		}
 
+		//Location
+
+		String location = StringPool.BLANK;
+
+		if(event.getLocation() != null) {
+			location = event.getLocation().getValue();
+		}
+
 		// Start date
 
 		DtStart dtStart = event.getStartDate();
@@ -1078,7 +1089,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		serviceContext.setScopeGroupId(groupId);
 
 		addEvent(
-			userId, title, description, startDate.get(Calendar.MONTH),
+			userId, title, description, location, startDate.get(Calendar.MONTH),
 			startDate.get(Calendar.DAY_OF_MONTH), startDate.get(Calendar.YEAR),
 			startDate.get(Calendar.HOUR_OF_DAY),
 			startDate.get(Calendar.MINUTE), endDate.get(Calendar.MONTH),
@@ -1147,6 +1158,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				new String[] {
 					"[$EVENT_START_DATE$]",
 					"[$EVENT_TITLE$]",
+					"[$EVENT_LOCATION$]",
 					"[$FROM_ADDRESS$]",
 					"[$FROM_NAME$]",
 					"[$PORTAL_URL$]",
@@ -1157,6 +1169,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				new String[] {
 					dateFormatDateTime.format(startDate.getTime()),
 					event.getTitle(),
+					event.getLocation(),
 					fromAddress,
 					fromName,
 					company.getVirtualHostname(),
@@ -1170,6 +1183,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				new String[] {
 					"[$EVENT_START_DATE$]",
 					"[$EVENT_TITLE$]",
+					"[$EVENT_LOCATION$]",
 					"[$FROM_ADDRESS$]",
 					"[$FROM_NAME$]",
 					"[$PORTAL_URL$]",
@@ -1180,6 +1194,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				new String[] {
 					dateFormatDateTime.format(startDate.getTime()),
 					event.getTitle(),
+					event.getLocation(),
 					fromAddress,
 					fromName,
 					company.getVirtualHostname(),
@@ -1460,6 +1475,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		Description description = new Description(event.getDescription());
 
 		eventProps.add(description);
+
+		//Location
+
+		Location location = new Location(event.getLocation());
+
+		eventProps.add(location);
 
 		// Comment
 

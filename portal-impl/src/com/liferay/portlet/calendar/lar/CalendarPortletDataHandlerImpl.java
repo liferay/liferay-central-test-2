@@ -267,19 +267,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 
 				importedEvent = CalEventLocalServiceUtil.addEvent(
 					userId, event.getTitle(), event.getDescription(),
-					startDateMonth, startDateDay, startDateYear, startDateHour,
-					startDateMinute, endDateMonth, endDateDay, endDateYear,
-					event.getDurationHour(), event.getDurationMinute(),
-					event.getAllDay(), event.getTimeZoneSensitive(),
-					event.getType(), event.getRepeating(),
-					event.getRecurrenceObj(), event.getRemindBy(),
-					event.getFirstReminder(), event.getSecondReminder(),
-					serviceContext);
-			}
-			else {
-				importedEvent = CalEventLocalServiceUtil.updateEvent(
-					userId, existingEvent.getEventId(), event.getTitle(),
-					event.getDescription(), startDateMonth, startDateDay,
+					event.getLocation(), startDateMonth, startDateDay,
 					startDateYear, startDateHour, startDateMinute, endDateMonth,
 					endDateDay, endDateYear, event.getDurationHour(),
 					event.getDurationMinute(), event.getAllDay(),
@@ -288,15 +276,29 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 					event.getRemindBy(), event.getFirstReminder(),
 					event.getSecondReminder(), serviceContext);
 			}
+			else {
+				importedEvent = CalEventLocalServiceUtil.updateEvent(
+					userId, existingEvent.getEventId(), event.getTitle(),
+					event.getDescription(), event.getLocation(), startDateMonth,
+					startDateDay, startDateYear, startDateHour, startDateMinute,
+					endDateMonth, endDateDay, endDateYear,
+					event.getDurationHour(), event.getDurationMinute(),
+					event.getAllDay(), event.getTimeZoneSensitive(),
+					event.getType(), event.getRepeating(),
+					event.getRecurrenceObj(), event.getRemindBy(),
+					event.getFirstReminder(), event.getSecondReminder(),
+					serviceContext);
+			}
 		}
 		else {
 			importedEvent = CalEventLocalServiceUtil.addEvent(
 				userId, event.getTitle(), event.getDescription(),
-				startDateMonth, startDateDay, startDateYear, startDateHour,
-				startDateMinute, endDateMonth, endDateDay, endDateYear,
-				event.getDurationHour(), event.getDurationMinute(),
-				event.getAllDay(), event.getTimeZoneSensitive(),
-				event.getType(), event.getRepeating(), event.getRecurrenceObj(),
+				event.getLocation(), startDateMonth, startDateDay,
+				startDateYear, startDateHour, startDateMinute, endDateMonth,
+				endDateDay, endDateYear, event.getDurationHour(),
+				event.getDurationMinute(), event.getAllDay(),
+				event.getTimeZoneSensitive(), event.getType(),
+				event.getRepeating(), event.getRecurrenceObj(),
 				event.getRemindBy(), event.getFirstReminder(),
 				event.getSecondReminder(), serviceContext);
 		}

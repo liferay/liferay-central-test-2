@@ -34,13 +34,13 @@ import java.util.List;
 public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 
 	public CalEvent addEvent(
-			String title, String description, int startDateMonth,
-			int startDateDay, int startDateYear, int startDateHour,
-			int startDateMinute, int endDateMonth, int endDateDay,
-			int endDateYear, int durationHour, int durationMinute,
-			boolean allDay, boolean timeZoneSensitive, String type,
-			boolean repeating, TZSRecurrence recurrence, int remindBy,
-			int firstReminder, int secondReminder,
+			String title, String description, String location,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, TZSRecurrence recurrence,
+			int remindBy, int firstReminder, int secondReminder,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -49,10 +49,10 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			ActionKeys.ADD_EVENT);
 
 		return calEventLocalService.addEvent(
-			getUserId(), title, description, startDateMonth, startDateDay,
-			startDateYear, startDateHour, startDateMinute, endDateMonth,
-			endDateDay, endDateYear, durationHour, durationMinute, allDay,
-			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			getUserId(), title, description, location, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour, durationMinute,
+			allDay, timeZoneSensitive, type, repeating, recurrence, remindBy,
 			firstReminder, secondReminder, serviceContext);
 	}
 
@@ -127,7 +127,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 	}
 
 	public CalEvent updateEvent(
-			long eventId, String title, String description,
+			long eventId, String title, String description, String location,
 			int startDateMonth, int startDateDay, int startDateYear,
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
@@ -141,7 +141,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			getPermissionChecker(), eventId, ActionKeys.UPDATE);
 
 		return calEventLocalService.updateEvent(
-			getUserId(), eventId, title, description, startDateMonth,
+			getUserId(), eventId, title, description, location, startDateMonth,
 			startDateDay, startDateYear, startDateHour, startDateMinute,
 			endDateMonth, endDateDay, endDateYear, durationHour, durationMinute,
 			allDay, timeZoneSensitive, type, repeating, recurrence, remindBy,

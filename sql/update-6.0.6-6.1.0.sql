@@ -12,6 +12,8 @@ COMMIT_TRANSACTION;
 update BookmarksEntry set description = comments;
 alter table BookmarksEntry drop column comments;
 
+alter table CalEvent add location STRING null;
+
 drop index IX_CE705D48 on DLFileRank;
 drop index IX_40B56512 on DLFileRank;
 alter table DLFileRank add fileEntryId LONG;

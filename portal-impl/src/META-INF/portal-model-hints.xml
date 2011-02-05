@@ -1163,6 +1163,9 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="location" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="startDate" type="Date" />
 		<field name="endDate" type="Date" />
 		<field name="durationHour" type="int" />
