@@ -34,6 +34,8 @@ import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.log4j.Log4JUtil;
 
+import com.sun.syndication.io.XmlReader;
+
 import org.apache.commons.lang.time.StopWatch;
 
 /**
@@ -127,7 +129,7 @@ public class InitUtil {
 
 		// ROME
 
-		com.sun.syndication.io.XmlReader.setDefaultEncoding(StringPool.UTF8);
+		XmlReader.setDefaultEncoding(StringPool.UTF8);
 
 		if (_PRINT_TIME) {
 			System.out.println(
