@@ -151,9 +151,9 @@ public class CalUtil {
 		sb.append(cal.getTimeZone().getRawOffset());
 		sb.append(StringPool.PERIOD);
 
-		String mergedTypes = StringUtil.merge(types, StringPool.PERIOD);
-
-		sb.append(mergedTypes != null ? mergedTypes : StringPool.BLANK);
+		if (types != null) {
+			sb.append(StringUtil.merge(types, StringPool.PERIOD));
+		}
 
 		return sb.toString();
 	}

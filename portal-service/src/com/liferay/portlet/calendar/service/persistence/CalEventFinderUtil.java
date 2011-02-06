@@ -35,6 +35,11 @@ public class CalEventFinderUtil {
 		return getFinder().findByFutureReminders();
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByNoAssets();
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD_T(
 		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
 		boolean timeZoneSensitive, java.lang.String[] types)
@@ -51,11 +56,6 @@ public class CalEventFinderUtil {
 		return getFinder()
 				   .findByG_SD_T(groupId, startDateGT, startDateLT,
 			timeZoneSensitive, types, start, end);
-	}
-
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByNoAssets()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().findByNoAssets();
 	}
 
 	public static CalEventFinder getFinder() {

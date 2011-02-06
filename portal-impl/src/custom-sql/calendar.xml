@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.coutByG_SD_T">
+	<sql id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.countByG_SD_T">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE

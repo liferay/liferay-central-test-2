@@ -471,17 +471,18 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public List<CalEvent> getEvents(long groupId, Calendar cal, String type)
 		throws SystemException {
 
-		return getEvents(groupId, cal, new String[]{type});
+		return getEvents(groupId, cal, new String[] {type});
 	}
 
 	public List<CalEvent> getEvents(long groupId, Calendar cal, String[] types)
 		throws SystemException {
 
+		types = ArrayUtil.distinct(types);
+
+		Arrays.sort(types);
+
 		Map<String, List<CalEvent>> eventsPool =
 			CalEventLocalUtil.getEventsPool(groupId);
-
-		types = ArrayUtil.distinct(types);
-		Arrays.sort(types);
 
 		String key = CalUtil.toString(cal, types);
 
@@ -528,15 +529,15 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			long groupId, String type, int start, int end)
 		throws SystemException {
 
-		return getEvents(groupId, new String[]{type}, start, end);
+		return getEvents(groupId, new String[] {type}, start, end);
 	}
 
 	public List<CalEvent> getEvents(
 			long groupId, String[] types, int start, int end)
 		throws SystemException {
 
-		if (types != null && types.length > 0 &&
-			(types.length > 1 || Validator.isNotNull(types[0]))) {
+		if ((types != null) && (types.length > 0) &&
+			((types.length > 1) || Validator.isNotNull(types[0]))) {
 
 			return calEventPersistence.findByG_T(groupId, types, start, end);
 		}
@@ -548,14 +549,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public int getEventsCount(long groupId, String type)
 		throws SystemException {
 
-		return getEventsCount(groupId, new String[]{type});
+		return getEventsCount(groupId, new String[] {type});
 	}
 
 	public int getEventsCount(long groupId, String[] types)
 		throws SystemException {
 
-		if (types != null && types.length > 0 &&
-			(types.length > 1 || Validator.isNotNull(types[0]))) {
+		if ((types != null) && (types.length > 0) &&
+			((types.length > 1) || Validator.isNotNull(types[0]))) {
 
 			return calEventPersistence.countByG_T(groupId, types);
 		}
@@ -586,7 +587,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		List<CalEvent> events = eventsPool.get(key);
 
 		if (events == null) {
-			events = calEventPersistence.findByG_R_T(groupId, true, types);
+			events = calEventPersistence.findByG_T_R(groupId, types, true);
 
 			events = new UnmodifiableList<CalEvent>(events);
 
@@ -594,6 +595,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 
 		if (cal != null) {
+
 			// Time zone insensitive
 
 			Calendar tzICal = CalendarFactoryUtil.getCalendar(
@@ -634,7 +636,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					_log.error(e, e);
 				}
 			}
-
 		}
 
 		return events;
@@ -649,17 +650,19 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public boolean hasEvents(long groupId, Calendar cal, String type)
 		throws SystemException {
 
-		return hasEvents(groupId, cal, new String[]{type});
+		return hasEvents(groupId, cal, new String[] {type});
 	}
 
 	public boolean hasEvents(long groupId, Calendar cal, String[] types)
 		throws SystemException {
 
-		if (getEvents(groupId, cal, types).size() > 0) {
-			return true;
+		List<CalEvent> events = getEvents(groupId, cal, types);
+
+		if (events.isEmpty()) {
+			return false;
 		}
 		else {
-			return false;
+			return true;
 		}
 	}
 
@@ -956,7 +959,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		String location = StringPool.BLANK;
 
-		if(event.getLocation() != null) {
+		if (event.getLocation() != null) {
 			location = event.getLocation().getValue();
 		}
 

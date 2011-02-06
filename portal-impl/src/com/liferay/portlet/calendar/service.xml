@@ -59,16 +59,16 @@
 		</finder>
 		<finder name="G_T" return-type="Collection">
 			<finder-column name="groupId" />
-			<finder-column arrayable-operator="OR" name="type" />
+			<finder-column name="type" arrayable-operator="OR" />
 		</finder>
 		<finder name="G_R" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="repeating" />
 		</finder>
-		<finder name="G_R_T" return-type="Collection">
+		<finder name="G_T_R" return-type="Collection">
 			<finder-column name="groupId" />
+			<finder-column name="type" arrayable-operator="OR" />
 			<finder-column name="repeating" />
-			<finder-column arrayable-operator="OR" name="type" />
 		</finder>
 
 		<!-- References -->

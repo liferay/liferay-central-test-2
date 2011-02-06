@@ -45,33 +45,24 @@ public class CalEventFinderImpl
 	extends BasePersistenceImpl<CalEvent> implements CalEventFinder {
 
 	public static String COUNT_BY_G_SD_T =
-			CalEventFinder.class.getName() + ".countByG_SD_T";
+		CalEventFinder.class.getName() + ".countByG_SD_T";
 
 	public static String FIND_BY_FUTURE_REMINDERS =
 		CalEventFinder.class.getName() + ".findByFutureReminders";
 
-	public static String FIND_BY_G_SD_T =
-			CalEventFinder.class.getName() + ".findByG_SD_T";
-
 	public static String FIND_BY_NO_ASSETS =
 		CalEventFinder.class.getName() + ".findByNoAssets";
+
+	public static String FIND_BY_G_SD_T =
+		CalEventFinder.class.getName() + ".findByG_SD_T";
 
 	public int countByG_SD_T(
 			long groupId, Date startDateGT, Date startDateLT,
 			boolean timeZoneSensitive, String[] types)
 		throws SystemException {
 
-		Timestamp startDateGT_TS = null;
-		Timestamp startDateLT_TS = null;
-
-		if (startDateGT != null && startDateLT!= null) {
-			startDateGT_TS = CalendarUtil.getTimestamp(startDateGT);
-			startDateLT_TS = CalendarUtil.getTimestamp(startDateLT);
-		}
-		else {
-			startDateGT_TS = Timestamp.valueOf("-1");
-			startDateLT_TS = Timestamp.valueOf("-1");
-		}
+		Timestamp startDateGT_TS = CalendarUtil.getTimestamp(startDateGT);
+		Timestamp startDateLT_TS = CalendarUtil.getTimestamp(startDateLT);
 
 		Session session = null;
 
@@ -94,8 +85,8 @@ public class CalEventFinderImpl
 			qPos.add(timeZoneSensitive);
 			qPos.add(false);
 
-			if (types != null && types.length > 0 &&
-				!(types.length == 1 && Validator.isNull(types[0]))) {
+			if ((types != null) && (types.length > 0) &&
+				((types.length > 1) || Validator.isNotNull(types[0]))) {
 
 				for (String type : types) {
 					qPos.add(type);
@@ -156,6 +147,28 @@ public class CalEventFinderImpl
 		}
 	}
 
+	public List<CalEvent> findByNoAssets() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("CalEvent", CalEventImpl.class);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<CalEvent> findByG_SD_T(
 			long groupId, Date startDateGT, Date startDateLT,
 			boolean timeZoneSensitive, String[] types)
@@ -195,37 +208,15 @@ public class CalEventFinderImpl
 			qPos.add(timeZoneSensitive);
 			qPos.add(false);
 
-			if (types != null && types.length > 0 &&
-				!(types.length == 1 && Validator.isNull(types[0]))) {
+			if ((types != null) && (types.length > 0) &&
+				((types.length > 1) || Validator.isNotNull(types[0]))) {
 
 				for (String type : types) {
 					qPos.add(type);
 				}
 			}
 
-			return (List<CalEvent>) QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<CalEvent> findByNoAssets() throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_NO_ASSETS);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("CalEvent", CalEventImpl.class);
-
-			return q.list();
+			return (List<CalEvent>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -236,27 +227,27 @@ public class CalEventFinderImpl
 	}
 
 	protected String getTypes(String[] types) {
-		if (types == null || types.length == 0 ||
-			(types.length == 1 && Validator.isNull(types[0]))) {
+		if ((types != null) && (types.length > 0) &&
+			((types.length > 1) || Validator.isNotNull(types[0]))) {
 
-			return StringPool.BLANK;
-		}
+			StringBundler sb = new StringBundler(types.length * 2 + 1);
 
-		StringBundler sb = new StringBundler(types.length * 2 + 1);
+			sb.append(" AND (");
 
-		sb.append(" AND (");
+			for (int i = 0; i < types.length; i++) {
+				sb.append("type_ = ? ");
 
-		for (int i = 0; i < types.length; i++) {
-			sb.append("type_ = ? ");
-
-			if ((i + 1) != types.length) {
-				sb.append("OR ");
+				if ((i + 1) != types.length) {
+					sb.append("OR ");
+				}
 			}
+
+			sb.append(")");
+
+			return sb.toString();
 		}
 
-		sb.append(")");
-
-		return sb.toString();
+		return StringPool.BLANK;
 	}
 
 }

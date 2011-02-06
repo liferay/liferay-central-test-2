@@ -97,7 +97,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			long groupId, String[] types, int start, int end)
 		throws SystemException {
 
-		if (types != null && types.length > 0) {
+		if ((types != null) && (types.length > 0)) {
 			return calEventPersistence.filterFindByG_T(
 				groupId, types, start, end);
 		}
@@ -109,7 +109,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 	public int getEventsCount(long groupId, String[] types)
 		throws SystemException {
 
-		if (types != null && types.length > 0) {
+		if ((types != null) && (types.length > 0)) {
 			return calEventPersistence.filterCountByG_T(groupId, types);
 		}
 		else {
