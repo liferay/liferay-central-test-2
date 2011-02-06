@@ -344,6 +344,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 	}
 
+	public void addUserGroupUsers(long userGroupId, long[] userIds)
+		throws PortalException, SystemException {
+
+		userGroupLocalService.copyUserGroupLayouts(userGroupId, userIds);
+
+		userGroupPersistence.addUsers(userGroupId, userIds);
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
+
+		indexer.reindex(userIds);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	/**
 	 * Adds a user to the database. Also notifies the appropriate model
 	 * listeners.
@@ -630,20 +644,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			serviceContext);
 
 		return user;
-	}
-
-	public void addUserGroupUsers(long userGroupId, long[] userIds)
-		throws PortalException, SystemException {
-
-		userGroupLocalService.copyUserGroupLayouts(userGroupId, userIds);
-
-		userGroupPersistence.addUsers(userGroupId, userIds);
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
-
-		indexer.reindex(userIds);
-
-		PermissionCacheUtil.clearCache();
 	}
 
 	public int authenticateByEmailAddress(
@@ -3163,6 +3163,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_SUBJECT);
 
 		String body = null;
+
 		if (Validator.isNotNull(password)) {
 			body = PrefsPropsUtil.getContent(
 				user.getCompanyId(), PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY);

@@ -39,9 +39,9 @@ public interface PropsKeys {
 
 	public static final String ADMIN_EMAIL_USER_ADDED_BODY = "admin.email.user.added.body";
 
-	public static final String ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY = "admin.email.user.added.no.password.body";
-
 	public static final String ADMIN_EMAIL_USER_ADDED_ENABLED = "admin.email.user.added.enabled";
+
+	public static final String ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY = "admin.email.user.added.no.password.body";
 
 	public static final String ADMIN_EMAIL_USER_ADDED_SUBJECT = "admin.email.user.added.subject";
 

@@ -298,6 +298,12 @@ public class UserLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void addUserGroupUsers(long userGroupId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addUserGroupUsers(userGroupId, userIds);
+	}
+
 	/**
 	* Adds a user to the database. Also notifies the appropriate model
 	* listeners.
@@ -358,12 +364,6 @@ public class UserLocalServiceUtil {
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			jobTitle, groupIds, organizationIds, roleIds, userGroupIds,
 			sendEmail, serviceContext);
-	}
-
-	public static void addUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().addUserGroupUsers(userGroupId, userIds);
 	}
 
 	public static int authenticateByEmailAddress(long companyId,

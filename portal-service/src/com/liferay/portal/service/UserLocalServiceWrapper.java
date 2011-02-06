@@ -285,6 +285,12 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			userGroupIds, sendEmail, serviceContext);
 	}
 
+	public void addUserGroupUsers(long userGroupId, long[] userIds)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_userLocalService.addUserGroupUsers(userGroupId, userIds);
+	}
+
 	/**
 	* Adds a user to the database. Also notifies the appropriate model
 	* listeners.
@@ -344,12 +350,6 @@ public class UserLocalServiceWrapper implements UserLocalService {
 			lastName, prefixId, suffixId, male, birthdayMonth, birthdayDay,
 			birthdayYear, jobTitle, groupIds, organizationIds, roleIds,
 			userGroupIds, sendEmail, serviceContext);
-	}
-
-	public void addUserGroupUsers(long userGroupId, long[] userIds)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_userLocalService.addUserGroupUsers(userGroupId, userIds);
 	}
 
 	public int authenticateByEmailAddress(long companyId,
