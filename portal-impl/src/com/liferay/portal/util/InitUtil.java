@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.log.Log4jLogFactoryImpl;
 import com.liferay.portal.spring.util.SpringUtil;
@@ -123,6 +124,10 @@ public class InitUtil {
 		// Java properties
 
 		JavaProps.isJDK5();
+
+		// ROME
+
+		com.sun.syndication.io.XmlReader.setDefaultEncoding(StringPool.UTF8);
 
 		if (_PRINT_TIME) {
 			System.out.println(
