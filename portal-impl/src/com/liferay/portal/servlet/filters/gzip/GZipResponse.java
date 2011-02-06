@@ -107,7 +107,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 
 	private static final String _GZIP = "gzip";
 
-	private static final Log _log = LogFactoryUtil.getLog(GZipResponse.class);
+	private static Log _log = LogFactoryUtil.getLog(GZipResponse.class);
 
 	private HttpServletResponse _response;
 	private ServletOutputStream _stream;

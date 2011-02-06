@@ -143,8 +143,7 @@ public class LayoutStagingHandler implements InvocationHandler {
 				_layout.toEscapedModel(), _layoutRevision.toEscapedModel()));
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		LayoutStagingHandler.class);
+	private static Log _log = LogFactoryUtil.getLog(LayoutStagingHandler.class);
 
 	private static Set<String> _layoutRevisionMethodNames =
 		new HashSet<String>();

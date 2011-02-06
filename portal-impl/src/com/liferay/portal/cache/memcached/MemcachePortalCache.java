@@ -173,8 +173,7 @@ public class MemcachePortalCache extends BasePortalCache {
 		_timeToLive = timeToLive;
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
-		MemcachePortalCache.class);
+	private static Log _log = LogFactoryUtil.getLog(MemcachePortalCache.class);
 
 	private MemcachedClientIF _memcachedClient;
 	private String _name;

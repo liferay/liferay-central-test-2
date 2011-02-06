@@ -103,7 +103,7 @@ public class MBeanRegistry {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(MBeanRegistry.class);
+	private static Log _log = LogFactoryUtil.getLog(MBeanRegistry.class);
 
 	private MBeanServer _mBeanServer;
 	private Map<String, ObjectName> _objectNameCache =

@@ -257,7 +257,7 @@ public class PooledMemcachePortalCache extends BasePortalCache {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		MemcachePortalCache.class);
 
 	private MemcachedClientFactory _memcachedClientFactory;
