@@ -137,9 +137,6 @@
 			<bean class="com.liferay.portal.json.JSONFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.language.LanguageResources" class="com.liferay.portal.language.LanguageResources">
-		<property name="config" value="content.Language,content.Language-ext" />
-	</bean>
 	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil">
 		<property name="language">
 			<bean class="com.liferay.portal.language.LanguageImpl" />
@@ -311,6 +308,9 @@
 	<bean id="com.liferay.portal.kernel.zip.ZipWriterFactory" class="com.liferay.portal.zip.ZipWriterFactoryImpl" />
 	<bean id="com.liferay.portal.kernel.zip.ZipWriterFactoryUtil" class="com.liferay.portal.kernel.zip.ZipWriterFactoryUtil">
 		<property name="zipWriterFactory" ref="com.liferay.portal.kernel.zip.ZipWriterFactory" />
+	</bean>
+	<bean id="com.liferay.portal.language.LanguageResources" class="com.liferay.portal.language.LanguageResources">
+		<property name="config" value="content.Language,content.Language-ext" />
 	</bean>
 	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil">
 		<property name="modelHints">
