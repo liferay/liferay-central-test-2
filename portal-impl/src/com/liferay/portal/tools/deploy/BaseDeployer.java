@@ -446,9 +446,7 @@ public class BaseDeployer implements Deployer {
 						}
 					}
 					else if (Validator.isNotNull(filePattern)) {
-						if (!StringUtil.matchesIgnoreCase(
-							fileName, filePattern)) {
-
+						if (!StringUtil.matches(fileName, filePattern)) {
 							deploy = false;
 						}
 					}
