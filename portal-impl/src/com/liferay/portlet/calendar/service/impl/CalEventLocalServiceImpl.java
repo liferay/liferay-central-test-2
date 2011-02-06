@@ -955,7 +955,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			description = event.getDescription().getValue();
 		}
 
-		//Location
+		// Location
 
 		String location = StringPool.BLANK;
 
@@ -1159,9 +1159,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			subject = StringUtil.replace(
 				subject,
 				new String[] {
+					"[$EVENT_LOCATION$]",
 					"[$EVENT_START_DATE$]",
 					"[$EVENT_TITLE$]",
-					"[$EVENT_LOCATION$]",
 					"[$FROM_ADDRESS$]",
 					"[$FROM_NAME$]",
 					"[$PORTAL_URL$]",
@@ -1170,9 +1170,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					"[$TO_NAME$]"
 				},
 				new String[] {
+					event.getLocation(),
 					dateFormatDateTime.format(startDate.getTime()),
 					event.getTitle(),
-					event.getLocation(),
 					fromAddress,
 					fromName,
 					company.getVirtualHostname(),
@@ -1184,9 +1184,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			body = StringUtil.replace(
 				body,
 				new String[] {
+					"[$EVENT_LOCATION$]",
 					"[$EVENT_START_DATE$]",
 					"[$EVENT_TITLE$]",
-					"[$EVENT_LOCATION$]",
 					"[$FROM_ADDRESS$]",
 					"[$FROM_NAME$]",
 					"[$PORTAL_URL$]",
@@ -1195,9 +1195,9 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					"[$TO_NAME$]"
 				},
 				new String[] {
+					event.getLocation(),
 					dateFormatDateTime.format(startDate.getTime()),
 					event.getTitle(),
-					event.getLocation(),
 					fromAddress,
 					fromName,
 					company.getVirtualHostname(),
@@ -1479,7 +1479,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		eventProps.add(description);
 
-		//Location
+		// Location
 
 		Location location = new Location(event.getLocation());
 

@@ -157,6 +157,7 @@ request.setAttribute("view_event.jsp-event", event);
 			<dd>
 				<span class="categories"><%= LanguageUtil.get(pageContext, event.getType()) %></span>
 			</dd>
+
 			<c:if test="<%= Validator.isNotNull(event.getLocation()) %>">
 				<dt>
 					<liferay-ui:icon

@@ -287,7 +287,7 @@ create table CalEvent (
 	modifiedDate DATE null,
 	title VARCHAR(75) null,
 	description STRING null,
-	location VARCHAR(75) null,
+	location STRING null,
 	startDate DATE null,
 	endDate DATE null,
 	durationHour INTEGER,

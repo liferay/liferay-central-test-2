@@ -80,6 +80,12 @@ String editorContent = emailEventReminderBody;
 
 				<dl>
 					<dt>
+						[$EVENT_LOCATION$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-event-location" />
+					</dd>
+					<dt>
 						[$EVENT_START_DATE$]
 					</dt>
 					<dd>
