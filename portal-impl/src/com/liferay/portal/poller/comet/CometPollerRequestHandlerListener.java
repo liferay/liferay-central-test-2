@@ -25,6 +25,7 @@ import com.liferay.portal.poller.PollerRequestHandlerListener;
  */
 public class CometPollerRequestHandlerListener
 	implements PollerRequestHandlerListener {
+
 	public CometPollerRequestHandlerListener(CometSession cometSession) {
 		_cometSession = cometSession;
 	}
@@ -33,15 +34,14 @@ public class CometPollerRequestHandlerListener
 		try {
 			_cometSession.close();
 		}
-		catch (CometException e) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to notify handling complete", e);
-			}
+		catch (CometException ce) {
+			_log.error("Unable to notify handling complete", ce);
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		CometPollerRequestHandlerListener.class);
 
 	private CometSession _cometSession;
+
 }

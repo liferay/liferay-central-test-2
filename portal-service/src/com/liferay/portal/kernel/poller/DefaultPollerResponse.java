@@ -35,39 +35,33 @@ public class DefaultPollerResponse implements PollerResponse {
 		_chunkId = chunkId;
 	}
 
-	public void close() {
-		synchronized (this) {
-			if (Validator.isNotNull(_responseMessage)) {
-				MessageBusUtil.sendMessage(
-					_responseMessage.getDestinationName(), _responseMessage);
+	public synchronized void close() {
+		if (Validator.isNotNull(_responseMessage)) {
+			MessageBusUtil.sendMessage(
+				_responseMessage.getDestinationName(), _responseMessage);
 
-				_responseMessage = null;
-			}
+			_responseMessage = null;
 		}
 	}
 
-	public void setParameter(String name, JSONArray value)
+	public synchronized void setParameter(String name, JSONArray value)
 		throws PollerResponseClosedException {
 
-		synchronized (this) {
-			if (_responseMessage == null) {
-				throw new PollerResponseClosedException();
-			}
-
-			_parameterMap.put(name, value);
+		if (_responseMessage == null) {
+			throw new PollerResponseClosedException();
 		}
+
+		_parameterMap.put(name, value);
 	}
 
-	public void setParameter(String name, JSONObject value)
+	public synchronized void setParameter(String name, JSONObject value)
 		throws PollerResponseClosedException {
 
-		synchronized (this) {
-			if (_responseMessage == null) {
-				throw new PollerResponseClosedException();
-			}
-
-			_parameterMap.put(name, value);
+		if (_responseMessage == null) {
+			throw new PollerResponseClosedException();
 		}
+
+		_parameterMap.put(name, value);
 	}
 
 	public void setParameter(String name, String value)
@@ -127,4 +121,5 @@ public class DefaultPollerResponse implements PollerResponse {
 	private Map<String, Object> _parameterMap = new HashMap<String, Object>();
 	private String _portletId;
 	private Message _responseMessage;
+
 }

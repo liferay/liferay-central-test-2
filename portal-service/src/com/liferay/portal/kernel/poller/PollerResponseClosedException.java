@@ -18,14 +18,21 @@ package com.liferay.portal.kernel.poller;
  * @author Edward Han
  */
 public class PollerResponseClosedException extends PollerException {
+
 	public PollerResponseClosedException() {
 		super();
 	}
 
-	@Override
-	public String getMessage() {
-		return MESSAGE;
+	public PollerResponseClosedException(String msg) {
+		super(msg);
 	}
 
-	private static final String MESSAGE = "Unable to write to PollerResponse, response is closed";
+	public PollerResponseClosedException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public PollerResponseClosedException(Throwable cause) {
+		super(cause);
+	}
+
 }

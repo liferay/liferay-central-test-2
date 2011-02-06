@@ -18,15 +18,10 @@ package com.liferay.portal.kernel.poller.comet;
  * @author Edward Han
  */
 public class CometHandlerPoolUtil {
-	public CometHandlerPool getCometHandlerPool() {
-		return _cometHandlerPool;
-	}
 
-	public void setCometHandlerPool(CometHandlerPool cometHandlerPool) {
-		_cometHandlerPool = cometHandlerPool;
-	}
+	public static void closeCometHandler(String sessionId)
+		throws CometException {
 
-	public static void closeCometHandler(String sessionId) throws CometException {
 		_cometHandlerPool.closeCometHandler(sessionId);
 	}
 
@@ -45,5 +40,14 @@ public class CometHandlerPoolUtil {
 		_cometHandlerPool.startCometHandler(cometSession, cometHandler);
 	}
 
+	public CometHandlerPool getCometHandlerPool() {
+		return _cometHandlerPool;
+	}
+
+	public void setCometHandlerPool(CometHandlerPool cometHandlerPool) {
+		_cometHandlerPool = cometHandlerPool;
+	}
+
 	private static CometHandlerPool _cometHandlerPool;
+
 }

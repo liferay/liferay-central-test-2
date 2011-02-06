@@ -35,12 +35,11 @@ public class PollerCometHandler extends BaseCometHandler {
 		return new PollerCometHandler();
 	}
 
-	@Override
-	protected void doDestroy() throws Exception {
-		_pollerRequestHandler.shutdown();
+	public void receiveData(String data) {
 	}
 
-	public void receiveData(String data) {
+	protected void doDestroy() throws Exception {
+		_pollerRequestHandler.shutdown();
 	}
 
 	protected void doInit(CometSession cometSession) throws Exception {
@@ -65,4 +64,5 @@ public class PollerCometHandler extends BaseCometHandler {
 	}
 
 	private PollerRequestHandler _pollerRequestHandler;
+
 }

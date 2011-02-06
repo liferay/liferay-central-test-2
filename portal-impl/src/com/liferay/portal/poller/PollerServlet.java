@@ -75,23 +75,25 @@ public class PollerServlet extends HttpServlet {
 		PollerResponseWriter pollerResponseWriter =
 			new JSONPollerResponseWriter();
 
-		SynchronousPollerRequestHandlerListener completionListener =
-			new SynchronousPollerRequestHandlerListener();
+		SynchronousPollerRequestHandlerListener
+			synchronousPollerRequestHandlerListener =
+				new SynchronousPollerRequestHandlerListener();
 
-		List<PollerRequestHandlerListener> listeners =
+		List<PollerRequestHandlerListener> pollerRequestHandlerListeners =
 			new ArrayList<PollerRequestHandlerListener>(1);
 
-		listeners.add(completionListener);
+		pollerRequestHandlerListeners.add(
+			synchronousPollerRequestHandlerListener);
 
 		PollerRequestHandler pollerRequestHandler = new PollerRequestHandler(
 			request.getPathInfo(), pollerRequestString, pollerResponseWriter,
-			listeners);
+			pollerRequestHandlerListeners);
 
 		if (!pollerRequestHandler.processRequest()) {
 			return null;
 		}
 
-		completionListener.waitNotification(
+		synchronousPollerRequestHandlerListener.waitNotification(
 			PropsValues.POLLER_REQUEST_TIMEOUT);
 
 		pollerRequestHandler.shutdown();

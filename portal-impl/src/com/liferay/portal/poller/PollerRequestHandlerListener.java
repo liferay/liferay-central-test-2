@@ -18,5 +18,7 @@ package com.liferay.portal.poller;
  * @author Edward Han
  */
 public interface PollerRequestHandlerListener {
+
 	public void notifyHandlingComplete();
+
 }

@@ -29,11 +29,14 @@ public interface PollerResponse {
 
 	public void close();
 
-	public void setParameter(String name, JSONArray value) throws PollerResponseClosedException;
+	public void setParameter(String name, JSONArray value)
+		throws PollerResponseClosedException;
 
-	public void setParameter(String name, JSONObject value) throws PollerResponseClosedException;
+	public void setParameter(String name, JSONObject value)
+		throws PollerResponseClosedException;
 
-	public void setParameter(String name, String value) throws PollerResponseClosedException;
+	public void setParameter(String name, String value)
+		throws PollerResponseClosedException;
 
 	public void setResponseMessage(Message responseMessage);
 

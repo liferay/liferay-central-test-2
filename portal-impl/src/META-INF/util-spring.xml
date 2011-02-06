@@ -75,11 +75,6 @@
 			<bean class="com.liferay.portal.captcha.CaptchaImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.poller.comet.CometHandlerPoolUtil" class="com.liferay.portal.kernel.poller.comet.CometHandlerPoolUtil">
-		<property name="cometHandlerPool">
-			<bean class="com.liferay.portal.kernel.poller.comet.CometHandlerPool" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil">
 		<property name="mappingSqlQueryFactory">
 			<bean class="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" />
@@ -155,6 +150,11 @@
 	<bean id="com.liferay.portal.kernel.oauth.OAuthFactoryUtil" class="com.liferay.portal.kernel.oauth.OAuthFactoryUtil">
 		<property name="OAuthFactory">
 			<bean class="com.liferay.portal.oauth.OAuthFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.poller.comet.CometHandlerPoolUtil" class="com.liferay.portal.kernel.poller.comet.CometHandlerPoolUtil">
+		<property name="cometHandlerPool">
+			<bean class="com.liferay.portal.kernel.poller.comet.CometHandlerPool" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.sanitizer.SanitizerUtil" class="com.liferay.portal.kernel.sanitizer.SanitizerUtil">

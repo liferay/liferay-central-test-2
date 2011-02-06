@@ -56,12 +56,12 @@ public class PollerRequestHandler implements MessageListener {
 	public PollerRequestHandler(
 		String path, String pollerRequestString,
 		PollerResponseWriter pollerResponseWriter,
-		List<PollerRequestHandlerListener> listeners) {
+		List<PollerRequestHandlerListener> pollerRequestHandlerListeners) {
 
-		_listeners = listeners;
 		_path = path;
 		_pollerRequestString = fixPollerRequestString(pollerRequestString);
 		_pollerResponseWriter = pollerResponseWriter;
+		_pollerRequestHandlerListeners = pollerRequestHandlerListeners;
 		_receiveRequest = isReceiveRequest(_path);
 	}
 
@@ -196,29 +196,34 @@ public class PollerRequestHandler implements MessageListener {
 		}
 	}
 
-	public void shutdown() throws PollerException {
-		synchronized (this) {
-			if (_active) {
-				if (_receiveRequest) {
-					for (PollerRequestResponsePair pollerRequestResponsePair :
-						_pollerRequestResponsePairs.values()) {
-
-						pollerRequestResponsePair.getPollerResponse().close();
-					}
-
-					MessageBusUtil.unregisterMessageListener(
-						DestinationNames.POLLER_RESPONSE, this);
-				}
-
-				_pollerResponseWriter.close();
-
-				for (PollerRequestHandlerListener listener : _listeners) {
-					listener.notifyHandlingComplete();
-				}
-
-				_active = false;
-			}
+	public synchronized void shutdown() throws PollerException {
+		if (!_active) {
+			return;
 		}
+
+		if (_receiveRequest) {
+			for (PollerRequestResponsePair pollerRequestResponsePair :
+					_pollerRequestResponsePairs.values()) {
+
+				PollerResponse pollerResponse =
+					pollerRequestResponsePair.getPollerResponse();
+
+				pollerResponse.close();
+			}
+
+			MessageBusUtil.unregisterMessageListener(
+				DestinationNames.POLLER_RESPONSE, this);
+		}
+
+		_pollerResponseWriter.close();
+
+		for (PollerRequestHandlerListener pollerRequestHandlerListener :
+				_pollerRequestHandlerListeners) {
+
+			pollerRequestHandlerListener.notifyHandlingComplete();
+		}
+
+		_active = false;
 	}
 
 	protected void addPollerRequest(
@@ -365,7 +370,7 @@ public class PollerRequestHandler implements MessageListener {
 		}
 
 		for (PollerRequestResponsePair pollerRequestResponsePair :
-			_pollerRequestResponsePairs.values()) {
+				_pollerRequestResponsePairs.values()) {
 
 			PollerRequest pollerRequest =
 				pollerRequestResponsePair.getPollerRequest();
@@ -407,13 +412,12 @@ public class PollerRequestHandler implements MessageListener {
 
 	private static final String _PATH_RECEIVE = "/receive";
 
-	private static Log _log = LogFactoryUtil.getLog(
-		PollerRequestHandler.class);
+	private static Log _log = LogFactoryUtil.getLog(PollerRequestHandler.class);
 
 	private boolean _active = true;
-	private List<PollerRequestHandlerListener> _listeners =
-		new ArrayList<PollerRequestHandlerListener>();
 	private String _path;
+	private List<PollerRequestHandlerListener> _pollerRequestHandlerListeners =
+		new ArrayList<PollerRequestHandlerListener>();
 	private Map<String, PollerRequestResponsePair> _pollerRequestResponsePairs =
 		new HashMap<String, PollerRequestResponsePair>();
 	private String _pollerRequestString;
@@ -421,4 +425,5 @@ public class PollerRequestHandler implements MessageListener {
 	private boolean _receiveRequest;
 	private int _responseCount;
 	private Map<String, String> _responseIds = new HashMap<String, String>();
+
 }

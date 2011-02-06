@@ -20,24 +20,22 @@ package com.liferay.portal.poller;
 public class SynchronousPollerRequestHandlerListener
 	implements PollerRequestHandlerListener {
 
-	public void waitNotification(long timeout) {
-		synchronized (this) {
-			try {
-				if (!_complete) {
-					this.wait(timeout);
-				}
+	public synchronized void notifyHandlingComplete() {
+		_complete = true;
+
+		this.notify();
+	}
+
+	public synchronized void waitNotification(long timeout) {
+		try {
+			if (!_complete) {
+				this.wait(timeout);
 			}
-			catch (InterruptedException ie) {
-			}
+		}
+		catch (InterruptedException ie) {
 		}
 	}
 
-	public void notifyHandlingComplete() {
-		synchronized (this) {
-			_complete = true;
-			this.notify();
-		}
-	}
+	private boolean _complete;
 
-	private boolean _complete = false;
 }

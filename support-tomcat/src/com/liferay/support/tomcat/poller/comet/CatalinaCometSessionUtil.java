@@ -14,13 +14,19 @@
 
 package com.liferay.support.tomcat.poller.comet;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.catalina.CometEvent;
 
 /**
  * @author Edward Han
  */
 public class CatalinaCometSessionUtil {
+
 	public static String getSessionId(CometEvent cometEvent) {
-		return cometEvent.getHttpServletResponse().toString();
+		HttpServletResponse response = cometEvent.getHttpServletResponse();
+
+		return response.toString();
 	}
+
 }

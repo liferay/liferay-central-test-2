@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.poller.PollerResponse;
  * @author Edward Han
  */
 public class PollerRequestResponsePair {
+
 	public PollerRequestResponsePair(PollerRequest pollerRequest) {
 		_pollerRequest = pollerRequest;
 	}
@@ -36,12 +37,12 @@ public class PollerRequestResponsePair {
 		return _pollerRequest;
 	}
 
-	public void setPollerRequest(PollerRequest pollerRequest) {
-		_pollerRequest = pollerRequest;
-	}
-
 	public PollerResponse getPollerResponse() {
 		return _pollerResponse;
+	}
+
+	public void setPollerRequest(PollerRequest pollerRequest) {
+		_pollerRequest = pollerRequest;
 	}
 
 	public void setPollerResponse(PollerResponse pollerResponse) {
@@ -49,5 +50,6 @@ public class PollerRequestResponsePair {
 	}
 
 	private PollerRequest _pollerRequest;
-	private PollerResponse _pollerResponse = null;
+	private PollerResponse _pollerResponse;
+
 }

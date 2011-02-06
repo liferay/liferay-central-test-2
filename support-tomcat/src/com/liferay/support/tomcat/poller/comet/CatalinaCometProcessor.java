@@ -169,10 +169,11 @@ public class CatalinaCometProcessor
 
 		CometSession cometSession = new CatalinaCometSession(cometEvent);
 
-		String sessionId = CatalinaCometSessionUtil.getSessionId(cometEvent);
-
 		cometSession.setCometRequest(new CatalinaCometRequest(cometEvent));
 		cometSession.setCometResponse(new CatalinaCometResponse(cometEvent));
+
+		String sessionId = CatalinaCometSessionUtil.getSessionId(cometEvent);
+
 		cometSession.setSessionId(sessionId);
 
 		CometHandler cometHandler = _cometHandler.clone();

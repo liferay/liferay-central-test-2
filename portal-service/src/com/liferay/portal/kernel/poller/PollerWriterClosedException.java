@@ -18,14 +18,21 @@ package com.liferay.portal.kernel.poller;
  * @author Edward Han
  */
 public class PollerWriterClosedException extends PollerException {
+
 	public PollerWriterClosedException() {
 		super();
 	}
 
-	@Override
-	public String getMessage() {
-		return MESSAGE;
+	public PollerWriterClosedException(String msg) {
+		super(msg);
 	}
 
-	private static final String MESSAGE = "Poller writer already closed";
+	public PollerWriterClosedException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public PollerWriterClosedException(Throwable cause) {
+		super(cause);
+	}
+
 }

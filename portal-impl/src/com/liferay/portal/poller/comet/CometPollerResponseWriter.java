@@ -14,7 +14,7 @@
 
 package com.liferay.portal.poller.comet;
 
-import com.liferay.portal.kernel.poller.PollerException;
+import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.poller.comet.CometResponse;
 import com.liferay.portal.kernel.poller.comet.CometSession;
 import com.liferay.portal.poller.JSONPollerResponseWriter;
@@ -29,17 +29,14 @@ public class CometPollerResponseWriter extends JSONPollerResponseWriter {
 		_cometSession = cometSession;
 	}
 
-	@Override
-	protected void doClose() throws PollerException {
-		try {
-			CometResponse cometResponse = _cometSession.getCometResponse();
+	protected void doClose() throws Exception {
+		CometResponse cometResponse = _cometSession.getCometResponse();
 
-			cometResponse.writeData(getJSONArray().toString());
-		}
-		catch (Exception e) {
-			throw new PollerException(e);
-		}
+		JSONArray jsonArray = getJSONArray();
+
+		cometResponse.writeData(jsonArray.toString());
 	}
 
 	private CometSession _cometSession;
+
 }
