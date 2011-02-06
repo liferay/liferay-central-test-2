@@ -244,7 +244,7 @@ public class CreateAccountAction extends PortletAction {
 			CaptchaUtil.check(actionRequest);
 		}
 
-		User user = UserServiceUtil.addUser(
+		User user = UserServiceUtil.addUserWithWorkflow(
 			company.getCompanyId(), autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			themeDisplay.getLocale(), firstName, middleName, lastName, prefixId,

@@ -354,7 +354,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			boolean sendEmail = false;
 			ServiceContext serviceContext = new ServiceContext();
 
-			userLocalService.addUserBypassWorkflow(
+			userLocalService.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
 				autoScreenName, screenName, emailAddress, facebookId, openId,
 				locale, firstName, middleName, lastName, prefixId, suffixId,

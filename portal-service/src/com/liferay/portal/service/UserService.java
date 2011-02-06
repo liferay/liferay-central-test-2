@@ -94,7 +94,7 @@ public interface UserService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.User addUserBypassWorkflow(long companyId,
+	public com.liferay.portal.model.User addUserWithWorkflow(long companyId,
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -113,7 +113,7 @@ public interface UserService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portal.model.User addUserBypassWorkflow(long companyId,
+	public com.liferay.portal.model.User addUserWithWorkflow(long companyId,
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,

@@ -376,9 +376,7 @@ public class EditUserAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
 
-		User user = null;
-
-		user = UserServiceUtil.addUserBypassWorkflow(
+		User user = UserServiceUtil.addUser(
 			themeDisplay.getCompanyId(), autoPassword, password1, password2,
 			autoScreenName, screenName, emailAddress, facebookId, openId,
 			LocaleUtil.getDefault(), firstName, middleName, lastName, prefixId,

@@ -297,7 +297,7 @@ public class OpenIdAction extends PortletAction {
 
 			ServiceContext serviceContext = new ServiceContext();
 
-			user = UserLocalServiceUtil.addUserBypassWorkflow(
+			user = UserLocalServiceUtil.addUser(
 				creatorUserId, companyId, autoPassword, password1, password2,
 				autoScreenName, screenName, emailAddress, facebookId, openId,
 				locale, firstName, middleName, lastName, prefixId, suffixId,

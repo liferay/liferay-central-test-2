@@ -328,7 +328,7 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.model.User addUserBypassWorkflow(
+	public static com.liferay.portal.model.User addUserWithWorkflow(
 		HttpPrincipal httpPrincipal, long companyId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean autoScreenName, java.lang.String screenName,
@@ -349,8 +349,7 @@ public class UserServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
-					"addUserBypassWorkflow",
-					_addUserBypassWorkflowParameterTypes7);
+					"addUserWithWorkflow", _addUserWithWorkflowParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, autoPassword, password1, password2,
@@ -387,7 +386,7 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.model.User addUserBypassWorkflow(
+	public static com.liferay.portal.model.User addUserWithWorkflow(
 		HttpPrincipal httpPrincipal, long companyId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
 		boolean autoScreenName, java.lang.String screenName,
@@ -403,8 +402,7 @@ public class UserServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(UserServiceUtil.class.getName(),
-					"addUserBypassWorkflow",
-					_addUserBypassWorkflowParameterTypes8);
+					"addUserWithWorkflow", _addUserWithWorkflowParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					companyId, autoPassword, password1, password2,
@@ -1796,7 +1794,7 @@ public class UserServiceHttp {
 			long[].class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _addUserBypassWorkflowParameterTypes7 = new Class[] {
+	private static final Class<?>[] _addUserWithWorkflowParameterTypes7 = new Class[] {
 			long.class, boolean.class, java.lang.String.class,
 			java.lang.String.class, boolean.class, java.lang.String.class,
 			java.lang.String.class, long.class, java.lang.String.class,
@@ -1809,7 +1807,7 @@ public class UserServiceHttp {
 			java.util.List.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _addUserBypassWorkflowParameterTypes8 = new Class[] {
+	private static final Class<?>[] _addUserWithWorkflowParameterTypes8 = new Class[] {
 			long.class, boolean.class, java.lang.String.class,
 			java.lang.String.class, boolean.class, java.lang.String.class,
 			java.lang.String.class, long.class, java.lang.String.class,

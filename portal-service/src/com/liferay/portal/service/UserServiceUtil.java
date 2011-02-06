@@ -117,7 +117,7 @@ public class UserServiceUtil {
 			organizationIds, roleIds, userGroupIds, sendEmail, serviceContext);
 	}
 
-	public static com.liferay.portal.model.User addUserBypassWorkflow(
+	public static com.liferay.portal.model.User addUserWithWorkflow(
 		long companyId, boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -136,7 +136,7 @@ public class UserServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addUserBypassWorkflow(companyId, autoPassword, password1,
+				   .addUserWithWorkflow(companyId, autoPassword, password1,
 			password2, autoScreenName, screenName, emailAddress, facebookId,
 			openId, locale, firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
@@ -145,7 +145,7 @@ public class UserServiceUtil {
 			serviceContext);
 	}
 
-	public static com.liferay.portal.model.User addUserBypassWorkflow(
+	public static com.liferay.portal.model.User addUserWithWorkflow(
 		long companyId, boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -159,7 +159,7 @@ public class UserServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addUserBypassWorkflow(companyId, autoPassword, password1,
+				   .addUserWithWorkflow(companyId, autoPassword, password1,
 			password2, autoScreenName, screenName, emailAddress, facebookId,
 			openId, locale, firstName, middleName, lastName, prefixId,
 			suffixId, male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,

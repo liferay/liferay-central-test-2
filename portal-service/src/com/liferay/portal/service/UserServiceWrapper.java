@@ -106,7 +106,7 @@ public class UserServiceWrapper implements UserService {
 			serviceContext);
 	}
 
-	public com.liferay.portal.model.User addUserBypassWorkflow(long companyId,
+	public com.liferay.portal.model.User addUserWithWorkflow(long companyId,
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -124,7 +124,7 @@ public class UserServiceWrapper implements UserService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _userService.addUserBypassWorkflow(companyId, autoPassword,
+		return _userService.addUserWithWorkflow(companyId, autoPassword,
 			password1, password2, autoScreenName, screenName, emailAddress,
 			facebookId, openId, locale, firstName, middleName, lastName,
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
@@ -133,7 +133,7 @@ public class UserServiceWrapper implements UserService {
 			announcementsDelivers, serviceContext);
 	}
 
-	public com.liferay.portal.model.User addUserBypassWorkflow(long companyId,
+	public com.liferay.portal.model.User addUserWithWorkflow(long companyId,
 		boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -146,7 +146,7 @@ public class UserServiceWrapper implements UserService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _userService.addUserBypassWorkflow(companyId, autoPassword,
+		return _userService.addUserWithWorkflow(companyId, autoPassword,
 			password1, password2, autoScreenName, screenName, emailAddress,
 			facebookId, openId, locale, firstName, middleName, lastName,
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,

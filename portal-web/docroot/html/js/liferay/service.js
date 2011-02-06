@@ -358,7 +358,7 @@ Liferay.Service.registerClass(
 		addRoleUsers: true,
 		addTeamUsers: true,
 		addUser: true,
-		addUserBypassWorkflow: true,
+		addUserWithWorkflow: true,
 		addUserGroupUsers: true,
 		deletePortrait: true,
 		deleteRoleUser: true,

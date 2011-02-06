@@ -201,7 +201,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap addUserBypassWorkflow(
+	public static com.liferay.portal.model.UserSoap addUserWithWorkflow(
 		long companyId, boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -219,7 +219,7 @@ public class UserServiceSoap {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.User returnValue = UserServiceUtil.addUserBypassWorkflow(companyId,
+			com.liferay.portal.model.User returnValue = UserServiceUtil.addUserWithWorkflow(companyId,
 					autoPassword, password1, password2, autoScreenName,
 					screenName, emailAddress, facebookId, openId,
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
@@ -246,7 +246,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserSoap addUserBypassWorkflow(
+	public static com.liferay.portal.model.UserSoap addUserWithWorkflow(
 		long companyId, boolean autoPassword, java.lang.String password1,
 		java.lang.String password2, boolean autoScreenName,
 		java.lang.String screenName, java.lang.String emailAddress,
@@ -259,7 +259,7 @@ public class UserServiceSoap {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.User returnValue = UserServiceUtil.addUserBypassWorkflow(companyId,
+			com.liferay.portal.model.User returnValue = UserServiceUtil.addUserWithWorkflow(companyId,
 					autoPassword, password1, password2, autoScreenName,
 					screenName, emailAddress, facebookId, openId,
 					LocaleUtil.fromLanguageId(locale), firstName, middleName,
