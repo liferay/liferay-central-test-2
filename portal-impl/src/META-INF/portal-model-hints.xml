@@ -2234,33 +2234,4 @@
 			<hint name="max-length">255</hint>
 		</field>
 	</model>
-	<model name="com.liferay.portlet.forms.model.FormsStructureEntry">
-		<field name="uuid" type="String" />
-		<field name="id" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="formStructureId" type="String">
-			<hint name="upper-case">true</hint>
-			<hint name="auto-escape">false</hint>
-		</field>
-		<field name="name" type="String">
-			<validator name="required" />
-		</field>
-		<field name="description" type="String">
-			<hint-collection name="TEXTAREA" />
-		</field>
-		<field name="xsd" type="String">
-			<hint-collection name="CLOB" />
-		</field>
-	</model>
-	<model name="com.liferay.portlet.forms.model.FormsStructureEntryLink">
-		<field name="formStructureLinkId" type="long" />
-		<field name="formStructureId" type="String" />
-		<field name="className" type="String" />
-		<field name="classPK" type="long" />
-	</model>
 </model-hints>

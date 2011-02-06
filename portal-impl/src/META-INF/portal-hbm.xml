@@ -147,8 +147,6 @@
 	<import class="com.liferay.portlet.wiki.model.WikiNode" />
 	<import class="com.liferay.portlet.wiki.model.WikiPage" />
 	<import class="com.liferay.portlet.wiki.model.WikiPageResource" />
-	<import class="com.liferay.portlet.forms.model.FormsStructureEntry" />
-	<import class="com.liferay.portlet.forms.model.FormsStructureEntryLink" />
 	<class name="com.liferay.portal.model.impl.AccountImpl" table="Account_">
 		<cache usage="read-write" />
 		<id name="accountId" type="long">
@@ -2260,31 +2258,5 @@
 			<generator class="assigned" />
 		</id>
 		<property name="currentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-	</class>
-	<class name="com.liferay.portlet.forms.model.impl.FormsStructureEntryImpl" table="FormsStructureEntry">
-		<cache usage="read-write" />
-		<id name="id" column="id_" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="formStructureId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="xsd" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
-	<class name="com.liferay.portlet.forms.model.impl.FormsStructureEntryLinkImpl" table="FormsStructureEntryLink">
-		<cache usage="read-write" />
-		<id name="formStructureLinkId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="formStructureId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="className" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>
