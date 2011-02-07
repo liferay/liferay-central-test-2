@@ -53,18 +53,23 @@ public class ServiceContextFactory {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		serviceContext.setCompanyId(themeDisplay.getCompanyId());
-		serviceContext.setLanguageId(themeDisplay.getLanguageId());
-		serviceContext.setLayoutFullURL(
-			PortalUtil.getLayoutFullURL(themeDisplay));
-		serviceContext.setLayoutURL(PortalUtil.getLayoutURL(themeDisplay));
-		serviceContext.setPathMain(PortalUtil.getPathMain());
-		serviceContext.setPlid(themeDisplay.getPlid());
-		serviceContext.setPortalURL(PortalUtil.getPortalURL(request));
-		serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
-		serviceContext.setUserDisplayURL(
-			themeDisplay.getUser().getDisplayURL(themeDisplay));
-		serviceContext.setUserId(themeDisplay.getUserId());
+		if (themeDisplay != null) {
+			serviceContext.setCompanyId(themeDisplay.getCompanyId());
+			serviceContext.setLanguageId(themeDisplay.getLanguageId());
+			serviceContext.setLayoutFullURL(
+				PortalUtil.getLayoutFullURL(themeDisplay));
+			serviceContext.setLayoutURL(PortalUtil.getLayoutURL(themeDisplay));
+			serviceContext.setPathMain(PortalUtil.getPathMain());
+			serviceContext.setPlid(themeDisplay.getPlid());
+			serviceContext.setPortalURL(PortalUtil.getPortalURL(request));
+			serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
+			serviceContext.setUserDisplayURL(
+				themeDisplay.getUser().getDisplayURL(themeDisplay));
+			serviceContext.setUserId(themeDisplay.getUserId());
+		}
+		else {
+			serviceContext.setCompanyId(PortalUtil.getCompanyId(request));
+		}
 
 		// Attributes
 

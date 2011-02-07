@@ -12,17 +12,15 @@
  * details.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portal.model;
 
+import com.liferay.portal.NoSuchLayoutRevisionException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutRevision;
-import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -72,10 +70,21 @@ public class LayoutStagingHandler implements InvocationHandler {
 				return _toEscapedModel();
 			}
 
+			if (methodName.equals("clone")) {
+				return _clone();
+			}
+
 			Object bean = _layout;
 
 			if (_layoutRevisionMethodNames.contains(methodName)) {
-				bean = _layoutRevision;
+				try {
+					method = _layoutRevision.getClass().getMethod(
+						methodName, _getParameterTypes(args));
+
+					bean = _layoutRevision;
+				}
+				catch (NoSuchMethodException nsme) {
+				}
 			}
 
 			return method.invoke(bean, args);
@@ -96,7 +105,7 @@ public class LayoutStagingHandler implements InvocationHandler {
 		catch (Exception e) {
 			_log.error(e, e);
 
-			throw new IllegalStateException();
+			throw new IllegalStateException(e);
 		}
 	}
 
@@ -108,31 +117,117 @@ public class LayoutStagingHandler implements InvocationHandler {
 			return layoutRevision;
 		}
 
+		long layoutRevisionId = 0;
+		long layoutSetBranchId = 0;
+
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		long layoutRevisionId = ParamUtil.getLong(
-			serviceContext, "layoutRevisionId");
+		if (serviceContext != null) {
+			layoutRevisionId = ParamUtil.getLong(
+				serviceContext, "layoutRevisionId");
+			layoutSetBranchId = ParamUtil.getLong(
+				serviceContext, "layoutSetBranchId");
+		}
 
 		if (layoutRevisionId > 0) {
 			return LayoutRevisionLocalServiceUtil.getLayoutRevision(
 				layoutRevisionId);
 		}
 
-		long layoutSetBranchId = ParamUtil.getLong(
-			serviceContext, "layoutSetBranchId");
+		LayoutSetBranch layoutSetBranch = null;
 
 		if (layoutSetBranchId > 0) {
-			return LayoutRevisionLocalServiceUtil.getLayoutRevision(
-				layoutSetBranchId, layout.getPlid(), true);
+			layoutSetBranch =
+				LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
+					layoutSetBranchId);
+
+			try {
+				return LayoutRevisionLocalServiceUtil.getLayoutRevision(
+					layoutSetBranch.getLayoutSetBranchId(), layout.getPlid(),
+					true);
+			}
+			catch (NoSuchLayoutRevisionException nslre) {
+				// this branch doesn't have this layout in it
+			}
+		}
+		else {
+			layoutSetBranch =
+				LayoutSetBranchLocalServiceUtil.getMasterLayoutSetBranch(
+					layout.getGroupId(), layout.isPrivateLayout());
 		}
 
-		LayoutSetBranch layoutSetBranch =
-			LayoutSetBranchLocalServiceUtil.getMasterLayoutSetBranch(
-				layout.getGroupId(), layout.isPrivateLayout());
+		try {
+			layoutRevision = LayoutRevisionLocalServiceUtil.getLayoutRevision(
+				layoutSetBranch.getLayoutSetBranchId(), layout.getPlid(), true);
+		}
+		catch (NoSuchLayoutRevisionException nslre) {
+			if (layoutSetBranchId <= 0) {
+				layoutSetBranchId = layoutSetBranch.getLayoutSetBranchId();
+			}
 
-		return LayoutRevisionLocalServiceUtil.getLayoutRevision(
-			layoutSetBranch.getLayoutSetBranchId(), layout.getPlid(), true);
+			layoutRevision = LayoutRevisionLocalServiceUtil.addLayoutRevision(
+				serviceContext.getUserId(), layoutSetBranchId,
+				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, true,
+				layout.getPlid(), layout.getName(), layout.getTitle(),
+				layout.getDescription(), layout.getTypeSettings(),
+				layout.getIconImage(), layout.getIconImageId(),
+				layout.getThemeId(), layout.getColorSchemeId(),
+				layout.getWapThemeId(), layout.getWapColorSchemeId(),
+				layout.getCss(), serviceContext);
+		}
+
+		return layoutRevision;
+	}
+
+	protected Class<?>[] _getParameterTypes(Object[] arguments) {
+		if (arguments == null) {
+			return null;
+		}
+
+		Class<?>[] parameterTypes = new Class<?>[arguments.length];
+
+		for (int i = 0; i < arguments.length; i++) {
+			if (arguments[i] == null) {
+				parameterTypes[i] = null;
+			}
+			else if (arguments[i] instanceof Boolean) {
+				parameterTypes[i] = Boolean.TYPE;
+			}
+			else if (arguments[i] instanceof Byte) {
+				parameterTypes[i] = Byte.TYPE;
+			}
+			else if (arguments[i] instanceof Character) {
+				parameterTypes[i + 1] = Character.TYPE;
+			}
+			else if (arguments[i] instanceof Double) {
+				parameterTypes[i] = Double.TYPE;
+			}
+			else if (arguments[i] instanceof Float) {
+				parameterTypes[i] = Float.TYPE;
+			}
+			else if (arguments[i] instanceof Integer) {
+				parameterTypes[i] = Integer.TYPE;
+			}
+			else if (arguments[i] instanceof Long) {
+				parameterTypes[i] = Long.TYPE;
+			}
+			else if (arguments[i] instanceof Short) {
+				parameterTypes[i] = Short.TYPE;
+			}
+			else {
+				parameterTypes[i] = arguments[i].getClass();
+			}
+		}
+
+		return parameterTypes;
+	}
+
+	private Object _clone() {
+		return Proxy.newProxyInstance(
+			PortalClassLoaderUtil.getClassLoader(),
+			new Class[] {Layout.class},
+			new LayoutStagingHandler(_layout, _layoutRevision));
 	}
 
 	private Object _toEscapedModel() {

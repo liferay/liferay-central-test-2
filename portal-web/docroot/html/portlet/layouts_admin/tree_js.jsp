@@ -98,6 +98,10 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 					newNode.label = TreeUtil.getNodeLabel(xmlDoc);
 
+					if (node.layoutRevisionId) {
+						newNode.label = [newNode.label, " [", node.layoutSetBranchName, " ", node.layoutRevisionId, "]"].join('');
+					}
+
 					if (!<%= selectableTree %>) {
 						newNode.label = TreeUtil.createLink(newNode.label, node.plid);
 					}

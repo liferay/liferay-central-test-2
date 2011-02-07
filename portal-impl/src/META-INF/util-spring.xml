@@ -179,6 +179,11 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.staging.LayoutStagingUtil" class="com.liferay.portal.kernel.staging.LayoutStagingUtil">
+		<property name="layoutStaging">
+			<bean class="com.liferay.portal.staging.LayoutStagingImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.staging.StagingUtil" class="com.liferay.portal.kernel.staging.StagingUtil">
 		<property name="staging">
 			<bean class="com.liferay.portal.staging.StagingImpl" />

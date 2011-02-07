@@ -14,13 +14,14 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.kernel.staging.LayoutStagingUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutRevision;
-import com.liferay.portal.model.impl.LayoutStagingHandler;
+import com.liferay.portal.model.LayoutStagingHandler;
 
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
 import java.util.ArrayList;
@@ -48,21 +49,6 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 		}
 	}
 
-	protected LayoutStagingHandler getLayoutStagingHandler(Layout layout) {
-		if (!Proxy.isProxyClass(layout.getClass())) {
-			return null;
-		}
-
-		InvocationHandler invocationHandler = Proxy.getInvocationHandler(
-			layout);
-
-		if (!(invocationHandler instanceof LayoutStagingHandler)) {
-			return null;
-		}
-
-		return (LayoutStagingHandler)invocationHandler;
-	}
-
 	protected boolean isStagingLayout(Layout layout) {
 		try {
 			Group group = layout.getGroup();
@@ -71,7 +57,21 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 				group = group.getLiveGroup();
 			}
 
-			if (group.isStaged()) {
+			UnicodeProperties typeSettingsProperties =
+				group.getTypeSettingsProperties();
+
+			boolean branchingEnabled = false;
+
+			if (layout.isPrivateLayout()) {
+				branchingEnabled = GetterUtil.getBoolean(
+					typeSettingsProperties.getProperty("branchingPrivate"));
+			}
+			else {
+				branchingEnabled = GetterUtil.getBoolean(
+					typeSettingsProperties.getProperty("branchingPublic"));
+			}
+
+			if (group.isStaged() && branchingEnabled) {
 				return true;
 			}
 
@@ -83,8 +83,8 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 	}
 
 	protected Layout unwrapLayout(Layout layout) {
-		LayoutStagingHandler layoutStagingHandler = getLayoutStagingHandler(
-			layout);
+		LayoutStagingHandler layoutStagingHandler =
+			LayoutStagingUtil.getLayoutStagingHandler(layout);
 
 		if (layoutStagingHandler == null) {
 			return layout;
@@ -93,25 +93,12 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 		return layoutStagingHandler.getLayout();
 	}
 
-	protected LayoutRevision unwrapLayoutRevision(Layout layout) {
-		LayoutStagingHandler layoutStagingHandler = getLayoutStagingHandler(
-			layout);
-
-		if (layoutStagingHandler == null) {
-			return null;
-		}
-
-		return layoutStagingHandler.getLayoutRevision();
-	}
-
 	protected Layout wrapLayout(Layout layout) {
-		if (Proxy.isProxyClass(layout.getClass())) {
-			InvocationHandler invocationHandler = Proxy.getInvocationHandler(
-				layout);
+		LayoutStagingHandler layoutStagingHandler =
+			LayoutStagingUtil.getLayoutStagingHandler(layout);
 
-			if (invocationHandler instanceof LayoutStagingHandler) {
-				return layout;
-			}
+		if (layoutStagingHandler != null) {
+			return layout;
 		}
 
 		if (!isStagingLayout(layout)) {
@@ -146,7 +133,7 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 			wrappedLayouts.add(wrapLayout(layout));
 		}
 
-		return layouts;
+		return wrappedLayouts;
 	}
 
 	protected Object wrapReturnValue(Object returnValue) {

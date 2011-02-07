@@ -17,9 +17,13 @@ package com.liferay.portlet.layoutsadmin.action;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.staging.LayoutStagingUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutRevision;
+import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.PropsValues;
 
@@ -56,6 +60,23 @@ public class GetLayoutsAction extends JSONAction {
 			jsonObject.put("priority", layout.getPriority());
 			jsonObject.put("privateLayout", layout.getPrivateLayout());
 			jsonObject.put("type", layout.getType());
+
+			LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
+				layout);
+
+			if (layoutRevision != null) {
+				long layoutSetBranchId = layoutRevision.getLayoutSetBranchId();
+
+				LayoutSetBranch layoutSetBranch =
+					LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
+						layoutSetBranchId);
+
+				jsonObject.put("layoutSetBranchId", layoutSetBranchId);
+				jsonObject.put(
+					"layoutSetBranchName", layoutSetBranch.getName());
+				jsonObject.put(
+					"layoutRevisionId", layoutRevision.getLayoutRevisionId());
+			}
 
 			jsonArray.put(jsonObject);
 		}

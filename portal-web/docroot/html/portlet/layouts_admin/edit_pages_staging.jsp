@@ -116,6 +116,12 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-work
 	<div class='<%= (liveGroup.isStaged() ? StringPool.BLANK : "aui-helper-hidden") %>' id="<portlet:namespace />stagedPortlets">
 		<br />
 
+		<aui:fieldset label="versioning-and-branching">
+			<aui:input inlineLabel="right" label="enabled-on-public-pages" name="branchingPublic" type="checkbox" value='<%= GetterUtil.getBoolean(liveGroupTypeSettings.getProperty("branchingPublic")) %>' />
+
+			<aui:input inlineLabel="right" label="enabled-on-private-pages" name="branchingPrivate" type="checkbox" value='<%= GetterUtil.getBoolean(liveGroupTypeSettings.getProperty("branchingPrivate")) %>' />
+		</aui:fieldset>
+
 		<aui:fieldset label="staged-portlets">
 			<div class="portlet-msg-alert">
 				<liferay-ui:message key="staged-portlets-alert" />

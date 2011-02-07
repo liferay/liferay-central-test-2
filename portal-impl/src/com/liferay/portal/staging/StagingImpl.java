@@ -84,8 +84,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -378,10 +378,6 @@ public class StagingImpl implements Staging {
 			liveGroup.getTypeSettingsProperties();
 
 		typeSettingsProperties.setProperty(
-			"branchingPrivate", String.valueOf(branchingPrivate));
-		typeSettingsProperties.setProperty(
-			"branchingPublic", String.valueOf(branchingPublic));
-		typeSettingsProperties.setProperty(
 			"staged", Boolean.TRUE.toString());
 		typeSettingsProperties.setProperty(
 			"stagedRemotely", String.valueOf(false));
@@ -398,6 +394,30 @@ public class StagingImpl implements Staging {
 				liveGroup.getDescription(), liveGroup.getType(),
 				liveGroup.getFriendlyURL(), liveGroup.isActive(),
 				serviceContext);
+
+			if (branchingPublic) {
+				typeSettingsProperties.setProperty(
+					"branchingPublic", String.valueOf(branchingPublic));
+
+				LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
+					userId, stagingGroup.getGroupId(), false,
+					LayoutSetBranchConstants.MASTER_BRANCH_NAME,
+					LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
+						" branch of ").concat(
+							stagingGroup.getDescriptiveName()), serviceContext);
+			}
+
+			if (branchingPrivate) {
+				typeSettingsProperties.setProperty(
+					"branchingPrivate", String.valueOf(branchingPrivate));
+
+				LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
+					userId, stagingGroup.getGroupId(), true,
+					LayoutSetBranchConstants.MASTER_BRANCH_NAME,
+					LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
+						" branch of ").concat(
+							stagingGroup.getDescriptiveName()), serviceContext);
+			}
 
 			GroupLocalServiceUtil.updateGroup(
 				liveGroup.getGroupId(), typeSettingsProperties.toString());
@@ -416,24 +436,6 @@ public class StagingImpl implements Staging {
 				publishLayouts(
 					userId, liveGroup.getGroupId(), stagingGroup.getGroupId(),
 					false, parameterMap, null, null);
-			}
-
-			if (branchingPublic) {
-				LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
-					userId, stagingGroup.getGroupId(), false,
-					LayoutSetBranchConstants.MASTER_BRANCH_NAME,
-					LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
-						" branch of ").concat(
-							stagingGroup.getDescriptiveName()), serviceContext);
-			}
-
-			if (branchingPrivate) {
-				LayoutSetBranchLocalServiceUtil.addLayoutSetBranch(
-					userId, stagingGroup.getGroupId(), true,
-					LayoutSetBranchConstants.MASTER_BRANCH_NAME,
-					LayoutSetBranchConstants.MASTER_BRANCH_NAME.concat(
-						" branch of ").concat(
-							stagingGroup.getDescriptiveName()), serviceContext);
 			}
 		}
 		else {
