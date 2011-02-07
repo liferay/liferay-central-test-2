@@ -91,6 +91,20 @@ if (row == null) {
 		/>
 	</c:if>
 
+	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_STAGING) || OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
+		<portlet:renderURL var="editSettingsURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_settings" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon
+			image="configuration"
+			message="site-settings"
+			url="<%= editSettingsURL %>"
+		/>
+	</c:if>
+
 	<c:if test='<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_TEAMS) %>'>
 		<portlet:renderURL var="manageTeamsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/view_teams" />

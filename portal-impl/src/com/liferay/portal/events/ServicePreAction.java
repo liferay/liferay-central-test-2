@@ -1621,6 +1621,15 @@ public class ServicePreAction extends Action {
 				}
 			}
 
+			boolean hasManageSiteSettingsPermission =
+				!group.isControlPanel() && !group.isUser() &&
+				!group.isUserGroup() &&
+				(GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.MANAGE_STAGING) ||
+				GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(), ActionKeys.UPDATE));
+
 			boolean hasManageLayoutsPermission =
 				GroupPermissionUtil.contains(
 					permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS);
@@ -1640,6 +1649,26 @@ public class ServicePreAction extends Action {
 
 			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
 				controlPanelGroup.getGroupId(), true);
+
+			if (hasManageSiteSettingsPermission) {
+				themeDisplay.setShowSiteSettingsIcon(true);
+
+				PortletURL siteSettingsURL = new PortletURLImpl(
+					request, PortletKeys.SITE_SETTINGS, controlPanelPlid,
+					PortletRequest.RENDER_PHASE);
+
+				siteSettingsURL.setWindowState(LiferayWindowState.POP_UP);
+				siteSettingsURL.setPortletMode(PortletMode.VIEW);
+
+				siteSettingsURL.setParameter(
+					"struts_action", "/site_settings/edit_settings");
+
+				siteSettingsURL.setParameter("redirect", currentURL);
+				siteSettingsURL.setParameter(
+					"groupId", String.valueOf(scopeGroupId));
+
+				themeDisplay.setURLSiteSettings(siteSettingsURL);
+			}
 
 			if (hasManageLayoutsPermission) {
 				themeDisplay.setShowPageSettingsIcon(true);

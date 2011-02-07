@@ -67,6 +67,20 @@ String tabs1 = (String)objArray[1];
 		/>
 	</c:if>
 
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.UPDATE) %>">
+		<portlet:renderURL var="editSettingsURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_settings" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon
+			image="configuration"
+			message="site-settings"
+			url="<%= editSettingsURL %>"
+		/>
+	</c:if>
+
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_TEAMS) %>">
 		<portlet:renderURL var="manageTeamsURL">
 			<portlet:param name="struts_action" value="/communities/view_teams" />

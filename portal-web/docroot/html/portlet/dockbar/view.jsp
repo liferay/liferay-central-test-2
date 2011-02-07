@@ -104,7 +104,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 			</li>
 		</c:if>
 
-		<c:if test="<%= !group.isControlPanel() && themeDisplay.isShowControlPanelIcon() || themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon() %>">
+		<c:if test="<%= !group.isControlPanel() && themeDisplay.isShowControlPanelIcon() || themeDisplay.isShowPageSettingsIcon() || themeDisplay.isShowSiteSettingsIcon() || themeDisplay.isShowLayoutTemplatesIcon() %>">
 			<li class="manage-content has-submenu" id="<portlet:namespace />manageContent">
 				<a class="menu-button" href="javascript:;">
 					<span>
@@ -135,17 +135,14 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 								</li>
 							</c:if>
 
-							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
+							<c:if test="<%= themeDisplay.isShowSiteSettingsIcon() && !group.isLayoutPrototype() %>">
 
 								<%
-								String pageSettingsURL = themeDisplay.getURLPageSettings().toString();
-
-								pageSettingsURL = HttpUtil.removeParameter(pageSettingsURL, "tabs1");
-								pageSettingsURL = HttpUtil.setParameter(pageSettingsURL, PortalUtil.getPortletNamespace(PortletKeys.LAYOUTS_ADMIN) + "tabs1", "settings");
+								String siteSettingsURL = themeDisplay.getURLSiteSettings().toString();
 								%>
 
 								<li class="settings use-dialog">
-									<aui:a href="<%= pageSettingsURL %>" label="settings" title="manage-settings" />
+									<aui:a href="<%= siteSettingsURL %>" label="site-settings" title="manage-site-settings" />
 								</li>
 							</c:if>
 
