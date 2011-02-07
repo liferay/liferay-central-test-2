@@ -94,6 +94,7 @@ public class LoginAction extends PortletAction {
 				}
 				else {
 					_log.error(e, e);
+
 					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 			}
@@ -110,6 +111,7 @@ public class LoginAction extends PortletAction {
 			}
 			else {
 				_log.error(e, e);
+
 				PortalUtil.sendError(e, actionRequest, actionResponse);
 			}
 		}
@@ -176,4 +178,5 @@ public class LoginAction extends PortletAction {
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 	private static Log _log = LogFactoryUtil.getLog(LoginAction.class);
+
 }
