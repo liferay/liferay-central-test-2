@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
+
+<service-builder package-path="com.liferay.portlet.forms">
+	<namespace>Forms</namespace>
+	<entity name="FormsStructureEntry" uuid="true" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="id" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="formStructureId" type="String" />
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="xsd" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_F" return-type="FormsStructureEntry" unique="true">
+			<finder-column name="groupId" />
+			<finder-column name="formStructureId" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
+	</entity>
+	<entity name="FormsStructureEntryLink" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="formStructureLinkId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="formStructureId" type="String" />
+		<column name="className" type="String" />
+		<column name="classPK" type="long" />
+
+		<!-- Finder methods -->
+
+		<finder name="FormStructureLinkId" return-type="FormsStructureEntryLink" unique="true">
+			<finder-column name="formStructureLinkId" />
+		</finder>
+		<finder name="FormStructureId" return-type="Collection">
+			<finder-column name="formStructureId" />
+		</finder>
+		<finder name="F_C_C" return-type="FormsStructureEntryLink" unique="true">
+			<finder-column name="formStructureId" />		
+			<finder-column name="className" />
+			<finder-column name="classPK" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
+	</entity>
+	<exceptions>
+		<exception>EntryDuplicateElement</exception>
+		<exception>EntryDuplicateStructureId</exception>
+		<exception>EntryStructureId</exception>
+		<exception>EntryName</exception>
+		<exception>EntryXsd</exception>
+	</exceptions>
+</service-builder>
