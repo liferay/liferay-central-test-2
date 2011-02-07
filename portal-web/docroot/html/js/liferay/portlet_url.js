@@ -8,6 +8,7 @@ AUI().add(
 
 			instance.options = {
 				copyCurrentRenderParameters: null,
+				doAsGroupId: null,
 				doAsUserId: null,
 				encrypt: null,
 				escapeXML: null,
@@ -33,6 +34,14 @@ AUI().add(
 				var instance = this;
 
 				instance.options.copyCurrentRenderParameters = copyCurrentRenderParameters;
+
+				return instance;
+			},
+
+			setDoAsGroupId: function(doAsGroupId) {
+				var instance = this;
+
+				instance.options.doAsGroupId = doAsGroupId;
 
 				return instance;
 			},
@@ -216,6 +225,7 @@ AUI().add(
 
 					var portletURL = PortletURL.createRenderURL();
 
+					portletURL.setDoAsGroupId(themeDisplay.getScopeGroupId());
 					portletURL.setPortletId(86);
 
 					portletURL.setWindowState('MAXIMIZED');
