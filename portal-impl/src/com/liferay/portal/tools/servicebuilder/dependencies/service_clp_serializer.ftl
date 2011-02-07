@@ -85,60 +85,9 @@ public class ClpSerializer {
 		<#list entities as entity>
 			<#if entity.hasColumns()>
 				if (oldModelClassName.equals(${entity.name}Clp.class.getName())) {
-					${entity.name}Clp oldCplModel = (${entity.name}Clp)oldModel;
-
-					ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-
-					try {
-						Thread.currentThread().setContextClassLoader(_classLoader);
-
-						try {
-							Class<?> newModelClass = Class.forName("${packagePath}.model.impl.${entity.name}Impl", true, _classLoader);
-
-							Object newModel = newModelClass.newInstance();
-
-							<#list entity.regularColList as column>
-								Method method${column_index} = newModelClass.getMethod("set${column.methodName}", new Class[] {
-									<#if column.isPrimitiveType()>
-										${serviceBuilder.getPrimitiveObj(column.type)}.TYPE
-									<#else>
-										${column.type}.class
-									</#if>
-								});
-
-								<#if column.isPrimitiveType()>
-									${serviceBuilder.getPrimitiveObj(column.type)}
-								<#else>
-									${column.type}
-								</#if>
-
-								value${column_index} =
-
-								<#if column.isPrimitiveType()>
-									new ${serviceBuilder.getPrimitiveObj(column.type)}(
-								</#if>
-
-								oldCplModel.get${column.methodName}()
-
-								<#if column.isPrimitiveType()>
-									)
-								</#if>
-
-								;
-
-								method${column_index}.invoke(newModel, value${column_index});
-							</#list>
-
-							return newModel;
-						}
-						catch (Exception e) {
-							_log.error(e, e);
-						}
-					}
-					finally {
-						Thread.currentThread().setContextClassLoader(contextClassLoader);
-					}
+					return translateInput${entity.name}(oldModel);
 				}
+
 			</#if>
 		</#list>
 
@@ -157,6 +106,69 @@ public class ClpSerializer {
 		return newList;
 	}
 
+	<#list entities as entity>
+		<#if entity.hasColumns()>
+			public static Object translateInput${entity.name}(BaseModel<?> oldModel) {
+				${entity.name}Clp oldCplModel = (${entity.name}Clp)oldModel;
+
+				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+
+				try {
+					Thread.currentThread().setContextClassLoader(_classLoader);
+
+					try {
+						Class<?> newModelClass = Class.forName("${packagePath}.model.impl.${entity.name}Impl", true, _classLoader);
+
+						Object newModel = newModelClass.newInstance();
+
+						<#list entity.regularColList as column>
+							Method method${column_index} = newModelClass.getMethod("set${column.methodName}", new Class[] {
+								<#if column.isPrimitiveType()>
+									${serviceBuilder.getPrimitiveObj(column.type)}.TYPE
+								<#else>
+									${column.type}.class
+								</#if>
+							});
+
+							<#if column.isPrimitiveType()>
+								${serviceBuilder.getPrimitiveObj(column.type)}
+							<#else>
+								${column.type}
+							</#if>
+
+							value${column_index} =
+
+							<#if column.isPrimitiveType()>
+								new ${serviceBuilder.getPrimitiveObj(column.type)}(
+							</#if>
+
+							oldCplModel.get${column.methodName}()
+
+							<#if column.isPrimitiveType()>
+								)
+							</#if>
+
+							;
+
+							method${column_index}.invoke(newModel, value${column_index});
+						</#list>
+
+						return newModel;
+					}
+					catch (Exception e) {
+						_log.error(e, e);
+					}
+				}
+				finally {
+					Thread.currentThread().setContextClassLoader(contextClassLoader);
+				}
+
+				return oldModel;
+			}
+
+		</#if>
+	</#list>
+
 	public static Object translateInput(Object obj) {
 		if (obj instanceof BaseModel<?>) {
 			return translateInput((BaseModel<?>)obj);
@@ -170,56 +182,12 @@ public class ClpSerializer {
 	}
 
 	public static Object translateOutput(BaseModel<?> oldModel) {
-		Class<?> oldModelClass = oldModel.getClass();
-
-		String oldModelClassName = oldModelClass.getName();
+		String oldModelClassName = oldModel.getClass().getName();
 
 		<#list entities as entity>
 			<#if entity.hasColumns()>
 				if (oldModelClassName.equals("${packagePath}.model.impl.${entity.name}Impl")) {
-					ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-
-					try {
-						Thread.currentThread().setContextClassLoader(_classLoader);
-
-						try {
-							${entity.name}Clp newModel = new ${entity.name}Clp();
-
-							<#list entity.regularColList as column>
-								Method method${column_index} = oldModelClass.getMethod("get${column.methodName}");
-
-								<#if column.isPrimitiveType()>
-									${serviceBuilder.getPrimitiveObj(column.type)}
-								<#else>
-									${column.type}
-								</#if>
-
-								value${column_index} =
-
-								(
-
-								<#if column.isPrimitiveType()>
-									${serviceBuilder.getPrimitiveObj(column.type)}
-								<#else>
-									${column.type}
-								</#if>
-
-								)
-
-								method${column_index}.invoke(oldModel, (Object[])null);
-
-								newModel.set${column.methodName}(value${column_index});
-							</#list>
-
-							return newModel;
-						}
-						catch (Exception e) {
-							_log.error(e, e);
-						}
-					}
-					finally {
-						Thread.currentThread().setContextClassLoader(contextClassLoader);
-					}
+					return translateOutput${entity.name}(oldModel);
 				}
 			</#if>
 		</#list>
@@ -250,6 +218,61 @@ public class ClpSerializer {
 			return obj;
 		}
 	}
+
+	<#list entities as entity>
+		<#if entity.hasColumns()>
+			public static Object translateOutput${entity.name}(BaseModel<?> oldModel) {
+				Class<?> oldModelClass = oldModel.getClass();
+
+				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+
+				try {
+					Thread.currentThread().setContextClassLoader(_classLoader);
+
+					try {
+						${entity.name}Clp newModel = new ${entity.name}Clp();
+
+						<#list entity.regularColList as column>
+							Method method${column_index} = oldModelClass.getMethod("get${column.methodName}");
+
+							<#if column.isPrimitiveType()>
+								${serviceBuilder.getPrimitiveObj(column.type)}
+							<#else>
+								${column.type}
+							</#if>
+
+							value${column_index} =
+
+							(
+
+							<#if column.isPrimitiveType()>
+								${serviceBuilder.getPrimitiveObj(column.type)}
+							<#else>
+								${column.type}
+							</#if>
+
+							)
+
+							method${column_index}.invoke(oldModel, (Object[])null);
+
+							newModel.set${column.methodName}(value${column_index});
+						</#list>
+
+						return newModel;
+					}
+					catch (Exception e) {
+						_log.error(e, e);
+					}
+				}
+				finally {
+					Thread.currentThread().setContextClassLoader(contextClassLoader);
+				}
+
+				return oldModel;
+			}
+
+		</#if>
+	</#list>
 
 	private static Log _log = LogFactoryUtil.getLog(ClpSerializer.class);
 
