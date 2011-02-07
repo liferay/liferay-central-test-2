@@ -87,7 +87,6 @@ public class ClpSerializer {
 				if (oldModelClassName.equals(${entity.name}Clp.class.getName())) {
 					return translateInput${entity.name}(oldModel);
 				}
-
 			</#if>
 		</#list>
 
@@ -111,10 +110,12 @@ public class ClpSerializer {
 			public static Object translateInput${entity.name}(BaseModel<?> oldModel) {
 				${entity.name}Clp oldCplModel = (${entity.name}Clp)oldModel;
 
-				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+				Thread currentThread = Thread.currentThread();
+
+				ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 				try {
-					Thread.currentThread().setContextClassLoader(_classLoader);
+					currentThread.setContextClassLoader(_classLoader);
 
 					try {
 						Class<?> newModelClass = Class.forName("${packagePath}.model.impl.${entity.name}Impl", true, _classLoader);
@@ -160,12 +161,11 @@ public class ClpSerializer {
 					}
 				}
 				finally {
-					Thread.currentThread().setContextClassLoader(contextClassLoader);
+					currentThread.setContextClassLoader(contextClassLoader);
 				}
 
 				return oldModel;
 			}
-
 		</#if>
 	</#list>
 
@@ -182,7 +182,9 @@ public class ClpSerializer {
 	}
 
 	public static Object translateOutput(BaseModel<?> oldModel) {
-		String oldModelClassName = oldModel.getClass().getName();
+		Class<?> oldModelClass = oldModel.getClass();
+
+		String oldModelClassName = oldModelClass.getName();
 
 		<#list entities as entity>
 			<#if entity.hasColumns()>
@@ -222,15 +224,17 @@ public class ClpSerializer {
 	<#list entities as entity>
 		<#if entity.hasColumns()>
 			public static Object translateOutput${entity.name}(BaseModel<?> oldModel) {
-				Class<?> oldModelClass = oldModel.getClass();
+				Thread currentThread = Thread.currentThread();
 
-				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
+				ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 				try {
-					Thread.currentThread().setContextClassLoader(_classLoader);
+					currentThread.setContextClassLoader(_classLoader);
 
 					try {
 						${entity.name}Clp newModel = new ${entity.name}Clp();
+
+						Class<?> oldModelClass = oldModel.getClass();
 
 						<#list entity.regularColList as column>
 							Method method${column_index} = oldModelClass.getMethod("get${column.methodName}");
@@ -265,7 +269,7 @@ public class ClpSerializer {
 					}
 				}
 				finally {
-					Thread.currentThread().setContextClassLoader(contextClassLoader);
+					currentThread.setContextClassLoader(contextClassLoader);
 				}
 
 				return oldModel;
