@@ -343,6 +343,10 @@ public class StringUtil {
 		return true;
 	}
 
+	public static boolean matchesIgnoreCase(String s, String pattern) {
+		return matchesIgnoreCase(lowerCase(s), lowerCase(pattern));
+	}
+
 	public static String merge(boolean[] array) {
 		return merge(array, StringPool.COMMA);
 	}

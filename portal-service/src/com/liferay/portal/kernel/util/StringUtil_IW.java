@@ -120,6 +120,11 @@ public class StringUtil_IW {
 		return StringUtil.matches(s, pattern);
 	}
 
+	public boolean matchesIgnoreCase(java.lang.String s,
+		java.lang.String pattern) {
+		return StringUtil.matchesIgnoreCase(s, pattern);
+	}
+
 	public java.lang.String merge(boolean[] array) {
 		return StringUtil.merge(array);
 	}
