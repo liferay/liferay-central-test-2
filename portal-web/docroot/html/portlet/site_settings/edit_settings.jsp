@@ -143,11 +143,10 @@ request.setAttribute("edit_settings.jsp-workflowRoleNames", workflowRoleNames);
 
 <aui:form action="<%= editSettingsURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveSettings();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
-	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 
 	<liferay-ui:tabs
@@ -303,22 +302,20 @@ request.setAttribute("edit_settings.jsp-workflowRoleNames", workflowRoleNames);
 			String host = PortalUtil.getHost(request);
 
 			String sitemapUrl = PortalUtil.getPortalURL(host, request.getServerPort(), request.isSecure()) + themeDisplay.getPathContext() + "/sitemap.xml";
-			String publicSitemapUrl = sitemapUrl;
-			String privateSitemapUrl = sitemapUrl;
 
+			String publicSitemapUrl = sitemapUrl;
 
 			LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, false);
 
-			LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, true);
-
-			String publicVirtualHostname = publicLayoutSet.getVirtualHostname();
-			String privateVirtualHostname = privateLayoutSet.getVirtualHostname();
-
-			if (!host.equals(privateVirtualHostname)) {
+			if (!host.equals(publicLayoutSet.getVirtualHostname())) {
 				publicSitemapUrl += "?groupId=" + groupId + "&privateLayout=" + false;
 			}
 
-			if (!host.equals(publicVirtualHostname)) {
+			String privateSitemapUrl = sitemapUrl;
+
+			LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, true);
+
+			if (!host.equals(privateLayoutSet.getVirtualHostname())) {
 				privateSitemapUrl += "?groupId=" + groupId + "&privateLayout=" + true;
 			}
 			%>
@@ -381,8 +378,6 @@ request.setAttribute("edit_settings.jsp-workflowRoleNames", workflowRoleNames);
 				</td>
 			</tr>
 			</table>
-
-
 		</c:when>
 		<c:when test='<%= tabs2.equals("robots") %>'>
 

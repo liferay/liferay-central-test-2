@@ -38,6 +38,8 @@ Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 Group liveGroup = null;
 Group stagingGroup = null;
 
+int pagesCount = 0;
+
 if (selGroup.isStagingGroup()) {
 	liveGroup = selGroup.getLiveGroup();
 	stagingGroup = selGroup;
@@ -74,6 +76,8 @@ if (stagingGroup != null) {
 }
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
+long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
+long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 UnicodeProperties groupTypeSettings = null;
 
@@ -94,6 +98,20 @@ try {
 	}
 }
 catch (NoSuchLayoutException nsle) {
+}
+
+Layout refererLayout = null;
+
+try {
+	if (refererPlid != LayoutConstants.DEFAULT_PLID) {
+		refererLayout = LayoutLocalServiceUtil.getLayout(refererPlid);
+	}
+}
+catch (NoSuchLayoutException nsle) {
+}
+
+if (selLayout != null) {
+	layoutId = selLayout.getLayoutId();
 }
 
 if (Validator.isNull(tabs2) && !tabs1.equals("settings")) {
@@ -168,6 +186,17 @@ if (selGroup.isLayoutSetPrototype()) {
 	privateLayout = true;
 }
 
+if (privateLayout) {
+	if (group != null) {
+		pagesCount = group.getPrivateLayoutsPageCount();
+	}
+}
+else {
+	if (group != null) {
+		pagesCount = group.getPublicLayoutsPageCount();
+	}
+}
+
 LayoutLister layoutLister = new LayoutLister();
 
 String rootNodeName = liveGroup.getDescriptiveName();
@@ -221,37 +250,6 @@ if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletK
 	}
 
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
-}
-
-long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
-
-int pagesCount = 0;
-
-long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
-
-if (selLayout != null) {
-	layoutId = selLayout.getLayoutId();
-}
-
-Layout refererLayout = null;
-
-try {
-	if (refererPlid != LayoutConstants.DEFAULT_PLID) {
-		refererLayout = LayoutLocalServiceUtil.getLayout(refererPlid);
-	}
-}
-catch (NoSuchLayoutException nsle) {
-}
-
-if (privateLayout) {
-	if (group != null) {
-		pagesCount = group.getPrivateLayoutsPageCount();
-	}
-}
-else {
-	if (group != null) {
-		pagesCount = group.getPublicLayoutsPageCount();
-	}
 }
 
 request.setAttribute("edit_pages.jsp-tab4", tabs4);
@@ -378,10 +376,10 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<c:choose>
 		<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && liveGroup.isUser() %>">
 			<liferay-ui:tabs
+				backURL="<%= redirect %>"
 				names="<%= tabs2Names %>"
 				param="tabs2"
 				url="<%= portletURL.toString() %>"
-				backURL="<%= redirect %>"
 			/>
 		</c:when>
 		<c:otherwise>
@@ -406,17 +404,19 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<c:when test='<%= tabs2.equals("merge-pages") %>'>
 
 			<%
+			Group companyGroup = company.getGroup();
+
 			boolean mergeGuestPublicPages = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "mergeGuestPublicPages");
 			%>
 
 			<div class="portlet-msg-info">
-				<liferay-ui:message arguments="<%= company.getGroup().getDescriptiveName() %>" key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-x-community" />
+				<liferay-ui:message arguments="<%= companyGroup.getDescriptiveName() %>" key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-x-community" />
 			</div>
 
 			<table class="lfr-table">
 			<tr>
 				<td>
-					<liferay-ui:message arguments="<%= company.getGroup().getDescriptiveName() %>" key="merge-x-public-pages" />
+					<liferay-ui:message arguments="<%= companyGroup.getDescriptiveName() %>" key="merge-x-public-pages" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />
@@ -455,7 +455,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	}
 
 	function <portlet:namespace />savePage() {
-
 		<c:choose>
 			<c:when test='<%= tabs2.equals("merge-pages") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "merge_pages";

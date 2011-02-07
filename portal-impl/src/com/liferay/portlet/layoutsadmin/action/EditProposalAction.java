@@ -56,7 +56,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Raymond Augé
  */
-public class EditProposalAction extends EditLayoutAction {
+public class EditProposalAction extends EditLayoutsAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,

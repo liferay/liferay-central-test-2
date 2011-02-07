@@ -1172,7 +1172,7 @@
 		<put name="portlet_content" value="/portlet/requests/view.jsp" />
 	</definition>
 
-	<!--Site Settings -->
+	<!-- Site Settings -->
 
 	<definition name="portlet.site_settings" extends="portlet" />
 

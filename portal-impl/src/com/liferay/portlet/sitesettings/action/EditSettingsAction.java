@@ -35,7 +35,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.action.ActionUtil;
-import com.liferay.portlet.layoutsadmin.action.EditLayoutAction;
+import com.liferay.portlet.layoutsadmin.action.EditLayoutsAction;
 import com.liferay.util.servlet.UploadException;
 
 import java.io.File;
@@ -54,7 +54,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Brian Wing Shun Chan
  */
-public class EditSettingsAction extends EditLayoutAction {
+public class EditSettingsAction extends EditLayoutsAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -146,21 +146,21 @@ public class EditSettingsAction extends EditLayoutAction {
 	protected Group getGroup(PortletRequest portletRequest) throws Exception {
 		Group group = ActionUtil.getGroup(portletRequest);
 
-		if (group == null) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)portletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-			group = themeDisplay.getScopeGroup();
-
-			portletRequest.setAttribute(WebKeys.GROUP, group);
+		if (group != null) {
+			return group;
 		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		group = themeDisplay.getScopeGroup();
+
+		portletRequest.setAttribute(WebKeys.GROUP, group);
 
 		return group;
 	}
 
 	protected void updateLogo(ActionRequest actionRequest) throws Exception {
-
 		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(
 			actionRequest, "stagingGroupId");
@@ -169,35 +169,35 @@ public class EditSettingsAction extends EditLayoutAction {
 		updateLogo(actionRequest, liveGroupId, stagingGroupId, true);
 	}
 
-	protected void updateLogo(ActionRequest actionRequest, long liveGroupId,
-			long stagingGroupId, boolean privateLayoutSet)
+	protected void updateLogo(
+			ActionRequest actionRequest, long liveGroupId, long stagingGroupId,
+			boolean privateLayout)
 		throws Exception {
 
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
-		String privateParam = "public";
+		String privateLayoutPrefix = "public";
 
-		if (privateLayoutSet) {
-			privateParam = "private";
+		if (privateLayout) {
+			privateLayoutPrefix = "private";
 		}
 
 		boolean logo = ParamUtil.getBoolean(
-			actionRequest, privateParam + "Logo");
+			actionRequest, privateLayoutPrefix + "Logo");
 
-		File file = uploadRequest.getFile(privateParam + "LogoFileName");
+		File file = uploadRequest.getFile(privateLayoutPrefix + "LogoFileName");
 		byte[] bytes = FileUtil.getBytes(file);
 
 		if (logo && ((bytes == null) || (bytes.length == 0))) {
 			throw new UploadException();
 		}
 
-		LayoutSetServiceUtil.updateLogo(
-			liveGroupId, privateLayoutSet, logo, file);
+		LayoutSetServiceUtil.updateLogo(liveGroupId, privateLayout, logo, file);
 
 		if (stagingGroupId > 0) {
 			LayoutSetServiceUtil.updateLogo(
-				stagingGroupId, privateLayoutSet, logo, file);
+				stagingGroupId, privateLayout, logo, file);
 		}
 	}
 
