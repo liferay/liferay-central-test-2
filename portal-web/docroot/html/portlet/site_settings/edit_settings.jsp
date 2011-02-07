@@ -121,13 +121,13 @@ PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "settings"), HttpUtil.removeParameter(currentURL, "tabs2"));
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs2, TextFormatter.O)), currentURL);
 
-request.setAttribute("edit_pages.jsp-liveGroup", liveGroup);
-request.setAttribute("edit_pages.jsp-liveGroupId", new Long(liveGroupId));
-request.setAttribute("edit_pages.jsp-liveGroupTypeSettings", liveGroupTypeSettings);
+request.setAttribute("edit_settings.jsp-liveGroup", liveGroup);
+request.setAttribute("edit_settings.jsp-liveGroupId", new Long(liveGroupId));
+request.setAttribute("edit_settings.jsp-liveGroupTypeSettings", liveGroupTypeSettings);
 
-request.setAttribute("edit_pages.jsp-workflowEnabled", new Boolean(workflowEnabled));
-request.setAttribute("edit_pages.jsp-workflowStages", new Integer(workflowStages));
-request.setAttribute("edit_pages.jsp-workflowRoleNames", workflowRoleNames);
+request.setAttribute("edit_settings.jsp-workflowEnabled", new Boolean(workflowEnabled));
+request.setAttribute("edit_settings.jsp-workflowStages", new Integer(workflowStages));
+request.setAttribute("edit_settings.jsp-workflowRoleNames", workflowRoleNames);
 %>
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) %>">

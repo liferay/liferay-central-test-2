@@ -17,13 +17,13 @@
 <%@ include file="/html/portlet/site_settings/init.jsp" %>
 
 <%
-Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
-long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
-UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-liveGroupTypeSettings");
+Group liveGroup = (Group)request.getAttribute("edit_settings.jsp-liveGroup");
+long liveGroupId = ((Long)request.getAttribute("edit_settings.jsp-liveGroupId")).longValue();
+UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribute("edit_settings.jsp-liveGroupTypeSettings");
 
-boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflowEnabled")).booleanValue();
-int workflowStages = ((Integer)request.getAttribute("edit_pages.jsp-workflowStages")).intValue();
-String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-workflowRoleNames");
+boolean workflowEnabled = ((Boolean)request.getAttribute("edit_settings.jsp-workflowEnabled")).booleanValue();
+int workflowStages = ((Integer)request.getAttribute("edit_settings.jsp-workflowStages")).intValue();
+String[] workflowRoleNames = (String[])request.getAttribute("edit_settings.jsp-workflowRoleNames");
 %>
 
 <c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
