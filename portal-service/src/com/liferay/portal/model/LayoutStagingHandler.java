@@ -78,7 +78,9 @@ public class LayoutStagingHandler implements InvocationHandler {
 
 			if (_layoutRevisionMethodNames.contains(methodName)) {
 				try {
-					method = _layoutRevision.getClass().getMethod(
+					Class<?> layoutRevisionClass = _layoutRevision.getClass();
+
+					method = layoutRevisionClass.getMethod(
 						methodName, _getParameterTypes(args));
 
 					bean = _layoutRevision;
@@ -107,6 +109,12 @@ public class LayoutStagingHandler implements InvocationHandler {
 
 			throw new IllegalStateException(e);
 		}
+	}
+
+	private Object _clone() {
+		return Proxy.newProxyInstance(
+			PortalClassLoaderUtil.getClassLoader(), new Class[] {Layout.class},
+			new LayoutStagingHandler(_layout, _layoutRevision));
 	}
 
 	private LayoutRevision _getLayoutRevision(
@@ -148,7 +156,9 @@ public class LayoutStagingHandler implements InvocationHandler {
 					true);
 			}
 			catch (NoSuchLayoutRevisionException nslre) {
-				// this branch doesn't have this layout in it
+
+				// This branch does not have this layout in it
+
 			}
 		}
 		else {
@@ -180,7 +190,7 @@ public class LayoutStagingHandler implements InvocationHandler {
 		return layoutRevision;
 	}
 
-	protected Class<?>[] _getParameterTypes(Object[] arguments) {
+	private Class<?>[] _getParameterTypes(Object[] arguments) {
 		if (arguments == null) {
 			return null;
 		}
@@ -221,13 +231,6 @@ public class LayoutStagingHandler implements InvocationHandler {
 		}
 
 		return parameterTypes;
-	}
-
-	private Object _clone() {
-		return Proxy.newProxyInstance(
-			PortalClassLoaderUtil.getClassLoader(),
-			new Class[] {Layout.class},
-			new LayoutStagingHandler(_layout, _layoutRevision));
 	}
 
 	private Object _toEscapedModel() {

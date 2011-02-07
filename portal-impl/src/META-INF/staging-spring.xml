@@ -8,10 +8,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd"
 >
-	<bean id="stagingAdvice" class="com.liferay.portal.service.impl.LayoutLocalServiceStagingAdvice" />
-
+	<bean id="layoutLocalServiceStagingAdvice" class="com.liferay.portal.service.impl.LayoutLocalServiceStagingAdvice" />
 	<aop:config proxy-target-class="false">
-		<aop:pointcut id="stagingOperation" expression="bean(com.liferay.portal.service.LayoutLocalService)" />
-		<aop:advisor advice-ref="stagingAdvice" pointcut-ref="stagingOperation" />
+		<aop:pointcut id="layoutLocalServiceStagingOperation" expression="bean(com.liferay.portal.service.LayoutLocalService)" />
+		<aop:advisor advice-ref="layoutLocalServiceStagingAdvice" pointcut-ref="stagingOperation" />
 	</aop:config>
 </beans>

@@ -19,8 +19,6 @@ import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutStagingHandler;
 
 /**
- * <a href="LayoutStaging.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public interface LayoutStaging {
