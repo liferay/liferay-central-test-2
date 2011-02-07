@@ -225,10 +225,11 @@ AUI().add(
 
 					var portletURL = PortletURL.createRenderURL();
 
-					portletURL.setDoAsGroupId(themeDisplay.getScopeGroupId());
 					portletURL.setPortletId(86);
 
 					portletURL.setWindowState('MAXIMIZED');
+
+					portletURL.setDoAsGroupId(themeDisplay.getScopeGroupId());
 
 					portletURL.setParameter('struts_action', '/portlet_configuration/edit_permissions');
 					portletURL.setParameter('redirect', redirect);
