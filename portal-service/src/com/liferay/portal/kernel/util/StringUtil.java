@@ -344,7 +344,7 @@ public class StringUtil {
 	}
 
 	public static boolean matchesIgnoreCase(String s, String pattern) {
-		return matchesIgnoreCase(lowerCase(s), lowerCase(pattern));
+		return matches(lowerCase(s), lowerCase(pattern));
 	}
 
 	public static String merge(boolean[] array) {
