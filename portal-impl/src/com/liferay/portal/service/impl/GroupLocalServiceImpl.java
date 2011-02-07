@@ -466,7 +466,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		scFrameworkVersionLocalService.deleteFrameworkVersions(
 			group.getGroupId());
-
 		scProductEntryLocalService.deleteProductEntries(group.getGroupId());
 
 		// Tasks
@@ -479,13 +478,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Resources
 
-		Iterator<Resource> itr = resourceFinder.findByC_P(
-			group.getCompanyId(),
-			String.valueOf(group.getGroupId())).iterator();
+		List<Resource> resources = resourceFinder.findByC_P(
+			group.getCompanyId(), String.valueOf(group.getGroupId()));
 
-		while (itr.hasNext()) {
-			Resource resource = itr.next();
-
+		for (Resource resource : resources) {
 			resourceLocalService.deleteResource(resource);
 		}
 
