@@ -175,10 +175,10 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public void deleteUserGroup(UserGroup userGroup)
 		throws PortalException, SystemException {
 
-		int userGroupCount = userLocalService.getUserGroupUsersCount(
+		int count = userLocalService.getUserGroupUsersCount(
 			userGroup.getUserGroupId(), WorkflowConstants.STATUS_APPROVED);
 
-		if (userGroupCount > 0) {
+		if (count > 0) {
 			throw new RequiredUserGroupException();
 		}
 
