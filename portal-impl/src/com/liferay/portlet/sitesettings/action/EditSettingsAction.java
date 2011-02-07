@@ -35,7 +35,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.action.ActionUtil;
-import com.liferay.portlet.layoutsadmin.action.EditPagesAction;
+import com.liferay.portlet.layoutsadmin.action.EditLayoutAction;
 import com.liferay.util.servlet.UploadException;
 
 import java.io.File;
@@ -54,7 +54,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Brian Wing Shun Chan
  */
-public class EditSettingsAction extends EditPagesAction {
+public class EditSettingsAction extends EditLayoutAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,

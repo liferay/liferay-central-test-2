@@ -52,7 +52,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Ming-Gih Lam
  */
-public class UpdatePageAction extends JSONAction {
+public class UpdateLayoutAction extends JSONAction {
 
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,

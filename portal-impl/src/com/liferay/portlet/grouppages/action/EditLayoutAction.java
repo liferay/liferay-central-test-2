@@ -23,8 +23,8 @@ import javax.portlet.PortletRequest;
 /**
  * @author Jorge Ferrer
  */
-public class EditPagesAction
-	extends com.liferay.portlet.layoutsadmin.action.EditPagesAction {
+public class EditLayoutAction
+	extends com.liferay.portlet.layoutsadmin.action.EditLayoutAction {
 
 	protected Group getGroup(PortletRequest portletRequest) throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
