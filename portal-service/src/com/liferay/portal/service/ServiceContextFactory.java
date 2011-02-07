@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
+import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -63,12 +64,23 @@ public class ServiceContextFactory {
 			serviceContext.setPlid(themeDisplay.getPlid());
 			serviceContext.setPortalURL(PortalUtil.getPortalURL(request));
 			serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
-			serviceContext.setUserDisplayURL(
-				themeDisplay.getUser().getDisplayURL(themeDisplay));
+
+			User user = themeDisplay.getUser();
+
+			serviceContext.setUserDisplayURL(user.getDisplayURL(themeDisplay));
+
 			serviceContext.setUserId(themeDisplay.getUserId());
 		}
 		else {
-			serviceContext.setCompanyId(PortalUtil.getCompanyId(request));
+			long companyId = PortalUtil.getCompanyId(request);
+
+			serviceContext.setCompanyId(companyId);
+
+			serviceContext.setPathMain(PortalUtil.getPathMain());
+
+			long userId = PortalUtil.getUserId(request);
+
+			serviceContext.setUserId(userId);
 		}
 
 		// Attributes
