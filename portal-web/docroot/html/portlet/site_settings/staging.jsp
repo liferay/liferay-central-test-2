@@ -14,11 +14,10 @@
  */
 --%>
 
-<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
+<%@ include file="/html/portlet/site_settings/init.jsp" %>
 
 <%
 Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
-Group stagingGroup = (Group)request.getAttribute("edit_pages.jsp-stagingGroup");
 long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
 UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-liveGroupTypeSettings");
 

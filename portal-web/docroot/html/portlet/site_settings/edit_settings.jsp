@@ -14,27 +14,80 @@
  */
 --%>
 
-<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
+<%@ include file="/html/portlet/site_settings/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "settings");
 String tabs2 = ParamUtil.getString(request, "tabs2");
-String tabs3 = ParamUtil.getString(request, "tabs3");
 
-Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
-Group stagingGroup = (Group)request.getAttribute("edit_pages.jsp-stagingGroup");
-Group group = (Group)request.getAttribute("edit_pages.jsp-group");
-long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
-long stagingGroupId = ((Long)request.getAttribute("edit_pages.jsp-stagingGroupId")).longValue();
-long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
-long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
-boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
-UnicodeProperties groupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-groupTypeSettings");
-Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
+String redirect = ParamUtil.getString(request, "redirect");
+String backURL = ParamUtil.getString(request, "backURL", redirect);
 
-boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflowEnabled")).booleanValue();
+if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
+	portletDisplay.setURLBack(backURL);
+}
 
-PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
+
+Group liveGroup = null;
+Group stagingGroup = null;
+
+if (selGroup.isStagingGroup()) {
+	liveGroup = selGroup.getLiveGroup();
+	stagingGroup = selGroup;
+}
+else {
+	liveGroup = selGroup;
+
+	if (selGroup.hasStagingGroup()) {
+		stagingGroup = selGroup.getStagingGroup();
+	}
+}
+
+Group group = null;
+
+if (stagingGroup != null) {
+	group = stagingGroup;
+}
+else {
+	group = liveGroup;
+}
+
+long groupId = liveGroup.getGroupId();
+
+if (group != null) {
+	groupId = group.getGroupId();
+}
+
+long liveGroupId = liveGroup.getGroupId();
+
+long stagingGroupId = 0;
+
+if (stagingGroup != null) {
+	stagingGroupId = stagingGroup.getGroupId();
+}
+
+UnicodeProperties groupTypeSettings = null;
+
+if (group != null) {
+	groupTypeSettings = group.getTypeSettingsProperties();
+}
+else {
+	groupTypeSettings = new UnicodeProperties();
+}
+
+UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
+
+boolean workflowEnabled = liveGroup.isWorkflowEnabled();
+int workflowStages = ParamUtil.getInteger(request, "workflowStages", liveGroup.getWorkflowStages());
+String[] workflowRoleNames = StringUtil.split(ParamUtil.getString(request, "workflowRoleNames", liveGroup.getWorkflowRoleNames()));
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setParameter("struts_action", "/site_settings/edit_settings");
+portletURL.setParameter("tabs2", tabs2);
+portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("backURL", backURL);
+portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 
 List<String> tabs2NamesList = new ArrayList<String>();
 
@@ -48,12 +101,6 @@ if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDA
 	tabs2NamesList.add("sitemap");
 	tabs2NamesList.add("robots");
 	tabs2NamesList.add("monitoring");
-
-	Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.GUEST);
-
-	if (liveGroup.getGroupId() != guestGroup.getGroupId()) {
-		tabs2NamesList.add("merge-pages");
-	}
 }
 
 if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
@@ -70,78 +117,46 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 	}
 }
 
-if (!tabs2.equals("pages")) {
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs2, TextFormatter.O)), currentURL);
-}
+PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "settings"), HttpUtil.removeParameter(currentURL, "tabs2"));
+PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs2, TextFormatter.O)), currentURL);
+
+request.setAttribute("edit_pages.jsp-liveGroup", liveGroup);
+request.setAttribute("edit_pages.jsp-liveGroupId", new Long(liveGroupId));
+request.setAttribute("edit_pages.jsp-liveGroupTypeSettings", liveGroupTypeSettings);
+
+request.setAttribute("edit_pages.jsp-workflowEnabled", new Boolean(workflowEnabled));
+request.setAttribute("edit_pages.jsp-workflowStages", new Integer(workflowStages));
+request.setAttribute("edit_pages.jsp-workflowRoleNames", workflowRoleNames);
 %>
 
-<portlet:actionURL var="editPagesURL">
-	<portlet:param name="struts_action" value="/layouts_admin/edit_pages" />
+<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) %>">
+	<liferay-ui:header
+		backURL="<%= backURL %>"
+		title="<%= liveGroup.getDescriptiveName() %>"
+	/>
+</c:if>
+
+<portlet:actionURL var="editSettingsURL">
+	<portlet:param name="struts_action" value="/site_settings/edit_settings" />
 </portlet:actionURL>
 
-<aui:form action="<%= editPagesURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveSettings();" %>'>
+<aui:form action="<%= editSettingsURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveSettings();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
+	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
-	<aui:input name="tabs3" type="hidden" value="<%= tabs3 %>" />
-	<aui:input name="pagesRedirect" type="hidden" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid  %>' />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
-	<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
-	<aui:input name="selPlid" type="hidden" value="<%= selPlid %>" />
-	<aui:input name="<%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" />
+	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 
 	<liferay-ui:tabs
 		names="<%= tabs2Names %>"
 		param="tabs2"
-		url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
+		url='<%= portletURL.toString() %>'
 	/>
 
 	<liferay-ui:error exception="<%= ImageTypeException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
-
-	<liferay-ui:error exception="<%= LayoutFriendlyURLException.class %>">
-
-		<%
-		LayoutFriendlyURLException lfurle = (LayoutFriendlyURLException)errorException;
-		%>
-
-		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.ADJACENT_SLASHES %>">
-			<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-have-adjacent-slashes" />
-		</c:if>
-
-		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.DOES_NOT_START_WITH_SLASH %>">
-			<liferay-ui:message key="please-enter-a-friendly-url-that-begins-with-a-slash" />
-		</c:if>
-
-		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.DUPLICATE %>">
-			<liferay-ui:message key="please-enter-a-unique-friendly-url" />
-		</c:if>
-
-		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.ENDS_WITH_SLASH %>">
-			<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-end-with-a-slash" />
-		</c:if>
-
-		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.INVALID_CHARACTERS %>">
-			<liferay-ui:message key="please-enter-a-friendly-url-with-valid-characters" />
-		</c:if>
-
-		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.KEYWORD_CONFLICT %>">
-			<liferay-ui:message arguments="<%= lfurle.getKeywordConflict() %>" key="please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x" />
-		</c:if>
-
-		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.POSSIBLE_DUPLICATE %>">
-			<liferay-ui:message key="the-friendly-url-may-conflict-with-another-page" />
-		</c:if>
-
-		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.TOO_DEEP %>">
-			<liferay-ui:message key="the-friendly-url-has-too-many-slashes" />
-		</c:if>
-
-		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.TOO_SHORT %>">
-			<liferay-ui:message key="please-enter-a-friendly-url-that-is-at-least-two-characters-long" />
-		</c:if>
-	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= LayoutSetVirtualHostException.class %>">
 		<liferay-ui:message key="please-enter-a-unique-virtual-host" />
@@ -151,7 +166,7 @@ if (!tabs2.equals("pages")) {
 
 	<c:choose>
 		<c:when test='<%= tabs2.equals("staging") %>'>
-			<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_staging.jsp" />
+			<liferay-util:include page="/html/portlet/site_settings/staging.jsp" />
 		</c:when>
 		<c:when test='<%= tabs2.equals("virtual-host") %>'>
 			<liferay-ui:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />
@@ -288,13 +303,23 @@ if (!tabs2.equals("pages")) {
 			String host = PortalUtil.getHost(request);
 
 			String sitemapUrl = PortalUtil.getPortalURL(host, request.getServerPort(), request.isSecure()) + themeDisplay.getPathContext() + "/sitemap.xml";
+			String publicSitemapUrl = sitemapUrl;
+			String privateSitemapUrl = sitemapUrl;
 
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
 
-			String virtualHostname = layoutSet.getVirtualHostname();
+			LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, false);
 
-			if (!host.equals(virtualHostname)) {
-				sitemapUrl += "?groupId=" + groupId + "&privateLayout=" + privateLayout;
+			LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroupId, true);
+
+			String publicVirtualHostname = publicLayoutSet.getVirtualHostname();
+			String privateVirtualHostname = privateLayoutSet.getVirtualHostname();
+
+			if (!host.equals(privateVirtualHostname)) {
+				publicSitemapUrl += "?groupId=" + groupId + "&privateLayout=" + false;
+			}
+
+			if (!host.equals(publicVirtualHostname)) {
+				privateSitemapUrl += "?groupId=" + groupId + "&privateLayout=" + true;
 			}
 			%>
 
@@ -306,16 +331,58 @@ if (!tabs2.equals("pages")) {
 
 			<br /><br />
 
-			<%= LanguageUtil.format(pageContext, "send-sitemap-information-to-preview", new Object[] {"<a target=\"_blank\" href=\"" + sitemapUrl + "\">", "</a>"}) %>
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="public-pages" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.format(pageContext, "send-sitemap-information-to-preview", new Object[] {"<a target=\"_blank\" href=\"" + publicSitemapUrl + "\">", "</a>"}) %>
 
-			<ul>
-				<li>
-					<aui:a href='<%= "http://www.google.com/webmasters/sitemaps/ping?sitemap=" + HtmlUtil.escapeURL(sitemapUrl) %>' target="_blank">Google</aui:a>
-				</li>
-				<li>
-					<aui:a href='<%= "https://siteexplorer.search.yahoo.com/submit/ping?sitemap=" + HtmlUtil.escapeURL(sitemapUrl) %>' target="_blank">Yahoo!</aui:a> (<liferay-ui:message key="requires-login" />)
-				</li>
-			</ul>
+					<ul>
+						<li>
+							<aui:a href='<%= "http://www.google.com/webmasters/sitemaps/ping?sitemap=" + HtmlUtil.escapeURL(publicSitemapUrl) %>' target="_blank">Google</aui:a>
+						</li>
+						<li>
+							<aui:a href='<%= "https://siteexplorer.search.yahoo.com/submit/ping?sitemap=" + HtmlUtil.escapeURL(publicSitemapUrl) %>' target="_blank">Yahoo!</aui:a> (<liferay-ui:message key="requires-login" />)
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="private-pages" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.format(pageContext, "send-sitemap-information-to-preview", new Object[] {"<a target=\"_blank\" href=\"" + privateSitemapUrl + "\">", "</a>"}) %>
+
+					<ul>
+						<li>
+							<aui:a href='<%= "http://www.google.com/webmasters/sitemaps/ping?sitemap=" + HtmlUtil.escapeURL(privateSitemapUrl) %>' target="_blank">Google</aui:a>
+						</li>
+						<li>
+							<aui:a href='<%= "https://siteexplorer.search.yahoo.com/submit/ping?sitemap=" + HtmlUtil.escapeURL(privateSitemapUrl) %>' target="_blank">Yahoo!</aui:a> (<liferay-ui:message key="requires-login" />)
+						</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<br />
+				</td>
+			</tr>
+			</table>
+
+
 		</c:when>
 		<c:when test='<%= tabs2.equals("robots") %>'>
 
@@ -415,16 +482,17 @@ if (!tabs2.equals("pages")) {
 			<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 
 			<%
-			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
+			LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, false);
+			LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, true);
 			%>
 
-			<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-" + (privateLayout ? "private" : "public") + "-pages-that-will-be-used-instead-of-the-default-enterprise-logo") %>
+			<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-public-pages-that-will-be-used-instead-of-the-default-enterprise-logo") %>
 
 			<br /><br />
 
-			<c:if test="<%= layoutSet.isLogo() %>">
+			<c:if test="<%= publicLayoutSet.isLogo() %>">
 				<span class="lfr-change-logo">
-					<img alt="<liferay-ui:message key="logo" />" src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(layoutSet.getLogoId()) %>" />
+					<img alt="<liferay-ui:message key="logo" />" src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= publicLayoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(publicLayoutSet.getLogoId()) %>" />
 				</span>
 			</c:if>
 
@@ -434,7 +502,7 @@ if (!tabs2.equals("pages")) {
 					<liferay-ui:message key="logo" />
 				</td>
 				<td>
-					<input name="<portlet:namespace />logoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />logo.value = true; document.<portlet:namespace />fm.<portlet:namespace />logoCheckbox.checked = true;" />
+					<input name="<portlet:namespace />publicLogoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />publicLogo.value = true; document.<portlet:namespace />fm.<portlet:namespace />publicLogoCheckbox.checked = true;" />
 				</td>
 			</tr>
 			<tr>
@@ -442,7 +510,36 @@ if (!tabs2.equals("pages")) {
 					<liferay-ui:message key="use-logo" />
 				</td>
 				<td>
-					<liferay-ui:input-checkbox param="logo" defaultValue="<%= layoutSet.isLogo() %>" />
+					<liferay-ui:input-checkbox param="publicLogo" defaultValue="<%= publicLayoutSet.isLogo() %>" />
+				</td>
+			</tr>
+			</table>
+
+			<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-private-pages-that-will-be-used-instead-of-the-default-enterprise-logo") %>
+
+			<br /><br />
+
+			<c:if test="<%= privateLayoutSet.isLogo() %>">
+				<span class="lfr-change-logo">
+					<img alt="<liferay-ui:message key="logo" />" src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= privateLayoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(privateLayoutSet.getLogoId()) %>" />
+				</span>
+			</c:if>
+
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="logo" />
+				</td>
+				<td>
+					<input name="<portlet:namespace />privateLogoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />privateLogo.value = true; document.<portlet:namespace />fm.<portlet:namespace />privateLogoCheckbox.checked = true;" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="use-logo" />
+				</td>
+				<td>
+					<liferay-ui:input-checkbox param="privateLogo" defaultValue="<%= privateLayoutSet.isLogo() %>" />
 				</td>
 			</tr>
 			</table>
@@ -450,31 +547,6 @@ if (!tabs2.equals("pages")) {
 			<br />
 
 			<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLogo();" />
-		</c:when>
-		<c:when test='<%= tabs2.equals("merge-pages") %>'>
-
-			<%
-			boolean mergeGuestPublicPages = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "mergeGuestPublicPages");
-			%>
-
-			<div class="portlet-msg-info">
-				<liferay-ui:message arguments="<%= company.getGroup().getDescriptiveName() %>" key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-x-community" />
-			</div>
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message arguments="<%= company.getGroup().getDescriptiveName() %>" key="merge-x-public-pages" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />
-				</td>
-			</tr>
-			</table>
-
-			<br />
-
-			<input type="submit" value="<liferay-ui:message key="save" />" />
 		</c:when>
 	</c:choose>
 </aui:form>

@@ -119,6 +119,12 @@ else {
 				if (permissionChecker.isOmniadmin() || (PropsValues.LOOK_AND_FEEL_MODIFIABLE && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS))) {
 					tabs2Names += ",look-and-feel";
 				}
+
+				Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.GUEST);
+
+				if (!privateLayout && liveGroup.getGroupId() != guestGroup.getGroupId()) {
+					tabs2Names += ",merge-pages";
+				}
 			}
 
 			if (workflowEnabled) {
@@ -163,6 +169,31 @@ else {
 				<c:when test='<%= tabs2.equals("proposals") %>'>
 					<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_proposals.jsp" />
 				</c:when>
+				<c:when test='<%= tabs2.equals("merge-pages") %>'>
+
+					<%
+					boolean mergeGuestPublicPages = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "mergeGuestPublicPages");
+					%>
+
+					<div class="portlet-msg-info">
+						<liferay-ui:message arguments="<%= company.getGroup().getDescriptiveName() %>" key="you-can-configure-the-top-level-pages-of-this-public-website-to-merge-with-the-top-level-pages-of-the-public-x-community" />
+					</div>
+
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<liferay-ui:message arguments="<%= company.getGroup().getDescriptiveName() %>" key="merge-x-public-pages" />
+						</td>
+						<td>
+							<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />
+						</td>
+					</tr>
+					</table>
+
+					<br />
+
+					<input type="submit" value="<liferay-ui:message key="save" />" />
+				</c:when>
 			</c:choose>
 
 			<%
@@ -199,12 +230,12 @@ else {
 			</c:when>
 			<c:otherwise>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs3.equals("children") ? Constants.ADD : Constants.UPDATE %>';
+
+				<c:if test='<%= tabs3.equals("page") %>'>
+					<portlet:namespace />updateLanguage();
+				</c:if>
 			</c:otherwise>
 		</c:choose>
-
-		<c:if test='<%= tabs3.equals("page") %>'>
-			<portlet:namespace />updateLanguage();
-		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);
 	}

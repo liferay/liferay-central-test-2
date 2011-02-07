@@ -439,6 +439,11 @@
 			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
 		</action>
 
+		<action path="/communities/edit_settings" type="com.liferay.portlet.sitesettings.action.EditSettingsAction">
+			<forward name="portlet.site_settings.edit_settings" path="portlet.site_settings.edit_settings" />
+			<forward name="portlet.site_settings.error" path="portlet.site_settings.error" />
+		</action>
+
 		<action path="/communities/edit_team" type="com.liferay.portlet.communities.action.EditTeamAction">
 			<forward name="portlet.communities.edit_team" path="portlet.communities.edit_team" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
@@ -687,6 +692,11 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
+		<action path="/enterprise_admin/edit_settings" type="com.liferay.portlet.sitesettings.action.EditSettingsAction">
+			<forward name="portlet.site_settings.edit_settings" path="portlet.site_settings.edit_settings" />
+			<forward name="portlet.site_settings.error" path="portlet.site_settings.error" />
+		</action>
+
 		<action path="/enterprise_admin/edit_team" type="com.liferay.portlet.communities.action.EditTeamAction">
 			<forward name="portlet.communities.edit_team" path="portlet.communities.edit_team" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
@@ -792,6 +802,11 @@
 			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
 		</action>
 
+		<action path="/enterprise_admin_communities/edit_settings" type="com.liferay.portlet.sitesettings.action.EditSettingsAction">
+			<forward name="portlet.site_settings.edit_settings" path="portlet.site_settings.edit_settings" />
+			<forward name="portlet.site_settings.error" path="portlet.site_settings.error" />
+		</action>
+
 		<action path="/enterprise_admin_communities/edit_team" type="com.liferay.portlet.communities.action.EditTeamAction">
 			<forward name="portlet.communities.edit_team" path="portlet.communities.edit_team" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
@@ -884,6 +899,11 @@
 
 		<action path="/enterprise_admin_organizations/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/enterprise_admin_organizations/edit_settings" type="com.liferay.portlet.sitesettings.action.EditSettingsAction">
+			<forward name="portlet.site_settings.edit_settings" path="portlet.site_settings.edit_settings" />
+			<forward name="portlet.site_settings.error" path="portlet.site_settings.error" />
 		</action>
 
 		<action path="/enterprise_admin_organizations/edit_team" type="com.liferay.portlet.communities.action.EditTeamAction">
@@ -2021,6 +2041,13 @@
 		<!-- Site Map -->
 
 		<action path="/site_map/view" forward="portlet.site_map.view" />
+
+		<!-- Site Settings -->
+
+		<action path="/site_settings/edit_settings" type="com.liferay.portlet.sitesettings.action.EditSettingsAction">
+			<forward name="portlet.site_settings.edit_settings" path="portlet.site_settings.edit_settings" />
+			<forward name="portlet.site_settings.error" path="portlet.site_settings.error" />
+		</action>
 
 		<!-- Update Manager -->
 

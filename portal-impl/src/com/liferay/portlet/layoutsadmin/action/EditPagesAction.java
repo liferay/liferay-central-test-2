@@ -47,7 +47,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
-import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -57,7 +56,6 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -79,8 +77,6 @@ import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.util.servlet.UploadException;
-
-import java.io.File;
 
 import java.util.Locale;
 import java.util.Map;
@@ -140,26 +136,17 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("display_order")) {
 				updateDisplayOrder(actionRequest);
 			}
-			else if (cmd.equals("logo")) {
-				updateLogo(actionRequest);
-			}
 			else if (cmd.equals("look_and_feel")) {
 				updateLookAndFeel(actionRequest);
 			}
 			else if (cmd.equals("merge_pages")) {
 				updateMergePages(actionRequest);
 			}
-			else if (cmd.equals("monitoring")) {
-				updateMonitoring(actionRequest);
-			}
 			else if (cmd.equals("publish_to_live")) {
 				StagingUtil.publishToLive(actionRequest);
 			}
 			else if (cmd.equals("publish_to_remote")) {
 				StagingUtil.publishToRemote(actionRequest);
-			}
-			else if (cmd.equals("robots")) {
-				updateRobots(actionRequest);
 			}
 			else if (cmd.equals("schedule_copy_from_live")) {
 				StagingUtil.scheduleCopyFromLive(actionRequest);
@@ -170,9 +157,6 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("schedule_publish_to_remote")) {
 				StagingUtil.schedulePublishToRemote(actionRequest);
 			}
-			else if (cmd.equals("staging")) {
-				StagingUtil.updateStaging(actionRequest);
-			}
 			else if (cmd.equals("unschedule_copy_from_live")) {
 				StagingUtil.unscheduleCopyFromLive(actionRequest);
 			}
@@ -181,9 +165,6 @@ public class EditPagesAction extends PortletAction {
 			}
 			else if (cmd.equals("unschedule_publish_to_remote")) {
 				StagingUtil.unschedulePublishToRemote(actionRequest);
-			}
-			else if (cmd.equals("virtual_host")) {
-				updateVirtualHost(actionRequest);
 			}
 
 			String redirect = (String)actionRequest.getAttribute(
@@ -615,33 +596,6 @@ public class EditPagesAction extends PortletAction {
 		return new Object[] {layout, oldFriendlyURL};
 	}
 
-	protected void updateLogo(ActionRequest actionRequest) throws Exception {
-		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
-			actionRequest);
-
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
-		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
-
-		boolean privateLayout = ParamUtil.getBoolean(
-			actionRequest, "privateLayout");
-		boolean logo = ParamUtil.getBoolean(actionRequest, "logo");
-
-		File file = uploadRequest.getFile("logoFileName");
-		byte[] bytes = FileUtil.getBytes(file);
-
-		if (logo && ((bytes == null) || (bytes.length == 0))) {
-			throw new UploadException();
-		}
-
-		LayoutSetServiceUtil.updateLogo(liveGroupId, privateLayout, logo, file);
-
-		if (stagingGroupId > 0) {
-			LayoutSetServiceUtil.updateLogo(
-				stagingGroupId, privateLayout, logo, file);
-		}
-	}
-
 	protected void updateLookAndFeel(ActionRequest actionRequest)
 		throws Exception {
 
@@ -715,99 +669,6 @@ public class EditPagesAction extends PortletAction {
 			"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
 
 		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
-	}
-
-	protected void updateMonitoring(ActionRequest actionRequest)
-		throws Exception {
-
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
-
-		String googleAnalyticsId = ParamUtil.getString(
-			actionRequest, "googleAnalyticsId");
-
-		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
-
-		UnicodeProperties typeSettingsProperties =
-			liveGroup.getTypeSettingsProperties();
-
-		typeSettingsProperties.setProperty(
-			"googleAnalyticsId", googleAnalyticsId);
-
-		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
-	}
-
-	protected void updateRobots(ActionRequest actionRequest)
-		throws Exception {
-
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
-
-		String publicRobots = ParamUtil.getString(
-			actionRequest, "publicRobots");
-		String privateRobots = ParamUtil.getString(
-			actionRequest, "privateRobots");
-
-		updateRobots(liveGroupId, false, publicRobots);
-		updateRobots(liveGroupId, true, privateRobots);
-	}
-
-	protected void updateRobots(
-			long groupId, boolean privateLayout, String robots)
-		throws Exception {
-
-		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-			groupId, privateLayout);
-
-		UnicodeProperties settingsProperties =
-			layoutSet.getSettingsProperties();
-
-		settingsProperties.setProperty(privateLayout + "-robots.txt", robots);
-
-		layoutSet.setSettingsProperties(settingsProperties);
-
-		LayoutSetLocalServiceUtil.updateSettings(
-			groupId, privateLayout, layoutSet.getSettings());
-	}
-
-	protected void updateVirtualHost(ActionRequest actionRequest)
-		throws Exception {
-
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
-
-		String publicVirtualHost = ParamUtil.getString(
-			actionRequest, "publicVirtualHost");
-		String privateVirtualHost = ParamUtil.getString(
-			actionRequest, "privateVirtualHost");
-		String friendlyURL = ParamUtil.getString(actionRequest, "friendlyURL");
-
-		LayoutSetServiceUtil.updateVirtualHost(
-			liveGroupId, false, publicVirtualHost);
-
-		LayoutSetServiceUtil.updateVirtualHost(
-			liveGroupId, true, privateVirtualHost);
-
-		GroupServiceUtil.updateFriendlyURL(liveGroupId, friendlyURL);
-
-		Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
-
-		if (liveGroup.hasStagingGroup()) {
-			Group stagingGroup = liveGroup.getStagingGroup();
-
-			publicVirtualHost = ParamUtil.getString(
-				actionRequest, "stagingPublicVirtualHost");
-			privateVirtualHost = ParamUtil.getString(
-				actionRequest, "stagingPrivateVirtualHost");
-			friendlyURL = ParamUtil.getString(
-				actionRequest, "stagingFriendlyURL");
-
-			LayoutSetServiceUtil.updateVirtualHost(
-				stagingGroup.getGroupId(), false, publicVirtualHost);
-
-			LayoutSetServiceUtil.updateVirtualHost(
-				stagingGroup.getGroupId(), true, privateVirtualHost);
-
-			GroupServiceUtil.updateFriendlyURL(
-				stagingGroup.getGroupId(), friendlyURL);
-		}
 	}
 
 }

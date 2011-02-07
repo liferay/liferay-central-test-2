@@ -220,12 +220,7 @@ if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletK
 		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(), null);
 	}
 
-	if (portletName.equals(PortletKeys.LAYOUTS_ADMIN) && tabs1.equals("settings")) {
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "settings"), currentURL);
-	}
-	else {
-		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
-	}
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "manage-pages"), currentURL);
 }
 
 request.setAttribute("edit_pages.jsp-tab4", tabs4);
@@ -275,9 +270,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 		tabs1URL = userTabs1URL.toString();
 	}
-	else if (!liveGroup.isUserGroup() && ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)))) {
-		tabs1Names += ",settings";
-	}
 	%>
 
 	<liferay-ui:tabs
@@ -292,11 +284,4 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	%>
 </c:if>
 
-<c:choose>
-	<c:when test='<%= tabs1.equals("settings") %>'>
-		<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_settings.jsp" />
-	</c:when>
-	<c:otherwise>
-		<liferay-util:include page="/html/portlet/layouts_admin/edit_pages.jsp" />
-	</c:otherwise>
-</c:choose>
+<liferay-util:include page="/html/portlet/layouts_admin/edit_pages.jsp" />
