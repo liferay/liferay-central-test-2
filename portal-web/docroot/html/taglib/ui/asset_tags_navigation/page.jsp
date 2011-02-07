@@ -55,7 +55,7 @@ else {
 <%!
 private String _buildTagsNavigation(long groupId, String selectedTagName, PortletURL portletURL, long classNameId, String displayStyle, boolean showAssetCount, boolean showZeroAssetCount) throws Exception {
 	List<AssetTag> tags = null;
-		
+
 	if(classNameId > 0) {
 		tags = AssetTagServiceUtil.getTags(groupId, classNameId, null);
 	}
