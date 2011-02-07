@@ -86,17 +86,14 @@ public class LayoutPrototypeLocalServiceImpl
 		return layoutPrototype;
 	}
 
-	public void deleteLayoutPrototype(long layoutPrototypeId)
+	public void deleteLayoutPrototype(LayoutPrototype layoutPrototype)
 		throws PortalException, SystemException {
-
-		LayoutPrototype layoutPrototype =
-			layoutPrototypePersistence.findByPrimaryKey(layoutPrototypeId);
 
 		// Group
 
 		Group group = layoutPrototype.getGroup();
 
-		groupLocalService.deleteGroup(group.getGroupId());
+		groupLocalService.deleteGroup(group);
 
 		// Resources
 
@@ -112,6 +109,15 @@ public class LayoutPrototypeLocalServiceImpl
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+	}
+
+	public void deleteLayoutPrototype(long layoutPrototypeId)
+		throws PortalException, SystemException {
+
+		LayoutPrototype layoutPrototype =
+			layoutPrototypePersistence.findByPrimaryKey(layoutPrototypeId);
+
+		deleteLayoutPrototype(layoutPrototype);
 	}
 
 	public List<LayoutPrototype> search(

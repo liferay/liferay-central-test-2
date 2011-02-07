@@ -79,11 +79,13 @@ public class PasswordPolicyLocalServiceUtil {
 	* Deletes the password policy from the database. Also notifies the appropriate model listeners.
 	*
 	* @param passwordPolicy the password policy to delete
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deletePasswordPolicy(
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deletePasswordPolicy(passwordPolicy);
 	}
 

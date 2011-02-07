@@ -78,10 +78,12 @@ public class TeamLocalServiceUtil {
 	* Deletes the team from the database. Also notifies the appropriate model listeners.
 	*
 	* @param team the team to delete
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public static void deleteTeam(com.liferay.portal.model.Team team)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteTeam(team);
 	}
 

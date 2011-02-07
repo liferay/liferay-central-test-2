@@ -69,10 +69,12 @@ public class UserGroupLocalServiceWrapper implements UserGroupLocalService {
 	* Deletes the user group from the database. Also notifies the appropriate model listeners.
 	*
 	* @param userGroup the user group to delete
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteUserGroup(com.liferay.portal.model.UserGroup userGroup)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_userGroupLocalService.deleteUserGroup(userGroup);
 	}
 

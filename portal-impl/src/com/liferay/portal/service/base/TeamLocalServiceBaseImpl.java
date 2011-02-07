@@ -252,9 +252,10 @@ public abstract class TeamLocalServiceBaseImpl implements TeamLocalService {
 	 * Deletes the team from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param team the team to delete
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteTeam(Team team) throws SystemException {
+	public void deleteTeam(Team team) throws PortalException, SystemException {
 		teamPersistence.remove(team);
 	}
 

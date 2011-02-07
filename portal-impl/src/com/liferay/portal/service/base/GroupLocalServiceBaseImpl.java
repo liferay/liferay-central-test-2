@@ -327,9 +327,11 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 	 * Deletes the group from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param group the group to delete
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteGroup(Group group) throws SystemException {
+	public void deleteGroup(Group group)
+		throws PortalException, SystemException {
 		groupPersistence.remove(group);
 	}
 

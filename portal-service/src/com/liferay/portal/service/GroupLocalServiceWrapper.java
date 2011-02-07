@@ -68,10 +68,12 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 	* Deletes the group from the database. Also notifies the appropriate model listeners.
 	*
 	* @param group the group to delete
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteGroup(com.liferay.portal.model.Group group)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_groupLocalService.deleteGroup(group);
 	}
 

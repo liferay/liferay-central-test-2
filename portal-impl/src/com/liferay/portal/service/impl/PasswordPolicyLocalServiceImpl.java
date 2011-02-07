@@ -138,6 +138,12 @@ public class PasswordPolicyLocalServiceImpl
 		PasswordPolicy passwordPolicy =
 			passwordPolicyPersistence.findByPrimaryKey(passwordPolicyId);
 
+		deletePasswordPolicy(passwordPolicy);
+	}
+
+	public void deletePasswordPolicy(PasswordPolicy passwordPolicy)
+		throws PortalException, SystemException {
+
 		if (passwordPolicy.isDefaultPolicy()) {
 			throw new RequiredPasswordPolicyException();
 		}
@@ -145,7 +151,7 @@ public class PasswordPolicyLocalServiceImpl
 		// Password policy relations
 
 		passwordPolicyRelLocalService.deletePasswordPolicyRels(
-			passwordPolicyId);
+			passwordPolicy.getPasswordPolicyId());
 
 		// Resources
 

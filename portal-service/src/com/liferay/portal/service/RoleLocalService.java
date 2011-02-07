@@ -76,10 +76,12 @@ public interface RoleLocalService {
 	* Deletes the role from the database. Also notifies the appropriate model listeners.
 	*
 	* @param role the role to delete
+	* @throws PortalException
 	* @throws SystemException if a system exception occurred
 	*/
 	public void deleteRole(com.liferay.portal.model.Role role)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Performs a dynamic query on the database and returns the matching rows.

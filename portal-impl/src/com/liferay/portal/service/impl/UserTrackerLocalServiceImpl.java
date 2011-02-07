@@ -78,13 +78,23 @@ public class UserTrackerLocalServiceImpl
 	public void deleteUserTracker(long userTrackerId)
 		throws PortalException, SystemException {
 
+		UserTracker userTracker = userTrackerPersistence.findByPrimaryKey(
+			userTrackerId);
+
+		deleteUserTracker(userTracker);
+	}
+
+	public void deleteUserTracker(UserTracker userTracker)
+		throws SystemException {
+
 		// Paths
 
-		userTrackerPathPersistence.removeByUserTrackerId(userTrackerId);
+		userTrackerPathPersistence.removeByUserTrackerId(
+			userTracker.getUserTrackerId());
 
 		// User tracker
 
-		userTrackerPersistence.remove(userTrackerId);
+		userTrackerPersistence.remove(userTracker);
 	}
 
 	public List<UserTracker> getUserTrackers(long companyId, int start, int end)

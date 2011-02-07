@@ -345,42 +345,45 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteGroup(long groupId)
+	public void deleteGroup(Group group)
 		throws PortalException, SystemException {
 
-		Group group = groupPersistence.findByPrimaryKey(groupId);
-
 		if (PortalUtil.isSystemGroup(group.getName())) {
-			throw new RequiredGroupException(String.valueOf(groupId));
+			throw new RequiredGroupException(
+				String.valueOf(group.getGroupId()));
 		}
 
 		// Layout branches
 
-		layoutSetBranchLocalService.deleteLayoutSetBranches(groupId, true);
-		layoutSetBranchLocalService.deleteLayoutSetBranches(groupId, false);
+		layoutSetBranchLocalService.deleteLayoutSetBranches(
+			group.getGroupId(), true);
+
+		layoutSetBranchLocalService.deleteLayoutSetBranches(
+			group.getGroupId(), false);
 
 		// Layout sets
 
 		try {
-			layoutSetLocalService.deleteLayoutSet(groupId, true);
+			layoutSetLocalService.deleteLayoutSet(group.getGroupId(), true);
 		}
 		catch (NoSuchLayoutSetException nslse) {
 		}
 
 		try {
-			layoutSetLocalService.deleteLayoutSet(groupId, false);
+			layoutSetLocalService.deleteLayoutSet(group.getGroupId(), false);
 		}
 		catch (NoSuchLayoutSetException nslse) {
 		}
 
 		// Group roles
 
-		userGroupRoleLocalService.deleteUserGroupRolesByGroupId(groupId);
+		userGroupRoleLocalService.deleteUserGroupRolesByGroupId(
+			group.getGroupId());
 
 		// User group roles
 
 		userGroupGroupRoleLocalService.deleteUserGroupGroupRolesByGroupId(
-			groupId);
+			group.getGroupId());
 
 		// Membership requests
 
@@ -411,70 +414,74 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Asset
 
 		if (group.isCommunity()) {
-			assetEntryLocalService.deleteEntry(Group.class.getName(), groupId);
+			assetEntryLocalService.deleteEntry(
+				Group.class.getName(), group.getGroupId());
 		}
 
 		// Blogs
 
-		blogsEntryLocalService.deleteEntries(groupId);
-		blogsStatsUserLocalService.deleteStatsUserByGroupId(groupId);
+		blogsEntryLocalService.deleteEntries(group.getGroupId());
+		blogsStatsUserLocalService.deleteStatsUserByGroupId(group.getGroupId());
 
 		// Bookmarks
 
-		bookmarksFolderLocalService.deleteFolders(groupId);
+		bookmarksFolderLocalService.deleteFolders(group.getGroupId());
 
 		// Calendar
 
-		calEventLocalService.deleteEvents(groupId);
+		calEventLocalService.deleteEvents(group.getGroupId());
 
 		// Document library
 
-		dlAppLocalService.deleteAll(groupId);
+		dlAppLocalService.deleteAll(group.getGroupId());
 
 		// Image gallery
 
-		igFolderLocalService.deleteFolders(groupId);
+		igFolderLocalService.deleteFolders(group.getGroupId());
 
 		// Journal
 
-		journalArticleLocalService.deleteArticles(groupId);
-		journalTemplateLocalService.deleteTemplates(groupId);
-		journalStructureLocalService.deleteStructures(groupId);
+		journalArticleLocalService.deleteArticles(group.getGroupId());
+		journalTemplateLocalService.deleteTemplates(group.getGroupId());
+		journalStructureLocalService.deleteStructures(group.getGroupId());
 
 		// Message boards
 
-		mbBanLocalService.deleteBansByGroupId(groupId);
-		mbCategoryLocalService.deleteCategories(groupId);
-		mbStatsUserLocalService.deleteStatsUsersByGroupId(groupId);
+		mbBanLocalService.deleteBansByGroupId(group.getGroupId());
+		mbCategoryLocalService.deleteCategories(group.getGroupId());
+		mbStatsUserLocalService.deleteStatsUsersByGroupId(group.getGroupId());
 
 		// Polls
 
-		pollsQuestionLocalService.deleteQuestions(groupId);
+		pollsQuestionLocalService.deleteQuestions(group.getGroupId());
 
 		// Shopping
 
-		shoppingCartLocalService.deleteGroupCarts(groupId);
-		shoppingCategoryLocalService.deleteCategories(groupId);
-		shoppingCouponLocalService.deleteCoupons(groupId);
-		shoppingOrderLocalService.deleteOrders(groupId);
+		shoppingCartLocalService.deleteGroupCarts(group.getGroupId());
+		shoppingCategoryLocalService.deleteCategories(group.getGroupId());
+		shoppingCouponLocalService.deleteCoupons(group.getGroupId());
+		shoppingOrderLocalService.deleteOrders(group.getGroupId());
 
 		// Software catalog
 
-		scFrameworkVersionLocalService.deleteFrameworkVersions(groupId);
-		scProductEntryLocalService.deleteProductEntries(groupId);
+		scFrameworkVersionLocalService.deleteFrameworkVersions(
+			group.getGroupId());
+
+		scProductEntryLocalService.deleteProductEntries(group.getGroupId());
 
 		// Tasks
 
-		tasksProposalLocalService.deleteProposals(groupId);
+		tasksProposalLocalService.deleteProposals(group.getGroupId());
 
 		// Wiki
 
-		wikiNodeLocalService.deleteNodes(groupId);
+		wikiNodeLocalService.deleteNodes(group.getGroupId());
 
 		// Resources
 
 		Iterator<Resource> itr = resourceFinder.findByC_P(
-			group.getCompanyId(), String.valueOf(groupId)).iterator();
+			group.getCompanyId(),
+			String.valueOf(group.getGroupId())).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = itr.next();
@@ -497,6 +504,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+	}
+
+	public void deleteGroup(long groupId)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		deleteGroup(group);
 	}
 
 	public Group getCompanyGroup(long companyId)

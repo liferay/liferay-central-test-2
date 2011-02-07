@@ -252,9 +252,10 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService {
 	 * Deletes the role from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param role the role to delete
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteRole(Role role) throws SystemException {
+	public void deleteRole(Role role) throws PortalException, SystemException {
 		rolePersistence.remove(role);
 	}
 

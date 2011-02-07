@@ -186,6 +186,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		Role role = rolePersistence.findByPrimaryKey(roleId);
 
+		deleteRole(role);
+	}
+
+	public void deleteRole(Role role)
+		throws PortalException, SystemException {
+
 		if (PortalUtil.isSystemRole(role.getName())) {
 			throw new RequiredRoleException();
 		}

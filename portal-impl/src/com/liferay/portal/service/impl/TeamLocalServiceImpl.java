@@ -82,9 +82,15 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 	public void deleteTeam(long teamId)
 		throws PortalException, SystemException {
 
-		// Team
-
 		Team team = teamPersistence.findByPrimaryKey(teamId);
+
+		deleteTeam(team);
+	}
+
+	public void deleteTeam(Team team)
+		throws PortalException, SystemException {
+
+		// Team
 
 		teamPersistence.remove(team);
 
@@ -98,7 +104,7 @@ public class TeamLocalServiceImpl extends TeamLocalServiceBaseImpl {
 
 		Role role = team.getRole();
 
-		roleLocalService.deleteRole(role.getRoleId());
+		roleLocalService.deleteRole(role);
 	}
 
 	public void deleteTeams(long groupId)

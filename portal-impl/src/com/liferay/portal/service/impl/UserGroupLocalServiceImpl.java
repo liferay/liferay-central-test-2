@@ -169,26 +169,33 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
 			userGroupId);
 
-		if (userLocalService.getUserGroupUsersCount(
-				userGroupId, WorkflowConstants.STATUS_APPROVED) > 0) {
+		deleteUserGroup(userGroup);
+	}
 
+	public void deleteUserGroup(UserGroup userGroup)
+		throws PortalException, SystemException {
+
+		int userGroupCount = userLocalService.getUserGroupUsersCount(
+			userGroup.getUserGroupId(), WorkflowConstants.STATUS_APPROVED);
+
+		if (userGroupCount > 0) {
 			throw new RequiredUserGroupException();
 		}
 
 		// Users
 
-		clearUserUserGroups(userGroupId);
+		clearUserUserGroups(userGroup.getUserGroupId());
 
 		// Group
 
 		Group group = userGroup.getGroup();
 
-		groupLocalService.deleteGroup(group.getGroupId());
+		groupLocalService.deleteGroup(group);
 
 		// User group roles
 
 		userGroupGroupRoleLocalService.deleteUserGroupGroupRolesByUserGroupId(
-			userGroupId);
+			userGroup.getUserGroupId());
 
 		// Resources
 
@@ -198,7 +205,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		// User group
 
-		userGroupPersistence.remove(userGroupId);
+		userGroupPersistence.remove(userGroup);
 
 		// Permission cache
 

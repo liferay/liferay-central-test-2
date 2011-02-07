@@ -255,9 +255,11 @@ public abstract class UserGroupLocalServiceBaseImpl
 	 * Deletes the user group from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param userGroup the user group to delete
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void deleteUserGroup(UserGroup userGroup) throws SystemException {
+	public void deleteUserGroup(UserGroup userGroup)
+		throws PortalException, SystemException {
 		userGroupPersistence.remove(userGroup);
 	}
 
