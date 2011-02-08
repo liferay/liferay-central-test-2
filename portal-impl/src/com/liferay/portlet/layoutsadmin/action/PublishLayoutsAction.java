@@ -32,7 +32,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Alexander Chow
  * @author Raymond Augé
  */
-public class PublishPagesAction extends PortletAction {
+public class PublishLayoutsAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -56,7 +56,7 @@ public class PublishPagesAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.layouts_admin.publish_pages"));
+			getForward(renderRequest, "portlet.layouts_admin.publish_layouts"));
 	}
 
 }

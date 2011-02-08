@@ -45,7 +45,7 @@ import org.apache.struts.action.ActionMapping;
  * @author Alexander Chow
  * @author Raymond Augé
  */
-public class ImportPagesAction extends PortletAction {
+public class ImportLayoutsAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -109,9 +109,9 @@ public class ImportPagesAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.layouts_admin.export_pages"));
+			getForward(renderRequest, "portlet.layouts_admin.export_layouts"));
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ImportPagesAction.class);
+	private static Log _log = LogFactoryUtil.getLog(ImportLayoutsAction.class);
 
 }

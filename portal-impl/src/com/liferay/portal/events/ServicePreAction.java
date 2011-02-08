@@ -1739,7 +1739,7 @@ public class ServicePreAction extends Action {
 					publishToLiveURL.setPortletMode(PortletMode.VIEW);
 
 					publishToLiveURL.setParameter(
-						"struts_action", "/layouts_admin/publish_pages");
+						"struts_action", "/layouts_admin/publish_layouts");
 
 					if (layout.isPrivateLayout()) {
 						publishToLiveURL.setParameter("tabs1", "private-pages");

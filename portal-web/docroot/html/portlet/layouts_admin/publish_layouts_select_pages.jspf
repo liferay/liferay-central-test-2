@@ -64,7 +64,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		jspSearchEntry.setAlign("left");
 		jspSearchEntry.setColspan(1);
-		jspSearchEntry.setPath("/html/portlet/layouts_admin/publish_page_options.jsp");
+		jspSearchEntry.setPath("/html/portlet/layouts_admin/publish_layout_options.jsp");
 		jspSearchEntry.setValign("top");
 
 		row.addSearchEntry(jspSearchEntry);

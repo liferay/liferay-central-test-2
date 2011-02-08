@@ -94,7 +94,7 @@
 							).render();
 
 							<portlet:renderURL var="exportPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-								<portlet:param name="struts_action" value="/layouts_admin/export_pages" />
+								<portlet:param name="struts_action" value="/layouts_admin/export_layouts" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
 								<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 								<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
@@ -131,7 +131,7 @@
 							).render();
 
 							<portlet:renderURL var="importPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-								<portlet:param name="struts_action" value="/layouts_admin/import_pages" />
+								<portlet:param name="struts_action" value="/layouts_admin/import_layouts" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
 								<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 								<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />

@@ -841,7 +841,7 @@
 		<put name="portlet_content" value="/portlet/layouts_admin/edit_proposal.jsp" />
 	</definition>
 
-	<definition name="portlet.layouts_admin.export_pages" extends="portlet.layouts_admin">
+	<definition name="portlet.layouts_admin.export_layouts" extends="portlet.layouts_admin">
 		<put name="portlet_content" value="/portlet/layouts_admin/export_import.jsp" />
 	</definition>
 
@@ -849,8 +849,8 @@
 		<put name="portlet_content" value="/portlet/layouts_admin/error.jsp" />
 	</definition>
 
-	<definition name="portlet.layouts_admin.publish_pages" extends="portlet.layouts_admin">
-		<put name="portlet_content" value="/portlet/layouts_admin/publish_pages.jsp" />
+	<definition name="portlet.layouts_admin.publish_layouts" extends="portlet.layouts_admin">
+		<put name="portlet_content" value="/portlet/layouts_admin/publish_layouts.jsp" />
 	</definition>
 
 	<definition name="portlet.layouts_admin.publish_portlet" extends="portlet.layouts_admin">
