@@ -27,9 +27,20 @@ public class SessionClicks_IW {
 		return SessionClicks.get(request, key, defaultValue);
 	}
 
+	public java.lang.String get(javax.servlet.http.HttpServletRequest request,
+		java.lang.String namespace, java.lang.String key,
+		java.lang.String defaultValue) {
+		return SessionClicks.get(request, namespace, key, defaultValue);
+	}
+
 	public void put(javax.servlet.http.HttpServletRequest request,
 		java.lang.String key, java.lang.String value) {
 		SessionClicks.put(request, key, value);
+	}
+
+	public void put(javax.servlet.http.HttpServletRequest request,
+		java.lang.String namespace, java.lang.String key, java.lang.String value) {
+		SessionClicks.put(request, namespace, key, value);
 	}
 
 	private SessionClicks_IW() {

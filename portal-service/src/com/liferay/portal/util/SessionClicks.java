@@ -27,12 +27,15 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SessionClicks {
 
+	/**
+	 * @deprecated {@link #_DEFAULT_NAMESPACE}
+	 */
 	public static final String CLASS_NAME = SessionClicks.class.getName();
 
 	public static String get(
 		HttpServletRequest request, String key, String defaultValue) {
 
-		return get(request, CLASS_NAME, key, defaultValue);
+		return get(request, _DEFAULT_NAMESPACE, key, defaultValue);
 	}
 
 	public static String get(
@@ -55,7 +58,7 @@ public class SessionClicks {
 	public static void put(
 		HttpServletRequest request, String key, String value) {
 
-		put(request, CLASS_NAME, key, value);
+		put(request, _DEFAULT_NAMESPACE, key, value);
 	}
 
 	public static void put(
@@ -72,6 +75,9 @@ public class SessionClicks {
 			_log.error(e, e);
 		}
 	}
+
+	private static final String _DEFAULT_NAMESPACE =
+		SessionClicks.class.getName();
 
 	private static Log _log = LogFactoryUtil.getLog(SessionClicks.class);
 
