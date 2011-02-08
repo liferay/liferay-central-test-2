@@ -27,11 +27,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SessionClicks {
 
-	/**
-	 * @deprecated {@link #_DEFAULT_NAMESPACE}
-	 */
-	public static final String CLASS_NAME = SessionClicks.class.getName();
-
 	public static String get(
 		HttpServletRequest request, String key, String defaultValue) {
 
