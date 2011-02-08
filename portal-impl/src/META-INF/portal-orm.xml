@@ -2792,41 +2792,6 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.forms.model.impl.FormsStructureEntryModelImpl">
-		<attributes>
-			<id name="id">
-				<column name="ID_" />
-			</id>
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="formStructureId" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="xsd" />
-			<transient name="primaryKey" />
-			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.forms.model.impl.FormsStructureEntryLinkModelImpl">
-		<attributes>
-			<id name="formStructureLinkId" />
-			<basic name="formStructureId" />
-			<basic name="className" />
-			<basic name="classPK" />
-			<transient name="primaryKey" />
-		</attributes>
-	</mapped-superclass>
 	<entity class="com.liferay.portal.model.impl.AccountImpl" name="Account">
 		<table name="Account_" />
 		<attributes />
@@ -3512,14 +3477,6 @@
 	</entity>
 	<entity class="com.liferay.counter.model.impl.CounterImpl" name="Counter">
 		<table name="Counter" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.forms.model.impl.FormsStructureEntryImpl" name="FormsStructureEntry">
-		<table name="FormsStructureEntry" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.forms.model.impl.FormsStructureEntryLinkImpl" name="FormsStructureEntryLink">
-		<table name="FormsStructureEntryLink" />
 		<attributes />
 	</entity>
 </entity-mappings>

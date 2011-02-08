@@ -391,10 +391,4 @@
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder" class="com.liferay.portlet.wiki.service.persistence.WikiPageFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService" class="com.liferay.portlet.wiki.service.impl.WikiPageResourceLocalServiceImpl" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.forms.service.FormsStructureEntryLocalService" class="com.liferay.portlet.forms.service.impl.FormsStructureEntryLocalServiceImpl" />
-	<bean id="com.liferay.portlet.forms.service.FormsStructureEntryService" class="com.liferay.portlet.forms.service.impl.FormsStructureEntryServiceImpl" />
-	<bean id="com.liferay.portlet.forms.service.persistence.FormsStructureEntryPersistence" class="com.liferay.portlet.forms.service.persistence.FormsStructureEntryPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.forms.service.FormsStructureEntryLinkLocalService" class="com.liferay.portlet.forms.service.impl.FormsStructureEntryLinkLocalServiceImpl" />
-	<bean id="com.liferay.portlet.forms.service.FormsStructureEntryLinkService" class="com.liferay.portlet.forms.service.impl.FormsStructureEntryLinkServiceImpl" />
-	<bean id="com.liferay.portlet.forms.service.persistence.FormsStructureEntryLinkPersistence" class="com.liferay.portlet.forms.service.persistence.FormsStructureEntryLinkPersistenceImpl" parent="basePersistence" />
 </beans>

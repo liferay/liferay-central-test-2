@@ -997,28 +997,4 @@
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService" />
 		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
 	</bean>
-	<bean name="/com_liferay_portlet_forms_service_spring_FormsStructureEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.forms.service.FormsStructureEntryService" />
-		<property name="serviceInterface" value="com.liferay.portlet.forms.service.FormsStructureEntryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_forms_service_spring_FormsStructureEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.forms.service.FormsStructureEntryService" />
-		<property name="serviceInterface" value="com.liferay.portlet.forms.service.FormsStructureEntryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_forms_service_spring_FormsStructureEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.forms.service.FormsStructureEntryService" />
-		<property name="serviceInterface" value="com.liferay.portlet.forms.service.FormsStructureEntryService" />
-	</bean>
-	<bean name="/com_liferay_portlet_forms_service_spring_FormsStructureEntryLinkService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.forms.service.FormsStructureEntryLinkService" />
-		<property name="serviceInterface" value="com.liferay.portlet.forms.service.FormsStructureEntryLinkService" />
-	</bean>
-	<bean name="/com_liferay_portlet_forms_service_spring_FormsStructureEntryLinkService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.forms.service.FormsStructureEntryLinkService" />
-		<property name="serviceInterface" value="com.liferay.portlet.forms.service.FormsStructureEntryLinkService" />
-	</bean>
-	<bean name="/com_liferay_portlet_forms_service_spring_FormsStructureEntryLinkService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.forms.service.FormsStructureEntryLinkService" />
-		<property name="serviceInterface" value="com.liferay.portlet.forms.service.FormsStructureEntryLinkService" />
-	</bean>
 </beans>
