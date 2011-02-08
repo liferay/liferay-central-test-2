@@ -104,6 +104,30 @@ import javax.servlet.ServletContext;
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
+	public void addPortletCategory(long companyId, String categoryName) {
+		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
+			String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
+
+		if (portletCategory == null) {
+			_log.error(
+				"Unable to add portlet category for company " + companyId +
+					" because it does not exist");
+
+			return;
+		}
+
+		PortletCategory newPortletCategory = new PortletCategory(categoryName);
+
+		if (newPortletCategory.getParentCategory() == null) {
+			PortletCategory rootPortletCategory =
+				new PortletCategory();
+
+			rootPortletCategory.addCategory(newPortletCategory);
+		}
+
+		portletCategory.merge(newPortletCategory.getRootCategory());
+	}
+
 	public void checkPortlet(Portlet portlet)
 		throws PortalException, SystemException {
 
@@ -180,6 +204,12 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	public Portlet deployRemotePortlet(Portlet portlet, String categoryName)
 		throws SystemException {
 
+		return deployRemotePortlet(portlet, new String[]{categoryName});
+	}
+
+	public Portlet deployRemotePortlet(Portlet portlet, String[] categoryNames)
+		throws SystemException {
+
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		portletsPool.put(portlet.getPortletId(), portlet);
@@ -191,34 +221,43 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		clearCache();
 
-		PortletCategory newPortletCategory = new PortletCategory();
-
-		PortletCategory oldPortletCategory = new PortletCategory(categoryName);
-
-		newPortletCategory.addCategory(oldPortletCategory);
-
-		oldPortletCategory.getPortletIds().add(portlet.getPortletId());
-
-		long companyId = portlet.getCompanyId();
-
-		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
-			String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
-
-		if (portletCategory != null) {
-			portletCategory.merge(newPortletCategory);
-		}
-		else {
-			_log.error(
-				"Unable to register remote portlet for company " + companyId +
-					" because it does not exist");
-		}
-
 		List<String> portletActions =
 			ResourceActionsUtil.getPortletResourceActions(
 				portlet.getPortletId());
 
 		resourceActionLocalService.checkResourceActions(
 			portlet.getPortletId(), portletActions);
+
+		long companyId = portlet.getCompanyId();
+
+		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
+			String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
+
+		if (portletCategory == null) {
+			_log.error(
+				"Unable to register remote portlet for company " + companyId +
+					" because it does not exist");
+
+			return portlet;
+		}
+
+		portletCategory.separate(portlet.getPortletId());
+
+		for (String categoryName : categoryNames) {
+			PortletCategory newPortletCategory = new PortletCategory(
+				categoryName);
+
+			if (newPortletCategory.getParentCategory() == null) {
+				PortletCategory rootPortletCategory =
+					new PortletCategory();
+
+				rootPortletCategory.addCategory(newPortletCategory);
+			}
+
+			newPortletCategory.getPortletIds().add(portlet.getPortletId());
+
+			portletCategory.merge(newPortletCategory.getRootCategory());
+		}
 
 		return portlet;
 	}
