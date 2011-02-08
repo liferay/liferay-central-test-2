@@ -216,6 +216,10 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		return _portletLocalService.updatePortlet(portlet, merge);
 	}
 
+	public void addPortletCategory(long companyId, java.lang.String categoryName) {
+		_portletLocalService.addPortletCategory(companyId, categoryName);
+	}
+
 	public void checkPortlet(com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -242,6 +246,13 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		com.liferay.portal.model.Portlet portlet, java.lang.String categoryName)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletLocalService.deployRemotePortlet(portlet, categoryName);
+	}
+
+	public com.liferay.portal.model.Portlet deployRemotePortlet(
+		com.liferay.portal.model.Portlet portlet,
+		java.lang.String[] categoryNames)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _portletLocalService.deployRemotePortlet(portlet, categoryNames);
 	}
 
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet) {

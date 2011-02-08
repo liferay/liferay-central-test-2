@@ -206,6 +206,8 @@ public interface PortletLocalService {
 		com.liferay.portal.model.Portlet portlet, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void addPortletCategory(long companyId, java.lang.String categoryName);
+
 	public void checkPortlet(com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -222,6 +224,11 @@ public interface PortletLocalService {
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet, java.lang.String categoryName)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portal.model.Portlet deployRemotePortlet(
+		com.liferay.portal.model.Portlet portlet,
+		java.lang.String[] categoryNames)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet);
