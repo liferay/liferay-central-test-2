@@ -30,6 +30,8 @@ public class SocialRelationConstants {
 
 	public static final int TYPE_BI_SPOUSE = 5;
 
+	public static final int TYPE_UNI_BLOCK = 9;
+
 	public static final int TYPE_UNI_CHILD = 6;
 
 	public static final int TYPE_UNI_FOLLOWER = 8;
@@ -41,7 +43,8 @@ public class SocialRelationConstants {
 	}
 
 	public static boolean isTypeUni(int type) {
-		if ((type == SocialRelationConstants.TYPE_UNI_CHILD) ||
+		if ((type == SocialRelationConstants.TYPE_UNI_BLOCK) ||
+			(type == SocialRelationConstants.TYPE_UNI_CHILD) ||
 			(type == SocialRelationConstants.TYPE_UNI_FOLLOWER) ||
 			(type == SocialRelationConstants.TYPE_UNI_PARENT)) {
 
