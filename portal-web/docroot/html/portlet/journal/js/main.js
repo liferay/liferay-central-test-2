@@ -507,7 +507,7 @@ AUI().add(
 
 				var workflowActionInput = instance.getByName(form, 'workflowAction');
 
-				workflowActionInput.val(Liferay.Workflow.STATUS_ANY);
+				workflowActionInput.val(Liferay.Workflow.STATUS_DRAFT);
 
 				var languageId = languageIdInput.val();
 				var getLanguageViewURL = window[instance.portletNamespace + 'getLanguageViewURL'];
