@@ -50,7 +50,7 @@ public class DLAppHelperLocalServiceImpl
 		throws PortalException, SystemException {
 
 		long userId = fileEntry.getUserId();
-		long groupId = fileEntry.getRepositoryId();
+		long groupId = fileEntry.getGroupId();
 		long fileEntryId = fileEntry.getFileEntryId();
 
 		// Message boards
@@ -112,7 +112,7 @@ public class DLAppHelperLocalServiceImpl
 
 		if (userId > 0) {
 			dlFileRankLocalService.updateFileRank(
-				fileEntry.getRepositoryId(), fileEntry.getCompanyId(), userId,
+				fileEntry.getGroupId(), fileEntry.getCompanyId(), userId,
 				fileEntry.getFileEntryId(), new ServiceContext());
 		}
 
@@ -248,7 +248,7 @@ public class DLAppHelperLocalServiceImpl
 
 		if (addDraftAssetEntry) {
 			assetEntryLocalService.updateEntry(
-				userId, fileEntry.getRepositoryId(),
+				userId, fileEntry.getGroupId(),
 				DLFileEntryConstants.getClassName(),
 				fileVersion.getFileVersionId(), fileEntry.getUuid(),
 				assetCategoryIds, assetTagNames, false, null, null, null, null,
@@ -257,7 +257,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 		else {
 			assetEntryLocalService.updateEntry(
-				userId, fileEntry.getRepositoryId(),
+				userId, fileEntry.getGroupId(),
 				DLFileEntryConstants.getClassName(),
 				fileEntry.getFileEntryId(), fileEntry.getUuid(),
 				assetCategoryIds, assetTagNames, visible, null, null, null,
@@ -305,7 +305,7 @@ public class DLAppHelperLocalServiceImpl
 						String[] assetTagNames = draftAssetEntry.getTagNames();
 
 						assetEntryLocalService.updateEntry(
-							userId, fileEntry.getRepositoryId(),
+							userId, fileEntry.getGroupId(),
 							DLFileEntryConstants.getClassName(),
 							fileEntry.getFileEntryId(), fileEntry.getUuid(),
 							assetCategoryIds, assetTagNames, true, null, null,
@@ -329,7 +329,7 @@ public class DLAppHelperLocalServiceImpl
 
 			socialActivityLocalService.addUniqueActivity(
 				latestFileVersion.getStatusByUserId(),
-				fileEntry.getRepositoryId(), latestFileVersion.getCreateDate(),
+				fileEntry.getGroupId(), latestFileVersion.getCreateDate(),
 				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
 				DLActivityKeys.ADD_FILE_ENTRY, StringPool.BLANK, 0);
 		}
