@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -81,7 +82,7 @@ public class LayoutStagingHandler implements InvocationHandler {
 					Class<?> layoutRevisionClass = _layoutRevision.getClass();
 
 					method = layoutRevisionClass.getMethod(
-						methodName, _getParameterTypes(args));
+						methodName, ReflectionUtil.getParameterTypes(args));
 
 					bean = _layoutRevision;
 				}
@@ -188,49 +189,6 @@ public class LayoutStagingHandler implements InvocationHandler {
 		}
 
 		return layoutRevision;
-	}
-
-	private Class<?>[] _getParameterTypes(Object[] arguments) {
-		if (arguments == null) {
-			return null;
-		}
-
-		Class<?>[] parameterTypes = new Class<?>[arguments.length];
-
-		for (int i = 0; i < arguments.length; i++) {
-			if (arguments[i] == null) {
-				parameterTypes[i] = null;
-			}
-			else if (arguments[i] instanceof Boolean) {
-				parameterTypes[i] = Boolean.TYPE;
-			}
-			else if (arguments[i] instanceof Byte) {
-				parameterTypes[i] = Byte.TYPE;
-			}
-			else if (arguments[i] instanceof Character) {
-				parameterTypes[i + 1] = Character.TYPE;
-			}
-			else if (arguments[i] instanceof Double) {
-				parameterTypes[i] = Double.TYPE;
-			}
-			else if (arguments[i] instanceof Float) {
-				parameterTypes[i] = Float.TYPE;
-			}
-			else if (arguments[i] instanceof Integer) {
-				parameterTypes[i] = Integer.TYPE;
-			}
-			else if (arguments[i] instanceof Long) {
-				parameterTypes[i] = Long.TYPE;
-			}
-			else if (arguments[i] instanceof Short) {
-				parameterTypes[i] = Short.TYPE;
-			}
-			else {
-				parameterTypes[i] = arguments[i].getClass();
-			}
-		}
-
-		return parameterTypes;
 	}
 
 	private Object _toEscapedModel() {
