@@ -67,7 +67,7 @@ public class DBBuilder {
 			_buildSQLFile(sqlDir, "portal-minimal");
 			_buildSQLFile(sqlDir, "indexes");
 			_buildSQLFile(sqlDir, "sequences");
-			_buildSQLFile(sqlDir, "tables");
+			_buildSQLFile(sqlDir, "portal-tables");
 			_buildSQLFile(sqlDir, "update-4.2.0-4.3.0");
 			_buildSQLFile(sqlDir, "update-4.3.0-4.3.1");
 			_buildSQLFile(sqlDir, "update-4.3.1-4.3.2");
