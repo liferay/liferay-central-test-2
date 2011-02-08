@@ -33,12 +33,6 @@ if (article.isApproved()) {
 else {
 	articleDisplay = JournalArticleLocalServiceUtil.getArticleDisplay(article, null, null, languageId, 1, null, themeDisplay);
 }
-
-String articleAbstract= articleDisplay.getDescription();
-
-if (Validator.isNull(articleAbstract)) {
-	articleAbstract = StringUtil.shorten(HtmlUtil.stripHtml(articleDisplay.getContent()), abstractLength);
-}
 %>
 
 <c:if test="<%= articleDisplay.isSmallImage() %>">
@@ -59,4 +53,4 @@ if (Validator.isNull(articleAbstract)) {
 	</div>
 </c:if>
 
-<%= articleAbstract %>
+<%= StringUtil.shorten(articleDisplay.getDescription(), abstractLength) %>

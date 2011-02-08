@@ -20,12 +20,6 @@
 int abstractLength = (Integer)request.getAttribute(WebKeys.ASSET_PUBLISHER_ABSTRACT_LENGTH);
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
-
-String articleAbstract= entry.getDescription();
-
-if (Validator.isNull(articleAbstract)) {
-	articleAbstract = StringUtil.shorten(HtmlUtil.stripHtml(entry.getContent()), abstractLength);
-}
 %>
 
 <c:if test="<%= entry.isSmallImage() %>">
@@ -46,4 +40,4 @@ if (Validator.isNull(articleAbstract)) {
 	</div>
 </c:if>
 
-<%= articleAbstract %>
+<%= StringUtil.shorten(entry.getDescription(), abstractLength) %>
