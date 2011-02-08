@@ -102,7 +102,7 @@ public class EditPagesAction extends PortletAction {
 			portletURL.setPortletMode(PortletMode.VIEW);
 
 			portletURL.setParameter(
-				"struts_action", "/layouts_admin/edit_pages");
+				"struts_action", "/layouts_admin/edit_layouts");
 			portletURL.setParameter("tabs1", tabs1);
 			portletURL.setParameter("redirect", redirect);
 			portletURL.setParameter("groupId", String.valueOf(groupId));

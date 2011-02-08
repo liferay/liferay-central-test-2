@@ -223,7 +223,7 @@
 				viewProposalsURL.setWindowState(WindowState.MAXIMIZED);
 				viewProposalsURL.setPortletMode(PortletMode.VIEW);
 
-				viewProposalsURL.setParameter("struts_action", "/layouts_admin/edit_pages");
+				viewProposalsURL.setParameter("struts_action", "/layouts_admin/edit_layouts");
 				viewProposalsURL.setParameter("tabs2", "proposals");
 				viewProposalsURL.setParameter("redirect", currentURL);
 				viewProposalsURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));

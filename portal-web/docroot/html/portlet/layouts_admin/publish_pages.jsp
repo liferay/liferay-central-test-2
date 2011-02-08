@@ -174,7 +174,7 @@ else {
 		cmd = "publish_to_remote";
 	}
 
-	portletURL.setParameter("struts_action", "/layouts_admin/edit_pages");
+	portletURL.setParameter("struts_action", "/layouts_admin/edit_layouts");
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 	portletURL.setParameter("private", String.valueOf(privateLayout));
 }
@@ -408,7 +408,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 						function(event){
 							<c:choose>
 								<c:when test="<%= proposalId > 0 %>">
-									window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/layouts_admin/edit_pages" /><portlet:param name="tabs2" value="proposals" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /></portlet:renderURL>';
+									window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/layouts_admin/edit_layouts" /><portlet:param name="tabs2" value="proposals" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /></portlet:renderURL>';
 								</c:when>
 								<c:otherwise>
 									window.location.reload(true);

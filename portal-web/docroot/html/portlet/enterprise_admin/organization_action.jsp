@@ -79,7 +79,7 @@ if (row == null) {
 
 	<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_LAYOUTS) %>">
 		<portlet:renderURL var="managePagesURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_layouts" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(organizationGroupId) %>" />
 		</portlet:renderURL>

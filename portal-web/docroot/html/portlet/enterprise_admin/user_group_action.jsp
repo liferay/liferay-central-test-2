@@ -56,7 +56,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 
 	<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
 		<portlet:renderURL var="managePagesURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_layouts" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(userGroup.getGroup().getGroupId()) %>" />
 		</portlet:renderURL>

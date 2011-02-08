@@ -60,7 +60,7 @@ long userId = user2.getUserId();
 
 	<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.UPDATE) && (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) %>">
 		<portlet:renderURL var="managePagesURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
+			<portlet:param name="struts_action" value="/enterprise_admin/edit_layouts" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(user2.getGroup().getGroupId()) %>" />
 		</portlet:renderURL>

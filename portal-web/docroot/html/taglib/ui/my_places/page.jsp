@@ -62,7 +62,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 					addPageURL.setWindowState(WindowState.NORMAL);
 					addPageURL.setPortletMode(PortletMode.VIEW);
 
-					addPageURL.setParameter("struts_action", "/my_places/edit_pages");
+					addPageURL.setParameter("struts_action", "/my_places/edit_layouts");
 					addPageURL.setParameter("redirect", currentURL);
 					addPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 					addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
@@ -81,7 +81,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 					addPageURL.setWindowState(WindowState.NORMAL);
 					addPageURL.setPortletMode(PortletMode.VIEW);
 
-					addPageURL.setParameter("struts_action", "/my_places/edit_pages");
+					addPageURL.setParameter("struts_action", "/my_places/edit_layouts");
 					addPageURL.setParameter("redirect", currentURL);
 					addPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 					addPageURL.setParameter("privateLayout", Boolean.FALSE.toString());
@@ -99,7 +99,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				publicAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				publicAddPageURL.setPortletMode(PortletMode.VIEW);
 
-				publicAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
+				publicAddPageURL.setParameter("struts_action", "/my_account/edit_layouts");
 				publicAddPageURL.setParameter("tabs1", "public-pages");
 				publicAddPageURL.setParameter("redirect", currentURL);
 				publicAddPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
@@ -113,7 +113,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 				privateAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				privateAddPageURL.setPortletMode(PortletMode.VIEW);
 
-				privateAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
+				privateAddPageURL.setParameter("struts_action", "/my_account/edit_layouts");
 				privateAddPageURL.setParameter("tabs1", "private-pages");
 				privateAddPageURL.setParameter("redirect", currentURL);
 				privateAddPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));

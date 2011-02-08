@@ -1253,7 +1253,7 @@
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/layouts_admin/edit_pages</value>
+			<value>/layouts_admin/edit_layouts</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2342,7 +2342,7 @@
         <portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
         <init-param>
             <name>view-action</name>
-            <value>/group_pages/edit_pages</value>
+            <value>/group_pages/edit_layouts</value>
         </init-param>
         <expiration-cache>0</expiration-cache>
         <supports>

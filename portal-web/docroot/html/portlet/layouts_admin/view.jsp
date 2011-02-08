@@ -228,7 +228,7 @@ String[] workflowRoleNames = StringUtil.split(ParamUtil.getString(request, "work
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setParameter("struts_action", "/layouts_admin/edit_pages");
+portletURL.setParameter("struts_action", "/layouts_admin/edit_layouts");
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
@@ -292,7 +292,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	if (liveGroup.isUser()) {
 		PortletURL userTabs1URL = renderResponse.createRenderURL();
 
-		userTabs1URL.setParameter("struts_action", "/my_pages/edit_pages");
+		userTabs1URL.setParameter("struts_action", "/my_pages/edit_layouts");
 		userTabs1URL.setParameter("tabs1", tabs1);
 		userTabs1URL.setParameter("backURL", backURL);
 		userTabs1URL.setParameter("groupId", String.valueOf(liveGroupId));
@@ -314,7 +314,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 </c:if>
 
 <portlet:actionURL var="editPagesURL">
-	<portlet:param name="struts_action" value="/layouts_admin/edit_pages" />
+	<portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
 </portlet:actionURL>
 
 <aui:form action="<%= editPagesURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>

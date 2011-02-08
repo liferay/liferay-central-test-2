@@ -46,7 +46,7 @@ Group group = layoutSetPrototype.getGroup();
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
 		<portlet:renderURL var="managePagesURL">
-			<portlet:param name="struts_action" value="/layout_set_prototypes/edit_pages" />
+			<portlet:param name="struts_action" value="/layout_set_prototypes/edit_layouts" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 		</portlet:renderURL>

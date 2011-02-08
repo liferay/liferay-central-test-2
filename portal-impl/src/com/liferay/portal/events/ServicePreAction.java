@@ -1681,7 +1681,7 @@ public class ServicePreAction extends Action {
 				pageSettingsURL.setPortletMode(PortletMode.VIEW);
 
 				pageSettingsURL.setParameter(
-					"struts_action", "/layouts_admin/edit_pages");
+					"struts_action", "/layouts_admin/edit_layouts");
 
 				if (layout.isPrivateLayout()) {
 					pageSettingsURL.setParameter("tabs1", "private-pages");
