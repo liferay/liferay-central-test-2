@@ -396,10 +396,10 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			<%@ include file="/html/portlet/layouts_admin/edit_pages_public_and_private.jspf" %>
 		</c:when>
 		<c:when test='<%= tabs2.equals("look-and-feel") %>'>
-			<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_look_and_feel.jsp" />
+			<liferay-util:include page="/html/portlet/layouts_admin/look_and_feel.jsp" />
 		</c:when>
 		<c:when test='<%= tabs2.equals("proposals") %>'>
-			<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_proposals.jsp" />
+			<liferay-util:include page="/html/portlet/layouts_admin/proposals.jsp" />
 		</c:when>
 		<c:when test='<%= tabs2.equals("merge-pages") %>'>
 

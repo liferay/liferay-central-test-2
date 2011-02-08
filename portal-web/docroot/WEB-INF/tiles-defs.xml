@@ -842,7 +842,7 @@
 	</definition>
 
 	<definition name="portlet.layouts_admin.export_pages" extends="portlet.layouts_admin">
-		<put name="portlet_content" value="/portlet/layouts_admin/edit_pages_export_import.jsp" />
+		<put name="portlet_content" value="/portlet/layouts_admin/export_import.jsp" />
 	</definition>
 
 	<definition name="portlet.layouts_admin.error" extends="portlet.layouts_admin">

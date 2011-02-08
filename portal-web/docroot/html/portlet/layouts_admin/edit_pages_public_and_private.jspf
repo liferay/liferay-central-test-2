@@ -15,7 +15,7 @@
 --%>
 
 <c:if test="<%= liveGroup.isStaged() %>">
-	<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_staging_toolbar.jsp" />
+	<liferay-util:include page="/html/portlet/layouts_admin/staging_toolbar.jsp" />
 </c:if>
 
 <aui:button-row id='<%= renderResponse.getNamespace() + "communityPagesToolbar" %>'>
@@ -23,7 +23,7 @@
 		<c:if test="<%= SessionErrors.contains(renderRequest, LayoutImportException.class.getName()) || SessionErrors.contains(renderRequest, LARFileException.class.getName()) || SessionErrors.contains(renderRequest, LARTypeException.class.getName()) %>">
 			<liferay-util:html-top>
 				<div class="aui-helper-hidden" id="<portlet:namespace />importPage">
-					<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_export_import.jsp">
+					<liferay-util:include page="/html/portlet/layouts_admin/export_import.jsp">
 						<liferay-util:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
 						<liferay-util:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 						<liferay-util:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
@@ -285,7 +285,7 @@
 				<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_children.jsp" />
 			</c:when>
 			<c:when test='<%= tabs3.equals("look-and-feel") %>'>
-				<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_look_and_feel.jsp" />
+				<liferay-util:include page="/html/portlet/layouts_admin/look_and_feel.jsp" />
 			</c:when>
 		</c:choose>
 	</td>

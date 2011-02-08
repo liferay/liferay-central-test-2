@@ -88,7 +88,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 				<aui:input label="export-the-selected-data-to-the-given-lar-file-name" name="exportFileName" size="50" value='<%= HtmlUtil.escape(StringUtil.replace(rootNodeName, " ", "_")) + "-" + Time.getShortTimestamp() + ".lar" %>' />
 
 				<aui:field-wrapper label="what-would-you-like-to-export">
-					<%@ include file="/html/portlet/layouts_admin/edit_pages_export_import_options.jspf" %>
+					<%@ include file="/html/portlet/layouts_admin/export_import_options.jspf" %>
 				</aui:field-wrapper>
 
 				<aui:button-row>
@@ -105,7 +105,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 						<aui:input label="import-a-lar-file-to-overwrite-the-selected-data" name="importFileName" size="50" type="file" />
 
 						<aui:field-wrapper label="what-would-you-like-to-import">
-							<%@ include file="/html/portlet/layouts_admin/edit_pages_export_import_options.jspf" %>
+							<%@ include file="/html/portlet/layouts_admin/export_import_options.jspf" %>
 						</aui:field-wrapper>
 
 						<aui:button-row>
