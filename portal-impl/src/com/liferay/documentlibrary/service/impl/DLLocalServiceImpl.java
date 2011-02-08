@@ -453,8 +453,6 @@ public class DLLocalServiceImpl implements DLLocalService {
 	protected boolean isValidName(String name) {
 		if ((name == null) ||
 			(name.contains("\\\\")) ||
-			(name.contains("/")) ||
-			(name.contains("\\")) ||
 			(name.contains("//")) ||
 			(name.contains(":")) ||
 			(name.contains("*")) ||
