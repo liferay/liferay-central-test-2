@@ -85,7 +85,7 @@ public class ViewAction extends PortletAction {
 
 		ActionUtil.getGroup(renderRequest);
 
-		return mapping.findForward("portlet.my_pages.edit_pages");
+		return mapping.findForward("portlet.my_pages.edit_layouts");
 	}
 
 }

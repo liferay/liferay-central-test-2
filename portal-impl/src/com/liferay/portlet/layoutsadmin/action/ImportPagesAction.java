@@ -84,7 +84,7 @@ public class ImportPagesAction extends PortletAction {
 			}
 		}
 
-		setForward(actionRequest, "portlet.layouts_admin.edit_pages");
+		setForward(actionRequest, "portlet.layouts_admin.edit_layouts");
 	}
 
 	public ActionForward render(

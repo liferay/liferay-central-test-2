@@ -273,7 +273,7 @@ public class EditLayoutsAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.layouts_admin.edit_pages"));
+			getForward(renderRequest, "portlet.layouts_admin.edit_layouts"));
 	}
 
 	public void serveResource(
