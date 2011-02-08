@@ -410,7 +410,6 @@ public class GroupFinderImpl
 			findByCND_SQL, "Group_.classNameId = ?",
 			"Group_.classNameId = ".concat(
 				StringUtil.merge(classNameIds, " OR Group_.classNameId = ")));
-		findByCND_SQL = CustomSQLUtil.replaceOrderBy(findByCND_SQL, obc);
 
 		StringBundler sb = new StringBundler();
 
@@ -427,6 +426,8 @@ public class GroupFinderImpl
 		}
 
 		String sql = sb.toString();
+
+		sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 		Session session = null;
 
