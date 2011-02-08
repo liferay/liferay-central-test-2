@@ -257,7 +257,7 @@
 	</category>
 
 	<category name="com.liferay.portal.kernel.servlet.PipingServletResponse">
-		<priority value="WARN" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.kernel.servlet.PortletContextListener">
