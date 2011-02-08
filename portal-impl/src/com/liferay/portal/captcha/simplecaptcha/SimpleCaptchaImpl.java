@@ -359,6 +359,7 @@ public class SimpleCaptchaImpl implements Captcha {
 				noiseProducerClassName);
 		}
 	}
+
 	protected void initTextProducers() {
 		String[] textProducerClassNames =
 			PropsValues.CAPTCHA_ENGINE_SIMPLECAPTCHA_TEXT_PRODUCERS;
@@ -372,6 +373,7 @@ public class SimpleCaptchaImpl implements Captcha {
 				textProducerClassName);
 		}
 	}
+
 	protected void initWordRenderers() {
 		String[] wordRendererClassNames =
 			PropsValues.CAPTCHA_ENGINE_SIMPLECAPTCHA_WORD_RENDERERS;
@@ -385,6 +387,7 @@ public class SimpleCaptchaImpl implements Captcha {
 				wordRendererClassName);
 		}
 	}
+
 	protected boolean validateChallenge(HttpServletRequest request)
 		throws CaptchaException {
 
@@ -409,6 +412,7 @@ public class SimpleCaptchaImpl implements Captcha {
 
 		return valid;
 	}
+
 	protected boolean validateChallenge(PortletRequest portletRequest)
 		throws CaptchaException {
 
