@@ -1069,3 +1069,5 @@ Liferay.Service.registerClass(
 		updatePage: true
 	}
 );
+
+Liferay.Service.register("Liferay.Service.Forms", "com.liferay.portlet.forms.service");
