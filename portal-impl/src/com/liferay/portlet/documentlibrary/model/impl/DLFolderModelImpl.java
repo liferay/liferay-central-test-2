@@ -67,12 +67,13 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "repositoryId", Types.BIGINT },
+			{ "mountPoint", Types.BOOLEAN },
 			{ "parentFolderId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "lastPostDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,mountPoint BOOLEAN,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFolder";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFolder.parentFolderId ASC, dlFolder.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFolder.parentFolderId ASC, DLFolder.name ASC";
@@ -211,6 +212,18 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_repositoryId = repositoryId;
 	}
 
+	public boolean getMountPoint() {
+		return _mountPoint;
+	}
+
+	public boolean isMountPoint() {
+		return _mountPoint;
+	}
+
+	public void setMountPoint(boolean mountPoint) {
+		_mountPoint = mountPoint;
+	}
+
 	public long getParentFolderId() {
 		return _parentFolderId;
 	}
@@ -306,6 +319,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setRepositoryId(getRepositoryId());
+		clone.setMountPoint(getMountPoint());
 		clone.setParentFolderId(getParentFolderId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
@@ -370,7 +384,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -390,6 +404,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		sb.append(getModifiedDate());
 		sb.append(", repositoryId=");
 		sb.append(getRepositoryId());
+		sb.append(", mountPoint=");
+		sb.append(getMountPoint());
 		sb.append(", parentFolderId=");
 		sb.append(getParentFolderId());
 		sb.append(", name=");
@@ -404,7 +420,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(46);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFolder");
@@ -447,6 +463,10 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		sb.append(getRepositoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>mountPoint</column-name><column-value><![CDATA[");
+		sb.append(getMountPoint());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>parentFolderId</column-name><column-value><![CDATA[");
 		sb.append(getParentFolderId());
 		sb.append("]]></column-value></column>");
@@ -481,6 +501,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _repositoryId;
+	private boolean _mountPoint;
 	private long _parentFolderId;
 	private long _originalParentFolderId;
 	private boolean _setOriginalParentFolderId;

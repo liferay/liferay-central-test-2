@@ -203,6 +203,27 @@ public interface DLFolderModel extends BaseModel<DLFolder> {
 	public void setRepositoryId(long repositoryId);
 
 	/**
+	 * Gets the mount point of this d l folder.
+	 *
+	 * @return the mount point of this d l folder
+	 */
+	public boolean getMountPoint();
+
+	/**
+	 * Determines if this d l folder is mount point.
+	 *
+	 * @return <code>true</code> if this d l folder is mount point; <code>false</code> otherwise
+	 */
+	public boolean isMountPoint();
+
+	/**
+	 * Sets whether this d l folder is mount point.
+	 *
+	 * @param mountPoint the mount point of this d l folder
+	 */
+	public void setMountPoint(boolean mountPoint);
+
+	/**
 	 * Gets the parent folder ID of this d l folder.
 	 *
 	 * @return the parent folder ID of this d l folder

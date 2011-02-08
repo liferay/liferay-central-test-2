@@ -37,14 +37,15 @@ public class RepositoryServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.RepositoryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static long addRepository(long groupId, java.lang.String name,
-		java.lang.String description, java.lang.String portletId, int type,
+	public static long addRepository(long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String portletId, int type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addRepository(groupId, name, description, portletId, type,
-			typeSettingsProperties);
+				   .addRepository(groupId, parentFolderId, name, description,
+			portletId, type, typeSettingsProperties);
 	}
 
 	public static void checkRepository(long repositoryId)

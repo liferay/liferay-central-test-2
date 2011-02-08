@@ -1605,6 +1605,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="repositoryId" />
+			<basic name="mountPoint" />
 			<basic name="parentFolderId" />
 			<basic name="name" />
 			<basic name="description" />

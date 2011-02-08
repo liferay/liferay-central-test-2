@@ -44,13 +44,14 @@ public class RepositoryFactoryImpl implements RepositoryFactory {
 	}
 
 	public long createRepository(
-			long groupId, String name, String description, String portletId,
-			int type, UnicodeProperties typeSettingsProperties)
+			long groupId, long parentFolderId, String name, String description,
+			String portletId, int type,
+			UnicodeProperties typeSettingsProperties)
 		throws RepositoryException {
 
 		try {
 			return RepositoryServiceUtil.addRepository(
-				groupId, name, description, portletId, type,
+				groupId, parentFolderId, name, description, portletId, type,
 				typeSettingsProperties);
 		}
 		catch (Exception e) {

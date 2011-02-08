@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
@@ -64,14 +63,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public long getFolderId() {
-		long folderId = _dlFolder.getFolderId();
-
-		if (folderId == DLFolderConstants.MAPPED_PARENT_FOLDER_ID) {
-			return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-		}
-		else {
-			return folderId;
-		}
+		return _dlFolder.getFolderId();
 	}
 
 	public long getGroupId() {
@@ -99,14 +91,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public long getParentFolderId() {
-		long parentFolderId = _dlFolder.getParentFolderId();
-
-		if (parentFolderId == DLFolderConstants.MAPPED_PARENT_FOLDER_ID) {
-			return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-		}
-		else {
-			return parentFolderId;
-		}
+		return _dlFolder.getParentFolderId();
 	}
 
 	public String getPath() throws PortalException, SystemException {
@@ -164,6 +149,10 @@ public class LiferayFolder extends LiferayModel implements Folder {
 
 	public boolean isLocked() {
 		return _dlFolder.isLocked();
+	}
+
+	public boolean isMountPoint() {
+		return _dlFolder.isMountPoint();
 	}
 
 	public boolean isRoot() {

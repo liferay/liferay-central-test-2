@@ -41,8 +41,9 @@ public interface RepositoryService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RepositoryServiceUtil} to access the repository remote service. Add custom service methods to {@link com.liferay.portal.service.impl.RepositoryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public long addRepository(long groupId, java.lang.String name,
-		java.lang.String description, java.lang.String portletId, int type,
+	public long addRepository(long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String portletId, int type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

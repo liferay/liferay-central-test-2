@@ -53,8 +53,8 @@ import com.liferay.portal.service.RepositoryServiceUtil;
  */
 public class RepositoryServiceHttp {
 	public static long addRepository(HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String portletId, int type,
+		long parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String portletId, int type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -63,7 +63,8 @@ public class RepositoryServiceHttp {
 					"addRepository", _addRepositoryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					name, description, portletId, type, typeSettingsProperties);
+					parentFolderId, name, description, portletId, type,
+					typeSettingsProperties);
 
 			Object returnObj = null;
 
@@ -296,8 +297,8 @@ public class RepositoryServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(RepositoryServiceHttp.class);
 	private static final Class<?>[] _addRepositoryParameterTypes0 = new Class[] {
-			long.class, java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, int.class,
+			long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, int.class,
 			com.liferay.portal.kernel.util.UnicodeProperties.class
 		};
 	private static final Class<?>[] _checkRepositoryParameterTypes1 = new Class[] {

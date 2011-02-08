@@ -35,6 +35,7 @@ alter table DLFileVersion add repositoryId LONG;
 update DLFileVersion set repositoryId = groupId;
 
 alter table DLFolder add repositoryId LONG;
+alter table DLFolder add mountPoint BOOLEAN null;
 update DLFolder set repositoryId = groupId;
 
 update Group_ set type_ = 3 where type_ = 0;

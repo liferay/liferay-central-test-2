@@ -229,6 +229,33 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
+	* Gets the mount point of this d l folder.
+	*
+	* @return the mount point of this d l folder
+	*/
+	public boolean getMountPoint() {
+		return _dlFolder.getMountPoint();
+	}
+
+	/**
+	* Determines if this d l folder is mount point.
+	*
+	* @return <code>true</code> if this d l folder is mount point; <code>false</code> otherwise
+	*/
+	public boolean isMountPoint() {
+		return _dlFolder.isMountPoint();
+	}
+
+	/**
+	* Sets whether this d l folder is mount point.
+	*
+	* @param mountPoint the mount point of this d l folder
+	*/
+	public void setMountPoint(boolean mountPoint) {
+		_dlFolder.setMountPoint(mountPoint);
+	}
+
+	/**
 	* Gets the parent folder ID of this d l folder.
 	*
 	* @return the parent folder ID of this d l folder

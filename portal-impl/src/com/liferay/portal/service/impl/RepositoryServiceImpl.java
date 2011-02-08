@@ -27,8 +27,8 @@ import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.RepositoryServiceBaseImpl;
+import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 import java.util.Date;
 import java.util.List;
@@ -39,8 +39,9 @@ import java.util.List;
 public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 	public long addRepository(
-			long groupId, String name, String description, String portletId,
-			int type, UnicodeProperties typeSettingsProperties)
+			long groupId, long parentFolderId, String name, String description,
+			String portletId, int type,
+			UnicodeProperties typeSettingsProperties)
 		throws PortalException, SystemException {
 
 		// Repository
@@ -61,8 +62,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		repository.setPortletId(portletId);
 		repository.setType(type);
 		repository.setTypeSettingsProperties(typeSettingsProperties);
-		repository.setDlFolderId(
-			getDLFolderId(user, groupId, repositoryId, name, description));
+		repository.setDlFolderId(getDLFolderId(
+			user, groupId, repositoryId, parentFolderId, name, description));
 
 		repositoryPersistence.update(repository, false);
 
@@ -140,7 +141,12 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			expandoValueLocalService.deleteValues(
 				Repository.class.getName(), repositoryId);
 
-			dlRepositoryLocalService.deleteFolder(repository.getDlFolderId());
+			try {
+				dlRepositoryLocalService.deleteFolder(
+					repository.getDlFolderId());
+			}
+			catch (NoSuchFolderException nsfe) {
+			}
 
 			repositoryPersistence.remove(repository);
 		}
@@ -185,14 +191,17 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	}
 
 	protected long getDLFolderId(
-			User user, long groupId, long repositoryId, String name,
-			String description)
+			User user, long groupId, long repositoryId, long parentFolderId,
+			String name, String description)
 		throws PortalException, SystemException {
 
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAttribute("mountPoint", Boolean.TRUE);
+
 		DLFolder dlFolder = dlRepositoryLocalService.addFolder(
-			user.getUserId(), groupId, repositoryId,
-			DLFolderConstants.MAPPED_PARENT_FOLDER_ID, name, description,
-			new ServiceContext());
+			user.getUserId(), groupId, repositoryId, parentFolderId, name,
+			description, serviceContext);
 
 		return dlFolder.getFolderId();
 	}

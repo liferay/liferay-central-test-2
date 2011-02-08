@@ -275,6 +275,7 @@
 		<!-- Other fields -->
 
 		<column name="repositoryId" type="long" />
+		<column name="mountPoint" type="boolean" />
 		<column name="parentFolderId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />

@@ -214,6 +214,8 @@ public class DLRepositoryLocalServiceImpl
 		folder.setCreateDate(serviceContext.getCreateDate(now));
 		folder.setModifiedDate(serviceContext.getModifiedDate(now));
 		folder.setRepositoryId(repositoryId);
+		folder.setMountPoint(GetterUtil.getBoolean(
+			serviceContext.getAttribute("mountPoint")));
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
@@ -238,9 +240,7 @@ public class DLRepositoryLocalServiceImpl
 
 		// Parent folder
 
-		if ((parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
-			(parentFolderId != DLFolderConstants.MAPPED_PARENT_FOLDER_ID)) {
-
+		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder parentFolder = dlFolderPersistence.findByPrimaryKey(
 				parentFolderId);
 
@@ -1349,9 +1349,7 @@ public class DLRepositoryLocalServiceImpl
 	protected long getParentFolderId(long groupId, long parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID &&
-			parentFolderId != DLFolderConstants.MAPPED_PARENT_FOLDER_ID) {
-
+		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			DLFolder parentFolder = dlFolderPersistence.fetchByPrimaryKey(
 				parentFolderId);
 
@@ -1642,13 +1640,11 @@ public class DLRepositoryLocalServiceImpl
 		catch (NoSuchFileEntryException nsfee) {
 		}
 
-		if (parentFolderId != DLFolderConstants.MAPPED_PARENT_FOLDER_ID) {
-			DLFolder folder = dlFolderPersistence.fetchByG_P_N(
-				groupId, parentFolderId, name);
+		DLFolder folder = dlFolderPersistence.fetchByG_P_N(
+			groupId, parentFolderId, name);
 
-			if ((folder != null) && (folder.getFolderId() != folderId)) {
-				throw new DuplicateFolderNameException();
-			}
+		if ((folder != null) && (folder.getFolderId() != folderId)) {
+			throw new DuplicateFolderNameException();
 		}
 	}
 

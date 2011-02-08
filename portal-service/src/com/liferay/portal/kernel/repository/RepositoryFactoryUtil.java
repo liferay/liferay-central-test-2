@@ -28,12 +28,13 @@ public class RepositoryFactoryUtil {
 	}
 
 	public static long createRepository(
-			long groupId, String name, String description, String portletId,
-			int type, UnicodeProperties typeSettingsProperties)
+			long groupId, long parentFolderId, String name, String description,
+			String portletId, int type,
+			UnicodeProperties typeSettingsProperties)
 		throws RepositoryException {
 
 		return getRepositoryFactory().createRepository(
-			groupId, name, description, portletId, type,
+			groupId, parentFolderId, name, description, portletId, type,
 			typeSettingsProperties);
 	}
 

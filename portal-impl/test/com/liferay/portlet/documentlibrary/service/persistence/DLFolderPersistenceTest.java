@@ -73,6 +73,7 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		newDLFolder.setCreateDate(nextDate());
 		newDLFolder.setModifiedDate(nextDate());
 		newDLFolder.setRepositoryId(nextLong());
+		newDLFolder.setMountPoint(randomBoolean());
 		newDLFolder.setParentFolderId(nextLong());
 		newDLFolder.setName(randomString());
 		newDLFolder.setDescription(randomString());
@@ -94,6 +95,8 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 			Time.getShortTimestamp(newDLFolder.getModifiedDate()));
 		assertEquals(existingDLFolder.getRepositoryId(),
 			newDLFolder.getRepositoryId());
+		assertEquals(existingDLFolder.getMountPoint(),
+			newDLFolder.getMountPoint());
 		assertEquals(existingDLFolder.getParentFolderId(),
 			newDLFolder.getParentFolderId());
 		assertEquals(existingDLFolder.getName(), newDLFolder.getName());
@@ -182,6 +185,7 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		dlFolder.setCreateDate(nextDate());
 		dlFolder.setModifiedDate(nextDate());
 		dlFolder.setRepositoryId(nextLong());
+		dlFolder.setMountPoint(randomBoolean());
 		dlFolder.setParentFolderId(nextLong());
 		dlFolder.setName(randomString());
 		dlFolder.setDescription(randomString());

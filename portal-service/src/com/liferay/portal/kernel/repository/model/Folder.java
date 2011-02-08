@@ -70,6 +70,8 @@ public interface Folder extends RepositoryModel<Folder> {
 
 	public boolean isLocked();
 
+	public boolean isMountPoint();
+
 	public boolean isRoot();
 
 }

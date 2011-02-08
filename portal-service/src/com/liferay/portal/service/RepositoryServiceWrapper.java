@@ -28,13 +28,14 @@ public class RepositoryServiceWrapper implements RepositoryService {
 		_repositoryService = repositoryService;
 	}
 
-	public long addRepository(long groupId, java.lang.String name,
-		java.lang.String description, java.lang.String portletId, int type,
+	public long addRepository(long groupId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String portletId, int type,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _repositoryService.addRepository(groupId, name, description,
-			portletId, type, typeSettingsProperties);
+		return _repositoryService.addRepository(groupId, parentFolderId, name,
+			description, portletId, type, typeSettingsProperties);
 	}
 
 	public void checkRepository(long repositoryId)

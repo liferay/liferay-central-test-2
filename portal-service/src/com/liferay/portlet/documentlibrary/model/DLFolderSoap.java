@@ -39,6 +39,7 @@ public class DLFolderSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setRepositoryId(model.getRepositoryId());
+		soapModel.setMountPoint(model.getMountPoint());
 		soapModel.setParentFolderId(model.getParentFolderId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
@@ -167,6 +168,18 @@ public class DLFolderSoap implements Serializable {
 		_repositoryId = repositoryId;
 	}
 
+	public boolean getMountPoint() {
+		return _mountPoint;
+	}
+
+	public boolean isMountPoint() {
+		return _mountPoint;
+	}
+
+	public void setMountPoint(boolean mountPoint) {
+		_mountPoint = mountPoint;
+	}
+
 	public long getParentFolderId() {
 		return _parentFolderId;
 	}
@@ -208,6 +221,7 @@ public class DLFolderSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _repositoryId;
+	private boolean _mountPoint;
 	private long _parentFolderId;
 	private String _name;
 	private String _description;

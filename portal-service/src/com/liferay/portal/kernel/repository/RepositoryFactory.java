@@ -24,8 +24,9 @@ public interface RepositoryFactory {
 	public void checkRepository(long repositoryId) throws RepositoryException;
 
 	public long createRepository(
-			long groupId, String name, String description, String portletId,
-			int type, UnicodeProperties typeSettingsProperties)
+			long groupId, long parentFolderId, String name, String description,
+			String portletId, int type,
+			UnicodeProperties typeSettingsProperties)
 		throws RepositoryException;
 
 	public void deleteRepositories(long groupId, int purge)

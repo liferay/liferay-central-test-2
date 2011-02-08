@@ -1274,6 +1274,7 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="repositoryId" type="long" />
+		<field name="mountPoint" type="boolean" />
 		<field name="parentFolderId" type="long" />
 		<field name="name" type="String">
 			<hint name="max-length">100</hint>
