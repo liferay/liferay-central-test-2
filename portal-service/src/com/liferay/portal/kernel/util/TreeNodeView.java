@@ -12,9 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util;
-
-import com.liferay.portal.kernel.util.StringPool;
+package com.liferay.portal.kernel.util;
 
 /**
  * @author Jorge Ferrer
@@ -56,6 +54,14 @@ public class TreeNodeView {
 	public void setImg(String img) {
 		_img = img;
 	}
+	
+	public boolean isLeaf() {
+		return _leaf;
+	}
+
+	public void setLeaf(boolean leaf) {
+		_leaf = leaf;
+	}
 
 	public String getLs() {
 		return _ls;
@@ -93,6 +99,7 @@ public class TreeNodeView {
 	private String _href = "javascript:;";
 	private long _id;
 	private String _img = StringPool.BLANK;
+	private boolean _leaf;
 	private String _ls = StringPool.BLANK;
 	private String _name = StringPool.BLANK;
 	private String _objId = StringPool.BLANK;

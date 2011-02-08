@@ -16,8 +16,9 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.TreeNodeView;
+import com.liferay.portal.kernel.util.TreeView;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -45,33 +46,19 @@ import javax.servlet.ServletContext;
  */
 public class PortletLister {
 
+	public TreeView getCategoryTreeView(User user)
+		throws PortalException, SystemException {
+
+		return _getTreeView(null, null, user, null, false);
+	}
+
 	public TreeView getTreeView(
 			LayoutTypePortlet layoutTypePortlet, String rootNodeName, User user,
 			ServletContext servletContext)
 		throws PortalException, SystemException {
 
-		_layoutTypePortlet = layoutTypePortlet;
-		_user = user;
-		_servletContext = servletContext;
-		_nodeId = 1;
-
-		_list = new ArrayList<TreeNodeView>();
-
-		TreeNodeView rootNodeView = new TreeNodeView(_nodeId);
-
-		rootNodeView.setName(rootNodeName);
-
-		_list.add(rootNodeView);
-
-		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
-			String.valueOf(user.getCompanyId()), WebKeys.PORTLET_CATEGORY);
-
-		List<PortletCategory> categories = ListUtil.fromCollection(
-			portletCategory.getCategories());
-
-		_iterateCategories(categories, _nodeId, 0);
-
-		return new TreeView(_list, _depth);
+		return _getTreeView(
+			layoutTypePortlet, rootNodeName, user, servletContext, true);
 	}
 
 	public boolean isIncludeInstanceablePortlets() {
@@ -84,8 +71,41 @@ public class PortletLister {
 		_includeInstanceablePortlets = includeInstanceablePortlets;
 	}
 
+	private TreeView _getTreeView(
+			LayoutTypePortlet layoutTypePortlet, String rootNodeName, User user,
+			ServletContext servletContext, boolean iteratePortlets)
+		throws PortalException, SystemException {
+
+		_layoutTypePortlet = layoutTypePortlet;
+		_user = user;
+		_servletContext = servletContext;
+		_nodeId = 1;
+
+		_list = new ArrayList<TreeNodeView>();
+
+		if (rootNodeName != null) {
+			TreeNodeView rootNodeView = new TreeNodeView(_nodeId);
+
+			rootNodeView.setLeaf(false);
+			rootNodeView.setName(rootNodeName);
+
+			_list.add(rootNodeView);
+		}
+
+		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
+			String.valueOf(user.getCompanyId()), WebKeys.PORTLET_CATEGORY);
+
+		List<PortletCategory> categories = ListUtil.fromCollection(
+			portletCategory.getCategories());
+
+		_iterateCategories(categories, _nodeId, 0, iteratePortlets);
+
+		return new TreeView(_list, _depth);
+	}
+
 	private void _iterateCategories(
-			List<PortletCategory> categories, long parentId, int depth)
+			List<PortletCategory> categories, long parentId, int depth,
+			boolean iteratePortlets)
 		throws PortalException, SystemException {
 
 		categories = ListUtil.sort(
@@ -111,6 +131,7 @@ public class PortletLister {
 			TreeNodeView nodeView = new TreeNodeView(++_nodeId);
 
 			nodeView.setDepth(depth);
+			nodeView.setLeaf(false);
 
 			if ((i + 1) == categories.size()) {
 				nodeView.setLs("1");
@@ -119,20 +140,24 @@ public class PortletLister {
 				nodeView.setLs("0");
 			}
 
-			nodeView.setName(
-				LanguageUtil.get(_user.getLocale(), portletCategory.getName()));
+			nodeView.setName(portletCategory.getName());
+			nodeView.setObjId(portletCategory.getPath());
 			nodeView.setParentId(parentId);
 
 			_list.add(nodeView);
 
+			int nodeId = _nodeId;
+
 			List<PortletCategory> subCategories = ListUtil.fromCollection(
 				portletCategory.getCategories());
 
-			_iterateCategories(subCategories, _nodeId, depth);
+			_iterateCategories(subCategories, nodeId, depth, iteratePortlets);
 
-			_iteratePortlets(
-				portletCategory, portletCategory.getPortletIds(), _nodeId,
-				depth + 1);
+			if (iteratePortlets) {
+				_iteratePortlets(
+					portletCategory, portletCategory.getPortletIds(), nodeId,
+					depth + 1);
+			}
 
 			i++;
 		}
@@ -208,6 +233,7 @@ public class PortletLister {
 			TreeNodeView nodeView = new TreeNodeView(++_nodeId);
 
 			nodeView.setDepth(depth);
+			nodeView.setLeaf(true);
 
 			if ((i + 1) == portlets.size()) {
 				nodeView.setLs("1");

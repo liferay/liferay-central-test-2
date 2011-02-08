@@ -1,4 +1,4 @@
-<%@ page import="com.liferay.portal.util.TreeView" %>
+<%@ page import="com.liferay.portal.kernel.util.TreeView" %>
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
@@ -87,6 +87,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 		var parentNode<%= i %> = treeView.getNodeById('treePanel<%= treeNodeView.getParentId() %>') || treeView;
 		var objId<%= i %> = '<%= treeNodeView.getObjId() %>';
 		var checked<%= i %> = objId<%= i %> ? (A.Array.indexOf(selectedPortlets, objId<%= i %>) > -1) : false;
+		var label<%= i %> = '<%= UnicodeFormatter.toString(LanguageUtil.get(user.getLocale(), treeNodeView.getName())) %>';
 
 		parentNode<%= i %>.appendChild(
 			new A.TreeNodeTask(
@@ -94,8 +95,8 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 					checked: checked<%= i %>,
 					expanded: <%= treeNodeView.getDepth() == 0 %>,
 					id: 'treePanel<%= treeNodeView.getId() %>',
-					label: '<%= UnicodeFormatter.toString(treeNodeView.getName()) %>',
-					leaf: <%= treeNodeView.getDepth() > 1 %>,
+					label: label<%= i %>,
+					leaf: <%= treeNodeView.isLeaf() %>,
 					on: {
 						check: A.rbind(onCheck, window, objId<%= i %>),
 						uncheck: A.rbind(onUncheck, window, objId<%= i %>)

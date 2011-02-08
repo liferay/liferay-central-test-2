@@ -16,9 +16,9 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
+<%@ page import="com.liferay.portal.kernel.util.TreeNodeView" %>
+<%@ page import="com.liferay.portal.kernel.util.TreeView" %>
 <%@ page import="com.liferay.portal.util.PortletLister" %>
-<%@ page import="com.liferay.portal.util.TreeNodeView" %>
-<%@ page import="com.liferay.portal.util.TreeView" %>
 
 <%
 Layout selLayout = (Layout)request.getAttribute(WebKeys.SEL_LAYOUT);
