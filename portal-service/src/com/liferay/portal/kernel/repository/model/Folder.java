@@ -36,6 +36,8 @@ public interface Folder extends RepositoryModel<Folder> {
 
 	public long getFolderId();
 
+	public long getGroupId();
+
 	public Date getLastPostDate();
 
 	public Date getModifiedDate();
@@ -63,6 +65,8 @@ public interface Folder extends RepositoryModel<Folder> {
 	public boolean hasInheritableLock();
 
 	public boolean hasLock();
+
+	public boolean isDefaultRepository();
 
 	public boolean isLocked();
 

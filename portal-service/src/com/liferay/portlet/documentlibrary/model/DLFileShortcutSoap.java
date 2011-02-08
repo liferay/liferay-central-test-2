@@ -39,6 +39,7 @@ public class DLFileShortcutSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setRepositoryId(model.getRepositoryId());
 		soapModel.setFolderId(model.getFolderId());
 		soapModel.setToFileEntryId(model.getToFileEntryId());
 		soapModel.setStatus(model.getStatus());
@@ -161,6 +162,14 @@ public class DLFileShortcutSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public long getRepositoryId() {
+		return _repositoryId;
+	}
+
+	public void setRepositoryId(long repositoryId) {
+		_repositoryId = repositoryId;
+	}
+
 	public long getFolderId() {
 		return _folderId;
 	}
@@ -217,6 +226,7 @@ public class DLFileShortcutSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _repositoryId;
 	private long _folderId;
 	private long _toFileEntryId;
 	private int _status;

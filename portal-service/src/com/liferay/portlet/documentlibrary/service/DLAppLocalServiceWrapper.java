@@ -305,45 +305,6 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 			folderIds, status);
 	}
 
-	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
-		long repositoryId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getGroupFileEntries(repositoryId, start, end);
-	}
-
-	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
-		long repositoryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getGroupFileEntries(repositoryId, start, end,
-			obc);
-	}
-
-	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
-		long repositoryId, long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getGroupFileEntries(repositoryId, userId,
-			start, end);
-	}
-
-	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
-		long repositoryId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getGroupFileEntries(repositoryId, userId,
-			start, end, obc);
-	}
-
-	public int getGroupFileEntriesCount(long repositoryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getGroupFileEntriesCount(repositoryId);
-	}
-
-	public int getGroupFileEntriesCount(long repositoryId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getGroupFileEntriesCount(repositoryId, userId);
-	}
-
 	public com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
 		long userId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)

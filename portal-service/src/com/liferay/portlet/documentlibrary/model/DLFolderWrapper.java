@@ -211,6 +211,24 @@ public class DLFolderWrapper implements DLFolder {
 	}
 
 	/**
+	* Gets the repository ID of this d l folder.
+	*
+	* @return the repository ID of this d l folder
+	*/
+	public long getRepositoryId() {
+		return _dlFolder.getRepositoryId();
+	}
+
+	/**
+	* Sets the repository ID of this d l folder.
+	*
+	* @param repositoryId the repository ID of this d l folder
+	*/
+	public void setRepositoryId(long repositoryId) {
+		_dlFolder.setRepositoryId(repositoryId);
+	}
+
+	/**
 	* Gets the parent folder ID of this d l folder.
 	*
 	* @return the parent folder ID of this d l folder

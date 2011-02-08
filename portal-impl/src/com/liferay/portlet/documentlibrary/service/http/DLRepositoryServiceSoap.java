@@ -56,13 +56,14 @@ import java.rmi.RemoteException;
  */
 public class DLRepositoryServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
-		long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		long groupId, long repositoryId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLRepositoryServiceUtil.addFolder(groupId,
-					parentFolderId, name, description, serviceContext);
+					repositoryId, parentFolderId, name, description,
+					serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}

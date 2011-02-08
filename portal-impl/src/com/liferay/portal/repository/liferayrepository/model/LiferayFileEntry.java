@@ -108,6 +108,10 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return _dlFileEntry.getFolderId();
 	}
 
+	public long getGroupId() {
+		return _dlFileEntry.getGroupId();
+	}
+
 	public String getIcon() {
 		return _dlFileEntry.getIcon();
 	}
@@ -139,7 +143,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	}
 
 	public long getRepositoryId() {
-		return _dlFileEntry.getGroupId();
+		return _dlFileEntry.getRepositoryId();
 	}
 
 	public long getSize() {
@@ -184,6 +188,15 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 
 	public boolean hasLock() {
 		return _dlFileEntry.hasLock();
+	}
+
+	public boolean isDefaultRepository() {
+		if (_dlFileEntry.getGroupId() == _dlFileEntry.getRepositoryId()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isEscapedModel() {

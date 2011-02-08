@@ -88,6 +88,10 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 		return _dlFileVersion.getFileVersionId();
 	}
 
+	public long getGroupId() {
+		return _dlFileVersion.getGroupId();
+	}
+
 	public String getIcon() {
 		return _dlFileVersion.getIcon();
 	}
@@ -101,7 +105,7 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 	}
 
 	public long getRepositoryId() {
-		return _dlFileVersion.getGroupId();
+		return _dlFileVersion.getRepositoryId();
 	}
 
 	public long getSize() {
@@ -150,6 +154,15 @@ public class LiferayFileVersion extends LiferayModel implements FileVersion {
 
 	public boolean isApproved() {
 		return _dlFileVersion.isApproved();
+	}
+
+	public boolean isDefaultRepository() {
+		if (_dlFileVersion.getGroupId() == _dlFileVersion.getRepositoryId()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isDraft() {

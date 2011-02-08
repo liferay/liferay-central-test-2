@@ -86,9 +86,9 @@ public class DLRepositoryLocalServiceImpl
 	extends DLRepositoryLocalServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
-			long userId, long groupId, long folderId, String title,
-			String description, String changeLog, InputStream is, long size,
-			ServiceContext serviceContext)
+			long userId, long groupId, long repositoryId, long folderId,
+			String title, String description, String changeLog, InputStream is,
+			long size, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -115,6 +115,7 @@ public class DLRepositoryLocalServiceImpl
 		dlFileEntry.setVersionUserName(user.getFullName());
 		dlFileEntry.setCreateDate(serviceContext.getCreateDate(now));
 		dlFileEntry.setModifiedDate(serviceContext.getModifiedDate(now));
+		dlFileEntry.setRepositoryId(repositoryId);
 		dlFileEntry.setFolderId(folderId);
 		dlFileEntry.setName(name);
 		dlFileEntry.setExtension(extension);
@@ -190,8 +191,8 @@ public class DLRepositoryLocalServiceImpl
 	}
 
 	public DLFolder addFolder(
-			long userId, long groupId, long parentFolderId, String name,
-			String description, ServiceContext serviceContext)
+			long userId, long groupId, long repositoryId, long parentFolderId,
+			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Folder
@@ -212,6 +213,7 @@ public class DLRepositoryLocalServiceImpl
 		folder.setUserId(user.getUserId());
 		folder.setCreateDate(serviceContext.getCreateDate(now));
 		folder.setModifiedDate(serviceContext.getModifiedDate(now));
+		folder.setRepositoryId(repositoryId);
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);
@@ -993,6 +995,7 @@ public class DLRepositoryLocalServiceImpl
 		dlFileVersion.setUserId(versionUserId);
 		dlFileVersion.setUserName(versionUserName);
 		dlFileVersion.setCreateDate(modifiedDate);
+		dlFileVersion.setRepositoryId(dlFileEntry.getRepositoryId());
 		dlFileVersion.setFileEntryId(dlFileEntry.getFileEntryId());
 		dlFileVersion.setExtension(extension);
 		dlFileVersion.setTitle(title);

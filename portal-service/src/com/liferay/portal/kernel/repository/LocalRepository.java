@@ -106,19 +106,6 @@ public interface LocalRepository {
 	public int getFoldersFileEntriesCount(List<Long> folderIds, int status)
 		throws SystemException;
 
-	public List<FileEntry> getRepositoryFileEntries(
-			int start, int end, OrderByComparator obc)
-		throws SystemException;
-
-	public List<FileEntry> getRepositoryFileEntries(
-			long userId, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException;
-
-	public int getRepositoryFileEntriesCount() throws SystemException;
-
-	public int getRepositoryFileEntriesCount(long userId)
-		throws SystemException;
-
 	public long getRepositoryId();
 
 	public FileEntry moveFileEntry(

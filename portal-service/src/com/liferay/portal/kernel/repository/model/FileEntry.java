@@ -57,6 +57,8 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 
 	public long getFolderId();
 
+	public long getGroupId();
+
 	public String getIcon();
 
 	public FileVersion getLatestFileVersion()
@@ -91,6 +93,8 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 	public String getVersionUserUuid() throws SystemException;
 
 	public boolean hasLock();
+
+	public boolean isDefaultRepository();
 
 	public boolean isLocked();
 

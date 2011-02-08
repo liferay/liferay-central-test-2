@@ -29,24 +29,24 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long groupId, long folderId, java.lang.String title,
+		long groupId, long repositoryId, long folderId, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog,
 		java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryService.addFileEntry(groupId, folderId, title,
-			description, changeLog, is, size, serviceContext);
+		return _dlRepositoryService.addFileEntry(groupId, repositoryId,
+			folderId, title, description, changeLog, is, size, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		long groupId, long repositoryId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryService.addFolder(groupId, parentFolderId, name,
-			description, serviceContext);
+		return _dlRepositoryService.addFolder(groupId, repositoryId,
+			parentFolderId, name, description, serviceContext);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(

@@ -57,8 +57,8 @@ import java.util.Set;
 public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
-			long groupId, long folderId, String title, String description,
-			String changeLog, InputStream is, long size,
+			long groupId, long repositoryId, long folderId, String title,
+			String description, String changeLog, InputStream is, long size,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -66,13 +66,13 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			getPermissionChecker(), groupId, folderId, ActionKeys.ADD_DOCUMENT);
 
 		return dlRepositoryLocalService.addFileEntry(
-			getUserId(), groupId, folderId, title, description, changeLog,
-			is, size, serviceContext);
+			getUserId(), groupId, repositoryId, folderId, title, description,
+			changeLog, is, size, serviceContext);
 	}
 
 	public DLFolder addFolder(
-			long groupId, long parentFolderId, String name, String description,
-			ServiceContext serviceContext)
+			long groupId, long repositoryId, long parentFolderId, String name,
+			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
@@ -80,8 +80,8 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			ActionKeys.ADD_FOLDER);
 
 		return dlRepositoryLocalService.addFolder(
-			getUserId(), groupId, parentFolderId, name, description,
-			serviceContext);
+			getUserId(), groupId, repositoryId, parentFolderId, name,
+			description, serviceContext);
 	}
 
 	public DLFolder copyFolder(
@@ -92,7 +92,8 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		DLFolder srcFolder = getFolder(sourceFolderId);
 
 		DLFolder destFolder = addFolder(
-			groupId, parentFolderId, name, description, serviceContext);
+			groupId, srcFolder.getRepositoryId(), parentFolderId, name,
+			description, serviceContext);
 
 		copyFolder(srcFolder, destFolder, serviceContext);
 
@@ -848,8 +849,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 					srcFolder.getCompanyId(), srcFolder.getFolderId(), name);
 
 				addFileEntry(
-					destFolder.getGroupId(), destFolder.getFolderId(), title,
-					description, null, is, size, serviceContext);
+					destFolder.getGroupId(), destFolder.getRepositoryId(),
+					destFolder.getFolderId(), title, description, null, is,
+					size, serviceContext);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -867,8 +869,8 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			String description = srcSubfolder.getDescription();
 
 			DLFolder destSubfolder = addFolder(
-				destFolder.getGroupId(), destFolder.getFolderId(), name,
-				description, serviceContext);
+				destFolder.getGroupId(), destFolder.getRepositoryId(),
+				destFolder.getFolderId(), name, description, serviceContext);
 
 			copyFolder(srcSubfolder, destSubfolder, serviceContext);
 		}

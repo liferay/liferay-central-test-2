@@ -38,26 +38,26 @@ public class DLRepositoryLocalServiceUtil {
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLRepositoryLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		long userId, long groupId, long folderId, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog,
-		java.io.InputStream is, long size,
+		long userId, long groupId, long repositoryId, long folderId,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFileEntry(userId, groupId, folderId, title, description,
-			changeLog, is, size, serviceContext);
+				   .addFileEntry(userId, groupId, repositoryId, folderId,
+			title, description, changeLog, is, size, serviceContext);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long userId, long groupId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		long userId, long groupId, long repositoryId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addFolder(userId, groupId, parentFolderId, name,
-			description, serviceContext);
+				   .addFolder(userId, groupId, repositoryId, parentFolderId,
+			name, description, serviceContext);
 	}
 
 	public static void convertExtraSettings(java.lang.String[] keys)

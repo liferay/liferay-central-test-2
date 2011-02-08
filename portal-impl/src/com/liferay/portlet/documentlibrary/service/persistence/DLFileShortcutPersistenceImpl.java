@@ -411,6 +411,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		dlFileShortcutImpl.setUserName(dlFileShortcut.getUserName());
 		dlFileShortcutImpl.setCreateDate(dlFileShortcut.getCreateDate());
 		dlFileShortcutImpl.setModifiedDate(dlFileShortcut.getModifiedDate());
+		dlFileShortcutImpl.setRepositoryId(dlFileShortcut.getRepositoryId());
 		dlFileShortcutImpl.setFolderId(dlFileShortcut.getFolderId());
 		dlFileShortcutImpl.setToFileEntryId(dlFileShortcut.getToFileEntryId());
 		dlFileShortcutImpl.setStatus(dlFileShortcut.getStatus());

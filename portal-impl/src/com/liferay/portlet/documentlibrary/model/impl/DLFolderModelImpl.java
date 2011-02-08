@@ -66,12 +66,13 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 			{ "userName", Types.VARCHAR },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "repositoryId", Types.BIGINT },
 			{ "parentFolderId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "lastPostDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table DLFolder";
 	public static final String ORDER_BY_JPQL = " ORDER BY dlFolder.parentFolderId ASC, dlFolder.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY DLFolder.parentFolderId ASC, DLFolder.name ASC";
@@ -202,6 +203,14 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		_modifiedDate = modifiedDate;
 	}
 
+	public long getRepositoryId() {
+		return _repositoryId;
+	}
+
+	public void setRepositoryId(long repositoryId) {
+		_repositoryId = repositoryId;
+	}
+
 	public long getParentFolderId() {
 		return _parentFolderId;
 	}
@@ -296,6 +305,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
+		clone.setRepositoryId(getRepositoryId());
 		clone.setParentFolderId(getParentFolderId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
@@ -360,7 +370,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{uuid=");
 		sb.append(getUuid());
@@ -378,6 +388,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", repositoryId=");
+		sb.append(getRepositoryId());
 		sb.append(", parentFolderId=");
 		sb.append(getParentFolderId());
 		sb.append(", name=");
@@ -392,7 +404,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portlet.documentlibrary.model.DLFolder");
@@ -431,6 +443,10 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>repositoryId</column-name><column-value><![CDATA[");
+		sb.append(getRepositoryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>parentFolderId</column-name><column-value><![CDATA[");
 		sb.append(getParentFolderId());
 		sb.append("]]></column-value></column>");
@@ -464,6 +480,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _repositoryId;
 	private long _parentFolderId;
 	private long _originalParentFolderId;
 	private boolean _setOriginalParentFolderId;

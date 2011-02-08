@@ -211,6 +211,24 @@ public class DLFileShortcutWrapper implements DLFileShortcut {
 	}
 
 	/**
+	* Gets the repository ID of this d l file shortcut.
+	*
+	* @return the repository ID of this d l file shortcut
+	*/
+	public long getRepositoryId() {
+		return _dlFileShortcut.getRepositoryId();
+	}
+
+	/**
+	* Sets the repository ID of this d l file shortcut.
+	*
+	* @param repositoryId the repository ID of this d l file shortcut
+	*/
+	public void setRepositoryId(long repositoryId) {
+		_dlFileShortcut.setRepositoryId(repositoryId);
+	}
+
+	/**
 	* Gets the folder ID of this d l file shortcut.
 	*
 	* @return the folder ID of this d l file shortcut

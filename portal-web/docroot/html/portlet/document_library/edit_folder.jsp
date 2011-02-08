@@ -57,9 +57,11 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 				String parentFolderName = "";
 
 				try {
-					Folder parentFolder = DLAppLocalServiceUtil.getFolder(parentFolderId);
+					if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+						Folder parentFolder = DLAppLocalServiceUtil.getFolder(parentFolderId);
 
-					parentFolderName = parentFolder.getName();
+						parentFolderName = parentFolder.getName();
+					}
 				}
 				catch (NoSuchFolderException nscce) {
 				}

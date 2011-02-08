@@ -160,6 +160,20 @@ public interface DLFileVersionModel extends BaseModel<DLFileVersion> {
 	public void setCreateDate(Date createDate);
 
 	/**
+	 * Gets the repository ID of this d l file version.
+	 *
+	 * @return the repository ID of this d l file version
+	 */
+	public long getRepositoryId();
+
+	/**
+	 * Sets the repository ID of this d l file version.
+	 *
+	 * @param repositoryId the repository ID of this d l file version
+	 */
+	public void setRepositoryId(long repositoryId);
+
+	/**
 	 * Gets the file entry ID of this d l file version.
 	 *
 	 * @return the file entry ID of this d l file version

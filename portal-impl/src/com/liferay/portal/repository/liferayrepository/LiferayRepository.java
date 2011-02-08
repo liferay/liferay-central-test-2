@@ -56,8 +56,8 @@ public class LiferayRepository
 		throws PortalException, SystemException {
 
 		DLFileEntry dlFileEntry = DLRepositoryServiceUtil.addFileEntry(
-			getGroupId(), toFolderId(folderId), title, description, changeLog,
-			is, size, serviceContext);
+			getGroupId(), getRepositoryId(), toFolderId(folderId), title,
+			description, changeLog, is, size, serviceContext);
 
 		return new LiferayFileEntry(dlFileEntry);
 	}
@@ -68,8 +68,8 @@ public class LiferayRepository
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = DLRepositoryServiceUtil.addFolder(
-			getGroupId(), toFolderId(parentFolderId), title, description,
-			serviceContext);
+			getGroupId(), getRepositoryId(), toFolderId(parentFolderId), title,
+			description, serviceContext);
 
 		return new LiferayFolder(dlFolder);
 	}

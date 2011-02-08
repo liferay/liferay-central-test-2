@@ -55,8 +55,8 @@ import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
  */
 public class DLRepositoryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
-		HttpPrincipal httpPrincipal, long groupId, long folderId,
-		java.lang.String title, java.lang.String description,
+		HttpPrincipal httpPrincipal, long groupId, long repositoryId,
+		long folderId, java.lang.String title, java.lang.String description,
 		java.lang.String changeLog, java.io.InputStream is, long size,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -66,8 +66,8 @@ public class DLRepositoryServiceHttp {
 					"addFileEntry", _addFileEntryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderId, title, description, changeLog, is, size,
-					serviceContext);
+					repositoryId, folderId, title, description, changeLog, is,
+					size, serviceContext);
 
 			Object returnObj = null;
 
@@ -96,8 +96,9 @@ public class DLRepositoryServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		HttpPrincipal httpPrincipal, long groupId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
+		HttpPrincipal httpPrincipal, long groupId, long repositoryId,
+		long parentFolderId, java.lang.String name,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -106,7 +107,8 @@ public class DLRepositoryServiceHttp {
 					"addFolder", _addFolderParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					parentFolderId, name, description, serviceContext);
+					repositoryId, parentFolderId, name, description,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -1761,13 +1763,13 @@ public class DLRepositoryServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(DLRepositoryServiceHttp.class);
 	private static final Class<?>[] _addFileEntryParameterTypes0 = new Class[] {
-			long.class, long.class, java.lang.String.class,
+			long.class, long.class, long.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
 			java.io.InputStream.class, long.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addFolderParameterTypes1 = new Class[] {
-			long.class, long.class, java.lang.String.class,
+			long.class, long.class, long.class, java.lang.String.class,
 			java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};

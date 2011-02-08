@@ -407,56 +407,6 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		return localRepository.getFoldersFileEntriesCount(folderIds, status);
 	}
 
-	public List<FileEntry> getGroupFileEntries(
-			long repositoryId, int start, int end)
-		throws SystemException {
-
-		return getGroupFileEntries(repositoryId, start, end, null);
-	}
-
-	public List<FileEntry> getGroupFileEntries(
-			long repositoryId, int start, int end, OrderByComparator obc)
-		throws SystemException {
-
-		LocalRepository localRepository = getLocalRepository(repositoryId);
-
-		return localRepository.getRepositoryFileEntries(start, end, obc);
-	}
-
-	public List<FileEntry> getGroupFileEntries(
-			long repositoryId, long userId, int start, int end)
-		throws SystemException {
-
-		return getGroupFileEntries(repositoryId, userId, start, end, null);
-	}
-
-	public List<FileEntry> getGroupFileEntries(
-			long repositoryId, long userId, int start, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		LocalRepository localRepository = getLocalRepository(repositoryId);
-
-		return localRepository.getRepositoryFileEntries(start, end, obc);
-	}
-
-	public int getGroupFileEntriesCount(long repositoryId)
-		throws SystemException {
-
-		LocalRepository localRepository = getLocalRepository(repositoryId);
-
-		return localRepository.getRepositoryFileEntriesCount();
-	}
-
-	public int getGroupFileEntriesCount(long repositoryId, long userId)
-		throws SystemException {
-
-		LocalRepository localRepository = getLocalRepository(repositoryId);
-
-		return localRepository.getRepositoryFileEntriesCount(
-			userId);
-	}
-
 	public FileEntry moveFileEntry(
 			long userId, long fileEntryId, long newFolderId,
 			ServiceContext serviceContext)

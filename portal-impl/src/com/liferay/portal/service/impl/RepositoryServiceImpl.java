@@ -62,7 +62,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		repository.setType(type);
 		repository.setTypeSettingsProperties(typeSettingsProperties);
 		repository.setDlFolderId(
-			getDLFolderId(user, groupId, name, description));
+			getDLFolderId(user, groupId, repositoryId, name, description));
 
 		repositoryPersistence.update(repository, false);
 
@@ -185,11 +185,12 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	}
 
 	protected long getDLFolderId(
-			User user, long groupId, String name, String description)
+			User user, long groupId, long repositoryId, String name,
+			String description)
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = dlRepositoryLocalService.addFolder(
-			user.getUserId(), groupId,
+			user.getUserId(), groupId, repositoryId,
 			DLFolderConstants.MAPPED_PARENT_FOLDER_ID, name, description,
 			new ServiceContext());
 

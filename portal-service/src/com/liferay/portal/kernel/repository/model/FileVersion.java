@@ -45,6 +45,8 @@ public interface FileVersion extends RepositoryModel<FileVersion> {
 
 	public long getFileVersionId();
 
+	public long getGroupId();
+
 	public String getIcon();
 
 	public long getRepositoryId();
@@ -72,6 +74,8 @@ public interface FileVersion extends RepositoryModel<FileVersion> {
 	public String getVersion();
 
 	public boolean isApproved();
+
+	public boolean isDefaultRepository();
 
 	public boolean isDraft();
 

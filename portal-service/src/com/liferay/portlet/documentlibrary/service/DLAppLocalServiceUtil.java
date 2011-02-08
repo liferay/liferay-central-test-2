@@ -325,43 +325,6 @@ public class DLAppLocalServiceUtil {
 				   .getFoldersFileEntriesCount(repositoryId, folderIds, status);
 	}
 
-	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
-		long repositoryId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupFileEntries(repositoryId, start, end);
-	}
-
-	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
-		long repositoryId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupFileEntries(repositoryId, start, end, obc);
-	}
-
-	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
-		long repositoryId, long userId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupFileEntries(repositoryId, userId, start, end);
-	}
-
-	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getGroupFileEntries(
-		long repositoryId, long userId, int start, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getGroupFileEntries(repositoryId, userId, start, end, obc);
-	}
-
-	public static int getGroupFileEntriesCount(long repositoryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupFileEntriesCount(repositoryId);
-	}
-
-	public static int getGroupFileEntriesCount(long repositoryId, long userId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getGroupFileEntriesCount(repositoryId, userId);
-	}
-
 	public static com.liferay.portal.kernel.repository.model.FileEntry moveFileEntry(
 		long userId, long fileEntryId, long newFolderId,
 		com.liferay.portal.service.ServiceContext serviceContext)

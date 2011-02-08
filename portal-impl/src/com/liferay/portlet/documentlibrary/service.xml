@@ -54,6 +54,7 @@
 
 		<!-- Other fields -->
 
+		<column name="repositoryId" type="long" />
 		<column name="folderId" type="long" />
 		<column name="name" type="String" />
 		<column name="extension" type="String" />
@@ -171,6 +172,7 @@
 
 		<!-- Other fields -->
 
+		<column name="repositoryId" type="long" />
 		<column name="folderId" type="long" />
 		<column name="toFileEntryId" type="long" />
 		<column name="status" type="int" />
@@ -217,6 +219,7 @@
 
 		<!-- Other fields -->
 
+		<column name="repositoryId" type="long" />
 		<column name="fileEntryId" type="long" />
         <column name="extension" type="String" />
 		<column name="title" type="String" />
@@ -271,6 +274,7 @@
 
 		<!-- Other fields -->
 
+		<column name="repositoryId" type="long" />
 		<column name="parentFolderId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />

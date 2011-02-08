@@ -38,6 +38,7 @@ public class DLFolderSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setRepositoryId(model.getRepositoryId());
 		soapModel.setParentFolderId(model.getParentFolderId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
@@ -158,6 +159,14 @@ public class DLFolderSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public long getRepositoryId() {
+		return _repositoryId;
+	}
+
+	public void setRepositoryId(long repositoryId) {
+		_repositoryId = repositoryId;
+	}
+
 	public long getParentFolderId() {
 		return _parentFolderId;
 	}
@@ -198,6 +207,7 @@ public class DLFolderSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _repositoryId;
 	private long _parentFolderId;
 	private String _name;
 	private String _description;

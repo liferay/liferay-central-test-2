@@ -233,6 +233,20 @@ public interface DLFileEntryModel extends BaseModel<DLFileEntry> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Gets the repository ID of this d l file entry.
+	 *
+	 * @return the repository ID of this d l file entry
+	 */
+	public long getRepositoryId();
+
+	/**
+	 * Sets the repository ID of this d l file entry.
+	 *
+	 * @param repositoryId the repository ID of this d l file entry
+	 */
+	public void setRepositoryId(long repositoryId);
+
+	/**
 	 * Gets the folder ID of this d l file entry.
 	 *
 	 * @return the folder ID of this d l file entry

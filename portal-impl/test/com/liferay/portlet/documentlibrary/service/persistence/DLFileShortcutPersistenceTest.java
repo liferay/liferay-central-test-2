@@ -72,6 +72,7 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		newDLFileShortcut.setUserName(randomString());
 		newDLFileShortcut.setCreateDate(nextDate());
 		newDLFileShortcut.setModifiedDate(nextDate());
+		newDLFileShortcut.setRepositoryId(nextLong());
 		newDLFileShortcut.setFolderId(nextLong());
 		newDLFileShortcut.setToFileEntryId(nextLong());
 		newDLFileShortcut.setStatus(nextInt());
@@ -101,6 +102,8 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingDLFileShortcut.getModifiedDate()),
 			Time.getShortTimestamp(newDLFileShortcut.getModifiedDate()));
+		assertEquals(existingDLFileShortcut.getRepositoryId(),
+			newDLFileShortcut.getRepositoryId());
 		assertEquals(existingDLFileShortcut.getFolderId(),
 			newDLFileShortcut.getFolderId());
 		assertEquals(existingDLFileShortcut.getToFileEntryId(),
@@ -194,6 +197,7 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		dlFileShortcut.setUserName(randomString());
 		dlFileShortcut.setCreateDate(nextDate());
 		dlFileShortcut.setModifiedDate(nextDate());
+		dlFileShortcut.setRepositoryId(nextLong());
 		dlFileShortcut.setFolderId(nextLong());
 		dlFileShortcut.setToFileEntryId(nextLong());
 		dlFileShortcut.setStatus(nextInt());

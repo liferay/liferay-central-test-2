@@ -58,6 +58,7 @@ public class DLFileShortcutJSONSerializer {
 		}
 
 		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("repositoryId", model.getRepositoryId());
 		jsonObject.put("folderId", model.getFolderId());
 		jsonObject.put("toFileEntryId", model.getToFileEntryId());
 		jsonObject.put("status", model.getStatus());

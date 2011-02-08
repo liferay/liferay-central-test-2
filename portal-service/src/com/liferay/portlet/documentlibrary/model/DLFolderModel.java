@@ -189,6 +189,20 @@ public interface DLFolderModel extends BaseModel<DLFolder> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Gets the repository ID of this d l folder.
+	 *
+	 * @return the repository ID of this d l folder
+	 */
+	public long getRepositoryId();
+
+	/**
+	 * Sets the repository ID of this d l folder.
+	 *
+	 * @param repositoryId the repository ID of this d l folder
+	 */
+	public void setRepositoryId(long repositoryId);
+
+	/**
 	 * Gets the parent folder ID of this d l folder.
 	 *
 	 * @return the parent folder ID of this d l folder

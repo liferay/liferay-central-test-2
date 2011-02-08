@@ -74,6 +74,10 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		}
 	}
 
+	public long getGroupId() {
+		return _dlFolder.getGroupId();
+	}
+
 	public Date getLastPostDate() {
 		return _dlFolder.getLastPostDate();
 	}
@@ -118,7 +122,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public long getRepositoryId() {
-		return _dlFolder.getGroupId();
+		return _dlFolder.getRepositoryId();
 	}
 
 	public long getUserId() {
@@ -143,6 +147,15 @@ public class LiferayFolder extends LiferayModel implements Folder {
 
 	public boolean hasLock() {
 		return _dlFolder.hasLock();
+	}
+
+	public boolean isDefaultRepository() {
+		if (_dlFolder.getGroupId() == _dlFolder.getRepositoryId()) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isEscapedModel() {

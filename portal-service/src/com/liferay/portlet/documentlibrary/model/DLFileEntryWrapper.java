@@ -267,6 +267,24 @@ public class DLFileEntryWrapper implements DLFileEntry {
 	}
 
 	/**
+	* Gets the repository ID of this d l file entry.
+	*
+	* @return the repository ID of this d l file entry
+	*/
+	public long getRepositoryId() {
+		return _dlFileEntry.getRepositoryId();
+	}
+
+	/**
+	* Sets the repository ID of this d l file entry.
+	*
+	* @param repositoryId the repository ID of this d l file entry
+	*/
+	public void setRepositoryId(long repositoryId) {
+		_dlFileEntry.setRepositoryId(repositoryId);
+	}
+
+	/**
 	* Gets the folder ID of this d l file entry.
 	*
 	* @return the folder ID of this d l file entry

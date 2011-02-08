@@ -470,6 +470,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		dlFolderImpl.setUserName(dlFolder.getUserName());
 		dlFolderImpl.setCreateDate(dlFolder.getCreateDate());
 		dlFolderImpl.setModifiedDate(dlFolder.getModifiedDate());
+		dlFolderImpl.setRepositoryId(dlFolder.getRepositoryId());
 		dlFolderImpl.setParentFolderId(dlFolder.getParentFolderId());
 		dlFolderImpl.setName(dlFolder.getName());
 		dlFolderImpl.setDescription(dlFolder.getDescription());

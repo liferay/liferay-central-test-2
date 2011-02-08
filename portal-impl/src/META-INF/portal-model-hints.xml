@@ -1193,6 +1193,7 @@
 		<field name="versionUserName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="repositoryId" type="long" />
 		<field name="folderId" type="long" />
 		<field name="name" type="String">
 			<hint name="max-length">255</hint>
@@ -1228,6 +1229,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="repositoryId" type="long" />
 		<field name="folderId" type="long" />
 		<field name="toFileEntryId" type="long" />
 		<field name="status" type="int" />
@@ -1242,6 +1244,7 @@
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
+		<field name="repositoryId" type="long" />
 		<field name="fileEntryId" type="long" />
 		<field name="extension" type="String" />
 		<field name="title" type="String">
@@ -1270,6 +1273,7 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="repositoryId" type="long" />
 		<field name="parentFolderId" type="long" />
 		<field name="name" type="String">
 			<hint name="max-length">100</hint>

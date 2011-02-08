@@ -64,7 +64,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
 				fileEntryId);
 
-			initByRepositoryId(dlFileEntry.getGroupId());
+			initByRepositoryId(dlFileEntry.getRepositoryId());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -76,7 +76,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			DLFileVersion dlFileVersion =
 				DLRepositoryLocalServiceUtil.getFileVersion(fileVersionId);
 
-			initByRepositoryId(dlFileVersion.getGroupId());
+			initByRepositoryId(dlFileVersion.getRepositoryId());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -88,7 +88,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
 				folderId);
 
-			initByRepositoryId(dlFolder.getGroupId());
+			initByRepositoryId(dlFolder.getRepositoryId());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -111,7 +111,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 		}
 	}
 
-	protected boolean isDLRepository() {
+	protected boolean isDefaultRepository() {
 		if (_groupId == _repositoryId) {
 			return false;
 		}
@@ -122,7 +122,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 
 	protected long toFolderId(long folderId) {
 		if ((folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
-			isDLRepository()) {
+			isDefaultRepository()) {
 
 			return _dlFolderId;
 		}

@@ -59,8 +59,8 @@ public class LiferayLocalRepository
 		throws PortalException, SystemException {
 
 		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.addFileEntry(
-			userId, getGroupId(), toFolderId(folderId), title, description,
-			changeLog, is, size, serviceContext);
+			userId, getGroupId(), getRepositoryId(), toFolderId(folderId),
+			title, description, changeLog, is, size, serviceContext);
 
 		return new LiferayFileEntry(dlFileEntry);
 	}
@@ -71,8 +71,8 @@ public class LiferayLocalRepository
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = DLRepositoryLocalServiceUtil.addFolder(
-			userId, getGroupId(), toFolderId(parentFolderId), title,
-			description, serviceContext);
+			userId, getGroupId(), getRepositoryId(), toFolderId(parentFolderId),
+			title, description, serviceContext);
 
 		return new LiferayFolder(dlFolder);
 	}
@@ -228,42 +228,6 @@ public class LiferayLocalRepository
 
 		return DLRepositoryLocalServiceUtil.getFoldersFileEntriesCount(
 			getGroupId(), toFolderIds(folderIds), status);
-	}
-
-	public List<FileEntry> getRepositoryFileEntries(
-			int start, int end, OrderByComparator obc)
-		throws SystemException {
-
-		List<DLFileEntry> dlFileEntries =
-			DLRepositoryLocalServiceUtil.getGroupFileEntries(
-				getGroupId(), start, end, obc);
-
-		return toFileEntries(dlFileEntries);
-	}
-
-	public List<FileEntry> getRepositoryFileEntries(
-			long userId, int start, int end, OrderByComparator obc)
-		throws SystemException {
-
-		List<DLFileEntry> dlFileEntries =
-			DLRepositoryLocalServiceUtil.getGroupFileEntries(
-				getGroupId(), userId, start, end, obc);
-
-		return toFileEntries(dlFileEntries);
-	}
-
-	public int getRepositoryFileEntriesCount()
-		throws SystemException {
-
-		return DLRepositoryLocalServiceUtil.getGroupFileEntriesCount(
-			getGroupId());
-	}
-
-	public int getRepositoryFileEntriesCount(long userId)
-		throws SystemException {
-
-		return DLRepositoryLocalServiceUtil.getGroupFileEntriesCount(
-			getGroupId(), userId);
 	}
 
 	public FileEntry moveFileEntry(
