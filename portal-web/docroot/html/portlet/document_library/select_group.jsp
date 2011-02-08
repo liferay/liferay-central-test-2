@@ -41,24 +41,33 @@
 
 	List<Group> myPlaces = user.getMyPlaces();
 
+	if (PortalUtil.isCompanyControlPanelPortlet(portletId, themeDisplay)) {
+		if (myPlaces.isEmpty()) {
+			myPlaces = new ArrayList<Group>();
+		}
+
+		myPlaces.add(0, GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyGroupId()));
+	}
+
 	int total = myPlaces.size();
 
 	searchContainer.setTotal(total);
 
-	List<Group> results = myPlaces;
-
-	searchContainer.setResults(results);
+	searchContainer.setResults(myPlaces);
 
 	List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < results.size(); i++) {
-		Group group = results.get(i);
+	for (int i = 0; i < myPlaces.size(); i++) {
+		Group group = myPlaces.get(i);
 
 		ResultRow row = new ResultRow(group, group.getGroupId(), i);
 
 		String groupName = HtmlUtil.escape(group.getDescriptiveName());
 
-		if (group.isUser()) {
+		if (group.isCompany()) {
+			groupName = LanguageUtil.get(pageContext, "global");
+		}
+		else if (group.isUser()) {
 			groupName = LanguageUtil.get(pageContext, "my-community");
 		}
 
