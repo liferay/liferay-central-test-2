@@ -117,12 +117,20 @@ public class ResourcePermissionFinderImpl
 	protected String getScopes(int[] scopes) {
 		StringBuilder sb = new StringBuilder();
 
+		if (scopes.length > 0) {
+			sb.append("(");
+		}
+
 		for (int i = 0; i < scopes.length; i++) {
 			sb.append("scope = ? ");
 
 			if ((i + 1) != scopes.length) {
 				sb.append("OR ");
 			}
+		}
+
+		if (scopes.length > 0) {
+			sb.append(")");
 		}
 
 		return sb.toString();
