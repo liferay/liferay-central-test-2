@@ -21,13 +21,15 @@ AUI().add(
 					Liferay.once('initDockbar', instance._init, instance);
 
 					var eventHandle = dockBar.on(
-						['focus', 'mousemove'],
+						['focus', 'mousemove', 'touchstart'],
 						function(event) {
 							Liferay.fire('initDockbar');
 
 							eventHandle.detach();
 						}
 					);
+
+					BODY.addClass('dockbar-ready');
 				}
 			},
 
@@ -735,6 +737,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-button-item', 'aui-io-plugin', 'aui-io-request', 'aui-overlay-context', 'aui-overlay-manager', 'node-focusmanager']
+		requires: ['aui-button-item', 'aui-io-plugin', 'aui-io-request', 'aui-overlay-context', 'aui-overlay-manager', 'event-touch', 'node-focusmanager']
 	}
 );

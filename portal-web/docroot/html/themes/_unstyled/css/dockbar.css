@@ -1,6 +1,9 @@
 .dockbar {
 }
 
+.dockbar-ready .dockbar {
+}
+
 .dockbar:after {
 }
 

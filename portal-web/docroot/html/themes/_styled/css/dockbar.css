@@ -4,7 +4,12 @@
 	font-size: 13px;
 	padding: 1px 5px;
 	position: relative;
+	visibility: hidden;
 	z-index: 300;
+}
+
+.dockbar-ready .dockbar {
+	visibility: visible;
 }
 
 .dockbar:after {
