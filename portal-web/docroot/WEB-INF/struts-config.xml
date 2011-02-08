@@ -637,6 +637,11 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
+		<action path="/enterprise_admin/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
+			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
+		</action>
+
 		<action path="/enterprise_admin/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
@@ -650,11 +655,6 @@
 		<action path="/enterprise_admin/edit_organization_logo" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationLogoAction">
 			<forward name="portlet.enterprise_admin.edit_organization_logo" path="portlet.enterprise_admin.edit_organization_logo" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
-		<action path="/enterprise_admin/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
-			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
 		<action path="/enterprise_admin/edit_password_policy" type="com.liferay.portlet.enterpriseadmin.action.EditPasswordPolicyAction">
@@ -872,6 +872,11 @@
 
 		<!-- Enterprise Admin Organizations -->
 
+		<action path="/enterprise_admin_organizations/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
+			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
+		</action>
+
 		<action path="/enterprise_admin_organizations/edit_organization" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationAction">
 			<forward name="portlet.enterprise_admin.edit_organization" path="portlet.enterprise_admin.edit_organization" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
@@ -885,11 +890,6 @@
 		<action path="/enterprise_admin_organizations/edit_organization_logo" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationLogoAction">
 			<forward name="portlet.enterprise_admin.edit_organization_logo" path="portlet.enterprise_admin.edit_organization_logo" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
-		<action path="/enterprise_admin_organizations/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
-			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
 		<action path="/enterprise_admin_organizations/edit_proposal" type="com.liferay.portlet.layoutsadmin.action.EditProposalAction">
