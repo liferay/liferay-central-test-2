@@ -7,7 +7,7 @@
 
 		<!-- PK fields -->
 
-		<column name="id" type="long" primary="true" />
+		<column name="structureEntryId" type="long" primary="true" />
 
 		<!-- Group instance -->
 
@@ -23,7 +23,7 @@
 
 		<!-- Other fields -->
 
-		<column name="formStructureId" type="String" />
+		<column name="structureId" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="xsd" type="String" />
@@ -33,50 +33,39 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="G_F" return-type="FormsStructureEntry" unique="true">
+		<finder name="G_S" return-type="FormsStructureEntry" unique="true">
 			<finder-column name="groupId" />
-			<finder-column name="formStructureId" />
+			<finder-column name="structureId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
 	<entity name="FormsStructureEntryLink" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="formStructureLinkId" type="long" primary="true" />
+		<column name="structureEntryLinkId" type="long" primary="true" />
 
 		<!-- Other fields -->
 
-		<column name="formStructureId" type="String" />
+		<column name="structureId" type="String" />
 		<column name="className" type="String" />
 		<column name="classPK" type="long" />
 
 		<!-- Finder methods -->
 
-		<finder name="FormStructureLinkId" return-type="FormsStructureEntryLink" unique="true">
-			<finder-column name="formStructureLinkId" />
+		<finder name="StructureId" return-type="Collection">
+			<finder-column name="structureId" />
 		</finder>
-		<finder name="FormStructureId" return-type="Collection">
-			<finder-column name="formStructureId" />
-		</finder>
-		<finder name="F_C_C" return-type="FormsStructureEntryLink" unique="true">
-			<finder-column name="formStructureId" />		
+		<finder name="S_C_C" return-type="FormsStructureEntryLink" unique="true">
+			<finder-column name="structureId" />		
 			<finder-column name="className" />
 			<finder-column name="classPK" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
 	<exceptions>
-		<exception>EntryDuplicateElement</exception>
-		<exception>EntryDuplicateStructureId</exception>
-		<exception>EntryStructureId</exception>
-		<exception>EntryName</exception>
-		<exception>EntryXsd</exception>
+		<exception>StructureEntryDuplicateElement</exception>
+		<exception>StructureEntryDuplicateStructureId</exception>
+		<exception>StructureEntryStructureId</exception>
+		<exception>StructureEntryName</exception>
+		<exception>StructureEntryXsd</exception>
 	</exceptions>
 </service-builder>

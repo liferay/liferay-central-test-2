@@ -333,7 +333,7 @@
 	</target>
 
 	<target name="build-service-portlet-forms">
-			<antcall target="build-service">
+		<antcall target="build-service">
 			<param name="service.file" value="${basedir}/src/com/liferay/portlet/forms/service.xml" />
 		</antcall>
 	</target>
