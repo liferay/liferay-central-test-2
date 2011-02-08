@@ -181,7 +181,7 @@
 					</c:if>
 
 					<%
-					boolean showGlobal = permissionChecker.isCompanyAdmin() || JournalPermission.contains(permissionChecker, themeDisplay.getCompanyGroupId(), ActionKeys.ADD_ARTICLE);
+					boolean showGlobal = PortalUtil.isCompanyControlPanelVisible(themeDisplay);
 					boolean showMyCommunity = user.getGroup().hasPrivateLayouts() || user.getGroup().hasPublicLayouts();
 					%>
 

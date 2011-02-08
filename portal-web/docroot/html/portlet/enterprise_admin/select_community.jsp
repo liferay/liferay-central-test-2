@@ -18,6 +18,7 @@
 
 <%
 String target = ParamUtil.getString(request, "target");
+boolean includeCompany = ParamUtil.getBoolean(request, "includeCompany");
 boolean includeUserPersonalCommunity = ParamUtil.getBoolean(request, "includeUserPersonalCommunity");
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -51,14 +52,22 @@ portletURL.setParameter("target", target);
 				groupParams.put("usersGroups", user.getUserId());
 			}
 
-			long[] classNameIds = new long[] {PortalUtil.getClassNameId(Group.class.getName())};
+			List<Long> classNameIds = new ArrayList<Long>();
 
-			if (includeUserPersonalCommunity) {
-				classNameIds = new long[] {PortalUtil.getClassNameId(Group.class.getName()), PortalUtil.getClassNameId(UserPersonalCommunity.class)};
+			classNameIds.add(PortalUtil.getClassNameId(Group.class.getName()));
+
+			if (includeCompany) {
+				classNameIds.add(PortalUtil.getClassNameId(Company.class));
 			}
 
-			results = GroupLocalServiceUtil.search(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams);
+			if (includeUserPersonalCommunity) {
+				classNameIds.add(PortalUtil.getClassNameId(UserPersonalCommunity.class));
+			}
+
+			long[] classNameIdsArray = StringUtil.split(StringUtil.merge(classNameIds), 0L);
+
+			results = GroupLocalServiceUtil.search(company.getCompanyId(), classNameIdsArray, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), classNameIdsArray, searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 			pageContext.setAttribute("results", results);
 			pageContext.setAttribute("total", total);

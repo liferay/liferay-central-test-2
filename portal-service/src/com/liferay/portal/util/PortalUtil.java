@@ -1120,6 +1120,29 @@ public class PortalUtil {
 		return getPortal().isCompanyAdmin(user);
 	}
 
+	public static boolean isCompanyControlPanelPortlet(
+			String portletId, String category, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().isCompanyControlPanelPortlet(
+			portletId, category, themeDisplay);
+	}
+
+	public static boolean isCompanyControlPanelPortlet(
+			String portletId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().isCompanyControlPanelPortlet(
+			portletId, themeDisplay);
+	}
+
+	public static boolean isCompanyControlPanelVisible(
+			ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().isCompanyControlPanelVisible(themeDisplay);
+	}
+
 	public static boolean isControlPanelPortlet(
 			String portletId, String category, ThemeDisplay themeDisplay)
 		throws SystemException {

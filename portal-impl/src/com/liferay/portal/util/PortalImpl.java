@@ -3644,6 +3644,70 @@ public class PortalImpl implements Portal {
 		return permissionChecker.isCompanyAdmin();
 	}
 
+	public boolean isCompanyControlPanelPortlet(
+			String portletId, String category, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return true;
+		}
+
+		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+			themeDisplay.getCompanyId());
+
+		themeDisplay.setScopeGroupId(companyGroup.getGroupId());
+
+		return isControlPanelPortlet(portletId, category, themeDisplay);
+	}
+
+	public boolean isCompanyControlPanelPortlet(
+			String portletId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return true;
+		}
+
+		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+			themeDisplay.getCompanyId());
+
+		themeDisplay.setScopeGroupId(companyGroup.getGroupId());
+
+		return isControlPanelPortlet(portletId, themeDisplay);
+	}
+
+	public boolean isCompanyControlPanelVisible(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		if (permissionChecker.isCompanyAdmin()) {
+			return true;
+		}
+
+		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+			themeDisplay.getCompanyId());
+
+		themeDisplay.setScopeGroupId(companyGroup.getGroupId());
+
+		List<Portlet> controlPanelPortlets = getControlPanelPortlets(
+			PortletCategoryKeys.CONTENT, themeDisplay);
+
+		if (controlPanelPortlets.size() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isControlPanelPortlet(
 			String portletId, String category, ThemeDisplay themeDisplay)
 		throws SystemException {
