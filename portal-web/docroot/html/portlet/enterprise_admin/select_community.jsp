@@ -52,22 +52,22 @@ portletURL.setParameter("target", target);
 				groupParams.put("usersGroups", user.getUserId());
 			}
 
-			List<Long> classNameIds = new ArrayList<Long>();
+			List<Long> classNameIdsList = new ArrayList<Long>();
 
-			classNameIds.add(PortalUtil.getClassNameId(Group.class.getName()));
+			classNameIdsList.add(PortalUtil.getClassNameId(Group.class.getName()));
 
 			if (includeCompany) {
-				classNameIds.add(PortalUtil.getClassNameId(Company.class));
+				classNameIdsList.add(PortalUtil.getClassNameId(Company.class));
 			}
 
 			if (includeUserPersonalCommunity) {
-				classNameIds.add(PortalUtil.getClassNameId(UserPersonalCommunity.class));
+				classNameIdsList.add(PortalUtil.getClassNameId(UserPersonalCommunity.class));
 			}
 
-			long[] classNameIdsArray = StringUtil.split(StringUtil.merge(classNameIds), 0L);
+			long[] classNameIds = StringUtil.split(StringUtil.merge(classNameIdsList), 0L);
 
-			results = GroupLocalServiceUtil.search(company.getCompanyId(), classNameIdsArray, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
-			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), classNameIdsArray, searchTerms.getName(), searchTerms.getDescription(), groupParams);
+			results = GroupLocalServiceUtil.search(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+			total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), classNameIds, searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 			pageContext.setAttribute("results", results);
 			pageContext.setAttribute("total", total);
