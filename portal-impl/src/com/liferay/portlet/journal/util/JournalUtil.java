@@ -86,6 +86,7 @@ import javax.portlet.PortletSession;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  * @author Wesley Gong
+ * @author Angelo Jefferson
  */
 public class JournalUtil {
 
@@ -1296,6 +1297,9 @@ public class JournalUtil {
 						else {
 							curContentElement.addCDATA(newValue);
 						}
+					}
+					else {
+						curElement.add(newContentElement.createCopy());
 					}
 
 					curContentElement.addAttribute(
