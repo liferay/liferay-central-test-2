@@ -15,6 +15,9 @@ alter table BookmarksEntry drop column comments;
 alter table CalEvent add location STRING null;
 
 alter table DLFileEntry add repositoryId LONG;
+
+COMMIT_TRANSACTION;
+
 update DLFileEntry set repositoryId = groupId;
 
 drop index IX_CE705D48 on DLFileRank;
@@ -25,17 +28,26 @@ drop index IX_55C736AC on DLFileShortcut;
 drop index IX_346A0992 on DLFileShortcut;
 alter table DLFileShortcut add repositoryId LONG;
 alter table DLFileShortcut add toFileEntryId LONG;
+
+COMMIT_TRANSACTION;
+
 update DLFileShortcut set repositoryId = groupId;
 
 drop index IX_B413F1EC on DLFileVersion;
 drop index IX_94E784D2 on DLFileVersion;
 drop index IX_2F8FED9C on DLFileVersion;
-alter table DLFileVersion add fileEntryId LONG;
 alter table DLFileVersion add repositoryId LONG;
+alter table DLFileVersion add fileEntryId LONG;
+
+COMMIT_TRANSACTION;
+
 update DLFileVersion set repositoryId = groupId;
 
 alter table DLFolder add repositoryId LONG;
 alter table DLFolder add mountPoint BOOLEAN null;
+
+COMMIT_TRANSACTION;
+
 update DLFolder set repositoryId = groupId;
 
 update Group_ set type_ = 3 where type_ = 0;

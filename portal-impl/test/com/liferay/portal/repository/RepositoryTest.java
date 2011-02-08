@@ -29,7 +29,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
 
 import java.io.InputStream;
@@ -52,13 +51,13 @@ public class RepositoryTest extends TestCase {
 			"Test 1", PortletKeys.DOCUMENT_LIBRARY,
 			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties());
 
-		DLFolder folder = DLRepositoryServiceUtil.addFolder(
+		DLFolder dlFolder = DLRepositoryServiceUtil.addFolder(
 			getGroupId(), getGroupId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Folder", "Folder",
 			new ServiceContext());
 
 		repositoryIds[1] = RepositoryFactoryUtil.createRepository(
-			getGroupId(), folder.getFolderId(), "Test 2", "Test 2",
+			getGroupId(), dlFolder.getFolderId(), "Test 2", "Test 2",
 			PortletKeys.DOCUMENT_LIBRARY, RepositoryConstants.TYPE_LIFERAY,
 			new UnicodeProperties());
 
@@ -136,15 +135,16 @@ public class RepositoryTest extends TestCase {
 
 		// Verify mapped folder
 
-		DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
+		// TODO
+
+		/*DLFolder dlFolder = DLRepositoryLocalServiceUtil.getFolder(
 			folderIds[1]);
 
 		DLFolder parentDLFolder = dlFolder.getParentFolder();
 
-//TODO
-//		assertEquals(
-//			parentDLFolder.getParentFolderId(),
-//			DLFolderConstants.MAPPED_PARENT_FOLDER_ID);
+		assertEquals(
+			parentDLFolder.getParentFolderId(),
+			DLFolderConstants.MAPPED_PARENT_FOLDER_ID);*/
 
 		// Delete repositories
 

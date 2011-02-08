@@ -214,8 +214,8 @@ public class DLRepositoryLocalServiceImpl
 		folder.setCreateDate(serviceContext.getCreateDate(now));
 		folder.setModifiedDate(serviceContext.getModifiedDate(now));
 		folder.setRepositoryId(repositoryId);
-		folder.setMountPoint(GetterUtil.getBoolean(
-			serviceContext.getAttribute("mountPoint")));
+		folder.setMountPoint(
+			GetterUtil.getBoolean(serviceContext.getAttribute("mountPoint")));
 		folder.setParentFolderId(parentFolderId);
 		folder.setName(name);
 		folder.setDescription(description);

@@ -17,7 +17,6 @@ package com.liferay.portal.repository.liferayrepository;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.LocalRepository;
-import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -78,9 +77,8 @@ public class LiferayLocalRepository
 	}
 
 	public void addRepository(
-			long groupId, String name, String description, String portletKey,
-			UnicodeProperties typeSettingsProperties)
-		throws RepositoryException {
+		long groupId, String name, String description, String portletKey,
+		UnicodeProperties typeSettingsProperties) {
 	}
 
 	public void deleteAll() throws PortalException, SystemException {
@@ -280,8 +278,7 @@ public class LiferayLocalRepository
 	}
 
 	public UnicodeProperties updateRepository(
-			UnicodeProperties typeSettingsProperties)
-		throws RepositoryException {
+		UnicodeProperties typeSettingsProperties) {
 
 		return typeSettingsProperties;
 	}
