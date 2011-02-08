@@ -919,7 +919,7 @@
 				ResourcePermission
 			WHERE
 				(ResourcePermission.roleId = ?) AND
-				([$SCOPE$])
+				[$SCOPE$]
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByCommunity">
