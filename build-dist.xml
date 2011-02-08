@@ -730,7 +730,7 @@ release was successful.</echo>
 	</target>
 
 	<target name="unzip-tomcat">
-		<delete dir="${app.server.parent.dir}/tomcat-6.0.29" />
+		<delete dir="${app.server.tomcat.dir}" />
 
 		<if>
 			<not>
@@ -745,6 +745,23 @@ release was successful.</echo>
 			</then>
 		</if>
 
+		<script classpathref="project.classpath" language="beanshell">
+			String appServerTomcatDir = project.getProperty("app.server.tomcat.dir");
+
+			int forwardSlashPos = appServerTomcatDir.lastIndexOf("/");
+			int backSlashPos = appServerTomcatDir.lastIndexOf("\\");
+
+			int pos = forwardSlashPos;
+
+			if ((backSlashPos != -1) &amp;&amp; (backSlashPos > forwardSlashPos)) {
+				pos = backSlashPos;
+			}
+
+			String appServerTomcatDirName = appServerTomcatDir.substring(pos + 1);
+
+			project.setProperty("app.server.tomcat.dir.name", appServerTomcatDirName);
+		</script>
+
 		<unzip
 			dest="${app.server.parent.dir}"
 			src="${app.server.parent.dir}/${app.server.tomcat.zip.name}"
@@ -755,11 +772,11 @@ release was successful.</echo>
 			<mapper
 				type="glob"
 				from="apache-tomcat-6.0.29/*"
-				to="tomcat-6.0.29/*"
+				to="${app.server.tomcat.dir.name}/*"
 			/>
 		</unzip>
 
-		<mkdir dir="${app.server.parent.dir}/tomcat-6.0.29/webapps" />
+		<mkdir dir="${app.server.tomcat.dir}/webapps" />
 	</target>
 
 	<target name="zip-api">

@@ -218,14 +218,45 @@ Please use Ant 1.7.0 or above.
 			</not>
 		</and>
 		<then>
-			<copy file="${project.dir}/lib/development/ecj.jar" todir="${ant.home}/lib" />
+			<trycatch>
+				<try>
+					<copy file="${project.dir}/lib/development/ecj.jar" todir="${ant.home}/lib" />
+				</try>
+				<catch>
+					<fail>
+.
 
-			<fail>
+Please manually copy ${project.dir}/lib/development/ecj.jar to ${ant.home}/lib
+to install ECJ. Then rerun your task.
+					</fail>
+				</catch>
+			</trycatch>
+
+			<if>
+				<available file="${ant.home}/lib/ecj.jar" />
+				<then>
+					<fail>
 .
 
 Task cannot continue because ECJ is not installed.
 
 ECJ was automatically installed. Please rerun your task.
+					</fail>
+				</then>
+			</if>
+		</then>
+	</if>
+
+	<if>
+		<not>
+			<isset property="env.ANT_OPTS" />
+		</not>
+		<then>
+			<fail>
+.
+
+Please set the environment variable ANT_OPTS to the recommended value of
+"-Xmx1024m -XX:MaxPermSize=256m".
 			</fail>
 		</then>
 	</if>

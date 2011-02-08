@@ -762,41 +762,7 @@
 			<else>
 				<antcall target="compile-dependencies" />
 
-				<trycatch property="exception.message">
-					<try>
-						<antcall target="build-common-java.compile" />
-					</try>
-					<catch>
-						<antelope:stringutil string="${exception.message}" property="exception.message.index">
-							<indexof string="java.lang.reflect.InvocationTargetException" fromindex="0" />
-						</antelope:stringutil>
-
-						<if>
-							<not>
-								<equals arg1="${exception.message.index}" arg2="-1" />
-							</not>
-							<then>
-								<fail>
-.
-
-${exception.message}
-
-A compilation error occurred because ECJ does not have enough memory.
-
-To fix this, set the environment variable ANT_OPTS to the recommended value of
-"-Xms256m -Xmx512m".
-								</fail>
-							</then>
-							<else>
-								<fail>
-.
-
-${exception.message}
-								</fail>
-							</else>
-						</if>
-					</catch>
-				</trycatch>
+				<antcall target="build-common-java.compile" />
 			</else>
 		</if>
 

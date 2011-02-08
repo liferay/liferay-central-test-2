@@ -143,6 +143,25 @@
 			</then>
 		</if>
 
+		<if>
+			<and>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<not>
+					<available file="${app.server.tomcat.dir}/lib/catalina.jar" />
+				</not>
+			</and>
+			<then>
+				<fail>
+.
+
+Tomcat is not installed in ${app.server.tomcat.dir}. If you already have Tomcat
+installed, make sure the property "$${app.server.tomcat.dir}" points to your
+Tomcat installation. If you wish to automatically install Tomcat into
+${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
+				</fail>
+			</then>
+		</if>
+
 		<ant dir="portal-service" target="deploy" inheritAll="false" />
 
 		<ant dir="util-bridges" target="deploy" inheritAll="false" />
@@ -804,7 +823,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 			<link href="http://docs.liferay.com/portlet-api/2.0/javadocs" />
 			<link href="http://java.sun.com/javase/6/docs/api" />
 			<link href="http://docs.liferay.com/portal/${lp.version.major}/javadocs" />
-			
+
 			<packageset dir="portal-service/src" />
 			<packageset dir="util-bridges/src" />
 			<packageset dir="util-java/src" />
@@ -812,7 +831,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 			<tag name="generated" description="" />
 		</javadoc>
 	</target>
-	
+
 	<target name="javadoc-all">
 		<property name="doc.java.dir" value="${doc.dir}/javadocs-all" />
 
