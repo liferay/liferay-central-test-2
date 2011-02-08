@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  */
 public class SessionClicks {
 
@@ -31,11 +32,18 @@ public class SessionClicks {
 	public static String get(
 		HttpServletRequest request, String key, String defaultValue) {
 
+		return get(request, CLASS_NAME, key, defaultValue);
+	}
+
+	public static String get(
+		HttpServletRequest request, String namespace, String key,
+		String defaultValue) {
+
 		try {
 			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			return preferences.getValue(CLASS_NAME, key, defaultValue);
+			return preferences.getValue(namespace, key, defaultValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -47,11 +55,18 @@ public class SessionClicks {
 	public static void put(
 		HttpServletRequest request, String key, String value) {
 
+		put(request, CLASS_NAME, key, value);
+	}
+
+	public static void put(
+		HttpServletRequest request, String namespace, String key,
+		String value) {
+
 		try {
 			PortalPreferences preferences =
 				PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-			preferences.setValue(CLASS_NAME, key, value);
+			preferences.setValue(namespace, key, value);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
