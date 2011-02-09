@@ -204,7 +204,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	public Portlet deployRemotePortlet(Portlet portlet, String categoryName)
 		throws SystemException {
 
-		return deployRemotePortlet(portlet, new String[]{categoryName});
+		return deployRemotePortlet(portlet, new String[] {categoryName});
 	}
 
 	public Portlet deployRemotePortlet(Portlet portlet, String[] categoryNames)
@@ -228,15 +228,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		resourceActionLocalService.checkResourceActions(
 			portlet.getPortletId(), portletActions);
 
-		long companyId = portlet.getCompanyId();
-
 		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
-			String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
+			String.valueOf(portlet.getCompanyId()), WebKeys.PORTLET_CATEGORY);
 
 		if (portletCategory == null) {
 			_log.error(
-				"Unable to register remote portlet for company " + companyId +
-					" because it does not exist");
+				"Unable to register remote portlet for company " +
+					portlet.getCompanyId() + " because it does not exist");
 
 			return portlet;
 		}
@@ -248,13 +246,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				categoryName);
 
 			if (newPortletCategory.getParentCategory() == null) {
-				PortletCategory rootPortletCategory =
-					new PortletCategory();
+				PortletCategory rootPortletCategory = new PortletCategory();
 
 				rootPortletCategory.addCategory(newPortletCategory);
 			}
 
-			newPortletCategory.getPortletIds().add(portlet.getPortletId());
+			Set<String> portletIds = newPortletCategory.getPortletIds();
+
+			portletIds.add(portlet.getPortletId());
 
 			portletCategory.merge(newPortletCategory.getRootCategory());
 		}

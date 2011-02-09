@@ -68,7 +68,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.TreeView;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.QName;
@@ -2436,14 +2435,6 @@ public class PortalImpl implements Portal {
 
 		return (List<KeyValuePair>)request.getAttribute(
 			WebKeys.PORTLET_BREADCRUMBS);
-	}
-
-	public TreeView getCategoryTreeView(User user)
-		throws PortalException, SystemException {
-
-		PortletLister portletLister = new PortletLister();
-
-		return portletLister.getCategoryTreeView(user);
 	}
 
 	public String getPortletDescription(

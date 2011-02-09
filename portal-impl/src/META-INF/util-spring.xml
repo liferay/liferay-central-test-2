@@ -434,6 +434,11 @@
 	<bean id="com.liferay.portal.util.PortalUtil" class="com.liferay.portal.util.PortalUtil">
 		<property name="portal" ref="com.liferay.portal.util.Portal" />
 	</bean>
+	<bean id="com.liferay.portal.util.PortletListerFactoryUtil" class="com.liferay.portal.util.PortletListerFactoryUtil">
+		<property name="portletListerFactory">
+			<bean class="com.liferay.portal.util.PortletListerFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil" class="com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil">
 		<property name="assetRendererFactoryRegistry">
 			<bean class="com.liferay.portal.asset.AssetRendererFactoryRegistryImpl" />

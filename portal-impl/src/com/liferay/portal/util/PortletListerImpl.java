@@ -46,7 +46,7 @@ import javax.servlet.ServletContext;
  * @author Dennis Ju
  * @author Brian Wing Shun Chan
  */
-public class PortletLister {
+public class PortletListerImpl implements PortletLister {
 
 	public TreeView getTreeView() throws PortalException, SystemException {
 		_nodeId = 1;
@@ -68,7 +68,7 @@ public class PortletLister {
 		List<PortletCategory> categories = ListUtil.fromCollection(
 			portletCategory.getCategories());
 
-		_iterateCategories(categories, _nodeId, 0);
+		iterateCategories(categories, _nodeId, 0);
 
 		return new TreeView(_list, _depth);
 	}
@@ -78,28 +78,28 @@ public class PortletLister {
 
 		_includeInstanceablePortlets = includeInstanceablePortlets;
 	}
-	
+
 	public void setIteratePortlets(boolean iteratePortlets) {
 		_iteratePortlets = iteratePortlets;
 	}
-	
+
 	public void setLayoutTypePortlet(LayoutTypePortlet layoutTypePortlet) {
 		_layoutTypePortlet = layoutTypePortlet;
 	}
-	
+
 	public void setRootNodeName(String rootNodeName) {
 		_rootNodeName = rootNodeName;
 	}
-	
+
 	public void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
 	}
-	
+
 	public void setUser(User user) {
 		_user = user;
 	}
-	
-	private void _iterateCategories(
+
+	protected void iterateCategories(
 			List<PortletCategory> categories, long parentId, int depth)
 		throws PortalException, SystemException {
 
@@ -146,7 +146,7 @@ public class PortletLister {
 			List<PortletCategory> subCategories = ListUtil.fromCollection(
 				portletCategory.getCategories());
 
-			_iterateCategories(subCategories, nodeId, depth);
+			iterateCategories(subCategories, nodeId, depth);
 
 			if (_iteratePortlets) {
 				_iteratePortlets(
@@ -157,7 +157,7 @@ public class PortletLister {
 			i++;
 		}
 	}
-	
+
 	private void _iteratePortlets(
 			PortletCategory portletCategory, Set<String> portletIds,
 			int parentNodeId, int depth)

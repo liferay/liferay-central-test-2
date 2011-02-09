@@ -71,7 +71,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 	).render();
 
 	<%
-	PortletLister portletLister = new PortletLister();
+	PortletLister portletLister = PortletListerFactoryUtil.getPortletLister();
 
 	portletLister.setIncludeInstanceablePortlets(false);
 	portletLister.setLayoutTypePortlet(layoutTypePortlet);
