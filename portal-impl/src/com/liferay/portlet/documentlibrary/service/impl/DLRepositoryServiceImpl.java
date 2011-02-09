@@ -30,8 +30,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
@@ -41,8 +41,6 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 
 import java.io.InputStream;
-
-import java.rmi.RemoteException;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,7 +85,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public DLFolder copyFolder(
 			long groupId, long sourceFolderId, long parentFolderId, String name,
 			String description, ServiceContext serviceContext)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFolder srcFolder = getFolder(sourceFolderId);
 
@@ -135,7 +133,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public void deleteFolder(long folderId)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFolder folder = dlRepositoryLocalService.getFolder(folderId);
 
@@ -168,7 +166,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public void deleteFolder(long groupId, long parentFolderId, String name)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFolder folder = getFolder(groupId, parentFolderId, name);
 
@@ -188,10 +186,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public List<DLFileEntry> getFileEntries(
 			long groupId, long folderId, int start, int end,
 			OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
+		throws SystemException {
 
 		return dlFileEntryPersistence.filterFindByG_F(
 			groupId, folderId, start, end, obc);
@@ -214,10 +209,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public int getFileEntriesCount(long groupId, long folderId)
-		throws PortalException, SystemException {
-
-		DLFolderPermission.check(
-			getPermissionChecker(), groupId, folderId, ActionKeys.VIEW);
+		throws SystemException {
 
 		return dlFileEntryPersistence.filterCountByG_F(groupId, folderId);
 	}
@@ -263,6 +255,19 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		catch (Exception e) {
 			return null;
 		}
+	}
+
+	public DLFileVersion getFileVersion(long fileVersionId)
+		throws PortalException, SystemException {
+
+		DLFileVersion fileVersion = dlRepositoryLocalService.getFileVersion(
+			fileVersionId);
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileVersion.getFileEntryId(),
+			ActionKeys.VIEW);
+
+		return fileVersion;
 	}
 
 	public DLFolder getFolder(long folderId)
@@ -484,7 +489,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public Lock lockFolder(long folderId)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		return lockFolder(
 			folderId, null, false, DLFolderImpl.LOCK_EXPIRATION_TIME);
@@ -493,7 +498,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public Lock lockFolder(
 			long folderId, String owner, boolean inheritable,
 			long expirationTime)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		User user = getUser();
 
@@ -533,9 +538,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 			if (e instanceof PortalException) {
 				throw (PortalException)e;
-			}
-			else if (e instanceof RemoteException) {
-				throw (RemoteException)e;
 			}
 			else if (e instanceof SystemException) {
 				throw (SystemException)e;
@@ -685,8 +687,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 				unlockFileEntry(dlFileEntry.getFileEntryId());
 			}
 		}
-		catch (NoSuchFolderException nsfe) {
-		}
 		catch (Exception e) {
 			_log.error(e, e);
 		}
@@ -741,7 +741,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description,
 			ServiceContext serviceContext)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFolder folder = dlRepositoryLocalService.getFolder(folderId);
 
@@ -832,7 +832,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	protected void copyFolder(
 			DLFolder srcFolder, DLFolder destFolder,
 			ServiceContext serviceContext)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, SystemException {
 
 		List<DLFileEntry> srcFileEntries = getFileEntries(
 			srcFolder.getGroupId(), srcFolder.getFolderId(), QueryUtil.ALL_POS,

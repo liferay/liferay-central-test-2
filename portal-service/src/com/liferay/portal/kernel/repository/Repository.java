@@ -17,14 +17,14 @@ package com.liferay.portal.kernel.repository;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.InputStream;
-
-import java.rmi.RemoteException;
 
 import java.util.List;
 
@@ -43,10 +43,17 @@ public interface Repository {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
+	public void addRepository(
+			long groupId, String name, String description, String portletKey,
+			UnicodeProperties typeSettingsProperties)
+		throws RepositoryException;
+
 	public Folder copyFolder(
 			long sourceFolderId, long parentFolderId, String title,
 			String description, ServiceContext serviceContext)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
+
+	public void deleteAll() throws PortalException, SystemException;
 
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException;
@@ -55,14 +62,14 @@ public interface Repository {
 		throws PortalException, SystemException;
 
 	public void deleteFolder(long folderId)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public void deleteFolder(long parentFolderId, String title)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public List<FileEntry> getFileEntries(
 			long folderId, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public List<Object> getFileEntriesAndFileShortcuts(
 			List<Long> folderIds, int status, int start, int end)
@@ -73,7 +80,7 @@ public interface Repository {
 		throws SystemException;
 
 	public int getFileEntriesCount(long folderId)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	public FileEntry getFileEntry(long fileEntryId)
 		throws PortalException, SystemException;
@@ -82,6 +89,9 @@ public interface Repository {
 		throws PortalException, SystemException;
 
 	public FileEntry getFileEntryByUuid(String uuid)
+		throws PortalException, SystemException;
+
+	public FileVersion getFileVersion(long fileVersionId)
 		throws PortalException, SystemException;
 
 	public Folder getFolder(long folderId)
@@ -127,12 +137,12 @@ public interface Repository {
 		throws PortalException, SystemException;
 
 	public Lock lockFolder(long folderId)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public Lock lockFolder(
 			long folderId, String owner, boolean inheritable,
 			long expirationTime)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
 
 	public FileEntry moveFileEntry(
 			long fileEntryId, long newFolderId, ServiceContext serviceContext)
@@ -168,7 +178,11 @@ public interface Repository {
 	public Folder updateFolder(
 			long folderId, long parentFolderId, String title,
 			String description, ServiceContext serviceContext)
-		throws PortalException, RemoteException, SystemException;
+		throws PortalException, SystemException;
+
+	public UnicodeProperties updateRepository(
+			UnicodeProperties typeSettingsProperties)
+		throws RepositoryException;
 
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException;

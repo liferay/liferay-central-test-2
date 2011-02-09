@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.service.ServiceContext;
 
 import java.io.InputStream;
@@ -42,11 +41,6 @@ public interface LocalRepository {
 			long userId, long parentFolderId, String title, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
-
-	public void addRepository(
-			long groupId, String name, String description, String portletKey,
-			UnicodeProperties typeSettingsProperties)
-		throws RepositoryException;
 
 	public void deleteAll() throws PortalException, SystemException;
 
@@ -128,9 +122,5 @@ public interface LocalRepository {
 			long folderId, long parentFolderId, String title,
 			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException;
-
-	public UnicodeProperties updateRepository(
-			UnicodeProperties typeSettingsProperties)
-		throws RepositoryException;
 
 }

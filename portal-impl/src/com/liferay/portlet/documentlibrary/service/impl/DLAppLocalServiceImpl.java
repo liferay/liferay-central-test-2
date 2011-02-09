@@ -22,12 +22,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.LocalRepository;
-import com.liferay.portal.kernel.repository.RepositoryException;
-import com.liferay.portal.kernel.repository.RepositoryFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.service.RepositoryServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
@@ -524,16 +523,16 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	protected LocalRepository getLocalRepository(long repositoryId)
-		throws RepositoryException {
+		throws SystemException {
 
-		return RepositoryFactoryUtil.getLocalRepository(repositoryId);
+		return RepositoryServiceUtil.getLocalRepositoryImpl(repositoryId);
 	}
 
 	protected LocalRepository getLocalRepository(
 			long folderId, long fileEntryId, long fileVersionId)
-		throws RepositoryException {
+		throws SystemException {
 
-		return RepositoryFactoryUtil.getLocalRepository(
+		return RepositoryServiceUtil.getLocalRepositoryImpl(
 			folderId, fileEntryId, fileVersionId);
 	}
 

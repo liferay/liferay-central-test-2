@@ -17,13 +17,13 @@ package com.liferay.portal.repository;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryConstants;
-import com.liferay.portal.kernel.repository.RepositoryFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.RepositoryServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.TestPropsValues;
@@ -46,7 +46,7 @@ public class RepositoryTest extends TestCase {
 
 		long[] repositoryIds = new long[2];
 
-		repositoryIds[0] = RepositoryFactoryUtil.createRepository(
+		repositoryIds[0] = RepositoryServiceUtil.addRepository(
 			getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1",
 			"Test 1", PortletKeys.DOCUMENT_LIBRARY,
 			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties());
@@ -56,21 +56,20 @@ public class RepositoryTest extends TestCase {
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Folder", "Folder",
 			new ServiceContext());
 
-		repositoryIds[1] = RepositoryFactoryUtil.createRepository(
+		repositoryIds[1] = RepositoryServiceUtil.addRepository(
 			getGroupId(), dlFolder.getFolderId(), "Test 2", "Test 2",
 			PortletKeys.DOCUMENT_LIBRARY, RepositoryConstants.TYPE_LIFERAY,
 			new UnicodeProperties());
 
 		// Delete repositories
 
-		RepositoryFactoryUtil.deleteRepositories(
-			getGroupId(), RepositoryConstants.PURGE_ALL);
+		RepositoryServiceUtil.deleteRepositories(getGroupId());
 
 		for (int i = 0; i < repositoryIds.length; i++) {
 			long repositoryId = repositoryIds[i];
 
 			try {
-				RepositoryFactoryUtil.getLocalRepository(repositoryId);
+				RepositoryServiceUtil.getLocalRepositoryImpl(repositoryId);
 
 				fail("Should not be able to access repository " + repositoryId);
 			}
@@ -85,7 +84,7 @@ public class RepositoryTest extends TestCase {
 
 		long defaultRepositoryId = getGroupId();
 
-		long dlRepositoryId = RepositoryFactoryUtil.createRepository(
+		long dlRepositoryId = RepositoryServiceUtil.addRepository(
 			getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test",
 			"Test", PortletKeys.DOCUMENT_LIBRARY,
 			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties());
@@ -105,7 +104,7 @@ public class RepositoryTest extends TestCase {
 			long repositoryId = repositoryIds[i];
 
 			LocalRepository localRepository =
-				RepositoryFactoryUtil.getLocalRepository(repositoryId);
+				RepositoryServiceUtil.getLocalRepositoryImpl(repositoryId);
 
 			FileEntry fileEntry1 = localRepository.addFileEntry(
 				TestPropsValues.USER_ID,
@@ -148,8 +147,7 @@ public class RepositoryTest extends TestCase {
 
 		// Delete repositories
 
-		RepositoryFactoryUtil.deleteRepositories(
-			getGroupId(), RepositoryConstants.PURGE_ALL);
+		RepositoryServiceUtil.deleteRepositories(getGroupId());
 
 		for (int i = 0; i < repositoryIds.length; i++) {
 			long repositoryId = repositoryIds[i];
@@ -158,7 +156,7 @@ public class RepositoryTest extends TestCase {
 
 			try {
 				LocalRepository localRepository =
-					RepositoryFactoryUtil.getLocalRepository(repositoryId);
+					RepositoryServiceUtil.getLocalRepositoryImpl(repositoryId);
 
 				localRepository.getFileEntry(fileEntryId);
 

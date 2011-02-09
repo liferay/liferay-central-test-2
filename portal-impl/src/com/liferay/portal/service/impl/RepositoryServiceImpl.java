@@ -18,13 +18,13 @@ import com.liferay.portal.NoSuchRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.LocalRepository;
-import com.liferay.portal.kernel.repository.RepositoryConstants;
 import com.liferay.portal.kernel.repository.RepositoryException;
-import com.liferay.portal.kernel.repository.RepositoryFactoryUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.User;
+import com.liferay.portal.repository.liferayrepository.LiferayLocalRepository;
+import com.liferay.portal.repository.liferayrepository.LiferayRepository;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.RepositoryServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -67,11 +67,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		repositoryPersistence.update(repository, false);
 
-		// Local repository
+		// Repository Implementation
 
-		LocalRepository localRepository = getLocalRepository(repositoryId);
-
-		localRepository.addRepository(
+		getRepositoryImpl(repositoryId).addRepository(
 			groupId, name, description, portletId, typeSettingsProperties);
 
 		return repositoryId;
@@ -92,46 +90,35 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 	}
 
-	public void deleteRepositories(long groupId, int purge)
+	/**
+	 * This method deletes the all repositories associated with this group.
+	 * It purges the default repository but does not purge any mapped
+	 * repositories.
+	 *
+	 * @param groupId identifier of group to delete from
+	 */
+	public void deleteRepositories(long groupId)
 		throws PortalException, SystemException {
-
-		// Default repository
-
-		boolean purgeDefault = false;
-
-		if ((purge == RepositoryConstants.PURGE_ALL) ||
-			(purge == RepositoryConstants.PURGE_DEFAULT)) {
-
-			purgeDefault = true;
-		}
-
-		deleteRepository(groupId, purgeDefault);
 
 		// Mapped repositories
 
 		List<Repository> repositories = repositoryPersistence.findByGroupId(
 			groupId);
 
-		boolean purgeNonDefault = false;
-
-		if ((purge == RepositoryConstants.PURGE_ALL) ||
-			(purge == RepositoryConstants.PURGE_MAPPED)) {
-
-			purgeNonDefault = true;
-		}
-
 		for (Repository repository : repositories) {
-			deleteRepository(repository.getRepositoryId(), purgeNonDefault);
+			deleteRepository(repository.getRepositoryId(), false);
 		}
+
+		// Default repository
+
+		deleteRepository(groupId, true);
 	}
 
 	public void deleteRepository(long repositoryId, boolean purge)
 		throws PortalException, SystemException {
 
 		if (purge) {
-			LocalRepository localRepository = getLocalRepository(repositoryId);
-
-			localRepository.deleteAll();
+			getLocalRepositoryImpl(repositoryId).deleteAll();
 		}
 
 		Repository repository = repositoryPersistence.fetchByPrimaryKey(
@@ -158,6 +145,53 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return repositoryPersistence.findByPrimaryKey(repositoryId);
 	}
 
+	public LocalRepository getLocalRepositoryImpl(long repositoryId)
+		throws SystemException {
+
+		LocalRepository localRepository = new LiferayLocalRepository(
+			repositoryId);
+
+		checkRepository(repositoryId);
+
+		return localRepository;
+	}
+
+	public LocalRepository getLocalRepositoryImpl(
+			long folderId, long fileEntryId, long fileVersionId)
+		throws SystemException {
+
+		LocalRepository localRepository = new LiferayLocalRepository(
+			folderId, fileEntryId, fileVersionId);
+
+		checkRepository(localRepository.getRepositoryId());
+
+		return localRepository;
+	}
+
+	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
+			long repositoryId)
+		throws SystemException {
+
+		com.liferay.portal.kernel.repository.Repository repository =
+			new LiferayRepository(repositoryId);
+
+		checkRepository(repositoryId);
+
+		return repository;
+	}
+
+	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
+			long folderId, long fileEntryId, long fileVersionId)
+		throws SystemException {
+
+		com.liferay.portal.kernel.repository.Repository repository =
+			new LiferayRepository(folderId, fileEntryId, fileVersionId);
+
+		checkRepository(repository.getRepositoryId());
+
+		return repository;
+	}
+
 	public UnicodeProperties getTypeSettingsProperties(long repositoryId)
 		throws PortalException, SystemException {
 
@@ -178,15 +212,15 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			repositoryId);
 
 		repository.setModifiedDate(new Date());
+		repository.setName(name);
+		repository.setDescription(description);
 		repository.setTypeSettingsProperties(typeSettingsProperties);
 
 		repositoryPersistence.update(repository, false);
 
-		// Local repository
+		// Repository Implementation
 
-		LocalRepository localRepository = getLocalRepository(repositoryId);
-
-		typeSettingsProperties = localRepository.updateRepository(
+		getRepositoryImpl(repositoryId).updateRepository(
 			typeSettingsProperties);
 	}
 
@@ -204,12 +238,6 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			description, serviceContext);
 
 		return dlFolder.getFolderId();
-	}
-
-	protected LocalRepository getLocalRepository(long repositoryId)
-		throws RepositoryException {
-
-		return RepositoryFactoryUtil.getLocalRepository(repositoryId);
 	}
 
 }

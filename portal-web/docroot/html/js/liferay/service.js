@@ -287,6 +287,8 @@ Liferay.Service.registerClass(
 		deleteRepositories: true,
 		deleteRepository: true,
 		getRepository: true,
+		getLocalRepositoryImpl: true,
+		getRepositoryImpl: true,
 		getTypeSettingsProperties: true,
 		updateRepository: true
 	}
@@ -675,6 +677,7 @@ Liferay.Service.registerClass(
 		getFileEntry: true,
 		getFileEntryByUuidAndGroupId: true,
 		getFileEntryLock: true,
+		getFileVersion: true,
 		getFolder: true,
 		getFolders: true,
 		getFoldersAndFileEntriesAndFileShortcutsCount: true,

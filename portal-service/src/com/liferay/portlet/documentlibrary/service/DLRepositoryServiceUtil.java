@@ -65,8 +65,7 @@ public class DLRepositoryServiceUtil {
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .copyFolder(groupId, sourceFolderId, parentFolderId, name,
 			description, serviceContext);
@@ -87,16 +86,14 @@ public class DLRepositoryServiceUtil {
 
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFolder(folderId);
 	}
 
 	public static void deleteFolder(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFolder(groupId, parentFolderId, name);
 	}
 
@@ -110,8 +107,7 @@ public class DLRepositoryServiceUtil {
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long groupId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntries(groupId, folderId, start, end, obc);
 	}
 
@@ -133,8 +129,7 @@ public class DLRepositoryServiceUtil {
 	}
 
 	public static int getFileEntriesCount(long groupId, long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntriesCount(groupId, folderId);
 	}
 
@@ -162,6 +157,13 @@ public class DLRepositoryServiceUtil {
 	public static com.liferay.portal.model.Lock getFileEntryLock(
 		long fileEntryId) {
 		return getService().getFileEntryLock(fileEntryId);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getFileVersion(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileVersion(fileVersionId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
@@ -280,16 +282,14 @@ public class DLRepositoryServiceUtil {
 
 	public static com.liferay.portal.model.Lock lockFolder(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().lockFolder(folderId);
 	}
 
 	public static com.liferay.portal.model.Lock lockFolder(long folderId,
 		java.lang.String owner, boolean inheritable, long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .lockFolder(folderId, owner, inheritable, expirationTime);
 	}
@@ -369,8 +369,7 @@ public class DLRepositoryServiceUtil {
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateFolder(folderId, parentFolderId, name, description,
 			serviceContext);

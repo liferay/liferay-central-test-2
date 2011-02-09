@@ -43,10 +43,10 @@ public class RepositoryServiceWrapper implements RepositoryService {
 		_repositoryService.checkRepository(repositoryId);
 	}
 
-	public void deleteRepositories(long groupId, int purge)
+	public void deleteRepositories(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_repositoryService.deleteRepositories(groupId, purge);
+		_repositoryService.deleteRepositories(groupId);
 	}
 
 	public void deleteRepository(long repositoryId, boolean purge)
@@ -59,6 +59,32 @@ public class RepositoryServiceWrapper implements RepositoryService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _repositoryService.getRepository(repositoryId);
+	}
+
+	public com.liferay.portal.kernel.repository.LocalRepository getLocalRepositoryImpl(
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _repositoryService.getLocalRepositoryImpl(repositoryId);
+	}
+
+	public com.liferay.portal.kernel.repository.LocalRepository getLocalRepositoryImpl(
+		long folderId, long fileEntryId, long fileVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _repositoryService.getLocalRepositoryImpl(folderId, fileEntryId,
+			fileVersionId);
+	}
+
+	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _repositoryService.getRepositoryImpl(repositoryId);
+	}
+
+	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
+		long folderId, long fileEntryId, long fileVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _repositoryService.getRepositoryImpl(folderId, fileEntryId,
+			fileVersionId);
 	}
 
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties(

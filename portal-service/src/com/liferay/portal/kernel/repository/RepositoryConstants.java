@@ -19,14 +19,6 @@ package com.liferay.portal.kernel.repository;
  */
 public class RepositoryConstants {
 
-	public static final int PURGE_ALL = -1;
-
-	public static final int PURGE_DEFAULT = 1;
-
-	public static final int PURGE_MAPPED = 2;
-
-	public static final int PURGE_NONE = 0;
-
 	public static final int TYPE_LIFERAY = 0;
 
 }

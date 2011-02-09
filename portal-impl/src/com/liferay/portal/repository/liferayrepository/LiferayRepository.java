@@ -17,20 +17,23 @@ package com.liferay.portal.repository.liferayrepository;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.Repository;
+import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryServiceUtil;
 
 import java.io.InputStream;
-
-import java.rmi.RemoteException;
 
 import java.util.List;
 
@@ -74,16 +77,36 @@ public class LiferayRepository
 		return new LiferayFolder(dlFolder);
 	}
 
+	public void addRepository(
+			long groupId, String name, String description, String portletKey,
+			UnicodeProperties typeSettingsProperties)
+		throws RepositoryException {
+	}
+
 	public Folder copyFolder(
 			long sourceFolderId, long parentFolderId, String title,
 			String description, ServiceContext serviceContext)
-		throws RemoteException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFolder dlFolder = DLRepositoryServiceUtil.copyFolder(
 			getGroupId(), sourceFolderId, parentFolderId, title, description,
 			serviceContext);
 
 		return new LiferayFolder(dlFolder);
+	}
+
+	/**
+	 * This method cannot be called from LiferayRepository because the
+	 * permission checking on all the objects would be a major impact on
+	 * performance. Hence, this should only be called from
+	 * LiferayLocalRepository which assumes the user is an administrator of some
+	 * sort.  If called, the method will throw an
+	 * <code>UnsupportedOperationException</code>.
+	 *
+	 * @see LiferayLocalRepository#deleteAll()
+	 */
+	public void deleteAll() throws PortalException, SystemException {
+		throw new UnsupportedOperationException();
 	}
 
 	public void deleteFileEntry(long fileEntryId)
@@ -100,13 +123,13 @@ public class LiferayRepository
 	}
 
 	public void deleteFolder(long folderId)
-		throws PortalException, SystemException, RemoteException {
+		throws PortalException, SystemException {
 
 		DLRepositoryServiceUtil.deleteFolder(folderId);
 	}
 
 	public void deleteFolder(long parentFolderId, String title)
-		throws PortalException, SystemException, RemoteException {
+		throws PortalException, SystemException {
 
 		DLRepositoryServiceUtil.deleteFolder(
 			getGroupId(), toFolderId(parentFolderId), title);
@@ -114,7 +137,7 @@ public class LiferayRepository
 
 	public List<FileEntry> getFileEntries(
 			long folderId, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<DLFileEntry> dlFileEntries =
 			DLRepositoryServiceUtil.getFileEntries(
@@ -142,9 +165,7 @@ public class LiferayRepository
 			getGroupId(), toFolderIds(folderIds), status);
 	}
 
-	public int getFileEntriesCount(long folderId)
-		throws PortalException, SystemException {
-
+	public int getFileEntriesCount(long folderId) throws SystemException {
 		return DLRepositoryServiceUtil.getFileEntriesCount(
 			getGroupId(), toFolderId(folderId));
 	}
@@ -179,6 +200,15 @@ public class LiferayRepository
 
 	public Lock getFileEntryLock(long fileEntryId) {
 		return DLRepositoryServiceUtil.getFileEntryLock(fileEntryId);
+	}
+
+	public FileVersion getFileVersion(long fileVersionId)
+		throws PortalException, SystemException {
+
+		DLFileVersion dlFileVersion =
+			DLRepositoryServiceUtil.getFileVersion(fileVersionId);
+
+		return new LiferayFileVersion(dlFileVersion);
 	}
 
 	public Folder getFolder(long folderId)
@@ -282,7 +312,7 @@ public class LiferayRepository
 	}
 
 	public Lock lockFolder(long folderId)
-		throws RemoteException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		return DLRepositoryServiceUtil.lockFolder(toFolderId(folderId));
 	}
@@ -290,7 +320,7 @@ public class LiferayRepository
 	public Lock lockFolder(
 			long folderId, String owner, boolean inheritable,
 			long expirationTime)
-		throws RemoteException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		return DLRepositoryServiceUtil.lockFolder(
 			toFolderId(folderId), owner, inheritable, expirationTime);
@@ -368,13 +398,20 @@ public class LiferayRepository
 	public Folder updateFolder(
 			long folderId, long parentFolderId, String title,
 			String description, ServiceContext serviceContext)
-		throws RemoteException, PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		DLFolder dlFolder = DLRepositoryServiceUtil.updateFolder(
 			toFolderId(folderId), toFolderId(parentFolderId), title,
 			description, serviceContext);
 
 		return new LiferayFolder(dlFolder);
+	}
+
+	public UnicodeProperties updateRepository(
+			UnicodeProperties typeSettingsProperties)
+		throws RepositoryException {
+
+		return new UnicodeProperties();
 	}
 
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
