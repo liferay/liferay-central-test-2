@@ -452,8 +452,8 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	protected boolean isValidName(String name) {
 		if ((name == null) ||
-			(name.contains("\\\\")) ||
 			(name.contains("\\")) ||
+			(name.contains("\\\\")) ||
 			(name.contains("//")) ||
 			(name.contains(":")) ||
 			(name.contains("*")) ||
@@ -486,4 +486,4 @@ public class DLLocalServiceImpl implements DLLocalService {
 	@BeanReference(type = Hook.class)
 	protected Hook hook;
 
-}//			(name.contains("\\")) ||
+}

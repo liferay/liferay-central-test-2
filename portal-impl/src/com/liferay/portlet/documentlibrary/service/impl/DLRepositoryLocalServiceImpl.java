@@ -1609,7 +1609,7 @@ public class DLRepositoryLocalServiceImpl
 				sourceFileName, extension, sourceFileName, true, is);
 		}
 
-		validateFileNameTitle(title);
+		validateFileName(title);
 
 		dlLocalService.validate(title, false);
 
@@ -1623,18 +1623,16 @@ public class DLRepositoryLocalServiceImpl
 
 		String fileName = title + StringPool.PERIOD + extension;
 
-		validateFileNameTitle(fileName);
+		validateFileName(fileName);
 
 		dlLocalService.validate(fileName, true, is);
 
 		validateFile(groupId, folderId, 0, title);
 	}
 
-	protected void validateFileNameTitle(String fileNameTitle)
-		throws PortalException {
-
-		if (fileNameTitle.contains("/")) {
-			throw new FileNameException(fileNameTitle);
+	protected void validateFileName(String fileName) throws PortalException {
+		if (fileName.contains(StringPool.SLASH)) {
+			throw new FileNameException(fileName);
 		}
 	}
 
