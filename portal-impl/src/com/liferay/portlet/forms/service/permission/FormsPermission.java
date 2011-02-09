@@ -24,7 +24,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 public class FormsPermission {
 
 	public static void check(
-		PermissionChecker permissionChecker, long groupId, String actionId)
+			PermissionChecker permissionChecker, long groupId, String actionId)
 		throws PortalException {
 
 		if (!contains(permissionChecker, groupId, actionId)) {
@@ -36,7 +36,9 @@ public class FormsPermission {
 		PermissionChecker permissionChecker, long groupId, String actionId) {
 
 		return permissionChecker.hasPermission(
-			groupId, "com.liferay.portlet.forms", groupId, actionId);
+			groupId, _CLASS_NAME, groupId, actionId);
 	}
+
+	private static final String _CLASS_NAME = "com.liferay.portlet.forms";
 
 }

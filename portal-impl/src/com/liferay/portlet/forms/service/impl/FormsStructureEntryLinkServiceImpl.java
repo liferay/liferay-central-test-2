@@ -44,19 +44,18 @@ public class FormsStructureEntryLinkServiceImpl
 	}
 
 	public void deleteStructureEntryLink(
-		long groupId, String structureId, long structureEntryLinkId)
+			long groupId, String structureId, long structureEntryLinkId)
 		throws PortalException, SystemException {
 
 		FormsStructureEntryPermission.check(
-			getPermissionChecker(), groupId, structureId,
-			ActionKeys.DELETE);
+			getPermissionChecker(), groupId, structureId, ActionKeys.DELETE);
 
 		formsStructureEntryLinkLocalService.deleteStructureEntryLink(
 			structureEntryLinkId);
 	}
 
 	public FormsStructureEntryLink getStructureEntryLink(
-		long groupId, String structureId, String className, long classPK)
+			long groupId, String structureId, String className, long classPK)
 		throws PortalException, SystemException {
 
 		FormsStructureEntryPermission.check(
@@ -72,8 +71,7 @@ public class FormsStructureEntryLinkServiceImpl
 		throws PortalException, SystemException {
 
 		FormsStructureEntryPermission.check(
-			getPermissionChecker(), groupId, structureId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, structureId, ActionKeys.UPDATE);
 
 		return formsStructureEntryLinkLocalService.updateStructureEntryLink(
 			structureEntryLinkId, structureId, groupId, className, classPK);

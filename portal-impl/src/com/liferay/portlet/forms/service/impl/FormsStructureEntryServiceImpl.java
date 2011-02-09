@@ -49,39 +49,29 @@ public class FormsStructureEntryServiceImpl
 		throws PortalException, SystemException {
 
 		FormsStructureEntryPermission.check(
-			getPermissionChecker(), groupId, structureId,
-			ActionKeys.DELETE);
+			getPermissionChecker(), groupId, structureId, ActionKeys.DELETE);
 
 		formsStructureEntryLocalService.deleteStructureEntry(
 			groupId, structureId);
 	}
 
-	public FormsStructureEntry fetchByG_S(long groupId, String structureId)
-		throws PortalException, SystemException {
-
-		return formsStructureEntryLocalService.fetchByG_S(
-			groupId, structureId);
-	}
-
 	public FormsStructureEntry getStructureEntry(
-		long groupId, String structureId)
+			long groupId, String structureId)
 		throws PortalException, SystemException {
 
 		FormsStructureEntryPermission.check(
 			getPermissionChecker(), groupId, structureId, ActionKeys.VIEW);
 
-		return formsStructureEntryPersistence.findByG_S(
-			groupId, structureId);
+		return formsStructureEntryPersistence.findByG_S(groupId, structureId);
 	}
 
 	public FormsStructureEntry updateStructureEntry(
-			long groupId, String structureId, String name,
-			String description, String xsd, ServiceContext serviceContext)
+			long groupId, String structureId, String name, String description,
+			String xsd, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		FormsStructureEntryPermission.check(
-			getPermissionChecker(), groupId, structureId,
-			ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, structureId, ActionKeys.UPDATE);
 
 		return formsStructureEntryLocalService.updateStructureEntry(
 			groupId, structureId, name, description, xsd, serviceContext);

@@ -56,7 +56,7 @@
 			<finder-column name="structureId" />
 		</finder>
 		<finder name="S_C_C" return-type="FormsStructureEntryLink" unique="true">
-			<finder-column name="structureId" />		
+			<finder-column name="structureId" />
 			<finder-column name="className" />
 			<finder-column name="classPK" />
 		</finder>

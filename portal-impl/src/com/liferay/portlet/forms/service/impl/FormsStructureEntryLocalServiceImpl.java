@@ -54,13 +54,16 @@ public class FormsStructureEntryLocalServiceImpl
 			String xsd, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Structure
+		// Structure entry
 
 		User user = userPersistence.findByPrimaryKey(
 			serviceContext.getUserId());
 
 		structureId = structureId.trim().toUpperCase();
-		Date now = new Date();
+
+		if (autoStructureId) {
+			structureId = String.valueOf(counterLocalService.increment());
+		}
 
 		try {
 			xsd = FormsXMLUtil.formatXML(xsd);
@@ -69,27 +72,25 @@ public class FormsStructureEntryLocalServiceImpl
 			throw new StructureEntryXsdException();
 		}
 
-		if (autoStructureId) {
-			structureId = String.valueOf(counterLocalService.increment());
-		}
+		Date now = new Date();
 
 		validate(groupId, structureId, autoStructureId, name, xsd);
 
-		long id = counterLocalService.increment();
+		long structureEntryId = counterLocalService.increment();
 
 		FormsStructureEntry structureEntry =
-			formsStructureEntryPersistence.create(id);
+			formsStructureEntryPersistence.create(structureEntryId);
 
 		structureEntry.setUuid(serviceContext.getUuid());
-		structureEntry.setStructureId(structureId);
 		structureEntry.setGroupId(serviceContext.getScopeGroupId());
 		structureEntry.setCompanyId(user.getCompanyId());
 		structureEntry.setUserId(user.getUserId());
 		structureEntry.setUserName(user.getFullName());
 		structureEntry.setCreateDate(serviceContext.getCreateDate(now));
-		structureEntry.setDescription(description);
 		structureEntry.setModifiedDate(serviceContext.getModifiedDate(now));
+		structureEntry.setStructureId(structureId);
 		structureEntry.setName(name);
+		structureEntry.setDescription(description);
 		structureEntry.setXsd(xsd);
 
 		formsStructureEntryPersistence.update(structureEntry, false);
@@ -136,30 +137,6 @@ public class FormsStructureEntryLocalServiceImpl
 			guestPermissions);
 	}
 
-	public void deleteStructureEntry(FormsStructureEntry structureEntry)
-		throws PortalException, SystemException {
-
-		// Resources
-
-		resourceLocalService.deleteResource(
-			structureEntry.getCompanyId(), FormsStructureEntry.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL,
-			structureEntry.getStructureId());
-
-		// Structure
-
-		formsStructureEntryPersistence.remove(structureEntry);
-	}
-
-	public void deleteStructureEntry(long groupId, String strucutreId)
-		throws PortalException, SystemException {
-
-		FormsStructureEntry structureEntry =
-			formsStructureEntryPersistence.findByG_S(groupId, strucutreId);
-
-		deleteStructureEntry(structureEntry);
-	}
-
 	public void deleteStructureEntries(long groupId)
 		throws PortalException, SystemException {
 
@@ -170,26 +147,28 @@ public class FormsStructureEntryLocalServiceImpl
 		}
 	}
 
-	public FormsStructureEntry fetchByG_S(long groupId, String structureId)
+	public void deleteStructureEntry(FormsStructureEntry structureEntry)
 		throws PortalException, SystemException {
 
-		return formsStructureEntryPersistence.fetchByG_S(
-			groupId, structureId);
+		// Structure
+
+		formsStructureEntryPersistence.remove(structureEntry);
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			structureEntry.getCompanyId(), FormsStructureEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL,
+			structureEntry.getStructureId());
 	}
 
-	public FormsStructureEntry getStructureEntry(long structureEntryId)
+	public void deleteStructureEntry(long groupId, String structureId)
 		throws PortalException, SystemException {
 
-		return formsStructureEntryPersistence.findByPrimaryKey(
-			structureEntryId);
-	}
+		FormsStructureEntry structureEntry =
+			formsStructureEntryPersistence.findByG_S(groupId, structureId);
 
-	public FormsStructureEntry getStructureEntry(
-			long groupId, String structureId)
-		throws PortalException, SystemException {
-
-		return formsStructureEntryPersistence.findByG_S(
-			groupId, structureId);
+		deleteStructureEntry(structureEntry);
 	}
 
 	public List<FormsStructureEntry> getStructureEntries()
@@ -216,6 +195,21 @@ public class FormsStructureEntryLocalServiceImpl
 		return formsStructureEntryPersistence.countByGroupId(groupId);
 	}
 
+	public FormsStructureEntry getStructureEntry(long structureEntryId)
+		throws PortalException, SystemException {
+
+		return formsStructureEntryPersistence.findByPrimaryKey(
+			structureEntryId);
+	}
+
+	public FormsStructureEntry getStructureEntry(
+			long groupId, String structureId)
+		throws PortalException, SystemException {
+
+		return formsStructureEntryPersistence.findByG_S(
+			groupId, structureId);
+	}
+
 	public FormsStructureEntry updateStructureEntry(
 			long groupId, String structureId, String name,
 			String description, String xsd, ServiceContext serviceContext)
@@ -238,66 +232,68 @@ public class FormsStructureEntryLocalServiceImpl
 		structureEntry.setDescription(description);
 		structureEntry.setXsd(xsd);
 
-		return formsStructureEntryPersistence.update(structureEntry, false);
+		formsStructureEntryPersistence.update(structureEntry, false);
+		
+		return structureEntry;
 	}
 
-	protected void validate(List<Element> elements, Set<String> elNames)
+	protected void validate(List<Element> elements, Set<String> names)
 		throws PortalException {
 
 		for (Element element : elements) {
-			if (element.getName().equals("meta-data")) {
+			String elementName = element.getName(); 
+			
+			if (elementName.equals("meta-data")) {
 				continue;
 			}
 
-			String elName = element.attributeValue("name", StringPool.BLANK);
-			String elType = element.attributeValue("type", StringPool.BLANK);
+			String name = element.attributeValue("name", StringPool.BLANK);
+			String type = element.attributeValue("type", StringPool.BLANK);
 
-			if (Validator.isNull(elName) ||
-				elName.startsWith(FormsStructureEntryConstants.RESERVED)) {
+			if (Validator.isNull(name) ||
+				name.startsWith(FormsStructureEntryConstants.RESERVED)) {
 
 				throw new StructureEntryXsdException();
+			}
+
+			char[] charArray = name.toCharArray();
+
+			for (int i = 0; i < charArray.length; i++) {
+				if (!Validator.isChar(charArray[i]) &&
+					!Validator.isDigit(charArray[i]) &&
+					(charArray[i] != CharPool.DASH) &&
+					(charArray[i] != CharPool.UNDERLINE)) {
+
+					throw new StructureEntryXsdException();
+				}
+			}
+
+			String path = name;
+
+			Element parentElement = element.getParent();
+
+			while (!parentElement.isRootElement()) {
+				path =
+					parentElement.attributeValue("name", StringPool.BLANK) +
+						StringPool.SLASH + path;
+
+				parentElement = parentElement.getParent();
+			}
+
+			path = path.toLowerCase();
+
+			if (names.contains(path)) {
+				throw new StructureEntryDuplicateElementException();
 			}
 			else {
-				char[] c = elName.toCharArray();
-
-				for (int i = 0; i < c.length; i++) {
-					if (!Validator.isChar(c[i]) &&
-						!Validator.isDigit(c[i]) &&
-						c[i] != CharPool.DASH &&
-						c[i] != CharPool.UNDERLINE) {
-
-						throw new StructureEntryXsdException();
-					}
-				}
-
-				String completePath = elName;
-
-				Element parentElement = element.getParent();
-
-				while (!parentElement.isRootElement()) {
-					completePath =
-						parentElement.attributeValue(
-							"name", StringPool.BLANK) + StringPool.SLASH +
-							completePath;
-
-					parentElement = parentElement.getParent();
-				}
-
-				String elNameLowerCase = completePath.toLowerCase();
-
-				if (elNames.contains(elNameLowerCase)) {
-					throw new StructureEntryDuplicateElementException();
-				}
-				else {
-					elNames.add(elNameLowerCase);
-				}
+				names.add(path);
 			}
 
-			if (Validator.isNull(elType)) {
+			if (Validator.isNull(type)) {
 				throw new StructureEntryXsdException();
 			}
 
-			validate(element.elements(), elNames);
+			validate(element.elements(), names);
 		}
 	}
 
@@ -321,8 +317,7 @@ public class FormsStructureEntryLocalServiceImpl
 		validate(groupId, name, xsd);
 	}
 
-	protected void validate(
-			long groupId, String name, String xsd)
+	protected void validate(long groupId, String name, String xsd)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
@@ -365,8 +360,7 @@ public class FormsStructureEntryLocalServiceImpl
 	protected void validateStructureId(String structureId)
 		throws PortalException {
 
-		if (Validator.isNull(structureId) ||
-			Validator.isNumber(structureId) ||
+		if (Validator.isNull(structureId) || Validator.isNumber(structureId) ||
 			structureId.indexOf(CharPool.SPACE) != -1) {
 
 			throw new StructureEntryStructureIdException();

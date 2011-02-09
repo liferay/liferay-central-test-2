@@ -32,9 +32,7 @@ public class FormsStructureEntryLinkLocalServiceImpl
 	public FormsStructureEntryLink addStructureEntryLink(
 			String structureId, String className, long classPK,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		// Link
+		throws SystemException {
 
 		long structureEntryLinkId = counterLocalService.increment();
 
@@ -50,36 +48,35 @@ public class FormsStructureEntryLinkLocalServiceImpl
 	}
 
 	public void deleteStructureEntryLink(
-		FormsStructureEntryLink structureEntryLink)
-		throws PortalException, SystemException {
+			FormsStructureEntryLink structureEntryLink)
+		throws SystemException {
 
-		deleteStructureEntryLink(structureEntryLink.getStructureEntryLinkId());
+		formsStructureEntryLinkPersistence.remove(structureEntryLink);
 	}
 
 	public void deleteStructureEntryLink(long structureEntryLinkId)
 		throws PortalException, SystemException {
 
-		formsStructureEntryLinkPersistence.remove(structureEntryLinkId);
+		FormsStructureEntryLink structureEntryLink =
+			formsStructureEntryLinkPersistence.findByPrimaryKey(
+				structureEntryLinkId); 
+		
+		deleteStructureEntryLink(structureEntryLink);
 	}
 
 	public void deleteStructureEntryLink(
 			String structureId, String className, long classPK)
 		throws PortalException, SystemException {
 
-		formsStructureEntryLinkPersistence.remove(
-			getStructureEntryLink(structureId, className, classPK));
-	}
+		FormsStructureEntryLink structureEntryLink =
+			formsStructureEntryLinkPersistence.findByS_C_C(
+				structureId, className, classPK);
 
-	public List<FormsStructureEntryLink> getStructureEntryLinks(
-			String structureId, int start, int end)
-		throws SystemException {
-
-		return formsStructureEntryLinkPersistence.findByStructureId(
-			structureId, start, end);
+		deleteStructureEntryLink(structureEntryLink);
 	}
 
 	public FormsStructureEntryLink getStructureEntryLink(
-		long structureEntryLinkId)
+			long structureEntryLinkId)
 		throws PortalException, SystemException {
 
 		return formsStructureEntryLinkPersistence.findByPrimaryKey(
@@ -92,6 +89,14 @@ public class FormsStructureEntryLinkLocalServiceImpl
 
 		return formsStructureEntryLinkPersistence.findByS_C_C(
 			structureId, className, classPK);
+	}
+
+	public List<FormsStructureEntryLink> getStructureEntryLinks(
+			String structureId, int start, int end)
+		throws SystemException {
+
+		return formsStructureEntryLinkPersistence.findByStructureId(
+			structureId, start, end);
 	}
 
 	public FormsStructureEntryLink updateStructureEntryLink(
