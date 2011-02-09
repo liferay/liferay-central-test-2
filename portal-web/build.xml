@@ -680,6 +680,14 @@
 	</target>
 
 	<target name="compile-resin">
+
+		<if>
+			<equals arg1="${jdk.6.home}" arg2="" />
+ 			<then>
+                <fail>Property 'jdk.6.home' required!</fail>
+			</then>
+		</if>
+
 		<property name="jspc.classes.dir" value="classes/${app.server.type}" />
 
 		<path id="jspc.classpath">
@@ -751,6 +759,7 @@
 			fork="true"
 			maxmemory="512m"
 			newenvironment="true"
+			jvm="${jdk.6.home}\bin\java"
 		>
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg line="docroot ${jspc.classes.dir}" />
