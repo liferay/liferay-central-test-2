@@ -1621,15 +1621,6 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			boolean hasManageSiteSettingsPermission =
-				!group.isControlPanel() && !group.isUser() &&
-				!group.isUserGroup() &&
-				(GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(),
-					ActionKeys.MANAGE_STAGING) ||
-				GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(), ActionKeys.UPDATE));
-
 			boolean hasManageLayoutsPermission =
 				GroupPermissionUtil.contains(
 					permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS);
@@ -1644,61 +1635,11 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			boolean hasManageSiteMapPermission =
-				hasManageLayoutsPermission && !group.isLayoutPrototype();
-
 			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
 				companyId, GroupConstants.CONTROL_PANEL);
 
 			long controlPanelPlid = LayoutLocalServiceUtil.getDefaultPlid(
 				controlPanelGroup.getGroupId(), true);
-
-			if (hasManageSiteSettingsPermission) {
-				themeDisplay.setShowSiteSettingsIcon(true);
-
-				PortletURL siteSettingsURL = new PortletURLImpl(
-					request, PortletKeys.SITE_SETTINGS, controlPanelPlid,
-					PortletRequest.RENDER_PHASE);
-
-				siteSettingsURL.setWindowState(LiferayWindowState.POP_UP);
-				siteSettingsURL.setPortletMode(PortletMode.VIEW);
-
-				siteSettingsURL.setParameter(
-					"struts_action", "/site_settings/edit_settings");
-
-				siteSettingsURL.setParameter("redirect", currentURL);
-				siteSettingsURL.setParameter(
-					"groupId", String.valueOf(scopeGroupId));
-
-				themeDisplay.setURLSiteSettings(siteSettingsURL);
-			}
-
-			if (hasManageSiteMapPermission) {
-				themeDisplay.setShowSiteMapSettingsIcon(true);
-
-				PortletURL siteMapSettingsURL = new PortletURLImpl(
-					request, PortletKeys.LAYOUTS_ADMIN, controlPanelPlid,
-					PortletRequest.RENDER_PHASE);
-
-				siteMapSettingsURL.setWindowState(LiferayWindowState.POP_UP);
-				siteMapSettingsURL.setPortletMode(PortletMode.VIEW);
-
-				siteMapSettingsURL.setParameter(
-					"struts_action", "/layouts_admin/edit_layouts");
-
-				if (layout.isPrivateLayout()) {
-					siteMapSettingsURL.setParameter("tabs1", "private-pages");
-				}
-				else {
-					siteMapSettingsURL.setParameter("tabs1", "public-pages");
-				}
-
-				siteMapSettingsURL.setParameter("redirect", currentURL);
-				siteMapSettingsURL.setParameter(
-					"groupId", String.valueOf(scopeGroupId));
-
-				themeDisplay.setURLSiteMapSettings(siteMapSettingsURL);
-			}
 
 			if (hasManageLayoutsPermission) {
 				themeDisplay.setShowPageSettingsIcon(true);
@@ -1726,6 +1667,60 @@ public class ServicePreAction extends Action {
 				pageSettingsURL.setParameter("selPlid", String.valueOf(plid));
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
+			}
+
+			if (!group.isControlPanel() && !group.isUser() &&
+				!group.isUserGroup() &&
+				(GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.MANAGE_STAGING) ||
+				GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(), ActionKeys.UPDATE)) {
+
+				themeDisplay.setShowSiteSettingsIcon(true);
+
+				PortletURL siteSettingsURL = new PortletURLImpl(
+					request, PortletKeys.SITE_SETTINGS, controlPanelPlid,
+					PortletRequest.RENDER_PHASE);
+
+				siteSettingsURL.setWindowState(LiferayWindowState.POP_UP);
+				siteSettingsURL.setPortletMode(PortletMode.VIEW);
+
+				siteSettingsURL.setParameter(
+					"struts_action", "/site_settings/edit_settings");
+
+				siteSettingsURL.setParameter("redirect", currentURL);
+				siteSettingsURL.setParameter(
+					"groupId", String.valueOf(scopeGroupId));
+
+				themeDisplay.setURLSiteSettings(siteSettingsURL);
+			}
+
+			if (hasManageLayoutsPermission && !group.isLayoutPrototype()) {
+				themeDisplay.setShowSiteMapSettingsIcon(true);
+
+				PortletURL siteMapSettingsURL = new PortletURLImpl(
+					request, PortletKeys.LAYOUTS_ADMIN, controlPanelPlid,
+					PortletRequest.RENDER_PHASE);
+
+				siteMapSettingsURL.setWindowState(LiferayWindowState.POP_UP);
+				siteMapSettingsURL.setPortletMode(PortletMode.VIEW);
+
+				siteMapSettingsURL.setParameter(
+					"struts_action", "/layouts_admin/edit_layouts");
+
+				if (layout.isPrivateLayout()) {
+					siteMapSettingsURL.setParameter("tabs1", "private-pages");
+				}
+				else {
+					siteMapSettingsURL.setParameter("tabs1", "public-pages");
+				}
+
+				siteMapSettingsURL.setParameter("redirect", currentURL);
+				siteMapSettingsURL.setParameter(
+					"groupId", String.valueOf(scopeGroupId));
+
+				themeDisplay.setURLSiteMapSettings(siteMapSettingsURL);
 			}
 
 			if (group.hasStagingGroup() && !group.isStagingGroup()) {

@@ -131,7 +131,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 
 							<c:if test="<%= themeDisplay.isShowSiteMapSettingsIcon() %>">
 								<li class="sitemap use-dialog">
-									<aui:a href='<%= themeDisplay.getURLSiteMapSettings().toString() %>' label="sitemap" title="manage-sitemap" />
+									<aui:a href="<%= themeDisplay.getURLSiteMapSettings().toString() %>" label="sitemap" title="manage-sitemap" />
 								</li>
 							</c:if>
 
