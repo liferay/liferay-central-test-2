@@ -1595,7 +1595,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		subscriptionSender.setPortletId(PortletKeys.WIKI);
 		subscriptionSender.setReplyToAddress(fromAddress);
 		subscriptionSender.setSubject(subject);
-		subscriptionSender.setUserId(node.getUserId());
+		subscriptionSender.setUserId(page.getUserId());
 
 		subscriptionSender.addPersistedSubscribers(
 			WikiNode.class.getName(), node.getNodeId());
