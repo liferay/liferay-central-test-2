@@ -214,7 +214,7 @@
 
 		<!-- Asset Category Admin -->
 
-        <action path="/asset_category_admin/edit_category" type="com.liferay.portlet.assetcategoryadmin.action.EditCategoryAction">
+		<action path="/asset_category_admin/edit_category" type="com.liferay.portlet.assetcategoryadmin.action.EditCategoryAction">
 			<forward name="portlet.asset_category_admin.edit_category" path="portlet.asset_category_admin.edit_category" />
 		</action>
 
