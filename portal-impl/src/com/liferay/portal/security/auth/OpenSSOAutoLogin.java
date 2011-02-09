@@ -46,7 +46,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  * @author Prashant Dighe
  */
-public class OpenSSOAutoLogin extends CASAutoLogin implements AutoLogin {
+public class OpenSSOAutoLogin extends CASAutoLogin {
 
 	public String[] login(
 		HttpServletRequest request, HttpServletResponse response) {
@@ -121,12 +121,12 @@ public class OpenSSOAutoLogin extends CASAutoLogin implements AutoLogin {
 				}
 			}
 
-			String authType = PrefsPropsUtil.getString(
-				companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
-				PropsValues.COMPANY_SECURITY_AUTH_TYPE);
-
 			if (ldapImportEnabled) {
 				try {
+					String authType = PrefsPropsUtil.getString(
+						companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
+						PropsValues.COMPANY_SECURITY_AUTH_TYPE);
+
 					if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 						user = importLDAPUser(
 							companyId, StringPool.BLANK, screenName);
