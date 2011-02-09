@@ -19,21 +19,21 @@ import com.liferay.portal.kernel.exception.PortalException;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MajorLayoutRevisionException extends PortalException {
+public class LayoutRevisionMajorException extends PortalException {
 
-	public MajorLayoutRevisionException() {
+	public LayoutRevisionMajorException() {
 		super();
 	}
 
-	public MajorLayoutRevisionException(String msg) {
+	public LayoutRevisionMajorException(String msg) {
 		super(msg);
 	}
 
-	public MajorLayoutRevisionException(String msg, Throwable cause) {
+	public LayoutRevisionMajorException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public MajorLayoutRevisionException(Throwable cause) {
+	public LayoutRevisionMajorException(Throwable cause) {
 		super(cause);
 	}
 

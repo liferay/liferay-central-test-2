@@ -405,8 +405,8 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 		layoutRevisionImpl.setModifiedDate(layoutRevision.getModifiedDate());
 		layoutRevisionImpl.setLayoutSetBranchId(layoutRevision.getLayoutSetBranchId());
 		layoutRevisionImpl.setParentLayoutRevisionId(layoutRevision.getParentLayoutRevisionId());
-		layoutRevisionImpl.setMajorLayoutRevision(layoutRevision.isMajorLayoutRevision());
 		layoutRevisionImpl.setHead(layoutRevision.isHead());
+		layoutRevisionImpl.setMajor(layoutRevision.isMajor());
 		layoutRevisionImpl.setPlid(layoutRevision.getPlid());
 		layoutRevisionImpl.setName(layoutRevision.getName());
 		layoutRevisionImpl.setTitle(layoutRevision.getTitle());

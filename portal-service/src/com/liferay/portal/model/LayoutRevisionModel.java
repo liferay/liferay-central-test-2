@@ -203,27 +203,6 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setParentLayoutRevisionId(long parentLayoutRevisionId);
 
 	/**
-	 * Gets the major layout revision of this layout revision.
-	 *
-	 * @return the major layout revision of this layout revision
-	 */
-	public boolean getMajorLayoutRevision();
-
-	/**
-	 * Determines if this layout revision is major layout revision.
-	 *
-	 * @return <code>true</code> if this layout revision is major layout revision; <code>false</code> otherwise
-	 */
-	public boolean isMajorLayoutRevision();
-
-	/**
-	 * Sets whether this layout revision is major layout revision.
-	 *
-	 * @param majorLayoutRevision the major layout revision of this layout revision
-	 */
-	public void setMajorLayoutRevision(boolean majorLayoutRevision);
-
-	/**
 	 * Gets the head of this layout revision.
 	 *
 	 * @return the head of this layout revision
@@ -243,6 +222,27 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	 * @param head the head of this layout revision
 	 */
 	public void setHead(boolean head);
+
+	/**
+	 * Gets the major of this layout revision.
+	 *
+	 * @return the major of this layout revision
+	 */
+	public boolean getMajor();
+
+	/**
+	 * Determines if this layout revision is major.
+	 *
+	 * @return <code>true</code> if this layout revision is major; <code>false</code> otherwise
+	 */
+	public boolean isMajor();
+
+	/**
+	 * Sets whether this layout revision is major.
+	 *
+	 * @param major the major of this layout revision
+	 */
+	public void setMajor(boolean major);
 
 	/**
 	 * Gets the plid of this layout revision.

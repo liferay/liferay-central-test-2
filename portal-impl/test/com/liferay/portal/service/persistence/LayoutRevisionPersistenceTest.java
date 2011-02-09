@@ -72,8 +72,8 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		newLayoutRevision.setModifiedDate(nextDate());
 		newLayoutRevision.setLayoutSetBranchId(nextLong());
 		newLayoutRevision.setParentLayoutRevisionId(nextLong());
-		newLayoutRevision.setMajorLayoutRevision(randomBoolean());
 		newLayoutRevision.setHead(randomBoolean());
+		newLayoutRevision.setMajor(randomBoolean());
 		newLayoutRevision.setPlid(nextLong());
 		newLayoutRevision.setName(randomString());
 		newLayoutRevision.setTitle(randomString());
@@ -117,10 +117,10 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 			newLayoutRevision.getLayoutSetBranchId());
 		assertEquals(existingLayoutRevision.getParentLayoutRevisionId(),
 			newLayoutRevision.getParentLayoutRevisionId());
-		assertEquals(existingLayoutRevision.getMajorLayoutRevision(),
-			newLayoutRevision.getMajorLayoutRevision());
 		assertEquals(existingLayoutRevision.getHead(),
 			newLayoutRevision.getHead());
+		assertEquals(existingLayoutRevision.getMajor(),
+			newLayoutRevision.getMajor());
 		assertEquals(existingLayoutRevision.getPlid(),
 			newLayoutRevision.getPlid());
 		assertEquals(existingLayoutRevision.getName(),
@@ -239,8 +239,8 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		layoutRevision.setModifiedDate(nextDate());
 		layoutRevision.setLayoutSetBranchId(nextLong());
 		layoutRevision.setParentLayoutRevisionId(nextLong());
-		layoutRevision.setMajorLayoutRevision(randomBoolean());
 		layoutRevision.setHead(randomBoolean());
+		layoutRevision.setMajor(randomBoolean());
 		layoutRevision.setPlid(nextLong());
 		layoutRevision.setName(randomString());
 		layoutRevision.setTitle(randomString());

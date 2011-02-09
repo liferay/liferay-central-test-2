@@ -77,8 +77,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "layoutSetBranchId", Types.BIGINT },
 			{ "parentLayoutRevisionId", Types.BIGINT },
-			{ "majorLayoutRevision", Types.BOOLEAN },
 			{ "head", Types.BOOLEAN },
+			{ "major", Types.BOOLEAN },
 			{ "plid", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "title", Types.VARCHAR },
@@ -98,7 +98,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutSetBranchId LONG,parentLayoutRevisionId LONG,majorLayoutRevision BOOLEAN,head BOOLEAN,plid LONG,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutSetBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,major BOOLEAN,plid LONG,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutRevision";
 	public static final String ORDER_BY_JPQL = " ORDER BY layoutRevision.layoutRevisionId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY LayoutRevision.layoutRevisionId DESC";
@@ -130,8 +130,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setLayoutSetBranchId(soapModel.getLayoutSetBranchId());
 		model.setParentLayoutRevisionId(soapModel.getParentLayoutRevisionId());
-		model.setMajorLayoutRevision(soapModel.getMajorLayoutRevision());
 		model.setHead(soapModel.getHead());
+		model.setMajor(soapModel.getMajor());
 		model.setPlid(soapModel.getPlid());
 		model.setName(soapModel.getName());
 		model.setTitle(soapModel.getTitle());
@@ -283,18 +283,6 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		_parentLayoutRevisionId = parentLayoutRevisionId;
 	}
 
-	public boolean getMajorLayoutRevision() {
-		return _majorLayoutRevision;
-	}
-
-	public boolean isMajorLayoutRevision() {
-		return _majorLayoutRevision;
-	}
-
-	public void setMajorLayoutRevision(boolean majorLayoutRevision) {
-		_majorLayoutRevision = majorLayoutRevision;
-	}
-
 	public boolean getHead() {
 		return _head;
 	}
@@ -315,6 +303,18 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 
 	public boolean getOriginalHead() {
 		return _originalHead;
+	}
+
+	public boolean getMajor() {
+		return _major;
+	}
+
+	public boolean isMajor() {
+		return _major;
+	}
+
+	public void setMajor(boolean major) {
+		_major = major;
 	}
 
 	public long getPlid() {
@@ -1004,8 +1004,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		clone.setModifiedDate(getModifiedDate());
 		clone.setLayoutSetBranchId(getLayoutSetBranchId());
 		clone.setParentLayoutRevisionId(getParentLayoutRevisionId());
-		clone.setMajorLayoutRevision(getMajorLayoutRevision());
 		clone.setHead(getHead());
+		clone.setMajor(getMajor());
 		clone.setPlid(getPlid());
 		clone.setName(getName());
 		clone.setTitle(getTitle());
@@ -1099,10 +1099,10 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(getLayoutSetBranchId());
 		sb.append(", parentLayoutRevisionId=");
 		sb.append(getParentLayoutRevisionId());
-		sb.append(", majorLayoutRevision=");
-		sb.append(getMajorLayoutRevision());
 		sb.append(", head=");
 		sb.append(getHead());
+		sb.append(", major=");
+		sb.append(getMajor());
 		sb.append(", plid=");
 		sb.append(getPlid());
 		sb.append(", name=");
@@ -1188,12 +1188,12 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(getParentLayoutRevisionId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>majorLayoutRevision</column-name><column-value><![CDATA[");
-		sb.append(getMajorLayoutRevision());
-		sb.append("]]></column-value></column>");
-		sb.append(
 			"<column><column-name>head</column-name><column-value><![CDATA[");
 		sb.append(getHead());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>major</column-name><column-value><![CDATA[");
+		sb.append(getMajor());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>plid</column-name><column-value><![CDATA[");
@@ -1285,10 +1285,10 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	private long _originalLayoutSetBranchId;
 	private boolean _setOriginalLayoutSetBranchId;
 	private long _parentLayoutRevisionId;
-	private boolean _majorLayoutRevision;
 	private boolean _head;
 	private boolean _originalHead;
 	private boolean _setOriginalHead;
+	private boolean _major;
 	private long _plid;
 	private long _originalPlid;
 	private boolean _setOriginalPlid;
