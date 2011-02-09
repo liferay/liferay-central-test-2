@@ -28,7 +28,7 @@ Layout curLayout = (Layout)row.getObject();
 	String taglibHref = "javascript:Liferay.LayoutExporter.details({toggle: '#" + renderResponse.getNamespace() + "_detail_" + curLayout.getPlid() + "_toggle img', detail: '#_detail_" + curLayout.getPlid() + "'});";
 	%>
 
-	<em class='<%= curLayout.getAncestors().isEmpty() ? "aui-helper-hidden" : StringPool.BLANK %>' id="<portlet:namespace /><%= curLayout.getPlid() %>includeAncestor"><liferay-ui:message key="include-ancestor-pages" /></em>
+	<em class='<%= curLayout.getAncestors().isEmpty() ? "aui-helper-hidden" : StringPool.BLANK %>' id="<portlet:namespace /><%= curLayout.getPlid() %>includeAncestor"><liferay-ui:message key="include-ancestor-pages-if-necessary" /></em>
 
 	<em class="aui-helper-hidden" id="<portlet:namespace /><%= curLayout.getPlid() %>deleteLivePage"><liferay-ui:message key="delete-live-page" /></em>
 
@@ -44,7 +44,7 @@ Layout curLayout = (Layout)row.getObject();
 
 	<div id="<portlet:namespace />publishChangesOptions_<%= curLayout.getPlid() %>" style="margin-left: 2em;">
 		<c:if test="<%= !curLayout.getAncestors().isEmpty() %>">
-			<aui:input checked="<%= true %>" disabled="<%= true %>" label="include-ancestor-pages" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
+			<aui:input checked="<%= true %>" disabled="<%= true %>" label="include-ancestor-pages-if-necessary" name='<%= "includeAncestors_" + curLayout.getPlid() %>' type="checkbox" value="1" />
 		</c:if>
 
 		<c:if test="<%= !curLayout.getChildren().isEmpty() %>">
