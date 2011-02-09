@@ -15,6 +15,7 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -23,8 +24,8 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.sso.opensso.OpenSSOUtil;
@@ -45,7 +46,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  * @author Prashant Dighe
  */
-public class OpenSSOAutoLogin implements AutoLogin {
+public class OpenSSOAutoLogin extends CASAutoLogin implements AutoLogin {
 
 	public String[] login(
 		HttpServletRequest request, HttpServletResponse response) {
@@ -120,9 +121,23 @@ public class OpenSSOAutoLogin implements AutoLogin {
 				}
 			}
 
+			String authType = PrefsPropsUtil.getString(
+				companyId, PropsKeys.COMPANY_SECURITY_AUTH_TYPE,
+				PropsValues.COMPANY_SECURITY_AUTH_TYPE);
+
 			if (ldapImportEnabled) {
-				user = PortalLDAPImporterUtil.importLDAPUserByScreenName(
-					companyId, screenName);
+				try {
+					if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+						user = importLDAPUser(
+							companyId, StringPool.BLANK, screenName);
+					}
+					else {
+						user = importLDAPUser(
+							companyId, emailAddress, StringPool.BLANK);
+					}
+				}
+				catch (SystemException se) {
+				}
 			}
 			else {
 				if (Validator.isNull(emailAddress)) {
