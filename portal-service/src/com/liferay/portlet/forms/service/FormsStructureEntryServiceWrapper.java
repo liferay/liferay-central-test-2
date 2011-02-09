@@ -30,6 +30,48 @@ public class FormsStructureEntryServiceWrapper
 		_formsStructureEntryService = formsStructureEntryService;
 	}
 
+	public com.liferay.portlet.forms.model.FormsStructureEntry addStructureEntry(
+		long groupId, java.lang.String structureId, boolean autoStrucureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _formsStructureEntryService.addStructureEntry(groupId,
+			structureId, autoStrucureId, name, description, xsd, serviceContext);
+	}
+
+	public void deleteStructureEntry(long groupId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_formsStructureEntryService.deleteStructureEntry(groupId, structureId);
+	}
+
+	public com.liferay.portlet.forms.model.FormsStructureEntry fetchByG_S(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _formsStructureEntryService.fetchByG_S(groupId, structureId);
+	}
+
+	public com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _formsStructureEntryService.getStructureEntry(groupId,
+			structureId);
+	}
+
+	public com.liferay.portlet.forms.model.FormsStructureEntry updateStructureEntry(
+		long groupId, java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _formsStructureEntryService.updateStructureEntry(groupId,
+			structureId, name, description, xsd, serviceContext);
+	}
+
 	public FormsStructureEntryService getWrappedFormsStructureEntryService() {
 		return _formsStructureEntryService;
 	}

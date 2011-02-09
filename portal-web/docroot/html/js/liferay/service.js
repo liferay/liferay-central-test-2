@@ -1071,3 +1071,24 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.register("Liferay.Service.Forms", "com.liferay.portlet.forms.service");
+
+Liferay.Service.registerClass(
+	Liferay.Service.Forms, "FormsStructureEntry",
+	{
+		addStructureEntry: true,
+		deleteStructureEntry: true,
+		fetchByG_S: true,
+		getStructureEntry: true,
+		updateStructureEntry: true
+	}
+);
+
+Liferay.Service.registerClass(
+	Liferay.Service.Forms, "FormsStructureEntryLink",
+	{
+		addStructureEntryLink: true,
+		deleteStructureEntryLink: true,
+		getStructureEntryLink: true,
+		updateStructureEntryLink: true
+	}
+);

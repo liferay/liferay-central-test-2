@@ -14,6 +14,13 @@
 
 package com.liferay.portlet.forms.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.liferay.portlet.forms.service.FormsStructureEntryLinkServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -58,4 +65,68 @@ package com.liferay.portlet.forms.service.http;
  * @generated
  */
 public class FormsStructureEntryLinkServiceSoap {
+	public static com.liferay.portlet.forms.model.FormsStructureEntryLinkSoap addStructureEntryLink(
+		java.lang.String structureId, java.lang.String className, long classPK,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.forms.model.FormsStructureEntryLink returnValue = FormsStructureEntryLinkServiceUtil.addStructureEntryLink(structureId,
+					className, classPK, serviceContext);
+
+			return com.liferay.portlet.forms.model.FormsStructureEntryLinkSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteStructureEntryLink(long groupId,
+		java.lang.String structureId, long structureEntryLinkId)
+		throws RemoteException {
+		try {
+			FormsStructureEntryLinkServiceUtil.deleteStructureEntryLink(groupId,
+				structureId, structureEntryLinkId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.forms.model.FormsStructureEntryLinkSoap getStructureEntryLink(
+		long groupId, java.lang.String structureId, java.lang.String className,
+		long classPK) throws RemoteException {
+		try {
+			com.liferay.portlet.forms.model.FormsStructureEntryLink returnValue = FormsStructureEntryLinkServiceUtil.getStructureEntryLink(groupId,
+					structureId, className, classPK);
+
+			return com.liferay.portlet.forms.model.FormsStructureEntryLinkSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.forms.model.FormsStructureEntryLinkSoap updateStructureEntryLink(
+		long structureEntryLinkId, java.lang.String structureId, long groupId,
+		java.lang.String className, long classPK) throws RemoteException {
+		try {
+			com.liferay.portlet.forms.model.FormsStructureEntryLink returnValue = FormsStructureEntryLinkServiceUtil.updateStructureEntryLink(structureEntryLinkId,
+					structureId, groupId, className, classPK);
+
+			return com.liferay.portlet.forms.model.FormsStructureEntryLinkSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(FormsStructureEntryLinkServiceSoap.class);
 }

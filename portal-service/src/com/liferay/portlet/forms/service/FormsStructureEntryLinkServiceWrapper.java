@@ -30,6 +30,41 @@ public class FormsStructureEntryLinkServiceWrapper
 		_formsStructureEntryLinkService = formsStructureEntryLinkService;
 	}
 
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink addStructureEntryLink(
+		java.lang.String structureId, java.lang.String className, long classPK,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _formsStructureEntryLinkService.addStructureEntryLink(structureId,
+			className, classPK, serviceContext);
+	}
+
+	public void deleteStructureEntryLink(long groupId,
+		java.lang.String structureId, long structureEntryLinkId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_formsStructureEntryLinkService.deleteStructureEntryLink(groupId,
+			structureId, structureEntryLinkId);
+	}
+
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink getStructureEntryLink(
+		long groupId, java.lang.String structureId, java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _formsStructureEntryLinkService.getStructureEntryLink(groupId,
+			structureId, className, classPK);
+	}
+
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink updateStructureEntryLink(
+		long structureEntryLinkId, java.lang.String structureId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _formsStructureEntryLinkService.updateStructureEntryLink(structureEntryLinkId,
+			structureId, groupId, className, classPK);
+	}
+
 	public FormsStructureEntryLinkService getWrappedFormsStructureEntryLinkService() {
 		return _formsStructureEntryLinkService;
 	}

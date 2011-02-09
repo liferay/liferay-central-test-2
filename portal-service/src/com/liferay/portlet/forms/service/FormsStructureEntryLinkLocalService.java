@@ -209,4 +209,47 @@ public interface FormsStructureEntryLinkLocalService {
 		com.liferay.portlet.forms.model.FormsStructureEntryLink formsStructureEntryLink,
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink addStructureEntryLink(
+		java.lang.String structureId, java.lang.String className, long classPK,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStructureEntryLink(
+		com.liferay.portlet.forms.model.FormsStructureEntryLink structureEntryLink)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStructureEntryLink(long structureEntryLinkId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStructureEntryLink(java.lang.String structureId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.forms.model.FormsStructureEntryLink> getStructureEntryLinks(
+		java.lang.String structureId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink getStructureEntryLink(
+		long structureEntryLinkId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink getStructureEntryLink(
+		java.lang.String structureId, java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink updateStructureEntryLink(
+		long structureEntryLinkId, java.lang.String structureId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

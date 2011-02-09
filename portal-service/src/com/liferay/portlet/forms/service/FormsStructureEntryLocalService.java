@@ -224,4 +224,80 @@ public interface FormsStructureEntryLocalService {
 		com.liferay.portlet.forms.model.FormsStructureEntry formsStructureEntry,
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.forms.model.FormsStructureEntry addStructureEntry(
+		long userId, long groupId, java.lang.String structureId,
+		boolean autoStructureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void addStructureEntryResources(
+		com.liferay.portlet.forms.model.FormsStructureEntry structureEntry,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void addStructureEntryResources(
+		com.liferay.portlet.forms.model.FormsStructureEntry structureEntry,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStructureEntry(
+		com.liferay.portlet.forms.model.FormsStructureEntry structureEntry)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStructureEntry(long groupId, java.lang.String strucutreId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStructureEntries(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.forms.model.FormsStructureEntry fetchByG_S(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
+		long structureEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.forms.model.FormsStructureEntry> getStructureEntries()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.forms.model.FormsStructureEntry> getStructureEntries(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portlet.forms.model.FormsStructureEntry> getStructureEntries(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getStructureEntriesCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.forms.model.FormsStructureEntry updateStructureEntry(
+		long groupId, java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

@@ -14,6 +14,13 @@
 
 package com.liferay.portlet.forms.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.liferay.portlet.forms.service.FormsStructureEntryServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -58,4 +65,86 @@ package com.liferay.portlet.forms.service.http;
  * @generated
  */
 public class FormsStructureEntryServiceSoap {
+	public static com.liferay.portlet.forms.model.FormsStructureEntrySoap addStructureEntry(
+		long groupId, java.lang.String structureId, boolean autoStrucureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.forms.model.FormsStructureEntry returnValue = FormsStructureEntryServiceUtil.addStructureEntry(groupId,
+					structureId, autoStrucureId, name, description, xsd,
+					serviceContext);
+
+			return com.liferay.portlet.forms.model.FormsStructureEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteStructureEntry(long groupId,
+		java.lang.String structureId) throws RemoteException {
+		try {
+			FormsStructureEntryServiceUtil.deleteStructureEntry(groupId,
+				structureId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.forms.model.FormsStructureEntrySoap fetchByG_S(
+		long groupId, java.lang.String structureId) throws RemoteException {
+		try {
+			com.liferay.portlet.forms.model.FormsStructureEntry returnValue = FormsStructureEntryServiceUtil.fetchByG_S(groupId,
+					structureId);
+
+			return com.liferay.portlet.forms.model.FormsStructureEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.forms.model.FormsStructureEntrySoap getStructureEntry(
+		long groupId, java.lang.String structureId) throws RemoteException {
+		try {
+			com.liferay.portlet.forms.model.FormsStructureEntry returnValue = FormsStructureEntryServiceUtil.getStructureEntry(groupId,
+					structureId);
+
+			return com.liferay.portlet.forms.model.FormsStructureEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.forms.model.FormsStructureEntrySoap updateStructureEntry(
+		long groupId, java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.forms.model.FormsStructureEntry returnValue = FormsStructureEntryServiceUtil.updateStructureEntry(groupId,
+					structureId, name, description, xsd, serviceContext);
+
+			return com.liferay.portlet.forms.model.FormsStructureEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(FormsStructureEntryServiceSoap.class);
 }

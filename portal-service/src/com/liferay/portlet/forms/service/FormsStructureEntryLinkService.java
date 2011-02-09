@@ -17,6 +17,7 @@ package com.liferay.portlet.forms.service;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 
 /**
@@ -40,4 +41,27 @@ public interface FormsStructureEntryLinkService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link FormsStructureEntryLinkServiceUtil} to access the forms structure entry link remote service. Add custom service methods to {@link com.liferay.portlet.forms.service.impl.FormsStructureEntryLinkServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink addStructureEntryLink(
+		java.lang.String structureId, java.lang.String className, long classPK,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStructureEntryLink(long groupId,
+		java.lang.String structureId, long structureEntryLinkId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink getStructureEntryLink(
+		long groupId, java.lang.String structureId, java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink updateStructureEntryLink(
+		long structureEntryLinkId, java.lang.String structureId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

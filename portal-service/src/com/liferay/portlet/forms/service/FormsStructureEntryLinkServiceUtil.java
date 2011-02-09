@@ -37,6 +37,44 @@ public class FormsStructureEntryLinkServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portlet.forms.service.impl.FormsStructureEntryLinkServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static com.liferay.portlet.forms.model.FormsStructureEntryLink addStructureEntryLink(
+		java.lang.String structureId, java.lang.String className, long classPK,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addStructureEntryLink(structureId, className, classPK,
+			serviceContext);
+	}
+
+	public static void deleteStructureEntryLink(long groupId,
+		java.lang.String structureId, long structureEntryLinkId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.deleteStructureEntryLink(groupId, structureId, structureEntryLinkId);
+	}
+
+	public static com.liferay.portlet.forms.model.FormsStructureEntryLink getStructureEntryLink(
+		long groupId, java.lang.String structureId, java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getStructureEntryLink(groupId, structureId, className,
+			classPK);
+	}
+
+	public static com.liferay.portlet.forms.model.FormsStructureEntryLink updateStructureEntryLink(
+		long structureEntryLinkId, java.lang.String structureId, long groupId,
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateStructureEntryLink(structureEntryLinkId, structureId,
+			groupId, className, classPK);
+	}
+
 	public static FormsStructureEntryLinkService getService() {
 		if (_service == null) {
 			_service = (FormsStructureEntryLinkService)PortalBeanLocatorUtil.locate(FormsStructureEntryLinkService.class.getName());
