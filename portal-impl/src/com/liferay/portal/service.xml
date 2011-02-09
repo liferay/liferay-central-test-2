@@ -582,6 +582,7 @@
 
 		<column name="layoutSetBranchId" type="long" />
 		<column name="parentLayoutRevisionId" type="long" />
+		<column name="majorLayoutRevision" type="boolean" />
 		<column name="head" type="boolean" />
 		<column name="plid" type="long" />
 		<column name="name" type="String" localized="true" />
@@ -2261,6 +2262,7 @@
 		<exception>LayoutPermission</exception>
 		<exception>LayoutSetVirtualHost</exception>
 		<exception>LayoutType</exception>
+		<exception>MajorLayoutRevision</exception>
 		<exception>MembershipRequestComments</exception>
 		<exception>OrganizationId</exception>
 		<exception>OrganizationName</exception>
