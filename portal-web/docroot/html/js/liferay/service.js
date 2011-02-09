@@ -1080,7 +1080,6 @@ Liferay.Service.registerClass(
 	{
 		addStructureEntry: true,
 		deleteStructureEntry: true,
-		fetchByG_S: true,
 		getStructureEntry: true,
 		updateStructureEntry: true
 	}

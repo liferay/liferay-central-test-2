@@ -56,13 +56,6 @@ public class FormsStructureEntryServiceUtil {
 		getService().deleteStructureEntry(groupId, structureId);
 	}
 
-	public static com.liferay.portlet.forms.model.FormsStructureEntry fetchByG_S(
-		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().fetchByG_S(groupId, structureId);
-	}
-
 	public static com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,

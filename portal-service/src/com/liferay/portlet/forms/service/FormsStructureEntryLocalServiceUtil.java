@@ -279,6 +279,12 @@ public class FormsStructureEntryLocalServiceUtil {
 			guestPermissions);
 	}
 
+	public static void deleteStructureEntries(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStructureEntries(groupId);
+	}
+
 	public static void deleteStructureEntry(
 		com.liferay.portlet.forms.model.FormsStructureEntry structureEntry)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -287,37 +293,10 @@ public class FormsStructureEntryLocalServiceUtil {
 	}
 
 	public static void deleteStructureEntry(long groupId,
-		java.lang.String strucutreId)
+		java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStructureEntry(groupId, strucutreId);
-	}
-
-	public static void deleteStructureEntries(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteStructureEntries(groupId);
-	}
-
-	public static com.liferay.portlet.forms.model.FormsStructureEntry fetchByG_S(
-		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().fetchByG_S(groupId, structureId);
-	}
-
-	public static com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
-		long structureEntryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStructureEntry(structureEntryId);
-	}
-
-	public static com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
-		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStructureEntry(groupId, structureId);
+		getService().deleteStructureEntry(groupId, structureId);
 	}
 
 	public static java.util.List<com.liferay.portlet.forms.model.FormsStructureEntry> getStructureEntries()
@@ -340,6 +319,20 @@ public class FormsStructureEntryLocalServiceUtil {
 	public static int getStructureEntriesCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getStructureEntriesCount(groupId);
+	}
+
+	public static com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
+		long structureEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStructureEntry(structureEntryId);
+	}
+
+	public static com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStructureEntry(groupId, structureId);
 	}
 
 	public static com.liferay.portlet.forms.model.FormsStructureEntry updateStructureEntry(

@@ -47,13 +47,6 @@ public class FormsStructureEntryServiceWrapper
 		_formsStructureEntryService.deleteStructureEntry(groupId, structureId);
 	}
 
-	public com.liferay.portlet.forms.model.FormsStructureEntry fetchByG_S(
-		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _formsStructureEntryService.fetchByG_S(groupId, structureId);
-	}
-
 	public com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,

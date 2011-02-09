@@ -235,8 +235,7 @@ public class FormsStructureEntryLinkLocalServiceUtil {
 	public static com.liferay.portlet.forms.model.FormsStructureEntryLink addStructureEntryLink(
 		java.lang.String structureId, java.lang.String className, long classPK,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addStructureEntryLink(structureId, className, classPK,
 			serviceContext);
@@ -244,8 +243,7 @@ public class FormsStructureEntryLinkLocalServiceUtil {
 
 	public static void deleteStructureEntryLink(
 		com.liferay.portlet.forms.model.FormsStructureEntryLink structureEntryLink)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteStructureEntryLink(structureEntryLink);
 	}
 
@@ -262,12 +260,6 @@ public class FormsStructureEntryLinkLocalServiceUtil {
 		getService().deleteStructureEntryLink(structureId, className, classPK);
 	}
 
-	public static java.util.List<com.liferay.portlet.forms.model.FormsStructureEntryLink> getStructureEntryLinks(
-		java.lang.String structureId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStructureEntryLinks(structureId, start, end);
-	}
-
 	public static com.liferay.portlet.forms.model.FormsStructureEntryLink getStructureEntryLink(
 		long structureEntryLinkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -281,6 +273,12 @@ public class FormsStructureEntryLinkLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getStructureEntryLink(structureId, className, classPK);
+	}
+
+	public static java.util.List<com.liferay.portlet.forms.model.FormsStructureEntryLink> getStructureEntryLinks(
+		java.lang.String structureId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStructureEntryLinks(structureId, start, end);
 	}
 
 	public static com.liferay.portlet.forms.model.FormsStructureEntryLink updateStructureEntryLink(

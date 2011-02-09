@@ -129,50 +129,13 @@ public class FormsStructureEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.forms.model.FormsStructureEntry fetchByG_S(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(FormsStructureEntryServiceUtil.class.getName(),
-					"fetchByG_S", _fetchByG_SParameterTypes2);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					structureId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portlet.forms.model.FormsStructureEntry)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(FormsStructureEntryServiceUtil.class.getName(),
-					"getStructureEntry", _getStructureEntryParameterTypes3);
+					"getStructureEntry", _getStructureEntryParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId);
@@ -212,7 +175,7 @@ public class FormsStructureEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(FormsStructureEntryServiceUtil.class.getName(),
-					"updateStructureEntry", _updateStructureEntryParameterTypes4);
+					"updateStructureEntry", _updateStructureEntryParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					structureId, name, description, xsd, serviceContext);
@@ -253,13 +216,10 @@ public class FormsStructureEntryServiceHttp {
 	private static final Class<?>[] _deleteStructureEntryParameterTypes1 = new Class[] {
 			long.class, java.lang.String.class
 		};
-	private static final Class<?>[] _fetchByG_SParameterTypes2 = new Class[] {
+	private static final Class<?>[] _getStructureEntryParameterTypes2 = new Class[] {
 			long.class, java.lang.String.class
 		};
-	private static final Class<?>[] _getStructureEntryParameterTypes3 = new Class[] {
-			long.class, java.lang.String.class
-		};
-	private static final Class<?>[] _updateStructureEntryParameterTypes4 = new Class[] {
+	private static final Class<?>[] _updateStructureEntryParameterTypes3 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class

@@ -53,11 +53,6 @@ public interface FormsStructureEntryService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public com.liferay.portlet.forms.model.FormsStructureEntry fetchByG_S(
-		long groupId, java.lang.String structureId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.forms.model.FormsStructureEntry getStructureEntry(
 		long groupId, java.lang.String structureId)

@@ -98,21 +98,6 @@ public class FormsStructureEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.forms.model.FormsStructureEntrySoap fetchByG_S(
-		long groupId, java.lang.String structureId) throws RemoteException {
-		try {
-			com.liferay.portlet.forms.model.FormsStructureEntry returnValue = FormsStructureEntryServiceUtil.fetchByG_S(groupId,
-					structureId);
-
-			return com.liferay.portlet.forms.model.FormsStructureEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.forms.model.FormsStructureEntrySoap getStructureEntry(
 		long groupId, java.lang.String structureId) throws RemoteException {
 		try {
