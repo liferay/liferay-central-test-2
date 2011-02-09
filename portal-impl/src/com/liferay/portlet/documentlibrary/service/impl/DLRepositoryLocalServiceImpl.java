@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.FileNameException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.util.JCRHook;
@@ -1608,6 +1609,8 @@ public class DLRepositoryLocalServiceImpl
 				sourceFileName, extension, sourceFileName, true, is);
 		}
 
+		validateFileNameTitle(title);
+
 		dlLocalService.validate(title, false);
 
 		validateFile(groupId, folderId, fileEntryId, title);
@@ -1618,10 +1621,21 @@ public class DLRepositoryLocalServiceImpl
 			InputStream is)
 		throws PortalException, SystemException {
 
-		dlLocalService.validate(
-			title + StringPool.PERIOD + extension, true, is);
+		String fileName = title + StringPool.PERIOD + extension;
+
+		validateFileNameTitle(fileName);
+
+		dlLocalService.validate(fileName, true, is);
 
 		validateFile(groupId, folderId, 0, title);
+	}
+
+	protected void validateFileNameTitle(String fileNameTitle)
+		throws PortalException {
+
+		if (fileNameTitle.contains("/")) {
+			throw new FileNameException(fileNameTitle);
+		}
 	}
 
 	protected void validateFolder(
