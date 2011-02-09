@@ -261,6 +261,18 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</then>
 	</if>
 
+	<if>
+		<and>
+			<not>
+				<isset property="jdk.6.home" />
+			</not>
+			<equals arg1="${java.specification.version}" arg2="1.6" />
+		</and>
+		<then>
+			<property name="jdk.6.home" value="${env.JAVA_HOME}" />
+		</then>
+	</if>
+
 	<target name="compile">
 	</target>
 

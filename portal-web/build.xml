@@ -680,11 +680,16 @@
 	</target>
 
 	<target name="compile-resin">
-
 		<if>
-			<equals arg1="${jdk.6.home}" arg2="" />
- 			<then>
-                <fail>Property 'jdk.6.home' required!</fail>
+			<not>
+				<isset property="jdk.6.home" />
+			</not>
+			<then>
+				<fail>
+.
+
+Please set the property "jdk.6.home" in build.properties.
+				</fail>
 			</then>
 		</if>
 
