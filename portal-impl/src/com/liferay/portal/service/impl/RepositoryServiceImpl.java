@@ -67,9 +67,12 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		repositoryPersistence.update(repository, false);
 
-		// Repository Implementation
+		// Repository implementation
 
-		getRepositoryImpl(repositoryId).addRepository(
+		com.liferay.portal.kernel.repository.Repository repositoryImpl =
+			getRepositoryImpl(repositoryId);
+
+		repositoryImpl.addRepository(
 			groupId, name, description, portletId, typeSettingsProperties);
 
 		return repositoryId;
@@ -91,11 +94,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	}
 
 	/**
-	 * This method deletes the all repositories associated with this group.
-	 * It purges the default repository but does not purge any mapped
-	 * repositories.
-	 *
-	 * @param groupId identifier of group to delete from
+	 * This method deletes the all repositories associated with this group. It
+	 * purges the default repository but does not purge any mapped repositories.
 	 */
 	public void deleteRepositories(long groupId)
 		throws PortalException, SystemException {
@@ -118,7 +118,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (purge) {
-			getLocalRepositoryImpl(repositoryId).deleteAll();
+			LocalRepository localRepositoryImpl = getLocalRepositoryImpl(
+				repositoryId);
+
+			localRepositoryImpl.deleteAll();
 		}
 
 		Repository repository = repositoryPersistence.fetchByPrimaryKey(
@@ -137,12 +140,6 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 			repositoryPersistence.remove(repository);
 		}
-	}
-
-	public Repository getRepository(long repositoryId)
-		throws PortalException, SystemException {
-
-		return repositoryPersistence.findByPrimaryKey(repositoryId);
 	}
 
 	public LocalRepository getLocalRepositoryImpl(long repositoryId)
@@ -168,28 +165,34 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return localRepository;
 	}
 
+	public Repository getRepository(long repositoryId)
+		throws PortalException, SystemException {
+
+		return repositoryPersistence.findByPrimaryKey(repositoryId);
+	}
+
 	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
 			long repositoryId)
 		throws SystemException {
 
-		com.liferay.portal.kernel.repository.Repository repository =
+		com.liferay.portal.kernel.repository.Repository repositoryImpl =
 			new LiferayRepository(repositoryId);
 
 		checkRepository(repositoryId);
 
-		return repository;
+		return repositoryImpl;
 	}
 
 	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
 			long folderId, long fileEntryId, long fileVersionId)
 		throws SystemException {
 
-		com.liferay.portal.kernel.repository.Repository repository =
+		com.liferay.portal.kernel.repository.Repository repositoryImpl =
 			new LiferayRepository(folderId, fileEntryId, fileVersionId);
 
-		checkRepository(repository.getRepositoryId());
+		checkRepository(repositoryImpl.getRepositoryId());
 
-		return repository;
+		return repositoryImpl;
 	}
 
 	public UnicodeProperties getTypeSettingsProperties(long repositoryId)
@@ -218,10 +221,12 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		repositoryPersistence.update(repository, false);
 
-		// Repository Implementation
+		// Repository implementation
 
-		getRepositoryImpl(repositoryId).updateRepository(
-			typeSettingsProperties);
+		com.liferay.portal.kernel.repository.Repository repositoryImpl =
+			getRepositoryImpl(repositoryId);
+
+		repositoryImpl.updateRepository(typeSettingsProperties);
 	}
 
 	protected long getDLFolderId(

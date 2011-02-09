@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.service.RepositoryServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
@@ -525,14 +524,14 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	protected LocalRepository getLocalRepository(long repositoryId)
 		throws SystemException {
 
-		return RepositoryServiceUtil.getLocalRepositoryImpl(repositoryId);
+		return repositoryService.getLocalRepositoryImpl(repositoryId);
 	}
 
 	protected LocalRepository getLocalRepository(
 			long folderId, long fileEntryId, long fileVersionId)
 		throws SystemException {
 
-		return RepositoryServiceUtil.getLocalRepositoryImpl(
+		return repositoryService.getLocalRepositoryImpl(
 			folderId, fileEntryId, fileVersionId);
 	}
 

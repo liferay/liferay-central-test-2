@@ -100,20 +100,6 @@ public class RepositoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RepositorySoap getRepository(
-		long repositoryId) throws RemoteException {
-		try {
-			com.liferay.portal.model.Repository returnValue = RepositoryServiceUtil.getRepository(repositoryId);
-
-			return com.liferay.portal.model.RepositorySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portal.kernel.repository.LocalRepository getLocalRepositoryImpl(
 		long repositoryId) throws RemoteException {
 		try {
@@ -136,6 +122,20 @@ public class RepositoryServiceSoap {
 					fileEntryId, fileVersionId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.RepositorySoap getRepository(
+		long repositoryId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Repository returnValue = RepositoryServiceUtil.getRepository(repositoryId);
+
+			return com.liferay.portal.model.RepositorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

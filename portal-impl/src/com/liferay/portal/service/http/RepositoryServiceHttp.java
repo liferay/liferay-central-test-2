@@ -185,50 +185,13 @@ public class RepositoryServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.model.Repository getRepository(
-		HttpPrincipal httpPrincipal, long repositoryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
-					"getRepository", _getRepositoryParameterTypes4);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portal.model.Repository)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portal.kernel.repository.LocalRepository getLocalRepositoryImpl(
 		HttpPrincipal httpPrincipal, long repositoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
 					"getLocalRepositoryImpl",
-					_getLocalRepositoryImplParameterTypes5);
+					_getLocalRepositoryImplParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					repositoryId);
@@ -262,7 +225,7 @@ public class RepositoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
 					"getLocalRepositoryImpl",
-					_getLocalRepositoryImplParameterTypes6);
+					_getLocalRepositoryImplParameterTypes5);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					folderId, fileEntryId, fileVersionId);
@@ -281,6 +244,43 @@ public class RepositoryServiceHttp {
 			}
 
 			return (com.liferay.portal.kernel.repository.LocalRepository)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.model.Repository getRepository(
+		HttpPrincipal httpPrincipal, long repositoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
+					"getRepository", _getRepositoryParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					repositoryId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Repository)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException se) {
 			_log.error(se, se);
@@ -441,14 +441,14 @@ public class RepositoryServiceHttp {
 	private static final Class<?>[] _deleteRepositoryParameterTypes3 = new Class[] {
 			long.class, boolean.class
 		};
-	private static final Class<?>[] _getRepositoryParameterTypes4 = new Class[] {
+	private static final Class<?>[] _getLocalRepositoryImplParameterTypes4 = new Class[] {
 			long.class
 		};
 	private static final Class<?>[] _getLocalRepositoryImplParameterTypes5 = new Class[] {
-			long.class
-		};
-	private static final Class<?>[] _getLocalRepositoryImplParameterTypes6 = new Class[] {
 			long.class, long.class, long.class
+		};
+	private static final Class<?>[] _getRepositoryParameterTypes6 = new Class[] {
+			long.class
 		};
 	private static final Class<?>[] _getRepositoryImplParameterTypes7 = new Class[] {
 			long.class

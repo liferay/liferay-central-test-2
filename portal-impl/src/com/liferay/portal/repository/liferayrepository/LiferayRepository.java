@@ -17,7 +17,6 @@ package com.liferay.portal.repository.liferayrepository;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.Repository;
-import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -78,9 +77,8 @@ public class LiferayRepository
 	}
 
 	public void addRepository(
-			long groupId, String name, String description, String portletKey,
-			UnicodeProperties typeSettingsProperties)
-		throws RepositoryException {
+		long groupId, String name, String description, String portletKey,
+		UnicodeProperties typeSettingsProperties) {
 	}
 
 	public Folder copyFolder(
@@ -100,12 +98,12 @@ public class LiferayRepository
 	 * permission checking on all the objects would be a major impact on
 	 * performance. Hence, this should only be called from
 	 * LiferayLocalRepository which assumes the user is an administrator of some
-	 * sort.  If called, the method will throw an
+	 * sort. If called, the method will throw an
 	 * <code>UnsupportedOperationException</code>.
 	 *
 	 * @see LiferayLocalRepository#deleteAll()
 	 */
-	public void deleteAll() throws PortalException, SystemException {
+	public void deleteAll() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -408,8 +406,7 @@ public class LiferayRepository
 	}
 
 	public UnicodeProperties updateRepository(
-			UnicodeProperties typeSettingsProperties)
-		throws RepositoryException {
+		UnicodeProperties typeSettingsProperties) {
 
 		return new UnicodeProperties();
 	}

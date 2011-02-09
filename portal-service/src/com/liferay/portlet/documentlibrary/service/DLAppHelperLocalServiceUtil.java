@@ -48,9 +48,7 @@ public class DLAppHelperLocalServiceUtil {
 
 	public static void addFolder(
 		com.liferay.portal.kernel.repository.model.Folder folder,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService().addFolder(folder, serviceContext);
 	}
 
@@ -62,9 +60,7 @@ public class DLAppHelperLocalServiceUtil {
 	}
 
 	public static void deleteFolder(
-		com.liferay.portal.kernel.repository.model.Folder folder)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.kernel.repository.model.Folder folder) {
 		getService().deleteFolder(folder);
 	}
 
@@ -98,8 +94,7 @@ public class DLAppHelperLocalServiceUtil {
 		return getService().getFileShortcutsCount(groupId, folderId, status);
 	}
 
-	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getNoAssetFileEntries()
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getNoAssetFileEntries() {
 		return getService().getNoAssetFileEntries();
 	}
 

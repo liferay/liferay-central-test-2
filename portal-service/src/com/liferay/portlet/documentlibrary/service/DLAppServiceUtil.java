@@ -98,8 +98,7 @@ public class DLAppServiceUtil {
 		java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .copyFolder(repositoryId, sourceFolderId, parentFolderId,
 			name, description, serviceContext);
@@ -126,38 +125,33 @@ public class DLAppServiceUtil {
 
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFolder(folderId);
 	}
 
 	public static void deleteFolder(long repositoryId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFolder(repositoryId, parentFolderId, name);
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
 		long repositoryId, long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntries(repositoryId, folderId);
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
 		long repositoryId, long folderId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntries(repositoryId, folderId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getFileEntries(
 		long repositoryId, long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getFileEntries(repositoryId, folderId, start, end, obc);
 	}
@@ -196,8 +190,7 @@ public class DLAppServiceUtil {
 	}
 
 	public static int getFileEntriesCount(long repositoryId, long folderId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntriesCount(repositoryId, folderId);
 	}
 
@@ -371,8 +364,7 @@ public class DLAppServiceUtil {
 	public static com.liferay.portal.model.Lock lockFolder(long repositoryId,
 		long folderId)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService().lockFolder(repositoryId, folderId);
 	}
 
@@ -380,8 +372,7 @@ public class DLAppServiceUtil {
 		long folderId, java.lang.String owner, boolean inheritable,
 		long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .lockFolder(repositoryId, folderId, owner, inheritable,
 			expirationTime);
@@ -496,8 +487,7 @@ public class DLAppServiceUtil {
 		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException,
-			java.rmi.RemoteException {
+			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateFolder(folderId, parentFolderId, name, description,
 			serviceContext);

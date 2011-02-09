@@ -50,9 +50,7 @@ public interface DLAppHelperLocalService {
 
 	public void addFolder(
 		com.liferay.portal.kernel.repository.model.Folder folder,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteFileEntry(
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry)
@@ -60,9 +58,7 @@ public interface DLAppHelperLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteFolder(
-		com.liferay.portal.kernel.repository.model.Folder folder)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		com.liferay.portal.kernel.repository.model.Folder folder);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void getFileAsStream(long userId,
@@ -90,8 +86,7 @@ public interface DLAppHelperLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getNoAssetFileEntries()
-		throws com.liferay.portal.kernel.exception.SystemException;
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getNoAssetFileEntries();
 
 	public void moveFileEntry(long oldFileEntryId, long newFileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,

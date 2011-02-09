@@ -43,6 +43,10 @@ public class RepositoryServiceWrapper implements RepositoryService {
 		_repositoryService.checkRepository(repositoryId);
 	}
 
+	/**
+	* This method deletes the all repositories associated with this group. It
+	* purges the default repository but does not purge any mapped repositories.
+	*/
 	public void deleteRepositories(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -53,12 +57,6 @@ public class RepositoryServiceWrapper implements RepositoryService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_repositoryService.deleteRepository(repositoryId, purge);
-	}
-
-	public com.liferay.portal.model.Repository getRepository(long repositoryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _repositoryService.getRepository(repositoryId);
 	}
 
 	public com.liferay.portal.kernel.repository.LocalRepository getLocalRepositoryImpl(
@@ -72,6 +70,12 @@ public class RepositoryServiceWrapper implements RepositoryService {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _repositoryService.getLocalRepositoryImpl(folderId, fileEntryId,
 			fileVersionId);
+	}
+
+	public com.liferay.portal.model.Repository getRepository(long repositoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _repositoryService.getRepository(repositoryId);
 	}
 
 	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(

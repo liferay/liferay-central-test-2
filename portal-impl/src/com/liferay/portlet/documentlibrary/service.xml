@@ -8,6 +8,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="Lock" />
+		<reference package-path="com.liferay.portal" entity="Repository" />
 
 		<!-- Transactions -->
 

@@ -63,8 +63,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
-	public void addFolder(Folder folder, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+	public void addFolder(Folder folder, ServiceContext serviceContext) {
 	}
 
 	public void deleteFileEntry(FileEntry fileEntry)
@@ -101,8 +100,7 @@ public class DLAppHelperLocalServiceImpl
 			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 	}
 
-	public void deleteFolder(Folder folder)
-		throws PortalException, SystemException {
+	public void deleteFolder(Folder folder) {
 	}
 
 	public void getFileAsStream(long userId, FileEntry fileEntry)
@@ -176,7 +174,7 @@ public class DLAppHelperLocalServiceImpl
 			groupId, folderId, status);
 	}
 
-	public List<FileEntry> getNoAssetFileEntries() throws SystemException {
+	public List<FileEntry> getNoAssetFileEntries() {
 		return null;
 	}
 

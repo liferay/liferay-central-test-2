@@ -286,8 +286,8 @@ Liferay.Service.registerClass(
 		checkRepository: true,
 		deleteRepositories: true,
 		deleteRepository: true,
-		getRepository: true,
 		getLocalRepositoryImpl: true,
+		getRepository: true,
 		getRepositoryImpl: true,
 		getTypeSettingsProperties: true,
 		updateRepository: true
