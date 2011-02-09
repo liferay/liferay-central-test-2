@@ -189,8 +189,6 @@ public class SubscriptionSender implements Serializable {
 				PortalUtil.getUserName(userId, StringPool.BLANK));
 		}
 
-		_sentUserIds.add(userId);
-
 		mailId = PortalUtil.getMailId(
 			company.getMx(), _mailIdPopPortletPrefix, _mailIdIds);
 	}
