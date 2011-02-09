@@ -1675,7 +1675,8 @@ public class ServicePreAction extends Action {
 					permissionChecker, group.getGroupId(),
 					ActionKeys.MANAGE_STAGING) ||
 				GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(), ActionKeys.UPDATE)) {
+					permissionChecker, group.getGroupId(),
+					ActionKeys.UPDATE))) {
 
 				themeDisplay.setShowSiteSettingsIcon(true);
 
