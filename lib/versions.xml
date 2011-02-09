@@ -2897,13 +2897,13 @@
 	</library>
 	<library>
 		<file-name>portal/vaadin.jar</file-name>
-		<version>6.4.6</version>
+		<version>6.4.10</version>
 		<project-name>Vaadin</project-name>
 		<project-url>http://vaadin.com</project-url>
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
-				<copyright-notice>Copyright (c) 2010 Vaadin Ltd</copyright-notice>
+				<copyright-notice>Copyright (c) 2011 Vaadin Ltd</copyright-notice>
 			</license>
 		</licenses>
 	</library>
