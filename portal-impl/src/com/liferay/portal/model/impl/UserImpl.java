@@ -352,6 +352,8 @@ public class UserImpl extends UserModelImpl implements User {
 			myPlaces = ListUtil.subList(myPlaces, start, end);
 		}
 
+		myPlaces = Collections.unmodifiableList(myPlaces);
+
 		threadLocalCache.put(key, myPlaces);
 
 		return myPlaces;

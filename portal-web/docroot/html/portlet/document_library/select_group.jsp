@@ -42,9 +42,7 @@
 	List<Group> myPlaces = user.getMyPlaces();
 
 	if (PortalUtil.isCompanyControlPanelPortlet(portletId, themeDisplay)) {
-		if (myPlaces.isEmpty()) {
-			myPlaces = new ArrayList<Group>();
-		}
+		myPlaces = ListUtil.copy(myPlaces);
 
 		myPlaces.add(0, GroupLocalServiceUtil.getGroup(themeDisplay.getCompanyGroupId()));
 	}
