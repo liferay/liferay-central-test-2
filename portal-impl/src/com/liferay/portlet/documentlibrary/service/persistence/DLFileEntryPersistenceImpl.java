@@ -3304,8 +3304,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(StringPool.OPEN_PARENTHESIS);
 
 				for (int i = 0; i < folderIds.length; i++) {
-					long folderId = folderIds[i];
-
 					query.append(_FINDER_COLUMN_G_F_FOLDERID_5);
 
 					if ((i + 1) < folderIds.length) {
@@ -3782,8 +3780,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(StringPool.OPEN_PARENTHESIS);
 
 			for (int i = 0; i < folderIds.length; i++) {
-				long folderId = folderIds[i];
-
 				query.append(_FINDER_COLUMN_G_F_FOLDERID_5);
 
 				if ((i + 1) < folderIds.length) {
@@ -4338,8 +4334,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(StringPool.OPEN_PARENTHESIS);
 
 				for (int i = 0; i < folderIds.length; i++) {
-					long folderId = folderIds[i];
-
 					query.append(_FINDER_COLUMN_G_U_F_FOLDERID_5);
 
 					if ((i + 1) < folderIds.length) {
@@ -4844,8 +4838,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(StringPool.OPEN_PARENTHESIS);
 
 			for (int i = 0; i < folderIds.length; i++) {
-				long folderId = folderIds[i];
-
 				query.append(_FINDER_COLUMN_G_U_F_FOLDERID_5);
 
 				if ((i + 1) < folderIds.length) {
@@ -5990,8 +5982,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(StringPool.OPEN_PARENTHESIS);
 
 				for (int i = 0; i < folderIds.length; i++) {
-					long folderId = folderIds[i];
-
 					query.append(_FINDER_COLUMN_G_F_FOLDERID_5);
 
 					if ((i + 1) < folderIds.length) {
@@ -6131,8 +6121,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(StringPool.OPEN_PARENTHESIS);
 
 			for (int i = 0; i < folderIds.length; i++) {
-				long folderId = folderIds[i];
-
 				query.append(_FINDER_COLUMN_G_F_FOLDERID_5);
 
 				if ((i + 1) < folderIds.length) {
@@ -6292,8 +6280,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 				query.append(StringPool.OPEN_PARENTHESIS);
 
 				for (int i = 0; i < folderIds.length; i++) {
-					long folderId = folderIds[i];
-
 					query.append(_FINDER_COLUMN_G_U_F_FOLDERID_5);
 
 					if ((i + 1) < folderIds.length) {
@@ -6449,8 +6435,6 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 			query.append(StringPool.OPEN_PARENTHESIS);
 
 			for (int i = 0; i < folderIds.length; i++) {
-				long folderId = folderIds[i];
-
 				query.append(_FINDER_COLUMN_G_U_F_FOLDERID_5);
 
 				if ((i + 1) < folderIds.length) {
