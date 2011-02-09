@@ -43,24 +43,55 @@ import javax.servlet.ServletContext;
 
 /**
  * @author Jorge Ferrer
+ * @author Dennis Ju
+ * @author Brian Wing Shun Chan
  */
 public class PortletLister {
 
-	public TreeView getCategoryTreeView(User user)
-		throws PortalException, SystemException {
+	public TreeView getTreeView() throws PortalException, SystemException {
+		_nodeId = 1;
 
-		return _getTreeView(null, null, user, null, false);
+		_list = new ArrayList<TreeNodeView>();
+
+		if (_rootNodeName != null) {
+			TreeNodeView rootNodeView = new TreeNodeView(_nodeId);
+
+			rootNodeView.setLeaf(false);
+			rootNodeView.setName(_rootNodeName);
+
+			_list.add(rootNodeView);
+		}
+
+		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
+			String.valueOf(_user.getCompanyId()), WebKeys.PORTLET_CATEGORY);
+
+		List<PortletCategory> categories = ListUtil.fromCollection(
+			portletCategory.getCategories());
+
+		_iterateCategories(categories, _nodeId, 0);
+
+		return new TreeView(_list, _depth);
 	}
 
+	/**
+	 * @deprecate {@link #getTreeView}
+	 */
 	public TreeView getTreeView(
 			LayoutTypePortlet layoutTypePortlet, String rootNodeName, User user,
 			ServletContext servletContext)
 		throws PortalException, SystemException {
 
-		return _getTreeView(
-			layoutTypePortlet, rootNodeName, user, servletContext, true);
+		_layoutTypePortlet = layoutTypePortlet;
+		_rootNodeName = rootNodeName;
+		_user = user;
+		_servletContext = servletContext;
+
+		return getTreeView();
 	}
 
+	/**
+	 * @deprecate
+	 */
 	public boolean isIncludeInstanceablePortlets() {
 		return _includeInstanceablePortlets;
 	}
@@ -70,42 +101,29 @@ public class PortletLister {
 
 		_includeInstanceablePortlets = includeInstanceablePortlets;
 	}
-
-	private TreeView _getTreeView(
-			LayoutTypePortlet layoutTypePortlet, String rootNodeName, User user,
-			ServletContext servletContext, boolean iteratePortlets)
-		throws PortalException, SystemException {
-
-		_layoutTypePortlet = layoutTypePortlet;
-		_user = user;
-		_servletContext = servletContext;
-		_nodeId = 1;
-
-		_list = new ArrayList<TreeNodeView>();
-
-		if (rootNodeName != null) {
-			TreeNodeView rootNodeView = new TreeNodeView(_nodeId);
-
-			rootNodeView.setLeaf(false);
-			rootNodeView.setName(rootNodeName);
-
-			_list.add(rootNodeView);
-		}
-
-		PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
-			String.valueOf(user.getCompanyId()), WebKeys.PORTLET_CATEGORY);
-
-		List<PortletCategory> categories = ListUtil.fromCollection(
-			portletCategory.getCategories());
-
-		_iterateCategories(categories, _nodeId, 0, iteratePortlets);
-
-		return new TreeView(_list, _depth);
+	
+	public void setIteratePortlets(boolean iteratePortlets) {
+		_iteratePortlets = iteratePortlets;
 	}
-
+	
+	public void setLayoutTypePortlet(LayoutTypePortlet layoutTypePortlet) {
+		_layoutTypePortlet = layoutTypePortlet;
+	}
+	
+	public void setRootNodeName(String rootNodeName) {
+		_rootNodeName = rootNodeName;
+	}
+	
+	public void setServletContext(ServletContext servletContext) {
+		_servletContext = servletContext;
+	}
+	
+	public void setUser(User user) {
+		_user = user;
+	}
+	
 	private void _iterateCategories(
-			List<PortletCategory> categories, long parentId, int depth,
-			boolean iteratePortlets)
+			List<PortletCategory> categories, long parentId, int depth)
 		throws PortalException, SystemException {
 
 		categories = ListUtil.sort(
@@ -151,9 +169,9 @@ public class PortletLister {
 			List<PortletCategory> subCategories = ListUtil.fromCollection(
 				portletCategory.getCategories());
 
-			_iterateCategories(subCategories, nodeId, depth, iteratePortlets);
+			_iterateCategories(subCategories, nodeId, depth);
 
-			if (iteratePortlets) {
+			if (_iteratePortlets) {
 				_iteratePortlets(
 					portletCategory, portletCategory.getPortletIds(), nodeId,
 					depth + 1);
@@ -162,7 +180,7 @@ public class PortletLister {
 			i++;
 		}
 	}
-
+	
 	private void _iteratePortlets(
 			PortletCategory portletCategory, Set<String> portletIds,
 			int parentNodeId, int depth)
@@ -250,12 +268,14 @@ public class PortletLister {
 		}
 	}
 
-	private LayoutTypePortlet _layoutTypePortlet;
-	private User _user;
-	private ServletContext _servletContext;
-	private int _nodeId;
-	private List<TreeNodeView> _list;
 	private int _depth;
 	private boolean _includeInstanceablePortlets;
+	private boolean _iteratePortlets;
+	private LayoutTypePortlet _layoutTypePortlet;
+	private List<TreeNodeView> _list;
+	private int _nodeId;
+	private String _rootNodeName;
+	private ServletContext _servletContext;
+	private User _user;
 
 }

@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portal.kernel.util.TreeView" %>
 <%--
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
@@ -75,8 +74,12 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 	PortletLister portletLister = new PortletLister();
 
 	portletLister.setIncludeInstanceablePortlets(false);
+	portletLister.setLayoutTypePortlet(layoutTypePortlet);
+	portletLister.setRootNodeName(LanguageUtil.get(pageContext, "application"));
+	portletLister.setServletContext(application);
+	portletLister.setUser(user);
 
-	TreeView treeView = portletLister.getTreeView(layoutTypePortlet, LanguageUtil.get(pageContext, "application"), user, application);
+	TreeView treeView = portletLister.getTreeView();
 
 	Iterator itr = treeView.getList().iterator();
 

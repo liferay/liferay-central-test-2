@@ -28,6 +28,7 @@ import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Dennis Ju
  */
 public class PortletCategory implements Serializable {
 
@@ -43,10 +44,10 @@ public class PortletCategory implements Serializable {
 		_categories = new HashMap<String, PortletCategory>();
 		_portletIds = portletIds;
 
-		if (name.contains(_delimiter)) {
-			int index = name.lastIndexOf(_delimiter);
+		if (name.contains(_DELIMITER)) {
+			int index = name.lastIndexOf(_DELIMITER);
 
-			_name = name.substring(index + _delimiter.length());
+			_name = name.substring(index + _DELIMITER.length());
 
 			String parentName = name.substring(0, index);
 
@@ -65,7 +66,7 @@ public class PortletCategory implements Serializable {
 	public void addCategory(PortletCategory portletCategory) {
 		portletCategory.setParentCategory(this);
 
-		String path = _path.concat(_delimiter).concat(
+		String path = _path.concat(_DELIMITER).concat(
 			portletCategory.getName());
 
 		portletCategory.setPath(path);
@@ -185,16 +186,12 @@ public class PortletCategory implements Serializable {
 		portletIds1.addAll(portletIds2);
 	}
 
-	private static final String _delimiter = StringPool.DOUBLE_SLASH;
+	private static final String _DELIMITER = StringPool.DOUBLE_SLASH;
 
 	private Map<String, PortletCategory> _categories;
-
 	private String _name;
-
 	private PortletCategory _parentPortletCategory;
-
 	private String _path;
-
 	private Set<String> _portletIds;
 
 }

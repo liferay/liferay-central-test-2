@@ -19,6 +19,8 @@ import java.util.List;
 
 /**
  * @author Shuyang Zhou
+ * @author Dennis Ju
+ * @author Brian Wing Shun Chan
  */
 public class TreeNode<T extends Comparable<T>> {
 

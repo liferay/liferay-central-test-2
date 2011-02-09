@@ -16,6 +16,8 @@ package com.liferay.portal.kernel.util;
 
 /**
  * @author Jorge Ferrer
+ * @author Dennis Ju
+ * @author Brian Wing Shun Chan
  */
 public class TreeNodeView {
 
@@ -27,68 +29,68 @@ public class TreeNodeView {
 		return _depth;
 	}
 
-	public void setDepth(int depth) {
-		_depth = depth;
-	}
-
 	public String getHref() {
 		return _href;
-	}
-
-	public void setHref(String href) {
-		_href = href;
 	}
 
 	public long getId() {
 		return _id;
 	}
 
-	public void setId(long id) {
-		_id = id;
-	}
-
 	public String getImg() {
 		return _img;
-	}
-
-	public void setImg(String img) {
-		_img = img;
-	}
-	
-	public boolean isLeaf() {
-		return _leaf;
-	}
-
-	public void setLeaf(boolean leaf) {
-		_leaf = leaf;
 	}
 
 	public String getLs() {
 		return _ls;
 	}
 
-	public void setLs(String ls) {
-		_ls = ls;
-	}
-
 	public String getName() {
 		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
 	}
 
 	public String getObjId() {
 		return _objId;
 	}
 
-	public void setObjId(String objId) {
-		_objId = objId;
-	}
-
 	public long getParentId() {
 		return _parentId;
+	}
+
+	public boolean isLeaf() {
+		return _leaf;
+	}
+
+	public void setDepth(int depth) {
+		_depth = depth;
+	}
+
+	public void setHref(String href) {
+		_href = href;
+	}
+
+	public void setId(long id) {
+		_id = id;
+	}
+
+	public void setImg(String img) {
+		_img = img;
+	}
+
+	public void setLeaf(boolean leaf) {
+		_leaf = leaf;
+	}
+
+	public void setLs(String ls) {
+		_ls = ls;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setObjId(String objId) {
+		_objId = objId;
 	}
 
 	public void setParentId(long parentId) {
