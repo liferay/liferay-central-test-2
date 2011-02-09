@@ -229,6 +229,33 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 	}
 
 	/**
+	* Gets the major layout revision of this layout revision.
+	*
+	* @return the major layout revision of this layout revision
+	*/
+	public boolean getMajorLayoutRevision() {
+		return _layoutRevision.getMajorLayoutRevision();
+	}
+
+	/**
+	* Determines if this layout revision is major layout revision.
+	*
+	* @return <code>true</code> if this layout revision is major layout revision; <code>false</code> otherwise
+	*/
+	public boolean isMajorLayoutRevision() {
+		return _layoutRevision.isMajorLayoutRevision();
+	}
+
+	/**
+	* Sets whether this layout revision is major layout revision.
+	*
+	* @param majorLayoutRevision the major layout revision of this layout revision
+	*/
+	public void setMajorLayoutRevision(boolean majorLayoutRevision) {
+		_layoutRevision.setMajorLayoutRevision(majorLayoutRevision);
+	}
+
+	/**
 	* Gets the head of this layout revision.
 	*
 	* @return the head of this layout revision

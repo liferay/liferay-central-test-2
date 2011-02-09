@@ -378,6 +378,7 @@
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="layoutSetBranchId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="parentLayoutRevisionId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="majorLayoutRevision" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="head" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="plid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />

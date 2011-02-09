@@ -313,6 +313,7 @@
 			</basic>
 			<basic name="layoutSetBranchId" />
 			<basic name="parentLayoutRevisionId" />
+			<basic name="majorLayoutRevision" />
 			<basic name="head" />
 			<basic name="plid" />
 			<basic name="name" />

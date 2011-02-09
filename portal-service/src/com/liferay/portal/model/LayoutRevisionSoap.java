@@ -40,6 +40,7 @@ public class LayoutRevisionSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setLayoutSetBranchId(model.getLayoutSetBranchId());
 		soapModel.setParentLayoutRevisionId(model.getParentLayoutRevisionId());
+		soapModel.setMajorLayoutRevision(model.getMajorLayoutRevision());
 		soapModel.setHead(model.getHead());
 		soapModel.setPlid(model.getPlid());
 		soapModel.setName(model.getName());
@@ -181,6 +182,18 @@ public class LayoutRevisionSoap implements Serializable {
 
 	public void setParentLayoutRevisionId(long parentLayoutRevisionId) {
 		_parentLayoutRevisionId = parentLayoutRevisionId;
+	}
+
+	public boolean getMajorLayoutRevision() {
+		return _majorLayoutRevision;
+	}
+
+	public boolean isMajorLayoutRevision() {
+		return _majorLayoutRevision;
+	}
+
+	public void setMajorLayoutRevision(boolean majorLayoutRevision) {
+		_majorLayoutRevision = majorLayoutRevision;
 	}
 
 	public boolean getHead() {
@@ -352,6 +365,7 @@ public class LayoutRevisionSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _layoutSetBranchId;
 	private long _parentLayoutRevisionId;
+	private boolean _majorLayoutRevision;
 	private boolean _head;
 	private long _plid;
 	private String _name;

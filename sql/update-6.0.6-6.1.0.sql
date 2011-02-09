@@ -88,6 +88,7 @@ create table LayoutRevision (
 	modifiedDate DATE null,
 	layoutSetBranchId LONG,
 	parentLayoutRevisionId LONG,
+	majorLayoutRevision BOOLEAN,
 	head BOOLEAN,
 	plid LONG,
 	name STRING null,

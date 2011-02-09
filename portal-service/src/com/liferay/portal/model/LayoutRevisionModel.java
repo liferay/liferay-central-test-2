@@ -203,6 +203,27 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setParentLayoutRevisionId(long parentLayoutRevisionId);
 
 	/**
+	 * Gets the major layout revision of this layout revision.
+	 *
+	 * @return the major layout revision of this layout revision
+	 */
+	public boolean getMajorLayoutRevision();
+
+	/**
+	 * Determines if this layout revision is major layout revision.
+	 *
+	 * @return <code>true</code> if this layout revision is major layout revision; <code>false</code> otherwise
+	 */
+	public boolean isMajorLayoutRevision();
+
+	/**
+	 * Sets whether this layout revision is major layout revision.
+	 *
+	 * @param majorLayoutRevision the major layout revision of this layout revision
+	 */
+	public void setMajorLayoutRevision(boolean majorLayoutRevision);
+
+	/**
 	 * Gets the head of this layout revision.
 	 *
 	 * @return the head of this layout revision
