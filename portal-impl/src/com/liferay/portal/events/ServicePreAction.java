@@ -1644,6 +1644,9 @@ public class ServicePreAction extends Action {
 				}
 			}
 
+			boolean hasManageSiteMapPermission =
+				hasManageLayoutsPermission && !group.isLayoutPrototype();
+
 			Group controlPanelGroup = GroupLocalServiceUtil.getGroup(
 				companyId, GroupConstants.CONTROL_PANEL);
 
@@ -1668,6 +1671,33 @@ public class ServicePreAction extends Action {
 					"groupId", String.valueOf(scopeGroupId));
 
 				themeDisplay.setURLSiteSettings(siteSettingsURL);
+			}
+
+			if (hasManageSiteMapPermission) {
+				themeDisplay.setShowSiteMapSettingsIcon(true);
+
+				PortletURL siteMapSettingsURL = new PortletURLImpl(
+					request, PortletKeys.LAYOUTS_ADMIN, controlPanelPlid,
+					PortletRequest.RENDER_PHASE);
+
+				siteMapSettingsURL.setWindowState(LiferayWindowState.POP_UP);
+				siteMapSettingsURL.setPortletMode(PortletMode.VIEW);
+
+				siteMapSettingsURL.setParameter(
+					"struts_action", "/layouts_admin/edit_layouts");
+
+				if (layout.isPrivateLayout()) {
+					siteMapSettingsURL.setParameter("tabs1", "private-pages");
+				}
+				else {
+					siteMapSettingsURL.setParameter("tabs1", "public-pages");
+				}
+
+				siteMapSettingsURL.setParameter("redirect", currentURL);
+				siteMapSettingsURL.setParameter(
+					"groupId", String.valueOf(scopeGroupId));
+
+				themeDisplay.setURLSiteMapSettings(siteMapSettingsURL);
 			}
 
 			if (hasManageLayoutsPermission) {

@@ -129,20 +129,15 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 								</li>
 							</c:if>
 
-							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && !group.isLayoutPrototype() %>">
+							<c:if test="<%= themeDisplay.isShowSiteMapSettingsIcon() %>">
 								<li class="sitemap use-dialog">
-									<aui:a href='<%= HttpUtil.setParameter(themeDisplay.getURLPageSettings().toString(), "selPlid", "-1") %>' label="sitemap" title="manage-sitemap" />
+									<aui:a href='<%= themeDisplay.getURLSiteMapSettings().toString() %>' label="sitemap" title="manage-sitemap" />
 								</li>
 							</c:if>
 
 							<c:if test="<%= themeDisplay.isShowSiteSettingsIcon() && !group.isLayoutPrototype() %>">
-
-								<%
-								String siteSettingsURL = themeDisplay.getURLSiteSettings().toString();
-								%>
-
 								<li class="settings use-dialog">
-									<aui:a href="<%= siteSettingsURL %>" label="site-settings" title="manage-site-settings" />
+									<aui:a href="<%= themeDisplay.getURLSiteSettings().toString() %>" label="site-settings" title="manage-site-settings" />
 								</li>
 							</c:if>
 
