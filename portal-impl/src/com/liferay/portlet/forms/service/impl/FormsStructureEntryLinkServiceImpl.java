@@ -14,11 +14,69 @@
 
 package com.liferay.portlet.forms.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.forms.model.FormsStructureEntryLink;
 import com.liferay.portlet.forms.service.base.FormsStructureEntryLinkServiceBaseImpl;
+import com.liferay.portlet.forms.service.permission.FormsPermission;
+import com.liferay.portlet.forms.service.permission.FormsStructureEntryPermission;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Bruno Basto
  */
 public class FormsStructureEntryLinkServiceImpl
 	extends FormsStructureEntryLinkServiceBaseImpl {
+
+	public FormsStructureEntryLink addStructureEntryLink(
+			String structureId, String className, long classPK,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		FormsPermission.check(
+			getPermissionChecker(), serviceContext.getScopeGroupId(),
+			ActionKeys.ADD_STRUCTURE_ENTRY);
+
+		return formsStructureEntryLinkLocalService.addStructureEntryLink(
+			structureId, className, classPK, serviceContext);
+	}
+
+	public void deleteStructureEntryLink(
+		long groupId, String structureId, long structureEntryLinkId)
+		throws PortalException, SystemException {
+
+		FormsStructureEntryPermission.check(
+			getPermissionChecker(), groupId, structureId,
+			ActionKeys.DELETE);
+
+		formsStructureEntryLinkLocalService.deleteStructureEntryLink(
+			structureEntryLinkId);
+	}
+
+	public FormsStructureEntryLink getStructureEntryLink(
+		long groupId, String structureId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		FormsStructureEntryPermission.check(
+			getPermissionChecker(), groupId, structureId, ActionKeys.VIEW);
+
+		return formsStructureEntryLinkLocalService.getStructureEntryLink(
+			structureId, className, classPK);
+	}
+
+	public FormsStructureEntryLink updateStructureEntryLink(
+			long structureEntryLinkId, String structureId, long groupId,
+			String className, long classPK)
+		throws PortalException, SystemException {
+
+		FormsStructureEntryPermission.check(
+			getPermissionChecker(), groupId, structureId,
+			ActionKeys.UPDATE);
+
+		return formsStructureEntryLinkLocalService.updateStructureEntryLink(
+			structureEntryLinkId, structureId, groupId, className, classPK);
+	}
+
 }

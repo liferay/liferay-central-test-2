@@ -14,11 +14,101 @@
 
 package com.liferay.portlet.forms.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.forms.model.FormsStructureEntryLink;
 import com.liferay.portlet.forms.service.base.FormsStructureEntryLinkLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Bruno Basto
  */
 public class FormsStructureEntryLinkLocalServiceImpl
 	extends FormsStructureEntryLinkLocalServiceBaseImpl {
+
+	public FormsStructureEntryLink addStructureEntryLink(
+			String structureId, String className, long classPK,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		// Link
+
+		long structureEntryLinkId = counterLocalService.increment();
+
+		FormsStructureEntryLink structureEntryLink =
+			formsStructureEntryLinkPersistence.create(structureEntryLinkId);
+
+		structureEntryLink.setStructureId(structureId);
+		structureEntryLink.setClassName(className);
+		structureEntryLink.setClassPK(classPK);
+
+		return formsStructureEntryLinkPersistence.update(
+			structureEntryLink, false);
+	}
+
+	public void deleteStructureEntryLink(
+		FormsStructureEntryLink structureEntryLink)
+		throws PortalException, SystemException {
+
+		deleteStructureEntryLink(structureEntryLink.getStructureEntryLinkId());
+	}
+
+	public void deleteStructureEntryLink(long structureEntryLinkId)
+		throws PortalException, SystemException {
+
+		formsStructureEntryLinkPersistence.remove(structureEntryLinkId);
+	}
+
+	public void deleteStructureEntryLink(
+			String structureId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		formsStructureEntryLinkPersistence.remove(
+			getStructureEntryLink(structureId, className, classPK));
+	}
+
+	public List<FormsStructureEntryLink> getStructureEntryLinks(
+			String structureId, int start, int end)
+		throws SystemException {
+
+		return formsStructureEntryLinkPersistence.findByStructureId(
+			structureId, start, end);
+	}
+
+	public FormsStructureEntryLink getStructureEntryLink(
+		long structureEntryLinkId)
+		throws PortalException, SystemException {
+
+		return formsStructureEntryLinkPersistence.findByPrimaryKey(
+			structureEntryLinkId);
+	}
+
+	public FormsStructureEntryLink getStructureEntryLink(
+			String structureId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		return formsStructureEntryLinkPersistence.findByS_C_C(
+			structureId, className, classPK);
+	}
+
+	public FormsStructureEntryLink updateStructureEntryLink(
+			long structureEntryLinkId, String structureId, long groupId,
+			String className, long classPK)
+		throws PortalException, SystemException {
+
+		FormsStructureEntryLink structureEntryLink =
+			formsStructureEntryLinkPersistence.findByPrimaryKey(
+				structureEntryLinkId);
+
+		structureEntryLink.setStructureId(structureId);
+		structureEntryLink.setClassName(className);
+		structureEntryLink.setClassPK(classPK);
+
+		return formsStructureEntryLinkPersistence.update(
+			structureEntryLink, false);
+	}
+
 }
