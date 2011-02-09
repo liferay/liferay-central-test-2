@@ -73,29 +73,6 @@ public class PortletLister {
 		return new TreeView(_list, _depth);
 	}
 
-	/**
-	 * @deprecate {@link #getTreeView}
-	 */
-	public TreeView getTreeView(
-			LayoutTypePortlet layoutTypePortlet, String rootNodeName, User user,
-			ServletContext servletContext)
-		throws PortalException, SystemException {
-
-		_layoutTypePortlet = layoutTypePortlet;
-		_rootNodeName = rootNodeName;
-		_user = user;
-		_servletContext = servletContext;
-
-		return getTreeView();
-	}
-
-	/**
-	 * @deprecate
-	 */
-	public boolean isIncludeInstanceablePortlets() {
-		return _includeInstanceablePortlets;
-	}
-
 	public void setIncludeInstanceablePortlets(
 		boolean includeInstanceablePortlets) {
 
