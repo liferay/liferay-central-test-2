@@ -169,7 +169,7 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	protected boolean containsSharedAttribute(String name) {
-		for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
+		for (String sharedName : PropsValues.SESSION_SHARED_ATTRIBUTES) {
 			if (name.startsWith(sharedName)) {
 				return true;
 			}
@@ -210,7 +210,7 @@ public class SharedSessionWrapper implements HttpSession {
 	static {
 		_sharedSessionAttributesExcludes = new HashMap<String, String>();
 
-		for (String name : PropsValues.SHARED_SESSION_ATTRIBUTES_EXCLUDES) {
+		for (String name : PropsValues.SESSION_SHARED_ATTRIBUTES_EXCLUDES) {
 			_sharedSessionAttributesExcludes.put(name, name);
 		}
 	}

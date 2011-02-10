@@ -64,12 +64,12 @@ public class SharedSessionAttributeListener
 		String name = event.getName();
 
 		if (ArrayUtil.contains(
-				PropsValues.SHARED_SESSION_ATTRIBUTES_EXCLUDES, name)) {
+				PropsValues.SESSION_SHARED_ATTRIBUTES_EXCLUDES, name)) {
 
 			return;
 		}
 
-		for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
+		for (String sharedName : PropsValues.SESSION_SHARED_ATTRIBUTES) {
 			if (!name.startsWith(sharedName)) {
 				continue;
 			}
