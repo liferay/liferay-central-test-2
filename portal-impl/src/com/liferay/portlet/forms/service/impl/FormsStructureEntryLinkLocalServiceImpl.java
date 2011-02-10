@@ -59,8 +59,8 @@ public class FormsStructureEntryLinkLocalServiceImpl
 
 		FormsStructureEntryLink structureEntryLink =
 			formsStructureEntryLinkPersistence.findByPrimaryKey(
-				structureEntryLinkId); 
-		
+				structureEntryLinkId);
+
 		deleteStructureEntryLink(structureEntryLink);
 	}
 

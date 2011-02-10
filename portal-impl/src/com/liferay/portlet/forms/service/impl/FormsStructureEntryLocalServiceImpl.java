@@ -233,7 +233,7 @@ public class FormsStructureEntryLocalServiceImpl
 		structureEntry.setXsd(xsd);
 
 		formsStructureEntryPersistence.update(structureEntry, false);
-		
+
 		return structureEntry;
 	}
 
@@ -241,8 +241,8 @@ public class FormsStructureEntryLocalServiceImpl
 		throws PortalException {
 
 		for (Element element : elements) {
-			String elementName = element.getName(); 
-			
+			String elementName = element.getName();
+
 			if (elementName.equals("meta-data")) {
 				continue;
 			}
