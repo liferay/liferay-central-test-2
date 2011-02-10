@@ -590,7 +590,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 					<fileset
 						dir="lib/portal"
 						includes="log4j.jar,slf4j-api.jar,slf4j-log4j12.jar"
-						/>
+					/>
 				</copy>
 			</then>
 		</if>
