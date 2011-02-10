@@ -34,6 +34,17 @@ public class Modifications {
 	}
 
 	public ModificationItem addItem(
+		int modificationOp, BasicAttribute basicAttribute) {
+
+		ModificationItem item = new ModificationItem(
+			modificationOp, basicAttribute);
+
+		_items.add(item);
+
+		return item;
+	}
+
+	public ModificationItem addItem(
 		int modificationOp, String id, String value) {
 
 		BasicAttribute basicAttribute = new BasicAttribute(id);
@@ -42,12 +53,11 @@ public class Modifications {
 			basicAttribute.add(value);
 		}
 
-		ModificationItem item = new ModificationItem(
-			modificationOp, basicAttribute);
+		return addItem(modificationOp, basicAttribute);
+	}
 
-		_items.add(item);
-
-		return item;
+	public ModificationItem addItem(BasicAttribute basicAttribute) {
+		return addItem(DirContext.REPLACE_ATTRIBUTE, basicAttribute);
 	}
 
 	public ModificationItem addItem(String id, String value) {

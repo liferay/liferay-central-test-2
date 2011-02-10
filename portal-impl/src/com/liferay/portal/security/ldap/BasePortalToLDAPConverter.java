@@ -215,9 +215,23 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 		if (user.isPasswordModified() &&
 			Validator.isNotNull(user.getPasswordUnencrypted())) {
 
-			addModificationItem(
-				userMappings.getProperty(UserConverterKeys.PASSWORD),
-				user.getPasswordUnencrypted(), modifications);
+			String newPassword = user.getPasswordUnencrypted();
+
+			String passwordKey = userMappings.getProperty(
+				UserConverterKeys.PASSWORD);
+
+			if (passwordKey.equals("unicodePwd")) {
+				String newQuotedPassword = "\"" + newPassword + "\"";
+				byte[] newUnicodePassword =
+					newQuotedPassword.getBytes("UTF-16LE");
+
+				addModificationItem(
+					new BasicAttribute(passwordKey, newUnicodePassword),
+					modifications);
+			}
+			else {
+				addModificationItem(passwordKey, newPassword, modifications);
+			}
 		}
 
 		populateCustomAttributeModifications(
@@ -273,6 +287,15 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 			attributes.put(attributeName, attributeValue);
 		}
 	}
+
+	protected void addModificationItem(
+		BasicAttribute basicAttribute, Modifications modifications) {
+
+		if (Validator.isNotNull(basicAttribute)) {
+			modifications.addItem(basicAttribute);
+		}
+	}
+
 	protected void addModificationItem(
 		String attributeName, String attributeValue,
 		Modifications modifications) {
