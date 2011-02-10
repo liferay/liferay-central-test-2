@@ -1280,6 +1280,8 @@ public class PropsValues {
 
 	public static final String WIKI_PAGE_TITLES_REMOVE_REGEXP = PropsUtil.get(PropsKeys.WIKI_PAGE_TITLES_REMOVE_REGEXP);
 
+	public static final boolean XML_VALIDATION_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.XML_VALIDATION_ENABLED));
+
 	static {
 		if (!LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED) {
 			LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE = false;

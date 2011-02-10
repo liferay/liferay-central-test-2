@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.xml.SAXReader;
 import com.liferay.portal.kernel.xml.Text;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.util.EntityResolver;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.File;
@@ -413,6 +414,10 @@ public class SAXReaderImpl implements SAXReader {
 	protected org.dom4j.io.SAXReader getSAXReader(boolean validate) {
 		org.dom4j.io.SAXReader reader = null;
 
+		if (!PropsValues.XML_VALIDATION_ENABLED) {
+			validate = false;
+		}
+
 		try {
 			reader = new org.dom4j.io.SAXReader(new SAXParser(), validate);
 
@@ -423,6 +428,11 @@ public class SAXReaderImpl implements SAXReader {
 			reader.setFeature(
 				_FEATURES_VALIDATION_SCHEMA_FULL_CHECKING, validate);
 			reader.setFeature(_FEATURES_DYNAMIC, validate);
+
+			if (!validate) {
+				reader.setFeature(_FEATURES_LOAD_DTD_GRAMMAR, validate);
+				reader.setFeature(_FEATURES_LOAD_EXTERNAL_DTD, validate);
+			}
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -438,6 +448,15 @@ public class SAXReaderImpl implements SAXReader {
 		return reader;
 	}
 
+	private static final String _FEATURES_DYNAMIC =
+		"http://apache.org/xml/features/validation/dynamic";
+
+	private static final String _FEATURES_LOAD_DTD_GRAMMAR =
+		"http://apache.org/xml/features/nonvalidating/load-dtd-grammar";
+
+	private static final String _FEATURES_LOAD_EXTERNAL_DTD =
+		"http://apache.org/xml/features/nonvalidating/load-external-dtd";
+
 	private static final String _FEATURES_VALIDATION =
 		"http://xml.org/sax/features/validation";
 
@@ -446,9 +465,6 @@ public class SAXReaderImpl implements SAXReader {
 
 	private static final String _FEATURES_VALIDATION_SCHEMA_FULL_CHECKING =
 		"http://apache.org/xml/features/validation/schema-full-checking";
-
-	private static final String _FEATURES_DYNAMIC =
-		"http://apache.org/xml/features/validation/dynamic";
 
 	private static Log _log = LogFactoryUtil.getLog(SAXReaderImpl.class);
 

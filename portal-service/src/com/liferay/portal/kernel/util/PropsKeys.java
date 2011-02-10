@@ -1895,6 +1895,8 @@ public interface PropsKeys {
 
 	public static final String WIKI_RSS_ABSTRACT_LENGTH = "wiki.rss.abstract.length";
 
+	public static final String XML_VALIDATION_ENABLED = "xml.validation.enabled";
+
 	public static final String YM_LOGIN = "ym.login";
 
 	public static final String YM_PASSWORD = "ym.password";
