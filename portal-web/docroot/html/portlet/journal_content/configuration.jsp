@@ -160,6 +160,14 @@ type = ParamUtil.getString(request, "type", type);
 	for (int i = 0; i < results.size(); i++) {
 		JournalArticle curArticle = (JournalArticle)results.get(i);
 
+			if (!JournalArticlePermission.contains(permissionChecker, curArticle, ActionKeys.VIEW)) {
+				if (searchContainer != null) {
+					searchContainer.setTotal(searchContainer.getTotal() - 1);
+				}
+
+				continue;
+			}
+
 		curArticle = curArticle.toEscapedModel();
 
 		ResultRow row = new ResultRow(null, curArticle.getArticleId() + EditArticleAction.VERSION_SEPARATOR + curArticle.getVersion(), i);
