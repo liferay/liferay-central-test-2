@@ -2085,7 +2085,7 @@
 	</library>
 	<library>
 		<file-name>portal/jruby.jar</file-name>
-		<version>1.5.1</version>
+		<version>1.5.6</version>
 		<project-name>JRuby</project-name>
 		<project-url>http://jruby.codehaus.org</project-url>
 		<licenses>
