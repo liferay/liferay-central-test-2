@@ -76,8 +76,10 @@ import org.apache.commons.httpclient.methods.PutMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HostParams;
+import org.apache.commons.httpclient.params.HttpClientParams;
 import org.apache.commons.httpclient.params.HttpConnectionManagerParams;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
+import org.apache.commons.httpclient.params.HttpMethodParams;
 
 /**
  * @author Brian Wing Shun Chan
@@ -141,7 +143,9 @@ public class HttpImpl implements Http {
 				authPrefs.add(AuthPolicy.DIGEST);
 			}
 
-			_proxyHttpClient.getParams().setParameter(
+			HttpClientParams httpClientParams = _proxyHttpClient.getParams();
+
+			httpClientParams.setParameter(
 				AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 		}
 	}
@@ -1070,7 +1074,9 @@ public class HttpImpl implements Http {
 
 				httpState.addCookies(commonsCookies);
 
-				httpMethod.getParams().setCookiePolicy(
+				HttpMethodParams httpMethodParams = httpMethod.getParams();
+
+				httpMethodParams.setCookiePolicy(
 					CookiePolicy.BROWSER_COMPATIBILITY);
 			}
 
