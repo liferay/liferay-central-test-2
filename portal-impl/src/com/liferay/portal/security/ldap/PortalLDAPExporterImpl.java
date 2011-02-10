@@ -16,12 +16,14 @@ package com.liferay.portal.security.ldap;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.AuthSettingsUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
 
 import java.io.Serializable;
 
@@ -31,6 +33,7 @@ import java.util.Properties;
 import javax.naming.Binding;
 import javax.naming.CompositeName;
 import javax.naming.Name;
+import javax.naming.NameNotFoundException;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.ModificationItem;
 import javax.naming.ldap.LdapContext;
@@ -172,8 +175,18 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 			ldapContext.modifyAttributes(name, modificationItems);
 		}
+		catch (NameNotFoundException nnfe) {
+			if (PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.LDAP_AUTH_REQUIRED)) {
+
+				throw nnfe;
+			}
+			else {
+				_log.error(nnfe, nnfe);
+			}
+		}
 		catch (Exception e) {
-			_log.error(e, e);
+			throw e;
 		}
 		finally {
 			if (ldapContext != null) {
