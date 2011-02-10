@@ -177,13 +177,12 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		}
 		catch (NameNotFoundException nnfe) {
 			if (PrefsPropsUtil.getBoolean(
-				companyId, PropsKeys.LDAP_AUTH_REQUIRED)) {
+					companyId, PropsKeys.LDAP_AUTH_REQUIRED)) {
 
 				throw nnfe;
 			}
-			else {
-				_log.error(nnfe, nnfe);
-			}
+
+			_log.error(nnfe, nnfe);
 		}
 		catch (Exception e) {
 			throw e;
