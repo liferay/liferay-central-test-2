@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.ServiceContext;
 
@@ -42,11 +41,6 @@ public interface Repository {
 			long parentFolderId, String title, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
-
-	public void addRepository(
-			long groupId, String name, String description, String portletKey,
-			UnicodeProperties typeSettingsProperties)
-		throws RepositoryException;
 
 	public Folder copyFolder(
 			long sourceFolderId, long parentFolderId, String title,
@@ -179,10 +173,6 @@ public interface Repository {
 			long folderId, long parentFolderId, String title,
 			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException;
-
-	public UnicodeProperties updateRepository(
-			UnicodeProperties typeSettingsProperties)
-		throws RepositoryException;
 
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException;

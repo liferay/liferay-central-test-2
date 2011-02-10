@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
@@ -76,11 +75,6 @@ public class LiferayRepository
 		return new LiferayFolder(dlFolder);
 	}
 
-	public void addRepository(
-		long groupId, String name, String description, String portletKey,
-		UnicodeProperties typeSettingsProperties) {
-	}
-
 	public Folder copyFolder(
 			long sourceFolderId, long parentFolderId, String title,
 			String description, ServiceContext serviceContext)
@@ -103,7 +97,7 @@ public class LiferayRepository
 	 *
 	 * @see LiferayLocalRepository#deleteAll()
 	 */
-	public void deleteAll() {
+	public void deleteAll() throws PortalException, SystemException {
 		throw new UnsupportedOperationException();
 	}
 
@@ -403,12 +397,6 @@ public class LiferayRepository
 			description, serviceContext);
 
 		return new LiferayFolder(dlFolder);
-	}
-
-	public UnicodeProperties updateRepository(
-		UnicodeProperties typeSettingsProperties) {
-
-		return new UnicodeProperties();
 	}
 
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)

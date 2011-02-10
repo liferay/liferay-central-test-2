@@ -43,6 +43,7 @@
 	<import class="com.liferay.portal.model.Region" />
 	<import class="com.liferay.portal.model.Release" />
 	<import class="com.liferay.portal.model.Repository" />
+	<import class="com.liferay.portal.model.RepositoryEntry" />
 	<import class="com.liferay.portal.model.Resource" />
 	<import class="com.liferay.portal.model.ResourceAction" />
 	<import class="com.liferay.portal.model.ResourceCode" />
@@ -704,6 +705,14 @@
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="typeSettings" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="dlFolderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.RepositoryEntryImpl" table="RepositoryEntry">
+		<cache usage="read-write" />
+		<id name="entryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="repositoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="mappedId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.ResourceImpl" table="Resource_">
 		<cache usage="read-write" />

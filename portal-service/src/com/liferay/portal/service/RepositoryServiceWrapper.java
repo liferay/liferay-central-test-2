@@ -91,6 +91,17 @@ public class RepositoryServiceWrapper implements RepositoryService {
 			fileVersionId);
 	}
 
+	public java.lang.String[] getSupportedConfigurations(int type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _repositoryService.getSupportedConfigurations(type);
+	}
+
+	public java.lang.String[] getSupportedParameters(int type,
+		java.lang.String configuration)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _repositoryService.getSupportedParameters(type, configuration);
+	}
+
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties(
 		long repositoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -99,12 +110,10 @@ public class RepositoryServiceWrapper implements RepositoryService {
 	}
 
 	public void updateRepository(long repositoryId, java.lang.String name,
-		java.lang.String description,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
+		java.lang.String description)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_repositoryService.updateRepository(repositoryId, name, description,
-			typeSettingsProperties);
+		_repositoryService.updateRepository(repositoryId, name, description);
 	}
 
 	public RepositoryService getWrappedRepositoryService() {

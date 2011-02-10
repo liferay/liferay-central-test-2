@@ -728,6 +728,14 @@
 			<transient name="primaryKey" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.RepositoryEntryModelImpl">
+		<attributes>
+			<id name="entryId" />
+			<basic name="repositoryId" />
+			<basic name="mappedId" />
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.ResourceModelImpl">
 		<attributes>
 			<id name="resourceId" />
@@ -3076,6 +3084,10 @@
 		<attributes>
 			<transient name="typeSettingsProperties" />
 		</attributes>
+	</entity>
+	<entity class="com.liferay.portal.model.impl.RepositoryEntryImpl" name="RepositoryEntry">
+		<table name="RepositoryEntry" />
+		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.ResourceImpl" name="Resource">
 		<table name="Resource_" />

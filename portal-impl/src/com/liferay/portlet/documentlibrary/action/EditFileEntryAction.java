@@ -281,6 +281,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			String extension = FileUtil.getExtension(sourceFileName);
 
+			serviceContext.setAttribute("sourceFileName", sourceFileName);
 			serviceContext.setAttribute("extension", extension);
 
 			// Add file entry
@@ -297,6 +298,7 @@ public class EditFileEntryAction extends PortletAction {
 			if (Validator.isNotNull(sourceFileName)) {
 				String extension = FileUtil.getExtension(sourceFileName);
 
+				serviceContext.setAttribute("sourceFileName", sourceFileName);
 				serviceContext.setAttribute("extension", extension);
 			}
 

@@ -152,6 +152,12 @@ create table Repository (
 	dlFolderId LONG
 );
 
+create table RepositoryEntry (
+	entryId LONG not null primary key,
+	repositoryId LONG,
+	mappedId VARCHAR(75) null
+);
+
 alter table SocialEquityLog add extraData VARCHAR(255) null;
 
 alter table User_ add status int;

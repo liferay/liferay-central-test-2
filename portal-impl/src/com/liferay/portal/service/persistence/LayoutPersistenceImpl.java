@@ -6076,6 +6076,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	protected ReleasePersistence releasePersistence;
 	@BeanReference(type = RepositoryPersistence.class)
 	protected RepositoryPersistence repositoryPersistence;
+	@BeanReference(type = RepositoryEntryPersistence.class)
+	protected RepositoryEntryPersistence repositoryEntryPersistence;
 	@BeanReference(type = ResourcePersistence.class)
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = ResourceActionPersistence.class)

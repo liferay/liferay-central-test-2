@@ -144,6 +144,8 @@ public class WebServerServlet extends HttpServlet {
 			user = _getUser(request);
 
 			PrincipalThreadLocal.setName(user.getUserId());
+			PrincipalThreadLocal.setPassword(PortalUtil.getUserPassword(
+				request));
 
 			PermissionChecker permissionChecker =
 				PermissionCheckerFactoryUtil.create(user, true);

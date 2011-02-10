@@ -1259,6 +1259,12 @@ create table Repository (
 	dlFolderId LONG
 );
 
+create table RepositoryEntry (
+	entryId LONG not null primary key,
+	repositoryId LONG,
+	mappedId VARCHAR(75) null
+);
+
 create table Resource_ (
 	resourceId LONG not null primary key,
 	codeId LONG,

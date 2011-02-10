@@ -174,12 +174,55 @@ public class RepositoryServiceSoap {
 		}
 	}
 
+	public static java.lang.String[] getSupportedConfigurations(int type)
+		throws RemoteException {
+		try {
+			java.lang.String[] returnValue = RepositoryServiceUtil.getSupportedConfigurations(type);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String[] getSupportedParameters(int type,
+		java.lang.String configuration) throws RemoteException {
+		try {
+			java.lang.String[] returnValue = RepositoryServiceUtil.getSupportedParameters(type,
+					configuration);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties(
 		long repositoryId) throws RemoteException {
 		try {
 			com.liferay.portal.kernel.util.UnicodeProperties returnValue = RepositoryServiceUtil.getTypeSettingsProperties(repositoryId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void updateRepository(long repositoryId,
+		java.lang.String name, java.lang.String description)
+		throws RemoteException {
+		try {
+			RepositoryServiceUtil.updateRepository(repositoryId, name,
+				description);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -160,6 +160,7 @@ import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.RegionPersistence;
 import com.liferay.portal.service.persistence.ReleasePersistence;
+import com.liferay.portal.service.persistence.RepositoryEntryPersistence;
 import com.liferay.portal.service.persistence.RepositoryPersistence;
 import com.liferay.portal.service.persistence.ResourceActionPersistence;
 import com.liferay.portal.service.persistence.ResourceCodePersistence;
@@ -2323,6 +2324,25 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the repository entry persistence.
+	 *
+	 * @return the repository entry persistence
+	 */
+	public RepositoryEntryPersistence getRepositoryEntryPersistence() {
+		return repositoryEntryPersistence;
+	}
+
+	/**
+	 * Sets the repository entry persistence.
+	 *
+	 * @param repositoryEntryPersistence the repository entry persistence
+	 */
+	public void setRepositoryEntryPersistence(
+		RepositoryEntryPersistence repositoryEntryPersistence) {
+		this.repositoryEntryPersistence = repositoryEntryPersistence;
+	}
+
+	/**
 	 * Gets the resource local service.
 	 *
 	 * @return the resource local service
@@ -3718,6 +3738,8 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 	protected RepositoryService repositoryService;
 	@BeanReference(type = RepositoryPersistence.class)
 	protected RepositoryPersistence repositoryPersistence;
+	@BeanReference(type = RepositoryEntryPersistence.class)
+	protected RepositoryEntryPersistence repositoryEntryPersistence;
 	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(type = ResourceService.class)

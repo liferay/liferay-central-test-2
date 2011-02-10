@@ -354,6 +354,71 @@ public class RepositoryServiceHttp {
 		}
 	}
 
+	public static java.lang.String[] getSupportedConfigurations(
+		HttpPrincipal httpPrincipal, int type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
+					"getSupportedConfigurations",
+					_getSupportedConfigurationsParameterTypes9);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, type);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.lang.String[])returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.lang.String[] getSupportedParameters(
+		HttpPrincipal httpPrincipal, int type, java.lang.String configuration)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
+					"getSupportedParameters",
+					_getSupportedParametersParameterTypes10);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, type,
+					configuration);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (java.lang.String[])returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties(
 		HttpPrincipal httpPrincipal, long repositoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -361,7 +426,7 @@ public class RepositoryServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
 					"getTypeSettingsProperties",
-					_getTypeSettingsPropertiesParameterTypes9);
+					_getTypeSettingsPropertiesParameterTypes11);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
 					repositoryId);
@@ -393,16 +458,15 @@ public class RepositoryServiceHttp {
 	}
 
 	public static void updateRepository(HttpPrincipal httpPrincipal,
-		long repositoryId, java.lang.String name, java.lang.String description,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
+		long repositoryId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
-					"updateRepository", _updateRepositoryParameterTypes10);
+					"updateRepository", _updateRepositoryParameterTypes12);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId, name, description, typeSettingsProperties);
+					repositoryId, name, description);
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodHandler);
@@ -456,11 +520,16 @@ public class RepositoryServiceHttp {
 	private static final Class<?>[] _getRepositoryImplParameterTypes8 = new Class[] {
 			long.class, long.class, long.class
 		};
-	private static final Class<?>[] _getTypeSettingsPropertiesParameterTypes9 = new Class[] {
+	private static final Class<?>[] _getSupportedConfigurationsParameterTypes9 = new Class[] {
+			int.class
+		};
+	private static final Class<?>[] _getSupportedParametersParameterTypes10 = new Class[] {
+			int.class, java.lang.String.class
+		};
+	private static final Class<?>[] _getTypeSettingsPropertiesParameterTypes11 = new Class[] {
 			long.class
 		};
-	private static final Class<?>[] _updateRepositoryParameterTypes10 = new Class[] {
-			long.class, java.lang.String.class, java.lang.String.class,
-			com.liferay.portal.kernel.util.UnicodeProperties.class
+	private static final Class<?>[] _updateRepositoryParameterTypes12 = new Class[] {
+			long.class, java.lang.String.class, java.lang.String.class
 		};
 }

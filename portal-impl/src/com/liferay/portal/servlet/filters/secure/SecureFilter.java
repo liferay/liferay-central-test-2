@@ -293,6 +293,8 @@ public class SecureFilter extends BasePortalFilter {
 
 		if (_usePermissionChecker) {
 			PrincipalThreadLocal.setName(userId);
+			PrincipalThreadLocal.setPassword(PortalUtil.getUserPassword(
+				request));
 
 			PermissionChecker permissionChecker =
 				PermissionCheckerFactoryUtil.create(user, false);

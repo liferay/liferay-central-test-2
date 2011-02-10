@@ -289,6 +289,8 @@ Liferay.Service.registerClass(
 		getLocalRepositoryImpl: true,
 		getRepository: true,
 		getRepositoryImpl: true,
+		getSupportedConfigurations: true,
+		getSupportedParameters: true,
 		getTypeSettingsProperties: true,
 		updateRepository: true
 	}

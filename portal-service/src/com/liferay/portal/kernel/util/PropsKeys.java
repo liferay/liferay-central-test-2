@@ -559,6 +559,8 @@ public interface PropsKeys {
 
 	public static final String DL_PUBLISH_TO_LIVE_BY_DEFAULT = "dl.publish.to.live.by.default";
 
+	public static final String DL_REPOSITORY_IMPL = "dl.repository.impl";
+
 	public static final String DL_WEBDAV_HOLD_LOCK = "dl.webdav.hold.lock";
 
 	public static final String DL_WEBDAV_SAVE_TO_SINGLE_VERSION = "dl.webdav.save.to.single.version";

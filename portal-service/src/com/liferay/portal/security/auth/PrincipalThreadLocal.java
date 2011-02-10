@@ -33,6 +33,16 @@ public class PrincipalThreadLocal {
 		return name;
 	}
 
+	public static String getPassword() {
+		String password = _password.get();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("getPassword " + password);
+		}
+
+		return password;
+	}
+
 	public static void setName(long name) {
 		setName(String.valueOf(name));
 	}
@@ -45,9 +55,21 @@ public class PrincipalThreadLocal {
 		_name.set(name);
 	}
 
+	public static void setPassword(String password) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("setPassword " + password);
+		}
+
+		_password.set(password);
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PrincipalThreadLocal.class);
 
 	private static ThreadLocal<String> _name =
 		new AutoResetThreadLocal<String>(PrincipalThreadLocal.class + "._name");
+
+	private static ThreadLocal<String> _password =
+		new AutoResetThreadLocal<String>(PrincipalThreadLocal.class +
+			"._password");
 
 }

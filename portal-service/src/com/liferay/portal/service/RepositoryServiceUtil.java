@@ -102,6 +102,17 @@ public class RepositoryServiceUtil {
 				   .getRepositoryImpl(folderId, fileEntryId, fileVersionId);
 	}
 
+	public static java.lang.String[] getSupportedConfigurations(int type)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSupportedConfigurations(type);
+	}
+
+	public static java.lang.String[] getSupportedParameters(int type,
+		java.lang.String configuration)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getSupportedParameters(type, configuration);
+	}
+
 	public static com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties(
 		long repositoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -110,13 +121,10 @@ public class RepositoryServiceUtil {
 	}
 
 	public static void updateRepository(long repositoryId,
-		java.lang.String name, java.lang.String description,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
+		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.updateRepository(repositoryId, name, description,
-			typeSettingsProperties);
+		getService().updateRepository(repositoryId, name, description);
 	}
 
 	public static RepositoryService getService() {
