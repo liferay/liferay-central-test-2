@@ -1328,14 +1328,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			group.getCompanyId(), RoleConstants.USER);
 
 		List<Portlet> portlets = portletLocalService.getPortlets(
-			group.getCompanyId());
+			group.getCompanyId(), false, false);
 
 		for (Portlet portlet : portlets) {
-			if (!portlet.isSystem()) {
-				setRolePermissions(
-					group, role, portlet.getPortletId(),
-					new String[] {ActionKeys.VIEW});
-			}
+			setRolePermissions(
+				group, role, portlet.getPortletId(),
+				new String[] {ActionKeys.VIEW});
 		}
 
 		setRolePermissions(
@@ -1364,9 +1362,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				ResourceActionsUtil.getPortletResourceActions(
 					portlet.getPortletId());
 
-			if (!portlet.isSystem() &&
-				actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
-
+			if (actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
 				setRolePermissions(
 					group, role, portlet.getPortletId(),
 					new String[] {ActionKeys.ACCESS_IN_CONTROL_PANEL});
