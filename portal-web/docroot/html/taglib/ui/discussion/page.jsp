@@ -501,7 +501,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 	loginURL.setParameter("struts_action", "/login/login");
 	%>
 
-	<aui:script use="aui-event-input">
+	<aui:script>
 		function <%= randomNamespace %>deleteMessage(i) {
 			eval("var messageId = document.<%= namespace %><%= formName %>.<%= namespace %>messageId" + i + ".value;");
 
@@ -560,7 +560,9 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			document.<%= namespace %><%= formName %>.<%= namespace %>messageId.value = messageId;
 			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
 		}
+	</aui:script>
 
+	<aui:script use="aui-event-input">
 		Liferay.provide(
 			window,
 			'<%= randomNamespace %>afterLogin',
