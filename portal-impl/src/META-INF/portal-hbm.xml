@@ -708,7 +708,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.RepositoryEntryImpl" table="RepositoryEntry">
 		<cache usage="read-write" />
-		<id name="entryId" type="long">
+		<id name="repositoryEntryId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="repositoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />

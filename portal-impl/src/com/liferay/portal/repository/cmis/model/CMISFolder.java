@@ -35,42 +35,19 @@ public class CMISFolder extends CMISModel implements Folder {
 
 	public CMISFolder(
 		CMISRepository cmisRepository, long repositoryId, long folderId,
-		org.apache.chemistry.opencmis.client.api.Folder folder) {
+		org.apache.chemistry.opencmis.client.api.Folder cmisFolder) {
 
 		_cmisRepository = cmisRepository;
 		_repositoryId = repositoryId;
 		_folderId = folderId;
-		_folder = folder;
+		_cmisFolder = cmisFolder;
 	}
 
-	public Map<String, Serializable> getAttributes() {
+	public List<Folder> getAncestors() {
 		return null;
 	}
 
-	public String getDescription() {
-		return getDescription((CmisObject)getModel());
-	}
-
-	public Object getModel() {
-		return _folder;
-	}
-
-	public long getPrimaryKey() {
-		return _folderId;
-	}
-
-	public boolean isEscapedModel() {
-		return false;
-	}
-
-	public void prepare() throws SystemException {
-	}
-
-	public Folder toEscapedModel() {
-		return this;
-	}
-
-	public List<Folder> getAncestors() throws PortalException, SystemException {
+	public Map<String, Serializable> getAttributes() {
 		return null;
 	}
 
@@ -79,7 +56,11 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public Date getCreateDate() {
-		return _folder.getCreationDate().getTime();
+		return _cmisFolder.getCreationDate().getTime();
+	}
+
+	public String getDescription() {
+		return getDescription((CmisObject)getModel());
 	}
 
 	public long getFolderId() {
@@ -91,31 +72,39 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public Date getLastPostDate() {
-		return _folder.getLastModificationDate().getTime();
+		return _cmisFolder.getLastModificationDate().getTime();
+	}
+
+	public Object getModel() {
+		return _cmisFolder;
 	}
 
 	public Date getModifiedDate() {
-		return _folder.getLastModificationDate().getTime();
+		return _cmisFolder.getLastModificationDate().getTime();
 	}
 
 	public String getName() {
-		return _folder.getName();
+		return _cmisFolder.getName();
 	}
 
 	public Folder getParentFolder() throws PortalException, SystemException {
-		return _cmisRepository.toFolder(_folder.getParents().get(0));
+		return _cmisRepository.toFolder(_cmisFolder.getParents().get(0));
 	}
 
 	public long getParentFolderId() {
 		return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 	}
 
-	public String getPath() throws PortalException, SystemException {
+	public String getPath() {
 		return null;
 	}
 
-	public String[] getPathArray() throws PortalException, SystemException {
+	public String[] getPathArray() {
 		return null;
+	}
+
+	public long getPrimaryKey() {
+		return _folderId;
 	}
 
 	public long getRepositoryId() {
@@ -127,15 +116,15 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public String getUserName() {
-		return _folder.getCreatedBy();
+		return _cmisFolder.getCreatedBy();
 	}
 
-	public String getUserUuid() throws SystemException {
+	public String getUserUuid() {
 		return null;
 	}
 
 	public String getUuid() {
-		return _folder.getId();
+		return _cmisFolder.getId();
 	}
 
 	public boolean hasInheritableLock() {
@@ -147,6 +136,10 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public boolean isDefaultRepository() {
+		return false;
+	}
+
+	public boolean isEscapedModel() {
 		return false;
 	}
 
@@ -162,12 +155,16 @@ public class CMISFolder extends CMISModel implements Folder {
 		return false;
 	}
 
+	public void prepare() {
+	}
+
+	public Folder toEscapedModel() {
+		return this;
+	}
+
+	private org.apache.chemistry.opencmis.client.api.Folder _cmisFolder;
 	private CMISRepository _cmisRepository;
-
-	private org.apache.chemistry.opencmis.client.api.Folder _folder;
-
 	private long _folderId;
-
 	private long _repositoryId;
 
 }

@@ -56,18 +56,18 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	public void setPrimaryKey(long pk);
 
 	/**
-	 * Gets the entry ID of this repository entry.
+	 * Gets the repository entry ID of this repository entry.
 	 *
-	 * @return the entry ID of this repository entry
+	 * @return the repository entry ID of this repository entry
 	 */
-	public long getEntryId();
+	public long getRepositoryEntryId();
 
 	/**
-	 * Sets the entry ID of this repository entry.
+	 * Sets the repository entry ID of this repository entry.
 	 *
-	 * @param entryId the entry ID of this repository entry
+	 * @param repositoryEntryId the repository entry ID of this repository entry
 	 */
-	public void setEntryId(long entryId);
+	public void setRepositoryEntryId(long repositoryEntryId);
 
 	/**
 	 * Gets the repository ID of this repository entry.

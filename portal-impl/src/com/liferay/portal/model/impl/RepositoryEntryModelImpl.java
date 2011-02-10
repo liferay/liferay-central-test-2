@@ -53,11 +53,11 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	 */
 	public static final String TABLE_NAME = "RepositoryEntry";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "entryId", Types.BIGINT },
+			{ "repositoryEntryId", Types.BIGINT },
 			{ "repositoryId", Types.BIGINT },
 			{ "mappedId", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table RepositoryEntry (entryId LONG not null primary key,repositoryId LONG,mappedId VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table RepositoryEntry (repositoryEntryId LONG not null primary key,repositoryId LONG,mappedId VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table RepositoryEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -75,23 +75,23 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	}
 
 	public long getPrimaryKey() {
-		return _entryId;
+		return _repositoryEntryId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setEntryId(pk);
+		setRepositoryEntryId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_entryId);
+		return new Long(_repositoryEntryId);
 	}
 
-	public long getEntryId() {
-		return _entryId;
+	public long getRepositoryEntryId() {
+		return _repositoryEntryId;
 	}
 
-	public void setEntryId(long entryId) {
-		_entryId = entryId;
+	public void setRepositoryEntryId(long repositoryEntryId) {
+		_repositoryEntryId = repositoryEntryId;
 	}
 
 	public long getRepositoryId() {
@@ -160,7 +160,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	public Object clone() {
 		RepositoryEntryImpl clone = new RepositoryEntryImpl();
 
-		clone.setEntryId(getEntryId());
+		clone.setRepositoryEntryId(getRepositoryEntryId());
 		clone.setRepositoryId(getRepositoryId());
 		clone.setMappedId(getMappedId());
 
@@ -212,8 +212,8 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("{entryId=");
-		sb.append(getEntryId());
+		sb.append("{repositoryEntryId=");
+		sb.append(getRepositoryEntryId());
 		sb.append(", repositoryId=");
 		sb.append(getRepositoryId());
 		sb.append(", mappedId=");
@@ -231,8 +231,8 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		sb.append("</model-name>");
 
 		sb.append(
-			"<column><column-name>entryId</column-name><column-value><![CDATA[");
-		sb.append(getEntryId());
+			"<column><column-name>repositoryEntryId</column-name><column-value><![CDATA[");
+		sb.append(getRepositoryEntryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>repositoryId</column-name><column-value><![CDATA[");
@@ -248,7 +248,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return sb.toString();
 	}
 
-	private long _entryId;
+	private long _repositoryEntryId;
 	private long _repositoryId;
 	private long _originalRepositoryId;
 	private boolean _setOriginalRepositoryId;

@@ -55,20 +55,22 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	/**
 	* Creates a new repository entry with the primary key. Does not add the repository entry to the database.
 	*
-	* @param entryId the primary key for the new repository entry
+	* @param repositoryEntryId the primary key for the new repository entry
 	* @return the new repository entry
 	*/
-	public com.liferay.portal.model.RepositoryEntry create(long entryId);
+	public com.liferay.portal.model.RepositoryEntry create(
+		long repositoryEntryId);
 
 	/**
 	* Removes the repository entry with the primary key from the database. Also notifies the appropriate model listeners.
 	*
-	* @param entryId the primary key of the repository entry to remove
+	* @param repositoryEntryId the primary key of the repository entry to remove
 	* @return the repository entry that was removed
 	* @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portal.model.RepositoryEntry remove(long entryId)
+	public com.liferay.portal.model.RepositoryEntry remove(
+		long repositoryEntryId)
 		throws com.liferay.portal.NoSuchRepositoryEntryException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -79,25 +81,25 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	/**
 	* Finds the repository entry with the primary key or throws a {@link com.liferay.portal.NoSuchRepositoryEntryException} if it could not be found.
 	*
-	* @param entryId the primary key of the repository entry to find
+	* @param repositoryEntryId the primary key of the repository entry to find
 	* @return the repository entry
 	* @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.RepositoryEntry findByPrimaryKey(
-		long entryId)
+		long repositoryEntryId)
 		throws com.liferay.portal.NoSuchRepositoryEntryException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Finds the repository entry with the primary key or returns <code>null</code> if it could not be found.
 	*
-	* @param entryId the primary key of the repository entry to find
+	* @param repositoryEntryId the primary key of the repository entry to find
 	* @return the repository entry, or <code>null</code> if a repository entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.RepositoryEntry fetchByPrimaryKey(
-		long entryId)
+		long repositoryEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -192,7 +194,7 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	* </p>
 	*
-	* @param entryId the primary key of the current repository entry
+	* @param repositoryEntryId the primary key of the current repository entry
 	* @param repositoryId the repository ID to search with
 	* @param orderByComparator the comparator to order the set by
 	* @return the previous, current, and next repository entry
@@ -200,7 +202,7 @@ public interface RepositoryEntryPersistence extends BasePersistence<RepositoryEn
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.RepositoryEntry[] findByRepositoryId_PrevAndNext(
-		long entryId, long repositoryId,
+		long repositoryEntryId, long repositoryId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.NoSuchRepositoryEntryException,
 			com.liferay.portal.kernel.exception.SystemException;

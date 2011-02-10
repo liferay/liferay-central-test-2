@@ -167,14 +167,14 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Creates a new repository entry with the primary key. Does not add the repository entry to the database.
 	 *
-	 * @param entryId the primary key for the new repository entry
+	 * @param repositoryEntryId the primary key for the new repository entry
 	 * @return the new repository entry
 	 */
-	public RepositoryEntry create(long entryId) {
+	public RepositoryEntry create(long repositoryEntryId) {
 		RepositoryEntry repositoryEntry = new RepositoryEntryImpl();
 
 		repositoryEntry.setNew(true);
-		repositoryEntry.setPrimaryKey(entryId);
+		repositoryEntry.setPrimaryKey(repositoryEntryId);
 
 		return repositoryEntry;
 	}
@@ -195,12 +195,12 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Removes the repository entry with the primary key from the database. Also notifies the appropriate model listeners.
 	 *
-	 * @param entryId the primary key of the repository entry to remove
+	 * @param repositoryEntryId the primary key of the repository entry to remove
 	 * @return the repository entry that was removed
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public RepositoryEntry remove(long entryId)
+	public RepositoryEntry remove(long repositoryEntryId)
 		throws NoSuchRepositoryEntryException, SystemException {
 		Session session = null;
 
@@ -208,15 +208,16 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 			session = openSession();
 
 			RepositoryEntry repositoryEntry = (RepositoryEntry)session.get(RepositoryEntryImpl.class,
-					new Long(entryId));
+					new Long(repositoryEntryId));
 
 			if (repositoryEntry == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + entryId);
+					_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
+						repositoryEntryId);
 				}
 
 				throw new NoSuchRepositoryEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-					entryId);
+					repositoryEntryId);
 			}
 
 			return repositoryEntryPersistence.remove(repositoryEntry);
@@ -347,7 +348,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 		repositoryEntryImpl.setNew(repositoryEntry.isNew());
 		repositoryEntryImpl.setPrimaryKey(repositoryEntry.getPrimaryKey());
 
-		repositoryEntryImpl.setEntryId(repositoryEntry.getEntryId());
+		repositoryEntryImpl.setRepositoryEntryId(repositoryEntry.getRepositoryEntryId());
 		repositoryEntryImpl.setRepositoryId(repositoryEntry.getRepositoryId());
 		repositoryEntryImpl.setMappedId(repositoryEntry.getMappedId());
 
@@ -370,22 +371,22 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Finds the repository entry with the primary key or throws a {@link com.liferay.portal.NoSuchRepositoryEntryException} if it could not be found.
 	 *
-	 * @param entryId the primary key of the repository entry to find
+	 * @param repositoryEntryId the primary key of the repository entry to find
 	 * @return the repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public RepositoryEntry findByPrimaryKey(long entryId)
+	public RepositoryEntry findByPrimaryKey(long repositoryEntryId)
 		throws NoSuchRepositoryEntryException, SystemException {
-		RepositoryEntry repositoryEntry = fetchByPrimaryKey(entryId);
+		RepositoryEntry repositoryEntry = fetchByPrimaryKey(repositoryEntryId);
 
 		if (repositoryEntry == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + entryId);
+				_log.warn(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY + repositoryEntryId);
 			}
 
 			throw new NoSuchRepositoryEntryException(_NO_SUCH_ENTITY_WITH_PRIMARY_KEY +
-				entryId);
+				repositoryEntryId);
 		}
 
 		return repositoryEntry;
@@ -406,14 +407,14 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	/**
 	 * Finds the repository entry with the primary key or returns <code>null</code> if it could not be found.
 	 *
-	 * @param entryId the primary key of the repository entry to find
+	 * @param repositoryEntryId the primary key of the repository entry to find
 	 * @return the repository entry, or <code>null</code> if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public RepositoryEntry fetchByPrimaryKey(long entryId)
+	public RepositoryEntry fetchByPrimaryKey(long repositoryEntryId)
 		throws SystemException {
 		RepositoryEntry repositoryEntry = (RepositoryEntry)EntityCacheUtil.getResult(RepositoryEntryModelImpl.ENTITY_CACHE_ENABLED,
-				RepositoryEntryImpl.class, entryId, this);
+				RepositoryEntryImpl.class, repositoryEntryId, this);
 
 		if (repositoryEntry == null) {
 			Session session = null;
@@ -422,7 +423,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 				session = openSession();
 
 				repositoryEntry = (RepositoryEntry)session.get(RepositoryEntryImpl.class,
-						new Long(entryId));
+						new Long(repositoryEntryId));
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -636,17 +637,18 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
 	 * </p>
 	 *
-	 * @param entryId the primary key of the current repository entry
+	 * @param repositoryEntryId the primary key of the current repository entry
 	 * @param repositoryId the repository ID to search with
 	 * @param orderByComparator the comparator to order the set by
 	 * @return the previous, current, and next repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public RepositoryEntry[] findByRepositoryId_PrevAndNext(long entryId,
-		long repositoryId, OrderByComparator orderByComparator)
+	public RepositoryEntry[] findByRepositoryId_PrevAndNext(
+		long repositoryEntryId, long repositoryId,
+		OrderByComparator orderByComparator)
 		throws NoSuchRepositoryEntryException, SystemException {
-		RepositoryEntry repositoryEntry = findByPrimaryKey(entryId);
+		RepositoryEntry repositoryEntry = findByPrimaryKey(repositoryEntryId);
 
 		Session session = null;
 

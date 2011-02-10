@@ -14,6 +14,7 @@
 
 package com.liferay.portal.repository.cmis;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -27,6 +28,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.RepositoryEntry;
@@ -39,6 +41,7 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.persistence.RepositoryEntryUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
@@ -117,27 +120,27 @@ public class CMISRepository extends BaseRepositoryImpl {
 	public static final String WEBSERVICES_VERSIONING_SERVICE =
 		"WEBSERVICES_VERSIONING_SERVICE";
 
-	public static final String[] SUPPORTED_CONFIGURATIONS = new String[] {
-			CONFIGURATION_ATOMPUB, CONFIGURATION_WEBSERVICES
-		};
+	public static final String[] SUPPORTED_CONFIGURATIONS = {
+		CONFIGURATION_ATOMPUB, CONFIGURATION_WEBSERVICES
+	};
 
-	public static final String[][] SUPPORTED_PARAMETERS = new String[][] {
-			new String[] {
-				ATOMPUB_URL, REPOSITORY_ID
-			},
-			new String[] {
-				REPOSITORY_ID, WEBSERVICES_ACL_SERVICE,
-				WEBSERVICES_DISCOVERY_SERVICE, WEBSERVICES_MULTIFILING_SERVICE,
-				WEBSERVICES_NAVIGATION_SERVICE, WEBSERVICES_OBJECT_SERVICE,
-				WEBSERVICES_POLICY_SERVICE, WEBSERVICES_RELATIONSHIP_SERVICE,
-				WEBSERVICES_REPOSITORY_SERVICE, WEBSERVICES_VERSIONING_SERVICE
-			}
-		};
+	public static final String[][] SUPPORTED_PARAMETERS = {
+		new String[] {
+			ATOMPUB_URL, REPOSITORY_ID
+		},
+		new String[] {
+			REPOSITORY_ID, WEBSERVICES_ACL_SERVICE,
+			WEBSERVICES_DISCOVERY_SERVICE, WEBSERVICES_MULTIFILING_SERVICE,
+			WEBSERVICES_NAVIGATION_SERVICE, WEBSERVICES_OBJECT_SERVICE,
+			WEBSERVICES_POLICY_SERVICE, WEBSERVICES_RELATIONSHIP_SERVICE,
+			WEBSERVICES_REPOSITORY_SERVICE, WEBSERVICES_VERSIONING_SERVICE
+		}
+	};
 
 	public FileEntry addFileEntry(
 			long folderId, String title, String description, String changeLog,
 			InputStream is, long size, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// TODO add description and other metadata
 
@@ -147,7 +150,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 				getCmisFolder(session, folderId);
 
-			if (hasTitle(session, cmisFolder, title)) {
+			if (hasTitle(cmisFolder, title)) {
 				throw new DuplicateFileException(title);
 			}
 
@@ -177,7 +180,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 	public Folder addFolder(
 			long parentFolderId, String title, String description,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		// TODO add description and other metadata
 
@@ -187,7 +190,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 				getCmisFolder(session, parentFolderId);
 
-			if (hasTitle(session, cmisFolder, title)) {
+			if (hasTitle(cmisFolder, title)) {
 				throw new DuplicateFolderNameException(title);
 			}
 
@@ -207,28 +210,30 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	public Folder copyFolder(long sourceFolderId, long parentFolderId,
-			String title, String description, ServiceContext serviceContext)
-			throws PortalException, SystemException {
+	public Folder copyFolder(
+		long sourceFolderId, long parentFolderId, String title,
+		String description, ServiceContext serviceContext) {
 
 		// TODO
 
 		return null;
 	}
 
-	public void deleteAll() throws PortalException, SystemException {
+	public void deleteAll() {
+
 		// TODO
+
 	}
 
-	public void deleteFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public void deleteFileEntry(long fileEntryId) throws SystemException {
 		try {
 			Session session = getSession();
 
 			FileEntry fileEntry = getFileEntry(session, fileEntryId);
 
-			((Document)fileEntry.getModel()).deleteAllVersions();
+			Document document = (Document)fileEntry.getModel();
+
+			document.deleteAllVersions();
 		}
 		catch (SystemException se) {
 			throw se;
@@ -238,16 +243,14 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	public void deleteFolder(long folderId)
-		throws PortalException, SystemException {
-
+	public void deleteFolder(long folderId) throws SystemException {
 		try {
 			Session session = getSession();
 
-			org.apache.chemistry.opencmis.client.api.Folder folder =
+			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 				getCmisFolder(session, folderId);
 
-			folder.delete(true);
+			cmisFolder.delete(true);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -261,44 +264,21 @@ public class CMISRepository extends BaseRepositoryImpl {
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		// TODO support obc
-
 		try {
-			Session session = getSession();
-
 			List<FileEntry> fileEntries = new ArrayList<FileEntry>();
 
-			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-				getCmisFolder(session, folderId);
-
-			Iterator<CmisObject> iterator;
-
-			OperationContext operationContext = getOperationContext(true);
-
-			if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
-				ItemIterable<CmisObject> children =
-					cmisFolder.getChildren(operationContext);
-
-				iterator = children.iterator();
-			}
-			else {
-				operationContext.setMaxItemsPerPage(end - start);
-
-				ItemIterable<CmisObject> children =
-					cmisFolder.getChildren(operationContext);
-				ItemIterable<CmisObject> page =
-					children.skipTo(start).getPage();
-
-				iterator = page.iterator();
-			}
+			Iterator<CmisObject> itr = getIterator(
+				folderId, true, start, end, obc);
 
 			boolean documentsSection = false;
 
-			while (iterator.hasNext()) {
-				CmisObject cmisObject = iterator.next();
+			while (itr.hasNext()) {
+				CmisObject cmisObject = itr.next();
 
 				if (cmisObject instanceof Document) {
-					fileEntries.add(toFileEntry(cmisObject));
+					FileEntry fileEntry = toFileEntry(cmisObject);
+
+					fileEntries.add(fileEntry);
 
 					documentsSection = true;
 				}
@@ -323,13 +303,16 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 		// TODO support file shortcuts
 
-		List<Object> list = new ArrayList<Object>();
+		List<Object> fileEntriesAndFileShortcuts = new ArrayList<Object>();
 
 		for (long folderId : folderIds) {
-			list.addAll(getFileEntries(folderId, start, end, null));
+			List<FileEntry> fileEntries = getFileEntries(
+				folderId, start, end, null);
+
+			fileEntriesAndFileShortcuts.addAll(fileEntries);
 		}
 
-		return list;
+		return fileEntriesAndFileShortcuts;
 	}
 
 	public int getFileEntriesAndFileShortcutsCount(
@@ -349,26 +332,14 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 	public int getFileEntriesCount(long folderId) throws SystemException {
 		try {
-			Session session = getSession();
-
 			int count = 0;
 
-			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-				getCmisFolder(session, folderId);
-
-			Iterator<CmisObject> iterator;
-
-			OperationContext operationContext = getOperationContext(true);
-
-			ItemIterable<CmisObject> children =
-				cmisFolder.getChildren(operationContext);
-
-			iterator = children.iterator();
+			Iterator<CmisObject> itr = getIterator(folderId, true);
 
 			boolean documentsSection = false;
 
-			while (iterator.hasNext()) {
-				CmisObject cmisObject = iterator.next();
+			while (itr.hasNext()) {
+				CmisObject cmisObject = itr.next();
 
 				if (cmisObject instanceof Document) {
 					count++;
@@ -413,23 +384,17 @@ public class CMISRepository extends BaseRepositoryImpl {
 		throws PortalException, SystemException {
 
 		try {
-			Session session = getSession();
-
-			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-				getCmisFolder(session, folderId);
-
-			OperationContext operationContext = getOperationContext(true);
-
-			Iterator<CmisObject> iterator = cmisFolder.getChildren(
-				operationContext).iterator();
+			Iterator<CmisObject> itr = getIterator(folderId, true);
 
 			boolean documentsSection = false;
 
-			while (iterator.hasNext()) {
-				CmisObject cmisObject = iterator.next();
+			while (itr.hasNext()) {
+				CmisObject cmisObject = itr.next();
 
 				if (cmisObject instanceof Document) {
-					if (cmisObject.getName().equals(title)) {
+					String cmisObjectName = cmisObject.getName();
+
+					if (cmisObjectName.equals(title)) {
 						return toFileEntry(cmisObject);
 					}
 
@@ -451,8 +416,8 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 
 		throw new NoSuchFileEntryException(
-			"No CMIS file entry with folderId=" + folderId + ", title=" +
-				title);
+			"No CMIS file entry with {folderId=" + folderId + ", title=" +
+				title + "}");
 	}
 
 	public FileEntry getFileEntryByUuid(String uuid)
@@ -518,24 +483,19 @@ public class CMISRepository extends BaseRepositoryImpl {
 		throws PortalException, SystemException {
 
 		try {
-			Session session = getSession();
-
-			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-				getCmisFolder(session, parentFolderId);
-
-			OperationContext operationContext = getOperationContext(false);
-
-			Iterator<CmisObject> iterator = cmisFolder.getChildren(
-				operationContext).iterator();
+			Iterator<CmisObject> itr = getIterator(parentFolderId, false);
 
 			boolean foldersSection = false;
 
-			while (iterator.hasNext()) {
-				CmisObject cmisObject = iterator.next();
+			while (itr.hasNext()) {
+				CmisObject cmisObject = itr.next();
 
 				if (cmisObject instanceof
 						org.apache.chemistry.opencmis.client.api.Folder) {
-					if (cmisObject.getName().equals(title)) {
+
+					String cmisObjectName = cmisObject.getName();
+
+					if (cmisObjectName.equals(title)) {
 						return toFolder(cmisObject);
 					}
 
@@ -557,51 +517,30 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 
 		throw new NoSuchFolderException(
-			"No CMIS file entry with parentFolderId=" + parentFolderId +
-				", title=" + title);
+			"No CMIS file entry with {parentFolderId=" + parentFolderId +
+				", title=" + title + "}");
 	}
 
 	public List<Folder> getFolders(long parentFolderId, int start, int end)
 		throws SystemException {
 
 		try {
-			Session session = getSession();
-
 			List<Folder> folders = new ArrayList<Folder>();
 
-			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-				getCmisFolder(session, parentFolderId);
-
-			Iterator<CmisObject> iterator;
-
-			OperationContext operationContext = getOperationContext(false);
-
-			if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
-				ItemIterable<CmisObject> children =
-					cmisFolder.getChildren(operationContext);
-
-				iterator = children.iterator();
-			}
-			else {
-				operationContext.setMaxItemsPerPage(end - start);
-
-				ItemIterable<CmisObject> children =
-					cmisFolder.getChildren(operationContext);
-				ItemIterable<CmisObject> page =
-					children.skipTo(start).getPage();
-
-				iterator = page.iterator();
-			}
+			Iterator<CmisObject> itr = getIterator(
+				parentFolderId, false, start, end, null);
 
 			boolean foldersSection = false;
 
-			while (iterator.hasNext()) {
-				CmisObject cmisObject = iterator.next();
+			while (itr.hasNext()) {
+				CmisObject cmisObject = itr.next();
 
 				if (cmisObject instanceof
 						org.apache.chemistry.opencmis.client.api.Folder) {
 
-					folders.add(toFolder(cmisObject));
+					Folder folder = toFolder(cmisObject);
+
+					folders.add(folder);
 
 					foldersSection = true;
 				}
@@ -625,51 +564,33 @@ public class CMISRepository extends BaseRepositoryImpl {
 		throws SystemException {
 
 		try {
-			Session session = getSession();
-
-			List<Object> list = new ArrayList<Object>();
+			List<Object> foldersAndFileEntriesAndFileShortcuts =
+				new ArrayList<Object>();
 
 			for (long folderId : folderIds) {
-				org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-					getCmisFolder(session, folderId);
-
-				Iterator<CmisObject> iterator;
-
-				OperationContext operationContext = getOperationContext(true);
-
-				if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS))
-				{
-					ItemIterable<CmisObject> children =
-						cmisFolder.getChildren(operationContext);
-
-					iterator = children.iterator();
-				}
-				else {
-					operationContext.setMaxItemsPerPage(end - start);
-
-					ItemIterable<CmisObject> children =
-						cmisFolder.getChildren(operationContext);
-					ItemIterable<CmisObject> page =
-						children.skipTo(start).getPage();
-
-					iterator = page.iterator();
-				}
+				Iterator<CmisObject> itr = getIterator(
+					folderId, true, start, end, null);
 
 				boolean documentsSection = false;
 				boolean foldersSection = false;
 
-				while (iterator.hasNext()) {
-					CmisObject cmisObject = iterator.next();
+				while (itr.hasNext()) {
+					CmisObject cmisObject = itr.next();
 
 					if (cmisObject instanceof Document) {
-						list.add(toFileEntry(cmisObject));
+						FileEntry fileEntry = toFileEntry(cmisObject);
+
+						foldersAndFileEntriesAndFileShortcuts.add(fileEntry);
 
 						documentsSection = true;
 					}
 					else if (cmisObject instanceof
-							org.apache.chemistry.opencmis.client.api.Folder) {
+								org.apache.chemistry.opencmis.client.api.
+									Folder) {
 
-						list.add(toFolder(cmisObject));
+						Folder folder = toFolder(cmisObject);
+
+						foldersAndFileEntriesAndFileShortcuts.add(folder);
 
 						foldersSection = true;
 					}
@@ -679,7 +600,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 				}
 			}
 
-			return list;
+			return foldersAndFileEntriesAndFileShortcuts;
 		}
 		catch (SystemException se) {
 			throw se;
@@ -700,22 +621,14 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 	public int getFoldersCount(long parentFolderId) throws SystemException {
 		try {
-			Session session = getSession();
-
 			int count = 0;
 
-			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-				getCmisFolder(session, parentFolderId);
-
-			OperationContext operationContext = getOperationContext(false);
-
-			Iterator<CmisObject> iterator = cmisFolder.getChildren(
-				operationContext).iterator();
+			Iterator<CmisObject> itr = getIterator(parentFolderId, false);
 
 			boolean foldersSection = false;
 
-			while (iterator.hasNext()) {
-				CmisObject cmisObject = iterator.next();
+			while (itr.hasNext()) {
+				CmisObject cmisObject = itr.next();
 
 				if (cmisObject instanceof
 						org.apache.chemistry.opencmis.client.api.Folder) {
@@ -743,24 +656,16 @@ public class CMISRepository extends BaseRepositoryImpl {
 		throws SystemException {
 
 		try {
-			Session session = getSession();
-
 			int count = 0;
 
 			for (long folderId : folderIds) {
-				org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-					getCmisFolder(session, folderId);
-
-				OperationContext operationContext = getOperationContext(true);
-
-				Iterator<CmisObject> iterator = cmisFolder.getChildren(
-					operationContext).iterator();
+				Iterator<CmisObject> itr = getIterator(folderId, true);
 
 				boolean documentsSection = false;
 				boolean foldersSection = false;
 
-				while (iterator.hasNext()) {
-					CmisObject cmisObject = iterator.next();
+				while (itr.hasNext()) {
+					CmisObject cmisObject = itr.next();
 
 					if (cmisObject instanceof Document) {
 						count++;
@@ -768,7 +673,8 @@ public class CMISRepository extends BaseRepositoryImpl {
 						documentsSection = true;
 					}
 					else if (cmisObject instanceof
-							org.apache.chemistry.opencmis.client.api.Folder) {
+								org.apache.chemistry.opencmis.client.api.
+									Folder) {
 
 						count++;
 
@@ -792,7 +698,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 	public List<FileEntry> getRepositoryFileEntries(long userId,
 			long rootFolderId, int start, int end, OrderByComparator obc)
-			throws SystemException {
+		throws SystemException {
 
 		// TODO
 
@@ -800,7 +706,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public int getRepositoryFileEntriesCount(long userId, long rootFolderId)
-			throws SystemException {
+		throws SystemException {
 
 		// TODO
 
@@ -808,12 +714,12 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public List<Long> getSubfolderIds(long folderId, boolean recurse)
-			throws SystemException {
+		throws SystemException {
 
 		try {
 			Session session = getSession();
 
-			List<Long> subFolderIds = new ArrayList<Long>();
+			List<Long> subfolderIds = new ArrayList<Long>();
 
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 				getCmisFolder(session, folderId);
@@ -824,12 +730,12 @@ public class CMISRepository extends BaseRepositoryImpl {
 				depth = 10;
 			}
 
-			List<Tree<FileableCmisObject>> list = cmisFolder.getFolderTree(
-				depth);
+			List<Tree<FileableCmisObject>> fileableCmisObjects =
+				cmisFolder.getFolderTree(depth);
 
-			getSubfolderIds(subFolderIds, list);
+			getSubfolderIds(subfolderIds, fileableCmisObjects);
 
-			return subFolderIds;
+			return subfolderIds;
 		}
 		catch (SystemException se) {
 			throw se;
@@ -847,7 +753,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 		catch (IllegalArgumentException iae) {
 			throw new RepositoryException(
-				"Unable to initialize CMIS session", iae);
+			"Unable to initialize CMIS session", iae);
 		}
 	}
 
@@ -903,6 +809,51 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 	}
 
+	public FileEntry toFileEntry(CmisObject cmisObject)
+		throws PortalException, SystemException {
+
+		if (cmisObject instanceof Document) {
+			return new CMISFileEntry(
+				this, getRepositoryId(),
+				toRepositoryEntryId(cmisObject.getId()), (Document)cmisObject);
+		}
+		else {
+			throw new NoSuchFileEntryException(
+				"CMIS object is not a file entry " + cmisObject);
+		}
+	}
+
+	public FileVersion toFileVersion(CmisObject object)
+		throws PortalException, SystemException {
+
+		if (object instanceof Document) {
+			return new CMISFileVersion(
+				this, getRepositoryId(), toRepositoryEntryId(object.getId()),
+				(Document)object);
+		}
+		else {
+			throw new NoSuchFileVersionException(
+				"CMIS object is not a file version " + object);
+		}
+	}
+
+	public Folder toFolder(CmisObject cmisObject)
+		throws PortalException, SystemException {
+
+		if (cmisObject instanceof
+				org.apache.chemistry.opencmis.client.api.Folder) {
+
+			return new CMISFolder(
+				this, getRepositoryId(),
+				toRepositoryEntryId(cmisObject.getId()),
+				(org.apache.chemistry.opencmis.client.api.Folder)cmisObject);
+		}
+		else {
+			throw new NoSuchFolderException(
+				"CMIS object is not a folder " + cmisObject);
+		}
+	}
+
 	public void unlockFileEntry(long fileEntryId) throws SystemException {
 
 	}
@@ -953,8 +904,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		Folder folder = getFolder(session, folderId);
 
 		org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-			(org.apache.chemistry.opencmis.client.api.Folder)
-				folder.getModel();
+			(org.apache.chemistry.opencmis.client.api.Folder)folder.getModel();
 
 		return cmisFolder;
 	}
@@ -978,21 +928,69 @@ public class CMISRepository extends BaseRepositoryImpl {
 	protected Folder getFolder(Session session, long folderId)
 		throws PortalException, SystemException {
 
-		Folder folder = null;
-
 		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			folder = new CMISFolder(
-				this, getRepositoryId(),
-				toEntryId(session.getRootFolder().getId()),
-				session.getRootFolder());
+			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
+				session.getRootFolder();
+
+			long repositoryEntryId = toRepositoryEntryId(cmisFolder.getId());
+
+			return new CMISFolder(
+				this, getRepositoryId(), repositoryEntryId, cmisFolder);
 		}
 		else {
 			ObjectId objectId = toFolderId(folderId);
 
-			folder = toFolder(session.getObject(objectId));
+			return toFolder(session.getObject(objectId));
+		}
+	}
+
+	protected Iterator<CmisObject> getIterator(
+			long folderId, boolean fileEntriesFirst)
+		throws PortalException, SystemException {
+
+		Session session = getSession();
+
+		org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
+			getCmisFolder(session, folderId);
+
+		OperationContext operationContext = getOperationContext(
+			fileEntriesFirst);
+
+		ItemIterable<CmisObject> cmisObjects = cmisFolder.getChildren(
+			operationContext);
+
+		return cmisObjects.iterator();
+	}
+
+	protected Iterator<CmisObject> getIterator(
+			long folderId, boolean fileEntriesFirst, int start, int end,
+			OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		// TODO support obc
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
+			return getIterator(folderId, fileEntriesFirst);
 		}
 
-		return folder;
+		Session session = getSession();
+
+		org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
+			getCmisFolder(session, folderId);
+
+		OperationContext operationContext = getOperationContext(
+			fileEntriesFirst);
+
+		operationContext.setMaxItemsPerPage(end - start);
+
+		ItemIterable<CmisObject> cmisObjects = cmisFolder.getChildren(
+			operationContext);
+
+		ItemIterable<CmisObject> cmisObject = cmisObjects.skipTo(start);
+
+		cmisObject = cmisObject.getPage();
+
+		return cmisObject.iterator();
 	}
 
 	protected OperationContext getOperationContext(boolean fileEntriesFirst) {
@@ -1041,6 +1039,8 @@ public class CMISRepository extends BaseRepositoryImpl {
 		parameter.put(SessionParameter.LOCALE_ISO639_LANGUAGE,
 			LocaleUtil.getDefault().getLanguage());
 
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
+
 		if (typeSettingsProperties.containsKey(ATOMPUB_URL)) {
 			parameter.put(
 				SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
@@ -1088,35 +1088,40 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected void getSubfolderIds(
-			List<Long> subFolderIds, List<Tree<FileableCmisObject>> list)
+			List<Long> subfolderIds,
+			List<Tree<FileableCmisObject>> fileableCmisObjects)
 		throws SystemException {
 
-		for (Tree<FileableCmisObject> tree : list) {
-			subFolderIds.add(toEntryId(tree.getItem().getId()));
+		for (Tree<FileableCmisObject> tree : fileableCmisObjects) {
+			subfolderIds.add(toRepositoryEntryId(tree.getItem().getId()));
 
-			getSubfolderIds(subFolderIds, tree.getChildren());
+			getSubfolderIds(subfolderIds, tree.getChildren());
 		}
 	}
 
 	protected boolean hasTitle(
-			Session session,
-			org.apache.chemistry.opencmis.client.api.Folder cmisFolder,
-			String title)
-		throws SystemException{
+		org.apache.chemistry.opencmis.client.api.Folder cmisFolder,
+		String title) {
 
 		OperationContext operationContext = getOperationContext(true);
 
-		Iterator<CmisObject> iterator = cmisFolder.getChildren(
-			operationContext).iterator();
+		cmisFolder.getChildren(operationContext);
+
+		ItemIterable<CmisObject> cmisObjects = cmisFolder.getChildren(
+			operationContext);
+
+		Iterator<CmisObject> itr = cmisObjects.iterator();
 
 		boolean documentsSection = false;
 		boolean foldersSection = false;
 
-		while (iterator.hasNext()) {
-			CmisObject cmisObject = iterator.next();
+		while (itr.hasNext()) {
+			CmisObject cmisObject = itr.next();
+
+			String cmisObjectName = cmisObject.getName();
 
 			if (cmisObject instanceof Document) {
-				if (cmisObject.getName().equals(title)) {
+				if (cmisObjectName.equals(title)) {
 					return true;
 				}
 
@@ -1125,7 +1130,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			else if (cmisObject instanceof
 						org.apache.chemistry.opencmis.client.api.Folder) {
 
-				if (cmisObject.getName().equals(title)) {
+				if (cmisObjectName.equals(title)) {
 					return true;
 				}
 
@@ -1140,64 +1145,25 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected void putParameter(
-			Map<String, String> parameters, String chemistryKey,
-			String typeSettingsKey) {
+		Map<String, String> parameters, String chemistryKey,
+		String typeSettingsKey) {
 
-		parameters.put(chemistryKey, typeSettingsProperties.getProperty(
-			typeSettingsKey));
-	}
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
 
-	public FileEntry toFileEntry(CmisObject object)
-		throws PortalException, SystemException {
+		String value = typeSettingsProperties.getProperty(typeSettingsKey);
 
-		if (object instanceof Document) {
-			return new CMISFileEntry(
-				this, getRepositoryId(), toEntryId(object.getId()),
-				(Document)object);
-		}
-		else {
-			throw new NoSuchFileEntryException(
-				"CMIS object is not a file entry " + object);
-		}
-	}
-
-	public FileVersion toFileVersion(CmisObject object)
-		throws PortalException, SystemException {
-
-		if (object instanceof Document) {
-			return new CMISFileVersion(
-				this, getRepositoryId(), toEntryId(object.getId()),
-				(Document)object);
-		}
-		else {
-			throw new NoSuchFileVersionException(
-				"CMIS object is not a file version " + object);
-		}
-	}
-
-	public Folder toFolder(CmisObject object)
-		throws PortalException, SystemException {
-
-		if (object instanceof org.apache.chemistry.opencmis.client.api.Folder) {
-			return new CMISFolder(
-				this, getRepositoryId(), toEntryId(object.getId()),
-				(org.apache.chemistry.opencmis.client.api.Folder)object);
-		}
-		else {
-			throw new NoSuchFolderException(
-				"CMIS object is not a folder " + object);
-		}
+		parameters.put(chemistryKey, value);
 	}
 
 	protected ObjectId toFileEntryId(long fileEntryId)
 		throws PortalException, SystemException {
 
-		RepositoryEntry repositoryEntry =
-			repositoryEntryPersistence.fetchByPrimaryKey(fileEntryId);
+		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByPrimaryKey(
+			fileEntryId);
 
 		if (repositoryEntry == null) {
 			throw new NoSuchFileEntryException(
-				"No CMIS file entry with fileEntryId=" + fileEntryId);
+				"No CMIS file entry with {fileEntryId=" + fileEntryId + "}");
 		}
 
 		return new ObjectIdImpl(repositoryEntry.getMappedId());
@@ -1206,47 +1172,48 @@ public class CMISRepository extends BaseRepositoryImpl {
 	protected ObjectId toFileVersionId(long fileVersionId)
 		throws PortalException, SystemException {
 
-		RepositoryEntry repositoryEntry =
-			repositoryEntryPersistence.fetchByPrimaryKey(fileVersionId);
+		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByPrimaryKey(
+			fileVersionId);
 
 		if (repositoryEntry == null) {
 			throw new NoSuchFileEntryException(
-				"No CMIS file version with fileVersionId=" + fileVersionId);
+				"No CMIS file version with {fileVersionId=" + fileVersionId +
+					"}");
 		}
 
 		return new ObjectIdImpl(repositoryEntry.getMappedId());
-	}
-
-	public long toEntryId(String objectId) throws SystemException {
-		RepositoryEntry repositoryEntry = repositoryEntryPersistence.fetchByR_M(
-			getRepositoryId(), objectId);
-
-		if (repositoryEntry == null) {
-			long entryId = counterLocalService.increment();
-
-			repositoryEntry = repositoryEntryPersistence.create(entryId);
-
-			repositoryEntry.setMappedId(objectId);
-			repositoryEntry.setRepositoryId(getRepositoryId());
-
-			repositoryEntryPersistence.update(repositoryEntry, false);
-		}
-
-		return repositoryEntry.getEntryId();
 	}
 
 	protected ObjectId toFolderId(long folderId)
 		throws PortalException, SystemException {
 
-		RepositoryEntry repositoryEntry =
-			repositoryEntryPersistence.fetchByPrimaryKey(folderId);
+		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByPrimaryKey(
+			folderId);
 
 		if (repositoryEntry == null) {
 			throw new NoSuchFolderException(
-				"No CMIS folder with folderId=" + folderId);
+				"No CMIS folder with {folderId=" + folderId + "}");
 		}
 
 		return new ObjectIdImpl(repositoryEntry.getMappedId());
+	}
+
+	protected long toRepositoryEntryId(String objectId) throws SystemException {
+		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByR_M(
+			getRepositoryId(), objectId);
+
+		if (repositoryEntry == null) {
+			long repositoryEntryId = CounterLocalServiceUtil.increment();
+
+			repositoryEntry = RepositoryEntryUtil.create(repositoryEntryId);
+
+			repositoryEntry.setRepositoryId(getRepositoryId());
+			repositoryEntry.setMappedId(objectId);
+
+			RepositoryEntryUtil.update(repositoryEntry, false);
+		}
+
+		return repositoryEntry.getRepositoryEntryId();
 	}
 
 	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();

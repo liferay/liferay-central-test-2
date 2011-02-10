@@ -70,8 +70,8 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 
 		RepositoryEntry existingRepositoryEntry = _persistence.findByPrimaryKey(newRepositoryEntry.getPrimaryKey());
 
-		assertEquals(existingRepositoryEntry.getEntryId(),
-			newRepositoryEntry.getEntryId());
+		assertEquals(existingRepositoryEntry.getRepositoryEntryId(),
+			newRepositoryEntry.getRepositoryEntryId());
 		assertEquals(existingRepositoryEntry.getRepositoryId(),
 			newRepositoryEntry.getRepositoryId());
 		assertEquals(existingRepositoryEntry.getMappedId(),
@@ -121,8 +121,8 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RepositoryEntry.class,
 				RepositoryEntry.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId",
-				newRepositoryEntry.getEntryId()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("repositoryEntryId",
+				newRepositoryEntry.getRepositoryEntryId()));
 
 		List<RepositoryEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 
@@ -137,7 +137,8 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(RepositoryEntry.class,
 				RepositoryEntry.class.getClassLoader());
 
-		dynamicQuery.add(RestrictionsFactoryUtil.eq("entryId", nextLong()));
+		dynamicQuery.add(RestrictionsFactoryUtil.eq("repositoryEntryId",
+				nextLong()));
 
 		List<RepositoryEntry> result = _persistence.findWithDynamicQuery(dynamicQuery);
 

@@ -14,24 +14,21 @@
 
 package com.liferay.portal.kernel.repository;
 
-import com.liferay.counter.service.CounterLocalService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.service.persistence.RepositoryEntryPersistence;
 
 /**
- * This class is used by third-party repository implementations. All
- * classes that extend <code>BaseRepositoryImpl</code> must specify two public
- * static fields: <code>SUPPORTED_CONFIGURATIONS</code> and
+ * This class is used by third-party repository implementations. All classes
+ * that extend <code>BaseRepositoryImpl</code> must specify two public static
+ * fields: <code>SUPPORTED_CONFIGURATIONS</code> and
  * <code>SUPPORTED_PARAMETERS</code>.
  *
- * @see com.liferay.portal.repository.cmis.CMISRepository#SUPPORTED_CONFIGURATIONS
- * @see com.liferay.portal.repository.cmis.CMISRepository#SUPPORTED_PARAMETERS
- *
  * @author Alexander Chow
+ * @see    com.liferay.portal.repository.cmis.CMISRepository#SUPPORTED_CONFIGURATIONS
+ * @see    com.liferay.portal.repository.cmis.CMISRepository#SUPPORTED_PARAMETERS
  */
 public abstract class BaseRepositoryImpl implements Repository {
 
@@ -59,21 +56,21 @@ public abstract class BaseRepositoryImpl implements Repository {
 		return _repositoryId;
 	}
 
-	public void initRepository(
-			long repositoryId, UnicodeProperties typeSettingsProperties,
-			RepositoryEntryPersistence repositoryEntryPersistence,
-			CounterLocalService counterLocalService)
-		throws RepositoryException {
-
-		_repositoryId = repositoryId;
-		this.repositoryEntryPersistence = repositoryEntryPersistence;
-		this.typeSettingsProperties = typeSettingsProperties;
-		this.counterLocalService = counterLocalService;
-
-		initRepository();
+	public UnicodeProperties getTypeSettingsProperties() {
+		return _typeSettingsProperties;
 	}
 
 	public abstract void initRepository() throws RepositoryException;
+
+	public void setRepositoryId(long repositoryId) {
+		_repositoryId = repositoryId;
+	}
+
+	public void setTypeSettingsProperties(
+		UnicodeProperties typeSettingsProperties) {
+
+		_typeSettingsProperties = typeSettingsProperties;
+	}
 
 	public void unlockFolder(long parentFolderId, String title, String lockUuid)
 		throws PortalException, SystemException {
@@ -83,15 +80,9 @@ public abstract class BaseRepositoryImpl implements Repository {
 		unlockFolder(folder.getFolderId(), lockUuid);
 	}
 
-	protected UnicodeProperties typeSettingsProperties;
-
-	protected RepositoryEntryPersistence repositoryEntryPersistence;
-
-	protected CounterLocalService counterLocalService;
-
-	private LocalRepository _localRepository = 
-		new BaseLocalRepositoryImpl(this);
-
+	private LocalRepository _localRepository = new BaseLocalRepositoryImpl(
+		this);
 	private long _repositoryId;
+	private UnicodeProperties _typeSettingsProperties;
 
 }

@@ -50,25 +50,6 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return null;
 	}
 
-	public Object getModel() {
-		return _document;
-	}
-
-	public long getPrimaryKey() {
-		return _fileVersionId;
-	}
-
-	public boolean isEscapedModel() {
-		return false;
-	}
-
-	public void prepare() throws SystemException {
-	}
-
-	public FileVersion toEscapedModel() {
-		return this;
-	}
-
 	public String getChangeLog() {
 		return null;
 	}
@@ -124,6 +105,14 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return null;
 	}
 
+	public Object getModel() {
+		return _document;
+	}
+
+	public long getPrimaryKey() {
+		return _fileVersionId;
+	}
+
 	public long getRepositoryId() {
 		return _repositoryId;
 	}
@@ -144,7 +133,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return null;
 	}
 
-	public String getStatusByUserUuid() throws SystemException {
+	public String getStatusByUserUuid() {
 		return null;
 	}
 
@@ -164,7 +153,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return _document.getCreatedBy();
 	}
 
-	public String getUserUuid() throws SystemException {
+	public String getUserUuid() {
 		return null;
 	}
 
@@ -184,6 +173,10 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return false;
 	}
 
+	public boolean isEscapedModel() {
+		return false;
+	}
+
 	public boolean isExpired() {
 		return false;
 	}
@@ -192,14 +185,18 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 		return false;
 	}
 
-	private CMISRepository _cmisRepository;
+	public void prepare() {
+	}
 
-	private Document _document;
-
-	private long _fileVersionId;
-
-	private long _repositoryId;
+	public FileVersion toEscapedModel() {
+		return this;
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(CMISFileVersion.class);
+
+	private CMISRepository _cmisRepository;
+	private Document _document;
+	private long _fileVersionId;
+	private long _repositoryId;
 
 }

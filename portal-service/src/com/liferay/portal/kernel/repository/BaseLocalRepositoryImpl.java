@@ -27,14 +27,14 @@ import java.io.InputStream;
 import java.util.List;
 
 /**
- * This class is designed for third-party repository implementations. Since the
- * paradigm of remote and local services exist only within Liferay, the
+ * This class is designed for third party repository implementations. Since the
+ * paradigm of remote and local services exists only within Liferay, the
  * assumption is that all permission checking will be delegated to the specific
  * repository.
  *
- * There are also many calls within this class that pass in a userId as a
+ * There are also many calls within this class that pass in a user ID as a
  * parameter. These methods should only be called for administration of Liferay
- * repositories and are hence not supported in all third-party repositories.
+ * repositories and are hence not supported in all third party repositories.
  * This includes moving between document library hooks and LAR import/export.
  * Calling these methods will throw an
  * <code>UnsupportedOperationException</code>.
@@ -64,47 +64,8 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 		throw new UnsupportedOperationException();
 	}
 
-	public FileVersion getFileVersion(long fileVersionId)
-		throws PortalException, SystemException {
-
-		return _repository.getFileVersion(fileVersionId);
-	}
-
 	public void deleteAll() throws PortalException, SystemException {
 		_repository.deleteAll();
-	}
-
-	public FileEntry moveFileEntry(
-			long userId, long fileEntryId, long newFolderId,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateAsset(
-			long userId, FileEntry fileEntry, FileVersion fileVersion,
-			long[] assetCategoryIds, String[] assetTagNames)
-		throws PortalException, SystemException {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public FileEntry updateFileEntry(
-			long userId, long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			InputStream is, long size, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public Folder updateFolder(
-			long folderId, long parentFolderId, String title,
-			String description, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		throw new UnsupportedOperationException();
 	}
 
 	public void deleteFileEntry(long fileEntryId)
@@ -164,6 +125,12 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 		return _repository.getFileEntryByUuid(uuid);
 	}
 
+	public FileVersion getFileVersion(long fileVersionId)
+		throws PortalException, SystemException {
+
+		return _repository.getFileVersion(fileVersionId);
+	}
+
 	public Folder getFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -210,6 +177,39 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 
 	public long getRepositoryId() {
 		return _repository.getRepositoryId();
+	}
+
+	public FileEntry moveFileEntry(
+			long userId, long fileEntryId, long newFolderId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateAsset(
+			long userId, FileEntry fileEntry, FileVersion fileVersion,
+			long[] assetCategoryIds, String[] assetTagNames)
+		throws PortalException, SystemException {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public FileEntry updateFileEntry(
+			long userId, long fileEntryId, String sourceFileName, String title,
+			String description, String changeLog, boolean majorVersion,
+			InputStream is, long size, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public Folder updateFolder(
+			long folderId, long parentFolderId, String title,
+			String description, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		throw new UnsupportedOperationException();
 	}
 
 	private Repository _repository;

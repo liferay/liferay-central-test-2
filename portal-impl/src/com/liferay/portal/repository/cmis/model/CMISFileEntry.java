@@ -55,38 +55,15 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return null;
 	}
 
-	public Object getModel() {
-		return _document;
-	}
-
-	public long getPrimaryKey() {
-		return _fileEntryId;
-	}
-
-	public boolean isEscapedModel() {
-		return false;
-	}
-
-	public void prepare() throws SystemException {
-	}
-
-	public FileEntry toEscapedModel() {
-		return this;
-	}
-
 	public long getCompanyId() {
 		return 0;
 	}
 
-	public InputStream getContentStream()
-		throws PortalException, SystemException {
-
+	public InputStream getContentStream() {
 		return _document.getContentStream().getStream();
 	}
 
-	public InputStream getContentStream(String version)
-		throws PortalException, SystemException {
-
+	public InputStream getContentStream(String version) {
 		List<Document> versions = _document.getAllVersions();
 
 		for (Document document : versions) {
@@ -114,9 +91,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _fileEntryId;
 	}
 
-	public FileVersion getFileVersion()
-		throws PortalException, SystemException {
-
+	public FileVersion getFileVersion() {
 		return new CMISFileVersion(
 			_cmisRepository, _repositoryId, _fileEntryId, _document);
 	}
@@ -188,8 +163,16 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return null;
 	}
 
+	public Object getModel() {
+		return _document;
+	}
+
 	public Date getModifiedDate() {
 		return _document.getLastModificationDate().getTime();
+	}
+
+	public long getPrimaryKey() {
+		return _fileEntryId;
 	}
 
 	public int getReadCount() {
@@ -216,7 +199,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _document.getCreatedBy();
 	}
 
-	public String getUserUuid() throws SystemException {
+	public String getUserUuid() {
 		return null;
 	}
 
@@ -236,7 +219,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _document.getLastModifiedBy();
 	}
 
-	public String getVersionUserUuid() throws SystemException {
+	public String getVersionUserUuid() {
 		return null;
 	}
 
@@ -248,18 +231,26 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return false;
 	}
 
+	public boolean isEscapedModel() {
+		return false;
+	}
+
 	public boolean isLocked() {
 		return false;
 	}
 
-	private CMISRepository _cmisRepository;
+	public void prepare() {
+	}
 
-	private Document _document;
-
-	private long _fileEntryId;
-
-	private long _repositoryId;
+	public FileEntry toEscapedModel() {
+		return this;
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(CMISFileEntry.class);
+
+	private CMISRepository _cmisRepository;
+	private Document _document;
+	private long _fileEntryId;
+	private long _repositoryId;
 
 }

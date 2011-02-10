@@ -730,7 +730,7 @@
 	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.RepositoryEntryModelImpl">
 		<attributes>
-			<id name="entryId" />
+			<id name="repositoryEntryId" />
 			<basic name="repositoryId" />
 			<basic name="mappedId" />
 			<transient name="primaryKey" />

@@ -1260,7 +1260,7 @@ create table Repository (
 );
 
 create table RepositoryEntry (
-	entryId LONG not null primary key,
+	repositoryEntryId LONG not null primary key,
 	repositoryId LONG,
 	mappedId VARCHAR(75) null
 );

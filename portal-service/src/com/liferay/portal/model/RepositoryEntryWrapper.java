@@ -47,21 +47,21 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 	}
 
 	/**
-	* Gets the entry ID of this repository entry.
+	* Gets the repository entry ID of this repository entry.
 	*
-	* @return the entry ID of this repository entry
+	* @return the repository entry ID of this repository entry
 	*/
-	public long getEntryId() {
-		return _repositoryEntry.getEntryId();
+	public long getRepositoryEntryId() {
+		return _repositoryEntry.getRepositoryEntryId();
 	}
 
 	/**
-	* Sets the entry ID of this repository entry.
+	* Sets the repository entry ID of this repository entry.
 	*
-	* @param entryId the entry ID of this repository entry
+	* @param repositoryEntryId the repository entry ID of this repository entry
 	*/
-	public void setEntryId(long entryId) {
-		_repositoryEntry.setEntryId(entryId);
+	public void setRepositoryEntryId(long repositoryEntryId) {
+		_repositoryEntry.setRepositoryEntryId(repositoryEntryId);
 	}
 
 	/**
@@ -141,8 +141,7 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 		return new RepositoryEntryWrapper((RepositoryEntry)_repositoryEntry.clone());
 	}
 
-	public int compareTo(
-		com.liferay.portal.model.RepositoryEntry repositoryEntry) {
+	public int compareTo(RepositoryEntry repositoryEntry) {
 		return _repositoryEntry.compareTo(repositoryEntry);
 	}
 
@@ -150,7 +149,7 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 		return _repositoryEntry.hashCode();
 	}
 
-	public com.liferay.portal.model.RepositoryEntry toEscapedModel() {
+	public RepositoryEntry toEscapedModel() {
 		return new RepositoryEntryWrapper(_repositoryEntry.toEscapedModel());
 	}
 

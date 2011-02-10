@@ -1390,10 +1390,10 @@
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
 	<entity name="RepositoryEntry" local-service="false" remote-service="false">
-	
+
 		<!-- PK fields -->
 
-		<column name="entryId" type="long" primary="true" />
+		<column name="repositoryEntryId" type="long" primary="true" />
 
 		<!-- Other fields -->
 

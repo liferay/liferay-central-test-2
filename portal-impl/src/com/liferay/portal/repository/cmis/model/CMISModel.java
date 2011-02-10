@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.commons.data.CmisExtensionElement;
@@ -35,20 +36,24 @@ public abstract class CMISModel {
 				ExtensionLevel.PROPERTIES).get(0).getChildren();
 
 			for (CmisExtensionElement extension : extensions) {
-				if (extension.getName().equals("properties")) {
-					for (CmisExtensionElement property :
-							extension.getChildren()) {
+				if (!extension.getName().equals("properties")) {
+					continue;
+				}
 
-						String id = property.getAttributes().get(
-							"propertyDefinitionId");
+				for (CmisExtensionElement property : extension.getChildren()) {
+					Map<String, String> attributes = property.getAttributes();
 
-						if (id.equals("cm:description")) {
-							for (CmisExtensionElement propertyValues :
-									property.getChildren()) {
+					String propertyDefinitionId = attributes.get(
+						"propertyDefinitionId");
 
-								return propertyValues.getValue();
-							}
-						}
+					if (!propertyDefinitionId.equals("cm:description")) {
+						continue;
+					}
+
+					for (CmisExtensionElement propertyValues :
+							property.getChildren()) {
+
+						return propertyValues.getValue();
 					}
 				}
 			}

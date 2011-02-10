@@ -140,6 +140,7 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(PortletPreferencesPersistenceTest.class);
 		testSuite.addTestSuite(RegionPersistenceTest.class);
 		testSuite.addTestSuite(ReleasePersistenceTest.class);
+		testSuite.addTestSuite(RepositoryEntryPersistenceTest.class);
 		testSuite.addTestSuite(RepositoryPersistenceTest.class);
 		testSuite.addTestSuite(ResourceActionPersistenceTest.class);
 		testSuite.addTestSuite(ResourceCodePersistenceTest.class);

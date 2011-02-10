@@ -615,7 +615,7 @@
 		<field name="dlFolderId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.RepositoryEntry">
-		<field name="entryId" type="long" />
+		<field name="repositoryEntryId" type="long" />
 		<field name="repositoryId" type="long" />
 		<field name="mappedId" type="String" />
 	</model>

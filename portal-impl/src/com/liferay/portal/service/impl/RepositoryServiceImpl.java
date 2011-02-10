@@ -16,11 +16,13 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.NoSuchRepositoryException;
+import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.BaseRepositoryImpl;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -35,14 +37,10 @@ import com.liferay.portal.service.base.RepositoryServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
-
-import org.apache.commons.collections.map.ReferenceMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Alexander Chow
@@ -54,8 +52,6 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			String portletId, int type,
 			UnicodeProperties typeSettingsProperties)
 		throws PortalException, SystemException {
-
-		// Repository
 
 		User user = getUser();
 		Date now = new Date();
@@ -121,7 +117,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		if (purge) {
-			getLocalRepositoryImpl(repositoryId).deleteAll();
+			LocalRepository localRepositoryImpl = getLocalRepositoryImpl(
+				repositoryId);
+
+			localRepositoryImpl.deleteAll();
 		}
 
 		Repository repository = repositoryPersistence.fetchByPrimaryKey(
@@ -146,25 +145,27 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		throws SystemException {
 
 		LocalRepository localRepositoryImpl =
-			_localRepositoryMap.get(repositoryId);
+			_localRepositoriesByRepositoryId.get(repositoryId);
 
-		if (localRepositoryImpl == null) {
-			int type = _getRepositoryType(repositoryId);
-
-			if (type == 0) {
-				localRepositoryImpl = new LiferayLocalRepository(repositoryId);
-			}
-			else {
-				BaseRepositoryImpl baseRepository = _createRepositoryImpl(
-					repositoryId, type);
-
-				localRepositoryImpl = baseRepository.getLocalRepository();
-			}
-
-			checkRepository(repositoryId);
-
-			_localRepositoryMap.put(repositoryId, localRepositoryImpl);
+		if (localRepositoryImpl != null) {
+			return localRepositoryImpl;
 		}
+
+		int type = getRepositoryType(repositoryId);
+
+		if (type == 0) {
+			localRepositoryImpl = new LiferayLocalRepository(repositoryId);
+		}
+		else {
+			BaseRepositoryImpl baseRepositoryImpl = createRepositoryImpl(
+				repositoryId, type);
+
+			localRepositoryImpl = baseRepositoryImpl.getLocalRepository();
+		}
+
+		checkRepository(repositoryId);
+
+		_localRepositoriesByRepositoryId.put(repositoryId, localRepositoryImpl);
 
 		return localRepositoryImpl;
 	}
@@ -173,31 +174,35 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			long folderId, long fileEntryId, long fileVersionId)
 		throws SystemException {
 
-		long entryId = _getEntryId(folderId, fileEntryId, fileVersionId);
+		long repositoryEntryId = getRepositoryEntryId(
+			folderId, fileEntryId, fileVersionId);
 
 		LocalRepository localRepositoryImpl =
-			_localRepositoryEntryMap.get(entryId);
+			_localRepositoriesByRepositoryEntryId.get(repositoryEntryId);
+
+		if (localRepositoryImpl != null) {
+			return localRepositoryImpl;
+		}
+
+		localRepositoryImpl = new LiferayLocalRepository(
+			folderId, fileEntryId, fileVersionId);
+
+		if (localRepositoryImpl.getRepositoryId() == 0) {
+			localRepositoryImpl = null;
+		}
 
 		if (localRepositoryImpl == null) {
-			localRepositoryImpl = new LiferayLocalRepository(
-				folderId, fileEntryId, fileVersionId);
+			BaseRepositoryImpl baseRepositoryImpl = createRepositoryImpl(
+				repositoryEntryId);
 
-			if (localRepositoryImpl.getRepositoryId() == 0) {
-				localRepositoryImpl = null;
-			}
-
-			if (localRepositoryImpl == null) {
-				BaseRepositoryImpl baseRepository = _createRepositoryImpl(
-					entryId);
-
-				localRepositoryImpl = baseRepository.getLocalRepository();
-			}
-			else {
-				checkRepository(localRepositoryImpl.getRepositoryId());
-			}
-
-			_localRepositoryEntryMap.put(entryId, localRepositoryImpl);
+			localRepositoryImpl = baseRepositoryImpl.getLocalRepository();
 		}
+		else {
+			checkRepository(localRepositoryImpl.getRepositoryId());
+		}
+
+		_localRepositoriesByRepositoryEntryId.put(
+			repositoryEntryId, localRepositoryImpl);
 
 		return localRepositoryImpl;
 	}
@@ -213,22 +218,24 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		throws SystemException {
 
 		com.liferay.portal.kernel.repository.Repository repositoryImpl =
-			_repositoryMap.get(repositoryId);
+			_repositoriesByRepositoryId.get(repositoryId);
 
-		if (repositoryImpl == null) {
-			int type = _getRepositoryType(repositoryId);
-
-			if (type == 0) {
-				repositoryImpl = new LiferayRepository(repositoryId);
-			}
-			else {
-				repositoryImpl = _createRepositoryImpl(repositoryId, type);
-			}
-
-			checkRepository(repositoryId);
-
-			_repositoryMap.put(repositoryId, repositoryImpl);
+		if (repositoryImpl != null) {
+			return repositoryImpl;
 		}
+
+		int type = getRepositoryType(repositoryId);
+
+		if (type == 0) {
+			repositoryImpl = new LiferayRepository(repositoryId);
+		}
+		else {
+			repositoryImpl = createRepositoryImpl(repositoryId, type);
+		}
+
+		checkRepository(repositoryId);
+
+		_repositoriesByRepositoryId.put(repositoryId, repositoryImpl);
 
 		return repositoryImpl;
 	}
@@ -237,28 +244,31 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			long folderId, long fileEntryId, long fileVersionId)
 		throws SystemException {
 
-		long entryId = _getEntryId(folderId, fileEntryId, fileVersionId);
+		long repositoryEntryId = getRepositoryEntryId(
+			folderId, fileEntryId, fileVersionId);
 
 		com.liferay.portal.kernel.repository.Repository repositoryImpl =
-			_repositoryEntryMap.get(entryId);
+			_repositoriesByEntryId.get(repositoryEntryId);
+
+		if (repositoryImpl != null) {
+			return repositoryImpl;
+		}
+
+		repositoryImpl = new LiferayRepository(
+			folderId, fileEntryId, fileVersionId);
+
+		if (repositoryImpl.getRepositoryId() == 0) {
+			repositoryImpl = null;
+		}
 
 		if (repositoryImpl == null) {
-			repositoryImpl = new LiferayRepository(
-				folderId, fileEntryId, fileVersionId);
-
-			if (repositoryImpl.getRepositoryId() == 0) {
-				repositoryImpl = null;
-			}
-
-			if (repositoryImpl == null) {
-				repositoryImpl = _createRepositoryImpl(entryId);
-			}
-			else {
-				checkRepository(repositoryImpl.getRepositoryId());
-			}
-
-			_repositoryEntryMap.put(entryId, repositoryImpl);
+			repositoryImpl = createRepositoryImpl(repositoryEntryId);
 		}
+		else {
+			checkRepository(repositoryImpl.getRepositoryId());
+		}
+
+		_repositoriesByEntryId.put(repositoryEntryId, repositoryImpl);
 
 		return repositoryImpl;
 	}
@@ -267,14 +277,12 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		throws SystemException {
 
 		try {
-			Properties repositoryImpls = PropsUtil.getProperties(
-				PropsKeys.DL_REPOSITORY_IMPL, true);
-
-			String repositoryImpl = repositoryImpls.getProperty(
-				Long.toString(type));
+			String repositoryImplClassName = PropsUtil.get(
+				PropsKeys.DL_REPOSITORY_IMPL, new Filter(String.valueOf(type)));
 
 			Class<BaseRepositoryImpl> repositoryImplClass =
-				(Class<BaseRepositoryImpl>)Class.forName(repositoryImpl);
+				(Class<BaseRepositoryImpl>)Class.forName(
+					repositoryImplClassName);
 
 			return (String[])repositoryImplClass.getField(
 				"SUPPORTED_CONFIGURATIONS").get(null);
@@ -288,14 +296,12 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		throws SystemException {
 
 		try {
-			Properties repositoryImpls = PropsUtil.getProperties(
-				PropsKeys.DL_REPOSITORY_IMPL, true);
-
-			String repositoryImpl = repositoryImpls.getProperty(
-				Long.toString(type));
+			String repositoryImplClassName = PropsUtil.get(
+				PropsKeys.DL_REPOSITORY_IMPL, new Filter(String.valueOf(type)));
 
 			Class<BaseRepositoryImpl> repositoryImplClass =
-				(Class<BaseRepositoryImpl>)Class.forName(repositoryImpl);
+				(Class<BaseRepositoryImpl>)Class.forName(
+					repositoryImplClassName);
 
 			String[] supportedConfigurations =
 				(String[])repositoryImplClass.getField(
@@ -332,8 +338,6 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			long repositoryId, String name, String description)
 		throws PortalException, SystemException {
 
-		// Repository
-
 		Repository repository = repositoryPersistence.findByPrimaryKey(
 			repositoryId);
 
@@ -342,6 +346,52 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		repository.setDescription(description);
 
 		repositoryPersistence.update(repository, false);
+	}
+
+	protected BaseRepositoryImpl createRepositoryImpl(long repositoryEntryId)
+		throws SystemException, RepositoryException {
+
+		try {
+			RepositoryEntry repositoryEntry =
+				repositoryEntryPersistence.findByPrimaryKey(repositoryEntryId);
+
+			long repositoryId = repositoryEntry.getRepositoryId();
+
+			return (BaseRepositoryImpl)getRepositoryImpl(repositoryId);
+		}
+		catch (NoSuchRepositoryEntryException nsree) {
+			throw new RepositoryException(nsree);
+		}
+	}
+
+	protected BaseRepositoryImpl createRepositoryImpl(
+			long repositoryId, int type)
+		throws RepositoryException {
+
+		try {
+			String repositoryImplClassName = PropsUtil.get(
+				PropsKeys.DL_REPOSITORY_IMPL, new Filter(String.valueOf(type)));
+
+			BaseRepositoryImpl baseRepositoryImpl =
+				(BaseRepositoryImpl)InstanceFactory.newInstance(
+					repositoryImplClassName);
+
+			baseRepositoryImpl.setRepositoryId(repositoryId);
+
+			Repository repository = getRepository(repositoryId);
+
+			baseRepositoryImpl.setTypeSettingsProperties(
+				repository.getTypeSettingsProperties());
+
+			baseRepositoryImpl.initRepository();
+
+			return baseRepositoryImpl;
+		}
+		catch (Exception e) {
+			throw new RepositoryException(
+				"There is no valid repository class for type " + type,
+				e);
+		}
 	}
 
 	protected long getDLFolderId(
@@ -360,104 +410,50 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return dlFolder.getFolderId();
 	}
 
-	private BaseRepositoryImpl _createRepositoryImpl(long entryId)
-		throws SystemException, RepositoryException {
-
-		BaseRepositoryImpl baseRepository;
-
-		try {
-			RepositoryEntry repositoryEntry =
-				repositoryEntryPersistence.findByPrimaryKey(entryId);
-
-			long repositoryId = repositoryEntry.getRepositoryId();
-
-			baseRepository = (BaseRepositoryImpl)getRepositoryImpl(
-				repositoryId);
-		}
-		catch (NoSuchRepositoryEntryException nsree) {
-			throw new RepositoryException(nsree);
-		}
-
-		return baseRepository;
-	}
-
-	private BaseRepositoryImpl _createRepositoryImpl(
-			long repositoryId, int type)
-		throws RepositoryException {
-
-		Properties repositoryImpls = PropsUtil.getProperties(
-			PropsKeys.DL_REPOSITORY_IMPL, true);
-
-		String repositoryImpl = repositoryImpls.getProperty(
-			Long.toString(type));
-
-		try {
-			BaseRepositoryImpl baseRepository = (BaseRepositoryImpl)
-				Class.forName(repositoryImpl).newInstance();
-
-			UnicodeProperties typeSettingsProperties = getRepository(
-				repositoryId).getTypeSettingsProperties();
-
-			baseRepository.initRepository(
-				repositoryId, typeSettingsProperties,
-				repositoryEntryPersistence, counterLocalService);
-
-			return baseRepository;
-		}
-		catch (Exception e) {
-			throw new RepositoryException(
-				"There is no valid repository class for type " + type,
-				e);
-		}
-	}
-
-	private long _getEntryId(
+	protected long getRepositoryEntryId(
 			long folderId, long fileEntryId, long fileVersionId)
 		throws RepositoryException {
 
-		long entryId = 0;
+		long repositoryEntryId = 0;
 
 		if (folderId != 0) {
-			entryId = folderId;
+			repositoryEntryId = folderId;
 		}
 		else if (fileEntryId != 0) {
-			entryId = fileEntryId;
+			repositoryEntryId = fileEntryId;
 		}
 		else if (fileVersionId != 0) {
-			entryId = fileVersionId;
+			repositoryEntryId = fileVersionId;
 		}
 
-		if (entryId == 0) {
+		if (repositoryEntryId == 0) {
 			throw new RepositoryException(
 				"Missing a valid ID for folder, fileEntry or fileVersion");
 		}
 
-		return entryId;
+		return repositoryEntryId;
 	}
 
-	private int _getRepositoryType(long repositoryId) throws SystemException {
-		int type = 0;
-
-		Repository repositoryObj = repositoryPersistence.fetchByPrimaryKey(
+	protected int getRepositoryType(long repositoryId) throws SystemException {
+		Repository repository = repositoryPersistence.fetchByPrimaryKey(
 			repositoryId);
 
-		if (repositoryObj != null) {
-			type = repositoryObj.getType();
+		if (repository != null) {
+			return repository.getType();
 		}
 
-		return type;
+		return 0;
 	}
 
-	private Map<Long, LocalRepository> _localRepositoryEntryMap =
-		Collections.synchronizedMap(new ReferenceMap());
-
-	private Map<Long, LocalRepository> _localRepositoryMap =
-		Collections.synchronizedMap(new HashMap());
-
+	private Map<Long, LocalRepository> _localRepositoriesByRepositoryEntryId =
+		new ConcurrentHashMap<Long, LocalRepository>();
+	private Map<Long, LocalRepository> _localRepositoriesByRepositoryId =
+		new ConcurrentHashMap<Long, LocalRepository>();
 	private Map<Long, com.liferay.portal.kernel.repository.Repository>
-		_repositoryEntryMap = Collections.synchronizedMap(new ReferenceMap());
-
+		_repositoriesByEntryId = new ConcurrentHashMap
+			<Long, com.liferay.portal.kernel.repository.Repository>();
 	private Map<Long, com.liferay.portal.kernel.repository.Repository>
-		_repositoryMap = Collections.synchronizedMap(new HashMap());
+		_repositoriesByRepositoryId = new ConcurrentHashMap
+			<Long, com.liferay.portal.kernel.repository.Repository>();
 
 }
