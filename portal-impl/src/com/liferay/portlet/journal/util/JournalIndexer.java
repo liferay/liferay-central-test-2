@@ -335,10 +335,13 @@ public class JournalIndexer extends BaseIndexer {
 			return;
 		}
 
-		String defaultLocale =
-			GetterUtil.getString(
-				element.getDocument().getRootElement().attributeValue(
-					"default-locale"));
+		com.liferay.portal.kernel.xml.Document structureDocument =
+			element.getDocument();
+
+		Element rootElement = structureDocument.getRootElement();
+
+		String defaultLocale = GetterUtil.getString(
+			rootElement.attributeValue("default-locale"));
 
 		String name = encodeFieldName(element.attributeValue("name"));
 
@@ -346,9 +349,10 @@ public class JournalIndexer extends BaseIndexer {
 			"dynamic-content");
 
 		for (Element dynamicContentElement : dynamicContentElements) {
-			String[] value = new String[] {dynamicContentElement.getText()};
 			String contentLocale = GetterUtil.getString(
 				dynamicContentElement.attributeValue("language-id"));
+
+			String[] value = new String[] {dynamicContentElement.getText()};
 
 			if (elType.equals("multi-list")) {
 				List<Element> optionElements = dynamicContentElement.elements(
