@@ -115,11 +115,7 @@ public class GZipFilter extends BasePortalFilter {
 
 		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-		boolean ensureContentLength = BrowserSnifferUtil.isFirefox(request) &&
-			request.getRequestURI().endsWith("/rss");
-
-		GZipResponse gZipResponse = new GZipResponse(
-			response, ensureContentLength);
+		GZipResponse gZipResponse = new GZipResponse(response);
 
 		processFilter(GZipFilter.class, request, gZipResponse, filterChain);
 
