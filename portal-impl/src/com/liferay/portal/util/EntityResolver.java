@@ -520,6 +520,12 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"http://www.ibm.com/webservices/xsd/" +
+				"j2ee_web_services_client_1_1.xsd",
+			"j2ee_web_services_client_1_1.xsd"
+		),
+
+		new KeyValuePair(
 			"http://java.sun.com/xml/ns/j2ee/jsp_2_0.xsd",
 			"jsp_2_0.xsd"
 		),
@@ -537,11 +543,6 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		new KeyValuePair(
 			"http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd",
 			"web-app_2_4.xsd"
-		),
-
-		new KeyValuePair(
-			"http://www.ibm.com/webservices/xsd/j2ee_web_services_client_1_1.xsd",
-			"j2ee_web_services_client_1_1.xsd"
 		),
 
 		new KeyValuePair(
