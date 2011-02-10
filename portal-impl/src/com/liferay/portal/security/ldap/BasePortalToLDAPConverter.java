@@ -221,9 +221,11 @@ public class BasePortalToLDAPConverter implements PortalToLDAPConverter {
 				UserConverterKeys.PASSWORD);
 
 			if (passwordKey.equals("unicodePwd")) {
-				String newQuotedPassword = "\"" + newPassword + "\"";
-				byte[] newUnicodePassword =
-					newQuotedPassword.getBytes("UTF-16LE");
+				String newQuotedPassword = StringPool.QUOTE.concat(
+					newPassword).concat(StringPool.QUOTE);
+
+				byte[] newUnicodePassword = newQuotedPassword.getBytes(
+					"UTF-16LE");
 
 				addModificationItem(
 					new BasicAttribute(passwordKey, newUnicodePassword),

@@ -33,15 +33,19 @@ public class Modifications {
 		return new Modifications();
 	}
 
+	public ModificationItem addItem(BasicAttribute basicAttribute) {
+		return addItem(DirContext.REPLACE_ATTRIBUTE, basicAttribute);
+	}
+
 	public ModificationItem addItem(
 		int modificationOp, BasicAttribute basicAttribute) {
 
-		ModificationItem item = new ModificationItem(
+		ModificationItem modificationItem = new ModificationItem(
 			modificationOp, basicAttribute);
 
-		_items.add(item);
+		_items.add(modificationItem);
 
-		return item;
+		return modificationItem;
 	}
 
 	public ModificationItem addItem(
@@ -54,10 +58,6 @@ public class Modifications {
 		}
 
 		return addItem(modificationOp, basicAttribute);
-	}
-
-	public ModificationItem addItem(BasicAttribute basicAttribute) {
-		return addItem(DirContext.REPLACE_ATTRIBUTE, basicAttribute);
 	}
 
 	public ModificationItem addItem(String id, String value) {
