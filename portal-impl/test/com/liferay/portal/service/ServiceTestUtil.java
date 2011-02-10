@@ -42,6 +42,7 @@ import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.util.BookmarksIndexer;
+import com.liferay.portlet.directory.workflow.UserWorkflowHandler;
 import com.liferay.portlet.documentlibrary.util.DLIndexer;
 import com.liferay.portlet.documentlibrary.workflow.DLFileEntryWorkflowHandler;
 import com.liferay.portlet.enterpriseadmin.util.UserIndexer;
@@ -172,6 +173,7 @@ public class ServiceTestUtil {
 			new JournalArticleWorkflowHandler());
 		WorkflowHandlerRegistryUtil.register(new MBDiscussionWorkflowHandler());
 		WorkflowHandlerRegistryUtil.register(new MBMessageWorkflowHandler());
+		WorkflowHandlerRegistryUtil.register(new UserWorkflowHandler());
 
 		// Company
 
