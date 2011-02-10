@@ -14,6 +14,7 @@
 
 package com.liferay.portal.servlet.filters.gzip;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -35,7 +36,8 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class GZipResponse extends HttpServletResponseWrapper {
 
-	public GZipResponse(HttpServletResponse response) {
+	public GZipResponse(
+		HttpServletResponse response, boolean ensureContentLength) {
 		super(response);
 
 		_response = response;
@@ -47,9 +49,13 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		_response.setContentLength(-1);
 
 		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
+
+		if (ensureContentLength) {
+			_unsyncByteArrayOutputStream = new UnsyncByteArrayOutputStream();
+		}
 	}
 
-	public void finishResponse() {
+	public void finishResponse() throws IOException {
 		try {
 			if (_writer != null) {
 				_writer.close();
@@ -59,6 +65,12 @@ public class GZipResponse extends HttpServletResponseWrapper {
 			}
 		}
 		catch (IOException e) {
+		}
+
+		if (_unsyncByteArrayOutputStream != null) {
+			_response.setContentLength(_unsyncByteArrayOutputStream.size());
+
+			_unsyncByteArrayOutputStream.writeTo(_response.getOutputStream());
 		}
 	}
 
@@ -74,7 +86,14 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		}
 
 		if (_stream == null) {
-			_stream = new GZipServletOutputStream(_response.getOutputStream());
+			if (_unsyncByteArrayOutputStream != null) {
+				_stream = new GZipServletOutputStream(
+					_unsyncByteArrayOutputStream);
+			}
+			else {
+				_stream = new GZipServletOutputStream(
+					_response.getOutputStream());
+			}
 		}
 
 		return _stream;
@@ -93,7 +112,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 			_log.warn("Use getOutputStream for optimum performance");
 		}
 
-		_stream = new GZipServletOutputStream(_response.getOutputStream());
+		_stream = getOutputStream();
 
 		_writer = new UnsyncPrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
@@ -110,6 +129,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 	private static Log _log = LogFactoryUtil.getLog(GZipResponse.class);
 
 	private HttpServletResponse _response;
+	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
 	private ServletOutputStream _stream;
 	private PrintWriter _writer;
 

@@ -136,6 +136,9 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		setStatus(SC_MOVED_TEMPORARILY);
 	}
 
+	public void setContentLength(int contentLength) {
+	}
+
 	public void setContentType(String contentType) {
 		_contentType = contentType;
 
