@@ -335,28 +335,62 @@ public class JournalIndexer extends BaseIndexer {
 			return;
 		}
 
+		String defaultLocale =
+			GetterUtil.getString(
+				element.getDocument().getRootElement().attributeValue(
+					"default-locale"));
+
 		String name = encodeFieldName(element.attributeValue("name"));
 
-		Element dynamicContentElement = element.element("dynamic-content");
+		List<Element> dynamicContentElements = element.elements(
+			"dynamic-content");
 
-		String[] value = new String[] {dynamicContentElement.getText()};
+		for (Element dynamicContentElement : dynamicContentElements) {
+			String[] value = new String[] {dynamicContentElement.getText()};
+			String contentLocale = GetterUtil.getString(
+				dynamicContentElement.attributeValue("language-id"));
 
-		if (elType.equals("multi-list")) {
-			List<Element> optionElements = dynamicContentElement.elements(
-				"option");
+			if (elType.equals("multi-list")) {
+				List<Element> optionElements = dynamicContentElement.elements(
+					"option");
 
-			value = new String[optionElements.size()];
+				value = new String[optionElements.size()];
 
-			for (int i = 0; i < optionElements.size(); i++) {
-				value[i] = optionElements.get(i).getText();
+				for (int i = 0; i < optionElements.size(); i++) {
+					value[i] = optionElements.get(i).getText();
+				}
 			}
-		}
 
-		if (elIndexType.equals("keyword")) {
-			document.addKeyword(name, value);
-		}
-		else if (elIndexType.equals("text")) {
-			document.addText(name, StringUtil.merge(value, StringPool.SPACE));
+			if (elIndexType.equals("keyword")) {
+				if (Validator.isNull(contentLocale)) {
+					document.addKeyword(name, value);
+				}
+				else {
+					if (defaultLocale.equals(contentLocale)) {
+						document.addKeyword(name, value);
+					}
+
+					document.addKeyword(
+						name.concat(StringPool.UNDERLINE).concat(contentLocale),
+						value);
+				}
+			}
+			else if (elIndexType.equals("text")) {
+				if (Validator.isNull(contentLocale)) {
+					document.addKeyword(
+						name, StringUtil.merge(value, StringPool.SPACE));
+				}
+				else {
+					if (defaultLocale.equals(contentLocale)) {
+						document.addKeyword(
+							name, StringUtil.merge(value, StringPool.SPACE));
+					}
+
+					document.addKeyword(
+						name.concat(StringPool.UNDERLINE).concat(contentLocale),
+						StringUtil.merge(value, StringPool.SPACE));
+				}
+			}
 		}
 	}
 
