@@ -748,7 +748,7 @@ input[type="text"], input[type="password"], select, textarea, .textarea, #breadc
 	border-radius: 0;
 }
 
-.aui-field-element {
+.aui-field-element, .lfr-preview-file-toolbar, .lfr-preview-file-index, .lfr-preview-file-info {
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;

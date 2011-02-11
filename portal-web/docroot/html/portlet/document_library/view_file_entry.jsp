@@ -175,37 +175,43 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 						<liferay-ui:message key="generating-preview-will-take-a-few-minutes" />
 					</c:when>
 					<c:otherwise>
-						<div>
-							[<a href="javascript:<portlet:namespace />previous();"><liferay-ui:message key="previous" /></a>] [<a href="javascript:<portlet:namespace />next();"><liferay-ui:message key="next" /></a>]
+						<div class="lfr-preview-file" id="<portlet:namespace />previewFile">
+							<div class="lfr-preview-file-content" id="<portlet:namespace />previewFileContent">
+							
+								<div class="lfr-preview-file-image-current-column">
+									<div class="lfr-preview-file-image-container">
+										<img class="lfr-preview-file-image-current" id="<portlet:namespace />previewFile" src="<%= previewFileURL + "1" %>" />
+									</div>
+									<span class="lfr-preview-file-actions aui-helper-hidden" id="<portlet:namespace />previewFileActions">
+										<span class="lfr-preview-file-toolbar" id="<portlet:namespace />previewToolbar"></span>
 
-							<span id="<portlet:namespace />previewFileIndex">1</span> of <span><%= previewFileCount %></span>
+										<span class="lfr-preview-file-info">
+											<span class="lfr-preview-file-index" id="<portlet:namespace />previewFileIndex">1</span> of <span class="lfr-preview-file-count"><%= previewFileCount %></span>
+										</span>
+									</span>
+								</div>
+
+								<div class="lfr-preview-file-images">
+									<div class="lfr-preview-file-images-content" id="<portlet:namespace />previewImagesContent"></div>
+								</div>
+							</div>
 						</div>
 
-						<div>
-							<img id="<portlet:namespace />previewFile" src="<%= previewFileURL + "1" %>" width="500px" />
-						</div>
-
-						<script type="text/javascript">
-							var <portlet:namespace />previewFileIndex = 1;
-
-							function <portlet:namespace />next() {
-								if (<portlet:namespace />previewFileIndex < <%= previewFileCount %>) {
-									<portlet:namespace />previewFileIndex++;
+						<aui:script use="aui-base,liferay-preview">
+							new Liferay.Preview(
+								{
+									actionContent: '#<portlet:namespace />previewFileActions',
+									baseImageURL: '<%= previewFileURL %>',
+									boundingBox: '#<portlet:namespace />previewFile',
+									contentBox: '#<portlet:namespace />previewFileContent',
+									currentPreviewImage: '#<portlet:namespace />previewFile',
+									previewFileIndexNode: '#<portlet:namespace />previewFileIndex',
+									imageListContent: '#<portlet:namespace />previewImagesContent',
+									maxIndex: <%= previewFileCount %>,
+									toolbar: '#<portlet:namespace />previewToolbar'
 								}
-
-								document.getElementById('<portlet:namespace/>previewFile').src = '<%= previewFileURL %>' + <portlet:namespace />previewFileIndex;
-								document.getElementById('<portlet:namespace/>previewFileIndex').innerHTML = <portlet:namespace />previewFileIndex;
-							}
-
-							function <portlet:namespace />previous() {
-								if (<portlet:namespace />previewFileIndex > 1) {
-									<portlet:namespace />previewFileIndex--;
-								}
-
-								document.getElementById('<portlet:namespace/>previewFile').src = '<%= previewFileURL %>' + <portlet:namespace />previewFileIndex;
-								document.getElementById('<portlet:namespace/>previewFileIndex').innerHTML = <portlet:namespace />previewFileIndex;
-							}
-						</script>
+							).render();
+						</aui:script>
 					</c:otherwise>
 				</c:choose>
 			</div>
