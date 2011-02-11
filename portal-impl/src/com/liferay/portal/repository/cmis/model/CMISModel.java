@@ -87,7 +87,7 @@ public abstract class CMISModel {
 		}
 
 		AllowableActions allowableActions = cmisObject.getAllowableActions();
-		
+
 		Set<Action> allowableActionsSet =
 			allowableActions.getAllowableActions();
 
