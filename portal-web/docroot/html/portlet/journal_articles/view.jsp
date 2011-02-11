@@ -85,14 +85,6 @@ double version = ParamUtil.getDouble(request, "version", -1);
 		for (int i = 0; i < results.size(); i++) {
 			JournalArticle article = (JournalArticle)results.get(i);
 
-			if (!JournalArticlePermission.contains(permissionChecker, article, ActionKeys.VIEW)) {
-				if (searchContainer != null) {
-					searchContainer.setTotal(searchContainer.getTotal() - 1);
-				}
-
-				continue;
-			}
-
 			article = article.toEscapedModel();
 
 			ResultRow row = new ResultRow(article, article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion(), i);
