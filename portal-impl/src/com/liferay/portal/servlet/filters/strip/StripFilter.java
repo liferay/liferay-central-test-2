@@ -187,7 +187,7 @@ public class StripFilter extends BasePortalFilter {
 
 		charBuffer.position(charBuffer.position() + closeTag.length());
 
-		skipWhiteSpace(charBuffer, writer);
+		skipWhiteSpace(charBuffer, writer, true);
 	}
 
 	protected void outputOpenTag(
@@ -400,7 +400,7 @@ public class StripFilter extends BasePortalFilter {
 
 		writer.write(content);
 
-		skipWhiteSpace(oldCharBuffer, writer);
+		skipWhiteSpace(oldCharBuffer, writer, true);
 	}
 
 	protected void processTextArea(CharBuffer oldCharBuffer, Writer writer)
@@ -425,10 +425,11 @@ public class StripFilter extends BasePortalFilter {
 
 		writer.write(content);
 
-		skipWhiteSpace(oldCharBuffer, writer);
+		skipWhiteSpace(oldCharBuffer, writer, true);
 	}
 
-	protected boolean skipWhiteSpace(CharBuffer charBuffer, Writer writer)
+	protected boolean skipWhiteSpace(
+			CharBuffer charBuffer, Writer writer, boolean keepOne)
 		throws IOException {
 
 		boolean skipped = false;
@@ -450,7 +451,7 @@ public class StripFilter extends BasePortalFilter {
 			}
 		}
 
-		if (skipped) {
+		if (skipped && keepOne) {
 			writer.write(CharPool.SPACE);
 		}
 
@@ -460,7 +461,7 @@ public class StripFilter extends BasePortalFilter {
 	protected void strip(CharBuffer charBuffer, Writer writer)
 		throws IOException {
 
-		skipWhiteSpace(charBuffer, writer);
+		skipWhiteSpace(charBuffer, writer, false);
 
 		while (charBuffer.hasRemaining()) {
 			char c = charBuffer.get();
@@ -495,7 +496,7 @@ public class StripFilter extends BasePortalFilter {
 				}
 			}
 			else if (c == CharPool.GREATER_THAN) {
-				skipWhiteSpace(charBuffer, writer);
+				skipWhiteSpace(charBuffer, writer, true);
 			}
 		}
 
