@@ -783,6 +783,8 @@ Liferay.Service.registerClass(
 		getArticleByUrlTitle: true,
 		getLatestArticle: true,
 		removeArticleLocale: true,
+		search: true,
+		searchCount: true,
 		subscribe: true,
 		unsubscribe: true,
 		updateArticle: true,

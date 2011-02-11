@@ -16,6 +16,7 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -27,6 +28,8 @@ import com.liferay.portlet.journal.service.permission.JournalPermission;
 
 import java.io.File;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -249,6 +252,86 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 		return journalArticleLocalService.removeArticleLocale(
 			groupId, articleId, version, languageId);
+	}
+
+	public List<JournalArticle> search(
+			long companyId, long groupId, String keywords, Double version,
+			String type, String structureId, String templateId,
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
+			int start, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return journalArticleFinder.filterFindByKeywords(
+			companyId, groupId, keywords, version, type, structureId,
+			templateId, displayDateGT, displayDateLT, status, reviewDate, start,
+			end, obc);
+	}
+
+	public List<JournalArticle> search(
+			long companyId, long groupId, String articleId, Double version,
+			String title, String description, String content, String type,
+			String structureId, String templateId, Date displayDateGT,
+			Date displayDateLT, int status, Date reviewDate,
+			boolean andOperator, int start, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return journalArticleFinder.filterFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
+			companyId, groupId, articleId, version, title, description, content,
+			type, structureId, templateId, displayDateGT, displayDateLT,
+			status, reviewDate, andOperator, start, end, obc);
+	}
+
+	public List<JournalArticle> search(
+			long companyId, long groupId, String articleId, Double version,
+			String title, String description, String content, String type,
+			String[] structureIds, String[] templateIds, Date displayDateGT,
+			Date displayDateLT, int status, Date reviewDate,
+			boolean andOperator, int start, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return journalArticleFinder.filterFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
+			companyId, groupId, articleId, version, title, description, content,
+			type, structureIds, templateIds, displayDateGT, displayDateLT,
+			status, reviewDate, andOperator, start, end, obc);
+	}
+
+	public int searchCount(
+			long companyId, long groupId, String keywords, Double version,
+			String type, String structureId, String templateId,
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate)
+		throws SystemException {
+
+		return journalArticleFinder.filterCountByKeywords(
+			companyId, groupId, keywords, version, type, structureId,
+			templateId, displayDateGT, displayDateLT, status, reviewDate);
+	}
+
+	public int searchCount(
+			long companyId, long groupId, String articleId, Double version,
+			String title, String description, String content, String type,
+			String structureId, String templateId, Date displayDateGT,
+			Date displayDateLT, int status, Date reviewDate,
+			boolean andOperator)
+		throws SystemException {
+
+		return journalArticleFinder.filterCountByC_G_A_V_T_D_C_T_S_T_D_S_R(
+			companyId, groupId, articleId, version, title, description, content,
+			type, structureId, templateId, displayDateGT, displayDateLT,
+			status, reviewDate, andOperator);
+	}
+
+	public int searchCount(
+			long companyId, long groupId, String articleId, Double version,
+			String title, String description, String content, String type,
+			String[] structureIds, String[] templateIds, Date displayDateGT,
+			Date displayDateLT, int status, Date reviewDate,
+			boolean andOperator)
+		throws SystemException {
+
+		return journalArticleFinder.filterCountByC_G_A_V_T_D_C_T_S_T_D_S_R(
+			companyId, groupId, articleId, version, title, description, content,
+			type, structureIds, templateIds, displayDateGT, displayDateLT,
+			status, reviewDate, andOperator);
 	}
 
 	public void subscribe(long groupId)
