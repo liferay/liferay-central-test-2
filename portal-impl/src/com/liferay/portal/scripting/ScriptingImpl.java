@@ -83,11 +83,12 @@ public class ScriptingImpl implements Scripting {
 			throw new UnsupportedLanguageException(language);
 		}
 
-		StopWatch timer = null;
+		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
-			timer = new StopWatch();
-			timer.start();
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
 		}
 
 		try {
@@ -99,9 +100,8 @@ public class ScriptingImpl implements Scripting {
 		}
 		finally {
 			if (_log.isDebugEnabled()) {
-				timer.stop();
-
-				_log.debug("Execution time: " + timer.toString());
+				_log.debug(
+					"Evaluated script in " + stopWatch.getTime() + " ms");
 			}
 		}
 	}
