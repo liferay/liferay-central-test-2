@@ -42,11 +42,13 @@ public class PortalClassInvoker {
 			return methodHandler.invoke(newInstance);
 		}
 		catch (InvocationTargetException ite) {
-			if (ite.getCause() instanceof Error) {
+			Throwable cause = ite.getCause();
+
+			if (cause instanceof Error) {
 				throw new SystemException(ite);
 			}
 			else {
-				throw (Exception)ite.getCause();
+				throw (Exception)cause;
 			}
 		}
 		finally {
@@ -76,11 +78,13 @@ public class PortalClassInvoker {
 			return methodHandler.invoke(newInstance);
 		}
 		catch (InvocationTargetException ite) {
-			if (ite.getCause() instanceof Error) {
+			Throwable cause = ite.getCause();
+
+			if (cause instanceof Error) {
 				throw new SystemException(ite);
 			}
 			else {
-				throw (Exception)ite.getCause();
+				throw (Exception)cause;
 			}
 		}
 		finally {
