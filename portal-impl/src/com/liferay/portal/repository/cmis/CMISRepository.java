@@ -930,19 +930,17 @@ public class CMISRepository extends BaseRepositoryImpl {
 	protected Folder getFolder(Session session, long folderId)
 		throws PortalException, SystemException {
 
-		try {
-			DLFolder dlFolder = DLFolderUtil.findByPrimaryKey(folderId);
+		DLFolder dlFolder = DLFolderUtil.fetchByPrimaryKey(folderId);
 
+		if (dlFolder != null) {
 			if (dlFolder.isMountPoint()) {
 				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 			else {
 				throw new RepositoryException(
-					"CMIS repository should not be used for folderId " +
+					"CMIS repository should not be used for folder ID " +
 						folderId);
 			}
-		}
-		catch (NoSuchFolderException nsfe) {
 		}
 
 		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {

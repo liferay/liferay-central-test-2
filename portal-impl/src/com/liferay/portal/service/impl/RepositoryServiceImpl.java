@@ -70,9 +70,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		repository.setPortletId(portletId);
 		repository.setType(type);
 		repository.setTypeSettingsProperties(typeSettingsProperties);
-		repository.setDlFolderId(getDLFolderId(
-			user, groupId, repositoryId, parentFolderId, name, description,
-			serviceContext));
+		repository.setDlFolderId(
+			getDLFolderId(
+				user, groupId, repositoryId, parentFolderId, name, description,
+				serviceContext));
 
 		repositoryPersistence.update(repository, false);
 

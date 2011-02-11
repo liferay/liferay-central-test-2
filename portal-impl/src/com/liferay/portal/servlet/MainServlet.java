@@ -421,8 +421,8 @@ public class MainServlet extends ActionServlet {
 		request = encryptRequest(request, companyId);
 
 		long userId = getUserId(request);
+
 		String remoteUser = getRemoteUser(request, userId);
-		String password = getPassword(request);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Protect request");
@@ -433,6 +433,8 @@ public class MainServlet extends ActionServlet {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Set principal");
 		}
+
+		String password = getPassword(request);
 
 		setPrincipal(userId, remoteUser, password);
 
@@ -1238,6 +1240,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		PrincipalThreadLocal.setName(name);
+
 		PrincipalThreadLocal.setPassword(password);
 	}
 
