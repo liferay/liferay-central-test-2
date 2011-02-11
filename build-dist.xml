@@ -846,6 +846,8 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-executable">
+		<delete file="dist/${zip.executable.file}-${lp.version}.zip" failonerror="false" />
+
 		<antelope:stringutil string="${zip.executable.dir}" property="zip.executable.dir.beginindex">
 			<lastindexof string="/" />
 		</antelope:stringutil>
@@ -888,8 +890,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-geronimo">
-		<delete file="dist/liferay-portal-geronimo-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-geronimo" />
 			<param name="zip.executable.dir" value="${app.server.geronimo.dir}" />
@@ -897,8 +897,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-glassfish">
-		<delete file="dist/liferay-portal-glassfish-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-glassfish" />
 			<param name="zip.executable.dir" value="${app.server.glassfish.dir}" />
@@ -906,8 +904,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-jboss">
-		<delete file="dist/liferay-portal-jboss-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-jboss" />
 			<param name="zip.executable.dir" value="${app.server.jboss.dir}" />
@@ -915,8 +911,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-jetty">
-		<delete file="dist/liferay-portal-jetty-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-jetty" />
 			<param name="zip.executable.dir" value="${app.server.jetty.dir}" />
@@ -924,8 +918,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-jonas">
-		<delete file="dist/liferay-portal-jonas-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-jonas" />
 			<param name="zip.executable.dir" value="${app.server.jonas.dir}" />
@@ -1110,8 +1102,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-resin">
-		<delete file="dist/liferay-portal-resin-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-resin" />
 			<param name="zip.executable.dir" value="${app.server.resin.dir}" />
@@ -1142,8 +1132,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-tomcat">
-		<delete file="dist/liferay-portal-tomcat-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tomcat" />
 			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
