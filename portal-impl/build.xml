@@ -223,6 +223,30 @@
 		</java>
 	</target>
 
+	<target name="build-ruby-gems">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.value}_gems" />
+
+		<exec executable="wget">
+			<arg line="-P ${tstamp.value}_gems http://rubygems.org/downloads/haml-3.0.25.gem"/>
+		</exec>
+
+		<java jar="${project.dir}/lib/portal/jruby.jar" fork="true" failonerror="true">
+			<arg line="-S gem install -i ./${tstamp.value} ${tstamp.value}_gems/haml-3.0.25.gem"/>
+		</java>
+
+		<jar
+			basedir="${tstamp.value}"
+			jarfile="${project.dir}/lib/portal/ruby-gems.jar"
+		/>
+
+		<delete dir="${tstamp.value}" />
+		<delete dir="${tstamp.value}_gems" />
+	</target>
+
 	<target name="build-selenium">
 		<ant dir="../portal-web" target="build-selenium" />
 	</target>
