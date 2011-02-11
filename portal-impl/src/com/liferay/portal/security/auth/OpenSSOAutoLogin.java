@@ -143,7 +143,9 @@ public class OpenSSOAutoLogin extends CASAutoLogin {
 				if (Validator.isNull(emailAddress)) {
 					throw new AutoLoginException("Email address is null");
 				}
+			}
 
+			if (user == null) {
 				try {
 					user = UserLocalServiceUtil.getUserByScreenName(
 						companyId, screenName);
