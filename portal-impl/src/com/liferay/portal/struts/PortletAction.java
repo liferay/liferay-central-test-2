@@ -238,15 +238,11 @@ public class PortletAction extends Action {
 			LayoutTypePortlet layoutTypePortlet =
 				themeDisplay.getLayoutTypePortlet();
 
-			PortletConfig portletConfig =
-				(PortletConfig)actionRequest.getAttribute(
-					JavaConstants.JAVAX_PORTLET_CONFIG);
-
 			boolean hasPortletId = false;
 
 			try {
 				hasPortletId = layoutTypePortlet.hasPortletId(
-					portletConfig.getPortletName());
+					(String)actionRequest.getAttribute(WebKeys.PORTLET_ID));
 			}
 			catch (Exception e) {
 			}
