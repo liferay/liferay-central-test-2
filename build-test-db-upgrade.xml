@@ -130,6 +130,10 @@
 	</target>
 
 	<target name="run-latest-upgrade-test">
+		<delete file="app.server.${user.name}.properties" />
+
+		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
+
 		<ant antfile="build-test-tomcat.xml" target="run-selenium-tomcat" inheritAll="false">
 			<property name="skip.rebuild-database" value="true" />
 		</ant>
