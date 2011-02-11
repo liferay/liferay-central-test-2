@@ -89,6 +89,8 @@ public class PortletKeys {
 
 	public static final String FLAGS = "142";
 
+	public static final String FORMS = "166";
+
 	public static final String GROUP_PAGES = "156";
 
 	public static final String IFRAME = "48";
