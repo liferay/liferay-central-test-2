@@ -27,11 +27,11 @@
 
 	<target name="prepare-cluster-tomcat-node">
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-${lp.version}.zip ${vm.username}@${cluster-node.host}:/" />
+			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-${lp.version}-${lp.version.tstamp}.zip ${vm.username}@${cluster-node.host}:/" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${cluster-node.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-${lp.version}.zip -oC:\" />
+			<arg line="-pw ${vm.password} ${vm.username}@${cluster-node.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-${lp.version}-${lp.version.tstamp}.zip -oC:\" />
 		</exec>
 
 		<antcall target="replace-remote-file">
@@ -78,11 +78,11 @@ web.server.display.node=true</echo>
 		<antcall target="prepare-zip-tomcat" />
 
 		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-${lp.version}.zip ${vm.username}@${vm.host}:/" />
+			<arg line="-pw ${vm.password} dist/liferay-portal-tomcat-${lp.version}-${lp.version.tstamp}.zip ${vm.username}@${vm.host}:/" />
 		</exec>
 
 		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-${lp.version}.zip -oC:\" />
+			<arg line="-pw ${vm.password} ${vm.username}@${vm.host} cmd.exe /c C:\Progra~1\7-Zip\7z.exe x C:\liferay-portal-tomcat-${lp.version}-${lp.version.tstamp}.zip -oC:\" />
 		</exec>
 
 		<antcall target="replace-remote-file">
