@@ -197,8 +197,14 @@
 
 .aui-tree-pages .aui-tree-icon {
 	background: transparent url() no-repeat 50% 50%;
+	cursor: pointer;
 	height: 18px;
 	width: 18px;
+}
+
+.aui-tree-pages .aui-tree-node-selected .aui-tree-label a,
+.aui-tree-pages .aui-tree-node-selected .aui-tree-icon {
+	cursor: move;
 }
 
 .aui-tree-expanded .aui-tree-icon {
@@ -211,6 +217,12 @@
 
 .lfr-root-node .aui-tree-icon {
 	background-image: url(<%= themeImagesPath %>/trees/root.png);
+	cursor: pointer;
+}
+
+.lfr-root-node .aui-tree-icon a,
+.lfr-root-node .aui-tree-label a {
+	cursor: pointer;
 }
 
 .lfr-tree-loading-icon {
