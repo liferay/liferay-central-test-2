@@ -268,13 +268,13 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 					String rowHREF = null;
 
 					if (DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW)) {
-						PortletURL rowURL = renderResponse.createRenderURL();
+						PortletURL viewFileEntryURL = renderResponse.createRenderURL();
 
-						rowURL.setParameter("struts_action", "/document_library/view_file_entry");
-						rowURL.setParameter("redirect", currentURL);
-						rowURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
+						viewFileEntryURL.setParameter("struts_action", "/document_library/view_file_entry");
+						viewFileEntryURL.setParameter("redirect", currentURL);
+						viewFileEntryURL.setParameter("fileEntryId", String.valueOf(fileEntry.getFileEntryId()));
 
-						rowHREF = rowURL.toString();
+						rowHREF = viewFileEntryURL.toString();
 					}
 					%>
 
