@@ -16,6 +16,8 @@ package com.liferay.portal.scripting;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
@@ -41,6 +43,8 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+
+import org.apache.commons.lang.time.StopWatch;
 
 import org.python.core.Py;
 import org.python.core.PyFile;
@@ -79,12 +83,26 @@ public class ScriptingImpl implements Scripting {
 			throw new UnsupportedLanguageException(language);
 		}
 
+		StopWatch timer = null;
+
+		if (_log.isDebugEnabled()) {
+			timer = new StopWatch();
+			timer.start();
+		}
+
 		try {
 			return scriptingExecutor.eval(
 				allowedClasses, inputObjects, outputNames, script);
 		}
 		catch (Exception e) {
 			throw new ScriptingException(getErrorMessage(script, e), e);
+		}
+		finally {
+			if (_log.isDebugEnabled()) {
+				timer.stop();
+
+				_log.debug("Execution time: " + timer.toString());
+			}
 		}
 	}
 
@@ -206,6 +224,8 @@ public class ScriptingImpl implements Scripting {
 
 		return sb.toString();
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(ScriptingImpl.class);
 
 	private Map<String, ScriptingExecutor> _scriptingExecutors =
 		new ConcurrentHashMap<String, ScriptingExecutor>();
