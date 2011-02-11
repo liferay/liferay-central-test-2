@@ -211,6 +211,36 @@ public class JournalArticleFinderImpl
 			displayDateLT, status, reviewDate, andOperator, true);
 	}
 
+	public List<JournalArticle> filterFindByKeywords(
+			long companyId, long groupId, String keywords, Double version,
+			String type, String structureId, String templateId,
+			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
+			int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+
+		String[] articleIds = null;
+		String[] titles = null;
+		String[] descriptions = null;
+		String[] contents = null;
+		boolean andOperator = false;
+
+		if (Validator.isNotNull(keywords)) {
+			articleIds = CustomSQLUtil.keywords(keywords, false);
+			titles = CustomSQLUtil.keywords(keywords);
+			descriptions = CustomSQLUtil.keywords(keywords, false);
+			contents = CustomSQLUtil.keywords(keywords, false);
+		}
+		else {
+			andOperator = true;
+		}
+
+		return doFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
+			companyId, groupId, articleIds, version, titles, descriptions,
+			contents, type, new String[] {structureId},
+			new String[] {templateId}, displayDateGT, displayDateLT, status,
+			reviewDate, andOperator, start, end, orderByComparator, true);
+	}
+
 	public List<JournalArticle> filterFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
@@ -258,36 +288,6 @@ public class JournalArticleFinderImpl
 			contents, type, structureIds, templateIds, displayDateGT,
 			displayDateLT, status, reviewDate, andOperator, start, end,
 			orderByComparator, true);
-	}
-
-	public List<JournalArticle> filterFindByKeywords(
-			long companyId, long groupId, String keywords, Double version,
-			String type, String structureId, String templateId,
-			Date displayDateGT, Date displayDateLT, int status, Date reviewDate,
-			int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
-
-		String[] articleIds = null;
-		String[] titles = null;
-		String[] descriptions = null;
-		String[] contents = null;
-		boolean andOperator = false;
-
-		if (Validator.isNotNull(keywords)) {
-			articleIds = CustomSQLUtil.keywords(keywords, false);
-			titles = CustomSQLUtil.keywords(keywords);
-			descriptions = CustomSQLUtil.keywords(keywords, false);
-			contents = CustomSQLUtil.keywords(keywords, false);
-		}
-		else {
-			andOperator = true;
-		}
-
-		return doFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
-			companyId, groupId, articleIds, version, titles, descriptions,
-			contents, type, new String[] {structureId},
-			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, start, end, orderByComparator, true);
 	}
 
 	public List<JournalArticle> findByExpirationDate(
@@ -356,11 +356,11 @@ public class JournalArticleFinderImpl
 			andOperator = true;
 		}
 
-		return doFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
+		return findByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleIds, version, titles, descriptions,
 			contents, type, new String[] {structureId},
 			new String[] {templateId}, displayDateGT, displayDateLT, status,
-			reviewDate, andOperator, start, end, orderByComparator, false);
+			reviewDate, andOperator, start, end, orderByComparator);
 	}
 
 	public List<JournalArticle> findByReviewDate(

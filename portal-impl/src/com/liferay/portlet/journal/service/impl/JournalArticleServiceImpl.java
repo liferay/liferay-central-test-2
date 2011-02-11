@@ -277,8 +277,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 		return journalArticleFinder.filterFindByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleId, version, title, description, content,
-			type, structureId, templateId, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator, start, end, obc);
+			type, structureId, templateId, displayDateGT, displayDateLT, status,
+			reviewDate, andOperator, start, end, obc);
 	}
 
 	public List<JournalArticle> search(
@@ -316,8 +316,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 		return journalArticleFinder.filterCountByC_G_A_V_T_D_C_T_S_T_D_S_R(
 			companyId, groupId, articleId, version, title, description, content,
-			type, structureId, templateId, displayDateGT, displayDateLT,
-			status, reviewDate, andOperator);
+			type, structureId, templateId, displayDateGT, displayDateLT, status,
+			reviewDate, andOperator);
 	}
 
 	public int searchCount(
