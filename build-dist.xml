@@ -3,6 +3,10 @@
 <project name="portal-dist" basedir="." default="dist" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build.xml" />
 
+	<tstamp>
+		<format property="lp.version.tstamp" pattern="yyyyMMdd" />
+	</tstamp>
+
 	<target name="build-dist-geronimo">
 		<antcall target="unzip-geronimo" />
 
@@ -459,13 +463,13 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 		<antcall target="zip-src" />
 		<antcall target="zip-tomcat" />
 
-		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version}.war" />
+		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version}-v${lp.version.tstamp}.war" />
 
 		<!--<antcall target="build-dist-sql-oracle" />-->
 
 		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
 
-		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" tofile="dist/liferay-plugins-sdk-${lp.version}.zip" />
+		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" tofile="dist/liferay-plugins-sdk-${lp.version}-v${lp.version.tstamp}.zip" />
 
 		<if>
 			<isset property="dist.username" />
@@ -780,9 +784,14 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-api">
-		<delete file="dist/liferay-portal-doc-${lp.version}.zip" failonerror="false" />
+		<delete>
+			<fileset
+				dir="dist"
+				includes="liferay-portal-doc-${lp.version}-v*.zip"
+			/>
+		</delete>
 
-		<zip destfile="dist/liferay-portal-doc-${lp.version}.zip">
+		<zip destfile="dist/liferay-portal-doc-${lp.version}-v${lp.version.tstamp}.zip">
 			<zipfileset
 				dir="api"
 				includes="**/*.css,**/*.gif,**/*.html"
@@ -828,7 +837,7 @@ release was successful.</echo>
 			/>
 		</copy>
 
-		<zip destfile="dist/liferay-portal-db-upgrade-${lp.version}.zip">
+		<zip destfile="dist/liferay-portal-db-upgrade-${lp.version}-v${lp.version.tstamp}.zip">
 			<zipfileset
 				dir="${tstamp.value}"
 				excludes="run.sh"
@@ -846,6 +855,13 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-executable">
+		<delete>
+			<fileset
+				dir="dist"
+				includes="${zip.executable.file}-${lp.version}-v*.zip"
+			/>
+		</delete>
+
 		<antelope:stringutil string="${zip.executable.dir}" property="zip.executable.dir.beginindex">
 			<lastindexof string="/" />
 		</antelope:stringutil>
@@ -864,7 +880,7 @@ release was successful.</echo>
 
 		<mkdir dir="dist" />
 
-		<zip destfile="dist/${zip.executable.file}-${lp.version}.zip">
+		<zip destfile="dist/${zip.executable.file}-${lp.version}-v${lp.version.tstamp}.zip">
 			<zipfileset
 				dir="${zip.executable.dir}"
 				excludes="**/*.sh"
@@ -888,8 +904,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-geronimo">
-		<delete file="dist/liferay-portal-geronimo-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-geronimo" />
 			<param name="zip.executable.dir" value="${app.server.geronimo.dir}" />
@@ -897,8 +911,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-glassfish">
-		<delete file="dist/liferay-portal-glassfish-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-glassfish" />
 			<param name="zip.executable.dir" value="${app.server.glassfish.dir}" />
@@ -906,8 +918,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-jboss">
-		<delete file="dist/liferay-portal-jboss-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-jboss" />
 			<param name="zip.executable.dir" value="${app.server.jboss.dir}" />
@@ -915,8 +925,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-jetty">
-		<delete file="dist/liferay-portal-jetty-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-jetty" />
 			<param name="zip.executable.dir" value="${app.server.jetty.dir}" />
@@ -924,8 +932,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-jonas">
-		<delete file="dist/liferay-portal-jonas-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-jonas" />
 			<param name="zip.executable.dir" value="${app.server.jonas.dir}" />
@@ -933,9 +939,14 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-portal-client">
-		<delete file="dist/liferay-portal-client-${lp.version}.zip" failonerror="false" />
+		<delete>
+			<fileset
+				dir="dist"
+				includes="liferay-portal-client-${lp.version}-v*.zip"
+			/>
+		</delete>
 
-		<zip destfile="dist/liferay-portal-client-${lp.version}.zip">
+		<zip destfile="dist/liferay-portal-client-${lp.version}-v${lp.version.tstamp}.zip">
 			<zipfileset
 				dir="lib/development"
 				includes="activation.jar,mail.jar"
@@ -955,9 +966,14 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-portal-dependencies">
-		<delete file="dist/liferay-portal-dependencies-${lp.version}.zip" failonerror="false" />
+		<delete>
+			<fileset
+				dir="dist"
+				includes="liferay-portal-dependencies-${lp.version}-v*.zip"
+			/>
+		</delete>
 
-		<zip destfile="dist/liferay-portal-dependencies-${lp.version}.zip">
+		<zip destfile="dist/liferay-portal-dependencies-${lp.version}-v${lp.version.tstamp}.zip">
 			<zipfileset
 				dir="lib/development"
 				includes="hsql.jar"
@@ -977,82 +993,16 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-portal-war">
-		<antcall target="zip-portal-war-2.4" />
-		<!--<antcall target="zip-portal-war-2.3" />
-		<antcall target="zip-portal-war-2.4-with-dependencies" />
-		<antcall target="zip-portal-war-2.3-with-dependencies" />-->
-	</target>
-
-	<target name="zip-portal-war-2.3">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<java
-			classname="com.liferay.portal.tools.WebXML23Converter"
-			classpathref="project.classpath"
-			fork="true"
-			maxmemory="128m"
-			newenvironment="true"
-		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
-			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
-			<arg value="${app.server.portal.dir}/WEB-INF/web.xml" />
-			<arg value="${tstamp.value}/WEB-INF/web.xml" />
-		</java>
-
-		<delete file="dist/liferay-portal-${lp.version}-servlet23.war" failonerror="false" />
-
-		<copy
-			file="dist/liferay-portal-${lp.version}.war"
-			tofile="dist/liferay-portal-${lp.version}-servlet23.war"
-			overwrite="true"
-		/>
-
-		<zip
-			basedir="${tstamp.value}"
-			destfile="dist/liferay-portal-${lp.version}-servlet23.war"
-			update="yes"
-		/>
-
-		<delete dir="${tstamp.value}" />
-	</target>
-
-	<target name="zip-portal-war-2.3-with-dependencies">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<copy todir="${tstamp.value}/WEB-INF/lib">
+		<delete>
 			<fileset
-				dir="${app.server.lib.global.dir}"
-				includes="annotations.jar,portal-service.jar,portlet.jar"
+				dir="dist"
+				includes="liferay-portal-${lp.version}-v*.war"
 			/>
-		</copy>
-
-		<delete file="dist/liferay-portal-${lp.version}-servlet23-with-dependencies.war" failonerror="false" />
-
-		<copy
-			file="dist/liferay-portal-${lp.version}-servlet23.war"
-			tofile="dist/liferay-portal-${lp.version}-servlet23-with-dependencies.war"
-			overwrite="true"
-		/>
-
-		<zip
-			basedir="${tstamp.value}"
-			destfile="dist/liferay-portal-${lp.version}-servlet23-with-dependencies.war"
-			update="yes"
-		/>
-
-		<delete dir="${tstamp.value}" />
-	</target>
-
-	<target name="zip-portal-war-2.4">
-		<delete file="dist/liferay-portal-${lp.version}.war" failonerror="false" />
+		</delete>
 
 		<zip
 			basedir="${app.server.portal.dir}"
-			destfile="dist/liferay-portal-${lp.version}.war"
+			destfile="dist/liferay-portal-${lp.version}-v${lp.version.tstamp}.war"
 			excludes="html/js/editor/_fckeditor/**,html/js/editor/fckeditor/_samples/**"
 		/>
 
@@ -1073,36 +1023,7 @@ release was successful.</echo>
 
 		<zip
 			basedir="${tstamp.value}"
-			destfile="dist/liferay-portal-${lp.version}.war"
-			update="yes"
-		/>
-
-		<delete dir="${tstamp.value}" />
-	</target>
-
-	<target name="zip-portal-war-2.4-with-dependencies">
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<copy todir="${tstamp.value}/WEB-INF/lib">
-			<fileset
-				dir="${app.server.lib.global.dir}"
-				includes="annotations.jar,portal-service.jar,portlet.jar"
-			/>
-		</copy>
-
-		<delete file="dist/liferay-portal-${lp.version}-with-dependencies.war" failonerror="false" />
-
-		<copy
-			file="dist/liferay-portal-${lp.version}.war"
-			tofile="dist/liferay-portal-${lp.version}-with-dependencies.war"
-			overwrite="true"
-		/>
-
-		<zip
-			basedir="${tstamp.value}"
-			destfile="dist/liferay-portal-${lp.version}-with-dependencies.war"
+			destfile="dist/liferay-portal-${lp.version}-v${lp.version.tstamp}.war"
 			update="yes"
 		/>
 
@@ -1110,8 +1031,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-resin">
-		<delete file="dist/liferay-portal-resin-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-resin" />
 			<param name="zip.executable.dir" value="${app.server.resin.dir}" />
@@ -1119,9 +1038,14 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-sql">
-		<delete file="dist/liferay-portal-sql-${lp.version}.zip" failonerror="false" />
+		<delete>
+			<fileset
+				dir="dist"
+				includes="liferay-portal-sql-${lp.version}-v*.zip"
+			/>
+		</delete>
 
-		<zip destfile="dist/liferay-portal-sql-${lp.version}.zip">
+		<zip destfile="dist/liferay-portal-sql-${lp.version}-v${lp.version.tstamp}.zip">
 			<zipfileset
 				dir="sql"
 				includes="**/*.sql"
@@ -1131,9 +1055,14 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-src">
-		<delete file="dist/liferay-portal-src-${lp.version}.zip" failonerror="false" />
+		<delete>
+			<fileset
+				dir="dist"
+				includes="liferay-portal-src-${lp.version}-v*.zip"
+			/>
+		</delete>
 
-		<zip destfile="dist/liferay-portal-src-${lp.version}.zip">
+		<zip destfile="dist/liferay-portal-src-${lp.version}-v${lp.version.tstamp}.zip">
 			<zipfileset
 				dir="${lp.source.dir}"
 				prefix="liferay-portal-src-${lp.version}"
@@ -1142,8 +1071,6 @@ release was successful.</echo>
 	</target>
 
 	<target name="zip-tomcat">
-		<delete file="dist/liferay-portal-tomcat-${lp.version}.zip" failonerror="false" />
-
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tomcat" />
 			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
