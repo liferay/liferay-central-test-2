@@ -699,9 +699,7 @@ Please set the property "jdk.6.home" in build.properties.
 			<pathelement location="${env.JAVA_HOME}/jre/lib/rt.jar" />
 			<pathelement location="${env.JAVA_HOME}/lib/tools.jar" />
 			<path refid="jspc.common.classpath" />
-
 			<pathelement location="${app.server.dir}/lib/resin.jar" />
-
 			<pathelement location="${project.dir}/lib/portal/commons-beanutils.jar" />
 			<pathelement location="${project.dir}/lib/portal/commons-configuration.jar" />
 			<pathelement location="${project.dir}/lib/portal/commons-digester.jar" />
