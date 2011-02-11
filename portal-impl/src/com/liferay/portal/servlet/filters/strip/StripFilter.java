@@ -429,7 +429,7 @@ public class StripFilter extends BasePortalFilter {
 	}
 
 	protected boolean skipWhiteSpace(
-			CharBuffer charBuffer, Writer writer, boolean keepOne)
+			CharBuffer charBuffer, Writer writer, boolean appendSeparator)
 		throws IOException {
 
 		boolean skipped = false;
@@ -451,7 +451,7 @@ public class StripFilter extends BasePortalFilter {
 			}
 		}
 
-		if (skipped && keepOne) {
+		if (skipped && appendSeparator) {
 			writer.write(CharPool.SPACE);
 		}
 
