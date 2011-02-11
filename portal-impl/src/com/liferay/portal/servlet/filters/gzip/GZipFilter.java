@@ -115,7 +115,8 @@ public class GZipFilter extends BasePortalFilter {
 
 		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
-		GZipResponse gZipResponse = new GZipResponse(response);
+		GZipResponse gZipResponse = new GZipResponse(
+			response, BrowserSnifferUtil.isFirefox(request));
 
 		processFilter(GZipFilter.class, request, gZipResponse, filterChain);
 

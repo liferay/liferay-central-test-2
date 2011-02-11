@@ -14,11 +14,13 @@
 
 package com.liferay.portal.servlet.filters.gzip;
 
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.RSSThreadLocal;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -35,10 +37,11 @@ import javax.servlet.http.HttpServletResponseWrapper;
  */
 public class GZipResponse extends HttpServletResponseWrapper {
 
-	public GZipResponse(HttpServletResponse response) {
+	public GZipResponse(HttpServletResponse response, boolean firefox) {
 		super(response);
 
 		_response = response;
+		_firefox = firefox;
 
 		// Clear previous content length setting. GZip response does not buffer
 		// output to get final content length. The response will be chunked
@@ -49,7 +52,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		_response.addHeader(HttpHeaders.CONTENT_ENCODING, _GZIP);
 	}
 
-	public void finishResponse() {
+	public void finishResponse() throws IOException {
 		try {
 			if (_writer != null) {
 				_writer.close();
@@ -59,6 +62,12 @@ public class GZipResponse extends HttpServletResponseWrapper {
 			}
 		}
 		catch (IOException e) {
+		}
+
+		if (_unsyncByteArrayOutputStream != null) {
+			_response.setContentLength(_unsyncByteArrayOutputStream.size());
+
+			_unsyncByteArrayOutputStream.writeTo(_response.getOutputStream());
 		}
 	}
 
@@ -74,7 +83,16 @@ public class GZipResponse extends HttpServletResponseWrapper {
 		}
 
 		if (_stream == null) {
-			_stream = new GZipServletOutputStream(_response.getOutputStream());
+			if (_firefox && RSSThreadLocal.isExportRSS()) {
+				_unsyncByteArrayOutputStream =
+					new UnsyncByteArrayOutputStream();
+				_stream = new GZipServletOutputStream(
+					_unsyncByteArrayOutputStream);
+			}
+			else {
+				_stream = new GZipServletOutputStream(
+					_response.getOutputStream());
+			}
 		}
 
 		return _stream;
@@ -93,7 +111,7 @@ public class GZipResponse extends HttpServletResponseWrapper {
 			_log.warn("Use getOutputStream for optimum performance");
 		}
 
-		_stream = new GZipServletOutputStream(_response.getOutputStream());
+		_stream = getOutputStream();
 
 		_writer = new UnsyncPrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
@@ -109,7 +127,9 @@ public class GZipResponse extends HttpServletResponseWrapper {
 
 	private static Log _log = LogFactoryUtil.getLog(GZipResponse.class);
 
+	private boolean _firefox;
 	private HttpServletResponse _response;
+	private UnsyncByteArrayOutputStream _unsyncByteArrayOutputStream;
 	private ServletOutputStream _stream;
 	private PrintWriter _writer;
 

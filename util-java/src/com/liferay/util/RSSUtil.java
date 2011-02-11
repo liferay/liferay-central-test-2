@@ -59,6 +59,8 @@ public class RSSUtil {
 	public static final String DISPLAY_STYLE_TITLE = "title";
 
 	public static String export(SyndFeed feed) throws FeedException {
+		RSSThreadLocal.setExportRSS(true);
+
 		feed.setEncoding(StringPool.UTF8);
 
 		SyndFeedOutput output = new SyndFeedOutput();
