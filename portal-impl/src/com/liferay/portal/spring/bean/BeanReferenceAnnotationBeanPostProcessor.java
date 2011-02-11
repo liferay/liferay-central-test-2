@@ -106,28 +106,26 @@ public class BeanReferenceAnnotationBeanPostProcessor
 				}
 				catch (NoSuchBeanDefinitionException nsbde) {
 					try {
-						referencedBean =
-							PortalBeanLocatorUtil.locate(referencedBeanName);
-					} catch (BeanLocatorException ble) {
-						StringWriter originalCause = new StringWriter();
+						referencedBean = PortalBeanLocatorUtil.locate(
+							referencedBeanName);
+					}
+					catch (BeanLocatorException ble) {
+						StringWriter stringWriter = new StringWriter();
 
-						PrintWriter originalCauseWriter =
-							new PrintWriter(originalCause);
+						PrintWriter printWriter = new PrintWriter(stringWriter);
 
-						originalCauseWriter.print(
-							 "BeanFactory could not find bean: ");
+						printWriter.print("BeanFactory could not find bean: ");
 
-						nsbde.printStackTrace(originalCauseWriter);
+						nsbde.printStackTrace(printWriter);
 
-						originalCauseWriter.print(
+						printWriter.print(
 							" and PortalBeanLocator failed with: ");
+						printWriter.append(ble.getMessage());
 
-						originalCauseWriter.append(ble.getMessage());
-
-						originalCauseWriter.close();
+						printWriter.close();
 
 						throw new BeanLocatorException(
-							originalCause.toString(), ble);
+							stringWriter.toString(), ble);
 					}
 				}
 
@@ -147,7 +145,6 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		}
 
 		_autoInject(targetBean, targetBeanName, beanClass.getSuperclass());
-
 	}
 
 	private static final String _JAVA_LANG_OBJECT = "java.lang.Object";
