@@ -28,6 +28,10 @@ import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.sanitizer.Sanitizer;
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
+import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -37,6 +41,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
@@ -376,6 +381,37 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			String uuid = PortalUUIDUtil.generate();
 
 			calEvent.setUuid(uuid);
+		}
+		
+		long userId = GetterUtil.getLong(PrincipalThreadLocal.getName());
+
+		if (userId > 0) {
+			long companyId = calEvent.getCompanyId();
+
+			long groupId = calEvent.getGroupId();
+
+			long entryId = 0;
+
+			if (!isNew) {
+				entryId = calEvent.getPrimaryKey();
+			}
+
+			try {
+				calEvent.setTitle(SanitizerUtil.sanitize(companyId, groupId,
+						userId,
+						com.liferay.portlet.calendar.model.CalEvent.class.getName(),
+						entryId, ContentTypes.TEXT_PLAIN, Sanitizer.MODE_ALL,
+						calEvent.getTitle(), null));
+
+				calEvent.setDescription(SanitizerUtil.sanitize(companyId,
+						groupId, userId,
+						com.liferay.portlet.calendar.model.CalEvent.class.getName(),
+						entryId, ContentTypes.TEXT_HTML, Sanitizer.MODE_ALL,
+						calEvent.getDescription(), null));
+			}
+			catch (SanitizerException se) {
+				throw new SystemException(se);
+			}
 		}
 
 		Session session = null;
