@@ -17,6 +17,7 @@ package com.liferay.portal.scripting.ruby;
 import com.liferay.portal.kernel.scripting.ExecutionException;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
+import com.liferay.portal.kernel.servlet.WebDirDetector;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -33,6 +34,7 @@ import org.jruby.javasupport.JavaEmbedUtils;
 
 /**
  * @author Alberto Montero
+ * @author Raymond Augé
  */
 public class RubyExecutor implements ScriptingExecutor {
 
@@ -43,8 +45,15 @@ public class RubyExecutor implements ScriptingExecutor {
 
 		rubyInstanceConfig.setLoader(PortalClassLoaderUtil.getClassLoader());
 
-		_ruby = JavaEmbedUtils.initialize(
-			new ArrayList<String>(), rubyInstanceConfig);
+		String basePath = WebDirDetector.getRootDir(
+			PortalClassLoaderUtil.getClassLoader());
+
+		ArrayList<String> loadPaths = new ArrayList<String>();
+
+		loadPaths.add(basePath);
+
+		_ruby = JavaEmbedUtils.initialize(loadPaths, rubyInstanceConfig);
+		_ruby.setCurrentDirectory(basePath);
 	}
 
 	public void clearCache() {
