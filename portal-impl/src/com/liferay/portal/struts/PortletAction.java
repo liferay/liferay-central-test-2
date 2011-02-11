@@ -29,7 +29,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletConfigImpl;
 
 import java.io.IOException;
 
@@ -63,23 +62,18 @@ import org.apache.struts.util.MessageResources;
 public class PortletAction extends Action {
 
 	public static String getForwardKey(HttpServletRequest request) {
-		PortletConfigImpl portletConfigImpl =
-			(PortletConfigImpl)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG);
+		String portletId = (String)request.getAttribute(WebKeys.PORTLET_ID);
 
-		String portletNamespace = PortalUtil.getPortletNamespace(
-			portletConfigImpl.getPortletId());
+		String portletNamespace = PortalUtil.getPortletNamespace(portletId);
 
 		return portletNamespace.concat(WebKeys.PORTLET_STRUTS_FORWARD);
 	}
 
 	public static String getForwardKey(PortletRequest portletRequest) {
-		PortletConfigImpl portletConfigImpl =
-			(PortletConfigImpl)portletRequest.getAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG);
+		String portletId = (String)portletRequest.getAttribute(
+			WebKeys.PORTLET_ID);
 
-		String portletNamespace = PortalUtil.getPortletNamespace(
-			portletConfigImpl.getPortletId());
+		String portletNamespace = PortalUtil.getPortletNamespace(portletId);
 
 		return portletNamespace.concat(WebKeys.PORTLET_STRUTS_FORWARD);
 	}
