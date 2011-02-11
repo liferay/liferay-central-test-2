@@ -14,9 +14,12 @@
 
 package com.liferay.portal.spring.bean;
 
+import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Field;
 
 import java.util.HashMap;
@@ -102,8 +105,30 @@ public class BeanReferenceAnnotationBeanPostProcessor
 					referencedBean = _beanFactory.getBean(referencedBeanName);
 				}
 				catch (NoSuchBeanDefinitionException nsbde) {
-					referencedBean = PortalBeanLocatorUtil.locate(
-						referencedBeanName);
+					try {
+						referencedBean =
+							PortalBeanLocatorUtil.locate(referencedBeanName);
+					} catch (BeanLocatorException ble) {
+						StringWriter originalCause = new StringWriter();
+
+						PrintWriter originalCauseWriter =
+							new PrintWriter(originalCause);
+
+						originalCauseWriter.print(
+							 "BeanFactory could not find bean: ");
+
+						nsbde.printStackTrace(originalCauseWriter);
+
+						originalCauseWriter.print(
+							" and PortalBeanLocator failed with: ");
+
+						originalCauseWriter.append(ble.getMessage());
+
+						originalCauseWriter.close();
+
+						throw new BeanLocatorException(
+							originalCause.toString(), ble);
+					}
 				}
 
 				_beans.put(referencedBeanName, referencedBean);
@@ -123,12 +148,11 @@ public class BeanReferenceAnnotationBeanPostProcessor
 
 		_autoInject(targetBean, targetBeanName, beanClass.getSuperclass());
 
-		return;
 	}
 
-	private static String _JAVA_LANG_OBJECT = "java.lang.Object";
+	private static final String _JAVA_LANG_OBJECT = "java.lang.Object";
 
-	private static String _ORG_SPRINGFRAMEWORK = "org.springframework";
+	private static final String _ORG_SPRINGFRAMEWORK = "org.springframework";
 
 	private BeanFactory _beanFactory;
 	private Map<String, Object> _beans = new HashMap<String, Object>();
