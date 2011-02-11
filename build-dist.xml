@@ -467,6 +467,8 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 
 		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" tofile="dist/liferay-plugins-sdk-${lp.version}.zip" />
 
+		<antcall target="rename-dist-files" />
+
 		<if>
 			<isset property="dist.username" />
 			<then>
@@ -478,6 +480,39 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 
 		<echo>Manually run "ant -buildfile build-maven.xml deploy-release-artifacts" if the
 release was successful.</echo>
+	</target>
+
+	<target name="rename-dist-files">
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMdd" />
+		</tstamp>
+
+		<for param="dist.file">
+			<path>
+				<fileset
+					dir="dist"
+				/>
+			</path>
+			<sequential>
+				<antelope:stringutil string="@{dist.file}" property="dist.file.endindex">
+					<antelope:lastindexof string="." />
+				</antelope:stringutil>
+
+				<antelope:stringutil string="@{dist.file}" property="dist.file.prefix">
+					<antelope:substring beginindex="0" endindex="${dist.file.endindex}" />
+				</antelope:stringutil>
+
+				<antelope:stringutil string="@{dist.file}" property="dist.file.suffix">
+					<antelope:substring beginindex="${dist.file.endindex}" />
+				</antelope:stringutil>
+
+				<move
+					file="@{dist.file}"
+					tofile="${dist.file.prefix}-${tstamp.value}${dist.file.suffix}"
+					overwrite="true"
+				/>
+			</sequential>
+		</for>
 	</target>
 
 	<target name="prepare-generated-files">
