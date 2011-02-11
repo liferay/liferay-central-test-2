@@ -17,7 +17,9 @@ package com.liferay.portal.repository.liferayrepository.model;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
@@ -38,6 +40,14 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	public LiferayFolder(DLFolder dlFolder, boolean escapedModel) {
 		_dlFolder = dlFolder;
 		_escapedModel = escapedModel;
+	}
+
+	public boolean containsPermission(
+			PermissionChecker permissionChecker, String actionId)
+		throws PortalException, SystemException {
+
+		return DLFolderPermission.contains(
+			permissionChecker, _dlFolder, actionId);
 	}
 
 	public List<Folder> getAncestors() throws PortalException, SystemException {

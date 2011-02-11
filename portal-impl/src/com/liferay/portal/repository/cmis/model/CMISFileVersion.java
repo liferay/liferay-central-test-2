@@ -20,12 +20,14 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.chemistry.opencmis.client.api.CmisObject;
@@ -47,7 +49,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 	}
 
 	public Map<String, Serializable> getAttributes() {
-		return null;
+		return new HashMap<String, Serializable>();
 	}
 
 	public String getChangeLog() {
@@ -71,7 +73,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 	}
 
 	public String getExtension() {
-		return null;
+		return FileUtil.getExtension(getTitle());
 	}
 
 	public String getExtraSettings() {

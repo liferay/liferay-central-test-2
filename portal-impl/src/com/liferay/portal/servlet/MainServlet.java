@@ -422,6 +422,7 @@ public class MainServlet extends ActionServlet {
 
 		long userId = getUserId(request);
 		String remoteUser = getRemoteUser(request, userId);
+		String password = getPassword(request);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Protect request");
@@ -433,7 +434,7 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Set principal");
 		}
 
-		setPrincipalName(userId, remoteUser);
+		setPrincipal(userId, remoteUser, password);
 
 		try {
 			if (_log.isDebugEnabled()) {
@@ -686,6 +687,10 @@ public class MainServlet extends ActionServlet {
 
 	protected long getCompanyId(HttpServletRequest request) {
 		return PortalInstances.getCompanyId(request);
+	}
+
+	protected String getPassword(HttpServletRequest request) {
+		return PortalUtil.getUserPassword(request);
 	}
 
 	protected String getRemoteUser(
@@ -1217,7 +1222,9 @@ public class MainServlet extends ActionServlet {
 		PortalUtil.setPortalPort(request);
 	}
 
-	protected void setPrincipalName(long userId, String remoteUser) {
+	protected void setPrincipal(
+		long userId, String remoteUser, String password) {
+
 		if ((userId == 0) && (remoteUser == null)) {
 			return;
 		}
@@ -1231,6 +1238,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		PrincipalThreadLocal.setName(name);
+		PrincipalThreadLocal.setPassword(password);
 	}
 
 	private static final String _LIFERAY_PORTAL_REQUEST_HEADER =

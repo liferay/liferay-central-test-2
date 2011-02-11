@@ -28,6 +28,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 
 /**
@@ -51,7 +52,9 @@ public class DLFileEntryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		check(permissionChecker, (DLFileEntry)fileEntry.getModel(), actionId);
+		if (!fileEntry.containsPermission(permissionChecker, actionId)) {
+			throw new PrincipalException();
+		}
 	}
 
 	public static void check(
@@ -126,8 +129,7 @@ public class DLFileEntryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		return contains(
-			permissionChecker, (DLFileEntry)fileEntry.getModel(), actionId);
+		return fileEntry.containsPermission(permissionChecker, actionId);
 	}
 
 	public static boolean contains(
@@ -135,10 +137,10 @@ public class DLFileEntryPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		DLFileEntry dlFileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+		FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
 			fileEntryId);
 
-		return contains(permissionChecker, dlFileEntry, actionId);
+		return fileEntry.containsPermission(permissionChecker, actionId);
 	}
 
 }

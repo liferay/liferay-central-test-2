@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.repository.model;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,10 @@ import java.util.List;
  * @author Alexander Chow
  */
 public interface Folder extends RepositoryModel<Folder> {
+
+	public boolean containsPermission(
+			PermissionChecker permissionChecker, String actionId)
+		throws PortalException, SystemException;
 
 	public List<Folder> getAncestors()
 		throws PortalException, SystemException;

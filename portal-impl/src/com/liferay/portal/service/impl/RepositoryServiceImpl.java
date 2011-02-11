@@ -50,7 +50,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	public long addRepository(
 			long groupId, long parentFolderId, String name, String description,
 			String portletId, int type,
-			UnicodeProperties typeSettingsProperties)
+			UnicodeProperties typeSettingsProperties,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -70,7 +71,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		repository.setType(type);
 		repository.setTypeSettingsProperties(typeSettingsProperties);
 		repository.setDlFolderId(getDLFolderId(
-			user, groupId, repositoryId, parentFolderId, name, description));
+			user, groupId, repositoryId, parentFolderId, name, description,
+			serviceContext));
 
 		repositoryPersistence.update(repository, false);
 
@@ -396,10 +398,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 	protected long getDLFolderId(
 			User user, long groupId, long repositoryId, long parentFolderId,
-			String name, String description)
+			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
-
-		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAttribute("mountPoint", Boolean.TRUE);
 

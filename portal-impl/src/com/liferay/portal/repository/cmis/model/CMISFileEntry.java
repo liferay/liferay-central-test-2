@@ -22,14 +22,17 @@ import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.repository.cmis.CMISRepository;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 import java.io.InputStream;
 import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,8 +54,15 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		_document = document;
 	}
 
+	public boolean containsPermission(
+			PermissionChecker permissionChecker, String actionId)
+		throws PortalException, SystemException {
+
+		return containsPermission(_document, actionId);
+	}
+
 	public Map<String, Serializable> getAttributes() {
-		return null;
+		return new HashMap<String, Serializable>();
 	}
 
 	public long getCompanyId() {
@@ -84,7 +94,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public String getExtension() {
-		return null;
+		return FileUtil.getExtension(getTitle());
 	}
 
 	public long getFileEntryId() {
@@ -103,7 +113,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 		for (Document document : versions) {
 			if (document.getVersionLabel().equals(version)) {
-				_cmisRepository.toFileVersion(document);
+				return _cmisRepository.toFileVersion(document);
 			}
 		}
 

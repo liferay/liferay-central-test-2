@@ -20,7 +20,9 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.model.Lock;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.InputStream;
@@ -42,6 +44,14 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	public LiferayFileEntry(DLFileEntry fileEntry, boolean escapedModel) {
 		_dlFileEntry = fileEntry;
 		_escapedModel = escapedModel;
+	}
+
+	public boolean containsPermission(
+			PermissionChecker permissionChecker, String actionId)
+		throws PortalException, SystemException {
+
+		return DLFileEntryPermission.contains(
+			permissionChecker, _dlFileEntry, actionId);
 	}
 
 	public Map<String, Serializable> getAttributes() {

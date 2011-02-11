@@ -46,7 +46,9 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
 import java.io.InputStream;
 
@@ -927,6 +929,21 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 	protected Folder getFolder(Session session, long folderId)
 		throws PortalException, SystemException {
+
+		try {
+			DLFolder dlFolder = DLFolderUtil.findByPrimaryKey(folderId);
+
+			if (dlFolder.isMountPoint()) {
+				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+			}
+			else {
+				throw new RepositoryException(
+					"CMIS repository should not be used for folderId " +
+						folderId);
+			}
+		}
+		catch (NoSuchFolderException nsfe) {
+		}
 
 		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =

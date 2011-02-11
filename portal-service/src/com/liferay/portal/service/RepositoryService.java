@@ -44,7 +44,8 @@ public interface RepositoryService {
 	public long addRepository(long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String portletId, int type,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties)
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 

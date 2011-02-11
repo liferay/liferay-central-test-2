@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.repository.model;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Lock;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 import java.io.InputStream;
 
@@ -27,6 +28,10 @@ import java.util.List;
  * @author Alexander Chow
  */
 public interface FileEntry extends RepositoryModel<FileEntry> {
+
+	public boolean containsPermission(
+			PermissionChecker permissionChecker, String actionId)
+		throws PortalException, SystemException;
 
 	public long getCompanyId();
 

@@ -141,7 +141,8 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 		return new RepositoryEntryWrapper((RepositoryEntry)_repositoryEntry.clone());
 	}
 
-	public int compareTo(RepositoryEntry repositoryEntry) {
+	public int compareTo(
+		com.liferay.portal.model.RepositoryEntry repositoryEntry) {
 		return _repositoryEntry.compareTo(repositoryEntry);
 	}
 
@@ -149,7 +150,7 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 		return _repositoryEntry.hashCode();
 	}
 
-	public RepositoryEntry toEscapedModel() {
+	public com.liferay.portal.model.RepositoryEntry toEscapedModel() {
 		return new RepositoryEntryWrapper(_repositoryEntry.toEscapedModel());
 	}
 

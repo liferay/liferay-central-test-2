@@ -49,7 +49,8 @@ public class RepositoryTest extends TestCase {
 		repositoryIds[0] = RepositoryServiceUtil.addRepository(
 			getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1",
 			"Test 1", PortletKeys.DOCUMENT_LIBRARY,
-			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties());
+			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties(),
+			new ServiceContext());
 
 		DLFolder dlFolder = DLRepositoryServiceUtil.addFolder(
 			getGroupId(), getGroupId(),
@@ -59,7 +60,7 @@ public class RepositoryTest extends TestCase {
 		repositoryIds[1] = RepositoryServiceUtil.addRepository(
 			getGroupId(), dlFolder.getFolderId(), "Test 2", "Test 2",
 			PortletKeys.DOCUMENT_LIBRARY, RepositoryConstants.TYPE_LIFERAY,
-			new UnicodeProperties());
+			new UnicodeProperties(), new ServiceContext());
 
 		// Delete repositories
 
@@ -87,7 +88,8 @@ public class RepositoryTest extends TestCase {
 		long dlRepositoryId = RepositoryServiceUtil.addRepository(
 			getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test",
 			"Test", PortletKeys.DOCUMENT_LIBRARY,
-			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties());
+			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties(),
+			new ServiceContext());
 
 		long[] repositoryIds = {defaultRepositoryId, dlRepositoryId};
 
