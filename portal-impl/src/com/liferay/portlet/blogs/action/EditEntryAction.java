@@ -296,6 +296,8 @@ public class EditEntryAction extends PortletAction {
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter(
+			"backURL", ParamUtil.getString(actionRequest, "backURL"), false);
+		portletURL.setParameter(
 			"groupId", String.valueOf(entry.getGroupId()), false);
 		portletURL.setParameter(
 			"entryId", String.valueOf(entry.getEntryId()), false);
