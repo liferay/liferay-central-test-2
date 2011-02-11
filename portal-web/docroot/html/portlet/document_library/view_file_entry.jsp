@@ -177,7 +177,6 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<c:otherwise>
 						<div class="lfr-preview-file" id="<portlet:namespace />previewFile">
 							<div class="lfr-preview-file-content" id="<portlet:namespace />previewFileContent">
-							
 								<div class="lfr-preview-file-image-current-column">
 									<div class="lfr-preview-file-image-container">
 										<img class="lfr-preview-file-image-current" id="<portlet:namespace />previewFile" src="<%= previewFileURL + "1" %>" />
@@ -205,9 +204,9 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 									boundingBox: '#<portlet:namespace />previewFile',
 									contentBox: '#<portlet:namespace />previewFileContent',
 									currentPreviewImage: '#<portlet:namespace />previewFile',
-									previewFileIndexNode: '#<portlet:namespace />previewFileIndex',
 									imageListContent: '#<portlet:namespace />previewImagesContent',
 									maxIndex: <%= previewFileCount %>,
+									previewFileIndexNode: '#<portlet:namespace />previewFileIndex',
 									toolbar: '#<portlet:namespace />previewToolbar'
 								}
 							).render();

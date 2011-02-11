@@ -44,9 +44,9 @@
 <%@ include file="/html/portal/css/portal/tag_selector.jspf" %>
 <%@ include file="/html/portal/css/portal/generic_portlet.jspf" %>
 <%@ include file="/html/portal/css/portal/forms.jspf" %>
+<%@ include file="/html/portal/css/portal/preview.jspf" %>
 <%@ include file="/html/portal/css/portal/separator.jspf" %>
 <%@ include file="/html/portal/css/portal/top_links.jspf" %>
-<%@ include file="/html/portal/css/portal/preview.jspf" %>
 
 <%@ include file="/html/portal/css/taglib/asset_categories_summary.jspf" %>
 <%@ include file="/html/portal/css/taglib/calendar.jspf" %>
