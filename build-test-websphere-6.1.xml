@@ -67,7 +67,7 @@
 
 $AdminConfig save
 
-$AdminApp install "C:/liferay-portal-${lp.version}-${lp.version.tstamp}.war" {-appname liferay-portal -contextroot /}
+$AdminApp install "C:/liferay-portal-${lp.version}.war" {-appname liferay-portal -contextroot /}
 
 $AdminConfig save
 

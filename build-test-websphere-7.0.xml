@@ -69,7 +69,7 @@ print AdminApp.uninstall('DefaultApplication')
 
 print AdminConfig.save()
 
-print AdminApp.install('C:/liferay-portal-${lp.version}-${lp.version.tstamp}.war', '[-appname liferay-portal -contextroot /]')
+print AdminApp.install('C:/liferay-portal-${lp.version}.war', '[-appname liferay-portal -contextroot /]')
 
 print AdminConfig.save()
 

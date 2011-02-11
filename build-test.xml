@@ -19,10 +19,6 @@
 	<property name="plink.executable" location="${project.dir}/tools/putty/plink.exe" />
 	<property name="pscp.executable" location="${project.dir}/tools/putty/pscp.exe" />
 
-	<tstamp>
-		<format property="lp.version.tstamp" pattern="yyyyMMdd" />
-	</tstamp>
-
 	<target name="append-ant-script">
 		<loadfile property="template.content" srcFile="portal-web/test-ant-templates/${ant.script.template}">
 			<filterchain>
@@ -1801,7 +1797,7 @@ resource.repositories.root=$${user.home}/liferay</echo>
 			</not>
 			<then>
 				<exec executable="${pscp.executable}">
-					<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}-${lp.version.tstamp}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
+					<arg line="-pw ${vm.password} hosts dist\liferay-portal-${lp.version}.war tunnel-web\tunnel-web.war ${vm.username}@${vm.host}:/" />
 				</exec>
 
 				<delete file="hosts" />
