@@ -278,6 +278,10 @@ public class EditEntryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String backURL = ParamUtil.getString(actionRequest, "backURL");
+
+		boolean preview = ParamUtil.getBoolean(actionRequest, "preview");
+
 		PortletURLImpl portletURL = new PortletURLImpl(
 			(ActionRequestImpl)actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
@@ -295,15 +299,12 @@ public class EditEntryAction extends PortletAction {
 
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
 		portletURL.setParameter("redirect", redirect, false);
-		portletURL.setParameter(
-			"backURL", ParamUtil.getString(actionRequest, "backURL"), false);
+		portletURL.setParameter("backURL", backURL, false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(entry.getGroupId()), false);
 		portletURL.setParameter(
 			"entryId", String.valueOf(entry.getEntryId()), false);
-		portletURL.setParameter(
-			"preview", String.valueOf(
-			ParamUtil.getBoolean(actionRequest, "preview")), false);
+		portletURL.setParameter("preview", String.valueOf(preview), false);
 
 		return portletURL.toString();
 	}
