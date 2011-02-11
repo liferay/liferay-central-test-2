@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 
 import java.io.IOException;
@@ -158,17 +160,30 @@ public class InvokerFilter implements Filter {
 	}
 
 	protected String getURI(HttpServletRequest request) {
+		String uri = null;
+
 		if (_dispatcher == Dispatcher.ERROR) {
-			return (String)request.getAttribute(
+			uri = (String)request.getAttribute(
 				JavaConstants.JAVAX_SERVLET_ERROR_REQUEST_URI);
 		}
 		else if (_dispatcher == Dispatcher.INCLUDE) {
-			return (String)request.getAttribute(
+			uri = (String)request.getAttribute(
 				JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI);
 		}
 		else {
-			return request.getRequestURI();
+			uri = request.getRequestURI();
 		}
+
+		String contextPath = request.getContextPath();
+
+		if (Validator.isNotNull(contextPath) &&
+			!contextPath.equals(StringPool.SLASH) &&
+			uri.startsWith(contextPath)) {
+
+			uri = uri.substring(contextPath.length());
+		}
+
+		return uri;
 	}
 
 	private static final int _INVOKER_FILTER_CHAIN_SIZE = GetterUtil.getInteger(
