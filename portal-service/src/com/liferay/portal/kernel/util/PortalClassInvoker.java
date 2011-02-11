@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
 import java.lang.reflect.InvocationTargetException;
 
 /**
@@ -40,7 +42,12 @@ public class PortalClassInvoker {
 			return methodHandler.invoke(newInstance);
 		}
 		catch (InvocationTargetException ite) {
-			throw (Exception)ite.getCause();
+			if (ite.getCause() instanceof Error) {
+				throw new SystemException(ite);
+			}
+			else {
+				throw (Exception)ite.getCause();
+			}
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
@@ -69,7 +76,12 @@ public class PortalClassInvoker {
 			return methodHandler.invoke(newInstance);
 		}
 		catch (InvocationTargetException ite) {
-			throw (Exception)ite.getCause();
+			if (ite.getCause() instanceof Error) {
+				throw new SystemException(ite);
+			}
+			else {
+				throw (Exception)ite.getCause();
+			}
 		}
 		finally {
 			currentThread.setContextClassLoader(contextClassLoader);
