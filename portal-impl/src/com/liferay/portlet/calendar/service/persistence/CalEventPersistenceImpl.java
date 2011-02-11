@@ -382,7 +382,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			calEvent.setUuid(uuid);
 		}
-		
+
 		long userId = GetterUtil.getLong(PrincipalThreadLocal.getName());
 
 		if (userId > 0) {
@@ -390,23 +390,23 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 			long groupId = calEvent.getGroupId();
 
-			long entryId = 0;
+			long eventId = 0;
 
 			if (!isNew) {
-				entryId = calEvent.getPrimaryKey();
+				eventId = calEvent.getPrimaryKey();
 			}
 
 			try {
 				calEvent.setTitle(SanitizerUtil.sanitize(companyId, groupId,
 						userId,
 						com.liferay.portlet.calendar.model.CalEvent.class.getName(),
-						entryId, ContentTypes.TEXT_PLAIN, Sanitizer.MODE_ALL,
+						eventId, ContentTypes.TEXT_PLAIN, Sanitizer.MODE_ALL,
 						calEvent.getTitle(), null));
 
 				calEvent.setDescription(SanitizerUtil.sanitize(companyId,
 						groupId, userId,
 						com.liferay.portlet.calendar.model.CalEvent.class.getName(),
-						entryId, ContentTypes.TEXT_HTML, Sanitizer.MODE_ALL,
+						eventId, ContentTypes.TEXT_HTML, Sanitizer.MODE_ALL,
 						calEvent.getDescription(), null));
 			}
 			catch (SanitizerException se) {
