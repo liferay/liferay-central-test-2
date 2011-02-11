@@ -53,6 +53,7 @@ public class RubyExecutor implements ScriptingExecutor {
 		loadPaths.add(basePath);
 
 		_ruby = JavaEmbedUtils.initialize(loadPaths, rubyInstanceConfig);
+
 		_ruby.setCurrentDirectory(basePath);
 	}
 
