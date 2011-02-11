@@ -241,8 +241,10 @@ public class PortletAction extends Action {
 			boolean hasPortletId = false;
 
 			try {
-				hasPortletId = layoutTypePortlet.hasPortletId(
-					(String)actionRequest.getAttribute(WebKeys.PORTLET_ID));
+				String portletId = (String)actionRequest.getAttribute(
+					WebKeys.PORTLET_ID);
+
+				hasPortletId = layoutTypePortlet.hasPortletId(portletId);
 			}
 			catch (Exception e) {
 			}
