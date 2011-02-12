@@ -255,15 +255,19 @@ public class ExpandoValueImpl
 	}
 
 	protected void validate(int type) throws PortalException, SystemException {
-		ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
-			getColumnId());
+		long columnId = getColumnId();
 
-		if (column.getType() != type) {
-			throw new ValueDataException(
-				"Column " + getColumnId() + " has type " +
-					ExpandoColumnConstants.getTypeLabel(column.getType()) +
-						" and is not compatible with type " +
-							ExpandoColumnConstants.getTypeLabel(type));
+		if (columnId > 0) {
+			ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
+				columnId);
+
+			if (column.getType() != type) {
+				throw new ValueDataException(
+					"Column " + columnId + " has type " +
+						ExpandoColumnConstants.getTypeLabel(column.getType()) +
+							" and is not compatible with type " +
+								ExpandoColumnConstants.getTypeLabel(type));
+			}
 		}
 	}
 
