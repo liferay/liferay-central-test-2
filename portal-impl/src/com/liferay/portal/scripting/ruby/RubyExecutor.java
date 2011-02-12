@@ -56,7 +56,8 @@ public class RubyExecutor implements ScriptingExecutor {
 			rubyInstanceConfig.setCompileMode(CompileMode.FORCE);
 		}
 		else if (PropsValues.SCRIPTING_JRUBY_COMPILE_MODE.equals(
-				_COMPILE_MODE_JIT)) {
+					_COMPILE_MODE_JIT)) {
+
 			rubyInstanceConfig.setCompileMode(CompileMode.JIT);
 		}
 
@@ -186,6 +187,7 @@ public class RubyExecutor implements ScriptingExecutor {
 	}
 
 	private static final String _COMPILE_MODE_FORCE = "force";
+
 	private static final String _COMPILE_MODE_JIT = "jit";
 
 	private Ruby _ruby;
