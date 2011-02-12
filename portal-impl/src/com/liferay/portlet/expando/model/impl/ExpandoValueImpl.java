@@ -17,6 +17,7 @@ package com.liferay.portlet.expando.model.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.expando.ValueDataException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
@@ -257,18 +258,27 @@ public class ExpandoValueImpl
 	protected void validate(int type) throws PortalException, SystemException {
 		long columnId = getColumnId();
 
-		if (columnId > 0) {
-			ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
-				columnId);
-
-			if (column.getType() != type) {
-				throw new ValueDataException(
-					"Column " + columnId + " has type " +
-						ExpandoColumnConstants.getTypeLabel(column.getType()) +
-							" and is not compatible with type " +
-								ExpandoColumnConstants.getTypeLabel(type));
-			}
+		if (columnId <= 0) {
+			return;
 		}
+
+		ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
+			columnId);
+
+		if (column.getType() == type) {
+			return;
+		}
+
+		StringBundler sb = new StringBundler(6);
+
+		sb.append("Column ");
+		sb.append(columnId);
+		sb.append(" has type ");
+		sb.append(ExpandoColumnConstants.getTypeLabel(column.getType()));
+		sb.append(" and is not compatible with type ");
+		sb.append(ExpandoColumnConstants.getTypeLabel(type));
+
+		throw new ValueDataException(sb.toString());
 	}
 
 }
