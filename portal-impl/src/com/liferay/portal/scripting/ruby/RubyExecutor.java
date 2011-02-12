@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 import com.liferay.portal.kernel.servlet.WebDirDetector;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ import java.util.Set;
 
 import org.jruby.Ruby;
 import org.jruby.RubyInstanceConfig;
+import org.jruby.RubyInstanceConfig.CompileMode;
 import org.jruby.exceptions.RaiseException;
 import org.jruby.internal.runtime.GlobalVariables;
 import org.jruby.javasupport.JavaEmbedUtils;
@@ -44,6 +46,19 @@ public class RubyExecutor implements ScriptingExecutor {
 		RubyInstanceConfig rubyInstanceConfig = new RubyInstanceConfig();
 
 		rubyInstanceConfig.setLoader(PortalClassLoaderUtil.getClassLoader());
+
+		if (PropsValues.SCRIPTING_JRUBY_COMPILE_MODE.equals(
+				_COMPILE_MODE_FORCE)) {
+
+			rubyInstanceConfig.setCompileMode(CompileMode.FORCE);
+		}
+		else if (PropsValues.SCRIPTING_JRUBY_COMPILE_MODE.equals(
+				_COMPILE_MODE_JIT)) {
+			rubyInstanceConfig.setCompileMode(CompileMode.JIT);
+		}
+
+		rubyInstanceConfig.setJitThreshold(
+			PropsValues.SCRIPTING_JRUBY_COMPILE_THRESHOLD);
 
 		String basePath = WebDirDetector.getRootDir(
 			PortalClassLoaderUtil.getClassLoader());
@@ -113,6 +128,9 @@ public class RubyExecutor implements ScriptingExecutor {
 			JavaEmbedUtils.terminate(_ruby);
 		}
 	}
+
+	private static final String _COMPILE_MODE_FORCE = "force";
+	private static final String _COMPILE_MODE_JIT = "jit";
 
 	private Ruby _ruby;
 
