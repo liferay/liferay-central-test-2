@@ -25,6 +25,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PreferencesValidator;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Brian Wing Shun Chan
@@ -75,6 +76,22 @@ public class PortletPreferencesFactoryUtil {
 
 		return getPortletPreferencesFactory().getPortletPreferences(
 			request, portletId);
+	}
+
+	public static PortalPreferences getPortalPreferences(
+			long companyId, long userId, boolean signedIn)
+		throws SystemException {
+
+		return getPortletPreferencesFactory().getPortalPreferences(
+			companyId, userId, signedIn);
+	}
+
+	public static PortalPreferences getPortalPreferences(
+			long companyId, long userId, boolean signedIn, HttpSession session)
+		throws SystemException {
+
+		return getPortletPreferencesFactory().getPortalPreferences(
+			companyId, userId, signedIn, session);
 	}
 
 	public static PortletPreferencesFactory getPortletPreferencesFactory() {

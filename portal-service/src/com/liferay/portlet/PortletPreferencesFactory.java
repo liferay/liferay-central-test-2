@@ -25,6 +25,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PreferencesValidator;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Brian Wing Shun Chan
@@ -51,6 +52,14 @@ public interface PortletPreferencesFactory {
 	public PortletPreferences getPortletPreferences(
 			HttpServletRequest request, String portletId)
 		throws PortalException, SystemException;
+
+	public PortalPreferences getPortalPreferences(
+			long companyId, long userId, boolean signedIn)
+		throws SystemException;
+
+	public PortalPreferences getPortalPreferences(
+			long companyId, long userId, boolean signedIn, HttpSession session)
+		throws SystemException;
 
 	public PortletPreferencesIds getPortletPreferencesIds(
 			HttpServletRequest request, Layout selLayout, String portletId)

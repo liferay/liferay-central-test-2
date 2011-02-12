@@ -152,51 +152,66 @@ public class PortletPreferencesFactoryImpl
 			layout.getCompanyId(), ownerId, ownerType, layout.getPlid(),
 			portletId);
 	}
-
 	public PortalPreferences getPortalPreferences(HttpServletRequest request)
 		throws SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long ownerId = themeDisplay.getUserId();
+		return getPortalPreferences(
+			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
+			themeDisplay.isSignedIn(), request.getSession());
+	}
+
+	public PortalPreferences getPortalPreferences(
+			long companyId, long userId, boolean signedIn)
+		throws SystemException {
+
+		return getPortalPreferences(companyId, userId, signedIn, null);
+	}
+
+	public PortalPreferences getPortalPreferences(
+			long companyId, long userId, boolean signedIn, HttpSession session)
+		throws SystemException {
+
+		long ownerId = userId;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
 		long plid = PortletKeys.PREFS_PLID_SHARED;
 		String portletId = PortletKeys.LIFERAY_PORTAL;
 
 		PortalPreferences portalPreferences = null;
 
-		if (themeDisplay.isSignedIn()) {
+		if (signedIn) {
 			PortletPreferencesImpl portletPreferencesImpl =
 				(PortletPreferencesImpl)
 					PortletPreferencesLocalServiceUtil.getPreferences(
-						themeDisplay.getCompanyId(), ownerId, ownerType, plid,
-						portletId);
+						companyId, ownerId, ownerType, plid, portletId);
 
 			portalPreferences = new PortalPreferencesImpl(
-				portletPreferencesImpl, themeDisplay.isSignedIn());
+				portletPreferencesImpl, signedIn);
 		}
 		else {
-			HttpSession session = request.getSession();
-
-			portalPreferences = (PortalPreferences)session.getAttribute(
-				WebKeys.PORTAL_PREFERENCES);
+			if (session != null) {
+				portalPreferences = (PortalPreferences)session.getAttribute(
+					WebKeys.PORTAL_PREFERENCES);
+			}
 
 			if (portalPreferences == null) {
 				PortletPreferencesImpl portletPreferencesImpl =
 					(PortletPreferencesImpl)
 						PortletPreferencesLocalServiceUtil.getPreferences(
-							themeDisplay.getCompanyId(), ownerId, ownerType,
-							plid, portletId);
+							companyId, ownerId, ownerType, plid, portletId);
 
 				portletPreferencesImpl =
 					(PortletPreferencesImpl)portletPreferencesImpl.clone();
 
 				portalPreferences = new PortalPreferencesImpl(
-					portletPreferencesImpl, themeDisplay.isSignedIn());
+					portletPreferencesImpl, signedIn);
 
-				session.setAttribute(
-					WebKeys.PORTAL_PREFERENCES, portalPreferences);
+				if (session != null) {
+					session.setAttribute(
+						WebKeys.PORTAL_PREFERENCES, portalPreferences);
+				}
 			}
 		}
 
