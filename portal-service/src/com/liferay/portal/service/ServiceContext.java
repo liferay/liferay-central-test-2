@@ -61,6 +61,7 @@ public class ServiceContext implements Cloneable, Serializable {
 		serviceContext.setPortalURL(getPortalURL());
 		serviceContext.setPortletPreferencesIds(getPortletPreferencesIds());
 		serviceContext.setScopeGroupId(getScopeGroupId());
+		serviceContext.setSignedIn(isSignedIn());
 		serviceContext.setUserDisplayURL(getUserDisplayURL());
 		serviceContext.setUserId(getUserId());
 		serviceContext.setUuid(getUuid());
@@ -219,6 +220,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		}
 	}
 
+	public boolean isSignedIn() {
+		return _signedIn;
+	}
+
 	public Serializable removeAttribute(String name) {
 		return _attributes.remove(name);
 	}
@@ -315,6 +320,10 @@ public class ServiceContext implements Cloneable, Serializable {
 		_scopeGroupId = scopeGroupId;
 	}
 
+	public void setSignedIn(boolean signedIn) {
+		_signedIn = signedIn;
+	}
+
 	public void setUserDisplayURL(String userDisplayURL) {
 		_userDisplayURL = userDisplayURL;
 	}
@@ -351,6 +360,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	private String _portalURL;
 	private PortletPreferencesIds _portletPreferencesIds;
 	private long _scopeGroupId;
+	private boolean _signedIn;
 	private String _userDisplayURL;
 	private long _plid;
 	private int _workflowAction = WorkflowConstants.ACTION_PUBLISH;

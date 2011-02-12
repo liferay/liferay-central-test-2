@@ -64,6 +64,7 @@ public class ServiceContextFactory {
 			serviceContext.setPlid(themeDisplay.getPlid());
 			serviceContext.setPortalURL(PortalUtil.getPortalURL(request));
 			serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
+			serviceContext.setSignedIn(themeDisplay.isSignedIn());
 
 			User user = themeDisplay.getUser();
 
@@ -80,6 +81,13 @@ public class ServiceContextFactory {
 
 			long userId = PortalUtil.getUserId(request);
 
+			boolean signedIn = false;
+
+			if (UserLocalServiceUtil.getDefaultUserId(companyId) == userId) {
+				signedIn = true;
+			}
+
+			serviceContext.setSignedIn(signedIn);
 			serviceContext.setUserId(userId);
 		}
 
