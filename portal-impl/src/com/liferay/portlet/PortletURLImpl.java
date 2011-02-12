@@ -963,7 +963,7 @@ public class PortletURLImpl
 			String name = entry.getKey();
 			String[] values = entry.getValue();
 
-			if ((name == null) || isParameterIncludedInPath(name)) {
+			if (isParameterIncludedInPath(name)) {
 				continue;
 			}
 
