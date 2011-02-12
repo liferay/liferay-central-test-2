@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.servlet.filters.css;
+package com.liferay.portal.servlet.filters.dynamiccss;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -65,7 +64,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		}
 	}
 
-	protected Object getParsedContent(
+	protected Object getDynamicContent(
 			HttpServletRequest request, HttpServletResponse response,
 			FilterChain filterChain)
 		throws Exception {
@@ -126,16 +125,14 @@ public class DynamicCSSFilter extends BasePortalFilter {
 			return cacheDataFile;
 		}
 		else {
-			String parsedContent = null;
+			String dynamicContent = null;
 
-			if (realPath.endsWith(_CSS_EXTENSION) ||
-				realPath.endsWith(_SCSS_EXTENSION)) {
-
+			if (realPath.endsWith(_CSS_EXTENSION)) {
 				if (_log.isInfoEnabled()) {
 					_log.info("Parsing SASS on CSS " + file);
 				}
 
-				parsedContent = parseSass(request, FileUtil.read(file));
+				dynamicContent = parseSass(request, FileUtil.read(file));
 
 				response.setContentType(ContentTypes.TEXT_CSS);
 
@@ -158,7 +155,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 				response.setContentType(stringResponse.getContentType());
 
-				parsedContent = parseSass(request, stringResponse.getString());
+				dynamicContent = parseSass(request, stringResponse.getString());
 
 				FileUtil.write(
 					cacheContentTypeFile, stringResponse.getContentType());
@@ -167,9 +164,9 @@ public class DynamicCSSFilter extends BasePortalFilter {
 				return null;
 			}
 
-			FileUtil.write(cacheDataFile, parsedContent);
+			FileUtil.write(cacheDataFile, dynamicContent);
 
-			return parsedContent;
+			return dynamicContent;
 		}
 	}
 
@@ -184,6 +181,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 			unsyncByteArrayOutputStream);
 
 		Map<String, Object> inputObjects = new HashMap<String, Object>();
+
 		inputObjects.put("content", content);
 		inputObjects.put("out", unsyncPrintWriter);
 
@@ -212,13 +210,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		processFilter(
 			DynamicCSSFilter.class, request, stringResponse, filterChain);
 
-		if (_log.isDebugEnabled()) {
-			String completeURL = HttpUtil.getCompleteURL(request);
-
-			_log.debug("Parsing CSS on response " + completeURL);
-		}
-
-		Object parsedContent = getParsedContent(
+		Object parsedContent = getDynamicContent(
 			request, stringResponse, filterChain);
 
 		if (parsedContent == null) {
@@ -249,9 +241,8 @@ public class DynamicCSSFilter extends BasePortalFilter {
 	private static final String _QUESTION_SEPARATOR = "_Q_";
 
 	private static final String _RUBY_SCRIPT =
-		"com/liferay/portal/servlet/filters/css/dependencies/sass/main.rb";
-
-	private static final String _SCSS_EXTENSION = ".scss";
+		"com/liferay/portal/servlet/filters/dynamiccss/dependencies/sass/" +
+			"main.rb";
 
 	private static final String _TEMP_DIR =
 		SystemProperties.get(SystemProperties.TMP_DIR) + "/liferay/css";
