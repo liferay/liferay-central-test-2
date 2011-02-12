@@ -100,15 +100,15 @@
 }
 
 .lfr-preview-file-toolbar .aui-icon-arrow-1-l {
-	background: url(<%= themeImagesPath %>/document_library/icon_arrow_left.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/document_library/preview_left.png) no-repeat 0 50%;
 }
 
 .lfr-preview-file-toolbar .aui-icon-arrow-1-r {
-	background: url(<%= themeImagesPath %>/document_library/icon_arrow_right.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/document_library/preview_right.png) no-repeat 0 50%;
 }
 
 .lfr-preview-file-toolbar .aui-icon-zoomin {
-	background: url(<%= themeImagesPath %>/document_library/icon_magnify_glass.png) no-repeat 0 50%;
+	background: url(<%= themeImagesPath %>/document_library/preview_zoom.png) no-repeat 0 50%;
 }
 
 .lfr-preview-file-info {

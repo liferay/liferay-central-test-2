@@ -179,7 +179,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 							<div class="lfr-preview-file-content" id="<portlet:namespace />previewFileContent">
 								<div class="lfr-preview-file-image-current-column">
 									<div class="lfr-preview-file-image-container">
-										<img class="lfr-preview-file-image-current" id="<portlet:namespace />previewFile" src="<%= previewFileURL + "1" %>" />
+										<img class="lfr-preview-file-image-current" id="<portlet:namespace />previewFileImage" src="<%= previewFileURL + "1" %>" />
 									</div>
 									<span class="lfr-preview-file-actions aui-helper-hidden" id="<portlet:namespace />previewFileActions">
 										<span class="lfr-preview-file-toolbar" id="<portlet:namespace />previewToolbar"></span>
@@ -203,7 +203,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 									baseImageURL: '<%= previewFileURL %>',
 									boundingBox: '#<portlet:namespace />previewFile',
 									contentBox: '#<portlet:namespace />previewFileContent',
-									currentPreviewImage: '#<portlet:namespace />previewFile',
+									currentPreviewImage: '#<portlet:namespace />previewFileImage',
 									imageListContent: '#<portlet:namespace />previewImagesContent',
 									maxIndex: <%= previewFileCount %>,
 									previewFileIndexNode: '#<portlet:namespace />previewFileIndex',
