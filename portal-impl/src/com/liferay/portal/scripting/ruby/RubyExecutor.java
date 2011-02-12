@@ -22,6 +22,9 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -123,6 +126,59 @@ public class RubyExecutor implements ScriptingExecutor {
 		catch (RaiseException re) {
 			throw new ScriptingException(
 				re.getException().message.asJavaString() + "\n\n", re);
+		}
+		finally {
+			JavaEmbedUtils.terminate(_ruby);
+		}
+	}
+
+	public Map<String, Object> evalFile(
+			Set<String> allowedClasses, Map<String, Object> inputObjects,
+			Set<String> outputNames, String filename)
+		throws ScriptingException {
+
+		if (allowedClasses != null) {
+			throw new ExecutionException(
+				"Constrained execution not supported for Ruby");
+		}
+
+		try {
+			GlobalVariables globalVariables = _ruby.getGlobalVariables();
+
+			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
+				String inputName = entry.getKey();
+				Object inputObject = entry.getValue();
+
+				if (!inputName.startsWith(StringPool.DOLLAR)) {
+					inputName = StringPool.DOLLAR + inputName;
+				}
+
+				BeanGlobalVariable beanGlobalVariable = new BeanGlobalVariable(
+					_ruby, inputObject, inputObject.getClass());
+
+				globalVariables.define(inputName, beanGlobalVariable);
+			}
+
+			_ruby.runFromMain(new FileInputStream(filename), filename);
+
+			if (outputNames == null) {
+				return null;
+			}
+
+			Map<String, Object> outputObjects = new HashMap<String, Object>();
+
+			for (String outputName : outputNames) {
+				outputObjects.put(outputName, globalVariables.get(outputName));
+			}
+
+			return outputObjects;
+		}
+		catch (RaiseException re) {
+			throw new ScriptingException(
+				re.getException().message.asJavaString() + "\n\n", re);
+		}
+		catch (FileNotFoundException fnfe) {
+			throw new ScriptingException(fnfe);
 		}
 		finally {
 			JavaEmbedUtils.terminate(_ruby);

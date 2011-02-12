@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.io.unsync.UnsyncPrintWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scripting.ScriptingException;
-import com.liferay.portal.kernel.scripting.ScriptingUtil;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.CharPool;
@@ -30,8 +29,8 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.scripting.ruby.RubyExecutor;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
-import com.liferay.util.ContentUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
@@ -47,8 +46,11 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.time.StopWatch;
+
 /**
  * @author Eduardo Lundgren
+ * @author Raymond Augé
  */
 public class DynamicCSSFilter extends BasePortalFilter {
 
@@ -58,6 +60,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		_servletContext = filterConfig.getServletContext();
 		_servletContextName = GetterUtil.getString(
 			_servletContext.getServletContextName());
+		_rubyExecutor = new RubyExecutor();
 
 		if (Validator.isNull(_servletContextName)) {
 			_tempDir += "/portal";
@@ -185,8 +188,12 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		inputObjects.put("content", content);
 		inputObjects.put("out", unsyncPrintWriter);
 
-		ScriptingUtil.exec(
-			null, inputObjects, _LANG_RUBY, ContentUtil.get(_RUBY_SCRIPT));
+		if (_rubyScriptRealPath == null) {
+			_rubyScriptRealPath = ServletContextUtil.getRealPath(
+				_servletContext, _RUBY_SCRIPT);
+		}
+
+		_rubyExecutor.evalFile(null, inputObjects, null, _rubyScriptRealPath);
 
 		unsyncPrintWriter.flush();
 
@@ -210,18 +217,35 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		processFilter(
 			DynamicCSSFilter.class, request, stringResponse, filterChain);
 
-		Object parsedContent = getDynamicContent(
-			request, stringResponse, filterChain);
+		StopWatch timer = null;
 
-		if (parsedContent == null) {
-			parsedContent = parseSass(request, stringResponse.getString());
+		if (_log.isDebugEnabled()) {
+			timer = new StopWatch();
+
+			timer.start();
 		}
 
-		if (parsedContent instanceof File) {
-			ServletResponseUtil.write(response, (File)parsedContent);
+		try {
+			Object parsedContent = getDynamicContent(
+				request, stringResponse, filterChain);
+
+			if (parsedContent == null) {
+				parsedContent = parseSass(request, stringResponse.getString());
+			}
+
+			if (parsedContent instanceof File) {
+				ServletResponseUtil.write(response, (File)parsedContent);
+			}
+			else if (parsedContent instanceof String) {
+				ServletResponseUtil.write(response, (String)parsedContent);
+			}
 		}
-		else if (parsedContent instanceof String) {
-			ServletResponseUtil.write(response, (String)parsedContent);
+		finally {
+			if (_log.isDebugEnabled()) {
+				timer.stop();
+
+				_log.debug("Execution time: " + timer.toString());
+			}
 		}
 	}
 
@@ -236,19 +260,17 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 	private static final String _JSP_EXTENSION = ".jsp";
 
-	private static final String _LANG_RUBY = "ruby";
-
 	private static final String _QUESTION_SEPARATOR = "_Q_";
 
-	private static final String _RUBY_SCRIPT =
-		"com/liferay/portal/servlet/filters/dynamiccss/dependencies/sass/" +
-			"main.rb";
+	private static final String _RUBY_SCRIPT = "/WEB-INF/sass/main.rb";
 
 	private static final String _TEMP_DIR =
 		SystemProperties.get(SystemProperties.TMP_DIR) + "/liferay/css";
 
 	private static Log _log = LogFactoryUtil.getLog(DynamicCSSFilter.class);
 
+	private RubyExecutor _rubyExecutor;
+	private String _rubyScriptRealPath;
 	private ServletContext _servletContext;
 	private String _servletContextName;
 	private String _tempDir = _TEMP_DIR;
