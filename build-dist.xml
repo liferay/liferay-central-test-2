@@ -482,6 +482,30 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 release was successful.</echo>
 	</target>
 
+	<target name="prepare-generated-files">
+		<ant dir="portal-impl" target="build-iw" inheritAll="false" />
+		<ant dir="portal-impl" target="build-services" inheritAll="false" />
+		<ant dir="portal-impl" target="build-wsdds" inheritAll="false" />
+
+		<antcall target="all" />
+
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
+		<parallel>
+			<exec dir="${app.server.tomcat.bin.dir}" executable="startup.bat" resolveexecutable="true" />
+
+			<sequential>
+				<waitfor>
+					<http url="http://localhost:8080" />
+				</waitfor>
+
+				<ant dir="portal-client" target="build-client" inheritAll="false" />
+
+				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown.bat" resolveexecutable="true" />
+			</sequential>
+		</parallel>
+	</target>
+
 	<target name="rename-dist-files">
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMdd" />
@@ -513,30 +537,6 @@ release was successful.</echo>
 				/>
 			</sequential>
 		</for>
-	</target>
-
-	<target name="prepare-generated-files">
-		<ant dir="portal-impl" target="build-iw" inheritAll="false" />
-		<ant dir="portal-impl" target="build-services" inheritAll="false" />
-		<ant dir="portal-impl" target="build-wsdds" inheritAll="false" />
-
-		<antcall target="all" />
-
-		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
-
-		<parallel>
-			<exec dir="${app.server.tomcat.bin.dir}" executable="startup.bat" resolveexecutable="true" />
-
-			<sequential>
-				<waitfor>
-					<http url="http://localhost:8080" />
-				</waitfor>
-
-				<ant dir="portal-client" target="build-client" inheritAll="false" />
-
-				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown.bat" resolveexecutable="true" />
-			</sequential>
-		</parallel>
 	</target>
 
 	<target name="unzip-geronimo">
