@@ -14,10 +14,13 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
+import com.liferay.portal.model.User;
 
 import java.io.Serializable;
 
@@ -63,7 +66,7 @@ public class ServiceContext implements Cloneable, Serializable {
 		serviceContext.setScopeGroupId(getScopeGroupId());
 		serviceContext.setSignedIn(isSignedIn());
 		serviceContext.setUserDisplayURL(getUserDisplayURL());
-		serviceContext.setUserId(getUserId());
+		serviceContext.setUser(getUser());
 		serviceContext.setUuid(getUuid());
 		serviceContext.setWorkflowAction(getWorkflowAction());
 
@@ -186,8 +189,17 @@ public class ServiceContext implements Cloneable, Serializable {
 		return _userDisplayURL;
 	}
 
+	public User getUser() {
+		return _user;
+	}
+
 	public long getUserId() {
-		return _userId;
+		if (_user != null) {
+			return _user.getUserId();
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public String getUuid() {
@@ -328,8 +340,20 @@ public class ServiceContext implements Cloneable, Serializable {
 		_userDisplayURL = userDisplayURL;
 	}
 
+	public void setUser(User user) {
+		_user = user;
+	}
+
+	/**
+	 * @deprecated {@link #setUser(User)}
+	 */
 	public void setUserId(long userId) {
-		_userId = userId;
+		try {
+			_user = UserLocalServiceUtil.getUserById(userId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	public void setUuid(String uuid) {
@@ -339,6 +363,8 @@ public class ServiceContext implements Cloneable, Serializable {
 	public void setWorkflowAction(int workflowAction) {
 		_workflowAction = workflowAction;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(ServiceContext.class);
 
 	private boolean _addCommunityPermissions;
 	private boolean _addGuestPermissions;
@@ -364,7 +390,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	private String _userDisplayURL;
 	private long _plid;
 	private int _workflowAction = WorkflowConstants.ACTION_PUBLISH;
-	private long _userId;
+	private User _user;
 	private String _uuid;
 
 }

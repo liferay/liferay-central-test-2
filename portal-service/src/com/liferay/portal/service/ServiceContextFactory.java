@@ -69,8 +69,7 @@ public class ServiceContextFactory {
 			User user = themeDisplay.getUser();
 
 			serviceContext.setUserDisplayURL(user.getDisplayURL(themeDisplay));
-
-			serviceContext.setUserId(themeDisplay.getUserId());
+			serviceContext.setUser(user);
 		}
 		else {
 			long companyId = PortalUtil.getCompanyId(request);
@@ -79,16 +78,10 @@ public class ServiceContextFactory {
 
 			serviceContext.setPathMain(PortalUtil.getPathMain());
 
-			long userId = PortalUtil.getUserId(request);
+			User user = PortalUtil.getUser(request);
 
-			boolean signedIn = false;
-
-			if (UserLocalServiceUtil.getDefaultUserId(companyId) == userId) {
-				signedIn = true;
-			}
-
-			serviceContext.setSignedIn(signedIn);
-			serviceContext.setUserId(userId);
+			serviceContext.setSignedIn(!user.isDefaultUser());
+			serviceContext.setUser(user);
 		}
 
 		// Attributes
@@ -145,9 +138,12 @@ public class ServiceContextFactory {
 			serviceContext.setPlid(themeDisplay.getPlid());
 			serviceContext.setPortalURL(
 				PortalUtil.getPortalURL(portletRequest));
-			serviceContext.setUserDisplayURL(
-				themeDisplay.getUser().getDisplayURL(themeDisplay));
-			serviceContext.setUserId(themeDisplay.getUserId());
+			serviceContext.setSignedIn(themeDisplay.isSignedIn());
+
+			User user = themeDisplay.getUser();
+
+			serviceContext.setUserDisplayURL(user.getDisplayURL(themeDisplay));
+			serviceContext.setUser(user);
 		}
 
 		serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
