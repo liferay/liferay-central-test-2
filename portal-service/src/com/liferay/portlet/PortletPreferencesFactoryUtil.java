@@ -63,6 +63,22 @@ public class PortletPreferencesFactoryUtil {
 	}
 
 	public static PortalPreferences getPortalPreferences(
+			HttpSession session, long companyId, long userId, boolean signedIn)
+		throws SystemException {
+
+		return getPortletPreferencesFactory().getPortalPreferences(
+			session, companyId, userId, signedIn);
+	}
+
+	public static PortalPreferences getPortalPreferences(
+			long companyId, long userId, boolean signedIn)
+		throws SystemException {
+
+		return getPortletPreferencesFactory().getPortalPreferences(
+			companyId, userId, signedIn);
+	}
+
+	public static PortalPreferences getPortalPreferences(
 			PortletRequest portletRequest)
 		throws SystemException {
 
@@ -76,22 +92,6 @@ public class PortletPreferencesFactoryUtil {
 
 		return getPortletPreferencesFactory().getPortletPreferences(
 			request, portletId);
-	}
-
-	public static PortalPreferences getPortalPreferences(
-			long companyId, long userId, boolean signedIn)
-		throws SystemException {
-
-		return getPortletPreferencesFactory().getPortalPreferences(
-			companyId, userId, signedIn);
-	}
-
-	public static PortalPreferences getPortalPreferences(
-			long companyId, long userId, boolean signedIn, HttpSession session)
-		throws SystemException {
-
-		return getPortletPreferencesFactory().getPortalPreferences(
-			companyId, userId, signedIn, session);
 	}
 
 	public static PortletPreferencesFactory getPortletPreferencesFactory() {

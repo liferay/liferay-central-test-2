@@ -152,6 +152,7 @@ public class PortletPreferencesFactoryImpl
 			layout.getCompanyId(), ownerId, ownerType, layout.getPlid(),
 			portletId);
 	}
+
 	public PortalPreferences getPortalPreferences(HttpServletRequest request)
 		throws SystemException {
 
@@ -159,19 +160,12 @@ public class PortletPreferencesFactoryImpl
 			WebKeys.THEME_DISPLAY);
 
 		return getPortalPreferences(
-			themeDisplay.getCompanyId(), themeDisplay.getUserId(),
-			themeDisplay.isSignedIn(), request.getSession());
+			request.getSession(), themeDisplay.getCompanyId(),
+			themeDisplay.getUserId(), themeDisplay.isSignedIn());
 	}
 
 	public PortalPreferences getPortalPreferences(
-			long companyId, long userId, boolean signedIn)
-		throws SystemException {
-
-		return getPortalPreferences(companyId, userId, signedIn, null);
-	}
-
-	public PortalPreferences getPortalPreferences(
-			long companyId, long userId, boolean signedIn, HttpSession session)
+			HttpSession session, long companyId, long userId, boolean signedIn)
 		throws SystemException {
 
 		long ownerId = userId;
@@ -216,6 +210,13 @@ public class PortletPreferencesFactoryImpl
 		}
 
 		return portalPreferences;
+	}
+
+	public PortalPreferences getPortalPreferences(
+			long companyId, long userId, boolean signedIn)
+		throws SystemException {
+
+		return getPortalPreferences(null, companyId, userId, signedIn);
 	}
 
 	public PortalPreferences getPortalPreferences(PortletRequest portletRequest)

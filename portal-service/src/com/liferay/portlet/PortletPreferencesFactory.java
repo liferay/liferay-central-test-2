@@ -46,20 +46,20 @@ public interface PortletPreferencesFactory {
 	public PortalPreferences getPortalPreferences(HttpServletRequest request)
 		throws SystemException;
 
+	public PortalPreferences getPortalPreferences(
+			HttpSession session, long companyId, long userId, boolean signedIn)
+		throws SystemException;
+
+	public PortalPreferences getPortalPreferences(
+			long companyId, long userId, boolean signedIn)
+		throws SystemException;
+
 	public PortalPreferences getPortalPreferences(PortletRequest portletRequest)
 		throws SystemException;
 
 	public PortletPreferences getPortletPreferences(
 			HttpServletRequest request, String portletId)
 		throws PortalException, SystemException;
-
-	public PortalPreferences getPortalPreferences(
-			long companyId, long userId, boolean signedIn)
-		throws SystemException;
-
-	public PortalPreferences getPortalPreferences(
-			long companyId, long userId, boolean signedIn, HttpSession session)
-		throws SystemException;
 
 	public PortletPreferencesIds getPortletPreferencesIds(
 			HttpServletRequest request, Layout selLayout, String portletId)
