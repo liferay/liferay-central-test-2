@@ -15,9 +15,9 @@
 package com.liferay.portal.scripting.python;
 
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+import com.liferay.portal.kernel.scripting.BaseScriptingExecutor;
 import com.liferay.portal.kernel.scripting.ExecutionException;
 import com.liferay.portal.kernel.scripting.ScriptingException;
-import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ import org.python.util.InteractiveInterpreter;
 /**
  * @author Alberto Montero
  */
-public class PythonExecutor implements ScriptingExecutor {
+public class PythonExecutor extends BaseScriptingExecutor {
 
 	public static final String CACHE_NAME = PythonExecutor.class.getName();
 

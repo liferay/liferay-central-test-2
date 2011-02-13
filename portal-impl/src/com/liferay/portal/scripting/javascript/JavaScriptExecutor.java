@@ -19,8 +19,8 @@ import com.liferay.mozilla.javascript.Script;
 import com.liferay.mozilla.javascript.Scriptable;
 import com.liferay.mozilla.javascript.ScriptableObject;
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+import com.liferay.portal.kernel.scripting.BaseScriptingExecutor;
 import com.liferay.portal.kernel.scripting.ScriptingException;
-import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ import java.util.Set;
 /**
  * @author Alberto Montero
  */
-public class JavaScriptExecutor implements ScriptingExecutor {
+public class JavaScriptExecutor extends BaseScriptingExecutor {
 
 	public static final String CACHE_NAME = JavaScriptExecutor.class.getName();
 

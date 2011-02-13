@@ -46,8 +46,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.time.StopWatch;
-
 /**
  * @author Eduardo Lundgren
  * @author Raymond Augé
@@ -60,7 +58,10 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		_servletContext = filterConfig.getServletContext();
 		_servletContextName = GetterUtil.getString(
 			_servletContext.getServletContextName());
-		_rubyExecutor = new RubyExecutor();
+
+		_rubyScriptFile = new File(
+			ServletContextUtil.getRealPath(
+				_servletContext, "/WEB-INF/sass/main.rb"));
 
 		if (Validator.isNull(_servletContextName)) {
 			_tempDir += "/portal";
@@ -188,12 +189,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		inputObjects.put("content", content);
 		inputObjects.put("out", unsyncPrintWriter);
 
-		if (_rubyScriptRealPath == null) {
-			_rubyScriptRealPath = ServletContextUtil.getRealPath(
-				_servletContext, _RUBY_SCRIPT);
-		}
-
-		_rubyExecutor.evalFile(null, inputObjects, null, _rubyScriptRealPath);
+		_rubyExecutor.eval(null, inputObjects, null, _rubyScriptFile);
 
 		unsyncPrintWriter.flush();
 
@@ -217,35 +213,18 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		processFilter(
 			DynamicCSSFilter.class, request, stringResponse, filterChain);
 
-		StopWatch timer = null;
+		Object parsedContent = getDynamicContent(
+			request, stringResponse, filterChain);
 
-		if (_log.isDebugEnabled()) {
-			timer = new StopWatch();
-
-			timer.start();
+		if (parsedContent == null) {
+			parsedContent = parseSass(request, stringResponse.getString());
 		}
 
-		try {
-			Object parsedContent = getDynamicContent(
-				request, stringResponse, filterChain);
-
-			if (parsedContent == null) {
-				parsedContent = parseSass(request, stringResponse.getString());
-			}
-
-			if (parsedContent instanceof File) {
-				ServletResponseUtil.write(response, (File)parsedContent);
-			}
-			else if (parsedContent instanceof String) {
-				ServletResponseUtil.write(response, (String)parsedContent);
-			}
+		if (parsedContent instanceof File) {
+			ServletResponseUtil.write(response, (File)parsedContent);
 		}
-		finally {
-			if (_log.isDebugEnabled()) {
-				timer.stop();
-
-				_log.debug("Execution time: " + timer.toString());
-			}
+		else if (parsedContent instanceof String) {
+			ServletResponseUtil.write(response, (String)parsedContent);
 		}
 	}
 
@@ -262,15 +241,13 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 	private static final String _QUESTION_SEPARATOR = "_Q_";
 
-	private static final String _RUBY_SCRIPT = "/WEB-INF/sass/main.rb";
-
 	private static final String _TEMP_DIR =
 		SystemProperties.get(SystemProperties.TMP_DIR) + "/liferay/css";
 
 	private static Log _log = LogFactoryUtil.getLog(DynamicCSSFilter.class);
 
-	private RubyExecutor _rubyExecutor;
-	private String _rubyScriptRealPath;
+	private RubyExecutor _rubyExecutor = new RubyExecutor();
+	private File _rubyScriptFile;
 	private ServletContext _servletContext;
 	private String _servletContextName;
 	private String _tempDir = _TEMP_DIR;

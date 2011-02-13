@@ -14,7 +14,10 @@
 
 package com.liferay.portal.kernel.scripting;
 
+import com.liferay.portal.kernel.util.FileUtil;
+
 import java.io.File;
+import java.io.IOException;
 
 import java.util.Map;
 import java.util.Set;
@@ -23,20 +26,24 @@ import java.util.Set;
  * @author Alberto Montero
  * @author Brian Wing Shun Chan
  */
-public interface ScriptingExecutor {
+public abstract class BaseScriptingExecutor implements ScriptingExecutor {
 
-	public void clearCache();
-
-	public String getLanguage();
+	public void clearCache() {
+	}
 
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, File scriptFile)
-		throws ScriptingException;
+		throws ScriptingException {
 
-	public Map<String, Object> eval(
-			Set<String> allowedClasses, Map<String, Object> inputObjects,
-			Set<String> outputNames, String script)
-		throws ScriptingException;
+		try {
+			String script = FileUtil.read(scriptFile);
+
+			return eval(allowedClasses, inputObjects, outputNames, script);
+		}
+		catch (IOException ioe) {
+			throw new ScriptingException(ioe);
+		}
+	}
 
 }

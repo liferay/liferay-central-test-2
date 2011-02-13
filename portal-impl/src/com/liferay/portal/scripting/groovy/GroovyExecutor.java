@@ -15,9 +15,9 @@
 package com.liferay.portal.scripting.groovy;
 
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+import com.liferay.portal.kernel.scripting.BaseScriptingExecutor;
 import com.liferay.portal.kernel.scripting.ExecutionException;
 import com.liferay.portal.kernel.scripting.ScriptingException;
-import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
@@ -31,7 +31,7 @@ import java.util.Set;
  * @author Alberto Montero
  * @author Brian Wing Shun Chan
  */
-public class GroovyExecutor implements ScriptingExecutor {
+public class GroovyExecutor extends BaseScriptingExecutor {
 
 	public static final String CACHE_NAME = GroovyExecutor.class.getName();
 

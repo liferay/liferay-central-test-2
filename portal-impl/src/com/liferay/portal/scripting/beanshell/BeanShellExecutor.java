@@ -16,9 +16,9 @@ package com.liferay.portal.scripting.beanshell;
 
 import bsh.Interpreter;
 
+import com.liferay.portal.kernel.scripting.BaseScriptingExecutor;
 import com.liferay.portal.kernel.scripting.ExecutionException;
 import com.liferay.portal.kernel.scripting.ScriptingException;
-import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,12 +27,9 @@ import java.util.Set;
 /**
  * @author Shuyang Zhou
  */
-public class BeanShellExecutor implements ScriptingExecutor {
+public class BeanShellExecutor extends BaseScriptingExecutor {
 
 	public static final String LANGUAGE = "beanshell";
-
-	public void clearCache() {
-	}
 
 	public String getLanguage() {
 		return LANGUAGE;
