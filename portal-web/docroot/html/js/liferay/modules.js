@@ -35,7 +35,7 @@
 			'layout-configuration': ['aui-live-search', 'dd', 'liferay-layout'],
 			'look-and-feel': ['aui-color-picker', 'aui-dialog', 'aui-io-request', 'aui-tabs-base'],
 			'menu': ['aui-base', 'node-focusmanager', 'selector-css3'],
-			'navigation': ['aui-form-combobox', 'aui-io-request', 'dd-constrain', 'event-touch', 'json-parse', 'node-event-simulate', 'overlay', 'selector-css3', 'sortable', 'substitute'],
+			'navigation': ['aui-form-combobox', 'aui-io-request', 'dd-constrain', 'json-parse', 'node-event-simulate', 'overlay', 'selector-css3', 'sortable', 'substitute'],
 			'notice': ['aui-base'],
 			'panel': ['aui-base', 'aui-io-request'],
 			'panel-floating': ['aui-paginator', 'liferay-panel', 'selector-css3'],
@@ -52,7 +52,7 @@
 
 		for (var i in moduleList) {
 			modules['liferay-' + i] = {
-				path: i.replace(REGEX_DASH, STR_UNDERSCORE) + '.js?t=' + (+new Date),
+				path: i.replace(REGEX_DASH, STR_UNDERSCORE) + '.js',
 				requires: moduleList[i]
 			};
 		}
@@ -76,21 +76,8 @@
 					path = path.replace(nameRE, '$1$2');
 					path = path.replace(REGEX_DASH, STR_UNDERSCORE);
 
-
-					config.path = path + '?t=' + (+new Date);
-
+					config.path = path;
 				}
-			}
-		}
-	};
-	
-	GROUPS.liferay.modules['liferay-navigation'].plugins = {
-		'liferay-navigation-touch': {
-			condition: {
-				test: function(A) {
-					return ('ontouchstart' in A.config.doc)
-				},
-				trigger: 'liferay-navigation'
 			}
 		}
 	};

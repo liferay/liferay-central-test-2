@@ -691,6 +691,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-form-combobox', 'aui-io-request', 'dd-constrain', 'event-touch', 'json-parse', 'node-event-simulate', 'overlay', 'selector-css3', 'sortable', 'substitute']
+		requires: ['aui-form-combobox', 'aui-io-request', 'dd-constrain', 'json-parse', 'node-event-simulate', 'overlay', 'selector-css3', 'sortable', 'substitute']
 	}
 );
