@@ -26,8 +26,7 @@ Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId
 		{
 			frame: window,
 			portletAjaxable: '<%= selPortlet.isAjaxable() %>',
-			portletId: '<%= portletDisplay.getId() %>',
-			refresh: true
+			refresh: '<%= portletDisplay.getId() %>'
 		}
 	);
 </aui:script>

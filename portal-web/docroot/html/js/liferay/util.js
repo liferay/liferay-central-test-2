@@ -1496,12 +1496,14 @@
 						if (event.frame == dialog.iframe.node.get('contentWindow').getDOM()) {
 							dialog.hide();
 
-							if (event.refresh === true) {
+							var refresh = event.refresh;
+
+							if (refresh) {
 								if (!event.portletAjaxable) {
 									openingWindow.location.reload();
 								}
 								else {
-									openingWindow.Liferay.Portlet.refresh('#p_p_id_' + event.portletId + '_');
+									openingWindow.Liferay.Portlet.refresh('#p_p_id_' + refresh + '_');
 								}
 							}
 

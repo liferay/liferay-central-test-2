@@ -48,8 +48,7 @@ String emailAddress = ParamUtil.getString(request, "emailAddress");
 			{
 				frame: window,
 				portletAjaxable: '<%= selPortlet.isAjaxable() %>',
-				portletId: '<%= portletDisplay.getId() %>',
-				refresh: true
+				refresh: '<%= portletDisplay.getId() %>'
 			}
 		);
 	}
