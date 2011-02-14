@@ -110,13 +110,13 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -186,11 +186,11 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {
@@ -207,11 +207,11 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	}
 
 	public void setPortletId(String portletId) {
-		_portletId = portletId;
-
 		if (_originalPortletId == null) {
-			_originalPortletId = portletId;
+			_originalPortletId = _portletId;
 		}
+
+		_portletId = portletId;
 	}
 
 	public String getOriginalPortletId() {
@@ -231,13 +231,13 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	}
 
 	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-
 		if (!_setOriginalClassNameId) {
 			_setOriginalClassNameId = true;
 
-			_originalClassNameId = classNameId;
+			_originalClassNameId = _classNameId;
 		}
+
+		_classNameId = classNameId;
 	}
 
 	public long getOriginalClassNameId() {

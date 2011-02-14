@@ -173,11 +173,11 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -197,13 +197,13 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -268,13 +268,13 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	}
 
 	public void setParentCategoryId(long parentCategoryId) {
-		_parentCategoryId = parentCategoryId;
-
 		if (!_setOriginalParentCategoryId) {
 			_setOriginalParentCategoryId = true;
 
-			_originalParentCategoryId = parentCategoryId;
+			_originalParentCategoryId = _parentCategoryId;
 		}
+
+		_parentCategoryId = parentCategoryId;
 	}
 
 	public long getOriginalParentCategoryId() {
@@ -307,11 +307,11 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {
@@ -503,13 +503,13 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	}
 
 	public void setVocabularyId(long vocabularyId) {
-		_vocabularyId = vocabularyId;
-
 		if (!_setOriginalVocabularyId) {
 			_setOriginalVocabularyId = true;
 
-			_originalVocabularyId = vocabularyId;
+			_originalVocabularyId = _vocabularyId;
 		}
+
+		_vocabularyId = vocabularyId;
 	}
 
 	public long getOriginalVocabularyId() {

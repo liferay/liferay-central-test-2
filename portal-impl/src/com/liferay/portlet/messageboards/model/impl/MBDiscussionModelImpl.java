@@ -110,13 +110,13 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 	}
 
 	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-
 		if (!_setOriginalClassNameId) {
 			_setOriginalClassNameId = true;
 
-			_originalClassNameId = classNameId;
+			_originalClassNameId = _classNameId;
 		}
+
+		_classNameId = classNameId;
 	}
 
 	public long getOriginalClassNameId() {
@@ -128,13 +128,13 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 	}
 
 	public void setClassPK(long classPK) {
-		_classPK = classPK;
-
 		if (!_setOriginalClassPK) {
 			_setOriginalClassPK = true;
 
-			_originalClassPK = classPK;
+			_originalClassPK = _classPK;
 		}
+
+		_classPK = classPK;
 	}
 
 	public long getOriginalClassPK() {
@@ -146,13 +146,13 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 	}
 
 	public void setThreadId(long threadId) {
-		_threadId = threadId;
-
 		if (!_setOriginalThreadId) {
 			_setOriginalThreadId = true;
 
-			_originalThreadId = threadId;
+			_originalThreadId = _threadId;
 		}
+
+		_threadId = threadId;
 	}
 
 	public long getOriginalThreadId() {

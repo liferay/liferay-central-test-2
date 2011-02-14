@@ -105,13 +105,13 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -128,11 +128,11 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setArticleId(String articleId) {
-		_articleId = articleId;
-
 		if (_originalArticleId == null) {
-			_originalArticleId = articleId;
+			_originalArticleId = _articleId;
 		}
+
+		_articleId = articleId;
 	}
 
 	public String getOriginalArticleId() {
@@ -144,13 +144,13 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setVersion(double version) {
-		_version = version;
-
 		if (!_setOriginalVersion) {
 			_setOriginalVersion = true;
 
-			_originalVersion = version;
+			_originalVersion = _version;
 		}
+
+		_version = version;
 	}
 
 	public double getOriginalVersion() {
@@ -167,11 +167,11 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setElInstanceId(String elInstanceId) {
-		_elInstanceId = elInstanceId;
-
 		if (_originalElInstanceId == null) {
-			_originalElInstanceId = elInstanceId;
+			_originalElInstanceId = _elInstanceId;
 		}
+
+		_elInstanceId = elInstanceId;
 	}
 
 	public String getOriginalElInstanceId() {
@@ -188,11 +188,11 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setElName(String elName) {
-		_elName = elName;
-
 		if (_originalElName == null) {
-			_originalElName = elName;
+			_originalElName = _elName;
 		}
+
+		_elName = elName;
 	}
 
 	public String getOriginalElName() {
@@ -209,11 +209,11 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public void setLanguageId(String languageId) {
-		_languageId = languageId;
-
 		if (_originalLanguageId == null) {
-			_originalLanguageId = languageId;
+			_originalLanguageId = _languageId;
 		}
+
+		_languageId = languageId;
 	}
 
 	public String getOriginalLanguageId() {

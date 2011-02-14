@@ -262,13 +262,13 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public void setLayoutSetBranchId(long layoutSetBranchId) {
-		_layoutSetBranchId = layoutSetBranchId;
-
 		if (!_setOriginalLayoutSetBranchId) {
 			_setOriginalLayoutSetBranchId = true;
 
-			_originalLayoutSetBranchId = layoutSetBranchId;
+			_originalLayoutSetBranchId = _layoutSetBranchId;
 		}
+
+		_layoutSetBranchId = layoutSetBranchId;
 	}
 
 	public long getOriginalLayoutSetBranchId() {
@@ -292,13 +292,13 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public void setHead(boolean head) {
-		_head = head;
-
 		if (!_setOriginalHead) {
 			_setOriginalHead = true;
 
-			_originalHead = head;
+			_originalHead = _head;
 		}
+
+		_head = head;
 	}
 
 	public boolean getOriginalHead() {
@@ -322,13 +322,13 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public void setPlid(long plid) {
-		_plid = plid;
-
 		if (!_setOriginalPlid) {
 			_setOriginalPlid = true;
 
-			_originalPlid = plid;
+			_originalPlid = _plid;
 		}
+
+		_plid = plid;
 	}
 
 	public long getOriginalPlid() {

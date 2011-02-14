@@ -186,11 +186,11 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -210,13 +210,13 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -240,13 +240,13 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setPrivateLayout(boolean privateLayout) {
-		_privateLayout = privateLayout;
-
 		if (!_setOriginalPrivateLayout) {
 			_setOriginalPrivateLayout = true;
 
-			_originalPrivateLayout = privateLayout;
+			_originalPrivateLayout = _privateLayout;
 		}
+
+		_privateLayout = privateLayout;
 	}
 
 	public boolean getOriginalPrivateLayout() {
@@ -258,13 +258,13 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setLayoutId(long layoutId) {
-		_layoutId = layoutId;
-
 		if (!_setOriginalLayoutId) {
 			_setOriginalLayoutId = true;
 
-			_originalLayoutId = layoutId;
+			_originalLayoutId = _layoutId;
 		}
+
+		_layoutId = layoutId;
 	}
 
 	public long getOriginalLayoutId() {
@@ -773,11 +773,11 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setFriendlyURL(String friendlyURL) {
-		_friendlyURL = friendlyURL;
-
 		if (_originalFriendlyURL == null) {
-			_originalFriendlyURL = friendlyURL;
+			_originalFriendlyURL = _friendlyURL;
 		}
+
+		_friendlyURL = friendlyURL;
 	}
 
 	public String getOriginalFriendlyURL() {
@@ -801,13 +801,13 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public void setIconImageId(long iconImageId) {
-		_iconImageId = iconImageId;
-
 		if (!_setOriginalIconImageId) {
 			_setOriginalIconImageId = true;
 
-			_originalIconImageId = iconImageId;
+			_originalIconImageId = _iconImageId;
 		}
+
+		_iconImageId = iconImageId;
 	}
 
 	public long getOriginalIconImageId() {

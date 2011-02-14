@@ -160,13 +160,13 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -178,13 +178,13 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	}
 
 	public void setParentOrganizationId(long parentOrganizationId) {
-		_parentOrganizationId = parentOrganizationId;
-
 		if (!_setOriginalParentOrganizationId) {
 			_setOriginalParentOrganizationId = true;
 
-			_originalParentOrganizationId = parentOrganizationId;
+			_originalParentOrganizationId = _parentOrganizationId;
 		}
+
+		_parentOrganizationId = parentOrganizationId;
 	}
 
 	public long getOriginalParentOrganizationId() {
@@ -217,11 +217,11 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {

@@ -239,11 +239,11 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 	}
 
 	public void setCode(String code) {
-		_code = code;
-
 		if (_originalCode == null) {
-			_originalCode = code;
+			_originalCode = _code;
 		}
+
+		_code = code;
 	}
 
 	public String getOriginalCode() {

@@ -179,13 +179,13 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview>
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -234,13 +234,13 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview>
 	}
 
 	public void setProposalId(long proposalId) {
-		_proposalId = proposalId;
-
 		if (!_setOriginalProposalId) {
 			_setOriginalProposalId = true;
 
-			_originalProposalId = proposalId;
+			_originalProposalId = _proposalId;
 		}
+
+		_proposalId = proposalId;
 	}
 
 	public long getOriginalProposalId() {

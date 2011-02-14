@@ -151,11 +151,11 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {
@@ -172,11 +172,11 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	}
 
 	public void setA2(String a2) {
-		_a2 = a2;
-
 		if (_originalA2 == null) {
-			_originalA2 = a2;
+			_originalA2 = _a2;
 		}
+
+		_a2 = a2;
 	}
 
 	public String getOriginalA2() {
@@ -193,11 +193,11 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	}
 
 	public void setA3(String a3) {
-		_a3 = a3;
-
 		if (_originalA3 == null) {
-			_originalA3 = a3;
+			_originalA3 = _a3;
 		}
+
+		_a3 = a3;
 	}
 
 	public String getOriginalA3() {

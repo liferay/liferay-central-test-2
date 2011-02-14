@@ -152,13 +152,13 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	}
 
 	public void setTableId(long tableId) {
-		_tableId = tableId;
-
 		if (!_setOriginalTableId) {
 			_setOriginalTableId = true;
 
-			_originalTableId = tableId;
+			_originalTableId = _tableId;
 		}
+
+		_tableId = tableId;
 	}
 
 	public long getOriginalTableId() {
@@ -175,11 +175,11 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {

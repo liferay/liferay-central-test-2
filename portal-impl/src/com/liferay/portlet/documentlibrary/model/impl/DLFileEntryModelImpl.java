@@ -120,11 +120,11 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -144,13 +144,13 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -253,13 +253,13 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public void setFolderId(long folderId) {
-		_folderId = folderId;
-
 		if (!_setOriginalFolderId) {
 			_setOriginalFolderId = true;
 
-			_originalFolderId = folderId;
+			_originalFolderId = _folderId;
 		}
+
+		_folderId = folderId;
 	}
 
 	public long getOriginalFolderId() {
@@ -276,11 +276,11 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {
@@ -310,11 +310,11 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public void setTitle(String title) {
-		_title = title;
-
 		if (_originalTitle == null) {
-			_originalTitle = title;
+			_originalTitle = _title;
 		}
+
+		_title = title;
 	}
 
 	public String getOriginalTitle() {

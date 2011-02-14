@@ -108,11 +108,11 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	}
 
 	public void setBuildNamespace(String buildNamespace) {
-		_buildNamespace = buildNamespace;
-
 		if (_originalBuildNamespace == null) {
-			_originalBuildNamespace = buildNamespace;
+			_originalBuildNamespace = _buildNamespace;
 		}
+
+		_buildNamespace = buildNamespace;
 	}
 
 	public String getOriginalBuildNamespace() {
@@ -124,13 +124,13 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	}
 
 	public void setBuildNumber(long buildNumber) {
-		_buildNumber = buildNumber;
-
 		if (!_setOriginalBuildNumber) {
 			_setOriginalBuildNumber = true;
 
-			_originalBuildNumber = buildNumber;
+			_originalBuildNumber = _buildNumber;
 		}
+
+		_buildNumber = buildNumber;
 	}
 
 	public long getOriginalBuildNumber() {

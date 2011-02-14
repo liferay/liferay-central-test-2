@@ -148,11 +148,11 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 	}
 
 	public void setValue(String value) {
-		_value = value;
-
 		if (_originalValue == null) {
-			_originalValue = value;
+			_originalValue = _value;
 		}
+
+		_value = value;
 	}
 
 	public String getOriginalValue() {

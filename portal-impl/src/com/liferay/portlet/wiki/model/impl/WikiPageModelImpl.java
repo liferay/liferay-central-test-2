@@ -180,11 +180,11 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -204,13 +204,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setResourcePrimKey(long resourcePrimKey) {
-		_resourcePrimKey = resourcePrimKey;
-
 		if (!_setOriginalResourcePrimKey) {
 			_setOriginalResourcePrimKey = true;
 
-			_originalResourcePrimKey = resourcePrimKey;
+			_originalResourcePrimKey = _resourcePrimKey;
 		}
+
+		_resourcePrimKey = resourcePrimKey;
 	}
 
 	public long getOriginalResourcePrimKey() {
@@ -222,13 +222,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -293,13 +293,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setNodeId(long nodeId) {
-		_nodeId = nodeId;
-
 		if (!_setOriginalNodeId) {
 			_setOriginalNodeId = true;
 
-			_originalNodeId = nodeId;
+			_originalNodeId = _nodeId;
 		}
+
+		_nodeId = nodeId;
 	}
 
 	public long getOriginalNodeId() {
@@ -316,11 +316,11 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setTitle(String title) {
-		_title = title;
-
 		if (_originalTitle == null) {
-			_originalTitle = title;
+			_originalTitle = _title;
 		}
+
+		_title = title;
 	}
 
 	public String getOriginalTitle() {
@@ -332,13 +332,13 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public void setVersion(double version) {
-		_version = version;
-
 		if (!_setOriginalVersion) {
 			_setOriginalVersion = true;
 
-			_originalVersion = version;
+			_originalVersion = _version;
 		}
+
+		_version = version;
 	}
 
 	public double getOriginalVersion() {

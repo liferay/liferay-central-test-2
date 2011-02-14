@@ -193,13 +193,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -236,13 +236,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-
 		if (!_setOriginalClassNameId) {
 			_setOriginalClassNameId = true;
 
-			_originalClassNameId = classNameId;
+			_originalClassNameId = _classNameId;
 		}
+
+		_classNameId = classNameId;
 	}
 
 	public long getOriginalClassNameId() {
@@ -254,13 +254,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public void setClassPK(long classPK) {
-		_classPK = classPK;
-
 		if (!_setOriginalClassPK) {
 			_setOriginalClassPK = true;
 
-			_originalClassPK = classPK;
+			_originalClassPK = _classPK;
 		}
+
+		_classPK = classPK;
 	}
 
 	public long getOriginalClassPK() {
@@ -280,13 +280,13 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public void setLiveGroupId(long liveGroupId) {
-		_liveGroupId = liveGroupId;
-
 		if (!_setOriginalLiveGroupId) {
 			_setOriginalLiveGroupId = true;
 
-			_originalLiveGroupId = liveGroupId;
+			_originalLiveGroupId = _liveGroupId;
 		}
+
+		_liveGroupId = liveGroupId;
 	}
 
 	public long getOriginalLiveGroupId() {
@@ -303,11 +303,11 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {
@@ -358,11 +358,11 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public void setFriendlyURL(String friendlyURL) {
-		_friendlyURL = friendlyURL;
-
 		if (_originalFriendlyURL == null) {
-			_originalFriendlyURL = friendlyURL;
+			_originalFriendlyURL = _friendlyURL;
 		}
+
+		_friendlyURL = friendlyURL;
 	}
 
 	public String getOriginalFriendlyURL() {

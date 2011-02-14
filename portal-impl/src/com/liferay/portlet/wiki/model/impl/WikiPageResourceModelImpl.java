@@ -114,13 +114,13 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	}
 
 	public void setNodeId(long nodeId) {
-		_nodeId = nodeId;
-
 		if (!_setOriginalNodeId) {
 			_setOriginalNodeId = true;
 
-			_originalNodeId = nodeId;
+			_originalNodeId = _nodeId;
 		}
+
+		_nodeId = nodeId;
 	}
 
 	public long getOriginalNodeId() {
@@ -137,11 +137,11 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	}
 
 	public void setTitle(String title) {
-		_title = title;
-
 		if (_originalTitle == null) {
-			_originalTitle = title;
+			_originalTitle = _title;
 		}
+
+		_title = title;
 	}
 
 	public String getOriginalTitle() {

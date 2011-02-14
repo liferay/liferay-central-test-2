@@ -104,13 +104,13 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 	}
 
 	public void setTagId(long tagId) {
-		_tagId = tagId;
-
 		if (!_setOriginalTagId) {
 			_setOriginalTagId = true;
 
-			_originalTagId = tagId;
+			_originalTagId = _tagId;
 		}
+
+		_tagId = tagId;
 	}
 
 	public long getOriginalTagId() {
@@ -130,13 +130,13 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 	}
 
 	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-
 		if (!_setOriginalClassNameId) {
 			_setOriginalClassNameId = true;
 
-			_originalClassNameId = classNameId;
+			_originalClassNameId = _classNameId;
 		}
+
+		_classNameId = classNameId;
 	}
 
 	public long getOriginalClassNameId() {

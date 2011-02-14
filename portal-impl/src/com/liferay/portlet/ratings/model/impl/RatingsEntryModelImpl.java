@@ -160,13 +160,13 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -223,13 +223,13 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	}
 
 	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-
 		if (!_setOriginalClassNameId) {
 			_setOriginalClassNameId = true;
 
-			_originalClassNameId = classNameId;
+			_originalClassNameId = _classNameId;
 		}
+
+		_classNameId = classNameId;
 	}
 
 	public long getOriginalClassNameId() {
@@ -241,13 +241,13 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	}
 
 	public void setClassPK(long classPK) {
-		_classPK = classPK;
-
 		if (!_setOriginalClassPK) {
 			_setOriginalClassPK = true;
 
-			_originalClassPK = classPK;
+			_originalClassPK = _classPK;
 		}
+
+		_classPK = classPK;
 	}
 
 	public long getOriginalClassPK() {

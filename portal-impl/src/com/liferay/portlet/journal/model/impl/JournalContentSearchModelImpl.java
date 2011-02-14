@@ -104,13 +104,13 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -134,13 +134,13 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setPrivateLayout(boolean privateLayout) {
-		_privateLayout = privateLayout;
-
 		if (!_setOriginalPrivateLayout) {
 			_setOriginalPrivateLayout = true;
 
-			_originalPrivateLayout = privateLayout;
+			_originalPrivateLayout = _privateLayout;
 		}
+
+		_privateLayout = privateLayout;
 	}
 
 	public boolean getOriginalPrivateLayout() {
@@ -152,13 +152,13 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setLayoutId(long layoutId) {
-		_layoutId = layoutId;
-
 		if (!_setOriginalLayoutId) {
 			_setOriginalLayoutId = true;
 
-			_originalLayoutId = layoutId;
+			_originalLayoutId = _layoutId;
 		}
+
+		_layoutId = layoutId;
 	}
 
 	public long getOriginalLayoutId() {
@@ -175,11 +175,11 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setPortletId(String portletId) {
-		_portletId = portletId;
-
 		if (_originalPortletId == null) {
-			_originalPortletId = portletId;
+			_originalPortletId = _portletId;
 		}
+
+		_portletId = portletId;
 	}
 
 	public String getOriginalPortletId() {
@@ -196,11 +196,11 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public void setArticleId(String articleId) {
-		_articleId = articleId;
-
 		if (_originalArticleId == null) {
-			_originalArticleId = articleId;
+			_originalArticleId = _articleId;
 		}
+
+		_articleId = articleId;
 	}
 
 	public String getOriginalArticleId() {

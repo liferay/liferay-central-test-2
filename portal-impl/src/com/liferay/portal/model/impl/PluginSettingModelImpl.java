@@ -142,13 +142,13 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -165,11 +165,11 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	}
 
 	public void setPluginId(String pluginId) {
-		_pluginId = pluginId;
-
 		if (_originalPluginId == null) {
-			_originalPluginId = pluginId;
+			_originalPluginId = _pluginId;
 		}
+
+		_pluginId = pluginId;
 	}
 
 	public String getOriginalPluginId() {
@@ -186,11 +186,11 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	}
 
 	public void setPluginType(String pluginType) {
-		_pluginType = pluginType;
-
 		if (_originalPluginType == null) {
-			_originalPluginType = pluginType;
+			_originalPluginType = _pluginType;
 		}
+
+		_pluginType = pluginType;
 	}
 
 	public String getOriginalPluginType() {

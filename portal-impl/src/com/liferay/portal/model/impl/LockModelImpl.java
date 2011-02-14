@@ -173,11 +173,11 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	}
 
 	public void setClassName(String className) {
-		_className = className;
-
 		if (_originalClassName == null) {
-			_originalClassName = className;
+			_originalClassName = _className;
 		}
+
+		_className = className;
 	}
 
 	public String getOriginalClassName() {
@@ -194,11 +194,11 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	}
 
 	public void setKey(String key) {
-		_key = key;
-
 		if (_originalKey == null) {
-			_originalKey = key;
+			_originalKey = _key;
 		}
+
+		_key = key;
 	}
 
 	public String getOriginalKey() {

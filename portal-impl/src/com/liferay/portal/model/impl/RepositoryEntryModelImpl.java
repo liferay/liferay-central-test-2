@@ -99,13 +99,13 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	}
 
 	public void setRepositoryId(long repositoryId) {
-		_repositoryId = repositoryId;
-
 		if (!_setOriginalRepositoryId) {
 			_setOriginalRepositoryId = true;
 
-			_originalRepositoryId = repositoryId;
+			_originalRepositoryId = _repositoryId;
 		}
+
+		_repositoryId = repositoryId;
 	}
 
 	public long getOriginalRepositoryId() {
@@ -122,11 +122,11 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	}
 
 	public void setMappedId(String mappedId) {
-		_mappedId = mappedId;
-
 		if (_originalMappedId == null) {
-			_originalMappedId = mappedId;
+			_originalMappedId = _mappedId;
 		}
+
+		_mappedId = mappedId;
 	}
 
 	public String getOriginalMappedId() {

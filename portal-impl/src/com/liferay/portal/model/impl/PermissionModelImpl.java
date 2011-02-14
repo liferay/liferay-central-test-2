@@ -157,11 +157,11 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 	}
 
 	public void setActionId(String actionId) {
-		_actionId = actionId;
-
 		if (_originalActionId == null) {
-			_originalActionId = actionId;
+			_originalActionId = _actionId;
 		}
+
+		_actionId = actionId;
 	}
 
 	public String getOriginalActionId() {
@@ -173,13 +173,13 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 	}
 
 	public void setResourceId(long resourceId) {
-		_resourceId = resourceId;
-
 		if (!_setOriginalResourceId) {
 			_setOriginalResourceId = true;
 
-			_originalResourceId = resourceId;
+			_originalResourceId = _resourceId;
 		}
+
+		_resourceId = resourceId;
 	}
 
 	public long getOriginalResourceId() {

@@ -212,13 +212,13 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -288,11 +288,11 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	}
 
 	public void setSku(String sku) {
-		_sku = sku;
-
 		if (_originalSku == null) {
-			_originalSku = sku;
+			_originalSku = _sku;
 		}
+
+		_sku = sku;
 	}
 
 	public String getOriginalSku() {
@@ -488,13 +488,13 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	}
 
 	public void setSmallImageId(long smallImageId) {
-		_smallImageId = smallImageId;
-
 		if (!_setOriginalSmallImageId) {
 			_setOriginalSmallImageId = true;
 
-			_originalSmallImageId = smallImageId;
+			_originalSmallImageId = _smallImageId;
 		}
+
+		_smallImageId = smallImageId;
 	}
 
 	public long getOriginalSmallImageId() {
@@ -531,13 +531,13 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	}
 
 	public void setMediumImageId(long mediumImageId) {
-		_mediumImageId = mediumImageId;
-
 		if (!_setOriginalMediumImageId) {
 			_setOriginalMediumImageId = true;
 
-			_originalMediumImageId = mediumImageId;
+			_originalMediumImageId = _mediumImageId;
 		}
+
+		_mediumImageId = mediumImageId;
 	}
 
 	public long getOriginalMediumImageId() {
@@ -574,13 +574,13 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	}
 
 	public void setLargeImageId(long largeImageId) {
-		_largeImageId = largeImageId;
-
 		if (!_setOriginalLargeImageId) {
 			_setOriginalLargeImageId = true;
 
-			_originalLargeImageId = largeImageId;
+			_originalLargeImageId = _largeImageId;
 		}
+
+		_largeImageId = largeImageId;
 	}
 
 	public long getOriginalLargeImageId() {

@@ -329,11 +329,11 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	}
 
 	public void setRepoGroupId(String repoGroupId) {
-		_repoGroupId = repoGroupId;
-
 		if (_originalRepoGroupId == null) {
-			_originalRepoGroupId = repoGroupId;
+			_originalRepoGroupId = _repoGroupId;
 		}
+
+		_repoGroupId = repoGroupId;
 	}
 
 	public String getOriginalRepoGroupId() {
@@ -350,11 +350,11 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	}
 
 	public void setRepoArtifactId(String repoArtifactId) {
-		_repoArtifactId = repoArtifactId;
-
 		if (_originalRepoArtifactId == null) {
-			_originalRepoArtifactId = repoArtifactId;
+			_originalRepoArtifactId = _repoArtifactId;
 		}
+
+		_repoArtifactId = repoArtifactId;
 	}
 
 	public String getOriginalRepoArtifactId() {

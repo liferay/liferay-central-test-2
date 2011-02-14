@@ -100,13 +100,13 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -118,13 +118,13 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	}
 
 	public void setLayoutSetId(long layoutSetId) {
-		_layoutSetId = layoutSetId;
-
 		if (!_setOriginalLayoutSetId) {
 			_setOriginalLayoutSetId = true;
 
-			_originalLayoutSetId = layoutSetId;
+			_originalLayoutSetId = _layoutSetId;
 		}
+
+		_layoutSetId = layoutSetId;
 	}
 
 	public long getOriginalLayoutSetId() {
@@ -141,11 +141,11 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	}
 
 	public void setHostname(String hostname) {
-		_hostname = hostname;
-
 		if (_originalHostname == null) {
-			_originalHostname = hostname;
+			_originalHostname = _hostname;
 		}
+
+		_hostname = hostname;
 	}
 
 	public String getOriginalHostname() {

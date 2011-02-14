@@ -232,13 +232,13 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 	}
 
 	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-
 		if (!_setOriginalClassNameId) {
 			_setOriginalClassNameId = true;
 
-			_originalClassNameId = classNameId;
+			_originalClassNameId = _classNameId;
 		}
+
+		_classNameId = classNameId;
 	}
 
 	public long getOriginalClassNameId() {
@@ -255,11 +255,11 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 	}
 
 	public void setClassPK(String classPK) {
-		_classPK = classPK;
-
 		if (_originalClassPK == null) {
-			_originalClassPK = classPK;
+			_originalClassPK = _classPK;
 		}
+
+		_classPK = classPK;
 	}
 
 	public String getOriginalClassPK() {

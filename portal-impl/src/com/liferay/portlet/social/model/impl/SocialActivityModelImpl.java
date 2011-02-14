@@ -112,13 +112,13 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -138,13 +138,13 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -164,13 +164,13 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public void setCreateDate(long createDate) {
-		_createDate = createDate;
-
 		if (!_setOriginalCreateDate) {
 			_setOriginalCreateDate = true;
 
-			_originalCreateDate = createDate;
+			_originalCreateDate = _createDate;
 		}
+
+		_createDate = createDate;
 	}
 
 	public long getOriginalCreateDate() {
@@ -182,13 +182,13 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public void setMirrorActivityId(long mirrorActivityId) {
-		_mirrorActivityId = mirrorActivityId;
-
 		if (!_setOriginalMirrorActivityId) {
 			_setOriginalMirrorActivityId = true;
 
-			_originalMirrorActivityId = mirrorActivityId;
+			_originalMirrorActivityId = _mirrorActivityId;
 		}
+
+		_mirrorActivityId = mirrorActivityId;
 	}
 
 	public long getOriginalMirrorActivityId() {
@@ -208,13 +208,13 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-
 		if (!_setOriginalClassNameId) {
 			_setOriginalClassNameId = true;
 
-			_originalClassNameId = classNameId;
+			_originalClassNameId = _classNameId;
 		}
+
+		_classNameId = classNameId;
 	}
 
 	public long getOriginalClassNameId() {
@@ -226,13 +226,13 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public void setClassPK(long classPK) {
-		_classPK = classPK;
-
 		if (!_setOriginalClassPK) {
 			_setOriginalClassPK = true;
 
-			_originalClassPK = classPK;
+			_originalClassPK = _classPK;
 		}
+
+		_classPK = classPK;
 	}
 
 	public long getOriginalClassPK() {
@@ -244,13 +244,13 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public void setType(int type) {
-		_type = type;
-
 		if (!_setOriginalType) {
 			_setOriginalType = true;
 
-			_originalType = type;
+			_originalType = _type;
 		}
+
+		_type = type;
 	}
 
 	public int getOriginalType() {
@@ -275,13 +275,13 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public void setReceiverUserId(long receiverUserId) {
-		_receiverUserId = receiverUserId;
-
 		if (!_setOriginalReceiverUserId) {
 			_setOriginalReceiverUserId = true;
 
-			_originalReceiverUserId = receiverUserId;
+			_originalReceiverUserId = _receiverUserId;
 		}
+
+		_receiverUserId = receiverUserId;
 	}
 
 	public String getReceiverUserUuid() throws SystemException {

@@ -127,11 +127,11 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	}
 
 	public void setServletContextName(String servletContextName) {
-		_servletContextName = servletContextName;
-
 		if (_originalServletContextName == null) {
-			_originalServletContextName = servletContextName;
+			_originalServletContextName = _servletContextName;
 		}
+
+		_servletContextName = servletContextName;
 	}
 
 	public String getOriginalServletContextName() {

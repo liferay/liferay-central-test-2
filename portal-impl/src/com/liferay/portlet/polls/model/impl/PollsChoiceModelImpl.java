@@ -125,13 +125,13 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	}
 
 	public void setQuestionId(long questionId) {
-		_questionId = questionId;
-
 		if (!_setOriginalQuestionId) {
 			_setOriginalQuestionId = true;
 
-			_originalQuestionId = questionId;
+			_originalQuestionId = _questionId;
 		}
+
+		_questionId = questionId;
 	}
 
 	public long getOriginalQuestionId() {
@@ -148,11 +148,11 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {

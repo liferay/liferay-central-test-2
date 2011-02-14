@@ -209,13 +209,13 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	}
 
 	public void setCategoryId(long categoryId) {
-		_categoryId = categoryId;
-
 		if (!_setOriginalCategoryId) {
 			_setOriginalCategoryId = true;
 
-			_originalCategoryId = categoryId;
+			_originalCategoryId = _categoryId;
 		}
+
+		_categoryId = categoryId;
 	}
 
 	public long getOriginalCategoryId() {
@@ -232,11 +232,11 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	}
 
 	public void setKey(String key) {
-		_key = key;
-
 		if (_originalKey == null) {
-			_originalKey = key;
+			_originalKey = _key;
 		}
+
+		_key = key;
 	}
 
 	public String getOriginalKey() {

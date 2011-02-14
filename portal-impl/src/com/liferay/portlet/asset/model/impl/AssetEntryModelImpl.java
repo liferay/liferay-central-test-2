@@ -203,13 +203,13 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -282,13 +282,13 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-
 		if (!_setOriginalClassNameId) {
 			_setOriginalClassNameId = true;
 
-			_originalClassNameId = classNameId;
+			_originalClassNameId = _classNameId;
 		}
+
+		_classNameId = classNameId;
 	}
 
 	public long getOriginalClassNameId() {
@@ -300,13 +300,13 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public void setClassPK(long classPK) {
-		_classPK = classPK;
-
 		if (!_setOriginalClassPK) {
 			_setOriginalClassPK = true;
 
-			_originalClassPK = classPK;
+			_originalClassPK = _classPK;
 		}
+
+		_classPK = classPK;
 	}
 
 	public long getOriginalClassPK() {
@@ -323,11 +323,11 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public void setClassUuid(String classUuid) {
-		_classUuid = classUuid;
-
 		if (_originalClassUuid == null) {
-			_originalClassUuid = classUuid;
+			_originalClassUuid = _classUuid;
 		}
+
+		_classUuid = classUuid;
 	}
 
 	public String getOriginalClassUuid() {

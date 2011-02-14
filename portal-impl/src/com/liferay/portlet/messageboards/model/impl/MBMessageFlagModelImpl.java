@@ -145,13 +145,13 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -187,13 +187,13 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 	}
 
 	public void setMessageId(long messageId) {
-		_messageId = messageId;
-
 		if (!_setOriginalMessageId) {
 			_setOriginalMessageId = true;
 
-			_originalMessageId = messageId;
+			_originalMessageId = _messageId;
 		}
+
+		_messageId = messageId;
 	}
 
 	public long getOriginalMessageId() {
@@ -205,13 +205,13 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 	}
 
 	public void setFlag(int flag) {
-		_flag = flag;
-
 		if (!_setOriginalFlag) {
 			_setOriginalFlag = true;
 
-			_originalFlag = flag;
+			_originalFlag = _flag;
 		}
+
+		_flag = flag;
 	}
 
 	public int getOriginalFlag() {

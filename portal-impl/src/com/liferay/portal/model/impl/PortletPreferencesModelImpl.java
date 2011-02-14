@@ -143,13 +143,13 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setOwnerId(long ownerId) {
-		_ownerId = ownerId;
-
 		if (!_setOriginalOwnerId) {
 			_setOriginalOwnerId = true;
 
-			_originalOwnerId = ownerId;
+			_originalOwnerId = _ownerId;
 		}
+
+		_ownerId = ownerId;
 	}
 
 	public long getOriginalOwnerId() {
@@ -161,13 +161,13 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setOwnerType(int ownerType) {
-		_ownerType = ownerType;
-
 		if (!_setOriginalOwnerType) {
 			_setOriginalOwnerType = true;
 
-			_originalOwnerType = ownerType;
+			_originalOwnerType = _ownerType;
 		}
+
+		_ownerType = ownerType;
 	}
 
 	public int getOriginalOwnerType() {
@@ -179,13 +179,13 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setPlid(long plid) {
-		_plid = plid;
-
 		if (!_setOriginalPlid) {
 			_setOriginalPlid = true;
 
-			_originalPlid = plid;
+			_originalPlid = _plid;
 		}
+
+		_plid = plid;
 	}
 
 	public long getOriginalPlid() {
@@ -202,11 +202,11 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public void setPortletId(String portletId) {
-		_portletId = portletId;
-
 		if (_originalPortletId == null) {
-			_originalPortletId = portletId;
+			_originalPortletId = _portletId;
 		}
+
+		_portletId = portletId;
 	}
 
 	public String getOriginalPortletId() {

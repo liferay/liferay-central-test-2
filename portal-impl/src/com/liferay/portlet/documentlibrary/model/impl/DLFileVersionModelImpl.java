@@ -185,13 +185,13 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public void setFileEntryId(long fileEntryId) {
-		_fileEntryId = fileEntryId;
-
 		if (!_setOriginalFileEntryId) {
 			_setOriginalFileEntryId = true;
 
-			_originalFileEntryId = fileEntryId;
+			_originalFileEntryId = _fileEntryId;
 		}
+
+		_fileEntryId = fileEntryId;
 	}
 
 	public long getOriginalFileEntryId() {
@@ -273,11 +273,11 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public void setVersion(String version) {
-		_version = version;
-
 		if (_originalVersion == null) {
-			_originalVersion = version;
+			_originalVersion = _version;
 		}
+
+		_version = version;
 	}
 
 	public String getOriginalVersion() {

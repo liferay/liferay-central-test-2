@@ -261,13 +261,13 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -287,13 +287,13 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -325,13 +325,13 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setDefaultUser(boolean defaultUser) {
-		_defaultUser = defaultUser;
-
 		if (!_setOriginalDefaultUser) {
 			_setOriginalDefaultUser = true;
 
-			_originalDefaultUser = defaultUser;
+			_originalDefaultUser = _defaultUser;
 		}
+
+		_defaultUser = defaultUser;
 	}
 
 	public boolean getOriginalDefaultUser() {
@@ -343,13 +343,13 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setContactId(long contactId) {
-		_contactId = contactId;
-
 		if (!_setOriginalContactId) {
 			_setOriginalContactId = true;
 
-			_originalContactId = contactId;
+			_originalContactId = _contactId;
 		}
+
+		_contactId = contactId;
 	}
 
 	public long getOriginalContactId() {
@@ -458,11 +458,11 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setScreenName(String screenName) {
-		_screenName = screenName;
-
 		if (_originalScreenName == null) {
-			_originalScreenName = screenName;
+			_originalScreenName = _screenName;
 		}
+
+		_screenName = screenName;
 	}
 
 	public String getOriginalScreenName() {
@@ -479,11 +479,11 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setEmailAddress(String emailAddress) {
-		_emailAddress = emailAddress;
-
 		if (_originalEmailAddress == null) {
-			_originalEmailAddress = emailAddress;
+			_originalEmailAddress = _emailAddress;
 		}
+
+		_emailAddress = emailAddress;
 	}
 
 	public String getOriginalEmailAddress() {
@@ -495,13 +495,13 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setFacebookId(long facebookId) {
-		_facebookId = facebookId;
-
 		if (!_setOriginalFacebookId) {
 			_setOriginalFacebookId = true;
 
-			_originalFacebookId = facebookId;
+			_originalFacebookId = _facebookId;
 		}
+
+		_facebookId = facebookId;
 	}
 
 	public long getOriginalFacebookId() {
@@ -518,11 +518,11 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setOpenId(String openId) {
-		_openId = openId;
-
 		if (_originalOpenId == null) {
-			_originalOpenId = openId;
+			_originalOpenId = _openId;
 		}
+
+		_openId = openId;
 	}
 
 	public String getOriginalOpenId() {
@@ -534,13 +534,13 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setPortraitId(long portraitId) {
-		_portraitId = portraitId;
-
 		if (!_setOriginalPortraitId) {
 			_setOriginalPortraitId = true;
 
-			_originalPortraitId = portraitId;
+			_originalPortraitId = _portraitId;
 		}
+
+		_portraitId = portraitId;
 	}
 
 	public long getOriginalPortraitId() {

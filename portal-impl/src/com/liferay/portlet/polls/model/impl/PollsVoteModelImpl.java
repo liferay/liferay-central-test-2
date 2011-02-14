@@ -143,13 +143,13 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -169,13 +169,13 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	}
 
 	public void setQuestionId(long questionId) {
-		_questionId = questionId;
-
 		if (!_setOriginalQuestionId) {
 			_setOriginalQuestionId = true;
 
-			_originalQuestionId = questionId;
+			_originalQuestionId = _questionId;
 		}
+
+		_questionId = questionId;
 	}
 
 	public long getOriginalQuestionId() {

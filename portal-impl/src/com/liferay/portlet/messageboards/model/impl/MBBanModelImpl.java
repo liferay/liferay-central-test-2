@@ -149,13 +149,13 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -220,13 +220,13 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	}
 
 	public void setBanUserId(long banUserId) {
-		_banUserId = banUserId;
-
 		if (!_setOriginalBanUserId) {
 			_setOriginalBanUserId = true;
 
-			_originalBanUserId = banUserId;
+			_originalBanUserId = _banUserId;
 		}
+
+		_banUserId = banUserId;
 	}
 
 	public String getBanUserUuid() throws SystemException {

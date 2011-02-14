@@ -305,11 +305,11 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 	}
 
 	public void setNumber(String number) {
-		_number = number;
-
 		if (_originalNumber == null) {
-			_originalNumber = number;
+			_originalNumber = _number;
 		}
+
+		_number = number;
 	}
 
 	public String getOriginalNumber() {
@@ -761,11 +761,11 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 	}
 
 	public void setPpTxnId(String ppTxnId) {
-		_ppTxnId = ppTxnId;
-
 		if (_originalPpTxnId == null) {
-			_originalPpTxnId = ppTxnId;
+			_originalPpTxnId = _ppTxnId;
 		}
+
+		_ppTxnId = ppTxnId;
 	}
 
 	public String getOriginalPpTxnId() {

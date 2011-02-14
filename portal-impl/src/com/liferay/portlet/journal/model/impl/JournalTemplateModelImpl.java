@@ -170,11 +170,11 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -194,13 +194,13 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -270,11 +270,11 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	}
 
 	public void setTemplateId(String templateId) {
-		_templateId = templateId;
-
 		if (_originalTemplateId == null) {
-			_originalTemplateId = templateId;
+			_originalTemplateId = _templateId;
 		}
+
+		_templateId = templateId;
 	}
 
 	public String getOriginalTemplateId() {
@@ -375,13 +375,13 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	}
 
 	public void setSmallImageId(long smallImageId) {
-		_smallImageId = smallImageId;
-
 		if (!_setOriginalSmallImageId) {
 			_setOriginalSmallImageId = true;
 
-			_originalSmallImageId = smallImageId;
+			_originalSmallImageId = _smallImageId;
 		}
+
+		_smallImageId = smallImageId;
 	}
 
 	public long getOriginalSmallImageId() {

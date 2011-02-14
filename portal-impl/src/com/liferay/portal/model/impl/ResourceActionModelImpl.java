@@ -107,11 +107,11 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {
@@ -128,11 +128,11 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 	}
 
 	public void setActionId(String actionId) {
-		_actionId = actionId;
-
 		if (_originalActionId == null) {
-			_originalActionId = actionId;
+			_originalActionId = _actionId;
 		}
+
+		_actionId = actionId;
 	}
 
 	public String getOriginalActionId() {

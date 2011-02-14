@@ -156,13 +156,13 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -231,13 +231,13 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	}
 
 	public void setPrivateLayout(boolean privateLayout) {
-		_privateLayout = privateLayout;
-
 		if (!_setOriginalPrivateLayout) {
 			_setOriginalPrivateLayout = true;
 
-			_originalPrivateLayout = privateLayout;
+			_originalPrivateLayout = _privateLayout;
 		}
+
+		_privateLayout = privateLayout;
 	}
 
 	public boolean getOriginalPrivateLayout() {
@@ -254,11 +254,11 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {

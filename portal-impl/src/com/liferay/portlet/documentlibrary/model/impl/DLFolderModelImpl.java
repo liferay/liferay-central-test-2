@@ -114,11 +114,11 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -138,13 +138,13 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -229,13 +229,13 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public void setParentFolderId(long parentFolderId) {
-		_parentFolderId = parentFolderId;
-
 		if (!_setOriginalParentFolderId) {
 			_setOriginalParentFolderId = true;
 
-			_originalParentFolderId = parentFolderId;
+			_originalParentFolderId = _parentFolderId;
 		}
+
+		_parentFolderId = parentFolderId;
 	}
 
 	public long getOriginalParentFolderId() {
@@ -252,11 +252,11 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {

@@ -103,13 +103,13 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -134,11 +134,11 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	}
 
 	public void setType(String type) {
-		_type = type;
-
 		if (_originalType == null) {
-			_originalType = type;
+			_originalType = _type;
 		}
+
+		_type = type;
 	}
 
 	public String getOriginalType() {
@@ -168,11 +168,11 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	}
 
 	public void setExternalUserId(String externalUserId) {
-		_externalUserId = externalUserId;
-
 		if (_originalExternalUserId == null) {
-			_originalExternalUserId = externalUserId;
+			_originalExternalUserId = _externalUserId;
 		}
+
+		_externalUserId = externalUserId;
 	}
 
 	public String getOriginalExternalUserId() {

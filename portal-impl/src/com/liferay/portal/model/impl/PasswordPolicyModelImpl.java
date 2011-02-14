@@ -197,13 +197,13 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -264,13 +264,13 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	}
 
 	public void setDefaultPolicy(boolean defaultPolicy) {
-		_defaultPolicy = defaultPolicy;
-
 		if (!_setOriginalDefaultPolicy) {
 			_setOriginalDefaultPolicy = true;
 
-			_originalDefaultPolicy = defaultPolicy;
+			_originalDefaultPolicy = _defaultPolicy;
 		}
+
+		_defaultPolicy = defaultPolicy;
 	}
 
 	public boolean getOriginalDefaultPolicy() {
@@ -287,11 +287,11 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {

@@ -161,11 +161,11 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -185,13 +185,13 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -277,13 +277,13 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public void setSmallImageId(long smallImageId) {
-		_smallImageId = smallImageId;
-
 		if (!_setOriginalSmallImageId) {
 			_setOriginalSmallImageId = true;
 
-			_originalSmallImageId = smallImageId;
+			_originalSmallImageId = _smallImageId;
 		}
+
+		_smallImageId = smallImageId;
 	}
 
 	public long getOriginalSmallImageId() {
@@ -295,13 +295,13 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public void setLargeImageId(long largeImageId) {
-		_largeImageId = largeImageId;
-
 		if (!_setOriginalLargeImageId) {
 			_setOriginalLargeImageId = true;
 
-			_originalLargeImageId = largeImageId;
+			_originalLargeImageId = _largeImageId;
 		}
+
+		_largeImageId = largeImageId;
 	}
 
 	public long getOriginalLargeImageId() {
@@ -313,13 +313,13 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public void setCustom1ImageId(long custom1ImageId) {
-		_custom1ImageId = custom1ImageId;
-
 		if (!_setOriginalCustom1ImageId) {
 			_setOriginalCustom1ImageId = true;
 
-			_originalCustom1ImageId = custom1ImageId;
+			_originalCustom1ImageId = _custom1ImageId;
 		}
+
+		_custom1ImageId = custom1ImageId;
 	}
 
 	public long getOriginalCustom1ImageId() {
@@ -331,13 +331,13 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public void setCustom2ImageId(long custom2ImageId) {
-		_custom2ImageId = custom2ImageId;
-
 		if (!_setOriginalCustom2ImageId) {
 			_setOriginalCustom2ImageId = true;
 
-			_originalCustom2ImageId = custom2ImageId;
+			_originalCustom2ImageId = _custom2ImageId;
 		}
+
+		_custom2ImageId = custom2ImageId;
 	}
 
 	public long getOriginalCustom2ImageId() {

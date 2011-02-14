@@ -140,13 +140,13 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -163,11 +163,11 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 	}
 
 	public void setPortletId(String portletId) {
-		_portletId = portletId;
-
 		if (_originalPortletId == null) {
-			_originalPortletId = portletId;
+			_originalPortletId = _portletId;
 		}
+
+		_portletId = portletId;
 	}
 
 	public String getOriginalPortletId() {

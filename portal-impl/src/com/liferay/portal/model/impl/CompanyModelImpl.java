@@ -161,11 +161,11 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	}
 
 	public void setWebId(String webId) {
-		_webId = webId;
-
 		if (_originalWebId == null) {
-			_originalWebId = webId;
+			_originalWebId = _webId;
 		}
+
+		_webId = webId;
 	}
 
 	public String getOriginalWebId() {
@@ -195,11 +195,11 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	}
 
 	public void setMx(String mx) {
-		_mx = mx;
-
 		if (_originalMx == null) {
-			_originalMx = mx;
+			_originalMx = _mx;
 		}
+
+		_mx = mx;
 	}
 
 	public String getOriginalMx() {
@@ -224,13 +224,13 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	}
 
 	public void setLogoId(long logoId) {
-		_logoId = logoId;
-
 		if (!_setOriginalLogoId) {
 			_setOriginalLogoId = true;
 
-			_originalLogoId = logoId;
+			_originalLogoId = _logoId;
 		}
+
+		_logoId = logoId;
 	}
 
 	public long getOriginalLogoId() {

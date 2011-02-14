@@ -271,11 +271,11 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 	}
 
 	public void setDirectDownloadURL(String directDownloadURL) {
-		_directDownloadURL = directDownloadURL;
-
 		if (_originalDirectDownloadURL == null) {
-			_originalDirectDownloadURL = directDownloadURL;
+			_originalDirectDownloadURL = _directDownloadURL;
 		}
+
+		_directDownloadURL = directDownloadURL;
 	}
 
 	public String getOriginalDirectDownloadURL() {

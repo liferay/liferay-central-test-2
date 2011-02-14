@@ -192,11 +192,11 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -224,13 +224,13 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -300,11 +300,11 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public void setArticleId(String articleId) {
-		_articleId = articleId;
-
 		if (_originalArticleId == null) {
-			_originalArticleId = articleId;
+			_originalArticleId = _articleId;
 		}
+
+		_articleId = articleId;
 	}
 
 	public String getOriginalArticleId() {
@@ -316,13 +316,13 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public void setVersion(double version) {
-		_version = version;
-
 		if (!_setOriginalVersion) {
 			_setOriginalVersion = true;
 
-			_originalVersion = version;
+			_originalVersion = _version;
 		}
+
+		_version = version;
 	}
 
 	public double getOriginalVersion() {

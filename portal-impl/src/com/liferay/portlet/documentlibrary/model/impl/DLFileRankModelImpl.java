@@ -117,13 +117,13 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -135,13 +135,13 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -169,13 +169,13 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	}
 
 	public void setFileEntryId(long fileEntryId) {
-		_fileEntryId = fileEntryId;
-
 		if (!_setOriginalFileEntryId) {
 			_setOriginalFileEntryId = true;
 
-			_originalFileEntryId = fileEntryId;
+			_originalFileEntryId = _fileEntryId;
 		}
+
+		_fileEntryId = fileEntryId;
 	}
 
 	public long getOriginalFileEntryId() {

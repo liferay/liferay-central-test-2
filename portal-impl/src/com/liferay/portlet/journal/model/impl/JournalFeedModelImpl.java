@@ -179,11 +179,11 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -203,13 +203,13 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -279,11 +279,11 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	}
 
 	public void setFeedId(String feedId) {
-		_feedId = feedId;
-
 		if (_originalFeedId == null) {
-			_originalFeedId = feedId;
+			_originalFeedId = _feedId;
 		}
+
+		_feedId = feedId;
 	}
 
 	public String getOriginalFeedId() {

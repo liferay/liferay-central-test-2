@@ -208,13 +208,13 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	}
 
 	public void setTagId(long tagId) {
-		_tagId = tagId;
-
 		if (!_setOriginalTagId) {
 			_setOriginalTagId = true;
 
-			_originalTagId = tagId;
+			_originalTagId = _tagId;
 		}
+
+		_tagId = tagId;
 	}
 
 	public long getOriginalTagId() {
@@ -231,11 +231,11 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	}
 
 	public void setKey(String key) {
-		_key = key;
-
 		if (_originalKey == null) {
-			_originalKey = key;
+			_originalKey = _key;
 		}
+
+		_key = key;
 	}
 
 	public String getOriginalKey() {

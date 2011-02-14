@@ -133,13 +133,13 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	}
 
 	public void setUserId1(long userId1) {
-		_userId1 = userId1;
-
 		if (!_setOriginalUserId1) {
 			_setOriginalUserId1 = true;
 
-			_originalUserId1 = userId1;
+			_originalUserId1 = _userId1;
 		}
+
+		_userId1 = userId1;
 	}
 
 	public long getOriginalUserId1() {
@@ -151,13 +151,13 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	}
 
 	public void setUserId2(long userId2) {
-		_userId2 = userId2;
-
 		if (!_setOriginalUserId2) {
 			_setOriginalUserId2 = true;
 
-			_originalUserId2 = userId2;
+			_originalUserId2 = _userId2;
 		}
+
+		_userId2 = userId2;
 	}
 
 	public long getOriginalUserId2() {
@@ -169,13 +169,13 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	}
 
 	public void setType(int type) {
-		_type = type;
-
 		if (!_setOriginalType) {
 			_setOriginalType = true;
 
-			_originalType = type;
+			_originalType = _type;
 		}
+
+		_type = type;
 	}
 
 	public int getOriginalType() {

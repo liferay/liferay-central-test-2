@@ -127,13 +127,13 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -153,13 +153,13 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public void setAssetEntryId(long assetEntryId) {
-		_assetEntryId = assetEntryId;
-
 		if (!_setOriginalAssetEntryId) {
 			_setOriginalAssetEntryId = true;
 
-			_originalAssetEntryId = assetEntryId;
+			_originalAssetEntryId = _assetEntryId;
 		}
+
+		_assetEntryId = assetEntryId;
 	}
 
 	public long getOriginalAssetEntryId() {
@@ -176,11 +176,11 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public void setActionId(String actionId) {
-		_actionId = actionId;
-
 		if (_originalActionId == null) {
-			_originalActionId = actionId;
+			_originalActionId = _actionId;
 		}
+
+		_actionId = actionId;
 	}
 
 	public String getOriginalActionId() {
@@ -192,13 +192,13 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public void setActionDate(int actionDate) {
-		_actionDate = actionDate;
-
 		if (!_setOriginalActionDate) {
 			_setOriginalActionDate = true;
 
-			_originalActionDate = actionDate;
+			_originalActionDate = _actionDate;
 		}
+
+		_actionDate = actionDate;
 	}
 
 	public int getOriginalActionDate() {
@@ -214,13 +214,13 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public void setActive(boolean active) {
-		_active = active;
-
 		if (!_setOriginalActive) {
 			_setOriginalActive = true;
 
-			_originalActive = active;
+			_originalActive = _active;
 		}
+
+		_active = active;
 	}
 
 	public boolean getOriginalActive() {
@@ -240,13 +240,13 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public void setType(int type) {
-		_type = type;
-
 		if (!_setOriginalType) {
 			_setOriginalType = true;
 
-			_originalType = type;
+			_originalType = _type;
 		}
+
+		_type = type;
 	}
 
 	public int getOriginalType() {
@@ -271,11 +271,11 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public void setExtraData(String extraData) {
-		_extraData = extraData;
-
 		if (_originalExtraData == null) {
-			_originalExtraData = extraData;
+			_originalExtraData = _extraData;
 		}
+
+		_extraData = extraData;
 	}
 
 	public String getOriginalExtraData() {

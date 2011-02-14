@@ -147,13 +147,13 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public void setUserId(long userId) {
-		_userId = userId;
-
 		if (!_setOriginalUserId) {
 			_setOriginalUserId = true;
 
-			_originalUserId = userId;
+			_originalUserId = _userId;
 		}
+
+		_userId = userId;
 	}
 
 	public String getUserUuid() throws SystemException {
@@ -181,13 +181,13 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public void setEntryId(long entryId) {
-		_entryId = entryId;
-
 		if (!_setOriginalEntryId) {
 			_setOriginalEntryId = true;
 
-			_originalEntryId = entryId;
+			_originalEntryId = _entryId;
 		}
+
+		_entryId = entryId;
 	}
 
 	public long getOriginalEntryId() {
@@ -199,13 +199,13 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public void setValue(int value) {
-		_value = value;
-
 		if (!_setOriginalValue) {
 			_setOriginalValue = true;
 
-			_originalValue = value;
+			_originalValue = _value;
 		}
+
+		_value = value;
 	}
 
 	public int getOriginalValue() {

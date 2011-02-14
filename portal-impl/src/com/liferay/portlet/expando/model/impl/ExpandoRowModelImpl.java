@@ -105,13 +105,13 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	}
 
 	public void setTableId(long tableId) {
-		_tableId = tableId;
-
 		if (!_setOriginalTableId) {
 			_setOriginalTableId = true;
 
-			_originalTableId = tableId;
+			_originalTableId = _tableId;
 		}
+
+		_tableId = tableId;
 	}
 
 	public long getOriginalTableId() {
@@ -123,13 +123,13 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	}
 
 	public void setClassPK(long classPK) {
-		_classPK = classPK;
-
 		if (!_setOriginalClassPK) {
 			_setOriginalClassPK = true;
 
-			_originalClassPK = classPK;
+			_originalClassPK = _classPK;
 		}
+
+		_classPK = classPK;
 	}
 
 	public long getOriginalClassPK() {

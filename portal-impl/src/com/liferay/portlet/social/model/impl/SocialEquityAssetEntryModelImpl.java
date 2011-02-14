@@ -137,13 +137,13 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 	}
 
 	public void setAssetEntryId(long assetEntryId) {
-		_assetEntryId = assetEntryId;
-
 		if (!_setOriginalAssetEntryId) {
 			_setOriginalAssetEntryId = true;
 
-			_originalAssetEntryId = assetEntryId;
+			_originalAssetEntryId = _assetEntryId;
 		}
+
+		_assetEntryId = assetEntryId;
 	}
 
 	public long getOriginalAssetEntryId() {

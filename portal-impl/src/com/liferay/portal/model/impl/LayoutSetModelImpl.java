@@ -158,13 +158,13 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -188,13 +188,13 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 	}
 
 	public void setPrivateLayout(boolean privateLayout) {
-		_privateLayout = privateLayout;
-
 		if (!_setOriginalPrivateLayout) {
 			_setOriginalPrivateLayout = true;
 
-			_originalPrivateLayout = privateLayout;
+			_originalPrivateLayout = _privateLayout;
 		}
+
+		_privateLayout = privateLayout;
 	}
 
 	public boolean getOriginalPrivateLayout() {

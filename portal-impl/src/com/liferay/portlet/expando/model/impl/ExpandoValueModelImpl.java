@@ -155,13 +155,13 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	public void setTableId(long tableId) {
-		_tableId = tableId;
-
 		if (!_setOriginalTableId) {
 			_setOriginalTableId = true;
 
-			_originalTableId = tableId;
+			_originalTableId = _tableId;
 		}
+
+		_tableId = tableId;
 	}
 
 	public long getOriginalTableId() {
@@ -173,13 +173,13 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	public void setColumnId(long columnId) {
-		_columnId = columnId;
-
 		if (!_setOriginalColumnId) {
 			_setOriginalColumnId = true;
 
-			_originalColumnId = columnId;
+			_originalColumnId = _columnId;
 		}
+
+		_columnId = columnId;
 	}
 
 	public long getOriginalColumnId() {
@@ -191,13 +191,13 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	public void setRowId(long rowId) {
-		_rowId = rowId;
-
 		if (!_setOriginalRowId) {
 			_setOriginalRowId = true;
 
-			_originalRowId = rowId;
+			_originalRowId = _rowId;
 		}
+
+		_rowId = rowId;
 	}
 
 	public long getOriginalRowId() {
@@ -225,13 +225,13 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	public void setClassPK(long classPK) {
-		_classPK = classPK;
-
 		if (!_setOriginalClassPK) {
 			_setOriginalClassPK = true;
 
-			_originalClassPK = classPK;
+			_originalClassPK = _classPK;
 		}
+
+		_classPK = classPK;
 	}
 
 	public long getOriginalClassPK() {

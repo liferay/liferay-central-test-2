@@ -145,13 +145,13 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public void setCompanyId(long companyId) {
-		_companyId = companyId;
-
 		if (!_setOriginalCompanyId) {
 			_setOriginalCompanyId = true;
 
-			_originalCompanyId = companyId;
+			_originalCompanyId = _companyId;
 		}
+
+		_companyId = companyId;
 	}
 
 	public long getOriginalCompanyId() {
@@ -168,11 +168,11 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public void setName(String name) {
-		_name = name;
-
 		if (_originalName == null) {
-			_originalName = name;
+			_originalName = _name;
 		}
+
+		_name = name;
 	}
 
 	public String getOriginalName() {
@@ -184,13 +184,13 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public void setScope(int scope) {
-		_scope = scope;
-
 		if (!_setOriginalScope) {
 			_setOriginalScope = true;
 
-			_originalScope = scope;
+			_originalScope = _scope;
 		}
+
+		_scope = scope;
 	}
 
 	public int getOriginalScope() {
@@ -207,11 +207,11 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public void setPrimKey(String primKey) {
-		_primKey = primKey;
-
 		if (_originalPrimKey == null) {
-			_originalPrimKey = primKey;
+			_originalPrimKey = _primKey;
 		}
+
+		_primKey = primKey;
 	}
 
 	public String getOriginalPrimKey() {
@@ -223,13 +223,13 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public void setRoleId(long roleId) {
-		_roleId = roleId;
-
 		if (!_setOriginalRoleId) {
 			_setOriginalRoleId = true;
 
-			_originalRoleId = roleId;
+			_originalRoleId = _roleId;
 		}
+
+		_roleId = roleId;
 	}
 
 	public long getOriginalRoleId() {

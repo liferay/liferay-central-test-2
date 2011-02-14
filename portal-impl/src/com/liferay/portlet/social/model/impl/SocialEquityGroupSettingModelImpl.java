@@ -104,13 +104,13 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -138,13 +138,13 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 	}
 
 	public void setClassNameId(long classNameId) {
-		_classNameId = classNameId;
-
 		if (!_setOriginalClassNameId) {
 			_setOriginalClassNameId = true;
 
-			_originalClassNameId = classNameId;
+			_originalClassNameId = _classNameId;
 		}
+
+		_classNameId = classNameId;
 	}
 
 	public long getOriginalClassNameId() {
@@ -156,13 +156,13 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 	}
 
 	public void setType(int type) {
-		_type = type;
-
 		if (!_setOriginalType) {
 			_setOriginalType = true;
 
-			_originalType = type;
+			_originalType = _type;
 		}
+
+		_type = type;
 	}
 
 	public int getOriginalType() {
