@@ -79,6 +79,7 @@ import com.liferay.portlet.journal.service.persistence.JournalFeedUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleIDComparator;
+import com.liferay.portlet.journal.util.comparator.JournalStructureIDComparator;
 
 import java.io.File;
 
@@ -2231,7 +2232,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		List<JournalStructure> structures =
 			JournalStructureUtil.findByGroupId(
-				portletDataContext.getScopeGroupId());
+				portletDataContext.getScopeGroupId(), QueryUtil.ALL_POS, 
+				QueryUtil.ALL_POS, new JournalStructureIDComparator(true));
 
 		for (JournalStructure structure : structures) {
 			if (portletDataContext.isWithinDateRange(

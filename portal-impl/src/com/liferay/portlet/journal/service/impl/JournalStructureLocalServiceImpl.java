@@ -43,6 +43,7 @@ import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
+import com.liferay.portlet.journal.util.comparator.JournalStructureIDComparator;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -304,8 +305,13 @@ public class JournalStructureLocalServiceImpl
 	public void deleteStructures(long groupId)
 		throws PortalException, SystemException {
 
+		int count = journalStructurePersistence.countByGroupId(groupId);
+		JournalStructureIDComparator idComparator =
+			new JournalStructureIDComparator();
+
 		for (JournalStructure structure :
-				journalStructurePersistence.findByGroupId(groupId)) {
+				journalStructurePersistence.findByGroupId(groupId, 0, count,
+				idComparator)) {
 
 			deleteStructure(structure);
 		}
