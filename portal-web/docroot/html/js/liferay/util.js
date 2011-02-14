@@ -971,9 +971,9 @@
 			var formBuilderURL = Liferay.PortletURL.createRenderURL();
 
 			formBuilderURL.setEscapeXML(false);
-			formBuilderURL.setParameter('callback', callback);
 			formBuilderURL.setParameter('struts_action', '/forms/edit_structure_entry');
 			formBuilderURL.setParameter('resourceNamespace', namespace);
+			formBuilderURL.setParameter('callback', callback);
 			formBuilderURL.setPortletId(166);
 			formBuilderURL.setWindowState('pop_up');
 

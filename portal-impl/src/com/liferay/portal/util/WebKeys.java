@@ -56,9 +56,9 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String CAPTCHA_TEXT = "CAPTCHA_TEXT";
 
-	public static final String CAS_LOGIN = "CAS_LOGIN";
-
 	public static final String CAS_FORCE_LOGOUT = "CAS_FORCE_LOGOUT";
+
+	public static final String CAS_LOGIN = "CAS_LOGIN";
 
 	public static final String CAS_NO_SUCH_USER_EXCEPTION = "CAS_NO_SUCH_USER_EXCEPTION";
 
@@ -100,9 +100,9 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String FORM_NAME = "FORM_NAME";
 
-	public static final String FORMS_STRUCTURE_ENTRY = "FORMS_STRUCTURE_ENTRY";
-
 	public static final String FORM_NAVIGATOR_SECTION_SHOW = "FORM_NAVIGATOR_SECTION_SHOW_";
+
+	public static final String FORMS_STRUCTURE_ENTRY = "FORMS_STRUCTURE_ENTRY";
 
 	public static final String FORWARD_URL = "FORWARD_URL";
 

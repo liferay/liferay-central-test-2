@@ -36,7 +36,6 @@ public class ActionUtil {
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(request, "groupId");
-
 		String structureId = ParamUtil.getString(request, "structureId");
 
 		FormsStructureEntry structureEntry = null;
