@@ -306,9 +306,10 @@ public class JournalStructureLocalServiceImpl
 	public void deleteStructures(long groupId)
 		throws PortalException, SystemException {
 
-		List<JournalStructure> structures = JournalStructureUtil.findByGroupId(
-			groupId,QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			new StructurePKComparator());
+		List<JournalStructure> structures =
+			journalStructurePersistence.findByGroupId(
+				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				new StructurePKComparator());
 
 		for (JournalStructure structure : structures) {
 			deleteStructure(structure);
