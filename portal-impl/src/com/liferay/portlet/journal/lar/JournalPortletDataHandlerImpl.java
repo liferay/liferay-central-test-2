@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
-import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
@@ -2004,17 +2003,17 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Element rootElement = document.getRootElement();
 
-		Node parentStructureNode = rootElement.selectSingleNode(
+		Element parentStructureElement = (Element)rootElement.selectSingleNode(
 			"./structures/structure[@structure-id='" + parentStructureId +
 				"']");
 
 		String parentStructureUuid = GetterUtil.getString(
 			structureElement.attributeValue("parent-structure-uuid"));
 
-		if ((parentStructureNode != null) &&
+		if ((parentStructureElement != null) &&
 			Validator.isNotNull(parentStructureId)) {
 
-			importStructure(portletDataContext, (Element)parentStructureNode);
+			importStructure(portletDataContext, parentStructureElement);
 
 			parentStructureId = structureIds.get(parentStructureId);
 		}
