@@ -1014,6 +1014,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (parentStructure != null) {
 				structureElement.addAttribute(
 					"parent-structure-uuid", parentStructure.getUuid());
+
+				exportStructure(portletDataContext, structuresElement,
+					parentStructure);
 			}
 		}
 
