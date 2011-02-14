@@ -101,7 +101,7 @@ public class WebXMLBuilder {
 
 				String filterMappings = customContent.substring(x, y);
 
-				int z = getInsertionIndexFilterMapping(originalContent);
+				int z = getOriginalContentIndex(originalContent);
 
 				mergedContent =
 					mergedContent.substring(0, z) + filterMappings +
@@ -112,7 +112,7 @@ public class WebXMLBuilder {
 						customContent.substring(y + 1);
 			}
 
-			int z = getInsertionIndex(mergedContent);
+			int z = getMergedContentIndex(mergedContent);
 
 			mergedContent =
 				mergedContent.substring(0, z) + customContent +
@@ -139,7 +139,7 @@ public class WebXMLBuilder {
 		return customContent.substring(x, y);
 	}
 
-	protected int getInsertionIndex(String content) {
+	protected int getMergedContentIndex(String content) {
 		int x = content.indexOf("<web-app");
 
 		x = content.indexOf(">", x) + 1;
@@ -147,7 +147,7 @@ public class WebXMLBuilder {
 		return x;
 	}
 
-	protected int getInsertionIndexFilterMapping(String content) {
+	protected int getOriginalContentIndex(String content) {
 		int x = content.indexOf(AbsoluteRedirectsFilter.class.getName());
 
 		if (x == -1) {
