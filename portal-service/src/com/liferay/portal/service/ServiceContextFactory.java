@@ -80,7 +80,13 @@ public class ServiceContextFactory {
 
 			User user = PortalUtil.getUser(request);
 
-			serviceContext.setSignedIn(!user.isDefaultUser());
+			if (user != null) {
+				serviceContext.setSignedIn(!user.isDefaultUser());
+			}
+			else {
+				serviceContext.setSignedIn(false);
+			}
+
 			serviceContext.setUser(user);
 		}
 
