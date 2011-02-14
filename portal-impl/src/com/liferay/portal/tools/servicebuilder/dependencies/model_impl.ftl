@@ -360,16 +360,15 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 		public void set${column.methodName}(${column.type} ${column.name}) {
 			<#if column.name == "uuid">
-				_uuid = uuid;
 
 				<#if column.isFetchFinderPath()>
 					if (_originalUuid == null) {
-						_originalUuid = uuid;
+						_originalUuid = _uuid;
 					}
 				</#if>
-			<#else>
-				_${column.name} = ${column.name};
 
+				_uuid = uuid;
+			<#else>
 				<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 					<#if column.isPrimitiveType()>
 						if (!_setOriginal${column.methodName}) {
@@ -378,9 +377,11 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 						if (_original${column.methodName} == null) {
 					</#if>
 
-						_original${column.methodName} = ${column.name};
+						_original${column.methodName} = _${column.name};
 					}
 				</#if>
+
+				_${column.name} = ${column.name};
 			</#if>
 		}
 
