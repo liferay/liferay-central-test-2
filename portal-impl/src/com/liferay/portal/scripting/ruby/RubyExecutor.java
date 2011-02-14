@@ -28,12 +28,13 @@ import java.io.FileNotFoundException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.jruby.Ruby;
-import org.jruby.RubyInstanceConfig;
 import org.jruby.RubyInstanceConfig.CompileMode;
+import org.jruby.RubyInstanceConfig;
 import org.jruby.exceptions.RaiseException;
 import org.jruby.internal.runtime.GlobalVariables;
 import org.jruby.javasupport.JavaEmbedUtils;
@@ -68,7 +69,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		_basePath = WebDirDetector.getRootDir(
 			PortalClassLoaderUtil.getClassLoader());
 
-		ArrayList<String> loadPaths = new ArrayList<String>();
+		List<String> loadPaths = new ArrayList<String>();
 
 		loadPaths.add(_basePath);
 
@@ -109,12 +110,15 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		}
 
 		try {
-			ArrayList<String> loadPaths = new ArrayList<String>();
+			List<String> loadPaths = new ArrayList<String>();
 
 			loadPaths.add(_basePath);
 
-			_ruby.getInstanceConfig().setLoadPaths(loadPaths);
-			_ruby.getInstanceConfig().setCurrentDirectory(_basePath);
+			RubyInstanceConfig rubyInstanceConfig =
+				_ruby.getInstanceConfig();
+
+			rubyInstanceConfig.setCurrentDirectory(_basePath);
+			rubyInstanceConfig.setLoadPaths(loadPaths);
 
 			GlobalVariables globalVariables = _ruby.getGlobalVariables();
 

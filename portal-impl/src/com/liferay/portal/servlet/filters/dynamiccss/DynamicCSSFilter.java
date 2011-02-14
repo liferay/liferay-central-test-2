@@ -64,12 +64,16 @@ public class DynamicCSSFilter extends BasePortalFilter {
 				_servletContext, "/WEB-INF/sass/main.rb"));
 
 		try {
+
+			// Ruby executor requires warm up in requring Saas. Always breaks
+			// the first time without this block.
+
 			_rubyExecutor.eval(
 				null, new HashMap<String, Object>(), null,
 				"require 'rubygems'\nrequire 'sass'");
 		}
-		catch (ScriptingException e) {
-			_log.error(e, e);
+		catch (ScriptingException se) {
+			_log.error(se, se);
 		}
 
 		if (Validator.isNull(_servletContextName)) {
