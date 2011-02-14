@@ -141,25 +141,25 @@ String adminEmailPasswordResetBody = PrefsPropsUtil.getContent(company.getCompan
 		try {
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_BODY %>--'].value = window.emailUserAddedBody.getHTML();
 		}
-		catch(error) {
+		catch (e) {
 		}
 
 		try {
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_USER_ADDED_NO_PASSWORD_BODY %>--'].value = window.emailUserAddedNoPasswordBody.getHTML();
 		}
-		catch(error) {
+		catch (e) {
 		}
 
 		try {
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_PASSWORD_SENT_BODY %>--'].value = window.emailPasswordSentBody.getHTML();
 		}
-		catch(error) {
+		catch (e) {
 		}
 
 		try {
 			document.<portlet:namespace />fm['<portlet:namespace />settings--<%= PropsKeys.ADMIN_EMAIL_PASSWORD_RESET_BODY %>--'].value = window.emailPasswordResetBody.getHTML();
 		}
-		catch(error) {
+		catch (e) {
 		}
 	}
 </aui:script>
