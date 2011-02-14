@@ -603,7 +603,7 @@ AUI().add(
 					applyEvents(instance._nestedListComponents);
 				}
 
-				if (nodes instanceof A.Node) {
+				if (A.instanceOf(nodes, A.Node)) {
 					nodes = A.all(nodes);
 				}
 
