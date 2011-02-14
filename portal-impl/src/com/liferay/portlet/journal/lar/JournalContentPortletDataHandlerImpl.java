@@ -198,7 +198,7 @@ public class JournalContentPortletDataHandlerImpl
 
 		if (structureElement != null) {
 			JournalPortletDataHandlerImpl.importStructure(
-				portletDataContext, structureElement);
+				portletDataContext, structureElement, rootElement);
 		}
 
 		Element templateElement = rootElement.element("template");

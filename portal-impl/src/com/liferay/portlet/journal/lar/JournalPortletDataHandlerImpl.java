@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
@@ -1000,7 +1001,21 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		structureElement.addAttribute("path", path);
 
-		structure.setUserUuid(structure.getUserUuid());
+		structureElement.addAttribute(
+			"structure-id", String.valueOf(structure.getStructureId()));
+
+		String parentStructureId = structure.getParentStructureId();
+
+		if (Validator.isNotNull(parentStructureId)) {
+			JournalStructure parentStructure =
+				JournalStructureLocalServiceUtil.getStructure(
+					structure.getGroupId(), parentStructureId);
+
+			if (parentStructure != null) {
+				structureElement.addAttribute(
+					"parent-structure-uuid", parentStructure.getUuid());
+			}
+		}
 
 		portletDataContext.addPermissions(
 			JournalStructure.class, structure.getId());
@@ -1936,8 +1951,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void importStructure(
-			PortletDataContext portletDataContext,	Element structureElement)
+			PortletDataContext portletDataContext, Element structureElement,
+			Element rootElement)
 		throws Exception {
+
+		long groupId = portletDataContext.getGroupId();
 
 		String path = structureElement.attributeValue("path");
 
@@ -1977,6 +1995,30 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		String parentStructureId = MapUtil.getString(
 			structureIds, structure.getParentStructureId(),
 			structure.getParentStructureId());
+
+		Node parentStructureNode = rootElement.selectSingleNode(
+			"./structures/structure[@structure-id='" + parentStructureId +
+				"']");
+
+		String parentStructureUuid = GetterUtil.getString(
+			structureElement.attributeValue("parent-structure-uuid"));
+
+		if (Validator.isNotNull(parentStructureId) &&
+			(parentStructureNode != null)) {
+
+			importStructure(portletDataContext, (Element)parentStructureNode,
+				rootElement);
+
+			parentStructureId = structureIds.get(parentStructureId);
+		}
+		else if (Validator.isNotNull(parentStructureUuid)) {
+			JournalStructure parentStructure =
+				JournalStructureLocalServiceUtil.
+					getJournalStructureByUuidAndGroupId(
+						parentStructureUuid, groupId);
+
+			parentStructureId = parentStructure.getStructureId();
+		}
 
 		boolean addCommunityPermissions =
 			creationStrategy.addCommunityPermissions(
@@ -2317,7 +2359,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			"structure");
 
 		for (Element structureElement : structureElements) {
-			importStructure(portletDataContext, structureElement);
+			importStructure(portletDataContext, structureElement, rootElement);
 		}
 
 		Element templatesElement = rootElement.element("templates");
