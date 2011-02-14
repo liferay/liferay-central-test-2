@@ -85,6 +85,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		imageElement.addAttribute("path", path);
 
+		image.setUserUuid(image.getUserUuid());
+
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "categories")) {
 			portletDataContext.addAssetCategories(
 				IGImage.class, image.getImageId());
@@ -98,8 +100,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "tags")) {
 			portletDataContext.addAssetTags(IGImage.class, image.getImageId());
 		}
-
-		image.setUserUuid(image.getUserUuid());
 
 		Image largeImage = ImageUtil.findByPrimaryKey(image.getLargeImageId());
 
