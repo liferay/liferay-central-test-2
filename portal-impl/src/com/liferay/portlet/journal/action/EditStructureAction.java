@@ -136,7 +136,7 @@ public class EditStructureAction extends PortletAction {
 		catch (NoSuchStructureException nsse) {
 
 			// Let this slide because the user can manually input a structure id
-			// for a new structure that does not yet exist.
+			// for a new structure that does not yet exist
 
 		}
 		catch (Exception e) {
