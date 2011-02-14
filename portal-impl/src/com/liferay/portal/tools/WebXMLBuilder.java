@@ -88,23 +88,35 @@ public class WebXMLBuilder {
 		String originalWebXML, String customWebXML, String mergedWebXML) {
 
 		try {
-			String customContent = FileUtil.read(customWebXML);
-
-			int x = customContent.indexOf("<web-app");
-
-			x = customContent.indexOf(">", x) + 1;
-
-			int y = customContent.indexOf("</web-app>");
-
-			customContent = customContent.substring(x, y);
+			String customContent = getCustomContent(customWebXML);
 
 			String originalContent = FileUtil.read(originalWebXML);
 
-			int z = getInsertionIndex(originalContent);
+			String mergedContent = originalContent;
 
-			String mergedContent =
-				originalContent.substring(0, z) + customContent +
-					originalContent.substring(z, originalContent.length());
+			int x = customContent.indexOf("<filter-mapping>");
+
+			if (x != -1) {
+				int y = customContent.lastIndexOf("</filter-mapping>") + 17;
+
+				String filterMappings = customContent.substring(x, y);
+
+				int z = getInsertionIndexFilterMapping(originalContent);
+
+				mergedContent =
+					mergedContent.substring(0, z) + filterMappings +
+						mergedContent.substring(z, mergedContent.length());
+
+				customContent =
+					customContent.substring(0, x) +
+						customContent.substring(y + 1);
+			}
+
+			int z = getInsertionIndex(mergedContent);
+
+			mergedContent =
+				mergedContent.substring(0, z) + customContent +
+					mergedContent.substring(z, mergedContent.length());
 
 			mergedContent = organizeWebXML(mergedContent);
 
@@ -115,7 +127,27 @@ public class WebXMLBuilder {
 		}
 	}
 
+	protected String getCustomContent(String customWebXML) throws IOException {
+		String customContent = FileUtil.read(customWebXML);
+
+		int x = customContent.indexOf("<web-app");
+
+		x = customContent.indexOf(">", x) + 1;
+
+		int y = customContent.indexOf("</web-app>");
+
+		return customContent.substring(x, y);
+	}
+
 	protected int getInsertionIndex(String content) {
+		int x = content.indexOf("<web-app");
+
+		x = content.indexOf(">", x) + 1;
+
+		return x;
+	}
+
+	protected int getInsertionIndexFilterMapping(String content) {
 		int x = content.indexOf(AbsoluteRedirectsFilter.class.getName());
 
 		if (x == -1) {
