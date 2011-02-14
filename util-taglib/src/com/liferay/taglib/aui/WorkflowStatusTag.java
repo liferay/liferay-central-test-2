@@ -91,7 +91,7 @@ public class WorkflowStatusTag extends IncludeTag {
 	private Object _bean;
 	private String _id;
 	private Class<?> _model;
-	int _status;
+	private int _status;
 	private String _version;
 
 }
