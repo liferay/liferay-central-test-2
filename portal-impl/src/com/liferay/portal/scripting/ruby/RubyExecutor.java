@@ -32,8 +32,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jruby.Ruby;
-import org.jruby.RubyInstanceConfig.CompileMode;
 import org.jruby.RubyInstanceConfig;
+import org.jruby.RubyInstanceConfig.CompileMode;
 import org.jruby.exceptions.RaiseException;
 import org.jruby.internal.runtime.GlobalVariables;
 import org.jruby.javasupport.JavaEmbedUtils;
@@ -65,16 +65,16 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		rubyInstanceConfig.setJitThreshold(
 			PropsValues.SCRIPTING_JRUBY_COMPILE_THRESHOLD);
 
-		String basePath = WebDirDetector.getRootDir(
+		_basePath = WebDirDetector.getRootDir(
 			PortalClassLoaderUtil.getClassLoader());
 
 		ArrayList<String> loadPaths = new ArrayList<String>();
 
-		loadPaths.add(basePath);
+		loadPaths.add(_basePath);
 
 		_ruby = JavaEmbedUtils.initialize(loadPaths, rubyInstanceConfig);
 
-		_ruby.setCurrentDirectory(basePath);
+		_ruby.setCurrentDirectory(_basePath);
 	}
 
 	public String getLanguage() {
@@ -109,6 +109,13 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		}
 
 		try {
+			ArrayList<String> loadPaths = new ArrayList<String>();
+
+			loadPaths.add(_basePath);
+
+			_ruby.getInstanceConfig().setLoadPaths(loadPaths);
+			_ruby.getInstanceConfig().setCurrentDirectory(_basePath);
+
 			GlobalVariables globalVariables = _ruby.getGlobalVariables();
 
 			for (Map.Entry<String, Object> entry : inputObjects.entrySet()) {
@@ -161,6 +168,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 
 	private static final String _COMPILE_MODE_JIT = "jit";
 
+	private String _basePath;
 	private Ruby _ruby;
 
 }

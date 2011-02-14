@@ -63,6 +63,15 @@ public class DynamicCSSFilter extends BasePortalFilter {
 			ServletContextUtil.getRealPath(
 				_servletContext, "/WEB-INF/sass/main.rb"));
 
+		try {
+			_rubyExecutor.eval(
+				null, new HashMap<String, Object>(), null,
+				"require 'rubygems'\nrequire 'sass'");
+		}
+		catch (ScriptingException e) {
+			_log.error(e, e);
+		}
+
 		if (Validator.isNull(_servletContextName)) {
 			_tempDir += "/portal";
 		}
