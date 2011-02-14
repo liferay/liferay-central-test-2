@@ -360,7 +360,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 		public void set${column.methodName}(${column.type} ${column.name}) {
 			<#if column.name == "uuid">
-
 				<#if column.isFetchFinderPath()>
 					if (_originalUuid == null) {
 						_originalUuid = _uuid;
