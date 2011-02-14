@@ -439,20 +439,24 @@ AUI().add(
 						else if (type == CATEGORY) {
 							if (action == ACTION_ADD) {
 								path += 'edit_category';
+
 								url.setParameter('vocabularyId', instance._selectedVocabularyId);
 							}
 							else if (action == ACTION_EDIT) {
 								path += 'edit_category';
+
 								url.setParameter('categoryId', instance._selectedCategoryId);
 								url.setParameter('vocabularyId', instance._selectedVocabularyId);
 							}
 							else if (action == ACTION_MOVE) {
 								path += 'edit_category';
+
 								url.setParameter('categoryId', instance._selectedCategoryId);
 								url.setParameter('cmd', 'move');
 							}
 							else if (action == ACTION_VIEW) {
 								path += 'view_category';
+
 								url.setParameter('categoryId', instance._selectedCategoryId);
 								url.setParameter('vocabularyId', instance._selectedVocabularyId);
 							}

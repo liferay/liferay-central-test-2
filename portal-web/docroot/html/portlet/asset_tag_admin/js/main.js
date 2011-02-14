@@ -325,10 +325,12 @@ AUI().add(
 						}
 						else if (action == ACTION_EDIT) {
 							path += 'edit_tag';
+
 							url.setParameter('tagId', instance._selectedTagId);
 						}
 						else if (action == ACTION_VIEW) {
 							path += 'view_tag';
+
 							url.setParameter('tagId', instance._selectedTagId);
 						}
 
