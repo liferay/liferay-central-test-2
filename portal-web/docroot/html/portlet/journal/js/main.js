@@ -681,7 +681,7 @@ AUI().add(
 
 					xmlInput.val(articleContent);
 
-					submitForm(auxForm);
+					auxForm.submit();
 				}
 			},
 
@@ -1335,7 +1335,7 @@ AUI().add(
 					titleAuxFormInput.val(titleInput.val());
 					xmlAuxFormInput.val(articleContent);
 
-					submitForm(auxForm);
+					auxForm.submit();
 				}
 			},
 
