@@ -14,12 +14,6 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -50,7 +44,13 @@ import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
-import com.liferay.portlet.journal.util.comparator.JournalStructureIDComparator;
+import com.liferay.portlet.journal.util.comparator.StructurePKComparator;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -306,11 +306,11 @@ public class JournalStructureLocalServiceImpl
 	public void deleteStructures(long groupId)
 		throws PortalException, SystemException {
 
-		for (JournalStructure structure :
-				journalStructurePersistence.findByGroupId(groupId, 
-					QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-					new JournalStructureIDComparator())) {
+		List<JournalStructure> structures = JournalStructureUtil.findByGroupId(
+			groupId,QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new StructurePKComparator());
 
+		for (JournalStructure structure : structures) {
 			deleteStructure(structure);
 		}
 	}

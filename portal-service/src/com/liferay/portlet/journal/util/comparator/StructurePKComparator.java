@@ -18,11 +18,10 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.journal.model.JournalStructure;
 
 /**
- *
  * @author Vilmos Papp
- *
+ * @author Brian Wing Shun Chan
  */
-public class JournalStructureIDComparator extends OrderByComparator {
+public class StructurePKComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "id ASC";
 
@@ -30,24 +29,24 @@ public class JournalStructureIDComparator extends OrderByComparator {
 
 	public static String[] ORDER_BY_FIELDS = {"id"};
 
-	public JournalStructureIDComparator() {
+	public StructurePKComparator() {
 		this(false);
 	}
 
-	public JournalStructureIDComparator(boolean ascending) {
+	public StructurePKComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		JournalStructure structrure1 = (JournalStructure)obj1;
+		JournalStructure structure1 = (JournalStructure)obj1;
 		JournalStructure structure2 = (JournalStructure)obj2;
 
 		int value = 0;
 
-		if (structrure1.getId() < structure2.getId()) {
+		if (structure1.getId() < structure2.getId()) {
 			value = -1;
 		}
-		else if (structrure1.getId() > structure2.getId()) {
+		else if (structure1.getId() > structure2.getId()) {
 			value = 1;
 		}
 
