@@ -885,11 +885,15 @@ public class PluginPackageUtil {
 			pluginType = Plugin.TYPE_WEB;
 		}
 
-		if (pos == -1) {
-			return null;
-		}
+		String displayPrefix = null;
 
-		String displayPrefix = displayName.substring(0, pos);
+		if (pos == -1) {
+			displayPrefix = displayName;
+			pluginType = Plugin.TYPE_PORTLET;
+		}
+		else {
+			displayPrefix = displayName.substring(0, pos);
+		}
 
 		String moduleGroupId = GetterUtil.getString(
 			properties.getProperty("module-group-id"));
