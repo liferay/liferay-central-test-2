@@ -422,7 +422,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 							</#if>
 						</#if>
 
-						${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
+						${entity.varName}ModelImpl.get${finderCol.methodName}()
 
 						<#if finderCol.isPrimitiveType()>
 							)
