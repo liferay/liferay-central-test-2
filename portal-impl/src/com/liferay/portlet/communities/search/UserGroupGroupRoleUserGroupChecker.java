@@ -54,7 +54,7 @@ public class UserGroupGroupRoleUserGroupChecker extends RowChecker {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		UserGroupGroupRoleUserChecker.class);
+		UserGroupGroupRoleUserGroupChecker.class);
 
 	private Group _group;
 	private Role _role;
