@@ -120,6 +120,16 @@ public class JobState implements Cloneable, Serializable {
 		_triggerTimeInfomation.put(key, date);
 	}
 
+	private void readObject(ObjectInputStream inputStream)
+		throws ClassNotFoundException, IOException {
+
+		_exceptions =
+			(Queue<ObjectValuePair<Exception, Date>>)inputStream.readObject();
+		_exceptionsMaxSize = inputStream.readInt();
+		_triggerState = TriggerState.values()[inputStream.readInt()];
+		_triggerTimeInfomation = (Map<String, Date>)inputStream.readObject();
+	}
+
 	private void writeObject(ObjectOutputStream outputStream)
 		throws IOException {
 
@@ -127,16 +137,6 @@ public class JobState implements Cloneable, Serializable {
 		outputStream.writeInt(_exceptionsMaxSize);
 		outputStream.writeInt(_triggerState.ordinal());
 		outputStream.writeObject(_triggerTimeInfomation);
-	}
-
-	private void readObject(ObjectInputStream inputStream)
-		throws IOException, ClassNotFoundException {
-
-		_exceptions =
-			(Queue<ObjectValuePair<Exception, Date>>)inputStream.readObject();
-		_exceptionsMaxSize = inputStream.readInt();
-		_triggerState = TriggerState.values()[inputStream.readInt()];
-		_triggerTimeInfomation = (Map<String, Date>)inputStream.readObject();
 	}
 
 	private static final int _EXCEPTIONS_MAX_SIZE = 10;
