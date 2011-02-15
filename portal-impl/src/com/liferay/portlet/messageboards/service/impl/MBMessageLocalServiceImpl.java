@@ -1698,6 +1698,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subscriptionSender.setContextUserPrefix("COMMENTS");
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setGroupId(message.getGroupId());
+		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId(
 			"mb_discussion", message.getCategoryId(), message.getMessageId());
 		subscriptionSender.setSubject(subject);
