@@ -27,7 +27,7 @@ import java.util.Properties;
  * @author Brian Wing Shun Chan
  * @author Samuel Liu
  */
-public class CreoleFilter extends org.wikiwizard.jspwiki.filters.CreoleFilter {
+public class CreoleFilter extends com.ecyrd.jspwiki.filters.CreoleFilter {
 
 	public void destroy(WikiEngine wikiEngine) {
 		super.destroy(wikiEngine);
