@@ -136,7 +136,6 @@
 	<classpathentry kind="lib" path="lib/portal/commons-validator.jar"/>
 	<classpathentry kind="lib" path="lib/portal/compass.jar"/>
 	<classpathentry kind="lib" path="lib/portal/concurrent.jar"/>
-	<classpathentry kind="lib" path="lib/portal/creolefilter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/crypt.jar"/>
 	<classpathentry kind="lib" path="lib/portal/daim.jar"/>
 	<classpathentry kind="lib" path="lib/portal/daisydiff.jar"/>
