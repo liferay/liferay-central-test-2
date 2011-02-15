@@ -60,6 +60,7 @@
 	<import class="com.liferay.portal.model.UserGroupGroupRole" />
 	<import class="com.liferay.portal.model.UserGroupRole" />
 	<import class="com.liferay.portal.model.UserIdMapper" />
+	<import class="com.liferay.portal.model.UserNotificationEvent" />
 	<import class="com.liferay.portal.model.UserTracker" />
 	<import class="com.liferay.portal.model.UserTrackerPath" />
 	<import class="com.liferay.portal.model.VirtualHost" />
@@ -903,6 +904,19 @@
 		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="externalUserId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.UserNotificationEventImpl" table="UserNotificationEvent">
+		<cache usage="read-write" />
+		<id name="userNotificationEventId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="type" column="type_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="timestamp" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="deliverBy" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="payload" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.UserTrackerImpl" table="UserTracker">
 		<cache usage="read-write" />

@@ -109,6 +109,7 @@ import com.liferay.portal.service.UserGroupRoleService;
 import com.liferay.portal.service.UserGroupService;
 import com.liferay.portal.service.UserIdMapperLocalService;
 import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserNotificationEventLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserTrackerLocalService;
 import com.liferay.portal.service.UserTrackerPathLocalService;
@@ -183,6 +184,7 @@ import com.liferay.portal.service.persistence.UserGroupPersistence;
 import com.liferay.portal.service.persistence.UserGroupRoleFinder;
 import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserIdMapperPersistence;
+import com.liferay.portal.service.persistence.UserNotificationEventPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPathPersistence;
 import com.liferay.portal.service.persistence.UserTrackerPersistence;
@@ -3206,6 +3208,44 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	}
 
 	/**
+	 * Gets the user notification event local service.
+	 *
+	 * @return the user notification event local service
+	 */
+	public UserNotificationEventLocalService getUserNotificationEventLocalService() {
+		return userNotificationEventLocalService;
+	}
+
+	/**
+	 * Sets the user notification event local service.
+	 *
+	 * @param userNotificationEventLocalService the user notification event local service
+	 */
+	public void setUserNotificationEventLocalService(
+		UserNotificationEventLocalService userNotificationEventLocalService) {
+		this.userNotificationEventLocalService = userNotificationEventLocalService;
+	}
+
+	/**
+	 * Gets the user notification event persistence.
+	 *
+	 * @return the user notification event persistence
+	 */
+	public UserNotificationEventPersistence getUserNotificationEventPersistence() {
+		return userNotificationEventPersistence;
+	}
+
+	/**
+	 * Sets the user notification event persistence.
+	 *
+	 * @param userNotificationEventPersistence the user notification event persistence
+	 */
+	public void setUserNotificationEventPersistence(
+		UserNotificationEventPersistence userNotificationEventPersistence) {
+		this.userNotificationEventPersistence = userNotificationEventPersistence;
+	}
+
+	/**
 	 * Gets the user tracker local service.
 	 *
 	 * @return the user tracker local service
@@ -3828,6 +3868,10 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	protected UserIdMapperLocalService userIdMapperLocalService;
 	@BeanReference(type = UserIdMapperPersistence.class)
 	protected UserIdMapperPersistence userIdMapperPersistence;
+	@BeanReference(type = UserNotificationEventLocalService.class)
+	protected UserNotificationEventLocalService userNotificationEventLocalService;
+	@BeanReference(type = UserNotificationEventPersistence.class)
+	protected UserNotificationEventPersistence userNotificationEventPersistence;
 	@BeanReference(type = UserTrackerLocalService.class)
 	protected UserTrackerLocalService userTrackerLocalService;
 	@BeanReference(type = UserTrackerPersistence.class)

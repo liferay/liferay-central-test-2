@@ -1927,6 +1927,8 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	protected UserGroupRolePersistence userGroupRolePersistence;
 	@BeanReference(type = UserIdMapperPersistence.class)
 	protected UserIdMapperPersistence userIdMapperPersistence;
+	@BeanReference(type = UserNotificationEventPersistence.class)
+	protected UserNotificationEventPersistence userNotificationEventPersistence;
 	@BeanReference(type = UserTrackerPersistence.class)
 	protected UserTrackerPersistence userTrackerPersistence;
 	@BeanReference(type = UserTrackerPathPersistence.class)

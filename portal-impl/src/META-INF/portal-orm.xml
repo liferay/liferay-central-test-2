@@ -972,6 +972,24 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portal.model.impl.UserNotificationEventModelImpl">
+		<attributes>
+			<id name="userNotificationEventId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="type">
+				<column name="TYPE_" />
+			</basic>
+			<basic name="timestamp" />
+			<basic name="deliverBy" />
+			<basic name="payload" />
+			<transient name="primaryKey" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portal.model.impl.UserTrackerModelImpl">
 		<attributes>
 			<id name="userTrackerId" />
@@ -3154,6 +3172,10 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserIdMapperImpl" name="UserIdMapper">
 		<table name="UserIdMapper" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portal.model.impl.UserNotificationEventImpl" name="UserNotificationEvent">
+		<table name="UserNotificationEvent" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portal.model.impl.UserTrackerImpl" name="UserTracker">
