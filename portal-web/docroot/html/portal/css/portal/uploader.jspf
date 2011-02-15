@@ -111,7 +111,7 @@
 }
 
 .lfr-upload-container .progress {
-	background: #8db2e3 url(<%= themeImagesPath %>/progress_bar/complete_gradient.png) repeat-y 100% 0;
+	background: #8db2e3;
 	display: block;
 	height: 15px;
 	width: 0;
