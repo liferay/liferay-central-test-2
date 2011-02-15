@@ -46,7 +46,7 @@ portletURL.setParameter("userGroupId", String.valueOf(userGroupId));
 <%
 RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
-searchContainer.setRowChecker(new UserGroupGroupRoleChecker(renderResponse, userGroup, group));
+searchContainer.setRowChecker(new UserGroupGroupRoleRoleChecker(renderResponse, userGroup, group));
 %>
 
 <liferay-ui:search-form

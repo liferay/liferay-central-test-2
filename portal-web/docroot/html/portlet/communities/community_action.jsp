@@ -106,6 +106,17 @@ String tabs1 = (String)objArray[1];
 			image="assign_user_roles"
 			url="<%= assignUserRolesURL %>"
 		/>
+
+		<portlet:renderURL var="assignUserGroupRolesURL">
+			<portlet:param name="struts_action" value="/communities/edit_user_group_roles" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon
+			image="assign_user_group_roles"
+			url="<%= assignUserGroupRolesURL %>"
+		/>
 	</c:if>
 
 	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">

@@ -331,6 +331,10 @@
 		<put name="portlet_content" value="/portlet/communities/edit_team_assignments.jsp" />
 	</definition>
 
+	<definition name="portlet.communities.edit_user_group_roles" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_user_group_roles.jsp" />
+	</definition>
+
 	<definition name="portlet.communities.edit_user_roles" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/edit_user_roles.jsp" />
 	</definition>

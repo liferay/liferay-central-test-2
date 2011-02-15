@@ -1622,7 +1622,8 @@
 			INNER JOIN
 				UserGroupGroupRole ON
 					(UserGroupGroupRole.groupId = ?) AND
-					(UserGroupGroupRole.roleId = ?)
+					(UserGroupGroupRole.roleId = ?) AND
+					(UserGroupGroupRole.userGroupId = Groups_UserGroups.userGroupId)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.joinByUserGroupsGroups">

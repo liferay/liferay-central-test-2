@@ -27,9 +27,9 @@ import javax.portlet.RenderResponse;
 /**
  * @author Brett Swaim
  */
-public class UserGroupGroupRoleChecker extends RowChecker {
+public class UserGroupGroupRoleRoleChecker extends RowChecker {
 
-	public UserGroupGroupRoleChecker(
+	public UserGroupGroupRoleRoleChecker(
 		RenderResponse renderResponse, UserGroup userGroup, Group group) {
 
 		super(renderResponse);
@@ -47,14 +47,14 @@ public class UserGroupGroupRoleChecker extends RowChecker {
 				role.getRoleId());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 
 			return false;
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		UserGroupGroupRoleChecker.class);
+		UserGroupGroupRoleRoleChecker.class);
 
 	private Group _group;
 	private UserGroup _userGroup;
