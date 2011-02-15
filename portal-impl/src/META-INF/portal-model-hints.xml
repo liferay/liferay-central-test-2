@@ -814,6 +814,18 @@
 		<field name="description" type="String" />
 		<field name="externalUserId" type="String" />
 	</model>
+	<model name="com.liferay.portal.model.UserNotificationEvent">
+		<field name="uuid" type="String" />
+		<field name="userNotificationEventId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="type" type="String" />
+		<field name="timestamp" type="long" />
+		<field name="deliverBy" type="long" />
+		<field name="payload" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+	</model>
 	<model name="com.liferay.portal.model.UserTracker">
 		<field name="userTrackerId" type="long" />
 		<field name="companyId" type="long" />
@@ -2215,6 +2227,18 @@
 		<field name="stage" type="int" />
 		<field name="completed" type="boolean" />
 		<field name="rejected" type="boolean" />
+	</model>
+	<model name="com.liferay.portlet.usernotifications.model.UserNotificationEvent">
+		<field name="uuid" type="String" />
+		<field name="userNotificationEventId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="type" type="String" />
+		<field name="userId" type="long" />
+		<field name="payload" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="timestamp" type="long" />
+		<field name="deliverBy" type="long" />
 	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiNode">
 		<field name="uuid" type="String" />

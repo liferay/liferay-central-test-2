@@ -174,6 +174,17 @@ create table UserGroups_Teams (
 	primary key (userGroupId, teamId)
 );
 
+create table UserNotificationEvent (
+	uuid_ VARCHAR(75) null,
+	userNotificationEventId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	type_ VARCHAR(75) null,
+	timestamp LONG,
+	deliverBy LONG,
+	payload TEXT null
+);
+
 create table VirtualHost (
 	virtualHostId LONG not null primary key,
 	companyId LONG,

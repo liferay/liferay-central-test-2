@@ -156,6 +156,7 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(UserGroupPersistenceTest.class);
 		testSuite.addTestSuite(UserGroupRolePersistenceTest.class);
 		testSuite.addTestSuite(UserIdMapperPersistenceTest.class);
+		testSuite.addTestSuite(UserNotificationEventPersistenceTest.class);
 		testSuite.addTestSuite(UserPersistenceTest.class);
 		testSuite.addTestSuite(UserTrackerPathPersistenceTest.class);
 		testSuite.addTestSuite(UserTrackerPersistenceTest.class);

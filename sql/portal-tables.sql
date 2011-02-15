@@ -1831,6 +1831,17 @@ create table UserIdMapper (
 	externalUserId VARCHAR(75) null
 );
 
+create table UserNotificationEvent (
+	uuid_ VARCHAR(75) null,
+	userNotificationEventId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	type_ VARCHAR(75) null,
+	timestamp LONG,
+	deliverBy LONG,
+	payload TEXT null
+);
+
 create table Users_Groups (
 	userId LONG not null,
 	groupId LONG not null,
