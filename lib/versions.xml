@@ -140,7 +140,7 @@
 		<file-name>development/dtdparser.jar</file-name>
 		<version>1.20</version>
 		<project-name>DTDParser</project-name>
-		<project-url>http://www.wutka.com/dtdparser.html</project-url>
+		<project-url>http://sourceforge.net/projects/dtdparser</project-url>
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
@@ -1922,7 +1922,7 @@
 		<file-name>portal/jcommon.jar</file-name>
 		<version>1.0.16</version>
 		<project-name>JCommon</project-name>
-		<project-url>http://www.jfree.org/jcommon/index.php</project-url>
+		<project-url>http://www.jfree.org/jcommon</project-url>
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
