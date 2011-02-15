@@ -18,8 +18,8 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
 <%
-String cssClasses = ParamUtil.getString(request, "cssClasses");
 String cssPath = ParamUtil.getString(request, "cssPath");
+String cssClasses = ParamUtil.getString(request, "cssClasses");
 String languageId = ParamUtil.getString(request, "languageId");
 %>
 
