@@ -42,9 +42,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long threadId = rs.getLong("MBThread.threadId");
-				long companyId = rs.getLong("MBMessage.companyId");
-				long userId = rs.getLong("MBMessage.userId");
+				long threadId = rs.getLong("threadId");
+				long companyId = rs.getLong("companyId");
+				long userId = rs.getLong("userId");
 
 				runSQL(
 					"update MBThread set companyId = " + companyId +
