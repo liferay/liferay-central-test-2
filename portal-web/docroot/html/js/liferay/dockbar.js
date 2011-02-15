@@ -421,17 +421,15 @@ AUI().add(
 
 							var portletId = item.attr('data-portlet-id');
 
-							if ((/^\d+$/).test(portletId)) {
-								if (!item.hasClass('lfr-instanceable')) {
-									instance._toggleAppShortcut(item, true);
-								}
-
-								Portlet.add(
-									{
-										portletId: portletId
-									}
-								);
+							if (!item.hasClass('lfr-instanceable')) {
+								instance._toggleAppShortcut(item, true);
 							}
+
+							Portlet.add(
+								{
+									portletId: portletId
+								}
+							);
 
 							if (!event.shiftKey) {
 								MenuManager.hideAll();
