@@ -29,14 +29,13 @@ public interface ChannelHub {
 	public ChannelHub clone(long companyId);
 
 	public void confirmDelivery(
-			long userId, Collection<String> notificationEventUuid)
+			long userId, Collection<String> notificationEventUuids)
 		throws ChannelException;
 
 	public void confirmDelivery(long userId, String notificationEventUuid)
 		throws ChannelException;
 
-	public Channel createChannel(long userId)
-		throws ChannelException;
+	public Channel createChannel(long userId) throws ChannelException;
 
 	public void destroy() throws ChannelException;
 
@@ -46,8 +45,7 @@ public interface ChannelHub {
 
 	public void flush(long userId) throws ChannelException;
 
-	public void flush(long userId, long timestamp)
-		throws ChannelException;
+	public void flush(long userId, long timestamp) throws ChannelException;
 
 	public Channel getChannel(long userId) throws ChannelException ;
 

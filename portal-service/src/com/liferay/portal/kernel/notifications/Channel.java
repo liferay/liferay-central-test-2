@@ -28,10 +28,11 @@ public interface Channel {
 
 	public void close() throws ChannelException;
 
-	public void confirmDelivery(Collection<String> uuids)
+	public void confirmDelivery(Collection<String> notificationEventUuids)
 		throws ChannelException;
 
-	public void confirmDelivery(String uuid) throws ChannelException;
+	public void confirmDelivery(String notificationEventUuid)
+		throws ChannelException;
 
 	public void flush() throws ChannelException;
 
