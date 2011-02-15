@@ -18,6 +18,7 @@
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
 <%
+String cssClasses = ParamUtil.getString(request, "cssClasses");
 String cssPath = ParamUtil.getString(request, "cssPath");
 String languageId = ParamUtil.getString(request, "languageId");
 %>
@@ -47,6 +48,8 @@ CKEDITOR.addStylesSet(
 	{name : 'Error Message', element : 'div', attributes : {'class' : 'portlet-msg-error'}}
 	]
 );
+
+CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';
 
 CKEDITOR.config.contentsCss = '<%= HtmlUtil.escape(cssPath) %>/main.css';
 
