@@ -44,7 +44,7 @@ public class OrganizationGroupChecker extends RowChecker {
 				_group.getGroupId(), organization.getOrganizationId());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 
 			return false;
 		}

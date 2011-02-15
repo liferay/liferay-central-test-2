@@ -50,7 +50,7 @@ public class GroupPermissionChecker extends RowChecker {
 				String.valueOf(group.getGroupId()), _actionId);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 
 			return false;
 		}

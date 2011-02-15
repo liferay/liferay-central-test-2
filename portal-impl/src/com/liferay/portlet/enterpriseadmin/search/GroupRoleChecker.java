@@ -42,7 +42,7 @@ public class GroupRoleChecker extends RowChecker {
 				_role.getRoleId(), group.getGroupId());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 
 			return false;
 		}

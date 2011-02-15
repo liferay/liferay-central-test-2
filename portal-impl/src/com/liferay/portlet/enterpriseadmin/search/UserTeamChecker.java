@@ -42,7 +42,7 @@ public class UserTeamChecker extends RowChecker {
 				_team.getTeamId(), user.getUserId());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 
 			return false;
 		}

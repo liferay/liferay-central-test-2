@@ -42,7 +42,7 @@ public class RoleUserChecker extends RowChecker {
 				_user.getUserId(), role.getRoleId());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 
 			return false;
 		}

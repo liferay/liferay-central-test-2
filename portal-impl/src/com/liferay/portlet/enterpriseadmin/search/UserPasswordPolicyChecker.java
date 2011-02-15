@@ -44,7 +44,7 @@ public class UserPasswordPolicyChecker extends RowChecker {
 				_passwordPolicy.getPasswordPolicyId(), user.getUserId());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 
 			return false;
 		}
