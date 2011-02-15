@@ -250,8 +250,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(webDAVPropsModelImpl.getOriginalClassNameId()),
-				new Long(webDAVPropsModelImpl.getOriginalClassPK())
+				new Long(webDAVPropsModelImpl.getClassNameId()),
+				new Long(webDAVPropsModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,

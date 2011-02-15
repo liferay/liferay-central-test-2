@@ -279,12 +279,12 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussion;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
-			new Object[] { new Long(mbDiscussionModelImpl.getOriginalThreadId()) });
+			new Object[] { new Long(mbDiscussionModelImpl.getThreadId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(mbDiscussionModelImpl.getOriginalClassNameId()),
-				new Long(mbDiscussionModelImpl.getOriginalClassPK())
+				new Long(mbDiscussionModelImpl.getClassNameId()),
+				new Long(mbDiscussionModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,

@@ -374,9 +374,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U1_U2_T,
 			new Object[] {
-				new Long(socialRelationModelImpl.getOriginalUserId1()),
-				new Long(socialRelationModelImpl.getOriginalUserId2()),
-				new Integer(socialRelationModelImpl.getOriginalType())
+				new Long(socialRelationModelImpl.getUserId1()),
+				new Long(socialRelationModelImpl.getUserId2()),
+				new Integer(socialRelationModelImpl.getType())
 			});
 
 		EntityCacheUtil.removeResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,

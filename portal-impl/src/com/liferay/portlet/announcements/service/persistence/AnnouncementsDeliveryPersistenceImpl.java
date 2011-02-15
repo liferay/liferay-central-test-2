@@ -273,9 +273,9 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
-				new Long(announcementsDeliveryModelImpl.getOriginalUserId()),
+				new Long(announcementsDeliveryModelImpl.getUserId()),
 				
-			announcementsDeliveryModelImpl.getOriginalType()
+			announcementsDeliveryModelImpl.getType()
 			});
 
 		EntityCacheUtil.removeResult(AnnouncementsDeliveryModelImpl.ENTITY_CACHE_ENABLED,

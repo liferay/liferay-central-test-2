@@ -318,8 +318,8 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				bookmarksFolderModelImpl.getOriginalUuid(),
-				new Long(bookmarksFolderModelImpl.getOriginalGroupId())
+				bookmarksFolderModelImpl.getUuid(),
+				new Long(bookmarksFolderModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(BookmarksFolderModelImpl.ENTITY_CACHE_ENABLED,

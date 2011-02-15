@@ -267,8 +267,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
 			new Object[] {
-				serviceComponentModelImpl.getOriginalBuildNamespace(),
-				new Long(serviceComponentModelImpl.getOriginalBuildNumber())
+				serviceComponentModelImpl.getBuildNamespace(),
+				new Long(serviceComponentModelImpl.getBuildNumber())
 			});
 
 		EntityCacheUtil.removeResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,

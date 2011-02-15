@@ -309,9 +309,9 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(userGroupModelImpl.getOriginalCompanyId()),
+				new Long(userGroupModelImpl.getCompanyId()),
 				
-			userGroupModelImpl.getOriginalName()
+			userGroupModelImpl.getName()
 			});
 
 		EntityCacheUtil.removeResult(UserGroupModelImpl.ENTITY_CACHE_ENABLED,

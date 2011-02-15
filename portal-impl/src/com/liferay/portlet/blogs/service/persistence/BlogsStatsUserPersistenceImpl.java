@@ -324,8 +324,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(blogsStatsUserModelImpl.getOriginalGroupId()),
-				new Long(blogsStatsUserModelImpl.getOriginalUserId())
+				new Long(blogsStatsUserModelImpl.getGroupId()),
+				new Long(blogsStatsUserModelImpl.getUserId())
 			});
 
 		EntityCacheUtil.removeResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,

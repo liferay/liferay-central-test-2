@@ -406,17 +406,17 @@ public class SocialRequestPersistenceImpl extends BasePersistenceImpl<SocialRequ
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				socialRequestModelImpl.getOriginalUuid(),
-				new Long(socialRequestModelImpl.getOriginalGroupId())
+				socialRequestModelImpl.getUuid(),
+				new Long(socialRequestModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C_T_R,
 			new Object[] {
-				new Long(socialRequestModelImpl.getOriginalUserId()),
-				new Long(socialRequestModelImpl.getOriginalClassNameId()),
-				new Long(socialRequestModelImpl.getOriginalClassPK()),
-				new Integer(socialRequestModelImpl.getOriginalType()),
-				new Long(socialRequestModelImpl.getOriginalReceiverUserId())
+				new Long(socialRequestModelImpl.getUserId()),
+				new Long(socialRequestModelImpl.getClassNameId()),
+				new Long(socialRequestModelImpl.getClassPK()),
+				new Integer(socialRequestModelImpl.getType()),
+				new Long(socialRequestModelImpl.getReceiverUserId())
 			});
 
 		EntityCacheUtil.removeResult(SocialRequestModelImpl.ENTITY_CACHE_ENABLED,

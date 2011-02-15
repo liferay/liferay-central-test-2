@@ -317,9 +317,9 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P,
 			new Object[] {
-				new Long(layoutRevisionModelImpl.getOriginalLayoutSetBranchId()),
-				Boolean.valueOf(layoutRevisionModelImpl.getOriginalHead()),
-				new Long(layoutRevisionModelImpl.getOriginalPlid())
+				new Long(layoutRevisionModelImpl.getLayoutSetBranchId()),
+				Boolean.valueOf(layoutRevisionModelImpl.getHead()),
+				new Long(layoutRevisionModelImpl.getPlid())
 			});
 
 		EntityCacheUtil.removeResult(LayoutRevisionModelImpl.ENTITY_CACHE_ENABLED,

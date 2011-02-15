@@ -284,10 +284,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S,
 			new Object[] {
-				new Long(resourceCodeModelImpl.getOriginalCompanyId()),
+				new Long(resourceCodeModelImpl.getCompanyId()),
 				
-			resourceCodeModelImpl.getOriginalName(),
-				new Integer(resourceCodeModelImpl.getOriginalScope())
+			resourceCodeModelImpl.getName(),
+				new Integer(resourceCodeModelImpl.getScope())
 			});
 
 		EntityCacheUtil.removeResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,

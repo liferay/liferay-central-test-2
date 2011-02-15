@@ -356,20 +356,18 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				journalTemplateModelImpl.getOriginalUuid(),
-				new Long(journalTemplateModelImpl.getOriginalGroupId())
+				journalTemplateModelImpl.getUuid(),
+				new Long(journalTemplateModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-			new Object[] {
-				new Long(journalTemplateModelImpl.getOriginalSmallImageId())
-			});
+			new Object[] { new Long(journalTemplateModelImpl.getSmallImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_T,
 			new Object[] {
-				new Long(journalTemplateModelImpl.getOriginalGroupId()),
+				new Long(journalTemplateModelImpl.getGroupId()),
 				
-			journalTemplateModelImpl.getOriginalTemplateId()
+			journalTemplateModelImpl.getTemplateId()
 			});
 
 		EntityCacheUtil.removeResult(JournalTemplateModelImpl.ENTITY_CACHE_ENABLED,

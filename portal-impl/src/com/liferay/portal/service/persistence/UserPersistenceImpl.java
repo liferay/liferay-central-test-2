@@ -485,48 +485,48 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		UserModelImpl userModelImpl = (UserModelImpl)user;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONTACTID,
-			new Object[] { new Long(userModelImpl.getOriginalContactId()) });
+			new Object[] { new Long(userModelImpl.getContactId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTRAITID,
-			new Object[] { new Long(userModelImpl.getOriginalPortraitId()) });
+			new Object[] { new Long(userModelImpl.getPortraitId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U,
 			new Object[] {
-				new Long(userModelImpl.getOriginalCompanyId()),
-				new Long(userModelImpl.getOriginalUserId())
+				new Long(userModelImpl.getCompanyId()),
+				new Long(userModelImpl.getUserId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DU,
 			new Object[] {
-				new Long(userModelImpl.getOriginalCompanyId()),
-				Boolean.valueOf(userModelImpl.getOriginalDefaultUser())
+				new Long(userModelImpl.getCompanyId()),
+				Boolean.valueOf(userModelImpl.getDefaultUser())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_SN,
 			new Object[] {
-				new Long(userModelImpl.getOriginalCompanyId()),
+				new Long(userModelImpl.getCompanyId()),
 				
-			userModelImpl.getOriginalScreenName()
+			userModelImpl.getScreenName()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_EA,
 			new Object[] {
-				new Long(userModelImpl.getOriginalCompanyId()),
+				new Long(userModelImpl.getCompanyId()),
 				
-			userModelImpl.getOriginalEmailAddress()
+			userModelImpl.getEmailAddress()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_FID,
 			new Object[] {
-				new Long(userModelImpl.getOriginalCompanyId()),
-				new Long(userModelImpl.getOriginalFacebookId())
+				new Long(userModelImpl.getCompanyId()),
+				new Long(userModelImpl.getFacebookId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_O,
 			new Object[] {
-				new Long(userModelImpl.getOriginalCompanyId()),
+				new Long(userModelImpl.getCompanyId()),
 				
-			userModelImpl.getOriginalOpenId()
+			userModelImpl.getOpenId()
 			});
 
 		EntityCacheUtil.removeResult(UserModelImpl.ENTITY_CACHE_ENABLED,

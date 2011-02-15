@@ -306,14 +306,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				mbMailingListModelImpl.getOriginalUuid(),
-				new Long(mbMailingListModelImpl.getOriginalGroupId())
+				mbMailingListModelImpl.getUuid(),
+				new Long(mbMailingListModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
 			new Object[] {
-				new Long(mbMailingListModelImpl.getOriginalGroupId()),
-				new Long(mbMailingListModelImpl.getOriginalCategoryId())
+				new Long(mbMailingListModelImpl.getGroupId()),
+				new Long(mbMailingListModelImpl.getCategoryId())
 			});
 
 		EntityCacheUtil.removeResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,

@@ -340,16 +340,16 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(roleModelImpl.getOriginalCompanyId()),
+				new Long(roleModelImpl.getCompanyId()),
 				
-			roleModelImpl.getOriginalName()
+			roleModelImpl.getName()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
 			new Object[] {
-				new Long(roleModelImpl.getOriginalCompanyId()),
-				new Long(roleModelImpl.getOriginalClassNameId()),
-				new Long(roleModelImpl.getOriginalClassPK())
+				new Long(roleModelImpl.getCompanyId()),
+				new Long(roleModelImpl.getClassNameId()),
+				new Long(roleModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(RoleModelImpl.ENTITY_CACHE_ENABLED,

@@ -346,9 +346,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl<MBMessageF
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_M_F,
 			new Object[] {
-				new Long(mbMessageFlagModelImpl.getOriginalUserId()),
-				new Long(mbMessageFlagModelImpl.getOriginalMessageId()),
-				new Integer(mbMessageFlagModelImpl.getOriginalFlag())
+				new Long(mbMessageFlagModelImpl.getUserId()),
+				new Long(mbMessageFlagModelImpl.getMessageId()),
+				new Integer(mbMessageFlagModelImpl.getFlag())
 			});
 
 		EntityCacheUtil.removeResult(MBMessageFlagModelImpl.ENTITY_CACHE_ENABLED,

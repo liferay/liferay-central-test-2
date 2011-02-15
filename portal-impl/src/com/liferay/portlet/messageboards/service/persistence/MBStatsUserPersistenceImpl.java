@@ -291,8 +291,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(mbStatsUserModelImpl.getOriginalGroupId()),
-				new Long(mbStatsUserModelImpl.getOriginalUserId())
+				new Long(mbStatsUserModelImpl.getGroupId()),
+				new Long(mbStatsUserModelImpl.getUserId())
 			});
 
 		EntityCacheUtil.removeResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,

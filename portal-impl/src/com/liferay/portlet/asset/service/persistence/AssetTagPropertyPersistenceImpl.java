@@ -298,9 +298,9 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_K,
 			new Object[] {
-				new Long(assetTagPropertyModelImpl.getOriginalTagId()),
+				new Long(assetTagPropertyModelImpl.getTagId()),
 				
-			assetTagPropertyModelImpl.getOriginalKey()
+			assetTagPropertyModelImpl.getKey()
 			});
 
 		EntityCacheUtil.removeResult(AssetTagPropertyModelImpl.ENTITY_CACHE_ENABLED,

@@ -240,7 +240,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)release;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SERVLETCONTEXTNAME,
-			new Object[] { releaseModelImpl.getOriginalServletContextName() });
+			new Object[] { releaseModelImpl.getServletContextName() });
 
 		EntityCacheUtil.removeResult(ReleaseModelImpl.ENTITY_CACHE_ENABLED,
 			ReleaseImpl.class, release.getPrimaryKey());

@@ -322,9 +322,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_RG_RA,
 			new Object[] {
-				scProductEntryModelImpl.getOriginalRepoGroupId(),
+				scProductEntryModelImpl.getRepoGroupId(),
 				
-			scProductEntryModelImpl.getOriginalRepoArtifactId()
+			scProductEntryModelImpl.getRepoArtifactId()
 			});
 
 		EntityCacheUtil.removeResult(SCProductEntryModelImpl.ENTITY_CACHE_ENABLED,

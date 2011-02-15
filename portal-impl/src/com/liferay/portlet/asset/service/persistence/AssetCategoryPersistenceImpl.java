@@ -400,16 +400,16 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				assetCategoryModelImpl.getOriginalUuid(),
-				new Long(assetCategoryModelImpl.getOriginalGroupId())
+				assetCategoryModelImpl.getUuid(),
+				new Long(assetCategoryModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_N_V,
 			new Object[] {
-				new Long(assetCategoryModelImpl.getOriginalParentCategoryId()),
+				new Long(assetCategoryModelImpl.getParentCategoryId()),
 				
-			assetCategoryModelImpl.getOriginalName(),
-				new Long(assetCategoryModelImpl.getOriginalVocabularyId())
+			assetCategoryModelImpl.getName(),
+				new Long(assetCategoryModelImpl.getVocabularyId())
 			});
 
 		EntityCacheUtil.removeResult(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,

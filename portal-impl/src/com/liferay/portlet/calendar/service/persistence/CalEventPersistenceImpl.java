@@ -358,8 +358,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				calEventModelImpl.getOriginalUuid(),
-				new Long(calEventModelImpl.getOriginalGroupId())
+				calEventModelImpl.getUuid(),
+				new Long(calEventModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(CalEventModelImpl.ENTITY_CACHE_ENABLED,

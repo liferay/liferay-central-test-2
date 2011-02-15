@@ -326,16 +326,16 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
 			new Object[] {
-				new Long(journalArticleImageModelImpl.getOriginalGroupId()),
+				new Long(journalArticleImageModelImpl.getGroupId()),
 				
-			journalArticleImageModelImpl.getOriginalArticleId(),
-				new Double(journalArticleImageModelImpl.getOriginalVersion()),
+			journalArticleImageModelImpl.getArticleId(),
+				new Double(journalArticleImageModelImpl.getVersion()),
 				
-			journalArticleImageModelImpl.getOriginalElInstanceId(),
+			journalArticleImageModelImpl.getElInstanceId(),
 				
-			journalArticleImageModelImpl.getOriginalElName(),
+			journalArticleImageModelImpl.getElName(),
 				
-			journalArticleImageModelImpl.getOriginalLanguageId()
+			journalArticleImageModelImpl.getLanguageId()
 			});
 
 		EntityCacheUtil.removeResult(JournalArticleImageModelImpl.ENTITY_CACHE_ENABLED,

@@ -265,8 +265,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
 			new Object[] {
-				new Long(expandoRowModelImpl.getOriginalTableId()),
-				new Long(expandoRowModelImpl.getOriginalClassPK())
+				new Long(expandoRowModelImpl.getTableId()),
+				new Long(expandoRowModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(ExpandoRowModelImpl.ENTITY_CACHE_ENABLED,

@@ -373,15 +373,15 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 			new Object[] {
-				new Long(socialEquityLogModelImpl.getOriginalUserId()),
-				new Long(socialEquityLogModelImpl.getOriginalAssetEntryId()),
+				new Long(socialEquityLogModelImpl.getUserId()),
+				new Long(socialEquityLogModelImpl.getAssetEntryId()),
 				
-			socialEquityLogModelImpl.getOriginalActionId(),
-				new Integer(socialEquityLogModelImpl.getOriginalActionDate()),
-				Boolean.valueOf(socialEquityLogModelImpl.getOriginalActive()),
-				new Integer(socialEquityLogModelImpl.getOriginalType()),
+			socialEquityLogModelImpl.getActionId(),
+				new Integer(socialEquityLogModelImpl.getActionDate()),
+				Boolean.valueOf(socialEquityLogModelImpl.getActive()),
+				new Integer(socialEquityLogModelImpl.getType()),
 				
-			socialEquityLogModelImpl.getOriginalExtraData()
+			socialEquityLogModelImpl.getExtraData()
 			});
 
 		EntityCacheUtil.removeResult(SocialEquityLogModelImpl.ENTITY_CACHE_ENABLED,

@@ -326,15 +326,15 @@ public class AssetVocabularyPersistenceImpl extends BasePersistenceImpl<AssetVoc
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				assetVocabularyModelImpl.getOriginalUuid(),
-				new Long(assetVocabularyModelImpl.getOriginalGroupId())
+				assetVocabularyModelImpl.getUuid(),
+				new Long(assetVocabularyModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
 			new Object[] {
-				new Long(assetVocabularyModelImpl.getOriginalGroupId()),
+				new Long(assetVocabularyModelImpl.getGroupId()),
 				
-			assetVocabularyModelImpl.getOriginalName()
+			assetVocabularyModelImpl.getName()
 			});
 
 		EntityCacheUtil.removeResult(AssetVocabularyModelImpl.ENTITY_CACHE_ENABLED,

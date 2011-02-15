@@ -554,23 +554,23 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				wikiPageModelImpl.getOriginalUuid(),
-				new Long(wikiPageModelImpl.getOriginalGroupId())
+				wikiPageModelImpl.getUuid(),
+				new Long(wikiPageModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_N_V,
 			new Object[] {
-				new Long(wikiPageModelImpl.getOriginalResourcePrimKey()),
-				new Long(wikiPageModelImpl.getOriginalNodeId()),
-				new Double(wikiPageModelImpl.getOriginalVersion())
+				new Long(wikiPageModelImpl.getResourcePrimKey()),
+				new Long(wikiPageModelImpl.getNodeId()),
+				new Double(wikiPageModelImpl.getVersion())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T_V,
 			new Object[] {
-				new Long(wikiPageModelImpl.getOriginalNodeId()),
+				new Long(wikiPageModelImpl.getNodeId()),
 				
-			wikiPageModelImpl.getOriginalTitle(),
-				new Double(wikiPageModelImpl.getOriginalVersion())
+			wikiPageModelImpl.getTitle(),
+				new Double(wikiPageModelImpl.getVersion())
 			});
 
 		EntityCacheUtil.removeResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,

@@ -310,8 +310,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				mbCategoryModelImpl.getOriginalUuid(),
-				new Long(mbCategoryModelImpl.getOriginalGroupId())
+				mbCategoryModelImpl.getUuid(),
+				new Long(mbCategoryModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(MBCategoryModelImpl.ENTITY_CACHE_ENABLED,

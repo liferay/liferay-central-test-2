@@ -261,8 +261,8 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
 			new Object[] {
-				new Long(layoutSetModelImpl.getOriginalGroupId()),
-				Boolean.valueOf(layoutSetModelImpl.getOriginalPrivateLayout())
+				new Long(layoutSetModelImpl.getGroupId()),
+				Boolean.valueOf(layoutSetModelImpl.getPrivateLayout())
 			});
 
 		EntityCacheUtil.removeResult(LayoutSetModelImpl.ENTITY_CACHE_ENABLED,

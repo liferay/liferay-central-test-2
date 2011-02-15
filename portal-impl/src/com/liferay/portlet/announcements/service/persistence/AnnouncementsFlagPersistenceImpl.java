@@ -277,9 +277,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V,
 			new Object[] {
-				new Long(announcementsFlagModelImpl.getOriginalUserId()),
-				new Long(announcementsFlagModelImpl.getOriginalEntryId()),
-				new Integer(announcementsFlagModelImpl.getOriginalValue())
+				new Long(announcementsFlagModelImpl.getUserId()),
+				new Long(announcementsFlagModelImpl.getEntryId()),
+				new Integer(announcementsFlagModelImpl.getValue())
 			});
 
 		EntityCacheUtil.removeResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,

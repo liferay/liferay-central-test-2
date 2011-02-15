@@ -309,11 +309,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O_P_P,
 			new Object[] {
-				new Long(portletPreferencesModelImpl.getOriginalOwnerId()),
-				new Integer(portletPreferencesModelImpl.getOriginalOwnerType()),
-				new Long(portletPreferencesModelImpl.getOriginalPlid()),
+				new Long(portletPreferencesModelImpl.getOwnerId()),
+				new Integer(portletPreferencesModelImpl.getOwnerType()),
+				new Long(portletPreferencesModelImpl.getPlid()),
 				
-			portletPreferencesModelImpl.getOriginalPortletId()
+			portletPreferencesModelImpl.getPortletId()
 			});
 
 		EntityCacheUtil.removeResult(PortletPreferencesModelImpl.ENTITY_CACHE_ENABLED,

@@ -300,9 +300,9 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K,
 			new Object[] {
-				new Long(assetCategoryPropertyModelImpl.getOriginalCategoryId()),
+				new Long(assetCategoryPropertyModelImpl.getCategoryId()),
 				
-			assetCategoryPropertyModelImpl.getOriginalKey()
+			assetCategoryPropertyModelImpl.getKey()
 			});
 
 		EntityCacheUtil.removeResult(AssetCategoryPropertyModelImpl.ENTITY_CACHE_ENABLED,

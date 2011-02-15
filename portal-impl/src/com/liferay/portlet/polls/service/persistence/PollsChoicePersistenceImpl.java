@@ -286,9 +286,9 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_N,
 			new Object[] {
-				new Long(pollsChoiceModelImpl.getOriginalQuestionId()),
+				new Long(pollsChoiceModelImpl.getQuestionId()),
 				
-			pollsChoiceModelImpl.getOriginalName()
+			pollsChoiceModelImpl.getName()
 			});
 
 		EntityCacheUtil.removeResult(PollsChoiceModelImpl.ENTITY_CACHE_ENABLED,

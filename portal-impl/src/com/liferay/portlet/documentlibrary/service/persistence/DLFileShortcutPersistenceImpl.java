@@ -321,8 +321,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				dlFileShortcutModelImpl.getOriginalUuid(),
-				new Long(dlFileShortcutModelImpl.getOriginalGroupId())
+				dlFileShortcutModelImpl.getUuid(),
+				new Long(dlFileShortcutModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,

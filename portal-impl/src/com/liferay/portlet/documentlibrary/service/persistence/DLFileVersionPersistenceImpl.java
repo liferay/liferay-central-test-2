@@ -285,9 +285,9 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V,
 			new Object[] {
-				new Long(dlFileVersionModelImpl.getOriginalFileEntryId()),
+				new Long(dlFileVersionModelImpl.getFileEntryId()),
 				
-			dlFileVersionModelImpl.getOriginalVersion()
+			dlFileVersionModelImpl.getVersion()
 			});
 
 		EntityCacheUtil.removeResult(DLFileVersionModelImpl.ENTITY_CACHE_ENABLED,

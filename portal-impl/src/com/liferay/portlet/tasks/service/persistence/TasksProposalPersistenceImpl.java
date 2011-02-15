@@ -289,9 +289,9 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(tasksProposalModelImpl.getOriginalClassNameId()),
+				new Long(tasksProposalModelImpl.getClassNameId()),
 				
-			tasksProposalModelImpl.getOriginalClassPK()
+			tasksProposalModelImpl.getClassPK()
 			});
 
 		EntityCacheUtil.removeResult(TasksProposalModelImpl.ENTITY_CACHE_ENABLED,

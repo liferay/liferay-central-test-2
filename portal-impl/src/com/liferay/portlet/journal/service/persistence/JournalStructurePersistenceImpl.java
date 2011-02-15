@@ -340,15 +340,15 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				journalStructureModelImpl.getOriginalUuid(),
-				new Long(journalStructureModelImpl.getOriginalGroupId())
+				journalStructureModelImpl.getUuid(),
+				new Long(journalStructureModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
 			new Object[] {
-				new Long(journalStructureModelImpl.getOriginalGroupId()),
+				new Long(journalStructureModelImpl.getGroupId()),
 				
-			journalStructureModelImpl.getOriginalStructureId()
+			journalStructureModelImpl.getStructureId()
 			});
 
 		EntityCacheUtil.removeResult(JournalStructureModelImpl.ENTITY_CACHE_ENABLED,

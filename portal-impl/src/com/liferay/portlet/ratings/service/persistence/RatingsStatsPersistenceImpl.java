@@ -255,8 +255,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(ratingsStatsModelImpl.getOriginalClassNameId()),
-				new Long(ratingsStatsModelImpl.getOriginalClassPK())
+				new Long(ratingsStatsModelImpl.getClassNameId()),
+				new Long(ratingsStatsModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,

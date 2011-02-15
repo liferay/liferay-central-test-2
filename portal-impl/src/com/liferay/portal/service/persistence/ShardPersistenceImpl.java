@@ -256,12 +256,12 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
-			new Object[] { shardModelImpl.getOriginalName() });
+			new Object[] { shardModelImpl.getName() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(shardModelImpl.getOriginalClassNameId()),
-				new Long(shardModelImpl.getOriginalClassPK())
+				new Long(shardModelImpl.getClassNameId()),
+				new Long(shardModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(ShardModelImpl.ENTITY_CACHE_ENABLED,

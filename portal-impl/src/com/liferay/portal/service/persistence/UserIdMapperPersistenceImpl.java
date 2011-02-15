@@ -289,16 +289,16 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
-				new Long(userIdMapperModelImpl.getOriginalUserId()),
+				new Long(userIdMapperModelImpl.getUserId()),
 				
-			userIdMapperModelImpl.getOriginalType()
+			userIdMapperModelImpl.getType()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_E,
 			new Object[] {
-				userIdMapperModelImpl.getOriginalType(),
+				userIdMapperModelImpl.getType(),
 				
-			userIdMapperModelImpl.getOriginalExternalUserId()
+			userIdMapperModelImpl.getExternalUserId()
 			});
 
 		EntityCacheUtil.removeResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,

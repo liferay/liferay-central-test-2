@@ -262,9 +262,9 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_A,
 			new Object[] {
-				resourceActionModelImpl.getOriginalName(),
+				resourceActionModelImpl.getName(),
 				
-			resourceActionModelImpl.getOriginalActionId()
+			resourceActionModelImpl.getActionId()
 			});
 
 		EntityCacheUtil.removeResult(ResourceActionModelImpl.ENTITY_CACHE_ENABLED,

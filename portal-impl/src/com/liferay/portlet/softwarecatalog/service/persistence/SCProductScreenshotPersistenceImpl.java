@@ -300,19 +300,15 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl<SCPr
 		SCProductScreenshotModelImpl scProductScreenshotModelImpl = (SCProductScreenshotModelImpl)scProductScreenshot;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THUMBNAILID,
-			new Object[] {
-				new Long(scProductScreenshotModelImpl.getOriginalThumbnailId())
-			});
+			new Object[] { new Long(scProductScreenshotModelImpl.getThumbnailId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_FULLIMAGEID,
-			new Object[] {
-				new Long(scProductScreenshotModelImpl.getOriginalFullImageId())
-			});
+			new Object[] { new Long(scProductScreenshotModelImpl.getFullImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_P,
 			new Object[] {
-				new Long(scProductScreenshotModelImpl.getOriginalProductEntryId()),
-				new Integer(scProductScreenshotModelImpl.getOriginalPriority())
+				new Long(scProductScreenshotModelImpl.getProductEntryId()),
+				new Integer(scProductScreenshotModelImpl.getPriority())
 			});
 
 		EntityCacheUtil.removeResult(SCProductScreenshotModelImpl.ENTITY_CACHE_ENABLED,

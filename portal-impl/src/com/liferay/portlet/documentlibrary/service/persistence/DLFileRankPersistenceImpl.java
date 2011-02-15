@@ -297,9 +297,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F,
 			new Object[] {
-				new Long(dlFileRankModelImpl.getOriginalCompanyId()),
-				new Long(dlFileRankModelImpl.getOriginalUserId()),
-				new Long(dlFileRankModelImpl.getOriginalFileEntryId())
+				new Long(dlFileRankModelImpl.getCompanyId()),
+				new Long(dlFileRankModelImpl.getUserId()),
+				new Long(dlFileRankModelImpl.getFileEntryId())
 			});
 
 		EntityCacheUtil.removeResult(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,

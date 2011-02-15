@@ -326,8 +326,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_P,
 			new Object[] {
-				new Long(tasksReviewModelImpl.getOriginalUserId()),
-				new Long(tasksReviewModelImpl.getOriginalProposalId())
+				new Long(tasksReviewModelImpl.getUserId()),
+				new Long(tasksReviewModelImpl.getProposalId())
 			});
 
 		EntityCacheUtil.removeResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,

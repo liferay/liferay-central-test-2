@@ -308,15 +308,15 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				wikiNodeModelImpl.getOriginalUuid(),
-				new Long(wikiNodeModelImpl.getOriginalGroupId())
+				wikiNodeModelImpl.getUuid(),
+				new Long(wikiNodeModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
 			new Object[] {
-				new Long(wikiNodeModelImpl.getOriginalGroupId()),
+				new Long(wikiNodeModelImpl.getGroupId()),
 				
-			wikiNodeModelImpl.getOriginalName()
+			wikiNodeModelImpl.getName()
 			});
 
 		EntityCacheUtil.removeResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,

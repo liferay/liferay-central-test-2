@@ -279,8 +279,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(shoppingCartModelImpl.getOriginalGroupId()),
-				new Long(shoppingCartModelImpl.getOriginalUserId())
+				new Long(shoppingCartModelImpl.getGroupId()),
+				new Long(shoppingCartModelImpl.getUserId())
 			});
 
 		EntityCacheUtil.removeResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,

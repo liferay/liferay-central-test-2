@@ -528,8 +528,8 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				mbMessageModelImpl.getOriginalUuid(),
-				new Long(mbMessageModelImpl.getOriginalGroupId())
+				mbMessageModelImpl.getUuid(),
+				new Long(mbMessageModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(MBMessageModelImpl.ENTITY_CACHE_ENABLED,

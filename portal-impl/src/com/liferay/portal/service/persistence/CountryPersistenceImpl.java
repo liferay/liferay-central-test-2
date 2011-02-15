@@ -276,13 +276,13 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		CountryModelImpl countryModelImpl = (CountryModelImpl)country;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
-			new Object[] { countryModelImpl.getOriginalName() });
+			new Object[] { countryModelImpl.getName() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A2,
-			new Object[] { countryModelImpl.getOriginalA2() });
+			new Object[] { countryModelImpl.getA2() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A3,
-			new Object[] { countryModelImpl.getOriginalA3() });
+			new Object[] { countryModelImpl.getA3() });
 
 		EntityCacheUtil.removeResult(CountryModelImpl.ENTITY_CACHE_ENABLED,
 			CountryImpl.class, country.getPrimaryKey());

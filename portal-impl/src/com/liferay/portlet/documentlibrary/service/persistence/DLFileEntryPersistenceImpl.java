@@ -397,24 +397,24 @@ public class DLFileEntryPersistenceImpl extends BasePersistenceImpl<DLFileEntry>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				dlFileEntryModelImpl.getOriginalUuid(),
-				new Long(dlFileEntryModelImpl.getOriginalGroupId())
+				dlFileEntryModelImpl.getUuid(),
+				new Long(dlFileEntryModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_N,
 			new Object[] {
-				new Long(dlFileEntryModelImpl.getOriginalGroupId()),
-				new Long(dlFileEntryModelImpl.getOriginalFolderId()),
+				new Long(dlFileEntryModelImpl.getGroupId()),
+				new Long(dlFileEntryModelImpl.getFolderId()),
 				
-			dlFileEntryModelImpl.getOriginalName()
+			dlFileEntryModelImpl.getName()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F_T,
 			new Object[] {
-				new Long(dlFileEntryModelImpl.getOriginalGroupId()),
-				new Long(dlFileEntryModelImpl.getOriginalFolderId()),
+				new Long(dlFileEntryModelImpl.getGroupId()),
+				new Long(dlFileEntryModelImpl.getFolderId()),
 				
-			dlFileEntryModelImpl.getOriginalTitle()
+			dlFileEntryModelImpl.getTitle()
 			});
 
 		EntityCacheUtil.removeResult(DLFileEntryModelImpl.ENTITY_CACHE_ENABLED,

@@ -347,16 +347,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				dlFolderModelImpl.getOriginalUuid(),
-				new Long(dlFolderModelImpl.getOriginalGroupId())
+				dlFolderModelImpl.getUuid(),
+				new Long(dlFolderModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(dlFolderModelImpl.getOriginalGroupId()),
-				new Long(dlFolderModelImpl.getOriginalParentFolderId()),
+				new Long(dlFolderModelImpl.getGroupId()),
+				new Long(dlFolderModelImpl.getParentFolderId()),
 				
-			dlFolderModelImpl.getOriginalName()
+			dlFolderModelImpl.getName()
 			});
 
 		EntityCacheUtil.removeResult(DLFolderModelImpl.ENTITY_CACHE_ENABLED,

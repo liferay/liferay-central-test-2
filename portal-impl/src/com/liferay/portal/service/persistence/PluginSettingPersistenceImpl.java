@@ -279,11 +279,11 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
 			new Object[] {
-				new Long(pluginSettingModelImpl.getOriginalCompanyId()),
+				new Long(pluginSettingModelImpl.getCompanyId()),
 				
-			pluginSettingModelImpl.getOriginalPluginId(),
+			pluginSettingModelImpl.getPluginId(),
 				
-			pluginSettingModelImpl.getOriginalPluginType()
+			pluginSettingModelImpl.getPluginType()
 			});
 
 		EntityCacheUtil.removeResult(PluginSettingModelImpl.ENTITY_CACHE_ENABLED,

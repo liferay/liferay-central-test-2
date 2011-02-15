@@ -317,8 +317,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				bookmarksEntryModelImpl.getOriginalUuid(),
-				new Long(bookmarksEntryModelImpl.getOriginalGroupId())
+				bookmarksEntryModelImpl.getUuid(),
+				new Long(bookmarksEntryModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,

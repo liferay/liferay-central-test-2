@@ -270,11 +270,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		LockModelImpl lockModelImpl = (LockModelImpl)lock;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_K,
-			new Object[] {
-				lockModelImpl.getOriginalClassName(),
-				
-			lockModelImpl.getOriginalKey()
-			});
+			new Object[] { lockModelImpl.getClassName(), lockModelImpl.getKey() });
 
 		EntityCacheUtil.removeResult(LockModelImpl.ENTITY_CACHE_ENABLED,
 			LockImpl.class, lock.getPrimaryKey());

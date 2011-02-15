@@ -376,21 +376,21 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				igImageModelImpl.getOriginalUuid(),
-				new Long(igImageModelImpl.getOriginalGroupId())
+				igImageModelImpl.getUuid(),
+				new Long(igImageModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-			new Object[] { new Long(igImageModelImpl.getOriginalSmallImageId()) });
+			new Object[] { new Long(igImageModelImpl.getSmallImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-			new Object[] { new Long(igImageModelImpl.getOriginalLargeImageId()) });
+			new Object[] { new Long(igImageModelImpl.getLargeImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
-			new Object[] { new Long(igImageModelImpl.getOriginalCustom1ImageId()) });
+			new Object[] { new Long(igImageModelImpl.getCustom1ImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
-			new Object[] { new Long(igImageModelImpl.getOriginalCustom2ImageId()) });
+			new Object[] { new Long(igImageModelImpl.getCustom2ImageId()) });
 
 		EntityCacheUtil.removeResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageImpl.class, igImage.getPrimaryKey());

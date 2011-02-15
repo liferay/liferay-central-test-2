@@ -276,13 +276,13 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		CompanyModelImpl companyModelImpl = (CompanyModelImpl)company;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_WEBID,
-			new Object[] { companyModelImpl.getOriginalWebId() });
+			new Object[] { companyModelImpl.getWebId() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_MX,
-			new Object[] { companyModelImpl.getOriginalMx() });
+			new Object[] { companyModelImpl.getMx() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LOGOID,
-			new Object[] { new Long(companyModelImpl.getOriginalLogoId()) });
+			new Object[] { new Long(companyModelImpl.getLogoId()) });
 
 		EntityCacheUtil.removeResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyImpl.class, company.getPrimaryKey());

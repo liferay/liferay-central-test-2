@@ -305,10 +305,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C,
 			new Object[] {
-				new Long(subscriptionModelImpl.getOriginalCompanyId()),
-				new Long(subscriptionModelImpl.getOriginalUserId()),
-				new Long(subscriptionModelImpl.getOriginalClassNameId()),
-				new Long(subscriptionModelImpl.getOriginalClassPK())
+				new Long(subscriptionModelImpl.getCompanyId()),
+				new Long(subscriptionModelImpl.getUserId()),
+				new Long(subscriptionModelImpl.getClassNameId()),
+				new Long(subscriptionModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,

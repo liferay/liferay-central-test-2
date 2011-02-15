@@ -269,9 +269,9 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_M,
 			new Object[] {
-				new Long(repositoryEntryModelImpl.getOriginalRepositoryId()),
+				new Long(repositoryEntryModelImpl.getRepositoryId()),
 				
-			repositoryEntryModelImpl.getOriginalMappedId()
+			repositoryEntryModelImpl.getMappedId()
 			});
 
 		EntityCacheUtil.removeResult(RepositoryEntryModelImpl.ENTITY_CACHE_ENABLED,

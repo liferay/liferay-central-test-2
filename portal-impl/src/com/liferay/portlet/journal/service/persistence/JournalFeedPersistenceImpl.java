@@ -307,15 +307,15 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				journalFeedModelImpl.getOriginalUuid(),
-				new Long(journalFeedModelImpl.getOriginalGroupId())
+				journalFeedModelImpl.getUuid(),
+				new Long(journalFeedModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F,
 			new Object[] {
-				new Long(journalFeedModelImpl.getOriginalGroupId()),
+				new Long(journalFeedModelImpl.getGroupId()),
 				
-			journalFeedModelImpl.getOriginalFeedId()
+			journalFeedModelImpl.getFeedId()
 			});
 
 		EntityCacheUtil.removeResult(JournalFeedModelImpl.ENTITY_CACHE_ENABLED,

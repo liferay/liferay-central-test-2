@@ -409,26 +409,26 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				layoutModelImpl.getOriginalUuid(),
-				new Long(layoutModelImpl.getOriginalGroupId())
+				layoutModelImpl.getUuid(),
+				new Long(layoutModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-			new Object[] { new Long(layoutModelImpl.getOriginalIconImageId()) });
+			new Object[] { new Long(layoutModelImpl.getIconImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L,
 			new Object[] {
-				new Long(layoutModelImpl.getOriginalGroupId()),
-				Boolean.valueOf(layoutModelImpl.getOriginalPrivateLayout()),
-				new Long(layoutModelImpl.getOriginalLayoutId())
+				new Long(layoutModelImpl.getGroupId()),
+				Boolean.valueOf(layoutModelImpl.getPrivateLayout()),
+				new Long(layoutModelImpl.getLayoutId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_F,
 			new Object[] {
-				new Long(layoutModelImpl.getOriginalGroupId()),
-				Boolean.valueOf(layoutModelImpl.getOriginalPrivateLayout()),
+				new Long(layoutModelImpl.getGroupId()),
+				Boolean.valueOf(layoutModelImpl.getPrivateLayout()),
 				
-			layoutModelImpl.getOriginalFriendlyURL()
+			layoutModelImpl.getFriendlyURL()
 			});
 
 		EntityCacheUtil.removeResult(LayoutModelImpl.ENTITY_CACHE_ENABLED,

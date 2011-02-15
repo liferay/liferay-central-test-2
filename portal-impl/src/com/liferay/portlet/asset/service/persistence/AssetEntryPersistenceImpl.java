@@ -328,15 +328,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
 			new Object[] {
-				new Long(assetEntryModelImpl.getOriginalGroupId()),
+				new Long(assetEntryModelImpl.getGroupId()),
 				
-			assetEntryModelImpl.getOriginalClassUuid()
+			assetEntryModelImpl.getClassUuid()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(assetEntryModelImpl.getOriginalClassNameId()),
-				new Long(assetEntryModelImpl.getOriginalClassPK())
+				new Long(assetEntryModelImpl.getClassNameId()),
+				new Long(assetEntryModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,

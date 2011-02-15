@@ -298,8 +298,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
 			new Object[] {
-				permissionModelImpl.getOriginalActionId(),
-				new Long(permissionModelImpl.getOriginalResourceId())
+				permissionModelImpl.getActionId(),
+				new Long(permissionModelImpl.getResourceId())
 			});
 
 		EntityCacheUtil.removeResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,

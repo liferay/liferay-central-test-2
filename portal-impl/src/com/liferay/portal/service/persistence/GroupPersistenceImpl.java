@@ -455,44 +455,44 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		GroupModelImpl groupModelImpl = (GroupModelImpl)group;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LIVEGROUPID,
-			new Object[] { new Long(groupModelImpl.getOriginalLiveGroupId()) });
+			new Object[] { new Long(groupModelImpl.getLiveGroupId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(groupModelImpl.getOriginalCompanyId()),
+				new Long(groupModelImpl.getCompanyId()),
 				
-			groupModelImpl.getOriginalName()
+			groupModelImpl.getName()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_F,
 			new Object[] {
-				new Long(groupModelImpl.getOriginalCompanyId()),
+				new Long(groupModelImpl.getCompanyId()),
 				
-			groupModelImpl.getOriginalFriendlyURL()
+			groupModelImpl.getFriendlyURL()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
 			new Object[] {
-				new Long(groupModelImpl.getOriginalCompanyId()),
-				new Long(groupModelImpl.getOriginalClassNameId()),
-				new Long(groupModelImpl.getOriginalClassPK())
+				new Long(groupModelImpl.getCompanyId()),
+				new Long(groupModelImpl.getClassNameId()),
+				new Long(groupModelImpl.getClassPK())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L_N,
 			new Object[] {
-				new Long(groupModelImpl.getOriginalCompanyId()),
-				new Long(groupModelImpl.getOriginalLiveGroupId()),
+				new Long(groupModelImpl.getCompanyId()),
+				new Long(groupModelImpl.getLiveGroupId()),
 				
-			groupModelImpl.getOriginalName()
+			groupModelImpl.getName()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_L_N,
 			new Object[] {
-				new Long(groupModelImpl.getOriginalCompanyId()),
-				new Long(groupModelImpl.getOriginalClassNameId()),
-				new Long(groupModelImpl.getOriginalLiveGroupId()),
+				new Long(groupModelImpl.getCompanyId()),
+				new Long(groupModelImpl.getClassNameId()),
+				new Long(groupModelImpl.getLiveGroupId()),
 				
-			groupModelImpl.getOriginalName()
+			groupModelImpl.getName()
 			});
 
 		EntityCacheUtil.removeResult(GroupModelImpl.ENTITY_CACHE_ENABLED,

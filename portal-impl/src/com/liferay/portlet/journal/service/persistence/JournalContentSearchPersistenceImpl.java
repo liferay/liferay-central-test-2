@@ -369,14 +369,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
 			new Object[] {
-				new Long(journalContentSearchModelImpl.getOriginalGroupId()),
+				new Long(journalContentSearchModelImpl.getGroupId()),
 				Boolean.valueOf(
-					journalContentSearchModelImpl.getOriginalPrivateLayout()),
-				new Long(journalContentSearchModelImpl.getOriginalLayoutId()),
+					journalContentSearchModelImpl.getPrivateLayout()),
+				new Long(journalContentSearchModelImpl.getLayoutId()),
 				
-			journalContentSearchModelImpl.getOriginalPortletId(),
+			journalContentSearchModelImpl.getPortletId(),
 				
-			journalContentSearchModelImpl.getOriginalArticleId()
+			journalContentSearchModelImpl.getArticleId()
 			});
 
 		EntityCacheUtil.removeResult(JournalContentSearchModelImpl.ENTITY_CACHE_ENABLED,

@@ -282,8 +282,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
 			new Object[] {
-				new Long(assetTagStatsModelImpl.getOriginalTagId()),
-				new Long(assetTagStatsModelImpl.getOriginalClassNameId())
+				new Long(assetTagStatsModelImpl.getTagId()),
+				new Long(assetTagStatsModelImpl.getClassNameId())
 			});
 
 		EntityCacheUtil.removeResult(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,

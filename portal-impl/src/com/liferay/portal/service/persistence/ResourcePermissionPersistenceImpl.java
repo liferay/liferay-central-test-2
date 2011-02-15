@@ -332,13 +332,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
 			new Object[] {
-				new Long(resourcePermissionModelImpl.getOriginalCompanyId()),
+				new Long(resourcePermissionModelImpl.getCompanyId()),
 				
-			resourcePermissionModelImpl.getOriginalName(),
-				new Integer(resourcePermissionModelImpl.getOriginalScope()),
+			resourcePermissionModelImpl.getName(),
+				new Integer(resourcePermissionModelImpl.getScope()),
 				
-			resourcePermissionModelImpl.getOriginalPrimKey(),
-				new Long(resourcePermissionModelImpl.getOriginalRoleId())
+			resourcePermissionModelImpl.getPrimKey(),
+				new Long(resourcePermissionModelImpl.getRoleId())
 			});
 
 		EntityCacheUtil.removeResult(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,

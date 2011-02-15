@@ -501,15 +501,15 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				blogsEntryModelImpl.getOriginalUuid(),
-				new Long(blogsEntryModelImpl.getOriginalGroupId())
+				blogsEntryModelImpl.getUuid(),
+				new Long(blogsEntryModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT,
 			new Object[] {
-				new Long(blogsEntryModelImpl.getOriginalGroupId()),
+				new Long(blogsEntryModelImpl.getGroupId()),
 				
-			blogsEntryModelImpl.getOriginalUrlTitle()
+			blogsEntryModelImpl.getUrlTitle()
 			});
 
 		EntityCacheUtil.removeResult(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,

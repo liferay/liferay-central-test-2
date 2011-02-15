@@ -240,7 +240,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		TicketModelImpl ticketModelImpl = (TicketModelImpl)ticket;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEY,
-			new Object[] { ticketModelImpl.getOriginalKey() });
+			new Object[] { ticketModelImpl.getKey() });
 
 		EntityCacheUtil.removeResult(TicketModelImpl.ENTITY_CACHE_ENABLED,
 			TicketImpl.class, ticket.getPrimaryKey());

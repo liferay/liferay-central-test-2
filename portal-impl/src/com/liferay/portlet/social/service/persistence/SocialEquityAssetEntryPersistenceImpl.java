@@ -256,7 +256,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
 			new Object[] {
-				new Long(socialEquityAssetEntryModelImpl.getOriginalAssetEntryId())
+				new Long(socialEquityAssetEntryModelImpl.getAssetEntryId())
 			});
 
 		EntityCacheUtil.removeResult(SocialEquityAssetEntryModelImpl.ENTITY_CACHE_ENABLED,

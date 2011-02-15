@@ -386,15 +386,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R,
 			new Object[] {
-				new Long(expandoValueModelImpl.getOriginalColumnId()),
-				new Long(expandoValueModelImpl.getOriginalRowId())
+				new Long(expandoValueModelImpl.getColumnId()),
+				new Long(expandoValueModelImpl.getRowId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_C,
 			new Object[] {
-				new Long(expandoValueModelImpl.getOriginalTableId()),
-				new Long(expandoValueModelImpl.getOriginalColumnId()),
-				new Long(expandoValueModelImpl.getOriginalClassPK())
+				new Long(expandoValueModelImpl.getTableId()),
+				new Long(expandoValueModelImpl.getColumnId()),
+				new Long(expandoValueModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,

@@ -288,8 +288,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				pollsQuestionModelImpl.getOriginalUuid(),
-				new Long(pollsQuestionModelImpl.getOriginalGroupId())
+				pollsQuestionModelImpl.getUuid(),
+				new Long(pollsQuestionModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,

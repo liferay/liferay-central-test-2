@@ -276,16 +276,15 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DP,
 			new Object[] {
-				new Long(passwordPolicyModelImpl.getOriginalCompanyId()),
-				Boolean.valueOf(
-					passwordPolicyModelImpl.getOriginalDefaultPolicy())
+				new Long(passwordPolicyModelImpl.getCompanyId()),
+				Boolean.valueOf(passwordPolicyModelImpl.getDefaultPolicy())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(passwordPolicyModelImpl.getOriginalCompanyId()),
+				new Long(passwordPolicyModelImpl.getCompanyId()),
 				
-			passwordPolicyModelImpl.getOriginalName()
+			passwordPolicyModelImpl.getName()
 			});
 
 		EntityCacheUtil.removeResult(PasswordPolicyModelImpl.ENTITY_CACHE_ENABLED,

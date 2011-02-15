@@ -293,9 +293,9 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_C,
 			new Object[] {
-				new Long(workflowDefinitionLinkModelImpl.getOriginalGroupId()),
-				new Long(workflowDefinitionLinkModelImpl.getOriginalCompanyId()),
-				new Long(workflowDefinitionLinkModelImpl.getOriginalClassNameId())
+				new Long(workflowDefinitionLinkModelImpl.getGroupId()),
+				new Long(workflowDefinitionLinkModelImpl.getCompanyId()),
+				new Long(workflowDefinitionLinkModelImpl.getClassNameId())
 			});
 
 		EntityCacheUtil.removeResult(WorkflowDefinitionLinkModelImpl.ENTITY_CACHE_ENABLED,

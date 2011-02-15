@@ -278,9 +278,9 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
 			new Object[] {
-				new Long(wikiPageResourceModelImpl.getOriginalNodeId()),
+				new Long(wikiPageResourceModelImpl.getNodeId()),
 				
-			wikiPageResourceModelImpl.getOriginalTitle()
+			wikiPageResourceModelImpl.getTitle()
 			});
 
 		EntityCacheUtil.removeResult(WikiPageResourceModelImpl.ENTITY_CACHE_ENABLED,

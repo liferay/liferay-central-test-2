@@ -263,9 +263,9 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
 			new Object[] {
-				new Long(portletModelImpl.getOriginalCompanyId()),
+				new Long(portletModelImpl.getCompanyId()),
 				
-			portletModelImpl.getOriginalPortletId()
+			portletModelImpl.getPortletId()
 			});
 
 		EntityCacheUtil.removeResult(PortletModelImpl.ENTITY_CACHE_ENABLED,

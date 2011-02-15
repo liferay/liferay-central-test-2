@@ -292,11 +292,10 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(layoutSetBranchModelImpl.getOriginalGroupId()),
-				Boolean.valueOf(
-					layoutSetBranchModelImpl.getOriginalPrivateLayout()),
+				new Long(layoutSetBranchModelImpl.getGroupId()),
+				Boolean.valueOf(layoutSetBranchModelImpl.getPrivateLayout()),
 				
-			layoutSetBranchModelImpl.getOriginalName()
+			layoutSetBranchModelImpl.getName()
 			});
 
 		EntityCacheUtil.removeResult(LayoutSetBranchModelImpl.ENTITY_CACHE_ENABLED,

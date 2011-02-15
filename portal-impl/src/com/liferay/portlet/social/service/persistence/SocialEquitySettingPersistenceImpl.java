@@ -288,11 +288,11 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_T,
 			new Object[] {
-				new Long(socialEquitySettingModelImpl.getOriginalGroupId()),
-				new Long(socialEquitySettingModelImpl.getOriginalClassNameId()),
+				new Long(socialEquitySettingModelImpl.getGroupId()),
+				new Long(socialEquitySettingModelImpl.getClassNameId()),
 				
-			socialEquitySettingModelImpl.getOriginalActionId(),
-				new Integer(socialEquitySettingModelImpl.getOriginalType())
+			socialEquitySettingModelImpl.getActionId(),
+				new Integer(socialEquitySettingModelImpl.getType())
 			});
 
 		EntityCacheUtil.removeResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,

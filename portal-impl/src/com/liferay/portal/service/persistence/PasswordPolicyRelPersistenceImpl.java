@@ -292,15 +292,15 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(passwordPolicyRelModelImpl.getOriginalClassNameId()),
-				new Long(passwordPolicyRelModelImpl.getOriginalClassPK())
+				new Long(passwordPolicyRelModelImpl.getClassNameId()),
+				new Long(passwordPolicyRelModelImpl.getClassPK())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_C_C,
 			new Object[] {
-				new Long(passwordPolicyRelModelImpl.getOriginalPasswordPolicyId()),
-				new Long(passwordPolicyRelModelImpl.getOriginalClassNameId()),
-				new Long(passwordPolicyRelModelImpl.getOriginalClassPK())
+				new Long(passwordPolicyRelModelImpl.getPasswordPolicyId()),
+				new Long(passwordPolicyRelModelImpl.getClassNameId()),
+				new Long(passwordPolicyRelModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,

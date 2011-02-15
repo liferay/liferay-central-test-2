@@ -263,12 +263,12 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 		VirtualHostModelImpl virtualHostModelImpl = (VirtualHostModelImpl)virtualHost;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_HOSTNAME,
-			new Object[] { virtualHostModelImpl.getOriginalHostname() });
+			new Object[] { virtualHostModelImpl.getHostname() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L,
 			new Object[] {
-				new Long(virtualHostModelImpl.getOriginalCompanyId()),
-				new Long(virtualHostModelImpl.getOriginalLayoutSetId())
+				new Long(virtualHostModelImpl.getCompanyId()),
+				new Long(virtualHostModelImpl.getLayoutSetId())
 			});
 
 		EntityCacheUtil.removeResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,

@@ -338,16 +338,16 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				igFolderModelImpl.getOriginalUuid(),
-				new Long(igFolderModelImpl.getOriginalGroupId())
+				igFolderModelImpl.getUuid(),
+				new Long(igFolderModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(igFolderModelImpl.getOriginalGroupId()),
-				new Long(igFolderModelImpl.getOriginalParentFolderId()),
+				new Long(igFolderModelImpl.getGroupId()),
+				new Long(igFolderModelImpl.getParentFolderId()),
 				
-			igFolderModelImpl.getOriginalName()
+			igFolderModelImpl.getName()
 			});
 
 		EntityCacheUtil.removeResult(IGFolderModelImpl.ENTITY_CACHE_ENABLED,

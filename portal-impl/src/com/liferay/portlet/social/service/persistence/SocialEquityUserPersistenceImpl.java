@@ -321,8 +321,8 @@ public class SocialEquityUserPersistenceImpl extends BasePersistenceImpl<SocialE
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(socialEquityUserModelImpl.getOriginalGroupId()),
-				new Long(socialEquityUserModelImpl.getOriginalUserId())
+				new Long(socialEquityUserModelImpl.getGroupId()),
+				new Long(socialEquityUserModelImpl.getUserId())
 			});
 
 		EntityCacheUtil.removeResult(SocialEquityUserModelImpl.ENTITY_CACHE_ENABLED,
