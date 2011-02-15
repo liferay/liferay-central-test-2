@@ -16,6 +16,9 @@ package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.kernel.util.ObjectValuePair;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import java.util.Date;
@@ -117,7 +120,27 @@ public class JobState implements Cloneable, Serializable {
 		_triggerTimeInfomation.put(key, date);
 	}
 
+	private void writeObject(ObjectOutputStream outputStream)
+		throws IOException {
+
+		outputStream.writeObject(_exceptions);
+		outputStream.writeInt(_exceptionsMaxSize);
+		outputStream.writeInt(_triggerState.ordinal());
+		outputStream.writeObject(_triggerTimeInfomation);
+	}
+
+	private void readObject(ObjectInputStream inputStream)
+		throws IOException, ClassNotFoundException {
+
+		_exceptions =
+			(Queue<ObjectValuePair<Exception, Date>>)inputStream.readObject();
+		_exceptionsMaxSize = inputStream.readInt();
+		_triggerState = TriggerState.values()[inputStream.readInt()];
+		_triggerTimeInfomation = (Map<String, Date>)inputStream.readObject();
+	}
+
 	private static final int _EXCEPTIONS_MAX_SIZE = 10;
+	private static final long serialVersionUID = 5747422831990881126L;
 
 	private Queue<ObjectValuePair<Exception, Date>> _exceptions;
 	private int _exceptionsMaxSize;

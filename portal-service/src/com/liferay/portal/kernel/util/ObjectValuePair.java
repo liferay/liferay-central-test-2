@@ -72,6 +72,8 @@ public class ObjectValuePair<K, V> implements Serializable {
 		}
 	}
 
+	private static final long serialVersionUID = 6341296770402285296L;
+
 	private K _key;
 	private V _value;
 
