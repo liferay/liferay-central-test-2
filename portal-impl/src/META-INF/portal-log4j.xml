@@ -168,6 +168,22 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.events.ChannelHubAppShutdownAction">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.events.ChannelHubAppStartupAction">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.events.ChannelLoginPostAction">
+		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.events.ChannelSessionDestroyAction">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.events.EventsProcessor">
 		<priority value="ERROR" />
 	</category>

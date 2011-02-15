@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.notifications.ChannelListener;
 import com.liferay.portal.kernel.notifications.DuplicateChannelException;
 import com.liferay.portal.kernel.notifications.NotificationEvent;
 import com.liferay.portal.kernel.notifications.UnknownChannelException;
+import com.liferay.portal.model.CompanyConstants;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -36,10 +37,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author Brian Wing Shun Chan
  */
 public class ChannelHubImpl implements ChannelHub {
-
-	public ChannelHubImpl(long companyId) {
-		_companyId = companyId;
-	}
 
 	public void cleanUp() throws ChannelException {
 		Lock readLock = _readWriteLock.readLock();
@@ -63,9 +60,10 @@ public class ChannelHubImpl implements ChannelHub {
 	}
 
 	public ChannelHub clone(long companyId) {
-		ChannelHubImpl channelHubImpl = new ChannelHubImpl(companyId);
+		ChannelHubImpl channelHubImpl = new ChannelHubImpl();
 
 		channelHubImpl.setChannelPrototype(_channel);
+		channelHubImpl.setCompanyId(companyId);
 
 		return channelHubImpl;
 	}
@@ -268,6 +266,10 @@ public class ChannelHubImpl implements ChannelHub {
 		_channel = channel;
 	}
 
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
+
 	public void unregisterChannelListener(
 			long userId, ChannelListener channelListener)
 		throws ChannelException {
@@ -279,7 +281,7 @@ public class ChannelHubImpl implements ChannelHub {
 
 	private Channel _channel;
 	private Map<Long, Channel> _channels = new HashMap<Long, Channel>();
-	private long _companyId;
+	private long _companyId = CompanyConstants.SYSTEM;
 	private ReadWriteLock _readWriteLock = new ReentrantReadWriteLock();
 
 }
