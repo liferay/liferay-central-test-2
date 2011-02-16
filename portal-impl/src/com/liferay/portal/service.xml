@@ -2009,7 +2009,7 @@
 			<finder-column name="externalUserId" />
 		</finder>
 	</entity>
-    <entity name="UserNotificationEvent" uuid="true" local-service="true" remote-service="false">
+	<entity name="UserNotificationEvent" uuid="true" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -2017,28 +2017,28 @@
 
 		<!-- Audit fields -->
 
-        <column name="companyId" type="long" />
-        <column name="userId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
 
 		<!-- Other fields -->
 
 		<column name="type" type="String" />
-        <column name="timestamp" type="long" />
-        <column name="deliverBy" type="long" />
-        <column name="payload" type="String" />
+		<column name="timestamp" type="long" />
+		<column name="deliverBy" type="long" />
+		<column name="payload" type="String" />
 
 		<!-- Order -->
 
-        <order by="asc">
-            <order-column name="timestamp" />
-        </order>
+		<order by="asc">
+			<order-column name="timestamp" />
+		</order>
 
-        <!-- Finder methods -->
+		<!-- Finder methods -->
 
-        <finder name="UserId" return-type="Collection">
-            <finder-column name="userId" />
-        </finder>
-    </entity>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+	</entity>
 	<entity name="UserTracker" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
