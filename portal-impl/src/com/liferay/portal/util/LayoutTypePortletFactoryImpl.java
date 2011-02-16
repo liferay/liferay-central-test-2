@@ -14,14 +14,11 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.util.LayoutTypePortletFactory;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 
 /**
- * <a href="LayoutTypePortletFactoryImpl.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
 public class LayoutTypePortletFactoryImpl implements LayoutTypePortletFactory {

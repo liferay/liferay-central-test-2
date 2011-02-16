@@ -254,11 +254,6 @@
 			<bean class="com.liferay.portal.util.HttpImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.util.LayoutTypePortletFactoryUtil" class="com.liferay.portal.kernel.util.LayoutTypePortletFactoryUtil">
-		<property name="layoutTypePortletFactory">
-			<bean class="com.liferay.portal.util.LayoutTypePortletFactoryImpl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.kernel.util.LocalizationUtil" class="com.liferay.portal.kernel.util.LocalizationUtil">
 		<property name="localization">
 			<bean class="com.liferay.portal.util.LocalizationImpl" />
@@ -433,6 +428,11 @@
 	<bean id="com.liferay.portal.util.CustomJspRegistryUtil" class="com.liferay.portal.util.CustomJspRegistryUtil">
 		<property name="customJspRegistry">
 			<bean class="com.liferay.portal.util.CustomJspRegistryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.util.LayoutTypePortletFactoryUtil" class="com.liferay.portal.util.LayoutTypePortletFactoryUtil">
+		<property name="layoutTypePortletFactory">
+			<bean class="com.liferay.portal.util.LayoutTypePortletFactoryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.util.Portal" class="com.liferay.portal.util.PortalImpl" />

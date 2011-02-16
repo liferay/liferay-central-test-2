@@ -12,31 +12,16 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.util;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 
 /**
- * <a href="LayoutTypePortletFactoryUtil.java.html"><b><i>View Source</i></b></a>
- *
  * @author Raymond Augé
  */
-public class LayoutTypePortletFactoryUtil {
+public interface LayoutTypePortletFactory {
 
-	public static LayoutTypePortlet create(Layout layout) {
-		return getLayoutTypePortletFactory().create(layout);
-	}
-
-	public static LayoutTypePortletFactory getLayoutTypePortletFactory() {
-		return _layoutTypePortletFactory;
-	}
-
-	public void setLayoutTypePortletFactory(
-		LayoutTypePortletFactory layoutTypePortletFactory) {
-		_layoutTypePortletFactory = layoutTypePortletFactory;
-	}
-
-	private static LayoutTypePortletFactory _layoutTypePortletFactory;
+	public LayoutTypePortlet create(Layout layout);
 
 }
