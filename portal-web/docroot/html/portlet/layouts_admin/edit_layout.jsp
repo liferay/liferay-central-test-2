@@ -14,280 +14,168 @@
  */
 --%>
 
-<c:if test="<%= liveGroup.isStaged() %>">
-	<liferay-util:include page="/html/portlet/layouts_admin/staging_toolbar.jsp" />
-</c:if>
+<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
-<aui:button-row id='<%= renderResponse.getNamespace() + "communityPagesToolbar" %>'>
-	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
-		<c:if test="<%= SessionErrors.contains(renderRequest, LayoutImportException.class.getName()) || SessionErrors.contains(renderRequest, LARFileException.class.getName()) || SessionErrors.contains(renderRequest, LARTypeException.class.getName()) %>">
-			<liferay-util:html-top>
-				<div class="aui-helper-hidden" id="<portlet:namespace />importPage">
-					<liferay-util:include page="/html/portlet/layouts_admin/export_import.jsp">
-						<liferay-util:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
-						<liferay-util:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-						<liferay-util:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
-						<liferay-util:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
-						<liferay-util:param name="rootNodeName" value="<%= rootNodeName %>" />
-					</liferay-util:include>
-				</div>
-			</liferay-util:html-top>
+<%
+Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
-			<aui:script use="aui-dialog">
-				new A.Dialog(
-					{
-						bodyContent: A.one('#<portlet:namespace />importPage').show(),
-						centered: true,
-						modal: true,
-						title: '<liferay-ui:message key="import" />',
-						width: 600
-					}
-				).render();
-			</aui:script>
+Group group = (Group)request.getAttribute("edit_pages.jsp-group");
+Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
+
+long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
+long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
+long stagingGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
+
+Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
+long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
+long layoutId = ((Long)request.getAttribute("edit_pages.jsp-layoutId")).longValue();
+boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
+
+PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+
+long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
+
+//Sections
+
+String[] mainSections = PropsValues.LAYOUTS_FORM_UPDATE;
+
+String[][] categorySections = {mainSections};
+%>
+
+<div class="header-row title">
+	<div class="header-row-content">
+		<aui:button-row cssClass="edit-toolbar" id='<%= renderResponse.getNamespace() + "layoutToolbar" %>'>
+		</aui:button-row>
+	</div>
+</div>
+
+<portlet:actionURL var="editLayoutURL">
+	<portlet:param name="struts_action" value="/manage_pages/edit_layouts" />
+</portlet:actionURL>
+
+<aui:form action="<%= editLayoutURL %>" cssClass="edit-layout-form"  enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayout();" %>'>
+	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+	<aui:input name="pagesRedirect" type="hidden" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid  %>' />
+	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
+	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
+	<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
+	<aui:input name="layoutId" type="hidden" value="<%= layoutId %>" />
+	<aui:input name="selPlid" type="hidden" value="<%= selPlid %>" />
+	<aui:input name="<%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" />
+
+	<c:if test="<%= !group.isLayoutPrototype() && (selLayout != null) %>">
+		<c:if test="<%= liveGroup.isStaged() %>">
+			<liferay-util:include page="/html/portlet/layouts_admin/staging_toolbar.jsp" />
 		</c:if>
-	</c:if>
-</aui:button-row>
 
-<aui:script use="aui-dialog,aui-toolbar">
-	var communityPagesToolbar = new A.Toolbar(
-		{
-			activeState: false,
-			boundingBox: '#<portlet:namespace />communityPagesToolbar',
-			children: [
-				<c:if test="<%= (pagesCount > 0) && (liveGroup.isStaged() || selGroup.isLayoutSetPrototype() || selGroup.isStagingGroup() || portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES)) %>">
-					<liferay-portlet:actionURL plid="<%= plid %>" portletName="<%= PortletKeys.MY_PLACES %>" var="viewPagesURL">
-						<liferay-portlet:param name="struts_action" value="/my_places/view" />
-						<liferay-portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-						<liferay-portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
-					</liferay-portlet:actionURL>
+		<liferay-security:permissionsURL
+			modelResource="<%= Layout.class.getName() %>"
+			modelResourceDescription="<%= selLayout.getName(locale) %>"
+			resourcePrimKey="<%= String.valueOf(selLayout.getPlid()) %>"
+			var="permissionURL"
+		/>
 
-					{
-						handler: function(event) {
-							var groupWindow = window.open('<%= viewPagesURL %>');
+		<aui:script use="aui-dialog,aui-dialog-iframe">
+			var buttonRow = A.one('#<portlet:namespace />layoutToolbar');
 
-							void('');
+			var layoutToolbar = new A.Toolbar(
+				{
+					activeState: false,
+					boundingBox: buttonRow,
+					children: [
+						{
+							handler: function(event) {
+								var content = A.one('#<portlet:namespace />addLayout');
 
-							groupWindow.focus();
-						},
-						icon: 'search',
-						label: '<liferay-ui:message key="view-pages" />'
-
-						<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
+								var popup = new A.Dialog(
+									{
+										bodyContent: content.show(),
+										centered: true,
+										title: '<liferay-ui:message key="add-child-page" />',
+										modal: true,
+										width: 500
+									}
+								).render();
 							},
-							{
-								type: 'ToolbarSpacer'
-						</c:if>
-					},
-				</c:if>
-
-				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
-					{
-						handler: function(event) {
-							var exportPopup = new A.Dialog(
-								{
-									centered: true,
-									constrain: true,
-									modal: true,
-									title: '<liferay-ui:message key="export" />',
-									width: 600
-								}
-							).render();
-
-							<portlet:renderURL var="exportPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-								<portlet:param name="struts_action" value="/layouts_admin/export_layouts" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
-								<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-								<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
-								<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
-							</portlet:renderURL>
-
-							exportPopup.plug(
-								A.Plugin.IO,
-								{
-									after: {
-										success: function() {
-											exportPopup.centered();
-										}
-									},
-									uri: '<%= exportPagesURL.toString() %>'
-								}
-							);
+							icon: 'circle-plus',
+							label: '<liferay-ui:message key="add-child-page" />'
 						},
-						icon: 'arrowthick-1-b',
-						label: '<liferay-ui:message key="export" />'
-					},
-					{
-						handler: function(event) {
-							var importPopup = new A.Dialog(
-								{
-									centered: true,
-									constrain: true,
-									modal: true,
-									title: '<liferay-ui:message key="import" />',
-									width: 600
-								}
-							).render();
+						{
+							handler: function(event) {
+								permissionPopUp = new A.Dialog(
+									{
+										centered: true,
+										modal: true,
+										title: '<liferay-ui:message key="permissions" />',
+										width: 700
+									}
+								).plug(
+									A.Plugin.DialogIframe,
+									{
+										after: {
+											load: Liferay.Util.afterIframeLoaded
+										},
+										uri: '<%= permissionURL %>'
+									}
+								).render();
 
-							<portlet:renderURL var="importPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-								<portlet:param name="struts_action" value="/layouts_admin/import_layouts" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
-								<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-								<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
-								<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="redirectWindowState" value="<%= renderRequest.getWindowState().toString() %>" />
-								<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
-							</portlet:renderURL>
+								permissionPopUp.centered();
 
-							importPopup.plug(
-								A.LoadingMask,
-								{
-									background: '#000'
-								}
-							);
-
-							importPopup.plug(
-								A.Plugin.IO,
-								{
-									after: {
-										success: function() {
-											importPopup.centered();
-
-											var form =  importPopup.get('contentBox').one('#<portlet:namespace />fm1');
-
-											form.on(
-												'submit',
-												function(event) {
-													importPopup.loadingmask.show();
-												}
-											);
-										}
-									},
-									uri: '<%= importPagesURL.toString() %>'
-								}
-							);
+							},
+							icon: 'key',
+							label: '<liferay-ui:message key="permissions" />'
 						},
-						icon: 'arrowthick-1-t',
-						label: '<liferay-ui:message key="import" />'
-					}
-				</c:if>
-			]
+						{
+							handler: function(event) {
+								<c:choose>
+									<c:when test="<%= (selPlid == themeDisplay.getPlid()) || (selPlid == refererPlid) %>">
+										alert('<%= UnicodeLanguageUtil.get(pageContext, "you-cannot-delete-this-page-because-you-are-currently-accessing-this-page") %>');
+									</c:when>
+									<c:otherwise>
+										if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
+											document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+											document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selLayout.getParentPlid() %>";
+											submitForm(document.<portlet:namespace />fm);
+										}
+									</c:otherwise>
+								</c:choose>
+							},
+							icon: 'circle-minus',
+							label: '<liferay-ui:message key="delete" />'
+						}
+					]
+				}
+			).render();
+
+			buttonRow.setData('layoutToolbar', layoutToolbar);
+		</aui:script>
+	</c:if>
+
+	<liferay-ui:form-navigator
+		categoryNames="<%= _CATEGORY_NAMES %>"
+		categorySections="<%= categorySections %>"
+		jspPath="/html/portlet/layouts_admin/layout/"
+	/>
+</aui:form>
+
+<liferay-util:html-top>
+	<liferay-util:include page="/html/portlet/layouts_admin/add_layout.jsp" />
+</liferay-util:html-top>
+
+<aui:script>
+	function <portlet:namespace />saveLayout(action) {
+		if (action) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = action;
 		}
-	).render();
+		else {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "update";
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
 </aui:script>
 
-<table class="lfr-table" width="100%">
-<tr>
-	<c:if test="<%= !group.isLayoutPrototype() %>">
-		<td class="lfr-top">
-			<liferay-util:include page="/html/portlet/layouts_admin/tree_js.jsp">
-				<liferay-util:param name="treeId" value="layoutsTree" />
-			</liferay-util:include>
-		</td>
-	</c:if>
-	<td class="lfr-top" width="75%">
-
-		<%
-		PortletURL breadcrumbURL = PortletURLUtil.clone(portletURL, renderResponse);
-		%>
-
-		<c:if test="<%= !group.isLayoutPrototype() && (selLayout != null) %>">
-			<liferay-ui:header
-				title="<%= selLayout.getName(locale) %>"
-			/>
-		</c:if>
-
-		<%
-		String tabs3Names = "page";
-
-		if (!group.isLayoutPrototype()) {
-			tabs3Names += ",children";
-		}
-
-		if ((selLayout != null) && (permissionChecker.isOmniadmin() || PropsValues.LOOK_AND_FEEL_MODIFIABLE)) {
-			tabs3Names += ",look-and-feel";
-		}
-
-		if ((selLayout != null) && !PortalUtil.isLayoutParentable(selLayout)) {
-			tabs3Names = StringUtil.replace(tabs3Names, "children,", StringPool.BLANK);
-		}
-
-		if (!StringUtil.contains(tabs3Names, tabs3)) {
-			if (selLayout == null) {
-				tabs3 = "children";
-			}
-			else {
-				tabs3 = "page";
-			}
-		}
-
-		PortletURL tabs3PortletURL = PortletURLUtil.clone(portletURL, renderResponse);
-
-		tabs3PortletURL.setParameter("tabs4", "");
-		%>
-
-		<c:if test="<%= (selLayout != null) %>">
-			<liferay-ui:tabs
-				names="<%= tabs3Names %>"
-				param="tabs3"
-				url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
-			/>
-		</c:if>
-
-		<liferay-ui:error exception="<%= LayoutHiddenException.class %>" message="your-first-page-must-not-be-hidden" />
-		<liferay-ui:error exception="<%= LayoutNameException.class %>" message="please-enter-a-valid-name" />
-
-		<liferay-ui:error exception="<%= LayoutParentLayoutIdException.class %>">
-
-			<%
-			LayoutParentLayoutIdException lplide = (LayoutParentLayoutIdException)errorException;
-			%>
-
-			<c:if test="<%= lplide.getType() == LayoutParentLayoutIdException.NOT_PARENTABLE %>">
-				<liferay-ui:message key="a-page-cannot-become-a-child-of-a-page-that-is-not-parentable" />
-			</c:if>
-
-			<c:if test="<%= lplide.getType() == LayoutParentLayoutIdException.SELF_DESCENDANT %>">
-				<liferay-ui:message key="a-page-cannot-become-a-child-of-itself" />
-			</c:if>
-
-			<c:if test="<%= lplide.getType() == LayoutParentLayoutIdException.FIRST_LAYOUT_TYPE %>">
-				<liferay-ui:message key="the-resulting-first-page-must-have-one-of-the-following-types" />: <%= PortalUtil.getFirstPageLayoutTypes(pageContext) %>
-			</c:if>
-
-			<c:if test="<%= lplide.getType() == LayoutParentLayoutIdException.FIRST_LAYOUT_HIDDEN %>">
-				<liferay-ui:message key="the-resulting-first-page-must-not-be-hidden" />
-			</c:if>
-		</liferay-ui:error>
-
-		<liferay-ui:error exception="<%= LayoutTypeException.class %>">
-
-			<%
-			LayoutTypeException lte = (LayoutTypeException)errorException;
-			%>
-
-			<c:if test="<%= lte.getType() == LayoutTypeException.NOT_PARENTABLE %>">
-				<liferay-ui:message key="your-type-must-allow-children-pages" />
-			</c:if>
-
-			<c:if test="<%= lte.getType() == LayoutTypeException.FIRST_LAYOUT %>">
-				<liferay-ui:message key="your-first-page-must-have-one-of-the-following-types" />: <%= PortalUtil.getFirstPageLayoutTypes(pageContext) %>
-			</c:if>
-		</liferay-ui:error>
-
-		<c:choose>
-			<c:when test='<%= tabs3.equals("page") %>'>
-				<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_page.jsp" />
-			</c:when>
-			<c:when test='<%= tabs3.equals("children") %>'>
-				<liferay-util:include page="/html/portlet/layouts_admin/edit_pages_children.jsp" />
-			</c:when>
-			<c:when test='<%= tabs3.equals("look-and-feel") %>'>
-				<liferay-util:include page="/html/portlet/layouts_admin/look_and_feel.jsp" />
-			</c:when>
-		</c:choose>
-	</td>
-</tr>
-</table>
+<%!
+private static String[] _CATEGORY_NAMES = {""};
+%>

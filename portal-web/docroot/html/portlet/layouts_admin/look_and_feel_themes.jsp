@@ -14,131 +14,156 @@
  */
 --%>
 
+<%@ include file="/html/portlet/layouts_admin/init.jsp" %>
+
 <%
-List<ColorScheme> colorSchemes = selTheme.getColorSchemes();
+List<Theme> themes = (List<Theme>)request.getAttribute("edit_pages.jsp-themes");
+List<ColorScheme> colorSchemes = (List<ColorScheme>)request.getAttribute("edit_pages.jsp-colorSchemes");
+
+Theme selTheme = (Theme)request.getAttribute("edit_pages.jsp-selTheme");
+ColorScheme selColorScheme = (ColorScheme)request.getAttribute("edit_pages.jsp-selColorScheme");
 
 PluginPackage selPluginPackage = selTheme.getPluginPackage();
-%>
+String device = (String)request.getAttribute("edit_pages.jsp-device");
 
-<aui:input name="themeId" type="hidden" value="<%= selTheme.getThemeId() %>" />
-<aui:input name="colorSchemeId" type="hidden" value="<%= selColorScheme.getColorSchemeId() %>" />
+boolean editable = (Boolean)request.getAttribute("edit_pages.jsp-editable");
+%>
 
 <div class="lfr-theme-list">
 	<div class="float-container lfr-current-theme">
 		<h3><liferay-ui:message key="current-theme" /></h3>
 
-		<img alt="<%= selTheme.getName() %>" class="theme-screenshot" src="<%= selTheme.getStaticResourcePath() %><%= selTheme.getImagesPath() %>/thumbnail.png" title="<%= selTheme.getName() %>" />
+		<div>
+			<img alt="<%= selTheme.getName() %>" class="theme-screenshot" onclick="document.getElementById('<portlet:namespace /><%= device %>SelTheme').checked = true;" src="<%= selTheme.getStaticResourcePath() %><%= selTheme.getImagesPath() %>/thumbnail.png" title="<%= selTheme.getName() %>" />
 
-		<div class="theme-details">
-			<h4 class="theme-title"><%= selTheme.getName() %></h4>
+			<div class="theme-details">
+				<c:choose>
+					<c:when test="<%= editable %>">
+						<aui:input checked="<%= true %>" cssClass="theme-title" id='<%= device + "SelTheme" %>' label="<%= selTheme.getName() %>" name='<%= device + "ThemeId" %>' type="radio" value="<%= selTheme.getThemeId() %>" />
+					</c:when>
+					<c:otherwise>
+						<div class="theme-title"><%= selTheme.getName() %></div>
+					</c:otherwise>
+				</c:choose>
 
-			<dl>
-				<c:if test="<%= Validator.isNotNull(selPluginPackage.getShortDescription()) %>">
-					<dt>
-						<liferay-ui:message key="description" />
-					</dt>
-					<dd>
-						<%= selPluginPackage.getShortDescription() %>
-					</dd>
-				</c:if>
+				<dl>
+					<c:if test="<%= Validator.isNotNull(selPluginPackage.getShortDescription()) %>">
+						<c:choose>
+							<c:when test="<%= editable %>">
+								<dt>
+									<liferay-ui:message key="description" />
+								</dt>
+								<dd>
+									<%= selPluginPackage.getShortDescription() %>
+								</dd>
+							</c:when>
+							<c:otherwise>
+								<%= selPluginPackage.getShortDescription() %>
+							</c:otherwise>
+						</c:choose>
+					</c:if>
 
-				<c:if test="<%= Validator.isNotNull(selPluginPackage.getAuthor()) %>">
-					<dt>
-						<liferay-ui:message key="author" />
-					</dt>
-					<dd>
-						<a href="<%= selPluginPackage.getPageURL() %>"><%= selPluginPackage.getAuthor() %></a>
-					</dd>
-				</c:if>
-			</dl>
+					<c:if test="<%= editable && Validator.isNotNull(selPluginPackage.getAuthor()) %>">
+						<dt>
+							<liferay-ui:message key="author" />
+						</dt>
+						<dd>
+							<a href="<%= selPluginPackage.getPageURL() %>"><%= selPluginPackage.getAuthor() %></a>
+						</dd>
+					</c:if>
 
-			<c:if test="<%= !colorSchemes.isEmpty() %>">
-				<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="communitiesColorSchemesPanel" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>'>
-					<ul class="lfr-component lfr-theme-list">
-
-						<%
-						Iterator<ColorScheme> itr = colorSchemes.iterator();
-
-						while (itr.hasNext()) {
-							ColorScheme curColorScheme = itr.next();
-
-							String cssClass = StringPool.BLANK;
-
-							if (selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId())) {
-								cssClass = "selected-color-scheme";
-							}
-						%>
-
-							<li class="<%= cssClass %>">
-								<a class="theme-entry" href="javascript:<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= curColorScheme.getColorSchemeId() %>', '');">
-									<span class="theme-title">
-										<%= curColorScheme.getName() %>
-									</span>
-
-									<img alt="<%= curColorScheme.getName() %>" class="theme-thumbnail" src="<%= selTheme.getStaticResourcePath() %><%= curColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
-								</a>
-							</li>
-
-						<%
-						}
-						%>
-
-					</ul>
-				</liferay-ui:panel>
-			</c:if>
+					<c:if test="<%= !editable && !colorSchemes.isEmpty() && Validator.isNotNull(selColorScheme) %>">
+						<dt class="current-color-scheme">
+							<liferay-ui:message key="color-scheme" />
+						</dt>
+						<dd>
+							<%= selColorScheme.getName() %>
+						</dd>
+					</c:if>
+				</dl>
+			</div>
 		</div>
-	</div>
 
-	<div class="float-container lfr-available-themes">
-		<h3>
-			<span class="header-title">
-				<%= LanguageUtil.format(pageContext, "available-themes-x", (themes.size() - 1)) %>
-			</span>
+		<c:if test="<%= editable && !colorSchemes.isEmpty() %>">
+			<div class="color-schemes">
+				<liferay-ui:panel-container extended="<%= true %>" id="communitiesColorSchemesPanelContainer" persistState="<%= true %>">
+					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="communitiesColorSchemesPanel" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>'>
+						<div class="lfr-component lfr-theme-list">
 
-			<c:if test="<%= permissionChecker.isOmniadmin() && PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED) %>">
+							<%
+							for (int i = 0; i < colorSchemes.size(); i++) {
+								ColorScheme curColorScheme = colorSchemes.get(i);
 
-				<%
-				PortletURL installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+								String cssClass = StringPool.BLANK;
 
-				installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
-				installPluginsURL.setParameter("backURL", currentURL);
-				installPluginsURL.setParameter("tabs2", "theme-plugins");
-				%>
+								if (selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId())) {
+									cssClass = "selected-color-scheme";
+								}
+							%>
 
-				<span class="install-themes">
-					<a href="<%= installPluginsURL %>"><liferay-ui:message key="install-more" /></a>
-				</span>
-			</c:if>
-		</h3>
+							<div class="<%= cssClass %> theme-entry">
+								<img alt="" class="theme-thumbnail" onclick="document.getElementById('<portlet:namespace /><%= device %>ColorSchemeId<%= i %>').checked = true;" src="<%= selTheme.getStaticResourcePath() %><%= curColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
 
-		<c:if test="<%= themes.size() > 1 %>">
-			<ul class="lfr-component lfr-theme-list">
+								<aui:input checked="<%= selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId()) %>" id='<%= device + "ColorSchemeId" + i %>' label="<%= curColorScheme.getName() %>" name='<%= device + "ColorSchemeId" %>' type="radio" value="<%= curColorScheme.getColorSchemeId() %>" />
+							</div>
 
-				<%
-				Iterator<Theme> itr = themes.iterator();
+							<%
+							}
+							%>
 
-				while (itr.hasNext()) {
-					Theme curTheme = itr.next();
-
-					if (!selTheme.getThemeId().equals(curTheme.getThemeId())) {
-				%>
-
-						<li>
-							<a class="theme-entry" href="javascript:<portlet:namespace />updateLookAndFeel('<%= curTheme.getThemeId() %>', '');">
-								<span class="theme-title">
-									<%= curTheme.getName() %>
-								</span>
-
-								<img alt="<%= curTheme.getName() %>" class="theme-thumbnail" src="<%= curTheme.getStaticResourcePath() %><%= curTheme.getImagesPath() %>/thumbnail.png" title="<%= curTheme.getName() %>" />
-							</a>
-						</li>
-
-				<%
-					}
-				}
-				%>
-
-			</ul>
+						</div>
+					</liferay-ui:panel>
+				</liferay-ui:panel-container>
+			</div>
 		</c:if>
 	</div>
+
+	<c:if test="<%= editable %>">
+		<div class="float-container lfr-available-themes">
+			<h3>
+				<span class="header-title">
+					<%= LanguageUtil.format(pageContext, "available-themes-x", (themes.size() - 1)) %>
+				</span>
+
+				<c:if test="<%= permissionChecker.isOmniadmin() && PrefsPropsUtil.getBoolean(PropsKeys.AUTO_DEPLOY_ENABLED, PropsValues.AUTO_DEPLOY_ENABLED) %>">
+
+					<%
+					PortletURL installPluginsURL = ((RenderResponseImpl)renderResponse).createRenderURL(PortletKeys.PLUGIN_INSTALLER);
+
+					installPluginsURL.setParameter("struts_action", "/plugin_installer/view");
+					installPluginsURL.setParameter("backURL", currentURL);
+					installPluginsURL.setParameter("tabs2", "theme-plugins");
+					%>
+
+					<span class="install-themes">
+						<a href="<%= installPluginsURL %>"><liferay-ui:message key="install-more" /></a>
+					</span>
+				</c:if>
+			</h3>
+
+			<c:if test="<%= themes.size() > 1 %>">
+				<ul class="lfr-component lfr-theme-list">
+
+					<%
+					for (int i = 0; i < themes.size(); i++) {
+						Theme curTheme = themes.get(i);
+
+						if (!selTheme.getThemeId().equals(curTheme.getThemeId())) {
+					%>
+
+							<div class="theme-entry">
+								<img alt="" class="theme-thumbnail" onclick="document.getElementById('<portlet:namespace /><%= device %>ThemeId<%= i %>').checked = true;" src="<%= curTheme.getStaticResourcePath() %><%= curTheme.getImagesPath() %>/thumbnail.png" title="<%= curTheme.getName() %>" />
+
+								<aui:input id='<%= device + "ThemeId" + i %>' label="<%= curTheme.getName() %>" name='<%= device + "ThemeId" %>' type="radio" value="<%= curTheme.getThemeId() %>" />
+							</div>
+
+					<%
+						}
+					}
+					%>
+
+				</ul>
+			</c:if>
+		</div>
+	</c:if>
 </div>

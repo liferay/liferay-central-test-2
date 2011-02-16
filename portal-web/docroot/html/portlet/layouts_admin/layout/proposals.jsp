@@ -17,6 +17,18 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
+Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
+
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
+%>
+
+<liferay-ui:error-marker key="errorSection" value="proposals" />
+
+<aui:model-context bean="<%= selLayout %>" model="<%= Layout.class %>" />
+
+<h3><liferay-ui:message key="proposals" /></h3>
+
+<%
 long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
@@ -24,7 +36,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("name");
-headerNames.add("type");
 headerNames.add("id");
 headerNames.add("user");
 headerNames.add("due-date");
@@ -71,12 +82,6 @@ for (int i = 0; i < results.size(); i++) {
 	// Name
 
 	row.addText(proposal.getName().concat("<br />").concat(proposal.getDescription()), rowURL);
-
-	// Type
-
-	String className = PortalUtil.getClassName(proposal.getClassNameId());
-
-	row.addText(LanguageUtil.get(pageContext, "model.resource." + className), rowURL);
 
 	// ID
 

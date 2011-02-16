@@ -16,8 +16,6 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<aui:button name="copyPortletsButton" value="copy-portlets-from-page" />
-
 <div id="<portlet:namespace />copyPortletsFromPage" class="aui-helper-hidden">
 	<p>
 		<liferay-ui:message key="the-portlets-in-page-x-will-be-replaced-with-the-portlets-in-the-page-you-select-below" arguments="<%= HtmlUtil.escape(selLayout.getName(locale)) %>" />
@@ -77,25 +75,20 @@
 </div>
 
 <aui:script use="aui-dialog">
-	var button = A.one('#<portlet:namespace />copyPortletsButton');
-
-	if (button) {
-		button.on(
-			'click',
-			function(event) {
+	var button = new A.ButtonItem(
+		{
+			handler:function(event) {
 				var content = A.one('#<portlet:namespace />copyPortletsFromPage');
 
 				var popup = new A.Dialog(
 					{
-						bodyContent: content,
+						bodyContent: content.show(),
 						centered: true,
 						title: '<liferay-ui:message key="copy-portlets-from-page" />',
 						modal: true,
 						width: 500
 					}
 				).render();
-
-				content.show();
 
 				var submitButton = popup.get('contentBox').one('#<portlet:namespace />copySubmitButton');
 
@@ -111,13 +104,35 @@
 								form.append(content);
 							}
 
-							<portlet:namespace />savePage();
+							<portlet:namespace />saveLayout();
 						}
 					);
 				}
+			},
+			icon: 'copy',
+			label: '<liferay-ui:message key="copy-portlets-from-page" />',
+		}
+	);
 
-				event.preventDefault();
-			}
-		);
+	var buttonRow = A.one('#<portlet:namespace />layoutToolbar');
+
+	if (buttonRow) {
+		var layoutToolbar = buttonRow.getData('layoutToolbar');
+
+		if (layoutToolbar) {
+			layoutToolbar.add(button);
+		}
 	}
+
+	Liferay.on(
+		'<portlet:namespace />toggleLayoutTypeFields',
+		function(event) {
+			if (event.type == 'portlet') {
+				button.show();
+			}
+			else {
+				button.hide();
+			}
+		}
+	);
 </aui:script>
