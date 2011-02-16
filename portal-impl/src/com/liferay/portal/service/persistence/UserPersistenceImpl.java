@@ -217,37 +217,42 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			UserImpl.class, user.getPrimaryKey(), user);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONTACTID,
-			new Object[] { new Long(user.getContactId()) }, user);
+			new Object[] { Long.valueOf(user.getContactId()) }, user);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTRAITID,
-			new Object[] { new Long(user.getPortraitId()) }, user);
+			new Object[] { Long.valueOf(user.getPortraitId()) }, user);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U,
 			new Object[] {
-				new Long(user.getCompanyId()), new Long(user.getUserId())
+				Long.valueOf(user.getCompanyId()),
+				Long.valueOf(user.getUserId())
 			}, user);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DU,
 			new Object[] {
-				new Long(user.getCompanyId()),
+				Long.valueOf(user.getCompanyId()),
 				Boolean.valueOf(user.getDefaultUser())
 			}, user);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_SN,
-			new Object[] { new Long(user.getCompanyId()), user.getScreenName() },
+			new Object[] { Long.valueOf(user.getCompanyId()), user.getScreenName() },
 			user);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_EA,
-			new Object[] { new Long(user.getCompanyId()), user.getEmailAddress() },
-			user);
+			new Object[] {
+				Long.valueOf(user.getCompanyId()),
+				
+			user.getEmailAddress()
+			}, user);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
 			new Object[] {
-				new Long(user.getCompanyId()), new Long(user.getFacebookId())
+				Long.valueOf(user.getCompanyId()),
+				Long.valueOf(user.getFacebookId())
 			}, user);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_O,
-			new Object[] { new Long(user.getCompanyId()), user.getOpenId() },
+			new Object[] { Long.valueOf(user.getCompanyId()), user.getOpenId() },
 			user);
 	}
 
@@ -291,35 +296,41 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			UserImpl.class, user.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONTACTID,
-			new Object[] { new Long(user.getContactId()) });
+			new Object[] { Long.valueOf(user.getContactId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTRAITID,
-			new Object[] { new Long(user.getPortraitId()) });
+			new Object[] { Long.valueOf(user.getPortraitId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U,
 			new Object[] {
-				new Long(user.getCompanyId()), new Long(user.getUserId())
+				Long.valueOf(user.getCompanyId()),
+				Long.valueOf(user.getUserId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DU,
 			new Object[] {
-				new Long(user.getCompanyId()),
+				Long.valueOf(user.getCompanyId()),
 				Boolean.valueOf(user.getDefaultUser())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_SN,
-			new Object[] { new Long(user.getCompanyId()), user.getScreenName() });
+			new Object[] { Long.valueOf(user.getCompanyId()), user.getScreenName() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_EA,
-			new Object[] { new Long(user.getCompanyId()), user.getEmailAddress() });
+			new Object[] {
+				Long.valueOf(user.getCompanyId()),
+				
+			user.getEmailAddress()
+			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_FID,
 			new Object[] {
-				new Long(user.getCompanyId()), new Long(user.getFacebookId())
+				Long.valueOf(user.getCompanyId()),
+				Long.valueOf(user.getFacebookId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_O,
-			new Object[] { new Long(user.getCompanyId()), user.getOpenId() });
+			new Object[] { Long.valueOf(user.getCompanyId()), user.getOpenId() });
 	}
 
 	/**
@@ -368,7 +379,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		try {
 			session = openSession();
 
-			User user = (User)session.get(UserImpl.class, new Long(userId));
+			User user = (User)session.get(UserImpl.class, Long.valueOf(userId));
 
 			if (user == null) {
 				if (_log.isWarnEnabled()) {
@@ -485,46 +496,46 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		UserModelImpl userModelImpl = (UserModelImpl)user;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONTACTID,
-			new Object[] { new Long(userModelImpl.getContactId()) });
+			new Object[] { Long.valueOf(userModelImpl.getContactId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTRAITID,
-			new Object[] { new Long(userModelImpl.getPortraitId()) });
+			new Object[] { Long.valueOf(userModelImpl.getPortraitId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U,
 			new Object[] {
-				new Long(userModelImpl.getCompanyId()),
-				new Long(userModelImpl.getUserId())
+				Long.valueOf(userModelImpl.getCompanyId()),
+				Long.valueOf(userModelImpl.getUserId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DU,
 			new Object[] {
-				new Long(userModelImpl.getCompanyId()),
+				Long.valueOf(userModelImpl.getCompanyId()),
 				Boolean.valueOf(userModelImpl.getDefaultUser())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_SN,
 			new Object[] {
-				new Long(userModelImpl.getCompanyId()),
+				Long.valueOf(userModelImpl.getCompanyId()),
 				
 			userModelImpl.getScreenName()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_EA,
 			new Object[] {
-				new Long(userModelImpl.getCompanyId()),
+				Long.valueOf(userModelImpl.getCompanyId()),
 				
 			userModelImpl.getEmailAddress()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_FID,
 			new Object[] {
-				new Long(userModelImpl.getCompanyId()),
-				new Long(userModelImpl.getFacebookId())
+				Long.valueOf(userModelImpl.getCompanyId()),
+				Long.valueOf(userModelImpl.getFacebookId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_O,
 			new Object[] {
-				new Long(userModelImpl.getCompanyId()),
+				Long.valueOf(userModelImpl.getCompanyId()),
 				
 			userModelImpl.getOpenId()
 			});
@@ -573,25 +584,27 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		if (!isNew &&
 				(user.getContactId() != userModelImpl.getOriginalContactId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CONTACTID,
-				new Object[] { new Long(userModelImpl.getOriginalContactId()) });
+				new Object[] { Long.valueOf(
+						userModelImpl.getOriginalContactId()) });
 		}
 
 		if (isNew ||
 				(user.getContactId() != userModelImpl.getOriginalContactId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CONTACTID,
-				new Object[] { new Long(user.getContactId()) }, user);
+				new Object[] { Long.valueOf(user.getContactId()) }, user);
 		}
 
 		if (!isNew &&
 				(user.getPortraitId() != userModelImpl.getOriginalPortraitId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_PORTRAITID,
-				new Object[] { new Long(userModelImpl.getOriginalPortraitId()) });
+				new Object[] { Long.valueOf(
+						userModelImpl.getOriginalPortraitId()) });
 		}
 
 		if (isNew ||
 				(user.getPortraitId() != userModelImpl.getOriginalPortraitId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_PORTRAITID,
-				new Object[] { new Long(user.getPortraitId()) }, user);
+				new Object[] { Long.valueOf(user.getPortraitId()) }, user);
 		}
 
 		if (!isNew &&
@@ -599,8 +612,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				(user.getUserId() != userModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U,
 				new Object[] {
-					new Long(userModelImpl.getOriginalCompanyId()),
-					new Long(userModelImpl.getOriginalUserId())
+					Long.valueOf(userModelImpl.getOriginalCompanyId()),
+					Long.valueOf(userModelImpl.getOriginalUserId())
 				});
 		}
 
@@ -609,7 +622,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				(user.getUserId() != userModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U,
 				new Object[] {
-					new Long(user.getCompanyId()), new Long(user.getUserId())
+					Long.valueOf(user.getCompanyId()),
+					Long.valueOf(user.getUserId())
 				}, user);
 		}
 
@@ -618,7 +632,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				(user.getDefaultUser() != userModelImpl.getOriginalDefaultUser()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DU,
 				new Object[] {
-					new Long(userModelImpl.getOriginalCompanyId()),
+					Long.valueOf(userModelImpl.getOriginalCompanyId()),
 					Boolean.valueOf(userModelImpl.getOriginalDefaultUser())
 				});
 		}
@@ -628,7 +642,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				(user.getDefaultUser() != userModelImpl.getOriginalDefaultUser()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DU,
 				new Object[] {
-					new Long(user.getCompanyId()),
+					Long.valueOf(user.getCompanyId()),
 					Boolean.valueOf(user.getDefaultUser())
 				}, user);
 		}
@@ -639,7 +653,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					userModelImpl.getOriginalScreenName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_SN,
 				new Object[] {
-					new Long(userModelImpl.getOriginalCompanyId()),
+					Long.valueOf(userModelImpl.getOriginalCompanyId()),
 					
 				userModelImpl.getOriginalScreenName()
 				});
@@ -650,8 +664,11 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				!Validator.equals(user.getScreenName(),
 					userModelImpl.getOriginalScreenName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_SN,
-				new Object[] { new Long(user.getCompanyId()), user.getScreenName() },
-				user);
+				new Object[] {
+					Long.valueOf(user.getCompanyId()),
+					
+				user.getScreenName()
+				}, user);
 		}
 
 		if (!isNew &&
@@ -660,7 +677,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					userModelImpl.getOriginalEmailAddress()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_EA,
 				new Object[] {
-					new Long(userModelImpl.getOriginalCompanyId()),
+					Long.valueOf(userModelImpl.getOriginalCompanyId()),
 					
 				userModelImpl.getOriginalEmailAddress()
 				});
@@ -672,7 +689,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					userModelImpl.getOriginalEmailAddress()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_EA,
 				new Object[] {
-					new Long(user.getCompanyId()),
+					Long.valueOf(user.getCompanyId()),
 					
 				user.getEmailAddress()
 				}, user);
@@ -683,8 +700,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				(user.getFacebookId() != userModelImpl.getOriginalFacebookId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_FID,
 				new Object[] {
-					new Long(userModelImpl.getOriginalCompanyId()),
-					new Long(userModelImpl.getOriginalFacebookId())
+					Long.valueOf(userModelImpl.getOriginalCompanyId()),
+					Long.valueOf(userModelImpl.getOriginalFacebookId())
 				});
 		}
 
@@ -693,8 +710,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				(user.getFacebookId() != userModelImpl.getOriginalFacebookId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_FID,
 				new Object[] {
-					new Long(user.getCompanyId()),
-					new Long(user.getFacebookId())
+					Long.valueOf(user.getCompanyId()),
+					Long.valueOf(user.getFacebookId())
 				}, user);
 		}
 
@@ -704,7 +721,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 					userModelImpl.getOriginalOpenId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_O,
 				new Object[] {
-					new Long(userModelImpl.getOriginalCompanyId()),
+					Long.valueOf(userModelImpl.getOriginalCompanyId()),
 					
 				userModelImpl.getOriginalOpenId()
 				});
@@ -715,7 +732,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 				!Validator.equals(user.getOpenId(),
 					userModelImpl.getOriginalOpenId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_O,
-				new Object[] { new Long(user.getCompanyId()), user.getOpenId() },
+				new Object[] { Long.valueOf(user.getCompanyId()), user.getOpenId() },
 				user);
 		}
 
@@ -840,7 +857,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 			try {
 				session = openSession();
 
-				user = (User)session.get(UserImpl.class, new Long(userId));
+				user = (User)session.get(UserImpl.class, Long.valueOf(userId));
 			}
 			catch (Exception e) {
 				throw processException(e);

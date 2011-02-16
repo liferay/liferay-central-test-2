@@ -245,7 +245,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 			session = openSession();
 
 			AnnouncementsEntry announcementsEntry = (AnnouncementsEntry)session.get(AnnouncementsEntryImpl.class,
-					new Long(entryId));
+					Long.valueOf(entryId));
 
 			if (announcementsEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -443,7 +443,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl<Annou
 				session = openSession();
 
 				announcementsEntry = (AnnouncementsEntry)session.get(AnnouncementsEntryImpl.class,
-						new Long(entryId));
+						Long.valueOf(entryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -109,7 +109,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_M,
 			new Object[] {
-				new Long(repositoryEntry.getRepositoryId()),
+				Long.valueOf(repositoryEntry.getRepositoryId()),
 				
 			repositoryEntry.getMappedId()
 			}, repositoryEntry);
@@ -158,7 +158,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_M,
 			new Object[] {
-				new Long(repositoryEntry.getRepositoryId()),
+				Long.valueOf(repositoryEntry.getRepositoryId()),
 				
 			repositoryEntry.getMappedId()
 			});
@@ -208,7 +208,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 			session = openSession();
 
 			RepositoryEntry repositoryEntry = (RepositoryEntry)session.get(RepositoryEntryImpl.class,
-					new Long(repositoryEntryId));
+					Long.valueOf(repositoryEntryId));
 
 			if (repositoryEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -269,7 +269,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_M,
 			new Object[] {
-				new Long(repositoryEntryModelImpl.getRepositoryId()),
+				Long.valueOf(repositoryEntryModelImpl.getRepositoryId()),
 				
 			repositoryEntryModelImpl.getMappedId()
 			});
@@ -317,7 +317,8 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 					repositoryEntryModelImpl.getOriginalMappedId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_M,
 				new Object[] {
-					new Long(repositoryEntryModelImpl.getOriginalRepositoryId()),
+					Long.valueOf(
+						repositoryEntryModelImpl.getOriginalRepositoryId()),
 					
 				repositoryEntryModelImpl.getOriginalMappedId()
 				});
@@ -329,7 +330,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 					repositoryEntryModelImpl.getOriginalMappedId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_M,
 				new Object[] {
-					new Long(repositoryEntry.getRepositoryId()),
+					Long.valueOf(repositoryEntry.getRepositoryId()),
 					
 				repositoryEntry.getMappedId()
 				}, repositoryEntry);
@@ -423,7 +424,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 				session = openSession();
 
 				repositoryEntry = (RepositoryEntry)session.get(RepositoryEntryImpl.class,
-						new Long(repositoryEntryId));
+						Long.valueOf(repositoryEntryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

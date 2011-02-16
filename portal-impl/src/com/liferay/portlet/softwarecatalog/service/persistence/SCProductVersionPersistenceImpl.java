@@ -213,7 +213,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			session = openSession();
 
 			SCProductVersion scProductVersion = (SCProductVersion)session.get(SCProductVersionImpl.class,
-					new Long(productVersionId));
+					Long.valueOf(productVersionId));
 
 			if (scProductVersion == null) {
 				if (_log.isWarnEnabled()) {
@@ -437,7 +437,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 				session = openSession();
 
 				scProductVersion = (SCProductVersion)session.get(SCProductVersionImpl.class,
-						new Long(productVersionId));
+						Long.valueOf(productVersionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

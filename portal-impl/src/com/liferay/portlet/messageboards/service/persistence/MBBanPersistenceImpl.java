@@ -134,7 +134,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
 			new Object[] {
-				new Long(mbBan.getGroupId()), new Long(mbBan.getBanUserId())
+				Long.valueOf(mbBan.getGroupId()),
+				Long.valueOf(mbBan.getBanUserId())
 			}, mbBan);
 	}
 
@@ -179,7 +180,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_B,
 			new Object[] {
-				new Long(mbBan.getGroupId()), new Long(mbBan.getBanUserId())
+				Long.valueOf(mbBan.getGroupId()),
+				Long.valueOf(mbBan.getBanUserId())
 			});
 	}
 
@@ -225,7 +227,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 		try {
 			session = openSession();
 
-			MBBan mbBan = (MBBan)session.get(MBBanImpl.class, new Long(banId));
+			MBBan mbBan = (MBBan)session.get(MBBanImpl.class,
+					Long.valueOf(banId));
 
 			if (mbBan == null) {
 				if (_log.isWarnEnabled()) {
@@ -283,8 +286,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_B,
 			new Object[] {
-				new Long(mbBanModelImpl.getGroupId()),
-				new Long(mbBanModelImpl.getBanUserId())
+				Long.valueOf(mbBanModelImpl.getGroupId()),
+				Long.valueOf(mbBanModelImpl.getBanUserId())
 			});
 
 		EntityCacheUtil.removeResult(MBBanModelImpl.ENTITY_CACHE_ENABLED,
@@ -328,8 +331,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				(mbBan.getBanUserId() != mbBanModelImpl.getOriginalBanUserId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_B,
 				new Object[] {
-					new Long(mbBanModelImpl.getOriginalGroupId()),
-					new Long(mbBanModelImpl.getOriginalBanUserId())
+					Long.valueOf(mbBanModelImpl.getOriginalGroupId()),
+					Long.valueOf(mbBanModelImpl.getOriginalBanUserId())
 				});
 		}
 
@@ -338,7 +341,8 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 				(mbBan.getBanUserId() != mbBanModelImpl.getOriginalBanUserId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_B,
 				new Object[] {
-					new Long(mbBan.getGroupId()), new Long(mbBan.getBanUserId())
+					Long.valueOf(mbBan.getGroupId()),
+					Long.valueOf(mbBan.getBanUserId())
 				}, mbBan);
 		}
 
@@ -433,7 +437,7 @@ public class MBBanPersistenceImpl extends BasePersistenceImpl<MBBan>
 			try {
 				session = openSession();
 
-				mbBan = (MBBan)session.get(MBBanImpl.class, new Long(banId));
+				mbBan = (MBBan)session.get(MBBanImpl.class, Long.valueOf(banId));
 			}
 			catch (Exception e) {
 				throw processException(e);

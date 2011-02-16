@@ -215,14 +215,16 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				assetCategory.getUuid(), new Long(assetCategory.getGroupId())
+				assetCategory.getUuid(),
+				Long.valueOf(assetCategory.getGroupId())
 			}, assetCategory);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_N_V,
 			new Object[] {
-				new Long(assetCategory.getParentCategoryId()),
+				Long.valueOf(assetCategory.getParentCategoryId()),
 				
-			assetCategory.getName(), new Long(assetCategory.getVocabularyId())
+			assetCategory.getName(),
+				Long.valueOf(assetCategory.getVocabularyId())
 			}, assetCategory);
 	}
 
@@ -269,14 +271,16 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				assetCategory.getUuid(), new Long(assetCategory.getGroupId())
+				assetCategory.getUuid(),
+				Long.valueOf(assetCategory.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_N_V,
 			new Object[] {
-				new Long(assetCategory.getParentCategoryId()),
+				Long.valueOf(assetCategory.getParentCategoryId()),
 				
-			assetCategory.getName(), new Long(assetCategory.getVocabularyId())
+			assetCategory.getName(),
+				Long.valueOf(assetCategory.getVocabularyId())
 			});
 	}
 
@@ -328,7 +332,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			session = openSession();
 
 			AssetCategory assetCategory = (AssetCategory)session.get(AssetCategoryImpl.class,
-					new Long(categoryId));
+					Long.valueOf(categoryId));
 
 			if (assetCategory == null) {
 				if (_log.isWarnEnabled()) {
@@ -401,15 +405,15 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				assetCategoryModelImpl.getUuid(),
-				new Long(assetCategoryModelImpl.getGroupId())
+				Long.valueOf(assetCategoryModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_N_V,
 			new Object[] {
-				new Long(assetCategoryModelImpl.getParentCategoryId()),
+				Long.valueOf(assetCategoryModelImpl.getParentCategoryId()),
 				
 			assetCategoryModelImpl.getName(),
-				new Long(assetCategoryModelImpl.getVocabularyId())
+				Long.valueOf(assetCategoryModelImpl.getVocabularyId())
 			});
 
 		EntityCacheUtil.removeResult(AssetCategoryModelImpl.ENTITY_CACHE_ENABLED,
@@ -472,7 +476,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					assetCategoryModelImpl.getOriginalUuid(),
-					new Long(assetCategoryModelImpl.getOriginalGroupId())
+					Long.valueOf(assetCategoryModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -483,7 +487,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					assetCategory.getUuid(),
-					new Long(assetCategory.getGroupId())
+					Long.valueOf(assetCategory.getGroupId())
 				}, assetCategory);
 		}
 
@@ -494,10 +498,12 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				(assetCategory.getVocabularyId() != assetCategoryModelImpl.getOriginalVocabularyId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_N_V,
 				new Object[] {
-					new Long(assetCategoryModelImpl.getOriginalParentCategoryId()),
+					Long.valueOf(
+						assetCategoryModelImpl.getOriginalParentCategoryId()),
 					
 				assetCategoryModelImpl.getOriginalName(),
-					new Long(assetCategoryModelImpl.getOriginalVocabularyId())
+					Long.valueOf(
+						assetCategoryModelImpl.getOriginalVocabularyId())
 				});
 		}
 
@@ -508,10 +514,10 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				(assetCategory.getVocabularyId() != assetCategoryModelImpl.getOriginalVocabularyId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_N_V,
 				new Object[] {
-					new Long(assetCategory.getParentCategoryId()),
+					Long.valueOf(assetCategory.getParentCategoryId()),
 					
 				assetCategory.getName(),
-					new Long(assetCategory.getVocabularyId())
+					Long.valueOf(assetCategory.getVocabularyId())
 				}, assetCategory);
 		}
 
@@ -615,7 +621,7 @@ public class AssetCategoryPersistenceImpl extends BasePersistenceImpl<AssetCateg
 				session = openSession();
 
 				assetCategory = (AssetCategory)session.get(AssetCategoryImpl.class,
-						new Long(categoryId));
+						Long.valueOf(categoryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

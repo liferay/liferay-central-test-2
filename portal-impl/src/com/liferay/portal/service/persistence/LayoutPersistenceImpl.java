@@ -220,22 +220,22 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			LayoutImpl.class, layout.getPrimaryKey(), layout);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { layout.getUuid(), new Long(layout.getGroupId()) },
+			new Object[] { layout.getUuid(), Long.valueOf(layout.getGroupId()) },
 			layout);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-			new Object[] { new Long(layout.getIconImageId()) }, layout);
+			new Object[] { Long.valueOf(layout.getIconImageId()) }, layout);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L,
 			new Object[] {
-				new Long(layout.getGroupId()),
+				Long.valueOf(layout.getGroupId()),
 				Boolean.valueOf(layout.getPrivateLayout()),
-				new Long(layout.getLayoutId())
+				Long.valueOf(layout.getLayoutId())
 			}, layout);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_F,
 			new Object[] {
-				new Long(layout.getGroupId()),
+				Long.valueOf(layout.getGroupId()),
 				Boolean.valueOf(layout.getPrivateLayout()),
 				
 			layout.getFriendlyURL()
@@ -283,21 +283,21 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			LayoutImpl.class, layout.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { layout.getUuid(), new Long(layout.getGroupId()) });
+			new Object[] { layout.getUuid(), Long.valueOf(layout.getGroupId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-			new Object[] { new Long(layout.getIconImageId()) });
+			new Object[] { Long.valueOf(layout.getIconImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L,
 			new Object[] {
-				new Long(layout.getGroupId()),
+				Long.valueOf(layout.getGroupId()),
 				Boolean.valueOf(layout.getPrivateLayout()),
-				new Long(layout.getLayoutId())
+				Long.valueOf(layout.getLayoutId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_F,
 			new Object[] {
-				new Long(layout.getGroupId()),
+				Long.valueOf(layout.getGroupId()),
 				Boolean.valueOf(layout.getPrivateLayout()),
 				
 			layout.getFriendlyURL()
@@ -351,7 +351,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		try {
 			session = openSession();
 
-			Layout layout = (Layout)session.get(LayoutImpl.class, new Long(plid));
+			Layout layout = (Layout)session.get(LayoutImpl.class,
+					Long.valueOf(plid));
 
 			if (layout == null) {
 				if (_log.isWarnEnabled()) {
@@ -410,22 +411,22 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				layoutModelImpl.getUuid(),
-				new Long(layoutModelImpl.getGroupId())
+				Long.valueOf(layoutModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-			new Object[] { new Long(layoutModelImpl.getIconImageId()) });
+			new Object[] { Long.valueOf(layoutModelImpl.getIconImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L,
 			new Object[] {
-				new Long(layoutModelImpl.getGroupId()),
+				Long.valueOf(layoutModelImpl.getGroupId()),
 				Boolean.valueOf(layoutModelImpl.getPrivateLayout()),
-				new Long(layoutModelImpl.getLayoutId())
+				Long.valueOf(layoutModelImpl.getLayoutId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_F,
 			new Object[] {
-				new Long(layoutModelImpl.getGroupId()),
+				Long.valueOf(layoutModelImpl.getGroupId()),
 				Boolean.valueOf(layoutModelImpl.getPrivateLayout()),
 				
 			layoutModelImpl.getFriendlyURL()
@@ -479,7 +480,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					layoutModelImpl.getOriginalUuid(),
-					new Long(layoutModelImpl.getOriginalGroupId())
+					Long.valueOf(layoutModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -488,20 +489,22 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					layoutModelImpl.getOriginalUuid()) ||
 				(layout.getGroupId() != layoutModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] { layout.getUuid(), new Long(layout.getGroupId()) },
-				layout);
+				new Object[] { layout.getUuid(), Long.valueOf(
+						layout.getGroupId()) }, layout);
 		}
 
 		if (!isNew &&
 				(layout.getIconImageId() != layoutModelImpl.getOriginalIconImageId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-				new Object[] { new Long(layoutModelImpl.getOriginalIconImageId()) });
+				new Object[] {
+					Long.valueOf(layoutModelImpl.getOriginalIconImageId())
+				});
 		}
 
 		if (isNew ||
 				(layout.getIconImageId() != layoutModelImpl.getOriginalIconImageId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ICONIMAGEID,
-				new Object[] { new Long(layout.getIconImageId()) }, layout);
+				new Object[] { Long.valueOf(layout.getIconImageId()) }, layout);
 		}
 
 		if (!isNew &&
@@ -510,9 +513,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				(layout.getLayoutId() != layoutModelImpl.getOriginalLayoutId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L,
 				new Object[] {
-					new Long(layoutModelImpl.getOriginalGroupId()),
+					Long.valueOf(layoutModelImpl.getOriginalGroupId()),
 					Boolean.valueOf(layoutModelImpl.getOriginalPrivateLayout()),
-					new Long(layoutModelImpl.getOriginalLayoutId())
+					Long.valueOf(layoutModelImpl.getOriginalLayoutId())
 				});
 		}
 
@@ -522,9 +525,9 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 				(layout.getLayoutId() != layoutModelImpl.getOriginalLayoutId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L,
 				new Object[] {
-					new Long(layout.getGroupId()),
+					Long.valueOf(layout.getGroupId()),
 					Boolean.valueOf(layout.getPrivateLayout()),
-					new Long(layout.getLayoutId())
+					Long.valueOf(layout.getLayoutId())
 				}, layout);
 		}
 
@@ -535,7 +538,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					layoutModelImpl.getOriginalFriendlyURL()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_F,
 				new Object[] {
-					new Long(layoutModelImpl.getOriginalGroupId()),
+					Long.valueOf(layoutModelImpl.getOriginalGroupId()),
 					Boolean.valueOf(layoutModelImpl.getOriginalPrivateLayout()),
 					
 				layoutModelImpl.getOriginalFriendlyURL()
@@ -549,7 +552,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 					layoutModelImpl.getOriginalFriendlyURL()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_F,
 				new Object[] {
-					new Long(layout.getGroupId()),
+					Long.valueOf(layout.getGroupId()),
 					Boolean.valueOf(layout.getPrivateLayout()),
 					
 				layout.getFriendlyURL()
@@ -664,7 +667,8 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 			try {
 				session = openSession();
 
-				layout = (Layout)session.get(LayoutImpl.class, new Long(plid));
+				layout = (Layout)session.get(LayoutImpl.class,
+						Long.valueOf(plid));
 			}
 			catch (Exception e) {
 				throw processException(e);

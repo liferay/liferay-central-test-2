@@ -182,7 +182,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 			session = openSession();
 
 			ListType listType = (ListType)session.get(ListTypeImpl.class,
-					new Integer(listTypeId));
+					Integer.valueOf(listTypeId));
 
 			if (listType == null) {
 				if (_log.isWarnEnabled()) {
@@ -354,7 +354,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 				session = openSession();
 
 				listType = (ListType)session.get(ListTypeImpl.class,
-						new Integer(listTypeId));
+						Integer.valueOf(listTypeId));
 			}
 			catch (Exception e) {
 				throw processException(e);

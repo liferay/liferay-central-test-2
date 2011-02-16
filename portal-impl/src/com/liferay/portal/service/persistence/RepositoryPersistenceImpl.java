@@ -184,7 +184,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 			session = openSession();
 
 			Repository repository = (Repository)session.get(RepositoryImpl.class,
-					new Long(repositoryId));
+					Long.valueOf(repositoryId));
 
 			if (repository == null) {
 				if (_log.isWarnEnabled()) {
@@ -367,7 +367,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 				session = openSession();
 
 				repository = (Repository)session.get(RepositoryImpl.class,
-						new Long(repositoryId));
+						Long.valueOf(repositoryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -182,7 +182,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 			session = openSession();
 
 			OrgLabor orgLabor = (OrgLabor)session.get(OrgLaborImpl.class,
-					new Long(orgLaborId));
+					Long.valueOf(orgLaborId));
 
 			if (orgLabor == null) {
 				if (_log.isWarnEnabled()) {
@@ -369,7 +369,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 				session = openSession();
 
 				orgLabor = (OrgLabor)session.get(OrgLaborImpl.class,
-						new Long(orgLaborId));
+						Long.valueOf(orgLaborId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -320,15 +320,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				journalArticle.getUuid(), new Long(journalArticle.getGroupId())
+				journalArticle.getUuid(),
+				Long.valueOf(journalArticle.getGroupId())
 			}, journalArticle);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V,
 			new Object[] {
-				new Long(journalArticle.getGroupId()),
+				Long.valueOf(journalArticle.getGroupId()),
 				
 			journalArticle.getArticleId(),
-				new Double(journalArticle.getVersion())
+				Double.valueOf(journalArticle.getVersion())
 			}, journalArticle);
 	}
 
@@ -375,15 +376,16 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				journalArticle.getUuid(), new Long(journalArticle.getGroupId())
+				journalArticle.getUuid(),
+				Long.valueOf(journalArticle.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V,
 			new Object[] {
-				new Long(journalArticle.getGroupId()),
+				Long.valueOf(journalArticle.getGroupId()),
 				
 			journalArticle.getArticleId(),
-				new Double(journalArticle.getVersion())
+				Double.valueOf(journalArticle.getVersion())
 			});
 	}
 
@@ -435,7 +437,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			session = openSession();
 
 			JournalArticle journalArticle = (JournalArticle)session.get(JournalArticleImpl.class,
-					new Long(id));
+					Long.valueOf(id));
 
 			if (journalArticle == null) {
 				if (_log.isWarnEnabled()) {
@@ -496,15 +498,15 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalArticleModelImpl.getUuid(),
-				new Long(journalArticleModelImpl.getGroupId())
+				Long.valueOf(journalArticleModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V,
 			new Object[] {
-				new Long(journalArticleModelImpl.getGroupId()),
+				Long.valueOf(journalArticleModelImpl.getGroupId()),
 				
 			journalArticleModelImpl.getArticleId(),
-				new Double(journalArticleModelImpl.getVersion())
+				Double.valueOf(journalArticleModelImpl.getVersion())
 			});
 
 		EntityCacheUtil.removeResult(JournalArticleModelImpl.ENTITY_CACHE_ENABLED,
@@ -557,7 +559,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					journalArticleModelImpl.getOriginalUuid(),
-					new Long(journalArticleModelImpl.getOriginalGroupId())
+					Long.valueOf(journalArticleModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -568,7 +570,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					journalArticle.getUuid(),
-					new Long(journalArticle.getGroupId())
+					Long.valueOf(journalArticle.getGroupId())
 				}, journalArticle);
 		}
 
@@ -579,10 +581,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				(journalArticle.getVersion() != journalArticleModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V,
 				new Object[] {
-					new Long(journalArticleModelImpl.getOriginalGroupId()),
+					Long.valueOf(journalArticleModelImpl.getOriginalGroupId()),
 					
 				journalArticleModelImpl.getOriginalArticleId(),
-					new Double(journalArticleModelImpl.getOriginalVersion())
+					Double.valueOf(journalArticleModelImpl.getOriginalVersion())
 				});
 		}
 
@@ -593,10 +595,10 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				(journalArticle.getVersion() != journalArticleModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V,
 				new Object[] {
-					new Long(journalArticle.getGroupId()),
+					Long.valueOf(journalArticle.getGroupId()),
 					
 				journalArticle.getArticleId(),
-					new Double(journalArticle.getVersion())
+					Double.valueOf(journalArticle.getVersion())
 				}, journalArticle);
 		}
 
@@ -713,7 +715,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 				session = openSession();
 
 				journalArticle = (JournalArticle)session.get(JournalArticleImpl.class,
-						new Long(id));
+						Long.valueOf(id));
 			}
 			catch (Exception e) {
 				throw processException(e);

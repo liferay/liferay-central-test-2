@@ -161,7 +161,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				dlFileShortcut.getUuid(), new Long(dlFileShortcut.getGroupId())
+				dlFileShortcut.getUuid(),
+				Long.valueOf(dlFileShortcut.getGroupId())
 			}, dlFileShortcut);
 	}
 
@@ -208,7 +209,8 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				dlFileShortcut.getUuid(), new Long(dlFileShortcut.getGroupId())
+				dlFileShortcut.getUuid(),
+				Long.valueOf(dlFileShortcut.getGroupId())
 			});
 	}
 
@@ -260,7 +262,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			session = openSession();
 
 			DLFileShortcut dlFileShortcut = (DLFileShortcut)session.get(DLFileShortcutImpl.class,
-					new Long(fileShortcutId));
+					Long.valueOf(fileShortcutId));
 
 			if (dlFileShortcut == null) {
 				if (_log.isWarnEnabled()) {
@@ -322,7 +324,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				dlFileShortcutModelImpl.getUuid(),
-				new Long(dlFileShortcutModelImpl.getGroupId())
+				Long.valueOf(dlFileShortcutModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(DLFileShortcutModelImpl.ENTITY_CACHE_ENABLED,
@@ -375,7 +377,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					dlFileShortcutModelImpl.getOriginalUuid(),
-					new Long(dlFileShortcutModelImpl.getOriginalGroupId())
+					Long.valueOf(dlFileShortcutModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -386,7 +388,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					dlFileShortcut.getUuid(),
-					new Long(dlFileShortcut.getGroupId())
+					Long.valueOf(dlFileShortcut.getGroupId())
 				}, dlFileShortcut);
 		}
 
@@ -490,7 +492,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistenceImpl<DLFileSho
 				session = openSession();
 
 				dlFileShortcut = (DLFileShortcut)session.get(DLFileShortcutImpl.class,
-						new Long(fileShortcutId));
+						Long.valueOf(fileShortcutId));
 			}
 			catch (Exception e) {
 				throw processException(e);

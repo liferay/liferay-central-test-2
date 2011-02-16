@@ -118,9 +118,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
 			new Object[] {
-				new Long(ratingsEntry.getUserId()),
-				new Long(ratingsEntry.getClassNameId()),
-				new Long(ratingsEntry.getClassPK())
+				Long.valueOf(ratingsEntry.getUserId()),
+				Long.valueOf(ratingsEntry.getClassNameId()),
+				Long.valueOf(ratingsEntry.getClassPK())
 			}, ratingsEntry);
 	}
 
@@ -167,9 +167,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C,
 			new Object[] {
-				new Long(ratingsEntry.getUserId()),
-				new Long(ratingsEntry.getClassNameId()),
-				new Long(ratingsEntry.getClassPK())
+				Long.valueOf(ratingsEntry.getUserId()),
+				Long.valueOf(ratingsEntry.getClassNameId()),
+				Long.valueOf(ratingsEntry.getClassPK())
 			});
 	}
 
@@ -217,7 +217,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 			session = openSession();
 
 			RatingsEntry ratingsEntry = (RatingsEntry)session.get(RatingsEntryImpl.class,
-					new Long(entryId));
+					Long.valueOf(entryId));
 
 			if (ratingsEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -277,9 +277,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C,
 			new Object[] {
-				new Long(ratingsEntryModelImpl.getUserId()),
-				new Long(ratingsEntryModelImpl.getClassNameId()),
-				new Long(ratingsEntryModelImpl.getClassPK())
+				Long.valueOf(ratingsEntryModelImpl.getUserId()),
+				Long.valueOf(ratingsEntryModelImpl.getClassNameId()),
+				Long.valueOf(ratingsEntryModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -324,9 +324,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				(ratingsEntry.getClassPK() != ratingsEntryModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C,
 				new Object[] {
-					new Long(ratingsEntryModelImpl.getOriginalUserId()),
-					new Long(ratingsEntryModelImpl.getOriginalClassNameId()),
-					new Long(ratingsEntryModelImpl.getOriginalClassPK())
+					Long.valueOf(ratingsEntryModelImpl.getOriginalUserId()),
+					Long.valueOf(ratingsEntryModelImpl.getOriginalClassNameId()),
+					Long.valueOf(ratingsEntryModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -336,9 +336,9 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				(ratingsEntry.getClassPK() != ratingsEntryModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
 				new Object[] {
-					new Long(ratingsEntry.getUserId()),
-					new Long(ratingsEntry.getClassNameId()),
-					new Long(ratingsEntry.getClassPK())
+					Long.valueOf(ratingsEntry.getUserId()),
+					Long.valueOf(ratingsEntry.getClassNameId()),
+					Long.valueOf(ratingsEntry.getClassPK())
 				}, ratingsEntry);
 		}
 
@@ -436,7 +436,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				session = openSession();
 
 				ratingsEntry = (RatingsEntry)session.get(RatingsEntryImpl.class,
-						new Long(entryId));
+						Long.valueOf(entryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

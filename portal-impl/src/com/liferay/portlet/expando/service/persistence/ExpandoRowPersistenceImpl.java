@@ -110,8 +110,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C,
 			new Object[] {
-				new Long(expandoRow.getTableId()),
-				new Long(expandoRow.getClassPK())
+				Long.valueOf(expandoRow.getTableId()),
+				Long.valueOf(expandoRow.getClassPK())
 			}, expandoRow);
 	}
 
@@ -157,8 +157,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
 			new Object[] {
-				new Long(expandoRow.getTableId()),
-				new Long(expandoRow.getClassPK())
+				Long.valueOf(expandoRow.getTableId()),
+				Long.valueOf(expandoRow.getClassPK())
 			});
 	}
 
@@ -206,7 +206,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 			session = openSession();
 
 			ExpandoRow expandoRow = (ExpandoRow)session.get(ExpandoRowImpl.class,
-					new Long(rowId));
+					Long.valueOf(rowId));
 
 			if (expandoRow == null) {
 				if (_log.isWarnEnabled()) {
@@ -265,8 +265,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
 			new Object[] {
-				new Long(expandoRowModelImpl.getTableId()),
-				new Long(expandoRowModelImpl.getClassPK())
+				Long.valueOf(expandoRowModelImpl.getTableId()),
+				Long.valueOf(expandoRowModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(ExpandoRowModelImpl.ENTITY_CACHE_ENABLED,
@@ -310,8 +310,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 				(expandoRow.getClassPK() != expandoRowModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
 				new Object[] {
-					new Long(expandoRowModelImpl.getOriginalTableId()),
-					new Long(expandoRowModelImpl.getOriginalClassPK())
+					Long.valueOf(expandoRowModelImpl.getOriginalTableId()),
+					Long.valueOf(expandoRowModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -320,8 +320,8 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 				(expandoRow.getClassPK() != expandoRowModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C,
 				new Object[] {
-					new Long(expandoRow.getTableId()),
-					new Long(expandoRow.getClassPK())
+					Long.valueOf(expandoRow.getTableId()),
+					Long.valueOf(expandoRow.getClassPK())
 				}, expandoRow);
 		}
 
@@ -413,7 +413,7 @@ public class ExpandoRowPersistenceImpl extends BasePersistenceImpl<ExpandoRow>
 				session = openSession();
 
 				expandoRow = (ExpandoRow)session.get(ExpandoRowImpl.class,
-						new Long(rowId));
+						Long.valueOf(rowId));
 			}
 			catch (Exception e) {
 				throw processException(e);

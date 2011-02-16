@@ -198,20 +198,20 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			IGImageImpl.class, igImage.getPrimaryKey(), igImage);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { igImage.getUuid(), new Long(igImage.getGroupId()) },
+			new Object[] { igImage.getUuid(), Long.valueOf(igImage.getGroupId()) },
 			igImage);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-			new Object[] { new Long(igImage.getSmallImageId()) }, igImage);
+			new Object[] { Long.valueOf(igImage.getSmallImageId()) }, igImage);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-			new Object[] { new Long(igImage.getLargeImageId()) }, igImage);
+			new Object[] { Long.valueOf(igImage.getLargeImageId()) }, igImage);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
-			new Object[] { new Long(igImage.getCustom1ImageId()) }, igImage);
+			new Object[] { Long.valueOf(igImage.getCustom1ImageId()) }, igImage);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
-			new Object[] { new Long(igImage.getCustom2ImageId()) }, igImage);
+			new Object[] { Long.valueOf(igImage.getCustom2ImageId()) }, igImage);
 	}
 
 	/**
@@ -255,19 +255,19 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			IGImageImpl.class, igImage.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { igImage.getUuid(), new Long(igImage.getGroupId()) });
+			new Object[] { igImage.getUuid(), Long.valueOf(igImage.getGroupId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-			new Object[] { new Long(igImage.getSmallImageId()) });
+			new Object[] { Long.valueOf(igImage.getSmallImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-			new Object[] { new Long(igImage.getLargeImageId()) });
+			new Object[] { Long.valueOf(igImage.getLargeImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
-			new Object[] { new Long(igImage.getCustom1ImageId()) });
+			new Object[] { Long.valueOf(igImage.getCustom1ImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
-			new Object[] { new Long(igImage.getCustom2ImageId()) });
+			new Object[] { Long.valueOf(igImage.getCustom2ImageId()) });
 	}
 
 	/**
@@ -318,7 +318,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			session = openSession();
 
 			IGImage igImage = (IGImage)session.get(IGImageImpl.class,
-					new Long(imageId));
+					Long.valueOf(imageId));
 
 			if (igImage == null) {
 				if (_log.isWarnEnabled()) {
@@ -377,20 +377,20 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				igImageModelImpl.getUuid(),
-				new Long(igImageModelImpl.getGroupId())
+				Long.valueOf(igImageModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-			new Object[] { new Long(igImageModelImpl.getSmallImageId()) });
+			new Object[] { Long.valueOf(igImageModelImpl.getSmallImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-			new Object[] { new Long(igImageModelImpl.getLargeImageId()) });
+			new Object[] { Long.valueOf(igImageModelImpl.getLargeImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
-			new Object[] { new Long(igImageModelImpl.getCustom1ImageId()) });
+			new Object[] { Long.valueOf(igImageModelImpl.getCustom1ImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
-			new Object[] { new Long(igImageModelImpl.getCustom2ImageId()) });
+			new Object[] { Long.valueOf(igImageModelImpl.getCustom2ImageId()) });
 
 		EntityCacheUtil.removeResult(IGImageModelImpl.ENTITY_CACHE_ENABLED,
 			IGImageImpl.class, igImage.getPrimaryKey());
@@ -441,7 +441,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					igImageModelImpl.getOriginalUuid(),
-					new Long(igImageModelImpl.getOriginalGroupId())
+					Long.valueOf(igImageModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -450,64 +450,69 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 					igImageModelImpl.getOriginalUuid()) ||
 				(igImage.getGroupId() != igImageModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] { igImage.getUuid(), new Long(igImage.getGroupId()) },
-				igImage);
+				new Object[] {
+					igImage.getUuid(), Long.valueOf(igImage.getGroupId())
+				}, igImage);
 		}
 
 		if (!isNew &&
 				(igImage.getSmallImageId() != igImageModelImpl.getOriginalSmallImageId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
 				new Object[] {
-					new Long(igImageModelImpl.getOriginalSmallImageId())
+					Long.valueOf(igImageModelImpl.getOriginalSmallImageId())
 				});
 		}
 
 		if (isNew ||
 				(igImage.getSmallImageId() != igImageModelImpl.getOriginalSmallImageId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-				new Object[] { new Long(igImage.getSmallImageId()) }, igImage);
+				new Object[] { Long.valueOf(igImage.getSmallImageId()) },
+				igImage);
 		}
 
 		if (!isNew &&
 				(igImage.getLargeImageId() != igImageModelImpl.getOriginalLargeImageId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
 				new Object[] {
-					new Long(igImageModelImpl.getOriginalLargeImageId())
+					Long.valueOf(igImageModelImpl.getOriginalLargeImageId())
 				});
 		}
 
 		if (isNew ||
 				(igImage.getLargeImageId() != igImageModelImpl.getOriginalLargeImageId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LARGEIMAGEID,
-				new Object[] { new Long(igImage.getLargeImageId()) }, igImage);
+				new Object[] { Long.valueOf(igImage.getLargeImageId()) },
+				igImage);
 		}
 
 		if (!isNew &&
 				(igImage.getCustom1ImageId() != igImageModelImpl.getOriginalCustom1ImageId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
 				new Object[] {
-					new Long(igImageModelImpl.getOriginalCustom1ImageId())
+					Long.valueOf(igImageModelImpl.getOriginalCustom1ImageId())
 				});
 		}
 
 		if (isNew ||
 				(igImage.getCustom1ImageId() != igImageModelImpl.getOriginalCustom1ImageId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM1IMAGEID,
-				new Object[] { new Long(igImage.getCustom1ImageId()) }, igImage);
+				new Object[] { Long.valueOf(igImage.getCustom1ImageId()) },
+				igImage);
 		}
 
 		if (!isNew &&
 				(igImage.getCustom2ImageId() != igImageModelImpl.getOriginalCustom2ImageId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
 				new Object[] {
-					new Long(igImageModelImpl.getOriginalCustom2ImageId())
+					Long.valueOf(igImageModelImpl.getOriginalCustom2ImageId())
 				});
 		}
 
 		if (isNew ||
 				(igImage.getCustom2ImageId() != igImageModelImpl.getOriginalCustom2ImageId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CUSTOM2IMAGEID,
-				new Object[] { new Long(igImage.getCustom2ImageId()) }, igImage);
+				new Object[] { Long.valueOf(igImage.getCustom2ImageId()) },
+				igImage);
 		}
 
 		return igImage;
@@ -608,7 +613,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 				session = openSession();
 
 				igImage = (IGImage)session.get(IGImageImpl.class,
-						new Long(imageId));
+						Long.valueOf(imageId));
 			}
 			catch (Exception e) {
 				throw processException(e);

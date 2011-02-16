@@ -157,9 +157,9 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_L_H_P,
 			new Object[] {
-				new Long(layoutRevision.getLayoutSetBranchId()),
+				Long.valueOf(layoutRevision.getLayoutSetBranchId()),
 				Boolean.valueOf(layoutRevision.getHead()),
-				new Long(layoutRevision.getPlid())
+				Long.valueOf(layoutRevision.getPlid())
 			}, layoutRevision);
 	}
 
@@ -206,9 +206,9 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P,
 			new Object[] {
-				new Long(layoutRevision.getLayoutSetBranchId()),
+				Long.valueOf(layoutRevision.getLayoutSetBranchId()),
 				Boolean.valueOf(layoutRevision.getHead()),
-				new Long(layoutRevision.getPlid())
+				Long.valueOf(layoutRevision.getPlid())
 			});
 	}
 
@@ -256,7 +256,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 			session = openSession();
 
 			LayoutRevision layoutRevision = (LayoutRevision)session.get(LayoutRevisionImpl.class,
-					new Long(layoutRevisionId));
+					Long.valueOf(layoutRevisionId));
 
 			if (layoutRevision == null) {
 				if (_log.isWarnEnabled()) {
@@ -317,9 +317,9 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P,
 			new Object[] {
-				new Long(layoutRevisionModelImpl.getLayoutSetBranchId()),
+				Long.valueOf(layoutRevisionModelImpl.getLayoutSetBranchId()),
 				Boolean.valueOf(layoutRevisionModelImpl.getHead()),
-				new Long(layoutRevisionModelImpl.getPlid())
+				Long.valueOf(layoutRevisionModelImpl.getPlid())
 			});
 
 		EntityCacheUtil.removeResult(LayoutRevisionModelImpl.ENTITY_CACHE_ENABLED,
@@ -365,9 +365,10 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 				(layoutRevision.getPlid() != layoutRevisionModelImpl.getOriginalPlid()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P,
 				new Object[] {
-					new Long(layoutRevisionModelImpl.getOriginalLayoutSetBranchId()),
+					Long.valueOf(
+						layoutRevisionModelImpl.getOriginalLayoutSetBranchId()),
 					Boolean.valueOf(layoutRevisionModelImpl.getOriginalHead()),
-					new Long(layoutRevisionModelImpl.getOriginalPlid())
+					Long.valueOf(layoutRevisionModelImpl.getOriginalPlid())
 				});
 		}
 
@@ -377,9 +378,9 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 				(layoutRevision.getPlid() != layoutRevisionModelImpl.getOriginalPlid()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_L_H_P,
 				new Object[] {
-					new Long(layoutRevision.getLayoutSetBranchId()),
+					Long.valueOf(layoutRevision.getLayoutSetBranchId()),
 					Boolean.valueOf(layoutRevision.getHead()),
-					new Long(layoutRevision.getPlid())
+					Long.valueOf(layoutRevision.getPlid())
 				}, layoutRevision);
 		}
 
@@ -497,7 +498,7 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 				session = openSession();
 
 				layoutRevision = (LayoutRevision)session.get(LayoutRevisionImpl.class,
-						new Long(layoutRevisionId));
+						Long.valueOf(layoutRevisionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

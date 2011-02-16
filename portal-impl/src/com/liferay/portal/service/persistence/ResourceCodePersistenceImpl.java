@@ -125,9 +125,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
 			new Object[] {
-				new Long(resourceCode.getCompanyId()),
+				Long.valueOf(resourceCode.getCompanyId()),
 				
-			resourceCode.getName(), new Integer(resourceCode.getScope())
+			resourceCode.getName(), Integer.valueOf(resourceCode.getScope())
 			}, resourceCode);
 	}
 
@@ -174,9 +174,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S,
 			new Object[] {
-				new Long(resourceCode.getCompanyId()),
+				Long.valueOf(resourceCode.getCompanyId()),
 				
-			resourceCode.getName(), new Integer(resourceCode.getScope())
+			resourceCode.getName(), Integer.valueOf(resourceCode.getScope())
 			});
 	}
 
@@ -224,7 +224,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 			session = openSession();
 
 			ResourceCode resourceCode = (ResourceCode)session.get(ResourceCodeImpl.class,
-					new Long(codeId));
+					Long.valueOf(codeId));
 
 			if (resourceCode == null) {
 				if (_log.isWarnEnabled()) {
@@ -284,10 +284,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S,
 			new Object[] {
-				new Long(resourceCodeModelImpl.getCompanyId()),
+				Long.valueOf(resourceCodeModelImpl.getCompanyId()),
 				
 			resourceCodeModelImpl.getName(),
-				new Integer(resourceCodeModelImpl.getScope())
+				Integer.valueOf(resourceCodeModelImpl.getScope())
 			});
 
 		EntityCacheUtil.removeResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
@@ -333,10 +333,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				(resourceCode.getScope() != resourceCodeModelImpl.getOriginalScope()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S,
 				new Object[] {
-					new Long(resourceCodeModelImpl.getOriginalCompanyId()),
+					Long.valueOf(resourceCodeModelImpl.getOriginalCompanyId()),
 					
 				resourceCodeModelImpl.getOriginalName(),
-					new Integer(resourceCodeModelImpl.getOriginalScope())
+					Integer.valueOf(resourceCodeModelImpl.getOriginalScope())
 				});
 		}
 
@@ -347,9 +347,9 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				(resourceCode.getScope() != resourceCodeModelImpl.getOriginalScope()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
 				new Object[] {
-					new Long(resourceCode.getCompanyId()),
+					Long.valueOf(resourceCode.getCompanyId()),
 					
-				resourceCode.getName(), new Integer(resourceCode.getScope())
+				resourceCode.getName(), Integer.valueOf(resourceCode.getScope())
 				}, resourceCode);
 		}
 
@@ -442,7 +442,7 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				session = openSession();
 
 				resourceCode = (ResourceCode)session.get(ResourceCodeImpl.class,
-						new Long(codeId));
+						Long.valueOf(codeId));
 			}
 			catch (Exception e) {
 				throw processException(e);

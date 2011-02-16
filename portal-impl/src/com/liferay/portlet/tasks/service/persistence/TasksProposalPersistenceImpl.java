@@ -130,7 +130,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(tasksProposal.getClassNameId()),
+				Long.valueOf(tasksProposal.getClassNameId()),
 				
 			tasksProposal.getClassPK()
 			}, tasksProposal);
@@ -179,7 +179,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(tasksProposal.getClassNameId()),
+				Long.valueOf(tasksProposal.getClassNameId()),
 				
 			tasksProposal.getClassPK()
 			});
@@ -229,7 +229,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 			session = openSession();
 
 			TasksProposal tasksProposal = (TasksProposal)session.get(TasksProposalImpl.class,
-					new Long(proposalId));
+					Long.valueOf(proposalId));
 
 			if (tasksProposal == null) {
 				if (_log.isWarnEnabled()) {
@@ -289,7 +289,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(tasksProposalModelImpl.getClassNameId()),
+				Long.valueOf(tasksProposalModelImpl.getClassNameId()),
 				
 			tasksProposalModelImpl.getClassPK()
 			});
@@ -337,7 +337,8 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 					tasksProposalModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(tasksProposalModelImpl.getOriginalClassNameId()),
+					Long.valueOf(
+						tasksProposalModelImpl.getOriginalClassNameId()),
 					
 				tasksProposalModelImpl.getOriginalClassPK()
 				});
@@ -349,7 +350,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 					tasksProposalModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(tasksProposal.getClassNameId()),
+					Long.valueOf(tasksProposal.getClassNameId()),
 					
 				tasksProposal.getClassPK()
 				}, tasksProposal);
@@ -453,7 +454,7 @@ public class TasksProposalPersistenceImpl extends BasePersistenceImpl<TasksPropo
 				session = openSession();
 
 				tasksProposal = (TasksProposal)session.get(TasksProposalImpl.class,
-						new Long(proposalId));
+						Long.valueOf(proposalId));
 			}
 			catch (Exception e) {
 				throw processException(e);

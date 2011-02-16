@@ -174,7 +174,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 			session = openSession();
 
 			SocialEquityHistory socialEquityHistory = (SocialEquityHistory)session.get(SocialEquityHistoryImpl.class,
-					new Long(equityHistoryId));
+					Long.valueOf(equityHistoryId));
 
 			if (socialEquityHistory == null) {
 				if (_log.isWarnEnabled()) {
@@ -356,7 +356,7 @@ public class SocialEquityHistoryPersistenceImpl extends BasePersistenceImpl<Soci
 				session = openSession();
 
 				socialEquityHistory = (SocialEquityHistory)session.get(SocialEquityHistoryImpl.class,
-						new Long(equityHistoryId));
+						Long.valueOf(equityHistoryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

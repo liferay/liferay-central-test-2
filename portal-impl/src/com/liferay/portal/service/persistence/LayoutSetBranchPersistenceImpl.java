@@ -130,7 +130,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(layoutSetBranch.getGroupId()),
+				Long.valueOf(layoutSetBranch.getGroupId()),
 				Boolean.valueOf(layoutSetBranch.getPrivateLayout()),
 				
 			layoutSetBranch.getName()
@@ -180,7 +180,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(layoutSetBranch.getGroupId()),
+				Long.valueOf(layoutSetBranch.getGroupId()),
 				Boolean.valueOf(layoutSetBranch.getPrivateLayout()),
 				
 			layoutSetBranch.getName()
@@ -231,7 +231,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 			session = openSession();
 
 			LayoutSetBranch layoutSetBranch = (LayoutSetBranch)session.get(LayoutSetBranchImpl.class,
-					new Long(layoutSetBranchId));
+					Long.valueOf(layoutSetBranchId));
 
 			if (layoutSetBranch == null) {
 				if (_log.isWarnEnabled()) {
@@ -292,7 +292,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(layoutSetBranchModelImpl.getGroupId()),
+				Long.valueOf(layoutSetBranchModelImpl.getGroupId()),
 				Boolean.valueOf(layoutSetBranchModelImpl.getPrivateLayout()),
 				
 			layoutSetBranchModelImpl.getName()
@@ -342,7 +342,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 					layoutSetBranchModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 				new Object[] {
-					new Long(layoutSetBranchModelImpl.getOriginalGroupId()),
+					Long.valueOf(layoutSetBranchModelImpl.getOriginalGroupId()),
 					Boolean.valueOf(
 						layoutSetBranchModelImpl.getOriginalPrivateLayout()),
 					
@@ -357,7 +357,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 					layoutSetBranchModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 				new Object[] {
-					new Long(layoutSetBranch.getGroupId()),
+					Long.valueOf(layoutSetBranch.getGroupId()),
 					Boolean.valueOf(layoutSetBranch.getPrivateLayout()),
 					
 				layoutSetBranch.getName()
@@ -459,7 +459,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 				session = openSession();
 
 				layoutSetBranch = (LayoutSetBranch)session.get(LayoutSetBranchImpl.class,
-						new Long(layoutSetBranchId));
+						Long.valueOf(layoutSetBranchId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -143,10 +143,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C,
 			new Object[] {
-				new Long(subscription.getCompanyId()),
-				new Long(subscription.getUserId()),
-				new Long(subscription.getClassNameId()),
-				new Long(subscription.getClassPK())
+				Long.valueOf(subscription.getCompanyId()),
+				Long.valueOf(subscription.getUserId()),
+				Long.valueOf(subscription.getClassNameId()),
+				Long.valueOf(subscription.getClassPK())
 			}, subscription);
 	}
 
@@ -193,10 +193,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C,
 			new Object[] {
-				new Long(subscription.getCompanyId()),
-				new Long(subscription.getUserId()),
-				new Long(subscription.getClassNameId()),
-				new Long(subscription.getClassPK())
+				Long.valueOf(subscription.getCompanyId()),
+				Long.valueOf(subscription.getUserId()),
+				Long.valueOf(subscription.getClassNameId()),
+				Long.valueOf(subscription.getClassPK())
 			});
 	}
 
@@ -244,7 +244,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 			session = openSession();
 
 			Subscription subscription = (Subscription)session.get(SubscriptionImpl.class,
-					new Long(subscriptionId));
+					Long.valueOf(subscriptionId));
 
 			if (subscription == null) {
 				if (_log.isWarnEnabled()) {
@@ -305,10 +305,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C,
 			new Object[] {
-				new Long(subscriptionModelImpl.getCompanyId()),
-				new Long(subscriptionModelImpl.getUserId()),
-				new Long(subscriptionModelImpl.getClassNameId()),
-				new Long(subscriptionModelImpl.getClassPK())
+				Long.valueOf(subscriptionModelImpl.getCompanyId()),
+				Long.valueOf(subscriptionModelImpl.getUserId()),
+				Long.valueOf(subscriptionModelImpl.getClassNameId()),
+				Long.valueOf(subscriptionModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
@@ -354,10 +354,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				(subscription.getClassPK() != subscriptionModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C,
 				new Object[] {
-					new Long(subscriptionModelImpl.getOriginalCompanyId()),
-					new Long(subscriptionModelImpl.getOriginalUserId()),
-					new Long(subscriptionModelImpl.getOriginalClassNameId()),
-					new Long(subscriptionModelImpl.getOriginalClassPK())
+					Long.valueOf(subscriptionModelImpl.getOriginalCompanyId()),
+					Long.valueOf(subscriptionModelImpl.getOriginalUserId()),
+					Long.valueOf(subscriptionModelImpl.getOriginalClassNameId()),
+					Long.valueOf(subscriptionModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -368,10 +368,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				(subscription.getClassPK() != subscriptionModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C,
 				new Object[] {
-					new Long(subscription.getCompanyId()),
-					new Long(subscription.getUserId()),
-					new Long(subscription.getClassNameId()),
-					new Long(subscription.getClassPK())
+					Long.valueOf(subscription.getCompanyId()),
+					Long.valueOf(subscription.getUserId()),
+					Long.valueOf(subscription.getClassNameId()),
+					Long.valueOf(subscription.getClassPK())
 				}, subscription);
 		}
 
@@ -469,7 +469,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				session = openSession();
 
 				subscription = (Subscription)session.get(SubscriptionImpl.class,
-						new Long(subscriptionId));
+						Long.valueOf(subscriptionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

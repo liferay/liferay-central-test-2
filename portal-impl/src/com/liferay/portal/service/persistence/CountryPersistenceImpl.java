@@ -219,7 +219,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 			session = openSession();
 
 			Country country = (Country)session.get(CountryImpl.class,
-					new Long(countryId));
+					Long.valueOf(countryId));
 
 			if (country == null) {
 				if (_log.isWarnEnabled()) {
@@ -452,7 +452,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 				session = openSession();
 
 				country = (Country)session.get(CountryImpl.class,
-						new Long(countryId));
+						Long.valueOf(countryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

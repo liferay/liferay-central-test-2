@@ -166,12 +166,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalStructure.getUuid(),
-				new Long(journalStructure.getGroupId())
+				Long.valueOf(journalStructure.getGroupId())
 			}, journalStructure);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
 			new Object[] {
-				new Long(journalStructure.getGroupId()),
+				Long.valueOf(journalStructure.getGroupId()),
 				
 			journalStructure.getStructureId()
 			}, journalStructure);
@@ -221,12 +221,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalStructure.getUuid(),
-				new Long(journalStructure.getGroupId())
+				Long.valueOf(journalStructure.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
 			new Object[] {
-				new Long(journalStructure.getGroupId()),
+				Long.valueOf(journalStructure.getGroupId()),
 				
 			journalStructure.getStructureId()
 			});
@@ -280,7 +280,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			session = openSession();
 
 			JournalStructure journalStructure = (JournalStructure)session.get(JournalStructureImpl.class,
-					new Long(id));
+					Long.valueOf(id));
 
 			if (journalStructure == null) {
 				if (_log.isWarnEnabled()) {
@@ -341,12 +341,12 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalStructureModelImpl.getUuid(),
-				new Long(journalStructureModelImpl.getGroupId())
+				Long.valueOf(journalStructureModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
 			new Object[] {
-				new Long(journalStructureModelImpl.getGroupId()),
+				Long.valueOf(journalStructureModelImpl.getGroupId()),
 				
 			journalStructureModelImpl.getStructureId()
 			});
@@ -401,7 +401,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					journalStructureModelImpl.getOriginalUuid(),
-					new Long(journalStructureModelImpl.getOriginalGroupId())
+					Long.valueOf(journalStructureModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -412,7 +412,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					journalStructure.getUuid(),
-					new Long(journalStructure.getGroupId())
+					Long.valueOf(journalStructure.getGroupId())
 				}, journalStructure);
 		}
 
@@ -422,7 +422,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					journalStructureModelImpl.getOriginalStructureId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
 				new Object[] {
-					new Long(journalStructureModelImpl.getOriginalGroupId()),
+					Long.valueOf(journalStructureModelImpl.getOriginalGroupId()),
 					
 				journalStructureModelImpl.getOriginalStructureId()
 				});
@@ -434,7 +434,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 					journalStructureModelImpl.getOriginalStructureId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
 				new Object[] {
-					new Long(journalStructure.getGroupId()),
+					Long.valueOf(journalStructure.getGroupId()),
 					
 				journalStructure.getStructureId()
 				}, journalStructure);
@@ -539,7 +539,7 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 				session = openSession();
 
 				journalStructure = (JournalStructure)session.get(JournalStructureImpl.class,
-						new Long(id));
+						Long.valueOf(id));
 			}
 			catch (Exception e) {
 				throw processException(e);

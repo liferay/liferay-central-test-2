@@ -175,16 +175,16 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalTemplate.getUuid(),
-				new Long(journalTemplate.getGroupId())
+				Long.valueOf(journalTemplate.getGroupId())
 			}, journalTemplate);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-			new Object[] { new Long(journalTemplate.getSmallImageId()) },
+			new Object[] { Long.valueOf(journalTemplate.getSmallImageId()) },
 			journalTemplate);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_T,
 			new Object[] {
-				new Long(journalTemplate.getGroupId()),
+				Long.valueOf(journalTemplate.getGroupId()),
 				
 			journalTemplate.getTemplateId()
 			}, journalTemplate);
@@ -234,15 +234,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalTemplate.getUuid(),
-				new Long(journalTemplate.getGroupId())
+				Long.valueOf(journalTemplate.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-			new Object[] { new Long(journalTemplate.getSmallImageId()) });
+			new Object[] { Long.valueOf(journalTemplate.getSmallImageId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_T,
 			new Object[] {
-				new Long(journalTemplate.getGroupId()),
+				Long.valueOf(journalTemplate.getGroupId()),
 				
 			journalTemplate.getTemplateId()
 			});
@@ -296,7 +296,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			session = openSession();
 
 			JournalTemplate journalTemplate = (JournalTemplate)session.get(JournalTemplateImpl.class,
-					new Long(id));
+					Long.valueOf(id));
 
 			if (journalTemplate == null) {
 				if (_log.isWarnEnabled()) {
@@ -357,15 +357,17 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalTemplateModelImpl.getUuid(),
-				new Long(journalTemplateModelImpl.getGroupId())
+				Long.valueOf(journalTemplateModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-			new Object[] { new Long(journalTemplateModelImpl.getSmallImageId()) });
+			new Object[] {
+				Long.valueOf(journalTemplateModelImpl.getSmallImageId())
+			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_T,
 			new Object[] {
-				new Long(journalTemplateModelImpl.getGroupId()),
+				Long.valueOf(journalTemplateModelImpl.getGroupId()),
 				
 			journalTemplateModelImpl.getTemplateId()
 			});
@@ -420,7 +422,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					journalTemplateModelImpl.getOriginalUuid(),
-					new Long(journalTemplateModelImpl.getOriginalGroupId())
+					Long.valueOf(journalTemplateModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -431,7 +433,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					journalTemplate.getUuid(),
-					new Long(journalTemplate.getGroupId())
+					Long.valueOf(journalTemplate.getGroupId())
 				}, journalTemplate);
 		}
 
@@ -439,14 +441,15 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				(journalTemplate.getSmallImageId() != journalTemplateModelImpl.getOriginalSmallImageId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
 				new Object[] {
-					new Long(journalTemplateModelImpl.getOriginalSmallImageId())
+					Long.valueOf(
+						journalTemplateModelImpl.getOriginalSmallImageId())
 				});
 		}
 
 		if (isNew ||
 				(journalTemplate.getSmallImageId() != journalTemplateModelImpl.getOriginalSmallImageId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_SMALLIMAGEID,
-				new Object[] { new Long(journalTemplate.getSmallImageId()) },
+				new Object[] { Long.valueOf(journalTemplate.getSmallImageId()) },
 				journalTemplate);
 		}
 
@@ -456,7 +459,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					journalTemplateModelImpl.getOriginalTemplateId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_T,
 				new Object[] {
-					new Long(journalTemplateModelImpl.getOriginalGroupId()),
+					Long.valueOf(journalTemplateModelImpl.getOriginalGroupId()),
 					
 				journalTemplateModelImpl.getOriginalTemplateId()
 				});
@@ -468,7 +471,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 					journalTemplateModelImpl.getOriginalTemplateId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_T,
 				new Object[] {
-					new Long(journalTemplate.getGroupId()),
+					Long.valueOf(journalTemplate.getGroupId()),
 					
 				journalTemplate.getTemplateId()
 				}, journalTemplate);
@@ -576,7 +579,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistenceImpl<JournalT
 				session = openSession();
 
 				journalTemplate = (JournalTemplate)session.get(JournalTemplateImpl.class,
-						new Long(id));
+						Long.valueOf(id));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -114,7 +114,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
 			new Object[] {
-				new Long(wikiPageResource.getNodeId()),
+				Long.valueOf(wikiPageResource.getNodeId()),
 				
 			wikiPageResource.getTitle()
 			}, wikiPageResource);
@@ -163,7 +163,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
 			new Object[] {
-				new Long(wikiPageResource.getNodeId()),
+				Long.valueOf(wikiPageResource.getNodeId()),
 				
 			wikiPageResource.getTitle()
 			});
@@ -217,7 +217,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			session = openSession();
 
 			WikiPageResource wikiPageResource = (WikiPageResource)session.get(WikiPageResourceImpl.class,
-					new Long(resourcePrimKey));
+					Long.valueOf(resourcePrimKey));
 
 			if (wikiPageResource == null) {
 				if (_log.isWarnEnabled()) {
@@ -278,7 +278,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
 			new Object[] {
-				new Long(wikiPageResourceModelImpl.getNodeId()),
+				Long.valueOf(wikiPageResourceModelImpl.getNodeId()),
 				
 			wikiPageResourceModelImpl.getTitle()
 			});
@@ -332,7 +332,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 					wikiPageResourceModelImpl.getOriginalTitle()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
 				new Object[] {
-					new Long(wikiPageResourceModelImpl.getOriginalNodeId()),
+					Long.valueOf(wikiPageResourceModelImpl.getOriginalNodeId()),
 					
 				wikiPageResourceModelImpl.getOriginalTitle()
 				});
@@ -344,7 +344,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 					wikiPageResourceModelImpl.getOriginalTitle()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
 				new Object[] {
-					new Long(wikiPageResource.getNodeId()),
+					Long.valueOf(wikiPageResource.getNodeId()),
 					
 				wikiPageResource.getTitle()
 				}, wikiPageResource);
@@ -440,7 +440,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 				session = openSession();
 
 				wikiPageResource = (WikiPageResource)session.get(WikiPageResourceImpl.class,
-						new Long(resourcePrimKey));
+						Long.valueOf(resourcePrimKey));
 			}
 			catch (Exception e) {
 				throw processException(e);

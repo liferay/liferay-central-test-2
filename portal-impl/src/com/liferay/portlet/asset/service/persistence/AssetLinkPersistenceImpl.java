@@ -254,7 +254,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 			session = openSession();
 
 			AssetLink assetLink = (AssetLink)session.get(AssetLinkImpl.class,
-					new Long(linkId));
+					Long.valueOf(linkId));
 
 			if (assetLink == null) {
 				if (_log.isWarnEnabled()) {
@@ -434,7 +434,7 @@ public class AssetLinkPersistenceImpl extends BasePersistenceImpl<AssetLink>
 				session = openSession();
 
 				assetLink = (AssetLink)session.get(AssetLinkImpl.class,
-						new Long(linkId));
+						Long.valueOf(linkId));
 			}
 			catch (Exception e) {
 				throw processException(e);

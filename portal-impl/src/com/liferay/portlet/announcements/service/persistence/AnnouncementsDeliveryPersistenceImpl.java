@@ -113,7 +113,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
-				new Long(announcementsDelivery.getUserId()),
+				Long.valueOf(announcementsDelivery.getUserId()),
 				
 			announcementsDelivery.getType()
 			}, announcementsDelivery);
@@ -163,7 +163,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
-				new Long(announcementsDelivery.getUserId()),
+				Long.valueOf(announcementsDelivery.getUserId()),
 				
 			announcementsDelivery.getType()
 			});
@@ -213,7 +213,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 			session = openSession();
 
 			AnnouncementsDelivery announcementsDelivery = (AnnouncementsDelivery)session.get(AnnouncementsDeliveryImpl.class,
-					new Long(deliveryId));
+					Long.valueOf(deliveryId));
 
 			if (announcementsDelivery == null) {
 				if (_log.isWarnEnabled()) {
@@ -273,7 +273,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
-				new Long(announcementsDeliveryModelImpl.getUserId()),
+				Long.valueOf(announcementsDeliveryModelImpl.getUserId()),
 				
 			announcementsDeliveryModelImpl.getType()
 			});
@@ -322,7 +322,8 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 					announcementsDeliveryModelImpl.getOriginalType()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
 				new Object[] {
-					new Long(announcementsDeliveryModelImpl.getOriginalUserId()),
+					Long.valueOf(
+						announcementsDeliveryModelImpl.getOriginalUserId()),
 					
 				announcementsDeliveryModelImpl.getOriginalType()
 				});
@@ -334,7 +335,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 					announcementsDeliveryModelImpl.getOriginalType()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
 				new Object[] {
-					new Long(announcementsDelivery.getUserId()),
+					Long.valueOf(announcementsDelivery.getUserId()),
 					
 				announcementsDelivery.getType()
 				}, announcementsDelivery);
@@ -433,7 +434,7 @@ public class AnnouncementsDeliveryPersistenceImpl extends BasePersistenceImpl<An
 				session = openSession();
 
 				announcementsDelivery = (AnnouncementsDelivery)session.get(AnnouncementsDeliveryImpl.class,
-						new Long(deliveryId));
+						Long.valueOf(deliveryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

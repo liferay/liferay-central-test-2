@@ -145,9 +145,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
 			new Object[] {
-				new Long(portletPreferences.getOwnerId()),
-				new Integer(portletPreferences.getOwnerType()),
-				new Long(portletPreferences.getPlid()),
+				Long.valueOf(portletPreferences.getOwnerId()),
+				Integer.valueOf(portletPreferences.getOwnerType()),
+				Long.valueOf(portletPreferences.getPlid()),
 				
 			portletPreferences.getPortletId()
 			}, portletPreferences);
@@ -196,9 +196,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O_P_P,
 			new Object[] {
-				new Long(portletPreferences.getOwnerId()),
-				new Integer(portletPreferences.getOwnerType()),
-				new Long(portletPreferences.getPlid()),
+				Long.valueOf(portletPreferences.getOwnerId()),
+				Integer.valueOf(portletPreferences.getOwnerType()),
+				Long.valueOf(portletPreferences.getPlid()),
 				
 			portletPreferences.getPortletId()
 			});
@@ -248,7 +248,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 			session = openSession();
 
 			PortletPreferences portletPreferences = (PortletPreferences)session.get(PortletPreferencesImpl.class,
-					new Long(portletPreferencesId));
+					Long.valueOf(portletPreferencesId));
 
 			if (portletPreferences == null) {
 				if (_log.isWarnEnabled()) {
@@ -309,9 +309,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O_P_P,
 			new Object[] {
-				new Long(portletPreferencesModelImpl.getOwnerId()),
-				new Integer(portletPreferencesModelImpl.getOwnerType()),
-				new Long(portletPreferencesModelImpl.getPlid()),
+				Long.valueOf(portletPreferencesModelImpl.getOwnerId()),
+				Integer.valueOf(portletPreferencesModelImpl.getOwnerType()),
+				Long.valueOf(portletPreferencesModelImpl.getPlid()),
 				
 			portletPreferencesModelImpl.getPortletId()
 			});
@@ -361,9 +361,11 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					portletPreferencesModelImpl.getOriginalPortletId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O_P_P,
 				new Object[] {
-					new Long(portletPreferencesModelImpl.getOriginalOwnerId()),
-					new Integer(portletPreferencesModelImpl.getOriginalOwnerType()),
-					new Long(portletPreferencesModelImpl.getOriginalPlid()),
+					Long.valueOf(
+						portletPreferencesModelImpl.getOriginalOwnerId()),
+					Integer.valueOf(
+						portletPreferencesModelImpl.getOriginalOwnerType()),
+					Long.valueOf(portletPreferencesModelImpl.getOriginalPlid()),
 					
 				portletPreferencesModelImpl.getOriginalPortletId()
 				});
@@ -377,9 +379,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 					portletPreferencesModelImpl.getOriginalPortletId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O_P_P,
 				new Object[] {
-					new Long(portletPreferences.getOwnerId()),
-					new Integer(portletPreferences.getOwnerType()),
-					new Long(portletPreferences.getPlid()),
+					Long.valueOf(portletPreferences.getOwnerId()),
+					Integer.valueOf(portletPreferences.getOwnerType()),
+					Long.valueOf(portletPreferences.getPlid()),
 					
 				portletPreferences.getPortletId()
 				}, portletPreferences);
@@ -478,7 +480,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 				session = openSession();
 
 				portletPreferences = (PortletPreferences)session.get(PortletPreferencesImpl.class,
-						new Long(portletPreferencesId));
+						Long.valueOf(portletPreferencesId));
 			}
 			catch (Exception e) {
 				throw processException(e);

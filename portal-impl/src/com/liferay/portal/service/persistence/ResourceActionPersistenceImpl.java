@@ -201,7 +201,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			session = openSession();
 
 			ResourceAction resourceAction = (ResourceAction)session.get(ResourceActionImpl.class,
-					new Long(resourceActionId));
+					Long.valueOf(resourceActionId));
 
 			if (resourceAction == null) {
 				if (_log.isWarnEnabled()) {
@@ -419,7 +419,7 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				session = openSession();
 
 				resourceAction = (ResourceAction)session.get(ResourceActionImpl.class,
-						new Long(resourceActionId));
+						Long.valueOf(resourceActionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

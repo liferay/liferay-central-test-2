@@ -115,7 +115,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
-				new Long(userIdMapper.getUserId()),
+				Long.valueOf(userIdMapper.getUserId()),
 				
 			userIdMapper.getType()
 			}, userIdMapper);
@@ -171,7 +171,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
-				new Long(userIdMapper.getUserId()),
+				Long.valueOf(userIdMapper.getUserId()),
 				
 			userIdMapper.getType()
 			});
@@ -228,7 +228,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 			session = openSession();
 
 			UserIdMapper userIdMapper = (UserIdMapper)session.get(UserIdMapperImpl.class,
-					new Long(userIdMapperId));
+					Long.valueOf(userIdMapperId));
 
 			if (userIdMapper == null) {
 				if (_log.isWarnEnabled()) {
@@ -289,7 +289,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
 			new Object[] {
-				new Long(userIdMapperModelImpl.getUserId()),
+				Long.valueOf(userIdMapperModelImpl.getUserId()),
 				
 			userIdMapperModelImpl.getType()
 			});
@@ -343,7 +343,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 					userIdMapperModelImpl.getOriginalType()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
 				new Object[] {
-					new Long(userIdMapperModelImpl.getOriginalUserId()),
+					Long.valueOf(userIdMapperModelImpl.getOriginalUserId()),
 					
 				userIdMapperModelImpl.getOriginalType()
 				});
@@ -355,7 +355,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 					userIdMapperModelImpl.getOriginalType()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
 				new Object[] {
-					new Long(userIdMapper.getUserId()),
+					Long.valueOf(userIdMapper.getUserId()),
 					
 				userIdMapper.getType()
 				}, userIdMapper);
@@ -477,7 +477,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 				session = openSession();
 
 				userIdMapper = (UserIdMapper)session.get(UserIdMapperImpl.class,
-						new Long(userIdMapperId));
+						Long.valueOf(userIdMapperId));
 			}
 			catch (Exception e) {
 				throw processException(e);

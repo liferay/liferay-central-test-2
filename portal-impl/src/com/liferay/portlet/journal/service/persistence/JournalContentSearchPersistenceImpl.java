@@ -201,9 +201,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
 			new Object[] {
-				new Long(journalContentSearch.getGroupId()),
+				Long.valueOf(journalContentSearch.getGroupId()),
 				Boolean.valueOf(journalContentSearch.getPrivateLayout()),
-				new Long(journalContentSearch.getLayoutId()),
+				Long.valueOf(journalContentSearch.getLayoutId()),
 				
 			journalContentSearch.getPortletId(),
 				
@@ -254,9 +254,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
 			new Object[] {
-				new Long(journalContentSearch.getGroupId()),
+				Long.valueOf(journalContentSearch.getGroupId()),
 				Boolean.valueOf(journalContentSearch.getPrivateLayout()),
-				new Long(journalContentSearch.getLayoutId()),
+				Long.valueOf(journalContentSearch.getLayoutId()),
 				
 			journalContentSearch.getPortletId(),
 				
@@ -308,7 +308,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			session = openSession();
 
 			JournalContentSearch journalContentSearch = (JournalContentSearch)session.get(JournalContentSearchImpl.class,
-					new Long(contentSearchId));
+					Long.valueOf(contentSearchId));
 
 			if (journalContentSearch == null) {
 				if (_log.isWarnEnabled()) {
@@ -369,10 +369,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
 			new Object[] {
-				new Long(journalContentSearchModelImpl.getGroupId()),
+				Long.valueOf(journalContentSearchModelImpl.getGroupId()),
 				Boolean.valueOf(
 					journalContentSearchModelImpl.getPrivateLayout()),
-				new Long(journalContentSearchModelImpl.getLayoutId()),
+				Long.valueOf(journalContentSearchModelImpl.getLayoutId()),
 				
 			journalContentSearchModelImpl.getPortletId(),
 				
@@ -426,10 +426,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					journalContentSearchModelImpl.getOriginalArticleId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
 				new Object[] {
-					new Long(journalContentSearchModelImpl.getOriginalGroupId()),
+					Long.valueOf(
+						journalContentSearchModelImpl.getOriginalGroupId()),
 					Boolean.valueOf(
 						journalContentSearchModelImpl.getOriginalPrivateLayout()),
-					new Long(journalContentSearchModelImpl.getOriginalLayoutId()),
+					Long.valueOf(
+						journalContentSearchModelImpl.getOriginalLayoutId()),
 					
 				journalContentSearchModelImpl.getOriginalPortletId(),
 					
@@ -447,9 +449,9 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 					journalContentSearchModelImpl.getOriginalArticleId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
 				new Object[] {
-					new Long(journalContentSearch.getGroupId()),
+					Long.valueOf(journalContentSearch.getGroupId()),
 					Boolean.valueOf(journalContentSearch.getPrivateLayout()),
-					new Long(journalContentSearch.getLayoutId()),
+					Long.valueOf(journalContentSearch.getLayoutId()),
 					
 				journalContentSearch.getPortletId(),
 					
@@ -550,7 +552,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				session = openSession();
 
 				journalContentSearch = (JournalContentSearch)session.get(JournalContentSearchImpl.class,
-						new Long(contentSearchId));
+						Long.valueOf(contentSearchId));
 			}
 			catch (Exception e) {
 				throw processException(e);

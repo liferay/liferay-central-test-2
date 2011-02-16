@@ -124,11 +124,11 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_T,
 			new Object[] {
-				new Long(socialEquitySetting.getGroupId()),
-				new Long(socialEquitySetting.getClassNameId()),
+				Long.valueOf(socialEquitySetting.getGroupId()),
+				Long.valueOf(socialEquitySetting.getClassNameId()),
 				
 			socialEquitySetting.getActionId(),
-				new Integer(socialEquitySetting.getType())
+				Integer.valueOf(socialEquitySetting.getType())
 			}, socialEquitySetting);
 	}
 
@@ -175,11 +175,11 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_T,
 			new Object[] {
-				new Long(socialEquitySetting.getGroupId()),
-				new Long(socialEquitySetting.getClassNameId()),
+				Long.valueOf(socialEquitySetting.getGroupId()),
+				Long.valueOf(socialEquitySetting.getClassNameId()),
 				
 			socialEquitySetting.getActionId(),
-				new Integer(socialEquitySetting.getType())
+				Integer.valueOf(socialEquitySetting.getType())
 			});
 	}
 
@@ -227,7 +227,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 			session = openSession();
 
 			SocialEquitySetting socialEquitySetting = (SocialEquitySetting)session.get(SocialEquitySettingImpl.class,
-					new Long(equitySettingId));
+					Long.valueOf(equitySettingId));
 
 			if (socialEquitySetting == null) {
 				if (_log.isWarnEnabled()) {
@@ -288,11 +288,11 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_T,
 			new Object[] {
-				new Long(socialEquitySettingModelImpl.getGroupId()),
-				new Long(socialEquitySettingModelImpl.getClassNameId()),
+				Long.valueOf(socialEquitySettingModelImpl.getGroupId()),
+				Long.valueOf(socialEquitySettingModelImpl.getClassNameId()),
 				
 			socialEquitySettingModelImpl.getActionId(),
-				new Integer(socialEquitySettingModelImpl.getType())
+				Integer.valueOf(socialEquitySettingModelImpl.getType())
 			});
 
 		EntityCacheUtil.removeResult(SocialEquitySettingModelImpl.ENTITY_CACHE_ENABLED,
@@ -340,11 +340,14 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 				(socialEquitySetting.getType() != socialEquitySettingModelImpl.getOriginalType()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_T,
 				new Object[] {
-					new Long(socialEquitySettingModelImpl.getOriginalGroupId()),
-					new Long(socialEquitySettingModelImpl.getOriginalClassNameId()),
+					Long.valueOf(
+						socialEquitySettingModelImpl.getOriginalGroupId()),
+					Long.valueOf(
+						socialEquitySettingModelImpl.getOriginalClassNameId()),
 					
 				socialEquitySettingModelImpl.getOriginalActionId(),
-					new Integer(socialEquitySettingModelImpl.getOriginalType())
+					Integer.valueOf(
+						socialEquitySettingModelImpl.getOriginalType())
 				});
 		}
 
@@ -356,11 +359,11 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 				(socialEquitySetting.getType() != socialEquitySettingModelImpl.getOriginalType()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_T,
 				new Object[] {
-					new Long(socialEquitySetting.getGroupId()),
-					new Long(socialEquitySetting.getClassNameId()),
+					Long.valueOf(socialEquitySetting.getGroupId()),
+					Long.valueOf(socialEquitySetting.getClassNameId()),
 					
 				socialEquitySetting.getActionId(),
-					new Integer(socialEquitySetting.getType())
+					Integer.valueOf(socialEquitySetting.getType())
 				}, socialEquitySetting);
 		}
 
@@ -460,7 +463,7 @@ public class SocialEquitySettingPersistenceImpl extends BasePersistenceImpl<Soci
 				session = openSession();
 
 				socialEquitySetting = (SocialEquitySetting)session.get(SocialEquitySettingImpl.class,
-						new Long(equitySettingId));
+						Long.valueOf(equitySettingId));
 			}
 			catch (Exception e) {
 				throw processException(e);

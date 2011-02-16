@@ -185,7 +185,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 			session = openSession();
 
 			PasswordTracker passwordTracker = (PasswordTracker)session.get(PasswordTrackerImpl.class,
-					new Long(passwordTrackerId));
+					Long.valueOf(passwordTrackerId));
 
 			if (passwordTracker == null) {
 				if (_log.isWarnEnabled()) {
@@ -364,7 +364,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 				session = openSession();
 
 				passwordTracker = (PasswordTracker)session.get(PasswordTrackerImpl.class,
-						new Long(passwordTrackerId));
+						Long.valueOf(passwordTrackerId));
 			}
 			catch (Exception e) {
 				throw processException(e);

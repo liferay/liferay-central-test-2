@@ -106,7 +106,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
 			new Object[] {
-				new Long(layoutSet.getGroupId()),
+				Long.valueOf(layoutSet.getGroupId()),
 				Boolean.valueOf(layoutSet.getPrivateLayout())
 			}, layoutSet);
 	}
@@ -153,7 +153,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
 			new Object[] {
-				new Long(layoutSet.getGroupId()),
+				Long.valueOf(layoutSet.getGroupId()),
 				Boolean.valueOf(layoutSet.getPrivateLayout())
 			});
 	}
@@ -202,7 +202,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 			session = openSession();
 
 			LayoutSet layoutSet = (LayoutSet)session.get(LayoutSetImpl.class,
-					new Long(layoutSetId));
+					Long.valueOf(layoutSetId));
 
 			if (layoutSet == null) {
 				if (_log.isWarnEnabled()) {
@@ -261,7 +261,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
 			new Object[] {
-				new Long(layoutSetModelImpl.getGroupId()),
+				Long.valueOf(layoutSetModelImpl.getGroupId()),
 				Boolean.valueOf(layoutSetModelImpl.getPrivateLayout())
 			});
 
@@ -305,7 +305,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 				(layoutSet.getPrivateLayout() != layoutSetModelImpl.getOriginalPrivateLayout()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P,
 				new Object[] {
-					new Long(layoutSetModelImpl.getOriginalGroupId()),
+					Long.valueOf(layoutSetModelImpl.getOriginalGroupId()),
 					Boolean.valueOf(
 						layoutSetModelImpl.getOriginalPrivateLayout())
 				});
@@ -316,7 +316,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 				(layoutSet.getPrivateLayout() != layoutSetModelImpl.getOriginalPrivateLayout()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P,
 				new Object[] {
-					new Long(layoutSet.getGroupId()),
+					Long.valueOf(layoutSet.getGroupId()),
 					Boolean.valueOf(layoutSet.getPrivateLayout())
 				}, layoutSet);
 		}
@@ -420,7 +420,7 @@ public class LayoutSetPersistenceImpl extends BasePersistenceImpl<LayoutSet>
 				session = openSession();
 
 				layoutSet = (LayoutSet)session.get(LayoutSetImpl.class,
-						new Long(layoutSetId));
+						Long.valueOf(layoutSetId));
 			}
 			catch (Exception e) {
 				throw processException(e);

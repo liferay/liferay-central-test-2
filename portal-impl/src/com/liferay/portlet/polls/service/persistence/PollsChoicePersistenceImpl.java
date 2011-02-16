@@ -124,7 +124,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_N,
 			new Object[] {
-				new Long(pollsChoice.getQuestionId()),
+				Long.valueOf(pollsChoice.getQuestionId()),
 				
 			pollsChoice.getName()
 			}, pollsChoice);
@@ -172,7 +172,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_N,
 			new Object[] {
-				new Long(pollsChoice.getQuestionId()),
+				Long.valueOf(pollsChoice.getQuestionId()),
 				
 			pollsChoice.getName()
 			});
@@ -226,7 +226,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 			session = openSession();
 
 			PollsChoice pollsChoice = (PollsChoice)session.get(PollsChoiceImpl.class,
-					new Long(choiceId));
+					Long.valueOf(choiceId));
 
 			if (pollsChoice == null) {
 				if (_log.isWarnEnabled()) {
@@ -286,7 +286,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_N,
 			new Object[] {
-				new Long(pollsChoiceModelImpl.getQuestionId()),
+				Long.valueOf(pollsChoiceModelImpl.getQuestionId()),
 				
 			pollsChoiceModelImpl.getName()
 			});
@@ -339,7 +339,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					pollsChoiceModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_N,
 				new Object[] {
-					new Long(pollsChoiceModelImpl.getOriginalQuestionId()),
+					Long.valueOf(pollsChoiceModelImpl.getOriginalQuestionId()),
 					
 				pollsChoiceModelImpl.getOriginalName()
 				});
@@ -351,7 +351,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 					pollsChoiceModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_N,
 				new Object[] {
-					new Long(pollsChoice.getQuestionId()),
+					Long.valueOf(pollsChoice.getQuestionId()),
 					
 				pollsChoice.getName()
 				}, pollsChoice);
@@ -447,7 +447,7 @@ public class PollsChoicePersistenceImpl extends BasePersistenceImpl<PollsChoice>
 				session = openSession();
 
 				pollsChoice = (PollsChoice)session.get(PollsChoiceImpl.class,
-						new Long(choiceId));
+						Long.valueOf(choiceId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -204,7 +204,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 			session = openSession();
 
 			ShoppingCategory shoppingCategory = (ShoppingCategory)session.get(ShoppingCategoryImpl.class,
-					new Long(categoryId));
+					Long.valueOf(categoryId));
 
 			if (shoppingCategory == null) {
 				if (_log.isWarnEnabled()) {
@@ -389,7 +389,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistenceImpl<Shoppin
 				session = openSession();
 
 				shoppingCategory = (ShoppingCategory)session.get(ShoppingCategoryImpl.class,
-						new Long(categoryId));
+						Long.valueOf(categoryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -200,7 +200,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 			session = openSession();
 
 			LayoutPrototype layoutPrototype = (LayoutPrototype)session.get(LayoutPrototypeImpl.class,
-					new Long(layoutPrototypeId));
+					Long.valueOf(layoutPrototypeId));
 
 			if (layoutPrototype == null) {
 				if (_log.isWarnEnabled()) {
@@ -381,7 +381,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 				session = openSession();
 
 				layoutPrototype = (LayoutPrototype)session.get(LayoutPrototypeImpl.class,
-						new Long(layoutPrototypeId));
+						Long.valueOf(layoutPrototypeId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -170,8 +170,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
 			new Object[] {
-				new Long(tasksReview.getUserId()),
-				new Long(tasksReview.getProposalId())
+				Long.valueOf(tasksReview.getUserId()),
+				Long.valueOf(tasksReview.getProposalId())
 			}, tasksReview);
 	}
 
@@ -217,8 +217,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_P,
 			new Object[] {
-				new Long(tasksReview.getUserId()),
-				new Long(tasksReview.getProposalId())
+				Long.valueOf(tasksReview.getUserId()),
+				Long.valueOf(tasksReview.getProposalId())
 			});
 	}
 
@@ -266,7 +266,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 			session = openSession();
 
 			TasksReview tasksReview = (TasksReview)session.get(TasksReviewImpl.class,
-					new Long(reviewId));
+					Long.valueOf(reviewId));
 
 			if (tasksReview == null) {
 				if (_log.isWarnEnabled()) {
@@ -326,8 +326,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_P,
 			new Object[] {
-				new Long(tasksReviewModelImpl.getUserId()),
-				new Long(tasksReviewModelImpl.getProposalId())
+				Long.valueOf(tasksReviewModelImpl.getUserId()),
+				Long.valueOf(tasksReviewModelImpl.getProposalId())
 			});
 
 		EntityCacheUtil.removeResult(TasksReviewModelImpl.ENTITY_CACHE_ENABLED,
@@ -371,8 +371,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				(tasksReview.getProposalId() != tasksReviewModelImpl.getOriginalProposalId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_P,
 				new Object[] {
-					new Long(tasksReviewModelImpl.getOriginalUserId()),
-					new Long(tasksReviewModelImpl.getOriginalProposalId())
+					Long.valueOf(tasksReviewModelImpl.getOriginalUserId()),
+					Long.valueOf(tasksReviewModelImpl.getOriginalProposalId())
 				});
 		}
 
@@ -381,8 +381,8 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				(tasksReview.getProposalId() != tasksReviewModelImpl.getOriginalProposalId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_P,
 				new Object[] {
-					new Long(tasksReview.getUserId()),
-					new Long(tasksReview.getProposalId())
+					Long.valueOf(tasksReview.getUserId()),
+					Long.valueOf(tasksReview.getProposalId())
 				}, tasksReview);
 		}
 
@@ -484,7 +484,7 @@ public class TasksReviewPersistenceImpl extends BasePersistenceImpl<TasksReview>
 				session = openSession();
 
 				tasksReview = (TasksReview)session.get(TasksReviewImpl.class,
-						new Long(reviewId));
+						Long.valueOf(reviewId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -189,7 +189,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 			session = openSession();
 
 			ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)session.get(ShoppingItemPriceImpl.class,
-					new Long(itemPriceId));
+					Long.valueOf(itemPriceId));
 
 			if (shoppingItemPrice == null) {
 				if (_log.isWarnEnabled()) {
@@ -374,7 +374,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 				session = openSession();
 
 				shoppingItemPrice = (ShoppingItemPrice)session.get(ShoppingItemPriceImpl.class,
-						new Long(itemPriceId));
+						Long.valueOf(itemPriceId));
 			}
 			catch (Exception e) {
 				throw processException(e);

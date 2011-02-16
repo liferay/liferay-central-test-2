@@ -122,8 +122,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(shoppingCart.getGroupId()),
-				new Long(shoppingCart.getUserId())
+				Long.valueOf(shoppingCart.getGroupId()),
+				Long.valueOf(shoppingCart.getUserId())
 			}, shoppingCart);
 	}
 
@@ -170,8 +170,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(shoppingCart.getGroupId()),
-				new Long(shoppingCart.getUserId())
+				Long.valueOf(shoppingCart.getGroupId()),
+				Long.valueOf(shoppingCart.getUserId())
 			});
 	}
 
@@ -219,7 +219,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 			session = openSession();
 
 			ShoppingCart shoppingCart = (ShoppingCart)session.get(ShoppingCartImpl.class,
-					new Long(cartId));
+					Long.valueOf(cartId));
 
 			if (shoppingCart == null) {
 				if (_log.isWarnEnabled()) {
@@ -279,8 +279,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(shoppingCartModelImpl.getGroupId()),
-				new Long(shoppingCartModelImpl.getUserId())
+				Long.valueOf(shoppingCartModelImpl.getGroupId()),
+				Long.valueOf(shoppingCartModelImpl.getUserId())
 			});
 
 		EntityCacheUtil.removeResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
@@ -324,8 +324,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 				(shoppingCart.getUserId() != shoppingCartModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 				new Object[] {
-					new Long(shoppingCartModelImpl.getOriginalGroupId()),
-					new Long(shoppingCartModelImpl.getOriginalUserId())
+					Long.valueOf(shoppingCartModelImpl.getOriginalGroupId()),
+					Long.valueOf(shoppingCartModelImpl.getOriginalUserId())
 				});
 		}
 
@@ -334,8 +334,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 				(shoppingCart.getUserId() != shoppingCartModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 				new Object[] {
-					new Long(shoppingCart.getGroupId()),
-					new Long(shoppingCart.getUserId())
+					Long.valueOf(shoppingCart.getGroupId()),
+					Long.valueOf(shoppingCart.getUserId())
 				}, shoppingCart);
 		}
 
@@ -435,7 +435,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 				session = openSession();
 
 				shoppingCart = (ShoppingCart)session.get(ShoppingCartImpl.class,
-						new Long(cartId));
+						Long.valueOf(cartId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -164,13 +164,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
 			new Object[] {
-				new Long(resourcePermission.getCompanyId()),
+				Long.valueOf(resourcePermission.getCompanyId()),
 				
 			resourcePermission.getName(),
-				new Integer(resourcePermission.getScope()),
+				Integer.valueOf(resourcePermission.getScope()),
 				
 			resourcePermission.getPrimKey(),
-				new Long(resourcePermission.getRoleId())
+				Long.valueOf(resourcePermission.getRoleId())
 			}, resourcePermission);
 	}
 
@@ -217,13 +217,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
 			new Object[] {
-				new Long(resourcePermission.getCompanyId()),
+				Long.valueOf(resourcePermission.getCompanyId()),
 				
 			resourcePermission.getName(),
-				new Integer(resourcePermission.getScope()),
+				Integer.valueOf(resourcePermission.getScope()),
 				
 			resourcePermission.getPrimKey(),
-				new Long(resourcePermission.getRoleId())
+				Long.valueOf(resourcePermission.getRoleId())
 			});
 	}
 
@@ -271,7 +271,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 			session = openSession();
 
 			ResourcePermission resourcePermission = (ResourcePermission)session.get(ResourcePermissionImpl.class,
-					new Long(resourcePermissionId));
+					Long.valueOf(resourcePermissionId));
 
 			if (resourcePermission == null) {
 				if (_log.isWarnEnabled()) {
@@ -332,13 +332,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
 			new Object[] {
-				new Long(resourcePermissionModelImpl.getCompanyId()),
+				Long.valueOf(resourcePermissionModelImpl.getCompanyId()),
 				
 			resourcePermissionModelImpl.getName(),
-				new Integer(resourcePermissionModelImpl.getScope()),
+				Integer.valueOf(resourcePermissionModelImpl.getScope()),
 				
 			resourcePermissionModelImpl.getPrimKey(),
-				new Long(resourcePermissionModelImpl.getRoleId())
+				Long.valueOf(resourcePermissionModelImpl.getRoleId())
 			});
 
 		EntityCacheUtil.removeResult(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
@@ -388,13 +388,16 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				(resourcePermission.getRoleId() != resourcePermissionModelImpl.getOriginalRoleId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
 				new Object[] {
-					new Long(resourcePermissionModelImpl.getOriginalCompanyId()),
+					Long.valueOf(
+						resourcePermissionModelImpl.getOriginalCompanyId()),
 					
 				resourcePermissionModelImpl.getOriginalName(),
-					new Integer(resourcePermissionModelImpl.getOriginalScope()),
+					Integer.valueOf(
+						resourcePermissionModelImpl.getOriginalScope()),
 					
 				resourcePermissionModelImpl.getOriginalPrimKey(),
-					new Long(resourcePermissionModelImpl.getOriginalRoleId())
+					Long.valueOf(
+						resourcePermissionModelImpl.getOriginalRoleId())
 				});
 		}
 
@@ -408,13 +411,13 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				(resourcePermission.getRoleId() != resourcePermissionModelImpl.getOriginalRoleId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S_P_R,
 				new Object[] {
-					new Long(resourcePermission.getCompanyId()),
+					Long.valueOf(resourcePermission.getCompanyId()),
 					
 				resourcePermission.getName(),
-					new Integer(resourcePermission.getScope()),
+					Integer.valueOf(resourcePermission.getScope()),
 					
 				resourcePermission.getPrimKey(),
-					new Long(resourcePermission.getRoleId())
+					Long.valueOf(resourcePermission.getRoleId())
 				}, resourcePermission);
 		}
 
@@ -512,7 +515,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 				session = openSession();
 
 				resourcePermission = (ResourcePermission)session.get(ResourcePermissionImpl.class,
-						new Long(resourcePermissionId));
+						Long.valueOf(resourcePermissionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

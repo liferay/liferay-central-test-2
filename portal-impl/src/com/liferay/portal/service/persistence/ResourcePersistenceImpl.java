@@ -106,8 +106,11 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			ResourceImpl.class, resource.getPrimaryKey(), resource);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
-			new Object[] { new Long(resource.getCodeId()), resource.getPrimKey() },
-			resource);
+			new Object[] {
+				Long.valueOf(resource.getCodeId()),
+				
+			resource.getPrimKey()
+			}, resource);
 	}
 
 	/**
@@ -151,7 +154,11 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			ResourceImpl.class, resource.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
-			new Object[] { new Long(resource.getCodeId()), resource.getPrimKey() });
+			new Object[] {
+				Long.valueOf(resource.getCodeId()),
+				
+			resource.getPrimKey()
+			});
 	}
 
 	/**
@@ -198,7 +205,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			session = openSession();
 
 			Resource resource = (Resource)session.get(ResourceImpl.class,
-					new Long(resourceId));
+					Long.valueOf(resourceId));
 
 			if (resource == null) {
 				if (_log.isWarnEnabled()) {
@@ -256,7 +263,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
 			new Object[] {
-				new Long(resourceModelImpl.getCodeId()),
+				Long.valueOf(resourceModelImpl.getCodeId()),
 				
 			resourceModelImpl.getPrimKey()
 			});
@@ -302,7 +309,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 					resourceModelImpl.getOriginalPrimKey()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
 				new Object[] {
-					new Long(resourceModelImpl.getOriginalCodeId()),
+					Long.valueOf(resourceModelImpl.getOriginalCodeId()),
 					
 				resourceModelImpl.getOriginalPrimKey()
 				});
@@ -314,7 +321,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 					resourceModelImpl.getOriginalPrimKey()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
 				new Object[] {
-					new Long(resource.getCodeId()),
+					Long.valueOf(resource.getCodeId()),
 					
 				resource.getPrimKey()
 				}, resource);
@@ -408,7 +415,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				session = openSession();
 
 				resource = (Resource)session.get(ResourceImpl.class,
-						new Long(resourceId));
+						Long.valueOf(resourceId));
 			}
 			catch (Exception e) {
 				throw processException(e);

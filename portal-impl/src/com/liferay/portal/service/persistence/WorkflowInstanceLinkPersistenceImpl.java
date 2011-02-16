@@ -189,7 +189,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 			session = openSession();
 
 			WorkflowInstanceLink workflowInstanceLink = (WorkflowInstanceLink)session.get(WorkflowInstanceLinkImpl.class,
-					new Long(workflowInstanceLinkId));
+					Long.valueOf(workflowInstanceLinkId));
 
 			if (workflowInstanceLink == null) {
 				if (_log.isWarnEnabled()) {
@@ -376,7 +376,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 				session = openSession();
 
 				workflowInstanceLink = (WorkflowInstanceLink)session.get(WorkflowInstanceLinkImpl.class,
-						new Long(workflowInstanceLinkId));
+						Long.valueOf(workflowInstanceLinkId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -98,8 +98,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(ratingsStats.getClassNameId()),
-				new Long(ratingsStats.getClassPK())
+				Long.valueOf(ratingsStats.getClassNameId()),
+				Long.valueOf(ratingsStats.getClassPK())
 			}, ratingsStats);
 	}
 
@@ -146,8 +146,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(ratingsStats.getClassNameId()),
-				new Long(ratingsStats.getClassPK())
+				Long.valueOf(ratingsStats.getClassNameId()),
+				Long.valueOf(ratingsStats.getClassPK())
 			});
 	}
 
@@ -195,7 +195,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 			session = openSession();
 
 			RatingsStats ratingsStats = (RatingsStats)session.get(RatingsStatsImpl.class,
-					new Long(statsId));
+					Long.valueOf(statsId));
 
 			if (ratingsStats == null) {
 				if (_log.isWarnEnabled()) {
@@ -255,8 +255,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(ratingsStatsModelImpl.getClassNameId()),
-				new Long(ratingsStatsModelImpl.getClassPK())
+				Long.valueOf(ratingsStatsModelImpl.getClassNameId()),
+				Long.valueOf(ratingsStatsModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(RatingsStatsModelImpl.ENTITY_CACHE_ENABLED,
@@ -300,8 +300,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 				(ratingsStats.getClassPK() != ratingsStatsModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(ratingsStatsModelImpl.getOriginalClassNameId()),
-					new Long(ratingsStatsModelImpl.getOriginalClassPK())
+					Long.valueOf(ratingsStatsModelImpl.getOriginalClassNameId()),
+					Long.valueOf(ratingsStatsModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -310,8 +310,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 				(ratingsStats.getClassPK() != ratingsStatsModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(ratingsStats.getClassNameId()),
-					new Long(ratingsStats.getClassPK())
+					Long.valueOf(ratingsStats.getClassNameId()),
+					Long.valueOf(ratingsStats.getClassPK())
 				}, ratingsStats);
 		}
 
@@ -406,7 +406,7 @@ public class RatingsStatsPersistenceImpl extends BasePersistenceImpl<RatingsStat
 				session = openSession();
 
 				ratingsStats = (RatingsStats)session.get(RatingsStatsImpl.class,
-						new Long(statsId));
+						Long.valueOf(statsId));
 			}
 			catch (Exception e) {
 				throw processException(e);

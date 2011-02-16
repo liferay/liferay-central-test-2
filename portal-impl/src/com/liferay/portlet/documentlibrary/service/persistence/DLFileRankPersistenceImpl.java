@@ -140,9 +140,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F,
 			new Object[] {
-				new Long(dlFileRank.getCompanyId()),
-				new Long(dlFileRank.getUserId()),
-				new Long(dlFileRank.getFileEntryId())
+				Long.valueOf(dlFileRank.getCompanyId()),
+				Long.valueOf(dlFileRank.getUserId()),
+				Long.valueOf(dlFileRank.getFileEntryId())
 			}, dlFileRank);
 	}
 
@@ -188,9 +188,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F,
 			new Object[] {
-				new Long(dlFileRank.getCompanyId()),
-				new Long(dlFileRank.getUserId()),
-				new Long(dlFileRank.getFileEntryId())
+				Long.valueOf(dlFileRank.getCompanyId()),
+				Long.valueOf(dlFileRank.getUserId()),
+				Long.valueOf(dlFileRank.getFileEntryId())
 			});
 	}
 
@@ -238,7 +238,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 			session = openSession();
 
 			DLFileRank dlFileRank = (DLFileRank)session.get(DLFileRankImpl.class,
-					new Long(fileRankId));
+					Long.valueOf(fileRankId));
 
 			if (dlFileRank == null) {
 				if (_log.isWarnEnabled()) {
@@ -297,9 +297,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F,
 			new Object[] {
-				new Long(dlFileRankModelImpl.getCompanyId()),
-				new Long(dlFileRankModelImpl.getUserId()),
-				new Long(dlFileRankModelImpl.getFileEntryId())
+				Long.valueOf(dlFileRankModelImpl.getCompanyId()),
+				Long.valueOf(dlFileRankModelImpl.getUserId()),
+				Long.valueOf(dlFileRankModelImpl.getFileEntryId())
 			});
 
 		EntityCacheUtil.removeResult(DLFileRankModelImpl.ENTITY_CACHE_ENABLED,
@@ -344,9 +344,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				(dlFileRank.getFileEntryId() != dlFileRankModelImpl.getOriginalFileEntryId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_F,
 				new Object[] {
-					new Long(dlFileRankModelImpl.getOriginalCompanyId()),
-					new Long(dlFileRankModelImpl.getOriginalUserId()),
-					new Long(dlFileRankModelImpl.getOriginalFileEntryId())
+					Long.valueOf(dlFileRankModelImpl.getOriginalCompanyId()),
+					Long.valueOf(dlFileRankModelImpl.getOriginalUserId()),
+					Long.valueOf(dlFileRankModelImpl.getOriginalFileEntryId())
 				});
 		}
 
@@ -356,9 +356,9 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				(dlFileRank.getFileEntryId() != dlFileRankModelImpl.getOriginalFileEntryId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_F,
 				new Object[] {
-					new Long(dlFileRank.getCompanyId()),
-					new Long(dlFileRank.getUserId()),
-					new Long(dlFileRank.getFileEntryId())
+					Long.valueOf(dlFileRank.getCompanyId()),
+					Long.valueOf(dlFileRank.getUserId()),
+					Long.valueOf(dlFileRank.getFileEntryId())
 				}, dlFileRank);
 		}
 
@@ -453,7 +453,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl<DLFileRank>
 				session = openSession();
 
 				dlFileRank = (DLFileRank)session.get(DLFileRankImpl.class,
-						new Long(fileRankId));
+						Long.valueOf(fileRankId));
 			}
 			catch (Exception e) {
 				throw processException(e);

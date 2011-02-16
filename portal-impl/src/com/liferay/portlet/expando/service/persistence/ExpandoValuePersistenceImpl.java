@@ -215,15 +215,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
 			new Object[] {
-				new Long(expandoValue.getColumnId()),
-				new Long(expandoValue.getRowId())
+				Long.valueOf(expandoValue.getColumnId()),
+				Long.valueOf(expandoValue.getRowId())
 			}, expandoValue);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_C,
 			new Object[] {
-				new Long(expandoValue.getTableId()),
-				new Long(expandoValue.getColumnId()),
-				new Long(expandoValue.getClassPK())
+				Long.valueOf(expandoValue.getTableId()),
+				Long.valueOf(expandoValue.getColumnId()),
+				Long.valueOf(expandoValue.getClassPK())
 			}, expandoValue);
 	}
 
@@ -270,15 +270,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R,
 			new Object[] {
-				new Long(expandoValue.getColumnId()),
-				new Long(expandoValue.getRowId())
+				Long.valueOf(expandoValue.getColumnId()),
+				Long.valueOf(expandoValue.getRowId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_C,
 			new Object[] {
-				new Long(expandoValue.getTableId()),
-				new Long(expandoValue.getColumnId()),
-				new Long(expandoValue.getClassPK())
+				Long.valueOf(expandoValue.getTableId()),
+				Long.valueOf(expandoValue.getColumnId()),
+				Long.valueOf(expandoValue.getClassPK())
 			});
 	}
 
@@ -326,7 +326,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 			session = openSession();
 
 			ExpandoValue expandoValue = (ExpandoValue)session.get(ExpandoValueImpl.class,
-					new Long(valueId));
+					Long.valueOf(valueId));
 
 			if (expandoValue == null) {
 				if (_log.isWarnEnabled()) {
@@ -386,15 +386,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R,
 			new Object[] {
-				new Long(expandoValueModelImpl.getColumnId()),
-				new Long(expandoValueModelImpl.getRowId())
+				Long.valueOf(expandoValueModelImpl.getColumnId()),
+				Long.valueOf(expandoValueModelImpl.getRowId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_C,
 			new Object[] {
-				new Long(expandoValueModelImpl.getTableId()),
-				new Long(expandoValueModelImpl.getColumnId()),
-				new Long(expandoValueModelImpl.getClassPK())
+				Long.valueOf(expandoValueModelImpl.getTableId()),
+				Long.valueOf(expandoValueModelImpl.getColumnId()),
+				Long.valueOf(expandoValueModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(ExpandoValueModelImpl.ENTITY_CACHE_ENABLED,
@@ -438,8 +438,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				(expandoValue.getRowId() != expandoValueModelImpl.getOriginalRowId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_R,
 				new Object[] {
-					new Long(expandoValueModelImpl.getOriginalColumnId()),
-					new Long(expandoValueModelImpl.getOriginalRowId())
+					Long.valueOf(expandoValueModelImpl.getOriginalColumnId()),
+					Long.valueOf(expandoValueModelImpl.getOriginalRowId())
 				});
 		}
 
@@ -448,8 +448,8 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				(expandoValue.getRowId() != expandoValueModelImpl.getOriginalRowId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_R,
 				new Object[] {
-					new Long(expandoValue.getColumnId()),
-					new Long(expandoValue.getRowId())
+					Long.valueOf(expandoValue.getColumnId()),
+					Long.valueOf(expandoValue.getRowId())
 				}, expandoValue);
 		}
 
@@ -459,9 +459,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				(expandoValue.getClassPK() != expandoValueModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C_C,
 				new Object[] {
-					new Long(expandoValueModelImpl.getOriginalTableId()),
-					new Long(expandoValueModelImpl.getOriginalColumnId()),
-					new Long(expandoValueModelImpl.getOriginalClassPK())
+					Long.valueOf(expandoValueModelImpl.getOriginalTableId()),
+					Long.valueOf(expandoValueModelImpl.getOriginalColumnId()),
+					Long.valueOf(expandoValueModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -471,9 +471,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				(expandoValue.getClassPK() != expandoValueModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C_C,
 				new Object[] {
-					new Long(expandoValue.getTableId()),
-					new Long(expandoValue.getColumnId()),
-					new Long(expandoValue.getClassPK())
+					Long.valueOf(expandoValue.getTableId()),
+					Long.valueOf(expandoValue.getColumnId()),
+					Long.valueOf(expandoValue.getClassPK())
 				}, expandoValue);
 		}
 
@@ -570,7 +570,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl<ExpandoValu
 				session = openSession();
 
 				expandoValue = (ExpandoValue)session.get(ExpandoValueImpl.class,
-						new Long(valueId));
+						Long.valueOf(valueId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -122,7 +122,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			new Object[] { company.getMx() }, company);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LOGOID,
-			new Object[] { new Long(company.getLogoId()) }, company);
+			new Object[] { Long.valueOf(company.getLogoId()) }, company);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			new Object[] { company.getMx() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LOGOID,
-			new Object[] { new Long(company.getLogoId()) });
+			new Object[] { Long.valueOf(company.getLogoId()) });
 	}
 
 	/**
@@ -219,7 +219,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			session = openSession();
 
 			Company company = (Company)session.get(CompanyImpl.class,
-					new Long(companyId));
+					Long.valueOf(companyId));
 
 			if (company == null) {
 				if (_log.isWarnEnabled()) {
@@ -282,7 +282,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 			new Object[] { companyModelImpl.getMx() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LOGOID,
-			new Object[] { new Long(companyModelImpl.getLogoId()) });
+			new Object[] { Long.valueOf(companyModelImpl.getLogoId()) });
 
 		EntityCacheUtil.removeResult(CompanyModelImpl.ENTITY_CACHE_ENABLED,
 			CompanyImpl.class, company.getPrimaryKey());
@@ -350,13 +350,14 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 		if (!isNew &&
 				(company.getLogoId() != companyModelImpl.getOriginalLogoId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_LOGOID,
-				new Object[] { new Long(companyModelImpl.getOriginalLogoId()) });
+				new Object[] { Long.valueOf(
+						companyModelImpl.getOriginalLogoId()) });
 		}
 
 		if (isNew ||
 				(company.getLogoId() != companyModelImpl.getOriginalLogoId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_LOGOID,
-				new Object[] { new Long(company.getLogoId()) }, company);
+				new Object[] { Long.valueOf(company.getLogoId()) }, company);
 		}
 
 		return company;
@@ -452,7 +453,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 				session = openSession();
 
 				company = (Company)session.get(CompanyImpl.class,
-						new Long(companyId));
+						Long.valueOf(companyId));
 			}
 			catch (Exception e) {
 				throw processException(e);

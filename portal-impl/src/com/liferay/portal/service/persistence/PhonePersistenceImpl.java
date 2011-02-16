@@ -237,7 +237,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 		try {
 			session = openSession();
 
-			Phone phone = (Phone)session.get(PhoneImpl.class, new Long(phoneId));
+			Phone phone = (Phone)session.get(PhoneImpl.class,
+					Long.valueOf(phoneId));
 
 			if (phone == null) {
 				if (_log.isWarnEnabled()) {
@@ -417,7 +418,8 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 			try {
 				session = openSession();
 
-				phone = (Phone)session.get(PhoneImpl.class, new Long(phoneId));
+				phone = (Phone)session.get(PhoneImpl.class,
+						Long.valueOf(phoneId));
 			}
 			catch (Exception e) {
 				throw processException(e);

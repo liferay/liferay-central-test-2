@@ -169,7 +169,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 			session = openSession();
 
 			ClusterGroup clusterGroup = (ClusterGroup)session.get(ClusterGroupImpl.class,
-					new Long(clusterGroupId));
+					Long.valueOf(clusterGroupId));
 
 			if (clusterGroup == null) {
 				if (_log.isWarnEnabled()) {
@@ -347,7 +347,7 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 				session = openSession();
 
 				clusterGroup = (ClusterGroup)session.get(ClusterGroupImpl.class,
-						new Long(clusterGroupId));
+						Long.valueOf(clusterGroupId));
 			}
 			catch (Exception e) {
 				throw processException(e);

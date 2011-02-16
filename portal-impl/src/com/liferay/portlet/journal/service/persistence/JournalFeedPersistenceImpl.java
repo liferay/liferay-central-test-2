@@ -135,12 +135,12 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				journalFeed.getUuid(), new Long(journalFeed.getGroupId())
+				journalFeed.getUuid(), Long.valueOf(journalFeed.getGroupId())
 			}, journalFeed);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F,
 			new Object[] {
-				new Long(journalFeed.getGroupId()),
+				Long.valueOf(journalFeed.getGroupId()),
 				
 			journalFeed.getFeedId()
 			}, journalFeed);
@@ -188,12 +188,12 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				journalFeed.getUuid(), new Long(journalFeed.getGroupId())
+				journalFeed.getUuid(), Long.valueOf(journalFeed.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F,
 			new Object[] {
-				new Long(journalFeed.getGroupId()),
+				Long.valueOf(journalFeed.getGroupId()),
 				
 			journalFeed.getFeedId()
 			});
@@ -247,7 +247,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 			session = openSession();
 
 			JournalFeed journalFeed = (JournalFeed)session.get(JournalFeedImpl.class,
-					new Long(id));
+					Long.valueOf(id));
 
 			if (journalFeed == null) {
 				if (_log.isWarnEnabled()) {
@@ -308,12 +308,12 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalFeedModelImpl.getUuid(),
-				new Long(journalFeedModelImpl.getGroupId())
+				Long.valueOf(journalFeedModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F,
 			new Object[] {
-				new Long(journalFeedModelImpl.getGroupId()),
+				Long.valueOf(journalFeedModelImpl.getGroupId()),
 				
 			journalFeedModelImpl.getFeedId()
 			});
@@ -367,7 +367,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					journalFeedModelImpl.getOriginalUuid(),
-					new Long(journalFeedModelImpl.getOriginalGroupId())
+					Long.valueOf(journalFeedModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -377,7 +377,8 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				(journalFeed.getGroupId() != journalFeedModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
-					journalFeed.getUuid(), new Long(journalFeed.getGroupId())
+					journalFeed.getUuid(),
+					Long.valueOf(journalFeed.getGroupId())
 				}, journalFeed);
 		}
 
@@ -387,7 +388,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 					journalFeedModelImpl.getOriginalFeedId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_F,
 				new Object[] {
-					new Long(journalFeedModelImpl.getOriginalGroupId()),
+					Long.valueOf(journalFeedModelImpl.getOriginalGroupId()),
 					
 				journalFeedModelImpl.getOriginalFeedId()
 				});
@@ -399,7 +400,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 					journalFeedModelImpl.getOriginalFeedId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_F,
 				new Object[] {
-					new Long(journalFeed.getGroupId()),
+					Long.valueOf(journalFeed.getGroupId()),
 					
 				journalFeed.getFeedId()
 				}, journalFeed);
@@ -512,7 +513,7 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 				session = openSession();
 
 				journalFeed = (JournalFeed)session.get(JournalFeedImpl.class,
-						new Long(id));
+						Long.valueOf(id));
 			}
 			catch (Exception e) {
 				throw processException(e);

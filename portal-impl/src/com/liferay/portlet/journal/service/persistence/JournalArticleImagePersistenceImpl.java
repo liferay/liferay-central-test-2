@@ -152,10 +152,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
 			new Object[] {
-				new Long(journalArticleImage.getGroupId()),
+				Long.valueOf(journalArticleImage.getGroupId()),
 				
 			journalArticleImage.getArticleId(),
-				new Double(journalArticleImage.getVersion()),
+				Double.valueOf(journalArticleImage.getVersion()),
 				
 			journalArticleImage.getElInstanceId(),
 				
@@ -208,10 +208,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
 			new Object[] {
-				new Long(journalArticleImage.getGroupId()),
+				Long.valueOf(journalArticleImage.getGroupId()),
 				
 			journalArticleImage.getArticleId(),
-				new Double(journalArticleImage.getVersion()),
+				Double.valueOf(journalArticleImage.getVersion()),
 				
 			journalArticleImage.getElInstanceId(),
 				
@@ -265,7 +265,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			session = openSession();
 
 			JournalArticleImage journalArticleImage = (JournalArticleImage)session.get(JournalArticleImageImpl.class,
-					new Long(articleImageId));
+					Long.valueOf(articleImageId));
 
 			if (journalArticleImage == null) {
 				if (_log.isWarnEnabled()) {
@@ -326,10 +326,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
 			new Object[] {
-				new Long(journalArticleImageModelImpl.getGroupId()),
+				Long.valueOf(journalArticleImageModelImpl.getGroupId()),
 				
 			journalArticleImageModelImpl.getArticleId(),
-				new Double(journalArticleImageModelImpl.getVersion()),
+				Double.valueOf(journalArticleImageModelImpl.getVersion()),
 				
 			journalArticleImageModelImpl.getElInstanceId(),
 				
@@ -388,10 +388,12 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 					journalArticleImageModelImpl.getOriginalLanguageId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
 				new Object[] {
-					new Long(journalArticleImageModelImpl.getOriginalGroupId()),
+					Long.valueOf(
+						journalArticleImageModelImpl.getOriginalGroupId()),
 					
 				journalArticleImageModelImpl.getOriginalArticleId(),
-					new Double(journalArticleImageModelImpl.getOriginalVersion()),
+					Double.valueOf(
+						journalArticleImageModelImpl.getOriginalVersion()),
 					
 				journalArticleImageModelImpl.getOriginalElInstanceId(),
 					
@@ -414,10 +416,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 					journalArticleImageModelImpl.getOriginalLanguageId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
 				new Object[] {
-					new Long(journalArticleImage.getGroupId()),
+					Long.valueOf(journalArticleImage.getGroupId()),
 					
 				journalArticleImage.getArticleId(),
-					new Double(journalArticleImage.getVersion()),
+					Double.valueOf(journalArticleImage.getVersion()),
 					
 				journalArticleImage.getElInstanceId(),
 					
@@ -521,7 +523,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				session = openSession();
 
 				journalArticleImage = (JournalArticleImage)session.get(JournalArticleImageImpl.class,
-						new Long(articleImageId));
+						Long.valueOf(articleImageId));
 			}
 			catch (Exception e) {
 				throw processException(e);

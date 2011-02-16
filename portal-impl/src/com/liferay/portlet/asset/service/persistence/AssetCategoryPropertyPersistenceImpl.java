@@ -139,7 +139,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K,
 			new Object[] {
-				new Long(assetCategoryProperty.getCategoryId()),
+				Long.valueOf(assetCategoryProperty.getCategoryId()),
 				
 			assetCategoryProperty.getKey()
 			}, assetCategoryProperty);
@@ -189,7 +189,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K,
 			new Object[] {
-				new Long(assetCategoryProperty.getCategoryId()),
+				Long.valueOf(assetCategoryProperty.getCategoryId()),
 				
 			assetCategoryProperty.getKey()
 			});
@@ -239,7 +239,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			session = openSession();
 
 			AssetCategoryProperty assetCategoryProperty = (AssetCategoryProperty)session.get(AssetCategoryPropertyImpl.class,
-					new Long(categoryPropertyId));
+					Long.valueOf(categoryPropertyId));
 
 			if (assetCategoryProperty == null) {
 				if (_log.isWarnEnabled()) {
@@ -300,7 +300,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K,
 			new Object[] {
-				new Long(assetCategoryPropertyModelImpl.getCategoryId()),
+				Long.valueOf(assetCategoryPropertyModelImpl.getCategoryId()),
 				
 			assetCategoryPropertyModelImpl.getKey()
 			});
@@ -349,7 +349,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					assetCategoryPropertyModelImpl.getOriginalKey()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K,
 				new Object[] {
-					new Long(assetCategoryPropertyModelImpl.getOriginalCategoryId()),
+					Long.valueOf(
+						assetCategoryPropertyModelImpl.getOriginalCategoryId()),
 					
 				assetCategoryPropertyModelImpl.getOriginalKey()
 				});
@@ -361,7 +362,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 					assetCategoryPropertyModelImpl.getOriginalKey()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K,
 				new Object[] {
-					new Long(assetCategoryProperty.getCategoryId()),
+					Long.valueOf(assetCategoryProperty.getCategoryId()),
 					
 				assetCategoryProperty.getKey()
 				}, assetCategoryProperty);
@@ -463,7 +464,7 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				session = openSession();
 
 				assetCategoryProperty = (AssetCategoryProperty)session.get(AssetCategoryPropertyImpl.class,
-						new Long(categoryPropertyId));
+						Long.valueOf(categoryPropertyId));
 			}
 			catch (Exception e) {
 				throw processException(e);

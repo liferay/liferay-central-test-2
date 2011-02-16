@@ -131,11 +131,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
 			new Object[] {
-				new Long(portletItem.getGroupId()),
+				Long.valueOf(portletItem.getGroupId()),
 				
 			portletItem.getName(),
 				
-			portletItem.getPortletId(), new Long(portletItem.getClassNameId())
+			portletItem.getPortletId(),
+				Long.valueOf(portletItem.getClassNameId())
 			}, portletItem);
 	}
 
@@ -181,11 +182,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N_P_C,
 			new Object[] {
-				new Long(portletItem.getGroupId()),
+				Long.valueOf(portletItem.getGroupId()),
 				
 			portletItem.getName(),
 				
-			portletItem.getPortletId(), new Long(portletItem.getClassNameId())
+			portletItem.getPortletId(),
+				Long.valueOf(portletItem.getClassNameId())
 			});
 	}
 
@@ -233,7 +235,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 			session = openSession();
 
 			PortletItem portletItem = (PortletItem)session.get(PortletItemImpl.class,
-					new Long(portletItemId));
+					Long.valueOf(portletItemId));
 
 			if (portletItem == null) {
 				if (_log.isWarnEnabled()) {
@@ -293,12 +295,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N_P_C,
 			new Object[] {
-				new Long(portletItemModelImpl.getGroupId()),
+				Long.valueOf(portletItemModelImpl.getGroupId()),
 				
 			portletItemModelImpl.getName(),
 				
 			portletItemModelImpl.getPortletId(),
-				new Long(portletItemModelImpl.getClassNameId())
+				Long.valueOf(portletItemModelImpl.getClassNameId())
 			});
 
 		EntityCacheUtil.removeResult(PortletItemModelImpl.ENTITY_CACHE_ENABLED,
@@ -346,12 +348,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				(portletItem.getClassNameId() != portletItemModelImpl.getOriginalClassNameId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N_P_C,
 				new Object[] {
-					new Long(portletItemModelImpl.getOriginalGroupId()),
+					Long.valueOf(portletItemModelImpl.getOriginalGroupId()),
 					
 				portletItemModelImpl.getOriginalName(),
 					
 				portletItemModelImpl.getOriginalPortletId(),
-					new Long(portletItemModelImpl.getOriginalClassNameId())
+					Long.valueOf(portletItemModelImpl.getOriginalClassNameId())
 				});
 		}
 
@@ -364,12 +366,12 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				(portletItem.getClassNameId() != portletItemModelImpl.getOriginalClassNameId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N_P_C,
 				new Object[] {
-					new Long(portletItem.getGroupId()),
+					Long.valueOf(portletItem.getGroupId()),
 					
 				portletItem.getName(),
 					
 				portletItem.getPortletId(),
-					new Long(portletItem.getClassNameId())
+					Long.valueOf(portletItem.getClassNameId())
 				}, portletItem);
 		}
 
@@ -468,7 +470,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 				session = openSession();
 
 				portletItem = (PortletItem)session.get(PortletItemImpl.class,
-						new Long(portletItemId));
+						Long.valueOf(portletItemId));
 			}
 			catch (Exception e) {
 				throw processException(e);

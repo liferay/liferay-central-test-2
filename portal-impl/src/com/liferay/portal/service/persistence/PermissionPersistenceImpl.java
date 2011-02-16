@@ -115,7 +115,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
 			new Object[] {
-				permission.getActionId(), new Long(permission.getResourceId())
+				permission.getActionId(),
+				Long.valueOf(permission.getResourceId())
 			}, permission);
 	}
 
@@ -161,7 +162,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
 			new Object[] {
-				permission.getActionId(), new Long(permission.getResourceId())
+				permission.getActionId(),
+				Long.valueOf(permission.getResourceId())
 			});
 	}
 
@@ -209,7 +211,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			session = openSession();
 
 			Permission permission = (Permission)session.get(PermissionImpl.class,
-					new Long(permissionId));
+					Long.valueOf(permissionId));
 
 			if (permission == null) {
 				if (_log.isWarnEnabled()) {
@@ -299,7 +301,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
 			new Object[] {
 				permissionModelImpl.getActionId(),
-				new Long(permissionModelImpl.getResourceId())
+				Long.valueOf(permissionModelImpl.getResourceId())
 			});
 
 		EntityCacheUtil.removeResult(PermissionModelImpl.ENTITY_CACHE_ENABLED,
@@ -345,7 +347,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_A_R,
 				new Object[] {
 					permissionModelImpl.getOriginalActionId(),
-					new Long(permissionModelImpl.getOriginalResourceId())
+					Long.valueOf(permissionModelImpl.getOriginalResourceId())
 				});
 		}
 
@@ -356,7 +358,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_A_R,
 				new Object[] {
 					permission.getActionId(),
-					new Long(permission.getResourceId())
+					Long.valueOf(permission.getResourceId())
 				}, permission);
 		}
 
@@ -449,7 +451,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 				session = openSession();
 
 				permission = (Permission)session.get(PermissionImpl.class,
-						new Long(permissionId));
+						Long.valueOf(permissionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

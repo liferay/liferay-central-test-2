@@ -213,7 +213,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 		try {
 			session = openSession();
 
-			Lock lock = (Lock)session.get(LockImpl.class, new Long(lockId));
+			Lock lock = (Lock)session.get(LockImpl.class, Long.valueOf(lockId));
 
 			if (lock == null) {
 				if (_log.isWarnEnabled()) {
@@ -427,7 +427,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 			try {
 				session = openSession();
 
-				lock = (Lock)session.get(LockImpl.class, new Long(lockId));
+				lock = (Lock)session.get(LockImpl.class, Long.valueOf(lockId));
 			}
 			catch (Exception e) {
 				throw processException(e);

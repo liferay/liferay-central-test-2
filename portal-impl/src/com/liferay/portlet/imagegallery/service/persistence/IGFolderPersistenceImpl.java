@@ -168,13 +168,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			IGFolderImpl.class, igFolder.getPrimaryKey(), igFolder);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { igFolder.getUuid(), new Long(igFolder.getGroupId()) },
-			igFolder);
+			new Object[] { igFolder.getUuid(), Long.valueOf(
+					igFolder.getGroupId()) }, igFolder);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(igFolder.getGroupId()),
-				new Long(igFolder.getParentFolderId()),
+				Long.valueOf(igFolder.getGroupId()),
+				Long.valueOf(igFolder.getParentFolderId()),
 				
 			igFolder.getName()
 			}, igFolder);
@@ -221,12 +221,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			IGFolderImpl.class, igFolder.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { igFolder.getUuid(), new Long(igFolder.getGroupId()) });
+			new Object[] { igFolder.getUuid(), Long.valueOf(
+					igFolder.getGroupId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(igFolder.getGroupId()),
-				new Long(igFolder.getParentFolderId()),
+				Long.valueOf(igFolder.getGroupId()),
+				Long.valueOf(igFolder.getParentFolderId()),
 				
 			igFolder.getName()
 			});
@@ -280,7 +281,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			session = openSession();
 
 			IGFolder igFolder = (IGFolder)session.get(IGFolderImpl.class,
-					new Long(folderId));
+					Long.valueOf(folderId));
 
 			if (igFolder == null) {
 				if (_log.isWarnEnabled()) {
@@ -339,13 +340,13 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				igFolderModelImpl.getUuid(),
-				new Long(igFolderModelImpl.getGroupId())
+				Long.valueOf(igFolderModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(igFolderModelImpl.getGroupId()),
-				new Long(igFolderModelImpl.getParentFolderId()),
+				Long.valueOf(igFolderModelImpl.getGroupId()),
+				Long.valueOf(igFolderModelImpl.getParentFolderId()),
 				
 			igFolderModelImpl.getName()
 			});
@@ -399,7 +400,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					igFolderModelImpl.getOriginalUuid(),
-					new Long(igFolderModelImpl.getOriginalGroupId())
+					Long.valueOf(igFolderModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -408,8 +409,9 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					igFolderModelImpl.getOriginalUuid()) ||
 				(igFolder.getGroupId() != igFolderModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] { igFolder.getUuid(), new Long(
-						igFolder.getGroupId()) }, igFolder);
+				new Object[] {
+					igFolder.getUuid(), Long.valueOf(igFolder.getGroupId())
+				}, igFolder);
 		}
 
 		if (!isNew &&
@@ -419,8 +421,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					igFolderModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 				new Object[] {
-					new Long(igFolderModelImpl.getOriginalGroupId()),
-					new Long(igFolderModelImpl.getOriginalParentFolderId()),
+					Long.valueOf(igFolderModelImpl.getOriginalGroupId()),
+					Long.valueOf(igFolderModelImpl.getOriginalParentFolderId()),
 					
 				igFolderModelImpl.getOriginalName()
 				});
@@ -433,8 +435,8 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 					igFolderModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 				new Object[] {
-					new Long(igFolder.getGroupId()),
-					new Long(igFolder.getParentFolderId()),
+					Long.valueOf(igFolder.getGroupId()),
+					Long.valueOf(igFolder.getParentFolderId()),
 					
 				igFolder.getName()
 				}, igFolder);
@@ -534,7 +536,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 				session = openSession();
 
 				igFolder = (IGFolder)session.get(IGFolderImpl.class,
-						new Long(folderId));
+						Long.valueOf(folderId));
 			}
 			catch (Exception e) {
 				throw processException(e);

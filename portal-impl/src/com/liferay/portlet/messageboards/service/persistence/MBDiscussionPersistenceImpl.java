@@ -116,12 +116,13 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			MBDiscussionImpl.class, mbDiscussion.getPrimaryKey(), mbDiscussion);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
-			new Object[] { new Long(mbDiscussion.getThreadId()) }, mbDiscussion);
+			new Object[] { Long.valueOf(mbDiscussion.getThreadId()) },
+			mbDiscussion);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(mbDiscussion.getClassNameId()),
-				new Long(mbDiscussion.getClassPK())
+				Long.valueOf(mbDiscussion.getClassNameId()),
+				Long.valueOf(mbDiscussion.getClassPK())
 			}, mbDiscussion);
 	}
 
@@ -167,12 +168,12 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			MBDiscussionImpl.class, mbDiscussion.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
-			new Object[] { new Long(mbDiscussion.getThreadId()) });
+			new Object[] { Long.valueOf(mbDiscussion.getThreadId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(mbDiscussion.getClassNameId()),
-				new Long(mbDiscussion.getClassPK())
+				Long.valueOf(mbDiscussion.getClassNameId()),
+				Long.valueOf(mbDiscussion.getClassPK())
 			});
 	}
 
@@ -220,7 +221,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 			session = openSession();
 
 			MBDiscussion mbDiscussion = (MBDiscussion)session.get(MBDiscussionImpl.class,
-					new Long(discussionId));
+					Long.valueOf(discussionId));
 
 			if (mbDiscussion == null) {
 				if (_log.isWarnEnabled()) {
@@ -279,12 +280,12 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussion;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
-			new Object[] { new Long(mbDiscussionModelImpl.getThreadId()) });
+			new Object[] { Long.valueOf(mbDiscussionModelImpl.getThreadId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(mbDiscussionModelImpl.getClassNameId()),
-				new Long(mbDiscussionModelImpl.getClassPK())
+				Long.valueOf(mbDiscussionModelImpl.getClassNameId()),
+				Long.valueOf(mbDiscussionModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
@@ -327,14 +328,14 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 				(mbDiscussion.getThreadId() != mbDiscussionModelImpl.getOriginalThreadId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
 				new Object[] {
-					new Long(mbDiscussionModelImpl.getOriginalThreadId())
+					Long.valueOf(mbDiscussionModelImpl.getOriginalThreadId())
 				});
 		}
 
 		if (isNew ||
 				(mbDiscussion.getThreadId() != mbDiscussionModelImpl.getOriginalThreadId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
-				new Object[] { new Long(mbDiscussion.getThreadId()) },
+				new Object[] { Long.valueOf(mbDiscussion.getThreadId()) },
 				mbDiscussion);
 		}
 
@@ -343,8 +344,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 				(mbDiscussion.getClassPK() != mbDiscussionModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(mbDiscussionModelImpl.getOriginalClassNameId()),
-					new Long(mbDiscussionModelImpl.getOriginalClassPK())
+					Long.valueOf(mbDiscussionModelImpl.getOriginalClassNameId()),
+					Long.valueOf(mbDiscussionModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -353,8 +354,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 				(mbDiscussion.getClassPK() != mbDiscussionModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(mbDiscussion.getClassNameId()),
-					new Long(mbDiscussion.getClassPK())
+					Long.valueOf(mbDiscussion.getClassNameId()),
+					Long.valueOf(mbDiscussion.getClassPK())
 				}, mbDiscussion);
 		}
 
@@ -447,7 +448,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 				session = openSession();
 
 				mbDiscussion = (MBDiscussion)session.get(MBDiscussionImpl.class,
-						new Long(discussionId));
+						Long.valueOf(discussionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

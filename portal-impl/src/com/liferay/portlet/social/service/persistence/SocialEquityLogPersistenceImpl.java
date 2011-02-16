@@ -202,13 +202,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 			new Object[] {
-				new Long(socialEquityLog.getUserId()),
-				new Long(socialEquityLog.getAssetEntryId()),
+				Long.valueOf(socialEquityLog.getUserId()),
+				Long.valueOf(socialEquityLog.getAssetEntryId()),
 				
 			socialEquityLog.getActionId(),
-				new Integer(socialEquityLog.getActionDate()),
+				Integer.valueOf(socialEquityLog.getActionDate()),
 				Boolean.valueOf(socialEquityLog.getActive()),
-				new Integer(socialEquityLog.getType()),
+				Integer.valueOf(socialEquityLog.getType()),
 				
 			socialEquityLog.getExtraData()
 			}, socialEquityLog);
@@ -257,13 +257,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 			new Object[] {
-				new Long(socialEquityLog.getUserId()),
-				new Long(socialEquityLog.getAssetEntryId()),
+				Long.valueOf(socialEquityLog.getUserId()),
+				Long.valueOf(socialEquityLog.getAssetEntryId()),
 				
 			socialEquityLog.getActionId(),
-				new Integer(socialEquityLog.getActionDate()),
+				Integer.valueOf(socialEquityLog.getActionDate()),
 				Boolean.valueOf(socialEquityLog.getActive()),
-				new Integer(socialEquityLog.getType()),
+				Integer.valueOf(socialEquityLog.getType()),
 				
 			socialEquityLog.getExtraData()
 			});
@@ -313,7 +313,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 			session = openSession();
 
 			SocialEquityLog socialEquityLog = (SocialEquityLog)session.get(SocialEquityLogImpl.class,
-					new Long(equityLogId));
+					Long.valueOf(equityLogId));
 
 			if (socialEquityLog == null) {
 				if (_log.isWarnEnabled()) {
@@ -373,13 +373,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 			new Object[] {
-				new Long(socialEquityLogModelImpl.getUserId()),
-				new Long(socialEquityLogModelImpl.getAssetEntryId()),
+				Long.valueOf(socialEquityLogModelImpl.getUserId()),
+				Long.valueOf(socialEquityLogModelImpl.getAssetEntryId()),
 				
 			socialEquityLogModelImpl.getActionId(),
-				new Integer(socialEquityLogModelImpl.getActionDate()),
+				Integer.valueOf(socialEquityLogModelImpl.getActionDate()),
 				Boolean.valueOf(socialEquityLogModelImpl.getActive()),
-				new Integer(socialEquityLogModelImpl.getType()),
+				Integer.valueOf(socialEquityLogModelImpl.getType()),
 				
 			socialEquityLogModelImpl.getExtraData()
 			});
@@ -433,14 +433,16 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					socialEquityLogModelImpl.getOriginalExtraData()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 				new Object[] {
-					new Long(socialEquityLogModelImpl.getOriginalUserId()),
-					new Long(socialEquityLogModelImpl.getOriginalAssetEntryId()),
+					Long.valueOf(socialEquityLogModelImpl.getOriginalUserId()),
+					Long.valueOf(
+						socialEquityLogModelImpl.getOriginalAssetEntryId()),
 					
 				socialEquityLogModelImpl.getOriginalActionId(),
-					new Integer(socialEquityLogModelImpl.getOriginalActionDate()),
+					Integer.valueOf(
+						socialEquityLogModelImpl.getOriginalActionDate()),
 					Boolean.valueOf(
 						socialEquityLogModelImpl.getOriginalActive()),
-					new Integer(socialEquityLogModelImpl.getOriginalType()),
+					Integer.valueOf(socialEquityLogModelImpl.getOriginalType()),
 					
 				socialEquityLogModelImpl.getOriginalExtraData()
 				});
@@ -458,13 +460,13 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 					socialEquityLogModelImpl.getOriginalExtraData()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_AEI_AID_AD_A_T_E,
 				new Object[] {
-					new Long(socialEquityLog.getUserId()),
-					new Long(socialEquityLog.getAssetEntryId()),
+					Long.valueOf(socialEquityLog.getUserId()),
+					Long.valueOf(socialEquityLog.getAssetEntryId()),
 					
 				socialEquityLog.getActionId(),
-					new Integer(socialEquityLog.getActionDate()),
+					Integer.valueOf(socialEquityLog.getActionDate()),
 					Boolean.valueOf(socialEquityLog.getActive()),
-					new Integer(socialEquityLog.getType()),
+					Integer.valueOf(socialEquityLog.getType()),
 					
 				socialEquityLog.getExtraData()
 				}, socialEquityLog);
@@ -567,7 +569,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 				session = openSession();
 
 				socialEquityLog = (SocialEquityLog)session.get(SocialEquityLogImpl.class,
-						new Long(equityLogId));
+						Long.valueOf(equityLogId));
 			}
 			catch (Exception e) {
 				throw processException(e);

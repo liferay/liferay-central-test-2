@@ -158,7 +158,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				bookmarksFolder.getUuid(),
-				new Long(bookmarksFolder.getGroupId())
+				Long.valueOf(bookmarksFolder.getGroupId())
 			}, bookmarksFolder);
 	}
 
@@ -206,7 +206,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				bookmarksFolder.getUuid(),
-				new Long(bookmarksFolder.getGroupId())
+				Long.valueOf(bookmarksFolder.getGroupId())
 			});
 	}
 
@@ -258,7 +258,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			session = openSession();
 
 			BookmarksFolder bookmarksFolder = (BookmarksFolder)session.get(BookmarksFolderImpl.class,
-					new Long(folderId));
+					Long.valueOf(folderId));
 
 			if (bookmarksFolder == null) {
 				if (_log.isWarnEnabled()) {
@@ -319,7 +319,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				bookmarksFolderModelImpl.getUuid(),
-				new Long(bookmarksFolderModelImpl.getGroupId())
+				Long.valueOf(bookmarksFolderModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(BookmarksFolderModelImpl.ENTITY_CACHE_ENABLED,
@@ -372,7 +372,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					bookmarksFolderModelImpl.getOriginalUuid(),
-					new Long(bookmarksFolderModelImpl.getOriginalGroupId())
+					Long.valueOf(bookmarksFolderModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -383,7 +383,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					bookmarksFolder.getUuid(),
-					new Long(bookmarksFolder.getGroupId())
+					Long.valueOf(bookmarksFolder.getGroupId())
 				}, bookmarksFolder);
 		}
 
@@ -482,7 +482,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistenceImpl<Bookmark
 				session = openSession();
 
 				bookmarksFolder = (BookmarksFolder)session.get(BookmarksFolderImpl.class,
-						new Long(folderId));
+						Long.valueOf(folderId));
 			}
 			catch (Exception e) {
 				throw processException(e);

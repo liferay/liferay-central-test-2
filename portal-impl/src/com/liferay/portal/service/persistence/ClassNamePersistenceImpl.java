@@ -183,7 +183,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 			session = openSession();
 
 			ClassName className = (ClassName)session.get(ClassNameImpl.class,
-					new Long(classNameId));
+					Long.valueOf(classNameId));
 
 			if (className == null) {
 				if (_log.isWarnEnabled()) {
@@ -379,7 +379,7 @@ public class ClassNamePersistenceImpl extends BasePersistenceImpl<ClassName>
 				session = openSession();
 
 				className = (ClassName)session.get(ClassNameImpl.class,
-						new Long(classNameId));
+						Long.valueOf(classNameId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -158,7 +158,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				bookmarksEntry.getUuid(), new Long(bookmarksEntry.getGroupId())
+				bookmarksEntry.getUuid(),
+				Long.valueOf(bookmarksEntry.getGroupId())
 			}, bookmarksEntry);
 	}
 
@@ -205,7 +206,8 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				bookmarksEntry.getUuid(), new Long(bookmarksEntry.getGroupId())
+				bookmarksEntry.getUuid(),
+				Long.valueOf(bookmarksEntry.getGroupId())
 			});
 	}
 
@@ -257,7 +259,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			session = openSession();
 
 			BookmarksEntry bookmarksEntry = (BookmarksEntry)session.get(BookmarksEntryImpl.class,
-					new Long(entryId));
+					Long.valueOf(entryId));
 
 			if (bookmarksEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -318,7 +320,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				bookmarksEntryModelImpl.getUuid(),
-				new Long(bookmarksEntryModelImpl.getGroupId())
+				Long.valueOf(bookmarksEntryModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(BookmarksEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -371,7 +373,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					bookmarksEntryModelImpl.getOriginalUuid(),
-					new Long(bookmarksEntryModelImpl.getOriginalGroupId())
+					Long.valueOf(bookmarksEntryModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -382,7 +384,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					bookmarksEntry.getUuid(),
-					new Long(bookmarksEntry.getGroupId())
+					Long.valueOf(bookmarksEntry.getGroupId())
 				}, bookmarksEntry);
 		}
 
@@ -484,7 +486,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				session = openSession();
 
 				bookmarksEntry = (BookmarksEntry)session.get(BookmarksEntryImpl.class,
-						new Long(entryId));
+						Long.valueOf(entryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

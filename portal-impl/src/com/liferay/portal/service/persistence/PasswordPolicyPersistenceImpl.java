@@ -104,13 +104,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DP,
 			new Object[] {
-				new Long(passwordPolicy.getCompanyId()),
+				Long.valueOf(passwordPolicy.getCompanyId()),
 				Boolean.valueOf(passwordPolicy.getDefaultPolicy())
 			}, passwordPolicy);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(passwordPolicy.getCompanyId()),
+				Long.valueOf(passwordPolicy.getCompanyId()),
 				
 			passwordPolicy.getName()
 			}, passwordPolicy);
@@ -159,13 +159,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DP,
 			new Object[] {
-				new Long(passwordPolicy.getCompanyId()),
+				Long.valueOf(passwordPolicy.getCompanyId()),
 				Boolean.valueOf(passwordPolicy.getDefaultPolicy())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(passwordPolicy.getCompanyId()),
+				Long.valueOf(passwordPolicy.getCompanyId()),
 				
 			passwordPolicy.getName()
 			});
@@ -215,7 +215,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 			session = openSession();
 
 			PasswordPolicy passwordPolicy = (PasswordPolicy)session.get(PasswordPolicyImpl.class,
-					new Long(passwordPolicyId));
+					Long.valueOf(passwordPolicyId));
 
 			if (passwordPolicy == null) {
 				if (_log.isWarnEnabled()) {
@@ -276,13 +276,13 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DP,
 			new Object[] {
-				new Long(passwordPolicyModelImpl.getCompanyId()),
+				Long.valueOf(passwordPolicyModelImpl.getCompanyId()),
 				Boolean.valueOf(passwordPolicyModelImpl.getDefaultPolicy())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(passwordPolicyModelImpl.getCompanyId()),
+				Long.valueOf(passwordPolicyModelImpl.getCompanyId()),
 				
 			passwordPolicyModelImpl.getName()
 			});
@@ -329,7 +329,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 				(passwordPolicy.getDefaultPolicy() != passwordPolicyModelImpl.getOriginalDefaultPolicy()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_DP,
 				new Object[] {
-					new Long(passwordPolicyModelImpl.getOriginalCompanyId()),
+					Long.valueOf(passwordPolicyModelImpl.getOriginalCompanyId()),
 					Boolean.valueOf(
 						passwordPolicyModelImpl.getOriginalDefaultPolicy())
 				});
@@ -340,7 +340,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 				(passwordPolicy.getDefaultPolicy() != passwordPolicyModelImpl.getOriginalDefaultPolicy()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_DP,
 				new Object[] {
-					new Long(passwordPolicy.getCompanyId()),
+					Long.valueOf(passwordPolicy.getCompanyId()),
 					Boolean.valueOf(passwordPolicy.getDefaultPolicy())
 				}, passwordPolicy);
 		}
@@ -351,7 +351,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 					passwordPolicyModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
-					new Long(passwordPolicyModelImpl.getOriginalCompanyId()),
+					Long.valueOf(passwordPolicyModelImpl.getOriginalCompanyId()),
 					
 				passwordPolicyModelImpl.getOriginalName()
 				});
@@ -363,7 +363,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 					passwordPolicyModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
-					new Long(passwordPolicy.getCompanyId()),
+					Long.valueOf(passwordPolicy.getCompanyId()),
 					
 				passwordPolicy.getName()
 				}, passwordPolicy);
@@ -486,7 +486,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 				session = openSession();
 
 				passwordPolicy = (PasswordPolicy)session.get(PasswordPolicyImpl.class,
-						new Long(passwordPolicyId));
+						Long.valueOf(passwordPolicyId));
 			}
 			catch (Exception e) {
 				throw processException(e);

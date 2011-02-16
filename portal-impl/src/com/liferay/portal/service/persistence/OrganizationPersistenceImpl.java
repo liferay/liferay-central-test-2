@@ -144,7 +144,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(organization.getCompanyId()),
+				Long.valueOf(organization.getCompanyId()),
 				
 			organization.getName()
 			}, organization);
@@ -193,7 +193,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(organization.getCompanyId()),
+				Long.valueOf(organization.getCompanyId()),
 				
 			organization.getName()
 			});
@@ -243,7 +243,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 			session = openSession();
 
 			Organization organization = (Organization)session.get(OrganizationImpl.class,
-					new Long(organizationId));
+					Long.valueOf(organizationId));
 
 			if (organization == null) {
 				if (_log.isWarnEnabled()) {
@@ -326,7 +326,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(organizationModelImpl.getCompanyId()),
+				Long.valueOf(organizationModelImpl.getCompanyId()),
 				
 			organizationModelImpl.getName()
 			});
@@ -383,7 +383,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 					organizationModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
-					new Long(organizationModelImpl.getOriginalCompanyId()),
+					Long.valueOf(organizationModelImpl.getOriginalCompanyId()),
 					
 				organizationModelImpl.getOriginalName()
 				});
@@ -395,7 +395,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 					organizationModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
-					new Long(organization.getCompanyId()),
+					Long.valueOf(organization.getCompanyId()),
 					
 				organization.getName()
 				}, organization);
@@ -498,7 +498,7 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 				session = openSession();
 
 				organization = (Organization)session.get(OrganizationImpl.class,
-						new Long(organizationId));
+						Long.valueOf(organizationId));
 			}
 			catch (Exception e) {
 				throw processException(e);

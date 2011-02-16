@@ -185,7 +185,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 			session = openSession();
 
 			UserTrackerPath userTrackerPath = (UserTrackerPath)session.get(UserTrackerPathImpl.class,
-					new Long(userTrackerPathId));
+					Long.valueOf(userTrackerPathId));
 
 			if (userTrackerPath == null) {
 				if (_log.isWarnEnabled()) {
@@ -364,7 +364,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistenceImpl<UserTrac
 				session = openSession();
 
 				userTrackerPath = (UserTrackerPath)session.get(UserTrackerPathImpl.class,
-						new Long(userTrackerPathId));
+						Long.valueOf(userTrackerPathId));
 			}
 			catch (Exception e) {
 				throw processException(e);

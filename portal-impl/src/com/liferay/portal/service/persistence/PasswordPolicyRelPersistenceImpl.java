@@ -120,15 +120,15 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(passwordPolicyRel.getClassNameId()),
-				new Long(passwordPolicyRel.getClassPK())
+				Long.valueOf(passwordPolicyRel.getClassNameId()),
+				Long.valueOf(passwordPolicyRel.getClassPK())
 			}, passwordPolicyRel);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_C_C,
 			new Object[] {
-				new Long(passwordPolicyRel.getPasswordPolicyId()),
-				new Long(passwordPolicyRel.getClassNameId()),
-				new Long(passwordPolicyRel.getClassPK())
+				Long.valueOf(passwordPolicyRel.getPasswordPolicyId()),
+				Long.valueOf(passwordPolicyRel.getClassNameId()),
+				Long.valueOf(passwordPolicyRel.getClassPK())
 			}, passwordPolicyRel);
 	}
 
@@ -175,15 +175,15 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(passwordPolicyRel.getClassNameId()),
-				new Long(passwordPolicyRel.getClassPK())
+				Long.valueOf(passwordPolicyRel.getClassNameId()),
+				Long.valueOf(passwordPolicyRel.getClassPK())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_C_C,
 			new Object[] {
-				new Long(passwordPolicyRel.getPasswordPolicyId()),
-				new Long(passwordPolicyRel.getClassNameId()),
-				new Long(passwordPolicyRel.getClassPK())
+				Long.valueOf(passwordPolicyRel.getPasswordPolicyId()),
+				Long.valueOf(passwordPolicyRel.getClassNameId()),
+				Long.valueOf(passwordPolicyRel.getClassPK())
 			});
 	}
 
@@ -231,7 +231,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 			session = openSession();
 
 			PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)session.get(PasswordPolicyRelImpl.class,
-					new Long(passwordPolicyRelId));
+					Long.valueOf(passwordPolicyRelId));
 
 			if (passwordPolicyRel == null) {
 				if (_log.isWarnEnabled()) {
@@ -292,15 +292,15 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(passwordPolicyRelModelImpl.getClassNameId()),
-				new Long(passwordPolicyRelModelImpl.getClassPK())
+				Long.valueOf(passwordPolicyRelModelImpl.getClassNameId()),
+				Long.valueOf(passwordPolicyRelModelImpl.getClassPK())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_C_C,
 			new Object[] {
-				new Long(passwordPolicyRelModelImpl.getPasswordPolicyId()),
-				new Long(passwordPolicyRelModelImpl.getClassNameId()),
-				new Long(passwordPolicyRelModelImpl.getClassPK())
+				Long.valueOf(passwordPolicyRelModelImpl.getPasswordPolicyId()),
+				Long.valueOf(passwordPolicyRelModelImpl.getClassNameId()),
+				Long.valueOf(passwordPolicyRelModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(PasswordPolicyRelModelImpl.ENTITY_CACHE_ENABLED,
@@ -345,8 +345,10 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				(passwordPolicyRel.getClassPK() != passwordPolicyRelModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(passwordPolicyRelModelImpl.getOriginalClassNameId()),
-					new Long(passwordPolicyRelModelImpl.getOriginalClassPK())
+					Long.valueOf(
+						passwordPolicyRelModelImpl.getOriginalClassNameId()),
+					Long.valueOf(
+						passwordPolicyRelModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -355,8 +357,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				(passwordPolicyRel.getClassPK() != passwordPolicyRelModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(passwordPolicyRel.getClassNameId()),
-					new Long(passwordPolicyRel.getClassPK())
+					Long.valueOf(passwordPolicyRel.getClassNameId()),
+					Long.valueOf(passwordPolicyRel.getClassPK())
 				}, passwordPolicyRel);
 		}
 
@@ -366,9 +368,12 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				(passwordPolicyRel.getClassPK() != passwordPolicyRelModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_P_C_C,
 				new Object[] {
-					new Long(passwordPolicyRelModelImpl.getOriginalPasswordPolicyId()),
-					new Long(passwordPolicyRelModelImpl.getOriginalClassNameId()),
-					new Long(passwordPolicyRelModelImpl.getOriginalClassPK())
+					Long.valueOf(
+						passwordPolicyRelModelImpl.getOriginalPasswordPolicyId()),
+					Long.valueOf(
+						passwordPolicyRelModelImpl.getOriginalClassNameId()),
+					Long.valueOf(
+						passwordPolicyRelModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -378,9 +383,9 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				(passwordPolicyRel.getClassPK() != passwordPolicyRelModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_P_C_C,
 				new Object[] {
-					new Long(passwordPolicyRel.getPasswordPolicyId()),
-					new Long(passwordPolicyRel.getClassNameId()),
-					new Long(passwordPolicyRel.getClassPK())
+					Long.valueOf(passwordPolicyRel.getPasswordPolicyId()),
+					Long.valueOf(passwordPolicyRel.getClassNameId()),
+					Long.valueOf(passwordPolicyRel.getClassPK())
 				}, passwordPolicyRel);
 		}
 
@@ -475,7 +480,7 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 				session = openSession();
 
 				passwordPolicyRel = (PasswordPolicyRel)session.get(PasswordPolicyRelImpl.class,
-						new Long(passwordPolicyRelId));
+						Long.valueOf(passwordPolicyRelId));
 			}
 			catch (Exception e) {
 				throw processException(e);

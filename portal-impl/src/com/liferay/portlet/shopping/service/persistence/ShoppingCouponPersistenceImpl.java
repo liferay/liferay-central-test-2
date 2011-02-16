@@ -204,7 +204,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 			session = openSession();
 
 			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCouponImpl.class,
-					new Long(couponId));
+					Long.valueOf(couponId));
 
 			if (shoppingCoupon == null) {
 				if (_log.isWarnEnabled()) {
@@ -419,7 +419,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistenceImpl<ShoppingC
 				session = openSession();
 
 				shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCouponImpl.class,
-						new Long(couponId));
+						Long.valueOf(couponId));
 			}
 			catch (Exception e) {
 				throw processException(e);

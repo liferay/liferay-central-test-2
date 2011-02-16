@@ -125,8 +125,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C,
 			new Object[] {
-				new Long(assetTagStats.getTagId()),
-				new Long(assetTagStats.getClassNameId())
+				Long.valueOf(assetTagStats.getTagId()),
+				Long.valueOf(assetTagStats.getClassNameId())
 			}, assetTagStats);
 	}
 
@@ -173,8 +173,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
 			new Object[] {
-				new Long(assetTagStats.getTagId()),
-				new Long(assetTagStats.getClassNameId())
+				Long.valueOf(assetTagStats.getTagId()),
+				Long.valueOf(assetTagStats.getClassNameId())
 			});
 	}
 
@@ -222,7 +222,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 			session = openSession();
 
 			AssetTagStats assetTagStats = (AssetTagStats)session.get(AssetTagStatsImpl.class,
-					new Long(tagStatsId));
+					Long.valueOf(tagStatsId));
 
 			if (assetTagStats == null) {
 				if (_log.isWarnEnabled()) {
@@ -282,8 +282,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
 			new Object[] {
-				new Long(assetTagStatsModelImpl.getTagId()),
-				new Long(assetTagStatsModelImpl.getClassNameId())
+				Long.valueOf(assetTagStatsModelImpl.getTagId()),
+				Long.valueOf(assetTagStatsModelImpl.getClassNameId())
 			});
 
 		EntityCacheUtil.removeResult(AssetTagStatsModelImpl.ENTITY_CACHE_ENABLED,
@@ -328,8 +328,9 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 				(assetTagStats.getClassNameId() != assetTagStatsModelImpl.getOriginalClassNameId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_C,
 				new Object[] {
-					new Long(assetTagStatsModelImpl.getOriginalTagId()),
-					new Long(assetTagStatsModelImpl.getOriginalClassNameId())
+					Long.valueOf(assetTagStatsModelImpl.getOriginalTagId()),
+					Long.valueOf(
+						assetTagStatsModelImpl.getOriginalClassNameId())
 				});
 		}
 
@@ -338,8 +339,8 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 				(assetTagStats.getClassNameId() != assetTagStatsModelImpl.getOriginalClassNameId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_C,
 				new Object[] {
-					new Long(assetTagStats.getTagId()),
-					new Long(assetTagStats.getClassNameId())
+					Long.valueOf(assetTagStats.getTagId()),
+					Long.valueOf(assetTagStats.getClassNameId())
 				}, assetTagStats);
 		}
 
@@ -432,7 +433,7 @@ public class AssetTagStatsPersistenceImpl extends BasePersistenceImpl<AssetTagSt
 				session = openSession();
 
 				assetTagStats = (AssetTagStats)session.get(AssetTagStatsImpl.class,
-						new Long(tagStatsId));
+						Long.valueOf(tagStatsId));
 			}
 			catch (Exception e) {
 				throw processException(e);

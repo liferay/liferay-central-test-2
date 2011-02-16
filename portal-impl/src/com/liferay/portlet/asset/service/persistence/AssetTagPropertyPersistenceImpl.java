@@ -139,7 +139,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_K,
 			new Object[] {
-				new Long(assetTagProperty.getTagId()),
+				Long.valueOf(assetTagProperty.getTagId()),
 				
 			assetTagProperty.getKey()
 			}, assetTagProperty);
@@ -188,7 +188,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_K,
 			new Object[] {
-				new Long(assetTagProperty.getTagId()),
+				Long.valueOf(assetTagProperty.getTagId()),
 				
 			assetTagProperty.getKey()
 			});
@@ -238,7 +238,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 			session = openSession();
 
 			AssetTagProperty assetTagProperty = (AssetTagProperty)session.get(AssetTagPropertyImpl.class,
-					new Long(tagPropertyId));
+					Long.valueOf(tagPropertyId));
 
 			if (assetTagProperty == null) {
 				if (_log.isWarnEnabled()) {
@@ -298,7 +298,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_K,
 			new Object[] {
-				new Long(assetTagPropertyModelImpl.getTagId()),
+				Long.valueOf(assetTagPropertyModelImpl.getTagId()),
 				
 			assetTagPropertyModelImpl.getKey()
 			});
@@ -346,7 +346,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 					assetTagPropertyModelImpl.getOriginalKey()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_K,
 				new Object[] {
-					new Long(assetTagPropertyModelImpl.getOriginalTagId()),
+					Long.valueOf(assetTagPropertyModelImpl.getOriginalTagId()),
 					
 				assetTagPropertyModelImpl.getOriginalKey()
 				});
@@ -358,7 +358,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 					assetTagPropertyModelImpl.getOriginalKey()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_K,
 				new Object[] {
-					new Long(assetTagProperty.getTagId()),
+					Long.valueOf(assetTagProperty.getTagId()),
 					
 				assetTagProperty.getKey()
 				}, assetTagProperty);
@@ -459,7 +459,7 @@ public class AssetTagPropertyPersistenceImpl extends BasePersistenceImpl<AssetTa
 				session = openSession();
 
 				assetTagProperty = (AssetTagProperty)session.get(AssetTagPropertyImpl.class,
-						new Long(tagPropertyId));
+						Long.valueOf(tagPropertyId));
 			}
 			catch (Exception e) {
 				throw processException(e);

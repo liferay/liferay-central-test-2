@@ -168,7 +168,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 			session = openSession();
 
 			Account account = (Account)session.get(AccountImpl.class,
-					new Long(accountId));
+					Long.valueOf(accountId));
 
 			if (account == null) {
 				if (_log.isWarnEnabled()) {
@@ -353,7 +353,7 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 				session = openSession();
 
 				account = (Account)session.get(AccountImpl.class,
-						new Long(accountId));
+						Long.valueOf(accountId));
 			}
 			catch (Exception e) {
 				throw processException(e);

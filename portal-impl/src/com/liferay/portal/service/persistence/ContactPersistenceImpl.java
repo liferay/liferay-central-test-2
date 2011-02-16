@@ -182,7 +182,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 			session = openSession();
 
 			Contact contact = (Contact)session.get(ContactImpl.class,
-					new Long(contactId));
+					Long.valueOf(contactId));
 
 			if (contact == null) {
 				if (_log.isWarnEnabled()) {
@@ -381,7 +381,7 @@ public class ContactPersistenceImpl extends BasePersistenceImpl<Contact>
 				session = openSession();
 
 				contact = (Contact)session.get(ContactImpl.class,
-						new Long(contactId));
+						Long.valueOf(contactId));
 			}
 			catch (Exception e) {
 				throw processException(e);

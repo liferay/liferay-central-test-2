@@ -136,12 +136,12 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalArticleResource.getUuid(),
-				new Long(journalArticleResource.getGroupId())
+				Long.valueOf(journalArticleResource.getGroupId())
 			}, journalArticleResource);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
 			new Object[] {
-				new Long(journalArticleResource.getGroupId()),
+				Long.valueOf(journalArticleResource.getGroupId()),
 				
 			journalArticleResource.getArticleId()
 			}, journalArticleResource);
@@ -193,12 +193,12 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalArticleResource.getUuid(),
-				new Long(journalArticleResource.getGroupId())
+				Long.valueOf(journalArticleResource.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A,
 			new Object[] {
-				new Long(journalArticleResource.getGroupId()),
+				Long.valueOf(journalArticleResource.getGroupId()),
 				
 			journalArticleResource.getArticleId()
 			});
@@ -252,7 +252,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			session = openSession();
 
 			JournalArticleResource journalArticleResource = (JournalArticleResource)session.get(JournalArticleResourceImpl.class,
-					new Long(resourcePrimKey));
+					Long.valueOf(resourcePrimKey));
 
 			if (journalArticleResource == null) {
 				if (_log.isWarnEnabled()) {
@@ -316,12 +316,12 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				journalArticleResourceModelImpl.getUuid(),
-				new Long(journalArticleResourceModelImpl.getGroupId())
+				Long.valueOf(journalArticleResourceModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A,
 			new Object[] {
-				new Long(journalArticleResourceModelImpl.getGroupId()),
+				Long.valueOf(journalArticleResourceModelImpl.getGroupId()),
 				
 			journalArticleResourceModelImpl.getArticleId()
 			});
@@ -377,7 +377,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					journalArticleResourceModelImpl.getOriginalUuid(),
-					new Long(journalArticleResourceModelImpl.getOriginalGroupId())
+					Long.valueOf(
+						journalArticleResourceModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -388,7 +389,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					journalArticleResource.getUuid(),
-					new Long(journalArticleResource.getGroupId())
+					Long.valueOf(journalArticleResource.getGroupId())
 				}, journalArticleResource);
 		}
 
@@ -398,7 +399,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 					journalArticleResourceModelImpl.getOriginalArticleId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A,
 				new Object[] {
-					new Long(journalArticleResourceModelImpl.getOriginalGroupId()),
+					Long.valueOf(
+						journalArticleResourceModelImpl.getOriginalGroupId()),
 					
 				journalArticleResourceModelImpl.getOriginalArticleId()
 				});
@@ -410,7 +412,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 					journalArticleResourceModelImpl.getOriginalArticleId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A,
 				new Object[] {
-					new Long(journalArticleResource.getGroupId()),
+					Long.valueOf(journalArticleResource.getGroupId()),
 					
 				journalArticleResource.getArticleId()
 				}, journalArticleResource);
@@ -506,7 +508,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistenceImpl<J
 				session = openSession();
 
 				journalArticleResource = (JournalArticleResource)session.get(JournalArticleResourceImpl.class,
-						new Long(resourcePrimKey));
+						Long.valueOf(resourcePrimKey));
 			}
 			catch (Exception e) {
 				throw processException(e);

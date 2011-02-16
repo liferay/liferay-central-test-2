@@ -135,8 +135,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(mbStatsUser.getGroupId()),
-				new Long(mbStatsUser.getUserId())
+				Long.valueOf(mbStatsUser.getGroupId()),
+				Long.valueOf(mbStatsUser.getUserId())
 			}, mbStatsUser);
 	}
 
@@ -182,8 +182,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(mbStatsUser.getGroupId()),
-				new Long(mbStatsUser.getUserId())
+				Long.valueOf(mbStatsUser.getGroupId()),
+				Long.valueOf(mbStatsUser.getUserId())
 			});
 	}
 
@@ -231,7 +231,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 			session = openSession();
 
 			MBStatsUser mbStatsUser = (MBStatsUser)session.get(MBStatsUserImpl.class,
-					new Long(statsUserId));
+					Long.valueOf(statsUserId));
 
 			if (mbStatsUser == null) {
 				if (_log.isWarnEnabled()) {
@@ -291,8 +291,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(mbStatsUserModelImpl.getGroupId()),
-				new Long(mbStatsUserModelImpl.getUserId())
+				Long.valueOf(mbStatsUserModelImpl.getGroupId()),
+				Long.valueOf(mbStatsUserModelImpl.getUserId())
 			});
 
 		EntityCacheUtil.removeResult(MBStatsUserModelImpl.ENTITY_CACHE_ENABLED,
@@ -336,8 +336,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				(mbStatsUser.getUserId() != mbStatsUserModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 				new Object[] {
-					new Long(mbStatsUserModelImpl.getOriginalGroupId()),
-					new Long(mbStatsUserModelImpl.getOriginalUserId())
+					Long.valueOf(mbStatsUserModelImpl.getOriginalGroupId()),
+					Long.valueOf(mbStatsUserModelImpl.getOriginalUserId())
 				});
 		}
 
@@ -346,8 +346,8 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				(mbStatsUser.getUserId() != mbStatsUserModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 				new Object[] {
-					new Long(mbStatsUser.getGroupId()),
-					new Long(mbStatsUser.getUserId())
+					Long.valueOf(mbStatsUser.getGroupId()),
+					Long.valueOf(mbStatsUser.getUserId())
 				}, mbStatsUser);
 		}
 
@@ -441,7 +441,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistenceImpl<MBStatsUser>
 				session = openSession();
 
 				mbStatsUser = (MBStatsUser)session.get(MBStatsUserImpl.class,
-						new Long(statsUserId));
+						Long.valueOf(statsUserId));
 			}
 			catch (Exception e) {
 				throw processException(e);

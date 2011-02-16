@@ -126,7 +126,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_V,
 			new Object[] {
-				new Long(dlFileVersion.getFileEntryId()),
+				Long.valueOf(dlFileVersion.getFileEntryId()),
 				
 			dlFileVersion.getVersion()
 			}, dlFileVersion);
@@ -175,7 +175,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V,
 			new Object[] {
-				new Long(dlFileVersion.getFileEntryId()),
+				Long.valueOf(dlFileVersion.getFileEntryId()),
 				
 			dlFileVersion.getVersion()
 			});
@@ -225,7 +225,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 			session = openSession();
 
 			DLFileVersion dlFileVersion = (DLFileVersion)session.get(DLFileVersionImpl.class,
-					new Long(fileVersionId));
+					Long.valueOf(fileVersionId));
 
 			if (dlFileVersion == null) {
 				if (_log.isWarnEnabled()) {
@@ -285,7 +285,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V,
 			new Object[] {
-				new Long(dlFileVersionModelImpl.getFileEntryId()),
+				Long.valueOf(dlFileVersionModelImpl.getFileEntryId()),
 				
 			dlFileVersionModelImpl.getVersion()
 			});
@@ -333,7 +333,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					dlFileVersionModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_F_V,
 				new Object[] {
-					new Long(dlFileVersionModelImpl.getOriginalFileEntryId()),
+					Long.valueOf(
+						dlFileVersionModelImpl.getOriginalFileEntryId()),
 					
 				dlFileVersionModelImpl.getOriginalVersion()
 				});
@@ -345,7 +346,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 					dlFileVersionModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_F_V,
 				new Object[] {
-					new Long(dlFileVersion.getFileEntryId()),
+					Long.valueOf(dlFileVersion.getFileEntryId()),
 					
 				dlFileVersion.getVersion()
 				}, dlFileVersion);
@@ -455,7 +456,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistenceImpl<DLFileVers
 				session = openSession();
 
 				dlFileVersion = (DLFileVersion)session.get(DLFileVersionImpl.class,
-						new Long(fileVersionId));
+						Long.valueOf(fileVersionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

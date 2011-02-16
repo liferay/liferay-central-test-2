@@ -208,7 +208,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 			session = openSession();
 
 			SCLicense scLicense = (SCLicense)session.get(SCLicenseImpl.class,
-					new Long(licenseId));
+					Long.valueOf(licenseId));
 
 			if (scLicense == null) {
 				if (_log.isWarnEnabled()) {
@@ -396,7 +396,7 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 				session = openSession();
 
 				scLicense = (SCLicense)session.get(SCLicenseImpl.class,
-						new Long(licenseId));
+						Long.valueOf(licenseId));
 			}
 			catch (Exception e) {
 				throw processException(e);

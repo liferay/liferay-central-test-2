@@ -139,15 +139,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
 			new Object[] {
-				new Long(assetEntry.getGroupId()),
+				Long.valueOf(assetEntry.getGroupId()),
 				
 			assetEntry.getClassUuid()
 			}, assetEntry);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(assetEntry.getClassNameId()),
-				new Long(assetEntry.getClassPK())
+				Long.valueOf(assetEntry.getClassNameId()),
+				Long.valueOf(assetEntry.getClassPK())
 			}, assetEntry);
 	}
 
@@ -193,15 +193,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
 			new Object[] {
-				new Long(assetEntry.getGroupId()),
+				Long.valueOf(assetEntry.getGroupId()),
 				
 			assetEntry.getClassUuid()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(assetEntry.getClassNameId()),
-				new Long(assetEntry.getClassPK())
+				Long.valueOf(assetEntry.getClassNameId()),
+				Long.valueOf(assetEntry.getClassPK())
 			});
 	}
 
@@ -249,7 +249,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 			session = openSession();
 
 			AssetEntry assetEntry = (AssetEntry)session.get(AssetEntryImpl.class,
-					new Long(entryId));
+					Long.valueOf(entryId));
 
 			if (assetEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -328,15 +328,15 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
 			new Object[] {
-				new Long(assetEntryModelImpl.getGroupId()),
+				Long.valueOf(assetEntryModelImpl.getGroupId()),
 				
 			assetEntryModelImpl.getClassUuid()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(assetEntryModelImpl.getClassNameId()),
-				new Long(assetEntryModelImpl.getClassPK())
+				Long.valueOf(assetEntryModelImpl.getClassNameId()),
+				Long.valueOf(assetEntryModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(AssetEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -381,7 +381,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 					assetEntryModelImpl.getOriginalClassUuid()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_CU,
 				new Object[] {
-					new Long(assetEntryModelImpl.getOriginalGroupId()),
+					Long.valueOf(assetEntryModelImpl.getOriginalGroupId()),
 					
 				assetEntryModelImpl.getOriginalClassUuid()
 				});
@@ -393,7 +393,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 					assetEntryModelImpl.getOriginalClassUuid()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_CU,
 				new Object[] {
-					new Long(assetEntry.getGroupId()),
+					Long.valueOf(assetEntry.getGroupId()),
 					
 				assetEntry.getClassUuid()
 				}, assetEntry);
@@ -404,8 +404,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 				(assetEntry.getClassPK() != assetEntryModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(assetEntryModelImpl.getOriginalClassNameId()),
-					new Long(assetEntryModelImpl.getOriginalClassPK())
+					Long.valueOf(assetEntryModelImpl.getOriginalClassNameId()),
+					Long.valueOf(assetEntryModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -414,8 +414,8 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 				(assetEntry.getClassPK() != assetEntryModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(assetEntry.getClassNameId()),
-					new Long(assetEntry.getClassPK())
+					Long.valueOf(assetEntry.getClassNameId()),
+					Long.valueOf(assetEntry.getClassPK())
 				}, assetEntry);
 		}
 
@@ -527,7 +527,7 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 				session = openSession();
 
 				assetEntry = (AssetEntry)session.get(AssetEntryImpl.class,
-						new Long(entryId));
+						Long.valueOf(entryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

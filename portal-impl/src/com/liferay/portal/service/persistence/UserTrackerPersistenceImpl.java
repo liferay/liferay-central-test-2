@@ -206,7 +206,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 			session = openSession();
 
 			UserTracker userTracker = (UserTracker)session.get(UserTrackerImpl.class,
-					new Long(userTrackerId));
+					Long.valueOf(userTrackerId));
 
 			if (userTracker == null) {
 				if (_log.isWarnEnabled()) {
@@ -387,7 +387,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 				session = openSession();
 
 				userTracker = (UserTracker)session.get(UserTrackerImpl.class,
-						new Long(userTrackerId));
+						Long.valueOf(userTrackerId));
 			}
 			catch (Exception e) {
 				throw processException(e);

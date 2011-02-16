@@ -110,7 +110,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
 			new Object[] {
 				serviceComponent.getBuildNamespace(),
-				new Long(serviceComponent.getBuildNumber())
+				Long.valueOf(serviceComponent.getBuildNumber())
 			}, serviceComponent);
 	}
 
@@ -158,7 +158,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
 			new Object[] {
 				serviceComponent.getBuildNamespace(),
-				new Long(serviceComponent.getBuildNumber())
+				Long.valueOf(serviceComponent.getBuildNumber())
 			});
 	}
 
@@ -206,7 +206,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			session = openSession();
 
 			ServiceComponent serviceComponent = (ServiceComponent)session.get(ServiceComponentImpl.class,
-					new Long(serviceComponentId));
+					Long.valueOf(serviceComponentId));
 
 			if (serviceComponent == null) {
 				if (_log.isWarnEnabled()) {
@@ -268,7 +268,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
 			new Object[] {
 				serviceComponentModelImpl.getBuildNamespace(),
-				new Long(serviceComponentModelImpl.getBuildNumber())
+				Long.valueOf(serviceComponentModelImpl.getBuildNumber())
 			});
 
 		EntityCacheUtil.removeResult(ServiceComponentModelImpl.ENTITY_CACHE_ENABLED,
@@ -315,7 +315,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
 				new Object[] {
 					serviceComponentModelImpl.getOriginalBuildNamespace(),
-					new Long(serviceComponentModelImpl.getOriginalBuildNumber())
+					Long.valueOf(
+						serviceComponentModelImpl.getOriginalBuildNumber())
 				});
 		}
 
@@ -326,7 +327,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
 				new Object[] {
 					serviceComponent.getBuildNamespace(),
-					new Long(serviceComponent.getBuildNumber())
+					Long.valueOf(serviceComponent.getBuildNumber())
 				}, serviceComponent);
 		}
 
@@ -422,7 +423,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				session = openSession();
 
 				serviceComponent = (ServiceComponent)session.get(ServiceComponentImpl.class,
-						new Long(serviceComponentId));
+						Long.valueOf(serviceComponentId));
 			}
 			catch (Exception e) {
 				throw processException(e);

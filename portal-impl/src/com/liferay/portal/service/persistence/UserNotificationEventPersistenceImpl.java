@@ -205,7 +205,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 			session = openSession();
 
 			UserNotificationEvent userNotificationEvent = (UserNotificationEvent)session.get(UserNotificationEventImpl.class,
-					new Long(userNotificationEventId));
+					Long.valueOf(userNotificationEventId));
 
 			if (userNotificationEvent == null) {
 				if (_log.isWarnEnabled()) {
@@ -397,7 +397,7 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 				session = openSession();
 
 				userNotificationEvent = (UserNotificationEvent)session.get(UserNotificationEventImpl.class,
-						new Long(userNotificationEventId));
+						Long.valueOf(userNotificationEventId));
 			}
 			catch (Exception e) {
 				throw processException(e);

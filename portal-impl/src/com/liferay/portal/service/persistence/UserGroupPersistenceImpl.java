@@ -128,8 +128,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			UserGroupImpl.class, userGroup.getPrimaryKey(), userGroup);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-			new Object[] { new Long(userGroup.getCompanyId()), userGroup.getName() },
-			userGroup);
+			new Object[] {
+				Long.valueOf(userGroup.getCompanyId()),
+				
+			userGroup.getName()
+			}, userGroup);
 	}
 
 	/**
@@ -173,7 +176,11 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			UserGroupImpl.class, userGroup.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
-			new Object[] { new Long(userGroup.getCompanyId()), userGroup.getName() });
+			new Object[] {
+				Long.valueOf(userGroup.getCompanyId()),
+				
+			userGroup.getName()
+			});
 	}
 
 	/**
@@ -220,7 +227,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 			session = openSession();
 
 			UserGroup userGroup = (UserGroup)session.get(UserGroupImpl.class,
-					new Long(userGroupId));
+					Long.valueOf(userGroupId));
 
 			if (userGroup == null) {
 				if (_log.isWarnEnabled()) {
@@ -309,7 +316,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(userGroupModelImpl.getCompanyId()),
+				Long.valueOf(userGroupModelImpl.getCompanyId()),
 				
 			userGroupModelImpl.getName()
 			});
@@ -355,7 +362,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					userGroupModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
-					new Long(userGroupModelImpl.getOriginalCompanyId()),
+					Long.valueOf(userGroupModelImpl.getOriginalCompanyId()),
 					
 				userGroupModelImpl.getOriginalName()
 				});
@@ -367,7 +374,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 					userGroupModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
-					new Long(userGroup.getCompanyId()),
+					Long.valueOf(userGroup.getCompanyId()),
 					
 				userGroup.getName()
 				}, userGroup);
@@ -463,7 +470,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				session = openSession();
 
 				userGroup = (UserGroup)session.get(UserGroupImpl.class,
-						new Long(userGroupId));
+						Long.valueOf(userGroupId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -211,7 +211,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			session = openSession();
 
 			MembershipRequest membershipRequest = (MembershipRequest)session.get(MembershipRequestImpl.class,
-					new Long(membershipRequestId));
+					Long.valueOf(membershipRequestId));
 
 			if (membershipRequest == null) {
 				if (_log.isWarnEnabled()) {
@@ -398,7 +398,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 				session = openSession();
 
 				membershipRequest = (MembershipRequest)session.get(MembershipRequestImpl.class,
-						new Long(membershipRequestId));
+						Long.valueOf(membershipRequestId));
 			}
 			catch (Exception e) {
 				throw processException(e);

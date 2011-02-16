@@ -147,11 +147,11 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			WikiNodeImpl.class, wikiNode.getPrimaryKey(), wikiNode);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { wikiNode.getUuid(), new Long(wikiNode.getGroupId()) },
-			wikiNode);
+			new Object[] { wikiNode.getUuid(), Long.valueOf(
+					wikiNode.getGroupId()) }, wikiNode);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-			new Object[] { new Long(wikiNode.getGroupId()), wikiNode.getName() },
+			new Object[] { Long.valueOf(wikiNode.getGroupId()), wikiNode.getName() },
 			wikiNode);
 	}
 
@@ -196,10 +196,11 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			WikiNodeImpl.class, wikiNode.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { wikiNode.getUuid(), new Long(wikiNode.getGroupId()) });
+			new Object[] { wikiNode.getUuid(), Long.valueOf(
+					wikiNode.getGroupId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
-			new Object[] { new Long(wikiNode.getGroupId()), wikiNode.getName() });
+			new Object[] { Long.valueOf(wikiNode.getGroupId()), wikiNode.getName() });
 	}
 
 	/**
@@ -250,7 +251,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			session = openSession();
 
 			WikiNode wikiNode = (WikiNode)session.get(WikiNodeImpl.class,
-					new Long(nodeId));
+					Long.valueOf(nodeId));
 
 			if (wikiNode == null) {
 				if (_log.isWarnEnabled()) {
@@ -309,12 +310,12 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				wikiNodeModelImpl.getUuid(),
-				new Long(wikiNodeModelImpl.getGroupId())
+				Long.valueOf(wikiNodeModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
 			new Object[] {
-				new Long(wikiNodeModelImpl.getGroupId()),
+				Long.valueOf(wikiNodeModelImpl.getGroupId()),
 				
 			wikiNodeModelImpl.getName()
 			});
@@ -368,7 +369,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					wikiNodeModelImpl.getOriginalUuid(),
-					new Long(wikiNodeModelImpl.getOriginalGroupId())
+					Long.valueOf(wikiNodeModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -377,8 +378,9 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					wikiNodeModelImpl.getOriginalUuid()) ||
 				(wikiNode.getGroupId() != wikiNodeModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] { wikiNode.getUuid(), new Long(
-						wikiNode.getGroupId()) }, wikiNode);
+				new Object[] {
+					wikiNode.getUuid(), Long.valueOf(wikiNode.getGroupId())
+				}, wikiNode);
 		}
 
 		if (!isNew &&
@@ -387,7 +389,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 					wikiNodeModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
 				new Object[] {
-					new Long(wikiNodeModelImpl.getOriginalGroupId()),
+					Long.valueOf(wikiNodeModelImpl.getOriginalGroupId()),
 					
 				wikiNodeModelImpl.getOriginalName()
 				});
@@ -398,8 +400,11 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				!Validator.equals(wikiNode.getName(),
 					wikiNodeModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-				new Object[] { new Long(wikiNode.getGroupId()), wikiNode.getName() },
-				wikiNode);
+				new Object[] {
+					Long.valueOf(wikiNode.getGroupId()),
+					
+				wikiNode.getName()
+				}, wikiNode);
 		}
 
 		return wikiNode;
@@ -497,7 +502,7 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				session = openSession();
 
 				wikiNode = (WikiNode)session.get(WikiNodeImpl.class,
-						new Long(nodeId));
+						Long.valueOf(nodeId));
 			}
 			catch (Exception e) {
 				throw processException(e);

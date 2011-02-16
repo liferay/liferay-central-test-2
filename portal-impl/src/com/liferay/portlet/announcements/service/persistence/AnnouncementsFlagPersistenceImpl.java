@@ -118,9 +118,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V,
 			new Object[] {
-				new Long(announcementsFlag.getUserId()),
-				new Long(announcementsFlag.getEntryId()),
-				new Integer(announcementsFlag.getValue())
+				Long.valueOf(announcementsFlag.getUserId()),
+				Long.valueOf(announcementsFlag.getEntryId()),
+				Integer.valueOf(announcementsFlag.getValue())
 			}, announcementsFlag);
 	}
 
@@ -167,9 +167,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V,
 			new Object[] {
-				new Long(announcementsFlag.getUserId()),
-				new Long(announcementsFlag.getEntryId()),
-				new Integer(announcementsFlag.getValue())
+				Long.valueOf(announcementsFlag.getUserId()),
+				Long.valueOf(announcementsFlag.getEntryId()),
+				Integer.valueOf(announcementsFlag.getValue())
 			});
 	}
 
@@ -217,7 +217,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			session = openSession();
 
 			AnnouncementsFlag announcementsFlag = (AnnouncementsFlag)session.get(AnnouncementsFlagImpl.class,
-					new Long(flagId));
+					Long.valueOf(flagId));
 
 			if (announcementsFlag == null) {
 				if (_log.isWarnEnabled()) {
@@ -277,9 +277,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V,
 			new Object[] {
-				new Long(announcementsFlagModelImpl.getUserId()),
-				new Long(announcementsFlagModelImpl.getEntryId()),
-				new Integer(announcementsFlagModelImpl.getValue())
+				Long.valueOf(announcementsFlagModelImpl.getUserId()),
+				Long.valueOf(announcementsFlagModelImpl.getEntryId()),
+				Integer.valueOf(announcementsFlagModelImpl.getValue())
 			});
 
 		EntityCacheUtil.removeResult(AnnouncementsFlagModelImpl.ENTITY_CACHE_ENABLED,
@@ -325,9 +325,11 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				(announcementsFlag.getValue() != announcementsFlagModelImpl.getOriginalValue()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V,
 				new Object[] {
-					new Long(announcementsFlagModelImpl.getOriginalUserId()),
-					new Long(announcementsFlagModelImpl.getOriginalEntryId()),
-					new Integer(announcementsFlagModelImpl.getOriginalValue())
+					Long.valueOf(announcementsFlagModelImpl.getOriginalUserId()),
+					Long.valueOf(
+						announcementsFlagModelImpl.getOriginalEntryId()),
+					Integer.valueOf(
+						announcementsFlagModelImpl.getOriginalValue())
 				});
 		}
 
@@ -337,9 +339,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				(announcementsFlag.getValue() != announcementsFlagModelImpl.getOriginalValue()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V,
 				new Object[] {
-					new Long(announcementsFlag.getUserId()),
-					new Long(announcementsFlag.getEntryId()),
-					new Integer(announcementsFlag.getValue())
+					Long.valueOf(announcementsFlag.getUserId()),
+					Long.valueOf(announcementsFlag.getEntryId()),
+					Integer.valueOf(announcementsFlag.getValue())
 				}, announcementsFlag);
 		}
 
@@ -434,7 +436,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				session = openSession();
 
 				announcementsFlag = (AnnouncementsFlag)session.get(AnnouncementsFlagImpl.class,
-						new Long(flagId));
+						Long.valueOf(flagId));
 			}
 			catch (Exception e) {
 				throw processException(e);

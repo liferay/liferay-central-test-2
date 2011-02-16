@@ -107,7 +107,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
 			new Object[] {
-				new Long(portlet.getCompanyId()),
+				Long.valueOf(portlet.getCompanyId()),
 				
 			portlet.getPortletId()
 			}, portlet);
@@ -155,7 +155,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
 			new Object[] {
-				new Long(portlet.getCompanyId()),
+				Long.valueOf(portlet.getCompanyId()),
 				
 			portlet.getPortletId()
 			});
@@ -205,7 +205,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			session = openSession();
 
 			Portlet portlet = (Portlet)session.get(PortletImpl.class,
-					new Long(id));
+					Long.valueOf(id));
 
 			if (portlet == null) {
 				if (_log.isWarnEnabled()) {
@@ -263,7 +263,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
 			new Object[] {
-				new Long(portletModelImpl.getCompanyId()),
+				Long.valueOf(portletModelImpl.getCompanyId()),
 				
 			portletModelImpl.getPortletId()
 			});
@@ -309,7 +309,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 					portletModelImpl.getOriginalPortletId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
 				new Object[] {
-					new Long(portletModelImpl.getOriginalCompanyId()),
+					Long.valueOf(portletModelImpl.getOriginalCompanyId()),
 					
 				portletModelImpl.getOriginalPortletId()
 				});
@@ -321,7 +321,7 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 					portletModelImpl.getOriginalPortletId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
 				new Object[] {
-					new Long(portlet.getCompanyId()),
+					Long.valueOf(portlet.getCompanyId()),
 					
 				portlet.getPortletId()
 				}, portlet);
@@ -415,7 +415,8 @@ public class PortletPersistenceImpl extends BasePersistenceImpl<Portlet>
 			try {
 				session = openSession();
 
-				portlet = (Portlet)session.get(PortletImpl.class, new Long(id));
+				portlet = (Portlet)session.get(PortletImpl.class,
+						Long.valueOf(id));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -373,8 +373,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			MBMessageImpl.class, mbMessage.getPrimaryKey(), mbMessage);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { mbMessage.getUuid(), new Long(mbMessage.getGroupId()) },
-			mbMessage);
+			new Object[] {
+				mbMessage.getUuid(), Long.valueOf(mbMessage.getGroupId())
+			}, mbMessage);
 	}
 
 	/**
@@ -418,7 +419,9 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			MBMessageImpl.class, mbMessage.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { mbMessage.getUuid(), new Long(mbMessage.getGroupId()) });
+			new Object[] {
+				mbMessage.getUuid(), Long.valueOf(mbMessage.getGroupId())
+			});
 	}
 
 	/**
@@ -469,7 +472,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			session = openSession();
 
 			MBMessage mbMessage = (MBMessage)session.get(MBMessageImpl.class,
-					new Long(messageId));
+					Long.valueOf(messageId));
 
 			if (mbMessage == null) {
 				if (_log.isWarnEnabled()) {
@@ -529,7 +532,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				mbMessageModelImpl.getUuid(),
-				new Long(mbMessageModelImpl.getGroupId())
+				Long.valueOf(mbMessageModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(MBMessageModelImpl.ENTITY_CACHE_ENABLED,
@@ -581,7 +584,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					mbMessageModelImpl.getOriginalUuid(),
-					new Long(mbMessageModelImpl.getOriginalGroupId())
+					Long.valueOf(mbMessageModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -591,7 +594,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				(mbMessage.getGroupId() != mbMessageModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
-					mbMessage.getUuid(), new Long(mbMessage.getGroupId())
+					mbMessage.getUuid(), Long.valueOf(mbMessage.getGroupId())
 				}, mbMessage);
 		}
 
@@ -705,7 +708,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				session = openSession();
 
 				mbMessage = (MBMessage)session.get(MBMessageImpl.class,
-						new Long(messageId));
+						Long.valueOf(messageId));
 			}
 			catch (Exception e) {
 				throw processException(e);

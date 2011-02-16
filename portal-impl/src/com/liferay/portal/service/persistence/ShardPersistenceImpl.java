@@ -104,7 +104,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(shard.getClassNameId()), new Long(shard.getClassPK())
+				Long.valueOf(shard.getClassNameId()),
+				Long.valueOf(shard.getClassPK())
 			}, shard);
 	}
 
@@ -152,7 +153,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(shard.getClassNameId()), new Long(shard.getClassPK())
+				Long.valueOf(shard.getClassNameId()),
+				Long.valueOf(shard.getClassPK())
 			});
 	}
 
@@ -199,7 +201,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		try {
 			session = openSession();
 
-			Shard shard = (Shard)session.get(ShardImpl.class, new Long(shardId));
+			Shard shard = (Shard)session.get(ShardImpl.class,
+					Long.valueOf(shardId));
 
 			if (shard == null) {
 				if (_log.isWarnEnabled()) {
@@ -260,8 +263,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 			new Object[] {
-				new Long(shardModelImpl.getClassNameId()),
-				new Long(shardModelImpl.getClassPK())
+				Long.valueOf(shardModelImpl.getClassNameId()),
+				Long.valueOf(shardModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
@@ -318,8 +321,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 				(shard.getClassPK() != shardModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(shardModelImpl.getOriginalClassNameId()),
-					new Long(shardModelImpl.getOriginalClassPK())
+					Long.valueOf(shardModelImpl.getOriginalClassNameId()),
+					Long.valueOf(shardModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -328,8 +331,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 				(shard.getClassPK() != shardModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
 				new Object[] {
-					new Long(shard.getClassNameId()),
-					new Long(shard.getClassPK())
+					Long.valueOf(shard.getClassNameId()),
+					Long.valueOf(shard.getClassPK())
 				}, shard);
 		}
 
@@ -420,7 +423,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 			try {
 				session = openSession();
 
-				shard = (Shard)session.get(ShardImpl.class, new Long(shardId));
+				shard = (Shard)session.get(ShardImpl.class,
+						Long.valueOf(shardId));
 			}
 			catch (Exception e) {
 				throw processException(e);

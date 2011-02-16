@@ -294,7 +294,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			session = openSession();
 
 			MBThread mbThread = (MBThread)session.get(MBThreadImpl.class,
-					new Long(threadId));
+					Long.valueOf(threadId));
 
 			if (mbThread == null) {
 				if (_log.isWarnEnabled()) {
@@ -479,7 +479,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				session = openSession();
 
 				mbThread = (MBThread)session.get(MBThreadImpl.class,
-						new Long(threadId));
+						Long.valueOf(threadId));
 			}
 			catch (Exception e) {
 				throw processException(e);

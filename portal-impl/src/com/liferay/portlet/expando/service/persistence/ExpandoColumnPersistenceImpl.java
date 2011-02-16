@@ -115,7 +115,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_N,
 			new Object[] {
-				new Long(expandoColumn.getTableId()),
+				Long.valueOf(expandoColumn.getTableId()),
 				
 			expandoColumn.getName()
 			}, expandoColumn);
@@ -164,7 +164,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_N,
 			new Object[] {
-				new Long(expandoColumn.getTableId()),
+				Long.valueOf(expandoColumn.getTableId()),
 				
 			expandoColumn.getName()
 			});
@@ -214,7 +214,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 			session = openSession();
 
 			ExpandoColumn expandoColumn = (ExpandoColumn)session.get(ExpandoColumnImpl.class,
-					new Long(columnId));
+					Long.valueOf(columnId));
 
 			if (expandoColumn == null) {
 				if (_log.isWarnEnabled()) {
@@ -274,7 +274,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_N,
 			new Object[] {
-				new Long(expandoColumnModelImpl.getTableId()),
+				Long.valueOf(expandoColumnModelImpl.getTableId()),
 				
 			expandoColumnModelImpl.getName()
 			});
@@ -322,7 +322,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 					expandoColumnModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_N,
 				new Object[] {
-					new Long(expandoColumnModelImpl.getOriginalTableId()),
+					Long.valueOf(expandoColumnModelImpl.getOriginalTableId()),
 					
 				expandoColumnModelImpl.getOriginalName()
 				});
@@ -334,7 +334,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 					expandoColumnModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_N,
 				new Object[] {
-					new Long(expandoColumn.getTableId()),
+					Long.valueOf(expandoColumn.getTableId()),
 					
 				expandoColumn.getName()
 				}, expandoColumn);
@@ -432,7 +432,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistenceImpl<ExpandoCol
 				session = openSession();
 
 				expandoColumn = (ExpandoColumn)session.get(ExpandoColumnImpl.class,
-						new Long(columnId));
+						Long.valueOf(columnId));
 			}
 			catch (Exception e) {
 				throw processException(e);

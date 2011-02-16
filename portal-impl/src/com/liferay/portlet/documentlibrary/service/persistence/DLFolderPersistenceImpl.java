@@ -177,13 +177,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			DLFolderImpl.class, dlFolder.getPrimaryKey(), dlFolder);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { dlFolder.getUuid(), new Long(dlFolder.getGroupId()) },
-			dlFolder);
+			new Object[] { dlFolder.getUuid(), Long.valueOf(
+					dlFolder.getGroupId()) }, dlFolder);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(dlFolder.getGroupId()),
-				new Long(dlFolder.getParentFolderId()),
+				Long.valueOf(dlFolder.getGroupId()),
+				Long.valueOf(dlFolder.getParentFolderId()),
 				
 			dlFolder.getName()
 			}, dlFolder);
@@ -230,12 +230,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			DLFolderImpl.class, dlFolder.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { dlFolder.getUuid(), new Long(dlFolder.getGroupId()) });
+			new Object[] { dlFolder.getUuid(), Long.valueOf(
+					dlFolder.getGroupId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(dlFolder.getGroupId()),
-				new Long(dlFolder.getParentFolderId()),
+				Long.valueOf(dlFolder.getGroupId()),
+				Long.valueOf(dlFolder.getParentFolderId()),
 				
 			dlFolder.getName()
 			});
@@ -289,7 +290,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			session = openSession();
 
 			DLFolder dlFolder = (DLFolder)session.get(DLFolderImpl.class,
-					new Long(folderId));
+					Long.valueOf(folderId));
 
 			if (dlFolder == null) {
 				if (_log.isWarnEnabled()) {
@@ -348,13 +349,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				dlFolderModelImpl.getUuid(),
-				new Long(dlFolderModelImpl.getGroupId())
+				Long.valueOf(dlFolderModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
-				new Long(dlFolderModelImpl.getGroupId()),
-				new Long(dlFolderModelImpl.getParentFolderId()),
+				Long.valueOf(dlFolderModelImpl.getGroupId()),
+				Long.valueOf(dlFolderModelImpl.getParentFolderId()),
 				
 			dlFolderModelImpl.getName()
 			});
@@ -408,7 +409,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					dlFolderModelImpl.getOriginalUuid(),
-					new Long(dlFolderModelImpl.getOriginalGroupId())
+					Long.valueOf(dlFolderModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -417,8 +418,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					dlFolderModelImpl.getOriginalUuid()) ||
 				(dlFolder.getGroupId() != dlFolderModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] { dlFolder.getUuid(), new Long(
-						dlFolder.getGroupId()) }, dlFolder);
+				new Object[] {
+					dlFolder.getUuid(), Long.valueOf(dlFolder.getGroupId())
+				}, dlFolder);
 		}
 
 		if (!isNew &&
@@ -428,8 +430,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					dlFolderModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 				new Object[] {
-					new Long(dlFolderModelImpl.getOriginalGroupId()),
-					new Long(dlFolderModelImpl.getOriginalParentFolderId()),
+					Long.valueOf(dlFolderModelImpl.getOriginalGroupId()),
+					Long.valueOf(dlFolderModelImpl.getOriginalParentFolderId()),
 					
 				dlFolderModelImpl.getOriginalName()
 				});
@@ -442,8 +444,8 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					dlFolderModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 				new Object[] {
-					new Long(dlFolder.getGroupId()),
-					new Long(dlFolder.getParentFolderId()),
+					Long.valueOf(dlFolder.getGroupId()),
+					Long.valueOf(dlFolder.getParentFolderId()),
 					
 				dlFolder.getName()
 				}, dlFolder);
@@ -547,7 +549,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				session = openSession();
 
 				dlFolder = (DLFolder)session.get(DLFolderImpl.class,
-						new Long(folderId));
+						Long.valueOf(folderId));
 			}
 			catch (Exception e) {
 				throw processException(e);

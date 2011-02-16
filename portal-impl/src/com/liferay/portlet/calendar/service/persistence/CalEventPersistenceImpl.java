@@ -204,8 +204,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			CalEventImpl.class, calEvent.getPrimaryKey(), calEvent);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { calEvent.getUuid(), new Long(calEvent.getGroupId()) },
-			calEvent);
+			new Object[] { calEvent.getUuid(), Long.valueOf(
+					calEvent.getGroupId()) }, calEvent);
 	}
 
 	/**
@@ -249,7 +249,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			CalEventImpl.class, calEvent.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { calEvent.getUuid(), new Long(calEvent.getGroupId()) });
+			new Object[] { calEvent.getUuid(), Long.valueOf(
+					calEvent.getGroupId()) });
 	}
 
 	/**
@@ -300,7 +301,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			session = openSession();
 
 			CalEvent calEvent = (CalEvent)session.get(CalEventImpl.class,
-					new Long(eventId));
+					Long.valueOf(eventId));
 
 			if (calEvent == null) {
 				if (_log.isWarnEnabled()) {
@@ -359,7 +360,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				calEventModelImpl.getUuid(),
-				new Long(calEventModelImpl.getGroupId())
+				Long.valueOf(calEventModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(CalEventModelImpl.ENTITY_CACHE_ENABLED,
@@ -442,7 +443,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					calEventModelImpl.getOriginalUuid(),
-					new Long(calEventModelImpl.getOriginalGroupId())
+					Long.valueOf(calEventModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -451,8 +452,9 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 					calEventModelImpl.getOriginalUuid()) ||
 				(calEvent.getGroupId() != calEventModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] { calEvent.getUuid(), new Long(
-						calEvent.getGroupId()) }, calEvent);
+				new Object[] {
+					calEvent.getUuid(), Long.valueOf(calEvent.getGroupId())
+				}, calEvent);
 		}
 
 		return calEvent;
@@ -562,7 +564,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				session = openSession();
 
 				calEvent = (CalEvent)session.get(CalEventImpl.class,
-						new Long(eventId));
+						Long.valueOf(eventId));
 			}
 			catch (Exception e) {
 				throw processException(e);

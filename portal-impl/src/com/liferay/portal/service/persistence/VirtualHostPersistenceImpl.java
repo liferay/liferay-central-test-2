@@ -105,8 +105,8 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_L,
 			new Object[] {
-				new Long(virtualHost.getCompanyId()),
-				new Long(virtualHost.getLayoutSetId())
+				Long.valueOf(virtualHost.getCompanyId()),
+				Long.valueOf(virtualHost.getLayoutSetId())
 			}, virtualHost);
 	}
 
@@ -155,8 +155,8 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L,
 			new Object[] {
-				new Long(virtualHost.getCompanyId()),
-				new Long(virtualHost.getLayoutSetId())
+				Long.valueOf(virtualHost.getCompanyId()),
+				Long.valueOf(virtualHost.getLayoutSetId())
 			});
 	}
 
@@ -204,7 +204,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 			session = openSession();
 
 			VirtualHost virtualHost = (VirtualHost)session.get(VirtualHostImpl.class,
-					new Long(virtualHostId));
+					Long.valueOf(virtualHostId));
 
 			if (virtualHost == null) {
 				if (_log.isWarnEnabled()) {
@@ -267,8 +267,8 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L,
 			new Object[] {
-				new Long(virtualHostModelImpl.getCompanyId()),
-				new Long(virtualHostModelImpl.getLayoutSetId())
+				Long.valueOf(virtualHostModelImpl.getCompanyId()),
+				Long.valueOf(virtualHostModelImpl.getLayoutSetId())
 			});
 
 		EntityCacheUtil.removeResult(VirtualHostModelImpl.ENTITY_CACHE_ENABLED,
@@ -326,8 +326,8 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 				(virtualHost.getLayoutSetId() != virtualHostModelImpl.getOriginalLayoutSetId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_L,
 				new Object[] {
-					new Long(virtualHostModelImpl.getOriginalCompanyId()),
-					new Long(virtualHostModelImpl.getOriginalLayoutSetId())
+					Long.valueOf(virtualHostModelImpl.getOriginalCompanyId()),
+					Long.valueOf(virtualHostModelImpl.getOriginalLayoutSetId())
 				});
 		}
 
@@ -336,8 +336,8 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 				(virtualHost.getLayoutSetId() != virtualHostModelImpl.getOriginalLayoutSetId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_L,
 				new Object[] {
-					new Long(virtualHost.getCompanyId()),
-					new Long(virtualHost.getLayoutSetId())
+					Long.valueOf(virtualHost.getCompanyId()),
+					Long.valueOf(virtualHost.getLayoutSetId())
 				}, virtualHost);
 		}
 
@@ -430,7 +430,7 @@ public class VirtualHostPersistenceImpl extends BasePersistenceImpl<VirtualHost>
 				session = openSession();
 
 				virtualHost = (VirtualHost)session.get(VirtualHostImpl.class,
-						new Long(virtualHostId));
+						Long.valueOf(virtualHostId));
 			}
 			catch (Exception e) {
 				throw processException(e);

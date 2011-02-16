@@ -182,7 +182,8 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		try {
 			session = openSession();
 
-			Image image = (Image)session.get(ImageImpl.class, new Long(imageId));
+			Image image = (Image)session.get(ImageImpl.class,
+					Long.valueOf(imageId));
 
 			if (image == null) {
 				if (_log.isWarnEnabled()) {
@@ -357,7 +358,8 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 			try {
 				session = openSession();
 
-				image = (Image)session.get(ImageImpl.class, new Long(imageId));
+				image = (Image)session.get(ImageImpl.class,
+						Long.valueOf(imageId));
 			}
 			catch (Exception e) {
 				throw processException(e);

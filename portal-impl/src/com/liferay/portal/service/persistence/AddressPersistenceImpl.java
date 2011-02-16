@@ -256,7 +256,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 			session = openSession();
 
 			Address address = (Address)session.get(AddressImpl.class,
-					new Long(addressId));
+					Long.valueOf(addressId));
 
 			if (address == null) {
 				if (_log.isWarnEnabled()) {
@@ -443,7 +443,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 				session = openSession();
 
 				address = (Address)session.get(AddressImpl.class,
-						new Long(addressId));
+						Long.valueOf(addressId));
 			}
 			catch (Exception e) {
 				throw processException(e);

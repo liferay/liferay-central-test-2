@@ -195,7 +195,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 			session = openSession();
 
 			AssetTag assetTag = (AssetTag)session.get(AssetTagImpl.class,
-					new Long(tagId));
+					Long.valueOf(tagId));
 
 			if (assetTag == null) {
 				if (_log.isWarnEnabled()) {
@@ -384,7 +384,7 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 				session = openSession();
 
 				assetTag = (AssetTag)session.get(AssetTagImpl.class,
-						new Long(tagId));
+						Long.valueOf(tagId));
 			}
 			catch (Exception e) {
 				throw processException(e);

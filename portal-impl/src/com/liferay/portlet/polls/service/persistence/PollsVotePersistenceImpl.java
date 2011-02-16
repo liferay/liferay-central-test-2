@@ -122,8 +122,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_U,
 			new Object[] {
-				new Long(pollsVote.getQuestionId()),
-				new Long(pollsVote.getUserId())
+				Long.valueOf(pollsVote.getQuestionId()),
+				Long.valueOf(pollsVote.getUserId())
 			}, pollsVote);
 	}
 
@@ -169,8 +169,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_U,
 			new Object[] {
-				new Long(pollsVote.getQuestionId()),
-				new Long(pollsVote.getUserId())
+				Long.valueOf(pollsVote.getQuestionId()),
+				Long.valueOf(pollsVote.getUserId())
 			});
 	}
 
@@ -218,7 +218,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 			session = openSession();
 
 			PollsVote pollsVote = (PollsVote)session.get(PollsVoteImpl.class,
-					new Long(voteId));
+					Long.valueOf(voteId));
 
 			if (pollsVote == null) {
 				if (_log.isWarnEnabled()) {
@@ -277,8 +277,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_U,
 			new Object[] {
-				new Long(pollsVoteModelImpl.getQuestionId()),
-				new Long(pollsVoteModelImpl.getUserId())
+				Long.valueOf(pollsVoteModelImpl.getQuestionId()),
+				Long.valueOf(pollsVoteModelImpl.getUserId())
 			});
 
 		EntityCacheUtil.removeResult(PollsVoteModelImpl.ENTITY_CACHE_ENABLED,
@@ -322,8 +322,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 				(pollsVote.getUserId() != pollsVoteModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_Q_U,
 				new Object[] {
-					new Long(pollsVoteModelImpl.getOriginalQuestionId()),
-					new Long(pollsVoteModelImpl.getOriginalUserId())
+					Long.valueOf(pollsVoteModelImpl.getOriginalQuestionId()),
+					Long.valueOf(pollsVoteModelImpl.getOriginalUserId())
 				});
 		}
 
@@ -332,8 +332,8 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 				(pollsVote.getUserId() != pollsVoteModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_Q_U,
 				new Object[] {
-					new Long(pollsVote.getQuestionId()),
-					new Long(pollsVote.getUserId())
+					Long.valueOf(pollsVote.getQuestionId()),
+					Long.valueOf(pollsVote.getUserId())
 				}, pollsVote);
 		}
 
@@ -426,7 +426,7 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 				session = openSession();
 
 				pollsVote = (PollsVote)session.get(PollsVoteImpl.class,
-						new Long(voteId));
+						Long.valueOf(voteId));
 			}
 			catch (Exception e) {
 				throw processException(e);

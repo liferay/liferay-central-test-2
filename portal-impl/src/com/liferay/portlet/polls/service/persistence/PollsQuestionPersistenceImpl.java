@@ -129,7 +129,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				pollsQuestion.getUuid(), new Long(pollsQuestion.getGroupId())
+				pollsQuestion.getUuid(),
+				Long.valueOf(pollsQuestion.getGroupId())
 			}, pollsQuestion);
 	}
 
@@ -176,7 +177,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				pollsQuestion.getUuid(), new Long(pollsQuestion.getGroupId())
+				pollsQuestion.getUuid(),
+				Long.valueOf(pollsQuestion.getGroupId())
 			});
 	}
 
@@ -228,7 +230,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			session = openSession();
 
 			PollsQuestion pollsQuestion = (PollsQuestion)session.get(PollsQuestionImpl.class,
-					new Long(questionId));
+					Long.valueOf(questionId));
 
 			if (pollsQuestion == null) {
 				if (_log.isWarnEnabled()) {
@@ -289,7 +291,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				pollsQuestionModelImpl.getUuid(),
-				new Long(pollsQuestionModelImpl.getGroupId())
+				Long.valueOf(pollsQuestionModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(PollsQuestionModelImpl.ENTITY_CACHE_ENABLED,
@@ -342,7 +344,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					pollsQuestionModelImpl.getOriginalUuid(),
-					new Long(pollsQuestionModelImpl.getOriginalGroupId())
+					Long.valueOf(pollsQuestionModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -353,7 +355,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					pollsQuestion.getUuid(),
-					new Long(pollsQuestion.getGroupId())
+					Long.valueOf(pollsQuestion.getGroupId())
 				}, pollsQuestion);
 		}
 
@@ -454,7 +456,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				session = openSession();
 
 				pollsQuestion = (PollsQuestion)session.get(PollsQuestionImpl.class,
-						new Long(questionId));
+						Long.valueOf(questionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

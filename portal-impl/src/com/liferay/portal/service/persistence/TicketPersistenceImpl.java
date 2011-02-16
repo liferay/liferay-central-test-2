@@ -183,7 +183,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 			session = openSession();
 
 			Ticket ticket = (Ticket)session.get(TicketImpl.class,
-					new Long(ticketId));
+					Long.valueOf(ticketId));
 
 			if (ticket == null) {
 				if (_log.isWarnEnabled()) {
@@ -382,7 +382,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 				session = openSession();
 
 				ticket = (Ticket)session.get(TicketImpl.class,
-						new Long(ticketId));
+						Long.valueOf(ticketId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -224,7 +224,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 			session = openSession();
 
 			SCFrameworkVersion scFrameworkVersion = (SCFrameworkVersion)session.get(SCFrameworkVersionImpl.class,
-					new Long(frameworkVersionId));
+					Long.valueOf(frameworkVersionId));
 
 			if (scFrameworkVersion == null) {
 				if (_log.isWarnEnabled()) {
@@ -422,7 +422,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 				session = openSession();
 
 				scFrameworkVersion = (SCFrameworkVersion)session.get(SCFrameworkVersionImpl.class,
-						new Long(frameworkVersionId));
+						Long.valueOf(frameworkVersionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

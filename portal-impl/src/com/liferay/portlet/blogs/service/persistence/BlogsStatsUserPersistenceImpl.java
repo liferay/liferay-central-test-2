@@ -167,8 +167,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(blogsStatsUser.getGroupId()),
-				new Long(blogsStatsUser.getUserId())
+				Long.valueOf(blogsStatsUser.getGroupId()),
+				Long.valueOf(blogsStatsUser.getUserId())
 			}, blogsStatsUser);
 	}
 
@@ -215,8 +215,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(blogsStatsUser.getGroupId()),
-				new Long(blogsStatsUser.getUserId())
+				Long.valueOf(blogsStatsUser.getGroupId()),
+				Long.valueOf(blogsStatsUser.getUserId())
 			});
 	}
 
@@ -264,7 +264,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			session = openSession();
 
 			BlogsStatsUser blogsStatsUser = (BlogsStatsUser)session.get(BlogsStatsUserImpl.class,
-					new Long(statsUserId));
+					Long.valueOf(statsUserId));
 
 			if (blogsStatsUser == null) {
 				if (_log.isWarnEnabled()) {
@@ -324,8 +324,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 			new Object[] {
-				new Long(blogsStatsUserModelImpl.getGroupId()),
-				new Long(blogsStatsUserModelImpl.getUserId())
+				Long.valueOf(blogsStatsUserModelImpl.getGroupId()),
+				Long.valueOf(blogsStatsUserModelImpl.getUserId())
 			});
 
 		EntityCacheUtil.removeResult(BlogsStatsUserModelImpl.ENTITY_CACHE_ENABLED,
@@ -370,8 +370,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				(blogsStatsUser.getUserId() != blogsStatsUserModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
 				new Object[] {
-					new Long(blogsStatsUserModelImpl.getOriginalGroupId()),
-					new Long(blogsStatsUserModelImpl.getOriginalUserId())
+					Long.valueOf(blogsStatsUserModelImpl.getOriginalGroupId()),
+					Long.valueOf(blogsStatsUserModelImpl.getOriginalUserId())
 				});
 		}
 
@@ -380,8 +380,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				(blogsStatsUser.getUserId() != blogsStatsUserModelImpl.getOriginalUserId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
 				new Object[] {
-					new Long(blogsStatsUser.getGroupId()),
-					new Long(blogsStatsUser.getUserId())
+					Long.valueOf(blogsStatsUser.getGroupId()),
+					Long.valueOf(blogsStatsUser.getUserId())
 				}, blogsStatsUser);
 		}
 
@@ -479,7 +479,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				session = openSession();
 
 				blogsStatsUser = (BlogsStatsUser)session.get(BlogsStatsUserImpl.class,
-						new Long(statsUserId));
+						Long.valueOf(statsUserId));
 			}
 			catch (Exception e) {
 				throw processException(e);

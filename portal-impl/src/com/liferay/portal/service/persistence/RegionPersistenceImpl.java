@@ -207,7 +207,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 			session = openSession();
 
 			Region region = (Region)session.get(RegionImpl.class,
-					new Long(regionId));
+					Long.valueOf(regionId));
 
 			if (region == null) {
 				if (_log.isWarnEnabled()) {
@@ -381,7 +381,7 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 				session = openSession();
 
 				region = (Region)session.get(RegionImpl.class,
-						new Long(regionId));
+						Long.valueOf(regionId));
 			}
 			catch (Exception e) {
 				throw processException(e);

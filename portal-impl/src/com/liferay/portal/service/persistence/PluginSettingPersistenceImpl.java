@@ -115,7 +115,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
 			new Object[] {
-				new Long(pluginSetting.getCompanyId()),
+				Long.valueOf(pluginSetting.getCompanyId()),
 				
 			pluginSetting.getPluginId(),
 				
@@ -166,7 +166,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
 			new Object[] {
-				new Long(pluginSetting.getCompanyId()),
+				Long.valueOf(pluginSetting.getCompanyId()),
 				
 			pluginSetting.getPluginId(),
 				
@@ -218,7 +218,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			session = openSession();
 
 			PluginSetting pluginSetting = (PluginSetting)session.get(PluginSettingImpl.class,
-					new Long(pluginSettingId));
+					Long.valueOf(pluginSettingId));
 
 			if (pluginSetting == null) {
 				if (_log.isWarnEnabled()) {
@@ -279,7 +279,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
 			new Object[] {
-				new Long(pluginSettingModelImpl.getCompanyId()),
+				Long.valueOf(pluginSettingModelImpl.getCompanyId()),
 				
 			pluginSettingModelImpl.getPluginId(),
 				
@@ -331,7 +331,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 					pluginSettingModelImpl.getOriginalPluginType()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
 				new Object[] {
-					new Long(pluginSettingModelImpl.getOriginalCompanyId()),
+					Long.valueOf(pluginSettingModelImpl.getOriginalCompanyId()),
 					
 				pluginSettingModelImpl.getOriginalPluginId(),
 					
@@ -347,7 +347,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 					pluginSettingModelImpl.getOriginalPluginType()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
 				new Object[] {
-					new Long(pluginSetting.getCompanyId()),
+					Long.valueOf(pluginSetting.getCompanyId()),
 					
 				pluginSetting.getPluginId(),
 					
@@ -446,7 +446,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 				session = openSession();
 
 				pluginSetting = (PluginSetting)session.get(PluginSettingImpl.class,
-						new Long(pluginSettingId));
+						Long.valueOf(pluginSettingId));
 			}
 			catch (Exception e) {
 				throw processException(e);

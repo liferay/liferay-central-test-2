@@ -372,21 +372,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			WikiPageImpl.class, wikiPage.getPrimaryKey(), wikiPage);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { wikiPage.getUuid(), new Long(wikiPage.getGroupId()) },
-			wikiPage);
+			new Object[] { wikiPage.getUuid(), Long.valueOf(
+					wikiPage.getGroupId()) }, wikiPage);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_N_V,
 			new Object[] {
-				new Long(wikiPage.getResourcePrimKey()),
-				new Long(wikiPage.getNodeId()),
-				new Double(wikiPage.getVersion())
+				Long.valueOf(wikiPage.getResourcePrimKey()),
+				Long.valueOf(wikiPage.getNodeId()),
+				Double.valueOf(wikiPage.getVersion())
 			}, wikiPage);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T_V,
 			new Object[] {
-				new Long(wikiPage.getNodeId()),
+				Long.valueOf(wikiPage.getNodeId()),
 				
-			wikiPage.getTitle(), new Double(wikiPage.getVersion())
+			wikiPage.getTitle(), Double.valueOf(wikiPage.getVersion())
 			}, wikiPage);
 	}
 
@@ -431,20 +431,21 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			WikiPageImpl.class, wikiPage.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { wikiPage.getUuid(), new Long(wikiPage.getGroupId()) });
+			new Object[] { wikiPage.getUuid(), Long.valueOf(
+					wikiPage.getGroupId()) });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_N_V,
 			new Object[] {
-				new Long(wikiPage.getResourcePrimKey()),
-				new Long(wikiPage.getNodeId()),
-				new Double(wikiPage.getVersion())
+				Long.valueOf(wikiPage.getResourcePrimKey()),
+				Long.valueOf(wikiPage.getNodeId()),
+				Double.valueOf(wikiPage.getVersion())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T_V,
 			new Object[] {
-				new Long(wikiPage.getNodeId()),
+				Long.valueOf(wikiPage.getNodeId()),
 				
-			wikiPage.getTitle(), new Double(wikiPage.getVersion())
+			wikiPage.getTitle(), Double.valueOf(wikiPage.getVersion())
 			});
 	}
 
@@ -496,7 +497,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			session = openSession();
 
 			WikiPage wikiPage = (WikiPage)session.get(WikiPageImpl.class,
-					new Long(pageId));
+					Long.valueOf(pageId));
 
 			if (wikiPage == null) {
 				if (_log.isWarnEnabled()) {
@@ -555,22 +556,22 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				wikiPageModelImpl.getUuid(),
-				new Long(wikiPageModelImpl.getGroupId())
+				Long.valueOf(wikiPageModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_N_V,
 			new Object[] {
-				new Long(wikiPageModelImpl.getResourcePrimKey()),
-				new Long(wikiPageModelImpl.getNodeId()),
-				new Double(wikiPageModelImpl.getVersion())
+				Long.valueOf(wikiPageModelImpl.getResourcePrimKey()),
+				Long.valueOf(wikiPageModelImpl.getNodeId()),
+				Double.valueOf(wikiPageModelImpl.getVersion())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T_V,
 			new Object[] {
-				new Long(wikiPageModelImpl.getNodeId()),
+				Long.valueOf(wikiPageModelImpl.getNodeId()),
 				
 			wikiPageModelImpl.getTitle(),
-				new Double(wikiPageModelImpl.getVersion())
+				Double.valueOf(wikiPageModelImpl.getVersion())
 			});
 
 		EntityCacheUtil.removeResult(WikiPageModelImpl.ENTITY_CACHE_ENABLED,
@@ -622,7 +623,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					wikiPageModelImpl.getOriginalUuid(),
-					new Long(wikiPageModelImpl.getOriginalGroupId())
+					Long.valueOf(wikiPageModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -631,8 +632,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 					wikiPageModelImpl.getOriginalUuid()) ||
 				(wikiPage.getGroupId() != wikiPageModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] { wikiPage.getUuid(), new Long(
-						wikiPage.getGroupId()) }, wikiPage);
+				new Object[] {
+					wikiPage.getUuid(), Long.valueOf(wikiPage.getGroupId())
+				}, wikiPage);
 		}
 
 		if (!isNew &&
@@ -641,9 +643,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				(wikiPage.getVersion() != wikiPageModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_N_V,
 				new Object[] {
-					new Long(wikiPageModelImpl.getOriginalResourcePrimKey()),
-					new Long(wikiPageModelImpl.getOriginalNodeId()),
-					new Double(wikiPageModelImpl.getOriginalVersion())
+					Long.valueOf(wikiPageModelImpl.getOriginalResourcePrimKey()),
+					Long.valueOf(wikiPageModelImpl.getOriginalNodeId()),
+					Double.valueOf(wikiPageModelImpl.getOriginalVersion())
 				});
 		}
 
@@ -653,9 +655,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				(wikiPage.getVersion() != wikiPageModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_N_V,
 				new Object[] {
-					new Long(wikiPage.getResourcePrimKey()),
-					new Long(wikiPage.getNodeId()),
-					new Double(wikiPage.getVersion())
+					Long.valueOf(wikiPage.getResourcePrimKey()),
+					Long.valueOf(wikiPage.getNodeId()),
+					Double.valueOf(wikiPage.getVersion())
 				}, wikiPage);
 		}
 
@@ -666,10 +668,10 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				(wikiPage.getVersion() != wikiPageModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T_V,
 				new Object[] {
-					new Long(wikiPageModelImpl.getOriginalNodeId()),
+					Long.valueOf(wikiPageModelImpl.getOriginalNodeId()),
 					
 				wikiPageModelImpl.getOriginalTitle(),
-					new Double(wikiPageModelImpl.getOriginalVersion())
+					Double.valueOf(wikiPageModelImpl.getOriginalVersion())
 				});
 		}
 
@@ -680,9 +682,9 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				(wikiPage.getVersion() != wikiPageModelImpl.getOriginalVersion()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T_V,
 				new Object[] {
-					new Long(wikiPage.getNodeId()),
+					Long.valueOf(wikiPage.getNodeId()),
 					
-				wikiPage.getTitle(), new Double(wikiPage.getVersion())
+				wikiPage.getTitle(), Double.valueOf(wikiPage.getVersion())
 				}, wikiPage);
 		}
 
@@ -793,7 +795,7 @@ public class WikiPagePersistenceImpl extends BasePersistenceImpl<WikiPage>
 				session = openSession();
 
 				wikiPage = (WikiPage)session.get(WikiPageImpl.class,
-						new Long(pageId));
+						Long.valueOf(pageId));
 			}
 			catch (Exception e) {
 				throw processException(e);

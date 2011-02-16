@@ -115,7 +115,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			TeamImpl.class, team.getPrimaryKey(), team);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-			new Object[] { new Long(team.getGroupId()), team.getName() }, team);
+			new Object[] { Long.valueOf(team.getGroupId()), team.getName() },
+			team);
 	}
 
 	/**
@@ -158,7 +159,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			TeamImpl.class, team.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
-			new Object[] { new Long(team.getGroupId()), team.getName() });
+			new Object[] { Long.valueOf(team.getGroupId()), team.getName() });
 	}
 
 	/**
@@ -203,7 +204,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		try {
 			session = openSession();
 
-			Team team = (Team)session.get(TeamImpl.class, new Long(teamId));
+			Team team = (Team)session.get(TeamImpl.class, Long.valueOf(teamId));
 
 			if (team == null) {
 				if (_log.isWarnEnabled()) {
@@ -281,7 +282,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
 			new Object[] {
-				new Long(teamModelImpl.getGroupId()),
+				Long.valueOf(teamModelImpl.getGroupId()),
 				
 			teamModelImpl.getName()
 			});
@@ -327,7 +328,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 					teamModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
 				new Object[] {
-					new Long(teamModelImpl.getOriginalGroupId()),
+					Long.valueOf(teamModelImpl.getOriginalGroupId()),
 					
 				teamModelImpl.getOriginalName()
 				});
@@ -338,7 +339,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 				!Validator.equals(team.getName(),
 					teamModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-				new Object[] { new Long(team.getGroupId()), team.getName() },
+				new Object[] { Long.valueOf(team.getGroupId()), team.getName() },
 				team);
 		}
 
@@ -434,7 +435,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 			try {
 				session = openSession();
 
-				team = (Team)session.get(TeamImpl.class, new Long(teamId));
+				team = (Team)session.get(TeamImpl.class, Long.valueOf(teamId));
 			}
 			catch (Exception e) {
 				throw processException(e);

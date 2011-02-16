@@ -251,7 +251,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 			session = openSession();
 
 			SCProductEntry scProductEntry = (SCProductEntry)session.get(SCProductEntryImpl.class,
-					new Long(productEntryId));
+					Long.valueOf(productEntryId));
 
 			if (scProductEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -491,7 +491,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl<SCProduct
 				session = openSession();
 
 				scProductEntry = (SCProductEntry)session.get(SCProductEntryImpl.class,
-						new Long(productEntryId));
+						Long.valueOf(productEntryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

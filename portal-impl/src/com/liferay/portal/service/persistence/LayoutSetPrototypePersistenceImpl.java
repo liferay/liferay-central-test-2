@@ -200,7 +200,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 			session = openSession();
 
 			LayoutSetPrototype layoutSetPrototype = (LayoutSetPrototype)session.get(LayoutSetPrototypeImpl.class,
-					new Long(layoutSetPrototypeId));
+					Long.valueOf(layoutSetPrototypeId));
 
 			if (layoutSetPrototype == null) {
 				if (_log.isWarnEnabled()) {
@@ -383,7 +383,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 				session = openSession();
 
 				layoutSetPrototype = (LayoutSetPrototype)session.get(LayoutSetPrototypeImpl.class,
-						new Long(layoutSetPrototypeId));
+						Long.valueOf(layoutSetPrototypeId));
 			}
 			catch (Exception e) {
 				throw processException(e);

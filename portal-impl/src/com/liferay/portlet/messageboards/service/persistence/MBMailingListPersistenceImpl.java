@@ -135,13 +135,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				mbMailingList.getUuid(), new Long(mbMailingList.getGroupId())
+				mbMailingList.getUuid(),
+				Long.valueOf(mbMailingList.getGroupId())
 			}, mbMailingList);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
 			new Object[] {
-				new Long(mbMailingList.getGroupId()),
-				new Long(mbMailingList.getCategoryId())
+				Long.valueOf(mbMailingList.getGroupId()),
+				Long.valueOf(mbMailingList.getCategoryId())
 			}, mbMailingList);
 	}
 
@@ -188,13 +189,14 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				mbMailingList.getUuid(), new Long(mbMailingList.getGroupId())
+				mbMailingList.getUuid(),
+				Long.valueOf(mbMailingList.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
 			new Object[] {
-				new Long(mbMailingList.getGroupId()),
-				new Long(mbMailingList.getCategoryId())
+				Long.valueOf(mbMailingList.getGroupId()),
+				Long.valueOf(mbMailingList.getCategoryId())
 			});
 	}
 
@@ -246,7 +248,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			session = openSession();
 
 			MBMailingList mbMailingList = (MBMailingList)session.get(MBMailingListImpl.class,
-					new Long(mailingListId));
+					Long.valueOf(mailingListId));
 
 			if (mbMailingList == null) {
 				if (_log.isWarnEnabled()) {
@@ -307,13 +309,13 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				mbMailingListModelImpl.getUuid(),
-				new Long(mbMailingListModelImpl.getGroupId())
+				Long.valueOf(mbMailingListModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
 			new Object[] {
-				new Long(mbMailingListModelImpl.getGroupId()),
-				new Long(mbMailingListModelImpl.getCategoryId())
+				Long.valueOf(mbMailingListModelImpl.getGroupId()),
+				Long.valueOf(mbMailingListModelImpl.getCategoryId())
 			});
 
 		EntityCacheUtil.removeResult(MBMailingListModelImpl.ENTITY_CACHE_ENABLED,
@@ -366,7 +368,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					mbMailingListModelImpl.getOriginalUuid(),
-					new Long(mbMailingListModelImpl.getOriginalGroupId())
+					Long.valueOf(mbMailingListModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -377,7 +379,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					mbMailingList.getUuid(),
-					new Long(mbMailingList.getGroupId())
+					Long.valueOf(mbMailingList.getGroupId())
 				}, mbMailingList);
 		}
 
@@ -386,8 +388,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				(mbMailingList.getCategoryId() != mbMailingListModelImpl.getOriginalCategoryId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
 				new Object[] {
-					new Long(mbMailingListModelImpl.getOriginalGroupId()),
-					new Long(mbMailingListModelImpl.getOriginalCategoryId())
+					Long.valueOf(mbMailingListModelImpl.getOriginalGroupId()),
+					Long.valueOf(mbMailingListModelImpl.getOriginalCategoryId())
 				});
 		}
 
@@ -396,8 +398,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				(mbMailingList.getCategoryId() != mbMailingListModelImpl.getOriginalCategoryId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
 				new Object[] {
-					new Long(mbMailingList.getGroupId()),
-					new Long(mbMailingList.getCategoryId())
+					Long.valueOf(mbMailingList.getGroupId()),
+					Long.valueOf(mbMailingList.getCategoryId())
 				}, mbMailingList);
 		}
 
@@ -511,7 +513,7 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				session = openSession();
 
 				mbMailingList = (MBMailingList)session.get(MBMailingListImpl.class,
-						new Long(mailingListId));
+						Long.valueOf(mailingListId));
 			}
 			catch (Exception e) {
 				throw processException(e);

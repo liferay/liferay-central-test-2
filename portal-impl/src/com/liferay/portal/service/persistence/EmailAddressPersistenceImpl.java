@@ -240,7 +240,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 			session = openSession();
 
 			EmailAddress emailAddress = (EmailAddress)session.get(EmailAddressImpl.class,
-					new Long(emailAddressId));
+					Long.valueOf(emailAddressId));
 
 			if (emailAddress == null) {
 				if (_log.isWarnEnabled()) {
@@ -425,7 +425,7 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 				session = openSession();
 
 				emailAddress = (EmailAddress)session.get(EmailAddressImpl.class,
-						new Long(emailAddressId));
+						Long.valueOf(emailAddressId));
 			}
 			catch (Exception e) {
 				throw processException(e);

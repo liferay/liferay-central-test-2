@@ -94,7 +94,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			browserTracker);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
-			new Object[] { new Long(browserTracker.getUserId()) },
+			new Object[] { Long.valueOf(browserTracker.getUserId()) },
 			browserTracker);
 	}
 
@@ -140,7 +140,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			BrowserTrackerImpl.class, browserTracker.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
-			new Object[] { new Long(browserTracker.getUserId()) });
+			new Object[] { Long.valueOf(browserTracker.getUserId()) });
 	}
 
 	/**
@@ -187,7 +187,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			session = openSession();
 
 			BrowserTracker browserTracker = (BrowserTracker)session.get(BrowserTrackerImpl.class,
-					new Long(browserTrackerId));
+					Long.valueOf(browserTrackerId));
 
 			if (browserTracker == null) {
 				if (_log.isWarnEnabled()) {
@@ -247,7 +247,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		BrowserTrackerModelImpl browserTrackerModelImpl = (BrowserTrackerModelImpl)browserTracker;
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
-			new Object[] { new Long(browserTrackerModelImpl.getUserId()) });
+			new Object[] { Long.valueOf(browserTrackerModelImpl.getUserId()) });
 
 		EntityCacheUtil.removeResult(BrowserTrackerModelImpl.ENTITY_CACHE_ENABLED,
 			BrowserTrackerImpl.class, browserTracker.getPrimaryKey());
@@ -290,14 +290,14 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 				(browserTracker.getUserId() != browserTrackerModelImpl.getOriginalUserId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
 				new Object[] {
-					new Long(browserTrackerModelImpl.getOriginalUserId())
+					Long.valueOf(browserTrackerModelImpl.getOriginalUserId())
 				});
 		}
 
 		if (isNew ||
 				(browserTracker.getUserId() != browserTrackerModelImpl.getOriginalUserId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
-				new Object[] { new Long(browserTracker.getUserId()) },
+				new Object[] { Long.valueOf(browserTracker.getUserId()) },
 				browserTracker);
 		}
 
@@ -389,7 +389,7 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 				session = openSession();
 
 				browserTracker = (BrowserTracker)session.get(BrowserTrackerImpl.class,
-						new Long(browserTrackerId));
+						Long.valueOf(browserTrackerId));
 			}
 			catch (Exception e) {
 				throw processException(e);

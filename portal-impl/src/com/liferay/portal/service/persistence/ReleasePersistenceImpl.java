@@ -183,7 +183,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 			session = openSession();
 
 			Release release = (Release)session.get(ReleaseImpl.class,
-					new Long(releaseId));
+					Long.valueOf(releaseId));
 
 			if (release == null) {
 				if (_log.isWarnEnabled()) {
@@ -383,7 +383,7 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 				session = openSession();
 
 				release = (Release)session.get(ReleaseImpl.class,
-						new Long(releaseId));
+						Long.valueOf(releaseId));
 			}
 			catch (Exception e) {
 				throw processException(e);

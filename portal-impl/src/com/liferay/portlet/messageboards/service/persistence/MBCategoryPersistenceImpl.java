@@ -154,8 +154,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			MBCategoryImpl.class, mbCategory.getPrimaryKey(), mbCategory);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { mbCategory.getUuid(), new Long(
-					mbCategory.getGroupId()) }, mbCategory);
+			new Object[] {
+				mbCategory.getUuid(), Long.valueOf(mbCategory.getGroupId())
+			}, mbCategory);
 	}
 
 	/**
@@ -199,8 +200,9 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			MBCategoryImpl.class, mbCategory.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { mbCategory.getUuid(), new Long(
-					mbCategory.getGroupId()) });
+			new Object[] {
+				mbCategory.getUuid(), Long.valueOf(mbCategory.getGroupId())
+			});
 	}
 
 	/**
@@ -251,7 +253,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			session = openSession();
 
 			MBCategory mbCategory = (MBCategory)session.get(MBCategoryImpl.class,
-					new Long(categoryId));
+					Long.valueOf(categoryId));
 
 			if (mbCategory == null) {
 				if (_log.isWarnEnabled()) {
@@ -311,7 +313,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				mbCategoryModelImpl.getUuid(),
-				new Long(mbCategoryModelImpl.getGroupId())
+				Long.valueOf(mbCategoryModelImpl.getGroupId())
 			});
 
 		EntityCacheUtil.removeResult(MBCategoryModelImpl.ENTITY_CACHE_ENABLED,
@@ -363,7 +365,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					mbCategoryModelImpl.getOriginalUuid(),
-					new Long(mbCategoryModelImpl.getOriginalGroupId())
+					Long.valueOf(mbCategoryModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -373,7 +375,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				(mbCategory.getGroupId() != mbCategoryModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
-					mbCategory.getUuid(), new Long(mbCategory.getGroupId())
+					mbCategory.getUuid(), Long.valueOf(mbCategory.getGroupId())
 				}, mbCategory);
 		}
 
@@ -477,7 +479,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				session = openSession();
 
 				mbCategory = (MBCategory)session.get(MBCategoryImpl.class,
-						new Long(categoryId));
+						Long.valueOf(categoryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

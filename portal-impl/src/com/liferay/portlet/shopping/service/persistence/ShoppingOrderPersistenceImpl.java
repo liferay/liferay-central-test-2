@@ -239,7 +239,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 			session = openSession();
 
 			ShoppingOrder shoppingOrder = (ShoppingOrder)session.get(ShoppingOrderImpl.class,
-					new Long(orderId));
+					Long.valueOf(orderId));
 
 			if (shoppingOrder == null) {
 				if (_log.isWarnEnabled()) {
@@ -504,7 +504,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 				session = openSession();
 
 				shoppingOrder = (ShoppingOrder)session.get(ShoppingOrderImpl.class,
-						new Long(orderId));
+						Long.valueOf(orderId));
 			}
 			catch (Exception e) {
 				throw processException(e);

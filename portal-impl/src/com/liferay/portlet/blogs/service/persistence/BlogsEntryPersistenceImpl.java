@@ -331,12 +331,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			BlogsEntryImpl.class, blogsEntry.getPrimaryKey(), blogsEntry);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { blogsEntry.getUuid(), new Long(
-					blogsEntry.getGroupId()) }, blogsEntry);
+			new Object[] {
+				blogsEntry.getUuid(), Long.valueOf(blogsEntry.getGroupId())
+			}, blogsEntry);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
 			new Object[] {
-				new Long(blogsEntry.getGroupId()),
+				Long.valueOf(blogsEntry.getGroupId()),
 				
 			blogsEntry.getUrlTitle()
 			}, blogsEntry);
@@ -383,12 +384,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			BlogsEntryImpl.class, blogsEntry.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { blogsEntry.getUuid(), new Long(
-					blogsEntry.getGroupId()) });
+			new Object[] {
+				blogsEntry.getUuid(), Long.valueOf(blogsEntry.getGroupId())
+			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT,
 			new Object[] {
-				new Long(blogsEntry.getGroupId()),
+				Long.valueOf(blogsEntry.getGroupId()),
 				
 			blogsEntry.getUrlTitle()
 			});
@@ -442,7 +444,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			session = openSession();
 
 			BlogsEntry blogsEntry = (BlogsEntry)session.get(BlogsEntryImpl.class,
-					new Long(entryId));
+					Long.valueOf(entryId));
 
 			if (blogsEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -502,12 +504,12 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				blogsEntryModelImpl.getUuid(),
-				new Long(blogsEntryModelImpl.getGroupId())
+				Long.valueOf(blogsEntryModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT,
 			new Object[] {
-				new Long(blogsEntryModelImpl.getGroupId()),
+				Long.valueOf(blogsEntryModelImpl.getGroupId()),
 				
 			blogsEntryModelImpl.getUrlTitle()
 			});
@@ -592,7 +594,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					blogsEntryModelImpl.getOriginalUuid(),
-					new Long(blogsEntryModelImpl.getOriginalGroupId())
+					Long.valueOf(blogsEntryModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -602,7 +604,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				(blogsEntry.getGroupId() != blogsEntryModelImpl.getOriginalGroupId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
-					blogsEntry.getUuid(), new Long(blogsEntry.getGroupId())
+					blogsEntry.getUuid(), Long.valueOf(blogsEntry.getGroupId())
 				}, blogsEntry);
 		}
 
@@ -612,7 +614,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					blogsEntryModelImpl.getOriginalUrlTitle()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT,
 				new Object[] {
-					new Long(blogsEntryModelImpl.getOriginalGroupId()),
+					Long.valueOf(blogsEntryModelImpl.getOriginalGroupId()),
 					
 				blogsEntryModelImpl.getOriginalUrlTitle()
 				});
@@ -624,7 +626,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 					blogsEntryModelImpl.getOriginalUrlTitle()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
 				new Object[] {
-					new Long(blogsEntry.getGroupId()),
+					Long.valueOf(blogsEntry.getGroupId()),
 					
 				blogsEntry.getUrlTitle()
 				}, blogsEntry);
@@ -737,7 +739,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				session = openSession();
 
 				blogsEntry = (BlogsEntry)session.get(BlogsEntryImpl.class,
-						new Long(entryId));
+						Long.valueOf(entryId));
 			}
 			catch (Exception e) {
 				throw processException(e);

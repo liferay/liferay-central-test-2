@@ -239,7 +239,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 			session = openSession();
 
 			Website website = (Website)session.get(WebsiteImpl.class,
-					new Long(websiteId));
+					Long.valueOf(websiteId));
 
 			if (website == null) {
 				if (_log.isWarnEnabled()) {
@@ -419,7 +419,7 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 				session = openSession();
 
 				website = (Website)session.get(WebsiteImpl.class,
-						new Long(websiteId));
+						Long.valueOf(websiteId));
 			}
 			catch (Exception e) {
 				throw processException(e);

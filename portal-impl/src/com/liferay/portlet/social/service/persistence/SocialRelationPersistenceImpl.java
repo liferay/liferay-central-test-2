@@ -211,9 +211,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U1_U2_T,
 			new Object[] {
-				new Long(socialRelation.getUserId1()),
-				new Long(socialRelation.getUserId2()),
-				new Integer(socialRelation.getType())
+				Long.valueOf(socialRelation.getUserId1()),
+				Long.valueOf(socialRelation.getUserId2()),
+				Integer.valueOf(socialRelation.getType())
 			}, socialRelation);
 	}
 
@@ -260,9 +260,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U1_U2_T,
 			new Object[] {
-				new Long(socialRelation.getUserId1()),
-				new Long(socialRelation.getUserId2()),
-				new Integer(socialRelation.getType())
+				Long.valueOf(socialRelation.getUserId1()),
+				Long.valueOf(socialRelation.getUserId2()),
+				Integer.valueOf(socialRelation.getType())
 			});
 	}
 
@@ -314,7 +314,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 			session = openSession();
 
 			SocialRelation socialRelation = (SocialRelation)session.get(SocialRelationImpl.class,
-					new Long(relationId));
+					Long.valueOf(relationId));
 
 			if (socialRelation == null) {
 				if (_log.isWarnEnabled()) {
@@ -374,9 +374,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U1_U2_T,
 			new Object[] {
-				new Long(socialRelationModelImpl.getUserId1()),
-				new Long(socialRelationModelImpl.getUserId2()),
-				new Integer(socialRelationModelImpl.getType())
+				Long.valueOf(socialRelationModelImpl.getUserId1()),
+				Long.valueOf(socialRelationModelImpl.getUserId2()),
+				Integer.valueOf(socialRelationModelImpl.getType())
 			});
 
 		EntityCacheUtil.removeResult(SocialRelationModelImpl.ENTITY_CACHE_ENABLED,
@@ -428,9 +428,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				(socialRelation.getType() != socialRelationModelImpl.getOriginalType()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U1_U2_T,
 				new Object[] {
-					new Long(socialRelationModelImpl.getOriginalUserId1()),
-					new Long(socialRelationModelImpl.getOriginalUserId2()),
-					new Integer(socialRelationModelImpl.getOriginalType())
+					Long.valueOf(socialRelationModelImpl.getOriginalUserId1()),
+					Long.valueOf(socialRelationModelImpl.getOriginalUserId2()),
+					Integer.valueOf(socialRelationModelImpl.getOriginalType())
 				});
 		}
 
@@ -440,9 +440,9 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				(socialRelation.getType() != socialRelationModelImpl.getOriginalType()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U1_U2_T,
 				new Object[] {
-					new Long(socialRelation.getUserId1()),
-					new Long(socialRelation.getUserId2()),
-					new Integer(socialRelation.getType())
+					Long.valueOf(socialRelation.getUserId1()),
+					Long.valueOf(socialRelation.getUserId2()),
+					Integer.valueOf(socialRelation.getType())
 				}, socialRelation);
 		}
 
@@ -538,7 +538,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 				session = openSession();
 
 				socialRelation = (SocialRelation)session.get(SocialRelationImpl.class,
-						new Long(relationId));
+						Long.valueOf(relationId));
 			}
 			catch (Exception e) {
 				throw processException(e);

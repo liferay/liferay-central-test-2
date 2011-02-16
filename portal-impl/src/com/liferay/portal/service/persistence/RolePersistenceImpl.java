@@ -152,12 +152,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			RoleImpl.class, role.getPrimaryKey(), role);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-			new Object[] { new Long(role.getCompanyId()), role.getName() }, role);
+			new Object[] { Long.valueOf(role.getCompanyId()), role.getName() },
+			role);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
 			new Object[] {
-				new Long(role.getCompanyId()), new Long(role.getClassNameId()),
-				new Long(role.getClassPK())
+				Long.valueOf(role.getCompanyId()),
+				Long.valueOf(role.getClassNameId()),
+				Long.valueOf(role.getClassPK())
 			}, role);
 	}
 
@@ -201,12 +203,13 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			RoleImpl.class, role.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
-			new Object[] { new Long(role.getCompanyId()), role.getName() });
+			new Object[] { Long.valueOf(role.getCompanyId()), role.getName() });
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
 			new Object[] {
-				new Long(role.getCompanyId()), new Long(role.getClassNameId()),
-				new Long(role.getClassPK())
+				Long.valueOf(role.getCompanyId()),
+				Long.valueOf(role.getClassNameId()),
+				Long.valueOf(role.getClassPK())
 			});
 	}
 
@@ -252,7 +255,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		try {
 			session = openSession();
 
-			Role role = (Role)session.get(RoleImpl.class, new Long(roleId));
+			Role role = (Role)session.get(RoleImpl.class, Long.valueOf(roleId));
 
 			if (role == null) {
 				if (_log.isWarnEnabled()) {
@@ -340,16 +343,16 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 			new Object[] {
-				new Long(roleModelImpl.getCompanyId()),
+				Long.valueOf(roleModelImpl.getCompanyId()),
 				
 			roleModelImpl.getName()
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
 			new Object[] {
-				new Long(roleModelImpl.getCompanyId()),
-				new Long(roleModelImpl.getClassNameId()),
-				new Long(roleModelImpl.getClassPK())
+				Long.valueOf(roleModelImpl.getCompanyId()),
+				Long.valueOf(roleModelImpl.getClassNameId()),
+				Long.valueOf(roleModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
@@ -393,7 +396,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 					roleModelImpl.getOriginalName()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
 				new Object[] {
-					new Long(roleModelImpl.getOriginalCompanyId()),
+					Long.valueOf(roleModelImpl.getOriginalCompanyId()),
 					
 				roleModelImpl.getOriginalName()
 				});
@@ -404,7 +407,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				!Validator.equals(role.getName(),
 					roleModelImpl.getOriginalName()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-				new Object[] { new Long(role.getCompanyId()), role.getName() },
+				new Object[] { Long.valueOf(role.getCompanyId()), role.getName() },
 				role);
 		}
 
@@ -414,9 +417,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				(role.getClassPK() != roleModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
 				new Object[] {
-					new Long(roleModelImpl.getOriginalCompanyId()),
-					new Long(roleModelImpl.getOriginalClassNameId()),
-					new Long(roleModelImpl.getOriginalClassPK())
+					Long.valueOf(roleModelImpl.getOriginalCompanyId()),
+					Long.valueOf(roleModelImpl.getOriginalClassNameId()),
+					Long.valueOf(roleModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -426,8 +429,9 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				(role.getClassPK() != roleModelImpl.getOriginalClassPK()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
 				new Object[] {
-					new Long(role.getCompanyId()),
-					new Long(role.getClassNameId()), new Long(role.getClassPK())
+					Long.valueOf(role.getCompanyId()),
+					Long.valueOf(role.getClassNameId()),
+					Long.valueOf(role.getClassPK())
 				}, role);
 		}
 
@@ -523,7 +527,7 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 			try {
 				session = openSession();
 
-				role = (Role)session.get(RoleImpl.class, new Long(roleId));
+				role = (Role)session.get(RoleImpl.class, Long.valueOf(roleId));
 			}
 			catch (Exception e) {
 				throw processException(e);

@@ -98,7 +98,8 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 			socialEquityAssetEntry.getPrimaryKey(), socialEquityAssetEntry);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
-			new Object[] { new Long(socialEquityAssetEntry.getAssetEntryId()) },
+			new Object[] { Long.valueOf(
+					socialEquityAssetEntry.getAssetEntryId()) },
 			socialEquityAssetEntry);
 	}
 
@@ -146,7 +147,8 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 			socialEquityAssetEntry.getPrimaryKey());
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
-			new Object[] { new Long(socialEquityAssetEntry.getAssetEntryId()) });
+			new Object[] { Long.valueOf(
+					socialEquityAssetEntry.getAssetEntryId()) });
 	}
 
 	/**
@@ -193,7 +195,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 			session = openSession();
 
 			SocialEquityAssetEntry socialEquityAssetEntry = (SocialEquityAssetEntry)session.get(SocialEquityAssetEntryImpl.class,
-					new Long(equityAssetEntryId));
+					Long.valueOf(equityAssetEntryId));
 
 			if (socialEquityAssetEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -256,7 +258,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
 			new Object[] {
-				new Long(socialEquityAssetEntryModelImpl.getAssetEntryId())
+				Long.valueOf(socialEquityAssetEntryModelImpl.getAssetEntryId())
 			});
 
 		EntityCacheUtil.removeResult(SocialEquityAssetEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -301,15 +303,17 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 				(socialEquityAssetEntry.getAssetEntryId() != socialEquityAssetEntryModelImpl.getOriginalAssetEntryId())) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
 				new Object[] {
-					new Long(socialEquityAssetEntryModelImpl.getOriginalAssetEntryId())
+					Long.valueOf(
+						socialEquityAssetEntryModelImpl.getOriginalAssetEntryId())
 				});
 		}
 
 		if (isNew ||
 				(socialEquityAssetEntry.getAssetEntryId() != socialEquityAssetEntryModelImpl.getOriginalAssetEntryId())) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ASSETENTRYID,
-				new Object[] { new Long(socialEquityAssetEntry.getAssetEntryId()) },
-				socialEquityAssetEntry);
+				new Object[] {
+					Long.valueOf(socialEquityAssetEntry.getAssetEntryId())
+				}, socialEquityAssetEntry);
 		}
 
 		return socialEquityAssetEntry;
@@ -406,7 +410,7 @@ public class SocialEquityAssetEntryPersistenceImpl extends BasePersistenceImpl<S
 				session = openSession();
 
 				socialEquityAssetEntry = (SocialEquityAssetEntry)session.get(SocialEquityAssetEntryImpl.class,
-						new Long(equityAssetEntryId));
+						Long.valueOf(equityAssetEntryId));
 			}
 			catch (Exception e) {
 				throw processException(e);
