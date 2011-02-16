@@ -282,7 +282,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 	public Object clone() {
 		TeamImpl teamImpl = new TeamImpl();
 
-		TeamModelImpl teamModelImpl = (TeamModelImpl)teamImpl;
+		TeamModelImpl teamModelImpl = teamImpl;
 
 		teamImpl.setTeamId(getTeamId());
 

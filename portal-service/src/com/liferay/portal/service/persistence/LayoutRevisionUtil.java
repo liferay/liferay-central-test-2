@@ -571,56 +571,6 @@ public class LayoutRevisionUtil {
 	}
 
 	/**
-	* Finds the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutRevisionException} if it could not be found.
-	*
-	* @param layoutSetBranchId the layout set branch ID to search with
-	* @param head the head to search with
-	* @param plid the plid to search with
-	* @return the matching layout revision
-	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.LayoutRevision findByL_H_P(
-		long layoutSetBranchId, boolean head, long plid)
-		throws com.liferay.portal.NoSuchLayoutRevisionException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByL_H_P(layoutSetBranchId, head, plid);
-	}
-
-	/**
-	* Finds the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param layoutSetBranchId the layout set branch ID to search with
-	* @param head the head to search with
-	* @param plid the plid to search with
-	* @return the matching layout revision, or <code>null</code> if a matching layout revision could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.LayoutRevision fetchByL_H_P(
-		long layoutSetBranchId, boolean head, long plid)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().fetchByL_H_P(layoutSetBranchId, head, plid);
-	}
-
-	/**
-	* Finds the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param layoutSetBranchId the layout set branch ID to search with
-	* @param head the head to search with
-	* @param plid the plid to search with
-	* @return the matching layout revision, or <code>null</code> if a matching layout revision could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public static com.liferay.portal.model.LayoutRevision fetchByL_H_P(
-		long layoutSetBranchId, boolean head, long plid,
-		boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence()
-				   .fetchByL_H_P(layoutSetBranchId, head, plid,
-			retrieveFromCache);
-	}
-
-	/**
 	* Finds all the layout revisions where layoutSetBranchId = &#63; and parentLayoutRevisionId = &#63; and plid = &#63;.
 	*
 	* @param layoutSetBranchId the layout set branch ID to search with
@@ -761,6 +711,56 @@ public class LayoutRevisionUtil {
 		return getPersistence()
 				   .findByL_P_P_PrevAndNext(layoutRevisionId,
 			layoutSetBranchId, parentLayoutRevisionId, plid, orderByComparator);
+	}
+
+	/**
+	* Finds the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; or throws a {@link com.liferay.portal.NoSuchLayoutRevisionException} if it could not be found.
+	*
+	* @param layoutSetBranchId the layout set branch ID to search with
+	* @param head the head to search with
+	* @param plid the plid to search with
+	* @return the matching layout revision
+	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.LayoutRevision findByL_H_P(
+		long layoutSetBranchId, boolean head, long plid)
+		throws com.liferay.portal.NoSuchLayoutRevisionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByL_H_P(layoutSetBranchId, head, plid);
+	}
+
+	/**
+	* Finds the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param layoutSetBranchId the layout set branch ID to search with
+	* @param head the head to search with
+	* @param plid the plid to search with
+	* @return the matching layout revision, or <code>null</code> if a matching layout revision could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.LayoutRevision fetchByL_H_P(
+		long layoutSetBranchId, boolean head, long plid)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByL_H_P(layoutSetBranchId, head, plid);
+	}
+
+	/**
+	* Finds the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param layoutSetBranchId the layout set branch ID to search with
+	* @param head the head to search with
+	* @param plid the plid to search with
+	* @return the matching layout revision, or <code>null</code> if a matching layout revision could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.LayoutRevision fetchByL_H_P(
+		long layoutSetBranchId, boolean head, long plid,
+		boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByL_H_P(layoutSetBranchId, head, plid,
+			retrieveFromCache);
 	}
 
 	/**
@@ -985,21 +985,6 @@ public class LayoutRevisionUtil {
 	}
 
 	/**
-	* Removes the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; from the database.
-	*
-	* @param layoutSetBranchId the layout set branch ID to search with
-	* @param head the head to search with
-	* @param plid the plid to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public static void removeByL_H_P(long layoutSetBranchId, boolean head,
-		long plid)
-		throws com.liferay.portal.NoSuchLayoutRevisionException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByL_H_P(layoutSetBranchId, head, plid);
-	}
-
-	/**
 	* Removes all the layout revisions where layoutSetBranchId = &#63; and parentLayoutRevisionId = &#63; and plid = &#63; from the database.
 	*
 	* @param layoutSetBranchId the layout set branch ID to search with
@@ -1012,6 +997,21 @@ public class LayoutRevisionUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getPersistence()
 			.removeByL_P_P(layoutSetBranchId, parentLayoutRevisionId, plid);
+	}
+
+	/**
+	* Removes the layout revision where layoutSetBranchId = &#63; and head = &#63; and plid = &#63; from the database.
+	*
+	* @param layoutSetBranchId the layout set branch ID to search with
+	* @param head the head to search with
+	* @param plid the plid to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByL_H_P(long layoutSetBranchId, boolean head,
+		long plid)
+		throws com.liferay.portal.NoSuchLayoutRevisionException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByL_H_P(layoutSetBranchId, head, plid);
 	}
 
 	/**
@@ -1075,20 +1075,6 @@ public class LayoutRevisionUtil {
 	}
 
 	/**
-	* Counts all the layout revisions where layoutSetBranchId = &#63; and head = &#63; and plid = &#63;.
-	*
-	* @param layoutSetBranchId the layout set branch ID to search with
-	* @param head the head to search with
-	* @param plid the plid to search with
-	* @return the number of matching layout revisions
-	* @throws SystemException if a system exception occurred
-	*/
-	public static int countByL_H_P(long layoutSetBranchId, boolean head,
-		long plid) throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByL_H_P(layoutSetBranchId, head, plid);
-	}
-
-	/**
 	* Counts all the layout revisions where layoutSetBranchId = &#63; and parentLayoutRevisionId = &#63; and plid = &#63;.
 	*
 	* @param layoutSetBranchId the layout set branch ID to search with
@@ -1102,6 +1088,20 @@ public class LayoutRevisionUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
 				   .countByL_P_P(layoutSetBranchId, parentLayoutRevisionId, plid);
+	}
+
+	/**
+	* Counts all the layout revisions where layoutSetBranchId = &#63; and head = &#63; and plid = &#63;.
+	*
+	* @param layoutSetBranchId the layout set branch ID to search with
+	* @param head the head to search with
+	* @param plid the plid to search with
+	* @return the number of matching layout revisions
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByL_H_P(long layoutSetBranchId, boolean head,
+		long plid) throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByL_H_P(layoutSetBranchId, head, plid);
 	}
 
 	/**

@@ -310,7 +310,7 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	public Object clone() {
 		DLFolderImpl dlFolderImpl = new DLFolderImpl();
 
-		DLFolderModelImpl dlFolderModelImpl = (DLFolderModelImpl)dlFolderImpl;
+		DLFolderModelImpl dlFolderModelImpl = dlFolderImpl;
 
 		dlFolderImpl.setUuid(getUuid());
 

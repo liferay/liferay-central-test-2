@@ -283,7 +283,7 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	public Object clone() {
 		AssetCategoryPropertyImpl assetCategoryPropertyImpl = new AssetCategoryPropertyImpl();
 
-		AssetCategoryPropertyModelImpl assetCategoryPropertyModelImpl = (AssetCategoryPropertyModelImpl)assetCategoryPropertyImpl;
+		AssetCategoryPropertyModelImpl assetCategoryPropertyModelImpl = assetCategoryPropertyImpl;
 
 		assetCategoryPropertyImpl.setCategoryPropertyId(getCategoryPropertyId());
 

@@ -259,7 +259,7 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 	public Object clone() {
 		AssetTagImpl assetTagImpl = new AssetTagImpl();
 
-		AssetTagModelImpl assetTagModelImpl = (AssetTagModelImpl)assetTagImpl;
+		AssetTagModelImpl assetTagModelImpl = assetTagImpl;
 
 		assetTagImpl.setTagId(getTagId());
 

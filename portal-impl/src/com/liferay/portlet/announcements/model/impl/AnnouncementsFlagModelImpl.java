@@ -239,7 +239,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	public Object clone() {
 		AnnouncementsFlagImpl announcementsFlagImpl = new AnnouncementsFlagImpl();
 
-		AnnouncementsFlagModelImpl announcementsFlagModelImpl = (AnnouncementsFlagModelImpl)announcementsFlagImpl;
+		AnnouncementsFlagModelImpl announcementsFlagModelImpl = announcementsFlagImpl;
 
 		announcementsFlagImpl.setFlagId(getFlagId());
 

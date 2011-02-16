@@ -428,7 +428,7 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	public Object clone() {
 		JournalTemplateImpl journalTemplateImpl = new JournalTemplateImpl();
 
-		JournalTemplateModelImpl journalTemplateModelImpl = (JournalTemplateModelImpl)journalTemplateImpl;
+		JournalTemplateModelImpl journalTemplateModelImpl = journalTemplateImpl;
 
 		journalTemplateImpl.setUuid(getUuid());
 

@@ -403,7 +403,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	public Object clone() {
 		DLFileEntryImpl dlFileEntryImpl = new DLFileEntryImpl();
 
-		DLFileEntryModelImpl dlFileEntryModelImpl = (DLFileEntryModelImpl)dlFileEntryImpl;
+		DLFileEntryModelImpl dlFileEntryModelImpl = dlFileEntryImpl;
 
 		dlFileEntryImpl.setUuid(getUuid());
 

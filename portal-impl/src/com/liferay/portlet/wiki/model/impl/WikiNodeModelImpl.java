@@ -313,7 +313,7 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 	public Object clone() {
 		WikiNodeImpl wikiNodeImpl = new WikiNodeImpl();
 
-		WikiNodeModelImpl wikiNodeModelImpl = (WikiNodeModelImpl)wikiNodeImpl;
+		WikiNodeModelImpl wikiNodeModelImpl = wikiNodeImpl;
 
 		wikiNodeImpl.setUuid(getUuid());
 

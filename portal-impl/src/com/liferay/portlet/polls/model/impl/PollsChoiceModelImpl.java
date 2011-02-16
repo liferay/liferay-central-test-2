@@ -278,7 +278,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	public Object clone() {
 		PollsChoiceImpl pollsChoiceImpl = new PollsChoiceImpl();
 
-		PollsChoiceModelImpl pollsChoiceModelImpl = (PollsChoiceModelImpl)pollsChoiceImpl;
+		PollsChoiceModelImpl pollsChoiceModelImpl = pollsChoiceImpl;
 
 		pollsChoiceImpl.setUuid(getUuid());
 

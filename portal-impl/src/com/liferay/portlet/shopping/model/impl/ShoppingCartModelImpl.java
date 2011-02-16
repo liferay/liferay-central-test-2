@@ -261,7 +261,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	public Object clone() {
 		ShoppingCartImpl shoppingCartImpl = new ShoppingCartImpl();
 
-		ShoppingCartModelImpl shoppingCartModelImpl = (ShoppingCartModelImpl)shoppingCartImpl;
+		ShoppingCartModelImpl shoppingCartModelImpl = shoppingCartImpl;
 
 		shoppingCartImpl.setCartId(getCartId());
 

@@ -502,7 +502,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	public Object clone() {
 		AssetEntryImpl assetEntryImpl = new AssetEntryImpl();
 
-		AssetEntryModelImpl assetEntryModelImpl = (AssetEntryModelImpl)assetEntryImpl;
+		AssetEntryModelImpl assetEntryModelImpl = assetEntryImpl;
 
 		assetEntryImpl.setEntryId(getEntryId());
 

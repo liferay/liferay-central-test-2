@@ -324,7 +324,7 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	public Object clone() {
 		SocialActivityImpl socialActivityImpl = new SocialActivityImpl();
 
-		SocialActivityModelImpl socialActivityModelImpl = (SocialActivityModelImpl)socialActivityImpl;
+		SocialActivityModelImpl socialActivityModelImpl = socialActivityImpl;
 
 		socialActivityImpl.setActivityId(getActivityId());
 

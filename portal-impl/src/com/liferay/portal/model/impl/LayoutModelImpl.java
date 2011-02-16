@@ -921,7 +921,7 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	public Object clone() {
 		LayoutImpl layoutImpl = new LayoutImpl();
 
-		LayoutModelImpl layoutModelImpl = (LayoutModelImpl)layoutImpl;
+		LayoutModelImpl layoutModelImpl = layoutImpl;
 
 		layoutImpl.setUuid(getUuid());
 

@@ -549,7 +549,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	public Object clone() {
 		WikiPageImpl wikiPageImpl = new WikiPageImpl();
 
-		WikiPageModelImpl wikiPageModelImpl = (WikiPageModelImpl)wikiPageImpl;
+		WikiPageModelImpl wikiPageModelImpl = wikiPageImpl;
 
 		wikiPageImpl.setUuid(getUuid());
 

@@ -388,7 +388,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	public Object clone() {
 		SCProductEntryImpl scProductEntryImpl = new SCProductEntryImpl();
 
-		SCProductEntryModelImpl scProductEntryModelImpl = (SCProductEntryModelImpl)scProductEntryImpl;
+		SCProductEntryModelImpl scProductEntryModelImpl = scProductEntryImpl;
 
 		scProductEntryImpl.setProductEntryId(getProductEntryId());
 

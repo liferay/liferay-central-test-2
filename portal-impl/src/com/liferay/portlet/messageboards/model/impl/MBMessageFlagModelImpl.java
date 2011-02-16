@@ -245,7 +245,7 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 	public Object clone() {
 		MBMessageFlagImpl mbMessageFlagImpl = new MBMessageFlagImpl();
 
-		MBMessageFlagModelImpl mbMessageFlagModelImpl = (MBMessageFlagModelImpl)mbMessageFlagImpl;
+		MBMessageFlagModelImpl mbMessageFlagModelImpl = mbMessageFlagImpl;
 
 		mbMessageFlagImpl.setMessageFlagId(getMessageFlagId());
 

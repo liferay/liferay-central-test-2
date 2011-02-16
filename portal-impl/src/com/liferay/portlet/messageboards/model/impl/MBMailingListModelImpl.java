@@ -447,7 +447,7 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	public Object clone() {
 		MBMailingListImpl mbMailingListImpl = new MBMailingListImpl();
 
-		MBMailingListModelImpl mbMailingListModelImpl = (MBMailingListModelImpl)mbMailingListImpl;
+		MBMailingListModelImpl mbMailingListModelImpl = mbMailingListImpl;
 
 		mbMailingListImpl.setUuid(getUuid());
 

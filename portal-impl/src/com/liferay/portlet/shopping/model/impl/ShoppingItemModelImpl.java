@@ -627,7 +627,7 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	public Object clone() {
 		ShoppingItemImpl shoppingItemImpl = new ShoppingItemImpl();
 
-		ShoppingItemModelImpl shoppingItemModelImpl = (ShoppingItemModelImpl)shoppingItemImpl;
+		ShoppingItemModelImpl shoppingItemModelImpl = shoppingItemImpl;
 
 		shoppingItemImpl.setItemId(getItemId());
 

@@ -156,7 +156,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 	public Object clone() {
 		BrowserTrackerImpl browserTrackerImpl = new BrowserTrackerImpl();
 
-		BrowserTrackerModelImpl browserTrackerModelImpl = (BrowserTrackerModelImpl)browserTrackerImpl;
+		BrowserTrackerModelImpl browserTrackerModelImpl = browserTrackerImpl;
 
 		browserTrackerImpl.setBrowserTrackerId(getBrowserTrackerId());
 

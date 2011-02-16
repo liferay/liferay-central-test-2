@@ -197,7 +197,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	public Object clone() {
 		MBStatsUserImpl mbStatsUserImpl = new MBStatsUserImpl();
 
-		MBStatsUserModelImpl mbStatsUserModelImpl = (MBStatsUserModelImpl)mbStatsUserImpl;
+		MBStatsUserModelImpl mbStatsUserModelImpl = mbStatsUserImpl;
 
 		mbStatsUserImpl.setStatsUserId(getStatsUserId());
 

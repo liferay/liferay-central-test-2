@@ -233,7 +233,7 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	public Object clone() {
 		BlogsStatsUserImpl blogsStatsUserImpl = new BlogsStatsUserImpl();
 
-		BlogsStatsUserModelImpl blogsStatsUserModelImpl = (BlogsStatsUserModelImpl)blogsStatsUserImpl;
+		BlogsStatsUserModelImpl blogsStatsUserModelImpl = blogsStatsUserImpl;
 
 		blogsStatsUserImpl.setStatsUserId(getStatsUserId());
 

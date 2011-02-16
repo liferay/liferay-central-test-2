@@ -179,7 +179,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	public Object clone() {
 		VirtualHostImpl virtualHostImpl = new VirtualHostImpl();
 
-		VirtualHostModelImpl virtualHostModelImpl = (VirtualHostModelImpl)virtualHostImpl;
+		VirtualHostModelImpl virtualHostModelImpl = virtualHostImpl;
 
 		virtualHostImpl.setVirtualHostId(getVirtualHostId());
 

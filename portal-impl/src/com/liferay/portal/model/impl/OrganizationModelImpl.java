@@ -317,7 +317,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	public Object clone() {
 		OrganizationImpl organizationImpl = new OrganizationImpl();
 
-		OrganizationModelImpl organizationModelImpl = (OrganizationModelImpl)organizationImpl;
+		OrganizationModelImpl organizationModelImpl = organizationImpl;
 
 		organizationImpl.setOrganizationId(getOrganizationId());
 

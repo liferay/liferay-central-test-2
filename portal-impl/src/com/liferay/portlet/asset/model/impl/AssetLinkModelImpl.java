@@ -210,7 +210,7 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	public Object clone() {
 		AssetLinkImpl assetLinkImpl = new AssetLinkImpl();
 
-		AssetLinkModelImpl assetLinkModelImpl = (AssetLinkModelImpl)assetLinkImpl;
+		AssetLinkModelImpl assetLinkModelImpl = assetLinkImpl;
 
 		assetLinkImpl.setLinkId(getLinkId());
 

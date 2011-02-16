@@ -234,7 +234,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	public Object clone() {
 		ExpandoColumnImpl expandoColumnImpl = new ExpandoColumnImpl();
 
-		ExpandoColumnModelImpl expandoColumnModelImpl = (ExpandoColumnModelImpl)expandoColumnImpl;
+		ExpandoColumnModelImpl expandoColumnModelImpl = expandoColumnImpl;
 
 		expandoColumnImpl.setColumnId(getColumnId());
 

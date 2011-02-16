@@ -289,7 +289,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	public Object clone() {
 		WebsiteImpl websiteImpl = new WebsiteImpl();
 
-		WebsiteModelImpl websiteModelImpl = (WebsiteModelImpl)websiteImpl;
+		WebsiteModelImpl websiteModelImpl = websiteImpl;
 
 		websiteImpl.setWebsiteId(getWebsiteId());
 

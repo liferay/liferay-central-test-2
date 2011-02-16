@@ -186,7 +186,7 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 	public Object clone() {
 		MBDiscussionImpl mbDiscussionImpl = new MBDiscussionImpl();
 
-		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussionImpl;
+		MBDiscussionModelImpl mbDiscussionModelImpl = mbDiscussionImpl;
 
 		mbDiscussionImpl.setDiscussionId(getDiscussionId());
 

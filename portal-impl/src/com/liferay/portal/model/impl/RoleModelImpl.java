@@ -395,7 +395,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	public Object clone() {
 		RoleImpl roleImpl = new RoleImpl();
 
-		RoleModelImpl roleModelImpl = (RoleModelImpl)roleImpl;
+		RoleModelImpl roleModelImpl = roleImpl;
 
 		roleImpl.setRoleId(getRoleId());
 

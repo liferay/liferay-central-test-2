@@ -224,7 +224,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	public Object clone() {
 		PollsVoteImpl pollsVoteImpl = new PollsVoteImpl();
 
-		PollsVoteModelImpl pollsVoteModelImpl = (PollsVoteModelImpl)pollsVoteImpl;
+		PollsVoteModelImpl pollsVoteModelImpl = pollsVoteImpl;
 
 		pollsVoteImpl.setVoteId(getVoteId());
 

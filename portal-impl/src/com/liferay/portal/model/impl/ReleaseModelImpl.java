@@ -205,7 +205,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	public Object clone() {
 		ReleaseImpl releaseImpl = new ReleaseImpl();
 
-		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)releaseImpl;
+		ReleaseModelImpl releaseModelImpl = releaseImpl;
 
 		releaseImpl.setReleaseId(getReleaseId());
 

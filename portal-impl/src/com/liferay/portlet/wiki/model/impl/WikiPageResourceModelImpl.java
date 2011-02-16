@@ -175,7 +175,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	public Object clone() {
 		WikiPageResourceImpl wikiPageResourceImpl = new WikiPageResourceImpl();
 
-		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResourceImpl;
+		WikiPageResourceModelImpl wikiPageResourceModelImpl = wikiPageResourceImpl;
 
 		wikiPageResourceImpl.setUuid(getUuid());
 

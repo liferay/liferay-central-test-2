@@ -235,7 +235,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	public Object clone() {
 		UserGroupImpl userGroupImpl = new UserGroupImpl();
 
-		UserGroupModelImpl userGroupModelImpl = (UserGroupModelImpl)userGroupImpl;
+		UserGroupModelImpl userGroupModelImpl = userGroupImpl;
 
 		userGroupImpl.setUserGroupId(getUserGroupId());
 

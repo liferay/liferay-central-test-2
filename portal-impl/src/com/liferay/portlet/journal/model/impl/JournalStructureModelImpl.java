@@ -350,7 +350,7 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	public Object clone() {
 		JournalStructureImpl journalStructureImpl = new JournalStructureImpl();
 
-		JournalStructureModelImpl journalStructureModelImpl = (JournalStructureModelImpl)journalStructureImpl;
+		JournalStructureModelImpl journalStructureModelImpl = journalStructureImpl;
 
 		journalStructureImpl.setUuid(getUuid());
 

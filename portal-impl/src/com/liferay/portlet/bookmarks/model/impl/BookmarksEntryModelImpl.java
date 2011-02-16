@@ -326,7 +326,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	public Object clone() {
 		BookmarksEntryImpl bookmarksEntryImpl = new BookmarksEntryImpl();
 
-		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntryImpl;
+		BookmarksEntryModelImpl bookmarksEntryModelImpl = bookmarksEntryImpl;
 
 		bookmarksEntryImpl.setUuid(getUuid());
 

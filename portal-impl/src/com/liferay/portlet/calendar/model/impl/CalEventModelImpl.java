@@ -453,7 +453,7 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	public Object clone() {
 		CalEventImpl calEventImpl = new CalEventImpl();
 
-		CalEventModelImpl calEventModelImpl = (CalEventModelImpl)calEventImpl;
+		CalEventModelImpl calEventModelImpl = calEventImpl;
 
 		calEventImpl.setUuid(getUuid());
 

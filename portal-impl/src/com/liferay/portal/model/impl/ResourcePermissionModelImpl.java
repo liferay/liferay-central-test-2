@@ -271,7 +271,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	public Object clone() {
 		ResourcePermissionImpl resourcePermissionImpl = new ResourcePermissionImpl();
 
-		ResourcePermissionModelImpl resourcePermissionModelImpl = (ResourcePermissionModelImpl)resourcePermissionImpl;
+		ResourcePermissionModelImpl resourcePermissionModelImpl = resourcePermissionImpl;
 
 		resourcePermissionImpl.setResourcePermissionId(getResourcePermissionId());
 

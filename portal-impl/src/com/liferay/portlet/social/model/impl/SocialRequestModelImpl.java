@@ -335,7 +335,7 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 	public Object clone() {
 		SocialRequestImpl socialRequestImpl = new SocialRequestImpl();
 
-		SocialRequestModelImpl socialRequestModelImpl = (SocialRequestModelImpl)socialRequestImpl;
+		SocialRequestModelImpl socialRequestModelImpl = socialRequestImpl;
 
 		socialRequestImpl.setUuid(getUuid());
 

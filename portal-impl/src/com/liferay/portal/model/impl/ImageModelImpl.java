@@ -225,7 +225,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	public Object clone() {
 		ImageImpl imageImpl = new ImageImpl();
 
-		ImageModelImpl imageModelImpl = (ImageModelImpl)imageImpl;
+		ImageModelImpl imageModelImpl = imageImpl;
 
 		imageImpl.setImageId(getImageId());
 

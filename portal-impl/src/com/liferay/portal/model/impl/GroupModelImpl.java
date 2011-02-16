@@ -407,7 +407,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	public Object clone() {
 		GroupImpl groupImpl = new GroupImpl();
 
-		GroupModelImpl groupModelImpl = (GroupModelImpl)groupImpl;
+		GroupModelImpl groupModelImpl = groupImpl;
 
 		groupImpl.setGroupId(getGroupId());
 

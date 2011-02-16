@@ -386,7 +386,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 	public Object clone() {
 		ShoppingCouponImpl shoppingCouponImpl = new ShoppingCouponImpl();
 
-		ShoppingCouponModelImpl shoppingCouponModelImpl = (ShoppingCouponModelImpl)shoppingCouponImpl;
+		ShoppingCouponModelImpl shoppingCouponModelImpl = shoppingCouponImpl;
 
 		shoppingCouponImpl.setCouponId(getCouponId());
 

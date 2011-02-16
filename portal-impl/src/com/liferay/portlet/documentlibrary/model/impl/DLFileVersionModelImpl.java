@@ -408,7 +408,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	public Object clone() {
 		DLFileVersionImpl dlFileVersionImpl = new DLFileVersionImpl();
 
-		DLFileVersionModelImpl dlFileVersionModelImpl = (DLFileVersionModelImpl)dlFileVersionImpl;
+		DLFileVersionModelImpl dlFileVersionModelImpl = dlFileVersionImpl;
 
 		dlFileVersionImpl.setFileVersionId(getFileVersionId());
 

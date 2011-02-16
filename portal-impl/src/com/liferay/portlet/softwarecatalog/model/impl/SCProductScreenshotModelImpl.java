@@ -215,7 +215,7 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public Object clone() {
 		SCProductScreenshotImpl scProductScreenshotImpl = new SCProductScreenshotImpl();
 
-		SCProductScreenshotModelImpl scProductScreenshotModelImpl = (SCProductScreenshotModelImpl)scProductScreenshotImpl;
+		SCProductScreenshotModelImpl scProductScreenshotModelImpl = scProductScreenshotImpl;
 
 		scProductScreenshotImpl.setProductScreenshotId(getProductScreenshotId());
 

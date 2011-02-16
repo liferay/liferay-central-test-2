@@ -173,7 +173,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	public Object clone() {
 		ExpandoTableImpl expandoTableImpl = new ExpandoTableImpl();
 
-		ExpandoTableModelImpl expandoTableModelImpl = (ExpandoTableModelImpl)expandoTableImpl;
+		ExpandoTableModelImpl expandoTableModelImpl = expandoTableImpl;
 
 		expandoTableImpl.setTableId(getTableId());
 

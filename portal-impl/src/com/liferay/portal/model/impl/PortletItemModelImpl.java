@@ -271,7 +271,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	public Object clone() {
 		PortletItemImpl portletItemImpl = new PortletItemImpl();
 
-		PortletItemModelImpl portletItemModelImpl = (PortletItemModelImpl)portletItemImpl;
+		PortletItemModelImpl portletItemModelImpl = portletItemImpl;
 
 		portletItemImpl.setPortletItemId(getPortletItemId());
 

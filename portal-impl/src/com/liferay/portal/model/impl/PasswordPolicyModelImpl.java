@@ -554,7 +554,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	public Object clone() {
 		PasswordPolicyImpl passwordPolicyImpl = new PasswordPolicyImpl();
 
-		PasswordPolicyModelImpl passwordPolicyModelImpl = (PasswordPolicyModelImpl)passwordPolicyImpl;
+		PasswordPolicyModelImpl passwordPolicyModelImpl = passwordPolicyImpl;
 
 		passwordPolicyImpl.setPasswordPolicyId(getPasswordPolicyId());
 

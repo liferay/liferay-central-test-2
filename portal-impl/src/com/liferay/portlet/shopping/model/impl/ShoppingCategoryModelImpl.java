@@ -274,7 +274,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	public Object clone() {
 		ShoppingCategoryImpl shoppingCategoryImpl = new ShoppingCategoryImpl();
 
-		ShoppingCategoryModelImpl shoppingCategoryModelImpl = (ShoppingCategoryModelImpl)shoppingCategoryImpl;
+		ShoppingCategoryModelImpl shoppingCategoryModelImpl = shoppingCategoryImpl;
 
 		shoppingCategoryImpl.setCategoryId(getCategoryId());
 

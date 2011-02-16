@@ -153,7 +153,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 	public Object clone() {
 		UserTrackerPathImpl userTrackerPathImpl = new UserTrackerPathImpl();
 
-		UserTrackerPathModelImpl userTrackerPathModelImpl = (UserTrackerPathModelImpl)userTrackerPathImpl;
+		UserTrackerPathModelImpl userTrackerPathModelImpl = userTrackerPathImpl;
 
 		userTrackerPathImpl.setUserTrackerPathId(getUserTrackerPathId());
 

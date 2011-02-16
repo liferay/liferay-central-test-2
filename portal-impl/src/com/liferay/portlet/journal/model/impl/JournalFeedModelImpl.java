@@ -489,7 +489,7 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	public Object clone() {
 		JournalFeedImpl journalFeedImpl = new JournalFeedImpl();
 
-		JournalFeedModelImpl journalFeedModelImpl = (JournalFeedModelImpl)journalFeedImpl;
+		JournalFeedModelImpl journalFeedModelImpl = journalFeedImpl;
 
 		journalFeedImpl.setUuid(getUuid());
 

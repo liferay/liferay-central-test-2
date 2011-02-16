@@ -214,7 +214,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	public Object clone() {
 		UserTrackerImpl userTrackerImpl = new UserTrackerImpl();
 
-		UserTrackerModelImpl userTrackerModelImpl = (UserTrackerModelImpl)userTrackerImpl;
+		UserTrackerModelImpl userTrackerModelImpl = userTrackerImpl;
 
 		userTrackerImpl.setUserTrackerId(getUserTrackerId());
 

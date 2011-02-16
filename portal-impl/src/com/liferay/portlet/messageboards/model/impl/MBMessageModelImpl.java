@@ -529,7 +529,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	public Object clone() {
 		MBMessageImpl mbMessageImpl = new MBMessageImpl();
 
-		MBMessageModelImpl mbMessageModelImpl = (MBMessageModelImpl)mbMessageImpl;
+		MBMessageModelImpl mbMessageModelImpl = mbMessageImpl;
 
 		mbMessageImpl.setUuid(getUuid());
 

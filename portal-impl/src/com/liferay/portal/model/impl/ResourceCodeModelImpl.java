@@ -179,7 +179,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 	public Object clone() {
 		ResourceCodeImpl resourceCodeImpl = new ResourceCodeImpl();
 
-		ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCodeImpl;
+		ResourceCodeModelImpl resourceCodeModelImpl = resourceCodeImpl;
 
 		resourceCodeImpl.setCodeId(getCodeId());
 

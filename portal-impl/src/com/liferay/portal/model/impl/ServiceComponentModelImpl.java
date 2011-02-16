@@ -185,7 +185,7 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	public Object clone() {
 		ServiceComponentImpl serviceComponentImpl = new ServiceComponentImpl();
 
-		ServiceComponentModelImpl serviceComponentModelImpl = (ServiceComponentModelImpl)serviceComponentImpl;
+		ServiceComponentModelImpl serviceComponentModelImpl = serviceComponentImpl;
 
 		serviceComponentImpl.setServiceComponentId(getServiceComponentId());
 

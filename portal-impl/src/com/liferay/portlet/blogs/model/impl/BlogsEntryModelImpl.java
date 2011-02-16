@@ -525,7 +525,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	public Object clone() {
 		BlogsEntryImpl blogsEntryImpl = new BlogsEntryImpl();
 
-		BlogsEntryModelImpl blogsEntryModelImpl = (BlogsEntryModelImpl)blogsEntryImpl;
+		BlogsEntryModelImpl blogsEntryModelImpl = blogsEntryImpl;
 
 		blogsEntryImpl.setUuid(getUuid());
 

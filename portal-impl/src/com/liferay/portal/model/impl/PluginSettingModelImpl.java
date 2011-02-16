@@ -249,7 +249,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	public Object clone() {
 		PluginSettingImpl pluginSettingImpl = new PluginSettingImpl();
 
-		PluginSettingModelImpl pluginSettingModelImpl = (PluginSettingModelImpl)pluginSettingImpl;
+		PluginSettingModelImpl pluginSettingModelImpl = pluginSettingImpl;
 
 		pluginSettingImpl.setPluginSettingId(getPluginSettingId());
 

@@ -196,7 +196,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 	public Object clone() {
 		ResourceImpl resourceImpl = new ResourceImpl();
 
-		ResourceModelImpl resourceModelImpl = (ResourceModelImpl)resourceImpl;
+		ResourceModelImpl resourceModelImpl = resourceImpl;
 
 		resourceImpl.setResourceId(getResourceId());
 

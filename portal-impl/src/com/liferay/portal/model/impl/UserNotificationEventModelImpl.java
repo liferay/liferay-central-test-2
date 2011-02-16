@@ -209,7 +209,7 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	public Object clone() {
 		UserNotificationEventImpl userNotificationEventImpl = new UserNotificationEventImpl();
 
-		UserNotificationEventModelImpl userNotificationEventModelImpl = (UserNotificationEventModelImpl)userNotificationEventImpl;
+		UserNotificationEventModelImpl userNotificationEventModelImpl = userNotificationEventImpl;
 
 		userNotificationEventImpl.setUuid(getUuid());
 

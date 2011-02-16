@@ -496,7 +496,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	public Object clone() {
 		AssetVocabularyImpl assetVocabularyImpl = new AssetVocabularyImpl();
 
-		AssetVocabularyModelImpl assetVocabularyModelImpl = (AssetVocabularyModelImpl)assetVocabularyImpl;
+		AssetVocabularyModelImpl assetVocabularyModelImpl = assetVocabularyImpl;
 
 		assetVocabularyImpl.setUuid(getUuid());
 

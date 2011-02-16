@@ -206,7 +206,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	public Object clone() {
 		UserIdMapperImpl userIdMapperImpl = new UserIdMapperImpl();
 
-		UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapperImpl;
+		UserIdMapperModelImpl userIdMapperModelImpl = userIdMapperImpl;
 
 		userIdMapperImpl.setUserIdMapperId(getUserIdMapperId());
 

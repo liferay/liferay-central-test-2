@@ -268,7 +268,7 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	public Object clone() {
 		CountryImpl countryImpl = new CountryImpl();
 
-		CountryModelImpl countryModelImpl = (CountryModelImpl)countryImpl;
+		CountryModelImpl countryModelImpl = countryImpl;
 
 		countryImpl.setCountryId(getCountryId());
 

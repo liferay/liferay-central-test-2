@@ -372,7 +372,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	public Object clone() {
 		AnnouncementsEntryImpl announcementsEntryImpl = new AnnouncementsEntryImpl();
 
-		AnnouncementsEntryModelImpl announcementsEntryModelImpl = (AnnouncementsEntryModelImpl)announcementsEntryImpl;
+		AnnouncementsEntryModelImpl announcementsEntryModelImpl = announcementsEntryImpl;
 
 		announcementsEntryImpl.setUuid(getUuid());
 

@@ -150,7 +150,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	public Object clone() {
 		ExpandoRowImpl expandoRowImpl = new ExpandoRowImpl();
 
-		ExpandoRowModelImpl expandoRowModelImpl = (ExpandoRowModelImpl)expandoRowImpl;
+		ExpandoRowModelImpl expandoRowModelImpl = expandoRowImpl;
 
 		expandoRowImpl.setRowId(getRowId());
 

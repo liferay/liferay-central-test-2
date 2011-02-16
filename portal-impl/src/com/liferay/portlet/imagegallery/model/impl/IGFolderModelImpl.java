@@ -308,7 +308,7 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 	public Object clone() {
 		IGFolderImpl igFolderImpl = new IGFolderImpl();
 
-		IGFolderModelImpl igFolderModelImpl = (IGFolderModelImpl)igFolderImpl;
+		IGFolderModelImpl igFolderModelImpl = igFolderImpl;
 
 		igFolderImpl.setUuid(getUuid());
 

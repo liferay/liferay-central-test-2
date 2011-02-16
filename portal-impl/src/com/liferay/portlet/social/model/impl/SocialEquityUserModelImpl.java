@@ -230,7 +230,7 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 	public Object clone() {
 		SocialEquityUserImpl socialEquityUserImpl = new SocialEquityUserImpl();
 
-		SocialEquityUserModelImpl socialEquityUserModelImpl = (SocialEquityUserModelImpl)socialEquityUserImpl;
+		SocialEquityUserModelImpl socialEquityUserModelImpl = socialEquityUserImpl;
 
 		socialEquityUserImpl.setEquityUserId(getEquityUserId());
 

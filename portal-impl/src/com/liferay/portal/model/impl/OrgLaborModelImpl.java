@@ -314,7 +314,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 	public Object clone() {
 		OrgLaborImpl orgLaborImpl = new OrgLaborImpl();
 
-		OrgLaborModelImpl orgLaborModelImpl = (OrgLaborModelImpl)orgLaborImpl;
+		OrgLaborModelImpl orgLaborModelImpl = orgLaborImpl;
 
 		orgLaborImpl.setOrgLaborId(getOrgLaborId());
 

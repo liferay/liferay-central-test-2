@@ -193,7 +193,7 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 	public Object clone() {
 		SocialEquityAssetEntryImpl socialEquityAssetEntryImpl = new SocialEquityAssetEntryImpl();
 
-		SocialEquityAssetEntryModelImpl socialEquityAssetEntryModelImpl = (SocialEquityAssetEntryModelImpl)socialEquityAssetEntryImpl;
+		SocialEquityAssetEntryModelImpl socialEquityAssetEntryModelImpl = socialEquityAssetEntryImpl;
 
 		socialEquityAssetEntryImpl.setEquityAssetEntryId(getEquityAssetEntryId());
 

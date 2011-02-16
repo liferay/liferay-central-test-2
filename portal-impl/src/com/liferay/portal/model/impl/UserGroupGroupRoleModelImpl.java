@@ -160,7 +160,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 	public Object clone() {
 		UserGroupGroupRoleImpl userGroupGroupRoleImpl = new UserGroupGroupRoleImpl();
 
-		UserGroupGroupRoleModelImpl userGroupGroupRoleModelImpl = (UserGroupGroupRoleModelImpl)userGroupGroupRoleImpl;
+		UserGroupGroupRoleModelImpl userGroupGroupRoleModelImpl = userGroupGroupRoleImpl;
 
 		userGroupGroupRoleImpl.setUserGroupId(getUserGroupId());
 

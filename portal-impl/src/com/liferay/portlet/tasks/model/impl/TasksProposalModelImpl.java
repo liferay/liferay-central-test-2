@@ -335,7 +335,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 	public Object clone() {
 		TasksProposalImpl tasksProposalImpl = new TasksProposalImpl();
 
-		TasksProposalModelImpl tasksProposalModelImpl = (TasksProposalModelImpl)tasksProposalImpl;
+		TasksProposalModelImpl tasksProposalModelImpl = tasksProposalImpl;
 
 		tasksProposalImpl.setProposalId(getProposalId());
 

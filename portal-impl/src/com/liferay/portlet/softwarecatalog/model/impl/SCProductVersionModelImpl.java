@@ -321,7 +321,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 	public Object clone() {
 		SCProductVersionImpl scProductVersionImpl = new SCProductVersionImpl();
 
-		SCProductVersionModelImpl scProductVersionModelImpl = (SCProductVersionModelImpl)scProductVersionImpl;
+		SCProductVersionModelImpl scProductVersionModelImpl = scProductVersionImpl;
 
 		scProductVersionImpl.setProductVersionId(getProductVersionId());
 

@@ -870,7 +870,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 	public Object clone() {
 		ShoppingOrderImpl shoppingOrderImpl = new ShoppingOrderImpl();
 
-		ShoppingOrderModelImpl shoppingOrderModelImpl = (ShoppingOrderModelImpl)shoppingOrderImpl;
+		ShoppingOrderModelImpl shoppingOrderModelImpl = shoppingOrderImpl;
 
 		shoppingOrderImpl.setOrderId(getOrderId());
 
