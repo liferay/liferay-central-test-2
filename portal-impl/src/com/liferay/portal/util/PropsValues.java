@@ -660,6 +660,12 @@ public class PropsValues {
 
 	public static boolean LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED));
 
+	public static final String[] LAYOUTS_FORM_ADD = PropsUtil.getArray(PropsKeys.LAYOUTS_FORM_ADD);
+
+	public static final String[] LAYOUTS_FORM_UPDATE = PropsUtil.getArray(PropsKeys.LAYOUTS_FORM_UPDATE);
+
+	public static final String[] LAYOUTSET_FORM_UPDATE = PropsUtil.getArray(PropsKeys.LAYOUTSET_FORM_UPDATE);
+
 	public static final String LDAP_ATTRS_TRANSFORMER_IMPL = PropsUtil.get(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL);
 
 	public static final boolean LDAP_AUTH_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LDAP_AUTH_ENABLED));

@@ -953,6 +953,12 @@ public interface PropsKeys {
 
 	public static final String LAYOUT_VIEW_PAGE = "layout.view.page";
 
+	public static final String LAYOUTS_FORM_ADD = "layouts.form.add";
+
+	public static final String LAYOUTS_FORM_UPDATE = "layouts.form.update";
+
+	public static final String LAYOUTSET_FORM_UPDATE = "layoutset.form.update";
+
 	public static final String LDAP_ATTRS_TRANSFORMER_IMPL = "ldap.attrs.transformer.impl";
 
 	public static final String LDAP_AUTH_ENABLED = "ldap.auth.enabled";
