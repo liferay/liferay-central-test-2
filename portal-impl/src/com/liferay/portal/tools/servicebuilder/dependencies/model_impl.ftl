@@ -518,11 +518,12 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	</#if>
 
 	public Object clone() {
-		${entity.name}Impl clone = new ${entity.name}Impl();
-		${entity.name}ModelImpl cloneModel = (${entity.name}ModelImpl)clone;
+		${entity.name}Impl ${entity.varName}Impl = new ${entity.name}Impl();
+
+		${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName}Impl;
 
 		<#list entity.regularColList as column>
-			clone.set${column.methodName}(
+			${entity.varName}Impl.set${column.methodName}(
 
 			<#if column.EJBName??>
 				(${column.EJBName})get${column.methodName}().clone()
@@ -533,14 +534,15 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			);
 
 			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
-				cloneModel._original${column.methodName} = cloneModel._${column.name};
+				${entity.varName}ModelImpl._original${column.methodName} = ${entity.varName}ModelImpl._${column.name};
+
 				<#if column.isPrimitiveType()>
-					cloneModel._setOriginal${column.methodName} = false;
+					${entity.varName}ModelImpl._setOriginal${column.methodName} = false;
 				</#if>
 			</#if>
 		</#list>
 
-		return clone;
+		return ${entity.varName}Impl;
 	}
 
 	public int compareTo(${entity.name} ${entity.varName}) {
