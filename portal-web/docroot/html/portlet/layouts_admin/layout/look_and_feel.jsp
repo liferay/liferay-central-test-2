@@ -81,7 +81,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), false);
 				%>
 
-				<%@ include file="/html/portlet/layouts_admin/look_and_feel_themes.jspf" %>
+				<%@ include file="/html/portlet/layouts_admin/look_and_feel_themes.jsp" %>
 			</liferay-ui:section>
 			<liferay-ui:section>
 
@@ -157,6 +157,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), true);
 		%>
 
-		<%@ include file="/html/portlet/layouts_admin/look_and_feel_themes.jspf" %>
+		<%@ include file="/html/portlet/layouts_admin/look_and_feel_themes.jsp" %>
 	</c:when>
 </c:choose>
