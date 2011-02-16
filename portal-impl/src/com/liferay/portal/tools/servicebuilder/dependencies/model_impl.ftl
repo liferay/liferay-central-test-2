@@ -518,21 +518,19 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	</#if>
 
 	public Object clone() {
-		${entity.name}ModelImpl clone = new ${entity.name}Impl();
+		${entity.name}Impl clone = new ${entity.name}Impl();
 		${entity.name}ModelImpl cloneModel = (${entity.name}ModelImpl)clone;
 
 		<#list entity.regularColList as column>
-			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
-				clone._original${column.methodName} =
-			</#if>
-
-			clone._${column.name} =
+			clone.set${column.methodName}(
 
 			<#if column.EJBName??>
-				_${column.name}.clone();
+				(${column.EJBName})get${column.methodName}().clone()
 			<#else>
-				_${column.name};
+				get${column.methodName}()
 			</#if>
+
+			);
 
 			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 				cloneModel._original${column.methodName} = cloneModel._${column.name};
