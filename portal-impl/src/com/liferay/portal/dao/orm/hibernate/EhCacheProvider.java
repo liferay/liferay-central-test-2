@@ -14,75 +14,80 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.cache.ehcache.EhcacheConfigurationUtil;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.ReflectionUtil;
-
-import java.lang.reflect.Field;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.Properties;
 
 import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.util.FailSafeTimer;
+import net.sf.ehcache.Ehcache;
+import net.sf.ehcache.config.Configuration;
+import net.sf.ehcache.hibernate.EhCache;
 
+import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
 import org.hibernate.cache.CacheProvider;
+import org.hibernate.cache.Timestamper;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
 @SuppressWarnings("deprecation")
-public class EhCacheProvider extends CacheProviderWrapper {
+public class EhCacheProvider implements CacheProvider {
 
 	public static CacheManager getCacheManager() throws SystemException {
-		try {
-			Class<?> clazz = Class.forName(
-				"net.sf.ehcache.hibernate.AbstractEhcacheProvider");
-
-			Field field = clazz.getDeclaredField("manager");
-
-			field.setAccessible(true);
-
-			CacheManager cacheManager = (CacheManager)field.get(
-				_cacheProvider);
-
-			if (cacheManager == null) {
-				throw new SystemException("CacheManager has been initialized");
-			}
-
-			return cacheManager;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
+		return _cacheManager;
 	}
 
-	public EhCacheProvider() {
-		super("net.sf.ehcache.hibernate.EhCacheProvider");
+	public Cache buildCache(String name, Properties properties)
+		throws CacheException {
+		Ehcache cache = _cacheManager.getEhcache(name);
 
-		_cacheProvider = cacheProvider;
+		if (cache == null) {
+			synchronized (_cacheManager) {
+				cache = _cacheManager.getEhcache(name);
+
+				if (cache == null) {
+					_cacheManager.addCache(name);
+
+					cache = _cacheManager.getEhcache(name);
+
+					cache.setStatisticsEnabled(
+						PropsValues.EHCACHE_STATISTICS_ENABLED);
+				}
+			}
+		}
+
+		return new EhCache(cache);
+	}
+
+	public long nextTimestamp() {
+		return Timestamper.next();
 	}
 
 	public void start(Properties properties) throws CacheException {
-		super.start(properties);
-
-		try {
-			CacheManager cacheManager = getCacheManager();
-
-			FailSafeTimer failSafeTimer = cacheManager.getTimer();
-
-			failSafeTimer.cancel();
-
-			Field cacheManagerTimerField = ReflectionUtil.getDeclaredField(
-				CacheManager.class, "cacheManagerTimer");
-
-			cacheManagerTimerField.set(cacheManager, null);
+		if (_cacheManager != null) {
+			return;
 		}
-		catch (Exception e) {
-			throw new CacheException(e);
+
+		Configuration configuration = EhcacheConfigurationUtil.getConfiguration(
+			PropsValues.NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME);
+		_cacheManager = new CacheManager(configuration);
+	}
+
+	public void stop() {
+		if (_cacheManager != null) {
+			_cacheManager.shutdown();
+			_cacheManager = null;
 		}
 	}
 
-	private static CacheProvider _cacheProvider;
+	public boolean isMinimalPutsEnabledByDefault() {
+		return true;
+	}
+
+	private static volatile CacheManager _cacheManager;
 
 }

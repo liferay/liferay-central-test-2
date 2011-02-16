@@ -1258,8 +1258,10 @@ public interface PropsKeys {
 	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT = "nested.portlets.layout.template.default";
 
 	public static final String NESTED_PORTLETS_LAYOUT_TEMPLATE_UNSUPPORTED = "nested.portlets.layout.template.unsupported";
-
+	
 	public static final String NETVIBES_SERVLET_MAPPING = "netvibes.servlet.mapping";
+
+	public static final String NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME = "net.sf.ehcache.configurationResourceName";
 
 	public static final String NTLM_AUTH_ENABLED = "ntlm.auth.enabled";
 

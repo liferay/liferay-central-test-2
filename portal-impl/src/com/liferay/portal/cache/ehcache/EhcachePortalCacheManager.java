@@ -14,7 +14,6 @@
 
 package com.liferay.portal.cache.ehcache;
 
-import com.liferay.portal.cache.cluster.EhcachePortalCacheClusterReplicatorFactory;
 import com.liferay.portal.kernel.cache.BlockingPortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
@@ -26,17 +25,11 @@ import com.liferay.portal.util.PropsValues;
 
 import java.lang.reflect.Field;
 
-import java.net.URL;
-
 import javax.management.MBeanServer;
 
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Ehcache;
-import net.sf.ehcache.ObjectExistsException;
-import net.sf.ehcache.config.CacheConfiguration.CacheEventListenerFactoryConfiguration;
-import net.sf.ehcache.config.CacheConfiguration;
 import net.sf.ehcache.config.Configuration;
-import net.sf.ehcache.config.ConfigurationFactory;
 import net.sf.ehcache.management.ManagementService;
 import net.sf.ehcache.util.FailSafeTimer;
 
@@ -49,7 +42,8 @@ import net.sf.ehcache.util.FailSafeTimer;
 public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	public void afterPropertiesSet() {
-		Configuration configuration = getConfiguration();
+		Configuration configuration = EhcacheConfigurationUtil.getConfiguration(
+			PropsUtil.get(_configPropertyKey));
 
 		_cacheManager = new CacheManager(configuration);
 
@@ -104,14 +98,7 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 				cache = _cacheManager.getEhcache(name);
 
 				if (cache == null) {
-					try {
-						_cacheManager.addCache(name);
-					}
-					catch (ObjectExistsException oee) {
-
-						// LEP-7122
-
-					}
+					_cacheManager.addCache(name);
 
 					cache = _cacheManager.getEhcache(name);
 
@@ -174,49 +161,6 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 
 	public void setRegisterCacheStatistics(boolean registerCacheStatistics) {
 		_registerCacheStatistics = registerCacheStatistics;
-	}
-
-	protected Configuration getConfiguration() {
-		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));
-
-		Configuration configuration = ConfigurationFactory.parseConfiguration(
-			url);
-
-		if (PropsValues.EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED) {
-			configuration.getCacheManagerPeerProviderFactoryConfiguration().
-				clear();
-			configuration.getCacheManagerPeerListenerFactoryConfigurations().
-				clear();
-
-			CacheConfiguration defaultCacheConfiguration =
-				configuration.getDefaultCacheConfiguration();
-
-			processCacheConfiguration(defaultCacheConfiguration);
-
-			for (CacheConfiguration cacheConfiguration :
-					configuration.getCacheConfigurations().values()) {
-
-				processCacheConfiguration(cacheConfiguration);
-			}
-		}
-
-		return configuration;
-	}
-
-	protected void processCacheConfiguration(
-		CacheConfiguration cacheConfiguration) {
-
-		cacheConfiguration.addBootstrapCacheLoaderFactory(null);
-
-		cacheConfiguration.getCacheEventListenerConfigurations().clear();
-
-		CacheEventListenerFactoryConfiguration configuration =
-			new CacheEventListenerFactoryConfiguration();
-
-		configuration.setClass(
-			EhcachePortalCacheClusterReplicatorFactory.class.getName());
-
-		cacheConfiguration.addCacheEventListenerFactory(configuration);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
