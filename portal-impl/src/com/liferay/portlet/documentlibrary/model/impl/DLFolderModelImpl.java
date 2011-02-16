@@ -308,22 +308,22 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public Object clone() {
-		DLFolderImpl clone = new DLFolderImpl();
+		DLFolderModelImpl clone = new DLFolderImpl();
 
-		clone.setUuid(getUuid());
-		clone.setFolderId(getFolderId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setRepositoryId(getRepositoryId());
-		clone.setMountPoint(getMountPoint());
-		clone.setParentFolderId(getParentFolderId());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setLastPostDate(getLastPostDate());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._folderId = _folderId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._repositoryId = _repositoryId;
+		clone._mountPoint = _mountPoint;
+		clone._originalParentFolderId = clone._parentFolderId = _parentFolderId;
+		clone._originalName = clone._name = _name;
+		clone._description = _description;
+		clone._lastPostDate = _lastPostDate;
 
 		return clone;
 	}

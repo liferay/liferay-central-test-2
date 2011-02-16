@@ -260,15 +260,15 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public Object clone() {
-		AnnouncementsDeliveryImpl clone = new AnnouncementsDeliveryImpl();
+		AnnouncementsDeliveryModelImpl clone = new AnnouncementsDeliveryImpl();
 
-		clone.setDeliveryId(getDeliveryId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setType(getType());
-		clone.setEmail(getEmail());
-		clone.setSms(getSms());
-		clone.setWebsite(getWebsite());
+		clone._deliveryId = _deliveryId;
+		clone._companyId = _companyId;
+		clone._originalUserId = clone._userId = _userId;
+		clone._originalType = clone._type = _type;
+		clone._email = _email;
+		clone._sms = _sms;
+		clone._website = _website;
 
 		return clone;
 	}

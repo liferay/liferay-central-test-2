@@ -172,12 +172,12 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 	}
 
 	public Object clone() {
-		ResourceActionImpl clone = new ResourceActionImpl();
+		ResourceActionModelImpl clone = new ResourceActionImpl();
 
-		clone.setResourceActionId(getResourceActionId());
-		clone.setName(getName());
-		clone.setActionId(getActionId());
-		clone.setBitwiseValue(getBitwiseValue());
+		clone._resourceActionId = _resourceActionId;
+		clone._originalName = clone._name = _name;
+		clone._originalActionId = clone._actionId = _actionId;
+		clone._bitwiseValue = _bitwiseValue;
 
 		return clone;
 	}

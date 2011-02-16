@@ -232,15 +232,15 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public Object clone() {
-		JournalContentSearchImpl clone = new JournalContentSearchImpl();
+		JournalContentSearchModelImpl clone = new JournalContentSearchImpl();
 
-		clone.setContentSearchId(getContentSearchId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setPrivateLayout(getPrivateLayout());
-		clone.setLayoutId(getLayoutId());
-		clone.setPortletId(getPortletId());
-		clone.setArticleId(getArticleId());
+		clone._contentSearchId = _contentSearchId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
+		clone._originalLayoutId = clone._layoutId = _layoutId;
+		clone._originalPortletId = clone._portletId = _portletId;
+		clone._originalArticleId = clone._articleId = _articleId;
 
 		return clone;
 	}

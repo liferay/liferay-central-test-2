@@ -257,17 +257,17 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 	}
 
 	public Object clone() {
-		AssetTagImpl clone = new AssetTagImpl();
+		AssetTagModelImpl clone = new AssetTagImpl();
 
-		clone.setTagId(getTagId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setName(getName());
-		clone.setAssetCount(getAssetCount());
+		clone._tagId = _tagId;
+		clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._name = _name;
+		clone._assetCount = _assetCount;
 
 		return clone;
 	}

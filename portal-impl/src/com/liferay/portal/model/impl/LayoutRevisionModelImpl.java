@@ -1007,38 +1007,38 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public Object clone() {
-		LayoutRevisionImpl clone = new LayoutRevisionImpl();
+		LayoutRevisionModelImpl clone = new LayoutRevisionImpl();
 
-		clone.setLayoutRevisionId(getLayoutRevisionId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setLayoutSetBranchId(getLayoutSetBranchId());
-		clone.setParentLayoutRevisionId(getParentLayoutRevisionId());
-		clone.setHead(getHead());
-		clone.setMajor(getMajor());
-		clone.setPlid(getPlid());
-		clone.setPrivateLayout(getPrivateLayout());
-		clone.setName(getName());
-		clone.setTitle(getTitle());
-		clone.setDescription(getDescription());
-		clone.setKeywords(getKeywords());
-		clone.setRobots(getRobots());
-		clone.setTypeSettings(getTypeSettings());
-		clone.setIconImage(getIconImage());
-		clone.setIconImageId(getIconImageId());
-		clone.setThemeId(getThemeId());
-		clone.setColorSchemeId(getColorSchemeId());
-		clone.setWapThemeId(getWapThemeId());
-		clone.setWapColorSchemeId(getWapColorSchemeId());
-		clone.setCss(getCss());
-		clone.setStatus(getStatus());
-		clone.setStatusByUserId(getStatusByUserId());
-		clone.setStatusByUserName(getStatusByUserName());
-		clone.setStatusDate(getStatusDate());
+		clone._layoutRevisionId = _layoutRevisionId;
+		clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalLayoutSetBranchId = clone._layoutSetBranchId = _layoutSetBranchId;
+		clone._parentLayoutRevisionId = _parentLayoutRevisionId;
+		clone._originalHead = clone._head = _head;
+		clone._major = _major;
+		clone._originalPlid = clone._plid = _plid;
+		clone._privateLayout = _privateLayout;
+		clone._name = _name;
+		clone._title = _title;
+		clone._description = _description;
+		clone._keywords = _keywords;
+		clone._robots = _robots;
+		clone._typeSettings = _typeSettings;
+		clone._iconImage = _iconImage;
+		clone._iconImageId = _iconImageId;
+		clone._themeId = _themeId;
+		clone._colorSchemeId = _colorSchemeId;
+		clone._wapThemeId = _wapThemeId;
+		clone._wapColorSchemeId = _wapColorSchemeId;
+		clone._css = _css;
+		clone._status = _status;
+		clone._statusByUserId = _statusByUserId;
+		clone._statusByUserName = _statusByUserName;
+		clone._statusDate = _statusDate;
 
 		return clone;
 	}

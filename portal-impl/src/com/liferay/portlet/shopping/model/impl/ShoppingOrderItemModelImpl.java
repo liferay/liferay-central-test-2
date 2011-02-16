@@ -228,18 +228,18 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public Object clone() {
-		ShoppingOrderItemImpl clone = new ShoppingOrderItemImpl();
+		ShoppingOrderItemModelImpl clone = new ShoppingOrderItemImpl();
 
-		clone.setOrderItemId(getOrderItemId());
-		clone.setOrderId(getOrderId());
-		clone.setItemId(getItemId());
-		clone.setSku(getSku());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setProperties(getProperties());
-		clone.setPrice(getPrice());
-		clone.setQuantity(getQuantity());
-		clone.setShippedDate(getShippedDate());
+		clone._orderItemId = _orderItemId;
+		clone._orderId = _orderId;
+		clone._itemId = _itemId;
+		clone._sku = _sku;
+		clone._name = _name;
+		clone._description = _description;
+		clone._properties = _properties;
+		clone._price = _price;
+		clone._quantity = _quantity;
+		clone._shippedDate = _shippedDate;
 
 		return clone;
 	}

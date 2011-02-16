@@ -311,19 +311,19 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 	}
 
 	public Object clone() {
-		WikiNodeImpl clone = new WikiNodeImpl();
+		WikiNodeModelImpl clone = new WikiNodeImpl();
 
-		clone.setUuid(getUuid());
-		clone.setNodeId(getNodeId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setLastPostDate(getLastPostDate());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._nodeId = _nodeId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalName = clone._name = _name;
+		clone._description = _description;
+		clone._lastPostDate = _lastPostDate;
 
 		return clone;
 	}

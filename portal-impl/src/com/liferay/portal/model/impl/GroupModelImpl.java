@@ -405,21 +405,21 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public Object clone() {
-		GroupImpl clone = new GroupImpl();
+		GroupModelImpl clone = new GroupImpl();
 
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setCreatorUserId(getCreatorUserId());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setParentGroupId(getParentGroupId());
-		clone.setLiveGroupId(getLiveGroupId());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setType(getType());
-		clone.setTypeSettings(getTypeSettings());
-		clone.setFriendlyURL(getFriendlyURL());
-		clone.setActive(getActive());
+		clone._groupId = _groupId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._creatorUserId = _creatorUserId;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalClassPK = clone._classPK = _classPK;
+		clone._parentGroupId = _parentGroupId;
+		clone._originalLiveGroupId = clone._liveGroupId = _liveGroupId;
+		clone._originalName = clone._name = _name;
+		clone._description = _description;
+		clone._type = _type;
+		clone._typeSettings = _typeSettings;
+		clone._originalFriendlyURL = clone._friendlyURL = _friendlyURL;
+		clone._active = _active;
 
 		return clone;
 	}

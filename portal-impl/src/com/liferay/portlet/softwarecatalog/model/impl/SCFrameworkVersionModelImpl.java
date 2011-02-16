@@ -299,19 +299,19 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public Object clone() {
-		SCFrameworkVersionImpl clone = new SCFrameworkVersionImpl();
+		SCFrameworkVersionModelImpl clone = new SCFrameworkVersionImpl();
 
-		clone.setFrameworkVersionId(getFrameworkVersionId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setName(getName());
-		clone.setUrl(getUrl());
-		clone.setActive(getActive());
-		clone.setPriority(getPriority());
+		clone._frameworkVersionId = _frameworkVersionId;
+		clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._name = _name;
+		clone._url = _url;
+		clone._active = _active;
+		clone._priority = _priority;
 
 		return clone;
 	}

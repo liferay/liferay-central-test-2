@@ -259,17 +259,17 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	}
 
 	public Object clone() {
-		SubscriptionImpl clone = new SubscriptionImpl();
+		SubscriptionModelImpl clone = new SubscriptionImpl();
 
-		clone.setSubscriptionId(getSubscriptionId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setFrequency(getFrequency());
+		clone._subscriptionId = _subscriptionId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._originalUserId = clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalClassPK = clone._classPK = _classPK;
+		clone._frequency = _frequency;
 
 		return clone;
 	}

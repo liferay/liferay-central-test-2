@@ -547,31 +547,31 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public Object clone() {
-		WikiPageImpl clone = new WikiPageImpl();
+		WikiPageModelImpl clone = new WikiPageImpl();
 
-		clone.setUuid(getUuid());
-		clone.setPageId(getPageId());
-		clone.setResourcePrimKey(getResourcePrimKey());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setNodeId(getNodeId());
-		clone.setTitle(getTitle());
-		clone.setVersion(getVersion());
-		clone.setMinorEdit(getMinorEdit());
-		clone.setContent(getContent());
-		clone.setSummary(getSummary());
-		clone.setFormat(getFormat());
-		clone.setHead(getHead());
-		clone.setParentTitle(getParentTitle());
-		clone.setRedirectTitle(getRedirectTitle());
-		clone.setStatus(getStatus());
-		clone.setStatusByUserId(getStatusByUserId());
-		clone.setStatusByUserName(getStatusByUserName());
-		clone.setStatusDate(getStatusDate());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._pageId = _pageId;
+		clone._originalResourcePrimKey = clone._resourcePrimKey = _resourcePrimKey;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalNodeId = clone._nodeId = _nodeId;
+		clone._originalTitle = clone._title = _title;
+		clone._originalVersion = clone._version = _version;
+		clone._minorEdit = _minorEdit;
+		clone._content = _content;
+		clone._summary = _summary;
+		clone._format = _format;
+		clone._head = _head;
+		clone._parentTitle = _parentTitle;
+		clone._redirectTitle = _redirectTitle;
+		clone._status = _status;
+		clone._statusByUserId = _statusByUserId;
+		clone._statusByUserName = _statusByUserName;
+		clone._statusDate = _statusDate;
 
 		return clone;
 	}

@@ -269,15 +269,15 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public Object clone() {
-		ResourcePermissionImpl clone = new ResourcePermissionImpl();
+		ResourcePermissionModelImpl clone = new ResourcePermissionImpl();
 
-		clone.setResourcePermissionId(getResourcePermissionId());
-		clone.setCompanyId(getCompanyId());
-		clone.setName(getName());
-		clone.setScope(getScope());
-		clone.setPrimKey(getPrimKey());
-		clone.setRoleId(getRoleId());
-		clone.setActionIds(getActionIds());
+		clone._resourcePermissionId = _resourcePermissionId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._originalName = clone._name = _name;
+		clone._originalScope = clone._scope = _scope;
+		clone._originalPrimKey = clone._primKey = _primKey;
+		clone._originalRoleId = clone._roleId = _roleId;
+		clone._actionIds = _actionIds;
 
 		return clone;
 	}

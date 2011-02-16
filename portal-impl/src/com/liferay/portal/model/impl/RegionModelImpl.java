@@ -207,13 +207,13 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	}
 
 	public Object clone() {
-		RegionImpl clone = new RegionImpl();
+		RegionModelImpl clone = new RegionImpl();
 
-		clone.setRegionId(getRegionId());
-		clone.setCountryId(getCountryId());
-		clone.setRegionCode(getRegionCode());
-		clone.setName(getName());
-		clone.setActive(getActive());
+		clone._regionId = _regionId;
+		clone._countryId = _countryId;
+		clone._regionCode = _regionCode;
+		clone._name = _name;
+		clone._active = _active;
 
 		return clone;
 	}

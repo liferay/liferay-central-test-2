@@ -523,31 +523,31 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	public Object clone() {
-		BlogsEntryImpl clone = new BlogsEntryImpl();
+		BlogsEntryModelImpl clone = new BlogsEntryImpl();
 
-		clone.setUuid(getUuid());
-		clone.setEntryId(getEntryId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setTitle(getTitle());
-		clone.setUrlTitle(getUrlTitle());
-		clone.setDescription(getDescription());
-		clone.setContent(getContent());
-		clone.setDisplayDate(getDisplayDate());
-		clone.setAllowPingbacks(getAllowPingbacks());
-		clone.setAllowTrackbacks(getAllowTrackbacks());
-		clone.setTrackbacks(getTrackbacks());
-		clone.setSmallImage(getSmallImage());
-		clone.setSmallImageId(getSmallImageId());
-		clone.setSmallImageURL(getSmallImageURL());
-		clone.setStatus(getStatus());
-		clone.setStatusByUserId(getStatusByUserId());
-		clone.setStatusByUserName(getStatusByUserName());
-		clone.setStatusDate(getStatusDate());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._entryId = _entryId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._title = _title;
+		clone._originalUrlTitle = clone._urlTitle = _urlTitle;
+		clone._description = _description;
+		clone._content = _content;
+		clone._displayDate = _displayDate;
+		clone._allowPingbacks = _allowPingbacks;
+		clone._allowTrackbacks = _allowTrackbacks;
+		clone._trackbacks = _trackbacks;
+		clone._smallImage = _smallImage;
+		clone._smallImageId = _smallImageId;
+		clone._smallImageURL = _smallImageURL;
+		clone._status = _status;
+		clone._statusByUserId = _statusByUserId;
+		clone._statusByUserName = _statusByUserName;
+		clone._statusDate = _statusDate;
 
 		return clone;
 	}

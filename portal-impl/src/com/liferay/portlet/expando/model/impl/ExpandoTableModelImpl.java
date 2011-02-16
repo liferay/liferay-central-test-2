@@ -171,12 +171,12 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	}
 
 	public Object clone() {
-		ExpandoTableImpl clone = new ExpandoTableImpl();
+		ExpandoTableModelImpl clone = new ExpandoTableImpl();
 
-		clone.setTableId(getTableId());
-		clone.setCompanyId(getCompanyId());
-		clone.setClassNameId(getClassNameId());
-		clone.setName(getName());
+		clone._tableId = _tableId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalName = clone._name = _name;
 
 		return clone;
 	}

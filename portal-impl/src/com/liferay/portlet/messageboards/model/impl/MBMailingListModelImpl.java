@@ -445,33 +445,33 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	}
 
 	public Object clone() {
-		MBMailingListImpl clone = new MBMailingListImpl();
+		MBMailingListModelImpl clone = new MBMailingListImpl();
 
-		clone.setUuid(getUuid());
-		clone.setMailingListId(getMailingListId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setCategoryId(getCategoryId());
-		clone.setEmailAddress(getEmailAddress());
-		clone.setInProtocol(getInProtocol());
-		clone.setInServerName(getInServerName());
-		clone.setInServerPort(getInServerPort());
-		clone.setInUseSSL(getInUseSSL());
-		clone.setInUserName(getInUserName());
-		clone.setInPassword(getInPassword());
-		clone.setInReadInterval(getInReadInterval());
-		clone.setOutEmailAddress(getOutEmailAddress());
-		clone.setOutCustom(getOutCustom());
-		clone.setOutServerName(getOutServerName());
-		clone.setOutServerPort(getOutServerPort());
-		clone.setOutUseSSL(getOutUseSSL());
-		clone.setOutUserName(getOutUserName());
-		clone.setOutPassword(getOutPassword());
-		clone.setActive(getActive());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._mailingListId = _mailingListId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalCategoryId = clone._categoryId = _categoryId;
+		clone._emailAddress = _emailAddress;
+		clone._inProtocol = _inProtocol;
+		clone._inServerName = _inServerName;
+		clone._inServerPort = _inServerPort;
+		clone._inUseSSL = _inUseSSL;
+		clone._inUserName = _inUserName;
+		clone._inPassword = _inPassword;
+		clone._inReadInterval = _inReadInterval;
+		clone._outEmailAddress = _outEmailAddress;
+		clone._outCustom = _outCustom;
+		clone._outServerName = _outServerName;
+		clone._outServerPort = _outServerPort;
+		clone._outUseSSL = _outUseSSL;
+		clone._outUserName = _outUserName;
+		clone._outPassword = _outPassword;
+		clone._active = _active;
 
 		return clone;
 	}

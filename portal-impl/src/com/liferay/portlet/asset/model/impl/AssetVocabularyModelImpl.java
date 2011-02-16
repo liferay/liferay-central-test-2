@@ -494,20 +494,20 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	}
 
 	public Object clone() {
-		AssetVocabularyImpl clone = new AssetVocabularyImpl();
+		AssetVocabularyModelImpl clone = new AssetVocabularyImpl();
 
-		clone.setUuid(getUuid());
-		clone.setVocabularyId(getVocabularyId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setName(getName());
-		clone.setTitle(getTitle());
-		clone.setDescription(getDescription());
-		clone.setSettings(getSettings());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._vocabularyId = _vocabularyId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalName = clone._name = _name;
+		clone._title = _title;
+		clone._description = _description;
+		clone._settings = _settings;
 
 		return clone;
 	}

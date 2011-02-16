@@ -381,26 +381,26 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 	}
 
 	public Object clone() {
-		AddressImpl clone = new AddressImpl();
+		AddressModelImpl clone = new AddressImpl();
 
-		clone.setAddressId(getAddressId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setStreet1(getStreet1());
-		clone.setStreet2(getStreet2());
-		clone.setStreet3(getStreet3());
-		clone.setCity(getCity());
-		clone.setZip(getZip());
-		clone.setRegionId(getRegionId());
-		clone.setCountryId(getCountryId());
-		clone.setTypeId(getTypeId());
-		clone.setMailing(getMailing());
-		clone.setPrimary(getPrimary());
+		clone._addressId = _addressId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._classNameId = _classNameId;
+		clone._classPK = _classPK;
+		clone._street1 = _street1;
+		clone._street2 = _street2;
+		clone._street3 = _street3;
+		clone._city = _city;
+		clone._zip = _zip;
+		clone._regionId = _regionId;
+		clone._countryId = _countryId;
+		clone._typeId = _typeId;
+		clone._mailing = _mailing;
+		clone._primary = _primary;
 
 		return clone;
 	}

@@ -349,23 +349,23 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	}
 
 	public Object clone() {
-		MBCategoryImpl clone = new MBCategoryImpl();
+		MBCategoryModelImpl clone = new MBCategoryImpl();
 
-		clone.setUuid(getUuid());
-		clone.setCategoryId(getCategoryId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setParentCategoryId(getParentCategoryId());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setDisplayStyle(getDisplayStyle());
-		clone.setThreadCount(getThreadCount());
-		clone.setMessageCount(getMessageCount());
-		clone.setLastPostDate(getLastPostDate());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._categoryId = _categoryId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._parentCategoryId = _parentCategoryId;
+		clone._name = _name;
+		clone._description = _description;
+		clone._displayStyle = _displayStyle;
+		clone._threadCount = _threadCount;
+		clone._messageCount = _messageCount;
+		clone._lastPostDate = _lastPostDate;
 
 		return clone;
 	}

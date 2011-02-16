@@ -151,12 +151,12 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 	}
 
 	public Object clone() {
-		UserTrackerPathImpl clone = new UserTrackerPathImpl();
+		UserTrackerPathModelImpl clone = new UserTrackerPathImpl();
 
-		clone.setUserTrackerPathId(getUserTrackerPathId());
-		clone.setUserTrackerId(getUserTrackerId());
-		clone.setPath(getPath());
-		clone.setPathDate(getPathDate());
+		clone._userTrackerPathId = _userTrackerPathId;
+		clone._userTrackerId = _userTrackerId;
+		clone._path = _path;
+		clone._pathDate = _pathDate;
 
 		return clone;
 	}

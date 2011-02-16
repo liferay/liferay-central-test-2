@@ -551,38 +551,38 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	}
 
 	public Object clone() {
-		ContactImpl clone = new ContactImpl();
+		ContactModelImpl clone = new ContactImpl();
 
-		clone.setContactId(getContactId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setAccountId(getAccountId());
-		clone.setParentContactId(getParentContactId());
-		clone.setFirstName(getFirstName());
-		clone.setMiddleName(getMiddleName());
-		clone.setLastName(getLastName());
-		clone.setPrefixId(getPrefixId());
-		clone.setSuffixId(getSuffixId());
-		clone.setMale(getMale());
-		clone.setBirthday(getBirthday());
-		clone.setSmsSn(getSmsSn());
-		clone.setAimSn(getAimSn());
-		clone.setFacebookSn(getFacebookSn());
-		clone.setIcqSn(getIcqSn());
-		clone.setJabberSn(getJabberSn());
-		clone.setMsnSn(getMsnSn());
-		clone.setMySpaceSn(getMySpaceSn());
-		clone.setSkypeSn(getSkypeSn());
-		clone.setTwitterSn(getTwitterSn());
-		clone.setYmSn(getYmSn());
-		clone.setEmployeeStatusId(getEmployeeStatusId());
-		clone.setEmployeeNumber(getEmployeeNumber());
-		clone.setJobTitle(getJobTitle());
-		clone.setJobClass(getJobClass());
-		clone.setHoursOfOperation(getHoursOfOperation());
+		clone._contactId = _contactId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._accountId = _accountId;
+		clone._parentContactId = _parentContactId;
+		clone._firstName = _firstName;
+		clone._middleName = _middleName;
+		clone._lastName = _lastName;
+		clone._prefixId = _prefixId;
+		clone._suffixId = _suffixId;
+		clone._male = _male;
+		clone._birthday = _birthday;
+		clone._smsSn = _smsSn;
+		clone._aimSn = _aimSn;
+		clone._facebookSn = _facebookSn;
+		clone._icqSn = _icqSn;
+		clone._jabberSn = _jabberSn;
+		clone._msnSn = _msnSn;
+		clone._mySpaceSn = _mySpaceSn;
+		clone._skypeSn = _skypeSn;
+		clone._twitterSn = _twitterSn;
+		clone._ymSn = _ymSn;
+		clone._employeeStatusId = _employeeStatusId;
+		clone._employeeNumber = _employeeNumber;
+		clone._jobTitle = _jobTitle;
+		clone._jobClass = _jobClass;
+		clone._hoursOfOperation = _hoursOfOperation;
 
 		return clone;
 	}

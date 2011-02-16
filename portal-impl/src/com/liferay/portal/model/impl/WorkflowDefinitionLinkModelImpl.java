@@ -260,18 +260,18 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	}
 
 	public Object clone() {
-		WorkflowDefinitionLinkImpl clone = new WorkflowDefinitionLinkImpl();
+		WorkflowDefinitionLinkModelImpl clone = new WorkflowDefinitionLinkImpl();
 
-		clone.setWorkflowDefinitionLinkId(getWorkflowDefinitionLinkId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setClassNameId(getClassNameId());
-		clone.setWorkflowDefinitionName(getWorkflowDefinitionName());
-		clone.setWorkflowDefinitionVersion(getWorkflowDefinitionVersion());
+		clone._workflowDefinitionLinkId = _workflowDefinitionLinkId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._workflowDefinitionName = _workflowDefinitionName;
+		clone._workflowDefinitionVersion = _workflowDefinitionVersion;
 
 		return clone;
 	}

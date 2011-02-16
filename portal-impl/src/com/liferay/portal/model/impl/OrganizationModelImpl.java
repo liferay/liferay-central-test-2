@@ -315,20 +315,20 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	}
 
 	public Object clone() {
-		OrganizationImpl clone = new OrganizationImpl();
+		OrganizationModelImpl clone = new OrganizationImpl();
 
-		clone.setOrganizationId(getOrganizationId());
-		clone.setCompanyId(getCompanyId());
-		clone.setParentOrganizationId(getParentOrganizationId());
-		clone.setLeftOrganizationId(getLeftOrganizationId());
-		clone.setRightOrganizationId(getRightOrganizationId());
-		clone.setName(getName());
-		clone.setType(getType());
-		clone.setRecursable(getRecursable());
-		clone.setRegionId(getRegionId());
-		clone.setCountryId(getCountryId());
-		clone.setStatusId(getStatusId());
-		clone.setComments(getComments());
+		clone._organizationId = _organizationId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._originalParentOrganizationId = clone._parentOrganizationId = _parentOrganizationId;
+		clone._leftOrganizationId = _leftOrganizationId;
+		clone._rightOrganizationId = _rightOrganizationId;
+		clone._originalName = clone._name = _name;
+		clone._type = _type;
+		clone._recursable = _recursable;
+		clone._regionId = _regionId;
+		clone._countryId = _countryId;
+		clone._statusId = _statusId;
+		clone._comments = _comments;
 
 		return clone;
 	}

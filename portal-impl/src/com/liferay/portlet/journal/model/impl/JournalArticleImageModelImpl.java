@@ -257,16 +257,16 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public Object clone() {
-		JournalArticleImageImpl clone = new JournalArticleImageImpl();
+		JournalArticleImageModelImpl clone = new JournalArticleImageImpl();
 
-		clone.setArticleImageId(getArticleImageId());
-		clone.setGroupId(getGroupId());
-		clone.setArticleId(getArticleId());
-		clone.setVersion(getVersion());
-		clone.setElInstanceId(getElInstanceId());
-		clone.setElName(getElName());
-		clone.setLanguageId(getLanguageId());
-		clone.setTempImage(getTempImage());
+		clone._articleImageId = _articleImageId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._originalArticleId = clone._articleId = _articleId;
+		clone._originalVersion = clone._version = _version;
+		clone._originalElInstanceId = clone._elInstanceId = _elInstanceId;
+		clone._originalElName = clone._elName = _elName;
+		clone._originalLanguageId = clone._languageId = _languageId;
+		clone._tempImage = _tempImage;
 
 		return clone;
 	}

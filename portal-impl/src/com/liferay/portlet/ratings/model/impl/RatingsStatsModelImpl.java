@@ -192,14 +192,14 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 	}
 
 	public Object clone() {
-		RatingsStatsImpl clone = new RatingsStatsImpl();
+		RatingsStatsModelImpl clone = new RatingsStatsImpl();
 
-		clone.setStatsId(getStatsId());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setTotalEntries(getTotalEntries());
-		clone.setTotalScore(getTotalScore());
-		clone.setAverageScore(getAverageScore());
+		clone._statsId = _statsId;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalClassPK = clone._classPK = _classPK;
+		clone._totalEntries = _totalEntries;
+		clone._totalScore = _totalScore;
+		clone._averageScore = _averageScore;
 
 		return clone;
 	}

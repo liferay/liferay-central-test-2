@@ -222,13 +222,13 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	}
 
 	public Object clone() {
-		PollsVoteImpl clone = new PollsVoteImpl();
+		PollsVoteModelImpl clone = new PollsVoteImpl();
 
-		clone.setVoteId(getVoteId());
-		clone.setUserId(getUserId());
-		clone.setQuestionId(getQuestionId());
-		clone.setChoiceId(getChoiceId());
-		clone.setVoteDate(getVoteDate());
+		clone._voteId = _voteId;
+		clone._originalUserId = clone._userId = _userId;
+		clone._originalQuestionId = clone._questionId = _questionId;
+		clone._choiceId = _choiceId;
+		clone._voteDate = _voteDate;
 
 		return clone;
 	}

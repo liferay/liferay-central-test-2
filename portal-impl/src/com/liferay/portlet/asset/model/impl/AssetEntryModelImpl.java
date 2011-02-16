@@ -500,32 +500,32 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public Object clone() {
-		AssetEntryImpl clone = new AssetEntryImpl();
+		AssetEntryModelImpl clone = new AssetEntryImpl();
 
-		clone.setEntryId(getEntryId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setClassUuid(getClassUuid());
-		clone.setVisible(getVisible());
-		clone.setStartDate(getStartDate());
-		clone.setEndDate(getEndDate());
-		clone.setPublishDate(getPublishDate());
-		clone.setExpirationDate(getExpirationDate());
-		clone.setMimeType(getMimeType());
-		clone.setTitle(getTitle());
-		clone.setDescription(getDescription());
-		clone.setSummary(getSummary());
-		clone.setUrl(getUrl());
-		clone.setHeight(getHeight());
-		clone.setWidth(getWidth());
-		clone.setPriority(getPriority());
-		clone.setViewCount(getViewCount());
+		clone._entryId = _entryId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalClassPK = clone._classPK = _classPK;
+		clone._originalClassUuid = clone._classUuid = _classUuid;
+		clone._visible = _visible;
+		clone._startDate = _startDate;
+		clone._endDate = _endDate;
+		clone._publishDate = _publishDate;
+		clone._expirationDate = _expirationDate;
+		clone._mimeType = _mimeType;
+		clone._title = _title;
+		clone._description = _description;
+		clone._summary = _summary;
+		clone._url = _url;
+		clone._height = _height;
+		clone._width = _width;
+		clone._priority = _priority;
+		clone._viewCount = _viewCount;
 
 		return clone;
 	}

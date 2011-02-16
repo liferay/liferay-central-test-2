@@ -374,23 +374,23 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public Object clone() {
-		MBThreadImpl clone = new MBThreadImpl();
+		MBThreadModelImpl clone = new MBThreadImpl();
 
-		clone.setThreadId(getThreadId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setCategoryId(getCategoryId());
-		clone.setRootMessageId(getRootMessageId());
-		clone.setRootMessageUserId(getRootMessageUserId());
-		clone.setMessageCount(getMessageCount());
-		clone.setViewCount(getViewCount());
-		clone.setLastPostByUserId(getLastPostByUserId());
-		clone.setLastPostDate(getLastPostDate());
-		clone.setPriority(getPriority());
-		clone.setStatus(getStatus());
-		clone.setStatusByUserId(getStatusByUserId());
-		clone.setStatusByUserName(getStatusByUserName());
-		clone.setStatusDate(getStatusDate());
+		clone._threadId = _threadId;
+		clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._categoryId = _categoryId;
+		clone._rootMessageId = _rootMessageId;
+		clone._rootMessageUserId = _rootMessageUserId;
+		clone._messageCount = _messageCount;
+		clone._viewCount = _viewCount;
+		clone._lastPostByUserId = _lastPostByUserId;
+		clone._lastPostDate = _lastPostDate;
+		clone._priority = _priority;
+		clone._status = _status;
+		clone._statusByUserId = _statusByUserId;
+		clone._statusByUserName = _statusByUserName;
+		clone._statusDate = _statusDate;
 
 		return clone;
 	}

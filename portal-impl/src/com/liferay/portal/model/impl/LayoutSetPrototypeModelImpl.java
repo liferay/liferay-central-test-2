@@ -304,14 +304,14 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	}
 
 	public Object clone() {
-		LayoutSetPrototypeImpl clone = new LayoutSetPrototypeImpl();
+		LayoutSetPrototypeModelImpl clone = new LayoutSetPrototypeImpl();
 
-		clone.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
-		clone.setCompanyId(getCompanyId());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setSettings(getSettings());
-		clone.setActive(getActive());
+		clone._layoutSetPrototypeId = _layoutSetPrototypeId;
+		clone._companyId = _companyId;
+		clone._name = _name;
+		clone._description = _description;
+		clone._settings = _settings;
+		clone._active = _active;
 
 		return clone;
 	}

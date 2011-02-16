@@ -208,18 +208,18 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public Object clone() {
-		ShoppingItemPriceImpl clone = new ShoppingItemPriceImpl();
+		ShoppingItemPriceModelImpl clone = new ShoppingItemPriceImpl();
 
-		clone.setItemPriceId(getItemPriceId());
-		clone.setItemId(getItemId());
-		clone.setMinQuantity(getMinQuantity());
-		clone.setMaxQuantity(getMaxQuantity());
-		clone.setPrice(getPrice());
-		clone.setDiscount(getDiscount());
-		clone.setTaxable(getTaxable());
-		clone.setShipping(getShipping());
-		clone.setUseShippingFormula(getUseShippingFormula());
-		clone.setStatus(getStatus());
+		clone._itemPriceId = _itemPriceId;
+		clone._itemId = _itemId;
+		clone._minQuantity = _minQuantity;
+		clone._maxQuantity = _maxQuantity;
+		clone._price = _price;
+		clone._discount = _discount;
+		clone._taxable = _taxable;
+		clone._shipping = _shipping;
+		clone._useShippingFormula = _useShippingFormula;
+		clone._status = _status;
 
 		return clone;
 	}

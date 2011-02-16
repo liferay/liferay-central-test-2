@@ -231,17 +231,17 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	}
 
 	public Object clone() {
-		BlogsStatsUserImpl clone = new BlogsStatsUserImpl();
+		BlogsStatsUserModelImpl clone = new BlogsStatsUserImpl();
 
-		clone.setStatsUserId(getStatsUserId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setEntryCount(getEntryCount());
-		clone.setLastPostDate(getLastPostDate());
-		clone.setRatingsTotalEntries(getRatingsTotalEntries());
-		clone.setRatingsTotalScore(getRatingsTotalScore());
-		clone.setRatingsAverageScore(getRatingsAverageScore());
+		clone._statsUserId = _statsUserId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._originalUserId = clone._userId = _userId;
+		clone._entryCount = _entryCount;
+		clone._lastPostDate = _lastPostDate;
+		clone._ratingsTotalEntries = _ratingsTotalEntries;
+		clone._ratingsTotalScore = _ratingsTotalScore;
+		clone._ratingsAverageScore = _ratingsAverageScore;
 
 		return clone;
 	}

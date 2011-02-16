@@ -919,33 +919,33 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public Object clone() {
-		LayoutImpl clone = new LayoutImpl();
+		LayoutModelImpl clone = new LayoutImpl();
 
-		clone.setUuid(getUuid());
-		clone.setPlid(getPlid());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setPrivateLayout(getPrivateLayout());
-		clone.setLayoutId(getLayoutId());
-		clone.setParentLayoutId(getParentLayoutId());
-		clone.setName(getName());
-		clone.setTitle(getTitle());
-		clone.setDescription(getDescription());
-		clone.setKeywords(getKeywords());
-		clone.setRobots(getRobots());
-		clone.setType(getType());
-		clone.setTypeSettings(getTypeSettings());
-		clone.setHidden(getHidden());
-		clone.setFriendlyURL(getFriendlyURL());
-		clone.setIconImage(getIconImage());
-		clone.setIconImageId(getIconImageId());
-		clone.setThemeId(getThemeId());
-		clone.setColorSchemeId(getColorSchemeId());
-		clone.setWapThemeId(getWapThemeId());
-		clone.setWapColorSchemeId(getWapColorSchemeId());
-		clone.setCss(getCss());
-		clone.setPriority(getPriority());
-		clone.setLayoutPrototypeId(getLayoutPrototypeId());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._plid = _plid;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
+		clone._originalLayoutId = clone._layoutId = _layoutId;
+		clone._parentLayoutId = _parentLayoutId;
+		clone._name = _name;
+		clone._title = _title;
+		clone._description = _description;
+		clone._keywords = _keywords;
+		clone._robots = _robots;
+		clone._type = _type;
+		clone._typeSettings = _typeSettings;
+		clone._hidden = _hidden;
+		clone._originalFriendlyURL = clone._friendlyURL = _friendlyURL;
+		clone._iconImage = _iconImage;
+		clone._originalIconImageId = clone._iconImageId = _iconImageId;
+		clone._themeId = _themeId;
+		clone._colorSchemeId = _colorSchemeId;
+		clone._wapThemeId = _wapThemeId;
+		clone._wapColorSchemeId = _wapColorSchemeId;
+		clone._css = _css;
+		clone._priority = _priority;
+		clone._layoutPrototypeId = _layoutPrototypeId;
 
 		return clone;
 	}

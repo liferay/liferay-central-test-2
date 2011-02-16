@@ -177,12 +177,12 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	}
 
 	public Object clone() {
-		VirtualHostImpl clone = new VirtualHostImpl();
+		VirtualHostModelImpl clone = new VirtualHostImpl();
 
-		clone.setVirtualHostId(getVirtualHostId());
-		clone.setCompanyId(getCompanyId());
-		clone.setLayoutSetId(getLayoutSetId());
-		clone.setHostname(getHostname());
+		clone._virtualHostId = _virtualHostId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._originalLayoutSetId = clone._layoutSetId = _layoutSetId;
+		clone._originalHostname = clone._hostname = _hostname;
 
 		return clone;
 	}

@@ -171,13 +171,13 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public Object clone() {
-		ShoppingItemFieldImpl clone = new ShoppingItemFieldImpl();
+		ShoppingItemFieldModelImpl clone = new ShoppingItemFieldImpl();
 
-		clone.setItemFieldId(getItemFieldId());
-		clone.setItemId(getItemId());
-		clone.setName(getName());
-		clone.setValues(getValues());
-		clone.setDescription(getDescription());
+		clone._itemFieldId = _itemFieldId;
+		clone._itemId = _itemId;
+		clone._name = _name;
+		clone._values = _values;
+		clone._description = _description;
 
 		return clone;
 	}

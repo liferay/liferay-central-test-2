@@ -266,15 +266,15 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	}
 
 	public Object clone() {
-		CountryImpl clone = new CountryImpl();
+		CountryModelImpl clone = new CountryImpl();
 
-		clone.setCountryId(getCountryId());
-		clone.setName(getName());
-		clone.setA2(getA2());
-		clone.setA3(getA3());
-		clone.setNumber(getNumber());
-		clone.setIdd(getIdd());
-		clone.setActive(getActive());
+		clone._countryId = _countryId;
+		clone._originalName = clone._name = _name;
+		clone._originalA2 = clone._a2 = _a2;
+		clone._originalA3 = clone._a3 = _a3;
+		clone._number = _number;
+		clone._idd = _idd;
+		clone._active = _active;
 
 		return clone;
 	}

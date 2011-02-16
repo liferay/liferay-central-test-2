@@ -319,20 +319,20 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 	}
 
 	public Object clone() {
-		SCProductVersionImpl clone = new SCProductVersionImpl();
+		SCProductVersionModelImpl clone = new SCProductVersionImpl();
 
-		clone.setProductVersionId(getProductVersionId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setProductEntryId(getProductEntryId());
-		clone.setVersion(getVersion());
-		clone.setChangeLog(getChangeLog());
-		clone.setDownloadPageURL(getDownloadPageURL());
-		clone.setDirectDownloadURL(getDirectDownloadURL());
-		clone.setRepoStoreArtifact(getRepoStoreArtifact());
+		clone._productVersionId = _productVersionId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._productEntryId = _productEntryId;
+		clone._version = _version;
+		clone._changeLog = _changeLog;
+		clone._downloadPageURL = _downloadPageURL;
+		clone._originalDirectDownloadURL = clone._directDownloadURL = _directDownloadURL;
+		clone._repoStoreArtifact = _repoStoreArtifact;
 
 		return clone;
 	}

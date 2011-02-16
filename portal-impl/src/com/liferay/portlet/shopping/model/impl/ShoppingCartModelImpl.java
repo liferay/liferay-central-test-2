@@ -259,19 +259,19 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	}
 
 	public Object clone() {
-		ShoppingCartImpl clone = new ShoppingCartImpl();
+		ShoppingCartModelImpl clone = new ShoppingCartImpl();
 
-		clone.setCartId(getCartId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setItemIds(getItemIds());
-		clone.setCouponCodes(getCouponCodes());
-		clone.setAltShipping(getAltShipping());
-		clone.setInsure(getInsure());
+		clone._cartId = _cartId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._originalUserId = clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._itemIds = _itemIds;
+		clone._couponCodes = _couponCodes;
+		clone._altShipping = _altShipping;
+		clone._insure = _insure;
 
 		return clone;
 	}

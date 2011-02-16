@@ -148,12 +148,12 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	}
 
 	public Object clone() {
-		ExpandoRowImpl clone = new ExpandoRowImpl();
+		ExpandoRowModelImpl clone = new ExpandoRowImpl();
 
-		clone.setRowId(getRowId());
-		clone.setCompanyId(getCompanyId());
-		clone.setTableId(getTableId());
-		clone.setClassPK(getClassPK());
+		clone._rowId = _rowId;
+		clone._companyId = _companyId;
+		clone._originalTableId = clone._tableId = _tableId;
+		clone._originalClassPK = clone._classPK = _classPK;
 
 		return clone;
 	}

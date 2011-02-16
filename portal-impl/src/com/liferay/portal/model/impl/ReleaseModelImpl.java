@@ -203,16 +203,16 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	}
 
 	public Object clone() {
-		ReleaseImpl clone = new ReleaseImpl();
+		ReleaseModelImpl clone = new ReleaseImpl();
 
-		clone.setReleaseId(getReleaseId());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setServletContextName(getServletContextName());
-		clone.setBuildNumber(getBuildNumber());
-		clone.setBuildDate(getBuildDate());
-		clone.setVerified(getVerified());
-		clone.setTestString(getTestString());
+		clone._releaseId = _releaseId;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalServletContextName = clone._servletContextName = _servletContextName;
+		clone._buildNumber = _buildNumber;
+		clone._buildDate = _buildDate;
+		clone._verified = _verified;
+		clone._testString = _testString;
 
 		return clone;
 	}

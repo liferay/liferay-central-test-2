@@ -370,25 +370,25 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public Object clone() {
-		AnnouncementsEntryImpl clone = new AnnouncementsEntryImpl();
+		AnnouncementsEntryModelImpl clone = new AnnouncementsEntryImpl();
 
-		clone.setUuid(getUuid());
-		clone.setEntryId(getEntryId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setTitle(getTitle());
-		clone.setContent(getContent());
-		clone.setUrl(getUrl());
-		clone.setType(getType());
-		clone.setDisplayDate(getDisplayDate());
-		clone.setExpirationDate(getExpirationDate());
-		clone.setPriority(getPriority());
-		clone.setAlert(getAlert());
+		clone._uuid = _uuid;
+		clone._entryId = _entryId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._classNameId = _classNameId;
+		clone._classPK = _classPK;
+		clone._title = _title;
+		clone._content = _content;
+		clone._url = _url;
+		clone._type = _type;
+		clone._displayDate = _displayDate;
+		clone._expirationDate = _expirationDate;
+		clone._priority = _priority;
+		clone._alert = _alert;
 
 		return clone;
 	}

@@ -181,12 +181,12 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	}
 
 	public Object clone() {
-		JournalArticleResourceImpl clone = new JournalArticleResourceImpl();
+		JournalArticleResourceModelImpl clone = new JournalArticleResourceImpl();
 
-		clone.setUuid(getUuid());
-		clone.setResourcePrimKey(getResourcePrimKey());
-		clone.setGroupId(getGroupId());
-		clone.setArticleId(getArticleId());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._resourcePrimKey = _resourcePrimKey;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._originalArticleId = clone._articleId = _articleId;
 
 		return clone;
 	}

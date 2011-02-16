@@ -393,17 +393,17 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	}
 
 	public Object clone() {
-		RoleImpl clone = new RoleImpl();
+		RoleModelImpl clone = new RoleImpl();
 
-		clone.setRoleId(getRoleId());
-		clone.setCompanyId(getCompanyId());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setName(getName());
-		clone.setTitle(getTitle());
-		clone.setDescription(getDescription());
-		clone.setType(getType());
-		clone.setSubtype(getSubtype());
+		clone._roleId = _roleId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalClassPK = clone._classPK = _classPK;
+		clone._originalName = clone._name = _name;
+		clone._title = _title;
+		clone._description = _description;
+		clone._type = _type;
+		clone._subtype = _subtype;
 
 		return clone;
 	}

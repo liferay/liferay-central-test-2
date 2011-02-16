@@ -223,15 +223,15 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	}
 
 	public Object clone() {
-		ImageImpl clone = new ImageImpl();
+		ImageModelImpl clone = new ImageImpl();
 
-		clone.setImageId(getImageId());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setText(getText());
-		clone.setType(getType());
-		clone.setHeight(getHeight());
-		clone.setWidth(getWidth());
-		clone.setSize(getSize());
+		clone._imageId = _imageId;
+		clone._modifiedDate = _modifiedDate;
+		clone._text = _text;
+		clone._type = _type;
+		clone._height = _height;
+		clone._width = _width;
+		clone._size = _size;
 
 		return clone;
 	}

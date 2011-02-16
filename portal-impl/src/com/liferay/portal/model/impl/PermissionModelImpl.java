@@ -211,12 +211,12 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 	}
 
 	public Object clone() {
-		PermissionImpl clone = new PermissionImpl();
+		PermissionModelImpl clone = new PermissionImpl();
 
-		clone.setPermissionId(getPermissionId());
-		clone.setCompanyId(getCompanyId());
-		clone.setActionId(getActionId());
-		clone.setResourceId(getResourceId());
+		clone._permissionId = _permissionId;
+		clone._companyId = _companyId;
+		clone._originalActionId = clone._actionId = _actionId;
+		clone._originalResourceId = clone._resourceId = _resourceId;
 
 		return clone;
 	}

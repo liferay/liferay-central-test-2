@@ -184,12 +184,12 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	}
 
 	public Object clone() {
-		ShardImpl clone = new ShardImpl();
+		ShardModelImpl clone = new ShardImpl();
 
-		clone.setShardId(getShardId());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setName(getName());
+		clone._shardId = _shardId;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalClassPK = clone._classPK = _classPK;
+		clone._originalName = clone._name = _name;
 
 		return clone;
 	}

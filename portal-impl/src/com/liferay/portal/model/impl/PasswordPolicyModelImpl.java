@@ -552,40 +552,40 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	}
 
 	public Object clone() {
-		PasswordPolicyImpl clone = new PasswordPolicyImpl();
+		PasswordPolicyModelImpl clone = new PasswordPolicyImpl();
 
-		clone.setPasswordPolicyId(getPasswordPolicyId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setDefaultPolicy(getDefaultPolicy());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setChangeable(getChangeable());
-		clone.setChangeRequired(getChangeRequired());
-		clone.setMinAge(getMinAge());
-		clone.setCheckSyntax(getCheckSyntax());
-		clone.setAllowDictionaryWords(getAllowDictionaryWords());
-		clone.setMinAlphanumeric(getMinAlphanumeric());
-		clone.setMinLength(getMinLength());
-		clone.setMinLowerCase(getMinLowerCase());
-		clone.setMinNumbers(getMinNumbers());
-		clone.setMinSymbols(getMinSymbols());
-		clone.setMinUpperCase(getMinUpperCase());
-		clone.setHistory(getHistory());
-		clone.setHistoryCount(getHistoryCount());
-		clone.setExpireable(getExpireable());
-		clone.setMaxAge(getMaxAge());
-		clone.setWarningTime(getWarningTime());
-		clone.setGraceLimit(getGraceLimit());
-		clone.setLockout(getLockout());
-		clone.setMaxFailure(getMaxFailure());
-		clone.setLockoutDuration(getLockoutDuration());
-		clone.setRequireUnlock(getRequireUnlock());
-		clone.setResetFailureCount(getResetFailureCount());
-		clone.setResetTicketMaxAge(getResetTicketMaxAge());
+		clone._passwordPolicyId = _passwordPolicyId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalDefaultPolicy = clone._defaultPolicy = _defaultPolicy;
+		clone._originalName = clone._name = _name;
+		clone._description = _description;
+		clone._changeable = _changeable;
+		clone._changeRequired = _changeRequired;
+		clone._minAge = _minAge;
+		clone._checkSyntax = _checkSyntax;
+		clone._allowDictionaryWords = _allowDictionaryWords;
+		clone._minAlphanumeric = _minAlphanumeric;
+		clone._minLength = _minLength;
+		clone._minLowerCase = _minLowerCase;
+		clone._minNumbers = _minNumbers;
+		clone._minSymbols = _minSymbols;
+		clone._minUpperCase = _minUpperCase;
+		clone._history = _history;
+		clone._historyCount = _historyCount;
+		clone._expireable = _expireable;
+		clone._maxAge = _maxAge;
+		clone._warningTime = _warningTime;
+		clone._graceLimit = _graceLimit;
+		clone._lockout = _lockout;
+		clone._maxFailure = _maxFailure;
+		clone._lockoutDuration = _lockoutDuration;
+		clone._requireUnlock = _requireUnlock;
+		clone._resetFailureCount = _resetFailureCount;
+		clone._resetTicketMaxAge = _resetTicketMaxAge;
 
 		return clone;
 	}

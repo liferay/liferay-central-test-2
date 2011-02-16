@@ -287,17 +287,17 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	}
 
 	public Object clone() {
-		RatingsEntryImpl clone = new RatingsEntryImpl();
+		RatingsEntryModelImpl clone = new RatingsEntryImpl();
 
-		clone.setEntryId(getEntryId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setScore(getScore());
+		clone._entryId = _entryId;
+		clone._companyId = _companyId;
+		clone._originalUserId = clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalClassPK = clone._classPK = _classPK;
+		clone._score = _score;
 
 		return clone;
 	}

@@ -195,13 +195,13 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	}
 
 	public Object clone() {
-		MBStatsUserImpl clone = new MBStatsUserImpl();
+		MBStatsUserModelImpl clone = new MBStatsUserImpl();
 
-		clone.setStatsUserId(getStatsUserId());
-		clone.setGroupId(getGroupId());
-		clone.setUserId(getUserId());
-		clone.setMessageCount(getMessageCount());
-		clone.setLastPostDate(getLastPostDate());
+		clone._statsUserId = _statsUserId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._originalUserId = clone._userId = _userId;
+		clone._messageCount = _messageCount;
+		clone._lastPostDate = _lastPostDate;
 
 		return clone;
 	}

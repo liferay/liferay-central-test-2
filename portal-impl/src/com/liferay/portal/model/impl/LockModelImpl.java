@@ -262,19 +262,19 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	}
 
 	public Object clone() {
-		LockImpl clone = new LockImpl();
+		LockModelImpl clone = new LockImpl();
 
-		clone.setUuid(getUuid());
-		clone.setLockId(getLockId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setClassName(getClassName());
-		clone.setKey(getKey());
-		clone.setOwner(getOwner());
-		clone.setInheritable(getInheritable());
-		clone.setExpirationDate(getExpirationDate());
+		clone._uuid = _uuid;
+		clone._lockId = _lockId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._originalClassName = clone._className = _className;
+		clone._originalKey = clone._key = _key;
+		clone._owner = _owner;
+		clone._inheritable = _inheritable;
+		clone._expirationDate = _expirationDate;
 
 		return clone;
 	}

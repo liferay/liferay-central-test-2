@@ -174,14 +174,14 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 	}
 
 	public Object clone() {
-		SocialEquityHistoryImpl clone = new SocialEquityHistoryImpl();
+		SocialEquityHistoryModelImpl clone = new SocialEquityHistoryImpl();
 
-		clone.setEquityHistoryId(getEquityHistoryId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setCreateDate(getCreateDate());
-		clone.setPersonalEquity(getPersonalEquity());
+		clone._equityHistoryId = _equityHistoryId;
+		clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._createDate = _createDate;
+		clone._personalEquity = _personalEquity;
 
 		return clone;
 	}

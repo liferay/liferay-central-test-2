@@ -322,19 +322,19 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public Object clone() {
-		SocialActivityImpl clone = new SocialActivityImpl();
+		SocialActivityModelImpl clone = new SocialActivityImpl();
 
-		clone.setActivityId(getActivityId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setCreateDate(getCreateDate());
-		clone.setMirrorActivityId(getMirrorActivityId());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setType(getType());
-		clone.setExtraData(getExtraData());
-		clone.setReceiverUserId(getReceiverUserId());
+		clone._activityId = _activityId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._originalUserId = clone._userId = _userId;
+		clone._originalCreateDate = clone._createDate = _createDate;
+		clone._originalMirrorActivityId = clone._mirrorActivityId = _mirrorActivityId;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalClassPK = clone._classPK = _classPK;
+		clone._originalType = clone._type = _type;
+		clone._extraData = _extraData;
+		clone._originalReceiverUserId = clone._receiverUserId = _receiverUserId;
 
 		return clone;
 	}

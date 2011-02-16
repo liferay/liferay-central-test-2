@@ -183,13 +183,13 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	}
 
 	public Object clone() {
-		ServiceComponentImpl clone = new ServiceComponentImpl();
+		ServiceComponentModelImpl clone = new ServiceComponentImpl();
 
-		clone.setServiceComponentId(getServiceComponentId());
-		clone.setBuildNamespace(getBuildNamespace());
-		clone.setBuildNumber(getBuildNumber());
-		clone.setBuildDate(getBuildDate());
-		clone.setData(getData());
+		clone._serviceComponentId = _serviceComponentId;
+		clone._originalBuildNamespace = clone._buildNamespace = _buildNamespace;
+		clone._originalBuildNumber = clone._buildNumber = _buildNumber;
+		clone._buildDate = _buildDate;
+		clone._data = _data;
 
 		return clone;
 	}

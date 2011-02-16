@@ -269,18 +269,18 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	}
 
 	public Object clone() {
-		PortletItemImpl clone = new PortletItemImpl();
+		PortletItemModelImpl clone = new PortletItemImpl();
 
-		clone.setPortletItemId(getPortletItemId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setName(getName());
-		clone.setPortletId(getPortletId());
-		clone.setClassNameId(getClassNameId());
+		clone._portletItemId = _portletItemId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalName = clone._name = _name;
+		clone._originalPortletId = clone._portletId = _portletId;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
 
 		return clone;
 	}

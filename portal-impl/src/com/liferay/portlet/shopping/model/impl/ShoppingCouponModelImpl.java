@@ -384,26 +384,26 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 	}
 
 	public Object clone() {
-		ShoppingCouponImpl clone = new ShoppingCouponImpl();
+		ShoppingCouponModelImpl clone = new ShoppingCouponImpl();
 
-		clone.setCouponId(getCouponId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setCode(getCode());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setStartDate(getStartDate());
-		clone.setEndDate(getEndDate());
-		clone.setActive(getActive());
-		clone.setLimitCategories(getLimitCategories());
-		clone.setLimitSkus(getLimitSkus());
-		clone.setMinOrder(getMinOrder());
-		clone.setDiscount(getDiscount());
-		clone.setDiscountType(getDiscountType());
+		clone._couponId = _couponId;
+		clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalCode = clone._code = _code;
+		clone._name = _name;
+		clone._description = _description;
+		clone._startDate = _startDate;
+		clone._endDate = _endDate;
+		clone._active = _active;
+		clone._limitCategories = _limitCategories;
+		clone._limitSkus = _limitSkus;
+		clone._minOrder = _minOrder;
+		clone._discount = _discount;
+		clone._discountType = _discountType;
 
 		return clone;
 	}

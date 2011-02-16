@@ -362,24 +362,24 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 	}
 
 	public Object clone() {
-		AccountImpl clone = new AccountImpl();
+		AccountModelImpl clone = new AccountImpl();
 
-		clone.setAccountId(getAccountId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setParentAccountId(getParentAccountId());
-		clone.setName(getName());
-		clone.setLegalName(getLegalName());
-		clone.setLegalId(getLegalId());
-		clone.setLegalType(getLegalType());
-		clone.setSicCode(getSicCode());
-		clone.setTickerSymbol(getTickerSymbol());
-		clone.setIndustry(getIndustry());
-		clone.setType(getType());
-		clone.setSize(getSize());
+		clone._accountId = _accountId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._parentAccountId = _parentAccountId;
+		clone._name = _name;
+		clone._legalName = _legalName;
+		clone._legalId = _legalId;
+		clone._legalType = _legalType;
+		clone._sicCode = _sicCode;
+		clone._tickerSymbol = _tickerSymbol;
+		clone._industry = _industry;
+		clone._type = _type;
+		clone._size = _size;
 
 		return clone;
 	}

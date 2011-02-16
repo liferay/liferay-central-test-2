@@ -177,12 +177,12 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 	}
 
 	public Object clone() {
-		ResourceCodeImpl clone = new ResourceCodeImpl();
+		ResourceCodeModelImpl clone = new ResourceCodeImpl();
 
-		clone.setCodeId(getCodeId());
-		clone.setCompanyId(getCompanyId());
-		clone.setName(getName());
-		clone.setScope(getScope());
+		clone._codeId = _codeId;
+		clone._originalCompanyId = clone._companyId = _companyId;
+		clone._originalName = clone._name = _name;
+		clone._originalScope = clone._scope = _scope;
 
 		return clone;
 	}

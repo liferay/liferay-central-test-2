@@ -487,31 +487,31 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	}
 
 	public Object clone() {
-		JournalFeedImpl clone = new JournalFeedImpl();
+		JournalFeedModelImpl clone = new JournalFeedImpl();
 
-		clone.setUuid(getUuid());
-		clone.setId(getId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setFeedId(getFeedId());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setType(getType());
-		clone.setStructureId(getStructureId());
-		clone.setTemplateId(getTemplateId());
-		clone.setRendererTemplateId(getRendererTemplateId());
-		clone.setDelta(getDelta());
-		clone.setOrderByCol(getOrderByCol());
-		clone.setOrderByType(getOrderByType());
-		clone.setTargetLayoutFriendlyUrl(getTargetLayoutFriendlyUrl());
-		clone.setTargetPortletId(getTargetPortletId());
-		clone.setContentField(getContentField());
-		clone.setFeedType(getFeedType());
-		clone.setFeedVersion(getFeedVersion());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._id = _id;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalFeedId = clone._feedId = _feedId;
+		clone._name = _name;
+		clone._description = _description;
+		clone._type = _type;
+		clone._structureId = _structureId;
+		clone._templateId = _templateId;
+		clone._rendererTemplateId = _rendererTemplateId;
+		clone._delta = _delta;
+		clone._orderByCol = _orderByCol;
+		clone._orderByType = _orderByType;
+		clone._targetLayoutFriendlyUrl = _targetLayoutFriendlyUrl;
+		clone._targetPortletId = _targetPortletId;
+		clone._contentField = _contentField;
+		clone._feedType = _feedType;
+		clone._feedVersion = _feedVersion;
 
 		return clone;
 	}

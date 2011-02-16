@@ -333,21 +333,21 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 	}
 
 	public Object clone() {
-		TasksProposalImpl clone = new TasksProposalImpl();
+		TasksProposalModelImpl clone = new TasksProposalImpl();
 
-		clone.setProposalId(getProposalId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setClassNameId(getClassNameId());
-		clone.setClassPK(getClassPK());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setPublishDate(getPublishDate());
-		clone.setDueDate(getDueDate());
+		clone._proposalId = _proposalId;
+		clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone._originalClassPK = clone._classPK = _classPK;
+		clone._name = _name;
+		clone._description = _description;
+		clone._publishDate = _publishDate;
+		clone._dueDate = _dueDate;
 
 		return clone;
 	}

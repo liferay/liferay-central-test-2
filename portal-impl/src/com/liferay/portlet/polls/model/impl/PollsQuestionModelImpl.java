@@ -476,20 +476,20 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 	}
 
 	public Object clone() {
-		PollsQuestionImpl clone = new PollsQuestionImpl();
+		PollsQuestionModelImpl clone = new PollsQuestionImpl();
 
-		clone.setUuid(getUuid());
-		clone.setQuestionId(getQuestionId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setTitle(getTitle());
-		clone.setDescription(getDescription());
-		clone.setExpirationDate(getExpirationDate());
-		clone.setLastVoteDate(getLastVoteDate());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._questionId = _questionId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._title = _title;
+		clone._description = _description;
+		clone._expirationDate = _expirationDate;
+		clone._lastVoteDate = _lastVoteDate;
 
 		return clone;
 	}

@@ -115,10 +115,10 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 	}
 
 	public Object clone() {
-		CounterImpl clone = new CounterImpl();
+		CounterModelImpl clone = new CounterImpl();
 
-		clone.setName(getName());
-		clone.setCurrentId(getCurrentId());
+		clone._name = _name;
+		clone._currentId = _currentId;
 
 		return clone;
 	}

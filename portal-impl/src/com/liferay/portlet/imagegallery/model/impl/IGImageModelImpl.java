@@ -368,22 +368,22 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public Object clone() {
-		IGImageImpl clone = new IGImageImpl();
+		IGImageModelImpl clone = new IGImageImpl();
 
-		clone.setUuid(getUuid());
-		clone.setImageId(getImageId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setFolderId(getFolderId());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setSmallImageId(getSmallImageId());
-		clone.setLargeImageId(getLargeImageId());
-		clone.setCustom1ImageId(getCustom1ImageId());
-		clone.setCustom2ImageId(getCustom2ImageId());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._imageId = _imageId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._folderId = _folderId;
+		clone._name = _name;
+		clone._description = _description;
+		clone._originalSmallImageId = clone._smallImageId = _smallImageId;
+		clone._originalLargeImageId = clone._largeImageId = _largeImageId;
+		clone._originalCustom1ImageId = clone._custom1ImageId = _custom1ImageId;
+		clone._originalCustom2ImageId = clone._custom2ImageId = _custom2ImageId;
 
 		return clone;
 	}

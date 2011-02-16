@@ -541,23 +541,23 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	}
 
 	public Object clone() {
-		AssetCategoryImpl clone = new AssetCategoryImpl();
+		AssetCategoryModelImpl clone = new AssetCategoryImpl();
 
-		clone.setUuid(getUuid());
-		clone.setCategoryId(getCategoryId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setParentCategoryId(getParentCategoryId());
-		clone.setLeftCategoryId(getLeftCategoryId());
-		clone.setRightCategoryId(getRightCategoryId());
-		clone.setName(getName());
-		clone.setTitle(getTitle());
-		clone.setDescription(getDescription());
-		clone.setVocabularyId(getVocabularyId());
+		clone._originalUuid = clone._uuid = _uuid;
+		clone._categoryId = _categoryId;
+		clone._originalGroupId = clone._groupId = _groupId;
+		clone._companyId = _companyId;
+		clone._userId = _userId;
+		clone._userName = _userName;
+		clone._createDate = _createDate;
+		clone._modifiedDate = _modifiedDate;
+		clone._originalParentCategoryId = clone._parentCategoryId = _parentCategoryId;
+		clone._leftCategoryId = _leftCategoryId;
+		clone._rightCategoryId = _rightCategoryId;
+		clone._originalName = clone._name = _name;
+		clone._title = _title;
+		clone._description = _description;
+		clone._originalVocabularyId = clone._vocabularyId = _vocabularyId;
 
 		return clone;
 	}

@@ -232,15 +232,15 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	}
 
 	public Object clone() {
-		ExpandoColumnImpl clone = new ExpandoColumnImpl();
+		ExpandoColumnModelImpl clone = new ExpandoColumnImpl();
 
-		clone.setColumnId(getColumnId());
-		clone.setCompanyId(getCompanyId());
-		clone.setTableId(getTableId());
-		clone.setName(getName());
-		clone.setType(getType());
-		clone.setDefaultData(getDefaultData());
-		clone.setTypeSettings(getTypeSettings());
+		clone._columnId = _columnId;
+		clone._companyId = _companyId;
+		clone._originalTableId = clone._tableId = _tableId;
+		clone._originalName = clone._name = _name;
+		clone._type = _type;
+		clone._defaultData = _defaultData;
+		clone._typeSettings = _typeSettings;
 
 		return clone;
 	}
