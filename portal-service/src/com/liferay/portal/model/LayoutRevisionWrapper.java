@@ -1185,6 +1185,77 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 		return _layoutRevision.toXmlString();
 	}
 
+	public java.util.List<com.liferay.portal.model.LayoutRevision> getChildren()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.getChildren();
+	}
+
+	public boolean hasChildren()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.hasChildren();
+	}
+
+	public com.liferay.portal.model.ColorScheme getColorScheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.getColorScheme();
+	}
+
+	public java.lang.String getCssText()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.getCssText();
+	}
+
+	public java.lang.String getHTMLTitle(java.util.Locale locale) {
+		return _layoutRevision.getHTMLTitle(locale);
+	}
+
+	public java.lang.String getHTMLTitle(java.lang.String localeLanguageId) {
+		return _layoutRevision.getHTMLTitle(localeLanguageId);
+	}
+
+	public com.liferay.portal.model.LayoutSet getLayoutSet()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.getLayoutSet();
+	}
+
+	public com.liferay.portal.model.Theme getTheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.getTheme();
+	}
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties() {
+		return _layoutRevision.getTypeSettingsProperties();
+	}
+
+	public com.liferay.portal.model.ColorScheme getWapColorScheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.getWapColorScheme();
+	}
+
+	public com.liferay.portal.model.Theme getWapTheme()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.getWapTheme();
+	}
+
+	public boolean isInheritLookAndFeel() {
+		return _layoutRevision.isInheritLookAndFeel();
+	}
+
+	public boolean isInheritWapLookAndFeel() {
+		return _layoutRevision.isInheritWapLookAndFeel();
+	}
+
+	public void setTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
+		_layoutRevision.setTypeSettingsProperties(typeSettingsProperties);
+	}
+
 	public LayoutRevision getWrappedLayoutRevision() {
 		return _layoutRevision;
 	}

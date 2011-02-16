@@ -2915,7 +2915,9 @@
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutRevisionImpl" name="LayoutRevision">
 		<table name="LayoutRevision" />
-		<attributes />
+		<attributes>
+			<transient name="typeSettingsProperties" />
+		</attributes>
 	</entity>
 	<entity class="com.liferay.portal.model.impl.LayoutSetImpl" name="LayoutSet">
 		<table name="LayoutSet" />
