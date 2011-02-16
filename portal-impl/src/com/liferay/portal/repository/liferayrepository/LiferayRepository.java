@@ -110,6 +110,7 @@ public class LiferayRepository
 	 *
 	 * @see LiferayLocalRepository#deleteAll()
 	 */
+	@SuppressWarnings("unused")
 	public void deleteAll() throws PortalException, SystemException {
 		throw new UnsupportedOperationException();
 	}
