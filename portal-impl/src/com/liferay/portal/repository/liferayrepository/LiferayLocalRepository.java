@@ -176,8 +176,8 @@ public class LiferayLocalRepository
 	public FileVersion getFileVersion(long fileVersionId)
 		throws PortalException, SystemException {
 
-		DLFileVersion dlFileVersion =
-			dlRepositoryLocalService.getFileVersion(fileVersionId);
+		DLFileVersion dlFileVersion = dlRepositoryLocalService.getFileVersion(
+			fileVersionId);
 
 		return new LiferayFileVersion(dlFileVersion);
 	}
@@ -213,8 +213,7 @@ public class LiferayLocalRepository
 		throws SystemException {
 
 		List<Object> dlFoldersAndFileEntriesAndFileShortcuts =
-			dlRepositoryLocalService.
-				getFoldersAndFileEntriesAndFileShortcuts(
+			dlRepositoryLocalService.getFoldersAndFileEntriesAndFileShortcuts(
 					getGroupId(), toFolderIds(folderIds), status, start, end);
 
 		return toFileEntriesAndFolders(dlFoldersAndFileEntriesAndFileShortcuts);

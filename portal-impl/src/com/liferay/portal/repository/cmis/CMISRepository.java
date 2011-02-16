@@ -49,6 +49,7 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
@@ -84,19 +85,17 @@ import org.apache.chemistry.opencmis.commons.enums.UnfileObject;
 import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
 
 /**
- * CMIS does not provide vendor-neutral support for workflow, metadata
- * (both custom and things like a folder's description), or tags/categories,
- * and will be ignored in this implementation.
- *
- * @see <a href="http://wiki.oasis-open.org/cmis/Candidate%20v2%20topics">
- * Candidate v2 topics</a>
- * @see <a
- * href="http://www.oasis-open.org/committees/document.php?document_id=39631">
- * CMIS Type Mutability proposal</a>
- * @see <a href="http://wiki.oasis-open.org/cmis/Mixin_Proposal">Mixin / Aspect
- * Support</a>
+ * CMIS does not provide vendor neutral support for workflow, metadata, tags,
+ * categories. They will be ignored in this implementation.
  *
  * @author Alexander Chow
+ * @see    <a href="http://wiki.oasis-open.org/cmis/Candidate%20v2%20topics">
+ *         Candidate v2 topics</a>
+ * @see    <a
+ *         href="http://www.oasis-open.org/committees/document.php?document_id=39631">
+ *         CMIS Type Mutability proposal</a>
+ * @see    <a href="http://wiki.oasis-open.org/cmis/Mixin_Proposal">Mixin /
+ *         Aspect Support</a>
  */
 public class CMISRepository extends BaseRepositoryImpl {
 
@@ -234,11 +233,17 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			session.getRootFolder().deleteTree(true, UnfileObject.DELETE, true);
+			org.apache.chemistry.opencmis.client.api.Folder rootCMISFolder =
+				session.getRootFolder();
+
+			rootCMISFolder.deleteTree(true, UnfileObject.DELETE, true);
 		}
 		catch (Exception e) {
-			String repositoryId =
-				getTypeSettingsProperties().getProperty(REPOSITORY_ID);
+			UnicodeProperties typeSettingsProperties =
+				getTypeSettingsProperties();
+
+			String repositoryId = typeSettingsProperties.getProperty(
+				REPOSITORY_ID);
 
 			_log.error(
 				"Unexpected error deleting CMIS repository " + repositoryId, e);
@@ -330,9 +335,11 @@ public class CMISRepository extends BaseRepositoryImpl {
 			fileEntriesAndFileShortcuts.addAll(fileEntries);
 		}
 
-		fileEntriesAndFileShortcuts.addAll(
+		List<DLFileShortcut> dlFileShortcuts =
 			dlAppHelperLocalService.getFileShortcuts(
-				getGroupId(), folderIds, status));
+				getGroupId(), folderIds, status);
+
+		fileEntriesAndFileShortcuts.addAll(dlFileShortcuts);
 
 		return fileEntriesAndFileShortcuts;
 	}
@@ -347,8 +354,9 @@ public class CMISRepository extends BaseRepositoryImpl {
 			count += getFileEntriesCount(folderId);
 		}
 
-		count += dlAppHelperLocalService.getFileShortcutsCount(
-			getGroupId(), folderIds, status);
+		count +=
+			dlAppHelperLocalService.getFileShortcutsCount(
+				getGroupId(), folderIds, status);
 
 		return count;
 	}
@@ -612,8 +620,9 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 		int count = getFoldersFileEntriesCount(folderIds, status);
 
-		count += dlAppHelperLocalService.getFileShortcutsCount(
-			getGroupId(), folderIds, status);
+		count +=
+			dlAppHelperLocalService.getFileShortcutsCount(
+				getGroupId(), folderIds, status);
 
 		return count;
 	}
@@ -861,31 +870,33 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			ObjectId objectId = toFolderId(session, folderId);
 
-			StringBundler sb = new StringBundler(5);
+			StringBundler sb = new StringBundler(6);
 
 			sb.append("SELECT cmis:objectId FROM ");
+
 			if (fileEntries) {
 				sb.append("cmis:document ");
 			}
 			else {
 				sb.append("cmis:folder ");
 			}
+
 			sb.append("WHERE IN_FOLDER('");
 			sb.append(objectId.getId());
 			sb.append("')");
 
-			ItemIterable<QueryResult> results = session.query(
+			ItemIterable<QueryResult> queryResults = session.query(
 				sb.toString(), false);
 
-			int count = (int)results.getTotalNumItems();
+			int count = (int)queryResults.getTotalNumItems();
 
 			if (count < 0) {
 				count = 0;
 
-				Iterator<QueryResult> iterator = results.iterator();
+				Iterator<QueryResult> itr = queryResults.iterator();
 
-				while (iterator.hasNext()) {
-					iterator.next();
+				while (itr.hasNext()) {
+					itr.next();
 
 					count++;
 				}
@@ -1217,7 +1228,6 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
 
-	private static Log _log = LogFactoryUtil.getLog(
-		CMISRepository.class);
+	private static Log _log = LogFactoryUtil.getLog(CMISRepository.class);
 
 }
