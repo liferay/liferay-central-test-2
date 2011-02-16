@@ -94,14 +94,19 @@
 
 			new A.Dialog(
 				{
+					align: {
+						node: null,
+						points: ['tc', 'tc']
+					},
 					bodyContent: contents,
-					centered: true,
 					destroyOnClose: true,
 					modal: true,
 					title: title,
 					width: 350
 				}
 			).render();
+
+			dialog.move(dialog.get('x'), dialog.get('y') + 100);
 		},
 		['aui-dialog']
 	);
@@ -117,13 +122,18 @@
 
 			var dialog = new A.Dialog(
 				{
-					centered: true,
+					align: {
+						node: null,
+						points: ['tc', 'tc']
+					},
 					destroyOnClose: true,
 					modal: true,
 					title: title,
 					width: 600
 				}
 			).render();
+
+			dialog.move(dialog.get('x'), dialog.get('y') + 100);
 
 			dialog.plug(
 				A.Plugin.IO,
