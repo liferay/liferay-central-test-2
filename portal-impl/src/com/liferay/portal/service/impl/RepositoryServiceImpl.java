@@ -387,6 +387,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				(BaseRepositoryImpl)InstanceFactory.newInstance(
 					repositoryImplClassName);
 
+			baseRepositoryImpl.setCounterLocalService(counterLocalService);
 			baseRepositoryImpl.setDLAppHelperLocalService(
 				dlAppHelperLocalService);
 			baseRepositoryImpl.setRepositoryId(repositoryId);

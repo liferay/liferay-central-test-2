@@ -14,7 +14,6 @@
 
 package com.liferay.portal.repository.cmis;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -86,16 +85,16 @@ import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
 
 /**
  * CMIS does not provide vendor neutral support for workflow, metadata, tags,
- * categories. They will be ignored in this implementation.
+ * categories, etc. They will be ignored in this implementation.
  *
  * @author Alexander Chow
  * @see    <a href="http://wiki.oasis-open.org/cmis/Candidate%20v2%20topics">
  *         Candidate v2 topics</a>
+ * @see    <a href="http://wiki.oasis-open.org/cmis/Mixin_Proposal">Mixin /
+ *         Aspect Support</a>
  * @see    <a
  *         href="http://www.oasis-open.org/committees/document.php?document_id=39631">
  *         CMIS Type Mutability proposal</a>
- * @see    <a href="http://wiki.oasis-open.org/cmis/Mixin_Proposal">Mixin /
- *         Aspect Support</a>
  */
 public class CMISRepository extends BaseRepositoryImpl {
 
@@ -1206,24 +1205,6 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 
 		return objectId;
-	}
-
-	protected long toRepositoryEntryId(String objectId) throws SystemException {
-		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByR_M(
-			getRepositoryId(), objectId);
-
-		if (repositoryEntry == null) {
-			long repositoryEntryId = CounterLocalServiceUtil.increment();
-
-			repositoryEntry = RepositoryEntryUtil.create(repositoryEntryId);
-
-			repositoryEntry.setRepositoryId(getRepositoryId());
-			repositoryEntry.setMappedId(objectId);
-
-			RepositoryEntryUtil.update(repositoryEntry, false);
-		}
-
-		return repositoryEntry.getRepositoryEntryId();
 	}
 
 	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
