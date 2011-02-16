@@ -226,28 +226,28 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 	}
 
 	public Object clone() {
-		WorkflowInstanceLinkModelImpl clone = new WorkflowInstanceLinkImpl();
+		WorkflowInstanceLinkImpl clone = new WorkflowInstanceLinkImpl();
 		WorkflowInstanceLinkModelImpl cloneModel = (WorkflowInstanceLinkModelImpl)clone;
 
-		clone._workflowInstanceLinkId = _workflowInstanceLinkId;
+		clone.setWorkflowInstanceLinkId(getWorkflowInstanceLinkId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
-		clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
-		clone._workflowInstanceId = _workflowInstanceId;
+		clone.setWorkflowInstanceId(getWorkflowInstanceId());
 
 		return clone;
 	}

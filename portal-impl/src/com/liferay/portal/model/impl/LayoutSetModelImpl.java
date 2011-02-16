@@ -339,42 +339,40 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 	}
 
 	public Object clone() {
-		LayoutSetModelImpl clone = new LayoutSetImpl();
+		LayoutSetImpl clone = new LayoutSetImpl();
 		LayoutSetModelImpl cloneModel = (LayoutSetModelImpl)clone;
 
-		clone._layoutSetId = _layoutSetId;
+		clone.setLayoutSetId(getLayoutSetId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
-
-		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
+		clone.setPrivateLayout(getPrivateLayout());
 
 		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
 		cloneModel._setOriginalPrivateLayout = false;
+		clone.setLogo(getLogo());
 
-		clone._logo = _logo;
+		clone.setLogoId(getLogoId());
 
-		clone._logoId = _logoId;
+		clone.setThemeId(getThemeId());
 
-		clone._themeId = _themeId;
+		clone.setColorSchemeId(getColorSchemeId());
 
-		clone._colorSchemeId = _colorSchemeId;
+		clone.setWapThemeId(getWapThemeId());
 
-		clone._wapThemeId = _wapThemeId;
+		clone.setWapColorSchemeId(getWapColorSchemeId());
 
-		clone._wapColorSchemeId = _wapColorSchemeId;
+		clone.setCss(getCss());
 
-		clone._css = _css;
+		clone.setPageCount(getPageCount());
 
-		clone._pageCount = _pageCount;
+		clone.setSettings(getSettings());
 
-		clone._settings = _settings;
-
-		clone._layoutSetPrototypeId = _layoutSetPrototypeId;
+		clone.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
 
 		return clone;
 	}

@@ -333,38 +333,37 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 	}
 
 	public Object clone() {
-		TasksProposalModelImpl clone = new TasksProposalImpl();
+		TasksProposalImpl clone = new TasksProposalImpl();
 		TasksProposalModelImpl cloneModel = (TasksProposalModelImpl)clone;
 
-		clone._proposalId = _proposalId;
+		clone.setProposalId(getProposalId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;
-		clone._originalClassPK = clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
 		cloneModel._originalClassPK = cloneModel._classPK;
+		clone.setName(getName());
 
-		clone._name = _name;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setPublishDate(getPublishDate());
 
-		clone._publishDate = _publishDate;
-
-		clone._dueDate = _dueDate;
+		clone.setDueDate(getDueDate());
 
 		return clone;
 	}

@@ -213,28 +213,28 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	public Object clone() {
-		SCProductScreenshotModelImpl clone = new SCProductScreenshotImpl();
+		SCProductScreenshotImpl clone = new SCProductScreenshotImpl();
 		SCProductScreenshotModelImpl cloneModel = (SCProductScreenshotModelImpl)clone;
 
-		clone._productScreenshotId = _productScreenshotId;
+		clone.setProductScreenshotId(getProductScreenshotId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._originalProductEntryId = clone._productEntryId = _productEntryId;
+		clone.setProductEntryId(getProductEntryId());
 
 		cloneModel._originalProductEntryId = cloneModel._productEntryId;
 		cloneModel._setOriginalProductEntryId = false;
-		clone._originalThumbnailId = clone._thumbnailId = _thumbnailId;
+		clone.setThumbnailId(getThumbnailId());
 
 		cloneModel._originalThumbnailId = cloneModel._thumbnailId;
 		cloneModel._setOriginalThumbnailId = false;
-		clone._originalFullImageId = clone._fullImageId = _fullImageId;
+		clone.setFullImageId(getFullImageId());
 
 		cloneModel._originalFullImageId = cloneModel._fullImageId;
 		cloneModel._setOriginalFullImageId = false;
-		clone._originalPriority = clone._priority = _priority;
+		clone.setPriority(getPriority());
 
 		cloneModel._originalPriority = cloneModel._priority;
 		cloneModel._setOriginalPriority = false;

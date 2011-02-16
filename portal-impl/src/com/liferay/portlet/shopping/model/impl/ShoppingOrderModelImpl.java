@@ -868,114 +868,112 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 	}
 
 	public Object clone() {
-		ShoppingOrderModelImpl clone = new ShoppingOrderImpl();
+		ShoppingOrderImpl clone = new ShoppingOrderImpl();
 		ShoppingOrderModelImpl cloneModel = (ShoppingOrderModelImpl)clone;
 
-		clone._orderId = _orderId;
+		clone.setOrderId(getOrderId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._originalNumber = clone._number = _number;
+		clone.setNumber(getNumber());
 
 		cloneModel._originalNumber = cloneModel._number;
+		clone.setTax(getTax());
 
-		clone._tax = _tax;
+		clone.setShipping(getShipping());
 
-		clone._shipping = _shipping;
+		clone.setAltShipping(getAltShipping());
 
-		clone._altShipping = _altShipping;
+		clone.setRequiresShipping(getRequiresShipping());
 
-		clone._requiresShipping = _requiresShipping;
+		clone.setInsure(getInsure());
 
-		clone._insure = _insure;
+		clone.setInsurance(getInsurance());
 
-		clone._insurance = _insurance;
+		clone.setCouponCodes(getCouponCodes());
 
-		clone._couponCodes = _couponCodes;
+		clone.setCouponDiscount(getCouponDiscount());
 
-		clone._couponDiscount = _couponDiscount;
+		clone.setBillingFirstName(getBillingFirstName());
 
-		clone._billingFirstName = _billingFirstName;
+		clone.setBillingLastName(getBillingLastName());
 
-		clone._billingLastName = _billingLastName;
+		clone.setBillingEmailAddress(getBillingEmailAddress());
 
-		clone._billingEmailAddress = _billingEmailAddress;
+		clone.setBillingCompany(getBillingCompany());
 
-		clone._billingCompany = _billingCompany;
+		clone.setBillingStreet(getBillingStreet());
 
-		clone._billingStreet = _billingStreet;
+		clone.setBillingCity(getBillingCity());
 
-		clone._billingCity = _billingCity;
+		clone.setBillingState(getBillingState());
 
-		clone._billingState = _billingState;
+		clone.setBillingZip(getBillingZip());
 
-		clone._billingZip = _billingZip;
+		clone.setBillingCountry(getBillingCountry());
 
-		clone._billingCountry = _billingCountry;
+		clone.setBillingPhone(getBillingPhone());
 
-		clone._billingPhone = _billingPhone;
+		clone.setShipToBilling(getShipToBilling());
 
-		clone._shipToBilling = _shipToBilling;
+		clone.setShippingFirstName(getShippingFirstName());
 
-		clone._shippingFirstName = _shippingFirstName;
+		clone.setShippingLastName(getShippingLastName());
 
-		clone._shippingLastName = _shippingLastName;
+		clone.setShippingEmailAddress(getShippingEmailAddress());
 
-		clone._shippingEmailAddress = _shippingEmailAddress;
+		clone.setShippingCompany(getShippingCompany());
 
-		clone._shippingCompany = _shippingCompany;
+		clone.setShippingStreet(getShippingStreet());
 
-		clone._shippingStreet = _shippingStreet;
+		clone.setShippingCity(getShippingCity());
 
-		clone._shippingCity = _shippingCity;
+		clone.setShippingState(getShippingState());
 
-		clone._shippingState = _shippingState;
+		clone.setShippingZip(getShippingZip());
 
-		clone._shippingZip = _shippingZip;
+		clone.setShippingCountry(getShippingCountry());
 
-		clone._shippingCountry = _shippingCountry;
+		clone.setShippingPhone(getShippingPhone());
 
-		clone._shippingPhone = _shippingPhone;
+		clone.setCcName(getCcName());
 
-		clone._ccName = _ccName;
+		clone.setCcType(getCcType());
 
-		clone._ccType = _ccType;
+		clone.setCcNumber(getCcNumber());
 
-		clone._ccNumber = _ccNumber;
+		clone.setCcExpMonth(getCcExpMonth());
 
-		clone._ccExpMonth = _ccExpMonth;
+		clone.setCcExpYear(getCcExpYear());
 
-		clone._ccExpYear = _ccExpYear;
+		clone.setCcVerNumber(getCcVerNumber());
 
-		clone._ccVerNumber = _ccVerNumber;
+		clone.setComments(getComments());
 
-		clone._comments = _comments;
-
-		clone._originalPpTxnId = clone._ppTxnId = _ppTxnId;
+		clone.setPpTxnId(getPpTxnId());
 
 		cloneModel._originalPpTxnId = cloneModel._ppTxnId;
+		clone.setPpPaymentStatus(getPpPaymentStatus());
 
-		clone._ppPaymentStatus = _ppPaymentStatus;
+		clone.setPpPaymentGross(getPpPaymentGross());
 
-		clone._ppPaymentGross = _ppPaymentGross;
+		clone.setPpReceiverEmail(getPpReceiverEmail());
 
-		clone._ppReceiverEmail = _ppReceiverEmail;
+		clone.setPpPayerEmail(getPpPayerEmail());
 
-		clone._ppPayerEmail = _ppPayerEmail;
+		clone.setSendOrderEmail(getSendOrderEmail());
 
-		clone._sendOrderEmail = _sendOrderEmail;
-
-		clone._sendShippingEmail = _sendShippingEmail;
+		clone.setSendShippingEmail(getSendShippingEmail());
 
 		return clone;
 	}

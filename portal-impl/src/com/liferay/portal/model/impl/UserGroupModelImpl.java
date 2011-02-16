@@ -233,23 +233,21 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	}
 
 	public Object clone() {
-		UserGroupModelImpl clone = new UserGroupImpl();
+		UserGroupImpl clone = new UserGroupImpl();
 		UserGroupModelImpl cloneModel = (UserGroupModelImpl)clone;
 
-		clone._userGroupId = _userGroupId;
+		clone.setUserGroupId(getUserGroupId());
 
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
+		clone.setParentUserGroupId(getParentUserGroupId());
 
-		clone._parentUserGroupId = _parentUserGroupId;
-
-		clone._originalName = clone._name = _name;
+		clone.setName(getName());
 
 		cloneModel._originalName = cloneModel._name;
-
-		clone._description = _description;
+		clone.setDescription(getDescription());
 
 		return clone;
 	}

@@ -287,30 +287,30 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	}
 
 	public Object clone() {
-		WebsiteModelImpl clone = new WebsiteImpl();
+		WebsiteImpl clone = new WebsiteImpl();
 		WebsiteModelImpl cloneModel = (WebsiteModelImpl)clone;
 
-		clone._websiteId = _websiteId;
+		clone.setWebsiteId(getWebsiteId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
-		clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
-		clone._url = _url;
+		clone.setUrl(getUrl());
 
-		clone._typeId = _typeId;
+		clone.setTypeId(getTypeId());
 
-		clone._primary = _primary;
+		clone.setPrimary(getPrimary());
 
 		return clone;
 	}

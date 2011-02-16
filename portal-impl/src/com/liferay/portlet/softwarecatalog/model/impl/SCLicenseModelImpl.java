@@ -238,20 +238,20 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	}
 
 	public Object clone() {
-		SCLicenseModelImpl clone = new SCLicenseImpl();
+		SCLicenseImpl clone = new SCLicenseImpl();
 		SCLicenseModelImpl cloneModel = (SCLicenseModelImpl)clone;
 
-		clone._licenseId = _licenseId;
+		clone.setLicenseId(getLicenseId());
 
-		clone._name = _name;
+		clone.setName(getName());
 
-		clone._url = _url;
+		clone.setUrl(getUrl());
 
-		clone._openSource = _openSource;
+		clone.setOpenSource(getOpenSource());
 
-		clone._active = _active;
+		clone.setActive(getActive());
 
-		clone._recommended = _recommended;
+		clone.setRecommended(getRecommended());
 
 		return clone;
 	}

@@ -196,24 +196,23 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	}
 
 	public Object clone() {
-		TicketModelImpl clone = new TicketImpl();
+		TicketImpl clone = new TicketImpl();
 		TicketModelImpl cloneModel = (TicketModelImpl)clone;
 
-		clone._ticketId = _ticketId;
+		clone.setTicketId(getTicketId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
-		clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
-		clone._originalKey = clone._key = _key;
+		clone.setKey(getKey());
 
 		cloneModel._originalKey = cloneModel._key;
-
-		clone._expirationDate = _expirationDate;
+		clone.setExpirationDate(getExpirationDate());
 
 		return clone;
 	}

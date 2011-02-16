@@ -290,33 +290,31 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	}
 
 	public Object clone() {
-		BookmarksFolderModelImpl clone = new BookmarksFolderImpl();
+		BookmarksFolderImpl clone = new BookmarksFolderImpl();
 		BookmarksFolderModelImpl cloneModel = (BookmarksFolderModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setFolderId(getFolderId());
 
-		clone._folderId = _folderId;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setParentFolderId(getParentFolderId());
 
-		clone._parentFolderId = _parentFolderId;
+		clone.setName(getName());
 
-		clone._name = _name;
-
-		clone._description = _description;
+		clone.setDescription(getDescription());
 
 		return clone;
 	}

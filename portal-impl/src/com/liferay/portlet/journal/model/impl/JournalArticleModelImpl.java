@@ -603,75 +603,72 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public Object clone() {
-		JournalArticleModelImpl clone = new JournalArticleImpl();
+		JournalArticleImpl clone = new JournalArticleImpl();
 		JournalArticleModelImpl cloneModel = (JournalArticleModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setId(getId());
 
-		clone._id = _id;
+		clone.setResourcePrimKey(getResourcePrimKey());
 
-		clone._resourcePrimKey = _resourcePrimKey;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalArticleId = clone._articleId = _articleId;
+		clone.setArticleId(getArticleId());
 
 		cloneModel._originalArticleId = cloneModel._articleId;
-		clone._originalVersion = clone._version = _version;
+		clone.setVersion(getVersion());
 
 		cloneModel._originalVersion = cloneModel._version;
 		cloneModel._setOriginalVersion = false;
+		clone.setTitle(getTitle());
 
-		clone._title = _title;
+		clone.setUrlTitle(getUrlTitle());
 
-		clone._urlTitle = _urlTitle;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setContent(getContent());
 
-		clone._content = _content;
+		clone.setType(getType());
 
-		clone._type = _type;
+		clone.setStructureId(getStructureId());
 
-		clone._structureId = _structureId;
+		clone.setTemplateId(getTemplateId());
 
-		clone._templateId = _templateId;
+		clone.setDisplayDate(getDisplayDate());
 
-		clone._displayDate = _displayDate;
+		clone.setExpirationDate(getExpirationDate());
 
-		clone._expirationDate = _expirationDate;
+		clone.setReviewDate(getReviewDate());
 
-		clone._reviewDate = _reviewDate;
+		clone.setIndexable(getIndexable());
 
-		clone._indexable = _indexable;
+		clone.setSmallImage(getSmallImage());
 
-		clone._smallImage = _smallImage;
+		clone.setSmallImageId(getSmallImageId());
 
-		clone._smallImageId = _smallImageId;
+		clone.setSmallImageURL(getSmallImageURL());
 
-		clone._smallImageURL = _smallImageURL;
+		clone.setStatus(getStatus());
 
-		clone._status = _status;
+		clone.setStatusByUserId(getStatusByUserId());
 
-		clone._statusByUserId = _statusByUserId;
+		clone.setStatusByUserName(getStatusByUserName());
 
-		clone._statusByUserName = _statusByUserName;
-
-		clone._statusDate = _statusDate;
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}

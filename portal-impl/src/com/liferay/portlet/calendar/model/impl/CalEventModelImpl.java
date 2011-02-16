@@ -451,59 +451,57 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	}
 
 	public Object clone() {
-		CalEventModelImpl clone = new CalEventImpl();
+		CalEventImpl clone = new CalEventImpl();
 		CalEventModelImpl cloneModel = (CalEventModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setEventId(getEventId());
 
-		clone._eventId = _eventId;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setTitle(getTitle());
 
-		clone._title = _title;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setLocation(getLocation());
 
-		clone._location = _location;
+		clone.setStartDate(getStartDate());
 
-		clone._startDate = _startDate;
+		clone.setEndDate(getEndDate());
 
-		clone._endDate = _endDate;
+		clone.setDurationHour(getDurationHour());
 
-		clone._durationHour = _durationHour;
+		clone.setDurationMinute(getDurationMinute());
 
-		clone._durationMinute = _durationMinute;
+		clone.setAllDay(getAllDay());
 
-		clone._allDay = _allDay;
+		clone.setTimeZoneSensitive(getTimeZoneSensitive());
 
-		clone._timeZoneSensitive = _timeZoneSensitive;
+		clone.setType(getType());
 
-		clone._type = _type;
+		clone.setRepeating(getRepeating());
 
-		clone._repeating = _repeating;
+		clone.setRecurrence(getRecurrence());
 
-		clone._recurrence = _recurrence;
+		clone.setRemindBy(getRemindBy());
 
-		clone._remindBy = _remindBy;
+		clone.setFirstReminder(getFirstReminder());
 
-		clone._firstReminder = _firstReminder;
-
-		clone._secondReminder = _secondReminder;
+		clone.setSecondReminder(getSecondReminder());
 
 		return clone;
 	}

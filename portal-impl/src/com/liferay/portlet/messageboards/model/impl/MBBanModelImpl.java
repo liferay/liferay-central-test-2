@@ -265,27 +265,26 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	}
 
 	public Object clone() {
-		MBBanModelImpl clone = new MBBanImpl();
+		MBBanImpl clone = new MBBanImpl();
 		MBBanModelImpl cloneModel = (MBBanModelImpl)clone;
 
-		clone._banId = _banId;
+		clone.setBanId(getBanId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalBanUserId = clone._banUserId = _banUserId;
+		clone.setBanUserId(getBanUserId());
 
 		cloneModel._originalBanUserId = cloneModel._banUserId;
 		cloneModel._setOriginalBanUserId = false;

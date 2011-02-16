@@ -272,28 +272,28 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	}
 
 	public Object clone() {
-		ShoppingCategoryModelImpl clone = new ShoppingCategoryImpl();
+		ShoppingCategoryImpl clone = new ShoppingCategoryImpl();
 		ShoppingCategoryModelImpl cloneModel = (ShoppingCategoryModelImpl)clone;
 
-		clone._categoryId = _categoryId;
+		clone.setCategoryId(getCategoryId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._parentCategoryId = _parentCategoryId;
+		clone.setParentCategoryId(getParentCategoryId());
 
-		clone._name = _name;
+		clone.setName(getName());
 
-		clone._description = _description;
+		clone.setDescription(getDescription());
 
 		return clone;
 	}

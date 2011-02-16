@@ -269,33 +269,32 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	}
 
 	public Object clone() {
-		PortletItemModelImpl clone = new PortletItemImpl();
+		PortletItemImpl clone = new PortletItemImpl();
 		PortletItemModelImpl cloneModel = (PortletItemModelImpl)clone;
 
-		clone._portletItemId = _portletItemId;
+		clone.setPortletItemId(getPortletItemId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalName = clone._name = _name;
+		clone.setName(getName());
 
 		cloneModel._originalName = cloneModel._name;
-		clone._originalPortletId = clone._portletId = _portletId;
+		clone.setPortletId(getPortletId());
 
 		cloneModel._originalPortletId = cloneModel._portletId;
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;

@@ -551,68 +551,68 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	}
 
 	public Object clone() {
-		ContactModelImpl clone = new ContactImpl();
+		ContactImpl clone = new ContactImpl();
 		ContactModelImpl cloneModel = (ContactModelImpl)clone;
 
-		clone._contactId = _contactId;
+		clone.setContactId(getContactId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._accountId = _accountId;
+		clone.setAccountId(getAccountId());
 
-		clone._parentContactId = _parentContactId;
+		clone.setParentContactId(getParentContactId());
 
-		clone._firstName = _firstName;
+		clone.setFirstName(getFirstName());
 
-		clone._middleName = _middleName;
+		clone.setMiddleName(getMiddleName());
 
-		clone._lastName = _lastName;
+		clone.setLastName(getLastName());
 
-		clone._prefixId = _prefixId;
+		clone.setPrefixId(getPrefixId());
 
-		clone._suffixId = _suffixId;
+		clone.setSuffixId(getSuffixId());
 
-		clone._male = _male;
+		clone.setMale(getMale());
 
-		clone._birthday = _birthday;
+		clone.setBirthday(getBirthday());
 
-		clone._smsSn = _smsSn;
+		clone.setSmsSn(getSmsSn());
 
-		clone._aimSn = _aimSn;
+		clone.setAimSn(getAimSn());
 
-		clone._facebookSn = _facebookSn;
+		clone.setFacebookSn(getFacebookSn());
 
-		clone._icqSn = _icqSn;
+		clone.setIcqSn(getIcqSn());
 
-		clone._jabberSn = _jabberSn;
+		clone.setJabberSn(getJabberSn());
 
-		clone._msnSn = _msnSn;
+		clone.setMsnSn(getMsnSn());
 
-		clone._mySpaceSn = _mySpaceSn;
+		clone.setMySpaceSn(getMySpaceSn());
 
-		clone._skypeSn = _skypeSn;
+		clone.setSkypeSn(getSkypeSn());
 
-		clone._twitterSn = _twitterSn;
+		clone.setTwitterSn(getTwitterSn());
 
-		clone._ymSn = _ymSn;
+		clone.setYmSn(getYmSn());
 
-		clone._employeeStatusId = _employeeStatusId;
+		clone.setEmployeeStatusId(getEmployeeStatusId());
 
-		clone._employeeNumber = _employeeNumber;
+		clone.setEmployeeNumber(getEmployeeNumber());
 
-		clone._jobTitle = _jobTitle;
+		clone.setJobTitle(getJobTitle());
 
-		clone._jobClass = _jobClass;
+		clone.setJobClass(getJobClass());
 
-		clone._hoursOfOperation = _hoursOfOperation;
+		clone.setHoursOfOperation(getHoursOfOperation());
 
 		return clone;
 	}

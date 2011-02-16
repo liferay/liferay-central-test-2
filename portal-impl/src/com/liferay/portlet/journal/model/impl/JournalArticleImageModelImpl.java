@@ -257,33 +257,32 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public Object clone() {
-		JournalArticleImageModelImpl clone = new JournalArticleImageImpl();
+		JournalArticleImageImpl clone = new JournalArticleImageImpl();
 		JournalArticleImageModelImpl cloneModel = (JournalArticleImageModelImpl)clone;
 
-		clone._articleImageId = _articleImageId;
+		clone.setArticleImageId(getArticleImageId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
-		clone._originalArticleId = clone._articleId = _articleId;
+		clone.setArticleId(getArticleId());
 
 		cloneModel._originalArticleId = cloneModel._articleId;
-		clone._originalVersion = clone._version = _version;
+		clone.setVersion(getVersion());
 
 		cloneModel._originalVersion = cloneModel._version;
 		cloneModel._setOriginalVersion = false;
-		clone._originalElInstanceId = clone._elInstanceId = _elInstanceId;
+		clone.setElInstanceId(getElInstanceId());
 
 		cloneModel._originalElInstanceId = cloneModel._elInstanceId;
-		clone._originalElName = clone._elName = _elName;
+		clone.setElName(getElName());
 
 		cloneModel._originalElName = cloneModel._elName;
-		clone._originalLanguageId = clone._languageId = _languageId;
+		clone.setLanguageId(getLanguageId());
 
 		cloneModel._originalLanguageId = cloneModel._languageId;
-
-		clone._tempImage = _tempImage;
+		clone.setTempImage(getTempImage());
 
 		return clone;
 	}

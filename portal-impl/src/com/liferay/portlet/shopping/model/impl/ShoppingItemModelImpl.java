@@ -625,90 +625,85 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 	}
 
 	public Object clone() {
-		ShoppingItemModelImpl clone = new ShoppingItemImpl();
+		ShoppingItemImpl clone = new ShoppingItemImpl();
 		ShoppingItemModelImpl cloneModel = (ShoppingItemModelImpl)clone;
 
-		clone._itemId = _itemId;
+		clone.setItemId(getItemId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setCategoryId(getCategoryId());
 
-		clone._categoryId = _categoryId;
-
-		clone._originalSku = clone._sku = _sku;
+		clone.setSku(getSku());
 
 		cloneModel._originalSku = cloneModel._sku;
+		clone.setName(getName());
 
-		clone._name = _name;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setProperties(getProperties());
 
-		clone._properties = _properties;
+		clone.setFields(getFields());
 
-		clone._fields = _fields;
+		clone.setFieldsQuantities(getFieldsQuantities());
 
-		clone._fieldsQuantities = _fieldsQuantities;
+		clone.setMinQuantity(getMinQuantity());
 
-		clone._minQuantity = _minQuantity;
+		clone.setMaxQuantity(getMaxQuantity());
 
-		clone._maxQuantity = _maxQuantity;
+		clone.setPrice(getPrice());
 
-		clone._price = _price;
+		clone.setDiscount(getDiscount());
 
-		clone._discount = _discount;
+		clone.setTaxable(getTaxable());
 
-		clone._taxable = _taxable;
+		clone.setShipping(getShipping());
 
-		clone._shipping = _shipping;
+		clone.setUseShippingFormula(getUseShippingFormula());
 
-		clone._useShippingFormula = _useShippingFormula;
+		clone.setRequiresShipping(getRequiresShipping());
 
-		clone._requiresShipping = _requiresShipping;
+		clone.setStockQuantity(getStockQuantity());
 
-		clone._stockQuantity = _stockQuantity;
+		clone.setFeatured(getFeatured());
 
-		clone._featured = _featured;
+		clone.setSale(getSale());
 
-		clone._sale = _sale;
+		clone.setSmallImage(getSmallImage());
 
-		clone._smallImage = _smallImage;
-
-		clone._originalSmallImageId = clone._smallImageId = _smallImageId;
+		clone.setSmallImageId(getSmallImageId());
 
 		cloneModel._originalSmallImageId = cloneModel._smallImageId;
 		cloneModel._setOriginalSmallImageId = false;
+		clone.setSmallImageURL(getSmallImageURL());
 
-		clone._smallImageURL = _smallImageURL;
+		clone.setMediumImage(getMediumImage());
 
-		clone._mediumImage = _mediumImage;
-
-		clone._originalMediumImageId = clone._mediumImageId = _mediumImageId;
+		clone.setMediumImageId(getMediumImageId());
 
 		cloneModel._originalMediumImageId = cloneModel._mediumImageId;
 		cloneModel._setOriginalMediumImageId = false;
+		clone.setMediumImageURL(getMediumImageURL());
 
-		clone._mediumImageURL = _mediumImageURL;
+		clone.setLargeImage(getLargeImage());
 
-		clone._largeImage = _largeImage;
-
-		clone._originalLargeImageId = clone._largeImageId = _largeImageId;
+		clone.setLargeImageId(getLargeImageId());
 
 		cloneModel._originalLargeImageId = cloneModel._largeImageId;
 		cloneModel._setOriginalLargeImageId = false;
-
-		clone._largeImageURL = _largeImageURL;
+		clone.setLargeImageURL(getLargeImageURL());
 
 		return clone;
 	}

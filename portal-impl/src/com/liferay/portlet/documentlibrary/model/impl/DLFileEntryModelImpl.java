@@ -401,59 +401,55 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public Object clone() {
-		DLFileEntryModelImpl clone = new DLFileEntryImpl();
+		DLFileEntryImpl clone = new DLFileEntryImpl();
 		DLFileEntryModelImpl cloneModel = (DLFileEntryModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setFileEntryId(getFileEntryId());
 
-		clone._fileEntryId = _fileEntryId;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setVersionUserId(getVersionUserId());
 
-		clone._versionUserId = _versionUserId;
+		clone.setVersionUserName(getVersionUserName());
 
-		clone._versionUserName = _versionUserName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setRepositoryId(getRepositoryId());
 
-		clone._repositoryId = _repositoryId;
-
-		clone._originalFolderId = clone._folderId = _folderId;
+		clone.setFolderId(getFolderId());
 
 		cloneModel._originalFolderId = cloneModel._folderId;
 		cloneModel._setOriginalFolderId = false;
-		clone._originalName = clone._name = _name;
+		clone.setName(getName());
 
 		cloneModel._originalName = cloneModel._name;
+		clone.setExtension(getExtension());
 
-		clone._extension = _extension;
-
-		clone._originalTitle = clone._title = _title;
+		clone.setTitle(getTitle());
 
 		cloneModel._originalTitle = cloneModel._title;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setExtraSettings(getExtraSettings());
 
-		clone._extraSettings = _extraSettings;
+		clone.setVersion(getVersion());
 
-		clone._version = _version;
+		clone.setSize(getSize());
 
-		clone._size = _size;
-
-		clone._readCount = _readCount;
+		clone.setReadCount(getReadCount());
 
 		return clone;
 	}

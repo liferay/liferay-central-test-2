@@ -547,67 +547,64 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public Object clone() {
-		WikiPageModelImpl clone = new WikiPageImpl();
+		WikiPageImpl clone = new WikiPageImpl();
 		WikiPageModelImpl cloneModel = (WikiPageModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setPageId(getPageId());
 
-		clone._pageId = _pageId;
-
-		clone._originalResourcePrimKey = clone._resourcePrimKey = _resourcePrimKey;
+		clone.setResourcePrimKey(getResourcePrimKey());
 
 		cloneModel._originalResourcePrimKey = cloneModel._resourcePrimKey;
 		cloneModel._setOriginalResourcePrimKey = false;
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalNodeId = clone._nodeId = _nodeId;
+		clone.setNodeId(getNodeId());
 
 		cloneModel._originalNodeId = cloneModel._nodeId;
 		cloneModel._setOriginalNodeId = false;
-		clone._originalTitle = clone._title = _title;
+		clone.setTitle(getTitle());
 
 		cloneModel._originalTitle = cloneModel._title;
-		clone._originalVersion = clone._version = _version;
+		clone.setVersion(getVersion());
 
 		cloneModel._originalVersion = cloneModel._version;
 		cloneModel._setOriginalVersion = false;
+		clone.setMinorEdit(getMinorEdit());
 
-		clone._minorEdit = _minorEdit;
+		clone.setContent(getContent());
 
-		clone._content = _content;
+		clone.setSummary(getSummary());
 
-		clone._summary = _summary;
+		clone.setFormat(getFormat());
 
-		clone._format = _format;
+		clone.setHead(getHead());
 
-		clone._head = _head;
+		clone.setParentTitle(getParentTitle());
 
-		clone._parentTitle = _parentTitle;
+		clone.setRedirectTitle(getRedirectTitle());
 
-		clone._redirectTitle = _redirectTitle;
+		clone.setStatus(getStatus());
 
-		clone._status = _status;
+		clone.setStatusByUserId(getStatusByUserId());
 
-		clone._statusByUserId = _statusByUserId;
+		clone.setStatusByUserName(getStatusByUserName());
 
-		clone._statusByUserName = _statusByUserName;
-
-		clone._statusDate = _statusDate;
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}

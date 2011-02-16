@@ -384,46 +384,45 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 	}
 
 	public Object clone() {
-		ShoppingCouponModelImpl clone = new ShoppingCouponImpl();
+		ShoppingCouponImpl clone = new ShoppingCouponImpl();
 		ShoppingCouponModelImpl cloneModel = (ShoppingCouponModelImpl)clone;
 
-		clone._couponId = _couponId;
+		clone.setCouponId(getCouponId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._originalCode = clone._code = _code;
+		clone.setCode(getCode());
 
 		cloneModel._originalCode = cloneModel._code;
+		clone.setName(getName());
 
-		clone._name = _name;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setStartDate(getStartDate());
 
-		clone._startDate = _startDate;
+		clone.setEndDate(getEndDate());
 
-		clone._endDate = _endDate;
+		clone.setActive(getActive());
 
-		clone._active = _active;
+		clone.setLimitCategories(getLimitCategories());
 
-		clone._limitCategories = _limitCategories;
+		clone.setLimitSkus(getLimitSkus());
 
-		clone._limitSkus = _limitSkus;
+		clone.setMinOrder(getMinOrder());
 
-		clone._minOrder = _minOrder;
+		clone.setDiscount(getDiscount());
 
-		clone._discount = _discount;
-
-		clone._discountType = _discountType;
+		clone.setDiscountType(getDiscountType());
 
 		return clone;
 	}

@@ -263,34 +263,32 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	public Object clone() {
-		ExpandoValueModelImpl clone = new ExpandoValueImpl();
+		ExpandoValueImpl clone = new ExpandoValueImpl();
 		ExpandoValueModelImpl cloneModel = (ExpandoValueModelImpl)clone;
 
-		clone._valueId = _valueId;
+		clone.setValueId(getValueId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._originalTableId = clone._tableId = _tableId;
+		clone.setTableId(getTableId());
 
 		cloneModel._originalTableId = cloneModel._tableId;
 		cloneModel._setOriginalTableId = false;
-		clone._originalColumnId = clone._columnId = _columnId;
+		clone.setColumnId(getColumnId());
 
 		cloneModel._originalColumnId = cloneModel._columnId;
 		cloneModel._setOriginalColumnId = false;
-		clone._originalRowId = clone._rowId = _rowId;
+		clone.setRowId(getRowId());
 
 		cloneModel._originalRowId = cloneModel._rowId;
 		cloneModel._setOriginalRowId = false;
+		clone.setClassNameId(getClassNameId());
 
-		clone._classNameId = _classNameId;
-
-		clone._originalClassPK = clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
 		cloneModel._originalClassPK = cloneModel._classPK;
 		cloneModel._setOriginalClassPK = false;
-
-		clone._data = _data;
+		clone.setData(getData());
 
 		return clone;
 	}

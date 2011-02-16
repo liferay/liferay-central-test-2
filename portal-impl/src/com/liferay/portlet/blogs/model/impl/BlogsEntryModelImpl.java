@@ -523,61 +523,58 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	public Object clone() {
-		BlogsEntryModelImpl clone = new BlogsEntryImpl();
+		BlogsEntryImpl clone = new BlogsEntryImpl();
 		BlogsEntryModelImpl cloneModel = (BlogsEntryModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setEntryId(getEntryId());
 
-		clone._entryId = _entryId;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setTitle(getTitle());
 
-		clone._title = _title;
-
-		clone._originalUrlTitle = clone._urlTitle = _urlTitle;
+		clone.setUrlTitle(getUrlTitle());
 
 		cloneModel._originalUrlTitle = cloneModel._urlTitle;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setContent(getContent());
 
-		clone._content = _content;
+		clone.setDisplayDate(getDisplayDate());
 
-		clone._displayDate = _displayDate;
+		clone.setAllowPingbacks(getAllowPingbacks());
 
-		clone._allowPingbacks = _allowPingbacks;
+		clone.setAllowTrackbacks(getAllowTrackbacks());
 
-		clone._allowTrackbacks = _allowTrackbacks;
+		clone.setTrackbacks(getTrackbacks());
 
-		clone._trackbacks = _trackbacks;
+		clone.setSmallImage(getSmallImage());
 
-		clone._smallImage = _smallImage;
+		clone.setSmallImageId(getSmallImageId());
 
-		clone._smallImageId = _smallImageId;
+		clone.setSmallImageURL(getSmallImageURL());
 
-		clone._smallImageURL = _smallImageURL;
+		clone.setStatus(getStatus());
 
-		clone._status = _status;
+		clone.setStatusByUserId(getStatusByUserId());
 
-		clone._statusByUserId = _statusByUserId;
+		clone.setStatusByUserName(getStatusByUserName());
 
-		clone._statusByUserName = _statusByUserName;
-
-		clone._statusDate = _statusDate;
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}

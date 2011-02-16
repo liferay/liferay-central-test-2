@@ -260,36 +260,34 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	}
 
 	public Object clone() {
-		WorkflowDefinitionLinkModelImpl clone = new WorkflowDefinitionLinkImpl();
+		WorkflowDefinitionLinkImpl clone = new WorkflowDefinitionLinkImpl();
 		WorkflowDefinitionLinkModelImpl cloneModel = (WorkflowDefinitionLinkModelImpl)clone;
 
-		clone._workflowDefinitionLinkId = _workflowDefinitionLinkId;
+		clone.setWorkflowDefinitionLinkId(getWorkflowDefinitionLinkId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;
+		clone.setWorkflowDefinitionName(getWorkflowDefinitionName());
 
-		clone._workflowDefinitionName = _workflowDefinitionName;
-
-		clone._workflowDefinitionVersion = _workflowDefinitionVersion;
+		clone.setWorkflowDefinitionVersion(getWorkflowDefinitionVersion());
 
 		return clone;
 	}

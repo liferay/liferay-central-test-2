@@ -237,23 +237,22 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public Object clone() {
-		AnnouncementsFlagModelImpl clone = new AnnouncementsFlagImpl();
+		AnnouncementsFlagImpl clone = new AnnouncementsFlagImpl();
 		AnnouncementsFlagModelImpl cloneModel = (AnnouncementsFlagModelImpl)clone;
 
-		clone._flagId = _flagId;
+		clone.setFlagId(getFlagId());
 
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
-
-		clone._originalEntryId = clone._entryId = _entryId;
+		clone.setEntryId(getEntryId());
 
 		cloneModel._originalEntryId = cloneModel._entryId;
 		cloneModel._setOriginalEntryId = false;
-		clone._originalValue = clone._value = _value;
+		clone.setValue(getValue());
 
 		cloneModel._originalValue = cloneModel._value;
 		cloneModel._setOriginalValue = false;

@@ -386,41 +386,41 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	}
 
 	public Object clone() {
-		SCProductEntryModelImpl clone = new SCProductEntryImpl();
+		SCProductEntryImpl clone = new SCProductEntryImpl();
 		SCProductEntryModelImpl cloneModel = (SCProductEntryModelImpl)clone;
 
-		clone._productEntryId = _productEntryId;
+		clone.setProductEntryId(getProductEntryId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._name = _name;
+		clone.setName(getName());
 
-		clone._type = _type;
+		clone.setType(getType());
 
-		clone._tags = _tags;
+		clone.setTags(getTags());
 
-		clone._shortDescription = _shortDescription;
+		clone.setShortDescription(getShortDescription());
 
-		clone._longDescription = _longDescription;
+		clone.setLongDescription(getLongDescription());
 
-		clone._pageURL = _pageURL;
+		clone.setPageURL(getPageURL());
 
-		clone._author = _author;
+		clone.setAuthor(getAuthor());
 
-		clone._originalRepoGroupId = clone._repoGroupId = _repoGroupId;
+		clone.setRepoGroupId(getRepoGroupId());
 
 		cloneModel._originalRepoGroupId = cloneModel._repoGroupId;
-		clone._originalRepoArtifactId = clone._repoArtifactId = _repoArtifactId;
+		clone.setRepoArtifactId(getRepoArtifactId());
 
 		cloneModel._originalRepoArtifactId = cloneModel._repoArtifactId;
 

@@ -255,38 +255,35 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 	}
 
 	public Object clone() {
-		SocialEquitySettingModelImpl clone = new SocialEquitySettingImpl();
+		SocialEquitySettingImpl clone = new SocialEquitySettingImpl();
 		SocialEquitySettingModelImpl cloneModel = (SocialEquitySettingModelImpl)clone;
 
-		clone._equitySettingId = _equitySettingId;
+		clone.setEquitySettingId(getEquitySettingId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
-
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;
-		clone._originalActionId = clone._actionId = _actionId;
+		clone.setActionId(getActionId());
 
 		cloneModel._originalActionId = cloneModel._actionId;
+		clone.setDailyLimit(getDailyLimit());
 
-		clone._dailyLimit = _dailyLimit;
+		clone.setLifespan(getLifespan());
 
-		clone._lifespan = _lifespan;
-
-		clone._originalType = clone._type = _type;
+		clone.setType(getType());
 
 		cloneModel._originalType = cloneModel._type;
 		cloneModel._setOriginalType = false;
+		clone.setUniqueEntry(getUniqueEntry());
 
-		clone._uniqueEntry = _uniqueEntry;
-
-		clone._value = _value;
+		clone.setValue(getValue());
 
 		return clone;
 	}

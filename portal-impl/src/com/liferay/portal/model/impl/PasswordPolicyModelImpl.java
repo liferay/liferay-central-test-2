@@ -552,79 +552,77 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	}
 
 	public Object clone() {
-		PasswordPolicyModelImpl clone = new PasswordPolicyImpl();
+		PasswordPolicyImpl clone = new PasswordPolicyImpl();
 		PasswordPolicyModelImpl cloneModel = (PasswordPolicyModelImpl)clone;
 
-		clone._passwordPolicyId = _passwordPolicyId;
+		clone.setPasswordPolicyId(getPasswordPolicyId());
 
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalDefaultPolicy = clone._defaultPolicy = _defaultPolicy;
+		clone.setDefaultPolicy(getDefaultPolicy());
 
 		cloneModel._originalDefaultPolicy = cloneModel._defaultPolicy;
 		cloneModel._setOriginalDefaultPolicy = false;
-		clone._originalName = clone._name = _name;
+		clone.setName(getName());
 
 		cloneModel._originalName = cloneModel._name;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setChangeable(getChangeable());
 
-		clone._changeable = _changeable;
+		clone.setChangeRequired(getChangeRequired());
 
-		clone._changeRequired = _changeRequired;
+		clone.setMinAge(getMinAge());
 
-		clone._minAge = _minAge;
+		clone.setCheckSyntax(getCheckSyntax());
 
-		clone._checkSyntax = _checkSyntax;
+		clone.setAllowDictionaryWords(getAllowDictionaryWords());
 
-		clone._allowDictionaryWords = _allowDictionaryWords;
+		clone.setMinAlphanumeric(getMinAlphanumeric());
 
-		clone._minAlphanumeric = _minAlphanumeric;
+		clone.setMinLength(getMinLength());
 
-		clone._minLength = _minLength;
+		clone.setMinLowerCase(getMinLowerCase());
 
-		clone._minLowerCase = _minLowerCase;
+		clone.setMinNumbers(getMinNumbers());
 
-		clone._minNumbers = _minNumbers;
+		clone.setMinSymbols(getMinSymbols());
 
-		clone._minSymbols = _minSymbols;
+		clone.setMinUpperCase(getMinUpperCase());
 
-		clone._minUpperCase = _minUpperCase;
+		clone.setHistory(getHistory());
 
-		clone._history = _history;
+		clone.setHistoryCount(getHistoryCount());
 
-		clone._historyCount = _historyCount;
+		clone.setExpireable(getExpireable());
 
-		clone._expireable = _expireable;
+		clone.setMaxAge(getMaxAge());
 
-		clone._maxAge = _maxAge;
+		clone.setWarningTime(getWarningTime());
 
-		clone._warningTime = _warningTime;
+		clone.setGraceLimit(getGraceLimit());
 
-		clone._graceLimit = _graceLimit;
+		clone.setLockout(getLockout());
 
-		clone._lockout = _lockout;
+		clone.setMaxFailure(getMaxFailure());
 
-		clone._maxFailure = _maxFailure;
+		clone.setLockoutDuration(getLockoutDuration());
 
-		clone._lockoutDuration = _lockoutDuration;
+		clone.setRequireUnlock(getRequireUnlock());
 
-		clone._requireUnlock = _requireUnlock;
+		clone.setResetFailureCount(getResetFailureCount());
 
-		clone._resetFailureCount = _resetFailureCount;
-
-		clone._resetTicketMaxAge = _resetTicketMaxAge;
+		clone.setResetTicketMaxAge(getResetTicketMaxAge());
 
 		return clone;
 	}

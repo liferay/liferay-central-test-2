@@ -281,33 +281,30 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	}
 
 	public Object clone() {
-		CompanyModelImpl clone = new CompanyImpl();
+		CompanyImpl clone = new CompanyImpl();
 		CompanyModelImpl cloneModel = (CompanyModelImpl)clone;
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._accountId = _accountId;
+		clone.setAccountId(getAccountId());
 
-		clone._originalWebId = clone._webId = _webId;
+		clone.setWebId(getWebId());
 
 		cloneModel._originalWebId = cloneModel._webId;
+		clone.setKey(getKey());
 
-		clone._key = _key;
-
-		clone._originalMx = clone._mx = _mx;
+		clone.setMx(getMx());
 
 		cloneModel._originalMx = cloneModel._mx;
+		clone.setHomeURL(getHomeURL());
 
-		clone._homeURL = _homeURL;
-
-		clone._originalLogoId = clone._logoId = _logoId;
+		clone.setLogoId(getLogoId());
 
 		cloneModel._originalLogoId = cloneModel._logoId;
 		cloneModel._setOriginalLogoId = false;
+		clone.setSystem(getSystem());
 
-		clone._system = _system;
-
-		clone._maxUsers = _maxUsers;
+		clone.setMaxUsers(getMaxUsers());
 
 		return clone;
 	}

@@ -1007,77 +1007,74 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public Object clone() {
-		LayoutRevisionModelImpl clone = new LayoutRevisionImpl();
+		LayoutRevisionImpl clone = new LayoutRevisionImpl();
 		LayoutRevisionModelImpl cloneModel = (LayoutRevisionModelImpl)clone;
 
-		clone._layoutRevisionId = _layoutRevisionId;
+		clone.setLayoutRevisionId(getLayoutRevisionId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._originalLayoutSetBranchId = clone._layoutSetBranchId = _layoutSetBranchId;
+		clone.setLayoutSetBranchId(getLayoutSetBranchId());
 
 		cloneModel._originalLayoutSetBranchId = cloneModel._layoutSetBranchId;
 		cloneModel._setOriginalLayoutSetBranchId = false;
+		clone.setParentLayoutRevisionId(getParentLayoutRevisionId());
 
-		clone._parentLayoutRevisionId = _parentLayoutRevisionId;
-
-		clone._originalHead = clone._head = _head;
+		clone.setHead(getHead());
 
 		cloneModel._originalHead = cloneModel._head;
 		cloneModel._setOriginalHead = false;
+		clone.setMajor(getMajor());
 
-		clone._major = _major;
-
-		clone._originalPlid = clone._plid = _plid;
+		clone.setPlid(getPlid());
 
 		cloneModel._originalPlid = cloneModel._plid;
 		cloneModel._setOriginalPlid = false;
+		clone.setPrivateLayout(getPrivateLayout());
 
-		clone._privateLayout = _privateLayout;
+		clone.setName(getName());
 
-		clone._name = _name;
+		clone.setTitle(getTitle());
 
-		clone._title = _title;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setKeywords(getKeywords());
 
-		clone._keywords = _keywords;
+		clone.setRobots(getRobots());
 
-		clone._robots = _robots;
+		clone.setTypeSettings(getTypeSettings());
 
-		clone._typeSettings = _typeSettings;
+		clone.setIconImage(getIconImage());
 
-		clone._iconImage = _iconImage;
+		clone.setIconImageId(getIconImageId());
 
-		clone._iconImageId = _iconImageId;
+		clone.setThemeId(getThemeId());
 
-		clone._themeId = _themeId;
+		clone.setColorSchemeId(getColorSchemeId());
 
-		clone._colorSchemeId = _colorSchemeId;
+		clone.setWapThemeId(getWapThemeId());
 
-		clone._wapThemeId = _wapThemeId;
+		clone.setWapColorSchemeId(getWapColorSchemeId());
 
-		clone._wapColorSchemeId = _wapColorSchemeId;
+		clone.setCss(getCss());
 
-		clone._css = _css;
+		clone.setStatus(getStatus());
 
-		clone._status = _status;
+		clone.setStatusByUserId(getStatusByUserId());
 
-		clone._statusByUserId = _statusByUserId;
+		clone.setStatusByUserName(getStatusByUserName());
 
-		clone._statusByUserName = _statusByUserName;
-
-		clone._statusDate = _statusDate;
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}

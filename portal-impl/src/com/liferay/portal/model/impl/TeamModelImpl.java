@@ -280,30 +280,29 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 	}
 
 	public Object clone() {
-		TeamModelImpl clone = new TeamImpl();
+		TeamImpl clone = new TeamImpl();
 		TeamModelImpl cloneModel = (TeamModelImpl)clone;
 
-		clone._teamId = _teamId;
+		clone.setTeamId(getTeamId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
-		clone._originalName = clone._name = _name;
+		clone.setName(getName());
 
 		cloneModel._originalName = cloneModel._name;
-
-		clone._description = _description;
+		clone.setDescription(getDescription());
 
 		return clone;
 	}

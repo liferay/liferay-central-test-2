@@ -322,46 +322,44 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public Object clone() {
-		SocialActivityModelImpl clone = new SocialActivityImpl();
+		SocialActivityImpl clone = new SocialActivityImpl();
 		SocialActivityModelImpl cloneModel = (SocialActivityModelImpl)clone;
 
-		clone._activityId = _activityId;
+		clone.setActivityId(getActivityId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
-
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
-		clone._originalCreateDate = clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
 		cloneModel._originalCreateDate = cloneModel._createDate;
 		cloneModel._setOriginalCreateDate = false;
-		clone._originalMirrorActivityId = clone._mirrorActivityId = _mirrorActivityId;
+		clone.setMirrorActivityId(getMirrorActivityId());
 
 		cloneModel._originalMirrorActivityId = cloneModel._mirrorActivityId;
 		cloneModel._setOriginalMirrorActivityId = false;
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;
-		clone._originalClassPK = clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
 		cloneModel._originalClassPK = cloneModel._classPK;
 		cloneModel._setOriginalClassPK = false;
-		clone._originalType = clone._type = _type;
+		clone.setType(getType());
 
 		cloneModel._originalType = cloneModel._type;
 		cloneModel._setOriginalType = false;
+		clone.setExtraData(getExtraData());
 
-		clone._extraData = _extraData;
-
-		clone._originalReceiverUserId = clone._receiverUserId = _receiverUserId;
+		clone.setReceiverUserId(getReceiverUserId());
 
 		cloneModel._originalReceiverUserId = cloneModel._receiverUserId;
 		cloneModel._setOriginalReceiverUserId = false;

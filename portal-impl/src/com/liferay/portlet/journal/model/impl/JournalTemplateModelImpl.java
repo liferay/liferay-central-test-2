@@ -426,54 +426,50 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 	}
 
 	public Object clone() {
-		JournalTemplateModelImpl clone = new JournalTemplateImpl();
+		JournalTemplateImpl clone = new JournalTemplateImpl();
 		JournalTemplateModelImpl cloneModel = (JournalTemplateModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setId(getId());
 
-		clone._id = _id;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalTemplateId = clone._templateId = _templateId;
+		clone.setTemplateId(getTemplateId());
 
 		cloneModel._originalTemplateId = cloneModel._templateId;
+		clone.setStructureId(getStructureId());
 
-		clone._structureId = _structureId;
+		clone.setName(getName());
 
-		clone._name = _name;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setXsl(getXsl());
 
-		clone._xsl = _xsl;
+		clone.setLangType(getLangType());
 
-		clone._langType = _langType;
+		clone.setCacheable(getCacheable());
 
-		clone._cacheable = _cacheable;
+		clone.setSmallImage(getSmallImage());
 
-		clone._smallImage = _smallImage;
-
-		clone._originalSmallImageId = clone._smallImageId = _smallImageId;
+		clone.setSmallImageId(getSmallImageId());
 
 		cloneModel._originalSmallImageId = cloneModel._smallImageId;
 		cloneModel._setOriginalSmallImageId = false;
-
-		clone._smallImageURL = _smallImageURL;
+		clone.setSmallImageURL(getSmallImageURL());
 
 		return clone;
 	}

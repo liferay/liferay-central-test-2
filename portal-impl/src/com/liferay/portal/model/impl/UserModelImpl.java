@@ -773,102 +773,99 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public Object clone() {
-		UserModelImpl clone = new UserImpl();
+		UserImpl clone = new UserImpl();
 		UserModelImpl cloneModel = (UserModelImpl)clone;
 
-		clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalDefaultUser = clone._defaultUser = _defaultUser;
+		clone.setDefaultUser(getDefaultUser());
 
 		cloneModel._originalDefaultUser = cloneModel._defaultUser;
 		cloneModel._setOriginalDefaultUser = false;
-		clone._originalContactId = clone._contactId = _contactId;
+		clone.setContactId(getContactId());
 
 		cloneModel._originalContactId = cloneModel._contactId;
 		cloneModel._setOriginalContactId = false;
+		clone.setPassword(getPassword());
 
-		clone._password = _password;
+		clone.setPasswordEncrypted(getPasswordEncrypted());
 
-		clone._passwordEncrypted = _passwordEncrypted;
+		clone.setPasswordReset(getPasswordReset());
 
-		clone._passwordReset = _passwordReset;
+		clone.setPasswordModifiedDate(getPasswordModifiedDate());
 
-		clone._passwordModifiedDate = _passwordModifiedDate;
+		clone.setDigest(getDigest());
 
-		clone._digest = _digest;
+		clone.setReminderQueryQuestion(getReminderQueryQuestion());
 
-		clone._reminderQueryQuestion = _reminderQueryQuestion;
+		clone.setReminderQueryAnswer(getReminderQueryAnswer());
 
-		clone._reminderQueryAnswer = _reminderQueryAnswer;
+		clone.setGraceLoginCount(getGraceLoginCount());
 
-		clone._graceLoginCount = _graceLoginCount;
-
-		clone._originalScreenName = clone._screenName = _screenName;
+		clone.setScreenName(getScreenName());
 
 		cloneModel._originalScreenName = cloneModel._screenName;
-		clone._originalEmailAddress = clone._emailAddress = _emailAddress;
+		clone.setEmailAddress(getEmailAddress());
 
 		cloneModel._originalEmailAddress = cloneModel._emailAddress;
-		clone._originalFacebookId = clone._facebookId = _facebookId;
+		clone.setFacebookId(getFacebookId());
 
 		cloneModel._originalFacebookId = cloneModel._facebookId;
 		cloneModel._setOriginalFacebookId = false;
-		clone._originalOpenId = clone._openId = _openId;
+		clone.setOpenId(getOpenId());
 
 		cloneModel._originalOpenId = cloneModel._openId;
-		clone._originalPortraitId = clone._portraitId = _portraitId;
+		clone.setPortraitId(getPortraitId());
 
 		cloneModel._originalPortraitId = cloneModel._portraitId;
 		cloneModel._setOriginalPortraitId = false;
+		clone.setLanguageId(getLanguageId());
 
-		clone._languageId = _languageId;
+		clone.setTimeZoneId(getTimeZoneId());
 
-		clone._timeZoneId = _timeZoneId;
+		clone.setGreeting(getGreeting());
 
-		clone._greeting = _greeting;
+		clone.setComments(getComments());
 
-		clone._comments = _comments;
+		clone.setFirstName(getFirstName());
 
-		clone._firstName = _firstName;
+		clone.setMiddleName(getMiddleName());
 
-		clone._middleName = _middleName;
+		clone.setLastName(getLastName());
 
-		clone._lastName = _lastName;
+		clone.setJobTitle(getJobTitle());
 
-		clone._jobTitle = _jobTitle;
+		clone.setLoginDate(getLoginDate());
 
-		clone._loginDate = _loginDate;
+		clone.setLoginIP(getLoginIP());
 
-		clone._loginIP = _loginIP;
+		clone.setLastLoginDate(getLastLoginDate());
 
-		clone._lastLoginDate = _lastLoginDate;
+		clone.setLastLoginIP(getLastLoginIP());
 
-		clone._lastLoginIP = _lastLoginIP;
+		clone.setLastFailedLoginDate(getLastFailedLoginDate());
 
-		clone._lastFailedLoginDate = _lastFailedLoginDate;
+		clone.setFailedLoginAttempts(getFailedLoginAttempts());
 
-		clone._failedLoginAttempts = _failedLoginAttempts;
+		clone.setLockout(getLockout());
 
-		clone._lockout = _lockout;
+		clone.setLockoutDate(getLockoutDate());
 
-		clone._lockoutDate = _lockoutDate;
+		clone.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
 
-		clone._agreedToTermsOfUse = _agreedToTermsOfUse;
-
-		clone._status = _status;
+		clone.setStatus(getStatus());
 
 		return clone;
 	}

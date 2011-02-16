@@ -919,73 +919,68 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public Object clone() {
-		LayoutModelImpl clone = new LayoutImpl();
+		LayoutImpl clone = new LayoutImpl();
 		LayoutModelImpl cloneModel = (LayoutModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setPlid(getPlid());
 
-		clone._plid = _plid;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
-
-		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
+		clone.setPrivateLayout(getPrivateLayout());
 
 		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
 		cloneModel._setOriginalPrivateLayout = false;
-		clone._originalLayoutId = clone._layoutId = _layoutId;
+		clone.setLayoutId(getLayoutId());
 
 		cloneModel._originalLayoutId = cloneModel._layoutId;
 		cloneModel._setOriginalLayoutId = false;
+		clone.setParentLayoutId(getParentLayoutId());
 
-		clone._parentLayoutId = _parentLayoutId;
+		clone.setName(getName());
 
-		clone._name = _name;
+		clone.setTitle(getTitle());
 
-		clone._title = _title;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setKeywords(getKeywords());
 
-		clone._keywords = _keywords;
+		clone.setRobots(getRobots());
 
-		clone._robots = _robots;
+		clone.setType(getType());
 
-		clone._type = _type;
+		clone.setTypeSettings(getTypeSettings());
 
-		clone._typeSettings = _typeSettings;
+		clone.setHidden(getHidden());
 
-		clone._hidden = _hidden;
-
-		clone._originalFriendlyURL = clone._friendlyURL = _friendlyURL;
+		clone.setFriendlyURL(getFriendlyURL());
 
 		cloneModel._originalFriendlyURL = cloneModel._friendlyURL;
+		clone.setIconImage(getIconImage());
 
-		clone._iconImage = _iconImage;
-
-		clone._originalIconImageId = clone._iconImageId = _iconImageId;
+		clone.setIconImageId(getIconImageId());
 
 		cloneModel._originalIconImageId = cloneModel._iconImageId;
 		cloneModel._setOriginalIconImageId = false;
+		clone.setThemeId(getThemeId());
 
-		clone._themeId = _themeId;
+		clone.setColorSchemeId(getColorSchemeId());
 
-		clone._colorSchemeId = _colorSchemeId;
+		clone.setWapThemeId(getWapThemeId());
 
-		clone._wapThemeId = _wapThemeId;
+		clone.setWapColorSchemeId(getWapColorSchemeId());
 
-		clone._wapColorSchemeId = _wapColorSchemeId;
+		clone.setCss(getCss());
 
-		clone._css = _css;
+		clone.setPriority(getPriority());
 
-		clone._priority = _priority;
-
-		clone._layoutPrototypeId = _layoutPrototypeId;
+		clone.setLayoutPrototypeId(getLayoutPrototypeId());
 
 		return clone;
 	}

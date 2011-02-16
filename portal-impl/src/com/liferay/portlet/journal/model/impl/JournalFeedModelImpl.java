@@ -487,61 +487,58 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	}
 
 	public Object clone() {
-		JournalFeedModelImpl clone = new JournalFeedImpl();
+		JournalFeedImpl clone = new JournalFeedImpl();
 		JournalFeedModelImpl cloneModel = (JournalFeedModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setId(getId());
 
-		clone._id = _id;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalFeedId = clone._feedId = _feedId;
+		clone.setFeedId(getFeedId());
 
 		cloneModel._originalFeedId = cloneModel._feedId;
+		clone.setName(getName());
 
-		clone._name = _name;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setType(getType());
 
-		clone._type = _type;
+		clone.setStructureId(getStructureId());
 
-		clone._structureId = _structureId;
+		clone.setTemplateId(getTemplateId());
 
-		clone._templateId = _templateId;
+		clone.setRendererTemplateId(getRendererTemplateId());
 
-		clone._rendererTemplateId = _rendererTemplateId;
+		clone.setDelta(getDelta());
 
-		clone._delta = _delta;
+		clone.setOrderByCol(getOrderByCol());
 
-		clone._orderByCol = _orderByCol;
+		clone.setOrderByType(getOrderByType());
 
-		clone._orderByType = _orderByType;
+		clone.setTargetLayoutFriendlyUrl(getTargetLayoutFriendlyUrl());
 
-		clone._targetLayoutFriendlyUrl = _targetLayoutFriendlyUrl;
+		clone.setTargetPortletId(getTargetPortletId());
 
-		clone._targetPortletId = _targetPortletId;
+		clone.setContentField(getContentField());
 
-		clone._contentField = _contentField;
+		clone.setFeedType(getFeedType());
 
-		clone._feedType = _feedType;
-
-		clone._feedVersion = _feedVersion;
+		clone.setFeedVersion(getFeedVersion());
 
 		return clone;
 	}

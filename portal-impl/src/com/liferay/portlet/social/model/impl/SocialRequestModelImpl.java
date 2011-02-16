@@ -333,52 +333,47 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 	}
 
 	public Object clone() {
-		SocialRequestModelImpl clone = new SocialRequestImpl();
+		SocialRequestImpl clone = new SocialRequestImpl();
 		SocialRequestModelImpl cloneModel = (SocialRequestModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setRequestId(getRequestId());
 
-		clone._requestId = _requestId;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
-
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;
-		clone._originalClassPK = clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
 		cloneModel._originalClassPK = cloneModel._classPK;
 		cloneModel._setOriginalClassPK = false;
-		clone._originalType = clone._type = _type;
+		clone.setType(getType());
 
 		cloneModel._originalType = cloneModel._type;
 		cloneModel._setOriginalType = false;
+		clone.setExtraData(getExtraData());
 
-		clone._extraData = _extraData;
-
-		clone._originalReceiverUserId = clone._receiverUserId = _receiverUserId;
+		clone.setReceiverUserId(getReceiverUserId());
 
 		cloneModel._originalReceiverUserId = cloneModel._receiverUserId;
 		cloneModel._setOriginalReceiverUserId = false;
-
-		clone._status = _status;
+		clone.setStatus(getStatus());
 
 		return clone;
 	}

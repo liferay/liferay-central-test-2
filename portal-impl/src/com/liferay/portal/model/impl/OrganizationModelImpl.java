@@ -315,39 +315,37 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	}
 
 	public Object clone() {
-		OrganizationModelImpl clone = new OrganizationImpl();
+		OrganizationImpl clone = new OrganizationImpl();
 		OrganizationModelImpl cloneModel = (OrganizationModelImpl)clone;
 
-		clone._organizationId = _organizationId;
+		clone.setOrganizationId(getOrganizationId());
 
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
-		clone._originalParentOrganizationId = clone._parentOrganizationId = _parentOrganizationId;
+		clone.setParentOrganizationId(getParentOrganizationId());
 
 		cloneModel._originalParentOrganizationId = cloneModel._parentOrganizationId;
 		cloneModel._setOriginalParentOrganizationId = false;
+		clone.setLeftOrganizationId(getLeftOrganizationId());
 
-		clone._leftOrganizationId = _leftOrganizationId;
+		clone.setRightOrganizationId(getRightOrganizationId());
 
-		clone._rightOrganizationId = _rightOrganizationId;
-
-		clone._originalName = clone._name = _name;
+		clone.setName(getName());
 
 		cloneModel._originalName = cloneModel._name;
+		clone.setType(getType());
 
-		clone._type = _type;
+		clone.setRecursable(getRecursable());
 
-		clone._recursable = _recursable;
+		clone.setRegionId(getRegionId());
 
-		clone._regionId = _regionId;
+		clone.setCountryId(getCountryId());
 
-		clone._countryId = _countryId;
+		clone.setStatusId(getStatusId());
 
-		clone._statusId = _statusId;
-
-		clone._comments = _comments;
+		clone.setComments(getComments());
 
 		return clone;
 	}

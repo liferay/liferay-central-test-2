@@ -207,26 +207,26 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	}
 
 	public Object clone() {
-		SocialRelationModelImpl clone = new SocialRelationImpl();
+		SocialRelationImpl clone = new SocialRelationImpl();
 		SocialRelationModelImpl cloneModel = (SocialRelationModelImpl)clone;
 
-		clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
-		clone._relationId = _relationId;
+		clone.setRelationId(getRelationId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._originalUserId1 = clone._userId1 = _userId1;
+		clone.setUserId1(getUserId1());
 
 		cloneModel._originalUserId1 = cloneModel._userId1;
 		cloneModel._setOriginalUserId1 = false;
-		clone._originalUserId2 = clone._userId2 = _userId2;
+		clone.setUserId2(getUserId2());
 
 		cloneModel._originalUserId2 = cloneModel._userId2;
 		cloneModel._setOriginalUserId2 = false;
-		clone._originalType = clone._type = _type;
+		clone.setType(getType());
 
 		cloneModel._originalType = cloneModel._type;
 		cloneModel._setOriginalType = false;

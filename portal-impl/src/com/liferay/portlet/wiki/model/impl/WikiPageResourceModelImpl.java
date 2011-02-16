@@ -173,18 +173,18 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	}
 
 	public Object clone() {
-		WikiPageResourceModelImpl clone = new WikiPageResourceImpl();
+		WikiPageResourceImpl clone = new WikiPageResourceImpl();
 		WikiPageResourceModelImpl cloneModel = (WikiPageResourceModelImpl)clone;
 
-		clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
-		clone._resourcePrimKey = _resourcePrimKey;
+		clone.setResourcePrimKey(getResourcePrimKey());
 
-		clone._originalNodeId = clone._nodeId = _nodeId;
+		clone.setNodeId(getNodeId());
 
 		cloneModel._originalNodeId = cloneModel._nodeId;
 		cloneModel._setOriginalNodeId = false;
-		clone._originalTitle = clone._title = _title;
+		clone.setTitle(getTitle());
 
 		cloneModel._originalTitle = cloneModel._title;
 

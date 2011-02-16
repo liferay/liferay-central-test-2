@@ -301,32 +301,32 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	}
 
 	public Object clone() {
-		PhoneModelImpl clone = new PhoneImpl();
+		PhoneImpl clone = new PhoneImpl();
 		PhoneModelImpl cloneModel = (PhoneModelImpl)clone;
 
-		clone._phoneId = _phoneId;
+		clone.setPhoneId(getPhoneId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
-		clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
-		clone._number = _number;
+		clone.setNumber(getNumber());
 
-		clone._extension = _extension;
+		clone.setExtension(getExtension());
 
-		clone._typeId = _typeId;
+		clone.setTypeId(getTypeId());
 
-		clone._primary = _primary;
+		clone.setPrimary(getPrimary());
 
 		return clone;
 	}

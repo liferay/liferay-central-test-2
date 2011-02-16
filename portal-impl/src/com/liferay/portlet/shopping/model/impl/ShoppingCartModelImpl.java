@@ -259,36 +259,34 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	}
 
 	public Object clone() {
-		ShoppingCartModelImpl clone = new ShoppingCartImpl();
+		ShoppingCartImpl clone = new ShoppingCartImpl();
 		ShoppingCartModelImpl cloneModel = (ShoppingCartModelImpl)clone;
 
-		clone._cartId = _cartId;
+		clone.setCartId(getCartId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
-
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setItemIds(getItemIds());
 
-		clone._itemIds = _itemIds;
+		clone.setCouponCodes(getCouponCodes());
 
-		clone._couponCodes = _couponCodes;
+		clone.setAltShipping(getAltShipping());
 
-		clone._altShipping = _altShipping;
-
-		clone._insure = _insure;
+		clone.setInsure(getInsure());
 
 		return clone;
 	}

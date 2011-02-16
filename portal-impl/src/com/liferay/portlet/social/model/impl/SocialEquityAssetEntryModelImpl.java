@@ -191,25 +191,24 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 	}
 
 	public Object clone() {
-		SocialEquityAssetEntryModelImpl clone = new SocialEquityAssetEntryImpl();
+		SocialEquityAssetEntryImpl clone = new SocialEquityAssetEntryImpl();
 		SocialEquityAssetEntryModelImpl cloneModel = (SocialEquityAssetEntryModelImpl)clone;
 
-		clone._equityAssetEntryId = _equityAssetEntryId;
+		clone.setEquityAssetEntryId(getEquityAssetEntryId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._originalAssetEntryId = clone._assetEntryId = _assetEntryId;
+		clone.setAssetEntryId(getAssetEntryId());
 
 		cloneModel._originalAssetEntryId = cloneModel._assetEntryId;
 		cloneModel._setOriginalAssetEntryId = false;
+		clone.setInformationK(getInformationK());
 
-		clone._informationK = _informationK;
-
-		clone._informationB = _informationB;
+		clone.setInformationB(getInformationB());
 
 		return clone;
 	}

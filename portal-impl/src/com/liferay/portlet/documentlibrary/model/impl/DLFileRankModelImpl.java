@@ -207,25 +207,24 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	}
 
 	public Object clone() {
-		DLFileRankModelImpl clone = new DLFileRankImpl();
+		DLFileRankImpl clone = new DLFileRankImpl();
 		DLFileRankModelImpl cloneModel = (DLFileRankModelImpl)clone;
 
-		clone._fileRankId = _fileRankId;
+		clone.setFileRankId(getFileRankId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
-
-		clone._originalFileEntryId = clone._fileEntryId = _fileEntryId;
+		clone.setFileEntryId(getFileEntryId());
 
 		cloneModel._originalFileEntryId = cloneModel._fileEntryId;
 		cloneModel._setOriginalFileEntryId = false;

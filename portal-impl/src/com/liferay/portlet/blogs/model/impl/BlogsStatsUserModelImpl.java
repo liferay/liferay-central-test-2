@@ -231,32 +231,30 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	}
 
 	public Object clone() {
-		BlogsStatsUserModelImpl clone = new BlogsStatsUserImpl();
+		BlogsStatsUserImpl clone = new BlogsStatsUserImpl();
 		BlogsStatsUserModelImpl cloneModel = (BlogsStatsUserModelImpl)clone;
 
-		clone._statsUserId = _statsUserId;
+		clone.setStatsUserId(getStatsUserId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
-
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
+		clone.setEntryCount(getEntryCount());
 
-		clone._entryCount = _entryCount;
+		clone.setLastPostDate(getLastPostDate());
 
-		clone._lastPostDate = _lastPostDate;
+		clone.setRatingsTotalEntries(getRatingsTotalEntries());
 
-		clone._ratingsTotalEntries = _ratingsTotalEntries;
+		clone.setRatingsTotalScore(getRatingsTotalScore());
 
-		clone._ratingsTotalScore = _ratingsTotalScore;
-
-		clone._ratingsAverageScore = _ratingsAverageScore;
+		clone.setRatingsAverageScore(getRatingsAverageScore());
 
 		return clone;
 	}

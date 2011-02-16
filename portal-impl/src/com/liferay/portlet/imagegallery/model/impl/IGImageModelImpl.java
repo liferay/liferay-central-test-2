@@ -368,47 +368,45 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public Object clone() {
-		IGImageModelImpl clone = new IGImageImpl();
+		IGImageImpl clone = new IGImageImpl();
 		IGImageModelImpl cloneModel = (IGImageModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setImageId(getImageId());
 
-		clone._imageId = _imageId;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setFolderId(getFolderId());
 
-		clone._folderId = _folderId;
+		clone.setName(getName());
 
-		clone._name = _name;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
-
-		clone._originalSmallImageId = clone._smallImageId = _smallImageId;
+		clone.setSmallImageId(getSmallImageId());
 
 		cloneModel._originalSmallImageId = cloneModel._smallImageId;
 		cloneModel._setOriginalSmallImageId = false;
-		clone._originalLargeImageId = clone._largeImageId = _largeImageId;
+		clone.setLargeImageId(getLargeImageId());
 
 		cloneModel._originalLargeImageId = cloneModel._largeImageId;
 		cloneModel._setOriginalLargeImageId = false;
-		clone._originalCustom1ImageId = clone._custom1ImageId = _custom1ImageId;
+		clone.setCustom1ImageId(getCustom1ImageId());
 
 		cloneModel._originalCustom1ImageId = cloneModel._custom1ImageId;
 		cloneModel._setOriginalCustom1ImageId = false;
-		clone._originalCustom2ImageId = clone._custom2ImageId = _custom2ImageId;
+		clone.setCustom2ImageId(getCustom2ImageId());
 
 		cloneModel._originalCustom2ImageId = cloneModel._custom2ImageId;
 		cloneModel._setOriginalCustom2ImageId = false;

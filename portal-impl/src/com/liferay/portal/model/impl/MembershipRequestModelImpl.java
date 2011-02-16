@@ -276,28 +276,28 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public Object clone() {
-		MembershipRequestModelImpl clone = new MembershipRequestImpl();
+		MembershipRequestImpl clone = new MembershipRequestImpl();
 		MembershipRequestModelImpl cloneModel = (MembershipRequestModelImpl)clone;
 
-		clone._membershipRequestId = _membershipRequestId;
+		clone.setMembershipRequestId(getMembershipRequestId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._comments = _comments;
+		clone.setComments(getComments());
 
-		clone._replyComments = _replyComments;
+		clone.setReplyComments(getReplyComments());
 
-		clone._replyDate = _replyDate;
+		clone.setReplyDate(getReplyDate());
 
-		clone._replierUserId = _replierUserId;
+		clone.setReplierUserId(getReplierUserId());
 
-		clone._statusId = _statusId;
+		clone.setStatusId(getStatusId());
 
 		return clone;
 	}

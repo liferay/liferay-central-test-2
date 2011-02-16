@@ -281,30 +281,29 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	}
 
 	public Object clone() {
-		AssetCategoryPropertyModelImpl clone = new AssetCategoryPropertyImpl();
+		AssetCategoryPropertyImpl clone = new AssetCategoryPropertyImpl();
 		AssetCategoryPropertyModelImpl cloneModel = (AssetCategoryPropertyModelImpl)clone;
 
-		clone._categoryPropertyId = _categoryPropertyId;
+		clone.setCategoryPropertyId(getCategoryPropertyId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._originalCategoryId = clone._categoryId = _categoryId;
+		clone.setCategoryId(getCategoryId());
 
 		cloneModel._originalCategoryId = cloneModel._categoryId;
 		cloneModel._setOriginalCategoryId = false;
-		clone._originalKey = clone._key = _key;
+		clone.setKey(getKey());
 
 		cloneModel._originalKey = cloneModel._key;
-
-		clone._value = _value;
+		clone.setValue(getValue());
 
 		return clone;
 	}

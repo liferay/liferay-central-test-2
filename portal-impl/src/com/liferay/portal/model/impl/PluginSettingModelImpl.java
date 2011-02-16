@@ -247,25 +247,24 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	}
 
 	public Object clone() {
-		PluginSettingModelImpl clone = new PluginSettingImpl();
+		PluginSettingImpl clone = new PluginSettingImpl();
 		PluginSettingModelImpl cloneModel = (PluginSettingModelImpl)clone;
 
-		clone._pluginSettingId = _pluginSettingId;
+		clone.setPluginSettingId(getPluginSettingId());
 
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
-		clone._originalPluginId = clone._pluginId = _pluginId;
+		clone.setPluginId(getPluginId());
 
 		cloneModel._originalPluginId = cloneModel._pluginId;
-		clone._originalPluginType = clone._pluginType = _pluginType;
+		clone.setPluginType(getPluginType());
 
 		cloneModel._originalPluginType = cloneModel._pluginType;
+		clone.setRoles(getRoles());
 
-		clone._roles = _roles;
-
-		clone._active = _active;
+		clone.setActive(getActive());
 
 		return clone;
 	}

@@ -405,48 +405,44 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public Object clone() {
-		GroupModelImpl clone = new GroupImpl();
+		GroupImpl clone = new GroupImpl();
 		GroupModelImpl cloneModel = (GroupModelImpl)clone;
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
+		clone.setCreatorUserId(getCreatorUserId());
 
-		clone._creatorUserId = _creatorUserId;
-
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;
-		clone._originalClassPK = clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
 		cloneModel._originalClassPK = cloneModel._classPK;
 		cloneModel._setOriginalClassPK = false;
+		clone.setParentGroupId(getParentGroupId());
 
-		clone._parentGroupId = _parentGroupId;
-
-		clone._originalLiveGroupId = clone._liveGroupId = _liveGroupId;
+		clone.setLiveGroupId(getLiveGroupId());
 
 		cloneModel._originalLiveGroupId = cloneModel._liveGroupId;
 		cloneModel._setOriginalLiveGroupId = false;
-		clone._originalName = clone._name = _name;
+		clone.setName(getName());
 
 		cloneModel._originalName = cloneModel._name;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setType(getType());
 
-		clone._type = _type;
+		clone.setTypeSettings(getTypeSettings());
 
-		clone._typeSettings = _typeSettings;
-
-		clone._originalFriendlyURL = clone._friendlyURL = _friendlyURL;
+		clone.setFriendlyURL(getFriendlyURL());
 
 		cloneModel._originalFriendlyURL = cloneModel._friendlyURL;
-
-		clone._active = _active;
+		clone.setActive(getActive());
 
 		return clone;
 	}

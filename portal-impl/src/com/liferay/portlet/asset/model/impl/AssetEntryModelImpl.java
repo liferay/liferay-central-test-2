@@ -500,65 +500,63 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public Object clone() {
-		AssetEntryModelImpl clone = new AssetEntryImpl();
+		AssetEntryImpl clone = new AssetEntryImpl();
 		AssetEntryModelImpl cloneModel = (AssetEntryModelImpl)clone;
 
-		clone._entryId = _entryId;
+		clone.setEntryId(getEntryId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;
-		clone._originalClassPK = clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
 		cloneModel._originalClassPK = cloneModel._classPK;
 		cloneModel._setOriginalClassPK = false;
-		clone._originalClassUuid = clone._classUuid = _classUuid;
+		clone.setClassUuid(getClassUuid());
 
 		cloneModel._originalClassUuid = cloneModel._classUuid;
+		clone.setVisible(getVisible());
 
-		clone._visible = _visible;
+		clone.setStartDate(getStartDate());
 
-		clone._startDate = _startDate;
+		clone.setEndDate(getEndDate());
 
-		clone._endDate = _endDate;
+		clone.setPublishDate(getPublishDate());
 
-		clone._publishDate = _publishDate;
+		clone.setExpirationDate(getExpirationDate());
 
-		clone._expirationDate = _expirationDate;
+		clone.setMimeType(getMimeType());
 
-		clone._mimeType = _mimeType;
+		clone.setTitle(getTitle());
 
-		clone._title = _title;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setSummary(getSummary());
 
-		clone._summary = _summary;
+		clone.setUrl(getUrl());
 
-		clone._url = _url;
+		clone.setHeight(getHeight());
 
-		clone._height = _height;
+		clone.setWidth(getWidth());
 
-		clone._width = _width;
+		clone.setPriority(getPriority());
 
-		clone._priority = _priority;
-
-		clone._viewCount = _viewCount;
+		clone.setViewCount(getViewCount());
 
 		return clone;
 	}

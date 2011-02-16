@@ -445,66 +445,63 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	}
 
 	public Object clone() {
-		MBMailingListModelImpl clone = new MBMailingListImpl();
+		MBMailingListImpl clone = new MBMailingListImpl();
 		MBMailingListModelImpl cloneModel = (MBMailingListModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setMailingListId(getMailingListId());
 
-		clone._mailingListId = _mailingListId;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalCategoryId = clone._categoryId = _categoryId;
+		clone.setCategoryId(getCategoryId());
 
 		cloneModel._originalCategoryId = cloneModel._categoryId;
 		cloneModel._setOriginalCategoryId = false;
+		clone.setEmailAddress(getEmailAddress());
 
-		clone._emailAddress = _emailAddress;
+		clone.setInProtocol(getInProtocol());
 
-		clone._inProtocol = _inProtocol;
+		clone.setInServerName(getInServerName());
 
-		clone._inServerName = _inServerName;
+		clone.setInServerPort(getInServerPort());
 
-		clone._inServerPort = _inServerPort;
+		clone.setInUseSSL(getInUseSSL());
 
-		clone._inUseSSL = _inUseSSL;
+		clone.setInUserName(getInUserName());
 
-		clone._inUserName = _inUserName;
+		clone.setInPassword(getInPassword());
 
-		clone._inPassword = _inPassword;
+		clone.setInReadInterval(getInReadInterval());
 
-		clone._inReadInterval = _inReadInterval;
+		clone.setOutEmailAddress(getOutEmailAddress());
 
-		clone._outEmailAddress = _outEmailAddress;
+		clone.setOutCustom(getOutCustom());
 
-		clone._outCustom = _outCustom;
+		clone.setOutServerName(getOutServerName());
 
-		clone._outServerName = _outServerName;
+		clone.setOutServerPort(getOutServerPort());
 
-		clone._outServerPort = _outServerPort;
+		clone.setOutUseSSL(getOutUseSSL());
 
-		clone._outUseSSL = _outUseSSL;
+		clone.setOutUserName(getOutUserName());
 
-		clone._outUserName = _outUserName;
+		clone.setOutPassword(getOutPassword());
 
-		clone._outPassword = _outPassword;
-
-		clone._active = _active;
+		clone.setActive(getActive());
 
 		return clone;
 	}

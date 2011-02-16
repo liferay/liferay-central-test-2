@@ -207,24 +207,24 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	}
 
 	public Object clone() {
-		UserNotificationEventModelImpl clone = new UserNotificationEventImpl();
+		UserNotificationEventImpl clone = new UserNotificationEventImpl();
 		UserNotificationEventModelImpl cloneModel = (UserNotificationEventModelImpl)clone;
 
-		clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
-		clone._userNotificationEventId = _userNotificationEventId;
+		clone.setUserNotificationEventId(getUserNotificationEventId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._type = _type;
+		clone.setType(getType());
 
-		clone._timestamp = _timestamp;
+		clone.setTimestamp(getTimestamp());
 
-		clone._deliverBy = _deliverBy;
+		clone.setDeliverBy(getDeliverBy());
 
-		clone._payload = _payload;
+		clone.setPayload(getPayload());
 
 		return clone;
 	}

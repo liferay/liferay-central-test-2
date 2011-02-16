@@ -276,22 +276,21 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	}
 
 	public Object clone() {
-		PollsChoiceModelImpl clone = new PollsChoiceImpl();
+		PollsChoiceImpl clone = new PollsChoiceImpl();
 		PollsChoiceModelImpl cloneModel = (PollsChoiceModelImpl)clone;
 
-		clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
-		clone._choiceId = _choiceId;
+		clone.setChoiceId(getChoiceId());
 
-		clone._originalQuestionId = clone._questionId = _questionId;
+		clone.setQuestionId(getQuestionId());
 
 		cloneModel._originalQuestionId = cloneModel._questionId;
 		cloneModel._setOriginalQuestionId = false;
-		clone._originalName = clone._name = _name;
+		clone.setName(getName());
 
 		cloneModel._originalName = cloneModel._name;
-
-		clone._description = _description;
+		clone.setDescription(getDescription());
 
 		return clone;
 	}

@@ -304,20 +304,20 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 	}
 
 	public Object clone() {
-		LayoutPrototypeModelImpl clone = new LayoutPrototypeImpl();
+		LayoutPrototypeImpl clone = new LayoutPrototypeImpl();
 		LayoutPrototypeModelImpl cloneModel = (LayoutPrototypeModelImpl)clone;
 
-		clone._layoutPrototypeId = _layoutPrototypeId;
+		clone.setLayoutPrototypeId(getLayoutPrototypeId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._name = _name;
+		clone.setName(getName());
 
-		clone._description = _description;
+		clone.setDescription(getDescription());
 
-		clone._settings = _settings;
+		clone.setSettings(getSettings());
 
-		clone._active = _active;
+		clone.setActive(getActive());
 
 		return clone;
 	}

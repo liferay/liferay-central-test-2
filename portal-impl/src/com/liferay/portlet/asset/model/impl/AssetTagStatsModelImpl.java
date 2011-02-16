@@ -176,21 +176,20 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 	}
 
 	public Object clone() {
-		AssetTagStatsModelImpl clone = new AssetTagStatsImpl();
+		AssetTagStatsImpl clone = new AssetTagStatsImpl();
 		AssetTagStatsModelImpl cloneModel = (AssetTagStatsModelImpl)clone;
 
-		clone._tagStatsId = _tagStatsId;
+		clone.setTagStatsId(getTagStatsId());
 
-		clone._originalTagId = clone._tagId = _tagId;
+		clone.setTagId(getTagId());
 
 		cloneModel._originalTagId = cloneModel._tagId;
 		cloneModel._setOriginalTagId = false;
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;
-
-		clone._assetCount = _assetCount;
+		clone.setAssetCount(getAssetCount());
 
 		return clone;
 	}

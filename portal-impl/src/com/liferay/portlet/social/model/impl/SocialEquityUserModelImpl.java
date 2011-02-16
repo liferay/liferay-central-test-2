@@ -228,32 +228,30 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 	}
 
 	public Object clone() {
-		SocialEquityUserModelImpl clone = new SocialEquityUserImpl();
+		SocialEquityUserImpl clone = new SocialEquityUserImpl();
 		SocialEquityUserModelImpl cloneModel = (SocialEquityUserModelImpl)clone;
 
-		clone._equityUserId = _equityUserId;
+		clone.setEquityUserId(getEquityUserId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
-
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
+		clone.setContributionK(getContributionK());
 
-		clone._contributionK = _contributionK;
+		clone.setContributionB(getContributionB());
 
-		clone._contributionB = _contributionB;
+		clone.setParticipationK(getParticipationK());
 
-		clone._participationK = _participationK;
+		clone.setParticipationB(getParticipationB());
 
-		clone._participationB = _participationB;
-
-		clone._rank = _rank;
+		clone.setRank(getRank());
 
 		return clone;
 	}

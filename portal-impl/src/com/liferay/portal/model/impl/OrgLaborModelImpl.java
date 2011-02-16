@@ -312,42 +312,42 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 	}
 
 	public Object clone() {
-		OrgLaborModelImpl clone = new OrgLaborImpl();
+		OrgLaborImpl clone = new OrgLaborImpl();
 		OrgLaborModelImpl cloneModel = (OrgLaborModelImpl)clone;
 
-		clone._orgLaborId = _orgLaborId;
+		clone.setOrgLaborId(getOrgLaborId());
 
-		clone._organizationId = _organizationId;
+		clone.setOrganizationId(getOrganizationId());
 
-		clone._typeId = _typeId;
+		clone.setTypeId(getTypeId());
 
-		clone._sunOpen = _sunOpen;
+		clone.setSunOpen(getSunOpen());
 
-		clone._sunClose = _sunClose;
+		clone.setSunClose(getSunClose());
 
-		clone._monOpen = _monOpen;
+		clone.setMonOpen(getMonOpen());
 
-		clone._monClose = _monClose;
+		clone.setMonClose(getMonClose());
 
-		clone._tueOpen = _tueOpen;
+		clone.setTueOpen(getTueOpen());
 
-		clone._tueClose = _tueClose;
+		clone.setTueClose(getTueClose());
 
-		clone._wedOpen = _wedOpen;
+		clone.setWedOpen(getWedOpen());
 
-		clone._wedClose = _wedClose;
+		clone.setWedClose(getWedClose());
 
-		clone._thuOpen = _thuOpen;
+		clone.setThuOpen(getThuOpen());
 
-		clone._thuClose = _thuClose;
+		clone.setThuClose(getThuClose());
 
-		clone._friOpen = _friOpen;
+		clone.setFriOpen(getFriOpen());
 
-		clone._friClose = _friClose;
+		clone.setFriClose(getFriClose());
 
-		clone._satOpen = _satOpen;
+		clone.setSatOpen(getSatOpen());
 
-		clone._satClose = _satClose;
+		clone.setSatClose(getSatClose());
 
 		return clone;
 	}

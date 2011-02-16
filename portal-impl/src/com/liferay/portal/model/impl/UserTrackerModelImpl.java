@@ -212,24 +212,24 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	}
 
 	public Object clone() {
-		UserTrackerModelImpl clone = new UserTrackerImpl();
+		UserTrackerImpl clone = new UserTrackerImpl();
 		UserTrackerModelImpl cloneModel = (UserTrackerModelImpl)clone;
 
-		clone._userTrackerId = _userTrackerId;
+		clone.setUserTrackerId(getUserTrackerId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._sessionId = _sessionId;
+		clone.setSessionId(getSessionId());
 
-		clone._remoteAddr = _remoteAddr;
+		clone.setRemoteAddr(getRemoteAddr());
 
-		clone._remoteHost = _remoteHost;
+		clone.setRemoteHost(getRemoteHost());
 
-		clone._userAgent = _userAgent;
+		clone.setUserAgent(getUserAgent());
 
 		return clone;
 	}

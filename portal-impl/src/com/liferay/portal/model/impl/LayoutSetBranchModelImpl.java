@@ -303,35 +303,33 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	}
 
 	public Object clone() {
-		LayoutSetBranchModelImpl clone = new LayoutSetBranchImpl();
+		LayoutSetBranchImpl clone = new LayoutSetBranchImpl();
 		LayoutSetBranchModelImpl cloneModel = (LayoutSetBranchModelImpl)clone;
 
-		clone._layoutSetBranchId = _layoutSetBranchId;
+		clone.setLayoutSetBranchId(getLayoutSetBranchId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
+		clone.setPrivateLayout(getPrivateLayout());
 
 		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
 		cloneModel._setOriginalPrivateLayout = false;
-		clone._originalName = clone._name = _name;
+		clone.setName(getName());
 
 		cloneModel._originalName = cloneModel._name;
-
-		clone._description = _description;
+		clone.setDescription(getDescription());
 
 		return clone;
 	}

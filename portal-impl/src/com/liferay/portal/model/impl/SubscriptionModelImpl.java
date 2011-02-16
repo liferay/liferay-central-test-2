@@ -259,36 +259,34 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	}
 
 	public Object clone() {
-		SubscriptionModelImpl clone = new SubscriptionImpl();
+		SubscriptionImpl clone = new SubscriptionImpl();
 		SubscriptionModelImpl cloneModel = (SubscriptionModelImpl)clone;
 
-		clone._subscriptionId = _subscriptionId;
+		clone.setSubscriptionId(getSubscriptionId());
 
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalClassNameId = clone._classNameId = _classNameId;
+		clone.setClassNameId(getClassNameId());
 
 		cloneModel._originalClassNameId = cloneModel._classNameId;
 		cloneModel._setOriginalClassNameId = false;
-		clone._originalClassPK = clone._classPK = _classPK;
+		clone.setClassPK(getClassPK());
 
 		cloneModel._originalClassPK = cloneModel._classPK;
 		cloneModel._setOriginalClassPK = false;
-
-		clone._frequency = _frequency;
+		clone.setFrequency(getFrequency());
 
 		return clone;
 	}

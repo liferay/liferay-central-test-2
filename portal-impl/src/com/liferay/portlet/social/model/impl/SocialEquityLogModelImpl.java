@@ -307,45 +307,43 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public Object clone() {
-		SocialEquityLogModelImpl clone = new SocialEquityLogImpl();
+		SocialEquityLogImpl clone = new SocialEquityLogImpl();
 		SocialEquityLogModelImpl cloneModel = (SocialEquityLogModelImpl)clone;
 
-		clone._equityLogId = _equityLogId;
+		clone.setEquityLogId(getEquityLogId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
-		clone._originalAssetEntryId = clone._assetEntryId = _assetEntryId;
+		clone.setAssetEntryId(getAssetEntryId());
 
 		cloneModel._originalAssetEntryId = cloneModel._assetEntryId;
 		cloneModel._setOriginalAssetEntryId = false;
-		clone._originalActionId = clone._actionId = _actionId;
+		clone.setActionId(getActionId());
 
 		cloneModel._originalActionId = cloneModel._actionId;
-		clone._originalActionDate = clone._actionDate = _actionDate;
+		clone.setActionDate(getActionDate());
 
 		cloneModel._originalActionDate = cloneModel._actionDate;
 		cloneModel._setOriginalActionDate = false;
-		clone._originalActive = clone._active = _active;
+		clone.setActive(getActive());
 
 		cloneModel._originalActive = cloneModel._active;
 		cloneModel._setOriginalActive = false;
+		clone.setExpiration(getExpiration());
 
-		clone._expiration = _expiration;
-
-		clone._originalType = clone._type = _type;
+		clone.setType(getType());
 
 		cloneModel._originalType = cloneModel._type;
 		cloneModel._setOriginalType = false;
+		clone.setValue(getValue());
 
-		clone._value = _value;
-
-		clone._originalExtraData = clone._extraData = _extraData;
+		clone.setExtraData(getExtraData());
 
 		cloneModel._originalExtraData = cloneModel._extraData;
 

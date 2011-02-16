@@ -406,51 +406,49 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public Object clone() {
-		DLFileVersionModelImpl clone = new DLFileVersionImpl();
+		DLFileVersionImpl clone = new DLFileVersionImpl();
 		DLFileVersionModelImpl cloneModel = (DLFileVersionModelImpl)clone;
 
-		clone._fileVersionId = _fileVersionId;
+		clone.setFileVersionId(getFileVersionId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._userId = _userId;
+		clone.setUserId(getUserId());
 
-		clone._userName = _userName;
+		clone.setUserName(getUserName());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._repositoryId = _repositoryId;
+		clone.setRepositoryId(getRepositoryId());
 
-		clone._originalFileEntryId = clone._fileEntryId = _fileEntryId;
+		clone.setFileEntryId(getFileEntryId());
 
 		cloneModel._originalFileEntryId = cloneModel._fileEntryId;
 		cloneModel._setOriginalFileEntryId = false;
+		clone.setExtension(getExtension());
 
-		clone._extension = _extension;
+		clone.setTitle(getTitle());
 
-		clone._title = _title;
+		clone.setDescription(getDescription());
 
-		clone._description = _description;
+		clone.setChangeLog(getChangeLog());
 
-		clone._changeLog = _changeLog;
+		clone.setExtraSettings(getExtraSettings());
 
-		clone._extraSettings = _extraSettings;
-
-		clone._originalVersion = clone._version = _version;
+		clone.setVersion(getVersion());
 
 		cloneModel._originalVersion = cloneModel._version;
+		clone.setSize(getSize());
 
-		clone._size = _size;
+		clone.setStatus(getStatus());
 
-		clone._status = _status;
+		clone.setStatusByUserId(getStatusByUserId());
 
-		clone._statusByUserId = _statusByUserId;
+		clone.setStatusByUserName(getStatusByUserName());
 
-		clone._statusByUserName = _statusByUserName;
-
-		clone._statusDate = _statusDate;
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}

@@ -334,40 +334,38 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview>
 	}
 
 	public Object clone() {
-		TasksReviewModelImpl clone = new TasksReviewImpl();
+		TasksReviewImpl clone = new TasksReviewImpl();
 		TasksReviewModelImpl cloneModel = (TasksReviewModelImpl)clone;
 
-		clone._reviewId = _reviewId;
+		clone.setReviewId(getReviewId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._originalUserId = clone._userId = _userId;
+		clone.setUserId(getUserId());
 
 		cloneModel._originalUserId = cloneModel._userId;
 		cloneModel._setOriginalUserId = false;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
-
-		clone._originalProposalId = clone._proposalId = _proposalId;
+		clone.setProposalId(getProposalId());
 
 		cloneModel._originalProposalId = cloneModel._proposalId;
 		cloneModel._setOriginalProposalId = false;
+		clone.setAssignedByUserId(getAssignedByUserId());
 
-		clone._assignedByUserId = _assignedByUserId;
+		clone.setAssignedByUserName(getAssignedByUserName());
 
-		clone._assignedByUserName = _assignedByUserName;
+		clone.setStage(getStage());
 
-		clone._stage = _stage;
+		clone.setCompleted(getCompleted());
 
-		clone._completed = _completed;
-
-		clone._rejected = _rejected;
+		clone.setRejected(getRejected());
 
 		return clone;
 	}

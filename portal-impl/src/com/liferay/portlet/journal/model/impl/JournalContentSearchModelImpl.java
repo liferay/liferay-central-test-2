@@ -232,30 +232,29 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public Object clone() {
-		JournalContentSearchModelImpl clone = new JournalContentSearchImpl();
+		JournalContentSearchImpl clone = new JournalContentSearchImpl();
 		JournalContentSearchModelImpl cloneModel = (JournalContentSearchModelImpl)clone;
 
-		clone._contentSearchId = _contentSearchId;
+		clone.setContentSearchId(getContentSearchId());
 
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
-
-		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
+		clone.setPrivateLayout(getPrivateLayout());
 
 		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
 		cloneModel._setOriginalPrivateLayout = false;
-		clone._originalLayoutId = clone._layoutId = _layoutId;
+		clone.setLayoutId(getLayoutId());
 
 		cloneModel._originalLayoutId = cloneModel._layoutId;
 		cloneModel._setOriginalLayoutId = false;
-		clone._originalPortletId = clone._portletId = _portletId;
+		clone.setPortletId(getPortletId());
 
 		cloneModel._originalPortletId = cloneModel._portletId;
-		clone._originalArticleId = clone._articleId = _articleId;
+		clone.setArticleId(getArticleId());
 
 		cloneModel._originalArticleId = cloneModel._articleId;
 

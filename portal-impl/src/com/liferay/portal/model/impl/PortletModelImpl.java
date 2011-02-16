@@ -223,22 +223,21 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 	}
 
 	public Object clone() {
-		PortletModelImpl clone = new PortletImpl();
+		PortletImpl clone = new PortletImpl();
 		PortletModelImpl cloneModel = (PortletModelImpl)clone;
 
-		clone._id = _id;
+		clone.setId(getId());
 
-		clone._originalCompanyId = clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
 		cloneModel._originalCompanyId = cloneModel._companyId;
 		cloneModel._setOriginalCompanyId = false;
-		clone._originalPortletId = clone._portletId = _portletId;
+		clone.setPortletId(getPortletId());
 
 		cloneModel._originalPortletId = cloneModel._portletId;
+		clone.setRoles(getRoles());
 
-		clone._roles = _roles;
-
-		clone._active = _active;
+		clone.setActive(getActive());
 
 		return clone;
 	}

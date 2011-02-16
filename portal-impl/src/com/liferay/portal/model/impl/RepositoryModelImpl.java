@@ -273,30 +273,30 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	}
 
 	public Object clone() {
-		RepositoryModelImpl clone = new RepositoryImpl();
+		RepositoryImpl clone = new RepositoryImpl();
 		RepositoryModelImpl cloneModel = (RepositoryModelImpl)clone;
 
-		clone._repositoryId = _repositoryId;
+		clone.setRepositoryId(getRepositoryId());
 
-		clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
-		clone._companyId = _companyId;
+		clone.setCompanyId(getCompanyId());
 
-		clone._createDate = _createDate;
+		clone.setCreateDate(getCreateDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._name = _name;
+		clone.setName(getName());
 
-		clone._description = _description;
+		clone.setDescription(getDescription());
 
-		clone._portletId = _portletId;
+		clone.setPortletId(getPortletId());
 
-		clone._type = _type;
+		clone.setType(getType());
 
-		clone._typeSettings = _typeSettings;
+		clone.setTypeSettings(getTypeSettings());
 
-		clone._dlFolderId = _dlFolderId;
+		clone.setDlFolderId(getDlFolderId());
 
 		return clone;
 	}

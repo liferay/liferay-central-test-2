@@ -527,63 +527,61 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public Object clone() {
-		MBMessageModelImpl clone = new MBMessageImpl();
+		MBMessageImpl clone = new MBMessageImpl();
 		MBMessageModelImpl cloneModel = (MBMessageModelImpl)clone;
 
-		clone._originalUuid = clone._uuid = _uuid;
+		clone.setUuid(getUuid());
 
 		cloneModel._originalUuid = cloneModel._uuid;
+		clone.setMessageId(getMessageId());
 
-		clone._messageId = _messageId;
-
-		clone._originalGroupId = clone._groupId = _groupId;
+		clone.setGroupId(getGroupId());
 
 		cloneModel._originalGroupId = cloneModel._groupId;
 		cloneModel._setOriginalGroupId = false;
+		clone.setCompanyId(getCompanyId());
 
-		clone._companyId = _companyId;
+		clone.setUserId(getUserId());
 
-		clone._userId = _userId;
+		clone.setUserName(getUserName());
 
-		clone._userName = _userName;
+		clone.setCreateDate(getCreateDate());
 
-		clone._createDate = _createDate;
+		clone.setModifiedDate(getModifiedDate());
 
-		clone._modifiedDate = _modifiedDate;
+		clone.setClassNameId(getClassNameId());
 
-		clone._classNameId = _classNameId;
+		clone.setClassPK(getClassPK());
 
-		clone._classPK = _classPK;
+		clone.setCategoryId(getCategoryId());
 
-		clone._categoryId = _categoryId;
+		clone.setThreadId(getThreadId());
 
-		clone._threadId = _threadId;
+		clone.setRootMessageId(getRootMessageId());
 
-		clone._rootMessageId = _rootMessageId;
+		clone.setParentMessageId(getParentMessageId());
 
-		clone._parentMessageId = _parentMessageId;
+		clone.setSubject(getSubject());
 
-		clone._subject = _subject;
+		clone.setBody(getBody());
 
-		clone._body = _body;
+		clone.setFormat(getFormat());
 
-		clone._format = _format;
+		clone.setAttachments(getAttachments());
 
-		clone._attachments = _attachments;
+		clone.setAnonymous(getAnonymous());
 
-		clone._anonymous = _anonymous;
+		clone.setPriority(getPriority());
 
-		clone._priority = _priority;
+		clone.setAllowPingbacks(getAllowPingbacks());
 
-		clone._allowPingbacks = _allowPingbacks;
+		clone.setStatus(getStatus());
 
-		clone._status = _status;
+		clone.setStatusByUserId(getStatusByUserId());
 
-		clone._statusByUserId = _statusByUserId;
+		clone.setStatusByUserName(getStatusByUserName());
 
-		clone._statusByUserName = _statusByUserName;
-
-		clone._statusDate = _statusDate;
+		clone.setStatusDate(getStatusDate());
 
 		return clone;
 	}
