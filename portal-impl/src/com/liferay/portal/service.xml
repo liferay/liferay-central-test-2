@@ -626,6 +626,11 @@
 			<finder-column name="head" />
 			<finder-column name="plid" />
 		</finder>
+		<finder name="L_P_P" return-type="Collection">
+			<finder-column name="layoutSetBranchId" />
+			<finder-column name="plid" />
+			<finder-column name="parentLayoutRevisionId" />
+		</finder>
 		<finder name="L_P_S" return-type="Collection">
 			<finder-column name="layoutSetBranchId" />
 			<finder-column name="plid" />
