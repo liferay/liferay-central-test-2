@@ -312,6 +312,7 @@ public class LayoutRevisionLocalServiceUtil {
 	public static com.liferay.portal.model.LayoutRevision updateLayoutRevision(
 		long userId, long layoutRevisionId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
+		java.lang.String keywords, java.lang.String robots,
 		java.lang.String typeSettings, boolean iconImage, long iconImageId,
 		java.lang.String themeId, java.lang.String colorSchemeId,
 		java.lang.String wapThemeId, java.lang.String wapColorSchemeId,
@@ -321,8 +322,9 @@ public class LayoutRevisionLocalServiceUtil {
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateLayoutRevision(userId, layoutRevisionId, name, title,
-			description, typeSettings, iconImage, iconImageId, themeId,
-			colorSchemeId, wapThemeId, wapColorSchemeId, css, serviceContext);
+			description, keywords, robots, typeSettings, iconImage,
+			iconImageId, themeId, colorSchemeId, wapThemeId, wapColorSchemeId,
+			css, serviceContext);
 	}
 
 	public static com.liferay.portal.model.LayoutRevision updateStatus(

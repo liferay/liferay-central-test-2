@@ -272,10 +272,10 @@ public class LayoutRevisionLocalServiceImpl
 
 	public LayoutRevision updateLayoutRevision(
 			long userId, long layoutRevisionId, String name, String title,
-			String description, String typeSettings, boolean iconImage,
-			long iconImageId, String themeId, String colorSchemeId,
-			String wapThemeId, String wapColorSchemeId, String css,
-			ServiceContext serviceContext)
+			String description, String keywords, String robots,
+			String typeSettings, boolean iconImage, long iconImageId,
+			String themeId, String colorSchemeId, String wapThemeId,
+			String wapColorSchemeId, String css, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout revision
@@ -303,6 +303,8 @@ public class LayoutRevisionLocalServiceImpl
 		newLayoutRevision.setName(name);
 		newLayoutRevision.setTitle(title);
 		newLayoutRevision.setDescription(description);
+		newLayoutRevision.setKeywords(keywords);
+		newLayoutRevision.setRobots(robots);
 		newLayoutRevision.setTypeSettings(typeSettings);
 
 		if (iconImage) {

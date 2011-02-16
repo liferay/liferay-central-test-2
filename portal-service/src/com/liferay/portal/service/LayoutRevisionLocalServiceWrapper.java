@@ -314,9 +314,9 @@ public class LayoutRevisionLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutRevisionLocalService.updateLayoutRevision(userId,
-			layoutRevisionId, name, title, description, typeSettings,
-			iconImage, iconImageId, themeId, colorSchemeId, wapThemeId,
-			wapColorSchemeId, css, serviceContext);
+			layoutRevisionId, name, title, description, keywords, robots,
+			typeSettings, iconImage, iconImageId, themeId, colorSchemeId,
+			wapThemeId, wapColorSchemeId, css, serviceContext);
 	}
 
 	public com.liferay.portal.model.LayoutRevision updateStatus(long userId,
