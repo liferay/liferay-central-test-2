@@ -177,11 +177,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
-							<#if finderCol.type == "boolean">
-								Boolean.valueOf(
-							<#else>
-								new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-							</#if>
+							${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.valueOf(
 						</#if>
 
 						${entity.varName}.get${finderCol.methodName}()
@@ -244,11 +240,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
-							<#if finderCol.type == "boolean">
-								Boolean.valueOf(
-							<#else>
-								new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-							</#if>
+							${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.valueOf(
 						</#if>
 
 						${entity.varName}.get${finderCol.methodName}()
@@ -319,7 +311,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			${entity.name} ${entity.varName} = (${entity.name})session.get(${entity.name}Impl.class,
 
 			<#if entity.hasPrimitivePK()>
-				new ${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}(
+				${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}.valueOf(
 			</#if>
 
 			${entity.PKVarName}
@@ -415,11 +407,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				new Object[] {
 					<#list finderColsList as finderCol>
 						<#if finderCol.isPrimitiveType()>
-							<#if finderCol.type == "boolean">
-								Boolean.valueOf(
-							<#else>
-								new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-							</#if>
+							${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.valueOf(
 						</#if>
 
 						${entity.varName}ModelImpl.get${finderCol.methodName}()
@@ -573,11 +561,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					new Object[] {
 						<#list finderColsList as finderCol>
 							<#if finderCol.isPrimitiveType()>
-								<#if finderCol.type == "boolean">
-									Boolean.valueOf(
-								<#else>
-									new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-								</#if>
+								${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.valueOf(
 							</#if>
 
 							${entity.varName}ModelImpl.getOriginal${finderCol.methodName}()
@@ -613,11 +597,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					new Object[] {
 						<#list finderColsList as finderCol>
 							<#if finderCol.isPrimitiveType()>
-								<#if finderCol.type == "boolean">
-									Boolean.valueOf(
-								<#else>
-									new ${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(
-								</#if>
+								${serviceBuilder.getPrimitiveObj("${finderCol.type}")}.valueOf(
 							</#if>
 
 							${entity.varName}.get${finderCol.methodName}()
@@ -735,7 +715,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				${entity.varName} = (${entity.name})session.get(${entity.name}Impl.class,
 
 				<#if entity.hasPrimitivePK()>
-					new ${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}(
+					${serviceBuilder.getPrimitiveObj("${entity.PKClassName}")}.valueOf(
 				</#if>
 
 				${entity.PKVarName}
