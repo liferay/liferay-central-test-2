@@ -19,6 +19,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.TryFilter;
 import com.liferay.portal.kernel.servlet.WrapHttpServletResponseFilter;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -76,6 +79,11 @@ public class AbsoluteRedirectsFilter
 				_log.debug("Setting httpsInitial to " + httpsInitial);
 			}
 		}
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			request);
+
+		ServiceContextThreadLocal.pushServiceContext(serviceContext);
 
 		return null;
 	}
