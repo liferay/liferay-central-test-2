@@ -532,10 +532,10 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			);
 
 			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
-				<#if cloneCastModelImpl??>
-					${entity.name}ModelImpl ${entity.varName}ModelImpl = ${entity.varName}Impl;
-				<#else>
+				<#if !cloneCastModelImpl??>
 					<#assign cloneCastModelImpl = true>
+
+					${entity.name}ModelImpl ${entity.varName}ModelImpl = ${entity.varName}Impl;
 				</#if>
 
 				${entity.varName}ModelImpl._original${column.methodName} = ${entity.varName}ModelImpl._${column.name};
