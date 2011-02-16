@@ -141,7 +141,7 @@
 
 	<definition name="portlet.asset_category_admin" extends="portlet" />
 
-    <definition name="portlet.asset_category_admin.edit_category" extends="portlet.asset_category_admin">
+	<definition name="portlet.asset_category_admin.edit_category" extends="portlet.asset_category_admin">
 		<put name="portlet_content" value="/portlet/asset_category_admin/edit_category.jsp" />
 	</definition>
 
