@@ -92,7 +92,7 @@ select {
 	border-width: 0;
 }
 
-#breadcrumbs, .form-navigation, .lfr-panel.lfr-extended, .aui-tree-view, .portlet-enterprise-admin .form-navigation, .lfr-asset-column-actions-content, .lfr-ctrl-panel-content .aui-column-content-center, .taglib-search-toggle {
+#breadcrumbs, .form-navigation, .lfr-panel.lfr-extended, .portlet-enterprise-admin .form-navigation, .lfr-asset-column-actions-content, .lfr-ctrl-panel-content .aui-column-content-center, .taglib-search-toggle {
 	background: #E8EAEB;
 	border: 1px solid #979798;
 	border-color: #979798 #FAFAFB #FAFAFB #BDBDBE;
@@ -676,7 +676,7 @@ input[type="text"], input[type="password"], select, textarea, .textarea {
 	box-shadow: 1px 0 5px #E3E3E3 inset;
 }
 
-input[type="text"], input[type="password"], select, textarea, .textarea, #breadcrumbs, .form-navigation, .lfr-panel.lfr-extended, .aui-tree-view, .portlet-enterprise-admin .form-navigation, .lfr-asset-column-actions-content, .lfr-ctrl-panel-content .aui-column-content-center, .taglib-search-toggle {
+input[type="text"], input[type="password"], select, textarea, .textarea, #breadcrumbs, .form-navigation, .lfr-panel.lfr-extended, .portlet-enterprise-admin .form-navigation, .lfr-asset-column-actions-content, .lfr-ctrl-panel-content .aui-column-content-center, .taglib-search-toggle {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	border-radius: 4px;
@@ -688,7 +688,7 @@ input[type="text"], input[type="password"], select, textarea, .textarea, #breadc
 	border-radius: 10px;
 }
 
-#breadcrumbs, .form-navigation, .lfr-panel.lfr-extended, .aui-tree-view, .portlet-enterprise-admin .form-navigation, .lfr-asset-column-actions-content, .lfr-ctrl-panel-content .aui-column-content-center, .taglib-search-toggle {
+#breadcrumbs, .form-navigation, .lfr-panel.lfr-extended, .portlet-enterprise-admin .form-navigation, .lfr-asset-column-actions-content, .lfr-ctrl-panel-content .aui-column-content-center, .taglib-search-toggle {
 	-moz-box-shadow: 0 0 8px #CECECE inset;
 	-webkit-box-shadow: 0 0 8px #CECECE inset;
 	box-shadow: 0 0 8px #CECECE inset;
