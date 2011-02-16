@@ -177,11 +177,19 @@ public class SecureFilter extends BasePortalFilter {
 			// wrap the request if necessary.
 
 			if (!PropsValues.PORTAL_JAAS_ENABLE) {
-				if (_digestAuthEnabled) {
-					request = digestAuth(request, response);
+				User user = PortalUtil.getUser(request);
+
+				if ((user != null) && !user.isDefaultUser()) {
+					setCredentials(
+						request, request.getSession(), user.getUserId());
 				}
-				else if (_basicAuthEnabled) {
-					request = basicAuth(request, response);
+				else {
+					if (_digestAuthEnabled) {
+						request = digestAuth(request, response);
+					}
+					else if (_basicAuthEnabled) {
+						request = basicAuth(request, response);
+					}
 				}
 			}
 
