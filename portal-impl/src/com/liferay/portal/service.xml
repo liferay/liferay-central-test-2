@@ -585,6 +585,7 @@
 		<column name="head" type="boolean" />
 		<column name="major" type="boolean" />
 		<column name="plid" type="long" />
+		<column name="privateLayout" type="boolean" />
 		<column name="name" type="String" localized="true" />
 		<column name="title" type="String" localized="true" />
 		<column name="description" type="String" localized="true" />
