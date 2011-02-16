@@ -204,25 +204,28 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	}
 
 	public Object clone() {
-		UserIdMapperImpl clone = new UserIdMapperImpl();
-		UserIdMapperModelImpl cloneModel = (UserIdMapperModelImpl)clone;
+		UserIdMapperImpl userIdMapperImpl = new UserIdMapperImpl();
 
-		clone.setUserIdMapperId(getUserIdMapperId());
+		UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapperImpl;
 
-		clone.setUserId(getUserId());
+		userIdMapperImpl.setUserIdMapperId(getUserIdMapperId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setType(getType());
+		userIdMapperImpl.setUserId(getUserId());
 
-		cloneModel._originalType = cloneModel._type;
-		clone.setDescription(getDescription());
+		userIdMapperModelImpl._originalUserId = userIdMapperModelImpl._userId;
 
-		clone.setExternalUserId(getExternalUserId());
+		userIdMapperModelImpl._setOriginalUserId = false;
+		userIdMapperImpl.setType(getType());
 
-		cloneModel._originalExternalUserId = cloneModel._externalUserId;
+		userIdMapperModelImpl._originalType = userIdMapperModelImpl._type;
 
-		return clone;
+		userIdMapperImpl.setDescription(getDescription());
+
+		userIdMapperImpl.setExternalUserId(getExternalUserId());
+
+		userIdMapperModelImpl._originalExternalUserId = userIdMapperModelImpl._externalUserId;
+
+		return userIdMapperImpl;
 	}
 
 	public int compareTo(UserIdMapper userIdMapper) {

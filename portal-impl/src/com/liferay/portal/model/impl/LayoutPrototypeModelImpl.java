@@ -304,22 +304,23 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 	}
 
 	public Object clone() {
-		LayoutPrototypeImpl clone = new LayoutPrototypeImpl();
-		LayoutPrototypeModelImpl cloneModel = (LayoutPrototypeModelImpl)clone;
+		LayoutPrototypeImpl layoutPrototypeImpl = new LayoutPrototypeImpl();
 
-		clone.setLayoutPrototypeId(getLayoutPrototypeId());
+		LayoutPrototypeModelImpl layoutPrototypeModelImpl = (LayoutPrototypeModelImpl)layoutPrototypeImpl;
 
-		clone.setCompanyId(getCompanyId());
+		layoutPrototypeImpl.setLayoutPrototypeId(getLayoutPrototypeId());
 
-		clone.setName(getName());
+		layoutPrototypeImpl.setCompanyId(getCompanyId());
 
-		clone.setDescription(getDescription());
+		layoutPrototypeImpl.setName(getName());
 
-		clone.setSettings(getSettings());
+		layoutPrototypeImpl.setDescription(getDescription());
 
-		clone.setActive(getActive());
+		layoutPrototypeImpl.setSettings(getSettings());
 
-		return clone;
+		layoutPrototypeImpl.setActive(getActive());
+
+		return layoutPrototypeImpl;
 	}
 
 	public int compareTo(LayoutPrototype layoutPrototype) {

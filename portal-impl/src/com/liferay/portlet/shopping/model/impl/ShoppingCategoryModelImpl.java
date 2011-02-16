@@ -272,30 +272,31 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	}
 
 	public Object clone() {
-		ShoppingCategoryImpl clone = new ShoppingCategoryImpl();
-		ShoppingCategoryModelImpl cloneModel = (ShoppingCategoryModelImpl)clone;
+		ShoppingCategoryImpl shoppingCategoryImpl = new ShoppingCategoryImpl();
 
-		clone.setCategoryId(getCategoryId());
+		ShoppingCategoryModelImpl shoppingCategoryModelImpl = (ShoppingCategoryModelImpl)shoppingCategoryImpl;
 
-		clone.setGroupId(getGroupId());
+		shoppingCategoryImpl.setCategoryId(getCategoryId());
 
-		clone.setCompanyId(getCompanyId());
+		shoppingCategoryImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		shoppingCategoryImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		shoppingCategoryImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		shoppingCategoryImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		shoppingCategoryImpl.setCreateDate(getCreateDate());
 
-		clone.setParentCategoryId(getParentCategoryId());
+		shoppingCategoryImpl.setModifiedDate(getModifiedDate());
 
-		clone.setName(getName());
+		shoppingCategoryImpl.setParentCategoryId(getParentCategoryId());
 
-		clone.setDescription(getDescription());
+		shoppingCategoryImpl.setName(getName());
 
-		return clone;
+		shoppingCategoryImpl.setDescription(getDescription());
+
+		return shoppingCategoryImpl;
 	}
 
 	public int compareTo(ShoppingCategory shoppingCategory) {

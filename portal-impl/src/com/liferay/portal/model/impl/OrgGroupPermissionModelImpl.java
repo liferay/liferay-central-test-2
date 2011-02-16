@@ -120,16 +120,17 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 	}
 
 	public Object clone() {
-		OrgGroupPermissionImpl clone = new OrgGroupPermissionImpl();
-		OrgGroupPermissionModelImpl cloneModel = (OrgGroupPermissionModelImpl)clone;
+		OrgGroupPermissionImpl orgGroupPermissionImpl = new OrgGroupPermissionImpl();
 
-		clone.setOrganizationId(getOrganizationId());
+		OrgGroupPermissionModelImpl orgGroupPermissionModelImpl = (OrgGroupPermissionModelImpl)orgGroupPermissionImpl;
 
-		clone.setGroupId(getGroupId());
+		orgGroupPermissionImpl.setOrganizationId(getOrganizationId());
 
-		clone.setPermissionId(getPermissionId());
+		orgGroupPermissionImpl.setGroupId(getGroupId());
 
-		return clone;
+		orgGroupPermissionImpl.setPermissionId(getPermissionId());
+
+		return orgGroupPermissionImpl;
 	}
 
 	public int compareTo(OrgGroupPermission orgGroupPermission) {

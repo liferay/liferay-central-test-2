@@ -281,32 +281,36 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	}
 
 	public Object clone() {
-		CompanyImpl clone = new CompanyImpl();
-		CompanyModelImpl cloneModel = (CompanyModelImpl)clone;
+		CompanyImpl companyImpl = new CompanyImpl();
 
-		clone.setCompanyId(getCompanyId());
+		CompanyModelImpl companyModelImpl = (CompanyModelImpl)companyImpl;
 
-		clone.setAccountId(getAccountId());
+		companyImpl.setCompanyId(getCompanyId());
 
-		clone.setWebId(getWebId());
+		companyImpl.setAccountId(getAccountId());
 
-		cloneModel._originalWebId = cloneModel._webId;
-		clone.setKey(getKey());
+		companyImpl.setWebId(getWebId());
 
-		clone.setMx(getMx());
+		companyModelImpl._originalWebId = companyModelImpl._webId;
 
-		cloneModel._originalMx = cloneModel._mx;
-		clone.setHomeURL(getHomeURL());
+		companyImpl.setKey(getKey());
 
-		clone.setLogoId(getLogoId());
+		companyImpl.setMx(getMx());
 
-		cloneModel._originalLogoId = cloneModel._logoId;
-		cloneModel._setOriginalLogoId = false;
-		clone.setSystem(getSystem());
+		companyModelImpl._originalMx = companyModelImpl._mx;
 
-		clone.setMaxUsers(getMaxUsers());
+		companyImpl.setHomeURL(getHomeURL());
 
-		return clone;
+		companyImpl.setLogoId(getLogoId());
+
+		companyModelImpl._originalLogoId = companyModelImpl._logoId;
+
+		companyModelImpl._setOriginalLogoId = false;
+		companyImpl.setSystem(getSystem());
+
+		companyImpl.setMaxUsers(getMaxUsers());
+
+		return companyImpl;
 	}
 
 	public int compareTo(Company company) {

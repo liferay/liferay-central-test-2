@@ -164,18 +164,19 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 	}
 
 	public Object clone() {
-		PasswordTrackerImpl clone = new PasswordTrackerImpl();
-		PasswordTrackerModelImpl cloneModel = (PasswordTrackerModelImpl)clone;
+		PasswordTrackerImpl passwordTrackerImpl = new PasswordTrackerImpl();
 
-		clone.setPasswordTrackerId(getPasswordTrackerId());
+		PasswordTrackerModelImpl passwordTrackerModelImpl = (PasswordTrackerModelImpl)passwordTrackerImpl;
 
-		clone.setUserId(getUserId());
+		passwordTrackerImpl.setPasswordTrackerId(getPasswordTrackerId());
 
-		clone.setCreateDate(getCreateDate());
+		passwordTrackerImpl.setUserId(getUserId());
 
-		clone.setPassword(getPassword());
+		passwordTrackerImpl.setCreateDate(getCreateDate());
 
-		return clone;
+		passwordTrackerImpl.setPassword(getPassword());
+
+		return passwordTrackerImpl;
 	}
 
 	public int compareTo(PasswordTracker passwordTracker) {

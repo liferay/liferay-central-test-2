@@ -247,26 +247,30 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	}
 
 	public Object clone() {
-		PluginSettingImpl clone = new PluginSettingImpl();
-		PluginSettingModelImpl cloneModel = (PluginSettingModelImpl)clone;
+		PluginSettingImpl pluginSettingImpl = new PluginSettingImpl();
 
-		clone.setPluginSettingId(getPluginSettingId());
+		PluginSettingModelImpl pluginSettingModelImpl = (PluginSettingModelImpl)pluginSettingImpl;
 
-		clone.setCompanyId(getCompanyId());
+		pluginSettingImpl.setPluginSettingId(getPluginSettingId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setPluginId(getPluginId());
+		pluginSettingImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalPluginId = cloneModel._pluginId;
-		clone.setPluginType(getPluginType());
+		pluginSettingModelImpl._originalCompanyId = pluginSettingModelImpl._companyId;
 
-		cloneModel._originalPluginType = cloneModel._pluginType;
-		clone.setRoles(getRoles());
+		pluginSettingModelImpl._setOriginalCompanyId = false;
+		pluginSettingImpl.setPluginId(getPluginId());
 
-		clone.setActive(getActive());
+		pluginSettingModelImpl._originalPluginId = pluginSettingModelImpl._pluginId;
 
-		return clone;
+		pluginSettingImpl.setPluginType(getPluginType());
+
+		pluginSettingModelImpl._originalPluginType = pluginSettingModelImpl._pluginType;
+
+		pluginSettingImpl.setRoles(getRoles());
+
+		pluginSettingImpl.setActive(getActive());
+
+		return pluginSettingImpl;
 	}
 
 	public int compareTo(PluginSetting pluginSetting) {

@@ -171,24 +171,27 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	}
 
 	public Object clone() {
-		ExpandoTableImpl clone = new ExpandoTableImpl();
-		ExpandoTableModelImpl cloneModel = (ExpandoTableModelImpl)clone;
+		ExpandoTableImpl expandoTableImpl = new ExpandoTableImpl();
 
-		clone.setTableId(getTableId());
+		ExpandoTableModelImpl expandoTableModelImpl = (ExpandoTableModelImpl)expandoTableImpl;
 
-		clone.setCompanyId(getCompanyId());
+		expandoTableImpl.setTableId(getTableId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setClassNameId(getClassNameId());
+		expandoTableImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setName(getName());
+		expandoTableModelImpl._originalCompanyId = expandoTableModelImpl._companyId;
 
-		cloneModel._originalName = cloneModel._name;
+		expandoTableModelImpl._setOriginalCompanyId = false;
+		expandoTableImpl.setClassNameId(getClassNameId());
 
-		return clone;
+		expandoTableModelImpl._originalClassNameId = expandoTableModelImpl._classNameId;
+
+		expandoTableModelImpl._setOriginalClassNameId = false;
+		expandoTableImpl.setName(getName());
+
+		expandoTableModelImpl._originalName = expandoTableModelImpl._name;
+
+		return expandoTableImpl;
 	}
 
 	public int compareTo(ExpandoTable expandoTable) {

@@ -476,37 +476,40 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 	}
 
 	public Object clone() {
-		PollsQuestionImpl clone = new PollsQuestionImpl();
-		PollsQuestionModelImpl cloneModel = (PollsQuestionModelImpl)clone;
+		PollsQuestionImpl pollsQuestionImpl = new PollsQuestionImpl();
 
-		clone.setUuid(getUuid());
+		PollsQuestionModelImpl pollsQuestionModelImpl = (PollsQuestionModelImpl)pollsQuestionImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setQuestionId(getQuestionId());
+		pollsQuestionImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		pollsQuestionModelImpl._originalUuid = pollsQuestionModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		pollsQuestionImpl.setQuestionId(getQuestionId());
 
-		clone.setUserId(getUserId());
+		pollsQuestionImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		pollsQuestionModelImpl._originalGroupId = pollsQuestionModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		pollsQuestionModelImpl._setOriginalGroupId = false;
+		pollsQuestionImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		pollsQuestionImpl.setUserId(getUserId());
 
-		clone.setTitle(getTitle());
+		pollsQuestionImpl.setUserName(getUserName());
 
-		clone.setDescription(getDescription());
+		pollsQuestionImpl.setCreateDate(getCreateDate());
 
-		clone.setExpirationDate(getExpirationDate());
+		pollsQuestionImpl.setModifiedDate(getModifiedDate());
 
-		clone.setLastVoteDate(getLastVoteDate());
+		pollsQuestionImpl.setTitle(getTitle());
 
-		return clone;
+		pollsQuestionImpl.setDescription(getDescription());
+
+		pollsQuestionImpl.setExpirationDate(getExpirationDate());
+
+		pollsQuestionImpl.setLastVoteDate(getLastVoteDate());
+
+		return pollsQuestionImpl;
 	}
 
 	public int compareTo(PollsQuestion pollsQuestion) {

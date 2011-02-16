@@ -232,33 +232,38 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	}
 
 	public Object clone() {
-		JournalContentSearchImpl clone = new JournalContentSearchImpl();
-		JournalContentSearchModelImpl cloneModel = (JournalContentSearchModelImpl)clone;
+		JournalContentSearchImpl journalContentSearchImpl = new JournalContentSearchImpl();
 
-		clone.setContentSearchId(getContentSearchId());
+		JournalContentSearchModelImpl journalContentSearchModelImpl = (JournalContentSearchModelImpl)journalContentSearchImpl;
 
-		clone.setGroupId(getGroupId());
+		journalContentSearchImpl.setContentSearchId(getContentSearchId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		journalContentSearchImpl.setGroupId(getGroupId());
 
-		clone.setPrivateLayout(getPrivateLayout());
+		journalContentSearchModelImpl._originalGroupId = journalContentSearchModelImpl._groupId;
 
-		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
-		cloneModel._setOriginalPrivateLayout = false;
-		clone.setLayoutId(getLayoutId());
+		journalContentSearchModelImpl._setOriginalGroupId = false;
+		journalContentSearchImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalLayoutId = cloneModel._layoutId;
-		cloneModel._setOriginalLayoutId = false;
-		clone.setPortletId(getPortletId());
+		journalContentSearchImpl.setPrivateLayout(getPrivateLayout());
 
-		cloneModel._originalPortletId = cloneModel._portletId;
-		clone.setArticleId(getArticleId());
+		journalContentSearchModelImpl._originalPrivateLayout = journalContentSearchModelImpl._privateLayout;
 
-		cloneModel._originalArticleId = cloneModel._articleId;
+		journalContentSearchModelImpl._setOriginalPrivateLayout = false;
+		journalContentSearchImpl.setLayoutId(getLayoutId());
 
-		return clone;
+		journalContentSearchModelImpl._originalLayoutId = journalContentSearchModelImpl._layoutId;
+
+		journalContentSearchModelImpl._setOriginalLayoutId = false;
+		journalContentSearchImpl.setPortletId(getPortletId());
+
+		journalContentSearchModelImpl._originalPortletId = journalContentSearchModelImpl._portletId;
+
+		journalContentSearchImpl.setArticleId(getArticleId());
+
+		journalContentSearchModelImpl._originalArticleId = journalContentSearchModelImpl._articleId;
+
+		return journalContentSearchImpl;
 	}
 
 	public int compareTo(JournalContentSearch journalContentSearch) {

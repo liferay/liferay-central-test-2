@@ -228,30 +228,31 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	}
 
 	public Object clone() {
-		ShoppingOrderItemImpl clone = new ShoppingOrderItemImpl();
-		ShoppingOrderItemModelImpl cloneModel = (ShoppingOrderItemModelImpl)clone;
+		ShoppingOrderItemImpl shoppingOrderItemImpl = new ShoppingOrderItemImpl();
 
-		clone.setOrderItemId(getOrderItemId());
+		ShoppingOrderItemModelImpl shoppingOrderItemModelImpl = (ShoppingOrderItemModelImpl)shoppingOrderItemImpl;
 
-		clone.setOrderId(getOrderId());
+		shoppingOrderItemImpl.setOrderItemId(getOrderItemId());
 
-		clone.setItemId(getItemId());
+		shoppingOrderItemImpl.setOrderId(getOrderId());
 
-		clone.setSku(getSku());
+		shoppingOrderItemImpl.setItemId(getItemId());
 
-		clone.setName(getName());
+		shoppingOrderItemImpl.setSku(getSku());
 
-		clone.setDescription(getDescription());
+		shoppingOrderItemImpl.setName(getName());
 
-		clone.setProperties(getProperties());
+		shoppingOrderItemImpl.setDescription(getDescription());
 
-		clone.setPrice(getPrice());
+		shoppingOrderItemImpl.setProperties(getProperties());
 
-		clone.setQuantity(getQuantity());
+		shoppingOrderItemImpl.setPrice(getPrice());
 
-		clone.setShippedDate(getShippedDate());
+		shoppingOrderItemImpl.setQuantity(getQuantity());
 
-		return clone;
+		shoppingOrderItemImpl.setShippedDate(getShippedDate());
+
+		return shoppingOrderItemImpl;
 	}
 
 	public int compareTo(ShoppingOrderItem shoppingOrderItem) {

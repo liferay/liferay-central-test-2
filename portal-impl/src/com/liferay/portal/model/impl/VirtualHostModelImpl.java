@@ -177,24 +177,27 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	}
 
 	public Object clone() {
-		VirtualHostImpl clone = new VirtualHostImpl();
-		VirtualHostModelImpl cloneModel = (VirtualHostModelImpl)clone;
+		VirtualHostImpl virtualHostImpl = new VirtualHostImpl();
 
-		clone.setVirtualHostId(getVirtualHostId());
+		VirtualHostModelImpl virtualHostModelImpl = (VirtualHostModelImpl)virtualHostImpl;
 
-		clone.setCompanyId(getCompanyId());
+		virtualHostImpl.setVirtualHostId(getVirtualHostId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setLayoutSetId(getLayoutSetId());
+		virtualHostImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalLayoutSetId = cloneModel._layoutSetId;
-		cloneModel._setOriginalLayoutSetId = false;
-		clone.setHostname(getHostname());
+		virtualHostModelImpl._originalCompanyId = virtualHostModelImpl._companyId;
 
-		cloneModel._originalHostname = cloneModel._hostname;
+		virtualHostModelImpl._setOriginalCompanyId = false;
+		virtualHostImpl.setLayoutSetId(getLayoutSetId());
 
-		return clone;
+		virtualHostModelImpl._originalLayoutSetId = virtualHostModelImpl._layoutSetId;
+
+		virtualHostModelImpl._setOriginalLayoutSetId = false;
+		virtualHostImpl.setHostname(getHostname());
+
+		virtualHostModelImpl._originalHostname = virtualHostModelImpl._hostname;
+
+		return virtualHostImpl;
 	}
 
 	public int compareTo(VirtualHost virtualHost) {

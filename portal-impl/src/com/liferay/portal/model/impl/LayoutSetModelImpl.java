@@ -339,42 +339,45 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 	}
 
 	public Object clone() {
-		LayoutSetImpl clone = new LayoutSetImpl();
-		LayoutSetModelImpl cloneModel = (LayoutSetModelImpl)clone;
+		LayoutSetImpl layoutSetImpl = new LayoutSetImpl();
 
-		clone.setLayoutSetId(getLayoutSetId());
+		LayoutSetModelImpl layoutSetModelImpl = (LayoutSetModelImpl)layoutSetImpl;
 
-		clone.setGroupId(getGroupId());
+		layoutSetImpl.setLayoutSetId(getLayoutSetId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		layoutSetImpl.setGroupId(getGroupId());
 
-		clone.setPrivateLayout(getPrivateLayout());
+		layoutSetModelImpl._originalGroupId = layoutSetModelImpl._groupId;
 
-		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
-		cloneModel._setOriginalPrivateLayout = false;
-		clone.setLogo(getLogo());
+		layoutSetModelImpl._setOriginalGroupId = false;
+		layoutSetImpl.setCompanyId(getCompanyId());
 
-		clone.setLogoId(getLogoId());
+		layoutSetImpl.setPrivateLayout(getPrivateLayout());
 
-		clone.setThemeId(getThemeId());
+		layoutSetModelImpl._originalPrivateLayout = layoutSetModelImpl._privateLayout;
 
-		clone.setColorSchemeId(getColorSchemeId());
+		layoutSetModelImpl._setOriginalPrivateLayout = false;
+		layoutSetImpl.setLogo(getLogo());
 
-		clone.setWapThemeId(getWapThemeId());
+		layoutSetImpl.setLogoId(getLogoId());
 
-		clone.setWapColorSchemeId(getWapColorSchemeId());
+		layoutSetImpl.setThemeId(getThemeId());
 
-		clone.setCss(getCss());
+		layoutSetImpl.setColorSchemeId(getColorSchemeId());
 
-		clone.setPageCount(getPageCount());
+		layoutSetImpl.setWapThemeId(getWapThemeId());
 
-		clone.setSettings(getSettings());
+		layoutSetImpl.setWapColorSchemeId(getWapColorSchemeId());
 
-		clone.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
+		layoutSetImpl.setCss(getCss());
 
-		return clone;
+		layoutSetImpl.setPageCount(getPageCount());
+
+		layoutSetImpl.setSettings(getSettings());
+
+		layoutSetImpl.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
+
+		return layoutSetImpl;
 	}
 
 	public int compareTo(LayoutSet layoutSet) {

@@ -226,30 +226,31 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 	}
 
 	public Object clone() {
-		WorkflowInstanceLinkImpl clone = new WorkflowInstanceLinkImpl();
-		WorkflowInstanceLinkModelImpl cloneModel = (WorkflowInstanceLinkModelImpl)clone;
+		WorkflowInstanceLinkImpl workflowInstanceLinkImpl = new WorkflowInstanceLinkImpl();
 
-		clone.setWorkflowInstanceLinkId(getWorkflowInstanceLinkId());
+		WorkflowInstanceLinkModelImpl workflowInstanceLinkModelImpl = (WorkflowInstanceLinkModelImpl)workflowInstanceLinkImpl;
 
-		clone.setGroupId(getGroupId());
+		workflowInstanceLinkImpl.setWorkflowInstanceLinkId(getWorkflowInstanceLinkId());
 
-		clone.setCompanyId(getCompanyId());
+		workflowInstanceLinkImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		workflowInstanceLinkImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		workflowInstanceLinkImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		workflowInstanceLinkImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		workflowInstanceLinkImpl.setCreateDate(getCreateDate());
 
-		clone.setClassNameId(getClassNameId());
+		workflowInstanceLinkImpl.setModifiedDate(getModifiedDate());
 
-		clone.setClassPK(getClassPK());
+		workflowInstanceLinkImpl.setClassNameId(getClassNameId());
 
-		clone.setWorkflowInstanceId(getWorkflowInstanceId());
+		workflowInstanceLinkImpl.setClassPK(getClassPK());
 
-		return clone;
+		workflowInstanceLinkImpl.setWorkflowInstanceId(getWorkflowInstanceId());
+
+		return workflowInstanceLinkImpl;
 	}
 
 	public int compareTo(WorkflowInstanceLink workflowInstanceLink) {

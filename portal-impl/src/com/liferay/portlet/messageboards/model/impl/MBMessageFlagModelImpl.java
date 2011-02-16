@@ -243,29 +243,33 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 	}
 
 	public Object clone() {
-		MBMessageFlagImpl clone = new MBMessageFlagImpl();
-		MBMessageFlagModelImpl cloneModel = (MBMessageFlagModelImpl)clone;
+		MBMessageFlagImpl mbMessageFlagImpl = new MBMessageFlagImpl();
 
-		clone.setMessageFlagId(getMessageFlagId());
+		MBMessageFlagModelImpl mbMessageFlagModelImpl = (MBMessageFlagModelImpl)mbMessageFlagImpl;
 
-		clone.setUserId(getUserId());
+		mbMessageFlagImpl.setMessageFlagId(getMessageFlagId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setModifiedDate(getModifiedDate());
+		mbMessageFlagImpl.setUserId(getUserId());
 
-		clone.setThreadId(getThreadId());
+		mbMessageFlagModelImpl._originalUserId = mbMessageFlagModelImpl._userId;
 
-		clone.setMessageId(getMessageId());
+		mbMessageFlagModelImpl._setOriginalUserId = false;
+		mbMessageFlagImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalMessageId = cloneModel._messageId;
-		cloneModel._setOriginalMessageId = false;
-		clone.setFlag(getFlag());
+		mbMessageFlagImpl.setThreadId(getThreadId());
 
-		cloneModel._originalFlag = cloneModel._flag;
-		cloneModel._setOriginalFlag = false;
+		mbMessageFlagImpl.setMessageId(getMessageId());
 
-		return clone;
+		mbMessageFlagModelImpl._originalMessageId = mbMessageFlagModelImpl._messageId;
+
+		mbMessageFlagModelImpl._setOriginalMessageId = false;
+		mbMessageFlagImpl.setFlag(getFlag());
+
+		mbMessageFlagModelImpl._originalFlag = mbMessageFlagModelImpl._flag;
+
+		mbMessageFlagModelImpl._setOriginalFlag = false;
+
+		return mbMessageFlagImpl;
 	}
 
 	public int compareTo(MBMessageFlag mbMessageFlag) {

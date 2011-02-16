@@ -158,18 +158,19 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	}
 
 	public Object clone() {
-		ClusterGroupImpl clone = new ClusterGroupImpl();
-		ClusterGroupModelImpl cloneModel = (ClusterGroupModelImpl)clone;
+		ClusterGroupImpl clusterGroupImpl = new ClusterGroupImpl();
 
-		clone.setClusterGroupId(getClusterGroupId());
+		ClusterGroupModelImpl clusterGroupModelImpl = (ClusterGroupModelImpl)clusterGroupImpl;
 
-		clone.setName(getName());
+		clusterGroupImpl.setClusterGroupId(getClusterGroupId());
 
-		clone.setClusterNodeIds(getClusterNodeIds());
+		clusterGroupImpl.setName(getName());
 
-		clone.setWholeCluster(getWholeCluster());
+		clusterGroupImpl.setClusterNodeIds(getClusterNodeIds());
 
-		return clone;
+		clusterGroupImpl.setWholeCluster(getWholeCluster());
+
+		return clusterGroupImpl;
 	}
 
 	public int compareTo(ClusterGroup clusterGroup) {

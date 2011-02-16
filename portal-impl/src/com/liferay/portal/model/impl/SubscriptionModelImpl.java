@@ -259,36 +259,41 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	}
 
 	public Object clone() {
-		SubscriptionImpl clone = new SubscriptionImpl();
-		SubscriptionModelImpl cloneModel = (SubscriptionModelImpl)clone;
+		SubscriptionImpl subscriptionImpl = new SubscriptionImpl();
 
-		clone.setSubscriptionId(getSubscriptionId());
+		SubscriptionModelImpl subscriptionModelImpl = (SubscriptionModelImpl)subscriptionImpl;
 
-		clone.setCompanyId(getCompanyId());
+		subscriptionImpl.setSubscriptionId(getSubscriptionId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setUserId(getUserId());
+		subscriptionImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setUserName(getUserName());
+		subscriptionModelImpl._originalCompanyId = subscriptionModelImpl._companyId;
 
-		clone.setCreateDate(getCreateDate());
+		subscriptionModelImpl._setOriginalCompanyId = false;
+		subscriptionImpl.setUserId(getUserId());
 
-		clone.setModifiedDate(getModifiedDate());
+		subscriptionModelImpl._originalUserId = subscriptionModelImpl._userId;
 
-		clone.setClassNameId(getClassNameId());
+		subscriptionModelImpl._setOriginalUserId = false;
+		subscriptionImpl.setUserName(getUserName());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		subscriptionImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setFrequency(getFrequency());
+		subscriptionImpl.setModifiedDate(getModifiedDate());
 
-		return clone;
+		subscriptionImpl.setClassNameId(getClassNameId());
+
+		subscriptionModelImpl._originalClassNameId = subscriptionModelImpl._classNameId;
+
+		subscriptionModelImpl._setOriginalClassNameId = false;
+		subscriptionImpl.setClassPK(getClassPK());
+
+		subscriptionModelImpl._originalClassPK = subscriptionModelImpl._classPK;
+
+		subscriptionModelImpl._setOriginalClassPK = false;
+		subscriptionImpl.setFrequency(getFrequency());
+
+		return subscriptionImpl;
 	}
 
 	public int compareTo(Subscription subscription) {

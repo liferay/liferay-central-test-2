@@ -262,34 +262,37 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	}
 
 	public Object clone() {
-		LockImpl clone = new LockImpl();
-		LockModelImpl cloneModel = (LockModelImpl)clone;
+		LockImpl lockImpl = new LockImpl();
 
-		clone.setUuid(getUuid());
+		LockModelImpl lockModelImpl = (LockModelImpl)lockImpl;
 
-		clone.setLockId(getLockId());
+		lockImpl.setUuid(getUuid());
 
-		clone.setCompanyId(getCompanyId());
+		lockImpl.setLockId(getLockId());
 
-		clone.setUserId(getUserId());
+		lockImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		lockImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		lockImpl.setUserName(getUserName());
 
-		clone.setClassName(getClassName());
+		lockImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalClassName = cloneModel._className;
-		clone.setKey(getKey());
+		lockImpl.setClassName(getClassName());
 
-		cloneModel._originalKey = cloneModel._key;
-		clone.setOwner(getOwner());
+		lockModelImpl._originalClassName = lockModelImpl._className;
 
-		clone.setInheritable(getInheritable());
+		lockImpl.setKey(getKey());
 
-		clone.setExpirationDate(getExpirationDate());
+		lockModelImpl._originalKey = lockModelImpl._key;
 
-		return clone;
+		lockImpl.setOwner(getOwner());
+
+		lockImpl.setInheritable(getInheritable());
+
+		lockImpl.setExpirationDate(getExpirationDate());
+
+		return lockImpl;
 	}
 
 	public int compareTo(Lock lock) {

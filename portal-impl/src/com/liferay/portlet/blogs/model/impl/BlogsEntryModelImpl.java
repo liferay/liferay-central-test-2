@@ -523,60 +523,64 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	public Object clone() {
-		BlogsEntryImpl clone = new BlogsEntryImpl();
-		BlogsEntryModelImpl cloneModel = (BlogsEntryModelImpl)clone;
+		BlogsEntryImpl blogsEntryImpl = new BlogsEntryImpl();
 
-		clone.setUuid(getUuid());
+		BlogsEntryModelImpl blogsEntryModelImpl = (BlogsEntryModelImpl)blogsEntryImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setEntryId(getEntryId());
+		blogsEntryImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		blogsEntryModelImpl._originalUuid = blogsEntryModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		blogsEntryImpl.setEntryId(getEntryId());
 
-		clone.setUserId(getUserId());
+		blogsEntryImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		blogsEntryModelImpl._originalGroupId = blogsEntryModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		blogsEntryModelImpl._setOriginalGroupId = false;
+		blogsEntryImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		blogsEntryImpl.setUserId(getUserId());
 
-		clone.setTitle(getTitle());
+		blogsEntryImpl.setUserName(getUserName());
 
-		clone.setUrlTitle(getUrlTitle());
+		blogsEntryImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalUrlTitle = cloneModel._urlTitle;
-		clone.setDescription(getDescription());
+		blogsEntryImpl.setModifiedDate(getModifiedDate());
 
-		clone.setContent(getContent());
+		blogsEntryImpl.setTitle(getTitle());
 
-		clone.setDisplayDate(getDisplayDate());
+		blogsEntryImpl.setUrlTitle(getUrlTitle());
 
-		clone.setAllowPingbacks(getAllowPingbacks());
+		blogsEntryModelImpl._originalUrlTitle = blogsEntryModelImpl._urlTitle;
 
-		clone.setAllowTrackbacks(getAllowTrackbacks());
+		blogsEntryImpl.setDescription(getDescription());
 
-		clone.setTrackbacks(getTrackbacks());
+		blogsEntryImpl.setContent(getContent());
 
-		clone.setSmallImage(getSmallImage());
+		blogsEntryImpl.setDisplayDate(getDisplayDate());
 
-		clone.setSmallImageId(getSmallImageId());
+		blogsEntryImpl.setAllowPingbacks(getAllowPingbacks());
 
-		clone.setSmallImageURL(getSmallImageURL());
+		blogsEntryImpl.setAllowTrackbacks(getAllowTrackbacks());
 
-		clone.setStatus(getStatus());
+		blogsEntryImpl.setTrackbacks(getTrackbacks());
 
-		clone.setStatusByUserId(getStatusByUserId());
+		blogsEntryImpl.setSmallImage(getSmallImage());
 
-		clone.setStatusByUserName(getStatusByUserName());
+		blogsEntryImpl.setSmallImageId(getSmallImageId());
 
-		clone.setStatusDate(getStatusDate());
+		blogsEntryImpl.setSmallImageURL(getSmallImageURL());
 
-		return clone;
+		blogsEntryImpl.setStatus(getStatus());
+
+		blogsEntryImpl.setStatusByUserId(getStatusByUserId());
+
+		blogsEntryImpl.setStatusByUserName(getStatusByUserName());
+
+		blogsEntryImpl.setStatusDate(getStatusDate());
+
+		return blogsEntryImpl;
 	}
 
 	public int compareTo(BlogsEntry blogsEntry) {

@@ -306,36 +306,41 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 	}
 
 	public Object clone() {
-		IGFolderImpl clone = new IGFolderImpl();
-		IGFolderModelImpl cloneModel = (IGFolderModelImpl)clone;
+		IGFolderImpl igFolderImpl = new IGFolderImpl();
 
-		clone.setUuid(getUuid());
+		IGFolderModelImpl igFolderModelImpl = (IGFolderModelImpl)igFolderImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setFolderId(getFolderId());
+		igFolderImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		igFolderModelImpl._originalUuid = igFolderModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		igFolderImpl.setFolderId(getFolderId());
 
-		clone.setUserId(getUserId());
+		igFolderImpl.setGroupId(getGroupId());
 
-		clone.setCreateDate(getCreateDate());
+		igFolderModelImpl._originalGroupId = igFolderModelImpl._groupId;
 
-		clone.setModifiedDate(getModifiedDate());
+		igFolderModelImpl._setOriginalGroupId = false;
+		igFolderImpl.setCompanyId(getCompanyId());
 
-		clone.setParentFolderId(getParentFolderId());
+		igFolderImpl.setUserId(getUserId());
 
-		cloneModel._originalParentFolderId = cloneModel._parentFolderId;
-		cloneModel._setOriginalParentFolderId = false;
-		clone.setName(getName());
+		igFolderImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setDescription(getDescription());
+		igFolderImpl.setModifiedDate(getModifiedDate());
 
-		return clone;
+		igFolderImpl.setParentFolderId(getParentFolderId());
+
+		igFolderModelImpl._originalParentFolderId = igFolderModelImpl._parentFolderId;
+
+		igFolderModelImpl._setOriginalParentFolderId = false;
+		igFolderImpl.setName(getName());
+
+		igFolderModelImpl._originalName = igFolderModelImpl._name;
+
+		igFolderImpl.setDescription(getDescription());
+
+		return igFolderImpl;
 	}
 
 	public int compareTo(IGFolder igFolder) {

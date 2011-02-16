@@ -319,35 +319,37 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 	}
 
 	public Object clone() {
-		SCProductVersionImpl clone = new SCProductVersionImpl();
-		SCProductVersionModelImpl cloneModel = (SCProductVersionModelImpl)clone;
+		SCProductVersionImpl scProductVersionImpl = new SCProductVersionImpl();
 
-		clone.setProductVersionId(getProductVersionId());
+		SCProductVersionModelImpl scProductVersionModelImpl = (SCProductVersionModelImpl)scProductVersionImpl;
 
-		clone.setCompanyId(getCompanyId());
+		scProductVersionImpl.setProductVersionId(getProductVersionId());
 
-		clone.setUserId(getUserId());
+		scProductVersionImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		scProductVersionImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		scProductVersionImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		scProductVersionImpl.setCreateDate(getCreateDate());
 
-		clone.setProductEntryId(getProductEntryId());
+		scProductVersionImpl.setModifiedDate(getModifiedDate());
 
-		clone.setVersion(getVersion());
+		scProductVersionImpl.setProductEntryId(getProductEntryId());
 
-		clone.setChangeLog(getChangeLog());
+		scProductVersionImpl.setVersion(getVersion());
 
-		clone.setDownloadPageURL(getDownloadPageURL());
+		scProductVersionImpl.setChangeLog(getChangeLog());
 
-		clone.setDirectDownloadURL(getDirectDownloadURL());
+		scProductVersionImpl.setDownloadPageURL(getDownloadPageURL());
 
-		cloneModel._originalDirectDownloadURL = cloneModel._directDownloadURL;
-		clone.setRepoStoreArtifact(getRepoStoreArtifact());
+		scProductVersionImpl.setDirectDownloadURL(getDirectDownloadURL());
 
-		return clone;
+		scProductVersionModelImpl._originalDirectDownloadURL = scProductVersionModelImpl._directDownloadURL;
+
+		scProductVersionImpl.setRepoStoreArtifact(getRepoStoreArtifact());
+
+		return scProductVersionImpl;
 	}
 
 	public int compareTo(SCProductVersion scProductVersion) {

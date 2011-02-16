@@ -184,25 +184,29 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 	}
 
 	public Object clone() {
-		MBDiscussionImpl clone = new MBDiscussionImpl();
-		MBDiscussionModelImpl cloneModel = (MBDiscussionModelImpl)clone;
+		MBDiscussionImpl mbDiscussionImpl = new MBDiscussionImpl();
 
-		clone.setDiscussionId(getDiscussionId());
+		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussionImpl;
 
-		clone.setClassNameId(getClassNameId());
+		mbDiscussionImpl.setDiscussionId(getDiscussionId());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		mbDiscussionImpl.setClassNameId(getClassNameId());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setThreadId(getThreadId());
+		mbDiscussionModelImpl._originalClassNameId = mbDiscussionModelImpl._classNameId;
 
-		cloneModel._originalThreadId = cloneModel._threadId;
-		cloneModel._setOriginalThreadId = false;
+		mbDiscussionModelImpl._setOriginalClassNameId = false;
+		mbDiscussionImpl.setClassPK(getClassPK());
 
-		return clone;
+		mbDiscussionModelImpl._originalClassPK = mbDiscussionModelImpl._classPK;
+
+		mbDiscussionModelImpl._setOriginalClassPK = false;
+		mbDiscussionImpl.setThreadId(getThreadId());
+
+		mbDiscussionModelImpl._originalThreadId = mbDiscussionModelImpl._threadId;
+
+		mbDiscussionModelImpl._setOriginalThreadId = false;
+
+		return mbDiscussionImpl;
 	}
 
 	public int compareTo(MBDiscussion mbDiscussion) {

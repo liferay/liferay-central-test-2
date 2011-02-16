@@ -259,36 +259,39 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	}
 
 	public Object clone() {
-		ShoppingCartImpl clone = new ShoppingCartImpl();
-		ShoppingCartModelImpl cloneModel = (ShoppingCartModelImpl)clone;
+		ShoppingCartImpl shoppingCartImpl = new ShoppingCartImpl();
 
-		clone.setCartId(getCartId());
+		ShoppingCartModelImpl shoppingCartModelImpl = (ShoppingCartModelImpl)shoppingCartImpl;
 
-		clone.setGroupId(getGroupId());
+		shoppingCartImpl.setCartId(getCartId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		shoppingCartImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		shoppingCartModelImpl._originalGroupId = shoppingCartModelImpl._groupId;
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setUserName(getUserName());
+		shoppingCartModelImpl._setOriginalGroupId = false;
+		shoppingCartImpl.setCompanyId(getCompanyId());
 
-		clone.setCreateDate(getCreateDate());
+		shoppingCartImpl.setUserId(getUserId());
 
-		clone.setModifiedDate(getModifiedDate());
+		shoppingCartModelImpl._originalUserId = shoppingCartModelImpl._userId;
 
-		clone.setItemIds(getItemIds());
+		shoppingCartModelImpl._setOriginalUserId = false;
+		shoppingCartImpl.setUserName(getUserName());
 
-		clone.setCouponCodes(getCouponCodes());
+		shoppingCartImpl.setCreateDate(getCreateDate());
 
-		clone.setAltShipping(getAltShipping());
+		shoppingCartImpl.setModifiedDate(getModifiedDate());
 
-		clone.setInsure(getInsure());
+		shoppingCartImpl.setItemIds(getItemIds());
 
-		return clone;
+		shoppingCartImpl.setCouponCodes(getCouponCodes());
+
+		shoppingCartImpl.setAltShipping(getAltShipping());
+
+		shoppingCartImpl.setInsure(getInsure());
+
+		return shoppingCartImpl;
 	}
 
 	public int compareTo(ShoppingCart shoppingCart) {

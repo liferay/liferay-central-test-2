@@ -287,32 +287,33 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 	}
 
 	public Object clone() {
-		WebsiteImpl clone = new WebsiteImpl();
-		WebsiteModelImpl cloneModel = (WebsiteModelImpl)clone;
+		WebsiteImpl websiteImpl = new WebsiteImpl();
 
-		clone.setWebsiteId(getWebsiteId());
+		WebsiteModelImpl websiteModelImpl = (WebsiteModelImpl)websiteImpl;
 
-		clone.setCompanyId(getCompanyId());
+		websiteImpl.setWebsiteId(getWebsiteId());
 
-		clone.setUserId(getUserId());
+		websiteImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		websiteImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		websiteImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		websiteImpl.setCreateDate(getCreateDate());
 
-		clone.setClassNameId(getClassNameId());
+		websiteImpl.setModifiedDate(getModifiedDate());
 
-		clone.setClassPK(getClassPK());
+		websiteImpl.setClassNameId(getClassNameId());
 
-		clone.setUrl(getUrl());
+		websiteImpl.setClassPK(getClassPK());
 
-		clone.setTypeId(getTypeId());
+		websiteImpl.setUrl(getUrl());
 
-		clone.setPrimary(getPrimary());
+		websiteImpl.setTypeId(getTypeId());
 
-		return clone;
+		websiteImpl.setPrimary(getPrimary());
+
+		return websiteImpl;
 	}
 
 	public int compareTo(Website website) {

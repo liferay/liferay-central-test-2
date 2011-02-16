@@ -257,28 +257,29 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 	}
 
 	public Object clone() {
-		AssetTagImpl clone = new AssetTagImpl();
-		AssetTagModelImpl cloneModel = (AssetTagModelImpl)clone;
+		AssetTagImpl assetTagImpl = new AssetTagImpl();
 
-		clone.setTagId(getTagId());
+		AssetTagModelImpl assetTagModelImpl = (AssetTagModelImpl)assetTagImpl;
 
-		clone.setGroupId(getGroupId());
+		assetTagImpl.setTagId(getTagId());
 
-		clone.setCompanyId(getCompanyId());
+		assetTagImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		assetTagImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		assetTagImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		assetTagImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		assetTagImpl.setCreateDate(getCreateDate());
 
-		clone.setName(getName());
+		assetTagImpl.setModifiedDate(getModifiedDate());
 
-		clone.setAssetCount(getAssetCount());
+		assetTagImpl.setName(getName());
 
-		return clone;
+		assetTagImpl.setAssetCount(getAssetCount());
+
+		return assetTagImpl;
 	}
 
 	public int compareTo(AssetTag assetTag) {

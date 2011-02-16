@@ -868,114 +868,117 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 	}
 
 	public Object clone() {
-		ShoppingOrderImpl clone = new ShoppingOrderImpl();
-		ShoppingOrderModelImpl cloneModel = (ShoppingOrderModelImpl)clone;
+		ShoppingOrderImpl shoppingOrderImpl = new ShoppingOrderImpl();
 
-		clone.setOrderId(getOrderId());
+		ShoppingOrderModelImpl shoppingOrderModelImpl = (ShoppingOrderModelImpl)shoppingOrderImpl;
 
-		clone.setGroupId(getGroupId());
+		shoppingOrderImpl.setOrderId(getOrderId());
 
-		clone.setCompanyId(getCompanyId());
+		shoppingOrderImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		shoppingOrderImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		shoppingOrderImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		shoppingOrderImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		shoppingOrderImpl.setCreateDate(getCreateDate());
 
-		clone.setNumber(getNumber());
+		shoppingOrderImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalNumber = cloneModel._number;
-		clone.setTax(getTax());
+		shoppingOrderImpl.setNumber(getNumber());
 
-		clone.setShipping(getShipping());
+		shoppingOrderModelImpl._originalNumber = shoppingOrderModelImpl._number;
 
-		clone.setAltShipping(getAltShipping());
+		shoppingOrderImpl.setTax(getTax());
 
-		clone.setRequiresShipping(getRequiresShipping());
+		shoppingOrderImpl.setShipping(getShipping());
 
-		clone.setInsure(getInsure());
+		shoppingOrderImpl.setAltShipping(getAltShipping());
 
-		clone.setInsurance(getInsurance());
+		shoppingOrderImpl.setRequiresShipping(getRequiresShipping());
 
-		clone.setCouponCodes(getCouponCodes());
+		shoppingOrderImpl.setInsure(getInsure());
 
-		clone.setCouponDiscount(getCouponDiscount());
+		shoppingOrderImpl.setInsurance(getInsurance());
 
-		clone.setBillingFirstName(getBillingFirstName());
+		shoppingOrderImpl.setCouponCodes(getCouponCodes());
 
-		clone.setBillingLastName(getBillingLastName());
+		shoppingOrderImpl.setCouponDiscount(getCouponDiscount());
 
-		clone.setBillingEmailAddress(getBillingEmailAddress());
+		shoppingOrderImpl.setBillingFirstName(getBillingFirstName());
 
-		clone.setBillingCompany(getBillingCompany());
+		shoppingOrderImpl.setBillingLastName(getBillingLastName());
 
-		clone.setBillingStreet(getBillingStreet());
+		shoppingOrderImpl.setBillingEmailAddress(getBillingEmailAddress());
 
-		clone.setBillingCity(getBillingCity());
+		shoppingOrderImpl.setBillingCompany(getBillingCompany());
 
-		clone.setBillingState(getBillingState());
+		shoppingOrderImpl.setBillingStreet(getBillingStreet());
 
-		clone.setBillingZip(getBillingZip());
+		shoppingOrderImpl.setBillingCity(getBillingCity());
 
-		clone.setBillingCountry(getBillingCountry());
+		shoppingOrderImpl.setBillingState(getBillingState());
 
-		clone.setBillingPhone(getBillingPhone());
+		shoppingOrderImpl.setBillingZip(getBillingZip());
 
-		clone.setShipToBilling(getShipToBilling());
+		shoppingOrderImpl.setBillingCountry(getBillingCountry());
 
-		clone.setShippingFirstName(getShippingFirstName());
+		shoppingOrderImpl.setBillingPhone(getBillingPhone());
 
-		clone.setShippingLastName(getShippingLastName());
+		shoppingOrderImpl.setShipToBilling(getShipToBilling());
 
-		clone.setShippingEmailAddress(getShippingEmailAddress());
+		shoppingOrderImpl.setShippingFirstName(getShippingFirstName());
 
-		clone.setShippingCompany(getShippingCompany());
+		shoppingOrderImpl.setShippingLastName(getShippingLastName());
 
-		clone.setShippingStreet(getShippingStreet());
+		shoppingOrderImpl.setShippingEmailAddress(getShippingEmailAddress());
 
-		clone.setShippingCity(getShippingCity());
+		shoppingOrderImpl.setShippingCompany(getShippingCompany());
 
-		clone.setShippingState(getShippingState());
+		shoppingOrderImpl.setShippingStreet(getShippingStreet());
 
-		clone.setShippingZip(getShippingZip());
+		shoppingOrderImpl.setShippingCity(getShippingCity());
 
-		clone.setShippingCountry(getShippingCountry());
+		shoppingOrderImpl.setShippingState(getShippingState());
 
-		clone.setShippingPhone(getShippingPhone());
+		shoppingOrderImpl.setShippingZip(getShippingZip());
 
-		clone.setCcName(getCcName());
+		shoppingOrderImpl.setShippingCountry(getShippingCountry());
 
-		clone.setCcType(getCcType());
+		shoppingOrderImpl.setShippingPhone(getShippingPhone());
 
-		clone.setCcNumber(getCcNumber());
+		shoppingOrderImpl.setCcName(getCcName());
 
-		clone.setCcExpMonth(getCcExpMonth());
+		shoppingOrderImpl.setCcType(getCcType());
 
-		clone.setCcExpYear(getCcExpYear());
+		shoppingOrderImpl.setCcNumber(getCcNumber());
 
-		clone.setCcVerNumber(getCcVerNumber());
+		shoppingOrderImpl.setCcExpMonth(getCcExpMonth());
 
-		clone.setComments(getComments());
+		shoppingOrderImpl.setCcExpYear(getCcExpYear());
 
-		clone.setPpTxnId(getPpTxnId());
+		shoppingOrderImpl.setCcVerNumber(getCcVerNumber());
 
-		cloneModel._originalPpTxnId = cloneModel._ppTxnId;
-		clone.setPpPaymentStatus(getPpPaymentStatus());
+		shoppingOrderImpl.setComments(getComments());
 
-		clone.setPpPaymentGross(getPpPaymentGross());
+		shoppingOrderImpl.setPpTxnId(getPpTxnId());
 
-		clone.setPpReceiverEmail(getPpReceiverEmail());
+		shoppingOrderModelImpl._originalPpTxnId = shoppingOrderModelImpl._ppTxnId;
 
-		clone.setPpPayerEmail(getPpPayerEmail());
+		shoppingOrderImpl.setPpPaymentStatus(getPpPaymentStatus());
 
-		clone.setSendOrderEmail(getSendOrderEmail());
+		shoppingOrderImpl.setPpPaymentGross(getPpPaymentGross());
 
-		clone.setSendShippingEmail(getSendShippingEmail());
+		shoppingOrderImpl.setPpReceiverEmail(getPpReceiverEmail());
 
-		return clone;
+		shoppingOrderImpl.setPpPayerEmail(getPpPayerEmail());
+
+		shoppingOrderImpl.setSendOrderEmail(getSendOrderEmail());
+
+		shoppingOrderImpl.setSendShippingEmail(getSendShippingEmail());
+
+		return shoppingOrderImpl;
 	}
 
 	public int compareTo(ShoppingOrder shoppingOrder) {

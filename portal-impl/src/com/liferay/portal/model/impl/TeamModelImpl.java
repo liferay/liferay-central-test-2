@@ -280,31 +280,34 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 	}
 
 	public Object clone() {
-		TeamImpl clone = new TeamImpl();
-		TeamModelImpl cloneModel = (TeamModelImpl)clone;
+		TeamImpl teamImpl = new TeamImpl();
 
-		clone.setTeamId(getTeamId());
+		TeamModelImpl teamModelImpl = (TeamModelImpl)teamImpl;
 
-		clone.setCompanyId(getCompanyId());
+		teamImpl.setTeamId(getTeamId());
 
-		clone.setUserId(getUserId());
+		teamImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		teamImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		teamImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		teamImpl.setCreateDate(getCreateDate());
 
-		clone.setGroupId(getGroupId());
+		teamImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setName(getName());
+		teamImpl.setGroupId(getGroupId());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setDescription(getDescription());
+		teamModelImpl._originalGroupId = teamModelImpl._groupId;
 
-		return clone;
+		teamModelImpl._setOriginalGroupId = false;
+		teamImpl.setName(getName());
+
+		teamModelImpl._originalName = teamModelImpl._name;
+
+		teamImpl.setDescription(getDescription());
+
+		return teamImpl;
 	}
 
 	public int compareTo(Team team) {

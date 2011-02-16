@@ -183,16 +183,17 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 	}
 
 	public Object clone() {
-		ClassNameImpl clone = new ClassNameImpl();
-		ClassNameModelImpl cloneModel = (ClassNameModelImpl)clone;
+		ClassNameImpl classNameImpl = new ClassNameImpl();
 
-		clone.setClassNameId(getClassNameId());
+		ClassNameModelImpl classNameModelImpl = (ClassNameModelImpl)classNameImpl;
 
-		clone.setValue(getValue());
+		classNameImpl.setClassNameId(getClassNameId());
 
-		cloneModel._originalValue = cloneModel._value;
+		classNameImpl.setValue(getValue());
 
-		return clone;
+		classNameModelImpl._originalValue = classNameModelImpl._value;
+
+		return classNameImpl;
 	}
 
 	public int compareTo(ClassName className) {

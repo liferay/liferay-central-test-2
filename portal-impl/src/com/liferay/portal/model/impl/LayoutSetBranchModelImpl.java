@@ -303,35 +303,39 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	}
 
 	public Object clone() {
-		LayoutSetBranchImpl clone = new LayoutSetBranchImpl();
-		LayoutSetBranchModelImpl cloneModel = (LayoutSetBranchModelImpl)clone;
+		LayoutSetBranchImpl layoutSetBranchImpl = new LayoutSetBranchImpl();
 
-		clone.setLayoutSetBranchId(getLayoutSetBranchId());
+		LayoutSetBranchModelImpl layoutSetBranchModelImpl = (LayoutSetBranchModelImpl)layoutSetBranchImpl;
 
-		clone.setGroupId(getGroupId());
+		layoutSetBranchImpl.setLayoutSetBranchId(getLayoutSetBranchId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		layoutSetBranchImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		layoutSetBranchModelImpl._originalGroupId = layoutSetBranchModelImpl._groupId;
 
-		clone.setUserName(getUserName());
+		layoutSetBranchModelImpl._setOriginalGroupId = false;
+		layoutSetBranchImpl.setCompanyId(getCompanyId());
 
-		clone.setCreateDate(getCreateDate());
+		layoutSetBranchImpl.setUserId(getUserId());
 
-		clone.setModifiedDate(getModifiedDate());
+		layoutSetBranchImpl.setUserName(getUserName());
 
-		clone.setPrivateLayout(getPrivateLayout());
+		layoutSetBranchImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
-		cloneModel._setOriginalPrivateLayout = false;
-		clone.setName(getName());
+		layoutSetBranchImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setDescription(getDescription());
+		layoutSetBranchImpl.setPrivateLayout(getPrivateLayout());
 
-		return clone;
+		layoutSetBranchModelImpl._originalPrivateLayout = layoutSetBranchModelImpl._privateLayout;
+
+		layoutSetBranchModelImpl._setOriginalPrivateLayout = false;
+		layoutSetBranchImpl.setName(getName());
+
+		layoutSetBranchModelImpl._originalName = layoutSetBranchModelImpl._name;
+
+		layoutSetBranchImpl.setDescription(getDescription());
+
+		return layoutSetBranchImpl;
 	}
 
 	public int compareTo(LayoutSetBranch layoutSetBranch) {

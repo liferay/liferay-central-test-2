@@ -154,18 +154,20 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 	}
 
 	public Object clone() {
-		BrowserTrackerImpl clone = new BrowserTrackerImpl();
-		BrowserTrackerModelImpl cloneModel = (BrowserTrackerModelImpl)clone;
+		BrowserTrackerImpl browserTrackerImpl = new BrowserTrackerImpl();
 
-		clone.setBrowserTrackerId(getBrowserTrackerId());
+		BrowserTrackerModelImpl browserTrackerModelImpl = (BrowserTrackerModelImpl)browserTrackerImpl;
 
-		clone.setUserId(getUserId());
+		browserTrackerImpl.setBrowserTrackerId(getBrowserTrackerId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setBrowserKey(getBrowserKey());
+		browserTrackerImpl.setUserId(getUserId());
 
-		return clone;
+		browserTrackerModelImpl._originalUserId = browserTrackerModelImpl._userId;
+
+		browserTrackerModelImpl._setOriginalUserId = false;
+		browserTrackerImpl.setBrowserKey(getBrowserKey());
+
+		return browserTrackerImpl;
 	}
 
 	public int compareTo(BrowserTracker browserTracker) {

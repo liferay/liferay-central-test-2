@@ -255,37 +255,42 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 	}
 
 	public Object clone() {
-		SocialEquitySettingImpl clone = new SocialEquitySettingImpl();
-		SocialEquitySettingModelImpl cloneModel = (SocialEquitySettingModelImpl)clone;
+		SocialEquitySettingImpl socialEquitySettingImpl = new SocialEquitySettingImpl();
 
-		clone.setEquitySettingId(getEquitySettingId());
+		SocialEquitySettingModelImpl socialEquitySettingModelImpl = (SocialEquitySettingModelImpl)socialEquitySettingImpl;
 
-		clone.setGroupId(getGroupId());
+		socialEquitySettingImpl.setEquitySettingId(getEquitySettingId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		socialEquitySettingImpl.setGroupId(getGroupId());
 
-		clone.setClassNameId(getClassNameId());
+		socialEquitySettingModelImpl._originalGroupId = socialEquitySettingModelImpl._groupId;
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setActionId(getActionId());
+		socialEquitySettingModelImpl._setOriginalGroupId = false;
+		socialEquitySettingImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalActionId = cloneModel._actionId;
-		clone.setDailyLimit(getDailyLimit());
+		socialEquitySettingImpl.setClassNameId(getClassNameId());
 
-		clone.setLifespan(getLifespan());
+		socialEquitySettingModelImpl._originalClassNameId = socialEquitySettingModelImpl._classNameId;
 
-		clone.setType(getType());
+		socialEquitySettingModelImpl._setOriginalClassNameId = false;
+		socialEquitySettingImpl.setActionId(getActionId());
 
-		cloneModel._originalType = cloneModel._type;
-		cloneModel._setOriginalType = false;
-		clone.setUniqueEntry(getUniqueEntry());
+		socialEquitySettingModelImpl._originalActionId = socialEquitySettingModelImpl._actionId;
 
-		clone.setValue(getValue());
+		socialEquitySettingImpl.setDailyLimit(getDailyLimit());
 
-		return clone;
+		socialEquitySettingImpl.setLifespan(getLifespan());
+
+		socialEquitySettingImpl.setType(getType());
+
+		socialEquitySettingModelImpl._originalType = socialEquitySettingModelImpl._type;
+
+		socialEquitySettingModelImpl._setOriginalType = false;
+		socialEquitySettingImpl.setUniqueEntry(getUniqueEntry());
+
+		socialEquitySettingImpl.setValue(getValue());
+
+		return socialEquitySettingImpl;
 	}
 
 	public int compareTo(SocialEquitySetting socialEquitySetting) {

@@ -223,23 +223,26 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 	}
 
 	public Object clone() {
-		PortletImpl clone = new PortletImpl();
-		PortletModelImpl cloneModel = (PortletModelImpl)clone;
+		PortletImpl portletImpl = new PortletImpl();
 
-		clone.setId(getId());
+		PortletModelImpl portletModelImpl = (PortletModelImpl)portletImpl;
 
-		clone.setCompanyId(getCompanyId());
+		portletImpl.setId(getId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setPortletId(getPortletId());
+		portletImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalPortletId = cloneModel._portletId;
-		clone.setRoles(getRoles());
+		portletModelImpl._originalCompanyId = portletModelImpl._companyId;
 
-		clone.setActive(getActive());
+		portletModelImpl._setOriginalCompanyId = false;
+		portletImpl.setPortletId(getPortletId());
 
-		return clone;
+		portletModelImpl._originalPortletId = portletModelImpl._portletId;
+
+		portletImpl.setRoles(getRoles());
+
+		portletImpl.setActive(getActive());
+
+		return portletImpl;
 	}
 
 	public int compareTo(Portlet portlet) {

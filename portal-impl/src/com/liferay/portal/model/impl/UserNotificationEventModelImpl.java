@@ -207,26 +207,27 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	}
 
 	public Object clone() {
-		UserNotificationEventImpl clone = new UserNotificationEventImpl();
-		UserNotificationEventModelImpl cloneModel = (UserNotificationEventModelImpl)clone;
+		UserNotificationEventImpl userNotificationEventImpl = new UserNotificationEventImpl();
 
-		clone.setUuid(getUuid());
+		UserNotificationEventModelImpl userNotificationEventModelImpl = (UserNotificationEventModelImpl)userNotificationEventImpl;
 
-		clone.setUserNotificationEventId(getUserNotificationEventId());
+		userNotificationEventImpl.setUuid(getUuid());
 
-		clone.setCompanyId(getCompanyId());
+		userNotificationEventImpl.setUserNotificationEventId(getUserNotificationEventId());
 
-		clone.setUserId(getUserId());
+		userNotificationEventImpl.setCompanyId(getCompanyId());
 
-		clone.setType(getType());
+		userNotificationEventImpl.setUserId(getUserId());
 
-		clone.setTimestamp(getTimestamp());
+		userNotificationEventImpl.setType(getType());
 
-		clone.setDeliverBy(getDeliverBy());
+		userNotificationEventImpl.setTimestamp(getTimestamp());
 
-		clone.setPayload(getPayload());
+		userNotificationEventImpl.setDeliverBy(getDeliverBy());
 
-		return clone;
+		userNotificationEventImpl.setPayload(getPayload());
+
+		return userNotificationEventImpl;
 	}
 
 	public int compareTo(UserNotificationEvent userNotificationEvent) {

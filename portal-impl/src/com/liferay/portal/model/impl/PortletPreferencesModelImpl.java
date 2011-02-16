@@ -251,29 +251,34 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	public Object clone() {
-		PortletPreferencesImpl clone = new PortletPreferencesImpl();
-		PortletPreferencesModelImpl cloneModel = (PortletPreferencesModelImpl)clone;
+		PortletPreferencesImpl portletPreferencesImpl = new PortletPreferencesImpl();
 
-		clone.setPortletPreferencesId(getPortletPreferencesId());
+		PortletPreferencesModelImpl portletPreferencesModelImpl = (PortletPreferencesModelImpl)portletPreferencesImpl;
 
-		clone.setOwnerId(getOwnerId());
+		portletPreferencesImpl.setPortletPreferencesId(getPortletPreferencesId());
 
-		cloneModel._originalOwnerId = cloneModel._ownerId;
-		cloneModel._setOriginalOwnerId = false;
-		clone.setOwnerType(getOwnerType());
+		portletPreferencesImpl.setOwnerId(getOwnerId());
 
-		cloneModel._originalOwnerType = cloneModel._ownerType;
-		cloneModel._setOriginalOwnerType = false;
-		clone.setPlid(getPlid());
+		portletPreferencesModelImpl._originalOwnerId = portletPreferencesModelImpl._ownerId;
 
-		cloneModel._originalPlid = cloneModel._plid;
-		cloneModel._setOriginalPlid = false;
-		clone.setPortletId(getPortletId());
+		portletPreferencesModelImpl._setOriginalOwnerId = false;
+		portletPreferencesImpl.setOwnerType(getOwnerType());
 
-		cloneModel._originalPortletId = cloneModel._portletId;
-		clone.setPreferences(getPreferences());
+		portletPreferencesModelImpl._originalOwnerType = portletPreferencesModelImpl._ownerType;
 
-		return clone;
+		portletPreferencesModelImpl._setOriginalOwnerType = false;
+		portletPreferencesImpl.setPlid(getPlid());
+
+		portletPreferencesModelImpl._originalPlid = portletPreferencesModelImpl._plid;
+
+		portletPreferencesModelImpl._setOriginalPlid = false;
+		portletPreferencesImpl.setPortletId(getPortletId());
+
+		portletPreferencesModelImpl._originalPortletId = portletPreferencesModelImpl._portletId;
+
+		portletPreferencesImpl.setPreferences(getPreferences());
+
+		return portletPreferencesImpl;
 	}
 
 	public int compareTo(PortletPreferences portletPreferences) {

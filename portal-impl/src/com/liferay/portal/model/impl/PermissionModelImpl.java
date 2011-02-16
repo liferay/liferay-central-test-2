@@ -211,22 +211,25 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 	}
 
 	public Object clone() {
-		PermissionImpl clone = new PermissionImpl();
-		PermissionModelImpl cloneModel = (PermissionModelImpl)clone;
+		PermissionImpl permissionImpl = new PermissionImpl();
 
-		clone.setPermissionId(getPermissionId());
+		PermissionModelImpl permissionModelImpl = (PermissionModelImpl)permissionImpl;
 
-		clone.setCompanyId(getCompanyId());
+		permissionImpl.setPermissionId(getPermissionId());
 
-		clone.setActionId(getActionId());
+		permissionImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalActionId = cloneModel._actionId;
-		clone.setResourceId(getResourceId());
+		permissionImpl.setActionId(getActionId());
 
-		cloneModel._originalResourceId = cloneModel._resourceId;
-		cloneModel._setOriginalResourceId = false;
+		permissionModelImpl._originalActionId = permissionModelImpl._actionId;
 
-		return clone;
+		permissionImpl.setResourceId(getResourceId());
+
+		permissionModelImpl._originalResourceId = permissionModelImpl._resourceId;
+
+		permissionModelImpl._setOriginalResourceId = false;
+
+		return permissionImpl;
 	}
 
 	public int compareTo(Permission permission) {

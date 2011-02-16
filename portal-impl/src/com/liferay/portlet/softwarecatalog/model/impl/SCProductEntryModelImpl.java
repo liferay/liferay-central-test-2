@@ -386,45 +386,47 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	}
 
 	public Object clone() {
-		SCProductEntryImpl clone = new SCProductEntryImpl();
-		SCProductEntryModelImpl cloneModel = (SCProductEntryModelImpl)clone;
+		SCProductEntryImpl scProductEntryImpl = new SCProductEntryImpl();
 
-		clone.setProductEntryId(getProductEntryId());
+		SCProductEntryModelImpl scProductEntryModelImpl = (SCProductEntryModelImpl)scProductEntryImpl;
 
-		clone.setGroupId(getGroupId());
+		scProductEntryImpl.setProductEntryId(getProductEntryId());
 
-		clone.setCompanyId(getCompanyId());
+		scProductEntryImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		scProductEntryImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		scProductEntryImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		scProductEntryImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		scProductEntryImpl.setCreateDate(getCreateDate());
 
-		clone.setName(getName());
+		scProductEntryImpl.setModifiedDate(getModifiedDate());
 
-		clone.setType(getType());
+		scProductEntryImpl.setName(getName());
 
-		clone.setTags(getTags());
+		scProductEntryImpl.setType(getType());
 
-		clone.setShortDescription(getShortDescription());
+		scProductEntryImpl.setTags(getTags());
 
-		clone.setLongDescription(getLongDescription());
+		scProductEntryImpl.setShortDescription(getShortDescription());
 
-		clone.setPageURL(getPageURL());
+		scProductEntryImpl.setLongDescription(getLongDescription());
 
-		clone.setAuthor(getAuthor());
+		scProductEntryImpl.setPageURL(getPageURL());
 
-		clone.setRepoGroupId(getRepoGroupId());
+		scProductEntryImpl.setAuthor(getAuthor());
 
-		cloneModel._originalRepoGroupId = cloneModel._repoGroupId;
-		clone.setRepoArtifactId(getRepoArtifactId());
+		scProductEntryImpl.setRepoGroupId(getRepoGroupId());
 
-		cloneModel._originalRepoArtifactId = cloneModel._repoArtifactId;
+		scProductEntryModelImpl._originalRepoGroupId = scProductEntryModelImpl._repoGroupId;
 
-		return clone;
+		scProductEntryImpl.setRepoArtifactId(getRepoArtifactId());
+
+		scProductEntryModelImpl._originalRepoArtifactId = scProductEntryModelImpl._repoArtifactId;
+
+		return scProductEntryImpl;
 	}
 
 	public int compareTo(SCProductEntry scProductEntry) {

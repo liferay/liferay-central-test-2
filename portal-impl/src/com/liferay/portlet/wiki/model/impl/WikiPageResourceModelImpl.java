@@ -173,22 +173,24 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 	}
 
 	public Object clone() {
-		WikiPageResourceImpl clone = new WikiPageResourceImpl();
-		WikiPageResourceModelImpl cloneModel = (WikiPageResourceModelImpl)clone;
+		WikiPageResourceImpl wikiPageResourceImpl = new WikiPageResourceImpl();
 
-		clone.setUuid(getUuid());
+		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResourceImpl;
 
-		clone.setResourcePrimKey(getResourcePrimKey());
+		wikiPageResourceImpl.setUuid(getUuid());
 
-		clone.setNodeId(getNodeId());
+		wikiPageResourceImpl.setResourcePrimKey(getResourcePrimKey());
 
-		cloneModel._originalNodeId = cloneModel._nodeId;
-		cloneModel._setOriginalNodeId = false;
-		clone.setTitle(getTitle());
+		wikiPageResourceImpl.setNodeId(getNodeId());
 
-		cloneModel._originalTitle = cloneModel._title;
+		wikiPageResourceModelImpl._originalNodeId = wikiPageResourceModelImpl._nodeId;
 
-		return clone;
+		wikiPageResourceModelImpl._setOriginalNodeId = false;
+		wikiPageResourceImpl.setTitle(getTitle());
+
+		wikiPageResourceModelImpl._originalTitle = wikiPageResourceModelImpl._title;
+
+		return wikiPageResourceImpl;
 	}
 
 	public int compareTo(WikiPageResource wikiPageResource) {

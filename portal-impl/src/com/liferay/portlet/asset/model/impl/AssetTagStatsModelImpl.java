@@ -176,22 +176,25 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 	}
 
 	public Object clone() {
-		AssetTagStatsImpl clone = new AssetTagStatsImpl();
-		AssetTagStatsModelImpl cloneModel = (AssetTagStatsModelImpl)clone;
+		AssetTagStatsImpl assetTagStatsImpl = new AssetTagStatsImpl();
 
-		clone.setTagStatsId(getTagStatsId());
+		AssetTagStatsModelImpl assetTagStatsModelImpl = (AssetTagStatsModelImpl)assetTagStatsImpl;
 
-		clone.setTagId(getTagId());
+		assetTagStatsImpl.setTagStatsId(getTagStatsId());
 
-		cloneModel._originalTagId = cloneModel._tagId;
-		cloneModel._setOriginalTagId = false;
-		clone.setClassNameId(getClassNameId());
+		assetTagStatsImpl.setTagId(getTagId());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setAssetCount(getAssetCount());
+		assetTagStatsModelImpl._originalTagId = assetTagStatsModelImpl._tagId;
 
-		return clone;
+		assetTagStatsModelImpl._setOriginalTagId = false;
+		assetTagStatsImpl.setClassNameId(getClassNameId());
+
+		assetTagStatsModelImpl._originalClassNameId = assetTagStatsModelImpl._classNameId;
+
+		assetTagStatsModelImpl._setOriginalClassNameId = false;
+		assetTagStatsImpl.setAssetCount(getAssetCount());
+
+		return assetTagStatsImpl;
 	}
 
 	public int compareTo(AssetTagStats assetTagStats) {

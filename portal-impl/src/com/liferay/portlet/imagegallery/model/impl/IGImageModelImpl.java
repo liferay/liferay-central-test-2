@@ -368,50 +368,57 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	}
 
 	public Object clone() {
-		IGImageImpl clone = new IGImageImpl();
-		IGImageModelImpl cloneModel = (IGImageModelImpl)clone;
+		IGImageImpl igImageImpl = new IGImageImpl();
 
-		clone.setUuid(getUuid());
+		IGImageModelImpl igImageModelImpl = (IGImageModelImpl)igImageImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setImageId(getImageId());
+		igImageImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		igImageModelImpl._originalUuid = igImageModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		igImageImpl.setImageId(getImageId());
 
-		clone.setUserId(getUserId());
+		igImageImpl.setGroupId(getGroupId());
 
-		clone.setCreateDate(getCreateDate());
+		igImageModelImpl._originalGroupId = igImageModelImpl._groupId;
 
-		clone.setModifiedDate(getModifiedDate());
+		igImageModelImpl._setOriginalGroupId = false;
+		igImageImpl.setCompanyId(getCompanyId());
 
-		clone.setFolderId(getFolderId());
+		igImageImpl.setUserId(getUserId());
 
-		clone.setName(getName());
+		igImageImpl.setCreateDate(getCreateDate());
 
-		clone.setDescription(getDescription());
+		igImageImpl.setModifiedDate(getModifiedDate());
 
-		clone.setSmallImageId(getSmallImageId());
+		igImageImpl.setFolderId(getFolderId());
 
-		cloneModel._originalSmallImageId = cloneModel._smallImageId;
-		cloneModel._setOriginalSmallImageId = false;
-		clone.setLargeImageId(getLargeImageId());
+		igImageImpl.setName(getName());
 
-		cloneModel._originalLargeImageId = cloneModel._largeImageId;
-		cloneModel._setOriginalLargeImageId = false;
-		clone.setCustom1ImageId(getCustom1ImageId());
+		igImageImpl.setDescription(getDescription());
 
-		cloneModel._originalCustom1ImageId = cloneModel._custom1ImageId;
-		cloneModel._setOriginalCustom1ImageId = false;
-		clone.setCustom2ImageId(getCustom2ImageId());
+		igImageImpl.setSmallImageId(getSmallImageId());
 
-		cloneModel._originalCustom2ImageId = cloneModel._custom2ImageId;
-		cloneModel._setOriginalCustom2ImageId = false;
+		igImageModelImpl._originalSmallImageId = igImageModelImpl._smallImageId;
 
-		return clone;
+		igImageModelImpl._setOriginalSmallImageId = false;
+		igImageImpl.setLargeImageId(getLargeImageId());
+
+		igImageModelImpl._originalLargeImageId = igImageModelImpl._largeImageId;
+
+		igImageModelImpl._setOriginalLargeImageId = false;
+		igImageImpl.setCustom1ImageId(getCustom1ImageId());
+
+		igImageModelImpl._originalCustom1ImageId = igImageModelImpl._custom1ImageId;
+
+		igImageModelImpl._setOriginalCustom1ImageId = false;
+		igImageImpl.setCustom2ImageId(getCustom2ImageId());
+
+		igImageModelImpl._originalCustom2ImageId = igImageModelImpl._custom2ImageId;
+
+		igImageModelImpl._setOriginalCustom2ImageId = false;
+
+		return igImageImpl;
 	}
 
 	public int compareTo(IGImage igImage) {

@@ -308,44 +308,49 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public Object clone() {
-		DLFolderImpl clone = new DLFolderImpl();
-		DLFolderModelImpl cloneModel = (DLFolderModelImpl)clone;
+		DLFolderImpl dlFolderImpl = new DLFolderImpl();
 
-		clone.setUuid(getUuid());
+		DLFolderModelImpl dlFolderModelImpl = (DLFolderModelImpl)dlFolderImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setFolderId(getFolderId());
+		dlFolderImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		dlFolderModelImpl._originalUuid = dlFolderModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		dlFolderImpl.setFolderId(getFolderId());
 
-		clone.setUserId(getUserId());
+		dlFolderImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		dlFolderModelImpl._originalGroupId = dlFolderModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		dlFolderModelImpl._setOriginalGroupId = false;
+		dlFolderImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		dlFolderImpl.setUserId(getUserId());
 
-		clone.setRepositoryId(getRepositoryId());
+		dlFolderImpl.setUserName(getUserName());
 
-		clone.setMountPoint(getMountPoint());
+		dlFolderImpl.setCreateDate(getCreateDate());
 
-		clone.setParentFolderId(getParentFolderId());
+		dlFolderImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalParentFolderId = cloneModel._parentFolderId;
-		cloneModel._setOriginalParentFolderId = false;
-		clone.setName(getName());
+		dlFolderImpl.setRepositoryId(getRepositoryId());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setDescription(getDescription());
+		dlFolderImpl.setMountPoint(getMountPoint());
 
-		clone.setLastPostDate(getLastPostDate());
+		dlFolderImpl.setParentFolderId(getParentFolderId());
 
-		return clone;
+		dlFolderModelImpl._originalParentFolderId = dlFolderModelImpl._parentFolderId;
+
+		dlFolderModelImpl._setOriginalParentFolderId = false;
+		dlFolderImpl.setName(getName());
+
+		dlFolderModelImpl._originalName = dlFolderModelImpl._name;
+
+		dlFolderImpl.setDescription(getDescription());
+
+		dlFolderImpl.setLastPostDate(getLastPostDate());
+
+		return dlFolderImpl;
 	}
 
 	public int compareTo(DLFolder dlFolder) {

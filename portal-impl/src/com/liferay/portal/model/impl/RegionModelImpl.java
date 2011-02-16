@@ -207,20 +207,21 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	}
 
 	public Object clone() {
-		RegionImpl clone = new RegionImpl();
-		RegionModelImpl cloneModel = (RegionModelImpl)clone;
+		RegionImpl regionImpl = new RegionImpl();
 
-		clone.setRegionId(getRegionId());
+		RegionModelImpl regionModelImpl = (RegionModelImpl)regionImpl;
 
-		clone.setCountryId(getCountryId());
+		regionImpl.setRegionId(getRegionId());
 
-		clone.setRegionCode(getRegionCode());
+		regionImpl.setCountryId(getCountryId());
 
-		clone.setName(getName());
+		regionImpl.setRegionCode(getRegionCode());
 
-		clone.setActive(getActive());
+		regionImpl.setName(getName());
 
-		return clone;
+		regionImpl.setActive(getActive());
+
+		return regionImpl;
 	}
 
 	public int compareTo(Region region) {

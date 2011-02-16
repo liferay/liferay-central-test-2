@@ -527,63 +527,66 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	public Object clone() {
-		MBMessageImpl clone = new MBMessageImpl();
-		MBMessageModelImpl cloneModel = (MBMessageModelImpl)clone;
+		MBMessageImpl mbMessageImpl = new MBMessageImpl();
 
-		clone.setUuid(getUuid());
+		MBMessageModelImpl mbMessageModelImpl = (MBMessageModelImpl)mbMessageImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setMessageId(getMessageId());
+		mbMessageImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		mbMessageModelImpl._originalUuid = mbMessageModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		mbMessageImpl.setMessageId(getMessageId());
 
-		clone.setUserId(getUserId());
+		mbMessageImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		mbMessageModelImpl._originalGroupId = mbMessageModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		mbMessageModelImpl._setOriginalGroupId = false;
+		mbMessageImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		mbMessageImpl.setUserId(getUserId());
 
-		clone.setClassNameId(getClassNameId());
+		mbMessageImpl.setUserName(getUserName());
 
-		clone.setClassPK(getClassPK());
+		mbMessageImpl.setCreateDate(getCreateDate());
 
-		clone.setCategoryId(getCategoryId());
+		mbMessageImpl.setModifiedDate(getModifiedDate());
 
-		clone.setThreadId(getThreadId());
+		mbMessageImpl.setClassNameId(getClassNameId());
 
-		clone.setRootMessageId(getRootMessageId());
+		mbMessageImpl.setClassPK(getClassPK());
 
-		clone.setParentMessageId(getParentMessageId());
+		mbMessageImpl.setCategoryId(getCategoryId());
 
-		clone.setSubject(getSubject());
+		mbMessageImpl.setThreadId(getThreadId());
 
-		clone.setBody(getBody());
+		mbMessageImpl.setRootMessageId(getRootMessageId());
 
-		clone.setFormat(getFormat());
+		mbMessageImpl.setParentMessageId(getParentMessageId());
 
-		clone.setAttachments(getAttachments());
+		mbMessageImpl.setSubject(getSubject());
 
-		clone.setAnonymous(getAnonymous());
+		mbMessageImpl.setBody(getBody());
 
-		clone.setPriority(getPriority());
+		mbMessageImpl.setFormat(getFormat());
 
-		clone.setAllowPingbacks(getAllowPingbacks());
+		mbMessageImpl.setAttachments(getAttachments());
 
-		clone.setStatus(getStatus());
+		mbMessageImpl.setAnonymous(getAnonymous());
 
-		clone.setStatusByUserId(getStatusByUserId());
+		mbMessageImpl.setPriority(getPriority());
 
-		clone.setStatusByUserName(getStatusByUserName());
+		mbMessageImpl.setAllowPingbacks(getAllowPingbacks());
 
-		clone.setStatusDate(getStatusDate());
+		mbMessageImpl.setStatus(getStatus());
 
-		return clone;
+		mbMessageImpl.setStatusByUserId(getStatusByUserId());
+
+		mbMessageImpl.setStatusByUserName(getStatusByUserName());
+
+		mbMessageImpl.setStatusDate(getStatusDate());
+
+		return mbMessageImpl;
 	}
 
 	public int compareTo(MBMessage mbMessage) {

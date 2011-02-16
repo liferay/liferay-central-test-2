@@ -401,57 +401,63 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	public Object clone() {
-		DLFileEntryImpl clone = new DLFileEntryImpl();
-		DLFileEntryModelImpl cloneModel = (DLFileEntryModelImpl)clone;
+		DLFileEntryImpl dlFileEntryImpl = new DLFileEntryImpl();
 
-		clone.setUuid(getUuid());
+		DLFileEntryModelImpl dlFileEntryModelImpl = (DLFileEntryModelImpl)dlFileEntryImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setFileEntryId(getFileEntryId());
+		dlFileEntryImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		dlFileEntryModelImpl._originalUuid = dlFileEntryModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		dlFileEntryImpl.setFileEntryId(getFileEntryId());
 
-		clone.setUserId(getUserId());
+		dlFileEntryImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		dlFileEntryModelImpl._originalGroupId = dlFileEntryModelImpl._groupId;
 
-		clone.setVersionUserId(getVersionUserId());
+		dlFileEntryModelImpl._setOriginalGroupId = false;
+		dlFileEntryImpl.setCompanyId(getCompanyId());
 
-		clone.setVersionUserName(getVersionUserName());
+		dlFileEntryImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		dlFileEntryImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		dlFileEntryImpl.setVersionUserId(getVersionUserId());
 
-		clone.setRepositoryId(getRepositoryId());
+		dlFileEntryImpl.setVersionUserName(getVersionUserName());
 
-		clone.setFolderId(getFolderId());
+		dlFileEntryImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalFolderId = cloneModel._folderId;
-		cloneModel._setOriginalFolderId = false;
-		clone.setName(getName());
+		dlFileEntryImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setExtension(getExtension());
+		dlFileEntryImpl.setRepositoryId(getRepositoryId());
 
-		clone.setTitle(getTitle());
+		dlFileEntryImpl.setFolderId(getFolderId());
 
-		cloneModel._originalTitle = cloneModel._title;
-		clone.setDescription(getDescription());
+		dlFileEntryModelImpl._originalFolderId = dlFileEntryModelImpl._folderId;
 
-		clone.setExtraSettings(getExtraSettings());
+		dlFileEntryModelImpl._setOriginalFolderId = false;
+		dlFileEntryImpl.setName(getName());
 
-		clone.setVersion(getVersion());
+		dlFileEntryModelImpl._originalName = dlFileEntryModelImpl._name;
 
-		clone.setSize(getSize());
+		dlFileEntryImpl.setExtension(getExtension());
 
-		clone.setReadCount(getReadCount());
+		dlFileEntryImpl.setTitle(getTitle());
 
-		return clone;
+		dlFileEntryModelImpl._originalTitle = dlFileEntryModelImpl._title;
+
+		dlFileEntryImpl.setDescription(getDescription());
+
+		dlFileEntryImpl.setExtraSettings(getExtraSettings());
+
+		dlFileEntryImpl.setVersion(getVersion());
+
+		dlFileEntryImpl.setSize(getSize());
+
+		dlFileEntryImpl.setReadCount(getReadCount());
+
+		return dlFileEntryImpl;
 	}
 
 	public int compareTo(DLFileEntry dlFileEntry) {

@@ -381,46 +381,47 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 	}
 
 	public Object clone() {
-		AddressImpl clone = new AddressImpl();
-		AddressModelImpl cloneModel = (AddressModelImpl)clone;
+		AddressImpl addressImpl = new AddressImpl();
 
-		clone.setAddressId(getAddressId());
+		AddressModelImpl addressModelImpl = (AddressModelImpl)addressImpl;
 
-		clone.setCompanyId(getCompanyId());
+		addressImpl.setAddressId(getAddressId());
 
-		clone.setUserId(getUserId());
+		addressImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		addressImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		addressImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		addressImpl.setCreateDate(getCreateDate());
 
-		clone.setClassNameId(getClassNameId());
+		addressImpl.setModifiedDate(getModifiedDate());
 
-		clone.setClassPK(getClassPK());
+		addressImpl.setClassNameId(getClassNameId());
 
-		clone.setStreet1(getStreet1());
+		addressImpl.setClassPK(getClassPK());
 
-		clone.setStreet2(getStreet2());
+		addressImpl.setStreet1(getStreet1());
 
-		clone.setStreet3(getStreet3());
+		addressImpl.setStreet2(getStreet2());
 
-		clone.setCity(getCity());
+		addressImpl.setStreet3(getStreet3());
 
-		clone.setZip(getZip());
+		addressImpl.setCity(getCity());
 
-		clone.setRegionId(getRegionId());
+		addressImpl.setZip(getZip());
 
-		clone.setCountryId(getCountryId());
+		addressImpl.setRegionId(getRegionId());
 
-		clone.setTypeId(getTypeId());
+		addressImpl.setCountryId(getCountryId());
 
-		clone.setMailing(getMailing());
+		addressImpl.setTypeId(getTypeId());
 
-		clone.setPrimary(getPrimary());
+		addressImpl.setMailing(getMailing());
 
-		return clone;
+		addressImpl.setPrimary(getPrimary());
+
+		return addressImpl;
 	}
 
 	public int compareTo(Address address) {

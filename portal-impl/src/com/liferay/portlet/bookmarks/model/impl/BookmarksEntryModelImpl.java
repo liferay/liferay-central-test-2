@@ -324,39 +324,42 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	}
 
 	public Object clone() {
-		BookmarksEntryImpl clone = new BookmarksEntryImpl();
-		BookmarksEntryModelImpl cloneModel = (BookmarksEntryModelImpl)clone;
+		BookmarksEntryImpl bookmarksEntryImpl = new BookmarksEntryImpl();
 
-		clone.setUuid(getUuid());
+		BookmarksEntryModelImpl bookmarksEntryModelImpl = (BookmarksEntryModelImpl)bookmarksEntryImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setEntryId(getEntryId());
+		bookmarksEntryImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		bookmarksEntryModelImpl._originalUuid = bookmarksEntryModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		bookmarksEntryImpl.setEntryId(getEntryId());
 
-		clone.setUserId(getUserId());
+		bookmarksEntryImpl.setGroupId(getGroupId());
 
-		clone.setCreateDate(getCreateDate());
+		bookmarksEntryModelImpl._originalGroupId = bookmarksEntryModelImpl._groupId;
 
-		clone.setModifiedDate(getModifiedDate());
+		bookmarksEntryModelImpl._setOriginalGroupId = false;
+		bookmarksEntryImpl.setCompanyId(getCompanyId());
 
-		clone.setFolderId(getFolderId());
+		bookmarksEntryImpl.setUserId(getUserId());
 
-		clone.setName(getName());
+		bookmarksEntryImpl.setCreateDate(getCreateDate());
 
-		clone.setUrl(getUrl());
+		bookmarksEntryImpl.setModifiedDate(getModifiedDate());
 
-		clone.setDescription(getDescription());
+		bookmarksEntryImpl.setFolderId(getFolderId());
 
-		clone.setVisits(getVisits());
+		bookmarksEntryImpl.setName(getName());
 
-		clone.setPriority(getPriority());
+		bookmarksEntryImpl.setUrl(getUrl());
 
-		return clone;
+		bookmarksEntryImpl.setDescription(getDescription());
+
+		bookmarksEntryImpl.setVisits(getVisits());
+
+		bookmarksEntryImpl.setPriority(getPriority());
+
+		return bookmarksEntryImpl;
 	}
 
 	public int compareTo(BookmarksEntry bookmarksEntry) {

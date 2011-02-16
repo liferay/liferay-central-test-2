@@ -307,47 +307,54 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	}
 
 	public Object clone() {
-		SocialEquityLogImpl clone = new SocialEquityLogImpl();
-		SocialEquityLogModelImpl cloneModel = (SocialEquityLogModelImpl)clone;
+		SocialEquityLogImpl socialEquityLogImpl = new SocialEquityLogImpl();
 
-		clone.setEquityLogId(getEquityLogId());
+		SocialEquityLogModelImpl socialEquityLogModelImpl = (SocialEquityLogModelImpl)socialEquityLogImpl;
 
-		clone.setGroupId(getGroupId());
+		socialEquityLogImpl.setEquityLogId(getEquityLogId());
 
-		clone.setCompanyId(getCompanyId());
+		socialEquityLogImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		socialEquityLogImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setAssetEntryId(getAssetEntryId());
+		socialEquityLogImpl.setUserId(getUserId());
 
-		cloneModel._originalAssetEntryId = cloneModel._assetEntryId;
-		cloneModel._setOriginalAssetEntryId = false;
-		clone.setActionId(getActionId());
+		socialEquityLogModelImpl._originalUserId = socialEquityLogModelImpl._userId;
 
-		cloneModel._originalActionId = cloneModel._actionId;
-		clone.setActionDate(getActionDate());
+		socialEquityLogModelImpl._setOriginalUserId = false;
+		socialEquityLogImpl.setAssetEntryId(getAssetEntryId());
 
-		cloneModel._originalActionDate = cloneModel._actionDate;
-		cloneModel._setOriginalActionDate = false;
-		clone.setActive(getActive());
+		socialEquityLogModelImpl._originalAssetEntryId = socialEquityLogModelImpl._assetEntryId;
 
-		cloneModel._originalActive = cloneModel._active;
-		cloneModel._setOriginalActive = false;
-		clone.setExpiration(getExpiration());
+		socialEquityLogModelImpl._setOriginalAssetEntryId = false;
+		socialEquityLogImpl.setActionId(getActionId());
 
-		clone.setType(getType());
+		socialEquityLogModelImpl._originalActionId = socialEquityLogModelImpl._actionId;
 
-		cloneModel._originalType = cloneModel._type;
-		cloneModel._setOriginalType = false;
-		clone.setValue(getValue());
+		socialEquityLogImpl.setActionDate(getActionDate());
 
-		clone.setExtraData(getExtraData());
+		socialEquityLogModelImpl._originalActionDate = socialEquityLogModelImpl._actionDate;
 
-		cloneModel._originalExtraData = cloneModel._extraData;
+		socialEquityLogModelImpl._setOriginalActionDate = false;
+		socialEquityLogImpl.setActive(getActive());
 
-		return clone;
+		socialEquityLogModelImpl._originalActive = socialEquityLogModelImpl._active;
+
+		socialEquityLogModelImpl._setOriginalActive = false;
+		socialEquityLogImpl.setExpiration(getExpiration());
+
+		socialEquityLogImpl.setType(getType());
+
+		socialEquityLogModelImpl._originalType = socialEquityLogModelImpl._type;
+
+		socialEquityLogModelImpl._setOriginalType = false;
+		socialEquityLogImpl.setValue(getValue());
+
+		socialEquityLogImpl.setExtraData(getExtraData());
+
+		socialEquityLogModelImpl._originalExtraData = socialEquityLogModelImpl._extraData;
+
+		return socialEquityLogImpl;
 	}
 
 	public int compareTo(SocialEquityLog socialEquityLog) {

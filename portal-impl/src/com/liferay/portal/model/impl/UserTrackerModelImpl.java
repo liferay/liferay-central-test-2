@@ -212,26 +212,27 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	}
 
 	public Object clone() {
-		UserTrackerImpl clone = new UserTrackerImpl();
-		UserTrackerModelImpl cloneModel = (UserTrackerModelImpl)clone;
+		UserTrackerImpl userTrackerImpl = new UserTrackerImpl();
 
-		clone.setUserTrackerId(getUserTrackerId());
+		UserTrackerModelImpl userTrackerModelImpl = (UserTrackerModelImpl)userTrackerImpl;
 
-		clone.setCompanyId(getCompanyId());
+		userTrackerImpl.setUserTrackerId(getUserTrackerId());
 
-		clone.setUserId(getUserId());
+		userTrackerImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		userTrackerImpl.setUserId(getUserId());
 
-		clone.setSessionId(getSessionId());
+		userTrackerImpl.setModifiedDate(getModifiedDate());
 
-		clone.setRemoteAddr(getRemoteAddr());
+		userTrackerImpl.setSessionId(getSessionId());
 
-		clone.setRemoteHost(getRemoteHost());
+		userTrackerImpl.setRemoteAddr(getRemoteAddr());
 
-		clone.setUserAgent(getUserAgent());
+		userTrackerImpl.setRemoteHost(getRemoteHost());
 
-		return clone;
+		userTrackerImpl.setUserAgent(getUserAgent());
+
+		return userTrackerImpl;
 	}
 
 	public int compareTo(UserTracker userTracker) {

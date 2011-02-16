@@ -148,23 +148,26 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	}
 
 	public Object clone() {
-		ExpandoRowImpl clone = new ExpandoRowImpl();
-		ExpandoRowModelImpl cloneModel = (ExpandoRowModelImpl)clone;
+		ExpandoRowImpl expandoRowImpl = new ExpandoRowImpl();
 
-		clone.setRowId(getRowId());
+		ExpandoRowModelImpl expandoRowModelImpl = (ExpandoRowModelImpl)expandoRowImpl;
 
-		clone.setCompanyId(getCompanyId());
+		expandoRowImpl.setRowId(getRowId());
 
-		clone.setTableId(getTableId());
+		expandoRowImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalTableId = cloneModel._tableId;
-		cloneModel._setOriginalTableId = false;
-		clone.setClassPK(getClassPK());
+		expandoRowImpl.setTableId(getTableId());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
+		expandoRowModelImpl._originalTableId = expandoRowModelImpl._tableId;
 
-		return clone;
+		expandoRowModelImpl._setOriginalTableId = false;
+		expandoRowImpl.setClassPK(getClassPK());
+
+		expandoRowModelImpl._originalClassPK = expandoRowModelImpl._classPK;
+
+		expandoRowModelImpl._setOriginalClassPK = false;
+
+		return expandoRowImpl;
 	}
 
 	public int compareTo(ExpandoRow expandoRow) {

@@ -269,37 +269,42 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	}
 
 	public Object clone() {
-		PortletItemImpl clone = new PortletItemImpl();
-		PortletItemModelImpl cloneModel = (PortletItemModelImpl)clone;
+		PortletItemImpl portletItemImpl = new PortletItemImpl();
 
-		clone.setPortletItemId(getPortletItemId());
+		PortletItemModelImpl portletItemModelImpl = (PortletItemModelImpl)portletItemImpl;
 
-		clone.setGroupId(getGroupId());
+		portletItemImpl.setPortletItemId(getPortletItemId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		portletItemImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		portletItemModelImpl._originalGroupId = portletItemModelImpl._groupId;
 
-		clone.setUserName(getUserName());
+		portletItemModelImpl._setOriginalGroupId = false;
+		portletItemImpl.setCompanyId(getCompanyId());
 
-		clone.setCreateDate(getCreateDate());
+		portletItemImpl.setUserId(getUserId());
 
-		clone.setModifiedDate(getModifiedDate());
+		portletItemImpl.setUserName(getUserName());
 
-		clone.setName(getName());
+		portletItemImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setPortletId(getPortletId());
+		portletItemImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalPortletId = cloneModel._portletId;
-		clone.setClassNameId(getClassNameId());
+		portletItemImpl.setName(getName());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
+		portletItemModelImpl._originalName = portletItemModelImpl._name;
 
-		return clone;
+		portletItemImpl.setPortletId(getPortletId());
+
+		portletItemModelImpl._originalPortletId = portletItemModelImpl._portletId;
+
+		portletItemImpl.setClassNameId(getClassNameId());
+
+		portletItemModelImpl._originalClassNameId = portletItemModelImpl._classNameId;
+
+		portletItemModelImpl._setOriginalClassNameId = false;
+
+		return portletItemImpl;
 	}
 
 	public int compareTo(PortletItem portletItem) {

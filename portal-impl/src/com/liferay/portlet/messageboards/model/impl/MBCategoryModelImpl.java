@@ -349,43 +349,46 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	}
 
 	public Object clone() {
-		MBCategoryImpl clone = new MBCategoryImpl();
-		MBCategoryModelImpl cloneModel = (MBCategoryModelImpl)clone;
+		MBCategoryImpl mbCategoryImpl = new MBCategoryImpl();
 
-		clone.setUuid(getUuid());
+		MBCategoryModelImpl mbCategoryModelImpl = (MBCategoryModelImpl)mbCategoryImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setCategoryId(getCategoryId());
+		mbCategoryImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		mbCategoryModelImpl._originalUuid = mbCategoryModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		mbCategoryImpl.setCategoryId(getCategoryId());
 
-		clone.setUserId(getUserId());
+		mbCategoryImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		mbCategoryModelImpl._originalGroupId = mbCategoryModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		mbCategoryModelImpl._setOriginalGroupId = false;
+		mbCategoryImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		mbCategoryImpl.setUserId(getUserId());
 
-		clone.setParentCategoryId(getParentCategoryId());
+		mbCategoryImpl.setUserName(getUserName());
 
-		clone.setName(getName());
+		mbCategoryImpl.setCreateDate(getCreateDate());
 
-		clone.setDescription(getDescription());
+		mbCategoryImpl.setModifiedDate(getModifiedDate());
 
-		clone.setDisplayStyle(getDisplayStyle());
+		mbCategoryImpl.setParentCategoryId(getParentCategoryId());
 
-		clone.setThreadCount(getThreadCount());
+		mbCategoryImpl.setName(getName());
 
-		clone.setMessageCount(getMessageCount());
+		mbCategoryImpl.setDescription(getDescription());
 
-		clone.setLastPostDate(getLastPostDate());
+		mbCategoryImpl.setDisplayStyle(getDisplayStyle());
 
-		return clone;
+		mbCategoryImpl.setThreadCount(getThreadCount());
+
+		mbCategoryImpl.setMessageCount(getMessageCount());
+
+		mbCategoryImpl.setLastPostDate(getLastPostDate());
+
+		return mbCategoryImpl;
 	}
 
 	public int compareTo(MBCategory mbCategory) {

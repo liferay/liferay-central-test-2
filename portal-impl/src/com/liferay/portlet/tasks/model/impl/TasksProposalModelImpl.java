@@ -333,39 +333,42 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 	}
 
 	public Object clone() {
-		TasksProposalImpl clone = new TasksProposalImpl();
-		TasksProposalModelImpl cloneModel = (TasksProposalModelImpl)clone;
+		TasksProposalImpl tasksProposalImpl = new TasksProposalImpl();
 
-		clone.setProposalId(getProposalId());
+		TasksProposalModelImpl tasksProposalModelImpl = (TasksProposalModelImpl)tasksProposalImpl;
 
-		clone.setGroupId(getGroupId());
+		tasksProposalImpl.setProposalId(getProposalId());
 
-		clone.setCompanyId(getCompanyId());
+		tasksProposalImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		tasksProposalImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		tasksProposalImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		tasksProposalImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		tasksProposalImpl.setCreateDate(getCreateDate());
 
-		clone.setClassNameId(getClassNameId());
+		tasksProposalImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		tasksProposalImpl.setClassNameId(getClassNameId());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		clone.setName(getName());
+		tasksProposalModelImpl._originalClassNameId = tasksProposalModelImpl._classNameId;
 
-		clone.setDescription(getDescription());
+		tasksProposalModelImpl._setOriginalClassNameId = false;
+		tasksProposalImpl.setClassPK(getClassPK());
 
-		clone.setPublishDate(getPublishDate());
+		tasksProposalModelImpl._originalClassPK = tasksProposalModelImpl._classPK;
 
-		clone.setDueDate(getDueDate());
+		tasksProposalImpl.setName(getName());
 
-		return clone;
+		tasksProposalImpl.setDescription(getDescription());
+
+		tasksProposalImpl.setPublishDate(getPublishDate());
+
+		tasksProposalImpl.setDueDate(getDueDate());
+
+		return tasksProposalImpl;
 	}
 
 	public int compareTo(TasksProposal tasksProposal) {

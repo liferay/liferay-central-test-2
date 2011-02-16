@@ -603,74 +603,79 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	public Object clone() {
-		JournalArticleImpl clone = new JournalArticleImpl();
-		JournalArticleModelImpl cloneModel = (JournalArticleModelImpl)clone;
+		JournalArticleImpl journalArticleImpl = new JournalArticleImpl();
 
-		clone.setUuid(getUuid());
+		JournalArticleModelImpl journalArticleModelImpl = (JournalArticleModelImpl)journalArticleImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setId(getId());
+		journalArticleImpl.setUuid(getUuid());
 
-		clone.setResourcePrimKey(getResourcePrimKey());
+		journalArticleModelImpl._originalUuid = journalArticleModelImpl._uuid;
 
-		clone.setGroupId(getGroupId());
+		journalArticleImpl.setId(getId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		journalArticleImpl.setResourcePrimKey(getResourcePrimKey());
 
-		clone.setUserId(getUserId());
+		journalArticleImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		journalArticleModelImpl._originalGroupId = journalArticleModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		journalArticleModelImpl._setOriginalGroupId = false;
+		journalArticleImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		journalArticleImpl.setUserId(getUserId());
 
-		clone.setArticleId(getArticleId());
+		journalArticleImpl.setUserName(getUserName());
 
-		cloneModel._originalArticleId = cloneModel._articleId;
-		clone.setVersion(getVersion());
+		journalArticleImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalVersion = cloneModel._version;
-		cloneModel._setOriginalVersion = false;
-		clone.setTitle(getTitle());
+		journalArticleImpl.setModifiedDate(getModifiedDate());
 
-		clone.setUrlTitle(getUrlTitle());
+		journalArticleImpl.setArticleId(getArticleId());
 
-		clone.setDescription(getDescription());
+		journalArticleModelImpl._originalArticleId = journalArticleModelImpl._articleId;
 
-		clone.setContent(getContent());
+		journalArticleImpl.setVersion(getVersion());
 
-		clone.setType(getType());
+		journalArticleModelImpl._originalVersion = journalArticleModelImpl._version;
 
-		clone.setStructureId(getStructureId());
+		journalArticleModelImpl._setOriginalVersion = false;
+		journalArticleImpl.setTitle(getTitle());
 
-		clone.setTemplateId(getTemplateId());
+		journalArticleImpl.setUrlTitle(getUrlTitle());
 
-		clone.setDisplayDate(getDisplayDate());
+		journalArticleImpl.setDescription(getDescription());
 
-		clone.setExpirationDate(getExpirationDate());
+		journalArticleImpl.setContent(getContent());
 
-		clone.setReviewDate(getReviewDate());
+		journalArticleImpl.setType(getType());
 
-		clone.setIndexable(getIndexable());
+		journalArticleImpl.setStructureId(getStructureId());
 
-		clone.setSmallImage(getSmallImage());
+		journalArticleImpl.setTemplateId(getTemplateId());
 
-		clone.setSmallImageId(getSmallImageId());
+		journalArticleImpl.setDisplayDate(getDisplayDate());
 
-		clone.setSmallImageURL(getSmallImageURL());
+		journalArticleImpl.setExpirationDate(getExpirationDate());
 
-		clone.setStatus(getStatus());
+		journalArticleImpl.setReviewDate(getReviewDate());
 
-		clone.setStatusByUserId(getStatusByUserId());
+		journalArticleImpl.setIndexable(getIndexable());
 
-		clone.setStatusByUserName(getStatusByUserName());
+		journalArticleImpl.setSmallImage(getSmallImage());
 
-		clone.setStatusDate(getStatusDate());
+		journalArticleImpl.setSmallImageId(getSmallImageId());
 
-		return clone;
+		journalArticleImpl.setSmallImageURL(getSmallImageURL());
+
+		journalArticleImpl.setStatus(getStatus());
+
+		journalArticleImpl.setStatusByUserId(getStatusByUserId());
+
+		journalArticleImpl.setStatusByUserName(getStatusByUserName());
+
+		journalArticleImpl.setStatusDate(getStatusDate());
+
+		return journalArticleImpl;
 	}
 
 	public int compareTo(JournalArticle journalArticle) {

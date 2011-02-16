@@ -195,24 +195,27 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	}
 
 	public Object clone() {
-		MBStatsUserImpl clone = new MBStatsUserImpl();
-		MBStatsUserModelImpl cloneModel = (MBStatsUserModelImpl)clone;
+		MBStatsUserImpl mbStatsUserImpl = new MBStatsUserImpl();
 
-		clone.setStatsUserId(getStatsUserId());
+		MBStatsUserModelImpl mbStatsUserModelImpl = (MBStatsUserModelImpl)mbStatsUserImpl;
 
-		clone.setGroupId(getGroupId());
+		mbStatsUserImpl.setStatsUserId(getStatsUserId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setUserId(getUserId());
+		mbStatsUserImpl.setGroupId(getGroupId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setMessageCount(getMessageCount());
+		mbStatsUserModelImpl._originalGroupId = mbStatsUserModelImpl._groupId;
 
-		clone.setLastPostDate(getLastPostDate());
+		mbStatsUserModelImpl._setOriginalGroupId = false;
+		mbStatsUserImpl.setUserId(getUserId());
 
-		return clone;
+		mbStatsUserModelImpl._originalUserId = mbStatsUserModelImpl._userId;
+
+		mbStatsUserModelImpl._setOriginalUserId = false;
+		mbStatsUserImpl.setMessageCount(getMessageCount());
+
+		mbStatsUserImpl.setLastPostDate(getLastPostDate());
+
+		return mbStatsUserImpl;
 	}
 
 	public int compareTo(MBStatsUser mbStatsUser) {

@@ -174,22 +174,23 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 	}
 
 	public Object clone() {
-		SocialEquityHistoryImpl clone = new SocialEquityHistoryImpl();
-		SocialEquityHistoryModelImpl cloneModel = (SocialEquityHistoryModelImpl)clone;
+		SocialEquityHistoryImpl socialEquityHistoryImpl = new SocialEquityHistoryImpl();
 
-		clone.setEquityHistoryId(getEquityHistoryId());
+		SocialEquityHistoryModelImpl socialEquityHistoryModelImpl = (SocialEquityHistoryModelImpl)socialEquityHistoryImpl;
 
-		clone.setGroupId(getGroupId());
+		socialEquityHistoryImpl.setEquityHistoryId(getEquityHistoryId());
 
-		clone.setCompanyId(getCompanyId());
+		socialEquityHistoryImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		socialEquityHistoryImpl.setCompanyId(getCompanyId());
 
-		clone.setCreateDate(getCreateDate());
+		socialEquityHistoryImpl.setUserId(getUserId());
 
-		clone.setPersonalEquity(getPersonalEquity());
+		socialEquityHistoryImpl.setCreateDate(getCreateDate());
 
-		return clone;
+		socialEquityHistoryImpl.setPersonalEquity(getPersonalEquity());
+
+		return socialEquityHistoryImpl;
 	}
 
 	public int compareTo(SocialEquityHistory socialEquityHistory) {

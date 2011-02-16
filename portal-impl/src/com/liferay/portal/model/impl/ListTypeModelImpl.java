@@ -166,16 +166,17 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	}
 
 	public Object clone() {
-		ListTypeImpl clone = new ListTypeImpl();
-		ListTypeModelImpl cloneModel = (ListTypeModelImpl)clone;
+		ListTypeImpl listTypeImpl = new ListTypeImpl();
 
-		clone.setListTypeId(getListTypeId());
+		ListTypeModelImpl listTypeModelImpl = (ListTypeModelImpl)listTypeImpl;
 
-		clone.setName(getName());
+		listTypeImpl.setListTypeId(getListTypeId());
 
-		clone.setType(getType());
+		listTypeImpl.setName(getName());
 
-		return clone;
+		listTypeImpl.setType(getType());
+
+		return listTypeImpl;
 	}
 
 	public int compareTo(ListType listType) {

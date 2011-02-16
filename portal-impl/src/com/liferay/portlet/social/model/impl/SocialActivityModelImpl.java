@@ -322,49 +322,58 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	public Object clone() {
-		SocialActivityImpl clone = new SocialActivityImpl();
-		SocialActivityModelImpl cloneModel = (SocialActivityModelImpl)clone;
+		SocialActivityImpl socialActivityImpl = new SocialActivityImpl();
 
-		clone.setActivityId(getActivityId());
+		SocialActivityModelImpl socialActivityModelImpl = (SocialActivityModelImpl)socialActivityImpl;
 
-		clone.setGroupId(getGroupId());
+		socialActivityImpl.setActivityId(getActivityId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		socialActivityImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		socialActivityModelImpl._originalGroupId = socialActivityModelImpl._groupId;
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setCreateDate(getCreateDate());
+		socialActivityModelImpl._setOriginalGroupId = false;
+		socialActivityImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalCreateDate = cloneModel._createDate;
-		cloneModel._setOriginalCreateDate = false;
-		clone.setMirrorActivityId(getMirrorActivityId());
+		socialActivityImpl.setUserId(getUserId());
 
-		cloneModel._originalMirrorActivityId = cloneModel._mirrorActivityId;
-		cloneModel._setOriginalMirrorActivityId = false;
-		clone.setClassNameId(getClassNameId());
+		socialActivityModelImpl._originalUserId = socialActivityModelImpl._userId;
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		socialActivityModelImpl._setOriginalUserId = false;
+		socialActivityImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setType(getType());
+		socialActivityModelImpl._originalCreateDate = socialActivityModelImpl._createDate;
 
-		cloneModel._originalType = cloneModel._type;
-		cloneModel._setOriginalType = false;
-		clone.setExtraData(getExtraData());
+		socialActivityModelImpl._setOriginalCreateDate = false;
+		socialActivityImpl.setMirrorActivityId(getMirrorActivityId());
 
-		clone.setReceiverUserId(getReceiverUserId());
+		socialActivityModelImpl._originalMirrorActivityId = socialActivityModelImpl._mirrorActivityId;
 
-		cloneModel._originalReceiverUserId = cloneModel._receiverUserId;
-		cloneModel._setOriginalReceiverUserId = false;
+		socialActivityModelImpl._setOriginalMirrorActivityId = false;
+		socialActivityImpl.setClassNameId(getClassNameId());
 
-		return clone;
+		socialActivityModelImpl._originalClassNameId = socialActivityModelImpl._classNameId;
+
+		socialActivityModelImpl._setOriginalClassNameId = false;
+		socialActivityImpl.setClassPK(getClassPK());
+
+		socialActivityModelImpl._originalClassPK = socialActivityModelImpl._classPK;
+
+		socialActivityModelImpl._setOriginalClassPK = false;
+		socialActivityImpl.setType(getType());
+
+		socialActivityModelImpl._originalType = socialActivityModelImpl._type;
+
+		socialActivityModelImpl._setOriginalType = false;
+		socialActivityImpl.setExtraData(getExtraData());
+
+		socialActivityImpl.setReceiverUserId(getReceiverUserId());
+
+		socialActivityModelImpl._originalReceiverUserId = socialActivityModelImpl._receiverUserId;
+
+		socialActivityModelImpl._setOriginalReceiverUserId = false;
+
+		return socialActivityImpl;
 	}
 
 	public int compareTo(SocialActivity socialActivity) {

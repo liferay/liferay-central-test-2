@@ -203,27 +203,29 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	}
 
 	public Object clone() {
-		ReleaseImpl clone = new ReleaseImpl();
-		ReleaseModelImpl cloneModel = (ReleaseModelImpl)clone;
+		ReleaseImpl releaseImpl = new ReleaseImpl();
 
-		clone.setReleaseId(getReleaseId());
+		ReleaseModelImpl releaseModelImpl = (ReleaseModelImpl)releaseImpl;
 
-		clone.setCreateDate(getCreateDate());
+		releaseImpl.setReleaseId(getReleaseId());
 
-		clone.setModifiedDate(getModifiedDate());
+		releaseImpl.setCreateDate(getCreateDate());
 
-		clone.setServletContextName(getServletContextName());
+		releaseImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalServletContextName = cloneModel._servletContextName;
-		clone.setBuildNumber(getBuildNumber());
+		releaseImpl.setServletContextName(getServletContextName());
 
-		clone.setBuildDate(getBuildDate());
+		releaseModelImpl._originalServletContextName = releaseModelImpl._servletContextName;
 
-		clone.setVerified(getVerified());
+		releaseImpl.setBuildNumber(getBuildNumber());
 
-		clone.setTestString(getTestString());
+		releaseImpl.setBuildDate(getBuildDate());
 
-		return clone;
+		releaseImpl.setVerified(getVerified());
+
+		releaseImpl.setTestString(getTestString());
+
+		return releaseImpl;
 	}
 
 	public int compareTo(Release release) {

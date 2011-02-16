@@ -551,70 +551,71 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	}
 
 	public Object clone() {
-		ContactImpl clone = new ContactImpl();
-		ContactModelImpl cloneModel = (ContactModelImpl)clone;
+		ContactImpl contactImpl = new ContactImpl();
 
-		clone.setContactId(getContactId());
+		ContactModelImpl contactModelImpl = (ContactModelImpl)contactImpl;
 
-		clone.setCompanyId(getCompanyId());
+		contactImpl.setContactId(getContactId());
 
-		clone.setUserId(getUserId());
+		contactImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		contactImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		contactImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		contactImpl.setCreateDate(getCreateDate());
 
-		clone.setAccountId(getAccountId());
+		contactImpl.setModifiedDate(getModifiedDate());
 
-		clone.setParentContactId(getParentContactId());
+		contactImpl.setAccountId(getAccountId());
 
-		clone.setFirstName(getFirstName());
+		contactImpl.setParentContactId(getParentContactId());
 
-		clone.setMiddleName(getMiddleName());
+		contactImpl.setFirstName(getFirstName());
 
-		clone.setLastName(getLastName());
+		contactImpl.setMiddleName(getMiddleName());
 
-		clone.setPrefixId(getPrefixId());
+		contactImpl.setLastName(getLastName());
 
-		clone.setSuffixId(getSuffixId());
+		contactImpl.setPrefixId(getPrefixId());
 
-		clone.setMale(getMale());
+		contactImpl.setSuffixId(getSuffixId());
 
-		clone.setBirthday(getBirthday());
+		contactImpl.setMale(getMale());
 
-		clone.setSmsSn(getSmsSn());
+		contactImpl.setBirthday(getBirthday());
 
-		clone.setAimSn(getAimSn());
+		contactImpl.setSmsSn(getSmsSn());
 
-		clone.setFacebookSn(getFacebookSn());
+		contactImpl.setAimSn(getAimSn());
 
-		clone.setIcqSn(getIcqSn());
+		contactImpl.setFacebookSn(getFacebookSn());
 
-		clone.setJabberSn(getJabberSn());
+		contactImpl.setIcqSn(getIcqSn());
 
-		clone.setMsnSn(getMsnSn());
+		contactImpl.setJabberSn(getJabberSn());
 
-		clone.setMySpaceSn(getMySpaceSn());
+		contactImpl.setMsnSn(getMsnSn());
 
-		clone.setSkypeSn(getSkypeSn());
+		contactImpl.setMySpaceSn(getMySpaceSn());
 
-		clone.setTwitterSn(getTwitterSn());
+		contactImpl.setSkypeSn(getSkypeSn());
 
-		clone.setYmSn(getYmSn());
+		contactImpl.setTwitterSn(getTwitterSn());
 
-		clone.setEmployeeStatusId(getEmployeeStatusId());
+		contactImpl.setYmSn(getYmSn());
 
-		clone.setEmployeeNumber(getEmployeeNumber());
+		contactImpl.setEmployeeStatusId(getEmployeeStatusId());
 
-		clone.setJobTitle(getJobTitle());
+		contactImpl.setEmployeeNumber(getEmployeeNumber());
 
-		clone.setJobClass(getJobClass());
+		contactImpl.setJobTitle(getJobTitle());
 
-		clone.setHoursOfOperation(getHoursOfOperation());
+		contactImpl.setJobClass(getJobClass());
 
-		return clone;
+		contactImpl.setHoursOfOperation(getHoursOfOperation());
+
+		return contactImpl;
 	}
 
 	public int compareTo(Contact contact) {

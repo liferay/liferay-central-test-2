@@ -393,35 +393,40 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	}
 
 	public Object clone() {
-		RoleImpl clone = new RoleImpl();
-		RoleModelImpl cloneModel = (RoleModelImpl)clone;
+		RoleImpl roleImpl = new RoleImpl();
 
-		clone.setRoleId(getRoleId());
+		RoleModelImpl roleModelImpl = (RoleModelImpl)roleImpl;
 
-		clone.setCompanyId(getCompanyId());
+		roleImpl.setRoleId(getRoleId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setClassNameId(getClassNameId());
+		roleImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		roleModelImpl._originalCompanyId = roleModelImpl._companyId;
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setName(getName());
+		roleModelImpl._setOriginalCompanyId = false;
+		roleImpl.setClassNameId(getClassNameId());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setTitle(getTitle());
+		roleModelImpl._originalClassNameId = roleModelImpl._classNameId;
 
-		clone.setDescription(getDescription());
+		roleModelImpl._setOriginalClassNameId = false;
+		roleImpl.setClassPK(getClassPK());
 
-		clone.setType(getType());
+		roleModelImpl._originalClassPK = roleModelImpl._classPK;
 
-		clone.setSubtype(getSubtype());
+		roleModelImpl._setOriginalClassPK = false;
+		roleImpl.setName(getName());
 
-		return clone;
+		roleModelImpl._originalName = roleModelImpl._name;
+
+		roleImpl.setTitle(getTitle());
+
+		roleImpl.setDescription(getDescription());
+
+		roleImpl.setType(getType());
+
+		roleImpl.setSubtype(getSubtype());
+
+		return roleImpl;
 	}
 
 	public int compareTo(Role role) {

@@ -374,40 +374,41 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	}
 
 	public Object clone() {
-		MBThreadImpl clone = new MBThreadImpl();
-		MBThreadModelImpl cloneModel = (MBThreadModelImpl)clone;
+		MBThreadImpl mbThreadImpl = new MBThreadImpl();
 
-		clone.setThreadId(getThreadId());
+		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThreadImpl;
 
-		clone.setGroupId(getGroupId());
+		mbThreadImpl.setThreadId(getThreadId());
 
-		clone.setCompanyId(getCompanyId());
+		mbThreadImpl.setGroupId(getGroupId());
 
-		clone.setCategoryId(getCategoryId());
+		mbThreadImpl.setCompanyId(getCompanyId());
 
-		clone.setRootMessageId(getRootMessageId());
+		mbThreadImpl.setCategoryId(getCategoryId());
 
-		clone.setRootMessageUserId(getRootMessageUserId());
+		mbThreadImpl.setRootMessageId(getRootMessageId());
 
-		clone.setMessageCount(getMessageCount());
+		mbThreadImpl.setRootMessageUserId(getRootMessageUserId());
 
-		clone.setViewCount(getViewCount());
+		mbThreadImpl.setMessageCount(getMessageCount());
 
-		clone.setLastPostByUserId(getLastPostByUserId());
+		mbThreadImpl.setViewCount(getViewCount());
 
-		clone.setLastPostDate(getLastPostDate());
+		mbThreadImpl.setLastPostByUserId(getLastPostByUserId());
 
-		clone.setPriority(getPriority());
+		mbThreadImpl.setLastPostDate(getLastPostDate());
 
-		clone.setStatus(getStatus());
+		mbThreadImpl.setPriority(getPriority());
 
-		clone.setStatusByUserId(getStatusByUserId());
+		mbThreadImpl.setStatus(getStatus());
 
-		clone.setStatusByUserName(getStatusByUserName());
+		mbThreadImpl.setStatusByUserId(getStatusByUserId());
 
-		clone.setStatusDate(getStatusDate());
+		mbThreadImpl.setStatusByUserName(getStatusByUserName());
 
-		return clone;
+		mbThreadImpl.setStatusDate(getStatusDate());
+
+		return mbThreadImpl;
 	}
 
 	public int compareTo(MBThread mbThread) {

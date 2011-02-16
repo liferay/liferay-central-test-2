@@ -191,26 +191,28 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 	}
 
 	public Object clone() {
-		SocialEquityAssetEntryImpl clone = new SocialEquityAssetEntryImpl();
-		SocialEquityAssetEntryModelImpl cloneModel = (SocialEquityAssetEntryModelImpl)clone;
+		SocialEquityAssetEntryImpl socialEquityAssetEntryImpl = new SocialEquityAssetEntryImpl();
 
-		clone.setEquityAssetEntryId(getEquityAssetEntryId());
+		SocialEquityAssetEntryModelImpl socialEquityAssetEntryModelImpl = (SocialEquityAssetEntryModelImpl)socialEquityAssetEntryImpl;
 
-		clone.setGroupId(getGroupId());
+		socialEquityAssetEntryImpl.setEquityAssetEntryId(getEquityAssetEntryId());
 
-		clone.setCompanyId(getCompanyId());
+		socialEquityAssetEntryImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		socialEquityAssetEntryImpl.setCompanyId(getCompanyId());
 
-		clone.setAssetEntryId(getAssetEntryId());
+		socialEquityAssetEntryImpl.setUserId(getUserId());
 
-		cloneModel._originalAssetEntryId = cloneModel._assetEntryId;
-		cloneModel._setOriginalAssetEntryId = false;
-		clone.setInformationK(getInformationK());
+		socialEquityAssetEntryImpl.setAssetEntryId(getAssetEntryId());
 
-		clone.setInformationB(getInformationB());
+		socialEquityAssetEntryModelImpl._originalAssetEntryId = socialEquityAssetEntryModelImpl._assetEntryId;
 
-		return clone;
+		socialEquityAssetEntryModelImpl._setOriginalAssetEntryId = false;
+		socialEquityAssetEntryImpl.setInformationK(getInformationK());
+
+		socialEquityAssetEntryImpl.setInformationB(getInformationB());
+
+		return socialEquityAssetEntryImpl;
 	}
 
 	public int compareTo(SocialEquityAssetEntry socialEquityAssetEntry) {

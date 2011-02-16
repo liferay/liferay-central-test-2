@@ -260,36 +260,40 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	}
 
 	public Object clone() {
-		WorkflowDefinitionLinkImpl clone = new WorkflowDefinitionLinkImpl();
-		WorkflowDefinitionLinkModelImpl cloneModel = (WorkflowDefinitionLinkModelImpl)clone;
+		WorkflowDefinitionLinkImpl workflowDefinitionLinkImpl = new WorkflowDefinitionLinkImpl();
 
-		clone.setWorkflowDefinitionLinkId(getWorkflowDefinitionLinkId());
+		WorkflowDefinitionLinkModelImpl workflowDefinitionLinkModelImpl = (WorkflowDefinitionLinkModelImpl)workflowDefinitionLinkImpl;
 
-		clone.setGroupId(getGroupId());
+		workflowDefinitionLinkImpl.setWorkflowDefinitionLinkId(getWorkflowDefinitionLinkId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		workflowDefinitionLinkImpl.setGroupId(getGroupId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setUserId(getUserId());
+		workflowDefinitionLinkModelImpl._originalGroupId = workflowDefinitionLinkModelImpl._groupId;
 
-		clone.setUserName(getUserName());
+		workflowDefinitionLinkModelImpl._setOriginalGroupId = false;
+		workflowDefinitionLinkImpl.setCompanyId(getCompanyId());
 
-		clone.setCreateDate(getCreateDate());
+		workflowDefinitionLinkModelImpl._originalCompanyId = workflowDefinitionLinkModelImpl._companyId;
 
-		clone.setModifiedDate(getModifiedDate());
+		workflowDefinitionLinkModelImpl._setOriginalCompanyId = false;
+		workflowDefinitionLinkImpl.setUserId(getUserId());
 
-		clone.setClassNameId(getClassNameId());
+		workflowDefinitionLinkImpl.setUserName(getUserName());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setWorkflowDefinitionName(getWorkflowDefinitionName());
+		workflowDefinitionLinkImpl.setCreateDate(getCreateDate());
 
-		clone.setWorkflowDefinitionVersion(getWorkflowDefinitionVersion());
+		workflowDefinitionLinkImpl.setModifiedDate(getModifiedDate());
 
-		return clone;
+		workflowDefinitionLinkImpl.setClassNameId(getClassNameId());
+
+		workflowDefinitionLinkModelImpl._originalClassNameId = workflowDefinitionLinkModelImpl._classNameId;
+
+		workflowDefinitionLinkModelImpl._setOriginalClassNameId = false;
+		workflowDefinitionLinkImpl.setWorkflowDefinitionName(getWorkflowDefinitionName());
+
+		workflowDefinitionLinkImpl.setWorkflowDefinitionVersion(getWorkflowDefinitionVersion());
+
+		return workflowDefinitionLinkImpl;
 	}
 
 	public int compareTo(WorkflowDefinitionLink workflowDefinitionLink) {

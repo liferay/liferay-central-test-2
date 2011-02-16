@@ -183,23 +183,26 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	}
 
 	public Object clone() {
-		ServiceComponentImpl clone = new ServiceComponentImpl();
-		ServiceComponentModelImpl cloneModel = (ServiceComponentModelImpl)clone;
+		ServiceComponentImpl serviceComponentImpl = new ServiceComponentImpl();
 
-		clone.setServiceComponentId(getServiceComponentId());
+		ServiceComponentModelImpl serviceComponentModelImpl = (ServiceComponentModelImpl)serviceComponentImpl;
 
-		clone.setBuildNamespace(getBuildNamespace());
+		serviceComponentImpl.setServiceComponentId(getServiceComponentId());
 
-		cloneModel._originalBuildNamespace = cloneModel._buildNamespace;
-		clone.setBuildNumber(getBuildNumber());
+		serviceComponentImpl.setBuildNamespace(getBuildNamespace());
 
-		cloneModel._originalBuildNumber = cloneModel._buildNumber;
-		cloneModel._setOriginalBuildNumber = false;
-		clone.setBuildDate(getBuildDate());
+		serviceComponentModelImpl._originalBuildNamespace = serviceComponentModelImpl._buildNamespace;
 
-		clone.setData(getData());
+		serviceComponentImpl.setBuildNumber(getBuildNumber());
 
-		return clone;
+		serviceComponentModelImpl._originalBuildNumber = serviceComponentModelImpl._buildNumber;
+
+		serviceComponentModelImpl._setOriginalBuildNumber = false;
+		serviceComponentImpl.setBuildDate(getBuildDate());
+
+		serviceComponentImpl.setData(getData());
+
+		return serviceComponentImpl;
 	}
 
 	public int compareTo(ServiceComponent serviceComponent) {

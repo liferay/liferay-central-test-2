@@ -276,30 +276,31 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	public Object clone() {
-		MembershipRequestImpl clone = new MembershipRequestImpl();
-		MembershipRequestModelImpl cloneModel = (MembershipRequestModelImpl)clone;
+		MembershipRequestImpl membershipRequestImpl = new MembershipRequestImpl();
 
-		clone.setMembershipRequestId(getMembershipRequestId());
+		MembershipRequestModelImpl membershipRequestModelImpl = (MembershipRequestModelImpl)membershipRequestImpl;
 
-		clone.setCompanyId(getCompanyId());
+		membershipRequestImpl.setMembershipRequestId(getMembershipRequestId());
 
-		clone.setUserId(getUserId());
+		membershipRequestImpl.setCompanyId(getCompanyId());
 
-		clone.setCreateDate(getCreateDate());
+		membershipRequestImpl.setUserId(getUserId());
 
-		clone.setGroupId(getGroupId());
+		membershipRequestImpl.setCreateDate(getCreateDate());
 
-		clone.setComments(getComments());
+		membershipRequestImpl.setGroupId(getGroupId());
 
-		clone.setReplyComments(getReplyComments());
+		membershipRequestImpl.setComments(getComments());
 
-		clone.setReplyDate(getReplyDate());
+		membershipRequestImpl.setReplyComments(getReplyComments());
 
-		clone.setReplierUserId(getReplierUserId());
+		membershipRequestImpl.setReplyDate(getReplyDate());
 
-		clone.setStatusId(getStatusId());
+		membershipRequestImpl.setReplierUserId(getReplierUserId());
 
-		return clone;
+		membershipRequestImpl.setStatusId(getStatusId());
+
+		return membershipRequestImpl;
 	}
 
 	public int compareTo(MembershipRequest membershipRequest) {

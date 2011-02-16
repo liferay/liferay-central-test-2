@@ -269,32 +269,38 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	public Object clone() {
-		ResourcePermissionImpl clone = new ResourcePermissionImpl();
-		ResourcePermissionModelImpl cloneModel = (ResourcePermissionModelImpl)clone;
+		ResourcePermissionImpl resourcePermissionImpl = new ResourcePermissionImpl();
 
-		clone.setResourcePermissionId(getResourcePermissionId());
+		ResourcePermissionModelImpl resourcePermissionModelImpl = (ResourcePermissionModelImpl)resourcePermissionImpl;
 
-		clone.setCompanyId(getCompanyId());
+		resourcePermissionImpl.setResourcePermissionId(getResourcePermissionId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setName(getName());
+		resourcePermissionImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setScope(getScope());
+		resourcePermissionModelImpl._originalCompanyId = resourcePermissionModelImpl._companyId;
 
-		cloneModel._originalScope = cloneModel._scope;
-		cloneModel._setOriginalScope = false;
-		clone.setPrimKey(getPrimKey());
+		resourcePermissionModelImpl._setOriginalCompanyId = false;
+		resourcePermissionImpl.setName(getName());
 
-		cloneModel._originalPrimKey = cloneModel._primKey;
-		clone.setRoleId(getRoleId());
+		resourcePermissionModelImpl._originalName = resourcePermissionModelImpl._name;
 
-		cloneModel._originalRoleId = cloneModel._roleId;
-		cloneModel._setOriginalRoleId = false;
-		clone.setActionIds(getActionIds());
+		resourcePermissionImpl.setScope(getScope());
 
-		return clone;
+		resourcePermissionModelImpl._originalScope = resourcePermissionModelImpl._scope;
+
+		resourcePermissionModelImpl._setOriginalScope = false;
+		resourcePermissionImpl.setPrimKey(getPrimKey());
+
+		resourcePermissionModelImpl._originalPrimKey = resourcePermissionModelImpl._primKey;
+
+		resourcePermissionImpl.setRoleId(getRoleId());
+
+		resourcePermissionModelImpl._originalRoleId = resourcePermissionModelImpl._roleId;
+
+		resourcePermissionModelImpl._setOriginalRoleId = false;
+		resourcePermissionImpl.setActionIds(getActionIds());
+
+		return resourcePermissionImpl;
 	}
 
 	public int compareTo(ResourcePermission resourcePermission) {

@@ -311,36 +311,40 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 	}
 
 	public Object clone() {
-		WikiNodeImpl clone = new WikiNodeImpl();
-		WikiNodeModelImpl cloneModel = (WikiNodeModelImpl)clone;
+		WikiNodeImpl wikiNodeImpl = new WikiNodeImpl();
 
-		clone.setUuid(getUuid());
+		WikiNodeModelImpl wikiNodeModelImpl = (WikiNodeModelImpl)wikiNodeImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setNodeId(getNodeId());
+		wikiNodeImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		wikiNodeModelImpl._originalUuid = wikiNodeModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		wikiNodeImpl.setNodeId(getNodeId());
 
-		clone.setUserId(getUserId());
+		wikiNodeImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		wikiNodeModelImpl._originalGroupId = wikiNodeModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		wikiNodeModelImpl._setOriginalGroupId = false;
+		wikiNodeImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		wikiNodeImpl.setUserId(getUserId());
 
-		clone.setName(getName());
+		wikiNodeImpl.setUserName(getUserName());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setDescription(getDescription());
+		wikiNodeImpl.setCreateDate(getCreateDate());
 
-		clone.setLastPostDate(getLastPostDate());
+		wikiNodeImpl.setModifiedDate(getModifiedDate());
 
-		return clone;
+		wikiNodeImpl.setName(getName());
+
+		wikiNodeModelImpl._originalName = wikiNodeModelImpl._name;
+
+		wikiNodeImpl.setDescription(getDescription());
+
+		wikiNodeImpl.setLastPostDate(getLastPostDate());
+
+		return wikiNodeImpl;
 	}
 
 	public int compareTo(WikiNode wikiNode) {

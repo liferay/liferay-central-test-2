@@ -362,42 +362,43 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 	}
 
 	public Object clone() {
-		AccountImpl clone = new AccountImpl();
-		AccountModelImpl cloneModel = (AccountModelImpl)clone;
+		AccountImpl accountImpl = new AccountImpl();
 
-		clone.setAccountId(getAccountId());
+		AccountModelImpl accountModelImpl = (AccountModelImpl)accountImpl;
 
-		clone.setCompanyId(getCompanyId());
+		accountImpl.setAccountId(getAccountId());
 
-		clone.setUserId(getUserId());
+		accountImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		accountImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		accountImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		accountImpl.setCreateDate(getCreateDate());
 
-		clone.setParentAccountId(getParentAccountId());
+		accountImpl.setModifiedDate(getModifiedDate());
 
-		clone.setName(getName());
+		accountImpl.setParentAccountId(getParentAccountId());
 
-		clone.setLegalName(getLegalName());
+		accountImpl.setName(getName());
 
-		clone.setLegalId(getLegalId());
+		accountImpl.setLegalName(getLegalName());
 
-		clone.setLegalType(getLegalType());
+		accountImpl.setLegalId(getLegalId());
 
-		clone.setSicCode(getSicCode());
+		accountImpl.setLegalType(getLegalType());
 
-		clone.setTickerSymbol(getTickerSymbol());
+		accountImpl.setSicCode(getSicCode());
 
-		clone.setIndustry(getIndustry());
+		accountImpl.setTickerSymbol(getTickerSymbol());
 
-		clone.setType(getType());
+		accountImpl.setIndustry(getIndustry());
 
-		clone.setSize(getSize());
+		accountImpl.setType(getType());
 
-		return clone;
+		accountImpl.setSize(getSize());
+
+		return accountImpl;
 	}
 
 	public int compareTo(Account account) {

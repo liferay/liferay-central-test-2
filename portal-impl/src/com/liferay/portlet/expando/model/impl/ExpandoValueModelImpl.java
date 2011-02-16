@@ -263,34 +263,39 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	public Object clone() {
-		ExpandoValueImpl clone = new ExpandoValueImpl();
-		ExpandoValueModelImpl cloneModel = (ExpandoValueModelImpl)clone;
+		ExpandoValueImpl expandoValueImpl = new ExpandoValueImpl();
 
-		clone.setValueId(getValueId());
+		ExpandoValueModelImpl expandoValueModelImpl = (ExpandoValueModelImpl)expandoValueImpl;
 
-		clone.setCompanyId(getCompanyId());
+		expandoValueImpl.setValueId(getValueId());
 
-		clone.setTableId(getTableId());
+		expandoValueImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalTableId = cloneModel._tableId;
-		cloneModel._setOriginalTableId = false;
-		clone.setColumnId(getColumnId());
+		expandoValueImpl.setTableId(getTableId());
 
-		cloneModel._originalColumnId = cloneModel._columnId;
-		cloneModel._setOriginalColumnId = false;
-		clone.setRowId(getRowId());
+		expandoValueModelImpl._originalTableId = expandoValueModelImpl._tableId;
 
-		cloneModel._originalRowId = cloneModel._rowId;
-		cloneModel._setOriginalRowId = false;
-		clone.setClassNameId(getClassNameId());
+		expandoValueModelImpl._setOriginalTableId = false;
+		expandoValueImpl.setColumnId(getColumnId());
 
-		clone.setClassPK(getClassPK());
+		expandoValueModelImpl._originalColumnId = expandoValueModelImpl._columnId;
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setData(getData());
+		expandoValueModelImpl._setOriginalColumnId = false;
+		expandoValueImpl.setRowId(getRowId());
 
-		return clone;
+		expandoValueModelImpl._originalRowId = expandoValueModelImpl._rowId;
+
+		expandoValueModelImpl._setOriginalRowId = false;
+		expandoValueImpl.setClassNameId(getClassNameId());
+
+		expandoValueImpl.setClassPK(getClassPK());
+
+		expandoValueModelImpl._originalClassPK = expandoValueModelImpl._classPK;
+
+		expandoValueModelImpl._setOriginalClassPK = false;
+		expandoValueImpl.setData(getData());
+
+		return expandoValueImpl;
 	}
 
 	public int compareTo(ExpandoValue expandoValue) {

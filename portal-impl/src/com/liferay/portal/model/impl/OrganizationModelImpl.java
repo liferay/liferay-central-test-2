@@ -315,39 +315,43 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	}
 
 	public Object clone() {
-		OrganizationImpl clone = new OrganizationImpl();
-		OrganizationModelImpl cloneModel = (OrganizationModelImpl)clone;
+		OrganizationImpl organizationImpl = new OrganizationImpl();
 
-		clone.setOrganizationId(getOrganizationId());
+		OrganizationModelImpl organizationModelImpl = (OrganizationModelImpl)organizationImpl;
 
-		clone.setCompanyId(getCompanyId());
+		organizationImpl.setOrganizationId(getOrganizationId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setParentOrganizationId(getParentOrganizationId());
+		organizationImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalParentOrganizationId = cloneModel._parentOrganizationId;
-		cloneModel._setOriginalParentOrganizationId = false;
-		clone.setLeftOrganizationId(getLeftOrganizationId());
+		organizationModelImpl._originalCompanyId = organizationModelImpl._companyId;
 
-		clone.setRightOrganizationId(getRightOrganizationId());
+		organizationModelImpl._setOriginalCompanyId = false;
+		organizationImpl.setParentOrganizationId(getParentOrganizationId());
 
-		clone.setName(getName());
+		organizationModelImpl._originalParentOrganizationId = organizationModelImpl._parentOrganizationId;
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setType(getType());
+		organizationModelImpl._setOriginalParentOrganizationId = false;
+		organizationImpl.setLeftOrganizationId(getLeftOrganizationId());
 
-		clone.setRecursable(getRecursable());
+		organizationImpl.setRightOrganizationId(getRightOrganizationId());
 
-		clone.setRegionId(getRegionId());
+		organizationImpl.setName(getName());
 
-		clone.setCountryId(getCountryId());
+		organizationModelImpl._originalName = organizationModelImpl._name;
 
-		clone.setStatusId(getStatusId());
+		organizationImpl.setType(getType());
 
-		clone.setComments(getComments());
+		organizationImpl.setRecursable(getRecursable());
 
-		return clone;
+		organizationImpl.setRegionId(getRegionId());
+
+		organizationImpl.setCountryId(getCountryId());
+
+		organizationImpl.setStatusId(getStatusId());
+
+		organizationImpl.setComments(getComments());
+
+		return organizationImpl;
 	}
 
 	public int compareTo(Organization organization) {

@@ -222,24 +222,27 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	}
 
 	public Object clone() {
-		PollsVoteImpl clone = new PollsVoteImpl();
-		PollsVoteModelImpl cloneModel = (PollsVoteModelImpl)clone;
+		PollsVoteImpl pollsVoteImpl = new PollsVoteImpl();
 
-		clone.setVoteId(getVoteId());
+		PollsVoteModelImpl pollsVoteModelImpl = (PollsVoteModelImpl)pollsVoteImpl;
 
-		clone.setUserId(getUserId());
+		pollsVoteImpl.setVoteId(getVoteId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setQuestionId(getQuestionId());
+		pollsVoteImpl.setUserId(getUserId());
 
-		cloneModel._originalQuestionId = cloneModel._questionId;
-		cloneModel._setOriginalQuestionId = false;
-		clone.setChoiceId(getChoiceId());
+		pollsVoteModelImpl._originalUserId = pollsVoteModelImpl._userId;
 
-		clone.setVoteDate(getVoteDate());
+		pollsVoteModelImpl._setOriginalUserId = false;
+		pollsVoteImpl.setQuestionId(getQuestionId());
 
-		return clone;
+		pollsVoteModelImpl._originalQuestionId = pollsVoteModelImpl._questionId;
+
+		pollsVoteModelImpl._setOriginalQuestionId = false;
+		pollsVoteImpl.setChoiceId(getChoiceId());
+
+		pollsVoteImpl.setVoteDate(getVoteDate());
+
+		return pollsVoteImpl;
 	}
 
 	public int compareTo(PollsVote pollsVote) {

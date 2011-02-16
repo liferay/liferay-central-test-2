@@ -301,34 +301,35 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	}
 
 	public Object clone() {
-		PhoneImpl clone = new PhoneImpl();
-		PhoneModelImpl cloneModel = (PhoneModelImpl)clone;
+		PhoneImpl phoneImpl = new PhoneImpl();
 
-		clone.setPhoneId(getPhoneId());
+		PhoneModelImpl phoneModelImpl = (PhoneModelImpl)phoneImpl;
 
-		clone.setCompanyId(getCompanyId());
+		phoneImpl.setPhoneId(getPhoneId());
 
-		clone.setUserId(getUserId());
+		phoneImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		phoneImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		phoneImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		phoneImpl.setCreateDate(getCreateDate());
 
-		clone.setClassNameId(getClassNameId());
+		phoneImpl.setModifiedDate(getModifiedDate());
 
-		clone.setClassPK(getClassPK());
+		phoneImpl.setClassNameId(getClassNameId());
 
-		clone.setNumber(getNumber());
+		phoneImpl.setClassPK(getClassPK());
 
-		clone.setExtension(getExtension());
+		phoneImpl.setNumber(getNumber());
 
-		clone.setTypeId(getTypeId());
+		phoneImpl.setExtension(getExtension());
 
-		clone.setPrimary(getPrimary());
+		phoneImpl.setTypeId(getTypeId());
 
-		return clone;
+		phoneImpl.setPrimary(getPrimary());
+
+		return phoneImpl;
 	}
 
 	public int compareTo(Phone phone) {

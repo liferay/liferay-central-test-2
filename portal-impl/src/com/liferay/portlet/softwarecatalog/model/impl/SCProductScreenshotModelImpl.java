@@ -213,33 +213,38 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	}
 
 	public Object clone() {
-		SCProductScreenshotImpl clone = new SCProductScreenshotImpl();
-		SCProductScreenshotModelImpl cloneModel = (SCProductScreenshotModelImpl)clone;
+		SCProductScreenshotImpl scProductScreenshotImpl = new SCProductScreenshotImpl();
 
-		clone.setProductScreenshotId(getProductScreenshotId());
+		SCProductScreenshotModelImpl scProductScreenshotModelImpl = (SCProductScreenshotModelImpl)scProductScreenshotImpl;
 
-		clone.setCompanyId(getCompanyId());
+		scProductScreenshotImpl.setProductScreenshotId(getProductScreenshotId());
 
-		clone.setGroupId(getGroupId());
+		scProductScreenshotImpl.setCompanyId(getCompanyId());
 
-		clone.setProductEntryId(getProductEntryId());
+		scProductScreenshotImpl.setGroupId(getGroupId());
 
-		cloneModel._originalProductEntryId = cloneModel._productEntryId;
-		cloneModel._setOriginalProductEntryId = false;
-		clone.setThumbnailId(getThumbnailId());
+		scProductScreenshotImpl.setProductEntryId(getProductEntryId());
 
-		cloneModel._originalThumbnailId = cloneModel._thumbnailId;
-		cloneModel._setOriginalThumbnailId = false;
-		clone.setFullImageId(getFullImageId());
+		scProductScreenshotModelImpl._originalProductEntryId = scProductScreenshotModelImpl._productEntryId;
 
-		cloneModel._originalFullImageId = cloneModel._fullImageId;
-		cloneModel._setOriginalFullImageId = false;
-		clone.setPriority(getPriority());
+		scProductScreenshotModelImpl._setOriginalProductEntryId = false;
+		scProductScreenshotImpl.setThumbnailId(getThumbnailId());
 
-		cloneModel._originalPriority = cloneModel._priority;
-		cloneModel._setOriginalPriority = false;
+		scProductScreenshotModelImpl._originalThumbnailId = scProductScreenshotModelImpl._thumbnailId;
 
-		return clone;
+		scProductScreenshotModelImpl._setOriginalThumbnailId = false;
+		scProductScreenshotImpl.setFullImageId(getFullImageId());
+
+		scProductScreenshotModelImpl._originalFullImageId = scProductScreenshotModelImpl._fullImageId;
+
+		scProductScreenshotModelImpl._setOriginalFullImageId = false;
+		scProductScreenshotImpl.setPriority(getPriority());
+
+		scProductScreenshotModelImpl._originalPriority = scProductScreenshotModelImpl._priority;
+
+		scProductScreenshotModelImpl._setOriginalPriority = false;
+
+		return scProductScreenshotImpl;
 	}
 
 	public int compareTo(SCProductScreenshot scProductScreenshot) {

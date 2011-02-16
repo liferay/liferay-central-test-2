@@ -171,20 +171,21 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 	}
 
 	public Object clone() {
-		ShoppingItemFieldImpl clone = new ShoppingItemFieldImpl();
-		ShoppingItemFieldModelImpl cloneModel = (ShoppingItemFieldModelImpl)clone;
+		ShoppingItemFieldImpl shoppingItemFieldImpl = new ShoppingItemFieldImpl();
 
-		clone.setItemFieldId(getItemFieldId());
+		ShoppingItemFieldModelImpl shoppingItemFieldModelImpl = (ShoppingItemFieldModelImpl)shoppingItemFieldImpl;
 
-		clone.setItemId(getItemId());
+		shoppingItemFieldImpl.setItemFieldId(getItemFieldId());
 
-		clone.setName(getName());
+		shoppingItemFieldImpl.setItemId(getItemId());
 
-		clone.setValues(getValues());
+		shoppingItemFieldImpl.setName(getName());
 
-		clone.setDescription(getDescription());
+		shoppingItemFieldImpl.setValues(getValues());
 
-		return clone;
+		shoppingItemFieldImpl.setDescription(getDescription());
+
+		return shoppingItemFieldImpl;
 	}
 
 	public int compareTo(ShoppingItemField shoppingItemField) {

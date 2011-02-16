@@ -260,27 +260,30 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	}
 
 	public Object clone() {
-		AnnouncementsDeliveryImpl clone = new AnnouncementsDeliveryImpl();
-		AnnouncementsDeliveryModelImpl cloneModel = (AnnouncementsDeliveryModelImpl)clone;
+		AnnouncementsDeliveryImpl announcementsDeliveryImpl = new AnnouncementsDeliveryImpl();
 
-		clone.setDeliveryId(getDeliveryId());
+		AnnouncementsDeliveryModelImpl announcementsDeliveryModelImpl = (AnnouncementsDeliveryModelImpl)announcementsDeliveryImpl;
 
-		clone.setCompanyId(getCompanyId());
+		announcementsDeliveryImpl.setDeliveryId(getDeliveryId());
 
-		clone.setUserId(getUserId());
+		announcementsDeliveryImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setType(getType());
+		announcementsDeliveryImpl.setUserId(getUserId());
 
-		cloneModel._originalType = cloneModel._type;
-		clone.setEmail(getEmail());
+		announcementsDeliveryModelImpl._originalUserId = announcementsDeliveryModelImpl._userId;
 
-		clone.setSms(getSms());
+		announcementsDeliveryModelImpl._setOriginalUserId = false;
+		announcementsDeliveryImpl.setType(getType());
 
-		clone.setWebsite(getWebsite());
+		announcementsDeliveryModelImpl._originalType = announcementsDeliveryModelImpl._type;
 
-		return clone;
+		announcementsDeliveryImpl.setEmail(getEmail());
+
+		announcementsDeliveryImpl.setSms(getSms());
+
+		announcementsDeliveryImpl.setWebsite(getWebsite());
+
+		return announcementsDeliveryImpl;
 	}
 
 	public int compareTo(AnnouncementsDelivery announcementsDelivery) {

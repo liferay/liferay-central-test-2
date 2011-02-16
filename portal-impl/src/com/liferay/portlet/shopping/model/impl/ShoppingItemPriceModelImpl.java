@@ -208,30 +208,31 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	public Object clone() {
-		ShoppingItemPriceImpl clone = new ShoppingItemPriceImpl();
-		ShoppingItemPriceModelImpl cloneModel = (ShoppingItemPriceModelImpl)clone;
+		ShoppingItemPriceImpl shoppingItemPriceImpl = new ShoppingItemPriceImpl();
 
-		clone.setItemPriceId(getItemPriceId());
+		ShoppingItemPriceModelImpl shoppingItemPriceModelImpl = (ShoppingItemPriceModelImpl)shoppingItemPriceImpl;
 
-		clone.setItemId(getItemId());
+		shoppingItemPriceImpl.setItemPriceId(getItemPriceId());
 
-		clone.setMinQuantity(getMinQuantity());
+		shoppingItemPriceImpl.setItemId(getItemId());
 
-		clone.setMaxQuantity(getMaxQuantity());
+		shoppingItemPriceImpl.setMinQuantity(getMinQuantity());
 
-		clone.setPrice(getPrice());
+		shoppingItemPriceImpl.setMaxQuantity(getMaxQuantity());
 
-		clone.setDiscount(getDiscount());
+		shoppingItemPriceImpl.setPrice(getPrice());
 
-		clone.setTaxable(getTaxable());
+		shoppingItemPriceImpl.setDiscount(getDiscount());
 
-		clone.setShipping(getShipping());
+		shoppingItemPriceImpl.setTaxable(getTaxable());
 
-		clone.setUseShippingFormula(getUseShippingFormula());
+		shoppingItemPriceImpl.setShipping(getShipping());
 
-		clone.setStatus(getStatus());
+		shoppingItemPriceImpl.setUseShippingFormula(getUseShippingFormula());
 
-		return clone;
+		shoppingItemPriceImpl.setStatus(getStatus());
+
+		return shoppingItemPriceImpl;
 	}
 
 	public int compareTo(ShoppingItemPrice shoppingItemPrice) {

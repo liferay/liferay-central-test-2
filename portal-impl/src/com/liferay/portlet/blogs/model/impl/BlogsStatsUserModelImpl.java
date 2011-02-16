@@ -231,32 +231,35 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 	}
 
 	public Object clone() {
-		BlogsStatsUserImpl clone = new BlogsStatsUserImpl();
-		BlogsStatsUserModelImpl cloneModel = (BlogsStatsUserModelImpl)clone;
+		BlogsStatsUserImpl blogsStatsUserImpl = new BlogsStatsUserImpl();
 
-		clone.setStatsUserId(getStatsUserId());
+		BlogsStatsUserModelImpl blogsStatsUserModelImpl = (BlogsStatsUserModelImpl)blogsStatsUserImpl;
 
-		clone.setGroupId(getGroupId());
+		blogsStatsUserImpl.setStatsUserId(getStatsUserId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		blogsStatsUserImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		blogsStatsUserModelImpl._originalGroupId = blogsStatsUserModelImpl._groupId;
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setEntryCount(getEntryCount());
+		blogsStatsUserModelImpl._setOriginalGroupId = false;
+		blogsStatsUserImpl.setCompanyId(getCompanyId());
 
-		clone.setLastPostDate(getLastPostDate());
+		blogsStatsUserImpl.setUserId(getUserId());
 
-		clone.setRatingsTotalEntries(getRatingsTotalEntries());
+		blogsStatsUserModelImpl._originalUserId = blogsStatsUserModelImpl._userId;
 
-		clone.setRatingsTotalScore(getRatingsTotalScore());
+		blogsStatsUserModelImpl._setOriginalUserId = false;
+		blogsStatsUserImpl.setEntryCount(getEntryCount());
 
-		clone.setRatingsAverageScore(getRatingsAverageScore());
+		blogsStatsUserImpl.setLastPostDate(getLastPostDate());
 
-		return clone;
+		blogsStatsUserImpl.setRatingsTotalEntries(getRatingsTotalEntries());
+
+		blogsStatsUserImpl.setRatingsTotalScore(getRatingsTotalScore());
+
+		blogsStatsUserImpl.setRatingsAverageScore(getRatingsAverageScore());
+
+		return blogsStatsUserImpl;
 	}
 
 	public int compareTo(BlogsStatsUser blogsStatsUser) {

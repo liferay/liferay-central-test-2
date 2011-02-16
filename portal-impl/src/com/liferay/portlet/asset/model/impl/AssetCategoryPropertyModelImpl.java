@@ -281,31 +281,34 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	}
 
 	public Object clone() {
-		AssetCategoryPropertyImpl clone = new AssetCategoryPropertyImpl();
-		AssetCategoryPropertyModelImpl cloneModel = (AssetCategoryPropertyModelImpl)clone;
+		AssetCategoryPropertyImpl assetCategoryPropertyImpl = new AssetCategoryPropertyImpl();
 
-		clone.setCategoryPropertyId(getCategoryPropertyId());
+		AssetCategoryPropertyModelImpl assetCategoryPropertyModelImpl = (AssetCategoryPropertyModelImpl)assetCategoryPropertyImpl;
 
-		clone.setCompanyId(getCompanyId());
+		assetCategoryPropertyImpl.setCategoryPropertyId(getCategoryPropertyId());
 
-		clone.setUserId(getUserId());
+		assetCategoryPropertyImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		assetCategoryPropertyImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		assetCategoryPropertyImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		assetCategoryPropertyImpl.setCreateDate(getCreateDate());
 
-		clone.setCategoryId(getCategoryId());
+		assetCategoryPropertyImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalCategoryId = cloneModel._categoryId;
-		cloneModel._setOriginalCategoryId = false;
-		clone.setKey(getKey());
+		assetCategoryPropertyImpl.setCategoryId(getCategoryId());
 
-		cloneModel._originalKey = cloneModel._key;
-		clone.setValue(getValue());
+		assetCategoryPropertyModelImpl._originalCategoryId = assetCategoryPropertyModelImpl._categoryId;
 
-		return clone;
+		assetCategoryPropertyModelImpl._setOriginalCategoryId = false;
+		assetCategoryPropertyImpl.setKey(getKey());
+
+		assetCategoryPropertyModelImpl._originalKey = assetCategoryPropertyModelImpl._key;
+
+		assetCategoryPropertyImpl.setValue(getValue());
+
+		return assetCategoryPropertyImpl;
 	}
 
 	public int compareTo(AssetCategoryProperty assetCategoryProperty) {

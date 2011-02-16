@@ -265,31 +265,34 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	}
 
 	public Object clone() {
-		MBBanImpl clone = new MBBanImpl();
-		MBBanModelImpl cloneModel = (MBBanModelImpl)clone;
+		MBBanImpl mbBanImpl = new MBBanImpl();
 
-		clone.setBanId(getBanId());
+		MBBanModelImpl mbBanModelImpl = (MBBanModelImpl)mbBanImpl;
 
-		clone.setGroupId(getGroupId());
+		mbBanImpl.setBanId(getBanId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		mbBanImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		mbBanModelImpl._originalGroupId = mbBanModelImpl._groupId;
 
-		clone.setUserName(getUserName());
+		mbBanModelImpl._setOriginalGroupId = false;
+		mbBanImpl.setCompanyId(getCompanyId());
 
-		clone.setCreateDate(getCreateDate());
+		mbBanImpl.setUserId(getUserId());
 
-		clone.setModifiedDate(getModifiedDate());
+		mbBanImpl.setUserName(getUserName());
 
-		clone.setBanUserId(getBanUserId());
+		mbBanImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalBanUserId = cloneModel._banUserId;
-		cloneModel._setOriginalBanUserId = false;
+		mbBanImpl.setModifiedDate(getModifiedDate());
 
-		return clone;
+		mbBanImpl.setBanUserId(getBanUserId());
+
+		mbBanModelImpl._originalBanUserId = mbBanModelImpl._banUserId;
+
+		mbBanModelImpl._setOriginalBanUserId = false;
+
+		return mbBanImpl;
 	}
 
 	public int compareTo(MBBan mbBan) {

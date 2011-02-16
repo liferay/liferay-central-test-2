@@ -773,101 +773,111 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public Object clone() {
-		UserImpl clone = new UserImpl();
-		UserModelImpl cloneModel = (UserModelImpl)clone;
+		UserImpl userImpl = new UserImpl();
 
-		clone.setUuid(getUuid());
+		UserModelImpl userModelImpl = (UserModelImpl)userImpl;
 
-		clone.setUserId(getUserId());
+		userImpl.setUuid(getUuid());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setCompanyId(getCompanyId());
+		userImpl.setUserId(getUserId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setCreateDate(getCreateDate());
+		userModelImpl._originalUserId = userModelImpl._userId;
 
-		clone.setModifiedDate(getModifiedDate());
+		userModelImpl._setOriginalUserId = false;
+		userImpl.setCompanyId(getCompanyId());
 
-		clone.setDefaultUser(getDefaultUser());
+		userModelImpl._originalCompanyId = userModelImpl._companyId;
 
-		cloneModel._originalDefaultUser = cloneModel._defaultUser;
-		cloneModel._setOriginalDefaultUser = false;
-		clone.setContactId(getContactId());
+		userModelImpl._setOriginalCompanyId = false;
+		userImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalContactId = cloneModel._contactId;
-		cloneModel._setOriginalContactId = false;
-		clone.setPassword(getPassword());
+		userImpl.setModifiedDate(getModifiedDate());
 
-		clone.setPasswordEncrypted(getPasswordEncrypted());
+		userImpl.setDefaultUser(getDefaultUser());
 
-		clone.setPasswordReset(getPasswordReset());
+		userModelImpl._originalDefaultUser = userModelImpl._defaultUser;
 
-		clone.setPasswordModifiedDate(getPasswordModifiedDate());
+		userModelImpl._setOriginalDefaultUser = false;
+		userImpl.setContactId(getContactId());
 
-		clone.setDigest(getDigest());
+		userModelImpl._originalContactId = userModelImpl._contactId;
 
-		clone.setReminderQueryQuestion(getReminderQueryQuestion());
+		userModelImpl._setOriginalContactId = false;
+		userImpl.setPassword(getPassword());
 
-		clone.setReminderQueryAnswer(getReminderQueryAnswer());
+		userImpl.setPasswordEncrypted(getPasswordEncrypted());
 
-		clone.setGraceLoginCount(getGraceLoginCount());
+		userImpl.setPasswordReset(getPasswordReset());
 
-		clone.setScreenName(getScreenName());
+		userImpl.setPasswordModifiedDate(getPasswordModifiedDate());
 
-		cloneModel._originalScreenName = cloneModel._screenName;
-		clone.setEmailAddress(getEmailAddress());
+		userImpl.setDigest(getDigest());
 
-		cloneModel._originalEmailAddress = cloneModel._emailAddress;
-		clone.setFacebookId(getFacebookId());
+		userImpl.setReminderQueryQuestion(getReminderQueryQuestion());
 
-		cloneModel._originalFacebookId = cloneModel._facebookId;
-		cloneModel._setOriginalFacebookId = false;
-		clone.setOpenId(getOpenId());
+		userImpl.setReminderQueryAnswer(getReminderQueryAnswer());
 
-		cloneModel._originalOpenId = cloneModel._openId;
-		clone.setPortraitId(getPortraitId());
+		userImpl.setGraceLoginCount(getGraceLoginCount());
 
-		cloneModel._originalPortraitId = cloneModel._portraitId;
-		cloneModel._setOriginalPortraitId = false;
-		clone.setLanguageId(getLanguageId());
+		userImpl.setScreenName(getScreenName());
 
-		clone.setTimeZoneId(getTimeZoneId());
+		userModelImpl._originalScreenName = userModelImpl._screenName;
 
-		clone.setGreeting(getGreeting());
+		userImpl.setEmailAddress(getEmailAddress());
 
-		clone.setComments(getComments());
+		userModelImpl._originalEmailAddress = userModelImpl._emailAddress;
 
-		clone.setFirstName(getFirstName());
+		userImpl.setFacebookId(getFacebookId());
 
-		clone.setMiddleName(getMiddleName());
+		userModelImpl._originalFacebookId = userModelImpl._facebookId;
 
-		clone.setLastName(getLastName());
+		userModelImpl._setOriginalFacebookId = false;
+		userImpl.setOpenId(getOpenId());
 
-		clone.setJobTitle(getJobTitle());
+		userModelImpl._originalOpenId = userModelImpl._openId;
 
-		clone.setLoginDate(getLoginDate());
+		userImpl.setPortraitId(getPortraitId());
 
-		clone.setLoginIP(getLoginIP());
+		userModelImpl._originalPortraitId = userModelImpl._portraitId;
 
-		clone.setLastLoginDate(getLastLoginDate());
+		userModelImpl._setOriginalPortraitId = false;
+		userImpl.setLanguageId(getLanguageId());
 
-		clone.setLastLoginIP(getLastLoginIP());
+		userImpl.setTimeZoneId(getTimeZoneId());
 
-		clone.setLastFailedLoginDate(getLastFailedLoginDate());
+		userImpl.setGreeting(getGreeting());
 
-		clone.setFailedLoginAttempts(getFailedLoginAttempts());
+		userImpl.setComments(getComments());
 
-		clone.setLockout(getLockout());
+		userImpl.setFirstName(getFirstName());
 
-		clone.setLockoutDate(getLockoutDate());
+		userImpl.setMiddleName(getMiddleName());
 
-		clone.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
+		userImpl.setLastName(getLastName());
 
-		clone.setStatus(getStatus());
+		userImpl.setJobTitle(getJobTitle());
 
-		return clone;
+		userImpl.setLoginDate(getLoginDate());
+
+		userImpl.setLoginIP(getLoginIP());
+
+		userImpl.setLastLoginDate(getLastLoginDate());
+
+		userImpl.setLastLoginIP(getLastLoginIP());
+
+		userImpl.setLastFailedLoginDate(getLastFailedLoginDate());
+
+		userImpl.setFailedLoginAttempts(getFailedLoginAttempts());
+
+		userImpl.setLockout(getLockout());
+
+		userImpl.setLockoutDate(getLockoutDate());
+
+		userImpl.setAgreedToTermsOfUse(getAgreedToTermsOfUse());
+
+		userImpl.setStatus(getStatus());
+
+		return userImpl;
 	}
 
 	public int compareTo(User user) {

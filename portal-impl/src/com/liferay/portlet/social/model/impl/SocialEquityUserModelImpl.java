@@ -228,32 +228,35 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 	}
 
 	public Object clone() {
-		SocialEquityUserImpl clone = new SocialEquityUserImpl();
-		SocialEquityUserModelImpl cloneModel = (SocialEquityUserModelImpl)clone;
+		SocialEquityUserImpl socialEquityUserImpl = new SocialEquityUserImpl();
 
-		clone.setEquityUserId(getEquityUserId());
+		SocialEquityUserModelImpl socialEquityUserModelImpl = (SocialEquityUserModelImpl)socialEquityUserImpl;
 
-		clone.setGroupId(getGroupId());
+		socialEquityUserImpl.setEquityUserId(getEquityUserId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		socialEquityUserImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		socialEquityUserModelImpl._originalGroupId = socialEquityUserModelImpl._groupId;
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setContributionK(getContributionK());
+		socialEquityUserModelImpl._setOriginalGroupId = false;
+		socialEquityUserImpl.setCompanyId(getCompanyId());
 
-		clone.setContributionB(getContributionB());
+		socialEquityUserImpl.setUserId(getUserId());
 
-		clone.setParticipationK(getParticipationK());
+		socialEquityUserModelImpl._originalUserId = socialEquityUserModelImpl._userId;
 
-		clone.setParticipationB(getParticipationB());
+		socialEquityUserModelImpl._setOriginalUserId = false;
+		socialEquityUserImpl.setContributionK(getContributionK());
 
-		clone.setRank(getRank());
+		socialEquityUserImpl.setContributionB(getContributionB());
 
-		return clone;
+		socialEquityUserImpl.setParticipationK(getParticipationK());
+
+		socialEquityUserImpl.setParticipationB(getParticipationB());
+
+		socialEquityUserImpl.setRank(getRank());
+
+		return socialEquityUserImpl;
 	}
 
 	public int compareTo(SocialEquityUser socialEquityUser) {

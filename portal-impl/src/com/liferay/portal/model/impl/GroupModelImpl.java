@@ -405,46 +405,53 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	public Object clone() {
-		GroupImpl clone = new GroupImpl();
-		GroupModelImpl cloneModel = (GroupModelImpl)clone;
+		GroupImpl groupImpl = new GroupImpl();
 
-		clone.setGroupId(getGroupId());
+		GroupModelImpl groupModelImpl = (GroupModelImpl)groupImpl;
 
-		clone.setCompanyId(getCompanyId());
+		groupImpl.setGroupId(getGroupId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setCreatorUserId(getCreatorUserId());
+		groupImpl.setCompanyId(getCompanyId());
 
-		clone.setClassNameId(getClassNameId());
+		groupModelImpl._originalCompanyId = groupModelImpl._companyId;
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		groupModelImpl._setOriginalCompanyId = false;
+		groupImpl.setCreatorUserId(getCreatorUserId());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setParentGroupId(getParentGroupId());
+		groupImpl.setClassNameId(getClassNameId());
 
-		clone.setLiveGroupId(getLiveGroupId());
+		groupModelImpl._originalClassNameId = groupModelImpl._classNameId;
 
-		cloneModel._originalLiveGroupId = cloneModel._liveGroupId;
-		cloneModel._setOriginalLiveGroupId = false;
-		clone.setName(getName());
+		groupModelImpl._setOriginalClassNameId = false;
+		groupImpl.setClassPK(getClassPK());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setDescription(getDescription());
+		groupModelImpl._originalClassPK = groupModelImpl._classPK;
 
-		clone.setType(getType());
+		groupModelImpl._setOriginalClassPK = false;
+		groupImpl.setParentGroupId(getParentGroupId());
 
-		clone.setTypeSettings(getTypeSettings());
+		groupImpl.setLiveGroupId(getLiveGroupId());
 
-		clone.setFriendlyURL(getFriendlyURL());
+		groupModelImpl._originalLiveGroupId = groupModelImpl._liveGroupId;
 
-		cloneModel._originalFriendlyURL = cloneModel._friendlyURL;
-		clone.setActive(getActive());
+		groupModelImpl._setOriginalLiveGroupId = false;
+		groupImpl.setName(getName());
 
-		return clone;
+		groupModelImpl._originalName = groupModelImpl._name;
+
+		groupImpl.setDescription(getDescription());
+
+		groupImpl.setType(getType());
+
+		groupImpl.setTypeSettings(getTypeSettings());
+
+		groupImpl.setFriendlyURL(getFriendlyURL());
+
+		groupModelImpl._originalFriendlyURL = groupModelImpl._friendlyURL;
+
+		groupImpl.setActive(getActive());
+
+		return groupImpl;
 	}
 
 	public int compareTo(Group group) {

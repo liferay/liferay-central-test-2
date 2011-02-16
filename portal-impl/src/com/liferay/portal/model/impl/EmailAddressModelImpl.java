@@ -288,32 +288,33 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	}
 
 	public Object clone() {
-		EmailAddressImpl clone = new EmailAddressImpl();
-		EmailAddressModelImpl cloneModel = (EmailAddressModelImpl)clone;
+		EmailAddressImpl emailAddressImpl = new EmailAddressImpl();
 
-		clone.setEmailAddressId(getEmailAddressId());
+		EmailAddressModelImpl emailAddressModelImpl = (EmailAddressModelImpl)emailAddressImpl;
 
-		clone.setCompanyId(getCompanyId());
+		emailAddressImpl.setEmailAddressId(getEmailAddressId());
 
-		clone.setUserId(getUserId());
+		emailAddressImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		emailAddressImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		emailAddressImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		emailAddressImpl.setCreateDate(getCreateDate());
 
-		clone.setClassNameId(getClassNameId());
+		emailAddressImpl.setModifiedDate(getModifiedDate());
 
-		clone.setClassPK(getClassPK());
+		emailAddressImpl.setClassNameId(getClassNameId());
 
-		clone.setAddress(getAddress());
+		emailAddressImpl.setClassPK(getClassPK());
 
-		clone.setTypeId(getTypeId());
+		emailAddressImpl.setAddress(getAddress());
 
-		clone.setPrimary(getPrimary());
+		emailAddressImpl.setTypeId(getTypeId());
 
-		return clone;
+		emailAddressImpl.setPrimary(getPrimary());
+
+		return emailAddressImpl;
 	}
 
 	public int compareTo(EmailAddress emailAddress) {

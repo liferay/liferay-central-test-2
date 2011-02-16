@@ -494,38 +494,42 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	}
 
 	public Object clone() {
-		AssetVocabularyImpl clone = new AssetVocabularyImpl();
-		AssetVocabularyModelImpl cloneModel = (AssetVocabularyModelImpl)clone;
+		AssetVocabularyImpl assetVocabularyImpl = new AssetVocabularyImpl();
 
-		clone.setUuid(getUuid());
+		AssetVocabularyModelImpl assetVocabularyModelImpl = (AssetVocabularyModelImpl)assetVocabularyImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setVocabularyId(getVocabularyId());
+		assetVocabularyImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		assetVocabularyModelImpl._originalUuid = assetVocabularyModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		assetVocabularyImpl.setVocabularyId(getVocabularyId());
 
-		clone.setUserId(getUserId());
+		assetVocabularyImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		assetVocabularyModelImpl._originalGroupId = assetVocabularyModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		assetVocabularyModelImpl._setOriginalGroupId = false;
+		assetVocabularyImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		assetVocabularyImpl.setUserId(getUserId());
 
-		clone.setName(getName());
+		assetVocabularyImpl.setUserName(getUserName());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setTitle(getTitle());
+		assetVocabularyImpl.setCreateDate(getCreateDate());
 
-		clone.setDescription(getDescription());
+		assetVocabularyImpl.setModifiedDate(getModifiedDate());
 
-		clone.setSettings(getSettings());
+		assetVocabularyImpl.setName(getName());
 
-		return clone;
+		assetVocabularyModelImpl._originalName = assetVocabularyModelImpl._name;
+
+		assetVocabularyImpl.setTitle(getTitle());
+
+		assetVocabularyImpl.setDescription(getDescription());
+
+		assetVocabularyImpl.setSettings(getSettings());
+
+		return assetVocabularyImpl;
 	}
 
 	public int compareTo(AssetVocabulary assetVocabulary) {

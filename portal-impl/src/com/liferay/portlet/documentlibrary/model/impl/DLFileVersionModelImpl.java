@@ -406,51 +406,54 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public Object clone() {
-		DLFileVersionImpl clone = new DLFileVersionImpl();
-		DLFileVersionModelImpl cloneModel = (DLFileVersionModelImpl)clone;
+		DLFileVersionImpl dlFileVersionImpl = new DLFileVersionImpl();
 
-		clone.setFileVersionId(getFileVersionId());
+		DLFileVersionModelImpl dlFileVersionModelImpl = (DLFileVersionModelImpl)dlFileVersionImpl;
 
-		clone.setGroupId(getGroupId());
+		dlFileVersionImpl.setFileVersionId(getFileVersionId());
 
-		clone.setCompanyId(getCompanyId());
+		dlFileVersionImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		dlFileVersionImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		dlFileVersionImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		dlFileVersionImpl.setUserName(getUserName());
 
-		clone.setRepositoryId(getRepositoryId());
+		dlFileVersionImpl.setCreateDate(getCreateDate());
 
-		clone.setFileEntryId(getFileEntryId());
+		dlFileVersionImpl.setRepositoryId(getRepositoryId());
 
-		cloneModel._originalFileEntryId = cloneModel._fileEntryId;
-		cloneModel._setOriginalFileEntryId = false;
-		clone.setExtension(getExtension());
+		dlFileVersionImpl.setFileEntryId(getFileEntryId());
 
-		clone.setTitle(getTitle());
+		dlFileVersionModelImpl._originalFileEntryId = dlFileVersionModelImpl._fileEntryId;
 
-		clone.setDescription(getDescription());
+		dlFileVersionModelImpl._setOriginalFileEntryId = false;
+		dlFileVersionImpl.setExtension(getExtension());
 
-		clone.setChangeLog(getChangeLog());
+		dlFileVersionImpl.setTitle(getTitle());
 
-		clone.setExtraSettings(getExtraSettings());
+		dlFileVersionImpl.setDescription(getDescription());
 
-		clone.setVersion(getVersion());
+		dlFileVersionImpl.setChangeLog(getChangeLog());
 
-		cloneModel._originalVersion = cloneModel._version;
-		clone.setSize(getSize());
+		dlFileVersionImpl.setExtraSettings(getExtraSettings());
 
-		clone.setStatus(getStatus());
+		dlFileVersionImpl.setVersion(getVersion());
 
-		clone.setStatusByUserId(getStatusByUserId());
+		dlFileVersionModelImpl._originalVersion = dlFileVersionModelImpl._version;
 
-		clone.setStatusByUserName(getStatusByUserName());
+		dlFileVersionImpl.setSize(getSize());
 
-		clone.setStatusDate(getStatusDate());
+		dlFileVersionImpl.setStatus(getStatus());
 
-		return clone;
+		dlFileVersionImpl.setStatusByUserId(getStatusByUserId());
+
+		dlFileVersionImpl.setStatusByUserName(getStatusByUserName());
+
+		dlFileVersionImpl.setStatusDate(getStatusDate());
+
+		return dlFileVersionImpl;
 	}
 
 	public int compareTo(DLFileVersion dlFileVersion) {

@@ -257,34 +257,41 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	public Object clone() {
-		JournalArticleImageImpl clone = new JournalArticleImageImpl();
-		JournalArticleImageModelImpl cloneModel = (JournalArticleImageModelImpl)clone;
+		JournalArticleImageImpl journalArticleImageImpl = new JournalArticleImageImpl();
 
-		clone.setArticleImageId(getArticleImageId());
+		JournalArticleImageModelImpl journalArticleImageModelImpl = (JournalArticleImageModelImpl)journalArticleImageImpl;
 
-		clone.setGroupId(getGroupId());
+		journalArticleImageImpl.setArticleImageId(getArticleImageId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setArticleId(getArticleId());
+		journalArticleImageImpl.setGroupId(getGroupId());
 
-		cloneModel._originalArticleId = cloneModel._articleId;
-		clone.setVersion(getVersion());
+		journalArticleImageModelImpl._originalGroupId = journalArticleImageModelImpl._groupId;
 
-		cloneModel._originalVersion = cloneModel._version;
-		cloneModel._setOriginalVersion = false;
-		clone.setElInstanceId(getElInstanceId());
+		journalArticleImageModelImpl._setOriginalGroupId = false;
+		journalArticleImageImpl.setArticleId(getArticleId());
 
-		cloneModel._originalElInstanceId = cloneModel._elInstanceId;
-		clone.setElName(getElName());
+		journalArticleImageModelImpl._originalArticleId = journalArticleImageModelImpl._articleId;
 
-		cloneModel._originalElName = cloneModel._elName;
-		clone.setLanguageId(getLanguageId());
+		journalArticleImageImpl.setVersion(getVersion());
 
-		cloneModel._originalLanguageId = cloneModel._languageId;
-		clone.setTempImage(getTempImage());
+		journalArticleImageModelImpl._originalVersion = journalArticleImageModelImpl._version;
 
-		return clone;
+		journalArticleImageModelImpl._setOriginalVersion = false;
+		journalArticleImageImpl.setElInstanceId(getElInstanceId());
+
+		journalArticleImageModelImpl._originalElInstanceId = journalArticleImageModelImpl._elInstanceId;
+
+		journalArticleImageImpl.setElName(getElName());
+
+		journalArticleImageModelImpl._originalElName = journalArticleImageModelImpl._elName;
+
+		journalArticleImageImpl.setLanguageId(getLanguageId());
+
+		journalArticleImageModelImpl._originalLanguageId = journalArticleImageModelImpl._languageId;
+
+		journalArticleImageImpl.setTempImage(getTempImage());
+
+		return journalArticleImageImpl;
 	}
 
 	public int compareTo(JournalArticleImage journalArticleImage) {

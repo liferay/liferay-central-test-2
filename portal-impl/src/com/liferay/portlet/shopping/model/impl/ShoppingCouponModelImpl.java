@@ -384,47 +384,49 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 	}
 
 	public Object clone() {
-		ShoppingCouponImpl clone = new ShoppingCouponImpl();
-		ShoppingCouponModelImpl cloneModel = (ShoppingCouponModelImpl)clone;
+		ShoppingCouponImpl shoppingCouponImpl = new ShoppingCouponImpl();
 
-		clone.setCouponId(getCouponId());
+		ShoppingCouponModelImpl shoppingCouponModelImpl = (ShoppingCouponModelImpl)shoppingCouponImpl;
 
-		clone.setGroupId(getGroupId());
+		shoppingCouponImpl.setCouponId(getCouponId());
 
-		clone.setCompanyId(getCompanyId());
+		shoppingCouponImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		shoppingCouponImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		shoppingCouponImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		shoppingCouponImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		shoppingCouponImpl.setCreateDate(getCreateDate());
 
-		clone.setCode(getCode());
+		shoppingCouponImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalCode = cloneModel._code;
-		clone.setName(getName());
+		shoppingCouponImpl.setCode(getCode());
 
-		clone.setDescription(getDescription());
+		shoppingCouponModelImpl._originalCode = shoppingCouponModelImpl._code;
 
-		clone.setStartDate(getStartDate());
+		shoppingCouponImpl.setName(getName());
 
-		clone.setEndDate(getEndDate());
+		shoppingCouponImpl.setDescription(getDescription());
 
-		clone.setActive(getActive());
+		shoppingCouponImpl.setStartDate(getStartDate());
 
-		clone.setLimitCategories(getLimitCategories());
+		shoppingCouponImpl.setEndDate(getEndDate());
 
-		clone.setLimitSkus(getLimitSkus());
+		shoppingCouponImpl.setActive(getActive());
 
-		clone.setMinOrder(getMinOrder());
+		shoppingCouponImpl.setLimitCategories(getLimitCategories());
 
-		clone.setDiscount(getDiscount());
+		shoppingCouponImpl.setLimitSkus(getLimitSkus());
 
-		clone.setDiscountType(getDiscountType());
+		shoppingCouponImpl.setMinOrder(getMinOrder());
 
-		return clone;
+		shoppingCouponImpl.setDiscount(getDiscount());
+
+		shoppingCouponImpl.setDiscountType(getDiscountType());
+
+		return shoppingCouponImpl;
 	}
 
 	public int compareTo(ShoppingCoupon shoppingCoupon) {

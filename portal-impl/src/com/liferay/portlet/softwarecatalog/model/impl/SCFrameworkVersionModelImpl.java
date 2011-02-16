@@ -299,32 +299,33 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	}
 
 	public Object clone() {
-		SCFrameworkVersionImpl clone = new SCFrameworkVersionImpl();
-		SCFrameworkVersionModelImpl cloneModel = (SCFrameworkVersionModelImpl)clone;
+		SCFrameworkVersionImpl scFrameworkVersionImpl = new SCFrameworkVersionImpl();
 
-		clone.setFrameworkVersionId(getFrameworkVersionId());
+		SCFrameworkVersionModelImpl scFrameworkVersionModelImpl = (SCFrameworkVersionModelImpl)scFrameworkVersionImpl;
 
-		clone.setGroupId(getGroupId());
+		scFrameworkVersionImpl.setFrameworkVersionId(getFrameworkVersionId());
 
-		clone.setCompanyId(getCompanyId());
+		scFrameworkVersionImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		scFrameworkVersionImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		scFrameworkVersionImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		scFrameworkVersionImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		scFrameworkVersionImpl.setCreateDate(getCreateDate());
 
-		clone.setName(getName());
+		scFrameworkVersionImpl.setModifiedDate(getModifiedDate());
 
-		clone.setUrl(getUrl());
+		scFrameworkVersionImpl.setName(getName());
 
-		clone.setActive(getActive());
+		scFrameworkVersionImpl.setUrl(getUrl());
 
-		clone.setPriority(getPriority());
+		scFrameworkVersionImpl.setActive(getActive());
 
-		return clone;
+		scFrameworkVersionImpl.setPriority(getPriority());
+
+		return scFrameworkVersionImpl;
 	}
 
 	public int compareTo(SCFrameworkVersion scFrameworkVersion) {

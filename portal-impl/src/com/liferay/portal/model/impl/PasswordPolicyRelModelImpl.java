@@ -183,25 +183,29 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	public Object clone() {
-		PasswordPolicyRelImpl clone = new PasswordPolicyRelImpl();
-		PasswordPolicyRelModelImpl cloneModel = (PasswordPolicyRelModelImpl)clone;
+		PasswordPolicyRelImpl passwordPolicyRelImpl = new PasswordPolicyRelImpl();
 
-		clone.setPasswordPolicyRelId(getPasswordPolicyRelId());
+		PasswordPolicyRelModelImpl passwordPolicyRelModelImpl = (PasswordPolicyRelModelImpl)passwordPolicyRelImpl;
 
-		clone.setPasswordPolicyId(getPasswordPolicyId());
+		passwordPolicyRelImpl.setPasswordPolicyRelId(getPasswordPolicyRelId());
 
-		cloneModel._originalPasswordPolicyId = cloneModel._passwordPolicyId;
-		cloneModel._setOriginalPasswordPolicyId = false;
-		clone.setClassNameId(getClassNameId());
+		passwordPolicyRelImpl.setPasswordPolicyId(getPasswordPolicyId());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		passwordPolicyRelModelImpl._originalPasswordPolicyId = passwordPolicyRelModelImpl._passwordPolicyId;
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
+		passwordPolicyRelModelImpl._setOriginalPasswordPolicyId = false;
+		passwordPolicyRelImpl.setClassNameId(getClassNameId());
 
-		return clone;
+		passwordPolicyRelModelImpl._originalClassNameId = passwordPolicyRelModelImpl._classNameId;
+
+		passwordPolicyRelModelImpl._setOriginalClassNameId = false;
+		passwordPolicyRelImpl.setClassPK(getClassPK());
+
+		passwordPolicyRelModelImpl._originalClassPK = passwordPolicyRelModelImpl._classPK;
+
+		passwordPolicyRelModelImpl._setOriginalClassPK = false;
+
+		return passwordPolicyRelImpl;
 	}
 
 	public int compareTo(PasswordPolicyRel passwordPolicyRel) {

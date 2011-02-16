@@ -266,27 +266,31 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 	}
 
 	public Object clone() {
-		CountryImpl clone = new CountryImpl();
-		CountryModelImpl cloneModel = (CountryModelImpl)clone;
+		CountryImpl countryImpl = new CountryImpl();
 
-		clone.setCountryId(getCountryId());
+		CountryModelImpl countryModelImpl = (CountryModelImpl)countryImpl;
 
-		clone.setName(getName());
+		countryImpl.setCountryId(getCountryId());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setA2(getA2());
+		countryImpl.setName(getName());
 
-		cloneModel._originalA2 = cloneModel._a2;
-		clone.setA3(getA3());
+		countryModelImpl._originalName = countryModelImpl._name;
 
-		cloneModel._originalA3 = cloneModel._a3;
-		clone.setNumber(getNumber());
+		countryImpl.setA2(getA2());
 
-		clone.setIdd(getIdd());
+		countryModelImpl._originalA2 = countryModelImpl._a2;
 
-		clone.setActive(getActive());
+		countryImpl.setA3(getA3());
 
-		return clone;
+		countryModelImpl._originalA3 = countryModelImpl._a3;
+
+		countryImpl.setNumber(getNumber());
+
+		countryImpl.setIdd(getIdd());
+
+		countryImpl.setActive(getActive());
+
+		return countryImpl;
 	}
 
 	public int compareTo(Country country) {

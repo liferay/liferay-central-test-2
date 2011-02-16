@@ -445,65 +445,69 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 	}
 
 	public Object clone() {
-		MBMailingListImpl clone = new MBMailingListImpl();
-		MBMailingListModelImpl cloneModel = (MBMailingListModelImpl)clone;
+		MBMailingListImpl mbMailingListImpl = new MBMailingListImpl();
 
-		clone.setUuid(getUuid());
+		MBMailingListModelImpl mbMailingListModelImpl = (MBMailingListModelImpl)mbMailingListImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setMailingListId(getMailingListId());
+		mbMailingListImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		mbMailingListModelImpl._originalUuid = mbMailingListModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		mbMailingListImpl.setMailingListId(getMailingListId());
 
-		clone.setUserId(getUserId());
+		mbMailingListImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		mbMailingListModelImpl._originalGroupId = mbMailingListModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		mbMailingListModelImpl._setOriginalGroupId = false;
+		mbMailingListImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		mbMailingListImpl.setUserId(getUserId());
 
-		clone.setCategoryId(getCategoryId());
+		mbMailingListImpl.setUserName(getUserName());
 
-		cloneModel._originalCategoryId = cloneModel._categoryId;
-		cloneModel._setOriginalCategoryId = false;
-		clone.setEmailAddress(getEmailAddress());
+		mbMailingListImpl.setCreateDate(getCreateDate());
 
-		clone.setInProtocol(getInProtocol());
+		mbMailingListImpl.setModifiedDate(getModifiedDate());
 
-		clone.setInServerName(getInServerName());
+		mbMailingListImpl.setCategoryId(getCategoryId());
 
-		clone.setInServerPort(getInServerPort());
+		mbMailingListModelImpl._originalCategoryId = mbMailingListModelImpl._categoryId;
 
-		clone.setInUseSSL(getInUseSSL());
+		mbMailingListModelImpl._setOriginalCategoryId = false;
+		mbMailingListImpl.setEmailAddress(getEmailAddress());
 
-		clone.setInUserName(getInUserName());
+		mbMailingListImpl.setInProtocol(getInProtocol());
 
-		clone.setInPassword(getInPassword());
+		mbMailingListImpl.setInServerName(getInServerName());
 
-		clone.setInReadInterval(getInReadInterval());
+		mbMailingListImpl.setInServerPort(getInServerPort());
 
-		clone.setOutEmailAddress(getOutEmailAddress());
+		mbMailingListImpl.setInUseSSL(getInUseSSL());
 
-		clone.setOutCustom(getOutCustom());
+		mbMailingListImpl.setInUserName(getInUserName());
 
-		clone.setOutServerName(getOutServerName());
+		mbMailingListImpl.setInPassword(getInPassword());
 
-		clone.setOutServerPort(getOutServerPort());
+		mbMailingListImpl.setInReadInterval(getInReadInterval());
 
-		clone.setOutUseSSL(getOutUseSSL());
+		mbMailingListImpl.setOutEmailAddress(getOutEmailAddress());
 
-		clone.setOutUserName(getOutUserName());
+		mbMailingListImpl.setOutCustom(getOutCustom());
 
-		clone.setOutPassword(getOutPassword());
+		mbMailingListImpl.setOutServerName(getOutServerName());
 
-		clone.setActive(getActive());
+		mbMailingListImpl.setOutServerPort(getOutServerPort());
 
-		return clone;
+		mbMailingListImpl.setOutUseSSL(getOutUseSSL());
+
+		mbMailingListImpl.setOutUserName(getOutUserName());
+
+		mbMailingListImpl.setOutPassword(getOutPassword());
+
+		mbMailingListImpl.setActive(getActive());
+
+		return mbMailingListImpl;
 	}
 
 	public int compareTo(MBMailingList mbMailingList) {

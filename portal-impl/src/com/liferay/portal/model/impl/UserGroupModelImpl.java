@@ -233,23 +233,26 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	}
 
 	public Object clone() {
-		UserGroupImpl clone = new UserGroupImpl();
-		UserGroupModelImpl cloneModel = (UserGroupModelImpl)clone;
+		UserGroupImpl userGroupImpl = new UserGroupImpl();
 
-		clone.setUserGroupId(getUserGroupId());
+		UserGroupModelImpl userGroupModelImpl = (UserGroupModelImpl)userGroupImpl;
 
-		clone.setCompanyId(getCompanyId());
+		userGroupImpl.setUserGroupId(getUserGroupId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setParentUserGroupId(getParentUserGroupId());
+		userGroupImpl.setCompanyId(getCompanyId());
 
-		clone.setName(getName());
+		userGroupModelImpl._originalCompanyId = userGroupModelImpl._companyId;
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setDescription(getDescription());
+		userGroupModelImpl._setOriginalCompanyId = false;
+		userGroupImpl.setParentUserGroupId(getParentUserGroupId());
 
-		return clone;
+		userGroupImpl.setName(getName());
+
+		userGroupModelImpl._originalName = userGroupModelImpl._name;
+
+		userGroupImpl.setDescription(getDescription());
+
+		return userGroupImpl;
 	}
 
 	public int compareTo(UserGroup userGroup) {

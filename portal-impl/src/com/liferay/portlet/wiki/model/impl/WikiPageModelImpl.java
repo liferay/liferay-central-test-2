@@ -547,66 +547,73 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	public Object clone() {
-		WikiPageImpl clone = new WikiPageImpl();
-		WikiPageModelImpl cloneModel = (WikiPageModelImpl)clone;
+		WikiPageImpl wikiPageImpl = new WikiPageImpl();
 
-		clone.setUuid(getUuid());
+		WikiPageModelImpl wikiPageModelImpl = (WikiPageModelImpl)wikiPageImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setPageId(getPageId());
+		wikiPageImpl.setUuid(getUuid());
 
-		clone.setResourcePrimKey(getResourcePrimKey());
+		wikiPageModelImpl._originalUuid = wikiPageModelImpl._uuid;
 
-		cloneModel._originalResourcePrimKey = cloneModel._resourcePrimKey;
-		cloneModel._setOriginalResourcePrimKey = false;
-		clone.setGroupId(getGroupId());
+		wikiPageImpl.setPageId(getPageId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		wikiPageImpl.setResourcePrimKey(getResourcePrimKey());
 
-		clone.setUserId(getUserId());
+		wikiPageModelImpl._originalResourcePrimKey = wikiPageModelImpl._resourcePrimKey;
 
-		clone.setUserName(getUserName());
+		wikiPageModelImpl._setOriginalResourcePrimKey = false;
+		wikiPageImpl.setGroupId(getGroupId());
 
-		clone.setCreateDate(getCreateDate());
+		wikiPageModelImpl._originalGroupId = wikiPageModelImpl._groupId;
 
-		clone.setModifiedDate(getModifiedDate());
+		wikiPageModelImpl._setOriginalGroupId = false;
+		wikiPageImpl.setCompanyId(getCompanyId());
 
-		clone.setNodeId(getNodeId());
+		wikiPageImpl.setUserId(getUserId());
 
-		cloneModel._originalNodeId = cloneModel._nodeId;
-		cloneModel._setOriginalNodeId = false;
-		clone.setTitle(getTitle());
+		wikiPageImpl.setUserName(getUserName());
 
-		cloneModel._originalTitle = cloneModel._title;
-		clone.setVersion(getVersion());
+		wikiPageImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalVersion = cloneModel._version;
-		cloneModel._setOriginalVersion = false;
-		clone.setMinorEdit(getMinorEdit());
+		wikiPageImpl.setModifiedDate(getModifiedDate());
 
-		clone.setContent(getContent());
+		wikiPageImpl.setNodeId(getNodeId());
 
-		clone.setSummary(getSummary());
+		wikiPageModelImpl._originalNodeId = wikiPageModelImpl._nodeId;
 
-		clone.setFormat(getFormat());
+		wikiPageModelImpl._setOriginalNodeId = false;
+		wikiPageImpl.setTitle(getTitle());
 
-		clone.setHead(getHead());
+		wikiPageModelImpl._originalTitle = wikiPageModelImpl._title;
 
-		clone.setParentTitle(getParentTitle());
+		wikiPageImpl.setVersion(getVersion());
 
-		clone.setRedirectTitle(getRedirectTitle());
+		wikiPageModelImpl._originalVersion = wikiPageModelImpl._version;
 
-		clone.setStatus(getStatus());
+		wikiPageModelImpl._setOriginalVersion = false;
+		wikiPageImpl.setMinorEdit(getMinorEdit());
 
-		clone.setStatusByUserId(getStatusByUserId());
+		wikiPageImpl.setContent(getContent());
 
-		clone.setStatusByUserName(getStatusByUserName());
+		wikiPageImpl.setSummary(getSummary());
 
-		clone.setStatusDate(getStatusDate());
+		wikiPageImpl.setFormat(getFormat());
 
-		return clone;
+		wikiPageImpl.setHead(getHead());
+
+		wikiPageImpl.setParentTitle(getParentTitle());
+
+		wikiPageImpl.setRedirectTitle(getRedirectTitle());
+
+		wikiPageImpl.setStatus(getStatus());
+
+		wikiPageImpl.setStatusByUserId(getStatusByUserId());
+
+		wikiPageImpl.setStatusByUserName(getStatusByUserName());
+
+		wikiPageImpl.setStatusDate(getStatusDate());
+
+		return wikiPageImpl;
 	}
 
 	public int compareTo(WikiPage wikiPage) {

@@ -184,24 +184,27 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	}
 
 	public Object clone() {
-		ShardImpl clone = new ShardImpl();
-		ShardModelImpl cloneModel = (ShardModelImpl)clone;
+		ShardImpl shardImpl = new ShardImpl();
 
-		clone.setShardId(getShardId());
+		ShardModelImpl shardModelImpl = (ShardModelImpl)shardImpl;
 
-		clone.setClassNameId(getClassNameId());
+		shardImpl.setShardId(getShardId());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		shardImpl.setClassNameId(getClassNameId());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setName(getName());
+		shardModelImpl._originalClassNameId = shardModelImpl._classNameId;
 
-		cloneModel._originalName = cloneModel._name;
+		shardModelImpl._setOriginalClassNameId = false;
+		shardImpl.setClassPK(getClassPK());
 
-		return clone;
+		shardModelImpl._originalClassPK = shardModelImpl._classPK;
+
+		shardModelImpl._setOriginalClassPK = false;
+		shardImpl.setName(getName());
+
+		shardModelImpl._originalName = shardModelImpl._name;
+
+		return shardImpl;
 	}
 
 	public int compareTo(Shard shard) {

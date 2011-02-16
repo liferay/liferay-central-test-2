@@ -552,79 +552,83 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	}
 
 	public Object clone() {
-		PasswordPolicyImpl clone = new PasswordPolicyImpl();
-		PasswordPolicyModelImpl cloneModel = (PasswordPolicyModelImpl)clone;
+		PasswordPolicyImpl passwordPolicyImpl = new PasswordPolicyImpl();
 
-		clone.setPasswordPolicyId(getPasswordPolicyId());
+		PasswordPolicyModelImpl passwordPolicyModelImpl = (PasswordPolicyModelImpl)passwordPolicyImpl;
 
-		clone.setCompanyId(getCompanyId());
+		passwordPolicyImpl.setPasswordPolicyId(getPasswordPolicyId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setUserId(getUserId());
+		passwordPolicyImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		passwordPolicyModelImpl._originalCompanyId = passwordPolicyModelImpl._companyId;
 
-		clone.setCreateDate(getCreateDate());
+		passwordPolicyModelImpl._setOriginalCompanyId = false;
+		passwordPolicyImpl.setUserId(getUserId());
 
-		clone.setModifiedDate(getModifiedDate());
+		passwordPolicyImpl.setUserName(getUserName());
 
-		clone.setDefaultPolicy(getDefaultPolicy());
+		passwordPolicyImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalDefaultPolicy = cloneModel._defaultPolicy;
-		cloneModel._setOriginalDefaultPolicy = false;
-		clone.setName(getName());
+		passwordPolicyImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setDescription(getDescription());
+		passwordPolicyImpl.setDefaultPolicy(getDefaultPolicy());
 
-		clone.setChangeable(getChangeable());
+		passwordPolicyModelImpl._originalDefaultPolicy = passwordPolicyModelImpl._defaultPolicy;
 
-		clone.setChangeRequired(getChangeRequired());
+		passwordPolicyModelImpl._setOriginalDefaultPolicy = false;
+		passwordPolicyImpl.setName(getName());
 
-		clone.setMinAge(getMinAge());
+		passwordPolicyModelImpl._originalName = passwordPolicyModelImpl._name;
 
-		clone.setCheckSyntax(getCheckSyntax());
+		passwordPolicyImpl.setDescription(getDescription());
 
-		clone.setAllowDictionaryWords(getAllowDictionaryWords());
+		passwordPolicyImpl.setChangeable(getChangeable());
 
-		clone.setMinAlphanumeric(getMinAlphanumeric());
+		passwordPolicyImpl.setChangeRequired(getChangeRequired());
 
-		clone.setMinLength(getMinLength());
+		passwordPolicyImpl.setMinAge(getMinAge());
 
-		clone.setMinLowerCase(getMinLowerCase());
+		passwordPolicyImpl.setCheckSyntax(getCheckSyntax());
 
-		clone.setMinNumbers(getMinNumbers());
+		passwordPolicyImpl.setAllowDictionaryWords(getAllowDictionaryWords());
 
-		clone.setMinSymbols(getMinSymbols());
+		passwordPolicyImpl.setMinAlphanumeric(getMinAlphanumeric());
 
-		clone.setMinUpperCase(getMinUpperCase());
+		passwordPolicyImpl.setMinLength(getMinLength());
 
-		clone.setHistory(getHistory());
+		passwordPolicyImpl.setMinLowerCase(getMinLowerCase());
 
-		clone.setHistoryCount(getHistoryCount());
+		passwordPolicyImpl.setMinNumbers(getMinNumbers());
 
-		clone.setExpireable(getExpireable());
+		passwordPolicyImpl.setMinSymbols(getMinSymbols());
 
-		clone.setMaxAge(getMaxAge());
+		passwordPolicyImpl.setMinUpperCase(getMinUpperCase());
 
-		clone.setWarningTime(getWarningTime());
+		passwordPolicyImpl.setHistory(getHistory());
 
-		clone.setGraceLimit(getGraceLimit());
+		passwordPolicyImpl.setHistoryCount(getHistoryCount());
 
-		clone.setLockout(getLockout());
+		passwordPolicyImpl.setExpireable(getExpireable());
 
-		clone.setMaxFailure(getMaxFailure());
+		passwordPolicyImpl.setMaxAge(getMaxAge());
 
-		clone.setLockoutDuration(getLockoutDuration());
+		passwordPolicyImpl.setWarningTime(getWarningTime());
 
-		clone.setRequireUnlock(getRequireUnlock());
+		passwordPolicyImpl.setGraceLimit(getGraceLimit());
 
-		clone.setResetFailureCount(getResetFailureCount());
+		passwordPolicyImpl.setLockout(getLockout());
 
-		clone.setResetTicketMaxAge(getResetTicketMaxAge());
+		passwordPolicyImpl.setMaxFailure(getMaxFailure());
 
-		return clone;
+		passwordPolicyImpl.setLockoutDuration(getLockoutDuration());
+
+		passwordPolicyImpl.setRequireUnlock(getRequireUnlock());
+
+		passwordPolicyImpl.setResetFailureCount(getResetFailureCount());
+
+		passwordPolicyImpl.setResetTicketMaxAge(getResetTicketMaxAge());
+
+		return passwordPolicyImpl;
 	}
 
 	public int compareTo(PasswordPolicy passwordPolicy) {

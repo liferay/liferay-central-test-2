@@ -194,20 +194,22 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 	}
 
 	public Object clone() {
-		ResourceImpl clone = new ResourceImpl();
-		ResourceModelImpl cloneModel = (ResourceModelImpl)clone;
+		ResourceImpl resourceImpl = new ResourceImpl();
 
-		clone.setResourceId(getResourceId());
+		ResourceModelImpl resourceModelImpl = (ResourceModelImpl)resourceImpl;
 
-		clone.setCodeId(getCodeId());
+		resourceImpl.setResourceId(getResourceId());
 
-		cloneModel._originalCodeId = cloneModel._codeId;
-		cloneModel._setOriginalCodeId = false;
-		clone.setPrimKey(getPrimKey());
+		resourceImpl.setCodeId(getCodeId());
 
-		cloneModel._originalPrimKey = cloneModel._primKey;
+		resourceModelImpl._originalCodeId = resourceModelImpl._codeId;
 
-		return clone;
+		resourceModelImpl._setOriginalCodeId = false;
+		resourceImpl.setPrimKey(getPrimKey());
+
+		resourceModelImpl._originalPrimKey = resourceModelImpl._primKey;
+
+		return resourceImpl;
 	}
 
 	public int compareTo(Resource resource) {

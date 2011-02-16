@@ -192,26 +192,29 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 	}
 
 	public Object clone() {
-		RatingsStatsImpl clone = new RatingsStatsImpl();
-		RatingsStatsModelImpl cloneModel = (RatingsStatsModelImpl)clone;
+		RatingsStatsImpl ratingsStatsImpl = new RatingsStatsImpl();
 
-		clone.setStatsId(getStatsId());
+		RatingsStatsModelImpl ratingsStatsModelImpl = (RatingsStatsModelImpl)ratingsStatsImpl;
 
-		clone.setClassNameId(getClassNameId());
+		ratingsStatsImpl.setStatsId(getStatsId());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		ratingsStatsImpl.setClassNameId(getClassNameId());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setTotalEntries(getTotalEntries());
+		ratingsStatsModelImpl._originalClassNameId = ratingsStatsModelImpl._classNameId;
 
-		clone.setTotalScore(getTotalScore());
+		ratingsStatsModelImpl._setOriginalClassNameId = false;
+		ratingsStatsImpl.setClassPK(getClassPK());
 
-		clone.setAverageScore(getAverageScore());
+		ratingsStatsModelImpl._originalClassPK = ratingsStatsModelImpl._classPK;
 
-		return clone;
+		ratingsStatsModelImpl._setOriginalClassPK = false;
+		ratingsStatsImpl.setTotalEntries(getTotalEntries());
+
+		ratingsStatsImpl.setTotalScore(getTotalScore());
+
+		ratingsStatsImpl.setAverageScore(getAverageScore());
+
+		return ratingsStatsImpl;
 	}
 
 	public int compareTo(RatingsStats ratingsStats) {

@@ -919,70 +919,77 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 	}
 
 	public Object clone() {
-		LayoutImpl clone = new LayoutImpl();
-		LayoutModelImpl cloneModel = (LayoutModelImpl)clone;
+		LayoutImpl layoutImpl = new LayoutImpl();
 
-		clone.setUuid(getUuid());
+		LayoutModelImpl layoutModelImpl = (LayoutModelImpl)layoutImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setPlid(getPlid());
+		layoutImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		layoutModelImpl._originalUuid = layoutModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		layoutImpl.setPlid(getPlid());
 
-		clone.setPrivateLayout(getPrivateLayout());
+		layoutImpl.setGroupId(getGroupId());
 
-		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
-		cloneModel._setOriginalPrivateLayout = false;
-		clone.setLayoutId(getLayoutId());
+		layoutModelImpl._originalGroupId = layoutModelImpl._groupId;
 
-		cloneModel._originalLayoutId = cloneModel._layoutId;
-		cloneModel._setOriginalLayoutId = false;
-		clone.setParentLayoutId(getParentLayoutId());
+		layoutModelImpl._setOriginalGroupId = false;
+		layoutImpl.setCompanyId(getCompanyId());
 
-		clone.setName(getName());
+		layoutImpl.setPrivateLayout(getPrivateLayout());
 
-		clone.setTitle(getTitle());
+		layoutModelImpl._originalPrivateLayout = layoutModelImpl._privateLayout;
 
-		clone.setDescription(getDescription());
+		layoutModelImpl._setOriginalPrivateLayout = false;
+		layoutImpl.setLayoutId(getLayoutId());
 
-		clone.setKeywords(getKeywords());
+		layoutModelImpl._originalLayoutId = layoutModelImpl._layoutId;
 
-		clone.setRobots(getRobots());
+		layoutModelImpl._setOriginalLayoutId = false;
+		layoutImpl.setParentLayoutId(getParentLayoutId());
 
-		clone.setType(getType());
+		layoutImpl.setName(getName());
 
-		clone.setTypeSettings(getTypeSettings());
+		layoutImpl.setTitle(getTitle());
 
-		clone.setHidden(getHidden());
+		layoutImpl.setDescription(getDescription());
 
-		clone.setFriendlyURL(getFriendlyURL());
+		layoutImpl.setKeywords(getKeywords());
 
-		cloneModel._originalFriendlyURL = cloneModel._friendlyURL;
-		clone.setIconImage(getIconImage());
+		layoutImpl.setRobots(getRobots());
 
-		clone.setIconImageId(getIconImageId());
+		layoutImpl.setType(getType());
 
-		cloneModel._originalIconImageId = cloneModel._iconImageId;
-		cloneModel._setOriginalIconImageId = false;
-		clone.setThemeId(getThemeId());
+		layoutImpl.setTypeSettings(getTypeSettings());
 
-		clone.setColorSchemeId(getColorSchemeId());
+		layoutImpl.setHidden(getHidden());
 
-		clone.setWapThemeId(getWapThemeId());
+		layoutImpl.setFriendlyURL(getFriendlyURL());
 
-		clone.setWapColorSchemeId(getWapColorSchemeId());
+		layoutModelImpl._originalFriendlyURL = layoutModelImpl._friendlyURL;
 
-		clone.setCss(getCss());
+		layoutImpl.setIconImage(getIconImage());
 
-		clone.setPriority(getPriority());
+		layoutImpl.setIconImageId(getIconImageId());
 
-		clone.setLayoutPrototypeId(getLayoutPrototypeId());
+		layoutModelImpl._originalIconImageId = layoutModelImpl._iconImageId;
 
-		return clone;
+		layoutModelImpl._setOriginalIconImageId = false;
+		layoutImpl.setThemeId(getThemeId());
+
+		layoutImpl.setColorSchemeId(getColorSchemeId());
+
+		layoutImpl.setWapThemeId(getWapThemeId());
+
+		layoutImpl.setWapColorSchemeId(getWapColorSchemeId());
+
+		layoutImpl.setCss(getCss());
+
+		layoutImpl.setPriority(getPriority());
+
+		layoutImpl.setLayoutPrototypeId(getLayoutPrototypeId());
+
+		return layoutImpl;
 	}
 
 	public int compareTo(Layout layout) {

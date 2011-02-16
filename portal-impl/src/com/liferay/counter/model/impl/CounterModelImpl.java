@@ -115,14 +115,15 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 	}
 
 	public Object clone() {
-		CounterImpl clone = new CounterImpl();
-		CounterModelImpl cloneModel = (CounterModelImpl)clone;
+		CounterImpl counterImpl = new CounterImpl();
 
-		clone.setName(getName());
+		CounterModelImpl counterModelImpl = (CounterModelImpl)counterImpl;
 
-		clone.setCurrentId(getCurrentId());
+		counterImpl.setName(getName());
 
-		return clone;
+		counterImpl.setCurrentId(getCurrentId());
+
+		return counterImpl;
 	}
 
 	public int compareTo(Counter counter) {

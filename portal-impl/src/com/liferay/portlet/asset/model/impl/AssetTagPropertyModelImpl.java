@@ -280,31 +280,34 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	}
 
 	public Object clone() {
-		AssetTagPropertyImpl clone = new AssetTagPropertyImpl();
-		AssetTagPropertyModelImpl cloneModel = (AssetTagPropertyModelImpl)clone;
+		AssetTagPropertyImpl assetTagPropertyImpl = new AssetTagPropertyImpl();
 
-		clone.setTagPropertyId(getTagPropertyId());
+		AssetTagPropertyModelImpl assetTagPropertyModelImpl = (AssetTagPropertyModelImpl)assetTagPropertyImpl;
 
-		clone.setCompanyId(getCompanyId());
+		assetTagPropertyImpl.setTagPropertyId(getTagPropertyId());
 
-		clone.setUserId(getUserId());
+		assetTagPropertyImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		assetTagPropertyImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		assetTagPropertyImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		assetTagPropertyImpl.setCreateDate(getCreateDate());
 
-		clone.setTagId(getTagId());
+		assetTagPropertyImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalTagId = cloneModel._tagId;
-		cloneModel._setOriginalTagId = false;
-		clone.setKey(getKey());
+		assetTagPropertyImpl.setTagId(getTagId());
 
-		cloneModel._originalKey = cloneModel._key;
-		clone.setValue(getValue());
+		assetTagPropertyModelImpl._originalTagId = assetTagPropertyModelImpl._tagId;
 
-		return clone;
+		assetTagPropertyModelImpl._setOriginalTagId = false;
+		assetTagPropertyImpl.setKey(getKey());
+
+		assetTagPropertyModelImpl._originalKey = assetTagPropertyModelImpl._key;
+
+		assetTagPropertyImpl.setValue(getValue());
+
+		return assetTagPropertyImpl;
 	}
 
 	public int compareTo(AssetTagProperty assetTagProperty) {

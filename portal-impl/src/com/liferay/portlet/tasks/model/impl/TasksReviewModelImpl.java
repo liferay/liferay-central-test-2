@@ -334,40 +334,43 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview>
 	}
 
 	public Object clone() {
-		TasksReviewImpl clone = new TasksReviewImpl();
-		TasksReviewModelImpl cloneModel = (TasksReviewModelImpl)clone;
+		TasksReviewImpl tasksReviewImpl = new TasksReviewImpl();
 
-		clone.setReviewId(getReviewId());
+		TasksReviewModelImpl tasksReviewModelImpl = (TasksReviewModelImpl)tasksReviewImpl;
 
-		clone.setGroupId(getGroupId());
+		tasksReviewImpl.setReviewId(getReviewId());
 
-		clone.setCompanyId(getCompanyId());
+		tasksReviewImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		tasksReviewImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setUserName(getUserName());
+		tasksReviewImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		tasksReviewModelImpl._originalUserId = tasksReviewModelImpl._userId;
 
-		clone.setModifiedDate(getModifiedDate());
+		tasksReviewModelImpl._setOriginalUserId = false;
+		tasksReviewImpl.setUserName(getUserName());
 
-		clone.setProposalId(getProposalId());
+		tasksReviewImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalProposalId = cloneModel._proposalId;
-		cloneModel._setOriginalProposalId = false;
-		clone.setAssignedByUserId(getAssignedByUserId());
+		tasksReviewImpl.setModifiedDate(getModifiedDate());
 
-		clone.setAssignedByUserName(getAssignedByUserName());
+		tasksReviewImpl.setProposalId(getProposalId());
 
-		clone.setStage(getStage());
+		tasksReviewModelImpl._originalProposalId = tasksReviewModelImpl._proposalId;
 
-		clone.setCompleted(getCompleted());
+		tasksReviewModelImpl._setOriginalProposalId = false;
+		tasksReviewImpl.setAssignedByUserId(getAssignedByUserId());
 
-		clone.setRejected(getRejected());
+		tasksReviewImpl.setAssignedByUserName(getAssignedByUserName());
 
-		return clone;
+		tasksReviewImpl.setStage(getStage());
+
+		tasksReviewImpl.setCompleted(getCompleted());
+
+		tasksReviewImpl.setRejected(getRejected());
+
+		return tasksReviewImpl;
 	}
 
 	public int compareTo(TasksReview tasksReview) {

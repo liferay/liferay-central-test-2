@@ -541,49 +541,55 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	}
 
 	public Object clone() {
-		AssetCategoryImpl clone = new AssetCategoryImpl();
-		AssetCategoryModelImpl cloneModel = (AssetCategoryModelImpl)clone;
+		AssetCategoryImpl assetCategoryImpl = new AssetCategoryImpl();
 
-		clone.setUuid(getUuid());
+		AssetCategoryModelImpl assetCategoryModelImpl = (AssetCategoryModelImpl)assetCategoryImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setCategoryId(getCategoryId());
+		assetCategoryImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		assetCategoryModelImpl._originalUuid = assetCategoryModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		assetCategoryImpl.setCategoryId(getCategoryId());
 
-		clone.setUserId(getUserId());
+		assetCategoryImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		assetCategoryModelImpl._originalGroupId = assetCategoryModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		assetCategoryModelImpl._setOriginalGroupId = false;
+		assetCategoryImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		assetCategoryImpl.setUserId(getUserId());
 
-		clone.setParentCategoryId(getParentCategoryId());
+		assetCategoryImpl.setUserName(getUserName());
 
-		cloneModel._originalParentCategoryId = cloneModel._parentCategoryId;
-		cloneModel._setOriginalParentCategoryId = false;
-		clone.setLeftCategoryId(getLeftCategoryId());
+		assetCategoryImpl.setCreateDate(getCreateDate());
 
-		clone.setRightCategoryId(getRightCategoryId());
+		assetCategoryImpl.setModifiedDate(getModifiedDate());
 
-		clone.setName(getName());
+		assetCategoryImpl.setParentCategoryId(getParentCategoryId());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setTitle(getTitle());
+		assetCategoryModelImpl._originalParentCategoryId = assetCategoryModelImpl._parentCategoryId;
 
-		clone.setDescription(getDescription());
+		assetCategoryModelImpl._setOriginalParentCategoryId = false;
+		assetCategoryImpl.setLeftCategoryId(getLeftCategoryId());
 
-		clone.setVocabularyId(getVocabularyId());
+		assetCategoryImpl.setRightCategoryId(getRightCategoryId());
 
-		cloneModel._originalVocabularyId = cloneModel._vocabularyId;
-		cloneModel._setOriginalVocabularyId = false;
+		assetCategoryImpl.setName(getName());
 
-		return clone;
+		assetCategoryModelImpl._originalName = assetCategoryModelImpl._name;
+
+		assetCategoryImpl.setTitle(getTitle());
+
+		assetCategoryImpl.setDescription(getDescription());
+
+		assetCategoryImpl.setVocabularyId(getVocabularyId());
+
+		assetCategoryModelImpl._originalVocabularyId = assetCategoryModelImpl._vocabularyId;
+
+		assetCategoryModelImpl._setOriginalVocabularyId = false;
+
+		return assetCategoryImpl;
 	}
 
 	public int compareTo(AssetCategory assetCategory) {

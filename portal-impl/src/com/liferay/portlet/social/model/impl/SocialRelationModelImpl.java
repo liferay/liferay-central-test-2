@@ -207,31 +207,35 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	}
 
 	public Object clone() {
-		SocialRelationImpl clone = new SocialRelationImpl();
-		SocialRelationModelImpl cloneModel = (SocialRelationModelImpl)clone;
+		SocialRelationImpl socialRelationImpl = new SocialRelationImpl();
 
-		clone.setUuid(getUuid());
+		SocialRelationModelImpl socialRelationModelImpl = (SocialRelationModelImpl)socialRelationImpl;
 
-		clone.setRelationId(getRelationId());
+		socialRelationImpl.setUuid(getUuid());
 
-		clone.setCompanyId(getCompanyId());
+		socialRelationImpl.setRelationId(getRelationId());
 
-		clone.setCreateDate(getCreateDate());
+		socialRelationImpl.setCompanyId(getCompanyId());
 
-		clone.setUserId1(getUserId1());
+		socialRelationImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalUserId1 = cloneModel._userId1;
-		cloneModel._setOriginalUserId1 = false;
-		clone.setUserId2(getUserId2());
+		socialRelationImpl.setUserId1(getUserId1());
 
-		cloneModel._originalUserId2 = cloneModel._userId2;
-		cloneModel._setOriginalUserId2 = false;
-		clone.setType(getType());
+		socialRelationModelImpl._originalUserId1 = socialRelationModelImpl._userId1;
 
-		cloneModel._originalType = cloneModel._type;
-		cloneModel._setOriginalType = false;
+		socialRelationModelImpl._setOriginalUserId1 = false;
+		socialRelationImpl.setUserId2(getUserId2());
 
-		return clone;
+		socialRelationModelImpl._originalUserId2 = socialRelationModelImpl._userId2;
+
+		socialRelationModelImpl._setOriginalUserId2 = false;
+		socialRelationImpl.setType(getType());
+
+		socialRelationModelImpl._originalType = socialRelationModelImpl._type;
+
+		socialRelationModelImpl._setOriginalType = false;
+
+		return socialRelationImpl;
 	}
 
 	public int compareTo(SocialRelation socialRelation) {

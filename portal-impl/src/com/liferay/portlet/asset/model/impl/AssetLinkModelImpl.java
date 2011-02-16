@@ -208,28 +208,29 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	}
 
 	public Object clone() {
-		AssetLinkImpl clone = new AssetLinkImpl();
-		AssetLinkModelImpl cloneModel = (AssetLinkModelImpl)clone;
+		AssetLinkImpl assetLinkImpl = new AssetLinkImpl();
 
-		clone.setLinkId(getLinkId());
+		AssetLinkModelImpl assetLinkModelImpl = (AssetLinkModelImpl)assetLinkImpl;
 
-		clone.setCompanyId(getCompanyId());
+		assetLinkImpl.setLinkId(getLinkId());
 
-		clone.setUserId(getUserId());
+		assetLinkImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		assetLinkImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		assetLinkImpl.setUserName(getUserName());
 
-		clone.setEntryId1(getEntryId1());
+		assetLinkImpl.setCreateDate(getCreateDate());
 
-		clone.setEntryId2(getEntryId2());
+		assetLinkImpl.setEntryId1(getEntryId1());
 
-		clone.setType(getType());
+		assetLinkImpl.setEntryId2(getEntryId2());
 
-		clone.setWeight(getWeight());
+		assetLinkImpl.setType(getType());
 
-		return clone;
+		assetLinkImpl.setWeight(getWeight());
+
+		return assetLinkImpl;
 	}
 
 	public int compareTo(AssetLink assetLink) {

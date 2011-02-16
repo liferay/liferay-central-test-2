@@ -238,22 +238,23 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	}
 
 	public Object clone() {
-		SCLicenseImpl clone = new SCLicenseImpl();
-		SCLicenseModelImpl cloneModel = (SCLicenseModelImpl)clone;
+		SCLicenseImpl scLicenseImpl = new SCLicenseImpl();
 
-		clone.setLicenseId(getLicenseId());
+		SCLicenseModelImpl scLicenseModelImpl = (SCLicenseModelImpl)scLicenseImpl;
 
-		clone.setName(getName());
+		scLicenseImpl.setLicenseId(getLicenseId());
 
-		clone.setUrl(getUrl());
+		scLicenseImpl.setName(getName());
 
-		clone.setOpenSource(getOpenSource());
+		scLicenseImpl.setUrl(getUrl());
 
-		clone.setActive(getActive());
+		scLicenseImpl.setOpenSource(getOpenSource());
 
-		clone.setRecommended(getRecommended());
+		scLicenseImpl.setActive(getActive());
 
-		return clone;
+		scLicenseImpl.setRecommended(getRecommended());
+
+		return scLicenseImpl;
 	}
 
 	public int compareTo(SCLicense scLicense) {

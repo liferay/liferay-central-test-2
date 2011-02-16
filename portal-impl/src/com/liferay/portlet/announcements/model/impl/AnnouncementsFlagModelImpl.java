@@ -237,27 +237,31 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	public Object clone() {
-		AnnouncementsFlagImpl clone = new AnnouncementsFlagImpl();
-		AnnouncementsFlagModelImpl cloneModel = (AnnouncementsFlagModelImpl)clone;
+		AnnouncementsFlagImpl announcementsFlagImpl = new AnnouncementsFlagImpl();
 
-		clone.setFlagId(getFlagId());
+		AnnouncementsFlagModelImpl announcementsFlagModelImpl = (AnnouncementsFlagModelImpl)announcementsFlagImpl;
 
-		clone.setUserId(getUserId());
+		announcementsFlagImpl.setFlagId(getFlagId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setCreateDate(getCreateDate());
+		announcementsFlagImpl.setUserId(getUserId());
 
-		clone.setEntryId(getEntryId());
+		announcementsFlagModelImpl._originalUserId = announcementsFlagModelImpl._userId;
 
-		cloneModel._originalEntryId = cloneModel._entryId;
-		cloneModel._setOriginalEntryId = false;
-		clone.setValue(getValue());
+		announcementsFlagModelImpl._setOriginalUserId = false;
+		announcementsFlagImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalValue = cloneModel._value;
-		cloneModel._setOriginalValue = false;
+		announcementsFlagImpl.setEntryId(getEntryId());
 
-		return clone;
+		announcementsFlagModelImpl._originalEntryId = announcementsFlagModelImpl._entryId;
+
+		announcementsFlagModelImpl._setOriginalEntryId = false;
+		announcementsFlagImpl.setValue(getValue());
+
+		announcementsFlagModelImpl._originalValue = announcementsFlagModelImpl._value;
+
+		announcementsFlagModelImpl._setOriginalValue = false;
+
+		return announcementsFlagImpl;
 	}
 
 	public int compareTo(AnnouncementsFlag announcementsFlag) {

@@ -333,49 +333,57 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 	}
 
 	public Object clone() {
-		SocialRequestImpl clone = new SocialRequestImpl();
-		SocialRequestModelImpl cloneModel = (SocialRequestModelImpl)clone;
+		SocialRequestImpl socialRequestImpl = new SocialRequestImpl();
 
-		clone.setUuid(getUuid());
+		SocialRequestModelImpl socialRequestModelImpl = (SocialRequestModelImpl)socialRequestImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setRequestId(getRequestId());
+		socialRequestImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		socialRequestModelImpl._originalUuid = socialRequestModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		socialRequestImpl.setRequestId(getRequestId());
 
-		clone.setUserId(getUserId());
+		socialRequestImpl.setGroupId(getGroupId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setCreateDate(getCreateDate());
+		socialRequestModelImpl._originalGroupId = socialRequestModelImpl._groupId;
 
-		clone.setModifiedDate(getModifiedDate());
+		socialRequestModelImpl._setOriginalGroupId = false;
+		socialRequestImpl.setCompanyId(getCompanyId());
 
-		clone.setClassNameId(getClassNameId());
+		socialRequestImpl.setUserId(getUserId());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		socialRequestModelImpl._originalUserId = socialRequestModelImpl._userId;
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setType(getType());
+		socialRequestModelImpl._setOriginalUserId = false;
+		socialRequestImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalType = cloneModel._type;
-		cloneModel._setOriginalType = false;
-		clone.setExtraData(getExtraData());
+		socialRequestImpl.setModifiedDate(getModifiedDate());
 
-		clone.setReceiverUserId(getReceiverUserId());
+		socialRequestImpl.setClassNameId(getClassNameId());
 
-		cloneModel._originalReceiverUserId = cloneModel._receiverUserId;
-		cloneModel._setOriginalReceiverUserId = false;
-		clone.setStatus(getStatus());
+		socialRequestModelImpl._originalClassNameId = socialRequestModelImpl._classNameId;
 
-		return clone;
+		socialRequestModelImpl._setOriginalClassNameId = false;
+		socialRequestImpl.setClassPK(getClassPK());
+
+		socialRequestModelImpl._originalClassPK = socialRequestModelImpl._classPK;
+
+		socialRequestModelImpl._setOriginalClassPK = false;
+		socialRequestImpl.setType(getType());
+
+		socialRequestModelImpl._originalType = socialRequestModelImpl._type;
+
+		socialRequestModelImpl._setOriginalType = false;
+		socialRequestImpl.setExtraData(getExtraData());
+
+		socialRequestImpl.setReceiverUserId(getReceiverUserId());
+
+		socialRequestModelImpl._originalReceiverUserId = socialRequestModelImpl._receiverUserId;
+
+		socialRequestModelImpl._setOriginalReceiverUserId = false;
+		socialRequestImpl.setStatus(getStatus());
+
+		return socialRequestImpl;
 	}
 
 	public int compareTo(SocialRequest socialRequest) {

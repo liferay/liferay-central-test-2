@@ -287,34 +287,38 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	}
 
 	public Object clone() {
-		RatingsEntryImpl clone = new RatingsEntryImpl();
-		RatingsEntryModelImpl cloneModel = (RatingsEntryModelImpl)clone;
+		RatingsEntryImpl ratingsEntryImpl = new RatingsEntryImpl();
 
-		clone.setEntryId(getEntryId());
+		RatingsEntryModelImpl ratingsEntryModelImpl = (RatingsEntryModelImpl)ratingsEntryImpl;
 
-		clone.setCompanyId(getCompanyId());
+		ratingsEntryImpl.setEntryId(getEntryId());
 
-		clone.setUserId(getUserId());
+		ratingsEntryImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalUserId = cloneModel._userId;
-		cloneModel._setOriginalUserId = false;
-		clone.setUserName(getUserName());
+		ratingsEntryImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		ratingsEntryModelImpl._originalUserId = ratingsEntryModelImpl._userId;
 
-		clone.setModifiedDate(getModifiedDate());
+		ratingsEntryModelImpl._setOriginalUserId = false;
+		ratingsEntryImpl.setUserName(getUserName());
 
-		clone.setClassNameId(getClassNameId());
+		ratingsEntryImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		ratingsEntryImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setScore(getScore());
+		ratingsEntryImpl.setClassNameId(getClassNameId());
 
-		return clone;
+		ratingsEntryModelImpl._originalClassNameId = ratingsEntryModelImpl._classNameId;
+
+		ratingsEntryModelImpl._setOriginalClassNameId = false;
+		ratingsEntryImpl.setClassPK(getClassPK());
+
+		ratingsEntryModelImpl._originalClassPK = ratingsEntryModelImpl._classPK;
+
+		ratingsEntryModelImpl._setOriginalClassPK = false;
+		ratingsEntryImpl.setScore(getScore());
+
+		return ratingsEntryImpl;
 	}
 
 	public int compareTo(RatingsEntry ratingsEntry) {

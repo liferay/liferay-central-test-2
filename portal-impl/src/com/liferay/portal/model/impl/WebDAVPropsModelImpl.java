@@ -207,28 +207,31 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	}
 
 	public Object clone() {
-		WebDAVPropsImpl clone = new WebDAVPropsImpl();
-		WebDAVPropsModelImpl cloneModel = (WebDAVPropsModelImpl)clone;
+		WebDAVPropsImpl webDAVPropsImpl = new WebDAVPropsImpl();
 
-		clone.setWebDavPropsId(getWebDavPropsId());
+		WebDAVPropsModelImpl webDAVPropsModelImpl = (WebDAVPropsModelImpl)webDAVPropsImpl;
 
-		clone.setCompanyId(getCompanyId());
+		webDAVPropsImpl.setWebDavPropsId(getWebDavPropsId());
 
-		clone.setCreateDate(getCreateDate());
+		webDAVPropsImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		webDAVPropsImpl.setCreateDate(getCreateDate());
 
-		clone.setClassNameId(getClassNameId());
+		webDAVPropsImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		webDAVPropsImpl.setClassNameId(getClassNameId());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setProps(getProps());
+		webDAVPropsModelImpl._originalClassNameId = webDAVPropsModelImpl._classNameId;
 
-		return clone;
+		webDAVPropsModelImpl._setOriginalClassNameId = false;
+		webDAVPropsImpl.setClassPK(getClassPK());
+
+		webDAVPropsModelImpl._originalClassPK = webDAVPropsModelImpl._classPK;
+
+		webDAVPropsModelImpl._setOriginalClassPK = false;
+		webDAVPropsImpl.setProps(getProps());
+
+		return webDAVPropsImpl;
 	}
 
 	public int compareTo(WebDAVProps webDAVProps) {

@@ -370,44 +370,45 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 	}
 
 	public Object clone() {
-		AnnouncementsEntryImpl clone = new AnnouncementsEntryImpl();
-		AnnouncementsEntryModelImpl cloneModel = (AnnouncementsEntryModelImpl)clone;
+		AnnouncementsEntryImpl announcementsEntryImpl = new AnnouncementsEntryImpl();
 
-		clone.setUuid(getUuid());
+		AnnouncementsEntryModelImpl announcementsEntryModelImpl = (AnnouncementsEntryModelImpl)announcementsEntryImpl;
 
-		clone.setEntryId(getEntryId());
+		announcementsEntryImpl.setUuid(getUuid());
 
-		clone.setCompanyId(getCompanyId());
+		announcementsEntryImpl.setEntryId(getEntryId());
 
-		clone.setUserId(getUserId());
+		announcementsEntryImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		announcementsEntryImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		announcementsEntryImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		announcementsEntryImpl.setCreateDate(getCreateDate());
 
-		clone.setClassNameId(getClassNameId());
+		announcementsEntryImpl.setModifiedDate(getModifiedDate());
 
-		clone.setClassPK(getClassPK());
+		announcementsEntryImpl.setClassNameId(getClassNameId());
 
-		clone.setTitle(getTitle());
+		announcementsEntryImpl.setClassPK(getClassPK());
 
-		clone.setContent(getContent());
+		announcementsEntryImpl.setTitle(getTitle());
 
-		clone.setUrl(getUrl());
+		announcementsEntryImpl.setContent(getContent());
 
-		clone.setType(getType());
+		announcementsEntryImpl.setUrl(getUrl());
 
-		clone.setDisplayDate(getDisplayDate());
+		announcementsEntryImpl.setType(getType());
 
-		clone.setExpirationDate(getExpirationDate());
+		announcementsEntryImpl.setDisplayDate(getDisplayDate());
 
-		clone.setPriority(getPriority());
+		announcementsEntryImpl.setExpirationDate(getExpirationDate());
 
-		clone.setAlert(getAlert());
+		announcementsEntryImpl.setPriority(getPriority());
 
-		return clone;
+		announcementsEntryImpl.setAlert(getAlert());
+
+		return announcementsEntryImpl;
 	}
 
 	public int compareTo(AnnouncementsEntry announcementsEntry) {

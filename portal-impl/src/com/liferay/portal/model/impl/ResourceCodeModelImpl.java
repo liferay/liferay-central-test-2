@@ -177,24 +177,28 @@ public class ResourceCodeModelImpl extends BaseModelImpl<ResourceCode>
 	}
 
 	public Object clone() {
-		ResourceCodeImpl clone = new ResourceCodeImpl();
-		ResourceCodeModelImpl cloneModel = (ResourceCodeModelImpl)clone;
+		ResourceCodeImpl resourceCodeImpl = new ResourceCodeImpl();
 
-		clone.setCodeId(getCodeId());
+		ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCodeImpl;
 
-		clone.setCompanyId(getCompanyId());
+		resourceCodeImpl.setCodeId(getCodeId());
 
-		cloneModel._originalCompanyId = cloneModel._companyId;
-		cloneModel._setOriginalCompanyId = false;
-		clone.setName(getName());
+		resourceCodeImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setScope(getScope());
+		resourceCodeModelImpl._originalCompanyId = resourceCodeModelImpl._companyId;
 
-		cloneModel._originalScope = cloneModel._scope;
-		cloneModel._setOriginalScope = false;
+		resourceCodeModelImpl._setOriginalCompanyId = false;
+		resourceCodeImpl.setName(getName());
 
-		return clone;
+		resourceCodeModelImpl._originalName = resourceCodeModelImpl._name;
+
+		resourceCodeImpl.setScope(getScope());
+
+		resourceCodeModelImpl._originalScope = resourceCodeModelImpl._scope;
+
+		resourceCodeModelImpl._setOriginalScope = false;
+
+		return resourceCodeImpl;
 	}
 
 	public int compareTo(ResourceCode resourceCode) {

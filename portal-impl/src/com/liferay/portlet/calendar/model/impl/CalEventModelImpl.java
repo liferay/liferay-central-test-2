@@ -451,59 +451,62 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 	}
 
 	public Object clone() {
-		CalEventImpl clone = new CalEventImpl();
-		CalEventModelImpl cloneModel = (CalEventModelImpl)clone;
+		CalEventImpl calEventImpl = new CalEventImpl();
 
-		clone.setUuid(getUuid());
+		CalEventModelImpl calEventModelImpl = (CalEventModelImpl)calEventImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setEventId(getEventId());
+		calEventImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		calEventModelImpl._originalUuid = calEventModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		calEventImpl.setEventId(getEventId());
 
-		clone.setUserId(getUserId());
+		calEventImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		calEventModelImpl._originalGroupId = calEventModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		calEventModelImpl._setOriginalGroupId = false;
+		calEventImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		calEventImpl.setUserId(getUserId());
 
-		clone.setTitle(getTitle());
+		calEventImpl.setUserName(getUserName());
 
-		clone.setDescription(getDescription());
+		calEventImpl.setCreateDate(getCreateDate());
 
-		clone.setLocation(getLocation());
+		calEventImpl.setModifiedDate(getModifiedDate());
 
-		clone.setStartDate(getStartDate());
+		calEventImpl.setTitle(getTitle());
 
-		clone.setEndDate(getEndDate());
+		calEventImpl.setDescription(getDescription());
 
-		clone.setDurationHour(getDurationHour());
+		calEventImpl.setLocation(getLocation());
 
-		clone.setDurationMinute(getDurationMinute());
+		calEventImpl.setStartDate(getStartDate());
 
-		clone.setAllDay(getAllDay());
+		calEventImpl.setEndDate(getEndDate());
 
-		clone.setTimeZoneSensitive(getTimeZoneSensitive());
+		calEventImpl.setDurationHour(getDurationHour());
 
-		clone.setType(getType());
+		calEventImpl.setDurationMinute(getDurationMinute());
 
-		clone.setRepeating(getRepeating());
+		calEventImpl.setAllDay(getAllDay());
 
-		clone.setRecurrence(getRecurrence());
+		calEventImpl.setTimeZoneSensitive(getTimeZoneSensitive());
 
-		clone.setRemindBy(getRemindBy());
+		calEventImpl.setType(getType());
 
-		clone.setFirstReminder(getFirstReminder());
+		calEventImpl.setRepeating(getRepeating());
 
-		clone.setSecondReminder(getSecondReminder());
+		calEventImpl.setRecurrence(getRecurrence());
 
-		return clone;
+		calEventImpl.setRemindBy(getRemindBy());
+
+		calEventImpl.setFirstReminder(getFirstReminder());
+
+		calEventImpl.setSecondReminder(getSecondReminder());
+
+		return calEventImpl;
 	}
 
 	public int compareTo(CalEvent calEvent) {

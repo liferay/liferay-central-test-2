@@ -158,20 +158,22 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	}
 
 	public Object clone() {
-		RepositoryEntryImpl clone = new RepositoryEntryImpl();
-		RepositoryEntryModelImpl cloneModel = (RepositoryEntryModelImpl)clone;
+		RepositoryEntryImpl repositoryEntryImpl = new RepositoryEntryImpl();
 
-		clone.setRepositoryEntryId(getRepositoryEntryId());
+		RepositoryEntryModelImpl repositoryEntryModelImpl = (RepositoryEntryModelImpl)repositoryEntryImpl;
 
-		clone.setRepositoryId(getRepositoryId());
+		repositoryEntryImpl.setRepositoryEntryId(getRepositoryEntryId());
 
-		cloneModel._originalRepositoryId = cloneModel._repositoryId;
-		cloneModel._setOriginalRepositoryId = false;
-		clone.setMappedId(getMappedId());
+		repositoryEntryImpl.setRepositoryId(getRepositoryId());
 
-		cloneModel._originalMappedId = cloneModel._mappedId;
+		repositoryEntryModelImpl._originalRepositoryId = repositoryEntryModelImpl._repositoryId;
 
-		return clone;
+		repositoryEntryModelImpl._setOriginalRepositoryId = false;
+		repositoryEntryImpl.setMappedId(getMappedId());
+
+		repositoryEntryModelImpl._originalMappedId = repositoryEntryModelImpl._mappedId;
+
+		return repositoryEntryImpl;
 	}
 
 	public int compareTo(RepositoryEntry repositoryEntry) {

@@ -167,16 +167,17 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
 	}
 
 	public Object clone() {
-		UserGroupRoleImpl clone = new UserGroupRoleImpl();
-		UserGroupRoleModelImpl cloneModel = (UserGroupRoleModelImpl)clone;
+		UserGroupRoleImpl userGroupRoleImpl = new UserGroupRoleImpl();
 
-		clone.setUserId(getUserId());
+		UserGroupRoleModelImpl userGroupRoleModelImpl = (UserGroupRoleModelImpl)userGroupRoleImpl;
 
-		clone.setGroupId(getGroupId());
+		userGroupRoleImpl.setUserId(getUserId());
 
-		clone.setRoleId(getRoleId());
+		userGroupRoleImpl.setGroupId(getGroupId());
 
-		return clone;
+		userGroupRoleImpl.setRoleId(getRoleId());
+
+		return userGroupRoleImpl;
 	}
 
 	public int compareTo(UserGroupRole userGroupRole) {

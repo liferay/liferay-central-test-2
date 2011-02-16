@@ -487,60 +487,64 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 	}
 
 	public Object clone() {
-		JournalFeedImpl clone = new JournalFeedImpl();
-		JournalFeedModelImpl cloneModel = (JournalFeedModelImpl)clone;
+		JournalFeedImpl journalFeedImpl = new JournalFeedImpl();
 
-		clone.setUuid(getUuid());
+		JournalFeedModelImpl journalFeedModelImpl = (JournalFeedModelImpl)journalFeedImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setId(getId());
+		journalFeedImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		journalFeedModelImpl._originalUuid = journalFeedModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		journalFeedImpl.setId(getId());
 
-		clone.setUserId(getUserId());
+		journalFeedImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		journalFeedModelImpl._originalGroupId = journalFeedModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		journalFeedModelImpl._setOriginalGroupId = false;
+		journalFeedImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		journalFeedImpl.setUserId(getUserId());
 
-		clone.setFeedId(getFeedId());
+		journalFeedImpl.setUserName(getUserName());
 
-		cloneModel._originalFeedId = cloneModel._feedId;
-		clone.setName(getName());
+		journalFeedImpl.setCreateDate(getCreateDate());
 
-		clone.setDescription(getDescription());
+		journalFeedImpl.setModifiedDate(getModifiedDate());
 
-		clone.setType(getType());
+		journalFeedImpl.setFeedId(getFeedId());
 
-		clone.setStructureId(getStructureId());
+		journalFeedModelImpl._originalFeedId = journalFeedModelImpl._feedId;
 
-		clone.setTemplateId(getTemplateId());
+		journalFeedImpl.setName(getName());
 
-		clone.setRendererTemplateId(getRendererTemplateId());
+		journalFeedImpl.setDescription(getDescription());
 
-		clone.setDelta(getDelta());
+		journalFeedImpl.setType(getType());
 
-		clone.setOrderByCol(getOrderByCol());
+		journalFeedImpl.setStructureId(getStructureId());
 
-		clone.setOrderByType(getOrderByType());
+		journalFeedImpl.setTemplateId(getTemplateId());
 
-		clone.setTargetLayoutFriendlyUrl(getTargetLayoutFriendlyUrl());
+		journalFeedImpl.setRendererTemplateId(getRendererTemplateId());
 
-		clone.setTargetPortletId(getTargetPortletId());
+		journalFeedImpl.setDelta(getDelta());
 
-		clone.setContentField(getContentField());
+		journalFeedImpl.setOrderByCol(getOrderByCol());
 
-		clone.setFeedType(getFeedType());
+		journalFeedImpl.setOrderByType(getOrderByType());
 
-		clone.setFeedVersion(getFeedVersion());
+		journalFeedImpl.setTargetLayoutFriendlyUrl(getTargetLayoutFriendlyUrl());
 
-		return clone;
+		journalFeedImpl.setTargetPortletId(getTargetPortletId());
+
+		journalFeedImpl.setContentField(getContentField());
+
+		journalFeedImpl.setFeedType(getFeedType());
+
+		journalFeedImpl.setFeedVersion(getFeedVersion());
+
+		return journalFeedImpl;
 	}
 
 	public int compareTo(JournalFeed journalFeed) {

@@ -151,18 +151,19 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 	}
 
 	public Object clone() {
-		UserTrackerPathImpl clone = new UserTrackerPathImpl();
-		UserTrackerPathModelImpl cloneModel = (UserTrackerPathModelImpl)clone;
+		UserTrackerPathImpl userTrackerPathImpl = new UserTrackerPathImpl();
 
-		clone.setUserTrackerPathId(getUserTrackerPathId());
+		UserTrackerPathModelImpl userTrackerPathModelImpl = (UserTrackerPathModelImpl)userTrackerPathImpl;
 
-		clone.setUserTrackerId(getUserTrackerId());
+		userTrackerPathImpl.setUserTrackerPathId(getUserTrackerPathId());
 
-		clone.setPath(getPath());
+		userTrackerPathImpl.setUserTrackerId(getUserTrackerId());
 
-		clone.setPathDate(getPathDate());
+		userTrackerPathImpl.setPath(getPath());
 
-		return clone;
+		userTrackerPathImpl.setPathDate(getPathDate());
+
+		return userTrackerPathImpl;
 	}
 
 	public int compareTo(UserTrackerPath userTrackerPath) {

@@ -273,32 +273,33 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	}
 
 	public Object clone() {
-		RepositoryImpl clone = new RepositoryImpl();
-		RepositoryModelImpl cloneModel = (RepositoryModelImpl)clone;
+		RepositoryImpl repositoryImpl = new RepositoryImpl();
 
-		clone.setRepositoryId(getRepositoryId());
+		RepositoryModelImpl repositoryModelImpl = (RepositoryModelImpl)repositoryImpl;
 
-		clone.setGroupId(getGroupId());
+		repositoryImpl.setRepositoryId(getRepositoryId());
 
-		clone.setCompanyId(getCompanyId());
+		repositoryImpl.setGroupId(getGroupId());
 
-		clone.setCreateDate(getCreateDate());
+		repositoryImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		repositoryImpl.setCreateDate(getCreateDate());
 
-		clone.setName(getName());
+		repositoryImpl.setModifiedDate(getModifiedDate());
 
-		clone.setDescription(getDescription());
+		repositoryImpl.setName(getName());
 
-		clone.setPortletId(getPortletId());
+		repositoryImpl.setDescription(getDescription());
 
-		clone.setType(getType());
+		repositoryImpl.setPortletId(getPortletId());
 
-		clone.setTypeSettings(getTypeSettings());
+		repositoryImpl.setType(getType());
 
-		clone.setDlFolderId(getDlFolderId());
+		repositoryImpl.setTypeSettings(getTypeSettings());
 
-		return clone;
+		repositoryImpl.setDlFolderId(getDlFolderId());
+
+		return repositoryImpl;
 	}
 
 	public int compareTo(Repository repository) {

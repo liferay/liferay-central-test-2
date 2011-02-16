@@ -232,27 +232,30 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	}
 
 	public Object clone() {
-		ExpandoColumnImpl clone = new ExpandoColumnImpl();
-		ExpandoColumnModelImpl cloneModel = (ExpandoColumnModelImpl)clone;
+		ExpandoColumnImpl expandoColumnImpl = new ExpandoColumnImpl();
 
-		clone.setColumnId(getColumnId());
+		ExpandoColumnModelImpl expandoColumnModelImpl = (ExpandoColumnModelImpl)expandoColumnImpl;
 
-		clone.setCompanyId(getCompanyId());
+		expandoColumnImpl.setColumnId(getColumnId());
 
-		clone.setTableId(getTableId());
+		expandoColumnImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalTableId = cloneModel._tableId;
-		cloneModel._setOriginalTableId = false;
-		clone.setName(getName());
+		expandoColumnImpl.setTableId(getTableId());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setType(getType());
+		expandoColumnModelImpl._originalTableId = expandoColumnModelImpl._tableId;
 
-		clone.setDefaultData(getDefaultData());
+		expandoColumnModelImpl._setOriginalTableId = false;
+		expandoColumnImpl.setName(getName());
 
-		clone.setTypeSettings(getTypeSettings());
+		expandoColumnModelImpl._originalName = expandoColumnModelImpl._name;
 
-		return clone;
+		expandoColumnImpl.setType(getType());
+
+		expandoColumnImpl.setDefaultData(getDefaultData());
+
+		expandoColumnImpl.setTypeSettings(getTypeSettings());
+
+		return expandoColumnImpl;
 	}
 
 	public int compareTo(ExpandoColumn expandoColumn) {

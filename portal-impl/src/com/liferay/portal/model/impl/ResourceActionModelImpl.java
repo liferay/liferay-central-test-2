@@ -172,20 +172,23 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 	}
 
 	public Object clone() {
-		ResourceActionImpl clone = new ResourceActionImpl();
-		ResourceActionModelImpl cloneModel = (ResourceActionModelImpl)clone;
+		ResourceActionImpl resourceActionImpl = new ResourceActionImpl();
 
-		clone.setResourceActionId(getResourceActionId());
+		ResourceActionModelImpl resourceActionModelImpl = (ResourceActionModelImpl)resourceActionImpl;
 
-		clone.setName(getName());
+		resourceActionImpl.setResourceActionId(getResourceActionId());
 
-		cloneModel._originalName = cloneModel._name;
-		clone.setActionId(getActionId());
+		resourceActionImpl.setName(getName());
 
-		cloneModel._originalActionId = cloneModel._actionId;
-		clone.setBitwiseValue(getBitwiseValue());
+		resourceActionModelImpl._originalName = resourceActionModelImpl._name;
 
-		return clone;
+		resourceActionImpl.setActionId(getActionId());
+
+		resourceActionModelImpl._originalActionId = resourceActionModelImpl._actionId;
+
+		resourceActionImpl.setBitwiseValue(getBitwiseValue());
+
+		return resourceActionImpl;
 	}
 
 	public int compareTo(ResourceAction resourceAction) {

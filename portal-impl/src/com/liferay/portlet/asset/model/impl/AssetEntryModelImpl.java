@@ -500,65 +500,70 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public Object clone() {
-		AssetEntryImpl clone = new AssetEntryImpl();
-		AssetEntryModelImpl cloneModel = (AssetEntryModelImpl)clone;
+		AssetEntryImpl assetEntryImpl = new AssetEntryImpl();
 
-		clone.setEntryId(getEntryId());
+		AssetEntryModelImpl assetEntryModelImpl = (AssetEntryModelImpl)assetEntryImpl;
 
-		clone.setGroupId(getGroupId());
+		assetEntryImpl.setEntryId(getEntryId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		assetEntryImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		assetEntryModelImpl._originalGroupId = assetEntryModelImpl._groupId;
 
-		clone.setUserName(getUserName());
+		assetEntryModelImpl._setOriginalGroupId = false;
+		assetEntryImpl.setCompanyId(getCompanyId());
 
-		clone.setCreateDate(getCreateDate());
+		assetEntryImpl.setUserId(getUserId());
 
-		clone.setModifiedDate(getModifiedDate());
+		assetEntryImpl.setUserName(getUserName());
 
-		clone.setClassNameId(getClassNameId());
+		assetEntryImpl.setCreateDate(getCreateDate());
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setClassPK(getClassPK());
+		assetEntryImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalClassPK = cloneModel._classPK;
-		cloneModel._setOriginalClassPK = false;
-		clone.setClassUuid(getClassUuid());
+		assetEntryImpl.setClassNameId(getClassNameId());
 
-		cloneModel._originalClassUuid = cloneModel._classUuid;
-		clone.setVisible(getVisible());
+		assetEntryModelImpl._originalClassNameId = assetEntryModelImpl._classNameId;
 
-		clone.setStartDate(getStartDate());
+		assetEntryModelImpl._setOriginalClassNameId = false;
+		assetEntryImpl.setClassPK(getClassPK());
 
-		clone.setEndDate(getEndDate());
+		assetEntryModelImpl._originalClassPK = assetEntryModelImpl._classPK;
 
-		clone.setPublishDate(getPublishDate());
+		assetEntryModelImpl._setOriginalClassPK = false;
+		assetEntryImpl.setClassUuid(getClassUuid());
 
-		clone.setExpirationDate(getExpirationDate());
+		assetEntryModelImpl._originalClassUuid = assetEntryModelImpl._classUuid;
 
-		clone.setMimeType(getMimeType());
+		assetEntryImpl.setVisible(getVisible());
 
-		clone.setTitle(getTitle());
+		assetEntryImpl.setStartDate(getStartDate());
 
-		clone.setDescription(getDescription());
+		assetEntryImpl.setEndDate(getEndDate());
 
-		clone.setSummary(getSummary());
+		assetEntryImpl.setPublishDate(getPublishDate());
 
-		clone.setUrl(getUrl());
+		assetEntryImpl.setExpirationDate(getExpirationDate());
 
-		clone.setHeight(getHeight());
+		assetEntryImpl.setMimeType(getMimeType());
 
-		clone.setWidth(getWidth());
+		assetEntryImpl.setTitle(getTitle());
 
-		clone.setPriority(getPriority());
+		assetEntryImpl.setDescription(getDescription());
 
-		clone.setViewCount(getViewCount());
+		assetEntryImpl.setSummary(getSummary());
 
-		return clone;
+		assetEntryImpl.setUrl(getUrl());
+
+		assetEntryImpl.setHeight(getHeight());
+
+		assetEntryImpl.setWidth(getWidth());
+
+		assetEntryImpl.setPriority(getPriority());
+
+		assetEntryImpl.setViewCount(getViewCount());
+
+		return assetEntryImpl;
 	}
 
 	public int compareTo(AssetEntry assetEntry) {

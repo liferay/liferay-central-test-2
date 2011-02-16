@@ -206,28 +206,32 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 	}
 
 	public Object clone() {
-		SocialEquityGroupSettingImpl clone = new SocialEquityGroupSettingImpl();
-		SocialEquityGroupSettingModelImpl cloneModel = (SocialEquityGroupSettingModelImpl)clone;
+		SocialEquityGroupSettingImpl socialEquityGroupSettingImpl = new SocialEquityGroupSettingImpl();
 
-		clone.setEquityGroupSettingId(getEquityGroupSettingId());
+		SocialEquityGroupSettingModelImpl socialEquityGroupSettingModelImpl = (SocialEquityGroupSettingModelImpl)socialEquityGroupSettingImpl;
 
-		clone.setGroupId(getGroupId());
+		socialEquityGroupSettingImpl.setEquityGroupSettingId(getEquityGroupSettingId());
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		socialEquityGroupSettingImpl.setGroupId(getGroupId());
 
-		clone.setClassNameId(getClassNameId());
+		socialEquityGroupSettingModelImpl._originalGroupId = socialEquityGroupSettingModelImpl._groupId;
 
-		cloneModel._originalClassNameId = cloneModel._classNameId;
-		cloneModel._setOriginalClassNameId = false;
-		clone.setType(getType());
+		socialEquityGroupSettingModelImpl._setOriginalGroupId = false;
+		socialEquityGroupSettingImpl.setCompanyId(getCompanyId());
 
-		cloneModel._originalType = cloneModel._type;
-		cloneModel._setOriginalType = false;
-		clone.setEnabled(getEnabled());
+		socialEquityGroupSettingImpl.setClassNameId(getClassNameId());
 
-		return clone;
+		socialEquityGroupSettingModelImpl._originalClassNameId = socialEquityGroupSettingModelImpl._classNameId;
+
+		socialEquityGroupSettingModelImpl._setOriginalClassNameId = false;
+		socialEquityGroupSettingImpl.setType(getType());
+
+		socialEquityGroupSettingModelImpl._originalType = socialEquityGroupSettingModelImpl._type;
+
+		socialEquityGroupSettingModelImpl._setOriginalType = false;
+		socialEquityGroupSettingImpl.setEnabled(getEnabled());
+
+		return socialEquityGroupSettingImpl;
 	}
 
 	public int compareTo(SocialEquityGroupSetting socialEquityGroupSetting) {

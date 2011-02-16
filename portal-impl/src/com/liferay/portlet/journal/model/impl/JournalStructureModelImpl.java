@@ -348,40 +348,44 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 	}
 
 	public Object clone() {
-		JournalStructureImpl clone = new JournalStructureImpl();
-		JournalStructureModelImpl cloneModel = (JournalStructureModelImpl)clone;
+		JournalStructureImpl journalStructureImpl = new JournalStructureImpl();
 
-		clone.setUuid(getUuid());
+		JournalStructureModelImpl journalStructureModelImpl = (JournalStructureModelImpl)journalStructureImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setId(getId());
+		journalStructureImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		journalStructureModelImpl._originalUuid = journalStructureModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		journalStructureImpl.setId(getId());
 
-		clone.setUserId(getUserId());
+		journalStructureImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		journalStructureModelImpl._originalGroupId = journalStructureModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		journalStructureModelImpl._setOriginalGroupId = false;
+		journalStructureImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		journalStructureImpl.setUserId(getUserId());
 
-		clone.setStructureId(getStructureId());
+		journalStructureImpl.setUserName(getUserName());
 
-		cloneModel._originalStructureId = cloneModel._structureId;
-		clone.setParentStructureId(getParentStructureId());
+		journalStructureImpl.setCreateDate(getCreateDate());
 
-		clone.setName(getName());
+		journalStructureImpl.setModifiedDate(getModifiedDate());
 
-		clone.setDescription(getDescription());
+		journalStructureImpl.setStructureId(getStructureId());
 
-		clone.setXsd(getXsd());
+		journalStructureModelImpl._originalStructureId = journalStructureModelImpl._structureId;
 
-		return clone;
+		journalStructureImpl.setParentStructureId(getParentStructureId());
+
+		journalStructureImpl.setName(getName());
+
+		journalStructureImpl.setDescription(getDescription());
+
+		journalStructureImpl.setXsd(getXsd());
+
+		return journalStructureImpl;
 	}
 
 	public int compareTo(JournalStructure journalStructure) {

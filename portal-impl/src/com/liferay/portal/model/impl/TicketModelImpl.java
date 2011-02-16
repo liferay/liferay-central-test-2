@@ -196,25 +196,27 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	}
 
 	public Object clone() {
-		TicketImpl clone = new TicketImpl();
-		TicketModelImpl cloneModel = (TicketModelImpl)clone;
+		TicketImpl ticketImpl = new TicketImpl();
 
-		clone.setTicketId(getTicketId());
+		TicketModelImpl ticketModelImpl = (TicketModelImpl)ticketImpl;
 
-		clone.setCompanyId(getCompanyId());
+		ticketImpl.setTicketId(getTicketId());
 
-		clone.setCreateDate(getCreateDate());
+		ticketImpl.setCompanyId(getCompanyId());
 
-		clone.setClassNameId(getClassNameId());
+		ticketImpl.setCreateDate(getCreateDate());
 
-		clone.setClassPK(getClassPK());
+		ticketImpl.setClassNameId(getClassNameId());
 
-		clone.setKey(getKey());
+		ticketImpl.setClassPK(getClassPK());
 
-		cloneModel._originalKey = cloneModel._key;
-		clone.setExpirationDate(getExpirationDate());
+		ticketImpl.setKey(getKey());
 
-		return clone;
+		ticketModelImpl._originalKey = ticketModelImpl._key;
+
+		ticketImpl.setExpirationDate(getExpirationDate());
+
+		return ticketImpl;
 	}
 
 	public int compareTo(Ticket ticket) {

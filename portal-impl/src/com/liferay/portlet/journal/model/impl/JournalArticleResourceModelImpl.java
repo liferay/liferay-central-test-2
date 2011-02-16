@@ -181,23 +181,26 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	}
 
 	public Object clone() {
-		JournalArticleResourceImpl clone = new JournalArticleResourceImpl();
-		JournalArticleResourceModelImpl cloneModel = (JournalArticleResourceModelImpl)clone;
+		JournalArticleResourceImpl journalArticleResourceImpl = new JournalArticleResourceImpl();
 
-		clone.setUuid(getUuid());
+		JournalArticleResourceModelImpl journalArticleResourceModelImpl = (JournalArticleResourceModelImpl)journalArticleResourceImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setResourcePrimKey(getResourcePrimKey());
+		journalArticleResourceImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		journalArticleResourceModelImpl._originalUuid = journalArticleResourceModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setArticleId(getArticleId());
+		journalArticleResourceImpl.setResourcePrimKey(getResourcePrimKey());
 
-		cloneModel._originalArticleId = cloneModel._articleId;
+		journalArticleResourceImpl.setGroupId(getGroupId());
 
-		return clone;
+		journalArticleResourceModelImpl._originalGroupId = journalArticleResourceModelImpl._groupId;
+
+		journalArticleResourceModelImpl._setOriginalGroupId = false;
+		journalArticleResourceImpl.setArticleId(getArticleId());
+
+		journalArticleResourceModelImpl._originalArticleId = journalArticleResourceModelImpl._articleId;
+
+		return journalArticleResourceImpl;
 	}
 
 	public int compareTo(JournalArticleResource journalArticleResource) {

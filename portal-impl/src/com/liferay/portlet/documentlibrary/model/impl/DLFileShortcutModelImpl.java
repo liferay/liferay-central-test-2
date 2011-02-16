@@ -390,43 +390,46 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	}
 
 	public Object clone() {
-		DLFileShortcutImpl clone = new DLFileShortcutImpl();
-		DLFileShortcutModelImpl cloneModel = (DLFileShortcutModelImpl)clone;
+		DLFileShortcutImpl dlFileShortcutImpl = new DLFileShortcutImpl();
 
-		clone.setUuid(getUuid());
+		DLFileShortcutModelImpl dlFileShortcutModelImpl = (DLFileShortcutModelImpl)dlFileShortcutImpl;
 
-		cloneModel._originalUuid = cloneModel._uuid;
-		clone.setFileShortcutId(getFileShortcutId());
+		dlFileShortcutImpl.setUuid(getUuid());
 
-		clone.setGroupId(getGroupId());
+		dlFileShortcutModelImpl._originalUuid = dlFileShortcutModelImpl._uuid;
 
-		cloneModel._originalGroupId = cloneModel._groupId;
-		cloneModel._setOriginalGroupId = false;
-		clone.setCompanyId(getCompanyId());
+		dlFileShortcutImpl.setFileShortcutId(getFileShortcutId());
 
-		clone.setUserId(getUserId());
+		dlFileShortcutImpl.setGroupId(getGroupId());
 
-		clone.setUserName(getUserName());
+		dlFileShortcutModelImpl._originalGroupId = dlFileShortcutModelImpl._groupId;
 
-		clone.setCreateDate(getCreateDate());
+		dlFileShortcutModelImpl._setOriginalGroupId = false;
+		dlFileShortcutImpl.setCompanyId(getCompanyId());
 
-		clone.setModifiedDate(getModifiedDate());
+		dlFileShortcutImpl.setUserId(getUserId());
 
-		clone.setRepositoryId(getRepositoryId());
+		dlFileShortcutImpl.setUserName(getUserName());
 
-		clone.setFolderId(getFolderId());
+		dlFileShortcutImpl.setCreateDate(getCreateDate());
 
-		clone.setToFileEntryId(getToFileEntryId());
+		dlFileShortcutImpl.setModifiedDate(getModifiedDate());
 
-		clone.setStatus(getStatus());
+		dlFileShortcutImpl.setRepositoryId(getRepositoryId());
 
-		clone.setStatusByUserId(getStatusByUserId());
+		dlFileShortcutImpl.setFolderId(getFolderId());
 
-		clone.setStatusByUserName(getStatusByUserName());
+		dlFileShortcutImpl.setToFileEntryId(getToFileEntryId());
 
-		clone.setStatusDate(getStatusDate());
+		dlFileShortcutImpl.setStatus(getStatus());
 
-		return clone;
+		dlFileShortcutImpl.setStatusByUserId(getStatusByUserId());
+
+		dlFileShortcutImpl.setStatusByUserName(getStatusByUserName());
+
+		dlFileShortcutImpl.setStatusDate(getStatusDate());
+
+		return dlFileShortcutImpl;
 	}
 
 	public int compareTo(DLFileShortcut dlFileShortcut) {
