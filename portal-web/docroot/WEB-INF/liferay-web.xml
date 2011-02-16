@@ -214,7 +214,7 @@
 		</init-param>
 		<init-param>
 			<param-name>portal_property_prefix</param-name>
-			<param-value>private.rss.feeds.</param-value>
+			<param-value>rss.feeds.</param-value>
 		</init-param>
 		<init-param>
 			<param-name>url-regex-pattern</param-name>
