@@ -43,6 +43,7 @@ public class LayoutRevisionSoap implements Serializable {
 		soapModel.setHead(model.getHead());
 		soapModel.setMajor(model.getMajor());
 		soapModel.setPlid(model.getPlid());
+		soapModel.setPrivateLayout(model.getPrivateLayout());
 		soapModel.setName(model.getName());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setDescription(model.getDescription());
@@ -216,6 +217,18 @@ public class LayoutRevisionSoap implements Serializable {
 		_plid = plid;
 	}
 
+	public boolean getPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public boolean isPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public void setPrivateLayout(boolean privateLayout) {
+		_privateLayout = privateLayout;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -368,6 +381,7 @@ public class LayoutRevisionSoap implements Serializable {
 	private boolean _head;
 	private boolean _major;
 	private long _plid;
+	private boolean _privateLayout;
 	private String _name;
 	private String _title;
 	private String _description;

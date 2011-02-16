@@ -80,6 +80,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "head", Types.BOOLEAN },
 			{ "major", Types.BOOLEAN },
 			{ "plid", Types.BIGINT },
+			{ "privateLayout", Types.BOOLEAN },
 			{ "name", Types.VARCHAR },
 			{ "title", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
@@ -98,7 +99,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 			{ "statusByUserName", Types.VARCHAR },
 			{ "statusDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutSetBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,major BOOLEAN,plid LONG,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutRevision (layoutRevisionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,layoutSetBranchId LONG,parentLayoutRevisionId LONG,head BOOLEAN,major BOOLEAN,plid LONG,privateLayout BOOLEAN,name STRING null,title STRING null,description STRING null,keywords STRING null,robots STRING null,typeSettings TEXT null,iconImage BOOLEAN,iconImageId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutRevision";
 	public static final String ORDER_BY_JPQL = " ORDER BY layoutRevision.layoutRevisionId DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY LayoutRevision.layoutRevisionId DESC";
@@ -133,6 +134,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		model.setHead(soapModel.getHead());
 		model.setMajor(soapModel.getMajor());
 		model.setPlid(soapModel.getPlid());
+		model.setPrivateLayout(soapModel.getPrivateLayout());
 		model.setName(soapModel.getName());
 		model.setTitle(soapModel.getTitle());
 		model.setDescription(soapModel.getDescription());
@@ -333,6 +335,18 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 
 	public long getOriginalPlid() {
 		return _originalPlid;
+	}
+
+	public boolean getPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public boolean isPrivateLayout() {
+		return _privateLayout;
+	}
+
+	public void setPrivateLayout(boolean privateLayout) {
+		_privateLayout = privateLayout;
 	}
 
 	public String getName() {
@@ -1007,6 +1021,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		clone.setHead(getHead());
 		clone.setMajor(getMajor());
 		clone.setPlid(getPlid());
+		clone.setPrivateLayout(getPrivateLayout());
 		clone.setName(getName());
 		clone.setTitle(getTitle());
 		clone.setDescription(getDescription());
@@ -1079,7 +1094,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(59);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("{layoutRevisionId=");
 		sb.append(getLayoutRevisionId());
@@ -1105,6 +1120,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(getMajor());
 		sb.append(", plid=");
 		sb.append(getPlid());
+		sb.append(", privateLayout=");
+		sb.append(getPrivateLayout());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", title=");
@@ -1145,7 +1162,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(91);
+		StringBundler sb = new StringBundler(94);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.LayoutRevision");
@@ -1198,6 +1215,10 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		sb.append(
 			"<column><column-name>plid</column-name><column-value><![CDATA[");
 		sb.append(getPlid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>privateLayout</column-name><column-value><![CDATA[");
+		sb.append(getPrivateLayout());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
@@ -1292,6 +1313,7 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	private long _plid;
 	private long _originalPlid;
 	private boolean _setOriginalPlid;
+	private boolean _privateLayout;
 	private String _name;
 	private String _title;
 	private String _description;

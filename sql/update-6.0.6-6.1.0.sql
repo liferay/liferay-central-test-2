@@ -91,6 +91,7 @@ create table LayoutRevision (
 	head BOOLEAN,
 	major BOOLEAN,
 	plid LONG,
+	privateLayout BOOLEAN,
 	name STRING null,
 	title STRING null,
 	description STRING null,

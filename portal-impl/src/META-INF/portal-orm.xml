@@ -316,6 +316,7 @@
 			<basic name="head" />
 			<basic name="major" />
 			<basic name="plid" />
+			<basic name="privateLayout" />
 			<basic name="name" />
 			<basic name="title" />
 			<basic name="description" />

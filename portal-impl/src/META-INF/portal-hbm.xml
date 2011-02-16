@@ -383,6 +383,7 @@
 		<property name="head" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="major" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="plid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="privateLayout" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />

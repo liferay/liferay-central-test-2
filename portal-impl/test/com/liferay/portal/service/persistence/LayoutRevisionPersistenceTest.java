@@ -75,6 +75,7 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		newLayoutRevision.setHead(randomBoolean());
 		newLayoutRevision.setMajor(randomBoolean());
 		newLayoutRevision.setPlid(nextLong());
+		newLayoutRevision.setPrivateLayout(randomBoolean());
 		newLayoutRevision.setName(randomString());
 		newLayoutRevision.setTitle(randomString());
 		newLayoutRevision.setDescription(randomString());
@@ -123,6 +124,8 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 			newLayoutRevision.getMajor());
 		assertEquals(existingLayoutRevision.getPlid(),
 			newLayoutRevision.getPlid());
+		assertEquals(existingLayoutRevision.getPrivateLayout(),
+			newLayoutRevision.getPrivateLayout());
 		assertEquals(existingLayoutRevision.getName(),
 			newLayoutRevision.getName());
 		assertEquals(existingLayoutRevision.getTitle(),
@@ -242,6 +245,7 @@ public class LayoutRevisionPersistenceTest extends BasePersistenceTestCase {
 		layoutRevision.setHead(randomBoolean());
 		layoutRevision.setMajor(randomBoolean());
 		layoutRevision.setPlid(nextLong());
+		layoutRevision.setPrivateLayout(randomBoolean());
 		layoutRevision.setName(randomString());
 		layoutRevision.setTitle(randomString());
 		layoutRevision.setDescription(randomString());

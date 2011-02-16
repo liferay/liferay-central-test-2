@@ -259,6 +259,27 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision> {
 	public void setPlid(long plid);
 
 	/**
+	 * Gets the private layout of this layout revision.
+	 *
+	 * @return the private layout of this layout revision
+	 */
+	public boolean getPrivateLayout();
+
+	/**
+	 * Determines if this layout revision is private layout.
+	 *
+	 * @return <code>true</code> if this layout revision is private layout; <code>false</code> otherwise
+	 */
+	public boolean isPrivateLayout();
+
+	/**
+	 * Sets whether this layout revision is private layout.
+	 *
+	 * @param privateLayout the private layout of this layout revision
+	 */
+	public void setPrivateLayout(boolean privateLayout);
+
+	/**
 	 * Gets the name of this layout revision.
 	 *
 	 * @return the name of this layout revision
