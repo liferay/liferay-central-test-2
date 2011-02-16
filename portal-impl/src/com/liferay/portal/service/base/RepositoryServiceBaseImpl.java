@@ -190,6 +190,7 @@ import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.WorkflowInstanceLinkPersistence;
 
+import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
@@ -3368,6 +3369,25 @@ public abstract class RepositoryServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
+	 * Gets the d l app helper local service.
+	 *
+	 * @return the d l app helper local service
+	 */
+	public DLAppHelperLocalService getDLAppHelperLocalService() {
+		return dlAppHelperLocalService;
+	}
+
+	/**
+	 * Sets the d l app helper local service.
+	 *
+	 * @param dlAppHelperLocalService the d l app helper local service
+	 */
+	public void setDLAppHelperLocalService(
+		DLAppHelperLocalService dlAppHelperLocalService) {
+		this.dlAppHelperLocalService = dlAppHelperLocalService;
+	}
+
+	/**
 	 * Gets the d l repository local service.
 	 *
 	 * @return the d l repository local service
@@ -3819,6 +3839,8 @@ public abstract class RepositoryServiceBaseImpl extends PrincipalBean
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	@BeanReference(type = DLAppHelperLocalService.class)
+	protected DLAppHelperLocalService dlAppHelperLocalService;
 	@BeanReference(type = DLRepositoryLocalService.class)
 	protected DLRepositoryLocalService dlRepositoryLocalService;
 	@BeanReference(type = DLRepositoryService.class)

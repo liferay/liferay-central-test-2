@@ -157,7 +157,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		int type = getRepositoryType(repositoryId);
 
 		if (type == 0) {
-			localRepositoryImpl = new LiferayLocalRepository(repositoryId);
+			localRepositoryImpl = new LiferayLocalRepository(
+				repositoryService, dlRepositoryLocalService,
+				dlRepositoryService, repositoryId);
 		}
 		else {
 			BaseRepositoryImpl baseRepositoryImpl = createRepositoryImpl(
@@ -188,6 +190,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 
 		localRepositoryImpl = new LiferayLocalRepository(
+			repositoryService, dlRepositoryLocalService, dlRepositoryService,
 			folderId, fileEntryId, fileVersionId);
 
 		if (localRepositoryImpl.getRepositoryId() == 0) {
@@ -230,7 +233,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		int type = getRepositoryType(repositoryId);
 
 		if (type == 0) {
-			repositoryImpl = new LiferayRepository(repositoryId);
+			repositoryImpl = new LiferayRepository(
+				repositoryService, dlRepositoryLocalService,
+				dlRepositoryService, repositoryId);
 		}
 		else {
 			repositoryImpl = createRepositoryImpl(repositoryId, type);
@@ -258,6 +263,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 
 		repositoryImpl = new LiferayRepository(
+			repositoryService, dlRepositoryLocalService, dlRepositoryService,
 			folderId, fileEntryId, fileVersionId);
 
 		if (repositoryImpl.getRepositoryId() == 0) {
@@ -372,6 +378,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		throws RepositoryException {
 
 		try {
+			Repository repository = getRepository(repositoryId);
+
 			String repositoryImplClassName = PropsUtil.get(
 				PropsKeys.DL_REPOSITORY_IMPL, new Filter(String.valueOf(type)));
 
@@ -379,10 +387,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				(BaseRepositoryImpl)InstanceFactory.newInstance(
 					repositoryImplClassName);
 
+			baseRepositoryImpl.setDLAppHelperLocalService(
+				dlAppHelperLocalService);
 			baseRepositoryImpl.setRepositoryId(repositoryId);
-
-			Repository repository = getRepository(repositoryId);
-
 			baseRepositoryImpl.setTypeSettingsProperties(
 				repository.getTypeSettingsProperties());
 

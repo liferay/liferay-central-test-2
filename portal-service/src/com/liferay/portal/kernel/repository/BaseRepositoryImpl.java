@@ -18,7 +18,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
+
+import java.util.List;
 
 /**
  * This class is used by third-party repository implementations. All classes
@@ -48,8 +52,26 @@ public abstract class BaseRepositoryImpl implements Repository {
 		deleteFolder(folder.getFolderId());
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
 	public LocalRepository getLocalRepository() {
 		return _localRepository;
+	}
+
+	public List<FileEntry> getRepositoryFileEntries(
+			long userId, long rootFolderId, int start, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return getFileEntries(rootFolderId, start, end, obc);
+	}
+
+	public int getRepositoryFileEntriesCount(long userId, long rootFolderId)
+		throws SystemException {
+
+		return getFileEntriesCount(rootFolderId);
 	}
 
 	public long getRepositoryId() {
@@ -61,6 +83,16 @@ public abstract class BaseRepositoryImpl implements Repository {
 	}
 
 	public abstract void initRepository() throws RepositoryException;
+
+	public void setDLAppHelperLocalService(
+		DLAppHelperLocalService dlAppHelperLocalService) {
+
+		this.dlAppHelperLocalService = dlAppHelperLocalService;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
 
 	public void setRepositoryId(long repositoryId) {
 		_repositoryId = repositoryId;
@@ -80,8 +112,11 @@ public abstract class BaseRepositoryImpl implements Repository {
 		unlockFolder(folder.getFolderId(), lockUuid);
 	}
 
+	protected DLAppHelperLocalService dlAppHelperLocalService;
+
 	private LocalRepository _localRepository = new BaseLocalRepositoryImpl(
 		this);
+	private long _groupId;
 	private long _repositoryId;
 	private UnicodeProperties _typeSettingsProperties;
 

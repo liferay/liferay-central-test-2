@@ -53,7 +53,7 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 	}
 
 	public String getChangeLog() {
-		return null;
+		return _document.getCheckinComment();
 	}
 
 	public long getCompanyId() {
