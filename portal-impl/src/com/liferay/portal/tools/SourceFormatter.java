@@ -858,6 +858,9 @@ public class SourceFormatter {
 					"* Copyright (c) 2000-2011 Liferay, Inc."
 				});
 
+			line = _replacePrimitiveWrapperInstantiation(
+				fileName, line, lineCount);
+
 			sb.append(line);
 			sb.append("\n");
 
@@ -1088,6 +1091,9 @@ public class SourceFormatter {
 				_sourceFormatterHelper.printError(
 					fileName, "aui:button " + fileName + " " + lineCount);
 			}
+
+			line = _replacePrimitiveWrapperInstantiation(
+				fileName, line, lineCount);
 
 			sb.append(line);
 			sb.append("\n");
@@ -1495,6 +1501,32 @@ public class SourceFormatter {
 		_exclusionsProperties.load(inputStream);
 
 		inputStream.close();
+	}
+
+	private static String _replacePrimitiveWrapperInstantiation(
+		String fileName, String line, int lineCount) {
+
+		if (true) {
+			return line;
+		}
+
+		String newLine = StringUtil.replace(
+			line,
+			new String[] {
+				"new Boolean(", "new Byte(", "new Character(",
+				"new Integer(", "new Long(", "new Short("
+			},
+			new String[] {
+				"Boolean.valueOf(", "Byte.valueOf(", "Character.valueOf(",
+				"Integer.valueOf(", "Long.valueOf(", "Short.valueOf("
+			});
+
+		if (!line.equals(newLine)) {
+			_sourceFormatterHelper.printError(
+				fileName, "> new Primitive(: " + fileName + " " + lineCount);
+		}
+
+		return newLine;
 	}
 
 	private static final String[] _TAG_LIBRARIES = new String[] {
