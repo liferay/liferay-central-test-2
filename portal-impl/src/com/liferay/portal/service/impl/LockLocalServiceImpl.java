@@ -19,6 +19,8 @@ import com.liferay.portal.ExpiredLockException;
 import com.liferay.portal.NoSuchLockException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.base.LockLocalServiceBaseImpl;
@@ -111,6 +113,42 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 		}
 
 		return false;
+	}
+
+	@Transactional(isolation = Isolation.SERIALIZABLE)
+	public Lock lock(
+			String className, String key, String owner,
+			boolean retrieveFromCache, boolean replaceOldLock)
+		throws PortalException, SystemException {
+
+		Lock lock = lockPersistence.fetchByC_K(
+			className, key, retrieveFromCache);
+
+		if (lock != null) {
+			if (lock.isExpired() || replaceOldLock) {
+				lockPersistence.remove(lock);
+
+				lock = null;
+			}
+			else if (!lock.getOwner().equals(owner)) {
+				return lock;
+			}
+		}
+
+		if (lock == null) {
+			long lockId = counterLocalService.increment();
+
+			lock = lockPersistence.create(lockId);
+
+			lock.setClassName(className);
+			lock.setKey(key);
+			lock.setOwner(owner);
+			lock.setCreateDate(new Date());
+
+			lockPersistence.update(lock, false);
+		}
+
+		return lock;
 	}
 
 	public Lock lock(
