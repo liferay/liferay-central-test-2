@@ -254,6 +254,11 @@
 			<bean class="com.liferay.portal.util.HttpImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.util.LayoutTypePortletFactoryUtil" class="com.liferay.portal.kernel.util.LayoutTypePortletFactoryUtil">
+		<property name="layoutTypePortletFactory">
+			<bean class="com.liferay.portal.util.LayoutTypePortletFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.util.LocalizationUtil" class="com.liferay.portal.kernel.util.LocalizationUtil">
 		<property name="localization">
 			<bean class="com.liferay.portal.util.LocalizationImpl" />
