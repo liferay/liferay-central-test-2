@@ -263,11 +263,11 @@ public class LayoutRevisionLocalServiceImpl
 	}
 
 	public List<LayoutRevision> getLayoutRevisions(
-			long layoutSetBranchId, long plid, long parentLayoutRevision)
+			long layoutSetBranchId, long parentLayoutRevisionId, long plid)
 		throws SystemException {
 
 		return layoutRevisionPersistence.findByL_P_P(
-			layoutSetBranchId, plid, parentLayoutRevision);
+			layoutSetBranchId, parentLayoutRevisionId, plid);
 	}
 
 	public LayoutRevision updateLayoutRevision(

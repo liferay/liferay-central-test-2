@@ -1190,11 +1190,6 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 		return _layoutRevision.getChildren();
 	}
 
-	public boolean hasChildren()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _layoutRevision.hasChildren();
-	}
-
 	public com.liferay.portal.model.ColorScheme getColorScheme()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1241,6 +1236,11 @@ public class LayoutRevisionWrapper implements LayoutRevision {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutRevision.getWapTheme();
+	}
+
+	public boolean hasChildren()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevision.hasChildren();
 	}
 
 	public boolean isInheritLookAndFeel() {

@@ -41,15 +41,7 @@ public class LayoutRevisionImpl
 
 	public List<LayoutRevision> getChildren() throws SystemException {
 		return LayoutRevisionLocalServiceUtil.getLayoutRevisions(
-			getLayoutSetBranchId(), getPlid(), getLayoutRevisionId());
-	}
-
-	public boolean hasChildren() throws SystemException {
-		if (!getChildren().isEmpty()) {
-			return true;
-		}
-
-		return false;
+			getLayoutSetBranchId(), getLayoutRevisionId(), getPlid());
 	}
 
 	public ColorScheme getColorScheme()
@@ -145,6 +137,14 @@ public class LayoutRevisionImpl
 			return ThemeLocalServiceUtil.getTheme(
 				getCompanyId(), getWapThemeId(), true);
 		}
+	}
+
+	public boolean hasChildren() throws SystemException {
+		if (!getChildren().isEmpty()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isInheritLookAndFeel() {

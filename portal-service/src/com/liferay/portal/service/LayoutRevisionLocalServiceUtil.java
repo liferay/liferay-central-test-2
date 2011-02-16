@@ -302,11 +302,11 @@ public class LayoutRevisionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
-		long layoutSetBranchId, long plid, long parentLayoutRevision)
+		long layoutSetBranchId, long parentLayoutRevisionId, long plid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .getLayoutRevisions(layoutSetBranchId, plid,
-			parentLayoutRevision);
+				   .getLayoutRevisions(layoutSetBranchId,
+			parentLayoutRevisionId, plid);
 	}
 
 	public static com.liferay.portal.model.LayoutRevision updateLayoutRevision(

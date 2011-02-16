@@ -32,9 +32,6 @@ public interface LayoutRevision extends LayoutRevisionModel {
 	public java.util.List<com.liferay.portal.model.LayoutRevision> getChildren()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public boolean hasChildren()
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	public com.liferay.portal.model.ColorScheme getColorScheme()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -66,6 +63,9 @@ public interface LayoutRevision extends LayoutRevisionModel {
 	public com.liferay.portal.model.Theme getWapTheme()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public boolean hasChildren()
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isInheritLookAndFeel();
 

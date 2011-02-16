@@ -1007,76 +1007,80 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	}
 
 	public Object clone() {
-		LayoutRevisionImpl clone = new LayoutRevisionImpl();
-		LayoutRevisionModelImpl cloneModel = (LayoutRevisionModelImpl)clone;
+		LayoutRevisionImpl layoutRevisionImpl = new LayoutRevisionImpl();
 
-		clone.setLayoutRevisionId(getLayoutRevisionId());
+		LayoutRevisionModelImpl layoutRevisionModelImpl = layoutRevisionImpl;
 
-		clone.setGroupId(getGroupId());
+		layoutRevisionImpl.setLayoutRevisionId(getLayoutRevisionId());
 
-		clone.setCompanyId(getCompanyId());
+		layoutRevisionImpl.setGroupId(getGroupId());
 
-		clone.setUserId(getUserId());
+		layoutRevisionImpl.setCompanyId(getCompanyId());
 
-		clone.setUserName(getUserName());
+		layoutRevisionImpl.setUserId(getUserId());
 
-		clone.setCreateDate(getCreateDate());
+		layoutRevisionImpl.setUserName(getUserName());
 
-		clone.setModifiedDate(getModifiedDate());
+		layoutRevisionImpl.setCreateDate(getCreateDate());
 
-		clone.setLayoutSetBranchId(getLayoutSetBranchId());
+		layoutRevisionImpl.setModifiedDate(getModifiedDate());
 
-		cloneModel._originalLayoutSetBranchId = cloneModel._layoutSetBranchId;
-		cloneModel._setOriginalLayoutSetBranchId = false;
-		clone.setParentLayoutRevisionId(getParentLayoutRevisionId());
+		layoutRevisionImpl.setLayoutSetBranchId(getLayoutSetBranchId());
 
-		clone.setHead(getHead());
+		layoutRevisionModelImpl._originalLayoutSetBranchId = layoutRevisionModelImpl._layoutSetBranchId;
 
-		cloneModel._originalHead = cloneModel._head;
-		cloneModel._setOriginalHead = false;
-		clone.setMajor(getMajor());
+		layoutRevisionModelImpl._setOriginalLayoutSetBranchId = false;
+		layoutRevisionImpl.setParentLayoutRevisionId(getParentLayoutRevisionId());
 
-		clone.setPlid(getPlid());
+		layoutRevisionImpl.setHead(getHead());
 
-		cloneModel._originalPlid = cloneModel._plid;
-		cloneModel._setOriginalPlid = false;
-		clone.setPrivateLayout(getPrivateLayout());
+		layoutRevisionModelImpl._originalHead = layoutRevisionModelImpl._head;
 
-		clone.setName(getName());
+		layoutRevisionModelImpl._setOriginalHead = false;
+		layoutRevisionImpl.setMajor(getMajor());
 
-		clone.setTitle(getTitle());
+		layoutRevisionImpl.setPlid(getPlid());
 
-		clone.setDescription(getDescription());
+		layoutRevisionModelImpl._originalPlid = layoutRevisionModelImpl._plid;
 
-		clone.setKeywords(getKeywords());
+		layoutRevisionModelImpl._setOriginalPlid = false;
+		layoutRevisionImpl.setPrivateLayout(getPrivateLayout());
 
-		clone.setRobots(getRobots());
+		layoutRevisionImpl.setName(getName());
 
-		clone.setTypeSettings(getTypeSettings());
+		layoutRevisionImpl.setTitle(getTitle());
 
-		clone.setIconImage(getIconImage());
+		layoutRevisionImpl.setDescription(getDescription());
 
-		clone.setIconImageId(getIconImageId());
+		layoutRevisionImpl.setKeywords(getKeywords());
 
-		clone.setThemeId(getThemeId());
+		layoutRevisionImpl.setRobots(getRobots());
 
-		clone.setColorSchemeId(getColorSchemeId());
+		layoutRevisionImpl.setTypeSettings(getTypeSettings());
 
-		clone.setWapThemeId(getWapThemeId());
+		layoutRevisionImpl.setIconImage(getIconImage());
 
-		clone.setWapColorSchemeId(getWapColorSchemeId());
+		layoutRevisionImpl.setIconImageId(getIconImageId());
 
-		clone.setCss(getCss());
+		layoutRevisionImpl.setThemeId(getThemeId());
 
-		clone.setStatus(getStatus());
+		layoutRevisionImpl.setColorSchemeId(getColorSchemeId());
 
-		clone.setStatusByUserId(getStatusByUserId());
+		layoutRevisionImpl.setWapThemeId(getWapThemeId());
 
-		clone.setStatusByUserName(getStatusByUserName());
+		layoutRevisionImpl.setWapColorSchemeId(getWapColorSchemeId());
 
-		clone.setStatusDate(getStatusDate());
+		layoutRevisionImpl.setCss(getCss());
 
-		return clone;
+		layoutRevisionImpl.setStatus(getStatus());
+
+		layoutRevisionImpl.setStatusByUserId(getStatusByUserId());
+
+		layoutRevisionImpl.setStatusByUserName(getStatusByUserName());
+
+		layoutRevisionImpl.setStatusDate(getStatusDate());
+
+		return layoutRevisionImpl;
 	}
 
 	public int compareTo(LayoutRevision layoutRevision) {

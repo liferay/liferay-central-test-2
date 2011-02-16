@@ -296,10 +296,10 @@ public class LayoutRevisionLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
-		long layoutSetBranchId, long plid, long parentLayoutRevision)
+		long layoutSetBranchId, long parentLayoutRevisionId, long plid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutRevisionLocalService.getLayoutRevisions(layoutSetBranchId,
-			plid, parentLayoutRevision);
+			parentLayoutRevisionId, plid);
 	}
 
 	public com.liferay.portal.model.LayoutRevision updateLayoutRevision(
