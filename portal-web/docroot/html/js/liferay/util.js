@@ -1405,32 +1405,28 @@
 		'toggleRadio',
 		function(radioId, showBoxId, hideBoxIds) {
 			var radioButton = A.one('#' + radioId);
-
 			var showBox = A.one('#' + showBoxId);
 
 			if (radioButton && showBox) {
 				var checked = radioButton.get('checked');
 
-				if (checked) {
-					showBox.show();
-				}
-				else {
-					showBox.hide();
-				}
+				showBox.toggle(checked);
 
 				radioButton.on(
 					'change',
 					function() {
 						showBox.show();
 
-						if (A.Lang.isArray(hideBoxIds)) {
-							for (var hideBoxId in hideBoxIds) {
-								A.one('#' + hideBoxId).hide();
-							}
+						var hideBox;
+
+						if (isArray(hideBoxIds)) {
+							hideBox = A.all('#' + hideBoxIds.join(',#'));
 						}
 						else {
-							A.one('#' + hideBoxIds).hide();
+							hideBox = A.one('#' + hideBoxIds);
 						}
+
+						hideBox.hide();
 					}
 				);
 			}
