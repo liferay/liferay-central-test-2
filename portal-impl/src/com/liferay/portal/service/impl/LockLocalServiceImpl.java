@@ -115,42 +115,6 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 		return false;
 	}
 
-	@Transactional(isolation = Isolation.SERIALIZABLE)
-	public Lock lock(
-			String className, String key, String owner,
-			boolean retrieveFromCache, boolean replaceOldLock)
-		throws PortalException, SystemException {
-
-		Lock lock = lockPersistence.fetchByC_K(
-			className, key, retrieveFromCache);
-
-		if (lock != null) {
-			if (lock.isExpired() || replaceOldLock) {
-				lockPersistence.remove(lock);
-
-				lock = null;
-			}
-			else if (!lock.getOwner().equals(owner)) {
-				return lock;
-			}
-		}
-
-		if (lock == null) {
-			long lockId = counterLocalService.increment();
-
-			lock = lockPersistence.create(lockId);
-
-			lock.setClassName(className);
-			lock.setKey(key);
-			lock.setOwner(owner);
-			lock.setCreateDate(new Date());
-
-			lockPersistence.update(lock, false);
-		}
-
-		return lock;
-	}
-
 	public Lock lock(
 			long userId, String className, long key, String owner,
 			boolean inheritable, long expirationTime)
@@ -208,6 +172,42 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 		}
 
 		lockPersistence.update(lock, false);
+
+		return lock;
+	}
+
+	@Transactional(isolation = Isolation.SERIALIZABLE)
+	public Lock lock(
+			String className, String key, String owner,
+			boolean retrieveFromCache, boolean replaceOldLock)
+		throws SystemException {
+
+		Lock lock = lockPersistence.fetchByC_K(
+			className, key, retrieveFromCache);
+
+		if (lock != null) {
+			if (lock.isExpired() || replaceOldLock) {
+				lockPersistence.remove(lock);
+
+				lock = null;
+			}
+			else if (!lock.getOwner().equals(owner)) {
+				return lock;
+			}
+		}
+
+		if (lock == null) {
+			long lockId = counterLocalService.increment();
+
+			lock = lockPersistence.create(lockId);
+
+			lock.setCreateDate(new Date());
+			lock.setClassName(className);
+			lock.setKey(key);
+			lock.setOwner(owner);
+
+			lockPersistence.update(lock, false);
+		}
 
 		return lock;
 	}
