@@ -218,10 +218,12 @@
 		<field name="layoutId" type="long" />
 		<field name="parentLayoutId" type="long" />
 		<field name="name" type="String" localized="true">
+			<hint name="display-width">150</hint>
 			<hint name="max-length">4000</hint>
 			<validator name="required" />
 		</field>
 		<field name="title" type="String" localized="true">
+			<hint name="display-width">150</hint>
 			<hint name="max-length">4000</hint>
 		</field>
 		<field name="description" type="String" localized="true">
@@ -242,6 +244,7 @@
 		</field>
 		<field name="hidden" type="boolean" />
 		<field name="friendlyURL" type="String">
+			<hint name="display-width">150</hint>
 			<hint name="max-length">255</hint>
 		</field>
 		<field name="iconImage" type="boolean" />

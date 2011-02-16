@@ -47,12 +47,11 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
+import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -99,6 +98,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  */
 public class EditLayoutsAction extends PortletAction {
 
@@ -135,12 +135,6 @@ public class EditLayoutsAction extends PortletAction {
 			}
 			else if (cmd.equals("display_order")) {
 				updateDisplayOrder(actionRequest);
-			}
-			else if (cmd.equals("look_and_feel")) {
-				updateLookAndFeel(actionRequest);
-			}
-			else if (cmd.equals("merge_pages")) {
-				updateMergePages(actionRequest);
 			}
 			else if (cmd.equals("publish_to_live")) {
 				StagingUtil.publishToLive(actionRequest);
@@ -420,12 +414,19 @@ public class EditLayoutsAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
 		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
+		long stagingGroupId = ParamUtil.getLong(
+			actionRequest, "stagingGroupId");
+
 		boolean privateLayout = ParamUtil.getBoolean(
 			actionRequest, "privateLayout");
 		long layoutId = ParamUtil.getLong(actionRequest, "layoutId");
@@ -513,7 +514,7 @@ public class EditLayoutsAction extends PortletAction {
 				ActionUtil.copyLookAndFeel(layout, layoutPrototypeLayout);
 			}
 			else {
-				LayoutServiceUtil.addLayout(
+				layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, nameMap,
 					titleMap, descriptionMap, keywordsMap, robotsMap, type,
 					hidden, friendlyURL, serviceContext);
@@ -593,82 +594,69 @@ public class EditLayoutsAction extends PortletAction {
 				response);
 		}
 
+		updateLookAndFeel(
+			actionRequest, themeDisplay.getCompanyId(), liveGroupId,
+			stagingGroupId, privateLayout, layout.getLayoutId());
+
 		return new Object[] {layout, oldFriendlyURL};
 	}
 
-	protected void updateLookAndFeel(ActionRequest actionRequest)
-		throws Exception {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long companyId = themeDisplay.getCompanyId();
-
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
-		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
-
-		boolean privateLayout = ParamUtil.getBoolean(
-			actionRequest, "privateLayout");
-		long layoutId = ParamUtil.getLong(actionRequest, "layoutId");
-		String themeId = ParamUtil.getString(actionRequest, "themeId");
-		String colorSchemeId = ParamUtil.getString(
-			actionRequest, "colorSchemeId");
-		String css = ParamUtil.getString(actionRequest, "css");
-		boolean wapTheme = ParamUtil.getBoolean(actionRequest, "wapTheme");
-
-		if (stagingGroupId > 0) {
-			updateLookAndFeel(
-				companyId, stagingGroupId, privateLayout, layoutId, themeId,
-				colorSchemeId, css, wapTheme);
-		}
-		else {
-			updateLookAndFeel(
-				companyId, liveGroupId, privateLayout, layoutId, themeId,
-				colorSchemeId, css, wapTheme);
-		}
-	}
-
 	protected void updateLookAndFeel(
-			long companyId, long groupId, boolean privateLayout, long layoutId,
-			String themeId, String colorSchemeId, String css, boolean wapTheme)
+			ActionRequest actionRequest, long companyId, long liveGroupId,
+			long stagingGroupId, boolean privateLayout, long layoutId)
 		throws Exception {
 
-		if (Validator.isNotNull(themeId) && Validator.isNull(colorSchemeId)) {
-			ColorScheme colorScheme = ThemeLocalServiceUtil.getColorScheme(
-				companyId, themeId, colorSchemeId, wapTheme);
+		String[] devices = StringUtil.split(
+			ParamUtil.getString(actionRequest, "devices"));
 
-			colorSchemeId = colorScheme.getColorSchemeId();
+		for (String device : devices) {
+			String themeId = ParamUtil.getString(
+				actionRequest, device + "ThemeId");
+			String colorSchemeId = ParamUtil.getString(
+				actionRequest, device + "ColorSchemeId");
+			String css = ParamUtil.getString(actionRequest, device + "Css");
+			boolean isInheritLookAndFeel = ParamUtil.getBoolean(
+				actionRequest, device + "IsInheritLookAndFeel");
+			boolean wapTheme = device.equals("wap");
+
+			if (isInheritLookAndFeel) {
+				themeId = StringPool.BLANK;
+				colorSchemeId = StringPool.BLANK;
+			}
+			else if (Validator.isNotNull(themeId)) {
+				Theme theme = ThemeLocalServiceUtil.getTheme(
+					companyId, themeId, wapTheme);
+
+				if (!theme.hasColorSchemes()) {
+					colorSchemeId = StringPool.BLANK;
+				}
+
+				if (Validator.isNull(colorSchemeId)) {
+					ColorScheme colorScheme =
+						ThemeLocalServiceUtil.getColorScheme(
+							companyId, themeId, colorSchemeId, wapTheme);
+
+					colorSchemeId = colorScheme.getColorSchemeId();
+				}
+			}
+
+			long groupId = liveGroupId;
+
+			if (stagingGroupId > 0) {
+				groupId = stagingGroupId;
+			}
+
+			if (layoutId <= 0) {
+				LayoutSetServiceUtil.updateLookAndFeel(
+					groupId, privateLayout, themeId, colorSchemeId, css,
+					wapTheme);
+			}
+			else {
+				LayoutServiceUtil.updateLookAndFeel(
+					groupId, privateLayout, layoutId, themeId, colorSchemeId,
+					css, wapTheme);
+			}
 		}
-
-		if (layoutId <= 0) {
-			LayoutSetServiceUtil.updateLookAndFeel(
-				groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
-		}
-		else {
-			LayoutServiceUtil.updateLookAndFeel(
-				groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
-				wapTheme);
-		}
-	}
-
-	protected void updateMergePages(ActionRequest actionRequest)
-		throws Exception {
-
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
-
-		boolean mergeGuestPublicPages = ParamUtil.getBoolean(
-			actionRequest, "mergeGuestPublicPages");
-
-		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
-
-		UnicodeProperties typeSettingsProperties =
-			liveGroup.getTypeSettingsProperties();
-
-		typeSettingsProperties.setProperty(
-			"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
-
-		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
 	}
 
 }
