@@ -15,7 +15,6 @@
 package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.cache.ehcache.EhcacheConfigurationUtil;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Properties;
@@ -37,30 +36,37 @@ import org.hibernate.cache.Timestamper;
 @SuppressWarnings("deprecation")
 public class EhCacheProvider implements CacheProvider {
 
-	public static CacheManager getCacheManager() throws SystemException {
+	public static CacheManager getCacheManager() {
 		return _cacheManager;
 	}
 
 	public Cache buildCache(String name, Properties properties)
 		throws CacheException {
-		Ehcache cache = _cacheManager.getEhcache(name);
 
-		if (cache == null) {
-			synchronized (_cacheManager) {
-				cache = _cacheManager.getEhcache(name);
+		Ehcache ehcache = _cacheManager.getEhcache(name);
 
-				if (cache == null) {
-					_cacheManager.addCache(name);
+		if (ehcache != null) {
+			return new EhCache(ehcache);
+		}
 
-					cache = _cacheManager.getEhcache(name);
+		synchronized (_cacheManager) {
+			ehcache = _cacheManager.getEhcache(name);
 
-					cache.setStatisticsEnabled(
-						PropsValues.EHCACHE_STATISTICS_ENABLED);
-				}
+			if (ehcache == null) {
+				_cacheManager.addCache(name);
+
+				ehcache = _cacheManager.getEhcache(name);
+
+				ehcache.setStatisticsEnabled(
+					PropsValues.EHCACHE_STATISTICS_ENABLED);
 			}
 		}
 
-		return new EhCache(cache);
+		return new EhCache(ehcache);
+	}
+
+	public boolean isMinimalPutsEnabledByDefault() {
+		return _MINIMAL_PUTS_ENABLED_BY_DEFAULT;
 	}
 
 	public long nextTimestamp() {
@@ -74,19 +80,21 @@ public class EhCacheProvider implements CacheProvider {
 
 		Configuration configuration = EhcacheConfigurationUtil.getConfiguration(
 			PropsValues.NET_SF_EHCACHE_CONFIGURATION_RESOURCE_NAME);
+
 		_cacheManager = new CacheManager(configuration);
 	}
 
 	public void stop() {
-		if (_cacheManager != null) {
-			_cacheManager.shutdown();
-			_cacheManager = null;
+		if (_cacheManager == null) {
+			return;
 		}
+
+		_cacheManager.shutdown();
+
+		_cacheManager = null;
 	}
 
-	public boolean isMinimalPutsEnabledByDefault() {
-		return true;
-	}
+	private static final boolean _MINIMAL_PUTS_ENABLED_BY_DEFAULT = true;
 
 	private static volatile CacheManager _cacheManager;
 

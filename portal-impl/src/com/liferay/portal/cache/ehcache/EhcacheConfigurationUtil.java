@@ -32,6 +32,7 @@ public class EhcacheConfigurationUtil {
 
 	public static Configuration getConfiguration(
 		String configurationResourcePath) {
+
 		if (Validator.isNull(configurationResourcePath)) {
 			return null;
 		}
@@ -51,19 +52,19 @@ public class EhcacheConfigurationUtil {
 			CacheConfiguration defaultCacheConfiguration =
 				configuration.getDefaultCacheConfiguration();
 
-			processCacheConfiguration(defaultCacheConfiguration);
+			_processCacheConfiguration(defaultCacheConfiguration);
 
 			for (CacheConfiguration cacheConfiguration :
 					configuration.getCacheConfigurations().values()) {
 
-				processCacheConfiguration(cacheConfiguration);
+				_processCacheConfiguration(cacheConfiguration);
 			}
 		}
 
 		return configuration;
 	}
 
-	private static void processCacheConfiguration(
+	private static void _processCacheConfiguration(
 		CacheConfiguration cacheConfiguration) {
 
 		cacheConfiguration.addBootstrapCacheLoaderFactory(null);
