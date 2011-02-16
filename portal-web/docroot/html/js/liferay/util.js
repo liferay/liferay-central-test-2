@@ -1402,6 +1402,44 @@
 
 	Liferay.provide(
 		Util,
+		'toggleRadio',
+		function(radioId, showBoxId, hideBoxIds) {
+			var radioButton = A.one('#' + radioId);
+
+			var showBox = A.one('#' + showBoxId);
+
+			if (radioButton && showBox) {
+				var checked = radioButton.get('checked');
+
+				if (checked) {
+					showBox.show();
+				}
+				else {
+					showBox.hide();
+				}
+
+				radioButton.on(
+					'change',
+					function() {
+						showBox.show();
+
+						if (A.Lang.isArray(hideBoxIds)) {
+							for (var hideBoxId in hideBoxIds) {
+								A.one('#' + hideBoxId).hide();
+							}
+						}
+						else {
+							A.one('#' + hideBoxIds).hide();
+						}
+					}
+				);
+			}
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		Util,
 		'toggleSelectBox',
 		function(selectBoxId, value, toggleBoxId) {
 			var selectBox = A.one('#' + selectBoxId);
