@@ -214,16 +214,30 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 
 	public Object clone() {
 		SCProductScreenshotModelImpl clone = new SCProductScreenshotImpl();
+		SCProductScreenshotModelImpl cloneModel = (SCProductScreenshotModelImpl)clone;
 
 		clone._productScreenshotId = _productScreenshotId;
 
 		clone._companyId = _companyId;
 
 		clone._groupId = _groupId;
+
 		clone._originalProductEntryId = clone._productEntryId = _productEntryId;
+
+		cloneModel._originalProductEntryId = cloneModel._productEntryId;
+		cloneModel._setOriginalProductEntryId = false;
 		clone._originalThumbnailId = clone._thumbnailId = _thumbnailId;
+
+		cloneModel._originalThumbnailId = cloneModel._thumbnailId;
+		cloneModel._setOriginalThumbnailId = false;
 		clone._originalFullImageId = clone._fullImageId = _fullImageId;
+
+		cloneModel._originalFullImageId = cloneModel._fullImageId;
+		cloneModel._setOriginalFullImageId = false;
 		clone._originalPriority = clone._priority = _priority;
+
+		cloneModel._originalPriority = cloneModel._priority;
+		cloneModel._setOriginalPriority = false;
 
 		return clone;
 	}

@@ -159,6 +159,7 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 	public Object clone() {
 		ClusterGroupModelImpl clone = new ClusterGroupImpl();
+		ClusterGroupModelImpl cloneModel = (ClusterGroupModelImpl)clone;
 
 		clone._clusterGroupId = _clusterGroupId;
 

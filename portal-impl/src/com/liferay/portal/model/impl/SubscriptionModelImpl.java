@@ -260,18 +260,33 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 
 	public Object clone() {
 		SubscriptionModelImpl clone = new SubscriptionImpl();
+		SubscriptionModelImpl cloneModel = (SubscriptionModelImpl)clone;
 
 		clone._subscriptionId = _subscriptionId;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 
 		clone._userName = _userName;
 
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 		clone._originalClassPK = clone._classPK = _classPK;
+
+		cloneModel._originalClassPK = cloneModel._classPK;
+		cloneModel._setOriginalClassPK = false;
 
 		clone._frequency = _frequency;
 

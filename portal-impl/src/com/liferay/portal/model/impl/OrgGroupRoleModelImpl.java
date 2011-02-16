@@ -121,6 +121,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 
 	public Object clone() {
 		OrgGroupRoleModelImpl clone = new OrgGroupRoleImpl();
+		OrgGroupRoleModelImpl cloneModel = (OrgGroupRoleModelImpl)clone;
 
 		clone._organizationId = _organizationId;
 

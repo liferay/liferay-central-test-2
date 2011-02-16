@@ -204,13 +204,17 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 	public Object clone() {
 		ReleaseModelImpl clone = new ReleaseImpl();
+		ReleaseModelImpl cloneModel = (ReleaseModelImpl)clone;
 
 		clone._releaseId = _releaseId;
 
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalServletContextName = clone._servletContextName = _servletContextName;
+
+		cloneModel._originalServletContextName = cloneModel._servletContextName;
 
 		clone._buildNumber = _buildNumber;
 

@@ -282,17 +282,28 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 	public Object clone() {
 		CompanyModelImpl clone = new CompanyImpl();
+		CompanyModelImpl cloneModel = (CompanyModelImpl)clone;
 
 		clone._companyId = _companyId;
 
 		clone._accountId = _accountId;
+
 		clone._originalWebId = clone._webId = _webId;
 
+		cloneModel._originalWebId = cloneModel._webId;
+
 		clone._key = _key;
+
 		clone._originalMx = clone._mx = _mx;
 
+		cloneModel._originalMx = cloneModel._mx;
+
 		clone._homeURL = _homeURL;
+
 		clone._originalLogoId = clone._logoId = _logoId;
+
+		cloneModel._originalLogoId = cloneModel._logoId;
+		cloneModel._setOriginalLogoId = false;
 
 		clone._system = _system;
 

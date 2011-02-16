@@ -244,15 +244,27 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 
 	public Object clone() {
 		MBMessageFlagModelImpl clone = new MBMessageFlagImpl();
+		MBMessageFlagModelImpl cloneModel = (MBMessageFlagModelImpl)clone;
 
 		clone._messageFlagId = _messageFlagId;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 
 		clone._modifiedDate = _modifiedDate;
 
 		clone._threadId = _threadId;
+
 		clone._originalMessageId = clone._messageId = _messageId;
+
+		cloneModel._originalMessageId = cloneModel._messageId;
+		cloneModel._setOriginalMessageId = false;
 		clone._originalFlag = clone._flag = _flag;
+
+		cloneModel._originalFlag = cloneModel._flag;
+		cloneModel._setOriginalFlag = false;
 
 		return clone;
 	}

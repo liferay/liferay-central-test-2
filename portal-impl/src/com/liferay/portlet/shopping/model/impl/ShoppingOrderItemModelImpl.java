@@ -229,6 +229,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 
 	public Object clone() {
 		ShoppingOrderItemModelImpl clone = new ShoppingOrderItemImpl();
+		ShoppingOrderItemModelImpl cloneModel = (ShoppingOrderItemModelImpl)clone;
 
 		clone._orderItemId = _orderItemId;
 

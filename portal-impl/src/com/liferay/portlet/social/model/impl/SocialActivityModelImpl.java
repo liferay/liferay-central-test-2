@@ -323,20 +323,48 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 
 	public Object clone() {
 		SocialActivityModelImpl clone = new SocialActivityImpl();
+		SocialActivityModelImpl cloneModel = (SocialActivityModelImpl)clone;
 
 		clone._activityId = _activityId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
 
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
+
 		clone._companyId = _companyId;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 		clone._originalCreateDate = clone._createDate = _createDate;
+
+		cloneModel._originalCreateDate = cloneModel._createDate;
+		cloneModel._setOriginalCreateDate = false;
 		clone._originalMirrorActivityId = clone._mirrorActivityId = _mirrorActivityId;
+
+		cloneModel._originalMirrorActivityId = cloneModel._mirrorActivityId;
+		cloneModel._setOriginalMirrorActivityId = false;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 		clone._originalClassPK = clone._classPK = _classPK;
+
+		cloneModel._originalClassPK = cloneModel._classPK;
+		cloneModel._setOriginalClassPK = false;
 		clone._originalType = clone._type = _type;
 
+		cloneModel._originalType = cloneModel._type;
+		cloneModel._setOriginalType = false;
+
 		clone._extraData = _extraData;
+
 		clone._originalReceiverUserId = clone._receiverUserId = _receiverUserId;
+
+		cloneModel._originalReceiverUserId = cloneModel._receiverUserId;
+		cloneModel._setOriginalReceiverUserId = false;
 
 		return clone;
 	}

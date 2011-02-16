@@ -239,6 +239,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 
 	public Object clone() {
 		SCLicenseModelImpl clone = new SCLicenseImpl();
+		SCLicenseModelImpl cloneModel = (SCLicenseModelImpl)clone;
 
 		clone._licenseId = _licenseId;
 

@@ -312,11 +312,18 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 
 	public Object clone() {
 		WikiNodeModelImpl clone = new WikiNodeImpl();
+		WikiNodeModelImpl cloneModel = (WikiNodeModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._nodeId = _nodeId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -327,7 +334,10 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._description = _description;
 

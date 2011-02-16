@@ -304,9 +304,14 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 
 	public Object clone() {
 		LayoutSetBranchModelImpl clone = new LayoutSetBranchImpl();
+		LayoutSetBranchModelImpl cloneModel = (LayoutSetBranchModelImpl)clone;
 
 		clone._layoutSetBranchId = _layoutSetBranchId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -317,8 +322,14 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
+
+		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
+		cloneModel._setOriginalPrivateLayout = false;
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._description = _description;
 

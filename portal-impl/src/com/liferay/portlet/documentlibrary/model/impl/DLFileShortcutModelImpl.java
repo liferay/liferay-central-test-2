@@ -391,11 +391,18 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 
 	public Object clone() {
 		DLFileShortcutModelImpl clone = new DLFileShortcutImpl();
+		DLFileShortcutModelImpl cloneModel = (DLFileShortcutModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._fileShortcutId = _fileShortcutId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 

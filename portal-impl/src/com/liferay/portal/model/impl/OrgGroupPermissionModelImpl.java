@@ -121,6 +121,7 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl<OrgGroupPermissio
 
 	public Object clone() {
 		OrgGroupPermissionModelImpl clone = new OrgGroupPermissionImpl();
+		OrgGroupPermissionModelImpl cloneModel = (OrgGroupPermissionModelImpl)clone;
 
 		clone._organizationId = _organizationId;
 

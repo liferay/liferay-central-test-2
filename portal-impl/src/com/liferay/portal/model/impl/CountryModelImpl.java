@@ -267,11 +267,19 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 
 	public Object clone() {
 		CountryModelImpl clone = new CountryImpl();
+		CountryModelImpl cloneModel = (CountryModelImpl)clone;
 
 		clone._countryId = _countryId;
+
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 		clone._originalA2 = clone._a2 = _a2;
+
+		cloneModel._originalA2 = cloneModel._a2;
 		clone._originalA3 = clone._a3 = _a3;
+
+		cloneModel._originalA3 = cloneModel._a3;
 
 		clone._number = _number;
 

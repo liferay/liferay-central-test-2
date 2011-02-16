@@ -387,6 +387,7 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 
 	public Object clone() {
 		SCProductEntryModelImpl clone = new SCProductEntryImpl();
+		SCProductEntryModelImpl cloneModel = (SCProductEntryModelImpl)clone;
 
 		clone._productEntryId = _productEntryId;
 
@@ -415,8 +416,13 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		clone._pageURL = _pageURL;
 
 		clone._author = _author;
+
 		clone._originalRepoGroupId = clone._repoGroupId = _repoGroupId;
+
+		cloneModel._originalRepoGroupId = cloneModel._repoGroupId;
 		clone._originalRepoArtifactId = clone._repoArtifactId = _repoArtifactId;
+
+		cloneModel._originalRepoArtifactId = cloneModel._repoArtifactId;
 
 		return clone;
 	}

@@ -185,11 +185,22 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 
 	public Object clone() {
 		MBDiscussionModelImpl clone = new MBDiscussionImpl();
+		MBDiscussionModelImpl cloneModel = (MBDiscussionModelImpl)clone;
 
 		clone._discussionId = _discussionId;
+
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 		clone._originalClassPK = clone._classPK = _classPK;
+
+		cloneModel._originalClassPK = cloneModel._classPK;
+		cloneModel._setOriginalClassPK = false;
 		clone._originalThreadId = clone._threadId = _threadId;
+
+		cloneModel._originalThreadId = cloneModel._threadId;
+		cloneModel._setOriginalThreadId = false;
 
 		return clone;
 	}

@@ -248,11 +248,20 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 
 	public Object clone() {
 		PluginSettingModelImpl clone = new PluginSettingImpl();
+		PluginSettingModelImpl cloneModel = (PluginSettingModelImpl)clone;
 
 		clone._pluginSettingId = _pluginSettingId;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 		clone._originalPluginId = clone._pluginId = _pluginId;
+
+		cloneModel._originalPluginId = cloneModel._pluginId;
 		clone._originalPluginType = clone._pluginType = _pluginType;
+
+		cloneModel._originalPluginType = cloneModel._pluginType;
 
 		clone._roles = _roles;
 

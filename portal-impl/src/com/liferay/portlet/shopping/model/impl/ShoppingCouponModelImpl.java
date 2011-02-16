@@ -385,6 +385,7 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 
 	public Object clone() {
 		ShoppingCouponModelImpl clone = new ShoppingCouponImpl();
+		ShoppingCouponModelImpl cloneModel = (ShoppingCouponModelImpl)clone;
 
 		clone._couponId = _couponId;
 
@@ -399,7 +400,10 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalCode = clone._code = _code;
+
+		cloneModel._originalCode = cloneModel._code;
 
 		clone._name = _name;
 

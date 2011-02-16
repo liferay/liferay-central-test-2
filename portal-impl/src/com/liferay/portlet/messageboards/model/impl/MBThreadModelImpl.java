@@ -375,6 +375,7 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	public Object clone() {
 		MBThreadModelImpl clone = new MBThreadImpl();
+		MBThreadModelImpl cloneModel = (MBThreadModelImpl)clone;
 
 		clone._threadId = _threadId;
 

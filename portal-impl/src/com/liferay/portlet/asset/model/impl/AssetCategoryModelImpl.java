@@ -542,11 +542,18 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 
 	public Object clone() {
 		AssetCategoryModelImpl clone = new AssetCategoryImpl();
+		AssetCategoryModelImpl cloneModel = (AssetCategoryModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._categoryId = _categoryId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -557,17 +564,28 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalParentCategoryId = clone._parentCategoryId = _parentCategoryId;
+
+		cloneModel._originalParentCategoryId = cloneModel._parentCategoryId;
+		cloneModel._setOriginalParentCategoryId = false;
 
 		clone._leftCategoryId = _leftCategoryId;
 
 		clone._rightCategoryId = _rightCategoryId;
+
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._title = _title;
 
 		clone._description = _description;
+
 		clone._originalVocabularyId = clone._vocabularyId = _vocabularyId;
+
+		cloneModel._originalVocabularyId = cloneModel._vocabularyId;
+		cloneModel._setOriginalVocabularyId = false;
 
 		return clone;
 	}

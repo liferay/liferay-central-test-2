@@ -553,9 +553,14 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 
 	public Object clone() {
 		PasswordPolicyModelImpl clone = new PasswordPolicyImpl();
+		PasswordPolicyModelImpl cloneModel = (PasswordPolicyModelImpl)clone;
 
 		clone._passwordPolicyId = _passwordPolicyId;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 
 		clone._userId = _userId;
 
@@ -564,8 +569,14 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalDefaultPolicy = clone._defaultPolicy = _defaultPolicy;
+
+		cloneModel._originalDefaultPolicy = cloneModel._defaultPolicy;
+		cloneModel._setOriginalDefaultPolicy = false;
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._description = _description;
 

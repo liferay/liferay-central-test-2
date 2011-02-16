@@ -177,10 +177,18 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 
 	public Object clone() {
 		AssetTagStatsModelImpl clone = new AssetTagStatsImpl();
+		AssetTagStatsModelImpl cloneModel = (AssetTagStatsModelImpl)clone;
 
 		clone._tagStatsId = _tagStatsId;
+
 		clone._originalTagId = clone._tagId = _tagId;
+
+		cloneModel._originalTagId = cloneModel._tagId;
+		cloneModel._setOriginalTagId = false;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 
 		clone._assetCount = _assetCount;
 

@@ -604,13 +604,20 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 
 	public Object clone() {
 		JournalArticleModelImpl clone = new JournalArticleImpl();
+		JournalArticleModelImpl cloneModel = (JournalArticleModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
+
+		cloneModel._originalUuid = cloneModel._uuid;
 
 		clone._id = _id;
 
 		clone._resourcePrimKey = _resourcePrimKey;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -621,8 +628,14 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalArticleId = clone._articleId = _articleId;
+
+		cloneModel._originalArticleId = cloneModel._articleId;
 		clone._originalVersion = clone._version = _version;
+
+		cloneModel._originalVersion = cloneModel._version;
+		cloneModel._setOriginalVersion = false;
 
 		clone._title = _title;
 

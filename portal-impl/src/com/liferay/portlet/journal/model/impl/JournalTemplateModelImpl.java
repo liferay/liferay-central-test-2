@@ -427,11 +427,18 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 
 	public Object clone() {
 		JournalTemplateModelImpl clone = new JournalTemplateImpl();
+		JournalTemplateModelImpl cloneModel = (JournalTemplateModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._id = _id;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -442,7 +449,10 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalTemplateId = clone._templateId = _templateId;
+
+		cloneModel._originalTemplateId = cloneModel._templateId;
 
 		clone._structureId = _structureId;
 
@@ -457,7 +467,11 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		clone._cacheable = _cacheable;
 
 		clone._smallImage = _smallImage;
+
 		clone._originalSmallImageId = clone._smallImageId = _smallImageId;
+
+		cloneModel._originalSmallImageId = cloneModel._smallImageId;
+		cloneModel._setOriginalSmallImageId = false;
 
 		clone._smallImageURL = _smallImageURL;
 

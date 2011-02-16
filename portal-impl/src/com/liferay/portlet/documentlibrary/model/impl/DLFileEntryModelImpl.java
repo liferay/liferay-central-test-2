@@ -402,11 +402,18 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 
 	public Object clone() {
 		DLFileEntryModelImpl clone = new DLFileEntryImpl();
+		DLFileEntryModelImpl cloneModel = (DLFileEntryModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._fileEntryId = _fileEntryId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -423,11 +430,20 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		clone._modifiedDate = _modifiedDate;
 
 		clone._repositoryId = _repositoryId;
+
 		clone._originalFolderId = clone._folderId = _folderId;
+
+		cloneModel._originalFolderId = cloneModel._folderId;
+		cloneModel._setOriginalFolderId = false;
 		clone._originalName = clone._name = _name;
 
+		cloneModel._originalName = cloneModel._name;
+
 		clone._extension = _extension;
+
 		clone._originalTitle = clone._title = _title;
+
+		cloneModel._originalTitle = cloneModel._title;
 
 		clone._description = _description;
 

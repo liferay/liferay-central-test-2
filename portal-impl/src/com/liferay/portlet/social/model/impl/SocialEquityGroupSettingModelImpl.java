@@ -207,13 +207,25 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 
 	public Object clone() {
 		SocialEquityGroupSettingModelImpl clone = new SocialEquityGroupSettingImpl();
+		SocialEquityGroupSettingModelImpl cloneModel = (SocialEquityGroupSettingModelImpl)clone;
 
 		clone._equityGroupSettingId = _equityGroupSettingId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
 
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
+
 		clone._companyId = _companyId;
+
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 		clone._originalType = clone._type = _type;
+
+		cloneModel._originalType = cloneModel._type;
+		cloneModel._setOriginalType = false;
 
 		clone._enabled = _enabled;
 

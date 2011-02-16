@@ -263,6 +263,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 	public Object clone() {
 		LockModelImpl clone = new LockImpl();
+		LockModelImpl cloneModel = (LockModelImpl)clone;
 
 		clone._uuid = _uuid;
 
@@ -275,8 +276,13 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		clone._userName = _userName;
 
 		clone._createDate = _createDate;
+
 		clone._originalClassName = clone._className = _className;
+
+		cloneModel._originalClassName = cloneModel._className;
 		clone._originalKey = clone._key = _key;
+
+		cloneModel._originalKey = cloneModel._key;
 
 		clone._owner = _owner;
 

@@ -233,12 +233,19 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 
 	public Object clone() {
 		ExpandoColumnModelImpl clone = new ExpandoColumnImpl();
+		ExpandoColumnModelImpl cloneModel = (ExpandoColumnModelImpl)clone;
 
 		clone._columnId = _columnId;
 
 		clone._companyId = _companyId;
+
 		clone._originalTableId = clone._tableId = _tableId;
+
+		cloneModel._originalTableId = cloneModel._tableId;
+		cloneModel._setOriginalTableId = false;
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._type = _type;
 

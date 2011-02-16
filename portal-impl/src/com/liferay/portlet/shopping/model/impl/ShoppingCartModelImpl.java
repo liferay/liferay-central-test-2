@@ -260,12 +260,21 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 
 	public Object clone() {
 		ShoppingCartModelImpl clone = new ShoppingCartImpl();
+		ShoppingCartModelImpl cloneModel = (ShoppingCartModelImpl)clone;
 
 		clone._cartId = _cartId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
 
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
+
 		clone._companyId = _companyId;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 
 		clone._userName = _userName;
 

@@ -1008,36 +1008,75 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 
 	public Object clone() {
 		LayoutRevisionModelImpl clone = new LayoutRevisionImpl();
+		LayoutRevisionModelImpl cloneModel = (LayoutRevisionModelImpl)clone;
 
 		clone._layoutRevisionId = _layoutRevisionId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalLayoutSetBranchId = clone._layoutSetBranchId = _layoutSetBranchId;
+
+		cloneModel._originalLayoutSetBranchId = cloneModel._layoutSetBranchId;
+		cloneModel._setOriginalLayoutSetBranchId = false;
+
 		clone._parentLayoutRevisionId = _parentLayoutRevisionId;
+
 		clone._originalHead = clone._head = _head;
+
+		cloneModel._originalHead = cloneModel._head;
+		cloneModel._setOriginalHead = false;
+
 		clone._major = _major;
+
 		clone._originalPlid = clone._plid = _plid;
+
+		cloneModel._originalPlid = cloneModel._plid;
+		cloneModel._setOriginalPlid = false;
+
 		clone._privateLayout = _privateLayout;
+
 		clone._name = _name;
+
 		clone._title = _title;
+
 		clone._description = _description;
+
 		clone._keywords = _keywords;
+
 		clone._robots = _robots;
+
 		clone._typeSettings = _typeSettings;
+
 		clone._iconImage = _iconImage;
+
 		clone._iconImageId = _iconImageId;
+
 		clone._themeId = _themeId;
+
 		clone._colorSchemeId = _colorSchemeId;
+
 		clone._wapThemeId = _wapThemeId;
+
 		clone._wapColorSchemeId = _wapColorSchemeId;
+
 		clone._css = _css;
+
 		clone._status = _status;
+
 		clone._statusByUserId = _statusByUserId;
+
 		clone._statusByUserName = _statusByUserName;
+
 		clone._statusDate = _statusDate;
 
 		return clone;

@@ -407,6 +407,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 	public Object clone() {
 		DLFileVersionModelImpl clone = new DLFileVersionImpl();
+		DLFileVersionModelImpl cloneModel = (DLFileVersionModelImpl)clone;
 
 		clone._fileVersionId = _fileVersionId;
 
@@ -421,7 +422,11 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		clone._createDate = _createDate;
 
 		clone._repositoryId = _repositoryId;
+
 		clone._originalFileEntryId = clone._fileEntryId = _fileEntryId;
+
+		cloneModel._originalFileEntryId = cloneModel._fileEntryId;
+		cloneModel._setOriginalFileEntryId = false;
 
 		clone._extension = _extension;
 
@@ -432,7 +437,10 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		clone._changeLog = _changeLog;
 
 		clone._extraSettings = _extraSettings;
+
 		clone._originalVersion = clone._version = _version;
+
+		cloneModel._originalVersion = cloneModel._version;
 
 		clone._size = _size;
 

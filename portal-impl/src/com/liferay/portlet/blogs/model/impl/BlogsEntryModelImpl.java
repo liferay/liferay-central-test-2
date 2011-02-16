@@ -524,11 +524,18 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 	public Object clone() {
 		BlogsEntryModelImpl clone = new BlogsEntryImpl();
+		BlogsEntryModelImpl cloneModel = (BlogsEntryModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._entryId = _entryId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -541,7 +548,10 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 		clone._modifiedDate = _modifiedDate;
 
 		clone._title = _title;
+
 		clone._originalUrlTitle = clone._urlTitle = _urlTitle;
+
+		cloneModel._originalUrlTitle = cloneModel._urlTitle;
 
 		clone._description = _description;
 

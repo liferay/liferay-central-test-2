@@ -350,11 +350,18 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 
 	public Object clone() {
 		MBCategoryModelImpl clone = new MBCategoryImpl();
+		MBCategoryModelImpl cloneModel = (MBCategoryModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._categoryId = _categoryId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 

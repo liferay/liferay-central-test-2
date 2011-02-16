@@ -309,11 +309,18 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 
 	public Object clone() {
 		DLFolderModelImpl clone = new DLFolderImpl();
+		DLFolderModelImpl cloneModel = (DLFolderModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._folderId = _folderId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -328,8 +335,14 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 		clone._repositoryId = _repositoryId;
 
 		clone._mountPoint = _mountPoint;
+
 		clone._originalParentFolderId = clone._parentFolderId = _parentFolderId;
+
+		cloneModel._originalParentFolderId = cloneModel._parentFolderId;
+		cloneModel._setOriginalParentFolderId = false;
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._description = _description;
 

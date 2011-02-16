@@ -334,24 +334,49 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 
 	public Object clone() {
 		SocialRequestModelImpl clone = new SocialRequestImpl();
+		SocialRequestModelImpl cloneModel = (SocialRequestModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._requestId = _requestId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
 
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
+
 		clone._companyId = _companyId;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 		clone._originalClassPK = clone._classPK = _classPK;
+
+		cloneModel._originalClassPK = cloneModel._classPK;
+		cloneModel._setOriginalClassPK = false;
 		clone._originalType = clone._type = _type;
 
+		cloneModel._originalType = cloneModel._type;
+		cloneModel._setOriginalType = false;
+
 		clone._extraData = _extraData;
+
 		clone._originalReceiverUserId = clone._receiverUserId = _receiverUserId;
+
+		cloneModel._originalReceiverUserId = cloneModel._receiverUserId;
+		cloneModel._setOriginalReceiverUserId = false;
 
 		clone._status = _status;
 

@@ -270,9 +270,14 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 
 	public Object clone() {
 		PortletItemModelImpl clone = new PortletItemImpl();
+		PortletItemModelImpl cloneModel = (PortletItemModelImpl)clone;
 
 		clone._portletItemId = _portletItemId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -283,9 +288,17 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 		clone._originalPortletId = clone._portletId = _portletId;
+
+		cloneModel._originalPortletId = cloneModel._portletId;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 
 		return clone;
 	}

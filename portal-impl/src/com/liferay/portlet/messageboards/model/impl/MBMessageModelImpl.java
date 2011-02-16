@@ -528,11 +528,18 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 	public Object clone() {
 		MBMessageModelImpl clone = new MBMessageImpl();
+		MBMessageModelImpl cloneModel = (MBMessageModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._messageId = _messageId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 

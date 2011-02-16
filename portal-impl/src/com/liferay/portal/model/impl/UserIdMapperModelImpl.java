@@ -205,13 +205,23 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 
 	public Object clone() {
 		UserIdMapperModelImpl clone = new UserIdMapperImpl();
+		UserIdMapperModelImpl cloneModel = (UserIdMapperModelImpl)clone;
 
 		clone._userIdMapperId = _userIdMapperId;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 		clone._originalType = clone._type = _type;
 
+		cloneModel._originalType = cloneModel._type;
+
 		clone._description = _description;
+
 		clone._originalExternalUserId = clone._externalUserId = _externalUserId;
+
+		cloneModel._originalExternalUserId = cloneModel._externalUserId;
 
 		return clone;
 	}

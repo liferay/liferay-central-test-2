@@ -261,10 +261,18 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 
 	public Object clone() {
 		WorkflowDefinitionLinkModelImpl clone = new WorkflowDefinitionLinkImpl();
+		WorkflowDefinitionLinkModelImpl cloneModel = (WorkflowDefinitionLinkModelImpl)clone;
 
 		clone._workflowDefinitionLinkId = _workflowDefinitionLinkId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 
 		clone._userId = _userId;
 
@@ -273,7 +281,11 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 
 		clone._workflowDefinitionName = _workflowDefinitionName;
 

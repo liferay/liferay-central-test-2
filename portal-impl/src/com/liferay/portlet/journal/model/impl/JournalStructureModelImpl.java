@@ -349,11 +349,18 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 
 	public Object clone() {
 		JournalStructureModelImpl clone = new JournalStructureImpl();
+		JournalStructureModelImpl cloneModel = (JournalStructureModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._id = _id;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -364,7 +371,10 @@ public class JournalStructureModelImpl extends BaseModelImpl<JournalStructure>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalStructureId = clone._structureId = _structureId;
+
+		cloneModel._originalStructureId = cloneModel._structureId;
 
 		clone._parentStructureId = _parentStructureId;
 

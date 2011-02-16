@@ -213,6 +213,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 
 	public Object clone() {
 		UserTrackerModelImpl clone = new UserTrackerImpl();
+		UserTrackerModelImpl cloneModel = (UserTrackerModelImpl)clone;
 
 		clone._userTrackerId = _userTrackerId;
 

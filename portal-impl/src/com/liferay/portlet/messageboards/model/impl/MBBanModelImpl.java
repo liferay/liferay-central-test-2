@@ -266,9 +266,14 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 
 	public Object clone() {
 		MBBanModelImpl clone = new MBBanImpl();
+		MBBanModelImpl cloneModel = (MBBanModelImpl)clone;
 
 		clone._banId = _banId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -279,7 +284,11 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalBanUserId = clone._banUserId = _banUserId;
+
+		cloneModel._originalBanUserId = cloneModel._banUserId;
+		cloneModel._setOriginalBanUserId = false;
 
 		return clone;
 	}

@@ -452,11 +452,18 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 
 	public Object clone() {
 		CalEventModelImpl clone = new CalEventImpl();
+		CalEventModelImpl cloneModel = (CalEventModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._eventId = _eventId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 

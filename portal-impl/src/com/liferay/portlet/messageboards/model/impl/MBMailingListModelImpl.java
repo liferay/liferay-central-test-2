@@ -446,11 +446,18 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 
 	public Object clone() {
 		MBMailingListModelImpl clone = new MBMailingListImpl();
+		MBMailingListModelImpl cloneModel = (MBMailingListModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._mailingListId = _mailingListId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -461,7 +468,11 @@ public class MBMailingListModelImpl extends BaseModelImpl<MBMailingList>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalCategoryId = clone._categoryId = _categoryId;
+
+		cloneModel._originalCategoryId = cloneModel._categoryId;
+		cloneModel._setOriginalCategoryId = false;
 
 		clone._emailAddress = _emailAddress;
 

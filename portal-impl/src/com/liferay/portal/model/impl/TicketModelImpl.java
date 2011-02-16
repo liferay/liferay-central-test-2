@@ -197,6 +197,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 
 	public Object clone() {
 		TicketModelImpl clone = new TicketImpl();
+		TicketModelImpl cloneModel = (TicketModelImpl)clone;
 
 		clone._ticketId = _ticketId;
 
@@ -207,7 +208,10 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		clone._classNameId = _classNameId;
 
 		clone._classPK = _classPK;
+
 		clone._originalKey = clone._key = _key;
+
+		cloneModel._originalKey = cloneModel._key;
 
 		clone._expirationDate = _expirationDate;
 

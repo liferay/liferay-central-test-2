@@ -196,10 +196,18 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 
 	public Object clone() {
 		MBStatsUserModelImpl clone = new MBStatsUserImpl();
+		MBStatsUserModelImpl cloneModel = (MBStatsUserModelImpl)clone;
 
 		clone._statsUserId = _statsUserId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 
 		clone._messageCount = _messageCount;
 

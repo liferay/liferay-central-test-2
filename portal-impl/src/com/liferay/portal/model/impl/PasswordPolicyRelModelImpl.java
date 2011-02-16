@@ -184,11 +184,22 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 
 	public Object clone() {
 		PasswordPolicyRelModelImpl clone = new PasswordPolicyRelImpl();
+		PasswordPolicyRelModelImpl cloneModel = (PasswordPolicyRelModelImpl)clone;
 
 		clone._passwordPolicyRelId = _passwordPolicyRelId;
+
 		clone._originalPasswordPolicyId = clone._passwordPolicyId = _passwordPolicyId;
+
+		cloneModel._originalPasswordPolicyId = cloneModel._passwordPolicyId;
+		cloneModel._setOriginalPasswordPolicyId = false;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 		clone._originalClassPK = clone._classPK = _classPK;
+
+		cloneModel._originalClassPK = cloneModel._classPK;
+		cloneModel._setOriginalClassPK = false;
 
 		return clone;
 	}

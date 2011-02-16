@@ -920,15 +920,29 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 
 	public Object clone() {
 		LayoutModelImpl clone = new LayoutImpl();
+		LayoutModelImpl cloneModel = (LayoutModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._plid = _plid;
+
 		clone._originalGroupId = clone._groupId = _groupId;
 
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
+
 		clone._companyId = _companyId;
+
 		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
+
+		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
+		cloneModel._setOriginalPrivateLayout = false;
 		clone._originalLayoutId = clone._layoutId = _layoutId;
+
+		cloneModel._originalLayoutId = cloneModel._layoutId;
+		cloneModel._setOriginalLayoutId = false;
 
 		clone._parentLayoutId = _parentLayoutId;
 
@@ -947,10 +961,17 @@ public class LayoutModelImpl extends BaseModelImpl<Layout>
 		clone._typeSettings = _typeSettings;
 
 		clone._hidden = _hidden;
+
 		clone._originalFriendlyURL = clone._friendlyURL = _friendlyURL;
 
+		cloneModel._originalFriendlyURL = cloneModel._friendlyURL;
+
 		clone._iconImage = _iconImage;
+
 		clone._originalIconImageId = clone._iconImageId = _iconImageId;
+
+		cloneModel._originalIconImageId = cloneModel._iconImageId;
+		cloneModel._setOriginalIconImageId = false;
 
 		clone._themeId = _themeId;
 

@@ -305,6 +305,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 
 	public Object clone() {
 		LayoutSetPrototypeModelImpl clone = new LayoutSetPrototypeImpl();
+		LayoutSetPrototypeModelImpl cloneModel = (LayoutSetPrototypeModelImpl)clone;
 
 		clone._layoutSetPrototypeId = _layoutSetPrototypeId;
 

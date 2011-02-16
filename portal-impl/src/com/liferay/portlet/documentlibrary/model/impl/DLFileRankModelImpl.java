@@ -208,15 +208,27 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 
 	public Object clone() {
 		DLFileRankModelImpl clone = new DLFileRankImpl();
+		DLFileRankModelImpl cloneModel = (DLFileRankModelImpl)clone;
 
 		clone._fileRankId = _fileRankId;
 
 		clone._groupId = _groupId;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 		clone._originalUserId = clone._userId = _userId;
 
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
+
 		clone._createDate = _createDate;
+
 		clone._originalFileEntryId = clone._fileEntryId = _fileEntryId;
+
+		cloneModel._originalFileEntryId = cloneModel._fileEntryId;
+		cloneModel._setOriginalFileEntryId = false;
 
 		return clone;
 	}

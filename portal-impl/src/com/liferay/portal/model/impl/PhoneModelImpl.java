@@ -302,6 +302,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	public Object clone() {
 		PhoneModelImpl clone = new PhoneImpl();
+		PhoneModelImpl cloneModel = (PhoneModelImpl)clone;
 
 		clone._phoneId = _phoneId;
 

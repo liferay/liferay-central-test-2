@@ -406,24 +406,45 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 	public Object clone() {
 		GroupModelImpl clone = new GroupImpl();
+		GroupModelImpl cloneModel = (GroupModelImpl)clone;
 
 		clone._groupId = _groupId;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
 
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
+
 		clone._creatorUserId = _creatorUserId;
+
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 		clone._originalClassPK = clone._classPK = _classPK;
 
+		cloneModel._originalClassPK = cloneModel._classPK;
+		cloneModel._setOriginalClassPK = false;
+
 		clone._parentGroupId = _parentGroupId;
+
 		clone._originalLiveGroupId = clone._liveGroupId = _liveGroupId;
+
+		cloneModel._originalLiveGroupId = cloneModel._liveGroupId;
+		cloneModel._setOriginalLiveGroupId = false;
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._description = _description;
 
 		clone._type = _type;
 
 		clone._typeSettings = _typeSettings;
+
 		clone._originalFriendlyURL = clone._friendlyURL = _friendlyURL;
+
+		cloneModel._originalFriendlyURL = cloneModel._friendlyURL;
 
 		clone._active = _active;
 

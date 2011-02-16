@@ -281,6 +281,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 
 	public Object clone() {
 		AssetTagPropertyModelImpl clone = new AssetTagPropertyImpl();
+		AssetTagPropertyModelImpl cloneModel = (AssetTagPropertyModelImpl)clone;
 
 		clone._tagPropertyId = _tagPropertyId;
 
@@ -293,8 +294,14 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalTagId = clone._tagId = _tagId;
+
+		cloneModel._originalTagId = cloneModel._tagId;
+		cloneModel._setOriginalTagId = false;
 		clone._originalKey = clone._key = _key;
+
+		cloneModel._originalKey = cloneModel._key;
 
 		clone._value = _value;
 

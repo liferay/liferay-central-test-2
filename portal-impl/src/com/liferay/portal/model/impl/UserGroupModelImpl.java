@@ -234,12 +234,20 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 
 	public Object clone() {
 		UserGroupModelImpl clone = new UserGroupImpl();
+		UserGroupModelImpl cloneModel = (UserGroupModelImpl)clone;
 
 		clone._userGroupId = _userGroupId;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
 
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
+
 		clone._parentUserGroupId = _parentUserGroupId;
+
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._description = _description;
 

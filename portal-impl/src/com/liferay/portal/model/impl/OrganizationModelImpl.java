@@ -316,15 +316,26 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 
 	public Object clone() {
 		OrganizationModelImpl clone = new OrganizationImpl();
+		OrganizationModelImpl cloneModel = (OrganizationModelImpl)clone;
 
 		clone._organizationId = _organizationId;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 		clone._originalParentOrganizationId = clone._parentOrganizationId = _parentOrganizationId;
+
+		cloneModel._originalParentOrganizationId = cloneModel._parentOrganizationId;
+		cloneModel._setOriginalParentOrganizationId = false;
 
 		clone._leftOrganizationId = _leftOrganizationId;
 
 		clone._rightOrganizationId = _rightOrganizationId;
+
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._type = _type;
 

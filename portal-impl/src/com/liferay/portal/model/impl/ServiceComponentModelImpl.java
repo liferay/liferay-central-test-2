@@ -184,10 +184,17 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 
 	public Object clone() {
 		ServiceComponentModelImpl clone = new ServiceComponentImpl();
+		ServiceComponentModelImpl cloneModel = (ServiceComponentModelImpl)clone;
 
 		clone._serviceComponentId = _serviceComponentId;
+
 		clone._originalBuildNamespace = clone._buildNamespace = _buildNamespace;
+
+		cloneModel._originalBuildNamespace = cloneModel._buildNamespace;
 		clone._originalBuildNumber = clone._buildNumber = _buildNumber;
+
+		cloneModel._originalBuildNumber = cloneModel._buildNumber;
+		cloneModel._setOriginalBuildNumber = false;
 
 		clone._buildDate = _buildDate;
 

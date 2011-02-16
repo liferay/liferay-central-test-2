@@ -175,6 +175,7 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 
 	public Object clone() {
 		SocialEquityHistoryModelImpl clone = new SocialEquityHistoryImpl();
+		SocialEquityHistoryModelImpl cloneModel = (SocialEquityHistoryModelImpl)clone;
 
 		clone._equityHistoryId = _equityHistoryId;
 

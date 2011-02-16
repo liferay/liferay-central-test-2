@@ -159,10 +159,17 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 
 	public Object clone() {
 		RepositoryEntryModelImpl clone = new RepositoryEntryImpl();
+		RepositoryEntryModelImpl cloneModel = (RepositoryEntryModelImpl)clone;
 
 		clone._repositoryEntryId = _repositoryEntryId;
+
 		clone._originalRepositoryId = clone._repositoryId = _repositoryId;
+
+		cloneModel._originalRepositoryId = cloneModel._repositoryId;
+		cloneModel._setOriginalRepositoryId = false;
 		clone._originalMappedId = clone._mappedId = _mappedId;
+
+		cloneModel._originalMappedId = cloneModel._mappedId;
 
 		return clone;
 	}

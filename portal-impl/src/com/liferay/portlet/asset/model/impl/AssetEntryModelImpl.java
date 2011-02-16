@@ -501,9 +501,14 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 
 	public Object clone() {
 		AssetEntryModelImpl clone = new AssetEntryImpl();
+		AssetEntryModelImpl cloneModel = (AssetEntryModelImpl)clone;
 
 		clone._entryId = _entryId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -514,9 +519,18 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 		clone._originalClassPK = clone._classPK = _classPK;
+
+		cloneModel._originalClassPK = cloneModel._classPK;
+		cloneModel._setOriginalClassPK = false;
 		clone._originalClassUuid = clone._classUuid = _classUuid;
+
+		cloneModel._originalClassUuid = cloneModel._classUuid;
 
 		clone._visible = _visible;
 

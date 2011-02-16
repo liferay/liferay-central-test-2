@@ -282,6 +282,7 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 
 	public Object clone() {
 		AssetCategoryPropertyModelImpl clone = new AssetCategoryPropertyImpl();
+		AssetCategoryPropertyModelImpl cloneModel = (AssetCategoryPropertyModelImpl)clone;
 
 		clone._categoryPropertyId = _categoryPropertyId;
 
@@ -294,8 +295,14 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalCategoryId = clone._categoryId = _categoryId;
+
+		cloneModel._originalCategoryId = cloneModel._categoryId;
+		cloneModel._setOriginalCategoryId = false;
 		clone._originalKey = clone._key = _key;
+
+		cloneModel._originalKey = cloneModel._key;
 
 		clone._value = _value;
 

@@ -224,10 +224,17 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 
 	public Object clone() {
 		PortletModelImpl clone = new PortletImpl();
+		PortletModelImpl cloneModel = (PortletModelImpl)clone;
 
 		clone._id = _id;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 		clone._originalPortletId = clone._portletId = _portletId;
+
+		cloneModel._originalPortletId = cloneModel._portletId;
 
 		clone._roles = _roles;
 

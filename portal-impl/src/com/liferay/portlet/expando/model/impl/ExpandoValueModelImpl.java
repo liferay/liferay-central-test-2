@@ -264,16 +264,31 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 
 	public Object clone() {
 		ExpandoValueModelImpl clone = new ExpandoValueImpl();
+		ExpandoValueModelImpl cloneModel = (ExpandoValueModelImpl)clone;
 
 		clone._valueId = _valueId;
 
 		clone._companyId = _companyId;
+
 		clone._originalTableId = clone._tableId = _tableId;
+
+		cloneModel._originalTableId = cloneModel._tableId;
+		cloneModel._setOriginalTableId = false;
 		clone._originalColumnId = clone._columnId = _columnId;
+
+		cloneModel._originalColumnId = cloneModel._columnId;
+		cloneModel._setOriginalColumnId = false;
 		clone._originalRowId = clone._rowId = _rowId;
 
+		cloneModel._originalRowId = cloneModel._rowId;
+		cloneModel._setOriginalRowId = false;
+
 		clone._classNameId = _classNameId;
+
 		clone._originalClassPK = clone._classPK = _classPK;
+
+		cloneModel._originalClassPK = cloneModel._classPK;
+		cloneModel._setOriginalClassPK = false;
 
 		clone._data = _data;
 

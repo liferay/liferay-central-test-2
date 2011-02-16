@@ -371,6 +371,7 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 
 	public Object clone() {
 		AnnouncementsEntryModelImpl clone = new AnnouncementsEntryImpl();
+		AnnouncementsEntryModelImpl cloneModel = (AnnouncementsEntryModelImpl)clone;
 
 		clone._uuid = _uuid;
 

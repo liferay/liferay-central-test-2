@@ -227,6 +227,7 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 
 	public Object clone() {
 		WorkflowInstanceLinkModelImpl clone = new WorkflowInstanceLinkImpl();
+		WorkflowInstanceLinkModelImpl cloneModel = (WorkflowInstanceLinkModelImpl)clone;
 
 		clone._workflowInstanceLinkId = _workflowInstanceLinkId;
 

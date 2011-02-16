@@ -869,6 +869,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 
 	public Object clone() {
 		ShoppingOrderModelImpl clone = new ShoppingOrderImpl();
+		ShoppingOrderModelImpl cloneModel = (ShoppingOrderModelImpl)clone;
 
 		clone._orderId = _orderId;
 
@@ -883,7 +884,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalNumber = clone._number = _number;
+
+		cloneModel._originalNumber = cloneModel._number;
 
 		clone._tax = _tax;
 
@@ -956,7 +960,10 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		clone._ccVerNumber = _ccVerNumber;
 
 		clone._comments = _comments;
+
 		clone._originalPpTxnId = clone._ppTxnId = _ppTxnId;
+
+		cloneModel._originalPpTxnId = cloneModel._ppTxnId;
 
 		clone._ppPaymentStatus = _ppPaymentStatus;
 

@@ -195,10 +195,17 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 
 	public Object clone() {
 		ResourceModelImpl clone = new ResourceImpl();
+		ResourceModelImpl cloneModel = (ResourceModelImpl)clone;
 
 		clone._resourceId = _resourceId;
+
 		clone._originalCodeId = clone._codeId = _codeId;
+
+		cloneModel._originalCodeId = cloneModel._codeId;
+		cloneModel._setOriginalCodeId = false;
 		clone._originalPrimKey = clone._primKey = _primKey;
+
+		cloneModel._originalPrimKey = cloneModel._primKey;
 
 		return clone;
 	}

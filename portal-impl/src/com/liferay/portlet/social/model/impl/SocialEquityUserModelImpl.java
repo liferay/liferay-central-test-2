@@ -229,12 +229,21 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 
 	public Object clone() {
 		SocialEquityUserModelImpl clone = new SocialEquityUserImpl();
+		SocialEquityUserModelImpl cloneModel = (SocialEquityUserModelImpl)clone;
 
 		clone._equityUserId = _equityUserId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
 
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
+
 		clone._companyId = _companyId;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 
 		clone._contributionK = _contributionK;
 

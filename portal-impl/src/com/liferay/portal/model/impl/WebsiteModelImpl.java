@@ -288,6 +288,7 @@ public class WebsiteModelImpl extends BaseModelImpl<Website>
 
 	public Object clone() {
 		WebsiteModelImpl clone = new WebsiteImpl();
+		WebsiteModelImpl cloneModel = (WebsiteModelImpl)clone;
 
 		clone._websiteId = _websiteId;
 

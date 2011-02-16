@@ -289,6 +289,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 
 	public Object clone() {
 		EmailAddressModelImpl clone = new EmailAddressImpl();
+		EmailAddressModelImpl cloneModel = (EmailAddressModelImpl)clone;
 
 		clone._emailAddressId = _emailAddressId;
 

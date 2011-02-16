@@ -165,6 +165,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 
 	public Object clone() {
 		PasswordTrackerModelImpl clone = new PasswordTrackerImpl();
+		PasswordTrackerModelImpl cloneModel = (PasswordTrackerModelImpl)clone;
 
 		clone._passwordTrackerId = _passwordTrackerId;
 

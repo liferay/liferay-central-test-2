@@ -172,6 +172,7 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 
 	public Object clone() {
 		ShoppingItemFieldModelImpl clone = new ShoppingItemFieldImpl();
+		ShoppingItemFieldModelImpl cloneModel = (ShoppingItemFieldModelImpl)clone;
 
 		clone._itemFieldId = _itemFieldId;
 

@@ -274,6 +274,7 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 
 	public Object clone() {
 		RepositoryModelImpl clone = new RepositoryImpl();
+		RepositoryModelImpl cloneModel = (RepositoryModelImpl)clone;
 
 		clone._repositoryId = _repositoryId;
 

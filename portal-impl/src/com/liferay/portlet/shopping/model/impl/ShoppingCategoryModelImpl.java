@@ -273,6 +273,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 
 	public Object clone() {
 		ShoppingCategoryModelImpl clone = new ShoppingCategoryImpl();
+		ShoppingCategoryModelImpl cloneModel = (ShoppingCategoryModelImpl)clone;
 
 		clone._categoryId = _categoryId;
 

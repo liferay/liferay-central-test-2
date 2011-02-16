@@ -167,6 +167,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 
 	public Object clone() {
 		ListTypeModelImpl clone = new ListTypeImpl();
+		ListTypeModelImpl cloneModel = (ListTypeModelImpl)clone;
 
 		clone._listTypeId = _listTypeId;
 

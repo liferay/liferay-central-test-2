@@ -488,11 +488,18 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 
 	public Object clone() {
 		JournalFeedModelImpl clone = new JournalFeedImpl();
+		JournalFeedModelImpl cloneModel = (JournalFeedModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._id = _id;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -503,7 +510,10 @@ public class JournalFeedModelImpl extends BaseModelImpl<JournalFeed>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalFeedId = clone._feedId = _feedId;
+
+		cloneModel._originalFeedId = cloneModel._feedId;
 
 		clone._name = _name;
 

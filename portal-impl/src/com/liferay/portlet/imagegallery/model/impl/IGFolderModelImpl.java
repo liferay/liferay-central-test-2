@@ -307,11 +307,18 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 
 	public Object clone() {
 		IGFolderModelImpl clone = new IGFolderImpl();
+		IGFolderModelImpl cloneModel = (IGFolderModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._folderId = _folderId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -320,8 +327,14 @@ public class IGFolderModelImpl extends BaseModelImpl<IGFolder>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalParentFolderId = clone._parentFolderId = _parentFolderId;
+
+		cloneModel._originalParentFolderId = cloneModel._parentFolderId;
+		cloneModel._setOriginalParentFolderId = false;
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._description = _description;
 

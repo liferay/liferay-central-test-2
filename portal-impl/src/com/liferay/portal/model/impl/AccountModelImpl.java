@@ -363,6 +363,7 @@ public class AccountModelImpl extends BaseModelImpl<Account>
 
 	public Object clone() {
 		AccountModelImpl clone = new AccountImpl();
+		AccountModelImpl cloneModel = (AccountModelImpl)clone;
 
 		clone._accountId = _accountId;
 

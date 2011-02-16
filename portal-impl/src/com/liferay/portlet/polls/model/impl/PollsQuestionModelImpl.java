@@ -477,11 +477,18 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 
 	public Object clone() {
 		PollsQuestionModelImpl clone = new PollsQuestionImpl();
+		PollsQuestionModelImpl cloneModel = (PollsQuestionModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._questionId = _questionId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 

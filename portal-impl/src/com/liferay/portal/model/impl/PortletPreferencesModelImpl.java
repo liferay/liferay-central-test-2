@@ -252,12 +252,25 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 	public Object clone() {
 		PortletPreferencesModelImpl clone = new PortletPreferencesImpl();
+		PortletPreferencesModelImpl cloneModel = (PortletPreferencesModelImpl)clone;
 
 		clone._portletPreferencesId = _portletPreferencesId;
+
 		clone._originalOwnerId = clone._ownerId = _ownerId;
+
+		cloneModel._originalOwnerId = cloneModel._ownerId;
+		cloneModel._setOriginalOwnerId = false;
 		clone._originalOwnerType = clone._ownerType = _ownerType;
+
+		cloneModel._originalOwnerType = cloneModel._ownerType;
+		cloneModel._setOriginalOwnerType = false;
 		clone._originalPlid = clone._plid = _plid;
+
+		cloneModel._originalPlid = cloneModel._plid;
+		cloneModel._setOriginalPlid = false;
 		clone._originalPortletId = clone._portletId = _portletId;
+
+		cloneModel._originalPortletId = cloneModel._portletId;
 
 		clone._preferences = _preferences;
 

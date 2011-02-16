@@ -626,11 +626,16 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 
 	public Object clone() {
 		ShoppingItemModelImpl clone = new ShoppingItemImpl();
+		ShoppingItemModelImpl cloneModel = (ShoppingItemModelImpl)clone;
 
 		clone._itemId = _itemId;
 
 		clone._groupId = _groupId;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 
 		clone._userId = _userId;
 
@@ -641,7 +646,10 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		clone._modifiedDate = _modifiedDate;
 
 		clone._categoryId = _categoryId;
+
 		clone._originalSku = clone._sku = _sku;
+
+		cloneModel._originalSku = cloneModel._sku;
 
 		clone._name = _name;
 
@@ -676,17 +684,29 @@ public class ShoppingItemModelImpl extends BaseModelImpl<ShoppingItem>
 		clone._sale = _sale;
 
 		clone._smallImage = _smallImage;
+
 		clone._originalSmallImageId = clone._smallImageId = _smallImageId;
+
+		cloneModel._originalSmallImageId = cloneModel._smallImageId;
+		cloneModel._setOriginalSmallImageId = false;
 
 		clone._smallImageURL = _smallImageURL;
 
 		clone._mediumImage = _mediumImage;
+
 		clone._originalMediumImageId = clone._mediumImageId = _mediumImageId;
+
+		cloneModel._originalMediumImageId = cloneModel._mediumImageId;
+		cloneModel._setOriginalMediumImageId = false;
 
 		clone._mediumImageURL = _mediumImageURL;
 
 		clone._largeImage = _largeImage;
+
 		clone._originalLargeImageId = clone._largeImageId = _largeImageId;
+
+		cloneModel._originalLargeImageId = cloneModel._largeImageId;
+		cloneModel._setOriginalLargeImageId = false;
 
 		clone._largeImageURL = _largeImageURL;
 

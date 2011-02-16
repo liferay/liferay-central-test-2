@@ -308,23 +308,46 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 
 	public Object clone() {
 		SocialEquityLogModelImpl clone = new SocialEquityLogImpl();
+		SocialEquityLogModelImpl cloneModel = (SocialEquityLogModelImpl)clone;
 
 		clone._equityLogId = _equityLogId;
 
 		clone._groupId = _groupId;
 
 		clone._companyId = _companyId;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 		clone._originalAssetEntryId = clone._assetEntryId = _assetEntryId;
+
+		cloneModel._originalAssetEntryId = cloneModel._assetEntryId;
+		cloneModel._setOriginalAssetEntryId = false;
 		clone._originalActionId = clone._actionId = _actionId;
+
+		cloneModel._originalActionId = cloneModel._actionId;
 		clone._originalActionDate = clone._actionDate = _actionDate;
+
+		cloneModel._originalActionDate = cloneModel._actionDate;
+		cloneModel._setOriginalActionDate = false;
 		clone._originalActive = clone._active = _active;
 
+		cloneModel._originalActive = cloneModel._active;
+		cloneModel._setOriginalActive = false;
+
 		clone._expiration = _expiration;
+
 		clone._originalType = clone._type = _type;
 
+		cloneModel._originalType = cloneModel._type;
+		cloneModel._setOriginalType = false;
+
 		clone._value = _value;
+
 		clone._originalExtraData = clone._extraData = _extraData;
+
+		cloneModel._originalExtraData = cloneModel._extraData;
 
 		return clone;
 	}

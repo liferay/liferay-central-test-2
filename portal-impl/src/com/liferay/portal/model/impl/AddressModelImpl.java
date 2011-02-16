@@ -382,6 +382,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 
 	public Object clone() {
 		AddressModelImpl clone = new AddressImpl();
+		AddressModelImpl cloneModel = (AddressModelImpl)clone;
 
 		clone._addressId = _addressId;
 

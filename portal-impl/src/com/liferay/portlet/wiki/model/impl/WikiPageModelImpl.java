@@ -548,12 +548,22 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 	public Object clone() {
 		WikiPageModelImpl clone = new WikiPageImpl();
+		WikiPageModelImpl cloneModel = (WikiPageModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._pageId = _pageId;
+
 		clone._originalResourcePrimKey = clone._resourcePrimKey = _resourcePrimKey;
+
+		cloneModel._originalResourcePrimKey = cloneModel._resourcePrimKey;
+		cloneModel._setOriginalResourcePrimKey = false;
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -564,9 +574,18 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalNodeId = clone._nodeId = _nodeId;
+
+		cloneModel._originalNodeId = cloneModel._nodeId;
+		cloneModel._setOriginalNodeId = false;
 		clone._originalTitle = clone._title = _title;
+
+		cloneModel._originalTitle = cloneModel._title;
 		clone._originalVersion = clone._version = _version;
+
+		cloneModel._originalVersion = cloneModel._version;
+		cloneModel._setOriginalVersion = false;
 
 		clone._minorEdit = _minorEdit;
 

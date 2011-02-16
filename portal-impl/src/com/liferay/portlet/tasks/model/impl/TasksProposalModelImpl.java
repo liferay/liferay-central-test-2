@@ -334,6 +334,7 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 
 	public Object clone() {
 		TasksProposalModelImpl clone = new TasksProposalImpl();
+		TasksProposalModelImpl cloneModel = (TasksProposalModelImpl)clone;
 
 		clone._proposalId = _proposalId;
 
@@ -348,8 +349,14 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
+		cloneModel._originalClassNameId = cloneModel._classNameId;
+		cloneModel._setOriginalClassNameId = false;
 		clone._originalClassPK = clone._classPK = _classPK;
+
+		cloneModel._originalClassPK = cloneModel._classPK;
 
 		clone._name = _name;
 

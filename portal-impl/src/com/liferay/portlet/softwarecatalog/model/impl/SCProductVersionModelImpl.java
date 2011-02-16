@@ -320,6 +320,7 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 
 	public Object clone() {
 		SCProductVersionModelImpl clone = new SCProductVersionImpl();
+		SCProductVersionModelImpl cloneModel = (SCProductVersionModelImpl)clone;
 
 		clone._productVersionId = _productVersionId;
 
@@ -340,7 +341,10 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		clone._changeLog = _changeLog;
 
 		clone._downloadPageURL = _downloadPageURL;
+
 		clone._originalDirectDownloadURL = clone._directDownloadURL = _directDownloadURL;
+
+		cloneModel._originalDirectDownloadURL = cloneModel._directDownloadURL;
 
 		clone._repoStoreArtifact = _repoStoreArtifact;
 

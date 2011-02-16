@@ -335,20 +335,29 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview>
 
 	public Object clone() {
 		TasksReviewModelImpl clone = new TasksReviewImpl();
+		TasksReviewModelImpl cloneModel = (TasksReviewModelImpl)clone;
 
 		clone._reviewId = _reviewId;
 
 		clone._groupId = _groupId;
 
 		clone._companyId = _companyId;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 
 		clone._userName = _userName;
 
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalProposalId = clone._proposalId = _proposalId;
+
+		cloneModel._originalProposalId = cloneModel._proposalId;
+		cloneModel._setOriginalProposalId = false;
 
 		clone._assignedByUserId = _assignedByUserId;
 

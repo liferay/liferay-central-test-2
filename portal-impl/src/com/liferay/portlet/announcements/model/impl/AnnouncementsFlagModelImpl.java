@@ -238,13 +238,25 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 	public Object clone() {
 		AnnouncementsFlagModelImpl clone = new AnnouncementsFlagImpl();
+		AnnouncementsFlagModelImpl cloneModel = (AnnouncementsFlagModelImpl)clone;
 
 		clone._flagId = _flagId;
+
 		clone._originalUserId = clone._userId = _userId;
 
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
+
 		clone._createDate = _createDate;
+
 		clone._originalEntryId = clone._entryId = _entryId;
+
+		cloneModel._originalEntryId = cloneModel._entryId;
+		cloneModel._setOriginalEntryId = false;
 		clone._originalValue = clone._value = _value;
+
+		cloneModel._originalValue = cloneModel._value;
+		cloneModel._setOriginalValue = false;
 
 		return clone;
 	}

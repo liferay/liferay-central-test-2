@@ -325,11 +325,18 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 
 	public Object clone() {
 		BookmarksEntryModelImpl clone = new BookmarksEntryImpl();
+		BookmarksEntryModelImpl cloneModel = (BookmarksEntryModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._entryId = _entryId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 

@@ -774,16 +774,31 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 	public Object clone() {
 		UserModelImpl clone = new UserImpl();
+		UserModelImpl cloneModel = (UserModelImpl)clone;
 
 		clone._uuid = _uuid;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalDefaultUser = clone._defaultUser = _defaultUser;
+
+		cloneModel._originalDefaultUser = cloneModel._defaultUser;
+		cloneModel._setOriginalDefaultUser = false;
 		clone._originalContactId = clone._contactId = _contactId;
+
+		cloneModel._originalContactId = cloneModel._contactId;
+		cloneModel._setOriginalContactId = false;
 
 		clone._password = _password;
 
@@ -800,11 +815,24 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		clone._reminderQueryAnswer = _reminderQueryAnswer;
 
 		clone._graceLoginCount = _graceLoginCount;
+
 		clone._originalScreenName = clone._screenName = _screenName;
+
+		cloneModel._originalScreenName = cloneModel._screenName;
 		clone._originalEmailAddress = clone._emailAddress = _emailAddress;
+
+		cloneModel._originalEmailAddress = cloneModel._emailAddress;
 		clone._originalFacebookId = clone._facebookId = _facebookId;
+
+		cloneModel._originalFacebookId = cloneModel._facebookId;
+		cloneModel._setOriginalFacebookId = false;
 		clone._originalOpenId = clone._openId = _openId;
+
+		cloneModel._originalOpenId = cloneModel._openId;
 		clone._originalPortraitId = clone._portraitId = _portraitId;
+
+		cloneModel._originalPortraitId = cloneModel._portraitId;
+		cloneModel._setOriginalPortraitId = false;
 
 		clone._languageId = _languageId;
 

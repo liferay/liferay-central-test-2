@@ -277,6 +277,7 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	public Object clone() {
 		MembershipRequestModelImpl clone = new MembershipRequestImpl();
+		MembershipRequestModelImpl cloneModel = (MembershipRequestModelImpl)clone;
 
 		clone._membershipRequestId = _membershipRequestId;
 

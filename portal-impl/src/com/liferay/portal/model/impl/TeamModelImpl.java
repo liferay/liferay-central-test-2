@@ -281,6 +281,7 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 
 	public Object clone() {
 		TeamModelImpl clone = new TeamImpl();
+		TeamModelImpl cloneModel = (TeamModelImpl)clone;
 
 		clone._teamId = _teamId;
 
@@ -293,8 +294,14 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		clone._createDate = _createDate;
 
 		clone._modifiedDate = _modifiedDate;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 
 		clone._description = _description;
 

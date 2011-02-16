@@ -223,10 +223,18 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 
 	public Object clone() {
 		PollsVoteModelImpl clone = new PollsVoteImpl();
+		PollsVoteModelImpl cloneModel = (PollsVoteModelImpl)clone;
 
 		clone._voteId = _voteId;
+
 		clone._originalUserId = clone._userId = _userId;
+
+		cloneModel._originalUserId = cloneModel._userId;
+		cloneModel._setOriginalUserId = false;
 		clone._originalQuestionId = clone._questionId = _questionId;
+
+		cloneModel._originalQuestionId = cloneModel._questionId;
+		cloneModel._setOriginalQuestionId = false;
 
 		clone._choiceId = _choiceId;
 

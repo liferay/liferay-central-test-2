@@ -159,6 +159,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 
 	public Object clone() {
 		UserGroupGroupRoleModelImpl clone = new UserGroupGroupRoleImpl();
+		UserGroupGroupRoleModelImpl cloneModel = (UserGroupGroupRoleModelImpl)clone;
 
 		clone._userGroupId = _userGroupId;
 

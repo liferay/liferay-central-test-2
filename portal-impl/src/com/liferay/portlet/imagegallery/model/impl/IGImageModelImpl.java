@@ -369,11 +369,18 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 
 	public Object clone() {
 		IGImageModelImpl clone = new IGImageImpl();
+		IGImageModelImpl cloneModel = (IGImageModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._imageId = _imageId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 
@@ -388,10 +395,23 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		clone._name = _name;
 
 		clone._description = _description;
+
 		clone._originalSmallImageId = clone._smallImageId = _smallImageId;
+
+		cloneModel._originalSmallImageId = cloneModel._smallImageId;
+		cloneModel._setOriginalSmallImageId = false;
 		clone._originalLargeImageId = clone._largeImageId = _largeImageId;
+
+		cloneModel._originalLargeImageId = cloneModel._largeImageId;
+		cloneModel._setOriginalLargeImageId = false;
 		clone._originalCustom1ImageId = clone._custom1ImageId = _custom1ImageId;
+
+		cloneModel._originalCustom1ImageId = cloneModel._custom1ImageId;
+		cloneModel._setOriginalCustom1ImageId = false;
 		clone._originalCustom2ImageId = clone._custom2ImageId = _custom2ImageId;
+
+		cloneModel._originalCustom2ImageId = cloneModel._custom2ImageId;
+		cloneModel._setOriginalCustom2ImageId = false;
 
 		return clone;
 	}

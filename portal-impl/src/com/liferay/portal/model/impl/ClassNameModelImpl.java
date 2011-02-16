@@ -184,9 +184,13 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 
 	public Object clone() {
 		ClassNameModelImpl clone = new ClassNameImpl();
+		ClassNameModelImpl cloneModel = (ClassNameModelImpl)clone;
 
 		clone._classNameId = _classNameId;
+
 		clone._originalValue = clone._value = _value;
+
+		cloneModel._originalValue = cloneModel._value;
 
 		return clone;
 	}

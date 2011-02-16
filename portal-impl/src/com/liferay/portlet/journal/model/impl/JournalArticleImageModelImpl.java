@@ -258,14 +258,30 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 	public Object clone() {
 		JournalArticleImageModelImpl clone = new JournalArticleImageImpl();
+		JournalArticleImageModelImpl cloneModel = (JournalArticleImageModelImpl)clone;
 
 		clone._articleImageId = _articleImageId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 		clone._originalArticleId = clone._articleId = _articleId;
+
+		cloneModel._originalArticleId = cloneModel._articleId;
 		clone._originalVersion = clone._version = _version;
+
+		cloneModel._originalVersion = cloneModel._version;
+		cloneModel._setOriginalVersion = false;
 		clone._originalElInstanceId = clone._elInstanceId = _elInstanceId;
+
+		cloneModel._originalElInstanceId = cloneModel._elInstanceId;
 		clone._originalElName = clone._elName = _elName;
+
+		cloneModel._originalElName = cloneModel._elName;
 		clone._originalLanguageId = clone._languageId = _languageId;
+
+		cloneModel._originalLanguageId = cloneModel._languageId;
 
 		clone._tempImage = _tempImage;
 

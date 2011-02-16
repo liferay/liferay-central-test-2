@@ -270,13 +270,28 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 
 	public Object clone() {
 		ResourcePermissionModelImpl clone = new ResourcePermissionImpl();
+		ResourcePermissionModelImpl cloneModel = (ResourcePermissionModelImpl)clone;
 
 		clone._resourcePermissionId = _resourcePermissionId;
+
 		clone._originalCompanyId = clone._companyId = _companyId;
+
+		cloneModel._originalCompanyId = cloneModel._companyId;
+		cloneModel._setOriginalCompanyId = false;
 		clone._originalName = clone._name = _name;
+
+		cloneModel._originalName = cloneModel._name;
 		clone._originalScope = clone._scope = _scope;
+
+		cloneModel._originalScope = cloneModel._scope;
+		cloneModel._setOriginalScope = false;
 		clone._originalPrimKey = clone._primKey = _primKey;
+
+		cloneModel._originalPrimKey = cloneModel._primKey;
 		clone._originalRoleId = clone._roleId = _roleId;
+
+		cloneModel._originalRoleId = cloneModel._roleId;
+		cloneModel._setOriginalRoleId = false;
 
 		clone._actionIds = _actionIds;
 

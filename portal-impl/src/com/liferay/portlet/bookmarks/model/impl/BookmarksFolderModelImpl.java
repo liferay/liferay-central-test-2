@@ -291,11 +291,18 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 
 	public Object clone() {
 		BookmarksFolderModelImpl clone = new BookmarksFolderImpl();
+		BookmarksFolderModelImpl cloneModel = (BookmarksFolderModelImpl)clone;
 
 		clone._originalUuid = clone._uuid = _uuid;
 
+		cloneModel._originalUuid = cloneModel._uuid;
+
 		clone._folderId = _folderId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
+
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
 
 		clone._companyId = _companyId;
 

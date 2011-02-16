@@ -340,12 +340,21 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 
 	public Object clone() {
 		LayoutSetModelImpl clone = new LayoutSetImpl();
+		LayoutSetModelImpl cloneModel = (LayoutSetModelImpl)clone;
 
 		clone._layoutSetId = _layoutSetId;
+
 		clone._originalGroupId = clone._groupId = _groupId;
 
+		cloneModel._originalGroupId = cloneModel._groupId;
+		cloneModel._setOriginalGroupId = false;
+
 		clone._companyId = _companyId;
+
 		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
+
+		cloneModel._originalPrivateLayout = cloneModel._privateLayout;
+		cloneModel._setOriginalPrivateLayout = false;
 
 		clone._logo = _logo;
 
