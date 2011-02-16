@@ -19,7 +19,6 @@ import com.liferay.portal.dao.orm.hibernate.EhCacheProvider;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEvent;
 import com.liferay.portal.kernel.cache.cluster.PortalCacheClusterEventType;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
@@ -34,9 +33,7 @@ import net.sf.ehcache.CacheManager;
 public class ClusterLinkPortalCacheClusterRemoveListener
 	extends BaseMessageListener {
 
-	public ClusterLinkPortalCacheClusterRemoveListener()
-		throws SystemException {
-
+	public ClusterLinkPortalCacheClusterRemoveListener() {
 		_hibernateCacheManager = EhCacheProvider.getCacheManager();
 
 		EhcachePortalCacheManager ehcachePortalCacheManager =
