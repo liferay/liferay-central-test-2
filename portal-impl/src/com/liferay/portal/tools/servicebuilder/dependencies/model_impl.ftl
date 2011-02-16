@@ -519,6 +519,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 	public Object clone() {
 		${entity.name}ModelImpl clone = new ${entity.name}Impl();
+		${entity.name}ModelImpl cloneModel = (${entity.name}ModelImpl)clone;
 
 		<#list entity.regularColList as column>
 			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
@@ -531,6 +532,13 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 				_${column.name}.clone();
 			<#else>
 				_${column.name};
+			</#if>
+
+			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
+				cloneModel._original${column.methodName} = cloneModel._${column.name};
+				<#if column.isPrimitiveType()>
+					cloneModel._setOriginal${column.methodName} = false;
+				</#if>
 			</#if>
 		</#list>
 
