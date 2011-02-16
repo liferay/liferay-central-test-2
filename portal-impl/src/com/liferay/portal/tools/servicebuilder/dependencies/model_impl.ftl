@@ -520,7 +520,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	public Object clone() {
 		${entity.name}Impl ${entity.varName}Impl = new ${entity.name}Impl();
 
-		${entity.name}ModelImpl ${entity.varName}ModelImpl = (${entity.name}ModelImpl)${entity.varName}Impl;
+		${entity.name}ModelImpl ${entity.varName}ModelImpl = ${entity.varName}Impl;
 
 		<#list entity.regularColList as column>
 			${entity.varName}Impl.set${column.methodName}(
