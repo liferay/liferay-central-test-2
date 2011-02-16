@@ -18,8 +18,6 @@
 
 <%
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
-
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <liferay-ui:error-marker key="errorSection" value="proposals" />

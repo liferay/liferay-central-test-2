@@ -64,3 +64,7 @@
 <%@ page import="com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tasks.service.permission.TasksProposalPermission" %>
 <%@ page import="com.liferay.portlet.tasks.util.comparator.ReviewUserNameComparator" %>
+
+<%
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
+%>
