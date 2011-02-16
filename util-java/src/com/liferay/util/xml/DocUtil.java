@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 public class DocUtil {
 
@@ -100,11 +101,7 @@ public class DocUtil {
 
 		QName qName = SAXReaderUtil.createQName(name, namespace);
 
-		Element childElement = element.addElement(qName);
-
-		childElement.addText(GetterUtil.getString(text));
-
-		return childElement;
+		return add(element, qName, text);
 	}
 
 	public static Element add(Element element, String name, Object text) {
@@ -117,6 +114,46 @@ public class DocUtil {
 
 	public static Element add(Element element, String name, String text) {
 		Element childElement = element.addElement(name);
+
+		childElement.addText(GetterUtil.getString(text));
+
+		return childElement;
+	}
+
+	public static Element add(Element element, QName qName) {
+		return element.addElement(qName);
+	}
+
+	public static Element add(Element element, QName qName, boolean text) {
+		return add(element, qName, String.valueOf(text));
+	}
+
+	public static Element add(Element element, QName qName, double text) {
+		return add(element, qName, String.valueOf(text));
+	}
+
+	public static Element add(Element element, QName qName, float text) {
+		return add(element, qName, String.valueOf(text));
+	}
+
+	public static Element add(Element element, QName qName, int text) {
+		return add(element, qName, String.valueOf(text));
+	}
+
+	public static Element add(Element element, QName qName, long text) {
+		return add(element, qName, String.valueOf(text));
+	}
+
+	public static Element add(Element element, QName qName, Object text) {
+		return add(element, qName, String.valueOf(text));
+	}
+
+	public static Element add(Element element, QName qName, short text) {
+		return add(element, qName, String.valueOf(text));
+	}
+
+	public static Element add(Element element, QName qName, String text) {
+		Element childElement = element.addElement(qName);
 
 		childElement.addText(GetterUtil.getString(text));
 

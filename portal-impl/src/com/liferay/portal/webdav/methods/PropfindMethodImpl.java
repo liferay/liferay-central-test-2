@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.WebDAVRequest;
@@ -26,6 +25,7 @@ import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.webdav.InvalidRequestException;
 import com.liferay.util.xml.XMLFormatter;
@@ -45,7 +45,7 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
-			Set<Tuple> props = getProps(webDavRequest);
+			Set<QName> props = getProps(webDavRequest);
 
 			return writeResponseXML(webDavRequest, props);
 		}
@@ -57,11 +57,11 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 		}
 	}
 
-	protected Set<Tuple> getProps(WebDAVRequest webDavRequest)
+	protected Set<QName> getProps(WebDAVRequest webDavRequest)
 		throws InvalidRequestException {
 
 		try {
-			Set<Tuple> props = new HashSet<Tuple>();
+			Set<QName> props = new HashSet<QName>();
 
 			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
@@ -86,7 +86,7 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 			Element root = doc.getRootElement();
 
-			if (root.element(ALLPROP) != null) {
+			if (root.element(ALLPROP.getName()) != null) {
 
 				// Generate props if <allprop> tag is used. See LEP-6162.
 
@@ -103,19 +103,9 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 				String prefix = el.getNamespacePrefix();
 				String uri = el.getNamespaceURI();
 
-				Namespace namespace = null;
+				Namespace namespace = WebDAVUtil.createNamespace(prefix, uri);
 
-				if (uri.equals(WebDAVUtil.DAV_URI.getURI())) {
-					namespace = WebDAVUtil.DAV_URI;
-				}
-				else if (Validator.isNull(prefix)) {
-					namespace = SAXReaderUtil.createNamespace(uri);
-				}
-				else {
-					namespace = SAXReaderUtil.createNamespace(prefix, uri);
-				}
-
-				props.add(new Tuple(el.getName(), namespace));
+				props.add(SAXReaderUtil.createQName(el.getName(), namespace));
 			}
 
 			return props;
@@ -125,13 +115,13 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 		}
 	}
 
-	protected Set<Tuple> generateProps(Set<Tuple> props) {
-		props.add(DISPLAYNAME_PAIR);
-		props.add(RESOURCETYPE_PAIR);
-		props.add(GETCONTENTTYPE_PAIR);
-		props.add(GETCONTENTLENGTH_PAIR);
-		props.add(GETLASTMODIFIED_PAIR);
-		props.add(LOCKDISCOVERY_PAIR);
+	protected Set<QName> generateProps(Set<QName> props) {
+		props.add(DISPLAYNAME);
+		props.add(RESOURCETYPE);
+		props.add(GETCONTENTTYPE);
+		props.add(GETCONTENTLENGTH);
+		props.add(GETLASTMODIFIED);
+		props.add(LOCKDISCOVERY);
 
 		// RFC 3253 Currently Unsupported
 

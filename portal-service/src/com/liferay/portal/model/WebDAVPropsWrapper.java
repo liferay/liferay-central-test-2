@@ -242,7 +242,7 @@ public class WebDAVPropsWrapper implements WebDAVProps {
 		return _webDAVProps.toXmlString();
 	}
 
-	public java.util.Set<com.liferay.portal.kernel.util.Tuple> getPropsSet()
+	public java.util.Set<com.liferay.portal.kernel.xml.QName> getPropsSet()
 		throws java.lang.Exception {
 		return _webDAVProps.getPropsSet();
 	}

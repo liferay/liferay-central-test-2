@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
@@ -62,6 +63,22 @@ public class WebDAVUtil {
 
 	public static void addStorage(WebDAVStorage storage) {
 		_instance._addStorage(storage);
+	}
+
+	public static Namespace createNamespace(String prefix, String uri) {
+		Namespace namespace = null;
+
+		if (uri.equals(WebDAVUtil.DAV_URI.getURI())) {
+			namespace = WebDAVUtil.DAV_URI;
+		}
+		else if (Validator.isNull(prefix)) {
+			namespace = SAXReaderUtil.createNamespace(uri);
+		}
+		else {
+			namespace = SAXReaderUtil.createNamespace(prefix, uri);
+		}
+
+		return namespace;
 	}
 
 	public static void deleteStorage(WebDAVStorage storage) {

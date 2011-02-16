@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webdav.Resource;
 import com.liferay.portal.kernel.webdav.WebDAVException;
@@ -30,6 +29,7 @@ import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.WebDAVProps;
@@ -53,7 +53,7 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
-			Set<Tuple> props = processInstructions(webDavRequest);
+			Set<QName> props = processInstructions(webDavRequest);
 
 			return writeResponseXML(webDavRequest, props);
 		}
@@ -105,11 +105,11 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 		return webDavProps;
 	}
 
-	protected Set<Tuple> processInstructions(WebDAVRequest webDavRequest)
+	protected Set<QName> processInstructions(WebDAVRequest webDavRequest)
 		throws InvalidRequestException, LockException {
 
 		try {
-			Set<Tuple> newProps = new HashSet<Tuple>();
+			Set<QName> newProps = new HashSet<QName>();
 
 			HttpServletRequest request = webDavRequest.getHttpServletRequest();
 
@@ -163,17 +163,8 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 					String uri = customPropElement.getNamespaceURI();
 					String text = customPropElement.getText();
 
-					Namespace namespace = null;
-
-					if (uri.equals(WebDAVUtil.DAV_URI.getURI())) {
-						namespace = WebDAVUtil.DAV_URI;
-					}
-					else if (Validator.isNull(prefix)) {
-						namespace = SAXReaderUtil.createNamespace(uri);
-					}
-					else {
-						namespace = SAXReaderUtil.createNamespace(prefix, uri);
-					}
+					Namespace namespace = WebDAVUtil.createNamespace(
+						prefix, uri);
 
 					if (instructionElement.getName().equals("set")) {
 						if (Validator.isNull(text)) {
@@ -183,8 +174,8 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 							webDavProps.addProp(name, prefix, uri, text);
 						}
 
-						newProps.add(
-							new Tuple(customPropElement.getName(), namespace));
+						newProps.add(SAXReaderUtil.createQName(
+							customPropElement.getName(), namespace));
 					}
 					else if (instructionElement.getName().equals("remove")) {
 						webDavProps.removeProp(name, prefix, uri);

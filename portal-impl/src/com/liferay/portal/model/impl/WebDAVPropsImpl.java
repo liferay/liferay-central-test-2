@@ -15,7 +15,6 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -50,8 +49,8 @@ public class WebDAVPropsImpl
 		}
 	}
 
-	public Set<Tuple> getPropsSet() throws Exception {
-		Set<Tuple> propsSet = new HashSet<Tuple>();
+	public Set<QName> getPropsSet() throws Exception {
+		Set<QName> propsSet = new HashSet<QName>();
 
 		Document doc = _getPropsDocument();
 
@@ -61,19 +60,9 @@ public class WebDAVPropsImpl
 			String prefix = el.getNamespacePrefix();
 			String uri = el.getNamespaceURI();
 
-			Namespace namespace = null;
+			Namespace namespace = WebDAVUtil.createNamespace(prefix, uri);
 
-			if (uri.equals(WebDAVUtil.DAV_URI.getURI())) {
-				namespace = WebDAVUtil.DAV_URI;
-			}
-			else if (Validator.isNull(prefix)) {
-				namespace = SAXReaderUtil.createNamespace(uri);
-			}
-			else {
-				namespace = SAXReaderUtil.createNamespace(prefix, uri);
-			}
-
-			propsSet.add(new Tuple(el.getName(), namespace));
+			propsSet.add(SAXReaderUtil.createQName(el.getName(), namespace));
 		}
 
 		return propsSet;
@@ -82,14 +71,7 @@ public class WebDAVPropsImpl
 	public String getText(String name, String prefix, String uri)
 		throws Exception {
 
-		Namespace namespace = null;
-
-		if (Validator.isNull(prefix)) {
-			namespace = SAXReaderUtil.createNamespace(uri);
-		}
-		else {
-			namespace = SAXReaderUtil.createNamespace(prefix, uri);
-		}
+		Namespace namespace = WebDAVUtil.createNamespace(prefix, uri);
 
 		QName qname = SAXReaderUtil.createQName(name, namespace);
 
@@ -105,14 +87,7 @@ public class WebDAVPropsImpl
 	public void addProp(String name, String prefix, String uri)
 		throws Exception {
 
-		Namespace namespace = null;
-
-		if (Validator.isNull(prefix)) {
-			namespace = SAXReaderUtil.createNamespace(uri);
-		}
-		else {
-			namespace = SAXReaderUtil.createNamespace(prefix, uri);
-		}
+		Namespace namespace = WebDAVUtil.createNamespace(prefix, uri);
 
 		QName qname = SAXReaderUtil.createQName(name, namespace);
 
@@ -124,14 +99,7 @@ public class WebDAVPropsImpl
 	public void addProp(String name, String prefix, String uri, String text)
 		throws Exception {
 
-		Namespace namespace = null;
-
-		if (Validator.isNull(prefix)) {
-			namespace = SAXReaderUtil.createNamespace(uri);
-		}
-		else {
-			namespace = SAXReaderUtil.createNamespace(prefix, uri);
-		}
+		Namespace namespace = WebDAVUtil.createNamespace(prefix, uri);
 
 		QName qname = SAXReaderUtil.createQName(name, namespace);
 
@@ -143,14 +111,7 @@ public class WebDAVPropsImpl
 	public void removeProp(String name, String prefix, String uri)
 		throws Exception {
 
-		Namespace namespace = null;
-
-		if (Validator.isNull(prefix)) {
-			namespace = SAXReaderUtil.createNamespace(uri);
-		}
-		else {
-			namespace = SAXReaderUtil.createNamespace(prefix, uri);
-		}
+		Namespace namespace = WebDAVUtil.createNamespace(prefix, uri);
 
 		QName qname = SAXReaderUtil.createQName(name, namespace);
 

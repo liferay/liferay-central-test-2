@@ -31,7 +31,7 @@ public interface WebDAVProps extends WebDAVPropsModel {
 	 */
 	public java.lang.String getProps();
 
-	public java.util.Set<com.liferay.portal.kernel.util.Tuple> getPropsSet()
+	public java.util.Set<com.liferay.portal.kernel.xml.QName> getPropsSet()
 		throws java.lang.Exception;
 
 	public java.lang.String getText(java.lang.String name,
