@@ -524,7 +524,9 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			<#if column.isFetchFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 				clone._original${column.methodName} =
 			</#if>
+
 			clone._${column.name} =
+
 			<#if column.EJBName??>
 				_${column.name}.clone();
 			<#else>
