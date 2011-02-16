@@ -637,6 +637,7 @@ public class DLRepositoryLocalServiceImpl
 		newDLFileEntry.setVersionUserName(dlFileEntry.getVersionUserName());
 		newDLFileEntry.setCreateDate(dlFileEntry.getCreateDate());
 		newDLFileEntry.setModifiedDate(dlFileEntry.getModifiedDate());
+		newDLFileEntry.setRepositoryId(dlFileEntry.getRepositoryId());
 		newDLFileEntry.setFolderId(newFolderId);
 		newDLFileEntry.setName(dlFileEntry.getName());
 		newDLFileEntry.setExtension(dlFileEntry.getExtension());
