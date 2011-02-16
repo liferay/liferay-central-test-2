@@ -295,9 +295,17 @@ public class LayoutRevisionLocalServiceWrapper
 			plid, status);
 	}
 
+	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
+		long layoutSetBranchId, long plid, long parentLayoutRevision)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.getLayoutRevisions(layoutSetBranchId,
+			plid, parentLayoutRevision);
+	}
+
 	public com.liferay.portal.model.LayoutRevision updateLayoutRevision(
 		long userId, long layoutRevisionId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
+		java.lang.String keywords, java.lang.String robots,
 		java.lang.String typeSettings, boolean iconImage, long iconImageId,
 		java.lang.String themeId, java.lang.String colorSchemeId,
 		java.lang.String wapThemeId, java.lang.String wapColorSchemeId,

@@ -262,6 +262,14 @@ public class LayoutRevisionLocalServiceImpl
 			layoutSetBranchId, plid, status);
 	}
 
+	public List<LayoutRevision> getLayoutRevisions(
+			long layoutSetBranchId, long plid, long parentLayoutRevision)
+		throws SystemException {
+
+		return layoutRevisionPersistence.findByL_P_P(
+			layoutSetBranchId, plid, parentLayoutRevision);
+	}
+
 	public LayoutRevision updateLayoutRevision(
 			long userId, long layoutRevisionId, String name, String title,
 			String description, String typeSettings, boolean iconImage,

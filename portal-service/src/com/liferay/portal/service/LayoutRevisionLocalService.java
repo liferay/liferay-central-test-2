@@ -260,6 +260,11 @@ public interface LayoutRevisionLocalService {
 		long layoutSetBranchId, long plid, int status)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
+		long layoutSetBranchId, long plid, long parentLayoutRevision)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public com.liferay.portal.model.LayoutRevision updateLayoutRevision(
 		long userId, long layoutRevisionId, java.lang.String name,
 		java.lang.String title, java.lang.String description,

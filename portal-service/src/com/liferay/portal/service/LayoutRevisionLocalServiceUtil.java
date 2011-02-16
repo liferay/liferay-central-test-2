@@ -301,6 +301,14 @@ public class LayoutRevisionLocalServiceUtil {
 		return getService().getLayoutRevisions(layoutSetBranchId, plid, status);
 	}
 
+	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
+		long layoutSetBranchId, long plid, long parentLayoutRevision)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getLayoutRevisions(layoutSetBranchId, plid,
+			parentLayoutRevision);
+	}
+
 	public static com.liferay.portal.model.LayoutRevision updateLayoutRevision(
 		long userId, long layoutRevisionId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
