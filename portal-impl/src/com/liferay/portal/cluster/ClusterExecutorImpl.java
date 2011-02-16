@@ -185,6 +185,8 @@ public class ClusterExecutorImpl
 
 			ClusterNode clusterNode = getLocalClusterNode();
 
+			memberJoined(getLocalControlAddress(), clusterNode);
+
 			ClusterRequest clusterRequest = ClusterRequest.createClusterRequest(
 				ClusterMessageType.NOTIFY, clusterNode);
 
@@ -219,6 +221,8 @@ public class ClusterExecutorImpl
 			ClusterNode clusterNode = getLocalClusterNode();
 
 			clusterNode.setPort(port);
+
+			memberJoined(getLocalControlAddress(), clusterNode);
 
 			ClusterRequest clusterRequest = ClusterRequest.createClusterRequest(
 				ClusterMessageType.UPDATE, clusterNode);

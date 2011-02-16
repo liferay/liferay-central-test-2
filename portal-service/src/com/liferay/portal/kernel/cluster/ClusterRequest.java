@@ -39,7 +39,7 @@ public class ClusterRequest implements Serializable {
 		clusterRequest.setClusterMessageType(clusterMessageType);
 		clusterRequest.setMulticast(true);
 		clusterRequest.setOriginatingClusterNode(originatingClusterNode);
-		clusterRequest.setSkipLocal(false);
+		clusterRequest.setSkipLocal(true);
 		clusterRequest.setUuid(PortalUUIDUtil.generate());
 
 		return clusterRequest;
