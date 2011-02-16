@@ -32,6 +32,7 @@ public class LayoutTypePortletFactoryUtil {
 
 	public void setLayoutTypePortletFactory(
 		LayoutTypePortletFactory layoutTypePortletFactory) {
+
 		_layoutTypePortletFactory = layoutTypePortletFactory;
 	}
 
