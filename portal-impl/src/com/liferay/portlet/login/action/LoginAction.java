@@ -45,7 +45,6 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -158,25 +157,7 @@ public class LoginAction extends PortletAction {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if (Validator.isNotNull(redirect)) {
-				HttpSession session = request.getSession();
-
-				Boolean httpsInitial = (Boolean)session.getAttribute(
-					WebKeys.HTTPS_INITIAL);
-
-				String portalURL = null;
-
-				if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
-					(!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) &&
-					(httpsInitial != null) && (!httpsInitial.booleanValue())) {
-
-					portalURL = PortalUtil.getPortalURL(request, false);
-				}
-				else {
-					portalURL = PortalUtil.getPortalURL(request);
-				}
-
 				redirect = PortalUtil.escapeRedirect(redirect);
-				redirect = portalURL.concat(redirect);
 
 				actionResponse.sendRedirect(redirect);
 			}
