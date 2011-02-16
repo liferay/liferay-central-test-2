@@ -234,11 +234,11 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 	public Object clone() {
 		JournalContentSearchImpl journalContentSearchImpl = new JournalContentSearchImpl();
 
-		JournalContentSearchModelImpl journalContentSearchModelImpl = journalContentSearchImpl;
-
 		journalContentSearchImpl.setContentSearchId(getContentSearchId());
 
 		journalContentSearchImpl.setGroupId(getGroupId());
+
+		JournalContentSearchModelImpl journalContentSearchModelImpl = journalContentSearchImpl;
 
 		journalContentSearchModelImpl._originalGroupId = journalContentSearchModelImpl._groupId;
 

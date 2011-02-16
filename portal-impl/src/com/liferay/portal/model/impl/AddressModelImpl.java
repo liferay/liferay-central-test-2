@@ -383,8 +383,6 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 	public Object clone() {
 		AddressImpl addressImpl = new AddressImpl();
 
-		AddressModelImpl addressModelImpl = addressImpl;
-
 		addressImpl.setAddressId(getAddressId());
 
 		addressImpl.setCompanyId(getCompanyId());

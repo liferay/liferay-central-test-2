@@ -478,9 +478,9 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 	public Object clone() {
 		PollsQuestionImpl pollsQuestionImpl = new PollsQuestionImpl();
 
-		PollsQuestionModelImpl pollsQuestionModelImpl = pollsQuestionImpl;
-
 		pollsQuestionImpl.setUuid(getUuid());
+
+		PollsQuestionModelImpl pollsQuestionModelImpl = pollsQuestionImpl;
 
 		pollsQuestionModelImpl._originalUuid = pollsQuestionModelImpl._uuid;
 

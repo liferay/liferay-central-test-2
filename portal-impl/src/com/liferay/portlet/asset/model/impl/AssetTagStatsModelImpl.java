@@ -178,11 +178,11 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 	public Object clone() {
 		AssetTagStatsImpl assetTagStatsImpl = new AssetTagStatsImpl();
 
-		AssetTagStatsModelImpl assetTagStatsModelImpl = assetTagStatsImpl;
-
 		assetTagStatsImpl.setTagStatsId(getTagStatsId());
 
 		assetTagStatsImpl.setTagId(getTagId());
+
+		AssetTagStatsModelImpl assetTagStatsModelImpl = assetTagStatsImpl;
 
 		assetTagStatsModelImpl._originalTagId = assetTagStatsModelImpl._tagId;
 

@@ -224,11 +224,11 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	public Object clone() {
 		PollsVoteImpl pollsVoteImpl = new PollsVoteImpl();
 
-		PollsVoteModelImpl pollsVoteModelImpl = pollsVoteImpl;
-
 		pollsVoteImpl.setVoteId(getVoteId());
 
 		pollsVoteImpl.setUserId(getUserId());
+
+		PollsVoteModelImpl pollsVoteModelImpl = pollsVoteImpl;
 
 		pollsVoteModelImpl._originalUserId = pollsVoteModelImpl._userId;
 

@@ -321,8 +321,6 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 	public Object clone() {
 		SCProductVersionImpl scProductVersionImpl = new SCProductVersionImpl();
 
-		SCProductVersionModelImpl scProductVersionModelImpl = scProductVersionImpl;
-
 		scProductVersionImpl.setProductVersionId(getProductVersionId());
 
 		scProductVersionImpl.setCompanyId(getCompanyId());
@@ -344,6 +342,8 @@ public class SCProductVersionModelImpl extends BaseModelImpl<SCProductVersion>
 		scProductVersionImpl.setDownloadPageURL(getDownloadPageURL());
 
 		scProductVersionImpl.setDirectDownloadURL(getDirectDownloadURL());
+
+		SCProductVersionModelImpl scProductVersionModelImpl = scProductVersionImpl;
 
 		scProductVersionModelImpl._originalDirectDownloadURL = scProductVersionModelImpl._directDownloadURL;
 

@@ -198,8 +198,6 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	public Object clone() {
 		TicketImpl ticketImpl = new TicketImpl();
 
-		TicketModelImpl ticketModelImpl = ticketImpl;
-
 		ticketImpl.setTicketId(getTicketId());
 
 		ticketImpl.setCompanyId(getCompanyId());
@@ -211,6 +209,8 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		ticketImpl.setClassPK(getClassPK());
 
 		ticketImpl.setKey(getKey());
+
+		TicketModelImpl ticketModelImpl = ticketImpl;
 
 		ticketModelImpl._originalKey = ticketModelImpl._key;
 

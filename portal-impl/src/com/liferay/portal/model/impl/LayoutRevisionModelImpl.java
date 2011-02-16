@@ -1009,8 +1009,6 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 	public Object clone() {
 		LayoutRevisionImpl layoutRevisionImpl = new LayoutRevisionImpl();
 
-		LayoutRevisionModelImpl layoutRevisionModelImpl = layoutRevisionImpl;
-
 		layoutRevisionImpl.setLayoutRevisionId(getLayoutRevisionId());
 
 		layoutRevisionImpl.setGroupId(getGroupId());
@@ -1026,6 +1024,8 @@ public class LayoutRevisionModelImpl extends BaseModelImpl<LayoutRevision>
 		layoutRevisionImpl.setModifiedDate(getModifiedDate());
 
 		layoutRevisionImpl.setLayoutSetBranchId(getLayoutSetBranchId());
+
+		LayoutRevisionModelImpl layoutRevisionModelImpl = layoutRevisionImpl;
 
 		layoutRevisionModelImpl._originalLayoutSetBranchId = layoutRevisionModelImpl._layoutSetBranchId;
 

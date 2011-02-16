@@ -271,11 +271,11 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	public Object clone() {
 		ResourcePermissionImpl resourcePermissionImpl = new ResourcePermissionImpl();
 
-		ResourcePermissionModelImpl resourcePermissionModelImpl = resourcePermissionImpl;
-
 		resourcePermissionImpl.setResourcePermissionId(getResourcePermissionId());
 
 		resourcePermissionImpl.setCompanyId(getCompanyId());
+
+		ResourcePermissionModelImpl resourcePermissionModelImpl = resourcePermissionImpl;
 
 		resourcePermissionModelImpl._originalCompanyId = resourcePermissionModelImpl._companyId;
 

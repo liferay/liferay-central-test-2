@@ -290,8 +290,6 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	public Object clone() {
 		EmailAddressImpl emailAddressImpl = new EmailAddressImpl();
 
-		EmailAddressModelImpl emailAddressModelImpl = emailAddressImpl;
-
 		emailAddressImpl.setEmailAddressId(getEmailAddressId());
 
 		emailAddressImpl.setCompanyId(getCompanyId());

@@ -259,11 +259,11 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	public Object clone() {
 		JournalArticleImageImpl journalArticleImageImpl = new JournalArticleImageImpl();
 
-		JournalArticleImageModelImpl journalArticleImageModelImpl = journalArticleImageImpl;
-
 		journalArticleImageImpl.setArticleImageId(getArticleImageId());
 
 		journalArticleImageImpl.setGroupId(getGroupId());
+
+		JournalArticleImageModelImpl journalArticleImageModelImpl = journalArticleImageImpl;
 
 		journalArticleImageModelImpl._originalGroupId = journalArticleImageModelImpl._groupId;
 

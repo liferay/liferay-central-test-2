@@ -408,8 +408,6 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	public Object clone() {
 		DLFileVersionImpl dlFileVersionImpl = new DLFileVersionImpl();
 
-		DLFileVersionModelImpl dlFileVersionModelImpl = dlFileVersionImpl;
-
 		dlFileVersionImpl.setFileVersionId(getFileVersionId());
 
 		dlFileVersionImpl.setGroupId(getGroupId());
@@ -425,6 +423,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		dlFileVersionImpl.setRepositoryId(getRepositoryId());
 
 		dlFileVersionImpl.setFileEntryId(getFileEntryId());
+
+		DLFileVersionModelImpl dlFileVersionModelImpl = dlFileVersionImpl;
 
 		dlFileVersionModelImpl._originalFileEntryId = dlFileVersionModelImpl._fileEntryId;
 

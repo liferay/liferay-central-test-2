@@ -502,11 +502,11 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	public Object clone() {
 		AssetEntryImpl assetEntryImpl = new AssetEntryImpl();
 
-		AssetEntryModelImpl assetEntryModelImpl = assetEntryImpl;
-
 		assetEntryImpl.setEntryId(getEntryId());
 
 		assetEntryImpl.setGroupId(getGroupId());
+
+		AssetEntryModelImpl assetEntryModelImpl = assetEntryImpl;
 
 		assetEntryModelImpl._originalGroupId = assetEntryModelImpl._groupId;
 

@@ -392,9 +392,9 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 	public Object clone() {
 		DLFileShortcutImpl dlFileShortcutImpl = new DLFileShortcutImpl();
 
-		DLFileShortcutModelImpl dlFileShortcutModelImpl = dlFileShortcutImpl;
-
 		dlFileShortcutImpl.setUuid(getUuid());
+
+		DLFileShortcutModelImpl dlFileShortcutModelImpl = dlFileShortcutImpl;
 
 		dlFileShortcutModelImpl._originalUuid = dlFileShortcutModelImpl._uuid;
 

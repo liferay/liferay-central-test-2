@@ -210,8 +210,6 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	public Object clone() {
 		ShoppingItemPriceImpl shoppingItemPriceImpl = new ShoppingItemPriceImpl();
 
-		ShoppingItemPriceModelImpl shoppingItemPriceModelImpl = shoppingItemPriceImpl;
-
 		shoppingItemPriceImpl.setItemPriceId(getItemPriceId());
 
 		shoppingItemPriceImpl.setItemId(getItemId());

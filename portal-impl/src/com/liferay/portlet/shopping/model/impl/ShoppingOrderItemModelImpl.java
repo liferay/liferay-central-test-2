@@ -230,8 +230,6 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 	public Object clone() {
 		ShoppingOrderItemImpl shoppingOrderItemImpl = new ShoppingOrderItemImpl();
 
-		ShoppingOrderItemModelImpl shoppingOrderItemModelImpl = shoppingOrderItemImpl;
-
 		shoppingOrderItemImpl.setOrderItemId(getOrderItemId());
 
 		shoppingOrderItemImpl.setOrderId(getOrderId());

@@ -870,8 +870,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 	public Object clone() {
 		ShoppingOrderImpl shoppingOrderImpl = new ShoppingOrderImpl();
 
-		ShoppingOrderModelImpl shoppingOrderModelImpl = shoppingOrderImpl;
-
 		shoppingOrderImpl.setOrderId(getOrderId());
 
 		shoppingOrderImpl.setGroupId(getGroupId());
@@ -887,6 +885,8 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		shoppingOrderImpl.setModifiedDate(getModifiedDate());
 
 		shoppingOrderImpl.setNumber(getNumber());
+
+		ShoppingOrderModelImpl shoppingOrderModelImpl = shoppingOrderImpl;
 
 		shoppingOrderModelImpl._originalNumber = shoppingOrderModelImpl._number;
 

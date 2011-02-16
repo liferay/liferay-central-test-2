@@ -388,8 +388,6 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 	public Object clone() {
 		SCProductEntryImpl scProductEntryImpl = new SCProductEntryImpl();
 
-		SCProductEntryModelImpl scProductEntryModelImpl = scProductEntryImpl;
-
 		scProductEntryImpl.setProductEntryId(getProductEntryId());
 
 		scProductEntryImpl.setGroupId(getGroupId());
@@ -419,6 +417,8 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		scProductEntryImpl.setAuthor(getAuthor());
 
 		scProductEntryImpl.setRepoGroupId(getRepoGroupId());
+
+		SCProductEntryModelImpl scProductEntryModelImpl = scProductEntryImpl;
 
 		scProductEntryModelImpl._originalRepoGroupId = scProductEntryModelImpl._repoGroupId;
 

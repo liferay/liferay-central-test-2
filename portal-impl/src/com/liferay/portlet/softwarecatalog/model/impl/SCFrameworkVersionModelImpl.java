@@ -301,8 +301,6 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 	public Object clone() {
 		SCFrameworkVersionImpl scFrameworkVersionImpl = new SCFrameworkVersionImpl();
 
-		SCFrameworkVersionModelImpl scFrameworkVersionModelImpl = scFrameworkVersionImpl;
-
 		scFrameworkVersionImpl.setFrameworkVersionId(getFrameworkVersionId());
 
 		scFrameworkVersionImpl.setGroupId(getGroupId());

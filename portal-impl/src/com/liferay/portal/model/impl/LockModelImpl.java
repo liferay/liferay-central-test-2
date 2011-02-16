@@ -264,8 +264,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public Object clone() {
 		LockImpl lockImpl = new LockImpl();
 
-		LockModelImpl lockModelImpl = lockImpl;
-
 		lockImpl.setUuid(getUuid());
 
 		lockImpl.setLockId(getLockId());
@@ -279,6 +277,8 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		lockImpl.setCreateDate(getCreateDate());
 
 		lockImpl.setClassName(getClassName());
+
+		LockModelImpl lockModelImpl = lockImpl;
 
 		lockModelImpl._originalClassName = lockModelImpl._className;
 

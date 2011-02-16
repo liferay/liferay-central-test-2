@@ -341,11 +341,11 @@ public class LayoutSetModelImpl extends BaseModelImpl<LayoutSet>
 	public Object clone() {
 		LayoutSetImpl layoutSetImpl = new LayoutSetImpl();
 
-		LayoutSetModelImpl layoutSetModelImpl = layoutSetImpl;
-
 		layoutSetImpl.setLayoutSetId(getLayoutSetId());
 
 		layoutSetImpl.setGroupId(getGroupId());
+
+		LayoutSetModelImpl layoutSetModelImpl = layoutSetImpl;
 
 		layoutSetModelImpl._originalGroupId = layoutSetModelImpl._groupId;
 

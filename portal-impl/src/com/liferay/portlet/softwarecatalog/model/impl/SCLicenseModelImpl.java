@@ -240,8 +240,6 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	public Object clone() {
 		SCLicenseImpl scLicenseImpl = new SCLicenseImpl();
 
-		SCLicenseModelImpl scLicenseModelImpl = scLicenseImpl;
-
 		scLicenseImpl.setLicenseId(getLicenseId());
 
 		scLicenseImpl.setName(getName());

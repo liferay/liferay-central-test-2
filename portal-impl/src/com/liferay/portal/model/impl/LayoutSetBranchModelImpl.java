@@ -305,11 +305,11 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	public Object clone() {
 		LayoutSetBranchImpl layoutSetBranchImpl = new LayoutSetBranchImpl();
 
-		LayoutSetBranchModelImpl layoutSetBranchModelImpl = layoutSetBranchImpl;
-
 		layoutSetBranchImpl.setLayoutSetBranchId(getLayoutSetBranchId());
 
 		layoutSetBranchImpl.setGroupId(getGroupId());
+
+		LayoutSetBranchModelImpl layoutSetBranchModelImpl = layoutSetBranchImpl;
 
 		layoutSetBranchModelImpl._originalGroupId = layoutSetBranchModelImpl._groupId;
 

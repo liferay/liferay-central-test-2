@@ -335,8 +335,6 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 	public Object clone() {
 		TasksProposalImpl tasksProposalImpl = new TasksProposalImpl();
 
-		TasksProposalModelImpl tasksProposalModelImpl = tasksProposalImpl;
-
 		tasksProposalImpl.setProposalId(getProposalId());
 
 		tasksProposalImpl.setGroupId(getGroupId());
@@ -352,6 +350,8 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 		tasksProposalImpl.setModifiedDate(getModifiedDate());
 
 		tasksProposalImpl.setClassNameId(getClassNameId());
+
+		TasksProposalModelImpl tasksProposalModelImpl = tasksProposalImpl;
 
 		tasksProposalModelImpl._originalClassNameId = tasksProposalModelImpl._classNameId;
 

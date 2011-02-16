@@ -185,11 +185,11 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 	public Object clone() {
 		ServiceComponentImpl serviceComponentImpl = new ServiceComponentImpl();
 
-		ServiceComponentModelImpl serviceComponentModelImpl = serviceComponentImpl;
-
 		serviceComponentImpl.setServiceComponentId(getServiceComponentId());
 
 		serviceComponentImpl.setBuildNamespace(getBuildNamespace());
+
+		ServiceComponentModelImpl serviceComponentModelImpl = serviceComponentImpl;
 
 		serviceComponentModelImpl._originalBuildNamespace = serviceComponentModelImpl._buildNamespace;
 

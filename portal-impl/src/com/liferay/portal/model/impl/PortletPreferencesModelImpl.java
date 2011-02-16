@@ -253,11 +253,11 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	public Object clone() {
 		PortletPreferencesImpl portletPreferencesImpl = new PortletPreferencesImpl();
 
-		PortletPreferencesModelImpl portletPreferencesModelImpl = portletPreferencesImpl;
-
 		portletPreferencesImpl.setPortletPreferencesId(getPortletPreferencesId());
 
 		portletPreferencesImpl.setOwnerId(getOwnerId());
+
+		PortletPreferencesModelImpl portletPreferencesModelImpl = portletPreferencesImpl;
 
 		portletPreferencesModelImpl._originalOwnerId = portletPreferencesModelImpl._ownerId;
 

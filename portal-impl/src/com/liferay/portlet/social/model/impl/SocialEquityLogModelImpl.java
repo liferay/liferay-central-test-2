@@ -309,8 +309,6 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 	public Object clone() {
 		SocialEquityLogImpl socialEquityLogImpl = new SocialEquityLogImpl();
 
-		SocialEquityLogModelImpl socialEquityLogModelImpl = socialEquityLogImpl;
-
 		socialEquityLogImpl.setEquityLogId(getEquityLogId());
 
 		socialEquityLogImpl.setGroupId(getGroupId());
@@ -318,6 +316,8 @@ public class SocialEquityLogModelImpl extends BaseModelImpl<SocialEquityLog>
 		socialEquityLogImpl.setCompanyId(getCompanyId());
 
 		socialEquityLogImpl.setUserId(getUserId());
+
+		SocialEquityLogModelImpl socialEquityLogModelImpl = socialEquityLogImpl;
 
 		socialEquityLogModelImpl._originalUserId = socialEquityLogModelImpl._userId;
 

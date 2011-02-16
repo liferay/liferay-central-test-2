@@ -336,8 +336,6 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview>
 	public Object clone() {
 		TasksReviewImpl tasksReviewImpl = new TasksReviewImpl();
 
-		TasksReviewModelImpl tasksReviewModelImpl = tasksReviewImpl;
-
 		tasksReviewImpl.setReviewId(getReviewId());
 
 		tasksReviewImpl.setGroupId(getGroupId());
@@ -345,6 +343,8 @@ public class TasksReviewModelImpl extends BaseModelImpl<TasksReview>
 		tasksReviewImpl.setCompanyId(getCompanyId());
 
 		tasksReviewImpl.setUserId(getUserId());
+
+		TasksReviewModelImpl tasksReviewModelImpl = tasksReviewImpl;
 
 		tasksReviewModelImpl._originalUserId = tasksReviewModelImpl._userId;
 

@@ -257,11 +257,11 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 	public Object clone() {
 		SocialEquitySettingImpl socialEquitySettingImpl = new SocialEquitySettingImpl();
 
-		SocialEquitySettingModelImpl socialEquitySettingModelImpl = socialEquitySettingImpl;
-
 		socialEquitySettingImpl.setEquitySettingId(getEquitySettingId());
 
 		socialEquitySettingImpl.setGroupId(getGroupId());
+
+		SocialEquitySettingModelImpl socialEquitySettingModelImpl = socialEquitySettingImpl;
 
 		socialEquitySettingModelImpl._originalGroupId = socialEquitySettingModelImpl._groupId;
 

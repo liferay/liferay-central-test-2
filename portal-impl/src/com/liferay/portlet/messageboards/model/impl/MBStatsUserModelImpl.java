@@ -197,11 +197,11 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 	public Object clone() {
 		MBStatsUserImpl mbStatsUserImpl = new MBStatsUserImpl();
 
-		MBStatsUserModelImpl mbStatsUserModelImpl = mbStatsUserImpl;
-
 		mbStatsUserImpl.setStatsUserId(getStatsUserId());
 
 		mbStatsUserImpl.setGroupId(getGroupId());
+
+		MBStatsUserModelImpl mbStatsUserModelImpl = mbStatsUserImpl;
 
 		mbStatsUserModelImpl._originalGroupId = mbStatsUserModelImpl._groupId;
 

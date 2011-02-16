@@ -205,8 +205,6 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	public Object clone() {
 		ReleaseImpl releaseImpl = new ReleaseImpl();
 
-		ReleaseModelImpl releaseModelImpl = releaseImpl;
-
 		releaseImpl.setReleaseId(getReleaseId());
 
 		releaseImpl.setCreateDate(getCreateDate());
@@ -214,6 +212,8 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		releaseImpl.setModifiedDate(getModifiedDate());
 
 		releaseImpl.setServletContextName(getServletContextName());
+
+		ReleaseModelImpl releaseModelImpl = releaseImpl;
 
 		releaseModelImpl._originalServletContextName = releaseModelImpl._servletContextName;
 

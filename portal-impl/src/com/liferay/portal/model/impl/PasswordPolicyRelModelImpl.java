@@ -185,11 +185,11 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	public Object clone() {
 		PasswordPolicyRelImpl passwordPolicyRelImpl = new PasswordPolicyRelImpl();
 
-		PasswordPolicyRelModelImpl passwordPolicyRelModelImpl = passwordPolicyRelImpl;
-
 		passwordPolicyRelImpl.setPasswordPolicyRelId(getPasswordPolicyRelId());
 
 		passwordPolicyRelImpl.setPasswordPolicyId(getPasswordPolicyId());
+
+		PasswordPolicyRelModelImpl passwordPolicyRelModelImpl = passwordPolicyRelImpl;
 
 		passwordPolicyRelModelImpl._originalPasswordPolicyId = passwordPolicyRelModelImpl._passwordPolicyId;
 

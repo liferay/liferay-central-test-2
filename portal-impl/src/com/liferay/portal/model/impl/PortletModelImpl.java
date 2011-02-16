@@ -225,11 +225,11 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 	public Object clone() {
 		PortletImpl portletImpl = new PortletImpl();
 
-		PortletModelImpl portletModelImpl = portletImpl;
-
 		portletImpl.setId(getId());
 
 		portletImpl.setCompanyId(getCompanyId());
+
+		PortletModelImpl portletModelImpl = portletImpl;
 
 		portletModelImpl._originalCompanyId = portletModelImpl._companyId;
 

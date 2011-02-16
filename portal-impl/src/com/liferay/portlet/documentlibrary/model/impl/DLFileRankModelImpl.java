@@ -209,13 +209,13 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 	public Object clone() {
 		DLFileRankImpl dlFileRankImpl = new DLFileRankImpl();
 
-		DLFileRankModelImpl dlFileRankModelImpl = dlFileRankImpl;
-
 		dlFileRankImpl.setFileRankId(getFileRankId());
 
 		dlFileRankImpl.setGroupId(getGroupId());
 
 		dlFileRankImpl.setCompanyId(getCompanyId());
+
+		DLFileRankModelImpl dlFileRankModelImpl = dlFileRankImpl;
 
 		dlFileRankModelImpl._originalCompanyId = dlFileRankModelImpl._companyId;
 

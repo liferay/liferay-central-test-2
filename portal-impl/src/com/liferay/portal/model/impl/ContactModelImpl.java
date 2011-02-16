@@ -553,8 +553,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	public Object clone() {
 		ContactImpl contactImpl = new ContactImpl();
 
-		ContactModelImpl contactModelImpl = contactImpl;
-
 		contactImpl.setContactId(getContactId());
 
 		contactImpl.setCompanyId(getCompanyId());

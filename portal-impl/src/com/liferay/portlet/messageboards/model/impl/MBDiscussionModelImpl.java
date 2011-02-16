@@ -186,11 +186,11 @@ public class MBDiscussionModelImpl extends BaseModelImpl<MBDiscussion>
 	public Object clone() {
 		MBDiscussionImpl mbDiscussionImpl = new MBDiscussionImpl();
 
-		MBDiscussionModelImpl mbDiscussionModelImpl = mbDiscussionImpl;
-
 		mbDiscussionImpl.setDiscussionId(getDiscussionId());
 
 		mbDiscussionImpl.setClassNameId(getClassNameId());
+
+		MBDiscussionModelImpl mbDiscussionModelImpl = mbDiscussionImpl;
 
 		mbDiscussionModelImpl._originalClassNameId = mbDiscussionModelImpl._classNameId;
 

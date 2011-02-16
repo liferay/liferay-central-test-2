@@ -194,11 +194,11 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 	public Object clone() {
 		RatingsStatsImpl ratingsStatsImpl = new RatingsStatsImpl();
 
-		RatingsStatsModelImpl ratingsStatsModelImpl = ratingsStatsImpl;
-
 		ratingsStatsImpl.setStatsId(getStatsId());
 
 		ratingsStatsImpl.setClassNameId(getClassNameId());
+
+		RatingsStatsModelImpl ratingsStatsModelImpl = ratingsStatsImpl;
 
 		ratingsStatsModelImpl._originalClassNameId = ratingsStatsModelImpl._classNameId;
 

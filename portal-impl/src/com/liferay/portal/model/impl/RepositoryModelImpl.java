@@ -275,8 +275,6 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	public Object clone() {
 		RepositoryImpl repositoryImpl = new RepositoryImpl();
 
-		RepositoryModelImpl repositoryModelImpl = repositoryImpl;
-
 		repositoryImpl.setRepositoryId(getRepositoryId());
 
 		repositoryImpl.setGroupId(getGroupId());

@@ -261,11 +261,11 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	public Object clone() {
 		ShoppingCartImpl shoppingCartImpl = new ShoppingCartImpl();
 
-		ShoppingCartModelImpl shoppingCartModelImpl = shoppingCartImpl;
-
 		shoppingCartImpl.setCartId(getCartId());
 
 		shoppingCartImpl.setGroupId(getGroupId());
+
+		ShoppingCartModelImpl shoppingCartModelImpl = shoppingCartImpl;
 
 		shoppingCartModelImpl._originalGroupId = shoppingCartModelImpl._groupId;
 

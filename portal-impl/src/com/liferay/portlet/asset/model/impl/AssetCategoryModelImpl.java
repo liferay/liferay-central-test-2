@@ -543,9 +543,9 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	public Object clone() {
 		AssetCategoryImpl assetCategoryImpl = new AssetCategoryImpl();
 
-		AssetCategoryModelImpl assetCategoryModelImpl = assetCategoryImpl;
-
 		assetCategoryImpl.setUuid(getUuid());
+
+		AssetCategoryModelImpl assetCategoryModelImpl = assetCategoryImpl;
 
 		assetCategoryModelImpl._originalUuid = assetCategoryModelImpl._uuid;
 

@@ -215,8 +215,6 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 	public Object clone() {
 		SCProductScreenshotImpl scProductScreenshotImpl = new SCProductScreenshotImpl();
 
-		SCProductScreenshotModelImpl scProductScreenshotModelImpl = scProductScreenshotImpl;
-
 		scProductScreenshotImpl.setProductScreenshotId(getProductScreenshotId());
 
 		scProductScreenshotImpl.setCompanyId(getCompanyId());
@@ -224,6 +222,8 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		scProductScreenshotImpl.setGroupId(getGroupId());
 
 		scProductScreenshotImpl.setProductEntryId(getProductEntryId());
+
+		SCProductScreenshotModelImpl scProductScreenshotModelImpl = scProductScreenshotImpl;
 
 		scProductScreenshotModelImpl._originalProductEntryId = scProductScreenshotModelImpl._productEntryId;
 

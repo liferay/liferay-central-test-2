@@ -185,11 +185,11 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 	public Object clone() {
 		ClassNameImpl classNameImpl = new ClassNameImpl();
 
-		ClassNameModelImpl classNameModelImpl = classNameImpl;
-
 		classNameImpl.setClassNameId(getClassNameId());
 
 		classNameImpl.setValue(getValue());
+
+		ClassNameModelImpl classNameModelImpl = classNameImpl;
 
 		classNameModelImpl._originalValue = classNameModelImpl._value;
 

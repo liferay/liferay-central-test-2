@@ -549,9 +549,9 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	public Object clone() {
 		WikiPageImpl wikiPageImpl = new WikiPageImpl();
 
-		WikiPageModelImpl wikiPageModelImpl = wikiPageImpl;
-
 		wikiPageImpl.setUuid(getUuid());
+
+		WikiPageModelImpl wikiPageModelImpl = wikiPageImpl;
 
 		wikiPageModelImpl._originalUuid = wikiPageModelImpl._uuid;
 

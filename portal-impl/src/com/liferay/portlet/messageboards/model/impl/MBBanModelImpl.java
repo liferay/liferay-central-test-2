@@ -267,11 +267,11 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	public Object clone() {
 		MBBanImpl mbBanImpl = new MBBanImpl();
 
-		MBBanModelImpl mbBanModelImpl = mbBanImpl;
-
 		mbBanImpl.setBanId(getBanId());
 
 		mbBanImpl.setGroupId(getGroupId());
+
+		MBBanModelImpl mbBanModelImpl = mbBanImpl;
 
 		mbBanModelImpl._originalGroupId = mbBanModelImpl._groupId;
 

@@ -262,11 +262,11 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 	public Object clone() {
 		WorkflowDefinitionLinkImpl workflowDefinitionLinkImpl = new WorkflowDefinitionLinkImpl();
 
-		WorkflowDefinitionLinkModelImpl workflowDefinitionLinkModelImpl = workflowDefinitionLinkImpl;
-
 		workflowDefinitionLinkImpl.setWorkflowDefinitionLinkId(getWorkflowDefinitionLinkId());
 
 		workflowDefinitionLinkImpl.setGroupId(getGroupId());
+
+		WorkflowDefinitionLinkModelImpl workflowDefinitionLinkModelImpl = workflowDefinitionLinkImpl;
 
 		workflowDefinitionLinkModelImpl._originalGroupId = workflowDefinitionLinkModelImpl._groupId;
 

@@ -278,13 +278,13 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	public Object clone() {
 		PollsChoiceImpl pollsChoiceImpl = new PollsChoiceImpl();
 
-		PollsChoiceModelImpl pollsChoiceModelImpl = pollsChoiceImpl;
-
 		pollsChoiceImpl.setUuid(getUuid());
 
 		pollsChoiceImpl.setChoiceId(getChoiceId());
 
 		pollsChoiceImpl.setQuestionId(getQuestionId());
+
+		PollsChoiceModelImpl pollsChoiceModelImpl = pollsChoiceImpl;
 
 		pollsChoiceModelImpl._originalQuestionId = pollsChoiceModelImpl._questionId;
 

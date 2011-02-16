@@ -262,13 +262,13 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 	public Object clone() {
 		AnnouncementsDeliveryImpl announcementsDeliveryImpl = new AnnouncementsDeliveryImpl();
 
-		AnnouncementsDeliveryModelImpl announcementsDeliveryModelImpl = announcementsDeliveryImpl;
-
 		announcementsDeliveryImpl.setDeliveryId(getDeliveryId());
 
 		announcementsDeliveryImpl.setCompanyId(getCompanyId());
 
 		announcementsDeliveryImpl.setUserId(getUserId());
+
+		AnnouncementsDeliveryModelImpl announcementsDeliveryModelImpl = announcementsDeliveryImpl;
 
 		announcementsDeliveryModelImpl._originalUserId = announcementsDeliveryModelImpl._userId;
 

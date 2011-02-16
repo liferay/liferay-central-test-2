@@ -351,9 +351,9 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	public Object clone() {
 		MBCategoryImpl mbCategoryImpl = new MBCategoryImpl();
 
-		MBCategoryModelImpl mbCategoryModelImpl = mbCategoryImpl;
-
 		mbCategoryImpl.setUuid(getUuid());
+
+		MBCategoryModelImpl mbCategoryModelImpl = mbCategoryImpl;
 
 		mbCategoryModelImpl._originalUuid = mbCategoryModelImpl._uuid;
 

@@ -160,8 +160,6 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	public Object clone() {
 		ClusterGroupImpl clusterGroupImpl = new ClusterGroupImpl();
 
-		ClusterGroupModelImpl clusterGroupModelImpl = clusterGroupImpl;
-
 		clusterGroupImpl.setClusterGroupId(getClusterGroupId());
 
 		clusterGroupImpl.setName(getName());

@@ -283,13 +283,13 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	public Object clone() {
 		CompanyImpl companyImpl = new CompanyImpl();
 
-		CompanyModelImpl companyModelImpl = companyImpl;
-
 		companyImpl.setCompanyId(getCompanyId());
 
 		companyImpl.setAccountId(getAccountId());
 
 		companyImpl.setWebId(getWebId());
+
+		CompanyModelImpl companyModelImpl = companyImpl;
 
 		companyModelImpl._originalWebId = companyModelImpl._webId;
 

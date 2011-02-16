@@ -183,9 +183,9 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl<JournalArticl
 	public Object clone() {
 		JournalArticleResourceImpl journalArticleResourceImpl = new JournalArticleResourceImpl();
 
-		JournalArticleResourceModelImpl journalArticleResourceModelImpl = journalArticleResourceImpl;
-
 		journalArticleResourceImpl.setUuid(getUuid());
+
+		JournalArticleResourceModelImpl journalArticleResourceModelImpl = journalArticleResourceImpl;
 
 		journalArticleResourceModelImpl._originalUuid = journalArticleResourceModelImpl._uuid;
 

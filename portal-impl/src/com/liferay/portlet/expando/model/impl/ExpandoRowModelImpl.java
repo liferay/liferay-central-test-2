@@ -150,13 +150,13 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	public Object clone() {
 		ExpandoRowImpl expandoRowImpl = new ExpandoRowImpl();
 
-		ExpandoRowModelImpl expandoRowModelImpl = expandoRowImpl;
-
 		expandoRowImpl.setRowId(getRowId());
 
 		expandoRowImpl.setCompanyId(getCompanyId());
 
 		expandoRowImpl.setTableId(getTableId());
+
+		ExpandoRowModelImpl expandoRowModelImpl = expandoRowImpl;
 
 		expandoRowModelImpl._originalTableId = expandoRowModelImpl._tableId;
 

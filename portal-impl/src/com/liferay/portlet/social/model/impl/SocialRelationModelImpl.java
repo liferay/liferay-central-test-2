@@ -209,8 +209,6 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	public Object clone() {
 		SocialRelationImpl socialRelationImpl = new SocialRelationImpl();
 
-		SocialRelationModelImpl socialRelationModelImpl = socialRelationImpl;
-
 		socialRelationImpl.setUuid(getUuid());
 
 		socialRelationImpl.setRelationId(getRelationId());
@@ -220,6 +218,8 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		socialRelationImpl.setCreateDate(getCreateDate());
 
 		socialRelationImpl.setUserId1(getUserId1());
+
+		SocialRelationModelImpl socialRelationModelImpl = socialRelationImpl;
 
 		socialRelationModelImpl._originalUserId1 = socialRelationModelImpl._userId1;
 

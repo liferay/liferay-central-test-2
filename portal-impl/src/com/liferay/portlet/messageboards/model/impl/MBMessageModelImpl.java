@@ -529,9 +529,9 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	public Object clone() {
 		MBMessageImpl mbMessageImpl = new MBMessageImpl();
 
-		MBMessageModelImpl mbMessageModelImpl = mbMessageImpl;
-
 		mbMessageImpl.setUuid(getUuid());
+
+		MBMessageModelImpl mbMessageModelImpl = mbMessageImpl;
 
 		mbMessageModelImpl._originalUuid = mbMessageModelImpl._uuid;
 

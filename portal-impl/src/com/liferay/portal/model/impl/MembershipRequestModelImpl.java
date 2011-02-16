@@ -278,8 +278,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	public Object clone() {
 		MembershipRequestImpl membershipRequestImpl = new MembershipRequestImpl();
 
-		MembershipRequestModelImpl membershipRequestModelImpl = membershipRequestImpl;
-
 		membershipRequestImpl.setMembershipRequestId(getMembershipRequestId());
 
 		membershipRequestImpl.setCompanyId(getCompanyId());

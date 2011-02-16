@@ -775,11 +775,11 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	public Object clone() {
 		UserImpl userImpl = new UserImpl();
 
-		UserModelImpl userModelImpl = userImpl;
-
 		userImpl.setUuid(getUuid());
 
 		userImpl.setUserId(getUserId());
+
+		UserModelImpl userModelImpl = userImpl;
 
 		userModelImpl._originalUserId = userModelImpl._userId;
 

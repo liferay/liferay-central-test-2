@@ -193,8 +193,6 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 	public Object clone() {
 		SocialEquityAssetEntryImpl socialEquityAssetEntryImpl = new SocialEquityAssetEntryImpl();
 
-		SocialEquityAssetEntryModelImpl socialEquityAssetEntryModelImpl = socialEquityAssetEntryImpl;
-
 		socialEquityAssetEntryImpl.setEquityAssetEntryId(getEquityAssetEntryId());
 
 		socialEquityAssetEntryImpl.setGroupId(getGroupId());
@@ -204,6 +202,8 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 		socialEquityAssetEntryImpl.setUserId(getUserId());
 
 		socialEquityAssetEntryImpl.setAssetEntryId(getAssetEntryId());
+
+		SocialEquityAssetEntryModelImpl socialEquityAssetEntryModelImpl = socialEquityAssetEntryImpl;
 
 		socialEquityAssetEntryModelImpl._originalAssetEntryId = socialEquityAssetEntryModelImpl._assetEntryId;
 

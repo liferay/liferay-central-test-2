@@ -265,13 +265,13 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	public Object clone() {
 		ExpandoValueImpl expandoValueImpl = new ExpandoValueImpl();
 
-		ExpandoValueModelImpl expandoValueModelImpl = expandoValueImpl;
-
 		expandoValueImpl.setValueId(getValueId());
 
 		expandoValueImpl.setCompanyId(getCompanyId());
 
 		expandoValueImpl.setTableId(getTableId());
+
+		ExpandoValueModelImpl expandoValueModelImpl = expandoValueImpl;
 
 		expandoValueModelImpl._originalTableId = expandoValueModelImpl._tableId;
 

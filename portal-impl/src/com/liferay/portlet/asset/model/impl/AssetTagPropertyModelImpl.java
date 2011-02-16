@@ -282,8 +282,6 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	public Object clone() {
 		AssetTagPropertyImpl assetTagPropertyImpl = new AssetTagPropertyImpl();
 
-		AssetTagPropertyModelImpl assetTagPropertyModelImpl = assetTagPropertyImpl;
-
 		assetTagPropertyImpl.setTagPropertyId(getTagPropertyId());
 
 		assetTagPropertyImpl.setCompanyId(getCompanyId());
@@ -297,6 +295,8 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		assetTagPropertyImpl.setModifiedDate(getModifiedDate());
 
 		assetTagPropertyImpl.setTagId(getTagId());
+
+		AssetTagPropertyModelImpl assetTagPropertyModelImpl = assetTagPropertyImpl;
 
 		assetTagPropertyModelImpl._originalTagId = assetTagPropertyModelImpl._tagId;
 

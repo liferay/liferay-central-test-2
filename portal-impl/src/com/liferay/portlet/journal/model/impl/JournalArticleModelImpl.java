@@ -605,9 +605,9 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	public Object clone() {
 		JournalArticleImpl journalArticleImpl = new JournalArticleImpl();
 
-		JournalArticleModelImpl journalArticleModelImpl = journalArticleImpl;
-
 		journalArticleImpl.setUuid(getUuid());
+
+		JournalArticleModelImpl journalArticleModelImpl = journalArticleImpl;
 
 		journalArticleModelImpl._originalUuid = journalArticleModelImpl._uuid;
 

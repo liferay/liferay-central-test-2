@@ -370,9 +370,9 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 	public Object clone() {
 		IGImageImpl igImageImpl = new IGImageImpl();
 
-		IGImageModelImpl igImageModelImpl = igImageImpl;
-
 		igImageImpl.setUuid(getUuid());
+
+		IGImageModelImpl igImageModelImpl = igImageImpl;
 
 		igImageModelImpl._originalUuid = igImageModelImpl._uuid;
 

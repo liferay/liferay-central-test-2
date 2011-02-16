@@ -283,8 +283,6 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 	public Object clone() {
 		AssetCategoryPropertyImpl assetCategoryPropertyImpl = new AssetCategoryPropertyImpl();
 
-		AssetCategoryPropertyModelImpl assetCategoryPropertyModelImpl = assetCategoryPropertyImpl;
-
 		assetCategoryPropertyImpl.setCategoryPropertyId(getCategoryPropertyId());
 
 		assetCategoryPropertyImpl.setCompanyId(getCompanyId());
@@ -298,6 +296,8 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		assetCategoryPropertyImpl.setModifiedDate(getModifiedDate());
 
 		assetCategoryPropertyImpl.setCategoryId(getCategoryId());
+
+		AssetCategoryPropertyModelImpl assetCategoryPropertyModelImpl = assetCategoryPropertyImpl;
 
 		assetCategoryPropertyModelImpl._originalCategoryId = assetCategoryPropertyModelImpl._categoryId;
 

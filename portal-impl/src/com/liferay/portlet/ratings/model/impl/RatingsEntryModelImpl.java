@@ -289,13 +289,13 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	public Object clone() {
 		RatingsEntryImpl ratingsEntryImpl = new RatingsEntryImpl();
 
-		RatingsEntryModelImpl ratingsEntryModelImpl = ratingsEntryImpl;
-
 		ratingsEntryImpl.setEntryId(getEntryId());
 
 		ratingsEntryImpl.setCompanyId(getCompanyId());
 
 		ratingsEntryImpl.setUserId(getUserId());
+
+		RatingsEntryModelImpl ratingsEntryModelImpl = ratingsEntryImpl;
 
 		ratingsEntryModelImpl._originalUserId = ratingsEntryModelImpl._userId;
 

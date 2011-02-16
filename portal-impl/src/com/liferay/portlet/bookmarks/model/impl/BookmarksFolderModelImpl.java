@@ -292,9 +292,9 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	public Object clone() {
 		BookmarksFolderImpl bookmarksFolderImpl = new BookmarksFolderImpl();
 
-		BookmarksFolderModelImpl bookmarksFolderModelImpl = bookmarksFolderImpl;
-
 		bookmarksFolderImpl.setUuid(getUuid());
+
+		BookmarksFolderModelImpl bookmarksFolderModelImpl = bookmarksFolderImpl;
 
 		bookmarksFolderModelImpl._originalUuid = bookmarksFolderModelImpl._uuid;
 

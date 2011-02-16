@@ -209,8 +209,6 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	public Object clone() {
 		WebDAVPropsImpl webDAVPropsImpl = new WebDAVPropsImpl();
 
-		WebDAVPropsModelImpl webDAVPropsModelImpl = webDAVPropsImpl;
-
 		webDAVPropsImpl.setWebDavPropsId(getWebDavPropsId());
 
 		webDAVPropsImpl.setCompanyId(getCompanyId());
@@ -220,6 +218,8 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		webDAVPropsImpl.setModifiedDate(getModifiedDate());
 
 		webDAVPropsImpl.setClassNameId(getClassNameId());
+
+		WebDAVPropsModelImpl webDAVPropsModelImpl = webDAVPropsImpl;
 
 		webDAVPropsModelImpl._originalClassNameId = webDAVPropsModelImpl._classNameId;
 

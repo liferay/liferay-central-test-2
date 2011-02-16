@@ -261,11 +261,11 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	public Object clone() {
 		SubscriptionImpl subscriptionImpl = new SubscriptionImpl();
 
-		SubscriptionModelImpl subscriptionModelImpl = subscriptionImpl;
-
 		subscriptionImpl.setSubscriptionId(getSubscriptionId());
 
 		subscriptionImpl.setCompanyId(getCompanyId());
+
+		SubscriptionModelImpl subscriptionModelImpl = subscriptionImpl;
 
 		subscriptionModelImpl._originalCompanyId = subscriptionModelImpl._companyId;
 
