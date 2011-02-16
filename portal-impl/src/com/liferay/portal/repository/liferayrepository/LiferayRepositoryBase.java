@@ -96,7 +96,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			}
 		}
 	}
-	
+
 	protected void initByFileVersionId(long fileVersionId) {
 		try {
 			DLFileVersion dlFileVersion =
@@ -115,7 +115,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			}
 		}
 	}
-	
+
 	protected void initByFolderId(long folderId) {
 		try {
 			DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
@@ -149,7 +149,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 		catch (Exception e) {
 		}
 	}
-	
+
 	protected boolean isDefaultRepository() {
 		if (_groupId == _repositoryId) {
 			return false;
@@ -158,7 +158,7 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			return true;
 		}
 	}
-	
+
 	protected long toFolderId(long folderId) {
 		if ((folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			isDefaultRepository()) {

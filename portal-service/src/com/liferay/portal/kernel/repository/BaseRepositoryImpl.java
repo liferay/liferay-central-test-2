@@ -93,17 +93,17 @@ public abstract class BaseRepositoryImpl implements Repository {
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
-	
+
 	public void setRepositoryId(long repositoryId) {
 		_repositoryId = repositoryId;
 	}
-	
+
 	public void setTypeSettingsProperties(
 		UnicodeProperties typeSettingsProperties) {
 
 		_typeSettingsProperties = typeSettingsProperties;
 	}
-	
+
 	public void unlockFolder(long parentFolderId, String title, String lockUuid)
 		throws PortalException, SystemException {
 
