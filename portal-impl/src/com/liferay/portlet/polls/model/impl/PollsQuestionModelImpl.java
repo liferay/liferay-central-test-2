@@ -479,16 +479,26 @@ public class PollsQuestionModelImpl extends BaseModelImpl<PollsQuestion>
 		PollsQuestionModelImpl clone = new PollsQuestionImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._questionId = _questionId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._title = _title;
+
 		clone._description = _description;
+
 		clone._expirationDate = _expirationDate;
+
 		clone._lastVoteDate = _lastVoteDate;
 
 		return clone;

@@ -302,15 +302,25 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl<SCFrameworkVersio
 		SCFrameworkVersionModelImpl clone = new SCFrameworkVersionImpl();
 
 		clone._frameworkVersionId = _frameworkVersionId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._name = _name;
+
 		clone._url = _url;
+
 		clone._active = _active;
+
 		clone._priority = _priority;
 
 		return clone;

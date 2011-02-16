@@ -210,12 +210,19 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 		UserNotificationEventModelImpl clone = new UserNotificationEventImpl();
 
 		clone._uuid = _uuid;
+
 		clone._userNotificationEventId = _userNotificationEventId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._type = _type;
+
 		clone._timestamp = _timestamp;
+
 		clone._deliverBy = _deliverBy;
+
 		clone._payload = _payload;
 
 		return clone;

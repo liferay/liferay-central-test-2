@@ -314,15 +314,23 @@ public class WikiNodeModelImpl extends BaseModelImpl<WikiNode>
 		WikiNodeModelImpl clone = new WikiNodeImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._nodeId = _nodeId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalName = clone._name = _name;
+
 		clone._description = _description;
+
 		clone._lastPostDate = _lastPostDate;
 
 		return clone;

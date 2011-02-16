@@ -188,7 +188,9 @@ public class ServiceComponentModelImpl extends BaseModelImpl<ServiceComponent>
 		clone._serviceComponentId = _serviceComponentId;
 		clone._originalBuildNamespace = clone._buildNamespace = _buildNamespace;
 		clone._originalBuildNumber = clone._buildNumber = _buildNumber;
+
 		clone._buildDate = _buildDate;
+
 		clone._data = _data;
 
 		return clone;

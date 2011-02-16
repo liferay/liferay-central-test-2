@@ -154,8 +154,11 @@ public class UserTrackerPathModelImpl extends BaseModelImpl<UserTrackerPath>
 		UserTrackerPathModelImpl clone = new UserTrackerPathImpl();
 
 		clone._userTrackerPathId = _userTrackerPathId;
+
 		clone._userTrackerId = _userTrackerId;
+
 		clone._path = _path;
+
 		clone._pathDate = _pathDate;
 
 		return clone;

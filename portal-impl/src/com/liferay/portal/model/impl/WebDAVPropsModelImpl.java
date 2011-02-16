@@ -210,11 +210,15 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		WebDAVPropsModelImpl clone = new WebDAVPropsImpl();
 
 		clone._webDavPropsId = _webDavPropsId;
+
 		clone._companyId = _companyId;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
 		clone._originalClassPK = clone._classPK = _classPK;
+
 		clone._props = _props;
 
 		return clone;

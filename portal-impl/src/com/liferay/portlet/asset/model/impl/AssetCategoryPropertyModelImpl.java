@@ -284,13 +284,19 @@ public class AssetCategoryPropertyModelImpl extends BaseModelImpl<AssetCategoryP
 		AssetCategoryPropertyModelImpl clone = new AssetCategoryPropertyImpl();
 
 		clone._categoryPropertyId = _categoryPropertyId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalCategoryId = clone._categoryId = _categoryId;
 		clone._originalKey = clone._key = _key;
+
 		clone._value = _value;
 
 		return clone;

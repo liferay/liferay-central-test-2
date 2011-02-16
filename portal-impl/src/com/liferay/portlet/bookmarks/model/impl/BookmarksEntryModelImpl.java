@@ -327,17 +327,28 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 		BookmarksEntryModelImpl clone = new BookmarksEntryImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._entryId = _entryId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._folderId = _folderId;
+
 		clone._name = _name;
+
 		clone._url = _url;
+
 		clone._description = _description;
+
 		clone._visits = _visits;
+
 		clone._priority = _priority;
 
 		return clone;

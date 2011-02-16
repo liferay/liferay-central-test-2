@@ -260,13 +260,21 @@ public class AssetTagModelImpl extends BaseModelImpl<AssetTag>
 		AssetTagModelImpl clone = new AssetTagImpl();
 
 		clone._tagId = _tagId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._name = _name;
+
 		clone._assetCount = _assetCount;
 
 		return clone;

@@ -215,12 +215,19 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 		UserTrackerModelImpl clone = new UserTrackerImpl();
 
 		clone._userTrackerId = _userTrackerId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._sessionId = _sessionId;
+
 		clone._remoteAddr = _remoteAddr;
+
 		clone._remoteHost = _remoteHost;
+
 		clone._userAgent = _userAgent;
 
 		return clone;

@@ -544,18 +544,28 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 		AssetCategoryModelImpl clone = new AssetCategoryImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._categoryId = _categoryId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalParentCategoryId = clone._parentCategoryId = _parentCategoryId;
+
 		clone._leftCategoryId = _leftCategoryId;
+
 		clone._rightCategoryId = _rightCategoryId;
 		clone._originalName = clone._name = _name;
+
 		clone._title = _title;
+
 		clone._description = _description;
 		clone._originalVocabularyId = clone._vocabularyId = _vocabularyId;
 

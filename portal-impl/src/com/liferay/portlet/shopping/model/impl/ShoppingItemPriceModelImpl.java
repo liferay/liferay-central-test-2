@@ -211,14 +211,23 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 		ShoppingItemPriceModelImpl clone = new ShoppingItemPriceImpl();
 
 		clone._itemPriceId = _itemPriceId;
+
 		clone._itemId = _itemId;
+
 		clone._minQuantity = _minQuantity;
+
 		clone._maxQuantity = _maxQuantity;
+
 		clone._price = _price;
+
 		clone._discount = _discount;
+
 		clone._taxable = _taxable;
+
 		clone._shipping = _shipping;
+
 		clone._useShippingFormula = _useShippingFormula;
+
 		clone._status = _status;
 
 		return clone;

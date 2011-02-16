@@ -400,9 +400,13 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 		clone._originalClassNameId = clone._classNameId = _classNameId;
 		clone._originalClassPK = clone._classPK = _classPK;
 		clone._originalName = clone._name = _name;
+
 		clone._title = _title;
+
 		clone._description = _description;
+
 		clone._type = _type;
+
 		clone._subtype = _subtype;
 
 		return clone;

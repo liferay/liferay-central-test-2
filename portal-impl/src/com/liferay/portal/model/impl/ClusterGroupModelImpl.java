@@ -161,8 +161,11 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		ClusterGroupModelImpl clone = new ClusterGroupImpl();
 
 		clone._clusterGroupId = _clusterGroupId;
+
 		clone._name = _name;
+
 		clone._clusterNodeIds = _clusterNodeIds;
+
 		clone._wholeCluster = _wholeCluster;
 
 		return clone;

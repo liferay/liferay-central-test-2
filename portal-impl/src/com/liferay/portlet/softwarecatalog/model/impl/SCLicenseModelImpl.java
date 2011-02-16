@@ -241,10 +241,15 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 		SCLicenseModelImpl clone = new SCLicenseImpl();
 
 		clone._licenseId = _licenseId;
+
 		clone._name = _name;
+
 		clone._url = _url;
+
 		clone._openSource = _openSource;
+
 		clone._active = _active;
+
 		clone._recommended = _recommended;
 
 		return clone;

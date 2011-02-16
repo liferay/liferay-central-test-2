@@ -530,29 +530,52 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 		MBMessageModelImpl clone = new MBMessageImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._messageId = _messageId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._classNameId = _classNameId;
+
 		clone._classPK = _classPK;
+
 		clone._categoryId = _categoryId;
+
 		clone._threadId = _threadId;
+
 		clone._rootMessageId = _rootMessageId;
+
 		clone._parentMessageId = _parentMessageId;
+
 		clone._subject = _subject;
+
 		clone._body = _body;
+
 		clone._format = _format;
+
 		clone._attachments = _attachments;
+
 		clone._anonymous = _anonymous;
+
 		clone._priority = _priority;
+
 		clone._allowPingbacks = _allowPingbacks;
+
 		clone._status = _status;
+
 		clone._statusByUserId = _statusByUserId;
+
 		clone._statusByUserName = _statusByUserName;
+
 		clone._statusDate = _statusDate;
 
 		return clone;

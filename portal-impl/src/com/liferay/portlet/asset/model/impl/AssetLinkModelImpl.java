@@ -211,13 +211,21 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 		AssetLinkModelImpl clone = new AssetLinkImpl();
 
 		clone._linkId = _linkId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._entryId1 = _entryId1;
+
 		clone._entryId2 = _entryId2;
+
 		clone._type = _type;
+
 		clone._weight = _weight;
 
 		return clone;

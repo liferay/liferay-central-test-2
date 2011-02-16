@@ -290,13 +290,18 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 		RatingsEntryModelImpl clone = new RatingsEntryImpl();
 
 		clone._entryId = _entryId;
+
 		clone._companyId = _companyId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
 		clone._originalClassPK = clone._classPK = _classPK;
+
 		clone._score = _score;
 
 		return clone;

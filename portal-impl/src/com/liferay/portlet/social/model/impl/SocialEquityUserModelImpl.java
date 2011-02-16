@@ -232,12 +232,18 @@ public class SocialEquityUserModelImpl extends BaseModelImpl<SocialEquityUser>
 
 		clone._equityUserId = _equityUserId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._contributionK = _contributionK;
+
 		clone._contributionB = _contributionB;
+
 		clone._participationK = _participationK;
+
 		clone._participationB = _participationB;
+
 		clone._rank = _rank;
 
 		return clone;

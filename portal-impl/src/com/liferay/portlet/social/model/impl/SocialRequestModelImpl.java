@@ -336,17 +336,23 @@ public class SocialRequestModelImpl extends BaseModelImpl<SocialRequest>
 		SocialRequestModelImpl clone = new SocialRequestImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._requestId = _requestId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
 		clone._originalClassPK = clone._classPK = _classPK;
 		clone._originalType = clone._type = _type;
+
 		clone._extraData = _extraData;
 		clone._originalReceiverUserId = clone._receiverUserId = _receiverUserId;
+
 		clone._status = _status;
 
 		return clone;

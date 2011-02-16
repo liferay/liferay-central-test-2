@@ -263,11 +263,15 @@ public class AnnouncementsDeliveryModelImpl extends BaseModelImpl<AnnouncementsD
 		AnnouncementsDeliveryModelImpl clone = new AnnouncementsDeliveryImpl();
 
 		clone._deliveryId = _deliveryId;
+
 		clone._companyId = _companyId;
 		clone._originalUserId = clone._userId = _userId;
 		clone._originalType = clone._type = _type;
+
 		clone._email = _email;
+
 		clone._sms = _sms;
+
 		clone._website = _website;
 
 		return clone;

@@ -429,22 +429,36 @@ public class JournalTemplateModelImpl extends BaseModelImpl<JournalTemplate>
 		JournalTemplateModelImpl clone = new JournalTemplateImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._id = _id;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalTemplateId = clone._templateId = _templateId;
+
 		clone._structureId = _structureId;
+
 		clone._name = _name;
+
 		clone._description = _description;
+
 		clone._xsl = _xsl;
+
 		clone._langType = _langType;
+
 		clone._cacheable = _cacheable;
+
 		clone._smallImage = _smallImage;
 		clone._originalSmallImageId = clone._smallImageId = _smallImageId;
+
 		clone._smallImageURL = _smallImageURL;
 
 		return clone;

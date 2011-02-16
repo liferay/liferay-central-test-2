@@ -373,21 +373,37 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl<AnnouncementsEntr
 		AnnouncementsEntryModelImpl clone = new AnnouncementsEntryImpl();
 
 		clone._uuid = _uuid;
+
 		clone._entryId = _entryId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._classNameId = _classNameId;
+
 		clone._classPK = _classPK;
+
 		clone._title = _title;
+
 		clone._content = _content;
+
 		clone._url = _url;
+
 		clone._type = _type;
+
 		clone._displayDate = _displayDate;
+
 		clone._expirationDate = _expirationDate;
+
 		clone._priority = _priority;
+
 		clone._alert = _alert;
 
 		return clone;

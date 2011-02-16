@@ -272,8 +272,11 @@ public class CountryModelImpl extends BaseModelImpl<Country>
 		clone._originalName = clone._name = _name;
 		clone._originalA2 = clone._a2 = _a2;
 		clone._originalA3 = clone._a3 = _a3;
+
 		clone._number = _number;
+
 		clone._idd = _idd;
+
 		clone._active = _active;
 
 		return clone;

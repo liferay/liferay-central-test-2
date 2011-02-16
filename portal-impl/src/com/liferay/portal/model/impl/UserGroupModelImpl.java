@@ -237,8 +237,10 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 
 		clone._userGroupId = _userGroupId;
 		clone._originalCompanyId = clone._companyId = _companyId;
+
 		clone._parentUserGroupId = _parentUserGroupId;
 		clone._originalName = clone._name = _name;
+
 		clone._description = _description;
 
 		return clone;

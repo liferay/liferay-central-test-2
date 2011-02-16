@@ -384,22 +384,39 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 		AddressModelImpl clone = new AddressImpl();
 
 		clone._addressId = _addressId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._classNameId = _classNameId;
+
 		clone._classPK = _classPK;
+
 		clone._street1 = _street1;
+
 		clone._street2 = _street2;
+
 		clone._street3 = _street3;
+
 		clone._city = _city;
+
 		clone._zip = _zip;
+
 		clone._regionId = _regionId;
+
 		clone._countryId = _countryId;
+
 		clone._typeId = _typeId;
+
 		clone._mailing = _mailing;
+
 		clone._primary = _primary;
 
 		return clone;

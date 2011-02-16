@@ -283,13 +283,19 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 		AssetTagPropertyModelImpl clone = new AssetTagPropertyImpl();
 
 		clone._tagPropertyId = _tagPropertyId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalTagId = clone._tagId = _tagId;
 		clone._originalKey = clone._key = _key;
+
 		clone._value = _value;
 
 		return clone;

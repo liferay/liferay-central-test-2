@@ -209,6 +209,7 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 		clone._userIdMapperId = _userIdMapperId;
 		clone._originalUserId = clone._userId = _userId;
 		clone._originalType = clone._type = _type;
+
 		clone._description = _description;
 		clone._originalExternalUserId = clone._externalUserId = _externalUserId;
 

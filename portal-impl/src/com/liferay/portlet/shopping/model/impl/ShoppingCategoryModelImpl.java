@@ -275,14 +275,23 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 		ShoppingCategoryModelImpl clone = new ShoppingCategoryImpl();
 
 		clone._categoryId = _categoryId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._parentCategoryId = _parentCategoryId;
+
 		clone._name = _name;
+
 		clone._description = _description;
 
 		return clone;

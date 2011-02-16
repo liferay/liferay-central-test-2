@@ -210,9 +210,13 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		RegionModelImpl clone = new RegionImpl();
 
 		clone._regionId = _regionId;
+
 		clone._countryId = _countryId;
+
 		clone._regionCode = _regionCode;
+
 		clone._name = _name;
+
 		clone._active = _active;
 
 		return clone;

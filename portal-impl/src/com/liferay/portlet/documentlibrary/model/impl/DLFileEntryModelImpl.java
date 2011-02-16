@@ -404,24 +404,39 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 		DLFileEntryModelImpl clone = new DLFileEntryImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._fileEntryId = _fileEntryId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._versionUserId = _versionUserId;
+
 		clone._versionUserName = _versionUserName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._repositoryId = _repositoryId;
 		clone._originalFolderId = clone._folderId = _folderId;
 		clone._originalName = clone._name = _name;
+
 		clone._extension = _extension;
 		clone._originalTitle = clone._title = _title;
+
 		clone._description = _description;
+
 		clone._extraSettings = _extraSettings;
+
 		clone._version = _version;
+
 		clone._size = _size;
+
 		clone._readCount = _readCount;
 
 		return clone;

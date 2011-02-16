@@ -320,14 +320,22 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		clone._organizationId = _organizationId;
 		clone._originalCompanyId = clone._companyId = _companyId;
 		clone._originalParentOrganizationId = clone._parentOrganizationId = _parentOrganizationId;
+
 		clone._leftOrganizationId = _leftOrganizationId;
+
 		clone._rightOrganizationId = _rightOrganizationId;
 		clone._originalName = clone._name = _name;
+
 		clone._type = _type;
+
 		clone._recursable = _recursable;
+
 		clone._regionId = _regionId;
+
 		clone._countryId = _countryId;
+
 		clone._statusId = _statusId;
+
 		clone._comments = _comments;
 
 		return clone;

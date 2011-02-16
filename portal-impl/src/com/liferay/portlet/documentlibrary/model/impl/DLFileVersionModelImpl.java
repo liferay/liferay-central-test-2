@@ -409,23 +409,39 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		DLFileVersionModelImpl clone = new DLFileVersionImpl();
 
 		clone._fileVersionId = _fileVersionId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._repositoryId = _repositoryId;
 		clone._originalFileEntryId = clone._fileEntryId = _fileEntryId;
+
 		clone._extension = _extension;
+
 		clone._title = _title;
+
 		clone._description = _description;
+
 		clone._changeLog = _changeLog;
+
 		clone._extraSettings = _extraSettings;
 		clone._originalVersion = clone._version = _version;
+
 		clone._size = _size;
+
 		clone._status = _status;
+
 		clone._statusByUserId = _statusByUserId;
+
 		clone._statusByUserName = _statusByUserName;
+
 		clone._statusDate = _statusDate;
 
 		return clone;

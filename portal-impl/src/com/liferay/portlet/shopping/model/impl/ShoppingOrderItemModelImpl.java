@@ -231,14 +231,23 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl<ShoppingOrderItem>
 		ShoppingOrderItemModelImpl clone = new ShoppingOrderItemImpl();
 
 		clone._orderItemId = _orderItemId;
+
 		clone._orderId = _orderId;
+
 		clone._itemId = _itemId;
+
 		clone._sku = _sku;
+
 		clone._name = _name;
+
 		clone._description = _description;
+
 		clone._properties = _properties;
+
 		clone._price = _price;
+
 		clone._quantity = _quantity;
+
 		clone._shippedDate = _shippedDate;
 
 		return clone;

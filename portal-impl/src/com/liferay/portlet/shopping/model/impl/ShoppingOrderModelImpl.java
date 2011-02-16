@@ -871,55 +871,103 @@ public class ShoppingOrderModelImpl extends BaseModelImpl<ShoppingOrder>
 		ShoppingOrderModelImpl clone = new ShoppingOrderImpl();
 
 		clone._orderId = _orderId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalNumber = clone._number = _number;
+
 		clone._tax = _tax;
+
 		clone._shipping = _shipping;
+
 		clone._altShipping = _altShipping;
+
 		clone._requiresShipping = _requiresShipping;
+
 		clone._insure = _insure;
+
 		clone._insurance = _insurance;
+
 		clone._couponCodes = _couponCodes;
+
 		clone._couponDiscount = _couponDiscount;
+
 		clone._billingFirstName = _billingFirstName;
+
 		clone._billingLastName = _billingLastName;
+
 		clone._billingEmailAddress = _billingEmailAddress;
+
 		clone._billingCompany = _billingCompany;
+
 		clone._billingStreet = _billingStreet;
+
 		clone._billingCity = _billingCity;
+
 		clone._billingState = _billingState;
+
 		clone._billingZip = _billingZip;
+
 		clone._billingCountry = _billingCountry;
+
 		clone._billingPhone = _billingPhone;
+
 		clone._shipToBilling = _shipToBilling;
+
 		clone._shippingFirstName = _shippingFirstName;
+
 		clone._shippingLastName = _shippingLastName;
+
 		clone._shippingEmailAddress = _shippingEmailAddress;
+
 		clone._shippingCompany = _shippingCompany;
+
 		clone._shippingStreet = _shippingStreet;
+
 		clone._shippingCity = _shippingCity;
+
 		clone._shippingState = _shippingState;
+
 		clone._shippingZip = _shippingZip;
+
 		clone._shippingCountry = _shippingCountry;
+
 		clone._shippingPhone = _shippingPhone;
+
 		clone._ccName = _ccName;
+
 		clone._ccType = _ccType;
+
 		clone._ccNumber = _ccNumber;
+
 		clone._ccExpMonth = _ccExpMonth;
+
 		clone._ccExpYear = _ccExpYear;
+
 		clone._ccVerNumber = _ccVerNumber;
+
 		clone._comments = _comments;
 		clone._originalPpTxnId = clone._ppTxnId = _ppTxnId;
+
 		clone._ppPaymentStatus = _ppPaymentStatus;
+
 		clone._ppPaymentGross = _ppPaymentGross;
+
 		clone._ppReceiverEmail = _ppReceiverEmail;
+
 		clone._ppPayerEmail = _ppPayerEmail;
+
 		clone._sendOrderEmail = _sendOrderEmail;
+
 		clone._sendShippingEmail = _sendShippingEmail;
 
 		return clone;

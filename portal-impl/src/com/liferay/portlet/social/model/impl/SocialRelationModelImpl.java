@@ -210,8 +210,11 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 		SocialRelationModelImpl clone = new SocialRelationImpl();
 
 		clone._uuid = _uuid;
+
 		clone._relationId = _relationId;
+
 		clone._companyId = _companyId;
+
 		clone._createDate = _createDate;
 		clone._originalUserId1 = clone._userId1 = _userId1;
 		clone._originalUserId2 = clone._userId2 = _userId2;

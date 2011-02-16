@@ -235,12 +235,18 @@ public class BlogsStatsUserModelImpl extends BaseModelImpl<BlogsStatsUser>
 
 		clone._statsUserId = _statsUserId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._entryCount = _entryCount;
+
 		clone._lastPostDate = _lastPostDate;
+
 		clone._ratingsTotalEntries = _ratingsTotalEntries;
+
 		clone._ratingsTotalScore = _ratingsTotalScore;
+
 		clone._ratingsAverageScore = _ratingsAverageScore;
 
 		return clone;

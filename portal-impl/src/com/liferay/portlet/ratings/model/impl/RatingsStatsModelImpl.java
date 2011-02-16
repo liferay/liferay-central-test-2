@@ -197,8 +197,11 @@ public class RatingsStatsModelImpl extends BaseModelImpl<RatingsStats>
 		clone._statsId = _statsId;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
 		clone._originalClassPK = clone._classPK = _classPK;
+
 		clone._totalEntries = _totalEntries;
+
 		clone._totalScore = _totalScore;
+
 		clone._averageScore = _averageScore;
 
 		return clone;

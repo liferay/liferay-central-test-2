@@ -194,11 +194,16 @@ public class SocialEquityAssetEntryModelImpl extends BaseModelImpl<SocialEquityA
 		SocialEquityAssetEntryModelImpl clone = new SocialEquityAssetEntryImpl();
 
 		clone._equityAssetEntryId = _equityAssetEntryId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
 		clone._originalAssetEntryId = clone._assetEntryId = _assetEntryId;
+
 		clone._informationK = _informationK;
+
 		clone._informationB = _informationB;
 
 		return clone;

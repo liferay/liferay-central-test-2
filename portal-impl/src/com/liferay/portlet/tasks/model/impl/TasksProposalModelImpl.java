@@ -336,17 +336,27 @@ public class TasksProposalModelImpl extends BaseModelImpl<TasksProposal>
 		TasksProposalModelImpl clone = new TasksProposalImpl();
 
 		clone._proposalId = _proposalId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
 		clone._originalClassPK = clone._classPK = _classPK;
+
 		clone._name = _name;
+
 		clone._description = _description;
+
 		clone._publishDate = _publishDate;
+
 		clone._dueDate = _dueDate;
 
 		return clone;

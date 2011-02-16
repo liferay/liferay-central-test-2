@@ -167,8 +167,11 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 		PasswordTrackerModelImpl clone = new PasswordTrackerImpl();
 
 		clone._passwordTrackerId = _passwordTrackerId;
+
 		clone._userId = _userId;
+
 		clone._createDate = _createDate;
+
 		clone._password = _password;
 
 		return clone;

@@ -266,6 +266,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 		clone._originalElInstanceId = clone._elInstanceId = _elInstanceId;
 		clone._originalElName = clone._elName = _elName;
 		clone._originalLanguageId = clone._languageId = _languageId;
+
 		clone._tempImage = _tempImage;
 
 		return clone;

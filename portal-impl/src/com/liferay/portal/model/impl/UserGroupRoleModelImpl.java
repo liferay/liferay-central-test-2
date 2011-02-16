@@ -170,7 +170,9 @@ public class UserGroupRoleModelImpl extends BaseModelImpl<UserGroupRole>
 		UserGroupRoleModelImpl clone = new UserGroupRoleImpl();
 
 		clone._userId = _userId;
+
 		clone._groupId = _groupId;
+
 		clone._roleId = _roleId;
 
 		return clone;

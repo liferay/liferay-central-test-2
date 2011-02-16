@@ -216,7 +216,9 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl<SCProductScreens
 		SCProductScreenshotModelImpl clone = new SCProductScreenshotImpl();
 
 		clone._productScreenshotId = _productScreenshotId;
+
 		clone._companyId = _companyId;
+
 		clone._groupId = _groupId;
 		clone._originalProductEntryId = clone._productEntryId = _productEntryId;
 		clone._originalThumbnailId = clone._thumbnailId = _thumbnailId;

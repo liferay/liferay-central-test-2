@@ -177,6 +177,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 		clone._resourceActionId = _resourceActionId;
 		clone._originalName = clone._name = _name;
 		clone._originalActionId = clone._actionId = _actionId;
+
 		clone._bitwiseValue = _bitwiseValue;
 
 		return clone;

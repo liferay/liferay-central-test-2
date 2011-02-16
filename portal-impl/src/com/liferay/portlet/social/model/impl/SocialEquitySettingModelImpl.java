@@ -259,13 +259,18 @@ public class SocialEquitySettingModelImpl extends BaseModelImpl<SocialEquitySett
 
 		clone._equitySettingId = _equitySettingId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
 		clone._originalActionId = clone._actionId = _actionId;
+
 		clone._dailyLimit = _dailyLimit;
+
 		clone._lifespan = _lifespan;
 		clone._originalType = clone._type = _type;
+
 		clone._uniqueEntry = _uniqueEntry;
+
 		clone._value = _value;
 
 		return clone;

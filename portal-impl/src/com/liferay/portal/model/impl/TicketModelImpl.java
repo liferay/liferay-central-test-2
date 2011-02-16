@@ -199,11 +199,16 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 		TicketModelImpl clone = new TicketImpl();
 
 		clone._ticketId = _ticketId;
+
 		clone._companyId = _companyId;
+
 		clone._createDate = _createDate;
+
 		clone._classNameId = _classNameId;
+
 		clone._classPK = _classPK;
 		clone._originalKey = clone._key = _key;
+
 		clone._expirationDate = _expirationDate;
 
 		return clone;

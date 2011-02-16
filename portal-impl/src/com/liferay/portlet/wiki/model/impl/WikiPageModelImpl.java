@@ -550,27 +550,44 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 		WikiPageModelImpl clone = new WikiPageImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._pageId = _pageId;
 		clone._originalResourcePrimKey = clone._resourcePrimKey = _resourcePrimKey;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalNodeId = clone._nodeId = _nodeId;
 		clone._originalTitle = clone._title = _title;
 		clone._originalVersion = clone._version = _version;
+
 		clone._minorEdit = _minorEdit;
+
 		clone._content = _content;
+
 		clone._summary = _summary;
+
 		clone._format = _format;
+
 		clone._head = _head;
+
 		clone._parentTitle = _parentTitle;
+
 		clone._redirectTitle = _redirectTitle;
+
 		clone._status = _status;
+
 		clone._statusByUserId = _statusByUserId;
+
 		clone._statusByUserName = _statusByUserName;
+
 		clone._statusDate = _statusDate;
 
 		return clone;

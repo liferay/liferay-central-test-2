@@ -307,13 +307,19 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 
 		clone._layoutSetBranchId = _layoutSetBranchId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
 		clone._originalName = clone._name = _name;
+
 		clone._description = _description;
 
 		return clone;

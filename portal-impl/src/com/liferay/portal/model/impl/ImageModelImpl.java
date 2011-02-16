@@ -226,11 +226,17 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 		ImageModelImpl clone = new ImageImpl();
 
 		clone._imageId = _imageId;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._text = _text;
+
 		clone._type = _type;
+
 		clone._height = _height;
+
 		clone._width = _width;
+
 		clone._size = _size;
 
 		return clone;

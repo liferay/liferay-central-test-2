@@ -158,6 +158,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 
 		clone._browserTrackerId = _browserTrackerId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._browserKey = _browserKey;
 
 		return clone;

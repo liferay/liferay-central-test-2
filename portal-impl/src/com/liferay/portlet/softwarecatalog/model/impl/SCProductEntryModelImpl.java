@@ -389,18 +389,31 @@ public class SCProductEntryModelImpl extends BaseModelImpl<SCProductEntry>
 		SCProductEntryModelImpl clone = new SCProductEntryImpl();
 
 		clone._productEntryId = _productEntryId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._name = _name;
+
 		clone._type = _type;
+
 		clone._tags = _tags;
+
 		clone._shortDescription = _shortDescription;
+
 		clone._longDescription = _longDescription;
+
 		clone._pageURL = _pageURL;
+
 		clone._author = _author;
 		clone._originalRepoGroupId = clone._repoGroupId = _repoGroupId;
 		clone._originalRepoArtifactId = clone._repoArtifactId = _repoArtifactId;

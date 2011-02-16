@@ -229,14 +229,23 @@ public class WorkflowInstanceLinkModelImpl extends BaseModelImpl<WorkflowInstanc
 		WorkflowInstanceLinkModelImpl clone = new WorkflowInstanceLinkImpl();
 
 		clone._workflowInstanceLinkId = _workflowInstanceLinkId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._classNameId = _classNameId;
+
 		clone._classPK = _classPK;
+
 		clone._workflowInstanceId = _workflowInstanceId;
 
 		return clone;

@@ -454,27 +454,48 @@ public class CalEventModelImpl extends BaseModelImpl<CalEvent>
 		CalEventModelImpl clone = new CalEventImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._eventId = _eventId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._title = _title;
+
 		clone._description = _description;
+
 		clone._location = _location;
+
 		clone._startDate = _startDate;
+
 		clone._endDate = _endDate;
+
 		clone._durationHour = _durationHour;
+
 		clone._durationMinute = _durationMinute;
+
 		clone._allDay = _allDay;
+
 		clone._timeZoneSensitive = _timeZoneSensitive;
+
 		clone._type = _type;
+
 		clone._repeating = _repeating;
+
 		clone._recurrence = _recurrence;
+
 		clone._remindBy = _remindBy;
+
 		clone._firstReminder = _firstReminder;
+
 		clone._secondReminder = _secondReminder;
 
 		return clone;

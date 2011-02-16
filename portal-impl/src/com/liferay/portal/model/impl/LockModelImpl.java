@@ -265,15 +265,23 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		LockModelImpl clone = new LockImpl();
 
 		clone._uuid = _uuid;
+
 		clone._lockId = _lockId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
 		clone._originalClassName = clone._className = _className;
 		clone._originalKey = clone._key = _key;
+
 		clone._owner = _owner;
+
 		clone._inheritable = _inheritable;
+
 		clone._expirationDate = _expirationDate;
 
 		return clone;

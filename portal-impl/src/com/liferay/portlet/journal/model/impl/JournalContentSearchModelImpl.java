@@ -236,6 +236,7 @@ public class JournalContentSearchModelImpl extends BaseModelImpl<JournalContentS
 
 		clone._contentSearchId = _contentSearchId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
 		clone._originalPrivateLayout = clone._privateLayout = _privateLayout;
 		clone._originalLayoutId = clone._layoutId = _layoutId;

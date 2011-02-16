@@ -556,35 +556,63 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 
 		clone._passwordPolicyId = _passwordPolicyId;
 		clone._originalCompanyId = clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalDefaultPolicy = clone._defaultPolicy = _defaultPolicy;
 		clone._originalName = clone._name = _name;
+
 		clone._description = _description;
+
 		clone._changeable = _changeable;
+
 		clone._changeRequired = _changeRequired;
+
 		clone._minAge = _minAge;
+
 		clone._checkSyntax = _checkSyntax;
+
 		clone._allowDictionaryWords = _allowDictionaryWords;
+
 		clone._minAlphanumeric = _minAlphanumeric;
+
 		clone._minLength = _minLength;
+
 		clone._minLowerCase = _minLowerCase;
+
 		clone._minNumbers = _minNumbers;
+
 		clone._minSymbols = _minSymbols;
+
 		clone._minUpperCase = _minUpperCase;
+
 		clone._history = _history;
+
 		clone._historyCount = _historyCount;
+
 		clone._expireable = _expireable;
+
 		clone._maxAge = _maxAge;
+
 		clone._warningTime = _warningTime;
+
 		clone._graceLimit = _graceLimit;
+
 		clone._lockout = _lockout;
+
 		clone._maxFailure = _maxFailure;
+
 		clone._lockoutDuration = _lockoutDuration;
+
 		clone._requireUnlock = _requireUnlock;
+
 		clone._resetFailureCount = _resetFailureCount;
+
 		clone._resetTicketMaxAge = _resetTicketMaxAge;
 
 		return clone;

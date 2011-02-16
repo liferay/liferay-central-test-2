@@ -307,10 +307,15 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 		LayoutPrototypeModelImpl clone = new LayoutPrototypeImpl();
 
 		clone._layoutPrototypeId = _layoutPrototypeId;
+
 		clone._companyId = _companyId;
+
 		clone._name = _name;
+
 		clone._description = _description;
+
 		clone._settings = _settings;
+
 		clone._active = _active;
 
 		return clone;

@@ -247,7 +247,9 @@ public class MBMessageFlagModelImpl extends BaseModelImpl<MBMessageFlag>
 
 		clone._messageFlagId = _messageFlagId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._threadId = _threadId;
 		clone._originalMessageId = clone._messageId = _messageId;
 		clone._originalFlag = clone._flag = _flag;

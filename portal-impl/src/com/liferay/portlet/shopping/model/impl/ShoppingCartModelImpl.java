@@ -263,14 +263,22 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 
 		clone._cartId = _cartId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._itemIds = _itemIds;
+
 		clone._couponCodes = _couponCodes;
+
 		clone._altShipping = _altShipping;
+
 		clone._insure = _insure;
 
 		return clone;

@@ -371,14 +371,22 @@ public class IGImageModelImpl extends BaseModelImpl<IGImage>
 		IGImageModelImpl clone = new IGImageImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._imageId = _imageId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._folderId = _folderId;
+
 		clone._name = _name;
+
 		clone._description = _description;
 		clone._originalSmallImageId = clone._smallImageId = _smallImageId;
 		clone._originalLargeImageId = clone._largeImageId = _largeImageId;

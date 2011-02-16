@@ -176,6 +176,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl<WikiPageResource>
 		WikiPageResourceModelImpl clone = new WikiPageResourceImpl();
 
 		clone._uuid = _uuid;
+
 		clone._resourcePrimKey = _resourcePrimKey;
 		clone._originalNodeId = clone._nodeId = _nodeId;
 		clone._originalTitle = clone._title = _title;

@@ -264,11 +264,15 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 		clone._subscriptionId = _subscriptionId;
 		clone._originalCompanyId = clone._companyId = _companyId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
 		clone._originalClassPK = clone._classPK = _classPK;
+
 		clone._frequency = _frequency;
 
 		return clone;

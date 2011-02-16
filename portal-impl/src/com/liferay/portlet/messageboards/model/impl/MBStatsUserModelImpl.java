@@ -200,7 +200,9 @@ public class MBStatsUserModelImpl extends BaseModelImpl<MBStatsUser>
 		clone._statsUserId = _statsUserId;
 		clone._originalGroupId = clone._groupId = _groupId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._messageCount = _messageCount;
+
 		clone._lastPostDate = _lastPostDate;
 
 		return clone;

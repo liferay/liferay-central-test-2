@@ -293,14 +293,22 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 		BookmarksFolderModelImpl clone = new BookmarksFolderImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._folderId = _folderId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._parentFolderId = _parentFolderId;
+
 		clone._name = _name;
+
 		clone._description = _description;
 
 		return clone;

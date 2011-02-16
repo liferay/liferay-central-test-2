@@ -177,10 +177,15 @@ public class SocialEquityHistoryModelImpl extends BaseModelImpl<SocialEquityHist
 		SocialEquityHistoryModelImpl clone = new SocialEquityHistoryImpl();
 
 		clone._equityHistoryId = _equityHistoryId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._createDate = _createDate;
+
 		clone._personalEquity = _personalEquity;
 
 		return clone;

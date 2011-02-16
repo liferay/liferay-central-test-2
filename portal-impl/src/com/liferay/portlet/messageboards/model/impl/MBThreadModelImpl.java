@@ -377,19 +377,33 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 		MBThreadModelImpl clone = new MBThreadImpl();
 
 		clone._threadId = _threadId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._categoryId = _categoryId;
+
 		clone._rootMessageId = _rootMessageId;
+
 		clone._rootMessageUserId = _rootMessageUserId;
+
 		clone._messageCount = _messageCount;
+
 		clone._viewCount = _viewCount;
+
 		clone._lastPostByUserId = _lastPostByUserId;
+
 		clone._lastPostDate = _lastPostDate;
+
 		clone._priority = _priority;
+
 		clone._status = _status;
+
 		clone._statusByUserId = _statusByUserId;
+
 		clone._statusByUserName = _statusByUserName;
+
 		clone._statusDate = _statusDate;
 
 		return clone;

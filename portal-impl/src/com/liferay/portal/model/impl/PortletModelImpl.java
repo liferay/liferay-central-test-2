@@ -228,7 +228,9 @@ public class PortletModelImpl extends BaseModelImpl<Portlet>
 		clone._id = _id;
 		clone._originalCompanyId = clone._companyId = _companyId;
 		clone._originalPortletId = clone._portletId = _portletId;
+
 		clone._roles = _roles;
+
 		clone._active = _active;
 
 		return clone;

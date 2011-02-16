@@ -118,6 +118,7 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 		CounterModelImpl clone = new CounterImpl();
 
 		clone._name = _name;
+
 		clone._currentId = _currentId;
 
 		return clone;

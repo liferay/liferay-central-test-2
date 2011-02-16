@@ -174,9 +174,13 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl<ShoppingItemField>
 		ShoppingItemFieldModelImpl clone = new ShoppingItemFieldImpl();
 
 		clone._itemFieldId = _itemFieldId;
+
 		clone._itemId = _itemId;
+
 		clone._name = _name;
+
 		clone._values = _values;
+
 		clone._description = _description;
 
 		return clone;

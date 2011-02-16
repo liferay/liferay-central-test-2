@@ -315,21 +315,37 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 		OrgLaborModelImpl clone = new OrgLaborImpl();
 
 		clone._orgLaborId = _orgLaborId;
+
 		clone._organizationId = _organizationId;
+
 		clone._typeId = _typeId;
+
 		clone._sunOpen = _sunOpen;
+
 		clone._sunClose = _sunClose;
+
 		clone._monOpen = _monOpen;
+
 		clone._monClose = _monClose;
+
 		clone._tueOpen = _tueOpen;
+
 		clone._tueClose = _tueClose;
+
 		clone._wedOpen = _wedOpen;
+
 		clone._wedClose = _wedClose;
+
 		clone._thuOpen = _thuOpen;
+
 		clone._thuClose = _thuClose;
+
 		clone._friOpen = _friOpen;
+
 		clone._friClose = _friClose;
+
 		clone._satOpen = _satOpen;
+
 		clone._satClose = _satClose;
 
 		return clone;

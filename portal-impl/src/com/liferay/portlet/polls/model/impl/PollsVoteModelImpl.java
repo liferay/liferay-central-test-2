@@ -227,7 +227,9 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 		clone._voteId = _voteId;
 		clone._originalUserId = clone._userId = _userId;
 		clone._originalQuestionId = clone._questionId = _questionId;
+
 		clone._choiceId = _choiceId;
+
 		clone._voteDate = _voteDate;
 
 		return clone;

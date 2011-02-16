@@ -258,6 +258,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 		clone._originalOwnerType = clone._ownerType = _ownerType;
 		clone._originalPlid = clone._plid = _plid;
 		clone._originalPortletId = clone._portletId = _portletId;
+
 		clone._preferences = _preferences;
 
 		return clone;

@@ -210,9 +210,11 @@ public class DLFileRankModelImpl extends BaseModelImpl<DLFileRank>
 		DLFileRankModelImpl clone = new DLFileRankImpl();
 
 		clone._fileRankId = _fileRankId;
+
 		clone._groupId = _groupId;
 		clone._originalCompanyId = clone._companyId = _companyId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._createDate = _createDate;
 		clone._originalFileEntryId = clone._fileEntryId = _fileEntryId;
 

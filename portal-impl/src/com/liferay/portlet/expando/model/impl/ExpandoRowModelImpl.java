@@ -151,6 +151,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 		ExpandoRowModelImpl clone = new ExpandoRowImpl();
 
 		clone._rowId = _rowId;
+
 		clone._companyId = _companyId;
 		clone._originalTableId = clone._tableId = _tableId;
 		clone._originalClassPK = clone._classPK = _classPK;

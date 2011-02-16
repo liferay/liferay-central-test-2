@@ -210,9 +210,11 @@ public class SocialEquityGroupSettingModelImpl extends BaseModelImpl<SocialEquit
 
 		clone._equityGroupSettingId = _equityGroupSettingId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
 		clone._originalType = clone._type = _type;
+
 		clone._enabled = _enabled;
 
 		return clone;

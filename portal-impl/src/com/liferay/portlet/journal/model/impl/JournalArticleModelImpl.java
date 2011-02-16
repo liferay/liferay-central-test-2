@@ -606,33 +606,58 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 		JournalArticleModelImpl clone = new JournalArticleImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._id = _id;
+
 		clone._resourcePrimKey = _resourcePrimKey;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalArticleId = clone._articleId = _articleId;
 		clone._originalVersion = clone._version = _version;
+
 		clone._title = _title;
+
 		clone._urlTitle = _urlTitle;
+
 		clone._description = _description;
+
 		clone._content = _content;
+
 		clone._type = _type;
+
 		clone._structureId = _structureId;
+
 		clone._templateId = _templateId;
+
 		clone._displayDate = _displayDate;
+
 		clone._expirationDate = _expirationDate;
+
 		clone._reviewDate = _reviewDate;
+
 		clone._indexable = _indexable;
+
 		clone._smallImage = _smallImage;
+
 		clone._smallImageId = _smallImageId;
+
 		clone._smallImageURL = _smallImageURL;
+
 		clone._status = _status;
+
 		clone._statusByUserId = _statusByUserId;
+
 		clone._statusByUserName = _statusByUserName;
+
 		clone._statusDate = _statusDate;
 
 		return clone;

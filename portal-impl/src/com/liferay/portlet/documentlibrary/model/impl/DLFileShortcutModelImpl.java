@@ -393,19 +393,32 @@ public class DLFileShortcutModelImpl extends BaseModelImpl<DLFileShortcut>
 		DLFileShortcutModelImpl clone = new DLFileShortcutImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._fileShortcutId = _fileShortcutId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._repositoryId = _repositoryId;
+
 		clone._folderId = _folderId;
+
 		clone._toFileEntryId = _toFileEntryId;
+
 		clone._status = _status;
+
 		clone._statusByUserId = _statusByUserId;
+
 		clone._statusByUserName = _statusByUserName;
+
 		clone._statusDate = _statusDate;
 
 		return clone;

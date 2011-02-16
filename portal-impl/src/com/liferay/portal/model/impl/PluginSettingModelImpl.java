@@ -253,7 +253,9 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 		clone._originalCompanyId = clone._companyId = _companyId;
 		clone._originalPluginId = clone._pluginId = _pluginId;
 		clone._originalPluginType = clone._pluginType = _pluginType;
+
 		clone._roles = _roles;
+
 		clone._active = _active;
 
 		return clone;

@@ -235,11 +235,15 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 		ExpandoColumnModelImpl clone = new ExpandoColumnImpl();
 
 		clone._columnId = _columnId;
+
 		clone._companyId = _companyId;
 		clone._originalTableId = clone._tableId = _tableId;
 		clone._originalName = clone._name = _name;
+
 		clone._type = _type;
+
 		clone._defaultData = _defaultData;
+
 		clone._typeSettings = _typeSettings;
 
 		return clone;

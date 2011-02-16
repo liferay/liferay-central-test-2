@@ -387,22 +387,38 @@ public class ShoppingCouponModelImpl extends BaseModelImpl<ShoppingCoupon>
 		ShoppingCouponModelImpl clone = new ShoppingCouponImpl();
 
 		clone._couponId = _couponId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalCode = clone._code = _code;
+
 		clone._name = _name;
+
 		clone._description = _description;
+
 		clone._startDate = _startDate;
+
 		clone._endDate = _endDate;
+
 		clone._active = _active;
+
 		clone._limitCategories = _limitCategories;
+
 		clone._limitSkus = _limitSkus;
+
 		clone._minOrder = _minOrder;
+
 		clone._discount = _discount;
+
 		clone._discountType = _discountType;
 
 		return clone;

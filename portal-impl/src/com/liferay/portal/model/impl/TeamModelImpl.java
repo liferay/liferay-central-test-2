@@ -283,13 +283,19 @@ public class TeamModelImpl extends BaseModelImpl<Team> implements TeamModel {
 		TeamModelImpl clone = new TeamImpl();
 
 		clone._teamId = _teamId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalGroupId = clone._groupId = _groupId;
 		clone._originalName = clone._name = _name;
+
 		clone._description = _description;
 
 		return clone;

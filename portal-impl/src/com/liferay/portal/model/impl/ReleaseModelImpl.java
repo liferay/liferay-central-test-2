@@ -206,12 +206,18 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 		ReleaseModelImpl clone = new ReleaseImpl();
 
 		clone._releaseId = _releaseId;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalServletContextName = clone._servletContextName = _servletContextName;
+
 		clone._buildNumber = _buildNumber;
+
 		clone._buildDate = _buildDate;
+
 		clone._verified = _verified;
+
 		clone._testString = _testString;
 
 		return clone;

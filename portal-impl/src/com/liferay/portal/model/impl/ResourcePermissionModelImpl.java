@@ -277,6 +277,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 		clone._originalScope = clone._scope = _scope;
 		clone._originalPrimKey = clone._primKey = _primKey;
 		clone._originalRoleId = clone._roleId = _roleId;
+
 		clone._actionIds = _actionIds;
 
 		return clone;

@@ -241,6 +241,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 		clone._flagId = _flagId;
 		clone._originalUserId = clone._userId = _userId;
+
 		clone._createDate = _createDate;
 		clone._originalEntryId = clone._entryId = _entryId;
 		clone._originalValue = clone._value = _value;

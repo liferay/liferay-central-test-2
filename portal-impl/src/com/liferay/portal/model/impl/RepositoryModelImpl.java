@@ -276,15 +276,25 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		RepositoryModelImpl clone = new RepositoryImpl();
 
 		clone._repositoryId = _repositoryId;
+
 		clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._name = _name;
+
 		clone._description = _description;
+
 		clone._portletId = _portletId;
+
 		clone._type = _type;
+
 		clone._typeSettings = _typeSettings;
+
 		clone._dlFolderId = _dlFolderId;
 
 		return clone;

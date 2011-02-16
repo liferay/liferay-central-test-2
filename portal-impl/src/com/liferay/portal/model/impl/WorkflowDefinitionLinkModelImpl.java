@@ -265,12 +265,18 @@ public class WorkflowDefinitionLinkModelImpl extends BaseModelImpl<WorkflowDefin
 		clone._workflowDefinitionLinkId = _workflowDefinitionLinkId;
 		clone._originalGroupId = clone._groupId = _groupId;
 		clone._originalCompanyId = clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalClassNameId = clone._classNameId = _classNameId;
+
 		clone._workflowDefinitionName = _workflowDefinitionName;
+
 		clone._workflowDefinitionVersion = _workflowDefinitionVersion;
 
 		return clone;

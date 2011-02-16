@@ -273,10 +273,15 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 
 		clone._portletItemId = _portletItemId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
 		clone._originalName = clone._name = _name;
 		clone._originalPortletId = clone._portletId = _portletId;

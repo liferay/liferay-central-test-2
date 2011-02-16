@@ -352,19 +352,32 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 		MBCategoryModelImpl clone = new MBCategoryImpl();
 
 		clone._originalUuid = clone._uuid = _uuid;
+
 		clone._categoryId = _categoryId;
 		clone._originalGroupId = clone._groupId = _groupId;
+
 		clone._companyId = _companyId;
+
 		clone._userId = _userId;
+
 		clone._userName = _userName;
+
 		clone._createDate = _createDate;
+
 		clone._modifiedDate = _modifiedDate;
+
 		clone._parentCategoryId = _parentCategoryId;
+
 		clone._name = _name;
+
 		clone._description = _description;
+
 		clone._displayStyle = _displayStyle;
+
 		clone._threadCount = _threadCount;
+
 		clone._messageCount = _messageCount;
+
 		clone._lastPostDate = _lastPostDate;
 
 		return clone;
