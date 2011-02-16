@@ -245,40 +245,58 @@ request.setAttribute("edit_pages.jsp-layoutList", layoutList);
 request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 %>
 
-<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES) || portletName.equals(PortletKeys.MY_PAGES) %>">
-	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) %>">
-		<liferay-ui:header
-			backURL="<%= backURL %>"
-			title="<%= liveGroup.getDescriptiveName() %>"
+<c:choose>
+	<c:when test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) || portletName.equals(PortletKeys.GROUP_PAGES) || portletName.equals(PortletKeys.MY_PAGES) %>">
+		<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USER_GROUPS) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_USERS) %>">
+			<liferay-ui:header
+				backURL="<%= backURL %>"
+				title="<%= liveGroup.getDescriptiveName() %>"
+			/>
+		</c:if>
+
+		<%
+		String tabs1URL = portletURL.toString();
+
+		if (liveGroup.isUser()) {
+			PortletURL userTabs1URL = renderResponse.createRenderURL();
+
+			userTabs1URL.setParameter("struts_action", "/my_pages/edit_layouts");
+			userTabs1URL.setParameter("tabs1", tabs1);
+			userTabs1URL.setParameter("backURL", backURL);
+			userTabs1URL.setParameter("groupId", String.valueOf(liveGroupId));
+
+			tabs1URL = userTabs1URL.toString();
+		}
+		%>
+
+		<liferay-ui:tabs
+			names="<%= tabs1Names %>"
+			param="tabs1"
+			value="<%= tabs1 %>"
+			url="<%= tabs1URL %>"
 		/>
-	</c:if>
 
-	<%
-	String tabs1URL = portletURL.toString();
+		<%
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), currentURL);
 
-	if (liveGroup.isUser()) {
-		PortletURL userTabs1URL = renderResponse.createRenderURL();
+		if(selLayout != null && !group.isLayoutPrototype()) {
+			PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), currentURL);
+		}
+		%>
+	</c:when>
+	<c:otherwise>
 
-		userTabs1URL.setParameter("struts_action", "/my_pages/edit_layouts");
-		userTabs1URL.setParameter("tabs1", tabs1);
-		userTabs1URL.setParameter("backURL", backURL);
-		userTabs1URL.setParameter("groupId", String.valueOf(liveGroupId));
+		<%
+		if(selLayout != null && !group.isLayoutPrototype()) {
+			PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), currentURL);
+		}
+		%>
 
-		tabs1URL = userTabs1URL.toString();
-	}
-	%>
-
-	<liferay-ui:tabs
-		names="<%= tabs1Names %>"
-		param="tabs1"
-		value="<%= tabs1 %>"
-		url="<%= tabs1URL %>"
-	/>
-
-	<%
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), currentURL);
-	%>
-</c:if>
+		<div class="layout-breadcrumb">
+			<liferay-ui:breadcrumb displayStyle="horizontal" showPortletBreadcrumb="<%= true %>" showGuestGroup="<%= false %>" showLayout="<%= false %>" showParentGroups="<%= false %>" />
+		</div>
+	</c:otherwise>
+</c:choose>
 
 <%
 if(selLayout != null && !group.isLayoutPrototype()) {
@@ -286,9 +304,7 @@ if(selLayout != null && !group.isLayoutPrototype()) {
 }
 %>
 
-<div class="layout-breadcrumb">
-	<liferay-ui:breadcrumb displayStyle="horizontal" showPortletBreadcrumb="<%= true %>" showGuestGroup="<%= false %>" showLayout="<%= false %>" showParentGroups="<%= false %>" />
-</div>
+
 
 <aui:layout cssClass="manage-view">
 	<c:if test="<%= !group.isLayoutPrototype() %>">
