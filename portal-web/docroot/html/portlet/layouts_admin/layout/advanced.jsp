@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
-Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 Group group = (Group)request.getAttribute("edit_pages.jsp-group");
+Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
 UnicodeProperties layoutTypeSettings =  selLayout.getTypeSettingsProperties();
 %>
@@ -29,33 +29,23 @@ UnicodeProperties layoutTypeSettings =  selLayout.getTypeSettingsProperties();
 
 <h3><liferay-ui:message key="advanced" /></h3>
 
+<liferay-ui:error exception="<%= ImageTypeException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
+
 <aui:fieldset>
 	<c:if test="<%= !group.isLayoutPrototype() %>">
 
 		<%
-		String queryString = layoutTypeSettings.getProperty("query-string");
-
-		if (queryString == null) {
-			queryString = StringPool.BLANK;
-		}
+		String queryString = GetterUtil.getString(layoutTypeSettings.getProperty("query-string"));
 		%>
 
 		<aui:input helpMessage="query-string-help" label="query-string" name="TypeSettingsProperties--query-string--" size="30" type="text" value="<%= HtmlUtil.escape(queryString) %>" />
 	</c:if>
 
 	<%
-	String curTarget = layoutTypeSettings.getProperty("target");
-
-	if (curTarget == null) {
-		curTarget = StringPool.BLANK;
-	}
-
-	curTarget = HtmlUtil.escapeAttribute(curTarget);
+	String curTarget = GetterUtil.getString(layoutTypeSettings.getProperty("target"));
 	%>
 
-	<aui:input label="target" name="TypeSettingsProperties--target--" size="15" type="text" value="<%= curTarget %>" />
-
-	<liferay-ui:error exception="<%= ImageTypeException.class %>" message="please-enter-a-file-with-a-valid-file-type" />
+	<aui:input label="target" name="TypeSettingsProperties--target--" size="15" type="text" value="<%= HtmlUtil.escapeAttribute(curTarget) %>" />
 
 	<aui:input name="iconImage" type="hidden" value="<%= selLayout.isIconImage() %>" />
 
@@ -70,33 +60,34 @@ UnicodeProperties layoutTypeSettings =  selLayout.getTypeSettingsProperties();
 				url="javascript:;"
 			/>
 
-			<div id="<portlet:namespace />layoutIcon">
+			<div id="<portlet:namespace />layoutIconContainer">
 				<liferay-theme:layout-icon layout="<%= selLayout %>" />
 			</div>
-
-
 		</c:if>
 	</aui:field-wrapper>
 </aui:fieldset>
 
 <aui:script use="aui-base">
 	var deleteIconImageLink = A.one('.deleteIconImage a');
+
 	var iconImageInput =  A.one('#<portlet:namespace />iconImage');
-	var iconImage =  A.one('#<portlet:namespace />layoutIcon');
+
+	var layoutIconContainer =  A.one('#<portlet:namespace />layoutIconContainer');
 
 	if (deleteIconImageLink) {
 		deleteIconImageLink.on(
 			'click',
 			function() {
 				iconImageInput.attr('value', false);
-				iconImage.hide();
+
+				layoutIconContainer.hide();
 			}
 		);
 	}
 
-	var fileInput = A.one('#<portlet:namespace />iconFileName');
+	var iconFileNameInput = A.one('#<portlet:namespace />iconFileName');
 
-	fileInput.on(
+	iconFileNameInput.on(
 		'change',
 		function() {
 			iconImageInput.attr('value', true);

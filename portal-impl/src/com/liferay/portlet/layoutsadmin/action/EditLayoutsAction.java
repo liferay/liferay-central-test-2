@@ -414,11 +414,11 @@ public class EditLayoutsAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
@@ -426,7 +426,6 @@ public class EditLayoutsAction extends PortletAction {
 		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(
 			actionRequest, "stagingGroupId");
-
 		boolean privateLayout = ParamUtil.getBoolean(
 			actionRequest, "privateLayout");
 		long layoutId = ParamUtil.getLong(actionRequest, "layoutId");
@@ -615,11 +614,12 @@ public class EditLayoutsAction extends PortletAction {
 			String colorSchemeId = ParamUtil.getString(
 				actionRequest, device + "ColorSchemeId");
 			String css = ParamUtil.getString(actionRequest, device + "Css");
-			boolean isInheritLookAndFeel = ParamUtil.getBoolean(
-				actionRequest, device + "IsInheritLookAndFeel");
 			boolean wapTheme = device.equals("wap");
 
-			if (isInheritLookAndFeel) {
+			boolean inheritLookAndFeel = ParamUtil.getBoolean(
+				actionRequest, device + "InheritLookAndFeel");
+
+			if (inheritLookAndFeel) {
 				themeId = StringPool.BLANK;
 				colorSchemeId = StringPool.BLANK;
 			}

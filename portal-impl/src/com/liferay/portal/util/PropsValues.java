@@ -614,6 +614,10 @@ public class PropsValues {
 
 	public static final String LAYOUT_DEFAULT_TEMPLATE_ID = PropsUtil.get(PropsKeys.LAYOUT_DEFAULT_TEMPLATE_ID);
 
+	public static final String[] LAYOUT_FORM_ADD = PropsUtil.getArray(PropsKeys.LAYOUT_FORM_ADD);
+
+	public static final String[] LAYOUT_FORM_UPDATE = PropsUtil.getArray(PropsKeys.LAYOUT_FORM_UPDATE);
+
 	public static final String LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND = PropsUtil.get(PropsKeys.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND);
 
 	public static final String LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING = PropsUtil.get(PropsKeys.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
@@ -631,6 +635,8 @@ public class PropsValues {
 	public static final boolean LAYOUT_PARALLEL_RENDER_ENABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_PARALLEL_RENDER_ENABLE));
 
 	public static final boolean LAYOUT_REMEMBER_MAXIMIZED_WINDOW_STATE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_REMEMBER_MAXIMIZED_WINDOW_STATE));
+
+	public static final String[] LAYOUT_SET_FORM_UPDATE = PropsUtil.getArray(PropsKeys.LAYOUT_SET_FORM_UPDATE);
 
 	public static final boolean LAYOUT_SHOW_HTTP_STATUS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_SHOW_HTTP_STATUS));
 
@@ -659,12 +665,6 @@ public class PropsValues {
 	public static boolean LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE));
 
 	public static boolean LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED));
-
-	public static final String[] LAYOUTS_FORM_ADD = PropsUtil.getArray(PropsKeys.LAYOUTS_FORM_ADD);
-
-	public static final String[] LAYOUTS_FORM_UPDATE = PropsUtil.getArray(PropsKeys.LAYOUTS_FORM_UPDATE);
-
-	public static final String[] LAYOUTSET_FORM_UPDATE = PropsUtil.getArray(PropsKeys.LAYOUTSET_FORM_UPDATE);
 
 	public static final String LDAP_ATTRS_TRANSFORMER_IMPL = PropsUtil.get(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL);
 

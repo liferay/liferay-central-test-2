@@ -17,24 +17,19 @@ package com.liferay.portlet.layoutsadmin.action;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.communities.action.ActionUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -118,17 +113,6 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 			getForward(renderRequest, "portlet.layouts_admin.edit_pages"));
 	}
 
-	protected Group getGroup(PortletRequest portletRequest) throws Exception {
-		return ActionUtil.getGroup(portletRequest);
-	}
-
-	protected UnicodeProperties getTypeSettingsProperties(
-		ActionRequest actionRequest) {
-
-		return PropertiesParamUtil.getProperties(
-			actionRequest, "TypeSettingsProperties--");
-	}
-
 	protected void updateLayoutSet(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -136,13 +120,9 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
-			actionRequest);
-
 		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(
 			actionRequest, "stagingGroupId");
-
 		boolean privateLayout = ParamUtil.getBoolean(
 			actionRequest, "privateLayout");
 

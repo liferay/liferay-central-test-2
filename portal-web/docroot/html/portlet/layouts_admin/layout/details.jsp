@@ -17,9 +17,9 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
-Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 Group group = (Group)request.getAttribute("edit_pages.jsp-group");
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
+Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
 Locale defaultLocale = LocaleUtil.getDefault();
 String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
@@ -31,6 +31,65 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 <h3><liferay-ui:message key="details" /></h3>
 
+<c:if test="<%= !group.isLayoutPrototype() && PortalUtil.isLayoutFriendliable(selLayout) %>">
+
+	<%
+	StringBuilder friendlyURLBase = new StringBuilder();
+
+	friendlyURLBase.append(themeDisplay.getPortalURL());
+
+	String virtualHostname = selLayout.getLayoutSet().getVirtualHostname();
+
+	if (Validator.isNull(virtualHostname) || (friendlyURLBase.indexOf(virtualHostname) == -1)) {
+		friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
+		friendlyURLBase.append(group.getFriendlyURL());
+	}
+	%>
+
+	<liferay-ui:error exception="<%= LayoutFriendlyURLException.class %>">
+
+		<%
+		LayoutFriendlyURLException lfurle = (LayoutFriendlyURLException)errorException;
+		%>
+
+		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.ADJACENT_SLASHES %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-have-adjacent-slashes" />
+		</c:if>
+
+		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.DOES_NOT_START_WITH_SLASH %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-that-begins-with-a-slash" />
+		</c:if>
+
+		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.DUPLICATE %>">
+			<liferay-ui:message key="please-enter-a-unique-friendly-url" />
+		</c:if>
+
+		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.ENDS_WITH_SLASH %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-end-with-a-slash" />
+		</c:if>
+
+		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.INVALID_CHARACTERS %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-with-valid-characters" />
+		</c:if>
+
+		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.KEYWORD_CONFLICT %>">
+			<%= LanguageUtil.format(pageContext, "please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x", lfurle.getKeywordConflict()) %>
+		</c:if>
+
+		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.POSSIBLE_DUPLICATE %>">
+			<liferay-ui:message key="the-friendly-url-may-conflict-with-another-page" />
+		</c:if>
+
+		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.TOO_DEEP %>">
+			<liferay-ui:message key="the-friendly-url-has-too-many-slashes" />
+		</c:if>
+
+		<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.TOO_SHORT %>">
+			<liferay-ui:message key="please-enter-a-friendly-url-that-is-at-least-two-characters-long" />
+		</c:if>
+	</liferay-ui:error>
+</c:if>
+
 <aui:fieldset>
 	<c:choose>
 		<c:when test="<%= !group.isLayoutPrototype() %>">
@@ -40,63 +99,6 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 			<c:choose>
 				<c:when test="<%= PortalUtil.isLayoutFriendliable(selLayout) %>">
-
-					<%
-					StringBuilder friendlyURLBase = new StringBuilder();
-
-					friendlyURLBase.append(themeDisplay.getPortalURL());
-
-					String virtualHostname = selLayout.getLayoutSet().getVirtualHostname();
-
-					if (Validator.isNull(virtualHostname) || (friendlyURLBase.indexOf(virtualHostname) == -1)) {
-						friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
-						friendlyURLBase.append(group.getFriendlyURL());
-					}
-					%>
-
-					<liferay-ui:error exception="<%= LayoutFriendlyURLException.class %>">
-
-						<%
-						LayoutFriendlyURLException lfurle = (LayoutFriendlyURLException)errorException;
-						%>
-
-						<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.ADJACENT_SLASHES %>">
-							<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-have-adjacent-slashes" />
-						</c:if>
-
-						<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.DOES_NOT_START_WITH_SLASH %>">
-							<liferay-ui:message key="please-enter-a-friendly-url-that-begins-with-a-slash" />
-						</c:if>
-
-						<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.DUPLICATE %>">
-							<liferay-ui:message key="please-enter-a-unique-friendly-url" />
-						</c:if>
-
-						<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.ENDS_WITH_SLASH %>">
-							<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-end-with-a-slash" />
-						</c:if>
-
-						<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.INVALID_CHARACTERS %>">
-							<liferay-ui:message key="please-enter-a-friendly-url-with-valid-characters" />
-						</c:if>
-
-						<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.KEYWORD_CONFLICT %>">
-							<%= LanguageUtil.format(pageContext, "please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x", lfurle.getKeywordConflict()) %>
-						</c:if>
-
-						<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.POSSIBLE_DUPLICATE %>">
-							<liferay-ui:message key="the-friendly-url-may-conflict-with-another-page" />
-						</c:if>
-
-						<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.TOO_DEEP %>">
-							<liferay-ui:message key="the-friendly-url-has-too-many-slashes" />
-						</c:if>
-
-						<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.TOO_SHORT %>">
-							<liferay-ui:message key="please-enter-a-friendly-url-that-is-at-least-two-characters-long" />
-						</c:if>
-					</liferay-ui:error>
-
 					<aui:input helpMessage='<%= LanguageUtil.format(pageContext, "for-example-x", "<em>/news</em>") %>' label="friendly-url" name="friendlyURL" prefix="<%= friendlyURLBase.toString() %>" />
 				</c:when>
 				<c:otherwise>
@@ -176,6 +178,7 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 			'change',
 			function(event) {
 				var type = event.currentTarget.val();
+
 				toggleLayoutTypeFields(type);
 
 				Liferay.fire(

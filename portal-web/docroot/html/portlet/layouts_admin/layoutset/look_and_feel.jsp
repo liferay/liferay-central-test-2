@@ -28,8 +28,6 @@ ColorScheme selColorScheme = layoutSet.getColorScheme();
 
 Theme selWapTheme = layoutSet.getWapTheme();
 ColorScheme selWapColorScheme = layoutSet.getWapColorScheme();
-
-String cssText = layoutSet.getCss();
 %>
 
 <liferay-ui:error-marker key="errorSection" value="look-and-feel" />
@@ -63,7 +61,7 @@ String cssText = layoutSet.getCss();
 
 			<h3><liferay-ui:message key="css" /></h3>
 
-			<aui:input label="insert-custom-css-that-will-be-loaded-after-the-theme" name="regularCss" type="textarea" value="<%= cssText %>" />
+			<aui:input label="insert-custom-css-that-will-be-loaded-after-the-theme" name="regularCss" type="textarea" value="<%= layoutSet.getCss() %>" />
 		</liferay-ui:section>
 
 		<liferay-ui:section>

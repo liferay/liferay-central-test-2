@@ -425,12 +425,12 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
-		<action path="/communities/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/communities/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/communities/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/communities/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -647,12 +647,12 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/enterprise_admin/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/enterprise_admin/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -803,12 +803,12 @@
 			<forward name="portlet.communities.evrror" path="portlet.communities.error" />
 		</action>
 
-		<action path="/enterprise_admin_communities/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/enterprise_admin_communities/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_communities/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/enterprise_admin_communities/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -897,12 +897,12 @@
 
 		<!-- Enterprise Admin Organizations -->
 
-		<action path="/enterprise_admin_organizations/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/enterprise_admin_organizations/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_organizations/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/enterprise_admin_organizations/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -1082,12 +1082,12 @@
 
 		<!-- Enterprise Admin User Groups -->
 
-		<action path="/enterprise_admin_user_groups/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/enterprise_admin_user_groups/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_user_groups/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/enterprise_admin_user_groups/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -1129,12 +1129,12 @@
 
 		<!-- Enterprise Admin Users -->
 
-		<action path="/enterprise_admin_users/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/enterprise_admin_users/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_users/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/enterprise_admin_users/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -1207,12 +1207,12 @@
 
 		<!-- Group Pages -->
 
-		<action path="/group_pages/edit_layouts" type="com.liferay.portlet.grouppages.action.EditLayoutsAction">
+		<action path="/group_pages/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/group_pages/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/group_pages/edit_layouts" type="com.liferay.portlet.grouppages.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -1451,6 +1451,11 @@
 
 		<!-- Layout Set Prototypes -->
 
+		<action path="/layout_set_prototypes/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
+			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
+		</action>
+
 		<action path="/layout_set_prototypes/edit_layout_set_prototype" type="com.liferay.portlet.layoutsetprototypes.action.EditLayoutSetPrototypeAction">
 			<forward name="portlet.layout_set_prototypes.edit_layout_set_prototype" path="portlet.layout_set_prototypes.edit_layout_set_prototype" />
 			<forward name="portlet.layout_set_prototypes.error" path="portlet.layout_set_prototypes.error" />
@@ -1459,11 +1464,6 @@
 		<action path="/layout_set_prototypes/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layout_set_prototypes.error" />
-		</action>
-
-		<action path="/layout_set_prototypes/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
-			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
 		<action path="/layout_set_prototypes/export_layouts" type="com.liferay.portlet.layoutsadmin.action.ExportLayoutsAction">
@@ -1486,12 +1486,12 @@
 
 		<!-- Layouts Admin -->
 
-		<action path="/layouts_admin/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/layouts_admin/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/layouts_admin/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/layouts_admin/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -1696,12 +1696,12 @@
 
 		<!-- My Account -->
 
-		<action path="/my_account/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/my_account/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/my_account/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/my_account/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -1755,12 +1755,12 @@
 
 		<!-- My Pages -->
 
-		<action path="/my_pages/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+		<action path="/my_pages/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/my_pages/edit_layoutset" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/my_pages/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>

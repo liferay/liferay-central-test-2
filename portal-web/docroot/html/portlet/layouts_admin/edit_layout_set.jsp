@@ -52,7 +52,7 @@ else {
 
 //Sections
 
-String[] mainSections = PropsValues.LAYOUTSET_FORM_UPDATE;
+String[] mainSections = PropsValues.LAYOUT_SET_FORM_UPDATE;
 
 if (liveGroup.isWorkflowEnabled()) {
 	mainSections = ArrayUtil.append(mainSections, "proposals");
@@ -249,11 +249,11 @@ String[][] categorySections = {mainSections};
 	).render();
 </aui:script>
 
-<portlet:actionURL var="editLayoutsetURL">
-	<portlet:param name="struts_action" value="/layouts_admin/edit_layoutset" />
+<portlet:actionURL var="editLayoutSetURL">
+	<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set" />
 </portlet:actionURL>
 
-<aui:form action="<%= editLayoutsetURL %>" cssClass="edit-layoutset-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayoutset();" %>'>
+<aui:form action="<%= editLayoutSetURL %>" cssClass="edit-layoutset-form" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayoutset();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />

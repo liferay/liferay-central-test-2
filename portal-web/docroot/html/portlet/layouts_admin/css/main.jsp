@@ -68,10 +68,10 @@
 .portlet-communities .theme-entry,
 .portlet-enterprise-admin .theme-entry {
 	float: left;
-	text-align: center;
-	text-decoration: none;
 	margin: 2px;
 	padding: 0.3em;
+	text-align: center;
+	text-decoration: none;
 }
 
 .portlet-communities .lfr-current-theme .theme-screenshot,
@@ -275,11 +275,10 @@
 	background-color: #FFF;
 	border: 1px solid #DEDEDE;
 	border-color: #C0C2C5;
+	border-radius: 4px;
 	margin: 0 0 1em 0;
-
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
-	border-radius: 4px;
 }
 
 .portlet-communities .layout-breadcrumb li,

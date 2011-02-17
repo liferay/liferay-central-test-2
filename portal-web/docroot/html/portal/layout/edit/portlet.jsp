@@ -77,7 +77,7 @@
 <aui:script use="aui-dialog">
 	var button = new A.ButtonItem(
 		{
-			handler:function(event) {
+			handler: function(event) {
 				var content = A.one('#<portlet:namespace />copyPortletsFromPage');
 
 				var popup = new A.Dialog(
@@ -110,7 +110,7 @@
 				}
 			},
 			icon: 'copy',
-			label: '<liferay-ui:message key="copy-portlets-from-page" />',
+			label: '<liferay-ui:message key="copy-portlets-from-page" />'
 		}
 	);
 

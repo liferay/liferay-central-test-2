@@ -68,6 +68,8 @@ if (stagingGroup != null) {
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
+
+boolean privateLayout = tabs1.equals("private-pages");
 long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 UnicodeProperties groupTypeSettings = null;
@@ -81,16 +83,14 @@ else {
 
 UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 
-boolean privateLayout = tabs1.equals("private-pages");
-
 Layout selLayout = null;
 
 try {
 	if (selPlid != LayoutConstants.DEFAULT_PLID) {
 		selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
 
-		layoutId = selLayout.getLayoutId();
 		privateLayout = selLayout.isPrivateLayout();
+		layoutId = selLayout.getLayoutId();
 	}
 }
 catch (NoSuchLayoutException nsle) {
@@ -226,17 +226,15 @@ request.setAttribute("edit_pages.jsp-group", group);
 request.setAttribute("edit_pages.jsp-selGroup", selGroup);
 request.setAttribute("edit_pages.jsp-liveGroup", liveGroup);
 request.setAttribute("edit_pages.jsp-stagingGroup", stagingGroup);
-
 request.setAttribute("edit_pages.jsp-groupId", new Long(groupId));
 request.setAttribute("edit_pages.jsp-liveGroupId", new Long(liveGroupId));
 request.setAttribute("edit_pages.jsp-stagingGroupId", new Long(stagingGroupId));
-
 request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
-request.setAttribute("edit_pages.jsp-layoutId", new Long(layoutId));
-request.setAttribute("edit_pages.jsp-selLayout", selLayout);
 request.setAttribute("edit_pages.jsp-privateLayout", new Boolean(privateLayout));
+request.setAttribute("edit_pages.jsp-layoutId", new Long(layoutId));
 request.setAttribute("edit_pages.jsp-groupTypeSettings", groupTypeSettings);
 request.setAttribute("edit_pages.jsp-liveGroupTypeSettings", liveGroupTypeSettings);
+request.setAttribute("edit_pages.jsp-selLayout", selLayout);
 
 request.setAttribute("edit_pages.jsp-rootNodeName", rootNodeName);
 
@@ -279,7 +277,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		<%
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, TextFormatter.format(tabs1, TextFormatter.O)), currentURL);
 
-		if(selLayout != null && !group.isLayoutPrototype()) {
+		if ((selLayout != null) && !group.isLayoutPrototype()) {
 			PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), currentURL);
 		}
 		%>
@@ -287,7 +285,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	<c:otherwise>
 
 		<%
-		if(selLayout != null && !group.isLayoutPrototype()) {
+		if ((selLayout != null) && !group.isLayoutPrototype()) {
 			PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), currentURL);
 		}
 		%>
@@ -299,12 +297,10 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 </c:choose>
 
 <%
-if(selLayout != null && !group.isLayoutPrototype()) {
+if ((selLayout != null) && !group.isLayoutPrototype()) {
 	PortalUtil.addPortletBreadcrumbEntry(request, selLayout.getName(locale), currentURL);
 }
 %>
-
-
 
 <aui:layout cssClass="manage-view">
 	<c:if test="<%= !group.isLayoutPrototype() %>">
@@ -325,7 +321,7 @@ if(selLayout != null && !group.isLayoutPrototype()) {
 				<liferay-util:include page="/html/portlet/layouts_admin/edit_layout.jsp" />
 			</c:when>
 			<c:otherwise>
-				<liferay-util:include page="/html/portlet/layouts_admin/edit_layoutset.jsp" />
+				<liferay-util:include page="/html/portlet/layouts_admin/edit_layout_set.jsp" />
 			</c:otherwise>
 		</c:choose>
 	</aui:column>

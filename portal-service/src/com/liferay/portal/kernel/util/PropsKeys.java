@@ -891,6 +891,10 @@ public interface PropsKeys {
 
 	public static final String LAYOUT_FIRST_PAGEABLE = "layout.first.pageable";
 
+	public static final String LAYOUT_FORM_ADD = "layout.form.add";
+
+	public static final String LAYOUT_FORM_UPDATE = "layout.form.update";
+
 	public static final String LAYOUT_FRIENDLY_URL_KEYWORDS = "layout.friendly.url.keywords";
 
 	public static final String LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND = "layout.friendly.url.page.not.found";
@@ -912,6 +916,8 @@ public interface PropsKeys {
 	public static final String LAYOUT_PARENTABLE = "layout.parentable";
 
 	public static final String LAYOUT_REMEMBER_MAXIMIZED_WINDOW_STATE = "layout.remember.maximized.window.state";
+
+	public static final String LAYOUT_SET_FORM_UPDATE = "layout.set.form.update";
 
 	public static final String LAYOUT_SHOW_HTTP_STATUS = "layout.show.http.status";
 
@@ -952,12 +958,6 @@ public interface PropsKeys {
 	public static final String LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED = "layout.user.public.layouts.power.user.required";
 
 	public static final String LAYOUT_VIEW_PAGE = "layout.view.page";
-
-	public static final String LAYOUTS_FORM_ADD = "layouts.form.add";
-
-	public static final String LAYOUTS_FORM_UPDATE = "layouts.form.update";
-
-	public static final String LAYOUTSET_FORM_UPDATE = "layoutset.form.update";
 
 	public static final String LDAP_ATTRS_TRANSFORMER_IMPL = "ldap.attrs.transformer.impl";
 

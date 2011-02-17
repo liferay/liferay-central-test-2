@@ -22,6 +22,7 @@ boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLa
 UnicodeProperties groupTypeSettings =  (UnicodeProperties)request.getAttribute("edit_pages.jsp-groupTypeSettings");
 
 Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupConstants.GUEST);
+
 boolean mergeGuestPublicPages = PropertiesParamUtil.getBoolean(groupTypeSettings, request, "mergeGuestPublicPages");
 %>
 
@@ -30,7 +31,7 @@ boolean mergeGuestPublicPages = PropertiesParamUtil.getBoolean(groupTypeSettings
 <h3><liferay-ui:message key="advanced" /></h3>
 
 <aui:fieldset>
-	<c:if test="<%= !privateLayout && liveGroup.getGroupId() != guestGroup.getGroupId() %>">
+	<c:if test="<%= !privateLayout && (liveGroup.getGroupId() != guestGroup.getGroupId()) %>">
 
 		<%
 		String taglibLabel = LanguageUtil.format(pageContext, "merge-x-public-pages", guestGroup.getDescriptiveName());

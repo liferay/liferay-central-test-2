@@ -37,7 +37,7 @@ long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEF
 
 //Sections
 
-String[] mainSections = PropsValues.LAYOUTS_FORM_UPDATE;
+String[] mainSections = PropsValues.LAYOUT_FORM_UPDATE;
 
 String[][] categorySections = {mainSections};
 %>
