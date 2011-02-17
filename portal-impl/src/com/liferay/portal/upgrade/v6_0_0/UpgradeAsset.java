@@ -533,7 +533,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		sb.append("select count(*) from AssetEntry AssetEntry inner join ");
 		sb.append("AssetEntries_AssetTags AssetEntries_AssetTags on ");
 		sb.append("AssetEntry.entryId = AssetEntries_AssetTags.entryId ");
-		sb.append("where AssetEntry.visible = 1 and ");
+		sb.append("where AssetEntry.visible = TRUE and ");
 		sb.append("AssetTag.tagId = AssetEntries_AssetTags.tagId)");
 
 		runSQL(sb.toString());
