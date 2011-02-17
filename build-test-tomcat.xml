@@ -145,17 +145,6 @@ web.server.display.node=true</echo>
 		<antcall target="revert-test-properties" />
 
 		<if>
-			<isset property="legacy.theme.ids" />
-			<then>
-				<replace
-					file="portal-web/test/test-portal-web.properties"
-					token="#theme.ids="
-					value="theme.ids=${legacy.theme.ids}"
-				/>
-			</then>
-		</if>
-
-		<if>
 			<isset property="jdbc.drivers.optional.dir" />
 			<then>
 				<antcall target="copy-optional-jars" inheritAll="false" />

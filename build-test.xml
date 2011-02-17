@@ -2205,6 +2205,24 @@ file.
 	</target>
 
 	<target name="run-simple-server">
+		<if>
+			<isset property="legacy.theme.ids" />
+			<then>
+				<replace
+					file="portal-web/test/test-portal-web.properties"
+					token="#theme.ids="
+					value="theme.ids=${legacy.theme.ids}"
+				/>
+			</then>
+			<else>				
+				<replace
+					file="portal-web/test/test-portal-web.properties"
+					token="#theme.ids="
+					value="theme.ids=classic,controlpanel"
+				/>
+			</else>
+		</if>
+
 		<antcall target="rebuild-database" inheritAll="false" />
 
 		<delete includeemptydirs="true" failonerror="false">
