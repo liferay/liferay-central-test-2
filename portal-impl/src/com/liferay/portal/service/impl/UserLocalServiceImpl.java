@@ -1152,7 +1152,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Group group = user.getGroup();
 
 		if (group != null) {
-			groupLocalService.deleteGroup(group.getGroupId());
+			groupLocalService.deleteGroup(group);
 		}
 
 		// Portrait

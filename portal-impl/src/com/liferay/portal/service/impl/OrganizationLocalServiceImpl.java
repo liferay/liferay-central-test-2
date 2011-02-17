@@ -292,7 +292,7 @@ public class OrganizationLocalServiceImpl
 
 		Group group = organization.getGroup();
 
-		groupLocalService.deleteGroup(group.getGroupId());
+		groupLocalService.deleteGroup(group);
 
 		// Resources
 
