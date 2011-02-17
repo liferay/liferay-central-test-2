@@ -256,8 +256,7 @@ public class EditFileEntryAction extends PortletAction {
 		String sourceFileName = uploadRequest.getFileName("file");
 		String title = ParamUtil.getString(uploadRequest, "title");
 		String description = ParamUtil.getString(uploadRequest, "description");
-		String changeLog = ParamUtil.getString(
-			uploadRequest, "changeLog");
+		String changeLog = ParamUtil.getString(uploadRequest, "changeLog");
 		boolean majorVersion = ParamUtil.getBoolean(
 			uploadRequest, "majorVersion");
 
