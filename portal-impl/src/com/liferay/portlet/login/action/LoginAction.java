@@ -128,6 +128,29 @@ public class LoginAction extends PortletAction {
 			getForward(renderRequest, "portlet.login.login"));
 	}
 
+	protected String getCompleteRedirectURL(
+		HttpServletRequest request, String redirect) {
+
+		HttpSession session = request.getSession();
+
+		Boolean httpsInitial = (Boolean)session.getAttribute(
+			WebKeys.HTTPS_INITIAL);
+
+		String portalURL = null;
+
+		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
+			(!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) &&
+			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
+
+			portalURL = PortalUtil.getPortalURL(request, false);
+		}
+		else {
+			portalURL = PortalUtil.getPortalURL(request);
+		}
+
+		return portalURL.concat(redirect);
+	}
+
 	protected boolean isCheckMethodOnProcessAction() {
 		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
@@ -161,7 +184,7 @@ public class LoginAction extends PortletAction {
 			if (Validator.isNotNull(redirect)) {
 				redirect = PortalUtil.escapeRedirect(redirect);
 
-				if ((redirect != null) && !redirect.startsWith(Http.HTTP)) {
+				if (!redirect.startsWith(Http.HTTP)) {
 					redirect = getCompleteRedirectURL(request, redirect);
 				}
 
@@ -179,29 +202,6 @@ public class LoginAction extends PortletAction {
 				}
 			}
 		}
-	}
-
-	protected String getCompleteRedirectURL(
-		HttpServletRequest request, String redirect) {
-
-		HttpSession session = request.getSession();
-
-		Boolean httpsInitial = (Boolean)session.getAttribute(
-			WebKeys.HTTPS_INITIAL);
-
-		String portalURL = null;
-
-		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
-			(!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) &&
-			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
-
-			portalURL = PortalUtil.getPortalURL(request, false);
-		}
-		else {
-			portalURL = PortalUtil.getPortalURL(request);
-		}
-
-		return portalURL.concat(redirect);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
