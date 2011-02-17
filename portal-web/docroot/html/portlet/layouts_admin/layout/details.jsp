@@ -31,11 +31,13 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 <h3><liferay-ui:message key="details" /></h3>
 
+<%
+StringBuilder friendlyURLBase = new StringBuilder();
+%>
+
 <c:if test="<%= !group.isLayoutPrototype() && PortalUtil.isLayoutFriendliable(selLayout) %>">
 
 	<%
-	StringBuilder friendlyURLBase = new StringBuilder();
-
 	friendlyURLBase.append(themeDisplay.getPortalURL());
 
 	String virtualHostname = selLayout.getLayoutSet().getVirtualHostname();
@@ -112,7 +114,6 @@ String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 			<aui:input name='<%= "name_" + defaultLanguageId %>' type="hidden" value="<%= HtmlUtil.escapeAttribute(selLayout.getName(defaultLocale)) %>" />
 		</c:otherwise>
 	</c:choose>
-
 
 	<aui:select name="type">
 
