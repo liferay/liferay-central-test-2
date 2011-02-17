@@ -458,7 +458,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			return repository.getClassNameId();
 		}
 
-		return 0;
+		return PortalUtil.getClassNameId(LiferayRepository.class.getName());
 	}
 
 	private Map<Long, LocalRepository> _localRepositoriesByRepositoryEntryId =
