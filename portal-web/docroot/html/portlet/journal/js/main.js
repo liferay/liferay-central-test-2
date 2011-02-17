@@ -1922,7 +1922,7 @@ AUI().add(
 										buffer.push(option.openTag);
 									}
 
-									buffer.push('<![CDATA[' + optionValue + ']]>');
+									buffer.push('<![CDATA[' + Liferay.Util.escapeHTML(optionValue) + ']]>');
 
 									if (multiList) {
 										buffer.push(option.closeTag);
@@ -3103,6 +3103,10 @@ AUI().add(
 							if (principalElement) {
 								content = principalElement.val();
 							}
+						}
+
+						if ((type == 'text') || (type == 'text_box') || (type == 'multi-list') || (type == 'list')) {
+							content = Liferay.Util.escapeHTML(content);
 						}
 
 						instance.set('content', content);

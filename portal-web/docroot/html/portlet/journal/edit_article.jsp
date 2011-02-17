@@ -903,6 +903,10 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 				elContent = HtmlUtil.toInputSafe(elContent);
 			}
 
+			if (elType.equals("text") || elType.equals("text_box") || elType.equals("multi-list") || elType.equals("list")) {
+				elContent = HtmlUtil.unescape(elContent);
+			}
+
 			String elLanguageId = StringPool.BLANK;
 
 			Element dynamicContentEl = contentElement.element("dynamic-content");
