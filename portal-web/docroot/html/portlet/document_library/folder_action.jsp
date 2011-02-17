@@ -77,8 +77,8 @@ if (row == null) {
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/document_library/edit_folder" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 			<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
+			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon

@@ -32,7 +32,6 @@ long toGroupId = ParamUtil.getLong(request, "toGroupId");
 Group toGroup = null;
 
 long repositoryId = BeanParamUtil.getLong(fileShortcut, request, "repositoryId");
-
 long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
 
 Folder toFolder = null;

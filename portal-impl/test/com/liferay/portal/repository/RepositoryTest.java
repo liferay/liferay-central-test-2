@@ -86,15 +86,15 @@ public class RepositoryTest extends TestCase {
 
 		// One default and one mapped repository
 
-		long classNameId = PortalUtil.getClassNameId(LiferayRepository.class);
-
 		long defaultRepositoryId = getGroupId();
 
+		long classNameId = PortalUtil.getClassNameId(LiferayRepository.class);
+
 		long dlRepositoryId = RepositoryServiceUtil.addRepository(
-				getGroupId(), classNameId,
-				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1", "Test 1",
-				PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(),
-				new ServiceContext());
+			getGroupId(), classNameId,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1", "Test 1",
+			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(),
+			new ServiceContext());
 
 		long[] repositoryIds = {defaultRepositoryId, dlRepositoryId};
 

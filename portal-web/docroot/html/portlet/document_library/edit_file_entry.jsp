@@ -30,10 +30,9 @@ String uploadProgressId = "dlFileEntryUploadProgress";
 
 FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
-long repositoryId = BeanParamUtil.getLong(fileEntry, request, "repositoryId");
-
 long fileEntryId = BeanParamUtil.getLong(fileEntry, request, "fileEntryId");
 
+long repositoryId = BeanParamUtil.getLong(fileEntry, request, "repositoryId");
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String extension = BeanParamUtil.getString(fileEntry, request, "extension");
 

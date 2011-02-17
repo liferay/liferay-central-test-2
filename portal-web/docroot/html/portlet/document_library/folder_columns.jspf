@@ -63,12 +63,14 @@ for (int j = 0; j < folderColumns.length; j++) {
 				buffer.append("\">");
 				buffer.append("<img align=\"left\" border=\"0\" src=\"");
 				buffer.append(themeDisplay.getPathThemeImages());
+
 				if (curFolder.isMountPoint()) {
 					buffer.append("/common/drive.png\">");
 				}
 				else {
 					buffer.append("/common/folder.png\">");
 				}
+
 				buffer.append("<strong>");
 				buffer.append(curFolder.getName());
 				buffer.append("</strong>");

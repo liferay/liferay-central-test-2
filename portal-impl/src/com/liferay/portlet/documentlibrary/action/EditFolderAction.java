@@ -22,8 +22,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
@@ -120,13 +118,9 @@ public class EditFolderAction extends PortletAction {
 	}
 
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
-
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
+		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
 		long parentFolderId = ParamUtil.getLong(
 			actionRequest, "parentFolderId");
 		String name = ParamUtil.getString(actionRequest, "name");

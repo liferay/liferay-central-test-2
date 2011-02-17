@@ -21,11 +21,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Repository repository = (Repository)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_REPOSITORY);
 
-long folderId = ParamUtil.getLong(request, "folderId");
-
 long repositoryId = BeanParamUtil.getLong(repository, request, "repositoryId");
 
-String[] repositoryClassnames = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL);
+long folderId = ParamUtil.getLong(request, "folderId");
 %>
 
 <liferay-util:include page="/html/portlet/document_library/top_links.jsp" />
@@ -56,26 +54,24 @@ String[] repositoryClassnames = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL)
 		<aui:input name="description" />
 
 		<c:if test="<%= repository == null %>">
-			<aui:select id="repositoryTypes" label="repository-type" name="className">
+			<aui:select id="repositoryTypes" label="repository-type" name="classNameId">
 
 				<%
-				for (String repositoryClassname : repositoryClassnames) {
+				for (String dlRepositoryImpl : PropsValues.DL_REPOSITORY_IMPL) {
 				%>
 
-					<aui:option label='<%= LanguageUtil.get(pageContext, "model.resource." + repositoryClassname) %>' value="<%= repositoryClassname %>" />
+					<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, dlRepositoryImpl) %>" value="<%= dlRepositoryImpl %>" />
 
 				<%
 				}
 				%>
 
-				<aui:option label='<%= LanguageUtil.get(pageContext, "model.resource." + LiferayRepository.class.getName()) %>' value="<%= LiferayRepository.class.getName() %>" />
+				<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, LiferayRepository.class.getName()) %>" value="<%= LiferayRepository.class.getName() %>" />
 			</aui:select>
 
-			<div id="settingsConfiguration">
-			</div>
+			<div id="settingsConfiguration"></div>
 
-			<div id="settingsParameters">
-			</div>
+			<div id="settingsParameters"></div>
 		</c:if>
 		<c:if test="<%= repository == null %>">
 			<aui:field-wrapper label="permissions">
@@ -96,20 +92,22 @@ String[] repositoryClassnames = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL)
 <div id="supportedSettings">
 
 	<%
-	for (String repositoryClassname : repositoryClassnames) {
-		String className = repositoryClassname.substring(repositoryClassname.lastIndexOf(".") + 1);
+	for (String dlRepositoryImpl : PropsValues.DL_REPOSITORY_IMPL) {
+		String className = dlRepositoryImpl.substring(dlRepositoryImpl.lastIndexOf(StringPool.PERIOD) + 1);
+
+		long classNameId = PortalUtil.getClassNameId(dlRepositoryImpl);
 	%>
 
 		<div class="aui-helper-hidden" id="repository-<%= className %>-wrapper">
 			<aui:select cssClass="repository-configuration" id='<%= "repository-" + className %>' label="repository-configuration" name="settings--configuration-type--">
 
 				<%
-				String[] supportedConfigurations = RepositoryServiceUtil.getSupportedConfigurations(PortalUtil.getClassNameId(repositoryClassname));
+				String[] supportedConfigurations = RepositoryServiceUtil.getSupportedConfigurations(classNameId);
 
 				for (String supportedConfiguration : supportedConfigurations) {
 				%>
 
-				<aui:option label="<%= LanguageUtil.get(pageContext, TextFormatter.format(supportedConfiguration, TextFormatter.Q)) %>" selected="<%= supportedConfiguration.equals(supportedConfigurations[0]) %>" value="<%= supportedConfiguration %>" />
+					<aui:option label="<%= LanguageUtil.get(pageContext, StringUtil.replace(supportedConfiguration.toLowerCase(), CharPool.UNDERLINE, CharPool.DASH)) %>" selected="<%= supportedConfiguration.equals(supportedConfigurations[0]) %>" value="<%= supportedConfiguration %>" />
 
 				<%
 				}
@@ -119,7 +117,7 @@ String[] repositoryClassnames = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL)
 		</div>
 
 		<%
-		String[] supportedConfigurations = RepositoryServiceUtil.getSupportedConfigurations(PortalUtil.getClassNameId(repositoryClassname));
+		String[] supportedConfigurations = RepositoryServiceUtil.getSupportedConfigurations(classNameId);
 
 		for (String supportedConfiguration : supportedConfigurations) {
 		%>
@@ -127,12 +125,12 @@ String[] repositoryClassnames = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL)
 			<div class="parameters aui-helper-hidden" id="<portlet:namespace />repository-<%= className %>-configuration-<%= supportedConfiguration %>">
 
 				<%
-				String[] supportedParameters = RepositoryServiceUtil.getSupportedParameters(PortalUtil.getClassNameId(repositoryClassname), supportedConfiguration);
+				String[] supportedParameters = RepositoryServiceUtil.getSupportedParameters(classNameId, supportedConfiguration);
 
 				for (String supportedParameter : supportedParameters) {
 				%>
 
-					<aui:input label="<%= LanguageUtil.get(pageContext, TextFormatter.format(supportedParameter, TextFormatter.Q)) %>" name='<%= "settings--" + supportedParameter + "--" %>' type="text" value="" />
+					<aui:input label="<%= LanguageUtil.get(pageContext, StringUtil.replace(supportedParameter.toLowerCase(), CharPool.UNDERLINE, CharPool.DASH)) %>" name='<%= "settings--" + supportedParameter + "--" %>' type="text" value="" />
 
 				<%
 				}
@@ -152,15 +150,16 @@ String[] repositoryClassnames = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL)
 	var settingsParameters = A.one("#settingsParameters");
 
 	var repositoryTypesSelector = A.one('#<portlet:namespace />repositoryTypes');
+
 	repositoryTypesSelector.on("change", showConfiguration);
 
 	var configurationSelector = A.all('.repository-configuration')
+
 	configurationSelector.on("change", showParameters);
 
-
 	if (repositoryTypesSelector) {
-
 		var value = repositoryTypesSelector.attr('value');
+
 		var className = value.substr(value.lastIndexOf('.') + 1);
 
 		var repositoryConfiguration = A.one('#repository-' + className + '-wrapper');
@@ -183,6 +182,7 @@ String[] repositoryClassnames = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL)
 		settingsParameters.get('children').hide();
 
 		var value = e.target.attr('value');
+
 		var className = value.substr(value.lastIndexOf('.') + 1);
 
 		var repositoryConfiguration = A.one('#repository-' + className + '-wrapper');
@@ -195,6 +195,7 @@ String[] repositoryClassnames = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL)
 
 		if (repositoryConfigurationSelector) {
 			var repositoryParameters = A.one('#<portlet:namespace />repository-' + className + '-configuration-' + repositoryConfigurationSelector.attr('value'));
+
 			repositoryParameters.show();
 		}
 
@@ -207,9 +208,11 @@ String[] repositoryClassnames = PropsUtil.getArray(PropsKeys.DL_REPOSITORY_IMPL)
 
 	function showParameters(e) {
 		repositoryParameters = A.one('#' + e.target.attr('id') + '-configuration-' + e.target.attr('value'));
+
 		repositoryParameters.show();
 
 		var settingsParametersChildren = settingsParameters.get('children');
+
 		settingsParametersChildren.hide();
 
 		settingsParameters.appendChild(repositoryParameters);

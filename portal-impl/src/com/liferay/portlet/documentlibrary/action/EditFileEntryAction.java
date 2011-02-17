@@ -33,9 +33,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
@@ -249,9 +247,6 @@ public class EditFileEntryAction extends PortletAction {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
 		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
 		long fileEntryId = ParamUtil.getLong(uploadRequest, "fileEntryId");
@@ -288,8 +283,8 @@ public class EditFileEntryAction extends PortletAction {
 			// Add file entry
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				repositoryId, folderId, title, description,
-				changeLog, file, serviceContext);
+				repositoryId, folderId, title, description, changeLog, file,
+				serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileEntry.class.getName(),

@@ -81,9 +81,9 @@ request.setAttribute("view.jsp-defaultFolderId", String.valueOf(defaultFolderId)
 
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
-request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
-
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
+
+request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
 
 request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntryQuery));
 %>

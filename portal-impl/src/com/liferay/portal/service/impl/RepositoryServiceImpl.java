@@ -62,8 +62,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		repository.setGroupId(groupId);
 		repository.setCompanyId(user.getCompanyId());
 		repository.setCreateDate(now);
-		repository.setClassNameId(classNameId);
 		repository.setModifiedDate(now);
+		repository.setClassNameId(classNameId);
 		repository.setName(name);
 		repository.setDescription(description);
 		repository.setPortletId(portletId);
@@ -154,8 +154,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		long classNameId = getRepositoryClassNameId(repositoryId);
 
-		if (classNameId == PortalUtil.getClassNameId(
-			LiferayRepository.class.getName())) {
+		if (classNameId ==
+				PortalUtil.getClassNameId(LiferayRepository.class.getName())) {
 
 			localRepositoryImpl = new LiferayLocalRepository(
 				repositoryService, dlRepositoryLocalService,
@@ -232,8 +232,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		long classNameId = getRepositoryClassNameId(repositoryId);
 
-		if (classNameId == PortalUtil.getClassNameId(
-			LiferayRepository.class.getName())) {
+		if (classNameId ==
+				PortalUtil.getClassNameId(LiferayRepository.class.getName())) {
 
 			repositoryImpl = new LiferayRepository(
 				repositoryService, dlRepositoryLocalService,
@@ -330,7 +330,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			}
 
 			throw new RepositoryException(
-				"Configuration not found for repository classNameId " +
+				"Configuration not found for repository with class name id " +
 					classNameId);
 		}
 		catch (Exception e) {
@@ -404,7 +404,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 		catch (Exception e) {
 			throw new RepositoryException(
-				"There is no valid repository class for classNameId " +
+				"There is no valid repository class with class name id " +
 					classNameId,
 				e);
 		}
@@ -422,6 +422,19 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			description, serviceContext);
 
 		return dlFolder.getFolderId();
+	}
+
+	protected long getRepositoryClassNameId(long repositoryId)
+		throws SystemException {
+
+		Repository repository = repositoryPersistence.fetchByPrimaryKey(
+			repositoryId);
+
+		if (repository != null) {
+			return repository.getClassNameId();
+		}
+
+		return PortalUtil.getClassNameId(LiferayRepository.class.getName());
 	}
 
 	protected long getRepositoryEntryId(
@@ -446,19 +459,6 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 
 		return repositoryEntryId;
-	}
-
-	protected long getRepositoryClassNameId(long repositoryId)
-		throws SystemException {
-
-		Repository repository = repositoryPersistence.fetchByPrimaryKey(
-			repositoryId);
-
-		if (repository != null) {
-			return repository.getClassNameId();
-		}
-
-		return PortalUtil.getClassNameId(LiferayRepository.class.getName());
 	}
 
 	private Map<Long, LocalRepository> _localRepositoriesByRepositoryEntryId =

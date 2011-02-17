@@ -25,6 +25,7 @@ import com.liferay.portal.service.RepositoryServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -105,8 +106,8 @@ public class EditRepositoryAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest,
-				"portlet.document_library.edit_repository"));
+			getForward(
+				renderRequest, "portlet.document_library.edit_repository"));
 	}
 
 	protected void deleteRepository(ActionRequest actionRequest)
@@ -125,14 +126,15 @@ public class EditRepositoryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
+
 		String className = ParamUtil.getString(actionRequest, "className");
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
-
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
-
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 
@@ -142,15 +144,14 @@ public class EditRepositoryAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFolder.class.getName(), actionRequest);
 
-		String portletId = themeDisplay.getPortletDisplay().getPortletName();
-
 		if (repositoryId <= 0) {
 
 			// Add repository
 
 			RepositoryServiceUtil.addRepository(
 				themeDisplay.getScopeGroupId(), classNameId, folderId, name,
-				description, portletId, typeSettingsProperties, serviceContext);
+				description, portletDisplay.getId(), typeSettingsProperties,
+				serviceContext);
 		}
 		else {
 
