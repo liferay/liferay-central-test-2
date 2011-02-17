@@ -78,9 +78,9 @@ public class EditUserAction
 
 		String requestPassword = actionRequest.getParameter("password0");
 
-		if (Validator.isNotNull(requestPassword)) {
-			String newPassword = actionRequest.getParameter("password1");
+		String newPassword = actionRequest.getParameter("password1");
 
+		if (Validator.isNotNull(requestPassword)) {
 			if (Validator.isNull(newPassword)) {
 				throw new UserPasswordException(
 					UserPasswordException.PASSWORD_LENGTH);
@@ -112,7 +112,7 @@ public class EditUserAction
 					UserPasswordException.PASSWORD_INVALID);
 			}
 		}
-		else {
+		else if (Validator.isNotNull(newPassword)) {
 			throw new UserPasswordException(
 				UserPasswordException.PASSWORD_INVALID);
 		}
