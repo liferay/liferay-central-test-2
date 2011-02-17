@@ -124,7 +124,7 @@ public class EditFileShortcutAction extends PortletAction {
 		long fileShortcutId = ParamUtil.getLong(
 			actionRequest, "fileShortcutId");
 
-		long groupId = themeDisplay.getScopeGroupId();
+		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 		long toFileEntryId = ParamUtil.getLong(actionRequest, "toFileEntryId");
 
@@ -136,7 +136,7 @@ public class EditFileShortcutAction extends PortletAction {
 			// Add file shortcut
 
 			DLFileShortcut fileShortcut = DLAppServiceUtil.addFileShortcut(
-				groupId, folderId, toFileEntryId, serviceContext);
+				repositoryId, folderId, toFileEntryId, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, DLFileShortcut.class.getName(),

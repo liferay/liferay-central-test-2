@@ -31,6 +31,8 @@ long toGroupId = ParamUtil.getLong(request, "toGroupId");
 
 Group toGroup = null;
 
+long repositoryId = BeanParamUtil.getLong(fileShortcut, request, "repositoryId");
+
 long folderId = BeanParamUtil.getLong(fileShortcut, request, "folderId");
 
 Folder toFolder = null;
@@ -79,6 +81,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="fileShortcutId" type="hidden" value="<%= fileShortcutId %>" />
+	<aui:input name="repositoryId" type="hidden" value="<%= repositoryId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="toGroupId" type="hidden" value="<%= toGroupId %>" />
 	<aui:input name="toFileEntryId" type="hidden" value="<%= toFileEntryId %>" />

@@ -21,6 +21,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
+long repositoryId = BeanParamUtil.getLong(folder, request, "repositoryId");
+
 long folderId = BeanParamUtil.getLong(folder, request, "folderId");
 
 long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
@@ -32,9 +34,10 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 	<portlet:param name="struts_action" value="/document_library/edit_folder" />
 </portlet:actionURL>
 
-<aui:form action="<%= editFolderURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFolder();" %>'>
-	<aui:input name="<%= Constants.CMD %>" type="hidden" />
+<aui:form action="<%= editFolderURL %>" method="post" name="fm">
+	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (folder == null) ? Constants.ADD : Constants.UPDATE %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+	<aui:input name="repositoryId" type="hidden" value="<%= repositoryId %>" />
 	<aui:input name="folderId" type="hidden" value="<%= folderId %>" />
 	<aui:input name="parentFolderId" type="hidden" value="<%= parentFolderId %>" />
 
@@ -128,11 +131,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 		nameEl.innerHTML = "";
 	}
 
-	function <portlet:namespace />saveFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= (folder == null) ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function <portlet:namespace />selectFolder(parentFolderId, parentFolderName) {
 		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = parentFolderId;
 
@@ -141,10 +139,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
 		nameEl.innerHTML = parentFolderName + "&nbsp;";
 	}
-
-	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) || windowState.equals(LiferayWindowState.POP_UP) %>">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</c:if>
 </aui:script>
 
 <%

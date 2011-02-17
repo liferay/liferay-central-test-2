@@ -84,6 +84,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String DOCUMENT_LIBRARY_FOLDER = "DOCUMENT_LIBRARY_FOLDER";
 
+	public static final String DOCUMENT_LIBRARY_REPOSITORY = "DOCUMENT_LIBRARY_REPOSITORY";
+
 	public static final String EMAIL_ADDRESS = "EMAIL_ADDRESS";
 
 	public static final String ENCRYPT = "shuo";

@@ -256,6 +256,7 @@ public class EditFileEntryAction extends PortletAction {
 
 		long fileEntryId = ParamUtil.getLong(uploadRequest, "fileEntryId");
 
+		long repositoryId = ParamUtil.getLong(uploadRequest, "repositoryId");
 		long folderId = ParamUtil.getLong(uploadRequest, "folderId");
 		String sourceFileName = uploadRequest.getFileName("file");
 		String title = ParamUtil.getString(uploadRequest, "title");
@@ -287,7 +288,7 @@ public class EditFileEntryAction extends PortletAction {
 			// Add file entry
 
 			FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-				themeDisplay.getScopeGroupId(), folderId, title, description,
+				repositoryId, folderId, title, description,
 				changeLog, file, serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(

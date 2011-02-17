@@ -17,7 +17,9 @@ package com.liferay.portlet.documentlibrary.action;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.Repository;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.RepositoryServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -111,6 +113,37 @@ public class ActionUtil {
 			portletRequest);
 
 		getFolder(request);
+	}
+
+	public static void getRepository(HttpServletRequest request)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long repositoryId = ParamUtil.getLong(request, "repositoryId");
+
+		Repository repository = null;
+
+		if (repositoryId > 0) {
+			repository = RepositoryServiceUtil.getRepository(repositoryId);
+		}
+		else {
+			DLPermission.check(
+				themeDisplay.getPermissionChecker(),
+				themeDisplay.getScopeGroupId(), ActionKeys.VIEW);
+		}
+
+		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_REPOSITORY, repository);
+	}
+
+	public static void getRepository(PortletRequest portletRequest)
+		throws Exception {
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		getRepository(request);
 	}
 
 }

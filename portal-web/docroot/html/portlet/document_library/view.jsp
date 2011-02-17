@@ -36,14 +36,20 @@ if ((folder == null) && (defaultFolderId != DLFolderConstants.DEFAULT_PARENT_FOL
 	}
 }
 
+long repositoryId = scopeGroupId;
+
+if (folder != null) {
+	repositoryId = folder.getRepositoryId();
+}
+
 int status = WorkflowConstants.STATUS_APPROVED;
 
 if (permissionChecker.isCompanyAdmin() || permissionChecker.isCommunityAdmin(scopeGroupId)) {
 	status = WorkflowConstants.STATUS_ANY;
 }
 
-int foldersCount = DLAppServiceUtil.getFoldersCount(scopeGroupId, folderId);
-int fileEntriesCount = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(scopeGroupId, folderId, status);
+int foldersCount = DLAppServiceUtil.getFoldersCount(repositoryId, folderId);
+int fileEntriesCount = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(repositoryId, folderId, status);
 
 long categoryId = ParamUtil.getLong(request, "categoryId");
 String tagName = ParamUtil.getString(request, "tag");
@@ -76,6 +82,8 @@ request.setAttribute("view.jsp-defaultFolderId", String.valueOf(defaultFolderId)
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-viewFolder", Boolean.TRUE.toString());
+
+request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
 
 request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntryQuery));
 %>
@@ -158,7 +166,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 								iteratorURL="<%= portletURL %>"
 							>
 								<liferay-ui:search-container-results
-									results="<%= DLAppServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+									results="<%= DLAppServiceUtil.getFolders(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
 									total="<%= foldersCount %>"
 								/>
 
@@ -253,8 +261,8 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				%>
 
 				<liferay-ui:search-container-results
-					results="<%= DLAppServiceUtil.getGroupFileEntries(scopeGroupId, groupFileEntriesUserId, defaultFolderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
-					total="<%= DLAppServiceUtil.getGroupFileEntriesCount(scopeGroupId, groupFileEntriesUserId, defaultFolderId) %>"
+					results="<%= DLAppServiceUtil.getGroupFileEntries(repositoryId, groupFileEntriesUserId, defaultFolderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+					total="<%= DLAppServiceUtil.getGroupFileEntriesCount(repositoryId, groupFileEntriesUserId, defaultFolderId) %>"
 				/>
 
 				<liferay-ui:search-container-row
