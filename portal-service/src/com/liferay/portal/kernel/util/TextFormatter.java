@@ -87,6 +87,10 @@ public class TextFormatter {
 
 	public static final int P = 15;
 
+	// Format_Id --> format-id
+
+	public static final int Q = 16;
+
 	public static String format(String s, int style) {
 		if (Validator.isNull(s)) {
 			return null;
@@ -141,6 +145,9 @@ public class TextFormatter {
 		}
 		else if (style == P) {
 			return _formatP(s);
+		}
+		else if (style == Q) {
+			return _formatQ(s);
 		}
 		else {
 			return s;
@@ -374,6 +381,11 @@ public class TextFormatter {
 		}
 
 		return sb.toString();
+	}
+
+	private static String _formatQ(String s) {
+		return StringUtil.replace(
+			s.toLowerCase(), CharPool.UNDERLINE, CharPool.DASH);
 	}
 
 }
