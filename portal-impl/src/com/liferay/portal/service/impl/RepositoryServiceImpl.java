@@ -155,7 +155,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		long classNameId = getRepositoryClassNameId(repositoryId);
 
 		if (classNameId == 0) {
-			localRepositoryImpl = new LiferayLocalRepository(repositoryId);
+			localRepositoryImpl = new LiferayLocalRepository(
+				repositoryService, dlRepositoryLocalService,
+				dlRepositoryService, repositoryId);
 		}
 		else {
 			BaseRepositoryImpl baseRepositoryImpl = createRepositoryImpl(
@@ -229,7 +231,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		long classNameId = getRepositoryClassNameId(repositoryId);
 
 		if (classNameId == 0) {
-			repositoryImpl = new LiferayRepository(repositoryId);
+			repositoryImpl = new LiferayRepository(
+				repositoryService, dlRepositoryLocalService,
+				dlRepositoryService, repositoryId);
 		}
 		else {
 			repositoryImpl = createRepositoryImpl(repositoryId, classNameId);
