@@ -76,11 +76,10 @@ public class EditUserAction
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
-		String requestPassword = actionRequest.getParameter("password0");
-
+		String currentPassword = actionRequest.getParameter("password0");
 		String newPassword = actionRequest.getParameter("password1");
 
-		if (Validator.isNotNull(requestPassword)) {
+		if (Validator.isNotNull(currentPassword)) {
 			if (Validator.isNull(newPassword)) {
 				throw new UserPasswordException(
 					UserPasswordException.PASSWORD_LENGTH);
@@ -105,7 +104,7 @@ public class EditUserAction
 			}
 
 			boolean validPassword = PwdAuthenticator.authenticate(
-				login, requestPassword, user.getPassword());
+				login, currentPassword, user.getPassword());
 
 			if (!validPassword) {
 				throw new UserPasswordException(
