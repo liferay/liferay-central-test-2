@@ -288,10 +288,11 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 				drop: function(event) {
 					var tree = event.tree;
 
-					var index = tree.dragNode.get('parentNode').indexOf(tree.dragNode);
+					var dragNode = tree.dragNode;
+					var index = dragNode.get('parentNode').indexOf(dragNode);
 
 					TreeUtil.updateLayoutPriority(
-						TreeUtil.extractPlid(tree.dragNode),
+						TreeUtil.extractPlid(dragNode),
 						index
 					);
 				},

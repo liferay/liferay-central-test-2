@@ -87,7 +87,7 @@ else {
 		<liferay-ui:section>
 			<aui:input checked="<%= selLayout.isInheritLookAndFeel() %>" id="regularInheritLookAndFeel" label="<%= taglibLabel %>" name="regularInheritLookAndFeel" type="radio" value="<%= true %>" />
 
-			<aui:input checked="<%= !selLayout.isInheritLookAndFeel() %>" id="regularNotInheritLookAndFeel" label="define-a-specific-look-and-feel-for-this-page" name="regularInheritLookAndFeel" type="radio" value="<%= false %>" />
+			<aui:input checked="<%= !selLayout.isInheritLookAndFeel() %>" id="regularUniqueLookAndFeel" label="define-a-specific-look-and-feel-for-this-page" name="regularInheritLookAndFeel" type="radio" value="<%= false %>" />
 
 			<%
 			List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), false);
@@ -124,7 +124,7 @@ else {
 		<liferay-ui:section>
 			<aui:input checked="<%= selLayout.isInheritWapLookAndFeel() %>" id="wapInheritLookAndFeel" label="<%= taglibLabel %>" name="wapInheritLookAndFeel" type="radio" value="<%= true %>" />
 
-			<aui:input checked="<%= !selLayout.isInheritWapLookAndFeel() %>" id="wapNotInheritLookAndFeel" label="define-a-specific-look-and-feel-for-this-page" name="wapInheritLookAndFeel" type="radio" value="<%= false %>" />
+			<aui:input checked="<%= !selLayout.isInheritWapLookAndFeel() %>" id="wapUniqueLookAndFeel" label="define-a-specific-look-and-feel-for-this-page" name="wapInheritLookAndFeel" type="radio" value="<%= false %>" />
 
 			<%
 			List<Theme> themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), true);
@@ -158,7 +158,7 @@ else {
 
 <aui:script>
 	Liferay.Util.toggleRadio('<portlet:namespace />regularInheritLookAndFeel', '<portlet:namespace />inheritThemeOptions', '<portlet:namespace />themeOptions');
-	Liferay.Util.toggleRadio('<portlet:namespace />regularNotInheritLookAndFeel', '<portlet:namespace />themeOptions', '<portlet:namespace />inheritThemeOptions');
+	Liferay.Util.toggleRadio('<portlet:namespace />regularUniqueLookAndFeel', '<portlet:namespace />themeOptions', '<portlet:namespace />inheritThemeOptions');
 	Liferay.Util.toggleRadio('<portlet:namespace />wapInheritLookAndFeel', '<portlet:namespace />inheritWapThemeOptions', '<portlet:namespace />wapThemeOptions');
-	Liferay.Util.toggleRadio('<portlet:namespace />wapNotInheritLookAndFeel', '<portlet:namespace />wapThemeOptions', '<portlet:namespace />inheritWapThemeOptions');
+	Liferay.Util.toggleRadio('<portlet:namespace />wapUniqueLookAndFeel', '<portlet:namespace />wapThemeOptions', '<portlet:namespace />inheritWapThemeOptions');
 </aui:script>

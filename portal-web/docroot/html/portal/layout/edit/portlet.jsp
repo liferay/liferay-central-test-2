@@ -75,20 +75,26 @@
 </div>
 
 <aui:script use="aui-dialog">
+	var content = A.one('#<portlet:namespace />copyPortletsFromPage');
+
+	var popup;
+
 	var button = new A.ButtonItem(
 		{
-			handler: function(event) {
-				var content = A.one('#<portlet:namespace />copyPortletsFromPage');
+			handler:function(event) {
+				if (!popup) {
+					 popup = new A.Dialog(
+						{
+							bodyContent: content.show(),
+							centered: true,
+							title: '<liferay-ui:message key="copy-portlets-from-page" />',
+							modal: true,
+							width: 500
+						}
+					).render();
+				}
 
-				var popup = new A.Dialog(
-					{
-						bodyContent: content.show(),
-						centered: true,
-						title: '<liferay-ui:message key="copy-portlets-from-page" />',
-						modal: true,
-						width: 500
-					}
-				).render();
+				popup.show();
 
 				var submitButton = popup.get('contentBox').one('#<portlet:namespace />copySubmitButton');
 
@@ -127,12 +133,7 @@
 	Liferay.on(
 		'<portlet:namespace />toggleLayoutTypeFields',
 		function(event) {
-			if (event.type == 'portlet') {
-				button.show();
-			}
-			else {
-				button.hide();
-			}
+			button.toggle(event.type == 'portlet');
 		}
 	);
 </aui:script>

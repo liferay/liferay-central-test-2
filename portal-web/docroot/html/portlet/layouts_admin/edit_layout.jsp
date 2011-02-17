@@ -79,6 +79,9 @@ String[][] categorySections = {mainSections};
 		<aui:script use="aui-dialog,aui-dialog-iframe">
 			var buttonRow = A.one('#<portlet:namespace />layoutToolbar');
 
+			var permissionPopUp;
+			var popup;
+
 			var layoutToolbar = new A.Toolbar(
 				{
 					activeState: false,
@@ -86,40 +89,50 @@ String[][] categorySections = {mainSections};
 					children: [
 						{
 							handler: function(event) {
-								var content = A.one('#<portlet:namespace />addLayout');
+								if (!popup) {
+									var content = A.one('#<portlet:namespace />addLayout');
 
-								var popup = new A.Dialog(
-									{
-										bodyContent: content.show(),
-										centered: true,
-										title: '<liferay-ui:message key="add-child-page" />',
-										modal: true,
-										width: 500
-									}
-								).render();
+									popup = new A.Dialog(
+										{
+											bodyContent: content.show(),
+											centered: true,
+											title: '<liferay-ui:message key="add-child-page" />',
+											modal: true,
+											width: 500
+										}
+									).render();
+								}
+
+								popup.show();
 							},
 							icon: 'circle-plus',
 							label: '<liferay-ui:message key="add-child-page" />'
 						},
 						{
 							handler: function(event) {
-								permissionPopUp = new A.Dialog(
-									{
-										centered: true,
-										modal: true,
-										title: '<liferay-ui:message key="permissions" />',
-										width: 700
-									}
-								).plug(
-									A.Plugin.DialogIframe,
-									{
-										after: {
-											load: Liferay.Util.afterIframeLoaded
-										},
-										uri: '<%= permissionURL %>'
-									}
-								).render();
+								if (!permissionPopUp) {
+									permissionPopUp = new A.Dialog(
+										{
+											centered: true,
+											modal: true,
+											title: '<liferay-ui:message key="permissions" />',
+											width: 700
+										}
+									).plug(
+										A.Plugin.DialogIframe,
+										{
+											after: {
+												load: Liferay.Util.afterIframeLoaded
+											},
+											uri: '<%= permissionURL %>'
+										}
+									).render();
+								}
+								else {
+									permissionPopUp.iframe.node.get('contentWindow.location').reload(true);
+								}
 
+								permissionPopUp.show();
 								permissionPopUp.centered();
 
 							},
@@ -169,7 +182,7 @@ String[][] categorySections = {mainSections};
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = action;
 		}
 		else {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "update";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'update';
 		}
 
 		submitForm(document.<portlet:namespace />fm);

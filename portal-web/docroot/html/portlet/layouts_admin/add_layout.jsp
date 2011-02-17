@@ -38,7 +38,7 @@ List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(compa
 		<portlet:param name="struts_action" value="/manage_pages/edit_layouts" />
 	</portlet:actionURL>
 
-	<aui:form action="<%= editPageURL %>" enctype="multipart/form-data" method="post" name="fm1">
+	<aui:form action="<%= editPageURL %>" enctype="multipart/form-data" method="post" name="fm2">
 		<aui:input id="addLayoutCmd" name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
 		<aui:input id="addLayoutPagesRedirect" name="pagesRedirect" type="hidden" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid  %>' />
 		<aui:input id="addLayoutGroupId" name="groupId" type="hidden" value="<%= groupId %>" />
@@ -103,25 +103,13 @@ List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(compa
 		function showHiddenFields() {
 			var hiddenFields = A.one('#<portlet:namespace />hiddenFields');
 
-			hiddenFields.hide();
-
-			if (layoutPrototypeIdSelect && layoutPrototypeIdSelect.val() == '') {
-				hiddenFields.show();
-			}
-			else {
-				hiddenFields.hide();
-			}
+			hiddenFields.toggle(layoutPrototypeIdSelect && !layoutPrototypeIdSelect.val());
 		}
 
 		showHiddenFields();
 
 		if (layoutPrototypeIdSelect) {
-			layoutPrototypeIdSelect.on(
-				'change',
-				function(event) {
-					showHiddenFields();
-				}
-			);
+			layoutPrototypeIdSelect.on('change', showHiddenFields);
 		}
 	</aui:script>
 </c:if>

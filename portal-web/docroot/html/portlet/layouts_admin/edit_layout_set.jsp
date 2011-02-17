@@ -104,6 +104,10 @@ String[][] categorySections = {mainSections};
 </liferay-util:html-top>
 
 <aui:script use="aui-dialog,aui-toolbar">
+	var popup;
+	var exportPopup;
+	var importPopup;
+
 	var layoutSetToolbar = new A.Toolbar(
 		{
 			activeState: false,
@@ -112,17 +116,21 @@ String[][] categorySections = {mainSections};
 				<c:if test="<%= !group.isLayoutPrototype() %>">
 					{
 						handler: function(event) {
-							var content = A.one('#<portlet:namespace />addLayout');
+							if (!popup) {
+								var content = A.one('#<portlet:namespace />addLayout');
 
-							var popup = new A.Dialog(
-								{
-									bodyContent: content.show(),
-									centered: true,
-									title: '<liferay-ui:message key="add-page" />',
-									modal: true,
-									width: 500
-								}
-							).render();
+								popup = new A.Dialog(
+									{
+										bodyContent: content.show(),
+										centered: true,
+										title: '<liferay-ui:message key="add-page" />',
+										modal: true,
+										width: 500
+									}
+								).render();
+							}
+
+							popup.show();
 						},
 						icon: 'circle-plus',
 						label: '<liferay-ui:message key="add-page" />'
@@ -138,11 +146,7 @@ String[][] categorySections = {mainSections};
 
 					{
 						handler: function(event) {
-							var groupWindow = window.open('<%= viewPagesURL %>');
-
-							void('');
-
-							groupWindow.focus();
+							window.open('<%= viewPagesURL %>').focus();
 						},
 						icon: 'search',
 						label: '<liferay-ui:message key="view-pages" />'
@@ -155,90 +159,96 @@ String[][] categorySections = {mainSections};
 					},
 					{
 						handler: function(event) {
-							var exportPopup = new A.Dialog(
-								{
-									centered: true,
-									constrain: true,
-									modal: true,
-									title: '<liferay-ui:message key="export" />',
-									width: 600
-								}
-							).render();
+							if (!exportPopup) {
+								exportPopup = new A.Dialog(
+									{
+										centered: true,
+										constrain: true,
+										modal: true,
+										title: '<liferay-ui:message key="export" />',
+										width: 600
+									}
+								).render();
 
-							<portlet:renderURL var="exportPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-								<portlet:param name="struts_action" value="/layouts_admin/export_layouts" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
-								<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-								<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
-								<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
-							</portlet:renderURL>
+								<portlet:renderURL var="exportPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+									<portlet:param name="struts_action" value="/layouts_admin/export_layouts" />
+									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
+									<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+									<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
+									<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
+								</portlet:renderURL>
 
-							exportPopup.plug(
-								A.Plugin.IO,
-								{
-									after: {
-										success: function() {
-											exportPopup.centered();
-										}
-									},
-									uri: '<%= exportPagesURL.toString() %>'
-								}
-							);
+								exportPopup.plug(
+									A.Plugin.IO,
+									{
+										after: {
+											success: function() {
+												exportPopup.centered();
+											}
+										},
+										autoLoad: false,
+										uri: '<%= exportPagesURL.toString() %>'
+									}
+								);
+							}
+
+							exportPopup.show();
+							exportPopup.io.start();
 						},
 						icon: 'arrowthick-1-b',
 						label: '<liferay-ui:message key="export" />'
 					},
 					{
 						handler: function(event) {
-							var importPopup = new A.Dialog(
-								{
-									centered: true,
-									constrain: true,
-									modal: true,
-									title: '<liferay-ui:message key="import" />',
-									width: 600
-								}
-							).render();
+							if (!importPopup) {
+								importPopup = new A.Dialog(
+									{
+										centered: true,
+										constrain: true,
+										modal: true,
+										title: '<liferay-ui:message key="import" />',
+										width: 600
+									}
+								).render();
 
-							<portlet:renderURL var="importPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
-								<portlet:param name="struts_action" value="/layouts_admin/import_layouts" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
-								<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-								<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
-								<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="redirectWindowState" value="<%= renderRequest.getWindowState().toString() %>" />
-								<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
-							</portlet:renderURL>
+								<portlet:renderURL var="importPagesURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+									<portlet:param name="struts_action" value="/layouts_admin/import_layouts" />
+									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
+									<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+									<portlet:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
+									<portlet:param name="privateLayout" value="<%= String.valueOf(liveGroupId) %>" />
+									<portlet:param name="redirect" value="<%= currentURL %>" />
+									<portlet:param name="redirectWindowState" value="<%= renderRequest.getWindowState().toString() %>" />
+									<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
+								</portlet:renderURL>
 
-							importPopup.plug(
-								A.LoadingMask,
-								{
-									background: '#000'
-								}
-							);
+								importPopup.plug(
+									A.Plugin.IO,
+									{
+										after: {
+											success: function() {
+												importPopup.centered();
 
-							importPopup.plug(
-								A.Plugin.IO,
-								{
-									after: {
-										success: function() {
-											importPopup.centered();
+												var form = importPopup.get('contentBox').one('#<portlet:namespace />fm1');
+												form.on(
+													'submit',
+													function(event) {
+														importPopup.io.showLoading();
+													}
+												);
+											}
+										},
+										autoLoad: false,
+										uri: '<%= importPagesURL.toString() %>'
+									}
+								);
+							}
 
-											var form = importPopup.get('contentBox').one('#<portlet:namespace />fm1');
-											form.on(
-												'submit',
-												function(event) {
-													importPopup.loadingmask.show();
-												}
-											);
-										}
-									},
-									uri: '<%= importPagesURL.toString() %>'
-								}
-							);
+							importPopup.show();
+							importPopup.centered();
+							importPopup.io.start();
 						},
 						icon: 'arrowthick-1-t',
 						label: '<liferay-ui:message key="import" />'
@@ -272,26 +282,26 @@ String[][] categorySections = {mainSections};
 
 <aui:script>
 	function <portlet:namespace />saveLayoutset(action) {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+		document.<portlet:namespace />fm.encoding = 'multipart/form-data';
 
 		if (action) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = action;
 		}
 		else {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "update";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'update';
 		}
 
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />updateLogo() {
-		document.<portlet:namespace />fm.encoding = "multipart/form-data";
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "logo";
+		document.<portlet:namespace />fm.encoding = 'multipart/form-data';
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'logo';
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />updateRobots() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "robots";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'robots';
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -303,11 +313,7 @@ String[][] categorySections = {mainSections};
 
 			var selectEl = A.one(box);
 
-			var currentValue = null;
-
-			if (selectEl) {
-				currentValue = selectEl.val();
-			}
+			var currentValue = selectEl.val() || null;
 
 			Liferay.Util.removeItem(box);
 		},
@@ -318,7 +324,7 @@ String[][] categorySections = {mainSections};
 		window,
 		'<portlet:namespace />updateDisplayOrder',
 		function() {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'display_order';
 			document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
 			submitForm(document.<portlet:namespace />fm);
 		},
@@ -333,26 +339,22 @@ String[][] categorySections = {mainSections};
 
 			var selectEl = A.one('#<portlet:namespace />stagingType');
 
-			var currentValue = null;
-
-			if (selectEl) {
-				currentValue = selectEl.val();
-			}
+			var currentValue = selectEl.val() || null;
 
 			var ok = false;
 
-			if (0 == currentValue) {
+			if (currentValue == 0) {
 				ok = confirm('<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-deactivate-staging-for-x", liveGroup.getDescriptiveName()) %>');
 			}
-			else if (1 == currentValue) {
+			else if (currentValue == 1) {
 				ok = confirm('<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-activate-local-staging-for-x", liveGroup.getDescriptiveName()) %>');
 			}
-			else if (2 == currentValue) {
+			else if (currentValue == 2) {
 				ok = confirm('<%= UnicodeLanguageUtil.format(pageContext, "are-you-sure-you-want-to-activate-remote-staging-for-x", liveGroup.getDescriptiveName()) %>');
 			}
 
 			if (ok) {
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "staging";
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'staging';
 				submitForm(document.<portlet:namespace />fm);
 			}
 		},

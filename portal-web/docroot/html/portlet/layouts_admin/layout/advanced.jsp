@@ -78,7 +78,7 @@ UnicodeProperties layoutTypeSettings =  selLayout.getTypeSettingsProperties();
 		deleteIconImageLink.on(
 			'click',
 			function() {
-				iconImageInput.attr('value', false);
+				iconImageInput.val(false);
 
 				layoutIconContainer.hide();
 			}
@@ -90,7 +90,7 @@ UnicodeProperties layoutTypeSettings =  selLayout.getTypeSettingsProperties();
 	iconFileNameInput.on(
 		'change',
 		function() {
-			iconImageInput.attr('value', true);
+			iconImageInput.val(true);
 		}
 	);
 </aui:script>

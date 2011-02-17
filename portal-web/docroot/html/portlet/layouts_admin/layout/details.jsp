@@ -150,20 +150,14 @@ StringBuilder friendlyURLBase = new StringBuilder();
 
 <aui:script use="aui-base">
 	function toggleLayoutTypeFields (type) {
-		var layoutTypeForms = A.all('.layout-type-form');
 		var currentType = 'layout-type-form-' + type;
 
-		layoutTypeForms.each(
+		A.all('.layout-type-form').each(
 			function(item, index, collection) {
-				var action = 'hide';
-				var disabled = true;
+				var visible = item.hasClass(currentType);
+				var disabled = !visible;
 
-				if (item.hasClass(currentType)) {
-					action = 'show';
-					disabled = false;
-				}
-
-				item[action]();
+				item.toggle(visible);
 
 				item.all('input, select, textarea').set('disabled', disabled);
 			}
