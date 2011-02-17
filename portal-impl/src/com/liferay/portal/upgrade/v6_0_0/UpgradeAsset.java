@@ -522,6 +522,21 @@ public class UpgradeAsset extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		updateAssetTagsCount();
+	}
+
+	protected void updateAssetTagsCount() throws Exception {
+		StringBundler sb = new StringBundler(6);
+
+		sb.append("update AssetTag AssetTag set AssetTag.assetCount = (");
+		sb.append("select count(*) from AssetEntry AssetEntry inner join ");
+		sb.append("AssetEntries_AssetTags AssetEntries_AssetTags on ");
+		sb.append("AssetEntry.entryId = AssetEntries_AssetTags.entryId ");
+		sb.append("where AssetEntry.visible = 1 and ");
+		sb.append("AssetTag.tagId = AssetEntries_AssetTags.tagId)");
+
+		runSQL(sb.toString());
 	}
 
 	protected void updateCategoryResource(long companyId, long categoryId)
