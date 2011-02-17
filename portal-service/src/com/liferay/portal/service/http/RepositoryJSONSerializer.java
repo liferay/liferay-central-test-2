@@ -54,10 +54,10 @@ public class RepositoryJSONSerializer {
 		}
 
 		jsonObject.put("modifiedDate", modifiedDateJSON);
+		jsonObject.put("classNameId", model.getClassNameId());
 		jsonObject.put("name", model.getName());
 		jsonObject.put("description", model.getDescription());
 		jsonObject.put("portletId", model.getPortletId());
-		jsonObject.put("type", model.getType());
 		jsonObject.put("typeSettings", model.getTypeSettings());
 		jsonObject.put("dlFolderId", model.getDlFolderId());
 

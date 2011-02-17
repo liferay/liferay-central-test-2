@@ -28,15 +28,16 @@ public class RepositoryServiceWrapper implements RepositoryService {
 		_repositoryService = repositoryService;
 	}
 
-	public long addRepository(long groupId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String portletId, int type,
+	public long addRepository(long groupId, long classNameId,
+		long parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String portletId,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _repositoryService.addRepository(groupId, parentFolderId, name,
-			description, portletId, type, typeSettingsProperties, serviceContext);
+		return _repositoryService.addRepository(groupId, classNameId,
+			parentFolderId, name, description, portletId,
+			typeSettingsProperties, serviceContext);
 	}
 
 	public void checkRepository(long repositoryId)
@@ -92,15 +93,16 @@ public class RepositoryServiceWrapper implements RepositoryService {
 			fileVersionId);
 	}
 
-	public java.lang.String[] getSupportedConfigurations(int type)
+	public java.lang.String[] getSupportedConfigurations(long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _repositoryService.getSupportedConfigurations(type);
+		return _repositoryService.getSupportedConfigurations(classNameId);
 	}
 
-	public java.lang.String[] getSupportedParameters(int type,
+	public java.lang.String[] getSupportedParameters(long classNameId,
 		java.lang.String configuration)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _repositoryService.getSupportedParameters(type, configuration);
+		return _repositoryService.getSupportedParameters(classNameId,
+			configuration);
 	}
 
 	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties(

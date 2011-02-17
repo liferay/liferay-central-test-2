@@ -41,9 +41,9 @@ public interface RepositoryService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RepositoryServiceUtil} to access the repository remote service. Add custom service methods to {@link com.liferay.portal.service.impl.RepositoryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public long addRepository(long groupId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String portletId, int type,
+	public long addRepository(long groupId, long classNameId,
+		long parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String portletId,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -90,11 +90,11 @@ public interface RepositoryService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String[] getSupportedConfigurations(int type)
+	public java.lang.String[] getSupportedConfigurations(long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.lang.String[] getSupportedParameters(int type,
+	public java.lang.String[] getSupportedParameters(long classNameId,
 		java.lang.String configuration)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

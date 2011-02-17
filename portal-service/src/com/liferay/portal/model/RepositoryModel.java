@@ -128,6 +128,27 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	public void setModifiedDate(Date modifiedDate);
 
 	/**
+	 * Gets the class name of the model instance this repository is polymorphically associated with.
+	 *
+	 * @return the class name of the model instance this repository is polymorphically associated with
+	 */
+	public String getClassName();
+
+	/**
+	 * Gets the class name ID of this repository.
+	 *
+	 * @return the class name ID of this repository
+	 */
+	public long getClassNameId();
+
+	/**
+	 * Sets the class name ID of this repository.
+	 *
+	 * @param classNameId the class name ID of this repository
+	 */
+	public void setClassNameId(long classNameId);
+
+	/**
 	 * Gets the name of this repository.
 	 *
 	 * @return the name of this repository
@@ -171,20 +192,6 @@ public interface RepositoryModel extends BaseModel<Repository> {
 	 * @param portletId the portlet ID of this repository
 	 */
 	public void setPortletId(String portletId);
-
-	/**
-	 * Gets the type of this repository.
-	 *
-	 * @return the type of this repository
-	 */
-	public int getType();
-
-	/**
-	 * Sets the type of this repository.
-	 *
-	 * @param type the type of this repository
-	 */
-	public void setType(int type);
 
 	/**
 	 * Gets the type settings of this repository.

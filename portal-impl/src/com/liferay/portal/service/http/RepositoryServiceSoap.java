@@ -174,10 +174,10 @@ public class RepositoryServiceSoap {
 		}
 	}
 
-	public static java.lang.String[] getSupportedConfigurations(int type)
-		throws RemoteException {
+	public static java.lang.String[] getSupportedConfigurations(
+		long classNameId) throws RemoteException {
 		try {
-			java.lang.String[] returnValue = RepositoryServiceUtil.getSupportedConfigurations(type);
+			java.lang.String[] returnValue = RepositoryServiceUtil.getSupportedConfigurations(classNameId);
 
 			return returnValue;
 		}
@@ -188,10 +188,10 @@ public class RepositoryServiceSoap {
 		}
 	}
 
-	public static java.lang.String[] getSupportedParameters(int type,
+	public static java.lang.String[] getSupportedParameters(long classNameId,
 		java.lang.String configuration) throws RemoteException {
 		try {
-			java.lang.String[] returnValue = RepositoryServiceUtil.getSupportedParameters(type,
+			java.lang.String[] returnValue = RepositoryServiceUtil.getSupportedParameters(classNameId,
 					configuration);
 
 			return returnValue;

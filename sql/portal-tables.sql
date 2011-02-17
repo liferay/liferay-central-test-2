@@ -1252,11 +1252,11 @@ create table Repository (
 	companyId LONG,
 	createDate DATE null,
 	modifiedDate DATE null,
+	classNameId LONG,
 	name VARCHAR(75) null,
 	description STRING null,
 	portletId VARCHAR(75) null,
-	type_ INTEGER,
-	typeSettings VARCHAR(75) null,
+	typeSettings TEXT null,
 	dlFolderId LONG
 );
 

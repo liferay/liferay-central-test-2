@@ -36,10 +36,10 @@ public class RepositorySoap implements Serializable {
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setPortletId(model.getPortletId());
-		soapModel.setType(model.getType());
 		soapModel.setTypeSettings(model.getTypeSettings());
 		soapModel.setDlFolderId(model.getDlFolderId());
 
@@ -134,6 +134,14 @@ public class RepositorySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -158,14 +166,6 @@ public class RepositorySoap implements Serializable {
 		_portletId = portletId;
 	}
 
-	public int getType() {
-		return _type;
-	}
-
-	public void setType(int type) {
-		_type = type;
-	}
-
 	public String getTypeSettings() {
 		return _typeSettings;
 	}
@@ -187,10 +187,10 @@ public class RepositorySoap implements Serializable {
 	private long _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _classNameId;
 	private String _name;
 	private String _description;
 	private String _portletId;
-	private int _type;
 	private String _typeSettings;
 	private long _dlFolderId;
 }

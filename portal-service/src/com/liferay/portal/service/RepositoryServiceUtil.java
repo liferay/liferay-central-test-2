@@ -37,16 +37,16 @@ public class RepositoryServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to {@link com.liferay.portal.service.impl.RepositoryServiceImpl} and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static long addRepository(long groupId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String portletId, int type,
+	public static long addRepository(long groupId, long classNameId,
+		long parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String portletId,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .addRepository(groupId, parentFolderId, name, description,
-			portletId, type, typeSettingsProperties, serviceContext);
+				   .addRepository(groupId, classNameId, parentFolderId, name,
+			description, portletId, typeSettingsProperties, serviceContext);
 	}
 
 	public static void checkRepository(long repositoryId)
@@ -103,15 +103,16 @@ public class RepositoryServiceUtil {
 				   .getRepositoryImpl(folderId, fileEntryId, fileVersionId);
 	}
 
-	public static java.lang.String[] getSupportedConfigurations(int type)
+	public static java.lang.String[] getSupportedConfigurations(
+		long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getSupportedConfigurations(type);
+		return getService().getSupportedConfigurations(classNameId);
 	}
 
-	public static java.lang.String[] getSupportedParameters(int type,
+	public static java.lang.String[] getSupportedParameters(long classNameId,
 		java.lang.String configuration)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getSupportedParameters(type, configuration);
+		return getService().getSupportedParameters(classNameId, configuration);
 	}
 
 	public static com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties(

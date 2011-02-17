@@ -137,6 +137,33 @@ public class RepositoryWrapper implements Repository {
 	}
 
 	/**
+	* Gets the class name of the model instance this repository is polymorphically associated with.
+	*
+	* @return the class name of the model instance this repository is polymorphically associated with
+	*/
+	public java.lang.String getClassName() {
+		return _repository.getClassName();
+	}
+
+	/**
+	* Gets the class name ID of this repository.
+	*
+	* @return the class name ID of this repository
+	*/
+	public long getClassNameId() {
+		return _repository.getClassNameId();
+	}
+
+	/**
+	* Sets the class name ID of this repository.
+	*
+	* @param classNameId the class name ID of this repository
+	*/
+	public void setClassNameId(long classNameId) {
+		_repository.setClassNameId(classNameId);
+	}
+
+	/**
 	* Gets the name of this repository.
 	*
 	* @return the name of this repository
@@ -188,24 +215,6 @@ public class RepositoryWrapper implements Repository {
 	*/
 	public void setPortletId(java.lang.String portletId) {
 		_repository.setPortletId(portletId);
-	}
-
-	/**
-	* Gets the type of this repository.
-	*
-	* @return the type of this repository
-	*/
-	public int getType() {
-		return _repository.getType();
-	}
-
-	/**
-	* Sets the type of this repository.
-	*
-	* @param type the type of this repository
-	*/
-	public void setType(int type) {
-		_repository.setType(type);
 	}
 
 	/**

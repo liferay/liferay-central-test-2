@@ -22,6 +22,7 @@ import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.RepositoryModel;
 import com.liferay.portal.model.RepositorySoap;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
@@ -63,14 +64,14 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 			{ "companyId", Types.BIGINT },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
+			{ "classNameId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "portletId", Types.VARCHAR },
-			{ "type_", Types.INTEGER },
-			{ "typeSettings", Types.VARCHAR },
+			{ "typeSettings", Types.CLOB },
 			{ "dlFolderId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Repository (repositoryId LONG not null primary key,groupId LONG,companyId LONG,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,description STRING null,portletId VARCHAR(75) null,type_ INTEGER,typeSettings VARCHAR(75) null,dlFolderId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Repository (repositoryId LONG not null primary key,groupId LONG,companyId LONG,createDate DATE null,modifiedDate DATE null,classNameId LONG,name VARCHAR(75) null,description STRING null,portletId VARCHAR(75) null,typeSettings TEXT null,dlFolderId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Repository";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -96,10 +97,10 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setPortletId(soapModel.getPortletId());
-		model.setType(soapModel.getType());
 		model.setTypeSettings(soapModel.getTypeSettings());
 		model.setDlFolderId(soapModel.getDlFolderId());
 
@@ -180,6 +181,22 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		_modifiedDate = modifiedDate;
 	}
 
+	public String getClassName() {
+		if (getClassNameId() <= 0) {
+			return StringPool.BLANK;
+		}
+
+		return PortalUtil.getClassName(getClassNameId());
+	}
+
+	public long getClassNameId() {
+		return _classNameId;
+	}
+
+	public void setClassNameId(long classNameId) {
+		_classNameId = classNameId;
+	}
+
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -217,14 +234,6 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
-	}
-
-	public int getType() {
-		return _type;
-	}
-
-	public void setType(int type) {
-		_type = type;
 	}
 
 	public String getTypeSettings() {
@@ -285,15 +294,15 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 
 		repositoryImpl.setModifiedDate(getModifiedDate());
 
-		repositoryImpl.setName(getName());
+		clone.setClassNameId(getClassNameId());
+
+		clone.setName(getName());
 
 		repositoryImpl.setDescription(getDescription());
 
 		repositoryImpl.setPortletId(getPortletId());
 
-		repositoryImpl.setType(getType());
-
-		repositoryImpl.setTypeSettings(getTypeSettings());
+		clone.setTypeSettings(getTypeSettings());
 
 		repositoryImpl.setDlFolderId(getDlFolderId());
 
@@ -355,14 +364,14 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		sb.append(getCreateDate());
 		sb.append(", modifiedDate=");
 		sb.append(getModifiedDate());
+		sb.append(", classNameId=");
+		sb.append(getClassNameId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", description=");
 		sb.append(getDescription());
 		sb.append(", portletId=");
 		sb.append(getPortletId());
-		sb.append(", type=");
-		sb.append(getType());
 		sb.append(", typeSettings=");
 		sb.append(getTypeSettings());
 		sb.append(", dlFolderId=");
@@ -400,6 +409,10 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		sb.append(getModifiedDate());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
+		sb.append(getClassNameId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>name</column-name><column-value><![CDATA[");
 		sb.append(getName());
 		sb.append("]]></column-value></column>");
@@ -410,10 +423,6 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 		sb.append(
 			"<column><column-name>portletId</column-name><column-value><![CDATA[");
 		sb.append(getPortletId());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>type</column-name><column-value><![CDATA[");
-		sb.append(getType());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>typeSettings</column-name><column-value><![CDATA[");
@@ -434,10 +443,10 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 	private long _companyId;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _classNameId;
 	private String _name;
 	private String _description;
 	private String _portletId;
-	private int _type;
 	private String _typeSettings;
 	private long _dlFolderId;
 	private transient ExpandoBridge _expandoBridge;

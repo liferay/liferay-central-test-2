@@ -718,12 +718,10 @@
 			<basic name="modifiedDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="classNameId" />
 			<basic name="name" />
 			<basic name="description" />
 			<basic name="portletId" />
-			<basic name="type">
-				<column name="TYPE_" />
-			</basic>
 			<basic name="typeSettings" />
 			<basic name="dlFolderId" />
 			<transient name="primaryKey" />

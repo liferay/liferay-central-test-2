@@ -53,8 +53,8 @@ import com.liferay.portal.service.RepositoryServiceUtil;
  */
 public class RepositoryServiceHttp {
 	public static long addRepository(HttpPrincipal httpPrincipal, long groupId,
-		long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String portletId, int type,
+		long classNameId, long parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String portletId,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -64,7 +64,7 @@ public class RepositoryServiceHttp {
 					"addRepository", _addRepositoryParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					parentFolderId, name, description, portletId, type,
+					classNameId, parentFolderId, name, description, portletId,
 					typeSettingsProperties, serviceContext);
 
 			Object returnObj = null;
@@ -356,14 +356,15 @@ public class RepositoryServiceHttp {
 	}
 
 	public static java.lang.String[] getSupportedConfigurations(
-		HttpPrincipal httpPrincipal, int type)
+		HttpPrincipal httpPrincipal, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
 					"getSupportedConfigurations",
 					_getSupportedConfigurationsParameterTypes9);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, type);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					classNameId);
 
 			Object returnObj = null;
 
@@ -388,15 +389,16 @@ public class RepositoryServiceHttp {
 	}
 
 	public static java.lang.String[] getSupportedParameters(
-		HttpPrincipal httpPrincipal, int type, java.lang.String configuration)
+		HttpPrincipal httpPrincipal, long classNameId,
+		java.lang.String configuration)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(RepositoryServiceUtil.class.getName(),
 					"getSupportedParameters",
 					_getSupportedParametersParameterTypes10);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, type,
-					configuration);
+			MethodHandler methodHandler = new MethodHandler(methodKey,
+					classNameId, configuration);
 
 			Object returnObj = null;
 
@@ -493,8 +495,8 @@ public class RepositoryServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(RepositoryServiceHttp.class);
 	private static final Class<?>[] _addRepositoryParameterTypes0 = new Class[] {
-			long.class, long.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, int.class,
+			long.class, long.class, long.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
 			com.liferay.portal.kernel.util.UnicodeProperties.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
@@ -523,10 +525,10 @@ public class RepositoryServiceHttp {
 			long.class, long.class, long.class
 		};
 	private static final Class<?>[] _getSupportedConfigurationsParameterTypes9 = new Class[] {
-			int.class
+			long.class
 		};
 	private static final Class<?>[] _getSupportedParametersParameterTypes10 = new Class[] {
-			int.class, java.lang.String.class
+			long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _getTypeSettingsPropertiesParameterTypes11 = new Class[] {
 			long.class

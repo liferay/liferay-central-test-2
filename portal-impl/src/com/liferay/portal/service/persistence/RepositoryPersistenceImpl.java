@@ -293,10 +293,10 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 		repositoryImpl.setCompanyId(repository.getCompanyId());
 		repositoryImpl.setCreateDate(repository.getCreateDate());
 		repositoryImpl.setModifiedDate(repository.getModifiedDate());
+		repositoryImpl.setClassNameId(repository.getClassNameId());
 		repositoryImpl.setName(repository.getName());
 		repositoryImpl.setDescription(repository.getDescription());
 		repositoryImpl.setPortletId(repository.getPortletId());
-		repositoryImpl.setType(repository.getType());
 		repositoryImpl.setTypeSettings(repository.getTypeSettings());
 		repositoryImpl.setDlFolderId(repository.getDlFolderId());
 
