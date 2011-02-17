@@ -460,7 +460,7 @@ AUI().add(
 
 				var canDrop = true;
 
-				if ((componentType == 'multi-list') || (componentType == 'list')) {
+				if ((componentType == 'list') || (componentType == 'multi-list')) {
 					canDrop = false;
 				}
 				else if (source.hasClass('repeated-field') || source.hasClass('parent-structure-field')) {
@@ -1869,7 +1869,7 @@ AUI().add(
 					else if (generateArticleContent) {
 						buffer.push(typeContent.openTag);
 
-						var appendOptions = (type == 'multi-list' || type == 'list');
+						var appendOptions = (type == 'list') || (type == 'multi-list');
 
 						if (appendOptions) {
 							instance._appendStructureFieldOptionsBuffer(source, buffer, generateArticleContent);
@@ -3105,7 +3105,7 @@ AUI().add(
 							}
 						}
 
-						if ((type == 'text') || (type == 'text_box') || (type == 'multi-list') || (type == 'list')) {
+						if ((type == 'list') || (type == 'multi-list') || (type == 'text') || (type == 'text_box')) {
 							content = Liferay.Util.escapeHTML(content);
 						}
 
