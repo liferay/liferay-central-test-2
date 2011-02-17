@@ -55,6 +55,7 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -216,7 +217,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(${entity.name}Impl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(${entity.name}Impl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(${entity.name}Impl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

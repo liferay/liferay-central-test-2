@@ -62,7 +62,7 @@ public class EhCacheProvider implements CacheProvider {
 			}
 		}
 
-		return new EhCache(ehcache);
+		return new CacheWrapper(new EhCache(ehcache));
 	}
 
 	public boolean isMinimalPutsEnabledByDefault() {
