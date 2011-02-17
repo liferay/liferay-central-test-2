@@ -535,14 +535,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
 			false, false, false);
 
-		// Mail
-
-		if (user.hasCompanyMx()) {
-			mailService.addUser(
-				companyId, userId, password1, firstName, middleName, lastName,
-				emailAddress);
-		}
-
 		// Contact
 
 		Date birthday = PortalUtil.getDate(
@@ -1041,6 +1033,26 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					user.getCompanyId(), user.getOrganizationIds());
 
 			password = PwdToolkitUtil.generate(passwordPolicy);
+
+			user.setPassword(PwdEncryptor.encrypt(password));
+			user.setPasswordEncrypted(true);
+			user.setPasswordUnencrypted(password);
+
+			userPersistence.update(user, false);
+
+		}
+
+		if (user.hasCompanyMx()) {
+			String mailPassword = password;
+
+			if (Validator.isNull(mailPassword)) {
+				mailPassword = user.getPasswordUnencrypted();
+			}
+
+			mailService.addUser(
+				user.getCompanyId(), user.getUserId(), mailPassword,
+				user.getFirstName(), user.getMiddleName(),
+				user.getLastName(), user.getEmailAddress());
 		}
 
 		boolean sendEmail = GetterUtil.getBoolean(
