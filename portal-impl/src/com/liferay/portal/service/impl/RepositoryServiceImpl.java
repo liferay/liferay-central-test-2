@@ -16,15 +16,12 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.NoSuchRepositoryException;
-import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.BaseRepositoryImpl;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.util.InstanceFactory;
-import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Repository;
@@ -34,6 +31,7 @@ import com.liferay.portal.repository.liferayrepository.LiferayLocalRepository;
 import com.liferay.portal.repository.liferayrepository.LiferayRepository;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.RepositoryServiceBaseImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
@@ -48,8 +46,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 	public long addRepository(
-			long groupId, long parentFolderId, String name, String description,
-			String portletId, int type,
+			long groupId, long classNameId, long parentFolderId, String name,
+			String description, String portletId,
 			UnicodeProperties typeSettingsProperties,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -64,11 +62,11 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		repository.setGroupId(groupId);
 		repository.setCompanyId(user.getCompanyId());
 		repository.setCreateDate(now);
+		repository.setClassNameId(classNameId);
 		repository.setModifiedDate(now);
 		repository.setName(name);
 		repository.setDescription(description);
 		repository.setPortletId(portletId);
-		repository.setType(type);
 		repository.setTypeSettingsProperties(typeSettingsProperties);
 		repository.setDlFolderId(
 			getDLFolderId(
@@ -154,16 +152,14 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			return localRepositoryImpl;
 		}
 
-		int type = getRepositoryType(repositoryId);
+		long classNameId = getRepositoryClassNameId(repositoryId);
 
-		if (type == 0) {
-			localRepositoryImpl = new LiferayLocalRepository(
-				repositoryService, dlRepositoryLocalService,
-				dlRepositoryService, repositoryId);
+		if (classNameId == 0) {
+			localRepositoryImpl = new LiferayLocalRepository(repositoryId);
 		}
 		else {
 			BaseRepositoryImpl baseRepositoryImpl = createRepositoryImpl(
-				repositoryId, type);
+				repositoryId, classNameId);
 
 			localRepositoryImpl = baseRepositoryImpl.getLocalRepository();
 		}
@@ -230,15 +226,13 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			return repositoryImpl;
 		}
 
-		int type = getRepositoryType(repositoryId);
+		long classNameId = getRepositoryClassNameId(repositoryId);
 
-		if (type == 0) {
-			repositoryImpl = new LiferayRepository(
-				repositoryService, dlRepositoryLocalService,
-				dlRepositoryService, repositoryId);
+		if (classNameId == 0) {
+			repositoryImpl = new LiferayRepository(repositoryId);
 		}
 		else {
-			repositoryImpl = createRepositoryImpl(repositoryId, type);
+			repositoryImpl = createRepositoryImpl(repositoryId, classNameId);
 		}
 
 		checkRepository(repositoryId);
@@ -282,12 +276,12 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return repositoryImpl;
 	}
 
-	public String[] getSupportedConfigurations(int type)
+	public String[] getSupportedConfigurations(long classNameId)
 		throws SystemException {
 
 		try {
-			String repositoryImplClassName = PropsUtil.get(
-				PropsKeys.DL_REPOSITORY_IMPL, new Filter(String.valueOf(type)));
+			String repositoryImplClassName = PortalUtil.getClassName(
+				classNameId);
 
 			Class<BaseRepositoryImpl> repositoryImplClass =
 				(Class<BaseRepositoryImpl>)Class.forName(
@@ -301,12 +295,13 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 	}
 
-	public String[] getSupportedParameters(int type, String configuration)
+	public String[] getSupportedParameters(
+			long classNameId, String configuration)
 		throws SystemException {
 
 		try {
-			String repositoryImplClassName = PropsUtil.get(
-				PropsKeys.DL_REPOSITORY_IMPL, new Filter(String.valueOf(type)));
+			String repositoryImplClassName = PortalUtil.getClassName(
+				classNameId);
 
 			Class<BaseRepositoryImpl> repositoryImplClass =
 				(Class<BaseRepositoryImpl>)Class.forName(
@@ -327,7 +322,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			}
 
 			throw new RepositoryException(
-				"Configuration not found for repository type " + type);
+				"Configuration not found for repository classNameId " +
+					classNameId);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -374,14 +370,14 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	}
 
 	protected BaseRepositoryImpl createRepositoryImpl(
-			long repositoryId, int type)
+			long repositoryId, long classNameId)
 		throws RepositoryException {
 
 		try {
 			Repository repository = getRepository(repositoryId);
 
-			String repositoryImplClassName = PropsUtil.get(
-				PropsKeys.DL_REPOSITORY_IMPL, new Filter(String.valueOf(type)));
+			String repositoryImplClassName = PortalUtil.getClassName(
+				classNameId);
 
 			BaseRepositoryImpl baseRepositoryImpl =
 				(BaseRepositoryImpl)InstanceFactory.newInstance(
@@ -400,7 +396,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 		catch (Exception e) {
 			throw new RepositoryException(
-				"There is no valid repository class for type " + type,
+				"There is no valid repository class for classNameId " +
+					classNameId,
 				e);
 		}
 	}
@@ -443,12 +440,14 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return repositoryEntryId;
 	}
 
-	protected int getRepositoryType(long repositoryId) throws SystemException {
+	protected long getRepositoryClassNameId(long repositoryId)
+		throws SystemException {
+
 		Repository repository = repositoryPersistence.fetchByPrimaryKey(
 			repositoryId);
 
 		if (repository != null) {
-			return repository.getType();
+			return repository.getClassNameId();
 		}
 
 		return 0;
