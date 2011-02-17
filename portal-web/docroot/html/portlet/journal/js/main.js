@@ -3105,6 +3105,8 @@ AUI().add(
 							}
 						}
 
+						content = Liferay.Util.escapeHTML(content);
+
 						instance.set('content', content);
 
 						return content;
