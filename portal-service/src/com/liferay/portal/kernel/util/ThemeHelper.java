@@ -47,9 +47,6 @@ public class ThemeHelper {
 		String contextPath = GetterUtil.getString(
 			servletContext.getContextPath(), StringPool.BLANK);
 
-		// be sure that root context path is just "".
-		// getContextPath() on different app servers returns
-		// various results, such as: "", null, "/".
 		if (contextPath.startsWith(StringPool.SLASH)) {
 			contextPath = contextPath.substring(1);
 		}
