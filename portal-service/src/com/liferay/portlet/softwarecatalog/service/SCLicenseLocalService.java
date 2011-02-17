@@ -220,6 +220,10 @@ public interface SCLicenseLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteLicense(
+		com.liferay.portlet.softwarecatalog.model.SCLicense license)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)

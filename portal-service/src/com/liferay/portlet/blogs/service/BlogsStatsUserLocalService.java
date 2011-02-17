@@ -210,6 +210,14 @@ public interface BlogsStatsUserLocalService {
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteStatsUser(
+		com.liferay.portlet.blogs.model.BlogsStatsUser statsUsers)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteStatsUser(long statsUserId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

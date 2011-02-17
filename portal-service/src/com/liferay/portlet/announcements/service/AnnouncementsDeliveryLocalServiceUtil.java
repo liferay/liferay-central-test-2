@@ -243,6 +243,12 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 		getService().deleteDeliveries(userId);
 	}
 
+	public static void deleteDelivery(
+		com.liferay.portlet.announcements.model.AnnouncementsDelivery delivery)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteDelivery(delivery);
+	}
+
 	public static void deleteDelivery(long deliveryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

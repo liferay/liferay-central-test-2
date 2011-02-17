@@ -229,6 +229,18 @@ public class AssetTagStatsLocalServiceWrapper
 		return _assetTagStatsLocalService.addTagStats(tagId, classNameId);
 	}
 
+	public void deleteTagStats(
+		com.liferay.portlet.asset.model.AssetTagStats tagStats)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_assetTagStatsLocalService.deleteTagStats(tagStats);
+	}
+
+	public void deleteTagStats(long tagStatsId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_assetTagStatsLocalService.deleteTagStats(tagStatsId);
+	}
+
 	public void deleteTagStatsByClassNameId(long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetTagStatsLocalService.deleteTagStatsByClassNameId(classNameId);

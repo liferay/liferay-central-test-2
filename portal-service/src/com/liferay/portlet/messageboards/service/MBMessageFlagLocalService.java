@@ -210,16 +210,24 @@ public interface MBMessageFlagLocalService {
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void addQuestionFlag(long messageId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void addReadFlags(long userId,
 		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void addQuestionFlag(long messageId)
+	public void deleteAnswerFlags(long threadId, long messageId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteFlag(long messageFlagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteAnswerFlags(long threadId, long messageId)
+	public void deleteFlag(
+		com.liferay.portlet.messageboards.model.MBMessageFlag messageFlag)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void deleteFlags(long userId)

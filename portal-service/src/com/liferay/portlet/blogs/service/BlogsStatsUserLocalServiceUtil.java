@@ -230,6 +230,18 @@ public class BlogsStatsUserLocalServiceUtil {
 		return getService().updateBlogsStatsUser(blogsStatsUser, merge);
 	}
 
+	public static void deleteStatsUser(
+		com.liferay.portlet.blogs.model.BlogsStatsUser statsUsers)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStatsUser(statsUsers);
+	}
+
+	public static void deleteStatsUser(long statsUserId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStatsUser(statsUserId);
+	}
+
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteStatsUserByGroupId(groupId);

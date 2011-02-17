@@ -230,6 +230,12 @@ public class MBMessageFlagLocalServiceUtil {
 		return getService().updateMBMessageFlag(mbMessageFlag, merge);
 	}
 
+	public static void addQuestionFlag(long messageId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().addQuestionFlag(messageId);
+	}
+
 	public static void addReadFlags(long userId,
 		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -237,15 +243,21 @@ public class MBMessageFlagLocalServiceUtil {
 		getService().addReadFlags(userId, thread);
 	}
 
-	public static void addQuestionFlag(long messageId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().addQuestionFlag(messageId);
-	}
-
 	public static void deleteAnswerFlags(long threadId, long messageId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteAnswerFlags(threadId, messageId);
+	}
+
+	public static void deleteFlag(long messageFlagId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteFlag(messageFlagId);
+	}
+
+	public static void deleteFlag(
+		com.liferay.portlet.messageboards.model.MBMessageFlag messageFlag)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteFlag(messageFlag);
 	}
 
 	public static void deleteFlags(long userId)

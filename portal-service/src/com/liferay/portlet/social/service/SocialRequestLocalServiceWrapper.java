@@ -260,6 +260,12 @@ public class SocialRequestLocalServiceWrapper
 		_socialRequestLocalService.deleteRequest(requestId);
 	}
 
+	public void deleteRequest(
+		com.liferay.portlet.social.model.SocialRequest request)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_socialRequestLocalService.deleteRequest(request);
+	}
+
 	public void deleteUserRequests(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_socialRequestLocalService.deleteUserRequests(userId);

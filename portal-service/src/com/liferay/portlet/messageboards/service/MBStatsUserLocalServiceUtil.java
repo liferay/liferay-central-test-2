@@ -236,6 +236,18 @@ public class MBStatsUserLocalServiceUtil {
 		return getService().addStatsUser(groupId, userId);
 	}
 
+	public static void deleteStatsUser(long statsUserId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStatsUser(statsUserId);
+	}
+
+	public static void deleteStatsUser(
+		com.liferay.portlet.messageboards.model.MBStatsUser statsUser)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteStatsUser(statsUser);
+	}
+
 	public static void deleteStatsUsersByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteStatsUsersByGroupId(groupId);
@@ -263,14 +275,14 @@ public class MBStatsUserLocalServiceUtil {
 		return getService().getStatsUsersByGroupId(groupId, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsersByUserId(
-		long userId) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getStatsUsersByUserId(userId);
-	}
-
 	public static int getStatsUsersByGroupIdCount(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getStatsUsersByGroupIdCount(groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsersByUserId(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStatsUsersByUserId(userId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser updateStatsUser(

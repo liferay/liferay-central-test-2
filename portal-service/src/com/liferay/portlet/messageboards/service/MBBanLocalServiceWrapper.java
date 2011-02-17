@@ -229,10 +229,21 @@ public class MBBanLocalServiceWrapper implements MBBanLocalService {
 		_mbBanLocalService.checkBan(groupId, banUserId);
 	}
 
+	public void deleteBan(long banId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_mbBanLocalService.deleteBan(banId);
+	}
+
 	public void deleteBan(long banUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_mbBanLocalService.deleteBan(banUserId, serviceContext);
+	}
+
+	public void deleteBan(com.liferay.portlet.messageboards.model.MBBan ban)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_mbBanLocalService.deleteBan(ban);
 	}
 
 	public void deleteBansByBanUserId(long banUserId)

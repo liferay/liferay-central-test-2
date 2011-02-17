@@ -214,6 +214,9 @@ public interface ExpandoRowLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteRow(com.liferay.portlet.expando.model.ExpandoRow row)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteRow(long rowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

@@ -264,19 +264,19 @@ public class PasswordPolicyRelLocalServiceWrapper
 	}
 
 	public com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
-		java.lang.String className, long classPK)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _passwordPolicyRelLocalService.getPasswordPolicyRel(className,
-			classPK);
-	}
-
-	public com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _passwordPolicyRelLocalService.getPasswordPolicyRel(passwordPolicyId,
 			className, classPK);
+	}
+
+	public com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _passwordPolicyRelLocalService.getPasswordPolicyRel(className,
+			classPK);
 	}
 
 	public boolean hasPasswordPolicyRel(long passwordPolicyId,

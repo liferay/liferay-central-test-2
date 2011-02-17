@@ -249,6 +249,12 @@ public class ShoppingCouponLocalServiceWrapper
 		_shoppingCouponLocalService.deleteCoupon(couponId);
 	}
 
+	public void deleteCoupon(
+		com.liferay.portlet.shopping.model.ShoppingCoupon coupon)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_shoppingCouponLocalService.deleteCoupon(coupon);
+	}
+
 	public void deleteCoupons(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_shoppingCouponLocalService.deleteCoupons(groupId);

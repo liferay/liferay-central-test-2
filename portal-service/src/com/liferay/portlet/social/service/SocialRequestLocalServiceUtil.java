@@ -267,6 +267,12 @@ public class SocialRequestLocalServiceUtil {
 		getService().deleteRequest(requestId);
 	}
 
+	public static void deleteRequest(
+		com.liferay.portlet.social.model.SocialRequest request)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteRequest(request);
+	}
+
 	public static void deleteUserRequests(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteUserRequests(userId);

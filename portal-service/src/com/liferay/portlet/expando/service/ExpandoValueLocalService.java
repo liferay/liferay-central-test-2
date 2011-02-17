@@ -496,6 +496,10 @@ public interface ExpandoValueLocalService {
 	public void deleteTableValues(long tableId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteValue(
+		com.liferay.portlet.expando.model.ExpandoValue value)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteValue(long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

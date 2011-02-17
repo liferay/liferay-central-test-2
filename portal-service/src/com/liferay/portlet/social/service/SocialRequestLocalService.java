@@ -238,6 +238,10 @@ public interface SocialRequestLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteRequest(
+		com.liferay.portlet.social.model.SocialRequest request)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteUserRequests(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

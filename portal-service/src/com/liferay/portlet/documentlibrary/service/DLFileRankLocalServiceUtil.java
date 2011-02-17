@@ -239,6 +239,18 @@ public class DLFileRankLocalServiceUtil {
 			serviceContext);
 	}
 
+	public static void deleteFileRank(
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteFileRank(dlFileRank);
+	}
+
+	public static void deleteFileRank(long fileRankId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteFileRank(fileRankId);
+	}
+
 	public static void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteFileRanksByFileEntryId(fileEntryId);

@@ -243,10 +243,22 @@ public class MBBanLocalServiceUtil {
 		getService().checkBan(groupId, banUserId);
 	}
 
+	public static void deleteBan(long banId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteBan(banId);
+	}
+
 	public static void deleteBan(long banUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteBan(banUserId, serviceContext);
+	}
+
+	public static void deleteBan(
+		com.liferay.portlet.messageboards.model.MBBan ban)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteBan(ban);
 	}
 
 	public static void deleteBansByBanUserId(long banUserId)

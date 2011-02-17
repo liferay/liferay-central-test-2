@@ -236,6 +236,12 @@ public class ExpandoRowLocalServiceUtil {
 		return getService().addRow(tableId, classPK);
 	}
 
+	public static void deleteRow(
+		com.liferay.portlet.expando.model.ExpandoRow row)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteRow(row);
+	}
+
 	public static void deleteRow(long rowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

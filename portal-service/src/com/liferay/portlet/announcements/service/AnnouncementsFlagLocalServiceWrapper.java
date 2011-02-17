@@ -230,6 +230,12 @@ public class AnnouncementsFlagLocalServiceWrapper
 		return _announcementsFlagLocalService.addFlag(userId, entryId, value);
 	}
 
+	public void deleteFlag(
+		com.liferay.portlet.announcements.model.AnnouncementsFlag flag)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_announcementsFlagLocalService.deleteFlag(flag);
+	}
+
 	public void deleteFlag(long flagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

@@ -227,6 +227,11 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 		return _expandoRowLocalService.addRow(tableId, classPK);
 	}
 
+	public void deleteRow(com.liferay.portlet.expando.model.ExpandoRow row)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_expandoRowLocalService.deleteRow(row);
+	}
+
 	public void deleteRow(long rowId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

@@ -214,6 +214,14 @@ public interface AssetTagStatsLocalService {
 		long tagId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteTagStats(
+		com.liferay.portlet.asset.model.AssetTagStats tagStats)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteTagStats(long tagStatsId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteTagStatsByClassNameId(long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 

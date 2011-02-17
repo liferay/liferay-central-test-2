@@ -236,6 +236,12 @@ public class AssetLinkLocalServiceUtil {
 		return getService().addLink(userId, entryId1, entryId2, type, weight);
 	}
 
+	public static void deleteLink(
+		com.liferay.portlet.asset.model.AssetLink link)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteLink(link);
+	}
+
 	public static void deleteLink(long linkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

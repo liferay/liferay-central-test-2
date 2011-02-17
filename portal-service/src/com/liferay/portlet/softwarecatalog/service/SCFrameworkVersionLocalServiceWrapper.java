@@ -242,15 +242,6 @@ public class SCFrameworkVersionLocalServiceWrapper
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addFrameworkVersionResources(
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion frameworkVersion,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_scFrameworkVersionLocalService.addFrameworkVersionResources(frameworkVersion,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
 	public void addFrameworkVersionResources(long frameworkVersionId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -258,6 +249,15 @@ public class SCFrameworkVersionLocalServiceWrapper
 			com.liferay.portal.kernel.exception.SystemException {
 		_scFrameworkVersionLocalService.addFrameworkVersionResources(frameworkVersionId,
 			communityPermissions, guestPermissions);
+	}
+
+	public void addFrameworkVersionResources(
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion frameworkVersion,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_scFrameworkVersionLocalService.addFrameworkVersionResources(frameworkVersion,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addFrameworkVersionResources(
@@ -295,13 +295,6 @@ public class SCFrameworkVersionLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
-		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _scFrameworkVersionLocalService.getFrameworkVersions(groupId,
-			start, end);
-	}
-
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
 		long groupId, boolean active)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scFrameworkVersionLocalService.getFrameworkVersions(groupId,
@@ -313,6 +306,13 @@ public class SCFrameworkVersionLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _scFrameworkVersionLocalService.getFrameworkVersions(groupId,
 			active, start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _scFrameworkVersionLocalService.getFrameworkVersions(groupId,
+			start, end);
 	}
 
 	public int getFrameworkVersionsCount(long groupId)

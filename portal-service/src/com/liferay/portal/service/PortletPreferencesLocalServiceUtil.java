@@ -265,12 +265,6 @@ public class PortletPreferencesLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
-		long plid, java.lang.String portletId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getPortletPreferences(plid, portletId);
-	}
-
-	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
 		long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPortletPreferences(ownerId, ownerType, plid);
@@ -284,15 +278,15 @@ public class PortletPreferencesLocalServiceUtil {
 				   .getPortletPreferences(ownerId, ownerType, plid, portletId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
+		long plid, java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPortletPreferences(plid, portletId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencesByPlid(
 		long plid) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getPortletPreferencesByPlid(plid);
-	}
-
-	public static javax.portlet.PortletPreferences getPreferences(
-		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getPreferences(portletPreferencesIds);
 	}
 
 	public static javax.portlet.PortletPreferences getPreferences(
@@ -311,6 +305,12 @@ public class PortletPreferencesLocalServiceUtil {
 		return getService()
 				   .getPreferences(companyId, ownerId, ownerType, plid,
 			portletId, defaultPreferences);
+	}
+
+	public static javax.portlet.PortletPreferences getPreferences(
+		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getPreferences(portletPreferencesIds);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences updatePreferences(

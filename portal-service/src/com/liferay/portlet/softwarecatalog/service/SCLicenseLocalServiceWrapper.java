@@ -236,6 +236,12 @@ public class SCLicenseLocalServiceWrapper implements SCLicenseLocalService {
 		_scLicenseLocalService.deleteLicense(licenseId);
 	}
 
+	public void deleteLicense(
+		com.liferay.portlet.softwarecatalog.model.SCLicense license)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_scLicenseLocalService.deleteLicense(license);
+	}
+
 	public com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)
 		throws com.liferay.portal.kernel.exception.PortalException,

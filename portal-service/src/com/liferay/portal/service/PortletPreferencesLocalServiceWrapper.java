@@ -261,13 +261,6 @@ public class PortletPreferencesLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
-		long plid, java.lang.String portletId)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _portletPreferencesLocalService.getPortletPreferences(plid,
-			portletId);
-	}
-
-	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
 		long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletPreferencesLocalService.getPortletPreferences(ownerId,
@@ -282,15 +275,16 @@ public class PortletPreferencesLocalServiceWrapper
 			ownerType, plid, portletId);
 	}
 
+	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
+		long plid, java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _portletPreferencesLocalService.getPortletPreferences(plid,
+			portletId);
+	}
+
 	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencesByPlid(
 		long plid) throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletPreferencesLocalService.getPortletPreferencesByPlid(plid);
-	}
-
-	public javax.portlet.PortletPreferences getPreferences(
-		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _portletPreferencesLocalService.getPreferences(portletPreferencesIds);
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(long companyId,
@@ -306,6 +300,12 @@ public class PortletPreferencesLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletPreferencesLocalService.getPreferences(companyId,
 			ownerId, ownerType, plid, portletId, defaultPreferences);
+	}
+
+	public javax.portlet.PortletPreferences getPreferences(
+		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _portletPreferencesLocalService.getPreferences(portletPreferencesIds);
 	}
 
 	public com.liferay.portal.model.PortletPreferences updatePreferences(

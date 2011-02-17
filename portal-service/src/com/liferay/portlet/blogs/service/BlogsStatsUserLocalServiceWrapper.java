@@ -223,6 +223,18 @@ public class BlogsStatsUserLocalServiceWrapper
 			merge);
 	}
 
+	public void deleteStatsUser(
+		com.liferay.portlet.blogs.model.BlogsStatsUser statsUsers)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_blogsStatsUserLocalService.deleteStatsUser(statsUsers);
+	}
+
+	public void deleteStatsUser(long statsUserId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_blogsStatsUserLocalService.deleteStatsUser(statsUserId);
+	}
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_blogsStatsUserLocalService.deleteStatsUserByGroupId(groupId);

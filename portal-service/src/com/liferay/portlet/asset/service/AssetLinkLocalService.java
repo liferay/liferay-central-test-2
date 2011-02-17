@@ -213,6 +213,9 @@ public interface AssetLinkLocalService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteLink(com.liferay.portlet.asset.model.AssetLink link)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteLink(long linkId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

@@ -646,6 +646,12 @@ public class ExpandoValueLocalServiceUtil {
 		getService().deleteTableValues(tableId);
 	}
 
+	public static void deleteValue(
+		com.liferay.portlet.expando.model.ExpandoValue value)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteValue(value);
+	}
+
 	public static void deleteValue(long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

@@ -245,6 +245,12 @@ public class SCLicenseLocalServiceUtil {
 		getService().deleteLicense(licenseId);
 	}
 
+	public static void deleteLicense(
+		com.liferay.portlet.softwarecatalog.model.SCLicense license)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteLicense(license);
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)
 		throws com.liferay.portal.kernel.exception.PortalException,

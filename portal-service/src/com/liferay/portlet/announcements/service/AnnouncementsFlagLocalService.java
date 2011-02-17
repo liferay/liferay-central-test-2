@@ -214,6 +214,10 @@ public interface AnnouncementsFlagLocalService {
 		long userId, long entryId, int value)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	public void deleteFlag(
+		com.liferay.portlet.announcements.model.AnnouncementsFlag flag)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteFlag(long flagId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

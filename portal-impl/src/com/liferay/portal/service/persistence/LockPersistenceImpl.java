@@ -42,7 +42,6 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.LockImpl;
 import com.liferay.portal.model.impl.LockModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -147,7 +146,7 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * </p>
 	 */
 	public void clearCache() {
-		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(LockImpl.class.getName());
 		}
 
@@ -1886,5 +1885,6 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	private static final String _ORDER_BY_ENTITY_ALIAS = "lock.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Lock exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Lock exists with the key {";
+	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = com.liferay.portal.util.PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE;
 	private static Log _log = LogFactoryUtil.getLog(LockPersistenceImpl.class);
 }

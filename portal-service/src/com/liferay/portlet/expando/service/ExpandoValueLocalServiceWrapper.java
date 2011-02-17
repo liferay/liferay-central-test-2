@@ -621,6 +621,12 @@ public class ExpandoValueLocalServiceWrapper implements ExpandoValueLocalService
 		_expandoValueLocalService.deleteTableValues(tableId);
 	}
 
+	public void deleteValue(
+		com.liferay.portlet.expando.model.ExpandoValue value)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_expandoValueLocalService.deleteValue(value);
+	}
+
 	public void deleteValue(long valueId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

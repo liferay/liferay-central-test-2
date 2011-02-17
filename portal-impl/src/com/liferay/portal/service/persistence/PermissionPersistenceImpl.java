@@ -47,7 +47,6 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.model.impl.PermissionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
-import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -144,7 +143,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 * </p>
 	 */
 	public void clearCache() {
-		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(PermissionImpl.class.getName());
 		}
 
@@ -3355,5 +3354,6 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	private static final String _ORDER_BY_ENTITY_ALIAS = "permission.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No Permission exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No Permission exists with the key {";
+	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = com.liferay.portal.util.PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE;
 	private static Log _log = LogFactoryUtil.getLog(PermissionPersistenceImpl.class);
 }
