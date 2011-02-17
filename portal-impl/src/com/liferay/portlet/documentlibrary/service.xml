@@ -336,7 +336,9 @@
 	</entity>
 	<exceptions>
 		<exception>DuplicateFolderName</exception>
+		<exception>DuplicateRepositoryName</exception>
 		<exception>FileShortcutPermission</exception>
 		<exception>FolderName</exception>
+		<exception>RepositoryName</exception>
 	</exceptions>
 </service-builder>
