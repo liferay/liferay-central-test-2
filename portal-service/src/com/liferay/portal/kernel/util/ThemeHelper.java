@@ -45,7 +45,14 @@ public class ThemeHelper {
 		String servletContextName = StringPool.BLANK;
 
 		String contextPath = GetterUtil.getString(
-			servletContext.getContextPath(), StringPool.SLASH);
+			servletContext.getContextPath(), StringPool.BLANK);
+
+		// be sure that root context path is just "".
+		// getContextPath() on different app servers returns
+		// various results, such as: "", null, "/".
+		if (contextPath.startsWith(StringPool.SLASH)) {
+			contextPath = contextPath.substring(1);
+		}
 
 		if (!contextPath.equals(PortalUtil.getPathContext())) {
 			servletContextName = GetterUtil.getString(
