@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ArrayUtil_IW;
+import com.liferay.portal.kernel.util.ClearThreadLocalUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -215,6 +216,15 @@ public class ServiceBuilder {
 
 			throw re;
 		}
+
+		try {
+			ClearThreadLocalUtil.clearThreadLocal();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Introspector.flushCaches();
 	}
 
 	public static String toHumanName(String name) {

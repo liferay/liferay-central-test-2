@@ -56,8 +56,6 @@ public class SpringUtil {
 			new ArrayApplicationContext(
 				configLocations.toArray(new String[configLocations.size()]));
 
-		applicationContext.registerShutdownHook();
-
 		BeanLocator beanLocator = new BeanLocatorImpl(
 			PortalClassLoaderUtil.getClassLoader(), applicationContext);
 
