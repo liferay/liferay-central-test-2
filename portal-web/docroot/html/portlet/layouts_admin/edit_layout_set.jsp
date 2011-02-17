@@ -104,9 +104,9 @@ String[][] categorySections = {mainSections};
 </liferay-util:html-top>
 
 <aui:script use="aui-dialog,aui-toolbar">
-	var popup;
-	var exportPopup;
-	var importPopup;
+	var popUp;
+	var exportPopUp;
+	var importPopUp;
 
 	var layoutSetToolbar = new A.Toolbar(
 		{
@@ -116,10 +116,10 @@ String[][] categorySections = {mainSections};
 				<c:if test="<%= !group.isLayoutPrototype() %>">
 					{
 						handler: function(event) {
-							if (!popup) {
+							if (!popUp) {
 								var content = A.one('#<portlet:namespace />addLayout');
 
-								popup = new A.Dialog(
+								popUp = new A.Dialog(
 									{
 										bodyContent: content.show(),
 										centered: true,
@@ -130,7 +130,7 @@ String[][] categorySections = {mainSections};
 								).render();
 							}
 
-							popup.show();
+							popUp.show();
 						},
 						icon: 'circle-plus',
 						label: '<liferay-ui:message key="add-page" />'
@@ -159,8 +159,8 @@ String[][] categorySections = {mainSections};
 					},
 					{
 						handler: function(event) {
-							if (!exportPopup) {
-								exportPopup = new A.Dialog(
+							if (!exportPopUp) {
+								exportPopUp = new A.Dialog(
 									{
 										centered: true,
 										constrain: true,
@@ -180,12 +180,12 @@ String[][] categorySections = {mainSections};
 									<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
 								</portlet:renderURL>
 
-								exportPopup.plug(
+								exportPopUp.plug(
 									A.Plugin.IO,
 									{
 										after: {
 											success: function() {
-												exportPopup.centered();
+												exportPopUp.centered();
 											}
 										},
 										autoLoad: false,
@@ -194,16 +194,16 @@ String[][] categorySections = {mainSections};
 								);
 							}
 
-							exportPopup.show();
-							exportPopup.io.start();
+							exportPopUp.show();
+							exportPopUp.io.start();
 						},
 						icon: 'arrowthick-1-b',
 						label: '<liferay-ui:message key="export" />'
 					},
 					{
 						handler: function(event) {
-							if (!importPopup) {
-								importPopup = new A.Dialog(
+							if (!importPopUp) {
+								importPopUp = new A.Dialog(
 									{
 										centered: true,
 										constrain: true,
@@ -224,18 +224,18 @@ String[][] categorySections = {mainSections};
 									<portlet:param name="rootNodeName" value="<%= rootNodeName %>" />
 								</portlet:renderURL>
 
-								importPopup.plug(
+								importPopUp.plug(
 									A.Plugin.IO,
 									{
 										after: {
 											success: function() {
-												importPopup.centered();
+												importPopUp.centered();
 
-												var form = importPopup.get('contentBox').one('#<portlet:namespace />fm1');
+												var form = importPopUp.get('contentBox').one('#<portlet:namespace />fm1');
 												form.on(
 													'submit',
 													function(event) {
-														importPopup.io.showLoading();
+														importPopUp.io.showLoading();
 													}
 												);
 											}
@@ -246,9 +246,9 @@ String[][] categorySections = {mainSections};
 								);
 							}
 
-							importPopup.show();
-							importPopup.centered();
-							importPopup.io.start();
+							importPopUp.show();
+							importPopUp.centered();
+							importPopUp.io.start();
 						},
 						icon: 'arrowthick-1-t',
 						label: '<liferay-ui:message key="import" />'

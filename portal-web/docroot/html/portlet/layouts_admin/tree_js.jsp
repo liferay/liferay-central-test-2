@@ -289,6 +289,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 					var tree = event.tree;
 
 					var dragNode = tree.dragNode;
+
 					var index = dragNode.get('parentNode').indexOf(dragNode);
 
 					TreeUtil.updateLayoutPriority(

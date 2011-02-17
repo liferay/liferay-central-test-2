@@ -77,13 +77,13 @@
 <aui:script use="aui-dialog">
 	var content = A.one('#<portlet:namespace />copyPortletsFromPage');
 
-	var popup;
+	var popUp = null;
 
 	var button = new A.ButtonItem(
 		{
-			handler:function(event) {
-				if (!popup) {
-					 popup = new A.Dialog(
+			handler: function(event) {
+				if (!popUp) {
+					 popUp = new A.Dialog(
 						{
 							bodyContent: content.show(),
 							centered: true,
@@ -94,15 +94,15 @@
 					).render();
 				}
 
-				popup.show();
+				popUp.show();
 
-				var submitButton = popup.get('contentBox').one('#<portlet:namespace />copySubmitButton');
+				var submitButton = popUp.get('contentBox').one('#<portlet:namespace />copySubmitButton');
 
 				if (submitButton) {
 					submitButton.on(
 						'click',
 						function(event) {
-							popup.close();
+							popUp.close();
 
 							var form = A.one('#<portlet:namespace />fm');
 

@@ -79,8 +79,8 @@ String[][] categorySections = {mainSections};
 		<aui:script use="aui-dialog,aui-dialog-iframe">
 			var buttonRow = A.one('#<portlet:namespace />layoutToolbar');
 
-			var permissionPopUp;
-			var popup;
+			var permissionPopUp = null;
+			var popUp = null;
 
 			var layoutToolbar = new A.Toolbar(
 				{
@@ -89,10 +89,10 @@ String[][] categorySections = {mainSections};
 					children: [
 						{
 							handler: function(event) {
-								if (!popup) {
+								if (!popUp) {
 									var content = A.one('#<portlet:namespace />addLayout');
 
-									popup = new A.Dialog(
+									popUp = new A.Dialog(
 										{
 											bodyContent: content.show(),
 											centered: true,
@@ -103,7 +103,7 @@ String[][] categorySections = {mainSections};
 									).render();
 								}
 
-								popup.show();
+								popUp.show();
 							},
 							icon: 'circle-plus',
 							label: '<liferay-ui:message key="add-child-page" />'
