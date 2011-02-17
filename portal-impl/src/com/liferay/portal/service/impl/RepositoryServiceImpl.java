@@ -154,7 +154,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		long classNameId = getRepositoryClassNameId(repositoryId);
 
-		if (classNameId == 0) {
+		if (classNameId == PortalUtil.getClassNameId(
+			LiferayRepository.class.getName())) {
+
 			localRepositoryImpl = new LiferayLocalRepository(
 				repositoryService, dlRepositoryLocalService,
 				dlRepositoryService, repositoryId);
@@ -230,7 +232,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		long classNameId = getRepositoryClassNameId(repositoryId);
 
-		if (classNameId == 0) {
+		if (classNameId == PortalUtil.getClassNameId(
+			LiferayRepository.class.getName())) {
+
 			repositoryImpl = new LiferayRepository(
 				repositoryService, dlRepositoryLocalService,
 				dlRepositoryService, repositoryId);
