@@ -294,15 +294,15 @@ public class RepositoryModelImpl extends BaseModelImpl<Repository>
 
 		repositoryImpl.setModifiedDate(getModifiedDate());
 
-		clone.setClassNameId(getClassNameId());
+		repositoryImpl.setClassNameId(getClassNameId());
 
-		clone.setName(getName());
+		repositoryImpl.setName(getName());
 
 		repositoryImpl.setDescription(getDescription());
 
 		repositoryImpl.setPortletId(getPortletId());
 
-		clone.setTypeSettings(getTypeSettings());
+		repositoryImpl.setTypeSettings(getTypeSettings());
 
 		repositoryImpl.setDlFolderId(getDlFolderId());
 
