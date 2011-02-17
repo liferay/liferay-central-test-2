@@ -25,6 +25,7 @@ import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.AuthException;
@@ -45,6 +46,7 @@ import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -159,6 +161,10 @@ public class LoginAction extends PortletAction {
 			if (Validator.isNotNull(redirect)) {
 				redirect = PortalUtil.escapeRedirect(redirect);
 
+				if ((redirect != null) && !redirect.startsWith(Http.HTTP)) {
+					redirect = getCompleteRedirectURL(request, redirect);
+				}
+
 				actionResponse.sendRedirect(redirect);
 			}
 			else {
@@ -173,6 +179,29 @@ public class LoginAction extends PortletAction {
 				}
 			}
 		}
+	}
+
+	protected String getCompleteRedirectURL(
+		HttpServletRequest request, String redirect) {
+
+		HttpSession session = request.getSession();
+
+		Boolean httpsInitial = (Boolean)session.getAttribute(
+			WebKeys.HTTPS_INITIAL);
+
+		String portalURL = null;
+
+		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
+			(!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) &&
+			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
+
+			portalURL = PortalUtil.getPortalURL(request, false);
+		}
+		else {
+			portalURL = PortalUtil.getPortalURL(request);
+		}
+
+		return portalURL.concat(redirect);
 	}
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
