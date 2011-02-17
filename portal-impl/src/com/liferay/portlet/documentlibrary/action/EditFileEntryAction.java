@@ -249,10 +249,10 @@ public class EditFileEntryAction extends PortletAction {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
 
-		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
+
+		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
 		long fileEntryId = ParamUtil.getLong(uploadRequest, "fileEntryId");
 
