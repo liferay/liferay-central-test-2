@@ -99,17 +99,15 @@ public class SocialRequestLocalServiceImpl
 		deleteRequest(request);
 	}
 
-	public void deleteRequest(SocialRequest request)
-		throws SystemException {
-
+	public void deleteRequest(SocialRequest request) throws SystemException {
 		socialRequestPersistence.remove(request);
 	}
 
 	public void deleteUserRequests(long userId) throws SystemException {
-		List<SocialRequest> socialRequests =
-			socialRequestPersistence.findByUserId(userId);
+		List<SocialRequest> requests = socialRequestPersistence.findByUserId(
+			userId);
 
-		for (SocialRequest request : socialRequests) {
+		for (SocialRequest request : requests) {
 			deleteRequest(request);
 		}
 	}

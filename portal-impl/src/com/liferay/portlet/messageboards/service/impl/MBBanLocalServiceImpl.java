@@ -76,6 +76,12 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 	}
 
+	public void deleteBan(long banId) throws PortalException, SystemException {
+		MBBan ban = mbBanPersistence.findByPrimaryKey(banId);
+
+		deleteBan(ban);
+	}
+
 	public void deleteBan(long banUserId, ServiceContext serviceContext)
 		throws SystemException {
 
@@ -88,12 +94,6 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 		catch (NoSuchBanException nsbe) {
 		}
-	}
-
-	public void deleteBan(long banId) throws PortalException, SystemException {
-		MBBan ban = mbBanPersistence.findByPrimaryKey(banId);
-
-		deleteBan(ban);
 	}
 
 	public void deleteBan(MBBan ban) throws SystemException {

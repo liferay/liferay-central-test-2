@@ -96,18 +96,6 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	public void addFrameworkVersionResources(
-			SCFrameworkVersion frameworkVersion,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		resourceLocalService.addResources(
-			frameworkVersion.getCompanyId(), frameworkVersion.getGroupId(),
-			frameworkVersion.getUserId(), SCFrameworkVersion.class.getName(),
-			frameworkVersion.getFrameworkVersionId(), false,
-			addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void addFrameworkVersionResources(
 			long frameworkVersionId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -117,6 +105,18 @@ public class SCFrameworkVersionLocalServiceImpl
 
 		addFrameworkVersionResources(
 			frameworkVersion, communityPermissions, guestPermissions);
+	}
+
+	public void addFrameworkVersionResources(
+			SCFrameworkVersion frameworkVersion,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addResources(
+			frameworkVersion.getCompanyId(), frameworkVersion.getGroupId(),
+			frameworkVersion.getUserId(), SCFrameworkVersion.class.getName(),
+			frameworkVersion.getFrameworkVersionId(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addFrameworkVersionResources(
@@ -163,13 +163,6 @@ public class SCFrameworkVersionLocalServiceImpl
 	}
 
 	public List<SCFrameworkVersion> getFrameworkVersions(
-			long groupId, int start, int end)
-		throws SystemException {
-
-		return scFrameworkVersionPersistence.findByGroupId(groupId, start, end);
-	}
-
-	public List<SCFrameworkVersion> getFrameworkVersions(
 			long groupId, boolean active)
 		throws SystemException {
 
@@ -182,6 +175,13 @@ public class SCFrameworkVersionLocalServiceImpl
 
 		return scFrameworkVersionPersistence.findByG_A(
 			groupId, active, start, end);
+	}
+
+	public List<SCFrameworkVersion> getFrameworkVersions(
+			long groupId, int start, int end)
+		throws SystemException {
+
+		return scFrameworkVersionPersistence.findByGroupId(groupId, start, end);
 	}
 
 	public int getFrameworkVersionsCount(long groupId)

@@ -53,9 +53,7 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		return link;
 	}
 
-	public void deleteLink(AssetLink link)
-		throws SystemException {
-
+	public void deleteLink(AssetLink link) throws SystemException {
 		assetLinkPersistence.remove(link);
 	}
 

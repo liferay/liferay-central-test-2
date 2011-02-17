@@ -76,15 +76,11 @@ public class MBStatsUserLocalServiceImpl
 		deleteStatsUser(statsUser);
 	}
 
-	public void deleteStatsUser(MBStatsUser statsUser)
-			throws SystemException {
-
+	public void deleteStatsUser(MBStatsUser statsUser) throws SystemException {
 		mbStatsUserPersistence.remove(statsUser);
 	}
 
-	public void deleteStatsUsersByGroupId(long groupId)
-		throws SystemException {
-
+	public void deleteStatsUsersByGroupId(long groupId) throws SystemException {
 		List<MBStatsUser> statsUsers = mbStatsUserPersistence.findByGroupId(
 			groupId);
 
@@ -134,16 +130,16 @@ public class MBStatsUserLocalServiceImpl
 		return mbStatsUserPersistence.findByG_NotM(groupId, 0, start, end);
 	}
 
-	public List<MBStatsUser> getStatsUsersByUserId(long userId)
-		throws SystemException {
-
-		return mbStatsUserPersistence.findByUserId(userId);
-	}
-
 	public int getStatsUsersByGroupIdCount(long groupId)
 		throws SystemException {
 
 		return mbStatsUserPersistence.countByG_NotM(groupId, 0);
+	}
+
+	public List<MBStatsUser> getStatsUsersByUserId(long userId)
+		throws SystemException {
+
+		return mbStatsUserPersistence.findByUserId(userId);
 	}
 
 	public MBStatsUser updateStatsUser(long groupId, long userId)

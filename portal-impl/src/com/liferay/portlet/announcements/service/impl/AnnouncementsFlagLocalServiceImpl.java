@@ -46,6 +46,10 @@ public class AnnouncementsFlagLocalServiceImpl
 		return flag;
 	}
 
+	public void deleteFlag(AnnouncementsFlag flag) throws SystemException {
+		announcementsFlagPersistence.remove(flag);
+	}
+
 	public void deleteFlag(long flagId)
 		throws PortalException, SystemException {
 
@@ -53,10 +57,6 @@ public class AnnouncementsFlagLocalServiceImpl
 			flagId);
 
 		deleteFlag(flag);
-	}
-
-	public void deleteFlag(AnnouncementsFlag flag) throws SystemException {
-		announcementsFlagPersistence.remove(flag);
 	}
 
 	public void deleteFlags(long entryId) throws SystemException {

@@ -70,8 +70,8 @@ public class AssetTagStatsLocalServiceImpl
 	public void deleteTagStats(long tagStatsId)
 		throws PortalException, SystemException {
 
-		AssetTagStats tagStats =
-			assetTagStatsPersistence.findByPrimaryKey(tagStatsId);
+		AssetTagStats tagStats = assetTagStatsPersistence.findByPrimaryKey(
+			tagStatsId);
 
 		deleteTagStats(tagStats);
 	}

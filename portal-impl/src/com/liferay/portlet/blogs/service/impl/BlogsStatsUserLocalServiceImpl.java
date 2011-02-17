@@ -34,38 +34,38 @@ import java.util.List;
 public class BlogsStatsUserLocalServiceImpl
 	extends BlogsStatsUserLocalServiceBaseImpl {
 
-	public void deleteStatsUser(BlogsStatsUser blogsStatsUsers)
+	public void deleteStatsUser(BlogsStatsUser statsUsers)
 		throws SystemException {
 
-		blogsStatsUserPersistence.remove(blogsStatsUsers);
+		blogsStatsUserPersistence.remove(statsUsers);
 	}
 
 	public void deleteStatsUser(long statsUserId)
 		throws PortalException,	SystemException {
 
-		BlogsStatsUser blogsStatsUsers =
-			blogsStatsUserPersistence.findByPrimaryKey(statsUserId);
+		BlogsStatsUser statsUsers = blogsStatsUserPersistence.findByPrimaryKey(
+			statsUserId);
 
-		deleteStatsUser(blogsStatsUsers);
+		deleteStatsUser(statsUsers);
 	}
 
 	public void deleteStatsUserByGroupId(long groupId)
 		throws SystemException {
 
-		List<BlogsStatsUser> blogsStatsUsers =
+		List<BlogsStatsUser> statsUsers =
 			blogsStatsUserPersistence.findByGroupId(groupId);
 
-		for (BlogsStatsUser blogsStatsUser : blogsStatsUsers) {
-			deleteStatsUser(blogsStatsUser);
+		for (BlogsStatsUser statsUser : statsUsers) {
+			deleteStatsUser(statsUser);
 		}
 	}
 
 	public void deleteStatsUserByUserId(long userId) throws SystemException {
-		List<BlogsStatsUser> blogsStatsUsers =
+		List<BlogsStatsUser> statsUsers =
 			blogsStatsUserPersistence.findByUserId(userId);
 
-		for (BlogsStatsUser blogsStatsUser : blogsStatsUsers) {
-			deleteStatsUser(blogsStatsUser);
+		for (BlogsStatsUser statsUser : statsUsers) {
+			deleteStatsUser(statsUser);
 		}
 	}
 

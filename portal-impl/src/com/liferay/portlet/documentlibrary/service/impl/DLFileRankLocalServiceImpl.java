@@ -84,8 +84,8 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws SystemException {
 
-		List<DLFileRank> dlFileRanks =
-			dlFileRankPersistence.findByFileEntryId(fileEntryId);
+		List<DLFileRank> dlFileRanks = dlFileRankPersistence.findByFileEntryId(
+			fileEntryId);
 
 		for (DLFileRank dlFileRank : dlFileRanks) {
 			deleteFileRank(dlFileRank);
@@ -93,8 +93,8 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	}
 
 	public void deleteFileRanksByUserId(long userId) throws SystemException {
-		List<DLFileRank> dlFileRanks =
-			dlFileRankPersistence.findByUserId(userId);
+		List<DLFileRank> dlFileRanks = dlFileRankPersistence.findByUserId(
+			userId);
 
 		for (DLFileRank dlFileRank : dlFileRanks) {
 			deleteFileRank(dlFileRank);

@@ -81,13 +81,6 @@ public class MembershipRequestLocalServiceImpl
 		return membershipRequest;
 	}
 
-	public MembershipRequest getMembershipRequest(long membershipRequestId)
-		throws PortalException, SystemException {
-
-		return membershipRequestPersistence.findByPrimaryKey(
-			membershipRequestId);
-	}
-
 	public void deleteMembershipRequest(long membershipRequestId)
 			throws PortalException, SystemException {
 
@@ -132,6 +125,13 @@ public class MembershipRequestLocalServiceImpl
 		for (MembershipRequest membershipRequest : membershipRequests) {
 			deleteMembershipRequest(membershipRequest);
 		}
+	}
+
+	public MembershipRequest getMembershipRequest(long membershipRequestId)
+		throws PortalException, SystemException {
+
+		return membershipRequestPersistence.findByPrimaryKey(
+			membershipRequestId);
 	}
 
 	public List<MembershipRequest> search(

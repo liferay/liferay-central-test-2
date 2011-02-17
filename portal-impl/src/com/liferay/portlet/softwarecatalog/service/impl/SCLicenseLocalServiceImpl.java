@@ -59,9 +59,7 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 		deleteLicense(license);
 	}
 
-	public void deleteLicense(SCLicense license)
-		throws SystemException {
-
+	public void deleteLicense(SCLicense license) throws SystemException {
 		scLicensePersistence.remove(license);
 	}
 

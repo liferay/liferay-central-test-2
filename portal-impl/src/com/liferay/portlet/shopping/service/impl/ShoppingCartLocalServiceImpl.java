@@ -49,27 +49,25 @@ public class ShoppingCartLocalServiceImpl
 	extends ShoppingCartLocalServiceBaseImpl {
 
 	public void deleteGroupCarts(long groupId) throws SystemException {
-		List<ShoppingCart> shoppingCarts =
-			shoppingCartPersistence.findByGroupId(groupId);
+		List<ShoppingCart> carts = shoppingCartPersistence.findByGroupId(
+			groupId);
 
-		for (ShoppingCart shoppingCart : shoppingCarts){
-			deleteShoppingCart(shoppingCart);
+		for (ShoppingCart cart : carts){
+			deleteShoppingCart(cart);
 		}
 	}
 
 	public void deleteShoppingCart(long cartId)
 		throws PortalException,	SystemException {
 
-		ShoppingCart shoppingCart = shoppingCartPersistence.findByPrimaryKey(
+		ShoppingCart cart = shoppingCartPersistence.findByPrimaryKey(
 			cartId);
 
-		deleteShoppingCart(shoppingCart);
+		deleteShoppingCart(cart);
 	}
 
-	public void deleteShoppingCart(ShoppingCart shoppingCart)
-		throws SystemException {
-
-		shoppingCartPersistence.remove(shoppingCart);
+	public void deleteShoppingCart(ShoppingCart cart) throws SystemException {
+		shoppingCartPersistence.remove(cart);
 	}
 
 	public void deleteUserCarts(long userId) throws SystemException {

@@ -35,6 +35,41 @@ import java.util.List;
 public class MBMessageFlagLocalServiceImpl
 	extends MBMessageFlagLocalServiceBaseImpl {
 
+	public void addQuestionFlag(long messageId)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		if (!message.isRoot()) {
+			return;
+		}
+
+		MBMessageFlag questionMessageFlag =
+			mbMessageFlagPersistence.fetchByU_M_F(
+				message.getUserId(), message.getMessageId(),
+				MBMessageFlagConstants.QUESTION_FLAG);
+
+		MBMessageFlag answerMessageFlag =
+			mbMessageFlagPersistence.fetchByU_M_F(
+				message.getUserId(), message.getMessageId(),
+				MBMessageFlagConstants.ANSWER_FLAG);
+
+		if ((questionMessageFlag == null) && (answerMessageFlag == null)) {
+			long messageFlagId = counterLocalService.increment();
+
+			questionMessageFlag = mbMessageFlagPersistence.create(
+				messageFlagId);
+
+			questionMessageFlag.setUserId(message.getUserId());
+			questionMessageFlag.setModifiedDate(new Date());
+			questionMessageFlag.setThreadId(message.getThreadId());
+			questionMessageFlag.setMessageId(message.getMessageId());
+			questionMessageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
+
+			mbMessageFlagPersistence.update(questionMessageFlag, false);
+		}
+	}
+
 	public void addReadFlags(long userId, MBThread thread)
 		throws PortalException, SystemException {
 
@@ -91,47 +126,11 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
-	public void addQuestionFlag(long messageId)
-		throws PortalException, SystemException {
-
-		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
-
-		if (!message.isRoot()) {
-			return;
-		}
-
-		MBMessageFlag questionMessageFlag =
-			mbMessageFlagPersistence.fetchByU_M_F(
-				message.getUserId(), message.getMessageId(),
-				MBMessageFlagConstants.QUESTION_FLAG);
-
-		MBMessageFlag answerMessageFlag =
-			mbMessageFlagPersistence.fetchByU_M_F(
-				message.getUserId(), message.getMessageId(),
-				MBMessageFlagConstants.ANSWER_FLAG);
-
-		if ((questionMessageFlag == null) && (answerMessageFlag == null)) {
-			long messageFlagId = counterLocalService.increment();
-
-			questionMessageFlag = mbMessageFlagPersistence.create(
-				messageFlagId);
-
-			questionMessageFlag.setUserId(message.getUserId());
-			questionMessageFlag.setModifiedDate(new Date());
-			questionMessageFlag.setThreadId(message.getThreadId());
-			questionMessageFlag.setMessageId(message.getMessageId());
-			questionMessageFlag.setFlag(MBMessageFlagConstants.QUESTION_FLAG);
-
-			mbMessageFlagPersistence.update(questionMessageFlag, false);
-		}
-	}
-
 	public void deleteAnswerFlags(long threadId, long messageId)
 		throws SystemException {
 
-		List<MBMessageFlag> messageFlags =
-			mbMessageFlagPersistence.findByM_F(
-				messageId, MBMessageFlagConstants.ANSWER_FLAG);
+		List<MBMessageFlag> messageFlags = mbMessageFlagPersistence.findByM_F(
+			messageId, MBMessageFlagConstants.ANSWER_FLAG);
 
 		for (MBMessageFlag messageFlag : messageFlags) {
 			deleteFlag(messageFlag);
@@ -168,8 +167,8 @@ public class MBMessageFlagLocalServiceImpl
 	}
 
 	public void deleteFlags(long messageId, int flag) throws SystemException {
-		List<MBMessageFlag> messageFlags =
-			mbMessageFlagPersistence.findByM_F(messageId, flag);
+		List<MBMessageFlag> messageFlags = mbMessageFlagPersistence.findByM_F(
+			messageId, flag);
 
 		for (MBMessageFlag messageFlag : messageFlags) {
 			deleteFlag(messageFlag);

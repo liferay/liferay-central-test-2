@@ -103,17 +103,6 @@ public class PortletPreferencesLocalServiceImpl
 		deletePortletPreferences(portletPreferences);
 	}
 
-	public void deletePortletPreferences(PortletPreferences portletPreferences)
-		throws SystemException {
-
-		long ownerId = portletPreferences.getOwnerId();
-		int ownerType = portletPreferences.getOwnerType();
-
-		portletPreferencesPersistence.remove(portletPreferences);
-
-		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId, ownerType);
-	}
-
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
 		throws SystemException {
 
@@ -131,6 +120,17 @@ public class PortletPreferencesLocalServiceImpl
 				ownerId, ownerType, plid, portletId);
 
 		deletePortletPreferences(portletPreferences);
+	}
+
+	public void deletePortletPreferences(PortletPreferences portletPreferences)
+		throws SystemException {
+
+		long ownerId = portletPreferences.getOwnerId();
+		int ownerType = portletPreferences.getOwnerType();
+
+		portletPreferencesPersistence.remove(portletPreferences);
+
+		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId, ownerType);
 	}
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(
@@ -151,13 +151,6 @@ public class PortletPreferencesLocalServiceImpl
 	}
 
 	public List<PortletPreferences> getPortletPreferences(
-			long plid, String portletId)
-		throws SystemException {
-
-		return portletPreferencesPersistence.findByP_P(plid, portletId);
-	}
-
-	public List<PortletPreferences> getPortletPreferences(
 			long ownerId, int ownerType, long plid)
 		throws SystemException {
 
@@ -173,22 +166,17 @@ public class PortletPreferencesLocalServiceImpl
 			ownerId, ownerType, plid, portletId);
 	}
 
+	public List<PortletPreferences> getPortletPreferences(
+			long plid, String portletId)
+		throws SystemException {
+
+		return portletPreferencesPersistence.findByP_P(plid, portletId);
+	}
+
 	public List<PortletPreferences> getPortletPreferencesByPlid(long plid)
 		throws SystemException {
 
 		return portletPreferencesPersistence.findByPlid(plid);
-	}
-
-	public javax.portlet.PortletPreferences getPreferences(
-			PortletPreferencesIds portletPreferencesIds)
-		throws SystemException {
-
-		return getPreferences(
-			portletPreferencesIds.getCompanyId(),
-			portletPreferencesIds.getOwnerId(),
-			portletPreferencesIds.getOwnerType(),
-			portletPreferencesIds.getPlid(),
-			portletPreferencesIds.getPortletId());
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(
@@ -242,6 +230,18 @@ public class PortletPreferencesLocalServiceImpl
 
 			LockRegistry.freeLock(groupName, key);
 		}
+	}
+
+	public javax.portlet.PortletPreferences getPreferences(
+			PortletPreferencesIds portletPreferencesIds)
+		throws SystemException {
+
+		return getPreferences(
+			portletPreferencesIds.getCompanyId(),
+			portletPreferencesIds.getOwnerId(),
+			portletPreferencesIds.getOwnerType(),
+			portletPreferencesIds.getPlid(),
+			portletPreferencesIds.getPortletId());
 	}
 
 	public PortletPreferences updatePreferences(

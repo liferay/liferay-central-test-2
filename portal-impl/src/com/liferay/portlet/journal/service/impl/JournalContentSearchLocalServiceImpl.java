@@ -156,7 +156,7 @@ public class JournalContentSearchLocalServiceImpl
 		throws SystemException {
 
 		List<JournalContentSearch> contentSearches =
-			journalContentSearchPersistence.findByG_P(groupId,privateLayout);
+			journalContentSearchPersistence.findByG_P(groupId, privateLayout);
 
 		for (JournalContentSearch contentSearch : contentSearches) {
 			deleteJournalContentSearch(contentSearch);

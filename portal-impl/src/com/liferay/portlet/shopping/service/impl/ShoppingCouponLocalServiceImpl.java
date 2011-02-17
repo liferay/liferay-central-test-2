@@ -130,9 +130,7 @@ public class ShoppingCouponLocalServiceImpl
 		deleteCoupon(coupon);
 	}
 
-	public void deleteCoupon(ShoppingCoupon coupon)
-		throws SystemException {
-
+	public void deleteCoupon(ShoppingCoupon coupon) throws SystemException {
 		shoppingCouponPersistence.remove(coupon);
 	}
 

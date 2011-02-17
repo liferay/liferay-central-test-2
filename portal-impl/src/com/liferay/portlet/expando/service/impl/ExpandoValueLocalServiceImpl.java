@@ -835,8 +835,7 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public void deleteRowValues(long rowId) throws SystemException {
-		List<ExpandoValue> values = expandoValuePersistence.findByRowId(
-			rowId);
+		List<ExpandoValue> values = expandoValuePersistence.findByRowId(rowId);
 
 		for (ExpandoValue value : values) {
 			deleteValue(value);
@@ -852,9 +851,7 @@ public class ExpandoValueLocalServiceImpl
 		}
 	}
 
-	public void deleteValue(ExpandoValue value)
-		throws SystemException {
-
+	public void deleteValue(ExpandoValue value) throws SystemException {
 		expandoValuePersistence.remove(value);
 	}
 

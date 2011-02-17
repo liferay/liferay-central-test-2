@@ -85,16 +85,6 @@ public class LayoutSetPrototypeLocalServiceImpl
 		return layoutSetPrototype;
 	}
 
-	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
-		throws PortalException, SystemException {
-
-		LayoutSetPrototype layoutSetPrototype =
-			layoutSetPrototypePersistence.findByPrimaryKey(
-				layoutSetPrototypeId);
-
-		deleteLayoutSetPrototype(layoutSetPrototype);
-	}
-
 	public void deleteLayoutSetPrototype(LayoutSetPrototype layoutSetPrototype)
 		throws PortalException, SystemException {
 
@@ -119,6 +109,16 @@ public class LayoutSetPrototypeLocalServiceImpl
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
+	}
+
+	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
+		throws PortalException, SystemException {
+
+		LayoutSetPrototype layoutSetPrototype =
+			layoutSetPrototypePersistence.findByPrimaryKey(
+				layoutSetPrototypeId);
+
+		deleteLayoutSetPrototype(layoutSetPrototype);
 	}
 
 	public List<LayoutSetPrototype> search(
