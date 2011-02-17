@@ -43,6 +43,7 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutModelImpl;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
@@ -265,7 +266,10 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(LayoutImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(LayoutImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(LayoutImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

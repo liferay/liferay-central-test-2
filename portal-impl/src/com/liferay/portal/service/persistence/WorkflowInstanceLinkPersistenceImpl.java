@@ -39,6 +39,7 @@ import com.liferay.portal.model.WorkflowInstanceLink;
 import com.liferay.portal.model.impl.WorkflowInstanceLinkImpl;
 import com.liferay.portal.model.impl.WorkflowInstanceLinkModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -127,7 +128,10 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(WorkflowInstanceLinkImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(WorkflowInstanceLinkImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(WorkflowInstanceLinkImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

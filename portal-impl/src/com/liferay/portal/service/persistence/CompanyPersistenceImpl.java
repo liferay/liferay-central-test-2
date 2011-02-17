@@ -40,6 +40,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.CompanyModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -148,7 +149,10 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(CompanyImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(CompanyImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(CompanyImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

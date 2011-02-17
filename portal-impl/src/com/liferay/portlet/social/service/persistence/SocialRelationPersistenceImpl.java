@@ -40,6 +40,7 @@ import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.model.SocialRelation;
@@ -241,7 +242,10 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(SocialRelationImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(SocialRelationImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(SocialRelationImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

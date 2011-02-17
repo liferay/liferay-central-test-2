@@ -39,6 +39,7 @@ import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.impl.PasswordTrackerImpl;
 import com.liferay.portal.model.impl.PasswordTrackerModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -123,7 +124,10 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(PasswordTrackerImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(PasswordTrackerImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(PasswordTrackerImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

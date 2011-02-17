@@ -40,6 +40,7 @@ import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.impl.ResourcePermissionImpl;
 import com.liferay.portal.model.impl.ResourcePermissionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -198,7 +199,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(ResourcePermissionImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(ResourcePermissionImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(ResourcePermissionImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

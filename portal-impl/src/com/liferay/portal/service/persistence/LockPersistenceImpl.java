@@ -42,6 +42,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.LockImpl;
 import com.liferay.portal.model.impl.LockModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -146,7 +147,10 @@ public class LockPersistenceImpl extends BasePersistenceImpl<Lock>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(LockImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(LockImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(LockImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

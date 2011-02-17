@@ -40,6 +40,7 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.model.impl.PortletPreferencesModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -177,7 +178,10 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(PortletPreferencesImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(PortletPreferencesImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(PortletPreferencesImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

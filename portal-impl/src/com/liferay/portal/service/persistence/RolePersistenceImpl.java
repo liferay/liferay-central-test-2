@@ -48,6 +48,7 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -185,7 +186,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(RoleImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(RoleImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(RoleImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

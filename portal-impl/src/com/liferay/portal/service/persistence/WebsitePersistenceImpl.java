@@ -39,6 +39,7 @@ import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.model.impl.WebsiteModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -177,7 +178,10 @@ public class WebsitePersistenceImpl extends BasePersistenceImpl<Website>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(WebsiteImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(WebsiteImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(WebsiteImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

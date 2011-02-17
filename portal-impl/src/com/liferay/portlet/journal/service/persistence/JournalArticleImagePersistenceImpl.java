@@ -40,6 +40,7 @@ import com.liferay.portal.service.persistence.ImagePersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.journal.NoSuchArticleImageException;
 import com.liferay.portlet.journal.model.JournalArticleImage;
@@ -189,7 +190,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(JournalArticleImageImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(JournalArticleImageImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(JournalArticleImageImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

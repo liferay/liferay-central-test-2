@@ -44,6 +44,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.asset.service.persistence.AssetTagPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
@@ -182,7 +183,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(MBCategoryImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(MBCategoryImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(MBCategoryImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

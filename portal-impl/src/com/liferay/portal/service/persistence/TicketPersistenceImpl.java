@@ -40,6 +40,7 @@ import com.liferay.portal.model.Ticket;
 import com.liferay.portal.model.impl.TicketImpl;
 import com.liferay.portal.model.impl.TicketModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -118,7 +119,10 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(TicketImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(TicketImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(TicketImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

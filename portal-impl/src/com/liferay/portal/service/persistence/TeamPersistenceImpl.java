@@ -48,6 +48,7 @@ import com.liferay.portal.model.impl.TeamImpl;
 import com.liferay.portal.model.impl.TeamModelImpl;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -141,7 +142,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(TeamImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(TeamImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(TeamImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -45,6 +45,7 @@ import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
@@ -203,7 +204,10 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl<IGFolder>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(IGFolderImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(IGFolderImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(IGFolderImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

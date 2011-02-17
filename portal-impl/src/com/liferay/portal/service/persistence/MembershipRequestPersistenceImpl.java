@@ -39,6 +39,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.MembershipRequestImpl;
 import com.liferay.portal.model.impl.MembershipRequestModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -149,7 +150,10 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(MembershipRequestImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(MembershipRequestImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(MembershipRequestImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

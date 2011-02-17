@@ -40,6 +40,7 @@ import com.liferay.portal.model.Shard;
 import com.liferay.portal.model.impl.ShardImpl;
 import com.liferay.portal.model.impl.ShardModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -131,7 +132,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(ShardImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(ShardImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(ShardImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

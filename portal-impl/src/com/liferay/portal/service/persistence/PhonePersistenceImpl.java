@@ -39,6 +39,7 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.model.impl.PhoneModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -176,7 +177,10 @@ public class PhonePersistenceImpl extends BasePersistenceImpl<Phone>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(PhoneImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(PhoneImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(PhoneImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

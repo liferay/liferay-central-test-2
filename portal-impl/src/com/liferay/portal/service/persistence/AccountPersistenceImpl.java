@@ -37,6 +37,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.model.impl.AccountModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -106,7 +107,10 @@ public class AccountPersistenceImpl extends BasePersistenceImpl<Account>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(AccountImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(AccountImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(AccountImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

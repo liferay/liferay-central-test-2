@@ -47,6 +47,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.GroupModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
@@ -263,7 +264,10 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(GroupImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(GroupImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(GroupImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

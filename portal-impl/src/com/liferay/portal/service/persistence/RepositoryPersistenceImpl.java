@@ -39,6 +39,7 @@ import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.impl.RepositoryImpl;
 import com.liferay.portal.model.impl.RepositoryModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 
@@ -122,7 +123,10 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(RepositoryImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(RepositoryImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(RepositoryImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

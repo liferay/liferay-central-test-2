@@ -39,6 +39,7 @@ import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.impl.UserTrackerImpl;
 import com.liferay.portal.model.impl.UserTrackerModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -144,7 +145,10 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(UserTrackerImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(UserTrackerImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(UserTrackerImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

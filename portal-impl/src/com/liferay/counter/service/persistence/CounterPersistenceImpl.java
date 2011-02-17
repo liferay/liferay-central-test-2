@@ -41,6 +41,7 @@ import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -110,7 +111,10 @@ public class CounterPersistenceImpl extends BasePersistenceImpl<Counter>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(CounterImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(CounterImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(CounterImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

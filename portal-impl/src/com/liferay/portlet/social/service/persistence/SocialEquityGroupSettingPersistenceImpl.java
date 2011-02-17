@@ -39,6 +39,7 @@ import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.social.NoSuchEquityGroupSettingException;
 import com.liferay.portlet.social.model.SocialEquityGroupSetting;
@@ -137,7 +138,10 @@ public class SocialEquityGroupSettingPersistenceImpl extends BasePersistenceImpl
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(SocialEquityGroupSettingImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(SocialEquityGroupSettingImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(SocialEquityGroupSettingImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

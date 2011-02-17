@@ -41,6 +41,7 @@ import com.liferay.portal.model.UserNotificationEvent;
 import com.liferay.portal.model.impl.UserNotificationEventImpl;
 import com.liferay.portal.model.impl.UserNotificationEventModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -138,7 +139,10 @@ public class UserNotificationEventPersistenceImpl extends BasePersistenceImpl<Us
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(UserNotificationEventImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(UserNotificationEventImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(UserNotificationEventImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

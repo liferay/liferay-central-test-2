@@ -40,6 +40,7 @@ import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.model.impl.ServiceComponentImpl;
 import com.liferay.portal.model.impl.ServiceComponentModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -138,7 +139,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(ServiceComponentImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(ServiceComponentImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(ServiceComponentImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

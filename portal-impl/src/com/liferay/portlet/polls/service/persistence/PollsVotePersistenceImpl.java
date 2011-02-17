@@ -38,6 +38,7 @@ import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.polls.NoSuchVoteException;
 import com.liferay.portlet.polls.model.PollsVote;
@@ -150,7 +151,10 @@ public class PollsVotePersistenceImpl extends BasePersistenceImpl<PollsVote>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(PollsVoteImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(PollsVoteImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(PollsVoteImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

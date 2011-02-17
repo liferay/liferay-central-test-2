@@ -42,6 +42,7 @@ import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
@@ -235,7 +236,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(JournalContentSearchImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(JournalContentSearchImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(JournalContentSearchImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

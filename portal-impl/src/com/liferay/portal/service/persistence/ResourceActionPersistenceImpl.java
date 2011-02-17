@@ -40,6 +40,7 @@ import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.impl.ResourceActionImpl;
 import com.liferay.portal.model.impl.ResourceActionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -136,7 +137,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(ResourceActionImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(ResourceActionImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(ResourceActionImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

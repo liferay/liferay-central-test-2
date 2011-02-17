@@ -39,6 +39,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.model.impl.ImageModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence;
 
@@ -121,7 +122,10 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(ImageImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(ImageImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(ImageImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

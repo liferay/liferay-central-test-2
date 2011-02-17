@@ -48,6 +48,7 @@ import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.model.impl.OrganizationModelImpl;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
@@ -174,7 +175,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(OrganizationImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(OrganizationImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(OrganizationImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -47,6 +47,7 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.model.impl.PermissionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -143,7 +144,10 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl<Permission>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(PermissionImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(PermissionImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(PermissionImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -43,6 +43,7 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -201,7 +202,10 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl<Journal
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(JournalStructureImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(JournalStructureImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(JournalStructureImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

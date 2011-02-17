@@ -39,6 +39,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.model.impl.EmailAddressModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -178,7 +179,10 @@ public class EmailAddressPersistenceImpl extends BasePersistenceImpl<EmailAddres
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(EmailAddressImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(EmailAddressImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(EmailAddressImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

@@ -40,6 +40,7 @@ import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.model.impl.ReleaseModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -118,7 +119,10 @@ public class ReleasePersistenceImpl extends BasePersistenceImpl<Release>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(ReleaseImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(ReleaseImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(ReleaseImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

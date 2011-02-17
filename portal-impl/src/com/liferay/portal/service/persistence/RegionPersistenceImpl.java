@@ -39,6 +39,7 @@ import com.liferay.portal.model.Region;
 import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.model.impl.RegionModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -145,7 +146,10 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(RegionImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(RegionImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(RegionImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);

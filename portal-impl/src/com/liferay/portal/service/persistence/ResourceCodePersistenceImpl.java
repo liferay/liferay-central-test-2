@@ -40,6 +40,7 @@ import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.impl.ResourceCodeImpl;
 import com.liferay.portal.model.impl.ResourceCodeModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.Serializable;
 
@@ -155,7 +156,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(ResourceCodeImpl.class.getName());
+		if (PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(ResourceCodeImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(ResourceCodeImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
