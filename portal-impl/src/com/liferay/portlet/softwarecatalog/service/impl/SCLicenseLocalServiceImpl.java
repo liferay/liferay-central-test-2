@@ -54,7 +54,15 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 	public void deleteLicense(long licenseId)
 		throws PortalException, SystemException {
 
-		scLicensePersistence.remove(licenseId);
+		SCLicense license = scLicensePersistence.findByPrimaryKey(licenseId);
+
+		deleteLicense(license);
+	}
+
+	public void deleteLicense(SCLicense license)
+		throws SystemException {
+
+		scLicensePersistence.remove(license);
 	}
 
 	public SCLicense getLicense(long licenseId)

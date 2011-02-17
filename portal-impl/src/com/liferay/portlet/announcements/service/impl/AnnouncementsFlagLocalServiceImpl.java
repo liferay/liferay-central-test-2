@@ -20,6 +20,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 import com.liferay.portlet.announcements.service.base.AnnouncementsFlagLocalServiceBaseImpl;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Thiago Moreira
@@ -48,11 +49,23 @@ public class AnnouncementsFlagLocalServiceImpl
 	public void deleteFlag(long flagId)
 		throws PortalException, SystemException {
 
-		announcementsFlagPersistence.remove(flagId);
+		AnnouncementsFlag flag = announcementsFlagPersistence.findByPrimaryKey(
+			flagId);
+
+		deleteFlag(flag);
+	}
+
+	public void deleteFlag(AnnouncementsFlag flag) throws SystemException {
+		announcementsFlagPersistence.remove(flag);
 	}
 
 	public void deleteFlags(long entryId) throws SystemException {
-		announcementsFlagPersistence.removeByEntryId(entryId);
+		List<AnnouncementsFlag> flags =
+			announcementsFlagPersistence.findByEntryId(entryId);
+
+		for (AnnouncementsFlag flag : flags){
+			deleteFlag(flag);
+		}
 	}
 
 	public AnnouncementsFlag getFlag(long userId, long entryId, int value)

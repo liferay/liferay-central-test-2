@@ -243,17 +243,17 @@ public class PasswordPolicyRelLocalServiceUtil {
 		getService().addPasswordPolicyRels(passwordPolicyId, className, classPKs);
 	}
 
-	public static void deletePasswordPolicyRel(java.lang.String className,
-		long classPK)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().deletePasswordPolicyRel(className, classPK);
-	}
-
 	public static void deletePasswordPolicyRel(long passwordPolicyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService()
 			.deletePasswordPolicyRel(passwordPolicyId, className, classPK);
+	}
+
+	public static void deletePasswordPolicyRel(java.lang.String className,
+		long classPK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deletePasswordPolicyRel(className, classPK);
 	}
 
 	public static void deletePasswordPolicyRels(long passwordPolicyId)

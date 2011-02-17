@@ -50,16 +50,24 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		return row;
 	}
 
-	public void deleteRow(long rowId)
+	public void deleteRow(ExpandoRow row)
 		throws PortalException, SystemException {
 
 		// Row
 
-		expandoRowPersistence.remove(rowId);
+		expandoRowPersistence.remove(row);
 
 		// Values
 
-		expandoValueLocalService.deleteRowValues(rowId);
+		expandoValueLocalService.deleteRowValues(row.getRowId());
+	}
+
+	public void deleteRow(long rowId)
+		throws PortalException, SystemException {
+
+		ExpandoRow row = expandoRowPersistence.findByPrimaryKey(rowId);
+
+		deleteRow(row);
 	}
 
 	public void deleteRow(long tableId, long classPK)
@@ -67,7 +75,7 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 
 		ExpandoRow row = expandoRowPersistence.findByT_C(tableId, classPK);
 
-		expandoRowLocalService.deleteRow(row.getRowId());
+		deleteRow(row);
 	}
 
 	public void deleteRow(

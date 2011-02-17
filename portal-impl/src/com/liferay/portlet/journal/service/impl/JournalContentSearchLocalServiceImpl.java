@@ -106,28 +106,61 @@ public class JournalContentSearchLocalServiceImpl
 			String portletId, String articleId)
 		throws PortalException, SystemException {
 
-		journalContentSearchPersistence.removeByG_P_L_P_A(
-			groupId, privateLayout, layoutId, portletId, articleId);
+		JournalContentSearch contentSearch =
+			journalContentSearchPersistence.findByG_P_L_P_A(
+				groupId, privateLayout, layoutId, portletId, articleId);
+
+		deleteJournalContentSearch(contentSearch);
 	}
 
 	public void deleteArticleContentSearches(long groupId, String articleId)
 		throws SystemException {
 
-		journalContentSearchPersistence.removeByG_A(groupId, articleId);
+		List<JournalContentSearch> contentSearches =
+			journalContentSearchPersistence.findByG_A(groupId, articleId);
+
+		for (JournalContentSearch contentSearch : contentSearches) {
+			deleteJournalContentSearch(contentSearch);
+		}
+	}
+
+	public void deleteJournalContentSearch(JournalContentSearch contentSearch)
+		throws SystemException {
+
+		journalContentSearchPersistence.remove(contentSearch);
+	}
+
+	public void deleteJournalContentSearch(long contentSearchId)
+		throws PortalException, SystemException {
+
+		JournalContentSearch contentSearch =
+			journalContentSearchPersistence.findByPrimaryKey(contentSearchId);
+
+		deleteJournalContentSearch(contentSearch);
 	}
 
 	public void deleteLayoutContentSearches(
 			long groupId, boolean privateLayout, long layoutId)
 		throws SystemException {
 
-		journalContentSearchPersistence.removeByG_P_L(
-			groupId, privateLayout, layoutId);
+		List<JournalContentSearch> contentSearches =
+			journalContentSearchPersistence.findByG_P_L(
+				groupId, privateLayout, layoutId);
+
+		for (JournalContentSearch contentSearch : contentSearches) {
+			deleteJournalContentSearch(contentSearch);
+		}
 	}
 
 	public void deleteOwnerContentSearches(long groupId, boolean privateLayout)
 		throws SystemException {
 
-		journalContentSearchPersistence.removeByG_P(groupId, privateLayout);
+		List<JournalContentSearch> contentSearches =
+			journalContentSearchPersistence.findByG_P(groupId,privateLayout);
+
+		for (JournalContentSearch contentSearch : contentSearches) {
+			deleteJournalContentSearch(contentSearch);
+		}
 	}
 
 	public List<JournalContentSearch> getArticleContentSearches()

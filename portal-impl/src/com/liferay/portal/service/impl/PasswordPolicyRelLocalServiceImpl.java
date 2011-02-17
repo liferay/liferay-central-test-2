@@ -21,6 +21,8 @@ import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.service.base.PasswordPolicyRelLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 
+import java.util.List;
+
 /**
  * @author Scott Lee
  */
@@ -73,16 +75,19 @@ public class PasswordPolicyRelLocalServiceImpl
 		}
 	}
 
-	public void deletePasswordPolicyRel(String className, long classPK)
-		throws SystemException {
+	public void deletePasswordPolicyRel(long passwordPolicyRelId)
+		throws PortalException, SystemException {
 
-		try {
-			long classNameId = PortalUtil.getClassNameId(className);
+		PasswordPolicyRel passwordPolicyRel =
+			passwordPolicyRelPersistence.findByPrimaryKey(passwordPolicyRelId);
 
-			passwordPolicyRelPersistence.removeByC_C(classNameId, classPK);
-		}
-		catch (NoSuchPasswordPolicyRelException nsppre) {
-		}
+		deletePasswordPolicyRel(passwordPolicyRel);
+	}
+
+	public void deletePasswordPolicyRel(PasswordPolicyRel passwordPolicyRel)
+			throws SystemException {
+
+		passwordPolicyRelPersistence.remove(passwordPolicyRel);
 	}
 
 	public void deletePasswordPolicyRel(
@@ -92,8 +97,26 @@ public class PasswordPolicyRelLocalServiceImpl
 		try {
 			long classNameId = PortalUtil.getClassNameId(className);
 
-			passwordPolicyRelPersistence.removeByP_C_C(
-				passwordPolicyId, classNameId, classPK);
+			PasswordPolicyRel passwordPolicyRel =
+				passwordPolicyRelPersistence.findByP_C_C(
+					passwordPolicyId, classNameId, classPK);
+
+			deletePasswordPolicyRel(passwordPolicyRel);
+		}
+		catch (NoSuchPasswordPolicyRelException nsppre) {
+		}
+	}
+
+	public void deletePasswordPolicyRel(String className, long classPK)
+		throws SystemException {
+
+		try {
+			long classNameId = PortalUtil.getClassNameId(className);
+
+			PasswordPolicyRel passwordPolicyRel =
+				passwordPolicyRelPersistence.findByC_C(classNameId, classPK);
+
+			deletePasswordPolicyRel(passwordPolicyRel);
 		}
 		catch (NoSuchPasswordPolicyRelException nsppre) {
 		}
@@ -102,7 +125,13 @@ public class PasswordPolicyRelLocalServiceImpl
 	public void deletePasswordPolicyRels(long passwordPolicyId)
 		throws SystemException {
 
-		passwordPolicyRelPersistence.removeByPasswordPolicyId(passwordPolicyId);
+		List<PasswordPolicyRel> passwordPolicyRels =
+			passwordPolicyRelPersistence.findByPasswordPolicyId(
+				passwordPolicyId);
+
+		for (PasswordPolicyRel passwordPolicyRel : passwordPolicyRels) {
+			deletePasswordPolicyRel(passwordPolicyRel);
+		}
 	}
 
 	public void deletePasswordPolicyRels(

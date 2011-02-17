@@ -134,7 +134,10 @@ public class SCFrameworkVersionLocalServiceImpl
 	public void deleteFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
 
-		scFrameworkVersionPersistence.remove(frameworkVersionId);
+		SCFrameworkVersion frameworkVersion =
+			scFrameworkVersionPersistence.findByPrimaryKey(frameworkVersionId);
+
+		deleteFrameworkVersion(frameworkVersion);
 	}
 
 	public void deleteFrameworkVersion(SCFrameworkVersion frameworkVersion)

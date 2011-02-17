@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -66,14 +67,39 @@ public class MBStatsUserLocalServiceImpl
 		return statsUser;
 	}
 
+	public void deleteStatsUser(long statsUserId)
+		throws PortalException,	SystemException {
+
+		MBStatsUser statsUser = mbStatsUserPersistence.findByPrimaryKey(
+			statsUserId);
+
+		deleteStatsUser(statsUser);
+	}
+
+	public void deleteStatsUser(MBStatsUser statsUser)
+			throws SystemException {
+
+		mbStatsUserPersistence.remove(statsUser);
+	}
+
 	public void deleteStatsUsersByGroupId(long groupId)
 		throws SystemException {
 
-		mbStatsUserPersistence.removeByGroupId(groupId);
+		List<MBStatsUser> statsUsers = mbStatsUserPersistence.findByGroupId(
+			groupId);
+
+		for (MBStatsUser statsUser : statsUsers) {
+			deleteStatsUser(statsUser);
+		}
 	}
 
 	public void deleteStatsUsersByUserId(long userId) throws SystemException {
-		mbStatsUserPersistence.removeByUserId(userId);
+		List<MBStatsUser> statsUsers = mbStatsUserPersistence.findByUserId(
+			userId);
+
+		for (MBStatsUser statsUser : statsUsers) {
+			deleteStatsUser(statsUser);
+		}
 	}
 
 	public long getMessageCountByUserId(long userId) throws SystemException {

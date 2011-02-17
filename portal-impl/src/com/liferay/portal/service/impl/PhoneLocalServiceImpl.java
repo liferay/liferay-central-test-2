@@ -77,7 +77,13 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 	public void deletePhone(long phoneId)
 		throws PortalException, SystemException {
 
-		phonePersistence.remove(phoneId);
+		Phone phone = phonePersistence.findByPrimaryKey(phoneId);
+
+		deletePhone(phone);
+	}
+
+	public void deletePhone(Phone phone) throws SystemException {
+		phonePersistence.remove(phone);
 	}
 
 	public void deletePhones(long companyId, String className, long classPK)
@@ -85,7 +91,12 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		phonePersistence.removeByC_C_C(companyId, classNameId, classPK);
+		List<Phone> phones = phonePersistence.findByC_C_C(
+			companyId, classNameId, classPK);
+
+		for (Phone phone : phones) {
+			deletePhone(phone);
+		}
 	}
 
 	public Phone getPhone(long phoneId)

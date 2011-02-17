@@ -69,7 +69,13 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 	public void deleteWebsite(long websiteId)
 		throws PortalException, SystemException {
 
-		websitePersistence.remove(websiteId);
+		Website website = websitePersistence.findByPrimaryKey(websiteId);
+
+		deleteWebsite(website);
+	}
+
+	public void deleteWebsite(Website website) throws SystemException {
+		websitePersistence.remove(website);
 	}
 
 	public void deleteWebsites(long companyId, String className, long classPK)
@@ -77,7 +83,12 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		websitePersistence.removeByC_C_C(companyId, classNameId, classPK);
+		List<Website> websites = websitePersistence.findByC_C_C(
+			companyId, classNameId, classPK);
+
+		for (Website website : websites) {
+			deleteWebsite(website);
+		}
 	}
 
 	public Website getWebsite(long websiteId)

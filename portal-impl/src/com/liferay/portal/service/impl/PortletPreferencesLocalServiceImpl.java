@@ -100,6 +100,12 @@ public class PortletPreferencesLocalServiceImpl
 			portletPreferencesPersistence.findByPrimaryKey(
 				portletPreferencesId);
 
+		deletePortletPreferences(portletPreferences);
+	}
+
+	public void deletePortletPreferences(PortletPreferences portletPreferences)
+		throws SystemException {
+
 		long ownerId = portletPreferences.getOwnerId();
 		int ownerType = portletPreferences.getOwnerType();
 
@@ -120,10 +126,11 @@ public class PortletPreferencesLocalServiceImpl
 			long ownerId, int ownerType, long plid, String portletId)
 		throws PortalException, SystemException {
 
-		portletPreferencesPersistence.removeByO_O_P_P(
-			ownerId, ownerType, plid, portletId);
+		PortletPreferences portletPreferences =
+			portletPreferencesPersistence.findByO_O_P_P(
+				ownerId, ownerType, plid, portletId);
 
-		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId, ownerType);
+		deletePortletPreferences(portletPreferences);
 	}
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(

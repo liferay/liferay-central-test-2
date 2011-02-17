@@ -129,8 +129,13 @@ public class MBMessageFlagLocalServiceImpl
 	public void deleteAnswerFlags(long threadId, long messageId)
 		throws SystemException {
 
-		mbMessageFlagPersistence.removeByM_F(
-			messageId, MBMessageFlagConstants.ANSWER_FLAG);
+		List<MBMessageFlag> messageFlags =
+			mbMessageFlagPersistence.findByM_F(
+				messageId, MBMessageFlagConstants.ANSWER_FLAG);
+
+		for (MBMessageFlag messageFlag : messageFlags) {
+			deleteFlag(messageFlag);
+		}
 
 		List<MBMessage> messages = mbMessagePersistence.findByT_P(
 			threadId, messageId);
@@ -140,12 +145,35 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
+	public void deleteFlag(long messageFlagId)
+		throws PortalException,	SystemException {
+
+		MBMessageFlag messageFlag =
+			mbMessageFlagPersistence.findByPrimaryKey(messageFlagId);
+
+		deleteFlag(messageFlag);
+	}
+
+	public void deleteFlag(MBMessageFlag messageFlag) throws SystemException {
+		mbMessageFlagPersistence.remove(messageFlag);
+	}
+
 	public void deleteFlags(long userId) throws SystemException {
-		mbMessageFlagPersistence.removeByUserId(userId);
+		List<MBMessageFlag> messageFlags =
+			mbMessageFlagPersistence.findByUserId(userId);
+
+		for (MBMessageFlag messageFlag : messageFlags) {
+			deleteFlag(messageFlag);
+		}
 	}
 
 	public void deleteFlags(long messageId, int flag) throws SystemException {
-		mbMessageFlagPersistence.removeByM_F(messageId, flag);
+		List<MBMessageFlag> messageFlags =
+			mbMessageFlagPersistence.findByM_F(messageId, flag);
+
+		for (MBMessageFlag messageFlag : messageFlags) {
+			deleteFlag(messageFlag);
+		}
 	}
 
 	public void deleteQuestionAndAnswerFlags(long threadId)
@@ -156,18 +184,33 @@ public class MBMessageFlagLocalServiceImpl
 
 		for (MBMessage message : messages) {
 			if (message.isRoot()) {
-				mbMessageFlagPersistence.removeByM_F(
-					message.getMessageId(),
-					MBMessageFlagConstants.QUESTION_FLAG);
+				List<MBMessageFlag> messageFlags =
+					mbMessageFlagPersistence.findByM_F(
+						message.getMessageId(),
+						MBMessageFlagConstants.QUESTION_FLAG);
+
+				for (MBMessageFlag messageFlag : messageFlags) {
+					deleteFlag(messageFlag);
+				}
 			}
 
-			mbMessageFlagPersistence.removeByM_F(
-				message.getMessageId(), MBMessageFlagConstants.ANSWER_FLAG);
+			List<MBMessageFlag> messageFlags =
+				mbMessageFlagPersistence.findByM_F(
+					message.getMessageId(), MBMessageFlagConstants.ANSWER_FLAG);
+
+			for (MBMessageFlag messageFlag : messageFlags) {
+				deleteFlag(messageFlag);
+			}
 		}
 	}
 
 	public void deleteThreadFlags(long threadId) throws SystemException {
-		mbMessageFlagPersistence.removeByThreadId(threadId);
+		List<MBMessageFlag> messageFlags =
+			mbMessageFlagPersistence.findByThreadId(threadId);
+
+		for (MBMessageFlag messageFlag : messageFlags) {
+			deleteFlag(messageFlag);
+		}
 	}
 
 	public MBMessageFlag getReadFlag(long userId, MBThread thread)

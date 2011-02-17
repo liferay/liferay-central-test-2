@@ -92,11 +92,17 @@ public class LayoutSetPrototypeLocalServiceImpl
 			layoutSetPrototypePersistence.findByPrimaryKey(
 				layoutSetPrototypeId);
 
+		deleteLayoutSetPrototype(layoutSetPrototype);
+	}
+
+	public void deleteLayoutSetPrototype(LayoutSetPrototype layoutSetPrototype)
+		throws PortalException, SystemException {
+
 		// Group
 
 		Group group = layoutSetPrototype.getGroup();
 
-		groupLocalService.deleteGroup(group.getGroupId());
+		groupLocalService.deleteGroup(group);
 
 		// Resources
 

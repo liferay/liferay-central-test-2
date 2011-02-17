@@ -69,10 +69,19 @@ public class EmailAddressLocalServiceImpl
 		return emailAddress;
 	}
 
+	public void deleteEmailAddress(EmailAddress emailAddress)
+		throws SystemException {
+
+		emailAddressPersistence.remove(emailAddress);
+	}
+
 	public void deleteEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 
-		emailAddressPersistence.remove(emailAddressId);
+		EmailAddress emailAddress = emailAddressPersistence.findByPrimaryKey(
+			emailAddressId);
+
+		deleteEmailAddress(emailAddress);
 	}
 
 	public void deleteEmailAddresses(
@@ -81,7 +90,12 @@ public class EmailAddressLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		emailAddressPersistence.removeByC_C_C(companyId, classNameId, classPK);
+		List<EmailAddress> emailAddresses = emailAddressPersistence.findByC_C_C(
+			companyId, classNameId, classPK);
+
+		for (EmailAddress emailAddress : emailAddresses) {
+			deleteEmailAddress(emailAddress);
+		}
 	}
 
 	public EmailAddress getEmailAddress(long emailAddressId)

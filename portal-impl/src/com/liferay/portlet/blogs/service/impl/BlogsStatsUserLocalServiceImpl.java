@@ -34,14 +34,39 @@ import java.util.List;
 public class BlogsStatsUserLocalServiceImpl
 	extends BlogsStatsUserLocalServiceBaseImpl {
 
+	public void deleteStatsUser(BlogsStatsUser blogsStatsUsers)
+		throws SystemException {
+
+		blogsStatsUserPersistence.remove(blogsStatsUsers);
+	}
+
+	public void deleteStatsUser(long statsUserId)
+		throws PortalException,	SystemException {
+
+		BlogsStatsUser blogsStatsUsers =
+			blogsStatsUserPersistence.findByPrimaryKey(statsUserId);
+
+		deleteStatsUser(blogsStatsUsers);
+	}
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws SystemException {
 
-		blogsStatsUserPersistence.removeByGroupId(groupId);
+		List<BlogsStatsUser> blogsStatsUsers =
+			blogsStatsUserPersistence.findByGroupId(groupId);
+
+		for (BlogsStatsUser blogsStatsUser : blogsStatsUsers) {
+			deleteStatsUser(blogsStatsUser);
+		}
 	}
 
 	public void deleteStatsUserByUserId(long userId) throws SystemException {
-		blogsStatsUserPersistence.removeByUserId(userId);
+		List<BlogsStatsUser> blogsStatsUsers =
+			blogsStatsUserPersistence.findByUserId(userId);
+
+		for (BlogsStatsUser blogsStatsUser : blogsStatsUsers) {
+			deleteStatsUser(blogsStatsUser);
+		}
 	}
 
 	public List<BlogsStatsUser> getCompanyStatsUsers(

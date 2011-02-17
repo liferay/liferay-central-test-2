@@ -826,27 +826,52 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public void deleteColumnValues(long columnId) throws SystemException {
-		expandoValuePersistence.removeByColumnId(columnId);
+		List<ExpandoValue> values = expandoValuePersistence.findByColumnId(
+			columnId);
+
+		for (ExpandoValue value : values) {
+			deleteValue(value);
+		}
 	}
 
 	public void deleteRowValues(long rowId) throws SystemException {
-		expandoValuePersistence.removeByRowId(rowId);
+		List<ExpandoValue> values = expandoValuePersistence.findByRowId(
+			rowId);
+
+		for (ExpandoValue value : values) {
+			deleteValue(value);
+		}
 	}
 
 	public void deleteTableValues(long tableId) throws SystemException {
-		expandoValuePersistence.removeByTableId(tableId);
+		List<ExpandoValue> values = expandoValuePersistence.findByTableId(
+			tableId);
+
+		for (ExpandoValue value : values) {
+			deleteValue(value);
+		}
+	}
+
+	public void deleteValue(ExpandoValue value)
+		throws SystemException {
+
+		expandoValuePersistence.remove(value);
 	}
 
 	public void deleteValue(long valueId)
 		throws PortalException, SystemException {
 
-		expandoValuePersistence.remove(valueId);
+		ExpandoValue value = expandoValuePersistence.findByPrimaryKey(valueId);
+
+		deleteValue(value);
 	}
 
 	public void deleteValue(long columnId, long rowId)
 		throws PortalException, SystemException {
 
-		expandoValuePersistence.removeByC_R(columnId, rowId);
+		ExpandoValue value = expandoValuePersistence.findByC_R(columnId, rowId);
+
+		deleteValue(value);
 	}
 
 	public void deleteValue(
@@ -890,7 +915,12 @@ public class ExpandoValueLocalServiceImpl
 	public void deleteValues(long classNameId, long classPK)
 		throws SystemException {
 
-		expandoValuePersistence.removeByC_C(classNameId, classPK);
+		List<ExpandoValue> values = expandoValuePersistence.findByC_C(
+			classNameId, classPK);
+
+		for (ExpandoValue value : values) {
+			deleteValue(value);
+		}
 	}
 
 	public void deleteValues(String className, long classPK)

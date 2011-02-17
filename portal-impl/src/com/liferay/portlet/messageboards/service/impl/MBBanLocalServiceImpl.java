@@ -82,18 +82,38 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		long groupId = serviceContext.getScopeGroupId();
 
 		try {
-			mbBanPersistence.removeByG_B(groupId, banUserId);
+			MBBan ban = mbBanPersistence.findByG_B(groupId, banUserId);
+
+			deleteBan(ban);
 		}
 		catch (NoSuchBanException nsbe) {
 		}
 	}
 
+	public void deleteBan(long banId) throws PortalException, SystemException {
+		MBBan ban = mbBanPersistence.findByPrimaryKey(banId);
+
+		deleteBan(ban);
+	}
+
+	public void deleteBan(MBBan ban) throws SystemException {
+		mbBanPersistence.remove(ban);
+	}
+
 	public void deleteBansByBanUserId(long banUserId) throws SystemException {
-		mbBanPersistence.removeByBanUserId(banUserId);
+		List<MBBan> bans = mbBanPersistence.findByBanUserId(banUserId);
+
+		for (MBBan ban : bans) {
+			deleteBan(ban);
+		}
 	}
 
 	public void deleteBansByGroupId(long groupId) throws SystemException {
-		mbBanPersistence.removeByGroupId(groupId);
+		List<MBBan> bans = mbBanPersistence.findByGroupId(groupId);
+
+		for (MBBan ban : bans) {
+			deleteBan(ban);
+		}
 	}
 
 	public void expireBans() throws SystemException {

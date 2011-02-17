@@ -259,10 +259,11 @@ public abstract class LayoutSetPrototypeLocalServiceBaseImpl
 	 * Deletes the layout set prototype from the database. Also notifies the appropriate model listeners.
 	 *
 	 * @param layoutSetPrototype the layout set prototype to delete
+	 * @throws PortalException
 	 * @throws SystemException if a system exception occurred
 	 */
 	public void deleteLayoutSetPrototype(LayoutSetPrototype layoutSetPrototype)
-		throws SystemException {
+		throws PortalException, SystemException {
 		layoutSetPrototypePersistence.remove(layoutSetPrototype);
 	}
 

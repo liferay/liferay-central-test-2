@@ -72,20 +72,37 @@ public class AnnouncementsDeliveryLocalServiceImpl
 	}
 
 	public void deleteDeliveries(long userId) throws SystemException {
-		announcementsDeliveryPersistence.removeByUserId(userId);
+		List<AnnouncementsDelivery> deliveries =
+			announcementsDeliveryPersistence.findByUserId(userId);
+
+		for (AnnouncementsDelivery delivery : deliveries) {
+			deleteDelivery(delivery);
+		}
+	}
+
+	public void deleteDelivery(AnnouncementsDelivery delivery)
+		throws SystemException {
+
+		announcementsDeliveryPersistence.remove(delivery);
 	}
 
 	public void deleteDelivery(long deliveryId)
 		throws PortalException, SystemException {
 
-		announcementsDeliveryPersistence.remove(deliveryId);
+		AnnouncementsDelivery delivery =
+			announcementsDeliveryPersistence.findByPrimaryKey(deliveryId);
+
+		deleteDelivery(delivery);
 	}
 
 	public void deleteDelivery(long userId, String type)
 		throws SystemException {
 
 		try {
-			announcementsDeliveryPersistence.removeByU_T(userId, type);
+			AnnouncementsDelivery delivery =
+				announcementsDeliveryPersistence.findByU_T(userId, type);
+
+			deleteDelivery(delivery);
 		}
 		catch (NoSuchDeliveryException nsde) {
 		}

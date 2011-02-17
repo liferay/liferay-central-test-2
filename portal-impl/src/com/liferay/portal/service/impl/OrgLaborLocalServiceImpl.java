@@ -65,7 +65,13 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 	public void deleteOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 
-		orgLaborPersistence.remove(orgLaborId);
+		OrgLabor orgLabor = orgLaborPersistence.findByPrimaryKey(orgLaborId);
+
+		deleteOrgLabor(orgLabor);
+	}
+
+	public void deleteOrgLabor(OrgLabor orgLabor) throws SystemException {
+		orgLaborPersistence.remove(orgLabor);
 	}
 
 	public OrgLabor getOrgLabor(long orgLaborId)

@@ -53,21 +53,39 @@ public class AssetLinkLocalServiceImpl extends AssetLinkLocalServiceBaseImpl {
 		return link;
 	}
 
+	public void deleteLink(AssetLink link)
+		throws SystemException {
+
+		assetLinkPersistence.remove(link);
+	}
+
 	public void deleteLink(long linkId)
 		throws PortalException, SystemException {
 
-		assetLinkPersistence.remove(linkId);
+		AssetLink link = assetLinkPersistence.findByPrimaryKey(linkId);
+
+		deleteLink(link);
 	}
 
 	public void deleteLinks(long entryId) throws SystemException {
-		assetLinkPersistence.removeByE1(entryId);
-		assetLinkPersistence.removeByE2(entryId);
+		for (AssetLink link : assetLinkPersistence.findByE1(entryId)) {
+			deleteLink(link);
+		}
+
+		for (AssetLink link : assetLinkPersistence.findByE2(entryId)) {
+			deleteLink(link);
+		}
 	}
 
 	public void deleteLinks(long entryId1, long entryId2)
 		throws SystemException {
 
-		assetLinkPersistence.removeByE_E(entryId1, entryId2);
+		List<AssetLink> links = assetLinkPersistence.findByE_E(
+			entryId1, entryId2);
+
+		for (AssetLink link : links){
+			deleteLink(link);
+		}
 	}
 
 	public List<AssetLink> getLinks(long entryId, int typeId)

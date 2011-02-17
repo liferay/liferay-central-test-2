@@ -15,6 +15,7 @@
 package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -67,14 +68,37 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		return fileRank;
 	}
 
+	public void deleteFileRank(DLFileRank dlFileRank) throws SystemException {
+		dlFileRankPersistence.remove(dlFileRank);
+	}
+
+	public void deleteFileRank(long fileRankId)
+		throws PortalException,	SystemException {
+
+		DLFileRank dlFileRank = dlFileRankPersistence.findByPrimaryKey(
+			fileRankId);
+
+		deleteFileRank(dlFileRank);
+	}
+
 	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws SystemException {
 
-		dlFileRankPersistence.removeByFileEntryId(fileEntryId);
+		List<DLFileRank> dlFileRanks =
+			dlFileRankPersistence.findByFileEntryId(fileEntryId);
+
+		for (DLFileRank dlFileRank : dlFileRanks) {
+			deleteFileRank(dlFileRank);
+		}
 	}
 
 	public void deleteFileRanksByUserId(long userId) throws SystemException {
-		dlFileRankPersistence.removeByUserId(userId);
+		List<DLFileRank> dlFileRanks =
+			dlFileRankPersistence.findByUserId(userId);
+
+		for (DLFileRank dlFileRank : dlFileRanks) {
+			deleteFileRank(dlFileRank);
+		}
 	}
 
 	public List<DLFileRank> getFileRanks(long groupId, long userId)

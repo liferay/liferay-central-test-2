@@ -82,17 +82,36 @@ public class SocialRequestLocalServiceImpl
 	public void deleteReceiverUserRequests(long receiverUserId)
 		throws SystemException {
 
-		socialRequestPersistence.removeByReceiverUserId(receiverUserId);
+		List<SocialRequest> requests =
+			socialRequestPersistence.findByReceiverUserId(receiverUserId);
+
+		for (SocialRequest request : requests){
+			deleteRequest(request);
+		}
 	}
 
 	public void deleteRequest(long requestId)
 		throws PortalException, SystemException {
 
-		socialRequestPersistence.remove(requestId);
+		SocialRequest request = socialRequestPersistence.findByPrimaryKey(
+			requestId);
+
+		deleteRequest(request);
+	}
+
+	public void deleteRequest(SocialRequest request)
+		throws SystemException {
+
+		socialRequestPersistence.remove(request);
 	}
 
 	public void deleteUserRequests(long userId) throws SystemException {
-		socialRequestPersistence.removeByUserId(userId);
+		List<SocialRequest> socialRequests =
+			socialRequestPersistence.findByUserId(userId);
+
+		for (SocialRequest request : socialRequests) {
+			deleteRequest(request);
+		}
 	}
 
 	public List<SocialRequest> getReceiverUserRequests(

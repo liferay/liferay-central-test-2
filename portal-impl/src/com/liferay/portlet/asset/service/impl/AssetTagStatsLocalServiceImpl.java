@@ -22,6 +22,8 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetTagStats;
 import com.liferay.portlet.asset.service.base.AssetTagStatsLocalServiceBaseImpl;
 
+import java.util.List;
+
 /**
  * @author Jorge Ferrer
  */
@@ -59,16 +61,41 @@ public class AssetTagStatsLocalServiceImpl
 		return tagStats;
 	}
 
+	public void deleteTagStats(AssetTagStats tagStats)
+		throws SystemException {
+
+		assetTagStatsPersistence.remove(tagStats);
+	}
+
+	public void deleteTagStats(long tagStatsId)
+		throws PortalException, SystemException {
+
+		AssetTagStats tagStats =
+			assetTagStatsPersistence.findByPrimaryKey(tagStatsId);
+
+		deleteTagStats(tagStats);
+	}
+
 	public void deleteTagStatsByClassNameId(long classNameId)
 		throws SystemException {
 
-		assetTagStatsPersistence.removeByClassNameId(classNameId);
+		List<AssetTagStats> tagStatsList =
+			assetTagStatsPersistence.findByClassNameId(classNameId);
+
+		for (AssetTagStats tagStats : tagStatsList) {
+			deleteTagStats(tagStats);
+		}
 	}
 
 	public void deleteTagStatsByTagId(long tagId)
 		throws SystemException {
 
-		assetTagStatsPersistence.removeByTagId(tagId);
+		List<AssetTagStats> tagStatsList = assetTagStatsPersistence.findByTagId(
+			tagId);
+
+		for (AssetTagStats tagStats : tagStatsList) {
+			deleteTagStats(tagStats);
+		}
 	}
 
 	public AssetTagStats getTagStats(long tagId, long classNameId)

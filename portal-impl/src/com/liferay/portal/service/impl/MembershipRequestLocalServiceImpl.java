@@ -88,20 +88,50 @@ public class MembershipRequestLocalServiceImpl
 			membershipRequestId);
 	}
 
+	public void deleteMembershipRequest(long membershipRequestId)
+			throws PortalException, SystemException {
+
+		MembershipRequest membershipRequest =
+			membershipRequestPersistence.findByPrimaryKey(membershipRequestId);
+
+		deleteMembershipRequest(membershipRequest);
+	}
+
+	public void deleteMembershipRequest(MembershipRequest membershipRequest)
+		throws SystemException {
+
+		membershipRequestPersistence.remove(membershipRequest);
+	}
+
 	public void deleteMembershipRequests(long groupId) throws SystemException {
-		membershipRequestPersistence.removeByGroupId(groupId);
+		List<MembershipRequest> membershipRequests =
+			membershipRequestPersistence.findByGroupId(groupId);
+
+		for (MembershipRequest membershipRequest : membershipRequests) {
+			deleteMembershipRequest(membershipRequest);
+		}
 	}
 
 	public void deleteMembershipRequests(long groupId, int statusId)
 		throws SystemException {
 
-		membershipRequestPersistence.removeByG_S(groupId, statusId);
+		List<MembershipRequest> membershipRequests =
+			membershipRequestPersistence.findByG_S(groupId, statusId);
+
+		for (MembershipRequest membershipRequest : membershipRequests) {
+			deleteMembershipRequest(membershipRequest);
+		}
 	}
 
 	public void deleteMembershipRequestsByUserId(long userId)
 		throws SystemException {
 
-		membershipRequestPersistence.removeByUserId(userId);
+		List<MembershipRequest> membershipRequests =
+			membershipRequestPersistence.findByUserId(userId);
+
+		for (MembershipRequest membershipRequest : membershipRequests) {
+			deleteMembershipRequest(membershipRequest);
+		}
 	}
 
 	public List<MembershipRequest> search(
