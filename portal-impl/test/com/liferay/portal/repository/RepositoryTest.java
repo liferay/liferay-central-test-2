@@ -16,15 +16,16 @@ package com.liferay.portal.repository;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.repository.LocalRepository;
-import com.liferay.portal.kernel.repository.RepositoryConstants;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.repository.liferayrepository.LiferayRepository;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.RepositoryServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -46,10 +47,12 @@ public class RepositoryTest extends TestCase {
 
 		long[] repositoryIds = new long[2];
 
+		long classNameId = PortalUtil.getClassNameId(LiferayRepository.class);
+
 		repositoryIds[0] = RepositoryServiceUtil.addRepository(
-			getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1",
-			"Test 1", PortletKeys.DOCUMENT_LIBRARY,
-			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties(),
+			getGroupId(), classNameId,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1", "Test 1",
+			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(),
 			new ServiceContext());
 
 		DLFolder dlFolder = DLRepositoryServiceUtil.addFolder(
@@ -58,9 +61,9 @@ public class RepositoryTest extends TestCase {
 			new ServiceContext());
 
 		repositoryIds[1] = RepositoryServiceUtil.addRepository(
-			getGroupId(), dlFolder.getFolderId(), "Test 2", "Test 2",
-			PortletKeys.DOCUMENT_LIBRARY, RepositoryConstants.TYPE_LIFERAY,
-			new UnicodeProperties(), new ServiceContext());
+			getGroupId(), classNameId, dlFolder.getFolderId(), "Test 2",
+			"Test 2", PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(),
+			new ServiceContext());
 
 		// Delete repositories
 
@@ -83,13 +86,15 @@ public class RepositoryTest extends TestCase {
 
 		// One default and one mapped repository
 
+		long classNameId = PortalUtil.getClassNameId(LiferayRepository.class);
+
 		long defaultRepositoryId = getGroupId();
 
 		long dlRepositoryId = RepositoryServiceUtil.addRepository(
-			getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test",
-			"Test", PortletKeys.DOCUMENT_LIBRARY,
-			RepositoryConstants.TYPE_LIFERAY, new UnicodeProperties(),
-			new ServiceContext());
+				getGroupId(), classNameId,
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1", "Test 1",
+				PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(),
+				new ServiceContext());
 
 		long[] repositoryIds = {defaultRepositoryId, dlRepositoryId};
 

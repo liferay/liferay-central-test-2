@@ -68,10 +68,10 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 		newRepository.setCompanyId(nextLong());
 		newRepository.setCreateDate(nextDate());
 		newRepository.setModifiedDate(nextDate());
+		newRepository.setClassNameId(nextLong());
 		newRepository.setName(randomString());
 		newRepository.setDescription(randomString());
 		newRepository.setPortletId(randomString());
-		newRepository.setType(nextInt());
 		newRepository.setTypeSettings(randomString());
 		newRepository.setDlFolderId(nextLong());
 
@@ -89,12 +89,13 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingRepository.getModifiedDate()),
 			Time.getShortTimestamp(newRepository.getModifiedDate()));
+		assertEquals(existingRepository.getClassNameId(),
+			newRepository.getClassNameId());
 		assertEquals(existingRepository.getName(), newRepository.getName());
 		assertEquals(existingRepository.getDescription(),
 			newRepository.getDescription());
 		assertEquals(existingRepository.getPortletId(),
 			newRepository.getPortletId());
-		assertEquals(existingRepository.getType(), newRepository.getType());
 		assertEquals(existingRepository.getTypeSettings(),
 			newRepository.getTypeSettings());
 		assertEquals(existingRepository.getDlFolderId(),
@@ -176,10 +177,10 @@ public class RepositoryPersistenceTest extends BasePersistenceTestCase {
 		repository.setCompanyId(nextLong());
 		repository.setCreateDate(nextDate());
 		repository.setModifiedDate(nextDate());
+		repository.setClassNameId(nextLong());
 		repository.setName(randomString());
 		repository.setDescription(randomString());
 		repository.setPortletId(randomString());
-		repository.setType(nextInt());
 		repository.setTypeSettings(randomString());
 		repository.setDlFolderId(nextLong());
 
