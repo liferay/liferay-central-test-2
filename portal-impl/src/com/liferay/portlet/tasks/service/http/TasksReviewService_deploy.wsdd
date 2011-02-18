@@ -2,13 +2,8 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portlet_Tasks_TasksReviewService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.tasks.portlet.liferay.com" />
-		<parameter name="wsdlServiceElement" value="TasksReviewServiceSoapService" />
-		<parameter name="schemaUnqualified" value="urn:http.service.tasks.portlet.liferay.com,http://model.tasks.portlet.liferay.com" />
-		<parameter name="wsdlServicePort" value="Portlet_Tasks_TasksReviewService" />
-		<parameter name="className" value="com.liferay.portlet.tasks.service.http.TasksReviewServiceSoap" />
-		<parameter name="wsdlPortType" value="TasksReviewServiceSoap" />
-		<parameter name="typeMappingVersion" value="1.2" />
+		<arrayMapping xmlns:ns="urn:http.service.tasks.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOfArrayOf_xsd_long" type="java:long[][]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.tasks.portlet.liferay.com" qname="ns:TasksReviewSoap" type="java:com.liferay.portlet.tasks.model.TasksReviewSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<operation xmlns:operNS="urn:http.service.tasks.portlet.liferay.com" xmlns:rtns="http://model.tasks.portlet.liferay.com" name="approveReview" qname="operNS:approveReview" returnQName="approveReviewReturn" returnType="rtns:TasksReviewSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="proposalId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="stage" type="tns:int"></parameter>
@@ -21,8 +16,13 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="proposalId" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.tasks.portlet.liferay.com" qname="userIdsPerStage" type="tns:ArrayOfArrayOf_xsd_long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="rejectReview updateReviews approveReview" />
-		<arrayMapping xmlns:ns="urn:http.service.tasks.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOfArrayOf_xsd_long" type="java:long[][]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
-		<typeMapping xmlns:ns="http://model.tasks.portlet.liferay.com" qname="ns:TasksReviewSoap" type="java:com.liferay.portlet.tasks.model.TasksReviewSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<parameter name="allowedMethods" value="approveReview rejectReview updateReviews" />
+		<parameter name="className" value="com.liferay.portlet.tasks.service.http.TasksReviewServiceSoap" />
+		<parameter name="schemaUnqualified" value="urn:http.service.tasks.portlet.liferay.com,http://model.tasks.portlet.liferay.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="TasksReviewServiceSoap" />
+		<parameter name="wsdlServiceElement" value="TasksReviewServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Portlet_Tasks_TasksReviewService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.tasks.portlet.liferay.com" />
 	</service>
 </deployment>

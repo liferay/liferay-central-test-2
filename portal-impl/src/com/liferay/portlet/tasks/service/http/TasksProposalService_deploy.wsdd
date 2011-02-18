@@ -2,13 +2,8 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portlet_Tasks_TasksProposalService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.tasks.portlet.liferay.com" />
-		<parameter name="wsdlServiceElement" value="TasksProposalServiceSoapService" />
-		<parameter name="schemaUnqualified" value="urn:http.service.tasks.portlet.liferay.com,http://model.tasks.portlet.liferay.com" />
-		<parameter name="wsdlServicePort" value="Portlet_Tasks_TasksProposalService" />
-		<parameter name="className" value="com.liferay.portlet.tasks.service.http.TasksProposalServiceSoap" />
-		<parameter name="wsdlPortType" value="TasksProposalServiceSoap" />
-		<parameter name="typeMappingVersion" value="1.2" />
+		<arrayMapping xmlns:ns="urn:http.service.tasks.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.tasks.portlet.liferay.com" qname="ns:TasksProposalSoap" type="java:com.liferay.portlet.tasks.model.TasksProposalSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<operation xmlns:operNS="urn:http.service.tasks.portlet.liferay.com" xmlns:rtns="http://model.tasks.portlet.liferay.com" name="addProposal" qname="operNS:addProposal" returnQName="addProposalReturn" returnType="rtns:TasksProposalSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -41,8 +36,13 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="dueDateHour" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="dueDateMinute" type="tns:int"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="updateProposal deleteProposal addProposal" />
-		<typeMapping xmlns:ns="http://model.tasks.portlet.liferay.com" qname="ns:TasksProposalSoap" type="java:com.liferay.portlet.tasks.model.TasksProposalSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
-		<arrayMapping xmlns:ns="urn:http.service.tasks.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<parameter name="allowedMethods" value="addProposal deleteProposal updateProposal" />
+		<parameter name="className" value="com.liferay.portlet.tasks.service.http.TasksProposalServiceSoap" />
+		<parameter name="schemaUnqualified" value="urn:http.service.tasks.portlet.liferay.com,http://model.tasks.portlet.liferay.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="TasksProposalServiceSoap" />
+		<parameter name="wsdlServiceElement" value="TasksProposalServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Portlet_Tasks_TasksProposalService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.tasks.portlet.liferay.com" />
 	</service>
 </deployment>

@@ -2,12 +2,6 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portlet_MB_MBMessageFlagService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.messageboards.portlet.liferay.com" />
-		<parameter name="wsdlServiceElement" value="MBMessageFlagServiceSoapService" />
-		<parameter name="wsdlServicePort" value="Portlet_MB_MBMessageFlagService" />
-		<parameter name="className" value="com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceSoap" />
-		<parameter name="wsdlPortType" value="MBMessageFlagServiceSoap" />
-		<parameter name="typeMappingVersion" value="1.2" />
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="addAnswerFlag" qname="operNS:addAnswerFlag" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
 		</operation>
@@ -15,5 +9,11 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="addAnswerFlag deleteAnswerFlag" />
+		<parameter name="className" value="com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="MBMessageFlagServiceSoap" />
+		<parameter name="wsdlServiceElement" value="MBMessageFlagServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Portlet_MB_MBMessageFlagService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.messageboards.portlet.liferay.com" />
 	</service>
 </deployment>
