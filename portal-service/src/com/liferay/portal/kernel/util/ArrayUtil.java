@@ -32,6 +32,117 @@ import java.util.TreeSet;
  */
 public class ArrayUtil {
 
+	public static boolean[] subArray(boolean[] array, int start, int end) {
+		if ((start < 0) || (end < 0) || ((end - start) < 0)) {
+			return array;
+		}
+
+		boolean[] newArray = new boolean[end - start];
+
+		System.arraycopy(array, start, newArray, 0, end - start);
+
+		return newArray;
+	}
+
+	public static byte[] subArray(byte[] array, int start, int end) {
+		if ((start < 0) || (end < 0) || ((end - start) < 0)) {
+			return array;
+		}
+
+		byte[] newArray = new byte[end - start];
+
+		System.arraycopy(array, start, newArray, 0, end - start);
+
+		return newArray;
+	}
+
+	public static char[] subArray(char[] array, int start, int end) {
+		if ((start < 0) || (end < 0) || ((end - start) < 0)) {
+			return array;
+		}
+
+		char[] newArray = new char[end - start];
+
+		System.arraycopy(array, start, newArray, 0, end - start);
+
+		return newArray;
+	}
+
+	public static double[] subArray(double[] array, int start, int end) {
+		if ((start < 0) || (end < 0) || ((end - start) < 0)) {
+			return array;
+		}
+
+		double[] newArray = new double[end - start];
+
+		System.arraycopy(array, start, newArray, 0, end - start);
+
+		return newArray;
+	}
+
+	public static float[] subArray(float[] array, int start, int end) {
+		if ((start < 0) || (end < 0) || ((end - start) < 0)) {
+			return array;
+		}
+
+		float[] newArray = new float[end - start];
+
+		System.arraycopy(array, start, newArray, 0, end - start);
+
+		return newArray;
+	}
+
+	public static int[] subArray(int[] array, int start, int end) {
+		if ((start < 0) || (end < 0) || ((end - start) < 0)) {
+			return array;
+		}
+
+		int[] newArray = new int[end - start];
+
+		System.arraycopy(array, start, newArray, 0, end - start);
+
+		return newArray;
+	}
+
+	public static long[] subArray(long[] array, int start, int end) {
+		if ((start < 0) || (end < 0) || ((end - start) < 0)) {
+			return array;
+		}
+
+		long[] newArray = new long[end - start];
+
+		System.arraycopy(array, start, newArray, 0, end - start);
+
+		return newArray;
+	}
+
+	public static short[] subArray(short[] array, int start, int end) {
+		if ((start < 0) || (end < 0) || ((end - start) < 0)) {
+			return array;
+		}
+
+		short[] newArray = new short[end - start];
+
+		System.arraycopy(array, start, newArray, 0, end - start);
+
+		return newArray;
+	}
+
+	public static <T> T[] subArray(T[] array, int start, int end) {
+		if ((start < 0) || (end < 0) || ((end - start) < 0)) {
+			return array;
+		}
+
+		Class<?> arrayClass = array.getClass();
+
+		T[] newArray = (T[])Array.newInstance(
+			arrayClass.getComponentType(), end - start);
+
+		System.arraycopy(array, start, newArray, 0, end - start);
+
+		return newArray;
+	}
+
 	public static boolean[] append(boolean[]... arrays) {
 		int length = 0;
 
