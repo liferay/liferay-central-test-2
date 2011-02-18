@@ -169,14 +169,22 @@ AUI().add(
 
 					cssClass = trigger.attr('className');
 
+					var align = 'auto';
 					var direction = 'auto';
 					var vertical = 'bottom';
 					var win = instance._window;
 
-					if (cssClass.indexOf('right') > -1) {
+					if (cssClass.indexOf('align-right') > -1) {
+						align = 'right';
+					}
+					else if (cssClass.indexOf('align-left') > -1) {
+						align = 'left';
+					}
+
+					if (cssClass.indexOf('direction-right') > -1) {
 						direction = 'right';
 					}
-					else if (cssClass.indexOf('left') > -1) {
+					else if (cssClass.indexOf('direction-left') > -1) {
 						direction = 'left';
 					}
 
@@ -197,14 +205,11 @@ AUI().add(
 					var windowHeight = windowRegion.height + scrollTop;
 					var windowWidth = windowRegion.width + scrollLeft;
 
-					if (direction == 'auto') {
+					if (align == 'auto') {
 						if (menuTop > windowHeight
 							&& !((offset.top - menuHeight) < 0)) {
 
 							offset.top -= menuHeight;
-						}
-						else {
-							offset.top += triggerHeight;
 						}
 
 						if ((menuLeft > windowWidth || ((menuWidth/2) + offset.left) > windowWidth/2)
@@ -212,12 +217,20 @@ AUI().add(
 
 							offset.left -= (menuWidth - triggerWidth);
 						}
+						else {
+							if (direction == 'left') {
+								offset.left -= menuWidth;
+							}
+							else {
+								offset.left += triggerWidth;
+							}
+						}
 					}
 					else {
-						if (direction == 'right') {
+						if (align == 'right') {
 							offset.left -= (menuWidth - 2);
 						}
-						else if (direction == 'left') {
+						else if (align == 'left') {
 							offset.left += (triggerWidth + 2);
 						}
 
