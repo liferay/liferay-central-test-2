@@ -31,7 +31,7 @@ public class FileImplExtractTest extends BaseTestCase {
 
 		text = extractText("test-2010.docx");
 
-		assertEquals("_GoBack\nExtract test.", text);
+		assertEquals("Extract test.", text);
 	}
 
 	public void testHtml() {
@@ -67,7 +67,7 @@ public class FileImplExtractTest extends BaseTestCase {
 	public void testPpt() {
 		String text = extractText("test-2010.pptx");
 
-		assertEquals("Extract \ntest.", text);
+		assertEquals("Extract test.", text);
 	}
 
 	public void testRtf() {
