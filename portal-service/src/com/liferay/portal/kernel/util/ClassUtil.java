@@ -131,7 +131,20 @@ public class ClassUtil {
 		String path = null;
 
 		try {
-			path = new URI(url.getPath()).getPath();
+			path = url.getPath();
+			URI uri = new URI(path);
+			String scheme = uri.getScheme();
+
+			if ((path.indexOf('!') != -1) &&
+				((scheme == null) || (scheme.length() <= 1))) {
+
+				if (!path.startsWith(StringPool.SLASH)) {
+					path = StringPool.SLASH + path;
+				}
+			}
+			else {
+				path = uri.getPath();
+			}
 		}
 		catch (URISyntaxException urise) {
 			path = url.getFile();
