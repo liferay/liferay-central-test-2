@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import java.io.File;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -131,6 +130,16 @@ public class Java2WsddTask {
 		return new String[] {deployContent, undeployContent};
 	}
 
+	private static void _addElements(
+		Element element, Map<String, Element> elements) {
+
+		for (Map.Entry<String, Element> entry : elements.entrySet()) {
+			Element childElement = entry.getValue();
+
+			element.add(childElement);
+		}
+	}
+
 	private static String _format(String content) throws Exception {
 		content = HtmlUtil.stripComments(content);
 
@@ -140,100 +149,75 @@ public class Java2WsddTask {
 
 		Element serviceElement = rootElement.element("service");
 
-		Map<String, Element> parameterElementsByName =
+		Map<String, Element> arrayMappingElements =
 			new TreeMap<String, Element>();
-
-		List<Element> parameterElements = serviceElement.elements("parameter");
-
-		for (Element parameterElement : parameterElements) {
-			parameterElement.detach();
-
-			String name = parameterElement.attributeValue("name");
-
-			if (name.equals("allowedMethods")) {
-				Attribute valueAttribute = parameterElement.attribute("value");
-
-				String[] allowedMethods = StringUtil.split(
-					valueAttribute.getValue(), " ");
-
-				Arrays.sort(allowedMethods);
-
-				valueAttribute.setValue(StringUtil.merge(allowedMethods, " "));
-			}
-
-			parameterElementsByName.put(name, parameterElement);
-		}
-
-		for (Map.Entry<String, Element> entry :
-				parameterElementsByName.entrySet()) {
-
-			Element parameterElement = entry.getValue();
-
-			serviceElement.add(parameterElement);
-		}
-
-		Map<String, Element> operationElementsById =
+		Map<String, Element> typeMappingElements =
 			new TreeMap<String, Element>();
+		Map<String, Element> operationElements = new TreeMap<String, Element>();
+		Map<String, Element> parameterElements = new TreeMap<String, Element>();
 
-		List<Element> operationElements = serviceElement.elements("operation");
+		for (Element element : serviceElement.elements()) {
+			String elementName = element.getName();
 
-		for (Element operationElement : operationElements) {
-			operationElement.detach();
+			if (elementName.equals("arrayMapping")) {
+				element.detach();
 
-			StringBundler sb = new StringBundler();
-
-			String name = operationElement.attributeValue("name");
-
-			sb.append(name);
-			sb.append("_METHOD_");
-
-			parameterElements = operationElement.elements("parameter");
-
-			for (Element parameterElement : parameterElements) {
-				String type = parameterElement.attributeValue("type");
-
-				sb.append(type);
-				sb.append("_PARAMETER_");
+				arrayMappingElements.put(element.toString(), element);
 			}
+			else if (elementName.equals("operation")) {
+				element.detach();
 
-			operationElementsById.put(sb.toString(), operationElement);
+				StringBundler sb = new StringBundler();
+
+				String name = element.attributeValue("name");
+
+				sb.append(name);
+				sb.append("_METHOD_");
+
+				for (Element parameterElement : element.elements("parameter")) {
+					String type = parameterElement.attributeValue("type");
+
+					sb.append(type);
+					sb.append("_PARAMETER_");
+				}
+
+				operationElements.put(sb.toString(), element);
+			}
+			else if (elementName.equals("parameter")) {
+				element.detach();
+
+				String name = element.attributeValue("name");
+
+				if (name.equals("allowedMethods")) {
+					Attribute valueAttribute = element.attribute("value");
+
+					String[] allowedMethods = StringUtil.split(
+						valueAttribute.getValue(), " ");
+
+					Arrays.sort(allowedMethods);
+
+					valueAttribute.setValue(
+						StringUtil.merge(allowedMethods, " "));
+				}
+
+				parameterElements.put(name, element);
+			}
+			else if (elementName.equals("typeMapping")) {
+				element.detach();
+
+				typeMappingElements.put(element.toString(), element);
+			}
 		}
 
-		for (Map.Entry<String, Element> entry :
-				operationElementsById.entrySet()) {
-
-			Element operationElement = entry.getValue();
-
-			serviceElement.add(operationElement);
-		}
+		_addElements(serviceElement, arrayMappingElements);
+		_addElements(serviceElement, typeMappingElements);
+		_addElements(serviceElement, operationElements);
+		_addElements(serviceElement, parameterElements);
 
 		content = StringUtil.replace(
 			document.formattedString(), "\"/>", "\" />");
 
-		content = _moveElement(content, "typeMapping");
-		content = _moveElement(content, "arrayMapping");
-
 		return content;
-	}
-
-	private static String _moveElement(String content, String name) {
-		int x = content.indexOf("<" + name);
-		int y = content.indexOf("</" + name + ">", x);
-
-		if (x == -1) {
-			return content;
-		}
-
-		x = x - 3;
-		y = y + name.length() + 3;
-
-		String element = content.substring(x, y);
-
-		content = content.substring(0, x) + content.substring(y);
-
-		x = content.lastIndexOf("</operation>") + 12;
-
-		return content.substring(0, x) + element + content.substring(x); 
 	}
 
 }
