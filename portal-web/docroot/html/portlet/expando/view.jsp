@@ -109,23 +109,3 @@ Collections.sort(customAttributesDisplays, new CustomAttributesDisplayComparator
 
 	<liferay-ui:search-iterator paginate="<%= false %>" />
 </liferay-ui:search-container>
-
-<%!
-private static final String[] _CUSTOM_ATTRIBUTES_RESOURCES = {
-	BlogsEntry.class.getName(),
-	BookmarksEntry.class.getName(),
-	BookmarksFolder.class.getName(),
-	CalEvent.class.getName(),
-	DLFileEntryConstants.getClassName(),
-	DLFolderConstants.getClassName(),
-	IGFolder.class.getName(),
-	IGImage.class.getName(),
-	JournalArticle.class.getName(),
-	Layout.class.getName(),
-	MBCategory.class.getName(),
-	MBMessage.class.getName(),
-	Organization.class.getName(),
-	User.class.getName(),
-	WikiPage.class.getName()
-};
-%>
