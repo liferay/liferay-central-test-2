@@ -15,36 +15,30 @@
 package com.liferay.portal.kernel.util;
 
 import javax.portlet.PortletRequest;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author Igor Spasic
+ * @author Brian Wing Shun Chan
+ */
 public class ContextPathUtil {
 
-	public static String getContextPath(ServletContext servletContext) {
-		String contextPath = GetterUtil.getString(
-			servletContext.getContextPath(), StringPool.BLANK);
-
-		if (contextPath.equals(StringPool.SLASH)) {
-			contextPath = StringPool.BLANK;
-		}
-
-		return contextPath;
-	}
-
-	public static String getContextPath(HttpServletRequest servletRequest) {
-		String contextPath = GetterUtil.getString(
-			servletRequest.getContextPath(), StringPool.BLANK);
-
-		if (contextPath.equals(StringPool.SLASH)) {
-			contextPath = StringPool.BLANK;
-		}
-
-		return contextPath;
+	public static String getContextPath(HttpServletRequest request) {
+		return getContextPath(request.getContextPath());
 	}
 
 	public static String getContextPath(PortletRequest portletRequest) {
-		String contextPath = GetterUtil.getString(
-			portletRequest.getContextPath(), StringPool.BLANK);
+		return getContextPath(portletRequest.getContextPath());
+	}
+
+	public static String getContextPath(ServletContext servletContext) {
+		return getContextPath(servletContext.getContextPath());
+	}
+
+	public static String getContextPath(String contextPath) {
+		contextPath = GetterUtil.getString(contextPath);
 
 		if (contextPath.equals(StringPool.SLASH)) {
 			contextPath = StringPool.BLANK;

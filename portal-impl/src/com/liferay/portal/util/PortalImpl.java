@@ -51,6 +51,7 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.DeterminateKeyGenerator;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -327,12 +328,8 @@ public class PortalImpl implements Portal {
 
 		_pathProxy = PropsUtil.get(PropsKeys.PORTAL_PROXY_PATH);
 
-		_pathContext = PropsUtil.get(PropsKeys.PORTAL_CTX);
-
-		if (_pathContext.equals(StringPool.SLASH)) {
-			_pathContext = StringPool.BLANK;
-		}
-
+		_pathContext = ContextPathUtil.getContextPath(
+			PropsUtil.get(PropsKeys.PORTAL_CTX));
 		_pathContext = _pathProxy.concat(_pathContext);
 
 		_pathFriendlyURLPrivateGroup =
