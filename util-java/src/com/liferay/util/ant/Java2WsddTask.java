@@ -19,12 +19,14 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.io.File;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -138,6 +140,23 @@ public class Java2WsddTask {
 
 		Element serviceElement = rootElement.element("service");
 
+		List<Element> parameterElements = serviceElement.elements("parameter");
+
+		for (Element parameterElement : parameterElements) {
+			String name = parameterElement.attributeValue("name");
+
+			if (name.equals("allowedMethods")) {
+				Attribute valueAttribute = parameterElement.attribute("value");
+
+				String[] allowedMethods = StringUtil.split(
+					valueAttribute.getValue(), " ");
+
+				Arrays.sort(allowedMethods);
+
+				valueAttribute.setValue(StringUtil.merge(allowedMethods, " "));
+			}
+		}
+
 		Map<String, Element> operationElementsById =
 			new TreeMap<String, Element>();
 
@@ -153,8 +172,7 @@ public class Java2WsddTask {
 			sb.append(name);
 			sb.append("_METHOD_");
 
-			List<Element> parameterElements = operationElement.elements(
-				"parameter");
+			parameterElements = operationElement.elements("parameter");
 
 			for (Element parameterElement : parameterElements) {
 				String type = parameterElement.attributeValue("type");
@@ -164,6 +182,26 @@ public class Java2WsddTask {
 			}
 
 			operationElementsById.put(sb.toString(), operationElement);
+		}
+
+		Element arrayMappingElement = serviceElement.element("arrayMapping");
+
+		if (arrayMappingElement != null) {
+			arrayMappingElement.detach();
+		}
+
+		Element typeMappingElement = serviceElement.element("typeMapping");
+
+		if (arrayMappingElement != null) {
+			typeMappingElement.detach();
+		}
+
+		if (arrayMappingElement != null) {
+			serviceElement.add(arrayMappingElement);
+		}
+
+		if (typeMappingElement != null) {
+			serviceElement.add(typeMappingElement);
 		}
 
 		for (Map.Entry<String, Element> entry :
