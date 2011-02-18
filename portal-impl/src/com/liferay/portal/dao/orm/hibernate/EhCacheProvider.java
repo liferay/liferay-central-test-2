@@ -15,6 +15,7 @@
 package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.cache.ehcache.EhcacheConfigurationUtil;
+import com.liferay.portal.spring.context.PortalContextLoaderLifecycleThreadLocal;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.Properties;
@@ -46,7 +47,7 @@ public class EhCacheProvider implements CacheProvider {
 		Ehcache ehcache = _cacheManager.getEhcache(name);
 
 		if (ehcache != null) {
-			return new EhCache(ehcache);
+			return new CacheWrapper(new EhCache(ehcache));
 		}
 
 		synchronized (_cacheManager) {
@@ -85,7 +86,8 @@ public class EhCacheProvider implements CacheProvider {
 	}
 
 	public void stop() {
-		if (_cacheManager == null) {
+		if (!PortalContextLoaderLifecycleThreadLocal.isContextDestroying() ||
+			(_cacheManager == null)) {
 			return;
 		}
 

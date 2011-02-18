@@ -84,7 +84,14 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		PortletContextBagPool.clear();
 		WebAppPool.clear();
 
-		super.contextInitialized(event);
+		PortalContextLoaderLifecycleThreadLocal.setContextInitializing(true);
+		try {
+			super.contextInitialized(event);
+		}
+		finally {
+			PortalContextLoaderLifecycleThreadLocal.setContextInitializing(
+				false);
+		}
 
 		FinderCacheUtil.clearCache();
 		FinderCacheUtil.clearLocalCache();
@@ -127,7 +134,13 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {
-		super.contextDestroyed(event);
+		PortalContextLoaderLifecycleThreadLocal.setContextDestroying(true);
+		try {
+			super.contextDestroyed(event);
+		}
+		finally {
+			PortalContextLoaderLifecycleThreadLocal.setContextDestroying(false);
+		}
 
 		ThreadLocalCacheManager.destroy();
 

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.spring.context.PortalContextLoaderLifecycleThreadLocal;
 
 import java.util.Map;
 
@@ -46,6 +47,11 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 	}
 
 	public void destroy() throws CacheException {
+		if (!PortalContextLoaderLifecycleThreadLocal.isContextDestroying() &&
+			_cache.getRegionName().startsWith("org.hibernate.cache")) {
+			return;
+		}
+
 		_cache.destroy();
 	}
 
