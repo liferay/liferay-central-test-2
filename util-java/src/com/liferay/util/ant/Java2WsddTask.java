@@ -210,31 +210,30 @@ public class Java2WsddTask {
 		content = StringUtil.replace(
 			document.formattedString(), "\"/>", "\" />");
 
-		int x = content.indexOf("<arrayMapping ");
-		int y = content.indexOf("</arrayMapping>", x);
-
-		if (x != -1) {
-			x = x - 3;
-			y = y + 15;
-
-			String arrayMapping = content.substring(x, y);
-
-			content = content.substring(0, x) + content.substring(y);
-
-			x = content.indexOf("<typeMapping ") - 3;
-			y = content.indexOf("</typeMapping>", x) + 14;
-
-			String typeMapping = content.substring(x, y);
-
-			content = content.substring(0, x) + content.substring(y);
-
-			x = content.lastIndexOf("</operation>") + 12;
-
-			content =
-				content.substring(0, x) + arrayMapping + typeMapping + content.substring(x); 
-		}
+		content = _moveElement(content, "typeMapping");
+		content = _moveElement(content, "arrayMapping");
 
 		return content;
+	}
+
+	private static String _moveElement(String content, String name) {
+		int x = content.indexOf("<" + name);
+		int y = content.indexOf("</" + name + ">", x);
+
+		if (x == -1) {
+			return content;
+		}
+
+		x = x - 3;
+		y = y + name.length() + 3;
+
+		String element = content.substring(x, y);
+
+		content = content.substring(0, x) + content.substring(y);
+
+		x = content.lastIndexOf("</operation>") + 12;
+
+		return content.substring(0, x) + element + content.substring(x); 
 	}
 
 }
