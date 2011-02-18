@@ -140,9 +140,14 @@ public class Java2WsddTask {
 
 		Element serviceElement = rootElement.element("service");
 
+		Map<String, Element> parameterElementsByName =
+			new TreeMap<String, Element>();
+
 		List<Element> parameterElements = serviceElement.elements("parameter");
 
 		for (Element parameterElement : parameterElements) {
+			parameterElement.detach();
+
 			String name = parameterElement.attributeValue("name");
 
 			if (name.equals("allowedMethods")) {
@@ -155,6 +160,16 @@ public class Java2WsddTask {
 
 				valueAttribute.setValue(StringUtil.merge(allowedMethods, " "));
 			}
+
+			parameterElementsByName.put(name, parameterElement);
+		}
+
+		for (Map.Entry<String, Element> entry :
+				parameterElementsByName.entrySet()) {
+
+			Element parameterElement = entry.getValue();
+
+			serviceElement.add(parameterElement);
 		}
 
 		Map<String, Element> operationElementsById =
@@ -184,26 +199,6 @@ public class Java2WsddTask {
 			operationElementsById.put(sb.toString(), operationElement);
 		}
 
-		Element arrayMappingElement = serviceElement.element("arrayMapping");
-
-		if (arrayMappingElement != null) {
-			arrayMappingElement.detach();
-		}
-
-		Element typeMappingElement = serviceElement.element("typeMapping");
-
-		if (arrayMappingElement != null) {
-			typeMappingElement.detach();
-		}
-
-		if (arrayMappingElement != null) {
-			serviceElement.add(arrayMappingElement);
-		}
-
-		if (typeMappingElement != null) {
-			serviceElement.add(typeMappingElement);
-		}
-
 		for (Map.Entry<String, Element> entry :
 				operationElementsById.entrySet()) {
 
@@ -214,6 +209,30 @@ public class Java2WsddTask {
 
 		content = StringUtil.replace(
 			document.formattedString(), "\"/>", "\" />");
+
+		int x = content.indexOf("<arrayMapping ");
+		int y = content.indexOf("</arrayMapping>", x);
+
+		if (x != -1) {
+			x = x - 3;
+			y = y + 15;
+
+			String arrayMapping = content.substring(x, y);
+
+			content = content.substring(0, x) + content.substring(y);
+
+			x = content.indexOf("<typeMapping ") - 3;
+			y = content.indexOf("</typeMapping>", x) + 14;
+
+			String typeMapping = content.substring(x, y);
+
+			content = content.substring(0, x) + content.substring(y);
+
+			x = content.lastIndexOf("</operation>") + 12;
+
+			content =
+				content.substring(0, x) + arrayMapping + typeMapping + content.substring(x); 
+		}
 
 		return content;
 	}
