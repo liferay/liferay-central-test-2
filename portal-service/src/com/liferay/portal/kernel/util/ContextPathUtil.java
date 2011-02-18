@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.util;
 
+import javax.portlet.PortletRequest;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
@@ -33,6 +34,17 @@ public class ContextPathUtil {
 	public static String getContextPath(HttpServletRequest servletRequest) {
 		String contextPath = GetterUtil.getString(
 			servletRequest.getContextPath(), StringPool.BLANK);
+
+		if (contextPath.equals(StringPool.SLASH)) {
+			contextPath = StringPool.BLANK;
+		}
+
+		return contextPath;
+	}
+
+	public static String getContextPath(PortletRequest portletRequest) {
+		String contextPath = GetterUtil.getString(
+			portletRequest.getContextPath(), StringPool.BLANK);
 
 		if (contextPath.equals(StringPool.SLASH)) {
 			contextPath = StringPool.BLANK;
