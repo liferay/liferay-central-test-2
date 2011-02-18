@@ -132,10 +132,12 @@ public class ClassUtil {
 
 		try {
 			path = url.getPath();
+
 			URI uri = new URI(path);
+
 			String scheme = uri.getScheme();
 
-			if ((path.indexOf('!') != -1) &&
+			if (path.contains(StringPool.EXCLAMATION) &&
 				((scheme == null) || (scheme.length() <= 1))) {
 
 				if (!path.startsWith(StringPool.SLASH)) {
