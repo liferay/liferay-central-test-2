@@ -14,6 +14,8 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.kernel.util.ContextPathUtil;
+
 import java.io.InputStream;
 
 import java.net.MalformedURLException;
@@ -57,7 +59,7 @@ public class LiferayServletContext implements ServletContext {
 	}
 
 	public String getContextPath() {
-		return _servletContext.getContextPath();
+		return ContextPathUtil.getContextPath(_servletContext);
 	}
 
 	public String getInitParameter(String name) {

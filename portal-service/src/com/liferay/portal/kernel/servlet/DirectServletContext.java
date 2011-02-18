@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ContextPathUtil;
 
 import java.io.InputStream;
 
@@ -52,7 +53,7 @@ public class DirectServletContext implements ServletContext {
 	}
 
 	public String getContextPath() {
-		return _servletContext.getContextPath();
+		return ContextPathUtil.getContextPath(_servletContext);
 	}
 
 	public String getInitParameter(String name) {
