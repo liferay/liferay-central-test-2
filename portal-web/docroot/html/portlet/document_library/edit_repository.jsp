@@ -69,9 +69,9 @@ long folderId = ParamUtil.getLong(request, "folderId");
 				<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, LiferayRepository.class.getName()) %>" value="<%= LiferayRepository.class.getName() %>" />
 			</aui:select>
 
-			<div id="settingsConfiguration"></div>
+			<div id="<portlet:namespace />settingsConfiguration"></div>
 
-			<div id="settingsParameters"></div>
+			<div id="<portlet:namespace />settingsParameters"></div>
 		</c:if>
 		<c:if test="<%= repository == null %>">
 			<aui:field-wrapper label="permissions">
@@ -89,7 +89,7 @@ long folderId = ParamUtil.getLong(request, "folderId");
 	</aui:fieldset>
 </aui:form>
 
-<div id="supportedSettings">
+<div class="aui-helper-hidden" id="<portlet:namespace />settingsSupported">
 
 	<%
 	for (String dlRepositoryImpl : PropsValues.DL_REPOSITORY_IMPL) {
@@ -98,8 +98,8 @@ long folderId = ParamUtil.getLong(request, "folderId");
 		long classNameId = PortalUtil.getClassNameId(dlRepositoryImpl);
 	%>
 
-		<div class="aui-helper-hidden" id="repository-<%= className %>-wrapper">
-			<aui:select cssClass="repository-configuration" id='<%= "repository-" + className %>' label="repository-configuration" name="settings--configuration-type--">
+		<div class="settings-configuration" id="<portlet:namespace />repository-<%= className %>-wrapper">
+			<aui:select id='<%= "repository-" + className %>' inputCssClass="repository-configuration" label="repository-configuration" name="settings--configuration-type--">
 
 				<%
 				String[] supportedConfigurations = RepositoryServiceUtil.getSupportedConfigurations(classNameId);
@@ -122,7 +122,7 @@ long folderId = ParamUtil.getLong(request, "folderId");
 		for (String supportedConfiguration : supportedConfigurations) {
 		%>
 
-			<div class="parameters aui-helper-hidden" id="<portlet:namespace />repository-<%= className %>-configuration-<%= supportedConfiguration %>">
+			<div class="settings-parameters" id="<portlet:namespace />repository-<%= className %>-configuration-<%= supportedConfiguration %>">
 
 				<%
 				String[] supportedParameters = RepositoryServiceUtil.getSupportedParameters(classNameId, supportedConfiguration);
@@ -145,80 +145,53 @@ long folderId = ParamUtil.getLong(request, "folderId");
 </div>
 
 <aui:script use="aui-base">
-	var supportedSettings = A.one('#supportedSettings');
-	var settingsConfiguration = A.one("#settingsConfiguration");
-	var settingsParameters = A.one("#settingsParameters");
+	var settingsSupported = A.one('#<portlet:namespace />settingsSupported');
+	var settingsConfiguration = A.one('#<portlet:namespace />settingsConfiguration');
+	var settingsParameters = A.one('#<portlet:namespace />settingsParameters');
 
-	var repositoryTypesSelector = A.one('#<portlet:namespace />repositoryTypes');
+	var showConfiguration = function(select) {
+		settingsSupported.append(settingsConfiguration.all('.settings-configuration'));
+		settingsSupported.append(settingsParameters.all('.settings-parameters'));
 
-	repositoryTypesSelector.on("change", showConfiguration);
+		var value = select.val();
+		var className = value.split('.').pop();
 
-	var configurationSelector = A.all('.repository-configuration')
+		var repositoryConfiguration = A.one('#<portlet:namespace />repository-' + className + '-wrapper');
+		var selectRepositoryConfiguration = A.one('#<portlet:namespace />repository-' + className);
 
-	configurationSelector.on("change", showParameters);
+		if (selectRepositoryConfiguration) {
+			var repositoryParameters = A.one('#<portlet:namespace />repository-' + className + '-configuration-' + selectRepositoryConfiguration.val());
 
-	if (repositoryTypesSelector) {
-		var value = repositoryTypesSelector.attr('value');
-
-		var className = value.substr(value.lastIndexOf('.') + 1);
-
-		var repositoryConfiguration = A.one('#repository-' + className + '-wrapper');
-		var repositoryConfigurationSelector = repositoryConfiguration.one('#<portlet:namespace />repository-' + className);
-
-		var repositoryParameters = A.one('#<portlet:namespace />repository-' + className + '-configuration-' + repositoryConfigurationSelector.attr('value'));
-
-		repositoryConfiguration.show();
-		repositoryParameters.show();
-
-		supportedSettings.appendChild(settingsConfiguration.get('children'));
-		supportedSettings.appendChild(settingsParameters.get('children'));
-
-		settingsConfiguration.appendChild(repositoryConfiguration);
-		settingsParameters.appendChild(repositoryParameters);
-	}
-
-	function showConfiguration(e) {
-		settingsConfiguration.get('children').hide();
-		settingsParameters.get('children').hide();
-
-		var value = e.target.attr('value');
-
-		var className = value.substr(value.lastIndexOf('.') + 1);
-
-		var repositoryConfiguration = A.one('#repository-' + className + '-wrapper');
-
-		if (repositoryConfiguration) {
-			repositoryConfiguration.show();
+			settingsConfiguration.append(repositoryConfiguration);
+			settingsParameters.append(repositoryParameters);
 		}
+	};
 
-		var repositoryConfigurationSelector = A.one('#<portlet:namespace />repository-' + className);
+	var showParameters = function(event) {
+		var select = event.currentTarget;
 
-		if (repositoryConfigurationSelector) {
-			var repositoryParameters = A.one('#<portlet:namespace />repository-' + className + '-configuration-' + repositoryConfigurationSelector.attr('value'));
+		var repositoryParameters = A.one('#' + select.attr('id') + '-configuration-' + select.val());
 
-			repositoryParameters.show();
+		var settingsParametersChildren = settingsParameters.all('.settings-parameters');
+
+		settingsSupported.append(settingsParametersChildren);
+		settingsParameters.append(repositoryParameters);
+	}
+
+	var selectRepositoryTypes = A.one('#<portlet:namespace />repositoryTypes');
+
+	selectRepositoryTypes.on(
+		'change',
+		function(event) {
+			showConfiguration(event.currentTarget);
 		}
+	);
 
-		supportedSettings.appendChild(settingsConfiguration.get('children'));
-		supportedSettings.appendChild(settingsParameters.get('children'));
+	showConfiguration(selectRepositoryTypes);
 
-		settingsConfiguration.appendChild(repositoryConfiguration);
-		settingsParameters.appendChild(repositoryParameters);
-	}
+	var selectConfiguration = A.all('.repository-configuration')
 
-	function showParameters(e) {
-		repositoryParameters = A.one('#' + e.target.attr('id') + '-configuration-' + e.target.attr('value'));
-
-		repositoryParameters.show();
-
-		var settingsParametersChildren = settingsParameters.get('children');
-
-		settingsParametersChildren.hide();
-
-		settingsParameters.appendChild(repositoryParameters);
-
-		supportedSettings.appendChild(settingsParametersChildren);
-	}
+	selectConfiguration.on('change', showParameters);
 </aui:script>
 
 <%
