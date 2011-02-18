@@ -170,6 +170,7 @@ AUI().add(
 
 				Layout.updateEmptyColumnsInfo();
 
+				Liferay.after('closePortlet', Layout._afterPortletClose);
 				Liferay.on('closePortlet', Layout._onPortletClose);
 			},
 
@@ -477,16 +478,21 @@ AUI().add(
 				);
 			},
 
-			_onPortletClose: function(event) {
-				var portlet = event.portlet;
-				var portletId = portlet.portletId;
-				var column = portlet.ancestor(Layout.options.dropContainer);
-
-				Layout.updateCurrentPortletInfo(portlet);
+			_afterPortletClose: function(event) {
+				var column = event.column;
 
 				if (column) {
 					Layout.syncEmptyColumnClassUI(column);
 				}
+			},
+
+			_onPortletClose: function(event) {
+				var portlet = event.portlet;
+				var column = portlet.ancestor(Layout.options.dropContainer);
+
+				Layout.updateCurrentPortletInfo(portlet);
+
+				event.column = column;
 			},
 
 			_onPortletDragEnd: function(event) {
