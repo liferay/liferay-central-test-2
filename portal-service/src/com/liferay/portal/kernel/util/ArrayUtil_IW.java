@@ -242,6 +242,42 @@ public class ArrayUtil_IW {
 		ArrayUtil.reverse(array);
 	}
 
+	public boolean[] subset(boolean[] array, int start, int end) {
+		return ArrayUtil.subset(array, start, end);
+	}
+
+	public byte[] subset(byte[] array, int start, int end) {
+		return ArrayUtil.subset(array, start, end);
+	}
+
+	public char[] subset(char[] array, int start, int end) {
+		return ArrayUtil.subset(array, start, end);
+	}
+
+	public double[] subset(double[] array, int start, int end) {
+		return ArrayUtil.subset(array, start, end);
+	}
+
+	public float[] subset(float[] array, int start, int end) {
+		return ArrayUtil.subset(array, start, end);
+	}
+
+	public int[] subset(int[] array, int start, int end) {
+		return ArrayUtil.subset(array, start, end);
+	}
+
+	public long[] subset(long[] array, int start, int end) {
+		return ArrayUtil.subset(array, start, end);
+	}
+
+	public short[] subset(short[] array, int start, int end) {
+		return ArrayUtil.subset(array, start, end);
+	}
+
+	public <T> T[] subset(T[] array, int start, int end) {
+		return ArrayUtil.subset(array, start, end);
+	}
+
 	public java.lang.Boolean[] toArray(boolean[] array) {
 		return ArrayUtil.toArray(array);
 	}
