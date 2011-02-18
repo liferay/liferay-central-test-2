@@ -77,6 +77,7 @@ String panelTreeKey = "panelSelectedPortletsPanelTree";
 	portletLister.setLayoutTypePortlet(layoutTypePortlet);
 	portletLister.setRootNodeName(LanguageUtil.get(pageContext, "application"));
 	portletLister.setServletContext(application);
+	portletLister.setIteratePortlets(true);
 	portletLister.setUser(user);
 
 	TreeView treeView = portletLister.getTreeView();
