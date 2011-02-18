@@ -98,7 +98,7 @@ public class NetlogonConnection {
 			new NetrServerAuthenticate3(
 				domainControllerName, ntlmServiceAccount.getAccountName(), 2,
 				ntlmServiceAccount.getComputerName(), clientCredential,
-				new byte[8], 0xFFFFFFFF);
+				new byte[8], 0x600FFFFF);
 
 		dcerpcHandle.sendrecv(netrServerAuthenticate3);
 
