@@ -628,7 +628,7 @@
 		<file-name>development/p6spy.jar</file-name>
 		<version>1.3</version>
 		<project-name>P6Spy</project-name>
-		<project-url>http://sourceforge.net/projects/p6spy/</project-url>
+		<project-url>http://sourceforge.net/projects/p6spy</project-url>
 		<licenses>
 			<license>
 				<license-name>P6Spy Software License 1.1</license-name>
@@ -991,7 +991,7 @@
 		<file-name>portal/aspectj-rt.jar</file-name>
 		<version>1.6.8</version>
 		<project-name>AspectJ</project-name>
-		<project-url>http://www.eclipse.org/aspectj/</project-url>
+		<project-url>http://www.eclipse.org/aspectj</project-url>
 		<licenses>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
@@ -1002,7 +1002,7 @@
 		<file-name>portal/aspectj-weaver.jar</file-name>
 		<version>1.6.8</version>
 		<project-name>AspectJ</project-name>
-		<project-url>http://www.eclipse.org/aspectj/</project-url>
+		<project-url>http://www.eclipse.org/aspectj</project-url>
 		<licenses>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
@@ -2292,7 +2292,7 @@
 		<file-name>portal/metadata-extractor.jar</file-name>
 		<version>2.4.0-beta-1</version>
 		<project-name>Metadata Extractor</project-name>
-		<project-url>http://www.drewnoakes.com/code/exif/</project-url>
+		<project-url>http://www.drewnoakes.com/code/exif</project-url>
 		<licenses>
 			<license>
 				<license-name>Public Domain</license-name>
