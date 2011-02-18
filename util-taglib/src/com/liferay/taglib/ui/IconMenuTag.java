@@ -74,7 +74,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 			if (!ServerDetector.isResin()) {
 				_align = "right";
 				_cssClass = null;
-				_direction = "right";
+				_direction = "left";
 				_endPage = null;
 				_icon = null;
 				_id = null;
