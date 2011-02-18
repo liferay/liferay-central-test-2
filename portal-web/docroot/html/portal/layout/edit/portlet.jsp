@@ -74,7 +74,7 @@
 	</aui:button-row>
 </div>
 
-<aui:script use="aui-dialog">
+<aui:script use="aui-button-item,aui-dialog">
 	var content = A.one('#<portlet:namespace />copyPortletsFromPage');
 
 	var popUp = null;
