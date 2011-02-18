@@ -21,29 +21,31 @@ import com.liferay.portal.kernel.util.InitialThreadLocal;
  */
 public class PortalContextLoaderLifecycleThreadLocal {
 
-	public static boolean isContextDestroying() {
-		return _contextDestroying.get();
+	public static boolean isDestroying() {
+		return _destroying.get();
 	}
 
-	public static boolean isContextInitializing() {
-		return _contextInitializing.get();
+	public static boolean isInitializing() {
+		return _initializing.get();
 	}
 
-	public static void setContextDestroying(boolean contextDestroying) {
-		_contextDestroying.set(contextDestroying);
+	public static void setDestroying(boolean destroying) {
+		_destroying.set(destroying);
 	}
 
-	public static void setContextInitializing(boolean contextInitializing) {
-		_contextInitializing.set(contextInitializing);
+	public static void setInitializing(boolean initializing) {
+		_initializing.set(initializing);
 	}
 
-	private static ThreadLocal<Boolean> _contextDestroying =
+	private static ThreadLocal<Boolean> _destroying =
 		new InitialThreadLocal<Boolean>(
 			PortalContextLoaderLifecycleThreadLocal.class +
-				"._contextDestroying", Boolean.FALSE);
-	private static ThreadLocal<Boolean> _contextInitializing =
+				"._destroying",
+			Boolean.FALSE);
+	private static ThreadLocal<Boolean> _initializing =
 		new InitialThreadLocal<Boolean>(
 			PortalContextLoaderLifecycleThreadLocal.class +
-				"._contextInitializing", Boolean.FALSE);
+				"._initializing",
+			Boolean.FALSE);
 
 }

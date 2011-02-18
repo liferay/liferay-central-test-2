@@ -86,8 +86,9 @@ public class EhCacheProvider implements CacheProvider {
 	}
 
 	public void stop() {
-		if (!PortalContextLoaderLifecycleThreadLocal.isContextDestroying() ||
+		if (!PortalContextLoaderLifecycleThreadLocal.isDestroying() ||
 			(_cacheManager == null)) {
+
 			return;
 		}
 
