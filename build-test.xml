@@ -2385,6 +2385,8 @@ file.
 
 		<ant dir="portal-service" target="test" inheritAll="false" />
 
+		<ant antfile="build-test-plugins.xml" target="test-create-bat" inheritAll="false" />
+
 		<ant antfile="build-test-plugins.xml" target="test-service-builder" inheritAll="false" />
 
 		<!--<ant dir="util-java" target="test" inheritAll="false" />-->

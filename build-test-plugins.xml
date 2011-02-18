@@ -3,6 +3,40 @@
 <project name="portal-test-plugins" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build-test.xml" />
 
+	<target name="create-bat-target">
+		<script classpathref="project.classpath" language="beanshell">
+			String createFolder = project.getProperty("create.folder");
+
+			if(createFolder.endsWith("s"))
+				createFolder = createFolder.substring(0, createFolder.length() - 1);
+
+			project.setProperty("create.folder.new", createFolder);
+		</script>
+
+		<if>
+			<available file="${lp.plugins.dir}/${create.folder}/test-${create.folder.new}" />
+			<then>
+				<delete dir="${lp.plugins.dir}/${create.folder}/test-${create.folder.new}" />
+			</then>
+		</if>
+
+		<exec dir="${lp.plugins.dir}/${create.folder}/" executable="create.bat" resolveexecutable="true">
+			<arg line="test test" />
+			<redirector outputproperty="create.output" />
+		</exec>
+
+		<echo>${create.output}</echo>
+
+		<delete dir="${lp.plugins.dir}/${create.folder}/test-${create.folder.new}" />
+
+		<if>
+			<contains string="${create.output}" substring="BUILD FAILED" />
+			<then>
+				<fail>Create ${created.folder} failed.</fail>
+			</then>
+		</if>
+	</target>
+
 	<target name="deploy-simple-server-plugins">
 		<if>
 			<not>
@@ -62,6 +96,12 @@ plugins.includes=${plugins.includes}</echo>
 				includes="${plugins.includes}"
 			/>
 		</copy>
+	</target>
+
+	<target name="test-create-bat">
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.tomcat.dir}</echo>
+
+		<foreach list="ext,hooks,layouttpl,portlets,themes" delimiter="," trim="true" param="create.folder" target="create-bat-target" />
 	</target>
 
 	<target name="test-service-builder">
