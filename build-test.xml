@@ -2214,7 +2214,7 @@ file.
 					value="theme.ids=${legacy.theme.ids}"
 				/>
 			</then>
-			<else>				
+			<else>
 				<replace
 					file="portal-web/test/test-portal-web.properties"
 					token="#theme.ids="
@@ -2385,8 +2385,7 @@ file.
 
 		<ant dir="portal-service" target="test" inheritAll="false" />
 
-		<ant antfile="build-test-plugins.xml" target="test-create-bat" inheritAll="false" />
-
+		<ant antfile="build-test-plugins.xml" target="test-create" inheritAll="false" />
 		<ant antfile="build-test-plugins.xml" target="test-service-builder" inheritAll="false" />
 
 		<!--<ant dir="util-java" target="test" inheritAll="false" />-->
