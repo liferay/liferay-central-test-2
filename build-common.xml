@@ -273,16 +273,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</then>
 	</if>
 
-	<if>
-		<equals arg1="${debug}" arg2="true" />
-		<then>
-			<property name="jpda" value="-agentlib:jdwp=transport=${transport},address=${address},server=${server},suspend=${suspend}" />
-		</then>
-		<else>
-			<property name="jpda" value="" />
-		</else>
-	</if>
-
 	<target name="compile">
 	</target>
 
@@ -353,7 +343,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			</not>
 			<then>
 				<junit dir="${project.dir}" fork="on" forkmode="once" printsummary="on">
-					<jvmarg line="${jpda}" />
+					<jvmarg line="${junit.debug.jpda}" />
 					<jvmarg value="-Xmx256m" />
 					<jvmarg value="-Duser.timezone=GMT" />
 					<jvmarg value="-Dexternal-properties=${test.properties}" />
@@ -367,7 +357,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			</then>
 			<else>
 				<junit dir="${project.dir}" fork="on" forkmode="once" printsummary="on">
-					<jvmarg line="${jpda}" />
+					<jvmarg line="${junit.debug.jpda}" />
 					<jvmarg value="-Xmx256m" />
 					<jvmarg value="-Duser.timezone=GMT" />
 					<jvmarg value="-Dexternal-properties=${test.properties}" />
@@ -384,7 +374,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 	<target name="test-class" depends="compile,compile-test" if="class">
 		<junit dir="${project.dir}" fork="on" forkmode="once" outputtoformatters="false" printsummary="on" showoutput="true">
-			<jvmarg line="${jpda}" />
+			<jvmarg line="${junit.debug.jpda}" />
 			<jvmarg value="-Xmx512m" />
 			<jvmarg value="-XX:MaxPermSize=128m" />
 			<jvmarg value="-Duser.timezone=GMT" />
