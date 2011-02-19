@@ -2183,7 +2183,7 @@ file.
 	<target name="run-selenium-test">
 		<if>
 			<and>
-			<equals arg1="${test.class}" arg2="PortalWebTestSuite" />
+				<equals arg1="${test.class}" arg2="PortalWebTestSuite" />
 				<not>
 					<equals arg1="${db.type}" arg2="hsql" />
 				</not>
