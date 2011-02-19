@@ -47,7 +47,7 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 	}
 
 	public void destroy() throws CacheException {
-		if (PortalContextLoaderLifecycleThreadLocal.isDestroying()) {
+		if (!PortalContextLoaderLifecycleThreadLocal.isDestroying()) {
 			String regionName = _cache.getRegionName();
 
 			if (regionName.startsWith("org.hibernate.cache")) {
