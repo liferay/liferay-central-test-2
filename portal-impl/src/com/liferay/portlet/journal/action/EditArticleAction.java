@@ -15,6 +15,7 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -72,6 +73,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -160,9 +162,9 @@ public class EditArticleAction extends PortletAction {
 					redirect = newRedirect;
 				}
 
-				if (!actionRequest.getWindowState().toString().equals(
-					"pop_up")) {
+				WindowState windowState = actionRequest.getWindowState();
 
+				if (!windowState.equals(LiferayWindowState.POP_UP)) {
 					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
