@@ -39,10 +39,6 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 		SingleVMPoolUtil.clear(CACHE_NAME);
 	}
 
-	public String getLanguage() {
-		return LANGUAGE;
-	}
-
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String script)
@@ -90,6 +86,10 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 		finally {
 			Context.exit();
 		}
+	}
+
+	public String getLanguage() {
+		return LANGUAGE;
 	}
 
 	protected Script getCompiledScript(String script) {

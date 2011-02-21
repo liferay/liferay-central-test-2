@@ -42,10 +42,6 @@ public class PythonExecutor extends BaseScriptingExecutor {
 		SingleVMPoolUtil.clear(CACHE_NAME);
 	}
 
-	public String getLanguage() {
-		return LANGUAGE;
-	}
-
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String script)
@@ -82,6 +78,10 @@ public class PythonExecutor extends BaseScriptingExecutor {
 		}
 
 		return outputObjects;
+	}
+
+	public String getLanguage() {
+		return LANGUAGE;
 	}
 
 	protected PyCode getCompiledScript(String script) {

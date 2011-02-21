@@ -31,10 +31,6 @@ public class BeanShellExecutor extends BaseScriptingExecutor {
 
 	public static final String LANGUAGE = "beanshell";
 
-	public String getLanguage() {
-		return LANGUAGE;
-	}
-
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String script)
@@ -69,6 +65,10 @@ public class BeanShellExecutor extends BaseScriptingExecutor {
 		catch (Exception e) {
 			throw new ScriptingException(e.getMessage(), e);
 		}
+	}
+
+	public String getLanguage() {
+		return LANGUAGE;
 	}
 
 }
