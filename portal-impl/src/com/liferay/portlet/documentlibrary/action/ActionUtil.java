@@ -23,6 +23,7 @@ import com.liferay.portal.service.RepositoryServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
@@ -40,12 +41,27 @@ public class ActionUtil {
 	public static void getFileEntry(HttpServletRequest request)
 		throws Exception {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long fileEntryId = ParamUtil.getLong(request, "fileEntryId");
+
+		long groupId = themeDisplay.getScopeGroupId();
+		long folderId = ParamUtil.getLong(request, "folderId");
+		String title = ParamUtil.getString(request, "title");
 
 		FileEntry fileEntry = null;
 
-		if (fileEntryId > 0) {
-			fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
+		try {
+			if (fileEntryId > 0) {
+				fileEntry = DLAppServiceUtil.getFileEntry(fileEntryId);
+			}
+			else {
+				fileEntry = DLAppServiceUtil.getFileEntry(
+					groupId, folderId, title);
+			}
+		}
+		catch (NoSuchFileEntryException nsfee) {
 		}
 
 		request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);

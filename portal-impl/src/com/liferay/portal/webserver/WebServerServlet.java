@@ -18,6 +18,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.freemarker.FreeMarkerContext;
 import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
+import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -99,7 +100,7 @@ public class WebServerServlet extends HttpServlet {
 				return true;
 			}
 			else if (Validator.isNumber(pathArray[0])) {
-				_getFileEntry(pathArray);
+				_checkFileEntry(pathArray);
 			}
 			else {
 				long groupId = _getGroupId(user.getCompanyId(), pathArray[0]);
@@ -122,7 +123,7 @@ public class WebServerServlet extends HttpServlet {
 							pathArray[i]
 						};
 
-						_getFileEntry(pathArray);
+						_checkFileEntry(pathArray);
 					}
 				}
 			}
@@ -197,7 +198,7 @@ public class WebServerServlet extends HttpServlet {
 		else if (pathArray.length == 2) {
 			long groupId = GetterUtil.getLong(pathArray[0]);
 
-			return DLAppServiceUtil.getFileEntryByUuidAndRepositoryId(
+			return DLAppServiceUtil.getFileEntryByUuidAndGroupId(
 				pathArray[1], groupId);
 		}
 		else {
@@ -477,7 +478,7 @@ public class WebServerServlet extends HttpServlet {
 		ServletResponseUtil.write(response, html);
 	}
 
-	private static FileEntry _getFileEntry(String[] pathArray)
+	private static void _checkFileEntry(String[] pathArray)
 		throws Exception {
 
 		if (pathArray.length == 1) {
@@ -486,22 +487,24 @@ public class WebServerServlet extends HttpServlet {
 			DLFileShortcut dlFileShortcut =
 				DLAppLocalServiceUtil.getFileShortcut(dlFileShortcutId);
 
-			return DLAppLocalServiceUtil.getFileEntry(
+			DLAppLocalServiceUtil.getFileEntry(
 				dlFileShortcut.getToFileEntryId());
 		}
 		else if (pathArray.length == 2) {
-			long groupId = GetterUtil.getLong(pathArray[0]);
 
-			return DLAppLocalServiceUtil.getFileEntryByUuidAndRepositoryId(
-				pathArray[1], groupId);
+			// Unable to check with UUID because of multiple repositories
+
 		}
 		else {
 			long groupId = GetterUtil.getLong(pathArray[0]);
 			long folderId = GetterUtil.getLong(pathArray[1]);
 			String fileName = HttpUtil.decodeURL(pathArray[2], true);
 
-			return DLAppLocalServiceUtil.getFileEntry(
-				groupId, folderId, fileName);
+			try {
+				DLAppLocalServiceUtil.getFileEntry(groupId, folderId, fileName);
+			}
+			catch (RepositoryException re) {
+			}
 		}
 	}
 

@@ -553,7 +553,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 					}
 
 					fileEntry =
-						DLAppLocalServiceUtil.getFileEntryByUuidAndRepositoryId(
+						DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
 							uuid, groupId);
 				}
 				else {

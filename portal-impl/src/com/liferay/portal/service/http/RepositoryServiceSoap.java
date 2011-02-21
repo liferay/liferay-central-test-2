@@ -76,10 +76,10 @@ public class RepositoryServiceSoap {
 		}
 	}
 
-	public static void deleteRepositories(long groupId)
+	public static void unmountRepositories(long groupId)
 		throws RemoteException {
 		try {
-			RepositoryServiceUtil.deleteRepositories(groupId);
+			RepositoryServiceUtil.unmountRepositories(groupId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -88,10 +88,10 @@ public class RepositoryServiceSoap {
 		}
 	}
 
-	public static void deleteRepository(long repositoryId, boolean purge)
+	public static void unmountRepository(long repositoryId)
 		throws RemoteException {
 		try {
-			RepositoryServiceUtil.deleteRepository(repositoryId, purge);
+			RepositoryServiceUtil.unmountRepository(repositoryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

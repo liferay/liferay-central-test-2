@@ -14,7 +14,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.NoSuchRepositoryEntryException;
+import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.NoSuchRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -45,7 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
-	public long addRepository(
+	public long mountRepository(
 			long groupId, long classNameId, long parentFolderId, String name,
 			String description, String portletId,
 			UnicodeProperties typeSettingsProperties,
@@ -75,6 +75,13 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		repositoryPersistence.update(repository, false);
 
+		try {
+			createRepositoryImpl(repositoryId, classNameId);
+		}
+		catch (Exception re) {
+			throw new InvalidRepositoryException(re);
+		}
+
 		return repositoryId;
 	}
 
@@ -94,10 +101,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	}
 
 	/**
-	 * This method deletes the all repositories associated with this group. It
-	 * purges the default repository but does not purge any mapped repositories.
+	 * This method unmounts all repositories associated with this group. It
+	 * deletes the data from only Liferay repositories.
 	 */
-	public void deleteRepositories(long groupId)
+	public void unmountRepositories(long groupId)
 		throws PortalException, SystemException {
 
 		// Mapped repositories
@@ -106,23 +113,14 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			groupId);
 
 		for (Repository repository : repositories) {
-			deleteRepository(repository.getRepositoryId(), false);
+			unmountRepository(repository.getRepositoryId());
 		}
 
-		// Default repository
-
-		deleteRepository(groupId, true);
+		dlRepositoryLocalService.deleteAll(groupId);
 	}
 
-	public void deleteRepository(long repositoryId, boolean purge)
+	public void unmountRepository(long repositoryId)
 		throws PortalException, SystemException {
-
-		if (purge) {
-			LocalRepository localRepositoryImpl = getLocalRepositoryImpl(
-				repositoryId);
-
-			localRepositoryImpl.deleteAll();
-		}
 
 		Repository repository = repositoryPersistence.fetchByPrimaryKey(
 			repositoryId);
@@ -143,7 +141,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	}
 
 	public LocalRepository getLocalRepositoryImpl(long repositoryId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		LocalRepository localRepositoryImpl =
 			_localRepositoriesByRepositoryId.get(repositoryId);
@@ -177,7 +175,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 	public LocalRepository getLocalRepositoryImpl(
 			long folderId, long fileEntryId, long fileVersionId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		long repositoryEntryId = getRepositoryEntryId(
 			folderId, fileEntryId, fileVersionId);
@@ -221,7 +219,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
 			long repositoryId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		com.liferay.portal.kernel.repository.Repository repositoryImpl =
 			_repositoriesByRepositoryId.get(repositoryId);
@@ -252,7 +250,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
 			long folderId, long fileEntryId, long fileVersionId)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		long repositoryEntryId = getRepositoryEntryId(
 			folderId, fileEntryId, fileVersionId);
@@ -362,45 +360,33 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	}
 
 	protected BaseRepositoryImpl createRepositoryImpl(long repositoryEntryId)
-		throws SystemException, RepositoryException {
+		throws PortalException, SystemException {
 
-		try {
-			RepositoryEntry repositoryEntry =
-				repositoryEntryPersistence.findByPrimaryKey(repositoryEntryId);
+		RepositoryEntry repositoryEntry =
+			repositoryEntryPersistence.findByPrimaryKey(repositoryEntryId);
 
-			long repositoryId = repositoryEntry.getRepositoryId();
+		long repositoryId = repositoryEntry.getRepositoryId();
 
-			return (BaseRepositoryImpl)getRepositoryImpl(repositoryId);
-		}
-		catch (NoSuchRepositoryEntryException nsree) {
-			throw new RepositoryException(nsree);
-		}
+		return (BaseRepositoryImpl)getRepositoryImpl(repositoryId);
 	}
 
 	protected BaseRepositoryImpl createRepositoryImpl(
 			long repositoryId, long classNameId)
-		throws RepositoryException {
+		throws PortalException, SystemException {
+
+		BaseRepositoryImpl baseRepositoryImpl = null;
+
+		Repository repository = null;
 
 		try {
-			Repository repository = getRepository(repositoryId);
+			repository = getRepository(repositoryId);
 
 			String repositoryImplClassName = PortalUtil.getClassName(
 				classNameId);
 
-			BaseRepositoryImpl baseRepositoryImpl =
+			baseRepositoryImpl =
 				(BaseRepositoryImpl)InstanceFactory.newInstance(
 					repositoryImplClassName);
-
-			baseRepositoryImpl.setCounterLocalService(counterLocalService);
-			baseRepositoryImpl.setDLAppHelperLocalService(
-				dlAppHelperLocalService);
-			baseRepositoryImpl.setRepositoryId(repositoryId);
-			baseRepositoryImpl.setTypeSettingsProperties(
-				repository.getTypeSettingsProperties());
-
-			baseRepositoryImpl.initRepository();
-
-			return baseRepositoryImpl;
 		}
 		catch (Exception e) {
 			throw new RepositoryException(
@@ -408,6 +394,19 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 					classNameId,
 				e);
 		}
+
+		baseRepositoryImpl.setCompanyId(repository.getCompanyId());
+		baseRepositoryImpl.setCounterLocalService(counterLocalService);
+		baseRepositoryImpl.setDLAppHelperLocalService(
+			dlAppHelperLocalService);
+		baseRepositoryImpl.setGroupId(repository.getGroupId());
+		baseRepositoryImpl.setRepositoryId(repositoryId);
+		baseRepositoryImpl.setTypeSettingsProperties(
+			repository.getTypeSettingsProperties());
+
+		baseRepositoryImpl.initRepository();
+
+		return baseRepositoryImpl;
 	}
 
 	protected long getDLFolderId(

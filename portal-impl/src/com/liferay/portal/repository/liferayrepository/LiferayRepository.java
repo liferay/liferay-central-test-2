@@ -100,21 +100,6 @@ public class LiferayRepository
 		return new LiferayFolder(dlFolder);
 	}
 
-	/**
-	 * This method cannot be called from LiferayRepository because the
-	 * permission checking on all the objects would be a major impact on
-	 * performance. Hence, this should only be called from
-	 * LiferayLocalRepository which assumes the user is an administrator of some
-	 * sort. If called, the method will throw an
-	 * <code>UnsupportedOperationException</code>.
-	 *
-	 * @see LiferayLocalRepository#deleteAll()
-	 */
-	@SuppressWarnings("unused")
-	public void deleteAll() throws PortalException, SystemException {
-		throw new UnsupportedOperationException();
-	}
-
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 

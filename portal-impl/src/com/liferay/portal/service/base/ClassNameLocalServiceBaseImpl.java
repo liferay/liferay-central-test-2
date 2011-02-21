@@ -29,6 +29,7 @@ import com.liferay.portal.service.AccountService;
 import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.AddressService;
 import com.liferay.portal.service.BrowserTrackerLocalService;
+import com.liferay.portal.service.CMISRepositoryLocalService;
 import com.liferay.portal.service.ClassNameLocalService;
 import com.liferay.portal.service.ClassNameService;
 import com.liferay.portal.service.ClusterGroupLocalService;
@@ -637,6 +638,25 @@ public abstract class ClassNameLocalServiceBaseImpl
 	public void setClusterGroupPersistence(
 		ClusterGroupPersistence clusterGroupPersistence) {
 		this.clusterGroupPersistence = clusterGroupPersistence;
+	}
+
+	/**
+	 * Gets the c m i s repository local service.
+	 *
+	 * @return the c m i s repository local service
+	 */
+	public CMISRepositoryLocalService getCMISRepositoryLocalService() {
+		return cmisRepositoryLocalService;
+	}
+
+	/**
+	 * Sets the c m i s repository local service.
+	 *
+	 * @param cmisRepositoryLocalService the c m i s repository local service
+	 */
+	public void setCMISRepositoryLocalService(
+		CMISRepositoryLocalService cmisRepositoryLocalService) {
+		this.cmisRepositoryLocalService = cmisRepositoryLocalService;
 	}
 
 	/**
@@ -3594,6 +3614,8 @@ public abstract class ClassNameLocalServiceBaseImpl
 	protected ClusterGroupLocalService clusterGroupLocalService;
 	@BeanReference(type = ClusterGroupPersistence.class)
 	protected ClusterGroupPersistence clusterGroupPersistence;
+	@BeanReference(type = CMISRepositoryLocalService.class)
+	protected CMISRepositoryLocalService cmisRepositoryLocalService;
 	@BeanReference(type = CompanyLocalService.class)
 	protected CompanyLocalService companyLocalService;
 	@BeanReference(type = CompanyService.class)

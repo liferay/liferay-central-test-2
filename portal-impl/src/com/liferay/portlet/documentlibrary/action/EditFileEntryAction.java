@@ -261,6 +261,7 @@ public class EditFileEntryAction extends PortletAction {
 			uploadRequest, "majorVersion");
 
 		File file = uploadRequest.getFile("file");
+		String contentType = uploadRequest.getContentType("file");
 
 		if (Validator.isNotNull(sourceFileName) && !file.exists()) {
 			file.createNewFile();
@@ -276,6 +277,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			String extension = FileUtil.getExtension(sourceFileName);
 
+			serviceContext.setAttribute("contentType", contentType);
 			serviceContext.setAttribute("sourceFileName", sourceFileName);
 			serviceContext.setAttribute("extension", extension);
 
@@ -293,6 +295,7 @@ public class EditFileEntryAction extends PortletAction {
 			if (Validator.isNotNull(sourceFileName)) {
 				String extension = FileUtil.getExtension(sourceFileName);
 
+				serviceContext.setAttribute("contentType", contentType);
 				serviceContext.setAttribute("sourceFileName", sourceFileName);
 				serviceContext.setAttribute("extension", extension);
 			}

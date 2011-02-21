@@ -47,8 +47,6 @@ public interface Repository {
 			String description, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
-	public void deleteAll() throws PortalException, SystemException;
-
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException;
 

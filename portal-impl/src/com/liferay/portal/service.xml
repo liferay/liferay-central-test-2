@@ -143,6 +143,7 @@
 		<column name="clusterNodeIds" type="String" />
 		<column name="wholeCluster" type="boolean" />
 	</entity>
+	<entity name="CMISRepository" local-service="true" remote-service="false" />
 	<entity name="Company" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -1396,11 +1397,15 @@
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLRepository" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 	</entity>
-	<entity name="RepositoryEntry" local-service="false" remote-service="false">
+	<entity name="RepositoryEntry" uuid="true" local-service="false" remote-service="false">
 
 		<!-- PK fields -->
 
 		<column name="repositoryEntryId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
 
 		<!-- Other fields -->
 
@@ -1412,7 +1417,7 @@
 		<finder name="RepositoryId" return-type="Collection">
 			<finder-column name="repositoryId" />
 		</finder>
-		<finder name="R_M" return-type="RepositoryEntry">
+		<finder name="R_M" return-type="RepositoryEntry" unique="true">
 			<finder-column name="repositoryId" />
 			<finder-column name="mappedId" />
 		</finder>
@@ -2309,6 +2314,7 @@
 		<exception>ExpiredLock</exception>
 		<exception>ImageType</exception>
 		<exception>InvalidLock</exception>
+		<exception>InvalidRepository</exception>
 		<exception>LARFile</exception>
 		<exception>LARType</exception>
 		<exception>LayoutSetBranchName</exception>

@@ -139,25 +139,9 @@ if (row == null) {
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= view ? redirectURL : redirect %>" />
 			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
-			<portlet:param name="purge" value="<%= Boolean.FALSE.toString() %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />
-
-		<portlet:renderURL var="redirectURL">
-			<portlet:param name="struts_action" value="/document_library/view" />
-			<portlet:param name="folderId" value="<%= String.valueOf(folder.getParentFolderId()) %>" />
-		</portlet:renderURL>
-
-		<portlet:actionURL var="deleteURL">
-			<portlet:param name="struts_action" value="/document_library/edit_repository" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= view ? redirectURL : redirect %>" />
-			<portlet:param name="repositoryId" value="<%= String.valueOf(repositoryId) %>" />
-			<portlet:param name="purge" value="<%= Boolean.TRUE.toString() %>" />
-		</portlet:actionURL>
-
-		<liferay-ui:icon image="delete" message="delete-content" url="<%= deleteURL %>" />
 	</c:if>
 
 	<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">

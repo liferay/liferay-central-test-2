@@ -63,6 +63,8 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 
 		RepositoryEntry newRepositoryEntry = _persistence.create(pk);
 
+		newRepositoryEntry.setUuid(randomString());
+		newRepositoryEntry.setGroupId(nextLong());
 		newRepositoryEntry.setRepositoryId(nextLong());
 		newRepositoryEntry.setMappedId(randomString());
 
@@ -70,8 +72,12 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 
 		RepositoryEntry existingRepositoryEntry = _persistence.findByPrimaryKey(newRepositoryEntry.getPrimaryKey());
 
+		assertEquals(existingRepositoryEntry.getUuid(),
+			newRepositoryEntry.getUuid());
 		assertEquals(existingRepositoryEntry.getRepositoryEntryId(),
 			newRepositoryEntry.getRepositoryEntryId());
+		assertEquals(existingRepositoryEntry.getGroupId(),
+			newRepositoryEntry.getGroupId());
 		assertEquals(existingRepositoryEntry.getRepositoryId(),
 			newRepositoryEntry.getRepositoryId());
 		assertEquals(existingRepositoryEntry.getMappedId(),
@@ -150,6 +156,8 @@ public class RepositoryEntryPersistenceTest extends BasePersistenceTestCase {
 
 		RepositoryEntry repositoryEntry = _persistence.create(pk);
 
+		repositoryEntry.setUuid(randomString());
+		repositoryEntry.setGroupId(nextLong());
 		repositoryEntry.setRepositoryId(nextLong());
 		repositoryEntry.setMappedId(randomString());
 

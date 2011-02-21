@@ -55,12 +55,40 @@ public abstract class BaseRepositoryImpl implements Repository {
 		deleteFolder(folder.getFolderId());
 	}
 
+	public long getCompanyId() {
+		return _companyId;
+	}
+
 	public long getGroupId() {
 		return _groupId;
 	}
 
 	public LocalRepository getLocalRepository() {
 		return _localRepository;
+	}
+
+	public Object[] getRepositoryEntryIds(String objectId)
+		throws SystemException {
+
+		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByR_M(
+			getRepositoryId(), objectId);
+
+		if (repositoryEntry == null) {
+			long repositoryEntryId = counterLocalService.increment();
+
+			repositoryEntry = RepositoryEntryUtil.create(repositoryEntryId);
+
+			repositoryEntry.setGroupId(getGroupId());
+			repositoryEntry.setRepositoryId(getRepositoryId());
+			repositoryEntry.setMappedId(objectId);
+
+			RepositoryEntryUtil.update(repositoryEntry, false);
+		}
+
+		return new Object[] {
+				repositoryEntry.getRepositoryEntryId(),
+				repositoryEntry.getUuid()
+			};
 	}
 
 	public List<FileEntry> getRepositoryFileEntries(
@@ -85,7 +113,12 @@ public abstract class BaseRepositoryImpl implements Repository {
 		return _typeSettingsProperties;
 	}
 
-	public abstract void initRepository() throws RepositoryException;
+	public abstract void initRepository()
+		throws PortalException, SystemException;
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
 
 	public void setCounterLocalService(
 		CounterLocalService counterLocalService) {
@@ -113,24 +146,6 @@ public abstract class BaseRepositoryImpl implements Repository {
 		_typeSettingsProperties = typeSettingsProperties;
 	}
 
-	public long toRepositoryEntryId(String objectId) throws SystemException {
-		RepositoryEntry repositoryEntry = RepositoryEntryUtil.fetchByR_M(
-			getRepositoryId(), objectId);
-
-		if (repositoryEntry == null) {
-			long repositoryEntryId = counterLocalService.increment();
-
-			repositoryEntry = RepositoryEntryUtil.create(repositoryEntryId);
-
-			repositoryEntry.setRepositoryId(getRepositoryId());
-			repositoryEntry.setMappedId(objectId);
-
-			RepositoryEntryUtil.update(repositoryEntry, false);
-		}
-
-		return repositoryEntry.getRepositoryEntryId();
-	}
-
 	public void unlockFolder(long parentFolderId, String title, String lockUuid)
 		throws PortalException, SystemException {
 
@@ -142,6 +157,7 @@ public abstract class BaseRepositoryImpl implements Repository {
 	protected CounterLocalService counterLocalService;
 	protected DLAppHelperLocalService dlAppHelperLocalService;
 
+	private long _companyId;
 	private long _groupId;
 	private LocalRepository _localRepository = new BaseLocalRepositoryImpl(
 		this);

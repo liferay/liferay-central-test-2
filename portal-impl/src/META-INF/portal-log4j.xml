@@ -320,6 +320,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.repository.cmis">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.sanitizer.DummySanitizerImpl">
 		<priority value="ERROR" />
 	</category>

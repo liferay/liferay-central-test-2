@@ -432,7 +432,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Document library
 
-		repositoryService.deleteRepositories(group.getGroupId());
+		repositoryService.unmountRepositories(group.getGroupId());
 
 		// Image gallery
 

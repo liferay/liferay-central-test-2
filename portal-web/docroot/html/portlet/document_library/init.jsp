@@ -25,6 +25,7 @@
 <%@ page import="com.liferay.documentlibrary.NoSuchFileException" %>
 <%@ page import="com.liferay.documentlibrary.SourceFileNameException" %>
 <%@ page import="com.liferay.portal.DuplicateLockException" %>
+<%@ page import="com.liferay.portal.InvalidRepositoryException" %>
 <%@ page import="com.liferay.portal.kernel.repository.model.FileEntry" %>
 <%@ page import="com.liferay.portal.kernel.repository.model.FileVersion" %>
 <%@ page import="com.liferay.portal.kernel.repository.model.Folder" %>

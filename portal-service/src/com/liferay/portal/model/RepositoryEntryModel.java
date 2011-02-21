@@ -56,6 +56,21 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	public void setPrimaryKey(long pk);
 
 	/**
+	 * Gets the uuid of this repository entry.
+	 *
+	 * @return the uuid of this repository entry
+	 */
+	@AutoEscape
+	public String getUuid();
+
+	/**
+	 * Sets the uuid of this repository entry.
+	 *
+	 * @param uuid the uuid of this repository entry
+	 */
+	public void setUuid(String uuid);
+
+	/**
 	 * Gets the repository entry ID of this repository entry.
 	 *
 	 * @return the repository entry ID of this repository entry
@@ -68,6 +83,20 @@ public interface RepositoryEntryModel extends BaseModel<RepositoryEntry> {
 	 * @param repositoryEntryId the repository entry ID of this repository entry
 	 */
 	public void setRepositoryEntryId(long repositoryEntryId);
+
+	/**
+	 * Gets the group ID of this repository entry.
+	 *
+	 * @return the group ID of this repository entry
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this repository entry.
+	 *
+	 * @param groupId the group ID of this repository entry
+	 */
+	public void setGroupId(long groupId);
 
 	/**
 	 * Gets the repository ID of this repository entry.

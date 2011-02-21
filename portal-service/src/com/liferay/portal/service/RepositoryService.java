@@ -41,7 +41,7 @@ public interface RepositoryService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link RepositoryServiceUtil} to access the repository remote service. Add custom service methods to {@link com.liferay.portal.service.impl.RepositoryServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public long addRepository(long groupId, long classNameId,
+	public long mountRepository(long groupId, long classNameId,
 		long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String portletId,
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
@@ -53,26 +53,28 @@ public interface RepositoryService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* This method deletes the all repositories associated with this group. It
-	* purges the default repository but does not purge any mapped repositories.
+	* This method unmounts all repositories associated with this group. It
+	* deletes the data from only Liferay repositories.
 	*/
-	public void deleteRepositories(long groupId)
+	public void unmountRepositories(long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteRepository(long repositoryId, boolean purge)
+	public void unmountRepository(long repositoryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.repository.LocalRepository getLocalRepositoryImpl(
 		long repositoryId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.repository.LocalRepository getLocalRepositoryImpl(
 		long folderId, long fileEntryId, long fileVersionId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.Repository getRepository(long repositoryId)
@@ -82,12 +84,14 @@ public interface RepositoryService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
 		long repositoryId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
 		long folderId, long fileEntryId, long fileVersionId)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.lang.String[] getSupportedConfigurations(long classNameId)

@@ -210,6 +210,13 @@ public class DLRepositoryLocalServiceUtil {
 		return getService().getFolder(groupId, parentFolderId, name);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolderByRepositoryId(
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFolderByRepositoryId(repositoryId);
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
 		long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException {

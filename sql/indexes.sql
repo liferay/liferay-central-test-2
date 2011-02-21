@@ -157,6 +157,7 @@ create index IX_F2EA1ACE on DLFolder (groupId);
 create index IX_49C37475 on DLFolder (groupId, parentFolderId);
 create unique index IX_902FD874 on DLFolder (groupId, parentFolderId, name);
 create index IX_51556082 on DLFolder (parentFolderId, name);
+create unique index IX_EE29C715 on DLFolder (repositoryId);
 create index IX_CBC408D8 on DLFolder (uuid_);
 create unique index IX_3CC1DED2 on DLFolder (uuid_, groupId);
 
@@ -464,6 +465,8 @@ create index IX_5253B1FA on Repository (groupId);
 
 create index IX_B7034B27 on RepositoryEntry (repositoryId);
 create index IX_9BDCF489 on RepositoryEntry (repositoryId, mappedId);
+create index IX_B9B1506 on RepositoryEntry (uuid_);
+create unique index IX_354AA664 on RepositoryEntry (uuid_, groupId);
 
 create index IX_81F2DB09 on ResourceAction (name);
 create unique index IX_EDB9986E on ResourceAction (name, actionId);

@@ -203,6 +203,13 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 		return _dlRepositoryLocalService.getFolder(groupId, parentFolderId, name);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFolder getFolderByRepositoryId(
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlRepositoryLocalService.getFolderByRepositoryId(repositoryId);
+	}
+
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
 		long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException {

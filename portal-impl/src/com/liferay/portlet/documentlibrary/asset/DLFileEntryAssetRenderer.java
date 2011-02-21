@@ -72,7 +72,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public long getGroupId() {
-		return _fileEntry.getRepositoryId();
+		return _fileEntry.getGroupId();
 	}
 
 	public String getSummary(Locale locale) {

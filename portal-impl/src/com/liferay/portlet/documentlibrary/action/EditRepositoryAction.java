@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
+import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.NoSuchRepositoryException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
@@ -60,13 +61,14 @@ public class EditRepositoryAction extends PortletAction {
 				updateRepository(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteRepository(actionRequest);
+				unmountRepository(actionRequest);
 			}
 
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchRepositoryException ||
+			if (e instanceof InvalidRepositoryException ||
+				e instanceof NoSuchRepositoryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
@@ -110,14 +112,12 @@ public class EditRepositoryAction extends PortletAction {
 				renderRequest, "portlet.document_library.edit_repository"));
 	}
 
-	protected void deleteRepository(ActionRequest actionRequest)
+	protected void unmountRepository(ActionRequest actionRequest)
 		throws Exception {
 
 		long repositoryId = ParamUtil.getLong(actionRequest, "repositoryId");
 
-		boolean purge = ParamUtil.getBoolean(actionRequest, "purge");
-
-		RepositoryServiceUtil.deleteRepository(repositoryId, purge);
+		RepositoryServiceUtil.unmountRepository(repositoryId);
 	}
 
 	protected void updateRepository(ActionRequest actionRequest)
@@ -148,7 +148,7 @@ public class EditRepositoryAction extends PortletAction {
 
 			// Add repository
 
-			RepositoryServiceUtil.addRepository(
+			RepositoryServiceUtil.mountRepository(
 				themeDisplay.getScopeGroupId(), classNameId, folderId, name,
 				description, portletDisplay.getId(), typeSettingsProperties,
 				serviceContext);

@@ -29,7 +29,9 @@ public class RepositoryEntrySoap implements Serializable {
 	public static RepositoryEntrySoap toSoapModel(RepositoryEntry model) {
 		RepositoryEntrySoap soapModel = new RepositoryEntrySoap();
 
+		soapModel.setUuid(model.getUuid());
 		soapModel.setRepositoryEntryId(model.getRepositoryEntryId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setRepositoryId(model.getRepositoryId());
 		soapModel.setMappedId(model.getMappedId());
 
@@ -86,12 +88,28 @@ public class RepositoryEntrySoap implements Serializable {
 		setRepositoryEntryId(pk);
 	}
 
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+	}
+
 	public long getRepositoryEntryId() {
 		return _repositoryEntryId;
 	}
 
 	public void setRepositoryEntryId(long repositoryEntryId) {
 		_repositoryEntryId = repositoryEntryId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getRepositoryId() {
@@ -110,7 +128,9 @@ public class RepositoryEntrySoap implements Serializable {
 		_mappedId = mappedId;
 	}
 
+	private String _uuid;
 	private long _repositoryEntryId;
+	private long _groupId;
 	private long _repositoryId;
 	private String _mappedId;
 }

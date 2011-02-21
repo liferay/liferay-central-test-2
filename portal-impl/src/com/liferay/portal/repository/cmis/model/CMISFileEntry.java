@@ -23,9 +23,15 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -36,7 +42,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Document;
 
 /**
@@ -45,11 +50,11 @@ import org.apache.chemistry.opencmis.client.api.Document;
 public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public CMISFileEntry(
-		CMISRepository cmisRepository, long repositoryId, long fileEntryId,
+		CMISRepository cmisRepository, String uuid, long fileEntryId,
 		Document document) {
 
 		_cmisRepository = cmisRepository;
-		_repositoryId = repositoryId;
+		_uuid = uuid;
 		_fileEntryId = fileEntryId;
 		_document = document;
 	}
@@ -66,7 +71,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public long getCompanyId() {
-		return 0;
+		return _cmisRepository.getCompanyId();
 	}
 
 	public InputStream getContentStream() {
@@ -89,10 +94,6 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _document.getCreationDate().getTime();
 	}
 
-	public String getDescription() {
-		return getDescription((CmisObject)getModel());
-	}
-
 	public String getExtension() {
 		return FileUtil.getExtension(getTitle());
 	}
@@ -102,8 +103,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public FileVersion getFileVersion() {
-		return new CMISFileVersion(
-			_cmisRepository, _repositoryId, _fileEntryId, _document);
+		return new CMISFileVersion(_cmisRepository, _fileEntryId, _document);
 	}
 
 	public FileVersion getFileVersion(String version)
@@ -113,7 +113,8 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 		for (Document document : versions) {
 			if (document.getVersionLabel().equals(version)) {
-				return _cmisRepository.toFileVersion(document);
+				return CMISRepositoryLocalServiceUtil.toFileVersion(
+					getRepositoryId(), document);
 			}
 		}
 
@@ -130,7 +131,9 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 		try {
 			for (Document document : documents) {
-				fileVersions.add(_cmisRepository.toFileVersion(document));
+				fileVersions.add(
+					CMISRepositoryLocalServiceUtil.toFileVersion(
+						getRepositoryId(), document));
 			}
 		}
 		catch (PortalException pe) {
@@ -142,7 +145,9 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public Folder getFolder() {
 		try {
-			return _cmisRepository.toFolder(_document.getParents().get(0));
+			return
+				CMISRepositoryLocalServiceUtil.toFolder(
+					getRepositoryId(), _document.getParents().get(0));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -156,17 +161,20 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public long getGroupId() {
-		return 0;
+		return _cmisRepository.getGroupId();
 	}
 
 	public String getIcon() {
-		return null;
+		return DLUtil.getFileIcon(getExtension());
 	}
 
 	public FileVersion getLatestFileVersion()
 		throws PortalException, SystemException {
 
-		return _cmisRepository.toFileVersion(_document);
+		List<Document> documents = _document.getAllVersions();
+
+		return CMISRepositoryLocalServiceUtil.toFileVersion(
+			getRepositoryId(), documents.get(0));
 	}
 
 	public Lock getLock() {
@@ -190,7 +198,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public long getRepositoryId() {
-		return _repositoryId;
+		return _cmisRepository.getRepositoryId();
 	}
 
 	public long getSize() {
@@ -202,7 +210,12 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public long getUserId() {
-		return 0;
+		try {
+			return UserLocalServiceUtil.getDefaultUserId(getCompanyId());
+		}
+		catch (Exception e) {
+			return 0;
+		}
 	}
 
 	public String getUserName() {
@@ -210,15 +223,22 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public String getUserUuid() {
-		return null;
+		try {
+			return UserLocalServiceUtil.getDefaultUser(
+				getCompanyId()).getUserUuid();
+		}
+		catch (Exception e) {
+			return StringPool.BLANK;
+		}
 	}
 
 	public String getUuid() {
-		return _document.getId();
+		return _uuid;
 	}
 
 	public String getVersion() {
-		return _document.getVersionLabel();
+		return GetterUtil.get(
+			_document.getVersionLabel(), DLFileEntryConstants.DEFAULT_VERSION);
 	}
 
 	public long getVersionUserId() {
@@ -230,7 +250,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public String getVersionUserUuid() {
-		return null;
+		return StringPool.BLANK;
 	}
 
 	public boolean hasLock() {
@@ -260,7 +280,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	private CMISRepository _cmisRepository;
 	private Document _document;
+	private String _uuid;
 	private long _fileEntryId;
-	private long _repositoryId;
 
 }

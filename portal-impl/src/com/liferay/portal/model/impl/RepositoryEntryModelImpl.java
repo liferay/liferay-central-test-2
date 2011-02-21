@@ -53,11 +53,13 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	 */
 	public static final String TABLE_NAME = "RepositoryEntry";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "uuid_", Types.VARCHAR },
 			{ "repositoryEntryId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
 			{ "repositoryId", Types.BIGINT },
 			{ "mappedId", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table RepositoryEntry (repositoryEntryId LONG not null primary key,repositoryId LONG,mappedId VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table RepositoryEntry (uuid_ VARCHAR(75) null,repositoryEntryId LONG not null primary key,groupId LONG,repositoryId LONG,mappedId VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table RepositoryEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -86,12 +88,51 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return new Long(_repositoryEntryId);
 	}
 
+	public String getUuid() {
+		if (_uuid == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _uuid;
+		}
+	}
+
+	public void setUuid(String uuid) {
+		if (_originalUuid == null) {
+			_originalUuid = _uuid;
+		}
+
+		_uuid = uuid;
+	}
+
+	public String getOriginalUuid() {
+		return GetterUtil.getString(_originalUuid);
+	}
+
 	public long getRepositoryEntryId() {
 		return _repositoryEntryId;
 	}
 
 	public void setRepositoryEntryId(long repositoryEntryId) {
 		_repositoryEntryId = repositoryEntryId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		if (!_setOriginalGroupId) {
+			_setOriginalGroupId = true;
+
+			_originalGroupId = _groupId;
+		}
+
+		_groupId = groupId;
+	}
+
+	public long getOriginalGroupId() {
+		return _originalGroupId;
 	}
 
 	public long getRepositoryId() {
@@ -160,11 +201,20 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	public Object clone() {
 		RepositoryEntryImpl repositoryEntryImpl = new RepositoryEntryImpl();
 
-		repositoryEntryImpl.setRepositoryEntryId(getRepositoryEntryId());
-
-		repositoryEntryImpl.setRepositoryId(getRepositoryId());
+		repositoryEntryImpl.setUuid(getUuid());
 
 		RepositoryEntryModelImpl repositoryEntryModelImpl = repositoryEntryImpl;
+
+		repositoryEntryModelImpl._originalUuid = repositoryEntryModelImpl._uuid;
+
+		repositoryEntryImpl.setRepositoryEntryId(getRepositoryEntryId());
+
+		repositoryEntryImpl.setGroupId(getGroupId());
+
+		repositoryEntryModelImpl._originalGroupId = repositoryEntryModelImpl._groupId;
+
+		repositoryEntryModelImpl._setOriginalGroupId = false;
+		repositoryEntryImpl.setRepositoryId(getRepositoryId());
 
 		repositoryEntryModelImpl._originalRepositoryId = repositoryEntryModelImpl._repositoryId;
 
@@ -219,10 +269,14 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	}
 
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(11);
 
-		sb.append("{repositoryEntryId=");
+		sb.append("{uuid=");
+		sb.append(getUuid());
+		sb.append(", repositoryEntryId=");
 		sb.append(getRepositoryEntryId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append(", repositoryId=");
 		sb.append(getRepositoryId());
 		sb.append(", mappedId=");
@@ -233,15 +287,23 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	}
 
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.portal.model.RepositoryEntry");
 		sb.append("</model-name>");
 
 		sb.append(
+			"<column><column-name>uuid</column-name><column-value><![CDATA[");
+		sb.append(getUuid());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>repositoryEntryId</column-name><column-value><![CDATA[");
 		sb.append(getRepositoryEntryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>repositoryId</column-name><column-value><![CDATA[");
@@ -257,7 +319,12 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 		return sb.toString();
 	}
 
+	private String _uuid;
+	private String _originalUuid;
 	private long _repositoryEntryId;
+	private long _groupId;
+	private long _originalGroupId;
+	private boolean _setOriginalGroupId;
 	private long _repositoryId;
 	private long _originalRepositoryId;
 	private boolean _setOriginalRepositoryId;

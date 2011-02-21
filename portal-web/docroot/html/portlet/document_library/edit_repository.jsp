@@ -54,7 +54,7 @@ long folderId = ParamUtil.getLong(request, "folderId");
 		<aui:input name="description" />
 
 		<c:if test="<%= repository == null %>">
-			<aui:select id="repositoryTypes" label="repository-type" name="classNameId">
+			<aui:select id="repositoryTypes" label="repository-type" name="className">
 
 				<%
 				for (String dlRepositoryImpl : PropsValues.DL_REPOSITORY_IMPL) {

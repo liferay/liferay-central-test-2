@@ -456,6 +456,12 @@ public class DLRepositoryLocalServiceImpl
 		return dlFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
 	}
 
+	public DLFolder getFolderByRepositoryId(long repositoryId)
+		throws PortalException, SystemException {
+
+		return dlFolderPersistence.findByRepositoryId(repositoryId);
+	}
+
 	public List<DLFolder> getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 

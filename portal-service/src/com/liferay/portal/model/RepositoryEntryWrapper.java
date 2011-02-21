@@ -47,6 +47,24 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 	}
 
 	/**
+	* Gets the uuid of this repository entry.
+	*
+	* @return the uuid of this repository entry
+	*/
+	public java.lang.String getUuid() {
+		return _repositoryEntry.getUuid();
+	}
+
+	/**
+	* Sets the uuid of this repository entry.
+	*
+	* @param uuid the uuid of this repository entry
+	*/
+	public void setUuid(java.lang.String uuid) {
+		_repositoryEntry.setUuid(uuid);
+	}
+
+	/**
 	* Gets the repository entry ID of this repository entry.
 	*
 	* @return the repository entry ID of this repository entry
@@ -62,6 +80,24 @@ public class RepositoryEntryWrapper implements RepositoryEntry {
 	*/
 	public void setRepositoryEntryId(long repositoryEntryId) {
 		_repositoryEntry.setRepositoryEntryId(repositoryEntryId);
+	}
+
+	/**
+	* Gets the group ID of this repository entry.
+	*
+	* @return the group ID of this repository entry
+	*/
+	public long getGroupId() {
+		return _repositoryEntry.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this repository entry.
+	*
+	* @param groupId the group ID of this repository entry
+	*/
+	public void setGroupId(long groupId) {
+		_repositoryEntry.setGroupId(groupId);
 	}
 
 	/**

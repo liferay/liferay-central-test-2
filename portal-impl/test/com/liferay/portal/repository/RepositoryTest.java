@@ -49,7 +49,7 @@ public class RepositoryTest extends TestCase {
 
 		long classNameId = PortalUtil.getClassNameId(LiferayRepository.class);
 
-		repositoryIds[0] = RepositoryServiceUtil.addRepository(
+		repositoryIds[0] = RepositoryServiceUtil.mountRepository(
 			getGroupId(), classNameId,
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1", "Test 1",
 			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(),
@@ -60,14 +60,14 @@ public class RepositoryTest extends TestCase {
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Folder", "Folder",
 			new ServiceContext());
 
-		repositoryIds[1] = RepositoryServiceUtil.addRepository(
+		repositoryIds[1] = RepositoryServiceUtil.mountRepository(
 			getGroupId(), classNameId, dlFolder.getFolderId(), "Test 2",
 			"Test 2", PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(),
 			new ServiceContext());
 
 		// Delete repositories
 
-		RepositoryServiceUtil.deleteRepositories(getGroupId());
+		RepositoryServiceUtil.unmountRepositories(getGroupId());
 
 		for (int i = 0; i < repositoryIds.length; i++) {
 			long repositoryId = repositoryIds[i];
@@ -90,7 +90,7 @@ public class RepositoryTest extends TestCase {
 
 		long classNameId = PortalUtil.getClassNameId(LiferayRepository.class);
 
-		long dlRepositoryId = RepositoryServiceUtil.addRepository(
+		long dlRepositoryId = RepositoryServiceUtil.mountRepository(
 			getGroupId(), classNameId,
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1", "Test 1",
 			PortletKeys.DOCUMENT_LIBRARY, new UnicodeProperties(),
@@ -154,7 +154,7 @@ public class RepositoryTest extends TestCase {
 
 		// Delete repositories
 
-		RepositoryServiceUtil.deleteRepositories(getGroupId());
+		RepositoryServiceUtil.unmountRepositories(getGroupId());
 
 		for (int i = 0; i < repositoryIds.length; i++) {
 			long repositoryId = repositoryIds[i];

@@ -9,6 +9,7 @@
 
 		<reference package-path="com.liferay.portal" entity="Lock" />
 		<reference package-path="com.liferay.portal" entity="Repository" />
+		<reference package-path="com.liferay.portal" entity="RepositoryEntry" />
 
 		<!-- Transactions -->
 
@@ -301,14 +302,17 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 		</finder>
-		<finder name="P_N" return-type="Collection">
-			<finder-column name="parentFolderId" />
-			<finder-column name="name" />
-		</finder>
 		<finder name="G_P_N" return-type="DLFolder" unique="true">
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 			<finder-column name="name" />
+		</finder>
+		<finder name="P_N" return-type="Collection">
+			<finder-column name="parentFolderId" />
+			<finder-column name="name" />
+		</finder>
+		<finder name="RepositoryId" return-type="DLFolder" unique="true">
+			<finder-column name="repositoryId" />
 		</finder>
 	</entity>
 	<entity name="DLRepository" local-service="true" remote-service="true">

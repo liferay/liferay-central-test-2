@@ -1261,7 +1261,9 @@ create table Repository (
 );
 
 create table RepositoryEntry (
+	uuid_ VARCHAR(75) null,
 	repositoryEntryId LONG not null primary key,
+	groupId LONG,
 	repositoryId LONG,
 	mappedId VARCHAR(75) null
 );

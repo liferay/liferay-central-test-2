@@ -14,61 +14,25 @@
 
 package com.liferay.portal.repository.cmis.model;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.permission.ActionKeys;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.commons.data.AllowableActions;
-import org.apache.chemistry.opencmis.commons.data.CmisExtensionElement;
 import org.apache.chemistry.opencmis.commons.enums.Action;
-import org.apache.chemistry.opencmis.commons.enums.ExtensionLevel;
 
 /**
  * @author Alexander Chow
  */
 public abstract class CMISModel {
 
-	public String getDescription(CmisObject cmisObject) {
-		try {
-			List<CmisExtensionElement> extensions = cmisObject.getExtensions(
-				ExtensionLevel.PROPERTIES).get(0).getChildren();
-
-			for (CmisExtensionElement extension : extensions) {
-				if (!extension.getName().equals("properties")) {
-					continue;
-				}
-
-				for (CmisExtensionElement property : extension.getChildren()) {
-					Map<String, String> attributes = property.getAttributes();
-
-					String propertyDefinitionId = attributes.get(
-						"propertyDefinitionId");
-
-					if (!propertyDefinitionId.equals("cm:description")) {
-						continue;
-					}
-
-					for (CmisExtensionElement propertyValues :
-							property.getChildren()) {
-
-						return propertyValues.getValue();
-					}
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
+	public String getDescription() {
 		return StringPool.BLANK;
 	}
 
@@ -93,8 +57,6 @@ public abstract class CMISModel {
 
 		return allowableActionsSet.contains(action);
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(CMISModel.class);
 
 	private static Map<String, Action> _mappedActionKeys =
 		new HashMap<String, Action>();

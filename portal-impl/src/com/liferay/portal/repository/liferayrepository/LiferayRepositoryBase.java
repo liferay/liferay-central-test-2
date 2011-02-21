@@ -86,12 +86,12 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			initByRepositoryId(dlFileEntry.getRepositoryId());
 		}
 		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
+			if (_log.isTraceEnabled()) {
 				if (e instanceof NoSuchFileEntryException) {
-					_log.debug(e.getMessage());
+					_log.trace(e.getMessage());
 				}
 				else {
-					_log.debug(e, e);
+					_log.trace(e, e);
 				}
 			}
 		}
@@ -105,12 +105,12 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			initByRepositoryId(dlFileVersion.getRepositoryId());
 		}
 		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
+			if (_log.isTraceEnabled()) {
 				if (e instanceof NoSuchFileVersionException) {
-					_log.debug(e.getMessage());
+					_log.trace(e.getMessage());
 				}
 				else {
-					_log.debug(e, e);
+					_log.trace(e, e);
 				}
 			}
 		}
@@ -123,12 +123,12 @@ public abstract class LiferayRepositoryBase extends LiferayBase {
 			initByRepositoryId(dlFolder.getRepositoryId());
 		}
 		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
+			if (_log.isTraceEnabled()) {
 				if (e instanceof NoSuchFolderException) {
-					_log.debug(e.getMessage());
+					_log.trace(e.getMessage());
 				}
 				else {
-					_log.debug(e, e);
+					_log.trace(e, e);
 				}
 			}
 		}

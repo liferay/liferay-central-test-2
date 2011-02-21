@@ -621,7 +621,9 @@
 		<field name="dlFolderId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.RepositoryEntry">
+		<field name="uuid" type="String" />
 		<field name="repositoryEntryId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="repositoryId" type="long" />
 		<field name="mappedId" type="String" />
 	</model>

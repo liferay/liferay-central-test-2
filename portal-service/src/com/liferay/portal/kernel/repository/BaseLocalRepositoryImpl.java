@@ -65,7 +65,7 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 	}
 
 	public void deleteAll() throws PortalException, SystemException {
-		_repository.deleteAll();
+		throw new UnsupportedOperationException();
 	}
 
 	public void deleteFileEntry(long fileEntryId)

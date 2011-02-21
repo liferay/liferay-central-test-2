@@ -41,15 +41,10 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 		DLFolder folder = this;
 
-		while (true) {
-			if (!folder.isRoot()) {
-				folder = folder.getParentFolder();
+		while (!folder.isRoot()) {
+			folder = folder.getParentFolder();
 
-				ancestors.add(folder);
-			}
-			else {
-				break;
-			}
+			ancestors.add(folder);
 		}
 
 		return ancestors;
@@ -70,19 +65,11 @@ public class DLFolderImpl extends DLFolderModelImpl implements DLFolder {
 
 		DLFolder folder = this;
 
-		while (true) {
+		while (folder != null) {
 			sb.insert(0, folder.getName());
 			sb.insert(0, StringPool.SLASH);
 
-			if (folder.getParentFolderId() !=
-					DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-
-				folder = DLRepositoryLocalServiceUtil.getFolder(
-					folder.getParentFolderId());
-			}
-			else {
-				break;
-			}
+			folder = folder.getParentFolder();
 		}
 
 		return sb.toString();

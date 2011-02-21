@@ -730,6 +730,10 @@
 	<mapped-superclass class="com.liferay.portal.model.impl.RepositoryEntryModelImpl">
 		<attributes>
 			<id name="repositoryEntryId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<basic name="groupId" />
 			<basic name="repositoryId" />
 			<basic name="mappedId" />
 			<transient name="primaryKey" />

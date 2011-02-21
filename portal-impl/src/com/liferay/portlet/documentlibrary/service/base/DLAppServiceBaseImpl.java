@@ -29,6 +29,7 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.LockPersistence;
+import com.liferay.portal.service.persistence.RepositoryEntryPersistence;
 import com.liferay.portal.service.persistence.RepositoryPersistence;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -443,6 +444,25 @@ public abstract class DLAppServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
+	 * Gets the repository entry persistence.
+	 *
+	 * @return the repository entry persistence
+	 */
+	public RepositoryEntryPersistence getRepositoryEntryPersistence() {
+		return repositoryEntryPersistence;
+	}
+
+	/**
+	 * Sets the repository entry persistence.
+	 *
+	 * @param repositoryEntryPersistence the repository entry persistence
+	 */
+	public void setRepositoryEntryPersistence(
+		RepositoryEntryPersistence repositoryEntryPersistence) {
+		this.repositoryEntryPersistence = repositoryEntryPersistence;
+	}
+
+	/**
 	 * Gets the resource local service.
 	 *
 	 * @return the resource local service
@@ -646,6 +666,8 @@ public abstract class DLAppServiceBaseImpl extends PrincipalBean
 	protected RepositoryService repositoryService;
 	@BeanReference(type = RepositoryPersistence.class)
 	protected RepositoryPersistence repositoryPersistence;
+	@BeanReference(type = RepositoryEntryPersistence.class)
+	protected RepositoryEntryPersistence repositoryEntryPersistence;
 	@BeanReference(type = ResourceLocalService.class)
 	protected ResourceLocalService resourceLocalService;
 	@BeanReference(type = ResourceService.class)

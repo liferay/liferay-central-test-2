@@ -282,10 +282,10 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Repository",
 	{
-		addRepository: true,
+		mountRepository: true,
 		checkRepository: true,
-		deleteRepositories: true,
-		deleteRepository: true,
+		unmountRepositories: true,
+		unmountRepository: true,
 		getLocalRepositoryImpl: true,
 		getRepository: true,
 		getRepositoryImpl: true,
@@ -631,7 +631,7 @@ Liferay.Service.registerClass(
 		getFileEntriesAndFileShortcutsCount: true,
 		getFileEntriesCount: true,
 		getFileEntry: true,
-		getFileEntryByUuidAndRepositoryId: true,
+		getFileEntryByUuidAndGroupId: true,
 		getFileShortcut: true,
 		getFolder: true,
 		getFolders: true,

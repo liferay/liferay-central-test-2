@@ -19,10 +19,12 @@
 <%
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
+long repositoryId = scopeGroupId;
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 String folderName = LanguageUtil.get(pageContext, "documents-home");
 
 if (folder != null) {
+	repositoryId = folder.getRepositoryId();
 	folderName = folder.getName();
 
 	DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
@@ -51,11 +53,11 @@ if (folder != null) {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-	int total = DLAppServiceUtil.getFoldersCount(scopeGroupId, folderId);
+	int total = DLAppServiceUtil.getFoldersCount(repositoryId, folderId);
 
 	searchContainer.setTotal(total);
 
-	List results = DLAppServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+	List results = DLAppServiceUtil.getFolders(repositoryId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -86,14 +88,14 @@ if (folder != null) {
 
 		// Statistics
 
-		List<Long> subfolderIds = DLAppServiceUtil.getSubfolderIds(scopeGroupId, curFolder.getFolderId(), false);
+		List<Long> subfolderIds = DLAppServiceUtil.getSubfolderIds(repositoryId, curFolder.getFolderId(), false);
 
 		int foldersCount = subfolderIds.size();
 
 		subfolderIds.clear();
 		subfolderIds.add(curFolder.getFolderId());
 
-		int fileEntriesCount = DLAppServiceUtil.getFoldersFileEntriesCount(scopeGroupId, subfolderIds, WorkflowConstants.STATUS_APPROVED);
+		int fileEntriesCount = DLAppServiceUtil.getFoldersFileEntriesCount(repositoryId, subfolderIds, WorkflowConstants.STATUS_APPROVED);
 
 		row.addText(String.valueOf(foldersCount), rowURL);
 		row.addText(String.valueOf(fileEntriesCount), rowURL);
@@ -117,7 +119,7 @@ if (folder != null) {
 		resultRows.add(row);
 	}
 
-	showAddFolderButton = showAddFolderButton && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
+	showAddFolderButton = showAddFolderButton && DLFolderPermission.contains(permissionChecker, repositoryId, folderId, ActionKeys.ADD_FOLDER);
 	%>
 
 	<aui:button-row>

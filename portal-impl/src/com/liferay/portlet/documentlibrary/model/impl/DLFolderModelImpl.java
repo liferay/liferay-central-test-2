@@ -209,7 +209,17 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	}
 
 	public void setRepositoryId(long repositoryId) {
+		if (!_setOriginalRepositoryId) {
+			_setOriginalRepositoryId = true;
+
+			_originalRepositoryId = _repositoryId;
+		}
+
 		_repositoryId = repositoryId;
+	}
+
+	public long getOriginalRepositoryId() {
+		return _originalRepositoryId;
 	}
 
 	public boolean getMountPoint() {
@@ -335,6 +345,9 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 
 		dlFolderImpl.setRepositoryId(getRepositoryId());
 
+		dlFolderModelImpl._originalRepositoryId = dlFolderModelImpl._repositoryId;
+
+		dlFolderModelImpl._setOriginalRepositoryId = false;
 		dlFolderImpl.setMountPoint(getMountPoint());
 
 		dlFolderImpl.setParentFolderId(getParentFolderId());
@@ -526,6 +539,8 @@ public class DLFolderModelImpl extends BaseModelImpl<DLFolder>
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _repositoryId;
+	private long _originalRepositoryId;
+	private boolean _setOriginalRepositoryId;
 	private boolean _mountPoint;
 	private long _parentFolderId;
 	private long _originalParentFolderId;
