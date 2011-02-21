@@ -72,21 +72,9 @@ public class DLAppHelperLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getFileShortcuts(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileShortcuts(groupId, folderIds, status);
-	}
-
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getFileShortcuts(
 		long groupId, long folderId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileShortcuts(groupId, folderId, status);
-	}
-
-	public static int getFileShortcutsCount(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileShortcutsCount(groupId, folderIds, status);
 	}
 
 	public static int getFileShortcutsCount(long groupId, long folderId,

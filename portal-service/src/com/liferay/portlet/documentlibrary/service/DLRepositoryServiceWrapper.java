@@ -101,18 +101,16 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 	}
 
 	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status,
-		int start, int end)
+		long groupId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryService.getFileEntriesAndFileShortcuts(groupId,
-			folderIds, status, start, end);
+			folderId, status, start, end);
 	}
 
-	public int getFileEntriesAndFileShortcutsCount(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public int getFileEntriesAndFileShortcutsCount(long groupId, long folderId,
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryService.getFileEntriesAndFileShortcutsCount(groupId,
-			folderIds, status);
+			folderId, status);
 	}
 
 	public int getFileEntriesCount(long groupId, long folderId)
@@ -174,18 +172,17 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 	}
 
 	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status,
-		int start, int end)
+		long groupId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryService.getFoldersAndFileEntriesAndFileShortcuts(groupId,
-			folderIds, status, start, end);
+			folderId, status, start, end);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
+		long folderId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlRepositoryService.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
-			folderIds, status);
+			folderId, status);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)

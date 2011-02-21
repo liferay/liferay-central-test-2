@@ -64,11 +64,10 @@ public interface Repository {
 		throws SystemException;
 
 	public List<Object> getFileEntriesAndFileShortcuts(
-			List<Long> folderIds, int status, int start, int end)
+			long folderId, int status, int start, int end)
 		throws SystemException;
 
-	public int getFileEntriesAndFileShortcutsCount(
-			List<Long> folderIds, int status)
+	public int getFileEntriesAndFileShortcutsCount(long folderId, int status)
 		throws SystemException;
 
 	public int getFileEntriesCount(long folderId)
@@ -96,11 +95,11 @@ public interface Repository {
 		throws SystemException;
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			List<Long> folderIds, int status, int start, int end)
+			long folderId, int status, int start, int end)
 		throws SystemException;
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			List<Long> folderIds, int status)
+			long folderId, int status)
 		throws SystemException;
 
 	public int getFoldersCount(long parentFolderId) throws SystemException;

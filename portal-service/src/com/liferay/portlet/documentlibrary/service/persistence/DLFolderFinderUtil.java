@@ -21,62 +21,54 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
  * @author Brian Wing Shun Chan
  */
 public class DLFolderFinderUtil {
-	public static int countF_FE_FS_ByG_F_S(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countF_FE_FS_ByG_F_S(groupId, folderIds, status);
+	public static int countF_FE_FS_ByG_F_S(long groupId, long folderId,
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().countF_FE_FS_ByG_F_S(groupId, folderId, status);
 	}
 
-	public static int countFE_FS_ByG_F_S(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
+	public static int countFE_FS_ByG_F_S(long groupId, long folderId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().countFE_FS_ByG_F_S(groupId, folderIds, status);
+		return getFinder().countFE_FS_ByG_F_S(groupId, folderId, status);
 	}
 
-	public static int filterCountF_FE_FS_ByG_F_S(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().filterCountF_FE_FS_ByG_F_S(groupId, folderIds, status);
+	public static int filterCountF_FE_FS_ByG_F_S(long groupId, long folderId,
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterCountF_FE_FS_ByG_F_S(groupId, folderId, status);
 	}
 
-	public static int filterCountFE_FS_ByG_F_S(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getFinder().filterCountFE_FS_ByG_F_S(groupId, folderIds, status);
+	public static int filterCountFE_FS_ByG_F_S(long groupId, long folderId,
+		int status) throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().filterCountFE_FS_ByG_F_S(groupId, folderId, status);
 	}
 
 	public static java.util.List<java.lang.Object> filterFindF_FE_FS_ByG_F_S(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status,
-		int start, int end)
+		long groupId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .filterFindF_FE_FS_ByG_F_S(groupId, folderIds, status,
-			start, end);
+				   .filterFindF_FE_FS_ByG_F_S(groupId, folderId, status, start,
+			end);
 	}
 
 	public static java.util.List<java.lang.Object> filterFindFE_FS_ByG_F_S(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status,
-		int start, int end)
+		long groupId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .filterFindFE_FS_ByG_F_S(groupId, folderIds, status, start,
+				   .filterFindFE_FS_ByG_F_S(groupId, folderId, status, start,
 			end);
 	}
 
 	public static java.util.List<java.lang.Object> findF_FE_FS_ByG_F_S(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status,
-		int start, int end)
+		long groupId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findF_FE_FS_ByG_F_S(groupId, folderIds, status, start, end);
+				   .findF_FE_FS_ByG_F_S(groupId, folderId, status, start, end);
 	}
 
 	public static java.util.List<java.lang.Object> findFE_FS_ByG_F_S(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status,
-		int start, int end)
+		long groupId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder()
-				   .findFE_FS_ByG_F_S(groupId, folderIds, status, start, end);
+				   .findFE_FS_ByG_F_S(groupId, folderId, status, start, end);
 	}
 
 	public static DLFolderFinder getFinder() {

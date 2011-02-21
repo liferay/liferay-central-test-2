@@ -193,19 +193,19 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
-			long groupId, List<Long> folderIds, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
 		return dlFolderFinder.filterFindFE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end);
+			groupId, folderId, status, start, end);
 	}
 
 	public int getFileEntriesAndFileShortcutsCount(
-			long groupId, List<Long> folderIds, int status)
+			long groupId, long folderId, int status)
 		throws SystemException {
 
 		return dlFolderFinder.filterCountFE_FS_ByG_F_S(
-			groupId, folderIds, status);
+			groupId, folderId, status);
 	}
 
 	public int getFileEntriesCount(long groupId, long folderId)
@@ -302,19 +302,19 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long groupId, List<Long> folderIds, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
 		return dlFolderFinder.filterFindF_FE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end);
+			groupId, folderId, status, start, end);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			long groupId, List<Long> folderIds, int status)
+			long groupId, long folderId, int status)
 		throws SystemException {
 
 		return dlFolderFinder.filterCountF_FE_FS_ByG_F_S(
-			groupId, folderIds, status);
+			groupId, folderId, status);
 	}
 
 	public int getFoldersCount(long groupId, long parentFolderId)

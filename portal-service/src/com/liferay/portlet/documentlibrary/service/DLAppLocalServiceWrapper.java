@@ -159,28 +159,11 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	}
 
 	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
-		long repositoryId, java.util.List<java.lang.Long> folderIds,
-		int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getFileEntriesAndFileShortcuts(repositoryId,
-			folderIds, status, start, end);
-	}
-
-	public java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
 		long repositoryId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppLocalService.getFileEntriesAndFileShortcuts(repositoryId,
 			folderId, status, start, end);
-	}
-
-	public int getFileEntriesAndFileShortcutsCount(long repositoryId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getFileEntriesAndFileShortcutsCount(repositoryId,
-			folderIds, status);
 	}
 
 	public int getFileEntriesAndFileShortcutsCount(long repositoryId,
@@ -274,28 +257,11 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	}
 
 	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
-		long repositoryId, java.util.List<java.lang.Long> folderIds,
-		int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getFoldersAndFileEntriesAndFileShortcuts(repositoryId,
-			folderIds, status, start, end);
-	}
-
-	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
 		long repositoryId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppLocalService.getFoldersAndFileEntriesAndFileShortcuts(repositoryId,
 			folderId, status, start, end);
-	}
-
-	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-		long repositoryId, java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId,
-			folderIds, status);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(

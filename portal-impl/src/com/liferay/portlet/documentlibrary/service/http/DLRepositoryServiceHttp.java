@@ -378,8 +378,8 @@ public class DLRepositoryServiceHttp {
 	}
 
 	public static java.util.List<java.lang.Object> getFileEntriesAndFileShortcuts(
-		HttpPrincipal httpPrincipal, long groupId,
-		java.util.List<java.lang.Long> folderIds, int status, int start, int end)
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLRepositoryServiceUtil.class.getName(),
@@ -387,7 +387,7 @@ public class DLRepositoryServiceHttp {
 					_getFileEntriesAndFileShortcutsParameterTypes9);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderIds, status, start, end);
+					folderId, status, start, end);
 
 			Object returnObj = null;
 
@@ -412,8 +412,7 @@ public class DLRepositoryServiceHttp {
 	}
 
 	public static int getFileEntriesAndFileShortcutsCount(
-		HttpPrincipal httpPrincipal, long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLRepositoryServiceUtil.class.getName(),
@@ -421,7 +420,7 @@ public class DLRepositoryServiceHttp {
 					_getFileEntriesAndFileShortcutsCountParameterTypes10);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderIds, status);
+					folderId, status);
 
 			Object returnObj = null;
 
@@ -763,8 +762,8 @@ public class DLRepositoryServiceHttp {
 	}
 
 	public static java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
-		HttpPrincipal httpPrincipal, long groupId,
-		java.util.List<java.lang.Long> folderIds, int status, int start, int end)
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status,
+		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLRepositoryServiceUtil.class.getName(),
@@ -772,7 +771,7 @@ public class DLRepositoryServiceHttp {
 					_getFoldersAndFileEntriesAndFileShortcutsParameterTypes20);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderIds, status, start, end);
+					folderId, status, start, end);
 
 			Object returnObj = null;
 
@@ -797,8 +796,7 @@ public class DLRepositoryServiceHttp {
 	}
 
 	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
-		HttpPrincipal httpPrincipal, long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
+		HttpPrincipal httpPrincipal, long groupId, long folderId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLRepositoryServiceUtil.class.getName(),
@@ -806,7 +804,7 @@ public class DLRepositoryServiceHttp {
 					_getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes21);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					folderIds, status);
+					folderId, status);
 
 			Object returnObj = null;
 
@@ -1795,11 +1793,9 @@ public class DLRepositoryServiceHttp {
 			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getFileEntriesAndFileShortcutsParameterTypes9 =
-		new Class[] {
-			long.class, java.util.List.class, int.class, int.class, int.class
-		};
+		new Class[] { long.class, long.class, int.class, int.class, int.class };
 	private static final Class<?>[] _getFileEntriesAndFileShortcutsCountParameterTypes10 =
-		new Class[] { long.class, java.util.List.class, int.class };
+		new Class[] { long.class, long.class, int.class };
 	private static final Class<?>[] _getFileEntriesCountParameterTypes11 = new Class[] {
 			long.class, long.class
 		};
@@ -1827,11 +1823,9 @@ public class DLRepositoryServiceHttp {
 			long.class, long.class, int.class, int.class
 		};
 	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsParameterTypes20 =
-		new Class[] {
-			long.class, java.util.List.class, int.class, int.class, int.class
-		};
+		new Class[] { long.class, long.class, int.class, int.class, int.class };
 	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsCountParameterTypes21 =
-		new Class[] { long.class, java.util.List.class, int.class };
+		new Class[] { long.class, long.class, int.class };
 	private static final Class<?>[] _getFoldersCountParameterTypes22 = new Class[] {
 			long.class, long.class
 		};

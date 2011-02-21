@@ -35,7 +35,6 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -134,36 +133,10 @@ public class DLAppHelperLocalServiceImpl
 	}
 
 	public List<DLFileShortcut> getFileShortcuts(
-			long groupId, List<Long> folderIds, int status)
-		throws SystemException {
-
-		List<DLFileShortcut> fileShortcuts = new ArrayList<DLFileShortcut>();
-
-		for (long folderId : folderIds) {
-			fileShortcuts.addAll(getFileShortcuts(groupId, folderId, status));
-		}
-
-		return fileShortcuts;
-	}
-
-	public List<DLFileShortcut> getFileShortcuts(
 			long groupId, long folderId, int status)
 		throws SystemException {
 
 		return dlFileShortcutPersistence.findByG_F_S(groupId, folderId, status);
-	}
-
-	public int getFileShortcutsCount(
-			long groupId, List<Long> folderIds, int status)
-		throws SystemException {
-
-		int count = 0;
-
-		for (long folderId : folderIds) {
-			count += getFileShortcutsCount(groupId, folderId, status);
-		}
-
-		return count;
 	}
 
 	public int getFileShortcutsCount(

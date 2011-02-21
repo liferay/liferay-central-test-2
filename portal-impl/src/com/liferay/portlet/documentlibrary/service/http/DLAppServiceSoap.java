@@ -184,21 +184,6 @@ public class DLAppServiceSoap {
 	}
 
 	public static int getFileEntriesAndFileShortcutsCount(long repositoryId,
-		Long[] folderIds, int status) throws RemoteException {
-		try {
-			int returnValue = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(repositoryId,
-					ListUtil.toList(folderIds), status);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getFileEntriesAndFileShortcutsCount(long repositoryId,
 		long folderId, int status) throws RemoteException {
 		try {
 			int returnValue = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(repositoryId,
@@ -265,22 +250,6 @@ public class DLAppServiceSoap {
 			java.util.List<com.liferay.portal.kernel.repository.model.Folder> returnValue =
 				DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
 					start, end);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
-		long repositoryId, Long[] folderIds, int status)
-		throws RemoteException {
-		try {
-			int returnValue = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId,
-					ListUtil.toList(folderIds), status);
 
 			return returnValue;
 		}

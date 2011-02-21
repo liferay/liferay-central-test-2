@@ -159,10 +159,10 @@ public class DLRepositoryServiceSoap {
 	}
 
 	public static int getFileEntriesAndFileShortcutsCount(long groupId,
-		Long[] folderIds, int status) throws RemoteException {
+		long folderId, int status) throws RemoteException {
 		try {
 			int returnValue = DLRepositoryServiceUtil.getFileEntriesAndFileShortcutsCount(groupId,
-					ListUtil.toList(folderIds), status);
+					folderId, status);
 
 			return returnValue;
 		}
@@ -295,10 +295,10 @@ public class DLRepositoryServiceSoap {
 	}
 
 	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
-		long groupId, Long[] folderIds, int status) throws RemoteException {
+		long groupId, long folderId, int status) throws RemoteException {
 		try {
 			int returnValue = DLRepositoryServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(groupId,
-					ListUtil.toList(folderIds), status);
+					folderId, status);
 
 			return returnValue;
 		}

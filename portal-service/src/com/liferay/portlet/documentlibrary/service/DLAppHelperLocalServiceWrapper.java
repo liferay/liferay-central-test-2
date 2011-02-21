@@ -65,24 +65,10 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService {
 	}
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getFileShortcuts(
-		long groupId, java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppHelperLocalService.getFileShortcuts(groupId, folderIds,
-			status);
-	}
-
-	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getFileShortcuts(
 		long groupId, long folderId, int status)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _dlAppHelperLocalService.getFileShortcuts(groupId, folderId,
 			status);
-	}
-
-	public int getFileShortcutsCount(long groupId,
-		java.util.List<java.lang.Long> folderIds, int status)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppHelperLocalService.getFileShortcutsCount(groupId,
-			folderIds, status);
 	}
 
 	public int getFileShortcutsCount(long groupId, long folderId, int status)

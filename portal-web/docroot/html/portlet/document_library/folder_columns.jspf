@@ -15,14 +15,16 @@
 --%>
 
 <%
-List<Long> subfolderIds = DLAppServiceUtil.getSubfolderIds(repositoryId, curFolder.getFolderId(), false);
+int curFoldersCount = 0;
+int curFileEntriesCount = 0;
 
-int curFoldersCount = subfolderIds.size();
-
-subfolderIds.clear();
-subfolderIds.add(curFolder.getFolderId());
-
-int curFileEntriesCount = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(repositoryId, subfolderIds, status);
+try {
+	curFoldersCount = DLAppServiceUtil.getFoldersCount(curFolder.getRepositoryId(), curFolder.getFolderId());
+	curFileEntriesCount = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(curFolder.getRepositoryId(), curFolder.getFolderId(), status);
+}
+catch (RepositoryException re) {
+	_log.error(re.getMessage());
+}
 
 for (int j = 0; j < folderColumns.length; j++) {
 	String folderColumn = folderColumns[j];
@@ -83,11 +85,15 @@ for (int j = 0; j < folderColumns.length; j++) {
 				buffer.append("</a>");
 
 				if (showSubfolders) {
-					List subfolders = DLAppServiceUtil.getFolders(repositoryId, curFolder.getFolderId(), 0, 5);
+					List subfolders = new ArrayList();
+
+					try {
+						subfolders = DLAppServiceUtil.getFolders(curFolder.getRepositoryId(), curFolder.getFolderId(), 0, 5);
+					}
+					catch (Exception e) {
+					}
 
 					if (!subfolders.isEmpty()) {
-						int subfoldersCount = DLAppServiceUtil.getFoldersCount(repositoryId, curFolder.getFolderId());
-
 						buffer.append("<br /><u>");
 						buffer.append(LanguageUtil.get(pageContext, "subfolders"));
 						buffer.append("</u>: ");
@@ -108,7 +114,7 @@ for (int j = 0; j < folderColumns.length; j++) {
 							}
 						}
 
-						if (subfoldersCount > subfolders.size()) {
+						if (curFoldersCount > subfolders.size()) {
 							rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
 							buffer.append(", <a href=\"");

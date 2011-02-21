@@ -39,7 +39,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -206,48 +205,24 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
-			long repositoryId, List<Long> folderIds, int status, int start,
+			long repositoryId, long folderId, int status, int start,
 			int end)
 		throws PortalException, SystemException {
 
 		LocalRepository localRepository = getLocalRepository(repositoryId);
 
 		return localRepository.getFileEntriesAndFileShortcuts(
-			folderIds, status, start, end);
-	}
-
-	public List<Object> getFileEntriesAndFileShortcuts(
-			long repositoryId, long folderId, int status, int start, int end)
-		throws PortalException, SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		return getFileEntriesAndFileShortcuts(
-			repositoryId, folderIds, status, start, end);
-	}
-
-	public int getFileEntriesAndFileShortcutsCount(
-			long repositoryId, List<Long> folderIds, int status)
-		throws PortalException, SystemException {
-
-		LocalRepository localRepository = getLocalRepository(repositoryId);
-
-		return localRepository.getFileEntriesAndFileShortcutsCount(
-			folderIds, status);
+			folderId, status, start, end);
 	}
 
 	public int getFileEntriesAndFileShortcutsCount(
 			long repositoryId, long folderId, int status)
 		throws PortalException, SystemException {
 
-		List<Long> folderIds = new ArrayList<Long>();
+		LocalRepository localRepository = getLocalRepository(repositoryId);
 
-		folderIds.add(folderId);
-
-		return getFileEntriesAndFileShortcutsCount(
-			repositoryId, folderIds, status);
+		return localRepository.getFileEntriesAndFileShortcutsCount(
+			folderId, status);
 	}
 
 	public int getFileEntriesCount(long repositoryId, long folderId)
@@ -384,48 +359,24 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long repositoryId, List<Long> folderIds, int status, int start,
+			long repositoryId, long folderId, int status, int start,
 			int end)
 		throws PortalException, SystemException {
 
 		LocalRepository localRepository = getLocalRepository(repositoryId);
 
 		return localRepository.getFoldersAndFileEntriesAndFileShortcuts(
-			folderIds, status, start, end);
-	}
-
-	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			long repositoryId, long folderId, int status, int start, int end)
-		throws PortalException, SystemException {
-
-		List<Long> folderIds = new ArrayList<Long>();
-
-		folderIds.add(folderId);
-
-		return getFoldersAndFileEntriesAndFileShortcuts(
-			repositoryId, folderIds, status, start, end);
-	}
-
-	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			long repositoryId, List<Long> folderIds, int status)
-		throws PortalException, SystemException {
-
-		LocalRepository localRepository = getLocalRepository(repositoryId);
-
-		return localRepository.getFoldersAndFileEntriesAndFileShortcutsCount(
-			folderIds, status);
+			folderId, status, start, end);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long repositoryId, long folderId, int status)
 		throws PortalException, SystemException {
 
-		List<Long> folderIds = new ArrayList<Long>();
+		LocalRepository localRepository = getLocalRepository(repositoryId);
 
-		folderIds.add(folderId);
-
-		return getFoldersAndFileEntriesAndFileShortcutsCount(
-			repositoryId, folderIds, status);
+		return localRepository.getFoldersAndFileEntriesAndFileShortcutsCount(
+			folderId, status);
 	}
 
 	public int getFoldersCount(long repositoryId, long parentFolderId)

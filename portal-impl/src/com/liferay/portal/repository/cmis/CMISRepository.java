@@ -51,7 +51,6 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
-import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
@@ -326,40 +325,29 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
-			List<Long> folderIds, int status, int start, int end)
+			long folderId, int status, int start, int end)
 		throws SystemException {
 
 		List<Object> fileEntriesAndFileShortcuts = new ArrayList<Object>();
 
-		for (long folderId : folderIds) {
-			List<FileEntry> fileEntries = getFileEntries(
-				folderId, start, end, null);
+		fileEntriesAndFileShortcuts.addAll(
+			getFileEntries(folderId, start, end, null));
 
-			fileEntriesAndFileShortcuts.addAll(fileEntries);
-		}
-
-		List<DLFileShortcut> dlFileShortcuts =
+		fileEntriesAndFileShortcuts.addAll(
 			dlAppHelperLocalService.getFileShortcuts(
-				getGroupId(), folderIds, status);
-
-		fileEntriesAndFileShortcuts.addAll(dlFileShortcuts);
+				getGroupId(), folderId, status));
 
 		return fileEntriesAndFileShortcuts;
 	}
 
-	public int getFileEntriesAndFileShortcutsCount(
-			List<Long> folderIds, int status)
+	public int getFileEntriesAndFileShortcutsCount(long folderId, int status)
 		throws SystemException {
 
-		int count = 0;
-
-		for (long folderId : folderIds) {
-			count += getFileEntriesCount(folderId);
-		}
+		int count = getFileEntriesCount(folderId);
 
 		count +=
 			dlAppHelperLocalService.getFileShortcutsCount(
-				getGroupId(), folderIds, status);
+				getGroupId(), folderId, status);
 
 		return count;
 	}
@@ -553,26 +541,24 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			List<Long> folderIds, int status, int start, int end)
+			long folderId, int status, int start, int end)
 		throws SystemException {
 
 		try {
 			List<Object> foldersAndFileEntriesAndFileShortcuts =
 				new ArrayList<Object>();
 
-			for (long folderId : folderIds) {
-				Iterator<CmisObject> itr = getIterator(folderId, start, end);
+			Iterator<CmisObject> itr = getIterator(folderId, start, end);
 
-				while (itr.hasNext()) {
-					CmisObject cmisObject = itr.next();
+			while (itr.hasNext()) {
+				CmisObject cmisObject = itr.next();
 
-					Object folderFileEntryOrFileShortcut =
-						toFolderFileEntryOrFileShortcut(cmisObject);
+				Object folderFileEntryOrFileShortcut =
+					toFolderFileEntryOrFileShortcut(cmisObject);
 
-					if (folderFileEntryOrFileShortcut != null) {
-						foldersAndFileEntriesAndFileShortcuts.add(
-							folderFileEntryOrFileShortcut);
-					}
+				if (folderFileEntryOrFileShortcut != null) {
+					foldersAndFileEntriesAndFileShortcuts.add(
+						folderFileEntryOrFileShortcut);
 				}
 			}
 
@@ -587,14 +573,18 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			List<Long> folderIds, int status)
+			long folderId, int status)
 		throws SystemException {
+
+		List<Long> folderIds = new ArrayList<Long>(1);
+
+		folderIds.add(folderId);
 
 		int count = getFoldersFileEntriesCount(folderIds, status);
 
 		count +=
 			dlAppHelperLocalService.getFileShortcutsCount(
-				getGroupId(), folderIds, status);
+				getGroupId(), folderId, status);
 
 		return count;
 	}
@@ -655,7 +645,8 @@ public class CMISRepository extends BaseRepositoryImpl {
 			processException(e);
 
 			throw new RepositoryException(
-				"Unable to initialize CMIS session", e);
+				"Unable to initialize CMIS session for repository " +
+					getRepositoryId(), e);
 		}
 	}
 

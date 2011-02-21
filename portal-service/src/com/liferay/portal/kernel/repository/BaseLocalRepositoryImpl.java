@@ -88,19 +88,18 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 	}
 
 	public List<Object> getFileEntriesAndFileShortcuts(
-			List<Long> folderIds, int status, int start, int end)
+			long folderId, int status, int start, int end)
 		throws SystemException {
 
 		return _repository.getFileEntriesAndFileShortcuts(
-			folderIds, status, start, end);
+			folderId, status, start, end);
 	}
 
-	public int getFileEntriesAndFileShortcutsCount(
-			List<Long> folderIds, int status)
+	public int getFileEntriesAndFileShortcutsCount(long folderId, int status)
 		throws SystemException {
 
 		return _repository.getFileEntriesAndFileShortcutsCount(
-			folderIds, status);
+			folderId, status);
 	}
 
 	public int getFileEntriesCount(long folderId) throws SystemException {
@@ -150,19 +149,19 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
-			List<Long> folderIds, int status, int start, int end)
+			long folderId, int status, int start, int end)
 		throws SystemException {
 
 		return _repository.getFoldersAndFileEntriesAndFileShortcuts(
-			folderIds, status, start, end);
+			folderId, status, start, end);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
-			List<Long> folderIds, int status)
+			long folderId, int status)
 		throws SystemException {
 
 		return _repository.getFoldersAndFileEntriesAndFileShortcutsCount(
-			folderIds, status);
+			folderId, status);
 	}
 
 	public int getFoldersCount(long parentFolderId) throws SystemException {

@@ -59,68 +59,66 @@ public class DLFolderFinderImpl
 	public static String FIND_FS_BY_G_F_S =
 		DLFolderFinder.class.getName() + ".findFS_ByG_F_S";
 
-	public int countF_FE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status)
+	public int countF_FE_FS_ByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
 
-		return doCountF_FE_FS_ByG_F_S(groupId, folderIds, status, false);
+		return doCountF_FE_FS_ByG_F_S(groupId, folderId, status, false);
 	}
 
-	public int countFE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status)
+	public int countFE_FS_ByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
 
-		return doCountFE_FS_ByG_F_S(groupId, folderIds, status, false);
+		return doCountFE_FS_ByG_F_S(groupId, folderId, status, false);
 	}
 
 	public int filterCountF_FE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status)
+			long groupId, long folderId, int status)
 		throws SystemException {
 
-		return doCountF_FE_FS_ByG_F_S(groupId, folderIds, status, true);
+		return doCountF_FE_FS_ByG_F_S(groupId, folderId, status, true);
 	}
 
 	public int filterCountFE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status)
+			long groupId, long folderId, int status)
 		throws SystemException {
 
-		return doCountFE_FS_ByG_F_S(groupId, folderIds, status, true);
+		return doCountFE_FS_ByG_F_S(groupId, folderId, status, true);
 	}
 
 	public List<Object> filterFindF_FE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
 		return doFindF_FE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end, true);
+			groupId, folderId, status, start, end, true);
 	}
 
 	public List<Object> filterFindFE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
 		return doFindFE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end, true);
+			groupId, folderId, status, start, end, true);
 	}
 
 	public List<Object> findF_FE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
 		return doFindF_FE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end, false);
+			groupId, folderId, status, start, end, false);
 	}
 
 	public List<Object> findFE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status, int start, int end)
+			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
 		return doFindFE_FS_ByG_F_S(
-			groupId, folderIds, status, start, end, false);
+			groupId, folderId, status, start, end, false);
 	}
 
 	protected int doCountF_FE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status,
+			long groupId, long folderId, int status,
 			boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -171,13 +169,13 @@ public class DLFolderFinderImpl
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_PARENT_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFolder"));
+				getFolderId(folderId, "DLFolder"));
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFileEntry"));
+				getFolderId(folderId, "DLFileEntry"));
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFileShortcut"));
+				getFolderId(folderId, "DLFileShortcut"));
 
 			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
@@ -191,26 +189,16 @@ public class DLFolderFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
-
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
-
+			qPos.add(folderId);
 			qPos.add(groupId);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
-
+			qPos.add(folderId);
 			qPos.add(groupId);
-
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
+			qPos.add(folderId);
 
 			int count = 0;
 
@@ -235,7 +223,7 @@ public class DLFolderFinderImpl
 	}
 
 	protected int doCountFE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status,
+			long groupId, long folderId, int status,
 			boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -275,10 +263,10 @@ public class DLFolderFinderImpl
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFileEntry"));
+				getFolderId(folderId, "DLFileEntry"));
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFileShortcut"));
+				getFolderId(folderId, "DLFileShortcut"));
 
 			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
@@ -297,15 +285,9 @@ public class DLFolderFinderImpl
 				qPos.add(status);
 			}
 
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
-
+			qPos.add(folderId);
 			qPos.add(groupId);
-
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
+			qPos.add(folderId);
 
 			int count = 0;
 
@@ -330,7 +312,7 @@ public class DLFolderFinderImpl
 	}
 
 	protected List<Object> doFindF_FE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status, int start, int end,
+			long groupId, long folderId, int status, int start, int end,
 			boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -381,13 +363,13 @@ public class DLFolderFinderImpl
 
 			sql = StringUtil.replace(
 				sql, "[$FOLDER_PARENT_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFolder"));
+				getFolderId(folderId, "DLFolder"));
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFileEntry"));
+				getFolderId(folderId, "DLFileEntry"));
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFileShortcut"));
+				getFolderId(folderId, "DLFileShortcut"));
 
 			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
@@ -405,26 +387,16 @@ public class DLFolderFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
-
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
-
+			qPos.add(folderId);
 			qPos.add(groupId);
 
 			if (status != WorkflowConstants.STATUS_ANY) {
 				qPos.add(status);
 			}
 
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
-
+			qPos.add(folderId);
 			qPos.add(groupId);
-
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
+			qPos.add(folderId);
 
 			List<Object> models = new ArrayList<Object>();
 
@@ -434,7 +406,7 @@ public class DLFolderFinderImpl
 			while (itr.hasNext()) {
 				Object[] array = itr.next();
 
-				long folderId = (Long)array[0];
+				long folderId2 = (Long)array[0];
 				String name = (String)array[1];
 				//String title = (String)array[2];
 				long fileShortcutId = (Long)array[3];
@@ -443,13 +415,13 @@ public class DLFolderFinderImpl
 				Object obj = null;
 
 				if (modelFolder == 1) {
-					obj = DLFolderUtil.findByPrimaryKey(folderId);
+					obj = DLFolderUtil.findByPrimaryKey(folderId2);
 				}
 				else if (fileShortcutId > 0) {
 					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
 				}
 				else {
-					obj = DLFileEntryUtil.findByG_F_N(groupId, folderId, name);
+					obj = DLFileEntryUtil.findByG_F_N(groupId, folderId2, name);
 				}
 
 				models.add(obj);
@@ -466,7 +438,7 @@ public class DLFolderFinderImpl
 	}
 
 	protected List<Object> doFindFE_FS_ByG_F_S(
-			long groupId, List<Long> folderIds, int status, int start, int end,
+			long groupId, long folderId, int status, int start, int end,
 			boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -506,10 +478,10 @@ public class DLFolderFinderImpl
 
 			sql = StringUtil.replace(
 				sql, "[$FILE_ENTRY_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFileEntry"));
+				getFolderId(folderId, "DLFileEntry"));
 			sql = StringUtil.replace(
 				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
-				getFolderIds(folderIds, "DLFileShortcut"));
+				getFolderId(folderId, "DLFileShortcut"));
 
 			if (status == WorkflowConstants.STATUS_ANY) {
 				sql = StringUtil.replace(
@@ -531,15 +503,9 @@ public class DLFolderFinderImpl
 				qPos.add(status);
 			}
 
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
-
+			qPos.add(folderId);
 			qPos.add(groupId);
-
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
+			qPos.add(folderId);
 
 			List<Object> models = new ArrayList<Object>();
 
@@ -549,7 +515,7 @@ public class DLFolderFinderImpl
 			while (itr.hasNext()) {
 				Object[] array = itr.next();
 
-				long folderId = (Long)array[0];
+				long folderId2 = (Long)array[0];
 				String name = (String)array[1];
 				//String title = (String)array[2];
 				long fileShortcutId = (Long)array[3];
@@ -560,7 +526,7 @@ public class DLFolderFinderImpl
 					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
 				}
 				else {
-					obj = DLFileEntryUtil.findByG_F_N(groupId, folderId, name);
+					obj = DLFileEntryUtil.findByG_F_N(groupId, folderId2, name);
 				}
 
 				models.add(obj);
@@ -576,30 +542,20 @@ public class DLFolderFinderImpl
 		}
 	}
 
-	protected String getFolderIds(List<Long> folderIds, String table) {
-		if (folderIds.isEmpty()) {
-			return StringPool.BLANK;
+	protected String getFolderId(long folderId, String table) {
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(table);
+		sb.append(".");
+
+		if (table.equals("DLFolder")) {
+			sb.append("parentFolderId");
+		}
+		else {
+			sb.append("folderId");
 		}
 
-		StringBundler sb = new StringBundler(folderIds.size() * 5 - 1);
-
-		for (int i = 0; i < folderIds.size(); i++) {
-			sb.append(table);
-			sb.append(".");
-
-			if (table.equals("DLFolder")) {
-				sb.append("parentFolderId");
-			}
-			else {
-				sb.append("folderId");
-			}
-
-			sb.append("= ? ");
-
-			if ((i + 1) != folderIds.size()) {
-				sb.append("OR ");
-			}
-		}
+		sb.append("= ? ");
 
 		return sb.toString();
 	}
