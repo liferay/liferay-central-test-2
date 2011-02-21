@@ -302,11 +302,11 @@ public class LockLocalServiceUtil {
 	public static com.liferay.portal.model.Lock lock(
 		java.lang.String className, java.lang.String key,
 		java.lang.String owner, boolean retrieveFromCache,
-		boolean replaceOldLock)
+		boolean replaceOldLock, boolean[] isNewLock, java.lang.String oldOwner)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .lock(className, key, owner, retrieveFromCache,
-			replaceOldLock);
+			replaceOldLock, isNewLock, oldOwner);
 	}
 
 	public static com.liferay.portal.model.Lock refresh(java.lang.String uuid,
@@ -324,6 +324,12 @@ public class LockLocalServiceUtil {
 	public static void unlock(java.lang.String className, java.lang.String key)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().unlock(className, key);
+	}
+
+	public static void unlock(java.lang.String className, java.lang.String key,
+		java.lang.String owner, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().unlock(className, key, owner, retrieveFromCache);
 	}
 
 	public static LockLocalService getService() {

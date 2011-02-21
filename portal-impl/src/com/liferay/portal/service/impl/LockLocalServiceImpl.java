@@ -179,14 +179,23 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public Lock lock(
 			String className, String key, String owner,
-			boolean retrieveFromCache, boolean replaceOldLock)
+			boolean retrieveFromCache, boolean replaceOldLock,
+			boolean[] isNewLock, String oldOwner)
 		throws SystemException {
+
+		if (isNewLock == null || isNewLock.length == 0) {
+			throw new IllegalArgumentException();
+		}
 
 		Lock lock = lockPersistence.fetchByC_K(
 			className, key, retrieveFromCache);
 
 		if (lock != null) {
 			if (lock.isExpired() || replaceOldLock) {
+				if (!lock.getOwner().equals(oldOwner)) {
+					return lock;
+				}
+
 				lockPersistence.remove(lock);
 
 				lock = null;
@@ -208,6 +217,8 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 
 			lockPersistence.update(lock, false);
 		}
+
+		isNewLock[0] = true;
 
 		return lock;
 	}
@@ -248,6 +259,24 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 			lockPersistence.removeByC_K(className, key);
 		}
 		catch (NoSuchLockException nsle) {
+		}
+	}
+
+	@Transactional(isolation = Isolation.SERIALIZABLE)
+	public void unlock(
+			String className, String key, String owner,
+			boolean retrieveFromCache)
+		throws SystemException {
+
+		Lock lock = lockPersistence.fetchByC_K(
+			className, key, retrieveFromCache);
+
+		if (lock == null) {
+			return;
+		}
+
+		if (lock.getOwner().equals(owner)) {
+			deleteLock(lock);
 		}
 	}
 
