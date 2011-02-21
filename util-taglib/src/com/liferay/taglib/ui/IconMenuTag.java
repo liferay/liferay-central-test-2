@@ -105,6 +105,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 			_id = randomKey + StringPool.UNDERLINE;
 		}
 
+		if (_align.equals("left")) {
+			_direction = "right";
+		}
+
 		request.setAttribute(
 			"liferay-ui:icon-menu:icon-count", new IntegerWrapper());
 		request.setAttribute(
