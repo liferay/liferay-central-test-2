@@ -18,10 +18,6 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -142,24 +138,6 @@ public class EditImageAction extends PortletAction {
 		IGImageServiceUtil.deleteImage(imageId);
 	}
 
-	protected String getContentType(
-		UploadPortletRequest uploadRequest, File file) {
-
-		String contentType = GetterUtil.getString(
-			uploadRequest.getContentType("file"));
-
-		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
-			String ext = GetterUtil.getString(
-				FileUtil.getExtension(file.getName())).toLowerCase();
-
-			if (Validator.isNotNull(ext)) {
-				contentType = MimeTypesUtil.getContentType(ext);
-			}
-		}
-
-		return contentType;
-	}
-
 	protected void updateImage(ActionRequest actionRequest) throws Exception {
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
 			actionRequest);
@@ -177,16 +155,7 @@ public class EditImageAction extends PortletAction {
 			uploadRequest, "description", fileName);
 
 		File file = uploadRequest.getFile("file");
-		String contentType = getContentType(uploadRequest, file);
-
-		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
-			String ext = GetterUtil.getString(
-				FileUtil.getExtension(file.getName())).toLowerCase();
-
-			if (Validator.isNotNull(ext)) {
-				contentType = MimeTypesUtil.getContentType(ext);
-			}
-		}
+		String contentType = uploadRequest.getContentType("file");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			IGImage.class.getName(), actionRequest);

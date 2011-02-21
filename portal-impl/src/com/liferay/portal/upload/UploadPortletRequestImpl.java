@@ -16,6 +16,11 @@ package com.liferay.portal.upload;
 
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
+import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.MimeTypesUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.File;
 
@@ -53,6 +58,17 @@ public class UploadPortletRequestImpl
 
 		if (contentType == null) {
 			contentType = _uploadRequest.getContentType(name);
+		}
+
+		if (Validator.isNull(contentType) ||
+			contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
+
+			String ext = GetterUtil.getString(
+				FileUtil.getExtension(name)).toLowerCase();
+
+			if (Validator.isNotNull(ext)) {
+				contentType = MimeTypesUtil.getContentType(ext);
+			}
 		}
 
 		return contentType;
