@@ -442,9 +442,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 					}
 				}
 				else if (type == ExpandoColumnConstants.STRING_ARRAY) {
-					if (!Arrays.deepEquals(
-						(String[])value, (String[])defaultValue)) {
-
+					if (!Arrays.deepEquals((String[])value, (String[])defaultValue)) {
 						sb.append(StringUtil.merge((String[])value));
 					}
 				}
