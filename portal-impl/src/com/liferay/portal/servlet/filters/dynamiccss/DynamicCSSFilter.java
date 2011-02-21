@@ -65,7 +65,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 		try {
 
-			// Ruby executor requires warm up in requring Sass. Always breaks
+			// Ruby executor requires warm up in requiring Sass. Always breaks
 			// the first time without this block.
 
 			_rubyExecutor.eval(
@@ -220,16 +220,17 @@ public class DynamicCSSFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
-		StringServletResponse stringResponse = new StringServletResponse(
-			response);
-
-		processFilter(
-			DynamicCSSFilter.class, request, stringResponse, filterChain);
-
 		Object parsedContent = getDynamicContent(
-			request, stringResponse, filterChain);
+			request, response, filterChain);
 
 		if (parsedContent == null) {
+
+			StringServletResponse stringResponse = new StringServletResponse(
+				response);
+
+			processFilter(
+				DynamicCSSFilter.class, request, stringResponse, filterChain);
+
 			parsedContent = parseSass(request, stringResponse.getString());
 		}
 
