@@ -47,9 +47,9 @@ public class CMISRepositoryLocalServiceImpl
 		CMISRepository cmisRepository =
 			(CMISRepository)repositoryService.getRepositoryImpl(repositoryId);
 
-		Document version = (Document)object;
+		Document document = (Document)object;
 
-		return cmisRepository.toFileVersion(version);
+		return cmisRepository.toFileVersion(document);
 	}
 
 	public Folder toFolder(long repositoryId, Object object)
@@ -58,10 +58,10 @@ public class CMISRepositoryLocalServiceImpl
 		CMISRepository cmisRepository =
 			(CMISRepository)repositoryService.getRepositoryImpl(repositoryId);
 
-		org.apache.chemistry.opencmis.client.api.Folder folder =
+		org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 			(org.apache.chemistry.opencmis.client.api.Folder)object;
 
-		return cmisRepository.toFolder(folder);
+		return cmisRepository.toFolder(cmisFolder);
 	}
 
 }

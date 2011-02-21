@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -160,8 +161,10 @@ public class CMISFileVersion extends CMISModel implements FileVersion {
 
 	public String getUserUuid() {
 		try {
-			return UserLocalServiceUtil.getDefaultUser(
-				getCompanyId()).getUserUuid();
+			User user = UserLocalServiceUtil.getDefaultUser(
+				getCompanyId());
+
+			return user.getUserUuid();
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;

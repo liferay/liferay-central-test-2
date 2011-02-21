@@ -805,7 +805,7 @@ public class DLAppServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(
-		HttpPrincipal httpPrincipal, long repositoryId, long folderId,
+		HttpPrincipal httpPrincipal, long groupId, long folderId,
 		java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -813,8 +813,8 @@ public class DLAppServiceHttp {
 			MethodKey methodKey = new MethodKey(DLAppServiceUtil.class.getName(),
 					"getFileEntry", _getFileEntryParameterTypes20);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey,
-					repositoryId, folderId, title);
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					folderId, title);
 
 			Object returnObj = null;
 

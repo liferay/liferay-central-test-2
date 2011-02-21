@@ -86,9 +86,9 @@ public abstract class BaseRepositoryImpl implements Repository {
 		}
 
 		return new Object[] {
-				repositoryEntry.getRepositoryEntryId(),
-				repositoryEntry.getUuid()
-			};
+			repositoryEntry.getRepositoryEntryId(),
+			repositoryEntry.getUuid()
+		};
 	}
 
 	public List<FileEntry> getRepositoryFileEntries(

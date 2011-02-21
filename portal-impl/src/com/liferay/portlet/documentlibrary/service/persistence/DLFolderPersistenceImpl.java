@@ -120,6 +120,12 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	public static final FinderPath FINDER_PATH_COUNT_BY_COMPANYID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
 			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByCompanyId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FETCH_BY_REPOSITORYID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
+			"fetchByRepositoryId", new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_COUNT_BY_REPOSITORYID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByRepositoryId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_BY_G_P = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
 			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findByG_P",
@@ -133,6 +139,19 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"countByG_P",
 			new String[] { Long.class.getName(), Long.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"findByP_N",
+			new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
+			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
+			"countByP_N",
+			new String[] { Long.class.getName(), String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_G_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
 			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
 			"fetchByG_P_N",
@@ -147,25 +166,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				Long.class.getName(), Long.class.getName(),
 				String.class.getName()
 			});
-	public static final FinderPath FINDER_PATH_FIND_BY_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
-			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"findByP_N",
-			new String[] {
-				Long.class.getName(), String.class.getName(),
-				
-			"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			});
-	public static final FinderPath FINDER_PATH_COUNT_BY_P_N = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
-			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByP_N",
-			new String[] { Long.class.getName(), String.class.getName() });
-	public static final FinderPath FINDER_PATH_FETCH_BY_REPOSITORYID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
-			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_ENTITY,
-			"fetchByRepositoryId", new String[] { Long.class.getName() });
-	public static final FinderPath FINDER_PATH_COUNT_BY_REPOSITORYID = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
-			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
-			"countByRepositoryId", new String[] { Long.class.getName() });
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
 			DLFolderModelImpl.FINDER_CACHE_ENABLED, FINDER_CLASS_NAME_LIST,
 			"findAll", new String[0]);
@@ -186,6 +186,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			new Object[] { dlFolder.getUuid(), Long.valueOf(
 					dlFolder.getGroupId()) }, dlFolder);
 
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+			new Object[] { Long.valueOf(dlFolder.getRepositoryId()) }, dlFolder);
+
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
 				Long.valueOf(dlFolder.getGroupId()),
@@ -193,9 +196,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				
 			dlFolder.getName()
 			}, dlFolder);
-
-		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
-			new Object[] { Long.valueOf(dlFolder.getRepositoryId()) }, dlFolder);
 	}
 
 	/**
@@ -245,6 +245,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			new Object[] { dlFolder.getUuid(), Long.valueOf(
 					dlFolder.getGroupId()) });
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+			new Object[] { Long.valueOf(dlFolder.getRepositoryId()) });
+
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
 				Long.valueOf(dlFolder.getGroupId()),
@@ -252,9 +255,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				
 			dlFolder.getName()
 			});
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
-			new Object[] { Long.valueOf(dlFolder.getRepositoryId()) });
 	}
 
 	/**
@@ -367,6 +367,9 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				Long.valueOf(dlFolderModelImpl.getGroupId())
 			});
 
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+			new Object[] { Long.valueOf(dlFolderModelImpl.getRepositoryId()) });
+
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 			new Object[] {
 				Long.valueOf(dlFolderModelImpl.getGroupId()),
@@ -374,9 +377,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				
 			dlFolderModelImpl.getName()
 			});
-
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
-			new Object[] { Long.valueOf(dlFolderModelImpl.getRepositoryId()) });
 
 		EntityCacheUtil.removeResult(DLFolderModelImpl.ENTITY_CACHE_ENABLED,
 			DLFolderImpl.class, dlFolder.getPrimaryKey());
@@ -442,6 +442,21 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		}
 
 		if (!isNew &&
+				(dlFolder.getRepositoryId() != dlFolderModelImpl.getOriginalRepositoryId())) {
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+				new Object[] {
+					Long.valueOf(dlFolderModelImpl.getOriginalRepositoryId())
+				});
+		}
+
+		if (isNew ||
+				(dlFolder.getRepositoryId() != dlFolderModelImpl.getOriginalRepositoryId())) {
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+				new Object[] { Long.valueOf(dlFolder.getRepositoryId()) },
+				dlFolder);
+		}
+
+		if (!isNew &&
 				((dlFolder.getGroupId() != dlFolderModelImpl.getOriginalGroupId()) ||
 				(dlFolder.getParentFolderId() != dlFolderModelImpl.getOriginalParentFolderId()) ||
 				!Validator.equals(dlFolder.getName(),
@@ -467,21 +482,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					
 				dlFolder.getName()
 				}, dlFolder);
-		}
-
-		if (!isNew &&
-				(dlFolder.getRepositoryId() != dlFolderModelImpl.getOriginalRepositoryId())) {
-			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
-				new Object[] {
-					Long.valueOf(dlFolderModelImpl.getOriginalRepositoryId())
-				});
-		}
-
-		if (isNew ||
-				(dlFolder.getRepositoryId() != dlFolderModelImpl.getOriginalRepositoryId())) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
-				new Object[] { Long.valueOf(dlFolder.getRepositoryId()) },
-				dlFolder);
 		}
 
 		return dlFolder;
@@ -2107,6 +2107,135 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
+	 * Finds the d l folder where repositoryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
+	 *
+	 * @param repositoryId the repository ID to search with
+	 * @return the matching d l folder
+	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFolder findByRepositoryId(long repositoryId)
+		throws NoSuchFolderException, SystemException {
+		DLFolder dlFolder = fetchByRepositoryId(repositoryId);
+
+		if (dlFolder == null) {
+			StringBundler msg = new StringBundler(4);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("repositoryId=");
+			msg.append(repositoryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFolderException(msg.toString());
+		}
+
+		return dlFolder;
+	}
+
+	/**
+	 * Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param repositoryId the repository ID to search with
+	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFolder fetchByRepositoryId(long repositoryId)
+		throws SystemException {
+		return fetchByRepositoryId(repositoryId, true);
+	}
+
+	/**
+	 * Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param repositoryId the repository ID to search with
+	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public DLFolder fetchByRepositoryId(long repositoryId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { repositoryId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+					finderArgs, this);
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_SELECT_DLFOLDER_WHERE);
+
+			query.append(_FINDER_COLUMN_REPOSITORYID_REPOSITORYID_2);
+
+			query.append(DLFolderModelImpl.ORDER_BY_JPQL);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(repositoryId);
+
+				List<DLFolder> list = q.list();
+
+				result = list;
+
+				DLFolder dlFolder = null;
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+						finderArgs, list);
+				}
+				else {
+					dlFolder = list.get(0);
+
+					cacheResult(dlFolder);
+
+					if ((dlFolder.getRepositoryId() != repositoryId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+							finderArgs, dlFolder);
+					}
+				}
+
+				return dlFolder;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (result == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+						finderArgs);
+				}
+
+				closeSession(session);
+			}
+		}
+		else {
+			if (result instanceof List<?>) {
+				return null;
+			}
+			else {
+				return (DLFolder)result;
+			}
+		}
+	}
+
+	/**
 	 * Finds all the d l folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -2797,170 +2926,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
-	 * @return the matching d l folder
-	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFolder findByG_P_N(long groupId, long parentFolderId, String name)
-		throws NoSuchFolderException, SystemException {
-		DLFolder dlFolder = fetchByG_P_N(groupId, parentFolderId, name);
-
-		if (dlFolder == null) {
-			StringBundler msg = new StringBundler(8);
-
-			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
-
-			msg.append("groupId=");
-			msg.append(groupId);
-
-			msg.append(", parentFolderId=");
-			msg.append(parentFolderId);
-
-			msg.append(", name=");
-			msg.append(name);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchFolderException(msg.toString());
-		}
-
-		return dlFolder;
-	}
-
-	/**
-	 * Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
-	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFolder fetchByG_P_N(long groupId, long parentFolderId, String name)
-		throws SystemException {
-		return fetchByG_P_N(groupId, parentFolderId, name, true);
-	}
-
-	/**
-	 * Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
-	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
-	 * @throws SystemException if a system exception occurred
-	 */
-	public DLFolder fetchByG_P_N(long groupId, long parentFolderId,
-		String name, boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, parentFolderId, name };
-
-		Object result = null;
-
-		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_N,
-					finderArgs, this);
-		}
-
-		if (result == null) {
-			StringBundler query = new StringBundler(5);
-
-			query.append(_SQL_SELECT_DLFOLDER_WHERE);
-
-			query.append(_FINDER_COLUMN_G_P_N_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_P_N_PARENTFOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_P_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_P_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_P_N_NAME_2);
-				}
-			}
-
-			query.append(DLFolderModelImpl.ORDER_BY_JPQL);
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(parentFolderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				List<DLFolder> list = q.list();
-
-				result = list;
-
-				DLFolder dlFolder = null;
-
-				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
-						finderArgs, list);
-				}
-				else {
-					dlFolder = list.get(0);
-
-					cacheResult(dlFolder);
-
-					if ((dlFolder.getGroupId() != groupId) ||
-							(dlFolder.getParentFolderId() != parentFolderId) ||
-							(dlFolder.getName() == null) ||
-							!dlFolder.getName().equals(name)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
-							finderArgs, dlFolder);
-					}
-				}
-
-				return dlFolder;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
-						finderArgs);
-				}
-
-				closeSession(session);
-			}
-		}
-		else {
-			if (result instanceof List<?>) {
-				return null;
-			}
-			else {
-				return (DLFolder)result;
-			}
-		}
-	}
-
-	/**
 	 * Finds all the d l folders where parentFolderId = &#63; and name = &#63;.
 	 *
 	 * @param parentFolderId the parent folder ID to search with
@@ -3347,24 +3312,32 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where repositoryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
+	 * Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param groupId the group ID to search with
+	 * @param parentFolderId the parent folder ID to search with
+	 * @param name the name to search with
 	 * @return the matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFolder findByRepositoryId(long repositoryId)
+	public DLFolder findByG_P_N(long groupId, long parentFolderId, String name)
 		throws NoSuchFolderException, SystemException {
-		DLFolder dlFolder = fetchByRepositoryId(repositoryId);
+		DLFolder dlFolder = fetchByG_P_N(groupId, parentFolderId, name);
 
 		if (dlFolder == null) {
-			StringBundler msg = new StringBundler(4);
+			StringBundler msg = new StringBundler(8);
 
 			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
-			msg.append("repositoryId=");
-			msg.append(repositoryId);
+			msg.append("groupId=");
+			msg.append(groupId);
+
+			msg.append(", parentFolderId=");
+			msg.append(parentFolderId);
+
+			msg.append(", name=");
+			msg.append(name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -3379,41 +3352,59 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 * Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param groupId the group ID to search with
+	 * @param parentFolderId the parent folder ID to search with
+	 * @param name the name to search with
 	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFolder fetchByRepositoryId(long repositoryId)
+	public DLFolder fetchByG_P_N(long groupId, long parentFolderId, String name)
 		throws SystemException {
-		return fetchByRepositoryId(repositoryId, true);
+		return fetchByG_P_N(groupId, parentFolderId, name, true);
 	}
 
 	/**
-	 * Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 * Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param groupId the group ID to search with
+	 * @param parentFolderId the parent folder ID to search with
+	 * @param name the name to search with
 	 * @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-	public DLFolder fetchByRepositoryId(long repositoryId,
-		boolean retrieveFromCache) throws SystemException {
-		Object[] finderArgs = new Object[] { repositoryId };
+	public DLFolder fetchByG_P_N(long groupId, long parentFolderId,
+		String name, boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, parentFolderId, name };
 
 		Object result = null;
 
 		if (retrieveFromCache) {
-			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_G_P_N,
 					finderArgs, this);
 		}
 
 		if (result == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(5);
 
 			query.append(_SQL_SELECT_DLFOLDER_WHERE);
 
-			query.append(_FINDER_COLUMN_REPOSITORYID_REPOSITORYID_2);
+			query.append(_FINDER_COLUMN_G_P_N_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_P_N_PARENTFOLDERID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_P_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_P_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_P_N_NAME_2);
+				}
+			}
 
 			query.append(DLFolderModelImpl.ORDER_BY_JPQL);
 
@@ -3428,7 +3419,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(repositoryId);
+				qPos.add(groupId);
+
+				qPos.add(parentFolderId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
 
 				List<DLFolder> list = q.list();
 
@@ -3437,7 +3434,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 				DLFolder dlFolder = null;
 
 				if (list.isEmpty()) {
-					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 						finderArgs, list);
 				}
 				else {
@@ -3445,8 +3442,11 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 					cacheResult(dlFolder);
 
-					if ((dlFolder.getRepositoryId() != repositoryId)) {
-						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+					if ((dlFolder.getGroupId() != groupId) ||
+							(dlFolder.getParentFolderId() != parentFolderId) ||
+							(dlFolder.getName() == null) ||
+							!dlFolder.getName().equals(name)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_N,
 							finderArgs, dlFolder);
 					}
 				}
@@ -3458,7 +3458,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 			}
 			finally {
 				if (result == null) {
-					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_REPOSITORYID,
+					FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_N,
 						finderArgs);
 				}
 
@@ -3634,6 +3634,19 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
+	 * Removes the d l folder where repositoryId = &#63; from the database.
+	 *
+	 * @param repositoryId the repository ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByRepositoryId(long repositoryId)
+		throws NoSuchFolderException, SystemException {
+		DLFolder dlFolder = findByRepositoryId(repositoryId);
+
+		dlFolderPersistence.remove(dlFolder);
+	}
+
+	/**
 	 * Removes all the d l folders where groupId = &#63; and parentFolderId = &#63; from the database.
 	 *
 	 * @param groupId the group ID to search with
@@ -3645,21 +3658,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 		for (DLFolder dlFolder : findByG_P(groupId, parentFolderId)) {
 			dlFolderPersistence.remove(dlFolder);
 		}
-	}
-
-	/**
-	 * Removes the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; from the database.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
-	 * @throws SystemException if a system exception occurred
-	 */
-	public void removeByG_P_N(long groupId, long parentFolderId, String name)
-		throws NoSuchFolderException, SystemException {
-		DLFolder dlFolder = findByG_P_N(groupId, parentFolderId, name);
-
-		dlFolderPersistence.remove(dlFolder);
 	}
 
 	/**
@@ -3677,14 +3675,16 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Removes the d l folder where repositoryId = &#63; from the database.
+	 * Removes the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; from the database.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param groupId the group ID to search with
+	 * @param parentFolderId the parent folder ID to search with
+	 * @param name the name to search with
 	 * @throws SystemException if a system exception occurred
 	 */
-	public void removeByRepositoryId(long repositoryId)
+	public void removeByG_P_N(long groupId, long parentFolderId, String name)
 		throws NoSuchFolderException, SystemException {
-		DLFolder dlFolder = findByRepositoryId(repositoryId);
+		DLFolder dlFolder = findByG_P_N(groupId, parentFolderId, name);
 
 		dlFolderPersistence.remove(dlFolder);
 	}
@@ -3991,6 +3991,59 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
+	 * Counts all the d l folders where repositoryId = &#63;.
+	 *
+	 * @param repositoryId the repository ID to search with
+	 * @return the number of matching d l folders
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByRepositoryId(long repositoryId) throws SystemException {
+		Object[] finderArgs = new Object[] { repositoryId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_REPOSITORYID,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_DLFOLDER_WHERE);
+
+			query.append(_FINDER_COLUMN_REPOSITORYID_REPOSITORYID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(repositoryId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_REPOSITORYID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
 	 * Counts all the d l folders where groupId = &#63; and parentFolderId = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -4104,82 +4157,6 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
-	 *
-	 * @param groupId the group ID to search with
-	 * @param parentFolderId the parent folder ID to search with
-	 * @param name the name to search with
-	 * @return the number of matching d l folders
-	 * @throws SystemException if a system exception occurred
-	 */
-	public int countByG_P_N(long groupId, long parentFolderId, String name)
-		throws SystemException {
-		Object[] finderArgs = new Object[] { groupId, parentFolderId, name };
-
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_N,
-				finderArgs, this);
-
-		if (count == null) {
-			StringBundler query = new StringBundler(4);
-
-			query.append(_SQL_COUNT_DLFOLDER_WHERE);
-
-			query.append(_FINDER_COLUMN_G_P_N_GROUPID_2);
-
-			query.append(_FINDER_COLUMN_G_P_N_PARENTFOLDERID_2);
-
-			if (name == null) {
-				query.append(_FINDER_COLUMN_G_P_N_NAME_1);
-			}
-			else {
-				if (name.equals(StringPool.BLANK)) {
-					query.append(_FINDER_COLUMN_G_P_N_NAME_3);
-				}
-				else {
-					query.append(_FINDER_COLUMN_G_P_N_NAME_2);
-				}
-			}
-
-			String sql = query.toString();
-
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				Query q = session.createQuery(sql);
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(groupId);
-
-				qPos.add(parentFolderId);
-
-				if (name != null) {
-					qPos.add(name);
-				}
-
-				count = (Long)q.uniqueResult();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				if (count == null) {
-					count = Long.valueOf(0);
-				}
-
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P_N,
-					finderArgs, count);
-
-				closeSession(session);
-			}
-		}
-
-		return count.intValue();
-	}
-
-	/**
 	 * Counts all the d l folders where parentFolderId = &#63; and name = &#63;.
 	 *
 	 * @param parentFolderId the parent folder ID to search with
@@ -4251,24 +4228,41 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	}
 
 	/**
-	 * Counts all the d l folders where repositoryId = &#63;.
+	 * Counts all the d l folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
 	 *
-	 * @param repositoryId the repository ID to search with
+	 * @param groupId the group ID to search with
+	 * @param parentFolderId the parent folder ID to search with
+	 * @param name the name to search with
 	 * @return the number of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
-	public int countByRepositoryId(long repositoryId) throws SystemException {
-		Object[] finderArgs = new Object[] { repositoryId };
+	public int countByG_P_N(long groupId, long parentFolderId, String name)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { groupId, parentFolderId, name };
 
-		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_REPOSITORYID,
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_G_P_N,
 				finderArgs, this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(2);
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_COUNT_DLFOLDER_WHERE);
 
-			query.append(_FINDER_COLUMN_REPOSITORYID_REPOSITORYID_2);
+			query.append(_FINDER_COLUMN_G_P_N_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_G_P_N_PARENTFOLDERID_2);
+
+			if (name == null) {
+				query.append(_FINDER_COLUMN_G_P_N_NAME_1);
+			}
+			else {
+				if (name.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_G_P_N_NAME_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_G_P_N_NAME_2);
+				}
+			}
 
 			String sql = query.toString();
 
@@ -4281,7 +4275,13 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(repositoryId);
+				qPos.add(groupId);
+
+				qPos.add(parentFolderId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
 
 				count = (Long)q.uniqueResult();
 			}
@@ -4293,7 +4293,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 					count = Long.valueOf(0);
 				}
 
-				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_REPOSITORYID,
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P_N,
 					finderArgs, count);
 
 				closeSession(session);
@@ -4401,18 +4401,18 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	private static final String _FINDER_COLUMN_UUID_G_GROUPID_2 = "dlFolder.groupId = ?";
 	private static final String _FINDER_COLUMN_GROUPID_GROUPID_2 = "dlFolder.groupId = ?";
 	private static final String _FINDER_COLUMN_COMPANYID_COMPANYID_2 = "dlFolder.companyId = ?";
+	private static final String _FINDER_COLUMN_REPOSITORYID_REPOSITORYID_2 = "dlFolder.repositoryId = ?";
 	private static final String _FINDER_COLUMN_G_P_GROUPID_2 = "dlFolder.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_PARENTFOLDERID_2 = "dlFolder.parentFolderId = ?";
+	private static final String _FINDER_COLUMN_P_N_PARENTFOLDERID_2 = "dlFolder.parentFolderId = ? AND ";
+	private static final String _FINDER_COLUMN_P_N_NAME_1 = "dlFolder.name IS NULL";
+	private static final String _FINDER_COLUMN_P_N_NAME_2 = "dlFolder.name = ?";
+	private static final String _FINDER_COLUMN_P_N_NAME_3 = "(dlFolder.name IS NULL OR dlFolder.name = ?)";
 	private static final String _FINDER_COLUMN_G_P_N_GROUPID_2 = "dlFolder.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_N_PARENTFOLDERID_2 = "dlFolder.parentFolderId = ? AND ";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_1 = "dlFolder.name IS NULL";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_2 = "dlFolder.name = ?";
 	private static final String _FINDER_COLUMN_G_P_N_NAME_3 = "(dlFolder.name IS NULL OR dlFolder.name = ?)";
-	private static final String _FINDER_COLUMN_P_N_PARENTFOLDERID_2 = "dlFolder.parentFolderId = ? AND ";
-	private static final String _FINDER_COLUMN_P_N_NAME_1 = "dlFolder.name IS NULL";
-	private static final String _FINDER_COLUMN_P_N_NAME_2 = "dlFolder.name = ?";
-	private static final String _FINDER_COLUMN_P_N_NAME_3 = "(dlFolder.name IS NULL OR dlFolder.name = ?)";
-	private static final String _FINDER_COLUMN_REPOSITORYID_REPOSITORYID_2 = "dlFolder.repositoryId = ?";
 	private static final String _FILTER_SQL_SELECT_DLFOLDER_WHERE = "SELECT DISTINCT {dlFolder.*} FROM DLFolder dlFolder WHERE ";
 	private static final String _FILTER_SQL_SELECT_DLFOLDER_NO_INLINE_DISTINCT_WHERE_1 =
 		"SELECT {DLFolder.*} FROM (SELECT DISTINCT dlFolder.folderId FROM DLFolder dlFolder WHERE ";

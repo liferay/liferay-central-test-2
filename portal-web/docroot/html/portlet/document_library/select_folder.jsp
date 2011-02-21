@@ -19,8 +19,9 @@
 <%
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
-long repositoryId = scopeGroupId;
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+
+long repositoryId = scopeGroupId;
 String folderName = LanguageUtil.get(pageContext, "documents-home");
 
 if (folder != null) {

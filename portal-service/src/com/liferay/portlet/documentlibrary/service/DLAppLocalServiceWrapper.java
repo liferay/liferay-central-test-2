@@ -205,10 +205,10 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 	}
 
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(
-		long repositoryId, long folderId, java.lang.String title)
+		long groupId, long folderId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppLocalService.getFileEntry(repositoryId, folderId, title);
+		return _dlAppLocalService.getFileEntry(groupId, folderId, title);
 	}
 
 	public com.liferay.portal.kernel.repository.model.FileEntry getFileEntryByUuidAndGroupId(

@@ -210,10 +210,10 @@ public class DLAppServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry getFileEntry(
-		long repositoryId, long folderId, java.lang.String title)
+		long groupId, long folderId, java.lang.String title)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileEntry(repositoryId, folderId, title);
+		return getService().getFileEntry(groupId, folderId, title);
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntry getFileEntryByUuidAndGroupId(

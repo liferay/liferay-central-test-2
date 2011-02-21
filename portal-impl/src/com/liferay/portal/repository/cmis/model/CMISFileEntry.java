@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Lock;
+import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
@@ -43,6 +44,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.chemistry.opencmis.client.api.Document;
+import org.apache.chemistry.opencmis.commons.data.ContentStream;
 
 /**
  * @author Alexander Chow
@@ -61,7 +63,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public boolean containsPermission(
 			PermissionChecker permissionChecker, String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return containsPermission(_document, actionId);
 	}
@@ -79,11 +81,11 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public InputStream getContentStream(String version) {
-		List<Document> versions = _document.getAllVersions();
+		for (Document document : _document.getAllVersions()) {
+			if (version.equals(document.getVersionLabel())) {
+				ContentStream contentStream = document.getContentStream();
 
-		for (Document document : versions) {
-			if (document.getVersionLabel().equals(version)) {
-				return document.getContentStream().getStream();
+				return contentStream.getStream();
 			}
 		}
 
@@ -109,10 +111,8 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	public FileVersion getFileVersion(String version)
 		throws PortalException, SystemException {
 
-		List<Document> versions = _document.getAllVersions();
-
-		for (Document document : versions) {
-			if (document.getVersionLabel().equals(version)) {
+		for (Document document : _document.getAllVersions()) {
+			if (version.equals(document.getVersionLabel())) {
 				return CMISRepositoryLocalServiceUtil.toFileVersion(
 					getRepositoryId(), document);
 			}
@@ -131,9 +131,11 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 		try {
 			for (Document document : documents) {
-				fileVersions.add(
+				FileVersion fileVersion =
 					CMISRepositoryLocalServiceUtil.toFileVersion(
-						getRepositoryId(), document));
+						getRepositoryId(), document);
+
+				fileVersions.add(fileVersion);
 			}
 		}
 		catch (PortalException pe) {
@@ -145,9 +147,8 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public Folder getFolder() {
 		try {
-			return
-				CMISRepositoryLocalServiceUtil.toFolder(
-					getRepositoryId(), _document.getParents().get(0));
+			return CMISRepositoryLocalServiceUtil.toFolder(
+				getRepositoryId(), _document.getParents().get(0));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -157,7 +158,9 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public long getFolderId() {
-		return getFolder().getFolderId();
+		Folder folder = getFolder();
+
+		return folder.getFolderId();
 	}
 
 	public long getGroupId() {
@@ -224,8 +227,10 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	public String getUserUuid() {
 		try {
-			return UserLocalServiceUtil.getDefaultUser(
-				getCompanyId()).getUserUuid();
+			User user = UserLocalServiceUtil.getDefaultUser(
+				getCompanyId());
+
+			return user.getUserUuid();
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;
@@ -280,7 +285,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 	private CMISRepository _cmisRepository;
 	private Document _document;
-	private String _uuid;
 	private long _fileEntryId;
+	private String _uuid;
 
 }

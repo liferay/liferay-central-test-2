@@ -282,16 +282,16 @@ Liferay.Service.registerClass(
 Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Repository",
 	{
-		mountRepository: true,
 		checkRepository: true,
-		unmountRepositories: true,
-		unmountRepository: true,
 		getLocalRepositoryImpl: true,
 		getRepository: true,
 		getRepositoryImpl: true,
 		getSupportedConfigurations: true,
 		getSupportedParameters: true,
 		getTypeSettingsProperties: true,
+		mountRepository: true,
+		unmountRepositories: true,
+		unmountRepository: true,
 		updateRepository: true
 	}
 );

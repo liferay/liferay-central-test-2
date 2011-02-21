@@ -526,6 +526,41 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	/**
+	* Finds the d l folder where repositoryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
+	*
+	* @param repositoryId the repository ID to search with
+	* @return the matching d l folder
+	* @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.documentlibrary.model.DLFolder findByRepositoryId(
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFolderException;
+
+	/**
+	* Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param repositoryId the repository ID to search with
+	* @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByRepositoryId(
+		long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param repositoryId the repository ID to search with
+	* @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByRepositoryId(
+		long repositoryId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Finds all the d l folders where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -708,48 +743,6 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	/**
-	* Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
-	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
-	* @param name the name to search with
-	* @return the matching d l folder
-	* @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_N(
-		long groupId, long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFolderException;
-
-	/**
-	* Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
-	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
-	* @param name the name to search with
-	* @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
-		long groupId, long parentFolderId, java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
-	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
-	* @param name the name to search with
-	* @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
-	* @throws SystemException if a system exception occurred
-	*/
-	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
-		long groupId, long parentFolderId, java.lang.String name,
-		boolean retrieveFromCache)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Finds all the d l folders where parentFolderId = &#63; and name = &#63;.
 	*
 	* @param parentFolderId the parent folder ID to search with
@@ -861,38 +854,45 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	/**
-	* Finds the d l folder where repositoryId = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
+	* Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or throws a {@link com.liferay.portlet.documentlibrary.NoSuchFolderException} if it could not be found.
 	*
-	* @param repositoryId the repository ID to search with
+	* @param groupId the group ID to search with
+	* @param parentFolderId the parent folder ID to search with
+	* @param name the name to search with
 	* @return the matching d l folder
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFolder findByRepositoryId(
-		long repositoryId)
+	public com.liferay.portlet.documentlibrary.model.DLFolder findByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	/**
-	* Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	* Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
 	*
-	* @param repositoryId the repository ID to search with
+	* @param groupId the group ID to search with
+	* @param parentFolderId the parent folder ID to search with
+	* @param name the name to search with
 	* @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByRepositoryId(
-		long repositoryId)
+	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Finds the d l folder where repositoryId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	* Finds the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
 	*
-	* @param repositoryId the repository ID to search with
+	* @param groupId the group ID to search with
+	* @param parentFolderId the parent folder ID to search with
+	* @param name the name to search with
 	* @return the matching d l folder, or <code>null</code> if a matching d l folder could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByRepositoryId(
-		long repositoryId, boolean retrieveFromCache)
+	public com.liferay.portlet.documentlibrary.model.DLFolder fetchByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name,
+		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -977,6 +977,16 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes the d l folder where repositoryId = &#63; from the database.
+	*
+	* @param repositoryId the repository ID to search with
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByRepositoryId(long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.documentlibrary.NoSuchFolderException;
+
+	/**
 	* Removes all the d l folders where groupId = &#63; and parentFolderId = &#63; from the database.
 	*
 	* @param groupId the group ID to search with
@@ -985,19 +995,6 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 	*/
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Removes the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; from the database.
-	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
-	* @param name the name to search with
-	* @throws SystemException if a system exception occurred
-	*/
-	public void removeByG_P_N(long groupId, long parentFolderId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException,
-			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
 	/**
 	* Removes all the d l folders where parentFolderId = &#63; and name = &#63; from the database.
@@ -1010,12 +1007,15 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes the d l folder where repositoryId = &#63; from the database.
+	* Removes the d l folder where groupId = &#63; and parentFolderId = &#63; and name = &#63; from the database.
 	*
-	* @param repositoryId the repository ID to search with
+	* @param groupId the group ID to search with
+	* @param parentFolderId the parent folder ID to search with
+	* @param name the name to search with
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByRepositoryId(long repositoryId)
+	public void removeByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.documentlibrary.NoSuchFolderException;
 
@@ -1079,6 +1079,16 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Counts all the d l folders where repositoryId = &#63;.
+	*
+	* @param repositoryId the repository ID to search with
+	* @return the number of matching d l folders
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByRepositoryId(long repositoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Counts all the d l folders where groupId = &#63; and parentFolderId = &#63;.
 	*
 	* @param groupId the group ID to search with
@@ -1101,19 +1111,6 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d l folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
-	*
-	* @param groupId the group ID to search with
-	* @param parentFolderId the parent folder ID to search with
-	* @param name the name to search with
-	* @return the number of matching d l folders
-	* @throws SystemException if a system exception occurred
-	*/
-	public int countByG_P_N(long groupId, long parentFolderId,
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	/**
 	* Counts all the d l folders where parentFolderId = &#63; and name = &#63;.
 	*
 	* @param parentFolderId the parent folder ID to search with
@@ -1125,13 +1122,16 @@ public interface DLFolderPersistence extends BasePersistence<DLFolder> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Counts all the d l folders where repositoryId = &#63;.
+	* Counts all the d l folders where groupId = &#63; and parentFolderId = &#63; and name = &#63;.
 	*
-	* @param repositoryId the repository ID to search with
+	* @param groupId the group ID to search with
+	* @param parentFolderId the parent folder ID to search with
+	* @param name the name to search with
 	* @return the number of matching d l folders
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByRepositoryId(long repositoryId)
+	public int countByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

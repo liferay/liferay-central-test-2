@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -33,8 +34,8 @@ import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,19 +47,19 @@ public class CMISFolder extends CMISModel implements Folder {
 
 	public CMISFolder(
 		CMISRepository cmisRepository, String uuid, long folderId,
-		org.apache.chemistry.opencmis.client.api.Folder folder) {
+		org.apache.chemistry.opencmis.client.api.Folder cmisFolder) {
 
 		_cmisRepository = cmisRepository;
 		_uuid = uuid;
 		_folderId = folderId;
-		_folder = folder;
+		_cmisFolder = cmisFolder;
 	}
 
 	public boolean containsPermission(
 			PermissionChecker permissionChecker, String actionId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		return containsPermission(_folder, actionId);
+		return containsPermission(_cmisFolder, actionId);
 	}
 
 	public List<Folder> getAncestors()
@@ -86,7 +87,7 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public Date getCreateDate() {
-		GregorianCalendar calendar = _folder.getCreationDate();
+		Calendar calendar = _cmisFolder.getCreationDate();
 
 		if (calendar != null) {
 			return calendar.getTime();
@@ -109,11 +110,11 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public Object getModel() {
-		return _folder;
+		return _cmisFolder;
 	}
 
 	public Date getModifiedDate() {
-		GregorianCalendar calendar = _folder.getLastModificationDate();
+		Calendar calendar = _cmisFolder.getLastModificationDate();
 
 		if (calendar != null) {
 			return calendar.getTime();
@@ -124,10 +125,10 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public String getName() {
-		List<org.apache.chemistry.opencmis.client.api.Folder> parentFolders =
-			_folder.getParents();
+		List<org.apache.chemistry.opencmis.client.api.Folder>
+			parentCmisFolders = _cmisFolder.getParents();
 
-		if (parentFolders.size() == 0) {
+		if (parentCmisFolders.isEmpty()) {
 			try {
 				DLFolder dlFolder =
 					DLRepositoryLocalServiceUtil.getFolderByRepositoryId(
@@ -140,14 +141,14 @@ public class CMISFolder extends CMISModel implements Folder {
 			}
 		}
 
-		return _folder.getName();
+		return _cmisFolder.getName();
 	}
 
 	public Folder getParentFolder() throws PortalException, SystemException {
-		List<org.apache.chemistry.opencmis.client.api.Folder> parentFolders =
-			_folder.getParents();
+		List<org.apache.chemistry.opencmis.client.api.Folder>
+			parentCmisFolders = _cmisFolder.getParents();
 
-		if (parentFolders.size() == 0) {
+		if (parentCmisFolders.isEmpty()) {
 			DLFolder dlFolder =
 				DLRepositoryLocalServiceUtil.getFolderByRepositoryId(
 					getRepositoryId());
@@ -163,7 +164,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		}
 		else {
 			return CMISRepositoryLocalServiceUtil.toFolder(
-				getRepositoryId(), parentFolders.get(0));
+				getRepositoryId(), parentCmisFolders.get(0));
 		}
 	}
 
@@ -230,13 +231,15 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public String getUserName() {
-		return _folder.getCreatedBy();
+		return _cmisFolder.getCreatedBy();
 	}
 
 	public String getUserUuid() {
 		try {
-			return UserLocalServiceUtil.getDefaultUser(
-				getCompanyId()).getUserUuid();
+			User user = UserLocalServiceUtil.getDefaultUser(
+				getCompanyId());
+
+			return user.getUserUuid();
 		}
 		catch (Exception e) {
 			return StringPool.BLANK;
@@ -287,11 +290,11 @@ public class CMISFolder extends CMISModel implements Folder {
 		return this;
 	}
 
-	private org.apache.chemistry.opencmis.client.api.Folder _folder;
-	private CMISRepository _cmisRepository;
-	private String _uuid;
-	private long _folderId;
-
 	private static Log _log = LogFactoryUtil.getLog(CMISFolder.class);
+
+	private org.apache.chemistry.opencmis.client.api.Folder _cmisFolder;
+	private CMISRepository _cmisRepository;
+	private long _folderId;
+	private String _uuid;
 
 }

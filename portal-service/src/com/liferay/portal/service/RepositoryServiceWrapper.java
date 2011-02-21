@@ -28,37 +28,9 @@ public class RepositoryServiceWrapper implements RepositoryService {
 		_repositoryService = repositoryService;
 	}
 
-	public long mountRepository(long groupId, long classNameId,
-		long parentFolderId, java.lang.String name,
-		java.lang.String description, java.lang.String portletId,
-		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _repositoryService.mountRepository(groupId, classNameId,
-			parentFolderId, name, description, portletId,
-			typeSettingsProperties, serviceContext);
-	}
-
 	public void checkRepository(long repositoryId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_repositoryService.checkRepository(repositoryId);
-	}
-
-	/**
-	* This method unmounts all repositories associated with this group. It
-	* deletes the data from only Liferay repositories.
-	*/
-	public void unmountRepositories(long groupId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_repositoryService.unmountRepositories(groupId);
-	}
-
-	public void unmountRepository(long repositoryId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_repositoryService.unmountRepository(repositoryId);
 	}
 
 	public com.liferay.portal.kernel.repository.LocalRepository getLocalRepositoryImpl(
@@ -114,6 +86,34 @@ public class RepositoryServiceWrapper implements RepositoryService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _repositoryService.getTypeSettingsProperties(repositoryId);
+	}
+
+	public long mountRepository(long groupId, long classNameId,
+		long parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String portletId,
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _repositoryService.mountRepository(groupId, classNameId,
+			parentFolderId, name, description, portletId,
+			typeSettingsProperties, serviceContext);
+	}
+
+	/**
+	* This method unmounts all repositories associated with this group. It
+	* deletes the data from only Liferay repositories.
+	*/
+	public void unmountRepositories(long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_repositoryService.unmountRepositories(groupId);
+	}
+
+	public void unmountRepository(long repositoryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_repositoryService.unmountRepository(repositoryId);
 	}
 
 	public void updateRepository(long repositoryId, java.lang.String name,

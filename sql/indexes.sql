@@ -464,7 +464,7 @@ create index IX_8BD6BCA7 on Release_ (servletContextName);
 create index IX_5253B1FA on Repository (groupId);
 
 create index IX_B7034B27 on RepositoryEntry (repositoryId);
-create index IX_9BDCF489 on RepositoryEntry (repositoryId, mappedId);
+create unique index IX_9BDCF489 on RepositoryEntry (repositoryId, mappedId);
 create index IX_B9B1506 on RepositoryEntry (uuid_);
 create unique index IX_354AA664 on RepositoryEntry (uuid_, groupId);
 

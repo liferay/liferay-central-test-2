@@ -76,30 +76,6 @@ public class RepositoryServiceSoap {
 		}
 	}
 
-	public static void unmountRepositories(long groupId)
-		throws RemoteException {
-		try {
-			RepositoryServiceUtil.unmountRepositories(groupId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void unmountRepository(long repositoryId)
-		throws RemoteException {
-		try {
-			RepositoryServiceUtil.unmountRepository(repositoryId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portal.model.RepositorySoap getRepository(
 		long repositoryId) throws RemoteException {
 		try {
@@ -149,6 +125,30 @@ public class RepositoryServiceSoap {
 			com.liferay.portal.kernel.util.UnicodeProperties returnValue = RepositoryServiceUtil.getTypeSettingsProperties(repositoryId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unmountRepositories(long groupId)
+		throws RemoteException {
+		try {
+			RepositoryServiceUtil.unmountRepositories(groupId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unmountRepository(long repositoryId)
+		throws RemoteException {
+		try {
+			RepositoryServiceUtil.unmountRepository(repositoryId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
