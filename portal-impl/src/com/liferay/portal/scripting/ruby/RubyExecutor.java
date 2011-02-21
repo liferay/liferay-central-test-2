@@ -69,17 +69,18 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		_basePath = WebDirDetector.getRootDir(
 			PortalClassLoaderUtil.getClassLoader());
 
-		List<String> loadPaths = new ArrayList<String>();
+		_loadPaths = new ArrayList<String>(3);
 
-		loadPaths.add(_basePath);
+		_loadPaths.add("META-INF/jruby.home/lib/ruby/1.8");
 
-		_ruby = JavaEmbedUtils.initialize(loadPaths, rubyInstanceConfig);
+		_loadPaths.add("META-INF/jruby.home/lib/ruby/site_ruby/1.8");
+
+		_loadPaths.add("file:" + _basePath +
+			"WEB-INF/lib/ruby-gems.jar!/gems/haml-3.0.25/lib");
+
+		_ruby = JavaEmbedUtils.initialize(_loadPaths, rubyInstanceConfig);
 
 		_ruby.setCurrentDirectory(_basePath);
-	}
-
-	public String getLanguage() {
-		return LANGUAGE;
 	}
 
 	public Map<String, Object> eval(
@@ -99,6 +100,10 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		return eval(allowedClasses, inputObjects, outputNames, null, script);
 	}
 
+	public String getLanguage() {
+		return LANGUAGE;
+	}
+
 	protected Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, File scriptFile, String script)
@@ -110,15 +115,10 @@ public class RubyExecutor extends BaseScriptingExecutor {
 		}
 
 		try {
-			List<String> loadPaths = new ArrayList<String>();
-
-			loadPaths.add(_basePath);
-
-			RubyInstanceConfig rubyInstanceConfig =
-				_ruby.getInstanceConfig();
+			RubyInstanceConfig rubyInstanceConfig = _ruby.getInstanceConfig();
 
 			rubyInstanceConfig.setCurrentDirectory(_basePath);
-			rubyInstanceConfig.setLoadPaths(loadPaths);
+			rubyInstanceConfig.setLoadPaths(_loadPaths);
 
 			GlobalVariables globalVariables = _ruby.getGlobalVariables();
 
@@ -173,6 +173,7 @@ public class RubyExecutor extends BaseScriptingExecutor {
 	private static final String _COMPILE_MODE_JIT = "jit";
 
 	private String _basePath;
+	private List<String> _loadPaths;
 	private Ruby _ruby;
 
 }
