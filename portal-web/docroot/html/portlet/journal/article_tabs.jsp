@@ -57,7 +57,7 @@ if (article != null) {
 	<c:when test="<%= article != null %>">
 		<liferay-ui:header
 			backURL="<%= redirect %>"
-			title='<%= article.getTitle() %>'
+			title="<%= article.getTitle() %>"
 		/>
 
 		<liferay-ui:tabs
