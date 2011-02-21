@@ -636,7 +636,7 @@ create table JournalArticle (
 	modifiedDate DATE null,
 	articleId VARCHAR(75) null,
 	version DOUBLE,
-	title VARCHAR(300) null,
+	title STRING null,
 	urlTitle VARCHAR(150) null,
 	description STRING null,
 	content TEXT null,

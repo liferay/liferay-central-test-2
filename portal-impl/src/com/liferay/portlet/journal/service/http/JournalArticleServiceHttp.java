@@ -56,16 +56,18 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 public class JournalArticleServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
-		boolean autoArticleId, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
-		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
+		boolean autoArticleId,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+		int reviewDateDay, int reviewDateYear, int reviewDateHour,
+		int reviewDateMinute, boolean neverReview, boolean indexable,
+		boolean smallImage, java.lang.String smallImageURL,
 		java.io.File smallFile, java.util.Map<java.lang.String, byte[]> images,
 		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -76,8 +78,8 @@ public class JournalArticleServiceHttp {
 					"addArticle", _addArticleParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					articleId, autoArticleId, title, description, content,
-					type, structureId, templateId, displayDateMonth,
+					articleId, autoArticleId, titleMap, descriptionMap,
+					content, type, structureId, templateId, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, expirationDateMonth, expirationDateDay,
 					expirationDateYear, expirationDateHour,
@@ -114,16 +116,18 @@ public class JournalArticleServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
-		boolean autoArticleId, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
-		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		boolean indexable, java.lang.String articleURL,
+		boolean autoArticleId,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+		int reviewDateDay, int reviewDateYear, int reviewDateHour,
+		int reviewDateMinute, boolean neverReview, boolean indexable,
+		java.lang.String articleURL,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -132,8 +136,8 @@ public class JournalArticleServiceHttp {
 					"addArticle", _addArticleParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					articleId, autoArticleId, title, description, content,
-					type, structureId, templateId, displayDateMonth,
+					articleId, autoArticleId, titleMap, descriptionMap,
+					content, type, structureId, templateId, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, expirationDateMonth, expirationDateDay,
 					expirationDateYear, expirationDateHour,
@@ -987,7 +991,9 @@ public class JournalArticleServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
-		double version, java.lang.String title, java.lang.String description,
+		double version,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -1007,15 +1013,15 @@ public class JournalArticleServiceHttp {
 					"updateArticle", _updateArticleParameterTypes24);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					articleId, version, title, description, content, type,
-					structureId, templateId, displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					expirationDateMonth, expirationDateDay, expirationDateYear,
-					expirationDateHour, expirationDateMinute, neverExpire,
-					reviewDateMonth, reviewDateDay, reviewDateYear,
-					reviewDateHour, reviewDateMinute, neverReview, indexable,
-					smallImage, smallImageURL, smallFile, images, articleURL,
-					serviceContext);
+					articleId, version, titleMap, descriptionMap, content,
+					type, structureId, templateId, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth,
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, indexable, smallImage,
+					smallImageURL, smallFile, images, articleURL, serviceContext);
 
 			Object returnObj = null;
 
@@ -1084,25 +1090,23 @@ public class JournalArticleServiceHttp {
 	private static Log _log = LogFactoryUtil.getLog(JournalArticleServiceHttp.class);
 	private static final Class<?>[] _addArticleParameterTypes0 = new Class[] {
 			long.class, java.lang.String.class, boolean.class,
+			java.util.Map.class, java.util.Map.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, int.class, int.class,
+			java.lang.String.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
-			int.class, int.class, boolean.class, int.class, int.class, int.class,
-			int.class, int.class, boolean.class, boolean.class, boolean.class,
-			java.lang.String.class, java.io.File.class, java.util.Map.class,
-			java.lang.String.class,
+			boolean.class, int.class, int.class, int.class, int.class, int.class,
+			boolean.class, boolean.class, boolean.class, java.lang.String.class,
+			java.io.File.class, java.util.Map.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _addArticleParameterTypes1 = new Class[] {
 			long.class, java.lang.String.class, boolean.class,
+			java.util.Map.class, java.util.Map.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, int.class, int.class,
+			java.lang.String.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
-			int.class, int.class, boolean.class, int.class, int.class, int.class,
-			int.class, int.class, boolean.class, boolean.class,
-			java.lang.String.class,
+			boolean.class, int.class, int.class, int.class, int.class, int.class,
+			boolean.class, boolean.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _copyArticleParameterTypes2 = new Class[] {
@@ -1213,14 +1217,13 @@ public class JournalArticleServiceHttp {
 		};
 	private static final Class<?>[] _updateArticleParameterTypes24 = new Class[] {
 			long.class, java.lang.String.class, double.class,
+			java.util.Map.class, java.util.Map.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class,
-			java.lang.String.class, java.lang.String.class, int.class, int.class,
+			java.lang.String.class, int.class, int.class, int.class, int.class,
 			int.class, int.class, int.class, int.class, int.class, int.class,
-			int.class, int.class, boolean.class, int.class, int.class, int.class,
-			int.class, int.class, boolean.class, boolean.class, boolean.class,
-			java.lang.String.class, java.io.File.class, java.util.Map.class,
-			java.lang.String.class,
+			boolean.class, int.class, int.class, int.class, int.class, int.class,
+			boolean.class, boolean.class, boolean.class, java.lang.String.class,
+			java.io.File.class, java.util.Map.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateContentParameterTypes25 = new Class[] {

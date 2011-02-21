@@ -31,7 +31,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		long groupId, java.lang.String articleId, boolean autoArticleId,
-		java.lang.String title, java.lang.String description,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -47,19 +48,20 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.addArticle(groupId, articleId,
-			autoArticleId, title, description, content, type, structureId,
-			templateId, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
-			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
-			indexable, smallImage, smallImageURL, smallFile, images,
-			articleURL, serviceContext);
+			autoArticleId, titleMap, descriptionMap, content, type,
+			structureId, templateId, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, indexable, smallImage,
+			smallImageURL, smallFile, images, articleURL, serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		long groupId, java.lang.String articleId, boolean autoArticleId,
-		java.lang.String title, java.lang.String description,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -73,13 +75,13 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.addArticle(groupId, articleId,
-			autoArticleId, title, description, content, type, structureId,
-			templateId, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
-			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
-			indexable, articleURL, serviceContext);
+			autoArticleId, titleMap, descriptionMap, content, type,
+			structureId, templateId, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, indexable, articleURL, serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle copyArticle(
@@ -298,7 +300,8 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String title, java.lang.String description,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -314,7 +317,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateArticle(groupId, articleId,
-			version, title, description, content, type, structureId,
+			version, titleMap, descriptionMap, content, type, structureId,
 			templateId, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
