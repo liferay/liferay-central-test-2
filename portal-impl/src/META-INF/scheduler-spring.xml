@@ -19,7 +19,7 @@
 
 	<!-- Proxy -->
 
-	<bean id="com.liferay.portal.scheduler.SchedulerEngineClusterProxy" class="com.liferay.portal.scheduler.SchedulerEngineClusterProxy">
+	<bean id="com.liferay.portal.scheduler.ClusterSchedulerEngine" class="com.liferay.portal.scheduler.ClusterSchedulerEngine">
 		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.SchedulerEngineProxyBean" />
 	</bean>
 	<bean id="com.liferay.portal.scheduler.SchedulerEngineProxyBean" class="com.liferay.portal.scheduler.SchedulerEngineProxyBean">
@@ -40,11 +40,11 @@
 	<!-- Util -->
 
 	<bean class="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil">
-		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.SchedulerEngineClusterProxy" />
-		<property name="schedulerEngineClusterManager" ref="com.liferay.portal.scheduler.SchedulerEngineClusterProxy" />
+		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.ClusterSchedulerEngine" />
+		<property name="schedulerEngineClusterManager" ref="com.liferay.portal.scheduler.ClusterSchedulerEngine" />
 	</bean>
 
-	<bean id="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
+	<bean id="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngine" />
 
 	<!-- Messaging -->
 
@@ -58,7 +58,7 @@
 		<property name="name" value="liferay/scheduler_scripting" />
 	</bean>
 	<bean id="messageListener.scheduler_engine" class="com.liferay.portal.kernel.messaging.proxy.ProxyMessageListener">
-		<property name="manager" ref="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />
+		<property name="manager" ref="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngine" />
 	</bean>
 	<bean id="messageListener.scheduler_scripting" class="com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper">
 		<property name="className" value="com.liferay.portal.scheduler.messaging.ScriptingMessageListener" />

@@ -20,18 +20,22 @@ import com.liferay.portal.kernel.util.InfrastructureUtil;
 
 import java.sql.Connection;
 
+import javax.sql.DataSource;
+
 import org.quartz.utils.ConnectionProvider;
 
 /**
  * @author Bruno Farache
  */
-public class QuartzConnectionProviderImpl implements ConnectionProvider {
+public class QuartzConnectionProvider implements ConnectionProvider {
 
 	public Connection getConnection() {
 		Connection con = null;
 
 		try {
-			con = InfrastructureUtil.getDataSource().getConnection();
+			DataSource dataSource = InfrastructureUtil.getDataSource();
+
+			con = dataSource.getConnection();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -44,6 +48,6 @@ public class QuartzConnectionProviderImpl implements ConnectionProvider {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		QuartzConnectionProviderImpl.class);
+		QuartzConnectionProvider.class);
 
 }

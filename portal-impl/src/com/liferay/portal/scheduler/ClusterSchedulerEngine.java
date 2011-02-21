@@ -36,7 +36,7 @@ import java.util.List;
 /**
  * @author Tina Tian
  */
-public class SchedulerEngineClusterProxy
+public class ClusterSchedulerEngine
 	implements SchedulerEngine, SchedulerEngineClusterManager {
 
 	public void delete(String groupName) throws SchedulerException {
@@ -107,7 +107,8 @@ public class SchedulerEngineClusterProxy
 					_memorySchedulerClusterEventListener);
 
 				LockLocalServiceUtil.unlock(
-					_classNameForLock, _classNameForLock, _localClusterNodeId,
+					SchedulerEngine.class.getName(),
+					SchedulerEngine.class.getName(), _localClusterNodeId,
 					_retrieveFromCache);
 			}
 		}
@@ -205,16 +206,15 @@ public class SchedulerEngineClusterProxy
 		}
 
 		Lock lock = LockLocalServiceUtil.lock(
-			_classNameForLock, _classNameForLock, oldOwner, _localClusterNodeId,
-			_retrieveFromCache, replaceOldLock);
+			SchedulerEngine.class.getName(), SchedulerEngine.class.getName(),
+			oldOwner, _localClusterNodeId, _retrieveFromCache, replaceOldLock);
 
 		return lock;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		SchedulerEngineClusterProxy.class);
+		ClusterSchedulerEngine.class);
 
-	private static String _classNameForLock = SchedulerEngine.class.getName();
 	private static String _localClusterNodeId;
 
 	private ClusterEventListener _memorySchedulerClusterEventListener;

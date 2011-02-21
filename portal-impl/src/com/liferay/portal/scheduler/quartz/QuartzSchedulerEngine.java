@@ -58,7 +58,7 @@ import org.quartz.impl.StdSchedulerFactory;
  * @author Wesley Gong
  * @author Tina Tian
  */
-public class QuartzSchedulerEngineImpl implements SchedulerEngine {
+public class QuartzSchedulerEngine implements SchedulerEngine {
 
 	public void afterPropertiesSet() {
 		if (!PropsValues.SCHEDULER_ENABLED) {
@@ -877,7 +877,7 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	protected QuartzLocalService quartzLocalService;
 
 	private static Log _log = LogFactoryUtil.getLog(
-		QuartzSchedulerEngineImpl.class);
+		QuartzSchedulerEngine.class);
 
 	private Scheduler _scheduler;
 
