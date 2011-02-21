@@ -344,9 +344,6 @@ public class ServiceContext implements Cloneable, Serializable {
 		_user = user;
 	}
 
-	/**
-	 * @deprecated {@link #setUser(User)}
-	 */
 	public void setUserId(long userId) {
 		try {
 			_user = UserLocalServiceUtil.getUserById(userId);
