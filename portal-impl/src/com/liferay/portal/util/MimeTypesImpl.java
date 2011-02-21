@@ -59,7 +59,7 @@ public class MimeTypesImpl implements MimeTypes {
 
 			if (contentType.contains("tika")) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Retrieved contentType invalid " + contentType);
+					_log.debug("Retrieved invalid content type " + contentType);
 				}
 
 				contentType = getContentType(fileName);
@@ -67,7 +67,7 @@ public class MimeTypesImpl implements MimeTypes {
 
 			if (contentType.contains("tika")) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Retrieved contentType invalid " + contentType);
+					_log.debug("Retrieved invalid content type " + contentType);
 				}
 
 				contentType = ContentTypes.APPLICATION_OCTET_STREAM;
@@ -96,7 +96,7 @@ public class MimeTypesImpl implements MimeTypes {
 				return contentType;
 			}
 			else if (_log.isDebugEnabled()) {
-				_log.debug("Retrieved contentType invalid " + contentType);
+				_log.debug("Retrieved invalid content type " + contentType);
 			}
 		}
 		catch (Exception e) {

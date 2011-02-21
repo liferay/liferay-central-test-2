@@ -177,9 +177,9 @@ public class MimeTypesImplTest extends BaseTestCase {
 		throws Exception {
 
 		if (checkStream) {
-			InputStream is = getInputStream(fileName);
+			InputStream inputStream = getInputStream(fileName);
 
-			return MimeTypesUtil.getContentType(is, fileName);
+			return MimeTypesUtil.getContentType(inputStream, fileName);
 		}
 		else {
 			return MimeTypesUtil.getContentType(fileName);
