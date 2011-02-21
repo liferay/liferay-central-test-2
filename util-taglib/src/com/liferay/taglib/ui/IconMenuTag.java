@@ -94,6 +94,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		if (_align.equals("left")) {
+			_direction = "right";
+		}
+
 		if (_icon == null) {
 			_icon = themeDisplay.getPathThemeImages() + "/common/tool.png";
 		}
@@ -103,10 +107,6 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 				request, IconMenuTag.class.getName());
 
 			_id = randomKey + StringPool.UNDERLINE;
-		}
-
-		if (_align.equals("left")) {
-			_direction = "right";
 		}
 
 		request.setAttribute(
