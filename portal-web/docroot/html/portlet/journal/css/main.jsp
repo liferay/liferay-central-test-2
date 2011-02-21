@@ -592,3 +592,51 @@
 .portlet-journal-edit-mode .journal-article-header-edit, .portlet-journal-edit-mode #journalAbstractPanel, .portlet-journal-edit-mode #journalCategorizationPanel, .portlet-journal-edit-mode #journalSchedulePanel, .portlet-journal-edit-mode .journal-article-button-row, .portlet-journal-edit-mode .journal-article-permissions, .portlet-journal-edit-mode .repeatable-field-image, .portlet-journal-edit-mode .structure-tree li.structure-field .journal-article-instructions-container, .portlet-journal-edit-mode .structure-tree li.parent-structure-field .journal-article-close, .portlet-journal-edit-mode .structure-tree li.parent-structure-field .journal-delete-field, .portlet-journal-edit-mode .structure-tree li.repeated-field .journal-edit-field-control, .portlet-journal-edit-mode .structure-tree li.repeated-field .journal-delete-field {
 	display: none;
 }
+
+.portlet-journal .lfr-table .article-translation-toolbar {
+	background: #DFF4FF url(<%= themeImagesPath %>/journal/language.png) no-repeat 6px 50%;
+	border: 1px solid #A7CEDF;
+	color: #34404F;
+	display: block;
+	margin: 2px auto 14px;
+	padding: 6px 6px 6px 30px;
+}
+
+.portlet-journal .lfr-table .article-translation-toolbar label {
+	font-weight: bold;
+}
+
+.portlet-journal .lfr-table .article-translation-toolbar .add-translations-menu {
+	float: right;
+	margin-left: 3em;
+	position: relative;
+	top: -3px;
+}
+
+.portlet-journal .lfr-table .article-translation-toolbar .contains-translations {
+	margin-top: 1em;
+}
+
+.portlet-journal .lfr-table .article-translation-toolbar .journal-article-translation {
+	background-color: #B3DAEF;
+	border: 1px solid #5FA8FF;
+	color: #444;
+	padding: 0.3em 0.5em 0.3em;
+	margin: 0 0.2em;
+	text-decoration: none;
+}
+
+.portlet-journal .lfr-table .article-translation-toolbar .journal-article-translation:hover {
+	background-color: #D1E5EF;
+}
+
+.portlet-journal .lfr-table .article-translation-toolbar .journal-article-translation img {
+	margin-right: 0.3em;
+}
+
+.portlet-journal .lfr-table .article-translation-toolbar .journal-article-default-translation {
+	background-color: #B3DAEF;
+	font-weight: bold;
+	padding: 0.3em 0.5em 0.3em;
+	margin: 0 0.2em;
+}

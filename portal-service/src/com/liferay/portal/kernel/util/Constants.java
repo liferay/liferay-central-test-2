@@ -39,6 +39,8 @@ public interface Constants {
 
 	public static final String DELETE = "delete";
 
+	public static final String DELETE_TRANSLATION = "delete_translation";
+
 	public static final String EDIT = "edit";
 
 	public static final String EXPIRE = "expire";
@@ -86,6 +88,8 @@ public interface Constants {
 	public static final String SUBSCRIBE = "subscribe";
 
 	public static final String SUBSCRIBE_TO_COMMENTS = "subscribe_to_comments";
+
+	public static final String TRANSLATE = "translate";
 
 	public static final String UNLOCK = "unlock";
 

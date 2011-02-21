@@ -29,9 +29,9 @@
 
 		<column name="articleId" type="String" />
 		<column name="version" type="double" />
-		<column name="title" type="String" />
+		<column name="title" type="String" localized="true"/>
 		<column name="urlTitle" type="String" />
-		<column name="description" type="String" />
+		<column name="description" type="String" localized="true"/>
 		<column name="content" type="String" />
 		<column name="type" type="String" />
 		<column name="structureId" type="String" />

@@ -82,7 +82,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getTitle(Locale locale) {
-			return _article.getTitle();
+			return _article.getTitle(locale);
 	}
 
 	public PortletURL getURLEdit(

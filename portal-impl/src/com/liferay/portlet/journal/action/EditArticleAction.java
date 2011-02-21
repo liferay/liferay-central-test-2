@@ -14,11 +14,14 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
+import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -61,8 +64,10 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import java.io.File;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -72,6 +77,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.WindowState;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -98,7 +104,9 @@ public class EditArticleAction extends PortletAction {
 		String oldUrlTitle = StringPool.BLANK;
 
 		try {
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+			if (cmd.equals(Constants.ADD) ||
+					cmd.equals(Constants.TRANSLATE) ||
+					cmd.equals(Constants.UPDATE)) {
 				Object[] returnValue = updateArticle(actionRequest);
 
 				article = (JournalArticle)returnValue[0];
@@ -116,7 +124,7 @@ public class EditArticleAction extends PortletAction {
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
 				unsubscribeArticles(actionRequest);
 			}
-			else if (cmd.equals("removeArticlesLocale")) {
+			else if (cmd.equals(Constants.DELETE_TRANSLATION)) {
 				removeArticlesLocale(actionRequest);
 			}
 
@@ -160,9 +168,16 @@ public class EditArticleAction extends PortletAction {
 					redirect = newRedirect;
 				}
 
-				if (!actionRequest.getWindowState().toString().equals(
-					"pop_up")) {
+				WindowState windowState = actionRequest.getWindowState();
 
+				if (cmd.equals(Constants.TRANSLATE) ||
+					cmd.equals(Constants.DELETE_TRANSLATION)) {
+
+					setForward(
+						actionRequest,
+						"portlet.journal.update_translation_redirect");
+				}
+				else if (!windowState.equals(LiferayWindowState.POP_UP)) {
 					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
@@ -433,18 +448,39 @@ public class EditArticleAction extends PortletAction {
 
 		double version = ParamUtil.getDouble(uploadRequest, "version");
 
-		String title = ParamUtil.getString(uploadRequest, "title");
-		String description = ParamUtil.getString(uploadRequest, "description");
-		String content = ParamUtil.getString(uploadRequest, "content");
-		String type = ParamUtil.getString(uploadRequest, "type");
-		String structureId = ParamUtil.getString(uploadRequest, "structureId");
-		String templateId = ParamUtil.getString(uploadRequest, "templateId");
-
 		boolean localized = ParamUtil.getBoolean(uploadRequest, "localized");
 		String lastLanguageId = ParamUtil.getString(
 			uploadRequest, "lastLanguageId");
 		String defaultLanguageId = ParamUtil.getString(
 			uploadRequest, "defaultLanguageId");
+		String toLanguageId = ParamUtil.getString(
+			uploadRequest, "toLanguageId");
+
+		if (Validator.isNull(lastLanguageId)){
+			lastLanguageId = defaultLanguageId;
+		}
+
+		String title = StringPool.BLANK;
+		String description = StringPool.BLANK;
+		Locale toLocale = null;
+
+		if (Validator.isNull(toLanguageId)) {
+			title = ParamUtil.getString(
+				uploadRequest, "title_" + defaultLanguageId);
+			description = ParamUtil.getString(
+				uploadRequest, "description_" + defaultLanguageId);
+		}
+		else{
+			title = ParamUtil.getString(uploadRequest, "title_" + toLanguageId);
+			description = ParamUtil.getString(
+				uploadRequest, "description_" + toLanguageId);
+			toLocale = LocaleUtil.fromLanguageId(toLanguageId);
+		}
+
+		String content = ParamUtil.getString(uploadRequest, "content");
+		String type = ParamUtil.getString(uploadRequest, "type");
+		String structureId = ParamUtil.getString(uploadRequest, "structureId");
+		String templateId = ParamUtil.getString(uploadRequest, "templateId");
 
 		int displayDateMonth = ParamUtil.getInteger(
 			uploadRequest, "displayDateMonth");
@@ -515,10 +551,30 @@ public class EditArticleAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			JournalArticle.class.getName(), actionRequest);
 
+		serviceContext.setAttribute("defaultLanguageId", defaultLanguageId);
+
 		JournalArticle article = null;
 		String oldUrlTitle = StringPool.BLANK;
 
+		Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
+
+		JournalArticle curArticle = null;
+
+		if (Validator.isNotNull(articleId)) {
+			curArticle = JournalArticleServiceUtil.getArticle(
+				groupId, articleId, version);
+		}
+
+		Map<Locale, String> descriptionMap = null;
+		Map<Locale, String> titleMap = null;
+
 		if (cmd.equals(Constants.ADD)) {
+			titleMap = new HashMap<Locale, String>();
+			descriptionMap = new HashMap<Locale, String>();
+
+			titleMap.put(defaultLocale, title);
+			descriptionMap.put(defaultLocale, description);
+
 			if (Validator.isNull(structureId)) {
 				content = LocalizationUtil.updateLocalization(
 					StringPool.BLANK, "static-content", content,
@@ -528,7 +584,7 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				groupId, articleId, autoArticleId, title, description,
+				groupId, articleId, autoArticleId, titleMap, descriptionMap,
 				content, type, structureId, templateId, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -546,20 +602,22 @@ public class EditArticleAction extends PortletAction {
 
 			// Merge current content with new content
 
-			JournalArticle curArticle = JournalArticleServiceUtil.getArticle(
-				groupId, articleId, version);
-
 			if (Validator.isNull(structureId)) {
 				if (!curArticle.isTemplateDriven()) {
 					String curContent = StringPool.BLANK;
 
-					if (localized) {
-						curContent = curArticle.getContent();
-					}
+					curContent = curArticle.getContent();
 
-					content = LocalizationUtil.updateLocalization(
-						curContent, "static-content", content,
-						lastLanguageId, defaultLanguageId, true, localized);
+					if (cmd.equals(Constants.TRANSLATE)) {
+						content = LocalizationUtil.updateLocalization(
+							curContent, "static-content", content, toLanguageId,
+							defaultLanguageId, true, true);
+					}
+					else {
+						content = LocalizationUtil.updateLocalization(
+							curContent, "static-content", content,
+							lastLanguageId, defaultLanguageId, true, localized);
+					}
 				}
 			}
 			else {
@@ -578,7 +636,7 @@ public class EditArticleAction extends PortletAction {
 					}
 
 					content = JournalUtil.mergeArticleContent(
-						curArticle.getContent(), content);
+						curArticle.getContent(), content, true);
 					content = JournalUtil.removeOldContent(
 						content, structure.getMergedXsd());
 				}
@@ -591,15 +649,90 @@ public class EditArticleAction extends PortletAction {
 
 			String tempOldUrlTitle = article.getUrlTitle();
 
+			titleMap = article.getTitleMap();
+			descriptionMap = article.getDescriptionMap();
+
+			if (cmd.equals(Constants.UPDATE)) {
+				titleMap.put(defaultLocale, title);
+				descriptionMap.put(defaultLocale, description);
+			}
+			else {
+				titleMap.put(toLocale, title);
+				descriptionMap.put(toLocale, description);
+
+				Date displayDate = article.getDisplayDate();
+				Date expirationDate = article.getExpirationDate();
+				Date reviewDate = article.getReviewDate();
+
+				if (displayDate != null) {
+					Calendar displayCal = CalendarFactoryUtil.getCalendar(
+						themeDisplay.getTimeZone());
+
+					displayCal.setTime(displayDate);
+
+					displayDateMonth = displayCal.get(Calendar.MONTH);
+					displayDateDay = displayCal.get(Calendar.DATE);
+					displayDateYear = displayCal.get(Calendar.YEAR);
+					displayDateHour = displayCal.get(Calendar.HOUR);
+					displayDateMinute = displayCal.get(Calendar.MINUTE);
+
+					if (displayCal.get(Calendar.AM_PM) == Calendar.PM) {
+						displayDateHour += 12;
+					}
+				}
+
+				neverExpire = true;
+
+				if (expirationDate != null) {
+					Calendar expirationCal = CalendarFactoryUtil.getCalendar(
+						themeDisplay.getTimeZone());
+
+					expirationCal.setTime(expirationDate);
+
+					expirationDateMonth = expirationCal.get(Calendar.MONTH);
+					expirationDateDay = expirationCal.get(Calendar.DATE);
+					expirationDateYear = expirationCal.get(Calendar.YEAR);
+					expirationDateHour = expirationCal.get(Calendar.HOUR);
+					expirationDateMinute = expirationCal.get(Calendar.MINUTE);
+					neverExpire = false;
+
+					if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
+						expirationDateHour += 12;
+					}
+				}
+
+				neverReview = true;
+
+				if (reviewDate != null) {
+					Calendar reviewCal = CalendarFactoryUtil.getCalendar(
+						themeDisplay.getTimeZone());
+
+					reviewCal.setTime(reviewDate);
+
+					reviewDateMonth = reviewCal.get(Calendar.MONTH);
+					reviewDateDay = reviewCal.get(Calendar.DATE);
+					reviewDateYear = reviewCal.get(Calendar.YEAR);
+					reviewDateHour = reviewCal.get(Calendar.HOUR);
+					reviewDateMinute = reviewCal.get(Calendar.MINUTE);
+					neverReview = false;
+
+					if (reviewCal.get(Calendar.AM_PM) == Calendar.PM) {
+						reviewDateHour += 12;
+					}
+				}
+			}
+
 			article = JournalArticleServiceUtil.updateArticle(
-				groupId, articleId, version, title, description, content, type,
-				structureId, templateId, displayDateMonth, displayDateDay,
+				groupId, articleId, version, titleMap, descriptionMap,
+				content, article.getType(), article.getStructureId(),
+				article.getTemplateId(), displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
 				expirationDateMonth, expirationDateDay, expirationDateYear,
 				expirationDateHour, expirationDateMinute, neverExpire,
 				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, neverReview, indexable, smallImage,
-				smallImageURL, smallFile, images, articleURL, serviceContext);
+				reviewDateMinute, neverReview, indexable,
+				article.getSmallImage(), article.getSmallImageURL(), smallFile,
+				images, articleURL, serviceContext);
 
 			if (!tempOldUrlTitle.equals(article.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;

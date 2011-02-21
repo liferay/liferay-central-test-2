@@ -99,7 +99,7 @@ portletURL.setParameter("articleId", article.getArticleId());
 
 		// Title
 
-		row.addText(articleVersion.getTitle(), rowURL);
+		row.addText(articleVersion.getTitle(locale), rowURL);
 
 		// Version
 

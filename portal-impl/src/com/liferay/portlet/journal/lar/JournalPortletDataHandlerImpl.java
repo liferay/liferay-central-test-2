@@ -1581,8 +1581,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (existingArticle == null) {
 				importedArticle = JournalArticleLocalServiceUtil.addArticle(
 					userId, portletDataContext.getScopeGroupId(), articleId,
-					autoArticleId, article.getVersion(), article.getTitle(),
-					article.getDescription(), article.getContent(),
+					autoArticleId, article.getVersion(), article.getTitleMap(),
+					article.getDescriptionMap(), article.getContent(),
 					article.getType(), parentStructureId, parentTemplateId,
 					displayDateMonth, displayDateDay, displayDateYear,
 					displayDateHour, displayDateMinute, expirationDateMonth,
@@ -1597,8 +1597,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 				importedArticle = JournalArticleLocalServiceUtil.updateArticle(
 					userId, existingArticle.getGroupId(),
 					existingArticle.getArticleId(),
-					existingArticle.getVersion(), article.getTitle(),
-					article.getDescription(), article.getContent(),
+					existingArticle.getVersion(), article.getTitleMap(),
+					article.getDescriptionMap(), article.getContent(),
 					article.getType(), parentStructureId, parentTemplateId,
 					displayDateMonth, displayDateDay, displayDateYear,
 					displayDateHour, displayDateMinute, expirationDateMonth,
@@ -1613,8 +1613,8 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		else {
 			importedArticle = JournalArticleLocalServiceUtil.addArticle(
 				userId, portletDataContext.getScopeGroupId(), articleId,
-				autoArticleId, article.getVersion(), article.getTitle(),
-				article.getDescription(), article.getContent(),
+				autoArticleId, article.getVersion(), article.getTitleMap(),
+				article.getDescriptionMap(), article.getContent(),
 				article.getType(), parentStructureId, parentTemplateId,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,

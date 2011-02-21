@@ -753,6 +753,10 @@
 		<put name="portlet_content" value="/portlet/journal/select_template.jsp" />
 	</definition>
 
+	<definition name="portlet.journal.update_translation_redirect" extends="portlet.journal">
+		<put name="portlet_content" value="/portlet/journal/update_translation_redirect.jsp" />
+	</definition>
+
 	<definition name="portlet.journal.view" extends="portlet.journal">
 		<put name="portlet_content" value="/portlet/journal/view.jsp" />
 	</definition>
