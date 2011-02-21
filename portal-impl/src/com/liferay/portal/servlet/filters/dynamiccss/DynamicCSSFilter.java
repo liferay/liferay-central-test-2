@@ -65,7 +65,7 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 		try {
 
-			// Ruby executor requires warm up in requiring Sass. Always breaks
+			// Ruby executor needs to warm up when requiring Sass. Always breaks
 			// the first time without this block.
 
 			_rubyExecutor.eval(
