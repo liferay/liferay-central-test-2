@@ -54,8 +54,8 @@ if (article != null) {
 
 String toLanguageId = ParamUtil.getString(request, "toLanguageId");
 
-if (article != null &&Validator.isNotNull(toLanguageId)) {
-		redirect = null;
+if ((article != null) && Validator.isNotNull(toLanguageId)) {
+	redirect = null;
 }
 %>
 
@@ -63,12 +63,12 @@ if (article != null &&Validator.isNotNull(toLanguageId)) {
 	<c:when test="<%= article != null %>">
 		<liferay-ui:header
 			backURL="<%= redirect %>"
-			title='<%= article.getTitle(locale) %>'
+			title="<%= article.getTitle(locale) %>"
 		/>
 
 		<c:if test="<%= Validator.isNull(toLanguageId) %>">
 			<liferay-ui:tabs
-				names="content, history"
+				names="content,history"
 				url0="<%= editArticleURL.toString() %>"
 				url1="<%= viewArticleHistoryURL.toString() %>"
 			/>

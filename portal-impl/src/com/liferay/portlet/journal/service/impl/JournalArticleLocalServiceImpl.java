@@ -191,9 +191,6 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticle article = journalArticlePersistence.create(id);
 
-		content = format(
-			groupId, articleId, version, false, content, structureId, images);
-
 		Locale locale = LocaleUtil.getDefault();
 
 		String defaultLanguageId = GetterUtil.getString(
@@ -204,6 +201,9 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		String title = titleMap.get(locale);
+
+		content = format(
+			groupId, articleId, version, false, content, structureId, images);
 
 		article.setResourcePrimKey(resourcePrimKey);
 		article.setGroupId(groupId);
@@ -1421,14 +1421,20 @@ public class JournalArticleLocalServiceImpl
 			groupId, articleId, version);
 
 		String title = article.getTitle();
-		String description = article.getDescription();
-		String content = article.getContent();
 
 		title = LocalizationUtil.removeLocalization(
 			title, "static-content", languageId, true);
 
+		article.setTitle(title);
+
+		String description = article.getDescription();
+
 		description = LocalizationUtil.removeLocalization(
 			description, "static-content", languageId, true);
+
+		article.setDescription(description);
+
+		String content = article.getContent();
 
 		if (article.isTemplateDriven()) {
 			content = JournalUtil.removeArticleLocale(content, languageId);
@@ -1438,8 +1444,6 @@ public class JournalArticleLocalServiceImpl
 				content, "static-content", languageId, true);
 		}
 
-		article.setTitle(title);
-		article.setDescription(description);
 		article.setContent(content);
 
 		journalArticlePersistence.update(article, false);
@@ -1773,11 +1777,7 @@ public class JournalArticleLocalServiceImpl
 		else {
 			article = oldArticle;
 		}
-
-		content = format(
-			groupId, articleId, article.getVersion(), incrementVersion,
-			content, structureId, images);
-
+		
 		Locale locale = LocaleUtil.getDefault();
 
 		String defaultLanguageId = GetterUtil.getString(
@@ -1788,6 +1788,10 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		String title = titleMap.get(locale);
+
+		content = format(
+			groupId, articleId, article.getVersion(), incrementVersion,
+			content, structureId, images);
 
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
 		article.setTitleMap(titleMap, locale);
@@ -2876,7 +2880,7 @@ public class JournalArticleLocalServiceImpl
 			byte[] smallBytes)
 		throws PortalException, SystemException {
 
-		if (titleMap.entrySet().isEmpty()) {
+		if (titleMap.isEmpty()) {
 			throw new ArticleTitleException();
 		}
 		else if (Validator.isNull(type)) {

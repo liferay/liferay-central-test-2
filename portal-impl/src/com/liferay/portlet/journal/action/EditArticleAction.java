@@ -104,9 +104,9 @@ public class EditArticleAction extends PortletAction {
 		String oldUrlTitle = StringPool.BLANK;
 
 		try {
-			if (cmd.equals(Constants.ADD) ||
-					cmd.equals(Constants.TRANSLATE) ||
-					cmd.equals(Constants.UPDATE)) {
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.TRANSLATE) ||
+				cmd.equals(Constants.UPDATE)) {
+
 				Object[] returnValue = updateArticle(actionRequest);
 
 				article = (JournalArticle)returnValue[0];
@@ -114,6 +114,9 @@ public class EditArticleAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteArticles(actionRequest);
+			}
+			else if (cmd.equals(Constants.DELETE_TRANSLATION)) {
+				removeArticlesLocale(actionRequest);
 			}
 			else if (cmd.equals(Constants.EXPIRE)) {
 				expireArticles(actionRequest);
@@ -123,9 +126,6 @@ public class EditArticleAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
 				unsubscribeArticles(actionRequest);
-			}
-			else if (cmd.equals(Constants.DELETE_TRANSLATION)) {
-				removeArticlesLocale(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {
@@ -170,8 +170,8 @@ public class EditArticleAction extends PortletAction {
 
 				WindowState windowState = actionRequest.getWindowState();
 
-				if (cmd.equals(Constants.TRANSLATE) ||
-					cmd.equals(Constants.DELETE_TRANSLATION)) {
+				if (cmd.equals(Constants.DELETE_TRANSLATION) ||
+					cmd.equals(Constants.TRANSLATE)) {
 
 					setForward(
 						actionRequest,
