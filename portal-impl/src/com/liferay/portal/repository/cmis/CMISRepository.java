@@ -305,7 +305,8 @@ public class CMISRepository extends BaseRepositoryImpl {
 			List<String> objectIds = getObjectIds(
 				session, folderId, true, start, end, obc);
 
-			List<FileEntry> fileEntries = new ArrayList<FileEntry>(objectIds.size());
+			List<FileEntry> fileEntries = new ArrayList<FileEntry>(
+				objectIds.size());
 
 			for (String objectId : objectIds) {
 				Document document = (Document)session.getObject(
