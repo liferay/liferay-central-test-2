@@ -1229,6 +1229,10 @@ public class PortletURLImpl
 
 			name = PortletQNameUtil.getPublicRenderParameterIdentifier(name);
 
+			if (Validator.isNull(name)) {
+				continue;
+			}
+
 			String[] oldValues = entry.getValue();
 			String[] newValues = _params.get(name);
 
