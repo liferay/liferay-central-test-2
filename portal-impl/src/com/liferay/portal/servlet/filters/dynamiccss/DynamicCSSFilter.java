@@ -224,21 +224,16 @@ public class DynamicCSSFilter extends BasePortalFilter {
 			request, response, filterChain);
 
 		if (parsedContent == null) {
-
-			StringServletResponse stringResponse = new StringServletResponse(
-				response);
-
 			processFilter(
-				DynamicCSSFilter.class, request, stringResponse, filterChain);
-
-			parsedContent = parseSass(request, stringResponse.getString());
+				DynamicCSSFilter.class, request, response, filterChain);
 		}
-
-		if (parsedContent instanceof File) {
-			ServletResponseUtil.write(response, (File)parsedContent);
-		}
-		else if (parsedContent instanceof String) {
-			ServletResponseUtil.write(response, (String)parsedContent);
+		else {
+			if (parsedContent instanceof File) {
+				ServletResponseUtil.write(response, (File)parsedContent);
+			}
+			else if (parsedContent instanceof String) {
+				ServletResponseUtil.write(response, (String)parsedContent);
+			}
 		}
 	}
 
