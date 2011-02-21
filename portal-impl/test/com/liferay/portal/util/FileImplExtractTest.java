@@ -21,8 +21,15 @@ import java.io.FileNotFoundException;
 
 /**
  * @author Igor Spasic
+ * @see    MimeTypesImplTest
  */
 public class FileImplExtractTest extends BaseTestCase {
+
+	public void testDoc() {
+		String text = extractText("test.doc");
+
+		assertEquals("Extract test.", text);
+	}
 
 	public void testDocx() {
 		String text = extractText("test-2007.docx");
@@ -65,6 +72,12 @@ public class FileImplExtractTest extends BaseTestCase {
 	}
 
 	public void testPpt() {
+		String text = extractText("test.ppt");
+
+		assertEquals("Extract test.", text);
+	}
+
+	public void testPptx() {
 		String text = extractText("test-2010.pptx");
 
 		assertEquals("Extract test.", text);
@@ -80,6 +93,12 @@ public class FileImplExtractTest extends BaseTestCase {
 		String text = extractText("test.txt");
 
 		assertEquals("Extract test.", text);
+	}
+
+	public void testXls() {
+		String text = extractText("test.xls");
+
+		assertEquals("Sheet1\n\tExtract test.", text);
 	}
 
 	public void testXlsx() {

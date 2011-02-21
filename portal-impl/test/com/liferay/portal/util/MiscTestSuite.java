@@ -34,6 +34,7 @@ public class MiscTestSuite extends TestSuite {
 		testSuite.addTestSuite(FileMultiValueMapTest.class);
 		testSuite.addTestSuite(ImageProcessorImplTest.class);
 		testSuite.addTestSuite(MemoryMultiValueMapTest.class);
+		testSuite.addTestSuite(MimeTypesImplTest.class);
 		testSuite.addTestSuite(RouterImplTest.class);
 		testSuite.addTestSuite(StripFilterTest.class);
 		testSuite.addTestSuite(XmlRpcParserTest.class);

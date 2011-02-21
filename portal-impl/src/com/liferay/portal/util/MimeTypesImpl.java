@@ -18,48 +18,22 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.MimeTypes;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-
-import eu.medsea.mimeutil.MimeType;
-import eu.medsea.mimeutil.MimeUtil;
-import eu.medsea.mimeutil.TextMimeType;
-import eu.medsea.mimeutil.detector.MagicMimeMimeDetector;
-import eu.medsea.util.EncodingGuesser;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-
-import javax.activation.MimetypesFileTypeMap;
+import org.apache.tika.Tika;
+import org.apache.tika.io.TikaInputStream;
 
 /**
- * <p>
- * Additional MIME types should be added to META-INF/mime.types or magic.mime.
- * </p>
- *
  * @author Jorge Ferrer
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
 public class MimeTypesImpl implements MimeTypes {
-
-	public MimeTypesImpl() {
-		MimeUtil.registerMimeDetector(MagicMimeMimeDetector.class.getName());
-
-		Collection<String> encodings = new HashSet<String>();
-
-		encodings.add(StringPool.UTF8);
-		encodings.add(System.getProperty("file.encoding"));
-
-		EncodingGuesser.setSupportedEncodings(encodings);
-	}
 
 	public String getContentType(File file) {
 		try {
@@ -71,38 +45,38 @@ public class MimeTypesImpl implements MimeTypes {
 	}
 
 	public String getContentType(InputStream inputStream, String fileName) {
-		String contentType = getContentType(fileName);
-
-		if (!contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
-			return contentType;
+		if ((inputStream == null) && Validator.isNull(fileName)) {
+			return ContentTypes.APPLICATION_OCTET_STREAM;
 		}
 
-		List<MimeType> mimeTypes = new ArrayList<MimeType>(
-			MimeUtil.getMimeTypes(inputStream));
+		String contentType = null;
 
-		MimeType mimeType = mimeTypes.get(0);
+		try {
+			Tika tika = new Tika();
 
-		if ((mimeTypes.size() > 1) && (mimeType instanceof TextMimeType)) {
-			mimeType = mimeTypes.get(1);
-		}
+			contentType = tika.detect(
+				TikaInputStream.get(inputStream), fileName);
 
-		contentType =
-			mimeType.getMediaType() + StringPool.SLASH + mimeType.getSubType();
+			if (contentType.contains("tika")) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Retrieved contentType invalid " + contentType);
+				}
 
-		if (contentType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
-			contentType = getContentType(fileName);
-		}
-		else if (contentType.equals(ContentTypes.APPLICATION_ZIP)) {
-			String contentTypeByFileName = getContentType(fileName);
+				contentType = getContentType(fileName);
+			}
 
-			if (contentTypeByFileName.contains("vnd.openxmlformats")) {
-				contentType = contentTypeByFileName;
+			if (contentType.contains("tika")) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Retrieved contentType invalid " + contentType);
+				}
+
+				contentType = ContentTypes.APPLICATION_OCTET_STREAM;
 			}
 		}
+		catch (Exception e) {
+			_log.error(e, e);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Content type " + contentType + " returned for " + fileName);
+			contentType = ContentTypes.APPLICATION_OCTET_STREAM;
 		}
 
 		return contentType;
@@ -113,23 +87,25 @@ public class MimeTypesImpl implements MimeTypes {
 			return ContentTypes.APPLICATION_OCTET_STREAM;
 		}
 
-		if (!fileName.contains(StringPool.PERIOD)) {
-			fileName = StringPool.PERIOD + fileName;
+		try {
+			Tika tika = new Tika();
+
+			String contentType = tika.detect(fileName);
+
+			if (!contentType.contains("tika")) {
+				return contentType;
+			}
+			else if (_log.isDebugEnabled()) {
+				_log.debug("Retrieved contentType invalid " + contentType);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
-		String contentType = _mimeTypes.getContentType(fileName);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Content type " + contentType + " returned for file name " +
-					fileName);
-		}
-
-		return contentType;
+		return ContentTypes.APPLICATION_OCTET_STREAM;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(MimeTypesImpl.class);
-
-	private MimetypesFileTypeMap _mimeTypes = new MimetypesFileTypeMap();
 
 }

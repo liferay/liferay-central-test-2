@@ -207,7 +207,6 @@
 	<classpathentry kind="lib" path="lib/portal/lucene-memory.jar"/>
 	<classpathentry kind="lib" path="lib/portal/memcached.jar"/>
 	<classpathentry kind="lib" path="lib/portal/metadata-extractor.jar"/>
-	<classpathentry kind="lib" path="lib/portal/mime-util.jar"/>
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
 	<classpathentry kind="lib" path="lib/portal/nekohtml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/odmg.jar"/>
