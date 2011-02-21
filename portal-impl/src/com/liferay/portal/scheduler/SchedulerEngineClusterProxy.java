@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cluster.ClusterEvent;
 import com.liferay.portal.kernel.cluster.ClusterEventListener;
 import com.liferay.portal.kernel.cluster.ClusterEventType;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
+import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
@@ -103,7 +104,7 @@ public class SchedulerEngineClusterProxy
 		try {
 			if (PropsValues.CLUSTER_LINK_ENABLED) {
 				ClusterExecutorUtil.removeClusterEventListener(
-					_memeorySchedulerClusterEventListener);
+					_memorySchedulerClusterEventListener);
 
 				LockLocalServiceUtil.unlock(
 					_classNameForLock, _classNameForLock, _localClusterNodeId,
@@ -120,11 +121,11 @@ public class SchedulerEngineClusterProxy
 	public void start() throws SchedulerException {
 		try {
 			if (PropsValues.CLUSTER_LINK_ENABLED) {
-				_memeorySchedulerClusterEventListener =
+				_memorySchedulerClusterEventListener =
 					new MemorySchedulerClusterEventListener();
 
 				ClusterExecutorUtil.addClusterEventListener(
-					_memeorySchedulerClusterEventListener);
+					_memorySchedulerClusterEventListener);
 
 				lockMemorySchedulerCluster(false, null);
 			}
@@ -175,15 +176,16 @@ public class SchedulerEngineClusterProxy
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to updae memory scheduler cluster master", e);
+				"Unable to update memory scheduler cluster master", e);
 		}
 	}
 
 	protected boolean isMemorySchedulerClusterLockOwner(Lock lock)
 		throws Exception {
 
-		String localClusterNodeId =
-			ClusterExecutorUtil.getLocalClusterNode().getClusterNodeId();
+		ClusterNode clusterNode = ClusterExecutorUtil.getLocalClusterNode();
+
+		String localClusterNodeId = clusterNode.getClusterNodeId();
 
 		if (localClusterNodeId.equals(lock.getOwner())) {
 			return true;
@@ -197,15 +199,14 @@ public class SchedulerEngineClusterProxy
 		throws Exception {
 
 		if (_localClusterNodeId == null) {
-			_localClusterNodeId =
-				ClusterExecutorUtil.getLocalClusterNode().getClusterNodeId();
+			ClusterNode clusterNode = ClusterExecutorUtil.getLocalClusterNode();
+
+			_localClusterNodeId = clusterNode.getClusterNodeId();
 		}
 
-		boolean[] isNewLock = new boolean[1];
-
 		Lock lock = LockLocalServiceUtil.lock(
-			_classNameForLock, _classNameForLock, _localClusterNodeId,
-			_retrieveFromCache, replaceOldLock, isNewLock, oldOwner);
+			_classNameForLock, _classNameForLock, oldOwner, _localClusterNodeId,
+			_retrieveFromCache, replaceOldLock);
 
 		return lock;
 	}
@@ -215,7 +216,8 @@ public class SchedulerEngineClusterProxy
 
 	private static String _classNameForLock = SchedulerEngine.class.getName();
 	private static String _localClusterNodeId;
-	private ClusterEventListener _memeorySchedulerClusterEventListener;
+
+	private ClusterEventListener _memorySchedulerClusterEventListener;
 	private boolean _retrieveFromCache;
 	private SchedulerEngine _schedulerEngine;
 
@@ -233,12 +235,8 @@ public class SchedulerEngineClusterProxy
 			try {
 				updateMemorySchedulerClusterMaster();
 			}
-			catch (Exception ex) {
-				if (_log.isErrorEnabled()) {
-					_log.error(
-						"Update memeory scheduler cluster lock failed",
-						ex);
-				}
+			catch (Exception e) {
+				_log.error("Unable to update memory scheduler cluster lock", e);
 			}
 		}
 

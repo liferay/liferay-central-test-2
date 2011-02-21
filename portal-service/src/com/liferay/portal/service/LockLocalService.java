@@ -259,9 +259,9 @@ public interface LockLocalService {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock lock(java.lang.String className,
-		java.lang.String key, java.lang.String owner,
-		boolean retrieveFromCache, boolean replaceOldLock, boolean[] isNewLock,
-		java.lang.String oldOwner)
+		java.lang.String key, java.lang.String oldOwner,
+		java.lang.String newOwner, boolean retrieveFromCache,
+		boolean replaceOldLock)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.Lock refresh(java.lang.String uuid,

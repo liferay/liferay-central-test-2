@@ -301,12 +301,12 @@ public class LockLocalServiceUtil {
 
 	public static com.liferay.portal.model.Lock lock(
 		java.lang.String className, java.lang.String key,
-		java.lang.String owner, boolean retrieveFromCache,
-		boolean replaceOldLock, boolean[] isNewLock, java.lang.String oldOwner)
+		java.lang.String oldOwner, java.lang.String newOwner,
+		boolean retrieveFromCache, boolean replaceOldLock)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .lock(className, key, owner, retrieveFromCache,
-			replaceOldLock, isNewLock, oldOwner);
+				   .lock(className, key, oldOwner, newOwner, retrieveFromCache,
+			replaceOldLock);
 	}
 
 	public static com.liferay.portal.model.Lock refresh(java.lang.String uuid,
