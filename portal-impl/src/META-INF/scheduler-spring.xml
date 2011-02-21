@@ -33,11 +33,15 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.scheduler.SchedulerEngineClusterProxy" class="com.liferay.portal.scheduler.SchedulerEngineClusterProxy">
+		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.SchedulerEngineProxyBean" />
+	</bean>
 
 	<!-- Util -->
 
 	<bean class="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil">
-		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.SchedulerEngineProxyBean" />
+		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.SchedulerEngineClusterProxy" />
+		<property name="schedulerEngineClusterManager" ref="com.liferay.portal.scheduler.SchedulerEngineClusterProxy" />
 	</bean>
 
 	<bean id="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl" />

@@ -141,6 +141,10 @@ public class StartupAction extends SimpleAction {
 		MessageBusUtil.init(
 			messageBus, messageSender, synchronousMessageSender);
 
+		// Cluster executor
+
+		ClusterExecutorUtil.initialize();
+
 		// Scheduler
 
 		if (_log.isDebugEnabled()) {
@@ -160,10 +164,6 @@ public class StartupAction extends SimpleAction {
 		// Liferay JspFactory
 
 		JspFactorySwapper.swap();
-
-		// Cluster executor
-
-		ClusterExecutorUtil.initialize();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(StartupAction.class);

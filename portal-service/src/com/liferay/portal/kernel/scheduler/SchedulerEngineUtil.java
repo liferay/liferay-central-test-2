@@ -315,8 +315,20 @@ public class SchedulerEngineUtil {
 		_instance._update(trigger);
 	}
 
+	public static void updateMemorySchedulerClusterMaster()
+		throws SchedulerException {
+
+		_instance._updateMemorySchedulerClusterMaster();
+	}
+
 	public void setSchedulerEngine(SchedulerEngine schedulerEngine) {
 		_schedulerEngine = schedulerEngine;
+	}
+
+	public void setSchedulerEngineClusterManager(
+		SchedulerEngineClusterManager schedulerEngineClusterManager) {
+
+		_schedulerEngineClusterManager = schedulerEngineClusterManager;
 	}
 
 	private void _addScriptingJob(
@@ -907,8 +919,15 @@ public class SchedulerEngineUtil {
 		_schedulerEngine.update(trigger);
 	}
 
+	private void _updateMemorySchedulerClusterMaster()
+		throws SchedulerException {
+
+		_schedulerEngineClusterManager.updateMemorySchedulerClusterMaster();
+	}
+
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();
 
 	private static SchedulerEngine _schedulerEngine;
+	private static SchedulerEngineClusterManager _schedulerEngineClusterManager;
 
 }
