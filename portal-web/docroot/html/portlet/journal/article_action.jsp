@@ -42,7 +42,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 	<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= JournalArticle.class.getName() %>"
-			modelResourceDescription="<%= article.getTitle(locale) %>"
+			modelResourceDescription="<%= article.getTitle() %>"
 			resourcePrimKey="<%= String.valueOf(article.getResourcePrimKey()) %>"
 			var="permissionsURL"
 		/>

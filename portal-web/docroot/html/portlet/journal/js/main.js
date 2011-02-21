@@ -763,7 +763,7 @@ AUI().add(
 					var availableLocales = [];
 					var stillLocalized = false;
 					var availableLocalesElements = A.all('[name=' + instance.portletNamespace + 'available_locales]');
-					var defaultLocale = instance.getDefaultLocale();
+					var defaultLocale = instance.getById('defaultLocale').val();
 
 					instance.getFields().each(
 						function(item, index, collection) {
@@ -839,13 +839,8 @@ AUI().add(
 
 			getDefaultLocale: function() {
 				var instance = this;
-				var defaultLocale = instance.getById('defaultLocale');
 
-				if (defaultLocale){
-					defaultLocale = instance.getById('defaultLocale').val();
-				}
-				
-				return defaultLocale;
+				return instance.getById('defaultLocale').val();
 			},
 
 			getEditButton: function(source) {
@@ -1162,18 +1157,15 @@ AUI().add(
 
 			hasStructure: function() {
 				var instance = this;
-				var form = instance.getPrincipalForm();
-				var structureId = instance.getByName(form, 'structureId');
 
-				return structureId ? structureId.val() : false;				
+				return !!instance.getById('structureId').val();
 			},
 
 			hasTemplate: function() {
 				var instance = this;
 				var form = instance.getPrincipalForm();
-				var templateId = instance.getByName(form, 'templateId');
 
-				return templateId ? templateId.val() : false;
+				return !!instance.getByName(form, 'templateId').val();
 			},
 
 			helperIntersecting: function() {
@@ -1336,7 +1328,7 @@ AUI().add(
 					auxForm.attr('action', previewURL);
 					auxForm.attr('target', '_blank');
 
-					var titleInput = instance.getByName(form, 'title_' + languageIdInput.val());
+					var titleInput = instance.getByName(form, 'title');
 					var titleAuxFormInput = instance.getByName(auxForm, 'title', true);
 					var xmlAuxFormInput = instance.getByName(auxForm, 'xml', true);
 
@@ -1591,26 +1583,6 @@ AUI().add(
 				var hasChanged = (storedStructureXSD != encodeURIComponent(instance.getStructureXSD()));
 
 				return hasChanged;
-			},
-
-			translateArticle: function() {
-				var instance = this;
-
-				var form = instance.getPrincipalForm();
-
-				var contentInput = instance.getByName(form, 'content');
-				var cmdInput = instance.getByName(form, 'cmd');
-				var content = instance.getArticleContentXML();
-				var structureIdInput = instance.getByName(form, 'structureId');
-
-				if (structureIdInput) {
-					var structureId = structureIdInput.val();
-				}
-
-				cmdInput.val('translate');
-				contentInput.val(content);
-
-				submitForm(form);
 			},
 
 			unselectFields: function() {
@@ -2191,6 +2163,7 @@ AUI().add(
 				var editFieldCancelButton = editContainerWrapper.one('.cancel-button .aui-button-input');
 				var editFieldCloseButton = editContainerWrapper.one('.close-button .aui-button-input');
 				var editFieldSaveButton = editContainerWrapper.one('.save-button .aui-button-input');
+				var enableLocale = instance.getById('enableLocalizationCheckbox');
 				var languageIdSelect = instance.getById('languageIdSelect');
 				var wrapper = instance.getById('journalArticleWrapper');
 
@@ -2224,6 +2197,24 @@ AUI().add(
 
 				editFieldCancelButton.on('click', closeEditField, instance);
 				editFieldCloseButton.on('click', closeEditField, instance);
+
+				enableLocale.on(
+					'click',
+					function(event) {
+						var checked = enableLocale.get('checked');
+
+						wrapper.toggleClass('localization-disabled', !checked);
+
+						A.io.request(
+							themeDisplay.getPathMain() + '/portal/session_click',
+							{
+								data: {
+									'liferay_journal_localization': checked
+								}
+							}
+						);
+					}
+				);
 			},
 
 			_attachEvents: function() {
@@ -2232,18 +2223,21 @@ AUI().add(
 				var closeButtons = instance.getCloseButtons();
 				var editButtons = instance.getEditButtons();
 				var repeatableButtons = instance.getRepeatableButtons();
+				var defaultLanguageIdSelect = instance.getById('defaultLanguageIdSelect');
 				var downloadArticleContentButton = instance.getById('downloadArticleContentButton');
 				var fieldsContainer = instance.getById('journalArticleContainer');
+				var languageIdSelect = instance.getById('languageIdSelect');
 				var previewArticleButton = instance.getById('previewArticleButton');
 				var publishButton = instance.getById('publishButton');
 				var saveButton = instance.getById('saveButton');
-				var translateButton = instance.getById('translateButton');
 
 				var containerInputs = fieldsContainer.all('.journal-article-component-container .aui-field-input');
 
 				closeButtons.detach('click');
 				containerInputs.detach('change');
+				defaultLanguageIdSelect.detach('change');
 				editButtons.detach('click');
+				languageIdSelect.detach('change');
 				repeatableButtons.detach('click');
 
 				if (publishButton) {
@@ -2254,10 +2248,6 @@ AUI().add(
 					saveButton.detach('click');
 				}
 
-				if (translateButton) {
-					translateButton.detach('click');
-				}
-				
 				editButtons.on(
 					'click',
 					function(event) {
@@ -2303,15 +2293,6 @@ AUI().add(
 					);
 				}
 
-				if (translateButton) {
-					translateButton.on(
-						'click',
-						function() {
-							instance.translateArticle();
-						}
-					);
-				}
-
 				if (downloadArticleContentButton) {
 					downloadArticleContentButton.detach('click');
 
@@ -2334,6 +2315,20 @@ AUI().add(
 					);
 				}
 
+				languageIdSelect.on(
+					'change',
+					function() {
+						instance.changeLanguageView();
+					}
+				);
+
+				defaultLanguageIdSelect.on(
+					'change',
+					function() {
+						instance.changeLanguageView();
+					}
+				);
+
 				var changeStructureButton = instance.getById('changeStructureButton');
 				var changeTemplateButton = instance.getById('changeTemplateButton');
 				var editStructureButton = instance.getById('editStructureButton');
@@ -2341,20 +2336,21 @@ AUI().add(
 				var saveStructureButton = instance.getById('saveStructureButton');
 				var saveStructureTriggers = A.one('.journal-save-structure-trigger');
 
-				if (changeStructureButton) {
-					changeStructureButton.detach('click');
+				changeStructureButton.detach('click');
+				editStructureButton.detach('click');
+				saveStructureButton.detach('click');
+				saveStructureTriggers.detach('click');
 
-					changeStructureButton.on(
-						'click',
-						function(event) {
-							if (confirm(Liferay.Language.get('selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates'))) {
-								var url = event.target.attr('dataChangeStructureUrl');
+				changeStructureButton.on(
+					'click',
+					function(event) {
+						if (confirm(Liferay.Language.get('selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates'))) {
+							var url = event.target.attr('dataChangeStructureUrl');
 
-								instance.openPopupWindow(url, 'ChangeStructure');
-							}
+							instance.openPopupWindow(url, 'ChangeStructure');
 						}
-					);
-				}
+					}
+				);
 
 				if (changeTemplateButton) {
 					changeTemplateButton.detach('click');
@@ -2381,49 +2377,37 @@ AUI().add(
 					);
 				}
 
-				if (saveStructureButton) {
-					saveStructureButton.detach('click');
-					
-					saveStructureButton.on(
-						'click',
-						function() {
-							instance.openSaveStructureDialog();
-						}
-					);
-				}
+				saveStructureButton.on(
+					'click',
+					function() {
+						instance.openSaveStructureDialog();
+					}
+				);
 
-				if (saveStructureTriggers) {
-				    saveStructureTriggers.detach('click');
+				saveStructureTriggers.on(
+					'click',
+					function(event) {
+						event.preventDefault();
 
-					saveStructureTriggers.on(
-						'click',
-						function(event) {
-							event.preventDefault();
-
-							saveStructureButton.simulate('click');
-						}
-					);
-				}
+						saveStructureButton.simulate('click');
+					}
+				);
 
 				var body = A.getBody();
 
-				if (editStructureButton) {
-				    editStructureButton.detach('click');
-
-					editStructureButton.on(
-						'click',
-						function(event) {
-							if (body.hasClass('portlet-journal-edit-mode')) {
-								Liferay.reset('controlPanelSidebarHidden');
-								instance.disableEditMode();
-							}
-							else {
-								Liferay.set('controlPanelSidebarHidden', true);
-								instance.enableEditMode();
-							}
+				editStructureButton.on(
+					'click',
+					function(event) {
+						if (body.hasClass('portlet-journal-edit-mode')) {
+							Liferay.reset('controlPanelSidebarHidden');
+							instance.disableEditMode();
 						}
-					);
-				}
+						else {
+							Liferay.set('controlPanelSidebarHidden', true);
+							instance.enableEditMode();
+						}
+					}
+				);
 
 				containerInputs.on(
 					'change',
@@ -2764,9 +2748,7 @@ AUI().add(
 				var currentXSD = encodeURIComponent(instance.getStructureXSD());
 				var structureXSDInput = instance.getByName(form, 'structureXSD');
 
-				if (structureXSDInput){
-					structureXSDInput.val(currentXSD);
-				}
+				structureXSDInput.val(currentXSD);
 			}
 		};
 

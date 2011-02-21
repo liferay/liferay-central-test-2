@@ -762,7 +762,7 @@ public class JournalUtil {
 	}
 
 	public static String mergeArticleContent(
-		String curContent, String newContent, boolean removeNullElements) {
+		String curContent, String newContent) {
 
 		try {
 			Document curDocument = SAXReaderUtil.read(curContent);
@@ -781,10 +781,7 @@ public class JournalUtil {
 			_mergeArticleContentUpdate(
 				curDocument, newRoot,
 				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
-
-			if (removeNullElements) {
-				_mergeArticleContentDelete(curRoot, newDocument);
-			}
+			_mergeArticleContentDelete(curRoot, newDocument);
 
 			curContent = FormsXMLUtil.formatXML(curDocument);
 		}

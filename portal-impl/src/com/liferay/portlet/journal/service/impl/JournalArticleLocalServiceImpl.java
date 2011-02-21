@@ -103,7 +103,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -115,18 +114,16 @@ import javax.portlet.PortletPreferences;
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  * @author Bruno Farache
- * @author Juan Fernández
  */
 public class JournalArticleLocalServiceImpl
 	extends JournalArticleLocalServiceBaseImpl {
 
 	public JournalArticle addArticle(
 			long userId, long groupId, String articleId, boolean autoArticleId,
-			double version, Map<Locale, String> titleMap,
-			Map<Locale, String> descriptionMap, String content, String type,
-			String structureId, String templateId, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
+			double version, String title, String description, String content,
+			String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -176,8 +173,8 @@ public class JournalArticleLocalServiceImpl
 
 		validate(
 			user.getCompanyId(), groupId, articleId, autoArticleId, version,
-			titleMap, content, type, structureId, templateId,
-			smallImage, smallImageURL, smallFile, smallBytes);
+			title, content, type, structureId, templateId, smallImage,
+			smallImageURL, smallFile, smallBytes);
 
 		if (autoArticleId) {
 			articleId = String.valueOf(counterLocalService.increment());
@@ -191,17 +188,6 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticle article = journalArticlePersistence.create(id);
 
-		Locale locale = LocaleUtil.getDefault();
-
-		String defaultLanguageId = GetterUtil.getString(
-			serviceContext.getAttribute("defaultLanguageId"));
-
-		if (Validator.isNotNull(defaultLanguageId)){
-			locale = LocaleUtil.fromLanguageId(defaultLanguageId);
-		}
-
-		String title = titleMap.get(locale);
-
 		content = format(
 			groupId, articleId, version, false, content, structureId, images);
 
@@ -214,9 +200,9 @@ public class JournalArticleLocalServiceImpl
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
 		article.setArticleId(articleId);
 		article.setVersion(version);
-		article.setTitleMap(titleMap, locale);
+		article.setTitle(title);
 		article.setUrlTitle(getUniqueUrlTitle(id, groupId, articleId, title));
-		article.setDescriptionMap(descriptionMap, locale);
+		article.setDescription(description);
 		article.setContent(content);
 		article.setType(type);
 		article.setStructureId(structureId);
@@ -1025,12 +1011,11 @@ public class JournalArticleLocalServiceImpl
 			article.getCompanyId(), article.getId(),
 			article.getResourcePrimKey(), article.getGroupId(),
 			article.getUserId(), article.getArticleId(), article.getVersion(),
-			article.getTitle(languageId), article.getUrlTitle(),
-			article.getDescription(languageId), article.getAvailableLocales(),
-			content, article.getType(), article.getStructureId(), templateId,
-			article.isSmallImage(), article.getSmallImageId(),
-			article.getSmallImageURL(), numberOfPages, page, paginate,
-			cacheable);
+			article.getTitle(), article.getUrlTitle(), article.getDescription(),
+			article.getAvailableLocales(), content, article.getType(),
+			article.getStructureId(), templateId, article.isSmallImage(),
+			article.getSmallImageId(), article.getSmallImageURL(),
+			numberOfPages, page, paginate, cacheable);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -1420,20 +1405,6 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
 
-		String title = article.getTitle();
-
-		title = LocalizationUtil.removeLocalization(
-			title, "static-content", languageId, true);
-
-		article.setTitle(title);
-
-		String description = article.getDescription();
-
-		description = LocalizationUtil.removeLocalization(
-			description, "static-content", languageId, true);
-
-		article.setDescription(description);
-
 		String content = article.getContent();
 
 		if (article.isTemplateDriven()) {
@@ -1644,8 +1615,8 @@ public class JournalArticleLocalServiceImpl
 		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
 
 		return updateArticle(
-			userId, groupId, articleId, version, article.getTitleMap(),
-			article.getDescriptionMap(), content, article.getType(),
+			userId, groupId, articleId, version, article.getTitle(),
+			article.getDescription(), content, article.getType(),
 			article.getStructureId(), article.getTemplateId(), displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -1658,10 +1629,10 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
-			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			String content, String type, String structureId, String templateId,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			String title, String description, String content, String type,
+			String structureId, String templateId, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
@@ -1716,7 +1687,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		validate(
-			user.getCompanyId(), groupId, titleMap, content, type, structureId,
+			user.getCompanyId(), groupId, title, content, type, structureId,
 			templateId, smallImage, smallImageURL, smallFile, smallBytes);
 
 		JournalArticle oldArticle = null;
@@ -1777,27 +1748,16 @@ public class JournalArticleLocalServiceImpl
 		else {
 			article = oldArticle;
 		}
-		
-		Locale locale = LocaleUtil.getDefault();
-
-		String defaultLanguageId = GetterUtil.getString(
-			serviceContext.getAttribute("defaultLanguageId"));
-
-		if (Validator.isNotNull(defaultLanguageId)){
-			locale = LocaleUtil.fromLanguageId(defaultLanguageId);
-		}
-
-		String title = titleMap.get(locale);
 
 		content = format(
 			groupId, articleId, article.getVersion(), incrementVersion,
 			content, structureId, images);
 
 		article.setModifiedDate(serviceContext.getModifiedDate(now));
-		article.setTitleMap(titleMap, locale);
+		article.setTitle(title);
 		article.setUrlTitle(
 			getUniqueUrlTitle(article.getId(), groupId, articleId, title));
-		article.setDescriptionMap(descriptionMap, locale);
+		article.setDescription(description);
 		article.setContent(content);
 		article.setType(type);
 		article.setStructureId(structureId);
@@ -2851,8 +2811,8 @@ public class JournalArticleLocalServiceImpl
 
 	protected void validate(
 			long companyId, long groupId, String articleId,
-			boolean autoArticleId, double version, Map<Locale, String> titleMap,
-			String content, String type, String structureId, String templateId,
+			boolean autoArticleId, double version, String title, String content,
+			String type, String structureId, String templateId,
 			boolean smallImage, String smallImageURL, File smallFile,
 			byte[] smallBytes)
 		throws PortalException, SystemException {
@@ -2869,18 +2829,18 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		validate(
-			companyId, groupId, titleMap, content, type, structureId,
-			templateId, smallImage, smallImageURL, smallFile, smallBytes);
+			companyId, groupId, title, content, type, structureId, templateId,
+			smallImage, smallImageURL, smallFile, smallBytes);
 	}
 
 	protected void validate(
-			long companyId, long groupId, Map<Locale, String> titleMap,
-			String content, String type, String structureId, String templateId,
+			long companyId, long groupId, String title, String content,
+			String type, String structureId, String templateId,
 			boolean smallImage, String smallImageURL, File smallFile,
 			byte[] smallBytes)
 		throws PortalException, SystemException {
 
-		if (titleMap.isEmpty()) {
+		if (Validator.isNull(title)) {
 			throw new ArticleTitleException();
 		}
 		else if (Validator.isNull(type)) {
