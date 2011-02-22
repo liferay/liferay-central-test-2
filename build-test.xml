@@ -1728,6 +1728,48 @@ resource.repositories.root=$${user.home}/liferay</echo>
 		</replace>
 	</target>
 
+	<target name="prepare-portal-to-svn-revision">
+		<if>
+			<not>
+				<available file="svn-revision" />
+			</not>
+			<then>
+				<fail>Unable to find file "svn-revision".</fail>
+			</then>
+		</if>
+
+		<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}" outputproperty="svn.info.output">
+			<arg line="/c svn info" />
+		</exec>
+
+		<script classpathref="project.classpath" language="beanshell">
+			String svnInfoOutput = project.getProperty("svn.info.output");
+
+			int x = svnInfoOutput.indexOf("Revision: ");
+
+			x = svnInfoOutput.indexOf(" ", x);
+
+			int y = svnInfoOutput.indexOf("Node ", x);
+
+			String revision = svnInfoOutput.substring(x, y).trim();
+
+			project.setProperty("svn.info.revision.actual", revision);
+		</script>
+
+		<loadfile property="svn.info.revision.valid" srcFile="svn-revision" />
+
+		<if>
+			<not>
+				<equals arg1="${svn.info.revision.actual}" arg2="${svn.info.revision.valid}" />
+			</not>
+			<then>
+				<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}">
+					<arg line="/c svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision.actual}" />
+				</exec>
+			</then>
+		</if>
+	</target>
+
 	<target name="prepare-postgresql">
 		<echo file="test.${user.name}.properties">db.type=postgresql</echo>
 
