@@ -1520,6 +1520,7 @@
 						},
 						iframeCssClass: 'control-panel-frame',
 						iframeId: iframeId,
+						originalParent: openingWindow,
 						uri: portletURL
 					}
 				).render();
