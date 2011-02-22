@@ -54,3 +54,9 @@
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+
+.portlet-journal .journal-article-default-translation, .portlet-journal .journal-article-translation {
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
+}
