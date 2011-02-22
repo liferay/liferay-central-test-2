@@ -82,12 +82,11 @@ public class ServiceContextFactory {
 
 			if (user != null) {
 				serviceContext.setSignedIn(!user.isDefaultUser());
+				serviceContext.setUserId(user.getUserId());
 			}
 			else {
 				serviceContext.setSignedIn(false);
 			}
-
-			serviceContext.setUserId(user.getUserId());
 		}
 
 		// Attributes
