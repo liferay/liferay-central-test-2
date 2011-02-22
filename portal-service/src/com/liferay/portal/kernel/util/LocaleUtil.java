@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Brian Wing Shun Chan
@@ -41,6 +42,10 @@ public class LocaleUtil {
 
 	public static LocaleUtil getInstance() {
 		return _instance;
+	}
+
+	public static Map<String, String> getISOLanguages(Locale locale) {
+		return _instance._getISOLanguages(locale);
 	}
 
 	public static void setDefault(
@@ -164,7 +169,21 @@ public class LocaleUtil {
 		return _locale;
 	}
 
-	public void _setDefault(
+	private Map<String, String> _getISOLanguages(Locale locale) {
+		Map<String, String> isoLanguages = new TreeMap<String, String>(
+			String.CASE_INSENSITIVE_ORDER);
+
+		for (String isoLanguageId : Locale.getISOLanguages()) {
+			Locale isoLocale = _fromLanguageId(isoLanguageId);
+
+			isoLanguages.put(
+				isoLocale.getDisplayLanguage(locale), isoLanguageId);
+		}
+
+		return isoLanguages;
+	}
+
+	private void _setDefault(
 		String userLanguage, String userCountry, String userVariant) {
 
 		if (Validator.isNotNull(userLanguage) &&
