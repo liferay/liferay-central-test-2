@@ -16,6 +16,8 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -47,6 +49,10 @@ public class InputEditorTag extends IncludeTag {
 		_onChangeMethod = onChangeMethod;
 	}
 
+	public void setConfigParams(Map<String, String> configParams) {
+		_configParams = configParams;
+	}
+
 	public void setToolbarSet(String toolbarSet) {
 		_toolbarSet = toolbarSet;
 	}
@@ -62,6 +68,7 @@ public class InputEditorTag extends IncludeTag {
 		_initMethod = null;
 		_name = null;
 		_onChangeMethod = null;
+		_configParams = null;
 		_toolbarSet = null;
 		_width = null;
 	}
@@ -78,6 +85,8 @@ public class InputEditorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-editor:name", _name);
 		request.setAttribute(
 			"liferay-ui:input-editor:onChangeMethod", _onChangeMethod);
+		request.setAttribute(
+			"liferay-ui:input-editor:configParams", _configParams);
 		request.setAttribute("liferay-ui:input-editor:toolbarSet", _toolbarSet);
 		request.setAttribute("liferay-ui:input-editor:width", _width);
 	}
@@ -90,6 +99,7 @@ public class InputEditorTag extends IncludeTag {
 	private String _initMethod;
 	private String _name;
 	private String _onChangeMethod;
+	private Map<String,String> _configParams;
 	private String _toolbarSet;
 	private String _width;
 

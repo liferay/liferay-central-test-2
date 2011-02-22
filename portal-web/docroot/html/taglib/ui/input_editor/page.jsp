@@ -35,6 +35,8 @@ String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:on
 String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "450");
 String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:width"), "640");
 
+Map<String,String> configParams = (Map<String,String>)request.getAttribute("liferay-ui:input-editor:configParams");
+
 StringBundler sb = new StringBundler();
 
 sb.append(themeDisplay.getPathContext());
@@ -96,6 +98,15 @@ sb.append(HttpUtil.encodeURL(cssClasses));
 
 sb.append("&amp;languageId=");
 sb.append(LocaleUtil.toLanguageId(locale));
+
+if (configParams != null) {
+	for (Map.Entry entry : configParams.entrySet()) {
+		sb.append("&amp;config--");
+		sb.append(entry.getKey());
+		sb.append("--=");
+		sb.append(entry.getValue());
+	}
+}
 
 String editorURL = sb.toString();
 %>
