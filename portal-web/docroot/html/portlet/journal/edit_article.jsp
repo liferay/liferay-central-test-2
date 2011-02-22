@@ -861,6 +861,68 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		['aui-base']
 	);
 
+	Liferay.provide(
+		window,
+		'<portlet:namespace />postProcessTranslation',
+		function(cmd, newVersion, newLanguageId, newLanguage) {
+			var A = AUI();
+
+			var availableTranslationContainer = A.one('#<portlet:namespace />availableTranslationContainer');
+			var availableTranslationsLinks = A.one('#<portlet:namespace />availableTranslationsLinks');
+			var chooseLanguageText = A.one('#<portlet:namespace />chooseLanguageText');
+			var statusEl = A.one('.taglib-workflow-status .workflow-status strong');
+			var translationsMessage = A.one('#<portlet:namespace />translationsMessage');
+			var versionEl = A.one('.taglib-workflow-status .workflow-version strong');
+
+			document.<portlet:namespace />fm1.<portlet:namespace />version.value = newVersion;
+
+			versionEl.html(newVersion);
+
+			statusEl.removeClass('workflow-status-approved');
+			statusEl.addClass('workflow-status-draft');
+			statusEl.html('<%= LanguageUtil.get(pageContext, "draft") %>');
+
+			availableTranslationContainer.addClass('contains-translations');
+			availableTranslationsLinks.show();
+			translationsMessage.show();
+
+			var translationLink = availableTranslationContainer.one('.journal-article-translation-' + newLanguageId);
+
+			if (cmd == '<%= Constants.DELETE_TRANSLATION %>') {
+				translationLink.hide();
+			}
+			else if (!translationLink) {
+				var TPL_TRANSLATION = '<a class="journal-article-translation journal-article-translation-{newLanguageId}" href="javascript:;"><img alt="" src="<%= themeDisplay.getPathThemeImages() %>/language/{newLanguageId}.png" />{newLanguage}</a>';
+
+				var newLinkTpl = A.Lang.sub(
+					TPL_TRANSLATION,
+					{
+						newLanguageId: newLanguageId,
+						newLanguage: newLanguage
+					}
+				);
+
+				var newLink = A.Node.create(newLinkTpl);
+
+				var editTranslationURL = '<%= editArticleRenderPopUpURL %>' + '&<portlet:namespace />toLanguageId=' + newLanguageId;
+
+				newLink.on(
+					'click',
+					function(event) {
+						Liferay.Util.openIframePopUp('', '', editTranslationURL, '<portlet:namespace />' + newLanguageId, '<%= LanguageUtil.get(pageContext, "web-content-translation") %>');
+					}
+				);
+
+				availableTranslationsLinks.append(newLink);
+
+				var newInput = A.Node.create('<input name="<portlet:namespace />available_locales" type="hidden" value="' + newLanguageId + '" />');
+
+				A.one('#<portlet:namespace />fm1').append(newInput);
+			}
+		},
+		['aui-base']
+	);
+
 	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoArticleIdCheckbox','<portlet:namespace />newArticleId', true);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
