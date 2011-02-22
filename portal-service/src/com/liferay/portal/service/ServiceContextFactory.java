@@ -86,7 +86,6 @@ public class ServiceContextFactory {
 			}
 			else {
 				serviceContext.setSignedIn(false);
-				serviceContext.setUserId(PortalUtil.getUserId(request));
 			}
 		}
 
