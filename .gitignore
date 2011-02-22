@@ -19,6 +19,7 @@
 /dist
 /out
 /release.*.properties
+/svn-revision
 /test.*.properties
 /WEB-INF
 
