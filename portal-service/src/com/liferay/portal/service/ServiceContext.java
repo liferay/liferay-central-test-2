@@ -66,7 +66,7 @@ public class ServiceContext implements Cloneable, Serializable {
 		serviceContext.setScopeGroupId(getScopeGroupId());
 		serviceContext.setSignedIn(isSignedIn());
 		serviceContext.setUserDisplayURL(getUserDisplayURL());
-		serviceContext.setUser(getUser());
+		serviceContext.setUserId(getUserId());
 		serviceContext.setUuid(getUuid());
 		serviceContext.setWorkflowAction(getWorkflowAction());
 
@@ -189,17 +189,8 @@ public class ServiceContext implements Cloneable, Serializable {
 		return _userDisplayURL;
 	}
 
-	public User getUser() {
-		return _user;
-	}
-
 	public long getUserId() {
-		if (_user != null) {
-			return _user.getUserId();
-		}
-		else {
-			return 0;
-		}
+		return _userId;
 	}
 
 	public String getUuid() {
@@ -340,17 +331,8 @@ public class ServiceContext implements Cloneable, Serializable {
 		_userDisplayURL = userDisplayURL;
 	}
 
-	public void setUser(User user) {
-		_user = user;
-	}
-
 	public void setUserId(long userId) {
-		try {
-			_user = UserLocalServiceUtil.getUserById(userId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
+		_userId = userId;
 	}
 
 	public void setUuid(String uuid) {
@@ -387,7 +369,7 @@ public class ServiceContext implements Cloneable, Serializable {
 	private String _userDisplayURL;
 	private long _plid;
 	private int _workflowAction = WorkflowConstants.ACTION_PUBLISH;
-	private User _user;
+	private long _userId;
 	private String _uuid;
 
 }

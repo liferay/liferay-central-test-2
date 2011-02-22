@@ -69,7 +69,7 @@ public class ServiceContextFactory {
 			User user = themeDisplay.getUser();
 
 			serviceContext.setUserDisplayURL(user.getDisplayURL(themeDisplay));
-			serviceContext.setUser(user);
+			serviceContext.setUserId(user.getUserId());
 		}
 		else {
 			long companyId = PortalUtil.getCompanyId(request);
@@ -87,7 +87,7 @@ public class ServiceContextFactory {
 				serviceContext.setSignedIn(false);
 			}
 
-			serviceContext.setUser(user);
+			serviceContext.setUserId(user.getUserId());
 		}
 
 		// Attributes
@@ -149,7 +149,7 @@ public class ServiceContextFactory {
 			User user = themeDisplay.getUser();
 
 			serviceContext.setUserDisplayURL(user.getDisplayURL(themeDisplay));
-			serviceContext.setUser(user);
+			serviceContext.setUserId(user.getUserId());
 		}
 
 		serviceContext.setScopeGroupId(themeDisplay.getScopeGroupId());
