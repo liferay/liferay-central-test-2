@@ -223,8 +223,7 @@ public class DLFolderFinderImpl
 	}
 
 	protected int doCountFE_FS_ByG_F_S(
-			long groupId, long folderId, int status,
-			boolean inlineSQLHelper)
+			long groupId, long folderId, int status, boolean inlineSQLHelper)
 		throws SystemException {
 
 		Session session = null;
@@ -406,7 +405,7 @@ public class DLFolderFinderImpl
 			while (itr.hasNext()) {
 				Object[] array = itr.next();
 
-				long folderId2 = (Long)array[0];
+				long curFolderId = (Long)array[0];
 				String name = (String)array[1];
 				//String title = (String)array[2];
 				long fileShortcutId = (Long)array[3];
@@ -415,13 +414,14 @@ public class DLFolderFinderImpl
 				Object obj = null;
 
 				if (modelFolder == 1) {
-					obj = DLFolderUtil.findByPrimaryKey(folderId2);
+					obj = DLFolderUtil.findByPrimaryKey(curFolderId);
 				}
 				else if (fileShortcutId > 0) {
 					obj = DLFileShortcutUtil.findByPrimaryKey(fileShortcutId);
 				}
 				else {
-					obj = DLFileEntryUtil.findByG_F_N(groupId, folderId2, name);
+					obj = DLFileEntryUtil.findByG_F_N(
+						groupId, curFolderId, name);
 				}
 
 				models.add(obj);

@@ -51,6 +51,7 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
@@ -330,12 +331,16 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 		List<Object> fileEntriesAndFileShortcuts = new ArrayList<Object>();
 
-		fileEntriesAndFileShortcuts.addAll(
-			getFileEntries(folderId, start, end, null));
+		List<FileEntry> fileEntries = getFileEntries(
+			folderId, start, end, null);
 
-		fileEntriesAndFileShortcuts.addAll(
+		fileEntriesAndFileShortcuts.addAll(fileEntries);
+
+		List<DLFileShortcut> dlFileShortcuts =
 			dlAppHelperLocalService.getFileShortcuts(
-				getGroupId(), folderId, status));
+				getGroupId(), folderId, status);
+
+		fileEntriesAndFileShortcuts.addAll(dlFileShortcuts);
 
 		return fileEntriesAndFileShortcuts;
 	}

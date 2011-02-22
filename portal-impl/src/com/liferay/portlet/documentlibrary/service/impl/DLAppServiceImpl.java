@@ -326,7 +326,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		Repository repository = getRepository(repositoryId);
 
 		return repository.getFoldersAndFileEntriesAndFileShortcuts(
-				folderId, status, start, end);
+			folderId, status, start, end);
 	}
 
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
