@@ -14,13 +14,10 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
-import com.liferay.portal.model.User;
 
 import java.io.Serializable;
 
@@ -342,8 +339,6 @@ public class ServiceContext implements Cloneable, Serializable {
 	public void setWorkflowAction(int workflowAction) {
 		_workflowAction = workflowAction;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(ServiceContext.class);
 
 	private boolean _addCommunityPermissions;
 	private boolean _addGuestPermissions;
