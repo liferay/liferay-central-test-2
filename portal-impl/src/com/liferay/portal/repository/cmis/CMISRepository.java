@@ -232,6 +232,36 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
+	public void copyFileEntry(
+			long groupId, long fileEntryId, long destFolderId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			Session session = getSession();
+
+			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
+			ObjectId destFolderObjectId = toFolderId(session, destFolderId);
+
+			Document document = (Document)session.getObject(versionSeriesId);
+
+			validateTitle(session, destFolderId, document.getName());
+
+			document.copy(destFolderObjectId);
+		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			processException(e);
+
+			throw new RepositoryException(e);
+		}
+	}
+
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 

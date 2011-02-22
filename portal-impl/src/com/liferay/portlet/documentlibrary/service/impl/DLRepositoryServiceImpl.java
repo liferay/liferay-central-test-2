@@ -82,6 +82,26 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			description, serviceContext);
 	}
 
+	public void copyFileEntry(
+			long groupId, long repositoryId, long fileEntryId,
+			long destFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFileEntry dlFileEntry = getFileEntry(fileEntryId);
+
+		String title = dlFileEntry.getTitle();
+		String description = dlFileEntry.getDescription();
+		long size = dlFileEntry.getSize();
+
+		InputStream is = dlLocalService.getFileAsStream(
+			dlFileEntry.getCompanyId(), dlFileEntry.getFolderId(),
+			dlFileEntry.getName());
+
+		addFileEntry(
+			groupId, repositoryId, destFolderId, title, description, null, is,
+			size, serviceContext);
+	}
+
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 

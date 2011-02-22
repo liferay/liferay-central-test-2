@@ -74,6 +74,21 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
+	public static void copyFileEntry(long groupId, long repositoryId,
+		long fileEntryId, long destFolderId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			DLRepositoryServiceUtil.copyFileEntry(groupId, repositoryId,
+				fileEntryId, destFolderId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteFileEntry(long fileEntryId)
 		throws RemoteException {
 		try {

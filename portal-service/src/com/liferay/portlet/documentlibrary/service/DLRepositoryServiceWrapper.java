@@ -49,6 +49,15 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 			parentFolderId, name, description, serviceContext);
 	}
 
+	public void copyFileEntry(long groupId, long repositoryId,
+		long fileEntryId, long destFolderId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlRepositoryService.copyFileEntry(groupId, repositoryId, fileEntryId,
+			destFolderId, serviceContext);
+	}
+
 	public void deleteFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

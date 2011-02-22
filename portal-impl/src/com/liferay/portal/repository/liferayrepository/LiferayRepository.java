@@ -88,6 +88,16 @@ public class LiferayRepository
 		return new LiferayFolder(dlFolder);
 	}
 
+	public void copyFileEntry(
+			long groupId, long fileEntryId, long destFolderId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		dlRepositoryService.copyFileEntry(
+			groupId, getRepositoryId(), fileEntryId, destFolderId,
+			serviceContext);
+	}
+
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 

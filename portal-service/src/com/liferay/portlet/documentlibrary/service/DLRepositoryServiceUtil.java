@@ -60,6 +60,16 @@ public class DLRepositoryServiceUtil {
 			description, serviceContext);
 	}
 
+	public static void copyFileEntry(long groupId, long repositoryId,
+		long fileEntryId, long destFolderId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService()
+			.copyFileEntry(groupId, repositoryId, fileEntryId, destFolderId,
+			serviceContext);
+	}
+
 	public static void deleteFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

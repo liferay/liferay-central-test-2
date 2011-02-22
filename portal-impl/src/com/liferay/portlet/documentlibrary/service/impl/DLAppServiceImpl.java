@@ -124,7 +124,7 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long repositoryId, long sourceFolderId, long parentFolderId,
 			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
-		
+
 		Repository repository = getRepository(repositoryId);
 
 		Folder srcFolder = repository.getFolder(sourceFolderId);
@@ -653,9 +653,9 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return repository.verifyInheritableLock(
 			folderId, lockUuid);
 	}
-	
+
 	protected void copyFolder(
-			Repository repository, Folder srcFolder, Folder destFolder, 
+			Repository repository, Folder srcFolder, Folder destFolder,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -663,17 +663,14 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			srcFolder.getFolderId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 
+		long destFolderId = destFolder.getFolderId();
+		long groupId = destFolder.getGroupId();
+
 		for (FileEntry srcFileEntry : srcFileEntries) {
-			String title = srcFileEntry.getTitle();
-			String description = srcFileEntry.getDescription();
-			long size = srcFileEntry.getSize();
-
 			try {
-				InputStream is = srcFileEntry.getContentStream();
-
-				repository.addFileEntry(
-					destFolder.getFolderId(), title, description, 
-					StringPool.BLANK, is, size, serviceContext);
+				repository.copyFileEntry(
+					groupId, srcFileEntry.getFileEntryId(), destFolderId,
+					serviceContext);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -711,5 +708,5 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(DLAppServiceImpl.class);
-	
+
 }

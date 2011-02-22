@@ -42,6 +42,11 @@ public interface Repository {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
+	public void copyFileEntry(
+			long groupId, long fileEntryId, long destFolderId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException;
+
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException;
 
