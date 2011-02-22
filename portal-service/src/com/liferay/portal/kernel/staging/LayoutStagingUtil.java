@@ -35,6 +35,10 @@ public class LayoutStagingUtil {
 		return getLayoutStaging().getLayoutStagingHandler(layout);
 	}
 
+	public static boolean isBranchingLayout(Layout layout) {
+		return getLayoutStaging().isBranchingLayout(layout);
+	}
+
 	public void setLayoutStaging(LayoutStaging layoutStaging) {
 		_layoutStaging = layoutStaging;
 	}

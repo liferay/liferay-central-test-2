@@ -14,6 +14,11 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.ModelListenerException;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.staging.LayoutStagingUtil;
+import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
 
 /**
@@ -28,6 +33,23 @@ public class LayoutListener extends BaseModelListener<Layout> {
 
 	public void onAfterRemove(Layout layout) {
 		clearCache(layout);
+	}
+
+	public void onBeforeRemove(Layout layout) throws ModelListenerException {
+		if (!LayoutStagingUtil.isBranchingLayout(layout)) {
+			return;
+		}
+
+		try {
+			LayoutRevisionLocalServiceUtil.deleteLayoutLayoutRevisions(
+				layout.getPlid());
+		}
+		catch (PortalException pe) {
+			throw new ModelListenerException(pe);
+		}
+		catch (SystemException se) {
+			throw new ModelListenerException(se);
+		}
 	}
 
 	public void onAfterUpdate(Layout layout) {

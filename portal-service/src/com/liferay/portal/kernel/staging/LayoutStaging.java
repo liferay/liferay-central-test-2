@@ -27,4 +27,6 @@ public interface LayoutStaging {
 
 	public LayoutStagingHandler getLayoutStagingHandler(Layout layout);
 
+	public boolean isBranchingLayout(Layout layout);
+
 }

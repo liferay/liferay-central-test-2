@@ -15,10 +15,7 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.staging.LayoutStagingUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutStagingHandler;
 
@@ -49,39 +46,6 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 		}
 	}
 
-	protected boolean isStagingLayout(Layout layout) {
-		try {
-			Group group = layout.getGroup();
-
-			if (group.isStagingGroup()) {
-				group = group.getLiveGroup();
-			}
-
-			UnicodeProperties typeSettingsProperties =
-				group.getTypeSettingsProperties();
-
-			boolean branchingEnabled = false;
-
-			if (layout.isPrivateLayout()) {
-				branchingEnabled = GetterUtil.getBoolean(
-					typeSettingsProperties.getProperty("branchingPrivate"));
-			}
-			else {
-				branchingEnabled = GetterUtil.getBoolean(
-					typeSettingsProperties.getProperty("branchingPublic"));
-			}
-
-			if (group.isStaged() && branchingEnabled) {
-				return true;
-			}
-
-			return false;
-		}
-		catch (Exception e) {
-			throw new IllegalStateException(e);
-		}
-	}
-
 	protected Layout unwrapLayout(Layout layout) {
 		LayoutStagingHandler layoutStagingHandler =
 			LayoutStagingUtil.getLayoutStagingHandler(layout);
@@ -101,7 +65,7 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 			return layout;
 		}
 
-		if (!isStagingLayout(layout)) {
+		if (!LayoutStagingUtil.isBranchingLayout(layout)) {
 			return layout;
 		}
 

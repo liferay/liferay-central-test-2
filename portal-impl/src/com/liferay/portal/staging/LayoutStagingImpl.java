@@ -15,6 +15,9 @@
 package com.liferay.portal.staging;
 
 import com.liferay.portal.kernel.staging.LayoutStaging;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutStagingHandler;
@@ -51,6 +54,39 @@ public class LayoutStagingImpl implements LayoutStaging {
 		}
 
 		return (LayoutStagingHandler)invocationHandler;
+	}
+
+	public boolean isBranchingLayout(Layout layout) {
+		try {
+			Group group = layout.getGroup();
+
+			if (group.isStagingGroup()) {
+				group = group.getLiveGroup();
+			}
+
+			UnicodeProperties typeSettingsProperties =
+				group.getTypeSettingsProperties();
+
+			boolean branchingEnabled = false;
+
+			if (layout.isPrivateLayout()) {
+				branchingEnabled = GetterUtil.getBoolean(
+					typeSettingsProperties.getProperty("branchingPrivate"));
+			}
+			else {
+				branchingEnabled = GetterUtil.getBoolean(
+					typeSettingsProperties.getProperty("branchingPublic"));
+			}
+
+			if (group.isStaged() && branchingEnabled) {
+				return true;
+			}
+
+			return false;
+		}
+		catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
 	}
 
 }
