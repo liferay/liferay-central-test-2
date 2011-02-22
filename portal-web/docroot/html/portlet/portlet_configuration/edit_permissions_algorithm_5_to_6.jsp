@@ -190,13 +190,13 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 			}
 		}
 
-		Iterator<Role> rolesItr = roles.iterator();
+		Iterator<Role> itr = roles.iterator();
 
-		while (rolesItr.hasNext()) {
-			Role curRole = rolesItr.next();
+		while (itr.hasNext()) {
+			Role curRole = itr.next();
 
 			if (!curRole.getName().equals(RoleConstants.GUEST) && !RolePermissionUtil.contains(permissionChecker, groupId, curRole.getRoleId(), ActionKeys.VIEW)) {
-				rolesItr.remove();
+				itr.remove();
 			}
 		}
 		%>

@@ -27,10 +27,10 @@ public interface RolePermission {
 		throws PrincipalException;
 
 	public boolean contains(
-		PermissionChecker permissionChecker, long roleId, String actionId);
-
-	public boolean contains(
 		PermissionChecker permissionChecker, long groupId, long roleId,
 		String actionId);
+
+	public boolean contains(
+		PermissionChecker permissionChecker, long roleId, String actionId);
 
 }

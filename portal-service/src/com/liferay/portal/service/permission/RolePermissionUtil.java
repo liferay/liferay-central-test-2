@@ -30,18 +30,18 @@ public class RolePermissionUtil {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, long roleId, String actionId) {
-
-		return getRolePermission().contains(
-			permissionChecker, roleId, actionId);
-	}
-
-	public static boolean contains(
 		PermissionChecker permissionChecker, long groupId, long roleId,
 		String actionId) {
 
 		return getRolePermission().contains(
 			permissionChecker, groupId, roleId, actionId);
+	}
+
+	public static boolean contains(
+		PermissionChecker permissionChecker, long roleId, String actionId) {
+
+		return getRolePermission().contains(
+			permissionChecker, roleId, actionId);
 	}
 
 	public static RolePermission getRolePermission() {

@@ -33,17 +33,17 @@ public class RolePermissionImpl implements RolePermission {
 	}
 
 	public boolean contains(
-		PermissionChecker permissionChecker, long roleId, String actionId) {
-
-		return contains(permissionChecker, 0, roleId, actionId);
-	}
-
-	public boolean contains(
 		PermissionChecker permissionChecker, long groupId, long roleId,
 		String actionId) {
 
 		return permissionChecker.hasPermission(
 			groupId, Role.class.getName(), roleId, actionId);
+	}
+
+	public boolean contains(
+		PermissionChecker permissionChecker, long roleId, String actionId) {
+
+		return contains(permissionChecker, 0, roleId, actionId);
 	}
 
 }
