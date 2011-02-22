@@ -25,9 +25,9 @@ public class ListTypeTable {
 	public static String TABLE_NAME = "ListType";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"listTypeId", new Integer(Types.INTEGER)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"type_", new Integer(Types.VARCHAR)}
+		{"listTypeId", Types.INTEGER},
+		{"name", Types.VARCHAR},
+		{"type_", Types.VARCHAR}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table ListType (listTypeId INTEGER not null primary key,name VARCHAR(75) null,type_ VARCHAR(75) null)";

@@ -25,16 +25,16 @@ public class IGFolderTable {
 	public static final String TABLE_NAME = "IGFolder";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"uuid_", new Integer(Types.VARCHAR)},
-		{"folderId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"parentFolderId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)}
+		{"uuid_", Types.VARCHAR},
+		{"folderId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"parentFolderId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"description", Types.VARCHAR}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table IGFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(75) null,description STRING null)";

@@ -25,23 +25,23 @@ public class OrgLaborTable {
 	public static String TABLE_NAME = "OrgLabor";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"orgLaborId", new Integer(Types.BIGINT)},
-		{"organizationId", new Integer(Types.BIGINT)},
-		{"typeId", new Integer(Types.INTEGER)},
-		{"sunOpen", new Integer(Types.INTEGER)},
-		{"sunClose", new Integer(Types.INTEGER)},
-		{"monOpen", new Integer(Types.INTEGER)},
-		{"monClose", new Integer(Types.INTEGER)},
-		{"tueOpen", new Integer(Types.INTEGER)},
-		{"tueClose", new Integer(Types.INTEGER)},
-		{"wedOpen", new Integer(Types.INTEGER)},
-		{"wedClose", new Integer(Types.INTEGER)},
-		{"thuOpen", new Integer(Types.INTEGER)},
-		{"thuClose", new Integer(Types.INTEGER)},
-		{"friOpen", new Integer(Types.INTEGER)},
-		{"friClose", new Integer(Types.INTEGER)},
-		{"satOpen", new Integer(Types.INTEGER)},
-		{"satClose", new Integer(Types.INTEGER)}
+		{"orgLaborId", Types.BIGINT},
+		{"organizationId", Types.BIGINT},
+		{"typeId", Types.INTEGER},
+		{"sunOpen", Types.INTEGER},
+		{"sunClose", Types.INTEGER},
+		{"monOpen", Types.INTEGER},
+		{"monClose", Types.INTEGER},
+		{"tueOpen", Types.INTEGER},
+		{"tueClose", Types.INTEGER},
+		{"wedOpen", Types.INTEGER},
+		{"wedClose", Types.INTEGER},
+		{"thuOpen", Types.INTEGER},
+		{"thuClose", Types.INTEGER},
+		{"friOpen", Types.INTEGER},
+		{"friClose", Types.INTEGER},
+		{"satOpen", Types.INTEGER},
+		{"satClose", Types.INTEGER}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table OrgLabor (orgLaborId LONG not null primary key,organizationId LONG,typeId INTEGER,sunOpen INTEGER,sunClose INTEGER,monOpen INTEGER,monClose INTEGER,tueOpen INTEGER,tueClose INTEGER,wedOpen INTEGER,wedClose INTEGER,thuOpen INTEGER,thuClose INTEGER,friOpen INTEGER,friClose INTEGER,satOpen INTEGER,satClose INTEGER)";

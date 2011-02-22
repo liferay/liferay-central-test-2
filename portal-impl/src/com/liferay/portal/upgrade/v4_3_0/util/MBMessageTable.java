@@ -25,19 +25,19 @@ public class MBMessageTable {
 	public static String TABLE_NAME = "MBMessage";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"messageId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"categoryId", new Integer(Types.BIGINT)},
-		{"threadId", new Integer(Types.BIGINT)},
-		{"parentMessageId", new Integer(Types.BIGINT)},
-		{"subject", new Integer(Types.VARCHAR)},
-		{"body", new Integer(Types.CLOB)},
-		{"attachments", new Integer(Types.BOOLEAN)},
-		{"anonymous", new Integer(Types.BOOLEAN)}
+		{"messageId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"categoryId", Types.BIGINT},
+		{"threadId", Types.BIGINT},
+		{"parentMessageId", Types.BIGINT},
+		{"subject", Types.VARCHAR},
+		{"body", Types.CLOB},
+		{"attachments", Types.BOOLEAN},
+		{"anonymous", Types.BOOLEAN}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table MBMessage (messageId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,categoryId LONG,threadId LONG,parentMessageId LONG,subject VARCHAR(75) null,body TEXT null,attachments BOOLEAN,anonymous BOOLEAN)";

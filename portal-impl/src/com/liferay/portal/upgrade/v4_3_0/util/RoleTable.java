@@ -25,13 +25,13 @@ public class RoleTable {
 	public static String TABLE_NAME = "Role_";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"roleId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"classNameId", new Integer(Types.BIGINT)},
-		{"classPK", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"type_", new Integer(Types.INTEGER)}
+		{"roleId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"classNameId", Types.BIGINT},
+		{"classPK", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"description", Types.VARCHAR},
+		{"type_", Types.INTEGER}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER)";

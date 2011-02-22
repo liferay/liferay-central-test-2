@@ -25,10 +25,10 @@ public class PollsChoiceTable {
 	public static String TABLE_NAME = "PollsChoice";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"choiceId", new Integer(Types.BIGINT)},
-		{"questionId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)}
+		{"choiceId", Types.BIGINT},
+		{"questionId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"description", Types.VARCHAR}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table PollsChoice (choiceId LONG not null primary key,questionId LONG,name VARCHAR(75) null,description VARCHAR(1000) null)";

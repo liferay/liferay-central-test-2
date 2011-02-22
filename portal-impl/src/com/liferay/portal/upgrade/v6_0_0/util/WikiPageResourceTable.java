@@ -25,9 +25,9 @@ public class WikiPageResourceTable {
 	public static final String TABLE_NAME = "WikiPageResource";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"resourcePrimKey", new Integer(Types.BIGINT)},
-		{"nodeId", new Integer(Types.BIGINT)},
-		{"title", new Integer(Types.VARCHAR)}
+		{"resourcePrimKey", Types.BIGINT},
+		{"nodeId", Types.BIGINT},
+		{"title", Types.VARCHAR}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table WikiPageResource (resourcePrimKey LONG not null primary key,nodeId LONG,title VARCHAR(255) null)";

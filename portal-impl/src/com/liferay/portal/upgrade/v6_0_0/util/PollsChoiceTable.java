@@ -25,11 +25,11 @@ public class PollsChoiceTable {
 	public static final String TABLE_NAME = "PollsChoice";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"uuid_", new Integer(Types.VARCHAR)},
-		{"choiceId", new Integer(Types.BIGINT)},
-		{"questionId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)}
+		{"uuid_", Types.VARCHAR},
+		{"choiceId", Types.BIGINT},
+		{"questionId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"description", Types.VARCHAR}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table PollsChoice (uuid_ VARCHAR(75) null,choiceId LONG not null primary key,questionId LONG,name VARCHAR(75) null,description STRING null)";

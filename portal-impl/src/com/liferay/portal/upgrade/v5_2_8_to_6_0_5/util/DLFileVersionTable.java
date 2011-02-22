@@ -25,25 +25,25 @@ public class DLFileVersionTable {
 	public static final String TABLE_NAME = "DLFileVersion";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"fileVersionId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"folderId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"extension", new Integer(Types.VARCHAR)},
-		{"title", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"changeLog", new Integer(Types.VARCHAR)},
-		{"extraSettings", new Integer(Types.VARCHAR)},
-		{"version", new Integer(Types.VARCHAR)},
-		{"size_", new Integer(Types.BIGINT)},
-		{"status", new Integer(Types.INTEGER)},
-		{"statusByUserId", new Integer(Types.BIGINT)},
-		{"statusByUserName", new Integer(Types.VARCHAR)},
-		{"statusDate", new Integer(Types.TIMESTAMP)}
+		{"fileVersionId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"folderId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"extension", Types.VARCHAR},
+		{"title", Types.VARCHAR},
+		{"description", Types.VARCHAR},
+		{"changeLog", Types.VARCHAR},
+		{"extraSettings", Types.VARCHAR},
+		{"version", Types.VARCHAR},
+		{"size_", Types.BIGINT},
+		{"status", Types.INTEGER},
+		{"statusByUserId", Types.BIGINT},
+		{"statusByUserName", Types.VARCHAR},
+		{"statusDate", Types.TIMESTAMP}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,extension VARCHAR(75) null,title VARCHAR(75) null,description STRING null,changeLog VARCHAR(75) null,extraSettings VARCHAR(75) null,version VARCHAR(75) null,size_ LONG,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";

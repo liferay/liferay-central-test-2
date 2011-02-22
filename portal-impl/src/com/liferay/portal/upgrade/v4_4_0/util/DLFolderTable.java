@@ -25,18 +25,18 @@ public class DLFolderTable {
 	public static final String TABLE_NAME = "DLFolder";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"uuid_", new Integer(Types.VARCHAR)},
-		{"folderId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"parentFolderId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"lastPostDate", new Integer(Types.TIMESTAMP)}
+		{"uuid_", Types.VARCHAR},
+		{"folderId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"parentFolderId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"description", Types.VARCHAR},
+		{"lastPostDate", Types.TIMESTAMP}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table DLFolder (uuid_ VARCHAR(75) null,folderId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentFolderId LONG,name VARCHAR(100) null,description STRING null,lastPostDate DATE null)";

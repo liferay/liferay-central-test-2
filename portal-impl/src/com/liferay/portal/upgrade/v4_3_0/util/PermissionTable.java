@@ -25,10 +25,10 @@ public class PermissionTable {
 	public static String TABLE_NAME = "Permission_";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"permissionId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"actionId", new Integer(Types.VARCHAR)},
-		{"resourceId", new Integer(Types.BIGINT)}
+		{"permissionId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"actionId", Types.VARCHAR},
+		{"resourceId", Types.BIGINT}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Permission_ (permissionId LONG not null primary key,companyId LONG,actionId VARCHAR(75) null,resourceId LONG)";

@@ -25,16 +25,16 @@ public class DLFileVersionTable {
 	public static final String TABLE_NAME = "DLFileVersion";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"fileVersionId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"folderId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"version", new Integer(Types.DOUBLE)},
-		{"size_", new Integer(Types.INTEGER)}
+		{"fileVersionId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"folderId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"version", Types.DOUBLE},
+		{"size_", Types.INTEGER}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table DLFileVersion (fileVersionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,folderId LONG,name VARCHAR(255) null,version DOUBLE,size_ INTEGER)";

@@ -25,18 +25,18 @@ public class SCProductVersionTable {
 	public static String TABLE_NAME = "SCProductVersion";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"productVersionId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"productEntryId", new Integer(Types.BIGINT)},
-		{"version", new Integer(Types.VARCHAR)},
-		{"changeLog", new Integer(Types.VARCHAR)},
-		{"downloadPageURL", new Integer(Types.VARCHAR)},
-		{"directDownloadURL", new Integer(Types.VARCHAR)},
-		{"repoStoreArtifact", new Integer(Types.BOOLEAN)}
+		{"productVersionId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"productEntryId", Types.BIGINT},
+		{"version", Types.VARCHAR},
+		{"changeLog", Types.VARCHAR},
+		{"downloadPageURL", Types.VARCHAR},
+		{"directDownloadURL", Types.VARCHAR},
+		{"repoStoreArtifact", Types.BOOLEAN}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table SCProductVersion (productVersionId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,productEntryId LONG,version VARCHAR(75) null,changeLog STRING null,downloadPageURL STRING null,directDownloadURL STRING null,repoStoreArtifact BOOLEAN)";

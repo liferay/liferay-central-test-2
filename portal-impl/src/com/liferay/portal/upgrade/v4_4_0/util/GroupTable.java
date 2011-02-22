@@ -25,19 +25,19 @@ public class GroupTable {
 	public static final String TABLE_NAME = "Group_";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"creatorUserId", new Integer(Types.BIGINT)},
-		{"classNameId", new Integer(Types.BIGINT)},
-		{"classPK", new Integer(Types.BIGINT)},
-		{"parentGroupId", new Integer(Types.BIGINT)},
-		{"liveGroupId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"type_", new Integer(Types.INTEGER)},
-		{"typeSettings", new Integer(Types.VARCHAR)},
-		{"friendlyURL", new Integer(Types.VARCHAR)},
-		{"active_", new Integer(Types.BOOLEAN)}
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"creatorUserId", Types.BIGINT},
+		{"classNameId", Types.BIGINT},
+		{"classPK", Types.BIGINT},
+		{"parentGroupId", Types.BIGINT},
+		{"liveGroupId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"description", Types.VARCHAR},
+		{"type_", Types.INTEGER},
+		{"typeSettings", Types.VARCHAR},
+		{"friendlyURL", Types.VARCHAR},
+		{"active_", Types.BOOLEAN}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table Group_ (groupId LONG not null primary key,companyId LONG,creatorUserId LONG,classNameId LONG,classPK LONG,parentGroupId LONG,liveGroupId LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,typeSettings STRING null,friendlyURL VARCHAR(100) null,active_ BOOLEAN)";

@@ -25,18 +25,18 @@ public class WikiPageTable {
 	public static String TABLE_NAME = "WikiPage";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"pageId", new Integer(Types.BIGINT)},
-		{"resourcePrimKey", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"nodeId", new Integer(Types.BIGINT)},
-		{"title", new Integer(Types.VARCHAR)},
-		{"version", new Integer(Types.DOUBLE)},
-		{"content", new Integer(Types.CLOB)},
-		{"format", new Integer(Types.VARCHAR)},
-		{"head", new Integer(Types.BOOLEAN)}
+		{"pageId", Types.BIGINT},
+		{"resourcePrimKey", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"nodeId", Types.BIGINT},
+		{"title", Types.VARCHAR},
+		{"version", Types.DOUBLE},
+		{"content", Types.CLOB},
+		{"format", Types.VARCHAR},
+		{"head", Types.BOOLEAN}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table WikiPage (pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN)";

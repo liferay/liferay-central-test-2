@@ -25,10 +25,10 @@ public class ResourceCodeTable {
 	public static final String TABLE_NAME = "ResourceCode";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"codeId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"scope", new Integer(Types.INTEGER)}
+		{"codeId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"scope", Types.INTEGER}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table ResourceCode (codeId LONG not null primary key,companyId LONG,name VARCHAR(255) null,scope INTEGER)";

@@ -25,9 +25,9 @@ public class OrgGroupRoleTable {
 	public static String TABLE_NAME = "OrgGroupRole";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"organizationId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"roleId", new Integer(Types.BIGINT)}
+		{"organizationId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"roleId", Types.BIGINT}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table OrgGroupRole (organizationId LONG not null,groupId LONG not null,roleId LONG not null,primary key (organizationId, groupId, roleId))";

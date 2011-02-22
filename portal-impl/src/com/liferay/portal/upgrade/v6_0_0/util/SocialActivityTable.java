@@ -25,17 +25,17 @@ public class SocialActivityTable {
 	public static final String TABLE_NAME = "SocialActivity";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"activityId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"createDate", new Integer(Types.BIGINT)},
-		{"mirrorActivityId", new Integer(Types.BIGINT)},
-		{"classNameId", new Integer(Types.BIGINT)},
-		{"classPK", new Integer(Types.BIGINT)},
-		{"type_", new Integer(Types.INTEGER)},
-		{"extraData", new Integer(Types.VARCHAR)},
-		{"receiverUserId", new Integer(Types.BIGINT)}
+		{"activityId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"createDate", Types.BIGINT},
+		{"mirrorActivityId", Types.BIGINT},
+		{"classNameId", Types.BIGINT},
+		{"classPK", Types.BIGINT},
+		{"type_", Types.INTEGER},
+		{"extraData", Types.VARCHAR},
+		{"receiverUserId", Types.BIGINT}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate LONG,mirrorActivityId LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,receiverUserId LONG)";

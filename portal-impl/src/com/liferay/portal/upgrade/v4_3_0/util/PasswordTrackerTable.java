@@ -25,10 +25,10 @@ public class PasswordTrackerTable {
 	public static String TABLE_NAME = "PasswordTracker";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"passwordTrackerId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"password_", new Integer(Types.VARCHAR)}
+		{"passwordTrackerId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"createDate", Types.TIMESTAMP},
+		{"password_", Types.VARCHAR}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table PasswordTracker (passwordTrackerId LONG not null primary key,userId LONG,createDate DATE null,password_ VARCHAR(75) null)";

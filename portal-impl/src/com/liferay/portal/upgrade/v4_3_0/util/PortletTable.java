@@ -25,11 +25,11 @@ public class PortletTable {
 	public static String TABLE_NAME = "Portlet";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"id_", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"portletId", new Integer(Types.VARCHAR)},
-		{"roles", new Integer(Types.VARCHAR)},
-		{"active_", new Integer(Types.BOOLEAN)}
+		{"id_", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"portletId", Types.VARCHAR},
+		{"roles", Types.VARCHAR},
+		{"active_", Types.BOOLEAN}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Portlet (id_ LONG not null primary key,companyId LONG,portletId VARCHAR(200) null,roles STRING null,active_ BOOLEAN)";

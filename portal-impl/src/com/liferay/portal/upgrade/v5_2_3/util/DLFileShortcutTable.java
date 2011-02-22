@@ -25,17 +25,17 @@ public class DLFileShortcutTable {
 	public static final String TABLE_NAME = "DLFileShortcut";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"uuid_", new Integer(Types.VARCHAR)},
-		{"fileShortcutId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"folderId", new Integer(Types.BIGINT)},
-		{"toFolderId", new Integer(Types.BIGINT)},
-		{"toName", new Integer(Types.VARCHAR)}
+		{"uuid_", Types.VARCHAR},
+		{"fileShortcutId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"folderId", Types.BIGINT},
+		{"toFolderId", Types.BIGINT},
+		{"toName", Types.VARCHAR}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table DLFileShortcut (uuid_ VARCHAR(75) null,fileShortcutId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,folderId LONG,toFolderId LONG,toName VARCHAR(255) null)";

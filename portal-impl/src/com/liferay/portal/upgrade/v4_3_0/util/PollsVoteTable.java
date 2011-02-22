@@ -25,11 +25,11 @@ public class PollsVoteTable {
 	public static String TABLE_NAME = "PollsVote";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"voteId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"questionId", new Integer(Types.BIGINT)},
-		{"choiceId", new Integer(Types.BIGINT)},
-		{"voteDate", new Integer(Types.TIMESTAMP)}
+		{"voteId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"questionId", Types.BIGINT},
+		{"choiceId", Types.BIGINT},
+		{"voteDate", Types.TIMESTAMP}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table PollsVote (voteId LONG not null primary key,userId LONG,questionId LONG,choiceId LONG,voteDate DATE null)";

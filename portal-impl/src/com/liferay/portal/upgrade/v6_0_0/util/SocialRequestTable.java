@@ -25,19 +25,19 @@ public class SocialRequestTable {
 	public static final String TABLE_NAME = "SocialRequest";
 
 	public static final Object[][] TABLE_COLUMNS = {
-		{"uuid_", new Integer(Types.VARCHAR)},
-		{"requestId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"createDate", new Integer(Types.BIGINT)},
-		{"modifiedDate", new Integer(Types.BIGINT)},
-		{"classNameId", new Integer(Types.BIGINT)},
-		{"classPK", new Integer(Types.BIGINT)},
-		{"type_", new Integer(Types.INTEGER)},
-		{"extraData", new Integer(Types.VARCHAR)},
-		{"receiverUserId", new Integer(Types.BIGINT)},
-		{"status", new Integer(Types.INTEGER)}
+		{"uuid_", Types.VARCHAR},
+		{"requestId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"createDate", Types.BIGINT},
+		{"modifiedDate", Types.BIGINT},
+		{"classNameId", Types.BIGINT},
+		{"classPK", Types.BIGINT},
+		{"type_", Types.INTEGER},
+		{"extraData", Types.VARCHAR},
+		{"receiverUserId", Types.BIGINT},
+		{"status", Types.INTEGER}
 	};
 
 	public static final String TABLE_SQL_CREATE = "create table SocialRequest (uuid_ VARCHAR(75) null,requestId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate LONG,modifiedDate LONG,classNameId LONG,classPK LONG,type_ INTEGER,extraData STRING null,receiverUserId LONG,status INTEGER)";

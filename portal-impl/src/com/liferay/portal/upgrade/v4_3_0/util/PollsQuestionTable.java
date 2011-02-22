@@ -25,17 +25,17 @@ public class PollsQuestionTable {
 	public static String TABLE_NAME = "PollsQuestion";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"questionId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"title", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"expirationDate", new Integer(Types.TIMESTAMP)},
-		{"lastVoteDate", new Integer(Types.TIMESTAMP)}
+		{"questionId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"title", Types.VARCHAR},
+		{"description", Types.VARCHAR},
+		{"expirationDate", Types.TIMESTAMP},
+		{"lastVoteDate", Types.TIMESTAMP}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table PollsQuestion (questionId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,title VARCHAR(500) null,description STRING null,expirationDate DATE null,lastVoteDate DATE null)";

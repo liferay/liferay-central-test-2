@@ -25,10 +25,10 @@ public class MBMessageFlagTable {
 	public static String TABLE_NAME = "MBMessageFlag";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"messageFlagId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"messageId", new Integer(Types.BIGINT)},
-		{"flag", new Integer(Types.INTEGER)}
+		{"messageFlagId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"messageId", Types.BIGINT},
+		{"flag", Types.INTEGER}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table MBMessageFlag (messageFlagId LONG not null primary key,userId LONG,messageId LONG,flag INTEGER)";

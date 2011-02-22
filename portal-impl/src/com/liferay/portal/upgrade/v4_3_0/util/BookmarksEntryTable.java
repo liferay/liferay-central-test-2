@@ -25,16 +25,16 @@ public class BookmarksEntryTable {
 	public static String TABLE_NAME = "BookmarksEntry";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"entryId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"folderId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"url", new Integer(Types.VARCHAR)},
-		{"comments", new Integer(Types.VARCHAR)},
-		{"visits", new Integer(Types.INTEGER)}
+		{"entryId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"folderId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"url", Types.VARCHAR},
+		{"comments", Types.VARCHAR},
+		{"visits", Types.INTEGER}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table BookmarksEntry (entryId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(75) null,url STRING null,comments STRING null,visits INTEGER)";

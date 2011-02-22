@@ -25,16 +25,16 @@ public class ShoppingItemPriceTable {
 	public static String TABLE_NAME = "ShoppingItemPrice";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"itemPriceId", new Integer(Types.BIGINT)},
-		{"itemId", new Integer(Types.BIGINT)},
-		{"minQuantity", new Integer(Types.INTEGER)},
-		{"maxQuantity", new Integer(Types.INTEGER)},
-		{"price", new Integer(Types.DOUBLE)},
-		{"discount", new Integer(Types.DOUBLE)},
-		{"taxable", new Integer(Types.BOOLEAN)},
-		{"shipping", new Integer(Types.DOUBLE)},
-		{"useShippingFormula", new Integer(Types.BOOLEAN)},
-		{"status", new Integer(Types.INTEGER)}
+		{"itemPriceId", Types.BIGINT},
+		{"itemId", Types.BIGINT},
+		{"minQuantity", Types.INTEGER},
+		{"maxQuantity", Types.INTEGER},
+		{"price", Types.DOUBLE},
+		{"discount", Types.DOUBLE},
+		{"taxable", Types.BOOLEAN},
+		{"shipping", Types.DOUBLE},
+		{"useShippingFormula", Types.BOOLEAN},
+		{"status", Types.INTEGER}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table ShoppingItemPrice (itemPriceId LONG not null primary key,itemId LONG,minQuantity INTEGER,maxQuantity INTEGER,price DOUBLE,discount DOUBLE,taxable BOOLEAN,shipping DOUBLE,useShippingFormula BOOLEAN,status INTEGER)";

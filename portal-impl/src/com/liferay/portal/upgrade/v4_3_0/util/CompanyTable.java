@@ -25,13 +25,13 @@ public class CompanyTable {
 	public static String TABLE_NAME = "Company";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"companyId", new Integer(Types.BIGINT)},
-		{"accountId", new Integer(Types.BIGINT)},
-		{"webId", new Integer(Types.VARCHAR)},
-		{"key_", new Integer(Types.CLOB)},
-		{"virtualHost", new Integer(Types.VARCHAR)},
-		{"mx", new Integer(Types.VARCHAR)},
-		{"logoId", new Integer(Types.BIGINT)}
+		{"companyId", Types.BIGINT},
+		{"accountId", Types.BIGINT},
+		{"webId", Types.VARCHAR},
+		{"key_", Types.CLOB},
+		{"virtualHost", Types.VARCHAR},
+		{"mx", Types.VARCHAR},
+		{"logoId", Types.BIGINT}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,virtualHost VARCHAR(75) null,mx VARCHAR(75) null,logoId LONG)";

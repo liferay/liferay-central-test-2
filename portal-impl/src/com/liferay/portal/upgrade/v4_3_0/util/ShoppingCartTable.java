@@ -25,17 +25,17 @@ public class ShoppingCartTable {
 	public static String TABLE_NAME = "ShoppingCart";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"cartId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"itemIds", new Integer(Types.VARCHAR)},
-		{"couponCodes", new Integer(Types.VARCHAR)},
-		{"altShipping", new Integer(Types.INTEGER)},
-		{"insure", new Integer(Types.BOOLEAN)}
+		{"cartId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"itemIds", Types.VARCHAR},
+		{"couponCodes", Types.VARCHAR},
+		{"altShipping", Types.INTEGER},
+		{"insure", Types.BOOLEAN}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table ShoppingCart (cartId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,itemIds STRING null,couponCodes VARCHAR(75) null,altShipping INTEGER,insure BOOLEAN)";

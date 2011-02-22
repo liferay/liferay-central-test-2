@@ -25,22 +25,22 @@ public class AccountTable {
 	public static String TABLE_NAME = "Account_";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"accountId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"parentAccountId", new Integer(Types.BIGINT)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"legalName", new Integer(Types.VARCHAR)},
-		{"legalId", new Integer(Types.VARCHAR)},
-		{"legalType", new Integer(Types.VARCHAR)},
-		{"sicCode", new Integer(Types.VARCHAR)},
-		{"tickerSymbol", new Integer(Types.VARCHAR)},
-		{"industry", new Integer(Types.VARCHAR)},
-		{"type_", new Integer(Types.VARCHAR)},
-		{"size_", new Integer(Types.VARCHAR)}
+		{"accountId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"parentAccountId", Types.BIGINT},
+		{"name", Types.VARCHAR},
+		{"legalName", Types.VARCHAR},
+		{"legalId", Types.VARCHAR},
+		{"legalType", Types.VARCHAR},
+		{"sicCode", Types.VARCHAR},
+		{"tickerSymbol", Types.VARCHAR},
+		{"industry", Types.VARCHAR},
+		{"type_", Types.VARCHAR},
+		{"size_", Types.VARCHAR}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table Account_ (accountId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,parentAccountId LONG,name VARCHAR(75) null,legalName VARCHAR(75) null,legalId VARCHAR(75) null,legalType VARCHAR(75) null,sicCode VARCHAR(75) null,tickerSymbol VARCHAR(75) null,industry VARCHAR(75) null,type_ VARCHAR(75) null,size_ VARCHAR(75) null)";

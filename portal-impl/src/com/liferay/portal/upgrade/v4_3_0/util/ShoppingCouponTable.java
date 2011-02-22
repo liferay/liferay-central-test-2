@@ -25,24 +25,24 @@ public class ShoppingCouponTable {
 	public static String TABLE_NAME = "ShoppingCoupon";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"couponId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.BIGINT)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"code_", new Integer(Types.VARCHAR)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"description", new Integer(Types.VARCHAR)},
-		{"startDate", new Integer(Types.TIMESTAMP)},
-		{"endDate", new Integer(Types.TIMESTAMP)},
-		{"active_", new Integer(Types.BOOLEAN)},
-		{"limitCategories", new Integer(Types.VARCHAR)},
-		{"limitSkus", new Integer(Types.VARCHAR)},
-		{"minOrder", new Integer(Types.DOUBLE)},
-		{"discount", new Integer(Types.DOUBLE)},
-		{"discountType", new Integer(Types.VARCHAR)}
+		{"couponId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"companyId", Types.BIGINT},
+		{"userId", Types.BIGINT},
+		{"userName", Types.VARCHAR},
+		{"createDate", Types.TIMESTAMP},
+		{"modifiedDate", Types.TIMESTAMP},
+		{"code_", Types.VARCHAR},
+		{"name", Types.VARCHAR},
+		{"description", Types.VARCHAR},
+		{"startDate", Types.TIMESTAMP},
+		{"endDate", Types.TIMESTAMP},
+		{"active_", Types.BOOLEAN},
+		{"limitCategories", Types.VARCHAR},
+		{"limitSkus", Types.VARCHAR},
+		{"minOrder", Types.DOUBLE},
+		{"discount", Types.DOUBLE},
+		{"discountType", Types.VARCHAR}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table ShoppingCoupon (couponId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,code_ VARCHAR(75) null,name VARCHAR(75) null,description STRING null,startDate DATE null,endDate DATE null,active_ BOOLEAN,limitCategories STRING null,limitSkus STRING null,minOrder DOUBLE,discount DOUBLE,discountType VARCHAR(75) null)";

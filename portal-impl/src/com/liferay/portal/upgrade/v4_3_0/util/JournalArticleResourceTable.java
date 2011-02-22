@@ -25,9 +25,9 @@ public class JournalArticleResourceTable {
 	public static String TABLE_NAME = "JournalArticleResource";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"resourcePrimKey", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"articleId", new Integer(Types.VARCHAR)}
+		{"resourcePrimKey", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"articleId", Types.VARCHAR}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table JournalArticleResource (resourcePrimKey LONG not null primary key,groupId LONG,articleId VARCHAR(75) null)";

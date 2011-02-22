@@ -25,9 +25,9 @@ public class OrgGroupPermissionTable {
 	public static String TABLE_NAME = "OrgGroupPermission";
 
 	public static Object[][] TABLE_COLUMNS = {
-		{"organizationId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)},
-		{"permissionId", new Integer(Types.BIGINT)}
+		{"organizationId", Types.BIGINT},
+		{"groupId", Types.BIGINT},
+		{"permissionId", Types.BIGINT}
 	};
 
 	public static String TABLE_SQL_CREATE = "create table OrgGroupPermission (organizationId LONG not null,groupId LONG not null,permissionId LONG not null,primary key (organizationId, groupId, permissionId))";
