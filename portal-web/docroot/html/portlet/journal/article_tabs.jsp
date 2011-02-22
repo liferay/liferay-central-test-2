@@ -51,20 +51,28 @@ if (article != null) {
 	viewArticleHistoryURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 	viewArticleHistoryURL.setParameter("articleId", article.getArticleId());
 }
+
+String toLanguageId = ParamUtil.getString(request, "toLanguageId");
+
+if ((article != null) && Validator.isNotNull(toLanguageId)) {
+	redirect = null;
+}
 %>
 
 <c:choose>
 	<c:when test="<%= article != null %>">
 		<liferay-ui:header
 			backURL="<%= redirect %>"
-			title="<%= article.getTitle() %>"
+			title="<%= article.getTitle(locale) %>"
 		/>
 
-		<liferay-ui:tabs
-			names="content,history"
-			url0="<%= editArticleURL.toString() %>"
-			url1="<%= viewArticleHistoryURL.toString() %>"
-		/>
+		<c:if test="<%= Validator.isNull(toLanguageId) %>">
+			<liferay-ui:tabs
+				names="content,history"
+				url0="<%= editArticleURL.toString() %>"
+				url1="<%= viewArticleHistoryURL.toString() %>"
+			/>
+		</c:if>
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:header

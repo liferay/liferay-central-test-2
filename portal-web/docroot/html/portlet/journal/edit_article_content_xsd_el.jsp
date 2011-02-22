@@ -18,6 +18,14 @@
 
 <%
 String languageId = LanguageUtil.getLanguageId(request);
+String toLanguageId = ParamUtil.getString(request, "toLanguageId");
+
+boolean translate = false;
+
+if (Validator.isNotNull(toLanguageId)) {
+	languageId = toLanguageId;
+	translate = true;
+}
 
 long groupId = GetterUtil.getLong((String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID));
 
@@ -354,7 +362,9 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 			</div>
 
-			<aui:input cssClass="journal-article-localized-checkbox" label="localized" name='<%= elInstanceId + "localized-checkbox" %>' type="checkbox" value="<%= !elLanguageId.equals(StringPool.BLANK) %>" />
+			<c:if test="<%= !translate %>">
+				<aui:input cssClass="journal-article-localized-checkbox" label="localizable" name='<%= elInstanceId + "localized-checkbox" %>' type="checkbox" value="<%= !elLanguageId.equals(StringPool.BLANK) %>" />
+			</c:if>
 
 			<div class="journal-article-required-message portlet-msg-error">
 				<liferay-ui:message key="this-field-is-required" />
