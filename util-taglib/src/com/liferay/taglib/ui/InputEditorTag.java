@@ -25,6 +25,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class InputEditorTag extends IncludeTag {
 
+	public void setConfigParams(Map<String, String> configParams) {
+		_configParams = configParams;
+	}
+
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
@@ -49,10 +53,6 @@ public class InputEditorTag extends IncludeTag {
 		_onChangeMethod = onChangeMethod;
 	}
 
-	public void setConfigParams(Map<String, String> configParams) {
-		_configParams = configParams;
-	}
-
 	public void setToolbarSet(String toolbarSet) {
 		_toolbarSet = toolbarSet;
 	}
@@ -62,13 +62,13 @@ public class InputEditorTag extends IncludeTag {
 	}
 
 	protected void cleanUp() {
+		_configParams = null;
 		_cssClass = null;
 		_editorImpl = null;
 		_height = null;
 		_initMethod = null;
 		_name = null;
 		_onChangeMethod = null;
-		_configParams = null;
 		_toolbarSet = null;
 		_width = null;
 	}
@@ -78,6 +78,8 @@ public class InputEditorTag extends IncludeTag {
 	}
 
 	protected void setAttributes(HttpServletRequest request) {
+		request.setAttribute(
+			"liferay-ui:input-editor:configParams", _configParams);
 		request.setAttribute("liferay-ui:input-editor:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-editor:editorImpl", _editorImpl);
 		request.setAttribute("liferay-ui:input-editor:height", _height);
@@ -85,21 +87,19 @@ public class InputEditorTag extends IncludeTag {
 		request.setAttribute("liferay-ui:input-editor:name", _name);
 		request.setAttribute(
 			"liferay-ui:input-editor:onChangeMethod", _onChangeMethod);
-		request.setAttribute(
-			"liferay-ui:input-editor:configParams", _configParams);
 		request.setAttribute("liferay-ui:input-editor:toolbarSet", _toolbarSet);
 		request.setAttribute("liferay-ui:input-editor:width", _width);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/input_editor/page.jsp";
 
+	private Map<String, String> _configParams;
 	private String _cssClass;
 	private String _editorImpl;
 	private String _height;
 	private String _initMethod;
 	private String _name;
 	private String _onChangeMethod;
-	private Map<String,String> _configParams;
 	private String _toolbarSet;
 	private String _width;
 

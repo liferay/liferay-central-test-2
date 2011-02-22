@@ -17,11 +17,12 @@
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.TextFormatter" %>
-<%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.kernel.util.PropertiesParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.StringBundler" %>
+<%@ page import="com.liferay.portal.kernel.util.StringPool" %>
+<%@ page import="com.liferay.portal.kernel.util.TextFormatter" %>
 <%@ page import="com.liferay.portal.kernel.util.UnicodeProperties" %>
+<%@ page import="com.liferay.portal.kernel.util.Validator" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <%@ page import="java.util.Map" %>
@@ -42,13 +43,13 @@ String editorVariant = ParamUtil.getString(request, "editorVariant");
 
 UnicodeProperties properties = PropertiesParamUtil.getProperties(request, "config--");
 
-StringBundler sb = new StringBundler();
+StringBundler configParamsSB = new StringBundler();
 
-for (Map.Entry property : properties.entrySet()) {
-	sb.append("&");
-	sb.append(property.getKey());
-	sb.append("=");
-	sb.append(HttpUtil.encodeURL((String)property.getValue()));
+for (Map.Entry<String, String> property : properties.entrySet()) {
+	configParamsSB.append(StringPool.AMPERSAND);
+	configParamsSB.append(property.getKey());
+	configParamsSB.append(StringPool.EQUAL);
+	configParamsSB.append(HttpUtil.encodeURL(property.getValue()));
 }
 %>
 
@@ -147,7 +148,7 @@ for (Map.Entry property : properties.entrySet()) {
 	CKEDITOR.replace(
 		'CKEditor1',
 		{
-			customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= customConfigFile %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= sb.toString() %>',
+			customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= customConfigFile %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
 			filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
 			filebrowserUploadUrl: null,
 			toolbar: '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>'

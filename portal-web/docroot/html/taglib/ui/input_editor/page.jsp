@@ -17,6 +17,7 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+Map<String, String> configParams = (Map<String, String>)request.getAttribute("liferay-ui:input-editor:configParams");
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:cssClass"));
 String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"), namespace + "editor");
 
@@ -42,8 +43,6 @@ String initMethod = GetterUtil.getString((String)request.getAttribute("liferay-u
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "450");
 String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:width"), "640");
-
-Map<String,String> configParams = (Map<String,String>)request.getAttribute("liferay-ui:input-editor:configParams");
 
 StringBundler sb = new StringBundler();
 
@@ -111,7 +110,7 @@ sb.append("&amp;editorVariant=");
 sb.append(editorVariant);
 
 if (configParams != null) {
-	for (Map.Entry entry : configParams.entrySet()) {
+	for (Map.Entry<String, String> entry : configParams.entrySet()) {
 		sb.append("&amp;config--");
 		sb.append(entry.getKey());
 		sb.append("--=");

@@ -335,15 +335,17 @@ public class PropertiesParamUtil {
 	}
 
 	public static UnicodeProperties getProperties(
-		PortletRequest portletRequest, String prefix) {
+		HttpServletRequest request, String prefix) {
 
 		UnicodeProperties properties = new UnicodeProperties(true);
 
-		for (String param : portletRequest.getParameterMap().keySet()) {
+		Map<String, String> parameterMap = request.getParameterMap();
+
+		for (String param : parameterMap.keySet()) {
 			if (param.startsWith(prefix) && !param.endsWith("--Checkbox")) {
 				String key = param.substring(
 					prefix.length(), param.length() - 2);
-				String value = portletRequest.getParameter(param);
+				String value = request.getParameter(param);
 
 				properties.setProperty(key, value);
 			}
@@ -353,17 +355,15 @@ public class PropertiesParamUtil {
 	}
 
 	public static UnicodeProperties getProperties(
-		HttpServletRequest request, String prefix) {
+		PortletRequest portletRequest, String prefix) {
 
 		UnicodeProperties properties = new UnicodeProperties(true);
 
-		Map<String,String> parameterMap = request.getParameterMap();
-
-		for (String param : parameterMap.keySet()) {
+		for (String param : portletRequest.getParameterMap().keySet()) {
 			if (param.startsWith(prefix) && !param.endsWith("--Checkbox")) {
 				String key = param.substring(
 					prefix.length(), param.length() - 2);
-				String value = request.getParameter(param);
+				String value = portletRequest.getParameter(param);
 
 				properties.setProperty(key, value);
 			}
