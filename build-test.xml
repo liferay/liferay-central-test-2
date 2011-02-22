@@ -261,6 +261,29 @@
 	</target>
 
 	<target name="build-test-ant-scripts">
+		<property name="build-test-ant-scripts.version" value="1" />
+
+		<if>
+			<available file="portal-web/test-ant-scripts/version" />
+			<then>
+				<loadfile property="build-test-ant-scripts.version.old" srcFile="portal-web/test-ant-scripts/version" />
+
+				<if>
+					<not>
+						<equals arg1="${build-test-ant-scripts.version.old}" arg2="${build-test-ant-scripts.version}" />
+					</not>
+					<then>
+						<antcall target="build-test-ant-scripts-cmd" />
+					</then>
+				</if>
+			</then>
+			<else>
+				<antcall target="build-test-ant-scripts-cmd" />
+			</else>
+		</if>
+	</target>
+
+	<target name="build-test-ant-scripts-cmd">
 		<delete dir="portal-web/test-ant-scripts" />
 
 		<mkdir dir="portal-web/test-ant-scripts" />
@@ -1429,6 +1452,8 @@
 			<param name="test.ant.script.command" value="tck-286" />
 			<param name="test.ant.script.template" value="ant-script-tck.xml" />
 		</antcall>
+
+		<echo file="portal-web/test-ant-scripts/version">${build-test-ant-scripts.version}</echo>
 	</target>
 
 	<target name="clean-up-bundles">
