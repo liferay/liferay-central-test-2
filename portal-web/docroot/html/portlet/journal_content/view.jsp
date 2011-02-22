@@ -29,7 +29,7 @@ boolean expired = true;
 
 try {
 	if (articleDisplay != null) {
-		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(articleDisplay.getGroupId(), articleDisplay.getArticleId(), WorkflowConstants.STATUS_ANY);
+		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(articleDisplay.getGroupId(), articleDisplay.getArticleId(), WorkflowConstants.STATUS_APPROVED);
 
 		title = article.getTitle();
 		approved = article.isApproved();
