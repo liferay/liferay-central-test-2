@@ -45,10 +45,10 @@ UnicodeProperties properties = PropertiesParamUtil.getProperties(request, "confi
 StringBundler sb = new StringBundler();
 
 for (Map.Entry property : properties.entrySet()) {
-		sb.append("&");
-		sb.append(property.getKey());
-		sb.append("=");
-		sb.append(property.getValue());
+	sb.append("&");
+	sb.append(property.getKey());
+	sb.append("=");
+	sb.append(HttpUtil.encodeURL((String)property.getValue()));
 }
 %>
 
