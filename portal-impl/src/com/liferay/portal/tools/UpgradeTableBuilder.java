@@ -201,10 +201,10 @@ public class UpgradeTableBuilder {
 		content = StringUtil.replace(
 			content,
 			new String[] {
-				"\t", "{ \"", ") }"
+				"\t", "{ \"", "new Integer(Types.", ") }", " }"
 			},
 			new String[] {
-				"", "{\"", ")}"
+				"", "{\"", "Types.", "}", "}"
 			});
 
 		while (content.contains("\n\n")) {
