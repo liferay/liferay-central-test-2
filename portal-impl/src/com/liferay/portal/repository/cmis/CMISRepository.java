@@ -165,9 +165,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			if (hasTitle(session, folderId, title)) {
-				throw new DuplicateFileException(title);
-			}
+			validateTitle(session, folderId, title);
 
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 				getCmisFolder(session, folderId);
@@ -208,9 +206,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			if (hasTitle(session, parentFolderId, title)) {
-				throw new DuplicateFolderNameException(title);
-			}
+			validateTitle(session, parentFolderId, title);
 
 			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
 				getCmisFolder(session, parentFolderId);
@@ -702,6 +698,8 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			Document document = (Document)session.getObject(versionSeriesId);
 
+			validateTitle(session, newFolderId, document.getName());
+
 			String oldFolderObjectId = document.getParents().get(0).getId();
 
 			if (oldFolderObjectId.equals(newFolderObjectId.toString())) {
@@ -956,9 +954,61 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
+	public Folder moveFolder(
+			long folderId, long parentFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			Session session = getSession();
+
+			ObjectId objectId = toFolderId(session, folderId);
+
+			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
+				(org.apache.chemistry.opencmis.client.api.Folder)
+					session.getObject(objectId);
+
+			validateTitle(session, parentFolderId, cmisFolder.getName());
+
+			org.apache.chemistry.opencmis.client.api.Folder
+				currentParentFolder =
+					cmisFolder.getFolderParent();
+
+			if (currentParentFolder == null) {
+				throw new RepositoryException(
+					"Cannot move CMIS root folder " + folderId);
+			}
+
+			ObjectId sourceFolderId = new ObjectIdImpl(
+				currentParentFolder.getId());
+
+			ObjectId targetFolderId = toFolderId(session, parentFolderId);
+
+			if (!sourceFolderId.getId().equals(targetFolderId.getId()) &&
+				!targetFolderId.getId().equals(objectId.getId())) {
+
+				cmisFolder =
+					(org.apache.chemistry.opencmis.client.api.Folder)
+						cmisFolder.move(sourceFolderId, targetFolderId);
+			}
+
+			return toFolder(cmisFolder);
+		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			processException(e);
+
+			throw new RepositoryException(e);
+		}
+	}
+
 	public Folder updateFolder(
-			long folderId, long parentFolderId, String title,
-			String description, ServiceContext serviceContext)
+			long folderId, String title, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		try {
@@ -1385,20 +1435,19 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	protected boolean hasTitle(Session session, long folderId, String title)
-		throws SystemException {
+	protected void validateTitle(Session session, long folderId, String title)
+		throws PortalException, SystemException {
 
 		String objectId = getObjectId(session, folderId, true, title);
 
-		if (objectId == null) {
-			objectId = getObjectId(session, folderId, false, title);
+		if (objectId != null) {
+			throw new DuplicateFileException(title);
 		}
 
-		if (objectId == null) {
-			return false;
-		}
-		else {
-			return true;
+		objectId = getObjectId(session, folderId, false, title);
+
+		if (objectId != null) {
+			throw new DuplicateFolderNameException(title);
 		}
 	}
 

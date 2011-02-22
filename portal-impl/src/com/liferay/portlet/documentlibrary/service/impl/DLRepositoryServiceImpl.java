@@ -584,6 +584,41 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		return dlFileEntry;
 	}
 
+	public DLFolder moveFolder(
+			long folderId, long parentFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFolder folder = dlRepositoryLocalService.getFolder(folderId);
+
+		DLFolderPermission.check(
+			getPermissionChecker(), folder, ActionKeys.UPDATE);
+
+		boolean hasLock = lockLocalService.hasLock(
+			getUserId(), DLFolder.class.getName(), folderId);
+
+		Lock lock = null;
+
+		if (!hasLock) {
+
+			// Lock
+
+			lock = lockFolder(folderId);
+		}
+
+		try {
+			return dlRepositoryLocalService.moveFolder(
+				folderId, parentFolderId, serviceContext);
+		}
+		finally {
+			if (!hasLock) {
+
+				// Unlock
+
+				unlockFolder(folder.getGroupId(), folderId, lock.getUuid());
+			}
+		}
+	}
+
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
 		throws PortalException, SystemException {
 
@@ -739,7 +774,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public DLFolder updateFolder(
-			long folderId, long parentFolderId, String name, String description,
+			long folderId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -762,7 +797,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 		try {
 			return dlRepositoryLocalService.updateFolder(
-				folderId, parentFolderId, name, description, serviceContext);
+				folderId, name, description, serviceContext);
 		}
 		finally {
 			if (!hasLock) {

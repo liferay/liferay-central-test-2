@@ -469,7 +469,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long parentFolderId = getParentFolderId(
 				companyId, destinationArray);
 			String name = WebDAVUtil.getResourceName(destinationArray);
-			String description = folder.getDescription();
 
 			ServiceContext serviceContext = new ServiceContext();
 
@@ -484,8 +483,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				}
 			}
 
-			DLAppServiceUtil.updateFolder(
-				folderId, parentFolderId, name, description, serviceContext);
+			DLAppServiceUtil.moveFolder(
+				folderId, parentFolderId, serviceContext);
 
 			return status;
 		}

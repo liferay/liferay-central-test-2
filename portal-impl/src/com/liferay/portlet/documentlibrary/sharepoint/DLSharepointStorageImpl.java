@@ -272,11 +272,9 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		}
 		else if (folder != null) {
 			long folderId = folder.getFolderId();
-			String description = folder.getDescription();
 
-			folder = DLAppServiceUtil.updateFolder(
-				folderId, newParentFolderId, newName, description,
-				serviceContext);
+			folder = DLAppServiceUtil.moveFolder(
+				folderId, newParentFolderId, serviceContext);
 
 			Tree folderTree = getFolderTree(folder, newParentFolderPath);
 

@@ -326,6 +326,17 @@ public class LiferayRepository
 		return new LiferayFileEntry(dlFileEntry);
 	}
 
+	public Folder moveFolder(
+			long folderId, long parentFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFolder dlFolder = dlRepositoryService.moveFolder(
+			toFolderId(folderId), toFolderId(parentFolderId),
+			serviceContext);
+
+		return new LiferayFolder(dlFolder);
+	}
+
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
 		throws PortalException, SystemException {
 
@@ -386,13 +397,12 @@ public class LiferayRepository
 	}
 
 	public Folder updateFolder(
-			long folderId, long parentFolderId, String title,
-			String description, ServiceContext serviceContext)
+			long folderId, String title, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = dlRepositoryService.updateFolder(
-			toFolderId(folderId), toFolderId(parentFolderId), title,
-			description, serviceContext);
+			toFolderId(folderId), title, description, serviceContext);
 
 		return new LiferayFolder(dlFolder);
 	}

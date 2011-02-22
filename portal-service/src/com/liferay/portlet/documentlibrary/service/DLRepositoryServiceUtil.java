@@ -301,6 +301,14 @@ public class DLRepositoryServiceUtil {
 				   .moveFileEntry(fileEntryId, newFolderId, serviceContext);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolder moveFolder(
+		long folderId, long parentFolderId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().moveFolder(folderId, parentFolderId, serviceContext);
+	}
+
 	public static com.liferay.portal.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -363,14 +371,12 @@ public class DLRepositoryServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
-		long folderId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		long folderId, java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .updateFolder(folderId, parentFolderId, name, description,
-			serviceContext);
+				   .updateFolder(folderId, name, description, serviceContext);
 	}
 
 	public static boolean verifyFileEntryLock(long fileEntryId,

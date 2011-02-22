@@ -97,7 +97,14 @@ public class LiferayFolder extends LiferayModel implements Folder {
 	}
 
 	public Folder getParentFolder() throws PortalException, SystemException {
-		return new LiferayFolder(_dlFolder.getParentFolder());
+		DLFolder dlParentFolder = _dlFolder.getParentFolder();
+
+		if (dlParentFolder == null) {
+			return null;
+		}
+		else {
+			return new LiferayFolder(dlParentFolder);
+		}
 	}
 
 	public long getParentFolderId() {

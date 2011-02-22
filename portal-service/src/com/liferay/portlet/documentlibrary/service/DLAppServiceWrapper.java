@@ -352,6 +352,14 @@ public class DLAppServiceWrapper implements DLAppService {
 			serviceContext);
 	}
 
+	public com.liferay.portal.kernel.repository.model.Folder moveFolder(
+		long folderId, long parentFolderId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppService.moveFolder(folderId, parentFolderId, serviceContext);
+	}
+
 	public com.liferay.portal.model.Lock refreshFileEntryLock(
 		java.lang.String lockUuid, long expirationTime)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -444,13 +452,12 @@ public class DLAppServiceWrapper implements DLAppService {
 	}
 
 	public com.liferay.portal.kernel.repository.model.Folder updateFolder(
-		long folderId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		long folderId, java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.updateFolder(folderId, parentFolderId, name,
-			description, serviceContext);
+		return _dlAppService.updateFolder(folderId, name, description,
+			serviceContext);
 	}
 
 	public boolean verifyFileEntryLock(long repositoryId, long fileEntryId,

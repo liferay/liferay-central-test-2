@@ -56,7 +56,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 			<aui:field-wrapper label="parent-folder">
 
 				<%
-				String parentFolderName = "";
+				String parentFolderName = LanguageUtil.get(pageContext, "documents-home");
 
 				try {
 					if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
@@ -75,19 +75,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 				</portlet:renderURL>
 
 				<aui:a href="<%= viewFolderURL %>" id="parentFolderName"><%= parentFolderName %></aui:a>
-
-				<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="selectFolderURL">
-					<portlet:param name="struts_action" value="/document_library/select_folder" />
-					<portlet:param name="folderId" value="<%= String.valueOf(parentFolderId) %>" />
-				</portlet:renderURL>
-
-				<%
-				String taglibOpenFolderWindow = "var folderWindow = window.open('" + selectFolderURL + "','folder', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); folderWindow.focus();";
-				%>
-
-				<aui:button onClick='<%= taglibOpenFolderWindow %>' value="select" />
-
-				<aui:button name="removeFolderButton" onClick='<%= renderResponse.getNamespace() + "removeFolder();" %>' value="remove" />
 			</aui:field-wrapper>
 		</c:if>
 
@@ -119,26 +106,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
-
-<aui:script>
-	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= rootFolderId %>";
-
-		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
-
-		nameEl.href = "";
-		nameEl.innerHTML = "";
-	}
-
-	function <portlet:namespace />selectFolder(parentFolderId, parentFolderName) {
-		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = parentFolderId;
-
-		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
-
-		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/document_library/view" /></portlet:renderURL>&<portlet:namespace />folderId=" + parentFolderId;
-		nameEl.innerHTML = parentFolderName + "&nbsp;";
-	}
-</aui:script>
 
 <%
 if (folder == null) {

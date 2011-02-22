@@ -808,6 +808,50 @@ public class DLRepositoryLocalServiceImpl
 			majorVersion, extraSettings, is, size, serviceContext);
 	}
 
+	public DLFolder moveFolder(
+			long folderId, long parentFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		// Folder
+
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		parentFolderId = getParentFolderId(folder, parentFolderId);
+
+		validateFolder(
+			folder.getFolderId(), folder.getGroupId(), parentFolderId,
+			folder.getName());
+
+		folder.setModifiedDate(serviceContext.getModifiedDate(null));
+		folder.setParentFolderId(parentFolderId);
+		folder.setExpandoBridgeAttributes(serviceContext);
+
+		dlFolderPersistence.update(folder, false);
+
+		return folder;
+	}
+
+	public DLFolder updateFolder(
+			long folderId, String name, String description,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		// Folder
+
+		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		validateFolderName(name);
+
+		folder.setModifiedDate(serviceContext.getModifiedDate(null));
+		folder.setName(name);
+		folder.setDescription(description);
+		folder.setExpandoBridgeAttributes(serviceContext);
+
+		dlFolderPersistence.update(folder, false);
+
+		return folder;
+	}
+
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name,
 			String description, ServiceContext serviceContext)
@@ -1649,9 +1693,7 @@ public class DLRepositoryLocalServiceImpl
 			long folderId, long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		if (!AssetUtil.isValidWord(name)) {
-			throw new FolderNameException();
-		}
+		validateFolderName(name);
 
 		try {
 			getFileEntry(groupId, parentFolderId, name);
@@ -1676,6 +1718,12 @@ public class DLRepositoryLocalServiceImpl
 		long folderId = 0;
 
 		validateFolder(folderId, groupId, parentFolderId, name);
+	}
+
+	protected void validateFolderName(String name) throws PortalException {
+		if (!AssetUtil.isValidWord(name)) {
+			throw new FolderNameException();
+		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

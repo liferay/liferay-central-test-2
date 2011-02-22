@@ -8,7 +8,6 @@
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="support-tomcat/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-bridges/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-java/src"/>
-	<!--<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-java/test"/>-->
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-taglib/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/development/activation.jar"/>
@@ -113,7 +112,7 @@
 	<classpathentry kind="lib" path="lib/portal/cglib.jar"/>
 	<classpathentry kind="lib" path="lib/portal/chardet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/chemistry-opencmis-client-api.jar"/>
-	<classpathentry kind="lib" path="lib/portal/chemistry-opencmis-client-bindings.jar"/>
+	<classpathentry kind="lib" path="lib/portal/chemistry-opencmis-client-bindings.jar" sourcepath="/Users/liferay/Sources/COTS/chemistry-opencmis-0.2.0-incubating-source-release.zip"/>
 	<classpathentry kind="lib" path="lib/portal/chemistry-opencmis-client-impl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/chemistry-opencmis-commons-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/chemistry-opencmis-commons-impl.jar"/>

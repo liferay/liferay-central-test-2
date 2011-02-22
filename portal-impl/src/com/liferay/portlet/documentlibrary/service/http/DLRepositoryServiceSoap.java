@@ -474,6 +474,23 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap moveFolder(
+		long folderId, long parentFolderId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLRepositoryServiceUtil.moveFolder(folderId,
+					parentFolderId, serviceContext);
+
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void revertFileEntry(long fileEntryId,
 		java.lang.String version,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -540,13 +557,12 @@ public class DLRepositoryServiceSoap {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
-		long folderId, long parentFolderId, java.lang.String name,
-		java.lang.String description,
+		long folderId, java.lang.String name, java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLRepositoryServiceUtil.updateFolder(folderId,
-					parentFolderId, name, description, serviceContext);
+					name, description, serviceContext);
 
 			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}

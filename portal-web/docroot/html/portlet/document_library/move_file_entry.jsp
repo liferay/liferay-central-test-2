@@ -89,6 +89,8 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 		title='<%= LanguageUtil.get(pageContext, "move") + StringPool.SPACE + fileEntry.getTitle() %>'
 	/>
 
+	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="the-folder-you-selected-already-has-an-entry-with-this-name-please-select-a-different-folder" />
+	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="the-folder-you-selected-already-has-an-entry-with-this-name-please-select-a-different-folder" />
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
 	<aui:model-context bean="<%= fileEntry %>" model="<%= DLFileEntry.class %>" />

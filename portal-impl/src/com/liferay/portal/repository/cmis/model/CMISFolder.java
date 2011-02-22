@@ -145,10 +145,10 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public Folder getParentFolder() throws PortalException, SystemException {
-		List<org.apache.chemistry.opencmis.client.api.Folder>
-			parentCmisFolders = _cmisFolder.getParents();
+		org.apache.chemistry.opencmis.client.api.Folder
+			parentCmisFolder = _cmisFolder.getFolderParent();
 
-		if (parentCmisFolders.isEmpty()) {
+		if (parentCmisFolder == null) {
 			DLFolder dlFolder =
 				DLRepositoryLocalServiceUtil.getFolderByRepositoryId(
 					getRepositoryId());
@@ -164,7 +164,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		}
 		else {
 			return CMISRepositoryLocalServiceUtil.toFolder(
-				getRepositoryId(), parentCmisFolders.get(0));
+				getRepositoryId(), parentCmisFolder);
 		}
 	}
 

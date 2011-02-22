@@ -581,6 +581,11 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
+		<action path="/document_library/move_folder" type="com.liferay.portlet.documentlibrary.action.EditFolderAction">
+			<forward name="portlet.document_library.edit_folder" path="portlet.document_library.move_folder" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
 		<action path="/document_library/search" forward="portlet.document_library.search" />
 
 		<action path="/document_library/select_file_entry" type="com.liferay.portlet.documentlibrary.action.ViewAction">

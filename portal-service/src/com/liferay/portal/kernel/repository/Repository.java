@@ -139,6 +139,11 @@ public interface Repository {
 			long fileEntryId, long newFolderId, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
+	public Folder moveFolder(
+			long folderId, long newParentFolderId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException;
+
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
 		throws PortalException, SystemException;
 
@@ -167,8 +172,8 @@ public interface Repository {
 		throws PortalException, SystemException;
 
 	public Folder updateFolder(
-			long folderId, long parentFolderId, String title,
-			String description, ServiceContext serviceContext)
+			long folderId, String title, String description,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)

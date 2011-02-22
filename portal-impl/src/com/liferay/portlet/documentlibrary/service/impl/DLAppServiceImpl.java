@@ -474,6 +474,15 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			fileEntryId, newFolderId, serviceContext);
 	}
 
+	public Folder moveFolder(
+			long folderId, long parentFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		Repository repository = getRepository(folderId, 0, 0);
+
+		return repository.moveFolder(folderId, parentFolderId, serviceContext);
+	}
+
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
 		throws PortalException, SystemException {
 
@@ -607,14 +616,14 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 	}
 
 	public Folder updateFolder(
-			long folderId, long parentFolderId, String name, String description,
+			long folderId, String name, String description,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(folderId, 0, 0);
 
 		return repository.updateFolder(
-			folderId, parentFolderId, name, description, serviceContext);
+			folderId, name, description, serviceContext);
 	}
 
 	public boolean verifyFileEntryLock(
