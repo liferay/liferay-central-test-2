@@ -1764,7 +1764,11 @@ resource.repositories.root=$${user.home}/liferay</echo>
 			</not>
 			<then>
 				<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}">
-					<arg line="/c svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision.actual}" />
+					<arg line="/c svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision.valid}" />
+				</exec>
+
+				<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+					<arg line="/c svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision.valid}" />
 				</exec>
 			</then>
 		</if>
