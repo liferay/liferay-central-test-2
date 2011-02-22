@@ -289,8 +289,6 @@ public class DLRepositoryLocalServiceImpl
 			deleteFolder(folder);
 		}
 
-		folders = dlFolderPersistence.findByGroupId(groupId);
-
 		deleteFileEntries(groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		try {

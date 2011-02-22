@@ -411,8 +411,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 	protected long getDefaultClassNameId() {
 		if (_defaultClassNameId == 0) {
-			_defaultClassNameId =
-				PortalUtil.getClassNameId(LiferayRepository.class.getName());
+			_defaultClassNameId = PortalUtil.getClassNameId(
+				LiferayRepository.class.getName());
 		}
 
 		return _defaultClassNameId;
@@ -469,7 +469,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return repositoryEntryId;
 	}
 
-	private long _defaultClassNameId = 0;
+	private long _defaultClassNameId;
 	private Map<Long, LocalRepository> _localRepositoriesByRepositoryEntryId =
 		new ConcurrentHashMap<Long, LocalRepository>();
 	private Map<Long, LocalRepository> _localRepositoriesByRepositoryId =
