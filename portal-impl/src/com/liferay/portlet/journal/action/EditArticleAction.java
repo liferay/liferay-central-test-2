@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
