@@ -189,6 +189,16 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 				roles.add(role);
 			}
 		}
+
+		Iterator<Role> rolesItr = roles.iterator();
+
+		while (rolesItr.hasNext()) {
+			Role curRole = rolesItr.next();
+
+			if (!curRole.getName().equals(RoleConstants.GUEST) && !RolePermissionUtil.contains(permissionChecker, groupId, curRole.getRoleId(), ActionKeys.VIEW)) {
+				rolesItr.remove();
+			}
+		}
 		%>
 
 		<liferay-ui:search-container id="rolesSearchContainer">
@@ -371,6 +381,6 @@ definePermissionsURL.setParameter(Constants.CMD, Constants.VIEW);
 
 		<aui:button-row>
 			<aui:button type="submit" />
-	 	</aui:button-row>
+		</aui:button-row>
 	</aui:form>
 </div>

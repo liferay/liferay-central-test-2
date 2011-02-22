@@ -49,11 +49,19 @@ if (name.equals(RoleConstants.GUEST) || name.equals(RoleConstants.OWNER) || name
 	</c:if>
 
 	<c:if test="<%= !unassignableRole && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.PERMISSIONS) %>">
+		<%
+		int[] roleTypes = new int[] {role.getType()};
+
+		if (role.getType() != RoleConstants.TYPE_REGULAR) {
+			roleTypes = new int[] {RoleConstants.TYPE_REGULAR, role.getType()};
+		}
+		%>
+
 		<liferay-security:permissionsURL
 			modelResource="<%= Role.class.getName() %>"
 			modelResourceDescription="<%= role.getTitle(locale) %>"
 			resourcePrimKey="<%= String.valueOf(role.getRoleId()) %>"
-			roleTypes="<%= new int[] {RoleConstants.TYPE_REGULAR, role.getType()} %>"
+			roleTypes="<%= roleTypes %>"
 			var="permissionsURL"
 		/>
 
