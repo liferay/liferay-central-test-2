@@ -232,16 +232,6 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	public Folder copyFolder(
-			long sourceFolderId, long parentFolderId, String title,
-			String description, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		// TODO
-
-		return null;
-	}
-
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 

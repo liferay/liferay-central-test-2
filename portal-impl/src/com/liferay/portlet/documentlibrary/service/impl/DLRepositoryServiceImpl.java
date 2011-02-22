@@ -82,22 +82,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			description, serviceContext);
 	}
 
-	public DLFolder copyFolder(
-			long groupId, long sourceFolderId, long parentFolderId, String name,
-			String description, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		DLFolder srcFolder = getFolder(sourceFolderId);
-
-		DLFolder destFolder = addFolder(
-			groupId, srcFolder.getRepositoryId(), parentFolderId, name,
-			description, serviceContext);
-
-		copyFolder(srcFolder, destFolder, serviceContext);
-
-		return destFolder;
-	}
-
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
@@ -862,53 +846,6 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		}
 
 		return verified;
-	}
-
-	protected void copyFolder(
-			DLFolder srcFolder, DLFolder destFolder,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		List<DLFileEntry> srcFileEntries = getFileEntries(
-			srcFolder.getGroupId(), srcFolder.getFolderId(), QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, null);
-
-		for (DLFileEntry srcFileEntry : srcFileEntries) {
-			String name = srcFileEntry.getName();
-			String title = srcFileEntry.getTitle();
-			String description = srcFileEntry.getDescription();
-			long size = srcFileEntry.getSize();
-
-			try {
-				InputStream is = dlLocalService.getFileAsStream(
-					srcFolder.getCompanyId(), srcFolder.getFolderId(), name);
-
-				addFileEntry(
-					destFolder.getGroupId(), destFolder.getRepositoryId(),
-					destFolder.getFolderId(), title, description, null, is,
-					size, serviceContext);
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-
-				continue;
-			}
-		}
-
-		List<DLFolder> srcSubfolders = getFolders(
-			srcFolder.getGroupId(), srcFolder.getFolderId(), QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS);
-
-		for (DLFolder srcSubfolder : srcSubfolders) {
-			String name = srcSubfolder.getName();
-			String description = srcSubfolder.getDescription();
-
-			DLFolder destSubfolder = addFolder(
-				destFolder.getGroupId(), destFolder.getRepositoryId(),
-				destFolder.getFolderId(), name, description, serviceContext);
-
-			copyFolder(srcSubfolder, destSubfolder, serviceContext);
-		}
 	}
 
 	protected long[] getFolderIds(long groupId, long folderId)

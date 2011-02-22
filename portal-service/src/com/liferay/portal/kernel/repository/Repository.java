@@ -42,11 +42,6 @@ public interface Repository {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
-	public Folder copyFolder(
-			long sourceFolderId, long parentFolderId, String title,
-			String description, ServiceContext serviceContext)
-		throws PortalException, SystemException;
-
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException;
 

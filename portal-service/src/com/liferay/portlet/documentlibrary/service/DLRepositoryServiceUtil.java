@@ -60,17 +60,6 @@ public class DLRepositoryServiceUtil {
 			description, serviceContext);
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
-		long groupId, long sourceFolderId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .copyFolder(groupId, sourceFolderId, parentFolderId, name,
-			description, serviceContext);
-	}
-
 	public static void deleteFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

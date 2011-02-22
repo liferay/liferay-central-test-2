@@ -671,7 +671,6 @@ Liferay.Service.registerClass(
 	Liferay.Service.DL, "DLRepository",
 	{
 		addFolder: true,
-		copyFolder: true,
 		deleteFileEntry: true,
 		deleteFolder: true,
 		getFileEntries: true,

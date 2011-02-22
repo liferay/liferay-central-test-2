@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.Repository;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -122,11 +124,17 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long repositoryId, long sourceFolderId, long parentFolderId,
 			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
-
+		
 		Repository repository = getRepository(repositoryId);
 
-		return repository.copyFolder(
-			sourceFolderId, parentFolderId, name, description, serviceContext);
+		Folder srcFolder = repository.getFolder(sourceFolderId);
+
+		Folder destFolder = repository.addFolder(
+			parentFolderId, name,description, serviceContext);
+
+		copyFolder(repository, srcFolder, destFolder, serviceContext);
+
+		return destFolder;
 	}
 
 	public void deleteFileEntry(long fileEntryId)
@@ -645,6 +653,48 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return repository.verifyInheritableLock(
 			folderId, lockUuid);
 	}
+	
+	protected void copyFolder(
+			Repository repository, Folder srcFolder, Folder destFolder, 
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		List<FileEntry> srcFileEntries = repository.getFileEntries(
+			srcFolder.getFolderId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+
+		for (FileEntry srcFileEntry : srcFileEntries) {
+			String title = srcFileEntry.getTitle();
+			String description = srcFileEntry.getDescription();
+			long size = srcFileEntry.getSize();
+
+			try {
+				InputStream is = srcFileEntry.getContentStream();
+
+				repository.addFileEntry(
+					destFolder.getFolderId(), title, description, 
+					StringPool.BLANK, is, size, serviceContext);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+
+				continue;
+			}
+		}
+
+		List<Folder> srcSubfolders = repository.getFolders(
+			srcFolder.getFolderId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (Folder srcSubfolder : srcSubfolders) {
+			String name = srcSubfolder.getName();
+			String description = srcSubfolder.getDescription();
+
+			Folder destSubfolder = repository.addFolder(
+				destFolder.getFolderId(), name, description, serviceContext);
+
+			copyFolder(repository, srcSubfolder, destSubfolder, serviceContext);
+		}
+	}
 
 	protected Repository getRepository(long repositoryId)
 		throws PortalException, SystemException {
@@ -660,4 +710,6 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			folderId, fileEntryId, fileVersionId);
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(DLAppServiceImpl.class);
+	
 }

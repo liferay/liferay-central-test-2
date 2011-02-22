@@ -49,16 +49,6 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 			parentFolderId, name, description, serviceContext);
 	}
 
-	public com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
-		long groupId, long sourceFolderId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _dlRepositoryService.copyFolder(groupId, sourceFolderId,
-			parentFolderId, name, description, serviceContext);
-	}
-
 	public void deleteFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

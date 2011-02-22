@@ -74,25 +74,6 @@ public class DLRepositoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap copyFolder(
-		long groupId, long sourceFolderId, long parentFolderId,
-		java.lang.String name, java.lang.String description,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLRepositoryServiceUtil.copyFolder(groupId,
-					sourceFolderId, parentFolderId, name, description,
-					serviceContext);
-
-			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void deleteFileEntry(long fileEntryId)
 		throws RemoteException {
 		try {
