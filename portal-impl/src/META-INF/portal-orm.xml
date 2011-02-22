@@ -1794,8 +1794,10 @@
 			<basic name="statusDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<transient name="descriptionMap" />
 			<transient name="primaryKey" />
 			<transient name="statusByUserUuid" />
+			<transient name="titleMap" />
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>

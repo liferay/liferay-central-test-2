@@ -65,41 +65,6 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class JournalArticleServiceSoap {
-	public static com.liferay.portlet.journal.model.JournalArticleSoap addArticle(
-		long groupId, java.lang.String articleId, boolean autoArticleId,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, boolean indexable,
-		java.lang.String articleURL,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(groupId,
-					articleId, autoArticleId, title, description, content,
-					type, structureId, templateId, displayDateMonth,
-					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, expirationDateMonth, expirationDateDay,
-					expirationDateYear, expirationDateHour,
-					expirationDateMinute, neverExpire, reviewDateMonth,
-					reviewDateDay, reviewDateYear, reviewDateHour,
-					reviewDateMinute, neverReview, indexable, articleURL,
-					serviceContext);
-
-			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.journal.model.JournalArticleSoap copyArticle(
 		long groupId, java.lang.String oldArticleId,
 		java.lang.String newArticleId, boolean autoArticleId, double version)
