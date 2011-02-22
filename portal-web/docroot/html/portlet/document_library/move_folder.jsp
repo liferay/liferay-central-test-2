@@ -44,8 +44,8 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 		title='<%= LanguageUtil.get(pageContext, "move") + StringPool.SPACE + folder.getName() %>'
 	/>
 
-	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="the-folder-you-selected-already-has-an-entry-with-this-name-please-select-a-different-folder" />
-	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="the-folder-you-selected-already-has-an-entry-with-this-name-please-select-a-different-folder" />
+	<liferay-ui:error exception="<%= DuplicateFileException.class %>" message="the-folder-you-selected-already-has-an-entry-with-this-name.-please-select-a-different-folder" />
+	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="the-folder-you-selected-already-has-an-entry-with-this-name.-please-select-a-different-folder" />
 	<liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="please-enter-a-valid-folder" />
 
 	<aui:model-context bean="<%= folder %>" model="<%= DLFolder.class %>" />
@@ -96,10 +96,6 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 </aui:form>
 
 <aui:script>
-	function <portlet:namespace />saveFolder() {
-		submitForm(document.<portlet:namespace />fm);
-	}
-
 	function <portlet:namespace />removeFolder() {
 		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= rootFolderId %>";
 
@@ -107,6 +103,10 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 
 		nameEl.href = "";
 		nameEl.innerHTML = "";
+	}
+
+	function <portlet:namespace />saveFolder() {
+		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />selectFolder(parentFolderId, parentFolderName) {

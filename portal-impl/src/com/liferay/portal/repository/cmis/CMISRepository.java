@@ -757,6 +757,57 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
+	public Folder moveFolder(
+			long folderId, long parentFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			Session session = getSession();
+
+			ObjectId objectId = toFolderId(session, folderId);
+
+			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
+				(org.apache.chemistry.opencmis.client.api.Folder)
+					session.getObject(objectId);
+
+			validateTitle(session, parentFolderId, cmisFolder.getName());
+
+			org.apache.chemistry.opencmis.client.api.Folder parentCmisFolder =
+				cmisFolder.getFolderParent();
+
+			if (parentCmisFolder == null) {
+				throw new RepositoryException(
+					"Cannot move CMIS root folder " + folderId);
+			}
+
+			ObjectId sourceFolderId = new ObjectIdImpl(
+				parentCmisFolder.getId());
+
+			ObjectId targetFolderId = toFolderId(session, parentFolderId);
+
+			if (!sourceFolderId.getId().equals(targetFolderId.getId()) &&
+				!targetFolderId.getId().equals(objectId.getId())) {
+
+				cmisFolder =
+					(org.apache.chemistry.opencmis.client.api.Folder)
+						cmisFolder.move(sourceFolderId, targetFolderId);
+			}
+
+			return toFolder(cmisFolder);
+		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			processException(e);
+
+			throw new RepositoryException(e);
+		}
+	}
+
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
 		throws PortalException, SystemException {
 
@@ -971,58 +1022,6 @@ public class CMISRepository extends BaseRepositoryImpl {
 			if (document != null) {
 				document.cancelCheckOut();
 			}
-		}
-	}
-
-	public Folder moveFolder(
-			long folderId, long parentFolderId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		try {
-			Session session = getSession();
-
-			ObjectId objectId = toFolderId(session, folderId);
-
-			org.apache.chemistry.opencmis.client.api.Folder cmisFolder =
-				(org.apache.chemistry.opencmis.client.api.Folder)
-					session.getObject(objectId);
-
-			validateTitle(session, parentFolderId, cmisFolder.getName());
-
-			org.apache.chemistry.opencmis.client.api.Folder
-				currentParentFolder =
-					cmisFolder.getFolderParent();
-
-			if (currentParentFolder == null) {
-				throw new RepositoryException(
-					"Cannot move CMIS root folder " + folderId);
-			}
-
-			ObjectId sourceFolderId = new ObjectIdImpl(
-				currentParentFolder.getId());
-
-			ObjectId targetFolderId = toFolderId(session, parentFolderId);
-
-			if (!sourceFolderId.getId().equals(targetFolderId.getId()) &&
-				!targetFolderId.getId().equals(objectId.getId())) {
-
-				cmisFolder =
-					(org.apache.chemistry.opencmis.client.api.Folder)
-						cmisFolder.move(sourceFolderId, targetFolderId);
-			}
-
-			return toFolder(cmisFolder);
-		}
-		catch (PortalException pe) {
-			throw pe;
-		}
-		catch (SystemException se) {
-			throw se;
-		}
-		catch (Exception e) {
-			processException(e);
-
-			throw new RepositoryException(e);
 		}
 	}
 
@@ -1455,22 +1454,6 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	protected void validateTitle(Session session, long folderId, String title)
-		throws PortalException, SystemException {
-
-		String objectId = getObjectId(session, folderId, true, title);
-
-		if (objectId != null) {
-			throw new DuplicateFileException(title);
-		}
-
-		objectId = getObjectId(session, folderId, false, title);
-
-		if (objectId != null) {
-			throw new DuplicateFolderNameException(title);
-		}
-	}
-
 	protected void processException(Exception e) throws PortalException {
 		if (e instanceof CmisRuntimeException &&
 			e.getMessage().contains("authorized")) {
@@ -1595,6 +1578,22 @@ public class CMISRepository extends BaseRepositoryImpl {
 			repositoryEntry.setMappedId(mappedId);
 
 			RepositoryEntryUtil.update(repositoryEntry, false);
+		}
+	}
+
+	protected void validateTitle(Session session, long folderId, String title)
+		throws PortalException, SystemException {
+
+		String objectId = getObjectId(session, folderId, true, title);
+
+		if (objectId != null) {
+			throw new DuplicateFileException(title);
+		}
+
+		objectId = getObjectId(session, folderId, false, title);
+
+		if (objectId != null) {
+			throw new DuplicateFolderNameException(title);
 		}
 	}
 

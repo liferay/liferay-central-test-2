@@ -89,11 +89,11 @@ public class DLFileShortcutLocalServiceImpl
 		// Folder
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+			DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-			folder.setLastPostDate(fileShortcut.getModifiedDate());
+			dlFolder.setLastPostDate(fileShortcut.getModifiedDate());
 
-			dlFolderPersistence.update(folder, false);
+			dlFolderPersistence.update(dlFolder, false);
 		}
 
 		// Asset
@@ -245,11 +245,11 @@ public class DLFileShortcutLocalServiceImpl
 		// Folder
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+			DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-			folder.setLastPostDate(fileShortcut.getModifiedDate());
+			dlFolder.setLastPostDate(fileShortcut.getModifiedDate());
 
-			dlFolderPersistence.update(folder, false);
+			dlFolderPersistence.update(dlFolder, false);
 		}
 
 		// Asset
@@ -300,9 +300,9 @@ public class DLFileShortcutLocalServiceImpl
 
 			// Ensure folder exists and belongs to the proper company
 
-			DLFolder folder = dlFolderPersistence.fetchByPrimaryKey(folderId);
+			DLFolder dlFolder = dlFolderPersistence.fetchByPrimaryKey(folderId);
 
-			if ((folder == null) || (companyId != folder.getCompanyId())) {
+			if ((dlFolder == null) || (companyId != dlFolder.getCompanyId())) {
 				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}

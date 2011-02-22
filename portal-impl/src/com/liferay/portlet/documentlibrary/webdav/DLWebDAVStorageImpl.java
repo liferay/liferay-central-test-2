@@ -489,7 +489,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 					folderId, parentFolderId, serviceContext);
 			}
 
-			if (!folder.getName().equals(name)) {
+			if (!name.equals(folder.getName())) {
 				DLAppServiceUtil.updateFolder(
 					folderId, name, description, serviceContext);
 			}

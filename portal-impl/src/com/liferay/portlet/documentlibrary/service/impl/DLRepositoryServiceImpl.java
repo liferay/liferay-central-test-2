@@ -89,17 +89,14 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 		DLFileEntry dlFileEntry = getFileEntry(fileEntryId);
 
-		String title = dlFileEntry.getTitle();
-		String description = dlFileEntry.getDescription();
-		long size = dlFileEntry.getSize();
-
-		InputStream is = dlLocalService.getFileAsStream(
+		InputStream inputStream = dlLocalService.getFileAsStream(
 			dlFileEntry.getCompanyId(), dlFileEntry.getFolderId(),
 			dlFileEntry.getName());
 
 		addFileEntry(
-			groupId, repositoryId, destFolderId, title, description, null, is,
-			size, serviceContext);
+			groupId, repositoryId, destFolderId, dlFileEntry.getTitle(),
+			dlFileEntry.getDescription(), null, inputStream,
+			dlFileEntry.getSize(), serviceContext);
 	}
 
 	public void deleteFileEntry(long fileEntryId)
@@ -139,10 +136,10 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlRepositoryLocalService.getFolder(folderId);
+		DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
 
 		DLFolderPermission.check(
-			getPermissionChecker(), folder, ActionKeys.DELETE);
+			getPermissionChecker(), dlFolder, ActionKeys.DELETE);
 
 		boolean hasLock = lockLocalService.hasLock(
 			getUserId(), DLFolder.class.getName(), folderId);
@@ -164,7 +161,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 				// Unlock
 
-				unlockFolder(folder.getGroupId(), folderId, lock.getUuid());
+				unlockFolder(dlFolder.getGroupId(), folderId, lock.getUuid());
 			}
 		}
 	}
@@ -172,9 +169,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public void deleteFolder(long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		DLFolder folder = getFolder(groupId, parentFolderId, name);
+		DLFolder dlFolder = getFolder(groupId, parentFolderId, name);
 
-		deleteFolder(folder.getFolderId());
+		deleteFolder(dlFolder.getFolderId());
 	}
 
 	public InputStream getFileAsStream(long fileEntryId, String version)
@@ -277,24 +274,24 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public DLFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlRepositoryLocalService.getFolder(folderId);
+		DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
 
 		DLFolderPermission.check(
-			getPermissionChecker(), folder, ActionKeys.VIEW);
+			getPermissionChecker(), dlFolder, ActionKeys.VIEW);
 
-		return folder;
+		return dlFolder;
 	}
 
 	public DLFolder getFolder(long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlRepositoryLocalService.getFolder(
+		DLFolder dlFolder = dlRepositoryLocalService.getFolder(
 			groupId, parentFolderId, name);
 
 		DLFolderPermission.check(
-			getPermissionChecker(), folder, ActionKeys.VIEW);
+			getPermissionChecker(), dlFolder, ActionKeys.VIEW);
 
-		return folder;
+		return dlFolder;
 	}
 
 	public List<DLFolder> getFolders(
@@ -395,14 +392,14 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 		List<Long> folderIds = new ArrayList<Long>();
 
-		List<DLFolder> folders = dlFolderPersistence.filterFindByG_P(
+		List<DLFolder> dlFolders = dlFolderPersistence.filterFindByG_P(
 			groupId, folderId);
 
-		for (DLFolder folder : folders) {
+		for (DLFolder dlFolder : dlFolders) {
 			List<Long> subFolderIds = getSubfolderIds(
-				folder.getGroupId(), folder.getFolderId(), recurse);
+				dlFolder.getGroupId(), dlFolder.getFolderId(), recurse);
 
-			folderIds.add(folder.getFolderId());
+			folderIds.add(dlFolder.getFolderId());
 			folderIds.addAll(subFolderIds);
 		}
 
@@ -518,9 +515,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 		Set<Long> fileFileEntryIds = new HashSet<Long>();
 
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-		long groupId = folder.getGroupId();
+		long groupId = dlFolder.getGroupId();
 
 		try {
 			List<DLFileEntry> dlFileEntries = getFileEntries(
@@ -592,10 +589,10 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			long folderId, long parentFolderId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlRepositoryLocalService.getFolder(folderId);
+		DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
 
 		DLFolderPermission.check(
-			getPermissionChecker(), folder, ActionKeys.UPDATE);
+			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
 
 		boolean hasLock = lockLocalService.hasLock(
 			getUserId(), DLFolder.class.getName(), folderId);
@@ -618,7 +615,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 				// Unlock
 
-				unlockFolder(folder.getGroupId(), folderId, lock.getUuid());
+				unlockFolder(dlFolder.getGroupId(), folderId, lock.getUuid());
 			}
 		}
 	}
@@ -735,9 +732,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			long groupId, long parentFolderId, String name, String lockUuid)
 		throws PortalException, SystemException {
 
-		DLFolder folder = getFolder(groupId, parentFolderId, name);
+		DLFolder dlFolder = getFolder(groupId, parentFolderId, name);
 
-		unlockFolder(groupId, folder.getFolderId(), lockUuid);
+		unlockFolder(groupId, dlFolder.getFolderId(), lockUuid);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -782,10 +779,10 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlRepositoryLocalService.getFolder(folderId);
+		DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
 
 		DLFolderPermission.check(
-			getPermissionChecker(), folder, ActionKeys.UPDATE);
+			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
 
 		boolean hasLock = lockLocalService.hasLock(
 			getUserId(), DLFolder.class.getName(), folderId);
@@ -808,7 +805,7 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 				// Unlock
 
-				unlockFolder(folder.getGroupId(), folderId, lock.getUuid());
+				unlockFolder(dlFolder.getGroupId(), folderId, lock.getUuid());
 			}
 		}
 	}

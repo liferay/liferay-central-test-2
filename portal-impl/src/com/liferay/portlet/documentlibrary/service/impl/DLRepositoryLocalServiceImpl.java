@@ -154,11 +154,11 @@ public class DLRepositoryLocalServiceImpl
 		// Folder
 
 		if (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+			DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-			folder.setLastPostDate(dlFileEntry.getModifiedDate());
+			dlFolder.setLastPostDate(dlFileEntry.getModifiedDate());
 
-			dlFolderPersistence.update(folder, false);
+			dlFolderPersistence.update(dlFolder, false);
 		}
 
 		// Asset
@@ -206,23 +206,23 @@ public class DLRepositoryLocalServiceImpl
 
 		long folderId = counterLocalService.increment();
 
-		DLFolder folder = dlFolderPersistence.create(folderId);
+		DLFolder dlFolder = dlFolderPersistence.create(folderId);
 
-		folder.setUuid(serviceContext.getUuid());
-		folder.setGroupId(groupId);
-		folder.setCompanyId(user.getCompanyId());
-		folder.setUserId(user.getUserId());
-		folder.setCreateDate(serviceContext.getCreateDate(now));
-		folder.setModifiedDate(serviceContext.getModifiedDate(now));
-		folder.setRepositoryId(repositoryId);
-		folder.setMountPoint(
+		dlFolder.setUuid(serviceContext.getUuid());
+		dlFolder.setGroupId(groupId);
+		dlFolder.setCompanyId(user.getCompanyId());
+		dlFolder.setUserId(user.getUserId());
+		dlFolder.setCreateDate(serviceContext.getCreateDate(now));
+		dlFolder.setModifiedDate(serviceContext.getModifiedDate(now));
+		dlFolder.setRepositoryId(repositoryId);
+		dlFolder.setMountPoint(
 			GetterUtil.getBoolean(serviceContext.getAttribute("mountPoint")));
-		folder.setParentFolderId(parentFolderId);
-		folder.setName(name);
-		folder.setDescription(description);
-		folder.setExpandoBridgeAttributes(serviceContext);
+		dlFolder.setParentFolderId(parentFolderId);
+		dlFolder.setName(name);
+		dlFolder.setDescription(description);
+		dlFolder.setExpandoBridgeAttributes(serviceContext);
 
-		dlFolderPersistence.update(folder, false);
+		dlFolderPersistence.update(dlFolder, false);
 
 		// Resources
 
@@ -230,32 +230,32 @@ public class DLRepositoryLocalServiceImpl
 			serviceContext.getAddGuestPermissions()) {
 
 			addFolderResources(
-				folder, serviceContext.getAddCommunityPermissions(),
+				dlFolder, serviceContext.getAddCommunityPermissions(),
 				serviceContext.getAddGuestPermissions());
 		}
 		else {
 			addFolderResources(
-				folder, serviceContext.getCommunityPermissions(),
+				dlFolder, serviceContext.getCommunityPermissions(),
 				serviceContext.getGuestPermissions());
 		}
 
 		// Parent folder
 
 		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder parentFolder = dlFolderPersistence.findByPrimaryKey(
+			DLFolder parentDLFolder = dlFolderPersistence.findByPrimaryKey(
 				parentFolderId);
 
-			parentFolder.setLastPostDate(now);
+			parentDLFolder.setLastPostDate(now);
 
-			dlFolderPersistence.update(parentFolder, false);
+			dlFolderPersistence.update(parentDLFolder, false);
 		}
 
 		// DLApp
 
 		dlAppHelperLocalService.addFolder(
-			new LiferayFolder(folder), serviceContext);
+			new LiferayFolder(dlFolder), serviceContext);
 
-		return folder;
+		return dlFolder;
 	}
 
 	public void convertExtraSettings(String[] keys)
@@ -282,11 +282,11 @@ public class DLRepositoryLocalServiceImpl
 
 		Group group = groupLocalService.getGroup(groupId);
 
-		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+		List<DLFolder> dlFolders = dlFolderPersistence.findByG_P(
 			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		for (DLFolder folder : folders) {
-			deleteFolder(folder);
+		for (DLFolder dlFolder : dlFolders) {
+			deleteFolder(dlFolder);
 		}
 
 		deleteFileEntries(groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
@@ -314,9 +314,9 @@ public class DLRepositoryLocalServiceImpl
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-		deleteFolder(folder);
+		deleteFolder(dlFolder);
 	}
 
 	public List<DLFolder> getCompanyFolders(long companyId, int start, int end)
@@ -732,6 +732,27 @@ public class DLRepositoryLocalServiceImpl
 		return newDLFileEntry;
 	}
 
+	public DLFolder moveFolder(
+			long folderId, long parentFolderId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		parentFolderId = getParentFolderId(dlFolder, parentFolderId);
+
+		validateFolder(
+			dlFolder.getFolderId(), dlFolder.getGroupId(), parentFolderId,
+			dlFolder.getName());
+
+		dlFolder.setModifiedDate(serviceContext.getModifiedDate(null));
+		dlFolder.setParentFolderId(parentFolderId);
+		dlFolder.setExpandoBridgeAttributes(serviceContext);
+
+		dlFolderPersistence.update(dlFolder, false);
+
+		return dlFolder;
+	}
+
 	public void revertFileEntry(
 			long userId, long fileEntryId, String version,
 			ServiceContext serviceContext)
@@ -806,50 +827,6 @@ public class DLRepositoryLocalServiceImpl
 			majorVersion, extraSettings, is, size, serviceContext);
 	}
 
-	public DLFolder moveFolder(
-			long folderId, long parentFolderId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		// Folder
-
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-		parentFolderId = getParentFolderId(folder, parentFolderId);
-
-		validateFolder(
-			folder.getFolderId(), folder.getGroupId(), parentFolderId,
-			folder.getName());
-
-		folder.setModifiedDate(serviceContext.getModifiedDate(null));
-		folder.setParentFolderId(parentFolderId);
-		folder.setExpandoBridgeAttributes(serviceContext);
-
-		dlFolderPersistence.update(folder, false);
-
-		return folder;
-	}
-
-	public DLFolder updateFolder(
-			long folderId, String name, String description,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		// Folder
-
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
-
-		validateFolderName(name);
-
-		folder.setModifiedDate(serviceContext.getModifiedDate(null));
-		folder.setName(name);
-		folder.setDescription(description);
-		folder.setExpandoBridgeAttributes(serviceContext);
-
-		dlFolderPersistence.update(folder, false);
-
-		return folder;
-	}
-
 	public DLFolder updateFolder(
 			long folderId, long parentFolderId, String name,
 			String description, ServiceContext serviceContext)
@@ -857,22 +834,42 @@ public class DLRepositoryLocalServiceImpl
 
 		// Folder
 
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-		parentFolderId = getParentFolderId(folder, parentFolderId);
+		parentFolderId = getParentFolderId(dlFolder, parentFolderId);
 
 		validateFolder(
-			folder.getFolderId(), folder.getGroupId(), parentFolderId, name);
+			dlFolder.getFolderId(), dlFolder.getGroupId(), parentFolderId,
+			name);
 
-		folder.setModifiedDate(serviceContext.getModifiedDate(null));
-		folder.setParentFolderId(parentFolderId);
-		folder.setName(name);
-		folder.setDescription(description);
-		folder.setExpandoBridgeAttributes(serviceContext);
+		dlFolder.setModifiedDate(serviceContext.getModifiedDate(null));
+		dlFolder.setParentFolderId(parentFolderId);
+		dlFolder.setName(name);
+		dlFolder.setDescription(description);
+		dlFolder.setExpandoBridgeAttributes(serviceContext);
 
-		dlFolderPersistence.update(folder, false);
+		dlFolderPersistence.update(dlFolder, false);
 
-		return folder;
+		return dlFolder;
+	}
+
+	public DLFolder updateFolder(
+			long folderId, String name, String description,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
+
+		validateFolderName(name);
+
+		dlFolder.setModifiedDate(serviceContext.getModifiedDate(null));
+		dlFolder.setName(name);
+		dlFolder.setDescription(description);
+		dlFolder.setExpandoBridgeAttributes(serviceContext);
+
+		dlFolderPersistence.update(dlFolder, false);
+
+		return dlFolder;
 	}
 
 	public DLFileEntry updateStatus(
@@ -1068,25 +1065,26 @@ public class DLRepositoryLocalServiceImpl
 	}
 
 	protected void addFolderResources(
-			DLFolder folder, boolean addCommunityPermissions,
+			DLFolder dlFolder, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			DLFolder.class.getName(), folder.getFolderId(), false,
-			addCommunityPermissions, addGuestPermissions);
+			dlFolder.getCompanyId(), dlFolder.getGroupId(),
+			dlFolder.getUserId(), DLFolder.class.getName(),
+			dlFolder.getFolderId(), false, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	protected void addFolderResources(
-			DLFolder folder, String[] communityPermissions,
+			DLFolder dlFolder, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
-			DLFolder.class.getName(), folder.getFolderId(),
-			communityPermissions, guestPermissions);
+			dlFolder.getCompanyId(), dlFolder.getGroupId(),
+			dlFolder.getUserId(), DLFolder.class.getName(),
+			dlFolder.getFolderId(), communityPermissions, guestPermissions);
 	}
 
 	protected void addFolderResources(
@@ -1094,10 +1092,10 @@ public class DLRepositoryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
 		addFolderResources(
-			folder, addCommunityPermissions, addGuestPermissions);
+			dlFolder, addCommunityPermissions, addGuestPermissions);
 	}
 
 	protected void addFolderResources(
@@ -1105,9 +1103,9 @@ public class DLRepositoryLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		DLFolder folder = dlFolderPersistence.findByPrimaryKey(folderId);
+		DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(folderId);
 
-		addFolderResources(folder, communityPermissions, guestPermissions);
+		addFolderResources(dlFolder, communityPermissions, guestPermissions);
 	}
 
 	protected void convertExtraSettings(
@@ -1254,52 +1252,52 @@ public class DLRepositoryLocalServiceImpl
 		}
 	}
 
-	protected void deleteFolder(DLFolder folder)
+	protected void deleteFolder(DLFolder dlFolder)
 		throws PortalException, SystemException {
 
 		// Folders
 
-		List<DLFolder> folders = dlFolderPersistence.findByG_P(
-			folder.getGroupId(), folder.getFolderId());
+		List<DLFolder> dlFolders = dlFolderPersistence.findByG_P(
+			dlFolder.getGroupId(), dlFolder.getFolderId());
 
-		for (DLFolder curFolder : folders) {
-			deleteFolder(curFolder);
+		for (DLFolder curDLFolder : dlFolders) {
+			deleteFolder(curDLFolder);
 		}
 
 		// Folder
 
-		dlFolderPersistence.remove(folder);
+		dlFolderPersistence.remove(dlFolder);
 
 		// Resources
 
 		resourceLocalService.deleteResource(
-			folder.getCompanyId(), DLFolder.class.getName(),
-			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
+			dlFolder.getCompanyId(), DLFolder.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, dlFolder.getFolderId());
 
 		// WebDAVProps
 
 		webDAVPropsLocalService.deleteWebDAVProps(
-			DLFolder.class.getName(), folder.getFolderId());
+			DLFolder.class.getName(), dlFolder.getFolderId());
 
 		// File entries
 
-		deleteFileEntries(folder.getGroupId(), folder.getFolderId());
+		deleteFileEntries(dlFolder.getGroupId(), dlFolder.getFolderId());
 
 		// Expando
 
 		expandoValueLocalService.deleteValues(
-			DLFolder.class.getName(), folder.getFolderId());
+			DLFolder.class.getName(), dlFolder.getFolderId());
 
 		// DLApp
 
-		dlAppHelperLocalService.deleteFolder(new LiferayFolder(folder));
+		dlAppHelperLocalService.deleteFolder(new LiferayFolder(dlFolder));
 
 		// Directory
 
 		try {
 			dlLocalService.deleteDirectory(
-				folder.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				folder.getFolderId(), StringPool.BLANK);
+				dlFolder.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
+				dlFolder.getFolderId(), StringPool.BLANK);
 		}
 		catch (NoSuchDirectoryException nsde) {
 			if (_log.isDebugEnabled()) {
@@ -1315,9 +1313,9 @@ public class DLRepositoryLocalServiceImpl
 
 			// Ensure folder exists and belongs to the proper company
 
-			DLFolder folder = dlFolderPersistence.fetchByPrimaryKey(folderId);
+			DLFolder dlFolder = dlFolderPersistence.fetchByPrimaryKey(folderId);
 
-			if ((folder == null) || (companyId != folder.getCompanyId())) {
+			if ((dlFolder == null) || (companyId != dlFolder.getCompanyId())) {
 				folderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
@@ -1365,33 +1363,33 @@ public class DLRepositoryLocalServiceImpl
 		return versionParts[0] + StringPool.PERIOD + versionParts[1];
 	}
 
-	protected long getParentFolderId(DLFolder folder, long parentFolderId)
+	protected long getParentFolderId(DLFolder dlFolder, long parentFolderId)
 		throws SystemException {
 
 		if (parentFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return parentFolderId;
 		}
 
-		if (folder.getFolderId() == parentFolderId) {
-			return folder.getParentFolderId();
+		if (dlFolder.getFolderId() == parentFolderId) {
+			return dlFolder.getParentFolderId();
 		}
 		else {
-			DLFolder parentFolder = dlFolderPersistence.fetchByPrimaryKey(
+			DLFolder parentDLFolder = dlFolderPersistence.fetchByPrimaryKey(
 				parentFolderId);
 
-			if ((parentFolder == null) ||
-				(folder.getGroupId() != parentFolder.getGroupId())) {
+			if ((parentDLFolder == null) ||
+				(dlFolder.getGroupId() != parentDLFolder.getGroupId())) {
 
-				return folder.getParentFolderId();
+				return dlFolder.getParentFolderId();
 			}
 
 			List<Long> subfolderIds = new ArrayList<Long>();
 
 			getSubfolderIds(
-				subfolderIds, folder.getGroupId(), folder.getFolderId());
+				subfolderIds, dlFolder.getGroupId(), dlFolder.getFolderId());
 
 			if (subfolderIds.contains(parentFolderId)) {
-				return folder.getParentFolderId();
+				return dlFolder.getParentFolderId();
 			}
 
 			return parentFolderId;
@@ -1402,11 +1400,11 @@ public class DLRepositoryLocalServiceImpl
 		throws SystemException {
 
 		if (parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder parentFolder = dlFolderPersistence.fetchByPrimaryKey(
+			DLFolder parentDLFolder = dlFolderPersistence.fetchByPrimaryKey(
 				parentFolderId);
 
-			if ((parentFolder == null) ||
-				(groupId != parentFolder.getGroupId())) {
+			if ((parentDLFolder == null) ||
+				(groupId != parentDLFolder.getGroupId())) {
 
 				parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
 			}
@@ -1419,14 +1417,14 @@ public class DLRepositoryLocalServiceImpl
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
-		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+		List<DLFolder> dlFolders = dlFolderPersistence.findByG_P(
 			groupId, folderId);
 
-		for (DLFolder folder : folders) {
-			folderIds.add(folder.getFolderId());
+		for (DLFolder dlFolder : dlFolders) {
+			folderIds.add(dlFolder.getFolderId());
 
 			getSubfolderIds(
-				folderIds, folder.getGroupId(), folder.getFolderId());
+				folderIds, dlFolder.getGroupId(), dlFolder.getFolderId());
 		}
 	}
 
@@ -1557,12 +1555,12 @@ public class DLRepositoryLocalServiceImpl
 		if (dlFileEntry.getFolderId() !=
 				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 
-			DLFolder folder = dlFolderPersistence.findByPrimaryKey(
+			DLFolder dlFolder = dlFolderPersistence.findByPrimaryKey(
 				dlFileEntry.getFolderId());
 
-			folder.setLastPostDate(dlFileEntry.getModifiedDate());
+			dlFolder.setLastPostDate(dlFileEntry.getModifiedDate());
 
-			dlFolderPersistence.update(folder, false);
+			dlFolderPersistence.update(dlFolder, false);
 		}
 
 		// File
@@ -1701,10 +1699,10 @@ public class DLRepositoryLocalServiceImpl
 		catch (NoSuchFileEntryException nsfee) {
 		}
 
-		DLFolder folder = dlFolderPersistence.fetchByG_P_N(
+		DLFolder dlFolder = dlFolderPersistence.fetchByG_P_N(
 			groupId, parentFolderId, name);
 
-		if ((folder != null) && (folder.getFolderId() != folderId)) {
+		if ((dlFolder != null) && (dlFolder.getFolderId() != folderId)) {
 			throw new DuplicateFolderNameException(name);
 		}
 	}

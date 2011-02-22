@@ -145,8 +145,8 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public Folder getParentFolder() throws PortalException, SystemException {
-		org.apache.chemistry.opencmis.client.api.Folder
-			parentCmisFolder = _cmisFolder.getFolderParent();
+		org.apache.chemistry.opencmis.client.api.Folder parentCmisFolder =
+			_cmisFolder.getFolderParent();
 
 		if (parentCmisFolder == null) {
 			DLFolder dlFolder =

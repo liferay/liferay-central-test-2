@@ -57,11 +57,11 @@ public class EditFolderAction extends PortletAction {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				updateFolder(actionRequest);
 			}
-			else if (cmd.equals(Constants.MOVE)) {
-				moveFolder(actionRequest);
-			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFolder(actionRequest);
+			}
+			else if (cmd.equals(Constants.MOVE)) {
+				moveFolder(actionRequest);
 			}
 
 			sendRedirect(actionRequest, actionResponse);
@@ -122,14 +122,14 @@ public class EditFolderAction extends PortletAction {
 
 	protected void moveFolder(ActionRequest actionRequest) throws Exception {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
+
 		long parentFolderId = ParamUtil.getLong(
 			actionRequest, "parentFolderId");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
-		DLAppServiceUtil.moveFolder(
-			folderId, parentFolderId, serviceContext);
+		DLAppServiceUtil.moveFolder(folderId, parentFolderId, serviceContext);
 	}
 
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {

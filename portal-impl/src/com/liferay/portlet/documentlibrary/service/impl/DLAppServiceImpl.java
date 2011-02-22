@@ -668,14 +668,11 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			srcFolder.getFolderId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 
-		long destFolderId = destFolder.getFolderId();
-		long groupId = destFolder.getGroupId();
-
 		for (FileEntry srcFileEntry : srcFileEntries) {
 			try {
 				repository.copyFileEntry(
-					groupId, srcFileEntry.getFileEntryId(), destFolderId,
-					serviceContext);
+					destFolder.getGroupId(), srcFileEntry.getFileEntryId(),
+					destFolder.getFolderId(), serviceContext);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -688,11 +685,9 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			srcFolder.getFolderId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (Folder srcSubfolder : srcSubfolders) {
-			String name = srcSubfolder.getName();
-			String description = srcSubfolder.getDescription();
-
 			Folder destSubfolder = repository.addFolder(
-				destFolder.getFolderId(), name, description, serviceContext);
+				destFolder.getFolderId(), srcSubfolder.getName(),
+				srcSubfolder.getDescription(), serviceContext);
 
 			copyFolder(repository, srcSubfolder, destSubfolder, serviceContext);
 		}
