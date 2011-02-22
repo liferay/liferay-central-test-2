@@ -140,7 +140,7 @@ double version = ParamUtil.getDouble(request, "version", -1);
 
 			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-			rowTextEntry.setName(article.getTitle());
+			rowTextEntry.setName(article.getTitle(locale));
 
 			row.addText(rowTextEntry);
 
