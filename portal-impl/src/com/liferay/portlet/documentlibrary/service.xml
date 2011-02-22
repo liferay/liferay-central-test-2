@@ -298,7 +298,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="RepositoryId" return-type="DLFolder" unique="true">
+		<finder name="RepositoryId" return-type="DLFolder">
 			<finder-column name="repositoryId" />
 		</finder>
 		<finder name="G_P" return-type="Collection">

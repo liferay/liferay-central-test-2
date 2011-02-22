@@ -72,9 +72,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		long classNameId = getRepositoryClassNameId(repositoryId);
 
-		if (classNameId ==
-				PortalUtil.getClassNameId(LiferayRepository.class.getName())) {
-
+		if (classNameId == getDefaultClassNameId()) {
 			localRepositoryImpl = new LiferayLocalRepository(
 				repositoryService, dlRepositoryLocalService,
 				dlRepositoryService, repositoryId);
@@ -295,11 +293,13 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 
 		repositoryPersistence.update(repository, false);
 
-		try {
-			createRepositoryImpl(repositoryId, classNameId);
-		}
-		catch (Exception e) {
-			throw new InvalidRepositoryException(e);
+		if (classNameId != getDefaultClassNameId()) {
+			try {
+				createRepositoryImpl(repositoryId, classNameId);
+			}
+			catch (Exception e) {
+				throw new InvalidRepositoryException(e);
+			}
 		}
 
 		return repositoryId;
@@ -316,7 +316,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			groupId);
 
 		for (Repository repository : repositories) {
-			unmountRepository(repository.getRepositoryId());
+			long repositoryId = repository.getRepositoryId();
+
+			unmountRepository(repositoryId);
 		}
 
 		dlRepositoryLocalService.deleteAll(groupId);
@@ -407,6 +409,15 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return baseRepositoryImpl;
 	}
 
+	protected long getDefaultClassNameId() {
+		if (_defaultClassNameId == 0) {
+			_defaultClassNameId =
+				PortalUtil.getClassNameId(LiferayRepository.class.getName());
+		}
+
+		return _defaultClassNameId;
+	}
+
 	protected long getDLFolderId(
 			User user, long groupId, long repositoryId, long parentFolderId,
 			String name, String description, ServiceContext serviceContext)
@@ -458,6 +469,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return repositoryEntryId;
 	}
 
+	private long _defaultClassNameId = 0;
 	private Map<Long, LocalRepository> _localRepositoriesByRepositoryEntryId =
 		new ConcurrentHashMap<Long, LocalRepository>();
 	private Map<Long, LocalRepository> _localRepositoriesByRepositoryId =

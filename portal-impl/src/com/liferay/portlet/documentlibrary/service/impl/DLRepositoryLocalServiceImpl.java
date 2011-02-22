@@ -289,6 +289,8 @@ public class DLRepositoryLocalServiceImpl
 			deleteFolder(folder);
 		}
 
+		folders = dlFolderPersistence.findByGroupId(groupId);
+
 		deleteFileEntries(groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
 		try {
@@ -1589,7 +1591,7 @@ public class DLRepositoryLocalServiceImpl
 		try {
 			getFolder(groupId, folderId, title);
 
-			throw new DuplicateFolderNameException();
+			throw new DuplicateFolderNameException(title);
 		}
 		catch (NoSuchFolderException nsfe) {
 		}
@@ -1654,7 +1656,7 @@ public class DLRepositoryLocalServiceImpl
 		try {
 			getFileEntry(groupId, parentFolderId, name);
 
-			throw new DuplicateFileException();
+			throw new DuplicateFileException(name);
 		}
 		catch (NoSuchFileEntryException nsfee) {
 		}
@@ -1663,7 +1665,7 @@ public class DLRepositoryLocalServiceImpl
 			groupId, parentFolderId, name);
 
 		if ((folder != null) && (folder.getFolderId() != folderId)) {
-			throw new DuplicateFolderNameException();
+			throw new DuplicateFolderNameException(name);
 		}
 	}
 
