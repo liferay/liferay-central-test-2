@@ -89,54 +89,6 @@
 	width: 100%;
 }
 
-.portlet-journal .lfr-table .article-translation-toolbar {
-	background: #DFF4FF url(<%= themeImagesPath %>/journal/language.png) no-repeat 6px 50%;
-	border: 1px solid #A7CEDF;
-	color: #34404F;
-	display: block;
-	margin: 2px auto 14px;
-	padding: 6px 6px 6px 30px;
-}
-
-.portlet-journal .lfr-table .article-translation-toolbar label {
-	font-weight: bold;
-}
-
-.portlet-journal .lfr-table .article-translation-toolbar .add-translations-menu {
-	float: right;
-	margin-left: 3em;
-	position: relative;
-	top: -3px;
-}
-
-.portlet-journal .lfr-table .article-translation-toolbar .contains-translations {
-	margin-top: 1em;
-}
-
-.portlet-journal .lfr-table .article-translation-toolbar .journal-article-translation {
-	background-color: #B3DAEF;
-	border: 1px solid #5FA8FF;
-	color: #444;
-	padding: 0.3em 0.5em 0.3em;
-	margin: 0 0.2em;
-	text-decoration: none;
-}
-
-.portlet-journal .lfr-table .article-translation-toolbar .journal-article-translation:hover {
-	background-color: #D1E5EF;
-}
-
-.portlet-journal .lfr-table .article-translation-toolbar .journal-article-translation img {
-    margin-right: 0.3em;
-}
-
-.portlet-journal .lfr-table .article-translation-toolbar .journal-article-default-translation {
-	background-color: #B3DAEF;
-	font-weight: bold;
-	padding: 0.3em 0.5em 0.3em;
-	margin: 0 0.2em;
-}
-
 .portlet-journal .journal-extras {
 	border-width: 0;
 }
@@ -234,6 +186,10 @@
 .portlet-journal .journal-article-localized-checkbox {
 	display: block;
 	margin-top: 10px;
+}
+
+.portlet-journal .localization-disabled .journal-article-language-options, .portlet-journal .localization-disabled .structure-field .journal-article-localized-checkbox, .portlet-journal-edit-mode .portlet-journal .structure-field .journal-article-localized-checkbox {
+	display: none;
 }
 
 .portlet-journal .journal-article-header-edit .journal-article-localized-checkbox {

@@ -1009,7 +1009,7 @@
 		<field name="expirationDate" type="Date" />
 		<field name="mimeType" type="String" />
 		<field name="title" type="String">
-			<hint name="max-length">4000</hint>
+			<hint name="max-length">255</hint>
 		</field>
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
@@ -1435,14 +1435,14 @@
 			<hint name="upper-case">true</hint>
 		</field>
 		<field name="version" type="double" />
-		<field name="title" type="String" localized="true">
-			<hint name="max-length">4000</hint>
+		<field name="title" type="String">
+			<hint name="max-length">300</hint>
 			<validator name="required" />
 		</field>
 		<field name="urlTitle" type="String">
 			<hint name="max-length">150</hint>
 		</field>
-		<field name="description" type="String" localized="true">
+		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 			<hint name="display-height">40</hint>
 		</field>

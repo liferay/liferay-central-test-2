@@ -274,95 +274,12 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
-	* Gets the localized title of this journal article. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale to get the localized title for
-	* @return the localized title of this journal article
-	*/
-	public java.lang.String getTitle(java.util.Locale locale) {
-		return _journalArticle.getTitle(locale);
-	}
-
-	/**
-	* Gets the localized title of this journal article, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local to get the localized title for
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized title of this journal article. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
-	public java.lang.String getTitle(java.util.Locale locale, boolean useDefault) {
-		return _journalArticle.getTitle(locale, useDefault);
-	}
-
-	/**
-	* Gets the localized title of this journal article. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the id of the language to get the localized title for
-	* @return the localized title of this journal article
-	*/
-	public java.lang.String getTitle(java.lang.String languageId) {
-		return _journalArticle.getTitle(languageId);
-	}
-
-	/**
-	* Gets the localized title of this journal article, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the id of the language to get the localized title for
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized title of this journal article
-	*/
-	public java.lang.String getTitle(java.lang.String languageId,
-		boolean useDefault) {
-		return _journalArticle.getTitle(languageId, useDefault);
-	}
-
-	/**
-	* Gets a map of the locales and localized title of this journal article.
-	*
-	* @return the locales and localized title
-	*/
-	public java.util.Map<java.util.Locale, java.lang.String> getTitleMap() {
-		return _journalArticle.getTitleMap();
-	}
-
-	/**
 	* Sets the title of this journal article.
 	*
 	* @param title the title of this journal article
 	*/
 	public void setTitle(java.lang.String title) {
 		_journalArticle.setTitle(title);
-	}
-
-	/**
-	* Sets the localized title of this journal article.
-	*
-	* @param title the localized title of this journal article
-	* @param locale the locale to set the localized title for
-	*/
-	public void setTitle(java.lang.String title, java.util.Locale locale) {
-		_journalArticle.setTitle(title, locale);
-	}
-
-	public void setTitle(java.lang.String title, java.util.Locale locale,
-		java.util.Locale defaultLocale) {
-		_journalArticle.setTitle(title, locale, defaultLocale);
-	}
-
-	/**
-	* Sets the localized titles of this journal article from the map of locales and localized titles.
-	*
-	* @param titleMap the locales and localized titles of this journal article
-	*/
-	public void setTitleMap(
-		java.util.Map<java.util.Locale, java.lang.String> titleMap) {
-		_journalArticle.setTitleMap(titleMap);
-	}
-
-	public void setTitleMap(
-		java.util.Map<java.util.Locale, java.lang.String> titleMap,
-		java.util.Locale defaultLocale) {
-		_journalArticle.setTitleMap(titleMap, defaultLocale);
 	}
 
 	/**
@@ -393,97 +310,12 @@ public class JournalArticleWrapper implements JournalArticle {
 	}
 
 	/**
-	* Gets the localized description of this journal article. Uses the default language if no localization exists for the requested language.
-	*
-	* @param locale the locale to get the localized description for
-	* @return the localized description of this journal article
-	*/
-	public java.lang.String getDescription(java.util.Locale locale) {
-		return _journalArticle.getDescription(locale);
-	}
-
-	/**
-	* Gets the localized description of this journal article, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param locale the local to get the localized description for
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this journal article. If <code>useDefault</code> is <code>false</code> and no localization exists for the requested language, an empty string will be returned.
-	*/
-	public java.lang.String getDescription(java.util.Locale locale,
-		boolean useDefault) {
-		return _journalArticle.getDescription(locale, useDefault);
-	}
-
-	/**
-	* Gets the localized description of this journal article. Uses the default language if no localization exists for the requested language.
-	*
-	* @param languageId the id of the language to get the localized description for
-	* @return the localized description of this journal article
-	*/
-	public java.lang.String getDescription(java.lang.String languageId) {
-		return _journalArticle.getDescription(languageId);
-	}
-
-	/**
-	* Gets the localized description of this journal article, optionally using the default language if no localization exists for the requested language.
-	*
-	* @param languageId the id of the language to get the localized description for
-	* @param useDefault whether to use the default language if no localization exists for the requested language
-	* @return the localized description of this journal article
-	*/
-	public java.lang.String getDescription(java.lang.String languageId,
-		boolean useDefault) {
-		return _journalArticle.getDescription(languageId, useDefault);
-	}
-
-	/**
-	* Gets a map of the locales and localized description of this journal article.
-	*
-	* @return the locales and localized description
-	*/
-	public java.util.Map<java.util.Locale, java.lang.String> getDescriptionMap() {
-		return _journalArticle.getDescriptionMap();
-	}
-
-	/**
 	* Sets the description of this journal article.
 	*
 	* @param description the description of this journal article
 	*/
 	public void setDescription(java.lang.String description) {
 		_journalArticle.setDescription(description);
-	}
-
-	/**
-	* Sets the localized description of this journal article.
-	*
-	* @param description the localized description of this journal article
-	* @param locale the locale to set the localized description for
-	*/
-	public void setDescription(java.lang.String description,
-		java.util.Locale locale) {
-		_journalArticle.setDescription(description, locale);
-	}
-
-	public void setDescription(java.lang.String description,
-		java.util.Locale locale, java.util.Locale defaultLocale) {
-		_journalArticle.setDescription(description, locale, defaultLocale);
-	}
-
-	/**
-	* Sets the localized descriptions of this journal article from the map of locales and localized descriptions.
-	*
-	* @param descriptionMap the locales and localized descriptions of this journal article
-	*/
-	public void setDescriptionMap(
-		java.util.Map<java.util.Locale, java.lang.String> descriptionMap) {
-		_journalArticle.setDescriptionMap(descriptionMap);
-	}
-
-	public void setDescriptionMap(
-		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
-		java.util.Locale defaultLocale) {
-		_journalArticle.setDescriptionMap(descriptionMap, defaultLocale);
 	}
 
 	/**
