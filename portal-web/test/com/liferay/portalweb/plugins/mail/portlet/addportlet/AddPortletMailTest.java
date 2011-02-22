@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.mail;
+package com.liferay.portalweb.plugins.mail.portlet.addportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
+public class AddPortletMailTest extends BaseTestCase {
+	public void testAddPortletMail() throws Exception {
 		selenium.open("/web/guest/home/");
 
 		for (int second = 0;; second++) {

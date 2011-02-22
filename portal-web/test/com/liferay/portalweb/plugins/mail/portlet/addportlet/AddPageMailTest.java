@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.mail;
+package com.liferay.portalweb.plugins.mail.portlet.addportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class AddPageTest extends BaseTestCase {
-	public void testAddPage() throws Exception {
+public class AddPageMailTest extends BaseTestCase {
+	public void testAddPageMail() throws Exception {
 		selenium.open("/web/guest/home/");
 		selenium.clickAt("main-content", RuntimeVariables.replace(""));
 		selenium.clickAt("dockbar", RuntimeVariables.replace(""));

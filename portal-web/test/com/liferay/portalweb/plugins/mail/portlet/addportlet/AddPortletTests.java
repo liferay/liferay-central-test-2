@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.mail;
+package com.liferay.portalweb.plugins.mail.portlet.addportlet;
 
-import com.liferay.portalweb.plugins.mail.portlet.PortletTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -23,12 +22,14 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MailTests extends BaseTests {
+public class AddPortletTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageMailTest.class);
+		testSuite.addTestSuite(AddPortletMailTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.mail;
+package com.liferay.portalweb.plugins.mail.portlet.addportlet;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
@@ -20,8 +20,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 /**
  * @author Brian Wing Shun Chan
  */
-public class DeletePageTest extends BaseTestCase {
-	public void testDeletePage() throws Exception {
+public class TearDownPageTest extends BaseTestCase {
+	public void testTearDownPage() throws Exception {
 		int label = 1;
 
 		while (label >= 1) {
@@ -32,10 +32,9 @@ public class DeletePageTest extends BaseTestCase {
 				selenium.clickAt("navigation", RuntimeVariables.replace(""));
 				selenium.clickAt("dockbar", RuntimeVariables.replace(""));
 
-				String guestCommunityName = selenium.getText(
-						"//nav[@id='breadcrumbs']/ul/li/span/a");
-				RuntimeVariables.setValue("guestCommunityName",
-					guestCommunityName);
+				String guestCommunity = selenium.getText(
+						"//nav[@class='site-breadcrumbs']/ul/li[1]/span/a");
+				RuntimeVariables.setValue("guestCommunity", guestCommunity);
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -69,7 +68,7 @@ public class DeletePageTest extends BaseTestCase {
 					}
 
 					try {
-						if (RuntimeVariables.replace("${guestCommunityName}")
+						if (RuntimeVariables.replace("${guestCommunity}")
 												.equals(selenium.getText(
 										"//div/div[3]/a"))) {
 							break;
