@@ -278,7 +278,17 @@ if ((articleDisplay != null) && Validator.isNotNull(articleDisplay.getTemplateId
 	}
 }
 
-boolean showEditArticleIcon = (articleDisplay != null) && JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);
+JournalArticle latestArticle = null;
+
+try {
+	if (articleDisplay != null) {
+		latestArticle = JournalArticleLocalServiceUtil.getLatestArticle(articleDisplay.getGroupId(), articleDisplay.getArticleId(), WorkflowConstants.STATUS_ANY);
+	}
+}
+catch (NoSuchArticleException nsae) {
+}
+
+boolean showEditArticleIcon = (latestArticle != null) && JournalArticlePermission.contains(permissionChecker, latestArticle.getGroupId(), latestArticle.getArticleId(), ActionKeys.UPDATE);
 boolean showEditTemplateIcon = (template != null) && JournalTemplatePermission.contains(permissionChecker, template.getGroupId(), template.getTemplateId(), ActionKeys.UPDATE);
 boolean showSelectArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid, portletDisplay.getId(), ActionKeys.CONFIGURATION);
 boolean showAddArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid, portletDisplay.getId(), ActionKeys.CONFIGURATION) && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
@@ -292,9 +302,9 @@ boolean showIconsActions = themeDisplay.isSignedIn() && (showEditArticleIcon || 
 				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 					<portlet:param name="struts_action" value="/journal/edit_article" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
-					<portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
-					<portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
+					<portlet:param name="groupId" value="<%= String.valueOf(latestArticle.getGroupId()) %>" />
+					<portlet:param name="articleId" value="<%= latestArticle.getArticleId() %>" />
+					<portlet:param name="version" value="<%= String.valueOf(latestArticle.getVersion()) %>" />
 				</liferay-portlet:renderURL>
 
 				<liferay-ui:icon
