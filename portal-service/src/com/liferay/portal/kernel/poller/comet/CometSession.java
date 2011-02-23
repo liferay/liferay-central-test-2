@@ -30,6 +30,8 @@ public interface CometSession {
 
 	public String getSessionId();
 
+	public void setAttribute(String name, Object object);
+
 	public void setCometRequest(CometRequest cometRequest);
 
 	public void setCometResponse(CometResponse cometResponse);
