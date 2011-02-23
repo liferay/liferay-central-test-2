@@ -32,9 +32,9 @@ else {
 
 	int pos = editorImpl.indexOf(StringPool.UNDERLINE);
 
-	if (pos != -1){
-		editorVariant = editorImpl.substring(pos + 1);
+	if (pos != -1) {
 		editorImpl = editorImpl.substring(0, pos);
+		editorVariant = editorImpl.substring(pos + 1);
 	}
 }
 
@@ -74,6 +74,9 @@ sb.append(themeDisplay.getDoAsGroupId());
 sb.append("&amp;editorImpl=");
 sb.append(editorImpl);
 
+sb.append("&amp;editorVariant=");
+sb.append(editorVariant);
+
 if (Validator.isNotNull(toolbarSet)) {
 	sb.append("&amp;toolbarSet=");
 	sb.append(toolbarSet);
@@ -105,9 +108,6 @@ sb.append(HttpUtil.encodeURL(cssClasses));
 
 sb.append("&amp;languageId=");
 sb.append(LocaleUtil.toLanguageId(locale));
-
-sb.append("&amp;editorVariant=");
-sb.append(editorVariant);
 
 if (configParams != null) {
 	for (Map.Entry<String, String> entry : configParams.entrySet()) {

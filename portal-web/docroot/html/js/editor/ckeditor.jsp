@@ -33,13 +33,13 @@ String portletId = ParamUtil.getString(request, "p_p_id");
 String mainPath = ParamUtil.getString(request, "p_main_path");
 String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 String doAsGroupId = ParamUtil.getString(request, "doAsGroupId");
+String editorVariant = ParamUtil.getString(request, "editorVariant");
+String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 String initMethod =	ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
-String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 String languageId = ParamUtil.getString(request, "languageId");
-String editorVariant = ParamUtil.getString(request, "editorVariant");
 
 UnicodeProperties properties = PropertiesParamUtil.getProperties(request, "config--");
 
@@ -136,13 +136,13 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 <script type="text/javascript">
 
 	<%
-	String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
-
 	String customConfigFile = "ckconfig.jsp";
 
-	if (Validator.isNotNull(editorVariant)){
-	  customConfigFile = "ckconfig_" + editorVariant + ".jsp";
+	if (Validator.isNotNull(editorVariant)) {
+		customConfigFile = "ckconfig_" + editorVariant + ".jsp";
 	}
+
+	String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
 	%>
 
 	CKEDITOR.replace(
