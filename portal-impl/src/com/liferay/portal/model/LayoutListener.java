@@ -15,7 +15,6 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.staging.LayoutStagingUtil;
@@ -45,7 +44,7 @@ public class LayoutListener extends BaseModelListener<Layout> {
 			LayoutRevisionLocalServiceUtil.deleteLayoutLayoutRevisions(
 				layout.getPlid());
 		}
-		catch (NoSuchGroupException nsge) {
+		catch (IllegalStateException ise) {
 
 			// This is only needed because of LayoutPersistenceTest but should
 			// never happen in a deployed environment
