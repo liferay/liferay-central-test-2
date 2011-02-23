@@ -48,23 +48,21 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 	}
 
 	public FileEntry addFileEntry(
-			long userId, long folderId, String title, String description,
-			String changeLog, InputStream is, long size,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		long userId, long folderId, String title, String description,
+		String changeLog, InputStream is, long size,
+		ServiceContext serviceContext) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public Folder addFolder(
-			long userId, long parentFolderId, String title,
-			String description, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		long userId, long parentFolderId, String title, String description,
+		ServiceContext serviceContext) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void deleteAll() throws PortalException, SystemException {
+	public void deleteAll() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -179,34 +177,30 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 	}
 
 	public FileEntry moveFileEntry(
-			long userId, long fileEntryId, long newFolderId,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		long userId, long fileEntryId, long newFolderId,
+		ServiceContext serviceContext) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public void updateAsset(
-			long userId, FileEntry fileEntry, FileVersion fileVersion,
-			long[] assetCategoryIds, String[] assetTagNames)
-		throws PortalException, SystemException {
+		long userId, FileEntry fileEntry, FileVersion fileVersion,
+		long[] assetCategoryIds, String[] assetTagNames) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public FileEntry updateFileEntry(
-			long userId, long fileEntryId, String sourceFileName, String title,
-			String description, String changeLog, boolean majorVersion,
-			InputStream is, long size, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		long userId, long fileEntryId, String sourceFileName, String title,
+		String description, String changeLog, boolean majorVersion,
+		InputStream is, long size, ServiceContext serviceContext) {
 
 		throw new UnsupportedOperationException();
 	}
 
 	public Folder updateFolder(
-			long folderId, long parentFolderId, String title,
-			String description, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		long folderId, long parentFolderId, String title,
+		String description, ServiceContext serviceContext) {
 
 		throw new UnsupportedOperationException();
 	}
