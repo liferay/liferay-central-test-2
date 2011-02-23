@@ -46,7 +46,10 @@ public class LayoutListener extends BaseModelListener<Layout> {
 				layout.getPlid());
 		}
 		catch (NoSuchGroupException nsge) {
-			// This is to fix tests which create Layouts with no group.
+
+			// This is only needed because of LayoutPersistenceTest but should
+			// never happen in a deployed environment
+
 		}
 		catch (PortalException pe) {
 			throw new ModelListenerException(pe);
