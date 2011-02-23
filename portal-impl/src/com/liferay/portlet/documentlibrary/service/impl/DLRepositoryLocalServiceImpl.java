@@ -1495,11 +1495,22 @@ public class DLRepositoryLocalServiceImpl
 					serviceContext.getModifiedDate(now), serviceContext);
 			}
 			else {
-				dlFileVersion = addFileVersion(
-					user, dlFileEntry, serviceContext.getModifiedDate(now),
-					extension, title, description, changeLog, extraSettings,
-					version, size, WorkflowConstants.STATUS_DRAFT,
-					serviceContext);
+				if (latestDLFileVersion.getSize() == 0) {
+					version = latestDLFileVersion.getVersion();
+
+					updateFileVersion(
+						user, latestDLFileVersion, sourceFileName, extension,
+						title, description, changeLog, extraSettings, version,
+						size, latestDLFileVersion.getStatus(),
+						serviceContext.getModifiedDate(now), serviceContext);
+				}
+				else {
+					dlFileVersion = addFileVersion(
+						user, dlFileEntry, serviceContext.getModifiedDate(now),
+						extension, title, description, changeLog, extraSettings,
+						version, size, WorkflowConstants.STATUS_DRAFT,
+						serviceContext);
+				}
 			}
 
 			if (dlFileVersion == null) {
