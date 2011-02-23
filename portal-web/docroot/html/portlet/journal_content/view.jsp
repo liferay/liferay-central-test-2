@@ -267,6 +267,16 @@ catch (NoSuchArticleException nsae) {
 <%
 }
 
+JournalArticle latestArticle = null;
+
+try {
+	if (articleDisplay != null) {
+		latestArticle = JournalArticleLocalServiceUtil.getLatestArticle(articleDisplay.getGroupId(), articleDisplay.getArticleId(), WorkflowConstants.STATUS_ANY);
+	}
+}
+catch (NoSuchArticleException nsae) {
+}
+
 JournalTemplate template = null;
 
 if ((articleDisplay != null) && Validator.isNotNull(articleDisplay.getTemplateId())) {
@@ -276,16 +286,6 @@ if ((articleDisplay != null) && Validator.isNotNull(articleDisplay.getTemplateId
 	catch (NoSuchTemplateException nste) {
 		template = JournalTemplateLocalServiceUtil.getTemplate(themeDisplay.getCompanyGroupId(), articleDisplay.getTemplateId());
 	}
-}
-
-JournalArticle latestArticle = null;
-
-try {
-	if (articleDisplay != null) {
-		latestArticle = JournalArticleLocalServiceUtil.getLatestArticle(articleDisplay.getGroupId(), articleDisplay.getArticleId(), WorkflowConstants.STATUS_ANY);
-	}
-}
-catch (NoSuchArticleException nsae) {
 }
 
 boolean showEditArticleIcon = (latestArticle != null) && JournalArticlePermission.contains(permissionChecker, latestArticle.getGroupId(), latestArticle.getArticleId(), ActionKeys.UPDATE);
