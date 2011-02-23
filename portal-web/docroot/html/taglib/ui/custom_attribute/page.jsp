@@ -123,8 +123,6 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									yearRangeEnd="<%= valueDate.get(Calendar.YEAR) + 100 %>"
 								/>
 
-								&nbsp;
-
 								<liferay-ui:input-time
 									amPmParam='<%= "ExpandoAttribute--" + name + "--AmPm" %>'
 									amPmValue="<%= valueDate.get(Calendar.AM_PM) %>"
