@@ -94,6 +94,8 @@ public interface DestinationNames {
 
 	public static final String POLLER_RESPONSE = "liferay/poller_response";
 
+	public static final String POLLER_COMET_RESPONSE = "liferay/poller_comet_response";
+
 	public static final String REPORT_COMPILER = "liferay/report_compiler";
 
 	public static final String REPORT_REQUEST = "liferay/report_request";

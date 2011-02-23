@@ -14,11 +14,24 @@
 
 package com.liferay.portal.poller;
 
+import com.liferay.portal.kernel.json.JSONObject;
+
 /**
  * @author Edward Han
  */
-public interface PollerRequestHandlerListener {
+public class PollerRequestHandlerUtil {
+	public void setPollerRequestHandler(
+		PollerRequestHandler pollerRequestHandler) {
 
-	public void notifyHandlingComplete();
+		_pollerRequestHandler = pollerRequestHandler;
+	}
 
+	public static JSONObject processRequest(
+			String path, String pollerRequestString)
+		throws Exception {
+
+		return _pollerRequestHandler.processRequest(path, pollerRequestString);
+	}
+
+	private static PollerRequestHandler _pollerRequestHandler;
 }

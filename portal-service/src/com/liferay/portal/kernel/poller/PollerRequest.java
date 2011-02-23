@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.poller;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -130,7 +131,7 @@ public class PollerRequest {
 	}
 
 	private String _chunkId;
-	private Map<String, String> _parameterMap;
+	private Map<String, String> _parameterMap = Collections.emptyMap();
 	private PollerHeader _pollerHeader;
 	private String _portletId;
 	private boolean _receiveRequest;

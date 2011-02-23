@@ -17,12 +17,31 @@
 		<property name="workersCoreSize" value="10" />
 		<property name="workersMaxSize" value="10" />
 	</bean>
-	<bean id="messageListener.poller" class="com.liferay.portal.poller.messaging.PollerMessageListener" />
+	<bean id="destination.poller_comet_response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<property name="name" value="liferay/poller_comet_response" />
+		<property name="workersCoreSize" value="10" />
+		<property name="workersMaxSize" value="10" />
+	</bean>
+
+	<bean id="messageListener.poller" class="com.liferay.portal.poller.messaging.PollerRequestMessageListener" />
+    <bean id="messageListener.pollerNotificationBridge" class="com.liferay.portal.poller.messaging.PollerNotificationBridgeMessageListener" />
+    <bean id="messageListener.PollerCometDelayedJob" class="com.liferay.portal.poller.comet.PollerCometDelayedJobImpl" />
+    <bean id="messageListener.pollerRequestHandler" class="com.liferay.portal.poller.PollerRequestHandlerImpl" />
+
+    <bean id="com.liferay.portal.poller.pollerRequestHandlerUtil" class="com.liferay.portal.poller.PollerRequestHandlerUtil">
+        <property name="pollerRequestHandler" ref="messageListener.pollerRequestHandler" />
+    </bean>
+
+    <bean id="ccom.liferay.portal.poller.comet.PollerCometDelayedJobUtil" class="com.liferay.portal.poller.comet.PollerCometDelayedJobUtil">
+        <property name="pollerCometDelayedJob" ref="messageListener.PollerCometDelayedJob"/>
+    </bean>
+
 	<bean id="messagingConfigurator.poller" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator">
 		<property name="destinations">
 			<list>
 				<ref bean="destination.poller" />
 				<ref bean="destination.poller_response" />
+				<ref bean="destination.poller_comet_response" />
 			</list>
 		</property>
 		<property name="messageBus">
@@ -33,6 +52,17 @@
 				<entry key="liferay/poller">
 					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
 						<ref bean="messageListener.poller" />
+					</list>
+				</entry>
+				<entry key="liferay/poller_response">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.pollerNotificationBridge" />
+                        <ref bean="messageListener.pollerRequestHandler" />
+					</list>
+				</entry>
+				<entry key="liferay/poller_comet_response">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="messageListener.PollerCometDelayedJob" />
 					</list>
 				</entry>
 			</map>

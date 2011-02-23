@@ -19,8 +19,6 @@ package com.liferay.portal.kernel.poller;
  */
 public interface PollerProcessor {
 
-	public boolean isAsynchronous();
-
 	public void receive(
 			PollerRequest pollerRequest, PollerResponse pollerResponse)
 		throws PollerException;

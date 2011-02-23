@@ -29,6 +29,14 @@ public interface PollerResponse {
 
 	public void close();
 
+	public void createResponseMessage(Message message);
+
+	public PollerHeader getPollerHeader();
+
+	public String getPortletId();
+
+	public boolean isEmpty();
+
 	public void setParameter(String name, JSONArray value)
 		throws PollerResponseClosedException;
 
@@ -37,8 +45,6 @@ public interface PollerResponse {
 
 	public void setParameter(String name, String value)
 		throws PollerResponseClosedException;
-
-	public void setResponseMessage(Message responseMessage);
 
 	public JSONObject toJSONObject();
 

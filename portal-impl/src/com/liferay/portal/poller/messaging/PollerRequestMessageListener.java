@@ -18,12 +18,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.poller.PollerException;
 import com.liferay.portal.kernel.poller.PollerProcessor;
 import com.liferay.portal.kernel.poller.PollerRequest;
 import com.liferay.portal.kernel.poller.PollerResponse;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.poller.PollerProcessorUtil;
 import com.liferay.portal.poller.PollerRequestResponsePair;
 
@@ -31,7 +29,7 @@ import com.liferay.portal.poller.PollerRequestResponsePair;
  * @author Michael C. Han
  * @author Brian Wing Shun Chan
  */
-public class PollerMessageListener extends BaseMessageListener {
+public class PollerRequestMessageListener extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
 		PollerRequestResponsePair pollerRequestResponsePair =
@@ -49,19 +47,7 @@ public class PollerMessageListener extends BaseMessageListener {
 			PollerProcessorUtil.getPollerProcessor(portletId);
 
 		if (pollerRequest.isReceiveRequest()) {
-			String responseDestinationName =
-				message.getResponseDestinationName();
-
-			if (Validator.isNotNull(responseDestinationName) &&
-				Validator.isNotNull(pollerResponse)) {
-
-				Message responseMessage = MessageBusUtil.createResponseMessage(
-					message);
-
-				responseMessage.setPayload(pollerResponse);
-
-				pollerResponse.setResponseMessage(responseMessage);
-			}
+			pollerResponse.createResponseMessage(message);
 
 			try {
 				pollerProcessor.receive(pollerRequest, pollerResponse);
@@ -73,12 +59,12 @@ public class PollerMessageListener extends BaseMessageListener {
 				pollerResponse.setParameter("pollerException", pe.getMessage());
 			}
 			finally {
-				if (!pollerProcessor.isAsynchronous()) {
-					pollerResponse.close();
-				}
+				pollerResponse.close();
 			}
 		}
 		else {
+			//for send requests pollerResponse is always null
+
 			try {
 				pollerProcessor.send(pollerRequest);
 			}
@@ -90,6 +76,6 @@ public class PollerMessageListener extends BaseMessageListener {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		PollerMessageListener.class);
+		PollerRequestMessageListener.class);
 
 }

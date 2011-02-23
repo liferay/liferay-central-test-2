@@ -12,23 +12,21 @@
  * details.
  */
 
-package com.liferay.portal.poller;
+package com.liferay.portal.poller.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.poller.PollerRequestHandlerUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -72,35 +70,25 @@ public class PollerServlet extends HttpServlet {
 		String pollerRequestString = ParamUtil.getString(
 			request, "pollerRequest");
 
-		PollerResponseWriter pollerResponseWriter =
-			new JSONPollerResponseWriter();
+		long userId = PortalUtil.getUserId(request);
 
-		SynchronousPollerRequestHandlerListener
-			synchronousPollerRequestHandlerListener =
-				new SynchronousPollerRequestHandlerListener();
+		long companyId = PortalUtil.getCompanyId(request);
 
-		List<PollerRequestHandlerListener> pollerRequestHandlerListeners =
-			new ArrayList<PollerRequestHandlerListener>(1);
+		JSONObject pollerResponseHeader = PollerRequestHandlerUtil.
+			processRequest(request.getPathInfo(), pollerRequestString);
 
-		pollerRequestHandlerListeners.add(
-			synchronousPollerRequestHandlerListener);
-
-		PollerRequestHandler pollerRequestHandler = new PollerRequestHandler(
-			request.getPathInfo(), pollerRequestString, pollerResponseWriter,
-			pollerRequestHandlerListeners);
-
-		if (!pollerRequestHandler.processRequest()) {
-			return null;
+		if (pollerResponseHeader == null) {
+			return StringPool.BLANK;
 		}
 
-		synchronousPollerRequestHandlerListener.waitNotification(
+		SynchronousPollerChannelListener synchronousPollerChannelListener =
+			new SynchronousPollerChannelListener(
+				companyId, pollerResponseHeader, userId);
+
+		String response = synchronousPollerChannelListener.getNotificationBatch(
 			PropsValues.POLLER_REQUEST_TIMEOUT);
 
-		pollerRequestHandler.shutdown();
-
-		JSONArray jsonArray = pollerResponseWriter.getJSONArray();
-
-		return jsonArray.toString();
+		return response;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PollerServlet.class);

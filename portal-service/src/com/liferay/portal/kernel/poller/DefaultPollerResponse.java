@@ -30,8 +30,11 @@ import java.util.Map;
  */
 public class DefaultPollerResponse implements PollerResponse {
 
-	public DefaultPollerResponse(String portletId, String chunkId) {
+	public DefaultPollerResponse(
+		String portletId, PollerHeader pollerHeader, String chunkId) {
+
 		_portletId = portletId;
+		_pollerHeader = pollerHeader;
 		_chunkId = chunkId;
 	}
 
@@ -42,6 +45,31 @@ public class DefaultPollerResponse implements PollerResponse {
 
 			_responseMessage = null;
 		}
+	}
+
+	public void createResponseMessage(Message requestMessage) {
+		String responseDestinationName =
+			requestMessage.getResponseDestinationName();
+
+		if (Validator.isNull(responseDestinationName)) {
+			return;
+		}
+
+		_responseMessage = MessageBusUtil.createResponseMessage(requestMessage);
+
+		_responseMessage.setPayload(this);
+	}
+
+	public PollerHeader getPollerHeader() {
+		return _pollerHeader;
+	}
+
+	public String getPortletId() {
+		return _portletId;
+	}
+
+	public boolean isEmpty() {
+		return _parameterMap.isEmpty();
 	}
 
 	public synchronized void setParameter(String name, JSONArray value)
@@ -74,10 +102,6 @@ public class DefaultPollerResponse implements PollerResponse {
 
 			_parameterMap.put(name, value);
 		}
-	}
-
-	public void setResponseMessage(Message responseMessage) {
-		_responseMessage = responseMessage;
 	}
 
 	public JSONObject toJSONObject() {
@@ -119,6 +143,7 @@ public class DefaultPollerResponse implements PollerResponse {
 
 	private String _chunkId;
 	private Map<String, Object> _parameterMap = new HashMap<String, Object>();
+	private PollerHeader _pollerHeader;
 	private String _portletId;
 	private Message _responseMessage;
 

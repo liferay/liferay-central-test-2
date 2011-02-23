@@ -21,10 +21,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
  */
 public abstract class BasePollerProcessor implements PollerProcessor {
 
-	public boolean isAsynchronous() {
-		return _ASYNCHRONOUS;
-	}
-
 	public void receive(
 			PollerRequest pollerRequest, PollerResponse pollerResponse)
 		throws PollerException {
@@ -109,7 +105,5 @@ public abstract class BasePollerProcessor implements PollerProcessor {
 		return GetterUtil.getString(
 			pollerRequest.getParameterMap().get(name), defaultValue);
 	}
-
-	private static final boolean _ASYNCHRONOUS = false;
 
 }
