@@ -580,7 +580,7 @@ public class EditArticleAction extends PortletAction {
 					}
 
 					content = JournalUtil.mergeArticleContent(
-						curArticle.getContent(), content);
+						curArticle.getContent(), content, true);
 					content = JournalUtil.removeOldContent(
 						content, structure.getMergedXsd());
 				}
