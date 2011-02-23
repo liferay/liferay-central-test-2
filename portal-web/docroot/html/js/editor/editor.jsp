@@ -28,18 +28,21 @@ if (!BrowserSnifferUtil.isRtf(request)) {
 		editorImpl = "simple";
 	}
 	else if (BrowserSnifferUtil.isSafari(request) && (editorImpl.indexOf("simple") == -1)) {
-		editorImpl = "tinymcesimple";
+		editorImpl = "tinymce_simple";
 	}
 	else {
 		editorImpl = "simple";
 	}
 }
 
+//editorImpl = "ckeditor";
+//editorImpl = "ckeditor_bbcode";
+//editorImpl = "ckeditor_creole";
 //editorImpl = "fckeditor";
 //editorImpl = "liferay";
 //editorImpl = "simple";
 //editorImpl = "tinymce";
-//editorImpl = "tinymcesimple";
+//editorImpl = "tinymce_simple";
 
 // Resin won't allow dynamic content inside the jsp:include tag
 

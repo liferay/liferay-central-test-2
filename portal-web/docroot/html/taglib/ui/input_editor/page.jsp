@@ -22,20 +22,12 @@ String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:
 String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:name"), namespace + "editor");
 
 String editorImpl = (String)request.getAttribute("liferay-ui:input-editor:editorImpl");
-String editorVariant = StringPool.BLANK;
 
 if (Validator.isNull(editorImpl)) {
 	editorImpl = PropsValues.EDITOR_WYSIWYG_DEFAULT;
 }
 else {
 	editorImpl = PropsUtil.get(editorImpl);
-
-	int pos = editorImpl.indexOf(StringPool.UNDERLINE);
-
-	if (pos != -1) {
-		editorVariant = editorImpl.substring(pos + 1);
-		editorImpl = editorImpl.substring(0, pos);
-	}
 }
 
 String toolbarSet = (String)request.getAttribute("liferay-ui:input-editor:toolbarSet");
@@ -73,9 +65,6 @@ sb.append(themeDisplay.getDoAsGroupId());
 
 sb.append("&amp;editorImpl=");
 sb.append(editorImpl);
-
-sb.append("&amp;editorVariant=");
-sb.append(editorVariant);
 
 if (Validator.isNotNull(toolbarSet)) {
 	sb.append("&amp;toolbarSet=");
