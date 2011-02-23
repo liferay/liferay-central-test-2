@@ -33,7 +33,6 @@ String portletId = ParamUtil.getString(request, "p_p_id");
 String mainPath = ParamUtil.getString(request, "p_main_path");
 String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 String doAsGroupId = ParamUtil.getString(request, "doAsGroupId");
-String editorVariant = ParamUtil.getString(request, "editorVariant");
 String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
 String initMethod =	ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
@@ -51,6 +50,8 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 	configParamsSB.append(StringPool.EQUAL);
 	configParamsSB.append(HttpUtil.encodeURL(property.getValue()));
 }
+
+String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFileName", "ckconfig.jsp");
 %>
 
 <html>
@@ -114,19 +115,13 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 	(function() {
 
 		<%
-		String customConfigFile = "ckconfig.jsp";
-
-		if (Validator.isNotNull(editorVariant)) {
-			customConfigFile = "ckconfig_" + editorVariant + ".jsp";
-		}
-
 		String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
 		%>
 
 		CKEDITOR.replace(
 			'CKEditor1',
 			{
-				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= customConfigFile %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
+				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= ckEditorConfigFileName %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
 				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
 				filebrowserUploadUrl: null,
 				toolbar: '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>'
