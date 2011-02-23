@@ -109,6 +109,9 @@ public class EditArticleAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteArticles(actionRequest);
 			}
+			else if (cmd.equals(Constants.DELETE_TRANSLATION)) {
+				removeArticlesLocale(actionRequest);
+			}
 			else if (cmd.equals(Constants.EXPIRE)) {
 				expireArticles(actionRequest);
 			}
@@ -117,9 +120,6 @@ public class EditArticleAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
 				unsubscribeArticles(actionRequest);
-			}
-			else if (cmd.equals("removeArticlesLocale")) {
-				removeArticlesLocale(actionRequest);
 			}
 
 			if (Validator.isNotNull(cmd)) {

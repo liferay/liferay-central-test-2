@@ -39,6 +39,8 @@ public interface Constants {
 
 	public static final String DELETE = "delete";
 
+	public static final String DELETE_TRANSLATION = "delete_translation";
+
 	public static final String EDIT = "edit";
 
 	public static final String EXPIRE = "expire";
