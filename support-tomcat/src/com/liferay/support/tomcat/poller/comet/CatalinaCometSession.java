@@ -53,6 +53,14 @@ public class CatalinaCometSession extends BaseCometSession {
 		}
 	}
 
+	public void setAttribute(String name, Object object) {
+		HttpServletRequest request = _cometEvent.getHttpServletRequest();
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute(name, object);
+	}
+
 	private CometEvent _cometEvent;
 
 }

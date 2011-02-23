@@ -14,7 +14,7 @@
 
 package com.liferay.support.tomcat.poller.comet;
 
-import javax.servlet.http.HttpServletResponse;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import org.apache.catalina.CometEvent;
 
@@ -23,10 +23,21 @@ import org.apache.catalina.CometEvent;
  */
 public class CatalinaCometSessionUtil {
 
-	public static String getSessionId(CometEvent cometEvent) {
-		HttpServletResponse response = cometEvent.getHttpServletResponse();
+	public static final String COMET_CONNECTION_ID = "liferay.comet.connection.id";
 
-		return response.toString();
+	public static String getSessionId(CometEvent cometEvent) {
+
+		Object sessionId = cometEvent.getHttpServletRequest().getAttribute(
+			COMET_CONNECTION_ID);
+
+		if (sessionId == null || !(sessionId instanceof String)) {
+			sessionId = PortalUUIDUtil.generate();
+
+			cometEvent.getHttpServletRequest().setAttribute(
+				COMET_CONNECTION_ID, sessionId);
+		}
+
+		return (String) sessionId;
 	}
 
 }
