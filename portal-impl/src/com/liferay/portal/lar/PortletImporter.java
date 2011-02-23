@@ -111,6 +111,8 @@ public class PortletImporter {
 			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean importPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
+		boolean importUserPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importUserPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		String userIdStrategy = MapUtil.getString(
@@ -271,6 +273,20 @@ public class PortletImporter {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Importing portlet data takes " + stopWatch.getTime() + " ms");
+		}
+
+		// Portlet permissions
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Importing portlet permissions");
+		}
+
+		if (importPermissions) {
+			LayoutCache layoutCache = new LayoutCache();
+
+			_permissionImporter.importPortletPermissions(
+				layoutCache, layout.getCompanyId(), groupId, userId, layout,
+				portletEl, portletId, importUserPermissions);
 		}
 
 		zipReader.close();
