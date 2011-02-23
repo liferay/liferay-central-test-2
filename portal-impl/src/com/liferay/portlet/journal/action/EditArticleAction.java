@@ -64,6 +64,7 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -435,8 +436,6 @@ public class EditArticleAction extends PortletAction {
 
 		double version = ParamUtil.getDouble(uploadRequest, "version");
 
-		String title = ParamUtil.getString(uploadRequest, "title");
-		String description = ParamUtil.getString(uploadRequest, "description");
 		String content = ParamUtil.getString(uploadRequest, "content");
 		String type = ParamUtil.getString(uploadRequest, "type");
 		String structureId = ParamUtil.getString(uploadRequest, "structureId");
@@ -447,6 +446,11 @@ public class EditArticleAction extends PortletAction {
 			uploadRequest, "lastLanguageId");
 		String defaultLanguageId = ParamUtil.getString(
 			uploadRequest, "defaultLanguageId");
+
+	    Map<Locale, String> titleMap =
+		    LocalizationUtil.getLocalizationMap(actionRequest, "title");
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 
 		int displayDateMonth = ParamUtil.getInteger(
 			uploadRequest, "displayDateMonth");
@@ -530,7 +534,7 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				groupId, articleId, autoArticleId, title, description,
+				groupId, articleId, autoArticleId, titleMap, descriptionMap,
 				content, type, structureId, templateId, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -594,8 +598,8 @@ public class EditArticleAction extends PortletAction {
 			String tempOldUrlTitle = article.getUrlTitle();
 
 			article = JournalArticleServiceUtil.updateArticle(
-				groupId, articleId, version, title, description, content, type,
-				structureId, templateId, displayDateMonth, displayDateDay,
+				groupId, articleId, version, titleMap, descriptionMap, content,
+				type, structureId, templateId, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
 				expirationDateMonth, expirationDateDay, expirationDateYear,
 				expirationDateHour, expirationDateMinute, neverExpire,
