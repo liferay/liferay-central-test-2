@@ -14,16 +14,14 @@
 
 package com.liferay.portal.poller.comet;
 
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
+import com.liferay.portal.kernel.notifications.ChannelListener;
 import com.liferay.portal.kernel.poller.comet.BaseCometHandler;
 import com.liferay.portal.kernel.poller.comet.CometHandler;
 import com.liferay.portal.kernel.poller.comet.CometRequest;
 import com.liferay.portal.kernel.poller.comet.CometSession;
-import com.liferay.portal.poller.PollerRequestHandler;
-import com.liferay.portal.poller.PollerRequestHandlerListener;
-import com.liferay.portal.poller.PollerResponseWriter;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.liferay.portal.poller.PollerRequestHandlerUtil;
 
 /**
  * @author Edward Han
@@ -39,7 +37,10 @@ public class PollerCometHandler extends BaseCometHandler {
 	}
 
 	protected void doDestroy() throws Exception {
-		_pollerRequestHandler.shutdown();
+		if (_cometPollerChannelListener != null) {
+			ChannelHubManagerUtil.unregisterChannelListener(
+				_companyId, _userId, _cometPollerChannelListener);
+		}
 	}
 
 	protected void doInit(CometSession cometSession) throws Exception {
@@ -47,22 +48,29 @@ public class PollerCometHandler extends BaseCometHandler {
 
 		String pollerRequestString = cometRequest.getParameter("pollerRequest");
 
-		PollerResponseWriter pollerResponseWriter =
-			new CometPollerResponseWriter(cometSession);
+		_companyId = cometRequest.getCompanyId();
 
-		List<PollerRequestHandlerListener> pollerRequestHandlerListeners =
-			new ArrayList<PollerRequestHandlerListener>(1);
+		_userId = cometRequest.getUserId();
 
-		pollerRequestHandlerListeners.add(
-			new CometPollerRequestHandlerListener(cometSession));
+		JSONObject pollerResponseHeader =
+			PollerRequestHandlerUtil.processRequest(
+				cometRequest.getPathInfo(), pollerRequestString);
 
-		_pollerRequestHandler = new PollerRequestHandler(
-			cometRequest.getPathInfo(), pollerRequestString,
-			pollerResponseWriter, pollerRequestHandlerListeners);
+		//for "send" requests will have null pollerResponseHeaders from which
+		//we can immediately return.  "send" requests do not need comet.
+		if (pollerResponseHeader != null) {
+			 _cometPollerChannelListener = new PollerCometChannelListener(
+					getCometSession(), pollerResponseHeader);
 
-		_pollerRequestHandler.processRequest();
+			ChannelHubManagerUtil.registerChannelListener(
+				_companyId, _userId, _cometPollerChannelListener);
+		}
+		else {
+			getCometSession().close();
+		}
 	}
 
-	private PollerRequestHandler _pollerRequestHandler;
-
+	ChannelListener _cometPollerChannelListener = null;
+	private long _companyId;
+	private long _userId;
 }

@@ -14,29 +14,26 @@
 
 package com.liferay.portal.poller.comet;
 
-import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.poller.comet.CometResponse;
-import com.liferay.portal.kernel.poller.comet.CometSession;
-import com.liferay.portal.poller.JSONPollerResponseWriter;
-
 /**
  * @author Edward Han
- * @author Brian Wing Shun Chan
  */
-public class CometPollerResponseWriter extends JSONPollerResponseWriter {
-
-	public CometPollerResponseWriter(CometSession cometSession) {
-		_cometSession = cometSession;
+public class PollerCometDelayedJobUtil {
+	public PollerCometDelayedJob getPollerCometDelayedJob() {
+		return _pollerCometDelayedJob;
 	}
 
-	protected void doClose() throws Exception {
-		CometResponse cometResponse = _cometSession.getCometResponse();
+	public void setPollerCometDelayedJob(
+		PollerCometDelayedJob pollerCometDelayedJob) {
 
-		JSONArray jsonArray = getJSONArray();
-
-		cometResponse.writeData(jsonArray.toString());
+		_pollerCometDelayedJob = pollerCometDelayedJob;
 	}
 
-	private CometSession _cometSession;
+	public static void addPollerCometDelayedTask(
+		PollerCometDelayedTask pollerCometDelayedTask) {
 
+		_pollerCometDelayedJob.addPollerCometDelayedTask(
+			pollerCometDelayedTask);
+	}
+
+	private static PollerCometDelayedJob _pollerCometDelayedJob;
 }
