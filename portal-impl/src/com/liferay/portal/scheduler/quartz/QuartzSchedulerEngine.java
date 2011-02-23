@@ -22,10 +22,8 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.IntervalTrigger;
 import com.liferay.portal.kernel.scheduler.JobState;
-import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
-import com.liferay.portal.kernel.scheduler.TriggerFactoryUtil;
 import com.liferay.portal.kernel.scheduler.TriggerState;
 import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
@@ -73,18 +71,11 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			StdSchedulerFactory schedulerFactory = new StdSchedulerFactory();
 
 			schedulerFactory.initialize(
-				PropsUtil.getProperties("permanent.scheduler.", true));
+				PropsUtil.getProperties("org.quartz.", false));
 
-			_permanentScheduler = schedulerFactory.getScheduler();
+			_scheduler = schedulerFactory.getScheduler();
 
 			initJobState();
-
-			schedulerFactory = new StdSchedulerFactory();
-
-			schedulerFactory.initialize(
-				PropsUtil.getProperties("memory.scheduler.", true));
-
-			_memoryScheduler = schedulerFactory.getScheduler();
 		}
 		catch (Exception e) {
 			_log.error("Unable to initialize engine", e);
@@ -97,9 +88,13 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			delete(groupName, scheduler);
+			String[] jobNames = _scheduler.getJobNames(groupName);
+
+			for (String jobName : jobNames) {
+				delete(jobName, groupName);
+			}
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to delete jobs", e);
@@ -114,9 +109,14 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			delete(jobName, groupName, scheduler);
+			SchedulerContext schedulerContext = _scheduler.getContext();
+
+			schedulerContext.remove(getFullName(jobName, groupName));
+
+			_scheduler.deleteJob(jobName, groupName);
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
@@ -145,9 +145,73 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			return getScheduledJob(jobName, groupName, scheduler);
+			JobDetail jobDetail = _scheduler.getJobDetail(
+				jobName, groupName);
+
+			if (jobDetail == null) {
+				return null;
+			}
+
+			JobDataMap jobDataMap = jobDetail.getJobDataMap();
+
+			String description = jobDataMap.getString(DESCRIPTION);
+			String destinationName = jobDataMap.getString(DESTINATION_NAME);
+			Message message = getMessage(jobDataMap);
+
+			SchedulerResponse schedulerResponse = null;
+
+			Trigger trigger = _scheduler.getTrigger(jobName, groupName);
+
+			handleJobState(jobName, groupName, message, trigger);
+
+			if (trigger == null) {
+				schedulerResponse = new SchedulerResponse();
+
+				schedulerResponse.setDescription(description);
+				schedulerResponse.setDestinationName(destinationName);
+				schedulerResponse.setGroupName(groupName);
+				schedulerResponse.setJobName(jobName);
+				schedulerResponse.setMessage(message);
+			}
+			else {
+				if (CronTrigger.class.isAssignableFrom(trigger.getClass())) {
+
+					CronTrigger cronTrigger = CronTrigger.class.cast(trigger);
+
+					schedulerResponse = new SchedulerResponse();
+
+					schedulerResponse.setDescription(description);
+					schedulerResponse.setDestinationName(destinationName);
+					schedulerResponse.setMessage(message);
+					schedulerResponse.setTrigger(
+						new com.liferay.portal.kernel.scheduler.CronTrigger(
+							jobName, groupName, cronTrigger.getStartTime(),
+							cronTrigger.getEndTime(),
+							cronTrigger.getCronExpression()));
+				}
+				else if (SimpleTrigger.class.isAssignableFrom(
+							trigger.getClass())) {
+
+					SimpleTrigger simpleTrigger = SimpleTrigger.class.cast(
+						trigger);
+
+					schedulerResponse = new SchedulerResponse();
+
+					schedulerResponse.setDescription(description);
+					schedulerResponse.setDestinationName(destinationName);
+					schedulerResponse.setMessage(message);
+					schedulerResponse.setTrigger(
+						new IntervalTrigger(
+							jobName, groupName, simpleTrigger.getStartTime(),
+							simpleTrigger.getEndTime(),
+							simpleTrigger.getRepeatInterval()));
+				}
+			}
+
+			return schedulerResponse;
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to get job", e);
@@ -162,21 +226,13 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			String[] groupNames = _permanentScheduler.getJobGroupNames();
+			String[] groupNames = _scheduler.getJobGroupNames();
 
 			List<SchedulerResponse> schedulerResponses =
 				new ArrayList<SchedulerResponse>();
 
 			for (String groupName : groupNames) {
-				schedulerResponses.addAll(
-					getScheduledJobs(groupName, _permanentScheduler));
-			}
-
-			groupNames = _memoryScheduler.getJobGroupNames();
-
-			for (String groupName : groupNames) {
-				schedulerResponses.addAll(
-					getScheduledJobs(groupName, _memoryScheduler));
+				schedulerResponses.addAll(getScheduledJobs(groupName));
 			}
 
 			return schedulerResponses;
@@ -194,9 +250,23 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			return getScheduledJobs(groupName, scheduler);
+			List<SchedulerResponse> schedulerResponses =
+				new ArrayList<SchedulerResponse>();
+
+			String[] jobNames = _scheduler.getJobNames(groupName);
+
+			for (String jobName : jobNames) {
+				SchedulerResponse schedulerResponse = getScheduledJob(
+					jobName, groupName);
+
+				if (schedulerResponse != null) {
+					schedulerResponses.add(schedulerResponse);
+				}
+			}
+
+			return schedulerResponses;
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to get jobs", e);
@@ -209,9 +279,19 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			pause(groupName, scheduler);
+			String[] jobNames = _scheduler.getJobNames(groupName);
+
+			for (String jobName : jobNames) {
+				JobState jobState = getJobState(jobName, groupName);
+
+				if (jobState != null) {
+					jobState.setTriggerState(TriggerState.PAUSED);
+				}
+			}
+
+			_scheduler.pauseJobGroup(groupName);
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to pause jobs", e);
@@ -226,9 +306,16 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			pause(jobName, groupName, scheduler);
+			JobState jobState = getJobState(jobName, groupName);
+
+			if (jobState != null) {
+				jobState.setTriggerState(TriggerState.PAUSED);
+			}
+
+			_scheduler.pauseJob(jobName, groupName);
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to pause job", e);
@@ -241,9 +328,19 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			resume(groupName, scheduler);
+			String[] jobNames = _scheduler.getJobNames(groupName);
+
+			for (String jobName : jobNames) {
+				JobState jobState = getJobState(jobName, groupName);
+
+				if (jobState != null) {
+					jobState.setTriggerState(TriggerState.NORMAL);
+				}
+			}
+
+			_scheduler.resumeJobGroup(groupName);
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to resume jobs", e);
@@ -258,9 +355,16 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			resume(jobName, groupName, scheduler);
+			JobState jobState = getJobState(jobName, groupName);
+
+			if (jobState != null) {
+				jobState.setTriggerState(TriggerState.NORMAL);
+			}
+
+			_scheduler.resumeJob(jobName, groupName);
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to resume job", e);
@@ -277,21 +381,14 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(trigger.getGroupName());
-
-			trigger = TriggerFactoryUtil.buildTrigger(
-				trigger.getTriggerType(), trigger.getJobName(),
-				getRealGroupName(trigger.getGroupName()),
-				trigger.getStartDate(), trigger.getEndDate(),
-				trigger.getTriggerContent());
-
 			Trigger quartzTrigger = getQuartzTrigger(trigger);
 
 			if (quartzTrigger == null) {
 				return;
 			}
 
-			description = fixMaxLength(description, DESCRIPTION_MAX_LENGTH);
+			description = fixMaxLength(
+				description, DESCRIPTION_MAX_LENGTH);
 
 			if (message == null){
 				message = new Message();
@@ -303,8 +400,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				message.put(PERMANENT, true);
 			}
 
-			schedule(
-				quartzTrigger, description, destination, message, scheduler);
+			schedule(quartzTrigger, description, destination, message);
 		}
 		catch (RuntimeException re) {
 
@@ -323,11 +419,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			if (!_permanentScheduler.isShutdown()) {
-				_permanentScheduler.shutdown(false);
-			}
-			if (!_memoryScheduler.isShutdown()) {
-				_memoryScheduler.shutdown(false);
+			if (!_scheduler.isShutdown()) {
+				_scheduler.shutdown(false);
 			}
 		}
 		catch (Exception e) {
@@ -341,11 +434,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			_permanentScheduler.start();
+			_scheduler.start();
 
 			cleanTemporaryJobs();
-
-			_memoryScheduler.start();
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to start scheduler", e);
@@ -360,9 +451,14 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			suppressError(jobName, groupName, scheduler);
+			JobState jobState = getJobState(jobName, groupName);
+
+			if (jobState != null) {
+				jobState.clearExceptions();
+			}
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to suppress error for job", e);
@@ -384,9 +480,13 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			unschedule(groupName, scheduler);
+			String[] jobNames = _scheduler.getJobNames(groupName);
+
+			for (String jobName : jobNames) {
+				unschedule(jobName, groupName);
+			}
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to unschedule jobs", e);
@@ -401,9 +501,47 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 
 		try {
-			Scheduler scheduler = selectScheduler(groupName);
+			jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
+			groupName = fixMaxLength(groupName, GROUP_NAME_MAX_LENGTH);
 
-			unschedule(jobName, groupName, scheduler);
+			JobDetail jobDetail = _scheduler.getJobDetail(jobName, groupName);
+
+			if (jobDetail == null) {
+				return;
+			}
+
+			JobState jobState = getJobState(jobName, groupName);
+
+			Trigger trigger = _scheduler.getTrigger(jobName, groupName);
+
+			Date previousFireTime = trigger.getPreviousFireTime();
+
+			jobState.setTriggerTimeInfomation(END_TIME, new Date());
+			jobState.setTriggerTimeInfomation(
+				FINAL_FIRE_TIME, previousFireTime);
+			jobState.setTriggerTimeInfomation(NEXT_FIRE_TIME, null);
+			jobState.setTriggerTimeInfomation(
+				PREVIOUS_FIRE_TIME, previousFireTime);
+			jobState.setTriggerTimeInfomation(
+				START_TIME, trigger.getStartTime());
+
+			jobState.setTriggerState(TriggerState.UNSCHEDULED);
+
+			JobDataMap jobDataMap = jobDetail.getJobDataMap();
+
+			Message message = getMessage(jobDataMap);
+
+			if (message.getBoolean(PERMANENT)) {
+				JobState jobStateClone = (JobState)jobState.clone();
+
+				jobStateClone.clearExceptions();
+
+				jobDataMap.put(JOB_STATE, jobStateClone);
+			}
+
+			_scheduler.unscheduleJob(jobName, groupName);
+
+			_scheduler.addJob(jobDetail, true);
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
@@ -420,30 +558,53 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return;
 		}
 
+		Trigger quartzTrigger = getQuartzTrigger(trigger);
+
+		if (quartzTrigger == null) {
+			return;
+		}
+
+		String jobName = quartzTrigger.getJobName();
+		String groupName = quartzTrigger.getGroup();
+
 		try {
-			Scheduler scheduler = selectScheduler(trigger.getGroupName());
+			if (_scheduler.getTrigger(jobName, groupName) != null) {
+				_scheduler.rescheduleJob(jobName, groupName, quartzTrigger);
+			}
+			else {
+				JobDetail jobDetail = _scheduler.getJobDetail(
+					jobName, groupName);
 
-			trigger = TriggerFactoryUtil.buildTrigger(
-				trigger.getTriggerType(), trigger.getJobName(),
-				getRealGroupName(trigger.getGroupName()),
-				trigger.getStartDate(), trigger.getEndDate(),
-				trigger.getTriggerContent());
+				if (jobDetail == null) {
+					return;
+				}
 
-			update(trigger, scheduler);
+				JobState jobState = getJobState(jobName, groupName);
+
+				jobState.setTriggerState(TriggerState.NORMAL);
+
+				synchronized (this) {
+					_scheduler.deleteJob(jobName, groupName);
+					_scheduler.scheduleJob(jobDetail, quartzTrigger);
+				}
+			}
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to update trigger", e);
+			throw new SchedulerException(
+				"Unable to update trigger for job {jobName=" + jobName +
+					", groupName=" + groupName + "}",
+				e);
 		}
 	}
 
 	protected void cleanTemporaryJobs() throws Exception {
-		String[] groupNames = _permanentScheduler.getJobGroupNames();
+		String[] groupNames = _scheduler.getJobGroupNames();
 
 		for (String groupName : groupNames) {
-			String[] jobNames = _permanentScheduler.getJobNames(groupName);
+			String[] jobNames = _scheduler.getJobNames(groupName);
 
 			for (String jobName : jobNames) {
-				JobDetail jobDetail = _permanentScheduler.getJobDetail(
+				JobDetail jobDetail = _scheduler.getJobDetail(
 					jobName, groupName);
 
 				if (jobDetail == null) {
@@ -455,37 +616,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				Message message = getMessage(jobDataMap);
 
 				if (!message.getBoolean(PERMANENT)) {
-					_permanentScheduler.deleteJob(jobName, groupName);
+					_scheduler.deleteJob(jobName, groupName);
 				}
 			}
 		}
-	}
-
-	protected void delete(String groupName, Scheduler scheduler)
-		throws Exception {
-
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		String[] jobNames = scheduler.getJobNames(groupName);
-
-		for (String jobName : jobNames) {
-			delete(jobName, groupName, scheduler);
-		}
-	}
-
-	protected void delete(String jobName, String groupName, Scheduler scheduler)
-		throws Exception {
-
-		jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		SchedulerContext schedulerContext = scheduler.getContext();
-
-		schedulerContext.remove(getFullName(jobName, groupName));
-
-		scheduler.deleteJob(jobName, groupName);
 	}
 
 	protected String fixMaxLength(String argument, int maxLength) {
@@ -504,13 +638,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		return groupName.concat(StringPool.PERIOD).concat(jobName);
 	}
 
-	protected JobState getJobState(
-			String jobName, String groupName, Scheduler scheduler)
+	protected JobState getJobState(String jobName, String groupName)
 		throws Exception {
 
-		groupName = getRealGroupName(groupName);
-
-		SchedulerContext schedulerContext = scheduler.getContext();
+		SchedulerContext schedulerContext = _scheduler.getContext();
 
 		JobState jobState = (JobState)schedulerContext.get(
 			getFullName(jobName, groupName));
@@ -601,128 +732,11 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		return quartzTrigger;
 	}
 
-	protected String getRealGroupName(String groupName) {
-		if (groupName.startsWith(JobType.PERMAENT.toString())) {
-			return groupName.substring(JobType.PERMAENT.toString().length() + 1);
-		}
-		else if (groupName.startsWith(
-			JobType.MEMORY_NON_SINGLETON.toString())) {
-
-			return groupName.substring(
-				JobType.MEMORY_NON_SINGLETON.toString().length() + 1);
-		}
-		else if (groupName.startsWith(JobType.MEMORY_SINGLETON.toString())) {
-			return groupName.substring(
-				JobType.MEMORY_SINGLETON.toString().length() + 1);
-		}
-
-		return groupName;
-	}
-
-	protected SchedulerResponse getScheduledJob(
-			String jobName, String groupName, Scheduler scheduler)
-		throws Exception {
-
-		jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		JobDetail jobDetail = scheduler.getJobDetail(
-			jobName, groupName);
-
-		if (jobDetail == null) {
-			return null;
-		}
-
-		JobDataMap jobDataMap = jobDetail.getJobDataMap();
-
-		String description = jobDataMap.getString(DESCRIPTION);
-		String destinationName = jobDataMap.getString(DESTINATION_NAME);
-		Message message = getMessage(jobDataMap);
-
-		SchedulerResponse schedulerResponse = null;
-
-		Trigger trigger = scheduler.getTrigger(jobName, groupName);
-
-		handleJobState(jobName, groupName, message, trigger, scheduler);
-
-		if (trigger == null) {
-			schedulerResponse = new SchedulerResponse();
-
-			schedulerResponse.setDescription(description);
-			schedulerResponse.setDestinationName(destinationName);
-			schedulerResponse.setGroupName(groupName);
-			schedulerResponse.setJobName(jobName);
-			schedulerResponse.setMessage(message);
-		}
-		else {
-			if (CronTrigger.class.isAssignableFrom(trigger.getClass())) {
-
-				CronTrigger cronTrigger = CronTrigger.class.cast(trigger);
-
-				schedulerResponse = new SchedulerResponse();
-
-				schedulerResponse.setDescription(description);
-				schedulerResponse.setDestinationName(destinationName);
-				schedulerResponse.setMessage(message);
-				schedulerResponse.setTrigger(
-					new com.liferay.portal.kernel.scheduler.CronTrigger(
-						jobName, groupName, cronTrigger.getStartTime(),
-						cronTrigger.getEndTime(),
-						cronTrigger.getCronExpression()));
-			}
-			else if (SimpleTrigger.class.isAssignableFrom(
-						trigger.getClass())) {
-
-				SimpleTrigger simpleTrigger = SimpleTrigger.class.cast(
-					trigger);
-
-				schedulerResponse = new SchedulerResponse();
-
-				schedulerResponse.setDescription(description);
-				schedulerResponse.setDestinationName(destinationName);
-				schedulerResponse.setMessage(message);
-				schedulerResponse.setTrigger(
-					new IntervalTrigger(
-						jobName, groupName, simpleTrigger.getStartTime(),
-						simpleTrigger.getEndTime(),
-						simpleTrigger.getRepeatInterval()));
-			}
-		}
-
-		return schedulerResponse;
-	}
-
-	protected List<SchedulerResponse> getScheduledJobs(
-			String groupName, Scheduler scheudler)
-		throws Exception {
-
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		List<SchedulerResponse> schedulerResponses =
-			new ArrayList<SchedulerResponse>();
-
-		String[] jobNames = scheudler.getJobNames(groupName);
-
-		for (String jobName : jobNames) {
-			SchedulerResponse schedulerResponse = getScheduledJob(
-				jobName, groupName);
-
-			if (schedulerResponse != null) {
-				schedulerResponses.add(schedulerResponse);
-			}
-		}
-
-		return schedulerResponses;
-	}
-
 	protected void handleJobState(
-			String jobName, String groupName, Message message, Trigger trigger,
-			Scheduler scheduler)
+			String jobName, String groupName, Message message, Trigger trigger)
 		throws Exception {
 
-		JobState jobState = getJobState(jobName, groupName, scheduler);
+		JobState jobState = getJobState(jobName, groupName);
 
 		if (trigger != null) {
 			message.put(END_TIME, trigger.getEndTime());
@@ -743,10 +757,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	}
 
 	protected void initJobState() throws Exception {
-		String[] groupNames = _permanentScheduler.getJobGroupNames();
+		String[] groupNames = _scheduler.getJobGroupNames();
 
 		for (String groupName : groupNames) {
-			String[] jobNames = _permanentScheduler.getJobNames(groupName);
+			String[] jobNames = _scheduler.getJobNames(groupName);
 
 			for (String jobName : jobNames) {
 				initJobState(jobName, groupName);
@@ -757,8 +771,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	protected void initJobState(String jobName, String groupName)
 		throws Exception {
 
-		JobDetail jobDetail = _permanentScheduler.getJobDetail(
-			jobName, groupName);
+		JobDetail jobDetail = _scheduler.getJobDetail(jobName, groupName);
 
 		JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
@@ -768,7 +781,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return;
 		}
 
-		Trigger trigger = _permanentScheduler.getTrigger(jobName, groupName);
+		Trigger trigger = _scheduler.getTrigger(jobName, groupName);
 
 		JobState jobState = null;
 
@@ -790,7 +803,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 			jobDataMap.put(JOB_STATE, jobState);
 
-			_permanentScheduler.addJob(jobDetail, true);
+			_scheduler.addJob(jobDetail, true);
 		}
 		else {
 			jobState = (JobState)jobDataMap.get(JOB_STATE);
@@ -802,7 +815,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			}
 		}
 
-		SchedulerContext schedulerContext = _permanentScheduler.getContext();
+		SchedulerContext schedulerContext = _scheduler.getContext();
 
 		schedulerContext.put(jobDetail.getFullName(), jobState);
 	}
@@ -821,79 +834,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 	}
 
-	protected void pause(String groupName, Scheduler scheduler)
-		throws Exception {
-
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		String[] jobNames = scheduler.getJobNames(groupName);
-
-		for (String jobName : jobNames) {
-			JobState jobState = getJobState(jobName, groupName, scheduler);
-
-			if (jobState != null) {
-				jobState.setTriggerState(TriggerState.PAUSED);
-			}
-		}
-
-		scheduler.pauseJobGroup(groupName);
-	}
-
-	protected void pause(String jobName, String groupName, Scheduler scheduler)
-		throws Exception {
-
-		jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		JobState jobState = getJobState(jobName, groupName, scheduler);
-
-		if (jobState != null) {
-			jobState.setTriggerState(TriggerState.PAUSED);
-		}
-
-		scheduler.pauseJob(jobName, groupName);
-	}
-
-	protected void resume(String groupName, Scheduler scheduler)
-		throws Exception {
-
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		String[] jobNames = _permanentScheduler.getJobNames(groupName);
-
-		for (String jobName : jobNames) {
-			JobState jobState = getJobState(jobName, groupName, scheduler);
-
-			if (jobState != null) {
-				jobState.setTriggerState(TriggerState.NORMAL);
-			}
-		}
-
-		scheduler.resumeJobGroup(groupName);
-	}
-
-	protected void resume(String jobName, String groupName, Scheduler scheduler)
-		throws Exception {
-
-		jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		JobState jobState = getJobState(jobName, groupName, scheduler);
-
-		if (jobState != null) {
-			jobState.setTriggerState(TriggerState.NORMAL);
-		}
-
-		scheduler.resumeJob(jobName, groupName);
-	}
-
 	protected void schedule(
 			Trigger trigger, String description, String destinationName,
-			Message message, Scheduler scheduler)
+			Message message)
 		throws Exception {
 
 		try {
@@ -902,6 +845,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 			JobDetail jobDetail = new JobDetail(
 				jobName, groupName, MessageSenderJob.class);
+
+			jobDetail.setDurability(true);
 
 			JobDataMap jobDataMap = jobDetail.getJobDataMap();
 
@@ -912,152 +857,18 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			JobState jobState = new JobState(
 				TriggerState.NORMAL, message.getInteger(EXCEPTIONS_MAX_SIZE));
 
-			SchedulerContext schedulerContext = scheduler.getContext();
+			SchedulerContext schedulerContext = _scheduler.getContext();
 
 			schedulerContext.put(jobDetail.getFullName(), jobState);
 
-			if (scheduler == _memoryScheduler) {
-				scheduler.scheduleJob(jobDetail, trigger);
-			}
-			else {
-				jobDetail.setDurability(true);
-
-				synchronized (this) {
-					scheduler.deleteJob(jobName, groupName);
-					scheduler.scheduleJob(jobDetail, trigger);
-				}
+			synchronized (this) {
+				_scheduler.deleteJob(jobName, groupName);
+				_scheduler.scheduleJob(jobDetail, trigger);
 			}
 		}
 		catch (ObjectAlreadyExistsException oare) {
 			if (_log.isInfoEnabled()) {
 				_log.info("Message is already scheduled");
-			}
-		}
-	}
-
-	protected Scheduler selectScheduler(String groupName) throws Exception {
-		if (groupName.startsWith(JobType.PERMAENT.toString())) {
-			return _permanentScheduler;
-		}
-		else {
-			return _memoryScheduler;
-		}
-	}
-
-	protected void suppressError(
-			String jobName, String groupName, Scheduler scheduler)
-		throws Exception {
-
-		jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		JobState jobState = getJobState(jobName, groupName, scheduler);
-
-		if (jobState != null) {
-			jobState.clearExceptions();
-		}
-	}
-
-	protected void unschedule(String groupName, Scheduler scheduler)
-		throws Exception {
-
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		String[] jobNames = scheduler.getJobNames(groupName);
-
-		for (String jobName : jobNames) {
-			unschedule(jobName, groupName, scheduler);
-		}
-	}
-
-	protected void unschedule(
-			String jobName, String groupName, Scheduler scheduler)
-		throws Exception {
-
-		jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
-		groupName = fixMaxLength(
-			getRealGroupName(groupName), GROUP_NAME_MAX_LENGTH);
-
-		JobDetail jobDetail = scheduler.getJobDetail(jobName, groupName);
-
-		if (jobDetail == null) {
-			return;
-		}
-
-		if (scheduler == _memoryScheduler) {
-			scheduler.unscheduleJob(jobName, groupName);
-
-			return;
-		}
-
-		JobState jobState = getJobState(jobName, groupName, scheduler);
-
-		Trigger trigger = scheduler.getTrigger(jobName, groupName);
-
-		Date previousFireTime = trigger.getPreviousFireTime();
-
-		jobState.setTriggerTimeInfomation(END_TIME, new Date());
-		jobState.setTriggerTimeInfomation(
-			FINAL_FIRE_TIME, previousFireTime);
-		jobState.setTriggerTimeInfomation(NEXT_FIRE_TIME, null);
-		jobState.setTriggerTimeInfomation(
-			PREVIOUS_FIRE_TIME, previousFireTime);
-		jobState.setTriggerTimeInfomation(
-			START_TIME, trigger.getStartTime());
-
-		jobState.setTriggerState(TriggerState.UNSCHEDULED);
-
-		JobDataMap jobDataMap = jobDetail.getJobDataMap();
-
-		Message message = getMessage(jobDataMap);
-
-		if (message.getBoolean(PERMANENT)) {
-			JobState jobStateClone = (JobState)jobState.clone();
-
-			jobStateClone.clearExceptions();
-
-			jobDataMap.put(JOB_STATE, jobStateClone);
-		}
-
-		scheduler.unscheduleJob(jobName, groupName);
-
-		scheduler.addJob(jobDetail, true);
-	}
-
-	protected void update(
-			com.liferay.portal.kernel.scheduler.Trigger trigger,
-			Scheduler scheduler)
-		throws Exception {
-
-		Trigger quartzTrigger = getQuartzTrigger(trigger);
-
-		if (quartzTrigger == null) {
-			return;
-		}
-
-		String jobName = quartzTrigger.getJobName();
-		String groupName = quartzTrigger.getGroup();
-
-		if (scheduler.getTrigger(jobName, groupName) != null) {
-			scheduler.rescheduleJob(jobName, groupName, quartzTrigger);
-		}
-		else {
-			JobDetail jobDetail = scheduler.getJobDetail(
-				jobName, groupName);
-
-			if (jobDetail == null) {
-				return;
-			}
-
-			JobState jobState = getJobState(jobName, groupName, scheduler);
-
-			jobState.setTriggerState(TriggerState.NORMAL);
-
-			synchronized (this) {
-				scheduler.deleteJob(jobName, groupName);
-				scheduler.scheduleJob(jobDetail, quartzTrigger);
 			}
 		}
 	}
@@ -1068,7 +879,6 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	private static Log _log = LogFactoryUtil.getLog(
 		QuartzSchedulerEngine.class);
 
-	private Scheduler _permanentScheduler;
-	private Scheduler _memoryScheduler;
+	private Scheduler _scheduler;
 
 }

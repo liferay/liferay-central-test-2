@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerEventMessageListenerWrapper;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.lang.reflect.Proxy;
 
@@ -44,8 +43,26 @@ public class SchedulerEngineUtil {
 			Trigger trigger, String description, String language, String script)
 		throws SchedulerException {
 
+		_instance._addScriptingJob(trigger, description, language, script);
+	}
+
+	public static void addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			boolean permanent)
+		throws SchedulerException {
+
 		_instance._addScriptingJob(
-			trigger, description, language, script, JobType.PERMAENT, 0);
+			trigger, description, language, script, permanent);
+	}
+
+	public static void addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			boolean permanent, int exceptionsMaxSize)
+		throws SchedulerException {
+
+		_instance._addScriptingJob(
+			trigger, description, language, script, permanent,
+			exceptionsMaxSize);
 	}
 
 	public static void addScriptingJob(
@@ -54,60 +71,23 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_instance._addScriptingJob(
-			trigger, description, language, script, JobType.PERMAENT,
-			exceptionsMaxSize);
-	}
-
-	public static void addScriptingJob(
-			Trigger trigger, String description, String language, String script,
-			JobType jobType)
-		throws SchedulerException {
-
-		_instance._addScriptingJob(
-			trigger, description, language, script, jobType, 0);
-	}
-
-	public static void addScriptingJob(
-			Trigger trigger, String description, String language, String script,
-			JobType jobType, int exceptionsMaxSize)
-		throws SchedulerException {
-
-		_instance._addScriptingJob(
-			trigger, description, language, script, jobType, exceptionsMaxSize);
+			trigger, description, language, script, exceptionsMaxSize);
 	}
 
 	public static void delete(SchedulerEntry schedulerEntry)
 		throws SchedulerException {
 
-		_instance._delete(schedulerEntry, JobType.PERMAENT);
-	}
-
-	public static void delete(SchedulerEntry schedulerEntry, JobType jobType)
-		throws SchedulerException {
-
-		_instance._delete(schedulerEntry, jobType);
+		_instance._delete(schedulerEntry);
 	}
 
 	public static void delete(String groupName) throws SchedulerException {
-		_instance._delete(groupName, JobType.PERMAENT);
-	}
-
-	public static void delete(String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_instance._delete(groupName, jobType);
+		_instance._delete(groupName);
 	}
 
 	public static void delete(String jobName, String groupName)
 		throws SchedulerException {
 
-		_instance._delete(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static void delete(String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_instance._delete(jobName, groupName, jobType);
+		_instance._delete(jobName, groupName);
 	}
 
 	public static Date getEndTime(SchedulerResponse schedulerResponse) {
@@ -117,14 +97,7 @@ public class SchedulerEngineUtil {
 	public static Date getEndTime(String jobName, String groupName)
 		throws SchedulerException {
 
-		return _instance._getEndTime(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static Date getEndTime(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		return _instance._getEndTime(jobName, groupName, jobType);
+		return _instance._getEndTime(jobName, groupName);
 	}
 
 	public static Date getFinalFireTime(SchedulerResponse schedulerResponse) {
@@ -134,15 +107,7 @@ public class SchedulerEngineUtil {
 	public static Date getFinalFireTime(String jobName, String groupName)
 		throws SchedulerException {
 
-		return _instance._getFinalFireTime(
-			jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static Date getFinalFireTime(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		return _instance._getFinalFireTime(jobName, groupName, jobType);
+		return _instance._getFinalFireTime(jobName, groupName);
 	}
 
 	public static ObjectValuePair<Exception, Date>[] getJobExceptions(
@@ -155,15 +120,7 @@ public class SchedulerEngineUtil {
 			String jobName, String groupName)
 		throws SchedulerException {
 
-		return _instance._getJobExceptions(
-			jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static ObjectValuePair<Exception, Date>[] getJobExceptions(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		return _instance._getJobExceptions(jobName, groupName, jobType);
+		return _instance._getJobExceptions(jobName, groupName);
 	}
 
 	public static TriggerState getJobState(
@@ -175,14 +132,7 @@ public class SchedulerEngineUtil {
 	public static TriggerState getJobState(String jobName, String groupName)
 		throws SchedulerException {
 
-		return _instance._getJobState(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static TriggerState getJobState(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		return _instance._getJobState(jobName, groupName, jobType);
+		return _instance._getJobState(jobName, groupName);
 	}
 
 	public static Date getNextFireTime(SchedulerResponse schedulerResponse) {
@@ -192,14 +142,7 @@ public class SchedulerEngineUtil {
 	public static Date getNextFireTime(String jobName, String groupName)
 		throws SchedulerException {
 
-		return _instance._getNextFireTime(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static Date getNextFireTime(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		return _instance._getNextFireTime(jobName, groupName, jobType);
+		return _instance._getNextFireTime(jobName, groupName);
 	}
 
 	public static Date getPreviousFireTime(
@@ -211,29 +154,14 @@ public class SchedulerEngineUtil {
 	public static Date getPreviousFireTime(String jobName, String groupName)
 		throws SchedulerException {
 
-		return _instance._getPreviousFireTime(
-			jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static Date getPreviousFireTime(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		return _instance._getPreviousFireTime(jobName, groupName, jobType);
+		return _instance._getPreviousFireTime(jobName, groupName);
 	}
 
 	public static SchedulerResponse getScheduledJob(
 			String jobName, String groupName)
 		throws SchedulerException {
 
-		return _instance._getScheduledJob(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static SchedulerResponse getScheduledJob(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		return _instance._getScheduledJob(jobName, groupName, jobType);
+		return _instance._getScheduledJob(jobName, groupName);
 	}
 
 	public static List<SchedulerResponse> getScheduledJobs()
@@ -245,14 +173,7 @@ public class SchedulerEngineUtil {
 	public static List<SchedulerResponse> getScheduledJobs(String groupName)
 		throws SchedulerException {
 
-		return _instance._getScheduledJobs(groupName, JobType.PERMAENT);
-	}
-
-	public static List<SchedulerResponse> getScheduledJobs(
-			String groupName, JobType jobType)
-		throws SchedulerException {
-
-		return _instance._getScheduledJobs(groupName, jobType);
+		return _instance._getScheduledJobs(groupName);
 	}
 
 	public static Date getStartTime(SchedulerResponse schedulerResponse) {
@@ -262,66 +183,34 @@ public class SchedulerEngineUtil {
 	public static Date getStartTime(String jobName, String groupName)
 		throws SchedulerException {
 
-		return _instance._getStartTime(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static Date getStartTime(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		return _instance._getStartTime(jobName, groupName, jobType);
+		return _instance._getStartTime(jobName, groupName);
 	}
 
 	public static void pause(String groupName) throws SchedulerException {
-		_instance._pause(groupName, JobType.PERMAENT);
-	}
-
-	public static void pause(String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_instance._pause(groupName, jobType);
+		_instance._pause(groupName);
 	}
 
 	public static void pause(String jobName, String groupName)
 		throws SchedulerException {
 
-		_instance._pause(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static void pause(String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_instance._pause(jobName, groupName, jobType);
+		_instance._pause(jobName, groupName);
 	}
 
 	public static void resume(String groupName) throws SchedulerException {
-		_instance._resume(groupName, JobType.PERMAENT);
-	}
-
-	public static void resume(String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_instance._resume(groupName, jobType);
+		_instance._resume(groupName);
 	}
 
 	public static void resume(String jobName, String groupName)
 		throws SchedulerException {
 
-		_instance._resume(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static void resume(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_instance._resume(jobName, groupName, jobType);
+		_instance._resume(jobName, groupName);
 	}
 
 	public static void schedule(
 			SchedulerEntry schedulerEntry, ClassLoader classLoader)
 		throws SchedulerException {
 
-		_instance._schedule(schedulerEntry, classLoader, JobType.PERMAENT, 0);
+		_instance._schedule(schedulerEntry, classLoader);
 	}
 
 	public static void schedule(
@@ -329,25 +218,7 @@ public class SchedulerEngineUtil {
 			int exceptionsMaxSize)
 		throws SchedulerException {
 
-		_instance._schedule(
-			schedulerEntry, classLoader, JobType.PERMAENT, exceptionsMaxSize);
-	}
-
-	public static void schedule(
-			SchedulerEntry schedulerEntry, ClassLoader classLoader,
-			JobType jobType)
-		throws SchedulerException {
-
-		_instance._schedule(schedulerEntry, classLoader, jobType, 0);
-	}
-
-	public static void schedule(
-			SchedulerEntry schedulerEntry, ClassLoader classLoader,
-			JobType jobType, int exceptionsMaxSize)
-		throws SchedulerException {
-
-		_instance._schedule(
-			schedulerEntry, classLoader, jobType, exceptionsMaxSize);
+		_instance._schedule(schedulerEntry, classLoader, exceptionsMaxSize);
 	}
 
 	public static void schedule(
@@ -355,9 +226,7 @@ public class SchedulerEngineUtil {
 			Message message)
 		throws SchedulerException {
 
-		_instance._schedule(
-			trigger, description, destinationName, message, JobType.PERMAENT,
-			0);
+		_instance._schedule(trigger, description, destinationName, message);
 	}
 
 	public static void schedule(
@@ -366,27 +235,7 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_instance._schedule(
-			trigger, description, destinationName, message, JobType.PERMAENT,
-			exceptionsMaxSize);
-	}
-
-	public static void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message, JobType jobType)
-		throws SchedulerException {
-
-		_instance._schedule(
-			trigger, description, destinationName, message, jobType, 0);
-	}
-
-	public static void schedule(
-			Trigger trigger, String description, String destinationName,
-			Message message, JobType jobType, int exceptionsMaxSize)
-		throws SchedulerException {
-
-		_instance._schedule(
-			trigger, description, destinationName, message, jobType,
-			exceptionsMaxSize);
+			trigger, description, destinationName, message, exceptionsMaxSize);
 	}
 
 	public static void schedule(
@@ -394,9 +243,7 @@ public class SchedulerEngineUtil {
 			Object payload)
 		throws SchedulerException {
 
-		_instance._schedule(
-			trigger, description, destinationName, payload, JobType.PERMAENT,
-			0);
+		_instance._schedule(trigger, description, destinationName, payload);
 	}
 
 	public static void schedule(
@@ -405,27 +252,7 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_instance._schedule(
-			trigger, description, destinationName, payload, JobType.PERMAENT,
-			exceptionsMaxSize);
-	}
-
-	public static void schedule(
-			Trigger trigger, String description, String destinationName,
-			Object payload, JobType jobType)
-		throws SchedulerException {
-
-		_instance._schedule(
-			trigger, description, destinationName, payload, jobType, 0);
-	}
-
-	public static void schedule(
-			Trigger trigger, String description, String destinationName,
-			Object payload, JobType jobType, int exceptionsMaxSize)
-		throws SchedulerException {
-
-		_instance._schedule(
-			trigger, description, destinationName, payload, jobType,
-			exceptionsMaxSize);
+			trigger, description, destinationName, payload, exceptionsMaxSize);
 	}
 
 	public static void shutdown() throws SchedulerException {
@@ -439,50 +266,24 @@ public class SchedulerEngineUtil {
 	public static void suppressError(String jobName, String groupName)
 		throws SchedulerException {
 
-		_instance._suppressError(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static void suppressError(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_instance._suppressError(jobName, groupName, jobType);
+		_instance._suppressError(jobName, groupName);
 	}
 
 	public static void unschedule(SchedulerEntry schedulerEntry)
 		throws SchedulerException {
 
-		_instance._unschedule(schedulerEntry, JobType.PERMAENT);
-	}
-
-	public static void unschedule(
-			SchedulerEntry schedulerEntry, JobType jobType)
-		throws SchedulerException {
-
-		_instance._unschedule(schedulerEntry, jobType);
+		_instance._unschedule(schedulerEntry);
 	}
 
 	public static void unschedule(String groupName) throws SchedulerException {
-		_instance._unschedule(groupName, JobType.PERMAENT);
-	}
 
-	public static void unschedule(String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_instance._unschedule(groupName, jobType);
+		_instance._unschedule(groupName);
 	}
 
 	public static void unschedule(String jobName, String groupName)
 		throws SchedulerException {
 
-		_instance._unschedule(jobName, groupName, JobType.PERMAENT);
-	}
-
-	public static void unschedule(
-			String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_instance._unschedule(jobName, groupName, jobType);
+		_instance._unschedule(jobName, groupName);
 	}
 
 	/**
@@ -497,9 +298,7 @@ public class SchedulerEngineUtil {
 			String language, String script)
 		throws SchedulerException {
 
-		_instance._update(
-			jobName, groupName, description, language, script, JobType.PERMAENT,
-			0);
+		_instance._update(jobName, groupName, description, language, script);
 	}
 
 	public static void update(
@@ -508,38 +307,12 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_instance._update(
-			jobName, groupName, description, language, script, JobType.PERMAENT,
-			exceptionsMaxSize);
-	}
-
-	public static void update(
-			String jobName, String groupName, String description,
-			String language, String script, JobType jobType)
-		throws SchedulerException {
-
-		_instance._update(
-			jobName, groupName, description, language, script, jobType, 0);
-	}
-
-	public static void update(
-			String jobName, String groupName, String description,
-			String language, String script, JobType jobType,
-			int exceptionsMaxSize)
-		throws SchedulerException {
-
-		_instance._update(
-			jobName, groupName, description, language, script, jobType,
+			jobName, groupName, description, language, script,
 			exceptionsMaxSize);
 	}
 
 	public static void update(Trigger trigger) throws SchedulerException {
-		_instance._update(trigger, JobType.PERMAENT);
-	}
-
-	public static void update(Trigger trigger, JobType jobType)
-		throws SchedulerException {
-
-		_instance._update(trigger, jobType);
+		_instance._update(trigger);
 	}
 
 	public static void updateMemorySchedulerClusterMaster()
@@ -559,8 +332,39 @@ public class SchedulerEngineUtil {
 	}
 
 	private void _addScriptingJob(
+			Trigger trigger, String description, String language, String script)
+		throws SchedulerException {
+
+		_addScriptingJob(trigger, description, language, script, 0);
+	}
+
+	private void _addScriptingJob(
 			Trigger trigger, String description, String language, String script,
-			JobType jobType, int exceptionsMaxSize)
+			boolean permanent)
+		throws SchedulerException {
+
+		_addScriptingJob(trigger, description, language, script, permanent, 0);
+	}
+
+	private void _addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			boolean permanent, int exceptionsMaxSize)
+		throws SchedulerException {
+
+		Message message = new Message();
+
+		message.put(SchedulerEngine.LANGUAGE, language);
+		message.put(SchedulerEngine.PERMANENT, permanent);
+		message.put(SchedulerEngine.SCRIPT, script);
+
+		_schedule(
+			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
+			message, exceptionsMaxSize);
+	}
+
+	private void _addScriptingJob(
+			Trigger trigger, String description, String language, String script,
+			int exceptionsMaxSize)
 		throws SchedulerException {
 
 		Message message = new Message();
@@ -569,37 +373,36 @@ public class SchedulerEngineUtil {
 		message.put(SchedulerEngine.SCRIPT, script);
 
 		_schedule(
-			trigger, description, DestinationNames.SCHEDULER_SCRIPTING, message,
-			jobType, exceptionsMaxSize);
+			trigger, description, DestinationNames.SCHEDULER_SCRIPTING,
+			message, exceptionsMaxSize);
 	}
 
-	private void _delete(SchedulerEntry schedulerEntry, JobType jobType)
+	private void _delete(SchedulerEntry schedulerEntry)
 		throws SchedulerException {
+
+		MessageListener schedulerEventListener =
+			schedulerEntry.getEventListener();
+
+		MessageBusUtil.unregisterMessageListener(
+			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
 
 		Trigger trigger = schedulerEntry.getTrigger();
 
-		_delete(trigger.getJobName(), trigger.getGroupName(), jobType);
+		_schedulerEngine.delete(trigger.getJobName(), trigger.getGroupName());
 	}
 
-	private void _delete(String groupName, JobType jobType)
+	private void _delete(String groupName) throws SchedulerException {
+		_unregisterMessageListener(groupName);
+
+		_schedulerEngine.delete(groupName);
+	}
+
+	private void _delete(String jobName, String groupName)
 		throws SchedulerException {
 
-		_unregisterMessageListener(groupName, jobType);
+		_unregisterMessageListener(jobName, groupName);
 
-		_schedulerEngine.delete(_formatGroupName(groupName, jobType));
-	}
-
-	private void _delete(String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_unregisterMessageListener(jobName, groupName, jobType);
-
-		_schedulerEngine.delete(jobName, _formatGroupName(groupName, jobType));
-	}
-
-	private String _formatGroupName(String groupName, JobType jobType) {
-		return jobType.toString().concat(StringPool.UNDERLINE).concat(
-			groupName);
+		_schedulerEngine.delete(jobName, groupName);
 	}
 
 	private Date _getEndTime(SchedulerResponse schedulerResponse) {
@@ -619,11 +422,11 @@ public class SchedulerEngineUtil {
 		}
 	}
 
-	private Date _getEndTime(String jobName, String groupName, JobType jobType)
+	private Date _getEndTime(String jobName, String groupName)
 		throws SchedulerException {
 
 		SchedulerResponse schedulerResponse = _getScheduledJob(
-			jobName, groupName, jobType);
+			jobName, groupName);
 
 		if (schedulerResponse != null) {
 			return _getEndTime(schedulerResponse);
@@ -650,12 +453,11 @@ public class SchedulerEngineUtil {
 		}
 	}
 
-	private Date _getFinalFireTime(
-			String jobName, String groupName, JobType jobType)
+	private Date _getFinalFireTime(String jobName, String groupName)
 		throws SchedulerException {
 
 		SchedulerResponse schedulerResponse = _getScheduledJob(
-			jobName, groupName, jobType);
+			jobName, groupName);
 
 		if (schedulerResponse != null) {
 			return _getFinalFireTime(schedulerResponse);
@@ -675,11 +477,11 @@ public class SchedulerEngineUtil {
 	}
 
 	private ObjectValuePair<Exception, Date>[] _getJobExceptions(
-			String jobName, String groupName, JobType jobType)
+			String jobName, String groupName)
 		throws SchedulerException {
 
 		SchedulerResponse schedulerResponse = _getScheduledJob(
-			jobName, groupName, jobType);
+			jobName, groupName);
 
 		if (schedulerResponse != null) {
 			return _getJobExceptions(schedulerResponse);
@@ -696,12 +498,11 @@ public class SchedulerEngineUtil {
 		return jobState.getTriggerState();
 	}
 
-	private TriggerState _getJobState(
-			String jobName, String groupName, JobType jobType)
+	private TriggerState _getJobState(String jobName, String groupName)
 		throws SchedulerException {
 
 		SchedulerResponse schedulerResponse = _getScheduledJob(
-			jobName, groupName, jobType);
+			jobName, groupName);
 
 		if (schedulerResponse != null) {
 			return _getJobState(schedulerResponse);
@@ -728,12 +529,11 @@ public class SchedulerEngineUtil {
 		}
 	}
 
-	private Date _getNextFireTime(
-			String jobName, String groupName, JobType jobType)
+	private Date _getNextFireTime(String jobName, String groupName)
 		throws SchedulerException {
 
 		SchedulerResponse schedulerResponse = _getScheduledJob(
-			jobName, groupName, jobType);
+			jobName, groupName);
 
 		if (schedulerResponse != null) {
 			return _getNextFireTime(schedulerResponse);
@@ -760,12 +560,11 @@ public class SchedulerEngineUtil {
 		}
 	}
 
-	private Date _getPreviousFireTime(
-			String jobName, String groupName, JobType jobType)
+	private Date _getPreviousFireTime(String jobName, String groupName)
 		throws SchedulerException {
 
 		SchedulerResponse schedulerResponse = _getScheduledJob(
-			jobName, groupName, jobType);
+			jobName, groupName);
 
 		if (schedulerResponse != null) {
 			return _getPreviousFireTime(schedulerResponse);
@@ -774,12 +573,20 @@ public class SchedulerEngineUtil {
 		return null;
 	}
 
-	private SchedulerResponse _getScheduledJob(
-			String jobName, String groupName, JobType jobType)
+	private SchedulerResponse _getScheduledJob(String jobName, String groupName)
 		throws SchedulerException {
 
-		return _schedulerEngine.getScheduledJob(
-			jobName, _formatGroupName(groupName, jobType));
+		SchedulerResponse schedulerResponse = _schedulerEngine.getScheduledJob(
+			jobName, groupName);
+
+		if ((schedulerResponse.getGroupName() == null) &&
+			(schedulerResponse.getJobName() == null) &&
+			(schedulerResponse.getTrigger() == null)) {
+
+			return null;
+		}
+
+		return schedulerResponse;
 	}
 
 	private List<SchedulerResponse> _getScheduledJobs()
@@ -788,12 +595,10 @@ public class SchedulerEngineUtil {
 		return _schedulerEngine.getScheduledJobs();
 	}
 
-	private List<SchedulerResponse> _getScheduledJobs(
-			String groupName, JobType jobType)
+	private List<SchedulerResponse> _getScheduledJobs(String groupName)
 		throws SchedulerException {
 
-		return _schedulerEngine.getScheduledJobs(
-			_formatGroupName(groupName, jobType));
+		return _schedulerEngine.getScheduledJobs(groupName);
 	}
 
 	private MessageListener _getSchedulerEventListener(
@@ -833,12 +638,11 @@ public class SchedulerEngineUtil {
 		}
 	}
 
-	private Date _getStartTime(
-			String jobName, String groupName, JobType jobType)
+	private Date _getStartTime(String jobName, String groupName)
 		throws SchedulerException {
 
 		SchedulerResponse schedulerResponse = _getScheduledJob(
-			jobName, groupName, jobType);
+			jobName, groupName);
 
 		if (schedulerResponse != null) {
 			return _getStartTime(schedulerResponse);
@@ -847,33 +651,36 @@ public class SchedulerEngineUtil {
 		return null;
 	}
 
-	private void _pause(String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_schedulerEngine.pause(_formatGroupName(groupName, jobType));
+	private void _pause(String groupName) throws SchedulerException {
+		_schedulerEngine.pause(groupName);
 	}
 
-	private void _pause(String jobName, String groupName, JobType jobType)
+	private void _pause(String jobName, String groupName)
 		throws SchedulerException {
 
-		_schedulerEngine.pause(jobName, _formatGroupName(groupName, jobType));
+		_schedulerEngine.pause(jobName, groupName);
 	}
 
-	private void _resume(String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_schedulerEngine.resume(_formatGroupName(groupName, jobType));
+	private void _resume(String groupName) throws SchedulerException {
+		_schedulerEngine.resume(groupName);
 	}
 
-	private void _resume(String jobName, String groupName, JobType jobType)
+	private void _resume(String jobName, String groupName)
 		throws SchedulerException {
 
-		_schedulerEngine.resume(jobName, _formatGroupName(groupName, jobType));
+		_schedulerEngine.resume(jobName, groupName);
+	}
+
+	private void _schedule(
+			SchedulerEntry schedulerEntry, ClassLoader classLoader)
+		throws SchedulerException {
+
+		_schedule(schedulerEntry, classLoader, 0);
 	}
 
 	private void _schedule(
 			SchedulerEntry schedulerEntry, ClassLoader classLoader,
-			JobType jobType, int exceptionsMaxSize)
+			int exceptionsMaxSize)
 		throws SchedulerException {
 
 		SchedulerEventMessageListenerWrapper schedulerEventListenerWrapper =
@@ -899,13 +706,21 @@ public class SchedulerEngineUtil {
 
 		_schedule(
 			schedulerEntry.getTrigger(), schedulerEntry.getDescription(),
-			DestinationNames.SCHEDULER_DISPATCH, message, jobType,
-			exceptionsMaxSize);
+			DestinationNames.SCHEDULER_DISPATCH, message, exceptionsMaxSize);
 	}
 
 	private void _schedule(
 			Trigger trigger, String description, String destinationName,
-			Message message, JobType jobType, int exceptionsMaxSize)
+			Message message)
+		throws SchedulerException {
+
+		_schedulerEngine.schedule(
+			trigger, description, destinationName, message);
+	}
+
+	private void _schedule(
+			Trigger trigger, String description, String destinationName,
+			Message message, int exceptionsMaxSize)
 		throws SchedulerException {
 
 		if (message == null) {
@@ -914,19 +729,21 @@ public class SchedulerEngineUtil {
 
 		message.put(SchedulerEngine.EXCEPTIONS_MAX_SIZE, exceptionsMaxSize);
 
-		trigger = TriggerFactoryUtil.buildTrigger(
-			trigger.getTriggerType(), trigger.getJobName(),
-			_formatGroupName(trigger.getGroupName(), jobType),
-			trigger.getStartDate(), trigger.getEndDate(),
-			trigger.getTriggerContent());
-
 		_schedulerEngine.schedule(
 			trigger, description, destinationName, message);
 	}
 
 	private void _schedule(
 			Trigger trigger, String description, String destinationName,
-			Object payload, JobType jobType, int exceptionsMaxSize)
+			Object payload)
+		throws SchedulerException {
+
+		_schedule(trigger, description, destinationName, payload, 0);
+	}
+
+	private void _schedule(
+			Trigger trigger, String description, String destinationName,
+			Object payload, int exceptionsMaxSize)
 		throws SchedulerException {
 
 		Message message = new Message();
@@ -934,8 +751,7 @@ public class SchedulerEngineUtil {
 		message.setPayload(payload);
 
 		_schedule(
-			trigger, description, destinationName, message, jobType,
-			exceptionsMaxSize);
+			trigger, description, destinationName, message, exceptionsMaxSize);
 	}
 
 	private void _shutdown() throws SchedulerException {
@@ -946,12 +762,10 @@ public class SchedulerEngineUtil {
 		_schedulerEngine.start();
 	}
 
-	private void _suppressError(
-			String jobName, String groupName, JobType jobType)
+	private void _suppressError(String jobName, String groupName)
 		throws SchedulerException {
 
-		_schedulerEngine.suppressError(
-			jobName, _formatGroupName(groupName, jobType));
+		_schedulerEngine.suppressError(jobName, groupName);
 	}
 
 	private void _unregisterMessageListener(
@@ -1004,50 +818,53 @@ public class SchedulerEngineUtil {
 		}
 	}
 
-	private void _unregisterMessageListener(String groupName, JobType jobType)
+	private void _unregisterMessageListener(String groupName)
 		throws SchedulerException {
 
 		List<SchedulerResponse> schedulerResponses = _getScheduledJobs(
-			groupName, jobType);
+			groupName);
 
 		for (SchedulerResponse schedulerResponse : schedulerResponses) {
 			_unregisterMessageListener(schedulerResponse);
 		}
 	}
 
-	private void _unregisterMessageListener(
-			String jobName, String groupName, JobType jobType)
+	private void _unregisterMessageListener(String jobName, String groupName)
 		throws SchedulerException {
 
 		SchedulerResponse schedulerResponse = _getScheduledJob(
-			jobName, groupName, jobType);
+			jobName, groupName);
 
 		_unregisterMessageListener(schedulerResponse);
 	}
 
-	private void _unschedule(SchedulerEntry schedulerEntry, JobType jobType)
+	private void _unschedule(SchedulerEntry schedulerEntry)
 		throws SchedulerException {
+
+		MessageListener schedulerEventListener =
+			schedulerEntry.getEventListener();
+
+		MessageBusUtil.unregisterMessageListener(
+			DestinationNames.SCHEDULER_DISPATCH, schedulerEventListener);
 
 		Trigger trigger = schedulerEntry.getTrigger();
 
-		_unschedule(trigger.getJobName(), trigger.getGroupName(), jobType);
-	}
-
-	private void _unschedule(String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_unregisterMessageListener(groupName, jobType);
-
-		_schedulerEngine.unschedule(_formatGroupName(groupName, jobType));
-	}
-
-	private void _unschedule(String jobName, String groupName, JobType jobType)
-		throws SchedulerException {
-
-		_unregisterMessageListener(jobName, groupName, jobType);
-
 		_schedulerEngine.unschedule(
-			jobName, _formatGroupName(groupName, jobType));
+			trigger.getJobName(), trigger.getGroupName());
+	}
+
+	private void _unschedule(String groupName) throws SchedulerException {
+		_unregisterMessageListener(groupName);
+
+		_schedulerEngine.unschedule(groupName);
+	}
+
+	private void _unschedule(String jobName, String groupName)
+		throws SchedulerException {
+
+		_unregisterMessageListener(jobName, groupName);
+
+		_schedulerEngine.unschedule(jobName, groupName);
 	}
 
 	/**
@@ -1059,12 +876,19 @@ public class SchedulerEngineUtil {
 
 	private void _update(
 			String jobName, String groupName, String description,
-			String language, String script, JobType jobType,
-			int exceptionsMaxSize)
+			String language, String script)
+		throws SchedulerException {
+
+		_update(jobName, groupName, description, language, script, 0);
+	}
+
+	private void _update(
+			String jobName, String groupName, String description,
+			String language, String script, int exceptionsMaxSize)
 		throws SchedulerException {
 
 		SchedulerResponse schedulerResponse = _getScheduledJob(
-			jobName, groupName, jobType);
+			jobName, groupName);
 
 		if (schedulerResponse == null) {
 			return;
@@ -1082,21 +906,16 @@ public class SchedulerEngineUtil {
 			return;
 		}
 
+		boolean permanent = message.getBoolean(SchedulerEngine.PERMANENT);
+
 		_unregisterMessageListener(schedulerResponse);
 
 		_addScriptingJob(
-			trigger, description, language, script, jobType, exceptionsMaxSize);
+			trigger, description, language, script, permanent,
+			exceptionsMaxSize);
 	}
 
-	private void _update(Trigger trigger, JobType jobType)
-		throws SchedulerException {
-
-		trigger = TriggerFactoryUtil.buildTrigger(
-			trigger.getTriggerType(), trigger.getJobName(),
-			_formatGroupName(trigger.getGroupName(), jobType),
-			trigger.getStartDate(), trigger.getEndDate(),
-			trigger.getTriggerContent());
-
+	private void _update(Trigger trigger) throws SchedulerException {
 		_schedulerEngine.update(trigger);
 	}
 
