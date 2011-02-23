@@ -112,7 +112,7 @@ public class NotificationEvent implements Serializable {
 		_timestamp = timestamp;
 	}
 
-	public String toJSONString() {
+	public JSONObject toJSONObject() {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put(_KEY_PAYLOAD, _payloadJSONObject);
@@ -120,7 +120,7 @@ public class NotificationEvent implements Serializable {
 		jsonObject.put(_KEY_TYPE, _type);
 		jsonObject.put(_KEY_UUID, _uuid);
 
-		return jsonObject.toString();
+		return jsonObject;
 	}
 
 	private static final String _KEY_PAYLOAD = "payload";

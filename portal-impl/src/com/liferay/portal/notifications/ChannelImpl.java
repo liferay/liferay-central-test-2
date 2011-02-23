@@ -28,14 +28,15 @@ import com.liferay.portal.kernel.notifications.NotificationEventFactoryUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.UserNotificationEvent;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -194,6 +195,9 @@ public class ChannelImpl extends BaseChannelImpl {
 	public void removeTransientNotificationEventsByUuid(
 		Collection<String> notificationEventUuids) {
 
+		HashSet<String> uuidHashSet =
+			new HashSet<String>(notificationEventUuids);
+
 		Lock writeLock = _readWriteLock.writeLock();
 
 		try {
@@ -204,9 +208,7 @@ public class ChannelImpl extends BaseChannelImpl {
 			while (itr.hasNext()) {
 				NotificationEvent notificationEvent = itr.next();
 
-				if (notificationEventUuids.contains(
-						notificationEvent.getUuid())) {
-
+				if (uuidHashSet.contains(notificationEvent.getUuid())) {
 					itr.remove();
 				}
 			}
@@ -463,12 +465,19 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 		else {
 			_notificationEvents.add(notificationEvent);
+
+			if (_notificationEvents.size() >
+				PropsValues.NOTIFICATION_MAX_CHANNEL_TRANSIENT) {
+
+				_notificationEvents.pollFirst();
+			}
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ChannelImpl.class);
 
-	private Set<NotificationEvent> _notificationEvents =
+	//todo need to make this bounded
+	private TreeSet<NotificationEvent> _notificationEvents =
 		new TreeSet<NotificationEvent>(new NotificationEventComparator());
 	private ReadWriteLock _readWriteLock = new ReentrantReadWriteLock();
 	private Map<String, NotificationEvent> _unconfirmedNotificationEvents =

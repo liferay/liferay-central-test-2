@@ -15,6 +15,8 @@
 package com.liferay.portal.kernel.notifications;
 
 import com.liferay.portal.kernel.concurrent.ConcurrentHashSet;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.List;
 import java.util.Set;
@@ -62,8 +64,25 @@ public abstract class BaseChannelImpl implements Channel {
 		return _userId;
 	}
 
+	public boolean hasNotificationEvents() {
+		try {
+			return getNotificationEvents(false).size() > 0;
+		}
+		catch (ChannelException ce) {
+			if (_log.isErrorEnabled()) {
+				_log.error("Unable to fetch notifications", ce);
+			}
+		}
+
+		return false;
+	}
+
 	public void registerChannelListener(ChannelListener channelListener) {
 		_channelListeners.add(channelListener);
+
+		if (hasNotificationEvents()) {
+			notifyChannelListeners();
+		}
 	}
 
 	public void setCleanUpInterval(long cleanUpInterval) {
@@ -87,10 +106,9 @@ public abstract class BaseChannelImpl implements Channel {
 		for (ChannelListener channelListener : _channelListeners) {
 			channelListener.notificationEventsAvailable(_userId);
 		}
-
-		_channelListeners.clear();
-
 	}
+
+	private static final Log _log = LogFactoryUtil.getLog(BaseChannelImpl.class);
 
 	private Set<ChannelListener> _channelListeners =
 		new ConcurrentHashSet<ChannelListener>();
@@ -98,5 +116,4 @@ public abstract class BaseChannelImpl implements Channel {
 	private long _companyId;
 	private long _nextCleanUpTime;
 	private long _userId;
-
 }
