@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-alerts {
-	.portlet-alerts .entry {
+	.entry {
 		border: 6px solid #c00;
 		margin: 8px 0px;
 		padding: 6px;
