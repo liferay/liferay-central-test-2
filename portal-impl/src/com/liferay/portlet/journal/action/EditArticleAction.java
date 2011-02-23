@@ -436,6 +436,10 @@ public class EditArticleAction extends PortletAction {
 
 		double version = ParamUtil.getDouble(uploadRequest, "version");
 
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+			actionRequest, "title");
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 		String content = ParamUtil.getString(uploadRequest, "content");
 		String type = ParamUtil.getString(uploadRequest, "type");
 		String structureId = ParamUtil.getString(uploadRequest, "structureId");
@@ -446,11 +450,6 @@ public class EditArticleAction extends PortletAction {
 			uploadRequest, "lastLanguageId");
 		String defaultLanguageId = ParamUtil.getString(
 			uploadRequest, "defaultLanguageId");
-
-	    Map<Locale, String> titleMap =
-		    LocalizationUtil.getLocalizationMap(actionRequest, "title");
-		Map<Locale, String> descriptionMap =
-			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 
 		int displayDateMonth = ParamUtil.getInteger(
 			uploadRequest, "displayDateMonth");

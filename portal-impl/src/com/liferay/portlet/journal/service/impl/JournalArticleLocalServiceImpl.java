@@ -2879,13 +2879,13 @@ public class JournalArticleLocalServiceImpl
 			boolean smallImage, String smallImageURL, File smallFile,
 			byte[] smallBytes)
 		throws PortalException, SystemException {
-        		
+
 		Locale defaultLocale = LocaleUtil.fromLanguageId(
 			LocalizationUtil.getDefaultLocale(content));
 
 		if (titleMap.isEmpty() ||
 			Validator.isNull(titleMap.get(defaultLocale))) {
-			
+
 			throw new ArticleTitleException();
 		}
 		else if (Validator.isNull(type)) {
