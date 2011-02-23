@@ -35,12 +35,9 @@ public class ChannelLoginPostAction extends Action {
 			User user = PortalUtil.getUser(request);
 
 			if (!user.isDefaultUser()) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Creating channel " + user.getUserId());
-				}
 
-				ChannelHubManagerUtil.createChannel(
-					user.getCompanyId(), user.getUserId());
+				ChannelHubManagerUtil.getChannel(
+					user.getCompanyId(), user.getUserId(), true);
 			}
 		}
 		catch (Exception e) {

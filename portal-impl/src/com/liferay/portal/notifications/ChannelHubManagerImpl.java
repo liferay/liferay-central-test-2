@@ -25,15 +25,13 @@ import com.liferay.portal.kernel.notifications.UnknownChannelHubException;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author Edward Han
- * @author Brian Wing Shun Chan
+ * @author Brian Wing Shun
+ * @author Shuyang Zhou
  */
 public class ChannelHubManagerImpl implements ChannelHubManager {
 
@@ -54,17 +52,15 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 		return channelHub.createChannel(userId);
 	}
 
-	public synchronized ChannelHub createChannelHub(long companyId)
+	public ChannelHub createChannelHub(long companyId)
 		throws ChannelException {
-
-		if (_channelHubs.containsKey(companyId)) {
-			throw new DuplicateChannelHubException(
-				"Channel already exists with company id " + companyId);
-		}
 
 		ChannelHub channelHub = _channelHub.clone(companyId);
 
-		_channelHubs.put(companyId, channelHub);
+		if (_channelHubs.putIfAbsent(companyId, channelHub) != null) {
+			throw new DuplicateChannelHubException(
+				"Channel already exists with company id " + companyId);
+		}
 
 		return channelHub;
 	}
@@ -86,17 +82,8 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 	}
 
 	public void flush() throws ChannelException {
-		Lock readLock = _readWriteLock.readLock();
-
-		try {
-			readLock.lock();
-
-			for (ChannelHub channelHub : _channelHubs.values()) {
-				channelHub.flush();
-			}
-		}
-		finally {
-			readLock.unlock();
+		for (ChannelHub channelHub : _channelHubs.values()) {
+			channelHub.flush();
 		}
 	}
 
@@ -117,29 +104,42 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 	public Channel getChannel(long companyId, long userId)
 		throws ChannelException {
 
-		ChannelHub channelHub = getChannelHub(companyId);
+		return getChannel(companyId, userId, false);
+	}
 
-		return channelHub.getChannel(userId);
+	public Channel getChannel(
+			long companyId, long userId, boolean createIfAbsent)
+		throws ChannelException {
+
+		ChannelHub channelHub = getChannelHub(companyId, createIfAbsent);
+
+		return channelHub.getChannel(userId, createIfAbsent);
 	}
 
 	public ChannelHub getChannelHub(long companyId) throws ChannelException {
-		Lock readLock = _readWriteLock.readLock();
+		return getChannelHub(companyId, false);
+	}
 
-		try {
-			readLock.lock();
+	public ChannelHub getChannelHub(long companyId, boolean createIfAbsent)
+		throws ChannelException {
+		ChannelHub channelHub = _channelHubs.get(companyId);
 
-			ChannelHub channelHub = _channelHubs.get(companyId);
-
-			if (channelHub == null) {
-				throw new UnknownChannelHubException(
-					"No channel exists with company id " + companyId);
+		if (channelHub == null) {
+			synchronized(_channelHubs) {
+				channelHub = _channelHubs.get(companyId);
+				if (channelHub == null) {
+					if (createIfAbsent) {
+						channelHub = createChannelHub(companyId);
+					}
+					else {
+						throw new UnknownChannelHubException(
+							"No channel exists with company id " + companyId);
+					}
+				}
 			}
+		}
 
-			return channelHub;
-		}
-		finally {
-			readLock.unlock();
-		}
+		return channelHub;
 	}
 
 	public List<NotificationEvent> getNotificationEvents(
@@ -228,8 +228,7 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 	}
 
 	private ChannelHub _channelHub;
-	private Map<Long, ChannelHub> _channelHubs =
+	private final ConcurrentMap<Long, ChannelHub> _channelHubs =
 		new ConcurrentHashMap<Long, ChannelHub>();
-	private ReadWriteLock _readWriteLock = new ReentrantReadWriteLock();
 
 }

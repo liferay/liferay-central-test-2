@@ -74,10 +74,25 @@ public class ChannelHubManagerUtil {
 		return getChannelHubManager().getChannel(companyId, userId);
 	}
 
+	public static Channel getChannel(
+			long companyId, long userId, boolean createIfAbsent)
+		throws ChannelException {
+
+		return getChannelHubManager().getChannel(
+			companyId, userId, createIfAbsent);
+	}
+
 	public static ChannelHub getChannelHub(long companyId)
 		throws ChannelException {
 
 		return getChannelHubManager().getChannelHub(companyId);
+	}
+
+	public static ChannelHub getChannelHub(
+			long companyId, boolean createIfAbsent)
+		throws ChannelException {
+
+		return getChannelHubManager().getChannelHub(companyId, createIfAbsent);
 	}
 
 	public static ChannelHubManager getChannelHubManager() {

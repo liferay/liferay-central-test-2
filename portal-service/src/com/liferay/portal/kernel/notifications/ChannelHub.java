@@ -49,6 +49,9 @@ public interface ChannelHub {
 
 	public Channel getChannel(long userId) throws ChannelException ;
 
+	public Channel getChannel(long userId, boolean createIfAbsent)
+		throws ChannelException;
+
 	public List<NotificationEvent> getNotificationEvents(long userId)
 		throws ChannelException;
 

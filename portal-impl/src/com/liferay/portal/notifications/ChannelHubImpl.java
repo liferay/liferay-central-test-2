@@ -25,31 +25,22 @@ import com.liferay.portal.model.CompanyConstants;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
  * @author Edward Han
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class ChannelHubImpl implements ChannelHub {
 
 	public void cleanUp() throws ChannelException {
-		Lock readLock = _readWriteLock.readLock();
-
-		try {
-			readLock.lock();
-
-			for (Channel channel : _channels.values()) {
-				channel.cleanUp();
-			}
-		}
-		finally {
-			readLock.unlock();
+		for (Channel channel : _channels.values()) {
+			channel.cleanUp();
 		}
 	}
 
@@ -86,77 +77,44 @@ public class ChannelHubImpl implements ChannelHub {
 	}
 
 	public Channel createChannel(long userId) throws ChannelException {
-		Lock writeLock = _readWriteLock.writeLock();
+		Channel channel = _channel.clone(_companyId, userId);
 
-		try {
-			writeLock.lock();
-
-			if (_channels.containsKey(userId)) {
-				throw new DuplicateChannelException(
-					"Channel already exists with user id " + userId);
-			}
-
-			Channel channel = _channel.clone(_companyId, userId);
-
-			_channels.put(userId, channel);
-
-			channel.init();
-
-			return channel;
+		if (_channels.putIfAbsent(userId, channel) != null) {
+			throw new DuplicateChannelException(
+				"Channel already exists with user id " + userId);
 		}
-		finally {
-			writeLock.unlock();
-		}
+
+		channel.init();
+
+		return channel;
 	}
 
 	public void destroy() throws ChannelException {
-		Lock writeLock = _readWriteLock.writeLock();
+		Iterator<Map.Entry<Long, Channel>> iterator =
+			_channels.entrySet().iterator();
 
-		try {
-			writeLock.lock();
+		while (iterator.hasNext()) {
+			Channel channel = iterator.next().getValue();
 
-			for (Channel channel : _channels.values()) {
-				channel.close();
-			}
+			channel.close();
 
-			_channels.clear();
-		}
-		finally {
-			writeLock.unlock();
+			iterator.remove();
 		}
 	}
 
 	public Channel destroyChannel(long userId) throws ChannelException {
-		Lock writeLock = _readWriteLock.writeLock();
+		Channel channel = _channels.remove(userId);
 
-		try {
-			writeLock.lock();
-
-			Channel channel = _channels.remove(userId);
-
-			if (channel != null) {
-				channel.close();
-			}
-
-			return channel;
+		if (channel != null) {
+			channel.close();
 		}
-		finally {
-			writeLock.unlock();
-		}
+
+		return channel;
 	}
 
 	public void flush() throws ChannelException {
-		Lock readLock = _readWriteLock.readLock();
-
-		try {
-			readLock.lock();
-
-			for (Channel channel : _channels.values()) {
-				channel.flush();
-			}
-		}
-		finally {
-			readLock.unlock();
+		for (Channel channel : _channels.values()) {
+			channel.flush();
 		}
 	}
 
@@ -173,23 +131,29 @@ public class ChannelHubImpl implements ChannelHub {
 	}
 
 	public Channel getChannel(long userId) throws ChannelException {
-		Lock readLock = _readWriteLock.readLock();
+		return getChannel(userId, false);
+	}
 
-		try {
-			readLock.lock();
+	public Channel getChannel(long userId, boolean createIfAbsent)
+		throws ChannelException {
+		Channel channel = _channels.get(userId);
 
-			Channel channel = _channels.get(userId);
-
-			if (channel == null) {
-				throw new UnknownChannelException(
-					"No channel exists with user id " + userId);
+		if (channel == null) {
+			synchronized (_channels) {
+				channel = _channels.get(userId);
+				if (channel == null) {
+					if (createIfAbsent) {
+						channel = createChannel(userId);
+					}
+					else {
+						throw new UnknownChannelException(
+							"No channel exists with user id " + userId);
+					}
+				}
 			}
+		}
 
-			return channel;
-		}
-		finally {
-			readLock.unlock();
-		}
+		return channel;
 	}
 
 	public long getCompanyId() {
@@ -280,8 +244,8 @@ public class ChannelHubImpl implements ChannelHub {
 	}
 
 	private Channel _channel;
-	private Map<Long, Channel> _channels = new HashMap<Long, Channel>();
+	private final ConcurrentMap<Long, Channel> _channels =
+		new ConcurrentHashMap<Long, Channel>();
 	private long _companyId = CompanyConstants.SYSTEM;
-	private ReadWriteLock _readWriteLock = new ReentrantReadWriteLock();
 
 }
