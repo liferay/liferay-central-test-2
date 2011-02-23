@@ -214,6 +214,25 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	<xs:element name="task-timer">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="name" />
+				<xs:element ref="description" minOccurs="0" />
+				<xs:element name="default" type="xs:boolean" minOccurs="0" default="false" />
+				<xs:element ref="delay" />
+				<xs:element ref="actions" minOccurs="0" />
+				<xs:element ref="reassignments" minOccurs="0" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="task-timers">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="task-timer" maxOccurs="unbounded" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="transition">
 		<xs:complexType>
 			<xs:sequence>
@@ -236,10 +255,8 @@
 			<xs:sequence>
 				<xs:element ref="name" />
 				<xs:element ref="description" minOccurs="0" />
-				<xs:element name="default" type="xs:boolean" minOccurs="0" default="false" />
 				<xs:element ref="delay" />
 				<xs:element ref="actions" minOccurs="0" />
-				<xs:element ref="reassignments" minOccurs="0" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
