@@ -858,6 +858,8 @@ public class PropsValues {
 
 	public static final String NETVIBES_SERVLET_MAPPING = PropsUtil.get(PropsKeys.NETVIBES_SERVLET_MAPPING);
 
+	public static final int NOTIFICATION_MAX_CHANNEL_TRANSIENT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.NOTIFICATION_MAX_CHANNEL_TRANSIENT));
+
 	public static final boolean NTLM_AUTH_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.NTLM_AUTH_ENABLED));
 
 	public static final String NTLM_DOMAIN = PropsUtil.get(PropsKeys.NTLM_DOMAIN);
@@ -963,6 +965,8 @@ public class PropsValues {
 	public static final String[] PLUGIN_TYPES = PropsUtil.getArray(PropsKeys.PLUGIN_TYPES);
 
 	public static final long POLLER_REQUEST_TIMEOUT = GetterUtil.getLong(PropsUtil.get(PropsKeys.POLLER_REQUEST_TIMEOUT));
+
+	public static final int POLLER_NOTIFICATION_BATCH_WAIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.POLLER_NOTIFICATION_BATCH_WAIT));
 
 	public static final boolean POP_SERVER_NOTIFICATIONS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.POP_SERVER_NOTIFICATIONS_ENABLED));
 
