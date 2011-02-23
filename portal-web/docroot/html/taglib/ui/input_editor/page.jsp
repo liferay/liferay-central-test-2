@@ -33,8 +33,8 @@ else {
 	int pos = editorImpl.indexOf(StringPool.UNDERLINE);
 
 	if (pos != -1) {
-		editorImpl = editorImpl.substring(0, pos);
 		editorVariant = editorImpl.substring(pos + 1);
+		editorImpl = editorImpl.substring(0, pos);
 	}
 }
 
