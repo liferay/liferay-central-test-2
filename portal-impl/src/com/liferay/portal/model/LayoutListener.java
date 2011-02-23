@@ -15,6 +15,7 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.staging.LayoutStagingUtil;
@@ -36,13 +37,16 @@ public class LayoutListener extends BaseModelListener<Layout> {
 	}
 
 	public void onBeforeRemove(Layout layout) throws ModelListenerException {
-		if (!LayoutStagingUtil.isBranchingLayout(layout)) {
-			return;
-		}
-
 		try {
+			if (!LayoutStagingUtil.isBranchingLayout(layout)) {
+				return;
+			}
+
 			LayoutRevisionLocalServiceUtil.deleteLayoutLayoutRevisions(
 				layout.getPlid());
+		}
+		catch (NoSuchGroupException nsge) {
+			// This is to fix tests which create Layouts with no group.
 		}
 		catch (PortalException pe) {
 			throw new ModelListenerException(pe);
