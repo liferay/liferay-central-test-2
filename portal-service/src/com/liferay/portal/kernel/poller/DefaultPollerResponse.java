@@ -31,10 +31,10 @@ import java.util.Map;
 public class DefaultPollerResponse implements PollerResponse {
 
 	public DefaultPollerResponse(
-		String portletId, PollerHeader pollerHeader, String chunkId) {
+		PollerHeader pollerHeader, String portletId, String chunkId) {
 
-		_portletId = portletId;
 		_pollerHeader = pollerHeader;
+		_portletId = portletId;
 		_chunkId = chunkId;
 	}
 
@@ -47,15 +47,14 @@ public class DefaultPollerResponse implements PollerResponse {
 		}
 	}
 
-	public void createResponseMessage(Message requestMessage) {
-		String responseDestinationName =
-			requestMessage.getResponseDestinationName();
+	public void createResponseMessage(Message message) {
+		String responseDestinationName = message.getResponseDestinationName();
 
 		if (Validator.isNull(responseDestinationName)) {
 			return;
 		}
 
-		_responseMessage = MessageBusUtil.createResponseMessage(requestMessage);
+		_responseMessage = MessageBusUtil.createResponseMessage(message);
 
 		_responseMessage.setPayload(this);
 	}

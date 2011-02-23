@@ -63,8 +63,6 @@ public class PollerRequestMessageListener extends BaseMessageListener {
 			}
 		}
 		else {
-			//for send requests pollerResponse is always null
-
 			try {
 				pollerProcessor.send(pollerRequest);
 			}

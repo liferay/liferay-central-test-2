@@ -14,6 +14,8 @@
 
 package com.liferay.portal.poller;
 
+import com.liferay.portal.kernel.poller.PollerRequest;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,31 +23,31 @@ import java.util.Map;
  * @author Edward Han
  */
 public class PollerSession {
-	public PollerSession(String id) {
-		_id = id;
-	}
 
-	public String getId() {
-		return _id;
+	public PollerSession(String pollerSessionId) {
+		_pollerSessionId = pollerSessionId;
 	}
 
 	public synchronized boolean beginPortletProcessing(
 		PollerRequestResponsePair pollerRequestResponsePair,
 		String responseId) {
 
-		String portletId = pollerRequestResponsePair.
-			getPollerRequest().getPortletId();
+		PollerRequest pollerRequest =
+			pollerRequestResponsePair.getPollerRequest();
 
-		//do not process new request if there is a request already pending
-		//this prevents flooding the server in the event of slow receive
-		//requests.
-		if (_pendingPortletIds.containsKey(portletId)) {
+		String portletId = pollerRequest.getPortletId();
+
+		// Do not process a new request if there is a request already pending.
+		// This prevents flooding the server in the event of slow receive
+		// requests.
+
+		if (_pendingResponseIds.containsKey(portletId)) {
 			return false;
 		}
 
-		_pendingPortletIds.put(portletId, responseId);
+		_pendingResponseIds.put(portletId, responseId);
 
-		_requestResponsePairs.put(portletId, pollerRequestResponsePair);
+		_pollerRequestResponsePairs.put(portletId, pollerRequestResponsePair);
 
 		return true;
 	}
@@ -53,18 +55,25 @@ public class PollerSession {
 	public synchronized boolean completePortletProcessing(
 		String responseId, String portletId) {
 
-		if (responseId.equals(_pendingPortletIds.get(portletId))) {
-			_pendingPortletIds.remove(portletId);
+		String pendingResponseId = _pendingResponseIds.get(portletId);
 
-			_requestResponsePairs.remove(portletId);
+		if (responseId.equals(pendingResponseId)) {
+			_pendingResponseIds.remove(portletId);
+
+			_pollerRequestResponsePairs.remove(portletId);
 		}
 
-		return _pendingPortletIds.isEmpty();
+		return _pendingResponseIds.isEmpty();
 	}
 
-	private String _id;
-	private Map<String, String> _pendingPortletIds =
+	public String getPollerSessionId() {
+		return _pollerSessionId;
+	}
+
+	private Map<String, String> _pendingResponseIds =
 		new HashMap<String, String>();
-	private Map<String, PollerRequestResponsePair> _requestResponsePairs =
+	private Map<String, PollerRequestResponsePair> _pollerRequestResponsePairs =
 		new HashMap<String, PollerRequestResponsePair>();
+	private String _pollerSessionId;
+
 }

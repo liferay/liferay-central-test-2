@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.poller.servlet;
+package com.liferay.portal.poller;
 
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -31,11 +31,12 @@ import java.util.List;
 public class SynchronousPollerChannelListener implements ChannelListener {
 
 	public SynchronousPollerChannelListener(
-		long companyId, JSONObject pollerResponseHeader, long userId) {
+		long companyId, long userId,
+		JSONObject pollerResponseHeaderJSONObject) {
 
 		_companyId = companyId;
-		_pollerResponseHeader = pollerResponseHeader;
 		_userId = userId;
+		_pollerResponseHeaderJSONObject = pollerResponseHeaderJSONObject;
 	}
 
 	public synchronized void channelListenerRemoved(long channelId) {
@@ -44,13 +45,7 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 		this.notify();
 	}
 
-	public synchronized void notificationEventsAvailable(long channelId) {
-		_complete = true;
-
-		this.notify();
-	}
-
-	public synchronized String getNotificationBatch(long timeout)
+	public synchronized String getNotificationEvents(long timeout)
 		throws ChannelException {
 
 		try {
@@ -62,7 +57,7 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 		}
 
 		try {
-			Thread.sleep(PropsValues.POLLER_NOTIFICATION_BATCH_WAIT);
+			Thread.sleep(PropsValues.POLLER_NOTIFICATIONS_TIMEOUT);
 		}
 		catch (InterruptedException ie) {
 		}
@@ -73,7 +68,7 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		jsonArray.put(_pollerResponseHeader);
+		jsonArray.put(_pollerResponseHeaderJSONObject);
 
 		for (NotificationEvent notificationEvent : notificationEvents) {
 			jsonArray.put(notificationEvent.toJSONObject());
@@ -82,8 +77,15 @@ public class SynchronousPollerChannelListener implements ChannelListener {
 		return jsonArray.toString();
 	}
 
+	public synchronized void notificationEventsAvailable(long channelId) {
+		_complete = true;
+
+		this.notify();
+	}
+
 	private long _companyId;
 	private boolean _complete;
-	private JSONObject _pollerResponseHeader;
+	private JSONObject _pollerResponseHeaderJSONObject;
 	private long _userId;
+
 }

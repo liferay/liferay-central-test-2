@@ -42,6 +42,14 @@ public class CatalinaCometSession extends BaseCometSession {
 		return session.getAttribute(name);
 	}
 
+	public void setAttribute(String name, Object object) {
+		HttpServletRequest request = _cometEvent.getHttpServletRequest();
+
+		HttpSession session = request.getSession();
+
+		session.setAttribute(name, object);
+	}
+
 	protected void doClose() throws SystemException {
 		try {
 			_cometEvent.close();
@@ -51,14 +59,6 @@ public class CatalinaCometSession extends BaseCometSession {
 		catch (IOException e) {
 			throw new SystemException(e);
 		}
-	}
-
-	public void setAttribute(String name, Object object) {
-		HttpServletRequest request = _cometEvent.getHttpServletRequest();
-
-		HttpSession session = request.getSession();
-
-		session.setAttribute(name, object);
 	}
 
 	private CometEvent _cometEvent;

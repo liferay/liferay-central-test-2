@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.poller.servlet;
+package com.liferay.portal.poller;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.poller.PollerRequestHandlerUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -67,28 +66,26 @@ public class PollerServlet extends HttpServlet {
 	}
 
 	protected String getContent(HttpServletRequest request) throws Exception {
+		long companyId = PortalUtil.getCompanyId(request);
+		long userId = PortalUtil.getUserId(request);
+
 		String pollerRequestString = ParamUtil.getString(
 			request, "pollerRequest");
 
-		long userId = PortalUtil.getUserId(request);
+		JSONObject pollerResponseHeaderJSONObject =
+			PollerRequestHandlerUtil.processRequest(
+				request.getPathInfo(), pollerRequestString);
 
-		long companyId = PortalUtil.getCompanyId(request);
-
-		JSONObject pollerResponseHeader = PollerRequestHandlerUtil.
-			processRequest(request.getPathInfo(), pollerRequestString);
-
-		if (pollerResponseHeader == null) {
+		if (pollerResponseHeaderJSONObject == null) {
 			return StringPool.BLANK;
 		}
 
 		SynchronousPollerChannelListener synchronousPollerChannelListener =
 			new SynchronousPollerChannelListener(
-				companyId, pollerResponseHeader, userId);
+				companyId, userId, pollerResponseHeaderJSONObject);
 
-		String response = synchronousPollerChannelListener.getNotificationBatch(
+		return synchronousPollerChannelListener.getNotificationEvents(
 			PropsValues.POLLER_REQUEST_TIMEOUT);
-
-		return response;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PollerServlet.class);

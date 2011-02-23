@@ -18,6 +18,8 @@ package com.liferay.portal.poller.comet;
  * @author Edward Han
  */
 public interface PollerCometDelayedJob {
+
 	public void addPollerCometDelayedTask(
 		PollerCometDelayedTask pollerCometDelayedTask);
+
 }

@@ -31,59 +31,33 @@ import java.util.TimerTask;
 public class PollerCometDelayedJobImpl
 	extends BaseMessageListener implements PollerCometDelayedJob {
 
-	//	TODO: Switch code to transient scheduling when complete
 	public void addPollerCometDelayedTask(
 		PollerCometDelayedTask pollerCometDelayedTask) {
 
 		synchronized (_pollerCometDelayedTasks) {
-			if (!jobScheduled) {
-				//	remove when Transient scheduler available.
-				_jobTimer = new Timer(_CRON_JOB_NAME);
+			if (_timer == null) {
+				_timer = new Timer(PollerCometDelayedJobImpl.class.getName());
 
-				_jobTimer.schedule(
+				_timer.schedule(
 					new PollerCometTimerTask(),
-					PropsValues.POLLER_NOTIFICATION_BATCH_WAIT);
-
-				jobScheduled = true;
-
-				/*	Uncomment when Transient Scheduling complete
-				Trigger trigger = new IntervalTrigger(
-					_CRON_JOB_NAME, _CRON_GROUP_NAME,
-					PropsValues.POLLER_NOTIFICATION_BATCH_WAIT);
-
-				try {
-					SchedulerEngineUtil.schedule(
-						trigger, _JOB_DESCRIPTION,
-						DestinationNames.POLLER_COMET_RESPONSE, null);
-
-					jobScheduled = true;
-				}
-				catch (SchedulerException se) {
-					if (_log.isErrorEnabled()) {
-						_log.error(
-							"Unable to schedule heartbeat job for Poller", se);
-					}
-				}
-				*/
+					PropsValues.POLLER_NOTIFICATIONS_TIMEOUT);
 			}
 
 			_pollerCometDelayedTasks.add(pollerCometDelayedTask);
 		}
 	}
 
-	@Override
-	protected void doReceive(Message message) throws Exception {
+	protected synchronized void doReceive(Message message) throws Exception {
 		synchronized (_pollerCometDelayedTasks) {
 			for (PollerCometDelayedTask pollerCometDelayedTask :
-				_pollerCometDelayedTasks) {
+					_pollerCometDelayedTasks) {
 
 				try {
 					pollerCometDelayedTask.doTask();
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
-						_log.warn("Error occurred while processing" +
-							" PollerCometDelayedTask", e);
+						_log.warn("Unable to do task" + e);
 					}
 				}
 			}
@@ -92,21 +66,26 @@ public class PollerCometDelayedJobImpl
 		}
 	}
 
-	//	remove when Transient scheduler available.
+	private static Log _log = LogFactoryUtil.getLog(
+		PollerCometDelayedJob.class);
+
+	private List<PollerCometDelayedTask> _pollerCometDelayedTasks =
+		new LinkedList<PollerCometDelayedTask>();
+	private Timer _timer;
+
 	private class PollerCometTimerTask extends TimerTask {
-		@Override
+
 		public void run() {
 			synchronized (_pollerCometDelayedTasks) {
 				for (PollerCometDelayedTask pollerCometDelayedTask :
-					_pollerCometDelayedTasks) {
+						_pollerCometDelayedTasks) {
 
 					try {
 						pollerCometDelayedTask.doTask();
 					}
 					catch (Exception e) {
 						if (_log.isWarnEnabled()) {
-							_log.warn("Error occurred while processing" +
-								" PollerCometDelayedTask", e);
+							_log.warn("Unable to do task" + e);
 						}
 					}
 				}
@@ -116,20 +95,4 @@ public class PollerCometDelayedJobImpl
 		}
 	}
 
-	private static final String _CRON_GROUP_NAME = "poller";
-
-	private static final String _CRON_JOB_NAME = "poller";
-
-	private static final String _JOB_DESCRIPTION = "Comet Poller";
-
-	private static final Log _log = LogFactoryUtil.getLog(
-		PollerCometDelayedJob.class);
-
-	private List<PollerCometDelayedTask> _pollerCometDelayedTasks =
-		new LinkedList<PollerCometDelayedTask>();
-
-	//	remove when Transient scheduler available.
-	private Timer _jobTimer = null;
-
-	private boolean jobScheduled = false;
 }

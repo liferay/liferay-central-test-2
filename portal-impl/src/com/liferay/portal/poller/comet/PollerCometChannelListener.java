@@ -20,17 +20,19 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.notifications.ChannelException;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
 import com.liferay.portal.kernel.notifications.ChannelListener;
+import com.liferay.portal.kernel.poller.comet.CometRequest;
 import com.liferay.portal.kernel.poller.comet.CometSession;
 
 /**
  * @author Edward Han
  */
 public class PollerCometChannelListener implements ChannelListener {
+
 	public PollerCometChannelListener(
-		CometSession cometSession, JSONObject pollerResponseHeader) {
+		CometSession cometSession, JSONObject pollerResponseHeaderJSONObject) {
 
 		_cometSession = cometSession;
-		_pollerResponseHeader = pollerResponseHeader;
+		_pollerResponseHeaderJSONObject = pollerResponseHeaderJSONObject;
 	}
 
 	public void channelListenerRemoved(long channelId) {
@@ -41,21 +43,21 @@ public class PollerCometChannelListener implements ChannelListener {
 	}
 
 	protected void sendProcessMessage() {
-		long companyId = _cometSession.getCometRequest().getCompanyId();
-		long userId = _cometSession.getCometRequest().getUserId();
+		CometRequest cometRequest = _cometSession.getCometRequest();
 
 		try {
 			ChannelHubManagerUtil.unregisterChannelListener(
-				companyId, userId, this);
+				cometRequest.getCompanyId(), cometRequest.getUserId(), this);
 		}
-		catch (ChannelException e) {
+		catch (ChannelException ce) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Error while unregistering channel listener", e);
+				_log.warn("Unable to unregister channel listener", ce);
 			}
 		}
 
 		PollerCometDelayedTask pollerCometDelayedTask =
-			new PollerCometDelayedTask(_cometSession, _pollerResponseHeader);
+			new PollerCometDelayedTask(
+				_cometSession, _pollerResponseHeaderJSONObject);
 
 		PollerCometDelayedJobUtil.addPollerCometDelayedTask(
 			pollerCometDelayedTask);
@@ -65,5 +67,6 @@ public class PollerCometChannelListener implements ChannelListener {
 		PollerCometChannelListener.class);
 
 	private CometSession _cometSession;
-	private JSONObject _pollerResponseHeader;
+	private JSONObject _pollerResponseHeaderJSONObject;
+
 }

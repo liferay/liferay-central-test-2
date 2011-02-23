@@ -66,7 +66,12 @@ public abstract class BaseChannelImpl implements Channel {
 
 	public boolean hasNotificationEvents() {
 		try {
-			return getNotificationEvents(false).size() > 0;
+			List<NotificationEvent> notificationEvents = getNotificationEvents(
+				false);
+
+			if (!notificationEvents.isEmpty()) {
+				return true;
+			}
 		}
 		catch (ChannelException ce) {
 			if (_log.isErrorEnabled()) {
@@ -108,7 +113,7 @@ public abstract class BaseChannelImpl implements Channel {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(BaseChannelImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(BaseChannelImpl.class);
 
 	private Set<ChannelListener> _channelListeners =
 		new ConcurrentHashSet<ChannelListener>();
@@ -116,4 +121,5 @@ public abstract class BaseChannelImpl implements Channel {
 	private long _companyId;
 	private long _nextCleanUpTime;
 	private long _userId;
+
 }

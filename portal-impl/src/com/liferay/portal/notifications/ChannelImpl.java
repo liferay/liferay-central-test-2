@@ -37,6 +37,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -195,8 +196,8 @@ public class ChannelImpl extends BaseChannelImpl {
 	public void removeTransientNotificationEventsByUuid(
 		Collection<String> notificationEventUuids) {
 
-		HashSet<String> uuidHashSet =
-			new HashSet<String>(notificationEventUuids);
+		Set<String> notificationEventUuidsSet = new HashSet<String>(
+			notificationEventUuids);
 
 		Lock writeLock = _readWriteLock.writeLock();
 
@@ -208,7 +209,9 @@ public class ChannelImpl extends BaseChannelImpl {
 			while (itr.hasNext()) {
 				NotificationEvent notificationEvent = itr.next();
 
-				if (uuidHashSet.contains(notificationEvent.getUuid())) {
+				if (notificationEventUuidsSet.contains(
+						notificationEvent.getUuid())) {
+
 					itr.remove();
 				}
 			}
@@ -467,16 +470,18 @@ public class ChannelImpl extends BaseChannelImpl {
 			_notificationEvents.add(notificationEvent);
 
 			if (_notificationEvents.size() >
-				PropsValues.NOTIFICATION_MAX_CHANNEL_TRANSIENT) {
+					PropsValues.NOTIFICATIONS_MAX_EVENTS) {
 
-				_notificationEvents.pollFirst();
+				NotificationEvent firstNotificationEvent =
+					_notificationEvents.first();
+
+				_notificationEvents.remove(firstNotificationEvent);
 			}
 		}
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(ChannelImpl.class);
 
-	//todo need to make this bounded
 	private TreeSet<NotificationEvent> _notificationEvents =
 		new TreeSet<NotificationEvent>(new NotificationEventComparator());
 	private ReadWriteLock _readWriteLock = new ReentrantReadWriteLock();

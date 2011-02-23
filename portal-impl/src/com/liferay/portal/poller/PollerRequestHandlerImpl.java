@@ -77,13 +77,13 @@ public class PollerRequestHandlerImpl
 
 		PollerSession pollerSession = null;
 
-		synchronized (_pollerSessionMap) {
-			pollerSession = _pollerSessionMap.get(pollerSessionId);
+		synchronized (_pollerSessions) {
+			pollerSession = _pollerSessions.get(pollerSessionId);
 
 			if ((pollerSession == null) && receiveRequest) {
 				pollerSession = new PollerSession(pollerSessionId);
 
-				_pollerSessionMap.put(pollerSessionId, pollerSession);
+				_pollerSessions.put(pollerSessionId, pollerSession);
 			}
 		}
 
@@ -113,21 +113,15 @@ public class PollerRequestHandlerImpl
 
 		String pollerSessionId = getPollerSessionId(pollerHeader);
 
-		synchronized (_pollerSessionMap) {
-			PollerSession pollerSession = _pollerSessionMap.get(
+		synchronized (_pollerSessions) {
+			PollerSession pollerSession = _pollerSessions.get(
 				pollerSessionId);
 
-			if (pollerSession != null) {
-				String portletId = pollerResponse.getPortletId();
+			if ((pollerSession != null) &&
+				pollerSession.completePortletProcessing(
+					pollerResponse.getPortletId(), message.getResponseId())) {
 
-				String responseId = message.getResponseId();
-
-				boolean complete = pollerSession.completePortletProcessing(
-					responseId, portletId);
-
-				if (complete) {
-					_pollerSessionMap.remove(pollerSessionId);
-				}
+				_pollerSessions.remove(pollerSessionId);
 			}
 		}
 	}
@@ -167,13 +161,15 @@ public class PollerRequestHandlerImpl
 			Map<String, Object>[] pollerRequestChunks, boolean receiveRequest)
 		throws Exception {
 
-		List<PollerRequest> pollerRequests =
-			new ArrayList<PollerRequest>(pollerHeader.getPortletIds().length);
+		String[] portletIds = pollerHeader.getPortletIds();
 
-		Set<String> portletIdsWithParameters = null;
+		List<PollerRequest> pollerRequests = new ArrayList<PollerRequest>(
+			portletIds.length);
+
+		Set<String> receiveRequestPortletIds = null;
 
 		if (receiveRequest) {
-			portletIdsWithParameters = new HashSet<String>(
+			receiveRequestPortletIds = new HashSet<String>(
 				(int)(pollerRequestChunks.length / 0.75) + 1);
 		}
 
@@ -192,7 +188,7 @@ public class PollerRequestHandlerImpl
 				pollerRequests.add(pollerRequest);
 
 				if (receiveRequest) {
-					portletIdsWithParameters.add(portletId);
+					receiveRequestPortletIds.add(portletId);
 				}
 			}
 			catch (Exception e) {
@@ -201,8 +197,8 @@ public class PollerRequestHandlerImpl
 		}
 
 		if (receiveRequest) {
-			for (String portletId : pollerHeader.getPortletIds()) {
-				if (portletIdsWithParameters.contains(portletId)) {
+			for (String portletId : portletIds) {
+				if (receiveRequestPortletIds.contains(portletId)) {
 					continue;
 				}
 
@@ -221,8 +217,7 @@ public class PollerRequestHandlerImpl
 		return pollerRequests;
 	}
 
-	protected JSONObject createPollerResponseHeader(
-			PollerHeader pollerHeader)
+	protected JSONObject createPollerResponseHeader(PollerHeader pollerHeader)
 		throws SystemException {
 
 		if (pollerHeader == null) {
@@ -247,19 +242,16 @@ public class PollerRequestHandlerImpl
 			}
 		}
 
-		JSONObject pollerResponseHeader = JSONFactoryUtil.createJSONObject();
+		JSONObject pollerResponseHeaderJSONObject =
+			JSONFactoryUtil.createJSONObject();
 
-		pollerResponseHeader.put(
+		pollerResponseHeaderJSONObject.put(
 			"userId", pollerHeader.getUserId());
-		pollerResponseHeader.put(
+		pollerResponseHeaderJSONObject.put(
 			"initialRequest", pollerHeader.isInitialRequest());
-		pollerResponseHeader.put("suspendPolling", suspendPolling);
+		pollerResponseHeaderJSONObject.put("suspendPolling", suspendPolling);
 
-		return pollerResponseHeader;
-	}
-
-	protected String getPollerSessionId(PollerHeader pollerHeader) {
-		return Long.toString(pollerHeader.getUserId());
+		return pollerResponseHeaderJSONObject;
 	}
 
 	protected void executePollerRequests(
@@ -269,22 +261,20 @@ public class PollerRequestHandlerImpl
 			PollerRequestResponsePair pollerRequestResponsePair =
 				new PollerRequestResponsePair(pollerRequest);
 
-			boolean receiveRequest = pollerRequest.isReceiveRequest();
-
 			String responseId = null;
 
-			if (receiveRequest) {
+			if (pollerRequest.isReceiveRequest()) {
 				responseId = PortalUUIDUtil.generate();
 
 				PollerResponse pollerResponse = new DefaultPollerResponse(
-					pollerRequest.getPortletId(),
 					pollerRequest.getPollerHeader(),
+					pollerRequest.getPortletId(),
 					pollerRequest.getChunkId());
 
 				pollerRequestResponsePair.setPollerResponse(pollerResponse);
 
 				if (!pollerSession.beginPortletProcessing(
-					pollerRequestResponsePair, responseId)) {
+						pollerRequestResponsePair, responseId)) {
 
 					continue;
 				}
@@ -294,7 +284,7 @@ public class PollerRequestHandlerImpl
 
 			message.setPayload(pollerRequestResponsePair);
 
-			if (receiveRequest) {
+			if (pollerRequest.isReceiveRequest()) {
 				message.setResponseId(responseId);
 
 				message.setResponseDestinationName(
@@ -326,6 +316,10 @@ public class PollerRequestHandlerImpl
 			});
 	}
 
+	protected String getPollerSessionId(PollerHeader pollerHeader) {
+		return String.valueOf(pollerHeader.getUserId());
+	}
+
 	protected long getUserId(long companyId, String userIdString) {
 		long userId = 0;
 
@@ -345,7 +339,12 @@ public class PollerRequestHandlerImpl
 	}
 
 	protected boolean isReceiveRequest(String path) {
-		return ((path != null) && path.endsWith(_PATH_RECEIVE));
+		if ((path != null) && path.endsWith(_PATH_RECEIVE)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	protected Map<String, String> parseData(
@@ -372,7 +371,7 @@ public class PollerRequestHandlerImpl
 	protected PollerHeader parsePollerRequestHeader(
 		Map<String, Object>[] pollerRequestChunks) {
 
-		if (pollerRequestChunks == null || pollerRequestChunks.length < 1) {
+		if ((pollerRequestChunks == null) || (pollerRequestChunks.length < 1)) {
 			return null;
 		}
 
@@ -405,8 +404,8 @@ public class PollerRequestHandlerImpl
 	protected Map<String, Object>[] parsePollerRequestParameters(
 		String pollerRequestString) {
 
-		String fixedPollerRequestString =
-			fixPollerRequestString(pollerRequestString);
+		String fixedPollerRequestString = fixPollerRequestString(
+			pollerRequestString);
 
 		return (Map<String, Object>[]) JSONFactoryUtil.deserialize(
 			fixedPollerRequestString);
@@ -423,8 +422,10 @@ public class PollerRequestHandlerImpl
 
 	private static final String _PATH_RECEIVE = "/receive";
 
-	private static Log _log = LogFactoryUtil.getLog(PollerRequestHandlerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		PollerRequestHandlerImpl.class);
 
-	private Map<String, PollerSession> _pollerSessionMap =
+	private Map<String, PollerSession> _pollerSessions =
 		new HashMap<String, PollerSession>();
+
 }

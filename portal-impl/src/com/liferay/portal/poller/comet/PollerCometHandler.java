@@ -37,40 +37,38 @@ public class PollerCometHandler extends BaseCometHandler {
 	}
 
 	protected void doDestroy() throws Exception {
-		if (_cometPollerChannelListener != null) {
+		if (_channelListener != null) {
 			ChannelHubManagerUtil.unregisterChannelListener(
-				_companyId, _userId, _cometPollerChannelListener);
+				_companyId, _userId, _channelListener);
 		}
 	}
 
 	protected void doInit(CometSession cometSession) throws Exception {
 		CometRequest cometRequest = cometSession.getCometRequest();
 
-		String pollerRequestString = cometRequest.getParameter("pollerRequest");
-
 		_companyId = cometRequest.getCompanyId();
-
 		_userId = cometRequest.getUserId();
 
-		JSONObject pollerResponseHeader =
+		String pollerRequestString = cometRequest.getParameter("pollerRequest");
+
+		JSONObject pollerResponseHeaderJSONObject =
 			PollerRequestHandlerUtil.processRequest(
 				cometRequest.getPathInfo(), pollerRequestString);
 
-		//for "send" requests will have null pollerResponseHeaders from which
-		//we can immediately return.  "send" requests do not need comet.
-		if (pollerResponseHeader != null) {
-			 _cometPollerChannelListener = new PollerCometChannelListener(
-					getCometSession(), pollerResponseHeader);
+		if (pollerResponseHeaderJSONObject != null) {
+			 _channelListener = new PollerCometChannelListener(
+				 cometSession, pollerResponseHeaderJSONObject);
 
 			ChannelHubManagerUtil.registerChannelListener(
-				_companyId, _userId, _cometPollerChannelListener);
+				_companyId, _userId, _channelListener);
 		}
 		else {
-			getCometSession().close();
+			cometSession.close();
 		}
 	}
 
-	ChannelListener _cometPollerChannelListener = null;
+	private ChannelListener _channelListener;
 	private long _companyId;
 	private long _userId;
+
 }

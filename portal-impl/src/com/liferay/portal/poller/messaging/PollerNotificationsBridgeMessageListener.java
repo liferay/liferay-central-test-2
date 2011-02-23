@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.poller.PollerResponse;
 /**
  * @author Edward Han
  */
-public class PollerNotificationBridgeMessageListener
+public class PollerNotificationsBridgeMessageListener
 	extends BaseMessageListener {
 
 	protected void doReceive(Message message) throws Exception {
@@ -50,11 +50,10 @@ public class PollerNotificationBridgeMessageListener
 
 		PollerHeader pollerHeader = pollerResponse.getPollerHeader();
 
-		long currentTime = System.currentTimeMillis();
-
 		NotificationEvent notificationEvent =
 			NotificationEventFactoryUtil.createNotificationEvent(
-				currentTime, _POLLER_TYPE,
+				System.currentTimeMillis(),
+				PollerNotificationsBridgeMessageListener.class.getName(),
 				pollerResponse.toJSONObject());
 
 		ChannelHubManagerUtil.sendNotificationEvent(
@@ -62,8 +61,7 @@ public class PollerNotificationBridgeMessageListener
 			notificationEvent);
 	}
 
-	private static final String _POLLER_TYPE = "portal.poller";
-
 	private static Log _log = LogFactoryUtil.getLog(
-		PollerNotificationBridgeMessageListener.class);
+		PollerNotificationsBridgeMessageListener.class);
+
 }

@@ -18,7 +18,15 @@ package com.liferay.portal.poller.comet;
  * @author Edward Han
  */
 public class PollerCometDelayedJobUtil {
-	public PollerCometDelayedJob getPollerCometDelayedJob() {
+
+	public static void addPollerCometDelayedTask(
+		PollerCometDelayedTask pollerCometDelayedTask) {
+
+		getPollerCometDelayedJob().addPollerCometDelayedTask(
+			pollerCometDelayedTask);
+	}
+
+	public static PollerCometDelayedJob getPollerCometDelayedJob() {
 		return _pollerCometDelayedJob;
 	}
 
@@ -28,12 +36,6 @@ public class PollerCometDelayedJobUtil {
 		_pollerCometDelayedJob = pollerCometDelayedJob;
 	}
 
-	public static void addPollerCometDelayedTask(
-		PollerCometDelayedTask pollerCometDelayedTask) {
-
-		_pollerCometDelayedJob.addPollerCometDelayedTask(
-			pollerCometDelayedTask);
-	}
-
 	private static PollerCometDelayedJob _pollerCometDelayedJob;
+
 }

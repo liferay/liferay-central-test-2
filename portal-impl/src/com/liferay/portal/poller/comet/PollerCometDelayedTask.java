@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.notifications.ChannelHubManagerUtil;
 import com.liferay.portal.kernel.notifications.NotificationEvent;
+import com.liferay.portal.kernel.poller.comet.CometRequest;
+import com.liferay.portal.kernel.poller.comet.CometResponse;
 import com.liferay.portal.kernel.poller.comet.CometSession;
 
 import java.util.List;
@@ -27,39 +29,43 @@ import java.util.List;
  * @author Edward Han
  */
 public class PollerCometDelayedTask {
+
 	public PollerCometDelayedTask(
-		CometSession cometSession, JSONObject pollerResponseHeader) {
+		CometSession cometSession, JSONObject pollerResponseHeaderJSONObject) {
 
 		_cometSession = cometSession;
-		_pollerResponseHeader = pollerResponseHeader;
+		_pollerResponseHeaderJSONObject = pollerResponseHeaderJSONObject;
 	}
 
 	public void doTask() throws Exception{
-		long companyId = _cometSession.getCometRequest().getCompanyId();
-		long userId = _cometSession.getCometRequest().getUserId();
+		CometRequest cometRequest = _cometSession.getCometRequest();
 
 		List<NotificationEvent> notificationEvents =
 			ChannelHubManagerUtil.getNotificationEvents(
-				companyId, userId, false);
+				cometRequest.getCompanyId(), cometRequest.getUserId(), false);
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
-		if (_pollerResponseHeader != null) {
-			jsonArray.put(_pollerResponseHeader);
+		if (_pollerResponseHeaderJSONObject != null) {
+			jsonArray.put(_pollerResponseHeaderJSONObject);
 		}
 
 		for (NotificationEvent notificationEvent : notificationEvents) {
 			jsonArray.put(notificationEvent.toJSONObject());
 		}
 
-		_cometSession.getCometResponse().writeData(jsonArray.toString());
+		CometResponse cometResponse = _cometSession.getCometResponse();
+
+		cometResponse.writeData(jsonArray.toString());
 
 		ChannelHubManagerUtil.removeTransientNotificationEvents(
-			companyId, userId, notificationEvents);
+			cometRequest.getCompanyId(), cometRequest.getUserId(),
+			notificationEvents);
 
 		_cometSession.close();
 	}
 
 	private CometSession _cometSession;
-	private JSONObject _pollerResponseHeader;
+	private JSONObject _pollerResponseHeaderJSONObject;
+
 }

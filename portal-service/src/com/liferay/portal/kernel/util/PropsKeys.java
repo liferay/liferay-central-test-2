@@ -1271,7 +1271,7 @@ public interface PropsKeys {
 
 	public static final String NETVIBES_SERVLET_MAPPING = "netvibes.servlet.mapping";
 
-	public static final String NOTIFICATION_MAX_CHANNEL_TRANSIENT = "notification.max.channel.transient";
+	public static final String NOTIFICATIONS_MAX_EVENTS = "notifications.max.events";
 
 	public static final String NTLM_AUTH_ENABLED = "ntlm.auth.enabled";
 
@@ -1407,9 +1407,9 @@ public interface PropsKeys {
 
 	public static final String PLUGIN_TYPES = "plugin.types";
 
-	public static final String POLLER_REQUEST_TIMEOUT = "poller.request.timeout";
+	public static final String POLLER_NOTIFICATIONS_TIMEOUT = "poller.notifications.timeout";
 
-	public static final String POLLER_NOTIFICATION_BATCH_WAIT = "poller.notification.batch.wait";
+	public static final String POLLER_REQUEST_TIMEOUT = "poller.request.timeout";
 
 	public static final String POP_SERVER_NOTIFICATIONS_ENABLED = "pop.server.notifications.enabled";
 

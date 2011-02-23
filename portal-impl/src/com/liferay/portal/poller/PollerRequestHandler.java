@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.json.JSONObject;
  * @author Edward Han
  */
 public interface PollerRequestHandler {
+
 	public JSONObject processRequest(String path, String pollerRequestString)
 		throws Exception;
+
 }

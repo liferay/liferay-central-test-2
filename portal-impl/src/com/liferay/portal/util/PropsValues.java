@@ -858,7 +858,7 @@ public class PropsValues {
 
 	public static final String NETVIBES_SERVLET_MAPPING = PropsUtil.get(PropsKeys.NETVIBES_SERVLET_MAPPING);
 
-	public static final int NOTIFICATION_MAX_CHANNEL_TRANSIENT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.NOTIFICATION_MAX_CHANNEL_TRANSIENT));
+	public static final int NOTIFICATIONS_MAX_EVENTS = GetterUtil.getInteger(PropsUtil.get(PropsKeys.NOTIFICATIONS_MAX_EVENTS));
 
 	public static final boolean NTLM_AUTH_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.NTLM_AUTH_ENABLED));
 
@@ -964,9 +964,9 @@ public class PropsValues {
 
 	public static final String[] PLUGIN_TYPES = PropsUtil.getArray(PropsKeys.PLUGIN_TYPES);
 
-	public static final long POLLER_REQUEST_TIMEOUT = GetterUtil.getLong(PropsUtil.get(PropsKeys.POLLER_REQUEST_TIMEOUT));
+	public static final long POLLER_NOTIFICATIONS_TIMEOUT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.POLLER_NOTIFICATIONS_TIMEOUT));
 
-	public static final int POLLER_NOTIFICATION_BATCH_WAIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.POLLER_NOTIFICATION_BATCH_WAIT));
+	public static final long POLLER_REQUEST_TIMEOUT = GetterUtil.getLong(PropsUtil.get(PropsKeys.POLLER_REQUEST_TIMEOUT));
 
 	public static final boolean POP_SERVER_NOTIFICATIONS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.POP_SERVER_NOTIFICATIONS_ENABLED));
 

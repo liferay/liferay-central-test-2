@@ -20,18 +20,25 @@ import com.liferay.portal.kernel.json.JSONObject;
  * @author Edward Han
  */
 public class PollerRequestHandlerUtil {
-	public void setPollerRequestHandler(
-		PollerRequestHandler pollerRequestHandler) {
 
-		_pollerRequestHandler = pollerRequestHandler;
+	public static PollerRequestHandler getPollerRequestHandler() {
+		return _pollerRequestHandler;
 	}
 
 	public static JSONObject processRequest(
 			String path, String pollerRequestString)
 		throws Exception {
 
-		return _pollerRequestHandler.processRequest(path, pollerRequestString);
+		return getPollerRequestHandler().processRequest(
+			path, pollerRequestString);
+	}
+
+	public void setPollerRequestHandler(
+		PollerRequestHandler pollerRequestHandler) {
+
+		_pollerRequestHandler = pollerRequestHandler;
 	}
 
 	private static PollerRequestHandler _pollerRequestHandler;
+
 }
