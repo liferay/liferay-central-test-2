@@ -17,26 +17,23 @@ package com.liferay.portal.upgrade.v6_1_0;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTable;
 import com.liferay.portal.kernel.upgrade.util.UpgradeTableFactoryUtil;
-import com.liferay.portal.upgrade.v6_1_0.util.JournalArticleTable;
+import com.liferay.portal.upgrade.v6_1_0.util.AssetEntryTable;
 
 /**
  * @author Juan Fernández
  */
-public class UpgradeJournalArticle extends UpgradeProcess {
+public class UpgradeAsset extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
 		try {
-			runSQL("alter_column_type JournalArticle title STRING null");
+			runSQL("alter_column_type AssetEntry title STRING null");
 		}
 		catch (Exception e) {
-
 			UpgradeTable upgradeTable = UpgradeTableFactoryUtil.getUpgradeTable(
-				JournalArticleTable.TABLE_NAME,
-				JournalArticleTable.TABLE_COLUMNS);
+				AssetEntryTable.TABLE_NAME, AssetEntryTable.TABLE_COLUMNS);
 
-			upgradeTable.setCreateSQL(JournalArticleTable.TABLE_SQL_CREATE);
-			upgradeTable.setIndexesSQL(
-				JournalArticleTable.TABLE_SQL_ADD_INDEXES);
+			upgradeTable.setCreateSQL(AssetEntryTable.TABLE_SQL_CREATE);
+			upgradeTable.setIndexesSQL(AssetEntryTable.TABLE_SQL_ADD_INDEXES);
 
 			upgradeTable.updateTable();
 		}
