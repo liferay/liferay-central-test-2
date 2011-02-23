@@ -35,7 +35,6 @@ public class ChannelLoginPostAction extends Action {
 			User user = PortalUtil.getUser(request);
 
 			if (!user.isDefaultUser()) {
-
 				ChannelHubManagerUtil.getChannel(
 					user.getCompanyId(), user.getUserId(), true);
 			}

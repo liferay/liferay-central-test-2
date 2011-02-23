@@ -122,11 +122,13 @@ public class ChannelHubManagerImpl implements ChannelHubManager {
 
 	public ChannelHub getChannelHub(long companyId, boolean createIfAbsent)
 		throws ChannelException {
+
 		ChannelHub channelHub = _channelHubs.get(companyId);
 
 		if (channelHub == null) {
 			synchronized(_channelHubs) {
 				channelHub = _channelHubs.get(companyId);
+
 				if (channelHub == null) {
 					if (createIfAbsent) {
 						channelHub = createChannelHub(companyId);

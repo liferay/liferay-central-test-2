@@ -28,6 +28,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -90,15 +91,16 @@ public class ChannelHubImpl implements ChannelHub {
 	}
 
 	public void destroy() throws ChannelException {
-		Iterator<Map.Entry<Long, Channel>> iterator =
-			_channels.entrySet().iterator();
+		Set<Map.Entry<Long, Channel>> channels = _channels.entrySet();
 
-		while (iterator.hasNext()) {
-			Channel channel = iterator.next().getValue();
+		Iterator<Map.Entry<Long, Channel>> itr = channels.iterator();
+
+		while (itr.hasNext()) {
+			Channel channel = itr.next().getValue();
 
 			channel.close();
 
-			iterator.remove();
+			itr.remove();
 		}
 	}
 
@@ -136,11 +138,13 @@ public class ChannelHubImpl implements ChannelHub {
 
 	public Channel getChannel(long userId, boolean createIfAbsent)
 		throws ChannelException {
+
 		Channel channel = _channels.get(userId);
 
 		if (channel == null) {
 			synchronized (_channels) {
 				channel = _channels.get(userId);
+
 				if (channel == null) {
 					if (createIfAbsent) {
 						channel = createChannel(userId);
