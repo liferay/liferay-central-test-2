@@ -98,7 +98,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Title
 
-				row.addText(article.getTitle(), rowURL);
+				row.addText(article.getTitle(locale), rowURL);
 
 				// Status
 
@@ -399,7 +399,7 @@ portletURL.setParameter("tabs1", tabs1);
 								<aui:a href="<%= editArticleURL %>"><%= article.getArticleId() %></aui:a>
 							</td>
 							<td>
-								<aui:a href="<%= editArticleURL %>"><%= article.getTitle() %></aui:a>
+								<aui:a href="<%= editArticleURL %>"><%= article.getTitle(locale) %></aui:a>
 							</td>
 						</tr>
 
