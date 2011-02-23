@@ -16,45 +16,47 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-forms .aui-form-builder-drop-container {
-	width: 70%;
-}
+.portlet-forms {
+	.aui-form-builder-drop-container {
+		width: 70%;
+	}
 
-.portlet-forms .aui-form-builder-tabs-container {
-	width: 30%;
-}
+	.aui-form-builder-tabs-container {
+		width: 30%;
 
-.portlet-forms .aui-form-builder-tabs-container .aui-field-input-text {
-	width: 98%;
-}
+		.aui-field-input-text {
+			width: 98%;
+		}
 
-.portlet-forms .aui-form-builder-tabs-container .aui-field-options-item-input {
-	width: 96px;
-}
+		.aui-field-options-item-input {
+			width: 96px;
+		}
+	}
 
-.portlet-forms .aui-form-builder-settings .aui-field-input-checkbox {
-	margin: 0 3px 0 0;
-}
+	.aui-form-builder-settings .aui-field-input-checkbox {
+		margin: 0 3px 0 0;
+	}
 
-.portlet-forms .aui-field-labels-inline {
-	clear: both;
-	display: block;
-}
+	.aui-field-labels-inline {
+		clear: both;
+		display: block;
 
-.portlet-forms .aui-field-labels-inline .aui-field-label {
-	margin-top: 0;
-}
+		.aui-field-label {
+			margin-top: 0;
+		}
+	}
 
-.portlet-forms .form-fields-loading {
-	list-style: none;
-	padding: 10px 0;
-	position: relative;
-}
+	.form-fields-loading {
+		list-style: none;
+		padding: 10px 0;
+		position: relative;
+	}
 
-.portlet-forms .lfr-structure-entry-details-container .lfr-panel-content {
-	padding: 10px;
-}
+	.lfr-structure-entry-details-container {
+		margin-top: 10px;
 
-.portlet-forms .lfr-structure-entry-details-container {
-	margin-top: 10px;
+		.lfr-panel-content {
+			padding: 10px;
+		}
+	}
 }

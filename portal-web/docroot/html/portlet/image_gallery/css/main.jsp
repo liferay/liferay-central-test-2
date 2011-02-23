@@ -21,38 +21,40 @@
 	text-align: right;
 }
 
-.portlet-image-gallery .lfr-asset-attributes {
-	clear: both;
-}
+.portlet-image-gallery {
+	.lfr-asset-attributes {
+		clear: both;
+	}
 
-.portlet-image-gallery .folder-search {
-	float: right;
-	margin: 0 0 0.5em 0.5em;
-}
+	.folder-search {
+		float: right;
+		margin: 0 0 0.5em 0.5em;
+	}
 
-.portlet-image-gallery .image-score {
-	display: block;
-	margin: 0 0 5px 35px;
-	padding-top: 3px;
-}
+	.image-score {
+		display: block;
+		margin: 0 0 5px 35px;
+		padding-top: 3px;
+	}
 
-.portlet-image-gallery .image-thumbnail {
-	border: 2px solid #eee;
-	float: left;
-	margin: 20px 4px 0;
-	padding: 5px 5px 0;
-	text-align: center;
-	text-decoration: none;
-}
+	.image-thumbnail {
+		border: 2px solid #eee;
+		float: left;
+		margin: 20px 4px 0;
+		padding: 5px 5px 0;
+		text-align: center;
+		text-decoration: none;
 
-.portlet-image-gallery .image-thumbnail:hover {
-	border-color: #ccc;
-}
+		&:hover {
+			border-color: #ccc;
+		}
+	}
 
-.portlet-image-gallery .taglib-webdav {
-	margin-top: 3em;
-}
+	.taglib-webdav {
+		margin-top: 3em;
+	}
 
-.portlet-image-gallery .image-title {
-	display: block;
+	.image-title {
+		display: block;
+	}
 }

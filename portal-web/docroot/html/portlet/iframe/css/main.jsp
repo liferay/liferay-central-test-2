@@ -16,11 +16,13 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-configuration fieldset {
-	margin-bottom: 5px;
-}
+.portlet-configuration {
+	fieldset {
+		margin-bottom: 5px;
+	}
 
-.portlet-configuration .lfr-panel-content {
-	background-color: #F8F8F8;
-	padding: 10px;
+	.lfr-panel-content {
+		background-color: #F8F8F8;
+		padding: 10px;
+	}
 }

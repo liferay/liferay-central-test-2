@@ -16,11 +16,13 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-bookmarks .lfr-asset-url {
-	margin: 1em 0 0.3em;
-}
+.portlet-bookmarks {
+	.lfr-asset-url {
+		margin: 1em 0 0.3em;
+	}
 
-.portlet-bookmarks .folder-search {
-	float: right;
-	margin: 0 0 0.5em 0.5em;
+	.folder-search {
+		float: right;
+		margin: 0 0 0.5em 0.5em;
+	}
 }

@@ -17,101 +17,100 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-alerts {
+	.portlet-alerts .entry {
+		border: 6px solid #c00;
+		margin: 8px 0px;
+		padding: 6px;
+	}
+
+	.entry-content {
+		display: block;
+		padding: 2px 2px 2px 30px;
+	}
+
+	.entry-scope {
+		color: #ccc;
+		display: block;
+	}
+
+	.entry-type-general {
+		background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+		clear: both;
+	}
+
+	.entry-type-news {
+		background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+		clear: both;
+	}
+
+	.entry-type-test {
+		background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+		clear: both;
+	}
 }
 
-.portlet-alerts .entry {
-	border: 6px solid #c00;
-	margin: 8px 0px;
-	padding: 6px;
-}
 
-.portlet-alerts .entry-content {
-	display: block;
-	padding: 2px 2px 2px 30px;
-}
-
-.portlet-alerts .entry-scope {
-	color: #ccc;
-	display: block;
-}
-
-.portlet-alerts .entry-type-general {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
-	clear: both;
-}
-
-.portlet-alerts .entry-type-news {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
-	clear: both;
-}
-
-.portlet-alerts .entry-type-test {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
-	clear: both;
-}
 
 .portlet-announcements {
+	.entry {
+		margin: 4px 0px 1.2em;
+		padding-bottom: 0.5em;
+	}
+
+	.entry.last {
+	}
+
+	.entry-content {
+		display: block;
+		margin-bottom: 0.5em;
+		padding: 2px 2px 2px 30px;
+	}
+
+	.entry-scope {
+		color: #555;
+		display: block;
+	}
+
+	.delete-entry {
+		padding-right: 2em;
+	}
+
+	.entry-type-general {
+		background: #fff url('<%= themeImagesPath %>/common/all_pages.png') 4px 4px no-repeat;
+		clear: both;
+	}
+
+	.entry-type-news {
+		background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
+		clear: both;
+	}
+
+	.entry-type-test {
+		background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
+		clear: both;
+	}
 }
 
-.portlet-announcements .entry {
-	margin: 4px 0px 1.2em;
-	padding-bottom: 0.5em;
-}
+.portlet-announcements, .portlet-alerts {
+	.important {
+		font-weight: normal;
+	}
 
-.portlet-announcements .important, .portlet-alerts .important {
-	font-weight: normal;
-}
+	.entry-title {
+		display: block;
+		margin-bottom: 0;
+		position: relative;
+	}
 
-.portlet-announcements .entry.last {
-}
+	.read-entries .entry-title {
+		opacity: 0.5;
+	}
 
-.portlet-announcements .entry-title, .portlet-alerts .entry-title {
-	display: block;
-	margin-bottom: 0;
-	position: relative;
-}
-
-.portlet-announcements .read-entries .entry-title, .portlet-alerts .read-entries .entry-title{
-	opacity: 0.5;
-}
-
-.portlet-announcements .read .entry-title, .portlet-alerts .read .entry-title {
-}
-
-.portlet-announcements .entry-content {
-	display: block;
-	margin-bottom: 0.5em;
-	padding: 2px 2px 2px 30px;
-}
-
-.portlet-announcements .entry-scope {
-	color: #555;
-	display: block;
-}
-
-.portlet-announcements .edit-actions, .portlet-alerts .edit-actions {
-	float: right;
-	font-size: 0.7em;
-	font-weight: normal;
-	right: 0;
-	top: 0;
-}
-
-.portlet-announcements .delete-entry {
-	padding-right: 2em;
-}
-
-.portlet-announcements .entry-type-general {
-	background: #fff url('<%= themeImagesPath %>/common/all_pages.png') 4px 4px no-repeat;
-	clear: both;
-}
-
-.portlet-announcements .entry-type-news {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
-	clear: both;
-}
-
-.portlet-announcements .entry-type-test {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
-	clear: both;
+	.edit-actions {
+		float: right;
+		font-size: 0.7em;
+		font-weight: normal;
+		right: 0;
+		top: 0;
+	}
 }

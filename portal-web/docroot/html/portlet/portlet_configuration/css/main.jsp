@@ -16,33 +16,41 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-configuration .archived-setups {
-	margin-bottom: 1em;
-	margin-right: 0.5em;
-	text-align: right;
+.portlet-configuration {
+	.archived-setups {
+		margin-bottom: 1em;
+		margin-right: 0.5em;
+		text-align: right;
+	}
+
+	.edit-permissions {
+		form:after {
+			clear: both;
+			content: ".";
+			display: block;
+			height: 0;
+			visibility: hidden;
+		}
+
+		.assign-permissions {
+			float: left;
+
+			.aui-button-holder {
+				position: relative;
+
+				.finished {
+					position: absolute;
+					right: 0;
+				}
+			}
+		}
+	}
 }
 
-.portlet-configuration .edit-permissions form:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
-
-.ie .portlet-configuration .edit-permissions form {
-	height: 1%;
-}
-
-.portlet-configuration .edit-permissions .assign-permissions {
-	float: left;
-}
-
-.portlet-configuration .edit-permissions .assign-permissions .aui-button-holder {
-	position: relative;
-}
-
-.portlet-configuration .edit-permissions .assign-permissions .aui-button-holder .finished {
-	position: absolute;
-	right: 0;
+.ie {
+	.portlet-configuration {
+		.edit-permissions form {
+			height: 1%;
+		}
+	}
 }

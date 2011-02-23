@@ -19,49 +19,53 @@
 .portlet-quick-note {
 	margin: 2px;
 	padding: 5px;
+
+	textarea {
+		min-height: 100px;
+		padding: 3px;
+		width: 95%;
+	}
+
+	.note-color {
+		border: 1px solid;
+		cursor: pointer;
+		float: left;
+		font-size: 0;
+		height: 10px;
+		margin: 3px 5px;
+		width: 10px;
+
+		&.yellow {
+			background-color: #FFC;
+			border-color: #FC0;
+			margin-left: 0;
+		}
+
+		&.green {
+			background-color: #CFC;
+			border-color: #0C0;
+		}
+
+		&.blue {
+			background-color: #CCF;
+			border-color: #309;
+		}
+
+		&.red {
+			background-color: #FCC;
+			border-color: #F00;
+		}
+	}
+
+	a.close-note {
+		float: right;
+	}
 }
 
-.portlet-quick-note textarea {
-	min-height: 100px;
-	padding: 3px;
-	width: 95%;
-}
-
-.ie6 .portlet-quick-note textarea {
-	height: expression(this.height < 100 ? '100px' : this.height);
-}
-
-.portlet-quick-note .note-color {
-	border: 1px solid;
-	cursor: pointer;
-	float: left;
-	font-size: 0;
-	height: 10px;
-	margin: 3px 5px;
-	width: 10px;
-}
-
-.portlet-quick-note .note-color.yellow {
-	background-color: #ffc;
-	border-color: #fc0;
-	margin-left: 0;
-}
-
-.portlet-quick-note .note-color.green {
-	background-color: #cfc;
-	border-color: #0c0;
-}
-
-.portlet-quick-note .note-color.blue {
-	background-color: #ccf;
-	border-color: #309;
-}
-
-.portlet-quick-note .note-color.red {
-	background-color: #fcc;
-	border-color: #f00;
-}
-
-.portlet-quick-note a.close-note {
-	float: right;
+.ie6 {
+	.portlet-quick-note {
+		textarea {
+			height: expression(this.height < 100 ? '100px' : this.height);
+		}
+	}
 }

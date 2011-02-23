@@ -17,8 +17,7 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-expando {
-}
-
-.portlet-expando .short-input-text input {
-	width: 25px;
+	.short-input-text input {
+		width: 25px;
+	}
 }

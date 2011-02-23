@@ -16,43 +16,47 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-document-library .file-entry-list-description {
-	font-style: italic;
-	margin-left: 10px;
-}
+.portlet-document-library {
+	.file-entry-list-description {
+		font-style: italic;
+		margin-left: 10px;
+	}
 
-.portlet-document-library .file-entry-tags {
-	margin-top: 5px;
-}
+	.file-entry-tags {
+		margin-top: 5px;
+	}
 
-.portlet-document-library .folder-search {
-	float: right;
-	margin: 0 0 0.5em 0.5em;
-}
+	.folder-search {
+		float: right;
+		margin: 0 0 0.5em 0.5em;
+	}
 
-.portlet-document-library img.shortcut-icon {
-	display: inline;
-	margin-left: 10px;
-	margin-top: 75px;
-	position: absolute;
-	z-index: 10;
-}
+	img.shortcut-icon {
+		display: inline;
+		margin-left: 10px;
+		margin-top: 75px;
+		position: absolute;
+		z-index: 10;
+	}
 
-.portlet-document-library img.locked-icon {
-	display: inline;
-	margin: 95px 0 0 130px;
-	position: absolute;
-	z-index: 10;
-}
+	img.locked-icon {
+		display: inline;
+		margin: 95px 0 0 130px;
+		position: absolute;
+		z-index: 10;
+	}
 
-.portlet-document-library .taglib-webdav {
-	margin-top: 3em;
-}
+	.taglib-webdav {
+		margin-top: 3em;
+	}
 
-.portlet-document-library .taglib-workflow-status {
-	margin-bottom: 5px;
-}
+	.taglib-workflow-status {
+		margin-bottom: 5px;
+	}
 
-.portlet-document-library .workflow-status-pending, .portlet-document-library .workflow-status-pending a {
-	color: orange;
+	.workflow-status-pending {
+		&, a {
+			color: orange;
+		}
+	}
 }

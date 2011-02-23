@@ -16,42 +16,42 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-login .aui-form fieldset {
-	border-width: 0;
-	margin-bottom: 0;
-	padding: 0;
-}
+.portlet-login {
+	.aui-form {
+		fieldset {
+			border-width: 0;
+			margin-bottom: 0;
+			padding: 0;
+		}
 
-.portlet-login .aui-form .aui-button-holder {
-	margin-bottom: 10px;
-}
+		.aui-button-holder, .aui-form-column {
+			margin-bottom: 10px;
+		}
+	}
 
-.portlet-login .facebook-login {
-	clear: both;
-	margin-top: 300px;
-	text-align: center;
-}
+	.facebook-login {
+		clear: both;
+		margin-top: 300px;
+		text-align: center;
 
-.portlet-login .facebook-login-button .aui-button-content {
-	background: url(<%= themeImagesPath %>/login/facebook_login_button.png) no-repeat scroll 0 50%;
-	padding: 5px 5px 5px 30px;
-}
+		.aui-button-content {
+			background: url(<%= themeImagesPath %>/login/facebook_login_button.png) no-repeat scroll 0 50%;
+			padding: 5px 5px 5px 30px;
+		}
 
-.portlet-login .facebook-login-button .aui-button-input {
-	background: transparent none;
-	border-width: 0;
-	color: #FFF;
-	font-family: "lucida grande", Tahoma, Verdana, Arial, sans-serif;
-	padding: 0;
-	text-shadow: none;
-}
+		.aui-button-input {
+			background: transparent none;
+			border-width: 0;
+			color: #FFF;
+			font-family: "lucida grande", Tahoma, Verdana, Arial, sans-serif;
+			padding: 0;
+			text-shadow: none;
+		}
+	}
 
-.portlet-login .navigation {
-	background: #eee;
-	border-top: 1px solid #BFBFBF;
-	padding: 10px;
-}
-
-.portlet-login .aui-form .aui-form-column {
-	margin-bottom: 10px;
+	.navigation {
+		background: #eee;
+		border-top: 1px solid #BFBFBF;
+		padding: 10px;
+	}
 }

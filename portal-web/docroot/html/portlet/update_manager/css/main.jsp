@@ -16,42 +16,28 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.results-row.status-installation-in-process td {
-	background-color: #99CCFF;
-}
+.results-row {
+	.status-installation-in-process, .status-update-ignored {
+		td, &.alt td {
+			background-color: #9CF;
+		}
+	}
 
-.results-row.alt.status-installation-in-process td {
-	background-color: #99CCFF;
-}
+	.status-up-to-date {
+		td, &.alt td {
+			background-color: #CFC;
+		}
+	}
 
-.results-row.status-up-to-date td {
-	background-color: #CCFFCC;
-}
+	.status-unknown {
+		td, &.alt td {
+			background-color: #FFC;
+		}
+	}
 
-.results-row.alt.status-up-to-date td {
-	background-color: #CCFFCC;
-}
-
-.results-row.status-unknown td {
-	background-color: #FFFFCC;
-}
-
-.results-row.alt.status-unknown td {
-	background-color: #FFFFCC;
-}
-
-.results-row.status-update-available td {
-	background-color: #FF9999;
-}
-
-.results-row.alt.status-update-available td {
-	background-color: #FF9999;
-}
-
-.results-row.status-update-ignored td {
-	background-color: #99CCFF;
-}
-
-.results-row.alt.status-update-ignored td {
-	background-color: #99CCFF;
+	.status-update-available {
+		td, &.alt td {
+			background-color: #F99;
+		}
+	}
 }

@@ -16,16 +16,20 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-polls .choice, .portlet-polls .add-choice{
-	clear: both;
-	display: block;
-}
+.portlet-polls {
+	.choice, .add-choice{
+		clear: both;
+		display: block;
+	}
 
-.portlet-polls .choice label {
-	float: left;
-	margin: 0.5em 0.5em 0 0;
-}
+	.choice {
+		label {
+			float: left;
+			margin: 0.5em 0.5em 0 0;
+		}
 
-.portlet-polls .choice .aui-field {
-	float: left;
+		.aui-field {
+			float: left;
+		}
+	}
 }
