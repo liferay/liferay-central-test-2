@@ -43,7 +43,7 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 		configParams.put("attachmentURLPrefix", HttpUtil.encodeURL(attachmentURLPrefix));
 		%>
 
-		<liferay-ui:input-editor configParams="<%= configParams %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" toolbarSet="creole"/>
+		<liferay-ui:input-editor configParams="<%= configParams %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="creole" width="100%" />
 
 		<aui:input name="content" type="hidden" />
 	</td>
