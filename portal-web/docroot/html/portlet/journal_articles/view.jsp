@@ -105,10 +105,10 @@ double version = ParamUtil.getDouble(request, "version", -1);
 				rowHREF = sb.toString();
 			}
 			else {
+				articleURL.setParameter("returnToFullPageURL", currentURL);
 				articleURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 				articleURL.setParameter("articleId", article.getArticleId());
 				articleURL.setParameter("version", String.valueOf(article.getVersion()));
-				articleURL.setParameter("returnToFullPageURL", currentURL);
 
 				rowHREF = articleURL.toString();
 			}
