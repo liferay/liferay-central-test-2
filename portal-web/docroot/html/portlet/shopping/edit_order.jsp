@@ -369,7 +369,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 		<br /><br />
 
-		<%= HtmlUtil.extractText(order.getComments()) %>
+		<%= order.getComments() %>
 
 		<br /><br />
 	</c:if>
