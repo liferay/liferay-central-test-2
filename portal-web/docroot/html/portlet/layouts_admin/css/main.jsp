@@ -74,7 +74,7 @@
 		width: 120px;
 
 		&:hover label, &:hover {
-			
+
 		}
 
 		&:hover {

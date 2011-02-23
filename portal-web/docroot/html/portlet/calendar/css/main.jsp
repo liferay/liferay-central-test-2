@@ -82,7 +82,7 @@
 		border-left: 1px solid #D7D7D7;
 		clear: none;
 		float: right;
-		margin-bottom: 0;		
+		margin-bottom: 0;
 		margin-left: -1px;
 		padding-left: 0;
 
