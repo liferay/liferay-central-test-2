@@ -355,7 +355,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				addMessageResources(message, true, true);
 			}
 			else if (serviceContext.getAddCommunityPermissions() ||
-				serviceContext.getAddGuestPermissions()) {
+					 serviceContext.getAddGuestPermissions()) {
 
 				addMessageResources(
 					message, serviceContext.getAddCommunityPermissions(),
