@@ -65,6 +65,29 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 	<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 
 	<script type="text/javascript">
+		function initCkArea() {
+			var textArea = document.getElementById("CKEditor1");
+			var ckEditor = CKEDITOR.instances.CKEditor1;
+
+			ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
+
+			ckEditor.on(
+				'instanceReady',
+				function() {
+					setInterval(
+						function() {
+							try {
+								onChangeCallback();
+							}
+							catch(e) {
+							}
+						},
+						300
+					);
+				}
+			);
+		}
+
 		function getCkData() {
 			var data = CKEDITOR.instances.CKEditor1.getData();
 
@@ -111,47 +134,30 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 <textarea id="CKEditor1" name="CKEditor1"></textarea>
 
 <script type="text/javascript">
-	(function(){
-		<%
-		String customConfigFile = "ckconfig.jsp";
 
-		if (Validator.isNotNull(editorVariant)) {
-			customConfigFile = "ckconfig_" + editorVariant + ".jsp";
+	<%
+	String customConfigFile = "ckconfig.jsp";
+
+	if (Validator.isNotNull(editorVariant)) {
+		customConfigFile = "ckconfig_" + editorVariant + ".jsp";
+	}
+
+	String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
+	%>
+
+	CKEDITOR.replace(
+		'CKEditor1',
+		{
+			customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= customConfigFile %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
+			filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
+			filebrowserUploadUrl: null,
+			toolbar: '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>'
 		}
+	);
 
-		String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
-		%>
-
-		CKEDITOR.replace(
-			'CKEditor1',
-			{
-				customConfig: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/<%= customConfigFile %>?p_l_id=<%= plid %>&p_p_id=<%= HttpUtil.encodeURL(portletId) %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&doAsGroupId=<%= HttpUtil.encodeURL(doAsGroupId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>&languageId=<%= HttpUtil.encodeURL(languageId) %><%= configParamsSB.toString() %>',
-				filebrowserBrowseUrl: '<%= PortalUtil.getPathContext() %>/html/js/editor/ckeditor/editor/filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>',
-				filebrowserUploadUrl: null,
-				toolbar: '<%= TextFormatter.format(HtmlUtil.escape(toolbarSet), TextFormatter.M) %>'
-			}
-		);
-
-		var ckEditor = CKEDITOR.instances.CKEditor1;
-
-		ckEditor.on(
-			'instanceReady',
-			function() {
-				ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
-
-				setInterval(
-					function() {
-						try {
-							onChangeCallback();
-						}
-						catch(e) {
-						}
-					},
-					300
-				);
-			}
-		);
-	}());
+	if (parent.AUI) {
+		parent.AUI().on('domready', initCkArea);
+	}
 </script>
 
 </body>
