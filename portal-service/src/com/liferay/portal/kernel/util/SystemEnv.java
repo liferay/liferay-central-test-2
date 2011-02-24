@@ -16,7 +16,6 @@ package com.liferay.portal.kernel.util;
 
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
@@ -24,11 +23,11 @@ import java.util.Set;
  */
 public class SystemEnv {
 
-	public static void setProperties(Properties props) {
-		Set<Map.Entry<String, String>> entrySet = System.getenv().entrySet();
+	public static void setProperties(Properties properties) {
+		Map<String, String> env = System.getenv();
 
-		for (Map.Entry<String, String> entry : entrySet) {
-			props.setProperty("env." + entry.getKey(), entry.getValue());
+		for (Map.Entry<String, String> entry : env.entrySet()) {
+			properties.setProperty("env." + entry.getKey(), entry.getValue());
 		}
 	}
 
