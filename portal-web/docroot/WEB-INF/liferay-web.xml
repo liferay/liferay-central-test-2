@@ -705,12 +705,6 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Secure RSS Filter</filter-name>
-		<url-pattern>/c/*</url-pattern>
-		<dispatcher>FORWARD</dispatcher>
-		<dispatcher>REQUEST</dispatcher>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Secure RSS Filter</filter-name>
 		<url-pattern>/group/*</url-pattern>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>REQUEST</dispatcher>
