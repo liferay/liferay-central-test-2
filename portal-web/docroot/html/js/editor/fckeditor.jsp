@@ -145,10 +145,6 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 			);
 		}
 
-		function setHTML(value) {
-			FCKeditorAPI.GetInstance("FCKeditor1").SetHTML(value);
-		}
-
 		function onChangeCallback() {
 
 			<%
@@ -167,6 +163,10 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 			}
 			%>
 
+		}
+
+		function setHTML(value) {
+			FCKeditorAPI.GetInstance("FCKeditor1").SetHTML(value);
 		}
 
 		window.onload = function() {

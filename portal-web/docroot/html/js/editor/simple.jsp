@@ -33,12 +33,12 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 			return document.getElementById("textArea").value;
 		}
 
-		function setHTML(value) {
-			document.getElementById("textArea").value = value;
-		}
-
 		function initEditor() {
 			setHTML(parent.<%= initMethod %>());
+		}
+
+		function setHTML(value) {
+			document.getElementById("textArea").value = value;
 		}
 	</script>
 </head>
