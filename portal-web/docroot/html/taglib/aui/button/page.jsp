@@ -14,20 +14,9 @@
  */
 --%>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="init.jsp" %>
 
 <%
-String cssClass = GetterUtil.getString((String)request.getAttribute("aui:button:cssClass"));
-CustomAttributes customAttributes = (CustomAttributes)request.getAttribute("aui:button:customAttributes");
-boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("aui:button:disabled"));
-Map<String, Object> data = (Map<String, Object>)request.getAttribute("aui:button:data");
-Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:button:dynamicAttributes");
-String inputCssClass = GetterUtil.getString((String)request.getAttribute("aui:button:inputCssClass"));
-String name = GetterUtil.getString((String)request.getAttribute("aui:button:name"));
-String onClick = GetterUtil.getString((String)request.getAttribute("aui:button:onClick"));
-String type = GetterUtil.getString((String)request.getAttribute("aui:button:type"));
-String value = (String)request.getAttribute("aui:button:value");
-
 if (onClick.startsWith(Http.HTTP_WITH_SLASH) || onClick.startsWith(Http.HTTPS_WITH_SLASH) || onClick.startsWith(StringPool.SLASH)) {
 	onClick = "location.href = '" + HtmlUtil.escape(PortalUtil.escapeRedirect(onClick)) + "';";
 }
