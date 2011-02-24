@@ -89,7 +89,6 @@ public class Field implements Serializable {
 	public Field(String name, Map<Locale, String> localizedValues) {
 		_name = name;
 		_localizedValues = localizedValues;
-		_localized = true;
 	}
 
 	public Field(String name, String value) {
@@ -155,7 +154,12 @@ public class Field implements Serializable {
 	}
 
 	public boolean isLocalized() {
-		return _localized;
+		if (_localizedValues != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isNumeric() {
@@ -191,10 +195,10 @@ public class Field implements Serializable {
 	}
 
 	private float _boost = 1;
-	private Map<Locale,String> _localizedValues;
-	private boolean _localized = false;
+	private Map<Locale, String> _localizedValues;
 	private String _name;
-	private boolean _numeric = false;
-	private boolean _tokenized = false;
+	private boolean _numeric;
+	private boolean _tokenized;
 	private String[] _values;
+
 }
