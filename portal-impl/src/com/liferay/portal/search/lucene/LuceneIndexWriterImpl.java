@@ -20,11 +20,14 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
 import java.util.Collection;
+import java.util.Locale;
+import java.util.Map;
 
 import org.apache.lucene.index.Term;
 
@@ -135,32 +138,62 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 			boolean tokenized = field.isTokenized();
 			float boost = field.getBoost();
 
-			for (String value : field.getValues()) {
-				if (Validator.isNull(value)) {
-					continue;
-				}
-
-				org.apache.lucene.document.Fieldable luceneFieldable = null;
-
-				if (numeric) {
-					luceneFieldable = LuceneFields.getNumber(name, value);
-				}
-				else {
-					if (tokenized) {
-						luceneFieldable = LuceneFields.getText(name, value);
+			if (!field.isLocalized()) {
+				for (String value : field.getValues()) {
+					if (Validator.isNull(value)) {
+						continue;
 					}
-					else {
-						luceneFieldable = LuceneFields.getKeyword(name, value);
-					}
+
+					_addLuceneFieldable(
+						luceneDocument, name, numeric, tokenized, boost, value);
 				}
-
-				luceneFieldable.setBoost(boost);
-
-				luceneDocument.add(luceneFieldable);
 			}
+			else {
+				for (Map.Entry<Locale, String> entry :
+						field.getLocalizedValues().entrySet()) {
+
+					Locale locale = entry.getKey();
+					String value = entry.getValue();
+
+					if (Validator.isNull(value)) {
+						continue;
+					}
+
+					name = name.concat(StringPool.UNDERLINE).concat(
+						locale.getDisplayName());
+
+					_addLuceneFieldable(
+						luceneDocument, name, numeric, tokenized, boost, value);
+
+				}
+			}
+
 		}
 
 		return luceneDocument;
+	}
+
+	private void _addLuceneFieldable(
+		org.apache.lucene.document.Document luceneDocument, String name,
+		boolean numeric, boolean tokenized, float boost, String value) {
+
+		org.apache.lucene.document.Fieldable luceneFieldable = null;
+
+		if (numeric) {
+			luceneFieldable = LuceneFields.getNumber(name, value);
+		}
+		else {
+			if (tokenized) {
+				luceneFieldable = LuceneFields.getText(name, value);
+			}
+			else {
+				luceneFieldable = LuceneFields.getKeyword(name, value);
+			}
+		}
+
+		luceneFieldable.setBoost(boost);
+
+		luceneDocument.add(luceneFieldable);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
