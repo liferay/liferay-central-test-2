@@ -255,6 +255,10 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			List<String> subsetSnippets = new ArrayList<String>(subsetTotal);
 			List<Float> subsetScores = new ArrayList<Float>(subsetTotal);
 
+			QueryConfig queryConfig = query.getQueryConfig();
+
+			boolean highlightEnabled = queryConfig.isHighlightEnabled();
+
 			for (int i = start; i < end; i++) {
 				if (i >= PropsValues.INDEX_SEARCH_LIMIT) {
 					break;
@@ -267,9 +271,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 				subsetDocs.add(subsetDocument);
 
-				QueryConfig queryConfig = query.getQueryConfig();
-
-				if (queryConfig.isHighlightEnabled()) {
+				if (highlightEnabled) {
 					String subsetSnippet = getSnippet(
 						document, query, Field.CONTENT);
 
