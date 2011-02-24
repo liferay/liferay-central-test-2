@@ -25,8 +25,10 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.LockImpl;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
@@ -181,7 +183,11 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public Lock getLock() {
-		return null;
+		Lock lock = new LockImpl();
+
+		lock.setCreateDate(new Date());
+
+		return lock;
 	}
 
 	public Object getModel() {
@@ -271,6 +277,25 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public boolean isLocked() {
+		String checkedOutId = _document.getVersionSeriesCheckedOutId();
+
+		if (Validator.isNotNull(checkedOutId)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isLockSupported() {
+		return false;
+	}
+
+	public boolean isMetadataSupported() {
+		return false;
+	}
+
+	public boolean isSocialSupported() {
 		return false;
 	}
 

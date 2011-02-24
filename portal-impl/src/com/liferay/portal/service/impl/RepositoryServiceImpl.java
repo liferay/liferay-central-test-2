@@ -396,6 +396,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		}
 
 		baseRepositoryImpl.setCompanyId(repository.getCompanyId());
+		baseRepositoryImpl.setCompanyLocalService(companyLocalService);
 		baseRepositoryImpl.setCounterLocalService(counterLocalService);
 		baseRepositoryImpl.setDLAppHelperLocalService(
 			dlAppHelperLocalService);
@@ -403,6 +404,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		baseRepositoryImpl.setRepositoryId(repositoryId);
 		baseRepositoryImpl.setTypeSettingsProperties(
 			repository.getTypeSettingsProperties());
+		baseRepositoryImpl.setUserLocalService(userLocalService);
 
 		baseRepositoryImpl.initRepository();
 

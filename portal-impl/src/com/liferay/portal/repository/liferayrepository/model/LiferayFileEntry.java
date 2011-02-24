@@ -217,6 +217,18 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 		return _dlFileEntry.isLocked();
 	}
 
+	public boolean isLockSupported() {
+		return true;
+	}
+
+	public boolean isMetadataSupported() {
+		return true;
+	}
+
+	public boolean isSocialSupported() {
+		return true;
+	}
+
 	public void prepare() throws SystemException {
 		_dlFileEntry.setUserUuid(getUserUuid());
 	}

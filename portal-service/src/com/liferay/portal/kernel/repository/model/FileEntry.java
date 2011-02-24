@@ -103,4 +103,10 @@ public interface FileEntry extends RepositoryModel<FileEntry> {
 
 	public boolean isLocked();
 
+	public boolean isLockSupported();
+
+	public boolean isMetadataSupported();
+
+	public boolean isSocialSupported();
+
 }

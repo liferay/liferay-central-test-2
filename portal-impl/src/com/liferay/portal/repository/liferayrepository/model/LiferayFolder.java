@@ -168,12 +168,24 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return _dlFolder.isLocked();
 	}
 
+	public boolean isLockSupported() {
+		return true;
+	}
+
+	public boolean isMetadataSupported() {
+		return true;
+	}
+
 	public boolean isMountPoint() {
 		return _dlFolder.isMountPoint();
 	}
 
 	public boolean isRoot() {
 		return _dlFolder.isRoot();
+	}
+
+	public boolean isSocialSupported() {
+		return true;
 	}
 
 	public void prepare() throws SystemException {

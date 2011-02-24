@@ -155,7 +155,6 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 			lock.setCompanyId(user.getCompanyId());
 			lock.setUserId(user.getUserId());
 			lock.setUserName(user.getFullName());
-			lock.setUserId(userId);
 			lock.setClassName(className);
 			lock.setKey(key);
 			lock.setOwner(owner);

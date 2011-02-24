@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.RepositoryEntry;
+import com.liferay.portal.service.CompanyLocalService;
+import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.persistence.RepositoryEntryUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
 
@@ -120,6 +122,12 @@ public abstract class BaseRepositoryImpl implements Repository {
 		_companyId = companyId;
 	}
 
+	public void setCompanyLocalService(
+		CompanyLocalService companyLocalService) {
+
+		this.companyLocalService = companyLocalService;
+	}
+
 	public void setCounterLocalService(
 		CounterLocalService counterLocalService) {
 
@@ -140,6 +148,10 @@ public abstract class BaseRepositoryImpl implements Repository {
 		_repositoryId = repositoryId;
 	}
 
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
 	public void setTypeSettingsProperties(
 		UnicodeProperties typeSettingsProperties) {
 
@@ -154,8 +166,10 @@ public abstract class BaseRepositoryImpl implements Repository {
 		unlockFolder(folder.getFolderId(), lockUuid);
 	}
 
+	protected CompanyLocalService companyLocalService;
 	protected CounterLocalService counterLocalService;
 	protected DLAppHelperLocalService dlAppHelperLocalService;
+	protected UserLocalService userLocalService;
 
 	private long _companyId;
 	private long _groupId;

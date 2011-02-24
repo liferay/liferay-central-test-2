@@ -216,20 +216,22 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</div>
 		</c:if>
 
-		<div class="lfr-asset-categories">
-			<liferay-ui:asset-categories-summary
-				className="<%= DLFileEntryConstants.getClassName() %>"
-				classPK="<%= assetClassPK %>"
-			/>
-		</div>
+		<c:if test="<%= fileEntry.isSocialSupported() %>">
+			<div class="lfr-asset-categories">
+				<liferay-ui:asset-categories-summary
+					className="<%= DLFileEntryConstants.getClassName() %>"
+					classPK="<%= assetClassPK %>"
+				/>
+			</div>
 
-		<div class="lfr-asset-tags">
-			<liferay-ui:asset-tags-summary
-				className="<%= DLFileEntryConstants.getClassName() %>"
-				classPK="<%= assetClassPK %>"
-				message="tags"
-			/>
-		</div>
+			<div class="lfr-asset-tags">
+				<liferay-ui:asset-tags-summary
+					className="<%= DLFileEntryConstants.getClassName() %>"
+					classPK="<%= assetClassPK %>"
+					message="tags"
+				/>
+			</div>
+		</c:if>
 
 		<c:if test="<%= Validator.isNotNull(fileEntry.getDescription()) %>">
 			<div class="lfr-asset-description">
@@ -237,21 +239,25 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</div>
 		</c:if>
 
-		<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
-			<liferay-ui:custom-attribute-list
-				className="<%= DLFileEntryConstants.getClassName() %>"
-				classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
-				editable="<%= false %>"
-				label="<%= true %>"
-			/>
-		</liferay-ui:custom-attributes-available>
+		<c:if test="<%= fileEntry.isMetadataSupported() %>">
+			<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFileEntryConstants.getClassName() %>"
+					classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
+					editable="<%= false %>"
+					label="<%= true %>"
+				/>
+			</liferay-ui:custom-attributes-available>
+		</c:if>
 
-		<div class="lfr-asset-ratings">
-			<liferay-ui:ratings
-				className="<%= DLFileEntryConstants.getClassName() %>"
-				classPK="<%= fileEntryId %>"
-			/>
-		</div>
+		<c:if test="<%= fileEntry.isSocialSupported() %>">
+			<div class="lfr-asset-ratings">
+				<liferay-ui:ratings
+					className="<%= DLFileEntryConstants.getClassName() %>"
+					classPK="<%= fileEntryId %>"
+				/>
+			</div>
+		</c:if>
 
 		<div class="lfr-asset-field">
 			<label><liferay-ui:message key="url" /></label>
@@ -261,7 +267,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			/>
 		</div>
 
-		<c:if test="<%= portletDisplay.isWebDAVEnabled() %>">
+		<c:if test="<%= portletDisplay.isWebDAVEnabled() && fileEntry.isSocialSupported() %>">
 			<div class="lfr-asset-field">
 
 				<%

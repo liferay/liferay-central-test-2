@@ -270,6 +270,14 @@ public class CMISFolder extends CMISModel implements Folder {
 		return false;
 	}
 
+	public boolean isLockSupported() {
+		return false;
+	}
+
+	public boolean isMetadataSupported() {
+		return false;
+	}
+
 	public boolean isMountPoint() {
 		return false;
 	}
@@ -281,6 +289,10 @@ public class CMISFolder extends CMISModel implements Folder {
 		else {
 			return false;
 		}
+	}
+
+	public boolean isSocialSupported() {
+		return false;
 	}
 
 	public void prepare() {

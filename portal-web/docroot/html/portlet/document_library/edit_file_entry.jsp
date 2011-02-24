@@ -242,20 +242,24 @@ portletURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 
 		<aui:input name="title" />
 
-		<aui:input name="description" />
+		<c:if test="<%= folder != null && folder.isMetadataSupported() %>">
+			<aui:input name="description" />
 
-		<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
-			<liferay-ui:custom-attribute-list
-				className="<%= DLFileEntryConstants.getClassName() %>"
-				classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
-				editable="<%= true %>"
-				label="<%= true %>"
-			/>
-		</liferay-ui:custom-attributes-available>
+			<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
+				<liferay-ui:custom-attribute-list
+					className="<%= DLFileEntryConstants.getClassName() %>"
+					classPK="<%= (fileVersion != null) ? fileVersion.getFileVersionId() : 0 %>"
+					editable="<%= true %>"
+					label="<%= true %>"
+				/>
+			</liferay-ui:custom-attributes-available>
+		</c:if>
 
-		<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
+		<c:if test="<%= folder != null && folder.isSocialSupported() %>">
+			<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="categories" type="assetCategories" />
 
-		<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
+			<aui:input classPK="<%= assetClassPK %>" model="<%= DLFileEntry.class %>" name="tags" type="assetTags" />
+		</c:if>
 
 		<c:if test="<%= fileEntry == null %>">
 			<aui:field-wrapper label="permissions">

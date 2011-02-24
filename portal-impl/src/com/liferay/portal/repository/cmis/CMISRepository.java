@@ -39,12 +39,9 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.model.CMISFileEntry;
 import com.liferay.portal.repository.cmis.model.CMISFileVersion;
 import com.liferay.portal.repository.cmis.model.CMISFolder;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.RepositoryEntryUtil;
 import com.liferay.portal.service.persistence.RepositoryUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
@@ -268,9 +265,9 @@ public class CMISRepository extends BaseRepositoryImpl {
 		try {
 			Session session = getSession();
 
-			FileEntry fileEntry = getFileEntry(session, fileEntryId);
+			ObjectId objectId = toFileEntryId(fileEntryId);
 
-			Document document = (Document)fileEntry.getModel();
+			Document document = (Document)session.getObject(objectId);
 
 			document.deleteAllVersions();
 		}
@@ -674,26 +671,20 @@ public class CMISRepository extends BaseRepositoryImpl {
 	public Lock lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		// TODO
-
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)
 		throws PortalException, SystemException {
 
-		// TODO
-
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public Lock lockFolder(long folderId)
 		throws PortalException, SystemException {
 
-		// TODO
-
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public Lock lockFolder(
@@ -701,9 +692,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			long expirationTime)
 		throws PortalException, SystemException {
 
-		// TODO
-
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public FileEntry moveFileEntry(
@@ -811,17 +800,13 @@ public class CMISRepository extends BaseRepositoryImpl {
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
 		throws PortalException, SystemException {
 
-		// TODO
-
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public Lock refreshFolderLock(String lockUuid, long expirationTime)
 		throws PortalException, SystemException {
 
-		// TODO
-
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public void revertFileEntry(
@@ -934,23 +919,19 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public void unlockFileEntry(long fileEntryId) throws SystemException {
-
-		// TODO
-
+		throw new UnsupportedOperationException();
 	}
 
 	public void unlockFileEntry(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
 
-		// TODO
-
+		throw new UnsupportedOperationException();
 	}
 
 	public void unlockFolder(long folderId, String lockUuid)
 		throws PortalException, SystemException {
 
-		// TODO
-
+		throw new UnsupportedOperationException();
 	}
 
 	public FileEntry updateFileEntry(
@@ -1076,17 +1057,13 @@ public class CMISRepository extends BaseRepositoryImpl {
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
 
-		// TODO
-
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	public boolean verifyInheritableLock(long folderId, String lockUuid)
 		throws PortalException, SystemException {
 
-		// TODO
-
-		return false;
+		throw new UnsupportedOperationException();
 	}
 
 	protected org.apache.chemistry.opencmis.client.api.Folder getCmisFolder(
@@ -1208,6 +1185,32 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			return cmisObject.iterator();
 		}
+	}
+
+	protected String getLogin() throws RepositoryException {
+		String login = PrincipalThreadLocal.getName();
+
+		try {
+			String authType = companyLocalService.getCompany(
+				getCompanyId()).getAuthType();
+
+			if (!authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
+				User user = userLocalService.getUser(
+					GetterUtil.getLong(login));
+
+				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+					login = user.getEmailAddress();
+				}
+				else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+					login = user.getScreenName();
+				}
+			}
+		}
+		catch (Exception e) {
+			throw new RepositoryException(e);
+		}
+
+		return login;
 	}
 
 	protected String getObjectId(
@@ -1337,28 +1340,8 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected Session getSession() throws RepositoryException {
-		String login = PrincipalThreadLocal.getName();
 		String password = PrincipalThreadLocal.getPassword();
-
-		try {
-			String authType = CompanyLocalServiceUtil.getCompany(
-				CompanyThreadLocal.getCompanyId()).getAuthType();
-
-			if (!authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
-				User user = UserLocalServiceUtil.getUser(
-					GetterUtil.getLong(login));
-
-				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
-					login = user.getEmailAddress();
-				}
-				else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-					login = user.getScreenName();
-				}
-			}
-		}
-		catch (Exception e) {
-			throw new RepositoryException(e);
-		}
+		String login = getLogin();
 
 		Map<String, String> parameters = new HashMap<String, String>();
 

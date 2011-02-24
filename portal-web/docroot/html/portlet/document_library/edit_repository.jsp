@@ -66,7 +66,6 @@ long folderId = ParamUtil.getLong(request, "folderId");
 				}
 				%>
 
-				<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, LiferayRepository.class.getName()) %>" value="<%= LiferayRepository.class.getName() %>" />
 			</aui:select>
 
 			<div id="<portlet:namespace />settingsConfiguration"></div>
