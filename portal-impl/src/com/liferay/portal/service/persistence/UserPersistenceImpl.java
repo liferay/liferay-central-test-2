@@ -916,7 +916,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param uuid the uuid to search with
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1009,7 +1009,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1044,7 +1044,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1081,7 +1081,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 *
 	 * @param userId the primary key of the current user
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user
 	 * @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1267,7 +1267,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1348,7 +1348,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1383,7 +1383,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1422,7 +1422,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 *
 	 * @param userId the primary key of the current user
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user
 	 * @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1723,7 +1723,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param emailAddress the email address to search with
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1816,7 +1816,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * </p>
 	 *
 	 * @param emailAddress the email address to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1852,7 +1852,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * </p>
 	 *
 	 * @param emailAddress the email address to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1891,7 +1891,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 *
 	 * @param userId the primary key of the current user
 	 * @param emailAddress the email address to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user
 	 * @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3075,7 +3075,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3161,7 +3161,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 *
 	 * @param companyId the company ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3200,7 +3200,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 *
 	 * @param companyId the company ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user
 	 * @throws com.liferay.portal.NoSuchUserException if a matching user could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3243,7 +3243,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param userId the primary key of the current user
 	 * @param companyId the company ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user
 	 * @throws com.liferay.portal.NoSuchUserException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3417,7 +3417,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 *
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of users
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4488,7 +4488,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param pk the primary key of the user to get the associated groups for
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of groups associated with the user
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4951,7 +4951,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param pk the primary key of the user to get the associated organizations for
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of organizations associated with the user
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5427,7 +5427,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param pk the primary key of the user to get the associated permissions for
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of permissions associated with the user
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5902,7 +5902,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param pk the primary key of the user to get the associated roles for
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of roles associated with the user
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -6363,7 +6363,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param pk the primary key of the user to get the associated teams for
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of teams associated with the user
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -6823,7 +6823,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 	 * @param pk the primary key of the user to get the associated user groups for
 	 * @param start the lower bound of the range of users to return
 	 * @param end the upper bound of the range of users to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of user groups associated with the user
 	 * @throws SystemException if a system exception occurred
 	 */

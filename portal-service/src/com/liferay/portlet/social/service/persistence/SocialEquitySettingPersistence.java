@@ -149,7 +149,7 @@ public interface SocialEquitySettingPersistence extends BasePersistence<SocialEq
 	* @param actionId the action ID to search with
 	* @param start the lower bound of the range of social equity settings to return
 	* @param end the upper bound of the range of social equity settings to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social equity settings
 	* @throws SystemException if a system exception occurred
 	*/
@@ -169,7 +169,7 @@ public interface SocialEquitySettingPersistence extends BasePersistence<SocialEq
 	* @param groupId the group ID to search with
 	* @param classNameId the class name ID to search with
 	* @param actionId the action ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social equity setting
 	* @throws com.liferay.portlet.social.NoSuchEquitySettingException if a matching social equity setting could not be found
 	* @throws SystemException if a system exception occurred
@@ -190,7 +190,7 @@ public interface SocialEquitySettingPersistence extends BasePersistence<SocialEq
 	* @param groupId the group ID to search with
 	* @param classNameId the class name ID to search with
 	* @param actionId the action ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social equity setting
 	* @throws com.liferay.portlet.social.NoSuchEquitySettingException if a matching social equity setting could not be found
 	* @throws SystemException if a system exception occurred
@@ -212,7 +212,7 @@ public interface SocialEquitySettingPersistence extends BasePersistence<SocialEq
 	* @param groupId the group ID to search with
 	* @param classNameId the class name ID to search with
 	* @param actionId the action ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social equity setting
 	* @throws com.liferay.portlet.social.NoSuchEquitySettingException if a social equity setting with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public interface SocialEquitySettingPersistence extends BasePersistence<SocialEq
 	*
 	* @param start the lower bound of the range of social equity settings to return
 	* @param end the upper bound of the range of social equity settings to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of social equity settings
 	* @throws SystemException if a system exception occurred
 	*/

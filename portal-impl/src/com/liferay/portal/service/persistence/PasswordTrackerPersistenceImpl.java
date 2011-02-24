@@ -424,7 +424,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of password trackers to return
 	 * @param end the upper bound of the range of password trackers to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching password trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -510,7 +510,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * </p>
 	 *
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching password tracker
 	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
 	 * @throws SystemException if a system exception occurred
@@ -546,7 +546,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 * </p>
 	 *
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching password tracker
 	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a matching password tracker could not be found
 	 * @throws SystemException if a system exception occurred
@@ -585,7 +585,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 *
 	 * @param passwordTrackerId the primary key of the current password tracker
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next password tracker
 	 * @throws com.liferay.portal.NoSuchPasswordTrackerException if a password tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -760,7 +760,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistenceImpl<Password
 	 *
 	 * @param start the lower bound of the range of password trackers to return
 	 * @param end the upper bound of the range of password trackers to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of password trackers
 	 * @throws SystemException if a system exception occurred
 	 */

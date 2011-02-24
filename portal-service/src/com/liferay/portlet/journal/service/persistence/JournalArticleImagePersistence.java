@@ -143,7 +143,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal article images to return
 	* @param end the upper bound of the range of journal article images to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -160,7 +160,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	* @throws SystemException if a system exception occurred
@@ -179,7 +179,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	*
 	* @param articleImageId the primary key of the current journal article image
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -248,7 +248,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param tempImage the temp image to search with
 	* @param start the lower bound of the range of journal article images to return
 	* @param end the upper bound of the range of journal article images to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -265,7 +265,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* </p>
 	*
 	* @param tempImage the temp image to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	* @throws SystemException if a system exception occurred
@@ -284,7 +284,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* </p>
 	*
 	* @param tempImage the temp image to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	* @throws SystemException if a system exception occurred
@@ -304,7 +304,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	*
 	* @param articleImageId the primary key of the current journal article image
 	* @param tempImage the temp image to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -359,7 +359,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param version the version to search with
 	* @param start the lower bound of the range of journal article images to return
 	* @param end the upper bound of the range of journal article images to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal article images
 	* @throws SystemException if a system exception occurred
 	*/
@@ -379,7 +379,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param groupId the group ID to search with
 	* @param articleId the article ID to search with
 	* @param version the version to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	* @throws SystemException if a system exception occurred
@@ -400,7 +400,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param groupId the group ID to search with
 	* @param articleId the article ID to search with
 	* @param version the version to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a matching journal article image could not be found
 	* @throws SystemException if a system exception occurred
@@ -422,7 +422,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	* @param groupId the group ID to search with
 	* @param articleId the article ID to search with
 	* @param version the version to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal article image
 	* @throws com.liferay.portlet.journal.NoSuchArticleImageException if a journal article image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -524,7 +524,7 @@ public interface JournalArticleImagePersistence extends BasePersistence<JournalA
 	*
 	* @param start the lower bound of the range of journal article images to return
 	* @param end the upper bound of the range of journal article images to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of journal article images
 	* @throws SystemException if a system exception occurred
 	*/

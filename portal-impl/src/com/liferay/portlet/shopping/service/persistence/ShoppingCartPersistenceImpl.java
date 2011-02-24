@@ -495,7 +495,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of shopping carts to return
 	 * @param end the upper bound of the range of shopping carts to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -577,7 +577,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching shopping cart
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
@@ -612,7 +612,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching shopping cart
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
@@ -651,7 +651,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 *
 	 * @param cartId the primary key of the current shopping cart
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next shopping cart
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -826,7 +826,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of shopping carts to return
 	 * @param end the upper bound of the range of shopping carts to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -908,7 +908,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * </p>
 	 *
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching shopping cart
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
@@ -943,7 +943,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 * </p>
 	 *
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching shopping cart
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a matching shopping cart could not be found
 	 * @throws SystemException if a system exception occurred
@@ -982,7 +982,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 *
 	 * @param cartId the primary key of the current shopping cart
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next shopping cart
 	 * @throws com.liferay.portlet.shopping.NoSuchCartException if a shopping cart with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1291,7 +1291,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 	 *
 	 * @param start the lower bound of the range of shopping carts to return
 	 * @param end the upper bound of the range of shopping carts to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of shopping carts
 	 * @throws SystemException if a system exception occurred
 	 */

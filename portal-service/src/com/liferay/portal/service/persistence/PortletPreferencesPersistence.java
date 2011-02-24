@@ -140,7 +140,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param plid the plid to search with
 	* @param start the lower bound of the range of portlet preferenceses to return
 	* @param end the upper bound of the range of portlet preferenceses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching portlet preferenceses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -157,7 +157,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* </p>
 	*
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching portlet preferences
 	* @throws com.liferay.portal.NoSuchPortletPreferencesException if a matching portlet preferences could not be found
 	* @throws SystemException if a system exception occurred
@@ -176,7 +176,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* </p>
 	*
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching portlet preferences
 	* @throws com.liferay.portal.NoSuchPortletPreferencesException if a matching portlet preferences could not be found
 	* @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	*
 	* @param portletPreferencesId the primary key of the current portlet preferences
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next portlet preferences
 	* @throws com.liferay.portal.NoSuchPortletPreferencesException if a portlet preferences with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -248,7 +248,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param portletId the portlet ID to search with
 	* @param start the lower bound of the range of portlet preferenceses to return
 	* @param end the upper bound of the range of portlet preferenceses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching portlet preferenceses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -266,7 +266,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	*
 	* @param plid the plid to search with
 	* @param portletId the portlet ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching portlet preferences
 	* @throws com.liferay.portal.NoSuchPortletPreferencesException if a matching portlet preferences could not be found
 	* @throws SystemException if a system exception occurred
@@ -286,7 +286,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	*
 	* @param plid the plid to search with
 	* @param portletId the portlet ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching portlet preferences
 	* @throws com.liferay.portal.NoSuchPortletPreferencesException if a matching portlet preferences could not be found
 	* @throws SystemException if a system exception occurred
@@ -307,7 +307,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param portletPreferencesId the primary key of the current portlet preferences
 	* @param plid the plid to search with
 	* @param portletId the portlet ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next portlet preferences
 	* @throws com.liferay.portal.NoSuchPortletPreferencesException if a portlet preferences with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -362,7 +362,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param plid the plid to search with
 	* @param start the lower bound of the range of portlet preferenceses to return
 	* @param end the upper bound of the range of portlet preferenceses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching portlet preferenceses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -381,7 +381,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param ownerId the owner ID to search with
 	* @param ownerType the owner type to search with
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching portlet preferences
 	* @throws com.liferay.portal.NoSuchPortletPreferencesException if a matching portlet preferences could not be found
 	* @throws SystemException if a system exception occurred
@@ -402,7 +402,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param ownerId the owner ID to search with
 	* @param ownerType the owner type to search with
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching portlet preferences
 	* @throws com.liferay.portal.NoSuchPortletPreferencesException if a matching portlet preferences could not be found
 	* @throws SystemException if a system exception occurred
@@ -424,7 +424,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	* @param ownerId the owner ID to search with
 	* @param ownerType the owner type to search with
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next portlet preferences
 	* @throws com.liferay.portal.NoSuchPortletPreferencesException if a portlet preferences with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -514,7 +514,7 @@ public interface PortletPreferencesPersistence extends BasePersistence<PortletPr
 	*
 	* @param start the lower bound of the range of portlet preferenceses to return
 	* @param end the upper bound of the range of portlet preferenceses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of portlet preferenceses
 	* @throws SystemException if a system exception occurred
 	*/

@@ -434,7 +434,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * @param itemId the item ID to search with
 	 * @param start the lower bound of the range of shopping item prices to return
 	 * @param end the upper bound of the range of shopping item prices to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching shopping item prices
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -520,7 +520,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * </p>
 	 *
 	 * @param itemId the item ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching shopping item price
 	 * @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a matching shopping item price could not be found
 	 * @throws SystemException if a system exception occurred
@@ -556,7 +556,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * </p>
 	 *
 	 * @param itemId the item ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching shopping item price
 	 * @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a matching shopping item price could not be found
 	 * @throws SystemException if a system exception occurred
@@ -595,7 +595,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 *
 	 * @param itemPriceId the primary key of the current shopping item price
 	 * @param itemId the item ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next shopping item price
 	 * @throws com.liferay.portlet.shopping.NoSuchItemPriceException if a shopping item price with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -770,7 +770,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl<Shoppi
 	 *
 	 * @param start the lower bound of the range of shopping item prices to return
 	 * @param end the upper bound of the range of shopping item prices to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of shopping item prices
 	 * @throws SystemException if a system exception occurred
 	 */

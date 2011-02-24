@@ -502,7 +502,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 * @param classNameId the class name ID to search with
 	 * @param start the lower bound of the range of expando tables to return
 	 * @param end the upper bound of the range of expando tables to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching expando tables
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -590,7 +590,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 *
 	 * @param companyId the company ID to search with
 	 * @param classNameId the class name ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching expando table
 	 * @throws com.liferay.portlet.expando.NoSuchTableException if a matching expando table could not be found
 	 * @throws SystemException if a system exception occurred
@@ -630,7 +630,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 *
 	 * @param companyId the company ID to search with
 	 * @param classNameId the class name ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching expando table
 	 * @throws com.liferay.portlet.expando.NoSuchTableException if a matching expando table could not be found
 	 * @throws SystemException if a system exception occurred
@@ -673,7 +673,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 * @param tableId the primary key of the current expando table
 	 * @param companyId the company ID to search with
 	 * @param classNameId the class name ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next expando table
 	 * @throws com.liferay.portlet.expando.NoSuchTableException if a expando table with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1010,7 +1010,7 @@ public class ExpandoTablePersistenceImpl extends BasePersistenceImpl<ExpandoTabl
 	 *
 	 * @param start the lower bound of the range of expando tables to return
 	 * @param end the upper bound of the range of expando tables to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of expando tables
 	 * @throws SystemException if a system exception occurred
 	 */

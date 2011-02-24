@@ -234,7 +234,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	* @param active the active to search with
 	* @param start the lower bound of the range of countries to return
 	* @param end the upper bound of the range of countries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching countries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -251,7 +251,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	* </p>
 	*
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching country
 	* @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
 	* @throws SystemException if a system exception occurred
@@ -269,7 +269,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	* </p>
 	*
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching country
 	* @throws com.liferay.portal.NoSuchCountryException if a matching country could not be found
 	* @throws SystemException if a system exception occurred
@@ -288,7 +288,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	*
 	* @param countryId the primary key of the current country
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next country
 	* @throws com.liferay.portal.NoSuchCountryException if a country with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -332,7 +332,7 @@ public interface CountryPersistence extends BasePersistence<Country> {
 	*
 	* @param start the lower bound of the range of countries to return
 	* @param end the upper bound of the range of countries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of countries
 	* @throws SystemException if a system exception occurred
 	*/

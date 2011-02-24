@@ -241,7 +241,7 @@ public class SocialActivityUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of social activities to return
 	* @param end the upper bound of the range of social activities to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social activities
 	* @throws SystemException if a system exception occurred
 	*/
@@ -261,7 +261,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -282,7 +282,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -304,7 +304,7 @@ public class SocialActivityUtil {
 	*
 	* @param activityId the primary key of the current social activity
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -361,7 +361,7 @@ public class SocialActivityUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of social activities to return
 	* @param end the upper bound of the range of social activities to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social activities
 	* @throws SystemException if a system exception occurred
 	*/
@@ -381,7 +381,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -403,7 +403,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -426,7 +426,7 @@ public class SocialActivityUtil {
 	*
 	* @param activityId the primary key of the current social activity
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -482,7 +482,7 @@ public class SocialActivityUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of social activities to return
 	* @param end the upper bound of the range of social activities to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social activities
 	* @throws SystemException if a system exception occurred
 	*/
@@ -502,7 +502,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -523,7 +523,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -545,7 +545,7 @@ public class SocialActivityUtil {
 	*
 	* @param activityId the primary key of the current social activity
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -644,7 +644,7 @@ public class SocialActivityUtil {
 	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of social activities to return
 	* @param end the upper bound of the range of social activities to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social activities
 	* @throws SystemException if a system exception occurred
 	*/
@@ -664,7 +664,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -686,7 +686,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -709,7 +709,7 @@ public class SocialActivityUtil {
 	*
 	* @param activityId the primary key of the current social activity
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -766,7 +766,7 @@ public class SocialActivityUtil {
 	* @param receiverUserId the receiver user ID to search with
 	* @param start the lower bound of the range of social activities to return
 	* @param end the upper bound of the range of social activities to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social activities
 	* @throws SystemException if a system exception occurred
 	*/
@@ -787,7 +787,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param receiverUserId the receiver user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -809,7 +809,7 @@ public class SocialActivityUtil {
 	* </p>
 	*
 	* @param receiverUserId the receiver user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -832,7 +832,7 @@ public class SocialActivityUtil {
 	*
 	* @param activityId the primary key of the current social activity
 	* @param receiverUserId the receiver user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -892,7 +892,7 @@ public class SocialActivityUtil {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of social activities to return
 	* @param end the upper bound of the range of social activities to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social activities
 	* @throws SystemException if a system exception occurred
 	*/
@@ -914,7 +914,7 @@ public class SocialActivityUtil {
 	*
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -937,7 +937,7 @@ public class SocialActivityUtil {
 	*
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -961,7 +961,7 @@ public class SocialActivityUtil {
 	* @param activityId the primary key of the current social activity
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1027,7 +1027,7 @@ public class SocialActivityUtil {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of social activities to return
 	* @param end the upper bound of the range of social activities to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social activities
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1051,7 +1051,7 @@ public class SocialActivityUtil {
 	* @param mirrorActivityId the mirror activity ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -1076,7 +1076,7 @@ public class SocialActivityUtil {
 	* @param mirrorActivityId the mirror activity ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a matching social activity could not be found
 	* @throws SystemException if a system exception occurred
@@ -1102,7 +1102,7 @@ public class SocialActivityUtil {
 	* @param mirrorActivityId the mirror activity ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social activity
 	* @throws com.liferay.portlet.social.NoSuchActivityException if a social activity with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1223,7 +1223,7 @@ public class SocialActivityUtil {
 	*
 	* @param start the lower bound of the range of social activities to return
 	* @param end the upper bound of the range of social activities to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of social activities
 	* @throws SystemException if a system exception occurred
 	*/

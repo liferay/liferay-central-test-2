@@ -241,7 +241,7 @@ public class MBDiscussionUtil {
 	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of message boards discussions to return
 	* @param end the upper bound of the range of message boards discussions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards discussions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -261,7 +261,7 @@ public class MBDiscussionUtil {
 	* </p>
 	*
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards discussion
 	* @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public class MBDiscussionUtil {
 	* </p>
 	*
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards discussion
 	* @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a matching message boards discussion could not be found
 	* @throws SystemException if a system exception occurred
@@ -306,7 +306,7 @@ public class MBDiscussionUtil {
 	*
 	* @param discussionId the primary key of the current message boards discussion
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards discussion
 	* @throws com.liferay.portlet.messageboards.NoSuchDiscussionException if a message boards discussion with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -445,7 +445,7 @@ public class MBDiscussionUtil {
 	*
 	* @param start the lower bound of the range of message boards discussions to return
 	* @param end the upper bound of the range of message boards discussions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of message boards discussions
 	* @throws SystemException if a system exception occurred
 	*/

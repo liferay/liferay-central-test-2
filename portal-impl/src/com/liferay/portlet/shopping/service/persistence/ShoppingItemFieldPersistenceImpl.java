@@ -429,7 +429,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * @param itemId the item ID to search with
 	 * @param start the lower bound of the range of shopping item fields to return
 	 * @param end the upper bound of the range of shopping item fields to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching shopping item fields
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -515,7 +515,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * </p>
 	 *
 	 * @param itemId the item ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching shopping item field
 	 * @throws com.liferay.portlet.shopping.NoSuchItemFieldException if a matching shopping item field could not be found
 	 * @throws SystemException if a system exception occurred
@@ -551,7 +551,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	 * </p>
 	 *
 	 * @param itemId the item ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching shopping item field
 	 * @throws com.liferay.portlet.shopping.NoSuchItemFieldException if a matching shopping item field could not be found
 	 * @throws SystemException if a system exception occurred
@@ -590,7 +590,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	 *
 	 * @param itemFieldId the primary key of the current shopping item field
 	 * @param itemId the item ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next shopping item field
 	 * @throws com.liferay.portlet.shopping.NoSuchItemFieldException if a shopping item field with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -765,7 +765,7 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistenceImpl<Shoppi
 	 *
 	 * @param start the lower bound of the range of shopping item fields to return
 	 * @param end the upper bound of the range of shopping item fields to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of shopping item fields
 	 * @throws SystemException if a system exception occurred
 	 */

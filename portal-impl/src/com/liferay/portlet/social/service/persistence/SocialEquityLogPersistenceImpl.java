@@ -636,7 +636,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param active the active to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -729,7 +729,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param assetEntryId the asset entry ID to search with
 	 * @param type the type to search with
 	 * @param active the active to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -773,7 +773,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param assetEntryId the asset entry ID to search with
 	 * @param type the type to search with
 	 * @param active the active to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -820,7 +820,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param assetEntryId the asset entry ID to search with
 	 * @param type the type to search with
 	 * @param active the active to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1017,7 +1017,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param extraData the extra data to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1139,7 +1139,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action ID to search with
 	 * @param active the active to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1188,7 +1188,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action ID to search with
 	 * @param active the active to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1240,7 +1240,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action ID to search with
 	 * @param active the active to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1471,7 +1471,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param extraData the extra data to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1599,7 +1599,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action ID to search with
 	 * @param active the active to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1652,7 +1652,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action ID to search with
 	 * @param active the active to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1709,7 +1709,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param actionId the action ID to search with
 	 * @param active the active to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1947,7 +1947,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param extraData the extra data to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2080,7 +2080,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param active the active to search with
 	 * @param type the type to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2137,7 +2137,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param active the active to search with
 	 * @param type the type to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2199,7 +2199,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param active the active to search with
 	 * @param type the type to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2442,7 +2442,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param extraData the extra data to search with
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2575,7 +2575,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param active the active to search with
 	 * @param type the type to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2633,7 +2633,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param active the active to search with
 	 * @param type the type to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a matching social equity log could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2695,7 +2695,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 * @param active the active to search with
 	 * @param type the type to search with
 	 * @param extraData the extra data to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social equity log
 	 * @throws com.liferay.portlet.social.NoSuchEquityLogException if a social equity log with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3144,7 +3144,7 @@ public class SocialEquityLogPersistenceImpl extends BasePersistenceImpl<SocialEq
 	 *
 	 * @param start the lower bound of the range of social equity logs to return
 	 * @param end the upper bound of the range of social equity logs to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of social equity logs
 	 * @throws SystemException if a system exception occurred
 	 */

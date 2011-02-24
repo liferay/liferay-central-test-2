@@ -237,7 +237,7 @@ public class MBBanUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -257,7 +257,7 @@ public class MBBanUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
@@ -278,7 +278,7 @@ public class MBBanUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
@@ -300,7 +300,7 @@ public class MBBanUtil {
 	*
 	* @param banId the primary key of the current message boards ban
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -355,7 +355,7 @@ public class MBBanUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -375,7 +375,7 @@ public class MBBanUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
@@ -396,7 +396,7 @@ public class MBBanUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
@@ -418,7 +418,7 @@ public class MBBanUtil {
 	*
 	* @param banId the primary key of the current message boards ban
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -474,7 +474,7 @@ public class MBBanUtil {
 	* @param banUserId the ban user ID to search with
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards bans
 	* @throws SystemException if a system exception occurred
 	*/
@@ -494,7 +494,7 @@ public class MBBanUtil {
 	* </p>
 	*
 	* @param banUserId the ban user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
@@ -516,7 +516,7 @@ public class MBBanUtil {
 	* </p>
 	*
 	* @param banUserId the ban user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a matching message boards ban could not be found
 	* @throws SystemException if a system exception occurred
@@ -539,7 +539,7 @@ public class MBBanUtil {
 	*
 	* @param banId the primary key of the current message boards ban
 	* @param banUserId the ban user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards ban
 	* @throws com.liferay.portlet.messageboards.NoSuchBanException if a message boards ban with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -636,7 +636,7 @@ public class MBBanUtil {
 	*
 	* @param start the lower bound of the range of message boards bans to return
 	* @param end the upper bound of the range of message boards bans to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of message boards bans
 	* @throws SystemException if a system exception occurred
 	*/

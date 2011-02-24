@@ -240,7 +240,7 @@ public class JournalTemplateUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of journal templates to return
 	* @param end the upper bound of the range of journal templates to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -259,7 +259,7 @@ public class JournalTemplateUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -280,7 +280,7 @@ public class JournalTemplateUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -302,7 +302,7 @@ public class JournalTemplateUtil {
 	*
 	* @param id the primary key of the current journal template
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -402,7 +402,7 @@ public class JournalTemplateUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal templates to return
 	* @param end the upper bound of the range of journal templates to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -422,7 +422,7 @@ public class JournalTemplateUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -443,7 +443,7 @@ public class JournalTemplateUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -465,7 +465,7 @@ public class JournalTemplateUtil {
 	*
 	* @param id the primary key of the current journal template
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -521,7 +521,7 @@ public class JournalTemplateUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal templates to return
 	* @param end the upper bound of the range of journal templates to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -542,7 +542,7 @@ public class JournalTemplateUtil {
 	*
 	* @param id the primary key of the current journal template
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -599,7 +599,7 @@ public class JournalTemplateUtil {
 	* @param templateId the template ID to search with
 	* @param start the lower bound of the range of journal templates to return
 	* @param end the upper bound of the range of journal templates to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -619,7 +619,7 @@ public class JournalTemplateUtil {
 	* </p>
 	*
 	* @param templateId the template ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -641,7 +641,7 @@ public class JournalTemplateUtil {
 	* </p>
 	*
 	* @param templateId the template ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -664,7 +664,7 @@ public class JournalTemplateUtil {
 	*
 	* @param id the primary key of the current journal template
 	* @param templateId the template ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -811,7 +811,7 @@ public class JournalTemplateUtil {
 	* @param structureId the structure ID to search with
 	* @param start the lower bound of the range of journal templates to return
 	* @param end the upper bound of the range of journal templates to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates
 	* @throws SystemException if a system exception occurred
 	*/
@@ -833,7 +833,7 @@ public class JournalTemplateUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -856,7 +856,7 @@ public class JournalTemplateUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a matching journal template could not be found
 	* @throws SystemException if a system exception occurred
@@ -880,7 +880,7 @@ public class JournalTemplateUtil {
 	* @param id the primary key of the current journal template
 	* @param groupId the group ID to search with
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -940,7 +940,7 @@ public class JournalTemplateUtil {
 	* @param structureId the structure ID to search with
 	* @param start the lower bound of the range of journal templates to return
 	* @param end the upper bound of the range of journal templates to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal templates that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -963,7 +963,7 @@ public class JournalTemplateUtil {
 	* @param id the primary key of the current journal template
 	* @param groupId the group ID to search with
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal template
 	* @throws com.liferay.portlet.journal.NoSuchTemplateException if a journal template with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1016,7 +1016,7 @@ public class JournalTemplateUtil {
 	*
 	* @param start the lower bound of the range of journal templates to return
 	* @param end the upper bound of the range of journal templates to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of journal templates
 	* @throws SystemException if a system exception occurred
 	*/

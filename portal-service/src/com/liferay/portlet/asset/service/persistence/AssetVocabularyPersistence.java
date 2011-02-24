@@ -143,7 +143,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of asset vocabularies to return
 	* @param end the upper bound of the range of asset vocabularies to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset vocabularies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -160,7 +160,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	* @throws SystemException if a system exception occurred
@@ -179,7 +179,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	*
 	* @param vocabularyId the primary key of the current asset vocabulary
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -286,7 +286,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset vocabularies to return
 	* @param end the upper bound of the range of asset vocabularies to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset vocabularies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -303,7 +303,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	* @throws SystemException if a system exception occurred
@@ -322,7 +322,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	* @throws SystemException if a system exception occurred
@@ -342,7 +342,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	*
 	* @param vocabularyId the primary key of the current asset vocabulary
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -391,7 +391,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset vocabularies to return
 	* @param end the upper bound of the range of asset vocabularies to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset vocabularies that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -409,7 +409,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	*
 	* @param vocabularyId the primary key of the current asset vocabulary
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -458,7 +458,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of asset vocabularies to return
 	* @param end the upper bound of the range of asset vocabularies to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset vocabularies
 	* @throws SystemException if a system exception occurred
 	*/
@@ -475,7 +475,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	* @throws SystemException if a system exception occurred
@@ -494,7 +494,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a matching asset vocabulary could not be found
 	* @throws SystemException if a system exception occurred
@@ -514,7 +514,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	*
 	* @param vocabularyId the primary key of the current asset vocabulary
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset vocabulary
 	* @throws com.liferay.portlet.asset.NoSuchVocabularyException if a asset vocabulary with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -597,7 +597,7 @@ public interface AssetVocabularyPersistence extends BasePersistence<AssetVocabul
 	*
 	* @param start the lower bound of the range of asset vocabularies to return
 	* @param end the upper bound of the range of asset vocabularies to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset vocabularies
 	* @throws SystemException if a system exception occurred
 	*/

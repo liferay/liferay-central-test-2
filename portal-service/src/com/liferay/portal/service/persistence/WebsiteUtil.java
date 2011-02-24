@@ -235,7 +235,7 @@ public class WebsiteUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -255,7 +255,7 @@ public class WebsiteUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -277,7 +277,7 @@ public class WebsiteUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -300,7 +300,7 @@ public class WebsiteUtil {
 	*
 	* @param websiteId the primary key of the current website
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -356,7 +356,7 @@ public class WebsiteUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -376,7 +376,7 @@ public class WebsiteUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -397,7 +397,7 @@ public class WebsiteUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -419,7 +419,7 @@ public class WebsiteUtil {
 	*
 	* @param websiteId the primary key of the current website
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -479,7 +479,7 @@ public class WebsiteUtil {
 	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -501,7 +501,7 @@ public class WebsiteUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -524,7 +524,7 @@ public class WebsiteUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -548,7 +548,7 @@ public class WebsiteUtil {
 	* @param websiteId the primary key of the current website
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -612,7 +612,7 @@ public class WebsiteUtil {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -635,7 +635,7 @@ public class WebsiteUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -660,7 +660,7 @@ public class WebsiteUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -686,7 +686,7 @@ public class WebsiteUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -756,7 +756,7 @@ public class WebsiteUtil {
 	* @param primary the primary to search with
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching websites
 	* @throws SystemException if a system exception occurred
 	*/
@@ -781,7 +781,7 @@ public class WebsiteUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -807,7 +807,7 @@ public class WebsiteUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a matching website could not be found
 	* @throws SystemException if a system exception occurred
@@ -834,7 +834,7 @@ public class WebsiteUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next website
 	* @throws com.liferay.portal.NoSuchWebsiteException if a website with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -888,7 +888,7 @@ public class WebsiteUtil {
 	*
 	* @param start the lower bound of the range of websites to return
 	* @param end the upper bound of the range of websites to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of websites
 	* @throws SystemException if a system exception occurred
 	*/

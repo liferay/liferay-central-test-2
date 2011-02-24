@@ -232,7 +232,7 @@ public class PhoneUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -252,7 +252,7 @@ public class PhoneUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -274,7 +274,7 @@ public class PhoneUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -297,7 +297,7 @@ public class PhoneUtil {
 	*
 	* @param phoneId the primary key of the current phone
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a phone with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -353,7 +353,7 @@ public class PhoneUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -373,7 +373,7 @@ public class PhoneUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -394,7 +394,7 @@ public class PhoneUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -416,7 +416,7 @@ public class PhoneUtil {
 	*
 	* @param phoneId the primary key of the current phone
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a phone with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -475,7 +475,7 @@ public class PhoneUtil {
 	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -497,7 +497,7 @@ public class PhoneUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -520,7 +520,7 @@ public class PhoneUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -544,7 +544,7 @@ public class PhoneUtil {
 	* @param phoneId the primary key of the current phone
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a phone with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -608,7 +608,7 @@ public class PhoneUtil {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -631,7 +631,7 @@ public class PhoneUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -656,7 +656,7 @@ public class PhoneUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -682,7 +682,7 @@ public class PhoneUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a phone with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -752,7 +752,7 @@ public class PhoneUtil {
 	* @param primary the primary to search with
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching phones
 	* @throws SystemException if a system exception occurred
 	*/
@@ -777,7 +777,7 @@ public class PhoneUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -803,7 +803,7 @@ public class PhoneUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a matching phone could not be found
 	* @throws SystemException if a system exception occurred
@@ -830,7 +830,7 @@ public class PhoneUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next phone
 	* @throws com.liferay.portal.NoSuchPhoneException if a phone with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -884,7 +884,7 @@ public class PhoneUtil {
 	*
 	* @param start the lower bound of the range of phones to return
 	* @param end the upper bound of the range of phones to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of phones
 	* @throws SystemException if a system exception occurred
 	*/

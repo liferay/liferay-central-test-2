@@ -638,7 +638,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param uuid the uuid to search with
 	 * @param start the lower bound of the range of d l folders to return
 	 * @param end the upper bound of the range of d l folders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -736,7 +736,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -771,7 +771,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -810,7 +810,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 *
 	 * @param folderId the primary key of the current d l folder
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1153,7 +1153,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of d l folders to return
 	 * @param end the upper bound of the range of d l folders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1239,7 +1239,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1274,7 +1274,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1313,7 +1313,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 *
 	 * @param folderId the primary key of the current d l folder
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1493,7 +1493,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of d l folders to return
 	 * @param end the upper bound of the range of d l folders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1587,7 +1587,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 *
 	 * @param folderId the primary key of the current d l folder
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1807,7 +1807,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of d l folders to return
 	 * @param end the upper bound of the range of d l folders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1893,7 +1893,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1928,7 +1928,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1967,7 +1967,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 *
 	 * @param folderId the primary key of the current d l folder
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2279,7 +2279,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param parentFolderId the parent folder ID to search with
 	 * @param start the lower bound of the range of d l folders to return
 	 * @param end the upper bound of the range of d l folders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2371,7 +2371,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param parentFolderId the parent folder ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2411,7 +2411,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param parentFolderId the parent folder ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2454,7 +2454,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param folderId the primary key of the current d l folder
 	 * @param groupId the group ID to search with
 	 * @param parentFolderId the parent folder ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2641,7 +2641,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param parentFolderId the parent folder ID to search with
 	 * @param start the lower bound of the range of d l folders to return
 	 * @param end the upper bound of the range of d l folders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2742,7 +2742,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param folderId the primary key of the current d l folder
 	 * @param groupId the group ID to search with
 	 * @param parentFolderId the parent folder ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2969,7 +2969,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param name the name to search with
 	 * @param start the lower bound of the range of d l folders to return
 	 * @param end the upper bound of the range of d l folders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching d l folders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3073,7 +3073,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 *
 	 * @param parentFolderId the parent folder ID to search with
 	 * @param name the name to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3113,7 +3113,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 *
 	 * @param parentFolderId the parent folder ID to search with
 	 * @param name the name to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a matching d l folder could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3156,7 +3156,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 * @param folderId the primary key of the current d l folder
 	 * @param parentFolderId the parent folder ID to search with
 	 * @param name the name to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next d l folder
 	 * @throws com.liferay.portlet.documentlibrary.NoSuchFolderException if a d l folder with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3510,7 +3510,7 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	 *
 	 * @param start the lower bound of the range of d l folders to return
 	 * @param end the upper bound of the range of d l folders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of d l folders
 	 * @throws SystemException if a system exception occurred
 	 */

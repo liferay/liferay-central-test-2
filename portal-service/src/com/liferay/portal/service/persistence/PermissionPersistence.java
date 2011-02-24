@@ -137,7 +137,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* @param resourceId the resource ID to search with
 	* @param start the lower bound of the range of permissions to return
 	* @param end the upper bound of the range of permissions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching permissions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -154,7 +154,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* </p>
 	*
 	* @param resourceId the resource ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching permission
 	* @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
 	* @throws SystemException if a system exception occurred
@@ -173,7 +173,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* </p>
 	*
 	* @param resourceId the resource ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching permission
 	* @throws com.liferay.portal.NoSuchPermissionException if a matching permission could not be found
 	* @throws SystemException if a system exception occurred
@@ -193,7 +193,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	*
 	* @param permissionId the primary key of the current permission
 	* @param resourceId the resource ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next permission
 	* @throws com.liferay.portal.NoSuchPermissionException if a permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -276,7 +276,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	*
 	* @param start the lower bound of the range of permissions to return
 	* @param end the upper bound of the range of permissions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of permissions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -380,7 +380,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* @param pk the primary key of the permission to get the associated groups for
 	* @param start the lower bound of the range of permissions to return
 	* @param end the upper bound of the range of permissions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of groups associated with the permission
 	* @throws SystemException if a system exception occurred
 	*/
@@ -569,7 +569,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* @param pk the primary key of the permission to get the associated roles for
 	* @param start the lower bound of the range of permissions to return
 	* @param end the upper bound of the range of permissions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of roles associated with the permission
 	* @throws SystemException if a system exception occurred
 	*/
@@ -758,7 +758,7 @@ public interface PermissionPersistence extends BasePersistence<Permission> {
 	* @param pk the primary key of the permission to get the associated users for
 	* @param start the lower bound of the range of permissions to return
 	* @param end the upper bound of the range of permissions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of users associated with the permission
 	* @throws SystemException if a system exception occurred
 	*/

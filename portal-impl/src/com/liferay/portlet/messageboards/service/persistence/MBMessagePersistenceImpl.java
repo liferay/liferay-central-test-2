@@ -767,7 +767,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param uuid the uuid to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -865,7 +865,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -900,7 +900,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -939,7 +939,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param messageId the primary key of the current message-boards message
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1283,7 +1283,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1369,7 +1369,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1404,7 +1404,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1443,7 +1443,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param messageId the primary key of the current message-boards message
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1623,7 +1623,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1717,7 +1717,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param messageId the primary key of the current message-boards message
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1937,7 +1937,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2023,7 +2023,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2059,7 +2059,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2098,7 +2098,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param messageId the primary key of the current message-boards message
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2278,7 +2278,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param threadId the thread ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2364,7 +2364,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2399,7 +2399,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2438,7 +2438,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param messageId the primary key of the current message-boards message
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2618,7 +2618,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param threadId the thread ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2704,7 +2704,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2740,7 +2740,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2779,7 +2779,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param messageId the primary key of the current message-boards message
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2957,7 +2957,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3043,7 +3043,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3078,7 +3078,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * </p>
 	 *
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3117,7 +3117,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param messageId the primary key of the current message-boards message
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3300,7 +3300,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3391,7 +3391,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3431,7 +3431,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3474,7 +3474,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3661,7 +3661,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3761,7 +3761,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3988,7 +3988,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param categoryId the category ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4079,7 +4079,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4119,7 +4119,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4162,7 +4162,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4349,7 +4349,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param categoryId the category ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4449,7 +4449,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4676,7 +4676,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4767,7 +4767,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4807,7 +4807,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4850,7 +4850,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5037,7 +5037,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5136,7 +5136,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5363,7 +5363,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5454,7 +5454,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param companyId the company ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5494,7 +5494,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param companyId the company ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5537,7 +5537,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param companyId the company ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5724,7 +5724,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param classPK the class p k to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5815,7 +5815,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5855,7 +5855,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5898,7 +5898,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6085,7 +6085,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param parentMessageId the parent message ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -6177,7 +6177,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param threadId the thread ID to search with
 	 * @param parentMessageId the parent message ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6217,7 +6217,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param threadId the thread ID to search with
 	 * @param parentMessageId the parent message ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6260,7 +6260,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param threadId the thread ID to search with
 	 * @param parentMessageId the parent message ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6447,7 +6447,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -6538,7 +6538,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6578,7 +6578,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6621,7 +6621,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6808,7 +6808,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -6899,7 +6899,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6939,7 +6939,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6982,7 +6982,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param messageId the primary key of the current message-boards message
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7172,7 +7172,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7269,7 +7269,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7313,7 +7313,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7360,7 +7360,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7554,7 +7554,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7660,7 +7660,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7895,7 +7895,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param threadId the thread ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7992,7 +7992,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8036,7 +8036,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8083,7 +8083,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8277,7 +8277,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param threadId the thread ID to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -8383,7 +8383,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param threadId the thread ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8618,7 +8618,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -8715,7 +8715,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8759,7 +8759,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8806,7 +8806,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -9000,7 +9000,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -9106,7 +9106,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -9341,7 +9341,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -9438,7 +9438,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -9482,7 +9482,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -9529,7 +9529,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param classNameId the class name ID to search with
 	 * @param classPK the class p k to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -9729,7 +9729,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -9831,7 +9831,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param categoryId the category ID to search with
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -9879,7 +9879,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param categoryId the category ID to search with
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a matching message-boards message could not be found
 	 * @throws SystemException if a system exception occurred
@@ -9930,7 +9930,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param categoryId the category ID to search with
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -10134,7 +10134,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message-boards messages that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -10245,7 +10245,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 * @param categoryId the category ID to search with
 	 * @param threadId the thread ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message-boards message
 	 * @throws com.liferay.portlet.messageboards.NoSuchMessageException if a message-boards message with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -10475,7 +10475,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 	 *
 	 * @param start the lower bound of the range of message-boards messages to return
 	 * @param end the upper bound of the range of message-boards messages to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of message-boards messages
 	 * @throws SystemException if a system exception occurred
 	 */

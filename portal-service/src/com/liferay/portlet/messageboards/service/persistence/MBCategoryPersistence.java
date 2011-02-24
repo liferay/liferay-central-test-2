@@ -143,7 +143,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of message boards categories to return
 	* @param end the upper bound of the range of message boards categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -160,7 +160,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
 	* @throws SystemException if a system exception occurred
@@ -179,7 +179,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*
 	* @param categoryId the primary key of the current message boards category
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -286,7 +286,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message boards categories to return
 	* @param end the upper bound of the range of message boards categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -303,7 +303,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
 	* @throws SystemException if a system exception occurred
@@ -322,7 +322,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
 	* @throws SystemException if a system exception occurred
@@ -342,7 +342,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*
 	* @param categoryId the primary key of the current message boards category
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -391,7 +391,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of message boards categories to return
 	* @param end the upper bound of the range of message boards categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -409,7 +409,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*
 	* @param categoryId the primary key of the current message boards category
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -458,7 +458,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of message boards categories to return
 	* @param end the upper bound of the range of message boards categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -475,7 +475,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
 	* @throws SystemException if a system exception occurred
@@ -494,7 +494,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
 	* @throws SystemException if a system exception occurred
@@ -514,7 +514,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*
 	* @param categoryId the primary key of the current message boards category
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -566,7 +566,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param parentCategoryId the parent category ID to search with
 	* @param start the lower bound of the range of message boards categories to return
 	* @param end the upper bound of the range of message boards categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -584,7 +584,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*
 	* @param groupId the group ID to search with
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
 	* @throws SystemException if a system exception occurred
@@ -604,7 +604,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*
 	* @param groupId the group ID to search with
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a matching message boards category could not be found
 	* @throws SystemException if a system exception occurred
@@ -625,7 +625,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param categoryId the primary key of the current message boards category
 	* @param groupId the group ID to search with
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -681,7 +681,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param parentCategoryIds the parent category IDs to search with
 	* @param start the lower bound of the range of message boards categories to return
 	* @param end the upper bound of the range of message boards categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -731,7 +731,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param parentCategoryId the parent category ID to search with
 	* @param start the lower bound of the range of message boards categories to return
 	* @param end the upper bound of the range of message boards categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -750,7 +750,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param categoryId the primary key of the current message boards category
 	* @param groupId the group ID to search with
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards category
 	* @throws com.liferay.portlet.messageboards.NoSuchCategoryException if a message boards category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -806,7 +806,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	* @param parentCategoryIds the parent category IDs to search with
 	* @param start the lower bound of the range of message boards categories to return
 	* @param end the upper bound of the range of message boards categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -849,7 +849,7 @@ public interface MBCategoryPersistence extends BasePersistence<MBCategory> {
 	*
 	* @param start the lower bound of the range of message boards categories to return
 	* @param end the upper bound of the range of message boards categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of message boards categories
 	* @throws SystemException if a system exception occurred
 	*/

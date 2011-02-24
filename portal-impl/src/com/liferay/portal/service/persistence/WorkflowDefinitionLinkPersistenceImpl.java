@@ -522,7 +522,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of workflow definition links to return
 	 * @param end the upper bound of the range of workflow definition links to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -609,7 +609,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching workflow definition link
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
@@ -645,7 +645,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching workflow definition link
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
@@ -684,7 +684,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 *
 	 * @param workflowDefinitionLinkId the primary key of the current workflow definition link
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next workflow definition link
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1028,7 +1028,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @param workflowDefinitionVersion the workflow definition version to search with
 	 * @param start the lower bound of the range of workflow definition links to return
 	 * @param end the upper bound of the range of workflow definition links to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1138,7 +1138,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @param companyId the company ID to search with
 	 * @param workflowDefinitionName the workflow definition name to search with
 	 * @param workflowDefinitionVersion the workflow definition version to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching workflow definition link
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1184,7 +1184,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @param companyId the company ID to search with
 	 * @param workflowDefinitionName the workflow definition name to search with
 	 * @param workflowDefinitionVersion the workflow definition version to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching workflow definition link
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a matching workflow definition link could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1234,7 +1234,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 * @param companyId the company ID to search with
 	 * @param workflowDefinitionName the workflow definition name to search with
 	 * @param workflowDefinitionVersion the workflow definition version to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next workflow definition link
 	 * @throws com.liferay.portal.NoSuchWorkflowDefinitionLinkException if a workflow definition link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1434,7 +1434,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 	 *
 	 * @param start the lower bound of the range of workflow definition links to return
 	 * @param end the upper bound of the range of workflow definition links to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of workflow definition links
 	 * @throws SystemException if a system exception occurred
 	 */

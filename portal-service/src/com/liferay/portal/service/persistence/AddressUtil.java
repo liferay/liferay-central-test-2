@@ -235,7 +235,7 @@ public class AddressUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of addresses to return
 	* @param end the upper bound of the range of addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -255,7 +255,7 @@ public class AddressUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -277,7 +277,7 @@ public class AddressUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -300,7 +300,7 @@ public class AddressUtil {
 	*
 	* @param addressId the primary key of the current address
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next address
 	* @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -356,7 +356,7 @@ public class AddressUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of addresses to return
 	* @param end the upper bound of the range of addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -376,7 +376,7 @@ public class AddressUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -397,7 +397,7 @@ public class AddressUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -419,7 +419,7 @@ public class AddressUtil {
 	*
 	* @param addressId the primary key of the current address
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next address
 	* @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -479,7 +479,7 @@ public class AddressUtil {
 	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of addresses to return
 	* @param end the upper bound of the range of addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -501,7 +501,7 @@ public class AddressUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -524,7 +524,7 @@ public class AddressUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -548,7 +548,7 @@ public class AddressUtil {
 	* @param addressId the primary key of the current address
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next address
 	* @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -612,7 +612,7 @@ public class AddressUtil {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of addresses to return
 	* @param end the upper bound of the range of addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -635,7 +635,7 @@ public class AddressUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -660,7 +660,7 @@ public class AddressUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -686,7 +686,7 @@ public class AddressUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next address
 	* @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -756,7 +756,7 @@ public class AddressUtil {
 	* @param mailing the mailing to search with
 	* @param start the lower bound of the range of addresses to return
 	* @param end the upper bound of the range of addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -781,7 +781,7 @@ public class AddressUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param mailing the mailing to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -807,7 +807,7 @@ public class AddressUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param mailing the mailing to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -834,7 +834,7 @@ public class AddressUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param mailing the mailing to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next address
 	* @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -905,7 +905,7 @@ public class AddressUtil {
 	* @param primary the primary to search with
 	* @param start the lower bound of the range of addresses to return
 	* @param end the upper bound of the range of addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -930,7 +930,7 @@ public class AddressUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -956,7 +956,7 @@ public class AddressUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching address
 	* @throws com.liferay.portal.NoSuchAddressException if a matching address could not be found
 	* @throws SystemException if a system exception occurred
@@ -983,7 +983,7 @@ public class AddressUtil {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next address
 	* @throws com.liferay.portal.NoSuchAddressException if a address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1037,7 +1037,7 @@ public class AddressUtil {
 	*
 	* @param start the lower bound of the range of addresses to return
 	* @param end the upper bound of the range of addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of addresses
 	* @throws SystemException if a system exception occurred
 	*/

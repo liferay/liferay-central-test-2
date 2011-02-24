@@ -138,7 +138,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout revisions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -155,7 +155,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* </p>
 	*
 	* @param layoutSetBranchId the layout set branch ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,7 +174,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* </p>
 	*
 	* @param layoutSetBranchId the layout set branch ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -194,7 +194,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	*
 	* @param layoutRevisionId the primary key of the current layout revision
 	* @param layoutSetBranchId the layout set branch ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a layout revision with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -242,7 +242,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param plid the plid to search with
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout revisions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -259,7 +259,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* </p>
 	*
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -277,7 +277,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* </p>
 	*
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -296,7 +296,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	*
 	* @param layoutRevisionId the primary key of the current layout revision
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a layout revision with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -348,7 +348,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param plid the plid to search with
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout revisions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -366,7 +366,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	*
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -386,7 +386,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	*
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -407,7 +407,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param layoutRevisionId the primary key of the current layout revision
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a layout revision with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -463,7 +463,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param plid the plid to search with
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout revisions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -483,7 +483,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param parentLayoutRevisionId the parent layout revision ID to search with
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -504,7 +504,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param parentLayoutRevisionId the parent layout revision ID to search with
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -526,7 +526,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param parentLayoutRevisionId the parent layout revision ID to search with
 	* @param plid the plid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a layout revision with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -624,7 +624,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param status the status to search with
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout revisions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -643,7 +643,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -664,7 +664,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a matching layout revision could not be found
 	* @throws SystemException if a system exception occurred
@@ -686,7 +686,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	* @param layoutSetBranchId the layout set branch ID to search with
 	* @param plid the plid to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout revision
 	* @throws com.liferay.portal.NoSuchLayoutRevisionException if a layout revision with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -731,7 +731,7 @@ public interface LayoutRevisionPersistence extends BasePersistence<LayoutRevisio
 	*
 	* @param start the lower bound of the range of layout revisions to return
 	* @param end the upper bound of the range of layout revisions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of layout revisions
 	* @throws SystemException if a system exception occurred
 	*/

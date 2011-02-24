@@ -558,7 +558,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * @param uuid the uuid to search with
 	 * @param start the lower bound of the range of repository entries to return
 	 * @param end the upper bound of the range of repository entries to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -652,7 +652,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -687,7 +687,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -726,7 +726,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 *
 	 * @param repositoryEntryId the primary key of the current repository entry
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1065,7 +1065,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * @param repositoryId the repository ID to search with
 	 * @param start the lower bound of the range of repository entries to return
 	 * @param end the upper bound of the range of repository entries to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching repository entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1148,7 +1148,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * </p>
 	 *
 	 * @param repositoryId the repository ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1184,7 +1184,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 * </p>
 	 *
 	 * @param repositoryId the repository ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a matching repository entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1223,7 +1223,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 *
 	 * @param repositoryEntryId the primary key of the current repository entry
 	 * @param repositoryId the repository ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next repository entry
 	 * @throws com.liferay.portal.NoSuchRepositoryEntryException if a repository entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1546,7 +1546,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 	 *
 	 * @param start the lower bound of the range of repository entries to return
 	 * @param end the upper bound of the range of repository entries to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of repository entries
 	 * @throws SystemException if a system exception occurred
 	 */

@@ -139,7 +139,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of journal feeds to return
 	* @param end the upper bound of the range of journal feeds to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -156,7 +156,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
@@ -175,7 +175,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
@@ -195,7 +195,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	*
 	* @param id the primary key of the current journal feed
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -282,7 +282,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal feeds to return
 	* @param end the upper bound of the range of journal feeds to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal feeds
 	* @throws SystemException if a system exception occurred
 	*/
@@ -299,7 +299,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
@@ -318,7 +318,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a matching journal feed could not be found
 	* @throws SystemException if a system exception occurred
@@ -338,7 +338,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	*
 	* @param id the primary key of the current journal feed
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -387,7 +387,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal feeds to return
 	* @param end the upper bound of the range of journal feeds to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal feeds that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -405,7 +405,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	*
 	* @param id the primary key of the current journal feed
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal feed
 	* @throws com.liferay.portlet.journal.NoSuchFeedException if a journal feed with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -488,7 +488,7 @@ public interface JournalFeedPersistence extends BasePersistence<JournalFeed> {
 	*
 	* @param start the lower bound of the range of journal feeds to return
 	* @param end the upper bound of the range of journal feeds to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of journal feeds
 	* @throws SystemException if a system exception occurred
 	*/

@@ -232,7 +232,7 @@ public class LockUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of locks to return
 	* @param end the upper bound of the range of locks to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -251,7 +251,7 @@ public class LockUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching lock
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
@@ -272,7 +272,7 @@ public class LockUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching lock
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
@@ -294,7 +294,7 @@ public class LockUtil {
 	*
 	* @param lockId the primary key of the current lock
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next lock
 	* @throws com.liferay.portal.NoSuchLockException if a lock with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -351,7 +351,7 @@ public class LockUtil {
 	* @param expirationDate the expiration date to search with
 	* @param start the lower bound of the range of locks to return
 	* @param end the upper bound of the range of locks to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching locks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -372,7 +372,7 @@ public class LockUtil {
 	* </p>
 	*
 	* @param expirationDate the expiration date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching lock
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
@@ -395,7 +395,7 @@ public class LockUtil {
 	* </p>
 	*
 	* @param expirationDate the expiration date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching lock
 	* @throws com.liferay.portal.NoSuchLockException if a matching lock could not be found
 	* @throws SystemException if a system exception occurred
@@ -419,7 +419,7 @@ public class LockUtil {
 	*
 	* @param lockId the primary key of the current lock
 	* @param expirationDate the expiration date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next lock
 	* @throws com.liferay.portal.NoSuchLockException if a lock with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -517,7 +517,7 @@ public class LockUtil {
 	*
 	* @param start the lower bound of the range of locks to return
 	* @param end the upper bound of the range of locks to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of locks
 	* @throws SystemException if a system exception occurred
 	*/

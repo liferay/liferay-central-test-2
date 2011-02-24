@@ -140,7 +140,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of asset entries to return
 	* @param end the upper bound of the range of asset entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -157,7 +157,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -176,7 +176,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a matching asset entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	*
 	* @param entryId the primary key of the current asset entry
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset entry
 	* @throws com.liferay.portlet.asset.NoSuchEntryException if a asset entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -317,7 +317,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	*
 	* @param start the lower bound of the range of asset entries to return
 	* @param end the upper bound of the range of asset entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -443,7 +443,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param pk the primary key of the asset entry to get the associated asset categories for
 	* @param start the lower bound of the range of asset entries to return
 	* @param end the upper bound of the range of asset entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset categories associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/
@@ -634,7 +634,7 @@ public interface AssetEntryPersistence extends BasePersistence<AssetEntry> {
 	* @param pk the primary key of the asset entry to get the associated asset tags for
 	* @param start the lower bound of the range of asset entries to return
 	* @param end the upper bound of the range of asset entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset tags associated with the asset entry
 	* @throws SystemException if a system exception occurred
 	*/

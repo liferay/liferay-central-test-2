@@ -775,7 +775,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param uuid the uuid to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -873,7 +873,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -908,7 +908,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -947,7 +947,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param id the primary key of the current journal article
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1292,7 +1292,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param resourcePrimKey the resource prim key to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1379,7 +1379,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param resourcePrimKey the resource prim key to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1415,7 +1415,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param resourcePrimKey the resource prim key to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1454,7 +1454,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param id the primary key of the current journal article
 	 * @param resourcePrimKey the resource prim key to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1633,7 +1633,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1719,7 +1719,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1755,7 +1755,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1794,7 +1794,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1974,7 +1974,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2069,7 +2069,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2288,7 +2288,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2374,7 +2374,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2410,7 +2410,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2449,7 +2449,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param id the primary key of the current journal article
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2629,7 +2629,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param smallImageId the small image ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2716,7 +2716,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param smallImageId the small image ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2752,7 +2752,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * </p>
 	 *
 	 * @param smallImageId the small image ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2791,7 +2791,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param id the primary key of the current journal article
 	 * @param smallImageId the small image ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2974,7 +2974,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3066,7 +3066,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param resourcePrimKey the resource prim key to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3106,7 +3106,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param resourcePrimKey the resource prim key to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3149,7 +3149,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param resourcePrimKey the resource prim key to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3336,7 +3336,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param articleId the article ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3440,7 +3440,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param articleId the article ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3480,7 +3480,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param articleId the article ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3523,7 +3523,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param articleId the article ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3722,7 +3722,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param articleId the article ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3835,7 +3835,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param articleId the article ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4074,7 +4074,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param structureId the structure ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4178,7 +4178,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param structureId the structure ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4218,7 +4218,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param structureId the structure ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4261,7 +4261,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param structureId the structure ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4460,7 +4460,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param structureId the structure ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4573,7 +4573,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param structureId the structure ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4812,7 +4812,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param templateId the template ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4916,7 +4916,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param templateId the template ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4956,7 +4956,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param templateId the template ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4999,7 +4999,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param templateId the template ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5198,7 +5198,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param templateId the template ID to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5311,7 +5311,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param templateId the template ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5550,7 +5550,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param urlTitle the url title to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5654,7 +5654,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5694,7 +5694,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5737,7 +5737,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5936,7 +5936,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param urlTitle the url title to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -6049,7 +6049,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6288,7 +6288,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -6379,7 +6379,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6419,7 +6419,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6462,7 +6462,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6649,7 +6649,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -6750,7 +6750,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -6976,7 +6976,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7068,7 +7068,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param companyId the company ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7108,7 +7108,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param companyId the company ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7151,7 +7151,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param id the primary key of the current journal article
 	 * @param companyId the company ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7505,7 +7505,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -7614,7 +7614,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param articleId the article ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7658,7 +7658,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param articleId the article ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7705,7 +7705,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param articleId the article ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -7912,7 +7912,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -8031,7 +8031,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param articleId the article ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8278,7 +8278,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -8387,7 +8387,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8431,7 +8431,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a matching journal article could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8478,7 +8478,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -8685,7 +8685,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching journal articles that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -8804,7 +8804,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 * @param groupId the group ID to search with
 	 * @param urlTitle the url title to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next journal article
 	 * @throws com.liferay.portlet.journal.NoSuchArticleException if a journal article with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -9040,7 +9040,7 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	 *
 	 * @param start the lower bound of the range of journal articles to return
 	 * @param end the upper bound of the range of journal articles to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of journal articles
 	 * @throws SystemException if a system exception occurred
 	 */

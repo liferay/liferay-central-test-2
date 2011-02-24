@@ -242,7 +242,7 @@ public class OrgGroupPermissionUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of org group permissions to return
 	* @param end the upper bound of the range of org group permissions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching org group permissions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,7 +262,7 @@ public class OrgGroupPermissionUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching org group permission
 	* @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a matching org group permission could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public class OrgGroupPermissionUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching org group permission
 	* @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a matching org group permission could not be found
 	* @throws SystemException if a system exception occurred
@@ -305,7 +305,7 @@ public class OrgGroupPermissionUtil {
 	*
 	* @param orgGroupPermissionPK the primary key of the current org group permission
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next org group permission
 	* @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a org group permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -363,7 +363,7 @@ public class OrgGroupPermissionUtil {
 	* @param permissionId the permission ID to search with
 	* @param start the lower bound of the range of org group permissions to return
 	* @param end the upper bound of the range of org group permissions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching org group permissions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -384,7 +384,7 @@ public class OrgGroupPermissionUtil {
 	* </p>
 	*
 	* @param permissionId the permission ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching org group permission
 	* @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a matching org group permission could not be found
 	* @throws SystemException if a system exception occurred
@@ -406,7 +406,7 @@ public class OrgGroupPermissionUtil {
 	* </p>
 	*
 	* @param permissionId the permission ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching org group permission
 	* @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a matching org group permission could not be found
 	* @throws SystemException if a system exception occurred
@@ -429,7 +429,7 @@ public class OrgGroupPermissionUtil {
 	*
 	* @param orgGroupPermissionPK the primary key of the current org group permission
 	* @param permissionId the permission ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next org group permission
 	* @throws com.liferay.portal.NoSuchOrgGroupPermissionException if a org group permission with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -483,7 +483,7 @@ public class OrgGroupPermissionUtil {
 	*
 	* @param start the lower bound of the range of org group permissions to return
 	* @param end the upper bound of the range of org group permissions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of org group permissions
 	* @throws SystemException if a system exception occurred
 	*/

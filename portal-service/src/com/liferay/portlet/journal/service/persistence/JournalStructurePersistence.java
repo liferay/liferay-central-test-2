@@ -140,7 +140,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of journal structures to return
 	* @param end the upper bound of the range of journal structures to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -157,7 +157,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -176,7 +176,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	*
 	* @param id the primary key of the current journal structure
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal structures to return
 	* @param end the upper bound of the range of journal structures to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -300,7 +300,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -319,7 +319,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -339,7 +339,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	*
 	* @param id the primary key of the current journal structure
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -388,7 +388,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of journal structures to return
 	* @param end the upper bound of the range of journal structures to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -406,7 +406,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	*
 	* @param id the primary key of the current journal structure
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -455,7 +455,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* @param structureId the structure ID to search with
 	* @param start the lower bound of the range of journal structures to return
 	* @param end the upper bound of the range of journal structures to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -472,7 +472,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* </p>
 	*
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -491,7 +491,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* </p>
 	*
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -511,7 +511,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	*
 	* @param id the primary key of the current journal structure
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -601,7 +601,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* @param parentStructureId the parent structure ID to search with
 	* @param start the lower bound of the range of journal structures to return
 	* @param end the upper bound of the range of journal structures to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal structures
 	* @throws SystemException if a system exception occurred
 	*/
@@ -619,7 +619,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	*
 	* @param groupId the group ID to search with
 	* @param parentStructureId the parent structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -639,7 +639,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	*
 	* @param groupId the group ID to search with
 	* @param parentStructureId the parent structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a matching journal structure could not be found
 	* @throws SystemException if a system exception occurred
@@ -660,7 +660,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* @param id the primary key of the current journal structure
 	* @param groupId the group ID to search with
 	* @param parentStructureId the parent structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -712,7 +712,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* @param parentStructureId the parent structure ID to search with
 	* @param start the lower bound of the range of journal structures to return
 	* @param end the upper bound of the range of journal structures to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching journal structures that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -731,7 +731,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	* @param id the primary key of the current journal structure
 	* @param groupId the group ID to search with
 	* @param parentStructureId the parent structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next journal structure
 	* @throws com.liferay.portlet.journal.NoSuchStructureException if a journal structure with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -776,7 +776,7 @@ public interface JournalStructurePersistence extends BasePersistence<JournalStru
 	*
 	* @param start the lower bound of the range of journal structures to return
 	* @param end the upper bound of the range of journal structures to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of journal structures
 	* @throws SystemException if a system exception occurred
 	*/

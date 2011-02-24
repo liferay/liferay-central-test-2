@@ -232,7 +232,7 @@ public class RoleUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -252,7 +252,7 @@ public class RoleUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching role
 	* @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	* @throws SystemException if a system exception occurred
@@ -274,7 +274,7 @@ public class RoleUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching role
 	* @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	* @throws SystemException if a system exception occurred
@@ -297,7 +297,7 @@ public class RoleUtil {
 	*
 	* @param roleId the primary key of the current role
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next role
 	* @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -354,7 +354,7 @@ public class RoleUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching roles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -376,7 +376,7 @@ public class RoleUtil {
 	*
 	* @param roleId the primary key of the current role
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next role
 	* @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -433,7 +433,7 @@ public class RoleUtil {
 	* @param subtype the subtype to search with
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -453,7 +453,7 @@ public class RoleUtil {
 	* </p>
 	*
 	* @param subtype the subtype to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching role
 	* @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	* @throws SystemException if a system exception occurred
@@ -474,7 +474,7 @@ public class RoleUtil {
 	* </p>
 	*
 	* @param subtype the subtype to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching role
 	* @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	* @throws SystemException if a system exception occurred
@@ -496,7 +496,7 @@ public class RoleUtil {
 	*
 	* @param roleId the primary key of the current role
 	* @param subtype the subtype to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next role
 	* @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -552,7 +552,7 @@ public class RoleUtil {
 	* @param subtype the subtype to search with
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching roles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -573,7 +573,7 @@ public class RoleUtil {
 	*
 	* @param roleId the primary key of the current role
 	* @param subtype the subtype to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next role
 	* @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -677,7 +677,7 @@ public class RoleUtil {
 	* @param subtype the subtype to search with
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -698,7 +698,7 @@ public class RoleUtil {
 	*
 	* @param type the type to search with
 	* @param subtype the subtype to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching role
 	* @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	* @throws SystemException if a system exception occurred
@@ -720,7 +720,7 @@ public class RoleUtil {
 	*
 	* @param type the type to search with
 	* @param subtype the subtype to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching role
 	* @throws com.liferay.portal.NoSuchRoleException if a matching role could not be found
 	* @throws SystemException if a system exception occurred
@@ -743,7 +743,7 @@ public class RoleUtil {
 	* @param roleId the primary key of the current role
 	* @param type the type to search with
 	* @param subtype the subtype to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next role
 	* @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -803,7 +803,7 @@ public class RoleUtil {
 	* @param subtype the subtype to search with
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching roles that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -825,7 +825,7 @@ public class RoleUtil {
 	* @param roleId the primary key of the current role
 	* @param type the type to search with
 	* @param subtype the subtype to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next role
 	* @throws com.liferay.portal.NoSuchRoleException if a role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -927,7 +927,7 @@ public class RoleUtil {
 	*
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1164,7 +1164,7 @@ public class RoleUtil {
 	* @param pk the primary key of the role to get the associated groups for
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of groups associated with the role
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1387,7 +1387,7 @@ public class RoleUtil {
 	* @param pk the primary key of the role to get the associated permissions for
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of permissions associated with the role
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1612,7 +1612,7 @@ public class RoleUtil {
 	* @param pk the primary key of the role to get the associated users for
 	* @param start the lower bound of the range of roles to return
 	* @param end the upper bound of the range of roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of users associated with the role
 	* @throws SystemException if a system exception occurred
 	*/

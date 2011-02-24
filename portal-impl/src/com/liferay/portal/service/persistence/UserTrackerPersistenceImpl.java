@@ -448,7 +448,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of user trackers to return
 	 * @param end the upper bound of the range of user trackers to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -530,7 +530,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
@@ -566,7 +566,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
@@ -605,7 +605,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 *
 	 * @param userTrackerId the primary key of the current user tracker
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -780,7 +780,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of user trackers to return
 	 * @param end the upper bound of the range of user trackers to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -862,7 +862,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * </p>
 	 *
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
@@ -897,7 +897,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * </p>
 	 *
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
@@ -936,7 +936,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 *
 	 * @param userTrackerId the primary key of the current user tracker
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1112,7 +1112,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * @param sessionId the session ID to search with
 	 * @param start the lower bound of the range of user trackers to return
 	 * @param end the upper bound of the range of user trackers to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user trackers
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1206,7 +1206,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * </p>
 	 *
 	 * @param sessionId the session ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1242,7 +1242,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 * </p>
 	 *
 	 * @param sessionId the session ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a matching user tracker could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1281,7 +1281,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 *
 	 * @param userTrackerId the primary key of the current user tracker
 	 * @param sessionId the session ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user tracker
 	 * @throws com.liferay.portal.NoSuchUserTrackerException if a user tracker with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1464,7 +1464,7 @@ public class UserTrackerPersistenceImpl extends BasePersistenceImpl<UserTracker>
 	 *
 	 * @param start the lower bound of the range of user trackers to return
 	 * @param end the upper bound of the range of user trackers to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of user trackers
 	 * @throws SystemException if a system exception occurred
 	 */

@@ -427,7 +427,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of repositories to return
 	 * @param end the upper bound of the range of repositories to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching repositories
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -509,7 +509,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching repository
 	 * @throws com.liferay.portal.NoSuchRepositoryException if a matching repository could not be found
 	 * @throws SystemException if a system exception occurred
@@ -544,7 +544,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching repository
 	 * @throws com.liferay.portal.NoSuchRepositoryException if a matching repository could not be found
 	 * @throws SystemException if a system exception occurred
@@ -583,7 +583,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	 *
 	 * @param repositoryId the primary key of the current repository
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next repository
 	 * @throws com.liferay.portal.NoSuchRepositoryException if a repository with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -754,7 +754,7 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 	 *
 	 * @param start the lower bound of the range of repositories to return
 	 * @param end the upper bound of the range of repositories to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of repositories
 	 * @throws SystemException if a system exception occurred
 	 */

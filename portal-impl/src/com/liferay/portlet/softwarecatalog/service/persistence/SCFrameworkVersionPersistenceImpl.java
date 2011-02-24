@@ -482,7 +482,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of s c framework versions to return
 	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -568,7 +568,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
 	 * @throws SystemException if a system exception occurred
@@ -604,7 +604,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
 	 * @throws SystemException if a system exception occurred
@@ -643,7 +643,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 *
 	 * @param frameworkVersionId the primary key of the current s c framework version
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -824,7 +824,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of s c framework versions to return
 	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -920,7 +920,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 *
 	 * @param frameworkVersionId the primary key of the current s c framework version
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1141,7 +1141,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of s c framework versions to return
 	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1227,7 +1227,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1263,7 +1263,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1302,7 +1302,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 *
 	 * @param frameworkVersionId the primary key of the current s c framework version
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1486,7 +1486,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * @param active the active to search with
 	 * @param start the lower bound of the range of s c framework versions to return
 	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1578,7 +1578,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 *
 	 * @param groupId the group ID to search with
 	 * @param active the active to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1618,7 +1618,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 *
 	 * @param groupId the group ID to search with
 	 * @param active the active to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a matching s c framework version could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1661,7 +1661,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * @param frameworkVersionId the primary key of the current s c framework version
 	 * @param groupId the group ID to search with
 	 * @param active the active to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1848,7 +1848,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * @param active the active to search with
 	 * @param start the lower bound of the range of s c framework versions to return
 	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching s c framework versions that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1949,7 +1949,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * @param frameworkVersionId the primary key of the current s c framework version
 	 * @param groupId the group ID to search with
 	 * @param active the active to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next s c framework version
 	 * @throws com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException if a s c framework version with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2169,7 +2169,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 *
 	 * @param start the lower bound of the range of s c framework versions to return
 	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of s c framework versions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2647,7 +2647,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	 * @param pk the primary key of the s c framework version to get the associated s c product versions for
 	 * @param start the lower bound of the range of s c framework versions to return
 	 * @param end the upper bound of the range of s c framework versions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of s c product versions associated with the s c framework version
 	 * @throws SystemException if a system exception occurred
 	 */

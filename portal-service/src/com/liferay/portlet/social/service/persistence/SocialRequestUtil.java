@@ -241,7 +241,7 @@ public class SocialRequestUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of social requests to return
 	* @param end the upper bound of the range of social requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,7 +260,7 @@ public class SocialRequestUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public class SocialRequestUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public class SocialRequestUtil {
 	*
 	* @param requestId the primary key of the current social request
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -403,7 +403,7 @@ public class SocialRequestUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of social requests to return
 	* @param end the upper bound of the range of social requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -423,7 +423,7 @@ public class SocialRequestUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -445,7 +445,7 @@ public class SocialRequestUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -468,7 +468,7 @@ public class SocialRequestUtil {
 	*
 	* @param requestId the primary key of the current social request
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -524,7 +524,7 @@ public class SocialRequestUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of social requests to return
 	* @param end the upper bound of the range of social requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -544,7 +544,7 @@ public class SocialRequestUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -565,7 +565,7 @@ public class SocialRequestUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -587,7 +587,7 @@ public class SocialRequestUtil {
 	*
 	* @param requestId the primary key of the current social request
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -644,7 +644,7 @@ public class SocialRequestUtil {
 	* @param receiverUserId the receiver user ID to search with
 	* @param start the lower bound of the range of social requests to return
 	* @param end the upper bound of the range of social requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -665,7 +665,7 @@ public class SocialRequestUtil {
 	* </p>
 	*
 	* @param receiverUserId the receiver user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -687,7 +687,7 @@ public class SocialRequestUtil {
 	* </p>
 	*
 	* @param receiverUserId the receiver user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -710,7 +710,7 @@ public class SocialRequestUtil {
 	*
 	* @param requestId the primary key of the current social request
 	* @param receiverUserId the receiver user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -770,7 +770,7 @@ public class SocialRequestUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of social requests to return
 	* @param end the upper bound of the range of social requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -791,7 +791,7 @@ public class SocialRequestUtil {
 	*
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -814,7 +814,7 @@ public class SocialRequestUtil {
 	*
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -837,7 +837,7 @@ public class SocialRequestUtil {
 	* @param requestId the primary key of the current social request
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -897,7 +897,7 @@ public class SocialRequestUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of social requests to return
 	* @param end the upper bound of the range of social requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -919,7 +919,7 @@ public class SocialRequestUtil {
 	*
 	* @param receiverUserId the receiver user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -942,7 +942,7 @@ public class SocialRequestUtil {
 	*
 	* @param receiverUserId the receiver user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -966,7 +966,7 @@ public class SocialRequestUtil {
 	* @param requestId the primary key of the current social request
 	* @param receiverUserId the receiver user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1101,7 +1101,7 @@ public class SocialRequestUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of social requests to return
 	* @param end the upper bound of the range of social requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1127,7 +1127,7 @@ public class SocialRequestUtil {
 	* @param classPK the class p k to search with
 	* @param type the type to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -1154,7 +1154,7 @@ public class SocialRequestUtil {
 	* @param classPK the class p k to search with
 	* @param type the type to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -1182,7 +1182,7 @@ public class SocialRequestUtil {
 	* @param classPK the class p k to search with
 	* @param type the type to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1257,7 +1257,7 @@ public class SocialRequestUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of social requests to return
 	* @param end the upper bound of the range of social requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching social requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1283,7 +1283,7 @@ public class SocialRequestUtil {
 	* @param type the type to search with
 	* @param receiverUserId the receiver user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -1311,7 +1311,7 @@ public class SocialRequestUtil {
 	* @param type the type to search with
 	* @param receiverUserId the receiver user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a matching social request could not be found
 	* @throws SystemException if a system exception occurred
@@ -1340,7 +1340,7 @@ public class SocialRequestUtil {
 	* @param type the type to search with
 	* @param receiverUserId the receiver user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next social request
 	* @throws com.liferay.portlet.social.NoSuchRequestException if a social request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1394,7 +1394,7 @@ public class SocialRequestUtil {
 	*
 	* @param start the lower bound of the range of social requests to return
 	* @param end the upper bound of the range of social requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of social requests
 	* @throws SystemException if a system exception occurred
 	*/

@@ -507,7 +507,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of plugin settings to return
 	 * @param end the upper bound of the range of plugin settings to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching plugin settings
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -589,7 +589,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching plugin setting
 	 * @throws com.liferay.portal.NoSuchPluginSettingException if a matching plugin setting could not be found
 	 * @throws SystemException if a system exception occurred
@@ -625,7 +625,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching plugin setting
 	 * @throws com.liferay.portal.NoSuchPluginSettingException if a matching plugin setting could not be found
 	 * @throws SystemException if a system exception occurred
@@ -664,7 +664,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 *
 	 * @param pluginSettingId the primary key of the current plugin setting
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next plugin setting
 	 * @throws com.liferay.portal.NoSuchPluginSettingException if a plugin setting with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1011,7 +1011,7 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 	 *
 	 * @param start the lower bound of the range of plugin settings to return
 	 * @param end the upper bound of the range of plugin settings to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of plugin settings
 	 * @throws SystemException if a system exception occurred
 	 */

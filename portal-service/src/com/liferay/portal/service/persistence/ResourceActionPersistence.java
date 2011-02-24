@@ -138,7 +138,7 @@ public interface ResourceActionPersistence extends BasePersistence<ResourceActio
 	* @param name the name to search with
 	* @param start the lower bound of the range of resource actions to return
 	* @param end the upper bound of the range of resource actions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching resource actions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -155,7 +155,7 @@ public interface ResourceActionPersistence extends BasePersistence<ResourceActio
 	* </p>
 	*
 	* @param name the name to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching resource action
 	* @throws com.liferay.portal.NoSuchResourceActionException if a matching resource action could not be found
 	* @throws SystemException if a system exception occurred
@@ -174,7 +174,7 @@ public interface ResourceActionPersistence extends BasePersistence<ResourceActio
 	* </p>
 	*
 	* @param name the name to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching resource action
 	* @throws com.liferay.portal.NoSuchResourceActionException if a matching resource action could not be found
 	* @throws SystemException if a system exception occurred
@@ -194,7 +194,7 @@ public interface ResourceActionPersistence extends BasePersistence<ResourceActio
 	*
 	* @param resourceActionId the primary key of the current resource action
 	* @param name the name to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next resource action
 	* @throws com.liferay.portal.NoSuchResourceActionException if a resource action with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -278,7 +278,7 @@ public interface ResourceActionPersistence extends BasePersistence<ResourceActio
 	*
 	* @param start the lower bound of the range of resource actions to return
 	* @param end the upper bound of the range of resource actions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of resource actions
 	* @throws SystemException if a system exception occurred
 	*/

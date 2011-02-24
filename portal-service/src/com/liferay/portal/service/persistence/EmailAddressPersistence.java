@@ -137,7 +137,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of email addresses to return
 	* @param end the upper bound of the range of email addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching email addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -154,7 +154,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -173,7 +173,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -193,7 +193,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	*
 	* @param emailAddressId the primary key of the current email address
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -241,7 +241,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of email addresses to return
 	* @param end the upper bound of the range of email addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching email addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -258,7 +258,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -277,7 +277,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -297,7 +297,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	*
 	* @param emailAddressId the primary key of the current email address
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -349,7 +349,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of email addresses to return
 	* @param end the upper bound of the range of email addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching email addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -367,7 +367,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	*
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -387,7 +387,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	*
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -408,7 +408,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param emailAddressId the primary key of the current email address
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -463,7 +463,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of email addresses to return
 	* @param end the upper bound of the range of email addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching email addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -482,7 +482,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -503,7 +503,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -525,7 +525,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -584,7 +584,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param primary the primary to search with
 	* @param start the lower bound of the range of email addresses to return
 	* @param end the upper bound of the range of email addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching email addresses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -605,7 +605,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -627,7 +627,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a matching email address could not be found
 	* @throws SystemException if a system exception occurred
@@ -650,7 +650,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
 	* @param primary the primary to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next email address
 	* @throws com.liferay.portal.NoSuchEmailAddressException if a email address with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -696,7 +696,7 @@ public interface EmailAddressPersistence extends BasePersistence<EmailAddress> {
 	*
 	* @param start the lower bound of the range of email addresses to return
 	* @param end the upper bound of the range of email addresses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of email addresses
 	* @throws SystemException if a system exception occurred
 	*/

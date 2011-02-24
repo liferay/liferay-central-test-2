@@ -142,7 +142,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of message boards message flags to return
 	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards message flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,7 +159,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -178,7 +178,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	*
 	* @param messageFlagId the primary key of the current message boards message flag
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -247,7 +247,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param threadId the thread ID to search with
 	* @param start the lower bound of the range of message boards message flags to return
 	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards message flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -264,7 +264,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* </p>
 	*
 	* @param threadId the thread ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* </p>
 	*
 	* @param threadId the thread ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	*
 	* @param messageFlagId the primary key of the current message boards message flag
 	* @param threadId the thread ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -352,7 +352,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param messageId the message ID to search with
 	* @param start the lower bound of the range of message boards message flags to return
 	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards message flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -369,7 +369,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* </p>
 	*
 	* @param messageId the message ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -388,7 +388,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* </p>
 	*
 	* @param messageId the message ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -408,7 +408,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	*
 	* @param messageFlagId the primary key of the current message boards message flag
 	* @param messageId the message ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -460,7 +460,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param flag the flag to search with
 	* @param start the lower bound of the range of message boards message flags to return
 	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards message flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -478,7 +478,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	*
 	* @param threadId the thread ID to search with
 	* @param flag the flag to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -498,7 +498,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	*
 	* @param threadId the thread ID to search with
 	* @param flag the flag to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -519,7 +519,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param messageFlagId the primary key of the current message boards message flag
 	* @param threadId the thread ID to search with
 	* @param flag the flag to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -571,7 +571,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param flag the flag to search with
 	* @param start the lower bound of the range of message boards message flags to return
 	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards message flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -589,7 +589,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	*
 	* @param messageId the message ID to search with
 	* @param flag the flag to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -609,7 +609,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	*
 	* @param messageId the message ID to search with
 	* @param flag the flag to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -630,7 +630,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param messageFlagId the primary key of the current message boards message flag
 	* @param messageId the message ID to search with
 	* @param flag the flag to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -685,7 +685,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param flag the flag to search with
 	* @param start the lower bound of the range of message boards message flags to return
 	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching message boards message flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -704,7 +704,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param userId the user ID to search with
 	* @param threadId the thread ID to search with
 	* @param flag the flag to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -725,7 +725,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param userId the user ID to search with
 	* @param threadId the thread ID to search with
 	* @param flag the flag to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a matching message boards message flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -747,7 +747,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	* @param userId the user ID to search with
 	* @param threadId the thread ID to search with
 	* @param flag the flag to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next message boards message flag
 	* @throws com.liferay.portlet.messageboards.NoSuchMessageFlagException if a message boards message flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -833,7 +833,7 @@ public interface MBMessageFlagPersistence extends BasePersistence<MBMessageFlag>
 	*
 	* @param start the lower bound of the range of message boards message flags to return
 	* @param end the upper bound of the range of message boards message flags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of message boards message flags
 	* @throws SystemException if a system exception occurred
 	*/

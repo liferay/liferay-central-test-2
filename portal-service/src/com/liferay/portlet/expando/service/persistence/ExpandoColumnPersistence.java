@@ -141,7 +141,7 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	* @param tableId the table ID to search with
 	* @param start the lower bound of the range of expando columns to return
 	* @param end the upper bound of the range of expando columns to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando columns
 	* @throws SystemException if a system exception occurred
 	*/
@@ -158,7 +158,7 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	* </p>
 	*
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a matching expando column could not be found
 	* @throws SystemException if a system exception occurred
@@ -177,7 +177,7 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	* </p>
 	*
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a matching expando column could not be found
 	* @throws SystemException if a system exception occurred
@@ -197,7 +197,7 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	*
 	* @param columnId the primary key of the current expando column
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a expando column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -246,7 +246,7 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	* @param tableId the table ID to search with
 	* @param start the lower bound of the range of expando columns to return
 	* @param end the upper bound of the range of expando columns to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando columns that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -264,7 +264,7 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	*
 	* @param columnId the primary key of the current expando column
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando column
 	* @throws com.liferay.portlet.expando.NoSuchColumnException if a expando column with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -347,7 +347,7 @@ public interface ExpandoColumnPersistence extends BasePersistence<ExpandoColumn>
 	*
 	* @param start the lower bound of the range of expando columns to return
 	* @param end the upper bound of the range of expando columns to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of expando columns
 	* @throws SystemException if a system exception occurred
 	*/

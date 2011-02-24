@@ -141,7 +141,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of user notification events to return
 	* @param end the upper bound of the range of user notification events to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user notification events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -158,7 +158,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user notification event
 	* @throws com.liferay.portal.NoSuchUserNotificationEventException if a matching user notification event could not be found
 	* @throws SystemException if a system exception occurred
@@ -177,7 +177,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user notification event
 	* @throws com.liferay.portal.NoSuchUserNotificationEventException if a matching user notification event could not be found
 	* @throws SystemException if a system exception occurred
@@ -197,7 +197,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	*
 	* @param userNotificationEventId the primary key of the current user notification event
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user notification event
 	* @throws com.liferay.portal.NoSuchUserNotificationEventException if a user notification event with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -245,7 +245,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of user notification events to return
 	* @param end the upper bound of the range of user notification events to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user notification events
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,7 +262,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user notification event
 	* @throws com.liferay.portal.NoSuchUserNotificationEventException if a matching user notification event could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user notification event
 	* @throws com.liferay.portal.NoSuchUserNotificationEventException if a matching user notification event could not be found
 	* @throws SystemException if a system exception occurred
@@ -301,7 +301,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	*
 	* @param userNotificationEventId the primary key of the current user notification event
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user notification event
 	* @throws com.liferay.portal.NoSuchUserNotificationEventException if a user notification event with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -346,7 +346,7 @@ public interface UserNotificationEventPersistence extends BasePersistence<UserNo
 	*
 	* @param start the lower bound of the range of user notification events to return
 	* @param end the upper bound of the range of user notification events to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of user notification events
 	* @throws SystemException if a system exception occurred
 	*/

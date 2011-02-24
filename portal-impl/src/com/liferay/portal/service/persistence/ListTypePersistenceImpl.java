@@ -413,7 +413,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of list types to return
 	 * @param end the upper bound of the range of list types to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching list types
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -511,7 +511,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * </p>
 	 *
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching list type
 	 * @throws com.liferay.portal.NoSuchListTypeException if a matching list type could not be found
 	 * @throws SystemException if a system exception occurred
@@ -546,7 +546,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 * </p>
 	 *
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching list type
 	 * @throws com.liferay.portal.NoSuchListTypeException if a matching list type could not be found
 	 * @throws SystemException if a system exception occurred
@@ -585,7 +585,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 *
 	 * @param listTypeId the primary key of the current list type
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next list type
 	 * @throws com.liferay.portal.NoSuchListTypeException if a list type with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -771,7 +771,7 @@ public class ListTypePersistenceImpl extends BasePersistenceImpl<ListType>
 	 *
 	 * @param start the lower bound of the range of list types to return
 	 * @param end the upper bound of the range of list types to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of list types
 	 * @throws SystemException if a system exception occurred
 	 */

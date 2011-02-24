@@ -241,7 +241,7 @@ public class AssetCategoryUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,7 +260,7 @@ public class AssetCategoryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public class AssetCategoryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public class AssetCategoryUtil {
 	*
 	* @param categoryId the primary key of the current asset category
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -403,7 +403,7 @@ public class AssetCategoryUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -423,7 +423,7 @@ public class AssetCategoryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -444,7 +444,7 @@ public class AssetCategoryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -466,7 +466,7 @@ public class AssetCategoryUtil {
 	*
 	* @param categoryId the primary key of the current asset category
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -523,7 +523,7 @@ public class AssetCategoryUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -544,7 +544,7 @@ public class AssetCategoryUtil {
 	*
 	* @param categoryId the primary key of the current asset category
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -602,7 +602,7 @@ public class AssetCategoryUtil {
 	* @param parentCategoryId the parent category ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -623,7 +623,7 @@ public class AssetCategoryUtil {
 	* </p>
 	*
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -646,7 +646,7 @@ public class AssetCategoryUtil {
 	* </p>
 	*
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -670,7 +670,7 @@ public class AssetCategoryUtil {
 	*
 	* @param categoryId the primary key of the current asset category
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -727,7 +727,7 @@ public class AssetCategoryUtil {
 	* @param vocabularyId the vocabulary ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -748,7 +748,7 @@ public class AssetCategoryUtil {
 	* </p>
 	*
 	* @param vocabularyId the vocabulary ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -770,7 +770,7 @@ public class AssetCategoryUtil {
 	* </p>
 	*
 	* @param vocabularyId the vocabulary ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -793,7 +793,7 @@ public class AssetCategoryUtil {
 	*
 	* @param categoryId the primary key of the current asset category
 	* @param vocabularyId the vocabulary ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -853,7 +853,7 @@ public class AssetCategoryUtil {
 	* @param name the name to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -875,7 +875,7 @@ public class AssetCategoryUtil {
 	*
 	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -898,7 +898,7 @@ public class AssetCategoryUtil {
 	*
 	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -922,7 +922,7 @@ public class AssetCategoryUtil {
 	* @param categoryId the primary key of the current asset category
 	* @param parentCategoryId the parent category ID to search with
 	* @param name the name to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -983,7 +983,7 @@ public class AssetCategoryUtil {
 	* @param vocabularyId the vocabulary ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1005,7 +1005,7 @@ public class AssetCategoryUtil {
 	*
 	* @param parentCategoryId the parent category ID to search with
 	* @param vocabularyId the vocabulary ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -1029,7 +1029,7 @@ public class AssetCategoryUtil {
 	*
 	* @param parentCategoryId the parent category ID to search with
 	* @param vocabularyId the vocabulary ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -1054,7 +1054,7 @@ public class AssetCategoryUtil {
 	* @param categoryId the primary key of the current asset category
 	* @param parentCategoryId the parent category ID to search with
 	* @param vocabularyId the vocabulary ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1114,7 +1114,7 @@ public class AssetCategoryUtil {
 	* @param vocabularyId the vocabulary ID to search with
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1135,7 +1135,7 @@ public class AssetCategoryUtil {
 	*
 	* @param name the name to search with
 	* @param vocabularyId the vocabulary ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -1158,7 +1158,7 @@ public class AssetCategoryUtil {
 	*
 	* @param name the name to search with
 	* @param vocabularyId the vocabulary ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
@@ -1182,7 +1182,7 @@ public class AssetCategoryUtil {
 	* @param categoryId the primary key of the current asset category
 	* @param name the name to search with
 	* @param vocabularyId the vocabulary ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1286,7 +1286,7 @@ public class AssetCategoryUtil {
 	*
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1595,7 +1595,7 @@ public class AssetCategoryUtil {
 	* @param pk the primary key of the asset category to get the associated asset entries for
 	* @param start the lower bound of the range of asset categories to return
 	* @param end the upper bound of the range of asset categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset entries associated with the asset category
 	* @throws SystemException if a system exception occurred
 	*/

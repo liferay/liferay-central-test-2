@@ -241,7 +241,7 @@ public class SCLicenseUtil {
 	* @param active the active to search with
 	* @param start the lower bound of the range of s c licenses to return
 	* @param end the upper bound of the range of s c licenses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c licenses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -261,7 +261,7 @@ public class SCLicenseUtil {
 	* </p>
 	*
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching s c license
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
 	* @throws SystemException if a system exception occurred
@@ -282,7 +282,7 @@ public class SCLicenseUtil {
 	* </p>
 	*
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching s c license
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
 	* @throws SystemException if a system exception occurred
@@ -304,7 +304,7 @@ public class SCLicenseUtil {
 	*
 	* @param licenseId the primary key of the current s c license
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c license
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -361,7 +361,7 @@ public class SCLicenseUtil {
 	* @param active the active to search with
 	* @param start the lower bound of the range of s c licenses to return
 	* @param end the upper bound of the range of s c licenses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c licenses that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -382,7 +382,7 @@ public class SCLicenseUtil {
 	*
 	* @param licenseId the primary key of the current s c license
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c license
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -442,7 +442,7 @@ public class SCLicenseUtil {
 	* @param recommended the recommended to search with
 	* @param start the lower bound of the range of s c licenses to return
 	* @param end the upper bound of the range of s c licenses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c licenses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -463,7 +463,7 @@ public class SCLicenseUtil {
 	*
 	* @param active the active to search with
 	* @param recommended the recommended to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching s c license
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
 	* @throws SystemException if a system exception occurred
@@ -486,7 +486,7 @@ public class SCLicenseUtil {
 	*
 	* @param active the active to search with
 	* @param recommended the recommended to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching s c license
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a matching s c license could not be found
 	* @throws SystemException if a system exception occurred
@@ -510,7 +510,7 @@ public class SCLicenseUtil {
 	* @param licenseId the primary key of the current s c license
 	* @param active the active to search with
 	* @param recommended the recommended to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c license
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -570,7 +570,7 @@ public class SCLicenseUtil {
 	* @param recommended the recommended to search with
 	* @param start the lower bound of the range of s c licenses to return
 	* @param end the upper bound of the range of s c licenses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c licenses that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -593,7 +593,7 @@ public class SCLicenseUtil {
 	* @param licenseId the primary key of the current s c license
 	* @param active the active to search with
 	* @param recommended the recommended to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c license
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchLicenseException if a s c license with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -646,7 +646,7 @@ public class SCLicenseUtil {
 	*
 	* @param start the lower bound of the range of s c licenses to return
 	* @param end the upper bound of the range of s c licenses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of s c licenses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -792,7 +792,7 @@ public class SCLicenseUtil {
 	* @param pk the primary key of the s c license to get the associated s c product entries for
 	* @param start the lower bound of the range of s c licenses to return
 	* @param end the upper bound of the range of s c licenses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of s c product entries associated with the s c license
 	* @throws SystemException if a system exception occurred
 	*/

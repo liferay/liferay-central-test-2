@@ -135,7 +135,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -152,7 +152,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -171,7 +171,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -190,7 +190,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	*
 	* @param groupId the primary key of the current group
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next group
 	* @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -351,7 +351,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* @param active the active to search with
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -369,7 +369,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	*
 	* @param type the type to search with
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -389,7 +389,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	*
 	* @param type the type to search with
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching group
 	* @throws com.liferay.portal.NoSuchGroupException if a matching group could not be found
 	* @throws SystemException if a system exception occurred
@@ -410,7 +410,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* @param groupId the primary key of the current group
 	* @param type the type to search with
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next group
 	* @throws com.liferay.portal.NoSuchGroupException if a group with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -581,7 +581,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	*
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of groups
 	* @throws SystemException if a system exception occurred
 	*/
@@ -826,7 +826,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* @param pk the primary key of the group to get the associated organizations for
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of organizations associated with the group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1017,7 +1017,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* @param pk the primary key of the group to get the associated permissions for
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of permissions associated with the group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1208,7 +1208,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* @param pk the primary key of the group to get the associated roles for
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of roles associated with the group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1397,7 +1397,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* @param pk the primary key of the group to get the associated user groups for
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of user groups associated with the group
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1588,7 +1588,7 @@ public interface GroupPersistence extends BasePersistence<Group> {
 	* @param pk the primary key of the group to get the associated users for
 	* @param start the lower bound of the range of groups to return
 	* @param end the upper bound of the range of groups to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of users associated with the group
 	* @throws SystemException if a system exception occurred
 	*/

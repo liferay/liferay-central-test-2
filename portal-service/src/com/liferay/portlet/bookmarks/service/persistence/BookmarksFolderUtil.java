@@ -241,7 +241,7 @@ public class BookmarksFolderUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of bookmarks folders to return
 	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,7 +260,7 @@ public class BookmarksFolderUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public class BookmarksFolderUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public class BookmarksFolderUtil {
 	*
 	* @param folderId the primary key of the current bookmarks folder
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -403,7 +403,7 @@ public class BookmarksFolderUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of bookmarks folders to return
 	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -423,7 +423,7 @@ public class BookmarksFolderUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
@@ -444,7 +444,7 @@ public class BookmarksFolderUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
@@ -466,7 +466,7 @@ public class BookmarksFolderUtil {
 	*
 	* @param folderId the primary key of the current bookmarks folder
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -523,7 +523,7 @@ public class BookmarksFolderUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of bookmarks folders to return
 	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -544,7 +544,7 @@ public class BookmarksFolderUtil {
 	*
 	* @param folderId the primary key of the current bookmarks folder
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -601,7 +601,7 @@ public class BookmarksFolderUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of bookmarks folders to return
 	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -621,7 +621,7 @@ public class BookmarksFolderUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
@@ -643,7 +643,7 @@ public class BookmarksFolderUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
@@ -666,7 +666,7 @@ public class BookmarksFolderUtil {
 	*
 	* @param folderId the primary key of the current bookmarks folder
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -726,7 +726,7 @@ public class BookmarksFolderUtil {
 	* @param parentFolderId the parent folder ID to search with
 	* @param start the lower bound of the range of bookmarks folders to return
 	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/
@@ -748,7 +748,7 @@ public class BookmarksFolderUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param parentFolderId the parent folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
@@ -771,7 +771,7 @@ public class BookmarksFolderUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param parentFolderId the parent folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a matching bookmarks folder could not be found
 	* @throws SystemException if a system exception occurred
@@ -795,7 +795,7 @@ public class BookmarksFolderUtil {
 	* @param folderId the primary key of the current bookmarks folder
 	* @param groupId the group ID to search with
 	* @param parentFolderId the parent folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -856,7 +856,7 @@ public class BookmarksFolderUtil {
 	* @param parentFolderId the parent folder ID to search with
 	* @param start the lower bound of the range of bookmarks folders to return
 	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks folders that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -879,7 +879,7 @@ public class BookmarksFolderUtil {
 	* @param folderId the primary key of the current bookmarks folder
 	* @param groupId the group ID to search with
 	* @param parentFolderId the parent folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks folder
 	* @throws com.liferay.portlet.bookmarks.NoSuchFolderException if a bookmarks folder with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -932,7 +932,7 @@ public class BookmarksFolderUtil {
 	*
 	* @param start the lower bound of the range of bookmarks folders to return
 	* @param end the upper bound of the range of bookmarks folders to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of bookmarks folders
 	* @throws SystemException if a system exception occurred
 	*/

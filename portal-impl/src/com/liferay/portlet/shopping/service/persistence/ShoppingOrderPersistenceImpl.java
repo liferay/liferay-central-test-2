@@ -564,7 +564,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of shopping orders to return
 	 * @param end the upper bound of the range of shopping orders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching shopping orders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -650,7 +650,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching shopping order
 	 * @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
 	 * @throws SystemException if a system exception occurred
@@ -686,7 +686,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching shopping order
 	 * @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
 	 * @throws SystemException if a system exception occurred
@@ -725,7 +725,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 *
 	 * @param orderId the primary key of the current shopping order
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next shopping order
 	 * @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -905,7 +905,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of shopping orders to return
 	 * @param end the upper bound of the range of shopping orders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching shopping orders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1000,7 +1000,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 *
 	 * @param orderId the primary key of the current shopping order
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next shopping order
 	 * @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1508,7 +1508,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @param ppPaymentStatus the pp payment status to search with
 	 * @param start the lower bound of the range of shopping orders to return
 	 * @param end the upper bound of the range of shopping orders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching shopping orders
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1617,7 +1617,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
 	 * @param ppPaymentStatus the pp payment status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching shopping order
 	 * @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1661,7 +1661,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
 	 * @param ppPaymentStatus the pp payment status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching shopping order
 	 * @throws com.liferay.portlet.shopping.NoSuchOrderException if a matching shopping order could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1708,7 +1708,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
 	 * @param ppPaymentStatus the pp payment status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next shopping order
 	 * @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1917,7 +1917,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @param ppPaymentStatus the pp payment status to search with
 	 * @param start the lower bound of the range of shopping orders to return
 	 * @param end the upper bound of the range of shopping orders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching shopping orders that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2036,7 +2036,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
 	 * @param ppPaymentStatus the pp payment status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next shopping order
 	 * @throws com.liferay.portlet.shopping.NoSuchOrderException if a shopping order with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2273,7 +2273,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistenceImpl<ShoppingOr
 	 *
 	 * @param start the lower bound of the range of shopping orders to return
 	 * @param end the upper bound of the range of shopping orders to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of shopping orders
 	 * @throws SystemException if a system exception occurred
 	 */

@@ -239,7 +239,7 @@ public class LayoutPrototypeUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of layout prototypes to return
 	* @param end the upper bound of the range of layout prototypes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout prototypes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -259,7 +259,7 @@ public class LayoutPrototypeUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout prototype
 	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public class LayoutPrototypeUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout prototype
 	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	* @throws SystemException if a system exception occurred
@@ -304,7 +304,7 @@ public class LayoutPrototypeUtil {
 	*
 	* @param layoutPrototypeId the primary key of the current layout prototype
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout prototype
 	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -361,7 +361,7 @@ public class LayoutPrototypeUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of layout prototypes to return
 	* @param end the upper bound of the range of layout prototypes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout prototypes that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -383,7 +383,7 @@ public class LayoutPrototypeUtil {
 	*
 	* @param layoutPrototypeId the primary key of the current layout prototype
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout prototype
 	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -443,7 +443,7 @@ public class LayoutPrototypeUtil {
 	* @param active the active to search with
 	* @param start the lower bound of the range of layout prototypes to return
 	* @param end the upper bound of the range of layout prototypes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout prototypes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -464,7 +464,7 @@ public class LayoutPrototypeUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout prototype
 	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	* @throws SystemException if a system exception occurred
@@ -487,7 +487,7 @@ public class LayoutPrototypeUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout prototype
 	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a matching layout prototype could not be found
 	* @throws SystemException if a system exception occurred
@@ -511,7 +511,7 @@ public class LayoutPrototypeUtil {
 	* @param layoutPrototypeId the primary key of the current layout prototype
 	* @param companyId the company ID to search with
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout prototype
 	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -571,7 +571,7 @@ public class LayoutPrototypeUtil {
 	* @param active the active to search with
 	* @param start the lower bound of the range of layout prototypes to return
 	* @param end the upper bound of the range of layout prototypes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layout prototypes that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -594,7 +594,7 @@ public class LayoutPrototypeUtil {
 	* @param layoutPrototypeId the primary key of the current layout prototype
 	* @param companyId the company ID to search with
 	* @param active the active to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout prototype
 	* @throws com.liferay.portal.NoSuchLayoutPrototypeException if a layout prototype with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -647,7 +647,7 @@ public class LayoutPrototypeUtil {
 	*
 	* @param start the lower bound of the range of layout prototypes to return
 	* @param end the upper bound of the range of layout prototypes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of layout prototypes
 	* @throws SystemException if a system exception occurred
 	*/

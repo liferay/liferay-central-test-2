@@ -243,7 +243,7 @@ public class ShoppingOrderItemUtil {
 	* @param orderId the order ID to search with
 	* @param start the lower bound of the range of shopping order items to return
 	* @param end the upper bound of the range of shopping order items to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping order items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -263,7 +263,7 @@ public class ShoppingOrderItemUtil {
 	* </p>
 	*
 	* @param orderId the order ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching shopping order item
 	* @throws com.liferay.portlet.shopping.NoSuchOrderItemException if a matching shopping order item could not be found
 	* @throws SystemException if a system exception occurred
@@ -284,7 +284,7 @@ public class ShoppingOrderItemUtil {
 	* </p>
 	*
 	* @param orderId the order ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching shopping order item
 	* @throws com.liferay.portlet.shopping.NoSuchOrderItemException if a matching shopping order item could not be found
 	* @throws SystemException if a system exception occurred
@@ -306,7 +306,7 @@ public class ShoppingOrderItemUtil {
 	*
 	* @param orderItemId the primary key of the current shopping order item
 	* @param orderId the order ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping order item
 	* @throws com.liferay.portlet.shopping.NoSuchOrderItemException if a shopping order item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -359,7 +359,7 @@ public class ShoppingOrderItemUtil {
 	*
 	* @param start the lower bound of the range of shopping order items to return
 	* @param end the upper bound of the range of shopping order items to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of shopping order items
 	* @throws SystemException if a system exception occurred
 	*/

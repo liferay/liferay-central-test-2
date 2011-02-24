@@ -418,7 +418,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * @param size the size to search with
 	 * @param start the lower bound of the range of images to return
 	 * @param end the upper bound of the range of images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching images
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -503,7 +503,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * </p>
 	 *
 	 * @param size the size to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching image
 	 * @throws com.liferay.portal.NoSuchImageException if a matching image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -538,7 +538,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 * </p>
 	 *
 	 * @param size the size to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching image
 	 * @throws com.liferay.portal.NoSuchImageException if a matching image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -576,7 +576,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 *
 	 * @param imageId the primary key of the current image
 	 * @param size the size to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next image
 	 * @throws com.liferay.portal.NoSuchImageException if a image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -749,7 +749,7 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 	 *
 	 * @param start the lower bound of the range of images to return
 	 * @param end the upper bound of the range of images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of images
 	 * @throws SystemException if a system exception occurred
 	 */

@@ -241,7 +241,7 @@ public class DLFileVersionUtil {
 	* @param fileEntryId the file entry ID to search with
 	* @param start the lower bound of the range of d l file versions to return
 	* @param end the upper bound of the range of d l file versions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -261,7 +261,7 @@ public class DLFileVersionUtil {
 	* </p>
 	*
 	* @param fileEntryId the file entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public class DLFileVersionUtil {
 	* </p>
 	*
 	* @param fileEntryId the file entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
 	* @throws SystemException if a system exception occurred
@@ -306,7 +306,7 @@ public class DLFileVersionUtil {
 	*
 	* @param fileVersionId the primary key of the current d l file version
 	* @param fileEntryId the file entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a d l file version with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -411,7 +411,7 @@ public class DLFileVersionUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of d l file versions to return
 	* @param end the upper bound of the range of d l file versions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -432,7 +432,7 @@ public class DLFileVersionUtil {
 	*
 	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
 	* @throws SystemException if a system exception occurred
@@ -455,7 +455,7 @@ public class DLFileVersionUtil {
 	*
 	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a matching d l file version could not be found
 	* @throws SystemException if a system exception occurred
@@ -479,7 +479,7 @@ public class DLFileVersionUtil {
 	* @param fileVersionId the primary key of the current d l file version
 	* @param fileEntryId the file entry ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file version
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException if a d l file version with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -532,7 +532,7 @@ public class DLFileVersionUtil {
 	*
 	* @param start the lower bound of the range of d l file versions to return
 	* @param end the upper bound of the range of d l file versions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of d l file versions
 	* @throws SystemException if a system exception occurred
 	*/

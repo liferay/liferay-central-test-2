@@ -598,7 +598,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param uuid the uuid to search with
 	 * @param start the lower bound of the range of social relations to return
 	 * @param end the upper bound of the range of social relations to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social relations
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -692,7 +692,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -727,7 +727,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -766,7 +766,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param relationId the primary key of the current social relation
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -954,7 +954,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of social relations to return
 	 * @param end the upper bound of the range of social relations to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social relations
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1036,7 +1036,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1072,7 +1072,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1111,7 +1111,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param relationId the primary key of the current social relation
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1286,7 +1286,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param userId1 the user id1 to search with
 	 * @param start the lower bound of the range of social relations to return
 	 * @param end the upper bound of the range of social relations to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social relations
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1368,7 +1368,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param userId1 the user id1 to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1404,7 +1404,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param userId1 the user id1 to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1443,7 +1443,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param relationId the primary key of the current social relation
 	 * @param userId1 the user id1 to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1618,7 +1618,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param userId2 the user id2 to search with
 	 * @param start the lower bound of the range of social relations to return
 	 * @param end the upper bound of the range of social relations to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social relations
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1700,7 +1700,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param userId2 the user id2 to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1736,7 +1736,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param userId2 the user id2 to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1775,7 +1775,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param relationId the primary key of the current social relation
 	 * @param userId2 the user id2 to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1949,7 +1949,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of social relations to return
 	 * @param end the upper bound of the range of social relations to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social relations
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2031,7 +2031,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2066,7 +2066,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * </p>
 	 *
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2105,7 +2105,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param relationId the primary key of the current social relation
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2284,7 +2284,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of social relations to return
 	 * @param end the upper bound of the range of social relations to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social relations
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2371,7 +2371,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param companyId the company ID to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2411,7 +2411,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param companyId the company ID to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2454,7 +2454,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param relationId the primary key of the current social relation
 	 * @param companyId the company ID to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2637,7 +2637,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of social relations to return
 	 * @param end the upper bound of the range of social relations to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social relations
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2724,7 +2724,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param userId1 the user id1 to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2764,7 +2764,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param userId1 the user id1 to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2807,7 +2807,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param relationId the primary key of the current social relation
 	 * @param userId1 the user id1 to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2990,7 +2990,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of social relations to return
 	 * @param end the upper bound of the range of social relations to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching social relations
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3077,7 +3077,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param userId2 the user id2 to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3117,7 +3117,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param userId2 the user id2 to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a matching social relation could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3160,7 +3160,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 * @param relationId the primary key of the current social relation
 	 * @param userId2 the user id2 to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next social relation
 	 * @throws com.liferay.portlet.social.NoSuchRelationException if a social relation with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3484,7 +3484,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl<SocialRel
 	 *
 	 * @param start the lower bound of the range of social relations to return
 	 * @param end the upper bound of the range of social relations to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of social relations
 	 * @throws SystemException if a system exception occurred
 	 */

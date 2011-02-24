@@ -916,7 +916,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * @param system the system to search with
 	 * @param start the lower bound of the range of companies to return
 	 * @param end the upper bound of the range of companies to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching companies
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -997,7 +997,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * </p>
 	 *
 	 * @param system the system to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching company
 	 * @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1032,7 +1032,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 * </p>
 	 *
 	 * @param system the system to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching company
 	 * @throws com.liferay.portal.NoSuchCompanyException if a matching company could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1071,7 +1071,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 *
 	 * @param companyId the primary key of the current company
 	 * @param system the system to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next company
 	 * @throws com.liferay.portal.NoSuchCompanyException if a company with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1240,7 +1240,7 @@ public class CompanyPersistenceImpl extends BasePersistenceImpl<Company>
 	 *
 	 * @param start the lower bound of the range of companies to return
 	 * @param end the upper bound of the range of companies to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of companies
 	 * @throws SystemException if a system exception occurred
 	 */

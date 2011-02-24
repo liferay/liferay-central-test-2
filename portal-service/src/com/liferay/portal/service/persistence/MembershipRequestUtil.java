@@ -242,7 +242,7 @@ public class MembershipRequestUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of membership requests to return
 	* @param end the upper bound of the range of membership requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching membership requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,7 +262,7 @@ public class MembershipRequestUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching membership request
 	* @throws com.liferay.portal.NoSuchMembershipRequestException if a matching membership request could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public class MembershipRequestUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching membership request
 	* @throws com.liferay.portal.NoSuchMembershipRequestException if a matching membership request could not be found
 	* @throws SystemException if a system exception occurred
@@ -305,7 +305,7 @@ public class MembershipRequestUtil {
 	*
 	* @param membershipRequestId the primary key of the current membership request
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next membership request
 	* @throws com.liferay.portal.NoSuchMembershipRequestException if a membership request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -361,7 +361,7 @@ public class MembershipRequestUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of membership requests to return
 	* @param end the upper bound of the range of membership requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching membership requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -381,7 +381,7 @@ public class MembershipRequestUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching membership request
 	* @throws com.liferay.portal.NoSuchMembershipRequestException if a matching membership request could not be found
 	* @throws SystemException if a system exception occurred
@@ -402,7 +402,7 @@ public class MembershipRequestUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching membership request
 	* @throws com.liferay.portal.NoSuchMembershipRequestException if a matching membership request could not be found
 	* @throws SystemException if a system exception occurred
@@ -424,7 +424,7 @@ public class MembershipRequestUtil {
 	*
 	* @param membershipRequestId the primary key of the current membership request
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next membership request
 	* @throws com.liferay.portal.NoSuchMembershipRequestException if a membership request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -484,7 +484,7 @@ public class MembershipRequestUtil {
 	* @param statusId the status ID to search with
 	* @param start the lower bound of the range of membership requests to return
 	* @param end the upper bound of the range of membership requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching membership requests
 	* @throws SystemException if a system exception occurred
 	*/
@@ -505,7 +505,7 @@ public class MembershipRequestUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param statusId the status ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching membership request
 	* @throws com.liferay.portal.NoSuchMembershipRequestException if a matching membership request could not be found
 	* @throws SystemException if a system exception occurred
@@ -528,7 +528,7 @@ public class MembershipRequestUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param statusId the status ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching membership request
 	* @throws com.liferay.portal.NoSuchMembershipRequestException if a matching membership request could not be found
 	* @throws SystemException if a system exception occurred
@@ -552,7 +552,7 @@ public class MembershipRequestUtil {
 	* @param membershipRequestId the primary key of the current membership request
 	* @param groupId the group ID to search with
 	* @param statusId the status ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next membership request
 	* @throws com.liferay.portal.NoSuchMembershipRequestException if a membership request with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -605,7 +605,7 @@ public class MembershipRequestUtil {
 	*
 	* @param start the lower bound of the range of membership requests to return
 	* @param end the upper bound of the range of membership requests to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of membership requests
 	* @throws SystemException if a system exception occurred
 	*/

@@ -242,7 +242,7 @@ public class AnnouncementsFlagUtil {
 	* @param entryId the entry ID to search with
 	* @param start the lower bound of the range of announcements flags to return
 	* @param end the upper bound of the range of announcements flags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching announcements flags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,7 +262,7 @@ public class AnnouncementsFlagUtil {
 	* </p>
 	*
 	* @param entryId the entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public class AnnouncementsFlagUtil {
 	* </p>
 	*
 	* @param entryId the entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a matching announcements flag could not be found
 	* @throws SystemException if a system exception occurred
@@ -305,7 +305,7 @@ public class AnnouncementsFlagUtil {
 	*
 	* @param flagId the primary key of the current announcements flag
 	* @param entryId the entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next announcements flag
 	* @throws com.liferay.portlet.announcements.NoSuchFlagException if a announcements flag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -405,7 +405,7 @@ public class AnnouncementsFlagUtil {
 	*
 	* @param start the lower bound of the range of announcements flags to return
 	* @param end the upper bound of the range of announcements flags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of announcements flags
 	* @throws SystemException if a system exception occurred
 	*/

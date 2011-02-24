@@ -137,7 +137,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of organizations to return
 	* @param end the upper bound of the range of organizations to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -154,7 +154,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
 	* @throws SystemException if a system exception occurred
@@ -173,7 +173,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
 	* @throws SystemException if a system exception occurred
@@ -193,7 +193,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	*
 	* @param organizationId the primary key of the current organization
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -242,7 +242,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of organizations to return
 	* @param end the upper bound of the range of organizations to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,7 +260,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	*
 	* @param organizationId the primary key of the current organization
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -309,7 +309,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of organizations to return
 	* @param end the upper bound of the range of organizations to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -326,7 +326,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
 	* @throws SystemException if a system exception occurred
@@ -345,7 +345,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
 	* @throws SystemException if a system exception occurred
@@ -365,7 +365,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	*
 	* @param organizationId the primary key of the current organization
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -414,7 +414,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of organizations to return
 	* @param end the upper bound of the range of organizations to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -432,7 +432,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	*
 	* @param organizationId the primary key of the current organization
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -484,7 +484,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param parentOrganizationId the parent organization ID to search with
 	* @param start the lower bound of the range of organizations to return
 	* @param end the upper bound of the range of organizations to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -502,7 +502,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	*
 	* @param companyId the company ID to search with
 	* @param parentOrganizationId the parent organization ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
 	* @throws SystemException if a system exception occurred
@@ -522,7 +522,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	*
 	* @param companyId the company ID to search with
 	* @param parentOrganizationId the parent organization ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a matching organization could not be found
 	* @throws SystemException if a system exception occurred
@@ -543,7 +543,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param organizationId the primary key of the current organization
 	* @param companyId the company ID to search with
 	* @param parentOrganizationId the parent organization ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -595,7 +595,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param parentOrganizationId the parent organization ID to search with
 	* @param start the lower bound of the range of organizations to return
 	* @param end the upper bound of the range of organizations to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching organizations that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -614,7 +614,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param organizationId the primary key of the current organization
 	* @param companyId the company ID to search with
 	* @param parentOrganizationId the parent organization ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next organization
 	* @throws com.liferay.portal.NoSuchOrganizationException if a organization with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -697,7 +697,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	*
 	* @param start the lower bound of the range of organizations to return
 	* @param end the upper bound of the range of organizations to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of organizations
 	* @throws SystemException if a system exception occurred
 	*/
@@ -872,7 +872,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param pk the primary key of the organization to get the associated groups for
 	* @param start the lower bound of the range of organizations to return
 	* @param end the upper bound of the range of organizations to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of groups associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1061,7 +1061,7 @@ public interface OrganizationPersistence extends BasePersistence<Organization> {
 	* @param pk the primary key of the organization to get the associated users for
 	* @param start the lower bound of the range of organizations to return
 	* @param end the upper bound of the range of organizations to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of users associated with the organization
 	* @throws SystemException if a system exception occurred
 	*/

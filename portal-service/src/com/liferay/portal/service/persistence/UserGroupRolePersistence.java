@@ -139,7 +139,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of user group roles to return
 	* @param end the upper bound of the range of user group roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -156,7 +156,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -175,7 +175,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -195,7 +195,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param userGroupRolePK the primary key of the current user group role
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -245,7 +245,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of user group roles to return
 	* @param end the upper bound of the range of user group roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,7 +262,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -301,7 +301,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param userGroupRolePK the primary key of the current user group role
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -350,7 +350,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID to search with
 	* @param start the lower bound of the range of user group roles to return
 	* @param end the upper bound of the range of user group roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -367,7 +367,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* </p>
 	*
 	* @param roleId the role ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -386,7 +386,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* </p>
 	*
 	* @param roleId the role ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -406,7 +406,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param userGroupRolePK the primary key of the current user group role
 	* @param roleId the role ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -459,7 +459,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of user group roles to return
 	* @param end the upper bound of the range of user group roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -477,7 +477,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param userId the user ID to search with
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -497,7 +497,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param userId the user ID to search with
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -518,7 +518,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param userGroupRolePK the primary key of the current user group role
 	* @param userId the user ID to search with
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -571,7 +571,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param roleId the role ID to search with
 	* @param start the lower bound of the range of user group roles to return
 	* @param end the upper bound of the range of user group roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user group roles
 	* @throws SystemException if a system exception occurred
 	*/
@@ -589,7 +589,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param groupId the group ID to search with
 	* @param roleId the role ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -609,7 +609,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param groupId the group ID to search with
 	* @param roleId the role ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a matching user group role could not be found
 	* @throws SystemException if a system exception occurred
@@ -630,7 +630,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	* @param userGroupRolePK the primary key of the current user group role
 	* @param groupId the group ID to search with
 	* @param roleId the role ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user group role
 	* @throws com.liferay.portal.NoSuchUserGroupRoleException if a user group role with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -676,7 +676,7 @@ public interface UserGroupRolePersistence extends BasePersistence<UserGroupRole>
 	*
 	* @param start the lower bound of the range of user group roles to return
 	* @param end the upper bound of the range of user group roles to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of user group roles
 	* @throws SystemException if a system exception occurred
 	*/

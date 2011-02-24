@@ -141,7 +141,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of polls questions to return
 	* @param end the upper bound of the range of polls questions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching polls questions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -158,7 +158,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching polls question
 	* @throws com.liferay.portlet.polls.NoSuchQuestionException if a matching polls question could not be found
 	* @throws SystemException if a system exception occurred
@@ -177,7 +177,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching polls question
 	* @throws com.liferay.portlet.polls.NoSuchQuestionException if a matching polls question could not be found
 	* @throws SystemException if a system exception occurred
@@ -197,7 +197,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	*
 	* @param questionId the primary key of the current polls question
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next polls question
 	* @throws com.liferay.portlet.polls.NoSuchQuestionException if a polls question with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -284,7 +284,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of polls questions to return
 	* @param end the upper bound of the range of polls questions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching polls questions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -301,7 +301,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching polls question
 	* @throws com.liferay.portlet.polls.NoSuchQuestionException if a matching polls question could not be found
 	* @throws SystemException if a system exception occurred
@@ -320,7 +320,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching polls question
 	* @throws com.liferay.portlet.polls.NoSuchQuestionException if a matching polls question could not be found
 	* @throws SystemException if a system exception occurred
@@ -340,7 +340,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	*
 	* @param questionId the primary key of the current polls question
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next polls question
 	* @throws com.liferay.portlet.polls.NoSuchQuestionException if a polls question with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -389,7 +389,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of polls questions to return
 	* @param end the upper bound of the range of polls questions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching polls questions that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -407,7 +407,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	*
 	* @param questionId the primary key of the current polls question
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next polls question
 	* @throws com.liferay.portlet.polls.NoSuchQuestionException if a polls question with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -452,7 +452,7 @@ public interface PollsQuestionPersistence extends BasePersistence<PollsQuestion>
 	*
 	* @param start the lower bound of the range of polls questions to return
 	* @param end the upper bound of the range of polls questions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of polls questions
 	* @throws SystemException if a system exception occurred
 	*/

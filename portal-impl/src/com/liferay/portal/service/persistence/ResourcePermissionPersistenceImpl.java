@@ -575,7 +575,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param roleId the role ID to search with
 	 * @param start the lower bound of the range of resource permissions to return
 	 * @param end the upper bound of the range of resource permissions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -657,7 +657,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * </p>
 	 *
 	 * @param roleId the role ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
@@ -693,7 +693,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * </p>
 	 *
 	 * @param roleId the role ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
@@ -732,7 +732,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param resourcePermissionId the primary key of the current resource permission
 	 * @param roleId the role ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -912,7 +912,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param scope the scope to search with
 	 * @param start the lower bound of the range of resource permissions to return
 	 * @param end the upper bound of the range of resource permissions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1000,7 +1000,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param roleId the role ID to search with
 	 * @param scope the scope to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1040,7 +1040,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param roleId the role ID to search with
 	 * @param scope the scope to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1083,7 +1083,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param resourcePermissionId the primary key of the current resource permission
 	 * @param roleId the role ID to search with
 	 * @param scope the scope to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1270,7 +1270,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param scope the scope to search with
 	 * @param start the lower bound of the range of resource permissions to return
 	 * @param end the upper bound of the range of resource permissions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1375,7 +1375,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @param scope the scope to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1419,7 +1419,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @param scope the scope to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1466,7 +1466,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param companyId the company ID to search with
 	 * @param name the name to search with
 	 * @param scope the scope to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1673,7 +1673,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key to search with
 	 * @param start the lower bound of the range of resource permissions to return
 	 * @param end the upper bound of the range of resource permissions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1795,7 +1795,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param name the name to search with
 	 * @param scope the scope to search with
 	 * @param primKey the prim key to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1843,7 +1843,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param name the name to search with
 	 * @param scope the scope to search with
 	 * @param primKey the prim key to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1894,7 +1894,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param name the name to search with
 	 * @param scope the scope to search with
 	 * @param primKey the prim key to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2305,7 +2305,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param start the lower bound of the range of resource permissions to return
 	 * @param end the upper bound of the range of resource permissions to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of resource permissions
 	 * @throws SystemException if a system exception occurred
 	 */

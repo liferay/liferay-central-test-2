@@ -474,7 +474,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * @param codeId the code ID to search with
 	 * @param start the lower bound of the range of resources to return
 	 * @param end the upper bound of the range of resources to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resources
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -556,7 +556,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * </p>
 	 *
 	 * @param codeId the code ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource
 	 * @throws com.liferay.portal.NoSuchResourceException if a matching resource could not be found
 	 * @throws SystemException if a system exception occurred
@@ -591,7 +591,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 * </p>
 	 *
 	 * @param codeId the code ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource
 	 * @throws com.liferay.portal.NoSuchResourceException if a matching resource could not be found
 	 * @throws SystemException if a system exception occurred
@@ -630,7 +630,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 *
 	 * @param resourceId the primary key of the current resource
 	 * @param codeId the code ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource
 	 * @throws com.liferay.portal.NoSuchResourceException if a resource with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -951,7 +951,7 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	 *
 	 * @param start the lower bound of the range of resources to return
 	 * @param end the upper bound of the range of resources to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of resources
 	 * @throws SystemException if a system exception occurred
 	 */

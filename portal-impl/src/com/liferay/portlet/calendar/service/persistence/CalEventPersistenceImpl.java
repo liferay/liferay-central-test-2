@@ -623,7 +623,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param uuid the uuid to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -721,7 +721,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -756,7 +756,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -795,7 +795,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param eventId the primary key of the current cal event
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1140,7 +1140,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1226,7 +1226,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1261,7 +1261,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1300,7 +1300,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param eventId the primary key of the current cal event
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1478,7 +1478,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1564,7 +1564,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1599,7 +1599,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1638,7 +1638,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param eventId the primary key of the current cal event
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1818,7 +1818,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1912,7 +1912,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param eventId the primary key of the current cal event
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2131,7 +2131,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param remindBy the remind by to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2217,7 +2217,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param remindBy the remind by to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2253,7 +2253,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * </p>
 	 *
 	 * @param remindBy the remind by to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2292,7 +2292,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param eventId the primary key of the current cal event
 	 * @param remindBy the remind by to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2475,7 +2475,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2578,7 +2578,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2617,7 +2617,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2660,7 +2660,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param eventId the primary key of the current cal event
 	 * @param groupId the group ID to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2863,7 +2863,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param types the types to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3021,7 +3021,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param type the type to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3132,7 +3132,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param eventId the primary key of the current cal event
 	 * @param groupId the group ID to search with
 	 * @param type the type to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3375,7 +3375,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param types the types to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3541,7 +3541,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3632,7 +3632,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3672,7 +3672,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3715,7 +3715,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param eventId the primary key of the current cal event
 	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3902,7 +3902,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4002,7 +4002,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param eventId the primary key of the current cal event
 	 * @param groupId the group ID to search with
 	 * @param repeating the repeating to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4232,7 +4232,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4341,7 +4341,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param repeating the repeating to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4385,7 +4385,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param repeating the repeating to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a matching cal event could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4432,7 +4432,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param repeating the repeating to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4642,7 +4642,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4814,7 +4814,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4932,7 +4932,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param groupId the group ID to search with
 	 * @param type the type to search with
 	 * @param repeating the repeating to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next cal event
 	 * @throws com.liferay.portlet.calendar.NoSuchEventException if a cal event with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -5182,7 +5182,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 * @param repeating the repeating to search with
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching cal events that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -5350,7 +5350,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 	 *
 	 * @param start the lower bound of the range of cal events to return
 	 * @param end the upper bound of the range of cal events to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of cal events
 	 * @throws SystemException if a system exception occurred
 	 */

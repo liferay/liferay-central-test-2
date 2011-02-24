@@ -241,7 +241,7 @@ public class SCProductVersionUtil {
 	* @param productEntryId the product entry ID to search with
 	* @param start the lower bound of the range of s c product versions to return
 	* @param end the upper bound of the range of s c product versions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching s c product versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,7 +262,7 @@ public class SCProductVersionUtil {
 	* </p>
 	*
 	* @param productEntryId the product entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a matching s c product version could not be found
 	* @throws SystemException if a system exception occurred
@@ -284,7 +284,7 @@ public class SCProductVersionUtil {
 	* </p>
 	*
 	* @param productEntryId the product entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a matching s c product version could not be found
 	* @throws SystemException if a system exception occurred
@@ -307,7 +307,7 @@ public class SCProductVersionUtil {
 	*
 	* @param productVersionId the primary key of the current s c product version
 	* @param productEntryId the product entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next s c product version
 	* @throws com.liferay.portlet.softwarecatalog.NoSuchProductVersionException if a s c product version with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -403,7 +403,7 @@ public class SCProductVersionUtil {
 	*
 	* @param start the lower bound of the range of s c product versions to return
 	* @param end the upper bound of the range of s c product versions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of s c product versions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -525,7 +525,7 @@ public class SCProductVersionUtil {
 	* @param pk the primary key of the s c product version to get the associated s c framework versions for
 	* @param start the lower bound of the range of s c product versions to return
 	* @param end the upper bound of the range of s c product versions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of s c framework versions associated with the s c product version
 	* @throws SystemException if a system exception occurred
 	*/

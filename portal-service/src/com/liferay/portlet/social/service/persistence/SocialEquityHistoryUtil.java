@@ -240,7 +240,7 @@ public class SocialEquityHistoryUtil {
 	*
 	* @param start the lower bound of the range of social equity histories to return
 	* @param end the upper bound of the range of social equity histories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of social equity histories
 	* @throws SystemException if a system exception occurred
 	*/

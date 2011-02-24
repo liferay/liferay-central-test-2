@@ -672,7 +672,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param uuid the uuid to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -769,7 +769,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -804,7 +804,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -843,7 +843,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 *
 	 * @param imageId the primary key of the current i g image
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1185,7 +1185,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1270,7 +1270,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1305,7 +1305,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1344,7 +1344,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 *
 	 * @param imageId the primary key of the current i g image
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1524,7 +1524,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1618,7 +1618,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 *
 	 * @param imageId the primary key of the current i g image
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2356,7 +2356,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2446,7 +2446,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2485,7 +2485,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2528,7 +2528,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param imageId the primary key of the current i g image
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2715,7 +2715,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param userId the user ID to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2814,7 +2814,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param imageId the primary key of the current i g image
 	 * @param groupId the group ID to search with
 	 * @param userId the user ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3041,7 +3041,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param folderId the folder ID to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3131,7 +3131,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param folderId the folder ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3171,7 +3171,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param folderId the folder ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3214,7 +3214,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param imageId the primary key of the current i g image
 	 * @param groupId the group ID to search with
 	 * @param folderId the folder ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3405,7 +3405,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param folderIds the folder IDs to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3550,7 +3550,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param folderId the folder ID to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3650,7 +3650,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param imageId the primary key of the current i g image
 	 * @param groupId the group ID to search with
 	 * @param folderId the folder ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3881,7 +3881,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param folderIds the folder IDs to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4038,7 +4038,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param name the name to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4146,7 +4146,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param groupId the group ID to search with
 	 * @param folderId the folder ID to search with
 	 * @param name the name to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4190,7 +4190,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param groupId the group ID to search with
 	 * @param folderId the folder ID to search with
 	 * @param name the name to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a matching i g image could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4237,7 +4237,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param groupId the group ID to search with
 	 * @param folderId the folder ID to search with
 	 * @param name the name to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4443,7 +4443,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param name the name to search with
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching i g images that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4561,7 +4561,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 * @param groupId the group ID to search with
 	 * @param folderId the folder ID to search with
 	 * @param name the name to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next i g image
 	 * @throws com.liferay.portlet.imagegallery.NoSuchImageException if a i g image with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -4795,7 +4795,7 @@ public class IGImagePersistenceImpl extends BasePersistenceImpl<IGImage>
 	 *
 	 * @param start the lower bound of the range of i g images to return
 	 * @param end the upper bound of the range of i g images to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of i g images
 	 * @throws SystemException if a system exception occurred
 	 */

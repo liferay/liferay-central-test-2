@@ -240,7 +240,7 @@ public class BlogsEntryUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -259,7 +259,7 @@ public class BlogsEntryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -280,7 +280,7 @@ public class BlogsEntryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -302,7 +302,7 @@ public class BlogsEntryUtil {
 	*
 	* @param entryId the primary key of the current blogs entry
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -402,7 +402,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -422,7 +422,7 @@ public class BlogsEntryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -443,7 +443,7 @@ public class BlogsEntryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -465,7 +465,7 @@ public class BlogsEntryUtil {
 	*
 	* @param entryId the primary key of the current blogs entry
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -522,7 +522,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -543,7 +543,7 @@ public class BlogsEntryUtil {
 	*
 	* @param entryId the primary key of the current blogs entry
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -600,7 +600,7 @@ public class BlogsEntryUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -620,7 +620,7 @@ public class BlogsEntryUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -642,7 +642,7 @@ public class BlogsEntryUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -665,7 +665,7 @@ public class BlogsEntryUtil {
 	*
 	* @param entryId the primary key of the current blogs entry
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -725,7 +725,7 @@ public class BlogsEntryUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -746,7 +746,7 @@ public class BlogsEntryUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -769,7 +769,7 @@ public class BlogsEntryUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -793,7 +793,7 @@ public class BlogsEntryUtil {
 	* @param entryId the primary key of the current blogs entry
 	* @param companyId the company ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -853,7 +853,7 @@ public class BlogsEntryUtil {
 	* @param displayDate the display date to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -875,7 +875,7 @@ public class BlogsEntryUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -898,7 +898,7 @@ public class BlogsEntryUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -922,7 +922,7 @@ public class BlogsEntryUtil {
 	* @param entryId the primary key of the current blogs entry
 	* @param companyId the company ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -982,7 +982,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1003,7 +1003,7 @@ public class BlogsEntryUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1026,7 +1026,7 @@ public class BlogsEntryUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1050,7 +1050,7 @@ public class BlogsEntryUtil {
 	* @param entryId the primary key of the current blogs entry
 	* @param companyId the company ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1154,7 +1154,7 @@ public class BlogsEntryUtil {
 	* @param displayDate the display date to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1176,7 +1176,7 @@ public class BlogsEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1199,7 +1199,7 @@ public class BlogsEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1223,7 +1223,7 @@ public class BlogsEntryUtil {
 	* @param entryId the primary key of the current blogs entry
 	* @param groupId the group ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1284,7 +1284,7 @@ public class BlogsEntryUtil {
 	* @param displayDate the display date to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1307,7 +1307,7 @@ public class BlogsEntryUtil {
 	* @param entryId the primary key of the current blogs entry
 	* @param groupId the group ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1367,7 +1367,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1388,7 +1388,7 @@ public class BlogsEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1411,7 +1411,7 @@ public class BlogsEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1435,7 +1435,7 @@ public class BlogsEntryUtil {
 	* @param entryId the primary key of the current blogs entry
 	* @param groupId the group ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1495,7 +1495,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1518,7 +1518,7 @@ public class BlogsEntryUtil {
 	* @param entryId the primary key of the current blogs entry
 	* @param groupId the group ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1582,7 +1582,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1605,7 +1605,7 @@ public class BlogsEntryUtil {
 	* @param companyId the company ID to search with
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1630,7 +1630,7 @@ public class BlogsEntryUtil {
 	* @param companyId the company ID to search with
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1656,7 +1656,7 @@ public class BlogsEntryUtil {
 	* @param companyId the company ID to search with
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1720,7 +1720,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1744,7 +1744,7 @@ public class BlogsEntryUtil {
 	* @param companyId the company ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1769,7 +1769,7 @@ public class BlogsEntryUtil {
 	* @param companyId the company ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1795,7 +1795,7 @@ public class BlogsEntryUtil {
 	* @param companyId the company ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1859,7 +1859,7 @@ public class BlogsEntryUtil {
 	* @param displayDate the display date to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1883,7 +1883,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1908,7 +1908,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1934,7 +1934,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1998,7 +1998,7 @@ public class BlogsEntryUtil {
 	* @param displayDate the display date to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2023,7 +2023,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param displayDate the display date to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2086,7 +2086,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2109,7 +2109,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -2133,7 +2133,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -2158,7 +2158,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2222,7 +2222,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2246,7 +2246,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2310,7 +2310,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2334,7 +2334,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -2359,7 +2359,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -2385,7 +2385,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2449,7 +2449,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2474,7 +2474,7 @@ public class BlogsEntryUtil {
 	* @param groupId the group ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2544,7 +2544,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2569,7 +2569,7 @@ public class BlogsEntryUtil {
 	* @param userId the user ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -2595,7 +2595,7 @@ public class BlogsEntryUtil {
 	* @param userId the user ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a matching blogs entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -2622,7 +2622,7 @@ public class BlogsEntryUtil {
 	* @param userId the user ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2693,7 +2693,7 @@ public class BlogsEntryUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching blogs entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2719,7 +2719,7 @@ public class BlogsEntryUtil {
 	* @param userId the user ID to search with
 	* @param displayDate the display date to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next blogs entry
 	* @throws com.liferay.portlet.blogs.NoSuchEntryException if a blogs entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2773,7 +2773,7 @@ public class BlogsEntryUtil {
 	*
 	* @param start the lower bound of the range of blogs entries to return
 	* @param end the upper bound of the range of blogs entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of blogs entries
 	* @throws SystemException if a system exception occurred
 	*/

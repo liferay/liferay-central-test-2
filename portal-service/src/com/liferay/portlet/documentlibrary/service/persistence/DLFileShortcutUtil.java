@@ -241,7 +241,7 @@ public class DLFileShortcutUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of d l file shortcuts to return
 	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,7 +260,7 @@ public class DLFileShortcutUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public class DLFileShortcutUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public class DLFileShortcutUtil {
 	*
 	* @param fileShortcutId the primary key of the current d l file shortcut
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -404,7 +404,7 @@ public class DLFileShortcutUtil {
 	* @param toFileEntryId the to file entry ID to search with
 	* @param start the lower bound of the range of d l file shortcuts to return
 	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -425,7 +425,7 @@ public class DLFileShortcutUtil {
 	* </p>
 	*
 	* @param toFileEntryId the to file entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
@@ -447,7 +447,7 @@ public class DLFileShortcutUtil {
 	* </p>
 	*
 	* @param toFileEntryId the to file entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
@@ -470,7 +470,7 @@ public class DLFileShortcutUtil {
 	*
 	* @param fileShortcutId the primary key of the current d l file shortcut
 	* @param toFileEntryId the to file entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -530,7 +530,7 @@ public class DLFileShortcutUtil {
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file shortcuts to return
 	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -551,7 +551,7 @@ public class DLFileShortcutUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
@@ -574,7 +574,7 @@ public class DLFileShortcutUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
@@ -598,7 +598,7 @@ public class DLFileShortcutUtil {
 	* @param fileShortcutId the primary key of the current d l file shortcut
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -658,7 +658,7 @@ public class DLFileShortcutUtil {
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file shortcuts to return
 	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file shortcuts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -681,7 +681,7 @@ public class DLFileShortcutUtil {
 	* @param fileShortcutId the primary key of the current d l file shortcut
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -745,7 +745,7 @@ public class DLFileShortcutUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of d l file shortcuts to return
 	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -768,7 +768,7 @@ public class DLFileShortcutUtil {
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
@@ -793,7 +793,7 @@ public class DLFileShortcutUtil {
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a matching d l file shortcut could not be found
 	* @throws SystemException if a system exception occurred
@@ -819,7 +819,7 @@ public class DLFileShortcutUtil {
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -883,7 +883,7 @@ public class DLFileShortcutUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of d l file shortcuts to return
 	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file shortcuts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -907,7 +907,7 @@ public class DLFileShortcutUtil {
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file shortcut
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException if a d l file shortcut with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -960,7 +960,7 @@ public class DLFileShortcutUtil {
 	*
 	* @param start the lower bound of the range of d l file shortcuts to return
 	* @param end the upper bound of the range of d l file shortcuts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of d l file shortcuts
 	* @throws SystemException if a system exception occurred
 	*/

@@ -534,7 +534,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @param classNameId the class name ID to search with
 	 * @param start the lower bound of the range of portlet items to return
 	 * @param end the upper bound of the range of portlet items to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching portlet items
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -622,7 +622,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param classNameId the class name ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
 	 * @throws SystemException if a system exception occurred
@@ -662,7 +662,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param classNameId the class name ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
 	 * @throws SystemException if a system exception occurred
@@ -705,7 +705,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @param portletItemId the primary key of the current portlet item
 	 * @param groupId the group ID to search with
 	 * @param classNameId the class name ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a portlet item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -891,7 +891,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @param classNameId the class name ID to search with
 	 * @param start the lower bound of the range of portlet items to return
 	 * @param end the upper bound of the range of portlet items to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching portlet items
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -996,7 +996,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @param groupId the group ID to search with
 	 * @param portletId the portlet ID to search with
 	 * @param classNameId the class name ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1040,7 +1040,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @param groupId the group ID to search with
 	 * @param portletId the portlet ID to search with
 	 * @param classNameId the class name ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a matching portlet item could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1087,7 +1087,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 * @param groupId the group ID to search with
 	 * @param portletId the portlet ID to search with
 	 * @param classNameId the class name ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next portlet item
 	 * @throws com.liferay.portal.NoSuchPortletItemException if a portlet item with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1468,7 +1468,7 @@ public class PortletItemPersistenceImpl extends BasePersistenceImpl<PortletItem>
 	 *
 	 * @param start the lower bound of the range of portlet items to return
 	 * @param end the upper bound of the range of portlet items to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of portlet items
 	 * @throws SystemException if a system exception occurred
 	 */

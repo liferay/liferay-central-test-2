@@ -240,7 +240,7 @@ public class PollsChoiceUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of polls choices to return
 	* @param end the upper bound of the range of polls choices to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -259,7 +259,7 @@ public class PollsChoiceUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
 	* @throws SystemException if a system exception occurred
@@ -280,7 +280,7 @@ public class PollsChoiceUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
 	* @throws SystemException if a system exception occurred
@@ -302,7 +302,7 @@ public class PollsChoiceUtil {
 	*
 	* @param choiceId the primary key of the current polls choice
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -358,7 +358,7 @@ public class PollsChoiceUtil {
 	* @param questionId the question ID to search with
 	* @param start the lower bound of the range of polls choices to return
 	* @param end the upper bound of the range of polls choices to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching polls choices
 	* @throws SystemException if a system exception occurred
 	*/
@@ -378,7 +378,7 @@ public class PollsChoiceUtil {
 	* </p>
 	*
 	* @param questionId the question ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
 	* @throws SystemException if a system exception occurred
@@ -400,7 +400,7 @@ public class PollsChoiceUtil {
 	* </p>
 	*
 	* @param questionId the question ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a matching polls choice could not be found
 	* @throws SystemException if a system exception occurred
@@ -423,7 +423,7 @@ public class PollsChoiceUtil {
 	*
 	* @param choiceId the primary key of the current polls choice
 	* @param questionId the question ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next polls choice
 	* @throws com.liferay.portlet.polls.NoSuchChoiceException if a polls choice with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -520,7 +520,7 @@ public class PollsChoiceUtil {
 	*
 	* @param start the lower bound of the range of polls choices to return
 	* @param end the upper bound of the range of polls choices to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of polls choices
 	* @throws SystemException if a system exception occurred
 	*/

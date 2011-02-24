@@ -241,7 +241,7 @@ public class DLFileEntryUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,7 +260,7 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public class DLFileEntryUtil {
 	*
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -403,7 +403,7 @@ public class DLFileEntryUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -423,7 +423,7 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -444,7 +444,7 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -466,7 +466,7 @@ public class DLFileEntryUtil {
 	*
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -523,7 +523,7 @@ public class DLFileEntryUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -544,7 +544,7 @@ public class DLFileEntryUtil {
 	*
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -601,7 +601,7 @@ public class DLFileEntryUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -621,7 +621,7 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -643,7 +643,7 @@ public class DLFileEntryUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -666,7 +666,7 @@ public class DLFileEntryUtil {
 	*
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -726,7 +726,7 @@ public class DLFileEntryUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -747,7 +747,7 @@ public class DLFileEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -770,7 +770,7 @@ public class DLFileEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -794,7 +794,7 @@ public class DLFileEntryUtil {
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -854,7 +854,7 @@ public class DLFileEntryUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -877,7 +877,7 @@ public class DLFileEntryUtil {
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -937,7 +937,7 @@ public class DLFileEntryUtil {
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -958,7 +958,7 @@ public class DLFileEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -981,7 +981,7 @@ public class DLFileEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1005,7 +1005,7 @@ public class DLFileEntryUtil {
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1069,7 +1069,7 @@ public class DLFileEntryUtil {
 	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1126,7 +1126,7 @@ public class DLFileEntryUtil {
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1149,7 +1149,7 @@ public class DLFileEntryUtil {
 	* @param fileEntryId the primary key of the current d l file entry
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1213,7 +1213,7 @@ public class DLFileEntryUtil {
 	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1275,7 +1275,7 @@ public class DLFileEntryUtil {
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1298,7 +1298,7 @@ public class DLFileEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1323,7 +1323,7 @@ public class DLFileEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a matching d l file entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -1349,7 +1349,7 @@ public class DLFileEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1417,7 +1417,7 @@ public class DLFileEntryUtil {
 	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1479,7 +1479,7 @@ public class DLFileEntryUtil {
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1503,7 +1503,7 @@ public class DLFileEntryUtil {
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file entry
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException if a d l file entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1571,7 +1571,7 @@ public class DLFileEntryUtil {
 	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1720,7 +1720,7 @@ public class DLFileEntryUtil {
 	*
 	* @param start the lower bound of the range of d l file entries to return
 	* @param end the upper bound of the range of d l file entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of d l file entries
 	* @throws SystemException if a system exception occurred
 	*/

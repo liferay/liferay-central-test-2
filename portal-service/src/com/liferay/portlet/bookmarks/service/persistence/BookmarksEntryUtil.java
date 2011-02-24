@@ -241,7 +241,7 @@ public class BookmarksEntryUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -260,7 +260,7 @@ public class BookmarksEntryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public class BookmarksEntryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public class BookmarksEntryUtil {
 	*
 	* @param entryId the primary key of the current bookmarks entry
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -403,7 +403,7 @@ public class BookmarksEntryUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -423,7 +423,7 @@ public class BookmarksEntryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -444,7 +444,7 @@ public class BookmarksEntryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -466,7 +466,7 @@ public class BookmarksEntryUtil {
 	*
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -523,7 +523,7 @@ public class BookmarksEntryUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -544,7 +544,7 @@ public class BookmarksEntryUtil {
 	*
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -604,7 +604,7 @@ public class BookmarksEntryUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -625,7 +625,7 @@ public class BookmarksEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -648,7 +648,7 @@ public class BookmarksEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -672,7 +672,7 @@ public class BookmarksEntryUtil {
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -732,7 +732,7 @@ public class BookmarksEntryUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -755,7 +755,7 @@ public class BookmarksEntryUtil {
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -815,7 +815,7 @@ public class BookmarksEntryUtil {
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -836,7 +836,7 @@ public class BookmarksEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -859,7 +859,7 @@ public class BookmarksEntryUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -883,7 +883,7 @@ public class BookmarksEntryUtil {
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -947,7 +947,7 @@ public class BookmarksEntryUtil {
 	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1004,7 +1004,7 @@ public class BookmarksEntryUtil {
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1027,7 +1027,7 @@ public class BookmarksEntryUtil {
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1091,7 +1091,7 @@ public class BookmarksEntryUtil {
 	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1142,7 +1142,7 @@ public class BookmarksEntryUtil {
 	*
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/

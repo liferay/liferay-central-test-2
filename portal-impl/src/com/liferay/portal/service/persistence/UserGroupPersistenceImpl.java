@@ -531,7 +531,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of user groups to return
 	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -617,7 +617,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user group
 	 * @throws com.liferay.portal.NoSuchUserGroupException if a matching user group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -653,7 +653,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * </p>
 	 *
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user group
 	 * @throws com.liferay.portal.NoSuchUserGroupException if a matching user group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -692,7 +692,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 *
 	 * @param userGroupId the primary key of the current user group
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user group
 	 * @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -872,7 +872,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @param companyId the company ID to search with
 	 * @param start the lower bound of the range of user groups to return
 	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user groups that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -966,7 +966,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 *
 	 * @param userGroupId the primary key of the current user group
 	 * @param companyId the company ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user group
 	 * @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1189,7 +1189,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @param parentUserGroupId the parent user group ID to search with
 	 * @param start the lower bound of the range of user groups to return
 	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1281,7 +1281,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 *
 	 * @param companyId the company ID to search with
 	 * @param parentUserGroupId the parent user group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching user group
 	 * @throws com.liferay.portal.NoSuchUserGroupException if a matching user group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1321,7 +1321,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 *
 	 * @param companyId the company ID to search with
 	 * @param parentUserGroupId the parent user group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching user group
 	 * @throws com.liferay.portal.NoSuchUserGroupException if a matching user group could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1364,7 +1364,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @param userGroupId the primary key of the current user group
 	 * @param companyId the company ID to search with
 	 * @param parentUserGroupId the parent user group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user group
 	 * @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1551,7 +1551,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @param parentUserGroupId the parent user group ID to search with
 	 * @param start the lower bound of the range of user groups to return
 	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching user groups that the user has permission to view
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1652,7 +1652,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @param userGroupId the primary key of the current user group
 	 * @param companyId the company ID to search with
 	 * @param parentUserGroupId the parent user group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next user group
 	 * @throws com.liferay.portal.NoSuchUserGroupException if a user group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2025,7 +2025,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 *
 	 * @param start the lower bound of the range of user groups to return
 	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of user groups
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2523,7 +2523,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @param pk the primary key of the user group to get the associated groups for
 	 * @param start the lower bound of the range of user groups to return
 	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of groups associated with the user group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2987,7 +2987,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @param pk the primary key of the user group to get the associated teams for
 	 * @param start the lower bound of the range of user groups to return
 	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of teams associated with the user group
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3448,7 +3448,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 	 * @param pk the primary key of the user group to get the associated users for
 	 * @param start the lower bound of the range of user groups to return
 	 * @param end the upper bound of the range of user groups to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of users associated with the user group
 	 * @throws SystemException if a system exception occurred
 	 */

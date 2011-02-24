@@ -241,7 +241,7 @@ public class ExpandoValueUtil {
 	* @param tableId the table ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -261,7 +261,7 @@ public class ExpandoValueUtil {
 	* </p>
 	*
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -282,7 +282,7 @@ public class ExpandoValueUtil {
 	* </p>
 	*
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -304,7 +304,7 @@ public class ExpandoValueUtil {
 	*
 	* @param valueId the primary key of the current expando value
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -361,7 +361,7 @@ public class ExpandoValueUtil {
 	* @param columnId the column ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -381,7 +381,7 @@ public class ExpandoValueUtil {
 	* </p>
 	*
 	* @param columnId the column ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -402,7 +402,7 @@ public class ExpandoValueUtil {
 	* </p>
 	*
 	* @param columnId the column ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -424,7 +424,7 @@ public class ExpandoValueUtil {
 	*
 	* @param valueId the primary key of the current expando value
 	* @param columnId the column ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -480,7 +480,7 @@ public class ExpandoValueUtil {
 	* @param rowId the row ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -499,7 +499,7 @@ public class ExpandoValueUtil {
 	* </p>
 	*
 	* @param rowId the row ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -520,7 +520,7 @@ public class ExpandoValueUtil {
 	* </p>
 	*
 	* @param rowId the row ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -542,7 +542,7 @@ public class ExpandoValueUtil {
 	*
 	* @param valueId the primary key of the current expando value
 	* @param rowId the row ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -601,7 +601,7 @@ public class ExpandoValueUtil {
 	* @param columnId the column ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -622,7 +622,7 @@ public class ExpandoValueUtil {
 	*
 	* @param tableId the table ID to search with
 	* @param columnId the column ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -645,7 +645,7 @@ public class ExpandoValueUtil {
 	*
 	* @param tableId the table ID to search with
 	* @param columnId the column ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -669,7 +669,7 @@ public class ExpandoValueUtil {
 	* @param valueId the primary key of the current expando value
 	* @param tableId the table ID to search with
 	* @param columnId the column ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -729,7 +729,7 @@ public class ExpandoValueUtil {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -750,7 +750,7 @@ public class ExpandoValueUtil {
 	*
 	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -773,7 +773,7 @@ public class ExpandoValueUtil {
 	*
 	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -797,7 +797,7 @@ public class ExpandoValueUtil {
 	* @param valueId the primary key of the current expando value
 	* @param tableId the table ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -857,7 +857,7 @@ public class ExpandoValueUtil {
 	* @param rowId the row ID to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -878,7 +878,7 @@ public class ExpandoValueUtil {
 	*
 	* @param tableId the table ID to search with
 	* @param rowId the row ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -901,7 +901,7 @@ public class ExpandoValueUtil {
 	*
 	* @param tableId the table ID to search with
 	* @param rowId the row ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -924,7 +924,7 @@ public class ExpandoValueUtil {
 	* @param valueId the primary key of the current expando value
 	* @param tableId the table ID to search with
 	* @param rowId the row ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1028,7 +1028,7 @@ public class ExpandoValueUtil {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1050,7 +1050,7 @@ public class ExpandoValueUtil {
 	*
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -1073,7 +1073,7 @@ public class ExpandoValueUtil {
 	*
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -1097,7 +1097,7 @@ public class ExpandoValueUtil {
 	* @param valueId the primary key of the current expando value
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1208,7 +1208,7 @@ public class ExpandoValueUtil {
 	* @param data the data to search with
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando values
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1231,7 +1231,7 @@ public class ExpandoValueUtil {
 	* @param tableId the table ID to search with
 	* @param columnId the column ID to search with
 	* @param data the data to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -1255,7 +1255,7 @@ public class ExpandoValueUtil {
 	* @param tableId the table ID to search with
 	* @param columnId the column ID to search with
 	* @param data the data to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a matching expando value could not be found
 	* @throws SystemException if a system exception occurred
@@ -1280,7 +1280,7 @@ public class ExpandoValueUtil {
 	* @param tableId the table ID to search with
 	* @param columnId the column ID to search with
 	* @param data the data to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando value
 	* @throws com.liferay.portlet.expando.NoSuchValueException if a expando value with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1333,7 +1333,7 @@ public class ExpandoValueUtil {
 	*
 	* @param start the lower bound of the range of expando values to return
 	* @param end the upper bound of the range of expando values to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of expando values
 	* @throws SystemException if a system exception occurred
 	*/

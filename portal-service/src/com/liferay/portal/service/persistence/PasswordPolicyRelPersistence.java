@@ -141,7 +141,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	* @param passwordPolicyId the password policy ID to search with
 	* @param start the lower bound of the range of password policy rels to return
 	* @param end the upper bound of the range of password policy rels to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching password policy rels
 	* @throws SystemException if a system exception occurred
 	*/
@@ -158,7 +158,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	* </p>
 	*
 	* @param passwordPolicyId the password policy ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching password policy rel
 	* @throws com.liferay.portal.NoSuchPasswordPolicyRelException if a matching password policy rel could not be found
 	* @throws SystemException if a system exception occurred
@@ -177,7 +177,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	* </p>
 	*
 	* @param passwordPolicyId the password policy ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching password policy rel
 	* @throws com.liferay.portal.NoSuchPasswordPolicyRelException if a matching password policy rel could not be found
 	* @throws SystemException if a system exception occurred
@@ -197,7 +197,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	*
 	* @param passwordPolicyRelId the primary key of the current password policy rel
 	* @param passwordPolicyId the password policy ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next password policy rel
 	* @throws com.liferay.portal.NoSuchPasswordPolicyRelException if a password policy rel with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -322,7 +322,7 @@ public interface PasswordPolicyRelPersistence extends BasePersistence<PasswordPo
 	*
 	* @param start the lower bound of the range of password policy rels to return
 	* @param end the upper bound of the range of password policy rels to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of password policy rels
 	* @throws SystemException if a system exception occurred
 	*/

@@ -142,7 +142,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of d l file ranks to return
 	* @param end the upper bound of the range of d l file ranks to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file ranks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -159,7 +159,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file rank
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
 	* @throws SystemException if a system exception occurred
@@ -178,7 +178,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file rank
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
 	* @throws SystemException if a system exception occurred
@@ -198,7 +198,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	*
 	* @param fileRankId the primary key of the current d l file rank
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file rank
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a d l file rank with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -247,7 +247,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param fileEntryId the file entry ID to search with
 	* @param start the lower bound of the range of d l file ranks to return
 	* @param end the upper bound of the range of d l file ranks to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file ranks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -264,7 +264,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* </p>
 	*
 	* @param fileEntryId the file entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file rank
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* </p>
 	*
 	* @param fileEntryId the file entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file rank
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	*
 	* @param fileRankId the primary key of the current d l file rank
 	* @param fileEntryId the file entry ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file rank
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a d l file rank with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -355,7 +355,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of d l file ranks to return
 	* @param end the upper bound of the range of d l file ranks to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching d l file ranks
 	* @throws SystemException if a system exception occurred
 	*/
@@ -373,7 +373,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	*
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching d l file rank
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
 	* @throws SystemException if a system exception occurred
@@ -393,7 +393,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	*
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching d l file rank
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a matching d l file rank could not be found
 	* @throws SystemException if a system exception occurred
@@ -414,7 +414,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	* @param fileRankId the primary key of the current d l file rank
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next d l file rank
 	* @throws com.liferay.portlet.documentlibrary.NoSuchFileRankException if a d l file rank with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -500,7 +500,7 @@ public interface DLFileRankPersistence extends BasePersistence<DLFileRank> {
 	*
 	* @param start the lower bound of the range of d l file ranks to return
 	* @param end the upper bound of the range of d l file ranks to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of d l file ranks
 	* @throws SystemException if a system exception occurred
 	*/

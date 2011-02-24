@@ -143,7 +143,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -160,7 +160,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -179,7 +179,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	*
 	* @param entryId the primary key of the current bookmarks entry
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -286,7 +286,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -303,7 +303,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -322,7 +322,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -342,7 +342,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	*
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -391,7 +391,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -409,7 +409,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	*
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -461,7 +461,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -479,7 +479,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	*
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -499,7 +499,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	*
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -520,7 +520,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -572,7 +572,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -591,7 +591,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -643,7 +643,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -661,7 +661,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	*
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -681,7 +681,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	*
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a matching bookmarks entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -702,7 +702,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -758,7 +758,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -808,7 +808,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param folderId the folder ID to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -827,7 +827,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param entryId the primary key of the current bookmarks entry
 	* @param groupId the group ID to search with
 	* @param folderId the folder ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next bookmarks entry
 	* @throws com.liferay.portlet.bookmarks.NoSuchEntryException if a bookmarks entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -883,7 +883,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	* @param folderIds the folder IDs to search with
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching bookmarks entries that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -926,7 +926,7 @@ public interface BookmarksEntryPersistence extends BasePersistence<BookmarksEntr
 	*
 	* @param start the lower bound of the range of bookmarks entries to return
 	* @param end the upper bound of the range of bookmarks entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of bookmarks entries
 	* @throws SystemException if a system exception occurred
 	*/

@@ -236,7 +236,7 @@ public class AssetTagUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset tags to return
 	* @param end the upper bound of the range of asset tags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset tags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -256,7 +256,7 @@ public class AssetTagUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset tag
 	* @throws com.liferay.portlet.asset.NoSuchTagException if a matching asset tag could not be found
 	* @throws SystemException if a system exception occurred
@@ -277,7 +277,7 @@ public class AssetTagUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset tag
 	* @throws com.liferay.portlet.asset.NoSuchTagException if a matching asset tag could not be found
 	* @throws SystemException if a system exception occurred
@@ -299,7 +299,7 @@ public class AssetTagUtil {
 	*
 	* @param tagId the primary key of the current asset tag
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset tag
 	* @throws com.liferay.portlet.asset.NoSuchTagException if a asset tag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -355,7 +355,7 @@ public class AssetTagUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of asset tags to return
 	* @param end the upper bound of the range of asset tags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset tags that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -376,7 +376,7 @@ public class AssetTagUtil {
 	*
 	* @param tagId the primary key of the current asset tag
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset tag
 	* @throws com.liferay.portlet.asset.NoSuchTagException if a asset tag with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -429,7 +429,7 @@ public class AssetTagUtil {
 	*
 	* @param start the lower bound of the range of asset tags to return
 	* @param end the upper bound of the range of asset tags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset tags
 	* @throws SystemException if a system exception occurred
 	*/
@@ -537,7 +537,7 @@ public class AssetTagUtil {
 	* @param pk the primary key of the asset tag to get the associated asset entries for
 	* @param start the lower bound of the range of asset tags to return
 	* @param end the upper bound of the range of asset tags to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset entries associated with the asset tag
 	* @throws SystemException if a system exception occurred
 	*/

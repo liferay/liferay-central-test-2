@@ -237,7 +237,7 @@ public class PollsVoteUtil {
 	* @param questionId the question ID to search with
 	* @param start the lower bound of the range of polls votes to return
 	* @param end the upper bound of the range of polls votes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching polls votes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -257,7 +257,7 @@ public class PollsVoteUtil {
 	* </p>
 	*
 	* @param questionId the question ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a matching polls vote could not be found
 	* @throws SystemException if a system exception occurred
@@ -279,7 +279,7 @@ public class PollsVoteUtil {
 	* </p>
 	*
 	* @param questionId the question ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a matching polls vote could not be found
 	* @throws SystemException if a system exception occurred
@@ -302,7 +302,7 @@ public class PollsVoteUtil {
 	*
 	* @param voteId the primary key of the current polls vote
 	* @param questionId the question ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a polls vote with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -359,7 +359,7 @@ public class PollsVoteUtil {
 	* @param choiceId the choice ID to search with
 	* @param start the lower bound of the range of polls votes to return
 	* @param end the upper bound of the range of polls votes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching polls votes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -379,7 +379,7 @@ public class PollsVoteUtil {
 	* </p>
 	*
 	* @param choiceId the choice ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a matching polls vote could not be found
 	* @throws SystemException if a system exception occurred
@@ -400,7 +400,7 @@ public class PollsVoteUtil {
 	* </p>
 	*
 	* @param choiceId the choice ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a matching polls vote could not be found
 	* @throws SystemException if a system exception occurred
@@ -422,7 +422,7 @@ public class PollsVoteUtil {
 	*
 	* @param voteId the primary key of the current polls vote
 	* @param choiceId the choice ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next polls vote
 	* @throws com.liferay.portlet.polls.NoSuchVoteException if a polls vote with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -519,7 +519,7 @@ public class PollsVoteUtil {
 	*
 	* @param start the lower bound of the range of polls votes to return
 	* @param end the upper bound of the range of polls votes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of polls votes
 	* @throws SystemException if a system exception occurred
 	*/

@@ -248,7 +248,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of shopping items to return
 	* @param end the upper bound of the range of shopping items to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -266,7 +266,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	*
 	* @param groupId the group ID to search with
 	* @param categoryId the category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
@@ -286,7 +286,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	*
 	* @param groupId the group ID to search with
 	* @param categoryId the category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a matching shopping item could not be found
 	* @throws SystemException if a system exception occurred
@@ -307,7 +307,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	* @param itemId the primary key of the current shopping item
 	* @param groupId the group ID to search with
 	* @param categoryId the category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a shopping item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -359,7 +359,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	* @param categoryId the category ID to search with
 	* @param start the lower bound of the range of shopping items to return
 	* @param end the upper bound of the range of shopping items to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping items that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -378,7 +378,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	* @param itemId the primary key of the current shopping item
 	* @param groupId the group ID to search with
 	* @param categoryId the category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping item
 	* @throws com.liferay.portlet.shopping.NoSuchItemException if a shopping item with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -461,7 +461,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	*
 	* @param start the lower bound of the range of shopping items to return
 	* @param end the upper bound of the range of shopping items to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of shopping items
 	* @throws SystemException if a system exception occurred
 	*/
@@ -638,7 +638,7 @@ public interface ShoppingItemPersistence extends BasePersistence<ShoppingItem> {
 	* @param pk the primary key of the shopping item to get the associated shopping item prices for
 	* @param start the lower bound of the range of shopping items to return
 	* @param end the upper bound of the range of shopping items to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of shopping item prices associated with the shopping item
 	* @throws SystemException if a system exception occurred
 	*/

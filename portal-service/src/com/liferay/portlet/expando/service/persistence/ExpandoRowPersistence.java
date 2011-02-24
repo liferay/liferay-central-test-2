@@ -139,7 +139,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	* @param tableId the table ID to search with
 	* @param start the lower bound of the range of expando rows to return
 	* @param end the upper bound of the range of expando rows to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching expando rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -156,7 +156,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	* </p>
 	*
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
 	* @throws SystemException if a system exception occurred
@@ -175,7 +175,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	* </p>
 	*
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a matching expando row could not be found
 	* @throws SystemException if a system exception occurred
@@ -195,7 +195,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	*
 	* @param rowId the primary key of the current expando row
 	* @param tableId the table ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next expando row
 	* @throws com.liferay.portlet.expando.NoSuchRowException if a expando row with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -278,7 +278,7 @@ public interface ExpandoRowPersistence extends BasePersistence<ExpandoRow> {
 	*
 	* @param start the lower bound of the range of expando rows to return
 	* @param end the upper bound of the range of expando rows to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of expando rows
 	* @throws SystemException if a system exception occurred
 	*/

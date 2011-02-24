@@ -256,7 +256,7 @@ public class WorkflowInstanceLinkUtil {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of workflow instance links to return
 	* @param end the upper bound of the range of workflow instance links to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching workflow instance links
 	* @throws SystemException if a system exception occurred
 	*/
@@ -281,7 +281,7 @@ public class WorkflowInstanceLinkUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching workflow instance link
 	* @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a matching workflow instance link could not be found
 	* @throws SystemException if a system exception occurred
@@ -307,7 +307,7 @@ public class WorkflowInstanceLinkUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching workflow instance link
 	* @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a matching workflow instance link could not be found
 	* @throws SystemException if a system exception occurred
@@ -334,7 +334,7 @@ public class WorkflowInstanceLinkUtil {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next workflow instance link
 	* @throws com.liferay.portal.NoSuchWorkflowInstanceLinkException if a workflow instance link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -388,7 +388,7 @@ public class WorkflowInstanceLinkUtil {
 	*
 	* @param start the lower bound of the range of workflow instance links to return
 	* @param end the upper bound of the range of workflow instance links to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of workflow instance links
 	* @throws SystemException if a system exception occurred
 	*/

@@ -241,7 +241,7 @@ public class AssetTagPropertyUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset tag properties
 	* @throws SystemException if a system exception occurred
 	*/
@@ -261,7 +261,7 @@ public class AssetTagPropertyUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public class AssetTagPropertyUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
 	* @throws SystemException if a system exception occurred
@@ -306,7 +306,7 @@ public class AssetTagPropertyUtil {
 	*
 	* @param tagPropertyId the primary key of the current asset tag property
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a asset tag property with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -362,7 +362,7 @@ public class AssetTagPropertyUtil {
 	* @param tagId the tag ID to search with
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset tag properties
 	* @throws SystemException if a system exception occurred
 	*/
@@ -381,7 +381,7 @@ public class AssetTagPropertyUtil {
 	* </p>
 	*
 	* @param tagId the tag ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
 	* @throws SystemException if a system exception occurred
@@ -402,7 +402,7 @@ public class AssetTagPropertyUtil {
 	* </p>
 	*
 	* @param tagId the tag ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
 	* @throws SystemException if a system exception occurred
@@ -424,7 +424,7 @@ public class AssetTagPropertyUtil {
 	*
 	* @param tagPropertyId the primary key of the current asset tag property
 	* @param tagId the tag ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a asset tag property with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -484,7 +484,7 @@ public class AssetTagPropertyUtil {
 	* @param key the key to search with
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset tag properties
 	* @throws SystemException if a system exception occurred
 	*/
@@ -505,7 +505,7 @@ public class AssetTagPropertyUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param key the key to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
 	* @throws SystemException if a system exception occurred
@@ -528,7 +528,7 @@ public class AssetTagPropertyUtil {
 	*
 	* @param companyId the company ID to search with
 	* @param key the key to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a matching asset tag property could not be found
 	* @throws SystemException if a system exception occurred
@@ -551,7 +551,7 @@ public class AssetTagPropertyUtil {
 	* @param tagPropertyId the primary key of the current asset tag property
 	* @param companyId the company ID to search with
 	* @param key the key to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset tag property
 	* @throws com.liferay.portlet.asset.NoSuchTagPropertyException if a asset tag property with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -648,7 +648,7 @@ public class AssetTagPropertyUtil {
 	*
 	* @param start the lower bound of the range of asset tag properties to return
 	* @param end the upper bound of the range of asset tag properties to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset tag properties
 	* @throws SystemException if a system exception occurred
 	*/

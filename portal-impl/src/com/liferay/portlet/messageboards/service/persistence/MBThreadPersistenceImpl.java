@@ -538,7 +538,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -624,7 +624,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -659,7 +659,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -698,7 +698,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param threadId the primary key of the current message boards thread
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -881,7 +881,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param categoryId the category ID to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -972,7 +972,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1012,7 +1012,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1055,7 +1055,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param threadId the primary key of the current message boards thread
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1246,7 +1246,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param categoryIds the category IDs to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1393,7 +1393,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param categoryId the category ID to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1485,7 +1485,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1525,7 +1525,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1568,7 +1568,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param threadId the primary key of the current message boards thread
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1755,7 +1755,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1846,7 +1846,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1885,7 +1885,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1928,7 +1928,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param threadId the primary key of the current message boards thread
 	 * @param groupId the group ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2115,7 +2115,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param priority the priority to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2207,7 +2207,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param categoryId the category ID to search with
 	 * @param priority the priority to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2247,7 +2247,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param categoryId the category ID to search with
 	 * @param priority the priority to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2290,7 +2290,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param threadId the primary key of the current message boards thread
 	 * @param categoryId the category ID to search with
 	 * @param priority the priority to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2480,7 +2480,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param lastPostDate the last post date to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2584,7 +2584,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param lastPostDate the last post date to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2628,7 +2628,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param lastPostDate the last post date to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2675,7 +2675,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param lastPostDate the last post date to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -2876,7 +2876,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2973,7 +2973,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3017,7 +3017,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3064,7 +3064,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3262,7 +3262,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3422,7 +3422,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param status the status to search with
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -3519,7 +3519,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3563,7 +3563,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a matching message boards thread could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3610,7 +3610,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 * @param groupId the group ID to search with
 	 * @param categoryId the category ID to search with
 	 * @param status the status to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next message boards thread
 	 * @throws com.liferay.portlet.messageboards.NoSuchThreadException if a message boards thread with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -3792,7 +3792,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 	 *
 	 * @param start the lower bound of the range of message boards threads to return
 	 * @param end the upper bound of the range of message boards threads to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of message boards threads
 	 * @throws SystemException if a system exception occurred
 	 */

@@ -236,7 +236,7 @@ public class WikiPageUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -255,7 +255,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -276,7 +276,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -298,7 +298,7 @@ public class WikiPageUtil {
 	*
 	* @param pageId the primary key of the current wiki page
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -397,7 +397,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -417,7 +417,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param nodeId the node ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -438,7 +438,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param nodeId the node ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -460,7 +460,7 @@ public class WikiPageUtil {
 	*
 	* @param pageId the primary key of the current wiki page
 	* @param nodeId the node ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -516,7 +516,7 @@ public class WikiPageUtil {
 	* @param format the format to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -536,7 +536,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param format the format to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -557,7 +557,7 @@ public class WikiPageUtil {
 	* </p>
 	*
 	* @param format the format to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -579,7 +579,7 @@ public class WikiPageUtil {
 	*
 	* @param pageId the primary key of the current wiki page
 	* @param format the format to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -638,7 +638,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -660,7 +660,7 @@ public class WikiPageUtil {
 	*
 	* @param resourcePrimKey the resource prim key to search with
 	* @param nodeId the node ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -683,7 +683,7 @@ public class WikiPageUtil {
 	*
 	* @param resourcePrimKey the resource prim key to search with
 	* @param nodeId the node ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -707,7 +707,7 @@ public class WikiPageUtil {
 	* @param pageId the primary key of the current wiki page
 	* @param resourcePrimKey the resource prim key to search with
 	* @param nodeId the node ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -767,7 +767,7 @@ public class WikiPageUtil {
 	* @param title the title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -788,7 +788,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param title the title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -810,7 +810,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param title the title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -833,7 +833,7 @@ public class WikiPageUtil {
 	* @param pageId the primary key of the current wiki page
 	* @param nodeId the node ID to search with
 	* @param title the title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -893,7 +893,7 @@ public class WikiPageUtil {
 	* @param head the head to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -914,7 +914,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param head the head to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -936,7 +936,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param head the head to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -959,7 +959,7 @@ public class WikiPageUtil {
 	* @param pageId the primary key of the current wiki page
 	* @param nodeId the node ID to search with
 	* @param head the head to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1019,7 +1019,7 @@ public class WikiPageUtil {
 	* @param parentTitle the parent title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1040,7 +1040,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1063,7 +1063,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1087,7 +1087,7 @@ public class WikiPageUtil {
 	* @param pageId the primary key of the current wiki page
 	* @param nodeId the node ID to search with
 	* @param parentTitle the parent title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1147,7 +1147,7 @@ public class WikiPageUtil {
 	* @param redirectTitle the redirect title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1169,7 +1169,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1192,7 +1192,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1216,7 +1216,7 @@ public class WikiPageUtil {
 	* @param pageId the primary key of the current wiki page
 	* @param nodeId the node ID to search with
 	* @param redirectTitle the redirect title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1276,7 +1276,7 @@ public class WikiPageUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1297,7 +1297,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1320,7 +1320,7 @@ public class WikiPageUtil {
 	*
 	* @param nodeId the node ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1343,7 +1343,7 @@ public class WikiPageUtil {
 	* @param pageId the primary key of the current wiki page
 	* @param nodeId the node ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1457,7 +1457,7 @@ public class WikiPageUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1480,7 +1480,7 @@ public class WikiPageUtil {
 	* @param resourcePrimKey the resource prim key to search with
 	* @param nodeId the node ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1505,7 +1505,7 @@ public class WikiPageUtil {
 	* @param resourcePrimKey the resource prim key to search with
 	* @param nodeId the node ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1531,7 +1531,7 @@ public class WikiPageUtil {
 	* @param resourcePrimKey the resource prim key to search with
 	* @param nodeId the node ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1594,7 +1594,7 @@ public class WikiPageUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1617,7 +1617,7 @@ public class WikiPageUtil {
 	* @param userId the user ID to search with
 	* @param nodeId the node ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1641,7 +1641,7 @@ public class WikiPageUtil {
 	* @param userId the user ID to search with
 	* @param nodeId the node ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1666,7 +1666,7 @@ public class WikiPageUtil {
 	* @param userId the user ID to search with
 	* @param nodeId the node ID to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1778,7 +1778,7 @@ public class WikiPageUtil {
 	* @param head the head to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1801,7 +1801,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1825,7 +1825,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1850,7 +1850,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param head the head to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1913,7 +1913,7 @@ public class WikiPageUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1936,7 +1936,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1960,7 +1960,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -1985,7 +1985,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param title the title to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2049,7 +2049,7 @@ public class WikiPageUtil {
 	* @param parentTitle the parent title to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2073,7 +2073,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -2098,7 +2098,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -2124,7 +2124,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2187,7 +2187,7 @@ public class WikiPageUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2210,7 +2210,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -2234,7 +2234,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -2259,7 +2259,7 @@ public class WikiPageUtil {
 	* @param nodeId the node ID to search with
 	* @param head the head to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2327,7 +2327,7 @@ public class WikiPageUtil {
 	* @param status the status to search with
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching wiki pages
 	* @throws SystemException if a system exception occurred
 	*/
@@ -2352,7 +2352,7 @@ public class WikiPageUtil {
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -2378,7 +2378,7 @@ public class WikiPageUtil {
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a matching wiki page could not be found
 	* @throws SystemException if a system exception occurred
@@ -2405,7 +2405,7 @@ public class WikiPageUtil {
 	* @param head the head to search with
 	* @param parentTitle the parent title to search with
 	* @param status the status to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next wiki page
 	* @throws com.liferay.portlet.wiki.NoSuchPageException if a wiki page with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -2459,7 +2459,7 @@ public class WikiPageUtil {
 	*
 	* @param start the lower bound of the range of wiki pages to return
 	* @param end the upper bound of the range of wiki pages to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of wiki pages
 	* @throws SystemException if a system exception occurred
 	*/

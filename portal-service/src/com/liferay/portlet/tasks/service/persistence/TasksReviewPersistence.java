@@ -139,7 +139,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of tasks reviews to return
 	* @param end the upper bound of the range of tasks reviews to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching tasks reviews
 	* @throws SystemException if a system exception occurred
 	*/
@@ -156,7 +156,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -175,7 +175,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -195,7 +195,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	*
 	* @param reviewId the primary key of the current tasks review
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -244,7 +244,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param proposalId the proposal ID to search with
 	* @param start the lower bound of the range of tasks reviews to return
 	* @param end the upper bound of the range of tasks reviews to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching tasks reviews
 	* @throws SystemException if a system exception occurred
 	*/
@@ -261,7 +261,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* </p>
 	*
 	* @param proposalId the proposal ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -280,7 +280,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* </p>
 	*
 	* @param proposalId the proposal ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -300,7 +300,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	*
 	* @param reviewId the primary key of the current tasks review
 	* @param proposalId the proposal ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -390,7 +390,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param stage the stage to search with
 	* @param start the lower bound of the range of tasks reviews to return
 	* @param end the upper bound of the range of tasks reviews to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching tasks reviews
 	* @throws SystemException if a system exception occurred
 	*/
@@ -408,7 +408,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	*
 	* @param proposalId the proposal ID to search with
 	* @param stage the stage to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -428,7 +428,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	*
 	* @param proposalId the proposal ID to search with
 	* @param stage the stage to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -449,7 +449,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param reviewId the primary key of the current tasks review
 	* @param proposalId the proposal ID to search with
 	* @param stage the stage to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -504,7 +504,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param completed the completed to search with
 	* @param start the lower bound of the range of tasks reviews to return
 	* @param end the upper bound of the range of tasks reviews to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching tasks reviews
 	* @throws SystemException if a system exception occurred
 	*/
@@ -523,7 +523,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param proposalId the proposal ID to search with
 	* @param stage the stage to search with
 	* @param completed the completed to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -544,7 +544,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param proposalId the proposal ID to search with
 	* @param stage the stage to search with
 	* @param completed the completed to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -566,7 +566,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param proposalId the proposal ID to search with
 	* @param stage the stage to search with
 	* @param completed the completed to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -625,7 +625,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param rejected the rejected to search with
 	* @param start the lower bound of the range of tasks reviews to return
 	* @param end the upper bound of the range of tasks reviews to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching tasks reviews
 	* @throws SystemException if a system exception occurred
 	*/
@@ -646,7 +646,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param stage the stage to search with
 	* @param completed the completed to search with
 	* @param rejected the rejected to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -668,7 +668,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param stage the stage to search with
 	* @param completed the completed to search with
 	* @param rejected the rejected to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a matching tasks review could not be found
 	* @throws SystemException if a system exception occurred
@@ -691,7 +691,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	* @param stage the stage to search with
 	* @param completed the completed to search with
 	* @param rejected the rejected to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next tasks review
 	* @throws com.liferay.portlet.tasks.NoSuchReviewException if a tasks review with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -737,7 +737,7 @@ public interface TasksReviewPersistence extends BasePersistence<TasksReview> {
 	*
 	* @param start the lower bound of the range of tasks reviews to return
 	* @param end the upper bound of the range of tasks reviews to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of tasks reviews
 	* @throws SystemException if a system exception occurred
 	*/

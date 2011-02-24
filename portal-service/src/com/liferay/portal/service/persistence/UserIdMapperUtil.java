@@ -238,7 +238,7 @@ public class UserIdMapperUtil {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of user ID mappers to return
 	* @param end the upper bound of the range of user ID mappers to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching user ID mappers
 	* @throws SystemException if a system exception occurred
 	*/
@@ -258,7 +258,7 @@ public class UserIdMapperUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching user ID mapper
 	* @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user ID mapper could not be found
 	* @throws SystemException if a system exception occurred
@@ -279,7 +279,7 @@ public class UserIdMapperUtil {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching user ID mapper
 	* @throws com.liferay.portal.NoSuchUserIdMapperException if a matching user ID mapper could not be found
 	* @throws SystemException if a system exception occurred
@@ -301,7 +301,7 @@ public class UserIdMapperUtil {
 	*
 	* @param userIdMapperId the primary key of the current user ID mapper
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next user ID mapper
 	* @throws com.liferay.portal.NoSuchUserIdMapperException if a user ID mapper with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -444,7 +444,7 @@ public class UserIdMapperUtil {
 	*
 	* @param start the lower bound of the range of user ID mappers to return
 	* @param end the upper bound of the range of user ID mappers to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of user ID mappers
 	* @throws SystemException if a system exception occurred
 	*/

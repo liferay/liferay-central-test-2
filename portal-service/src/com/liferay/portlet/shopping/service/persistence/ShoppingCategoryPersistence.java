@@ -143,7 +143,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of shopping categories to return
 	* @param end the upper bound of the range of shopping categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -160,7 +160,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a matching shopping category could not be found
 	* @throws SystemException if a system exception occurred
@@ -179,7 +179,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a matching shopping category could not be found
 	* @throws SystemException if a system exception occurred
@@ -199,7 +199,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	*
 	* @param categoryId the primary key of the current shopping category
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -248,7 +248,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of shopping categories to return
 	* @param end the upper bound of the range of shopping categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -266,7 +266,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	*
 	* @param categoryId the primary key of the current shopping category
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -318,7 +318,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* @param parentCategoryId the parent category ID to search with
 	* @param start the lower bound of the range of shopping categories to return
 	* @param end the upper bound of the range of shopping categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping categories
 	* @throws SystemException if a system exception occurred
 	*/
@@ -336,7 +336,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	*
 	* @param groupId the group ID to search with
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a matching shopping category could not be found
 	* @throws SystemException if a system exception occurred
@@ -356,7 +356,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	*
 	* @param groupId the group ID to search with
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a matching shopping category could not be found
 	* @throws SystemException if a system exception occurred
@@ -377,7 +377,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* @param categoryId the primary key of the current shopping category
 	* @param groupId the group ID to search with
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -429,7 +429,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* @param parentCategoryId the parent category ID to search with
 	* @param start the lower bound of the range of shopping categories to return
 	* @param end the upper bound of the range of shopping categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching shopping categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -448,7 +448,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	* @param categoryId the primary key of the current shopping category
 	* @param groupId the group ID to search with
 	* @param parentCategoryId the parent category ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next shopping category
 	* @throws com.liferay.portlet.shopping.NoSuchCategoryException if a shopping category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -493,7 +493,7 @@ public interface ShoppingCategoryPersistence extends BasePersistence<ShoppingCat
 	*
 	* @param start the lower bound of the range of shopping categories to return
 	* @param end the upper bound of the range of shopping categories to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of shopping categories
 	* @throws SystemException if a system exception occurred
 	*/

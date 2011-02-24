@@ -232,7 +232,7 @@ public class TeamUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of teams to return
 	* @param end the upper bound of the range of teams to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching teams
 	* @throws SystemException if a system exception occurred
 	*/
@@ -252,7 +252,7 @@ public class TeamUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching team
 	* @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
 	* @throws SystemException if a system exception occurred
@@ -273,7 +273,7 @@ public class TeamUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching team
 	* @throws com.liferay.portal.NoSuchTeamException if a matching team could not be found
 	* @throws SystemException if a system exception occurred
@@ -295,7 +295,7 @@ public class TeamUtil {
 	*
 	* @param teamId the primary key of the current team
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next team
 	* @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -351,7 +351,7 @@ public class TeamUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of teams to return
 	* @param end the upper bound of the range of teams to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching teams that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -372,7 +372,7 @@ public class TeamUtil {
 	*
 	* @param teamId the primary key of the current team
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next team
 	* @throws com.liferay.portal.NoSuchTeamException if a team with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -469,7 +469,7 @@ public class TeamUtil {
 	*
 	* @param start the lower bound of the range of teams to return
 	* @param end the upper bound of the range of teams to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of teams
 	* @throws SystemException if a system exception occurred
 	*/
@@ -603,7 +603,7 @@ public class TeamUtil {
 	* @param pk the primary key of the team to get the associated users for
 	* @param start the lower bound of the range of teams to return
 	* @param end the upper bound of the range of teams to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of users associated with the team
 	* @throws SystemException if a system exception occurred
 	*/
@@ -826,7 +826,7 @@ public class TeamUtil {
 	* @param pk the primary key of the team to get the associated user groups for
 	* @param start the lower bound of the range of teams to return
 	* @param end the upper bound of the range of teams to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of user groups associated with the team
 	* @throws SystemException if a system exception occurred
 	*/

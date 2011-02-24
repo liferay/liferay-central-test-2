@@ -136,7 +136,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	* @param userId the user ID to search with
 	* @param start the lower bound of the range of subscriptions to return
 	* @param end the upper bound of the range of subscriptions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching subscriptions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -153,7 +153,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching subscription
 	* @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
 	* @throws SystemException if a system exception occurred
@@ -172,7 +172,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	* </p>
 	*
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching subscription
 	* @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
 	* @throws SystemException if a system exception occurred
@@ -192,7 +192,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	*
 	* @param subscriptionId the primary key of the current subscription
 	* @param userId the user ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next subscription
 	* @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -244,7 +244,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of subscriptions to return
 	* @param end the upper bound of the range of subscriptions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching subscriptions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,7 +262,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	*
 	* @param userId the user ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching subscription
 	* @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
 	* @throws SystemException if a system exception occurred
@@ -282,7 +282,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	*
 	* @param userId the user ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching subscription
 	* @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
 	* @throws SystemException if a system exception occurred
@@ -303,7 +303,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	* @param subscriptionId the primary key of the current subscription
 	* @param userId the user ID to search with
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next subscription
 	* @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -358,7 +358,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	* @param classPK the class p k to search with
 	* @param start the lower bound of the range of subscriptions to return
 	* @param end the upper bound of the range of subscriptions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching subscriptions
 	* @throws SystemException if a system exception occurred
 	*/
@@ -377,7 +377,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching subscription
 	* @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
 	* @throws SystemException if a system exception occurred
@@ -398,7 +398,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching subscription
 	* @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
 	* @throws SystemException if a system exception occurred
@@ -420,7 +420,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	* @param companyId the company ID to search with
 	* @param classNameId the class name ID to search with
 	* @param classPK the class p k to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next subscription
 	* @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -510,7 +510,7 @@ public interface SubscriptionPersistence extends BasePersistence<Subscription> {
 	*
 	* @param start the lower bound of the range of subscriptions to return
 	* @param end the upper bound of the range of subscriptions to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of subscriptions
 	* @throws SystemException if a system exception occurred
 	*/

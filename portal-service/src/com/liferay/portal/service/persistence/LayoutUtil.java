@@ -232,7 +232,7 @@ public class LayoutUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -251,7 +251,7 @@ public class LayoutUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -272,7 +272,7 @@ public class LayoutUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -294,7 +294,7 @@ public class LayoutUtil {
 	*
 	* @param plid the primary key of the current layout
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -394,7 +394,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -414,7 +414,7 @@ public class LayoutUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -435,7 +435,7 @@ public class LayoutUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -457,7 +457,7 @@ public class LayoutUtil {
 	*
 	* @param plid the primary key of the current layout
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -513,7 +513,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -534,7 +534,7 @@ public class LayoutUtil {
 	*
 	* @param plid the primary key of the current layout
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -591,7 +591,7 @@ public class LayoutUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -611,7 +611,7 @@ public class LayoutUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -633,7 +633,7 @@ public class LayoutUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -656,7 +656,7 @@ public class LayoutUtil {
 	*
 	* @param plid the primary key of the current layout
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -758,7 +758,7 @@ public class LayoutUtil {
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -780,7 +780,7 @@ public class LayoutUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -803,7 +803,7 @@ public class LayoutUtil {
 	*
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -827,7 +827,7 @@ public class LayoutUtil {
 	* @param plid the primary key of the current layout
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -888,7 +888,7 @@ public class LayoutUtil {
 	* @param privateLayout the private layout to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -911,7 +911,7 @@ public class LayoutUtil {
 	* @param plid the primary key of the current layout
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1026,7 +1026,7 @@ public class LayoutUtil {
 	* @param parentLayoutId the parent layout ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1050,7 +1050,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param parentLayoutId the parent layout ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -1075,7 +1075,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param parentLayoutId the parent layout ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -1101,7 +1101,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param parentLayoutId the parent layout ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1167,7 +1167,7 @@ public class LayoutUtil {
 	* @param parentLayoutId the parent layout ID to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1192,7 +1192,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param parentLayoutId the parent layout ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1306,7 +1306,7 @@ public class LayoutUtil {
 	* @param type the type to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1330,7 +1330,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -1355,7 +1355,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
@@ -1381,7 +1381,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1445,7 +1445,7 @@ public class LayoutUtil {
 	* @param type the type to search with
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching layouts that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
@@ -1470,7 +1470,7 @@ public class LayoutUtil {
 	* @param groupId the group ID to search with
 	* @param privateLayout the private layout to search with
 	* @param type the type to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next layout
 	* @throws com.liferay.portal.NoSuchLayoutException if a layout with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -1523,7 +1523,7 @@ public class LayoutUtil {
 	*
 	* @param start the lower bound of the range of layouts to return
 	* @param end the upper bound of the range of layouts to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of layouts
 	* @throws SystemException if a system exception occurred
 	*/

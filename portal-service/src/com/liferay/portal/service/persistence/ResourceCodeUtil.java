@@ -236,7 +236,7 @@ public class ResourceCodeUtil {
 	* @param companyId the company ID to search with
 	* @param start the lower bound of the range of resource codes to return
 	* @param end the upper bound of the range of resource codes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching resource codes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -256,7 +256,7 @@ public class ResourceCodeUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching resource code
 	* @throws com.liferay.portal.NoSuchResourceCodeException if a matching resource code could not be found
 	* @throws SystemException if a system exception occurred
@@ -278,7 +278,7 @@ public class ResourceCodeUtil {
 	* </p>
 	*
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching resource code
 	* @throws com.liferay.portal.NoSuchResourceCodeException if a matching resource code could not be found
 	* @throws SystemException if a system exception occurred
@@ -301,7 +301,7 @@ public class ResourceCodeUtil {
 	*
 	* @param codeId the primary key of the current resource code
 	* @param companyId the company ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next resource code
 	* @throws com.liferay.portal.NoSuchResourceCodeException if a resource code with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -358,7 +358,7 @@ public class ResourceCodeUtil {
 	* @param name the name to search with
 	* @param start the lower bound of the range of resource codes to return
 	* @param end the upper bound of the range of resource codes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching resource codes
 	* @throws SystemException if a system exception occurred
 	*/
@@ -377,7 +377,7 @@ public class ResourceCodeUtil {
 	* </p>
 	*
 	* @param name the name to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching resource code
 	* @throws com.liferay.portal.NoSuchResourceCodeException if a matching resource code could not be found
 	* @throws SystemException if a system exception occurred
@@ -398,7 +398,7 @@ public class ResourceCodeUtil {
 	* </p>
 	*
 	* @param name the name to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching resource code
 	* @throws com.liferay.portal.NoSuchResourceCodeException if a matching resource code could not be found
 	* @throws SystemException if a system exception occurred
@@ -420,7 +420,7 @@ public class ResourceCodeUtil {
 	*
 	* @param codeId the primary key of the current resource code
 	* @param name the name to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next resource code
 	* @throws com.liferay.portal.NoSuchResourceCodeException if a resource code with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -521,7 +521,7 @@ public class ResourceCodeUtil {
 	*
 	* @param start the lower bound of the range of resource codes to return
 	* @param end the upper bound of the range of resource codes to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of resource codes
 	* @throws SystemException if a system exception occurred
 	*/

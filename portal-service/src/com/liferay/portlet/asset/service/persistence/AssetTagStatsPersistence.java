@@ -140,7 +140,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* @param tagId the tag ID to search with
 	* @param start the lower bound of the range of asset tag statses to return
 	* @param end the upper bound of the range of asset tag statses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -157,7 +157,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* </p>
 	*
 	* @param tagId the tag ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	* @throws SystemException if a system exception occurred
@@ -176,7 +176,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* </p>
 	*
 	* @param tagId the tag ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	* @throws SystemException if a system exception occurred
@@ -196,7 +196,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	*
 	* @param tagStatsId the primary key of the current asset tag stats
 	* @param tagId the tag ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -245,7 +245,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* @param classNameId the class name ID to search with
 	* @param start the lower bound of the range of asset tag statses to return
 	* @param end the upper bound of the range of asset tag statses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/
@@ -262,7 +262,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* </p>
 	*
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	* @throws SystemException if a system exception occurred
@@ -281,7 +281,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	* </p>
 	*
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a matching asset tag stats could not be found
 	* @throws SystemException if a system exception occurred
@@ -301,7 +301,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	*
 	* @param tagStatsId the primary key of the current asset tag stats
 	* @param classNameId the class name ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset tag stats
 	* @throws com.liferay.portlet.asset.NoSuchTagStatsException if a asset tag stats with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -384,7 +384,7 @@ public interface AssetTagStatsPersistence extends BasePersistence<AssetTagStats>
 	*
 	* @param start the lower bound of the range of asset tag statses to return
 	* @param end the upper bound of the range of asset tag statses to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of asset tag statses
 	* @throws SystemException if a system exception occurred
 	*/

@@ -240,7 +240,7 @@ public class ServiceComponentUtil {
 	* @param buildNamespace the build namespace to search with
 	* @param start the lower bound of the range of service components to return
 	* @param end the upper bound of the range of service components to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching service components
 	* @throws SystemException if a system exception occurred
 	*/
@@ -261,7 +261,7 @@ public class ServiceComponentUtil {
 	* </p>
 	*
 	* @param buildNamespace the build namespace to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching service component
 	* @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
 	* @throws SystemException if a system exception occurred
@@ -283,7 +283,7 @@ public class ServiceComponentUtil {
 	* </p>
 	*
 	* @param buildNamespace the build namespace to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching service component
 	* @throws com.liferay.portal.NoSuchServiceComponentException if a matching service component could not be found
 	* @throws SystemException if a system exception occurred
@@ -306,7 +306,7 @@ public class ServiceComponentUtil {
 	*
 	* @param serviceComponentId the primary key of the current service component
 	* @param buildNamespace the build namespace to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next service component
 	* @throws com.liferay.portal.NoSuchServiceComponentException if a service component with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -406,7 +406,7 @@ public class ServiceComponentUtil {
 	*
 	* @param start the lower bound of the range of service components to return
 	* @param end the upper bound of the range of service components to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of service components
 	* @throws SystemException if a system exception occurred
 	*/
