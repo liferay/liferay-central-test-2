@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
@@ -253,6 +254,9 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			List<String> subsetSnippets = new ArrayList<String>(subsetTotal);
 			List<Float> subsetScores = new ArrayList<Float>(subsetTotal);
 
+			boolean highlightEnabled =
+				query.getQueryConfig().isHighlightEnabled();
+
 			for (int i = start; i < end; i++) {
 				if (i >= PropsValues.INDEX_SEARCH_LIMIT) {
 					break;
@@ -265,10 +269,15 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 				subsetDocs.add(subsetDocument);
 
-				String subsetSnippet = getSnippet(
-					document, query, Field.CONTENT);
+				if (highlightEnabled) {
+					String subsetSnippet = getSnippet(
+						document, query, Field.CONTENT);
 
-				subsetSnippets.add(subsetSnippet);
+					subsetSnippets.add(subsetSnippet);
+				}
+				else {
+					subsetSnippets.add(StringPool.BLANK);
+				}
 
 				Float subsetScore = topFieldDocs.scoreDocs[i].score;
 

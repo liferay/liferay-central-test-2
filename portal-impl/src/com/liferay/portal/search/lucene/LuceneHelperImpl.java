@@ -255,7 +255,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 			if (Validator.isNotNull(snippet) &&
 				!StringUtil.endsWith(snippet, fragmentSuffix)) {
 
-				snippet = snippet + fragmentSuffix;
+				snippet = snippet.concat(fragmentSuffix);
 			}
 
 			return snippet;
