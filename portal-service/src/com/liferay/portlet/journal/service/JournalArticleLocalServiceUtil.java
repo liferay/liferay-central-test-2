@@ -869,6 +869,18 @@ public class JournalArticleLocalServiceUtil {
 		long userId, long groupId, java.lang.String articleId, double version,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String content)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateArticle(userId, groupId, articleId, version,
+			titleMap, descriptionMap, content);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
+		long userId, long groupId, java.lang.String articleId, double version,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		int displayDateMonth, int displayDateDay, int displayDateYear,

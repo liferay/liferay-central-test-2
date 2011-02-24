@@ -990,6 +990,48 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
+		HttpPrincipal httpPrincipal, long userId, long groupId,
+		java.lang.String articleId, double version,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String content)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
+					"updateArticle", _updateArticleParameterTypes24);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
+					groupId, articleId, version, titleMap, descriptionMap,
+					content);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.journal.model.JournalArticle)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
 		double version,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
@@ -1010,7 +1052,7 @@ public class JournalArticleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
-					"updateArticle", _updateArticleParameterTypes24);
+					"updateArticle", _updateArticleParameterTypes25);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version, titleMap, descriptionMap, content,
@@ -1056,7 +1098,7 @@ public class JournalArticleServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(JournalArticleServiceUtil.class.getName(),
-					"updateContent", _updateContentParameterTypes25);
+					"updateContent", _updateContentParameterTypes26);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					articleId, version, content);
@@ -1216,6 +1258,10 @@ public class JournalArticleServiceHttp {
 			java.lang.String.class
 		};
 	private static final Class<?>[] _updateArticleParameterTypes24 = new Class[] {
+			long.class, long.class, java.lang.String.class, double.class,
+			java.util.Map.class, java.util.Map.class, java.lang.String.class
+		};
+	private static final Class<?>[] _updateArticleParameterTypes25 = new Class[] {
 			long.class, java.lang.String.class, double.class,
 			java.util.Map.class, java.util.Map.class, java.lang.String.class,
 			java.lang.String.class, java.lang.String.class,
@@ -1226,7 +1272,7 @@ public class JournalArticleServiceHttp {
 			java.io.File.class, java.util.Map.class, java.lang.String.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
-	private static final Class<?>[] _updateContentParameterTypes25 = new Class[] {
+	private static final Class<?>[] _updateContentParameterTypes26 = new Class[] {
 			long.class, java.lang.String.class, double.class,
 			java.lang.String.class
 		};
