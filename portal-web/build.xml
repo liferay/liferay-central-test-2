@@ -244,9 +244,23 @@
 					</then>
 				</if>
 
+				<copy
+					file="third-party/javascript_creole_wiki_markup_parser.js"
+					tofile="docroot/html/js/editor/ckeditor_diffs/plugins/creole/creole_parser.js"
+				/>
+
+				<patch
+					failonerror="true"
+					originalfile="docroot/html/js/editor/ckeditor_diffs/plugins/creole/creole_parser.js"
+					patchfile="docroot/html/js/editor/ckeditor_diffs/plugins/creole/javascript_creole_wiki_markup_parser.patch"
+				/>
+
 				<copy todir="docroot/html/js/editor/ckeditor" overwrite="true">
 					<fileset dir="docroot/html/js/editor/ckeditor_diffs" />
 				</copy>
+
+				<delete file="docroot/html/js/editor/ckeditor_diffs/plugins/creole/creole_parser.js" />
+				<delete file="docroot/html/js/editor/ckeditor/plugins/creole/javascript_creole_wiki_markup_parser.patch" />
 			</then>
 			<else>
 				<copy todir="docroot/html/js/editor/ckeditor">
