@@ -166,8 +166,6 @@ portletURL.setParameter("modelResource", modelResource);
 							yearRangeEnd="<%= defaultValueDate.get(Calendar.YEAR) + 100 %>"
 						/>
 
-						&nbsp;
-
 						<liferay-ui:input-time
 							hourParam="defaultValueHour"
 							hourValue="<%= defaultValueDate.get(Calendar.HOUR) %>"
