@@ -14,73 +14,29 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import java.util.Enumeration;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Shuyang Zhou
  */
 public class SystemEnv {
 
 	public static Properties getProperties() {
-		Properties props = new Properties();
+		Properties properties = new Properties();
 
-		try {
-			Runtime runtime = Runtime.getRuntime();
-			Process process = null;
+		properties.putAll(System.getenv());
 
-			String osName = System.getProperty("os.name").toLowerCase();
-
-			if (osName.indexOf("windows ") > -1) {
-				if (osName.indexOf("windows 9") > -1) {
-					process = runtime.exec("command.com /c set");
-				}
-				else {
-					process = runtime.exec("cmd.exe /c set");
-				}
-			}
-			else {
-				process = runtime.exec("env");
-			}
-
-			UnsyncBufferedReader unsyncBufferedReader =
-				new UnsyncBufferedReader(
-					new InputStreamReader(process.getInputStream()));
-
-			String line;
-
-			while ((line = unsyncBufferedReader.readLine()) != null) {
-				int pos = line.indexOf(CharPool.EQUAL);
-
-				if (pos != -1) {
-					String key = line.substring(0, pos);
-					String value = line.substring(pos + 1);
-
-					props.setProperty(key, value);
-				}
-			}
-		}
-		catch (IOException ioe) {
-			ioe.printStackTrace();
-		}
-
-		return props;
+		return properties;
 	}
 
 	public static void setProperties(Properties props) {
-		Properties envProps = getProperties();
+		Set<Map.Entry<String, String>> entrySet = System.getenv().entrySet();
 
-		Enumeration<String> enu = (Enumeration<String>)envProps.propertyNames();
-
-		while (enu.hasMoreElements()) {
-			String key = enu.nextElement();
-
-			props.setProperty("env." + key, (String)envProps.get(key));
+		for (Map.Entry<String, String> entry : entrySet) {
+			props.setProperty("env." + entry.getKey(), entry.getValue());
 		}
 	}
 
