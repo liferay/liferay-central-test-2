@@ -34,19 +34,35 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 				selenium.saveScreenShotAndSource();
 				Thread.sleep(60000);
 
-				boolean signedIn = selenium.isElementPresent(
-						"//div[4]/div/nobr/a[2]");
+				boolean signedIn1 = selenium.isElementPresent(
+						"//div[2]/div/nobr/a[2]");
 
-				if (!signedIn) {
+				if (!signedIn1) {
 					label = 2;
 
 					continue;
 				}
 
-				selenium.clickAt("//div[4]/div/nobr/a[2]",
-					RuntimeVariables.replace("Sign Out"));
+				assertEquals(RuntimeVariables.replace("Sign out"),
+					selenium.getText("//div[2]/div/nobr/a[2]"));
+				selenium.clickAt("//div[2]/div/nobr/a[2]",
+					RuntimeVariables.replace("Sign out"));
 
 			case 2:
+
+				boolean signedIn2 = selenium.isPartialText("//td/a", "Sign out");
+
+				if (!signedIn2) {
+					label = 3;
+
+					continue;
+				}
+
+				assertEquals(RuntimeVariables.replace("Sign out"),
+					selenium.getText("//td/a"));
+				selenium.clickAt("//td/a", RuntimeVariables.replace("Sign out"));
+
+			case 3:
 
 				for (int second = 0;; second++) {
 					if (second >= 60) {
@@ -76,7 +92,7 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 						"PersistentCookie");
 
 				if (staySignedInChecked) {
-					label = 3;
+					label = 4;
 
 					continue;
 				}
@@ -84,7 +100,7 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 				selenium.clickAt("PersistentCookie",
 					RuntimeVariables.replace(""));
 
-			case 3:
+			case 4:
 				selenium.clickAt("signIn", RuntimeVariables.replace("Sign In"));
 
 				for (int second = 0;; second++) {
@@ -171,27 +187,35 @@ public class ReplyMessageEmailTest extends BaseTestCase {
 				Thread.sleep(5000);
 				Thread.sleep(5000);
 
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
+				boolean signedIn3 = selenium.isElementPresent(
+						"//div[2]/div/nobr/a[2]");
 
-					try {
-						if (selenium.isVisible("//div[4]/div/nobr/a[2]")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
+				if (!signedIn3) {
+					label = 5;
 
-					Thread.sleep(1000);
+					continue;
 				}
 
-				selenium.saveScreenShotAndSource();
-				selenium.click(RuntimeVariables.replace(
-						"//div[4]/div/nobr/a[2]"));
-				selenium.waitForPageToLoad("30000");
-				selenium.saveScreenShotAndSource();
+				assertEquals(RuntimeVariables.replace("Sign out"),
+					selenium.getText("//div[2]/div/nobr/a[2]"));
+				selenium.clickAt("//div[2]/div/nobr/a[2]",
+					RuntimeVariables.replace("Sign out"));
+
+			case 5:
+
+				boolean signedIn4 = selenium.isPartialText("//td/a", "Sign out");
+
+				if (!signedIn4) {
+					label = 6;
+
+					continue;
+				}
+
+				assertEquals(RuntimeVariables.replace("Sign out"),
+					selenium.getText("//td/a"));
+				selenium.clickAt("//td/a", RuntimeVariables.replace("Sign out"));
+
+			case 6:
 				Thread.sleep(5000);
 				Thread.sleep(5000);
 				selenium.close();

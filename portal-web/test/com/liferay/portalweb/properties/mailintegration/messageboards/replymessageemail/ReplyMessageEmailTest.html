@@ -30,22 +30,52 @@
 </tr>
 <tr>
 	<td>store</td>
-	<td>eval(selenium.isElementPresent('//div[4]/div/nobr/a[2]'))</td>
-	<td>signedIn</td>
+	<td>eval(selenium.isElementPresent('//div[2]/div/nobr/a[2]'))</td>
+	<td>signedIn1</td>
 </tr>
 <tr>
 	<td>gotoIf</td>
-	<td>!${signedIn}</td>
-	<td>signedOut</td>
+	<td>!${signedIn1}</td>
+	<td>signedOut1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div/nobr/a[2]</td>
+	<td>Sign out</td>
 </tr>
 <tr>
 	<td>clickAt</td>
-	<td>//div[4]/div/nobr/a[2]</td>
-	<td>Sign Out</td>
+	<td>//div[2]/div/nobr/a[2]</td>
+	<td>Sign out</td>
 </tr>
 <tr>
 	<td>label</td>
-	<td>signedOut</td>
+	<td>signedOut1</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isPartialText('//td/a','Sign out'))</td>
+	<td>signedIn2</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${signedIn2}</td>
+	<td>signedOut2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td/a</td>
+	<td>Sign out</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//td/a</td>
+	<td>Sign out</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>signedOut2</td>
 	<td></td>
 </tr>
 <tr>
@@ -174,14 +204,54 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForVisible</td>
-	<td>//div[4]/div/nobr/a[2]</td>
-	<td>Sign Out</td>
+	<td>store</td>
+	<td>eval(selenium.isElementPresent('//div[2]/div/nobr/a[2]'))</td>
+	<td>signedIn3</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>//div[4]/div/nobr/a[2]</td>
-	<td>Sign Out</td>
+	<td>gotoIf</td>
+	<td>!${signedIn3}</td>
+	<td>signedOut3</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[2]/div/nobr/a[2]</td>
+	<td>Sign out</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[2]/div/nobr/a[2]</td>
+	<td>Sign out</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>signedOut3</td>
+	<td></td>
+</tr>
+<tr>
+	<td>store</td>
+	<td>eval(selenium.isPartialText('//td/a','Sign out'))</td>
+	<td>signedIn4</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>!${signedIn4}</td>
+	<td>signedOut4</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//td/a</td>
+	<td>Sign out</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//td/a</td>
+	<td>Sign out</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>signedOut4</td>
+	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
