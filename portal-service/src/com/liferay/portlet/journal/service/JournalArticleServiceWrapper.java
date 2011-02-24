@@ -290,15 +290,6 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		long groupId, java.lang.String articleId, double version,
-		java.lang.String content)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _journalArticleService.updateArticle(groupId, articleId,
-			version, content);
-	}
-
-	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long userId, long groupId, java.lang.String articleId, double version,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
@@ -336,6 +327,15 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
 			indexable, smallImage, smallImageURL, smallFile, images,
 			articleURL, serviceContext);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
+		long groupId, java.lang.String articleId, double version,
+		java.lang.String content)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleService.updateArticle(groupId, articleId,
+			version, content);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(

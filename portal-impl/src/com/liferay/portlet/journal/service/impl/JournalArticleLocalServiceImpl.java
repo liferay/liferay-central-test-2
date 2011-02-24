@@ -1547,18 +1547,6 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
-			String content)
-		throws PortalException, SystemException {
-
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
-
-		return updateArticle(userId, groupId, articleId, version,
-			article.getTitleMap(), article.getDescriptionMap(), content);
-	}
-
-	public JournalArticle updateArticle(
-			long userId, long groupId, String articleId, double version,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
 			String content)
 		throws PortalException, SystemException {
@@ -1881,6 +1869,19 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return article;
+	}
+
+	public JournalArticle updateArticle(
+			long userId, long groupId, String articleId, double version,
+			String content)
+		throws PortalException, SystemException {
+
+		JournalArticle article = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
+
+		return updateArticle(
+			userId, groupId, articleId, version, article.getTitleMap(),
+			article.getDescriptionMap(), content);
 	}
 
 	public void updateAsset(
@@ -2863,30 +2864,6 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void validate(
-			long companyId, long groupId, String articleId,
-			boolean autoArticleId, double version, Map<Locale, String> titleMap,
-			String content, String type, String structureId, String templateId,
-			boolean smallImage, String smallImageURL, File smallFile,
-			byte[] smallBytes)
-		throws PortalException, SystemException {
-
-		if (!autoArticleId) {
-			validate(articleId);
-
-			JournalArticle article = journalArticlePersistence.fetchByG_A_V(
-				groupId, articleId, version);
-
-			if (article != null) {
-				throw new DuplicateArticleIdException();
-			}
-		}
-
-		validate(
-			companyId, groupId, titleMap, content, type, structureId,templateId,
-			smallImage, smallImageURL, smallFile, smallBytes);
-	}
-
-	protected void validate(
 			long companyId, long groupId, Map<Locale, String> titleMap,
 			String content, String type, String structureId, String templateId,
 			boolean smallImage, String smallImageURL, File smallFile,
@@ -2971,6 +2948,30 @@ public class JournalArticleLocalServiceImpl
 				throw new ArticleSmallImageSizeException();
 			}
 		}
+	}
+
+	protected void validate(
+			long companyId, long groupId, String articleId,
+			boolean autoArticleId, double version, Map<Locale, String> titleMap,
+			String content, String type, String structureId, String templateId,
+			boolean smallImage, String smallImageURL, File smallFile,
+			byte[] smallBytes)
+		throws PortalException, SystemException {
+
+		if (!autoArticleId) {
+			validate(articleId);
+
+			JournalArticle article = journalArticlePersistence.fetchByG_A_V(
+				groupId, articleId, version);
+
+			if (article != null) {
+				throw new DuplicateArticleIdException();
+			}
+		}
+
+		validate(
+			companyId, groupId, titleMap, content, type, structureId,templateId,
+			smallImage, smallImageURL, smallFile, smallBytes);
 	}
 
 	protected void validate(String articleId) throws PortalException {

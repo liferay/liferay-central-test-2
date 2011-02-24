@@ -356,18 +356,6 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle updateArticle(
-			long groupId, String articleId, double version, String content)
-		throws PortalException, SystemException {
-
-		JournalArticlePermission.check(
-			getPermissionChecker(), groupId, articleId, version,
-			ActionKeys.UPDATE);
-
-		return journalArticleLocalService.updateArticle(
-			getUserId(), groupId, articleId, version, content);
-	}
-
-	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
 			String content)
@@ -406,6 +394,18 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
 			smallFile, images, articleURL, serviceContext);
+	}
+
+	public JournalArticle updateArticle(
+			long groupId, String articleId, double version, String content)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), groupId, articleId, version,
+			ActionKeys.UPDATE);
+
+		return journalArticleLocalService.updateArticle(
+			getUserId(), groupId, articleId, version, content);
 	}
 
 	public JournalArticle updateContent(
