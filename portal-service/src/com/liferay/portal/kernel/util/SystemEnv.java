@@ -24,14 +24,6 @@ import java.util.Set;
  */
 public class SystemEnv {
 
-	public static Properties getProperties() {
-		Properties properties = new Properties();
-
-		properties.putAll(System.getenv());
-
-		return properties;
-	}
-
 	public static void setProperties(Properties props) {
 		Set<Map.Entry<String, String>> entrySet = System.getenv().entrySet();
 
