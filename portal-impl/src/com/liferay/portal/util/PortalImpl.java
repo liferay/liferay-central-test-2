@@ -2053,6 +2053,14 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
+	public String getNetvibesURL(
+			Portlet portlet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return _getServletURL(
+			portlet, PropsValues.NETVIBES_SERVLET_MAPPING, themeDisplay);
+	}
+
 	public String getNewPortletTitle(
 		String portletTitle, String oldScopeName, String newScopeName) {
 
@@ -2075,14 +2083,6 @@ public class PortalImpl implements Portal {
 		sb.append(StringPool.CLOSE_PARENTHESIS);
 
 		return sb.toString();
-	}
-
-	public String getNetvibesURL(
-			Portlet portlet, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return _getServletURL(
-			portlet, PropsValues.NETVIBES_SERVLET_MAPPING, themeDisplay);
 	}
 
 	public HttpServletRequest getOriginalServletRequest(

@@ -620,18 +620,18 @@ public class PortalUtil {
 		return getPortal().getBaseModel(modelName, primKey);
 	}
 
-	public static String getNewPortletTitle(
-		String portletTitle, String oldScopeName, String newScopeName) {
-
-		return getPortal().getNewPortletTitle(
-			portletTitle, oldScopeName, newScopeName);
-	}
-
 	public static String getNetvibesURL(
 			Portlet portlet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return getPortal().getNetvibesURL(portlet, themeDisplay);
+	}
+
+	public static String getNewPortletTitle(
+		String portletTitle, String oldScopeName, String newScopeName) {
+
+		return getPortal().getNewPortletTitle(
+			portletTitle, oldScopeName, newScopeName);
 	}
 
 	public static HttpServletRequest getOriginalServletRequest(
