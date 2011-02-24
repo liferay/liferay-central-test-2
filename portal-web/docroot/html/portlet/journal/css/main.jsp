@@ -89,18 +89,6 @@
 				border: 1px #C3E7CC solid;
 			}
 
-			&.aui-dd-draggable .journal-article-move-handler {
-				background: transparent url(<%= themeImagesPath %>/application/handle_sort_vertical.png) no-repeat scroll right 50%;
-				cursor: move;
-				display: block;
-				height: 20px;
-				left: 7px;
-				position: absolute;
-				top: 8px;
-				width: 16px;
-				z-index: 420;
-			}
-
 			&.repeated-field .journal-article-variable-name {
 				display: none;
 			}
@@ -161,18 +149,6 @@
 
 	 .journal-article-header-edit .journal-article-localized-checkbox {
 		margin-bottom: 10px;
-	}
-
-	.journal-article-buttons {
-		display: block;
-		height: 27px;
-		margin-top: 18px;
-		text-align: right;
-
-		.edit-button, .repeatable-button {
-			float: left;
-			margin-left: 3px;
-		}
 	}
 
 	.journal-article-variable-name .aui-field-label {
@@ -310,6 +286,18 @@
 					}
 				}
 
+				&.aui-dd-draggable .journal-article-move-handler {
+					background: transparent url(<%= themeImagesPath %>/application/handle_sort_vertical.png) no-repeat scroll right 50%;
+					cursor: move;
+					display: block;
+					height: 20px;
+					left: 7px;
+					position: absolute;
+					top: 8px;
+					width: 16px;
+					z-index: 420;
+				}
+
 				.journal-article-close {
 					background: url(<%= themeImagesPath %>/journal/form_builder_close.png);
 					cursor: pointer;
@@ -363,6 +351,18 @@
 			margin: 10px;
 			padding-top: 5px;
 			position: relative;
+		}
+	}
+
+	.journal-article-buttons {
+		display: block;
+		height: 27px;
+		margin-top: 18px;
+		text-align: right;
+
+		.edit-button, .repeatable-button {
+			float: left;
+			margin-left: 3px;
 		}
 	}
 
