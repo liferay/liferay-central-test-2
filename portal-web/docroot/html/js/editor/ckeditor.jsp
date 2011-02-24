@@ -80,6 +80,10 @@ String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFile
 			return getCkData();
 		}
 
+		function setHTML(value) {
+			CKEDITOR.instances.CKEditor1.setData(value);
+		}
+
 		function getText() {
 			return getCkData();
 		}
