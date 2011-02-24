@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.search;
 
 import java.io.Serializable;
+
 import java.util.Locale;
 import java.util.Map;
 
