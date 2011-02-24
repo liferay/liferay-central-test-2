@@ -14,13 +14,14 @@
 
 package com.liferay.portal.search.generic;
 
+import com.liferay.portal.kernel.search.BaseQueryImpl;
 import com.liferay.portal.kernel.search.QueryTerm;
 import com.liferay.portal.kernel.search.WildcardQuery;
 
 /**
  * @author Michael C. Han
  */
-public class WildcardQueryImpl implements WildcardQuery {
+public class WildcardQueryImpl extends BaseQueryImpl implements WildcardQuery {
 
 	public WildcardQueryImpl(QueryTerm queryTerm) {
 		_queryTerm = queryTerm;

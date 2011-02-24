@@ -14,6 +14,7 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.search.BaseQueryImpl;
 import com.liferay.portal.kernel.search.QueryTerm;
 import com.liferay.portal.kernel.search.TermQuery;
 
@@ -22,7 +23,7 @@ import org.apache.lucene.index.Term;
 /**
  * @author Brian Wing Shun Chan
  */
-public class TermQueryImpl implements TermQuery {
+public class TermQueryImpl extends BaseQueryImpl implements TermQuery {
 
 	public TermQueryImpl(String field, long value) {
 		this(field, String.valueOf(value));

@@ -18,11 +18,13 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
 
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -78,6 +80,14 @@ public class SearchContextFactory {
 
 		searchContext.setAssetCategoryIds(assetCategoryIds);
 		searchContext.setAssetTagNames(assetTagNames);
+
+		//Query Config
+		QueryConfig queryConfig = new QueryConfig();
+
+		Locale local = PortalUtil.getLocale(request);
+		queryConfig.setLocale(local);
+
+		searchContext.setQueryConfig(queryConfig);
 
 		return searchContext;
 	}

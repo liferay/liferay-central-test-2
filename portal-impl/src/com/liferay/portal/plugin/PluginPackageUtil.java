@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.plugin.Version;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.DateFormatFactoryUtil;
@@ -1308,6 +1309,12 @@ public class PluginPackageUtil {
 		searchContext.setEnd(end);
 		searchContext.setKeywords(keywords);
 		searchContext.setStart(start);
+
+		QueryConfig queryConfig = new QueryConfig();
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		searchContext.setQueryConfig(queryConfig);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(PluginPackage.class);
 

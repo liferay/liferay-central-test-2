@@ -721,6 +721,14 @@ public interface PropsKeys {
 
 	public static final String INDEX_READ_ONLY = "index.read.only";
 
+	public static final String INDEX_SEARCH_HIGHLIGHT_ENABLED = "index.search.highlight.enabled";
+
+	public static final String INDEX_SEARCH_HIGHLIGHT_FRAGMENT_SIZE = "index.search.highlight.fragment.size";
+
+	public static final String INDEX_SEARCH_HIGHLIGHT_SNIPPET_SIZE = "index.search.highlight.snippet.size";
+
+	public static final String INDEX_SEARCH_SCORING_ENABLED = "index.search.scoring.enabled";
+
 	public static final String INDEX_SEARCH_LIMIT = "index.search.limit";
 
 	public static final String INDEX_WITH_THREAD = "index.with.thread";

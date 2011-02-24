@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -711,6 +712,12 @@ public class OrganizationLocalServiceImpl
 			searchContext.setEnd(end);
 			searchContext.setSorts(new Sort[] {sort});
 			searchContext.setStart(start);
+
+			QueryConfig queryConfig = new QueryConfig();
+			queryConfig.setHighlightEnabled(false);
+			queryConfig.setScoreEnabled(false);
+
+			searchContext.setQueryConfig(queryConfig);
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(
 				Organization.class);

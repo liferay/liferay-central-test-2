@@ -170,6 +170,8 @@ public abstract class BaseIndexer implements Indexer {
 				end = end + INDEX_FILTER_SEARCH_LIMIT;
 			}
 
+			fullQuery.setQueryConfig(searchContext.getQueryConfig());
+
 			Hits hits = SearchEngineUtil.search(
 				searchContext.getCompanyId(), searchContext.getGroupIds(),
 				searchContext.getUserId(), className, fullQuery,

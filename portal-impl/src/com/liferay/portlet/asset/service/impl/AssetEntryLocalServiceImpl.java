@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -371,6 +372,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setPortletIds(getPortletIds(portletId));
 			searchContext.setStart(start);
 
+			QueryConfig queryConfig = new QueryConfig();
+			queryConfig.setHighlightEnabled(false);
+			queryConfig.setScoreEnabled(false);
+
+			searchContext.setQueryConfig(queryConfig);
+
 			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
 
 			return indexer.search(searchContext);
@@ -403,6 +410,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setGroupIds(groupIds);
 			searchContext.setPortletIds(getPortletIds(portletId));
 			searchContext.setStart(start);
+
+			QueryConfig queryConfig = new QueryConfig();
+			queryConfig.setHighlightEnabled(false);
+			queryConfig.setScoreEnabled(false);
+
+			searchContext.setQueryConfig(queryConfig);
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
 

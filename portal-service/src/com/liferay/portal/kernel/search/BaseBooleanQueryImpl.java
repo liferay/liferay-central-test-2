@@ -26,7 +26,8 @@ import java.util.regex.Pattern;
 /**
  * @author Brian Wing Shun Chan
  */
-public abstract class BaseBooleanQueryImpl implements BooleanQuery{
+public abstract class BaseBooleanQueryImpl
+	extends BaseQueryImpl implements BooleanQuery {
 
 	public void addTerms(String[] fields, String values) throws ParseException {
 		if (Validator.isNull(values)) {

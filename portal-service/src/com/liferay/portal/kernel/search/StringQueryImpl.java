@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.search;
 /**
  * @author Bruno Farache
  */
-public class StringQueryImpl implements Query {
+public class StringQueryImpl extends BaseQueryImpl implements Query {
 
 	public StringQueryImpl(String query) {
 		_query = query;

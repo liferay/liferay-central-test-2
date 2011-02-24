@@ -14,12 +14,13 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.search.BaseQueryImpl;
 import com.liferay.portal.kernel.search.Query;
 
 /**
  * @author Bruno Farache
  */
-public class LuceneQueryImpl implements Query {
+public class LuceneQueryImpl extends BaseQueryImpl implements Query {
 
 	public LuceneQueryImpl(org.apache.lucene.search.Query query) {
 		_query = query;

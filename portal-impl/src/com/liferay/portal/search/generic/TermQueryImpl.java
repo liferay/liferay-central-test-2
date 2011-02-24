@@ -14,13 +14,14 @@
 
 package com.liferay.portal.search.generic;
 
+import com.liferay.portal.kernel.search.BaseQueryImpl;
 import com.liferay.portal.kernel.search.QueryTerm;
 import com.liferay.portal.kernel.search.TermQuery;
 
 /**
  * @author Michael C. Han
  */
-public class TermQueryImpl implements TermQuery {
+public class TermQueryImpl extends BaseQueryImpl implements TermQuery {
 
 	public TermQueryImpl(QueryTerm queryTerm) {
 		_queryTerm = queryTerm;

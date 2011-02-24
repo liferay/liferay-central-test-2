@@ -19,11 +19,11 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
 import java.util.List;
 
@@ -70,6 +70,12 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 		searchContext.setFolderIds(new long[] {folderId});
 		searchContext.setGroupIds(new long[] {groupId});
 		searchContext.setKeywords(keywords);
+
+		QueryConfig queryConfig = new QueryConfig();
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		searchContext.setQueryConfig(queryConfig);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(BookmarksEntry.class);
 

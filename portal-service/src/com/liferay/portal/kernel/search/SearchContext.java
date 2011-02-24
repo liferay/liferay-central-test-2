@@ -82,6 +82,14 @@ public class SearchContext implements Serializable {
 		return _portletIds;
 	}
 
+	public QueryConfig getQueryConfig() {
+		if (_queryConfig == null) {
+			_queryConfig = new QueryConfig();
+		}
+
+		return _queryConfig;
+	}
+
 	public Sort[] getSorts() {
 		return _sorts;
 	}
@@ -170,6 +178,10 @@ public class SearchContext implements Serializable {
 		_nodeIds = nodeIds;
 	}
 
+	public void setQueryConfig(QueryConfig queryConfig) {
+		_queryConfig = queryConfig;
+	}
+
 	public void setOwnerUserId(long ownerUserId) {
 		_ownerUserId = ownerUserId;
 	}
@@ -214,5 +226,5 @@ public class SearchContext implements Serializable {
 	private Sort[] _sorts;
 	private int _start = QueryUtil.ALL_POS;
 	private long _userId;
-
+	private QueryConfig _queryConfig;
 }

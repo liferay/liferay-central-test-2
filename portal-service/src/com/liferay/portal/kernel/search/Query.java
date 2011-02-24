@@ -20,4 +20,7 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  */
 public interface Query extends Serializable {
+	public QueryConfig getQueryConfig();
+
+	public void setQueryConfig(QueryConfig queryConfig);
 }

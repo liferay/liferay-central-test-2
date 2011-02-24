@@ -52,6 +52,7 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -2922,6 +2923,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			searchContext.setEnd(end);
 			searchContext.setSorts(new Sort[] {sort});
 			searchContext.setStart(start);
+
+			QueryConfig queryConfig = new QueryConfig();
+			queryConfig.setHighlightEnabled(false);
+			queryConfig.setScoreEnabled(false);
+
+			searchContext.setQueryConfig(queryConfig);
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(User.class);
 

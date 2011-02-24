@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.search.QueryConfig;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -141,6 +142,12 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		searchContext.setFolderIds(new long[] {_fileEntry.getFolderId()});
 		searchContext.setGroupIds(new long[] {_fileEntry.getRepositoryId()});
 		searchContext.setKeywords(keywords);
+
+		QueryConfig queryConfig = new QueryConfig();
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
+
+		searchContext.setQueryConfig(queryConfig);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(DLFileEntry.class);
 
