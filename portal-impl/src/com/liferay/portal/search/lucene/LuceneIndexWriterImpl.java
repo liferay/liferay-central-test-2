@@ -124,6 +124,29 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	private void _addLuceneFieldable(
+		org.apache.lucene.document.Document luceneDocument, String name,
+		boolean numeric, boolean tokenized, float boost, String value) {
+
+		org.apache.lucene.document.Fieldable luceneFieldable = null;
+
+		if (numeric) {
+			luceneFieldable = LuceneFields.getNumber(name, value);
+		}
+		else {
+			if (tokenized) {
+				luceneFieldable = LuceneFields.getText(name, value);
+			}
+			else {
+				luceneFieldable = LuceneFields.getKeyword(name, value);
+			}
+		}
+
+		luceneFieldable.setBoost(boost);
+
+		luceneDocument.add(luceneFieldable);
+	}
+
 	private org.apache.lucene.document.Document _getLuceneDocument(
 		Document document) {
 
@@ -149,8 +172,11 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 				}
 			}
 			else {
+				Map<Locale, String> localizedValues =
+					field.getLocalizedValues();
+
 				for (Map.Entry<Locale, String> entry :
-						field.getLocalizedValues().entrySet()) {
+						localizedValues.entrySet()) {
 
 					Locale locale = entry.getKey();
 					String value = entry.getValue();
@@ -171,29 +197,6 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 
 		return luceneDocument;
-	}
-
-	private void _addLuceneFieldable(
-		org.apache.lucene.document.Document luceneDocument, String name,
-		boolean numeric, boolean tokenized, float boost, String value) {
-
-		org.apache.lucene.document.Fieldable luceneFieldable = null;
-
-		if (numeric) {
-			luceneFieldable = LuceneFields.getNumber(name, value);
-		}
-		else {
-			if (tokenized) {
-				luceneFieldable = LuceneFields.getText(name, value);
-			}
-			else {
-				luceneFieldable = LuceneFields.getKeyword(name, value);
-			}
-		}
-
-		luceneFieldable.setBoost(boost);
-
-		luceneDocument.add(luceneFieldable);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
