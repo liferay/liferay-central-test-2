@@ -15,6 +15,8 @@
 package com.liferay.portal.kernel.search;
 
 import java.io.Serializable;
+import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Bruno Farache
@@ -84,6 +86,12 @@ public class Field implements Serializable {
 
 	public static final String VERSION = "version";
 
+	public Field(String name, Map<Locale, String> localizedValues) {
+		_name = name;
+		_localizedValues = localizedValues;
+		_localized = true;
+	}
+
 	public Field(String name, String value) {
 		this(name, new String[] {value});
 	}
@@ -125,6 +133,10 @@ public class Field implements Serializable {
 		return _boost;
 	}
 
+	public Map<Locale, String> getLocalizedValues() {
+		return _localizedValues;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -140,6 +152,10 @@ public class Field implements Serializable {
 
 	public String[] getValues() {
 		return _values;
+	}
+
+	public boolean isLocalized() {
+		return _localized;
 	}
 
 	public boolean isNumeric() {
@@ -175,9 +191,10 @@ public class Field implements Serializable {
 	}
 
 	private float _boost = 1;
+	private Map<Locale,String> _localizedValues;
+	private boolean _localized = false;
 	private String _name;
 	private boolean _numeric = false;
 	private boolean _tokenized = false;
 	private String[] _values;
-
 }

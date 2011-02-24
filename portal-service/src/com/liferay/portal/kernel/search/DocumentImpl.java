@@ -35,6 +35,7 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -237,6 +238,28 @@ public class DocumentImpl implements Document {
 		}
 
 		Field field = new Field(name, values);
+
+		_fields.put(name, field);
+	}
+
+	public void addLocalizedKeyword(String name, Map<Locale, String> values) {
+		if ((values == null) || values.isEmpty()) {
+			return;
+		}
+
+		Field field = new Field(name, values);
+
+		_fields.put(name, field);
+	}
+
+	public void addLocalizedText(String name, Map<Locale, String> values) {
+		if ((values == null) || values.isEmpty()) {
+			return;
+		}
+
+		Field field = new Field(name, values);
+
+		field.setTokenized(true);
 
 		_fields.put(name, field);
 	}

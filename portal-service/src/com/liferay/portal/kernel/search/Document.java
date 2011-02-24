@@ -22,6 +22,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -96,6 +97,10 @@ public interface Document extends Serializable {
 	public void addKeyword(String name, String value, boolean lowerCase);
 
 	public void addKeyword(String name, String[] values);
+
+	public void addLocalizedKeyword(String name, Map<Locale, String> values);
+
+	public void addLocalizedText(String name, Map<Locale, String> values);
 
 	public void addModifiedDate();
 
