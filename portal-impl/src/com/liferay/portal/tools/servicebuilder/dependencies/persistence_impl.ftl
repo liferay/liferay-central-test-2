@@ -822,7 +822,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			</#list>
 			 * @param start the lower bound of the range of ${entity.humanNames} to return
 			 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
-			 * @param orderByComparator the comparator to order the results by
+			 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 			 * @return the ordered range of matching ${entity.humanNames}
 			 * @throws SystemException if a system exception occurred
 			 */
@@ -912,7 +912,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			<#list finderColsList as finderCol>
 			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
 			</#list>
-			 * @param orderByComparator the comparator to order the set by
+			 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 			 * @return the first matching ${entity.humanName}
 			 * @throws ${packagePath}.${noSuchEntity}Exception if a matching ${entity.humanName} could not be found
 			 * @throws SystemException if a system exception occurred
@@ -963,7 +963,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			<#list finderColsList as finderCol>
 			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
 			</#list>
-			 * @param orderByComparator the comparator to order the set by
+			 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 			 * @return the last matching ${entity.humanName}
 			 * @throws ${packagePath}.${noSuchEntity}Exception if a matching ${entity.humanName} could not be found
 			 * @throws SystemException if a system exception occurred
@@ -1027,7 +1027,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			<#list finderColsList as finderCol>
 			 * @param ${finderCol.name} the ${finderCol.humanName} to search with
 			</#list>
-			 * @param orderByComparator the comparator to order the set by
+			 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 			 * @return the previous, current, and next ${entity.humanName}
 			 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
 			 * @throws SystemException if a system exception occurred
@@ -1296,7 +1296,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#list>
 				 * @param start the lower bound of the range of ${entity.humanNames} to return
 				 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
-				 * @param orderByComparator the comparator to order the results by
+				 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 				 * @return the ordered range of matching ${entity.humanNames}
 				 * @throws SystemException if a system exception occurred
 				 */
@@ -1452,7 +1452,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				</#list>
 				 * @param start the lower bound of the range of ${entity.humanNames} to return
 				 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
-				 * @param orderByComparator the comparator to order the results by
+				 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 				 * @return the ordered range of matching ${entity.humanNames} that the user has permission to view
 				 * @throws SystemException if a system exception occurred
 				 */
@@ -1556,7 +1556,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				<#list finderColsList as finderCol>
 				 * @param ${finderCol.name} the ${finderCol.humanName} to search with
 				</#list>
-				 * @param orderByComparator the comparator to order the set by
+				 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 				 * @return the previous, current, and next ${entity.humanName}
 				 * @throws ${packagePath}.${noSuchEntity}Exception if a ${entity.humanName} with the primary key could not be found
 				 * @throws SystemException if a system exception occurred
@@ -1868,7 +1868,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					</#list>
 					 * @param start the lower bound of the range of ${entity.humanNames} to return
 					 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
-					 * @param orderByComparator the comparator to order the results by
+					 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 					 * @return the ordered range of matching ${entity.humanNames} that the user has permission to view
 					 * @throws SystemException if a system exception occurred
 					 */
@@ -2218,7 +2218,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	 *
 	 * @param start the lower bound of the range of ${entity.humanNames} to return
 	 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of ${entity.humanNames}
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -2797,7 +2797,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			 * @param pk the primary key of the ${entity.humanName} to get the associated ${tempEntity.humanNames} for
 			 * @param start the lower bound of the range of ${entity.humanNames} to return
 			 * @param end the upper bound of the range of ${entity.humanNames} to return (not inclusive)
-			 * @param orderByComparator the comparator to order the results by
+			 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 			 * @return the ordered range of ${tempEntity.humanNames} associated with the ${entity.humanName}
 			 * @throws SystemException if a system exception occurred
 			 */
