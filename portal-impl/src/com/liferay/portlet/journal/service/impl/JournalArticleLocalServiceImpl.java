@@ -1550,6 +1550,19 @@ public class JournalArticleLocalServiceImpl
 			String content)
 		throws PortalException, SystemException {
 
+		JournalArticle article = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
+
+		return updateArticle(userId, groupId, articleId, version,
+			article.getTitleMap(), article.getDescriptionMap(), content);
+	}
+
+	public JournalArticle updateArticle(
+			long userId, long groupId, String articleId, double version,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			String content)
+		throws PortalException, SystemException {
+
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
@@ -1644,10 +1657,10 @@ public class JournalArticleLocalServiceImpl
 		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
 
 		return updateArticle(
-			userId, groupId, articleId, version, article.getTitleMap(),
-			article.getDescriptionMap(), content, article.getType(),
-			article.getStructureId(), article.getTemplateId(), displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			userId, groupId, articleId, version, titleMap, descriptionMap,
+			content, article.getType(), article.getStructureId(),
+			article.getTemplateId(), displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,

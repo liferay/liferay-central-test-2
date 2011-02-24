@@ -368,6 +368,17 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle updateArticle(
+			long userId, long groupId, String articleId, double version,
+			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
+			String content)
+		throws PortalException, SystemException {
+
+		return journalArticleLocalService.updateArticle(
+			userId, groupId, articleId, version, titleMap, descriptionMap,
+			content);
+	}
+
+	public JournalArticle updateArticle(
 			long groupId, String articleId, double version,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
 			String content, String type, String structureId, String templateId,
