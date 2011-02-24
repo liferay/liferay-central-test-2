@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.scheduler.Trigger;
 import java.io.Serializable;
 
 /**
- *
  * @author Tina Tian
  */
 public class SchedulerResponse implements Serializable {

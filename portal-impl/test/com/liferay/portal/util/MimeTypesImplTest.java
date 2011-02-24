@@ -21,7 +21,7 @@ import java.io.InputStream;
 
 /**
  * @author Alexander Chow
- * @see	   FileImplExtractTest
+ * @see    FileImplExtractTest
  */
 public class MimeTypesImplTest extends BaseTestCase {
 
