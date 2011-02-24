@@ -115,6 +115,7 @@ public class NotificationEvent implements Serializable {
 	public JSONObject toJSONObject() {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
+		jsonObject.put(_KEY_DELIVERY_REQUIRED, _deliveryRequired);
 		jsonObject.put(_KEY_PAYLOAD, _payloadJSONObject);
 		jsonObject.put(_KEY_TIMESTAMP, _timestamp);
 		jsonObject.put(_KEY_TYPE, _type);
@@ -122,6 +123,8 @@ public class NotificationEvent implements Serializable {
 
 		return jsonObject;
 	}
+
+	private static final String _KEY_DELIVERY_REQUIRED = "deliveryRequired";
 
 	private static final String _KEY_PAYLOAD = "payload";
 
