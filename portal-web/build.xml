@@ -250,7 +250,6 @@
 				/>
 
 				<patch
-					failonerror="true"
 					originalfile="docroot/html/js/editor/ckeditor_diffs/plugins/creole/creole_parser.js"
 					patchfile="docroot/html/js/editor/ckeditor_diffs/plugins/creole/javascript_creole_wiki_markup_parser.patch"
 				/>
