@@ -14,7 +14,7 @@
  */
 --%>
 
-<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) && fileEntry.isLockSupported() %>">
+<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) && fileEntry.isSupportsLocking() %>">
 	<c:choose>
 		<c:when test="<%= !fileEntry.isLocked() %>">
 			<portlet:actionURL var ="lockURL">

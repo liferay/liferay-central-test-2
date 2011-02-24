@@ -168,11 +168,11 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return _dlFolder.isLocked();
 	}
 
-	public boolean isLockSupported() {
+	public boolean isSupportsLocking() {
 		return true;
 	}
 
-	public boolean isMetadataSupported() {
+	public boolean isSupportsMetadata() {
 		return true;
 	}
 
@@ -184,7 +184,7 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return _dlFolder.isRoot();
 	}
 
-	public boolean isSocialSupported() {
+	public boolean isSupportsSocial() {
 		return true;
 	}
 

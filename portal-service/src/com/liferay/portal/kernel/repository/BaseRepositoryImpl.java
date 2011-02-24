@@ -148,14 +148,14 @@ public abstract class BaseRepositoryImpl implements Repository {
 		_repositoryId = repositoryId;
 	}
 
-	public void setUserLocalService(UserLocalService userLocalService) {
-		this.userLocalService = userLocalService;
-	}
-
 	public void setTypeSettingsProperties(
 		UnicodeProperties typeSettingsProperties) {
-
+	
 		_typeSettingsProperties = typeSettingsProperties;
+	}
+
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
 	}
 
 	public void unlockFolder(long parentFolderId, String title, String lockUuid)

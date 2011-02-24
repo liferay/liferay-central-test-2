@@ -75,14 +75,14 @@ public interface Folder extends RepositoryModel<Folder> {
 
 	public boolean isLocked();
 
-	public boolean isLockSupported();
+	public boolean isSupportsLocking();
 
-	public boolean isMetadataSupported();
+	public boolean isSupportsMetadata();
 
 	public boolean isMountPoint();
 
 	public boolean isRoot();
 
-	public boolean isSocialSupported();
+	public boolean isSupportsSocial();
 
 }

@@ -287,15 +287,15 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		}
 	}
 
-	public boolean isLockSupported() {
+	public boolean isSupportsLocking() {
 		return false;
 	}
 
-	public boolean isMetadataSupported() {
+	public boolean isSupportsMetadata() {
 		return false;
 	}
 
-	public boolean isSocialSupported() {
+	public boolean isSupportsSocial() {
 		return false;
 	}
 

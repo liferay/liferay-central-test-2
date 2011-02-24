@@ -270,11 +270,11 @@ public class CMISFolder extends CMISModel implements Folder {
 		return false;
 	}
 
-	public boolean isLockSupported() {
+	public boolean isSupportsLocking() {
 		return false;
 	}
 
-	public boolean isMetadataSupported() {
+	public boolean isSupportsMetadata() {
 		return false;
 	}
 
@@ -291,7 +291,7 @@ public class CMISFolder extends CMISModel implements Folder {
 		}
 	}
 
-	public boolean isSocialSupported() {
+	public boolean isSupportsSocial() {
 		return false;
 	}
 

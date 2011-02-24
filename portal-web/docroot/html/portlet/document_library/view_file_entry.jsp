@@ -216,7 +216,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</div>
 		</c:if>
 
-		<c:if test="<%= fileEntry.isSocialSupported() %>">
+		<c:if test="<%= fileEntry.isSupportsSocial() %>">
 			<div class="lfr-asset-categories">
 				<liferay-ui:asset-categories-summary
 					className="<%= DLFileEntryConstants.getClassName() %>"
@@ -239,7 +239,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</div>
 		</c:if>
 
-		<c:if test="<%= fileEntry.isMetadataSupported() %>">
+		<c:if test="<%= fileEntry.isSupportsMetadata() %>">
 			<liferay-ui:custom-attributes-available className="<%= DLFileEntryConstants.getClassName() %>">
 				<liferay-ui:custom-attribute-list
 					className="<%= DLFileEntryConstants.getClassName() %>"
@@ -250,7 +250,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			</liferay-ui:custom-attributes-available>
 		</c:if>
 
-		<c:if test="<%= fileEntry.isSocialSupported() %>">
+		<c:if test="<%= fileEntry.isSupportsSocial() %>">
 			<div class="lfr-asset-ratings">
 				<liferay-ui:ratings
 					className="<%= DLFileEntryConstants.getClassName() %>"
@@ -267,7 +267,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 			/>
 		</div>
 
-		<c:if test="<%= portletDisplay.isWebDAVEnabled() && fileEntry.isSocialSupported() %>">
+		<c:if test="<%= portletDisplay.isWebDAVEnabled() && fileEntry.isSupportsSocial() %>">
 			<div class="lfr-asset-field">
 
 				<%

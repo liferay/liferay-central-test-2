@@ -668,29 +668,22 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	public Lock lockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public Lock lockFileEntry(long fileEntryId) {
 		throw new UnsupportedOperationException();
 	}
 
 	public Lock lockFileEntry(
-			long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
+		long fileEntryId, String owner, long expirationTime) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public Lock lockFolder(long folderId)
-		throws PortalException, SystemException {
-
+	public Lock lockFolder(long folderId) {
 		throw new UnsupportedOperationException();
 	}
 
 	public Lock lockFolder(
-			long folderId, String owner, boolean inheritable,
-			long expirationTime)
-		throws PortalException, SystemException {
+		long folderId, String owner, boolean inheritable, long expirationTime) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -797,15 +790,11 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
-		throws PortalException, SystemException {
-
+	public Lock refreshFileEntryLock(String lockUuid, long expirationTime) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Lock refreshFolderLock(String lockUuid, long expirationTime)
-		throws PortalException, SystemException {
-
+	public Lock refreshFolderLock(String lockUuid, long expirationTime) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -918,19 +907,15 @@ public class CMISRepository extends BaseRepositoryImpl {
 		return new CMISFolder(this, uuid, folderId, cmisFolder);
 	}
 
-	public void unlockFileEntry(long fileEntryId) throws SystemException {
+	public void unlockFileEntry(long fileEntryId) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void unlockFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
+	public void unlockFileEntry(long fileEntryId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void unlockFolder(long folderId, String lockUuid)
-		throws PortalException, SystemException {
-
+	public void unlockFolder(long folderId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -1054,15 +1039,11 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
-
+	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean verifyInheritableLock(long folderId, String lockUuid)
-		throws PortalException, SystemException {
-
+	public boolean verifyInheritableLock(long folderId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 
