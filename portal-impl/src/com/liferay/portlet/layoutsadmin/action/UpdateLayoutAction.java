@@ -18,7 +18,9 @@ import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
@@ -27,11 +29,14 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
+import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
@@ -40,9 +45,17 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LayoutSettings;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletConfigFactoryUtil;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
+import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javax.portlet.PortletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -51,6 +64,7 @@ import org.apache.struts.action.ActionMapping;
 
 /**
  * @author Ming-Gih Lam
+ * @author Hugo Huijser
  */
 public class UpdateLayoutAction extends JSONAction {
 
@@ -204,6 +218,35 @@ public class UpdateLayoutAction extends JSONAction {
 		return new String[] {String.valueOf(layout.getLayoutId()), layoutURL};
 	}
 
+	protected String getPortletTitle(
+		HttpServletRequest request, String portletId,
+		javax.portlet.PortletPreferences preferences) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		String portletTitle = PortletConfigurationUtil.getPortletTitle(
+			preferences, themeDisplay.getLanguageId());
+
+		if (Validator.isNull(portletTitle)) {
+			ServletContext servletContext =
+				(ServletContext)request.getAttribute(WebKeys.CTX);
+
+			PortletConfig portletConfig =
+				PortletConfigFactoryUtil.create(
+					PortletLocalServiceUtil.getPortletById(portletId),
+					servletContext);
+
+			ResourceBundle resourceBundle = portletConfig.getResourceBundle(
+				themeDisplay.getLocale());
+
+			portletTitle = resourceBundle.getString(
+				JavaConstants.JAVAX_PORTLET_TITLE);
+		}
+
+		return portletTitle;
+	}
+
 	protected void updateDisplayOrder(HttpServletRequest request)
 		throws Exception {
 
@@ -225,6 +268,9 @@ public class UpdateLayoutAction extends JSONAction {
 		long layoutId = ParamUtil.getLong(request, "layoutId");
 		String name = ParamUtil.getString(request, "name");
 		String languageId = ParamUtil.getString(request, "languageId");
+
+		updateScopedPortletNames(
+			request, groupId, privateLayout, layoutId, name, languageId);
 
 		if (plid <= 0) {
 			LayoutServiceUtil.updateName(
@@ -272,6 +318,48 @@ public class UpdateLayoutAction extends JSONAction {
 		}
 		else {
 			LayoutServiceUtil.updatePriority(plid, priority);
+		}
+	}
+
+	protected void updateScopedPortletNames(
+			HttpServletRequest request, long groupId, boolean privateLayout,
+			long layoutId, String name, String languageId)
+		throws Exception {
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			groupId, privateLayout, layoutId);
+
+		List<PortletPreferences> portletPreferencesList =
+			PortletPreferencesLocalServiceUtil.getPortletPreferencesByPlid(
+				layout.getPlid());
+
+		for (PortletPreferences portletPreferences : portletPreferencesList) {
+			String portletId = portletPreferences.getPortletId();
+
+			javax.portlet.PortletPreferences preferences =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					layout, portletId);
+
+			String scopeLayoutUuid = GetterUtil.getString(
+				preferences.getValue("lfr-scope-layout-uuid", null));
+
+			if (layout.getUuid().equals(scopeLayoutUuid)) {
+				String portletTitle = getPortletTitle(
+					request, portletId, preferences);
+
+				String newPortletTitle = PortalUtil.getNewPortletTitle(
+					portletTitle, layout.getName(languageId), name);
+
+				if (!newPortletTitle.equals(portletTitle)) {
+					preferences.setValue(
+						"portlet-setup-title-" + languageId, newPortletTitle);
+					preferences.setValue(
+						"portlet-setup-use-custom-title",
+						Boolean.TRUE.toString());
+				}
+
+				preferences.store();
+			}
 		}
 	}
 
