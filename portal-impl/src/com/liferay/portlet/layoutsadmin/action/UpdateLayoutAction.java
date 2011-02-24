@@ -55,6 +55,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.portlet.PortletConfig;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -218,6 +219,10 @@ public class UpdateLayoutAction extends JSONAction {
 		return new String[] {String.valueOf(layout.getLayoutId()), layoutURL};
 	}
 
+	/**
+	 * @see {@link
+	 *      com.liferay.portlet.portletconfiguration.action.EditScopeAction#getPortletTitle}
+	 */
 	protected String getPortletTitle(
 		HttpServletRequest request, String portletId,
 		javax.portlet.PortletPreferences preferences) {
@@ -321,6 +326,10 @@ public class UpdateLayoutAction extends JSONAction {
 		}
 	}
 
+	/**
+	 * @see {@link
+	 *      com.liferay.portlet.portletconfiguration.action.EditScopeAction#updateScope}
+	 */
 	protected void updateScopedPortletNames(
 			HttpServletRequest request, long groupId, boolean privateLayout,
 			long layoutId, String name, String languageId)
