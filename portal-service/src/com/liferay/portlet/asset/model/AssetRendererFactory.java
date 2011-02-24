@@ -35,6 +35,12 @@ public interface AssetRendererFactory {
 
 	public static int TYPE_LATEST_APPROVED = 1;
 
+	public AssetEntry getAssetEntry(long assetEntryId)
+		throws PortalException, SystemException;
+
+	public AssetEntry getAssetEntry(String classNameId, long classPK)
+		throws PortalException, SystemException;
+
 	public AssetRenderer getAssetRenderer(long classPK)
 		throws PortalException, SystemException;
 

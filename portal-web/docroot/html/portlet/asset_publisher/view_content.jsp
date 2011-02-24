@@ -44,10 +44,10 @@ try {
 		className = assetRendererFactory.getClassName();
 		classPK = assetRenderer.getClassPK();
 
-		assetEntry = AssetEntryLocalServiceUtil.getEntry(className, classPK);
+		assetEntry = assetRendererFactory.getAssetEntry(className, classPK);
 	}
 	else {
-		assetEntry = AssetEntryLocalServiceUtil.getEntry(assetEntryId);
+		assetEntry = assetRendererFactory.getAssetEntry(assetEntryId);
 
 		className = PortalUtil.getClassName(assetEntry.getClassNameId());
 		classPK = assetEntry.getClassPK();

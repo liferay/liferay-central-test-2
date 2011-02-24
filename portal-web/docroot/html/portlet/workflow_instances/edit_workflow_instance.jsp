@@ -36,7 +36,7 @@ AssetRendererFactory assetRendererFactory = workflowHandler.getAssetRendererFact
 AssetEntry assetEntry = null;
 
 if (assetRenderer != null) {
-	assetEntry = AssetEntryLocalServiceUtil.getEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
+	assetEntry = assetRendererFactory.getAssetEntry(assetRendererFactory.getClassName(), assetRenderer.getClassPK());
 }
 
 String headerTitle = LanguageUtil.get(pageContext, workflowInstance.getWorkflowDefinitionName());

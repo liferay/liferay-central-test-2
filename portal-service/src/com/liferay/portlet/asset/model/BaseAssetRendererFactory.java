@@ -25,6 +25,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -36,6 +37,18 @@ import javax.portlet.PortletURL;
  * @author Sergio González
  */
 public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
+
+	public AssetEntry getAssetEntry(long assetEntryId)
+		throws PortalException, SystemException {
+
+		return AssetEntryLocalServiceUtil.getEntry(assetEntryId);
+	}
+
+	public AssetEntry getAssetEntry(String className, long classPK)
+		throws PortalException, SystemException {
+
+		return AssetEntryLocalServiceUtil.getEntry(className, classPK);
+	}
 
 	public AssetRenderer getAssetRenderer(long classPK)
 		throws PortalException, SystemException {
