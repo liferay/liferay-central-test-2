@@ -150,7 +150,7 @@ public abstract class BaseRepositoryImpl implements Repository {
 
 	public void setTypeSettingsProperties(
 		UnicodeProperties typeSettingsProperties) {
-	
+
 		_typeSettingsProperties = typeSettingsProperties;
 	}
 
