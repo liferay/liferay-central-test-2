@@ -53,7 +53,7 @@ public class PollerSession {
 	}
 
 	public synchronized boolean completePortletProcessing(
-		String responseId, String portletId) {
+		String portletId, String responseId) {
 
 		String pendingResponseId = _pendingResponseIds.get(portletId);
 
