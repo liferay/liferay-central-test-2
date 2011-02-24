@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.servlet.DirectServletContext;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
-import com.liferay.portal.kernel.servlet.taglib.CustomAttributes;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -41,13 +40,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CustomJspRegistryUtil;
 import com.liferay.portal.util.PortalUtil;
 
-import java.io.IOException;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -56,21 +50,18 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.tagext.DynamicAttributes;
 
 /**
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
+ * @author Eduardo Lundgren
  */
-public class IncludeTag
-	extends ParamAndPropertyAncestorTagImpl implements DynamicAttributes {
+public class IncludeTag extends AttributesTagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
 			ServletContext servletContext = getServletContext();
 			HttpServletRequest request = getServletRequest();
-			HttpServletResponse response = getServletResponse();
 
 			String page = null;
 
@@ -88,19 +79,8 @@ public class IncludeTag
 
 			callSetAttributes();
 
-			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
-
-			if (_log.isDebugEnabled() && Validator.isNotNull(page)) {
-				String resourcePath = ThemeHelper.getResourcePath(
-					servletContext, theme, page);
-
-				_log.debug(resourcePath);
-			}
-
-			if (ThemeHelper.resourceExists(servletContext, theme, page)) {
-				ThemeUtil.include(
-					servletContext, request, response, pageContext,
-					page, theme);
+			if (themeResourceExists(page)) {
+				_doIncludeTheme(page);
 
 				return EVAL_PAGE;
 			}
@@ -117,8 +97,7 @@ public class IncludeTag
 			throw new JspException(e);
 		}
 		finally {
-			_dynamicAttributes.clear();
-
+			clearDynamicAttributes();
 			clearParams();
 			clearProperties();
 
@@ -136,24 +115,13 @@ public class IncludeTag
 	public int doStartTag() throws JspException {
 		try {
 			ServletContext servletContext = getServletContext();
-			HttpServletRequest request = getServletRequest();
-			HttpServletResponse response = getServletResponse();
 
 			String page = getStartPage();
 
 			callSetAttributes();
 
-			Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
-
-			if (_log.isDebugEnabled() && Validator.isNotNull(page)) {
-				_log.debug(
-					ThemeHelper.getResourcePath(servletContext, theme, page));
-			}
-
-			if (ThemeHelper.resourceExists(servletContext, theme, page)) {
-				ThemeUtil.include(
-					servletContext, request, response, pageContext, page,
-					theme);
+			if (themeResourceExists(page)) {
+				_doIncludeTheme(page);
 
 				return EVAL_BODY_INCLUDE;
 			}
@@ -169,10 +137,6 @@ public class IncludeTag
 		catch (Exception e) {
 			throw new JspException(e);
 		}
-	}
-
-	public CustomAttributes getCustomAttributes() {
-		return _customAttributes;
 	}
 
 	public ServletContext getServletContext() {
@@ -221,16 +185,6 @@ public class IncludeTag
 		doEndTag();
 	}
 
-	public void setCustomAttributes(CustomAttributes customAttributes) {
-		_customAttributes = customAttributes;
-	}
-
-	public void setDynamicAttribute(
-		String uri, String localName, Object value) {
-
-		_dynamicAttributes.put(localName, value);
-	}
-
 	public void setPage(String page) {
 		_page = page;
 	}
@@ -258,6 +212,18 @@ public class IncludeTag
 
 			request = _trackedRequest;
 		}
+
+		setNamespacedAttribute(
+			request, "bodyContent", getBodyContent());
+
+		setNamespacedAttribute(
+			request, "customAttributes", getCustomAttributes());
+
+		setNamespacedAttribute(
+			request, "dynamicAttributes", getDynamicAttributes());
+
+		setNamespacedAttribute(
+			request, "scopedAttributes", getScopedAttributes());
 
 		setAttributes(request);
 	}
@@ -317,10 +283,6 @@ public class IncludeTag
 		}
 
 		return null;
-	}
-
-	protected Map<String, Object> getDynamicAttributes() {
-		return _dynamicAttributes;
 	}
 
 	protected String getEndPage() {
@@ -415,15 +377,22 @@ public class IncludeTag
 	protected void setAttributes(HttpServletRequest request) {
 	}
 
-	protected void writeDynamicAttributes(JspWriter jspWriter)
-		throws IOException {
+	protected boolean themeResourceExists(String page)
+		throws Exception {
 
-		String dynamicAttributesString = InlineUtil.buildDynamicAttributes(
-			getDynamicAttributes());
+		ServletContext servletContext = getServletContext();
+		HttpServletRequest request = getServletRequest();
 
-		if (Validator.isNotNull(dynamicAttributesString)) {
-			jspWriter.write(dynamicAttributesString);
+		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
+
+		if (_log.isDebugEnabled() && Validator.isNotNull(page)) {
+			String resourcePath = ThemeHelper.getResourcePath(
+				servletContext, theme, page);
+
+			_log.debug(resourcePath);
 		}
+
+		return ThemeHelper.resourceExists(servletContext, theme, page);
 	}
 
 	private void _doInclude(String page) throws JspException {
@@ -448,6 +417,18 @@ public class IncludeTag
 		}
 	}
 
+	private void _doIncludeTheme(String page) throws Exception {
+		ServletContext servletContext = getServletContext();
+		HttpServletRequest request = getServletRequest();
+		HttpServletResponse response = getServletResponse();
+
+		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
+
+		ThemeUtil.include(
+			servletContext, request, response, pageContext, page,
+			theme);
+	}
+
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = false;
 
 	private static final boolean _DIRECT_SERVLET_CONTEXT_ENABLED =
@@ -462,9 +443,6 @@ public class IncludeTag
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 
 	private boolean _calledSetAttributes;
-	private CustomAttributes _customAttributes;
-	private Map<String, Object> _dynamicAttributes =
-		new HashMap<String, Object>();
 	private String _page;
 	private String _portletId;
 	private TrackedServletRequest _trackedRequest;
