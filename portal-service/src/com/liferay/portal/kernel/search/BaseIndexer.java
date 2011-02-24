@@ -159,6 +159,8 @@ public abstract class BaseIndexer implements Indexer {
 			BooleanQuery fullQuery = createFullQuery(
 				contextQuery, searchContext);
 
+			fullQuery.setQueryConfig(searchContext.getQueryConfig());
+
 			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
@@ -169,8 +171,6 @@ public abstract class BaseIndexer implements Indexer {
 				start = 0;
 				end = end + INDEX_FILTER_SEARCH_LIMIT;
 			}
-
-			fullQuery.setQueryConfig(searchContext.getQueryConfig());
 
 			Hits hits = SearchEngineUtil.search(
 				searchContext.getCompanyId(), searchContext.getGroupIds(),
