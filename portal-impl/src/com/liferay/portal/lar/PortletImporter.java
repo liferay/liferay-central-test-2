@@ -105,15 +105,15 @@ public class PortletImporter {
 			parameterMap, PortletDataHandlerKeys.DELETE_PORTLET_DATA);
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
+		boolean importUserPermissions = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean importPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
 		boolean importPortletArchivedSetups = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean importPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
-		boolean importUserPermissions = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
-		boolean importUserPreferences = MapUtil.getBoolean(
+		boolean importPortletUserPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		String userIdStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
@@ -247,7 +247,7 @@ public class PortletImporter {
 		importPortletPreferences(
 			context, layout.getCompanyId(), groupId, layout, portletId,
 			portletEl, importPortletSetup, importPortletArchivedSetups,
-			importUserPreferences, true);
+			importPortletUserPreferences, true);
 
 		// Portlet data
 
@@ -712,7 +712,7 @@ public class PortletImporter {
 			PortletDataContext context, long companyId, long groupId,
 			Layout layout, String portletId, Element parentEl,
 			boolean importPortletSetup, boolean importPortletArchivedSetups,
-			boolean importUserPreferences, boolean preserveScopeLayoutId)
+			boolean importPortletUserPreferences, boolean preserveScopeLayoutId)
 		throws PortalException, SystemException {
 
 		long defaultUserId = UserLocalServiceUtil.getDefaultUserId(companyId);
@@ -782,7 +782,7 @@ public class PortletImporter {
 
 				if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) &&
 					(ownerId != PortletKeys.PREFS_OWNER_ID_DEFAULT) &&
-					!importUserPreferences) {
+					!importPortletUserPreferences) {
 
 					continue;
 				}
