@@ -727,9 +727,9 @@ public interface PropsKeys {
 
 	public static final String INDEX_SEARCH_HIGHLIGHT_SNIPPET_SIZE = "index.search.highlight.snippet.size";
 
-	public static final String INDEX_SEARCH_SCORING_ENABLED = "index.search.scoring.enabled";
-
 	public static final String INDEX_SEARCH_LIMIT = "index.search.limit";
+
+	public static final String INDEX_SEARCH_SCORING_ENABLED = "index.search.scoring.enabled";
 
 	public static final String INDEX_WITH_THREAD = "index.with.thread";
 

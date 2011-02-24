@@ -222,9 +222,10 @@ public class SearchContext implements Serializable {
 	private long[] _nodeIds;
 	private long _ownerUserId;
 	private String[] _portletIds;
+	private QueryConfig _queryConfig;
 	private boolean _scopeStrict = true;
 	private Sort[] _sorts;
 	private int _start = QueryUtil.ALL_POS;
 	private long _userId;
-	private QueryConfig _queryConfig;
+
 }

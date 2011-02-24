@@ -144,6 +144,7 @@ public class DLAppServiceTest extends BaseServiceTestCase {
 		searchContext.setKeywords(keywords);
 
 		QueryConfig queryConfig = new QueryConfig();
+
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
 

@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
@@ -18,9 +18,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
+
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -43,17 +43,13 @@ public class QueryConfig implements Serializable {
 	public int getHighlightFragmentSize() {
 		return GetterUtil.getInteger(
 			_attributes.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_FRAGMENT_SIZE),
-			GetterUtil.getInteger(
-				PropsUtil.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_FRAGMENT_SIZE),
-				80));
+			_INDEX_SEARCH_HIGHLIGHT_FRAGMENT_SIZE);
 	}
 
 	public int getHighlightSnippetSize() {
 		return GetterUtil.getInteger(
 			_attributes.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_SNIPPET_SIZE),
-			GetterUtil.getInteger(
-				PropsUtil.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_SNIPPET_SIZE),
-				3));
+			_INDEX_SEARCH_HIGHLIGHT_SNIPPET_SIZE);
 	}
 
 	public Locale getLocale() {
@@ -69,15 +65,13 @@ public class QueryConfig implements Serializable {
 	public boolean isHighlightEnabled() {
 		return GetterUtil.getBoolean(
 			_attributes.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_ENABLED),
-			GetterUtil.getBoolean(
-				PropsUtil.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_ENABLED), true));
+			_INDEX_SEARCH_HIGHLIGHT_ENABLED);
 	}
 
 	public boolean isScoreEnabled() {
 		return GetterUtil.getBoolean(
 			_attributes.get(PropsKeys.INDEX_SEARCH_SCORING_ENABLED),
-			GetterUtil.getBoolean(
-				PropsUtil.get(PropsKeys.INDEX_SEARCH_SCORING_ENABLED), true));
+			_INDEX_SEARCH_SCORING_ENABLED);
 	}
 
 	public Serializable removeAttribute(String name) {
@@ -113,6 +107,23 @@ public class QueryConfig implements Serializable {
 		_attributes.put(PropsKeys.INDEX_SEARCH_SCORING_ENABLED, scoreEnabled);
 	}
 
+	private static final boolean _INDEX_SEARCH_HIGHLIGHT_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_ENABLED));
+
+	private static final int _INDEX_SEARCH_HIGHLIGHT_FRAGMENT_SIZE =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_FRAGMENT_SIZE));
+
+	private static final int _INDEX_SEARCH_HIGHLIGHT_SNIPPET_SIZE =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.INDEX_SEARCH_HIGHLIGHT_SNIPPET_SIZE));
+
+	private static final boolean _INDEX_SEARCH_SCORING_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.INDEX_SEARCH_SCORING_ENABLED));
+
 	private Map<String, Serializable> _attributes =
 		new HashMap<String, Serializable>();
+
 }

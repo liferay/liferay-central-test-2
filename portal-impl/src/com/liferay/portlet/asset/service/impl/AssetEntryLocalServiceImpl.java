@@ -370,13 +370,15 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setGroupIds(groupIds);
 			searchContext.setKeywords(keywords);
 			searchContext.setPortletIds(getPortletIds(portletId));
-			searchContext.setStart(start);
 
 			QueryConfig queryConfig = new QueryConfig();
+
 			queryConfig.setHighlightEnabled(false);
 			queryConfig.setScoreEnabled(false);
 
 			searchContext.setQueryConfig(queryConfig);
+
+			searchContext.setStart(start);
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
 
@@ -409,13 +411,15 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setEnd(end);
 			searchContext.setGroupIds(groupIds);
 			searchContext.setPortletIds(getPortletIds(portletId));
-			searchContext.setStart(start);
 
 			QueryConfig queryConfig = new QueryConfig();
+
 			queryConfig.setHighlightEnabled(false);
 			queryConfig.setScoreEnabled(false);
 
 			searchContext.setQueryConfig(queryConfig);
+
+			searchContext.setStart(start);
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(AssetEntry.class);
 

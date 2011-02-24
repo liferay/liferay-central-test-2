@@ -81,10 +81,12 @@ public class SearchContextFactory {
 		searchContext.setAssetCategoryIds(assetCategoryIds);
 		searchContext.setAssetTagNames(assetTagNames);
 
-		//Query Config
+		// Query config
+
 		QueryConfig queryConfig = new QueryConfig();
 
 		Locale local = PortalUtil.getLocale(request);
+
 		queryConfig.setLocale(local);
 
 		searchContext.setQueryConfig(queryConfig);

@@ -1308,13 +1308,15 @@ public class PluginPackageUtil {
 		searchContext.setCompanyId(CompanyConstants.SYSTEM);
 		searchContext.setEnd(end);
 		searchContext.setKeywords(keywords);
-		searchContext.setStart(start);
 
 		QueryConfig queryConfig = new QueryConfig();
+
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
 
 		searchContext.setQueryConfig(queryConfig);
+
+		searchContext.setStart(start);
 
 		Indexer indexer = IndexerRegistryUtil.getIndexer(PluginPackage.class);
 

@@ -711,13 +711,15 @@ public class OrganizationLocalServiceImpl
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
 			searchContext.setSorts(new Sort[] {sort});
-			searchContext.setStart(start);
 
 			QueryConfig queryConfig = new QueryConfig();
+
 			queryConfig.setHighlightEnabled(false);
 			queryConfig.setScoreEnabled(false);
 
 			searchContext.setQueryConfig(queryConfig);
+
+			searchContext.setStart(start);
 
 			Indexer indexer = IndexerRegistryUtil.getIndexer(
 				Organization.class);

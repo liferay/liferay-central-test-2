@@ -72,6 +72,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 		searchContext.setKeywords(keywords);
 
 		QueryConfig queryConfig = new QueryConfig();
+
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
 
