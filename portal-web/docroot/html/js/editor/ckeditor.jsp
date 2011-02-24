@@ -84,12 +84,11 @@ String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFile
 			return getCkData();
 		}
 
-		function onChangeCallback() {
+		<%
+		if (Validator.isNotNull(onChangeMethod)) {
+		%>
 
-			<%
-			if (Validator.isNotNull(onChangeMethod)) {
-			%>
-
+			function onChangeCallback() {
 				var ckEditor = CKEDITOR.instances.CKEditor1;
 				var dirty = ckEditor.checkDirty();
 
@@ -98,12 +97,11 @@ String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFile
 
 					ckEditor.resetDirty();
 				}
-
-			<%
 			}
-			%>
 
+		<%
 		}
+		%>
 	</script>
 </head>
 
@@ -135,16 +133,24 @@ String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFile
 			function() {
 				ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
 
-				setInterval(
-					function() {
-						try {
-							onChangeCallback();
-						}
-						catch(e) {
-						}
-					},
-					300
-				);
+				<%
+				if (Validator.isNotNull(onChangeMethod)) {
+				%>
+
+					setInterval(
+						function() {
+							try {
+								onChangeCallback();
+							}
+							catch(e) {
+							}
+						},
+						300
+					);
+
+				<%
+				}
+				%>
 			}
 		);
 	})();
