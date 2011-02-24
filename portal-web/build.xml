@@ -6,6 +6,7 @@
 	<property name="war.file" value="${ant.project.name}" />
 
 	<property name="alloy.file" value="alloy-1.0.1.zip" />
+	<property name="alloy-taglibs.file" value="alloy-taglibs-1.0.war" />
 
 	<!--
 	When upgrading CKEditor, make sure to delete
@@ -173,6 +174,36 @@
 				<!-- Clean up -->
 
 				<delete dir="docroot/html/ALLOY_ZIP" />
+			</then>
+		</if>
+	</target>
+	
+	<target name="build-alloy-taglibs">
+		<if>
+			<not>
+				<uptodate
+					srcfile="third-party/${alloy-taglibs.file}"
+					targetfile="${project.dir}/lib/portal/alloy-taglib.jar"
+				/>
+			</not>
+			<then>
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<mkdir dir="${tstamp.value}" />
+
+				<unzip src="third-party/${alloy-taglibs.file}" dest="${tstamp.value}" overwrite="true" />
+
+				<copy todir="docroot/html/taglib" overwrite="true">
+					<fileset file="${tstamp.value}/html/taglib/init-taglib.jsp" />
+				</copy>
+				
+				<copy todir="${project.dir}/lib/portal" overwrite="true">
+					<fileset dir="${tstamp.value}/WEB-INF/lib" includes="alloy-taglib.jar" />
+				</copy>
+
+				<delete dir="${tstamp.value}" />
 			</then>
 		</if>
 	</target>
@@ -767,6 +798,7 @@ Please set the property "jdk.6.home" in build.properties.
 
 	<target name="deploy">
 		<antcall target="build-alloy" />
+		<antcall target="build-alloy-taglibs" />
 		<antcall target="build-ckeditor" />
 		<antcall target="build-codepress" />
 		<antcall target="build-dtd" />

@@ -4,6 +4,28 @@
 	<import file="../build-common-java.xml" />
 
 	<property name="jar.file" value="${ant.project.name}" />
+	
+	<target name="build-tags">
+		<java
+			classname="com.liferay.alloy.tools.tagbuilder.TagBuilder"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dtagbuilder.tld.dir=${project.dir}/util-taglib/src/META-INF/" />
+			<jvmarg value="-Dtagbuilder.components.xml=${project.dir}/util-taglib/src/com/liferay/taglib/liferay.xml" />
+			<jvmarg value="-Dtagbuilder.components.ext.xml=${project.dir}/util-taglib/src/com/liferay/taglib/aui.xml" />
+			<jvmarg value="-Dtagbuilder.templates.dir=com/liferay/alloy/tools/tagbuilder/templates/" />
+			<jvmarg value="-Dtagbuilder.java.output.dir=${project.dir}/util-taglib/src/com/liferay/taglib/" />
+			<jvmarg value="-Dtagbuilder.java.output.package=com.liferay.taglib" />
+			<jvmarg value="-Dtagbuilder.jsp.docroot.dir=${project.dir}/portal-web/docroot/" />
+			<jvmarg value="-Dtagbuilder.jsp.common.init.path=/html/taglib/init-taglib.jsp" />
+			<jvmarg value="-Dtagbuilder.jsp.common.init.output.dir=${project.dir}/portal-web/docroot/html/taglib/init-taglib.jsp" />
+			<jvmarg value="-Dtagbuilder.jsp.dir=/html/taglib/" />
+			<jvmarg value="-Dtagbuilder.jsp.output.dir=${project.dir}/portal-web/docroot/html/taglib/" />
+		</java>
+	</target>
 
 	<target name="deploy" depends="jar">
 		<if>
