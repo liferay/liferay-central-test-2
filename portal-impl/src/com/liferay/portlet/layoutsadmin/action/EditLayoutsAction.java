@@ -47,6 +47,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -161,12 +162,7 @@ public class EditLayoutsAction extends PortletAction {
 				StagingUtil.unschedulePublishToRemote(actionRequest);
 			}
 
-			String redirect = (String)actionRequest.getAttribute(
-				WebKeys.REDIRECT);
-
-			if (Validator.isNull(redirect)) {
-				redirect = ParamUtil.getString(actionRequest, "pagesRedirect");
-			}
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
 			if ((layout != null) && Validator.isNotNull(oldFriendlyURL)) {
 				ThemeDisplay themeDisplay =

@@ -32,6 +32,7 @@ long layoutId = ((Long)request.getAttribute("edit_pages.jsp-layoutId")).longValu
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+portletURL.setParameter("selPlid", String.valueOf(selPlid));
 
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
@@ -55,7 +56,7 @@ String[][] categorySections = {mainSections};
 
 <aui:form action="<%= editLayoutURL %>" cssClass="edit-layout-form"  enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayout();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="pagesRedirect" type="hidden" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid  %>' />
+	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
@@ -184,6 +185,8 @@ String[][] categorySections = {mainSections};
 		else {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'update';
 		}
+
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value += Liferay.Util.getHistoryParam('<portlet:namespace />');;
 
 		submitForm(document.<portlet:namespace />fm);
 	}
