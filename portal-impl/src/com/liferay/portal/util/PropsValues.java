@@ -700,8 +700,6 @@ public class PropsValues {
 
 	public static final String LIFERAY_HOME = PropsUtil.get(PropsKeys.LIFERAY_HOME);
 
-	public static final boolean LIVE_ONE_SESSION_PER_USER_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LIVE_ONE_SESSION_PER_USER_ENABLED));
-
 	public static final boolean LIVE_USERS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LIVE_USERS_ENABLED));
 
 	public static final boolean LOCALE_DEFAULT_REQUEST = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.LOCALE_DEFAULT_REQUEST));
