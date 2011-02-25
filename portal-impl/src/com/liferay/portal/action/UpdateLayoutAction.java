@@ -163,12 +163,6 @@ public class UpdateLayoutAction extends Action {
 			layoutTypePortlet.movePortletId(
 				userId, portletId, columnId, columnPos);
 		}
-		else if (cmd.equals("template")) {
-			String layoutTemplateId = ParamUtil.getString(
-				request, "layoutTemplateId");
-
-			layoutTypePortlet.setLayoutTemplateId(userId, layoutTemplateId);
-		}
 
 		if (updateLayout) {
 

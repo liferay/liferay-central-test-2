@@ -572,42 +572,6 @@ AUI().add(
 					);
 				}
 
-				var pageTemplate = A.one('#pageTemplate');
-
-				if (pageTemplate) {
-					pageTemplate.on(
-						'click',
-						function(event) {
-							manageContent.hide();
-
-							var manageLayouts = Dockbar.manageLayouts;
-
-							if (!manageLayouts) {
-								manageLayouts = instance.addUnderlay(
-									{
-										className: 'manage-layouts',
-										io: {
-											data: {
-												doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-												p_l_id: themeDisplay.getPlid(),
-												redirect: Liferay.currentURL
-											},
-											uri: themeDisplay.getPathMain() + '/layout_configuration/templates'
-										},
-										name: 'manageLayouts',
-										width: '670px'
-									}
-								);
-							}
-							else {
-								manageLayouts.show();
-							}
-
-							manageLayouts.focus();
-						}
-					);
-				}
-
 				dockBar._menuButtons = dockBar.all('ul.aui-toolbar > li > a, .user-links a, .sign-out a');
 
 				dockBar.delegate(

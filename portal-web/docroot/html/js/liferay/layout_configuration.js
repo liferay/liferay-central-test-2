@@ -6,46 +6,6 @@
 
 	Liferay.provide(
 		LayoutConfiguration,
-		'showTemplates',
-		function() {
-			var instance = this;
-
-			var dialog = instance._layoutDialog;
-
-			if (!dialog) {
-				var url = themeDisplay.getPathMain() + '/layout_configuration/templates';
-
-				var dialog = new A.Dialog(
-					{
-						centered: true,
-						modal: true,
-						title: Liferay.Language.get('layout'),
-						width: 700
-					}
-				).render();
-
-				dialog.plug(
-					A.Plugin.IO,
-					{
-						data: {
-							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-							p_l_id: themeDisplay.getPlid(),
-							redirect: Liferay.currentURL
-						},
-						uri: url
-					}
-				);
-
-				instance._layoutDialog = dialog;
-			}
-
-			dialog.show();
-		},
-		['aui-dialog']
-	);
-
-	Liferay.provide(
-		LayoutConfiguration,
 		'toggle',
 		function(ppid) {
 			var instance = this;

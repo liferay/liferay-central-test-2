@@ -819,8 +819,6 @@
 		<put name="portlet_decorate" value="false" />
 	</definition>
 
-	<definition name="portlet.layout_configuration.templates" path="/portlet/layout_configuration/templates.jsp" />
-
 	<definition name="portlet.layout_configuration.view" extends="portlet.layout_configuration">
 		<put name="portlet_content" value="/portlet/layout_configuration/view.jsp" />
 	</definition>

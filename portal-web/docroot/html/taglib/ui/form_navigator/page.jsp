@@ -184,7 +184,7 @@ if (Validator.isNotNull(historyKey)) {
 </aui:script>
 
 <aui:script use="aui-base">
-	var modifyLinks = A.all('span.modify-link');
+	var modifyLinks = A.all('.modify-link');
 
 	if (modifyLinks) {
 		modifyLinks.on(

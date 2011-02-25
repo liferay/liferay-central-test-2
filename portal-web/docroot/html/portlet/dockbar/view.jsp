@@ -122,10 +122,8 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 							</c:if>
 
 							<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() && !themeDisplay.isStateMaximized() %>">
-								<li class="page-layout">
-									<a href="javascript:;" id="pageTemplate">
-										<liferay-ui:message key="page-layout" />
-									</a>
+								<li class="page-layout use-dialog">
+									<aui:a href='<%= themeDisplay.getURLPageSettings().toString() + "#layout" %>' label="page-layout" title="manage-page" />
 								</li>
 							</c:if>
 

@@ -1442,8 +1442,6 @@
 
 		<!-- Layout Configuration -->
 
-		<action path="/layout_configuration/templates" forward="portlet.layout_configuration.templates" />
-
 		<action path="/layout_configuration/view" forward="portlet.layout_configuration.view" />
 
 		<!-- Layout Prototypes -->
