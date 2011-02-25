@@ -206,7 +206,7 @@ ${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
 		<if>
 			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
-				<loadfile property="domain.xml.content" srcFile="${app.server.glassfish.instance.dir}/config/domain.xml" />
+				<loadfile property="domain.xml.content" srcfile="${app.server.glassfish.instance.dir}/config/domain.xml" />
 
 				<antelope:stringutil string="${domain.xml.content}" property="domain.xml.content.index">
 					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
@@ -311,7 +311,7 @@ ${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
 		<if>
 			<equals arg1="${app.server.type}" arg2="jboss" />
 			<then>
-				<loadfile property="run.conf.content" srcFile="${app.server.bin.dir}/run.conf" />
+				<loadfile property="run.conf.content" srcfile="${app.server.bin.dir}/run.conf" />
 
 				<antelope:stringutil string="${run.conf.content}" property="run.conf.content.index">
 					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
@@ -325,7 +325,7 @@ JAVA_OPTS="$JAVA_OPTS -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true -Djb
 					</then>
 				</if>
 
-				<loadfile property="run.conf.bat.content" srcFile="${app.server.bin.dir}/run.conf.bat" />
+				<loadfile property="run.conf.bat.content" srcfile="${app.server.bin.dir}/run.conf.bat" />
 
 				<antelope:stringutil string="${run.conf.bat.content}" property="run.conf.bat.content.index">
 					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
@@ -431,7 +431,7 @@ $(jetty.home)/lib/liferay/*</echo>
 		<if>
 			<equals arg1="${app.server.type}" arg2="jonas" />
 			<then>
-				<loadfile property="setenv.content" srcFile="${app.server.bin.dir}/setenv" />
+				<loadfile property="setenv.content" srcfile="${app.server.bin.dir}/setenv" />
 
 				<antelope:stringutil string="${setenv.content}" property="setenv.content.index">
 					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
@@ -448,7 +448,7 @@ export JAVA_OPTS]]></replacevalue>
 					</then>
 				</if>
 
-				<loadfile property="setenv.bat.content" srcFile="${app.server.bin.dir}/setenv.bat" />
+				<loadfile property="setenv.bat.content" srcfile="${app.server.bin.dir}/setenv.bat" />
 
 				<antelope:stringutil string="${setenv.bat.content}" property="setenv.bat.content.index">
 					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
@@ -465,7 +465,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 					</then>
 				</if>
 
-				<loadfile property="classloader-default-filtering.xml.content" srcFile="${app.server.dir}/conf/classloader-default-filtering.xml" />
+				<loadfile property="classloader-default-filtering.xml.content" srcfile="${app.server.dir}/conf/classloader-default-filtering.xml" />
 
 				<antelope:stringutil string="${classloader-default-filtering.xml.content}" property="classloader-default-filtering.xml.content.index">
 					<indexof string="net.sf.cglib.*" fromindex="0" />
@@ -557,7 +557,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 					</then>
 				</if>
 
-				<loadfile property="resin.xml.content" srcFile="${app.server.dir}/conf/resin.xml" />
+				<loadfile property="resin.xml.content" srcfile="${app.server.dir}/conf/resin.xml" />
 
 				<antelope:stringutil string="${resin.xml.content}" property="resin.xml.content.index">
 					<indexof string="-Dfile.encoding=UTF-8" fromindex="0" />
@@ -645,7 +645,7 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 					</then>
 				</if>
 
-				<loadfile property="catalina.properties.content" srcFile="${app.server.dir}/conf/catalina.properties" />
+				<loadfile property="catalina.properties.content" srcfile="${app.server.dir}/conf/catalina.properties" />
 
 				<antelope:stringutil string="${catalina.properties.content}" property="catalina.properties.content.index">
 					<indexof string=",${catalina.home}/lib/ext/*.jar" fromindex="0" />

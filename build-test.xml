@@ -20,7 +20,7 @@
 	<property name="pscp.executable" location="${project.dir}/tools/putty/pscp.exe" />
 
 	<target name="append-ant-script">
-		<loadfile property="template.content" srcFile="portal-web/test-ant-templates/${ant.script.template}">
+		<loadfile property="template.content" srcfile="portal-web/test-ant-templates/${ant.script.template}">
 			<filterchain>
 				<expandproperties />
 			</filterchain>
@@ -266,7 +266,7 @@
 		<if>
 			<available file="portal-web/test-ant-scripts/version" />
 			<then>
-				<loadfile property="build-test-ant-scripts.version.old" srcFile="portal-web/test-ant-scripts/version" />
+				<loadfile property="build-test-ant-scripts.version.old" srcfile="portal-web/test-ant-scripts/version" />
 
 				<if>
 					<not>
@@ -1474,7 +1474,7 @@
 	</target>
 
 	<target name="create-ant-script">
-		<loadfile property="template.content" srcFile="portal-web/test-ant-templates/${ant.script.template}">
+		<loadfile property="template.content" srcfile="portal-web/test-ant-templates/${ant.script.template}">
 			<filterchain>
 				<expandproperties />
 			</filterchain>
@@ -1756,7 +1756,7 @@ resource.repositories.root=$${user.home}/liferay</echo>
 			project.setProperty("svn.info.revision.actual", revision);
 		</script>
 
-		<loadfile property="svn.info.revision.valid" srcFile="svn-revision" />
+		<loadfile property="svn.info.revision.valid" srcfile="svn-revision" />
 
 		<if>
 			<not>

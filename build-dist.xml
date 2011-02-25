@@ -378,7 +378,7 @@ app.server.glassfish.zip.url=http://download.java.net/glassfish/v3/release/${app
 				/>
 			</path>
 			<sequential>
-				<loadfile property="pom.file.content" srcFile="@{pom.file}" />
+				<loadfile property="pom.file.content" srcfile="@{pom.file}" />
 
 				<antelope:stringutil string="${pom.file.content}" property="pom.file.content.index">
 					<indexof string="${lp.version}-" fromindex="0" />
