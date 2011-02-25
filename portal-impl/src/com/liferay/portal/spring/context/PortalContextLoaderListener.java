@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
+import com.liferay.portal.kernel.process.ClassPathUtil;
 import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.CharBufferPool;
@@ -76,6 +77,8 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		ReferenceRegistry.releaseReferences();
 
 		InitUtil.init();
+
+		ClassPathUtil.initializeClassPaths(event.getServletContext());
 
 		DirectServletRegistry.clearServlets();
 
