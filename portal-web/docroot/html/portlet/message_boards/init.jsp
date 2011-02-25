@@ -110,7 +110,7 @@ boolean allowAnonymousPosting = MBUtil.isAllowAnonymousPosting(preferences);
 boolean subscribeByDefault = GetterUtil.getBoolean(preferences.getValue("subscribeByDefault", null), PropsValues.MESSAGE_BOARDS_SUBSCRIBE_BY_DEFAULT);
 String messageFormat = GetterUtil.getString(preferences.getValue("messageFormat", MBMessageConstants.DEFAULT_FORMAT));
 boolean enableFlags = GetterUtil.getBoolean(preferences.getValue("enableFlags", null), true);
-boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enableMessageRatings", null), true);
+boolean enableRatings = GetterUtil.getBoolean(preferences.getValue("enableRatings", null), true);
 
 String rssFormatType = RSSUtil.getFormatType(rssFormat);
 double rssFormatVersion = RSSUtil.getFormatVersion(rssFormat);
