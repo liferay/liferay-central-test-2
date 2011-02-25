@@ -293,11 +293,12 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 		long userId, long groupId, java.lang.String articleId, double version,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
-		java.lang.String content)
+		java.lang.String content,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateArticle(userId, groupId, articleId,
-			version, titleMap, descriptionMap, content);
+			version, titleMap, descriptionMap, content, serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
@@ -331,11 +332,12 @@ public class JournalArticleServiceWrapper implements JournalArticleService {
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String content)
+		java.lang.String content,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.updateArticle(groupId, articleId,
-			version, content);
+			version, content, serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(

@@ -845,13 +845,25 @@ public class JournalArticleLocalServiceWrapper
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		long userId, long groupId, java.lang.String articleId, double version,
-		java.util.Map<java.util.Locale, java.lang.String> titleMap,
-		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
-		java.lang.String content)
+		java.lang.String content,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleLocalService.updateArticle(userId, groupId,
-			articleId, version, titleMap, descriptionMap, content);
+			articleId, version, content, serviceContext);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
+		long userId, long groupId, java.lang.String articleId, double version,
+		java.util.Map<java.util.Locale, java.lang.String> titleMap,
+		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
+		java.lang.String content,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _journalArticleLocalService.updateArticle(userId, groupId,
+			articleId, version, titleMap, descriptionMap, content,
+			serviceContext);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
@@ -881,15 +893,6 @@ public class JournalArticleLocalServiceWrapper
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, indexable, smallImage,
 			smallImageURL, smallFile, images, articleURL, serviceContext);
-	}
-
-	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		long userId, long groupId, java.lang.String articleId, double version,
-		java.lang.String content)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _journalArticleLocalService.updateArticle(userId, groupId,
-			articleId, version, content);
 	}
 
 	public void updateAsset(long userId,

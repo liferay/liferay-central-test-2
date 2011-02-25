@@ -400,10 +400,12 @@ public class JournalArticleServiceSoap {
 
 	public static com.liferay.portlet.journal.model.JournalArticleSoap updateArticle(
 		long groupId, java.lang.String articleId, double version,
-		java.lang.String content) throws RemoteException {
+		java.lang.String content,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.updateArticle(groupId,
-					articleId, version, content);
+					articleId, version, content, serviceContext);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}

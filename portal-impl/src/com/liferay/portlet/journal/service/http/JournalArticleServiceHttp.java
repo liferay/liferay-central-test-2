@@ -956,7 +956,8 @@ public class JournalArticleServiceHttp {
 		java.lang.String articleId, double version,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
 		java.util.Map<java.util.Locale, java.lang.String> descriptionMap,
-		java.lang.String content)
+		java.lang.String content,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -965,7 +966,7 @@ public class JournalArticleServiceHttp {
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId,
 					groupId, articleId, version, titleMap, descriptionMap,
-					content);
+					content, serviceContext);
 
 			Object returnObj = null;
 
@@ -1055,7 +1056,8 @@ public class JournalArticleServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
-		double version, java.lang.String content)
+		double version, java.lang.String content,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -1063,7 +1065,7 @@ public class JournalArticleServiceHttp {
 					"updateArticle", _updateArticleParameterTypes25);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					articleId, version, content);
+					articleId, version, content, serviceContext);
 
 			Object returnObj = null;
 
@@ -1255,7 +1257,8 @@ public class JournalArticleServiceHttp {
 		};
 	private static final Class<?>[] _updateArticleParameterTypes23 = new Class[] {
 			long.class, long.class, java.lang.String.class, double.class,
-			java.util.Map.class, java.util.Map.class, java.lang.String.class
+			java.util.Map.class, java.util.Map.class, java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateArticleParameterTypes24 = new Class[] {
 			long.class, java.lang.String.class, double.class,
@@ -1270,7 +1273,8 @@ public class JournalArticleServiceHttp {
 		};
 	private static final Class<?>[] _updateArticleParameterTypes25 = new Class[] {
 			long.class, java.lang.String.class, double.class,
-			java.lang.String.class
+			java.lang.String.class,
+			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateContentParameterTypes26 = new Class[] {
 			long.class, java.lang.String.class, double.class,
