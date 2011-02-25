@@ -52,7 +52,7 @@
 	}
 
 	.vocabulary-category {
-		&:hover, &:focus, .vocabulary-item-actions-trigger:focus {
+		&:hover .vocabulary-item-actions-trigger, &:focus .vocabulary-item-actions-trigger, .vocabulary-item-actions-trigger:focus {
 			clip: auto;
 		}
 	}
