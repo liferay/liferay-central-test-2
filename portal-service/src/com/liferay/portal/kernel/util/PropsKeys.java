@@ -1726,7 +1726,11 @@ public interface PropsKeys {
 	public static final String THEME_VIRTUAL_PATH = "theme.virtual.path";
 
 	public static final String THREAD_DUMP_SPEED_THRESHOLD = "thread.dump.speed.threshold";
-
+	
+	public static final String TIKA_EXTRACT_FORK_PROCESS_ENABLED = "tika.extract.fork.process.enabled";
+	
+	public static final String TIKA_EXTRACT_FORK_PROCESS_MIME_TYPES = "tika.extract.fork.process.mime.types";
+	
 	public static final String TIME_ZONES = "time.zones";
 
 	public static final String TRANSACTION_ISOLATION_COUNTER = "transaction.isolation.counter";

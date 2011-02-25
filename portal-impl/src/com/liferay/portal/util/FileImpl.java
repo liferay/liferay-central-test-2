@@ -15,10 +15,16 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
+import com.liferay.portal.kernel.process.ClassPathUtil;
+import com.liferay.portal.kernel.process.ProcessCallable;
+import com.liferay.portal.kernel.process.ProcessException;
+import com.liferay.portal.kernel.process.ProcessExecutor;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileComparator;
 import com.liferay.portal.kernel.util.StreamUtil;
@@ -240,6 +246,18 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 		try {
 			Tika tika = new Tika();
+
+			if (PropsValues.TIKA_EXTRACT_FORK_PROCESS_ENABLED) {
+				String mimeType = tika.detect(is);
+				if (ArrayUtil.contains(
+					PropsValues.TIKA_EXTRACT_FORK_PROCESS_MIME_TYPES,
+					mimeType)) {
+
+					return ProcessExecutor.synchronizeExecute(
+						new TikaExtractTextProcessCallable(getBytes(is)),
+						ClassPathUtil.getPortalClassPath());
+				}
+			}
 
 			text = tika.parseToString(is);
 		}
@@ -758,5 +776,26 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 	private static Log _log = LogFactoryUtil.getLog(FileImpl.class);
 
 	private static FileImpl _instance = new FileImpl();
+
+	private static class TikaExtractTextProcessCallable
+		implements ProcessCallable<String> {
+
+		public TikaExtractTextProcessCallable(byte[] data) {
+			_data = data;
+		}
+
+		public String call() throws ProcessException {
+			Tika tika = new Tika();
+			try {
+				return tika.parseToString(
+					new UnsyncByteArrayInputStream(_data));
+			}
+			catch (Exception e) {
+				throw new ProcessException(e);
+			}
+		}
+
+		private byte[] _data;
+	}
 
 }

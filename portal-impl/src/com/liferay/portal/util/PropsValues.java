@@ -1186,6 +1186,10 @@ public class PropsValues {
 
 	public static int THREAD_DUMP_SPEED_THRESHOLD = GetterUtil.getInteger(PropsUtil.get(PropsKeys.THREAD_DUMP_SPEED_THRESHOLD));
 
+	public static boolean TIKA_EXTRACT_FORK_PROCESS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.TIKA_EXTRACT_FORK_PROCESS_ENABLED));
+	
+	public static final String[] TIKA_EXTRACT_FORK_PROCESS_MIME_TYPES = PropsUtil.getArray(PropsKeys.TIKA_EXTRACT_FORK_PROCESS_MIME_TYPES);
+	
 	public static int TRANSACTION_ISOLATION_COUNTER = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRANSACTION_ISOLATION_COUNTER));
 
 	public static int TRANSACTION_ISOLATION_PORTAL = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TRANSACTION_ISOLATION_PORTAL));
