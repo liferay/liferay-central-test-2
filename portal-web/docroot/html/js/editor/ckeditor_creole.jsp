@@ -14,8 +14,6 @@
  */
 --%>
 
-<%@ include file="/html/common/init.jsp" %>
-
 <jsp:include page="/html/js/editor/ckeditor.jsp">
 	<jsp:param name="ckEditorConfigFileName" value="ckconfig_creole.jsp" />
 </jsp:include>

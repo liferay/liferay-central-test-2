@@ -69,7 +69,6 @@ CKEDITOR.config.toolbar_creole = [
 	['Source']
 ];
 
-
 CKEDITOR.config.attachments_prefix = '<%= attachmentURLPrefix %>';
 
 CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';

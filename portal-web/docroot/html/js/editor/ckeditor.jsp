@@ -142,7 +142,6 @@ String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFile
 					300
 				);
 
-
 				<%
 				if (Validator.isNotNull(onChangeMethod)) {
 				%>
