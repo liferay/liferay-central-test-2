@@ -29,6 +29,54 @@
 		clear: both;
 	}
 
+	.lfr-table .article-translation-toolbar {
+		background: #DFF4FF url(<%= themeImagesPath %>/journal/language.png) no-repeat 6px 50%;
+		border: 1px solid #A7CEDF;
+		color: #34404F;
+		display: block;
+		margin: 2px auto 14px;
+		padding: 6px 6px 6px 30px;
+
+		label {
+			font-weight: bold;
+		}
+
+		.add-translations-menu {
+			float: right;
+			margin-left: 3em;
+			position: relative;
+			top: -3px;
+		}
+
+		.contains-translations {
+			margin-top: 1em;
+		}
+
+		.journal-article-default-translation {
+			background-color: #B3DAEF;
+			font-weight: bold;
+			padding: 0.3em 0.5em 0.3em;
+			margin: 0 0.2em;
+		}
+
+		.journal-article-translation {
+			background-color: #B3DAEF;
+			border: 1px solid #5FA8FF;
+			color: #444;
+			padding: 0.3em 0.5em 0.3em;
+			margin: 0 0.2em;
+			text-decoration: none;
+
+			&:hover {
+				background-color: #D1E5EF;
+			}
+
+			img {
+				margin-right: 0.3em;
+			}
+		}
+	}
+
 	.subscribe-link {
 		float: right;
 		margin-bottom: 1em;
@@ -262,6 +310,8 @@
 	.journal-article-buttons {
 		display: none;
 	}
+
+
 }
 
 .portlet-journal-edit-mode {
