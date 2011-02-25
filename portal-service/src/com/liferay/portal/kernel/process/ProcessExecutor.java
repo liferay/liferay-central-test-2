@@ -26,40 +26,9 @@ import java.io.Serializable;
  */
 public class ProcessExecutor {
 
-	public static <T extends Serializable> T synchronizeExecute(
-			ProcessCallable<T> processCallable, String classPath)
-		throws ProcessException {
-		ProcessBuilder processBuilder = new ProcessBuilder(
-			"java", "-cp", classPath, ProcessExecutor.class.getName());
-
-		try {
-			Process process = processBuilder.start();
-
-			_writeObject(process.getOutputStream(), processCallable, true);
-
-			int exitCode = process.waitFor();
-			if (exitCode != 0) {
-				throw new ProcessException(
-					"Sub-process terminated exceptionally, exit code : " +
-						exitCode);
-			}
-
-			InputStream errorStream = process.getErrorStream();
-			if (errorStream.available() > 0) {
-				ProcessException processException =
-					(ProcessException)_readObject(errorStream, true);
-				throw processException;
-			}
-
-			return (T)_readObject(process.getInputStream(), true);
-		}
-		catch (Exception e) {
-			throw new ProcessException(e);
-		}
-	}
-
 	public static void main(String[] arguments)
-		throws IOException, ClassNotFoundException {
+		throws ClassNotFoundException, IOException {
+
 		try {
 			ProcessCallable<?> processCallable =
 				(ProcessCallable<?>)_readObject(System.in, false);
@@ -73,10 +42,47 @@ public class ProcessExecutor {
 		}
 	}
 
+	public static <T extends Serializable> T synchronizeExecute(
+			ProcessCallable<T> processCallable, String classPath)
+		throws ProcessException {
+
+		try {
+			ProcessBuilder processBuilder = new ProcessBuilder(
+				"java", "-cp", classPath, ProcessExecutor.class.getName());
+
+			Process process = processBuilder.start();
+
+			_writeObject(process.getOutputStream(), processCallable, true);
+
+			int exitCode = process.waitFor();
+
+			if (exitCode != 0) {
+				throw new ProcessException(
+					"Subprocess terminated with exit code " + exitCode);
+			}
+
+			InputStream errorInputStream = process.getErrorStream();
+
+			if (errorInputStream.available() > 0) {
+				ProcessException processException =
+					(ProcessException)_readObject(errorInputStream, true);
+
+				throw processException;
+			}
+
+			return (T)_readObject(process.getInputStream(), true);
+		}
+		catch (Exception e) {
+			throw new ProcessException(e);
+		}
+	}
+
 	private static Object _readObject(InputStream inputStream, boolean close)
-		throws IOException, ClassNotFoundException {
+		throws ClassNotFoundException, IOException {
+
 		ObjectInputStream objectInputStream = new ObjectInputStream(
 			inputStream);
+
 		try {
 			return objectInputStream.readObject();
 		}
@@ -90,8 +96,10 @@ public class ProcessExecutor {
 	private static void _writeObject(
 			OutputStream outputStream, Object object, boolean close)
 		throws IOException {
+
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
 			outputStream);
+
 		try {
 			objectOutputStream.writeObject(object);
 		}

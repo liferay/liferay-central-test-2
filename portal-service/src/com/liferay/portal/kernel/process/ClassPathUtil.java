@@ -21,8 +21,11 @@ import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.File;
+
+import java.net.URL;
 
 import javax.servlet.ServletContext;
 
@@ -43,7 +46,8 @@ public class ClassPathUtil {
 		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
 		if (classLoader == null) {
-			_log.error("Portal ClassLoader has not been initialized yet!");
+			_log.error("Portal ClassLoader is null");
+
 			return;
 		}
 
@@ -54,8 +58,9 @@ public class ClassPathUtil {
 
 		sb.append(_globalClassPath);
 		sb.append(StringPool.COLON);
-		sb.append(_buildClassPath(
-			classLoader, "com.liferay.portal.servlet.MainServlet"));
+		sb.append(
+			_buildClassPath(
+				classLoader, "com.liferay.portal.servlet.MainServlet"));
 		sb.append(StringPool.COLON);
 		sb.append(servletContext.getRealPath("").concat("/WEB-INF/classes"));
 
@@ -64,24 +69,33 @@ public class ClassPathUtil {
 
 	private static String _buildClassPath(
 		ClassLoader classloader, String className) {
-		String relativePath = className.replace(
-			CharPool.PERIOD, CharPool.SLASH).concat(".class");
-		String fullPath = classloader.getResource(relativePath).getPath();
 
-		int index = -1;
-		if (!fullPath.startsWith("file:") ||
-			((index = fullPath.indexOf(CharPool.EXCLAMATION)) == -1)) {
-			_log.error("Class " + className +
-				" is not loaded from jar file.");
+		String path = StringUtil.replace(
+			className, CharPool.PERIOD, CharPool.SLASH);
+
+		path = path.concat(".class");
+
+		URL url = classloader.getResource(path);
+
+		path = url.getPath();
+
+		int pos = -1;
+
+		if (!path.startsWith("file:") ||
+			((pos = path.indexOf(CharPool.EXCLAMATION)) == -1)) {
+
+			_log.error("Class " + className + " is not loaded from a JAR file");
+
 			return StringPool.BLANK;
 		}
 
-		index = fullPath.lastIndexOf(CharPool.SLASH, index);
+		pos = path.lastIndexOf(CharPool.SLASH, pos);
 
-		File dir = new File(fullPath.substring("file:".length(), index));
+		File dir = new File(path.substring("file:".length(), pos));
 
 		if (!dir.isDirectory()) {
-			_log.error(dir.toString() + " is not a directory.");
+			_log.error(dir.toString() + " is not a directory");
+
 			return StringPool.BLANK;
 		}
 
@@ -102,7 +116,6 @@ public class ClassPathUtil {
 	private static Log _log = LogFactoryUtil.getLog(ClassPathUtil.class);
 
 	private static String _globalClassPath;
-
 	private static String _portalClassPath;
 
 }
