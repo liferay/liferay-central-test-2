@@ -158,7 +158,7 @@ public class PortletDisplay implements Serializable {
 		slave.setURLRefresh(_urlRefresh);
 		slave.setWebDAVEnabled(_webDAVEnabled);
 
-		slave._title = _title;		
+		slave._title = _title;
 	}
 
 	public int getColumnCount() {
