@@ -302,9 +302,7 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				createRepositoryImpl(repositoryId, classNameId);
 			}
 			catch (Exception e) {
-				if (_log.isErrorEnabled()) {
-					_log.error(e, e);
-				}
+				_log.error(e, e);
 
 				throw new InvalidRepositoryException(e);
 			}
@@ -483,6 +481,9 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 		return repositoryEntryId;
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(
+		RepositoryServiceImpl.class);
+
 	private long _defaultClassNameId;
 	private Map<Long, LocalRepository> _localRepositoriesByRepositoryEntryId =
 		new ConcurrentHashMap<Long, LocalRepository>();
@@ -494,8 +495,5 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	private Map<Long, com.liferay.portal.kernel.repository.Repository>
 		_repositoriesByRepositoryId = new ConcurrentHashMap
 			<Long, com.liferay.portal.kernel.repository.Repository>();
-
-	private static Log _log = LogFactoryUtil.getLog(
-		RepositoryServiceImpl.class);
 
 }

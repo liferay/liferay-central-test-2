@@ -67,7 +67,7 @@ public class CMISWebServicesRepository extends CMISRepository {
 	public boolean isAtomPub() {
 		return false;
 	}
-	
+
 	public boolean isWebServices() {
 		return true;
 	}

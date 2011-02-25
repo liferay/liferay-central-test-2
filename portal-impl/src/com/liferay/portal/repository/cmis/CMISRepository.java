@@ -1007,6 +1007,40 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		throw new UnsupportedOperationException();
 	}
 
+	protected void checkRepository(
+			Map<String, String> parameters,
+			UnicodeProperties typeSettingsProperties)
+		throws PortalException, RepositoryException {
+
+		String parameterKey = CMISAtomPubRepository.REPOSITORY_ID;
+
+		if (isWebServices()) {
+			parameterKey = CMISWebServicesRepository.REPOSITORY_ID;
+		}
+
+		if (!typeSettingsProperties.containsKey(parameterKey)) {
+			org.apache.chemistry.opencmis.client.api.Repository cmisRepository =
+				_sessionFactory.getRepositories(parameters).get(0);
+
+			typeSettingsProperties.setProperty(
+				parameterKey, cmisRepository.getId());
+
+			try {
+				Repository repository = RepositoryUtil.findByPrimaryKey(
+					getRepositoryId());
+
+				repository.setTypeSettingsProperties(typeSettingsProperties);
+
+				RepositoryUtil.update(repository, false);
+			}
+			catch (Exception e) {
+				throw new RepositoryException(e);
+			}
+		}
+
+		putParameter(parameters, SessionParameter.REPOSITORY_ID, parameterKey);
+	}
+
 	protected org.apache.chemistry.opencmis.client.api.Folder getCmisFolder(
 			Session session, long folderId)
 		throws PortalException, SystemException {
@@ -1281,7 +1315,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected Session getSession() throws PortalException, RepositoryException {
-		Session session = _session.get();
+		Session session = _sessionThreadLocal.get();
 
 		if (session != null) {
 			return session;
@@ -1344,43 +1378,9 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		checkRepository(parameters, typeSettingsProperties);
 
-		_session.set(_sessionFactory.createSession(parameters));
+		_sessionThreadLocal.set(_sessionFactory.createSession(parameters));
 
-		return _session.get();
-	}
-
-	protected void checkRepository(
-			Map<String, String> parameters,
-			UnicodeProperties typeSettingsProperties)
-		throws PortalException, RepositoryException {
-
-		String parameterKey = CMISAtomPubRepository.REPOSITORY_ID;
-
-		if (isWebServices()) {
-			parameterKey = CMISWebServicesRepository.REPOSITORY_ID;
-		}
-
-		if (!typeSettingsProperties.containsKey(parameterKey)) {
-			org.apache.chemistry.opencmis.client.api.Repository cmisRepository =
-				_sessionFactory.getRepositories(parameters).get(0);
-
-			typeSettingsProperties.setProperty(
-				parameterKey, cmisRepository.getId());
-
-			try {
-				Repository repository = RepositoryUtil.findByPrimaryKey(
-					getRepositoryId());
-
-				repository.setTypeSettingsProperties(typeSettingsProperties);
-
-				RepositoryUtil.update(repository, false);
-			}
-			catch (Exception e) {
-				throw new RepositoryException(e);
-			}
-		}
-
-		putParameter(parameters, SessionParameter.REPOSITORY_ID, parameterKey);
+		return _sessionThreadLocal.get();
 	}
 
 	protected void getSubfolderIds(
@@ -1532,7 +1532,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			RepositoryEntryUtil.update(repositoryEntry, false);
 		}
 	}
-
 	protected void validateTitle(Session session, long folderId, String title)
 		throws PortalException, SystemException {
 
@@ -1549,8 +1548,9 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
-	private static ThreadLocal<Session> _session =
+	private static ThreadLocal<Session> _sessionThreadLocal =
 		new AutoResetThreadLocal<Session>(CMISRepository.class + "._session");
+
+	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
 
 }
