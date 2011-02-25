@@ -118,8 +118,10 @@ public class LiferayDeployerFactory implements DeployerFactory {
 			"deployerFactory");
     }
     
-    public Deployer getDeployer(DeploymentVersion deploymentVersion, Server server) {
-        Deployer wrappedDeployer = defaultDeployerFactory.getDeployer(
+    public Deployer getDeployer(
+		DeploymentVersion deploymentVersion, Server server) {
+
+		Deployer wrappedDeployer = defaultDeployerFactory.getDeployer(
 			deploymentVersion, server)
         
         return new LiferayDeployer(

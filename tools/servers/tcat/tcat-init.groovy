@@ -4,6 +4,8 @@ import org.mule.galaxy.Item
 import org.mule.galaxy.NotFoundException
 import org.mule.galaxy.Registry
 import org.mule.galaxy.impl.jcr.JcrUtil
+import org.mule.galaxy.script.Script;
+import org.mule.galaxy.script.ScriptManager
 import org.mule.galaxy.type.TypeManager;
 import com.mulesoft.tcat.ServerProfileManager;
 
@@ -12,14 +14,19 @@ import org.springmodules.jcr.JcrCallback
 
 import javax.jcr.RepositoryException
 import javax.jcr.Session
+import org.mule.galaxy.util.IOUtils
 
 /**
  * This tcat-init.groovy script initializes the TCat admin server by
- * first loading server profiles and then loading web applications.
+ * loading server profiles, console scripts, and web applications.
  *
  * This script must be placed into ${CATALINA_HOME}.  The TCat admin server
  * will execute the script on first startup and after successful execution,
  * delete it.
+ *
+ * The script loads console groovy scripts from:
+ * ${CATALINA_HOME}/tcat_init/scripts.  The scripts will be available in the
+ * TCat console Admin Shell.
  *
  * The script will load profiles from: ${CATALINA_HOME}/tcat_init/profiles.
  * Profiles zip files must be named liferay-portal-tcat-profile-VERSION.zip.
@@ -63,11 +70,14 @@ class InitializeLiferayDeployment implements JcrCallback {
         // Register the local Tcat agent.
         //installBuilder.registerConsoleAgent("TcatServer")
 
-        // Import the Liferay server profile into the Tcat console repository.
+        // Import the Liferay server profile into the Tcat repository.
 		_loadServerProfiles(installBuilder);
 
-        // Loop through all WAR files and add them to the Tcat console repository.
+        // Loop through all WAR files and add them to the Tcat repository.
 		_loadWebapps(installBuilder);
+
+        // Loop through all scripts and add them to Tcat console
+		_loadScripts(installBuilder);
 
         return "Completed Initialization";
     }
@@ -101,6 +111,47 @@ class InitializeLiferayDeployment implements JcrCallback {
 
 			serverProfileManager.importProfile(
 				new FileInputStream(file), profileWorkspaceItem);
+		}
+	}
+
+	private void _loadScripts(InstallBuilder installBuilder) {
+		println("Loading TCat Console Scripts...");
+
+		def scriptsDir = new File("tcat_init/scripts");
+
+		def scriptManager =
+			(ScriptManager)_applicationContext.getBean(
+				"scriptManager");
+
+		for (File file : scriptsDir.listFiles()) {
+			String scriptName = file.name;
+			if (!scriptName.contains(".groovy")) {
+				continue;
+			}
+
+			println("Loading Script: " + scriptName);
+
+			String friendlyName = scriptName.substring(
+				0, scriptName.indexOf(".groovy"));
+
+			List scripts = scriptManager.find("name", friendlyName);
+
+			FileInputStream fis = new FileInputStream(file);
+
+			Script script = null;
+
+			if(!scripts.isEmpty()) {
+				script = (Script)scripts.get(0);
+			}
+			else {
+				script = new Script();
+				script.setName(friendlyName);
+			}
+			script.setRunOnStartup(true);
+
+			script.setScript(IOUtils.toString(fis));
+
+			scriptManager.save(script);
 		}
 	}
 
