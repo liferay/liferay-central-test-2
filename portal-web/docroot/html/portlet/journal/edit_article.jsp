@@ -175,10 +175,17 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 }
 
 String languageId = LanguageUtil.getLanguageId(request);
-
 String defaultLanguageId = ParamUtil.getString(request, "defaultLanguageId");
+String toLanguageId = ParamUtil.getString(request, "toLanguageId");
 
-if (article == null) {
+boolean translate = false;
+
+if (Validator.isNotNull(toLanguageId)) {
+	translate = true;
+	languageId = toLanguageId;
+}
+
+if (article == null && Validator.isNull(defaultLanguageId)) {
 	defaultLanguageId = languageId;
 }
 else {
@@ -198,7 +205,12 @@ if (article != null) {
 		content = article.getContent();
 	}
 
-	content = JournalArticleImpl.getContentByLocale(content, Validator.isNotNull(structureId), languageId);
+	if (!translate) {
+		content = JournalArticleImpl.getContentByLocale(content, Validator.isNotNull(structureId), defaultLanguageId);
+	}
+	else {
+		content = JournalArticleImpl.getContentByLocale(content, Validator.isNotNull(structureId), toLanguageId);
+	}
 }
 else {
 	content = ParamUtil.getString(request, "content");
@@ -237,6 +249,10 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<liferay-util:param name="tabs1" value="content" />
 </liferay-util:include>
 
+<div class="portlet-msg-info aui-helper-hidden" id="<portlet:namespace />translationsMessage">
+	<liferay-ui:message key="the-changes-in-your-translations-will-be-available-once-the-content-is-published" />
+</div>
+
 <aui:form enctype="multipart/form-data" method="post" name="fm2">
 	<input name="groupId" type="hidden" value="" />
 	<input name="articleId" type="hidden" value="" />
@@ -253,6 +269,20 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<portlet:param name="struts_action" value="/journal/edit_article" />
 </portlet:renderURL>
 
+<portlet:renderURL var="editArticleRenderPopUpURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+	<portlet:param name="articleId" value="<%= articleId %>" />
+	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+	<portlet:param name="struts_action" value="/journal/edit_article" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
+</portlet:renderURL>
+
+<portlet:renderURL var="updateDefaultLanguageURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
+	<portlet:param name="struts_action" value="/journal/edit_article" />
+	<portlet:param name="articleId" value="<%= articleId %>" />
+	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
+</portlet:renderURL>
+
 <aui:form action="<%= editArticleActionURL %>" enctype="multipart/form-data" method="post" name="fm1">
 	<aui:input name="portletResource" type="hidden" value="<%= portletResource %>" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
@@ -265,20 +295,16 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
 	<aui:input name="version" type="hidden" value="<%= version %>" />
 	<aui:input name="content" type="hidden" />
-	<aui:input name="defaultLocale" type="hidden" value="<%= defaultLanguageId %>" />
 	<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
 	<aui:input name="articleURL" type="hidden" value="<%= editArticleRenderURL %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
 	<aui:input name="deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 	<aui:input name="expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
+	<aui:input name="languageId" type="hidden" value="<%= languageId %>" />
 
 	<aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
 
-	<%
-	boolean localizationEnabled = GetterUtil.getBoolean(SessionClicks.get(request, "liferay_journal_localization", Boolean.TRUE.toString()));
-	%>
-
-	<table class="lfr-table <%= localizationEnabled ? StringPool.BLANK : "localization-disabled" %>" id="<portlet:namespace />journalArticleWrapper" width="100%">
+	<table class="lfr-table" id="<portlet:namespace />journalArticleWrapper" width="100%">
 	<tr>
 		<td class="lfr-top">
 			<liferay-ui:error exception="<%= ArticleContentException.class %>" message="please-enter-valid-content" />
@@ -307,104 +333,137 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							</c:choose>
 						</c:when>
 						<c:otherwise>
-							<aui:workflow-status id="<%= String.valueOf(article.getArticleId()) %>" status="<%= article.getStatus() %>" version="<%= String.valueOf(article.getVersion()) %>" />
+							<c:if test="<%= !translate %>">
+								<aui:workflow-status id="<%= String.valueOf(article.getArticleId()) %>" status="<%= article.getStatus() %>" version="<%= String.valueOf(article.getVersion()) %>" />
+							</c:if>
 						</c:otherwise>
 					</c:choose>
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<aui:input bean="<%= article %>" model="<%= JournalArticle.class %>" label="name" name="title" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<aui:input cssClass="journal-article-localized-checkbox" disabled="<%= article == null %>" label="localized" name="enableLocalization" type="checkbox" value="<%= localizationEnabled %>" />
-				</td>
-			</tr>
-			<tr class="journal-article-language-options">
-				<td>
-					<input name="<portlet:namespace />lastLanguageId" type="hidden" value="<%= languageId %>" />
-
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<aui:select disabled="<%= article == null %>" id="languageIdSelect" label="language" name="languageId">
-
-								<%
-								Locale[] locales = LanguageUtil.getAvailableLocales();
-
-								for (int i = 0; i < locales.length; i++) {
-								%>
-
-									<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= languageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
-
-								<%
-								}
-								%>
-
-							</aui:select>
-						</td>
-						<td>
-							<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-								<aui:button name="removeArticleLocaleButton" onClick='<%= renderResponse.getNamespace() + "removeArticleLocale();" %>' value="remove" />
-							</c:if>
-						</td>
-						<td>
-							<table class="lfr-table">
-							<tr>
-								<td>
-									<aui:select disabled="<%= article == null %>" id="defaultLanguageIdSelect" label="default-language" name="defaultLanguageId">
+				<td class="article-translation-toolbar">
+					<div>
+						<c:choose>
+							<c:when test="<%= !translate %>">
+								<c:if test="<%= Validator.isNotNull(articleId) %>">
+									<liferay-ui:icon-menu
+										align="auto"
+										cssClass="add-translations-menu"
+										direction="right"
+										icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
+										message='<%= LanguageUtil.get(pageContext, "add-translation") %>'
+										showArrow='<%= true %>'
+										showWhenSingleIcon="<%= true %>"
+									>
 
 										<%
-										if ((availableLocales != null) && (availableLocales.length > 0)) {
-											boolean wasLanguageId = false;
+										Locale[] locales = LanguageUtil.getAvailableLocales();
 
-											for (int i = 0; i < availableLocales.length; i++) {
-												if (availableLocales[i].equals(languageId)) {
-													wasLanguageId = true;
+										for (int i = 0; i < locales.length; i++) {
+											if (ArrayUtil.contains(article.getAvailableLocales(), LocaleUtil.toLanguageId(locales[i]))) {
+												continue;
+											}
+
+											String taglibEditArticleURL = HttpUtil.addParameter(editArticleRenderPopUpURL.toString(), renderResponse.getNamespace() + "toLanguageId", LocaleUtil.toLanguageId(locales[i]));
+											String taglibEditURL = "javascript:Liferay.Util.openIframePopUp('','', '" + taglibEditArticleURL + "', '" + renderResponse.getNamespace() + LocaleUtil.toLanguageId(locales[i]) + "','" + LanguageUtil.get(pageContext, "web-content-translation") + "');";
+										%>
+
+											<liferay-ui:icon
+												image='<%= "../language/" + LocaleUtil.toLanguageId(locales[i]) %>'
+												message="<%= locales[i].getDisplayName(locale) %>"
+												url="<%= taglibEditURL %>"
+											/>
+
+										<%
+										}
+										%>
+
+									</liferay-ui:icon-menu>
+								</c:if>
+
+								<label for="<portlet:namespace />defaultLanguageId"><liferay-ui:message key="web-content-default-language" /></label>:
+
+								<span class="article-default-language journal-article-default-translation" id="<portlet:namespace />textLanguageId">
+									<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + defaultLanguageId + ".png" %>' />
+
+									<%= LocaleUtil.fromLanguageId(defaultLanguageId).getDisplayName(locale) %>
+								</span>
+
+								<liferay-ui:icon-help message="default-language-help" />
+
+								<a href="javascript:;" id="<portlet:namespace />changeLanguageId"><liferay-ui:message key="change" /></a>
+
+								<aui:select inputCssClass="aui-helper-hidden" id="defaultLocale" inlineField="<%= true %>" label="" name="defaultLanguageId">
+									<%
+									Locale[] locales = LanguageUtil.getAvailableLocales();
+
+									for (int i = 0; i < locales.length; i++) {
+									%>
+
+										<aui:option label="<%= locales[i].getDisplayName(locale) %>" selected="<%= defaultLanguageId.equals(LocaleUtil.toLanguageId(locales[i])) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
+
+									<%
+									}
+									%>
+								</aui:select>
+							</c:when>
+							<c:otherwise>
+								<aui:input id="defaultLocale" name="defaultLanguageId" type="hidden" value="<%= defaultLanguageId %>" />
+							</c:otherwise>
+						</c:choose>
+					</div>
+
+					<c:if test="<%= Validator.isNotNull(articleId) %>">
+						<%
+						String[] translations = article.getAvailableLocales();
+						%>
+
+						<div class='<%= (!translate && (translations.length > 1)) ? "contains-translations" :"" %>' id="<portlet:namespace />availableTranslationContainer">
+							<c:choose>
+								<c:when test="<%= translate %>">
+									<liferay-util:buffer var="languageLabel">
+										<%= LocaleUtil.fromLanguageId(toLanguageId).getDisplayName(locale) %>
+
+										<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + toLanguageId + ".png" %>' />
+									</liferay-util:buffer>
+
+									<%= LanguageUtil.format(pageContext, "translating-web-content-to-x", languageLabel) %>
+
+									<aui:input name="toLanguageId" type="hidden" value="<%= toLanguageId %>" />
+								</c:when>
+								<c:otherwise>
+									<span class='available-translations<%= (translations.length > 1) ? "" : " aui-helper-hidden" %>' id="<portlet:namespace />availableTranslationsLinks">
+										<label><liferay-ui:message key="available-translations" /></label>
+
+											<%
+											for (int i = 0; i < translations.length; i++) {
+												if (translations[i].equals(defaultLanguageId)){
+													continue;
 												}
 
-												Locale availableLocale = LocaleUtil.fromLanguageId(availableLocales[i]);
-										%>
+												String editTranslationURL = HttpUtil.addParameter(editArticleRenderPopUpURL.toString(), renderResponse.getNamespace() + "toLanguageId", translations[i]);
+											%>
 
-												<aui:option label="<%= availableLocale.getDisplayName(availableLocale) %>" selected="<%= availableLocales[i].equals(defaultLanguageId) %>" value="<%= availableLocales[i] %>" />
+											<a class="journal-article-translation journal-article-translation-<%= translations[i] %>" href="javascript:;" onClick="Liferay.Util.openIframePopUp('', '', '<%= editTranslationURL %>', '<portlet:namespace /><%= translations[i] %>', '<%= LanguageUtil.get(pageContext, "web-content-translation") %>');">
+												<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + translations[i] + ".png" %>' />
 
-										<%
-											}
-
-											if (!wasLanguageId) {
-												Locale languageLocale = LocaleUtil.fromLanguageId(languageId);
-										%>
-
-												<aui:option label="<%= languageLocale.getDisplayName(languageLocale) %>" value="<%= languageId %>" />
-
-										<%
-											}
-										}
-										else {
-										%>
-
-											<aui:option label="<%= defaultLocale.getDisplayName(defaultLocale) %>" value="<%= defaultLanguageId %>" />
+												<%= LocaleUtil.fromLanguageId(translations[i]).getDisplayName(locale) %>
+											</a>
 
 										<%
 										}
 										%>
 
-									</aui:select>
-
-									<c:if test="<%= article == null %>">
-										<aui:input name="defaultLanguageId" type="hidden" value="<%= defaultLanguageId %>" />
-									</c:if>
-								</td>
-							</tr>
-							</table>
-						</td>
-					</tr>
-					</table>
+									</span>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</c:if>
 				</td>
 			</tr>
 			</table>
+
+			<aui:input label="name" languageId="<%= (translate) ? toLanguageId : defaultLanguageId %>" name="title" />
 
 			<div class="journal-article-container" id="<portlet:namespace />journalArticleContainer">
 				<c:choose>
@@ -426,7 +485,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 												<liferay-ui:input-editor name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="liferay-article" onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>' width="100%" />
 											</div>
 
-											<aui:input cssClass="journal-article-localized-checkbox" disabled="<%= article == null %>" label="localized" name="localized" type="checkbox" value="<%= ((article != null) && (article.getAvailableLocales().length > 1)) %>" />
+											<aui:input cssClass="journal-article-localized-checkbox" label="localizable" name="localized" type="hidden" value="<%= true %>" />
 
 											<div class="journal-article-required-message portlet-msg-error">
 												<liferay-ui:message key="this-field-is-required" />
@@ -453,50 +512,20 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 						Document xsdDoc = SAXReaderUtil.read(structure.getMergedXsd());
 
 						if (contentDoc != null) {
-						%>
-
-							<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(defaultLanguageId) %>" />
-
-							<%
-							boolean languageFound = false;
-
 							if ((availableLocales != null) && (availableLocales.length > 0)) {
 								for (int i = 0; i < availableLocales.length ; i++) {
-									if (!availableLocales[i].equals(defaultLanguageId)) {
-							%>
+						%>
 
-										<input name="<portlet:namespace />available_locales" type="hidden" value="<%= availableLocales[i] %>" />
+									<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escapeAttribute(availableLocales[i]) %>" />
 
-										<aui:script>
-											document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
-										</aui:script>
-
-									<%
-									}
-									else{
-									%>
-
-										<aui:script>
-											document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[<portlet:namespace />getChoice('<%= availableLocales[i] %>')].className = 'focused';
-										</aui:script>
-
-							<%
-									}
-
-									if (availableLocales[i].equals(languageId)) {
-										languageFound = true;
-									}
+						<%
 								}
 							}
 
-							if (!languageFound && !languageId.equals(defaultLanguageId)) {
-							%>
+							if (translate) {
+						%>
 
 								<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>" />
-
-								<aui:script>
-									document.<portlet:namespace />fm1.<portlet:namespace />removeArticleLocaleButton.disabled = true;
-								</aui:script>
 
 						<%
 							}
@@ -519,7 +548,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					</c:otherwise>
 				</c:choose>
 
-				<aui:input inlineLabel="left" label="searchable" name="indexable" />
+				<c:if test="<%= !translate %>">
+					<aui:input inlineLabel="left" label="searchable" name="indexable" />
+				</c:if>
 
 				<c:if test="<%= article == null %>">
 					<aui:field-wrapper cssClass="journal-article-permissions" label="permissions">
@@ -545,71 +576,75 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
 
 				<aui:fieldset>
-					<aui:input name="description" />
+					<aui:input name="description" languageId="<%= (translate) ? toLanguageId : defaultLanguageId %>" />
 
-					<aui:input inlineLabel="left" label="use-small-image" name="smallImage" />
+					<c:if test="<%= !translate %>">
+						<aui:input inlineLabel="left" label="use-small-image" name="smallImage" />
 
-					<aui:input label="small-image-url" name="smallImageURL" />
+						<aui:input label="small-image-url" name="smallImageURL" />
 
-					<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
+						<span style="font-size: xx-small;">-- <%= LanguageUtil.get(pageContext, "or").toUpperCase() %> --</span>
 
-					<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
+						<aui:input cssClass="lfr-input-text-container" label="small-image" name="smallFile" type="file" />
 
-					<liferay-ui:custom-attributes-available className="<%= JournalArticle.class.getName() %>">
-						<liferay-ui:custom-attribute-list
-							className="<%= JournalArticle.class.getName() %>"
-							classPK="<%= (article != null) ? article.getPrimaryKey() : 0 %>"
-							editable="<%= true %>"
-							label="<%= true %>"
-						/>
-					</liferay-ui:custom-attributes-available>
+						<liferay-ui:custom-attributes-available className="<%= JournalArticle.class.getName() %>">
+							<liferay-ui:custom-attribute-list
+								className="<%= JournalArticle.class.getName() %>"
+								classPK="<%= (article != null) ? article.getPrimaryKey() : 0 %>"
+								editable="<%= true %>"
+								label="<%= true %>"
+							/>
+						</liferay-ui:custom-attributes-available>
+					</c:if>
 
 				</aui:fieldset>
 			</liferay-ui:panel>
 
 			<br />
 
-			<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalCategorizationPanel" persistState="<%= true %>" title="categorization">
-				<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
+			<c:if test="<%= !translate %>">
+				<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalCategorizationPanel" persistState="<%= true %>" title="categorization">
+					<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 
-				<aui:fieldset>
-					<aui:select name="type" showEmptyOption="<%= true %>">
+					<aui:fieldset>
+						<aui:select name="type" showEmptyOption="<%= true %>">
+
+							<%
+							for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
+							%>
+
+								<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" />
+
+							<%
+							}
+							%>
+
+						</aui:select>
 
 						<%
-						for (int i = 0; i < JournalArticleConstants.TYPES.length; i++) {
-						%>
+						long classPK = 0;
 
-							<aui:option label="<%= JournalArticleConstants.TYPES[i] %>" selected="<%= type.equals(JournalArticleConstants.TYPES[i]) %>" />
+						if (article != null) {
+							classPK = article.getResourcePrimKey();
 
-						<%
+							if (!article.isApproved() && (article.getVersion() != JournalArticleConstants.DEFAULT_VERSION)) {
+								try {
+									AssetEntryLocalServiceUtil.getEntry(JournalArticle.class.getName(), article.getPrimaryKey());
+
+									classPK = article.getPrimaryKey();
+								}
+								catch (NoSuchEntryException nsee) {
+								}
+							}
 						}
 						%>
 
-					</aui:select>
+						<aui:input classPK="<%= classPK %>" name="categories" type="assetCategories" />
 
-					<%
-					long classPK = 0;
-
-					if (article != null) {
-						classPK = article.getResourcePrimKey();
-
-						if (!article.isApproved() && (article.getVersion() != JournalArticleConstants.DEFAULT_VERSION)) {
-							try {
-								AssetEntryLocalServiceUtil.getEntry(JournalArticle.class.getName(), article.getPrimaryKey());
-
-								classPK = article.getPrimaryKey();
-							}
-							catch (NoSuchEntryException nsee) {
-							}
-						}
-					}
-					%>
-
-					<aui:input classPK="<%= classPK %>" name="categories" type="assetCategories" />
-
-					<aui:input classPK="<%= classPK %>" name="tags" type="assetTags" />
-				</aui:fieldset>
-			</liferay-ui:panel>
+						<aui:input classPK="<%= classPK %>" name="tags" type="assetTags" />
+					</aui:fieldset>
+				</liferay-ui:panel>
+			</c:if>
 
 			<br />
 
@@ -666,35 +701,56 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				}
 				%>
 
-				<c:if test="<%= hasSavePermission %>">
-					<aui:button name="saveButton" value="<%= saveButtonLabel %>" />
+				<c:choose>
+					<c:when test="<%= !translate %>">
+						<c:if test="<%= hasSavePermission %>">
+							<aui:button name="saveButton" value="<%= saveButtonLabel %>" />
 
-					<aui:button disabled="<%= pending %>" name="publishButton" value="<%= publishButtonLabel %>" />
-				</c:if>
+							<aui:button disabled="<%= pending %>" name="publishButton" value="<%= publishButtonLabel %>" />
+						</c:if>
 
-				<c:if test="<%= Validator.isNotNull(structureId) %>">
-					<aui:button name="previewArticleButton" value="preview" />
-				</c:if>
+						<c:if test="<%= Validator.isNotNull(structureId) %>">
+							<aui:button name="previewArticleButton" value="preview" />
+						</c:if>
 
-				<c:if test="<%= structure != null %>">
-					<aui:button name="downloadArticleContentButton" value="download" />
-				</c:if>
+								<c:if test="<%= structure != null %>">
+							<aui:button name="downloadArticleContentButton" value="download" />
+						</c:if>
 
-				<c:if test="<%= (article != null) && !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
-					<aui:button disabled="<%= !article.isApproved() %>" onClick='<%= renderResponse.getNamespace() + "expireArticle();" %>' value="expire-this-version" />
-				</c:if>
+						<c:if test="<%= (article != null) && !article.isExpired() && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.EXPIRE) %>">
+							<aui:button disabled="<%= !article.isApproved() %>" onClick='<%= renderResponse.getNamespace() + "expireArticle();" %>' value="expire-this-version" />
+						</c:if>
 
-				<c:if test="<%= (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
-					<aui:button disabled="<%= !article.isApproved() && !article.isDraft() %>" onClick='<%= renderResponse.getNamespace() + "deleteArticle();" %>' value="<%= deleteButtonLabel %>" />
-				</c:if>
+						<c:if test="<%= (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.DELETE) %>">
+							<aui:button disabled="<%= !article.isApproved() && !article.isDraft() %>" onClick='<%= renderResponse.getNamespace() + "deleteArticle();" %>' value="<%= deleteButtonLabel %>" />
+						</c:if>
+					</c:when>
+					<c:otherwise>
+						<aui:button name="translateButton" value="save" />
 
+						<%
+						String[] translations = article.getAvailableLocales();
+
+						boolean alreadyTranslated = ArrayUtil.contains(translations, languageId);
+						%>
+
+						<aui:button name="removeArticleLocaleButton" onClick='<%= renderResponse.getNamespace() + "removeArticleLocale();" %>' value="remove-translation" disabled="<%= languageId.equals(defaultLanguageId) || !alreadyTranslated %>" />
+					</c:otherwise>
+				</c:choose>
 				<aui:button onClick="<%= redirect %>" type="cancel" />
 			</aui:button-row>
 		</td>
 
-		<td class="lfr-top">
-			<%@ include file="edit_article_extra.jspf" %>
-		</td>
+		<c:choose>
+			<c:when test="<%= !translate %>">
+				<td class="lfr-top">
+					<%@ include file="edit_article_extra.jspf" %>
+				</td>
+			</c:when>
+			<c:otherwise>
+				<aui:input name="structureId" type="hidden" value="<%= structureId %>" />
+			</c:otherwise>
+		</c:choose>
 	</tr>
 	</table>
 </aui:form>
@@ -733,20 +789,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	function <portlet:namespace />expireArticle() {
 		document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
 		submitForm(document.<portlet:namespace />fm1);
-	}
-
-	function <portlet:namespace />getChoice(value) {
-		for (var i = 0; i < document.<portlet:namespace />fm1.<portlet:namespace />languageId.length; i++) {
-			if (document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[i].value == value) {
-				return document.<portlet:namespace />fm1.<portlet:namespace />languageId.options[i].index;
-			}
-		}
-
-		return null;
-	}
-
-	function <portlet:namespace />getLanguageViewURL(languageId) {
-		return "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + languageId;
 	}
 
 	function <portlet:namespace />initEditor() {
@@ -805,6 +847,68 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		['aui-base']
 	);
 
+	Liferay.provide(
+		window,
+		'<portlet:namespace />postProcessTranslation',
+		function(cmd, newVersion, newLanguageId, newLanguage) {
+			var A = AUI();
+
+			var availableTranslationContainer = A.one('#<portlet:namespace />availableTranslationContainer');
+			var availableTranslationsLinks = A.one('#<portlet:namespace />availableTranslationsLinks');
+			var chooseLanguageText = A.one('#<portlet:namespace />chooseLanguageText');
+			var statusEl = A.one('.taglib-workflow-status .workflow-status strong');
+			var translationsMessage = A.one('#<portlet:namespace />translationsMessage');
+			var versionEl = A.one('.taglib-workflow-status .workflow-version strong');
+
+			document.<portlet:namespace />fm1.<portlet:namespace />version.value = newVersion;
+
+			versionEl.html(newVersion);
+
+			statusEl.removeClass('workflow-status-approved');
+			statusEl.addClass('workflow-status-draft');
+			statusEl.html('<%= LanguageUtil.get(pageContext, "draft") %>');
+
+			availableTranslationContainer.addClass('contains-translations');
+			availableTranslationsLinks.show();
+			translationsMessage.show();
+
+			var translationLink = availableTranslationContainer.one('.journal-article-translation-' + newLanguageId);
+
+			if (cmd == '<%= Constants.DELETE_TRANSLATION %>') {
+				translationLink.hide();
+			}
+			else if (!translationLink) {
+				var TPL_TRANSLATION = '<a class="journal-article-translation journal-article-translation-{newLanguageId}" href="javascript:;"><img alt="" src="<%= themeDisplay.getPathThemeImages() %>/language/{newLanguageId}.png" />{newLanguage}</a>';
+
+				var newLinkTpl = A.Lang.sub(
+					TPL_TRANSLATION,
+					{
+						newLanguageId: newLanguageId,
+						newLanguage: newLanguage
+					}
+				);
+
+				var newLink = A.Node.create(newLinkTpl);
+
+				var editTranslationURL = '<%= editArticleRenderPopUpURL %>' + '&<portlet:namespace />toLanguageId=' + newLanguageId;
+
+				newLink.on(
+					'click',
+					function(event) {
+						Liferay.Util.openIframePopUp('', '', editTranslationURL, '<portlet:namespace />' + newLanguageId, '<%= LanguageUtil.get(pageContext, "web-content-translation") %>');
+					}
+				);
+
+				availableTranslationsLinks.append(newLink);
+
+				var newInput = A.Node.create('<input name="<portlet:namespace />available_locales" type="hidden" value="' + newLanguageId + '" />');
+
+				A.one('#<portlet:namespace />fm1').append(newInput);
+			}
+		},
+		['aui-base']
+	);
+
 	Liferay.Util.disableToggleBoxes('<portlet:namespace />autoArticleIdCheckbox','<portlet:namespace />newArticleId', true);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
@@ -839,6 +943,40 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= HtmlUtil.escape(articleId) %>');
 </aui:script>
 
+<aui:script use="aui-base">
+	var defaultLocaleSelector = A.one('#<portlet:namespace/>defaultLocale');
+
+	if (defaultLocaleSelector) {
+		defaultLocaleSelector.on(
+			'change',
+			function(event) {
+				var defaultLanguageId = defaultLocaleSelector.get('value');
+				var url = '<%= updateDefaultLanguageURL %>' + '&<portlet:namespace />defaultLanguageId=' + defaultLanguageId;
+
+				window.location.href = url;
+			}
+		);
+	}
+
+	var changeLink = A.one('#<portlet:namespace />changeLanguageId');
+	var languageSelector = A.one('#<portlet:namespace />defaultLocale');
+	var textLanguageId = A.one('#<portlet:namespace />textLanguageId');
+
+	if (changeLink) {
+		changeLink.on(
+			'click',
+			function(event) {
+				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "changing-the-default-language-will-delete-all-non-saved-content") %>')) {
+					languageSelector.show();
+					languageSelector.focus();
+					changeLink.hide();
+					textLanguageId.hide();
+				}
+			}
+		);
+	}
+</aui:script>
+
 <%!
 public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.journal.edit_article_content.jsp";
 
@@ -846,6 +984,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 	depth = new Integer(depth.intValue() + 1);
 
 	String languageId = LanguageUtil.getLanguageId(request);
+	String toLanguageId = ParamUtil.getString(request, "toLanguageId");
 
 	List<Element> xsdElements = xsdParentElement.elements();
 
@@ -913,6 +1052,9 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 
 			if (dynamicContentEl != null) {
 				elLanguageId = dynamicContentEl.attributeValue("language-id", StringPool.BLANK);
+				if (Validator.isNotNull(toLanguageId) && Validator.isNull(elLanguageId)){
+					continue;
+				}
 			}
 			else {
 				elLanguageId = languageId;

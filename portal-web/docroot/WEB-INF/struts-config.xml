@@ -1332,6 +1332,7 @@
 		<action path="/journal/edit_article" type="com.liferay.portlet.journal.action.EditArticleAction">
 			<forward name="portlet.journal.edit_article" path="portlet.journal.edit_article" />
 			<forward name="portlet.journal.error" path="portlet.journal.error" />
+			<forward name="portlet.journal.update_translation_redirect" path="portlet.journal.update_translation_redirect" />
 		</action>
 
 		<action path="/journal/edit_article_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">

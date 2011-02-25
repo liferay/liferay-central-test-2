@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -101,7 +102,9 @@ public class EditArticleAction extends PortletAction {
 		String oldUrlTitle = StringPool.BLANK;
 
 		try {
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.TRANSLATE) ||
+				cmd.equals(Constants.UPDATE)) {
+				
 				Object[] returnValue = updateArticle(actionRequest);
 
 				article = (JournalArticle)returnValue[0];
@@ -165,7 +168,14 @@ public class EditArticleAction extends PortletAction {
 
 				WindowState windowState = actionRequest.getWindowState();
 
-				if (!windowState.equals(LiferayWindowState.POP_UP)) {
+				if (cmd.equals(Constants.TRANSLATE) ||
+					cmd.equals(Constants.DELETE_TRANSLATION)) {
+
+					setForward(
+						actionRequest,
+						"portlet.journal.update_translation_redirect");
+				}
+				else if (!windowState.equals(LiferayWindowState.POP_UP)) {
 					sendRedirect(actionRequest, actionResponse, redirect);
 				}
 				else {
@@ -436,20 +446,33 @@ public class EditArticleAction extends PortletAction {
 
 		double version = ParamUtil.getDouble(uploadRequest, "version");
 
-		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
-			actionRequest, "title");
-		Map<Locale, String> descriptionMap =
-			LocalizationUtil.getLocalizationMap(actionRequest, "description");
+		boolean localized = ParamUtil.getBoolean(uploadRequest, "localized");
+		String defaultLanguageId = ParamUtil.getString(
+			uploadRequest, "defaultLanguageId");
+		String toLanguageId = ParamUtil.getString(
+			uploadRequest, "toLanguageId");
+
+		String title = StringPool.BLANK;
+		String description = StringPool.BLANK;
+		Locale toLocale = null;
+
+		if (Validator.isNull(toLanguageId)) {
+			title = ParamUtil.getString(
+				uploadRequest, "title_" + defaultLanguageId);
+			description = ParamUtil.getString(
+				uploadRequest, "description_" + defaultLanguageId);
+		}
+		else{
+			title = ParamUtil.getString(uploadRequest, "title_" + toLanguageId);
+			description = ParamUtil.getString(
+				uploadRequest, "description_" + toLanguageId);
+			toLocale = LocaleUtil.fromLanguageId(toLanguageId);
+		}
+
 		String content = ParamUtil.getString(uploadRequest, "content");
 		String type = ParamUtil.getString(uploadRequest, "type");
 		String structureId = ParamUtil.getString(uploadRequest, "structureId");
 		String templateId = ParamUtil.getString(uploadRequest, "templateId");
-
-		boolean localized = ParamUtil.getBoolean(uploadRequest, "localized");
-		String lastLanguageId = ParamUtil.getString(
-			uploadRequest, "lastLanguageId");
-		String defaultLanguageId = ParamUtil.getString(
-			uploadRequest, "defaultLanguageId");
 
 		int displayDateMonth = ParamUtil.getInteger(
 			uploadRequest, "displayDateMonth");
@@ -520,14 +543,34 @@ public class EditArticleAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			JournalArticle.class.getName(), actionRequest);
 
+		serviceContext.setAttribute("defaultLanguageId", defaultLanguageId);
+
 		JournalArticle article = null;
 		String oldUrlTitle = StringPool.BLANK;
 
+		Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
+
+		JournalArticle curArticle = null;
+
+		if (Validator.isNotNull(articleId)) {
+			curArticle = JournalArticleServiceUtil.getArticle(
+				groupId, articleId, version);
+		}
+
+		Map<Locale, String> descriptionMap = null;
+		Map<Locale, String> titleMap = null;
+
 		if (cmd.equals(Constants.ADD)) {
+			titleMap = new HashMap<Locale, String>();
+			descriptionMap = new HashMap<Locale, String>();
+
+			titleMap.put(defaultLocale, title);
+			descriptionMap.put(defaultLocale, description);
+
 			if (Validator.isNull(structureId)) {
 				content = LocalizationUtil.updateLocalization(
 					StringPool.BLANK, "static-content", content,
-					lastLanguageId, defaultLanguageId, true, localized);
+					defaultLanguageId, defaultLanguageId, true, localized);
 			}
 
 			// Add article
@@ -551,20 +594,23 @@ public class EditArticleAction extends PortletAction {
 
 			// Merge current content with new content
 
-			JournalArticle curArticle = JournalArticleServiceUtil.getArticle(
-				groupId, articleId, version);
-
 			if (Validator.isNull(structureId)) {
 				if (!curArticle.isTemplateDriven()) {
 					String curContent = StringPool.BLANK;
 
-					if (localized) {
-						curContent = curArticle.getContent();
-					}
+					curContent = curArticle.getContent();
 
-					content = LocalizationUtil.updateLocalization(
-						curContent, "static-content", content,
-						lastLanguageId, defaultLanguageId, true, localized);
+					if (cmd.equals(Constants.TRANSLATE)) {
+						content = LocalizationUtil.updateLocalization(
+							curContent, "static-content", content, toLanguageId,
+							defaultLanguageId, true, true);
+					}
+					else {
+						content = LocalizationUtil.updateLocalization(
+							curContent, "static-content", content,
+							defaultLanguageId, defaultLanguageId, true,
+							localized);
+					}
 				}
 			}
 			else {
@@ -596,15 +642,33 @@ public class EditArticleAction extends PortletAction {
 
 			String tempOldUrlTitle = article.getUrlTitle();
 
-			article = JournalArticleServiceUtil.updateArticle(
-				groupId, articleId, version, titleMap, descriptionMap, content,
-				type, structureId, templateId, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire,
-				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, neverReview, indexable, smallImage,
-				smallImageURL, smallFile, images, articleURL, serviceContext);
+			titleMap = article.getTitleMap();
+			descriptionMap = article.getDescriptionMap();
+
+			if (cmd.equals(Constants.UPDATE)) {
+				titleMap.put(defaultLocale, title);
+				descriptionMap.put(defaultLocale, description);
+
+				article = JournalArticleServiceUtil.updateArticle(
+					groupId, articleId, version, titleMap, descriptionMap,
+					content, type, structureId, templateId, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth, 
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, indexable, smallImage,
+					smallImageURL, smallFile, images, articleURL,
+					serviceContext);
+			}
+			else if (cmd.equals(Constants.TRANSLATE)) {
+				titleMap.put(toLocale, title);
+				descriptionMap.put(toLocale, description);
+
+				article = JournalArticleServiceUtil.updateArticle(
+					themeDisplay.getUserId(), groupId, articleId, version,
+					titleMap, descriptionMap, content, serviceContext);
+			}
 
 			if (!tempOldUrlTitle.equals(article.getUrlTitle())) {
 				oldUrlTitle = tempOldUrlTitle;
