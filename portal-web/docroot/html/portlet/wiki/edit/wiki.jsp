@@ -25,6 +25,7 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 
 <div align="right">
 	<liferay-ui:toggle
+		defaultShowContent="<%= false %>"
 		id="toggle_id_wiki_edit_wiki_syntax_help"
 		showMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "show-syntax-help") %>'
 		hideMessage='<%= LanguageUtil.get(pageContext, "hide-syntax-help") + " &raquo;" %>'
