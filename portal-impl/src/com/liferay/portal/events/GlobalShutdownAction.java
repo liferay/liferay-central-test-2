@@ -28,9 +28,9 @@ import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -137,7 +137,7 @@ public class GlobalShutdownAction extends SimpleAction {
 		// Thread local registry
 
 		ThirdPartyThreadLocalRegistry.resetThreadLocals();
-		ThreadLocalRegistry.resetThreadLocals();
+		CentralizedThreadLocal.clearPeriodicalThreadLocals();
 
 		// Hypersonic
 
