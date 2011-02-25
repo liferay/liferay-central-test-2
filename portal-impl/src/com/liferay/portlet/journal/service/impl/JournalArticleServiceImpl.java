@@ -358,12 +358,12 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			String content)
+			String content, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return journalArticleLocalService.updateArticle(
 			userId, groupId, articleId, version, titleMap, descriptionMap,
-			content);
+			content, serviceContext);
 	}
 
 	public JournalArticle updateArticle(
@@ -397,7 +397,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle updateArticle(
-			long groupId, String articleId, double version, String content)
+			long groupId, String articleId, double version, String content,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
@@ -405,7 +406,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			ActionKeys.UPDATE);
 
 		return journalArticleLocalService.updateArticle(
-			getUserId(), groupId, articleId, version, content);
+			getUserId(), groupId, articleId, version, content, serviceContext);
 	}
 
 	public JournalArticle updateContent(

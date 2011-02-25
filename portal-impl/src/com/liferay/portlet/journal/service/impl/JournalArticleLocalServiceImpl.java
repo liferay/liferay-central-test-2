@@ -1547,8 +1547,21 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
+			String content, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JournalArticle article = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
+
+		return updateArticle(
+			userId, groupId, articleId, version, article.getTitleMap(),
+			article.getDescriptionMap(), content, serviceContext);
+	}
+
+	public JournalArticle updateArticle(
+			long userId, long groupId, String articleId, double version,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
-			String content)
+			String content, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -1634,15 +1647,6 @@ public class JournalArticleLocalServiceImpl
 				reviewDateHour += 12;
 			}
 		}
-
-		PortletPreferencesIds portletPreferencesIds = new PortletPreferencesIds(
-			article.getCompanyId(), PortletKeys.PREFS_OWNER_ID_DEFAULT,
-			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, PortletKeys.PREFS_PLID_SHARED,
-			PortletKeys.JOURNAL);
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setPortletPreferencesIds(portletPreferencesIds);
 
 		return updateArticle(
 			userId, groupId, articleId, version, titleMap, descriptionMap,
@@ -1869,19 +1873,6 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return article;
-	}
-
-	public JournalArticle updateArticle(
-			long userId, long groupId, String articleId, double version,
-			String content)
-		throws PortalException, SystemException {
-
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
-
-		return updateArticle(
-			userId, groupId, articleId, version, article.getTitleMap(),
-			article.getDescriptionMap(), content);
 	}
 
 	public void updateAsset(
