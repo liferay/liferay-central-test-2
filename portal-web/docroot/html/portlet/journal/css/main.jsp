@@ -310,8 +310,6 @@
 	.journal-article-buttons {
 		display: none;
 	}
-
-
 }
 
 .portlet-journal-edit-mode {
