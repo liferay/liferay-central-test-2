@@ -220,6 +220,15 @@ public class HookHotDeployListener
 		"upgrade.processes",
 		"users.email.address.generator",
 		"users.email.address.required",
+		"users.form.add.identification",
+		"users.form.add.main",
+		"users.form.add.miscellaneous",
+		"users.form.my.account.identification",
+		"users.form.my.account.main",
+		"users.form.my.account.miscellaneous",
+		"users.form.update.identification",
+		"users.form.update.main",
+		"users.form.update.miscellaneous",
 		"users.full.name.generator",
 		"users.full.name.validator",
 		"users.screen.name.always.autogenerate",
@@ -1931,7 +1940,16 @@ public class HookHotDeployListener
 		"convert.processes",
 		"layout.static.portlets.all",
 		"layout.types",
-		"session.phishing.protected.attributes"
+		"session.phishing.protected.attributes",
+		"users.form.add.identification",
+		"users.form.add.main",
+		"users.form.add.miscellaneous",
+		"users.form.my.account.identification",
+		"users.form.my.account.main",
+		"users.form.my.account.miscellaneous",
+		"users.form.update.identification",
+		"users.form.update.main",
+		"users.form.update.miscellaneous"
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(
