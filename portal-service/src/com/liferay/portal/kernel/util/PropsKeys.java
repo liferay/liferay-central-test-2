@@ -1709,6 +1709,10 @@ public interface PropsKeys {
 
 	public static final String TERMS_OF_USE_REQUIRED = "terms.of.use.required";
 
+	public static final String TEXT_EXTRACT_FORK_PROCESS_ENABLED = "text.extract.fork.process.enabled";
+
+	public static final String TEXT_EXTRACT_FORK_PROCESS_MIME_TYPES = "text.extract.fork.process.mime.types";
+
 	public static final String THEME_CSS_FAST_LOAD = "theme.css.fast.load";
 
 	public static final String THEME_IMAGES_FAST_LOAD = "theme.images.fast.load";
@@ -1728,10 +1732,6 @@ public interface PropsKeys {
 	public static final String THEME_VIRTUAL_PATH = "theme.virtual.path";
 
 	public static final String THREAD_DUMP_SPEED_THRESHOLD = "thread.dump.speed.threshold";
-
-	public static final String TIKA_EXTRACT_FORK_PROCESS_ENABLED = "tika.extract.fork.process.enabled";
-
-	public static final String TIKA_EXTRACT_FORK_PROCESS_MIME_TYPES = "tika.extract.fork.process.mime.types";
 
 	public static final String TIME_ZONES = "time.zones";
 
