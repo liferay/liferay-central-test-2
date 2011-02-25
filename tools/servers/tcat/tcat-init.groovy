@@ -192,7 +192,11 @@ class InitializeLiferayDeployment implements JcrCallback {
 				def start = fileName.lastIndexOf("-") + 1;
 				def end = fileName.indexOf(".war");
 
-				String fileVersion = fileName.substring(start, end);
+				String fileVersion = workspaceName;
+
+				if (start > 1) {
+					fileVersion = fileName.substring(start, end)
+				}
 
 				installBuilder.addRepositoryFile(
 					file.toString(), workspaceFullPath, fileName, fileVersion);
