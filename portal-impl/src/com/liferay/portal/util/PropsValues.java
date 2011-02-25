@@ -94,6 +94,8 @@ public class PropsValues {
 
 	public static final String[] AUTH_PIPELINE_PRE = PropsUtil.getArray(PropsKeys.AUTH_PIPELINE_PRE);
 
+	public static final boolean AUTH_SIMULTANEOUS_LOGINS = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTH_SIMULTANEOUS_LOGINS));
+
 	public static final boolean AUTH_TOKEN_CHECK_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.AUTH_TOKEN_CHECK_ENABLED));
 
 	public static final String[] AUTH_TOKEN_IGNORE_ACTIONS = PropsUtil.getArray(PropsKeys.AUTH_TOKEN_IGNORE_ACTIONS);

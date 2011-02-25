@@ -59,7 +59,9 @@ public class LoginPostAction extends Action {
 
 			// Live users
 
-			if (PropsValues.LIVE_USERS_ENABLED) {
+			if (PropsValues.LIVE_USERS_ENABLED ||
+				!PropsValues.AUTH_SIMULTANEOUS_LOGINS) {
+
 				String sessionId = session.getId();
 				String remoteAddr = request.getRemoteAddr();
 				String remoteHost = request.getRemoteHost();

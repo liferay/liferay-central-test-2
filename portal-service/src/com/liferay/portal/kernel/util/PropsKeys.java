@@ -131,6 +131,8 @@ public interface PropsKeys {
 
 	public static final String AUTH_PUBLIC_PATHS = "auth.public.paths";
 
+	public static final String AUTH_SIMULTANEOUS_LOGINS = "auth.simultaneous.logins";
+
 	public static final String AUTH_TOKEN_CHECK_ENABLED = "auth.token.check.enabled";
 
 	public static final String AUTH_TOKEN_IGNORE_ACTIONS = "auth.token.ignore.actions";

@@ -78,7 +78,9 @@ public class PortalSessionDestroyer extends BasePortalLifecycle {
 
 			// Live users
 
-			if (PropsValues.LIVE_USERS_ENABLED) {
+			if (PropsValues.LIVE_USERS_ENABLED ||
+				!PropsValues.AUTH_SIMULTANEOUS_LOGINS) {
+
 				long userId = userIdObj.longValue();
 				long companyId = getCompanyId(userId);
 				String sessionId = session.getId();
