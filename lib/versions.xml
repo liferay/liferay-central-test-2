@@ -1886,6 +1886,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/jaxb-impl.jar</file-name>
+		<version>2.1.11</version>
+		<project-name>Java Architecture for XML Binding</project-name>
+		<project-url>http://jaxb.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jaxrpc.jar</file-name>
 		<version>1.1</version>
 		<project-name>JAX-RPC</project-name>
@@ -1893,6 +1904,17 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/jaxws-rt.jar</file-name>
+		<version>2.1.7</version>
+		<project-name>JAXWS-RT</project-name>
+		<project-url>http://jax-ws.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.1</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -2296,6 +2318,17 @@
 		<licenses>
 			<license>
 				<license-name>Public Domain</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/mimepull.jar</file-name>
+		<version>1.3</version>
+		<project-name>MIME pull</project-name>
+		<project-url>http://mimepull.java.net/</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -2832,6 +2865,28 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/stax-ex.jar</file-name>
+		<version>1.2</version>
+		<project-name>StAX-Ex Project</project-name>
+		<project-url>http://stax-ex.java.net/</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/streambuffer.jar</file-name>
+		<version>0.9</version>
+		<project-name>XML Stream Buffer</project-name>
+		<project-url>http://java.net/projects/xmlstreambuffer</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
