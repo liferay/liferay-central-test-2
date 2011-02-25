@@ -16,8 +16,8 @@ package com.liferay.portal.upgrade.v6_0_3;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 
 import java.sql.Connection;
@@ -26,126 +26,39 @@ import java.sql.ResultSet;
 
 /**
  * @author Julio Camarero
+ * @author Amos Fong
  */
 public class UpgradeAsset extends UpgradeProcess {
 
 	protected void doUpgrade() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"select classNameId, classPK from AssetEntry");
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long classNameId = rs.getLong("classNameId");
-				long classPK = rs.getLong("classPK");
-
-				String className = PortalUtil.getClassName(classNameId);
-
-				String[] tableAndColumn = getTableAndColumnName(className);
-
-				if (Validator.isNull(tableAndColumn[0]) ||
-					Validator.isNull(tableAndColumn[1])) {
-
-					continue;
-				}
-
-				String uuid = getUuid(
-					tableAndColumn[0], tableAndColumn[1], tableAndColumn[2],
-					classPK);
-
-				updateAssetEntry(classNameId, classPK, uuid);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected String[] getTableAndColumnName(String className) {
-		String[] tableAndColumn = new String[3];
-
-		if (className.equals("com.liferay.portal.model.Group")) {
-		}
-		else if (className.equals("com.liferay.portal.model.Organization")) {
-		}
-		else if (className.equals("com.liferay.portal.model.User")) {
-			tableAndColumn[0] = "User_";
-			tableAndColumn[1] = "userId";
-			tableAndColumn[2] = "userId";
-		}
-		else if (className.equals(
-					"com.liferay.portlet.blogs.model.BlogsEntry")) {
-
-			tableAndColumn[0] = "BlogsEntry";
-			tableAndColumn[1] = "entryId";
-			tableAndColumn[2] = "entryId";
-		}
-		else if (className.equals(
-					"com.liferay.portlet.bookmarks.model.BookmarksEntry")) {
-
-			tableAndColumn[0] = "BookmarksEntry";
-			tableAndColumn[1] = "entryId";
-			tableAndColumn[2] = "entryId";
-		}
-		else if (className.equals(
-					"com.liferay.portlet.calendar.model.CalEvent")) {
-
-			tableAndColumn[0] = "CalEvent";
-			tableAndColumn[1] = "eventId";
-			tableAndColumn[2] = "eventId";
-		}
-		else if (className.equals(
-					"com.liferay.portlet.documentlibrary.model.DLFileEntry")) {
-
-			tableAndColumn[0] = "DLFileEntry";
-			tableAndColumn[1] = "fileEntryId";
-			tableAndColumn[2] = "fileEntryId";
-		}
-		else if (className.equals(
-					"com.liferay.portlet.documentlibrary.model." +
-						"DLFileShortcut")) {
-
-			tableAndColumn[0] = "DLFileShortcut";
-			tableAndColumn[1] = "fileShortcutId";
-			tableAndColumn[2] = "fileShortcutId";
-		}
-		else if (className.equals(
-					"com.liferay.portlet.imagegallery.model.IGImage")) {
-
-			tableAndColumn[0] = "IGImage";
-			tableAndColumn[1] = "imageId";
-			tableAndColumn[2] = "imageId";
-		}
-		else if (className.equals(
-					"com.liferay.portlet.journal.model.JournalArticle")) {
-
-			tableAndColumn[0] = "JournalArticle";
-			tableAndColumn[1] = "resourcePrimKey";
-			tableAndColumn[2] = "id_";
-		}
-		else if (className.equals(
-					"com.liferay.portlet.messageboards.model.MBMessage")) {
-
-			tableAndColumn[0] = "MBMessage";
-			tableAndColumn[1] = "messageId";
-			tableAndColumn[2] = "messageId";
-		}
-		else if (className.equals(
-					"com.liferay.portlet.wiki.model.WikiPage")) {
-
-			tableAndColumn[0] = "WikiPage";
-			tableAndColumn[1] = "resourcePrimKey";
-			tableAndColumn[2] = "pageId";
-		}
-
-		return tableAndColumn;
+		updateAssetEntry("com.liferay.portal.model.User", "User_", "userId");
+		updateAssetEntry(
+			"com.liferay.portlet.blogs.model.BlogsEntry", "BlogsEntry",
+			"entryId");
+		updateAssetEntry(
+			"com.liferay.portlet.bookmarks.model.BookmarksEntry",
+			"BookmarksEntry", "entryId");
+		updateAssetEntry(
+			"com.liferay.portlet.calendar.model.CalEvent", "CalEvent",
+			"eventId");
+		updateAssetEntry(
+			"com.liferay.portlet.documentlibrary.model.DLFileEntry",
+			"DLFileEntry", "fileEntryId");
+		updateAssetEntry(
+			"com.liferay.portlet.documentlibrary.model.DLFileShortcut",
+			"DLFileShortcut", "fileShortcutId");
+		updateAssetEntry(
+			"com.liferay.portlet.imagegallery.model.IGImage", "IGImage",
+			"imageId");
+		updateAssetEntry(
+			"com.liferay.portlet.journal.model.JournalArticle",
+			"JournalArticle", "resourcePrimKey", "id_");
+		updateAssetEntry(
+			"com.liferay.portlet.messageboards.model.MBMessage", "MBMessage",
+			"messageId");
+		updateAssetEntry(
+			"com.liferay.portlet.wiki.model.WikiPage", "WikiPage",
+			"resourcePrimKey", "pageId");
 	}
 
 	protected String getUuid(
@@ -203,6 +116,64 @@ public class UpgradeAsset extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected void updateAssetEntry(
+			String className, String tableName, String columnName)
+		throws Exception {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		StringBundler sb = new StringBundler(11);
+
+		sb.append("update AssetEntry set classUuid = (select ");
+		sb.append(tableName);
+		sb.append(".uuid_ from ");
+		sb.append(tableName);
+		sb.append(" where ");
+		sb.append(tableName);
+		sb.append(".");
+		sb.append(columnName);
+		sb.append(" = AssetEntry.classPK) where (AssetEntry.classNameId = ");
+		sb.append(classNameId);
+		sb.append(");");
+
+		runSQL(sb.toString());
+	}
+
+	protected void updateAssetEntry(
+			String className, String tableName, String columnName1,
+			String columnName2)
+		throws Exception {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select classPK from AssetEntry where classNameId = ?");
+
+			ps.setLong(1, classNameId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long classPK = rs.getLong("classPK");
+
+				String uuid = getUuid(
+					tableName, columnName1, columnName2, classPK);
+
+				updateAssetEntry(classNameId, classPK, uuid);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
