@@ -259,6 +259,11 @@
 			<bean class="com.liferay.portal.util.LocalizationImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.util.MethodParamNamesResolverUtil" class="com.liferay.portal.kernel.util.MethodParamNamesResolverUtil">
+		<property name="methodParamNamesResolver">
+			<bean class="com.liferay.portal.util.MethodParamNamesResolverImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.util.MimeTypesUtil" class="com.liferay.portal.kernel.util.MimeTypesUtil">
 		<property name="mimeTypes">
 			<bean class="com.liferay.portal.util.MimeTypesImpl" />
