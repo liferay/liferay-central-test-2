@@ -104,12 +104,9 @@ public class AttributesTagSupport
 	}
 
 	private String _attributeNamespace = StringPool.BLANK;
-
 	private CustomAttributes _customAttributes;
-
 	private Map<String, Object> _dynamicAttributes =
 		new HashMap<String, Object>();
-
 	private Map<String, Object> _scopedAttributes =
 		new HashMap<String, Object>();
 

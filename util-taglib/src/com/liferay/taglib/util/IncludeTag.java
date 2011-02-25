@@ -213,15 +213,11 @@ public class IncludeTag extends AttributesTagSupport {
 			request = _trackedRequest;
 		}
 
-		setNamespacedAttribute(
-			request, "bodyContent", getBodyContent());
-
+		setNamespacedAttribute(request, "bodyContent", getBodyContent());
 		setNamespacedAttribute(
 			request, "customAttributes", getCustomAttributes());
-
 		setNamespacedAttribute(
 			request, "dynamicAttributes", getDynamicAttributes());
-
 		setNamespacedAttribute(
 			request, "scopedAttributes", getScopedAttributes());
 
@@ -425,8 +421,7 @@ public class IncludeTag extends AttributesTagSupport {
 		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
 
 		ThemeUtil.include(
-			servletContext, request, response, pageContext, page,
-			theme);
+			servletContext, request, response, pageContext, page, theme);
 	}
 
 	private static final boolean _CLEAN_UP_SET_ATTRIBUTES = false;
