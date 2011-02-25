@@ -450,6 +450,8 @@ public class EditLayoutsAction extends PortletAction {
 			uploadRequest, "inheritFromParentLayoutId");
 
 		long copyLayoutId = ParamUtil.getLong(uploadRequest, "copyLayoutId");
+		String layoutTemplateId = ParamUtil.getString(
+			uploadRequest, "layoutTemplateId");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			Layout.class.getName(), actionRequest);
@@ -538,6 +540,12 @@ public class EditLayoutsAction extends PortletAction {
 				getTypeSettingsProperties(actionRequest);
 
 			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
+				LayoutTypePortlet layoutTypePortlet =
+					(LayoutTypePortlet)layout.getLayoutType();
+
+				layoutTypePortlet.setLayoutTemplateId(
+					themeDisplay.getUserId(), layoutTemplateId);
+
 				if ((copyLayoutId > 0) &&
 					(copyLayoutId != layout.getLayoutId())) {
 

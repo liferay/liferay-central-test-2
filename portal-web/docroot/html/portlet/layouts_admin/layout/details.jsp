@@ -149,6 +149,8 @@ StringBuilder friendlyURLBase = new StringBuilder();
 </aui:fieldset>
 
 <aui:script use="aui-base">
+	var templateLink = A.one('#templateLink');
+
 	function toggleLayoutTypeFields (type) {
 		var currentType = 'layout-type-form-' + type;
 
@@ -162,6 +164,10 @@ StringBuilder friendlyURLBase = new StringBuilder();
 				item.all('input, select, textarea').set('disabled', disabled);
 			}
 		);
+
+		if (templateLink) {
+			templateLink.toggle(type == 'portlet')
+		}
 	}
 
 	toggleLayoutTypeFields('<%= selLayout.getType() %>');
