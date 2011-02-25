@@ -126,10 +126,12 @@ public class LiferayDeployerFactory implements DeployerFactory {
         
         return new LiferayDeployer(
 			_fileService: applicationContext.getBean("tomcatFileService"),
-			server: server, _wrappedDeployer: wrappedDeployer);
+			_server: server, _wrappedDeployer: wrappedDeployer);
     }
         
 }
+
+println("Replacing deployer factory with LiferayDeployerFactory");
 
 def factory = new LiferayDeployerFactory(applicationContext);
 

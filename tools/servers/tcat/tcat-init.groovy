@@ -49,6 +49,7 @@ class InitializeLiferayDeployment implements JcrCallback {
     XmlWebApplicationContext _applicationContext;
 	Registry _registry;
 	TypeManager _typeManager;
+	List<Script> _loadedScripts = new ArrayList<Script>();;
 
     public InitializeLiferayDeployment(
 		XmlWebApplicationContext applicationContext) {
@@ -56,8 +57,7 @@ class InitializeLiferayDeployment implements JcrCallback {
 		_applicationContext = applicationContext;
 
 		_registry = (Registry)_applicationContext.getBean("registry");
-		_typeManager = (TypeManager)_applicationContext.getBean(
-			"typeManager");
+		_typeManager = (TypeManager)_applicationContext.getBean("typeManager");
 
     }
 
@@ -81,6 +81,10 @@ class InitializeLiferayDeployment implements JcrCallback {
 
         return "Completed Initialization";
     }
+
+	public List<Script> getLoadedScriptNames() {
+		return _loadedScripts;
+	}
 
 	private void _loadServerProfiles(InstallBuilder installBuilder) {
 		println("Loading Liferay Server Profiles...");
@@ -120,8 +124,7 @@ class InitializeLiferayDeployment implements JcrCallback {
 		def scriptsDir = new File("tcat_init/scripts");
 
 		def scriptManager =
-			(ScriptManager)_applicationContext.getBean(
-				"scriptManager");
+			(ScriptManager)_applicationContext.getBean("scriptManager");
 
 		for (File file : scriptsDir.listFiles()) {
 			String scriptName = file.name;
@@ -145,11 +148,14 @@ class InitializeLiferayDeployment implements JcrCallback {
 			}
 			else {
 				script = new Script();
+
 				script.setName(friendlyName);
 			}
 			script.setRunOnStartup(true);
 
 			script.setScript(IOUtils.toString(fis));
+
+			_loadedScripts.add(script);
 
 			scriptManager.save(script);
 		}
@@ -222,8 +228,19 @@ class InitializeLiferayDeployment implements JcrCallback {
 	}
 }
 
-def repositoryImport = new InitializeLiferayDeployment(applicationContext) as JcrCallback;
+def repositoryImport = new InitializeLiferayDeployment(applicationContext);
 def sf = applicationContext.getBean("sessionFactory");
 
 JcrUtil.doInTransaction(sf, repositoryImport);
 
+//execute preloaded scripts...
+def scriptManager =
+	(ScriptManager)applicationContext.getBean("scriptManager");
+
+List<Script> loadedScripts = repositoryImport.getLoadedScriptNames();
+
+for (Script loadedScript : loadedScripts) {
+	println("Executing loaded script: " + loadedScript.name);
+
+	scriptManager.execute(loadedScript);
+}
