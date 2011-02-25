@@ -15,10 +15,10 @@
 package com.liferay.portal.servlet.filters.threadlocal;
 
 import com.liferay.portal.kernel.servlet.TryFinallyFilter;
+import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InitialThreadLocal;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.kernel.util.ThreadLocalRegistry;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +48,7 @@ public class ThreadLocalFilter
 
 		_useCountThreadLocal.set(_useCountThreadLocal.get() - 1);
 
-		ThreadLocalRegistry.resetThreadLocals();
+		CentralizedThreadLocal.clearPeriodicalThreadLocals();
 	}
 
 	public Object doFilterTry(

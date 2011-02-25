@@ -14,7 +14,7 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.util.ThreadLocalRegistry;
+import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 
 import javax.servlet.http.HttpServlet;
 
@@ -24,11 +24,11 @@ import javax.servlet.http.HttpServlet;
 public class CleanUpServlet extends HttpServlet {
 
 	public void destroy() {
-		ThreadLocalRegistry.resetThreadLocals();
+		CentralizedThreadLocal.clearPeriodicalThreadLocals();
 	}
 
 	public void init() {
-		ThreadLocalRegistry.resetThreadLocals();
+		CentralizedThreadLocal.clearPeriodicalThreadLocals();
 	}
 
 }

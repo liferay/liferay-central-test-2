@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.messaging;
 import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ThreadLocalRegistry;
+import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 
 import java.util.Set;
 
@@ -65,7 +65,7 @@ public class SerialDestination extends BaseAsyncDestination {
 					}
 				}
 				finally {
-					ThreadLocalRegistry.resetThreadLocals();
+					CentralizedThreadLocal.clearPeriodicalThreadLocals();
 				}
 			}
 

@@ -23,9 +23,15 @@ import java.lang.reflect.Method;
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class InitialThreadLocal<T> extends ThreadLocal<T> {
+public class InitialThreadLocal<T> extends CentralizedThreadLocal<T> {
 
 	public InitialThreadLocal(String name, T initialValue) {
+		this(name, initialValue, false);
+	}
+
+	public InitialThreadLocal(String name, T initialValue, boolean periodical) {
+		super(periodical);
+
 		_name = name;
 		_initialValue = initialValue;
 

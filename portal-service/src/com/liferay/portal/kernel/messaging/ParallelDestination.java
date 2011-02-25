@@ -17,7 +17,7 @@ package com.liferay.portal.kernel.messaging;
 import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ThreadLocalRegistry;
+import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 
 import java.util.Set;
 
@@ -66,7 +66,7 @@ public class ParallelDestination extends BaseAsyncDestination {
 						_log.error("Unable to process message " + message, mle);
 					}
 					finally {
-						ThreadLocalRegistry.resetThreadLocals();
+						CentralizedThreadLocal.clearPeriodicalThreadLocals();
 					}
 				}
 
