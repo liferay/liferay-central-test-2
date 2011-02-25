@@ -247,19 +247,27 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		try {
 			Tika tika = new Tika();
 
+			boolean forkProcess = false;
+
 			if (PropsValues.TIKA_EXTRACT_FORK_PROCESS_ENABLED) {
 				String mimeType = tika.detect(is);
-				if (ArrayUtil.contains(
-					PropsValues.TIKA_EXTRACT_FORK_PROCESS_MIME_TYPES,
-					mimeType)) {
 
-					return ProcessExecutor.synchronizeExecute(
-						new TikaExtractTextProcessCallable(getBytes(is)),
-						ClassPathUtil.getPortalClassPath());
+				if (ArrayUtil.contains(
+						PropsValues.TIKA_EXTRACT_FORK_PROCESS_MIME_TYPES,
+						mimeType)) {
+
+					forkProcess = true;
 				}
 			}
 
-			text = tika.parseToString(is);
+			if (forkProcess) {
+				text = ProcessExecutor.execute(
+					new ExtractTextProcessCallable(getBytes(is)),
+					ClassPathUtil.getPortalClassPath());
+			}
+			else {
+				text = tika.parseToString(is);
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -777,15 +785,16 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 	private static FileImpl _instance = new FileImpl();
 
-	private static class TikaExtractTextProcessCallable
+	private static class ExtractTextProcessCallable
 		implements ProcessCallable<String> {
 
-		public TikaExtractTextProcessCallable(byte[] data) {
+		public ExtractTextProcessCallable(byte[] data) {
 			_data = data;
 		}
 
 		public String call() throws ProcessException {
 			Tika tika = new Tika();
+
 			try {
 				return tika.parseToString(
 					new UnsyncByteArrayInputStream(_data));
@@ -796,6 +805,7 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 		}
 
 		private byte[] _data;
+
 	}
 
 }

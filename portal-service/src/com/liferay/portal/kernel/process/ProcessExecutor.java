@@ -26,23 +26,7 @@ import java.io.Serializable;
  */
 public class ProcessExecutor {
 
-	public static void main(String[] arguments)
-		throws ClassNotFoundException, IOException {
-
-		try {
-			ProcessCallable<?> processCallable =
-				(ProcessCallable<?>)_readObject(System.in, false);
-
-			Object result = processCallable.call();
-
-			_writeObject(System.out, result, false);
-		}
-		catch (ProcessException pe) {
-			_writeObject(System.err, pe, false);
-		}
-	}
-
-	public static <T extends Serializable> T synchronizeExecute(
+	public static <T extends Serializable> T execute(
 			ProcessCallable<T> processCallable, String classPath)
 		throws ProcessException {
 
@@ -74,6 +58,22 @@ public class ProcessExecutor {
 		}
 		catch (Exception e) {
 			throw new ProcessException(e);
+		}
+	}
+
+	public static void main(String[] arguments)
+		throws ClassNotFoundException, IOException {
+
+		try {
+			ProcessCallable<?> processCallable =
+				(ProcessCallable<?>)_readObject(System.in, false);
+
+			Object result = processCallable.call();
+
+			_writeObject(System.out, result, false);
+		}
+		catch (ProcessException pe) {
+			_writeObject(System.err, pe, false);
 		}
 	}
 
