@@ -25,14 +25,17 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.servlet.PortalSessionContext;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -217,6 +220,23 @@ public class LoginUtil {
 
 		long userId = getAuthenticatedUserId(
 			request, login, password, authType);
+
+		if (PropsValues.LIVE_ONE_SESSION_PER_USER_ENABLED) {
+			Map<String, UserTracker> sessionUsers =
+				LiveUsers.getSessionUsers(PortalUtil.getCompanyId(request));
+
+			List<UserTracker> userTrackers =
+				new ArrayList<UserTracker>(sessionUsers.values());
+
+			for (UserTracker userTracker : userTrackers) {
+				if (userId == userTracker.getUserId()) {
+					HttpSession userSession = 
+						PortalSessionContext.get(userTracker.getSessionId());
+
+					userSession.invalidate();
+				}
+			}
+		}
 
 		if (PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) {
 
