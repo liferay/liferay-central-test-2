@@ -104,7 +104,7 @@ public class EditArticleAction extends PortletAction {
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.TRANSLATE) ||
 				cmd.equals(Constants.UPDATE)) {
-				
+
 				Object[] returnValue = updateArticle(actionRequest);
 
 				article = (JournalArticle)returnValue[0];
@@ -655,7 +655,7 @@ public class EditArticleAction extends PortletAction {
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, expirationDateMonth, expirationDateDay,
 					expirationDateYear, expirationDateHour,
-					expirationDateMinute, neverExpire, reviewDateMonth, 
+					expirationDateMinute, neverExpire, reviewDateMonth,
 					reviewDateDay, reviewDateYear, reviewDateHour,
 					reviewDateMinute, neverReview, indexable, smallImage,
 					smallImageURL, smallFile, images, articleURL,
