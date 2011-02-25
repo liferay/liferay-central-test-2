@@ -62,6 +62,10 @@ public class Validator_IW {
 		return Validator.isAddress(address);
 	}
 
+	public boolean isAlphanumericName(java.lang.String name) {
+		return Validator.isAlphanumericName(name);
+	}
+
 	public boolean isAscii(char c) {
 		return Validator.isAscii(c);
 	}
