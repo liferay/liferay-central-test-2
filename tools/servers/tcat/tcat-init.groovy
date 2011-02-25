@@ -13,6 +13,30 @@ import org.springmodules.jcr.JcrCallback
 import javax.jcr.RepositoryException
 import javax.jcr.Session
 
+/**
+ * This tcat-init.groovy script initializes the TCat admin server by
+ * first loading server profiles and then loading web applications.
+ *
+ * This script must be placed into ${CATALINA_HOME}.  The TCat admin server
+ * will execute the script on first startup and after successful execution,
+ * delete it.
+ *
+ * The script will load profiles from: ${CATALINA_HOME}/tcat_init/profiles.
+ * Profiles zip files must be named liferay-portal-tcat-profile-VERSION.zip.
+ * For instance, liferay-portal-tcat-profile-6.1.0.zip.  On startup, this script
+ * will load the profile into the repository: /Profiles/liferay-portal-VERSION.
+ *
+ * The script will also load web application from
+ * ${CATALINA_HOME}/tcat_init/webapps/VERSION, where VERSION should be the
+ * version of Liferay Portal (e.g. 6_0_10).
+ *
+ * A sample configuration for Liferay Portal 6.0.10 would look like:
+ * (1) Profile: ${CATALINA_HOME}/tcat_init/profiles/liferay-portal-tcat-profile-6.0.10.zip
+ * (2) Webapps:
+ *      (a)${CATALINA_HOME}/tcat_init/webapps/6_0_10/ROOT.war
+ *      (b)${CATALINA_HOME}/tcat_init/webapps/6_0_10/kaleo-web-6.0.10.war
+ *
+ */
 class InitializeLiferayDeployment implements JcrCallback {
 
     XmlWebApplicationContext _applicationContext;

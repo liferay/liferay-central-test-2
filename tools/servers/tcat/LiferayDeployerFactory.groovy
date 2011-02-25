@@ -15,7 +15,17 @@ import org.codehaus.cargo.util.log.Logger;
 
 import org.springframework.context.ApplicationContext;
 
-
+/**
+ * This script replaces the TCat Deployer and DeployerFactory with ones
+ * customized LiferayDeployer and LiferayDeployerFactory.
+ *
+ * Liferay's WARs require some additional preprocessing before they can be
+ * properly placed into Tomcat's webapps directory.  This script intercepts
+ * Liferay WAR files and places them into Liferay's hot deploy directory
+ * located at ${CATALINA_HOME}/deploy.  Liferay will then complete the
+ * deployment.
+ *
+ */
 public class LiferayDeployer implements Deployer {
     Deployer _wrappedDeployer;
     FileService _fileService;
