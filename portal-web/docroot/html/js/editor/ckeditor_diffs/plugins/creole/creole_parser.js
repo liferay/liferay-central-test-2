@@ -1,4 +1,3 @@
-<pre id="parser">
 /*
  * JavaScript Creole 1.0 Wiki Markup Parser
  * $Id: creole.js 14 2009-03-21 16:15:08Z ifomichev $
@@ -26,6 +25,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+(function() {
 if (!Parse) { var Parse = {}; }
 if (!Parse.Simple) { Parse.Simple = {}; }
 
@@ -44,7 +44,7 @@ Parse.Simple.Base.prototype = {
 
     parse: function(node, data, options) {
         if (options) {
-            for (i in this.options) {
+            for (var i in this.options) {
                 if (typeof options[i] == 'undefined') { options[i] = this.options[i]; }
             }
         }
@@ -245,8 +245,18 @@ Parse.Simple.Creole = function(options) {
 
         img: { regex: rx.img,
             build: function(node, r, options) {
-                var img = document.createElement('img');
-                img.src = r[1];
+				var imagePath = r[1];
+				var imagePathPrefix = options ? options.imagePrefix : '';
+				var img = document.createElement('img');
+
+				if (imagePathPrefix) {
+					if (!(/^https?:\/\//gi.test(imagePath))) {
+						imagePath = imagePathPrefix + imagePath;
+					}
+				}
+
+				img.src = imagePath;
+
                 img.alt = r[2] === undefined
                     ? (options && options.defaultImageText ? options.defaultImageText : '')
                     : r[2].replace(/~(.)/g, '$1');
@@ -369,5 +379,5 @@ Parse.Simple.Creole = function(options) {
 
 Parse.Simple.Creole.prototype = new Parse.Simple.Base();
 
-Parse.Simple.Creole.prototype.constructor = Parse.Simple.Creole;
-</pre>
+CKEDITOR.CreoleParser = Parse.Simple.Creole;
+})();
