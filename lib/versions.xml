@@ -2,17 +2,6 @@
 
 <libraries>
 	<library>
-		<file-name>javascript_creole_wiki_markup_parser.js</file-name>
-		<version>1.0</version>
-		<project-name>Javascritp Creole Wiki Markup Parser</project-name>
-		<project-url>http://www.ivan.fomichev.name/2008/04/javascript-creole-10-wiki-markup-parser.html</project-url>
-		<licenses>
-			<license>
-				<license-name>MIT License</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/activation.jar</file-name>
 		<version>1.1</version>
 		<project-name>JavaBeans Activation Framework</project-name>
