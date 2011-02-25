@@ -48,7 +48,7 @@ public class ThreadLocalFilter
 
 		_useCountThreadLocal.set(_useCountThreadLocal.get() - 1);
 
-		CentralizedThreadLocal.clearPeriodicalThreadLocals();
+		CentralizedThreadLocal.clearShortLivedThreadLocals();
 	}
 
 	public Object doFilterTry(

@@ -66,7 +66,7 @@ public class ParallelDestination extends BaseAsyncDestination {
 						_log.error("Unable to process message " + message, mle);
 					}
 					finally {
-						CentralizedThreadLocal.clearPeriodicalThreadLocals();
+						CentralizedThreadLocal.clearShortLivedThreadLocals();
 					}
 				}
 

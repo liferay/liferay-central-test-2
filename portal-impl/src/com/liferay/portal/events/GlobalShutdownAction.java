@@ -137,7 +137,7 @@ public class GlobalShutdownAction extends SimpleAction {
 		// Thread local registry
 
 		ThirdPartyThreadLocalRegistry.resetThreadLocals();
-		CentralizedThreadLocal.clearPeriodicalThreadLocals();
+		CentralizedThreadLocal.clearShortLivedThreadLocals();
 
 		// Hypersonic
 

@@ -65,7 +65,7 @@ public class SerialDestination extends BaseAsyncDestination {
 					}
 				}
 				finally {
-					CentralizedThreadLocal.clearPeriodicalThreadLocals();
+					CentralizedThreadLocal.clearShortLivedThreadLocals();
 				}
 			}
 

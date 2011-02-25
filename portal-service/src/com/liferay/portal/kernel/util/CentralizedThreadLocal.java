@@ -23,38 +23,38 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 
-	public static void clearLongLiveThreadLocals() {
-		_longLiveThreadLocals.remove();
+	public static void clearLongLivedThreadLocals() {
+		_longLivedThreadLocals.remove();
 	}
 
-	public static void clearPeriodicalThreadLocals() {
-		_periodicalThreadLocals.remove();
+	public static void clearShortLivedThreadLocals() {
+		_shortLivedThreadLocals.remove();
 	}
 
-	public static Map<ThreadLocal<?>, Object> getLongLiveThreadLocals() {
-		return _longLiveThreadLocals.get();
+	public static Map<ThreadLocal<?>, Object> getLongLivedThreadLocals() {
+		return _longLivedThreadLocals.get();
 	}
 
-	public static Map<ThreadLocal<?>, Object> getPeriodicalThreadLocals() {
-		return _periodicalThreadLocals.get();
+	public static Map<ThreadLocal<?>, Object> getShortLivedThreadLocals() {
+		return _shortLivedThreadLocals.get();
 	}
 
 	public static void setThreadLocals(
-		Map<ThreadLocal<?>, Object> longLiveThreadLocals,
-		Map<ThreadLocal<?>, Object> periodicalThreadLocals) {
+		Map<ThreadLocal<?>, Object> longLivedThreadLocals,
+		Map<ThreadLocal<?>, Object> shortLivedThreadLocals) {
 
-		_longLiveThreadLocals.set(longLiveThreadLocals);
-		_periodicalThreadLocals.set(periodicalThreadLocals);
+		_longLivedThreadLocals.set(longLivedThreadLocals);
+		_shortLivedThreadLocals.set(shortLivedThreadLocals);
 	}
 
-	public CentralizedThreadLocal(boolean periodical) {
-		_periodical = periodical;
+	public CentralizedThreadLocal(boolean shortLived) {
+		_shortLived = shortLived;
 
-		if (periodical) {
-			_hashCode = _periodicalNextHasCode.getAndAdd(_HASH_INCREMENT);
+		if (shortLived) {
+			_hashCode = _shortLivedNextHasCode.getAndAdd(_HASH_INCREMENT);
 		}
 		else {
-			_hashCode = _longLiveNextHasCode.getAndAdd(_HASH_INCREMENT);
+			_hashCode = _longLivedNextHasCode.getAndAdd(_HASH_INCREMENT);
 		}
 	}
 
@@ -69,6 +69,7 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 
 		if (value == null) {
 			value = initialValue();
+
 			if (value == null) {
 				threadLocals.put(this, _nullHolder);
 			}
@@ -85,7 +86,9 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 	}
 
 	public void remove() {
-		_getThreadLocals().remove(this);
+		Map<ThreadLocal<?>, Object> threadLocals = _getThreadLocals();
+
+		threadLocals.remove(this);
 	}
 
 	public void set(T value) {
@@ -100,45 +103,36 @@ public class CentralizedThreadLocal<T> extends ThreadLocal<T> {
 	}
 
 	private Map<ThreadLocal<?>, Object> _getThreadLocals() {
-		if (_periodical) {
-			return _periodicalThreadLocals.get();
+		if (_shortLived) {
+			return _shortLivedThreadLocals.get();
 		}
 		else {
-			return _longLiveThreadLocals.get();
+			return _longLivedThreadLocals.get();
 		}
 	}
 
 	private static final int _HASH_INCREMENT = 0x61c88647;
 
-	private static final AtomicInteger _longLiveNextHasCode =
+	private static final AtomicInteger _longLivedNextHasCode =
 		new AtomicInteger();
-
 	private static final ThreadLocal<Map<ThreadLocal<?>, Object>>
-		_longLiveThreadLocals =
-		new ThreadLocal<Map<ThreadLocal<?>, Object>>() {
-
-			protected Map<ThreadLocal<?>, Object> initialValue() {
-				return new HashMap<ThreadLocal<?>, Object>();
-			}
-
-		};
-
+		_longLivedThreadLocals = new MapThreadLocal();
 	private static final Object _nullHolder = new Object();
-
-	private static final AtomicInteger _periodicalNextHasCode =
+	private static final AtomicInteger _shortLivedNextHasCode =
 		new AtomicInteger();
-
 	private static final ThreadLocal<Map<ThreadLocal<?>, Object>>
-		_periodicalThreadLocals =
-		new ThreadLocal<Map<ThreadLocal<?>, Object>>() {
-
-			protected Map<ThreadLocal<?>, Object> initialValue() {
-				return new HashMap<ThreadLocal<?>, Object>();
-			}
-
-		};
+		_shortLivedThreadLocals = new MapThreadLocal();
 
 	private final int _hashCode;
-	private final boolean _periodical;
+	private final boolean _shortLived;
+
+	private static class MapThreadLocal
+		extends ThreadLocal<Map<ThreadLocal<?>, Object>> {
+
+		protected Map<ThreadLocal<?>, Object> initialValue() {
+			return new HashMap<ThreadLocal<?>, Object>();
+		}
+
+	}
 
 }

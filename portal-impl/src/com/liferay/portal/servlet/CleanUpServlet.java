@@ -24,11 +24,11 @@ import javax.servlet.http.HttpServlet;
 public class CleanUpServlet extends HttpServlet {
 
 	public void destroy() {
-		CentralizedThreadLocal.clearPeriodicalThreadLocals();
+		CentralizedThreadLocal.clearShortLivedThreadLocals();
 	}
 
 	public void init() {
-		CentralizedThreadLocal.clearPeriodicalThreadLocals();
+		CentralizedThreadLocal.clearShortLivedThreadLocals();
 	}
 
 }
