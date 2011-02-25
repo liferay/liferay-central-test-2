@@ -217,6 +217,28 @@ public class Validator {
 	}
 
 	/**
+	 * Determines if the string is an Alphanumeric name, meaning it contains
+	 * nothing but English letters, numbers and spaces.
+	 *
+	 * @param  name the string to check
+	 * @return <code>true</code> if the string is an Alphanumeric name;
+	 * <code>false</code> otherwise
+	 */
+	public static boolean isAlphanumericName(String name) {
+		if (isNull(name)) {
+			return false;
+		}
+
+		for (char c : name.trim().toCharArray()) {
+			if (!isChar(c) && !isDigit(c) && !Character.isWhitespace(c)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Determines if the character is in the ASCII character set. This includes
 	 * characters with integer values between 32 and 126 (inclusive).
 	 *
