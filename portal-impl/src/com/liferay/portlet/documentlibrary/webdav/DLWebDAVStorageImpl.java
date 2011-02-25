@@ -761,6 +761,13 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				DLAppServiceUtil.unlockFileEntry(
 					fileEntry.getFileEntryId(), token);
+
+				if (fileEntry.getTitle().startsWith(
+						StringPool.APPLE_DOUBLE_PREFIX)) {
+
+					DLAppServiceUtil.deleteFileEntry(
+						fileEntry.getFileEntryId());
+				}
 			}
 			else {
 				Folder folder = (Folder)resource.getModel();
