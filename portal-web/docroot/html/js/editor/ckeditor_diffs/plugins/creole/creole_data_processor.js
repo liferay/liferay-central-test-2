@@ -11,13 +11,17 @@
 
 	var SPACE = ' ';
 
+	var STR_EQUALS = '=';
+
+	var STR_PIPE = '|';
+
 	var TAG_BOLD = '**';
 
 	var TAG_EMPHASIZE = '//';
 
 	var TAG_ORDERED_LIST = 'ol';
 
-	var TAG_ORDEREDLIST_ITEM = '#';
+	var TAG_ORDERED_LIST_ITEM = '#';
 
 	var TAG_PARAGRAPH = 'p';
 
@@ -25,7 +29,7 @@
 
 	var TAG_UNORDERED_LIST = 'ul';
 
-	var TAG_UNORDEREDLIST_ITEM = '*';
+	var TAG_UNORDERED_LIST_ITEM = '*';
 
 	CKEDITOR.plugins.add(
 		'creole_data_processor',
@@ -38,7 +42,7 @@
 				editor.dataProcessor.writer.setRules(
 					'p',
 					{
-						breakBeforeClose : false
+						breakBeforeClose: false
 					}
 				);
 			}
@@ -46,22 +50,40 @@
 	);
 
 	CKEDITOR.htmlDataProcessor.prototype = {
-		_endResult: null,
+		toDataFormat: function(html, fixForBody ) {
+			var instance = this;
 
-		_inPRE: false,
+			var data = instance._convert(html);
 
-		_replaceNewLineParent: true,
+			return data;
+		},
 
-		_replaceNewLineChild: true,
+		toHtml: function(data, fixForBody) {
+			var instance = this;
 
-		_ulLevel: 0,
+			var div = document.createElement('div');
+
+			if (!instance._creoleParser) {
+				instance._creoleParser = new CKEDITOR.CreoleParser(
+					{
+						imagePrefix: CKEDITOR.config.attachments_prefix
+					}
+				);
+			}
+
+			instance._creoleParser.parse(div, data);
+
+			data = div.innerHTML;
+
+			return data;
+		},
 
 		_allowNewLine: function(element) {
 			var instance = this;
 
-			if (instance._inPRE) {
-				return true;
-			} else {
+			var allowNewLine = true;
+
+			if (!instance._inPRE) {
 				var parentNode = element.parentNode;
 
 				if (parentNode) {
@@ -70,17 +92,12 @@
 					if (parentTagName) {
 						parentTagName = parentTagName.toLowerCase();
 
-						if (parentTagName == TAG_PARAGRAPH) {
-							return true;
-						}
-						else {
-							return false;
-						}
+						allowNewLine = (parentTagName == TAG_PARAGRAPH);
 					}
 				}
 			}
 
-			return true;
+			return allowNewLine;
 		},
 
 		_convert: function(data) {
@@ -96,33 +113,6 @@
 			instance._endResult = null;
 
 			return endResult;
-		},
-
-		_isAllWS: function(node) {
-			return node.isElementContentWhitespace || !(REGEX_NOT_WHITESPACE.test(node.data));
-		},
-
-		_isDataAvailable: function() {
-			var instance = this;
-
-			return instance._endResult && instance._endResult.length;
-		},
-
-		_isIgnorable: function(node) {
-			var instance = this;
-
-			var nodeType = node.nodeType;
-
-			return (node.isElementContentWhitespace || nodeType == 8) ||
-			((nodeType == 3) && instance._isAllWS(node));
-		},
-
-		_isLastItemNewLine: function(node) {
-			var instance = this;
-
-			var endResult = instance._endResult;
-
-			return (endResult && REGEX_LASTCHAR_NEWLINE.test(endResult.slice(-1)));
 		},
 
 		_handle: function(node) {
@@ -191,6 +181,46 @@
 			}
 		},
 
+		_handleElementEnd: function(element, listTagsIn, listTagsOut) {
+			var instance = this;
+
+			var tagName = element.tagName;
+
+			if (tagName) {
+				tagName = tagName.toLowerCase();
+			}
+
+			if (tagName == TAG_PARAGRAPH) {
+				if (!instance._isLastItemNewLine()) {
+					instance._endResult.push(NEW_LINE);
+				}
+			}
+			else if (tagName == TAG_UNORDERED_LIST || tagName == TAG_ORDERED_LIST) {
+				instance._ulLevel -= 1;
+
+				var newLinesAtEnd = REGEX_LASTCHAR_NEWLINE.exec(instance._endResult.slice(-2).join(''));
+				var count = 0;
+
+				if (newLinesAtEnd) {
+					 count = newLinesAtEnd[1].length;
+				}
+
+				while (count++ < 2) {
+					instance._endResult.push(NEW_LINE);
+				}
+			}
+			else if (tagName == TAG_PRE) {
+				if (!instance._isLastItemNewLine()) {
+					instance._endResult.push(NEW_LINE);
+				}
+
+				instance._inPRE = false;
+			}
+			else if (tagName == 'table') {
+				listTagsOut.push(NEW_LINE);
+			}
+		},
+
 		_handleElementStart: function(element, listTagsIn, listTagsOut) {
 			var instance = this;
 
@@ -248,42 +278,6 @@
 			}
 		},
 
-		_handleElementEnd: function(element, listTagsIn, listTagsOut) {
-			var instance = this;
-
-			var tagName = element.tagName;
-
-			if (tagName) {
-				tagName = tagName.toLowerCase();
-			}
-
-			if (tagName == TAG_PARAGRAPH) {
-				if (!instance._isLastItemNewLine()) {
-					instance._endResult.push(NEW_LINE);
-				}
-			}
-			else if (tagName == TAG_UNORDERED_LIST || tagName == TAG_ORDERED_LIST) {
-				instance._ulLevel -= 1;
-
-				var newLinesAtEnd = REGEX_LASTCHAR_NEWLINE.exec(instance._endResult.slice(-2).join(''));
-				var count = newLinesAtEnd ? newLinesAtEnd[1].length : 0;
-
-				while (count++ < 2) {
-					instance._endResult.push(NEW_LINE);
-				}
-			}
-			else if (tagName == TAG_PRE) {
-				if (!instance._isLastItemNewLine()) {
-					instance._endResult.push(NEW_LINE);
-				}
-
-				instance._inPRE = false;
-			}
-			else if (tagName == 'table') {
-				listTagsOut.push(NEW_LINE);
-			}
-		},
-
 		_handleEm: function(element, listTagsIn, listTagsOut) {
 			listTagsIn.push(TAG_EMPHASIZE);
 			listTagsOut.push(TAG_EMPHASIZE);
@@ -293,7 +287,7 @@
 			var instance = this;
 
 			var res = new Array(parseInt(params[1], 10) + 1);
-			res = res.join('=');
+			res = res.join(STR_EQUALS);
 
 			if (instance._isDataAvailable() && !instance._isLastItemNewLine()) {
 				listTagsIn.push(NEW_LINE);
@@ -322,7 +316,7 @@
 			listTagsIn.push('{{', attrSrc);
 
 			if (attrAlt) {
-				listTagsIn.push('|', attrAlt);
+				listTagsIn.push(STR_PIPE, attrAlt);
 			}
 
 			listTagsOut.push('}}');
@@ -331,7 +325,7 @@
 		_handleLink: function(element, listTagsIn, listTagsOut) {
 			var hrefAttribute = element.getAttribute('href');
 
-			listTagsIn.push('[[', hrefAttribute, '|');
+			listTagsIn.push('[[', hrefAttribute, STR_PIPE);
 
 			listTagsOut.push(']]');
 		},
@@ -341,13 +335,16 @@
 
 			var parentNode = element.parentNode;
 			var tagName = parentNode.tagName.toLowerCase();
-			var listItemTag = (tagName === TAG_UNORDERED_LIST) ?
-				TAG_UNORDEREDLIST_ITEM : TAG_ORDEREDLIST_ITEM;
+			var listItemTag = TAG_ORDERED_LIST_ITEM;
+
+			if (tagName === TAG_UNORDERED_LIST) {
+				listItemTag = TAG_UNORDERED_LIST_ITEM;
+			}
 
 			var res = new Array(instance._ulLevel + 1);
 			res = res.join(listItemTag);
 
-			if (instance._isDataAvailable() && !instance._isLastItemNewLine()){
+			if (instance._isDataAvailable() && !instance._isLastItemNewLine()) {
 				listTagsIn.push(NEW_LINE);
 			}
 
@@ -365,7 +362,11 @@
 
 			if (instance._isDataAvailable()) {
 				var newLinesAtEnd = REGEX_LASTCHAR_NEWLINE.exec(instance._endResult.slice(-2).join(''));
-				var count = newLinesAtEnd ? newLinesAtEnd[1].length : 0;
+				var count = 0;
+
+				if (newLinesAtEnd) {
+					 count = newLinesAtEnd[1].length;
+				}
 
 				while (count++ < 2) {
 					listTagsIn.push(NEW_LINE);
@@ -413,11 +414,11 @@
 		},
 
 		_handleTableCell: function(element, listTagsIn, listTagsOut) {
-			listTagsIn.push('|');
+			listTagsIn.push(STR_PIPE);
 		},
 
 		_handleTableHeader: function(element, listTagsIn, listTagsOut) {
-			listTagsIn.push('|', '=');
+			listTagsIn.push(STR_PIPE, STR_EQUALS);
 		},
 
 		_handleTableRow: function(element, listTagsIn, listTagsOut) {
@@ -427,13 +428,40 @@
 				listTagsIn.push(NEW_LINE);
 			}
 
-			listTagsOut.push('|');
+			listTagsOut.push(STR_PIPE);
 		},
 
 		_handleUnorderedList: function(element, listTagsIn, listTagsOut) {
 			var instance = this;
 
 			instance._ulLevel += 1;
+		},
+
+		_isDataAvailable: function() {
+			var instance = this;
+
+			return instance._endResult && instance._endResult.length;
+		},
+
+		_isIgnorable: function(node) {
+			var instance = this;
+
+			var nodeType = node.nodeType;
+
+			return (node.isElementContentWhitespace || nodeType == 8) ||
+					((nodeType == 3) && instance._isWhitespace(node));
+		},
+
+		_isLastItemNewLine: function(node) {
+			var instance = this;
+
+			var endResult = instance._endResult;
+
+			return endResult && REGEX_LASTCHAR_NEWLINE.test(endResult.slice(-1));
+		},
+
+		_isWhitespace: function(node) {
+			return node.isElementContentWhitespace || !(REGEX_NOT_WHITESPACE.test(node.data));
 		},
 
 		_pushTagList: function(tagsList) {
@@ -451,26 +479,14 @@
 			}
 		},
 
-		toHtml: function(data, fixForBody) {
-			var div = document.createElement('div');
+		_endResult: null,
 
-			if (!this._creoleParser) {
-				this._creoleParser = new CKEDITOR.CreoleParser({
-					imagePrefix: CKEDITOR.config.attachments_prefix
-				});
-			}
+		_inPRE: false,
 
-			this._creoleParser.parse(div, data);
+		_replaceNewLineChild: true,
 
-			data = div.innerHTML;
+		_replaceNewLineParent: true,
 
-			return data;
-		},
-
-		toDataFormat: function(html, fixForBody ) {
-			var data = this._convert(html);
-
-			return data;
-		}
+		_ulLevel: 0
 	};
 })();

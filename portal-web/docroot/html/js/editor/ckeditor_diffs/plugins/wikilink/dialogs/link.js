@@ -5,56 +5,16 @@ CKEDITOR.dialog.add(
 
 		var LANG_LINK = editor.lang.link;
 
-		var plugin = CKEDITOR.plugins.link;
-
-		var parseLink = function(editor, element) {
-			var instance = this;
-
-			var href = (element  && (element.data('cke-saved-href') || element.getAttribute('href'))) || '';
-
-			var data = {
-				address: href
-			};
-
-			instance._.selectedElement = element;
-
-			return data;
-		};
+		var PLUGIN = CKEDITOR.plugins.link;
 
 		return {
-			minWidth : 250,
-
-			minHeight : 100,
-
-			title : LANG_LINK.title,
-
-			contents : [
+			contents: [
 				{
-					id : 'info',
-
-					label : LANG_LINK.info,
-
-					title : LANG_LINK.info,
-
-					elements : [
+					elements: [
 						{
-							id : 'linkOptions',
-
-							padding : 1,
-
-							type :  'vbox',
-
-							children : [
+							children: [
 								{
-									id : 'linkAddress',
-
-									label : LANG_COMMON.url,
-
-									required : true,
-
-									type : 'text',
-
-									commit : function(data) {
+									commit: function(data) {
 										var instance = this;
 
 										if (!data) {
@@ -63,8 +23,10 @@ CKEDITOR.dialog.add(
 
 										data.address = instance.getValue();
 									},
-
-									setup : function(data) {
+									id: 'linkAddress',
+									label: LANG_COMMON.url,
+									required: true,
+									setup: function(data) {
 										var instance = this;
 
 										if (data) {
@@ -77,8 +39,8 @@ CKEDITOR.dialog.add(
 											instance.select();
 										}
 									},
-
-									validate : function() {
+									type: 'text',
+									validate: function() {
 										var instance = this;
 
 										var func = CKEDITOR.dialog.validate.notEmpty(LANG_LINK.noUrl);
@@ -86,33 +48,38 @@ CKEDITOR.dialog.add(
 										return func.apply(instance);
 									}
 								}
-							]
+							],
+							id: 'linkOptions',
+							padding: 1,
+							type:  'vbox'
 						}
-					]
+					],
+					id: 'info',
+					label: LANG_LINK.info,
+					title: LANG_LINK.info
 				}
 			],
+			minWidth: 250,
+			minHeight: 100,
+			title: LANG_LINK.title,
 
-			onShow : function() {
+			onShow: function() {
 				var instance = this;
 
 				instance.fakeObj = false;
 
 				var editor = instance.getParentEditor();
 				var selection = editor.getSelection();
-				var element = null;
+				var element = PLUGIN.getSelectedLink(editor) || null;
 
-				// Fill in all the relevant fields if there's already one link selected.
-				if ((element = plugin.getSelectedLink(editor))) {
+				if (element) {
 					selection.selectElement(element);
 				}
-				else {
-					element = null;
-				}
 
-				instance.setupContent(parseLink.apply(instance, [editor, element]));
+				instance.setupContent(instance._parseLink(editor, element));
 			},
 
-			onOk : function() {
+			onOk: function() {
 				var instance = this;
 
 				var attributes = {};
@@ -125,12 +92,10 @@ CKEDITOR.dialog.add(
 				attributes.href = data.address;
 
 				if (!instance._.selectedElement) {
-					// Create element if current selection is collapsed.
-					var selection = editor.getSelection(),
-						ranges = selection.getRanges(true);
+					var selection = editor.getSelection();
+					var ranges = selection.getRanges(true);
 
-					if (ranges.length == 1 && ranges[0].collapsed)
-					{
+					if (ranges.length == 1 && ranges[0].collapsed) {
 						var text = new CKEDITOR.dom.text(attributes['data-cke-saved-href'], editor.document);
 
 						ranges[0].insertNode(text);
@@ -138,34 +103,48 @@ CKEDITOR.dialog.add(
 						selection.selectRanges(ranges);
 					}
 
-					// Apply style.
 					var style = new CKEDITOR.style(
 						{
-							element : 'a',
-							attributes : attributes
+							attributes: attributes,
+							element: 'a'
 						}
 					);
 
-					style.type = CKEDITOR.STYLE_INLINE;		// need to override... dunno why.
+					style.type = CKEDITOR.STYLE_INLINE;
 					style.apply(editor.document);
 				}
 				else {
-					var element = instance._.selectedElement;
-
-					element.setAttributes(attributes);
+					instance._.selectedElement.setAttributes(attributes);
 				}
 			},
 
-			onLoad : function() {
-			},
-
-			// Inital focus on 'url' field if link is of type URL.
-			onFocus : function() {
+			onFocus: function() {
 				var instance = this;
 
 				var urlField = instance.getContentElement('info', 'linkAddress');
 
 				urlField.select();
+			},
+
+			onLoad: function() {
+			},
+
+			_parseLink: function(editor, element) {
+				var instance = this;
+
+				var href = '';
+
+				if (element) {
+					element = element.data('cke-saved-href') || element.getAttribute('href');
+				}
+
+				var data = {
+					address: href
+				};
+
+				instance._.selectedElement = element;
+
+				return data;
 			}
 		};
 	}

@@ -1,103 +1,99 @@
 CKEDITOR.plugins.add(
 	'wikilink',
 	{
-		init : function(editor) {
+		init: function(editor) {
 			var instance = this;
 
-			// Add the link and unlink buttons.
 			editor.addCommand('link', new CKEDITOR.dialogCommand('link'));
 			editor.addCommand('unlink', new CKEDITOR.unlinkCommand());
 
 			editor.ui.addButton(
 				'Link',
 				{
-					label : editor.lang.link.toolbar,
-					command : 'link'
+					command: 'link',
+					label: editor.lang.link.toolbar
 				}
 			);
 
 			editor.ui.addButton(
-			'Unlink',
+				'Unlink',
 				{
-					label : editor.lang.unlink,
-					command : 'unlink'
+					command: 'unlink',
+					label: editor.lang.unlink
 				}
 			);
 
 			CKEDITOR.dialog.add('link', instance.path + 'dialogs/link.js');
 
-			// Register selection change handler for the unlink button.
 			 editor.on(
 				'selectionChange',
-				function(evt) {
-					/*
-					 * Despite our initial hope, document.queryCommandEnabled() does not work
-					 * for this in Firefox. So we must detect the state by element paths.
-					 */
+				function(event) {
+
+					// document.queryCommandEnabled does not work for this in Firefox.
+					// Use element paths to detect the state.
+
 					var command = editor.getCommand('unlink');
 
-					var element = evt.data.path.lastElement && evt.data.path.lastElement.getAscendant('a', true);
+					var lastElement = event.data.path.lastElement;
 
-					if (element && element.getName() == 'a' && element.getAttribute('href')) {
-						command.setState(CKEDITOR.TRISTATE_OFF);
-					}
-					else {
-						command.setState(CKEDITOR.TRISTATE_DISABLED);
+					if (lastElement) {
+						var element = lastElement.getAscendant('a', true);
+
+						if (element && element.getName() == 'a' && element.getAttribute('href')) {
+							command.setState(CKEDITOR.TRISTATE_OFF);
+						}
+						else {
+							command.setState(CKEDITOR.TRISTATE_DISABLED);
+						}
 					}
 				}
 			);
 
 			editor.on(
 				'doubleclick',
-				function(evt) {
-					var element = CKEDITOR.plugins.link.getSelectedLink(editor) || evt.data.element;
+				function(event) {
+					var element = CKEDITOR.plugins.link.getSelectedLink(editor) || event.data.element;
 
-					if (!element.isReadOnly())
-					{
-						if (element.is('a')){
-							evt.data.dialog = 'link';
-						}
+					if (!element.isReadOnly() && element.is('a')) {
+						event.data.dialog = 'link';
 					}
 				}
 			);
 
-			// If the "menu" plugin is loaded, register the menu items.
 			if (editor.addMenuItems) {
 				editor.addMenuItems(
 					{
-						link : {
-							label : editor.lang.link.menu,
-							command : 'link',
-							group : 'link',
-							order : 1
+						link: {
+							command: 'link',
+							group: 'link',
+							label: editor.lang.link.menu,
+							order: 1
 						},
-
-						unlink : {
-							label : editor.lang.unlink,
-							command : 'unlink',
-							group : 'link',
-							order : 5
+						unlink: {
+							command: 'unlink',
+							group: 'link',
+							label: editor.lang.unlink,
+							order: 5
 						}
 					}
 				);
 			}
 
-			// If the "contextmenu" plugin is loaded, register the listeners.
 			if (editor.contextMenu) {
 				editor.contextMenu.addListener(
 					function(element, selection) {
-						if (!element || element.isReadOnly()){
-							return null;
-						}
+						var selectionObj = null;
 
-						if (!(element = CKEDITOR.plugins.link.getSelectedLink(editor))){
-							return null;
-						}
+						if (element && !element.isReadOnly()) {
+							element = CKEDITOR.plugins.link.getSelectedLink(editor);
 
-						return { 
-							link : CKEDITOR.TRISTATE_OFF,
-							unlink : CKEDITOR.TRISTATE_OFF
-						};
+							if (element) {
+								selectionObj = {
+									link: CKEDITOR.TRISTATE_OFF,
+									unlink: CKEDITOR.TRISTATE_OFF
+								};
+							}
+						}
 					}
 				);
 			}
@@ -106,57 +102,42 @@ CKEDITOR.plugins.add(
 );
 
 CKEDITOR.plugins.link = {
-	/**
-	 *  Get the surrounding link element of current selection.
-	 * @param editor
-	 * @example CKEDITOR.plugins.link.getSelectedLink(editor);
-	 * @since 3.2.1
-	 * The following selection will all return the link element.
-	 *	 <pre>
-	 *  <a href="#">li^nk</a>
-	 *  <a href="#">[link]</a>
-	 *  text[<a href="#">link]</a>
-	 *  <a href="#">li[nk</a>]
-	 *  [<b><a href="#">li]nk</a></b>]
-	 *  [<a href="#"><b>li]nk</b></a>
-	 * </pre>
-	 */
-	getSelectedLink : function(editor) {
+	getSelectedLink: function(editor) {
+		var selectedLink = null;
+
 		try {
 			var selection = editor.getSelection();
 
 			if (selection.getType() == CKEDITOR.SELECTION_ELEMENT) {
 				var selectedElement = selection.getSelectedElement();
 
-				if (selectedElement.is('a')){
-					return selectedElement;
+				if (selectedElement.is('a')) {
+					selectedLink = selectedElement;
 				}
 			}
+			else {
+				var range = selection.getRanges(true)[ 0 ];
 
-			var range = selection.getRanges(true)[ 0 ];
-			range.shrink(CKEDITOR.SHRINK_TEXT);
+				range.shrink(CKEDITOR.SHRINK_TEXT);
 
-			var root = range.getCommonAncestor();
-			return root.getAscendant('a', true);
+				var root = range.getCommonAncestor();
+
+				selectedLink = root.getAscendant('a', true);
+			}
 		}
-		catch(e) { 
-			return null;
+		catch(e) {
 		}
+
+		return selectedLink;
 	}
 };
 
-CKEDITOR.unlinkCommand = function(){};
+CKEDITOR.unlinkCommand = function() {};
 
 CKEDITOR.unlinkCommand.prototype = {
-	/** @ignore */
-	exec : function(editor) {
-		/*
-		 * execCommand('unlink', ...) in Firefox leaves behind <span> tags at where
-		 * the <a> was, so again we have to remove the link ourselves. (See #430)
-		 *
-		 * TODO: Use the style system when it's complete. Let's use execCommand()
-		 * as a stopgap solution for now.
-		 */
+	startDisabled: true,
+
+	exec: function(editor) {
 		var selection = editor.getSelection();
 		var bookmarks = selection.createBookmarks();
 		var ranges = selection.getRanges();
@@ -176,7 +157,5 @@ CKEDITOR.unlinkCommand.prototype = {
 		selection.selectRanges(ranges);
 		editor.document.$.execCommand('unlink', false, null);
 		selection.selectBookmarks(bookmarks);
-	},
-
-	startDisabled : true
+	}
 };

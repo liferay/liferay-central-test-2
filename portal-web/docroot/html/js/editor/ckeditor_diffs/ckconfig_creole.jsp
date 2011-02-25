@@ -56,7 +56,7 @@ CKEDITOR.config.removePlugins = [
 	'stylescombo',
 	'templates',
 	'wsc'
-].join(',');
+].join();
 
 CKEDITOR.config.toolbar_creole = [
 	['Cut','Copy','Paste','PasteText','PasteFromWord'],
