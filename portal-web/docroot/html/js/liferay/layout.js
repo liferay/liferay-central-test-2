@@ -664,7 +664,7 @@ AUI().add(
 											var internalNode = portletNode.one('.portlet');
 
 											if (internalNode) {
-												internalNode.set('offsetHeight', info.height);
+												internalNode.set('offsetHeight', info.offsetHeight);
 											}
 
 											instance.savePosition(portletNode);
