@@ -1546,19 +1546,6 @@ public class JournalArticleLocalServiceImpl
 
 	public JournalArticle updateArticle(
 			long userId, long groupId, String articleId, double version,
-			String content, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
-
-		return updateArticle(
-			userId, groupId, articleId, version, article.getTitleMap(),
-			article.getDescriptionMap(), content, serviceContext);
-	}
-
-	public JournalArticle updateArticle(
-			long userId, long groupId, String articleId, double version,
 			Map<Locale, String> titleMap, Map<Locale, String> descriptionMap,
 			String content, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1872,6 +1859,19 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return article;
+	}
+
+	public JournalArticle updateArticle(
+			long userId, long groupId, String articleId, double version,
+			String content, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		JournalArticle article = journalArticlePersistence.findByG_A_V(
+			groupId, articleId, version);
+
+		return updateArticle(
+			userId, groupId, articleId, version, article.getTitleMap(),
+			article.getDescriptionMap(), content, serviceContext);
 	}
 
 	public void updateAsset(
