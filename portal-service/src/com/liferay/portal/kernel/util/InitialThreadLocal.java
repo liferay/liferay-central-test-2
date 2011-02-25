@@ -29,8 +29,8 @@ public class InitialThreadLocal<T> extends CentralizedThreadLocal<T> {
 		this(name, initialValue, false);
 	}
 
-	public InitialThreadLocal(String name, T initialValue, boolean periodical) {
-		super(periodical);
+	public InitialThreadLocal(String name, T initialValue, boolean shortLived) {
+		super(shortLived);
 
 		_name = name;
 		_initialValue = initialValue;
