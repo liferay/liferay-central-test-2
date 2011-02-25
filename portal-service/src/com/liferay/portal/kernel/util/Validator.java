@@ -217,12 +217,12 @@ public class Validator {
 	}
 
 	/**
-	 * Determines if the string is an Alphanumeric name, meaning it contains
-	 * nothing but English letters, numbers and spaces.
+	 * Determines if the string is an alphanumeric name, meaning it contains
+	 * nothing but English letters, numbers, and spaces.
 	 *
 	 * @param  name the string to check
 	 * @return <code>true</code> if the string is an Alphanumeric name;
-	 * <code>false</code> otherwise
+	 *         <code>false</code> otherwise
 	 */
 	public static boolean isAlphanumericName(String name) {
 		if (isNull(name)) {
