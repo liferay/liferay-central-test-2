@@ -25,8 +25,6 @@ public class StringPool {
 
 	public static final String APOSTROPHE = "'";
 
-	public static final String APPLE_DOUBLE_PREFIX = "._";
-
 	public static String[] ASCII_TABLE = new String[128];
 
 	public static final String AT = "@";
