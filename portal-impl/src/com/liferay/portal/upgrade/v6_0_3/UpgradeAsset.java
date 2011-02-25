@@ -137,7 +137,7 @@ public class UpgradeAsset extends UpgradeProcess {
 		sb.append(columnName);
 		sb.append(" = AssetEntry.classPK) where (AssetEntry.classNameId = ");
 		sb.append(classNameId);
-		sb.append(");");
+		sb.append(")");
 
 		runSQL(sb.toString());
 	}
