@@ -35,13 +35,13 @@ CKEDITOR.addStylesSet(
 	{name: 'Heading 3', element: 'h3'},
 	{name: 'Heading 4', element: 'h4'},
 
-	//Special classes
+	// Special classes
 
 	{name: 'Preformatted Text', element:'pre'},
 	{name: 'Cited Work', element:'cite'},
 	{name: 'Computer Code', element:'code'},
 
-	//Custom styles
+	// Custom styles
 
 	{name: 'Info Message', element: 'div', attributes: {'class': 'portlet-msg-info'}},
 	{name: 'Alert Message', element: 'div', attributes: {'class': 'portlet-msg-alert'}},

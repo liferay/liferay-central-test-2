@@ -29,23 +29,23 @@ CKEDITOR.addStylesSet(
 
 	// Block Styles
 
-	{name: 'Normal', element : 'p'},
-	{name: 'Heading 1', element : 'h1'},
-	{name: 'Heading 2', element : 'h2'},
-	{name: 'Heading 3', element : 'h3'},
-	{name: 'Heading 4', element : 'h4'},
+	{name: 'Normal', element: 'p'},
+	{name: 'Heading 1', element: 'h1'},
+	{name: 'Heading 2', element: 'h2'},
+	{name: 'Heading 3', element: 'h3'},
+	{name: 'Heading 4', element: 'h4'},
 
-	//Special classes
+	// Special classes
 
 	{name: 'Preformatted Text', element:'pre'},
 	{name: 'Cited Work', element:'cite'},
 	{name: 'Computer Code', element:'code'},
 
-	//Custom styles
+	// Custom styles
 
-	{name : 'Info Message', element : 'div', attributes : {'class' : 'portlet-msg-info'}},
-	{name : 'Alert Message', element : 'div', attributes : {'class' : 'portlet-msg-alert'}},
-	{name : 'Error Message', element : 'div', attributes : {'class' : 'portlet-msg-error'}}
+	{name: 'Info Message', element: 'div', attributes: {'class': 'portlet-msg-info'}},
+	{name: 'Alert Message', element: 'div', attributes: {'class': 'portlet-msg-alert'}},
+	{name: 'Error Message', element: 'div', attributes: {'class': 'portlet-msg-error'}}
 	]
 );
 
