@@ -30,9 +30,9 @@
 	<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {HtmlUtil.escape(PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId()))), dateFormatDateTime.format(lock.getCreateDate())}, false) %>
 </liferay-ui:error>
 
-<liferay-ui:error exception="<%= InvalidRepositoryException.class %>" message="please-verify-your-repository-configuration-parameters" />
 <liferay-ui:error exception="<%= NoSuchDirectoryException.class %>" message="the-folder-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchFileException.class %>" message="the-document-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-document-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchFolderException.class %>" message="the-folder-could-not-be-found" />
+<liferay-ui:error exception="<%= NoSuchRepositoryException.class %>" message="the-repository-could-not-be-found" />
 <liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

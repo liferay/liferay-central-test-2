@@ -44,6 +44,7 @@ long folderId = ParamUtil.getLong(request, "folderId");
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateRepositoryNameException.class %>" message="please-enter-a-unique-repository-name" />
+	<liferay-ui:error exception="<%= InvalidRepositoryException.class %>" message="please-verify-your-repository-configuration-parameters" />
 	<liferay-ui:error exception="<%= RepositoryNameException.class %>" message="please-enter-a-valid-name" />
 
 	<aui:model-context bean="<%= repository %>" model="<%= Repository.class %>" />
@@ -95,32 +96,17 @@ long folderId = ParamUtil.getLong(request, "folderId");
 		String className = dlRepositoryImpl.substring(dlRepositoryImpl.lastIndexOf(StringPool.PERIOD) + 1);
 
 		long classNameId = PortalUtil.getClassNameId(dlRepositoryImpl);
-	%>
 
-		<div class="settings-configuration" id="<portlet:namespace />repository-<%= className %>-wrapper">
-			<aui:select id='<%= "repository-" + className %>' inputCssClass="repository-configuration" label="repository-configuration" name="settings--configuration-type--">
-
-				<%
-				String[] supportedConfigurations = RepositoryServiceUtil.getSupportedConfigurations(classNameId);
-
-				for (String supportedConfiguration : supportedConfigurations) {
-				%>
-
-					<aui:option label="<%= LanguageUtil.get(pageContext, StringUtil.replace(supportedConfiguration.toLowerCase(), CharPool.UNDERLINE, CharPool.DASH)) %>" selected="<%= supportedConfiguration.equals(supportedConfigurations[0]) %>" value="<%= supportedConfiguration %>" />
-
-				<%
-				}
-				%>
-
-			</aui:select>
-		</div>
-
-		<%
 		String[] supportedConfigurations = RepositoryServiceUtil.getSupportedConfigurations(classNameId);
 
 		for (String supportedConfiguration : supportedConfigurations) {
 		%>
 
+			<div class="settings-configuration" id="<portlet:namespace />repository-<%= className %>-wrapper" <%= ((supportedConfigurations.length == 1) ? "style=\"display: none\"" : "") %> >
+				<aui:select id='<%= "repository-" + className %>' inputCssClass="repository-configuration" label="repository-configuration" name="settings--configuration-type--">
+					<aui:option label="<%= LanguageUtil.get(pageContext, StringUtil.replace(supportedConfiguration.toLowerCase(), CharPool.UNDERLINE, CharPool.DASH)) %>" selected="<%= supportedConfiguration.equals(supportedConfigurations[0]) %>" value="<%= supportedConfiguration %>" />
+				</aui:select>
+			</div>
 			<div class="settings-parameters" id="<portlet:namespace />repository-<%= className %>-configuration-<%= supportedConfiguration %>">
 
 				<%

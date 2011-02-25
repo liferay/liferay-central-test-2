@@ -36,8 +36,8 @@ import java.util.List;
  * <code>SUPPORTED_PARAMETERS</code>.
  *
  * @author Alexander Chow
- * @see    com.liferay.portal.repository.cmis.CMISRepository#SUPPORTED_CONFIGURATIONS
- * @see    com.liferay.portal.repository.cmis.CMISRepository#SUPPORTED_PARAMETERS
+ * @see    com.liferay.portal.repository.cmis.CMISAtomPubRepository#SUPPORTED_CONFIGURATIONS
+ * @see    com.liferay.portal.repository.cmis.CMISAtomPubRepository#SUPPORTED_PARAMETERS
  */
 public abstract class BaseRepositoryImpl implements Repository {
 

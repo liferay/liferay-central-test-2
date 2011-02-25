@@ -18,11 +18,14 @@ import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.NoSuchRepositoryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.BaseRepositoryImpl;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Repository;
 import com.liferay.portal.model.RepositoryEntry;
@@ -33,6 +36,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.RepositoryServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.RepositoryNameException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 
 import java.util.Date;
@@ -298,6 +302,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 				createRepositoryImpl(repositoryId, classNameId);
 			}
 			catch (Exception e) {
+				if (_log.isErrorEnabled()) {
+					_log.error(e, e);
+				}
+
 				throw new InvalidRepositoryException(e);
 			}
 		}
@@ -425,6 +433,10 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
+		if (Validator.isNull(name)) {
+			throw new RepositoryNameException();
+		}
+
 		serviceContext.setAttribute("mountPoint", Boolean.TRUE);
 
 		DLFolder dlFolder = dlRepositoryLocalService.addFolder(
@@ -482,5 +494,8 @@ public class RepositoryServiceImpl extends RepositoryServiceBaseImpl {
 	private Map<Long, com.liferay.portal.kernel.repository.Repository>
 		_repositoriesByRepositoryId = new ConcurrentHashMap
 			<Long, com.liferay.portal.kernel.repository.Repository>();
+
+	private static Log _log = LogFactoryUtil.getLog(
+		RepositoryServiceImpl.class);
 
 }

@@ -15,6 +15,7 @@
 package com.liferay.portal.repository.cmis;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.portal.InvalidRepositoryException;
 import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -24,6 +25,7 @@ import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -100,59 +102,7 @@ import org.apache.chemistry.opencmis.commons.impl.dataobjects.ContentStreamImpl;
  *         href="http://www.oasis-open.org/committees/document.php?document_id=39631">
  *         CMIS Type Mutability proposal</a>
  */
-public class CMISRepository extends BaseRepositoryImpl {
-
-	public static final String ATOMPUB_URL = "ATOMPUB_URL";
-
-	public static final String CONFIGURATION_ATOMPUB = "ATOMPUB";
-
-	public static final String CONFIGURATION_WEBSERVICES = "WEBSERVICES";
-
-	public static final String REPOSITORY_ID = "REPOSITORY_ID";
-
-	public static final String WEBSERVICES_ACL_SERVICE =
-		"WEBSERVICES_ACL_SERVICE";
-
-	public static final String WEBSERVICES_DISCOVERY_SERVICE =
-		"WEBSERVICES_DISCOVERY_SERVICE";
-
-	public static final String WEBSERVICES_MULTIFILING_SERVICE =
-		"WEBSERVICES_MULTIFILING_SERVICE";
-
-	public static final String WEBSERVICES_NAVIGATION_SERVICE =
-		"WEBSERVICES_NAVIGATION_SERVICE";
-
-	public static final String WEBSERVICES_OBJECT_SERVICE =
-		"WEBSERVICES_OBJECT_SERVICE";
-
-	public static final String WEBSERVICES_POLICY_SERVICE =
-		"WEBSERVICES_POLICY_SERVICE";
-
-	public static final String WEBSERVICES_RELATIONSHIP_SERVICE =
-		"WEBSERVICES_RELATIONSHIP_SERVICE";
-
-	public static final String WEBSERVICES_REPOSITORY_SERVICE =
-		"WEBSERVICES_REPOSITORY_SERVICE";
-
-	public static final String WEBSERVICES_VERSIONING_SERVICE =
-		"WEBSERVICES_VERSIONING_SERVICE";
-
-	public static final String[] SUPPORTED_CONFIGURATIONS = {
-		CONFIGURATION_ATOMPUB, CONFIGURATION_WEBSERVICES
-	};
-
-	public static final String[][] SUPPORTED_PARAMETERS = {
-		new String[] {
-			ATOMPUB_URL, REPOSITORY_ID
-		},
-		new String[] {
-			REPOSITORY_ID, WEBSERVICES_ACL_SERVICE,
-			WEBSERVICES_DISCOVERY_SERVICE, WEBSERVICES_MULTIFILING_SERVICE,
-			WEBSERVICES_NAVIGATION_SERVICE, WEBSERVICES_OBJECT_SERVICE,
-			WEBSERVICES_POLICY_SERVICE, WEBSERVICES_RELATIONSHIP_SERVICE,
-			WEBSERVICES_REPOSITORY_SERVICE, WEBSERVICES_VERSIONING_SERVICE
-		}
-	};
+public abstract class CMISRepository extends BaseRepositoryImpl {
 
 	public FileEntry addFileEntry(
 			long folderId, String title, String description, String changeLog,
@@ -659,6 +609,12 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			session.getRepositoryInfo();
 		}
+		catch (PortalException pe) {
+			throw pe;
+		}
+		catch (SystemException se) {
+			throw se;
+		}
 		catch (Exception e) {
 			processException(e);
 
@@ -667,6 +623,10 @@ public class CMISRepository extends BaseRepositoryImpl {
 					getRepositoryId(), e);
 		}
 	}
+
+	public abstract boolean isAtomPub();
+
+	public abstract boolean isWebServices();
 
 	public Lock lockFileEntry(long fileEntryId) {
 		throw new UnsupportedOperationException();
@@ -1320,7 +1280,13 @@ public class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	protected Session getSession() throws RepositoryException {
+	protected Session getSession() throws PortalException, RepositoryException {
+		Session session = _session.get();
+
+		if (session != null) {
+			return session;
+		}
+
 		String password = PrincipalThreadLocal.getPassword();
 		String login = getLogin();
 
@@ -1335,11 +1301,13 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
 
-		if (typeSettingsProperties.containsKey(ATOMPUB_URL)) {
+		if (isAtomPub()) {
 			parameters.put(
 				SessionParameter.BINDING_TYPE, BindingType.ATOMPUB.value());
 
-			putParameter(parameters, SessionParameter.ATOMPUB_URL, ATOMPUB_URL);
+			putParameter(
+				parameters, SessionParameter.ATOMPUB_URL,
+				CMISAtomPubRepository.ATOMPUB_URL);
 		}
 		else {
 			parameters.put(
@@ -1347,39 +1315,57 @@ public class CMISRepository extends BaseRepositoryImpl {
 
 			putParameter(
 				parameters, SessionParameter.WEBSERVICES_ACL_SERVICE,
-				WEBSERVICES_ACL_SERVICE);
+				CMISWebServicesRepository.WEBSERVICES_ACL_SERVICE);
 			putParameter(
 				parameters, SessionParameter.WEBSERVICES_DISCOVERY_SERVICE,
-				WEBSERVICES_DISCOVERY_SERVICE);
+				CMISWebServicesRepository.WEBSERVICES_DISCOVERY_SERVICE);
 			putParameter(
 				parameters, SessionParameter.WEBSERVICES_MULTIFILING_SERVICE,
-				WEBSERVICES_MULTIFILING_SERVICE);
+				CMISWebServicesRepository.WEBSERVICES_MULTIFILING_SERVICE);
 			putParameter(
 				parameters, SessionParameter.WEBSERVICES_NAVIGATION_SERVICE,
-				WEBSERVICES_NAVIGATION_SERVICE);
+				CMISWebServicesRepository.WEBSERVICES_NAVIGATION_SERVICE);
 			putParameter(
 				parameters, SessionParameter.WEBSERVICES_OBJECT_SERVICE,
-				WEBSERVICES_OBJECT_SERVICE);
+				CMISWebServicesRepository.WEBSERVICES_OBJECT_SERVICE);
 			putParameter(
 				parameters, SessionParameter.WEBSERVICES_POLICY_SERVICE,
-				WEBSERVICES_POLICY_SERVICE);
+				CMISWebServicesRepository.WEBSERVICES_POLICY_SERVICE);
 			putParameter(
 				parameters, SessionParameter.WEBSERVICES_RELATIONSHIP_SERVICE,
-				WEBSERVICES_RELATIONSHIP_SERVICE);
+				CMISWebServicesRepository.WEBSERVICES_RELATIONSHIP_SERVICE);
 			putParameter(
 				parameters, SessionParameter.WEBSERVICES_REPOSITORY_SERVICE,
-				WEBSERVICES_REPOSITORY_SERVICE);
+				CMISWebServicesRepository.WEBSERVICES_REPOSITORY_SERVICE);
 			putParameter(
 				parameters, SessionParameter.WEBSERVICES_VERSIONING_SERVICE,
-				WEBSERVICES_VERSIONING_SERVICE);
+				CMISWebServicesRepository.WEBSERVICES_VERSIONING_SERVICE);
 		}
 
-		if (!typeSettingsProperties.containsKey(REPOSITORY_ID)) {
+		checkRepository(parameters, typeSettingsProperties);
+
+		_session.set(_sessionFactory.createSession(parameters));
+
+		return _session.get();
+	}
+
+	protected void checkRepository(
+			Map<String, String> parameters,
+			UnicodeProperties typeSettingsProperties)
+		throws PortalException, RepositoryException {
+
+		String parameterKey = CMISAtomPubRepository.REPOSITORY_ID;
+
+		if (isWebServices()) {
+			parameterKey = CMISWebServicesRepository.REPOSITORY_ID;
+		}
+
+		if (!typeSettingsProperties.containsKey(parameterKey)) {
 			org.apache.chemistry.opencmis.client.api.Repository cmisRepository =
 				_sessionFactory.getRepositories(parameters).get(0);
 
 			typeSettingsProperties.setProperty(
-				REPOSITORY_ID, cmisRepository.getId());
+				parameterKey, cmisRepository.getId());
 
 			try {
 				Repository repository = RepositoryUtil.findByPrimaryKey(
@@ -1394,10 +1380,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 			}
 		}
 
-		putParameter(
-			parameters, SessionParameter.REPOSITORY_ID, REPOSITORY_ID);
-
-		return _sessionFactory.createSession(parameters);
+		putParameter(parameters, SessionParameter.REPOSITORY_ID, parameterKey);
 	}
 
 	protected void getSubfolderIds(
@@ -1430,12 +1413,17 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected void putParameter(
-		Map<String, String> parameters, String chemistryKey,
-		String typeSettingsKey) {
+			Map<String, String> parameters, String chemistryKey,
+			String typeSettingsKey)
+		throws PortalException {
 
 		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
 
 		String value = typeSettingsProperties.getProperty(typeSettingsKey);
+
+		if (Validator.isNull(value)) {
+			throw new InvalidRepositoryException();
+		}
 
 		parameters.put(chemistryKey, value);
 	}
@@ -1562,5 +1550,7 @@ public class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
+	private static ThreadLocal<Session> _session =
+		new AutoResetThreadLocal<Session>(CMISRepository.class + "._session");
 
 }

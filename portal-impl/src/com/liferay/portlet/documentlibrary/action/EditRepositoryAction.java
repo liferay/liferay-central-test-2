@@ -67,8 +67,7 @@ public class EditRepositoryAction extends PortletAction {
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof InvalidRepositoryException ||
-				e instanceof NoSuchRepositoryException ||
+			if (e instanceof NoSuchRepositoryException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
@@ -76,6 +75,7 @@ public class EditRepositoryAction extends PortletAction {
 				setForward(actionRequest, "portlet.document_library.error");
 			}
 			else if (e instanceof DuplicateRepositoryNameException ||
+					 e instanceof InvalidRepositoryException ||
 					 e instanceof RepositoryNameException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
