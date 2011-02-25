@@ -247,6 +247,8 @@
 				<copy todir="docroot/html/js/editor/ckeditor" overwrite="true">
 					<fileset dir="docroot/html/js/editor/ckeditor_diffs" />
 				</copy>
+
+				<antcall target="build-ckeditor-plugins-creole" />
 			</then>
 			<else>
 				<copy todir="docroot/html/js/editor/ckeditor">
@@ -290,7 +292,7 @@
 
 				x = creoleParserContent.indexOf("if (!Parse) {");
 
-				creoleParserContent = creoleParserContent.substring(0, x) + "(function() {" + creoleParserContent.substring(x) + "})();";
+				creoleParserContent = creoleParserContent.substring(0, x) + "(function() {\n" + creoleParserContent.substring(x) + "})();";
 
 				// Fix for loop
 
@@ -305,17 +307,24 @@
 
 				StringBuilder sb = new StringBuilder();
 
-				sb.append("var imagePath = r[1];\n");
-				sb.append("var imagePathPrefix = options ? options.imagePrefix : '';\n");
-				sb.append("var img = document.createElement('img');\n");
-				sb.append("if (imagePathPrefix) {\n");
-				sb.append("if (!(/^https?:\\/\\//gi.test(imagePath))) {\n");
-				sb.append("imagePath = imagePathPrefix + imagePath;\n");
-				sb.append("}\n");
-				sb.append("}\n");
-				sb.append("img.src = imagePath;\n");
+				sb.append("                var imagePath = r[1];\n");
+				sb.append("                var imagePathPrefix = options ? options.imagePrefix : '';\n");
+				sb.append("                var img = document.createElement('img');\n\n");
+				sb.append("                if (imagePathPrefix) {\n");
+				sb.append("                    if (!(/^https?:\\/\\//gi.test(imagePath))) {\n");
+				sb.append("                        imagePath = imagePathPrefix + imagePath;\n");
+				sb.append("                    }\n");
+				sb.append("                }\n\n");
+				sb.append("                img.src = imagePath;\n");
 
 				creoleParserContent = creoleParserContent.substring(0, x) + sb.toString() + creoleParserContent.substring(y);
+
+				//Add Creole Parser object to Ckeditor's namespace
+
+				x = creoleParserContent.indexOf("Parse.Simple.Creole.prototype.constructor = Parse.Simple.Creole;");
+				y = creoleParserContent.indexOf("})();");
+
+				creoleParserContent = creoleParserContent.substring(0, x) + "CKEDITOR.CreoleParser = Parse.Simple.Creole;\n" + creoleParserContent.substring(y);
 
 				// Set content
 
@@ -323,7 +332,7 @@
 			]]>
 		</script>
 
-		<echo file="docroot/html/js/editor/ckeditor_diffs/plugins/creole/creole_parser.js">${creole_parser.content}</echo>
+		<echo file="docroot/html/js/editor/ckeditor/plugins/creole/creole_parser.js">${creole_parser.content}</echo>
 	</target>
 
 	<target name="build-codepress">

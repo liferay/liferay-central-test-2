@@ -1,3 +1,4 @@
+<pre id="parser">
 /*
  * JavaScript Creole 1.0 Wiki Markup Parser
  * $Id: creole.js 14 2009-03-21 16:15:08Z ifomichev $
@@ -25,7 +26,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-(function() {if (!Parse) { var Parse = {}; }
+if (!Parse) { var Parse = {}; }
 if (!Parse.Simple) { Parse.Simple = {}; }
 
 Parse.Simple.Base = function(grammar, options) {
@@ -43,7 +44,7 @@ Parse.Simple.Base.prototype = {
 
     parse: function(node, data, options) {
         if (options) {
-            for (var i in this.options) {
+            for (i in this.options) {
                 if (typeof options[i] == 'undefined') { options[i] = this.options[i]; }
             }
         }
@@ -243,16 +244,9 @@ Parse.Simple.Creole = function(options) {
                    '((?!' + rx.uriPrefix + ')[^\\/~])*)*)(\\/\\/|\\n|$)' },
 
         img: { regex: rx.img,
-            build: function(node, r, options) {var imagePath = r[1];
-var imagePathPrefix = options ? options.imagePrefix : '';
-var img = document.createElement('img');
-if (imagePathPrefix) {
-if (!(/^https?:\/\//gi.test(imagePath))) {
-imagePath = imagePathPrefix + imagePath;
-}
-}
-img.src = imagePath;
-
+            build: function(node, r, options) {
+                var img = document.createElement('img');
+                img.src = r[1];
                 img.alt = r[2] === undefined
                     ? (options && options.defaultImageText ? options.defaultImageText : '')
                     : r[2].replace(/~(.)/g, '$1');
@@ -375,4 +369,5 @@ img.src = imagePath;
 
 Parse.Simple.Creole.prototype = new Parse.Simple.Base();
 
-Parse.Simple.Creole.prototype.constructor = Parse.Simple.Creole;})();
+Parse.Simple.Creole.prototype.constructor = Parse.Simple.Creole;
+</pre>
