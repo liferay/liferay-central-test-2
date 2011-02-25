@@ -135,7 +135,13 @@ String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFile
 		ckEditor.on(
 			'instanceReady',
 			function() {
-				ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
+				setTimeout(
+					function() {
+						ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
+					},
+					300
+				);
+
 
 				<%
 				if (Validator.isNotNull(onChangeMethod)) {

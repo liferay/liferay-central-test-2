@@ -15,100 +15,67 @@
 --%>
 
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
 <%
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 String languageId = ParamUtil.getString(request, "languageId");
+String attachmentURLPrefix = HttpUtil.decodeURL(ParamUtil.getString(request, "attachmentURLPrefix"));
 %>
-
-CKEDITOR.addStylesSet(
-	'liferayStyles',
-	[
-
-	// Block Styles
-
-	{name: 'Normal', element : 'p'},
-	{name: 'Heading 1', element : 'h1'},
-	{name: 'Heading 2', element : 'h2'},
-	{name: 'Heading 3', element : 'h3'},
-	{name: 'Heading 4', element : 'h4'},
-
-	//Special classes
-
-	{name: 'Preformatted Text', element:'pre'},
-	{name: 'Cited Work', element:'cite'},
-	{name: 'Computer Code', element:'code'},
-
-	//Custom styles
-
-	{name : 'Info Message', element : 'div', attributes : {'class' : 'portlet-msg-info'}},
-	{name : 'Alert Message', element : 'div', attributes : {'class' : 'portlet-msg-alert'}},
-	{name : 'Error Message', element : 'div', attributes : {'class' : 'portlet-msg-error'}}
-	]
-);
-
-CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';
-
-CKEDITOR.config.contentsCss = '<%= HtmlUtil.escape(cssPath) %>/main.css';
-
-CKEDITOR.config.entities = false;
 
 CKEDITOR.config.height = 265;
 
-CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
+CKEDITOR.config.removePlugins = [
+	'elementspath',
+	'save',
+	'font',
+	'bidi',
+	'colordialog',
+	'colorbutton',
+	'div',
+	'flash',
+	'font',
+	'forms',
+	'image',
+	'indent',
+	'justify',
+	'keystrokes',
+	'link',
+	'menu',
+	'maximize',
+	'newpage',
+	'pagebreak',
+	'preview',
+	'print',
+	'save',
+	'scayt',
+	'smiley',
+	'showblocks',
+	'stylescombo',
+	'templates',
+	'wsc'
+].join(',');
 
-CKEDITOR.config.resize_enabled = false;
-
-CKEDITOR.config.stylesCombo_stylesSet = 'liferayStyles';
-
-CKEDITOR.config.toolbar_editInPlace = [
-	['Styles'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['Subscript', 'Superscript', 'SpecialChar'],
-	['Undo', 'Redo'],
-	['SpellChecker', 'Scayt'],
-	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'], ['Source', 'RemoveFormat'],
-];
-
-CKEDITOR.config.toolbar_email = [
-	['FontSize', 'TextColor', 'BGColor', '-', 'Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-	['SpellChecker', 'Scayt'],
-	'/',
-	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
-	['Source'],
+CKEDITOR.config.toolbar_creole = [
+	['Cut','Copy','Paste','PasteText','PasteFromWord'],
+	['Undo','Redo'],
+	['Bold', 'Italic', '-', 'NumberedList', 'BulletedList' ],
+	['Format'],
 	['Link', 'Unlink'],
-	['Image']
+	['Table', '-', 'HorizontalRule', 'SpecialChar' ],
+	['Find','Replace','-','SelectAll','RemoveFormat'],
+	['Source']
 ];
 
-CKEDITOR.config.toolbar_liferay = [
-	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['Subscript', 'Superscript'],
-	'/',
-	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
-	['Find', 'Replace', 'SpellChecker', 'Scayt'],
-	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
-	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-	'/',
-	['Source'],
-	['Link', 'Unlink', 'Anchor'],
-	['Image', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar']
-];
 
-CKEDITOR.config.toolbar_liferayArticle = [
-	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['Subscript', 'Superscript'],
-	'/',
-	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
-	['Find', 'Replace', 'SpellChecker', 'Scayt'],
-	['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
-	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-	'/',
-	['Source'],
-	['Link', 'Unlink', 'Anchor'],
-	['Image', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar', 'LiferayPageBreak']
-];
+CKEDITOR.config.attachments_prefix = '<%= attachmentURLPrefix %>';
+
+CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';
+
+CKEDITOR.config.extraPlugins = 'creole,wikilink';
+
+CKEDITOR.config.format_tags = 'p;h1;h2;h3;h4;h5;h6;pre';
+
+CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
