@@ -256,6 +256,76 @@
 		</if>
 	</target>
 
+	<target name="build-ckeditor-plugins-creole">
+		<!--<get
+			dest="docroot/html/js/editor/ckeditor_diffs/plugins/creole/creole_parser.js"
+			src="http://www.ivan.fomichev.name/2008/04/javascript-creole-10-wiki-markup-parser.html"
+		/>-->
+
+		<loadfile property="creole_parser.content" srcfile="docroot/html/js/editor/ckeditor_diffs/plugins/creole/creole_parser.js" />
+
+		<script classpathref="project.classpath" language="beanshell">
+			<![CDATA[
+				import org.apache.commons.lang.StringEscapeUtils;
+
+				// Read content
+
+				String creoleParserContent = project.getProperty("creole_parser.content");
+
+				// Get source
+
+				int x = creoleParserContent.indexOf("<pre id=\"parser\"");
+
+				x  = creoleParserContent.indexOf(">", x) + 1;
+
+				int y = creoleParserContent.indexOf("</pre>", x);
+
+				creoleParserContent = creoleParserContent.substring(x, y);
+
+				// Unescape
+
+				creoleParserContent = StringEscapeUtils.unescapeHtml(creoleParserContent);
+
+				// Wrap with function
+
+				x = creoleParserContent.indexOf("if (!Parse) {");
+
+				creoleParserContent = creoleParserContent.substring(0, x) + "(function() {" + creoleParserContent.substring(x) + "})();";
+
+				// Fix for loop
+
+				creoleParserContent = creoleParserContent.replace("for (i in this.options) {", "for (var i in this.options) {");
+
+				// Fix image
+
+				x = creoleParserContent.indexOf("regex: rx.img,");
+				x = creoleParserContent.indexOf("{", x) + 1;
+
+				y = creoleParserContent.indexOf("r[1];", x) + 5;
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("var imagePath = r[1];\n");
+				sb.append("var imagePathPrefix = options ? options.imagePrefix : '';\n");
+				sb.append("var img = document.createElement('img');\n");
+				sb.append("if (imagePathPrefix) {\n");
+				sb.append("if (!(/^https?:\\/\\//gi.test(imagePath))) {\n");
+				sb.append("imagePath = imagePathPrefix + imagePath;\n");
+				sb.append("}\n");
+				sb.append("}\n");
+				sb.append("img.src = imagePath;\n");
+
+				creoleParserContent = creoleParserContent.substring(0, x) + sb.toString() + creoleParserContent.substring(y);
+
+				// Set content
+
+				project.setProperty("creole_parser.content", creoleParserContent);
+			]]>
+		</script>
+
+		<echo file="docroot/html/js/editor/ckeditor_diffs/plugins/creole/creole_parser.js">${creole_parser.content}</echo>
+	</target>
+
 	<target name="build-codepress">
 		<if>
 			<not>
