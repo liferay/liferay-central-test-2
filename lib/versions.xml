@@ -889,6 +889,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/alloy-taglib.jar</file-name>
+		<version>74065</version>
+		<project-name>Alloy</project-name>
+		<project-url>http://alloy.liferay.com</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 2.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/ant.jar</file-name>
 		<version>1.8.2</version>
 		<project-name>Ant</project-name>

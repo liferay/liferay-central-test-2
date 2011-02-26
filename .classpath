@@ -86,6 +86,7 @@
 	<classpathentry kind="lib" path="lib/development/xmltask.jar"/>
 	<classpathentry kind="lib" path="lib/global/portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/abdera.jar"/>
+	<classpathentry kind="lib" path="lib/portal/alloy-taglib.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ant.jar"/>
 	<classpathentry kind="lib" path="lib/portal/antlr.jar"/>
 	<classpathentry kind="lib" path="lib/portal/aopalliance.jar"/>
