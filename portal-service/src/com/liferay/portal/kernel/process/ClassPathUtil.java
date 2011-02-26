@@ -57,11 +57,11 @@ public class ClassPathUtil {
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(_globalClassPath);
-		sb.append(StringPool.COLON);
+		sb.append(File.pathSeparator);
 		sb.append(
 			_buildClassPath(
 				classLoader, "com.liferay.portal.servlet.MainServlet"));
-		sb.append(StringPool.COLON);
+		sb.append(File.pathSeparator);
 		sb.append(servletContext.getRealPath("").concat("/WEB-INF/classes"));
 
 		_portalClassPath = sb.toString();
@@ -105,7 +105,7 @@ public class ClassPathUtil {
 
 		for (File file : files) {
 			sb.append(file.getAbsolutePath());
-			sb.append(StringPool.COLON);
+			sb.append(File.pathSeparator);
 		}
 
 		sb.setIndex(sb.index() - 1);
