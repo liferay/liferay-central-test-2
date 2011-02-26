@@ -570,9 +570,23 @@ public class SeleneseToJavaBuilder {
 
 				sb.append("selenium.");
 				sb.append(param1);
-				sb.append("(\"");
-				sb.append(param2);
-				sb.append("\");");
+				sb.append("(");
+
+				if (param2.startsWith("${")) {
+					sb.append("RuntimeVariables.getValue(\"");
+
+					String text = param2.substring(2, param2.length() - 1);
+
+					sb.append(text);
+					sb.append("\")");
+				}
+				else {
+					sb.append("\"");
+					sb.append(param2);
+					sb.append("\"");
+				}
+
+				sb.append(");");
 			}
 			else if (param1.equals("clickAndWait")) {
 				sb.append("selenium.click(RuntimeVariables.replace(\"");
@@ -741,6 +755,19 @@ public class SeleneseToJavaBuilder {
 				sb.append("String ");
 				sb.append(param3);
 				sb.append(" = selenium.getText(\"");
+				sb.append(param2);
+				sb.append("\");");
+
+				sb.append("RuntimeVariables.setValue(\"");
+				sb.append(param3);
+				sb.append("\", ");
+				sb.append(param3);
+				sb.append(");");
+			}
+			else if (param1.equals("storeValue")) {
+				sb.append("String ");
+				sb.append(param3);
+				sb.append(" = selenium.getValue(\"");
 				sb.append(param2);
 				sb.append("\");");
 
