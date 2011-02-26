@@ -260,7 +260,7 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.util.MethodParameterNamesResolverUtil" class="com.liferay.portal.kernel.util.MethodParameterNamesResolverUtil">
-		<property name="methodParamNamesResolver">
+		<property name="methodParameterNamesResolver">
 			<bean class="com.liferay.portal.util.MethodParameterNamesResolverImpl" />
 		</property>
 	</bean>
