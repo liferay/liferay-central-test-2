@@ -168,8 +168,8 @@ public class EditArticleAction extends PortletAction {
 
 				WindowState windowState = actionRequest.getWindowState();
 
-				if (cmd.equals(Constants.TRANSLATE) ||
-					cmd.equals(Constants.DELETE_TRANSLATION)) {
+				if (cmd.equals(Constants.DELETE_TRANSLATION) ||
+					cmd.equals(Constants.TRANSLATE)) {
 
 					setForward(
 						actionRequest,
@@ -447,14 +447,19 @@ public class EditArticleAction extends PortletAction {
 		double version = ParamUtil.getDouble(uploadRequest, "version");
 
 		boolean localized = ParamUtil.getBoolean(uploadRequest, "localized");
+
 		String defaultLanguageId = ParamUtil.getString(
 			uploadRequest, "defaultLanguageId");
+
+		Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
+
 		String toLanguageId = ParamUtil.getString(
 			uploadRequest, "toLanguageId");
 
+		Locale toLocale = null;
+
 		String title = StringPool.BLANK;
 		String description = StringPool.BLANK;
-		Locale toLocale = null;
 
 		if (Validator.isNull(toLanguageId)) {
 			title = ParamUtil.getString(
@@ -463,10 +468,11 @@ public class EditArticleAction extends PortletAction {
 				uploadRequest, "description_" + defaultLanguageId);
 		}
 		else{
+			toLocale = LocaleUtil.fromLanguageId(toLanguageId);
+
 			title = ParamUtil.getString(uploadRequest, "title_" + toLanguageId);
 			description = ParamUtil.getString(
 				uploadRequest, "description_" + toLanguageId);
-			toLocale = LocaleUtil.fromLanguageId(toLanguageId);
 		}
 
 		String content = ParamUtil.getString(uploadRequest, "content");
@@ -548,23 +554,13 @@ public class EditArticleAction extends PortletAction {
 		JournalArticle article = null;
 		String oldUrlTitle = StringPool.BLANK;
 
-		Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
-
-		JournalArticle curArticle = null;
-
-		if (Validator.isNotNull(articleId)) {
-			curArticle = JournalArticleServiceUtil.getArticle(
-				groupId, articleId, version);
-		}
-
-		Map<Locale, String> descriptionMap = null;
-		Map<Locale, String> titleMap = null;
-
 		if (cmd.equals(Constants.ADD)) {
-			titleMap = new HashMap<Locale, String>();
-			descriptionMap = new HashMap<Locale, String>();
+			Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
 			titleMap.put(defaultLocale, title);
+
+			Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
+
 			descriptionMap.put(defaultLocale, description);
 
 			if (Validator.isNull(structureId)) {
@@ -593,6 +589,9 @@ public class EditArticleAction extends PortletAction {
 		else {
 
 			// Merge current content with new content
+
+			JournalArticle curArticle = JournalArticleServiceUtil.getArticle(
+				groupId, articleId, version);
 
 			if (Validator.isNull(structureId)) {
 				if (!curArticle.isTemplateDriven()) {
@@ -640,10 +639,11 @@ public class EditArticleAction extends PortletAction {
 			article = JournalArticleServiceUtil.getArticle(
 				groupId, articleId, version);
 
-			String tempOldUrlTitle = article.getUrlTitle();
+			Map<Locale, String> titleMap = article.getTitleMap();
+			Map<Locale, String> descriptionMap =
+				article.getDescriptionMap();
 
-			titleMap = article.getTitleMap();
-			descriptionMap = article.getDescriptionMap();
+			String tempOldUrlTitle = article.getUrlTitle();
 
 			if (cmd.equals(Constants.UPDATE)) {
 				titleMap.put(defaultLocale, title);

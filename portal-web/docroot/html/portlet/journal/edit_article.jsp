@@ -175,15 +175,9 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 }
 
 String languageId = LanguageUtil.getLanguageId(request);
+
 String defaultLanguageId = ParamUtil.getString(request, "defaultLanguageId");
-String toLanguageId = ParamUtil.getString(request, "toLanguageId");
-
-boolean translate = false;
-
-if (Validator.isNotNull(toLanguageId)) {
-	translate = true;
-	languageId = toLanguageId;
-}
+String toLanguageId = ParamUtil.getString(request, "toLanguageId", languageId);
 
 if (article == null && Validator.isNull(defaultLanguageId)) {
 	defaultLanguageId = languageId;
@@ -205,11 +199,11 @@ if (article != null) {
 		content = article.getContent();
 	}
 
-	if (!translate) {
-		content = JournalArticleImpl.getContentByLocale(content, Validator.isNotNull(structureId), defaultLanguageId);
+	if (Validator.isNotNull(toLanguageId)) {
+		content = JournalArticleImpl.getContentByLocale(content, Validator.isNotNull(structureId), toLanguageId);
 	}
 	else {
-		content = JournalArticleImpl.getContentByLocale(content, Validator.isNotNull(structureId), toLanguageId);
+		content = JournalArticleImpl.getContentByLocale(content, Validator.isNotNull(structureId), defaultLanguageId);
 	}
 }
 else {
@@ -270,17 +264,17 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 </portlet:renderURL>
 
 <portlet:renderURL var="editArticleRenderPopUpURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="articleId" value="<%= articleId %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 	<portlet:param name="struts_action" value="/journal/edit_article" />
-	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:renderURL>
 
 <portlet:renderURL var="updateDefaultLanguageURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/journal/edit_article" />
+	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="articleId" value="<%= articleId %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:renderURL>
 
 <aui:form action="<%= editArticleActionURL %>" enctype="multipart/form-data" method="post" name="fm1">
@@ -294,13 +288,13 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="articleId" type="hidden" value="<%= articleId %>" />
 	<aui:input name="version" type="hidden" value="<%= version %>" />
+	<aui:input name="languageId" type="hidden" value="<%= languageId %>" />
 	<aui:input name="content" type="hidden" />
 	<aui:input name="parentStructureId" type="hidden" value="<%= parentStructureId %>" />
 	<aui:input name="articleURL" type="hidden" value="<%= editArticleRenderURL %>" />
 	<aui:input name="workflowAction" type="hidden" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
 	<aui:input name="deleteArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
 	<aui:input name="expireArticleIds" type="hidden" value="<%= articleId + EditArticleAction.VERSION_SEPARATOR + version %>" />
-	<aui:input name="languageId" type="hidden" value="<%= languageId %>" />
 
 	<aui:model-context bean="<%= article %>" model="<%= JournalArticle.class %>" />
 
@@ -333,7 +327,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 							</c:choose>
 						</c:when>
 						<c:otherwise>
-							<c:if test="<%= !translate %>">
+							<c:if test="<%= Validator.isNull(toLanguageId) %>">
 								<aui:workflow-status id="<%= String.valueOf(article.getArticleId()) %>" status="<%= article.getStatus() %>" version="<%= String.valueOf(article.getVersion()) %>" />
 							</c:if>
 						</c:otherwise>
@@ -344,7 +338,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				<td class="article-translation-toolbar">
 					<div>
 						<c:choose>
-							<c:when test="<%= !translate %>">
+							<c:when test="<%= Validator.isNull(toLanguageId) %>">
 								<c:if test="<%= Validator.isNotNull(articleId) %>">
 									<liferay-ui:icon-menu
 										align="auto"
@@ -352,7 +346,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 										direction="right"
 										icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
 										message='<%= LanguageUtil.get(pageContext, "add-translation") %>'
-										showArrow='<%= true %>'
+										showArrow="<%= true %>"
 										showWhenSingleIcon="<%= true %>"
 									>
 
@@ -394,6 +388,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 								<a href="javascript:;" id="<portlet:namespace />changeLanguageId"><liferay-ui:message key="change" /></a>
 
 								<aui:select inputCssClass="aui-helper-hidden" id="defaultLocale" inlineField="<%= true %>" label="" name="defaultLanguageId">
+
 									<%
 									Locale[] locales = LanguageUtil.getAvailableLocales();
 
@@ -405,6 +400,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 									<%
 									}
 									%>
+
 								</aui:select>
 							</c:when>
 							<c:otherwise>
@@ -414,13 +410,14 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					</div>
 
 					<c:if test="<%= Validator.isNotNull(articleId) %>">
+
 						<%
 						String[] translations = article.getAvailableLocales();
 						%>
 
-						<div class='<%= (!translate && (translations.length > 1)) ? "contains-translations" :"" %>' id="<portlet:namespace />availableTranslationContainer">
+						<div class='<%= (Validator.isNull(toLanguageId) && (translations.length > 1)) ? "contains-translations" :"" %>' id="<portlet:namespace />availableTranslationContainer">
 							<c:choose>
-								<c:when test="<%= translate %>">
+								<c:when test="<%= Validator.isNotNull(toLanguageId) %>">
 									<liferay-util:buffer var="languageLabel">
 										<%= LocaleUtil.fromLanguageId(toLanguageId).getDisplayName(locale) %>
 
@@ -463,7 +460,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			</tr>
 			</table>
 
-			<aui:input label="name" languageId="<%= (translate) ? toLanguageId : defaultLanguageId %>" name="title" />
+			<aui:input label="name" languageId="<%= Validator.isNotNull(toLanguageId) ? toLanguageId : defaultLanguageId %>" name="title" />
 
 			<div class="journal-article-container" id="<portlet:namespace />journalArticleContainer">
 				<c:choose>
@@ -522,7 +519,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 								}
 							}
 
-							if (translate) {
+							if (Validator.isNotNull(toLanguageId)) {
 						%>
 
 								<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>" />
@@ -548,7 +545,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					</c:otherwise>
 				</c:choose>
 
-				<c:if test="<%= !translate %>">
+				<c:if test="<%= Validator.isNull(toLanguageId) %>">
 					<aui:input inlineLabel="left" label="searchable" name="indexable" />
 				</c:if>
 
@@ -576,9 +573,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				<liferay-ui:error exception="<%= ArticleSmallImageSizeException.class %>" message="please-enter-a-small-image-with-a-valid-file-size" />
 
 				<aui:fieldset>
-					<aui:input name="description" languageId="<%= (translate) ? toLanguageId : defaultLanguageId %>" />
+					<aui:input name="description" languageId="<%= Validator.isNotNull(toLanguageId) ? toLanguageId : defaultLanguageId %>" />
 
-					<c:if test="<%= !translate %>">
+					<c:if test="<%= Validator.isNull(toLanguageId) %>">
 						<aui:input inlineLabel="left" label="use-small-image" name="smallImage" />
 
 						<aui:input label="small-image-url" name="smallImageURL" />
@@ -602,7 +599,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 			<br />
 
-			<c:if test="<%= !translate %>">
+			<c:if test="<%= Validator.isNull(toLanguageId) %>">
 				<liferay-ui:panel defaultState="closed" extended="<%= false %>" id="journalCategorizationPanel" persistState="<%= true %>" title="categorization">
 					<liferay-ui:error exception="<%= ArticleTypeException.class %>" message="please-select-a-type" />
 
@@ -702,7 +699,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				%>
 
 				<c:choose>
-					<c:when test="<%= !translate %>">
+					<c:when test="<%= Validator.isNull(toLanguageId) %>">
 						<c:if test="<%= hasSavePermission %>">
 							<aui:button name="saveButton" value="<%= saveButtonLabel %>" />
 
@@ -730,11 +727,9 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 						<%
 						String[] translations = article.getAvailableLocales();
-
-						boolean alreadyTranslated = ArrayUtil.contains(translations, languageId);
 						%>
 
-						<aui:button name="removeArticleLocaleButton" onClick='<%= renderResponse.getNamespace() + "removeArticleLocale();" %>' value="remove-translation" disabled="<%= languageId.equals(defaultLanguageId) || !alreadyTranslated %>" />
+						<aui:button name="removeArticleLocaleButton" onClick='<%= renderResponse.getNamespace() + "removeArticleLocale();" %>' value="remove-translation" disabled="<%= languageId.equals(defaultLanguageId) || !ArrayUtil.contains(translations, languageId) %>" />
 					</c:otherwise>
 				</c:choose>
 				<aui:button onClick="<%= redirect %>" type="cancel" />
@@ -742,7 +737,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		</td>
 
 		<c:choose>
-			<c:when test="<%= !translate %>">
+			<c:when test="<%= Validator.isNull(toLanguageId) %>">
 				<td class="lfr-top">
 					<%@ include file="edit_article_extra.jspf" %>
 				</td>
@@ -923,7 +918,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	</c:if>
 </aui:script>
 
-<aui:script use="liferay-portlet-journal">
+<aui:script use="aui-base,liferay-portlet-journal">
 
 	<%
 	String doAsUserId = themeDisplay.getDoAsUserId();
@@ -941,9 +936,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
 
 	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= HtmlUtil.escape(articleId) %>');
-</aui:script>
 
-<aui:script use="aui-base">
 	var defaultLocaleSelector = A.one('#<portlet:namespace/>defaultLocale');
 
 	if (defaultLocaleSelector) {
@@ -951,6 +944,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			'change',
 			function(event) {
 				var defaultLanguageId = defaultLocaleSelector.get('value');
+
 				var url = '<%= updateDefaultLanguageURL %>' + '&<portlet:namespace />defaultLanguageId=' + defaultLanguageId;
 
 				window.location.href = url;
@@ -966,7 +960,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		changeLink.on(
 			'click',
 			function(event) {
-				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "changing-the-default-language-will-delete-all-non-saved-content") %>')) {
+				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "changing-the-default-language-will-delete-all-unaved-content") %>')) {
 					languageSelector.show();
 					languageSelector.focus();
 					changeLink.hide();
@@ -984,6 +978,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 	depth = new Integer(depth.intValue() + 1);
 
 	String languageId = LanguageUtil.getLanguageId(request);
+
 	String toLanguageId = ParamUtil.getString(request, "toLanguageId");
 
 	List<Element> xsdElements = xsdParentElement.elements();
@@ -1052,6 +1047,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 
 			if (dynamicContentEl != null) {
 				elLanguageId = dynamicContentEl.attributeValue("language-id", StringPool.BLANK);
+
 				if (Validator.isNotNull(toLanguageId) && Validator.isNull(elLanguageId)){
 					continue;
 				}

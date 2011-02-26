@@ -32,6 +32,12 @@ String backURL = ParamUtil.getString(request, "backURL");
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
+String toLanguageId = ParamUtil.getString(request, "toLanguageId");
+
+if ((article != null) && Validator.isNotNull(toLanguageId)) {
+	redirect = null;
+}
+
 PortletURL editArticleURL = renderResponse.createRenderURL();
 
 editArticleURL.setParameter("struts_action", "/journal/edit_article");
@@ -50,12 +56,6 @@ viewArticleHistoryURL.setParameter("redirect", redirect);
 if (article != null) {
 	viewArticleHistoryURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 	viewArticleHistoryURL.setParameter("articleId", article.getArticleId());
-}
-
-String toLanguageId = ParamUtil.getString(request, "toLanguageId");
-
-if ((article != null) && Validator.isNotNull(toLanguageId)) {
-	redirect = null;
 }
 %>
 

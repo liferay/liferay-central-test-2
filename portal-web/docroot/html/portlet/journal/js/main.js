@@ -791,12 +791,13 @@ AUI().add(
 
 			getDefaultLocale: function() {
 				var instance = this;
+
 				var defaultLocale = instance.getById('defaultLocale');
 
 				if (defaultLocale){
 					defaultLocale = instance.getById('defaultLocale').val();
 				}
-				
+
 				return defaultLocale;
 			},
 
@@ -1114,18 +1115,32 @@ AUI().add(
 
 			hasStructure: function() {
 				var instance = this;
+
 				var form = instance.getPrincipalForm();
+
 				var structureId = instance.getByName(form, 'structureId');
 
-				return structureId ? structureId.val() : false;				
+				if (structureId) {
+					return structureId.val();
+				}
+				else {
+					return false;
+				}
 			},
 
 			hasTemplate: function() {
 				var instance = this;
+
 				var form = instance.getPrincipalForm();
+
 				var templateId = instance.getByName(form, 'templateId');
 
-				return templateId ? templateId.val() : false;
+				if (templateId) {
+					return templateId.val();
+				}
+				else {
+					return false;
+				}
 			},
 
 			helperIntersecting: function() {
@@ -1548,16 +1563,14 @@ AUI().add(
 
 				var form = instance.getPrincipalForm();
 
-				var contentInput = instance.getByName(form, 'content');
 				var cmdInput = instance.getByName(form, 'cmd');
-				var content = instance.getArticleContentXML();
-				var structureIdInput = instance.getByName(form, 'structureId');
-
-				if (structureIdInput) {
-					var structureId = structureIdInput.val();
-				}
 
 				cmdInput.val('translate');
+
+				var contentInput = instance.getByName(form, 'content');
+
+				var content = instance.getArticleContentXML();
+
 				contentInput.val(content);
 
 				submitForm(form);
@@ -2206,7 +2219,7 @@ AUI().add(
 				if (translateButton) {
 					translateButton.detach('click');
 				}
-				
+
 				editButtons.on(
 					'click',
 					function(event) {
@@ -2332,7 +2345,7 @@ AUI().add(
 
 				if (saveStructureButton) {
 					saveStructureButton.detach('click');
-					
+
 					saveStructureButton.on(
 						'click',
 						function() {
@@ -2690,6 +2703,7 @@ AUI().add(
 				var form = instance.getPrincipalForm();
 
 				var currentXSD = encodeURIComponent(instance.getStructureXSD());
+
 				var structureXSDInput = instance.getByName(form, 'structureXSD');
 
 				if (structureXSDInput){

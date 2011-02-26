@@ -17,16 +17,18 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
+String cmd = ParamUtil.getString(request, Constants.CMD);
+
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
-double version = article.getVersion();
-
-String cmd = ParamUtil.getString(request, Constants.CMD);
 String toLanguageId = ParamUtil.getString(request, "toLanguageId");
+
 String toLanguageDisplayName = StringPool.BLANK;
 
 if (cmd.equals(Constants.TRANSLATE)) {
-	toLanguageDisplayName = LocaleUtil.fromLanguageId(toLanguageId).getDisplayName(locale);
+	Locale toLocale = LocaleUtil.fromLanguageId(toLanguageId);
+
+	toLanguageDisplayName = toLocale.getDisplayName(locale);
 }
 %>
 
@@ -41,7 +43,7 @@ if (cmd.equals(Constants.TRANSLATE)) {
 		parent = originalParent;
 	}
 
-	parent.<portlet:namespace />postProcessTranslation('<%= HtmlUtil.escape(cmd) %>', '<%= version %>', '<%= HtmlUtil.escape(toLanguageId) %>', '<%= toLanguageDisplayName %>');
+	parent.<portlet:namespace />postProcessTranslation('<%= HtmlUtil.escape(cmd) %>', '<%= article.getVersion() %>', '<%= HtmlUtil.escape(toLanguageId) %>', '<%= toLanguageDisplayName %>');
 
 	window.parent.Liferay.fire(
 		'<%= renderResponse.getNamespace() + toLanguageId %>close',
