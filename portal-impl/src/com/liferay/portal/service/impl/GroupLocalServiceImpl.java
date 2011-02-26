@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
@@ -1429,7 +1430,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			String groupName = StagingUtil.getSchedulerGroupName(
 				DestinationNames.LAYOUTS_REMOTE_PUBLISHER, group.getGroupId());
 
-			SchedulerEngineUtil.unschedule(groupName);
+			SchedulerEngineUtil.unschedule(groupName, JobType.PERMAENT);
 
 			long liveGroupId = 0;
 			long stagingGroupId = 0;
@@ -1452,14 +1453,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				groupName = StagingUtil.getSchedulerGroupName(
 					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
 
-				SchedulerEngineUtil.unschedule(groupName);
+				SchedulerEngineUtil.unschedule(groupName, JobType.PERMAENT);
 
 				// Copy from live
 
 				groupName = StagingUtil.getSchedulerGroupName(
 					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, stagingGroupId);
 
-				SchedulerEngineUtil.unschedule(groupName);
+				SchedulerEngineUtil.unschedule(groupName, JobType.PERMAENT);
 			}
 		}
 		catch (Exception e) {

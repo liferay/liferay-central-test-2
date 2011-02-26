@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.portlet.Route;
 import com.liferay.portal.kernel.portlet.Router;
+import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
@@ -428,7 +429,8 @@ public class PortletBagFactory {
 			schedulerEntry.setTriggerValue(triggerValue);
 		}
 
-		SchedulerEngineUtil.schedule(schedulerEntry, _classLoader);
+		SchedulerEngineUtil.schedule(
+			schedulerEntry, _classLoader, JobType.PERMAENT);
 	}
 
 	protected void initSchedulers(Portlet portlet) throws Exception {

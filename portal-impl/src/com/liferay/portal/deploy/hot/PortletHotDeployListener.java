@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBag;
+import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.search.Indexer;
@@ -148,7 +149,8 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 			if ((schedulerEntries != null) && !schedulerEntries.isEmpty()) {
 				for (SchedulerEntry schedulerEntry : schedulerEntries) {
-					SchedulerEngineUtil.unschedule(schedulerEntry);
+					SchedulerEngineUtil.unschedule(
+						schedulerEntry, JobType.PERMAENT);
 				}
 			}
 		}

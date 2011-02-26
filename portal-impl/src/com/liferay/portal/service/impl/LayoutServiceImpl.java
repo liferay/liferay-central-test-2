@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.CronTrigger;
+import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -308,7 +309,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		SchedulerEngineUtil.schedule(
 			trigger, description, DestinationNames.LAYOUTS_LOCAL_PUBLISHER,
-			publisherRequest);
+			publisherRequest, JobType.PERMAENT);
 	}
 
 	public void schedulePublishToRemote(
@@ -356,7 +357,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				cronText);
 		SchedulerEngineUtil.schedule(
 			trigger, description, DestinationNames.LAYOUTS_REMOTE_PUBLISHER,
-			publisherRequest);
+			publisherRequest, JobType.PERMAENT);
 	}
 
 	public void setLayouts(
@@ -385,7 +386,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		SchedulerEngineUtil.unschedule(jobName, groupName);
+		SchedulerEngineUtil.unschedule(jobName, groupName, JobType.PERMAENT);
 	}
 
 	public void unschedulePublishToRemote(
@@ -413,7 +414,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS);
 		}
 
-		SchedulerEngineUtil.unschedule(jobName, groupName);
+		SchedulerEngineUtil.unschedule(jobName, groupName, JobType.PERMAENT);
 	}
 
 	public Layout updateLayout(

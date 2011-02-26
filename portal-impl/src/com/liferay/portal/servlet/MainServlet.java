@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
@@ -649,7 +650,8 @@ public class MainServlet extends ActionServlet {
 			}
 
 			for (SchedulerEntry schedulerEntry : schedulerEntries) {
-				SchedulerEngineUtil.unschedule(schedulerEntry);
+				SchedulerEngineUtil.unschedule(
+					schedulerEntry, JobType.PERMAENT);
 			}
 		}
 	}
@@ -657,7 +659,8 @@ public class MainServlet extends ActionServlet {
 	protected void destroySocialEquityLogScheduler() throws Exception {
 		try {
 			if (_socialEquityLogSchedulerEntry != null) {
-				SchedulerEngineUtil.unschedule(_socialEquityLogSchedulerEntry);
+				SchedulerEngineUtil.unschedule(
+					_socialEquityLogSchedulerEntry, JobType.PERMAENT);
 			}
 		}
 		catch (Exception e) {
@@ -971,7 +974,7 @@ public class MainServlet extends ActionServlet {
 
 		SchedulerEngineUtil.schedule(
 			_socialEquityLogSchedulerEntry,
-			PortalClassLoaderUtil.getClassLoader());
+			PortalClassLoaderUtil.getClassLoader(), JobType.PERMAENT);
 	}
 
 	protected void initThemes(

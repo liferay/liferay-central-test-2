@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.CronText;
 import com.liferay.portal.kernel.scheduler.CronTrigger;
+import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -228,7 +229,7 @@ public class MBMailingListLocalServiceImpl
 
 		SchedulerEngineUtil.schedule(
 			trigger, null, DestinationNames.MESSAGE_BOARDS_MAILING_LIST,
-			mailingListRequest);
+			mailingListRequest, JobType.PERMAENT);
 	}
 
 	protected void unscheduleMailingList(MBMailingList mailingList)
@@ -236,7 +237,7 @@ public class MBMailingListLocalServiceImpl
 
 		String groupName = getSchedulerGroupName(mailingList);
 
-		SchedulerEngineUtil.unschedule(groupName);
+		SchedulerEngineUtil.unschedule(groupName, JobType.PERMAENT);
 	}
 
 	protected void validate(
