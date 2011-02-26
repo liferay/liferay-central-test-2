@@ -14,7 +14,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.util.MethodParamNamesResolver;
+import com.liferay.portal.kernel.util.MethodParameterNamesResolver;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Method;
@@ -25,26 +25,24 @@ import java.util.Map;
 import jodd.paramo.Paramo;
 
 /**
- * <a href="MethodParamNamesResolverUtilImpl.java.html"><b><i>View
- * Source</i></b></a>
+ * @author Igor Spasic
  */
-public class MethodParamNamesResolverImpl implements MethodParamNamesResolver {
+public class MethodParameterNamesResolverImpl
+	implements MethodParameterNamesResolver {
 
-	public String[] resolveParamNames(Method method) {
+	public String[] resolveParamemterNames(Method method) {
+		String[] parameterNames = _parameterNames.get(method);
 
-		String[] names = _cache.get(method);
+		if (parameterNames == null) {
+			parameterNames = Paramo.resolveParameterNames(method);
 
-		if (names == null) {
-
-			names = Paramo.resolveParameterNames(method);
-
-			_cache.put(method, names);
+			_parameterNames.put(method, parameterNames);
 		}
 
-		return names;
+		return parameterNames;
 	}
 
-	private final Map<AccessibleObject, String[]> _cache =
+	private Map<AccessibleObject, String[]> _parameterNames =
 		new HashMap<AccessibleObject, String[]>();
 
 }

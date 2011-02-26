@@ -15,8 +15,12 @@
 package com.liferay.portal.kernel.util;
 
 import java.lang.reflect.Method;
-public interface MethodParamNamesResolver {
 
-	public String[] resolveParamNames(Method method);
+/**
+ * @author Igor Spasic
+ */
+public interface MethodParameterNamesResolver {
+
+	public String[] resolveParamemterNames(Method method);
 
 }

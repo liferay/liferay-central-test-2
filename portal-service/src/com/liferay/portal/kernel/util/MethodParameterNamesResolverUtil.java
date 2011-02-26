@@ -17,25 +17,26 @@ package com.liferay.portal.kernel.util;
 import java.lang.reflect.Method;
 
 /**
- * <a href="MethodParamNameResolverUtil.java.html"><b><i>View
- * Source</i></b></a>
+ * @author Igor Spasic
  */
-public class MethodParamNamesResolverUtil {
+public class MethodParameterNamesResolverUtil {
 
-	public static MethodParamNamesResolver getMethodParamNamesResolver() {
-		return _methodParamNamesResolver;
+	public static MethodParameterNamesResolver
+		getMethodParameterNamesResolver() {
+
+		return _methodParameterNamesResolver;
 	}
 
 	public static String[] resolveParamNames(Method method) {
-		return getMethodParamNamesResolver().resolveParamNames(method);
+		return getMethodParameterNamesResolver().resolveParamemterNames(method);
 	}
 
-	public void setMethodParamNamesResolver
-		(MethodParamNamesResolver methodParamNameResolver) {
+	public void setMethodParameterNamesResolver(
+		MethodParameterNamesResolver methodParameterNamesResolver) {
 
-		_methodParamNamesResolver = methodParamNameResolver;
+		_methodParameterNamesResolver = methodParameterNamesResolver;
 	}
 
-	private static MethodParamNamesResolver _methodParamNamesResolver;
+	private static MethodParameterNamesResolver _methodParameterNamesResolver;
 
 }
