@@ -222,18 +222,18 @@ public class LoginUtil {
 			request, login, password, authType);
 
 		if (!PropsValues.AUTH_SIMULTANEOUS_LOGINS) {
-			Map<String, UserTracker> sessionUsers =
-				LiveUsers.getSessionUsers(PortalUtil.getCompanyId(request));
+			Map<String, UserTracker> sessionUsers = LiveUsers.getSessionUsers(
+				company.getCompanyId());
 
-			List<UserTracker> userTrackers =
-				new ArrayList<UserTracker>(sessionUsers.values());
+			List<UserTracker> userTrackers = new ArrayList<UserTracker>(
+				sessionUsers.values());
 
 			for (UserTracker userTracker : userTrackers) {
 				if (userId == userTracker.getUserId()) {
-					HttpSession userSession = 
-						PortalSessionContext.get(userTracker.getSessionId());
+					HttpSession userTrackerSession =  PortalSessionContext.get(
+						userTracker.getSessionId());
 
-					userSession.invalidate();
+					userTrackerSession.invalidate();
 				}
 			}
 		}
