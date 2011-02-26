@@ -450,6 +450,7 @@ public class EditLayoutsAction extends PortletAction {
 			uploadRequest, "inheritFromParentLayoutId");
 
 		long copyLayoutId = ParamUtil.getLong(uploadRequest, "copyLayoutId");
+
 		String layoutTemplateId = ParamUtil.getString(
 			uploadRequest, "layoutTemplateId");
 

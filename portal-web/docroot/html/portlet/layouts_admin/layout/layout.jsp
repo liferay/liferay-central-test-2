@@ -19,19 +19,20 @@
 <%
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
-Theme selTheme = null;
 LayoutTypePortlet selLayoutTypePortlet = null;
 
+Theme selTheme = null;
+
 if (selLayout != null) {
-	selTheme = selLayout.getTheme();
 	selLayoutTypePortlet = (LayoutTypePortlet)selLayout.getLayoutType();
+
+	selTheme = selLayout.getTheme();
 }
 %>
 
 <liferay-ui:error-marker key="errorSection" value="layout" />
 
 <aui:model-context bean="<%= selLayout %>" model="<%= Layout.class %>" />
-
 
 <h3><liferay-ui:message key="layout" /></h3>
 
