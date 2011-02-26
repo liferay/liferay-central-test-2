@@ -249,11 +249,11 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 			boolean forkProcess = false;
 
-			if (PropsValues.TEXT_EXTRACT_FORK_PROCESS_ENABLED) {
+			if (PropsValues.TEXT_EXTRACTION_FORK_PROCESS_ENABLED) {
 				String mimeType = tika.detect(is);
 
 				if (ArrayUtil.contains(
-						PropsValues.TEXT_EXTRACT_FORK_PROCESS_MIME_TYPES,
+						PropsValues.TEXT_EXTRACTION_FORK_PROCESS_MIME_TYPES,
 						mimeType)) {
 
 					forkProcess = true;

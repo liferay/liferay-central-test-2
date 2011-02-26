@@ -1709,9 +1709,9 @@ public interface PropsKeys {
 
 	public static final String TERMS_OF_USE_REQUIRED = "terms.of.use.required";
 
-	public static final String TEXT_EXTRACT_FORK_PROCESS_ENABLED = "text.extract.fork.process.enabled";
+	public static final String TEXT_EXTRACTION_FORK_PROCESS_ENABLED = "text.extraction.fork.process.enabled";
 
-	public static final String TEXT_EXTRACT_FORK_PROCESS_MIME_TYPES = "text.extract.fork.process.mime.types";
+	public static final String TEXT_EXTRACTION_FORK_PROCESS_MIME_TYPES = "text.extraction.fork.process.mime.types";
 
 	public static final String THEME_CSS_FAST_LOAD = "theme.css.fast.load";
 

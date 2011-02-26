@@ -1168,9 +1168,9 @@ public class PropsValues {
 
 	public static boolean TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.TERMS_OF_USE_REQUIRED));
 
-	public static final boolean TEXT_EXTRACT_FORK_PROCESS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.TEXT_EXTRACT_FORK_PROCESS_ENABLED));
+	public static final boolean TEXT_EXTRACTION_FORK_PROCESS_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.TEXT_EXTRACTION_FORK_PROCESS_ENABLED));
 
-	public static final String[] TEXT_EXTRACT_FORK_PROCESS_MIME_TYPES = PropsUtil.getArray(PropsKeys.TEXT_EXTRACT_FORK_PROCESS_MIME_TYPES);
+	public static final String[] TEXT_EXTRACTION_FORK_PROCESS_MIME_TYPES = PropsUtil.getArray(PropsKeys.TEXT_EXTRACTION_FORK_PROCESS_MIME_TYPES);
 
 	public static boolean THEME_CSS_FAST_LOAD = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.THEME_CSS_FAST_LOAD));
 
