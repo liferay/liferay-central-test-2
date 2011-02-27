@@ -850,18 +850,21 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 			var availableTranslationContainer = A.one('#<portlet:namespace />availableTranslationContainer');
 			var availableTranslationsLinks = A.one('#<portlet:namespace />availableTranslationsLinks');
+
 			var chooseLanguageText = A.one('#<portlet:namespace />chooseLanguageText');
-			var statusEl = A.one('.taglib-workflow-status .workflow-status strong');
 			var translationsMessage = A.one('#<portlet:namespace />translationsMessage');
-			var versionEl = A.one('.taglib-workflow-status .workflow-version strong');
+
+			var taglibWorkflowStatus = A.one('#<portlet:namespace />journalArticleWrapper .taglib-workflow-status');
+			var statusNode = taglibWorkflowStatus.one('.workflow-status strong');
+			var versionNode = taglibWorkflowStatus.one('.workflow-version strong');
 
 			document.<portlet:namespace />fm1.<portlet:namespace />version.value = newVersion;
 
-			versionEl.html(newVersion);
+			versionNode.html(newVersion);
 
-			statusEl.removeClass('workflow-status-approved');
-			statusEl.addClass('workflow-status-draft');
-			statusEl.html('<%= LanguageUtil.get(pageContext, "draft") %>');
+			statusNode.removeClass('workflow-status-approved');
+			statusNode.addClass('workflow-status-draft');
+			statusNode.html('<%= LanguageUtil.get(pageContext, "draft") %>');
 
 			availableTranslationContainer.addClass('contains-translations');
 			availableTranslationsLinks.show();
@@ -875,7 +878,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			else if (!translationLink) {
 				var TPL_TRANSLATION = '<a class="journal-article-translation journal-article-translation-{newLanguageId}" href="javascript:;"><img alt="" src="<%= themeDisplay.getPathThemeImages() %>/language/{newLanguageId}.png" />{newLanguage}</a>';
 
-				var newLinkTpl = A.Lang.sub(
+				translationLinkTpl = A.Lang.sub(
 					TPL_TRANSLATION,
 					{
 						newLanguageId: newLanguageId,
@@ -883,22 +886,22 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					}
 				);
 
-				var newLink = A.Node.create(newLinkTpl);
+				translationLink = A.Node.create(translationLinkTpl);
 
-				var editTranslationURL = '<%= editArticleRenderPopUpURL %>' + '&<portlet:namespace />toLanguageId=' + newLanguageId;
+				var editTranslationURL = '<%= editArticleRenderPopUpURL %>&<portlet:namespace />toLanguageId=' + newLanguageId;
 
-				newLink.on(
+				translationLink.on(
 					'click',
 					function(event) {
 						Liferay.Util.openIframePopUp('', '', editTranslationURL, '<portlet:namespace />' + newLanguageId, '<%= LanguageUtil.get(pageContext, "web-content-translation") %>');
 					}
 				);
 
-				availableTranslationsLinks.append(newLink);
+				availableTranslationsLinks.append(translationLink);
 
-				var newInput = A.Node.create('<input name="<portlet:namespace />available_locales" type="hidden" value="' + newLanguageId + '" />');
+				var languageInput = A.Node.create('<input name="<portlet:namespace />available_locales" type="hidden" value="' + newLanguageId + '" />');
 
-				A.one('#<portlet:namespace />fm1').append(newInput);
+				A.one('#<portlet:namespace />fm1').append(languageInput);
 			}
 		},
 		['aui-base']
@@ -963,6 +966,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "changing-the-default-language-will-delete-all-unaved-content") %>')) {
 					languageSelector.show();
 					languageSelector.focus();
+
 					changeLink.hide();
 					textLanguageId.hide();
 				}

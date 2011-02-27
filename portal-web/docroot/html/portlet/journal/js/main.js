@@ -795,7 +795,7 @@ AUI().add(
 				var defaultLocale = instance.getById('defaultLocale');
 
 				if (defaultLocale){
-					defaultLocale = instance.getById('defaultLocale').val();
+					defaultLocale = defaultLocale.val();
 				}
 
 				return defaultLocale;
@@ -838,6 +838,7 @@ AUI().add(
 
 				if (instance.articleId) {
 					var form = instance.getPrincipalForm();
+
 					var inputGroupId = instance.getByName(form, 'groupId');
 					var inputGroupIdVal = inputGroupId.val();
 
@@ -897,6 +898,7 @@ AUI().add(
 						);
 
 						var form = instance.getPrincipalForm();
+
 						var structureIdInput = instance.getByName(form, 'structureId');
 						var structureId = structureIdInput.val();
 
@@ -1120,12 +1122,7 @@ AUI().add(
 
 				var structureId = instance.getByName(form, 'structureId');
 
-				if (structureId) {
-					return structureId.val();
-				}
-				else {
-					return false;
-				}
+				return structureId && structureId.val();
 			},
 
 			hasTemplate: function() {
@@ -1135,12 +1132,7 @@ AUI().add(
 
 				var templateId = instance.getByName(form, 'templateId');
 
-				if (templateId) {
-					return templateId.val();
-				}
-				else {
-					return false;
-				}
+				return templateId && templateId.val();
 			},
 
 			helperIntersecting: function() {
@@ -1283,6 +1275,7 @@ AUI().add(
 				var instance = this;
 
 				var form = instance.getPrincipalForm();
+
 				var auxForm = instance.getPrincipalForm('fm2');
 				var articleContent = instance.getArticleContentXML();
 
@@ -1551,6 +1544,7 @@ AUI().add(
 				var instance = this;
 
 				var form = instance.getPrincipalForm();
+
 				var storedStructureXSD = instance.getByName(form, 'structureXSD').val();
 
 				var hasChanged = (storedStructureXSD != encodeURIComponent(instance.getStructureXSD()));
