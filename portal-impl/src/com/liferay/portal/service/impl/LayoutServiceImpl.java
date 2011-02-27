@@ -18,8 +18,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.CronTrigger;
-import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -308,8 +308,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				privateLayout, layoutIdMap, parameterMap, startDate, endDate);
 
 		SchedulerEngineUtil.schedule(
-			trigger, description, DestinationNames.LAYOUTS_LOCAL_PUBLISHER,
-			publisherRequest, JobType.PERMAENT);
+			trigger, StorageType.PERSISTED, description,
+			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, publisherRequest, 0);
 	}
 
 	public void schedulePublishToRemote(
@@ -356,8 +356,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				jobName, groupName, schedulerStartDate, schedulerEndDate,
 				cronText);
 		SchedulerEngineUtil.schedule(
-			trigger, description, DestinationNames.LAYOUTS_REMOTE_PUBLISHER,
-			publisherRequest, JobType.PERMAENT);
+			trigger, StorageType.PERSISTED, description,
+			DestinationNames.LAYOUTS_REMOTE_PUBLISHER, publisherRequest, 0);
 	}
 
 	public void setLayouts(
@@ -386,7 +386,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			throw new PrincipalException();
 		}
 
-		SchedulerEngineUtil.unschedule(jobName, groupName, JobType.PERMAENT);
+		SchedulerEngineUtil.unschedule(
+			jobName, groupName, StorageType.PERSISTED);
 	}
 
 	public void unschedulePublishToRemote(
@@ -414,7 +415,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS);
 		}
 
-		SchedulerEngineUtil.unschedule(jobName, groupName, JobType.PERMAENT);
+		SchedulerEngineUtil.unschedule(
+			jobName, groupName, StorageType.PERSISTED);
 	}
 
 	public Layout updateLayout(

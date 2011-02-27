@@ -77,7 +77,7 @@ public class MessageSenderJob implements Job {
 			jobDetail.getFullName());
 
 		if (jobExecutionContext.getNextFireTime() == null) {
-			if (message.getBoolean(SchedulerEngine.PERMANENT)) {
+			if (message.getBoolean(SchedulerEngine.PERSISTED)) {
 				Trigger trigger = jobExecutionContext.getTrigger();
 
 				jobState.setTriggerTimeInfomation(

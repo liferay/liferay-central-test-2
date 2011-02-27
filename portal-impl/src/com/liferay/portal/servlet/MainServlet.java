@@ -25,10 +25,10 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
-import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
+import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
@@ -651,7 +651,7 @@ public class MainServlet extends ActionServlet {
 
 			for (SchedulerEntry schedulerEntry : schedulerEntries) {
 				SchedulerEngineUtil.unschedule(
-					schedulerEntry, JobType.PERMAENT);
+					schedulerEntry, StorageType.PERSISTED);
 			}
 		}
 	}
@@ -660,7 +660,7 @@ public class MainServlet extends ActionServlet {
 		try {
 			if (_socialEquityLogSchedulerEntry != null) {
 				SchedulerEngineUtil.unschedule(
-					_socialEquityLogSchedulerEntry, JobType.PERMAENT);
+					_socialEquityLogSchedulerEntry, StorageType.PERSISTED);
 			}
 		}
 		catch (Exception e) {
@@ -973,8 +973,8 @@ public class MainServlet extends ActionServlet {
 			PropsValues.SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL);
 
 		SchedulerEngineUtil.schedule(
-			_socialEquityLogSchedulerEntry,
-			PortalClassLoaderUtil.getClassLoader(), JobType.PERMAENT);
+			_socialEquityLogSchedulerEntry, StorageType.PERSISTED,
+			PortalClassLoaderUtil.getClassLoader(), 0);
 	}
 
 	protected void initThemes(

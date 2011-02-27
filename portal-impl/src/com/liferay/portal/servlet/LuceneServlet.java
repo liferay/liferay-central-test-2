@@ -16,10 +16,10 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
+import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -94,9 +94,8 @@ public class LuceneServlet extends HttpServlet {
 
 				try {
 					SchedulerEngineUtil.schedule(
-						_schedulerEntry,
-						PortalClassLoaderUtil.getClassLoader(),
-						JobType.PERMAENT);
+						_schedulerEntry, StorageType.PERSISTED,
+						PortalClassLoaderUtil.getClassLoader(), 0);
 				}
 				catch (Exception e) {
 					_log.error(e, e);
@@ -109,7 +108,7 @@ public class LuceneServlet extends HttpServlet {
 		try {
 			if (_schedulerEntry != null) {
 				SchedulerEngineUtil.unschedule(
-					_schedulerEntry, JobType.PERMAENT);
+					_schedulerEntry, StorageType.PERSISTED);
 			}
 		}
 		catch (Exception e) {

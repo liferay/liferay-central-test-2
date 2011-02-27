@@ -27,10 +27,10 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.portlet.Route;
 import com.liferay.portal.kernel.portlet.Router;
-import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
+import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.OpenSearch;
@@ -430,7 +430,7 @@ public class PortletBagFactory {
 		}
 
 		SchedulerEngineUtil.schedule(
-			schedulerEntry, _classLoader, JobType.PERMAENT);
+			schedulerEntry, StorageType.PERSISTED, _classLoader, 0);
 	}
 
 	protected void initSchedulers(Portlet portlet) throws Exception {

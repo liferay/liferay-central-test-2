@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.CronText;
 import com.liferay.portal.kernel.scheduler.CronTrigger;
-import com.liferay.portal.kernel.scheduler.JobType;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -228,8 +228,9 @@ public class MBMailingListLocalServiceImpl
 		mailingListRequest.setInPassword(mailingList.getInPassword());
 
 		SchedulerEngineUtil.schedule(
-			trigger, null, DestinationNames.MESSAGE_BOARDS_MAILING_LIST,
-			mailingListRequest, JobType.PERMAENT);
+			trigger, StorageType.PERSISTED, null,
+			DestinationNames.MESSAGE_BOARDS_MAILING_LIST, mailingListRequest,
+			0);
 	}
 
 	protected void unscheduleMailingList(MBMailingList mailingList)
@@ -237,7 +238,7 @@ public class MBMailingListLocalServiceImpl
 
 		String groupName = getSchedulerGroupName(mailingList);
 
-		SchedulerEngineUtil.unschedule(groupName, JobType.PERMAENT);
+		SchedulerEngineUtil.unschedule(groupName, StorageType.PERSISTED);
 	}
 
 	protected void validate(

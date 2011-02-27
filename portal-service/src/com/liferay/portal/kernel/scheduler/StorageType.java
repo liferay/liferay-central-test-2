@@ -17,7 +17,8 @@ package com.liferay.portal.kernel.scheduler;
 /**
  * @author Tina Tian
  */
-public enum JobType {
-	MEMORY_NON_SINGLETON, MEMORY_SINGLETON, PERMAENT
+public enum StorageType {
+
+	MEMORY_MULTIPLE_INSTANCES, MEMORY_SINGLE_INSTANCE, PERSISTED
 
 }
