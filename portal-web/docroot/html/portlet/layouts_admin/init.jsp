@@ -44,6 +44,7 @@
 <%@ page import="com.liferay.portal.kernel.lar.UserIdStrategy" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
 <%@ page import="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil" %>
+<%@ page import="com.liferay.portal.kernel.scheduler.StorageType" %>
 <%@ page import="com.liferay.portal.kernel.scheduler.Trigger" %>
 <%@ page import="com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse" %>
 <%@ page import="com.liferay.portal.kernel.staging.StagingConstants" %>
