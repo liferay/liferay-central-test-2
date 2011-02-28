@@ -689,9 +689,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 					continue;
 				}
 
-				String propertiesValue = PropsUtil.get(key);
+				String propsUtilValue = PropsUtil.get(key);
 
-				if (!value.equals(propertiesValue)) {
+				if (!value.equals(propsUtilValue)) {
 					preferences.setValue(key, value);
 				}
 				else {
