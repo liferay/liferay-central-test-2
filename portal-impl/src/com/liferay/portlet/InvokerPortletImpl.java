@@ -14,6 +14,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.executor.CopyThreadLocalCallable;
+import com.liferay.portal.kernel.executor.PortalExecutorManagerUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -32,6 +34,7 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.tools.deploy.PortletDeployer;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
@@ -42,6 +45,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -676,18 +680,39 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
 
-		LiferayPortletRequest portletRequest =
+		final LiferayPortletRequest portletRequest =
 			(LiferayPortletRequest)actionRequest;
-		LiferayPortletResponse portletResponse =
+		final LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)actionResponse;
 
 		String portletId = _getPortletId(portletResponse);
 
-		List<ActionFilter> actionFilters = _actionFiltersMap.get(portletId);
+		final List<ActionFilter> actionFilters = _actionFiltersMap.get(
+			portletId);
 
-		invoke(
-			portletRequest, portletResponse, PortletRequest.ACTION_PHASE,
-			actionFilters);
+		if (PropsValues.PORTLET_ASYNC_EXECUTE_ENABLED &&
+			(_portletModel.getActionTimeout() > 0)) {
+			try {
+				PortalExecutorManagerUtil.execute(PORTLET_EXECUTOR_NAME,
+					new CopyThreadLocalCallable<Void>(false, true) {
+
+						public Void doCall() throws Exception {
+							invoke(
+								portletRequest, portletResponse,
+								PortletRequest.ACTION_PHASE, actionFilters);
+							return null;
+						}
+					}, _portletModel.getActionTimeout(), TimeUnit.SECONDS);
+			}
+			catch (Exception e) {
+				throw new PortletException(e);
+			}
+		}
+		else {
+			invoke(
+				portletRequest, portletResponse, PortletRequest.ACTION_PHASE,
+				actionFilters);
+		}
 	}
 
 	protected void invokeEvent(
@@ -712,19 +737,39 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		LiferayPortletRequest portletRequest =
+		final LiferayPortletRequest portletRequest =
 			(LiferayPortletRequest)renderRequest;
-		LiferayPortletResponse portletResponse =
+		final LiferayPortletResponse portletResponse =
 			(LiferayPortletResponse)renderResponse;
 
 		String portletId = _getPortletId(portletResponse);
 
-		List<RenderFilter> renderFilters = _renderFiltersMap.get(portletId);
+		final List<RenderFilter> renderFilters = _renderFiltersMap.get(
+			portletId);
 
-		invoke(
-			portletRequest, portletResponse, PortletRequest.RENDER_PHASE,
-			renderFilters);
+		if (PropsValues.PORTLET_ASYNC_EXECUTE_ENABLED &&
+			(_portletModel.getRenderTimeout() > 0)) {
+			try {
+				PortalExecutorManagerUtil.execute(PORTLET_EXECUTOR_NAME,
+					new CopyThreadLocalCallable<Void>(false, true) {
 
+						public Void doCall() throws Exception {
+							invoke(
+								portletRequest, portletResponse,
+								PortletRequest.RENDER_PHASE, renderFilters);
+							return null;
+						}
+					}, _portletModel.getRenderTimeout(), TimeUnit.SECONDS);
+			}
+			catch (Exception e) {
+				throw new PortletException(e);
+			}
+		}
+		else {
+			invoke(
+				portletRequest, portletResponse, PortletRequest.RENDER_PHASE,
+				renderFilters);
+		}
 		RenderResponseImpl renderResponseImpl =
 			(RenderResponseImpl)renderResponse;
 
@@ -766,6 +811,8 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 		return portlet.getPortletId();
 	}
+
+	public static final String PORTLET_EXECUTOR_NAME = "PORTLET_EXECUTOR_NAME";
 
 	private static Log _log = LogFactoryUtil.getLog(InvokerPortletImpl.class);
 

@@ -1449,6 +1449,8 @@ public interface PropsKeys {
 
 	public static final String PORTLET_ADD_DEFAULT_RESOURCE_CHECK_WHITELIST_ACTIONS = "portlet.add.default.resource.check.whitelist.actions";
 
+	public static final String PORTLET_ASYNC_EXECUTE_ENABLED = "portlet.async.execute.enabled";
+
 	public static final String PORTLET_CSS_ENABLED = "portlet.css.enabled";
 
 	public static final String PORTLET_EVENT_DISTRIBUTION = "portlet.event.distribution";

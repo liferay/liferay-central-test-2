@@ -1314,6 +1314,25 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
+	* Gets action phase timeout time by seconds.
+	*
+	* @return Action phase timeout time by seconds.
+	*/
+	public int getActionTimeout() {
+		return _portlet.getActionTimeout();
+	}
+
+	/**
+	* Sets action phase timeout time by seconds of the portlet.
+	*
+	* @param actionTimeout int value for action phase timeout time by seconds
+	of the portlet
+	*/
+	public void setActionTimeout(int actionTimeout) {
+		_portlet.setActionTimeout(actionTimeout);
+	}
+
+	/**
 	* Returns <code>true</code> if an action URL for this portlet should cause
 	* an auto redirect.
 	*
@@ -1681,6 +1700,25 @@ public class PortletWrapper implements Portlet {
 	*/
 	public void setPrivateSessionAttributes(boolean privateSessionAttributes) {
 		_portlet.setPrivateSessionAttributes(privateSessionAttributes);
+	}
+
+	/**
+	* Gets render phase timeout time by seconds.
+	*
+	* @return Render phase timeout time by seconds.
+	*/
+	public int getRenderTimeout() {
+		return _portlet.getRenderTimeout();
+	}
+
+	/**
+	* Sets render phase timeout time by seconds of the portlet.
+	*
+	* @param renderTimeout int value for render phase timeout time by seconds
+	of the portlet
+	*/
+	public void setRenderTimeout(int renderTimeout) {
+		_portlet.setRenderTimeout(renderTimeout);
 	}
 
 	/**

@@ -1334,6 +1334,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getBoolean(
 				portletElement.elementText("ajaxable"),
 				portletModel.isAjaxable()));
+		portletModel.setActionTimeout(
+			GetterUtil.getInteger(
+				portletElement.elementText("action-timeout"),
+				portletModel.getActionTimeout()));
+		portletModel.setRenderTimeout(
+			GetterUtil.getInteger(
+				portletElement.elementText("render-timeout"),
+				portletModel.getRenderTimeout()));
 
 		List<String> headerPortalCssList =
 			portletModel.getHeaderPortalCss();

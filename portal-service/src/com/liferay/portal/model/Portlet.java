@@ -912,6 +912,21 @@ public interface Portlet extends PortletModel {
 	public void setShowPortletInactive(boolean showPortletInactive);
 
 	/**
+	* Gets action phase timeout time by seconds.
+	*
+	* @return Action phase timeout time by seconds.
+	*/
+	public int getActionTimeout();
+
+	/**
+	* Sets action phase timeout time by seconds of the portlet.
+	*
+	* @param actionTimeout int value for action phase timeout time by seconds
+	of the portlet
+	*/
+	public void setActionTimeout(int actionTimeout);
+
+	/**
 	* Returns <code>true</code> if an action URL for this portlet should cause
 	* an auto redirect.
 	*
@@ -1210,6 +1225,21 @@ public interface Portlet extends PortletModel {
 	shares session attributes with the portal
 	*/
 	public void setPrivateSessionAttributes(boolean privateSessionAttributes);
+
+	/**
+	* Gets render phase timeout time by seconds.
+	*
+	* @return Render phase timeout time by seconds.
+	*/
+	public int getRenderTimeout();
+
+	/**
+	* Sets render phase timeout time by seconds of the portlet.
+	*
+	* @param renderTimeout int value for render phase timeout time by seconds
+	of the portlet
+	*/
+	public void setRenderTimeout(int renderTimeout);
 
 	/**
 	* Returns the render weight of the portlet.

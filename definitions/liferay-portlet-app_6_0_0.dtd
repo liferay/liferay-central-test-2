@@ -31,11 +31,12 @@ preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
 show-portlet-inactive?, action-url-redirect?, restore-current-view?,
 maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
 remoteable?, scopeable?, user-principal-strategy?, private-request-attributes?,
-private-session-attributes?, render-weight?, ajaxable?, header-portal-css*,
-header-portlet-css*, header-portal-javascript*, header-portlet-javascript*,
-footer-portal-css*, footer-portlet-css*, footer-portal-javascript*,
-footer-portlet-javascript*, css-class-wrapper?, facebook-integration?,
-add-default-resource?, system?, active?, include?)>
+private-session-attributes?, render-weight?, ajaxable?, action-timeout?, 
+render-timeout?, header-portal-css*, header-portlet-css*, 
+header-portal-javascript*, header-portlet-javascript*, footer-portal-css*, 
+footer-portlet-css*, footer-portal-javascript*, footer-portlet-javascript*, 
+css-class-wrapper?, facebook-integration?, add-default-resource?, system?, 
+active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -592,6 +593,22 @@ The default value of ajaxable is true. If set to false, then this portlet can
 never be displayed via Ajax.
 -->
 <!ELEMENT ajaxable (#PCDATA)>
+
+<!--
+The default value of action-timeout is 0. If set to a value greater than 0 and 
+portlet.async.execute.enabled is true, the portlet's action phase is processed 
+asynchronously with the given timeout time(by seconds). Otherwise the portlet is
+processed normally in the current worker thread.
+-->
+<!ELEMENT action-timeout (#PCDATA)>
+
+<!--
+The default value of render-timeout is 0. If set to a value greater than 0 and 
+portlet.async.execute.enabled is true, the portlet is rendered asynchronously 
+with the given timeout time(by seconds). Otherwise the portlet is rendered
+normally in the current worker thread.
+-->
+<!ELEMENT render-timeout (#PCDATA)>
 
 <!--
 Set the path of CSS that will be referenced in the page's header relative to the

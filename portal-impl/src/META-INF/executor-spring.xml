@@ -67,7 +67,11 @@
 				<property name="portalExecutorFactory" ref="com.liferay.portal.executor.PortalExecutorFactory" />
 				<property name="portalExecutors">
 					<map>
-						<entry key="PORTLET_EXECUTOR_NAME" value-ref="portlet.PortalExecutor" />
+						<entry value-ref="portlet.PortalExecutor">
+							<key>
+								<util:constant static-field="com.liferay.portlet.InvokerPortletImpl.PORTLET_EXECUTOR_NAME" />
+							</key>
+						</entry>
 					</map>
 				</property>
 			</bean>

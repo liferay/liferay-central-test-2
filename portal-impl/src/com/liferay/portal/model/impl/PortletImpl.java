@@ -1487,6 +1487,24 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Gets action phase timeout time by seconds.
+	 * @return Action phase timeout time by seconds.
+	 */
+	public int getActionTimeout() {
+		return _actionTimeout;
+	}
+
+	/**
+	 * Sets action phase timeout time by seconds of the portlet.
+	 *
+	 * @param actionTimeout int value for action phase timeout time by seconds
+	 *		  of the portlet
+	 */
+	public void setActionTimeout(int actionTimeout) {
+		_actionTimeout = actionTimeout;
+	}
+
+	/**
 	 * Returns <code>true</code> if an action URL for this portlet should cause
 	 * an auto redirect.
 	 *
@@ -1856,6 +1874,24 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setPrivateSessionAttributes(boolean privateSessionAttributes) {
 		_privateSessionAttributes = privateSessionAttributes;
+	}
+
+	/**
+	 * Gets render phase timeout time by seconds.
+	 * @return Render phase timeout time by seconds.
+	 */
+	public int getRenderTimeout() {
+		return _renderTimeout;
+	}
+
+	/**
+	 * Sets render phase timeout time by seconds of the portlet.
+	 *
+	 * @param renderTimeout int value for render phase timeout time by seconds
+	 *		  of the portlet
+	 */
+	public void setRenderTimeout(int renderTimeout) {
+		_renderTimeout = renderTimeout;
 	}
 
 	/**
@@ -3359,6 +3395,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		PropsValues.LAYOUT_SHOW_PORTLET_INACTIVE;
 
 	/**
+	 * Action phase timeout time by seconds.
+	 */
+	private int _actionTimeout;
+
+	/**
 	 * <code>True</code> if an action URL for this portlet should cause an auto
 	 * redirect.
 	 */
@@ -3425,6 +3466,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * the portal.
 	 */
 	private boolean _privateSessionAttributes = true;
+
+	/**
+	 * Render phase timeout time by seconds.
+	 */
+	private int _renderTimeout;
 
 	/**
 	 * Render weight of the portlet.
