@@ -357,7 +357,7 @@ public class LiferayRepository
 			fileEntryId, version, serviceContext);
 	}
 
-	public void unlockFileEntry(long fileEntryId) throws SystemException {
+	public void unlockFileEntry(long fileEntryId) throws PortalException, SystemException {
 		dlRepositoryService.unlockFileEntry(fileEntryId);
 	}
 

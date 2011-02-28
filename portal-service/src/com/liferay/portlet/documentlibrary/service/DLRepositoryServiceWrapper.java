@@ -317,7 +317,8 @@ public class DLRepositoryServiceWrapper implements DLRepositoryService {
 	}
 
 	public void unlockFileEntry(long fileEntryId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_dlRepositoryService.unlockFileEntry(fileEntryId);
 	}
 

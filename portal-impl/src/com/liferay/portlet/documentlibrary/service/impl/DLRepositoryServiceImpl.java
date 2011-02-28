@@ -468,6 +468,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public Lock lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+
 		return lockFileEntry(
 			fileEntryId, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 	}
@@ -491,6 +494,11 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 	public Lock lockFolder(long folderId)
 		throws PortalException, SystemException {
+
+		DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
+
+		DLFolderPermission.check(
+			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
 
 		return lockFolder(
 			folderId, null, false, DLFolderImpl.LOCK_EXPIRATION_TIME);
@@ -661,13 +669,19 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	}
 
 	public void unlockFileEntry(long fileEntryId)
-		throws SystemException {
+		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
 
 		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
 	}
 
 	public void unlockFileEntry(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
+
+		DLFileEntryPermission.check(
+			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
@@ -693,6 +707,11 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 
 	public void unlockFolder(long groupId, long folderId, String lockUuid)
 		throws PortalException, SystemException {
+
+		DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
+
+		DLFolderPermission.check(
+			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
@@ -733,6 +752,9 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		DLFolder dlFolder = getFolder(groupId, parentFolderId, name);
+
+		DLFolderPermission.check(
+			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
 
 		unlockFolder(groupId, dlFolder.getFolderId(), lockUuid);
 	}

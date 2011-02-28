@@ -154,7 +154,8 @@ public interface Repository {
 			long fileEntryId, String version, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
-	public void unlockFileEntry(long fileEntryId) throws SystemException;
+	public void unlockFileEntry(long fileEntryId)
+		throws PortalException, SystemException;
 
 	public void unlockFileEntry(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException;
