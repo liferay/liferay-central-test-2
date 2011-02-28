@@ -39,7 +39,7 @@ Map<String, PortletURL> addPortletURLs = getAddPortletURLs(renderRequest, render
 				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "doAsGroupId", groupId);
 				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "refererPlid", plid);
 
-				String taglibEditURL = "javascript:Liferay.Util.openIframePopUp('','', '" + addPortletURLString + "', '" + renderResponse.getNamespace() + "','" + LanguageUtil.get(pageContext, "model.resource." + className) + "');";
+				String taglibEditURL = "javascript:Liferay.Util.openWindow({id: '" + renderResponse.getNamespace() + "', title: '" + LanguageUtil.get(pageContext, "model.resource." + className) + "', uri:'" + addPortletURLString + "'});";
 
 				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 			%>

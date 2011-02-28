@@ -47,7 +47,8 @@
 			'service-datasource': ['aui-base', 'datasource-local'],
 			'undo-manager': ['aui-data-set', 'base', 'substitute'],
 			'upload': ['aui-base', 'aui-swf', 'collection', 'substitute', 'swfupload'],
-			'util-list-fields': ['aui-base']
+			'util-list-fields': ['aui-base'],
+			'util-window': ['aui-dialog', 'aui-dialog-iframe']
 		};
 
 		for (var i in moduleList) {

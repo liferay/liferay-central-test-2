@@ -33,22 +33,14 @@ if (cmd.equals(Constants.TRANSLATE)) {
 %>
 
 <aui:script use="aui-base">
-	var parent = window.parent;
+	var openingWindow = Liferay.Util.getOpener();
 
-	var parentIframe = window.parent.AUI().one('#<portlet:namespace /><%= toLanguageId %>controlPanelIframe');
+	openingWindow.<portlet:namespace />postProcessTranslation('<%= HtmlUtil.escape(cmd) %>', '<%= article.getVersion() %>', '<%= HtmlUtil.escape(toLanguageId) %>', '<%= toLanguageDisplayName %>');
 
-	var originalParent = parentIframe.getData('originalParent');
-
-	if (originalParent) {
-		parent = originalParent;
-	}
-
-	parent.<portlet:namespace />postProcessTranslation('<%= HtmlUtil.escape(cmd) %>', '<%= article.getVersion() %>', '<%= HtmlUtil.escape(toLanguageId) %>', '<%= toLanguageDisplayName %>');
-
-	window.parent.Liferay.fire(
-		'<%= renderResponse.getNamespace() + toLanguageId %>close',
+	Liferay.fire(
+		'closeWindow',
 		{
-			frame: window,
+			id: '<%= renderResponse.getNamespace() + toLanguageId %>'
 		}
 	);
 </aui:script>

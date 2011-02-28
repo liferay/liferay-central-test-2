@@ -566,7 +566,16 @@ AUI().add(
 							var href = item.attr('href');
 							var title = item.attr('title');
 
-							Liferay.Util.openIframePopUp('', '', href, namespace, title);
+							Util.openWindow(
+								{
+									dialog: {
+										align: Util.Window.ALIGN_CENTER
+									},
+									id: item.guid(),
+									title: title,
+									uri: href
+								}
+							);
 						},
 						'.use-dialog a'
 					);

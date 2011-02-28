@@ -521,7 +521,13 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 			if (!themeDisplay.isSignedIn()) {
 				window.randomNamespace = '<%= randomNamespace %>';
 
-				Liferay.Util.openIframePopUp('', '', '<%= loginURL.toString() %>', '<%= namespace %>', Liferay.Language.get('sign-in'));
+				Liferay.Util.openWindow(
+					{
+						id: '<%= namespace %>',
+						title: Liferay.Language.get('sign-in'),
+						uri: '<%= loginURL.toString() %>'
+					}
+				);
 			}
 			else {
 				submitForm(document.<%= namespace %><%= formName %>);

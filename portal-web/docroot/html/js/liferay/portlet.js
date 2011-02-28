@@ -646,36 +646,26 @@
 			if (portlet && configurationURL) {
 				var title = portlet.one('.portlet-title') || portlet.one('.portlet-title-default');
 
-				var iframeId = namespacedId + 'configurationIframe';
-
-				var dialog = new A.Dialog(
+				var dialog = Liferay.Util._openWindow(
 					{
-						align: {
-							node: null,
-							points: ['tc', 'tc']
-						},
-						destroyOnClose: true,
-						draggable: true,
-						stack: true,
 						title: title.html() + ' - ' + Liferay.Language.get('configuration'),
-						width: 820
-					}
-				).plug(
-					A.Plugin.DialogIframe,
-					{
-						after: {
-							load: Liferay.Util.afterIframeLoaded
+						uri: configurationURL,
+						cache: false,
+						dialog: {
+							align: Util.Window.ALIGN_CENTER,
+							width: 820
 						},
-						iframeCssClass: 'configuration-frame',
-						iframeId: iframeId,
-						uri: configurationURL
+						dialogIframe: {
+							id: namespacedId + 'configurationIframe',
+							uri: configurationURL
+						}
 					}
-				).render();
+				);
 
-				dialog.move(dialog.get('x'), dialog.get('y') + 100);
+				dialog.set('y', dialog.get('y') + 100);
 			}
 		},
-		['aui-dialog', 'aui-dialog-iframe']
+		['liferay-util-window']
 	);
 
 	Liferay.provide(

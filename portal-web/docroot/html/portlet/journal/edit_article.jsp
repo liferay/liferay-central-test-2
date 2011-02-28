@@ -363,7 +363,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 											}
 
 											String taglibEditArticleURL = HttpUtil.addParameter(editArticleRenderPopUpURL.toString(), renderResponse.getNamespace() + "toLanguageId", LocaleUtil.toLanguageId(locales[i]));
-											String taglibEditURL = "javascript:Liferay.Util.openIframePopUp('','', '" + taglibEditArticleURL + "', '" + renderResponse.getNamespace() + LocaleUtil.toLanguageId(locales[i]) + "','" + LanguageUtil.get(pageContext, "web-content-translation") + "');";
+											String taglibEditURL = "javascript:Liferay.Util.openWindow({id: '" + renderResponse.getNamespace() + LocaleUtil.toLanguageId(locales[i]) + "', title: '" + LanguageUtil.get(pageContext, "web-content-translation") + "', uri: '" + taglibEditArticleURL + "'});";
 										%>
 
 											<liferay-ui:icon
@@ -445,7 +445,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 												String editTranslationURL = HttpUtil.addParameter(editArticleRenderPopUpURL.toString(), renderResponse.getNamespace() + "toLanguageId", translations[i]);
 											%>
 
-											<a class="journal-article-translation journal-article-translation-<%= translations[i] %>" href="javascript:;" onClick="Liferay.Util.openIframePopUp('', '', '<%= editTranslationURL %>', '<portlet:namespace /><%= translations[i] %>', '<%= LanguageUtil.get(pageContext, "web-content-translation") %>');">
+											<a class="journal-article-translation journal-article-translation-<%= translations[i] %>" href="javascript:;" onClick="Liferay.Util.openWindow({id: '<portlet:namespace /><%= translations[i] %>', title: '<%= LanguageUtil.get(pageContext, "web-content-translation") %>', uri: '<%= editTranslationURL %>'});">
 												<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + translations[i] + ".png" %>' />
 
 												<%= LocaleUtil.fromLanguageId(translations[i]).getDisplayName(locale) %>
@@ -897,7 +897,13 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				translationLink.on(
 					'click',
 					function(event) {
-						Liferay.Util.openIframePopUp('', '', editTranslationURL, '<portlet:namespace />' + newLanguageId, '<%= LanguageUtil.get(pageContext, "web-content-translation") %>');
+						Liferay.Util.openWindow(
+							{
+								id: '<portlet:namespace />' + newLanguageId,
+								title: '<%= LanguageUtil.get(pageContext, "web-content-translation") %>',
+								uri: editTranslationURL
+							}
+						);
 					}
 				);
 

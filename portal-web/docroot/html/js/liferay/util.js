@@ -6,6 +6,15 @@
 	var isArray = Lang.isArray;
 	var arrayIndexOf = AArray.indexOf;
 
+	var Window = {
+		ALIGN_CENTER: {
+			points: ['tc', 'tc']
+		},
+		XY: [50, 100],
+		XY_INCREMENTOR: 50,
+		_map: {}
+	};
+
 	var Util = {
 		submitCountdown: 0,
 
@@ -239,11 +248,46 @@
 			return historyParam;
 		},
 
+		getOpener: function() {
+			return Window._opener || window.opener || window.parent;
+		},
+
 		getPortletId: function(portletId) {
 			portletId = portletId.replace(/^p_p_id_/i, '');
 			portletId = portletId.replace(/_$/, '');
 
 			return portletId;
+		},
+
+		getTop: function() {
+			var win = window;
+			var parent = win.parent;
+			var top = win;
+			var parentThemeDisplay;
+
+			while (parent != win) {
+				parentThemeDisplay = parent.themeDisplay;
+
+				if (parentThemeDisplay && !parentThemeDisplay.isStatePopUp()) {
+					top = parent;
+
+					break;
+				}
+			}
+
+			return top;
+		},
+
+		getWindow: function(id) {
+			if (!id) {
+				id = Util.getWindowName();
+			}
+
+			return Util.getTop().Liferay.Util.Window._map[id];
+		},
+
+		getWindowName: function() {
+			return Window._name || '';
 		},
 
 		getURLWithSessionId: function(url) {
@@ -287,23 +331,15 @@
 			return !!(window.Array && object.constructor == window.Array);
 		},
 
-		openIframePopUp: function(portlet, portletId, portletURL, namespacedId, title) {
-			var instance = this;
+		openWindow: function(config) {
+			config.openingWindow = window;
 
-			var parentUtil = Util;
+			var top = Util.getTop();
 
-			if (themeDisplay.isStatePopUp()) {
-				parentUtil = window.parent.Liferay.Util;
-			}
+			var topUtil = top.Liferay.Util;
+			var topAUI = top.AUI;
 
-			return parentUtil._iframePopup(
-				portlet,
-				portletId,
-				portletURL,
-				namespacedId,
-				title,
-				window
-			);
+			topUtil._openWindowProvider(config);
 		},
 
 		processTab: function(id) {
@@ -964,26 +1000,32 @@
 
 	Liferay.provide(
 		Util,
-		'openFormBuilderPopUp',
-		function(portletId, namespace, title, callback) {
+		'openFormBuilderWindow',
+		function(config) {
 			var instance = this;
 
 			var formBuilderURL = Liferay.PortletURL.createRenderURL();
 
 			formBuilderURL.setEscapeXML(false);
 			formBuilderURL.setParameter('struts_action', '/forms/edit_structure_entry');
-			formBuilderURL.setParameter('resourceNamespace', namespace);
-			formBuilderURL.setParameter('callback', callback);
+			formBuilderURL.setParameter('resourceNamespace', config.namespace);
+			formBuilderURL.setParameter('callback', config.callback);
 			formBuilderURL.setPortletId(166);
 			formBuilderURL.setWindowState('pop_up');
 
-			instance.openIframePopUp(
-				'',
-				portletId,
-				formBuilderURL,
-				namespace,
-				title
-			);
+			var dialogConfig = config.dialog;
+
+			if (!dialogConfig) {
+				dialogConfig = {};
+
+				config.dialog = dialogConfig;
+			}
+
+			if (!('align' in dialogConfig)) {
+				dialogConfig.align = Util.Window.ALIGN_CENTER;
+			}
+
+			Util.openWindow(config);
 		},
 		['liferay-portlet-url']
 	);
@@ -1496,67 +1538,41 @@
 
 	Liferay.provide(
 		Util,
-		'_iframePopup',
-		function(portlet, portletId, portletURL, namespacedId, title, openingWindow) {
-			if (portletURL) {
-				var iframeId = namespacedId + 'controlPanelIframe';
-
-				var dialog = new A.Dialog(
-					{
-						align: {
-							node: null,
-							points: ['tc', 'tc']
-						},
-						draggable: true,
-						stack: true,
-						title: title,
-						width: 820
-					}
-				).plug(
-					A.Plugin.DialogIframe,
-					{
-						after: {
-							load: Liferay.Util.afterIframeLoaded
-						},
-						iframeCssClass: 'control-panel-frame',
-						iframeId: iframeId,
-						originalParent: openingWindow,
-						uri: portletURL
-					}
-				).render();
-
-				var handle = Liferay.on(
-					namespacedId + 'close',
-					function(event) {
-						if (event.frame == dialog.iframe.node.get('contentWindow').getDOM()) {
-							dialog.hide();
-
-							var refresh = event.refresh;
-
-							if (refresh) {
-								if (!event.portletAjaxable) {
-									openingWindow.location.reload();
-								}
-								else {
-									openingWindow.Liferay.Portlet.refresh('#p_p_id_' + refresh + '_');
-								}
-							}
-
-							setTimeout(
-								function() {
-									dialog.destroy();
-								},
-								0
-							);
-
-							handle.detach();
-						}
-					}
-				);
-			}
+		'_openWindowProvider',
+		function(config) {
+			Util._openWindow(config);
 		},
-		['aui-dialog', 'aui-dialog-iframe']
+		['liferay-util-window']
 	);
+
+	Liferay.after(
+		'closeWindow',
+		function(event) {
+			var id = event.id;
+
+			var dialog = Liferay.Util.getTop().Liferay.Util.Window._map[id];
+
+			if (dialog && dialog.iframe) {
+				var dialogWindow = dialog.iframe.node.get('contentWindow').getDOM();
+
+				var openingWindow = dialogWindow.Liferay.Util.getOpener();
+				var refresh = event.refresh;
+
+				if (refresh && openingWindow) {
+					if (!event.portletAjaxable) {
+						openingWindow.location.reload();
+					}
+					else {
+						openingWindow.Liferay.Portlet.refresh('#p_p_id_' + refresh + '_');
+					}
+				}
+
+				dialog.close();
+			}
+		}
+	);
+
+	Util.Window = Window;
 
 	Liferay.Util = Util;
 
@@ -1565,12 +1581,13 @@
 	// 400+: Liferay
 
 	Liferay.zIndex = {
-		DOCK:			10,
-		DOCK_PARENT:	20,
-		ALERT:			430,
-		DROP_AREA:		440,
-		DROP_POSITION:	450,
-		DRAG_ITEM:		460,
-		TOOLTIP:		470
+		DOCK: 10,
+		DOCK_PARENT: 20,
+		ALERT: 430,
+		DROP_AREA: 440,
+		DROP_POSITION: 450,
+		DRAG_ITEM: 460,
+		TOOLTIP: 470,
+		WINDOW: 1000
 	};
 })(AUI(), Liferay);
