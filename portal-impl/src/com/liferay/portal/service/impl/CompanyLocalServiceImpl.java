@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -52,6 +53,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
@@ -60,6 +62,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -677,16 +680,34 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				}
 			}
 
+			List<String> deleteKeysList = new ArrayList<String>();
+
 			for (Map.Entry<String, String> entry : properties.entrySet()) {
 				String key = entry.getKey();
+				String prefsValue = preferences.getValue(key, null);
+				String propsValue = PropsUtil.get(key);
 				String value = entry.getValue();
 
-				if (!value.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
+				if (value.equals(Portal.TEMP_OBFUSCATION_VALUE)) {
+					continue;
+				}
+
+				if (!Validator.equals(value, propsValue)) {
 					preferences.setValue(key, value);
+				}
+				else if (prefsValue != null) {
+					deleteKeysList.add(key);
 				}
 			}
 
 			preferences.store();
+
+			if (deleteKeysList.size() > 0) {
+				String[] deleteKeys = StringUtil.split(
+					StringUtil.merge(deleteKeysList), StringPool.COMMA);
+
+				removePreferences(companyId, deleteKeys);
+			}
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
