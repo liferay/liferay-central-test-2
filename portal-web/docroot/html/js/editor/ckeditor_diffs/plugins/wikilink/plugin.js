@@ -34,14 +34,18 @@ CKEDITOR.plugins.add(
 
 					var command = editor.getCommand('unlink');
 
-					var element = event.data.path.lastElement && event.data.path.lastElement.getAscendant('a', true);
+					var commandState = CKEDITOR.TRISTATE_DISABLED;
+					var lastElement = event.data.path.lastElement;
 
-					if (element && element.getName() == 'a' && element.getAttribute('href')) {
-						command.setState(CKEDITOR.TRISTATE_OFF);
+					if (lastElement) {
+						var element = lastElement.getAscendant('a', true);
+
+						if (element && element.getName() == 'a' && element.getAttribute('href')) {
+							commandState = CKEDITOR.TRISTATE_OFF;
+						}
 					}
-					else {
-						command.setState(CKEDITOR.TRISTATE_DISABLED);
-					}
+
+					command.setState(commandState);
 				}
 			);
 
