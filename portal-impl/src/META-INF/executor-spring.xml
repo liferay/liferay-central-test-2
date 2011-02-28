@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<beans
+	default-destroy-method="destroy"
+	default-init-method="afterPropertiesSet"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
+>
+	<!-- PortalExecutorFactory for default executors -->
+	<bean id="com.liferay.portal.executor.PortalExecutorFactory" class="com.liferay.portal.executor.PortalExecutorFactoryImpl">
+		<property name="corePoolSize" value="0" />
+		<property name="maxPoolSize" value="10" />
+		<property name="allowCoreThreadTimeOut" value="true" />
+		<property name="keepAliveTime" value="60" />
+		<property name="timeunit">
+			<util:constant static-field="java.util.concurrent.TimeUnit.SECONDS" />
+		</property>
+		<property name="maxQueueSize">
+			<util:constant static-field="java.lang.Integer.MAX_VALUE" />
+		</property>
+		<property name="rejectedExecutionHandler">
+			<bean class="com.liferay.portal.kernel.concurrent.AbortPolicy" />
+		</property>
+		<property name="threadPoolHandler">
+			<bean class="com.liferay.portal.kernel.concurrent.ClearThreadLocalThreadPoolHandler" />
+		</property>
+	</bean>
+
+	<!-- Predefine PortalExecutors -->
+	
+	<!-- Portlet PortalExecutor -->
+	<bean id="portlet.PortalExecutor" class="com.liferay.portal.kernel.concurrent.ThreadPoolExecutor">
+		<constructor-arg name="corePoolSize" value="5" />
+		<constructor-arg name="maxPoolSize" value="10" />
+		<constructor-arg name="keepAliveTime" value="60" />
+		<constructor-arg name="timeunit">
+			<util:constant static-field="java.util.concurrent.TimeUnit.SECONDS" />
+		</constructor-arg>
+		<constructor-arg name="allowCoreThreadTimeOut" value="false" />
+		<constructor-arg name="maxQueueSize">
+			<util:constant static-field="java.lang.Integer.MAX_VALUE" />
+		</constructor-arg>
+		<constructor-arg name="rejectedExecutionHandler">
+			<bean class="com.liferay.portal.kernel.concurrent.AbortPolicy" />
+		</constructor-arg>
+		<constructor-arg name="threadFactory">
+			<bean class="com.liferay.portal.kernel.util.NamedThreadFactory">
+				<constructor-arg name="name" value="Portlet-Executor" />
+				<constructor-arg name="priority">
+					<util:constant static-field="java.lang.Thread.NORM_PRIORITY" />
+				</constructor-arg>
+				<constructor-arg name="contextClassLoader">
+					<bean class="com.liferay.portal.kernel.util.PortalClassLoaderUtil" factory-method="getClassLoader" />
+				</constructor-arg>
+			</bean>
+		</constructor-arg>
+		<constructor-arg name="threadPoolHandler">
+			<bean class="com.liferay.portal.kernel.concurrent.ThreadPoolHandlerAdapter" />
+		</constructor-arg>
+	</bean>
+
+	<bean id="com.liferay.portal.kernel.executor.PortalExecutorManagerUtil" class="com.liferay.portal.kernel.executor.PortalExecutorManagerUtil">
+		<property name="portalExecutorManager">
+			<bean class="com.liferay.portal.executor.PortalExecutorManagerImpl">
+				<property name="portalExecutorFactory" ref="com.liferay.portal.executor.PortalExecutorFactory" />
+				<property name="portalExecutors">
+					<map>
+						<entry key="PORTLET_EXECUTOR_NAME" value-ref="portlet.PortalExecutor" />
+					</map>
+				</property>
+			</bean>
+		</property>
+	</bean>
+</beans>
