@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
@@ -305,6 +306,20 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 		catch (NoSuchResourceException nsre) {
 		}
 
+		long groupTemplateResourceId = 0;
+
+		try {
+			Resource groupTemplateResource =
+				ResourceLocalServiceUtil.getResource(
+					companyId, className,
+					ResourceConstants.SCOPE_GROUP_TEMPLATE,
+					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID));
+
+			groupTemplateResourceId = groupTemplateResource.getResourceId();
+		}
+		catch (NoSuchResourceException nsre) {
+		}
+
 		long[] groupResourceIds = new long[groups.size()];
 
 		try {
@@ -335,6 +350,10 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			long roleId = role.getRoleId();
 
 			if (hasPermission(roleId, companyResourceId)) {
+				return query;
+			}
+
+			if (hasPermission(roleId, groupTemplateResourceId)) {
 				return query;
 			}
 
@@ -429,6 +448,15 @@ public class SearchPermissionCheckerImpl implements SearchPermissionChecker {
 			if (ResourcePermissionLocalServiceUtil.hasResourcePermission(
 					companyId, className, ResourceConstants.SCOPE_COMPANY,
 					String.valueOf(companyId), roleId, ActionKeys.VIEW)) {
+
+				return query;
+			}
+
+			if (ResourcePermissionLocalServiceUtil.hasResourcePermission(
+					companyId, className,
+					ResourceConstants.SCOPE_GROUP_TEMPLATE,
+					String.valueOf(GroupConstants.DEFAULT_PARENT_GROUP_ID),
+					roleId, ActionKeys.VIEW)) {
 
 				return query;
 			}

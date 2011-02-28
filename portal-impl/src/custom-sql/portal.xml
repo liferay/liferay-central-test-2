@@ -21,6 +21,10 @@
 								(ResourcePermission.primKey IN ('[$GROUP_IDS$]'))
 							) OR
 							(
+								(ResourcePermission.scope = 3) AND
+								(ResourcePermission.primKey = 0)
+							) OR
+							(
 								(ResourcePermission.scope = 4) AND
 								(ResourcePermission.primKey = CAST_TEXT([$CLASS_PK_FIELD$]))
 							)
