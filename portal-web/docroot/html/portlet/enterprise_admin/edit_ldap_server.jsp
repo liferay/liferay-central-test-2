@@ -581,7 +581,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 		['aui-base']
 	);
 
-	<c:if test="<%= ldapServerId <= 0 %>">
+	<c:if test="<%= ldapServerId <= 0 && Validator.isNull(ldapBaseProviderUrl) %>">
 		<portlet:namespace />updateDefaultLdap('apache');
 	</c:if>
 </aui:script>
