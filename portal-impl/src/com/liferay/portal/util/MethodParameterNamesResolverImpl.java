@@ -14,6 +14,8 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodParameterNamesResolver;
 
 import java.lang.reflect.AccessibleObject;
@@ -23,6 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import jodd.paramo.Paramo;
+import jodd.paramo.ParamoException;
 
 /**
  * @author Igor Spasic
@@ -34,13 +37,23 @@ public class MethodParameterNamesResolverImpl
 		String[] parameterNames = _parameterNames.get(method);
 
 		if (parameterNames == null) {
-			parameterNames = Paramo.resolveParameterNames(method);
+			try {
+				parameterNames = Paramo.resolveParameterNames(method);
+			}
+			catch (ParamoException pe) {
+				_log.error(pe, pe);
+
+				return null;
+			}
 
 			_parameterNames.put(method, parameterNames);
 		}
 
 		return parameterNames;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		MethodParameterNamesResolverImpl.class);
 
 	private Map<AccessibleObject, String[]> _parameterNames =
 		new HashMap<AccessibleObject, String[]>();
