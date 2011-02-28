@@ -177,9 +177,10 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 String languageId = LanguageUtil.getLanguageId(request);
 
 String defaultLanguageId = ParamUtil.getString(request, "defaultLanguageId");
+
 String toLanguageId = ParamUtil.getString(request, "toLanguageId");
 
-if (Validator.isNotNull(toLanguageId)) {	
+if (Validator.isNotNull(toLanguageId)) {
 	languageId = toLanguageId;
 }
 
