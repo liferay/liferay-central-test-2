@@ -587,9 +587,21 @@ public class LayoutExporter {
 							layout.getCompanyId());
 					}
 					else if (scopeType.equals("layout")) {
-						Layout scopeLayout =
-							LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-								scopeLayoutUuid, context.getGroupId());
+						Layout scopeLayout = null;
+
+						try {
+							scopeLayout =
+								LayoutLocalServiceUtil.
+									getLayoutByUuidAndGroupId(
+										scopeLayoutUuid, context.getGroupId());
+						}
+						catch (NoSuchLayoutException nsle) {
+							if (_log.isWarnEnabled()) {
+								_log.warn(nsle.getMessage());
+							}
+
+							continue;
+						}
 
 						scopeGroup = scopeLayout.getScopeGroup();
 					}
