@@ -483,10 +483,6 @@
 
 		_inPRE: false,
 
-		_replaceNewLineChild: true,
-
-		_replaceNewLineParent: true,
-
 		_ulLevel: 0
 	};
 })();

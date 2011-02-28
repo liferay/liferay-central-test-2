@@ -247,7 +247,6 @@ Parse.Simple.Creole = function(options) {
             build: function(node, r, options) {
 				var imagePath = r[1];
 				var imagePathPrefix = options ? options.imagePrefix : '';
-				var img = document.createElement('img');
 
 				if (imagePathPrefix) {
 					if (!(/^https?:\/\//gi.test(imagePath))) {
@@ -255,8 +254,8 @@ Parse.Simple.Creole = function(options) {
 					}
 				}
 
+				var img = document.createElement('img');
 				img.src = imagePath;
-
                 img.alt = r[2] === undefined
                     ? (options && options.defaultImageText ? options.defaultImageText : '')
                     : r[2].replace(/~(.)/g, '$1');
@@ -378,6 +377,8 @@ Parse.Simple.Creole = function(options) {
 };
 
 Parse.Simple.Creole.prototype = new Parse.Simple.Base();
+
+Parse.Simple.Creole.prototype.constructor = Parse.Simple.Creole;
 
 CKEDITOR.CreoleParser = Parse.Simple.Creole;
 })();

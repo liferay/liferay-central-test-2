@@ -7,6 +7,24 @@ CKEDITOR.dialog.add(
 
 		var PLUGIN = CKEDITOR.plugins.link;
 
+		var parseLink = function(editor, element) {
+			var instance = this;
+
+			var href = '';
+
+			if (element) {
+				href = element.data('cke-saved-href') || element.getAttribute('href');
+			}
+
+			var data = {
+				address: href
+			};
+
+			instance._.selectedElement = element;
+
+			return data;
+		};
+
 		return {
 			contents: [
 				{
@@ -76,7 +94,7 @@ CKEDITOR.dialog.add(
 					selection.selectElement(element);
 				}
 
-				instance.setupContent(instance._parseLink(editor, element));
+				instance.setupContent(parseLink.apply(instance, [editor, element]));
 			},
 
 			onOk: function() {
@@ -127,24 +145,6 @@ CKEDITOR.dialog.add(
 			},
 
 			onLoad: function() {
-			},
-
-			_parseLink: function(editor, element) {
-				var instance = this;
-
-				var href = '';
-
-				if (element) {
-					element = element.data('cke-saved-href') || element.getAttribute('href');
-				}
-
-				var data = {
-					address: href
-				};
-
-				instance._.selectedElement = element;
-
-				return data;
 			}
 		};
 	}

@@ -34,17 +34,13 @@ CKEDITOR.plugins.add(
 
 					var command = editor.getCommand('unlink');
 
-					var lastElement = event.data.path.lastElement;
+					var element = event.data.path.lastElement && event.data.path.lastElement.getAscendant('a', true);
 
-					if (lastElement) {
-						var element = lastElement.getAscendant('a', true);
-
-						if (element && element.getName() == 'a' && element.getAttribute('href')) {
-							command.setState(CKEDITOR.TRISTATE_OFF);
-						}
-						else {
-							command.setState(CKEDITOR.TRISTATE_DISABLED);
-						}
+					if (element && element.getName() == 'a' && element.getAttribute('href')) {
+						command.setState(CKEDITOR.TRISTATE_OFF);
+					}
+					else {
+						command.setState(CKEDITOR.TRISTATE_DISABLED);
 					}
 				}
 			);
@@ -94,6 +90,8 @@ CKEDITOR.plugins.add(
 								};
 							}
 						}
+
+						return selectionObj;
 					}
 				);
 			}

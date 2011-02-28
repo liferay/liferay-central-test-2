@@ -306,20 +306,20 @@
 				StringBuilder sb = new StringBuilder();
 
 				sb.append("\n\t\t\t\tvar imagePath = r[1];\n");
-				sb.append("\t\t\t\tvar imagePathPrefix = options ? options.imagePrefix : '';\n");
-				sb.append("\t\t\t\tvar img = document.createElement('img');\n\n");
+				sb.append("\t\t\t\tvar imagePathPrefix = options ? options.imagePrefix : '';\n\n");
 				sb.append("\t\t\t\tif (imagePathPrefix) {\n");
 				sb.append("\t\t\t\t\tif (!(/^https?:\\/\\//gi.test(imagePath))) {\n");
 				sb.append("\t\t\t\t\t\timagePath = imagePathPrefix + imagePath;\n");
 				sb.append("\t\t\t\t\t}\n");
 				sb.append("\t\t\t\t}\n\n");
-				sb.append("\t\t\t\timg.src = imagePath;\n");
+				sb.append("\t\t\t\tvar img = document.createElement('img');\n");
+				sb.append("\t\t\t\timg.src = imagePath;");
 
 				creoleParserContent = creoleParserContent.substring(0, x) + sb.toString() + creoleParserContent.substring(y);
 
 				// Register Creole parser
 
-				creoleParserContent = creoleParserContent.replace("Parse.Simple.Creole.prototype.constructor", "CKEDITOR.CreoleParser");
+				creoleParserContent = creoleParserContent.replace("= Parse.Simple.Creole;", "= Parse.Simple.Creole;\n\nCKEDITOR.CreoleParser = Parse.Simple.Creole;");
 
 				// Set content
 
