@@ -20,6 +20,10 @@ package com.liferay.portal.kernel.search;
 public class BaseQueryImpl implements Query {
 
 	public QueryConfig getQueryConfig() {
+		if (_queryConfig == null) {
+			_queryConfig = new QueryConfig();
+		}
+
 		return _queryConfig;
 	}
 
