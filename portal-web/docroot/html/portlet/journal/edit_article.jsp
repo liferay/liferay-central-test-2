@@ -963,7 +963,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		changeLink.on(
 			'click',
 			function(event) {
-				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "changing-the-default-language-will-delete-all-unaved-content") %>')) {
+				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "changing-the-default-language-will-delete-all-unsaved-content") %>')) {
 					languageSelector.show();
 					languageSelector.focus();
 
