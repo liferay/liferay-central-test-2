@@ -206,7 +206,7 @@
 					var count = 0;
 
 					if (newLinesAtEnd) {
-						 count = newLinesAtEnd[1].length;
+						count = newLinesAtEnd[1].length;
 					}
 
 					while (count++ < 2) {
@@ -214,7 +214,7 @@
 					}
 				}
 
-				instance._ulLevel -= 1;
+				instance._ulLevel--;
 			}
 			else if (tagName == TAG_PRE) {
 				if (!instance._isLastItemNewLine()) {
@@ -361,7 +361,7 @@
 		_handleOrderedList: function(element, listTagsIn, listTagsOut) {
 			var instance = this;
 
-			instance._ulLevel += 1;
+			instance._ulLevel++;
 		},
 
 		_handleParagraph: function(element, listTagsIn, listTagsOut) {
@@ -441,7 +441,7 @@
 		_handleUnorderedList: function(element, listTagsIn, listTagsOut) {
 			var instance = this;
 
-			instance._ulLevel += 1;
+			instance._ulLevel++;
 		},
 
 		_isDataAvailable: function() {
