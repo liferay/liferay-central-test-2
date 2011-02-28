@@ -30,6 +30,33 @@ public class CalEventFinderUtil {
 			timeZoneSensitive, types);
 	}
 
+	public static int filterCountByG_SD_T(long groupId,
+		java.util.Date startDateGT, java.util.Date startDateLT,
+		boolean timeZoneSensitive, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterCountByG_SD_T(groupId, startDateGT, startDateLT,
+			timeZoneSensitive, types);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_SD_T(
+		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
+		boolean timeZoneSensitive, java.lang.String[] types)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterFindByG_SD_T(groupId, startDateGT, startDateLT,
+			timeZoneSensitive, types);
+	}
+
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> filterFindByG_SD_T(
+		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
+		boolean timeZoneSensitive, java.lang.String[] types, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder()
+				   .filterFindByG_SD_T(groupId, startDateGT, startDateLT,
+			timeZoneSensitive, types, start, end);
+	}
+
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByFutureReminders()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getFinder().findByFutureReminders();

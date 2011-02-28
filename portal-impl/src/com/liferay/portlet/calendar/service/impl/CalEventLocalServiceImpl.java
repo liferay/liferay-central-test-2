@@ -492,7 +492,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			// Time zone sensitive
 
-			List<CalEvent> events1 = calEventFinder.findByG_SD_T(
+			List<CalEvent> events1 = calEventFinder.filterFindByG_SD_T(
 				groupId, CalendarUtil.getGTDate(cal),
 				CalendarUtil.getLTDate(cal), true, types);
 
@@ -502,7 +502,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
 				cal.get(Calendar.DATE));
 
-			List<CalEvent> events2 = calEventFinder.findByG_SD_T(
+			List<CalEvent> events2 = calEventFinder.filterFindByG_SD_T(
 				groupId, CalendarUtil.getGTDate(tzICal),
 				CalendarUtil.getLTDate(tzICal), false, types);
 
@@ -539,10 +539,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if ((types != null) && (types.length > 0) &&
 			((types.length > 1) || Validator.isNotNull(types[0]))) {
 
-			return calEventPersistence.findByG_T(groupId, types, start, end);
+			return calEventPersistence.filterFindByG_T(groupId, types, start, end);
 		}
 		else {
-			return calEventPersistence.findByGroupId(groupId, start, end);
+			return calEventPersistence.filterFindByGroupId(groupId, start, end);
 		}
 	}
 
@@ -558,10 +558,10 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		if ((types != null) && (types.length > 0) &&
 			((types.length > 1) || Validator.isNotNull(types[0]))) {
 
-			return calEventPersistence.countByG_T(groupId, types);
+			return calEventPersistence.filterCountByG_T(groupId, types);
 		}
 		else {
-			return calEventPersistence.countByGroupId(groupId);
+			return calEventPersistence.filterCountByGroupId(groupId);
 		}
 	}
 
