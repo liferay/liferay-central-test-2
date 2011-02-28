@@ -112,6 +112,7 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 			}
 			else {
 				lock(HttpServletResponse.SC_CREATED, _TEST_META_NAME);
+
 				tuple = serviceGet(_TEST_META_NAME);
 
 				assertCode(HttpServletResponse.SC_OK, tuple);
@@ -316,16 +317,16 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 		return _USER_AGENT;
 	}
 
-	protected void lock(int expectedCode, String fileName) {
+	protected void lock(int statusCode, String fileName) {
 		Tuple tuple = serviceLock(fileName, null, 0);
 
-		assertCode(expectedCode, tuple);
+		assertCode(statusCode, tuple);
 
 		_lockMap.put(fileName, getLock(tuple));
 	}
 
-	protected void moveLock(String orig, String dest) {
-		String lock = _lockMap.remove(orig);
+	protected void moveLock(String src, String dest) {
+		String lock = _lockMap.remove(src);
 
 		if (lock != null) {
 			_lockMap.put(dest, lock);
@@ -336,8 +337,7 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 		String lock = _lockMap.remove(fileName);
 
 		assertCode(
-			HttpServletResponse.SC_NO_CONTENT,
-			serviceUnlock(fileName, lock));
+			HttpServletResponse.SC_NO_CONTENT, serviceUnlock(fileName, lock));
 	}
 
 	private static final String _OFFICE_TEST_FILE_PREFIX =
