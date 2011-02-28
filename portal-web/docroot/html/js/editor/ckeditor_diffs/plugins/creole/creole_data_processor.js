@@ -196,18 +196,25 @@
 				}
 			}
 			else if (tagName == TAG_UNORDERED_LIST || tagName == TAG_ORDERED_LIST) {
+				if (instance._ulLevel > 1) {
+					if (!instance._isLastItemNewLine()) {
+						instance._endResult.push(NEW_LINE);
+					}
+				}
+				else {
+					var newLinesAtEnd = REGEX_LASTCHAR_NEWLINE.exec(instance._endResult.slice(-2).join(''));
+					var count = 0;
+
+					if (newLinesAtEnd) {
+						 count = newLinesAtEnd[1].length;
+					}
+
+					while (count++ < 2) {
+						instance._endResult.push(NEW_LINE);
+					}
+				}
+
 				instance._ulLevel -= 1;
-
-				var newLinesAtEnd = REGEX_LASTCHAR_NEWLINE.exec(instance._endResult.slice(-2).join(''));
-				var count = 0;
-
-				if (newLinesAtEnd) {
-					 count = newLinesAtEnd[1].length;
-				}
-
-				while (count++ < 2) {
-					instance._endResult.push(NEW_LINE);
-				}
 			}
 			else if (tagName == TAG_PRE) {
 				if (!instance._isLastItemNewLine()) {
