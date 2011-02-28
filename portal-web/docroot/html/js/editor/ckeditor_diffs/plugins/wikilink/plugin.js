@@ -35,6 +35,7 @@ CKEDITOR.plugins.add(
 					var command = editor.getCommand('unlink');
 
 					var commandState = CKEDITOR.TRISTATE_DISABLED;
+
 					var lastElement = event.data.path.lastElement;
 
 					if (lastElement) {
