@@ -579,54 +579,40 @@ public class LayoutExporter {
 
 				long scopeGroupId = context.getScopeGroupId();
 
-				try {
-					if (Validator.isNotNull(scopeType)) {
-						Group scopeGroup = null;
+				if (Validator.isNotNull(scopeType)) {
+					Group scopeGroup = null;
 
-						if (scopeType.equals("company")) {
-							scopeGroup = GroupLocalServiceUtil.getCompanyGroup(
-								layout.getCompanyId());
-						}
-						else if (scopeType.equals("layout")) {
-							Layout scopeLayout =
-								LayoutLocalServiceUtil.
-									getLayoutByUuidAndGroupId(
-									scopeLayoutUuid, context.getGroupId());
+					if (scopeType.equals("company")) {
+						scopeGroup = GroupLocalServiceUtil.getCompanyGroup(
+							layout.getCompanyId());
+					}
+					else if (scopeType.equals("layout")) {
+						Layout scopeLayout =
+							LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+								scopeLayoutUuid, context.getGroupId());
 
-							scopeGroup = scopeLayout.getScopeGroup();
-						}
-						else {
-							throw new IllegalArgumentException(
-								"Scope type " + scopeType + " is invalid");
-						}
-
-						if (scopeGroup != null) {
-							scopeGroupId = scopeGroup.getGroupId();
-						}
+						scopeGroup = scopeLayout.getScopeGroup();
+					}
+					else {
+						throw new IllegalArgumentException(
+							"Scope type " + scopeType + " is invalid");
 					}
 
-					String key = PortletPermissionUtil.getPrimaryKey(
-						layout.getPlid(), portletId);
-
-					portletIds.put(
-						key,
-						new Object[] {
-							portletId, layout.getPlid(), scopeGroupId,
-							scopeType, scopeLayoutUuid
-						}
-					);
-				}
-				catch (NoSuchLayoutException nsle) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Unable to get layout with uuid " +
-								scopeLayoutUuid + " in group " +
-									context.getGroupId() + ". The portlet " +
-										"with id " + portletId + " will not " +
-											"be exported.",
-							nsle);
+					if (scopeGroup != null) {
+						scopeGroupId = scopeGroup.getGroupId();
 					}
 				}
+
+				String key = PortletPermissionUtil.getPrimaryKey(
+					layout.getPlid(), portletId);
+
+				portletIds.put(
+					key,
+					new Object[] {
+						portletId, layout.getPlid(), scopeGroupId, scopeType,
+						scopeLayoutUuid
+					}
+				);
 			}
 		}
 		else if (layout.isTypeLinkToLayout()) {
