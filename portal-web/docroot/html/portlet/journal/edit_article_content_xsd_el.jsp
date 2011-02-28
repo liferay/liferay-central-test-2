@@ -19,7 +19,11 @@
 <%
 String languageId = LanguageUtil.getLanguageId(request);
 
-String toLanguageId = ParamUtil.getString(request, "toLanguageId", languageId);
+String toLanguageId = ParamUtil.getString(request, "toLanguageId");
+
+if (Validator.isNotNull(toLanguageId)) {
+	languageId = toLanguageId;
+}
 
 long groupId = GetterUtil.getLong((String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID));
 

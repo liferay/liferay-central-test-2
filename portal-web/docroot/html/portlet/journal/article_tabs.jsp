@@ -40,8 +40,10 @@ if ((article != null) && Validator.isNotNull(toLanguageId)) {
 
 PortletURL editArticleURL = renderResponse.createRenderURL();
 
-editArticleURL.setParameter("struts_action", "/journal/edit_article");
-editArticleURL.setParameter("redirect", redirect);
+if (Validator.isNull(toLanguageId)) {
+	editArticleURL.setParameter("struts_action", "/journal/edit_article");
+	editArticleURL.setParameter("redirect", redirect);
+}
 
 if (article != null) {
 	editArticleURL.setParameter("groupId", String.valueOf(article.getGroupId()));
@@ -50,8 +52,10 @@ if (article != null) {
 
 PortletURL viewArticleHistoryURL = renderResponse.createRenderURL();
 
-viewArticleHistoryURL.setParameter("struts_action", "/journal/view_article_history");
-viewArticleHistoryURL.setParameter("redirect", redirect);
+if (Validator.isNull(toLanguageId)) {
+	viewArticleHistoryURL.setParameter("struts_action", "/journal/view_article_history");
+	viewArticleHistoryURL.setParameter("redirect", redirect);
+}
 
 if (article != null) {
 	viewArticleHistoryURL.setParameter("groupId", String.valueOf(article.getGroupId()));

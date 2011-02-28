@@ -177,7 +177,11 @@ if ((structure == null) && Validator.isNotNull(templateId)) {
 String languageId = LanguageUtil.getLanguageId(request);
 
 String defaultLanguageId = ParamUtil.getString(request, "defaultLanguageId");
-String toLanguageId = ParamUtil.getString(request, "toLanguageId", languageId);
+String toLanguageId = ParamUtil.getString(request, "toLanguageId");
+
+if (Validator.isNotNull(toLanguageId)) {	
+	languageId = toLanguageId;
+}
 
 if (article == null && Validator.isNull(defaultLanguageId)) {
 	defaultLanguageId = languageId;
@@ -264,10 +268,10 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 </portlet:renderURL>
 
 <portlet:renderURL var="editArticleRenderPopUpURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+	<portlet:param name="struts_action" value="/journal/edit_article" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="articleId" value="<%= articleId %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-	<portlet:param name="struts_action" value="/journal/edit_article" />
 </portlet:renderURL>
 
 <portlet:renderURL var="updateDefaultLanguageURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
