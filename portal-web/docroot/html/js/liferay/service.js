@@ -78,8 +78,7 @@ Liferay.Service.registerClass(
 		setRoleGroups: true,
 		unsetRoleGroups: true,
 		updateFriendlyURL: true,
-		updateGroup: true,
-		updateWorkflow: true
+		updateGroup: true
 	}
 );
 
@@ -1021,26 +1020,6 @@ Liferay.Service.registerClass(
 		getProductVersions: true,
 		getProductVersionsCount: true,
 		updateProductVersion: true
-	}
-);
-
-Liferay.Service.register("Liferay.Service.Tasks", "com.liferay.portlet.tasks.service");
-
-Liferay.Service.registerClass(
-	Liferay.Service.Tasks, "TasksProposal",
-	{
-		addProposal: true,
-		deleteProposal: true,
-		updateProposal: true
-	}
-);
-
-Liferay.Service.registerClass(
-	Liferay.Service.Tasks, "TasksReview",
-	{
-		approveReview: true,
-		rejectReview: true,
-		updateReviews: true
 	}
 );
 

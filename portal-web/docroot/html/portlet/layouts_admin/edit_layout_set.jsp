@@ -56,10 +56,6 @@ else {
 
 String[] mainSections = PropsValues.LAYOUT_SET_FORM_UPDATE;
 
-if (liveGroup.isWorkflowEnabled()) {
-	mainSections = ArrayUtil.append(mainSections, "proposals");
-}
-
 if (!company.isCommunityLogo()) {
 	mainSections = ArrayUtil.remove(mainSections, "logo");
 }

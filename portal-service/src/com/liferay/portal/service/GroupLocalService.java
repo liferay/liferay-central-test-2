@@ -474,10 +474,4 @@ public interface GroupLocalService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.liferay.portal.model.Group updateWorkflow(long groupId,
-		boolean workflowEnabled, int workflowStages,
-		java.lang.String workflowRoleNames)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
 }

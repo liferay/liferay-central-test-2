@@ -564,15 +564,6 @@ public class GroupLocalServiceWrapper implements GroupLocalService {
 			friendlyURL, active, serviceContext);
 	}
 
-	public com.liferay.portal.model.Group updateWorkflow(long groupId,
-		boolean workflowEnabled, int workflowStages,
-		java.lang.String workflowRoleNames)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _groupLocalService.updateWorkflow(groupId, workflowEnabled,
-			workflowStages, workflowRoleNames);
-	}
-
 	public GroupLocalService getWrappedGroupLocalService() {
 		return _groupLocalService;
 	}

@@ -379,13 +379,6 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductVersionLocalServiceImpl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductVersionServiceImpl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalService" class="com.liferay.portlet.tasks.service.impl.TasksProposalLocalServiceImpl" />
-	<bean id="com.liferay.portlet.tasks.service.TasksProposalService" class="com.liferay.portlet.tasks.service.impl.TasksProposalServiceImpl" />
-	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence" class="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalFinder" class="com.liferay.portlet.tasks.service.persistence.TasksProposalFinderImpl" parent="basePersistence" />
-	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalService" class="com.liferay.portlet.tasks.service.impl.TasksReviewLocalServiceImpl" />
-	<bean id="com.liferay.portlet.tasks.service.TasksReviewService" class="com.liferay.portlet.tasks.service.impl.TasksReviewServiceImpl" />
-	<bean id="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence" class="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService" class="com.liferay.portlet.wiki.service.impl.WikiNodeLocalServiceImpl" />
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeService" class="com.liferay.portlet.wiki.service.impl.WikiNodeServiceImpl" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceImpl" parent="basePersistence" />

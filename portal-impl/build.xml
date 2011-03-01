@@ -436,12 +436,6 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-tasks">
-		<antcall target="build-service">
-			<param name="service.file" value="${basedir}/src/com/liferay/portlet/tasks/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlet-test">
 		<antcall target="build-service">
 			<param name="service.file" value="${basedir}/src/com/liferay/portlet/test/service.xml" />
@@ -472,7 +466,6 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		<antcall target="build-service-portlet-shopping" />
 		<antcall target="build-service-portlet-social" />
 		<antcall target="build-service-portlet-softwarecatalog" />
-		<antcall target="build-service-portlet-tasks" />
 		<antcall target="build-service-portlet-wiki" />
 	</target>
 
@@ -692,12 +685,6 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		</antcall>
 	</target>
 
-	<target name="build-wsdd-portlet-tasks">
-		<antcall target="build-wsdd">
-			<param name="service.file" value="${basedir}/src/com/liferay/portlet/tasks/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-wsdd-portlet-test">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="${basedir}/src/com/liferay/portlet/test/service.xml" />
@@ -726,7 +713,6 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		<antcall target="build-wsdd-portlet-ratings" />
 		<antcall target="build-wsdd-portlet-shopping" />
 		<antcall target="build-wsdd-portlet-softwarecatalog" />
-		<antcall target="build-wsdd-portlet-tasks" />
 		<antcall target="build-wsdd-portlet-wiki" />
 	</target>
 

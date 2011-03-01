@@ -2204,38 +2204,6 @@
 		</field>
 		<field name="repoStoreArtifact" type="boolean" />
 	</model>
-	<model name="com.liferay.portlet.tasks.model.TasksProposal">
-		<field name="proposalId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="classNameId" type="long" />
-		<field name="classPK" type="String" />
-		<field name="name" type="String" />
-		<field name="description" type="String">
-			<hint-collection name="TEXTAREA" />
-		</field>
-		<field name="publishDate" type="Date" />
-		<field name="dueDate" type="Date" />
-	</model>
-	<model name="com.liferay.portlet.tasks.model.TasksReview">
-		<field name="reviewId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="proposalId" type="long" />
-		<field name="assignedByUserId" type="long" />
-		<field name="assignedByUserName" type="String" />
-		<field name="stage" type="int" />
-		<field name="completed" type="boolean" />
-		<field name="rejected" type="boolean" />
-	</model>
 	<model name="com.liferay.portlet.usernotifications.model.UserNotificationEvent">
 		<field name="uuid" type="String" />
 		<field name="userNotificationEventId" type="long" />

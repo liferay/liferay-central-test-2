@@ -75,7 +75,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
-import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.util.servlet.UploadException;
 
 import java.util.Locale;
@@ -188,7 +187,6 @@ public class EditLayoutsAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchLayoutException ||
-				e instanceof NoSuchProposalException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
@@ -317,9 +315,6 @@ public class EditLayoutsAction extends PortletAction {
 
 			if (!GroupPermissionUtil.contains(
 					permissionChecker, group.getGroupId(),
-					ActionKeys.APPROVE_PROPOSAL) &&
-				!GroupPermissionUtil.contains(
-					permissionChecker, group.getGroupId(),
 					ActionKeys.MANAGE_LAYOUTS) &&
 				!hasUpdateLayoutPermission && !publishToLive) {
 
@@ -351,9 +346,6 @@ public class EditLayoutsAction extends PortletAction {
 				cmd.equals("publish_to_live");
 
 			if (!OrganizationPermissionUtil.contains(
-					permissionChecker, organizationId,
-					ActionKeys.APPROVE_PROPOSAL) &&
-				!OrganizationPermissionUtil.contains(
 					permissionChecker, organizationId,
 					ActionKeys.MANAGE_LAYOUTS) &&
 				!hasUpdateLayoutPermission && !publishToLive) {

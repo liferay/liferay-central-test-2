@@ -183,112 +183,18 @@ if (layout.isTypeControlPanel()) {
 
 					<c:choose>
 						<c:when test="<%= Validator.isNull(errorMessageKey) %>">
-
-						<%
-						boolean workflowEnabled = liveGroup.isWorkflowEnabled();
-
-						TasksProposal proposal = null;
-
-						if (workflowEnabled) {
-							try {
-								proposal = TasksProposalLocalServiceUtil.getProposal(Portlet.class.getName(), selPortletPrimaryKey);
-							}
-							catch (NoSuchProposalException nspe) {
-							}
-						}
-						%>
-
 							<aui:fieldset>
 								<aui:field-wrapper label="what-would-you-like-to-copy-from-live-or-publish-to-live">
 									<%@ include file="/html/portlet/portlet_configuration/export_import_options.jspf" %>
 								</aui:field-wrapper>
 
-								<c:choose>
-									<c:when test="<%= workflowEnabled %>">
-										<c:if test="<%= proposal == null %>">
+								<c:if test="<%= (themeDisplay.getURLPublishToLive() != null) || controlPanel %>">
+									<aui:button-row>
+										<aui:button onClick='<%= renderResponse.getNamespace() + "publishToLive();" %>' value="publish-to-live" />
 
-											<%
-											PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUTS_ADMIN, layout.getPlid(), PortletRequest.ACTION_PHASE);
-
-											proposePublicationURL.setPortletMode(PortletMode.VIEW);
-
-											proposePublicationURL.setParameter("struts_action", "/layouts_admin/edit_proposal");
-											proposePublicationURL.setParameter(Constants.CMD, Constants.ADD);
-											proposePublicationURL.setParameter("redirect", currentURL);
-											proposePublicationURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
-											proposePublicationURL.setParameter("className", Portlet.class.getName());
-											proposePublicationURL.setParameter("classPK", selPortletPrimaryKey);
-
-											String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
-
-											JSONArray jsonReviewers = JSONFactoryUtil.createJSONArray();
-
-											Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
-
-											LinkedHashMap userParams = new LinkedHashMap();
-
-											if (liveGroup.isOrganization()) {
-												userParams.put("usersOrgs", new Long(liveGroup.getOrganizationId()));
-											}
-											else {
-												userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
-											}
-
-											userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
-
-											List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, WorkflowConstants.STATUS_ANY, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
-
-											if (reviewers.isEmpty()) {
-												if (liveGroup.isCommunity()) {
-													role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
-												}
-												else {
-													role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.ORGANIZATION_OWNER);
-												}
-
-												userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
-
-												reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, WorkflowConstants.STATUS_ANY, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, (OrderByComparator)null);
-											}
-
-											for (User reviewer : reviewers) {
-												JSONObject jsonReviewer = JSONFactoryUtil.createJSONObject();
-
-												jsonReviewer.put("userId", reviewer.getUserId());
-												jsonReviewer.put("fullName", HtmlUtil.escape(reviewer.getFullName()));
-
-												jsonReviewers.put(jsonReviewer);
-											}
-											%>
-
-											<aui:button-row>
-												<aui:button onClick='<%= renderResponse.getNamespace() + "proposePublication();" %>' value="propose-publication" />
-
-												<aui:button onClick='<%= renderResponse.getNamespace() + "copyFromLive();" %>' value="copy-from-live" />
-											</aui:button-row>
-
-											<aui:script>
-												function <portlet:namespace />proposePublication() {
-													Liferay.LayoutExporter.proposeLayout(
-														{
-															namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUTS_ADMIN) %>',
-															reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>,
-															title: '<liferay-ui:message key="proposal-description" />',
-															url: '<%= proposePublicationURL.toString() %>'
-														}
-													);
-												}
-											</aui:script>
-										</c:if>
-									</c:when>
-									<c:when test="<%= (themeDisplay.getURLPublishToLive() != null) || controlPanel %>">
-										<aui:button-row>
-											<aui:button onClick='<%= renderResponse.getNamespace() + "publishToLive();" %>' value="publish-to-live" />
-
-											<aui:button onClick='<%= renderResponse.getNamespace() + "copyFromLive();" %>' value="copy-from-live" />
-										</aui:button-row>
-									</c:when>
-								</c:choose>
+										<aui:button onClick='<%= renderResponse.getNamespace() + "copyFromLive();" %>' value="copy-from-live" />
+									</aui:button-row>
+								</c:if>
 							</aui:fieldset>
 						</c:when>
 						<c:otherwise>

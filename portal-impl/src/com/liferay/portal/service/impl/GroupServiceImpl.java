@@ -227,16 +227,4 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			serviceContext);
 	}
 
-	public Group updateWorkflow(
-			long groupId, boolean workflowEnabled, int workflowStages,
-			String workflowRoleNames)
-		throws PortalException, SystemException {
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_STAGING);
-
-		return groupLocalService.updateWorkflow(
-			groupId, workflowEnabled, workflowStages, workflowRoleNames);
-	}
-
 }

@@ -160,24 +160,13 @@ List layoutList = layoutView.getList();
 
 PortletURL portletURL = renderResponse.createActionURL();
 
-long proposalId = ParamUtil.getLong(request, "proposalId");
-
-if (proposalId > 0) {
-	cmd = Constants.PUBLISH;
-
-	portletURL.setParameter("struts_action", "/layouts_admin/edit_proposal");
-	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
-	portletURL.setParameter("proposalId", String.valueOf(proposalId));
+if (selGroup.isStaged() && selGroup.isStagedRemotely()) {
+	cmd = "publish_to_remote";
 }
-else {
-	if (selGroup.isStaged() && selGroup.isStagedRemotely()) {
-		cmd = "publish_to_remote";
-	}
 
-	portletURL.setParameter("struts_action", "/layouts_admin/edit_layouts");
-	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
-	portletURL.setParameter("private", String.valueOf(privateLayout));
-}
+portletURL.setParameter("struts_action", "/layouts_admin/edit_layouts");
+portletURL.setParameter("groupId", String.valueOf(liveGroupId));
+portletURL.setParameter("private", String.valueOf(privateLayout));
 
 PortletURL selectURL = renderResponse.createRenderURL();
 
@@ -357,7 +346,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 						</liferay-ui:panel>
 					</c:if>
 
-					<c:if test="<%= proposalId <= 0 && schedule %>">
+					<c:if test="<%= schedule %>">
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="schedule">
 							<%@ include file="/html/portlet/layouts_admin/publish_layouts_scheduler.jspf" %>
 						</liferay-ui:panel>
@@ -406,14 +395,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					dialog.io.after(
 						'success',
 						function(event){
-							<c:choose>
-								<c:when test="<%= proposalId > 0 %>">
-									window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/layouts_admin/edit_layouts" /><portlet:param name="tabs2" value="proposals" /><portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" /></portlet:renderURL>';
-								</c:when>
-								<c:otherwise>
-									window.location.reload(true);
-								</c:otherwise>
-							</c:choose>
+							window.location.reload(true);
 						}
 					);
 

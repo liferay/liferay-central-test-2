@@ -71,7 +71,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 
 <div>
 	<ul class="lfr-tree lfr-component">
-		<li class="tree-item" <%= (proposalId > 0) ? "style=\"display: none;\"" : "" %>>
+		<li class="tree-item">
 			<aui:input checked="<%= true %>" disabled="<%= true %>" inlineLabel="right" name="pages" type="checkbox" />
 		</li>
 

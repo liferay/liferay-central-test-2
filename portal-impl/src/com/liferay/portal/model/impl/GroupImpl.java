@@ -45,7 +45,6 @@ import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 
@@ -286,18 +285,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return typeSettingsProperties.getProperty(key);
 	}
 
-	public String getWorkflowRoleNames() {
-		return GetterUtil.getString(
-			getTypeSettingsProperty("workflowRoleNames"),
-			PropsValues.TASKS_DEFAULT_ROLE_NAMES);
-	}
-
-	public int getWorkflowStages() {
-		return GetterUtil.getInteger(
-			getTypeSettingsProperty("workflowStages"),
-			PropsValues.TASKS_DEFAULT_STAGES);
-	}
-
 	public boolean hasPrivateLayouts() {
 		if (getPrivateLayoutsPageCount() > 0) {
 			return true;
@@ -396,11 +383,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	public boolean isUserGroup() {
 		return hasClassName(UserGroup.class);
-	}
-
-	public boolean isWorkflowEnabled() {
-		return GetterUtil.getBoolean(
-			getTypeSettingsProperty("workflowEnabled"));
 	}
 
 	public void setTypeSettings(String typeSettings) {

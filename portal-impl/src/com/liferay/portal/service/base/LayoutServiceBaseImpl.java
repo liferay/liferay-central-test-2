@@ -204,10 +204,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenc
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsFinder;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
-import com.liferay.portlet.tasks.service.TasksProposalLocalService;
-import com.liferay.portlet.tasks.service.TasksProposalService;
-import com.liferay.portlet.tasks.service.persistence.TasksProposalFinder;
-import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
 
 import javax.sql.DataSource;
 
@@ -3624,81 +3620,6 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
-	 * Gets the tasks proposal local service.
-	 *
-	 * @return the tasks proposal local service
-	 */
-	public TasksProposalLocalService getTasksProposalLocalService() {
-		return tasksProposalLocalService;
-	}
-
-	/**
-	 * Sets the tasks proposal local service.
-	 *
-	 * @param tasksProposalLocalService the tasks proposal local service
-	 */
-	public void setTasksProposalLocalService(
-		TasksProposalLocalService tasksProposalLocalService) {
-		this.tasksProposalLocalService = tasksProposalLocalService;
-	}
-
-	/**
-	 * Gets the tasks proposal remote service.
-	 *
-	 * @return the tasks proposal remote service
-	 */
-	public TasksProposalService getTasksProposalService() {
-		return tasksProposalService;
-	}
-
-	/**
-	 * Sets the tasks proposal remote service.
-	 *
-	 * @param tasksProposalService the tasks proposal remote service
-	 */
-	public void setTasksProposalService(
-		TasksProposalService tasksProposalService) {
-		this.tasksProposalService = tasksProposalService;
-	}
-
-	/**
-	 * Gets the tasks proposal persistence.
-	 *
-	 * @return the tasks proposal persistence
-	 */
-	public TasksProposalPersistence getTasksProposalPersistence() {
-		return tasksProposalPersistence;
-	}
-
-	/**
-	 * Sets the tasks proposal persistence.
-	 *
-	 * @param tasksProposalPersistence the tasks proposal persistence
-	 */
-	public void setTasksProposalPersistence(
-		TasksProposalPersistence tasksProposalPersistence) {
-		this.tasksProposalPersistence = tasksProposalPersistence;
-	}
-
-	/**
-	 * Gets the tasks proposal finder.
-	 *
-	 * @return the tasks proposal finder
-	 */
-	public TasksProposalFinder getTasksProposalFinder() {
-		return tasksProposalFinder;
-	}
-
-	/**
-	 * Sets the tasks proposal finder.
-	 *
-	 * @param tasksProposalFinder the tasks proposal finder
-	 */
-	public void setTasksProposalFinder(TasksProposalFinder tasksProposalFinder) {
-		this.tasksProposalFinder = tasksProposalFinder;
-	}
-
-	/**
 	 * Gets the Spring bean id for this ServiceBean.
 	 *
 	 * @return the Spring bean id for this ServiceBean
@@ -4101,13 +4022,5 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 	protected RatingsStatsPersistence ratingsStatsPersistence;
 	@BeanReference(type = RatingsStatsFinder.class)
 	protected RatingsStatsFinder ratingsStatsFinder;
-	@BeanReference(type = TasksProposalLocalService.class)
-	protected TasksProposalLocalService tasksProposalLocalService;
-	@BeanReference(type = TasksProposalService.class)
-	protected TasksProposalService tasksProposalService;
-	@BeanReference(type = TasksProposalPersistence.class)
-	protected TasksProposalPersistence tasksProposalPersistence;
-	@BeanReference(type = TasksProposalFinder.class)
-	protected TasksProposalFinder tasksProposalFinder;
 	protected String identifier;
 }

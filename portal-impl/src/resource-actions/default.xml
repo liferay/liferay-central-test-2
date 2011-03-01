@@ -20,7 +20,6 @@
 	<resource file="resource-actions/shopping.xml" />
 	<resource file="resource-actions/social.xml" />
 	<resource file="resource-actions/softwarecatalog.xml" />
-	<resource file="resource-actions/tasks.xml" />
 	<resource file="resource-actions/wiki.xml" />
 	<resource file="resource-actions/workflow.xml" />
 	<resource file="resource-actions/xslcontent.xml" />

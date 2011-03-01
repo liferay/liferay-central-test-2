@@ -89,15 +89,6 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserTeamChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
-<%@ page import="com.liferay.portlet.tasks.DuplicateReviewUserIdException" %>
-<%@ page import="com.liferay.portlet.tasks.NoSuchProposalException" %>
-<%@ page import="com.liferay.portlet.tasks.NoSuchReviewException" %>
-<%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
-<%@ page import="com.liferay.portlet.tasks.model.TasksReview" %>
-<%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tasks.service.permission.TasksProposalPermission" %>
-<%@ page import="com.liferay.portlet.tasks.util.comparator.ReviewUserNameComparator" %>
 
 <%
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);

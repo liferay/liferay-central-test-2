@@ -212,11 +212,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			PortletKeys.PREFS_OWNER_ID_DEFAULT,
 			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid());
 
-		// Tasks
-
-		tasksProposalLocalService.deleteProposal(
-			Layout.class.getName(), String.valueOf(layout.getPlid()));
-
 		// Ratings
 
 		ratingsStatsLocalService.deleteStats(

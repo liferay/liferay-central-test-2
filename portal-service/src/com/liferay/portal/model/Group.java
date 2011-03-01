@@ -62,10 +62,6 @@ public interface Group extends GroupModel {
 
 	public java.lang.String getTypeSettingsProperty(java.lang.String key);
 
-	public java.lang.String getWorkflowRoleNames();
-
-	public int getWorkflowStages();
-
 	public boolean hasPrivateLayouts();
 
 	public boolean hasPublicLayouts();
@@ -97,8 +93,6 @@ public interface Group extends GroupModel {
 	public boolean isUser();
 
 	public boolean isUserGroup();
-
-	public boolean isWorkflowEnabled();
 
 	public void setTypeSettings(java.lang.String typeSettings);
 

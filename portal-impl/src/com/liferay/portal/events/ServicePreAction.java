@@ -664,10 +664,6 @@ public class ServicePreAction extends Action {
 			}
 
 			if (GroupPermissionUtil.contains(
-					permissionChecker, groupId, ActionKeys.APPROVE_PROPOSAL) ||
-				GroupPermissionUtil.contains(
-					permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) ||
-				GroupPermissionUtil.contains(
 					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS) ||
 				GroupPermissionUtil.contains(
 					permissionChecker, groupId, ActionKeys.MANAGE_STAGING) ||
@@ -1739,19 +1735,12 @@ public class ServicePreAction extends Action {
 			// LEP-4987
 
 			if (group.isStaged() || group.isStagingGroup()) {
-				boolean hasApproveProposalPermission =
-					GroupPermissionUtil.contains(
-						permissionChecker, scopeGroupId,
-						ActionKeys.APPROVE_PROPOSAL);
-
 				boolean hasPublishStagingPermission =
 					GroupPermissionUtil.contains(
 						permissionChecker, scopeGroupId,
 						ActionKeys.PUBLISH_STAGING);
 
-				if (hasApproveProposalPermission ||
-					hasManageLayoutsPermission || hasPublishStagingPermission) {
-
+				if (hasManageLayoutsPermission || hasPublishStagingPermission) {
 					themeDisplay.setShowStagingIcon(true);
 				}
 

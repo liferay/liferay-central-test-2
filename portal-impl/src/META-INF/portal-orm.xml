@@ -2699,57 +2699,6 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl">
-		<attributes>
-			<id name="proposalId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="classNameId" />
-			<basic name="classPK" />
-			<basic name="name" />
-			<basic name="description" />
-			<basic name="publishDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="dueDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<transient name="primaryKey" />
-			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
-	<mapped-superclass class="com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl">
-		<attributes>
-			<id name="reviewId" />
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="proposalId" />
-			<basic name="assignedByUserId" />
-			<basic name="assignedByUserName" />
-			<basic name="stage" />
-			<basic name="completed" />
-			<basic name="rejected" />
-			<transient name="assignedByUserUuid" />
-			<transient name="primaryKey" />
-			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl">
 		<attributes>
 			<id name="nodeId" />
@@ -3528,14 +3477,6 @@
 	</entity>
 	<entity class="com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl" name="SCProductVersion">
 		<table name="SCProductVersion" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.tasks.model.impl.TasksProposalImpl" name="TasksProposal">
-		<table name="TasksProposal" />
-		<attributes />
-	</entity>
-	<entity class="com.liferay.portlet.tasks.model.impl.TasksReviewImpl" name="TasksReview">
-		<table name="TasksReview" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.wiki.model.impl.WikiNodeImpl" name="WikiNode">

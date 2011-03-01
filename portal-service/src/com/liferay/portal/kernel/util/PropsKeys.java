@@ -1699,10 +1699,6 @@ public interface PropsKeys {
 
 	public static final String TAGS_COMPILER_ENABLED = "tags.compiler.enabled";
 
-	public static final String TASKS_DEFAULT_ROLE_NAMES = "tasks.default.role.names";
-
-	public static final String TASKS_DEFAULT_STAGES = "tasks.default.stages";
-
 	public static final String TCK_URL = "tck.url";
 
 	public static final String TERMS_OF_USE_JOURNAL_ARTICLE_GROUP_ID = "terms.of.use.journal.article.group.id";

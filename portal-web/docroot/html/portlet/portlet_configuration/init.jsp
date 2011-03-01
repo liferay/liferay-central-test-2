@@ -51,9 +51,6 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 <%@ page import="com.liferay.portlet.portletconfiguration.util.PublicRenderParameterConfiguration" %>
 <%@ page import="com.liferay.portlet.social.util.FacebookUtil" %>
-<%@ page import="com.liferay.portlet.tasks.NoSuchProposalException" %>
-<%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
-<%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
 
 <%
 String portletResource = ParamUtil.getString(request, "portletResource");

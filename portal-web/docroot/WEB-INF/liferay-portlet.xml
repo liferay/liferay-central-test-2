@@ -1083,18 +1083,6 @@
 		<system>true</system>
 	</portlet>
 	<portlet>
-		<portlet-name>120</portlet-name>
-		<icon>/html/icons/default.png</icon>
-		<struts-path>tasks</struts-path>
-		<social-activity-interpreter-class>com.liferay.portlet.tasks.social.TasksActivityInterpreter</social-activity-interpreter-class>
-		<preferences-owned-by-group>true</preferences-owned-by-group>
-		<use-default-template>false</use-default-template>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
-		<system>true</system>
-	</portlet>
-	<portlet>
 		<portlet-name>121</portlet-name>
 		<struts-path>requests</struts-path>
 		<use-default-template>false</use-default-template>

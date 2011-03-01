@@ -23,7 +23,5 @@
 
 <liferay-ui:error exception="<%= NoSuchGroupException.class %>" message="the-community-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="the-page-could-not-be-found" />
-<liferay-ui:error exception="<%= NoSuchProposalException.class %>" message="the-proposal-could-not-be-found" />
-<liferay-ui:error exception="<%= NoSuchReviewException.class %>" message="the-review-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchRoleException.class %>" message="the-role-could-not-be-found" />
 <liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

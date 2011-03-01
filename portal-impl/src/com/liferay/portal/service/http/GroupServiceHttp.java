@@ -725,44 +725,6 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static com.liferay.portal.model.Group updateWorkflow(
-		HttpPrincipal httpPrincipal, long groupId, boolean workflowEnabled,
-		int workflowStages, java.lang.String workflowRoleNames)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		try {
-			MethodKey methodKey = new MethodKey(GroupServiceUtil.class.getName(),
-					"updateWorkflow", _updateWorkflowParameterTypes19);
-
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					workflowEnabled, workflowStages, workflowRoleNames);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
-					throw (com.liferay.portal.kernel.exception.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
-					throw (com.liferay.portal.kernel.exception.SystemException)e;
-				}
-
-				throw new com.liferay.portal.kernel.exception.SystemException(e);
-			}
-
-			return (com.liferay.portal.model.Group)returnObj;
-		}
-		catch (com.liferay.portal.kernel.exception.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(GroupServiceHttp.class);
 	private static final Class<?>[] _addGroupParameterTypes0 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,
@@ -828,8 +790,5 @@ public class GroupServiceHttp {
 			long.class, java.lang.String.class, java.lang.String.class,
 			int.class, java.lang.String.class, boolean.class,
 			com.liferay.portal.service.ServiceContext.class
-		};
-	private static final Class<?>[] _updateWorkflowParameterTypes19 = new Class[] {
-			long.class, boolean.class, int.class, java.lang.String.class
 		};
 }

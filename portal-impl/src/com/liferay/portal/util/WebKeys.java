@@ -26,7 +26,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ANNOUNCEMENTS_ENTRY = "ANNOUNCEMENTS_ENTRY";
 
-    public static final String ASSET_CATEGORY = "ASSET_CATEGORY";
+	public static final String ASSET_CATEGORY = "ASSET_CATEGORY";
 
 	public static final String ASSET_LAYOUT_TAG_NAMES = "ASSET_LAYOUT_TAG_NAMES";
 
@@ -34,7 +34,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ASSET_TAG = "ASSET_TAG";
 
-    public static final String ASSET_VOCABULARIES = "ASSET_VOCABULARIES";
+	public static final String ASSET_VOCABULARIES = "ASSET_VOCABULARIES";
 
 	public static final String ASSET_VOCABULARY = "ASSET_VOCABULARY";
 
@@ -373,8 +373,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String TARGET_VERSION = "TARGET_VERSION";
 
 	public static final String TASK_LIST = "TASK_LIST";
-
-	public static final String TASKS_PROPOSAL = "TASKS_PROPOSAL";
 
 	public static final String TEAM = "TEAM";
 

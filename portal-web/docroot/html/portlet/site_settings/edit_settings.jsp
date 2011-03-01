@@ -77,10 +77,6 @@ else {
 
 UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 
-boolean workflowEnabled = liveGroup.isWorkflowEnabled();
-int workflowStages = ParamUtil.getInteger(request, "workflowStages", liveGroup.getWorkflowStages());
-String[] workflowRoleNames = StringUtil.split(ParamUtil.getString(request, "workflowRoleNames", liveGroup.getWorkflowRoleNames()));
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/site_settings/edit_settings");
@@ -119,10 +115,6 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, Text
 request.setAttribute("edit_settings.jsp-liveGroup", liveGroup);
 request.setAttribute("edit_settings.jsp-liveGroupId", new Long(liveGroupId));
 request.setAttribute("edit_settings.jsp-liveGroupTypeSettings", liveGroupTypeSettings);
-
-request.setAttribute("edit_settings.jsp-workflowEnabled", new Boolean(workflowEnabled));
-request.setAttribute("edit_settings.jsp-workflowStages", new Integer(workflowStages));
-request.setAttribute("edit_settings.jsp-workflowRoleNames", workflowRoleNames);
 %>
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN_ORGANIZATIONS) %>">

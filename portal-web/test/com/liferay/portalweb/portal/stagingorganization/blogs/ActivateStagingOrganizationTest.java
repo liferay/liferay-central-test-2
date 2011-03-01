@@ -131,45 +131,6 @@ public class ActivateStagingOrganizationTest extends BaseTestCase {
 				selenium.clickAt("_126_staged-portlet_33Checkbox",
 					RuntimeVariables.replace("Blogs"));
 
-			case 2:
-				selenium.select("_126_workflowStages",
-					RuntimeVariables.replace("label=3"));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible("_126_workflowRoleName_1")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.saveScreenShotAndSource();
-				selenium.select("_126_workflowRoleName_1",
-					RuntimeVariables.replace(
-						"label=Organization Content Administrator"));
-				selenium.select("_126_workflowRoleName_Last",
-					RuntimeVariables.replace(
-						"label=Organization Content Publisher"));
-				selenium.clickAt("//input[@value='Save']",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to activate local staging for Organization Name[\\s\\S]$"));
-				selenium.saveScreenShotAndSource();
-				assertEquals(RuntimeVariables.replace(
-						"Your request completed successfully."),
-					selenium.getText("//section/div/div/div/div"));
-				assertTrue(selenium.isChecked("_126_staged-portlet_33Checkbox"));
-				selenium.saveScreenShotAndSource();
-
 			case 100:
 				label = -1;
 			}

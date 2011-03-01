@@ -67,7 +67,6 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistenc
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence;
-import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
 
 import java.io.Serializable;
@@ -5796,8 +5795,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
 	@BeanReference(type = SCProductEntryPersistence.class)
 	protected SCProductEntryPersistence scProductEntryPersistence;
-	@BeanReference(type = TasksProposalPersistence.class)
-	protected TasksProposalPersistence tasksProposalPersistence;
 	@BeanReference(type = WikiNodePersistence.class)
 	protected WikiNodePersistence wikiNodePersistence;
 	protected ContainsOrganization containsOrganization;

@@ -71,7 +71,6 @@ import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.File;
@@ -84,8 +83,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -310,9 +309,6 @@ public class StagingImpl implements Staging {
 		typeSettingsProperties.remove("secureConnection");
 		typeSettingsProperties.remove("staged");
 		typeSettingsProperties.remove("stagedRemotely");
-		typeSettingsProperties.remove("workflowEnabled");
-		typeSettingsProperties.remove("workflowRoleNames");
-		typeSettingsProperties.remove("workflowStages");
 
 		Set<String> keys = new HashSet<String>();
 
@@ -1206,41 +1202,6 @@ public class StagingImpl implements Staging {
 		return cal;
 	}
 
-	protected String getWorkflowRoleNames(ServiceContext serviceContext) {
-		int workflowStages = ParamUtil.getInteger(
-			serviceContext, "workflowStages");
-
-		String workflowRoleNames = null;
-
-		if (workflowStages == 0) {
-			workflowRoleNames = StringPool.BLANK;
-		}
-		else {
-			StringBundler sb = new StringBundler(workflowStages * 2 - 1);
-
-			for (int i = 1; i <= (workflowStages - 1); i++) {
-				if (i > 1) {
-					sb.append(StringPool.COMMA);
-				}
-
-				String workflowRoleName = ParamUtil.getString(
-					serviceContext, "workflowRoleName_" + i);
-
-				sb.append(workflowRoleName);
-			}
-
-			String workflowRoleName = ParamUtil.getString(
-				serviceContext, "workflowRoleName_Last");
-
-			sb.append(",");
-			sb.append(workflowRoleName);
-
-			workflowRoleNames = sb.toString();
-		}
-
-		return workflowRoleNames;
-	}
-
 	protected void publishLayouts(
 			PortletRequest portletRequest, long sourceGroupId,
 			long targetGroupId, Map<String, String[]> parameterMap,
@@ -1589,36 +1550,6 @@ public class StagingImpl implements Staging {
 				typeSettingsProperties.setProperty(
 					parameterName, String.valueOf(staged));
 			}
-		}
-
-		boolean workflowEnabled = false;
-
-		int workflowStages = ParamUtil.getInteger(
-			serviceContext, "workflowStages", 1);
-
-		if (workflowStages > 1) {
-			workflowEnabled = true;
-		}
-
-		typeSettingsProperties.setProperty(
-			"workflowEnabled", String.valueOf(workflowEnabled));
-
-		if (workflowEnabled) {
-			String workflowRoleNames = getWorkflowRoleNames(serviceContext);
-
-			if (Validator.isNull(workflowRoleNames)) {
-				workflowRoleNames = PropsValues.TASKS_DEFAULT_ROLE_NAMES;
-			}
-
-			typeSettingsProperties.setProperty(
-				"workflowRoleNames", workflowRoleNames);
-
-			if (workflowStages < PropsValues.TASKS_DEFAULT_STAGES) {
-				workflowStages = PropsValues.TASKS_DEFAULT_STAGES;
-			}
-
-			typeSettingsProperties.setProperty(
-				"workflowStages", String.valueOf(workflowStages));
 		}
 	}
 

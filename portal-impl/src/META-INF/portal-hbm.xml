@@ -145,8 +145,6 @@
 	<import class="com.liferay.portlet.softwarecatalog.model.SCProductEntry" />
 	<import class="com.liferay.portlet.softwarecatalog.model.SCProductScreenshot" />
 	<import class="com.liferay.portlet.softwarecatalog.model.SCProductVersion" />
-	<import class="com.liferay.portlet.tasks.model.TasksProposal" />
-	<import class="com.liferay.portlet.tasks.model.TasksReview" />
 	<import class="com.liferay.portlet.wiki.model.WikiNode" />
 	<import class="com.liferay.portlet.wiki.model.WikiPage" />
 	<import class="com.liferay.portlet.wiki.model.WikiPageResource" />
@@ -2198,42 +2196,6 @@
 		<property name="downloadPageURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="directDownloadURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="repoStoreArtifact" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-	</class>
-	<class name="com.liferay.portlet.tasks.model.impl.TasksProposalImpl" table="TasksProposal">
-		<cache usage="read-write" />
-		<id name="proposalId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="publishDate" type="org.hibernate.type.TimestampType" />
-		<property name="dueDate" type="org.hibernate.type.TimestampType" />
-	</class>
-	<class name="com.liferay.portlet.tasks.model.impl.TasksReviewImpl" table="TasksReview">
-		<cache usage="read-write" />
-		<id name="reviewId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="proposalId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="assignedByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="assignedByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="stage" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="completed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="rejected" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portlet.wiki.model.impl.WikiNodeImpl" table="WikiNode">
 		<cache usage="read-write" />

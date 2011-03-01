@@ -438,14 +438,6 @@ public class GroupWrapper implements Group {
 		return _group.getTypeSettingsProperty(key);
 	}
 
-	public java.lang.String getWorkflowRoleNames() {
-		return _group.getWorkflowRoleNames();
-	}
-
-	public int getWorkflowStages() {
-		return _group.getWorkflowStages();
-	}
-
 	public boolean hasPrivateLayouts() {
 		return _group.hasPrivateLayouts();
 	}
@@ -508,10 +500,6 @@ public class GroupWrapper implements Group {
 
 	public boolean isUserGroup() {
 		return _group.isUserGroup();
-	}
-
-	public boolean isWorkflowEnabled() {
-		return _group.isWorkflowEnabled();
 	}
 
 	public void setTypeSettingsProperties(

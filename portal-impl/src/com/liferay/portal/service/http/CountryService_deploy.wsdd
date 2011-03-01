@@ -30,7 +30,7 @@
 		</operation>
 		<parameter name="allowedMethods" value="addCountry getCountries getCountry getCountryByA2 getCountryByA3 getCountryByName" />
 		<parameter name="className" value="com.liferay.portal.service.http.CountryServiceSoap" />
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com" />
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,urn:http.service.portal.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="CountryServiceSoap" />
 		<parameter name="wsdlServiceElement" value="CountryServiceSoapService" />

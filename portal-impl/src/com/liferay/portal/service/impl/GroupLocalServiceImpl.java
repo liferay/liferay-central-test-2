@@ -41,7 +41,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
@@ -467,10 +466,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		scFrameworkVersionLocalService.deleteFrameworkVersions(
 			group.getGroupId());
 		scProductEntryLocalService.deleteProductEntries(group.getGroupId());
-
-		// Tasks
-
-		tasksProposalLocalService.deleteProposals(group.getGroupId());
 
 		// Wiki
 
@@ -1037,45 +1032,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			updateAsset(
 				user.getUserId(), group, serviceContext.getAssetCategoryIds(),
 				serviceContext.getAssetTagNames());
-		}
-
-		return group;
-	}
-
-	public Group updateWorkflow(
-			long groupId, boolean workflowEnabled, int workflowStages,
-			String workflowRoleNames)
-		throws PortalException, SystemException {
-
-		Group group = groupPersistence.findByPrimaryKey(groupId);
-
-		UnicodeProperties typeSettingsProperties =
-			group.getTypeSettingsProperties();
-
-		typeSettingsProperties.setProperty(
-			"workflowEnabled", String.valueOf(workflowEnabled));
-
-		if (workflowEnabled) {
-			if (workflowStages < PropsValues.TASKS_DEFAULT_STAGES) {
-				workflowStages = PropsValues.TASKS_DEFAULT_STAGES;
-			}
-
-			if (Validator.isNull(workflowRoleNames)) {
-				workflowRoleNames = PropsValues.TASKS_DEFAULT_ROLE_NAMES;
-			}
-
-			typeSettingsProperties.setProperty(
-				"workflowStages", String.valueOf(workflowStages));
-			typeSettingsProperties.setProperty(
-				"workflowRoleNames", workflowRoleNames);
-		}
-
-		group.setTypeSettings(group.getTypeSettings());
-
-		groupPersistence.update(group, false);
-
-		if (!workflowEnabled) {
-			tasksProposalLocalService.deleteProposals(groupId);
 		}
 
 		return group;

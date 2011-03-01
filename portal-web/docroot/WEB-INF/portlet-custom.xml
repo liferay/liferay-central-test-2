@@ -1689,22 +1689,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>120</portlet-name>
-		<display-name>Tasks</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>121</portlet-name>
 		<display-name>Requests</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
@@ -2336,21 +2320,21 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
-    <portlet>
-        <portlet-name>156</portlet-name>
-        <display-name>Group Pages</display-name>
-        <portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-        <init-param>
-            <name>view-action</name>
-            <value>/group_pages/edit_layouts</value>
-        </init-param>
-        <expiration-cache>0</expiration-cache>
-        <supports>
-            <mime-type>text/html</mime-type>
-        </supports>
-        <resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-    </portlet>
-    <portlet>
+	<portlet>
+		<portlet-name>156</portlet-name>
+		<display-name>Group Pages</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/group_pages/edit_layouts</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+	</portlet>
+	<portlet>
 		<portlet-name>157</portlet-name>
 		<display-name>Workflow Instances</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>

@@ -1158,10 +1158,6 @@ public class PropsValues {
 
 	public static final boolean TAGS_COMPILER_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.TAGS_COMPILER_ENABLED));
 
-	public static final String TASKS_DEFAULT_ROLE_NAMES = PropsUtil.get(PropsKeys.TASKS_DEFAULT_ROLE_NAMES);
-
-	public static final int TASKS_DEFAULT_STAGES = GetterUtil.getInteger(PropsUtil.get(PropsKeys.TASKS_DEFAULT_STAGES));
-
 	public static final boolean TCK_URL = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.TCK_URL));
 
 	public static final long TERMS_OF_USE_JOURNAL_ARTICLE_GROUP_ID = GetterUtil.getLong(PropsUtil.get(PropsKeys.TERMS_OF_USE_JOURNAL_ARTICLE_GROUP_ID));

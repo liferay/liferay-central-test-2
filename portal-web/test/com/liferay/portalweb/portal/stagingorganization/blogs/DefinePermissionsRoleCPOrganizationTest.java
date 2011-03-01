@@ -95,12 +95,8 @@ public class DefinePermissionsRoleCPOrganizationTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Organization Administration"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.check(
-			"//input[@value='com.liferay.portal.model.OrganizationAPPROVE_PROPOSAL']");
 		selenium.uncheck(
 			"//input[@value='com.liferay.portal.model.OrganizationASSIGN_MEMBERS']");
-		selenium.uncheck(
-			"//input[@value='com.liferay.portal.model.OrganizationASSIGN_REVIEWER']");
 		selenium.uncheck(
 			"//input[@value='com.liferay.portal.model.OrganizationASSIGN_USER_ROLES']");
 		selenium.uncheck(

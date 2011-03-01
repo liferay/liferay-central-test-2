@@ -48,7 +48,6 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
-import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
 
 import java.io.Serializable;
 
@@ -6139,8 +6138,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 	protected MBMessagePersistence mbMessagePersistence;
 	@BeanReference(type = RatingsStatsPersistence.class)
 	protected RatingsStatsPersistence ratingsStatsPersistence;
-	@BeanReference(type = TasksProposalPersistence.class)
-	protected TasksProposalPersistence tasksProposalPersistence;
 	private static final String _SQL_SELECT_LAYOUT = "SELECT layout FROM Layout layout";
 	private static final String _SQL_SELECT_LAYOUT_WHERE = "SELECT layout FROM Layout layout WHERE ";
 	private static final String _SQL_COUNT_LAYOUT = "SELECT COUNT(layout) FROM Layout layout";

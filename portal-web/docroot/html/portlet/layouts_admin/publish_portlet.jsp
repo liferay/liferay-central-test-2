@@ -21,19 +21,9 @@ String tabs2 = "staging";
 
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
-long proposalId = ParamUtil.getLong(request, "proposalId");
-
-TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(proposalId);
-
-String classPK = proposal.getClassPK();
-
-int pos = classPK.indexOf(PortletConstants.LAYOUT_SEPARATOR);
-
-String selPortletId = classPK.substring(pos + PortletConstants.LAYOUT_SEPARATOR.length());
+String selPortletId = ParamUtil.getString(request, "selPortletId");
 
 Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), selPortletId);
-
-String selPlid = classPK.substring(0, pos);
 
 long groupId = ParamUtil.getLong(request, "groupId");
 
@@ -44,14 +34,6 @@ Group stagingGroup = selGroup;
 
 long liveGroupId = liveGroup.getGroupId();
 long stagingGroupId = stagingGroup.getGroupId();
-
-PortletURL portletURL = renderResponse.createActionURL();
-
-portletURL.setParameter("struts_action", "/layouts_admin/edit_proposal");
-portletURL.setParameter(Constants.CMD, Constants.PUBLISH);
-portletURL.setParameter("proposalId", String.valueOf(proposalId));
-portletURL.setParameter("groupId", String.valueOf(liveGroupId));
-portletURL.setParameter("plid", selPlid);
 
 boolean supportsLAR = Validator.isNotNull(selPortlet.getPortletDataHandlerClass());
 boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionClass());

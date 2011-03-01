@@ -20,10 +20,6 @@
 Group liveGroup = (Group)request.getAttribute("edit_settings.jsp-liveGroup");
 long liveGroupId = ((Long)request.getAttribute("edit_settings.jsp-liveGroupId")).longValue();
 UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribute("edit_settings.jsp-liveGroupTypeSettings");
-
-boolean workflowEnabled = ((Boolean)request.getAttribute("edit_settings.jsp-workflowEnabled")).booleanValue();
-int workflowStages = ((Integer)request.getAttribute("edit_settings.jsp-workflowStages")).intValue();
-String[] workflowRoleNames = (String[])request.getAttribute("edit_settings.jsp-workflowRoleNames");
 %>
 
 <c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
@@ -168,110 +164,6 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_settings.jsp-w
 		</aui:fieldset>
 	</div>
 
-	<br />
-
-	<div class='<%= (workflowEnabled ? StringPool.BLANK : "aui-helper-hidden") %>' id="<portlet:namespace />advancedOptions">
-		<aui:fieldset label="advanced-options">
-			<aui:field-wrapper>
-				<aui:select inlineField="<%= true %>" inlineLabel="left" label="number-of-editorial-stages" name="workflowStages">
-
-					<aui:option selected="<%= (1 == workflowStages) %>" value="1">1</aui:option>
-
-					<%
-					for (int i = 3; i <= 6; i++) {
-					%>
-
-						<aui:option selected="<%= (i == (workflowStages + 1)) %>" value="<%= (i - 1) %>"><%= i %></aui:option>
-
-					<%
-					}
-					%>
-
-				</aui:select>
-			</aui:field-wrapper>
-
-			<div class='<%= ((workflowStages == 1) ? "aui-helper-hidden": StringPool.BLANK) %>' id="<portlet:namespace />workflowStage_0">
-				<br />
-
-				<div class="portlet-msg-info">
-					<c:choose>
-						<c:when test="<%= liveGroup.isOrganization() %>">
-							<liferay-ui:message key="stage-organization-permissions-reference-help" />
-						</c:when>
-						<c:otherwise>
-							<liferay-ui:message key="stage-community-permissions-reference-help" />
-						</c:otherwise>
-					</c:choose>
-				</div>
-
-				<aui:field-wrapper>
-					<strong><%= LanguageUtil.get(pageContext, "creation-stage") %></strong> <liferay-ui:icon-help message="stage-1-role-help" />
-
-					<br />
-
-					<%= LanguageUtil.get(pageContext, "content-creators") %>
-				</aui:field-wrapper>
-
-				<%
-				int roleType = liveGroup.isOrganization() ? RoleConstants.TYPE_ORGANIZATION : RoleConstants.TYPE_COMMUNITY;
-
-				List<Role> workflowRoles = RoleLocalServiceUtil.search(company.getCompanyId(), null, null, new Integer[] {roleType}, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-
-				for (int i = 1; i <= 4; i++) {
-					String helpMessage = "stage-review-role-help";
-					String label = "review-stage-x";
-
-					if (i == 1) {
-						helpMessage = "stage-2-role-help";
-						label = "task-leader-stage";
-					}
-				%>
-
-					<div class='<%= ((i >= workflowStages) ? "aui-helper-hidden": StringPool.BLANK) %>' id="<portlet:namespace />workflowStage_<%= i %>">
-						<aui:select helpMessage="<%= helpMessage %>" label='<%= LanguageUtil.format(pageContext, label, String.valueOf(i - 1)) %>' name='<%= "workflowRoleName_" + i %>'>
-
-							<%
-							for (Role workflowRole : workflowRoles) {
-								String workflowRoleName = workflowRole.getName();
-
-								if (!workflowRoleName.equals(RoleConstants.COMMUNITY_MEMBER) && !workflowRoleName.equals(RoleConstants.ORGANIZATION_MEMBER)) {
-							%>
-
-									<aui:option selected="<%= (((i - 1) < workflowRoleNames.length) && workflowRoleNames[i - 1].equals(workflowRoleName)) %>" value="<%= HtmlUtil.escape(workflowRoleName) %>"><%= HtmlUtil.escape(workflowRole.getTitle(locale)) %></aui:option>
-
-							<%
-								}
-							}
-							%>
-
-						</aui:select>
-					</div>
-
-				<%
-				}
-				%>
-
-				<aui:select helpMessage="stage-last-role-help" label='<%= LanguageUtil.get(pageContext, "approval-stage") %>' name="workflowRoleName_Last">
-
-					<%
-					for (Role workflowRole : workflowRoles) {
-						String workflowRoleName = workflowRole.getName();
-
-						if (!workflowRoleName.equals(RoleConstants.COMMUNITY_MEMBER) && !workflowRoleName.equals(RoleConstants.ORGANIZATION_MEMBER)) {
-					%>
-
-							<aui:option selected="<%= (workflowRoleNames[workflowRoleNames.length - 1].equals(workflowRoleName)) %>" value="<%= HtmlUtil.escape(workflowRoleName) %>"><%= HtmlUtil.escape(workflowRole.getTitle(locale)) %></aui:option>
-
-					<%
-						}
-					}
-					%>
-
-				</aui:select>
-			</div>
-		</aui:fieldset>
-	</div>
-
 	<aui:button-row>
 		<aui:button last="true" name="saveButton" onClick='<%= renderResponse.getNamespace() + "updateStaging();" %>' value="save" />
 	</aui:button-row>
@@ -364,8 +256,6 @@ String[] workflowRoleNames = (String[])request.getAttribute("edit_settings.jsp-w
 			},
 			['aui-base']
 		);
-
-		Liferay.Util.toggleSelectBoxCustom('<portlet:namespace />workflowStages','<portlet:namespace />workflowStage_');
 
 		Liferay.Util.toggleSelectBoxReverse('<portlet:namespace />stagingType','<%= StagingConstants.TYPE_NOT_STAGED %>','<portlet:namespace />stagedPortlets');
 		Liferay.Util.toggleSelectBoxReverse('<portlet:namespace />stagingType','<%= StagingConstants.TYPE_NOT_STAGED %>','<portlet:namespace />stagingOptions');

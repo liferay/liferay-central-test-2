@@ -29,12 +29,8 @@ public class CP_PortalRolesTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Community administration"));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		selenium.check(
-			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupAPPROVE_PROPOSAL']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupASSIGN_MEMBERS']");
-		selenium.uncheck(
-			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupASSIGN_REVIEWER']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.GroupDELETE']");
 		selenium.uncheck(
@@ -57,14 +53,6 @@ public class CP_PortalRolesTest extends BaseTestCase {
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.LayoutUPDATE']");
 		selenium.uncheck(
 			"//input[@name='_128_rowIds' and @value='com.liferay.portal.model.LayoutVIEW']");
-		selenium.uncheck(
-			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.tasks.model.TasksProposalADD_DISCUSSION']");
-		selenium.uncheck(
-			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.tasks.model.TasksProposalDELETE']");
-		selenium.uncheck(
-			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.tasks.model.TasksProposalUPDATE']");
-		selenium.uncheck(
-			"//input[@name='_128_rowIds' and @value='com.liferay.portlet.tasks.model.TasksProposalVIEW']");
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();

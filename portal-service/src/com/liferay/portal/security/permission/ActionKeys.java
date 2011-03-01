@@ -116,11 +116,7 @@ public class ActionKeys {
 
 	public static final String ADD_VOTE = "ADD_VOTE";
 
-	public static final String APPROVE_PROPOSAL = "APPROVE_PROPOSAL";
-
 	public static final String ASSIGN_MEMBERS = "ASSIGN_MEMBERS";
-
-	public static final String ASSIGN_REVIEWER = "ASSIGN_REVIEWER";
 
 	public static final String ASSIGN_USER_ROLES = "ASSIGN_USER_ROLES";
 

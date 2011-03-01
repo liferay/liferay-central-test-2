@@ -435,15 +435,6 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/communities/edit_proposal" type="com.liferay.portlet.layoutsadmin.action.EditProposalAction">
-			<forward name="portlet.layouts_admin.edit_proposal" path="portlet.layouts_admin.edit_proposal" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-		</action>
-
-		<action path="/communities/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
-		</action>
-
 		<action path="/communities/edit_settings" type="com.liferay.portlet.sitesettings.action.EditSettingsAction">
 			<forward name="portlet.site_settings.edit_settings" path="portlet.site_settings.edit_settings" />
 			<forward name="portlet.site_settings.error" path="portlet.site_settings.error" />
@@ -486,8 +477,6 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 			<forward name="portlet.communities.post_membership_request" path="portlet.communities.post_membership_request" />
 		</action>
-
-		<action path="/communities/publish_portlet" forward="portlet.layouts_admin.publish_portlet" />
 
 		<action path="/communities/publish_layouts" type="com.liferay.portlet.layoutsadmin.action.PublishLayoutsAction">
 			<forward name="portlet.layouts_admin.publish_layouts" path="portlet.layouts_admin.publish_layouts" />
@@ -823,15 +812,6 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin_communities/edit_proposal" type="com.liferay.portlet.layoutsadmin.action.EditProposalAction">
-			<forward name="portlet.layouts_admin.edit_proposal" path="portlet.layouts_admin.edit_proposal" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-		</action>
-
-		<action path="/enterprise_admin_communities/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
-		</action>
-
 		<action path="/enterprise_admin_communities/edit_settings" type="com.liferay.portlet.sitesettings.action.EditSettingsAction">
 			<forward name="portlet.site_settings.edit_settings" path="portlet.site_settings.edit_settings" />
 			<forward name="portlet.site_settings.error" path="portlet.site_settings.error" />
@@ -879,8 +859,6 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 			<forward name="portlet.layouts_admin.publish_layouts" path="portlet.layouts_admin.publish_layouts" />
 		</action>
-
-		<action path="/enterprise_admin_communities/publish_portlet" forward="portlet.layouts_admin.publish_portlet" />
 
 		<action path="/enterprise_admin_communities/reply_membership_request" type="com.liferay.portlet.communities.action.ReplyMembershipRequestAction">
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
@@ -930,15 +908,6 @@
 		<action path="/enterprise_admin_organizations/edit_organization_logo" type="com.liferay.portlet.enterpriseadmin.action.EditOrganizationLogoAction">
 			<forward name="portlet.enterprise_admin.edit_organization_logo" path="portlet.enterprise_admin.edit_organization_logo" />
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
-		</action>
-
-		<action path="/enterprise_admin_organizations/edit_proposal" type="com.liferay.portlet.layoutsadmin.action.EditProposalAction">
-			<forward name="portlet.layouts_admin.edit_proposal" path="portlet.layouts_admin.edit_proposal" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-		</action>
-
-		<action path="/enterprise_admin_organizations/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
 		</action>
 
 		<action path="/enterprise_admin_organizations/edit_settings" type="com.liferay.portlet.sitesettings.action.EditSettingsAction">
@@ -1227,15 +1196,6 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/group_pages/edit_proposal" type="com.liferay.portlet.layoutsadmin.action.EditProposalAction">
-			<forward name="portlet.layouts_admin.edit_proposal" path="portlet.layouts_admin.edit_proposal" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-		</action>
-
-		<action path="/group_pages/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
-		</action>
-
 		<action path="/group_pages/export_layouts" type="com.liferay.portlet.layoutsadmin.action.ExportLayoutsAction">
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
@@ -1253,8 +1213,6 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 			<forward name="portlet.layouts_admin.publish_layouts" path="portlet.layouts_admin.publish_layouts" />
 		</action>
-
-		<action path="/group_pages/publish_portlet" forward="portlet.layouts_admin.publish_portlet" />
 
 		<action path="/group_pages/sitemap" type="com.liferay.portlet.layoutsadmin.action.SitemapAction" />
 
@@ -1505,15 +1463,6 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/layouts_admin/edit_proposal" type="com.liferay.portlet.layoutsadmin.action.EditProposalAction">
-			<forward name="portlet.layouts_admin.edit_proposal" path="portlet.layouts_admin.edit_proposal" />
-			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
-		</action>
-
-		<action path="/layouts_admin/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
-		</action>
-
 		<action path="/layouts_admin/export_layouts" type="com.liferay.portlet.layoutsadmin.action.ExportLayoutsAction">
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
@@ -1531,8 +1480,6 @@
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 			<forward name="portlet.layouts_admin.publish_layouts" path="portlet.layouts_admin.publish_layouts" />
 		</action>
-
-		<action path="/layouts_admin/publish_portlet" forward="portlet.layouts_admin.publish_portlet" />
 
 		<action path="/layouts_admin/robots" type="com.liferay.portlet.layoutsadmin.action.RobotsAction" />
 

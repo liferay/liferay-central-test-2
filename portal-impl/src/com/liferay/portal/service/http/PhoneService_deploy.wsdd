@@ -31,7 +31,7 @@
 		</operation>
 		<parameter name="allowedMethods" value="addPhone deletePhone getPhone getPhones updatePhone" />
 		<parameter name="className" value="com.liferay.portal.service.http.PhoneServiceSoap" />
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com" />
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,urn:http.service.portal.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="PhoneServiceSoap" />
 		<parameter name="wsdlServiceElement" value="PhoneServiceSoapService" />

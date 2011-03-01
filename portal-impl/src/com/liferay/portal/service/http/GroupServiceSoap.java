@@ -348,21 +348,5 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.GroupSoap updateWorkflow(
-		long groupId, boolean workflowEnabled, int workflowStages,
-		java.lang.String workflowRoleNames) throws RemoteException {
-		try {
-			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateWorkflow(groupId,
-					workflowEnabled, workflowStages, workflowRoleNames);
-
-			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(GroupServiceSoap.class);
 }

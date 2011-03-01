@@ -57,7 +57,7 @@
 		</operation>
 		<parameter name="allowedMethods" value="deleteImage deleteImageByFolderIdAndNameWithExtension getFoldersImagesCount getGroupImages getGroupImagesCount getImage getImageByFolderIdAndNameWithExtension getImageByLargeImageId getImageBySmallImageId getImages getImagesCount" />
 		<parameter name="className" value="com.liferay.portlet.imagegallery.service.http.IGImageServiceSoap" />
-		<parameter name="schemaUnqualified" value="http://model.imagegallery.portlet.liferay.com,urn:http.service.imagegallery.portlet.liferay.com" />
+		<parameter name="schemaUnqualified" value="urn:http.service.imagegallery.portlet.liferay.com,http://model.imagegallery.portlet.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="IGImageServiceSoap" />
 		<parameter name="wsdlServiceElement" value="IGImageServiceSoapService" />

@@ -188,40 +188,6 @@ public class SA_SetupTest extends BaseTestCase {
 				selenium.clickAt("_134_staged-portlet_33Checkbox",
 					RuntimeVariables.replace("Blogs"));
 
-			case 2:
-				selenium.select("_134_workflowStages",
-					RuntimeVariables.replace("label=3"));
-
-				for (int second = 0;; second++) {
-					if (second >= 60) {
-						fail("timeout");
-					}
-
-					try {
-						if (selenium.isVisible("_134_workflowRoleName_1")) {
-							break;
-						}
-					}
-					catch (Exception e) {
-					}
-
-					Thread.sleep(1000);
-				}
-
-				selenium.saveScreenShotAndSource();
-				selenium.select("_134_workflowRoleName_1",
-					RuntimeVariables.replace("label=Content Administrator"));
-				selenium.select("_134_workflowRoleName_Last",
-					RuntimeVariables.replace("label=Content Publisher"));
-				selenium.clickAt("//input[@value='Save']",
-					RuntimeVariables.replace(""));
-				selenium.waitForPageToLoad("30000");
-				assertTrue(selenium.getConfirmation()
-								   .matches("^Are you sure you want to activate local staging for Liferay[\\s\\S]$"));
-				selenium.saveScreenShotAndSource();
-				assertTrue(selenium.isTextPresent(
-						"Your request completed successfully."));
-
 			case 100:
 				label = -1;
 			}

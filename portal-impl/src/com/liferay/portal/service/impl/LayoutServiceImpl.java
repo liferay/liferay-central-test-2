@@ -330,18 +330,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			group = group.getLiveGroup();
 		}
 
-		if (group.isWorkflowEnabled() &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, sourceGroupId, ActionKeys.MANAGE_STAGING) &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, sourceGroupId, ActionKeys.PUBLISH_STAGING)) {
-
-			throw new PrincipalException();
-		}
-		else {
-			GroupPermissionUtil.check(
-				permissionChecker, sourceGroupId, ActionKeys.PUBLISH_TO_REMOTE);
-		}
+		GroupPermissionUtil.contains(
+			permissionChecker, sourceGroupId, ActionKeys.PUBLISH_STAGING);
 
 		LayoutsRemotePublisherRequest publisherRequest =
 			new LayoutsRemotePublisherRequest(
@@ -402,18 +392,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			group = group.getLiveGroup();
 		}
 
-		if (group.isWorkflowEnabled() &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, groupId, ActionKeys.MANAGE_STAGING) &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) {
-
-			throw new PrincipalException();
-		}
-		else {
-			GroupPermissionUtil.check(
-				permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS);
-		}
+		GroupPermissionUtil.contains(
+			permissionChecker, groupId, ActionKeys.PUBLISH_STAGING);
 
 		SchedulerEngineUtil.unschedule(
 			jobName, groupName, StorageType.PERSISTED);

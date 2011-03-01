@@ -579,16 +579,6 @@ public class GroupLocalServiceUtil {
 			active, serviceContext);
 	}
 
-	public static com.liferay.portal.model.Group updateWorkflow(long groupId,
-		boolean workflowEnabled, int workflowStages,
-		java.lang.String workflowRoleNames)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateWorkflow(groupId, workflowEnabled, workflowStages,
-			workflowRoleNames);
-	}
-
 	public static GroupLocalService getService() {
 		if (_service == null) {
 			_service = (GroupLocalService)PortalBeanLocatorUtil.locate(GroupLocalService.class.getName());

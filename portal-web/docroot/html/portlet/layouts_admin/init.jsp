@@ -56,15 +56,6 @@
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
-<%@ page import="com.liferay.portlet.tasks.DuplicateReviewUserIdException" %>
-<%@ page import="com.liferay.portlet.tasks.NoSuchProposalException" %>
-<%@ page import="com.liferay.portlet.tasks.NoSuchReviewException" %>
-<%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
-<%@ page import="com.liferay.portlet.tasks.model.TasksReview" %>
-<%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tasks.service.permission.TasksProposalPermission" %>
-<%@ page import="com.liferay.portlet.tasks.util.comparator.ReviewUserNameComparator" %>
 
 <%
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
