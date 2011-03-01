@@ -220,6 +220,24 @@ public class VirtualHostLocalServiceWrapper implements VirtualHostLocalService {
 		return _virtualHostLocalService.updateVirtualHost(virtualHost, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _virtualHostLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_virtualHostLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.VirtualHost getVirtualHost(long companyId,
 		long layoutSetId)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -233,6 +233,24 @@ public class WikiNodeLocalServiceWrapper implements WikiNodeLocalService {
 		return _wikiNodeLocalService.updateWikiNode(wikiNode, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _wikiNodeLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_wikiNodeLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.wiki.model.WikiNode addDefaultNode(long userId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

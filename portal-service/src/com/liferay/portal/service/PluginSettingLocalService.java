@@ -209,6 +209,20 @@ public interface PluginSettingLocalService {
 		com.liferay.portal.model.PluginSetting pluginSetting, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier();
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier);
+
 	public void checkPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType)
 		throws com.liferay.portal.kernel.exception.PortalException;

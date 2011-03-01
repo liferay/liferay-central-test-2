@@ -41,6 +41,21 @@ public interface DLAppLocalService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link DLAppLocalServiceUtil} to access the d l app local service. Add custom service methods to {@link com.liferay.portlet.documentlibrary.service.impl.DLAppLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier();
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier);
+
 	public com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
 		long userId, long repositoryId, long folderId, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog, byte[] bytes,

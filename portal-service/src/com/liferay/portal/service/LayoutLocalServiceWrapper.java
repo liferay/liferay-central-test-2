@@ -232,6 +232,24 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService {
 		return _layoutLocalService.updateLayout(layout, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _layoutLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_layoutLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.Layout addLayout(long userId, long groupId,
 		boolean privateLayout, long parentLayoutId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,

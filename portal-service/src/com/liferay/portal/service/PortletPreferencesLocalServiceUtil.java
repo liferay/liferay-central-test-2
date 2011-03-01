@@ -230,6 +230,24 @@ public class PortletPreferencesLocalServiceUtil {
 		return getService().updatePortletPreferences(portletPreferences, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static com.liferay.portal.model.PortletPreferences addPortletPreferences(
 		long companyId, long ownerId, int ownerType, long plid,
 		java.lang.String portletId, com.liferay.portal.model.Portlet portlet,

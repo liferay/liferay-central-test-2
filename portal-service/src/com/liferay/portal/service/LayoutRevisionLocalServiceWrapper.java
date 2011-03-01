@@ -224,6 +224,24 @@ public class LayoutRevisionLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _layoutRevisionLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_layoutRevisionLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.LayoutRevision addLayoutRevision(
 		long userId, long layoutSetBranchId, long parentLayoutRevisionId,
 		boolean head, long plid, java.lang.String name, java.lang.String title,

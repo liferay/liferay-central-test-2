@@ -224,6 +224,24 @@ public class SocialEquityUserLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _socialEquityUserLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_socialEquityUserLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.social.model.SocialEquityValue getContributionEquity(
 		long userId) throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialEquityUserLocalService.getContributionEquity(userId);

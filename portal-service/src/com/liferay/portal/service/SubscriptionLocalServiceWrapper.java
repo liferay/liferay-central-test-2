@@ -222,6 +222,24 @@ public class SubscriptionLocalServiceWrapper implements SubscriptionLocalService
 		return _subscriptionLocalService.updateSubscription(subscription, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _subscriptionLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_subscriptionLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
 		long groupId, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,

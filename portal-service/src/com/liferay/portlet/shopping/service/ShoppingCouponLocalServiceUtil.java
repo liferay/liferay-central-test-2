@@ -230,6 +230,24 @@ public class ShoppingCouponLocalServiceUtil {
 		return getService().updateShoppingCoupon(shoppingCoupon, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
 		long userId, java.lang.String code, boolean autoCode,
 		java.lang.String name, java.lang.String description,

@@ -224,6 +224,24 @@ public class PasswordPolicyRelLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _passwordPolicyRelLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_passwordPolicyRelLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {

@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -35,6 +36,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -122,7 +124,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 				formsStructureEntryLink.getStructureId(),
 				
 			formsStructureEntryLink.getClassName(),
-				new Long(formsStructureEntryLink.getClassPK())
+				Long.valueOf(formsStructureEntryLink.getClassPK())
 			}, formsStructureEntryLink);
 	}
 
@@ -151,7 +153,10 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(FormsStructureEntryLinkImpl.class.getName());
+		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(FormsStructureEntryLinkImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(FormsStructureEntryLinkImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -174,7 +179,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 				formsStructureEntryLink.getStructureId(),
 				
 			formsStructureEntryLink.getClassName(),
-				new Long(formsStructureEntryLink.getClassPK())
+				Long.valueOf(formsStructureEntryLink.getClassPK())
 			});
 	}
 
@@ -222,7 +227,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 			session = openSession();
 
 			FormsStructureEntryLink formsStructureEntryLink = (FormsStructureEntryLink)session.get(FormsStructureEntryLinkImpl.class,
-					new Long(structureEntryLinkId));
+					Long.valueOf(structureEntryLinkId));
 
 			if (formsStructureEntryLink == null) {
 				if (_log.isWarnEnabled()) {
@@ -285,10 +290,10 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_S_C_C,
 			new Object[] {
-				formsStructureEntryLinkModelImpl.getOriginalStructureId(),
+				formsStructureEntryLinkModelImpl.getStructureId(),
 				
-			formsStructureEntryLinkModelImpl.getOriginalClassName(),
-				new Long(formsStructureEntryLinkModelImpl.getOriginalClassPK())
+			formsStructureEntryLinkModelImpl.getClassName(),
+				Long.valueOf(formsStructureEntryLinkModelImpl.getClassPK())
 			});
 
 		EntityCacheUtil.removeResult(FormsStructureEntryLinkModelImpl.ENTITY_CACHE_ENABLED,
@@ -340,7 +345,8 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 					formsStructureEntryLinkModelImpl.getOriginalStructureId(),
 					
 				formsStructureEntryLinkModelImpl.getOriginalClassName(),
-					new Long(formsStructureEntryLinkModelImpl.getOriginalClassPK())
+					Long.valueOf(
+						formsStructureEntryLinkModelImpl.getOriginalClassPK())
 				});
 		}
 
@@ -355,7 +361,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 					formsStructureEntryLink.getStructureId(),
 					
 				formsStructureEntryLink.getClassName(),
-					new Long(formsStructureEntryLink.getClassPK())
+					Long.valueOf(formsStructureEntryLink.getClassPK())
 				}, formsStructureEntryLink);
 		}
 
@@ -450,7 +456,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 				session = openSession();
 
 				formsStructureEntryLink = (FormsStructureEntryLink)session.get(FormsStructureEntryLinkImpl.class,
-						new Long(structureEntryLinkId));
+						Long.valueOf(structureEntryLinkId));
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -508,7 +514,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 	 * @param structureId the structure ID to search with
 	 * @param start the lower bound of the range of forms structure entry links to return
 	 * @param end the upper bound of the range of forms structure entry links to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching forms structure entry links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -603,7 +609,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 	 * </p>
 	 *
 	 * @param structureId the structure ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching forms structure entry link
 	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryLinkException if a matching forms structure entry link could not be found
 	 * @throws SystemException if a system exception occurred
@@ -639,7 +645,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 	 * </p>
 	 *
 	 * @param structureId the structure ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching forms structure entry link
 	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryLinkException if a matching forms structure entry link could not be found
 	 * @throws SystemException if a system exception occurred
@@ -678,7 +684,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 	 *
 	 * @param structureEntryLinkId the primary key of the current forms structure entry link
 	 * @param structureId the structure ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next forms structure entry link
 	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryLinkException if a forms structure entry link with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -804,6 +810,334 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 
 		q.setFirstResult(0);
 		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (structureId != null) {
+			qPos.add(structureId);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(formsStructureEntryLink);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<FormsStructureEntryLink> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Filters by the user's permissions and finds all the forms structure entry links where structureId = &#63;.
+	 *
+	 * @param structureId the structure ID to search with
+	 * @return the matching forms structure entry links that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<FormsStructureEntryLink> filterFindByStructureId(
+		String structureId) throws SystemException {
+		return filterFindByStructureId(structureId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the forms structure entry links where structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param structureId the structure ID to search with
+	 * @param start the lower bound of the range of forms structure entry links to return
+	 * @param end the upper bound of the range of forms structure entry links to return (not inclusive)
+	 * @return the range of matching forms structure entry links that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<FormsStructureEntryLink> filterFindByStructureId(
+		String structureId, int start, int end) throws SystemException {
+		return filterFindByStructureId(structureId, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the forms structure entry links where structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param structureId the structure ID to search with
+	 * @param start the lower bound of the range of forms structure entry links to return
+	 * @param end the upper bound of the range of forms structure entry links to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching forms structure entry links that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<FormsStructureEntryLink> filterFindByStructureId(
+		String structureId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByStructureId(structureId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(2);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRYLINK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRYLINK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		if (structureId == null) {
+			query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
+		}
+		else {
+			if (structureId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
+			}
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRYLINK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				FormsStructureEntryLink.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS,
+					FormsStructureEntryLinkImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE,
+					FormsStructureEntryLinkImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (structureId != null) {
+				qPos.add(structureId);
+			}
+
+			return (List<FormsStructureEntryLink>)QueryUtil.list(q,
+				getDialect(), start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Filters the forms structure entry links before and after the current forms structure entry link in the ordered set where structureId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param structureEntryLinkId the primary key of the current forms structure entry link
+	 * @param structureId the structure ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next forms structure entry link
+	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryLinkException if a forms structure entry link with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public FormsStructureEntryLink[] filterFindByStructureId_PrevAndNext(
+		long structureEntryLinkId, String structureId,
+		OrderByComparator orderByComparator)
+		throws NoSuchStructureEntryLinkException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return findByStructureId_PrevAndNext(structureEntryLinkId,
+				structureId, orderByComparator);
+		}
+
+		FormsStructureEntryLink formsStructureEntryLink = findByPrimaryKey(structureEntryLinkId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			FormsStructureEntryLink[] array = new FormsStructureEntryLinkImpl[3];
+
+			array[0] = filterGetByStructureId_PrevAndNext(session,
+					formsStructureEntryLink, structureId, orderByComparator,
+					true);
+
+			array[1] = formsStructureEntryLink;
+
+			array[2] = filterGetByStructureId_PrevAndNext(session,
+					formsStructureEntryLink, structureId, orderByComparator,
+					false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected FormsStructureEntryLink filterGetByStructureId_PrevAndNext(
+		Session session, FormsStructureEntryLink formsStructureEntryLink,
+		String structureId, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRYLINK_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRYLINK_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		if (structureId == null) {
+			query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
+		}
+		else {
+			if (structureId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
+			}
+		}
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRYLINK_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				FormsStructureEntryLink.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, FormsStructureEntryLinkImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, FormsStructureEntryLinkImpl.class);
+		}
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1045,7 +1379,7 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 	 *
 	 * @param start the lower bound of the range of forms structure entry links to return
 	 * @param end the upper bound of the range of forms structure entry links to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of forms structure entry links
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1222,6 +1556,67 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 		}
 
 		return count.intValue();
+	}
+
+	/**
+	 * Filters by the user's permissions and counts all the forms structure entry links where structureId = &#63;.
+	 *
+	 * @param structureId the structure ID to search with
+	 * @return the number of matching forms structure entry links that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByStructureId(String structureId)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled()) {
+			return countByStructureId(structureId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_FORMSSTRUCTUREENTRYLINK_WHERE);
+
+		if (structureId == null) {
+			query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_1);
+		}
+		else {
+			if (structureId.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_STRUCTUREID_STRUCTUREID_2);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				FormsStructureEntryLink.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (structureId != null) {
+				qPos.add(structureId);
+			}
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	/**
@@ -1405,8 +1800,21 @@ public class FormsStructureEntryLinkPersistenceImpl extends BasePersistenceImpl<
 	private static final String _FINDER_COLUMN_S_C_C_CLASSNAME_2 = "formsStructureEntryLink.className = ? AND ";
 	private static final String _FINDER_COLUMN_S_C_C_CLASSNAME_3 = "(formsStructureEntryLink.className IS NULL OR formsStructureEntryLink.className = ?) AND ";
 	private static final String _FINDER_COLUMN_S_C_C_CLASSPK_2 = "formsStructureEntryLink.classPK = ?";
+	private static final String _FILTER_SQL_SELECT_FORMSSTRUCTUREENTRYLINK_WHERE =
+		"SELECT DISTINCT {formsStructureEntryLink.*} FROM FormsStructureEntryLink formsStructureEntryLink WHERE ";
+	private static final String _FILTER_SQL_SELECT_FORMSSTRUCTUREENTRYLINK_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {FormsStructureEntryLink.*} FROM (SELECT DISTINCT formsStructureEntryLink.structureEntryLinkId FROM FormsStructureEntryLink formsStructureEntryLink WHERE ";
+	private static final String _FILTER_SQL_SELECT_FORMSSTRUCTUREENTRYLINK_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN FormsStructureEntryLink ON TEMP_TABLE.structureEntryLinkId = FormsStructureEntryLink.structureEntryLinkId";
+	private static final String _FILTER_SQL_COUNT_FORMSSTRUCTUREENTRYLINK_WHERE = "SELECT COUNT(DISTINCT formsStructureEntryLink.structureEntryLinkId) AS COUNT_VALUE FROM FormsStructureEntryLink formsStructureEntryLink WHERE ";
+	private static final String _FILTER_COLUMN_PK = "formsStructureEntryLink.structureEntryLinkId";
+	private static final String _FILTER_COLUMN_USERID = null;
+	private static final String _FILTER_ENTITY_ALIAS = "formsStructureEntryLink";
+	private static final String _FILTER_ENTITY_TABLE = "FormsStructureEntryLink";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "formsStructureEntryLink.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "FormsStructureEntryLink.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No FormsStructureEntryLink exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No FormsStructureEntryLink exists with the key {";
+	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = com.liferay.portal.util.PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE;
 	private static Log _log = LogFactoryUtil.getLog(FormsStructureEntryLinkPersistenceImpl.class);
 }

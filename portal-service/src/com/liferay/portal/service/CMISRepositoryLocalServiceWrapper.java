@@ -30,6 +30,24 @@ public class CMISRepositoryLocalServiceWrapper
 		_cmisRepositoryLocalService = cmisRepositoryLocalService;
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _cmisRepositoryLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_cmisRepositoryLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.kernel.repository.model.FileEntry toFileEntry(
 		long repositoryId, java.lang.Object object)
 		throws com.liferay.portal.kernel.exception.PortalException,

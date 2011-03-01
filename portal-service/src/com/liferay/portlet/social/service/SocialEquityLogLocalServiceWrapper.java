@@ -225,6 +225,24 @@ public class SocialEquityLogLocalServiceWrapper
 	}
 
 	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _socialEquityLogLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_socialEquityLogLocalService.setIdentifier(identifier);
+	}
+
+	/**
 	* @deprecated {@link #addEquityLogs(long, long, String, String)}
 	*/
 	public void addEquityLogs(long userId, long assetEntryId,

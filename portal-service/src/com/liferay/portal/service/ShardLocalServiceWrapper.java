@@ -215,6 +215,24 @@ public class ShardLocalServiceWrapper implements ShardLocalService {
 		return _shardLocalService.updateShard(shard, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _shardLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_shardLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.Shard addShard(java.lang.String className,
 		long classPK, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {

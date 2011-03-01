@@ -216,6 +216,24 @@ public class MBBanLocalServiceWrapper implements MBBanLocalService {
 		return _mbBanLocalService.updateMBBan(mbBan, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _mbBanLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_mbBanLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.messageboards.model.MBBan addBan(long userId,
 		long banUserId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

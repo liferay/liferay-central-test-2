@@ -225,6 +225,24 @@ public class UserNotificationEventLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _userNotificationEventLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_userNotificationEventLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.UserNotificationEvent addUserNotificationEvent(
 		long userId,
 		com.liferay.portal.kernel.notifications.NotificationEvent notificationEvent)

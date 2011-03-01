@@ -224,6 +224,24 @@ public class SCProductVersionLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _scProductVersionLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_scProductVersionLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
 		long userId, long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,

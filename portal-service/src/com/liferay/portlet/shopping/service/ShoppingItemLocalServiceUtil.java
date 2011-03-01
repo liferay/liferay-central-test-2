@@ -230,6 +230,24 @@ public class ShoppingItemLocalServiceUtil {
 		return getService().updateShoppingItem(shoppingItem, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static void addBookItems(long userId, long groupId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.kernel.exception.PortalException,

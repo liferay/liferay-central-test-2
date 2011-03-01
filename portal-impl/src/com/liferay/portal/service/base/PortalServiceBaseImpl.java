@@ -17,6 +17,7 @@ package com.liferay.portal.service.base;
 import com.liferay.counter.service.CounterLocalService;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -206,7 +207,7 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class PortalServiceBaseImpl extends PrincipalBean
-	implements PortalService {
+	implements PortalService, ServiceBeanIdentifier {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -3383,6 +3384,24 @@ public abstract class PortalServiceBaseImpl extends PrincipalBean
 	}
 
 	/**
+	 * Gets the Spring bean id for this ServiceBean.
+	 *
+	 * @return the Spring bean id for this ServiceBean
+	 */
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	/**
+	 * Sets the Spring bean id for this ServiceBean.
+	 *
+	 * @param identifier the Spring bean id for this ServiceBean
+	 */
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	/**
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query to perform
@@ -3743,4 +3762,5 @@ public abstract class PortalServiceBaseImpl extends PrincipalBean
 	protected WorkflowInstanceLinkPersistence workflowInstanceLinkPersistence;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
+	protected String identifier;
 }

@@ -217,6 +217,24 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService {
 		return _orgLaborLocalService.updateOrgLabor(orgLabor, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _orgLaborLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_orgLaborLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.OrgLabor addOrgLabor(long organizationId,
 		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
 		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,

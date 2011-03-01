@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -36,6 +37,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -136,12 +138,12 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				formsStructureEntry.getUuid(),
-				new Long(formsStructureEntry.getGroupId())
+				Long.valueOf(formsStructureEntry.getGroupId())
 			}, formsStructureEntry);
 
 		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
 			new Object[] {
-				new Long(formsStructureEntry.getGroupId()),
+				Long.valueOf(formsStructureEntry.getGroupId()),
 				
 			formsStructureEntry.getStructureId()
 			}, formsStructureEntry);
@@ -171,7 +173,10 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 * </p>
 	 */
 	public void clearCache() {
-		CacheRegistryUtil.clear(FormsStructureEntryImpl.class.getName());
+		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
+			CacheRegistryUtil.clear(FormsStructureEntryImpl.class.getName());
+		}
+
 		EntityCacheUtil.clearCache(FormsStructureEntryImpl.class.getName());
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST);
@@ -191,12 +196,12 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
 				formsStructureEntry.getUuid(),
-				new Long(formsStructureEntry.getGroupId())
+				Long.valueOf(formsStructureEntry.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
 			new Object[] {
-				new Long(formsStructureEntry.getGroupId()),
+				Long.valueOf(formsStructureEntry.getGroupId()),
 				
 			formsStructureEntry.getStructureId()
 			});
@@ -250,7 +255,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 			session = openSession();
 
 			FormsStructureEntry formsStructureEntry = (FormsStructureEntry)session.get(FormsStructureEntryImpl.class,
-					new Long(structureEntryId));
+					Long.valueOf(structureEntryId));
 
 			if (formsStructureEntry == null) {
 				if (_log.isWarnEnabled()) {
@@ -311,15 +316,15 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 			new Object[] {
-				formsStructureEntryModelImpl.getOriginalUuid(),
-				new Long(formsStructureEntryModelImpl.getOriginalGroupId())
+				formsStructureEntryModelImpl.getUuid(),
+				Long.valueOf(formsStructureEntryModelImpl.getGroupId())
 			});
 
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
 			new Object[] {
-				new Long(formsStructureEntryModelImpl.getOriginalGroupId()),
+				Long.valueOf(formsStructureEntryModelImpl.getGroupId()),
 				
-			formsStructureEntryModelImpl.getOriginalStructureId()
+			formsStructureEntryModelImpl.getStructureId()
 			});
 
 		EntityCacheUtil.removeResult(FormsStructureEntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -372,7 +377,8 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					formsStructureEntryModelImpl.getOriginalUuid(),
-					new Long(formsStructureEntryModelImpl.getOriginalGroupId())
+					Long.valueOf(
+						formsStructureEntryModelImpl.getOriginalGroupId())
 				});
 		}
 
@@ -383,7 +389,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
 				new Object[] {
 					formsStructureEntry.getUuid(),
-					new Long(formsStructureEntry.getGroupId())
+					Long.valueOf(formsStructureEntry.getGroupId())
 				}, formsStructureEntry);
 		}
 
@@ -393,7 +399,8 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 					formsStructureEntryModelImpl.getOriginalStructureId()))) {
 			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_S,
 				new Object[] {
-					new Long(formsStructureEntryModelImpl.getOriginalGroupId()),
+					Long.valueOf(
+						formsStructureEntryModelImpl.getOriginalGroupId()),
 					
 				formsStructureEntryModelImpl.getOriginalStructureId()
 				});
@@ -405,7 +412,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 					formsStructureEntryModelImpl.getOriginalStructureId()))) {
 			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_S,
 				new Object[] {
-					new Long(formsStructureEntry.getGroupId()),
+					Long.valueOf(formsStructureEntry.getGroupId()),
 					
 				formsStructureEntry.getStructureId()
 				}, formsStructureEntry);
@@ -509,7 +516,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 				session = openSession();
 
 				formsStructureEntry = (FormsStructureEntry)session.get(FormsStructureEntryImpl.class,
-						new Long(structureEntryId));
+						Long.valueOf(structureEntryId));
 			}
 			catch (Exception e) {
 				throw processException(e);
@@ -566,7 +573,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 * @param uuid the uuid to search with
 	 * @param start the lower bound of the range of forms structure entries to return
 	 * @param end the upper bound of the range of forms structure entries to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching forms structure entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -660,7 +667,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching forms structure entry
 	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a matching forms structure entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -696,7 +703,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 * </p>
 	 *
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching forms structure entry
 	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a matching forms structure entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -735,7 +742,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 *
 	 * @param structureEntryId the primary key of the current forms structure entry
 	 * @param uuid the uuid to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next forms structure entry
 	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a forms structure entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1073,7 +1080,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 * @param groupId the group ID to search with
 	 * @param start the lower bound of the range of forms structure entries to return
 	 * @param end the upper bound of the range of forms structure entries to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching forms structure entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1155,7 +1162,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching forms structure entry
 	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a matching forms structure entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1191,7 +1198,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 * </p>
 	 *
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching forms structure entry
 	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a matching forms structure entry could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1230,7 +1237,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 *
 	 * @param structureEntryId the primary key of the current forms structure entry
 	 * @param groupId the group ID to search with
-	 * @param orderByComparator the comparator to order the set by
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next forms structure entry
 	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a forms structure entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
@@ -1342,6 +1349,304 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 
 		q.setFirstResult(0);
 		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(groupId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(formsStructureEntry);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<FormsStructureEntry> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Filters by the user's permissions and finds all the forms structure entries where groupId = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @return the matching forms structure entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<FormsStructureEntry> filterFindByGroupId(long groupId)
+		throws SystemException {
+		return filterFindByGroupId(groupId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds a range of all the forms structure entries where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param start the lower bound of the range of forms structure entries to return
+	 * @param end the upper bound of the range of forms structure entries to return (not inclusive)
+	 * @return the range of matching forms structure entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<FormsStructureEntry> filterFindByGroupId(long groupId,
+		int start, int end) throws SystemException {
+		return filterFindByGroupId(groupId, start, end, null);
+	}
+
+	/**
+	 * Filters by the user's permissions and finds an ordered range of all the forms structure entries where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param groupId the group ID to search with
+	 * @param start the lower bound of the range of forms structure entries to return
+	 * @param end the upper bound of the range of forms structure entries to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching forms structure entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<FormsStructureEntry> filterFindByGroupId(long groupId,
+		int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByGroupId(groupId, start, end, orderByComparator);
+		}
+
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(3 +
+					(orderByComparator.getOrderByFields().length * 3));
+		}
+		else {
+			query = new StringBundler(2);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRY_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRY_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			if (getDB().isSupportsInlineDistinct()) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_TABLE,
+					orderByComparator);
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				FormsStructureEntry.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			if (getDB().isSupportsInlineDistinct()) {
+				q.addEntity(_FILTER_ENTITY_ALIAS, FormsStructureEntryImpl.class);
+			}
+			else {
+				q.addEntity(_FILTER_ENTITY_TABLE, FormsStructureEntryImpl.class);
+			}
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			return (List<FormsStructureEntry>)QueryUtil.list(q, getDialect(),
+				start, end);
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
+	 * Filters the forms structure entries before and after the current forms structure entry in the ordered set where groupId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param structureEntryId the primary key of the current forms structure entry
+	 * @param groupId the group ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next forms structure entry
+	 * @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a forms structure entry with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public FormsStructureEntry[] filterFindByGroupId_PrevAndNext(
+		long structureEntryId, long groupId, OrderByComparator orderByComparator)
+		throws NoSuchStructureEntryException, SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return findByGroupId_PrevAndNext(structureEntryId, groupId,
+				orderByComparator);
+		}
+
+		FormsStructureEntry formsStructureEntry = findByPrimaryKey(structureEntryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			FormsStructureEntry[] array = new FormsStructureEntryImpl[3];
+
+			array[0] = filterGetByGroupId_PrevAndNext(session,
+					formsStructureEntry, groupId, orderByComparator, true);
+
+			array[1] = formsStructureEntry;
+
+			array[2] = filterGetByGroupId_PrevAndNext(session,
+					formsStructureEntry, groupId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected FormsStructureEntry filterGetByGroupId_PrevAndNext(
+		Session session, FormsStructureEntry formsStructureEntry, long groupId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		if (getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRY_WHERE);
+		}
+		else {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRY_NO_INLINE_DISTINCT_WHERE_1);
+		}
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		if (!getDB().isSupportsInlineDistinct()) {
+			query.append(_FILTER_SQL_SELECT_FORMSSTRUCTUREENTRY_NO_INLINE_DISTINCT_WHERE_2);
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				if (getDB().isSupportsInlineDistinct()) {
+					query.append(_ORDER_BY_ENTITY_ALIAS);
+				}
+				else {
+					query.append(_ORDER_BY_ENTITY_TABLE);
+				}
+
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				FormsStructureEntry.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		SQLQuery q = session.createSQLQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		if (getDB().isSupportsInlineDistinct()) {
+			q.addEntity(_FILTER_ENTITY_ALIAS, FormsStructureEntryImpl.class);
+		}
+		else {
+			q.addEntity(_FILTER_ENTITY_TABLE, FormsStructureEntryImpl.class);
+		}
 
 		QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1554,7 +1859,7 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	 *
 	 * @param start the lower bound of the range of forms structure entries to return
 	 * @param end the upper bound of the range of forms structure entries to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of forms structure entries
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -1880,6 +2185,54 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	}
 
 	/**
+	 * Filters by the user's permissions and counts all the forms structure entries where groupId = &#63;.
+	 *
+	 * @param groupId the group ID to search with
+	 * @return the number of matching forms structure entries that the user has permission to view
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int filterCountByGroupId(long groupId) throws SystemException {
+		if (!InlineSQLHelperUtil.isEnabled(groupId)) {
+			return countByGroupId(groupId);
+		}
+
+		StringBundler query = new StringBundler(2);
+
+		query.append(_FILTER_SQL_COUNT_FORMSSTRUCTUREENTRY_WHERE);
+
+		query.append(_FINDER_COLUMN_GROUPID_GROUPID_2);
+
+		String sql = InlineSQLHelperUtil.replacePermissionCheck(query.toString(),
+				FormsStructureEntry.class.getName(), _FILTER_COLUMN_PK,
+				_FILTER_COLUMN_USERID, groupId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME,
+				com.liferay.portal.kernel.dao.orm.Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			Long count = (Long)q.uniqueResult();
+
+			return count.intValue();
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	/**
 	 * Counts all the forms structure entries where groupId = &#63; and structureId = &#63;.
 	 *
 	 * @param groupId the group ID to search with
@@ -2045,8 +2398,20 @@ public class FormsStructureEntryPersistenceImpl extends BasePersistenceImpl<Form
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_1 = "formsStructureEntry.structureId IS NULL";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_2 = "formsStructureEntry.structureId = ?";
 	private static final String _FINDER_COLUMN_G_S_STRUCTUREID_3 = "(formsStructureEntry.structureId IS NULL OR formsStructureEntry.structureId = ?)";
+	private static final String _FILTER_SQL_SELECT_FORMSSTRUCTUREENTRY_WHERE = "SELECT DISTINCT {formsStructureEntry.*} FROM FormsStructureEntry formsStructureEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_FORMSSTRUCTUREENTRY_NO_INLINE_DISTINCT_WHERE_1 =
+		"SELECT {FormsStructureEntry.*} FROM (SELECT DISTINCT formsStructureEntry.structureEntryId FROM FormsStructureEntry formsStructureEntry WHERE ";
+	private static final String _FILTER_SQL_SELECT_FORMSSTRUCTUREENTRY_NO_INLINE_DISTINCT_WHERE_2 =
+		") TEMP_TABLE INNER JOIN FormsStructureEntry ON TEMP_TABLE.structureEntryId = FormsStructureEntry.structureEntryId";
+	private static final String _FILTER_SQL_COUNT_FORMSSTRUCTUREENTRY_WHERE = "SELECT COUNT(DISTINCT formsStructureEntry.structureEntryId) AS COUNT_VALUE FROM FormsStructureEntry formsStructureEntry WHERE ";
+	private static final String _FILTER_COLUMN_PK = "formsStructureEntry.structureEntryId";
+	private static final String _FILTER_COLUMN_USERID = "formsStructureEntry.userId";
+	private static final String _FILTER_ENTITY_ALIAS = "formsStructureEntry";
+	private static final String _FILTER_ENTITY_TABLE = "FormsStructureEntry";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "formsStructureEntry.";
+	private static final String _ORDER_BY_ENTITY_TABLE = "FormsStructureEntry.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No FormsStructureEntry exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No FormsStructureEntry exists with the key {";
+	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = com.liferay.portal.util.PropsValues.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE;
 	private static Log _log = LogFactoryUtil.getLog(FormsStructureEntryPersistenceImpl.class);
 }

@@ -226,6 +226,24 @@ public class LockLocalServiceUtil {
 		return getService().updateLock(lock, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static void clear()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().clear();

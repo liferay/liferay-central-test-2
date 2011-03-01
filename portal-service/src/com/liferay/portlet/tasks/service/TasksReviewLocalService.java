@@ -209,6 +209,20 @@ public interface TasksReviewLocalService {
 		com.liferay.portlet.tasks.model.TasksReview tasksReview, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier();
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier);
+
 	public com.liferay.portlet.tasks.model.TasksReview addReview(long userId,
 		long proposalId, long assignedByUserId, int stage)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -215,6 +215,24 @@ public class ImageLocalServiceWrapper implements ImageLocalService {
 		return _imageLocalService.updateImage(image, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _imageLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_imageLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.Image getCompanyLogo(long imageId) {
 		return _imageLocalService.getCompanyLogo(imageId);
 	}

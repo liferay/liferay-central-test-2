@@ -216,6 +216,24 @@ public class PortletLocalServiceWrapper implements PortletLocalService {
 		return _portletLocalService.updatePortlet(portlet, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _portletLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_portletLocalService.setIdentifier(identifier);
+	}
+
 	public void addPortletCategory(long companyId, java.lang.String categoryName) {
 		_portletLocalService.addPortletCategory(companyId, categoryName);
 	}

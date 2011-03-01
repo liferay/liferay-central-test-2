@@ -224,6 +224,24 @@ public class ResourcePermissionLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _resourcePermissionLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_resourcePermissionLocalService.setIdentifier(identifier);
+	}
+
 	public void addResourcePermission(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey, long roleId,
 		java.lang.String actionId)

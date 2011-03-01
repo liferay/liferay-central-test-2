@@ -30,6 +30,24 @@ public class LayoutTemplateLocalServiceWrapper
 		_layoutTemplateLocalService = layoutTemplateLocalService;
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _layoutTemplateLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_layoutTemplateLocalService.setIdentifier(identifier);
+	}
+
 	public java.lang.String getContent(java.lang.String layoutTemplateId,
 		boolean standard, java.lang.String themeId)
 		throws com.liferay.portal.kernel.exception.SystemException {

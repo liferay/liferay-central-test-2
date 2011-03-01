@@ -30,6 +30,24 @@ public class SocialRequestInterpreterLocalServiceWrapper
 		_socialRequestInterpreterLocalService = socialRequestInterpreterLocalService;
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _socialRequestInterpreterLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_socialRequestInterpreterLocalService.setIdentifier(identifier);
+	}
+
 	public void addRequestInterpreter(
 		com.liferay.portlet.social.model.SocialRequestInterpreter requestInterpreter) {
 		_socialRequestInterpreterLocalService.addRequestInterpreter(requestInterpreter);

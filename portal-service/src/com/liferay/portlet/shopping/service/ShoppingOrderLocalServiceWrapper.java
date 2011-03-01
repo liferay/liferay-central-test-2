@@ -223,6 +223,24 @@ public class ShoppingOrderLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _shoppingOrderLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_shoppingOrderLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.shopping.model.ShoppingOrder addLatestOrder(
 		long userId, long groupId)
 		throws com.liferay.portal.kernel.exception.PortalException,

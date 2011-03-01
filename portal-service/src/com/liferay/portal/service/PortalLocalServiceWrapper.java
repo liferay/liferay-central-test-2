@@ -28,6 +28,24 @@ public class PortalLocalServiceWrapper implements PortalLocalService {
 		_portalLocalService = portalLocalService;
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _portalLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_portalLocalService.setIdentifier(identifier);
+	}
+
 	public PortalLocalService getWrappedPortalLocalService() {
 		return _portalLocalService;
 	}

@@ -29,6 +29,24 @@ public class DLRepositoryLocalServiceWrapper implements DLRepositoryLocalService
 		_dlRepositoryLocalService = dlRepositoryLocalService;
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _dlRepositoryLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_dlRepositoryLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long userId, long groupId, long repositoryId, long folderId,
 		java.lang.String title, java.lang.String description,

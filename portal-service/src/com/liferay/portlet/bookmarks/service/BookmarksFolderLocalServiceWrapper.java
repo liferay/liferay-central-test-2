@@ -241,6 +241,24 @@ public class BookmarksFolderLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _bookmarksFolderLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_bookmarksFolderLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		long userId, long parentFolderId, java.lang.String name,
 		java.lang.String description,

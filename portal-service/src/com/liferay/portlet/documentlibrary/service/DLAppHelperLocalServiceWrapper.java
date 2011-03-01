@@ -29,6 +29,24 @@ public class DLAppHelperLocalServiceWrapper implements DLAppHelperLocalService {
 		_dlAppHelperLocalService = dlAppHelperLocalService;
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _dlAppHelperLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_dlAppHelperLocalService.setIdentifier(identifier);
+	}
+
 	public void addFileEntry(
 		com.liferay.portal.kernel.repository.model.FileEntry fileEntry,
 		com.liferay.portal.kernel.repository.model.FileVersion fileVersion,

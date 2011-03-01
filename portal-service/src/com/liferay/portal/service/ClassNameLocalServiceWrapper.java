@@ -217,6 +217,24 @@ public class ClassNameLocalServiceWrapper implements ClassNameLocalService {
 		return _classNameLocalService.updateClassName(className, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _classNameLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_classNameLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.ClassName addClassName(
 		java.lang.String value)
 		throws com.liferay.portal.kernel.exception.SystemException {

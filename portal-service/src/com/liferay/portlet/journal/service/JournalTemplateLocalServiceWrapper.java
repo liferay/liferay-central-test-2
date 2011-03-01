@@ -241,6 +241,24 @@ public class JournalTemplateLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _journalTemplateLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_journalTemplateLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, long groupId, java.lang.String templateId,
 		boolean autoTemplateId, java.lang.String structureId,

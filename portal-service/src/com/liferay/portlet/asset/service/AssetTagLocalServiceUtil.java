@@ -229,6 +229,24 @@ public class AssetTagLocalServiceUtil {
 		return getService().updateAssetTag(assetTag, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetTag addTag(long userId,
 		java.lang.String name, java.lang.String[] tagProperties,
 		com.liferay.portal.service.ServiceContext serviceContext)

@@ -225,6 +225,24 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _workflowDefinitionLinkLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_workflowDefinitionLinkLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.WorkflowDefinitionLink addWorkflowDefinitionLink(
 		long userId, long companyId, long groupId, java.lang.String className,
 		java.lang.String workflowDefinitionName, int workflowDefinitionVersion)

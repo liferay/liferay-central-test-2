@@ -236,6 +236,24 @@ public class IGFolderLocalServiceWrapper implements IGFolderLocalService {
 		return _igFolderLocalService.updateIGFolder(igFolder, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _igFolderLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_igFolderLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long parentFolderId, java.lang.String name,
 		java.lang.String description,

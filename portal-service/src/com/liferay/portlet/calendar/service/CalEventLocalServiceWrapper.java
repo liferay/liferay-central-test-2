@@ -235,6 +235,24 @@ public class CalEventLocalServiceWrapper implements CalEventLocalService {
 		return _calEventLocalService.updateCalEvent(calEvent, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _calEventLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_calEventLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String location, int startDateMonth, int startDateDay,

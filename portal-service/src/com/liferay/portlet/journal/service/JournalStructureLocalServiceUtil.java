@@ -246,6 +246,24 @@ public class JournalStructureLocalServiceUtil {
 		return getService().updateJournalStructure(journalStructure, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, long groupId, java.lang.String structureId,
 		boolean autoStructureId, java.lang.String parentStructureId,

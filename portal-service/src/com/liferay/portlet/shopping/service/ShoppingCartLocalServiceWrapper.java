@@ -221,6 +221,24 @@ public class ShoppingCartLocalServiceWrapper implements ShoppingCartLocalService
 		return _shoppingCartLocalService.updateShoppingCart(shoppingCart, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _shoppingCartLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_shoppingCartLocalService.setIdentifier(identifier);
+	}
+
 	public void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_shoppingCartLocalService.deleteGroupCarts(groupId);

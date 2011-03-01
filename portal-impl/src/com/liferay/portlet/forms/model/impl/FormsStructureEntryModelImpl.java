@@ -156,11 +156,11 @@ public class FormsStructureEntryModelImpl extends BaseModelImpl<FormsStructureEn
 	}
 
 	public void setUuid(String uuid) {
-		_uuid = uuid;
-
 		if (_originalUuid == null) {
-			_originalUuid = uuid;
+			_originalUuid = _uuid;
 		}
+
+		_uuid = uuid;
 	}
 
 	public String getOriginalUuid() {
@@ -180,13 +180,13 @@ public class FormsStructureEntryModelImpl extends BaseModelImpl<FormsStructureEn
 	}
 
 	public void setGroupId(long groupId) {
-		_groupId = groupId;
-
 		if (!_setOriginalGroupId) {
 			_setOriginalGroupId = true;
 
-			_originalGroupId = groupId;
+			_originalGroupId = _groupId;
 		}
+
+		_groupId = groupId;
 	}
 
 	public long getOriginalGroupId() {
@@ -256,11 +256,11 @@ public class FormsStructureEntryModelImpl extends BaseModelImpl<FormsStructureEn
 	}
 
 	public void setStructureId(String structureId) {
-		_structureId = structureId;
-
 		if (_originalStructureId == null) {
-			_originalStructureId = structureId;
+			_originalStructureId = _structureId;
 		}
+
+		_structureId = structureId;
 	}
 
 	public String getOriginalStructureId() {
@@ -331,22 +331,42 @@ public class FormsStructureEntryModelImpl extends BaseModelImpl<FormsStructureEn
 	}
 
 	public Object clone() {
-		FormsStructureEntryImpl clone = new FormsStructureEntryImpl();
+		FormsStructureEntryImpl formsStructureEntryImpl = new FormsStructureEntryImpl();
 
-		clone.setUuid(getUuid());
-		clone.setStructureEntryId(getStructureEntryId());
-		clone.setGroupId(getGroupId());
-		clone.setCompanyId(getCompanyId());
-		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
-		clone.setCreateDate(getCreateDate());
-		clone.setModifiedDate(getModifiedDate());
-		clone.setStructureId(getStructureId());
-		clone.setName(getName());
-		clone.setDescription(getDescription());
-		clone.setXsd(getXsd());
+		formsStructureEntryImpl.setUuid(getUuid());
 
-		return clone;
+		FormsStructureEntryModelImpl formsStructureEntryModelImpl = formsStructureEntryImpl;
+
+		formsStructureEntryModelImpl._originalUuid = formsStructureEntryModelImpl._uuid;
+
+		formsStructureEntryImpl.setStructureEntryId(getStructureEntryId());
+
+		formsStructureEntryImpl.setGroupId(getGroupId());
+
+		formsStructureEntryModelImpl._originalGroupId = formsStructureEntryModelImpl._groupId;
+
+		formsStructureEntryModelImpl._setOriginalGroupId = false;
+		formsStructureEntryImpl.setCompanyId(getCompanyId());
+
+		formsStructureEntryImpl.setUserId(getUserId());
+
+		formsStructureEntryImpl.setUserName(getUserName());
+
+		formsStructureEntryImpl.setCreateDate(getCreateDate());
+
+		formsStructureEntryImpl.setModifiedDate(getModifiedDate());
+
+		formsStructureEntryImpl.setStructureId(getStructureId());
+
+		formsStructureEntryModelImpl._originalStructureId = formsStructureEntryModelImpl._structureId;
+
+		formsStructureEntryImpl.setName(getName());
+
+		formsStructureEntryImpl.setDescription(getDescription());
+
+		formsStructureEntryImpl.setXsd(getXsd());
+
+		return formsStructureEntryImpl;
 	}
 
 	public int compareTo(FormsStructureEntry formsStructureEntry) {

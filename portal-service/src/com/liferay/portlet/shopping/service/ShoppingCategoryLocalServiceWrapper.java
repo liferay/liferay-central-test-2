@@ -224,6 +224,24 @@ public class ShoppingCategoryLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _shoppingCategoryLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_shoppingCategoryLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
 		long userId, long parentCategoryId, java.lang.String name,
 		java.lang.String description,

@@ -222,6 +222,24 @@ public class PluginSettingLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _pluginSettingLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_pluginSettingLocalService.setIdentifier(identifier);
+	}
+
 	public void checkPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType)
 		throws com.liferay.portal.kernel.exception.PortalException {

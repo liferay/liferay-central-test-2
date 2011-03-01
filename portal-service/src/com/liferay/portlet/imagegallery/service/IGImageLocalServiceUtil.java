@@ -245,6 +245,24 @@ public class IGImageLocalServiceUtil {
 		return getService().updateIGImage(igImage, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,

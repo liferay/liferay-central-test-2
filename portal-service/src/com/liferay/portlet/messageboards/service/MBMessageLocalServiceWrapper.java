@@ -237,6 +237,24 @@ public class MBMessageLocalServiceWrapper implements MBMessageLocalService {
 		return _mbMessageLocalService.updateMBMessage(mbMessage, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _mbMessageLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_mbMessageLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		long userId, java.lang.String userName, long groupId,
 		java.lang.String className, long classPK, int workflowAction)

@@ -216,6 +216,24 @@ public class TicketLocalServiceWrapper implements TicketLocalService {
 		return _ticketLocalService.updateTicket(ticket, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _ticketLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_ticketLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.Ticket addTicket(long companyId,
 		java.lang.String className, long classPK,
 		java.util.Date expirationDate,

@@ -221,6 +221,24 @@ public class RatingsStatsLocalServiceWrapper implements RatingsStatsLocalService
 		return _ratingsStatsLocalService.updateRatingsStats(ratingsStats, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _ratingsStatsLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_ratingsStatsLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.ratings.model.RatingsStats addStats(
 		long classNameId, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {

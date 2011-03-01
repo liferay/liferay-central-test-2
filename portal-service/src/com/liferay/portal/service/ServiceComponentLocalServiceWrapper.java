@@ -224,6 +224,24 @@ public class ServiceComponentLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _serviceComponentLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_serviceComponentLocalService.setIdentifier(identifier);
+	}
+
 	public void destroyServiceComponent(
 		javax.servlet.ServletContext servletContext,
 		java.lang.ClassLoader classLoader)

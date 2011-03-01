@@ -218,6 +218,24 @@ public class ResourceCodeLocalServiceWrapper implements ResourceCodeLocalService
 		return _resourceCodeLocalService.updateResourceCode(resourceCode, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _resourceCodeLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_resourceCodeLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.ResourceCode addResourceCode(
 		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.kernel.exception.SystemException {

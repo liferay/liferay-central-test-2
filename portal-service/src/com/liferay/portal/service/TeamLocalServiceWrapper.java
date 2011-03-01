@@ -217,6 +217,24 @@ public class TeamLocalServiceWrapper implements TeamLocalService {
 		return _teamLocalService.updateTeam(team, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _teamLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_teamLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.Team addTeam(long userId, long groupId,
 		java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.kernel.exception.PortalException,

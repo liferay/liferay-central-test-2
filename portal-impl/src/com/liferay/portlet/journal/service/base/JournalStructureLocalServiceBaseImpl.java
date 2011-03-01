@@ -17,6 +17,7 @@ package com.liferay.portlet.journal.service.base;
 import com.liferay.counter.service.CounterLocalService;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -78,7 +79,7 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class JournalStructureLocalServiceBaseImpl
-	implements JournalStructureLocalService {
+	implements JournalStructureLocalService, ServiceBeanIdentifier {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -956,6 +957,24 @@ public abstract class JournalStructureLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the Spring bean id for this ServiceBean.
+	 *
+	 * @return the Spring bean id for this ServiceBean
+	 */
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	/**
+	 * Sets the Spring bean id for this ServiceBean.
+	 *
+	 * @param identifier the Spring bean id for this ServiceBean
+	 */
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	/**
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query to perform
@@ -1046,4 +1065,5 @@ public abstract class JournalStructureLocalServiceBaseImpl
 	protected ExpandoValueService expandoValueService;
 	@BeanReference(type = ExpandoValuePersistence.class)
 	protected ExpandoValuePersistence expandoValuePersistence;
+	protected String identifier;
 }

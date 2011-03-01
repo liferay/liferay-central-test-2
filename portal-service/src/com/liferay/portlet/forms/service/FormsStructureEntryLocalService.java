@@ -123,7 +123,7 @@ public interface FormsStructureEntryLocalService {
 	* @param dynamicQuery the dynamic query to search with
 	* @param start the lower bound of the range of model instances to return
 	* @param end the upper bound of the range of model instances to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -224,6 +224,20 @@ public interface FormsStructureEntryLocalService {
 		com.liferay.portlet.forms.model.FormsStructureEntry formsStructureEntry,
 		boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier();
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier);
 
 	public com.liferay.portlet.forms.model.FormsStructureEntry addStructureEntry(
 		long userId, long groupId, java.lang.String structureId,

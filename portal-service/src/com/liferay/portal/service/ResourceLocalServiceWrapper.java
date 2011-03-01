@@ -217,6 +217,24 @@ public class ResourceLocalServiceWrapper implements ResourceLocalService {
 		return _resourceLocalService.updateResource(resource, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _resourceLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_resourceLocalService.setIdentifier(identifier);
+	}
+
 	public void addModelResources(long companyId, long groupId, long userId,
 		java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,

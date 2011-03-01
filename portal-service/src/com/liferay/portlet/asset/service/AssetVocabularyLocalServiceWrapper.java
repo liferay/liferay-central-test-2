@@ -242,6 +242,24 @@ public class AssetVocabularyLocalServiceWrapper
 	}
 
 	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _assetVocabularyLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_assetVocabularyLocalService.setIdentifier(identifier);
+	}
+
+	/**
 	* @deprecated
 	*/
 	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(

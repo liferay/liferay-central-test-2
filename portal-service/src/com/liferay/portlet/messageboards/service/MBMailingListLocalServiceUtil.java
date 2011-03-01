@@ -246,6 +246,24 @@ public class MBMailingListLocalServiceUtil {
 		return getService().updateMBMailingList(mbMailingList, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMailingList addMailingList(
 		long userId, long groupId, long categoryId,
 		java.lang.String emailAddress, java.lang.String inProtocol,

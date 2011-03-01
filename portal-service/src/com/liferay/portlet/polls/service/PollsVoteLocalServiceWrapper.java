@@ -219,6 +219,24 @@ public class PollsVoteLocalServiceWrapper implements PollsVoteLocalService {
 		return _pollsVoteLocalService.updatePollsVote(pollsVote, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _pollsVoteLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_pollsVoteLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
 		long questionId, long choiceId,
 		com.liferay.portal.service.ServiceContext serviceContext)

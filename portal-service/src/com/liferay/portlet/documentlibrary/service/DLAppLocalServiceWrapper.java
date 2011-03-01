@@ -28,6 +28,24 @@ public class DLAppLocalServiceWrapper implements DLAppLocalService {
 		_dlAppLocalService = dlAppLocalService;
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _dlAppLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_dlAppLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.kernel.repository.model.FileEntry addFileEntry(
 		long userId, long repositoryId, long folderId, java.lang.String title,
 		java.lang.String description, java.lang.String changeLog, byte[] bytes,

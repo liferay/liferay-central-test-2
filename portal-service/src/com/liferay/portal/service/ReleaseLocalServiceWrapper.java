@@ -216,6 +216,24 @@ public class ReleaseLocalServiceWrapper implements ReleaseLocalService {
 		return _releaseLocalService.updateRelease(release, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _releaseLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_releaseLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.Release addRelease(
 		java.lang.String servletContextName, int buildNumber)
 		throws com.liferay.portal.kernel.exception.SystemException {

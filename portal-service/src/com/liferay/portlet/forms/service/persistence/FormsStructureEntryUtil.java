@@ -244,7 +244,7 @@ public class FormsStructureEntryUtil {
 	* @param uuid the uuid to search with
 	* @param start the lower bound of the range of forms structure entries to return
 	* @param end the upper bound of the range of forms structure entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching forms structure entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -263,7 +263,7 @@ public class FormsStructureEntryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching forms structure entry
 	* @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a matching forms structure entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -284,7 +284,7 @@ public class FormsStructureEntryUtil {
 	* </p>
 	*
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching forms structure entry
 	* @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a matching forms structure entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -306,7 +306,7 @@ public class FormsStructureEntryUtil {
 	*
 	* @param structureEntryId the primary key of the current forms structure entry
 	* @param uuid the uuid to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next forms structure entry
 	* @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a forms structure entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -407,7 +407,7 @@ public class FormsStructureEntryUtil {
 	* @param groupId the group ID to search with
 	* @param start the lower bound of the range of forms structure entries to return
 	* @param end the upper bound of the range of forms structure entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching forms structure entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -427,7 +427,7 @@ public class FormsStructureEntryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching forms structure entry
 	* @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a matching forms structure entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -448,7 +448,7 @@ public class FormsStructureEntryUtil {
 	* </p>
 	*
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching forms structure entry
 	* @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a matching forms structure entry could not be found
 	* @throws SystemException if a system exception occurred
@@ -470,7 +470,7 @@ public class FormsStructureEntryUtil {
 	*
 	* @param structureEntryId the primary key of the current forms structure entry
 	* @param groupId the group ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next forms structure entry
 	* @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a forms structure entry with the primary key could not be found
 	* @throws SystemException if a system exception occurred
@@ -482,6 +482,84 @@ public class FormsStructureEntryUtil {
 			com.liferay.portlet.forms.NoSuchStructureEntryException {
 		return getPersistence()
 				   .findByGroupId_PrevAndNext(structureEntryId, groupId,
+			orderByComparator);
+	}
+
+	/**
+	* Filters by the user's permissions and finds all the forms structure entries where groupId = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @return the matching forms structure entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.forms.model.FormsStructureEntry> filterFindByGroupId(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId);
+	}
+
+	/**
+	* Filters by the user's permissions and finds a range of all the forms structure entries where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param start the lower bound of the range of forms structure entries to return
+	* @param end the upper bound of the range of forms structure entries to return (not inclusive)
+	* @return the range of matching forms structure entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.forms.model.FormsStructureEntry> filterFindByGroupId(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterFindByGroupId(groupId, start, end);
+	}
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the forms structure entries where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID to search with
+	* @param start the lower bound of the range of forms structure entries to return
+	* @param end the upper bound of the range of forms structure entries to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching forms structure entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.forms.model.FormsStructureEntry> filterFindByGroupId(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .filterFindByGroupId(groupId, start, end, orderByComparator);
+	}
+
+	/**
+	* Filters the forms structure entries before and after the current forms structure entry in the ordered set where groupId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param structureEntryId the primary key of the current forms structure entry
+	* @param groupId the group ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next forms structure entry
+	* @throws com.liferay.portlet.forms.NoSuchStructureEntryException if a forms structure entry with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portlet.forms.model.FormsStructureEntry[] filterFindByGroupId_PrevAndNext(
+		long structureEntryId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.forms.NoSuchStructureEntryException {
+		return getPersistence()
+				   .filterFindByGroupId_PrevAndNext(structureEntryId, groupId,
 			orderByComparator);
 	}
 
@@ -568,7 +646,7 @@ public class FormsStructureEntryUtil {
 	*
 	* @param start the lower bound of the range of forms structure entries to return
 	* @param end the upper bound of the range of forms structure entries to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of forms structure entries
 	* @throws SystemException if a system exception occurred
 	*/
@@ -672,6 +750,18 @@ public class FormsStructureEntryUtil {
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	/**
+	* Filters by the user's permissions and counts all the forms structure entries where groupId = &#63;.
+	*
+	* @param groupId the group ID to search with
+	* @return the number of matching forms structure entries that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int filterCountByGroupId(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().filterCountByGroupId(groupId);
 	}
 
 	/**

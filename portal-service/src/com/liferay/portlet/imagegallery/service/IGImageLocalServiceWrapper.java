@@ -235,6 +235,24 @@ public class IGImageLocalServiceWrapper implements IGImageLocalService {
 		return _igImageLocalService.updateIGImage(igImage, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _igImageLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_igImageLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long userId, long groupId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,

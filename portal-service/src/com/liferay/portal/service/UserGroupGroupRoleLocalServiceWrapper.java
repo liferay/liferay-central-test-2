@@ -225,6 +225,24 @@ public class UserGroupGroupRoleLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _userGroupGroupRoleLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_userGroupGroupRoleLocalService.setIdentifier(identifier);
+	}
+
 	public void addUserGroupGroupRoles(long userGroupId, long groupId,
 		long[] roleIds)
 		throws com.liferay.portal.kernel.exception.PortalException,

@@ -229,6 +229,24 @@ public class AssetLinkLocalServiceUtil {
 		return getService().updateAssetLink(assetLink, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static com.liferay.portlet.asset.model.AssetLink addLink(
 		long userId, long entryId1, long entryId2, int type, int weight)
 		throws com.liferay.portal.kernel.exception.PortalException,

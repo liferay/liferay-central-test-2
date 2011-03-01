@@ -216,6 +216,24 @@ public class CompanyLocalServiceWrapper implements CompanyLocalService {
 		return _companyLocalService.updateCompany(company, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _companyLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_companyLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.Company addCompany(java.lang.String webId,
 		java.lang.String virtualHostname, java.lang.String mx,
 		java.lang.String shardName, boolean system, int maxUsers)

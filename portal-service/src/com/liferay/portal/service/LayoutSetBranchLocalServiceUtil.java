@@ -231,6 +231,24 @@ public class LayoutSetBranchLocalServiceUtil {
 		return getService().updateLayoutSetBranch(layoutSetBranch, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static com.liferay.portal.model.LayoutSetBranch addLayoutSetBranch(
 		long userId, long groupId, boolean privateLayout,
 		java.lang.String name, java.lang.String description,

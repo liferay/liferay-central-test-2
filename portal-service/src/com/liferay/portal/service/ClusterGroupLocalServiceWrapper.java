@@ -220,6 +220,24 @@ public class ClusterGroupLocalServiceWrapper implements ClusterGroupLocalService
 		return _clusterGroupLocalService.updateClusterGroup(clusterGroup, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _clusterGroupLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_clusterGroupLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.ClusterGroup addClusterGroup(
 		java.lang.String name, java.util.List<java.lang.String> clusterNodeIds)
 		throws com.liferay.portal.kernel.exception.SystemException {

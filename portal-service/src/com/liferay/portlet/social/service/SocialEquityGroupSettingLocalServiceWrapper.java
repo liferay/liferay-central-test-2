@@ -225,6 +225,24 @@ public class SocialEquityGroupSettingLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _socialEquityGroupSettingLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_socialEquityGroupSettingLocalService.setIdentifier(identifier);
+	}
+
 	public boolean isEnabled(long groupId, java.lang.String className)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _socialEquityGroupSettingLocalService.isEnabled(groupId,

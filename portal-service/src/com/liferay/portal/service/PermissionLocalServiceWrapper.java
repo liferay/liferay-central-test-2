@@ -218,6 +218,24 @@ public class PermissionLocalServiceWrapper implements PermissionLocalService {
 		return _permissionLocalService.updatePermission(permission, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _permissionLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_permissionLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.Permission addPermission(long companyId,
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException {

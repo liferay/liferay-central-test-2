@@ -224,6 +224,24 @@ public class AnnouncementsFlagLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _announcementsFlagLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_announcementsFlagLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag addFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.kernel.exception.SystemException {

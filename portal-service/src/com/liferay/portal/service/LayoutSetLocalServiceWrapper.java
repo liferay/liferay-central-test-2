@@ -217,6 +217,24 @@ public class LayoutSetLocalServiceWrapper implements LayoutSetLocalService {
 		return _layoutSetLocalService.updateLayoutSet(layoutSet, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _layoutSetLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_layoutSetLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.LayoutSet addLayoutSet(long groupId,
 		boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.PortalException,

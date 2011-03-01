@@ -28,6 +28,24 @@ public class QuartzLocalServiceWrapper implements QuartzLocalService {
 		_quartzLocalService = quartzLocalService;
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _quartzLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_quartzLocalService.setIdentifier(identifier);
+	}
+
 	public void checkQuartzTables()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_quartzLocalService.checkQuartzTables();

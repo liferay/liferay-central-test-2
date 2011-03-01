@@ -220,6 +220,24 @@ public class PortletItemLocalServiceWrapper implements PortletItemLocalService {
 		return _portletItemLocalService.updatePortletItem(portletItem, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _portletItemLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_portletItemLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.PortletItem addPortletItem(long userId,
 		long groupId, java.lang.String name, java.lang.String portletId,
 		java.lang.String className)

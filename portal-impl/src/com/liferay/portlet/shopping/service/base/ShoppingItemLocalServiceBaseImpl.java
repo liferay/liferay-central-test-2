@@ -17,6 +17,7 @@ package com.liferay.portlet.shopping.service.base;
 import com.liferay.counter.service.CounterLocalService;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -77,7 +78,7 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class ShoppingItemLocalServiceBaseImpl
-	implements ShoppingItemLocalService {
+	implements ShoppingItemLocalService, ServiceBeanIdentifier {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -918,6 +919,24 @@ public abstract class ShoppingItemLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the Spring bean id for this ServiceBean.
+	 *
+	 * @return the Spring bean id for this ServiceBean
+	 */
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	/**
+	 * Sets the Spring bean id for this ServiceBean.
+	 *
+	 * @param identifier the Spring bean id for this ServiceBean
+	 */
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	/**
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query to perform
@@ -1006,4 +1025,5 @@ public abstract class ShoppingItemLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	protected String identifier;
 }

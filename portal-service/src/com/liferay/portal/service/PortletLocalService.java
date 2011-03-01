@@ -206,6 +206,20 @@ public interface PortletLocalService {
 		com.liferay.portal.model.Portlet portlet, boolean merge)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier();
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier);
+
 	public void addPortletCategory(long companyId, java.lang.String categoryName);
 
 	public void checkPortlet(com.liferay.portal.model.Portlet portlet)

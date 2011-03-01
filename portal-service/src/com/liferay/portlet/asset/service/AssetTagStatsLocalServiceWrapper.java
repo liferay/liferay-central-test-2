@@ -223,6 +223,24 @@ public class AssetTagStatsLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _assetTagStatsLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_assetTagStatsLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.asset.model.AssetTagStats addTagStats(
 		long tagId, long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {

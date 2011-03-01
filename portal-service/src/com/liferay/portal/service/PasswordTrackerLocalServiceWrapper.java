@@ -223,6 +223,24 @@ public class PasswordTrackerLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _passwordTrackerLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_passwordTrackerLocalService.setIdentifier(identifier);
+	}
+
 	public void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_passwordTrackerLocalService.deletePasswordTrackers(userId);

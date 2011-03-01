@@ -221,6 +221,24 @@ public class ShoppingItemLocalServiceWrapper implements ShoppingItemLocalService
 		return _shoppingItemLocalService.updateShoppingItem(shoppingItem, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _shoppingItemLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_shoppingItemLocalService.setIdentifier(identifier);
+	}
+
 	public void addBookItems(long userId, long groupId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.kernel.exception.PortalException,

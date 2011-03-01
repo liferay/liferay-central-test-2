@@ -230,6 +230,24 @@ public class SocialRelationLocalServiceUtil {
 		return getService().updateSocialRelation(socialRelation, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public static java.lang.String getIdentifier() {
+		return getService().getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public static void setIdentifier(java.lang.String identifier) {
+		getService().setIdentifier(identifier);
+	}
+
 	public static com.liferay.portlet.social.model.SocialRelation addRelation(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.kernel.exception.PortalException,

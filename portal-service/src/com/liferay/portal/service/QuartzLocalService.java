@@ -40,6 +40,21 @@ public interface QuartzLocalService {
 	 *
 	 * Never modify or reference this interface directly. Always use {@link QuartzLocalServiceUtil} to access the quartz local service. Add custom service methods to {@link com.liferay.portal.service.impl.QuartzLocalServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier();
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier);
+
 	public void checkQuartzTables()
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

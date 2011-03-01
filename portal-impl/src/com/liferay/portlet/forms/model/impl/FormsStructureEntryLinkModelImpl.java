@@ -146,11 +146,11 @@ public class FormsStructureEntryLinkModelImpl extends BaseModelImpl<FormsStructu
 	}
 
 	public void setStructureId(String structureId) {
-		_structureId = structureId;
-
 		if (_originalStructureId == null) {
-			_originalStructureId = structureId;
+			_originalStructureId = _structureId;
 		}
+
+		_structureId = structureId;
 	}
 
 	public String getOriginalStructureId() {
@@ -167,11 +167,11 @@ public class FormsStructureEntryLinkModelImpl extends BaseModelImpl<FormsStructu
 	}
 
 	public void setClassName(String className) {
-		_className = className;
-
 		if (_originalClassName == null) {
-			_originalClassName = className;
+			_originalClassName = _className;
 		}
+
+		_className = className;
 	}
 
 	public String getOriginalClassName() {
@@ -183,13 +183,13 @@ public class FormsStructureEntryLinkModelImpl extends BaseModelImpl<FormsStructu
 	}
 
 	public void setClassPK(long classPK) {
-		_classPK = classPK;
-
 		if (!_setOriginalClassPK) {
 			_setOriginalClassPK = true;
 
-			_originalClassPK = classPK;
+			_originalClassPK = _classPK;
 		}
+
+		_classPK = classPK;
 	}
 
 	public long getOriginalClassPK() {
@@ -221,14 +221,27 @@ public class FormsStructureEntryLinkModelImpl extends BaseModelImpl<FormsStructu
 	}
 
 	public Object clone() {
-		FormsStructureEntryLinkImpl clone = new FormsStructureEntryLinkImpl();
+		FormsStructureEntryLinkImpl formsStructureEntryLinkImpl = new FormsStructureEntryLinkImpl();
 
-		clone.setStructureEntryLinkId(getStructureEntryLinkId());
-		clone.setStructureId(getStructureId());
-		clone.setClassName(getClassName());
-		clone.setClassPK(getClassPK());
+		formsStructureEntryLinkImpl.setStructureEntryLinkId(getStructureEntryLinkId());
 
-		return clone;
+		formsStructureEntryLinkImpl.setStructureId(getStructureId());
+
+		FormsStructureEntryLinkModelImpl formsStructureEntryLinkModelImpl = formsStructureEntryLinkImpl;
+
+		formsStructureEntryLinkModelImpl._originalStructureId = formsStructureEntryLinkModelImpl._structureId;
+
+		formsStructureEntryLinkImpl.setClassName(getClassName());
+
+		formsStructureEntryLinkModelImpl._originalClassName = formsStructureEntryLinkModelImpl._className;
+
+		formsStructureEntryLinkImpl.setClassPK(getClassPK());
+
+		formsStructureEntryLinkModelImpl._originalClassPK = formsStructureEntryLinkModelImpl._classPK;
+
+		formsStructureEntryLinkModelImpl._setOriginalClassPK = false;
+
+		return formsStructureEntryLinkImpl;
 	}
 
 	public int compareTo(FormsStructureEntryLink formsStructureEntryLink) {

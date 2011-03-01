@@ -216,6 +216,24 @@ public class ContactLocalServiceWrapper implements ContactLocalService {
 		return _contactLocalService.updateContact(contact, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _contactLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_contactLocalService.setIdentifier(identifier);
+	}
+
 	public ContactLocalService getWrappedContactLocalService() {
 		return _contactLocalService;
 	}

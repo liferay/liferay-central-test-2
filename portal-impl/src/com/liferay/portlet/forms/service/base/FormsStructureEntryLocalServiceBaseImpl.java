@@ -17,6 +17,7 @@ package com.liferay.portlet.forms.service.base;
 import com.liferay.counter.service.CounterLocalService;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -57,7 +58,7 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class FormsStructureEntryLocalServiceBaseImpl
-	implements FormsStructureEntryLocalService {
+	implements FormsStructureEntryLocalService, ServiceBeanIdentifier {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -154,7 +155,7 @@ public abstract class FormsStructureEntryLocalServiceBaseImpl
 	 * @param dynamicQuery the dynamic query to search with
 	 * @param start the lower bound of the range of model instances to return
 	 * @param end the upper bound of the range of model instances to return (not inclusive)
-	 * @param orderByComparator the comparator to order the results by
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching rows
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -539,6 +540,24 @@ public abstract class FormsStructureEntryLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the Spring bean id for this ServiceBean.
+	 *
+	 * @return the Spring bean id for this ServiceBean
+	 */
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	/**
+	 * Sets the Spring bean id for this ServiceBean.
+	 *
+	 * @param identifier the Spring bean id for this ServiceBean
+	 */
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	/**
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query to perform
@@ -587,4 +606,5 @@ public abstract class FormsStructureEntryLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	protected String identifier;
 }

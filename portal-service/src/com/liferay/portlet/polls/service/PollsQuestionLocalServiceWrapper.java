@@ -240,6 +240,24 @@ public class PollsQuestionLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _pollsQuestionLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_pollsQuestionLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId,
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,

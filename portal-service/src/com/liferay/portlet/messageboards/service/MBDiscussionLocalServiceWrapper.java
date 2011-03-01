@@ -221,6 +221,24 @@ public class MBDiscussionLocalServiceWrapper implements MBDiscussionLocalService
 		return _mbDiscussionLocalService.updateMBDiscussion(mbDiscussion, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _mbDiscussionLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_mbDiscussionLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.messageboards.model.MBDiscussion addDiscussion(
 		long classNameId, long classPK, long threadId)
 		throws com.liferay.portal.kernel.exception.SystemException {

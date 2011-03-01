@@ -220,6 +220,24 @@ public class UserTrackerLocalServiceWrapper implements UserTrackerLocalService {
 		return _userTrackerLocalService.updateUserTracker(userTracker, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _userTrackerLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_userTrackerLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portal.model.UserTracker addUserTracker(long companyId,
 		long userId, java.util.Date modifiedDate, java.lang.String sessionId,
 		java.lang.String remoteAddr, java.lang.String remoteHost,

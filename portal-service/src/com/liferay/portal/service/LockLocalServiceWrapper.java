@@ -215,6 +215,24 @@ public class LockLocalServiceWrapper implements LockLocalService {
 		return _lockLocalService.updateLock(lock, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _lockLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_lockLocalService.setIdentifier(identifier);
+	}
+
 	public void clear()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_lockLocalService.clear();

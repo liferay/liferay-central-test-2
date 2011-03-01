@@ -217,6 +217,24 @@ public class CounterLocalServiceWrapper implements CounterLocalService {
 		return _counterLocalService.updateCounter(counter, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _counterLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_counterLocalService.setIdentifier(identifier);
+	}
+
 	public java.util.List<java.lang.String> getNames()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _counterLocalService.getNames();

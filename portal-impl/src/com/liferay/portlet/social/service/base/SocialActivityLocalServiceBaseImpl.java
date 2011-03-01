@@ -17,6 +17,7 @@ package com.liferay.portlet.social.service.base;
 import com.liferay.counter.service.CounterLocalService;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -79,7 +80,7 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class SocialActivityLocalServiceBaseImpl
-	implements SocialActivityLocalService {
+	implements SocialActivityLocalService, ServiceBeanIdentifier {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -956,6 +957,24 @@ public abstract class SocialActivityLocalServiceBaseImpl
 	}
 
 	/**
+	 * Gets the Spring bean id for this ServiceBean.
+	 *
+	 * @return the Spring bean id for this ServiceBean
+	 */
+	public String getIdentifier() {
+		return identifier;
+	}
+
+	/**
+	 * Sets the Spring bean id for this ServiceBean.
+	 *
+	 * @param identifier the Spring bean id for this ServiceBean
+	 */
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
+	}
+
+	/**
 	 * Performs an SQL query.
 	 *
 	 * @param sql the sql query to perform
@@ -1048,4 +1067,5 @@ public abstract class SocialActivityLocalServiceBaseImpl
 	protected UserPersistence userPersistence;
 	@BeanReference(type = UserFinder.class)
 	protected UserFinder userFinder;
+	protected String identifier;
 }

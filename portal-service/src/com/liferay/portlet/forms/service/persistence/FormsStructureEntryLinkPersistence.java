@@ -143,7 +143,7 @@ public interface FormsStructureEntryLinkPersistence extends BasePersistence<Form
 	* @param structureId the structure ID to search with
 	* @param start the lower bound of the range of forms structure entry links to return
 	* @param end the upper bound of the range of forms structure entry links to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching forms structure entry links
 	* @throws SystemException if a system exception occurred
 	*/
@@ -160,7 +160,7 @@ public interface FormsStructureEntryLinkPersistence extends BasePersistence<Form
 	* </p>
 	*
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching forms structure entry link
 	* @throws com.liferay.portlet.forms.NoSuchStructureEntryLinkException if a matching forms structure entry link could not be found
 	* @throws SystemException if a system exception occurred
@@ -179,7 +179,7 @@ public interface FormsStructureEntryLinkPersistence extends BasePersistence<Form
 	* </p>
 	*
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching forms structure entry link
 	* @throws com.liferay.portlet.forms.NoSuchStructureEntryLinkException if a matching forms structure entry link could not be found
 	* @throws SystemException if a system exception occurred
@@ -199,12 +199,79 @@ public interface FormsStructureEntryLinkPersistence extends BasePersistence<Form
 	*
 	* @param structureEntryLinkId the primary key of the current forms structure entry link
 	* @param structureId the structure ID to search with
-	* @param orderByComparator the comparator to order the set by
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next forms structure entry link
 	* @throws com.liferay.portlet.forms.NoSuchStructureEntryLinkException if a forms structure entry link with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portlet.forms.model.FormsStructureEntryLink[] findByStructureId_PrevAndNext(
+		long structureEntryLinkId, java.lang.String structureId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.forms.NoSuchStructureEntryLinkException;
+
+	/**
+	* Filters by the user's permissions and finds all the forms structure entry links where structureId = &#63;.
+	*
+	* @param structureId the structure ID to search with
+	* @return the matching forms structure entry links that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.forms.model.FormsStructureEntryLink> filterFindByStructureId(
+		java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds a range of all the forms structure entry links where structureId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param structureId the structure ID to search with
+	* @param start the lower bound of the range of forms structure entry links to return
+	* @param end the upper bound of the range of forms structure entry links to return (not inclusive)
+	* @return the range of matching forms structure entry links that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.forms.model.FormsStructureEntryLink> filterFindByStructureId(
+		java.lang.String structureId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and finds an ordered range of all the forms structure entry links where structureId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param structureId the structure ID to search with
+	* @param start the lower bound of the range of forms structure entry links to return
+	* @param end the upper bound of the range of forms structure entry links to return (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching forms structure entry links that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.forms.model.FormsStructureEntryLink> filterFindByStructureId(
+		java.lang.String structureId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters the forms structure entry links before and after the current forms structure entry link in the ordered set where structureId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param structureEntryLinkId the primary key of the current forms structure entry link
+	* @param structureId the structure ID to search with
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next forms structure entry link
+	* @throws com.liferay.portlet.forms.NoSuchStructureEntryLinkException if a forms structure entry link with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.forms.model.FormsStructureEntryLink[] filterFindByStructureId_PrevAndNext(
 		long structureEntryLinkId, java.lang.String structureId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -286,7 +353,7 @@ public interface FormsStructureEntryLinkPersistence extends BasePersistence<Form
 	*
 	* @param start the lower bound of the range of forms structure entry links to return
 	* @param end the upper bound of the range of forms structure entry links to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of forms structure entry links
 	* @throws SystemException if a system exception occurred
 	*/
@@ -333,6 +400,16 @@ public interface FormsStructureEntryLinkPersistence extends BasePersistence<Form
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByStructureId(java.lang.String structureId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Filters by the user's permissions and counts all the forms structure entry links where structureId = &#63;.
+	*
+	* @param structureId the structure ID to search with
+	* @return the number of matching forms structure entry links that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByStructureId(java.lang.String structureId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

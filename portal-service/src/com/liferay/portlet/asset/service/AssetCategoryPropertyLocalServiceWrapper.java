@@ -225,6 +225,24 @@ public class AssetCategoryPropertyLocalServiceWrapper
 			merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _assetCategoryPropertyLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_assetCategoryPropertyLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.asset.model.AssetCategoryProperty addCategoryProperty(
 		long userId, long categoryId, java.lang.String key,
 		java.lang.String value)

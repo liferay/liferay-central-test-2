@@ -220,6 +220,24 @@ public class ExpandoRowLocalServiceWrapper implements ExpandoRowLocalService {
 		return _expandoRowLocalService.updateExpandoRow(expandoRow, merge);
 	}
 
+	/**
+	* Gets the Spring bean id for this ServiceBean.
+	*
+	* @return the Spring bean id for this ServiceBean
+	*/
+	public java.lang.String getIdentifier() {
+		return _expandoRowLocalService.getIdentifier();
+	}
+
+	/**
+	* Sets the Spring bean id for this ServiceBean.
+	*
+	* @param identifier the Spring bean id for this ServiceBean
+	*/
+	public void setIdentifier(java.lang.String identifier) {
+		_expandoRowLocalService.setIdentifier(identifier);
+	}
+
 	public com.liferay.portlet.expando.model.ExpandoRow addRow(long tableId,
 		long classPK)
 		throws com.liferay.portal.kernel.exception.PortalException,
