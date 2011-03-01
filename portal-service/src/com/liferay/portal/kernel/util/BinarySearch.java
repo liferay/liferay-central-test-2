@@ -18,24 +18,23 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
- * <a href="BinarySearch<E>.java.html"><b><i>View Source</i></b></a>
+ * @author Igor Spasic
  */
 public abstract class BinarySearch<E> {
 
-	public static <T extends Comparable> BinarySearch<T> forList(
+	public static <T extends Comparable<T>> BinarySearch<T> forList(
 		final List<T> list) {
 
 		return new BinarySearch<T>() {
-			@Override
-			@SuppressWarnings({"unchecked"})
-			protected int compare(int index, T element) {
-				return list.get(index).compareTo(element);
+
+			protected int compare(int index, T e) {
+				return list.get(index).compareTo(e);
 			}
 
-			@Override
 			protected int getLastIndex() {
 				return list.size() - 1;
 			}
+
 		};
 	}
 
@@ -43,31 +42,31 @@ public abstract class BinarySearch<E> {
 		final List<T> list, final Comparator<T> comparator) {
 
 		return new BinarySearch<T>() {
-			@Override
-			@SuppressWarnings( {"unchecked"})
-			protected int compare(int index, T element) {
-				return comparator.compare(list.get(index), element);
+
+			protected int compare(int index, T e) {
+				return comparator.compare(list.get(index), e);
 			}
 
-			@Override
 			protected int getLastIndex() {
 				return list.size() - 1;
 			}
+
 		};
 	}
 
-	public int find(E element) {
-		return find(element, 0, getLastIndex());
+	public int find(E e) {
+		return find(e, 0, getLastIndex());
 	}
 
-	public int find(E element, int low) {
-		return find(element, low, getLastIndex());
+	public int find(E e, int low) {
+		return find(e, low, getLastIndex());
 	}
 
-	public int find(E element, int low, int high) {
+	public int find(E e, int low, int high) {
 		while (low <= high) {
 			int mid = (low + high) >>> 1;
-			int delta = compare(mid, element);
+
+			int delta = compare(mid, e);
 
 			if (delta < 0) {
 				low = mid + 1;
@@ -79,72 +78,78 @@ public abstract class BinarySearch<E> {
 				return mid;
 			}
 		}
+
 		return -(low + 1);
 	}
 
-	public int findFirst(E o) {
-		return findFirst(o, 0, getLastIndex());
+	public int findFirst(E e) {
+		return findFirst(e, 0, getLastIndex());
 	}
 
-	public int findFirst(E o, int low) {
-		return findFirst(o, low, getLastIndex());
+	public int findFirst(E e, int low) {
+		return findFirst(e, low, getLastIndex());
 	}
 
-	public int findFirst(E o, int low, int high) {
+	public int findFirst(E e, int low, int high) {
+		int index = -1;
 
-		int ndx = -1;
 		while (low <= high) {
 			int mid = (low + high) >>> 1;
-			int delta = compare(mid, o);
+
+			int delta = compare(mid, e);
 
 			if (delta < 0) {
 				low = mid + 1;
 			}
 			else {
 				if (delta == 0) {
-					ndx = mid;
+					index = mid;
 				}
+
 				high = mid - 1;
 			}
 		}
 
-		if (ndx == -1) {
+		if (index == -1) {
 			return -(low + 1);
 		}
 
-		return ndx;
+		return index;
 	}
 
-	public int findLast(E o) {
-		return findLast(o, 0, getLastIndex());
+	public int findLast(E e) {
+		return findLast(e, 0, getLastIndex());
 	}
 
-	public int findLast(E o, int low) {
-		return findLast(o, low, getLastIndex());
+	public int findLast(E e, int low) {
+		return findLast(e, low, getLastIndex());
 	}
 
-	public int findLast(E o, int low, int high) {
-		int ndx = -1;
+	public int findLast(E e, int low, int high) {
+		int index = -1;
+
 		while (low <= high) {
 			int mid = (low + high) >>> 1;
-			int delta = compare(mid, o);
+
+			int delta = compare(mid, e);
 
 			if (delta > 0) {
 				high = mid - 1;
 			}
 			else {
 				if (delta == 0) {
-					ndx = mid;
+					index = mid;
 				}
+
 				low = mid + 1;
 			}
 		}
 
-		if (ndx == -1) {
+		if (index == -1) {
 			return -(low + 1);
 		}
 
-		return ndx;
+		return index;
 	}
 
 	protected abstract int compare(int index, E element);

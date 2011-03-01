@@ -20,83 +20,78 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 /**
- * <a href="SortedArrayList<E>.java.html"><b><i>View Source</i></b></a>
+ * @author Igor Spasic
  */
 public class SortedArrayList<E> extends ArrayList<E> {
 
 	public SortedArrayList() {
-		_comparator = null;
-	}
-
-	public SortedArrayList(Comparator<E> c) {
-		_comparator = c;
 	}
 
 	public SortedArrayList(Collection<? extends E> c) {
-		_comparator = null;
 		addAll(c);
 	}
 
-	@Override
-	public boolean add(E o) {
-		int idx = 0;
+	public SortedArrayList(Comparator<E> comparator) {
+		_comparator = comparator;
+	}
 
-		if (isEmpty() == false) {
-			idx = _findInsertionPoint(o);
+	public boolean add(E e) {
+		int index = 0;
+
+		if (!isEmpty()) {
+			index = _findInsertionPoint(e);
 		}
-		super.add(idx, o);
+
+		super.add(index, e);
 
 		return true;
 	}
 
-	@Override
-	public void add(int index, E element) {
+	public void add(int index, E e) {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
 	public boolean addAll(Collection<? extends E> c) {
-		Iterator<? extends E> i = c.iterator();
+		boolean modified = false;
 
-		boolean changed = false;
+		Iterator<? extends E> itr = c.iterator();
 
-		while (i.hasNext()) {
-			boolean ret = add(i.next());
-
-			if (!changed) {
-				changed = ret;
+		while (itr.hasNext()) {
+			if (add(itr.next()) && !modified) {
+				modified = true;
 			}
 		}
 
-		return changed;
+		return modified;
 	}
 
-	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
-	public E set(int index, E element) {
+	public E set(int index, E e) {
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings( {"unchecked"})
-	protected int compare(E k1, E k2) {
+	protected int compare(E e1, E e2) {
 		if (_comparator == null) {
-			return ((Comparable)k1).compareTo(k2);
+			Comparable<E> comparator1 = (Comparable<E>)e1;
+
+			return comparator1.compareTo(e2);
 		}
-		return _comparator.compare(k1, k2);
+
+		return _comparator.compare(e1, e2);
 	}
 
-	private int _findInsertionPoint(E o) {
-		return _findInsertionPoint(o, 0, size() - 1);
+	private int _findInsertionPoint(E e) {
+		return _findInsertionPoint(e, 0, size() - 1);
 	}
 
-	private int _findInsertionPoint(E o, int low, int high) {
+	private int _findInsertionPoint(E e, int low, int high) {
 		while (low <= high) {
 			int mid = (low + high) >>> 1;
-			int delta = compare(get(mid), o);
+
+			int delta = compare(get(mid), e);
 
 			if (delta > 0) {
 				high = mid - 1;
@@ -109,6 +104,6 @@ public class SortedArrayList<E> extends ArrayList<E> {
 		return low;
 	}
 
-	private final Comparator<E> _comparator;
+	private Comparator<E> _comparator;
 
 }
