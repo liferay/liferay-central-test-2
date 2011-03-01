@@ -180,7 +180,7 @@ public class GlobalShutdownAction extends SimpleAction {
 			e.printStackTrace();
 		}
 
-		// Portal Executors
+		// Portal executors
 
 		PortalExecutorManagerUtil.shutdown(true);
 

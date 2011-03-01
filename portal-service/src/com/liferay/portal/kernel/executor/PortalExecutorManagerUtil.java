@@ -29,43 +29,52 @@ public class PortalExecutorManagerUtil {
 
 	public static <T> Future<T> execute(
 		String name, Callable<T> callable) {
-		return _portalExecutorManager.execute(name, callable);
+
+		return getPortalExecutorManager().execute(name, callable);
 	}
 
 	public static <T> T execute(
 			String name, Callable<T> callable, long timeout, TimeUnit timeUnit)
 		throws ExecutionException, InterruptedException, TimeoutException {
-		return _portalExecutorManager.execute(
+
+		return getPortalExecutorManager().execute(
 			name, callable, timeout, timeUnit);
 	}
 
 	public static ThreadPoolExecutor getPortalExecutor(String name) {
-		return _portalExecutorManager.getPortalExecutor(name);
+		return getPortalExecutorManager().getPortalExecutor(name);
 	}
 
 	public static ThreadPoolExecutor getPortalExecutor(
 		String name, boolean createIfAbsent) {
-		return _portalExecutorManager.getPortalExecutor(name, createIfAbsent);
+
+		return getPortalExecutorManager().getPortalExecutor(
+			name, createIfAbsent);
+	}
+
+	public static PortalExecutorManager getPortalExecutorManager() {
+		return _portalExecutorManager;
 	}
 
 	public static void shutdown() {
-		_portalExecutorManager.shutdown();
+		getPortalExecutorManager().shutdown();
 	}
 
 	public static void shutdown(boolean interrupt) {
-		_portalExecutorManager.shutdown(interrupt);
+		getPortalExecutorManager().shutdown(interrupt);
 	}
 
 	public static void shutdown(String name) {
-		_portalExecutorManager.shutdown(name);
+		getPortalExecutorManager().shutdown(name);
 	}
 
 	public static void shutdown(String name, boolean interrupt) {
-		_portalExecutorManager.shutdown(name, interrupt);
+		getPortalExecutorManager().shutdown(name, interrupt);
 	}
 
 	public void setPortalExecutorManager(
 		PortalExecutorManager portalExecutorManager) {
+
 		_portalExecutorManager = portalExecutorManager;
 	}
 

@@ -21,6 +21,6 @@ import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
  */
 public interface PortalExecutorFactory {
 
-	ThreadPoolExecutor createPortalExecutor(String name);
+	public ThreadPoolExecutor createPortalExecutor(String name);
 
 }

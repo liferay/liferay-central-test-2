@@ -8,15 +8,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd"
 >
-	<!-- PortalExecutorFactory for default executors -->
-	<bean id="com.liferay.portal.executor.PortalExecutorFactory" class="com.liferay.portal.executor.PortalExecutorFactoryImpl">
+
+	<!-- Executor factory -->
+
+	<bean id="com.liferay.portal.kernel.executor.PortalExecutorFactory" class="com.liferay.portal.executor.PortalExecutorFactoryImpl">
+		<property name="allowCoreThreadTimeout" value="true" />
 		<property name="corePoolSize" value="0" />
-		<property name="maxPoolSize" value="10" />
-		<property name="allowCoreThreadTimeOut" value="true" />
 		<property name="keepAliveTime" value="60" />
-		<property name="timeunit">
-			<util:constant static-field="java.util.concurrent.TimeUnit.SECONDS" />
-		</property>
+		<property name="maxPoolSize" value="10" />
 		<property name="maxQueueSize">
 			<util:constant static-field="java.lang.Integer.MAX_VALUE" />
 		</property>
@@ -26,19 +25,18 @@
 		<property name="threadPoolHandler">
 			<bean class="com.liferay.portal.kernel.concurrent.ClearThreadLocalThreadPoolHandler" />
 		</property>
+		<property name="timeUnit">
+			<util:constant static-field="java.util.concurrent.TimeUnit.SECONDS" />
+		</property>
 	</bean>
 
-	<!-- Predefine PortalExecutors -->
-	
-	<!-- Portlet PortalExecutor -->
-	<bean id="portlet.PortalExecutor" class="com.liferay.portal.kernel.concurrent.ThreadPoolExecutor">
+	<!-- Executors -->
+
+	<bean id="portalExecutor.portlet" class="com.liferay.portal.kernel.concurrent.ThreadPoolExecutor">
+		<constructor-arg name="allowCoreThreadTimeout" value="false" />
 		<constructor-arg name="corePoolSize" value="5" />
-		<constructor-arg name="maxPoolSize" value="10" />
 		<constructor-arg name="keepAliveTime" value="60" />
-		<constructor-arg name="timeunit">
-			<util:constant static-field="java.util.concurrent.TimeUnit.SECONDS" />
-		</constructor-arg>
-		<constructor-arg name="allowCoreThreadTimeOut" value="false" />
+		<constructor-arg name="maxPoolSize" value="10" />
 		<constructor-arg name="maxQueueSize">
 			<util:constant static-field="java.lang.Integer.MAX_VALUE" />
 		</constructor-arg>
@@ -47,34 +45,34 @@
 		</constructor-arg>
 		<constructor-arg name="threadFactory">
 			<bean class="com.liferay.portal.kernel.util.NamedThreadFactory">
-				<constructor-arg name="name" value="Portlet-Executor" />
-				<constructor-arg name="priority">
-					<util:constant static-field="java.lang.Thread.NORM_PRIORITY" />
-				</constructor-arg>
 				<constructor-arg name="contextClassLoader">
 					<bean class="com.liferay.portal.kernel.util.PortalClassLoaderUtil" factory-method="getClassLoader" />
 				</constructor-arg>
+				<constructor-arg name="priority">
+					<util:constant static-field="java.lang.Thread.NORM_PRIORITY" />
+				</constructor-arg>
+				<constructor-arg name="name" value="Portlet Executor" />
 			</bean>
 		</constructor-arg>
 		<constructor-arg name="threadPoolHandler">
 			<bean class="com.liferay.portal.kernel.concurrent.ThreadPoolHandlerAdapter" />
 		</constructor-arg>
+		<constructor-arg name="timeUnit">
+			<util:constant static-field="java.util.concurrent.TimeUnit.SECONDS" />
+		</constructor-arg>
 	</bean>
 
-	<bean id="com.liferay.portal.kernel.executor.PortalExecutorManagerUtil" class="com.liferay.portal.kernel.executor.PortalExecutorManagerUtil">
-		<property name="portalExecutorManager">
-			<bean class="com.liferay.portal.executor.PortalExecutorManagerImpl">
-				<property name="portalExecutorFactory" ref="com.liferay.portal.executor.PortalExecutorFactory" />
-				<property name="portalExecutors">
-					<map>
-						<entry value-ref="portlet.PortalExecutor">
-							<key>
-								<util:constant static-field="com.liferay.portlet.InvokerPortletImpl.PORTLET_EXECUTOR_NAME" />
-							</key>
-						</entry>
-					</map>
-				</property>
-			</bean>
+	<!-- Executor manager -->
+
+	<bean id="com.liferay.portal.kernel.executor.PortalExecutorManager" class="com.liferay.portal.executor.PortalExecutorManagerImpl">
+		<property name="portalExecutorFactory" ref="com.liferay.portal.kernel.executor.PortalExecutorFactory" />
+		<property name="portalExecutors">
+			<map>
+				<entry key="com.liferay.portlet.InvokerPortletImpl" value-ref="portlet.PortalExecutor" />
+			</map>
 		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.executor.PortalExecutorManagerUtil" class="com.liferay.portal.kernel.executor.PortalExecutorManagerUtil">
+		<property name="portalExecutorManager" ref="com.liferay.portal.kernel.executor.PortalExecutorManager" />
 	</bean>
 </beans>

@@ -31,56 +31,56 @@ public class PortalExecutorFactoryImpl implements PortalExecutorFactory {
 
 	public void afterPropertiesSet() {
 		if (_corePoolSize < 0) {
-			throw new IllegalArgumentException(
-				"corePoolSize is negative number : " + _corePoolSize);
+			throw new IllegalArgumentException("Core pool size is less than 0");
 		}
 
 		if (_keepAliveTime < 0) {
 			throw new IllegalArgumentException(
-				"keepAliveTime is negative number : " + _keepAliveTime);
+				"Keep alive time is less than 0");
 		}
 
 		if (_maxPoolSize <= 0) {
 			throw new IllegalArgumentException(
-				"maxPoolSize is not positive number : " + _maxPoolSize);
+				"Max pool size is less than or equal to 0");
 		}
 
 		if (_maxPoolSize < _corePoolSize) {
 			throw new IllegalArgumentException(
-				"maxPoolSize is less than corePoolSize");
+				"Max pool size is less than core pool size");
 		}
 
 		if (_maxQueueSize <= 0) {
 			throw new IllegalArgumentException(
-				"maxQueueSize is not positive number : " + _maxQueueSize);
+				"Max queue size is less than or equal to 0");
 		}
 
 		if (_rejectedExecutionHandler == null) {
 			throw new IllegalArgumentException(
-				"rejectedExecutionHandler is null");
+				"Rejected execution handler is null");
 		}
 
 		if (_threadPoolHandler == null) {
-			throw new IllegalArgumentException("threadPoolHandler is null");
+			throw new IllegalArgumentException("Thread pool handler is null");
 		}
 
-		if (_timeunit == null) {
-			throw new IllegalArgumentException("timeunit is null");
+		if (_timeUnit == null) {
+			throw new IllegalArgumentException("Time unit is null");
 		}
 	}
 
 	public ThreadPoolExecutor createPortalExecutor(String executorName) {
-		ThreadFactory threadFactory = new NamedThreadFactory(executorName,
-			Thread.NORM_PRIORITY, PortalClassLoaderUtil.getClassLoader());
+		ThreadFactory threadFactory = new NamedThreadFactory(
+			executorName, Thread.NORM_PRIORITY,
+			PortalClassLoaderUtil.getClassLoader());
 
 		return new ThreadPoolExecutor(
-			_corePoolSize, _maxPoolSize, _keepAliveTime, _timeunit,
-			_allowCoreThreadTimeOut, _maxQueueSize, _rejectedExecutionHandler,
+			_corePoolSize, _maxPoolSize, _keepAliveTime, _timeUnit,
+			_allowCoreThreadTimeout, _maxQueueSize, _rejectedExecutionHandler,
 			threadFactory, _threadPoolHandler);
 	}
 
-	public void setAllowCoreThreadTimeOut(boolean allowCoreThreadTimeOut) {
-		_allowCoreThreadTimeOut = allowCoreThreadTimeOut;
+	public void setAllowCoreThreadTimeout(boolean allowCoreThreadTimeout) {
+		_allowCoreThreadTimeout = allowCoreThreadTimeout;
 	}
 
 	public void setCorePoolSize(int corePoolSize) {
@@ -101,6 +101,7 @@ public class PortalExecutorFactoryImpl implements PortalExecutorFactory {
 
 	public void setRejectedExecutionHandler(
 		RejectedExecutionHandler rejectedExecutionHandler) {
+
 		_rejectedExecutionHandler = rejectedExecutionHandler;
 	}
 
@@ -108,17 +109,17 @@ public class PortalExecutorFactoryImpl implements PortalExecutorFactory {
 		_threadPoolHandler = threadPoolHandler;
 	}
 
-	public void setTimeunit(TimeUnit timeunit) {
-		_timeunit = timeunit;
+	public void setTimeUnit(TimeUnit timeUnit) {
+		_timeUnit = timeUnit;
 	}
 
-	private boolean _allowCoreThreadTimeOut;
+	private boolean _allowCoreThreadTimeout;
 	private int _corePoolSize;
 	private long _keepAliveTime;
 	private int _maxPoolSize;
 	private int _maxQueueSize;
 	private RejectedExecutionHandler _rejectedExecutionHandler;
 	private ThreadPoolHandler _threadPoolHandler;
-	private TimeUnit _timeunit;
+	private TimeUnit _timeUnit;
 
 }
