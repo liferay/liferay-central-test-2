@@ -40,14 +40,13 @@ public class NamedThreadFactory implements ThreadFactory {
 		_name = name;
 		_priority = priority;
 		_contextClassLoader = contextClassLoader;
-		_counter = new AtomicInteger();
 	}
 
 	public Thread newThread(Runnable runnable) {
-
 		Thread thread = new Thread(
-			_group, runnable, _name.concat(StringPool.MINUS).concat(
-				Integer.toString(_counter.incrementAndGet())));
+			_group, runnable,
+			_name.concat(StringPool.MINUS).concat(
+				String.valueOf(_counter.incrementAndGet())));
 
 		thread.setDaemon(true);
 		thread.setPriority(_priority);
@@ -60,7 +59,7 @@ public class NamedThreadFactory implements ThreadFactory {
 	}
 
 	private ClassLoader _contextClassLoader;
-	private AtomicInteger _counter;
+	private AtomicInteger _counter = new AtomicInteger();
 	private ThreadGroup _group;
 	private String _name;
 	private int _priority;

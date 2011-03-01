@@ -1314,25 +1314,6 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets action phase timeout time by seconds.
-	*
-	* @return Action phase timeout time by seconds.
-	*/
-	public int getActionTimeout() {
-		return _portlet.getActionTimeout();
-	}
-
-	/**
-	* Sets action phase timeout time by seconds of the portlet.
-	*
-	* @param actionTimeout int value for action phase timeout time by seconds
-	of the portlet
-	*/
-	public void setActionTimeout(int actionTimeout) {
-		_portlet.setActionTimeout(actionTimeout);
-	}
-
-	/**
 	* Returns <code>true</code> if an action URL for this portlet should cause
 	* an auto redirect.
 	*
@@ -1703,19 +1684,36 @@ public class PortletWrapper implements Portlet {
 	}
 
 	/**
-	* Gets render phase timeout time by seconds.
+	* Gets the action timeout of the portlet.
 	*
-	* @return Render phase timeout time by seconds.
+	* @return the action timeout of the portlet
+	*/
+	public int getActionTimeout() {
+		return _portlet.getActionTimeout();
+	}
+
+	/**
+	* Sets the action timeout of the portlet.
+	*
+	* @param actionTimeout the action timeout of the portlet
+	*/
+	public void setActionTimeout(int actionTimeout) {
+		_portlet.setActionTimeout(actionTimeout);
+	}
+
+	/**
+	* Gets the render timeout of the portlet.
+	*
+	* @return the render timeout of the portlet
 	*/
 	public int getRenderTimeout() {
 		return _portlet.getRenderTimeout();
 	}
 
 	/**
-	* Sets render phase timeout time by seconds of the portlet.
+	* Sets the render timeout of the portlet.
 	*
-	* @param renderTimeout int value for render phase timeout time by seconds
-	of the portlet
+	* @param renderTimeout the render timeout of the portlet
 	*/
 	public void setRenderTimeout(int renderTimeout) {
 		_portlet.setRenderTimeout(renderTimeout);

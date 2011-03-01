@@ -1326,14 +1326,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getBoolean(
 				portletElement.elementText("private-session-attributes"),
 				portletModel.isPrivateSessionAttributes()));
-		portletModel.setRenderWeight(
-			GetterUtil.getInteger(
-				portletElement.elementText("render-weight"),
-				portletModel.getRenderWeight()));
-		portletModel.setAjaxable(
-			GetterUtil.getBoolean(
-				portletElement.elementText("ajaxable"),
-				portletModel.isAjaxable()));
 		portletModel.setActionTimeout(
 			GetterUtil.getInteger(
 				portletElement.elementText("action-timeout"),
@@ -1342,6 +1334,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			GetterUtil.getInteger(
 				portletElement.elementText("render-timeout"),
 				portletModel.getRenderTimeout()));
+		portletModel.setRenderWeight(
+			GetterUtil.getInteger(
+				portletElement.elementText("render-weight"),
+				portletModel.getRenderWeight()));
+		portletModel.setAjaxable(
+			GetterUtil.getBoolean(
+				portletElement.elementText("ajaxable"),
+				portletModel.isAjaxable()));
 
 		List<String> headerPortalCssList =
 			portletModel.getHeaderPortalCss();

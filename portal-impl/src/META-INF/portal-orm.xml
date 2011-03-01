@@ -2999,6 +2999,7 @@
 		<table name="Portlet" />
 		<attributes>
 			<transient name="URLEncoderClass" />
+			<transient name="actionTimeout" />
 			<transient name="actionURLRedirect" />
 			<transient name="addDefaultResource" />
 			<transient name="ajaxable" />
@@ -3059,6 +3060,7 @@
 			<transient name="publishingEvents" />
 			<transient name="ready" />
 			<transient name="remoteable" />
+			<transient name="renderTimeout" />
 			<transient name="renderWeight" />
 			<transient name="resourceBundle" />
 			<transient name="restoreCurrentView" />

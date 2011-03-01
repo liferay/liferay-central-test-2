@@ -692,17 +692,22 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 		if (PropsValues.PORTLET_ASYNC_EXECUTE_ENABLED &&
 			(_portletModel.getActionTimeout() > 0)) {
+
 			try {
-				PortalExecutorManagerUtil.execute(PORTLET_EXECUTOR_NAME,
+				PortalExecutorManagerUtil.execute(
+					InvokerPortletImpl.class.getName(),
 					new CopyThreadLocalCallable<Void>(false, true) {
 
 						public Void doCall() throws Exception {
 							invoke(
 								portletRequest, portletResponse,
 								PortletRequest.ACTION_PHASE, actionFilters);
+
 							return null;
 						}
-					}, _portletModel.getActionTimeout(), TimeUnit.SECONDS);
+
+					},
+					_portletModel.getActionTimeout(), TimeUnit.SECONDS);
 			}
 			catch (Exception e) {
 				throw new PortletException(e);
@@ -749,17 +754,21 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 		if (PropsValues.PORTLET_ASYNC_EXECUTE_ENABLED &&
 			(_portletModel.getRenderTimeout() > 0)) {
+
 			try {
-				PortalExecutorManagerUtil.execute(PORTLET_EXECUTOR_NAME,
+				PortalExecutorManagerUtil.execute(
+					InvokerPortletImpl.class.getName(),
 					new CopyThreadLocalCallable<Void>(false, true) {
 
 						public Void doCall() throws Exception {
 							invoke(
 								portletRequest, portletResponse,
 								PortletRequest.RENDER_PHASE, renderFilters);
+
 							return null;
 						}
-					}, _portletModel.getRenderTimeout(), TimeUnit.SECONDS);
+					},
+					_portletModel.getRenderTimeout(), TimeUnit.SECONDS);
 			}
 			catch (Exception e) {
 				throw new PortletException(e);
@@ -811,8 +820,6 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 		return portlet.getPortletId();
 	}
-
-	public static final String PORTLET_EXECUTOR_NAME = "PORTLET_EXECUTOR_NAME";
 
 	private static Log _log = LogFactoryUtil.getLog(InvokerPortletImpl.class);
 

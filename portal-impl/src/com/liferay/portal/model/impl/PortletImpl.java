@@ -150,7 +150,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
 		boolean remoteable, boolean scopeable, String userPrincipalStrategy,
 		boolean privateRequestAttributes, boolean privateSessionAttributes,
-		int renderWeight, boolean ajaxable, List<String> headerPortalCss,
+		int actionTimeout, int renderTimeout, int renderWeight,
+		boolean ajaxable, List<String> headerPortalCss,
 		List<String> headerPortletCss, List<String> headerPortalJavaScript,
 		List<String> headerPortletJavaScript, List<String> footerPortalCss,
 		List<String> footerPortletCss, List<String> footerPortalJavaScript,
@@ -224,6 +225,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_userPrincipalStrategy = userPrincipalStrategy;
 		_privateRequestAttributes = privateRequestAttributes;
 		_privateSessionAttributes = privateSessionAttributes;
+		_actionTimeout = actionTimeout;
+		_renderTimeout = renderTimeout;
 		_renderWeight = renderWeight;
 		_ajaxable = ajaxable;
 		_headerPortalCss = headerPortalCss;
@@ -1487,24 +1490,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets action phase timeout time by seconds.
-	 * @return Action phase timeout time by seconds.
-	 */
-	public int getActionTimeout() {
-		return _actionTimeout;
-	}
-
-	/**
-	 * Sets action phase timeout time by seconds of the portlet.
-	 *
-	 * @param actionTimeout int value for action phase timeout time by seconds
-	 *		  of the portlet
-	 */
-	public void setActionTimeout(int actionTimeout) {
-		_actionTimeout = actionTimeout;
-	}
-
-	/**
 	 * Returns <code>true</code> if an action URL for this portlet should cause
 	 * an auto redirect.
 	 *
@@ -1877,18 +1862,36 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets render phase timeout time by seconds.
-	 * @return Render phase timeout time by seconds.
+	 * Gets the action timeout of the portlet.
+	 *
+	 * @return the action timeout of the portlet
+	 */
+	public int getActionTimeout() {
+		return _actionTimeout;
+	}
+
+	/**
+	 * Sets the action timeout of the portlet.
+	 *
+	 * @param actionTimeout the action timeout of the portlet
+	 */
+	public void setActionTimeout(int actionTimeout) {
+		_actionTimeout = actionTimeout;
+	}
+
+	/**
+	 * Gets the render timeout of the portlet.
+	 *
+	 * @return the render timeout of the portlet
 	 */
 	public int getRenderTimeout() {
 		return _renderTimeout;
 	}
 
 	/**
-	 * Sets render phase timeout time by seconds of the portlet.
+	 * Sets the render timeout of the portlet.
 	 *
-	 * @param renderTimeout int value for render phase timeout time by seconds
-	 *		  of the portlet
+	 * @param renderTimeout the render timeout of the portlet
 	 */
 	public void setRenderTimeout(int renderTimeout) {
 		_renderTimeout = renderTimeout;
@@ -3112,7 +3115,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
 			isInstanceable(), isRemoteable(), isScopeable(),
 			getUserPrincipalStrategy(), isPrivateRequestAttributes(),
-			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
+			isPrivateSessionAttributes(), getActionTimeout(),
+			getRenderTimeout(), getRenderWeight(), isAjaxable(),
 			getHeaderPortalCss(), getHeaderPortletCss(),
 			getHeaderPortalJavaScript(), getHeaderPortletJavaScript(),
 			getFooterPortalCss(), getFooterPortletCss(),
@@ -3395,11 +3399,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		PropsValues.LAYOUT_SHOW_PORTLET_INACTIVE;
 
 	/**
-	 * Action phase timeout time by seconds.
-	 */
-	private int _actionTimeout;
-
-	/**
 	 * <code>True</code> if an action URL for this portlet should cause an auto
 	 * redirect.
 	 */
@@ -3468,7 +3467,12 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private boolean _privateSessionAttributes = true;
 
 	/**
-	 * Render phase timeout time by seconds.
+	 * The action timeout of the portlet.
+	 */
+	private int _actionTimeout;
+
+	/**
+	 * The render timeout of the portlet.
 	 */
 	private int _renderTimeout;
 
