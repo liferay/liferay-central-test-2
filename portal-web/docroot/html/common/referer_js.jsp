@@ -19,17 +19,15 @@
 <script type="text/javascript">
 
 	<%
-	Boolean logout = (Boolean)request.getAttribute("logout");
+	Boolean logout = (Boolean)request.getAttribute(WebKeys.LOGOUT);
 
 	if (logout == null) {
-		logout = false;
+		logout = Boolean.FALSE;
 	}
-
-	boolean isNtlmEnabled = PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED);
 	%>
 
-	<c:if test="<%= logout && isNtlmEnabled && BrowserSnifferUtil.isIe(request) %>">
-	    document.execCommand("ClearAuthenticationCache");
+	<c:if test="<%= logout && BrowserSnifferUtil.isIe(request) && PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED) %>">
+		document.execCommand("ClearAuthenticationCache");
 	</c:if>
 
 	location.href = '<%= HtmlUtil.escapeJS(referer) %>';

@@ -94,8 +94,8 @@ public class NtlmFilter extends BasePortalFilter {
 		try {
 			long companyId = PortalInstances.getCompanyId(request);
 
-			if (AuthSettingsUtil.isNtlmEnabled(companyId) &&
-					BrowserSnifferUtil.isIe(request)) {
+			if (BrowserSnifferUtil.isIe(request) &&
+				AuthSettingsUtil.isNtlmEnabled(companyId)) {
 
 				return true;
 			}
