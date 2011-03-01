@@ -17,11 +17,10 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
-LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLayoutSet"));
-
 Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 UnicodeProperties groupTypeSettings =  (UnicodeProperties)request.getAttribute("edit_pages.jsp-groupTypeSettings");
+LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLayoutSet"));
 %>
 
 <liferay-ui:error-marker key="errorSection" value="logo" />

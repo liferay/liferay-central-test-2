@@ -19,17 +19,14 @@
 <%
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
-LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLayoutSet"));
-
-boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 Group group = (Group)request.getAttribute("edit_pages.jsp-group");
 Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
-
 long groupId = (Long)request.getAttribute("edit_pages.jsp-groupId");
 long liveGroupId = (Long)request.getAttribute("edit_pages.jsp-liveGroupId");
 long stagingGroupId = (Long)request.getAttribute("edit_pages.jsp-stagingGroupId");
-
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
+boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
+LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLayoutSet"));
 
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
 
@@ -51,8 +48,6 @@ else {
 		pagesCount = group.getPublicLayoutsPageCount();
 	}
 }
-
-//Sections
 
 String[] mainSections = PropsValues.LAYOUT_SET_FORM_UPDATE;
 
@@ -269,11 +264,11 @@ String[][] categorySections = {mainSections};
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
-	<aui:input name="layoutSetId" type="hidden" value="<%= selLayoutSet.getLayoutSetId() %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
-	<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
 	<aui:input name="selPlid" type="hidden" value="<%= selPlid %>" />
+	<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
+	<aui:input name="layoutSetId" type="hidden" value="<%= selLayoutSet.getLayoutSetId() %>" />
 	<aui:input name="<%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" />
 
 	<liferay-ui:form-navigator

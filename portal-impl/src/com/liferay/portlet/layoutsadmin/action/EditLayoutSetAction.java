@@ -32,6 +32,9 @@ import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.servlet.UploadException;
+
+import java.io.File;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -39,12 +42,9 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
-import com.liferay.util.servlet.UploadException;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import java.io.File;
 
 /**
  * @author Brian Wing Shun Chan
@@ -130,6 +130,7 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 			WebKeys.THEME_DISPLAY);
 
 		long layoutSetId = ParamUtil.getLong(actionRequest, "layoutSetId");
+
 		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(
 			actionRequest, "stagingGroupId");
@@ -139,7 +140,7 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 		updateMergePages(actionRequest);
 
 		updateLogo(
-			actionRequest, liveGroupId, stagingGroupId, layoutSetId,
+			actionRequest, layoutSetId, liveGroupId, stagingGroupId,
 			privateLayout);
 
 		updateLookAndFeel(
@@ -148,8 +149,8 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 	}
 
 	protected void updateLogo(
-			ActionRequest actionRequest, long liveGroupId, long stagingGroupId,
-			long layoutSetId, boolean privateLayout)
+			ActionRequest actionRequest, long layoutSetId, long liveGroupId,
+			long stagingGroupId, boolean privateLayout)
 		throws Exception {
 
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
@@ -164,7 +165,7 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 				layoutSetId);
 
-			if (layoutSet.getLogo()) {
+			if (layoutSet.isLogo()) {
 				return;
 			}
 
