@@ -86,19 +86,11 @@
 		padding: 7px 10px;
 	}
 
-	.avatar {
+	#details .avatar {
 		border: 1px solid #88C5D9;
 		clear: both;
+		margin: 0 auto;
 		width: 100px;
-
-		img {
-			display: block;
-		}
-	}
-
-	.change-avatar img {
-		display: block;
-		margin: 10px auto;
 	}
 
 	.lfr-change-logo img {
@@ -210,7 +202,7 @@
 		}
 
 		.user-info, .organization-info {
-			.avatar {
+			.user-logo, .organization-logo {
 				float: left;
 				margin-right: 10px;
 				padding: 0;
@@ -231,12 +223,6 @@
 		.aui-field {
 			float: left;
 		}
-	}
-
-	.portrait-icons {
-		margin-bottom: 20px;
-		text-align: center;
-		width: 200px;
 	}
 
 	table.org-labor-table {

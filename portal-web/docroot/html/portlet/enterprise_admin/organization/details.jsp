@@ -136,8 +136,17 @@ if (organization != null) {
 		<c:if test="<%= organization != null %>">
 
 			<%
+			long logoId = 0;
+
 			LayoutSet publicLayoutSet =	LayoutSetLocalServiceUtil.getLayoutSet(groupId, false);
 			LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, true);
+
+			if (publicLayoutSet.getLogoId() > 0) {
+				logoId = publicLayoutSet.getLogoId();
+			}
+			else if (privateLayoutSet.getLogoId() > 0) {
+				logoId = privateLayoutSet.getLogoId();
+			}
 			%>
 
 			<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="editOrganizationLogoURL">
@@ -147,41 +156,13 @@ if (organization != null) {
 				<portlet:param name="publicLayoutSetId" value="<%= String.valueOf(publicLayoutSet.getLayoutSetId()) %>" />
 			</portlet:renderURL>
 
-			<%
-			String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditOrganizationLogoWindow('" + editOrganizationLogoURL + "');";
-
-			long logoId = organization.getLogoId();
-			%>
-
-			<aui:a cssClass="change-avatar" href="<%= taglibEditURL %>">
-				<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/organization_logo?img_id=<%= deleteLogo ? 0 : logoId %>&t=<%= ImageServletTokenUtil.getToken(logoId) %>" />
-			</aui:a>
-
-			<div class="portrait-icons">
-
-				<liferay-ui:icon
-					image="edit"
-					label="<%= true %>"
-					message="change"
-					url="<%= taglibEditURL %>"
-				/>
-
-				<c:if test="<%= logoId != 0 %>">
-
-					<%
-					String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/organization_logo?img_id=0');";
-					%>
-
-					<liferay-ui:icon
-						cssClass="modify-link"
-						image="delete"
-						label="<%= true %>"
-						url="<%= taglibDeleteURL %>"
-					/>
-
-					<aui:input name="deleteLogo" type="hidden" value="<%= deleteLogo %>" />
-				</c:if>
-			</div>
+			<liferay-ui:logo-selector
+				defaultLogoURL='<%= themeDisplay.getPathImage() + "/organization_logo?img_id=0" %>'
+				imageId="<%= logoId %>"
+				editLogoURL="<%= editOrganizationLogoURL %>"
+				logoDisplaySelector=".organization-logo"
+				showBackground="<%= false %>"
+			/>
 		</c:if>
 	</div>
 </aui:fieldset>
@@ -276,12 +257,6 @@ if (parentOrganization != null) {
 />
 
 <aui:script>
-	function <portlet:namespace />openEditOrganizationLogoWindow(editOrganizationLogoURL) {
-		var editOrganizationLogoWindow = window.open(editOrganizationLogoURL, 'change', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
-
-		editOrganizationLogoWindow.focus();
-	}
-
 	function <portlet:namespace />openOrganizationSelector() {
 		var url = '<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /></portlet:renderURL>';
 
@@ -298,34 +273,6 @@ if (parentOrganization != null) {
 
 		organizationWindow.focus();
 	}
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />changeLogo',
-		function(newLogoURL) {
-			var A = AUI();
-
-			A.one('#<portlet:namespace />avatar').attr('src', newLogoURL);
-			A.one('.avatar').attr('src', newLogoURL);
-
-			A.one('#<portlet:namespace />deleteLogo').val(false);
-		},
-		['aui-base']
-	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />deleteLogo',
-		function(defaultLogoURL) {
-			var A = AUI();
-
-			A.one('#<portlet:namespace />deleteLogo').val(true);
-
-			A.one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
-			A.one('.avatar').attr('src', defaultLogoURL);
-		},
-		['aui-base']
-	);
 
 	Liferay.provide(
 		window,

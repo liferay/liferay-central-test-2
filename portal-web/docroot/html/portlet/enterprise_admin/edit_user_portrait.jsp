@@ -24,7 +24,7 @@ User selUser = PortalUtil.getSelectedUser(request);
 	<c:when test='<%= SessionMessages.contains(renderRequest, "request_processed") %>'>
 		<aui:script>
 			window.close();
-			opener.<portlet:namespace />changePortrait('<%= selUser.getPortraitURL(themeDisplay) %>');
+			opener.<portlet:namespace />changeLogo('<%= selUser.getPortraitURL(themeDisplay) %>');
 		</aui:script>
 	</c:when>
 	<c:otherwise>

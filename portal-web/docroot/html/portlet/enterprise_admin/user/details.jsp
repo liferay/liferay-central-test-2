@@ -120,36 +120,13 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 				<portlet:param name="portrait_id" value="<%= String.valueOf(selUser.getPortraitId()) %>" />
 			</portlet:renderURL>
 
-			<%
-			String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditUserPortraitWindow('" + editUserPortraitURL + "');";
-			%>
-
-			<aui:a cssClass="change-avatar" href="<%= taglibEditURL %>"><img alt="<liferay-ui:message key="avatar" />" class="avatar" id="<portlet:namespace />avatar" src="<%= selUser.getPortraitURL(themeDisplay) %>" /></aui:a>
-
-			<div class="portrait-icons">
-				<liferay-ui:icon
-					image="edit"
-					label="<%= true %>"
-					message="change"
-					url="<%= taglibEditURL %>"
-				/>
-
-				<c:if test="<%= selUser.getPortraitId() > 0 %>">
-
-					<%
-					String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deletePortrait('" + UserConstants.getPortraitURL(themeDisplay.getPathImage(), selUser.isMale(), 0) + "');";
-					%>
-
-					<liferay-ui:icon
-						cssClass="modify-link"
-						image="delete"
-						label="<%= true %>"
-						url="<%= taglibDeleteURL %>"
-					/>
-
-					<aui:input name="deletePortrait" type="hidden" value="<%= deletePortrait %>" />
-				</c:if>
-			</div>
+			<liferay-ui:logo-selector
+				defaultLogoURL='<%= UserConstants.getPortraitURL(themeDisplay.getPathImage(), selUser.isMale(), 0) %>'
+				imageId="<%= selUser.getPortraitId() %>"
+				editLogoURL="<%= editUserPortraitURL %>"
+				logoDisplaySelector=".user-logo"
+				showBackground="<%= false %>"
+			/>
 		</c:if>
 	</div>
 
@@ -185,39 +162,3 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 
 	<aui:input name="jobTitle" />
 </aui:fieldset>
-
-<aui:script>
-	function <portlet:namespace />openEditUserPortraitWindow(editUserPortraitURL) {
-		var editUserPortraitWindow = window.open(editUserPortraitURL, 'change', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
-
-		editUserPortraitWindow.focus();
-	}
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />changePortrait',
-		function(newPortraitURL) {
-			var A = AUI();
-
-			A.one('#<portlet:namespace />avatar').attr('src', newPortraitURL);
-			A.one('.avatar').attr('src', newPortraitURL);
-
-			A.one('#<portlet:namespace />deletePortrait').val(false);
-		},
-		['aui-base']
-	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />deletePortrait',
-		function(defaultPortraitURL) {
-			var A = AUI();
-
-			A.one('#<portlet:namespace />deletePortrait').val(true);
-
-			A.one('#<portlet:namespace />avatar').attr('src', defaultPortraitURL);
-			A.one('.avatar').attr('src', defaultPortraitURL);
-		},
-		['aui-base']
-	);
-</aui:script>

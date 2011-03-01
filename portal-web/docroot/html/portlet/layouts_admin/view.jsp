@@ -222,6 +222,8 @@ if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletK
 	}
 }
 
+LayoutSet selLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
+
 request.setAttribute("edit_pages.jsp-group", group);
 request.setAttribute("edit_pages.jsp-selGroup", selGroup);
 request.setAttribute("edit_pages.jsp-liveGroup", liveGroup);
@@ -235,6 +237,7 @@ request.setAttribute("edit_pages.jsp-layoutId", new Long(layoutId));
 request.setAttribute("edit_pages.jsp-groupTypeSettings", groupTypeSettings);
 request.setAttribute("edit_pages.jsp-liveGroupTypeSettings", liveGroupTypeSettings);
 request.setAttribute("edit_pages.jsp-selLayout", selLayout);
+request.setAttribute("edit_pages.jsp-selLayoutSet", selLayoutSet);
 
 request.setAttribute("edit_pages.jsp-rootNodeName", rootNodeName);
 

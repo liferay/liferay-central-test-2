@@ -68,38 +68,12 @@ String defaultControlPanelThemeId = PrefsPropsUtil.getString(company.getCompanyI
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 	</portlet:renderURL>
 
-	<%
-	String taglibEditURL = "javascript:" + renderResponse.getNamespace() + "openEditCompanyLogoWindow('" + editCompanyLogoURL + "');";
-	%>
-
-	<aui:a cssClass="lfr-change-logo" href="<%= taglibEditURL %>">
-		<img alt="<liferay-ui:message key="logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= deleteLogo ? 0 : company.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(company.getLogoId()) %>" />
-	</aui:a>
-
-	<div class="portrait-icons">
-		<liferay-ui:icon
-			image="edit"
-			label="<%= true %>"
-			message="change"
-			url="<%= taglibEditURL %>"
-		/>
-
-		<c:if test="<%= company.getLogoId() != 0 %>">
-
-			<%
-			String taglibDeleteURL = "javascript:" + renderResponse.getNamespace() + "deleteLogo('" + themeDisplay.getPathImage() + "/company_logo?img_id=0');";
-			%>
-
-			<liferay-ui:icon
-				cssClass="modify-link"
-				image="delete"
-				label="<%= true %>"
-				url="<%= taglibDeleteURL %>"
-			/>
-
-			<aui:input name="deleteLogo" type="hidden" value="<%= deleteLogo %>" />
-		</c:if>
-	</div>
+	<liferay-ui:logo-selector
+		defaultLogoURL='<%= themeDisplay.getPathImage() + "/company_logo?img_id=0" %>'
+		imageId="<%= company.getLogoId() %>"
+		editLogoURL="<%= editCompanyLogoURL %>"
+		logoDisplaySelector=".company-logo"
+	/>
 </aui:fieldset>
 
 <h3><liferay-ui:message key="look-and-feel" /></h3>
@@ -185,39 +159,3 @@ boolean deployed = false;
 		</c:if>
 	</aui:select>
 </aui:fieldset>
-
-<aui:script>
-	function <portlet:namespace />openEditCompanyLogoWindow(editCompanyLogoURL) {
-		var editCompanyLogoWindow = window.open(editCompanyLogoURL, 'changeLogo', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
-
-		editCompanyLogoWindow.focus();
-	}
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />changeLogo',
-		function(newLogoURL) {
-			var A = AUI();
-
-			A.one('#<portlet:namespace />avatar').attr('src', newLogoURL);
-			A.one('.company-logo').attr('src', newLogoURL);
-
-			A.one('#<portlet:namespace />deleteLogo').val(false);
-		},
-		['aui-base']
-	);
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />deleteLogo',
-		function(defaultLogoURL) {
-			var A = AUI();
-
-			A.one('#<portlet:namespace />deleteLogo').val(true);
-
-			A.one('#<portlet:namespace />avatar').attr('src', defaultLogoURL);
-			A.one('.company-logo').attr('src', defaultLogoURL);
-		},
-		['aui-base']
-	);
-</aui:script>

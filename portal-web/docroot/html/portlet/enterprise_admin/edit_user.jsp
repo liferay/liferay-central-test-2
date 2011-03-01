@@ -219,7 +219,7 @@ String taglibOnSubmit = "event.preventDefault(); " + renderResponse.getNamespace
 		<c:if test="<%= selUser != null %>">
 			<div class="user-info">
 				<div class="float-container">
-					<img alt="<%= HtmlUtil.escape(selUser.getFullName()) %>" class="avatar" src="<%= selUser.getPortraitURL(themeDisplay) %>" />
+					<img alt="<%= HtmlUtil.escape(selUser.getFullName()) %>" class="user-logo" src="<%= selUser.getPortraitURL(themeDisplay) %>" />
 
 					<span class="user-name"><%= HtmlUtil.escape(selUser.getFullName()) %></span>
 				</div>
