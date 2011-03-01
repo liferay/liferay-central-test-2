@@ -65,6 +65,7 @@
 <%@ include file="/html/portal/css/taglib/input_move_boxes.jspf" %>
 <%@ include file="/html/portal/css/taglib/input_repeat.jspf" %>
 <%@ include file="/html/portal/css/taglib/language.jspf" %>
+<%@ include file="/html/portal/css/taglib/logo_selector.jspf" %>
 <%@ include file="/html/portal/css/taglib/preview.jspf" %>
 <%@ include file="/html/portal/css/taglib/ratings.jspf" %>
 <%@ include file="/html/portal/css/taglib/search_iterator.jspf" %>
