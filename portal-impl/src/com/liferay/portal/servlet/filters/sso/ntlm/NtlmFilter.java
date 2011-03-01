@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -93,7 +94,9 @@ public class NtlmFilter extends BasePortalFilter {
 		try {
 			long companyId = PortalInstances.getCompanyId(request);
 
-			if (AuthSettingsUtil.isNtlmEnabled(companyId)) {
+			if (AuthSettingsUtil.isNtlmEnabled(companyId) &&
+					BrowserSnifferUtil.isIe(request)) {
+
 				return true;
 			}
 		}

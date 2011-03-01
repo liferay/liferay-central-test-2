@@ -17,5 +17,15 @@
 <%@ include file="/html/common/referer_common.jsp" %>
 
 <script type="text/javascript">
+
+	<%
+	boolean logout = (Boolean)request.getAttribute("logout");
+	boolean isNtlmEnabled = PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED);
+	%>
+
+	<c:if test="<%= logout && isNtlmEnabled && BrowserSnifferUtil.isIe(request) %>">
+	    document.execCommand("ClearAuthenticationCache");
+	</c:if>
+
 	location.href = '<%= HtmlUtil.escapeJS(referer) %>';
 </script>

@@ -95,6 +95,8 @@ public class LogoutAction extends Action {
 				PropsKeys.LOGOUT_EVENTS_POST, PropsValues.LOGOUT_EVENTS_POST,
 				request, response);
 
+			request.setAttribute("logout", true);
+
 			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 		catch (Exception e) {
