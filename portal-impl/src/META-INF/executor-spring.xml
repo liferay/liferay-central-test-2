@@ -68,7 +68,7 @@
 		<property name="portalExecutorFactory" ref="com.liferay.portal.kernel.executor.PortalExecutorFactory" />
 		<property name="portalExecutors">
 			<map>
-				<entry key="com.liferay.portlet.InvokerPortletImpl" value-ref="portlet.PortalExecutor" />
+				<entry key="com.liferay.portlet.InvokerPortletImpl" value-ref="portalExecutor.portlet" />
 			</map>
 		</property>
 	</bean>
