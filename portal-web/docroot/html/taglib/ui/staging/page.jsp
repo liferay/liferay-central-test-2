@@ -16,7 +16,6 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-
 <c:if test="<%= themeDisplay.isShowStagingIcon() %>">
 
 	<%
