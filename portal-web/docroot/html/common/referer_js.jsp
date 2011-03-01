@@ -19,7 +19,12 @@
 <script type="text/javascript">
 
 	<%
-	boolean logout = (Boolean)request.getAttribute("logout");
+	Boolean logout = (Boolean)request.getAttribute("logout");
+
+	if (logout == null) {
+		logout = false;
+	}
+
 	boolean isNtlmEnabled = PrefsPropsUtil.getBoolean(themeDisplay.getCompanyId(), PropsKeys.NTLM_AUTH_ENABLED, PropsValues.NTLM_AUTH_ENABLED);
 	%>
 
