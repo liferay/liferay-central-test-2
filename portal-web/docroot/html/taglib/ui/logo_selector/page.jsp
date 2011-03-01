@@ -18,16 +18,16 @@
 
 <%
 String defaultLogoURL = (String)request.getAttribute("liferay-ui:logo-selector:defaultLogoURL");
-String logoDisplaySelector = (String)request.getAttribute("liferay-ui:logo-selector:logoDisplaySelector");
-long imageId = (Long)request.getAttribute("liferay-ui:logo-selector:imageId");
 String editLogoURL = (String)request.getAttribute("liferay-ui:logo-selector:editLogoURL");
+long imageId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:logo-selector:imageId"));
+String logoDisplaySelector = (String)request.getAttribute("liferay-ui:logo-selector:logoDisplaySelector");
 boolean showBackground = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:logo-selector:showBackground"));
 
 boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 
 String imageSrc = null;
 
-if (deleteLogo || imageId == 0) {
+if (deleteLogo || (imageId == 0)) {
 	imageSrc = defaultLogoURL;
 }
 else {

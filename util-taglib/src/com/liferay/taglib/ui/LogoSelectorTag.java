@@ -19,8 +19,7 @@ import com.liferay.taglib.util.IncludeTag;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
+ * @author Julio Camarero
  */
 public class LogoSelectorTag extends IncludeTag {
 
@@ -62,7 +61,7 @@ public class LogoSelectorTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:logo-selector:editLogoURL", _editLogoURL);
 		request.setAttribute(
-			"liferay-ui:logo-selector:imageId", _imageId);
+			"liferay-ui:logo-selector:imageId", String.valueOf(_imageId));
 		request.setAttribute(
 			"liferay-ui:logo-selector:logoDisplaySelector",
 			_logoDisplaySelector);
@@ -76,7 +75,7 @@ public class LogoSelectorTag extends IncludeTag {
 
 	private String _defaultLogoURL;
 	private String _editLogoURL;
-	private long _imageId = 0;
+	private long _imageId;
 	private String _logoDisplaySelector;
 	private boolean _showBackground = true;
 
