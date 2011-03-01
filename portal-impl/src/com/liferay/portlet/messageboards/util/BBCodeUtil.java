@@ -38,45 +38,57 @@ public class BBCodeUtil {
 	static Map<String, String> listStyles = new HashMap<String, String>();
 
 	static String[][] emoticons = {
-		{"happy.gif", ":)"},
-		{"smile.gif", ":D"},
-		{"cool.gif", "B)"},
-		{"sad.gif", ":("},
-		{"tongue.gif", ":P"},
-		{"laugh.gif", ":lol:"},
-		{"kiss.gif", ":#"},
-		{"blush.gif", ":*)"},
-		{"bashful.gif", ":bashful:"},
-		{"smug.gif", ":smug:"},
-		{"blink.gif", ":blink:"},
-		{"huh.gif", ":huh:"},
-		{"mellow.gif", ":mellow:"},
-		{"unsure.gif", ":unsure:"},
-		{"mad.gif", ":mad:"},
-		{"oh_my.gif", ":O"},
-		{"roll_eyes.gif", ":rolleyes:"},
-		{"angry.gif", ":angry:"},
-		{"suspicious.gif", "8o"},
-		{"big_grin.gif", ":grin:"},
-		{"in_love.gif", "<3"},
-		{"bored.gif", ":bored:"},
-		{"closed_eyes.gif", "-_-"},
-		{"cold.gif", ":cold:"},
-		{"sleep.gif", ":sleep:"},
-		{"glare.gif", ">_>"},
-		{"darth_vader.gif", ":vader:"},
-		{"dry.gif", "<_<"},
-		{"exclamation.gif", ":what:"},
-		{"girl.gif", ":girl:"},
-		{"karate_kid.gif", ":kid:"},
-		{"ninja.gif", ":ph34r:"},
-		{"pac_man.gif", ":V"},
-		{"wacko.gif", ":wacko:"},
-		{"wink.gif", ":wink:"},
-		{"wub.gif", ":wub:"}
+		{"happy.gif", ":)", "happy"},
+		{"smile.gif", ":D", "smile"},
+		{"cool.gif", "B)", "cool"},
+		{"sad.gif", ":(", "sad"},
+		{"tongue.gif", ":P", "tongue"},
+		{"laugh.gif", ":lol:", "laugh"},
+		{"kiss.gif", ":#", "kiss"},
+		{"blush.gif", ":*)", "blush"},
+		{"bashful.gif", ":bashful:", "bashful"},
+		{"smug.gif", ":smug:", "smug"},
+		{"blink.gif", ":blink:", "blink"},
+		{"huh.gif", ":huh:", "huh"},
+		{"mellow.gif", ":mellow:", "mellow"},
+		{"unsure.gif", ":unsure:", "unsure"},
+		{"mad.gif", ":mad:", "mad"},
+		{"oh_my.gif", ":O", "oh-my-goodness"},
+		{"roll_eyes.gif", ":rolleyes:", "roll-eyes"},
+		{"angry.gif", ":angry:", "angry"},
+		{"suspicious.gif", "8o", "suspicious"},
+		{"big_grin.gif", ":grin:", "grin"},
+		{"in_love.gif", "<3", "in-love"},
+		{"bored.gif", ":bored:", "bored"},
+		{"closed_eyes.gif", "-_-", "closed-eyes"},
+		{"cold.gif", ":cold:", "cold"},
+		{"sleep.gif", ":sleep:", "sleep"},
+		{"glare.gif", ">_>", "glare"},
+		{"darth_vader.gif", ":vader:", "darth-vader"},
+		{"dry.gif", "<_<", "dry"},
+		{"exclamation.gif", ":what:", "what"},
+		{"girl.gif", ":girl:", "girl"},
+		{"karate_kid.gif", ":kid:", "karate-kid"},
+		{"ninja.gif", ":ph34r:", "ninja"},
+		{"pac_man.gif", ":V", "pac-man"},
+		{"wacko.gif", ":wacko:", "wacko"},
+		{"wink.gif", ":wink:", "wink"},
+		{"wub.gif", ":wub:", "wub"}
 	};
 
+	static String[] emoticons_descriptions = new String[emoticons.length];
+	static String[] emoticons_files = new String[emoticons.length];
+	static String[] emoticons_symbols = new String[emoticons.length];
+
 	static {
+		for (int i = 0; i < emoticons.length; i++) {
+			String[] emoticon = emoticons[i];
+
+			emoticons_descriptions[i] = emoticon[2];
+			emoticons_files[i] = emoticon[0];
+			emoticons_symbols[i] = emoticon[1];
+		}
+
 		fontSizes.put(new Integer(1), "<span style='font-size: 0.7em;'>");
 		fontSizes.put(new Integer(2), "<span style='font-size: 0.8em;'>");
 		fontSizes.put(new Integer(3), "<span style='font-size: 0.9em;'>");
@@ -105,6 +117,13 @@ public class BBCodeUtil {
 	}
 
 	public static final String[][] EMOTICONS = emoticons;
+
+	public static final String[] EMOTICONS_DESCRIPTIONS =
+		emoticons_descriptions;
+
+	public static final String[] EMOTICONS_FILES = emoticons_files;
+
+	public static final String[] EMOTICONS_SYMBOLS = emoticons_symbols;
 
 	public static String getHTML(MBMessage message) {
 		String body = message.getBody();

@@ -14,7 +14,7 @@
  */
 --%>
 
-<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+<liferay-ui:input-editor editorImpl="<%= HTML_EDITOR_WYSIWYG_IMPL_KEY %>" />
 
 <aui:script>
 	function <portlet:namespace />getHTML() {
@@ -27,5 +27,5 @@
 </aui:script>
 
 <%!
-public static final String EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.message_boards.edit_message.jsp";
+public static final String HTML_EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.message_boards.edit_message.jsp";
 %>

@@ -14,27 +14,24 @@
  */
 --%>
 
-<aui:input cssClass="lfr-textarea message-edit" label="" name="textArea" type="textarea" value="<%= GetterUtil.getString(body) %>" />
+<%
+Map<String,String> configParams = new HashMap();
+
+configParams.put("emoticonsPath", HttpUtil.encodeURL(themeDisplay.getPathThemeImages() + "/emoticons"));
+%>
+
+<liferay-ui:input-editor configParams="<%= configParams %>" editorImpl="<%= BB_CODE_EDITOR_WYSIWYG_IMPL_KEY %>" toolbarSet="bbcode" />
 
 <aui:script>
-	var <portlet:namespace />bbCode = null;
-
 	function <portlet:namespace />getHTML() {
-		return <portlet:namespace />bbCode.getHTML();
+		return window.<portlet:namespace />editor.getHTML();
+	}
+
+	function <portlet:namespace />initEditor() {
+		return "<%= UnicodeFormatter.toString(body) %>";
 	}
 </aui:script>
 
-<aui:script use="liferay-bbcode-editor">
-	<portlet:namespace />bbCode = new Liferay.Editor.bbCode(
-		{
-			textarea: '#<portlet:namespace />textArea'
-		}
-	);
-
-	<c:if test="<%= quote && Validator.isNull(body) && (curParentMessage != null) %>">
-		var respondee = "<%= UnicodeFormatter.toString(parentAuthor) %>";
-		var quote = "<%= UnicodeFormatter.toString(curParentMessage.getBody(false)) %>";
-
-		<portlet:namespace />bbCode.insertTag("quote", respondee, quote);
-	</c:if>
-</aui:script>
+<%!
+public static final String BB_CODE_EDITOR_WYSIWYG_IMPL_KEY = "editor.wysiwyg.portal-web.docroot.html.portlet.message_boards.edit_message.bb_code.jsp";
+%>

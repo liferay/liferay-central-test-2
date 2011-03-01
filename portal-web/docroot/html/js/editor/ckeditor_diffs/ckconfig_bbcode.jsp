@@ -14,101 +14,76 @@
  */
 --%>
 
+<%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
 
 <%
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
+String emoticonsPath = HttpUtil.decodeURL(ParamUtil.getString(request, "emoticonsPath"));
 String languageId = ParamUtil.getString(request, "languageId");
 %>
 
-CKEDITOR.addStylesSet(
-	'liferayStyles',
-	[
+CKEDITOR.config.height = 265;
 
-	// Block Styles
+CKEDITOR.config.removePlugins = [
+	'elementspath',
+	'save',
+	'bidi',
+	'div',
+	'flash',
+	'forms',
+	'indent',
+	'keystrokes',
+	'link',
+	'menu',
+	'maximize',
+	'newpage',
+	'pagebreak',
+	'preview',
+	'print',
+	'save',
+	'scayt',
+	'showblocks',
+	'templates',
+	'wsc'
+].join(',');
 
-	{name: 'Normal', element: 'p'},
-	{name: 'Heading 1', element: 'h1'},
-	{name: 'Heading 2', element: 'h2'},
-	{name: 'Heading 3', element: 'h3'},
-	{name: 'Heading 4', element: 'h4'},
-
-	// Special classes
-
-	{name: 'Preformatted Text', element:'pre'},
-	{name: 'Cited Work', element:'cite'},
-	{name: 'Computer Code', element:'code'},
-
-	// Custom styles
-
-	{name: 'Info Message', element: 'div', attributes: {'class': 'portlet-msg-info'}},
-	{name: 'Alert Message', element: 'div', attributes: {'class': 'portlet-msg-alert'}},
-	{name: 'Error Message', element: 'div', attributes: {'class': 'portlet-msg-error'}}
-	]
-);
+CKEDITOR.config.toolbar_bbcode = [
+	['Bold', 'Italic', 'Underline', 'Strike', '-', 'Link', 'Unlink'],
+	['Image', 'Smiley', '-', 'TextColor', '-', 'NumberedList', 'BulletedList'],
+	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Blockquote'],
+	'/',
+	['Font', 'FontSize', '-', 'Format', '-', 'Table', '-', 'Undo', 'Redo', '-', 'Source']
+];
 
 CKEDITOR.config.bodyClass = 'html-editor <%= cssClasses %>';
 
-CKEDITOR.config.contentsCss = '<%= HtmlUtil.escape(cssPath) %>/main.css';
+CKEDITOR.config.extraPlugins = 'bbcode,wikilink';
 
-CKEDITOR.config.entities = false;
+CKEDITOR.config.filebrowserBrowseUrl = '';
 
-CKEDITOR.config.height = 265;
+CKEDITOR.config.filebrowserImageBrowseLinkUrl = '';
+
+CKEDITOR.config.filebrowserImageBrowseUrl = '';
+
+CKEDITOR.config.filebrowserImageUploadUrl = '';
+
+CKEDITOR.config.filebrowserUploadUrl = '';
+
+CKEDITOR.config.fontSize_sizes = '10/10px;12/12px;16/16px;18/18px;24/24px;32/32px;48/48px';
+
+CKEDITOR.config.format_tags = 'p;h1;h2;h3;h4;h5;h6;pre';
 
 CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
 
-CKEDITOR.config.resize_enabled = false;
+CKEDITOR.config.smiley_descriptions = ['<%= StringUtil.merge(BBCodeUtil.EMOTICONS_DESCRIPTIONS, "','") %>'];
 
-CKEDITOR.config.stylesCombo_stylesSet = 'liferayStyles';
+CKEDITOR.config.smiley_images = ['<%= StringUtil.merge(BBCodeUtil.EMOTICONS_FILES, "','") %>'];
 
-CKEDITOR.config.toolbar_editInPlace = [
-	['Styles'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['Subscript', 'Superscript', 'SpecialChar'],
-	['Undo', 'Redo'],
-	['SpellChecker', 'Scayt'],
-	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'], ['Source', 'RemoveFormat'],
-];
+CKEDITOR.config.smiley_path = '<%= emoticonsPath %>' + '/';
 
-CKEDITOR.config.toolbar_email = [
-	['FontSize', 'TextColor', 'BGColor', '-', 'Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-	['SpellChecker', 'Scayt'],
-	'/',
-	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
-	['Source'],
-	['Link', 'Unlink'],
-	['Image']
-];
-
-CKEDITOR.config.toolbar_liferay = [
-	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['Subscript', 'Superscript'],
-	'/',
-	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
-	['Find', 'Replace', 'SpellChecker', 'Scayt'],
-	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
-	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-	'/',
-	['Source'],
-	['Link', 'Unlink', 'Anchor'],
-	['Image', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar']
-];
-
-CKEDITOR.config.toolbar_liferayArticle = [
-	['Styles', 'FontSize', '-', 'TextColor', 'BGColor'],
-	['Bold', 'Italic', 'Underline', 'StrikeThrough'],
-	['Subscript', 'Superscript'],
-	'/',
-	['Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'SelectAll', 'RemoveFormat'],
-	['Find', 'Replace', 'SpellChecker', 'Scayt'],
-	['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
-	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-	'/',
-	['Source'],
-	['Link', 'Unlink', 'Anchor'],
-	['Image', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar', 'LiferayPageBreak']
-];
+CKEDITOR.config.smiley_symbols = ['<%= StringUtil.merge(BBCodeUtil.EMOTICONS_SYMBOLS, "','") %>'];
