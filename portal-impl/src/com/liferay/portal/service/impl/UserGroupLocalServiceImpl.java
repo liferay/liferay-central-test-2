@@ -382,6 +382,9 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			new String[] {PortletDataHandlerKeys.
 				LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME});
 		parameterMap.put(
+			PortletDataHandlerKeys.LAYOUT_THEME_SETTINGS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS,
 			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
