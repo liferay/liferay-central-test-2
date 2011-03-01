@@ -61,7 +61,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 	<div class="taglib-page-iterator">
 </c:if>
 
-<c:if test='<%= type.equals("regular") %>'>
+<c:if test='<%= type.equals("more") || type.equals("regular") %>'>
 	<%@ include file="/html/taglib/ui/page_iterator/showing_x_results.jspf" %>
 </c:if>
 
