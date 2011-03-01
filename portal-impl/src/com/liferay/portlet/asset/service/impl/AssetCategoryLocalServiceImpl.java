@@ -366,6 +366,12 @@ public class AssetCategoryLocalServiceImpl
 		return category;
 	}
 
+	public void rebuildTree(long groupId, boolean force)
+		throws SystemException {
+
+		assetCategoryPersistence.rebuildTree(groupId, force);
+	}
+
 	public List<AssetCategory> search(
 			long groupId, String name, String[] categoryProperties, int start,
 			int end)

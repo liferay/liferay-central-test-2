@@ -26,6 +26,7 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetVocabulary;
+import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -394,6 +395,31 @@ public class UpgradeAsset extends UpgradeProcess {
 		updateAssetTags();
 	}
 
+	protected void rebuildTree() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select distinct groupId from AssetCategory where " +
+					"(leftCategoryId is null) or (rightCategoryid is null)");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
+
+				AssetCategoryLocalServiceUtil.rebuildTree(groupId, true);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	protected void updateAssetCategories() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -430,6 +456,8 @@ public class UpgradeAsset extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+
+		rebuildTree();
 	}
 
 	protected void updateAssetEntries() throws Exception {
