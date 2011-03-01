@@ -1560,10 +1560,11 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
+	private static Set<String> _defaultFilterSet = new HashSet<String>();
 	private static ThreadLocal<Session> _sessionThreadLocal =
 		new AutoResetThreadLocal<Session>(CMISRepository.class + "._session");
 
-	private static final Set<String> _defaultFilterSet = new HashSet<String>();
+	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
 
 	static {
 
@@ -1593,7 +1594,5 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		_defaultFilterSet.add(PropertyIds.PARENT_ID);
 		_defaultFilterSet.add(PropertyIds.PATH);
 	}
-
-	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
 
 }
