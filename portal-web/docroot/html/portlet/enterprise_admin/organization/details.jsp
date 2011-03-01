@@ -158,8 +158,8 @@ if (organization != null) {
 
 			<liferay-ui:logo-selector
 				defaultLogoURL='<%= themeDisplay.getPathImage() + "/organization_logo?img_id=0" %>'
-				imageId="<%= logoId %>"
 				editLogoURL="<%= editOrganizationLogoURL %>"
+				imageId="<%= logoId %>"
 				logoDisplaySelector=".organization-logo"
 				showBackground="<%= false %>"
 			/>

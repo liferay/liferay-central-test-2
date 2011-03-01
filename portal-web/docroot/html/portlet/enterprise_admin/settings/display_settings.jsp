@@ -70,8 +70,8 @@ String defaultControlPanelThemeId = PrefsPropsUtil.getString(company.getCompanyI
 
 	<liferay-ui:logo-selector
 		defaultLogoURL='<%= themeDisplay.getPathImage() + "/company_logo?img_id=0" %>'
-		imageId="<%= company.getLogoId() %>"
 		editLogoURL="<%= editCompanyLogoURL %>"
+		imageId="<%= company.getLogoId() %>"
 		logoDisplaySelector=".company-logo"
 	/>
 </aui:fieldset>

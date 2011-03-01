@@ -96,6 +96,8 @@ try {
 catch (NoSuchLayoutException nsle) {
 }
 
+LayoutSet selLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
+
 Layout refererLayout = null;
 
 try {
@@ -221,8 +223,6 @@ if (!portletName.equals(PortletKeys.GROUP_PAGES) && !portletName.equals(PortletK
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, pagesName), portletURL.toString());
 	}
 }
-
-LayoutSet selLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, privateLayout);
 
 request.setAttribute("edit_pages.jsp-group", group);
 request.setAttribute("edit_pages.jsp-selGroup", selGroup);

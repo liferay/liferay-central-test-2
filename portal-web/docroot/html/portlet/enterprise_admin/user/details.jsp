@@ -121,9 +121,9 @@ boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 			</portlet:renderURL>
 
 			<liferay-ui:logo-selector
-				defaultLogoURL='<%= UserConstants.getPortraitURL(themeDisplay.getPathImage(), selUser.isMale(), 0) %>'
-				imageId="<%= selUser.getPortraitId() %>"
+				defaultLogoURL="<%= UserConstants.getPortraitURL(themeDisplay.getPathImage(), selUser.isMale(), 0) %>"
 				editLogoURL="<%= editUserPortraitURL %>"
+				imageId="<%= selUser.getPortraitId() %>"
 				logoDisplaySelector=".user-logo"
 				showBackground="<%= false %>"
 			/>
