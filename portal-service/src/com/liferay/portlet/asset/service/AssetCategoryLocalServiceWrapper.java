@@ -123,7 +123,7 @@ public class AssetCategoryLocalServiceWrapper
 	* @param dynamicQuery the dynamic query to search with
 	* @param start the lower bound of the range of model instances to return
 	* @param end the upper bound of the range of model instances to return (not inclusive)
-	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @param orderByComparator the comparator to order the results by
 	* @return the ordered range of matching rows
 	* @throws SystemException if a system exception occurred
 	*/
@@ -398,6 +398,11 @@ public class AssetCategoryLocalServiceWrapper
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetCategoryLocalService.moveCategory(categoryId,
 			parentCategoryId, vocabularyId, serviceContext);
+	}
+
+	public void rebuildTree(long groupId, boolean force)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_assetCategoryLocalService.rebuildTree(groupId, force);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> search(
