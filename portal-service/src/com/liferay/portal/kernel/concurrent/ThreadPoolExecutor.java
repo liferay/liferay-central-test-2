@@ -44,17 +44,17 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 
 	public ThreadPoolExecutor(
 		int corePoolSize, int maxPoolSize, long keepAliveTime,
-		TimeUnit timeunit, boolean allowCoreThreadTimeOut, int maxQueueSize) {
+		TimeUnit timeUnit, boolean allowCoreThreadTimeout, int maxQueueSize) {
 
 		this(
-			corePoolSize, maxPoolSize, keepAliveTime, timeunit,
-			allowCoreThreadTimeOut, maxQueueSize, new AbortPolicy(),
+			corePoolSize, maxPoolSize, keepAliveTime, timeUnit,
+			allowCoreThreadTimeout, maxQueueSize, new AbortPolicy(),
 			Executors.defaultThreadFactory(), new ThreadPoolHandlerAdapter());
 	}
 
 	public ThreadPoolExecutor(
 		int corePoolSize, int maxPoolSize, long keepAliveTime,
-		TimeUnit timeunit, boolean allowCoreThreadTimeOut, int maxQueueSize,
+		TimeUnit timeUnit, boolean allowCoreThreadTimeout, int maxQueueSize,
 		RejectedExecutionHandler rejectedExecutionHandler,
 		ThreadFactory threadFactory, ThreadPoolHandler threadPoolHandler) {
 
@@ -73,8 +73,8 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 
 		_corePoolSize = corePoolSize;
 		_maxPoolSize = maxPoolSize;
-		_keepAliveTime = timeunit.toNanos(keepAliveTime);
-		_allowCoreThreadTimeOut = allowCoreThreadTimeOut;
+		_keepAliveTime = timeUnit.toNanos(keepAliveTime);
+		_allowCoreThreadTimeout = allowCoreThreadTimeout;
 		_rejectedExecutionHandler = rejectedExecutionHandler;
 		_threadFactory = threadFactory;
 		_threadPoolHandler = threadPoolHandler;
@@ -281,8 +281,8 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		return _threadPoolHandler;
 	}
 
-	public boolean isAllowCoreThreadTimeOut() {
-		return _allowCoreThreadTimeOut;
+	public boolean isAllowCoreThreadTimeout() {
+		return _allowCoreThreadTimeout;
 	}
 
 	public boolean isShutdown() {
@@ -312,8 +312,8 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		}
 	}
 
-	public void setAllowCoreThreadTimeout(boolean allowCoreThreadTimeOut) {
-		_allowCoreThreadTimeOut = allowCoreThreadTimeOut;
+	public void setAllowCoreThreadTimeout(boolean allowCoreThreadTimeout) {
+		_allowCoreThreadTimeout = allowCoreThreadTimeout;
 	}
 
 	public void setKeepAliveTime(long keepAliveTime, TimeUnit timeUnit) {
@@ -470,7 +470,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 					runnable = _taskQueue.poll();
 				}
 				else if ((_poolSize > _corePoolSize) ||
-						 _allowCoreThreadTimeOut) {
+						 _allowCoreThreadTimeout) {
 
 					runnable = _taskQueue.poll(
 						_keepAliveTime, TimeUnit.NANOSECONDS);
@@ -488,9 +488,9 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 				try {
 					if ((_runState >= _STOP) ||
 						((_runState >= _SHUTDOWN) && _taskQueue.isEmpty()) ||
-						(_allowCoreThreadTimeOut &&
+						(_allowCoreThreadTimeout &&
 						 ((_poolSize > 1) || _taskQueue.isEmpty())) ||
-						(!_allowCoreThreadTimeOut &&
+						(!_allowCoreThreadTimeout &&
 						 (_poolSize > _corePoolSize))) {
 
 						_completedTaskCount +=
@@ -545,7 +545,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 
 	private static final int _TERMINATED = 3;
 
-	private volatile boolean _allowCoreThreadTimeOut;
+	private volatile boolean _allowCoreThreadTimeout;
 	private long _completedTaskCount;
 	private volatile int _corePoolSize;
 	private volatile long _keepAliveTime;

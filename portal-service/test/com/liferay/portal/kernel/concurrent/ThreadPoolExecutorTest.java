@@ -596,7 +596,7 @@ public class ThreadPoolExecutorTest extends TestCase {
 		assertEquals(
 			60 * 1000000000L,
 			threadPoolExecutor.getKeepAliveTime(TimeUnit.NANOSECONDS));
-		assertEquals(false, threadPoolExecutor.isAllowCoreThreadTimeOut());
+		assertEquals(false, threadPoolExecutor.isAllowCoreThreadTimeout());
 		assertEquals(
 			Integer.MAX_VALUE,
 			threadPoolExecutor.getRemainingTaskQueueCapacity());
@@ -624,7 +624,7 @@ public class ThreadPoolExecutorTest extends TestCase {
 		assertEquals(
 			TestUtil.KEEPALIVE_TIME * 1000000,
 			threadPoolExecutor.getKeepAliveTime(TimeUnit.NANOSECONDS));
-		assertEquals(true, threadPoolExecutor.isAllowCoreThreadTimeOut());
+		assertEquals(true, threadPoolExecutor.isAllowCoreThreadTimeout());
 		assertEquals(3, threadPoolExecutor.getRemainingTaskQueueCapacity());
 
 		RejectedExecutionHandler rejectedExecutionHandler =
@@ -658,7 +658,7 @@ public class ThreadPoolExecutorTest extends TestCase {
 		assertEquals(
 			TestUtil.KEEPALIVE_TIME * 1000000,
 			threadPoolExecutor.getKeepAliveTime(TimeUnit.NANOSECONDS));
-		assertEquals(true, threadPoolExecutor.isAllowCoreThreadTimeOut());
+		assertEquals(true, threadPoolExecutor.isAllowCoreThreadTimeout());
 		assertEquals(3, threadPoolExecutor.getRemainingTaskQueueCapacity());
 		assertSame(
 			rejectedExecutionHandler,
