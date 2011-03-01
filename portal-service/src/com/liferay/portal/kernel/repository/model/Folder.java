@@ -53,10 +53,6 @@ public interface Folder extends RepositoryModel<Folder> {
 
 	public long getParentFolderId();
 
-	public String getPath() throws PortalException, SystemException;
-
-	public String[] getPathArray() throws PortalException, SystemException;
-
 	public long getRepositoryId();
 
 	public long getUserId();

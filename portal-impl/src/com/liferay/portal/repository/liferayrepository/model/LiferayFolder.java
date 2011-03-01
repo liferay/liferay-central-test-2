@@ -111,14 +111,6 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return _dlFolder.getParentFolderId();
 	}
 
-	public String getPath() throws PortalException, SystemException {
-		return _dlFolder.getPath();
-	}
-
-	public String[] getPathArray() throws PortalException, SystemException {
-		return _dlFolder.getPathArray();
-	}
-
 	public long getPrimaryKey() {
 		return _dlFolder.getPrimaryKey();
 	}

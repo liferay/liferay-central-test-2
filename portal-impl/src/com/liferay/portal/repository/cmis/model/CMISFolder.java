@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
@@ -125,10 +124,7 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public String getName() {
-		List<org.apache.chemistry.opencmis.client.api.Folder>
-			parentCmisFolders = _cmisFolder.getParents();
-
-		if (parentCmisFolders.isEmpty()) {
+		if (_cmisFolder.isRootFolder()) {
 			try {
 				DLFolder dlFolder =
 					DLRepositoryLocalServiceUtil.getFolderByRepositoryId(
@@ -145,10 +141,7 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public Folder getParentFolder() throws PortalException, SystemException {
-		org.apache.chemistry.opencmis.client.api.Folder parentCmisFolder =
-			_cmisFolder.getFolderParent();
-
-		if (parentCmisFolder == null) {
+		if (_cmisFolder.isRootFolder()) {
 			DLFolder dlFolder =
 				DLRepositoryLocalServiceUtil.getFolderByRepositoryId(
 					getRepositoryId());
@@ -163,6 +156,9 @@ public class CMISFolder extends CMISModel implements Folder {
 			}
 		}
 		else {
+			org.apache.chemistry.opencmis.client.api.Folder parentCmisFolder =
+				_cmisFolder.getFolderParent();
+
 			return CMISRepositoryLocalServiceUtil.toFolder(
 				getRepositoryId(), parentCmisFolder);
 		}
@@ -181,36 +177,6 @@ public class CMISFolder extends CMISModel implements Folder {
 		}
 
 		return DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-	}
-
-	public String getPath() {
-		StringBuilder sb = new StringBuilder();
-
-		try {
-			Folder folder = this;
-
-			while (folder != null) {
-				sb.insert(0, folder.getName());
-				sb.insert(0, StringPool.SLASH);
-
-				folder = folder.getParentFolder();
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		return sb.toString();
-	}
-
-	public String[] getPathArray() {
-		String path = getPath();
-
-		// Remove leading /
-
-		path = path.substring(1, path.length());
-
-		return StringUtil.split(path, StringPool.SLASH);
 	}
 
 	public long getPrimaryKey() {

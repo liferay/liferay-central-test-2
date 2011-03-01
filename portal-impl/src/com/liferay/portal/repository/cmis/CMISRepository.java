@@ -63,9 +63,11 @@ import java.math.BigInteger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Document;
@@ -1140,9 +1142,12 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		OperationContext operationContext = new OperationContextImpl();
 
+		operationContext.setFilter(_defaultFilterSet);
 		operationContext.setOrderBy("cmis:name ASC");
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
+			operationContext.setMaxItemsPerPage(1000);
+
 			ItemIterable<CmisObject> cmisObjects = cmisFolder.getChildren(
 				operationContext);
 
@@ -1402,13 +1407,19 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected void processException(Exception e) throws PortalException {
-		if (e instanceof CmisRuntimeException &&
-			e.getMessage().contains("authorized")) {
+		if ((e instanceof CmisRuntimeException &&
+			 e.getMessage().contains("authorized")) ||
+			(e instanceof CmisPermissionDeniedException)) {
 
-			throw new PrincipalException(e);
-		}
-		else if (e instanceof CmisPermissionDeniedException) {
-			throw new PrincipalException(e);
+			String message = e.getMessage();
+
+			try {
+				message = "Unable to login with user " + getLogin();
+			}
+			catch (Exception e2) {
+			}
+
+			throw new PrincipalException(message, e);
 		}
 	}
 
@@ -1532,6 +1543,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			RepositoryEntryUtil.update(repositoryEntry, false);
 		}
 	}
+
 	protected void validateTitle(Session session, long folderId, String title)
 		throws PortalException, SystemException {
 
@@ -1550,6 +1562,37 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 	private static ThreadLocal<Session> _sessionThreadLocal =
 		new AutoResetThreadLocal<Session>(CMISRepository.class + "._session");
+
+	private static final Set<String> _defaultFilterSet = new HashSet<String>();
+
+	static {
+
+		// Base
+
+		_defaultFilterSet.add(PropertyIds.BASE_TYPE_ID);
+		_defaultFilterSet.add(PropertyIds.CREATED_BY);
+		_defaultFilterSet.add(PropertyIds.CREATION_DATE);
+		_defaultFilterSet.add(PropertyIds.LAST_MODIFIED_BY);
+		_defaultFilterSet.add(PropertyIds.LAST_MODIFICATION_DATE);
+		_defaultFilterSet.add(PropertyIds.NAME);
+		_defaultFilterSet.add(PropertyIds.OBJECT_ID);
+		_defaultFilterSet.add(PropertyIds.OBJECT_TYPE_ID);
+
+		// Document
+
+		_defaultFilterSet.add(PropertyIds.CONTENT_STREAM_LENGTH);
+		_defaultFilterSet.add(PropertyIds.CONTENT_STREAM_MIME_TYPE);
+		_defaultFilterSet.add(PropertyIds.IS_VERSION_SERIES_CHECKED_OUT);
+		_defaultFilterSet.add(PropertyIds.VERSION_LABEL);
+		_defaultFilterSet.add(PropertyIds.VERSION_SERIES_CHECKED_OUT_BY);
+		_defaultFilterSet.add(PropertyIds.VERSION_SERIES_CHECKED_OUT_ID);
+		_defaultFilterSet.add(PropertyIds.VERSION_SERIES_ID);
+
+		// Folder
+
+		_defaultFilterSet.add(PropertyIds.PARENT_ID);
+		_defaultFilterSet.add(PropertyIds.PATH);
+	}
 
 	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
 
