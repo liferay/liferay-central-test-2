@@ -22,6 +22,7 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
