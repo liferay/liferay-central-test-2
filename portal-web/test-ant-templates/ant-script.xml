@@ -3,7 +3,7 @@
 <project name="portal-test-${test.ant.script.command}" basedir="../../." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="../../build-test.xml" />
 
-	<target name="test-${test.ant.script.command}-glassfish-mysql-trunk">
+	<target name="test-${test.ant.script.command}-glassfish-mysql">
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -16,7 +16,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-jboss-mysql-trunk">
+	<target name="test-${test.ant.script.command}-jboss-mysql">
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -29,7 +29,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-tomcat-db2-trunk">
+	<target name="test-${test.ant.script.command}-tomcat-db2">
 		<antcall target="prepare-db2">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -42,7 +42,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-tomcat-hsql-trunk">
+	<target name="test-${test.ant.script.command}-tomcat-hsql">
 		<antcall target="prepare-hsql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -55,7 +55,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-tomcat-mysql-trunk">
+	<target name="test-${test.ant.script.command}-tomcat-mysql">
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -68,7 +68,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-tomcat-oracle-trunk">
+	<target name="test-${test.ant.script.command}-tomcat-oracle">
 		<antcall target="prepare-oracle">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -81,7 +81,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-tomcat-postgresql-trunk">
+	<target name="test-${test.ant.script.command}-tomcat-postgresql">
 		<antcall target="prepare-postgresql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -94,7 +94,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-tomcat-sql-server-trunk">
+	<target name="test-${test.ant.script.command}-tomcat-sql-server">
 		<antcall target="prepare-sql-server">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -107,7 +107,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-tomcat-sybase-trunk">
+	<target name="test-${test.ant.script.command}-tomcat-sybase">
 		<antcall target="prepare-sybase">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -120,7 +120,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-weblogic-10.3-mysql-trunk">
+	<target name="test-${test.ant.script.command}-weblogic-10.3-mysql">
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -130,7 +130,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-websphere-6.1-mysql-trunk">
+	<target name="test-${test.ant.script.command}-websphere-6.1-mysql">
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -140,7 +140,7 @@
 		</ant>
 	</target>
 
-	<target name="test-${test.ant.script.command}-websphere-7.0-mysql-trunk">
+	<target name="test-${test.ant.script.command}-websphere-7.0-mysql">
 		<antcall target="prepare-mysql">
 			${test.ant.script.file.properties}
 		</antcall>

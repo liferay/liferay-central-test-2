@@ -1,5 +1,5 @@
 
-	<target name="test-db-upgrade-5.2.8-smoke-tomcat-${test.ant.script.db}-trunk">
+	<target name="test-db-upgrade-5.2.8-smoke-tomcat-${test.ant.script.db}">
 		<antcall target="prepare-db-${test.ant.script.db}-common">
 			<param name="custom.properties" value="upgrade.processes=\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_5_2_8_to_6_0_5,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_0_6,\$${line.separator}com.liferay.portal.upgrade.UpgradeProcess_6_1_0" />
 			<param name="skip.prepare-bundle" value="true" />
