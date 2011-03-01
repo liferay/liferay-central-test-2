@@ -20,13 +20,13 @@ import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.mail.service.CyrusService;
 import com.liferay.mail.service.persistence.CyrusUserUtil;
 import com.liferay.mail.service.persistence.CyrusVirtualUtil;
+import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 
 /**
  * @author Alexander Chow
  */
-public class CyrusServiceImpl implements CyrusService, ServiceBeanIdentifier {
+public class CyrusServiceImpl implements CyrusService, IdentifiableBean {
 
 	public void addUser(long userId, String emailAddress, String password)
 		throws SystemException {
@@ -65,12 +65,12 @@ public class CyrusServiceImpl implements CyrusService, ServiceBeanIdentifier {
 		CyrusVirtualUtil.removeByUserId(userId);
 	}
 
-	public String getIdentifier() {
-		return _identifier;
+	public String getBeanIdentifier() {
+		return _beanIdentifier;
 	}
 
-	public void setIdentifier(String identifier) {
-		_identifier = identifier;
+	public void setBeanIdentifier(String beanIdentifier) {
+		_beanIdentifier = beanIdentifier;
 	}
 
 	public void updateEmailAddress(
@@ -101,6 +101,6 @@ public class CyrusServiceImpl implements CyrusService, ServiceBeanIdentifier {
 		CyrusUserUtil.update(user);
 	}
 
-	private String _identifier;
+	private String _beanIdentifier;
 
 }

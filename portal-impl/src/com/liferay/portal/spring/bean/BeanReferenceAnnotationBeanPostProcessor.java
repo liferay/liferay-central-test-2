@@ -14,9 +14,10 @@
 
 package com.liferay.portal.spring.bean;
 
-import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
+import com.liferay.portal.cluster.ClusterableAdvice;
 import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -51,13 +52,18 @@ public class BeanReferenceAnnotationBeanPostProcessor
 	public Object postProcessAfterInitialization(Object bean, String beanName)
 		throws BeansException {
 
-		if (bean instanceof ServiceBeanIdentifier) {
-			((ServiceBeanIdentifier)bean).setIdentifier(beanName);
+		if (bean instanceof IdentifiableBean) {
+			IdentifiableBean identifiableBean = (IdentifiableBean)bean;
+
+			identifiableBean.setBeanIdentifier(beanName);
 		}
 		else if (beanName.endsWith("Service")){
-			_log.error("Service bean " + beanName + " does not implement " +
-				ServiceBeanIdentifier.class.getName() + " interface. This "
-				+ "will make it unable to be invoked across cluster.");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					beanName + " should implement " +
+						IdentifiableBean.class.getName() +
+							" for " + ClusterableAdvice.class.getName());
+			}
 		}
 
 		return bean;
@@ -160,12 +166,12 @@ public class BeanReferenceAnnotationBeanPostProcessor
 		_autoInject(targetBean, targetBeanName, beanClass.getSuperclass());
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		BeanReferenceAnnotationBeanPostProcessor.class);
-
 	private static final String _JAVA_LANG_OBJECT = "java.lang.Object";
 
 	private static final String _ORG_SPRINGFRAMEWORK = "org.springframework";
+
+	private static Log _log = LogFactoryUtil.getLog(
+		BeanReferenceAnnotationBeanPostProcessor.class);
 
 	private BeanFactory _beanFactory;
 	private Map<String, Object> _beans = new HashMap<String, Object>();

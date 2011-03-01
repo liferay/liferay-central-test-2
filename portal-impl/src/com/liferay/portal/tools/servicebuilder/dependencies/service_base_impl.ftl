@@ -1,8 +1,8 @@
 package ${packagePath}.service.base;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import ${beanLocatorUtil};
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
@@ -63,7 +63,7 @@ import javax.sql.DataSource;
  * @see ${packagePath}.service.${entity.name}LocalServiceUtil
  * @generated
  */
-	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService, ServiceBeanIdentifier {
+	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService, IdentifiableBean {
 
 		/*
 		 * NOTE FOR DEVELOPERS:
@@ -82,7 +82,7 @@ import javax.sql.DataSource;
  * @see ${packagePath}.service.${entity.name}ServiceUtil
  * @generated
  */
-	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service, ServiceBeanIdentifier {
+	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service, IdentifiableBean {
 
 		/*
 		 * NOTE FOR DEVELOPERS:
@@ -415,21 +415,21 @@ import javax.sql.DataSource;
 </#list>
 
 /**
- * Gets the Spring bean id for this ServiceBean.
+ * Gets the Spring bean ID for this bean.
  *
- * @return the Spring bean id for this ServiceBean
+ * @return the Spring bean ID for this bean
  */
-public String getIdentifier() {
-	return identifier;
+public String getBeanIdentifier() {
+	return _beanIdentifier;
 }
 
 /**
- * Sets the Spring bean id for this ServiceBean.
+ * Sets the Spring bean ID for this bean.
  *
- * @param identifier the Spring bean id for this ServiceBean
+ * @param beanIdentifier the Spring bean ID for this bean
  */
-public void setIdentifier(String identifier) {
-	this.identifier = identifier;
+public void setBeanIdentifier(String beanIdentifier) {
+	_beanIdentifier = beanIdentifier;
 }
 
 /**
@@ -476,5 +476,6 @@ protected void runSQL(String sql) throws SystemException {
 	</#if>
 </#list>
 
-	protected String identifier;
+	private String _beanIdentifier;
+
 }

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.cluster;
 
+import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.cluster.Clusterable;
@@ -22,7 +23,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
-import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -51,17 +51,16 @@ public class ClusterableAdvice
 			return;
 		}
 
-		Object targetServiceBean = methodInvocation.getThis();
-		if (!(targetServiceBean instanceof ServiceBeanIdentifier)) {
-			_log.error("ServiceBean " + targetServiceBean.getClass().getName() +
-				" does not implement interface " +
-				ServiceBeanIdentifier.class.getName() +
-				", unable to proceed this request accross cluster.");
+		Object targetBean = methodInvocation.getThis();
+
+		if (!(targetBean instanceof IdentifiableBean)) {
+			_log.error(
+				"Not clustering calls for " + targetBean.getClass().getName() +
+					" because it does not implement " +
+						IdentifiableBean.class.getName());
+
 			return;
 		}
-
-		String serviceBeanIdentifier =
-			((ServiceBeanIdentifier)targetServiceBean).getIdentifier();
 
 		Method method = methodTargetClassKey.getMethod();
 
@@ -71,7 +70,10 @@ public class ClusterableAdvice
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
 			methodHandler, true);
 
-		clusterRequest.setServiceBeanIdentifier(serviceBeanIdentifier);
+		IdentifiableBean identifiableBean = (IdentifiableBean)targetBean;
+
+		clusterRequest.setBeanIdentifier(identifiableBean.getBeanIdentifier());
+
 		clusterRequest.setServletContextName(_servletContextName);
 
 		ClusterExecutorUtil.execute(clusterRequest);

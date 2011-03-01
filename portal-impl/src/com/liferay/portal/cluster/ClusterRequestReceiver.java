@@ -117,17 +117,18 @@ public class ClusterRequestReceiver extends BaseReceiver {
 	}
 
 	protected Object invoke(
-			String servletContextName, String serviceBeanIdentifier,
+			String servletContextName, String beanIdentifier,
 			MethodHandler methodHandler)
 		throws Exception {
 
 		if (servletContextName == null) {
-			if (Validator.isNull(serviceBeanIdentifier)) {
+			if (Validator.isNull(beanIdentifier)) {
 				return methodHandler.invoke(true);
 			}
 			else {
-				return methodHandler.invoke(
-					PortalBeanLocatorUtil.locate(serviceBeanIdentifier));
+				Object bean = PortalBeanLocatorUtil.locate(beanIdentifier);
+
+				return methodHandler.invoke(bean);
 			}
 		}
 
@@ -142,13 +143,14 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 			currentThread.setContextClassLoader(classLoader);
 
-			if (Validator.isNull(serviceBeanIdentifier)) {
+			if (Validator.isNull(beanIdentifier)) {
 				return methodHandler.invoke(true);
 			}
 			else {
-				return methodHandler.invoke(
-					PortletBeanLocatorUtil.locate(
-						servletContextName, serviceBeanIdentifier));
+				Object bean = PortletBeanLocatorUtil.locate(
+					servletContextName, beanIdentifier);
+
+				return methodHandler.invoke(bean);
 			}
 		}
 		catch(Exception e) {
@@ -245,8 +247,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 					Object returnValue = invoke(
 						clusterRequest.getServletContextName(),
-						clusterRequest.getServiceBeanIdentifier(),
-						methodHandler);
+						clusterRequest.getBeanIdentifier(), methodHandler);
 
 					if (returnValue instanceof Serializable) {
 						clusterNodeResponse.setResult(returnValue);

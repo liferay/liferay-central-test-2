@@ -57,7 +57,7 @@ public interface ${entity.name}${sessionTypeName}Service {
 				@SuppressWarnings("rawtypes")
 			</#if>
 
-			<#if serviceBuilder.isServiceReadOnlyMethod(method, entity.txRequiredList) && method.name != "getIdentifier">
+			<#if serviceBuilder.isServiceReadOnlyMethod(method, entity.txRequiredList) && (method.name != "getBeanIdentifier")>
 				@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 			</#if>
 			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name}(

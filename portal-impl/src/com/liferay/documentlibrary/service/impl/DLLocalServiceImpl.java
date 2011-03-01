@@ -21,6 +21,7 @@ import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.util.Hook;
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
@@ -42,7 +43,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -60,7 +60,7 @@ import java.util.Date;
  * @author Alexander Chow
  */
 public class DLLocalServiceImpl
-	implements DLLocalService, ServiceBeanIdentifier {
+	implements DLLocalService, IdentifiableBean {
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
@@ -140,6 +140,10 @@ public class DLLocalServiceImpl
 			companyId, portletId, repositoryId, fileName, versionNumber);
 	}
 
+	public String getBeanIdentifier() {
+		return _beanIdentifier;
+	}
+
 	public byte[] getFile(long companyId, long repositoryId, String fileName)
 		throws PortalException, SystemException {
 
@@ -182,10 +186,6 @@ public class DLLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return hook.getFileSize(companyId, repositoryId, fileName);
-	}
-
-	public String getIdentifier() {
-		return identifier;
 	}
 
 	public boolean hasFile(
@@ -278,8 +278,8 @@ public class DLLocalServiceImpl
 		}
 	}
 
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
+	public void setBeanIdentifier(String beanIdentifier) {
+		_beanIdentifier = beanIdentifier;
 	}
 
 	public void updateFile(
@@ -496,6 +496,6 @@ public class DLLocalServiceImpl
 	@BeanReference(type = Hook.class)
 	protected Hook hook;
 
-	protected String identifier;
+	private String _beanIdentifier;
 
 }

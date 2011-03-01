@@ -17,10 +17,10 @@ package com.liferay.portal.kernel.bean;
 /**
  * @author Shuyang Zhou
  */
-public interface ServiceBeanIdentifier {
+public interface IdentifiableBean {
 
-	public String getIdentifier();
+	public String getBeanIdentifier();
 
-	public void setIdentifier(String identifier);
+	public void setBeanIdentifier(String beanIdentifier);
 
 }

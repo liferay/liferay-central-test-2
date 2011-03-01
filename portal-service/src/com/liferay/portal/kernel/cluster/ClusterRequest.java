@@ -88,6 +88,10 @@ public class ClusterRequest implements Serializable {
 		_targetClusterNodeIds.addAll(Arrays.asList(targetClusterNodeIds));
 	}
 
+	public String getBeanIdentifier() {
+		return _beanIdentifier;
+	}
+
 	public ClusterMessageType getClusterMessageType() {
 		return _clusterMessageType;
 	}
@@ -98,10 +102,6 @@ public class ClusterRequest implements Serializable {
 
 	public ClusterNode getOriginatingClusterNode() {
 		return _originatingClusterNode;
-	}
-
-	public String getServiceBeanIdentifier() {
-		return _serviceBeanIdentifier;
 	}
 
 	public String getServletContextName() {
@@ -128,6 +128,10 @@ public class ClusterRequest implements Serializable {
 		return _skipLocal;
 	}
 
+	public void setBeanIdentifier(String beanIdentifier) {
+		_beanIdentifier = beanIdentifier;
+	}
+
 	public void setClusterMessageType(ClusterMessageType clusterMessageType) {
 		_clusterMessageType = clusterMessageType;
 	}
@@ -146,10 +150,6 @@ public class ClusterRequest implements Serializable {
 
 	public void setOriginatingClusterNode(ClusterNode originatingClusterNode) {
 		_originatingClusterNode = originatingClusterNode;
-	}
-
-	public void setServiceBeanIdentifier(String serviceBeanIdentifier) {
-		_serviceBeanIdentifier = serviceBeanIdentifier;
 	}
 
 	public void setServletContextName(String servletContextName) {
@@ -197,12 +197,12 @@ public class ClusterRequest implements Serializable {
 	private ClusterRequest() {
 	}
 
+	private String _beanIdentifier;
 	private ClusterMessageType _clusterMessageType;
 	private boolean _fireAndForget;
 	private MethodHandler _methodHandler;
 	private boolean _multicast;
 	private ClusterNode _originatingClusterNode;
-	private String _serviceBeanIdentifier;
 	private String _servletContextName;
 	private boolean _skipLocal;
 	private Set<String> _targetClusterNodeIds;
