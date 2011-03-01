@@ -12,12 +12,10 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.controlpanel.blogs;
+package com.liferay.portalweb.portal.controlpanel.blogs.lar;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.controlpanel.blogs.entry.EntryTests;
-import com.liferay.portalweb.portal.controlpanel.blogs.entrycomment.EntryCommentTests;
-import com.liferay.portalweb.portal.controlpanel.blogs.lar.LARTests;
+import com.liferay.portalweb.portal.controlpanel.blogs.lar.importlar.ImportLARTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -25,14 +23,12 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class BlogsTests extends BaseTests {
+public class LARTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(EntryTests.suite());
-		testSuite.addTest(EntryCommentTests.suite());
-		testSuite.addTest(LARTests.suite());
+		testSuite.addTest(ImportLARTests.suite());
 
 		return testSuite;
 	}
