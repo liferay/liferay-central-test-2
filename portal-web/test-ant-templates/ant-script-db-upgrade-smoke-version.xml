@@ -1,5 +1,5 @@
 
-	<target name="test-db-upgrade-${test.ant.script.version}-smoke-tomcat-${test.ant.script.db}">
+	<target name="test-db-upgrade-${test.ant.script.version}-smoke-tomcat-${test.ant.script.db}-trunk">
 		<antcall target="prepare-db-${test.ant.script.db}-common">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="${test.ant.script.version}" />

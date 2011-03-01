@@ -1,5 +1,5 @@
 
-	<target name="test-db-upgrade-latest-smoke-tomcat-${test.ant.script.db}">
+	<target name="test-db-upgrade-latest-smoke-tomcat-${test.ant.script.db}-trunk">
 		<echo file="create-$${db.${test.ant.script.db}.${test.ant.script.db.schema}}.sql">${test.ant.script.db.minimal}</echo>
 
 		<antcall target="prepare-db-${test.ant.script.db}-common">
