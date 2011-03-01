@@ -266,7 +266,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
-						name="entry"
+						name="name"
 						property="name"
 						target="_blank"
 						title="<%= entry.getDescription() %>"
