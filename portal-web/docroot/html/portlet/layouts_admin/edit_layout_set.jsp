@@ -19,6 +19,8 @@
 <%
 Group selGroup = (Group)request.getAttribute(WebKeys.GROUP);
 
+LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLayoutSet"));
+
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 Group group = (Group)request.getAttribute("edit_pages.jsp-group");
 Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
@@ -56,6 +58,10 @@ String[] mainSections = PropsValues.LAYOUT_SET_FORM_UPDATE;
 
 if (liveGroup.isWorkflowEnabled()) {
 	mainSections = ArrayUtil.append(mainSections, "proposals");
+}
+
+if (!company.isCommunityLogo()) {
+	mainSections = ArrayUtil.remove(mainSections, "logo");
 }
 
 String[][] categorySections = {mainSections};
@@ -267,6 +273,7 @@ String[][] categorySections = {mainSections};
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+	<aui:input name="layoutSetId" type="hidden" value="<%= selLayoutSet.getLayoutSetId() %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 	<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />

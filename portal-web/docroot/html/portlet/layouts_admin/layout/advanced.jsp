@@ -50,7 +50,7 @@ UnicodeProperties layoutTypeSettings =  selLayout.getTypeSettingsProperties();
 	<aui:input name="iconImage" type="hidden" value="<%= selLayout.isIconImage() %>" />
 
 	<aui:field-wrapper helpMessage="this-icon-will-be-shown-in-the-navigation-menu" label="icon" name="iconFileName">
-		<aui:input inlineField="<%= true %>" label="" name="iconFileName" type="file" onChange=""  />
+		<aui:input inlineField="<%= true %>" label="" name="iconFileName" type="file" />
 
 		<c:if test="<%= selLayout.getIconImage() %>">
 			<liferay-ui:icon

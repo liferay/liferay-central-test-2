@@ -17,14 +17,20 @@ package com.liferay.portlet.layoutsadmin.action;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
@@ -33,9 +39,12 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import com.liferay.util.servlet.UploadException;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import java.io.File;
 
 /**
  * @author Brian Wing Shun Chan
@@ -120,6 +129,7 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long layoutSetId = ParamUtil.getLong(actionRequest, "layoutSetId");
 		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(
 			actionRequest, "stagingGroupId");
@@ -128,9 +138,46 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 
 		updateMergePages(actionRequest);
 
+		updateLogo(
+			actionRequest, liveGroupId, stagingGroupId, layoutSetId,
+			privateLayout);
+
 		updateLookAndFeel(
 			actionRequest, themeDisplay.getCompanyId(), liveGroupId,
 			stagingGroupId, privateLayout, 0);
+	}
+
+	protected void updateLogo(
+			ActionRequest actionRequest, long liveGroupId, long stagingGroupId,
+			long layoutSetId, boolean privateLayout)
+		throws Exception {
+
+		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
+			actionRequest);
+
+		boolean useLogo = ParamUtil.getBoolean(actionRequest, "useLogo");
+
+		File file = uploadRequest.getFile( "logoFileName");
+		byte[] bytes = FileUtil.getBytes(file);
+
+		if (useLogo && ((bytes == null) || (bytes.length == 0))) {
+			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				layoutSetId);
+
+			if (layoutSet.getLogo()) {
+				return;
+			}
+
+			throw new UploadException();
+		}
+
+		LayoutSetServiceUtil.updateLogo(
+			liveGroupId, privateLayout, useLogo, file);
+
+		if (stagingGroupId > 0) {
+			LayoutSetServiceUtil.updateLogo(
+				stagingGroupId, privateLayout, useLogo, file);
+		}
 	}
 
 	protected void updateMergePages(ActionRequest actionRequest)

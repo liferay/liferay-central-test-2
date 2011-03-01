@@ -93,11 +93,6 @@ List<String> tabs2NamesList = new ArrayList<String>();
 
 if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
 	tabs2NamesList.add("virtual-host");
-
-	if (company.isCommunityLogo()) {
-		tabs2NamesList.add("logo");
-	}
-
 	tabs2NamesList.add("sitemap");
 	tabs2NamesList.add("robots");
 	tabs2NamesList.add("monitoring");
@@ -472,76 +467,6 @@ request.setAttribute("edit_settings.jsp-workflowRoleNames", workflowRoleNames);
 			<br />
 
 			<input type="submit" value="<liferay-ui:message key="save" />" />
-		</c:when>
-		<c:when test='<%= tabs2.equals("logo") %>'>
-			<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
-
-			<%
-			LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, false);
-			LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(groupId, true);
-			%>
-
-			<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-public-pages-that-will-be-used-instead-of-the-default-enterprise-logo") %>
-
-			<br /><br />
-
-			<c:if test="<%= publicLayoutSet.isLogo() %>">
-				<span class="lfr-change-logo">
-					<img alt="<liferay-ui:message key="logo" />" src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= publicLayoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(publicLayoutSet.getLogoId()) %>" />
-				</span>
-			</c:if>
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="logo" />
-				</td>
-				<td>
-					<input name="<portlet:namespace />publicLogoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />publicLogo.value = true; document.<portlet:namespace />fm.<portlet:namespace />publicLogoCheckbox.checked = true;" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="use-logo" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param="publicLogo" defaultValue="<%= publicLayoutSet.isLogo() %>" />
-				</td>
-			</tr>
-			</table>
-
-			<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-private-pages-that-will-be-used-instead-of-the-default-enterprise-logo") %>
-
-			<br /><br />
-
-			<c:if test="<%= privateLayoutSet.isLogo() %>">
-				<span class="lfr-change-logo">
-					<img alt="<liferay-ui:message key="logo" />" src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= privateLayoutSet.getLogoId() %>&t=<%= ImageServletTokenUtil.getToken(privateLayoutSet.getLogoId()) %>" />
-				</span>
-			</c:if>
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="logo" />
-				</td>
-				<td>
-					<input name="<portlet:namespace />privateLogoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />privateLogo.value = true; document.<portlet:namespace />fm.<portlet:namespace />privateLogoCheckbox.checked = true;" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="use-logo" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param="privateLogo" defaultValue="<%= privateLayoutSet.isLogo() %>" />
-				</td>
-			</tr>
-			</table>
-
-			<br />
-
-			<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLogo();" />
 		</c:when>
 	</c:choose>
 </aui:form>

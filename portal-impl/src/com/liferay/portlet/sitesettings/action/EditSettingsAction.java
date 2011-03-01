@@ -71,10 +71,7 @@ public class EditSettingsAction extends EditLayoutsAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		try {
-			if (cmd.equals("logo")) {
-				updateLogo(actionRequest);
-			}
-			else if (cmd.equals("monitoring")) {
+			if (cmd.equals("monitoring")) {
 				updateMonitoring(actionRequest);
 			}
 			else if (cmd.equals("robots")) {
@@ -158,47 +155,6 @@ public class EditSettingsAction extends EditLayoutsAction {
 		portletRequest.setAttribute(WebKeys.GROUP, group);
 
 		return group;
-	}
-
-	protected void updateLogo(ActionRequest actionRequest) throws Exception {
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
-		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
-
-		updateLogo(actionRequest, liveGroupId, stagingGroupId, false);
-		updateLogo(actionRequest, liveGroupId, stagingGroupId, true);
-	}
-
-	protected void updateLogo(
-			ActionRequest actionRequest, long liveGroupId, long stagingGroupId,
-			boolean privateLayout)
-		throws Exception {
-
-		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(
-			actionRequest);
-
-		String privateLayoutPrefix = "public";
-
-		if (privateLayout) {
-			privateLayoutPrefix = "private";
-		}
-
-		boolean logo = ParamUtil.getBoolean(
-			actionRequest, privateLayoutPrefix + "Logo");
-
-		File file = uploadRequest.getFile(privateLayoutPrefix + "LogoFileName");
-		byte[] bytes = FileUtil.getBytes(file);
-
-		if (logo && ((bytes == null) || (bytes.length == 0))) {
-			throw new UploadException();
-		}
-
-		LayoutSetServiceUtil.updateLogo(liveGroupId, privateLayout, logo, file);
-
-		if (stagingGroupId > 0) {
-			LayoutSetServiceUtil.updateLogo(
-				stagingGroupId, privateLayout, logo, file);
-		}
 	}
 
 	protected void updateMonitoring(ActionRequest actionRequest)
