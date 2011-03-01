@@ -93,7 +93,10 @@ for (Object result : results) {
 		entry = (BlogsEntry)result;
 	}
 
-	if ((entry.getStatus() == WorkflowConstants.STATUS_DRAFT) && (entry.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) {
+	if (((entry.getStatus() == WorkflowConstants.STATUS_DRAFT) || (entry.getDisplayDate().after(new Date()))) && (entry.getUserId() != user.getUserId()) && !permissionChecker.isCommunityAdmin(scopeGroupId)) {
+
+		searchContainer.setTotal(searchContainer.getTotal() - 1);
+
 		continue;
 	}
 
