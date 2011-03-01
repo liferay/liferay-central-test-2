@@ -548,16 +548,23 @@ public class BBCodeUtil {
 	private static final String[] _BBCODE_TAGS = {
 		"[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[s]", "[/s]",
 		"[img]", "[/img]",
-		"[left]", "[center]", "[right]", "[indent]",
-		"[/left]", "[/center]", "[/right]", "[/indent]", "[tt]", "[/tt]"
+		"[left]", "[center]", "[right]", "[justify]", "[indent]",
+		"[/left]", "[/center]", "[/right]", "[/justify]", "[/indent]",
+		"[tt]", "[/tt]",
+		"[table]", "[tr]", "[th]", "[td]",
+		"[/table]", "[/tr]", "[/th]", "[/td]"
 	};
 
 	private static final String[] _HTML_TAGS = {
 		"<b>", "</b>", "<i>", "</i>", "<u>", "</u>", "<strike>", "</strike>",
 		"<img alt='' src='", "' />",
 		"<div style='text-align: left;'>", "<div style='text-align: center;'>",
-		"<div style='text-align: right;'>", "<div style='margin-left: 15px;'>",
-		"</div>", "</div>", "</div>", "</div>", "<tt>", "</tt>"
+		"<div style='text-align: right;'>",
+		"<div style='text-align: justify;'>",
+		"<div style='margin-left: 15px;'>",
+		"</div>", "</div>", "</div>", "</div>", "</div>", "<tt>", "</tt>",
+		"<table>", "<tr>", "<th>", "<td>",
+		"</table>", "</tr>", "</th>", "</td>"
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(BBCodeUtil.class);
