@@ -49,8 +49,6 @@ public class PortletDataHandlerKeys {
 	public static final String LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_NAME =
 		"MERGE_BY_LAYOUT_NAME";
 
-	public static final String LAYOUT_THEME_SETTINGS = "LAYOUT_THEME_SETTINGS";
-
 	public static final String PERFORM_DIRECT_BINARY_IMPORT =
 		"PERFORM_DIRECT_BINARY_IMPORT";
 
@@ -83,6 +81,8 @@ public class PortletDataHandlerKeys {
 	public static final String SELECTED_LAYOUTS = "SELECTED_LAYOUTS";
 
 	public static final String THEME = "THEME";
+
+	public static final String THEME_REFERENCE = "THEME_REFERENCE";
 
 	public static final String USER_ID_STRATEGY = "USER_ID_STRATEGY";
 

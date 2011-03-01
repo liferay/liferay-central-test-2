@@ -169,8 +169,6 @@ public class LayoutExporter {
 			parameterMap, PortletDataHandlerKeys.CATEGORIES);
 		boolean exportIgnoreLastPublishDate = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.IGNORE_LAST_PUBLISH_DATE);
-		boolean exportThemeSetting = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.LAYOUT_THEME_SETTINGS);
 		boolean exportPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
 		boolean exportUserPermissions = MapUtil.getBoolean(
@@ -181,6 +179,8 @@ public class LayoutExporter {
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		boolean exportTheme = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.THEME);
+		boolean exportThemeSettings = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.THEME_REFERENCE);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export categories " + exportCategories);
@@ -255,7 +255,7 @@ public class LayoutExporter {
 		headerElement.addAttribute(
 			"private-layout", String.valueOf(privateLayout));
 
-		if (exportThemeSetting || exportTheme) {
+		if (exportTheme || exportThemeSettings) {
 			headerElement.addAttribute("theme-id", layoutSet.getThemeId());
 			headerElement.addAttribute(
 				"color-scheme-id", layoutSet.getColorSchemeId());
