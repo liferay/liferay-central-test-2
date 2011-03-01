@@ -31,6 +31,8 @@ import jcifs.dcerpc.DcerpcBinding;
 import jcifs.dcerpc.DcerpcHandle;
 import jcifs.dcerpc.UnicodeString;
 
+import jcifs.smb.SmbException;
+
 /**
  * @author Marcellus Tavares
  * @author Michael C. Han
@@ -84,9 +86,11 @@ public class Netlogon {
 				return new NtlmUserAccount(name.toString());
 			}
 			else {
+				SmbException smbe = new SmbException(
+					netrLogonSamLogon.getStatus(), false);
+
 				throw new NtlmLogonException(
-					"Unable to authenticate due to status " +
-						netrLogonSamLogon.getStatus());
+					"Unable to authenticate user. " + smbe.getMessage());
 			}
 		}
 		catch (NoSuchAlgorithmException e) {
