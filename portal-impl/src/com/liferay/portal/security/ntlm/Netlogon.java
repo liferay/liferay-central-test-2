@@ -90,7 +90,7 @@ public class Netlogon {
 					netrLogonSamLogon.getStatus(), false);
 
 				throw new NtlmLogonException(
-					"Unable to authenticate user. " + smbe.getMessage());
+					"Unable to authenticate user: " + smbe.getMessage());
 			}
 		}
 		catch (NoSuchAlgorithmException e) {
