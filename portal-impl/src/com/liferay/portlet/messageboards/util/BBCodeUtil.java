@@ -33,10 +33,6 @@ import java.util.Map;
  */
 public class BBCodeUtil {
 
-	static Map<Integer, String> fontSizes = new HashMap<Integer, String>();
-
-	static Map<String, String> listStyles = new HashMap<String, String>();
-
 	static String[][] emoticons = {
 		{"happy.gif", ":)", "happy"},
 		{"smile.gif", ":D", "smile"},
@@ -76,17 +72,23 @@ public class BBCodeUtil {
 		{"wub.gif", ":wub:", "wub"}
 	};
 
-	static String[] emoticons_descriptions = new String[emoticons.length];
-	static String[] emoticons_files = new String[emoticons.length];
-	static String[] emoticons_symbols = new String[emoticons.length];
+	static String[] emoticonDescriptions = new String[emoticons.length];
+
+	static String[] emoticonFiles = new String[emoticons.length];
+
+	static String[] emoticonSymbols = new String[emoticons.length];
+
+	static Map<Integer, String> fontSizes = new HashMap<Integer, String>();
+
+	static Map<String, String> listStyles = new HashMap<String, String>();
 
 	static {
 		for (int i = 0; i < emoticons.length; i++) {
 			String[] emoticon = emoticons[i];
 
-			emoticons_descriptions[i] = emoticon[2];
-			emoticons_files[i] = emoticon[0];
-			emoticons_symbols[i] = emoticon[1];
+			emoticonDescriptions[i] = emoticon[2];
+			emoticonFiles[i] = emoticon[0];
+			emoticonSymbols[i] = emoticon[1];
 		}
 
 		fontSizes.put(new Integer(1), "<span style='font-size: 0.7em;'>");
@@ -119,11 +121,11 @@ public class BBCodeUtil {
 	public static final String[][] EMOTICONS = emoticons;
 
 	public static final String[] EMOTICONS_DESCRIPTIONS =
-		emoticons_descriptions;
+		emoticonDescriptions;
 
-	public static final String[] EMOTICONS_FILES = emoticons_files;
+	public static final String[] EMOTICONS_FILES = emoticonFiles;
 
-	public static final String[] EMOTICONS_SYMBOLS = emoticons_symbols;
+	public static final String[] EMOTICONS_SYMBOLS = emoticonSymbols;
 
 	public static String getHTML(MBMessage message) {
 		String body = message.getBody();
@@ -567,7 +569,10 @@ public class BBCodeUtil {
 	private static final String[] _BBCODE_TAGS = {
 		"[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[s]", "[/s]",
 		"[img]", "[/img]",
-		"[left]", "[center]", "[right]", "[justify]", "[indent]",
+		"[left]", "[center]",
+		"[right]",
+		"[justify]",
+		"[indent]",
 		"[/left]", "[/center]", "[/right]", "[/justify]", "[/indent]",
 		"[tt]", "[/tt]",
 		"[table]", "[tr]", "[th]", "[td]",
@@ -581,7 +586,8 @@ public class BBCodeUtil {
 		"<div style='text-align: right;'>",
 		"<div style='text-align: justify;'>",
 		"<div style='margin-left: 15px;'>",
-		"</div>", "</div>", "</div>", "</div>", "</div>", "<tt>", "</tt>",
+		"</div>", "</div>", "</div>", "</div>", "</div>",
+		"<tt>", "</tt>",
 		"<table>", "<tr>", "<th>", "<td>",
 		"</table>", "</tr>", "</th>", "</td>"
 	};

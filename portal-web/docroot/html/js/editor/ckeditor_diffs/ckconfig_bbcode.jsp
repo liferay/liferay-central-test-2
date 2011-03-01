@@ -23,8 +23,8 @@
 <%
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
-String emoticonsPath = HttpUtil.decodeURL(ParamUtil.getString(request, "emoticonsPath"));
 String languageId = ParamUtil.getString(request, "languageId");
+String emoticonsPath = HttpUtil.decodeURL(ParamUtil.getString(request, "emoticonsPath"));
 %>
 
 CKEDITOR.config.height = 265;
