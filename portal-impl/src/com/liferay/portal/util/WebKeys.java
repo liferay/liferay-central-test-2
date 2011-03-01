@@ -198,6 +198,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String LIVE_USERS = "LIVE_USERS";
 
+	public static final String LOGOUT = "LOGOUT";
+
 	public static final String MAIL_CURRENT_ACCOUNT = "MAIL_CURRENT_ACCOUNT";
 
 	public static final String MAIL_FOLDER = "MAIL_FOLDER";
