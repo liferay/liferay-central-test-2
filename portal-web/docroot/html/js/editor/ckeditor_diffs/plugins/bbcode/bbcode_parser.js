@@ -39,11 +39,14 @@
 				openTags = instance._openTags = [];
 			}
 
-			var result = data.replace(REGEX_MAIN, function(pstr, p1, p2, p3, p4, offset, orig) {
-				return instance._process(pstr, p1, p2, p3, p4, offset, orig);
-			});
+			var result = data.replace(
+				REGEX_MAIN,
+				function(pstr, p1, p2, p3, p4, offset, orig) {
+					return instance._process(pstr, p1, p2, p3, p4, offset, orig);
+				}
+			);
 
-			if (instance._noParse ) {
+			if (instance._noParse) {
 				instance._noParse = false;
 			}
 
@@ -112,10 +115,12 @@
 		_handleCode: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</pre>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</pre>'
+				}
+			);
 
 			instance._noParse = true;
 
@@ -129,10 +134,12 @@
 				p3 = 'inherit';
 			}
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: SPAN_CLOSE
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: SPAN_CLOSE
+				}
+			);
 
 			return '<span style="color: ' + p3 + '">';
 		},
@@ -140,10 +147,12 @@
 		_handleEm: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</em>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</em>'
+				}
+			);
 
 			return '<em>';
 		},
@@ -153,10 +162,12 @@
 
 			var result = null;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '">'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '">'
+				}
+			);
 
 			result = '<img src="';
 
@@ -168,10 +179,12 @@
 
 			var result = null;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: SPAN_CLOSE
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: SPAN_CLOSE
+				}
+			);
 
 			result = '<span style="font-family: ' + p3 + '">';
 
@@ -199,10 +212,12 @@
 				}
 			}
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</' + tag + '>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</' + tag + '>'
+				}
+			);
 
 			var result;
 
@@ -229,10 +244,12 @@
 					instance._processEndTag(pstr, p1, p2, p3, '*', offset, orig);
 				}
 
-				instance._openTags.push({
-					bbTag: p2,
-					endTag: '</li>'
-				});
+				instance._openTags.push(
+					{
+						bbTag: p2,
+						endTag: '</li>'
+					}
+				);
 
 				result = '<li>';
 			}
@@ -243,10 +260,12 @@
 		_handleQuote: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</blockquote>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</blockquote>'
+				}
+			);
 
 			var result;
 
@@ -266,10 +285,12 @@
 				p3 = '1';
 			}
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: SPAN_CLOSE
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: SPAN_CLOSE
+				}
+			);
 
 			return '<span style="font-size: ' + instance._getFontSize(p3) + 'px">';
 		},
@@ -277,10 +298,12 @@
 		_handleSimpleTags: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</' + p2 + '>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</' + p2 + '>'
+				}
+			);
 
 			return '<' + p2 + '>';
 		},
@@ -288,10 +311,12 @@
 		_handleStrikeThrough: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</strike>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</strike>'
+				}
+			);
 
 			return '<strike>';
 		},
@@ -299,10 +324,12 @@
 		_handleStrong: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</strong>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</strong>'
+				}
+			);
 
 			return '<strong>';
 		},
@@ -310,10 +337,12 @@
 		_handleTable: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</table>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</table>'
+				}
+			);
 
 			return '<table>';
 		},
@@ -321,10 +350,12 @@
 		_handleTableCell: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</td>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</td>'
+				}
+			);
 
 			return '<td>';
 		},
@@ -332,10 +363,12 @@
 		_handleTableHeader: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</th>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</th>'
+				}
+			);
 
 			return '<th>';
 		},
@@ -343,10 +376,12 @@
 		_handleTableRow: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</tr>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</tr>'
+				}
+			);
 
 			return '<tr>';
 		},
@@ -354,10 +389,12 @@
 		_handleTextAlignCenter: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</p>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</p>'
+				}
+			);
 
 			return '<p style="text-align: center">';
 		},
@@ -365,10 +402,12 @@
 		_handleTextAlignJustify: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</p>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</p>'
+				}
+			);
 
 			return '<p style="text-align: justify">';
 		},
@@ -376,10 +415,12 @@
 		_handleTextAlignLeft: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</span>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</span>'
+				}
+			);
 
 			return '<p style="text-align: left">';
 		},
@@ -387,10 +428,12 @@
 		_handleTextAlignRight: function(pstr, p1, p2, p3, p4, offset, orig) {
 			var instance = this;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</p>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</p>'
+				}
+			);
 
 			return '<p style="text-align: right">';
 		},
@@ -400,10 +443,12 @@
 
 			var result = null;
 
-			instance._openTags.push({
-				bbTag: p2,
-				endTag: '</a>'
-			});
+			instance._openTags.push(
+				{
+					bbTag: p2,
+					endTag: '</a>'
+				}
+			);
 
 			if (p3 && REGEX_URI.test(p3)) {
 				instance._urlStart = -1;
@@ -429,7 +474,7 @@
 			}
 
 			for (var i = openTags.length - 1; i >= 0; i--) {
-				if (openTags[i].bbTag === tagName ) {
+				if (openTags[i].bbTag === tagName) {
 					return true;
 				}
 			}
@@ -487,7 +532,7 @@
 						result = '<span style="color: red">[/' + p4 + ']</span>';
 					}
 					else if (p4 == 'url') {
-						if (instance._urlStart > 0 ) {
+						if (instance._urlStart > 0) {
 							result = '">' + orig.substr(instance._urlStart, offset - instance._urlStart) + openTags.pop().endTag;
 						}
 						else {
