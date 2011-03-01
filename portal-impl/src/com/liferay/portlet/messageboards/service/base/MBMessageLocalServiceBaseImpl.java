@@ -21,7 +21,7 @@ import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.mail.service.MailService;
 
 import com.liferay.portal.kernel.bean.BeanReference;
-import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
+import com.liferay.portal.kernel.bean.IdentifiableBean;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -120,7 +120,7 @@ import javax.sql.DataSource;
  * @generated
  */
 public abstract class MBMessageLocalServiceBaseImpl
-	implements MBMessageLocalService, ServiceBeanIdentifier {
+	implements MBMessageLocalService, IdentifiableBean {
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -1710,21 +1710,21 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	/**
-	 * Gets the Spring bean id for this ServiceBean.
+	 * Gets the Spring bean ID for this implementation.
 	 *
-	 * @return the Spring bean id for this ServiceBean
+	 * @return the Spring bean ID for this implementation
 	 */
-	public String getIdentifier() {
-		return identifier;
+	public String getBeanIdentifier() {
+		return _beanIdentifier;
 	}
 
 	/**
-	 * Sets the Spring bean id for this ServiceBean.
+	 * Sets the Spring bean ID for this implementation.
 	 *
-	 * @param identifier the Spring bean id for this ServiceBean
+	 * @param beanIdentifier the Spring bean ID for this implementation
 	 */
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
+	public void setBeanIdentifier(String beanIdentifier) {
+		_beanIdentifier = beanIdentifier;
 	}
 
 	/**
@@ -1896,5 +1896,5 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected SocialEquityLogLocalService socialEquityLogLocalService;
 	@BeanReference(type = SocialEquityLogPersistence.class)
 	protected SocialEquityLogPersistence socialEquityLogPersistence;
-	protected String identifier;
+	private String _beanIdentifier;
 }

@@ -238,21 +238,21 @@ public class BlogsEntryLocalServiceWrapper implements BlogsEntryLocalService {
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _blogsEntryLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _blogsEntryLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_blogsEntryLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_blogsEntryLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long userId,

@@ -218,21 +218,21 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _roleLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _roleLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_roleLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_roleLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public com.liferay.portal.model.Role addRole(long userId, long companyId,

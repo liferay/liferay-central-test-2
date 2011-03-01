@@ -222,21 +222,21 @@ public class ExpandoTableLocalServiceWrapper implements ExpandoTableLocalService
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _expandoTableLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _expandoTableLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_expandoTableLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_expandoTableLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(

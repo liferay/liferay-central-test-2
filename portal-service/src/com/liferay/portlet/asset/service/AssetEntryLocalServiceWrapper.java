@@ -221,21 +221,21 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService {
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _assetEntryLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _assetEntryLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_assetEntryLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_assetEntryLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public void deleteEntry(com.liferay.portlet.asset.model.AssetEntry entry)

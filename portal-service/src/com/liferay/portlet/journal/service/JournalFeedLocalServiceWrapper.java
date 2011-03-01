@@ -237,21 +237,21 @@ public class JournalFeedLocalServiceWrapper implements JournalFeedLocalService {
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _journalFeedLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _journalFeedLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_journalFeedLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_journalFeedLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public com.liferay.portlet.journal.model.JournalFeed addFeed(long userId,

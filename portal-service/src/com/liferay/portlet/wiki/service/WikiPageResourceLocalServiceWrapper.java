@@ -225,21 +225,21 @@ public class WikiPageResourceLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _wikiPageResourceLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _wikiPageResourceLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_wikiPageResourceLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_wikiPageResourceLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPageResource addPageResource(

@@ -219,21 +219,21 @@ public class AssetTagLocalServiceWrapper implements AssetTagLocalService {
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _assetTagLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _assetTagLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_assetTagLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_assetTagLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public com.liferay.portlet.asset.model.AssetTag addTag(long userId,

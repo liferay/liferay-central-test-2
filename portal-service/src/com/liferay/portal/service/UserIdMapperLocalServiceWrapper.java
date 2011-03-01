@@ -221,21 +221,21 @@ public class UserIdMapperLocalServiceWrapper implements UserIdMapperLocalService
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _userIdMapperLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _userIdMapperLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_userIdMapperLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_userIdMapperLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public void deleteUserIdMappers(long userId)

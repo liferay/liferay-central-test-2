@@ -226,21 +226,21 @@ public class PortletPreferencesLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _portletPreferencesLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _portletPreferencesLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_portletPreferencesLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_portletPreferencesLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public com.liferay.portal.model.PortletPreferences addPortletPreferences(

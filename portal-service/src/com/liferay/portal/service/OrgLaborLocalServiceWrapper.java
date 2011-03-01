@@ -218,21 +218,21 @@ public class OrgLaborLocalServiceWrapper implements OrgLaborLocalService {
 	}
 
 	/**
-	* Gets the Spring bean id for this ServiceBean.
+	* Gets the Spring bean ID for this implementation.
 	*
-	* @return the Spring bean id for this ServiceBean
+	* @return the Spring bean ID for this implementation
 	*/
-	public java.lang.String getIdentifier() {
-		return _orgLaborLocalService.getIdentifier();
+	public java.lang.String getBeanIdentifier() {
+		return _orgLaborLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean id for this ServiceBean.
+	* Sets the Spring bean ID for this implementation.
 	*
-	* @param identifier the Spring bean id for this ServiceBean
+	* @param beanIdentifier the Spring bean ID for this implementation
 	*/
-	public void setIdentifier(java.lang.String identifier) {
-		_orgLaborLocalService.setIdentifier(identifier);
+	public void setBeanIdentifier(java.lang.String beanIdentifier) {
+		_orgLaborLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
 	public com.liferay.portal.model.OrgLabor addOrgLabor(long organizationId,
