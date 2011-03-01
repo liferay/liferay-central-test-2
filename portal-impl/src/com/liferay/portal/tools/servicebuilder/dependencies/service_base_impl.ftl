@@ -2,6 +2,7 @@ package ${packagePath}.service.base;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import ${beanLocatorUtil};
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
 import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
@@ -62,7 +63,7 @@ import javax.sql.DataSource;
  * @see ${packagePath}.service.${entity.name}LocalServiceUtil
  * @generated
  */
-	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService {
+	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService, ServiceBeanIdentifier {
 
 		/*
 		 * NOTE FOR DEVELOPERS:
@@ -81,7 +82,7 @@ import javax.sql.DataSource;
  * @see ${packagePath}.service.${entity.name}ServiceUtil
  * @generated
  */
-	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service {
+	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service, ServiceBeanIdentifier {
 
 		/*
 		 * NOTE FOR DEVELOPERS:
@@ -414,6 +415,24 @@ import javax.sql.DataSource;
 </#list>
 
 /**
+ * Gets the Spring bean id for this ServiceBean.
+ *
+ * @return the Spring bean id for this ServiceBean
+ */
+public String getIdentifier() {
+	return identifier;
+}
+
+/**
+ * Sets the Spring bean id for this ServiceBean.
+ *
+ * @param identifier the Spring bean id for this ServiceBean
+ */
+public void setIdentifier(String identifier) {
+	this.identifier = identifier;
+}
+
+/**
  * Performs an SQL query.
  *
  * @param sql the sql query to perform
@@ -457,4 +476,5 @@ protected void runSQL(String sql) throws SystemException {
 	</#if>
 </#list>
 
+	protected String identifier;
 }

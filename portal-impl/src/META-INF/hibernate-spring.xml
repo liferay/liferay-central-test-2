@@ -29,14 +29,13 @@
 		<constructor-arg ref="liferayDataSource" />
 		<constructor-arg ref="liferayHibernateSessionFactory" />
 	</bean>
-	<bean id="hibernateStatisticsService" class="com.liferay.portal.dao.orm.hibernate.jmx.HibernateStatisticsService">
-		<property name="sessionFactory" ref="liferaySessionFactory" />
-	</bean>
 	<bean id="hibernateMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
 		<property name="beans">
 			<map>
 				<entry key="Hibernate:name=statistics">
-					<ref local="hibernateStatisticsService" />
+					<bean class="com.liferay.portal.dao.orm.hibernate.jmx.HibernateStatisticsService">
+						<property name="sessionFactory" ref="liferaySessionFactory" />
+					</bean>
 				</entry>
 			</map>
 		</property>

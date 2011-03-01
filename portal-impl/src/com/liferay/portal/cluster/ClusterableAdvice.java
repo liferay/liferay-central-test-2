@@ -17,9 +17,12 @@ package com.liferay.portal.cluster;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.cluster.Clusterable;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
+import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -48,16 +51,27 @@ public class ClusterableAdvice
 			return;
 		}
 
+		Object targetServiceBean = methodInvocation.getThis();
+		if (!(targetServiceBean instanceof ServiceBeanIdentifier)) {
+			_log.error("ServiceBean " + targetServiceBean.getClass().getName() +
+				" does not implement interface " +
+				ServiceBeanIdentifier.class.getName() +
+				", unable to proceed this request accross cluster.");
+			return;
+		}
+
+		String serviceBeanIdentifier =
+			((ServiceBeanIdentifier)targetServiceBean).getIdentifier();
+
 		Method method = methodTargetClassKey.getMethod();
 
-		Method utilClassMethod = _getUtilClassMethod(method);
-
 		MethodHandler methodHandler = new MethodHandler(
-			utilClassMethod, methodInvocation.getArguments());
+			method, methodInvocation.getArguments());
 
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
 			methodHandler, true);
 
+		clusterRequest.setServiceBeanIdentifier(serviceBeanIdentifier);
 		clusterRequest.setServletContextName(_servletContextName);
 
 		ClusterExecutorUtil.execute(clusterRequest);
@@ -71,20 +85,7 @@ public class ClusterableAdvice
 		_servletContextName = servletContextName;
 	}
 
-	private Method _getUtilClassMethod(Method method) throws Exception {
-		Thread currentThread = Thread.currentThread();
-
-		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
-
-		Class<?> declaringClass = method.getDeclaringClass();
-
-		String utilClassName = declaringClass.getName().concat("Util");
-
-		Class<?> utilClass = contextClassLoader.loadClass(utilClassName);
-
-		return utilClass.getMethod(
-			method.getName(), method.getParameterTypes());
-	}
+	private static Log _log = LogFactoryUtil.getLog(ClusterableAdvice.class);
 
 	private static Clusterable _nullClusterable =
 		new Clusterable() {

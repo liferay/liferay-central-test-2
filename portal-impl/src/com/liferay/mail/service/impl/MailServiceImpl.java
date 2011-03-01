@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -45,7 +46,7 @@ import javax.mail.Session;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MailServiceImpl implements MailService {
+public class MailServiceImpl implements MailService, ServiceBeanIdentifier {
 
 	public void addForward(
 		long companyId, long userId, List<Filter> filters,
@@ -116,6 +117,10 @@ public class MailServiceImpl implements MailService {
 			_deleteUserMethodKey, companyId, userId);
 
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodHandler);
+	}
+
+	public String getIdentifier() {
+		return _identifier;
 	}
 
 	public Session getSession() throws SystemException {
@@ -247,6 +252,10 @@ public class MailServiceImpl implements MailService {
 		MessageBusUtil.sendMessage(DestinationNames.MAIL, mailMessage);
 	}
 
+	public void setIdentifier(String identifier) {
+		_identifier = identifier;
+	}
+
 	public void updateBlocked(
 		long companyId, long userId, List<String> blocked) {
 
@@ -309,6 +318,7 @@ public class MailServiceImpl implements MailService {
 		Hook.class.getName(), "updatePassword", long.class, long.class,
 		String.class);
 
+	private String _identifier;
 	private Session _session;
 
 }

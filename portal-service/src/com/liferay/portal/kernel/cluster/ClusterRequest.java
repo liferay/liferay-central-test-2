@@ -100,6 +100,10 @@ public class ClusterRequest implements Serializable {
 		return _originatingClusterNode;
 	}
 
+	public String getServiceBeanIdentifier() {
+		return _serviceBeanIdentifier;
+	}
+
 	public String getServletContextName() {
 		return _servletContextName;
 	}
@@ -142,6 +146,10 @@ public class ClusterRequest implements Serializable {
 
 	public void setOriginatingClusterNode(ClusterNode originatingClusterNode) {
 		_originatingClusterNode = originatingClusterNode;
+	}
+
+	public void setServiceBeanIdentifier(String serviceBeanIdentifier) {
+		_serviceBeanIdentifier = serviceBeanIdentifier;
 	}
 
 	public void setServletContextName(String servletContextName) {
@@ -194,6 +202,7 @@ public class ClusterRequest implements Serializable {
 	private MethodHandler _methodHandler;
 	private boolean _multicast;
 	private ClusterNode _originatingClusterNode;
+	private String _serviceBeanIdentifier;
 	private String _servletContextName;
 	private boolean _skipLocal;
 	private Set<String> _targetClusterNodeIds;

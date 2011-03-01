@@ -42,6 +42,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.kernel.bean.ServiceBeanIdentifier;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -58,7 +59,8 @@ import java.util.Date;
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  */
-public class DLLocalServiceImpl implements DLLocalService {
+public class DLLocalServiceImpl
+	implements DLLocalService, ServiceBeanIdentifier {
 
 	public void addDirectory(long companyId, long repositoryId, String dirName)
 		throws PortalException, SystemException {
@@ -182,6 +184,10 @@ public class DLLocalServiceImpl implements DLLocalService {
 		return hook.getFileSize(companyId, repositoryId, fileName);
 	}
 
+	public String getIdentifier() {
+		return identifier;
+	}
+
 	public boolean hasFile(
 			long companyId, long repositoryId, String fileName,
 			String versionNumber)
@@ -270,6 +276,10 @@ public class DLLocalServiceImpl implements DLLocalService {
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+	}
+
+	public void setIdentifier(String identifier) {
+		this.identifier = identifier;
 	}
 
 	public void updateFile(
@@ -485,5 +495,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 	@BeanReference(type = Hook.class)
 	protected Hook hook;
+
+	protected String identifier;
 
 }

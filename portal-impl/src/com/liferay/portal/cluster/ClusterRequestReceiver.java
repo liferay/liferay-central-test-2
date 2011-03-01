@@ -14,6 +14,7 @@
 
 package com.liferay.portal.cluster;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.cluster.Address;
 import com.liferay.portal.kernel.cluster.ClusterException;
@@ -25,6 +26,7 @@ import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -115,11 +117,18 @@ public class ClusterRequestReceiver extends BaseReceiver {
 	}
 
 	protected Object invoke(
-			String servletContextName, MethodHandler methodHandler)
+			String servletContextName, String serviceBeanIdentifier,
+			MethodHandler methodHandler)
 		throws Exception {
 
 		if (servletContextName == null) {
-			return methodHandler.invoke(true);
+			if (Validator.isNull(serviceBeanIdentifier)) {
+				return methodHandler.invoke(true);
+			}
+			else {
+				return methodHandler.invoke(
+					PortalBeanLocatorUtil.locate(serviceBeanIdentifier));
+			}
 		}
 
 		Thread currentThread = Thread.currentThread();
@@ -133,7 +142,14 @@ public class ClusterRequestReceiver extends BaseReceiver {
 
 			currentThread.setContextClassLoader(classLoader);
 
-			return methodHandler.invoke(true);
+			if (Validator.isNull(serviceBeanIdentifier)) {
+				return methodHandler.invoke(true);
+			}
+			else {
+				return methodHandler.invoke(
+					PortletBeanLocatorUtil.locate(
+						servletContextName, serviceBeanIdentifier));
+			}
 		}
 		catch(Exception e) {
 			throw e;
@@ -228,7 +244,9 @@ public class ClusterRequestReceiver extends BaseReceiver {
 					ClusterInvokeThreadLocal.setEnabled(false);
 
 					Object returnValue = invoke(
-						clusterRequest.getServletContextName(), methodHandler);
+						clusterRequest.getServletContextName(),
+						clusterRequest.getServiceBeanIdentifier(),
+						methodHandler);
 
 					if (returnValue instanceof Serializable) {
 						clusterNodeResponse.setResult(returnValue);
