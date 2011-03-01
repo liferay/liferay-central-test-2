@@ -1222,7 +1222,8 @@ public class DLRepositoryLocalServiceImpl
 			dlFileVersionPersistence.remove(dlFileVersion);
 
 			expandoValueLocalService.deleteValues(
-				DLFileVersion.class.getName(), dlFileVersion.getFileVersionId());
+				DLFileVersion.class.getName(),
+				dlFileVersion.getFileVersionId());
 		}
 
 		// Expando
