@@ -266,7 +266,6 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
-						name="name"
 						property="name"
 						target="_blank"
 						title="<%= entry.getDescription() %>"
@@ -274,7 +273,6 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
-						name="url"
 						property="url"
 						target="_blank"
 						title="<%= entry.getDescription() %>"
@@ -282,7 +280,6 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 
 					<liferay-ui:search-container-column-text
 						href="<%= rowHREF %>"
-						name="visits"
 						property="visits"
 						target="_blank"
 						title="<%= entry.getDescription() %>"
