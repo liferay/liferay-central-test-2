@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.CalEventConstants;
@@ -62,37 +61,56 @@ public class CalEventFinderImpl
 			boolean timeZoneSensitive, String[] types)
 		throws SystemException {
 
-		return doCountByG_SD_T(
-			groupId, startDateGT, startDateLT, timeZoneSensitive, types, false);
-	}
+		Timestamp startDateGT_TS = CalendarUtil.getTimestamp(startDateGT);
+		Timestamp startDateLT_TS = CalendarUtil.getTimestamp(startDateLT);
 
-	public int filterCountByG_SD_T(
-			long groupId, Date startDateGT, Date startDateLT,
-			boolean timeZoneSensitive, String[] types)
-		throws SystemException {
+		Session session = null;
 
-		return doCountByG_SD_T(
-			groupId, startDateGT, startDateLT, timeZoneSensitive, types, true);
-	}
+		try {
+			session = openSession();
 
-	public List<CalEvent> filterFindByG_SD_T(
-			long groupId, Date startDateGT, Date startDateLT,
-			boolean timeZoneSensitive, String[] types)
-		throws SystemException {
+			String sql = CustomSQLUtil.get(COUNT_BY_G_SD_T);
 
-		return filterFindByG_SD_T(
-			groupId, startDateGT, startDateLT, timeZoneSensitive, types,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
+			sql = StringUtil.replace(sql, "[$TYPE$]", getTypes(types));
 
-	public List<CalEvent> filterFindByG_SD_T(
-			long groupId, Date startDateGT, Date startDateLT,
-			boolean timeZoneSensitive, String[] types, int start, int end)
-		throws SystemException {
+			SQLQuery q = session.createSQLQuery(sql);
 
-		return doFindByG_SD_T(
-			groupId, startDateGT, startDateLT, timeZoneSensitive, types, start,
-			end, true);
+			q.addEntity("CalEvent", CalEventImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(startDateGT_TS);
+			qPos.add(startDateLT_TS);
+			qPos.add(timeZoneSensitive);
+			qPos.add(false);
+
+			if ((types != null) && (types.length > 0) &&
+				((types.length > 1) || Validator.isNotNull(types[0]))) {
+
+				for (String type : types) {
+					qPos.add(type);
+				}
+			}
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
 	}
 
 	public List<CalEvent> findByFutureReminders() throws SystemException {
@@ -166,80 +184,6 @@ public class CalEventFinderImpl
 			boolean timeZoneSensitive, String[] types, int start, int end)
 		throws SystemException {
 
-		return doFindByG_SD_T(
-			groupId, startDateGT, startDateLT, timeZoneSensitive, types, start,
-			end, false);
-	}
-
-	protected int doCountByG_SD_T(
-			long groupId, Date startDateGT, Date startDateLT,
-			boolean timeZoneSensitive, String[] types, boolean inlineSQLHelper)
-		throws SystemException {
-
-		Timestamp startDateGT_TS = CalendarUtil.getTimestamp(startDateGT);
-		Timestamp startDateLT_TS = CalendarUtil.getTimestamp(startDateLT);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_G_SD_T);
-
-			sql = StringUtil.replace(sql, "[$TYPE$]", getTypes(types));
-
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, CalEvent.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
-			}
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("CalEvent", CalEventImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(groupId);
-			qPos.add(startDateGT_TS);
-			qPos.add(startDateLT_TS);
-			qPos.add(timeZoneSensitive);
-			qPos.add(false);
-
-			if ((types != null) && (types.length > 0) &&
-				((types.length > 1) || Validator.isNotNull(types[0]))) {
-
-				for (String type : types) {
-					qPos.add(type);
-				}
-			}
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	protected List<CalEvent> doFindByG_SD_T(
-			long groupId, Date startDateGT, Date startDateLT,
-			boolean timeZoneSensitive, String[] types, int start, int end,
-			boolean inlineSQLHelper)
-		throws SystemException {
-
 		Timestamp startDateGT_TS = CalendarUtil.getTimestamp(startDateGT);
 		Timestamp startDateLT_TS = CalendarUtil.getTimestamp(startDateLT);
 
@@ -251,12 +195,6 @@ public class CalEventFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_G_SD_T);
 
 			sql = StringUtil.replace(sql, "[$TYPE$]", getTypes(types));
-
-			if (inlineSQLHelper) {
-				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, CalEvent.class.getName(), _FILTER_COLUMN_PK,
-					_FILTER_COLUMN_USERID, groupId);
-			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -312,6 +250,4 @@ public class CalEventFinderImpl
 		return StringPool.BLANK;
 	}
 
-	private static final String _FILTER_COLUMN_PK = "calEvent.eventId";
-	private static final String _FILTER_COLUMN_USERID = "calEvent.userId";
 }
