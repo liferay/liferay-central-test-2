@@ -477,9 +477,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public List<CalEvent> getEvents(long groupId, Calendar cal, String[] types)
 		throws SystemException {
 
-		types = ArrayUtil.distinct(types);
+		if (types != null) {
+			types = ArrayUtil.distinct(types);
 
-		Arrays.sort(types);
+			Arrays.sort(types);
+		}
 
 		Map<String, List<CalEvent>> eventsPool =
 			CalEventLocalUtil.getEventsPool(groupId);
@@ -587,7 +589,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		List<CalEvent> events = eventsPool.get(key);
 
 		if (events == null) {
-			events = calEventPersistence.findByG_T_R(groupId, types, true);
+			if (types != null) {
+				events = calEventPersistence.findByG_T_R(groupId, types, true);
+			}
+			else {
+				events = calEventPersistence.findByG_R(groupId, true);
+			}
 
 			events = new UnmodifiableList<CalEvent>(events);
 
