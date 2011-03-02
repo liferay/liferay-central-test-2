@@ -31,7 +31,7 @@ catch (Exception e) {
 %>
 
 <c:choose>
-	<c:when test="<%= (url != null) && (feed != null) %>">
+	<c:when test="<%= (Validator.isNotNull(url)) && (feed != null) %>">
 		<div class="feed">
 
 			<%
@@ -39,10 +39,15 @@ catch (Exception e) {
 
 			String feedLink = feed.getLink();
 
-			if ((feedLink == null) || (!HttpUtil.hasDomain(feedLink))) {
+			if ((Validator.isNull(feedLink)) || (!HttpUtil.hasDomain(feedLink))) {
 				baseURL = HttpUtil.getProtocol(url).concat(Http.PROTOCOL_DELIMITER).concat(HttpUtil.getDomain(url));
 
-				feedLink = baseURL + feedLink;
+				if (Validator.isNotNull(feedLink)) {
+					feedLink = baseURL.concat(feedLink);
+				}
+				else {
+					feedLink = baseURL;
+				}
 			}
 			else {
 				baseURL = HttpUtil.getProtocol(feedLink).concat(Http.PROTOCOL_DELIMITER).concat(HttpUtil.getDomain(feedLink));
