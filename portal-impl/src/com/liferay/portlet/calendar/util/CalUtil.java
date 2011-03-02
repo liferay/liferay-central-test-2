@@ -152,8 +152,7 @@ public class CalUtil {
 			sb.append(cal.getTimeZone().getRawOffset());
 		}
 
-		if (types != null &&
-			types.length > 0 &&
+		if ((types != null) && (types.length > 0) &&
 			((types.length > 1) || Validator.isNotNull(types[0]))) {
 
 			sb.append(StringPool.PERIOD);
