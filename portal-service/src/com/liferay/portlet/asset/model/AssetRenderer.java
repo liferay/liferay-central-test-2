@@ -63,8 +63,6 @@ public interface AssetRenderer {
 
 	public String getUrlTitle();
 
-	public String getUuid();
-
 	public String getURLViewInContext(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse,
@@ -72,6 +70,8 @@ public interface AssetRenderer {
 		throws Exception;
 
 	public long getUserId();
+
+	public String getUuid();
 
 	public String getViewInContextMessage();
 
