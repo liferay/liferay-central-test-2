@@ -39,7 +39,7 @@ catch (Exception e) {
 
 			String feedLink = feed.getLink();
 
-			if ((Validator.isNull(feedLink)) || (!HttpUtil.hasDomain(feedLink))) {
+			if (Validator.isNull(feedLink) || !HttpUtil.hasDomain(feedLink)) {
 				baseURL = HttpUtil.getProtocol(url).concat(Http.PROTOCOL_DELIMITER).concat(HttpUtil.getDomain(url));
 
 				if (Validator.isNotNull(feedLink)) {
