@@ -305,10 +305,12 @@ create index IX_30616AAA on LayoutPrototype (companyId);
 create index IX_557A639F on LayoutPrototype (companyId, active_);
 
 create index IX_314B621A on LayoutRevision (layoutSetBranchId);
+create index IX_A9AC086E on LayoutRevision (layoutSetBranchId, head);
 create index IX_E10AC39 on LayoutRevision (layoutSetBranchId, head, plid);
 create index IX_4A84AF43 on LayoutRevision (layoutSetBranchId, parentLayoutRevisionId, plid);
 create index IX_B7B914E5 on LayoutRevision (layoutSetBranchId, plid);
 create index IX_70DA9ECB on LayoutRevision (layoutSetBranchId, plid, status);
+create index IX_7FFAE700 on LayoutRevision (layoutSetBranchId, status);
 create index IX_9329C9D6 on LayoutRevision (plid);
 
 create index IX_A40B8BEC on LayoutSet (groupId);

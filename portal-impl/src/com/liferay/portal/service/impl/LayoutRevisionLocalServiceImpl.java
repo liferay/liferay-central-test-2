@@ -280,6 +280,20 @@ public class LayoutRevisionLocalServiceImpl
 	}
 
 	public List<LayoutRevision> getLayoutRevisions(
+			long layoutSetBranchId, boolean head)
+		throws SystemException {
+
+		return layoutRevisionPersistence.findByL_H(layoutSetBranchId, head);
+	}
+
+	public List<LayoutRevision> getLayoutRevisions(
+			long layoutSetBranchId, int status)
+		throws SystemException {
+
+		return layoutRevisionPersistence.findByL_S(layoutSetBranchId, status);
+	}
+
+	public List<LayoutRevision> getLayoutRevisions(
 			long layoutSetBranchId, long plid)
 		throws SystemException {
 
