@@ -227,11 +227,12 @@ public interface LayoutRevisionLocalService {
 
 	public com.liferay.portal.model.LayoutRevision addLayoutRevision(
 		long userId, long layoutSetBranchId, long parentLayoutRevisionId,
-		boolean head, long plid, java.lang.String name, java.lang.String title,
-		java.lang.String description, java.lang.String typeSettings,
-		boolean iconImage, long iconImageId, java.lang.String themeId,
-		java.lang.String colorSchemeId, java.lang.String wapThemeId,
-		java.lang.String wapColorSchemeId, java.lang.String css,
+		boolean head, long plid, boolean privateLayout, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String typeSettings, boolean iconImage, long iconImageId,
+		java.lang.String themeId, java.lang.String colorSchemeId,
+		java.lang.String wapThemeId, java.lang.String wapColorSchemeId,
+		java.lang.String css,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

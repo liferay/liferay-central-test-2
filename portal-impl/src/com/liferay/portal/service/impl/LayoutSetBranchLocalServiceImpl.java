@@ -86,7 +86,8 @@ public class LayoutSetBranchLocalServiceImpl
 				layoutRevisionLocalService.addLayoutRevision(
 					userId, layoutSetBranchId,
 					LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
-					true, layout.getPlid(), layout.getName(), layout.getTitle(),
+					true, layout.getPlid(), layout.getPrivateLayout(),
+					layout.getName(), layout.getTitle(),
 					layout.getDescription(), layout.getTypeSettings(),
 					layout.isIconImage(), layout.getIconImageId(),
 					layout.getThemeId(), layout.getColorSchemeId(),

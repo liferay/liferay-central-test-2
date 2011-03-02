@@ -40,11 +40,11 @@ public class LayoutRevisionLocalServiceImpl
 
 	public LayoutRevision addLayoutRevision(
 			long userId, long layoutSetBranchId, long parentLayoutRevisionId,
-			boolean head, long plid, String name, String title,
-			String description, String typeSettings, boolean iconImage,
-			long iconImageId, String themeId, String colorSchemeId,
-			String wapThemeId, String wapColorSchemeId, String css,
-			ServiceContext serviceContext)
+			boolean head, long plid, boolean privateLayout, String name,
+			String title, String description, String typeSettings,
+			boolean iconImage, long iconImageId, String themeId,
+			String colorSchemeId, String wapThemeId, String wapColorSchemeId,
+			String css, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout revision
@@ -71,6 +71,7 @@ public class LayoutRevisionLocalServiceImpl
 		layoutRevision.setParentLayoutRevisionId(parentLayoutRevisionId);
 		layoutRevision.setHead(head);
 		layoutRevision.setPlid(plid);
+		layoutRevision.setPrivateLayout(privateLayout);
 		layoutRevision.setName(name);
 		layoutRevision.setTitle(title);
 		layoutRevision.setDescription(description);
@@ -137,7 +138,8 @@ public class LayoutRevisionLocalServiceImpl
 		layoutRevision = addLayoutRevision(
 			layoutSetBranch.getUserId(), layoutSetBranch.getLayoutSetBranchId(),
 			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, false,
-			plid, layout.getName(), layout.getTitle(), layout.getDescription(),
+			plid, layout.getPrivateLayout(), layout.getName(),
+			layout.getTitle(), layout.getDescription(),
 			layout.getTypeSettings(), layout.isIconImage(),
 			layout.getIconImageId(), layout.getThemeId(),
 			layout.getColorSchemeId(), layout.getWapThemeId(),
@@ -158,12 +160,12 @@ public class LayoutRevisionLocalServiceImpl
 				layoutSetBranch.getUserId(),
 				layoutSetBranch.getLayoutSetBranchId(),
 				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
-				false, plid, layout.getName(), layout.getTitle(),
-				layout.getDescription(), layout.getTypeSettings(),
-				layout.isIconImage(), layout.getIconImageId(),
-				layout.getThemeId(), layout.getColorSchemeId(),
-				layout.getWapThemeId(), layout.getWapColorSchemeId(),
-				layout.getCss(), serviceContext);
+				false, plid, layout.getPrivateLayout(), layout.getName(),
+				layout.getTitle(), layout.getDescription(),
+				layout.getTypeSettings(), layout.isIconImage(),
+				layout.getIconImageId(), layout.getThemeId(),
+				layout.getColorSchemeId(), layout.getWapThemeId(),
+				layout.getWapColorSchemeId(), layout.getCss(), serviceContext);
 		}
 
 		return layoutRevision;
@@ -300,6 +302,7 @@ public class LayoutRevisionLocalServiceImpl
 			layoutRevision.getLayoutRevisionId());
 		newLayoutRevision.setHead(false);
 		newLayoutRevision.setPlid(layoutRevision.getPlid());
+		newLayoutRevision.setPrivateLayout(layoutRevision.getPrivateLayout());
 		newLayoutRevision.setName(name);
 		newLayoutRevision.setTitle(title);
 		newLayoutRevision.setDescription(description);
