@@ -871,6 +871,8 @@
 		<put name="portlet_content" value="/portlet/layouts_admin/error.jsp" />
 	</definition>
 
+	<definition name="portlet.layouts_admin.merge_branch" path="/portlet/layouts_admin/merge_branch.jsp" />
+
 	<definition name="portlet.layouts_admin.publish_layouts" extends="portlet.layouts_admin">
 		<put name="portlet_content" value="/portlet/layouts_admin/publish_layouts.jsp" />
 	</definition>

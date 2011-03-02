@@ -55,6 +55,18 @@ if (!company.isCommunityLogo()) {
 	mainSections = ArrayUtil.remove(mainSections, "logo");
 }
 
+UnicodeProperties properties = liveGroup.getTypeSettingsProperties();
+
+String branchingKey = "branchingPublic";
+
+if (privateLayout) {
+	branchingKey = "branchingPrivate";
+}
+
+if (GetterUtil.getBoolean(properties.getProperty(branchingKey))) {
+	mainSections = ArrayUtil.append(mainSections, "branches");
+}
+
 String[][] categorySections = {mainSections};
 %>
 

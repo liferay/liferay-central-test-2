@@ -20,7 +20,7 @@
 	backURL="javascript:history.go(-1);"
 	title="error"
 />
-
+<liferay-ui:error exception="<%= LayoutSetBranchNameException.class %>" message="a-branch-with-than-name-already-exists" />
 <liferay-ui:error exception="<%= NoSuchGroupException.class %>" message="the-community-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchLayoutException.class %>" message="the-page-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchRoleException.class %>" message="the-role-could-not-be-found" />

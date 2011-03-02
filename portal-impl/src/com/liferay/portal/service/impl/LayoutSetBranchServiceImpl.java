@@ -36,7 +36,8 @@ public class LayoutSetBranchServiceImpl extends LayoutSetBranchServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		LayoutSetBranchPermissionUtil.check(
-			getPermissionChecker(), groupId, 0, ActionKeys.ADD_LAYOUT_BRANCH);
+			getPermissionChecker(), groupId, 0,
+			ActionKeys.ADD_LAYOUT_SET_BRANCH);
 
 		return layoutSetBranchLocalService.addLayoutSetBranch(
 			getUserId(), groupId, privateLayout, name, description,

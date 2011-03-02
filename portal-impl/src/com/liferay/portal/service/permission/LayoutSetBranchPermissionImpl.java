@@ -64,11 +64,9 @@ public class LayoutSetBranchPermissionImpl
 			long layoutSetBranchId, String actionId)
 		throws PortalException, SystemException {
 
-		if (actionId.equals(ActionKeys.ADD_LAYOUT_BRANCH) ||
-			actionId.equals(ActionKeys.DELETE)) {
-
+		if (actionId.equals(ActionKeys.ADD_LAYOUT_SET_BRANCH)) {
 			return GroupPermissionUtil.contains(
-				permissionChecker, groupId, ActionKeys.ADD_LAYOUT_BRANCH);
+				permissionChecker, groupId, ActionKeys.ADD_LAYOUT_SET_BRANCH);
 		}
 		else {
 			LayoutSetBranch layoutSetBranch =

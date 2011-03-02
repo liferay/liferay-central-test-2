@@ -45,6 +45,7 @@
 			'search-container': ['aui-base', 'selector-css3'],
 			'session': ['aui-io', 'collection', 'cookie', 'liferay-notice', 'substitute'],
 			'service-datasource': ['aui-base', 'datasource-local'],
+			'staging': ['aui-dialog', 'aui-io-plugin', 'aui-io-request', 'liferay-portlet-url'],
 			'undo-manager': ['aui-data-set', 'base', 'substitute'],
 			'upload': ['aui-base', 'aui-swf', 'collection', 'substitute', 'swfupload'],
 			'util-list-fields': ['aui-base'],

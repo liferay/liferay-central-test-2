@@ -61,7 +61,7 @@ public class ActionKeys {
 
 	public static final String ADD_ITEM = "ADD_ITEM";
 
-	public static final String ADD_LAYOUT_BRANCH = "ADD_LAYOUT_BRANCH";
+	public static final String ADD_LAYOUT_SET_BRANCH = "ADD_LAYOUT_SET_BRANCH";
 
 	public static final String ADD_LAYOUT_PROTOTYPE = "ADD_LAYOUT_PROTOTYPE";
 
@@ -171,6 +171,8 @@ public class ActionKeys {
 	public static final String MANAGE_TEAMS = "MANAGE_TEAMS";
 
 	public static final String MANAGE_USERS = "MANAGE_USERS";
+
+	public static final String MERGE = "MERGE";
 
 	public static final String MOVE_THREAD = "MOVE_THREAD";
 
