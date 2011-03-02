@@ -584,7 +584,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		Map<String, List<CalEvent>> eventsPool =
 			CalEventLocalUtil.getEventsPool(groupId);
 
-		String key = "recurrence".concat(CalUtil.toString(null, types));
+		String key = "recurrence";
 
 		List<CalEvent> events = eventsPool.get(key);
 
@@ -597,6 +597,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			}
 
 			events = new UnmodifiableList<CalEvent>(events);
+
+			eventsPool.put(key, events);
 		}
 
 		if (cal != null) {
@@ -608,8 +610,6 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				cal.get(Calendar.DATE));
 
 			Iterator<CalEvent> itr = events.iterator();
-
-			List<CalEvent> repeatingEvents = new ArrayList<CalEvent>();
 
 			while (itr.hasNext()) {
 				CalEvent event = itr.next();
@@ -636,18 +636,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					if (recurrence.isInRecurrence(
 							getRecurrenceCal(cal, tzICal, event))) {
 
-						repeatingEvents.add(event);
+						events.add(event);
 					}
 				}
 				catch (Exception e) {
 					_log.error(e, e);
 				}
 			}
-
-			events = new UnmodifiableList<CalEvent>(repeatingEvents);
 		}
-
-		eventsPool.put(key, events);
 
 		return events;
 	}
