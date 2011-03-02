@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.scripting.ruby.RubyExecutor;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.util.SystemProperties;
@@ -117,6 +118,8 @@ public class DynamicCSSFilter extends BasePortalFilter {
 		sb.append(_tempDir);
 		sb.append(requestURI);
 
+		request.setAttribute(WebKeys.CSS_REAL_PATH, realPath);
+
 		String queryString = request.getQueryString();
 
 		if (queryString != null) {
@@ -199,6 +202,8 @@ public class DynamicCSSFilter extends BasePortalFilter {
 
 		Map<String, Object> inputObjects = new HashMap<String, Object>();
 
+		inputObjects.put(
+			"cssRealPath", request.getAttribute(WebKeys.CSS_REAL_PATH));
 		inputObjects.put("content", content);
 		inputObjects.put("out", unsyncPrintWriter);
 
