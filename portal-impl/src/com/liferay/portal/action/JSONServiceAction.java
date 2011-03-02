@@ -231,7 +231,7 @@ public class JSONServiceAction extends JSONAction {
 			return ParamUtil.getShortValues(request, parameter);
 		}
 		else if (typeNameOrClassDescriptor.equals("[Ljava.lang.String;")) {
-			return StringUtil.split(value);
+			return request.getParameterValues(parameter);
 		}
 		else if (typeNameOrClassDescriptor.equals("[[Z")) {
 			String[] values = request.getParameterValues(parameter);
