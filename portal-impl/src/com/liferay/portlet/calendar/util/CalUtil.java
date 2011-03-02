@@ -142,16 +142,21 @@ public class CalUtil {
 
 		StringBundler sb = new StringBundler(9);
 
-		sb.append(cal.get(Calendar.YEAR));
-		sb.append(StringPool.PERIOD);
-		sb.append(cal.get(Calendar.MONTH));
-		sb.append(StringPool.PERIOD);
-		sb.append(cal.get(Calendar.DATE));
-		sb.append(StringPool.PERIOD);
-		sb.append(cal.getTimeZone().getRawOffset());
-		sb.append(StringPool.PERIOD);
+		if (cal != null) {
+			sb.append(cal.get(Calendar.YEAR));
+			sb.append(StringPool.PERIOD);
+			sb.append(cal.get(Calendar.MONTH));
+			sb.append(StringPool.PERIOD);
+			sb.append(cal.get(Calendar.DATE));
+			sb.append(StringPool.PERIOD);
+			sb.append(cal.getTimeZone().getRawOffset());
+		}
 
-		if (types != null) {
+		if (types != null &&
+			types.length > 0 &&
+			((types.length > 1) || Validator.isNotNull(types[0]))) {
+
+			sb.append(StringPool.PERIOD);
 			sb.append(StringUtil.merge(types, StringPool.PERIOD));
 		}
 
