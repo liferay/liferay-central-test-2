@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.staging.Staging;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
@@ -28,6 +29,8 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutRevisionLocalServiceBaseImpl;
+import com.liferay.portlet.PortalPreferences;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -88,12 +91,27 @@ public class LayoutRevisionLocalServiceImpl
 		layoutRevision.setWapThemeId(wapThemeId);
 		layoutRevision.setWapColorSchemeId(wapColorSchemeId);
 		layoutRevision.setCss(css);
+		layoutRevision.setStatus(WorkflowConstants.STATUS_DRAFT);
+		layoutRevision.setStatusDate(serviceContext.getModifiedDate(now));
 
 		layoutRevision.setStatus(WorkflowConstants.STATUS_DRAFT);
 
 		layoutRevisionPersistence.update(layoutRevision, false);
 
+		// Portlet preferences
+
+		if (parentLayoutRevisionId ==
+				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID) {
+
+			parentLayoutRevisionId = layoutRevision.getPlid();
+		}
+
+		copyPortletPreferences(
+			layoutRevision, parentLayoutRevisionId, serviceContext);
+
 		// Workflow
+
+		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), layoutRevision.getGroupId(), user.getUserId(),
@@ -180,7 +198,7 @@ public class LayoutRevisionLocalServiceImpl
 				layoutSetBranchId);
 
 		for (LayoutRevision layoutRevision : layoutRevisions) {
-			deleteLayoutRevision(layoutRevision);
+			layoutRevisionLocalService.deleteLayoutRevision(layoutRevision);
 		}
 	}
 
@@ -188,12 +206,23 @@ public class LayoutRevisionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		for (LayoutRevision layoutRevision : getLayoutRevisions(plid)) {
-			deleteLayoutRevision(layoutRevision);
+			layoutRevisionLocalService.deleteLayoutRevision(layoutRevision);
 		}
 	}
 
 	public void deleteLayoutRevision(LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
+
+		if (layoutRevision.hasChildren()) {
+			for (LayoutRevision curLayoutRevision :
+					layoutRevision.getChildren()) {
+
+				curLayoutRevision.setParentLayoutRevisionId(
+					layoutRevision.getParentLayoutRevisionId());
+
+				layoutRevisionPersistence.update(curLayoutRevision, false);
+			}
+		}
 
 		List<PortletPreferences> portletPreferencesList =
 			portletPreferencesLocalService.getPortletPreferencesByPlid(
@@ -217,7 +246,7 @@ public class LayoutRevisionLocalServiceImpl
 		LayoutRevision layoutRevision =
 			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
-		deleteLayoutRevision(layoutRevision);
+		layoutRevisionLocalService.deleteLayoutRevision(layoutRevision);
 	}
 
 	public void deleteLayoutRevisions(long layoutSetBranchId, long plid)
@@ -226,7 +255,7 @@ public class LayoutRevisionLocalServiceImpl
 		for (LayoutRevision layoutRevision : getLayoutRevisions(
 				layoutSetBranchId, plid)) {
 
-			deleteLayoutRevision(layoutRevision);
+			layoutRevisionLocalService.deleteLayoutRevision(layoutRevision);
 		}
 	}
 
@@ -301,12 +330,16 @@ public class LayoutRevisionLocalServiceImpl
 		// Layout revision
 
 		User user = userPersistence.findByPrimaryKey(userId);
+
 		LayoutRevision layoutRevision =
 			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
+
 		Date now = new Date();
 
+		long newLayoutRevisionId = counterLocalService.increment();
+
 		LayoutRevision newLayoutRevision = layoutRevisionPersistence.create(
-			layoutRevisionId);
+			newLayoutRevisionId);
 
 		newLayoutRevision.setGroupId(layoutRevision.getGroupId());
 		newLayoutRevision.setCompanyId(layoutRevision.getCompanyId());
@@ -338,14 +371,31 @@ public class LayoutRevisionLocalServiceImpl
 		newLayoutRevision.setWapThemeId(wapThemeId);
 		newLayoutRevision.setWapColorSchemeId(wapColorSchemeId);
 		newLayoutRevision.setCss(css);
+		newLayoutRevision.setStatus(WorkflowConstants.STATUS_DRAFT);
+		newLayoutRevision.setStatusDate(serviceContext.getModifiedDate(now));
 
 		layoutRevisionPersistence.update(newLayoutRevision, false);
 
 		// Portlet preferences
 
-		copyPortletPreferences(newLayoutRevision, serviceContext);
+		copyPortletPreferences(
+			newLayoutRevision, newLayoutRevision.getParentLayoutRevisionId(),
+			serviceContext);
+
+		PortalPreferences portalPreferences =
+			PortletPreferencesFactoryUtil.getPortalPreferences(
+				newLayoutRevision.getCompanyId(), userId,
+				serviceContext.isSignedIn());
+
+		portalPreferences.setValue(
+			Staging.class.getName(), LayoutRevisionConstants.encodeKey(
+				newLayoutRevision.getLayoutSetBranchId(),
+				newLayoutRevision.getPlid()),
+			String.valueOf(newLayoutRevision.getLayoutRevisionId()));
 
 		// Workflow
+
+		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			newLayoutRevision.getCompanyId(), newLayoutRevision.getGroupId(),
@@ -419,12 +469,13 @@ public class LayoutRevisionLocalServiceImpl
 	}
 
 	protected void copyPortletPreferences(
-			LayoutRevision layoutRevision, ServiceContext serviceContext)
+			LayoutRevision layoutRevision, long parentLayoutRevisionId,
+			ServiceContext serviceContext)
 		throws SystemException {
 
 		List<PortletPreferences> portletPreferencesList =
 			portletPreferencesLocalService.getPortletPreferencesByPlid(
-				layoutRevision.getPlid());
+				parentLayoutRevisionId);
 
 		for (PortletPreferences portletPreferences : portletPreferencesList) {
 			portletPreferencesLocalService.addPortletPreferences(
