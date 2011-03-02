@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
@@ -122,6 +123,13 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 			getForward(renderRequest, "portlet.layouts_admin.edit_pages"));
 	}
 
+	protected UnicodeProperties getTypeSettingsProperties(
+		ActionRequest actionRequest) {
+
+		return PropertiesParamUtil.getProperties(
+			actionRequest, "TypeSettingsProperties--");
+	}
+
 	protected void updateLayoutSet(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -137,8 +145,6 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 		boolean privateLayout = ParamUtil.getBoolean(
 			actionRequest, "privateLayout");
 
-		updateMergePages(actionRequest);
-
 		updateLogo(
 			actionRequest, layoutSetId, liveGroupId, stagingGroupId,
 			privateLayout);
@@ -146,6 +152,30 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 		updateLookAndFeel(
 			actionRequest, themeDisplay.getCompanyId(), liveGroupId,
 			stagingGroupId, privateLayout, 0);
+
+		updateMergePages(actionRequest, liveGroupId);
+
+		updateSettings(
+			actionRequest, liveGroupId, stagingGroupId, privateLayout);
+
+	}
+
+	protected void updateSettings(
+			ActionRequest actionRequest, long liveGroupId, long stagingGroupId,
+			boolean privateLayout)
+		throws Exception {
+
+		UnicodeProperties typeSettingsProperties =
+			getTypeSettingsProperties(actionRequest);
+
+		LayoutSetServiceUtil.updateSettings(
+			liveGroupId, privateLayout, typeSettingsProperties.toString());
+
+		if (stagingGroupId > 0) {
+			LayoutSetServiceUtil.updateSettings(
+				stagingGroupId, privateLayout, typeSettingsProperties.toString());
+		}
+
 	}
 
 	protected void updateLogo(
@@ -181,10 +211,8 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 		}
 	}
 
-	protected void updateMergePages(ActionRequest actionRequest)
+	protected void updateMergePages(ActionRequest actionRequest, long liveGroupId)
 		throws Exception {
-
-		long liveGroupId = ParamUtil.getLong(actionRequest, "liveGroupId");
 
 		boolean mergeGuestPublicPages = ParamUtil.getBoolean(
 			actionRequest, "mergeGuestPublicPages");

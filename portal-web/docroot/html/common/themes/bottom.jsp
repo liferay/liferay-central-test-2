@@ -152,17 +152,23 @@ StringBundler pageBottomSB = (StringBundler)request.getAttribute(WebKeys.PAGE_BO
 
 <c:if test="<%= layout != null %>">
 
-	<%-- User Inputted Layout JavaScript --%>
+	<%-- User Inputted Layout and LayoutSet JavaScript --%>
 
 	<%
-	UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
+	LayoutSet layoutSet = themeDisplay.getLayoutSet();
+
+	UnicodeProperties layoutSetSettings = layoutSet.getSettingsProperties();
+
+	UnicodeProperties layoutTypeSettings = layout.getTypeSettingsProperties();
 	%>
 
 	<script type="text/javascript">
 		// <![CDATA[
-			<%= GetterUtil.getString(typeSettings.getProperty("javascript-1")) %>
-			<%= GetterUtil.getString(typeSettings.getProperty("javascript-2")) %>
-			<%= GetterUtil.getString(typeSettings.getProperty("javascript-3")) %>
+			<%= GetterUtil.getString(layoutSetSettings.getProperty("javascript")) %>
+
+			<%= GetterUtil.getString(layoutTypeSettings.getProperty("javascript-1")) %>
+			<%= GetterUtil.getString(layoutTypeSettings.getProperty("javascript-2")) %>
+			<%= GetterUtil.getString(layoutTypeSettings.getProperty("javascript-3")) %>
 		// ]]>
 	</script>
 
