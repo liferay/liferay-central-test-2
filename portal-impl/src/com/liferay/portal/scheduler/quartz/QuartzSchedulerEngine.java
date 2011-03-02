@@ -782,7 +782,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		Properties properties = PropsUtil.getProperties(propertiesPrefix, true);
 
 		if (useQuartzCluster && PropsValues.CLUSTER_LINK_ENABLED) {
-			properties.put("org.quartz.jobStore.isClustered", true);
+			properties.put(
+				"org.quartz.jobStore.isClustered", Boolean.TRUE.toString());
 		}
 
 		schedulerFactory.initialize(properties);
