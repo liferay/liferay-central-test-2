@@ -617,9 +617,17 @@
 		<finder name="Plid" return-type="Collection">
 			<finder-column name="plid" />
 		</finder>
+		<finder name="L_H" return-type="Collection">
+			<finder-column name="layoutSetBranchId" />
+			<finder-column name="head" />
+		</finder>
 		<finder name="L_P" return-type="Collection">
 			<finder-column name="layoutSetBranchId" />
 			<finder-column name="plid" />
+		</finder>
+		<finder name="L_S" return-type="Collection">
+			<finder-column name="layoutSetBranchId" />
+			<finder-column name="status" />
 		</finder>
 		<finder name="L_P_P" return-type="Collection">
 			<finder-column name="layoutSetBranchId" />
