@@ -36,6 +36,15 @@ public interface PortalLDAPImporter {
 			Attributes attributes, String password)
 		throws Exception;
 
+	public User importLDAPUser(
+			long ldapServerId, long companyId, String emailAddress,
+			String screenName)
+		throws Exception;
+
+	public User importLDAPUser(
+			long companyId, String emailAddress, String screenName)
+		throws Exception;
+
 	public User importLDAPUserByScreenName(long companyId, String screenName)
 		throws Exception;
 

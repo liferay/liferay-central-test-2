@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.sso.opensso.OpenSSOUtil;
@@ -46,7 +47,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  * @author Prashant Dighe
  */
-public class OpenSSOAutoLogin extends CASAutoLogin {
+public class OpenSSOAutoLogin implements AutoLogin {
 
 	public String[] login(
 		HttpServletRequest request, HttpServletResponse response) {
@@ -128,11 +129,11 @@ public class OpenSSOAutoLogin extends CASAutoLogin {
 						PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 
 					if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
-						user = importLDAPUser(
+						user = PortalLDAPImporterUtil.importLDAPUser(
 							companyId, StringPool.BLANK, screenName);
 					}
 					else {
-						user = importLDAPUser(
+						user = PortalLDAPImporterUtil.importLDAPUser(
 							companyId, emailAddress, StringPool.BLANK);
 					}
 				}

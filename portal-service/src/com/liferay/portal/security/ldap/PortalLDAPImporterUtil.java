@@ -49,6 +49,23 @@ public class PortalLDAPImporterUtil {
 			ldapServerId, companyId, ldapContext, attributes, password);
 	}
 
+	public static User importLDAPUser(
+			long ldapServerId, long companyId, String emailAddress,
+			String screenName)
+		throws Exception {
+
+		return _portalLDAPImporter.importLDAPUser(
+			ldapServerId, companyId, emailAddress, screenName);
+	}
+
+	public static User importLDAPUser(
+			long companyId, String emailAddress, String screenName)
+		throws Exception {
+
+		return _portalLDAPImporter.importLDAPUser(
+			companyId, emailAddress, screenName);
+	}
+
 	public static User importLDAPUserByScreenName(
 			long companyId, String screenName)
 		throws Exception {

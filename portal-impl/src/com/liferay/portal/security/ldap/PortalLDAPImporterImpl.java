@@ -17,6 +17,7 @@ package com.liferay.portal.security.ldap;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -65,8 +66,10 @@ import java.util.Properties;
 
 import javax.naming.Binding;
 import javax.naming.NameNotFoundException;
+import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
+import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import javax.naming.ldap.LdapContext;
 
@@ -217,6 +220,133 @@ public class PortalLDAPImporterImpl implements PortalLDAPImporter {
 			userMappings, groupMappings);
 
 		return user;
+	}
+
+	public User importLDAPUser(
+			long ldapServerId, long companyId, String emailAddress,
+			String screenName)
+		throws Exception {
+
+		LdapContext ldapContext = null;
+
+		try {
+			String postfix = LDAPSettingsUtil.getPropertyPostfix(ldapServerId);
+
+			String baseDN = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_BASE_DN + postfix);
+
+			ldapContext = PortalLDAPUtil.getContext(ldapServerId, companyId);
+
+			if (ldapContext == null) {
+				throw new SystemException("Failed to bind to the LDAP server");
+			}
+
+			String filter = PrefsPropsUtil.getString(
+				companyId, PropsKeys.LDAP_AUTH_SEARCH_FILTER + postfix);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Search filter before transformation " + filter);
+			}
+
+			filter = StringUtil.replace(
+				filter,
+				new String[] {
+					"@company_id@", "@email_address@", "@screen_name@"
+				},
+				new String[] {
+					String.valueOf(companyId), emailAddress, screenName
+				});
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Search filter after transformation " + filter);
+			}
+
+			Properties userMappings = LDAPSettingsUtil.getUserMappings(
+				ldapServerId, companyId);
+
+			String userMappingsScreenName = GetterUtil.getString(
+				userMappings.getProperty("screenName")).toLowerCase();
+
+			SearchControls searchControls = new SearchControls(
+				SearchControls.SUBTREE_SCOPE, 1, 0,
+				new String[] {userMappingsScreenName}, false, false);
+
+			NamingEnumeration<SearchResult> enu = ldapContext.search(
+				baseDN, filter, searchControls);
+
+			if (enu.hasMoreElements()) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Search filter returned at least one result");
+				}
+
+				Binding binding = enu.nextElement();
+
+				Attributes attributes = PortalLDAPUtil.getUserAttributes(
+					ldapServerId, companyId, ldapContext,
+					PortalLDAPUtil.getNameInNamespace(
+						ldapServerId, companyId, binding));
+
+				return importLDAPUser(
+					ldapServerId, companyId, ldapContext, attributes,
+					StringPool.BLANK);
+			}
+			else {
+				return null;
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Problem accessing LDAP server " + e.getMessage());
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
+
+			throw new SystemException(
+				"Problem accessing LDAP server " + e.getMessage());
+		}
+		finally {
+			if (ldapContext != null) {
+				ldapContext.close();
+			}
+		}
+	}
+
+	public User importLDAPUser(
+			long companyId, String emailAddress, String screenName)
+		throws Exception {
+
+		long[] ldapServerIds = StringUtil.split(
+			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+		if (ldapServerIds.length <= 0) {
+			ldapServerIds = new long[] {0};
+		}
+
+		for (long ldapServerId : ldapServerIds) {
+			User user = importLDAPUser(
+				ldapServerId, companyId, emailAddress, screenName);
+
+			if (user != null) {
+				return user;
+			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			if (Validator.isNotNull(emailAddress)) {
+				_log.debug(
+					"User with the email address " + emailAddress +
+				" was not found in any LDAP servers");
+			}
+			else {
+				_log.debug(
+					"User with the screen name " + screenName +
+				" was not found in any LDAP servers");
+			}
+		}
+
+		return null;
 	}
 
 	public User importLDAPUserByScreenName(long companyId, String screenName)
