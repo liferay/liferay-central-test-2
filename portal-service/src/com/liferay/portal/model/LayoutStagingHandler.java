@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.staging.Staging;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
@@ -26,6 +28,9 @@ import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
+import com.liferay.portal.util.LayoutTypePortletFactoryUtil;
+import com.liferay.portlet.PortalPreferences;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -33,6 +38,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -63,6 +69,10 @@ public class LayoutStagingHandler implements InvocationHandler {
 
 			String methodName = method.getName();
 
+			if (methodName.equals("getLayoutType")) {
+				return _getLayoutType();
+			}
+
 			if (methodName.equals("toEscapedModel")) {
 				if (_layout.isEscapedModel()) {
 					return this;
@@ -87,6 +97,7 @@ public class LayoutStagingHandler implements InvocationHandler {
 					bean = _layoutRevision;
 				}
 				catch (NoSuchMethodException nsme) {
+					_log.error(nsme);
 				}
 			}
 
@@ -126,22 +137,27 @@ public class LayoutStagingHandler implements InvocationHandler {
 			return layoutRevision;
 		}
 
-		long layoutRevisionId = 0;
-		long layoutSetBranchId = 0;
-
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		if (serviceContext != null) {
-			layoutRevisionId = ParamUtil.getLong(
-				serviceContext, "layoutRevisionId");
-			layoutSetBranchId = ParamUtil.getLong(
-				serviceContext, "layoutSetBranchId");
+		if (!serviceContext.isSignedIn()) {
+			return layoutRevision;
 		}
 
-		if (layoutRevisionId > 0) {
-			return LayoutRevisionLocalServiceUtil.getLayoutRevision(
-				layoutRevisionId);
+		long layoutRevisionId = ParamUtil.getLong(
+			serviceContext, "layoutRevisionId");
+		long layoutSetBranchId = ParamUtil.getLong(
+			serviceContext, "layoutSetBranchId");
+
+		PortalPreferences portalPreferences =
+			PortletPreferencesFactoryUtil.getPortalPreferences(
+				layout.getCompanyId(), serviceContext.getUserId(),
+				serviceContext.isSignedIn());
+
+		if (layoutSetBranchId <= 0) {
+			layoutSetBranchId = GetterUtil.getLong(
+				portalPreferences.getValue(
+					Staging.class.getName(), "LAYOUT_SET_BRANCH_ID"));
 		}
 
 		LayoutSetBranch layoutSetBranch = null;
@@ -150,45 +166,64 @@ public class LayoutStagingHandler implements InvocationHandler {
 			layoutSetBranch =
 				LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
 					layoutSetBranchId);
-
-			try {
-				return LayoutRevisionLocalServiceUtil.getLayoutRevision(
-					layoutSetBranch.getLayoutSetBranchId(), layout.getPlid(),
-					true);
-			}
-			catch (NoSuchLayoutRevisionException nslre) {
-
-				// This branch does not have this layout in it
-
-			}
 		}
 		else {
 			layoutSetBranch =
 				LayoutSetBranchLocalServiceUtil.getMasterLayoutSetBranch(
 					layout.getGroupId(), layout.isPrivateLayout());
+
+			layoutSetBranchId = layoutSetBranch.getLayoutSetBranchId();
+		}
+
+		if (layoutRevisionId <= 0) {
+			layoutRevisionId = GetterUtil.getLong(
+				portalPreferences.getValue(
+					Staging.class.getName(),
+					LayoutRevisionConstants.encodeKey(
+						layoutSetBranchId, layout.getPlid())));
 		}
 
 		try {
-			layoutRevision = LayoutRevisionLocalServiceUtil.getLayoutRevision(
-				layoutSetBranch.getLayoutSetBranchId(), layout.getPlid(), true);
+			return LayoutRevisionLocalServiceUtil.getLayoutRevision(
+				layoutRevisionId);
 		}
 		catch (NoSuchLayoutRevisionException nslre) {
-			if (layoutSetBranchId <= 0) {
-				layoutSetBranchId = layoutSetBranch.getLayoutSetBranchId();
-			}
-
-			layoutRevision = LayoutRevisionLocalServiceUtil.addLayoutRevision(
-				serviceContext.getUserId(), layoutSetBranchId,
-				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, true,
-				layout.getPlid(), layout.getPrivateLayout(), layout.getName(),
-				layout.getTitle(), layout.getDescription(),
-				layout.getTypeSettings(), layout.getIconImage(),
-				layout.getIconImageId(), layout.getThemeId(),
-				layout.getColorSchemeId(), layout.getWapThemeId(),
-				layout.getWapColorSchemeId(), layout.getCss(), serviceContext);
 		}
 
-		return layoutRevision;
+		try {
+			return LayoutRevisionLocalServiceUtil.getLayoutRevision(
+				layoutSetBranch.getLayoutSetBranchId(),
+				layout.getPlid(), true);
+		}
+		catch (NoSuchLayoutRevisionException nslre) {
+			List<LayoutRevision> revisions =
+				LayoutRevisionLocalServiceUtil.getLayoutRevisions(
+					layoutSetBranch.getLayoutSetBranchId(),
+					layout.getPlid(),
+					LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID);
+
+			if (!revisions.isEmpty()) {
+				return revisions.get(0);
+			}
+		}
+
+		return LayoutRevisionLocalServiceUtil.addLayoutRevision(
+			serviceContext.getUserId(), layoutSetBranchId,
+			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
+			true, layout.getPlid(), layout.getPrivateLayout(), layout.getName(),
+			layout.getTitle(), layout.getDescription(),
+			layout.getTypeSettings(), layout.getIconImage(),
+			layout.getIconImageId(), layout.getThemeId(),
+			layout.getColorSchemeId(), layout.getWapThemeId(),
+			layout.getWapColorSchemeId(), layout.getCss(), serviceContext);
+	}
+
+	private LayoutType _getLayoutType() {
+		return LayoutTypePortletFactoryUtil.create(
+			(Layout)Proxy.newProxyInstance(
+				PortalClassLoaderUtil.getClassLoader(),
+				new Class[] {Layout.class},
+				new LayoutStagingHandler(_layout, _layoutRevision)));
 	}
 
 	private Object _toEscapedModel() {
@@ -208,18 +243,13 @@ public class LayoutStagingHandler implements InvocationHandler {
 		_layoutRevisionMethodNames.add("getColorSchemeId");
 		_layoutRevisionMethodNames.add("getCss");
 		_layoutRevisionMethodNames.add("getDescription");
-		_layoutRevisionMethodNames.add("getDescriptionMap");
 		_layoutRevisionMethodNames.add("getIconImage");
 		_layoutRevisionMethodNames.add("getIconImageId");
 		_layoutRevisionMethodNames.add("getKeywords");
-		_layoutRevisionMethodNames.add("getKeywordsMap");
 		_layoutRevisionMethodNames.add("getName");
-		_layoutRevisionMethodNames.add("getNameMap");
 		_layoutRevisionMethodNames.add("getRobots");
-		_layoutRevisionMethodNames.add("getRobotsMap");
 		_layoutRevisionMethodNames.add("getThemeId");
 		_layoutRevisionMethodNames.add("getTitle");
-		_layoutRevisionMethodNames.add("getTitleMap");
 		_layoutRevisionMethodNames.add("getTypeSettings");
 		_layoutRevisionMethodNames.add("getTypeSettingsProperties");
 		_layoutRevisionMethodNames.add("getWapColorSchemeId");

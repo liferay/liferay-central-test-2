@@ -14,6 +14,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 /**
  * <a href="RevisionConstants.java.html"><b><i>View Source</i></b></a>
  *
@@ -22,5 +24,17 @@ package com.liferay.portal.model;
 public class LayoutRevisionConstants {
 
 	public static final long DEFAULT_PARENT_LAYOUT_REVISION_ID = 0;
+
+	public static String encodeKey(long layoutSetBranchId, long plid) {
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("LAYOUT_SET_BRANCH_ID_");
+		sb.append(layoutSetBranchId);
+		sb.append("_PLID_");
+		sb.append(plid);
+		sb.append("_LAYOUT_REVISION_ID");
+
+		return sb.toString();
+	}
 
 }
