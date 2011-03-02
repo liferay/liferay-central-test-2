@@ -166,9 +166,7 @@ StringBundler pageBottomSB = (StringBundler)request.getAttribute(WebKeys.PAGE_BO
 		// <![CDATA[
 			<%= GetterUtil.getString(layoutSetSettings.getProperty("javascript")) %>
 
-			<%= GetterUtil.getString(layoutTypeSettings.getProperty("javascript-1")) %>
-			<%= GetterUtil.getString(layoutTypeSettings.getProperty("javascript-2")) %>
-			<%= GetterUtil.getString(layoutTypeSettings.getProperty("javascript-3")) %>
+			<%= GetterUtil.getString(layoutTypeSettings.getProperty("javascript")) %>
 		// ]]>
 	</script>
 

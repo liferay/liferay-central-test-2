@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -117,7 +118,58 @@ public class UpgradeLayout
 					"robots");
 			}
 
+			String javascript1 = typeSettingsProperties.getProperty(
+				"javascript-1");
+			String javascript2 = typeSettingsProperties.getProperty(
+				"javascript-2");
+			String javascript3 = typeSettingsProperties.getProperty(
+				"javascript-3");
+
+			if ((javascript1 != null) ||
+				(javascript2 != null) ||
+				(javascript3 != null)) {
+
+				updateJavascript(
+					typeSettingsProperties, javascript1, javascript2,
+					javascript3);
+			}
+
 			updateTypeSettings(plid, typeSettingsProperties.toString());
+		}
+	}
+
+	protected void updateJavascript(
+			UnicodeProperties typeSettingsProperties, String javascript1,
+			String javascript2, String javascript3)
+		throws Exception {
+
+		StringBundler sb = new StringBundler(6);
+
+		if (Validator.isNotNull(javascript1)) {
+			sb.append("//Custom Javascript 1\n\n");
+			sb.append(javascript1);
+
+			typeSettingsProperties.remove("javascript-1");
+		}
+
+		if (Validator.isNotNull(javascript2)) {
+			sb.append("\n\n\n //Custom Javascript 2\n\n");
+			sb.append(javascript2);
+
+			typeSettingsProperties.remove("javascript-2");
+		}
+
+		if (Validator.isNotNull(javascript3)) {
+			sb.append("\n\n\n //Custom Javascript 3\n\n");
+			sb.append(javascript3);
+
+			typeSettingsProperties.remove("javascript-3");
+		}
+
+		String javascript = sb.toString();
+
+		if (Validator.isNotNull(javascript)) {
+			typeSettingsProperties.put("javascript", javascript);
 		}
 	}
 
