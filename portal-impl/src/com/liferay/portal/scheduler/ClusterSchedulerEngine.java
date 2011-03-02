@@ -27,6 +27,9 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineClusterManager;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
@@ -218,7 +221,8 @@ public class ClusterSchedulerEngine
 	private static String _localClusterNodeId;
 
 	private ClusterEventListener _memorySchedulerClusterEventListener;
-	private boolean _retrieveFromCache;
+	private boolean _retrieveFromCache = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED));
 	private SchedulerEngine _schedulerEngine;
 
 	private class MemorySchedulerClusterEventListener

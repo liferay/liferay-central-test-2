@@ -71,11 +71,12 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		try {
 			quartzLocalService.checkQuartzTables();
 
-			_persistedScheduler = initializeScheduler("persisted.scheduler.");
+			_persistedScheduler = initializeScheduler(
+				"persisted.scheduler.", true);
 
 			initJobState();
 
-			_memoryScheduler = initializeScheduler("memory.scheduler.");
+			_memoryScheduler = initializeScheduler("memory.scheduler.", false);
 		}
 		catch (Exception e) {
 			_log.error("Unable to initialize engine", e);
@@ -746,12 +747,17 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		message.put(JOB_STATE, jobState.clone());
 	}
 
-	protected Scheduler initializeScheduler(String propertiesPrefix)
+	protected Scheduler initializeScheduler(
+			String propertiesPrefix, boolean useQuartzCluster)
 		throws Exception {
 
 		StdSchedulerFactory schedulerFactory = new StdSchedulerFactory();
 
 		Properties properties = PropsUtil.getProperties(propertiesPrefix, true);
+
+		if (useQuartzCluster && PropsValues.CLUSTER_LINK_ENABLED) {
+			properties.put("org.quartz.jobStore.isClustered", true);
+		}
 
 		schedulerFactory.initialize(properties);
 
@@ -932,16 +938,13 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 			schedulerContext.put(jobDetail.getFullName(), jobState);
 
-			if (scheduler == _memoryScheduler) {
-				scheduler.scheduleJob(jobDetail, trigger);
-			}
-			else {
+			if (scheduler == _persistedScheduler) {
 				jobDetail.setDurability(true);
+			}
 
-				synchronized (this) {
-					scheduler.deleteJob(jobName, groupName);
-					scheduler.scheduleJob(jobDetail, trigger);
-				}
+			synchronized (this) {
+				scheduler.deleteJob(jobName, groupName);
+				scheduler.scheduleJob(jobDetail, trigger);
 			}
 		}
 		catch (ObjectAlreadyExistsException oare) {
