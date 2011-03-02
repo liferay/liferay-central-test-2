@@ -14,4 +14,8 @@
  */
 --%>
 
+<%@ page import="com.liferay.portal.kernel.staging.LayoutStagingUtil" %>
+<%@ page import="com.liferay.portal.kernel.staging.Staging" %>
+<%@ page import="com.liferay.portal.util.comparator.LayoutRevisionIdComparator" %>
+
 <%@ include file="/html/portlet/init.jsp" %>

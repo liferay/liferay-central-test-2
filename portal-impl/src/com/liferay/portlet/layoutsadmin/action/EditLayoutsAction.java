@@ -29,6 +29,7 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.staging.Staging;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -48,6 +49,9 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.LayoutRevision;
+import com.liferay.portal.model.LayoutRevisionConstants;
+import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -55,7 +59,9 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
+import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -72,6 +78,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LayoutSettings;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.SessionClicks;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
@@ -90,6 +97,7 @@ import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
@@ -136,6 +144,9 @@ public class EditLayoutsAction extends PortletAction {
 			else if (cmd.equals("display_order")) {
 				updateDisplayOrder(actionRequest);
 			}
+			else if (cmd.equals("delete_layout_revision")) {
+				deleteLayoutRevision(actionRequest);
+			}
 			else if (cmd.equals("publish_to_live")) {
 				StagingUtil.publishToLive(actionRequest);
 			}
@@ -151,6 +162,9 @@ public class EditLayoutsAction extends PortletAction {
 			else if (cmd.equals("schedule_publish_to_remote")) {
 				StagingUtil.schedulePublishToRemote(actionRequest);
 			}
+			else if (cmd.equals("select_layout_set_branch")) {
+				selectLayoutSetBranch(actionRequest);
+			}
 			else if (cmd.equals("unschedule_copy_from_live")) {
 				StagingUtil.unscheduleCopyFromLive(actionRequest);
 			}
@@ -159,6 +173,9 @@ public class EditLayoutsAction extends PortletAction {
 			}
 			else if (cmd.equals("unschedule_publish_to_remote")) {
 				StagingUtil.unschedulePublishToRemote(actionRequest);
+			}
+			else if (cmd.equals("update_layout_revision")) {
+				updateLayoutRevision(actionRequest);
 			}
 
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
@@ -372,6 +389,32 @@ public class EditLayoutsAction extends PortletAction {
 		}
 	}
 
+	protected void deleteLayoutRevision(ActionRequest actionRequest)
+		throws Exception {
+
+		long layoutRevisionId = ParamUtil.getLong(
+			actionRequest, "layoutRevisionId");
+		boolean updateSessionClicks = ParamUtil.getBoolean(
+			actionRequest, "updateSessionClicks");
+
+		LayoutRevision layoutRevision =
+			LayoutRevisionLocalServiceUtil.getLayoutRevision(layoutRevisionId);
+
+		LayoutRevisionLocalServiceUtil.deleteLayoutRevision(layoutRevision);
+
+		if (updateSessionClicks) {
+			HttpServletRequest request = PortalUtil.getHttpServletRequest(
+				actionRequest);
+
+			SessionClicks.put(
+				request, Staging.class.getName(),
+				LayoutRevisionConstants.encodeKey(
+					layoutRevision.getLayoutSetBranchId(),
+					layoutRevision.getPlid()),
+				String.valueOf(layoutRevision.getParentLayoutRevisionId()));
+		}
+	}
+
 	protected Group getGroup(PortletRequest portletRequest) throws Exception {
 		return ActionUtil.getGroup(portletRequest);
 	}
@@ -381,6 +424,26 @@ public class EditLayoutsAction extends PortletAction {
 
 		return PropertiesParamUtil.getProperties(
 			actionRequest, "TypeSettingsProperties--");
+	}
+
+	protected void selectLayoutSetBranch(ActionRequest actionRequest)
+		throws Exception {
+
+		long layoutSetBranchId = ParamUtil.getLong(
+			actionRequest, "layoutSetBranchId");
+
+		// Keep this so that we don't allow setting a non-existent branchId.
+
+		LayoutSetBranch layoutSetBranch =
+			LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
+				layoutSetBranchId);
+
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		SessionClicks.put(
+			request, Staging.class.getName(), "LAYOUT_SET_BRANCH_ID",
+			String.valueOf(layoutSetBranch.getLayoutSetBranchId()));
 	}
 
 	protected void updateDisplayOrder(ActionRequest actionRequest)
@@ -654,6 +717,30 @@ public class EditLayoutsAction extends PortletAction {
 					css, wapTheme);
 			}
 		}
+	}
+
+	protected void updateLayoutRevision(ActionRequest actionRequest)
+		throws Exception {
+
+		long layoutRevisionId = ParamUtil.getLong(
+			actionRequest, "layoutRevisionId");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
+		LayoutRevision layoutRevision =
+			LayoutRevisionLocalServiceUtil.getLayoutRevision(layoutRevisionId);
+
+		LayoutRevisionLocalServiceUtil.updateLayoutRevision(
+			serviceContext.getUserId(), layoutRevisionId,
+			layoutRevision.getName(), layoutRevision.getTitle(),
+			layoutRevision.getDescription(), layoutRevision.getKeywords(),
+			layoutRevision.getRobots(), layoutRevision.getTypeSettings(),
+			layoutRevision.getIconImage(), layoutRevision.getIconImageId(),
+			layoutRevision.getThemeId(), layoutRevision.getColorSchemeId(),
+			layoutRevision.getWapThemeId(),
+			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
+			serviceContext);
 	}
 
 }

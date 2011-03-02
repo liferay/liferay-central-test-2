@@ -526,6 +526,12 @@
 
 		<action path="/dockbar/view" forward="portlet.dockbar.view" />
 
+		<action path="/dockbar/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
+			<forward name="portlet.layouts_admin.error" path="portlet.dockbar.view" />
+		</action>
+
+		<action path="/dockbar/revision_graph" forward="portlet.dockbar.revision_graph" />
+
 		<!-- Document Library -->
 
 		<action path="/document_library/compare_versions" type="com.liferay.portlet.documentlibrary.action.CompareVersionsAction">

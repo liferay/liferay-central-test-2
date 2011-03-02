@@ -409,6 +409,8 @@
 
 	<definition name="portlet.dockbar.view" path="/portlet/dockbar/view.jsp" />
 
+	<definition name="portlet.dockbar.revision_graph" path="/portlet/dockbar/revision_graph.jsp" />
+
 	<!-- Document Library -->
 
 	<definition name="portlet.document_library" extends="portlet" />
