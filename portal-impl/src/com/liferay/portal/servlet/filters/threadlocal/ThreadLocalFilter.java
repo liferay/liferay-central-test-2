@@ -16,9 +16,6 @@ package com.liferay.portal.servlet.filters.threadlocal;
 
 import com.liferay.portal.kernel.servlet.TryFinallyFilter;
 import com.liferay.portal.kernel.util.CentralizedThreadLocal;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InitialThreadLocal;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,23 +27,9 @@ import javax.servlet.http.HttpServletResponse;
 public class ThreadLocalFilter
 	extends BasePortalFilter implements TryFinallyFilter {
 
-	public static final boolean ENABLED = GetterUtil.getBoolean(
-		PropsUtil.get(ThreadLocalFilter.class.getName()));
-
-	public static boolean isInUse() {
-		if (_useCountThreadLocal.get() > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
 	public void doFilterFinally(
 		HttpServletRequest request, HttpServletResponse response,
 		Object ojbect) {
-
-		_useCountThreadLocal.set(_useCountThreadLocal.get() - 1);
 
 		CentralizedThreadLocal.clearShortLivedThreadLocals();
 	}
@@ -54,13 +37,7 @@ public class ThreadLocalFilter
 	public Object doFilterTry(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		_useCountThreadLocal.set(_useCountThreadLocal.get() + 1);
-
 		return null;
 	}
-
-	private static ThreadLocal<Long> _useCountThreadLocal =
-		new InitialThreadLocal<Long>(
-			ThreadLocalFilter.class + "_useCountThreadLocal", 0L);
 
 }
