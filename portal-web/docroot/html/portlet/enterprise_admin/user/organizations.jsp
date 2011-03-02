@@ -125,7 +125,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 			rowColumns.push(name);
 			rowColumns.push(type);
-			rowColumns.push('<%= RoleConstants.ORGANIZATION_MEMBER %>');
+			rowColumns.push('');
 			rowColumns.push('<a class="modify-link" data-rowId="' + organizationId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeOrganizationIcon) %></a>');
 
 			searchContainer.addRow(rowColumns, organizationId);

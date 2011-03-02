@@ -117,7 +117,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 			var rowColumns = [];
 
 			rowColumns.push(name);
-			rowColumns.push('<%= RoleConstants.COMMUNITY_MEMBER %>');
+			rowColumns.push('');
 			rowColumns.push('<a class="modify-link" data-rowId="' + groupId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeGroupIcon) %></a>');
 
 			searchContainer.addRow(rowColumns, groupId);
