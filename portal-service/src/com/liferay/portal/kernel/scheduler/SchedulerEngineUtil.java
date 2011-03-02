@@ -542,14 +542,13 @@ public class SchedulerEngineUtil {
 	private List<SchedulerResponse> _getScheduledJobs(StorageType storageType)
 		throws SchedulerException {
 
-		List<SchedulerResponse> allSchedulerResponses =
-			_schedulerEngine.getScheduledJobs();
-
 		List<SchedulerResponse> schedulerResponses =
 			new ArrayList<SchedulerResponse>();
 
-		for (SchedulerResponse schedulerResponse : allSchedulerResponses) {
-			if (schedulerResponse.getStorageType().equals(storageType)) {
+		for (SchedulerResponse schedulerResponse :
+				_schedulerEngine.getScheduledJobs()) {
+
+			if (storageType.equals(schedulerResponse.getStorageType())) {
 				schedulerResponses.add(schedulerResponse);
 			}
 		}

@@ -270,6 +270,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 		try {
 			Scheduler scheduler = getScheduler(trigger.getGroupName());
+
 			StorageType storageType = getStorageType(trigger.getGroupName());
 
 			trigger = TriggerFactoryUtil.buildTrigger(
@@ -734,17 +735,17 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return StorageType.PERSISTED;
 		}
 		else if (groupName.startsWith(
-			StorageType.MEMORY_MULTIPLE_INSTANCES.toString())) {
+					StorageType.MEMORY_MULTIPLE_INSTANCES.toString())) {
 
 			return StorageType.MEMORY_MULTIPLE_INSTANCES;
 		}
 		else if (groupName.startsWith(
-			StorageType.MEMORY_SINGLE_INSTANCE.toString())) {
+					StorageType.MEMORY_SINGLE_INSTANCE.toString())) {
 
 			return StorageType.MEMORY_SINGLE_INSTANCE;
 		}
 
-		throw new Exception("Unable to get storage type!");
+		throw new Exception("Unable to get storage type");
 	}
 
 	protected void handleJobState(
