@@ -28,6 +28,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
@@ -146,6 +147,10 @@ public class ThemeDisplay implements Serializable {
 
 	public List<Layout> getLayouts() {
 		return _layouts;
+	}
+
+	public LayoutSet getLayoutSet() {
+		return _layoutSet;
 	}
 
 	public String getLayoutSetLogo() {
@@ -706,6 +711,10 @@ public class ThemeDisplay implements Serializable {
 		_layouts = layouts;
 	}
 
+	public void setLayoutSet(LayoutSet layoutSet) {
+		_layoutSet = layoutSet;
+	}
+
 	public void setLayoutSetLogo(String layoutSetLogo) {
 		_layoutSetLogo = layoutSetLogo;
 	}
@@ -1139,6 +1148,7 @@ public class ThemeDisplay implements Serializable {
 	private Layout _layout;
 	private List<Layout> _layouts;
 	private String _layoutSetLogo = StringPool.BLANK;
+	private LayoutSet _layoutSet;
 	private LayoutTypePortlet _layoutTypePortlet;
 	private String _lifecycle;
 	private boolean _lifecycleAction;

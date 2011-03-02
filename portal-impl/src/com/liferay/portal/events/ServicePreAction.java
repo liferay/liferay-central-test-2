@@ -1246,11 +1246,13 @@ public class ServicePreAction extends Action {
 		layouts = mergeAdditionalLayouts(
 			request, user, permissionChecker, layout, layouts);
 
+		LayoutSet layoutSet = null;
+
 		if (layout != null) {
+			layoutSet = layout.getLayoutSet();
+
 			if (company.isCommunityLogo()) {
 				long logoId = 0;
-
-				LayoutSet layoutSet = layout.getLayoutSet();
 
 				if (layoutSet.isLogo()) {
 					logoId = layoutSet.getLogoId();
@@ -1475,6 +1477,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setLayoutSetLogo(layoutSetLogo);
 		themeDisplay.setLayout(layout);
 		themeDisplay.setLayouts(layouts);
+		themeDisplay.setLayoutSet(layoutSet);
 		themeDisplay.setUnfilteredLayouts(unfilteredLayouts);
 		themeDisplay.setPlid(plid);
 		themeDisplay.setLayoutTypePortlet(layoutTypePortlet);
