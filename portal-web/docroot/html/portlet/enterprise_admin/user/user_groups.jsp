@@ -94,8 +94,6 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 
 			searchContainer.addRow(rowColumns, userGroupId);
 			searchContainer.updateDataStore();
-
-			<portlet:namespace />trackChanges();
 		},
 		['liferay-search-container']
 	);
@@ -111,8 +109,6 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 			var tr = link.ancestor('tr');
 
 			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
-
-			<portlet:namespace />trackChanges();
 		},
 		'.modify-link'
 	);

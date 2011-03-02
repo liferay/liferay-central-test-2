@@ -293,8 +293,6 @@ if (parentOrganization != null) {
 			searchContainer.deleteRow(1, searchContainer.getData());
 			searchContainer.addRow(rowColumns, organizationId);
 			searchContainer.updateDataStore(organizationId);
-
-			<portlet:namespace />trackChanges();
 		},
 		['liferay-search-container']
 	);
@@ -329,8 +327,6 @@ if (parentOrganization != null) {
 			var tr = link.ancestor('tr');
 
 			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
-
-			<portlet:namespace />trackChanges();
 		},
 		'.modify-link'
 	);

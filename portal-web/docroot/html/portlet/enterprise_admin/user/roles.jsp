@@ -205,8 +205,6 @@ userGroupRoles.addAll(organizationRoles);
 					searchContainer.deleteRow(tr, rowId);
 
 					<portlet:namespace />deleteGroupRole(rowId, groupId);
-
-					<portlet:namespace />trackChanges();
 				},
 				'.modify-link'
 			);
@@ -361,8 +359,6 @@ userGroupRoles.addAll(organizationRoles);
 
 			searchContainer.addRow(rowColumns, roleId);
 			searchContainer.updateDataStore();
-
-			<portlet:namespace />trackChanges();
 		},
 		['liferay-search-container']
 	);
@@ -378,8 +374,6 @@ userGroupRoles.addAll(organizationRoles);
 			var tr = link.ancestor('tr');
 
 			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
-
-			<portlet:namespace />trackChanges();
 		},
 		'.modify-link'
 	);

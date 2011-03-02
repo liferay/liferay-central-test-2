@@ -130,8 +130,6 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 			searchContainer.addRow(rowColumns, organizationId);
 			searchContainer.updateDataStore();
-
-			<portlet:namespace />trackChanges();
 		},
 		['liferay-search-container']
 	);
@@ -147,8 +145,6 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 			var tr = link.ancestor('tr');
 
 			searchContainer.deleteRow(tr, link.getAttribute('data-rowId'));
-
-			<portlet:namespace />trackChanges();
 		},
 		'.modify-link'
 	);
