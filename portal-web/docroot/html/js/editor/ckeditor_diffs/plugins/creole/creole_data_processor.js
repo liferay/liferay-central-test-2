@@ -45,6 +45,8 @@
 						breakBeforeClose: false
 					}
 				);
+
+				editor.fire('customDataProcessorLoaded');
 			}
 		}
 	);

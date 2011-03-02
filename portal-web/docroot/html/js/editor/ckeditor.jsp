@@ -52,6 +52,7 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 }
 
 String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFileName", "ckconfig.jsp");
+boolean useCustomDataProcessor = ParamUtil.getBoolean(request, "useCustomDataProcessor");
 %>
 
 <html>
@@ -115,6 +116,12 @@ String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFile
 
 <script type="text/javascript">
 	(function() {
+		var customDataProcessorLoaded = false;
+		var instanceReady = false;
+
+		function setData() {
+			ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
+		}
 
 		<%
 		String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&p_p_id=" + HttpUtil.encodeURL(portletId) + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId) + "&doAsGroupId=" + HttpUtil.encodeURL(doAsGroupId));
@@ -132,17 +139,49 @@ String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFile
 
 		var ckEditor = CKEDITOR.instances.CKEditor1;
 
+		<%
+		if (useCustomDataProcessor ) {
+		%>
+
+			ckEditor.on(
+				'customDataProcessorLoaded',
+				function() {
+					customDataProcessorLoaded = true;
+
+					if (instanceReady) {
+						setData();
+					}
+				}
+			);
+
+		<%
+		}
+		%>
+
 		ckEditor.on(
 			'instanceReady',
 			function() {
-				setTimeout(
-					function() {
-						ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
-					},
-					300
-				);
 
 				<%
+				if (useCustomDataProcessor) {
+				%>
+
+					instanceReady = true;
+
+					if (customDataProcessorLoaded) {
+						setData();
+					}
+
+				<%
+				}
+				else {
+				%>
+
+					setData();
+
+				<%
+				}
+
 				if (Validator.isNotNull(onChangeMethod)) {
 				%>
 
