@@ -17,6 +17,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Layout;
@@ -270,6 +271,23 @@ public class LayoutRevisionLocalServiceImpl
 
 		return layoutRevisionPersistence.findByL_P_P(
 			layoutSetBranchId, parentLayoutRevisionId, plid);
+	}
+
+	public List<LayoutRevision> getLayoutRevisions(
+			long layoutSetBranchId, long parentLayoutRevision, long plid,
+			int start, int end, OrderByComparator obc)
+		throws SystemException {
+
+		return layoutRevisionPersistence.findByL_P_P(
+			layoutSetBranchId, parentLayoutRevision, plid, start, end, obc);
+	}
+
+	public int getLayoutRevisionsCount(
+			long layoutSetBranchId, long parentLayoutRevision, long plid)
+		throws SystemException {
+
+		return layoutRevisionPersistence.countByL_P_P(
+			layoutSetBranchId, parentLayoutRevision, plid);
 	}
 
 	public LayoutRevision updateLayoutRevision(
