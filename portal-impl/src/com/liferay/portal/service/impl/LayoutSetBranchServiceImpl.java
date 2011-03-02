@@ -61,6 +61,19 @@ public class LayoutSetBranchServiceImpl extends LayoutSetBranchServiceBaseImpl {
 			groupId, privateLayout);
 	}
 
+	public LayoutSetBranch mergeLayoutSetBranch(
+			long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		LayoutSetBranchPermissionUtil.check(
+			getPermissionChecker(), groupId, layoutSetBranchId,
+			ActionKeys.UPDATE);
+
+		return layoutSetBranchLocalService.mergeLayoutSetBranch(
+			groupId, layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
+	}
+
 	public LayoutSetBranch updateLayoutSetBranch(
 			long groupId, long layoutSetBranchId, String name,
 			String description, ServiceContext serviceContext)

@@ -52,6 +52,15 @@ public class LayoutSetBranchServiceWrapper implements LayoutSetBranchService {
 			privateLayout);
 	}
 
+	public com.liferay.portal.model.LayoutSetBranch mergeLayoutSetBranch(
+		long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutSetBranchService.mergeLayoutSetBranch(groupId,
+			layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
+	}
+
 	public com.liferay.portal.model.LayoutSetBranch updateLayoutSetBranch(
 		long groupId, long layoutSetBranchId, java.lang.String name,
 		java.lang.String description,

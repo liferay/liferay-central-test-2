@@ -133,6 +133,7 @@ Liferay.Service.registerClass(
 		addLayoutSetBranch: true,
 		deleteLayoutSetBranch: true,
 		getLayoutSetBranches: true,
+		mergeLayoutSetBranch: true,
 		updateLayoutSetBranch: true
 	}
 );

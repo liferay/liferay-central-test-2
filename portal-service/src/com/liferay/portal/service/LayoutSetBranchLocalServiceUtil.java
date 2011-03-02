@@ -290,6 +290,15 @@ public class LayoutSetBranchLocalServiceUtil {
 		return getService().getLayoutSetBranch(groupId, privateLayout, name);
 	}
 
+	public static com.liferay.portal.model.LayoutSetBranch getUserLayoutSetBranch(
+		long userId, long groupId, boolean privateLayout, long layoutSetBranchId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getUserLayoutSetBranch(userId, groupId, privateLayout,
+			layoutSetBranchId);
+	}
+
 	public static java.util.List<com.liferay.portal.model.LayoutSetBranch> getLayoutSetBranches(
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -312,6 +321,16 @@ public class LayoutSetBranchLocalServiceUtil {
 		return getService()
 				   .updateLayoutSetBranch(layoutSetBranchId, name, description,
 			serviceContext);
+	}
+
+	public static com.liferay.portal.model.LayoutSetBranch mergeLayoutSetBranch(
+		long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .mergeLayoutSetBranch(groupId, layoutSetBranchId,
+			mergeLayoutSetBranchId, serviceContext);
 	}
 
 	public static LayoutSetBranchLocalService getService() {

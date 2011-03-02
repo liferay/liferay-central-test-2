@@ -61,6 +61,16 @@ public class LayoutSetBranchServiceUtil {
 		return getService().getLayoutSetBranches(groupId, privateLayout);
 	}
 
+	public static com.liferay.portal.model.LayoutSetBranch mergeLayoutSetBranch(
+		long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .mergeLayoutSetBranch(groupId, layoutSetBranchId,
+			mergeLayoutSetBranchId, serviceContext);
+	}
+
 	public static com.liferay.portal.model.LayoutSetBranch updateLayoutSetBranch(
 		long groupId, long layoutSetBranchId, java.lang.String name,
 		java.lang.String description,

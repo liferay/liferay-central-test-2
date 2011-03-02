@@ -253,6 +253,7 @@ public class LayoutRevisionLocalServiceUtil {
 		long userId, long layoutSetBranchId, long parentLayoutRevisionId,
 		boolean head, long plid, boolean privateLayout, java.lang.String name,
 		java.lang.String title, java.lang.String description,
+		java.lang.String keywords, java.lang.String robots,
 		java.lang.String typeSettings, boolean iconImage, long iconImageId,
 		java.lang.String themeId, java.lang.String colorSchemeId,
 		java.lang.String wapThemeId, java.lang.String wapColorSchemeId,
@@ -263,18 +264,9 @@ public class LayoutRevisionLocalServiceUtil {
 		return getService()
 				   .addLayoutRevision(userId, layoutSetBranchId,
 			parentLayoutRevisionId, head, plid, privateLayout, name, title,
-			description, typeSettings, iconImage, iconImageId, themeId,
-			colorSchemeId, wapThemeId, wapColorSchemeId, css, serviceContext);
-	}
-
-	public static com.liferay.portal.model.LayoutRevision checkLatestLayoutRevision(
-		long layoutRevisionId, long layoutSetBranchId, long plid,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .checkLatestLayoutRevision(layoutRevisionId,
-			layoutSetBranchId, plid, serviceContext);
+			description, keywords, robots, typeSettings, iconImage,
+			iconImageId, themeId, colorSchemeId, wapThemeId, wapColorSchemeId,
+			css, serviceContext);
 	}
 
 	public static void deleteLayoutSetBranchLayoutRevisions(
@@ -373,13 +365,6 @@ public class LayoutRevisionLocalServiceUtil {
 			description, keywords, robots, typeSettings, iconImage,
 			iconImageId, themeId, colorSchemeId, wapThemeId, wapColorSchemeId,
 			css, serviceContext);
-	}
-
-	public static com.liferay.portal.model.LayoutRevision updateMajor(
-		long layoutRevisionId, boolean major)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().updateMajor(layoutRevisionId, major);
 	}
 
 	public static com.liferay.portal.model.LayoutRevision updateStatus(

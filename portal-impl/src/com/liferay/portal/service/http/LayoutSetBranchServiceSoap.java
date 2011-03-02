@@ -111,6 +111,23 @@ public class LayoutSetBranchServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.LayoutSetBranchSoap mergeLayoutSetBranch(
+		long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.LayoutSetBranch returnValue = LayoutSetBranchServiceUtil.mergeLayoutSetBranch(groupId,
+					layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
+
+			return com.liferay.portal.model.LayoutSetBranchSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.LayoutSetBranchSoap updateLayoutSetBranch(
 		long groupId, long layoutSetBranchId, java.lang.String name,
 		java.lang.String description,

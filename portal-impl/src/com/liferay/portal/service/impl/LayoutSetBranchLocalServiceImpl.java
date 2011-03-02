@@ -19,8 +19,12 @@ import com.liferay.portal.NoSuchLayoutSetBranchException;
 import com.liferay.portal.RequiredLayoutSetBranchException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.staging.Staging;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutRevisionConstants;
 import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.LayoutSetBranchConstants;
@@ -28,6 +32,8 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutSetBranchLocalServiceBaseImpl;
+import com.liferay.portlet.PortalPreferences;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -88,7 +94,8 @@ public class LayoutSetBranchLocalServiceImpl
 					LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
 					true, layout.getPlid(), layout.getPrivateLayout(),
 					layout.getName(), layout.getTitle(),
-					layout.getDescription(), layout.getTypeSettings(),
+					layout.getDescription(), layout.getKeywords(),
+					layout.getRobots(), layout.getTypeSettings(),
 					layout.isIconImage(), layout.getIconImageId(),
 					layout.getThemeId(), layout.getColorSchemeId(),
 					layout.getWapThemeId(), layout.getWapColorSchemeId(),
@@ -165,6 +172,36 @@ public class LayoutSetBranchLocalServiceImpl
 			groupId, privateLayout, name);
 	}
 
+	public LayoutSetBranch getUserLayoutSetBranch(
+			long userId, long groupId, boolean privateLayout,
+			long layoutSetBranchId)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		boolean signedIn = !user.isDefaultUser();
+
+		PortalPreferences portalPreferences =
+			PortletPreferencesFactoryUtil.getPortalPreferences(
+				user.getCompanyId(), user.getUserId(), signedIn);
+
+		if (layoutSetBranchId <= 0) {
+			layoutSetBranchId = GetterUtil.getLong(
+				portalPreferences.getValue(
+					Staging.class.getName(), "LAYOUT_SET_BRANCH_ID"));
+		}
+
+		if (layoutSetBranchId > 0) {
+			try {
+				return getLayoutSetBranch(layoutSetBranchId);
+			}
+			catch (NoSuchLayoutSetBranchException nslsbe) {
+			}
+		}
+
+		return getMasterLayoutSetBranch(groupId, privateLayout);
+	}
+
 	public List<LayoutSetBranch> getLayoutSetBranches(
 			long groupId, boolean privateLayout)
 		throws SystemException {
@@ -193,6 +230,40 @@ public class LayoutSetBranchLocalServiceImpl
 		layoutSetBranch.setDescription(description);
 
 		layoutSetBranchPersistence.update(layoutSetBranch, false);
+
+		return layoutSetBranch;
+	}
+
+	public LayoutSetBranch mergeLayoutSetBranch(
+			long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
+
+		LayoutSetBranch layoutSetBranch =
+			layoutSetBranchPersistence.findByPrimaryKey(layoutSetBranchId);
+
+		List<LayoutRevision> revisions =
+			layoutRevisionLocalService.getLayoutRevisions(
+				mergeLayoutSetBranchId, true);
+
+		for (LayoutRevision revision : revisions) {
+			serviceContext.setAttribute(
+				"mergeLayoutRevisionId", revision.getLayoutRevisionId());
+
+			layoutRevisionLocalService.addLayoutRevision(
+				revision.getUserId(), layoutSetBranch.getLayoutSetBranchId(),
+				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
+				false, revision.getPlid(), revision.getPrivateLayout(),
+				revision.getName(), revision.getTitle(),
+				revision.getDescription(), revision.getKeywords(),
+				revision.getRobots(), revision.getTypeSettings(),
+				revision.getIconImage(), revision.getIconImageId(),
+				revision.getThemeId(), revision.getColorSchemeId(),
+				revision.getWapThemeId(), revision.getWapColorSchemeId(),
+				revision.getCss(), serviceContext);
+		}
 
 		return layoutSetBranch;
 	}

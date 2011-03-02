@@ -45,10 +45,10 @@ public class LayoutRevisionLocalServiceImpl
 	public LayoutRevision addLayoutRevision(
 			long userId, long layoutSetBranchId, long parentLayoutRevisionId,
 			boolean head, long plid, boolean privateLayout, String name,
-			String title, String description, String typeSettings,
-			boolean iconImage, long iconImageId, String themeId,
-			String colorSchemeId, String wapThemeId, String wapColorSchemeId,
-			String css, ServiceContext serviceContext)
+			String title, String description, String keywords, String robots,
+			String typeSettings, boolean iconImage, long iconImageId,
+			String themeId, String colorSchemeId, String wapThemeId,
+			String wapColorSchemeId, String css, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout revision
@@ -79,6 +79,8 @@ public class LayoutRevisionLocalServiceImpl
 		layoutRevision.setName(name);
 		layoutRevision.setTitle(title);
 		layoutRevision.setDescription(description);
+		layoutRevision.setKeywords(keywords);
+		layoutRevision.setRobots(robots);
 		layoutRevision.setTypeSettings(typeSettings);
 
 		if (iconImage) {
@@ -118,74 +120,6 @@ public class LayoutRevisionLocalServiceImpl
 			LayoutRevision.class.getName(),
 			layoutRevision.getLayoutRevisionId(), layoutRevision,
 			serviceContext);
-
-		return layoutRevision;
-	}
-
-	public LayoutRevision checkLatestLayoutRevision(
-			long layoutRevisionId, long layoutSetBranchId, long plid,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		LayoutSetBranch layoutSetBranch =
-			layoutSetBranchPersistence.findByPrimaryKey(layoutSetBranchId);
-
-		LayoutRevision layoutRevision = null;
-
-		if (layoutRevisionId > 0) {
-			layoutRevision = layoutRevisionPersistence.fetchByPrimaryKey(
-				layoutRevisionId);
-		}
-
-		List<LayoutRevision> layoutRevisions = null;
-
-		if (layoutRevision == null) {
-			layoutRevisions = layoutRevisionPersistence.findByL_P(
-				layoutSetBranchId, plid, 0 , 1);
-
-			if (!layoutRevisions.isEmpty()) {
-				layoutRevision = layoutRevisions.get(0);
-			}
-		}
-
-		if (layoutRevision != null) {
-			return layoutRevision;
-		}
-
-		Layout layout = layoutPersistence.findByPrimaryKey(plid);
-
-		layoutRevision = addLayoutRevision(
-			layoutSetBranch.getUserId(), layoutSetBranch.getLayoutSetBranchId(),
-			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID, false,
-			plid, layout.getPrivateLayout(), layout.getName(),
-			layout.getTitle(), layout.getDescription(),
-			layout.getTypeSettings(), layout.isIconImage(),
-			layout.getIconImageId(), layout.getThemeId(),
-			layout.getColorSchemeId(), layout.getWapThemeId(),
-			layout.getWapColorSchemeId(), layout.getCss(), serviceContext);
-
-		if (layoutSetBranch.isMaster()) {
-			return layoutRevision;
-		}
-
-		layoutSetBranch = layoutSetBranchLocalService.getMasterLayoutSetBranch(
-			layoutSetBranch.getGroupId(), layoutSetBranch.getPrivateLayout());
-
-		layoutRevisions = layoutRevisionPersistence.findByL_P(
-			layoutSetBranch.getLayoutSetBranchId(), plid, 0 , 1);
-
-		if (layoutRevisions.isEmpty()) {
-			addLayoutRevision(
-				layoutSetBranch.getUserId(),
-				layoutSetBranch.getLayoutSetBranchId(),
-				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
-				false, plid, layout.getPrivateLayout(), layout.getName(),
-				layout.getTitle(), layout.getDescription(),
-				layout.getTypeSettings(), layout.isIconImage(),
-				layout.getIconImageId(), layout.getThemeId(),
-				layout.getColorSchemeId(), layout.getWapThemeId(),
-				layout.getWapColorSchemeId(), layout.getCss(), serviceContext);
-		}
 
 		return layoutRevision;
 	}
