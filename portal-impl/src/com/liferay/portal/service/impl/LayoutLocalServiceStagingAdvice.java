@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutStagingHandler;
@@ -175,6 +176,8 @@ public class LayoutLocalServiceStagingAdvice extends LayoutLocalServiceImpl
 			}
 		}
 
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
+
 		layoutRevisionLocalService.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutRevisionId(),
 			layoutRevision.getName(), layoutRevision.getTitle(),
@@ -227,6 +230,8 @@ public class LayoutLocalServiceStagingAdvice extends LayoutLocalServiceImpl
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
+
 		layoutRevisionLocalService.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutRevisionId(),
 			layoutRevision.getName(), layoutRevision.getTitle(),
@@ -273,6 +278,8 @@ public class LayoutLocalServiceStagingAdvice extends LayoutLocalServiceImpl
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
+
 		layoutRevisionLocalService.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutRevisionId(),
 			layoutRevision.getName(), layoutRevision.getTitle(),
@@ -305,6 +312,8 @@ public class LayoutLocalServiceStagingAdvice extends LayoutLocalServiceImpl
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
+
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		layoutRevisionLocalService.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutRevisionId(),

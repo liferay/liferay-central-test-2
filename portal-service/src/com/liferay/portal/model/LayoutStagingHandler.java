@@ -149,31 +149,17 @@ public class LayoutStagingHandler implements InvocationHandler {
 		long layoutSetBranchId = ParamUtil.getLong(
 			serviceContext, "layoutSetBranchId");
 
+		LayoutSetBranch layoutSetBranch =
+			LayoutSetBranchLocalServiceUtil.getUserLayoutSetBranch(
+				serviceContext.getUserId(), layout.getGroupId(),
+				layout.getPrivateLayout(), layoutSetBranchId);
+
+		layoutSetBranchId = layoutSetBranch.getLayoutSetBranchId();
+
 		PortalPreferences portalPreferences =
 			PortletPreferencesFactoryUtil.getPortalPreferences(
 				layout.getCompanyId(), serviceContext.getUserId(),
 				serviceContext.isSignedIn());
-
-		if (layoutSetBranchId <= 0) {
-			layoutSetBranchId = GetterUtil.getLong(
-				portalPreferences.getValue(
-					Staging.class.getName(), "LAYOUT_SET_BRANCH_ID"));
-		}
-
-		LayoutSetBranch layoutSetBranch = null;
-
-		if (layoutSetBranchId > 0) {
-			layoutSetBranch =
-				LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
-					layoutSetBranchId);
-		}
-		else {
-			layoutSetBranch =
-				LayoutSetBranchLocalServiceUtil.getMasterLayoutSetBranch(
-					layout.getGroupId(), layout.isPrivateLayout());
-
-			layoutSetBranchId = layoutSetBranch.getLayoutSetBranchId();
-		}
 
 		if (layoutRevisionId <= 0) {
 			layoutRevisionId = GetterUtil.getLong(
@@ -192,15 +178,14 @@ public class LayoutStagingHandler implements InvocationHandler {
 
 		try {
 			return LayoutRevisionLocalServiceUtil.getLayoutRevision(
-				layoutSetBranch.getLayoutSetBranchId(),
-				layout.getPlid(), true);
+				layoutSetBranchId, layout.getPlid(), true);
 		}
 		catch (NoSuchLayoutRevisionException nslre) {
 			List<LayoutRevision> revisions =
 				LayoutRevisionLocalServiceUtil.getLayoutRevisions(
-					layoutSetBranch.getLayoutSetBranchId(),
-					layout.getPlid(),
-					LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID);
+					layoutSetBranchId,
+					LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
+					layout.getPlid());
 
 			if (!revisions.isEmpty()) {
 				return revisions.get(0);

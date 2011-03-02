@@ -15,6 +15,7 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.staging.LayoutStagingUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.PortletPreferencesIds;
@@ -132,6 +133,8 @@ public class PortletPreferencesLocalServiceStagingAdvice
 
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
+
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
 		layoutRevision = LayoutRevisionLocalServiceUtil.updateLayoutRevision(
 			serviceContext.getUserId(), layoutRevision.getLayoutRevisionId(),

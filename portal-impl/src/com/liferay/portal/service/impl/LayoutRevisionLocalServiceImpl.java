@@ -19,9 +19,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.staging.Staging;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutRevisionConstants;
 import com.liferay.portal.model.LayoutSetBranch;
@@ -96,7 +96,13 @@ public class LayoutRevisionLocalServiceImpl
 		layoutRevision.setStatus(WorkflowConstants.STATUS_DRAFT);
 		layoutRevision.setStatusDate(serviceContext.getModifiedDate(now));
 
-		layoutRevision.setStatus(WorkflowConstants.STATUS_DRAFT);
+		long mergeLayoutRevisionId = ParamUtil.getLong(
+			serviceContext, "mergeLayoutRevisionId");
+
+		if (mergeLayoutRevisionId > 0) {
+			parentLayoutRevisionId = mergeLayoutRevisionId;
+			layoutRevision.setMajor(true);
+		}
 
 		layoutRevisionPersistence.update(layoutRevision, false);
 
@@ -112,8 +118,6 @@ public class LayoutRevisionLocalServiceImpl
 			layoutRevision, parentLayoutRevisionId, serviceContext);
 
 		// Workflow
-
-		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
 			user.getCompanyId(), layoutRevision.getGroupId(), user.getUserId(),
@@ -279,86 +283,96 @@ public class LayoutRevisionLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		LayoutRevision layoutRevision =
+		LayoutRevision oldLayoutRevision =
 			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
 		Date now = new Date();
 
-		long newLayoutRevisionId = counterLocalService.increment();
+		LayoutRevision layoutRevision = null;
 
-		LayoutRevision newLayoutRevision = layoutRevisionPersistence.create(
-			newLayoutRevisionId);
+		int workflowAction = serviceContext.getWorkflowAction();
 
-		newLayoutRevision.setGroupId(layoutRevision.getGroupId());
-		newLayoutRevision.setCompanyId(layoutRevision.getCompanyId());
-		newLayoutRevision.setUserId(user.getUserId());
-		newLayoutRevision.setUserName(user.getFullName());
-		newLayoutRevision.setCreateDate(serviceContext.getCreateDate(now));
-		newLayoutRevision.setModifiedDate(serviceContext.getModifiedDate(now));
-		newLayoutRevision.setLayoutSetBranchId(
-			layoutRevision.getLayoutSetBranchId());
-		newLayoutRevision.setParentLayoutRevisionId(
-			layoutRevision.getLayoutRevisionId());
-		newLayoutRevision.setHead(false);
-		newLayoutRevision.setPlid(layoutRevision.getPlid());
-		newLayoutRevision.setPrivateLayout(layoutRevision.getPrivateLayout());
-		newLayoutRevision.setName(name);
-		newLayoutRevision.setTitle(title);
-		newLayoutRevision.setDescription(description);
-		newLayoutRevision.setKeywords(keywords);
-		newLayoutRevision.setRobots(robots);
-		newLayoutRevision.setTypeSettings(typeSettings);
+		if (workflowAction != WorkflowConstants.ACTION_PUBLISH) {
+			long newLayoutRevisionId = counterLocalService.increment();
 
-		if (iconImage) {
-			newLayoutRevision.setIconImage(iconImage);
-			newLayoutRevision.setIconImageId(iconImageId);
+			layoutRevision = layoutRevisionPersistence.create(
+				newLayoutRevisionId);
+
+			layoutRevision.setGroupId(oldLayoutRevision.getGroupId());
+			layoutRevision.setCompanyId(oldLayoutRevision.getCompanyId());
+			layoutRevision.setUserId(user.getUserId());
+			layoutRevision.setUserName(user.getFullName());
+			layoutRevision.setCreateDate(serviceContext.getCreateDate(now));
+			layoutRevision.setModifiedDate(serviceContext.getModifiedDate(now));
+			layoutRevision.setLayoutSetBranchId(
+				oldLayoutRevision.getLayoutSetBranchId());
+			layoutRevision.setParentLayoutRevisionId(
+				oldLayoutRevision.getLayoutRevisionId());
+			layoutRevision.setHead(false);
+			layoutRevision.setPlid(oldLayoutRevision.getPlid());
+			layoutRevision.setPrivateLayout(oldLayoutRevision.getPrivateLayout());
+			layoutRevision.setName(name);
+			layoutRevision.setTitle(title);
+			layoutRevision.setDescription(description);
+			layoutRevision.setKeywords(keywords);
+			layoutRevision.setRobots(robots);
+			layoutRevision.setTypeSettings(typeSettings);
+
+			if (iconImage) {
+				layoutRevision.setIconImage(iconImage);
+				layoutRevision.setIconImageId(iconImageId);
+			}
+
+			layoutRevision.setThemeId(themeId);
+			layoutRevision.setColorSchemeId(colorSchemeId);
+			layoutRevision.setWapThemeId(wapThemeId);
+			layoutRevision.setWapColorSchemeId(wapColorSchemeId);
+			layoutRevision.setCss(css);
+			layoutRevision.setStatus(WorkflowConstants.STATUS_DRAFT);
+			layoutRevision.setStatusDate(serviceContext.getModifiedDate(now));
+
+			layoutRevisionPersistence.update(layoutRevision, false);
+
+			// Portlet preferences
+
+			copyPortletPreferences(
+				layoutRevision, layoutRevision.getParentLayoutRevisionId(),
+				serviceContext);
+
+			PortalPreferences portalPreferences =
+				PortletPreferencesFactoryUtil.getPortalPreferences(
+					layoutRevision.getCompanyId(), userId,
+					serviceContext.isSignedIn());
+
+			portalPreferences.setValue(
+				Staging.class.getName(), LayoutRevisionConstants.encodeKey(
+					layoutRevision.getLayoutSetBranchId(),
+					layoutRevision.getPlid()),
+				String.valueOf(layoutRevision.getLayoutRevisionId()));
+		}
+		else {
+			layoutRevision = oldLayoutRevision;
 		}
 
-		newLayoutRevision.setThemeId(themeId);
-		newLayoutRevision.setColorSchemeId(colorSchemeId);
-		newLayoutRevision.setWapThemeId(wapThemeId);
-		newLayoutRevision.setWapColorSchemeId(wapColorSchemeId);
-		newLayoutRevision.setCss(css);
-		newLayoutRevision.setStatus(WorkflowConstants.STATUS_DRAFT);
-		newLayoutRevision.setStatusDate(serviceContext.getModifiedDate(now));
+		boolean major = ParamUtil.getBoolean(serviceContext, "major");
 
-		layoutRevisionPersistence.update(newLayoutRevision, false);
-
-		// Portlet preferences
-
-		copyPortletPreferences(
-			newLayoutRevision, newLayoutRevision.getParentLayoutRevisionId(),
-			serviceContext);
-
-		PortalPreferences portalPreferences =
-			PortletPreferencesFactoryUtil.getPortalPreferences(
-				newLayoutRevision.getCompanyId(), userId,
-				serviceContext.isSignedIn());
-
-		portalPreferences.setValue(
-			Staging.class.getName(), LayoutRevisionConstants.encodeKey(
-				newLayoutRevision.getLayoutSetBranchId(),
-				newLayoutRevision.getPlid()),
-			String.valueOf(newLayoutRevision.getLayoutRevisionId()));
+		if (major) {
+			updateMajor(layoutRevision);
+		}
 
 		// Workflow
 
-		serviceContext.setWorkflowAction(WorkflowConstants.STATUS_DRAFT);
-
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
-			newLayoutRevision.getCompanyId(), newLayoutRevision.getGroupId(),
+			layoutRevision.getCompanyId(), layoutRevision.getGroupId(),
 			userId, LayoutRevision.class.getName(),
-			newLayoutRevision.getLayoutRevisionId(), newLayoutRevision,
+			layoutRevision.getLayoutRevisionId(), layoutRevision,
 			serviceContext);
 
-		return newLayoutRevision;
+		return layoutRevision;
 	}
 
-	public LayoutRevision updateMajor(long layoutRevisionId, boolean major)
+	protected LayoutRevision updateMajor(LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
-
-		LayoutRevision layoutRevision =
-			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
 		long parentLayoutRevisionId =
 			layoutRevision.getParentLayoutRevisionId();
@@ -390,11 +404,9 @@ public class LayoutRevisionLocalServiceImpl
 		}
 
 		layoutRevision.setParentLayoutRevisionId(parentLayoutRevisionId);
-		layoutRevision.setMajor(major);
+		layoutRevision.setMajor(true);
 
-		layoutRevisionPersistence.update(layoutRevision, false);
-
-		return layoutRevision;
+		return layoutRevisionPersistence.update(layoutRevision, false);
 	}
 
 	public LayoutRevision updateStatus(
@@ -403,16 +415,15 @@ public class LayoutRevisionLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		Date now = new Date();
-
 		LayoutRevision layoutRevision =
 			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
 
-		layoutRevision.setModifiedDate(serviceContext.getModifiedDate(now));
+		Date now = new Date();
+
 		layoutRevision.setStatus(status);
 		layoutRevision.setStatusByUserId(user.getUserId());
 		layoutRevision.setStatusByUserName(user.getFullName());
-		layoutRevision.setStatusDate(serviceContext.getModifiedDate(now));
+		layoutRevision.setStatusDate(now);
 
 		if (status == WorkflowConstants.STATUS_APPROVED) {
 			layoutRevision.setHead(true);
@@ -454,9 +465,7 @@ public class LayoutRevisionLocalServiceImpl
 			}
 		}
 
-		layoutRevisionPersistence.update(layoutRevision, false);
-
-		return layoutRevision;
+		return layoutRevisionPersistence.update(layoutRevision, false);
 	}
 
 	protected void copyPortletPreferences(

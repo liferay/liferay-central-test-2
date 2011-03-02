@@ -23,6 +23,7 @@ import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.theme.ThemeDisplay;
 
 import java.io.Serializable;
 
@@ -50,7 +51,7 @@ public class LayoutRevisionWorkflowHandler extends BaseWorkflowHandler {
 
 		long userId = GetterUtil.getLong(
 			(String)workflowContext.get(WorkflowConstants.CONTEXT_USER_ID));
-		long revisionId = GetterUtil.getLong(
+		long layoutRevisionId = GetterUtil.getLong(
 			(String)workflowContext.get(
 				WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 
@@ -58,7 +59,11 @@ public class LayoutRevisionWorkflowHandler extends BaseWorkflowHandler {
 			"serviceContext");
 
 		return LayoutRevisionLocalServiceUtil.updateStatus(
-			userId, revisionId, status, serviceContext);
+			userId, layoutRevisionId, status, serviceContext);
+	}
+
+	protected String getIconPath(ThemeDisplay themeDisplay) {
+		return themeDisplay.getPathThemeImages() + "/common/pages.png";
 	}
 
 }

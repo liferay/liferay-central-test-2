@@ -321,6 +321,7 @@
 		<icon>/html/icons/communities.png</icon>
 		<struts-path>communities</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<asset-renderer-factory>com.liferay.portal.asset.LayoutRevisionAssetRendererFactory</asset-renderer-factory>
 		<workflow-handler>com.liferay.portal.workflow.LayoutRevisionWorkflowHandler</workflow-handler>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
