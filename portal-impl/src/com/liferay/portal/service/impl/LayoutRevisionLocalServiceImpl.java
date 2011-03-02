@@ -406,6 +406,49 @@ public class LayoutRevisionLocalServiceImpl
 		return newLayoutRevision;
 	}
 
+	public LayoutRevision updateMajor(long layoutRevisionId, boolean major)
+		throws PortalException, SystemException {
+
+		LayoutRevision layoutRevision =
+			layoutRevisionPersistence.findByPrimaryKey(layoutRevisionId);
+
+		long parentLayoutRevisionId =
+			layoutRevision.getParentLayoutRevisionId();
+
+		boolean forks = false;
+
+		while (parentLayoutRevisionId !=
+					LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID) {
+
+			LayoutRevision parentLayoutRevision =
+				layoutRevisionPersistence.findByPrimaryKey(
+					parentLayoutRevisionId);
+
+			if (parentLayoutRevision.isMajor()) {
+				break;
+			}
+
+			parentLayoutRevisionId =
+				parentLayoutRevision.getParentLayoutRevisionId();
+
+			if (parentLayoutRevision.getChildren().size() > 1) {
+				forks = true;
+			}
+
+			if (!forks) {
+				layoutRevisionLocalService.deleteLayoutRevision(
+					parentLayoutRevision);
+			}
+		}
+
+		layoutRevision.setParentLayoutRevisionId(parentLayoutRevisionId);
+		layoutRevision.setMajor(major);
+
+		layoutRevisionPersistence.update(layoutRevision, false);
+
+		return layoutRevision;
+	}
+
 	public LayoutRevision updateStatus(
 			long userId, long layoutRevisionId, int status,
 			ServiceContext serviceContext)

@@ -363,6 +363,13 @@ public class LayoutRevisionLocalServiceUtil {
 			css, serviceContext);
 	}
 
+	public static com.liferay.portal.model.LayoutRevision updateMajor(
+		long layoutRevisionId, boolean major)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().updateMajor(layoutRevisionId, major);
+	}
+
 	public static com.liferay.portal.model.LayoutRevision updateStatus(
 		long userId, long layoutRevisionId, int status,
 		com.liferay.portal.service.ServiceContext serviceContext)
