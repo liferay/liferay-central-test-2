@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 
 import java.lang.reflect.Proxy;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -153,6 +154,13 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		return _instance._getScheduledJobs();
+	}
+
+	public static List<SchedulerResponse> getScheduledJobs(
+			StorageType storageType)
+		throws SchedulerException {
+
+		return _instance._getScheduledJobs(storageType);
 	}
 
 	public static List<SchedulerResponse> getScheduledJobs(
@@ -529,6 +537,24 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		return _schedulerEngine.getScheduledJobs();
+	}
+
+	private List<SchedulerResponse> _getScheduledJobs(StorageType storageType)
+		throws SchedulerException {
+
+		List<SchedulerResponse> allSchedulerResponses =
+			_schedulerEngine.getScheduledJobs();
+
+		List<SchedulerResponse> schedulerResponses =
+			new ArrayList<SchedulerResponse>();
+
+		for (SchedulerResponse schedulerResponse : allSchedulerResponses) {
+			if (schedulerResponse.getStorageType().equals(storageType)) {
+				schedulerResponses.add(schedulerResponse);
+			}
+		}
+
+		return schedulerResponses;
 	}
 
 	private List<SchedulerResponse> _getScheduledJobs(

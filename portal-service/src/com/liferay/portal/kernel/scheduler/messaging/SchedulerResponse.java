@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.scheduler.messaging;
 
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.Trigger;
 
 import java.io.Serializable;
@@ -52,6 +53,10 @@ public class SchedulerResponse implements Serializable {
 		return _message;
 	}
 
+	public StorageType getStorageType() {
+		return _storageType;
+	}
+
 	public Trigger getTrigger() {
 		return _trigger;
 	}
@@ -76,6 +81,10 @@ public class SchedulerResponse implements Serializable {
 		_message = message;
 	}
 
+	public void setStorageType(StorageType storageType) {
+		_storageType = storageType;
+	}
+
 	public void setTrigger(Trigger trigger) {
 		_trigger = trigger;
 	}
@@ -85,6 +94,7 @@ public class SchedulerResponse implements Serializable {
 	private String _groupName;
 	private String _jobName;
 	private Message _message;
+	private StorageType _storageType;
 	private Trigger _trigger;
 
 }

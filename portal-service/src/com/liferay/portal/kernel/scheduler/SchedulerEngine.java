@@ -73,6 +73,8 @@ public interface SchedulerEngine {
 
 	public static final String START_TIME = "START_TIME";
 
+	public static final String STORAGE_TYPE = "STORAGE_TYPE";
+
 	public void delete(String groupName) throws SchedulerException;
 
 	public void delete(String jobName, String groupName)

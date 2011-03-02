@@ -139,7 +139,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		try {
 			Scheduler scheduler = getScheduler(groupName);
 
-			return getScheduledJob(jobName, groupName, scheduler);
+			return getScheduledJob(scheduler, jobName, groupName);
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to get job", e);
@@ -270,6 +270,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 		try {
 			Scheduler scheduler = getScheduler(trigger.getGroupName());
+			StorageType storageType = getStorageType(trigger.getGroupName());
 
 			trigger = TriggerFactoryUtil.buildTrigger(
 				trigger.getTriggerType(), trigger.getJobName(),
@@ -296,7 +297,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			}
 
 			schedule(
-				scheduler, quartzTrigger, description, destination, message);
+				scheduler, storageType, quartzTrigger, description, destination,
+				message);
 		}
 		catch (RuntimeException re) {
 
@@ -616,7 +618,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	}
 
 	protected SchedulerResponse getScheduledJob(
-			String jobName, String groupName, Scheduler scheduler)
+			Scheduler scheduler, String jobName, String groupName)
 		throws Exception {
 
 		jobName = fixMaxLength(jobName, JOB_NAME_MAX_LENGTH);
@@ -635,6 +637,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		String description = jobDataMap.getString(DESCRIPTION);
 		String destinationName = jobDataMap.getString(DESTINATION_NAME);
 		Message message = getMessage(jobDataMap);
+		StorageType storageType = StorageType.valueOf(
+			jobDataMap.getString(STORAGE_TYPE));
 
 		SchedulerResponse schedulerResponse = null;
 
@@ -650,6 +654,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			schedulerResponse.setGroupName(groupName);
 			schedulerResponse.setJobName(jobName);
 			schedulerResponse.setMessage(message);
+			schedulerResponse.setStorageType(storageType);
 		}
 		else {
 			if (CronTrigger.class.isAssignableFrom(trigger.getClass())) {
@@ -661,6 +666,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				schedulerResponse.setDescription(description);
 				schedulerResponse.setDestinationName(destinationName);
 				schedulerResponse.setMessage(message);
+				schedulerResponse.setStorageType(storageType);
 				schedulerResponse.setTrigger(
 					new com.liferay.portal.kernel.scheduler.CronTrigger(
 						jobName, groupName, cronTrigger.getStartTime(),
@@ -678,6 +684,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				schedulerResponse.setDescription(description);
 				schedulerResponse.setDestinationName(destinationName);
 				schedulerResponse.setMessage(message);
+				schedulerResponse.setStorageType(storageType);
 				schedulerResponse.setTrigger(
 					new IntervalTrigger(
 						jobName, groupName, simpleTrigger.getStartTime(),
@@ -703,7 +710,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 		for (String jobName : jobNames) {
 			SchedulerResponse schedulerResponse = getScheduledJob(
-				jobName, groupName);
+				scheduler, jobName, groupName);
 
 			if (schedulerResponse != null) {
 				schedulerResponses.add(schedulerResponse);
@@ -720,6 +727,24 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		else {
 			return _memoryScheduler;
 		}
+	}
+
+	protected StorageType getStorageType(String groupName) throws Exception {
+		if (groupName.startsWith(StorageType.PERSISTED.toString())) {
+			return StorageType.PERSISTED;
+		}
+		else if (groupName.startsWith(
+			StorageType.MEMORY_MULTIPLE_INSTANCES.toString())) {
+
+			return StorageType.MEMORY_MULTIPLE_INSTANCES;
+		}
+		else if (groupName.startsWith(
+			StorageType.MEMORY_SINGLE_INSTANCE.toString())) {
+
+			return StorageType.MEMORY_SINGLE_INSTANCE;
+		}
+
+		throw new Exception("Unable to get storage type!");
 	}
 
 	protected void handleJobState(
@@ -914,8 +939,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	}
 
 	protected void schedule(
-			Scheduler scheduler, Trigger trigger, String description,
-			String destinationName, Message message)
+			Scheduler scheduler, StorageType storageType, Trigger trigger,
+			String description, String destinationName, Message message)
 		throws Exception {
 
 		try {
@@ -930,6 +955,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			jobDataMap.put(DESCRIPTION, description);
 			jobDataMap.put(DESTINATION_NAME, destinationName);
 			jobDataMap.put(MESSAGE, JSONFactoryUtil.serialize(message));
+			jobDataMap.put(STORAGE_TYPE, storageType.toString());
 
 			JobState jobState = new JobState(
 				TriggerState.NORMAL, message.getInteger(EXCEPTIONS_MAX_SIZE));
