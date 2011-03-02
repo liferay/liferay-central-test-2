@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Mika Koivisto
  * @author Wesley Gong
  */
-public class SiteMinderAutoLogin extends CASAutoLogin {
+public class SiteMinderAutoLogin implements AutoLogin {
 
 	public String[] login(
 		HttpServletRequest request, HttpServletResponse response) {

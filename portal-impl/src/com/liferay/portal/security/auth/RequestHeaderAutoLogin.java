@@ -34,7 +34,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Brian Wing Shun Chan
  * @author Wesley Gong
  */
-public class RequestHeaderAutoLogin extends CASAutoLogin {
+public class RequestHeaderAutoLogin implements AutoLogin {
 
 	public String[] login(
 		HttpServletRequest request, HttpServletResponse response) {
