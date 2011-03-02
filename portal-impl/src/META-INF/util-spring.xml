@@ -375,6 +375,11 @@
 			<bean class="com.liferay.portal.service.permission.LayoutPrototypePermissionImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.permission.LayoutSetBranchPermissionUtil" class="com.liferay.portal.service.permission.LayoutSetBranchPermissionUtil">
+		<property name="layoutSetBranchPermission">
+			<bean class="com.liferay.portal.service.permission.LayoutSetBranchPermissionImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil" class="com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil">
 		<property name="layoutSetPrototypePermission">
 			<bean class="com.liferay.portal.service.permission.LayoutSetPrototypePermissionImpl" />
