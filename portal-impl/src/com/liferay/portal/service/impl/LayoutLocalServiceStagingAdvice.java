@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.staging.LayoutStagingUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
@@ -51,16 +50,14 @@ public class LayoutLocalServiceStagingAdvice extends LayoutLocalServiceImpl
 
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		try {
-			String methodName = methodInvocation.getMethod().getName();
+			Method method = methodInvocation.getMethod();
+			String methodName = method.getName();
 			Object args[] = methodInvocation.getArguments();
 
 			Object returnValue = null;
 
 			if (_layoutLocalServiceStagingAdviceMethodNames.contains(
 					methodName)) {
-
-				Class<?>[] parameterTypes = ReflectionUtil.getParameterTypes(
-					args);
 
 				if (methodName.equals("updateLayout") && (args.length == 15)) {
 					returnValue = updateLayout(
@@ -74,10 +71,10 @@ public class LayoutLocalServiceStagingAdvice extends LayoutLocalServiceImpl
 					try {
 						Class<?> adviceClass = this.getClass();
 
-						Method method = adviceClass.getMethod(
-							methodName, ReflectionUtil.getParameterTypes(args));
+						Method localMethod = adviceClass.getMethod(
+							methodName, method.getParameterTypes());
 
-						returnValue = method.invoke(this, args);
+						returnValue = localMethod.invoke(this, args);
 					}
 					catch (NoSuchMethodException nsme) {
 						throw new SystemException(nsme);
