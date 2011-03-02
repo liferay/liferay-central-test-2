@@ -212,6 +212,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 			lock.setOwner(newOwner);
 
 			lockPersistence.update(lock, false);
+
 			lock.setNew(true);
 		}
 
