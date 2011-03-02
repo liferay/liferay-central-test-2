@@ -47,6 +47,7 @@ import java.util.Stack;
 import javax.sql.DataSource;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 
 /**
  * @author Michael Young
@@ -103,7 +104,10 @@ public class ShardAdvice {
 	public Object invokeCompanyService(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		String methodName = proceedingJoinPoint.getSignature().getName();
+		Signature signature = proceedingJoinPoint.getSignature();
+
+		String methodName = signature.getName();
+
 		Object[] arguments = proceedingJoinPoint.getArgs();
 
 		String shardName = PropsValues.SHARD_DEFAULT_NAME;
@@ -294,7 +298,10 @@ public class ShardAdvice {
 	public Object invokePortletService(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		String methodName = proceedingJoinPoint.getSignature().getName();
+		Signature signature = proceedingJoinPoint.getSignature();
+
+		String methodName = signature.getName();
+
 		Object[] arguments = proceedingJoinPoint.getArgs();
 
 		if (arguments.length == 0) {
@@ -446,9 +453,9 @@ public class ShardAdvice {
 			proceedingJoinPoint.getTarget().getClass().getName(),
 			StringPool.PERIOD);
 
-		methodName +=
-			StringPool.PERIOD + proceedingJoinPoint.getSignature().getName() +
-				"()";
+		Signature signature = proceedingJoinPoint.getSignature();
+
+		methodName += StringPool.PERIOD + signature.getName() + "()";
 
 		return methodName;
 	}

@@ -19,6 +19,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 
 /**
  * @author Brian Wing Shun Chan
@@ -28,7 +29,10 @@ public class WorkflowPermissionAdvice {
 	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		String methodName = proceedingJoinPoint.getSignature().getName();
+		Signature signature = proceedingJoinPoint.getSignature();
+
+		String methodName = signature.getName();
+
 		Object[] arguments = proceedingJoinPoint.getArgs();
 
 		if (methodName.equals(_ASSIGN_WORKFLOW_TASK_TO_USER_METHOD_NAME)) {

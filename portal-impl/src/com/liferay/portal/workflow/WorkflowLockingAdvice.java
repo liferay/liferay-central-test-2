@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.workflow.WorkflowException;
 import com.liferay.portal.service.LockLocalServiceUtil;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 
 /**
  * @author Shuyang Zhou
@@ -32,7 +33,10 @@ public class WorkflowLockingAdvice {
 	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		String methodName = proceedingJoinPoint.getSignature().getName();
+		Signature signature = proceedingJoinPoint.getSignature();
+
+		String methodName = signature.getName();
+
 		Object[] arguments = proceedingJoinPoint.getArgs();
 
 		if (methodName.equals(_START_WORKFLOW_INSTANCE_METHOD_NAME)) {

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.workflow.RequiredWorkflowDefinitionException;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.Signature;
 
 /**
  * @author Brian Wing Shun Chan
@@ -27,7 +28,10 @@ public class WorkflowLinkAdvice {
 	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable {
 
-		String methodName = proceedingJoinPoint.getSignature().getName();
+		Signature signature = proceedingJoinPoint.getSignature();
+
+		String methodName = signature.getName();
+
 		Object[] arguments = proceedingJoinPoint.getArgs();
 
 		if (methodName.equals(_UPDATE_ACTIVE)) {
