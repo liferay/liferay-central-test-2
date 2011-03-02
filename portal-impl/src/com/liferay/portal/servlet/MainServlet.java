@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpSessionThreadLocal;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -455,6 +456,12 @@ public class MainServlet extends ActionServlet {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Set session thread local");
+		}
+
+		setSessionThreadLocal(request.getSession());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process service pre events");
@@ -1245,6 +1252,10 @@ public class MainServlet extends ActionServlet {
 		PrincipalThreadLocal.setName(name);
 
 		PrincipalThreadLocal.setPassword(password);
+	}
+
+	protected void setSessionThreadLocal(HttpSession session) {
+		HttpSessionThreadLocal.setSessionId(session.getId());
 	}
 
 	private static final String _LIFERAY_PORTAL_REQUEST_HEADER =

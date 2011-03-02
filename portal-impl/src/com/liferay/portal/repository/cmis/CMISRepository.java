@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.util.AutoResetThreadLocal;
+import com.liferay.portal.kernel.util.AutoResetSessionLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -1320,7 +1320,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected Session getSession() throws PortalException, RepositoryException {
-		Session session = _sessionThreadLocal.get();
+		Session session = _sessionLocal.get();
 
 		if (session != null) {
 			return session;
@@ -1383,9 +1383,9 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		checkRepository(parameters, typeSettingsProperties);
 
-		_sessionThreadLocal.set(_sessionFactory.createSession(parameters));
+		_sessionLocal.set(_sessionFactory.createSession(parameters));
 
-		return _sessionThreadLocal.get();
+		return _sessionLocal.get();
 	}
 
 	protected void getSubfolderIds(
@@ -1561,8 +1561,8 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	private static Set<String> _defaultFilterSet = new HashSet<String>();
-	private static ThreadLocal<Session> _sessionThreadLocal =
-		new AutoResetThreadLocal<Session>(CMISRepository.class + "._session");
+	private static AutoResetSessionLocal<Session> _sessionLocal =
+		new AutoResetSessionLocal<Session>();
 
 	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
 
