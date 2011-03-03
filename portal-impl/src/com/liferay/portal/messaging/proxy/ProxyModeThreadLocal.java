@@ -19,18 +19,18 @@ import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 /**
  * @author Shuyang Zhou
  */
-public class BatchModelThreadLocal {
+public class ProxyModeThreadLocal {
 
-	public static boolean isBatchModel() {
-		return _batchModel.get();
+	public static boolean isForceSync() {
+		return _forceSync.get();
 	}
 
-	public static void setBatchModel(boolean batchModel) {
-		_batchModel.set(batchModel);
+	public static void setForceSync(boolean forceSync) {
+		_forceSync.set(forceSync);
 	}
 
-	private static ThreadLocal<Boolean> _batchModel =
+	private static ThreadLocal<Boolean> _forceSync =
 		new AutoResetThreadLocal<Boolean>(
-			BatchModelThreadLocal.class + "_batchModel", Boolean.FALSE);
+			ProxyModeThreadLocal.class + "_forceSync", Boolean.FALSE);
 
 }
