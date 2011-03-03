@@ -1,3 +1,4 @@
+
 /**
  * Copyright (c) 2000-2011 Liferay, Inc. All rights reserved.
  *
@@ -12,11 +13,9 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.mail;
+package com.liferay.portalweb.plugins.mail.mailaccount;
 
-import com.liferay.portalweb.plugins.mail.mailaccount.MailAccountTests;
-import com.liferay.portalweb.plugins.mail.message.MessageTests;
-import com.liferay.portalweb.plugins.mail.portlet.PortletTests;
+import com.liferay.portalweb.plugins.mail.mailaccount.addmailaccount.AddMailAccountTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -25,14 +24,12 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MailTests extends BaseTests {
+public class MailAccountTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(MailAccountTests.suite());
-		testSuite.addTest(MessageTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTest(AddMailAccountTests.suite());
 
 		return testSuite;
 	}

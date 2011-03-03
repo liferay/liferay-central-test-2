@@ -12,11 +12,8 @@
  * details.
  */
 
-package com.liferay.portalweb.plugins.mail;
+package com.liferay.portalweb.plugins.mail.message.deletemessagenullallmail;
 
-import com.liferay.portalweb.plugins.mail.mailaccount.MailAccountTests;
-import com.liferay.portalweb.plugins.mail.message.MessageTests;
-import com.liferay.portalweb.plugins.mail.portlet.PortletTests;
 import com.liferay.portalweb.portal.BaseTests;
 
 import junit.framework.Test;
@@ -25,14 +22,17 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class MailTests extends BaseTests {
+public class DeleteMessageNullAllMailTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(MailAccountTests.suite());
-		testSuite.addTest(MessageTests.suite());
-		testSuite.addTest(PortletTests.suite());
+		testSuite.addTestSuite(AddPageMailTest.class);
+		testSuite.addTestSuite(AddPortletMailTest.class);
+		testSuite.addTestSuite(AddMailAccountTest.class);
+		testSuite.addTestSuite(DeleteMessageNullAllMailTest.class);
+		testSuite.addTestSuite(TearDownMailAccountTest.class);
+		testSuite.addTestSuite(TearDownPageTest.class);
 
 		return testSuite;
 	}
