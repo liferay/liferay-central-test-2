@@ -14,10 +14,13 @@
 
 package com.liferay.portal.scheduler;
 
+import com.liferay.portal.kernel.cluster.Address;
 import com.liferay.portal.kernel.cluster.ClusterEvent;
 import com.liferay.portal.kernel.cluster.ClusterEventListener;
 import com.liferay.portal.kernel.cluster.ClusterEventType;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
+import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
@@ -31,8 +34,6 @@ import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
@@ -174,7 +175,10 @@ public class ClusterSchedulerEngine
 		try {
 			Lock lock = lockMemorySchedulerCluster(false, null);
 
-			if (ClusterExecutorUtil.isClusterNodeAlive(lock.getOwner())) {
+			Address masterAddress = (Address)getDeserializedObject(
+				lock.getOwner());
+
+			if (ClusterExecutorUtil.isClusterNodeAlive(masterAddress)) {
 				return;
 			}
 
@@ -191,8 +195,8 @@ public class ClusterSchedulerEngine
 
 		byte[] orginalBytes = Base64.decode(serializedString);
 
-		ByteArrayInputStream byetArrayInputStream = new ByteArrayInputStream(
-			orginalBytes);
+		UnsyncByteArrayInputStream byetArrayInputStream =
+			new UnsyncByteArrayInputStream(orginalBytes);
 		ObjectInputStream objectInputStream = new ObjectInputStream(
 			byetArrayInputStream);
 
@@ -203,8 +207,8 @@ public class ClusterSchedulerEngine
 	}
 
 	protected String getSerializedString(Object object) throws Exception {
-		ByteArrayOutputStream byetArrayOutputStream =
-			new ByteArrayOutputStream();
+		UnsyncByteArrayOutputStream byetArrayOutputStream =
+			new UnsyncByteArrayOutputStream();
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
 			byetArrayOutputStream);
 
