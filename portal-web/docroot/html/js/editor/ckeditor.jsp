@@ -116,9 +116,6 @@ boolean useCustomDataProcessor = ParamUtil.getBoolean(request, "useCustomDataPro
 
 <script type="text/javascript">
 	(function() {
-		var customDataProcessorLoaded = false;
-		var instanceReady = false;
-
 		function setData() {
 			ckEditor.setData(parent.<%= HtmlUtil.escape(initMethod) %>());
 		}
@@ -139,8 +136,10 @@ boolean useCustomDataProcessor = ParamUtil.getBoolean(request, "useCustomDataPro
 
 		var ckEditor = CKEDITOR.instances.CKEditor1;
 
+		var customDataProcessorLoaded = false;
+
 		<%
-		if (useCustomDataProcessor ) {
+		if (useCustomDataProcessor) {
 		%>
 
 			ckEditor.on(
@@ -157,6 +156,8 @@ boolean useCustomDataProcessor = ParamUtil.getBoolean(request, "useCustomDataPro
 		<%
 		}
 		%>
+
+		var instanceReady = false;
 
 		ckEditor.on(
 			'instanceReady',
