@@ -1202,6 +1202,10 @@ public class PortalUtil {
 		return getPortal().isReservedParameter(name);
 	}
 
+	public static boolean isSecure(HttpServletRequest request) {
+		return getPortal().isSecure(request);
+	}
+
 	public static boolean isSystemGroup(String groupName) {
 		return getPortal().isSystemGroup(groupName);
 	}

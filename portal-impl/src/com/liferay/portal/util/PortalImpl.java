@@ -2315,7 +2315,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortalURL(HttpServletRequest request) {
-		return getPortalURL(request, request.isSecure());
+		return getPortalURL(request, isSecure(request));
 	}
 
 	public String getPortalURL(HttpServletRequest request, boolean secure) {
@@ -3732,6 +3732,27 @@ public class PortalImpl implements Portal {
 		}
 
 		return false;
+	}
+
+	public boolean isSecure(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		Boolean httpsInitial = (Boolean)session.getAttribute(
+			WebKeys.HTTPS_INITIAL);
+
+		boolean secure = false;
+
+		if ((PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS) &&
+			(!PropsValues.SESSION_ENABLE_PHISHING_PROTECTION) &&
+			(httpsInitial != null) && (!httpsInitial.booleanValue())) {
+
+			secure = false;
+		}
+		else {
+			secure = request.isSecure();
+		}
+
+		return secure;
 	}
 
 	public boolean isLayoutFirstPageable(Layout layout) {

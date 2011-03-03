@@ -1497,7 +1497,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setThemeJsFastLoad(themeJsFastLoad);
 		themeDisplay.setServerName(request.getServerName());
 		themeDisplay.setServerPort(request.getServerPort());
-		themeDisplay.setSecure(request.isSecure());
+		themeDisplay.setSecure(PortalUtil.isSecure(request));
 		themeDisplay.setLifecycle(lifecycle);
 		themeDisplay.setLifecycleAction(lifecycle.equals("1"));
 		themeDisplay.setLifecycleRender(lifecycle.equals("0"));

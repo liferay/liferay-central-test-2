@@ -100,7 +100,7 @@ public class PortletURLImpl
 		_parametersIncludedInPath = new LinkedHashSet<String>();
 		_params = new LinkedHashMap<String, String[]>();
 		_removePublicRenderParameters = new LinkedHashMap<String, String[]>();
-		_secure = request.isSecure();
+		_secure = PortalUtil.isSecure(request);
 		_wsrp = ParamUtil.getBoolean(request, "wsrp");
 
 		Portlet portlet = getPortlet();

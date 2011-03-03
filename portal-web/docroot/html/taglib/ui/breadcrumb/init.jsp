@@ -190,7 +190,7 @@ private void _buildPortletBreadcrumb(HttpServletRequest request, StringBundler s
 
 private String _getBreadcrumbLayoutURL(Layout selLayout, String selLayoutParam, PortletURL portletURL, ThemeDisplay themeDisplay) throws Exception {
 	if (portletURL == null) {
-		return PortalUtil.getLayoutURL(selLayout, themeDisplay);
+		return PortalUtil.getLayoutFullURL(selLayout, themeDisplay);
 	}
 	else {
 		portletURL.setParameter(selLayoutParam, String.valueOf(selLayout.getPlid()));

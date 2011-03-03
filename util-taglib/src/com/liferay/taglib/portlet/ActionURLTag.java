@@ -87,7 +87,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 			liferayPortletURL.setSecure(secure.booleanValue());
 		}
 		else {
-			liferayPortletURL.setSecure(request.isSecure());
+			liferayPortletURL.setSecure(PortalUtil.isSecure(request));
 		}
 
 		if (copyCurrentRenderParameters != null) {

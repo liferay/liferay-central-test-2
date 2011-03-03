@@ -894,6 +894,8 @@ public interface Portal {
 
 	public boolean isReservedParameter(String name);
 
+	public boolean isSecure(HttpServletRequest request);
+
 	public boolean isSystemGroup(String groupName);
 
 	public boolean isSystemRole(String roleName);

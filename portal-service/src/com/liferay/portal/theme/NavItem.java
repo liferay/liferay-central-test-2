@@ -18,8 +18,10 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
 
@@ -85,6 +87,18 @@ public class NavItem implements Serializable {
 		return _layout.getRegularURL(_vars.getRequest());
 	}
 
+	public String getRegularFullURL() throws Exception {
+		String portalURL = PortalUtil.getPortalURL(_vars.getRequest());
+		String regularURL = getRegularURL();
+
+		if (StringUtil.startsWith(regularURL, portalURL)) {
+			return regularURL;
+		}
+		else {
+			return portalURL + regularURL;
+		}
+	}
+
 	public String getResetLayoutURL() throws Exception {
 		return _layout.getResetLayoutURL(_vars.getRequest());
 	}
@@ -106,7 +120,7 @@ public class NavItem implements Serializable {
 	}
 
 	public String getURL() throws Exception {
-		return HtmlUtil.escape(HtmlUtil.escapeHREF(getRegularURL()));
+		return HtmlUtil.escape(HtmlUtil.escapeHREF(getRegularFullURL()));
 	}
 
 	public boolean hasChildren() throws Exception {
