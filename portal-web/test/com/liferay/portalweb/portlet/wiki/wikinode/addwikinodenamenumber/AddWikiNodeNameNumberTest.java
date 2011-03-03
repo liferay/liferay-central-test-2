@@ -59,8 +59,10 @@ public class AddWikiNodeNameNumberTest extends BaseTestCase {
 		selenium.clickAt("//input[@value='Save']", RuntimeVariables.replace(""));
 		selenium.waitForPageToLoad("30000");
 		selenium.saveScreenShotAndSource();
-		assertTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
-		assertTrue(selenium.isTextPresent("Please enter a valid name."));
+		assertEquals(RuntimeVariables.replace(
+				"Your request processed successfully."),
+			selenium.getText("//div[@class='portlet-msg-success']"));
+		assertEquals(RuntimeVariables.replace("Test1"),
+			selenium.getText("//tr[4]/td[1]/a"));
 	}
 }
