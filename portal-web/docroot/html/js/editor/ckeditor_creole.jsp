@@ -16,5 +16,4 @@
 
 <jsp:include page="/html/js/editor/ckeditor.jsp">
 	<jsp:param name="ckEditorConfigFileName" value="ckconfig_creole.jsp" />
-	<jsp:param name="useCustomDataProcessor" value="<%= Boolean.TRUE.toString() %>" />
 </jsp:include>

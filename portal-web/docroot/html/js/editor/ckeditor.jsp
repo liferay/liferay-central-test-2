@@ -52,7 +52,12 @@ for (Map.Entry<String, String> property : properties.entrySet()) {
 }
 
 String ckEditorConfigFileName = ParamUtil.getString(request, "ckEditorConfigFileName", "ckconfig.jsp");
-boolean useCustomDataProcessor = ParamUtil.getBoolean(request, "useCustomDataProcessor");
+
+boolean useCustomDataProcessor = false;
+
+if (!ckEditorConfigFileName.equals("ckconfig.jsp")) {
+	useCustomDataProcessor = true;
+}
 %>
 
 <html>

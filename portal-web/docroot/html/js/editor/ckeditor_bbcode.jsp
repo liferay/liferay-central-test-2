@@ -16,5 +16,4 @@
 
 <jsp:include page="/html/js/editor/ckeditor.jsp">
 	<jsp:param name="ckEditorConfigFileName" value="ckconfig_bbcode.jsp" />
-	<jsp:param name="useCustomDataProcessor" value="<%= Boolean.TRUE.toString() %>" />
 </jsp:include>
