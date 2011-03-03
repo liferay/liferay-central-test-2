@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.cluster.ClusterEvent;
 import com.liferay.portal.kernel.cluster.ClusterEventListener;
 import com.liferay.portal.kernel.cluster.ClusterEventType;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
-import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
@@ -27,9 +26,15 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineClusterManager;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.LockLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import java.util.List;
 
@@ -108,7 +113,7 @@ public class ClusterSchedulerEngine
 
 				LockLocalServiceUtil.unlock(
 					SchedulerEngine.class.getName(),
-					SchedulerEngine.class.getName(), _localClusterNodeId,
+					SchedulerEngine.class.getName(), _localClusterNodeAddress,
 					PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED);
 			}
 		}
@@ -181,33 +186,53 @@ public class ClusterSchedulerEngine
 		}
 	}
 
+	protected Object getDeserializedObject(String serializedString)
+		throws Exception {
+
+		byte[] orginalBytes = Base64.decode(serializedString);
+
+		ByteArrayInputStream byetArrayInputStream = new ByteArrayInputStream(
+			orginalBytes);
+		ObjectInputStream objectInputStream = new ObjectInputStream(
+			byetArrayInputStream);
+
+		Object object = objectInputStream.readObject();
+		objectInputStream.close();
+
+		return object;
+	}
+
+	protected String getSerializedString(Object object) throws Exception {
+		ByteArrayOutputStream byetArrayOutputStream =
+			new ByteArrayOutputStream();
+		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
+			byetArrayOutputStream);
+
+		objectOutputStream.writeObject(object);
+		objectOutputStream.close();
+
+		byte[] orginalBytes = byetArrayOutputStream.toByteArray();
+		return Base64.encode(orginalBytes);
+	}
+
 	protected boolean isMemorySchedulerClusterLockOwner(Lock lock)
 		throws Exception {
 
-		ClusterNode clusterNode = ClusterExecutorUtil.getLocalClusterNode();
-
-		String localClusterNodeId = clusterNode.getClusterNodeId();
-
-		if (localClusterNodeId.equals(lock.getOwner())) {
-			return true;
-		}
-
-		return false;
+		return _localClusterNodeAddress.equals(lock.getOwner());
 	}
 
 	protected Lock lockMemorySchedulerCluster(
 			boolean replaceOldLock, String oldOwner)
 		throws Exception {
 
-		if (_localClusterNodeId == null) {
-			ClusterNode clusterNode = ClusterExecutorUtil.getLocalClusterNode();
-
-			_localClusterNodeId = clusterNode.getClusterNodeId();
+		if (_localClusterNodeAddress == null) {
+			_localClusterNodeAddress = getSerializedString(
+				ClusterExecutorUtil.getLocalClusterNodeAddress());
 		}
 
 		Lock lock = LockLocalServiceUtil.lock(
 			SchedulerEngine.class.getName(), SchedulerEngine.class.getName(),
-			oldOwner, _localClusterNodeId,
+			oldOwner, _localClusterNodeAddress,
 			PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED,
 			replaceOldLock);
 
@@ -217,7 +242,7 @@ public class ClusterSchedulerEngine
 	private static Log _log = LogFactoryUtil.getLog(
 		ClusterSchedulerEngine.class);
 
-	private static String _localClusterNodeId;
+	private static String _localClusterNodeAddress;
 
 	private ClusterEventListener _memorySchedulerClusterEventListener;
 	private SchedulerEngine _schedulerEngine;
