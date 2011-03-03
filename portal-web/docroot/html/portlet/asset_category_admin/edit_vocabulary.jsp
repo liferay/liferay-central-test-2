@@ -41,6 +41,8 @@ long vocabularyId = BeanParamUtil.getLong(vocabulary, request, "vocabularyId");
 
 				<aui:input name="description" />
 
+				<%@ include file="/html/portlet/asset_category_admin/edit_vocabulary_settings.jspf" %>
+
 				<c:choose>
 					<c:when test="<%= vocabulary == null %>">
 						<aui:field-wrapper cssClass="vocabulary-permissions-actions" label="permissions">

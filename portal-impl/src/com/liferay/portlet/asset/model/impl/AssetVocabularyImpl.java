@@ -14,16 +14,37 @@
 
 package com.liferay.portlet.asset.model.impl;
 
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Juan Fernández
  */
 public class AssetVocabularyImpl
 	extends AssetVocabularyModelImpl implements AssetVocabulary {
 
 	public AssetVocabularyImpl() {
+	}
+
+	public String getSettings() {
+		if (_settingsProperties == null) {
+			return super.getSettings();
+		}
+		else {
+			return _settingsProperties.toString();
+		}
+	}
+
+	public UnicodeProperties getSettingsProperties() {
+		if (_settingsProperties == null) {
+			_settingsProperties = new UnicodeProperties(true);
+
+			_settingsProperties.fastLoad(super.getSettings());
+		}
+
+		return _settingsProperties;
 	}
 
 	public String getTitle(String languageId) {
@@ -45,5 +66,21 @@ public class AssetVocabularyImpl
 
 		return value;
 	}
+
+	public void setTypeSettings(String settings) {
+		_settingsProperties = null;
+
+		super.setSettings(settings);
+	}
+
+	public void setTypeSettingsProperties(
+		UnicodeProperties settingsProperties) {
+
+		_settingsProperties = settingsProperties;
+
+		super.setSettings(settingsProperties.toString());
+	}
+
+	private UnicodeProperties _settingsProperties;
 
 }

@@ -272,6 +272,17 @@
 			}
 		}
 	}
+
+	.aui-widget-bd .aui-field.vocabulary-checkbox {
+		input {
+			width: 100%;
+		}
+
+		label {
+			margin: 1.8em 0;
+			display:inline-block;
+		}
+	}
 }
 
 .lfr-position-helper {

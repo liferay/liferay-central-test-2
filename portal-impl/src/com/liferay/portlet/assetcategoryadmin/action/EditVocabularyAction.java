@@ -21,17 +21,22 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.asset.model.AssetConstants;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -48,6 +53,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Brian Wing Shun Chan
  * @author Julio Camarero
+ * @author Juan Fernández
  */
 public class EditVocabularyAction extends PortletAction {
 
@@ -101,6 +107,8 @@ public class EditVocabularyAction extends PortletAction {
 		Map<Locale, String> descriptionMap =
 			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 
+		UnicodeProperties settings = getSettings(actionRequest);
+
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			AssetVocabulary.class.getName(), actionRequest);
 
@@ -111,16 +119,16 @@ public class EditVocabularyAction extends PortletAction {
 			// Add vocabulary
 
 			vocabulary = AssetVocabularyServiceUtil.addVocabulary(
-				StringPool.BLANK, titleMap, descriptionMap, null,
-				serviceContext);
+				StringPool.BLANK, titleMap, descriptionMap,
+				settings.toString(), serviceContext);
 		}
 		else {
 
 			// Update vocabulary
 
 			vocabulary = AssetVocabularyServiceUtil.updateVocabulary(
-				vocabularyId, StringPool.BLANK, titleMap, descriptionMap, null,
-				serviceContext);
+				vocabularyId, StringPool.BLANK, titleMap, descriptionMap,
+				settings.toString(), serviceContext);
 		}
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
@@ -128,6 +136,56 @@ public class EditVocabularyAction extends PortletAction {
 		jsonObject.put("vocabularyId", vocabulary.getVocabularyId());
 
 		return jsonObject;
+	}
+
+	protected UnicodeProperties getSettings(ActionRequest actionRequest) {
+		UnicodeProperties settings = new UnicodeProperties();
+
+		boolean multiValued = ParamUtil.getBoolean(
+			actionRequest, "multiValued");
+
+		settings.setProperty(
+			"multiValued", String.valueOf(multiValued));
+
+		int[] indexes = StringUtil.split(
+			ParamUtil.getString(actionRequest, "indexes"), 0);
+
+		Set<Long> selectedClassNameIds = new HashSet<Long>();
+		Set<Long> requiredClassNameIds = new HashSet<Long>();
+
+		for (int index : indexes) {
+			long classNameId = ParamUtil.getLong(
+				actionRequest, "classNameId" + index);
+
+			boolean required =
+				ParamUtil.getBoolean(actionRequest, "required" + index);
+
+			if (classNameId == AssetConstants.CLASS_NAME_ID_ALL) {
+				selectedClassNameIds.clear();
+				selectedClassNameIds.add(classNameId);
+
+				if (required) {
+					requiredClassNameIds.clear();
+					requiredClassNameIds.add(classNameId);
+				}
+
+				break;
+			}
+			else {
+				selectedClassNameIds.add(classNameId);
+
+				if (required) {
+					requiredClassNameIds.add(classNameId);
+				}
+			}
+		}
+
+		settings.setProperty(
+			"selectedClassNameIds", StringUtil.merge(selectedClassNameIds));
+		settings.setProperty(
+			"requiredClassNameIds", StringUtil.merge(requiredClassNameIds));
+
+		return settings;
 	}
 
 }
