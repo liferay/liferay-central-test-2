@@ -16,7 +16,6 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.servlet.taglib.ui.InputPermissionsParamsTagUtil" %>
 
 <%
