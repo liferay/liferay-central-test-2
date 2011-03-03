@@ -42,10 +42,10 @@ public class PortletPreferencesLocalServiceStagingAdvice
 			String methodName = methodInvocation.getMethod().getName();
 
 			if (methodName.equals("getPreferences")) {
-				return _getPreferences(methodInvocation);
+				return getPreferences(methodInvocation);
 			}
 			else if (methodName.equals("updatePreferences")) {
-				return _updatePreferences(methodInvocation);
+				return updatePreferences(methodInvocation);
 			}
 			else {
 				return methodInvocation.proceed();
@@ -56,31 +56,28 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		}
 	}
 
-	protected Object _getPreferences(MethodInvocation methodInvocation)
+	protected Object getPreferences(MethodInvocation methodInvocation)
 		throws Throwable {
 
 		Method method = methodInvocation.getMethod();
-
-		Object args[] = methodInvocation.getArguments();
+		Object[] arguments = methodInvocation.getArguments();
 
 		long plid = 0;
 		String portletId = null;
 
-		if (args.length == 1) {
+		if (arguments.length == 1) {
 			PortletPreferencesIds portletPreferencesIds =
-				(PortletPreferencesIds)args[0];
+				(PortletPreferencesIds)arguments[0];
 
 			plid = portletPreferencesIds.getPlid();
 			portletId = portletPreferencesIds.getPortletId();
 		}
 		else {
-			plid = (Long)args[3];
-			portletId = (String)args[4];
+			plid = (Long)arguments[3];
+			portletId = (String)arguments[4];
 		}
 
-		if (portletId.equals(PortletKeys.LIFERAY_PORTAL) ||
-			(plid <= 0)) {
-
+		if (portletId.equals(PortletKeys.LIFERAY_PORTAL) || (plid <= 0)) {
 			return methodInvocation.proceed();
 		}
 
@@ -95,32 +92,29 @@ public class PortletPreferencesLocalServiceStagingAdvice
 
 		plid = layoutRevision.getLayoutRevisionId();
 
-		if (args.length == 1) {
+		if (arguments.length == 1) {
 			PortletPreferencesIds portletPreferencesIds =
-				(PortletPreferencesIds)args[0];
+				(PortletPreferencesIds)arguments[0];
 
 			portletPreferencesIds.setPlid(plid);
 		}
 		else {
-			args[3] = plid;
+			arguments[3] = plid;
 		}
 
-		return method.invoke(methodInvocation.getThis(), args);
+		return method.invoke(methodInvocation.getThis(), arguments);
 	}
 
-	protected Object _updatePreferences(MethodInvocation methodInvocation)
+	protected Object updatePreferences(MethodInvocation methodInvocation)
 		throws Throwable {
 
 		Method method = methodInvocation.getMethod();
+		Object[] arguments = methodInvocation.getArguments();
 
-		Object args[] = methodInvocation.getArguments();
+		long plid = (Long)arguments[2];
+		String portletId = (String)arguments[3];
 
-		long plid = (Long)args[2];
-		String portletId = (String)args[3];
-
-		if (portletId.equals(PortletKeys.LIFERAY_PORTAL) ||
-			(plid <= 0)) {
-
+		if (portletId.equals(PortletKeys.LIFERAY_PORTAL) || (plid <= 0)) {
 			return methodInvocation.proceed();
 		}
 
@@ -147,9 +141,9 @@ public class PortletPreferencesLocalServiceStagingAdvice
 			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
 			serviceContext);
 
-		args[2] = layoutRevision.getLayoutRevisionId();
+		arguments[2] = layoutRevision.getLayoutRevisionId();
 
-		return method.invoke(methodInvocation.getThis(), args);
+		return method.invoke(methodInvocation.getThis(), arguments);
 	}
 
 }

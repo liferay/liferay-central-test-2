@@ -19,8 +19,7 @@ import com.liferay.portal.NoSuchLayoutSetBranchException;
 import com.liferay.portal.RequiredLayoutSetBranchException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.staging.Staging;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
@@ -32,8 +31,6 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutSetBranchLocalServiceBaseImpl;
-import com.liferay.portlet.PortalPreferences;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -172,36 +169,6 @@ public class LayoutSetBranchLocalServiceImpl
 			groupId, privateLayout, name);
 	}
 
-	public LayoutSetBranch getUserLayoutSetBranch(
-			long userId, long groupId, boolean privateLayout,
-			long layoutSetBranchId)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		boolean signedIn = !user.isDefaultUser();
-
-		PortalPreferences portalPreferences =
-			PortletPreferencesFactoryUtil.getPortalPreferences(
-				user.getCompanyId(), user.getUserId(), signedIn);
-
-		if (layoutSetBranchId <= 0) {
-			layoutSetBranchId = GetterUtil.getLong(
-				portalPreferences.getValue(
-					Staging.class.getName(), "LAYOUT_SET_BRANCH_ID"));
-		}
-
-		if (layoutSetBranchId > 0) {
-			try {
-				return getLayoutSetBranch(layoutSetBranchId);
-			}
-			catch (NoSuchLayoutSetBranchException nslsbe) {
-			}
-		}
-
-		return getMasterLayoutSetBranch(groupId, privateLayout);
-	}
-
 	public List<LayoutSetBranch> getLayoutSetBranches(
 			long groupId, boolean privateLayout)
 		throws SystemException {
@@ -218,6 +185,65 @@ public class LayoutSetBranchLocalServiceImpl
 			LayoutSetBranchConstants.MASTER_BRANCH_NAME);
 	}
 
+	public LayoutSetBranch getUserLayoutSetBranch(
+			long userId, long groupId, boolean privateLayout,
+			long layoutSetBranchId)
+		throws PortalException, SystemException {
+
+		if (layoutSetBranchId <= 0) {
+			User user = userPersistence.findByPrimaryKey(userId);
+
+			layoutSetBranchId = StagingUtil.getRecentLayoutSetBranchId(user);
+		}
+
+		if (layoutSetBranchId > 0) {
+			try {
+				return getLayoutSetBranch(layoutSetBranchId);
+			}
+			catch (NoSuchLayoutSetBranchException nslsbe) {
+			}
+		}
+
+		return getMasterLayoutSetBranch(groupId, privateLayout);
+	}
+
+	public LayoutSetBranch mergeLayoutSetBranch(
+			long layoutSetBranchId, long mergeLayoutSetBranchId,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		LayoutSetBranch layoutSetBranch =
+			layoutSetBranchPersistence.findByPrimaryKey(layoutSetBranchId);
+
+		List<LayoutRevision> layoutRevisions =
+			layoutRevisionLocalService.getLayoutRevisions(
+				mergeLayoutSetBranchId, true);
+
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
+
+		for (LayoutRevision layoutRevision : layoutRevisions) {
+			serviceContext.setAttribute(
+				"mergeLayoutRevisionId", layoutRevision.getLayoutRevisionId());
+
+			layoutRevisionLocalService.addLayoutRevision(
+				layoutRevision.getUserId(),
+				layoutSetBranch.getLayoutSetBranchId(),
+				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
+				false, layoutRevision.getPlid(),
+				layoutRevision.isPrivateLayout(), layoutRevision.getName(),
+				layoutRevision.getTitle(), layoutRevision.getDescription(),
+				layoutRevision.getKeywords(), layoutRevision.getRobots(),
+				layoutRevision.getTypeSettings(), layoutRevision.getIconImage(),
+				layoutRevision.getIconImageId(), layoutRevision.getThemeId(),
+				layoutRevision.getColorSchemeId(),
+				layoutRevision.getWapThemeId(),
+				layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
+				serviceContext);
+		}
+
+		return layoutSetBranch;
+	}
+
 	public LayoutSetBranch updateLayoutSetBranch(
 			long layoutSetBranchId, String name, String description,
 			ServiceContext serviceContext)
@@ -230,40 +256,6 @@ public class LayoutSetBranchLocalServiceImpl
 		layoutSetBranch.setDescription(description);
 
 		layoutSetBranchPersistence.update(layoutSetBranch, false);
-
-		return layoutSetBranch;
-	}
-
-	public LayoutSetBranch mergeLayoutSetBranch(
-			long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
-
-		LayoutSetBranch layoutSetBranch =
-			layoutSetBranchPersistence.findByPrimaryKey(layoutSetBranchId);
-
-		List<LayoutRevision> revisions =
-			layoutRevisionLocalService.getLayoutRevisions(
-				mergeLayoutSetBranchId, true);
-
-		for (LayoutRevision revision : revisions) {
-			serviceContext.setAttribute(
-				"mergeLayoutRevisionId", revision.getLayoutRevisionId());
-
-			layoutRevisionLocalService.addLayoutRevision(
-				revision.getUserId(), layoutSetBranch.getLayoutSetBranchId(),
-				LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
-				false, revision.getPlid(), revision.getPrivateLayout(),
-				revision.getName(), revision.getTitle(),
-				revision.getDescription(), revision.getKeywords(),
-				revision.getRobots(), revision.getTypeSettings(),
-				revision.getIconImage(), revision.getIconImageId(),
-				revision.getThemeId(), revision.getColorSchemeId(),
-				revision.getWapThemeId(), revision.getWapColorSchemeId(),
-				revision.getCss(), serviceContext);
-		}
 
 		return layoutSetBranch;
 	}

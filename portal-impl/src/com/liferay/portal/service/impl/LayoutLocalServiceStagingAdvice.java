@@ -45,64 +45,53 @@ import org.aopalliance.intercept.MethodInvocation;
  * @author Raymond Augé
  * @author Brian Wing Shun Chan
  */
-public class LayoutLocalServiceStagingAdvice extends LayoutLocalServiceImpl
-	implements MethodInterceptor {
+public class LayoutLocalServiceStagingAdvice
+	extends LayoutLocalServiceImpl implements MethodInterceptor {
 
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-		try {
-			Method method = methodInvocation.getMethod();
-			String methodName = method.getName();
-			Object args[] = methodInvocation.getArguments();
+		Method method = methodInvocation.getMethod();
 
-			Object returnValue = null;
+		String methodName = method.getName();
 
-			if (_layoutLocalServiceStagingAdviceMethodNames.contains(
-					methodName)) {
+		Object[] arguments = methodInvocation.getArguments();
 
-				if (methodName.equals("updateLayout") && (args.length == 15)) {
-					returnValue = updateLayout(
-						(Long)args[0], (Boolean)args[1], (Long)args[2],
-						(Long)args[3], (Map)args[4], (Map)args[5], (Map)args[6],
-						(Map)args[7], (Map)args[8], (String)args[9],
-						(Boolean)args[10], (String)args[11], (Boolean)args[12],
-						(byte[])args[13], (ServiceContext)args[14]);
-				}
-				else {
-					try {
-						Class<?> adviceClass = this.getClass();
+		if (!_layoutLocalServiceStagingAdviceMethodNames.contains(
+				methodName)) {
 
-						Method localMethod = adviceClass.getMethod(
-							methodName, method.getParameterTypes());
+			return wrapReturnValue(methodInvocation.proceed());
+		}
 
-						returnValue = localMethod.invoke(this, args);
-					}
-					catch (NoSuchMethodException nsme) {
-						throw new SystemException(nsme);
-					}
-				}
+		Object returnValue = null;
+
+		if (methodName.equals("updateLayout") && (arguments.length == 15)) {
+			returnValue = updateLayout(
+				(Long)arguments[0], (Boolean)arguments[1], (Long)arguments[2],
+				(Long)arguments[3], (Map<Locale, String>)arguments[4],
+				(Map<Locale, String>)arguments[5],
+				(Map<Locale, String>)arguments[6],
+				(Map<Locale, String>)arguments[7],
+				(Map<Locale, String>)arguments[8], (String)arguments[9],
+				(Boolean)arguments[10], (String)arguments[11],
+				(Boolean)arguments[12], (byte[])arguments[13],
+				(ServiceContext)arguments[14]);
+		}
+		else {
+			try {
+				Class<?> classObject = getClass();
+
+				Method localMethod = classObject.getMethod(
+					methodName, method.getParameterTypes());
+
+				returnValue = localMethod.invoke(this, arguments);
 			}
-			else {
-				returnValue = methodInvocation.proceed();
+			catch (NoSuchMethodException nsme) {
+				throw new SystemException(nsme);
 			}
-
-			returnValue = wrapReturnValue(returnValue);
-
-			return returnValue;
-		}
-		catch (Throwable throwable) {
-			throw throwable;
-		}
-	}
-
-	protected Layout unwrapLayout(Layout layout) {
-		LayoutStagingHandler layoutStagingHandler =
-			LayoutStagingUtil.getLayoutStagingHandler(layout);
-
-		if (layoutStagingHandler == null) {
-			return layout;
 		}
 
-		return layoutStagingHandler.getLayout();
+		returnValue = wrapReturnValue(returnValue);
+
+		return returnValue;
 	}
 
 	public Layout updateLayout(
@@ -326,23 +315,15 @@ public class LayoutLocalServiceStagingAdvice extends LayoutLocalServiceImpl
 		return layout;
 	}
 
-	public Layout updateName(
-			long groupId, boolean privateLayout, long layoutId, String name,
-			String languageId)
-		throws PortalException, SystemException {
+	protected Layout unwrapLayout(Layout layout) {
+		LayoutStagingHandler layoutStagingHandler =
+			LayoutStagingUtil.getLayoutStagingHandler(layout);
 
-		Layout layout = layoutPersistence.findByG_P_L(
-			groupId, privateLayout, layoutId);
+		if (layoutStagingHandler == null) {
+			return layout;
+		}
 
-		return updateName(layout, name, languageId);
-	}
-
-	public Layout updateName(long plid, String name, String languageId)
-		throws PortalException, SystemException {
-
-		Layout layout = layoutPersistence.findByPrimaryKey(plid);
-
-		return updateName(layout, name, languageId);
+		return layoutStagingHandler.getLayout();
 	}
 
 	protected Layout wrapLayout(Layout layout) {

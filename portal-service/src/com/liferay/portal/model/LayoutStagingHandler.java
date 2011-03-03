@@ -19,8 +19,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.staging.Staging;
-import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
@@ -28,9 +27,8 @@ import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.LayoutTypePortletFactoryUtil;
-import com.liferay.portlet.PortalPreferences;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -72,8 +70,7 @@ public class LayoutStagingHandler implements InvocationHandler {
 			if (methodName.equals("getLayoutType")) {
 				return _getLayoutType();
 			}
-
-			if (methodName.equals("toEscapedModel")) {
+			else if (methodName.equals("toEscapedModel")) {
 				if (_layout.isEscapedModel()) {
 					return this;
 				}
@@ -97,7 +94,7 @@ public class LayoutStagingHandler implements InvocationHandler {
 					bean = _layoutRevision;
 				}
 				catch (NoSuchMethodException nsme) {
-					_log.error(nsme);
+					_log.error(nsme, nsme);
 				}
 			}
 
@@ -144,29 +141,25 @@ public class LayoutStagingHandler implements InvocationHandler {
 			return layoutRevision;
 		}
 
-		long layoutRevisionId = ParamUtil.getLong(
-			serviceContext, "layoutRevisionId");
 		long layoutSetBranchId = ParamUtil.getLong(
 			serviceContext, "layoutSetBranchId");
 
 		LayoutSetBranch layoutSetBranch =
 			LayoutSetBranchLocalServiceUtil.getUserLayoutSetBranch(
 				serviceContext.getUserId(), layout.getGroupId(),
-				layout.getPrivateLayout(), layoutSetBranchId);
+				layout.isPrivateLayout(), layoutSetBranchId);
 
 		layoutSetBranchId = layoutSetBranch.getLayoutSetBranchId();
 
-		PortalPreferences portalPreferences =
-			PortletPreferencesFactoryUtil.getPortalPreferences(
-				layout.getCompanyId(), serviceContext.getUserId(),
-				serviceContext.isSignedIn());
+		long layoutRevisionId = ParamUtil.getLong(
+			serviceContext, "layoutRevisionId");
 
 		if (layoutRevisionId <= 0) {
-			layoutRevisionId = GetterUtil.getLong(
-				portalPreferences.getValue(
-					Staging.class.getName(),
-					LayoutRevisionConstants.encodeKey(
-						layoutSetBranchId, layout.getPlid())));
+			User user = UserLocalServiceUtil.getUser(
+				serviceContext.getUserId());
+
+			layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(
+				user, layoutSetBranchId, layout.getPlid());
 		}
 
 		try {
@@ -181,21 +174,21 @@ public class LayoutStagingHandler implements InvocationHandler {
 				layoutSetBranchId, layout.getPlid(), true);
 		}
 		catch (NoSuchLayoutRevisionException nslre) {
-			List<LayoutRevision> revisions =
+			List<LayoutRevision> layoutRevisions =
 				LayoutRevisionLocalServiceUtil.getLayoutRevisions(
 					layoutSetBranchId,
 					LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
 					layout.getPlid());
 
-			if (!revisions.isEmpty()) {
-				return revisions.get(0);
+			if (!layoutRevisions.isEmpty()) {
+				return layoutRevisions.get(0);
 			}
 		}
 
 		return LayoutRevisionLocalServiceUtil.addLayoutRevision(
 			serviceContext.getUserId(), layoutSetBranchId,
 			LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID,
-			false, layout.getPlid(), layout.getPrivateLayout(), layout.getName(),
+			false, layout.getPlid(), layout.isPrivateLayout(), layout.getName(),
 			layout.getTitle(), layout.getDescription(), layout.getKeywords(),
 			layout.getRobots(), layout.getTypeSettings(), layout.getIconImage(),
 			layout.getIconImageId(), layout.getThemeId(),

@@ -763,7 +763,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
 		friendlyURL = getFriendlyURL(
-			layout.getGroupId(), layout.getPrivateLayout(),
+			layout.getGroupId(), layout.isPrivateLayout(),
 			layout.getLayoutId(), StringPool.BLANK, friendlyURL);
 
 		validateFriendlyURL(
@@ -914,7 +914,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Layout layout = layoutPersistence.findByG_P_L(
 			groupId, privateLayout, layoutId);
 
-		return updateName(layout, name, languageId);
+		return layoutLocalService.updateName(layout, name, languageId);
 	}
 
 	public Layout updateName(long plid, String name, String languageId)
@@ -922,7 +922,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
-		return updateName(layout, name, languageId);
+		return layoutLocalService.updateName(layout, name, languageId);
 	}
 
 	public Layout updateParentLayoutId(

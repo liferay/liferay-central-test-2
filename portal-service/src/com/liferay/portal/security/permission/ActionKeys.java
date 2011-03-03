@@ -61,9 +61,9 @@ public class ActionKeys {
 
 	public static final String ADD_ITEM = "ADD_ITEM";
 
-	public static final String ADD_LAYOUT_SET_BRANCH = "ADD_LAYOUT_SET_BRANCH";
-
 	public static final String ADD_LAYOUT_PROTOTYPE = "ADD_LAYOUT_PROTOTYPE";
+
+	public static final String ADD_LAYOUT_SET_BRANCH = "ADD_LAYOUT_SET_BRANCH";
 
 	public static final String ADD_LAYOUT_SET_PROTOTYPE =
 		"ADD_LAYOUT_SET_PROTOTYPE";
