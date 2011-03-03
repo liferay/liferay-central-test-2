@@ -49,7 +49,7 @@ public class RobotsUtil {
 
 			return GetterUtil.get(
 				layoutSet.getSettingsProperty(
-					layoutSet.getPrivateLayout() + "-robots.txt"),
+					layoutSet.isPrivateLayout() + "-robots.txt"),
 					getDefaultRobots(virtualHostname));
 		}
 

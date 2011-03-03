@@ -58,7 +58,7 @@ public class GetLayoutsAction extends JSONAction {
 			jsonObject.put("parentLayoutId", layout.getParentLayoutId());
 			jsonObject.put("plid", layout.getPlid());
 			jsonObject.put("priority", layout.getPriority());
-			jsonObject.put("privateLayout", layout.getPrivateLayout());
+			jsonObject.put("privateLayout", layout.isPrivateLayout());
 			jsonObject.put("type", layout.getType());
 
 			LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
