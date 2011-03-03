@@ -83,20 +83,21 @@ public class NavItem implements Serializable {
 		return HtmlUtil.escape(getUnescapedName());
 	}
 
-	public String getRegularURL() throws Exception {
-		return _layout.getRegularURL(_vars.getRequest());
-	}
-
 	public String getRegularFullURL() throws Exception {
 		String portalURL = PortalUtil.getPortalURL(_vars.getRequest());
+
 		String regularURL = getRegularURL();
 
 		if (StringUtil.startsWith(regularURL, portalURL)) {
 			return regularURL;
 		}
 		else {
-			return portalURL + regularURL;
+			return portalURL.concat(regularURL);
 		}
+	}
+
+	public String getRegularURL() throws Exception {
+		return _layout.getRegularURL(_vars.getRequest());
 	}
 
 	public String getResetLayoutURL() throws Exception {
