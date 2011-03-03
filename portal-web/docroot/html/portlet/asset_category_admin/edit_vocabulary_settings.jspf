@@ -15,18 +15,26 @@
 --%>
 
 <%
-UnicodeProperties settings = null;
-
-String selectedClassNameIds = StringPool.BLANK;
-String requiredClassNameIds = StringPool.BLANK;
-
 boolean multiValued = true;
 
+long[] selectedClassNameIds = null;
+long[] requiredClassNameIds = null;
+
 if (vocabulary != null) {
-	settings = vocabulary.getSettingsProperties();
-	selectedClassNameIds = settings.getProperty("selectedClassNameIds");
-	requiredClassNameIds = settings.getProperty("requiredClassNameIds");
-	multiValued = GetterUtil.getBoolean(settings.getProperty("multiValued"), true);
+	UnicodeProperties settingsProperties = vocabulary.getSettingsProperties();
+
+	multiValued = GetterUtil.getBoolean(settingsProperties.getProperty("multiValued"), true);
+
+	selectedClassNameIds = StringUtil.split(settingsProperties.getProperty("selectedClassNameIds"), 0L);
+	requiredClassNameIds = StringUtil.split(settingsProperties.getProperty("requiredClassNameIds"), 0L);
+}
+
+if ((selectedClassNameIds == null) || (selectedClassNameIds.length == 0)) {
+	selectedClassNameIds = new long[] {0};
+}
+
+if ((requiredClassNameIds == null) || (requiredClassNameIds.length == 0)) {
+	requiredClassNameIds = new long[] {0};
 }
 %>
 
@@ -36,49 +44,41 @@ if (vocabulary != null) {
 	<aui:fieldset id="extraFields">
 
 		<%
-		long[] selectedClassNameIdsArray = StringUtil.split(selectedClassNameIds, StringPool.COMMA, 0L);
-
 		List<String> indexes = new ArrayList<String>();
 
-		if (selectedClassNameIdsArray.length == 0) {
-			selectedClassNameIdsArray = new long[]{0};
-		}
-
-		if (String.valueOf(AssetConstants.CLASS_NAME_ID_ALL).equals(selectedClassNameIds)) {
+		if (_isDefaultClassNameIds(selectedClassNameIds)) {
 		%>
 
 			<div class="lfr-form-row lfr-form-row-inline">
 				<div class="row-fields">
 					<aui:select label="choose-asset-type" name="classNameId">
-						<aui:option label="all-asset-types" selected="<%= true %>" value="<%= AssetConstants.CLASS_NAME_ID_ALL %>" />
+						<aui:option label="all-asset-types" selected="<%= true %>" value="0" />
 
 						<%
-						for (int i = 0; i < availableClassNameIds.length; i++) {
+						for (long availableClassNameId : availableClassNameIds) {
 						%>
 
-							<aui:option label='<%= "model.resource." + PortalUtil.getClassName(availableClassNameIds[i]) %>' selected="<%= false %>" value="<%= availableClassNameIds[i] %>" />
+							<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, PortalUtil.getClassName(availableClassNameId)) %>" selected="<%= false %>" value="<%= availableClassNameId %>" />
 
 						<%
 						}
 						%>
+
 					</aui:select>
 
-					<aui:input cssClass="vocabulary-checkbox" name="required" type="checkbox" value="<%= requiredClassNameIds.equals(String.valueOf(AssetConstants.CLASS_NAME_ID_ALL)) %>" />
+					<aui:input cssClass="vocabulary-checkbox" name="required" type="checkbox" value="<%= _isDefaultClassNameIds(requiredClassNameIds) %>" />
 				</div>
 			</div>
 
 		<%
 		}
 		else {
-			for (int index = 0; index < selectedClassNameIdsArray.length; index++) {
-
+			for (int index = 0; index < selectedClassNameIds.length; index++) {
 				indexes.add(String.valueOf(index));
-
-				long[] requiredClassNameIdsArray = StringUtil.split(requiredClassNameIds, StringPool.COMMA, 0L);
 
 				boolean required = false;
 
-				if (ArrayUtil.contains(requiredClassNameIdsArray, selectedClassNameIdsArray[index])) {
+				if (ArrayUtil.contains(requiredClassNameIds, selectedClassNameIds[index])) {
 					required = true;
 				}
 		%>
@@ -86,22 +86,25 @@ if (vocabulary != null) {
 				<div class="lfr-form-row lfr-form-row-inline">
 					<div class="row-fields">
 						<aui:select label="choose-asset-type" name='<%= "classNameId" + index %>'>
-							<aui:option label="all-asset-types" value="<%= AssetConstants.CLASS_NAME_ID_ALL %>" />
+							<aui:option label="all-asset-types" value="0" />
 
 							<%
 							for (int i = 0; i < availableClassNameIds.length; i++) {
+								long availableClassNameId = availableClassNameIds[i];
+
 								boolean selected = false;
 
-								if (availableClassNameIds[i] == selectedClassNameIdsArray[index]) {
+								if (availableClassNameId == selectedClassNameIds[index]) {
 									selected = true;
 								}
 							%>
 
-								<aui:option label='<%= "model.resource." + PortalUtil.getClassName(availableClassNameIds[i]) %>' selected="<%= selected %>" value="<%= availableClassNameIds[i] %>" />
+								<aui:option label="<%= ResourceActionsUtil.getModelResource(locale, PortalUtil.getClassName(availableClassNameId)) %>" selected="<%= selected %>" value="<%= availableClassNameId %>" />
 
 							<%
 							}
 							%>
+
 						</aui:select>
 
 						<aui:input cssClass="vocabulary-checkbox" label="required" name='<%= "required" + index %>' type="checkbox" value="<%= required %>" />
@@ -125,3 +128,14 @@ if (vocabulary != null) {
 		}
 	).render();
 </aui:script>
+
+<%!
+private boolean _isDefaultClassNameIds(long[] classNameIds) {
+	if ((classNameIds.length == 1) && (classNameIds[0] == 0)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+%>

@@ -67,15 +67,13 @@ public class AssetVocabularyImpl
 		return value;
 	}
 
-	public void setTypeSettings(String settings) {
+	public void setSettings(String settings) {
 		_settingsProperties = null;
 
 		super.setSettings(settings);
 	}
 
-	public void setTypeSettingsProperties(
-		UnicodeProperties settingsProperties) {
-
+	public void setSettingsProperties(UnicodeProperties settingsProperties) {
 		_settingsProperties = settingsProperties;
 
 		super.setSettings(settingsProperties.toString());

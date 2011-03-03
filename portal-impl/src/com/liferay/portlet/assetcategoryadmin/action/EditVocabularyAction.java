@@ -28,7 +28,6 @@ import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.asset.model.AssetConstants;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -97,54 +96,15 @@ public class EditVocabularyAction extends PortletAction {
 				renderRequest, "portlet.asset_category_admin.edit_vocabulary"));
 	}
 
-	protected JSONObject updateVocabulary(ActionRequest actionRequest)
-		throws Exception {
+	protected UnicodeProperties getSettingsProperties(
+		ActionRequest actionRequest) {
 
-		long vocabularyId = ParamUtil.getLong(actionRequest, "vocabularyId");
-
-		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
-			actionRequest, "title");
-		Map<Locale, String> descriptionMap =
-			LocalizationUtil.getLocalizationMap(actionRequest, "description");
-
-		UnicodeProperties settings = getSettings(actionRequest);
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			AssetVocabulary.class.getName(), actionRequest);
-
-		AssetVocabulary vocabulary = null;
-
-		if (vocabularyId <= 0) {
-
-			// Add vocabulary
-
-			vocabulary = AssetVocabularyServiceUtil.addVocabulary(
-				StringPool.BLANK, titleMap, descriptionMap,
-				settings.toString(), serviceContext);
-		}
-		else {
-
-			// Update vocabulary
-
-			vocabulary = AssetVocabularyServiceUtil.updateVocabulary(
-				vocabularyId, StringPool.BLANK, titleMap, descriptionMap,
-				settings.toString(), serviceContext);
-		}
-
-		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-
-		jsonObject.put("vocabularyId", vocabulary.getVocabularyId());
-
-		return jsonObject;
-	}
-
-	protected UnicodeProperties getSettings(ActionRequest actionRequest) {
-		UnicodeProperties settings = new UnicodeProperties();
+		UnicodeProperties settingsProperties = new UnicodeProperties();
 
 		boolean multiValued = ParamUtil.getBoolean(
 			actionRequest, "multiValued");
 
-		settings.setProperty(
+		settingsProperties.setProperty(
 			"multiValued", String.valueOf(multiValued));
 
 		int[] indexes = StringUtil.split(
@@ -157,10 +117,10 @@ public class EditVocabularyAction extends PortletAction {
 			long classNameId = ParamUtil.getLong(
 				actionRequest, "classNameId" + index);
 
-			boolean required =
-				ParamUtil.getBoolean(actionRequest, "required" + index);
+			boolean required = ParamUtil.getBoolean(
+				actionRequest, "required" + index);
 
-			if (classNameId == AssetConstants.CLASS_NAME_ID_ALL) {
+			if (classNameId == 0) {
 				selectedClassNameIds.clear();
 				selectedClassNameIds.add(classNameId);
 
@@ -180,12 +140,54 @@ public class EditVocabularyAction extends PortletAction {
 			}
 		}
 
-		settings.setProperty(
+		settingsProperties.setProperty(
 			"selectedClassNameIds", StringUtil.merge(selectedClassNameIds));
-		settings.setProperty(
+		settingsProperties.setProperty(
 			"requiredClassNameIds", StringUtil.merge(requiredClassNameIds));
 
-		return settings;
+		return settingsProperties;
+	}
+
+	protected JSONObject updateVocabulary(ActionRequest actionRequest)
+		throws Exception {
+
+		long vocabularyId = ParamUtil.getLong(actionRequest, "vocabularyId");
+
+		Map<Locale, String> titleMap = LocalizationUtil.getLocalizationMap(
+			actionRequest, "title");
+		Map<Locale, String> descriptionMap =
+			LocalizationUtil.getLocalizationMap(actionRequest, "description");
+
+		UnicodeProperties settingsProperties = getSettingsProperties(
+			actionRequest);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			AssetVocabulary.class.getName(), actionRequest);
+
+		AssetVocabulary vocabulary = null;
+
+		if (vocabularyId <= 0) {
+
+			// Add vocabulary
+
+			vocabulary = AssetVocabularyServiceUtil.addVocabulary(
+				StringPool.BLANK, titleMap, descriptionMap,
+				settingsProperties.toString(), serviceContext);
+		}
+		else {
+
+			// Update vocabulary
+
+			vocabulary = AssetVocabularyServiceUtil.updateVocabulary(
+				vocabularyId, StringPool.BLANK, titleMap, descriptionMap,
+				settingsProperties.toString(), serviceContext);
+		}
+
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+
+		jsonObject.put("vocabularyId", vocabulary.getVocabularyId());
+
+		return jsonObject;
 	}
 
 }
