@@ -415,13 +415,6 @@ public class EditLayoutsAction extends PortletAction {
 		return ActionUtil.getGroup(portletRequest);
 	}
 
-	protected UnicodeProperties getTypeSettingsProperties(
-		ActionRequest actionRequest) {
-
-		return PropertiesParamUtil.getProperties(
-			actionRequest, "TypeSettingsProperties--");
-	}
-
 	protected void selectLayoutSetBranch(ActionRequest actionRequest)
 		throws Exception {
 
@@ -588,7 +581,8 @@ public class EditLayoutsAction extends PortletAction {
 			}
 
 			UnicodeProperties formTypeSettingsProperties =
-				getTypeSettingsProperties(actionRequest);
+				PropertiesParamUtil.getProperties(
+					actionRequest, "TypeSettingsProperties--");
 
 			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =

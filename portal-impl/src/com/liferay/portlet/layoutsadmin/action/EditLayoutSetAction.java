@@ -123,13 +123,6 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 			getForward(renderRequest, "portlet.layouts_admin.edit_pages"));
 	}
 
-	protected UnicodeProperties getTypeSettingsProperties(
-		ActionRequest actionRequest) {
-
-		return PropertiesParamUtil.getProperties(
-			actionRequest, "TypeSettingsProperties--");
-	}
-
 	protected void updateLayoutSet(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
@@ -157,25 +150,6 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 
 		updateSettings(
 			actionRequest, liveGroupId, stagingGroupId, privateLayout);
-
-	}
-
-	protected void updateSettings(
-			ActionRequest actionRequest, long liveGroupId, long stagingGroupId,
-			boolean privateLayout)
-		throws Exception {
-
-		UnicodeProperties typeSettingsProperties =
-			getTypeSettingsProperties(actionRequest);
-
-		LayoutSetServiceUtil.updateSettings(
-			liveGroupId, privateLayout, typeSettingsProperties.toString());
-
-		if (stagingGroupId > 0) {
-			LayoutSetServiceUtil.updateSettings(
-				stagingGroupId, privateLayout, typeSettingsProperties.toString());
-		}
-
 	}
 
 	protected void updateLogo(
@@ -211,7 +185,8 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 		}
 	}
 
-	protected void updateMergePages(ActionRequest actionRequest, long liveGroupId)
+	protected void updateMergePages(
+			ActionRequest actionRequest, long liveGroupId)
 		throws Exception {
 
 		boolean mergeGuestPublicPages = ParamUtil.getBoolean(
@@ -226,6 +201,25 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 			"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
 
 		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
+	}
+
+	protected void updateSettings(
+			ActionRequest actionRequest, long liveGroupId, long stagingGroupId,
+			boolean privateLayout)
+		throws Exception {
+
+		UnicodeProperties typeSettingsProperties =
+			PropertiesParamUtil.getProperties(
+				actionRequest, "TypeSettingsProperties--");
+
+		LayoutSetServiceUtil.updateSettings(
+			liveGroupId, privateLayout, typeSettingsProperties.toString());
+
+		if (stagingGroupId > 0) {
+			LayoutSetServiceUtil.updateSettings(
+				stagingGroupId, privateLayout,
+				typeSettingsProperties.toString());
+		}
 	}
 
 }
