@@ -29,28 +29,31 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 <aui:form action="<%= editLayoutRevisonURL %>" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "savePage();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" value='<%= portletURL.toString() %>' />
-	<aui:input name="layoutRevisionId" type="hidden" value='<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>' />
-	<aui:input name="updateSessionClicks" type="hidden" value='<%= false %>' />
+	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="layoutRevisionId" type="hidden" value="<%= layoutRevision.getLayoutRevisionId() %>" />
+	<aui:input name="updateRecentLayoutRevisionId" type="hidden" value="<%= false %>" />
 
 	<div class="dockbar dockbar-branching-and-versioning" data-namespace="<portlet:namespace />" id="stagingDockbar">
 		<ul class="aui-toolbar">
 			<li class="select-branch" id="selectBranch">
+
 				<%
-				List<LayoutSetBranch> branches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(layout.getGroupId(), layout.isPrivateLayout());
+				List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(layout.getGroupId(), layout.isPrivateLayout());
 				%>
 
-				<aui:select inlineField="<%= true %>" label="branch" name="layoutSetBranchId" id="layoutSetBranchId">
+				<aui:select id="layoutSetBranchId" inlineField="<%= true %>" label="branch" name="layoutSetBranchId">
 
 					<%
-					for (LayoutSetBranch layoutSetBranch : branches) {
+					for (LayoutSetBranch layoutSetBranch : layoutSetBranches) {
 						boolean selected = false;
 
 						if (layoutSetBranch.getLayoutSetBranchId() == layoutRevision.getLayoutSetBranchId()) {
 							selected = true;
 						}
 					%>
+
 						<aui:option label="<%= HtmlUtil.escape(layoutSetBranch.getName()) %>" selected="<%= selected %>" value="<%= layoutSetBranch.getLayoutSetBranchId() %>" />
+
 					<%
 					}
 					%>

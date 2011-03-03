@@ -54,17 +54,17 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getSummary(Locale locale) {
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(12);
 
 		sb.append("<strong>");
 		sb.append(LanguageUtil.get(locale, "layout"));
 		sb.append(":</strong> ");
 		sb.append(_layoutRevision.getHTMLTitle(locale));
-		sb.append("<br/><strong>");
+		sb.append("<br /><strong>");
 		sb.append(LanguageUtil.get(locale, "branch"));
 		sb.append(":</strong> ");
 		sb.append(_layoutSetBranch.getName());
-		sb.append("<br/><strong>");
+		sb.append("<br /><strong>");
 		sb.append(LanguageUtil.get(locale, "revision-id"));
 		sb.append(":</strong> ");
 		sb.append(_layoutRevision.getLayoutRevisionId());
@@ -73,7 +73,7 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 	}
 
 	public String getTitle(Locale locale) {
-		StringBundler sb = new StringBundler();
+		StringBundler sb = new StringBundler(4);
 
 		sb.append(_layoutRevision.getHTMLTitle(locale));
 		sb.append(" [");
@@ -83,12 +83,12 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 		return sb.toString();
 	}
 
-	public String getUuid() {
-		return null;
-	}
-
 	public long getUserId() {
 		return _layoutRevision.getUserId();
+	}
+
+	public String getUuid() {
+		return null;
 	}
 
 	public String render(

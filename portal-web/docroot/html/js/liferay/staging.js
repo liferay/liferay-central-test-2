@@ -43,10 +43,10 @@ AUI().add(
 				var instance = this;
 
 				var groupId = options.groupId;
-				var layoutSetBranchId = options.layoutSetBranchId;
 				var privateLayout = options.privateLayout;
+				var layoutSetBranchId = options.layoutSetBranchId;
 
-				var url = themeDisplay.getPathMain() + '/group_pages/merge_branch?groupId=' + groupId + '&layoutSetBranchId=' + layoutSetBranchId + '&privateLayout=' + privateLayout;
+				var url = themeDisplay.getPathMain() + '/group_pages/merge_layout_set_branch?groupId=' + groupId + '&privateLayout=' + privateLayout + '&layoutSetBranchId=' + layoutSetBranchId;
 
 				var dialog = instance._mergeBranchDialog;
 
@@ -148,7 +148,7 @@ AUI().add(
 						function(event) {
 							if (confirm(Liferay.Language.get('are-you-sure-you-want-to-undo-your-last-changes'))) {
 								window.document[namespace + 'fm'][namespace + 'cmd'].value = "delete_layout_revision";
-								window.document[namespace + 'fm'][namespace + 'updateSessionClicks'].value = true;
+								window.document[namespace + 'fm'][namespace + 'updateRecentLayoutRevisionId'].value = true;
 
 								window.submitForm(window.document[namespace + 'fm']);
 							}
@@ -168,7 +168,7 @@ AUI().add(
 
 							var layoutSetBranchId = layoutSetBranchIdSelect.options[layoutSetBranchIdSelect.selectedIndex].value;
 
-							var url = themeDisplay.getPathMain() + '/dockbar/revision_graph?layoutRevisionId=' + layoutRevisionId + '&layoutSetBranchId=' + layoutSetBranchId;
+							var url = themeDisplay.getPathMain() + '/dockbar/layout_revisions?layoutRevisionId=' + layoutRevisionId + '&layoutSetBranchId=' + layoutSetBranchId;
 
 							var dialog = instance._graphDialog;
 

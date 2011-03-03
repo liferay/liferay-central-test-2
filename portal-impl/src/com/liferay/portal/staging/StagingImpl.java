@@ -71,7 +71,10 @@ import com.liferay.portal.service.http.LayoutServiceHttp;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.SessionClicks;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortalPreferences;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.io.File;
 
@@ -89,6 +92,8 @@ import java.util.Set;
 import java.util.TimeZone;
 
 import javax.portlet.PortletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Raymond Augé
@@ -536,6 +541,42 @@ public class StagingImpl implements Staging {
 		return missingParentLayouts;
 	}
 
+	public long getRecentLayoutRevisionId(
+		HttpServletRequest request, long layoutSetBranchId, long plid) {
+
+		return GetterUtil.getLong(
+			SessionClicks.get(
+				request, Staging.class.getName(),
+				getRecentLayoutRevisionIdKey(layoutSetBranchId, plid)));
+	}
+
+	public long getRecentLayoutRevisionId(
+			User user, long layoutSetBranchId, long plid)
+		throws SystemException {
+
+		PortalPreferences portalPreferences = getPortalPreferences(user);
+
+		return GetterUtil.getLong(
+			portalPreferences.getValue(
+				Staging.class.getName(),
+				getRecentLayoutRevisionIdKey(layoutSetBranchId, plid)));
+	}
+
+	public long getRecentLayoutSetBranchId(HttpServletRequest request) {
+		return GetterUtil.getLong(
+			SessionClicks.get(
+				request, Staging.class.getName(),
+				getRecentLayoutSetBranchIdKey()));
+	}
+
+	public long getRecentLayoutSetBranchId(User user) throws SystemException {
+		PortalPreferences portalPreferences = getPortalPreferences(user);
+
+		return GetterUtil.getLong(
+			portalPreferences.getValue(
+				Staging.class.getName(), getRecentLayoutSetBranchIdKey()));
+	}
+
 	public String getSchedulerGroupName(
 		String destinationName, long groupId) {
 
@@ -909,6 +950,46 @@ public class StagingImpl implements Staging {
 		publishToRemote(portletRequest, true);
 	}
 
+	public void setRecentLayoutRevisionId(
+		HttpServletRequest request, long layoutSetBranchId, long plid,
+		long layoutRevisionId) {
+
+		SessionClicks.put(
+			request, Staging.class.getName(),
+			getRecentLayoutRevisionIdKey(layoutSetBranchId, plid),
+			String.valueOf(layoutRevisionId));
+	}
+
+	public void setRecentLayoutRevisionId(
+			User user, long layoutSetBranchId, long plid, long layoutRevisionId)
+		throws SystemException {
+
+		PortalPreferences portalPreferences = getPortalPreferences(user);
+
+		portalPreferences.setValue(
+			Staging.class.getName(),
+			"layoutRevisionId-" + layoutSetBranchId + "-" + plid,
+			String.valueOf(layoutRevisionId));
+	}
+
+	public void setRecentLayoutSetBranchId(
+		HttpServletRequest request, long layoutSetBranchId) {
+
+		SessionClicks.put(
+			request, Staging.class.getName(), getRecentLayoutSetBranchIdKey(),
+			String.valueOf(layoutSetBranchId));
+	}
+
+	public void setRecentLayoutSetBranchId(User user, long layoutSetBranchId)
+		throws SystemException {
+
+		PortalPreferences portalPreferences = getPortalPreferences(user);
+
+		portalPreferences.setValue(
+			Staging.class.getName(), getRecentLayoutSetBranchIdKey(),
+			String.valueOf(layoutSetBranchId));
+	}
+
 	public void unscheduleCopyFromLive(PortletRequest portletRequest)
 		throws Exception {
 
@@ -1200,6 +1281,35 @@ public class StagingImpl implements Staging {
 		cal.set(Calendar.MILLISECOND, 0);
 
 		return cal;
+	}
+
+	protected PortalPreferences getPortalPreferences(User user)
+		throws SystemException {
+
+		boolean signedIn = !user.isDefaultUser();
+
+		PortalPreferences portalPreferences =
+			PortletPreferencesFactoryUtil.getPortalPreferences(
+				user.getCompanyId(), user.getUserId(), signedIn);
+
+		return portalPreferences;
+	}
+
+	protected String getRecentLayoutRevisionIdKey(
+		long layoutSetBranchId, long plid) {
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append("layoutRevisionId-");
+		sb.append(layoutSetBranchId);
+		sb.append(StringPool.DASH);
+		sb.append(plid);
+
+		return sb.toString();
+	}
+
+	protected String getRecentLayoutSetBranchIdKey() {
+		return "layoutSetBranchId";
 	}
 
 	protected void publishLayouts(

@@ -29,7 +29,6 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.events.EventsProcessorUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.staging.Staging;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -48,10 +47,9 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
-import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.LayoutRevision;
-import com.liferay.portal.model.LayoutRevisionConstants;
 import com.liferay.portal.model.LayoutSetBranch;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -78,7 +76,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LayoutSettings;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.SessionClicks;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
@@ -394,24 +391,23 @@ public class EditLayoutsAction extends PortletAction {
 
 		long layoutRevisionId = ParamUtil.getLong(
 			actionRequest, "layoutRevisionId");
-		boolean updateSessionClicks = ParamUtil.getBoolean(
-			actionRequest, "updateSessionClicks");
 
 		LayoutRevision layoutRevision =
 			LayoutRevisionLocalServiceUtil.getLayoutRevision(layoutRevisionId);
 
 		LayoutRevisionLocalServiceUtil.deleteLayoutRevision(layoutRevision);
 
-		if (updateSessionClicks) {
+		boolean updateRecentLayoutRevisionId = ParamUtil.getBoolean(
+			actionRequest, "updateRecentLayoutRevisionId");
+
+		if (updateRecentLayoutRevisionId) {
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
 
-			SessionClicks.put(
-				request, Staging.class.getName(),
-				LayoutRevisionConstants.encodeKey(
-					layoutRevision.getLayoutSetBranchId(),
-					layoutRevision.getPlid()),
-				String.valueOf(layoutRevision.getParentLayoutRevisionId()));
+			StagingUtil.setRecentLayoutRevisionId(
+				request, layoutRevision.getLayoutSetBranchId(),
+				layoutRevision.getPlid(),
+				layoutRevision.getParentLayoutRevisionId());
 		}
 	}
 
@@ -432,7 +428,7 @@ public class EditLayoutsAction extends PortletAction {
 		long layoutSetBranchId = ParamUtil.getLong(
 			actionRequest, "layoutSetBranchId");
 
-		// Keep this so that we don't allow setting a non-existent branchId.
+		// Ensure layout set branch exists
 
 		LayoutSetBranch layoutSetBranch =
 			LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
@@ -441,9 +437,8 @@ public class EditLayoutsAction extends PortletAction {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
 
-		SessionClicks.put(
-			request, Staging.class.getName(), "LAYOUT_SET_BRANCH_ID",
-			String.valueOf(layoutSetBranch.getLayoutSetBranchId()));
+		StagingUtil.setRecentLayoutSetBranchId(
+			request, layoutSetBranch.getLayoutSetBranchId());
 	}
 
 	protected void updateDisplayOrder(ActionRequest actionRequest)
@@ -660,6 +655,30 @@ public class EditLayoutsAction extends PortletAction {
 		return new Object[] {layout, oldFriendlyURL};
 	}
 
+	protected void updateLayoutRevision(ActionRequest actionRequest)
+		throws Exception {
+
+		long layoutRevisionId = ParamUtil.getLong(
+			actionRequest, "layoutRevisionId");
+
+		LayoutRevision layoutRevision =
+			LayoutRevisionLocalServiceUtil.getLayoutRevision(layoutRevisionId);
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
+		LayoutRevisionLocalServiceUtil.updateLayoutRevision(
+			serviceContext.getUserId(), layoutRevisionId,
+			layoutRevision.getName(), layoutRevision.getTitle(),
+			layoutRevision.getDescription(), layoutRevision.getKeywords(),
+			layoutRevision.getRobots(), layoutRevision.getTypeSettings(),
+			layoutRevision.getIconImage(), layoutRevision.getIconImageId(),
+			layoutRevision.getThemeId(), layoutRevision.getColorSchemeId(),
+			layoutRevision.getWapThemeId(),
+			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
+			serviceContext);
+	}
+
 	protected void updateLookAndFeel(
 			ActionRequest actionRequest, long companyId, long liveGroupId,
 			long stagingGroupId, boolean privateLayout, long layoutId)
@@ -717,30 +736,6 @@ public class EditLayoutsAction extends PortletAction {
 					css, wapTheme);
 			}
 		}
-	}
-
-	protected void updateLayoutRevision(ActionRequest actionRequest)
-		throws Exception {
-
-		long layoutRevisionId = ParamUtil.getLong(
-			actionRequest, "layoutRevisionId");
-
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			actionRequest);
-
-		LayoutRevision layoutRevision =
-			LayoutRevisionLocalServiceUtil.getLayoutRevision(layoutRevisionId);
-
-		LayoutRevisionLocalServiceUtil.updateLayoutRevision(
-			serviceContext.getUserId(), layoutRevisionId,
-			layoutRevision.getName(), layoutRevision.getTitle(),
-			layoutRevision.getDescription(), layoutRevision.getKeywords(),
-			layoutRevision.getRobots(), layoutRevision.getTypeSettings(),
-			layoutRevision.getIconImage(), layoutRevision.getIconImageId(),
-			layoutRevision.getThemeId(), layoutRevision.getColorSchemeId(),
-			layoutRevision.getWapThemeId(),
-			layoutRevision.getWapColorSchemeId(), layoutRevision.getCss(),
-			serviceContext);
 	}
 
 }

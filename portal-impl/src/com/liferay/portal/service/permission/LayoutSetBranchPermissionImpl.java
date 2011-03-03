@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
 
@@ -39,12 +38,12 @@ public class LayoutSetBranchPermissionImpl
 	}
 
 	public void check(
-			PermissionChecker permissionChecker, long groupId,
-			long layoutSetBranchId, String actionId)
+			PermissionChecker permissionChecker, long layoutSetBranchId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
-				permissionChecker, groupId, layoutSetBranchId, actionId)) {
+				permissionChecker, layoutSetBranchId, actionId)) {
 
 			throw new PrincipalException();
 		}
@@ -60,21 +59,15 @@ public class LayoutSetBranchPermissionImpl
 	}
 
 	public boolean contains(
-			PermissionChecker permissionChecker, long groupId,
-			long layoutSetBranchId, String actionId)
+			PermissionChecker permissionChecker, long layoutSetBranchId,
+			String actionId)
 		throws PortalException, SystemException {
 
-		if (actionId.equals(ActionKeys.ADD_LAYOUT_SET_BRANCH)) {
-			return GroupPermissionUtil.contains(
-				permissionChecker, groupId, ActionKeys.ADD_LAYOUT_SET_BRANCH);
-		}
-		else {
-			LayoutSetBranch layoutSetBranch =
-				LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
-					layoutSetBranchId);
+		LayoutSetBranch layoutSetBranch =
+			LayoutSetBranchLocalServiceUtil.getLayoutSetBranch(
+				layoutSetBranchId);
 
-			return contains(permissionChecker, layoutSetBranch, actionId);
-		}
+		return contains(permissionChecker, layoutSetBranch, actionId);
 	}
 
 }

@@ -14,8 +14,10 @@
 
 package com.liferay.portal.kernel.staging;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.Date;
@@ -23,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Raymond Augé
@@ -75,6 +79,17 @@ public interface Staging {
 	public List<Layout> getMissingParentLayouts(Layout layout, long liveGroupId)
 		throws Exception;
 
+	public long getRecentLayoutRevisionId(
+		HttpServletRequest request, long layoutSetBranchId, long plid);
+
+	public long getRecentLayoutRevisionId(
+			User user, long layoutSetBranchId, long plid)
+		throws SystemException;
+
+	public long getRecentLayoutSetBranchId(HttpServletRequest request);
+
+	public long getRecentLayoutSetBranchId(User user) throws SystemException;
+
 	public String getSchedulerGroupName(String destinationName, long groupId);
 
 	public Map<String, String[]> getStagingParameters();
@@ -119,6 +134,20 @@ public interface Staging {
 
 	public void schedulePublishToRemote(PortletRequest PortletRequest)
 		throws Exception;
+
+	public void setRecentLayoutRevisionId(
+		HttpServletRequest request, long layoutSetBranchId, long plid,
+		long layoutRevisionId);
+
+	public void setRecentLayoutRevisionId(
+			User user, long layoutSetBranchId, long plid, long layoutRevisionId)
+		throws SystemException;
+
+	public void setRecentLayoutSetBranchId(
+		HttpServletRequest request, long layoutSetBranchId);
+
+	public void setRecentLayoutSetBranchId(User user, long layoutSetBranchId)
+		throws SystemException;
 
 	public void unscheduleCopyFromLive(PortletRequest PortletRequest)
 		throws Exception;

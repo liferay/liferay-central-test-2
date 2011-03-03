@@ -63,6 +63,7 @@ public class LayoutRevisionAssetRendererFactory
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.createAssetEntry(
 			classPK);
 
+		assetEntry.setGroupId(layoutRevision.getGroupId());
 		assetEntry.setCompanyId(user.getCompanyId());
 		assetEntry.setUserId(user.getUserId());
 		assetEntry.setUserName(user.getFullName());
@@ -70,7 +71,6 @@ public class LayoutRevisionAssetRendererFactory
 		assetEntry.setClassNameId(
 			PortalUtil.getClassNameId(LayoutRevision.class.getName()));
 		assetEntry.setClassPK(layoutRevision.getLayoutRevisionId());
-		assetEntry.setGroupId(layoutRevision.getGroupId());
 
 		StringBundler sb = new StringBundler();
 

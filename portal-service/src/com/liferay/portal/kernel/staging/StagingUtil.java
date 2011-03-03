@@ -14,8 +14,10 @@
 
 package com.liferay.portal.kernel.staging;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 
 import java.util.Date;
@@ -23,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletRequest;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Raymond Augé
@@ -114,6 +118,31 @@ public class StagingUtil {
 		throws Exception {
 
 		return getStaging().getMissingParentLayouts(layout, liveGroupId);
+	}
+
+	public static long getRecentLayoutRevisionId(
+		HttpServletRequest request, long layoutSetBranchId, long plid) {
+
+		return getStaging().getRecentLayoutRevisionId(
+			request, layoutSetBranchId, plid);
+	}
+
+	public static long getRecentLayoutRevisionId(
+			User user, long layoutSetBranchId, long plid)
+		throws SystemException {
+
+		return getStaging().getRecentLayoutRevisionId(
+			user, layoutSetBranchId, plid);
+	}
+
+	public static long getRecentLayoutSetBranchId(HttpServletRequest request) {
+		return getStaging().getRecentLayoutSetBranchId(request);
+	}
+
+	public static long getRecentLayoutSetBranchId(User user)
+		throws SystemException {
+
+		return getStaging().getRecentLayoutSetBranchId(user);
 	}
 
 	public static String getSchedulerGroupName(
@@ -211,6 +240,35 @@ public class StagingUtil {
 		throws Exception {
 
 		getStaging().schedulePublishToRemote(PortletRequest);
+	}
+
+	public static void setRecentLayoutRevisionId(
+		HttpServletRequest request, long layoutSetBranchId, long plid,
+		long layoutRevisionId) {
+
+		getStaging().setRecentLayoutRevisionId(
+			request, layoutSetBranchId, plid, layoutRevisionId);
+	}
+
+	public static void setRecentLayoutRevisionId(
+			User user, long layoutSetBranchId, long plid, long layoutRevisionId)
+		throws SystemException {
+
+		getStaging().setRecentLayoutRevisionId(
+			user, layoutSetBranchId, plid, layoutRevisionId);
+	}
+
+	public static void setRecentLayoutSetBranchId(
+		HttpServletRequest request, long layoutSetBranchId) {
+
+		getStaging().setRecentLayoutSetBranchId(request, layoutSetBranchId);
+	}
+
+	public static void setRecentLayoutSetBranchId(
+			User user, long layoutSetBranchId)
+		throws SystemException {
+
+		getStaging().setRecentLayoutSetBranchId(user, layoutSetBranchId);
 	}
 
 	public static void unscheduleCopyFromLive(PortletRequest PortletRequest)

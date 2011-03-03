@@ -49,6 +49,7 @@ public class LayoutRevisionIdComparator extends OrderByComparator {
 		}
 		else if (layoutRevision1.getLayoutRevisionId() <
 					layoutRevision2.getLayoutRevisionId()) {
+
 			value = -1;
 		}
 

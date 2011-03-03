@@ -26,17 +26,16 @@ PortletURL portletURL = ((PortletURL)request.getAttribute("edit_pages.jsp-portle
 <div class="aui-helper-hidden" data-namespace="<portlet:namespace />" id="addBranch">
 	<aui:model-context model="<%= LayoutSetBranch.class %>" />
 
-	<portlet:actionURL var="editBranchURL">
-			<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set_branch" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+	<portlet:actionURL var="editLayoutSetBranchURL">
+		<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set_branch" />
 	</portlet:actionURL>
 
-	<aui:form action="<%= editBranchURL %>" enctype="multipart/form-data" method="post" name="fm3">
-		<aui:input id="addBranchCmd" name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-		<aui:input id="addBranchPagesRedirect" name="pagesRedirect" type="hidden" value='<%= portletURL.toString() %>' />
-		<aui:input id="addBranchGroupId" name="groupId" type="hidden" value="<%= groupId %>" />
-		<aui:input id="addBranchPrivateLayout" name="privateLayout" type="hidden" value="<%= privateLayout %>" />
+	<aui:form action="<%= editLayoutSetBranchURL %>" enctype="multipart/form-data" method="post" name="fm3">
+		<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
+		<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
+		<aui:input name="pagesRedirect" type="hidden" value="<%= portletURL.toString() %>" />
+		<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
+		<aui:input name="privateLayout" type="hidden" value="<%= privateLayout %>" />
 
 		<aui:fieldset>
 			<aui:input name="name" />

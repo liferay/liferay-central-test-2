@@ -19,15 +19,15 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-LayoutSetBranch branch = (LayoutSetBranch)row.getObject();
+LayoutSetBranch layoutSetBranch = (LayoutSetBranch)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= LayoutSetBranchPermissionUtil.contains(permissionChecker, branch, ActionKeys.PERMISSIONS) %>">
+	<c:if test="<%= LayoutSetBranchPermissionUtil.contains(permissionChecker, layoutSetBranch, ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= LayoutSetBranch.class.getName() %>"
-			modelResourceDescription="<%= branch.getName() %>"
-			resourcePrimKey="<%= String.valueOf(branch.getLayoutSetBranchId()) %>"
+			modelResourceDescription="<%= layoutSetBranch.getName() %>"
+			resourcePrimKey="<%= String.valueOf(layoutSetBranch.getLayoutSetBranchId()) %>"
 			var="permissionsURL"
 		/>
 
@@ -37,13 +37,13 @@ LayoutSetBranch branch = (LayoutSetBranch)row.getObject();
 		/>
 	</c:if>
 
-	<c:if test="<%= !branch.isMaster() && LayoutSetBranchPermissionUtil.contains(permissionChecker, branch, ActionKeys.DELETE) %>">
+	<c:if test="<%= !layoutSetBranch.isMaster() && LayoutSetBranchPermissionUtil.contains(permissionChecker, layoutSetBranch, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set_branch" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(branch.getGroupId()) %>" />
-			<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(branch.getLayoutSetBranchId()) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(layoutSetBranch.getGroupId()) %>" />
+			<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(layoutSetBranch.getLayoutSetBranchId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete
@@ -51,11 +51,11 @@ LayoutSetBranch branch = (LayoutSetBranch)row.getObject();
 		/>
 	</c:if>
 
-	<c:if test="<%= LayoutSetBranchPermissionUtil.contains(permissionChecker, branch, ActionKeys.MERGE) %>">
+	<c:if test="<%= LayoutSetBranchPermissionUtil.contains(permissionChecker, layoutSetBranch, ActionKeys.MERGE) %>">
 		<liferay-ui:icon
 			image="edit"
 			message="merge"
-			url='<%= "javascript:Liferay.Staging.Branching.mergeBranch({groupId:" + branch.getGroupId() + ",layoutSetBranchId:" + branch.getLayoutSetBranchId() + ",privateLayout:" + branch.getPrivateLayout() + "});" %>'
+			url='<%= "javascript:Liferay.Staging.Branching.mergeBranch({groupId: " + layoutSetBranch.getGroupId() + ", privateLayout: " + layoutSetBranch.isPrivateLayout() + ", layoutSetBranchId: " + layoutSetBranch.getLayoutSetBranchId() + "});" %>'
 		/>
 	</c:if>
 </liferay-ui:icon-menu>

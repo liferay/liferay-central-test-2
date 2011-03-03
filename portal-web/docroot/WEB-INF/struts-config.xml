@@ -524,13 +524,13 @@
 
 		<!-- Dockbar -->
 
-		<action path="/dockbar/view" forward="portlet.dockbar.view" />
-
 		<action path="/dockbar/edit_layouts" type="com.liferay.portlet.layoutsadmin.action.EditLayoutsAction">
 			<forward name="portlet.layouts_admin.error" path="portlet.dockbar.view" />
 		</action>
 
-		<action path="/dockbar/revision_graph" forward="portlet.dockbar.revision_graph" />
+		<action path="/dockbar/layout_revisions" forward="portlet.dockbar.layout_revisions" />
+
+		<action path="/dockbar/view" forward="portlet.dockbar.view" />
 
 		<!-- Document Library -->
 
@@ -1192,12 +1192,12 @@
 
 		<!-- Group Pages -->
 
-		<action path="/group_pages/edit_layout_set_branch" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetBranchAction">
+		<action path="/group_pages/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
 
-		<action path="/group_pages/edit_layout_set" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetAction">
+		<action path="/group_pages/edit_layout_set_branch" type="com.liferay.portlet.layoutsadmin.action.EditLayoutSetBranchAction">
 			<forward name="portlet.layouts_admin.edit_layouts" path="portlet.layouts_admin.edit_layouts" />
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
 		</action>
@@ -1220,7 +1220,7 @@
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
 		</action>
 
-		<action path="/group_pages/merge_branch" forward="portlet.layouts_admin.merge_branch" />
+		<action path="/group_pages/merge_layout_set_branch" forward="portlet.layouts_admin.merge_layout_set_branch" />
 
 		<action path="/group_pages/publish_layouts" type="com.liferay.portlet.layoutsadmin.action.PublishLayoutsAction">
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />
@@ -1494,7 +1494,7 @@
 			<forward name="portlet.layouts_admin.export_layouts" path="portlet.layouts_admin.export_layouts" />
 		</action>
 
-		<action path="/layouts_admin/merge_branch" forward="portlet.layouts_admin.merge_branch" />
+		<action path="/layouts_admin/merge_layout_set_branch" forward="portlet.layouts_admin.merge_layout_set_branch" />
 
 		<action path="/layouts_admin/publish_layouts" type="com.liferay.portlet.layoutsadmin.action.PublishLayoutsAction">
 			<forward name="portlet.layouts_admin.error" path="portlet.layouts_admin.error" />

@@ -34,12 +34,12 @@ public class LayoutSetBranchPermissionUtil {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, long groupId,
-			long layoutSetBranchId, String actionId)
+			PermissionChecker permissionChecker, long layoutSetBranchId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		getLayoutSetBranchPermission().check(
-			permissionChecker, groupId, layoutSetBranchId, actionId);
+			permissionChecker, layoutSetBranchId, actionId);
 	}
 
 	public static boolean contains(
@@ -51,12 +51,12 @@ public class LayoutSetBranchPermissionUtil {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long groupId,
-			long layoutSetBranchId, String actionId)
+			PermissionChecker permissionChecker, long layoutSetBranchId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		return getLayoutSetBranchPermission().contains(
-			permissionChecker, groupId, layoutSetBranchId, actionId);
+			permissionChecker, layoutSetBranchId, actionId);
 	}
 
 	public static LayoutSetBranchPermission getLayoutSetBranchPermission() {

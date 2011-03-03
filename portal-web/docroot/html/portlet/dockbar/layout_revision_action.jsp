@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/dockbar/init.jsp" %>
 
 <%
-LayoutRevision layoutRevision = (LayoutRevision)request.getAttribute("revision_graph.jsp-layoutRevision");
+LayoutRevision layoutRevision = (LayoutRevision)request.getAttribute("layout_revisions.jsp-layoutRevision");
 
 List<LayoutRevision> pendingRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(), WorkflowConstants.STATUS_PENDING);
 %>
@@ -31,14 +31,18 @@ List<LayoutRevision> pendingRevisions = LayoutRevisionLocalServiceUtil.getLayout
 				<portlet:param name="pagesRedirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(layoutRevision.getGroupId()) %>" />
 				<portlet:param name="layoutRevisionId" value="<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>" />
-				<portlet:param name="workflowAction" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
 				<portlet:param name="major" value="true" />
+				<portlet:param name="workflowAction" value="<%= String.valueOf(WorkflowConstants.ACTION_PUBLISH) %>" />
 			</portlet:actionURL>
+
+			<%
+			String taglibURL = "javascript:submitForm(document.hrefFm, '" + HttpUtil.encodeURL(publishURL) + "');";
+			%>
 
 			<liferay-ui:icon
 				image="submit"
 				message="publish"
-				url='<%= "javascript:submitForm(document.hrefFm, \'".concat(HttpUtil.encodeURL(publishURL)).concat("\');") %>'
+				url="<%= taglibURL %>"
 			/>
 		</c:if>
 
@@ -49,14 +53,18 @@ List<LayoutRevision> pendingRevisions = LayoutRevisionLocalServiceUtil.getLayout
 				<portlet:param name="pagesRedirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(layoutRevision.getGroupId()) %>" />
 				<portlet:param name="layoutRevisionId" value="<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>" />
-				<portlet:param name="workflowAction" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
 				<portlet:param name="major" value="true" />
+				<portlet:param name="workflowAction" value="<%= String.valueOf(WorkflowConstants.ACTION_SAVE_DRAFT) %>" />
 			</portlet:actionURL>
+
+			<%
+			String taglibURL = "javascript:submitForm(document.hrefFm, '" + HttpUtil.encodeURL(saveURL) + "');";
+			%>
 
 			<liferay-ui:icon
 				image="checked"
 				message="save"
-				url='<%= "javascript:submitForm(document.hrefFm, \'".concat(HttpUtil.encodeURL(saveURL)).concat("\');") %>'
+				url="<%= taglibURL %>"
 			/>
 		</c:if>
 

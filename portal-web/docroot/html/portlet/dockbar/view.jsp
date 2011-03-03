@@ -36,7 +36,7 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(layout);
 %>
 
-<c:if test="<%= (layoutRevision != null) %>">
+<c:if test="<%= layoutRevision != null %>">
 	<liferay-util:include page="/html/portlet/dockbar/branching_and_versioning.jsp" />
 </c:if>
 

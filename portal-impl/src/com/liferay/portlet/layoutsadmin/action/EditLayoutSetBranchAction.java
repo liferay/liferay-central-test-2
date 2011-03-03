@@ -124,10 +124,7 @@ public class EditLayoutSetBranchAction extends EditLayoutsAction {
 		long layoutSetBranchId = ParamUtil.getLong(
 			actionRequest, "layoutSetBranchId");
 
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
-		LayoutSetBranchServiceUtil.deleteLayoutSetBranch(
-			groupId, layoutSetBranchId);
+		LayoutSetBranchServiceUtil.deleteLayoutSetBranch(layoutSetBranchId);
 	}
 
 	protected void mergeLayoutSetBranch(ActionRequest actionRequest)
@@ -135,16 +132,15 @@ public class EditLayoutSetBranchAction extends EditLayoutsAction {
 
 		long layoutSetBranchId = ParamUtil.getLong(
 			actionRequest, "layoutSetBranchId");
+
 		long mergeLayoutSetBranchId = ParamUtil.getLong(
 			actionRequest, "mergeLayoutSetBranchId");
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			actionRequest);
 
 		LayoutSetBranchServiceUtil.mergeLayoutSetBranch(
-			groupId, layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
+			layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
 	}
 
 	protected void updateLayoutSetBranch(ActionRequest actionRequest)

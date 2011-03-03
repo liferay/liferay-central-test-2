@@ -17,7 +17,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.staging.Staging;
+import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutRevisionConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
@@ -44,7 +43,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.SessionClicks;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
@@ -172,11 +170,8 @@ public class UpdateLayoutAction extends Action {
 			long layoutSetBranchId = ParamUtil.getLong(
 				request, "layoutSetBranchId");
 
-			SessionClicks.put(
-				request, Staging.class.getName(),
-				LayoutRevisionConstants.encodeKey(
-					layoutSetBranchId, layout.getPlid()),
-				String.valueOf(layoutRevisionId));
+			StagingUtil.setRecentLayoutRevisionId(
+				request, layoutSetBranchId, layout.getPlid(), layoutRevisionId);
 
 			updateLayout = false;
 		}

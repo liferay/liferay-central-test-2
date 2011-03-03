@@ -407,9 +407,9 @@
 
 	<!-- Dockbar -->
 
-	<definition name="portlet.dockbar.view" path="/portlet/dockbar/view.jsp" />
+	<definition name="portlet.dockbar.layout_revisions" path="/portlet/dockbar/layout_revisions.jsp" />
 
-	<definition name="portlet.dockbar.revision_graph" path="/portlet/dockbar/revision_graph.jsp" />
+	<definition name="portlet.dockbar.view" path="/portlet/dockbar/view.jsp" />
 
 	<!-- Document Library -->
 
@@ -873,7 +873,7 @@
 		<put name="portlet_content" value="/portlet/layouts_admin/error.jsp" />
 	</definition>
 
-	<definition name="portlet.layouts_admin.merge_branch" path="/portlet/layouts_admin/merge_branch.jsp" />
+	<definition name="portlet.layouts_admin.merge_layout_set_branch" path="/portlet/layouts_admin/merge_layout_set_branch.jsp" />
 
 	<definition name="portlet.layouts_admin.publish_layouts" extends="portlet.layouts_admin">
 		<put name="portlet_content" value="/portlet/layouts_admin/publish_layouts.jsp" />

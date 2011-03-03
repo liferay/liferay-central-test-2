@@ -31,8 +31,8 @@ public interface LayoutSetBranchPermission {
 		throws PortalException;
 
 	public void check(
-			PermissionChecker permissionChecker, long groupId,
-			long layoutSetBranchId, String actionId)
+			PermissionChecker permissionChecker, long layoutSetBranchId,
+			String actionId)
 		throws PortalException, SystemException;
 
 	public boolean contains(
@@ -40,8 +40,8 @@ public interface LayoutSetBranchPermission {
 		String actionId);
 
 	public boolean contains(
-			PermissionChecker permissionChecker, long groupId,
-			long layoutSetBranchId, String actionId)
+			PermissionChecker permissionChecker, long layoutSetBranchId,
+			String actionId)
 		throws PortalException, SystemException;
 
 }

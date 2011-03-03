@@ -26,6 +26,7 @@ long liveGroupId = (Long)request.getAttribute("edit_pages.jsp-liveGroupId");
 long stagingGroupId = (Long)request.getAttribute("edit_pages.jsp-stagingGroupId");
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
+UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribute("edit_pages.jsp-liveGroupTypeSettings");
 LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLayoutSet"));
 
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
@@ -55,15 +56,13 @@ if (!company.isCommunityLogo()) {
 	mainSections = ArrayUtil.remove(mainSections, "logo");
 }
 
-UnicodeProperties properties = liveGroup.getTypeSettingsProperties();
-
 String branchingKey = "branchingPublic";
 
 if (privateLayout) {
 	branchingKey = "branchingPrivate";
 }
 
-if (GetterUtil.getBoolean(properties.getProperty(branchingKey))) {
+if (GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(branchingKey))) {
 	mainSections = ArrayUtil.append(mainSections, "branches");
 }
 
