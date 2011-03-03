@@ -176,6 +176,15 @@ public class LiferayFolder extends LiferayModel implements Folder {
 		return _dlFolder.isRoot();
 	}
 
+	public boolean isSupportsShortcuts() {
+		if (isMountPoint()) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
 	public boolean isSupportsSocial() {
 		return true;
 	}

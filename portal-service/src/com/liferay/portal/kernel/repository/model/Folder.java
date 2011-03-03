@@ -79,6 +79,8 @@ public interface Folder extends RepositoryModel<Folder> {
 
 	public boolean isRoot();
 
+	public boolean isSupportsShortcuts();
+
 	public boolean isSupportsSocial();
 
 }

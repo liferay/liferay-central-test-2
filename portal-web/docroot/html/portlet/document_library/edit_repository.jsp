@@ -43,6 +43,7 @@ long folderId = ParamUtil.getLong(request, "folderId");
 		title='<%= (repository != null) ? repository.getName() : "new-repository" %>'
 	/>
 
+	<liferay-ui:error exception="<%= DuplicateFolderNameException.class %>" message="please-enter-a-unique-repository-name" />
 	<liferay-ui:error exception="<%= DuplicateRepositoryNameException.class %>" message="please-enter-a-unique-repository-name" />
 	<liferay-ui:error exception="<%= InvalidRepositoryException.class %>" message="please-verify-your-repository-configuration-parameters" />
 	<liferay-ui:error exception="<%= RepositoryNameException.class %>" message="please-enter-a-valid-name" />

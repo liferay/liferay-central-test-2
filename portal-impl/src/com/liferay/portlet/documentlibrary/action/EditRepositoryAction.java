@@ -30,6 +30,7 @@ import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.DuplicateRepositoryNameException;
 import com.liferay.portlet.documentlibrary.RepositoryNameException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -74,7 +75,8 @@ public class EditRepositoryAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.document_library.error");
 			}
-			else if (e instanceof DuplicateRepositoryNameException ||
+			else if (e instanceof DuplicateFolderNameException ||
+					 e instanceof DuplicateRepositoryNameException ||
 					 e instanceof InvalidRepositoryException ||
 					 e instanceof RepositoryNameException) {
 

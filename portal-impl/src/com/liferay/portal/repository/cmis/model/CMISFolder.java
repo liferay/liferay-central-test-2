@@ -257,6 +257,10 @@ public class CMISFolder extends CMISModel implements Folder {
 		}
 	}
 
+	public boolean isSupportsShortcuts() {
+		return false;
+	}
+
 	public boolean isSupportsSocial() {
 		return false;
 	}

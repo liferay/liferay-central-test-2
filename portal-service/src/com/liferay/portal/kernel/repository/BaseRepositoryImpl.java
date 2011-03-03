@@ -27,6 +27,7 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.persistence.RepositoryEntryUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,6 +41,41 @@ import java.util.List;
  * @see    com.liferay.portal.repository.cmis.CMISAtomPubRepository#SUPPORTED_PARAMETERS
  */
 public abstract class BaseRepositoryImpl implements Repository {
+
+	public List<Object> getFileEntriesAndFileShortcuts(
+			long folderId, int status, int start, int end)
+		throws SystemException {
+
+		return new ArrayList<Object>(
+			getFileEntries(folderId, start, end, null));
+	}
+
+	public int getFileEntriesAndFileShortcutsCount(long folderId, int status)
+		throws SystemException {
+
+		return getFileEntriesCount(folderId);
+	}
+
+	public abstract List<Object> getFoldersAndFileEntries(
+			long folderId, int start, int end)
+		throws SystemException;
+
+	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
+			long folderId, int status, int start, int end)
+		throws SystemException {
+
+		return getFoldersAndFileEntries(folderId, start, end);
+	}
+
+	public abstract int getFoldersAndFileEntriesCount(long folderId)
+		throws SystemException;
+
+	public int getFoldersAndFileEntriesAndFileShortcutsCount(
+			long folderId, int status)
+		throws SystemException {
+
+		return getFoldersAndFileEntriesCount(folderId);
+	}
 
 	public void deleteFileEntry(long folderId, String title)
 		throws PortalException, SystemException {

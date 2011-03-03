@@ -14,11 +14,13 @@
 
 package com.liferay.portlet.documentlibrary.util.comparator;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 public class FileEntryTitleComparator extends OrderByComparator {
 
@@ -37,11 +39,19 @@ public class FileEntryTitleComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		DLFileEntry fileEntry1 = (DLFileEntry)obj1;
-		DLFileEntry fileEntry2 = (DLFileEntry)obj2;
+		String title1;
+		String title2;
 
-		int value = fileEntry1.getTitle().toLowerCase().compareTo(
-			fileEntry2.getTitle().toLowerCase());
+		if (obj1 instanceof DLFileEntry) {
+			title1 = ((DLFileEntry)obj1).getTitle();
+			title2 = ((DLFileEntry)obj2).getTitle();
+		}
+		else {
+			title1 = ((FileEntry)obj1).getTitle();
+			title2 = ((FileEntry)obj2).getTitle();
+		}
+
+		int value = title1.compareToIgnoreCase(title2);
 
 		if (_ascending) {
 			return value;

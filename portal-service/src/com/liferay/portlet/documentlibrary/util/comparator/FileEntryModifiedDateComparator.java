@@ -14,12 +14,16 @@
 
 package com.liferay.portlet.documentlibrary.util.comparator;
 
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
+import java.util.Date;
+
 /**
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
 public class FileEntryModifiedDateComparator extends OrderByComparator {
 
@@ -38,11 +42,19 @@ public class FileEntryModifiedDateComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		DLFileEntry fileEntry1 = (DLFileEntry)obj1;
-		DLFileEntry fileEntry2 = (DLFileEntry)obj2;
+		Date modifiedDate1;
+		Date modifiedDate2;
 
-		int value = DateUtil.compareTo(
-			fileEntry1.getModifiedDate(), fileEntry2.getModifiedDate());
+		if (obj1 instanceof DLFileEntry) {
+			modifiedDate1 = ((DLFileEntry)obj1).getModifiedDate();
+			modifiedDate2 = ((DLFileEntry)obj2).getModifiedDate();
+		}
+		else {
+			modifiedDate1 = ((FileEntry)obj1).getModifiedDate();
+			modifiedDate2 = ((FileEntry)obj2).getModifiedDate();
+		}
+
+		int value = DateUtil.compareTo(modifiedDate1, modifiedDate2);
 
 		if (_ascending) {
 			return value;
