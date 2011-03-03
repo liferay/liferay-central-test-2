@@ -175,10 +175,9 @@ public class ClusterSchedulerEngine
 		try {
 			Lock lock = lockMemorySchedulerCluster(false, null);
 
-			Address masterAddress = (Address)getDeserializedObject(
-				lock.getOwner());
+			Address address = (Address)getDeserializedObject(lock.getOwner());
 
-			if (ClusterExecutorUtil.isClusterNodeAlive(masterAddress)) {
+			if (ClusterExecutorUtil.isClusterNodeAlive(address)) {
 				return;
 			}
 
@@ -190,33 +189,35 @@ public class ClusterSchedulerEngine
 		}
 	}
 
-	protected Object getDeserializedObject(String serializedString)
-		throws Exception {
+	protected Object getDeserializedObject(String string) throws Exception {
+		byte[] bytes = Base64.decode(string);
 
-		byte[] orginalBytes = Base64.decode(serializedString);
+		UnsyncByteArrayInputStream byteArrayInputStream =
+			new UnsyncByteArrayInputStream(bytes);
 
-		UnsyncByteArrayInputStream byetArrayInputStream =
-			new UnsyncByteArrayInputStream(orginalBytes);
 		ObjectInputStream objectInputStream = new ObjectInputStream(
-			byetArrayInputStream);
+			byteArrayInputStream);
 
 		Object object = objectInputStream.readObject();
+
 		objectInputStream.close();
 
 		return object;
 	}
 
 	protected String getSerializedString(Object object) throws Exception {
-		UnsyncByteArrayOutputStream byetArrayOutputStream =
+		UnsyncByteArrayOutputStream byteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
+
 		ObjectOutputStream objectOutputStream = new ObjectOutputStream(
-			byetArrayOutputStream);
+			byteArrayOutputStream);
 
 		objectOutputStream.writeObject(object);
 		objectOutputStream.close();
 
-		byte[] orginalBytes = byetArrayOutputStream.toByteArray();
-		return Base64.encode(orginalBytes);
+		byte[] bytes = byteArrayOutputStream.toByteArray();
+
+		return Base64.encode(bytes);
 	}
 
 	protected boolean isMemorySchedulerClusterLockOwner(Lock lock)

@@ -205,7 +205,9 @@ public class ClusterExecutorImpl
 	}
 
 	public boolean isClusterNodeAlive(Address address) {
-		return getAddresses(_controlChannel).contains(address);
+		List<Address> addresses = getAddresses(_controlChannel);
+
+		return addresses.contains(address);
 	}
 
 	public boolean isClusterNodeAlive(String clusterNodeId) {
@@ -361,14 +363,15 @@ public class ClusterExecutorImpl
 		else {
 			addresses = new ArrayList<Address>();
 
-			Collection<String> clusterNodeIds =
-				clusterRequest.getTargetClusterNodeIds();
 			Collection<Address> clusterNodeAddresses =
 				clusterRequest.getTargetClusterNodeAddresses();
 
 			if (clusterNodeAddresses != null) {
 				addresses.addAll(clusterNodeAddresses);
 			}
+
+			Collection<String> clusterNodeIds =
+				clusterRequest.getTargetClusterNodeIds();
 
 			if (clusterNodeIds != null) {
 				for (String clusterNodeId : clusterNodeIds) {
