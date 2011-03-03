@@ -232,9 +232,6 @@ public class ImageProcessorImpl implements ImageProcessor {
 
 		BufferedImage bufferedImage = getBufferedImage(renderedImage);
 
-		Image scaledImage = bufferedImage.getScaledInstance(
-			scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
-
 		int type = bufferedImage.getType();
 
 		if (type == 0) {
@@ -245,6 +242,9 @@ public class ImageProcessorImpl implements ImageProcessor {
 			scaledWidth, scaledHeight, type);
 
 		Graphics graphics = scaledBufferedImage.getGraphics();
+
+		Image scaledImage = bufferedImage.getScaledInstance(
+			scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
 
 		graphics.drawImage(scaledImage, 0, 0, null);
 
@@ -277,9 +277,6 @@ public class ImageProcessorImpl implements ImageProcessor {
 
 		BufferedImage bufferedImage = getBufferedImage(renderedImage);
 
-		Image scaledImage = bufferedImage.getScaledInstance(
-			scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
-
 		int type = bufferedImage.getType();
 
 		if (type == 0) {
@@ -290,6 +287,9 @@ public class ImageProcessorImpl implements ImageProcessor {
 			scaledWidth, scaledHeight, type);
 
 		Graphics graphics = scaledBufferedImage.getGraphics();
+
+		Image scaledImage = bufferedImage.getScaledInstance(
+			scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
 
 		graphics.drawImage(scaledImage, 0, 0, null);
 
