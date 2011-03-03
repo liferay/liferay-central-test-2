@@ -18,6 +18,7 @@
 
 <%
 Group group = null;
+
 LayoutRevision layoutRevision = null;
 
 if (layout != null) {

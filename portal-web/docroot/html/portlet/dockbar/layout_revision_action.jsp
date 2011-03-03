@@ -19,20 +19,20 @@
 <%
 LayoutRevision layoutRevision = (LayoutRevision)request.getAttribute("layout_revisions.jsp-layoutRevision");
 
-long curLayoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid());
+long layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid());
 
-List<LayoutRevision> pendingRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(), WorkflowConstants.STATUS_PENDING);
+List<LayoutRevision> pendingLayoutRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(), WorkflowConstants.STATUS_PENDING);
 
 boolean updateRecentLayoutRevisionId = false;
 
-if (layoutRevision.getLayoutRevisionId() == curLayoutRevisionId) {
+if (layoutRevision.getLayoutRevisionId() == layoutRevisionId) {
 	updateRecentLayoutRevisionId = true;
 }
 %>
 
 <liferay-ui:icon-menu showWhenSingleIcon="<%= true %>">
 	<c:if test="<%= !layoutRevision.isPending() && LayoutPermissionUtil.contains(permissionChecker, layoutRevision.getPlid(), ActionKeys.UPDATE) %>">
-		<c:if test="<%= pendingRevisions.isEmpty() && layoutRevision.isMajor() && !layoutRevision.isHead() %>">
+		<c:if test="<%= pendingLayoutRevisions.isEmpty() && layoutRevision.isMajor() && !layoutRevision.isHead() %>">
 			<portlet:actionURL var="publishURL">
 				<portlet:param name="struts_action" value="/dockbar/edit_layouts" />
 				<portlet:param name="<%= Constants.CMD %>" value="update_layout_revision" />
