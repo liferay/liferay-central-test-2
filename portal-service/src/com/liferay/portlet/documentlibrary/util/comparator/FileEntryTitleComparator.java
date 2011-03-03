@@ -39,8 +39,8 @@ public class FileEntryTitleComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		String title1;
-		String title2;
+		String title1 = null;
+		String title2 = null;
 
 		if (obj1 instanceof DLFileEntry) {
 			title1 = ((DLFileEntry)obj1).getTitle();

@@ -42,6 +42,26 @@ import java.util.List;
  */
 public abstract class BaseRepositoryImpl implements Repository {
 
+	public void deleteFileEntry(long folderId, String title)
+		throws PortalException, SystemException {
+
+		FileEntry fileEntry = getFileEntry(folderId, title);
+
+		deleteFileEntry(fileEntry.getFileEntryId());
+	}
+
+	public void deleteFolder(long parentFolderId, String title)
+		throws PortalException, SystemException {
+
+		Folder folder = getFolder(parentFolderId, title);
+
+		deleteFolder(folder.getFolderId());
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
 	public List<Object> getFileEntriesAndFileShortcuts(
 			long folderId, int status, int start, int end)
 		throws SystemException {
@@ -67,9 +87,6 @@ public abstract class BaseRepositoryImpl implements Repository {
 		return getFoldersAndFileEntries(folderId, start, end);
 	}
 
-	public abstract int getFoldersAndFileEntriesCount(long folderId)
-		throws SystemException;
-
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long folderId, int status)
 		throws SystemException {
@@ -77,25 +94,8 @@ public abstract class BaseRepositoryImpl implements Repository {
 		return getFoldersAndFileEntriesCount(folderId);
 	}
 
-	public void deleteFileEntry(long folderId, String title)
-		throws PortalException, SystemException {
-
-		FileEntry fileEntry = getFileEntry(folderId, title);
-
-		deleteFileEntry(fileEntry.getFileEntryId());
-	}
-
-	public void deleteFolder(long parentFolderId, String title)
-		throws PortalException, SystemException {
-
-		Folder folder = getFolder(parentFolderId, title);
-
-		deleteFolder(folder.getFolderId());
-	}
-
-	public long getCompanyId() {
-		return _companyId;
-	}
+	public abstract int getFoldersAndFileEntriesCount(long folderId)
+		throws SystemException;
 
 	public long getGroupId() {
 		return _groupId;

@@ -288,7 +288,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			}
 		}
 
-		if (start == QueryUtil.ALL_POS && end == QueryUtil.ALL_POS) {
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
 			return fileEntries;
 		}
 		else {
@@ -297,7 +297,9 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public int getFileEntriesCount(long folderId) throws SystemException {
-		return getFileEntries(folderId).size();
+		List<FileEntry> fileEntries = getFileEntries(folderId);
+
+		return fileEntries.size();
 	}
 
 	public FileEntry getFileEntry(long fileEntryId)
@@ -457,7 +459,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		List<Folder> folders = getFolders(parentFolderId);
 
-		if (start == QueryUtil.ALL_POS && end == QueryUtil.ALL_POS) {
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
 			return folders;
 		}
 		else {
@@ -471,7 +473,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		List<Object> foldersAndFileEntries = getFoldersAndFileEntries(folderId);
 
-		if (start == QueryUtil.ALL_POS && end == QueryUtil.ALL_POS) {
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
 			return foldersAndFileEntries;
 		}
 		else {
@@ -482,11 +484,15 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	public int getFoldersAndFileEntriesCount(long folderId)
 		throws SystemException {
 
-		return getFoldersAndFileEntries(folderId).size();
+		List<Object> foldersAndFileEntries = getFoldersAndFileEntries(folderId);
+
+		return foldersAndFileEntries.size();
 	}
 
 	public int getFoldersCount(long parentFolderId) throws SystemException {
-		return getFolders(parentFolderId).size();
+		List<Folder> folders = getFolders(parentFolderId);
+
+		return folders.size();
 	}
 
 	public int getFoldersFileEntriesCount(List<Long> folderIds, int status)
@@ -495,7 +501,9 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		int count = 0;
 
 		for (long folderId : folderIds) {
-			count += getFileEntries(folderId).size();
+			List<FileEntry> fileEntries = getFileEntries(folderId);
+
+			count += fileEntries.size();
 		}
 
 		return count;
@@ -525,7 +533,8 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	public void initRepository() throws PortalException, SystemException {
 		try {
 			_sessionKey =
-				Session.class.getName() + StringPool.POUND + getRepositoryId();
+				Session.class.getName().concat(StringPool.POUND).concat(
+					String.valueOf(getRepositoryId()));
 
 			Session session = getSession();
 
@@ -729,10 +738,12 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 				properties.put(PropertyIds.NAME, title);
 			}
 
+			String documentId = document.getId();
+
 			ObjectId newObjectId = document.checkIn(
 				true, properties, contentStream, changeLog);
 
-			if (!document.getId().equals(newObjectId.toString())) {
+			if (!documentId.equals(newObjectId.toString())) {
 				document = (Document)session.getObject(newObjectId);
 			}
 
@@ -838,10 +849,12 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 					sourceFileName, BigInteger.valueOf(size), contentType, is);
 			}
 
+			String documentId = document.getId();
+
 			ObjectId newObjectId = document.checkIn(
 				majorVersion, properties, contentStream, changeLog);
 
-			if (!document.getId().equals(newObjectId.toString())) {
+			if (!documentId.equals(newObjectId.toString())) {
 				document = (Document)session.getObject(newObjectId);
 			}
 
@@ -925,14 +938,17 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		throw new UnsupportedOperationException();
 	}
 
-	protected void cacheChildren(long folderId)
+	protected void cacheFoldersAndFileEntries(long folderId)
 		throws SystemException {
 
-		if (_foldersAndFileEntriesCache.get().containsKey(folderId)) {
-			return;
-		}
-
 		try {
+			Map<Long, List<Object>> foldersAndFileEntriesCache =
+				_foldersAndFileEntriesCache.get();
+
+			if (foldersAndFileEntriesCache.containsKey(folderId)) {
+				return;
+			}
+
 			List<Object> foldersAndFileEntries = new ArrayList<Object>();
 			List<Folder> folders = new ArrayList<Folder>();
 			List<FileEntry> fileEntries = new ArrayList<FileEntry>();
@@ -960,10 +976,16 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 				}
 			}
 
-			_foldersCache.get().put(folderId, folders);
-			_foldersAndFileEntriesCache.get().put(
-				folderId, foldersAndFileEntries);
-			_fileEntriesCache.get().put(folderId, fileEntries);
+			foldersAndFileEntriesCache.put(folderId, foldersAndFileEntries);
+
+			Map<Long, List<Folder>> foldersCache = _foldersCache.get();
+
+			foldersCache.put(folderId, folders);
+
+			Map<Long, List<FileEntry>> fileEntriesCache =
+				_fileEntriesCache.get();
+
+			fileEntriesCache.put(folderId, fileEntries);
 		}
 		catch (SystemException se) {
 			throw se;
@@ -1039,9 +1061,12 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	protected List<FileEntry> getFileEntries(long folderId)
 		throws SystemException {
 
-		cacheChildren(folderId);
+		cacheFoldersAndFileEntries(folderId);
 
-		return _fileEntriesCache.get().get(folderId);
+		Map<Long, List<FileEntry>> fileEntriesCache =
+			_fileEntriesCache.get();
+
+		return fileEntriesCache.get(folderId);
 	}
 
 	protected FileEntry getFileEntry(Session session, long fileEntryId)
@@ -1071,17 +1096,22 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected List<Folder> getFolders(long folderId) throws SystemException {
-		cacheChildren(folderId);
+		cacheFoldersAndFileEntries(folderId);
 
-		return _foldersCache.get().get(folderId);
+		Map<Long, List<Folder>> foldersCache = _foldersCache.get();
+
+		return foldersCache.get(folderId);
 	}
 
 	protected List<Object> getFoldersAndFileEntries(long folderId)
 		throws SystemException {
 
-		cacheChildren(folderId);
+		cacheFoldersAndFileEntries(folderId);
 
-		return _foldersAndFileEntriesCache.get().get(folderId);
+		Map<Long, List<Object>> foldersAndFileEntriesCache =
+			_foldersAndFileEntriesCache.get();
+
+		return foldersAndFileEntriesCache.get(folderId);
 	}
 
 	protected Iterator<CmisObject> getIterator(long folderId)
@@ -1439,24 +1469,24 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	private static Set<String> _defaultFilterSet = new HashSet<String>();
-
 	private static ThreadLocal<Map<Long, List<FileEntry>>> _fileEntriesCache =
 		new AutoResetThreadLocal<Map<Long, List<FileEntry>>>(
 			CMISRepository.class + "._fileEntriesCache",
 			new HashMap<Long, List<FileEntry>>());
-
 	private static ThreadLocal<Map<Long, List<Object>>>
 		_foldersAndFileEntriesCache =
 			new AutoResetThreadLocal<Map<Long, List<Object>>>(
 				CMISRepository.class + "._foldersAndFileEntriesCache",
 				new HashMap<Long, List<Object>>());
-
 	private static ThreadLocal<Map<Long, List<Folder>>> _foldersCache =
 		new AutoResetThreadLocal<Map<Long, List<Folder>>>(
 			CMISRepository.class + "._foldersCache",
 			new HashMap<Long, List<Folder>>());
 
 	private static Log _log = LogFactoryUtil.getLog(CMISRepository.class);
+
+	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
+	private String _sessionKey;
 
 	static {
 
@@ -1486,9 +1516,5 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		_defaultFilterSet.add(PropertyIds.PARENT_ID);
 		_defaultFilterSet.add(PropertyIds.PATH);
 	}
-
-	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
-
-	private String _sessionKey;
 
 }

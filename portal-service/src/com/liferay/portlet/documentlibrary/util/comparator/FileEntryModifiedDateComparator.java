@@ -42,8 +42,8 @@ public class FileEntryModifiedDateComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		Date modifiedDate1;
-		Date modifiedDate2;
+		Date modifiedDate1 = null;
+		Date modifiedDate2 = null;
 
 		if (obj1 instanceof DLFileEntry) {
 			modifiedDate1 = ((DLFileEntry)obj1).getModifiedDate();
