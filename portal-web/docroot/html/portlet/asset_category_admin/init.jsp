@@ -24,9 +24,3 @@
 <%@ page import="com.liferay.portlet.asset.service.AssetCategoryPropertyServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.AssetVocabularyServiceUtil" %>
 <%@ page import="com.liferay.portlet.asset.service.permission.AssetPermission" %>
-
-<%
-PortletPreferences preferences = renderRequest.getPreferences();
-
-long[] availableClassNameIds = AssetRendererFactoryRegistryUtil.getClassNameIds();
-%>
