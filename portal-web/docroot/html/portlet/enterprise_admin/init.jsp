@@ -72,7 +72,6 @@
 <%@ page import="com.liferay.portal.security.auth.AuthSettingsUtil" %>
 <%@ page import="com.liferay.portal.security.ldap.LDAPSettingsUtil" %>
 <%@ page import="com.liferay.portal.security.ldap.PortalLDAPUtil" %>
-<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>

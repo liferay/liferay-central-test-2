@@ -35,7 +35,6 @@
 <%@ page import="com.liferay.portal.kernel.portlet.FriendlyURLMapper" %>
 <%@ page import="com.liferay.portal.kernel.portlet.PortletModeFactory" %>
 <%@ page import="com.liferay.portal.kernel.servlet.PortletServlet" %>
-<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
 <%@ page import="com.liferay.portal.service.permission.RolePermissionUtil" %>
 <%@ page import="com.liferay.portlet.PortletContextImpl" %>
