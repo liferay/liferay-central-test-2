@@ -235,8 +235,14 @@ public class ImageProcessorImpl implements ImageProcessor {
 		Image scaledImage = bufferedImage.getScaledInstance(
 			scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
 
+		int type = bufferedImage.getType();
+
+		if (type == 0) {
+			type = BufferedImage.TYPE_INT_ARGB;
+		}
+
 		BufferedImage scaledBufferedImage = new BufferedImage(
-			scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+			scaledWidth, scaledHeight, type);
 
 		Graphics graphics = scaledBufferedImage.getGraphics();
 
@@ -274,8 +280,14 @@ public class ImageProcessorImpl implements ImageProcessor {
 		Image scaledImage = bufferedImage.getScaledInstance(
 			scaledWidth, scaledHeight, Image.SCALE_SMOOTH);
 
+		int type = bufferedImage.getType();
+
+		if (type == 0) {
+			type = BufferedImage.TYPE_INT_ARGB;
+		}
+
 		BufferedImage scaledBufferedImage = new BufferedImage(
-			scaledWidth, scaledHeight, BufferedImage.TYPE_INT_RGB);
+			scaledWidth, scaledHeight, type);
 
 		Graphics graphics = scaledBufferedImage.getGraphics();
 
