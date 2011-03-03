@@ -233,7 +233,9 @@ public class LoginUtil {
 					HttpSession userTrackerSession =  PortalSessionContext.get(
 						userTracker.getSessionId());
 
-					userTrackerSession.invalidate();
+					if (userTrackerSession != null) {
+						userTrackerSession.invalidate();
+					}
 				}
 			}
 		}
