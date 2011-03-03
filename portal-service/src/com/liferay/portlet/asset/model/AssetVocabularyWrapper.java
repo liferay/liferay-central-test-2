@@ -516,13 +516,9 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return _assetVocabulary.getSettingsProperties();
 	}
 
-	public void setTypeSettings(java.lang.String settings) {
-		_assetVocabulary.setTypeSettings(settings);
-	}
-
-	public void setTypeSettingsProperties(
+	public void setSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties) {
-		_assetVocabulary.setTypeSettingsProperties(settingsProperties);
+		_assetVocabulary.setSettingsProperties(settingsProperties);
 	}
 
 	public AssetVocabulary getWrappedAssetVocabulary() {

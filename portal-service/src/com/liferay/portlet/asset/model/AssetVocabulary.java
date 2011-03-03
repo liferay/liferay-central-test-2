@@ -29,17 +29,17 @@ public interface AssetVocabulary extends AssetVocabularyModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portlet.asset.model.impl.AssetVocabularyImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getSettings();
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties();
+
 	public java.lang.String getTitle(java.lang.String languageId);
 
 	public java.lang.String getTitle(java.lang.String languageId,
 		boolean useDefault);
 
-	public java.lang.String getSettings();
+	public void setSettings(java.lang.String settings);
 
-	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties();
-
-	public void setTypeSettings(java.lang.String settings);
-
-	public void setTypeSettingsProperties(
+	public void setSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties);
 }

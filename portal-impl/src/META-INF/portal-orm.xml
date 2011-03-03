@@ -3206,7 +3206,9 @@
 	</entity>
 	<entity class="com.liferay.portlet.asset.model.impl.AssetVocabularyImpl" name="AssetVocabulary">
 		<table name="AssetVocabulary" />
-		<attributes />
+		<attributes>
+			<transient name="settingsProperties" />
+		</attributes>
 	</entity>
 	<entity class="com.liferay.portlet.blogs.model.impl.BlogsEntryImpl" name="BlogsEntry">
 		<table name="BlogsEntry" />
