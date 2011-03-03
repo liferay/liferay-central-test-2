@@ -547,7 +547,8 @@ public class StagingImpl implements Staging {
 		return GetterUtil.getLong(
 			SessionClicks.get(
 				request, Staging.class.getName(),
-				getRecentLayoutRevisionIdKey(layoutSetBranchId, plid)));
+				getRecentLayoutRevisionIdKey(layoutSetBranchId, plid),
+				StringPool.BLANK));
 	}
 
 	public long getRecentLayoutRevisionId(
@@ -968,7 +969,7 @@ public class StagingImpl implements Staging {
 
 		portalPreferences.setValue(
 			Staging.class.getName(),
-			"layoutRevisionId-" + layoutSetBranchId + "-" + plid,
+			getRecentLayoutRevisionIdKey(layoutSetBranchId, plid),
 			String.valueOf(layoutRevisionId));
 	}
 

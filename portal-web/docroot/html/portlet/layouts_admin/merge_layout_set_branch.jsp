@@ -45,6 +45,7 @@ if (layoutSetBranches.contains(layoutSetBranch)) {
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 		<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 		<aui:input name="layoutSetBranchId" type="hidden" value="<%= layoutSetBranchId %>" />
+		<aui:input name="mergeLayoutSetBranchId" type="hidden" />
 
 		<liferay-ui:search-container>
 			<liferay-ui:search-container-results
@@ -60,6 +61,7 @@ if (layoutSetBranches.contains(layoutSetBranch)) {
 			>
 
 				<liferay-ui:search-container-column-text
+					name="branch"
 					property="name"
 				/>
 

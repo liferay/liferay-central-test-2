@@ -18,9 +18,12 @@
 
 <%
 Group group = null;
+LayoutRevision layoutRevision = null;
 
 if (layout != null) {
 	group = layout.getGroup();
+
+	layoutRevision = LayoutStagingUtil.getLayoutRevision(layout);
 }
 
 List<Portlet> portlets = new ArrayList<Portlet>();
@@ -32,8 +35,6 @@ for (String portletId : PropsValues.DOCKBAR_ADD_PORTLETS) {
 		portlets.add(portlet);
 	}
 }
-
-LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(layout);
 %>
 
 <c:if test="<%= layoutRevision != null %>">

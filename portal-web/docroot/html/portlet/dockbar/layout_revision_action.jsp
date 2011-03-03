@@ -19,7 +19,15 @@
 <%
 LayoutRevision layoutRevision = (LayoutRevision)request.getAttribute("layout_revisions.jsp-layoutRevision");
 
+long curLayoutRevisionId = StagingUtil.getRecentLayoutRevisionId(request, layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid());
+
 List<LayoutRevision> pendingRevisions = LayoutRevisionLocalServiceUtil.getLayoutRevisions(layoutRevision.getLayoutSetBranchId(), layoutRevision.getPlid(), WorkflowConstants.STATUS_PENDING);
+
+boolean updateRecentLayoutRevisionId = false;
+
+if (layoutRevision.getLayoutRevisionId() == curLayoutRevisionId) {
+	updateRecentLayoutRevisionId = true;
+}
 %>
 
 <liferay-ui:icon-menu showWhenSingleIcon="<%= true %>">
@@ -28,7 +36,7 @@ List<LayoutRevision> pendingRevisions = LayoutRevisionLocalServiceUtil.getLayout
 			<portlet:actionURL var="publishURL">
 				<portlet:param name="struts_action" value="/dockbar/edit_layouts" />
 				<portlet:param name="<%= Constants.CMD %>" value="update_layout_revision" />
-				<portlet:param name="pagesRedirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
+				<portlet:param name="redirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(layoutRevision.getGroupId()) %>" />
 				<portlet:param name="layoutRevisionId" value="<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>" />
 				<portlet:param name="major" value="true" />
@@ -50,7 +58,7 @@ List<LayoutRevision> pendingRevisions = LayoutRevisionLocalServiceUtil.getLayout
 			<portlet:actionURL var="saveURL">
 				<portlet:param name="struts_action" value="/dockbar/edit_layouts" />
 				<portlet:param name="<%= Constants.CMD %>" value="update_layout_revision" />
-				<portlet:param name="pagesRedirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
+				<portlet:param name="redirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(layoutRevision.getGroupId()) %>" />
 				<portlet:param name="layoutRevisionId" value="<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>" />
 				<portlet:param name="major" value="true" />
@@ -72,9 +80,10 @@ List<LayoutRevision> pendingRevisions = LayoutRevisionLocalServiceUtil.getLayout
 			<portlet:actionURL var="deleteURL">
 				<portlet:param name="struts_action" value="/dockbar/edit_layouts" />
 				<portlet:param name="<%= Constants.CMD %>" value="delete_layout_revision" />
-				<portlet:param name="pagesRedirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
+				<portlet:param name="redirect" value="<%= PortalUtil.getLayoutFullURL(themeDisplay) %>" />
 				<portlet:param name="groupId" value="<%= String.valueOf(layoutRevision.getGroupId()) %>" />
 				<portlet:param name="layoutRevisionId" value="<%= String.valueOf(layoutRevision.getLayoutRevisionId()) %>" />
+				<portlet:param name="updateRecentLayoutRevisionId" value="<%= String.valueOf(updateRecentLayoutRevisionId) %>" />
 			</portlet:actionURL>
 
 			<liferay-ui:icon-delete url="<%= deleteURL %>" />
