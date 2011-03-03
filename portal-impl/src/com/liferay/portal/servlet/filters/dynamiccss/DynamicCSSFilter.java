@@ -113,12 +113,12 @@ public class DynamicCSSFilter extends BasePortalFilter {
 			return null;
 		}
 
+		request.setAttribute(WebKeys.CSS_REAL_PATH, realPath);
+
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(_tempDir);
 		sb.append(requestURI);
-
-		request.setAttribute(WebKeys.CSS_REAL_PATH, realPath);
 
 		String queryString = request.getQueryString();
 
@@ -194,17 +194,22 @@ public class DynamicCSSFilter extends BasePortalFilter {
 			HttpServletRequest request, String content)
 		throws ScriptingException {
 
+		Map<String, Object> inputObjects = new HashMap<String, Object>();
+
+		inputObjects.put("content", content);
+
+		String cssRealPath = (String)request.getAttribute(
+			WebKeys.CSS_REAL_PATH);
+
+		inputObjects.put(
+			"cssRealPath", cssRealPath);
+
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
 		UnsyncPrintWriter unsyncPrintWriter = new UnsyncPrintWriter(
 			unsyncByteArrayOutputStream);
 
-		Map<String, Object> inputObjects = new HashMap<String, Object>();
-
-		inputObjects.put(
-			"cssRealPath", request.getAttribute(WebKeys.CSS_REAL_PATH));
-		inputObjects.put("content", content);
 		inputObjects.put("out", unsyncPrintWriter);
 
 		_rubyExecutor.eval(null, inputObjects, null, _rubyScriptFile);
