@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
-import com.liferay.portal.kernel.servlet.HttpSessionIdThreadLocal;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
@@ -458,10 +457,10 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Set session id thread local");
+			_log.debug("Set session thread local");
 		}
 
-		setHttpSessionIdThreadLocal(request);
+		HttpSessionThreadLocal.setHttpSession(request.getSession());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process service pre events");
@@ -1228,12 +1227,6 @@ public class MainServlet extends ActionServlet {
 		dynamicRequest.setParameter("p_l_id", StringPool.BLANK);
 
 		PortalUtil.sendError(status, (Exception)t, dynamicRequest, response);
-	}
-
-	protected void setHttpSessionIdThreadLocal(HttpServletRequest request) {
-		HttpSession session = request.getSession();
-
-		HttpSessionIdThreadLocal.setSessionId(session.getId());
 	}
 
 	protected void setPortalPort(HttpServletRequest request) {

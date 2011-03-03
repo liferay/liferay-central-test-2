@@ -12,20 +12,30 @@
  * details.
  */
 
-package com.liferay.portal.events;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.events.SessionAction;
-import com.liferay.portal.kernel.servlet.HttpSessionLocal;
-
-import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 
 /**
- * @author Alexander Chow
+ * @author Shuyang Zhou
  */
-public class HttpSessionLocalDestroyAction extends SessionAction {
+public class TransientWrapper<T> implements Serializable {
 
-	public void run(HttpSession session) {
-		HttpSessionLocal.destroySession(session.getId());
+	public TransientWrapper() {
 	}
+
+	public TransientWrapper(T transientObject) {
+		_transientObject = transientObject;
+	}
+
+	public T getTransientObject() {
+		return _transientObject;
+	}
+
+	public void setTransientObject(T transientObject) {
+		_transientObject = transientObject;
+	}
+
+	private transient T _transientObject;
 
 }

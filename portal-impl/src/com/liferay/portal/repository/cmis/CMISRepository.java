@@ -20,17 +20,19 @@ import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.BaseRepositoryImpl;
 import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.servlet.HttpSessionLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.TransientWrapper;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
@@ -46,6 +48,7 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.RepositoryEntryUtil;
 import com.liferay.portal.service.persistence.RepositoryUtil;
+import com.liferay.portal.servlet.HttpSessionThreadLocal;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -68,6 +71,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.servlet.http.HttpSession;
 
 import org.apache.chemistry.opencmis.client.api.CmisObject;
 import org.apache.chemistry.opencmis.client.api.Document;
@@ -1320,7 +1325,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected Session getSession() throws PortalException, RepositoryException {
-		Session session = _cmisSessions.get();
+		Session session = getThreadLocalSession();
 
 		if (session != null) {
 			return session;
@@ -1383,11 +1388,11 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		checkRepository(parameters, typeSettingsProperties);
 
-		Session newSession = _sessionFactory.createSession(parameters);
+		session = _sessionFactory.createSession(parameters);
 
-		_cmisSessions.set(newSession);
+		setThreadLocalSession(session);
 
-		return newSession;
+		return session;
 	}
 
 	protected void getSubfolderIds(
@@ -1406,6 +1411,23 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 				getSubfolderIds(subfolderIds, subSubFolders, recurse);
 			}
 		}
+	}
+
+	protected Session getThreadLocalSession() {
+		HttpSession httpSession = HttpSessionThreadLocal.getHttpSession();
+		if (httpSession == null) {
+			return null;
+		}
+
+		TransientWrapper<Session> transientWrapper =
+			(TransientWrapper<Session>)httpSession.getAttribute(
+				SESSION_ATTRIBUTE_KEY);
+
+		if (transientWrapper == null) {
+			return null;
+		}
+
+		return transientWrapper.getTransientObject();
 	}
 
 	protected void processException(Exception e) throws PortalException {
@@ -1439,6 +1461,17 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 
 		parameters.put(chemistryKey, value);
+	}
+
+	protected void setThreadLocalSession(Session session) {
+		HttpSession httpSession = HttpSessionThreadLocal.getHttpSession();
+		if (httpSession == null) {
+			_log.error("Current Thread does not have a valid HttpSession");
+			return;
+		}
+
+		httpSession.setAttribute(
+			SESSION_ATTRIBUTE_KEY, new TransientWrapper<Session>(session));
 	}
 
 	protected ObjectId toFileEntryId(long fileEntryId)
@@ -1562,8 +1595,10 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 	}
 
-	private static HttpSessionLocal<Session> _cmisSessions =
-		new HttpSessionLocal<Session>();
+	public static final String SESSION_ATTRIBUTE_KEY = "SESSION_ATTRIBUTE_KEY";
+
+	private static Log _log = LogFactoryUtil.getLog(CMISRepository.class);
+
 	private static Set<String> _defaultFilterSet = new HashSet<String>();
 
 	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
