@@ -512,6 +512,19 @@ public class AssetVocabularyWrapper implements AssetVocabulary {
 		return _assetVocabulary.toXmlString();
 	}
 
+	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties() {
+		return _assetVocabulary.getSettingsProperties();
+	}
+
+	public void setTypeSettings(java.lang.String settings) {
+		_assetVocabulary.setTypeSettings(settings);
+	}
+
+	public void setTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties) {
+		_assetVocabulary.setTypeSettingsProperties(settingsProperties);
+	}
+
 	public AssetVocabulary getWrappedAssetVocabulary() {
 		return _assetVocabulary;
 	}

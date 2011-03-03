@@ -33,4 +33,13 @@ public interface AssetVocabulary extends AssetVocabularyModel {
 
 	public java.lang.String getTitle(java.lang.String languageId,
 		boolean useDefault);
+
+	public java.lang.String getSettings();
+
+	public com.liferay.portal.kernel.util.UnicodeProperties getSettingsProperties();
+
+	public void setTypeSettings(java.lang.String settings);
+
+	public void setTypeSettingsProperties(
+		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties);
 }
