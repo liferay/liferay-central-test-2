@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -50,7 +51,6 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.RepositoryEntryUtil;
 import com.liferay.portal.service.persistence.RepositoryUtil;
-import com.liferay.portal.servlet.HttpSessionThreadLocal;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
@@ -1030,7 +1030,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected Session getCachedSession() {
-		HttpSession httpSession = HttpSessionThreadLocal.getHttpSession();
+		HttpSession httpSession = PortalSessionThreadLocal.getHttpSession();
 
 		if (httpSession == null) {
 			return null;
@@ -1333,7 +1333,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected void setCachedSession(Session session) {
-		HttpSession httpSession = HttpSessionThreadLocal.getHttpSession();
+		HttpSession httpSession = PortalSessionThreadLocal.getHttpSession();
 
 		if (httpSession == null) {
 			if (_log.isWarnEnabled()) {
