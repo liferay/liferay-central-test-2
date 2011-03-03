@@ -25,6 +25,7 @@ public class HttpSessionThreadLocal {
 
 	public static HttpSession getHttpSession() {
 		String sessionId = _sessionId.get();
+
 		if (sessionId == null) {
 			return null;
 		}
@@ -32,8 +33,8 @@ public class HttpSessionThreadLocal {
 		return PortalSessionContext.get(sessionId);
 	}
 
-	public static void setHttpSession(HttpSession httpSession) {
-		_sessionId.set(httpSession.getId());
+	public static void setHttpSession(HttpSession session) {
+		_sessionId.set(session.getId());
 	}
 
 	private static ThreadLocal<String> _sessionId =

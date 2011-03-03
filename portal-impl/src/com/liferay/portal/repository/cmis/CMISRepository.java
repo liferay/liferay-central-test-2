@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.TransientWrapper;
+import com.liferay.portal.kernel.util.TransientValue;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
@@ -1415,19 +1415,20 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 	protected Session getThreadLocalSession() {
 		HttpSession httpSession = HttpSessionThreadLocal.getHttpSession();
+
 		if (httpSession == null) {
 			return null;
 		}
 
-		TransientWrapper<Session> transientWrapper =
-			(TransientWrapper<Session>)httpSession.getAttribute(
-				SESSION_ATTRIBUTE_KEY);
+		TransientValue<Session> transientValue =
+			(TransientValue<Session>)httpSession.getAttribute(
+				Session.class.getName());
 
-		if (transientWrapper == null) {
+		if (transientValue == null) {
 			return null;
 		}
 
-		return transientWrapper.getTransientObject();
+		return transientValue.getValue();
 	}
 
 	protected void processException(Exception e) throws PortalException {
@@ -1465,13 +1466,17 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 	protected void setThreadLocalSession(Session session) {
 		HttpSession httpSession = HttpSessionThreadLocal.getHttpSession();
+
 		if (httpSession == null) {
-			_log.error("Current Thread does not have a valid HttpSession");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to get HTTP session");
+			}
+
 			return;
 		}
 
 		httpSession.setAttribute(
-			SESSION_ATTRIBUTE_KEY, new TransientWrapper<Session>(session));
+			Session.class.getName(), new TransientValue<Session>(session));
 	}
 
 	protected ObjectId toFileEntryId(long fileEntryId)
@@ -1594,8 +1599,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			throw new DuplicateFolderNameException(title);
 		}
 	}
-
-	public static final String SESSION_ATTRIBUTE_KEY = "SESSION_ATTRIBUTE_KEY";
 
 	private static Log _log = LogFactoryUtil.getLog(CMISRepository.class);
 
