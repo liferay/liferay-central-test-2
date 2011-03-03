@@ -92,7 +92,7 @@ public class LayoutSetBranchServiceHttp {
 	}
 
 	public static void deleteLayoutSetBranch(HttpPrincipal httpPrincipal,
-		long groupId, long layoutSetBranchId)
+		long layoutSetBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -100,7 +100,7 @@ public class LayoutSetBranchServiceHttp {
 					"deleteLayoutSetBranch",
 					_deleteLayoutSetBranchParameterTypes1);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+			MethodHandler methodHandler = new MethodHandler(methodKey,
 					layoutSetBranchId);
 
 			try {
@@ -158,7 +158,7 @@ public class LayoutSetBranchServiceHttp {
 	}
 
 	public static com.liferay.portal.model.LayoutSetBranch mergeLayoutSetBranch(
-		HttpPrincipal httpPrincipal, long groupId, long layoutSetBranchId,
+		HttpPrincipal httpPrincipal, long layoutSetBranchId,
 		long mergeLayoutSetBranchId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -167,7 +167,7 @@ public class LayoutSetBranchServiceHttp {
 			MethodKey methodKey = new MethodKey(LayoutSetBranchServiceUtil.class.getName(),
 					"mergeLayoutSetBranch", _mergeLayoutSetBranchParameterTypes3);
 
-			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+			MethodHandler methodHandler = new MethodHandler(methodKey,
 					layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
 
 			Object returnObj = null;
@@ -243,13 +243,13 @@ public class LayoutSetBranchServiceHttp {
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteLayoutSetBranchParameterTypes1 = new Class[] {
-			long.class, long.class
+			long.class
 		};
 	private static final Class<?>[] _getLayoutSetBranchesParameterTypes2 = new Class[] {
 			long.class, boolean.class
 		};
 	private static final Class<?>[] _mergeLayoutSetBranchParameterTypes3 = new Class[] {
-			long.class, long.class, long.class,
+			long.class, long.class,
 			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateLayoutSetBranchParameterTypes4 = new Class[] {

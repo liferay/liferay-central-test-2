@@ -223,18 +223,18 @@ public class BrowserTrackerLocalServiceWrapper
 	}
 
 	/**
-	* Gets the Spring bean ID for this implementation.
+	* Gets the Spring bean ID for this bean.
 	*
-	* @return the Spring bean ID for this implementation
+	* @return the Spring bean ID for this bean
 	*/
 	public java.lang.String getBeanIdentifier() {
 		return _browserTrackerLocalService.getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean ID for this implementation.
+	* Sets the Spring bean ID for this bean.
 	*
-	* @param beanIdentifier the Spring bean ID for this implementation
+	* @param beanIdentifier the Spring bean ID for this bean
 	*/
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_browserTrackerLocalService.setBeanIdentifier(beanIdentifier);

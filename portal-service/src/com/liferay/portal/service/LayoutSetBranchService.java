@@ -48,7 +48,7 @@ public interface LayoutSetBranchService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
-	public void deleteLayoutSetBranch(long groupId, long layoutSetBranchId)
+	public void deleteLayoutSetBranch(long layoutSetBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
@@ -58,7 +58,7 @@ public interface LayoutSetBranchService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public com.liferay.portal.model.LayoutSetBranch mergeLayoutSetBranch(
-		long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
+		long layoutSetBranchId, long mergeLayoutSetBranchId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

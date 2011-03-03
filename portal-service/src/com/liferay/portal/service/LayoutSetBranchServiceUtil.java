@@ -48,11 +48,10 @@ public class LayoutSetBranchServiceUtil {
 			description, serviceContext);
 	}
 
-	public static void deleteLayoutSetBranch(long groupId,
-		long layoutSetBranchId)
+	public static void deleteLayoutSetBranch(long layoutSetBranchId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteLayoutSetBranch(groupId, layoutSetBranchId);
+		getService().deleteLayoutSetBranch(layoutSetBranchId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutSetBranch> getLayoutSetBranches(
@@ -62,12 +61,12 @@ public class LayoutSetBranchServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutSetBranch mergeLayoutSetBranch(
-		long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
+		long layoutSetBranchId, long mergeLayoutSetBranchId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .mergeLayoutSetBranch(groupId, layoutSetBranchId,
+				   .mergeLayoutSetBranch(layoutSetBranchId,
 			mergeLayoutSetBranchId, serviceContext);
 	}
 

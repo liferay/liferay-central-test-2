@@ -232,18 +232,18 @@ public class LayoutRevisionLocalServiceUtil {
 	}
 
 	/**
-	* Gets the Spring bean ID for this implementation.
+	* Gets the Spring bean ID for this bean.
 	*
-	* @return the Spring bean ID for this implementation
+	* @return the Spring bean ID for this bean
 	*/
 	public static java.lang.String getBeanIdentifier() {
 		return getService().getBeanIdentifier();
 	}
 
 	/**
-	* Sets the Spring bean ID for this implementation.
+	* Sets the Spring bean ID for this bean.
 	*
-	* @param beanIdentifier the Spring bean ID for this implementation
+	* @param beanIdentifier the Spring bean ID for this bean
 	*/
 	public static void setBeanIdentifier(java.lang.String beanIdentifier) {
 		getService().setBeanIdentifier(beanIdentifier);
@@ -269,13 +269,6 @@ public class LayoutRevisionLocalServiceUtil {
 			css, serviceContext);
 	}
 
-	public static void deleteLayoutSetBranchLayoutRevisions(
-		long layoutSetBranchId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().deleteLayoutSetBranchLayoutRevisions(layoutSetBranchId);
-	}
-
 	public static void deleteLayoutLayoutRevisions(long plid)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -286,6 +279,13 @@ public class LayoutRevisionLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().deleteLayoutRevisions(layoutSetBranchId, plid);
+	}
+
+	public static void deleteLayoutSetBranchLayoutRevisions(
+		long layoutSetBranchId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteLayoutSetBranchLayoutRevisions(layoutSetBranchId);
 	}
 
 	public static com.liferay.portal.model.LayoutRevision getLayoutRevision(
@@ -334,11 +334,12 @@ public class LayoutRevisionLocalServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
 		long layoutSetBranchId, long parentLayoutRevision, long plid,
-		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getLayoutRevisions(layoutSetBranchId, parentLayoutRevision,
-			plid, start, end, obc);
+			plid, start, end, orderByComparator);
 	}
 
 	public static int getLayoutRevisionsCount(long layoutSetBranchId,

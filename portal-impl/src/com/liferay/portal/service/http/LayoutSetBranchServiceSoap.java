@@ -82,11 +82,10 @@ public class LayoutSetBranchServiceSoap {
 		}
 	}
 
-	public static void deleteLayoutSetBranch(long groupId,
-		long layoutSetBranchId) throws RemoteException {
+	public static void deleteLayoutSetBranch(long layoutSetBranchId)
+		throws RemoteException {
 		try {
-			LayoutSetBranchServiceUtil.deleteLayoutSetBranch(groupId,
-				layoutSetBranchId);
+			LayoutSetBranchServiceUtil.deleteLayoutSetBranch(layoutSetBranchId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -112,12 +111,12 @@ public class LayoutSetBranchServiceSoap {
 	}
 
 	public static com.liferay.portal.model.LayoutSetBranchSoap mergeLayoutSetBranch(
-		long groupId, long layoutSetBranchId, long mergeLayoutSetBranchId,
+		long layoutSetBranchId, long mergeLayoutSetBranchId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.model.LayoutSetBranch returnValue = LayoutSetBranchServiceUtil.mergeLayoutSetBranch(groupId,
-					layoutSetBranchId, mergeLayoutSetBranchId, serviceContext);
+			com.liferay.portal.model.LayoutSetBranch returnValue = LayoutSetBranchServiceUtil.mergeLayoutSetBranch(layoutSetBranchId,
+					mergeLayoutSetBranchId, serviceContext);
 
 			return com.liferay.portal.model.LayoutSetBranchSoap.toSoapModel(returnValue);
 		}
