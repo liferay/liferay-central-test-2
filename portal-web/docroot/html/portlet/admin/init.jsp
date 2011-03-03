@@ -29,7 +29,6 @@
 <%@ page import="com.liferay.portal.kernel.xml.Document" %>
 <%@ page import="com.liferay.portal.kernel.xml.Element" %>
 <%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
-<%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
 <%@ page import="com.liferay.portlet.documentlibrary.model.DLFileVersion" %>
 <%@ page import="com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil" %>

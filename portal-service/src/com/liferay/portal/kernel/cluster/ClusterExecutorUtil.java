@@ -90,7 +90,7 @@ public class ClusterExecutorUtil {
 		return _clusterExecutor.getLocalClusterNode();
 	}
 
-	public static Address getLocalClusterNodeAddress() throws SystemException {
+	public static Address getLocalClusterNodeAddress() {
 		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("ClusterExecutorUtil has not been initialized");

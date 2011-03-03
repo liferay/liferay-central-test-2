@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
+import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
@@ -460,7 +461,7 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Set session thread local");
 		}
 
-		HttpSessionThreadLocal.setHttpSession(request.getSession());
+		PortalSessionThreadLocal.setHttpSession(request.getSession());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process service pre events");

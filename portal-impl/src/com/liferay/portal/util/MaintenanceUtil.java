@@ -16,8 +16,8 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.PortalSessionContext;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.servlet.PortalSessionContext;
 
 import java.util.Collection;
 
