@@ -15,6 +15,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.upgrade.util.UpgradeAssetPublisherManualEntries;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 
 import java.sql.Connection;
@@ -24,9 +25,15 @@ import java.sql.ResultSet;
 /**
  * @author Douglas Wong
  */
-public class VerifyCategories extends VerifyProcess {
+public class VerifyAsset extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
+		rebuildTree();
+
+		upgradeAssetPublisherManualEntries();
+	}
+
+	protected void rebuildTree() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -49,6 +56,13 @@ public class VerifyCategories extends VerifyProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected void upgradeAssetPublisherManualEntries() throws Exception {
+		UpgradeAssetPublisherManualEntries upgradeAssetPublisherManualEntries =
+			new UpgradeAssetPublisherManualEntries();
+
+		upgradeAssetPublisherManualEntries.upgrade();
 	}
 
 }

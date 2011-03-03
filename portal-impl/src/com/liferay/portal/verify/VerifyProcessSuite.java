@@ -31,11 +31,10 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyPermission());
 		verify(new VerifyRole());
 
-		verify(new VerifyAssetPublisher());
+		verify(new VerifyAsset());
 		verify(new VerifyBlogs());
 		verify(new VerifyBookmarks());
 		verify(new VerifyCalendar());
-		verify(new VerifyCategories());
 		verify(new VerifyDocumentLibrary());
 		verify(new VerifyGroup());
 		verify(new VerifyImageGallery());
