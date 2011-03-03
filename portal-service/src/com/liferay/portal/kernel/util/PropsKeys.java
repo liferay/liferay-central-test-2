@@ -1493,9 +1493,9 @@ public interface PropsKeys {
 
 	public static final String RESOURCE_REPOSITORIES_ROOT = "resource.repositories.root";
 
-	public static final String ROBOTS_TXT_DEFAULT = "robots.txt.default";
+	public static final String ROBOTS_TXT_WITH_SITEMAP = "robots.txt.with.sitemap";
 
-	public static final String ROBOTS_TXT_DEFAULT_WITHOUT_SITEMAP = "robots.txt.default.without.sitemap";
+	public static final String ROBOTS_TXT_WITHOUT_SITEMAP = "robots.txt.without.sitemap";
 
 	public static final String ROLES_COMMUNITY_SUBTYPES = "roles.community.subtypes";
 

@@ -53,9 +53,9 @@ public class RobotsAction extends Action {
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 					virtualHostname);
 			}
-			catch (NoSuchLayoutSetException nslse) {
-			}
 			catch (LayoutSetVirtualHostException lsvhe) {
+			}
+			catch (NoSuchLayoutSetException nslse) {
 			}
 
 			String robots = RobotsUtil.getRobots(layoutSet);

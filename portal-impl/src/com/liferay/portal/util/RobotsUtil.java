@@ -32,39 +32,34 @@ public class RobotsUtil {
 
 	public static String getDefaultRobots(String virtualHost) {
 		if (Validator.isNotNull(virtualHost)) {
-			String content = ContentUtil.get(PropsValues.ROBOTS_TXT_DEFAULT);
+			String content = ContentUtil.get(
+				PropsValues.ROBOTS_TXT_WITH_SITEMAP);
 
-			content = StringUtil.replace(
-				content,
-				new String[] {
-					"[$HOST$]"
-				},
-				new String[] {
-					virtualHost
-				});
+			content = StringUtil.replace(content, "[$HOST$]", virtualHost);
 
 			return content;
 		}
 
-		return ContentUtil.get(PropsValues.ROBOTS_TXT_DEFAULT_WITHOUT_SITEMAP);
+		return ContentUtil.get(PropsValues.ROBOTS_TXT_WITHOUT_SITEMAP);
 	}
 
 	public static String getRobots(LayoutSet layoutSet) {
-		if (layoutSet != null) {
-			String virtualHostname = StringPool.BLANK;
-
-			try {
-				virtualHostname = layoutSet.getVirtualHostname();
-			}
-			catch (Exception e) {
-			}
-
-			return GetterUtil.get(
-				layoutSet.getSettingsProperty(
-					layoutSet.isPrivateLayout() + "-robots.txt"),
-					getDefaultRobots(virtualHostname));
+		if (layoutSet == null) {
+			return getDefaultRobots(null);
 		}
 
-		return getDefaultRobots(null);
+		String virtualHostname = StringPool.BLANK;
+
+		try {
+			virtualHostname = layoutSet.getVirtualHostname();
+		}
+		catch (Exception e) {
+		}
+
+		return GetterUtil.get(
+			layoutSet.getSettingsProperty(
+				layoutSet.isPrivateLayout() + "-robots.txt"),
+				getDefaultRobots(virtualHostname));
 	}
+
 }

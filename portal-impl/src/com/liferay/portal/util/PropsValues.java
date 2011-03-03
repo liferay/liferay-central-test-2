@@ -1042,9 +1042,9 @@ public class PropsValues {
 
 	public static final String RESOURCE_REPOSITORIES_ROOT = PropsUtil.get(PropsKeys.RESOURCE_REPOSITORIES_ROOT);
 
-	public static final String ROBOTS_TXT_DEFAULT = PropsUtil.get(PropsKeys.ROBOTS_TXT_DEFAULT);
+	public static final String ROBOTS_TXT_WITH_SITEMAP = PropsUtil.get(PropsKeys.ROBOTS_TXT_WITH_SITEMAP);
 
-	public static final String ROBOTS_TXT_DEFAULT_WITHOUT_SITEMAP = PropsUtil.get(PropsKeys.ROBOTS_TXT_DEFAULT_WITHOUT_SITEMAP);
+	public static final String ROBOTS_TXT_WITHOUT_SITEMAP = PropsUtil.get(PropsKeys.ROBOTS_TXT_WITHOUT_SITEMAP);
 
 	public static final String[] ROLES_COMMUNITY_SUBTYPES = PropsUtil.getArray(PropsKeys.ROLES_COMMUNITY_SUBTYPES);
 
