@@ -372,7 +372,9 @@ if (Validator.isNull(redirect)) {
 			</div>
 		</c:if>
 
-		<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' value="<%= saveButtonLabel %>" />
+		<c:if test="<%= themeDisplay.isSignedIn() %>">
+			<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' value="<%= saveButtonLabel %>" />
+		</c:if>
 
 		<aui:button disabled="<%= pending %>" name="publishButton" type="submit" value="<%= publishButtonLabel %>" />
 
