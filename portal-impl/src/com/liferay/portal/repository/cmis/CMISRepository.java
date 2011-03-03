@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TransientValue;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
@@ -612,6 +613,9 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 	public void initRepository() throws PortalException, SystemException {
 		try {
+			_sessionKey =
+				Session.class.getName() + StringPool.POUND + getRepositoryId();
+
 			Session session = getSession();
 
 			session.getRepositoryInfo();
@@ -1048,6 +1052,23 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		putParameter(parameters, SessionParameter.REPOSITORY_ID, parameterKey);
 	}
 
+	protected Session getCachedSession() {
+		HttpSession httpSession = HttpSessionThreadLocal.getHttpSession();
+
+		if (httpSession == null) {
+			return null;
+		}
+
+		TransientValue<Session> transientValue =
+			(TransientValue<Session>)httpSession.getAttribute(_sessionKey);
+
+		if (transientValue == null) {
+			return null;
+		}
+
+		return transientValue.getValue();
+	}
+
 	protected org.apache.chemistry.opencmis.client.api.Folder getCmisFolder(
 			Session session, long folderId)
 		throws PortalException, SystemException {
@@ -1325,7 +1346,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	protected Session getSession() throws PortalException, RepositoryException {
-		Session session = getThreadLocalSession();
+		Session session = getCachedSession();
 
 		if (session != null) {
 			return session;
@@ -1390,7 +1411,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		session = _sessionFactory.createSession(parameters);
 
-		setThreadLocalSession(session);
+		setCachedSession(session);
 
 		return session;
 	}
@@ -1411,24 +1432,6 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 				getSubfolderIds(subfolderIds, subSubFolders, recurse);
 			}
 		}
-	}
-
-	protected Session getThreadLocalSession() {
-		HttpSession httpSession = HttpSessionThreadLocal.getHttpSession();
-
-		if (httpSession == null) {
-			return null;
-		}
-
-		TransientValue<Session> transientValue =
-			(TransientValue<Session>)httpSession.getAttribute(
-				Session.class.getName());
-
-		if (transientValue == null) {
-			return null;
-		}
-
-		return transientValue.getValue();
 	}
 
 	protected void processException(Exception e) throws PortalException {
@@ -1464,7 +1467,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		parameters.put(chemistryKey, value);
 	}
 
-	protected void setThreadLocalSession(Session session) {
+	protected void setCachedSession(Session session) {
 		HttpSession httpSession = HttpSessionThreadLocal.getHttpSession();
 
 		if (httpSession == null) {
@@ -1476,7 +1479,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		}
 
 		httpSession.setAttribute(
-			Session.class.getName(), new TransientValue<Session>(session));
+			_sessionKey, new TransientValue<Session>(session));
 	}
 
 	protected ObjectId toFileEntryId(long fileEntryId)
@@ -1605,6 +1608,8 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	private static Set<String> _defaultFilterSet = new HashSet<String>();
 
 	private SessionFactory _sessionFactory = SessionFactoryImpl.newInstance();
+
+	private String _sessionKey;
 
 	static {
 
