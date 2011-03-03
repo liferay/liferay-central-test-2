@@ -200,6 +200,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			clusterRequest.getClusterMessageType();
 
 		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
+		clusterNodeResponse.setAddress(new AddressImpl(localAddress));
 
 		try {
 			ClusterNode localClusterNode =

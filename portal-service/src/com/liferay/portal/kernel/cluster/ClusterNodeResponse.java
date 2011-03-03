@@ -23,6 +23,10 @@ import java.io.Serializable;
  */
 public class ClusterNodeResponse implements Serializable {
 
+	public Address getAddress() {
+		return _address;
+	}
+
 	public ClusterMessageType getClusterMessageType() {
 		return _clusterMessageType;
 	}
@@ -58,6 +62,10 @@ public class ClusterNodeResponse implements Serializable {
 
 	public boolean isMulticast() {
 		return _multicast;
+	}
+
+	public void setAddress(Address address) {
+		_address = address;
 	}
 
 	public void setClusterMessageType(ClusterMessageType clusterMessageType) {
@@ -116,6 +124,7 @@ public class ClusterNodeResponse implements Serializable {
 		return sb.toString();
 	}
 
+	private Address _address;
 	private ClusterMessageType _clusterMessageType;
 	private ClusterNode _clusterNode;
 	private Exception _exception;

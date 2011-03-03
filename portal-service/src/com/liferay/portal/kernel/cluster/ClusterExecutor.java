@@ -37,7 +37,11 @@ public interface ClusterExecutor {
 
 	public ClusterNode getLocalClusterNode() throws SystemException;
 
+	public Address getLocalClusterNodeAddress();
+
 	public void initialize();
+
+	public boolean isClusterNodeAlive(Address address);
 
 	public boolean isClusterNodeAlive(String clusterNodeId);
 

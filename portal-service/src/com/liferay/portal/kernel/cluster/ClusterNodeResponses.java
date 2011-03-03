@@ -29,23 +29,32 @@ public class ClusterNodeResponses implements Serializable {
 		new ClusterNodeResponses();
 
 	public void addClusterResponse(ClusterNodeResponse clusterNodeResponse) {
-		_clusterResponses.put(
+		_clusterResponsesByAddress.put(
+			clusterNodeResponse.getAddress(), clusterNodeResponse);
+		_clusterResponsesByClusterNode.put(
 			clusterNodeResponse.getClusterNode(), clusterNodeResponse);
 	}
 
+	public ClusterNodeResponse getClusterResponse(Address address) {
+		return _clusterResponsesByAddress.get(address);
+	}
+
 	public ClusterNodeResponse getClusterResponse(ClusterNode clusterNode) {
-		return _clusterResponses.get(clusterNode);
+		return _clusterResponsesByClusterNode.get(clusterNode);
 	}
 
 	public Map<ClusterNode, ClusterNodeResponse> getClusterResponses() {
-		return Collections.unmodifiableMap(_clusterResponses);
+		return Collections.unmodifiableMap(_clusterResponsesByClusterNode);
 	}
 
 	public int size() {
-		return _clusterResponses.size();
+		return _clusterResponsesByClusterNode.size();
 	}
 
-	private Map<ClusterNode, ClusterNodeResponse> _clusterResponses =
-		new HashMap<ClusterNode, ClusterNodeResponse>();
+	private Map<Address, ClusterNodeResponse> _clusterResponsesByAddress =
+		new HashMap<Address, ClusterNodeResponse>();
+	private Map<ClusterNode, ClusterNodeResponse>
+		_clusterResponsesByClusterNode =
+			new HashMap<ClusterNode, ClusterNodeResponse>();
 
 }

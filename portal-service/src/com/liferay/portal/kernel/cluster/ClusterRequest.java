@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.io.Serializable;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -66,6 +65,22 @@ public class ClusterRequest implements Serializable {
 	}
 
 	public static ClusterRequest createUnicastRequest(
+		MethodHandler methodHandler, Address... targetClusterNodeAddresses) {
+
+		ClusterRequest clusterRequest = new ClusterRequest();
+
+		clusterRequest.addTargetClusterNodeAddresses(
+			targetClusterNodeAddresses);
+		clusterRequest.setClusterMessageType(ClusterMessageType.EXECUTE);
+		clusterRequest.setMethodHandler(methodHandler);
+		clusterRequest.setMulticast(false);
+		clusterRequest.setSkipLocal(false);
+		clusterRequest.setUuid(PortalUUIDUtil.generate());
+
+		return clusterRequest;
+	}
+
+	public static ClusterRequest createUnicastRequest(
 		MethodHandler methodHandler, String... targetClusterNodeIds) {
 
 		ClusterRequest clusterRequest = new ClusterRequest();
@@ -80,12 +95,28 @@ public class ClusterRequest implements Serializable {
 		return clusterRequest;
 	}
 
-	public void addTargetClusterNodeIds(String... targetClusterNodeIds) {
-		if (_targetClusterNodeIds == null) {
-			_targetClusterNodeIds = new HashSet<String>();
+	public void addTargetClusterNodeAddresses(
+		Address... targetClusterNodeAddresses) {
+
+		if (_targetClusterNodeAddresses == null) {
+			_targetClusterNodeAddresses = new HashSet<Address>(
+				targetClusterNodeAddresses.length);
 		}
 
-		_targetClusterNodeIds.addAll(Arrays.asList(targetClusterNodeIds));
+		for (Address targetClusterNodeAddress : targetClusterNodeAddresses) {
+			_targetClusterNodeAddresses.add(targetClusterNodeAddress);
+		}
+	}
+
+	public void addTargetClusterNodeIds(String... targetClusterNodeIds) {
+		if (_targetClusterNodeIds == null) {
+			_targetClusterNodeIds = new HashSet<String>(
+				targetClusterNodeIds.length);
+		}
+
+		for (String targetClusterNodeId : targetClusterNodeIds) {
+			_targetClusterNodeIds.add(targetClusterNodeId);
+		}
 	}
 
 	public String getBeanIdentifier() {
@@ -106,6 +137,10 @@ public class ClusterRequest implements Serializable {
 
 	public String getServletContextName() {
 		return _servletContextName;
+	}
+
+	public Collection<Address> getTargetClusterNodeAddresses() {
+		return _targetClusterNodeAddresses;
 	}
 
 	public Collection<String> getTargetClusterNodeIds() {
@@ -205,6 +240,7 @@ public class ClusterRequest implements Serializable {
 	private ClusterNode _originatingClusterNode;
 	private String _servletContextName;
 	private boolean _skipLocal;
+	private Set<Address> _targetClusterNodeAddresses;
 	private Set<String> _targetClusterNodeIds;
 	private String _uuid;
 

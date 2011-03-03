@@ -90,6 +90,18 @@ public class ClusterExecutorUtil {
 		return _clusterExecutor.getLocalClusterNode();
 	}
 
+	public static Address getLocalClusterNodeAddress() throws SystemException {
+		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterExecutorUtil has not been initialized");
+			}
+
+			return null;
+		}
+
+		return _clusterExecutor.getLocalClusterNodeAddress();
+	}
+
 	public static void initialize() {
 		if ((_clusterExecutor == null) || !_clusterExecutor.isEnabled()) {
 			if (_log.isWarnEnabled()) {
@@ -100,6 +112,18 @@ public class ClusterExecutorUtil {
 		}
 
 		_clusterExecutor.initialize();
+	}
+
+	public static boolean isClusterNodeAlive(Address address) {
+		if ((_clusterExecutor == null) || !_clusterExecutor .isEnabled()) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("ClusterExecutorUtil has not been initialized");
+			}
+
+			return false;
+		}
+
+		return _clusterExecutor.isClusterNodeAlive(address);
 	}
 
 	public static boolean isClusterNodeAlive(String clusterNodeId) {

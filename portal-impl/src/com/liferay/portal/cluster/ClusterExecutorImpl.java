@@ -104,7 +104,7 @@ public class ClusterExecutorImpl
 		}
 
 		if (!clusterRequest.isSkipLocal() && _shortcutLocalMethod &&
-			addresses.remove(getLocalControlAddress())) {
+			addresses.remove(getLocalClusterNodeAddress())) {
 
 			ClusterNodeResponse clusterNodeResponse = runLocalMethod(
 				clusterRequest.getMethodHandler());
@@ -146,7 +146,7 @@ public class ClusterExecutorImpl
 			return null;
 		}
 
-		ClusterNode clusterNode = _addressMap.get(getLocalControlAddress());
+		ClusterNode clusterNode = _addressMap.get(getLocalClusterNodeAddress());
 
 		if (clusterNode == null) {
 			_localClusterNodeId = PortalUUIDUtil.generate();
@@ -175,6 +175,10 @@ public class ClusterExecutorImpl
 		return clusterNode;
 	}
 
+	public Address getLocalClusterNodeAddress() {
+		return new AddressImpl(_controlChannel.getLocalAddress());
+	}
+
 	public void initialize() {
 		if (!isEnabled()) {
 			return;
@@ -185,7 +189,7 @@ public class ClusterExecutorImpl
 
 			ClusterNode clusterNode = getLocalClusterNode();
 
-			memberJoined(getLocalControlAddress(), clusterNode);
+			memberJoined(getLocalClusterNodeAddress(), clusterNode);
 
 			ClusterRequest clusterRequest = ClusterRequest.createClusterRequest(
 				ClusterMessageType.NOTIFY, clusterNode);
@@ -198,6 +202,10 @@ public class ClusterExecutorImpl
 		catch (SystemException se) {
 			_log.error("Unable to determine local network address", se);
 		}
+	}
+
+	public boolean isClusterNodeAlive(Address address) {
+		return getAddresses(_controlChannel).contains(address);
 	}
 
 	public boolean isClusterNodeAlive(String clusterNodeId) {
@@ -222,7 +230,7 @@ public class ClusterExecutorImpl
 
 			clusterNode.setPort(port);
 
-			memberJoined(getLocalControlAddress(), clusterNode);
+			memberJoined(getLocalClusterNodeAddress(), clusterNode);
 
 			ClusterRequest clusterRequest = ClusterRequest.createClusterRequest(
 				ClusterMessageType.UPDATE, clusterNode);
@@ -278,10 +286,6 @@ public class ClusterExecutorImpl
 		return _executionResultMap.get(uuid);
 	}
 
-	protected Address getLocalControlAddress() {
-		return new AddressImpl(_controlChannel.getLocalAddress());
-	}
-
 	protected void initChannels() {
 		Properties controlProperties = PropsUtil.getProperties(
 			PropsKeys.CLUSTER_LINK_CHANNEL_PROPERTIES_CONTROL, false);
@@ -315,7 +319,7 @@ public class ClusterExecutorImpl
 			clusterNode.getClusterNodeId(), joinAddress);
 
 		if ((previousAddress == null) &&
-			!getLocalControlAddress().equals(joinAddress)) {
+			!getLocalClusterNodeAddress().equals(joinAddress)) {
 
 			ClusterEvent clusterEvent = ClusterEvent.join(clusterNode);
 
@@ -355,15 +359,23 @@ public class ClusterExecutorImpl
 			addresses = getAddresses(_controlChannel);
 		}
 		else {
+			addresses = new ArrayList<Address>();
+
 			Collection<String> clusterNodeIds =
 				clusterRequest.getTargetClusterNodeIds();
+			Collection<Address> clusterNodeAddresses =
+				clusterRequest.getTargetClusterNodeAddresses();
 
-			addresses = new ArrayList<Address>(clusterNodeIds.size());
+			if (clusterNodeAddresses != null) {
+				addresses.addAll(clusterNodeAddresses);
+			}
 
-			for (String clusterNodeId : clusterNodeIds) {
-				Address address = _clusterNodeIdMap.get(clusterNodeId);
+			if (clusterNodeIds != null) {
+				for (String clusterNodeId : clusterNodeIds) {
+					Address address = _clusterNodeIdMap.get(clusterNodeId);
 
-				addresses.add(address);
+					addresses.add(address);
+				}
 			}
 		}
 
@@ -377,6 +389,7 @@ public class ClusterExecutorImpl
 
 		ClusterNode localClusterNode = getLocalClusterNode();
 
+		clusterNodeResponse.setAddress(getLocalClusterNodeAddress());
 		clusterNodeResponse.setClusterNode(localClusterNode);
 		clusterNodeResponse.setClusterMessageType(ClusterMessageType.EXECUTE);
 
