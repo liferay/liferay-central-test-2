@@ -871,7 +871,7 @@ create table Lock_ (
 	createDate DATE null,
 	className VARCHAR(75) null,
 	key_ VARCHAR(200) null,
-	owner VARCHAR(75) null,
+	owner VARCHAR(300) null,
 	inheritable BOOLEAN,
 	expirationDate DATE null
 );
