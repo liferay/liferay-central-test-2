@@ -150,7 +150,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		resourceLocalService.addResources(
 			user.getCompanyId(), groupId, user.getUserId(),
-			Layout.class.getName(), layout.getPlid(), false, true, true);
+			Layout.class.getName(), layout.getPlid(), false, true,
+			!privateLayout);
 
 		// Layout set
 
