@@ -38,7 +38,8 @@ public class MessagingProxyAdvice {
 		BaseProxyBean baseProxyBean =
 			(BaseProxyBean)proceedingJoinPoint.getTarget();
 
-		if (proxyRequest.isSynchronous()) {
+		if (proxyRequest.isSynchronous() ||
+			BatchModelThreadLocal.isBatchModel()) {
 			return doInvokeSynchronous(proxyRequest, baseProxyBean);
 		}
 		else {
