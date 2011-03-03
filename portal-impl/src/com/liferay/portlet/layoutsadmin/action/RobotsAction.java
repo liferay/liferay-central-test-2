@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.layoutsadmin.action;
 
+import com.liferay.portal.LayoutSetVirtualHostException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -53,6 +54,8 @@ public class RobotsAction extends Action {
 					virtualHostname);
 			}
 			catch (NoSuchLayoutSetException nslse) {
+			}
+			catch (LayoutSetVirtualHostException lsvhe) {
 			}
 
 			String robots = RobotsUtil.getRobots(layoutSet);

@@ -1493,6 +1493,10 @@ public interface PropsKeys {
 
 	public static final String RESOURCE_REPOSITORIES_ROOT = "resource.repositories.root";
 
+	public static final String ROBOTS_TXT_DEFAULT = "robots.txt.default";
+
+	public static final String ROBOTS_TXT_DEFAULT_WITHOUT_SITEMAP = "robots.txt.default.without.sitemap";
+
 	public static final String ROLES_COMMUNITY_SUBTYPES = "roles.community.subtypes";
 
 	public static final String ROLES_NAME_ALLOW_NUMERIC = "roles.name.allow.numeric";

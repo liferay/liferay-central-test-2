@@ -16,8 +16,10 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.util.ContentUtil;
 
 /**
  * @author David Truong
@@ -30,11 +32,21 @@ public class RobotsUtil {
 
 	public static String getDefaultRobots(String virtualHost) {
 		if (Validator.isNotNull(virtualHost)) {
-			return _DEFAULT_ROBOTS_TXT.replace(
-				"$HOSTS$", virtualHost);
+			String content = ContentUtil.get(PropsValues.ROBOTS_TXT_DEFAULT);
+
+			content = StringUtil.replace(
+				content,
+				new String[] {
+					"[$HOST$]"
+				},
+				new String[] {
+					virtualHost
+				});
+
+			return content;
 		}
 
-		return _DEFAULT_ROBOTS_TXT_WITHOUT_SITEMAP;
+		return ContentUtil.get(PropsValues.ROBOTS_TXT_DEFAULT_WITHOUT_SITEMAP);
 	}
 
 	public static String getRobots(LayoutSet layoutSet) {
@@ -55,11 +67,4 @@ public class RobotsUtil {
 
 		return getDefaultRobots(null);
 	}
-
-	private static String _DEFAULT_ROBOTS_TXT =
-		"User-Agent: *\nDisallow:\nSitemap: http://$HOSTS$/sitemap.xml";
-
-	private static String _DEFAULT_ROBOTS_TXT_WITHOUT_SITEMAP =
-		"User-Agent: *\nDisallow:";
-
 }
