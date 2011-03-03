@@ -14,19 +14,18 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SessionAction;
-import com.liferay.portal.kernel.util.AutoResetSessionLocal;
+import com.liferay.portal.kernel.servlet.HttpSessionLocal;
 
 import javax.servlet.http.HttpSession;
 
 /**
  * @author Alexander Chow
  */
-public class SessionLocalDestroyAction extends SessionAction {
+public class HttpSessionLocalDestroyAction extends SessionAction {
 
-	public void run(HttpSession session) throws ActionException {
-		AutoResetSessionLocal.destroySession(session.getId());
+	public void run(HttpSession session) {
+		HttpSessionLocal.destroySession(session.getId());
 	}
 
 }

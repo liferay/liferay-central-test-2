@@ -31,12 +31,12 @@ import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
+import com.liferay.portal.kernel.servlet.HttpSessionIdThreadLocal;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpSessionThreadLocal;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
@@ -458,10 +458,10 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Set session thread local");
+			_log.debug("Set session id thread local");
 		}
 
-		setSessionThreadLocal(request.getSession());
+		setHttpSessionIdThreadLocal(request);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Process service pre events");
@@ -1230,6 +1230,12 @@ public class MainServlet extends ActionServlet {
 		PortalUtil.sendError(status, (Exception)t, dynamicRequest, response);
 	}
 
+	protected void setHttpSessionIdThreadLocal(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+
+		HttpSessionIdThreadLocal.setSessionId(session.getId());
+	}
+
 	protected void setPortalPort(HttpServletRequest request) {
 		PortalUtil.setPortalPort(request);
 	}
@@ -1252,10 +1258,6 @@ public class MainServlet extends ActionServlet {
 		PrincipalThreadLocal.setName(name);
 
 		PrincipalThreadLocal.setPassword(password);
-	}
-
-	protected void setSessionThreadLocal(HttpSession session) {
-		HttpSessionThreadLocal.setSessionId(session.getId());
 	}
 
 	private static final String _LIFERAY_PORTAL_REQUEST_HEADER =

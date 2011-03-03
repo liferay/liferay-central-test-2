@@ -12,12 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portal.kernel.servlet;
+
+import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 
 /**
  * @author Alexander Chow
  */
-public class HttpSessionThreadLocal {
+public class HttpSessionIdThreadLocal {
 
 	public static String getSessionId() {
 		return _sessionId.get();
@@ -29,6 +31,6 @@ public class HttpSessionThreadLocal {
 
 	private static ThreadLocal<String> _sessionId =
 		new AutoResetThreadLocal<String>(
-			HttpSessionThreadLocal.class + "._sessionId");
+			HttpSessionIdThreadLocal.class + "._sessionId");
 
 }
