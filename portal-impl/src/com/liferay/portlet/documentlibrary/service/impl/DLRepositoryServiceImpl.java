@@ -30,6 +30,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -671,8 +673,12 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public void unlockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
 
 		lockLocalService.unlock(DLFileEntry.class.getName(), fileEntryId);
 	}
@@ -680,8 +686,12 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public void unlockFileEntry(long fileEntryId, String lockUuid)
 		throws PortalException, SystemException {
 
-		DLFileEntryPermission.check(
-			getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), fileEntryId, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFileEntryException nsfee) {
+		}
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
@@ -708,10 +718,14 @@ public class DLRepositoryServiceImpl extends DLRepositoryServiceBaseImpl {
 	public void unlockFolder(long groupId, long folderId, String lockUuid)
 		throws PortalException, SystemException {
 
-		DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
+		try {
+			DLFolder dlFolder = dlRepositoryLocalService.getFolder(folderId);
 
-		DLFolderPermission.check(
-			getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
+			DLFolderPermission.check(
+				getPermissionChecker(), dlFolder, ActionKeys.UPDATE);
+		}
+		catch (NoSuchFolderException nsfe) {
+		}
 
 		if (Validator.isNotNull(lockUuid)) {
 			try {
