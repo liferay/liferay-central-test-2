@@ -45,12 +45,14 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 	}
 
 	public void duringFinally(MethodInvocation methodInvocation) {
-		if (_methodTargetClassKeyCreationRegistry.remove(methodInvocation)) {
-			Map<MethodInvocation, MethodTargetClassKey>
-				methodTargetClassKeyMap =
-					_methodTargetClassKeyThreadLocalCache.get();
-			methodTargetClassKeyMap.remove(methodInvocation);
+		if (!_methodInvocations.remove(methodInvocation)) {
+			return;
 		}
+
+		Map<MethodInvocation, MethodTargetClassKey> methodTargetClassKeyMap =
+			_methodTargetClassKeyThreadLocalCache.get();
+
+		methodTargetClassKeyMap.remove(methodInvocation);
 	}
 
 	public abstract T getNullAnnotation();
@@ -95,7 +97,7 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 
 		methodTargetClassKeyMap.put(methodInvocation, methodTargetClassKey);
 
-		_methodTargetClassKeyCreationRegistry.add(methodInvocation);
+		_methodInvocations.add(methodInvocation);
 
 		return methodTargetClassKey;
 	}
@@ -152,17 +154,16 @@ public abstract class AnnotationChainableMethodAdvice<T extends Annotation>
 					<BeanFactory, Map<MethodTargetClassKey, Annotation[]>>();
 	private static Annotation[] _emptyAnnotations = new Annotation[0];
 	private static ThreadLocal<Map<MethodInvocation, MethodTargetClassKey>>
-		_methodTargetClassKeyThreadLocalCache = new InitialThreadLocal
-			<Map<MethodInvocation, MethodTargetClassKey>>(
+		_methodTargetClassKeyThreadLocalCache =
+			new InitialThreadLocal<Map<MethodInvocation, MethodTargetClassKey>>(
 				AnnotationChainableMethodAdvice.class +
 					"._methodTargetClassKeyThreadLocalCache",
-					new HashMap<MethodInvocation, MethodTargetClassKey>());
-
-	private Set<MethodInvocation> _methodTargetClassKeyCreationRegistry =
-		new ConcurrentHashSet<MethodInvocation>();
+				new HashMap<MethodInvocation, MethodTargetClassKey>());
 
 	private Class<? extends Annotation> _annotationType;
 	private BeanFactory _beanFactory;
+	private Set<MethodInvocation> _methodInvocations =
+		new ConcurrentHashSet<MethodInvocation>();
 	private T _nullAnnotation;
 
 }
