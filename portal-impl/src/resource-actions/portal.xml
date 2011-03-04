@@ -341,7 +341,7 @@
 		</portlet-ref>
 		<permissions>
 			<supports>
-				<action-key>ADD_LAYOUT_BRANCH</action-key>
+				<action-key>ADD_LAYOUT_SET_BRANCH</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_USER_ROLES</action-key>
 				<action-key>DELETE</action-key>
@@ -358,7 +358,7 @@
 			<community-defaults />
 			<guest-defaults />
 			<guest-unsupported>
-				<action-key>ADD_LAYOUT_BRANCH</action-key>
+				<action-key>ADD_LAYOUT_SET_BRANCH</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_USER_ROLES</action-key>
 				<action-key>DELETE</action-key>
@@ -450,7 +450,7 @@
 		</portlet-ref>
 		<permissions>
 			<supports>
-				<action-key>ADD_LAYOUT_BRANCH</action-key>
+				<action-key>ADD_LAYOUT_SET_BRANCH</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_USER_ROLES</action-key>
 				<action-key>DELETE</action-key>
@@ -469,7 +469,7 @@
 			<community-defaults />
 			<guest-defaults />
 			<guest-unsupported>
-				<action-key>ADD_LAYOUT_BRANCH</action-key>
+				<action-key>ADD_LAYOUT_SET_BRANCH</action-key>
 				<action-key>ASSIGN_MEMBERS</action-key>
 				<action-key>ASSIGN_USER_ROLES</action-key>
 				<action-key>DELETE</action-key>
