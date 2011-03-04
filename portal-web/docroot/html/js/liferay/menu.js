@@ -187,6 +187,9 @@ AUI().add(
 					else if (cssClass.indexOf('direction-left') > -1) {
 						direction = 'left';
 					}
+					else if (cssClass.indexOf('direction-down') > -1) {
+						direction = 'down';
+					}
 
 					var menuHeight = menu.get('offsetHeight');
 					var menuWidth = menu.get('offsetWidth');
@@ -206,6 +209,10 @@ AUI().add(
 					var windowWidth = windowRegion.width + scrollLeft;
 
 					if (align == 'auto') {
+						if (direction == "down") {
+							offset.top += triggerHeight;
+						}
+
 						if (menuTop > windowHeight
 							&& !((offset.top - menuHeight) < 0)) {
 
@@ -227,14 +234,19 @@ AUI().add(
 						}
 					}
 					else {
-						if (align == 'right') {
+						if (direction == 'left') {
 							offset.left -= (menuWidth - 2);
 						}
-						else if (align == 'left') {
+						else if (direction == 'right') {
 							offset.left += (triggerWidth + 2);
 						}
 
-						offset.top -= (menuHeight - triggerHeight);
+						if (direction == "down") {
+							offset.top += triggerHeight;
+						}
+						else {
+							offset.top -= (menuHeight - triggerHeight);
+						}
 					}
 
 					menu.setStyle('position', 'absolute');

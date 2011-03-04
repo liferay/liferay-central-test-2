@@ -74,7 +74,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 			if (!ServerDetector.isResin()) {
 				_align = "right";
 				_cssClass = null;
-				_direction = "left";
+				_direction = null;
 				_endPage = null;
 				_icon = null;
 				_id = null;
@@ -95,8 +95,13 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		if (_align.equals("left")) {
-			_direction = "right";
+		if (_direction == null) {
+			if (_align.equals("left")) {
+				_direction = "right";
+			}
+			else {
+				_direction = "left";
+			}
 		}
 
 		if (_icon == null) {
@@ -297,7 +302,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 	private String _align = "right";
 	private String _cssClass;
-	private String _direction = "left";
+	private String _direction;
 	private String _endPage;
 	private String _icon;
 	private String _id;
