@@ -611,6 +611,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			Iterator<CalEvent> itr = events.iterator();
 
+			List<CalEvent> repeatingEvents = new ArrayList<CalEvent>();
+
 			while (itr.hasNext()) {
 				CalEvent event = itr.next();
 
@@ -636,13 +638,15 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 					if (recurrence.isInRecurrence(
 							getRecurrenceCal(cal, tzICal, event))) {
 
-						events.add(event);
+						repeatingEvents.add(event);
 					}
 				}
 				catch (Exception e) {
 					_log.error(e, e);
 				}
 			}
+
+			events = repeatingEvents;
 		}
 
 		return events;
