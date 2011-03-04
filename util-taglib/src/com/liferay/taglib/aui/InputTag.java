@@ -14,9 +14,9 @@
 
 package com.liferay.taglib.aui;
 
-import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.taglib.aui.ValidatorTag;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
@@ -263,10 +263,10 @@ public class InputTag extends IncludeTag {
 
 		String name = _name;
 
-		if (name.startsWith(DefaultConfigurationAction.PREFERENCES_PREFIX)) {
-			name = name.substring(
-				DefaultConfigurationAction.PREFERENCES_PREFIX.length(),
-				name.length() - 2);
+		int pos = name.indexOf(StringPool.DOUBLE_DASH);
+
+		if (pos != -1) {
+			name = name.substring(pos + 2, name.length() - 2);
 		}
 
 		String field = _field;
