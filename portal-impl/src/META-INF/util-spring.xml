@@ -157,6 +157,11 @@
 			<bean class="com.liferay.portal.kernel.poller.comet.CometHandlerPool" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.rest.RestActionsManagerUtil" class="com.liferay.portal.kernel.rest.RestActionsManagerUtil">
+		<property name="restActionsManager">
+			<bean class="com.liferay.portal.rest.RestActionsManagerImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.sanitizer.SanitizerUtil" class="com.liferay.portal.kernel.sanitizer.SanitizerUtil">
 		<property name="sanitizer">
 			<bean class="com.liferay.portal.sanitizer.SanitizerImpl" />
