@@ -1,9 +1,4 @@
 (function() {
-	/*
-	 * Based in part on the BBCode parse by Stone Steps Inc.
-	 * http://www.stonesteps.ca/legal/bsd-license/
-	 */
-
 	var LIST = 'list';
 
 	var REGEX_COLOR = /^(:?aqua|black|blue|fuchsia|gray|green|lime|maroon|navy|olive|purple|red|silver|teal|white|yellow|#(?:[0-9a-f]{3})?[0-9a-f]{3})$/i;
