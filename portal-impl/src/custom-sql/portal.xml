@@ -22,7 +22,7 @@
 							) OR
 							(
 								(ResourcePermission.scope = 3) AND
-								(ResourcePermission.primKey = 0)
+								(ResourcePermission.primKey = '0')
 							) OR
 							(
 								(ResourcePermission.scope = 4) AND
