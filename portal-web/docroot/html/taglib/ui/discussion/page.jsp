@@ -502,6 +502,11 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 	%>
 
 	<aui:script>
+		function <%= randomNamespace %>afterLogin(emailAddress, randomNamespace) {
+			document.<%= namespace %><%= formName %>.<%= namespace %>emailAddress.value = emailAddress;
+			submitForm(document.<portlet:namespace /><%= formName %>);
+		}
+
 		function <%= randomNamespace %>deleteMessage(i) {
 			eval("var messageId = document.<%= namespace %><%= formName %>.<%= namespace %>messageId" + i + ".value;");
 
@@ -569,16 +574,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 	</aui:script>
 
 	<aui:script use="aui-event-input">
-		Liferay.provide(
-			window,
-			'<%= randomNamespace %>afterLogin',
-			function(emailAddress, randomNamespace){
-				document.<%= namespace %><%= formName %>.<%= namespace %>emailAddress.value = emailAddress;
-				submitForm(document.<portlet:namespace /><%= formName %>);
-			},
-			[]
-		);
-
 		var form = A.one(document.<%= namespace %><%= formName %>);
 
 		if (form) {
