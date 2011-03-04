@@ -178,7 +178,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 							<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value="<%= postReplyButtonLabel %>"  />
 
 							<%
-							String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');";
+							String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; document.getElementById('" + namespace + randomNamespace + "postReplyBody" + i +"').value = ''; void('');";
 							%>
 
 							<aui:button onClick="<%= taglibCancel %>" type="cancel" />
@@ -432,7 +432,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 										<aui:button disabled="<%= true %>" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value='<%= themeDisplay.isSignedIn() ? "reply" : "reply-as" %>' />
 
 										<%
-										String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; void('');";
+										String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i +"').style.display = 'none'; document.getElementById('" + namespace + randomNamespace + "postReplyBody" + i +"').value = ''; void('');";
 										%>
 
 										<aui:button onClick="<%= taglibCancel %>" type="cancel" />
@@ -462,7 +462,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 											<aui:button name='<%= randomNamespace + "editReplyButton" + i %>' onClick='<%= randomNamespace + "updateMessage(" + i + ");" %>' type="submit" value="<%= publishButtonLabel %>" />
 
 											<%
-											String taglibCancel = "document.getElementById('" + randomNamespace + "ditForm" + i +"').style.display = 'none'; void('');";
+											String taglibCancel = "document.getElementById('" + randomNamespace + "editForm" + i +"').style.display = 'none'; document.getElementById('" + namespace + randomNamespace + "editReplyBody" + i +"').value = '" + message.getBody() + "'; void('');";
 											%>
 
 											<aui:button onClick="<%= taglibCancel %>" type="cancel" />
