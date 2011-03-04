@@ -14,7 +14,7 @@
 
 				CKEDITOR.scriptLoader.load(
 					dependencies,
-					function(){
+					function() {
 						var bbcodeDataProcessor = CKEDITOR.plugins.get('bbcode_data_processor');
 
 						bbcodeDataProcessor.init(editor);

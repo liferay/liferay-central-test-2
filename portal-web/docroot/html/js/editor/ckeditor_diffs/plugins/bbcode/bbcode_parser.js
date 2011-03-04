@@ -1,10 +1,6 @@
 (function() {
 	/*
-	 * Copyright (c) 2011 Liferay Inc.
-	 * Liferay's implementation extends and improves Stone Steps's parser.
-	 *
-	 * Copyright (c) 2008, Stone Steps Inc.
-	 * All rights reserved
+	 * Based in part on the BBCode parse by Stone Steps Inc.
 	 * http://www.stonesteps.ca/legal/bsd-license/
 	 */
 
@@ -20,30 +16,80 @@
 
 	var REGEX_URI = /^[-;\/\?:@&=\+\$,_\.!~\*'\(\)%0-9a-z]{1,512}$/i;
 
-	var SPAN_CLOSE = '</span>';
+	var STR_BBCODE_CLOSE = ']';
+
+	var STR_BBCODE_OPEN = '[';
+
+	var STR_BBCODE_END_OPEN = '[/';
+
+	var STR_ATTR_TAG_CLOSE = '">';
+
+	var STR_ATTR_TAG_OPEN = '<span style="';
+
+	var STR_TAG_BR = '<br>';
+
+	var STR_TAG_END_CLOSE = '>';
+
+	var STR_TAG_END_OPEN = '</';
+
+	var STR_TAG_P_OPEN = '<p>';
+
+	var STR_TAG_OPEN = '<';
+
+	var STR_TAG_SPAN_CLOSE = '</span>';
+
+	var STR_TAG_SPAN_OPEN = '<span style="color: red">';
+
+	var TPL_LIST_ITEM = STR_TAG_SPAN_OPEN + STR_BBCODE_OPEN + LIST + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
+
+	var MAP_FONT_SIZE = {
+		1: 10,
+		2: 12,
+		3: 16,
+		4: 18,
+		5: 24,
+		6: 32,
+		7: 48,
+		defaultSize: 12
+	};
+
+	var MAP_LIST_STYLES = {
+		1: 'list-style-type: decimal;',
+		a: 'list-style-type: lower-alpha;'
+	};
+
+	var MAP_NEW_LINES = {
+		'\r\n\r\n': STR_TAG_P_OPEN,
+		'\n\n': STR_TAG_P_OPEN,
+		'\r\n': STR_TAG_BR,
+		'\n': STR_TAG_BR,
+		'\r': STR_TAG_BR
+	};
 
 	var BBCodeParser = function(config) {
-		this._config = config;
+		var instance = this;
+
+		instance._reset();
+
+		instance._config = config;
 	};
 
 	BBCodeParser.prototype = {
-		constructor: BBCodeParser,
-
 		parse: function(data) {
 			var instance = this;
 
 			var endTags = instance._endTags;
 			var openTags = instance._openTags;
 
-			if (openTags == null || openTags.length) {
-				openTags = instance._openTags = [];
+			if (!openTags || openTags.length) {
+				openTags = [];
+
+				instance._openTags = openTags;
 			}
 
 			var result = data.replace(
 				REGEX_MAIN,
-				function(pstr, p1, p2, p3, p4, offset, orig) {
-					return instance._process(pstr, p1, p2, p3, p4, offset, orig);
-				}
+				A.bind(instance._process, instance)
 			);
 
 			if (instance._noParse) {
@@ -55,11 +101,13 @@
 
 				if ( lastBBTag == 'url') {
 					openTags.pop();
-					endTags.push('">', data.substr(instance._urlStart, data.length - instance._urlStart), '</a>');
+
+					endTags.push(STR_ATTR_TAG_CLOSE, data.substr(instance._urlStart, data.length - instance._urlStart), '</a>');
 				}
 				else if (lastBBTag == 'img') {
 					openTags.pop();
-					endTags.push('">');
+
+					endTags.push(STR_ATTR_TAG_CLOSE);
 				}
 
 				while (openTags.length) {
@@ -67,7 +115,7 @@
 				}
 			}
 
-			this._reset();
+			instance._reset();
 
 			if (endTags.length) {
 				result =  result + endTags.join('');
@@ -77,47 +125,15 @@
 		},
 
 		_getFontSize: function(fontSize) {
-			switch (fontSize) {
-				case '1':
-					return 10;
-					break;
-				case '2':
-					return 12;
-					break;
-				case '3':
-					return 16;
-					break;
-				case '4':
-					return 18;
-					break;
-				case '5':
-					return 24;
-					break;
-				case '6':
-					return 32;
-					break;
-				case '7':
-					return 48;
-					break;
-				default:
-					return 12;
-			}
+			return MAP_FONT_SIZE[fontSize] || MAP_FONT_SIZE.defaultSize;
 		},
 
-		_isValidTag: function(str) {
-			if (!str || !str.length) {
-				return false;
-			}
-
-			return REGEX_TAG_NAME.test(str);
-		},
-
-		_handleCode: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleCode: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</pre>'
 				}
 			);
@@ -127,29 +143,29 @@
 			return '<pre>';
 		},
 
-		_handleColor: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleColor: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
-			if (!p3 || !REGEX_COLOR.test(p3)) {
-				p3 = 'inherit';
+			if (!tagOption || !REGEX_COLOR.test(tagOption)) {
+				tagOption = 'inherit';
 			}
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
-					endTag: SPAN_CLOSE
+					bbTag: openTag,
+					endTag: STR_TAG_SPAN_CLOSE
 				}
 			);
 
-			return '<span style="color: ' + p3 + '">';
+			return STR_ATTR_TAG_OPEN + 'color: ' + tagOption + STR_ATTR_TAG_CLOSE;
 		},
 
-		_handleEm: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleEm: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</em>'
 				}
 			);
@@ -157,96 +173,80 @@
 			return '<em>';
 		},
 
-		_handleImage: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleFont: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
-			var result = null;
+			var result = STR_ATTR_TAG_OPEN + 'font-family: ' + tagOption + STR_ATTR_TAG_CLOSE;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
-					endTag: '">'
+					bbTag: openTag,
+					endTag: STR_TAG_SPAN_CLOSE
 				}
 			);
-
-			result = '<img src="';
 
 			return result;
 		},
 
-		_handleFont: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleImage: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
-			var result = null;
+			var result = '<img src="';
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
-					endTag: SPAN_CLOSE
+					bbTag: openTag,
+					endTag: STR_ATTR_TAG_CLOSE
 				}
 			);
-
-			result = '<span style="font-family: ' + p3 + '">';
 
 			return result;
 		},
 
-		_handleList: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleList: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			var tag = 'ul';
 			var styleAttr;
 
-			if (p3) {
+			if (tagOption) {
 				tag = 'ol';
 
-				switch (p3) {
-					case '1':
-						styleAttr = 'list-style-type: decimal;';
-
-						break;
-					case 'a':
-						styleAttr = 'list-style-type: lower-alpha;';
-
-						break;
-				}
+				styleAttr = MAP_LIST_STYLES[tagOption];
 			}
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
-					endTag: '</' + tag + '>'
+					bbTag: openTag,
+					endTag: STR_TAG_END_OPEN + tag + STR_TAG_END_CLOSE
 				}
 			);
 
-			var result;
+			var result = STR_TAG_OPEN + tag + STR_TAG_END_CLOSE;
 
 			if (styleAttr) {
-				result = '<' + tag + ' style="' + styleAttr + '">';
-			}
-			else {
-				result = '<' + tag + '>';
+				result = STR_TAG_OPEN + tag + ' style="' + styleAttr + STR_ATTR_TAG_CLOSE;
 			}
 
 			return result;
 		},
 
-		_handleListItem: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleListItem: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
-			var result;
+			var result = null;
 
 			if (!instance._hasOpenTag(LIST)) {
-				result = '<span style="color: red">[list]</span>';
+				result = TPL_LIST_ITEM;
 			}
 			else {
-				if (instance._hasOpenTag(p2)) {
-					instance._processEndTag(pstr, p1, p2, p3, '*', offset, orig);
+				if (instance._hasOpenTag(openTag)) {
+					instance._processEndTag(matchedStr, crlf, openTag, tagOption, '*', offset, orig);
 				}
 
 				instance._openTags.push(
 					{
-						bbTag: p2,
+						bbTag: openTag,
 						endTag: '</li>'
 					}
 				);
@@ -257,63 +257,61 @@
 			return result;
 		},
 
-		_handleQuote: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleQuote: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</blockquote>'
 				}
 			);
 
-			var result;
+			var result = '<blockquote>';
 
-			if (p3 && p3.length && REGEX_URI.test(p3)) {
-				result = '<blockquote cite="' + p3 + '">';
-			} else {
-				result = '<blockquote>';
+			if (tagOption && tagOption.length && REGEX_URI.test(tagOption)) {
+				result = '<blockquote cite="' + tagOption + STR_ATTR_TAG_CLOSE;
 			}
 
 			return result;
 		},
 
-		_handleSize: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleSimpleTags: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
-			if (!p3 || !REGEX_NUMBER.test(p3)) {
-				p3 = '1';
+			instance._openTags.push(
+				{
+					bbTag: openTag,
+					endTag: STR_TAG_END_OPEN + openTag + STR_TAG_END_CLOSE
+				}
+			);
+
+			return STR_TAG_OPEN + openTag + STR_TAG_END_CLOSE;
+		},
+
+		_handleSize: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
+			var instance = this;
+
+			if (!tagOption || !REGEX_NUMBER.test(tagOption)) {
+				tagOption = '1';
 			}
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
-					endTag: SPAN_CLOSE
+					bbTag: openTag,
+					endTag: STR_TAG_SPAN_CLOSE
 				}
 			);
 
-			return '<span style="font-size: ' + instance._getFontSize(p3) + 'px">';
+			return STR_ATTR_TAG_OPEN + 'font-size: ' + instance._getFontSize(tagOption) + 'px">';
 		},
 
-		_handleSimpleTags: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleStrikeThrough: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
-					endTag: '</' + p2 + '>'
-				}
-			);
-
-			return '<' + p2 + '>';
-		},
-
-		_handleStrikeThrough: function(pstr, p1, p2, p3, p4, offset, orig) {
-			var instance = this;
-
-			instance._openTags.push(
-				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</strike>'
 				}
 			);
@@ -321,12 +319,12 @@
 			return '<strike>';
 		},
 
-		_handleStrong: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleStrong: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</strong>'
 				}
 			);
@@ -334,12 +332,12 @@
 			return '<strong>';
 		},
 
-		_handleTable: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleTable: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</table>'
 				}
 			);
@@ -347,12 +345,12 @@
 			return '<table>';
 		},
 
-		_handleTableCell: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleTableCell: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</td>'
 				}
 			);
@@ -360,12 +358,12 @@
 			return '<td>';
 		},
 
-		_handleTableHeader: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleTableHeader: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</th>'
 				}
 			);
@@ -373,12 +371,12 @@
 			return '<th>';
 		},
 
-		_handleTableRow: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleTableRow: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</tr>'
 				}
 			);
@@ -386,12 +384,12 @@
 			return '<tr>';
 		},
 
-		_handleTextAlignCenter: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleTextAlignCenter: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</p>'
 				}
 			);
@@ -399,12 +397,12 @@
 			return '<p style="text-align: center">';
 		},
 
-		_handleTextAlignJustify: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleTextAlignJustify: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</p>'
 				}
 			);
@@ -412,12 +410,12 @@
 			return '<p style="text-align: justify">';
 		},
 
-		_handleTextAlignLeft: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleTextAlignLeft: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</span>'
 				}
 			);
@@ -425,12 +423,12 @@
 			return '<p style="text-align: left">';
 		},
 
-		_handleTextAlignRight: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleTextAlignRight: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</p>'
 				}
 			);
@@ -438,25 +436,25 @@
 			return '<p style="text-align: right">';
 		},
 
-		_handleURL: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_handleURL: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			var result = null;
 
 			instance._openTags.push(
 				{
-					bbTag: p2,
+					bbTag: openTag,
 					endTag: '</a>'
 				}
 			);
 
-			if (p3 && REGEX_URI.test(p3)) {
+			if (tagOption && REGEX_URI.test(tagOption)) {
 				instance._urlStart = -1;
 
-				result = '<a href="' + p3 + '">';
+				result = '<a href="' + tagOption + STR_ATTR_TAG_CLOSE;
 			}
 			else {
-				instance._urlStart = pstr.length + offset;
+				instance._urlStart = matchedStr.length + offset;
 
 				result = '<a href="';
 			}
@@ -482,58 +480,70 @@
 			return false;
 		},
 
-		_process: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_isValidTag: function(str) {
+			var valid = false;
+
+			if (str && str.length) {
+				valid = REGEX_TAG_NAME.test(str);
+			}
+
+			return valid;
+		},
+
+		_process: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
-			var res;
+			var result = null;
 
-			if (p1 && p1.length) {
-				res = instance._processNewLines(pstr, p1, p2, p3, p4, offset, orig);
+			if (crlf && crlf.length) {
+				result = instance._processNewLines(matchedStr, crlf, openTag, tagOption, closeTag, offset, str);
 			}
 			else {
-				res = instance._processStartTag(pstr, p1, p2, p3, p4, offset, orig);
+				result = instance._processStartTag(matchedStr, crlf, openTag, tagOption, closeTag, offset, str);
 
-				if (res === null) {
-					res = instance._processEndTag(pstr, p1, p2, p3, p4, offset, orig);
+				if (result === null) {
+					result = instance._processEndTag(matchedStr, crlf, openTag, tagOption, closeTag, offset, str);
 				}
 			}
 
-			if (res === null) {
-				res = pstr;
+			if (result === null) {
+				result = matchedStr;
 			}
 
-			return res;
+			return result;
 		},
 
-		_processEndTag: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_processEndTag: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			var openTags = instance._openTags;
-			var result = null, tmp = null;
+			var result = null;
+			var tmp;
 
-			if (instance._isValidTag(p4)) {
+			if (instance._isValidTag(closeTag)) {
 				if (instance._noParse) {
-					if (p4 == 'code') {
+					if (closeTag == 'code') {
 						instance._noParse = false;
 
 						result = openTags.pop().endTag;
 					}
 					else {
-						result = '[/' + p4 + ']';
+						result = STR_BBCODE_END_OPEN + closeTag + STR_BBCODE_CLOSE;
 					}
 				}
 				else {
-					if (p4 === LIST && instance._hasOpenTag('*')) {
+					if (closeTag === LIST && instance._hasOpenTag('*')) {
 						openTags.pop();
+
 						tmp = '</li>';
 					}
 
-					if (!openTags.length || openTags[openTags.length - 1].bbTag != p4) {
-						result = '<span style="color: red">[/' + p4 + ']</span>';
+					if (!openTags.length || openTags[openTags.length - 1].bbTag != closeTag) {
+						result = STR_TAG_SPAN_OPEN + STR_BBCODE_END_OPEN + closeTag + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
 					}
-					else if (p4 == 'url') {
+					else if (closeTag == 'url') {
 						if (instance._urlStart > 0) {
-							result = '">' + orig.substr(instance._urlStart, offset - instance._urlStart) + openTags.pop().endTag;
+							result = STR_ATTR_TAG_CLOSE + orig.substr(instance._urlStart, offset - instance._urlStart) + openTags.pop().endTag;
 						}
 						else {
 							result = openTags.pop().endTag;
@@ -552,140 +562,105 @@
 			return result;
 		},
 
-		_processNewLines: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_processNewLines: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
-			var res = null;
+			var result = null;
 
 			if (instance._noParse) {
-				res = pstr;
+				result = matchedStr;
 			}
 			else {
-				switch (p1) {
-					case '\r\n\r\n':
-					case '\n\n':
-						res = '<p>';
+				result = MAP_NEW_LINES[crlf];
 
-						break;
-					case '\r\n':
-					case '\n':
-					case '\r':
-						res = '<br>';
-
-						break;
-					default:
-						throw 'Internal error. Invalid regular expression';
+				if (!result) {
+					throw 'Internal error. Invalid regular expression';
 				}
 			}
 
-			return res;
+			return result;
 		},
 
-		_processStartTag: function(pstr, p1, p2, p3, p4, offset, orig) {
+		_processStartTag: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
 			var openTags = instance._openTags;
-			var handler, result = null;
+			var result = null;
 
-			if (instance._isValidTag(p2)) {
+			if (instance._isValidTag(openTag)) {
 				if (instance._noParse) {
-					result = '[' + p2 + ']';
+					result = STR_BBCODE_OPEN + openTag + STR_BBCODE_CLOSE;
 				}
 				else if ((openTags.length && openTags[openTags.length - 1].bbTag == 'url' && instance._urlStart >= 0) ||
 					(openTags.length && openTags[openTags.length - 1].bbTag == 'img')) {
-					result = '[' + p2 + ']';
+
+					result = STR_BBCODE_OPEN + openTag + STR_BBCODE_CLOSE;
 				}
 				else {
-					switch (p2) {
-						case 'b':
-							handler = instance._handleStrong;
+					var handler = instance._handleSimpleTags;
 
-							break;
-						case 'center':
-							handler = instance._handleTextAlignCenter;
-
-							break;
-						case 'code':
-							handler = instance._handleCode;
-
-							break;
-						case 'color':
-						case 'colour':
-							handler = instance._handleColor;
-
-							break;
-						case 'i':
-							handler = instance._handleEm;
-
-							break;
-						case 'img':
-							handler = instance._handleImage;
-
-							break;
-						case 'justify':
-							handler = instance._handleTextAlignJustify;
-
-							break;
-						case 'font':
-							handler = instance._handleFont;
-
-							break;
-						case LIST:
-							handler = instance._handleList;
-
-							break;
-						case 'left':
-							handler = instance._handleTextAlignLeft;
-
-							break;
-						case 'right':
-							handler = instance._handleTextAlignRight;
-
-							break;
-						case 'q':
-						case 'quote':
-							handler = instance._handleQuote;
-
-							break;
-						case '*':
-							handler = instance._handleListItem;
-
-							break;
-						case 's':
-							handler = instance._handleStrikeThrough;
-
-							break;
-						case 'size':
-							handler = instance._handleSize;
-
-							break;
-						case 'table':
-							handler = instance._handleTable;
-
-							break;
-						case 'td':
-							handler = instance._handleTableCell;
-
-							break;
-						case 'th':
-							handler = instance._handleTableHeader;
-
-							break;
-						case 'tr':
-							handler = instance._handleTableRow;
-
-							break;
-						case 'url':
-							handler = instance._handleURL;
-
-							break;
-						default:
-							handler = instance._handleSimpleTags;
-
-							break;
+					if (openTag == 'b') {
+						handler = instance._handleStrong;
+					}
+					else if (openTag == 'center') {
+						handler = instance._handleTextAlignCenter;
+					}
+					else if (openTag == 'code') {
+						handler = instance._handleCode;
+					}
+					else if (openTag == 'color' || openTag == 'colour') {
+						handler = instance._handleColor;
+					}
+					else if (openTag == 'font') {
+						handler = instance._handleFont;
+					}
+					else if (openTag == 'i') {
+						handler = instance._handleEm;
+					}
+					else if (openTag == 'img') {
+						handler = instance._handleImage;
+					}
+					else if (openTag == 'justify') {
+						handler = instance._handleTextAlignJustify;
+					}
+					else if (openTag == LIST) {
+						handler = instance._handleList;
+					}
+					else if (openTag == 'left') {
+						handler = instance._handleTextAlignLeft;
+					}
+					else if (openTag == 'right') {
+						handler = instance._handleTextAlignRight;
+					}
+					else if (openTag == 'q' || openTag == 'quote') {
+						handler = instance._handleQuote;
+					}
+					else if (openTag == '*') {
+						handler = instance._handleListItem;
+					}
+					else if (openTag == 's') {
+						handler = instance._handleStrikeThrough;
+					}
+					else if (openTag == 'size') {
+						handler = instance._handleSize;
+					}
+					else if (openTag == 'table') {
+						handler = instance._handleTable;
+					}
+					else if (openTag == 'td') {
+						handler = instance._handleTableCell;
+					}
+					else if (openTag == 'th') {
+						handler = instance._handleTableHeader;
+					}
+					else if (openTag == 'tr') {
+						handler = instance._handleTableRow;
+					}
+					else if (openTag == 'url') {
+						handler = instance._handleURL;
 					}
 
-					result = handler.call(instance, pstr, p1, p2, p3, p4, offset, orig);
+					result = handler.apply(instance, arguments);
 				}
 			}
 
@@ -700,18 +675,8 @@
 			instance._noParse = false;
 			instance._openTags = null;
 			instance._urlStart = -1;
-		},
-
-		_endTags: [],
-
-		_fontStart: -1,
-
-		_noParse: false,
-
-		_openTags: null,
-
-		_urlStart: -1
+		}
 	};
-	
+
 	CKEDITOR.BBCodeParser = BBCodeParser;
 })();
