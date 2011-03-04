@@ -1705,10 +1705,10 @@ AUI().add(
 				var selector = '> span.folder > ul > li';
 
 				if (!generateArticleContent) {
-					selector += '.structure-field:not(.repeated-field)';
+					selector += '.structure-field:not(.repeated-field,.parent-structure-field)';
 				}
 
-				var children = source.all(selector).filter(':not(.parent-structure-field)');
+				var children = source.all(selector);
 
 				A.each(
 					children,
