@@ -80,6 +80,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 				_id = null;
 				_message = "actions";
 				_showArrow = true;
+				_showDecoration = true;
 				_showExpanded = false;
 				_showWhenSingleIcon = false;
 				_startPage = null;
@@ -148,6 +149,10 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 
 	public void setShowArrow(boolean showArrow) {
 		_showArrow = showArrow;
+	}
+
+	public void setShowDecoration(boolean showDecoration) {
+		_showDecoration = showDecoration;
 	}
 
 	public void setShowExpanded(boolean showExpanded) {
@@ -222,10 +227,13 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write(_direction);
 					jspWriter.write(" ");
 					jspWriter.print(_cssClass);
-					jspWriter.write(" ");
 
 					if (_showArrow) {
-						jspWriter.write("show-arrow");
+						jspWriter.write(" show-arrow");
+					}
+
+					if (!_showDecoration) {
+						jspWriter.write(" no-decoration");
 					}
 
 					jspWriter.write("'>");
@@ -295,6 +303,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 	private String _id;
 	private String _message = "actions";
 	private boolean _showArrow = true;
+	private boolean _showDecoration = true;
 	private boolean _showExpanded;
 	private boolean _showWhenSingleIcon;
 	private String _startPage;

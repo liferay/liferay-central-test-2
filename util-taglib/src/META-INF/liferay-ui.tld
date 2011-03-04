@@ -860,6 +860,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>showDecoration</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>showExpanded</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
