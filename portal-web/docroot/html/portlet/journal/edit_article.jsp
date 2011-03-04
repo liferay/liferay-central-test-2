@@ -1063,7 +1063,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 			if (dynamicContentEl != null) {
 				elLanguageId = dynamicContentEl.attributeValue("language-id", StringPool.BLANK);
 
-				if (Validator.isNotNull(toLanguageId) && Validator.isNull(elLanguageId)){
+				if (Validator.isNotNull(toLanguageId) && Validator.isNull(elLanguageId)) {
 					continue;
 				}
 			}
@@ -1071,7 +1071,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 				elLanguageId = languageId;
 			}
 
-			if (repeatablePrototype) {
+			if (repeatablePrototype || ((depth == 0) && (siblingIndex == 0))) {
 				repeatablePrototype = (siblingIndex == 0);
 			}
 

@@ -3300,9 +3300,7 @@ AUI().add(
 								repeatableFieldImage.remove();
 							}
 
-							var parentStructureId = instance.get('parentStructureId');
-
-							if (value && !parentStructureId) {
+							if (value) {
 								var repeatableFieldImageModel = A.Node.create(
 									A.one('#repeatable-field-image-model').html()
 								);
