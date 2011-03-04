@@ -286,7 +286,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 				<liferay-ui:message key="expiration-date" />:
 			</td>
 			<td>
-				<%= CalendarUtil.getMonths(locale)[order.getCcExpMonth()] %>, <%= HtmlUtil.escape(order.getCcExpYear()) %>
+				<%= CalendarUtil.getMonths(locale)[order.getCcExpMonth()] %>, <%= order.getCcExpYear() %>
 			</td>
 		</tr>
 
