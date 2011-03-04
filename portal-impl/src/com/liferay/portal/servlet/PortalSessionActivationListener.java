@@ -14,32 +14,35 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.cache.Lifecycle;
-import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
+import java.io.Serializable;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionEvent;
-import javax.servlet.http.HttpSessionListener;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  */
-public class PortalSessionListener implements HttpSessionListener {
+public class PortalSessionActivationListener implements
+	HttpSessionActivationListener, Serializable {
 
-	public void sessionCreated(HttpSessionEvent httpSessionEvent) {
+	public static PortalSessionActivationListener getInstance() {
+		return _instance;
+	}
+
+	public void sessionDidActivate(HttpSessionEvent httpSessionEvent) {
 		new PortalSessionCreator(httpSessionEvent);
 
 		HttpSession session = httpSessionEvent.getSession();
 
 		session.setAttribute(
-			PortalSessionActivationListener.class.getName(),
-			PortalSessionActivationListener.getInstance());
+			PortalSessionActivationListener.class.getName(), _instance);
 	}
 
-	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
-		new PortalSessionDestroyer(httpSessionEvent);
-
-		ThreadLocalCacheManager.clearAll(Lifecycle.SESSION);
+	public void sessionWillPassivate(HttpSessionEvent httpSessionEvent) {
 	}
+
+	private static PortalSessionActivationListener _instance =
+		new PortalSessionActivationListener();
 
 }
