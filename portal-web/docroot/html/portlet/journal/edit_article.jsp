@@ -1071,7 +1071,7 @@ private void _format(long groupId, Element contentParentElement, Element xsdPare
 				elLanguageId = languageId;
 			}
 
-			if (repeatablePrototype || ((depth == 0) && (siblingIndex == 0))) {
+			if (!_hasRepeatedParent(contentElement)) {
 				repeatablePrototype = (siblingIndex == 0);
 			}
 
@@ -1149,5 +1149,25 @@ private List<Element> _getSiblings(Element element, String name) {
 	}
 
 	return elements;
+}
+
+private boolean _hasRepeatedParent(Element element) {
+	Element parentElement = element.getParent();
+
+	while (parentElement != null) {
+		Element parentParentElement = parentElement.getParent();
+
+		if (parentParentElement != null) {
+			List<Element> parentSiblings = _getSiblings(parentParentElement, parentElement.attributeValue("name", StringPool.BLANK));
+
+			if (parentSiblings.indexOf(parentElement) > 0) {
+				return true;
+			}
+		}
+
+		parentElement = parentParentElement;
+	}
+
+	return false;
 }
 %>
