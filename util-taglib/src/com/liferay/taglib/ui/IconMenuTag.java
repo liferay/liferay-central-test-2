@@ -233,12 +233,12 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 					jspWriter.write(" ");
 					jspWriter.print(_cssClass);
 
-					if (_showArrow) {
-						jspWriter.write(" show-arrow");
-					}
-
 					if (!_showDecoration) {
 						jspWriter.write(" no-decoration");
+					}
+
+					if (_showArrow) {
+						jspWriter.write(" show-arrow");
 					}
 
 					jspWriter.write("'>");
