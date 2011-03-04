@@ -78,12 +78,19 @@ public class VerifyMySQL extends VerifyProcess {
 			while (rs.next()) {
 				String tableName = rs.getString("Name");
 				String engine = GetterUtil.getString(rs.getString("Engine"));
+				String comment = GetterUtil.getString(rs.getString("Comment"));
 
-				if (!engine.equalsIgnoreCase(
+				if (comment.equalsIgnoreCase("VIEW")) {
+					continue;
+				}
+
+				if (engine.equalsIgnoreCase(
 						PropsValues.DATABASE_MYSQL_ENGINE)) {
 
-					alterTableEngine(tableName);
+					continue;
 				}
+
+				alterTableEngine(tableName);
 			}
 		}
 		finally {
