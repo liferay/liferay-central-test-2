@@ -39,9 +39,15 @@ if (selGroup.isStagingGroup()) {
 }
 else {
 	liveGroup = selGroup;
+}
 
-	if (selGroup.hasStagingGroup()) {
-		stagingGroup = selGroup.getStagingGroup();
+
+if (liveGroup.isStaged()) {
+	if (liveGroup.isStagedRemotely()) {
+		stagingGroup = liveGroup;
+	}
+	else {
+		stagingGroup = liveGroup.getStagingGroup();
 	}
 }
 
@@ -152,6 +158,18 @@ else if (liveGroup.isUser()) {
 	rootNodeName = user2.getFullName();
 }
 
+String branchingKey = "branchingPublic";
+
+if (privateLayout) {
+	branchingKey = "branchingPrivate";
+}
+
+boolean branchingEnabled = false;
+
+if (liveGroup.isStaged() && GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(branchingKey))) {
+	branchingEnabled = true;
+}
+
 LayoutLister layoutLister = new LayoutLister();
 
 LayoutView layoutView = layoutLister.getLayoutView(selGroupId, privateLayout, rootNodeName, locale);
@@ -222,7 +240,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 <aui:form action='<%= portletURL.toString() + "&etag=0" %>' method="post" name="exportPagesFm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "refreshDialog();" %>' >
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
-	<aui:input name="pagesRedirect" type="hidden" value="<%= currentURL %>" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
 
 	<liferay-ui:error exception="<%= RemoteExportException.class %>">
@@ -335,6 +353,34 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="pages">
 						<%@ include file="/html/portlet/layouts_admin/publish_layouts_select_pages.jspf" %>
 					</liferay-ui:panel>
+
+					<c:if test="<%= branchingEnabled %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="branches">
+
+							<%
+							List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(stagingGroup.getGroupId(), privateLayout);
+							%>
+
+							<aui:select id="layoutSetBranchId" inlineField="<%= true %>" label="branch" name="layoutSetBranchId">
+
+								<%
+								for (LayoutSetBranch layoutSetBranch : layoutSetBranches) {
+									boolean selected = false;
+
+									if (layoutSetBranch.isMaster()) {
+										selected = true;
+									}
+								%>
+
+									<aui:option label="<%= HtmlUtil.escape(layoutSetBranch.getName()) %>" selected="<%= selected %>" value="<%= layoutSetBranch.getLayoutSetBranchId() %>" />
+
+								<%
+								}
+								%>
+
+							</aui:select>
+						</liferay-ui:panel>
+					</c:if>
 
 					<liferay-ui:panel collapsible="<%= true %>" defaultState="closed" extended="<%= true %>" persistState="<%= true %>" title="options">
 						<%@ include file="/html/portlet/layouts_admin/publish_layouts_options.jspf" %>

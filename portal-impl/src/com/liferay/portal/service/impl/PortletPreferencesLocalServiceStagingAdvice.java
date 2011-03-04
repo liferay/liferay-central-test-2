@@ -15,6 +15,7 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.kernel.staging.LayoutStagingUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutRevision;
@@ -41,7 +42,12 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		try {
 			String methodName = methodInvocation.getMethod().getName();
 
-			if (methodName.equals("getPreferences")) {
+			if (methodName.equals("getPortletPreferences") &&
+				(methodInvocation.getArguments().length == 4)) {
+
+				return getPortletPreferences(methodInvocation);
+			}
+			else if (methodName.equals("getPreferences")) {
 				return getPreferences(methodInvocation);
 			}
 			else if (methodName.equals("updatePreferences")) {
@@ -54,6 +60,34 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		catch (Throwable throwable) {
 			throw throwable;
 		}
+	}
+
+	protected Object getPortletPreferences(MethodInvocation methodInvocation)
+		throws Throwable {
+
+		Method method = methodInvocation.getMethod();
+		Object[] arguments = methodInvocation.getArguments();
+
+		long plid = (Long)arguments[2];
+		String portletId = (String)arguments[3];
+
+
+		if (portletId.equals(PortletKeys.LIFERAY_PORTAL) || (plid <= 0)) {
+			return methodInvocation.proceed();
+		}
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		if (!LayoutStagingUtil.isBranchingLayout(layout)) {
+			return methodInvocation.proceed();
+		}
+
+		LayoutRevision layoutRevision =
+			LayoutStagingUtil.getLayoutRevision(layout);
+
+		arguments[2] = layoutRevision.getLayoutRevisionId();
+
+		return method.invoke(methodInvocation.getThis(), arguments);
 	}
 
 	protected Object getPreferences(MethodInvocation methodInvocation)
@@ -121,12 +155,14 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		LayoutRevision layoutRevision = LayoutRevisionUtil.fetchByPrimaryKey(
 			plid);
 
-		if (layoutRevision == null) {
-			return methodInvocation.proceed();
-		}
-
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
+
+		boolean exporting = ParamUtil.getBoolean(serviceContext, "exporting");
+
+		if ((layoutRevision == null) || exporting) {
+			return methodInvocation.proceed();
+		}
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 

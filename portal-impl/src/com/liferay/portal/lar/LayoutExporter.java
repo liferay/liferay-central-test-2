@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
+import com.liferay.portal.kernel.staging.LayoutStagingUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -41,6 +42,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
+import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
@@ -51,9 +53,10 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.PortletKeys;
@@ -181,6 +184,8 @@ public class LayoutExporter {
 			parameterMap, PortletDataHandlerKeys.THEME);
 		boolean exportThemeSettings = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.THEME_REFERENCE);
+		long layoutSetBranchId = MapUtil.getLong(
+			parameterMap, "layoutSetBranchId");
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export categories " + exportCategories);
@@ -194,6 +199,12 @@ public class LayoutExporter {
 					exportPortletUserPreferences);
 			_log.debug("Export theme " + exportTheme);
 		}
+
+		ServiceContext serviceContext =
+			ServiceContextThreadLocal.getServiceContext();
+
+		serviceContext.setAttribute("layoutSetBranchId", layoutSetBranchId);
+		serviceContext.setAttribute("exporting", true);
 
 		long lastPublishDate = System.currentTimeMillis();
 
@@ -383,7 +394,7 @@ public class LayoutExporter {
 				scopeLayoutUuid = (String)portletIdsEntry.getValue()[4];
 			}
 
-			Layout layout = LayoutUtil.findByPrimaryKey(plid);
+			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
 			context.setPlid(layout.getPlid());
 			context.setOldPlid(layout.getPlid());
@@ -508,6 +519,15 @@ public class LayoutExporter {
 
 		if (!context.isPathNotProcessed(path)) {
 			return;
+		}
+
+		if (LayoutStagingUtil.isBranchingLayout(layout)) {
+			LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
+				layout);
+
+			if (!layoutRevision.isHead()) {
+				return;
+			}
 		}
 
 		Element layoutElement = layoutsElement.addElement("layout");
@@ -639,7 +659,7 @@ public class LayoutExporter {
 
 			if (linkToLayoutId > 0) {
 				try {
-					Layout linkedToLayout = LayoutUtil.findByG_P_L(
+					Layout linkedToLayout = LayoutLocalServiceUtil.getLayout(
 						context.getScopeGroupId(), layout.isPrivateLayout(),
 						linkToLayoutId);
 
