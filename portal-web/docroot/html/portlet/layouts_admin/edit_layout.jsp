@@ -106,6 +106,8 @@ String[][] categorySections = {mainSections};
 								}
 
 								popUp.show();
+
+								content.one('input[type=text]').focus();
 							},
 							icon: 'circle-plus',
 							label: '<liferay-ui:message key="add-child-page" />'
