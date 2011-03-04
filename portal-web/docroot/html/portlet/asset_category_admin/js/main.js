@@ -1179,9 +1179,10 @@ AUI().add(
 						if (vocabularyId) {
 							var vocabularyElId = '#' + instance._prefixedPortletId + 'vocabularyId';
 							var parentCategoryElId = '#' + instance._prefixedPortletId + 'parentCategoryId';
+							var parentCategoryId = instance._selectedParentCategoryId;
 
 							form.one(vocabularyElId).val(vocabularyId);
-							form.one(parentCategoryElId).val(0);
+							form.one(parentCategoryElId).val(parentCategoryId);
 
 							Liferay.fire(
 								'saveAutoFields',
