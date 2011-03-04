@@ -18,6 +18,7 @@ import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -43,6 +44,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
+ * @author Sergio González
  */
 public class EditFolderAction extends PortletAction {
 
@@ -58,10 +60,10 @@ public class EditFolderAction extends PortletAction {
 				updateFolder(actionRequest);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteFolder(actionRequest);
+				deleteFolders(actionRequest);
 			}
 			else if (cmd.equals(Constants.MOVE)) {
-				moveFolder(actionRequest);
+				moveFolders(actionRequest);
 			}
 
 			sendRedirect(actionRequest, actionResponse);
@@ -111,16 +113,29 @@ public class EditFolderAction extends PortletAction {
 			getForward(renderRequest, "portlet.document_library.edit_folder"));
 	}
 
-	protected void deleteFolder(ActionRequest actionRequest) throws Exception {
+	protected void deleteFolders(ActionRequest actionRequest) throws Exception {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
-		DLAppServiceUtil.deleteFolder(folderId);
+		if (folderId > 0) {
+			DLAppServiceUtil.deleteFolder(folderId);
 
-		AssetPublisherUtil.removeRecentFolderId(
-			actionRequest, DLFileEntry.class.getName(), folderId);
+			AssetPublisherUtil.removeRecentFolderId(
+				actionRequest, DLFileEntry.class.getName(), folderId);
+		}
+		else {
+			long[] folderIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "folderIds"), 0L);
+
+			for (int i = 0; i < folderIds.length; i++) {
+				DLAppServiceUtil.deleteFolder(folderIds[i]);
+
+				AssetPublisherUtil.removeRecentFolderId(
+					actionRequest, DLFileEntry.class.getName(), folderIds[i]);
+			}
+		}
 	}
 
-	protected void moveFolder(ActionRequest actionRequest) throws Exception {
+	protected void moveFolders(ActionRequest actionRequest) throws Exception {
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
 		long parentFolderId = ParamUtil.getLong(
@@ -129,7 +144,19 @@ public class EditFolderAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
-		DLAppServiceUtil.moveFolder(folderId, parentFolderId, serviceContext);
+		if (folderId > 0) {
+			DLAppServiceUtil.moveFolder(
+				folderId, parentFolderId, serviceContext);
+		}
+		else {
+			long[] folderIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "folderIds"), 0L);
+
+			for (int i = 0; i < folderIds.length; i++) {
+				DLAppServiceUtil.moveFolder(
+					folderIds[i], parentFolderId, serviceContext);
+			}
+		}
 	}
 
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {

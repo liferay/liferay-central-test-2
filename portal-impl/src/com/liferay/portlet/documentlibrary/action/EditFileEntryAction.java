@@ -60,6 +60,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
+ * @author Sergio González
  */
 public class EditFileEntryAction extends PortletAction {
 
@@ -78,16 +79,16 @@ public class EditFileEntryAction extends PortletAction {
 				deleteFileEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.LOCK)) {
-				lockFileEntry(actionRequest);
+				lockFileEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.MOVE)) {
-				moveFileEntry(actionRequest);
+				moveFileEntries(actionRequest);
 			}
 			else if (cmd.equals(Constants.REVERT)) {
 				revertFileEntry(actionRequest);
 			}
 			else if (cmd.equals(Constants.UNLOCK)) {
-				unlockFileEntry(actionRequest);
+				unlockFileEntries(actionRequest);
 			}
 
 			WindowState windowState = actionRequest.getWindowState();
@@ -203,21 +204,46 @@ public class EditFileEntryAction extends PortletAction {
 		}
 	}
 
-	protected void lockFileEntry(ActionRequest actionRequest) throws Exception {
+	protected void lockFileEntries(ActionRequest actionRequest)
+		throws Exception {
+
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 
-		DLAppServiceUtil.lockFileEntry(fileEntryId);
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.lockFileEntry(fileEntryId);
+		}
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				DLAppServiceUtil.lockFileEntry(fileEntryIds[i]);
+			}
+		}
 	}
 
-	protected void moveFileEntry(ActionRequest actionRequest) throws Exception {
+	protected void moveFileEntries(ActionRequest actionRequest)
+		throws Exception {
+
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 		long newFolderId = ParamUtil.getLong(actionRequest, "newFolderId");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			DLFileEntry.class.getName(), actionRequest);
 
-		DLAppServiceUtil.moveFileEntry(
-			fileEntryId, newFolderId, serviceContext);
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.moveFileEntry(
+				fileEntryId, newFolderId, serviceContext);
+		}
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				DLAppServiceUtil.moveFileEntry(
+					fileEntryIds[i], newFolderId, serviceContext);
+			}
+		}
 	}
 
 	protected void revertFileEntry(ActionRequest actionRequest)
@@ -232,12 +258,22 @@ public class EditFileEntryAction extends PortletAction {
 		DLAppServiceUtil.revertFileEntry(fileEntryId, version, serviceContext);
 	}
 
-	protected void unlockFileEntry(ActionRequest actionRequest)
+	protected void unlockFileEntries(ActionRequest actionRequest)
 		throws Exception {
 
 		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
 
-		DLAppServiceUtil.unlockFileEntry(fileEntryId);
+		if (fileEntryId > 0) {
+			DLAppServiceUtil.unlockFileEntry(fileEntryId);
+		}
+		else {
+			long[] fileEntryIds = StringUtil.split(
+				ParamUtil.getString(actionRequest, "fileEntryIds"), 0L);
+
+			for (int i = 0; i < fileEntryIds.length; i++) {
+				DLAppServiceUtil.unlockFileEntry(fileEntryIds[i]);
+			}
+		}
 	}
 
 	protected void updateFileEntry(
