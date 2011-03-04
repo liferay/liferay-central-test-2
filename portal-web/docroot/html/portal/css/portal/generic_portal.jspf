@@ -57,6 +57,10 @@ td.lfr-middle {
 	vertical-align: middle;
 }
 
+.lfr-component.lfr-actions li img {
+	padding: 0 5px;
+}
+
 #layout-grid.dragging .lfr-portlet-column.empty {
 	padding: 20px;
 }
