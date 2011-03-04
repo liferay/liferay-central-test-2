@@ -311,6 +311,14 @@ AUI().add(
 						obj.append(TPL_DELETE_BUTTON);
 					},
 
+					_handleKeyDown: function(event) {
+						var instance = this;
+
+						if (event.charCode == 46) {
+							instance._removePage(event);
+						}
+					},
+
 					_makeAddable: function() {
 						var instance = this;
 
@@ -347,6 +355,12 @@ AUI().add(
 								'click',
 								A.bind(instance._removePage, instance),
 								'.delete-tab'
+							);
+
+							navBlock.delegate(
+								'keydown',
+								A.bind(instance._handleKeyDown, instance),
+								'> ul > li:not(.selected) a'
 							);
 
 							navBlock.delegate(
