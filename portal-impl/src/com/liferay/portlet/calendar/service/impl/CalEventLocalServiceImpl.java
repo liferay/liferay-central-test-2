@@ -584,7 +584,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		Map<String, List<CalEvent>> eventsPool =
 			CalEventLocalUtil.getEventsPool(groupId);
 
-		String key = "recurrence";
+		String key = "recurrence".concat(CalUtil.toString(null, types));
 
 		List<CalEvent> events = eventsPool.get(key);
 
