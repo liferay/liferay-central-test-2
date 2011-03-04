@@ -27,8 +27,6 @@ int altShipping = cart.getAltShipping();
 String altShippingName = shoppingPrefs.getAlternativeShippingName(altShipping);
 
 ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER);
-
-order = order.toEscapedModel();
 %>
 
 <portlet:actionURL var="checkoutSecondURL">
@@ -83,7 +81,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="first-name" />:
 				</td>
 				<td>
-					<%= order.getBillingFirstName() %>
+					<%= HtmlUtil.escape(order.getBillingFirstName()) %>
 				</td>
 			</tr>
 			<tr>
@@ -91,7 +89,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="last-name" />:
 				</td>
 				<td>
-					<%= order.getBillingLastName() %>
+					<%= HtmlUtil.escape(order.getBillingLastName()) %>
 				</td>
 			</tr>
 			<tr>
@@ -99,7 +97,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="email-address" />:
 				</td>
 				<td>
-					<%= order.getBillingEmailAddress() %>
+					<%= HtmlUtil.escape(order.getBillingEmailAddress()) %>
 				</td>
 			</tr>
 			<tr>
@@ -107,7 +105,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="company" />:
 				</td>
 				<td>
-					<%= order.getBillingCompany() %>
+					<%= HtmlUtil.escape(order.getBillingCompany()) %>
 				</td>
 			</tr>
 			<tr>
@@ -115,7 +113,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="street" />:
 				</td>
 				<td>
-					<%= order.getBillingStreet() %>
+					<%= HtmlUtil.escape(order.getBillingStreet()) %>
 				</td>
 			</tr>
 			<tr>
@@ -123,7 +121,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="city" />
 				</td>
 				<td>
-					<%= order.getBillingCity() %>:
+					<%= HtmlUtil.escape(order.getBillingCity()) %>:
 				</td>
 			</tr>
 			<tr>
@@ -131,7 +129,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="state" />:
 				</td>
 				<td>
-					<%= order.getBillingState() %>
+					<%= HtmlUtil.escape(order.getBillingState()) %>
 				</td>
 			</tr>
 			<tr>
@@ -139,7 +137,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="zip" />:
 				</td>
 				<td>
-					<%= order.getBillingZip() %>
+					<%= HtmlUtil.escape(order.getBillingZip()) %>
 				</td>
 			</tr>
 			<tr>
@@ -147,7 +145,7 @@ order = order.toEscapedModel();
 				<liferay-ui:message key="country" />:
 				</td>
 				<td>
-					<%= order.getBillingCountry() %>
+					<%= HtmlUtil.escape(order.getBillingCountry()) %>
 				</td>
 			</tr>
 			<tr>
@@ -155,7 +153,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="phone" />:
 				</td>
 				<td>
-					<%= order.getBillingPhone() %>
+					<%= HtmlUtil.escape(order.getBillingPhone()) %>
 				</td>
 			</tr>
 			</table>
@@ -171,7 +169,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="first-name" />:
 				</td>
 				<td>
-					<%= order.getShippingFirstName() %>
+					<%= HtmlUtil.escape(order.getShippingFirstName()) %>
 				</td>
 			</tr>
 			<tr>
@@ -179,7 +177,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="last-name" />:
 				</td>
 				<td>
-					<%= order.getShippingLastName() %>
+					<%= HtmlUtil.escape(order.getShippingLastName()) %>
 				</td>
 			</tr>
 			<tr>
@@ -187,7 +185,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="email-address" />:
 				</td>
 				<td>
-					<%= order.getShippingEmailAddress() %>
+					<%= HtmlUtil.escape(order.getShippingEmailAddress()) %>
 				</td>
 			</tr>
 			<tr>
@@ -195,7 +193,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="company" />:
 				</td>
 				<td>
-					<%= order.getShippingCompany() %>
+					<%= HtmlUtil.escape(order.getShippingCompany()) %>
 				</td>
 			</tr>
 			<tr>
@@ -203,7 +201,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="street" />:
 				</td>
 				<td>
-					<%= order.getShippingStreet() %>
+					<%= HtmlUtil.escape(order.getShippingStreet()) %>
 				</td>
 			</tr>
 			<tr>
@@ -211,7 +209,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="city" />
 				</td>
 				<td>
-					<%= order.getShippingCity() %>:
+					<%= HtmlUtil.escape(order.getShippingCity()) %>:
 				</td>
 			</tr>
 			<tr>
@@ -219,7 +217,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="state" />:
 				</td>
 				<td>
-					<%= order.getShippingState() %>
+					<%= HtmlUtil.escape(order.getShippingState()) %>
 				</td>
 			</tr>
 			<tr>
@@ -227,7 +225,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="zip" />:
 				</td>
 				<td>
-					<%= order.getShippingZip() %>
+					<%= HtmlUtil.escape(order.getShippingZip()) %>
 				</td>
 			</tr>
 			<tr>
@@ -235,7 +233,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="country" />:
 				</td>
 				<td>
-					<%= order.getShippingCountry() %>
+					<%= HtmlUtil.escape(order.getShippingCountry()) %>
 				</td>
 			</tr>
 			<tr>
@@ -243,7 +241,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="phone" />:
 				</td>
 				<td>
-					<%= order.getShippingPhone() %>
+					<%= HtmlUtil.escape(order.getShippingPhone()) %>
 				</td>
 			</tr>
 			</table>
@@ -264,7 +262,7 @@ order = order.toEscapedModel();
 				<liferay-ui:message key="full-name" />:
 			</td>
 			<td>
-				<%= order.getCcName() %>
+				<%= HtmlUtil.escape(order.getCcName()) %>
 			</td>
 		</tr>
 		<tr>
@@ -272,7 +270,7 @@ order = order.toEscapedModel();
 				<liferay-ui:message key="type" />:
 			</td>
 			<td>
-				<liferay-ui:message key='<%= "cc_" + order.getCcType() %>' />
+				<liferay-ui:message key='<%= "cc_" + HtmlUtil.escape(order.getCcType()) %>' />
 			</td>
 		</tr>
 		<tr>
@@ -288,7 +286,7 @@ order = order.toEscapedModel();
 				<liferay-ui:message key="expiration-date" />:
 			</td>
 			<td>
-				<%= CalendarUtil.getMonths(locale)[order.getCcExpMonth()] %>, <%= order.getCcExpYear() %>
+				<%= CalendarUtil.getMonths(locale)[order.getCcExpMonth()] %>, <%= HtmlUtil.escape(order.getCcExpYear()) %>
 			</td>
 		</tr>
 
@@ -298,7 +296,7 @@ order = order.toEscapedModel();
 					<liferay-ui:message key="verification-number" />:
 				</td>
 				<td>
-					<%= order.getCcVerNumber() %>
+					<%= HtmlUtil.escape(order.getCcVerNumber()) %>
 				</td>
 			</tr>
 		</c:if>
@@ -313,7 +311,7 @@ order = order.toEscapedModel();
 
 		<br /><br />
 
-		<%= order.getComments() %>
+		<%= HtmlUtil.escape(order.getComments()) %>
 
 		<br /><br />
 	</c:if>
