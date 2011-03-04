@@ -16,7 +16,6 @@ package com.liferay.portal.servlet;
 
 import java.io.Serializable;
 
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionEvent;
 
@@ -32,11 +31,6 @@ public class PortalSessionActivationListener implements
 
 	public void sessionDidActivate(HttpSessionEvent httpSessionEvent) {
 		new PortalSessionCreator(httpSessionEvent);
-
-		HttpSession session = httpSessionEvent.getSession();
-
-		session.setAttribute(
-			PortalSessionActivationListener.class.getName(), _instance);
 	}
 
 	public void sessionWillPassivate(HttpSessionEvent httpSessionEvent) {
