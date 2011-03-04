@@ -44,7 +44,11 @@ if (layout.isTypeControlPanel()) {
 		layout = LayoutLocalServiceUtil.getLayout(scopeGroup.getClassPK());
 	}
 	else if (!scopeGroup.isCompany()) {
-		layout = LayoutLocalServiceUtil.getLayout(LayoutLocalServiceUtil.getDefaultPlid(scopeGroupId));
+		long defaultPlid = LayoutLocalServiceUtil.getDefaultPlid(scopeGroupId);
+
+		if (defaultPlid > 0) {
+			layout = LayoutLocalServiceUtil.getLayout(defaultPlid);
+		}
 	}
 
 	supportsSetup = false;
