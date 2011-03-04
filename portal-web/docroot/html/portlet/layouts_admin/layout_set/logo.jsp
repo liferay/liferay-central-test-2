@@ -53,28 +53,20 @@ LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLay
 
 <aui:script use="aui-base">
 	var deleteLogoLink = A.one('#<portlet:namespace />deleteLogoLink');
-
 	var useLogoInput =  A.one('#<portlet:namespace />useLogo');
-
 	var logoContainer =  A.one('#<portlet:namespace />logoContainer');
-
-	if (deleteLogoLink) {
-		deleteLogoLink.on(
-			'click',
-			function() {
-				useLogoInput.val(false);
-
-				logoContainer.hide();
-			}
-		);
-	}
-
 	var logoFileNameInput = A.one('#<portlet:namespace />logoFileName');
 
-	logoFileNameInput.on(
-		'change',
-		function() {
-			useLogoInput.val(true);
-		}
-	);
+	var changeLogo = function(event) {
+		var changeLogo = (event.type == 'change');
+
+		useLogoInput.val(changeLogo);
+		logoContainer.hide();
+	};
+
+	if (deleteLogoLink) {
+		deleteLogoLink.on('click', changeLogo);
+	}
+
+	logoFileNameInput.on('change', changeLogo);
 </aui:script>
