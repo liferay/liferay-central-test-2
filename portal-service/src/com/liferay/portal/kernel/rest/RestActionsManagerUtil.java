@@ -26,7 +26,7 @@ public class RestActionsManagerUtil {
 		return getRestActionsManager().lookup(pathChunks, method);
 	}
 
-	public static Object[] preapreParameters(
+	public static Object[] prepareParameters(
 		String[] pathChunks, Object config) {
 
 		return getRestActionsManager().prepareParameters(pathChunks, config);
