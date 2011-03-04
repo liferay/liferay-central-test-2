@@ -646,7 +646,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				}
 			}
 
-			events = repeatingEvents;
+			events = new UnmodifiableList<CalEvent>(repeatingEvents);
 		}
 
 		return events;
