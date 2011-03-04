@@ -1178,10 +1178,13 @@ AUI().add(
 
 						if (vocabularyId) {
 							var vocabularyElId = '#' + instance._prefixedPortletId + 'vocabularyId';
-							var parentCategoryElId = '#' + instance._prefixedPortletId + 'parentCategoryId';
-							var parentCategoryId = instance._selectedParentCategoryId;
 
 							form.one(vocabularyElId).val(vocabularyId);
+
+							var parentCategoryElId = '#' + instance._prefixedPortletId + 'parentCategoryId';
+
+							var parentCategoryId = instance._selectedParentCategoryId;
+
 							form.one(parentCategoryElId).val(parentCategoryId);
 
 							Liferay.fire(
