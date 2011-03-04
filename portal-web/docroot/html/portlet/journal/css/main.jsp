@@ -122,6 +122,7 @@
 
 	li {
 		list-style: none;
+		position: relative;
 	}
 
 	.structure-tree {
