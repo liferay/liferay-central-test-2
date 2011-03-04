@@ -17,6 +17,8 @@
 <%@ include file="/html/taglib/ui/logo_selector/init.jsp" %>
 
 <%
+String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_logo_selector") + StringPool.UNDERLINE;
+
 String defaultLogoURL = (String)request.getAttribute("liferay-ui:logo-selector:defaultLogoURL");
 String editLogoURL = (String)request.getAttribute("liferay-ui:logo-selector:editLogoURL");
 long imageId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:logo-selector:imageId"));
@@ -35,82 +37,44 @@ else {
 }
 %>
 
-<div class="taglib-logo-selector">
-	<a class='lfr-change-logo edit-logo-link <%= showBackground ? "show-background" : StringPool.BLANK %>' href="javascript:;">
-		<img alt="<liferay-ui:message key="change-logo" />" class="avatar" id="<portlet:namespace />avatar" src="<%= imageSrc %>" />
-	</a>
+<div class="taglib-logo-selector" id="<%= randomNamespace %>taglibLogoSelector">
+	<div class="taglib-logo-selector-content" id="<%= randomNamespace %>taglibLogoSelectorContent">
+		<a class='lfr-change-logo edit-logo-link <%= showBackground ? "show-background" : StringPool.BLANK %>' href="javascript:;">
+			<img alt="<liferay-ui:message key="change-logo" />" class="avatar" id="<%= randomNamespace %>avatar" src="<%= imageSrc %>" />
+		</a>
 
-	<div class="portrait-icons">
-		<liferay-ui:icon
-			cssClass="edit-logo-link"
-			image="edit"
-			label="<%= true %>"
-			message="change"
-			url="javascript:;"
-		/>
+		<div class="portrait-icons">
+			<liferay-ui:icon
+				cssClass="edit-logo-link"
+				image="edit"
+				label="<%= true %>"
+				message="change"
+				url="javascript:;"
+			/>
 
-		<liferay-ui:icon
-			cssClass='<%= "modify-link" + (imageId != 0 ? StringPool.BLANK : " aui-helper-hidden") %>'
-			id="deleteLogoLink"
-			image="delete"
-			label="<%= true %>"
-			url="javascript:;"
-		/>
+			<liferay-ui:icon
+				cssClass='<%= "modify-link" + (imageId != 0 ? StringPool.BLANK : " aui-helper-hidden") %>'
+				id='<%= randomNamespace + "deleteLogoLink" %>'
+				image="delete"
+				label="<%= true %>"
+				url="javascript:;"
+			/>
 
-		<aui:input name="deleteLogo" type="hidden" value="<%= deleteLogo %>" />
+			<aui:input name="deleteLogo" type="hidden" value="<%= deleteLogo %>" />
+		</div>
 	</div>
 </div>
 
-<aui:script use="aui-base">
-	var avatar = A.one('#<portlet:namespace />avatar');
-	var editLogoLink = A.all('.edit-logo-link');
-	var deleteLogoLink = A.one('#<portlet:namespace />deleteLogoLink');
-
-	var deleteLogoInput = A.one('#<portlet:namespace />deleteLogo');
-
-	<c:if test="<%= Validator.isNotNull(logoDisplaySelector) %>">
-		var logoDisplay = A.one('<%= logoDisplaySelector %>');
-	</c:if>
-
-	editLogoLink.on(
-		'click',
-		function(event) {
-			var editLogoWindow = window.open('<%= editLogoURL %>', 'changeLogo', 'directories=no,height=400,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=500');
-
-			editLogoWindow.focus();
+<aui:script use="liferay-logo-selector">
+	new Liferay.LogoSelector(
+		{
+			boundingBox: '#<%= randomNamespace %>taglibLogoSelector',
+			contentBox: '#<%= randomNamespace %>taglibLogoSelectorContent',
+			defaultLogoURL: '<%= defaultLogoURL %>',
+			editLogoURL: '<%= editLogoURL %>',
+			randomNamespace: '<%= randomNamespace %>',
+			logoDisplaySelector: '<%= logoDisplaySelector %>',
+			portletNamespace: '<portlet:namespace />'
 		}
-	);
-
-	if (deleteLogoLink) {
-		deleteLogoLink.on(
-			'click',
-			function(event) {
-				deleteLogoInput.val(true);
-
-				avatar.attr('src', '<%= defaultLogoURL %>');
-
-				<c:if test="<%= Validator.isNotNull(logoDisplaySelector) %>">
-					logoDisplay.attr('src', '<%= defaultLogoURL %>');
-				</c:if>
-
-				deleteLogoLink.hide();
-			}
-		);
-	}
-
-	Liferay.provide(
-		window,
-		'<portlet:namespace />changeLogo',
-		function(newLogoURL) {
-			avatar.attr('src', newLogoURL);
-
-			<c:if test="<%= Validator.isNotNull(logoDisplaySelector) %>">
-				logoDisplay.attr('src', newLogoURL);
-			</c:if>
-
-			deleteLogoInput.val(false);
-			deleteLogoLink.show();
-		},
-		['aui-base']
-	);
+	).render();
 </aui:script>
