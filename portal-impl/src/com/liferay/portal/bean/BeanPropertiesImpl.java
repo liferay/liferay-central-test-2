@@ -69,7 +69,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public boolean getBoolean(Object bean, String param, boolean defaultValue) {
-		Boolean beanValue = null;
+		boolean beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -82,12 +82,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.booleanValue();
-		}
+		return beanValue;
 	}
 
 	public boolean getBooleanSilent(Object bean, String param) {
@@ -97,7 +92,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	public boolean getBooleanSilent(
 		Object bean, String param, boolean defaultValue) {
 
-		Boolean beanValue = null;
+		boolean beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -109,12 +104,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.booleanValue();
-		}
+		return beanValue;
 	}
 
 	public byte getByte(Object bean, String param) {
@@ -122,7 +112,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public byte getByte(Object bean, String param, byte defaultValue) {
-		Byte beanValue = null;
+		byte beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -135,12 +125,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.byteValue();
-		}
+		return beanValue;
 	}
 
 	public byte getByteSilent(Object bean, String param) {
@@ -148,7 +133,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public byte getByteSilent(Object bean, String param, byte defaultValue) {
-		Byte beanValue = null;
+		byte beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -160,12 +145,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.byteValue();
-		}
+		return beanValue;
 	}
 
 	public double getDouble(Object bean, String param) {
@@ -173,7 +153,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public double getDouble(Object bean, String param, double defaultValue) {
-		Double beanValue = null;
+		double beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -186,12 +166,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.doubleValue();
-		}
+		return beanValue;
 	}
 
 	public double getDoubleSilent(Object bean, String param) {
@@ -201,7 +176,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	public double getDoubleSilent(
 		Object bean, String param, double defaultValue) {
 
-		Double beanValue = null;
+		double beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -213,12 +188,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.doubleValue();
-		}
+		return beanValue;
 	}
 
 	public float getFloat(Object bean, String param) {
@@ -226,7 +196,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public float getFloat(Object bean, String param, float defaultValue) {
-		Float beanValue = null;
+		float beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -239,12 +209,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.floatValue();
-		}
+		return beanValue;
 	}
 
 	public float getFloatSilent(Object bean, String param) {
@@ -252,7 +217,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public float getFloatSilent(Object bean, String param, float defaultValue) {
-		Float beanValue = null;
+		float beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -264,12 +229,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.floatValue();
-		}
+		return beanValue;
 	}
 
 	public int getInteger(Object bean, String param) {
@@ -277,7 +237,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public int getInteger(Object bean, String param, int defaultValue) {
-		Integer beanValue = null;
+		int beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -290,12 +250,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.intValue();
-		}
+		return beanValue;
 	}
 
 	public int getIntegerSilent(Object bean, String param) {
@@ -303,7 +258,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public int getIntegerSilent(Object bean, String param, int defaultValue) {
-		Integer beanValue = null;
+		int beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -315,12 +270,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.intValue();
-		}
+		return beanValue;
 	}
 
 	public long getLong(Object bean, String param) {
@@ -328,7 +278,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public long getLong(Object bean, String param, long defaultValue) {
-		Long beanValue = null;
+		long beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -341,12 +291,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.longValue();
-		}
+		return beanValue;
 	}
 
 	public long getLongSilent(Object bean, String param) {
@@ -354,7 +299,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public long getLongSilent(Object bean, String param, long defaultValue) {
-		Long beanValue = null;
+		long beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -366,12 +311,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.longValue();
-		}
+		return beanValue;
 	}
 
 	public Object getObject(Object bean, String param) {
@@ -428,7 +368,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public short getShort(Object bean, String param, short defaultValue) {
-		Short beanValue = null;
+		short beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -441,12 +381,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.shortValue();
-		}
+		return beanValue;
 	}
 
 	public short getShortSilent(Object bean, String param) {
@@ -454,7 +389,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public short getShortSilent(Object bean, String param, short defaultValue) {
-		Short beanValue = null;
+		short beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -466,12 +401,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue.shortValue();
-		}
+		return beanValue;
 	}
 
 	public String getString(Object bean, String param) {
@@ -479,7 +409,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	}
 
 	public String getString(Object bean, String param, String defaultValue) {
-		String beanValue = null;
+		String beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -492,12 +422,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue;
-		}
+		return beanValue;
 	}
 
 	public String getStringSilent(Object bean, String param) {
@@ -507,7 +432,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 	public String getStringSilent(
 		Object bean, String param, String defaultValue) {
 
-		String beanValue = null;
+		String beanValue = defaultValue;
 
 		if (bean != null) {
 			try {
@@ -519,12 +444,7 @@ public class BeanPropertiesImpl implements BeanProperties {
 			}
 		}
 
-		if (beanValue == null) {
-			return defaultValue;
-		}
-		else {
-			return beanValue;
-		}
+		return beanValue;
 	}
 
 	public void setProperties(Object bean, HttpServletRequest request) {
