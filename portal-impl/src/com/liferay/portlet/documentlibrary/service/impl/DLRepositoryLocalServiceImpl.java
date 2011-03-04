@@ -21,10 +21,12 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.util.JCRHook;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.io.unsync.UnsyncBufferedInputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
@@ -62,6 +64,9 @@ import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionCom
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
@@ -1528,6 +1533,8 @@ public class DLRepositoryLocalServiceImpl
 				version, size, WorkflowConstants.STATUS_DRAFT, serviceContext);
 		}
 
+		File file = null;
+
 		if ((is == null) && !updatedFileVersion) {
 			int fetchFailures = 0;
 
@@ -1536,6 +1543,11 @@ public class DLRepositoryLocalServiceImpl
 					is = dlLocalService.getFileAsStream(
 						user.getCompanyId(), dlFileEntry.getDataRepositoryId(),
 						dlFileEntry.getName());
+
+					file = FileUtil.createTempFile(
+						FileUtil.getExtension(title));
+
+					FileUtil.write(file, is);
 				}
 				catch (NoSuchFileException nsfe) {
 					fetchFailures++;
@@ -1554,6 +1566,9 @@ public class DLRepositoryLocalServiceImpl
 					else {
 						throw nsfe;
 					}
+				}
+				catch (IOException ioe) {
+					new SystemException(ioe);
 				}
 			}
 		}
@@ -1580,7 +1595,7 @@ public class DLRepositoryLocalServiceImpl
 
 		// File
 
-		if (is != null) {
+		if ((is != null) || (file != null)) {
 			try {
 				dlLocalService.deleteFile(
 					user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
@@ -1588,6 +1603,16 @@ public class DLRepositoryLocalServiceImpl
 					version);
 			}
 			catch (NoSuchFileException nsfe) {
+			}
+
+			if (file != null) {
+				try {
+					is = new UnsyncBufferedInputStream(
+						new FileInputStream(file));
+				}
+				catch (IOException ioe) {
+					throw new SystemException(ioe);
+				}
 			}
 
 			dlLocalService.updateFile(
