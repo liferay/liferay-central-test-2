@@ -353,7 +353,7 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 											%>
 
 											<liferay-ui:ratings
-												className="<%= MBMessage.class.getName() %>"
+												className="<%= MBDiscussion.class.getName() %>"
 												classPK="<%= message.getMessageId() %>"
 												ratingsEntry="<%= ratingsEntry %>"
 												ratingsStats="<%= ratingStats %>"
