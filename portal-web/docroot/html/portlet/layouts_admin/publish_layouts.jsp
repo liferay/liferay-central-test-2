@@ -41,7 +41,6 @@ else {
 	liveGroup = selGroup;
 }
 
-
 if (liveGroup.isStaged()) {
 	if (liveGroup.isStagedRemotely()) {
 		stagingGroup = liveGroup;
@@ -156,18 +155,6 @@ if (liveGroup.isOrganization()) {
 }
 else if (liveGroup.isUser()) {
 	rootNodeName = user2.getFullName();
-}
-
-String branchingKey = "branchingPublic";
-
-if (privateLayout) {
-	branchingKey = "branchingPrivate";
-}
-
-boolean branchingEnabled = false;
-
-if (liveGroup.isStaged() && GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(branchingKey))) {
-	branchingEnabled = true;
 }
 
 LayoutLister layoutLister = new LayoutLister();
@@ -353,6 +340,20 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 					<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="pages">
 						<%@ include file="/html/portlet/layouts_admin/publish_layouts_select_pages.jspf" %>
 					</liferay-ui:panel>
+
+					<%
+					String branchingKey = "branchingPublic";
+
+					if (privateLayout) {
+						branchingKey = "branchingPrivate";
+					}
+
+					boolean branchingEnabled = false;
+
+					if (liveGroup.isStaged() && GetterUtil.getBoolean(liveGroupTypeSettings.getProperty(branchingKey))) {
+						branchingEnabled = true;
+					}
+					%>
 
 					<c:if test="<%= branchingEnabled %>">
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" persistState="<%= true %>" title="branches">

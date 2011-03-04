@@ -71,7 +71,6 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		long plid = (Long)arguments[2];
 		String portletId = (String)arguments[3];
 
-
 		if (portletId.equals(PortletKeys.LIFERAY_PORTAL) || (plid <= 0)) {
 			return methodInvocation.proceed();
 		}
@@ -82,8 +81,8 @@ public class PortletPreferencesLocalServiceStagingAdvice
 			return methodInvocation.proceed();
 		}
 
-		LayoutRevision layoutRevision =
-			LayoutStagingUtil.getLayoutRevision(layout);
+		LayoutRevision layoutRevision = LayoutStagingUtil.getLayoutRevision(
+			layout);
 
 		arguments[2] = layoutRevision.getLayoutRevisionId();
 

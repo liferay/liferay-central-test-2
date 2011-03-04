@@ -184,8 +184,6 @@ public class LayoutExporter {
 			parameterMap, PortletDataHandlerKeys.THEME);
 		boolean exportThemeSettings = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.THEME_REFERENCE);
-		long layoutSetBranchId = MapUtil.getLong(
-			parameterMap, "layoutSetBranchId");
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export categories " + exportCategories);
@@ -203,8 +201,12 @@ public class LayoutExporter {
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
+		serviceContext.setAttribute("exporting", Boolean.TRUE);
+
+		long layoutSetBranchId = MapUtil.getLong(
+			parameterMap, "layoutSetBranchId");
+
 		serviceContext.setAttribute("layoutSetBranchId", layoutSetBranchId);
-		serviceContext.setAttribute("exporting", true);
 
 		long lastPublishDate = System.currentTimeMillis();
 
