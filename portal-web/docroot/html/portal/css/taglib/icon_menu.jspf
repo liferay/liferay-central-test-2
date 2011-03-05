@@ -80,20 +80,23 @@
 	vertical-align: middle;
 }
 
-.lfr-actions.direction-left.show-arrow .lfr-trigger strong a {
-	background: url(<%= themeImagesPath %>/arrows/08_left.png) no-repeat 0 10%;
-}
-
-.lfr-actions.direction-right.show-arrow .lfr-trigger strong a {
-	background: url(<%= themeImagesPath %>/arrows/08_right.png) no-repeat 98% 12%;
-}
-
-.lfr-actions.direction-down.show-arrow .lfr-trigger strong a {
-	background: url(<%= themeImagesPath %>/arrows/08_down.png) no-repeat 98% 12%;
-}
-
 .lfr-actions.show-arrow .lfr-trigger strong a {
 	background: url(<%= themeImagesPath %>/arrows/04_left.png) no-repeat 5px 50%;
+}
+
+.lfr-actions.show-arrow.direction-left .lfr-trigger strong a {
+	background-image: url(<%= themeImagesPath %>/arrows/08_left.png);
+	background-position: 0 10%;
+}
+
+.lfr-actions.show-arrow.direction-right .lfr-trigger strong a {
+	background-image: url(<%= themeImagesPath %>/arrows/08_right.png);
+	background-position: 98% 12%;
+}
+
+.lfr-actions.show-arrow.direction-down .lfr-trigger strong a {
+	background-image: url(<%= themeImagesPath %>/arrows/08_down.png);
+	background-position: 98% 12%;
 }
 
 .lfr-actions.direction-right .lfr-trigger strong a {
