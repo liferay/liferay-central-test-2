@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author Edward Han
@@ -29,20 +30,20 @@ public abstract class BaseChannelImpl implements Channel {
 	public void cleanUp() throws ChannelException {
 		long currentTime = System.currentTimeMillis();
 
-		synchronized (this) {
-			if (currentTime > _nextCleanUpTime) {
-				try {
-					doCleanUp();
-				}
-				catch (ChannelException ce) {
-					throw ce;
-				}
-				catch (Exception e) {
-					throw new ChannelException(e);
-				}
-			}
+		long nextCleanUpTime = _nextCleanUpTime.get();
 
-			_nextCleanUpTime = currentTime + _cleanUpInterval;
+		if ((currentTime > nextCleanUpTime) &&
+			_nextCleanUpTime.compareAndSet(
+				nextCleanUpTime, currentTime + _cleanUpInterval)) {
+			try {
+				doCleanUp();
+			}
+			catch (ChannelException ce) {
+				throw ce;
+			}
+			catch (Exception e) {
+				throw new ChannelException(e);
+			}
 		}
 	}
 
@@ -119,7 +120,7 @@ public abstract class BaseChannelImpl implements Channel {
 		new ConcurrentHashSet<ChannelListener>();
 	private long _cleanUpInterval;
 	private long _companyId;
-	private long _nextCleanUpTime;
+	private AtomicLong _nextCleanUpTime = new AtomicLong();
 	private long _userId;
 
 }

@@ -39,9 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author Edward Han
@@ -64,11 +62,9 @@ public class ChannelImpl extends BaseChannelImpl {
 	public void confirmDelivery(Collection<String> notificationEventUuids)
 		throws ChannelException {
 
-		Lock writeLock = _readWriteLock.writeLock();
+		_reentrantLock.lock();
 
 		try {
-			writeLock.lock();
-
 			for (String notificationEventUuid : notificationEventUuids) {
 				_unconfirmedNotificationEvents.remove(notificationEventUuid);
 			}
@@ -81,18 +77,16 @@ public class ChannelImpl extends BaseChannelImpl {
 				"Unable to confirm delivery for user " + getUserId() , e);
 		}
 		finally {
-			writeLock.unlock();
+			_reentrantLock.unlock();
 		}
 	}
 
 	public void confirmDelivery(String notificationEventUuid)
 		throws ChannelException {
 
-		Lock writeLock = _readWriteLock.writeLock();
+		_reentrantLock.lock();
 
 		try {
-			writeLock.lock();
-
 			NotificationEvent notificationEvent =
 				_unconfirmedNotificationEvents.remove(notificationEventUuid);
 
@@ -106,29 +100,25 @@ public class ChannelImpl extends BaseChannelImpl {
 				"Uanble to confirm delivery for " + notificationEventUuid , e);
 		}
 		finally {
-			writeLock.unlock();
+			_reentrantLock.unlock();
 		}
 	}
 
 	public void flush() {
-		Lock writeLock = _readWriteLock.writeLock();
+		_reentrantLock.lock();
 
 		try {
-			writeLock.lock();
-
 			_notificationEvents.clear();
 		}
 		finally {
-			writeLock.unlock();
+			_reentrantLock.unlock();
 		}
 	}
 
 	public void flush(long timestamp) {
-		Lock writeLock = _readWriteLock.writeLock();
+		_reentrantLock.lock();
 
 		try {
-			writeLock.lock();
-
 			Iterator<NotificationEvent> itr = _notificationEvents.iterator();
 
 			while (itr.hasNext()) {
@@ -140,18 +130,16 @@ public class ChannelImpl extends BaseChannelImpl {
 			}
 		}
 		finally {
-			writeLock.unlock();
+			_reentrantLock.unlock();
 		}
 	}
 
 	public List<NotificationEvent> getNotificationEvents(boolean flush)
 		throws ChannelException {
 
-		Lock writeLock = _readWriteLock.writeLock();
+		_reentrantLock.lock();
 
 		try {
-			writeLock.lock();
-
 			return doGetNotificationEvents(flush);
 		}
 		catch (ChannelException ce) {
@@ -161,11 +149,14 @@ public class ChannelImpl extends BaseChannelImpl {
 			throw new ChannelException(e);
 		}
 		finally {
-			writeLock.unlock();
+			_reentrantLock.unlock();
 		}
 	}
 
 	public void init() throws ChannelException {
+
+		_reentrantLock.lock();
+
 		try {
 			doInit();
 		}
@@ -176,20 +167,21 @@ public class ChannelImpl extends BaseChannelImpl {
 			throw new ChannelException(
 				"Unable to init channel " + getUserId(), e);
 		}
+		finally {
+			_reentrantLock.unlock();
+		}
 	}
 
 	public void removeTransientNotificationEvents(
 		Collection<NotificationEvent> notificationEvents) {
 
-		Lock writeLock = _readWriteLock.writeLock();
+		_reentrantLock.lock();
 
 		try {
-			writeLock.lock();
-
 			_notificationEvents.removeAll(notificationEvents);
 		}
 		finally {
-			writeLock.unlock();
+			_reentrantLock.unlock();
 		}
 	}
 
@@ -199,11 +191,9 @@ public class ChannelImpl extends BaseChannelImpl {
 		Set<String> notificationEventUuidsSet = new HashSet<String>(
 			notificationEventUuids);
 
-		Lock writeLock = _readWriteLock.writeLock();
+		_reentrantLock.lock();
 
 		try {
-			writeLock.lock();
-
 			Iterator<NotificationEvent> itr = _notificationEvents.iterator();
 
 			while (itr.hasNext()) {
@@ -217,18 +207,16 @@ public class ChannelImpl extends BaseChannelImpl {
 			}
 		}
 		finally {
-			writeLock.unlock();
+			_reentrantLock.unlock();
 		}
 	}
 
 	public void sendNotificationEvent(NotificationEvent notificationEvent)
 		throws ChannelException {
 
-		Lock writeLock = _readWriteLock.writeLock();
+		_reentrantLock.lock();
 
 		try {
-			writeLock.lock();
-
 			long currentTime = System.currentTimeMillis();
 
 			storeNotificationEvent(notificationEvent, currentTime);
@@ -242,7 +230,7 @@ public class ChannelImpl extends BaseChannelImpl {
 			throw new ChannelException("Unable to send event", e);
 		}
 		finally {
-			writeLock.unlock();
+			_reentrantLock.unlock();
 		}
 
 		notifyChannelListeners();
@@ -252,11 +240,9 @@ public class ChannelImpl extends BaseChannelImpl {
 			Collection<NotificationEvent> notificationEvents)
 		throws ChannelException {
 
-		Lock writeLock = _readWriteLock.writeLock();
+		_reentrantLock.lock();
 
 		try {
-			writeLock.lock();
-
 			long currentTime = System.currentTimeMillis();
 
 			List<NotificationEvent> persistedNotificationEvents =
@@ -277,17 +263,17 @@ public class ChannelImpl extends BaseChannelImpl {
 			throw new ChannelException("Unable to send event", e);
 		}
 		finally {
-			writeLock.unlock();
+			_reentrantLock.unlock();
 		}
 
 		notifyChannelListeners();
 	}
 
 	protected void doCleanUp() throws Exception {
-		Lock lock = _readWriteLock.writeLock();
+
+		_reentrantLock.lock();
 
 		try {
-			lock.lock();
 
 			long currentTime = System.currentTimeMillis();
 
@@ -331,7 +317,7 @@ public class ChannelImpl extends BaseChannelImpl {
 				"Unable to clean up channel " + getUserId(), e);
 		}
 		finally {
-			lock.unlock();
+			_reentrantLock.unlock();
 		}
 	}
 
@@ -484,7 +470,7 @@ public class ChannelImpl extends BaseChannelImpl {
 
 	private TreeSet<NotificationEvent> _notificationEvents =
 		new TreeSet<NotificationEvent>(new NotificationEventComparator());
-	private ReadWriteLock _readWriteLock = new ReentrantReadWriteLock();
+	private ReentrantLock _reentrantLock = new ReentrantLock();
 	private Map<String, NotificationEvent> _unconfirmedNotificationEvents =
 		new LinkedHashMap<String, NotificationEvent>();
 
