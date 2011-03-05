@@ -239,7 +239,7 @@ select {
 	height: 16px;
 	position: absolute;
 	right: 14px;
-	text-indent: -9999em;
+	text-indent: -9999px;
 	top: 14px;
 	width: 16px;
 }
@@ -558,7 +558,7 @@ select {
 	padding-left: 0;
 	position: absolute;
 	right: 10px;
-	text-indent: -9999em;
+	text-indent: -9999px;
 	top: 8px;
 	width: 19px;
 }

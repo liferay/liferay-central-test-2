@@ -212,7 +212,7 @@ StringBundler pageTopSB = (StringBundler)request.getAttribute(WebKeys.PAGE_TOP);
 				display: block;
 				font-size: 0;
 				height: <%= themeDisplay.getCompanyLogoHeight() %>px;
-				text-indent: -9999em;
+				text-indent: -9999px;
 				width: <%= themeDisplay.getCompanyLogoWidth() %>px;
 			}
 		</c:if>
