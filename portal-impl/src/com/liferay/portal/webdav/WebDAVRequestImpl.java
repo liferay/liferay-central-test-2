@@ -94,6 +94,19 @@ public class WebDAVRequestImpl implements WebDAVRequest {
 		return _permissionChecker;
 	}
 
+	public boolean isAppleDoubleRequest() {
+		String[] pathArray = getPathArray();
+
+		String name = WebDAVUtil.getResourceName(pathArray);
+
+		if (isMac() && name.startsWith(_APPLE_DOUBLE_PREFIX)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isLitmus() {
 		return _userAgent.contains("litmus");
 	}
@@ -106,6 +119,8 @@ public class WebDAVRequestImpl implements WebDAVRequest {
 		return _userAgent.contains(
 			"Microsoft Data Access Internet Publishing Provider");
 	}
+
+	public static final String _APPLE_DOUBLE_PREFIX = "._";
 
 	private WebDAVStorage _storage;
 	private HttpServletRequest _request;

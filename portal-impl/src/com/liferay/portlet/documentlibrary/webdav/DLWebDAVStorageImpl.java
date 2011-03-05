@@ -219,7 +219,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			Resource resource = getResource(webDavRequest);
 
 			if (resource == null) {
-				return HttpServletResponse.SC_NOT_FOUND;
+				if (webDavRequest.isAppleDoubleRequest()) {
+					return HttpServletResponse.SC_NO_CONTENT;
+				}
+				else {
+					return HttpServletResponse.SC_NOT_FOUND;
+				}
 			}
 
 			Object model = resource.getModel();
@@ -762,9 +767,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				DLAppServiceUtil.unlockFileEntry(
 					fileEntry.getFileEntryId(), token);
 
-				String title = fileEntry.getTitle();
-
-				if (title.startsWith(_APPLE_DOUBLE_PREFIX)) {
+				if (webDavRequest.isAppleDoubleRequest()) {
 					DLAppServiceUtil.deleteFileEntry(
 						fileEntry.getFileEntryId());
 				}
@@ -993,8 +996,6 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 		return resource;
 	}
-
-	public static final String _APPLE_DOUBLE_PREFIX = "._";
 
 	private static Log _log = LogFactoryUtil.getLog(DLWebDAVStorageImpl.class);
 

@@ -46,6 +46,8 @@ public interface WebDAVRequest {
 
 	public PermissionChecker getPermissionChecker();
 
+	public boolean isAppleDoubleRequest();
+
 	public boolean isLitmus();
 
 	public boolean isMac();
