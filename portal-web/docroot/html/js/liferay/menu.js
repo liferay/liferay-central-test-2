@@ -209,7 +209,7 @@ AUI().add(
 					var windowWidth = windowRegion.width + scrollLeft;
 
 					if (align == 'auto') {
-						if (direction == "down") {
+						if (direction == 'down') {
 							offset.top += triggerHeight;
 						}
 
@@ -241,7 +241,7 @@ AUI().add(
 							offset.left += (triggerWidth + 2);
 						}
 
-						if (direction == "down") {
+						if (direction == 'down') {
 							offset.top += triggerHeight;
 						}
 						else {
