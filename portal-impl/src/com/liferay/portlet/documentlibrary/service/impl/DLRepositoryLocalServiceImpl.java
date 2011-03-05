@@ -1550,7 +1550,7 @@ public class DLRepositoryLocalServiceImpl
 					FileUtil.write(file, is);
 				}
 				catch (IOException ioe) {
-					new SystemException(ioe);
+					throw new SystemException(ioe);
 				}
 				catch (NoSuchFileException nsfe) {
 					fetchFailures++;
