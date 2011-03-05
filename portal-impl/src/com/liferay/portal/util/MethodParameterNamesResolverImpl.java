@@ -33,7 +33,7 @@ import jodd.paramo.ParamoException;
 public class MethodParameterNamesResolverImpl
 	implements MethodParameterNamesResolver {
 
-	public String[] resolveParamemterNames(Method method) {
+	public String[] resolveParameterNames(Method method) {
 		String[] parameterNames = _parameterNames.get(method);
 
 		if (parameterNames == null) {
