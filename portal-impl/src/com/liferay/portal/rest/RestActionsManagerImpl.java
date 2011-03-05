@@ -14,105 +14,129 @@
 
 package com.liferay.portal.rest;
 
+import com.liferay.portal.kernel.rest.PathMacro;
+import com.liferay.portal.kernel.rest.RestActionConfig;
+import com.liferay.portal.kernel.rest.RestActionConfigSet;
 import com.liferay.portal.kernel.rest.RestActionsManager;
 import com.liferay.portal.kernel.util.BinarySearch;
 import com.liferay.portal.kernel.util.SortedArrayList;
-import jodd.util.ReflectUtil;
 
 import java.lang.reflect.Method;
 
-public class RestActionsManagerImpl implements
-	RestActionsManager<RestActionConfig> {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import jodd.util.ReflectUtil;
+
+/**
+ * @author Igor Spasic
+ */
+public class RestActionsManagerImpl implements RestActionsManager {
 
 	public RestActionsManagerImpl() {
-		_list = new SortedArrayList<RestActionConfigSet>();
-		_listMatch = new ActionPathChunksBinarySearch();
-		_listBS = BinarySearch.forList(_list);
+		_pathChunksBinarySearch = new PathChunksBinarySearch();
+		_restActionConfigSets = new SortedArrayList<RestActionConfigSet>();
+		_restActionConfigSetsBinarySearch = BinarySearch.forList(
+			_restActionConfigSets);
 	}
 
-	public RestActionConfig lookup(String[] pathChunks, String method) {
+	public RestActionConfig getRestActionConfig(
+		String[] pathChunks, String method) {
 
 		int low = 0;
-		int high = _list.size() - 1;
-		int macroNdx = 0;
+		int high = _restActionConfigSets.size() - 1;
 
-		for (int deep = 0; deep < pathChunks.length; deep++) {
-			String chunk = pathChunks[deep];
-			_listMatch.deep = deep;
+		int pathMacroIndex = 0;
 
-			int nextLow = _listMatch.findFirst(chunk, low, high);
+		for (int depth = 0; depth < pathChunks.length; depth++) {
+			String pathChunk = pathChunks[depth];
+
+			_pathChunksBinarySearch._depth = depth;
+
+			int nextLow = _pathChunksBinarySearch.findFirst(
+				pathChunk, low, high);
 
 			if (nextLow < 0) {
-				int matched = _matchChunk(chunk, deep, macroNdx, low, high);
-				if (matched == -1) {
+				int pathChunkndex = getPathChunkIndex(
+					pathChunk, depth, pathMacroIndex, low, high);
+
+				if (pathChunkndex == -1) {
 					low = nextLow;
+
 					break;
 				}
 				else {
-					macroNdx++;
-					low = matched;
-					high = matched;
+					pathMacroIndex++;
+
+					low = pathChunkndex;
+					high = pathChunkndex;
 				}
 			}
 			else {
 				low = nextLow;
+
 				if (high > low) {
-					high = _listMatch.findLast(chunk, low, high);
+					high = _pathChunksBinarySearch.findLast(
+						pathChunk, low, high);
 				}
 			}
 		}
+
 		if (low < 0) {
 			return null;
 		}
 
-		RestActionConfigSet set = _list.get(low);
-		RestActionConfig cfg = set.lookup(method);
+		RestActionConfigSet restActionConfigSet = _restActionConfigSets.get(
+			low);
 
-		if (cfg == null) {
+		RestActionConfig restActionConfig =
+			restActionConfigSet.getRestActionConfig(method);
+
+		if (restActionConfig == null) {
 			return null;
 		}
-		if (set.getActionPathChunks().length != pathChunks.length) {
+
+		String[] restActionConfigSetPathChunks =
+			restActionConfigSet.getPathChunks();
+
+		if (restActionConfigSetPathChunks.length != pathChunks.length) {
 			return null;
 		}
-		return cfg;
+
+		return restActionConfig;
 	}
 
-
 	public Object[] prepareParameters(
-		String[] pathChunks, RestActionConfig config) {
+		String[] pathChunks, RestActionConfig restActionConfig) {
 
-		String[] parameterNames = config.getParameterNames();
-
-		Class[] parameterTypes = config.getParameterTypes();
-
-		PathMacro[] macros = config.getActionPathMacros();
+		String[] parameterNames = restActionConfig.getParameterNames();
+		Class<?>[] parameterTypes = restActionConfig.getParameterTypes();
+		PathMacro[] pathMacros = restActionConfig.getPathMacros();
 
 		Object[] parameters = new Object[parameterNames.length];
 
-		for (PathMacro macro : macros) {
-			String macroName = macro.getName();
+		for (PathMacro pathMacro : pathMacros) {
+			int index = pathMacro.getIndex();
 
-			int macroIndex = macro.getIndex();
-
-			if (macroIndex >= pathChunks.length) {
+			if (index >= pathChunks.length) {
 				continue;
 			}
 
-			String value = pathChunks[macroIndex];
+			String value = pathChunks[index];
 
 			for (int i = 0; i < parameterNames.length; i++) {
-
 				String parameterName = parameterNames[i];
 
-				Class destinationType = parameterTypes[i];
-
-				if (parameterName.equals(macroName)) {
-
-					Object paramValue =
-						ReflectUtil.castType(value, destinationType);
-
-					parameters[i] = paramValue;
+				if (!parameterName.equals(pathMacro.getName())) {
+					continue;
 				}
+
+				Class<?> parameterType = parameterTypes[i];
+
+				Object parameterValue = ReflectUtil.castType(
+					value, parameterType);
+
+				parameters[i] = parameterValue;
 			}
 		}
 
@@ -120,86 +144,108 @@ public class RestActionsManagerImpl implements
 	}
 
 	public void registerRestAction(
-		Class actionClass, Method actionMethod, String path, String method) {
+		Class<?> actionClass, Method actionMethod, String path, String method) {
 
-		RestActionConfig cfg =
-			new RestActionConfig(actionClass, actionMethod, path, method);
+		RestActionConfig restActionConfig = new RestActionConfig();
 
-		RestActionConfigSet set = new RestActionConfigSet(cfg.getActionPath());
+		restActionConfig.setActionClass(actionClass);
+		restActionConfig.setActionMethod(actionMethod);
+		restActionConfig.setPath(path);
+		restActionConfig.setMethod(method);
 
-		int ndx = _listBS.find(set);
+		RestActionConfigSet restActionConfigSet = new RestActionConfigSet();
 
-		if (ndx < 0) {
-			_list.add(set);
+		restActionConfigSet.setPath(restActionConfig.getPath());
+
+		int index = _restActionConfigSetsBinarySearch.find(restActionConfigSet);
+
+		if (index < 0) {
+			_restActionConfigSets.add(restActionConfigSet);
 		}
 		else {
-			set = _list.get(ndx);
+			restActionConfigSet = _restActionConfigSets.get(index);
 		}
 
-		set.add(cfg);
+		restActionConfigSet.addRestActionConfig(restActionConfig);
 	}
 
-	private int _matchChunk(
-		String chunk, int chunkNdx, int macroNdx, int low, int high) {
+	protected int getPathChunkIndex(
+		String pathChunk, int depth, int pathMacroIndex, int low, int high) {
 
 		for (int i = low; i <= high; i++) {
-			RestActionConfigSet set = _list.get(i);
+			RestActionConfigSet restActionConfigSet = _restActionConfigSets.get(
+				i);
 
-			if (macroNdx >= set.getActionPathMacros().length) {
-				continue;
-			}
-			PathMacro macro = set.getActionPathMacros()[macroNdx];
-			if (macro.getIndex() != chunkNdx) {
-				continue;
-			}
+			PathMacro[] pathMacros = restActionConfigSet.getPathMacros();
 
-			if (chunk.startsWith(macro.getOffsetLeft()) == false) {
+			if (pathMacroIndex >= pathMacros.length) {
 				continue;
 			}
 
-			if (chunk.endsWith(macro.getOffsetRight()) == false) {
+			PathMacro pathMacro = pathMacros[pathMacroIndex];
+
+			if (pathMacro.getIndex() != depth) {
 				continue;
 			}
 
-			if (macro.getRegexPattern() != null) {
-				String value = chunk.substring(
-					macro.getOffsetLeft().length(),
-					chunk.length() - macro.getOffsetRight().length());
+			if (!pathChunk.startsWith(pathMacro.getOffsetLeft())) {
+				continue;
+			}
 
-				if (macro.getRegexPattern().matcher(value).matches() == false) {
+			if (!pathChunk.endsWith(pathMacro.getOffsetRight())) {
+				continue;
+			}
+
+			if (pathMacro.getPattern() != null) {
+				String offsetLeft = pathMacro.getOffsetLeft();
+				String offsetRight = pathMacro.getOffsetRight();
+
+				String value = pathChunk.substring(
+					offsetLeft.length(),
+					pathChunk.length() - offsetRight.length());
+
+				Pattern pattern = pathMacro.getPattern();
+
+				Matcher matcher = pattern.matcher(value);
+
+				if (!matcher.matches()) {
 					continue;
 				}
 			}
 
 			return i;
 		}
+
 		return -1;
 	}
 
+	private PathChunksBinarySearch _pathChunksBinarySearch;
+	private SortedArrayList<RestActionConfigSet> _restActionConfigSets;
+	private BinarySearch<RestActionConfigSet> _restActionConfigSetsBinarySearch;
 
-	private class ActionPathChunksBinarySearch extends BinarySearch<String> {
+	private class PathChunksBinarySearch extends BinarySearch<String> {
 
-		@Override
 		protected int compare(int index, String element) {
-			return get(index, deep).compareTo(element);
+			String pathChunk = get(index, _depth);
+
+			return pathChunk.compareTo(element);
 		}
 
-		protected String get(int index, int deep) {
-			return _list.get(index).getActionPathChunks()[deep];
+		protected String get(int index, int depth) {
+			RestActionConfigSet restActionConfigSet =
+				_restActionConfigSets.get(index);
+
+			String[] pathChunks = restActionConfigSet.getPathChunks();
+
+			return pathChunks[depth];
 		}
 
-		@Override
 		protected int getLastIndex() {
-			return _list.size() - 1;
+			return _restActionConfigSets.size() - 1;
 		}
 
-		protected int deep;
+		private int _depth;
+
 	}
-
-	private final SortedArrayList<RestActionConfigSet> _list;
-
-	private final BinarySearch<RestActionConfigSet> _listBS;
-
-	private final ActionPathChunksBinarySearch _listMatch;
 
 }

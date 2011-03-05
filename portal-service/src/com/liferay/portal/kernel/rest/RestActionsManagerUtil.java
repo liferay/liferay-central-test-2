@@ -15,35 +15,38 @@
 package com.liferay.portal.kernel.rest;
 
 import java.lang.reflect.Method;
+
+/**
+ * @author Igor Spasic
+ */
 public class RestActionsManagerUtil {
 
 	public static RestActionsManager getRestActionsManager() {
-		return _restRestActionsManager;
+		return _restActionsManager;
 	}
 
 	public static Object lookup(String[] pathChunks, String method) {
-
-		return getRestActionsManager().lookup(pathChunks, method);
+		return getRestActionsManager().getRestActionConfig(pathChunks, method);
 	}
 
 	public static Object[] prepareParameters(
-		String[] pathChunks, Object config) {
+		String[] pathChunks, RestActionConfig restActionConfig) {
 
-		return getRestActionsManager().prepareParameters(pathChunks, config);
+		return getRestActionsManager().prepareParameters(
+			pathChunks, restActionConfig);
 	}
 
 	public static void registerRestAction(
-		Class actionClass, Method actionMethod, String path, String method) {
+		Class<?> actionClass, Method actionMethod, String path, String method) {
 
 		getRestActionsManager().registerRestAction(
 			actionClass, actionMethod, path, method);
 	}
 
 	public void setRestActionsManager(RestActionsManager restActionsManager) {
-
-		_restRestActionsManager = restActionsManager;
+		_restActionsManager = restActionsManager;
 	}
 
-	private static RestActionsManager _restRestActionsManager;
+	private static RestActionsManager _restActionsManager;
 
 }

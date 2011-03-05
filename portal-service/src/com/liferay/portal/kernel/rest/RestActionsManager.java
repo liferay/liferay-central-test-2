@@ -15,13 +15,19 @@
 package com.liferay.portal.kernel.rest;
 
 import java.lang.reflect.Method;
-public interface RestActionsManager<T> {
 
-	public T lookup(String[] pathChunks, String method);
+/**
+ * @author Igor Spasic
+ */
+public interface RestActionsManager {
 
-	public Object[] prepareParameters(String[] pathChunks, T config);
+	public RestActionConfig getRestActionConfig(
+		String[] pathChunks, String method);
+
+	public Object[] prepareParameters(
+		String[] pathChunks, RestActionConfig restActionConfig);
 
 	public void registerRestAction(
-		Class actionClass, Method actionMethod, String path, String method);
+		Class<?> actionClass, Method actionMethod, String path, String method);
 
 }
