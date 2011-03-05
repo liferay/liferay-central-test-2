@@ -140,7 +140,7 @@ String[][] categorySections = {mainSections};
 
 							popUp.show();
 
-							content.one('input[type=text]').focus();
+							Liferay.Util.focusFormField(content.one('input:text'));
 						},
 						icon: 'circle-plus',
 						label: '<liferay-ui:message key="add-page" />'
