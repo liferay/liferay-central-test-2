@@ -1549,6 +1549,9 @@ public class DLRepositoryLocalServiceImpl
 
 					FileUtil.write(file, is);
 				}
+				catch (IOException ioe) {
+					new SystemException(ioe);
+				}
 				catch (NoSuchFileException nsfe) {
 					fetchFailures++;
 
@@ -1566,9 +1569,6 @@ public class DLRepositoryLocalServiceImpl
 					else {
 						throw nsfe;
 					}
-				}
-				catch (IOException ioe) {
-					new SystemException(ioe);
 				}
 			}
 		}

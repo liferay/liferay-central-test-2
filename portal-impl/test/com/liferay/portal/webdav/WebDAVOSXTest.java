@@ -100,7 +100,8 @@ public class WebDAVOSXTest extends BaseWebDAVTestCase {
 
 			unlock(_TEST_META_NAME);
 
-			assertCode(HttpServletResponse.SC_NO_CONTENT,
+			assertCode(
+				HttpServletResponse.SC_NO_CONTENT,
 				serviceDelete(_TEST_META_NAME));
 		}
 
