@@ -16,45 +16,6 @@
 
 <%@ include file="/html/portlet/dockbar/init.jsp" %>
 
-<style type="text/css">
-	.layout-revision-container-root {
-		margin: 0 0 0 2em;
-	}
-
-	.layout-revision-container-root ul.layout-revision-container {
-		margin: 0 0 0 .5em;
-		padding: 0;
-	}
-
-	.layout-revision-container-root li.layout-revision {
-		list-style-image: url('<%= themeDisplay.getPathThemeImages() %>/navigation/bullet.png');
-		margin: 1px 0;
-		padding: 6px 0;
-	}
-
-	.layout-revision-container-root li.layout-revision.current {
-		list-style-image: url('<%= themeDisplay.getPathThemeImages() %>/arrows/01_right.png');
-	}
-
-	.layout-revision-container-root li.layout-revision.current.head {
-		list-style-image: url('<%= themeDisplay.getPathThemeImages() %>/arrows/02_right.png');
-	}
-
-	.layout-revision-container-root li.layout-revision.head {
-		list-style-image: url('<%= themeDisplay.getPathThemeImages() %>/arrows/02_plus.png');
-	}
-
-	.layout-revision-container-root li.layout-revision a.selection-handle {
-	}
-
-	.layout-revision-container-root li.layout-revision a.user-handle {
-	}
-
-	.lfr-menu-list {
-		z-index: 1002;
-	}
-</style>
-
 <%
 long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
 
@@ -87,11 +48,11 @@ public String _getGraph(PageContext pageContext, long layoutRevisionId, List<Lay
 		sb.append("<li class=\"layout-revision");
 
 		if (layoutRevision.getLayoutRevisionId() == layoutRevisionId) {
-			sb.append(" current");
+			sb.append(" layout-revision-current");
 		}
 
 		if (layoutRevision.isHead()) {
-			sb.append(" head");
+			sb.append(" layout-revision-head");
 		}
 
 		sb.append("\"><a class=\"selection-handle\" href=\"#\" data-layoutRevisionId=\"");

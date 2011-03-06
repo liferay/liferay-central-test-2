@@ -35,7 +35,7 @@ if (layoutSetBranches.contains(layoutSetBranch)) {
 }
 %>
 
-<div data-namespace="<portlet:namespace />">
+<div id="<portlet:namespace />mergeLayoutSetBranch">
 	<portlet:actionURL var="mergeLayoutSetBranchURL">
 		<portlet:param name="struts_action" value="/layouts_admin/edit_layout_set_branch" />
 	</portlet:actionURL>

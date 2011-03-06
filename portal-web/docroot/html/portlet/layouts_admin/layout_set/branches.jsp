@@ -84,6 +84,10 @@ LayoutSetBranch layoutSetBranch = LayoutSetBranchLocalServiceUtil.getUserLayoutS
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
 </liferay-ui:search-container>
 
-<aui:script position="inline" use="aui-dialog,aui-io-request,staging">
-	Liferay.Staging.Branching.init({namespace: '<portlet:namespace />'});
+<aui:script position="inline" use="liferay-staging">
+	Liferay.Staging.Branching.init(
+		{
+			namespace: '<portlet:namespace />'
+		}
+	);
 </aui:script>

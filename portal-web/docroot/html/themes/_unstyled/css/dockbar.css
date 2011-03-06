@@ -61,6 +61,29 @@ html > .lfr-dockbar-pinned {
 .dockbar .impersonating-user .user-links a {
 }
 
+/* ---------- Staging Dockbar ---------- */
+
+.layout-revision-container {
+}
+
+.layout-revision-container-root {
+}
+
+.layout-revision {
+}
+
+.layout-revision-current {
+}
+
+.layout-revision-head {
+}
+
+.layout-revision-current.layout-revision-head {
+}
+
+.layout-revision-container .lfr-menu-list {
+}
+
 /* ---------- Menus ---------- */
 
 .aui-dockbarmenu-hidden {

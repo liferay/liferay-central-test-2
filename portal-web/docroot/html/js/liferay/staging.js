@@ -1,6 +1,8 @@
 AUI().add(
-	'staging',
+	'liferay-staging',
 	function(A) {
+		var Lang = A.Lang;
+
 		var Staging = {};
 
 		var Branching = {
@@ -13,48 +15,66 @@ AUI().add(
 			addBranch: function() {
 				var instance = this;
 
-				var dialog = instance._addBranchDialog;
+				var branchDialog = instance._getBranchDialog();
 
-				if (!dialog) {
-					var content = A.one('#addBranch');
+				branchDialog.show();
+			},
 
-					dialog = new A.Dialog(
+			mergeBranch: function(options) {
+				var instance = this;
+
+				var mergeDialog = instance._getMergeDialog();
+				var mergeDialogIO = mergeDialog.io;
+
+				var data = mergeDialogIO.get('data');
+
+				data.groupId = options.groupId;
+				data.privateLayout = options.privateLayout;
+				data.layoutSetBranchId = options.layoutSetBranchId;
+
+				mergeDialogIO.set('data', data);
+				mergeDialogIO.start();
+
+				mergeDialog.show();
+			},
+
+			_getBranchDialog: function() {
+				var instance = this;
+
+				var branchDialog = instance._branchDialog;
+
+				if (!branchDialog) {
+					var namespace = instance._namespace;
+
+					branchDialog = new A.Dialog(
 						{
 							align: {
-								node: null,
 								points: ['tc', 'tc']
 							},
-							bodyContent: content.show(),
+							bodyContent: A.one('#' + namespace + 'addBranch').show(),
 							title: Liferay.Language.get('add-branch'),
 							modal: true,
 							width: 530
 						}
 					).render();
 
-					dialog.move(dialog.get('x'), dialog.get('y') + 100);
+					branchDialog.move(dialog.get('x'), dialog.get('y') + 100);
 
-					instance._addBranchDialog = dialog;
+					instance._branchDialog = branchDialog;
 				}
 
-				dialog.show();
+				return branchDialog;
 			},
 
-			mergeBranch: function(options) {
+			_getMergeDialog: function() {
 				var instance = this;
 
-				var groupId = options.groupId;
-				var privateLayout = options.privateLayout;
-				var layoutSetBranchId = options.layoutSetBranchId;
+				var mergeDialog = instance._mergeDialog;
 
-				var url = themeDisplay.getPathMain() + '/group_pages/merge_layout_set_branch?groupId=' + groupId + '&privateLayout=' + privateLayout + '&layoutSetBranchId=' + layoutSetBranchId;
-
-				var dialog = instance._mergeBranchDialog;
-
-				if (!dialog) {
-					dialog = new A.Dialog(
+				if (!mergeDialog) {
+					mergeDialog = new A.Dialog(
 						{
 							align: {
-								node: null,
 								points: ['tc', 'tc']
 							},
 							draggable: true,
@@ -65,158 +85,175 @@ AUI().add(
 					).plug(
 						A.Plugin.IO,
 						{
-							autoLoad:false,
+							autoLoad: false,
 							data: {
 								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 								p_l_id: themeDisplay.getPlid(),
 								redirect: Liferay.currentURL
 							},
-							uri: url
+							uri: themeDisplay.getPathMain() + '/group_pages/merge_layout_set_branch'
 						}
 					).render();
 
-					dialog.move(dialog.get('x'), dialog.get('y') + 100);
+					mergeDialog.move(mergeDialog.get('x'), mergeDialog.get('y') + 100);
 
-					dialog.bodyNode.delegate(
-						'click',
-						instance._mergeBranch,
-						'a.layout-set-branch'
-					);
+					mergeDialog.bodyNode.delegate('click', instance._onMergeBranch, 'a.layout-set-branch');
 
-					instance._mergeBranchDialog = dialog;
+					instance._mergeDialog = mergeDialog;
 				}
 
-				dialog.io.set('uri', url);
-				dialog.io.start();
-				dialog.show();
+				return mergeDialog;
 			},
 
-			_mergeBranch: function(event) {
+			_onMergeBranch: function(event) {
 				var instance = this;
 
 				var node = event.currentTarget;
 
-				var addBranch = A.one('#addBranch');
+				var namespace = instance._namespace;
 
-				var namespace = addBranch.attr('data-namespace');
+				var addBranch = A.one('#' + namespace + 'addBranch');
 
 				var mergeLayoutSetBranchId = node.attr('data-layoutSetBranchId');
 				var mergeLayoutSetBranchName = node.attr('data-layoutSetBranchName');
 
 				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-merge-changes-from-branch') + ' ' + mergeLayoutSetBranchName)) {
-					window.document[namespace + 'fm4'][namespace + 'mergeLayoutSetBranchId'].value = mergeLayoutSetBranchId;
+					var form = A.one('#' + namespace + 'fm4');
 
-					window.submitForm(window.document[namespace + 'fm4']);
+					form.one('#' + namespace + 'mergeLayoutSetBranchId').val(mergeLayoutSetBranchId);
+
+					submitForm(form);
 				}
 			}
 		};
 
 		var Dockbar = {
-			init: function() {
+			init: function(options) {
 				var instance = this;
 
-				var dockBar = A.one('#stagingDockbar');
+				var namespace = options.namespace;
 
-				if (dockBar) {
-					instance.dockBar = dockBar;
+				var dockBar = A.one('#' + namespace + 'dockbarStaging');
 
-					instance._namespace = dockBar.attr('data-namespace');
+				var layoutSetBranchId = A.one('#' + namespace + 'layoutSetBranchId');
+
+				if (layoutSetBranchId) {
+					layoutSetBranchId.on('change', instance._onLayoutSetBranchId, instance);
 				}
 
-				var namespace = instance._namespace;
-
-				var selectBranch = A.one('#' + instance._namespace + 'layoutSetBranchId');
-
-				if (selectBranch) {
-					selectBranch.on(
-						'change',
-						function(event) {
-							if (confirm(Liferay.Language.get('are-you-sure-you-want-to-switch-to-another-branch'))) {
-								window.document[namespace + 'fm'][namespace + 'cmd'].value = "select_layout_set_branch";
-
-								window.submitForm(window.document[namespace + 'fm']);
-							}
-						}
-					);
-				}
-
-				var undoRevision = A.one('#undoRevision');
+				var undoRevision = A.one('#' + namespace + 'undoRevision');
 
 				if (undoRevision) {
-					undoRevision.on(
-						'click',
-						function(event) {
-							if (confirm(Liferay.Language.get('are-you-sure-you-want-to-undo-your-last-changes'))) {
-								window.document[namespace + 'fm'][namespace + 'cmd'].value = "delete_layout_revision";
-								window.document[namespace + 'fm'][namespace + 'updateRecentLayoutRevisionId'].value = true;
-
-								window.submitForm(window.document[namespace + 'fm']);
-							}
-						}
-					);
+					undoRevision.on('click', instance._onUndoRevision, instance);
 				}
 
-				var viewHistory = A.one('#viewHistory');
+				var viewHistory = A.one('#' + namespace + 'viewHistory');
 
 				if (viewHistory) {
-					viewHistory.on(
-						'click',
-						function(event) {
-							var layoutRevisionId = window.document[namespace + 'fm'][namespace + 'layoutRevisionId'].value;
+					viewHistory.on('click', instance._onViewHistory, instance);
+				}
 
-							var layoutSetBranchIdSelect = window.document[namespace + 'fm'][namespace + 'layoutSetBranchId'];
+				instance._namespace = namespace;
+			},
 
-							var layoutSetBranchId = layoutSetBranchIdSelect.options[layoutSetBranchIdSelect.selectedIndex].value;
+			_getGraphDialog: function() {
+				var instance = this;
 
-							var url = themeDisplay.getPathMain() + '/dockbar/layout_revisions?layoutRevisionId=' + layoutRevisionId + '&layoutSetBranchId=' + layoutSetBranchId;
+				var graphDialog = instance._graphDialog;
 
-							var dialog = instance._graphDialog;
-
-							if (!dialog) {
-								dialog = new A.Dialog(
-									{
-										align: {
-											node: null,
-											points: ['tc', 'tc']
-										},
-										draggable: true,
-										modal: true,
-										title: Liferay.Language.get('history'),
-										width: 400
-									}
-								).plug(
-									A.Plugin.IO,
-									{
-										autoLoad:false,
-										data: {
-											doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-											p_l_id: themeDisplay.getPlid(),
-											redirect: Liferay.currentURL
-										},
-										uri: url
-									}
-								).render();
-
-								dialog.move(dialog.get('x'), dialog.get('y') + 100);
-
-								dialog.bodyNode.delegate(
-									'click',
-									instance._selectRevision,
-									'li.layout-revision a.selection-handle'
-								);
-
-								instance._graphDialog = dialog;
-							}
-
-							dialog.io.set('uri', url);
-							dialog.io.start();
-							dialog.show();
+				if (!graphDialog) {
+					graphDialog = new A.Dialog(
+						{
+							align: {
+								points: ['tc', 'tc']
+							},
+							draggable: true,
+							modal: true,
+							title: Liferay.Language.get('history'),
+							width: 400
 						}
+					).plug(
+						A.Plugin.IO,
+						{
+							autoLoad: false,
+							data: {
+								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+								p_l_id: themeDisplay.getPlid(),
+								redirect: Liferay.currentURL
+							},
+							uri: themeDisplay.getPathMain() + '/dockbar/layout_revisions'
+						}
+					).render();
+
+					graphDialog.move(graphDialog.get('x'), graphDialog.get('y') + 100);
+
+					graphDialog.bodyNode.delegate(
+						'click',
+						instance._selectRevision,
+						'li.layout-revision a.selection-handle'
 					);
+
+					instance._graphDialog = graphDialog;
+				}
+
+				return graphDialog;
+			},
+
+			_onLayoutSetBranchId: function(event) {
+				var instance = this;
+
+				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-switch-to-another-branch'))) {
+					var namespace = instance._namespace;
+
+					var form = A.one('#' + namespace + 'fm');
+
+					form.one('#' + namespace + 'cmd').val('select_layout_set_branch');
+
+					submitForm(form);
 				}
 			},
 
-			_selectRevision : function(event) {
+			_onUndoRevision: function(event) {
+				var instance = this;
+
+				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-undo-your-last-changes'))) {
+					var namespace = instance._namespace;
+
+					var form = A.one('#' + namespace + 'fm');
+
+					form.one('#' + namespace + 'cmd').val('delete_layout_revision');
+					form.one('#' + namespace + 'updateRecentLayoutRevisionId').val(true);
+
+					submitForm(form);
+				}
+			},
+
+			_onViewHistory: function(event) {
+				var instance = this;
+
+				var namespace = instance._namespace;
+
+				var form = A.one('#' + namespace + 'fm');
+
+				var layoutRevisionId = form.one('#' + namespace + 'layoutRevisionId').val();
+				var layoutSetBranchId = form.one('#' + namespace + 'layoutSetBranchId option:selected').val();
+
+				var graphDialog = instance._getGraphDialog();
+
+				var graphDialogIO = graphDialog.io;
+
+				var data = graphDialogIO.get('data');
+
+				data.layoutRevisionId = layoutRevisionId;
+				data.layoutSetBranchId = layoutSetBranchId;
+
+				graphDialogIO.set('data', data);
+				graphDialogIO.start();
+
+				graphDialog.show();
+			},
+
+			_selectRevision: function(event) {
 				var node = event.currentTarget;
 
 				A.io.request(
@@ -240,9 +277,13 @@ AUI().add(
 
 			_updateMajor: function() {
 				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-save-your-changes-all-the-undo-steps-will-be-lost'))) {
-					window.document[namespace + 'fm'][namespace + 'cmd'].value = "update_major";
+					var namespace = instance._namespace;
 
-					window.submitForm(window.document[namespace + 'fm']);
+					var form = A.one('#' + namespace + 'fm');
+
+					form.one('#' + namespace + 'cmd').val('update_major');
+
+					submitForm(form);
 				}
 			}
 		};
@@ -253,6 +294,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-dialog', 'aui-io-plugin', 'aui-io-request', 'liferay-portlet-url']
+		requires: ['aui-dialog', 'aui-io-plugin', 'liferay-portlet-url']
 	}
 );

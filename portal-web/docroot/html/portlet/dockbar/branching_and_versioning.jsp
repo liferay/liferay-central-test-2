@@ -33,9 +33,9 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	<aui:input name="layoutRevisionId" type="hidden" value="<%= layoutRevision.getLayoutRevisionId() %>" />
 	<aui:input name="updateRecentLayoutRevisionId" type="hidden" value="<%= false %>" />
 
-	<div class="dockbar dockbar-branching-and-versioning" data-namespace="<portlet:namespace />" id="stagingDockbar">
+	<div class="dockbar dockbar-staging" id="<portlet:namespace />dockbarStaging">
 		<ul class="aui-toolbar">
-			<li class="select-branch" id="selectBranch">
+			<li class="select-branch" id="<portlet:namespace />selectBranch">
 
 				<%
 				List<LayoutSetBranch> layoutSetBranches = LayoutSetBranchLocalServiceUtil.getLayoutSetBranches(layout.getGroupId(), layout.isPrivateLayout());
@@ -62,25 +62,30 @@ PortletURL portletURL = renderResponse.createRenderURL();
 			</li>
 
 			<c:if test="<%= !layoutRevision.isMajor() && (!layoutRevision.hasChildren()) && (layoutRevision.getParentLayoutRevisionId() != LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID) %>">
-				<li class="undo-revision" id="undoRevision">
+				<li class="undo-revision" id="<portlet:namespace />undoRevision">
 					<a href="javascript:;">
 						<liferay-ui:message key="undo" />
 					</a>
 				</li>
 			</c:if>
 
-			<li class="view-history" id="viewHistory">
+			<li class="view-history" id="<portlet:namespace />viewHistory">
 				<a href="javascript:;">
 					<liferay-ui:message key="history" />
 				</a>
 			</li>
-			<li class="layout-revision-id-container" id="layoutRevisionIdContainer">
-				[<span class="layout-revision-id-value"><%= layoutRevision.getLayoutRevisionId() %></span>]
+
+			<li class="layout-revision-info" id="<portlet:namespace />layoutRevisionInfo">
+				<span class="layout-revision-id"><%= layoutRevision.getLayoutRevisionId() %></span>
 			</li>
 		</ul>
 	</div>
 </aui:form>
 
-<aui:script position="inline" use="aui-dialog,aui-io-request,staging">
-	Liferay.Staging.Dockbar.init();
+<aui:script position="inline" use="liferay-staging">
+	Liferay.Staging.Dockbar.init(
+		{
+			namespace: '<portlet:namespace />'
+		}
+	);
 </aui:script>

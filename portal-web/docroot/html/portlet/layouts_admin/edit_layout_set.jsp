@@ -165,7 +165,7 @@ String[][] categorySections = {mainSections};
 
 				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS) %>">
 					{
-								type: 'ToolbarSpacer'
+						type: 'ToolbarSpacer'
 					},
 					{
 						handler: function(event) {
