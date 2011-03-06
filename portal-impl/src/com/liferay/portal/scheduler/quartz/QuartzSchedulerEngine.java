@@ -15,6 +15,8 @@
 package com.liferay.portal.scheduler.quartz;
 
 import com.liferay.portal.kernel.bean.BeanReference;
+import com.liferay.portal.kernel.dao.db.DB;
+import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -782,8 +784,15 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		Properties properties = PropsUtil.getProperties(propertiesPrefix, true);
 
 		if (useQuartzCluster && PropsValues.CLUSTER_LINK_ENABLED) {
-			properties.put(
-				"org.quartz.jobStore.isClustered", Boolean.TRUE.toString());
+			String dbType = DBFactoryUtil.getDB().getType();
+
+			if (dbType.equals(DB.TYPE_HYPERSONIC)) {
+				_log.error("Unable to cluster scheduler on HSQL");
+			}
+			else {
+				properties.put(
+					"org.quartz.jobStore.isClustered", Boolean.TRUE.toString());
+			}
 		}
 
 		schedulerFactory.initialize(properties);
