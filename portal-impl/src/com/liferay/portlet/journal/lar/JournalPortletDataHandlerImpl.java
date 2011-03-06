@@ -83,6 +83,7 @@ import com.liferay.portlet.journal.util.comparator.StructurePKComparator;
 
 import java.io.File;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -432,7 +433,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			article.setContent(content);
 		}
 
-		portletDataContext.addZipEntry(path, article);
+		portletDataContext.addZipEntry(path, articleElement, article);
 	}
 
 	protected static String exportDLFileEntries(
@@ -652,7 +653,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		portletDataContext.addPermissions(JournalFeed.class, feed.getId());
 
-		portletDataContext.addZipEntry(path, feed);
+		portletDataContext.addZipEntry(path, feedElement, feed);
 	}
 
 	protected static String exportIGImages(
@@ -1026,7 +1027,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.addPermissions(
 			JournalStructure.class, structure.getId());
 
-		portletDataContext.addZipEntry(path, structure);
+		portletDataContext.addZipEntry(path, structureElement, structure);
 	}
 
 	protected static void exportTemplate(
@@ -1083,7 +1084,7 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		portletDataContext.addPermissions(
 			JournalTemplate.class, template.getId());
 
-		portletDataContext.addZipEntry(path, template);
+		portletDataContext.addZipEntry(path, templateElement, template);
 	}
 
 	protected static String getArticleImagePath(
@@ -1229,6 +1230,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		JournalArticle article =
 			(JournalArticle)portletDataContext.getZipEntryAsObject(path);
+
+		Map<String, Serializable> articleExpandoAttributes =
+			getExpandoAttributes(portletDataContext, articleElement);
 
 		long userId = portletDataContext.getUserId(article.getUserUuid());
 
@@ -1542,6 +1546,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(article.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
+		if ((articleExpandoAttributes != null) &&
+			!articleExpandoAttributes.isEmpty()) {
+			serviceContext.setExpandoBridgeAttributes(articleExpandoAttributes);
+		}
+
 		if (article.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
 				WorkflowConstants.ACTION_SAVE_DRAFT);
@@ -1720,6 +1729,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		JournalFeed feed = (JournalFeed)portletDataContext.getZipEntryAsObject(
 			path);
 
+		Map<String, Serializable> feedExpandoAttributes =
+			getExpandoAttributes(portletDataContext, feedElement);
+
 		long userId = portletDataContext.getUserId(feed.getUserUuid());
 
 		JournalCreationStrategy creationStrategy =
@@ -1788,6 +1800,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 		serviceContext.setCreateDate(feed.getCreateDate());
 		serviceContext.setModifiedDate(feed.getModifiedDate());
+
+		if ((feedExpandoAttributes != null) &&
+			!feedExpandoAttributes.isEmpty()) {
+			serviceContext.setExpandoBridgeAttributes(feedExpandoAttributes);
+		}
 
 		JournalFeed existingFeed = null;
 
@@ -1969,6 +1986,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		JournalStructure structure =
 			(JournalStructure)portletDataContext.getZipEntryAsObject(path);
 
+		Map<String, Serializable> structureExpandoAttributes =
+			getExpandoAttributes(portletDataContext, structureElement);
+
 		long userId = portletDataContext.getUserId(structure.getUserUuid());
 
 		JournalCreationStrategy creationStrategy =
@@ -2039,6 +2059,12 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(structure.getCreateDate());
 		serviceContext.setModifiedDate(structure.getModifiedDate());
 
+		if ((structureExpandoAttributes != null) &&
+			!structureExpandoAttributes.isEmpty()) {
+			serviceContext.setExpandoBridgeAttributes(
+				structureExpandoAttributes);
+		}
+
 		JournalStructure existingStructure = null;
 
 		if (portletDataContext.isDataStrategyMirror()) {
@@ -2101,6 +2127,9 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		JournalTemplate template =
 			(JournalTemplate)portletDataContext.getZipEntryAsObject(path);
 
+		Map<String, Serializable> templateExpandoAttributes =
+			getExpandoAttributes(portletDataContext, templateElement);
+
 		long userId = portletDataContext.getUserId(template.getUserUuid());
 
 		JournalCreationStrategy creationStrategy =
@@ -2157,6 +2186,11 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAddGuestPermissions(addGuestPermissions);
 		serviceContext.setCreateDate(template.getCreateDate());
 		serviceContext.setModifiedDate(template.getModifiedDate());
+
+		if ((templateExpandoAttributes != null) &&
+			!templateExpandoAttributes.isEmpty()) {
+			serviceContext.setExpandoBridgeAttributes(templateExpandoAttributes);
+		}
 
 		File smallFile = null;
 

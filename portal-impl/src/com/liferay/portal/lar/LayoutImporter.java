@@ -81,6 +81,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -926,6 +927,21 @@ public class LayoutImporter {
 		}
 		else {
 			ImageLocalServiceUtil.deleteImage(importedLayout.getIconImageId());
+		}
+
+		String expandoPath = layoutElement.attributeValue("expando-path");
+
+		Map<String, Serializable> expandoAttributes = null;
+
+		if (Validator.isNotNull(expandoPath)) {
+			expandoAttributes =
+				(Map<String, Serializable>)context.getZipEntryAsObject(
+					expandoPath);
+
+			ServiceContext serviceContext = new ServiceContext();
+			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
+
+			importedLayout.setExpandoBridgeAttributes(serviceContext);
 		}
 
 		LayoutUtil.update(importedLayout, false);

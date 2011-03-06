@@ -33,8 +33,10 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.Resource;
@@ -99,6 +101,7 @@ import com.thoughtworks.xstream.XStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -436,6 +439,27 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
+		}
+	}
+
+	public void addZipEntry(String path, Element element, BaseModel baseModel)
+		throws SystemException {
+
+		addZipEntry(path, toXML(baseModel));
+
+		Map<String, Serializable> expandoAttributes =
+			baseModel.getExpandoBridge().getAttributes();
+
+		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
+			int index = path.lastIndexOf(".xml");
+
+			String expandoPath = path.substring(0, index).
+				concat("-expando").
+				concat(path.substring(index, path.length()));
+
+			element.addAttribute("expando-path", expandoPath);
+
+			addZipEntry(expandoPath, expandoAttributes);
 		}
 	}
 

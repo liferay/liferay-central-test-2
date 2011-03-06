@@ -17,8 +17,10 @@ package com.liferay.portal.kernel.lar;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Lock;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
@@ -97,6 +99,9 @@ public interface PortletDataContext extends Serializable {
 	public void addZipEntry(String path, String s) throws SystemException;
 
 	public void addZipEntry(String name, StringBuilder sb)
+		throws SystemException;
+
+	public void addZipEntry(String path, Element element, BaseModel baseModel)
 		throws SystemException;
 
 	public Object fromXML(byte[] bytes);

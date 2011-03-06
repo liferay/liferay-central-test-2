@@ -70,6 +70,7 @@ import com.liferay.util.ContentUtil;
 
 import java.io.File;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -679,7 +680,7 @@ public class LayoutExporter {
 
 		layoutElement.addAttribute("path", path);
 
-		context.addZipEntry(path, layout);
+		context.addZipEntry(path, layoutElement, layout);
 	}
 
 	protected void exportTheme(LayoutSet layoutSet, ZipWriter zipWriter)
