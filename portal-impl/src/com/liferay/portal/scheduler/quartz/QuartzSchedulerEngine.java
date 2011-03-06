@@ -920,7 +920,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		groupName = fixMaxLength(
 			getOriginalGroupName(groupName), GROUP_NAME_MAX_LENGTH);
 
-		String[] jobNames = _persistedScheduler.getJobNames(groupName);
+		String[] jobNames = scheduler.getJobNames(groupName);
 
 		for (String jobName : jobNames) {
 			JobState jobState = getJobState(scheduler, jobName, groupName);
