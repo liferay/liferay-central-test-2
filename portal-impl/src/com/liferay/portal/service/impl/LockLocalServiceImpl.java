@@ -177,8 +177,35 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public Lock lock(
-			String className, String key, String oldOwner, String newOwner,
-			boolean retrieveFromCache, boolean replaceOldLock)
+			String className, String key, String owner,
+			boolean retrieveFromCache)
+		throws SystemException {
+
+		Lock lock = lockPersistence.fetchByC_K(
+			className, key, retrieveFromCache);
+
+		if (lock == null) {
+			long lockId = counterLocalService.increment();
+
+			lock = lockPersistence.create(lockId);
+
+			lock.setCreateDate(new Date());
+			lock.setClassName(className);
+			lock.setKey(key);
+			lock.setOwner(owner);
+
+			lockPersistence.update(lock, false);
+
+			lock.setNew(true);
+		}
+
+		return lock;
+	}
+	
+	@Transactional(isolation = Isolation.SERIALIZABLE)
+	public Lock lock(
+			String className, String key, String expectOwner, 
+			String updateOwner, boolean retrieveFromCache)
 		throws SystemException {
 
 		Lock lock = lockPersistence.fetchByC_K(
@@ -187,18 +214,13 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 		if (lock != null) {
 			String owner = lock.getOwner();
 
-			if (lock.isExpired() || replaceOldLock) {
-				if (!owner.equals(oldOwner)) {
-					return lock;
-				}
-
-				lockPersistence.remove(lock);
-
-				lock = null;
-			}
-			else if (!owner.equals(newOwner)) {
+			if (!owner.equals(expectOwner)) {
 				return lock;
 			}
+
+			lockPersistence.remove(lock);
+
+			lock = null;
 		}
 
 		if (lock == null) {
@@ -209,7 +231,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 			lock.setCreateDate(new Date());
 			lock.setClassName(className);
 			lock.setKey(key);
-			lock.setOwner(newOwner);
+			lock.setOwner(updateOwner);
 
 			lockPersistence.update(lock, false);
 

@@ -319,12 +319,19 @@ public class LockLocalServiceUtil {
 
 	public static com.liferay.portal.model.Lock lock(
 		java.lang.String className, java.lang.String key,
-		java.lang.String oldOwner, java.lang.String newOwner,
-		boolean retrieveFromCache, boolean replaceOldLock)
+		java.lang.String owner, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().lock(className, key, owner, retrieveFromCache);
+	}
+
+	public static com.liferay.portal.model.Lock lock(
+		java.lang.String className, java.lang.String key,
+		java.lang.String expectOwner, java.lang.String updateOwner,
+		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .lock(className, key, oldOwner, newOwner, retrieveFromCache,
-			replaceOldLock);
+				   .lock(className, key, expectOwner, updateOwner,
+			retrieveFromCache);
 	}
 
 	public static com.liferay.portal.model.Lock refresh(java.lang.String uuid,

@@ -123,8 +123,7 @@ public class ClusterSchedulerEngine
 					_memorySchedulerClusterEventListener);
 
 				LockLocalServiceUtil.unlock(
-					SchedulerEngine.class.getName(),
-					SchedulerEngine.class.getName(), _localClusterNodeAddress,
+					_classNameForLock, _classNameForLock, _localClusterNodeAddress,
 					PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED);
 			}
 		}
@@ -144,7 +143,7 @@ public class ClusterSchedulerEngine
 				ClusterExecutorUtil.addClusterEventListener(
 					_memorySchedulerClusterEventListener);
 
-				lockMemorySchedulerCluster(false, null);
+				lockMemorySchedulerCluster(null);
 			}
 		}
 		catch (Exception e) {
@@ -183,15 +182,14 @@ public class ClusterSchedulerEngine
 
 	public void updateMemorySchedulerClusterMaster() throws SchedulerException {
 		try {
-			Lock lock = lockMemorySchedulerCluster(false, null);
-
+			Lock lock = lockMemorySchedulerCluster(null);
+			
 			Address address = (Address)getDeserializedObject(lock.getOwner());
-
+			
 			if (ClusterExecutorUtil.isClusterNodeAlive(address)) {
 				return;
 			}
-
-			lockMemorySchedulerCluster(true, lock.getOwner());
+			lockMemorySchedulerCluster(lock.getOwner());
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
@@ -236,8 +234,7 @@ public class ClusterSchedulerEngine
 		return _localClusterNodeAddress.equals(lock.getOwner());
 	}
 
-	protected Lock lockMemorySchedulerCluster(
-			boolean replaceOldLock, String oldOwner)
+	protected Lock lockMemorySchedulerCluster(String expectOwner)
 		throws Exception {
 
 		if (_localClusterNodeAddress == null) {
@@ -245,11 +242,19 @@ public class ClusterSchedulerEngine
 				ClusterExecutorUtil.getLocalClusterNodeAddress());
 		}
 
-		Lock lock = LockLocalServiceUtil.lock(
-			SchedulerEngine.class.getName(), SchedulerEngine.class.getName(),
-			oldOwner, _localClusterNodeAddress,
-			PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED,
-			replaceOldLock);
+		Lock lock = null;
+		
+		if (expectOwner == null) {
+			lock = LockLocalServiceUtil.lock(
+				_classNameForLock, _classNameForLock, _localClusterNodeAddress,
+				PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED);
+		}
+		else {
+			lock = LockLocalServiceUtil.lock(
+				_classNameForLock, _classNameForLock, expectOwner,
+				_localClusterNodeAddress,
+				PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED);
+		}
 
 		return lock;
 	}
@@ -257,6 +262,7 @@ public class ClusterSchedulerEngine
 	private static Log _log = LogFactoryUtil.getLog(
 		ClusterSchedulerEngine.class);
 
+	private static String _classNameForLock = SchedulerEngine.class.getName();
 	private static String _localClusterNodeAddress;
 
 	private ClusterEventListener _memorySchedulerClusterEventListener;
