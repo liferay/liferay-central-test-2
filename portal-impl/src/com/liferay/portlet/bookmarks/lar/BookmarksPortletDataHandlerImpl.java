@@ -88,6 +88,10 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
+		portletDataContext.addExpandoColumns(BookmarksEntry.class.getName());
+
+		portletDataContext.addExpandoColumns(BookmarksFolder.class.getName());
+
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.bookmarks",
 			portletDataContext.getScopeGroupId());

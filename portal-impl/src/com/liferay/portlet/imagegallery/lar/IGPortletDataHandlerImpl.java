@@ -65,6 +65,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element imagesElement, IGImage image, boolean checkDateRange)
 		throws Exception {
 
+		portletDataContext.addExpandoColumns(IGImage.class.getName());
+
 		if (checkDateRange &&
 			!portletDataContext.isWithinDateRange(image.getModifiedDate())) {
 
@@ -482,6 +484,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element imagesElement, IGFolder folder)
 		throws Exception {
 
+		portletDataContext.addExpandoColumns(IGFolder.class.getName());
+
 		if (portletDataContext.isWithinDateRange(folder.getModifiedDate())) {
 			exportParentFolder(
 				portletDataContext, foldersElement, folder.getParentFolderId());
@@ -677,6 +681,10 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
+
+		portletDataContext.addExpandoColumns(IGImage.class.getName());
+
+		portletDataContext.addExpandoColumns(IGFolder.class.getName());
 
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.imagegallery",

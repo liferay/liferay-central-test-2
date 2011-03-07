@@ -304,6 +304,7 @@ public class LayoutImporter {
 		}
 
 		_portletImporter.readComments(context, rootElement);
+		_portletImporter.readExpandos(context);
 		_portletImporter.readLocks(context, rootElement);
 		_portletImporter.readRatings(context, rootElement);
 		_portletImporter.readTags(context, rootElement);

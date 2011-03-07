@@ -2299,6 +2299,14 @@ public class JournalPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
+		portletDataContext.addExpandoColumns(JournalArticle.class.getName());
+
+		portletDataContext.addExpandoColumns(JournalFeed.class.getName());
+
+		portletDataContext.addExpandoColumns(JournalTemplate.class.getName());
+
+		portletDataContext.addExpandoColumns(JournalStructure.class.getName());
+
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.journal",
 			portletDataContext.getScopeGroupId());

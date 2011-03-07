@@ -114,6 +114,10 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
+		portletDataContext.addExpandoColumns(MBCategory.class.getName());
+
+		portletDataContext.addExpandoColumns(MBMessage.class.getName());
+
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.messageboards",
 			portletDataContext.getScopeGroupId());

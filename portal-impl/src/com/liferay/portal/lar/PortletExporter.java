@@ -64,6 +64,7 @@ import com.liferay.portlet.asset.service.AssetCategoryPropertyLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
+import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
@@ -255,6 +256,9 @@ public class PortletExporter {
 		// Comments
 
 		exportComments(context, root);
+
+		// Expandos
+		exportExpandos(context);
 
 		// Locks
 
@@ -456,6 +460,62 @@ public class PortletExporter {
 
 			context.addZipEntry(
 				context.getRootPath() + "/comments.xml", doc.formattedString());
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+	}
+
+	protected void exportExpandos(PortletDataContext context)
+		throws SystemException {
+
+		try {
+			Document doc = SAXReaderUtil.createDocument();
+
+			Map<String, List<ExpandoColumn>> expandoColumnsMap =
+				context.getExpandoColumns();
+
+			Element expandoTablesElement = doc.addElement("expando-tables");
+
+			for (Map.Entry<String, List<ExpandoColumn>> entry :
+					expandoColumnsMap.entrySet()) {
+
+				String className = entry.getKey();
+
+				Element expandoTableElement = expandoTablesElement.addElement(
+					"expando-table");
+
+				expandoTableElement.addAttribute("class-name", className);
+
+				List<ExpandoColumn> expandoColumns = entry.getValue();
+
+				for (ExpandoColumn expandoColumn: expandoColumns) {
+
+					Element expandoColumnElement =
+						expandoTableElement.addElement("expando-column");
+
+					String name = expandoColumn.getName();
+					int type = expandoColumn.getType();
+					String typeSettings = expandoColumn.getTypeSettings();
+					String defaultData = expandoColumn.getDefaultData();
+
+					expandoColumnElement.addAttribute("name", name);
+					expandoColumnElement.addAttribute(
+						"type", String.valueOf(type));
+
+					Element typeSettingsElement =
+						expandoColumnElement.addElement("type-settings");
+					typeSettingsElement.addText(typeSettings);
+
+					Element defaultDataElement =
+						expandoColumnElement.addElement("default-data");
+					defaultDataElement.addText(defaultData);
+				}
+			}
+
+			context.addZipEntry(
+				context.getRootPath() + "/expando-tables.xml",
+				doc.formattedString());
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

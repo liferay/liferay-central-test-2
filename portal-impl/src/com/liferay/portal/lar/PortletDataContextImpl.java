@@ -67,6 +67,8 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -251,6 +253,20 @@ public class PortletDataContextImpl implements PortletDataContext {
 		String className, long classPK, List<MBMessage> messages) {
 
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
+	}
+
+	public void addExpandoColumns(String resourceClassName)
+		throws PortalException, SystemException {
+
+		if (_expandoColumnsMap.containsKey(resourceClassName)) {
+			return;
+		}
+
+		List<ExpandoColumn> expandoColumns =
+			ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
+				_companyId, resourceClassName);
+
+		_expandoColumnsMap.put(resourceClassName, expandoColumns);
 	}
 
 	public void addLocks(Class<?> classObj, String key)
@@ -525,6 +541,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Date getEndDate() {
 		return _endDate;
+	}
+
+	public Map<String, List<ExpandoColumn>> getExpandoColumns() {
+		return _expandoColumnsMap;
 	}
 
 	public long getGroupId() {
@@ -1156,6 +1176,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _companyId;
 	private String _dataStrategy;
 	private Date _endDate;
+	private Map<String, List<ExpandoColumn>> _expandoColumnsMap =
+		new HashMap<String, List<ExpandoColumn>>();
 	private long _groupId;
 	private Map<String, Lock> _locksMap = new HashMap<String, Lock>();
 	private Map<String, Map<?, ?>> _newPrimaryKeysMaps =

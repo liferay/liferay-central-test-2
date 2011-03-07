@@ -81,6 +81,8 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
+		portletDataContext.addExpandoColumns(CalEvent.class.getName());
+
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.calendar",
 			portletDataContext.getScopeGroupId());

@@ -68,6 +68,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element pagesElement, WikiNode node)
 		throws Exception {
 
+		portletDataContext.addExpandoColumns(WikiNode.class.getName());
+
 		if (portletDataContext.isWithinDateRange(node.getModifiedDate())) {
 			String path = getNodePath(portletDataContext, node);
 
@@ -387,6 +389,8 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			return;
 		}
 
+		portletDataContext.addExpandoColumns(WikiPage.class.getName());
+
 		String path = getPagePath(portletDataContext, page);
 
 		// Clone this page to make sure changes to its content are never
@@ -559,6 +563,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
+
+		portletDataContext.addExpandoColumns(WikiPage.class.getName());
+
+		portletDataContext.addExpandoColumns(WikiNode.class.getName());
 
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.wiki", portletDataContext.getScopeGroupId());
