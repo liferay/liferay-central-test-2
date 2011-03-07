@@ -891,7 +891,7 @@ public class SchedulerEngineUtil {
 		if (_schedulerEngineClusterManager == null) {
 			_log.error(
 				"Unable to update memory scheduler cluster master because " +
-					"the portal is using a clustered scheduler engine");
+					"the portal is not using a clustered scheduler engine");
 
 			return;
 		}
