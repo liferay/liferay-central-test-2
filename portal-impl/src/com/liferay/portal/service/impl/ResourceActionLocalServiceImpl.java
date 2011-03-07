@@ -17,13 +17,18 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MathUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ResourceAction;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourceActionLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 
@@ -103,6 +108,12 @@ public class ResourceActionLocalServiceImpl
 			lastBitwiseValue = resourceAction.getBitwiseValue();
 		}
 
+		List<String> communityDefaultActions =
+			ResourceActionsUtil.getModelResourceCommunityDefaultActions(name);
+
+		List<String> guestDefaultActions =
+			ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
+
 		int lastBitwiseLogValue = MathUtil.base2Log(lastBitwiseValue);
 
 		for (String actionId : actionIds) {
@@ -135,6 +146,37 @@ public class ResourceActionLocalServiceImpl
 				resourceActionPersistence.update(resourceAction, false);
 
 				_resourceActions.put(key, resourceAction);
+
+				if (communityDefaultActions.contains(actionId)) {
+					try {
+						resourcePermissionLocalService.addResourcePermissions(
+							name, RoleConstants.COMMUNITY_MEMBER,
+							ResourceConstants.SCOPE_INDIVIDUAL, actionId);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
+				}
+
+				if (guestDefaultActions.contains(actionId)) {
+					try {
+						resourcePermissionLocalService.addResourcePermissions(
+							name, RoleConstants.GUEST,
+							ResourceConstants.SCOPE_INDIVIDUAL, actionId);
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
+				}
+
+				try {
+					resourcePermissionLocalService.addResourcePermissions(
+						name, RoleConstants.OWNER,
+						ResourceConstants.SCOPE_INDIVIDUAL, actionId);
+				}
+				catch (PortalException pe) {
+					_log.error(pe, pe);
+				}
 			}
 		}
 	}
@@ -145,5 +187,8 @@ public class ResourceActionLocalServiceImpl
 
 	private static Map<String, ResourceAction> _resourceActions =
 		new HashMap<String, ResourceAction>();
+
+	private static Log _log = LogFactoryUtil.getLog(
+		ResourceActionLocalServiceImpl.class);
 
 }

@@ -38,6 +38,9 @@ public class ResourceFinderImpl
 	public static String FIND_BY_C_P =
 		ResourceFinder.class.getName() + ".findByC_P";
 
+	public static String FIND_BY_N_S =
+		ResourceFinder.class.getName() + ".findByN_S";
+
 	public List<Resource> findByName(String name) throws SystemException {
 		Session session = null;
 
@@ -82,6 +85,35 @@ public class ResourceFinderImpl
 
 			qPos.add(companyId);
 			qPos.add(primKey);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<Resource> findByN_S(String name, int scope)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_N_S);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Resource_", ResourceImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(name);
+			qPos.add(scope);
 
 			return q.list();
 		}

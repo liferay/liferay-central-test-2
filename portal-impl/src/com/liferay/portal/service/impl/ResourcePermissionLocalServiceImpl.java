@@ -80,6 +80,40 @@ public class ResourcePermissionLocalServiceImpl
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void addResourcePermissions(
+			String resourceName, String roleName, int scope, String actionId)
+		throws PortalException, SystemException{
+
+		List<ResourcePermission> resourcePermissions =
+			resourcePermissionPersistence.findByN_S(resourceName, scope);
+
+		List<Role> roles = roleLocalService.getRoles(roleName);
+
+		for (ResourcePermission resourcePermission : resourcePermissions) {
+			long companyId = resourcePermission.getCompanyId();
+			String primKey = resourcePermission.getPrimKey();
+
+			for (Role role : roles) {
+				long roleId = role.getRoleId();
+
+				List<String> actionIds =
+					getAvailableResourcePermissionActionIds(
+						companyId, resourceName, scope, primKey, roleId,
+						ResourceActionsUtil.getResourceActions(resourceName));
+
+				if (actionIds.isEmpty()) {
+					actionIds = new ArrayList<String>();
+				}
+
+				actionIds.add(actionId);
+
+				setResourcePermissions(
+					companyId, resourceName, scope, primKey, roleId,
+					actionIds.toArray(new String[actionIds.size()]));
+			}
+		}
+	}
+
 	public void deleteResourcePermission(long resourcePermissionId)
 		throws PortalException, SystemException {
 
@@ -144,6 +178,13 @@ public class ResourcePermissionLocalServiceImpl
 			companyId, name, scope, primKey);
 	}
 
+	public List<ResourcePermission> getResourcePermissions(
+			String name, int scope)
+		throws SystemException {
+
+		return resourcePermissionPersistence.findByN_S(name, scope);
+	}
+
 	public int getResourcePermissionsCount(
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
@@ -183,10 +224,6 @@ public class ResourcePermissionLocalServiceImpl
 			long companyId, String name, int scope, String primKey, long roleId,
 			String actionId)
 		throws PortalException, SystemException {
-
-		/*ResourcePermission resourcePermission =
-			resourcePermissionPersistence.fetchByC_N_S_P_R(
-				companyId, name, scope, primKey, roleId);*/
 
 		ResourcePermission resourcePermission = null;
 

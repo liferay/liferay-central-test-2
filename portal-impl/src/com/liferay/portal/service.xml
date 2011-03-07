@@ -1552,6 +1552,10 @@
 			<finder-column name="primKey" />
 			<finder-column name="roleId" />
 		</finder>
+		<finder name="N_S" return-type="Collection">
+			<finder-column name="name" />
+			<finder-column name="scope" />
+		</finder>
 	</entity>
 	<entity name="Role" local-service="true" remote-service="true">
 
@@ -1589,6 +1593,9 @@
 
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
+		</finder>
+		<finder name="Name" return-type="Collection">
+			<finder-column name="name" />
 		</finder>
 		<finder name="Subtype" return-type="Collection">
 			<finder-column name="subtype" />

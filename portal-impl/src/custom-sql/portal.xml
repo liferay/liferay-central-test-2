@@ -904,6 +904,20 @@
 				(Resource_.primKey LIKE ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByN_S">
+		<![CDATA[
+			SELECT
+				{Resource_.*}
+			FROM
+				Resource_
+			INNER JOIN
+				ResourceCode ON
+					(ResourceCode.codeId = Resource_.codeId)
+			WHERE
+				(ResourceCode.name = ?) AND
+				(ResourceCode.scope = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.ResourcePermissionFinder.countByR_S">
 		<![CDATA[
 			SELECT

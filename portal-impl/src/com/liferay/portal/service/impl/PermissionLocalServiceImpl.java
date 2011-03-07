@@ -31,6 +31,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
@@ -149,6 +150,16 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		return permissions;
 	}
 
+	public void addRolePermissions(String roleName, Permission permission)
+		throws SystemException {
+
+		List<Role> roles = roleLocalService.getRoles(roleName);
+
+		for (Role role : roles) {
+			rolePersistence.addPermission(role.getRoleId(), permission);
+		}
+	}
+
 	public void addUserPermissions(
 			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
@@ -164,6 +175,61 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		userPersistence.addPermissions(userId, permissions);
 
 		PermissionCacheUtil.clearCache();
+	}
+
+	public void checkPermissions(String name, List<String> actionIds)
+		throws SystemException {
+
+		List<String> communityDefaultActions =
+			ResourceActionsUtil.getModelResourceCommunityDefaultActions(name);
+
+		List<String> guestDefaultActions =
+			ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
+
+		List<Resource> resources = resourceFinder.findByN_S(
+			name, ResourceConstants.SCOPE_INDIVIDUAL);
+
+		for (Resource resource : resources) {
+			for (String actionId : actionIds) {
+				Permission permission = permissionPersistence.fetchByA_R(
+					actionId, resource.getResourceId());
+
+				if (permission == null) {
+					try {
+						long permissionId = counterLocalService.increment(
+							Permission.class.getName());
+
+						permission = permissionPersistence.create(permissionId);
+
+						permission.setCompanyId(resource.getCompanyId());
+						permission.setActionId(actionId);
+						permission.setResourceId(resource.getResourceId());
+
+						permissionPersistence.update(permission, false);
+
+						if (communityDefaultActions.contains(actionId)) {
+							addRolePermissions(
+								RoleConstants.COMMUNITY_MEMBER, permission);
+						}
+
+						if (guestDefaultActions.contains(actionId)) {
+							addRolePermissions(
+								RoleConstants.GUEST, permission);
+						}
+
+						addRolePermissions(RoleConstants.OWNER, permission);
+
+						PermissionCacheUtil.clearCache();
+
+						SearchEngineUtil.updatePermissionFields(
+							resource.getResourceId());
+					}
+					catch (PortalException pe) {
+						_log.error(pe, pe);
+					}
+				}
+			}
+		}
 	}
 
 	public List<String> getActions(List<Permission> permissions) {

@@ -15,6 +15,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -22,11 +23,14 @@ import java.util.List;
 
 /**
  * @author Tobias Kaefer
+ * @author Douglas Wong
  */
 public class VerifyPermission extends VerifyProcess {
 
 	protected void doVerify() throws Exception {
-		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
+		if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) &&
+			(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) {
+
 			return;
 		}
 
@@ -36,8 +40,14 @@ public class VerifyPermission extends VerifyProcess {
 			List<String> actionIds =
 				ResourceActionsUtil.getModelResourceActions(modelName);
 
-			ResourceActionLocalServiceUtil.checkResourceActions(
-				modelName, actionIds);
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+				PermissionLocalServiceUtil.checkPermissions(
+					modelName, actionIds);
+			}
+			else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
+				ResourceActionLocalServiceUtil.checkResourceActions(
+					modelName, actionIds);
+			}
 		}
 	}
 

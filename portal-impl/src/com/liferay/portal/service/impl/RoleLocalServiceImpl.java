@@ -309,6 +309,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return rolePersistence.findByCompanyId(companyId);
 	}
 
+	public List<Role> getRoles(String name) throws SystemException {
+		return rolePersistence.findByName(name);
+	}
+
 	public List<Role> getRoles(long[] roleIds)
 		throws PortalException, SystemException {
 
