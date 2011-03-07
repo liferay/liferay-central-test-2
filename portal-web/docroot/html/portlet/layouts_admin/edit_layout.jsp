@@ -33,8 +33,6 @@ boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLa
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 
-portletURL.setParameter("selPlid", String.valueOf(selPlid));
-
 long refererPlid = ParamUtil.getLong(request, "refererPlid", LayoutConstants.DEFAULT_PLID);
 
 //Sections
@@ -57,7 +55,7 @@ String[][] categorySections = {mainSections};
 
 <aui:form action="<%= editLayoutURL %>" cssClass="edit-layout-form"  enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayout();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="redirect" type="hidden" value='<%= HttpUtil.addParameter(portletURL.toString(), renderResponse.getNamespace() + "selPlid"  ,selPlid) %>' />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
@@ -152,7 +150,7 @@ String[][] categorySections = {mainSections};
 									<c:otherwise>
 										if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
 											document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-											document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selLayout.getParentPlid() %>";
+											document.<portlet:namespace />fm.<portlet:namespace />redirect.value = '<%= HttpUtil.addParameter(portletURL.toString(), renderResponse.getNamespace() + "selPlid", selLayout.getParentPlid()) %>';
 											submitForm(document.<portlet:namespace />fm);
 										}
 									</c:otherwise>
