@@ -55,7 +55,7 @@ String[][] categorySections = {mainSections};
 
 <aui:form action="<%= editLayoutURL %>" cssClass="edit-layout-form"  enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveLayout();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" value='<%= HttpUtil.addParameter(portletURL.toString(), renderResponse.getNamespace() + "selPlid"  ,selPlid) %>' />
+	<aui:input name="redirect" type="hidden" value='<%= HttpUtil.addParameter(portletURL.toString(), renderResponse.getNamespace() + "selPlid", selPlid) %>' />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="liveGroupId" type="hidden" value="<%= liveGroupId %>" />
 	<aui:input name="stagingGroupId" type="hidden" value="<%= stagingGroupId %>" />
