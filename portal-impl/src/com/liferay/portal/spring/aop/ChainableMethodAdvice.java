@@ -32,11 +32,13 @@ public abstract class ChainableMethodAdvice implements MethodInterceptor {
 	public boolean afterThrowing(
 			MethodInvocation methodInvocation, Throwable throwable)
 		throws Throwable {
+
 		if (!(throwable instanceof Swallowable)) {
 			return true;
 		}
 
 		Swallowable swallowable = (Swallowable)throwable;
+
 		if (swallowable.isSwallowable()) {
 			return false;
 		}

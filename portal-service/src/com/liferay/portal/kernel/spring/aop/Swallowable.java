@@ -21,4 +21,6 @@ public interface Swallowable {
 
 	public boolean isSwallowable();
 
+	public void setSwallowable(boolean swallowable);
+
 }
