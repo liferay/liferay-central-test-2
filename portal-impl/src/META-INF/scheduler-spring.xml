@@ -19,8 +19,8 @@
 
 	<!-- Proxy -->
 
-	<bean id="com.liferay.portal.scheduler.ClusterSchedulerEngine" class="com.liferay.portal.scheduler.ClusterSchedulerEngine">
-		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.SchedulerEngineProxyBean" />
+	<bean id="com.liferay.portal.scheduler.ClusterSchedulerEngine" class="com.liferay.portal.scheduler.ClusterSchedulerEngine" factory-method="createClusterSchedulerEngine" >
+		<constructor-arg ref="com.liferay.portal.scheduler.SchedulerEngineProxyBean" />
 	</bean>
 	<bean id="com.liferay.portal.scheduler.SchedulerEngineProxyBean" class="com.liferay.portal.scheduler.SchedulerEngineProxyBean">
 		<property name="singleDestinationSynchronousMessageSender">
@@ -41,7 +41,6 @@
 
 	<bean class="com.liferay.portal.kernel.scheduler.SchedulerEngineUtil">
 		<property name="schedulerEngine" ref="com.liferay.portal.scheduler.ClusterSchedulerEngine" />
-		<property name="schedulerEngineClusterManager" ref="com.liferay.portal.scheduler.ClusterSchedulerEngine" />
 	</bean>
 
 	<bean id="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngine" />

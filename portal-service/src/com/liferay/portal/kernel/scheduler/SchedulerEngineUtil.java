@@ -15,6 +15,8 @@
 package com.liferay.portal.kernel.scheduler;
 
 import com.liferay.portal.kernel.bean.ClassLoaderBeanHandler;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.InvokerMessageListener;
@@ -302,13 +304,12 @@ public class SchedulerEngineUtil {
 	}
 
 	public void setSchedulerEngine(SchedulerEngine schedulerEngine) {
-		_schedulerEngine = schedulerEngine;
-	}
+		_instance._schedulerEngine = schedulerEngine;
 
-	public void setSchedulerEngineClusterManager(
-		SchedulerEngineClusterManager schedulerEngineClusterManager) {
-
-		_schedulerEngineClusterManager = schedulerEngineClusterManager;
+		if (_schedulerEngine instanceof SchedulerEngineClusterManager) {
+			_instance._schedulerEngineClusterManager =
+				(SchedulerEngineClusterManager)_schedulerEngineClusterManager;
+		}
 	}
 
 	private void _addScriptingJob(
@@ -887,12 +888,21 @@ public class SchedulerEngineUtil {
 	private void _updateMemorySchedulerClusterMaster()
 		throws SchedulerException {
 
+		if (_schedulerEngineClusterManager == null) {
+			_log.error("Can not update memory scheduler cluster master, portal "
+				+ "is no configured to use a clustered scheduler engine.");
+			return;
+		}
+
 		_schedulerEngineClusterManager.updateMemorySchedulerClusterMaster();
+
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(SchedulerEngineUtil.class);
 
 	private static SchedulerEngineUtil _instance = new SchedulerEngineUtil();
 
-	private static SchedulerEngine _schedulerEngine;
-	private static SchedulerEngineClusterManager _schedulerEngineClusterManager;
+	private SchedulerEngine _schedulerEngine;
+	private SchedulerEngineClusterManager _schedulerEngineClusterManager;
 
 }

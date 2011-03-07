@@ -45,6 +45,19 @@ import java.util.List;
 public class ClusterSchedulerEngine
 	implements SchedulerEngine, SchedulerEngineClusterManager {
 
+	public static SchedulerEngine createClusterSchedulerEngine(
+		SchedulerEngine schedulerEngine) {
+		if (PropsValues.CLUSTER_LINK_ENABLED) {
+			schedulerEngine = new ClusterSchedulerEngine(schedulerEngine);
+		}
+
+		return schedulerEngine;
+	}
+
+	public ClusterSchedulerEngine(SchedulerEngine schedulerEngine) {
+		_schedulerEngine = schedulerEngine;
+	}
+
 	public void delete(String groupName) throws SchedulerException {
 		_schedulerEngine.delete(groupName);
 	}
@@ -100,10 +113,6 @@ public class ClusterSchedulerEngine
 
 		_schedulerEngine.schedule(
 			trigger, description, destinationName, message);
-	}
-
-	public void setSchedulerEngine (SchedulerEngine schedulerEngine) {
-		_schedulerEngine = schedulerEngine;
 	}
 
 	public void shutdown() throws SchedulerException {
