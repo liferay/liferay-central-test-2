@@ -42,12 +42,18 @@ public class FolderNameComparator extends OrderByComparator {
 		String name2 = null;
 
 		if (obj1 instanceof DLFolder) {
-			name1 = ((DLFolder)obj1).getName();
-			name2 = ((DLFolder)obj2).getName();
+			DLFolder dlFolder1 = (DLFolder)obj1;
+			DLFolder dlFolder2 = (DLFolder)obj2;
+
+			name1 = dlFolder1.getName();
+			name2 = dlFolder2.getName();
 		}
 		else {
-			name1 = ((Folder)obj1).getName();
-			name2 = ((Folder)obj2).getName();
+			Folder folder1 = (Folder)obj1;
+			Folder folder2 = (Folder)obj2;
+
+			name1 = folder1.getName();
+			name2 = folder2.getName();
 		}
 
 		int value = name1.compareToIgnoreCase(name2);

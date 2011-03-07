@@ -43,12 +43,18 @@ public class FileEntryTitleComparator extends OrderByComparator {
 		String title2 = null;
 
 		if (obj1 instanceof DLFileEntry) {
-			title1 = ((DLFileEntry)obj1).getTitle();
-			title2 = ((DLFileEntry)obj2).getTitle();
+			DLFileEntry dlFileEntry1 = (DLFileEntry)obj1;
+			DLFileEntry dlFileEntry2 = (DLFileEntry)obj2;
+
+			title1 = dlFileEntry1.getTitle();
+			title2 = dlFileEntry2.getTitle();
 		}
 		else {
-			title1 = ((FileEntry)obj1).getTitle();
-			title2 = ((FileEntry)obj2).getTitle();
+			FileEntry fileEntry1 = (FileEntry)obj1;
+			FileEntry fileEntry2 = (FileEntry)obj2;
+
+			title1 = fileEntry1.getTitle();
+			title2 = fileEntry2.getTitle();
 		}
 
 		int value = title1.compareToIgnoreCase(title2);

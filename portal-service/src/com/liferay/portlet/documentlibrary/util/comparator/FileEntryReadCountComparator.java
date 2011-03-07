@@ -37,15 +37,15 @@ public class FileEntryReadCountComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		DLFileEntry fileEntry1 = (DLFileEntry)obj1;
-		DLFileEntry fileEntry2 = (DLFileEntry)obj2;
+		DLFileEntry dlFileEntry1 = (DLFileEntry)obj1;
+		DLFileEntry dlFileEntry2 = (DLFileEntry)obj2;
 
 		int value = 0;
 
-		if (fileEntry1.getReadCount() < fileEntry2.getReadCount()) {
+		if (dlFileEntry1.getReadCount() < dlFileEntry2.getReadCount()) {
 			value = -1;
 		}
-		else if (fileEntry1.getReadCount() > fileEntry2.getReadCount()) {
+		else if (dlFileEntry1.getReadCount() > dlFileEntry2.getReadCount()) {
 			value = 1;
 		}
 

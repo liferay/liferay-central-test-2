@@ -46,12 +46,18 @@ public class FileEntryModifiedDateComparator extends OrderByComparator {
 		Date modifiedDate2 = null;
 
 		if (obj1 instanceof DLFileEntry) {
-			modifiedDate1 = ((DLFileEntry)obj1).getModifiedDate();
-			modifiedDate2 = ((DLFileEntry)obj2).getModifiedDate();
+			DLFileEntry dlFileEntry1 = (DLFileEntry)obj1;
+			DLFileEntry dlFileEntry2 = (DLFileEntry)obj2;
+
+			modifiedDate1 = dlFileEntry1.getModifiedDate();
+			modifiedDate2 = dlFileEntry2.getModifiedDate();
 		}
 		else {
-			modifiedDate1 = ((FileEntry)obj1).getModifiedDate();
-			modifiedDate2 = ((FileEntry)obj2).getModifiedDate();
+			FileEntry fileEntry1 = (FileEntry)obj1;
+			FileEntry fileEntry2 = (FileEntry)obj2;
+
+			modifiedDate1 = fileEntry1.getModifiedDate();
+			modifiedDate2 = fileEntry2.getModifiedDate();
 		}
 
 		int value = DateUtil.compareTo(modifiedDate1, modifiedDate2);

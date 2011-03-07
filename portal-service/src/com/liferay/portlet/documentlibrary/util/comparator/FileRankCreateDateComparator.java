@@ -38,11 +38,11 @@ public class FileRankCreateDateComparator extends OrderByComparator {
 	}
 
 	public int compare(Object obj1, Object obj2) {
-		DLFileRank fileRank1 = (DLFileRank)obj1;
-		DLFileRank fileRank2 = (DLFileRank)obj2;
+		DLFileRank dlFileRank1 = (DLFileRank)obj1;
+		DLFileRank dlFileRank2 = (DLFileRank)obj2;
 
 		int value = DateUtil.compareTo(
-			fileRank1.getCreateDate(), fileRank2.getCreateDate());
+			dlFileRank1.getCreateDate(), dlFileRank2.getCreateDate());
 
 		if (_ascending) {
 			return value;

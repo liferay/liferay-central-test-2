@@ -42,12 +42,18 @@ public class FileEntrySizeComparator extends OrderByComparator {
 		Long size2 = null;
 
 		if (obj1 instanceof DLFileEntry) {
-			size1 = ((DLFileEntry)obj1).getSize();
-			size2 = ((DLFileEntry)obj2).getSize();
+			DLFileEntry dlFileEntry1 = (DLFileEntry)obj1;
+			DLFileEntry dlFileEntry2 = (DLFileEntry)obj2;
+
+			size1 = dlFileEntry1.getSize();
+			size2 = dlFileEntry2.getSize();
 		}
 		else {
-			size1 = ((FileEntry)obj1).getSize();
-			size2 = ((FileEntry)obj2).getSize();
+			FileEntry fileEntry1 = (FileEntry)obj1;
+			FileEntry fileEntry2 = (FileEntry)obj2;
+
+			size1 = fileEntry1.getSize();
+			size2 = fileEntry2.getSize();
 		}
 
 		int value = size1.compareTo(size2);

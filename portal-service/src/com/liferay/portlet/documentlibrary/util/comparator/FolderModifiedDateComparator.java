@@ -45,12 +45,18 @@ public class FolderModifiedDateComparator extends OrderByComparator {
 		Date modifiedDate2 = null;
 
 		if (obj1 instanceof DLFolder) {
-			modifiedDate1 = ((DLFolder)obj1).getModifiedDate();
-			modifiedDate2 = ((DLFolder)obj2).getModifiedDate();
+			DLFolder dlFolder1 = (DLFolder)obj1;
+			DLFolder dlFolder2 = (DLFolder)obj2;
+
+			modifiedDate1 = dlFolder1.getModifiedDate();
+			modifiedDate2 = dlFolder2.getModifiedDate();
 		}
 		else {
-			modifiedDate1 = ((Folder)obj1).getModifiedDate();
-			modifiedDate2 = ((Folder)obj2).getModifiedDate();
+			Folder folder1 = (Folder)obj1;
+			Folder folder2 = (Folder)obj2;
+
+			modifiedDate1 = folder1.getModifiedDate();
+			modifiedDate2 = folder2.getModifiedDate();
 		}
 
 		int value = DateUtil.compareTo(modifiedDate1, modifiedDate2);

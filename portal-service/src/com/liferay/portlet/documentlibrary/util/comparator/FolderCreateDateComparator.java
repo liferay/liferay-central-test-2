@@ -45,12 +45,18 @@ public class FolderCreateDateComparator extends OrderByComparator {
 		Date createDate2 = null;
 
 		if (obj1 instanceof DLFolder) {
-			createDate1 = ((DLFolder)obj1).getCreateDate();
-			createDate2 = ((DLFolder)obj2).getCreateDate();
+			DLFolder dlFolder1 = (DLFolder)obj1;
+			DLFolder dlFolder2 = (DLFolder)obj2;
+
+			createDate1 = dlFolder1.getCreateDate();
+			createDate2 = dlFolder2.getCreateDate();
 		}
 		else {
-			createDate1 = ((Folder)obj1).getCreateDate();
-			createDate2 = ((Folder)obj2).getCreateDate();
+			Folder folder1 = (Folder)obj1;
+			Folder folder2 = (Folder)obj2;
+
+			createDate1 = folder1.getCreateDate();
+			createDate2 = folder2.getCreateDate();
 		}
 
 		int value = DateUtil.compareTo(createDate1, createDate2);

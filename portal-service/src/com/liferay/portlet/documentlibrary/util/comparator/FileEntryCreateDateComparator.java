@@ -45,12 +45,18 @@ public class FileEntryCreateDateComparator extends OrderByComparator {
 		Date createDate2 = null;
 
 		if (obj1 instanceof DLFileEntry) {
-			createDate1 = ((DLFileEntry)obj1).getCreateDate();
-			createDate2 = ((DLFileEntry)obj2).getCreateDate();
+			DLFileEntry dlFileEntry1 = (DLFileEntry)obj1;
+			DLFileEntry dlFileEntry2 = (DLFileEntry)obj2;
+
+			createDate1 = dlFileEntry1.getCreateDate();
+			createDate2 = dlFileEntry2.getCreateDate();
 		}
 		else {
-			createDate1 = ((FileEntry)obj1).getCreateDate();
-			createDate2 = ((FileEntry)obj2).getCreateDate();
+			FileEntry fileEntry1 = (FileEntry)obj1;
+			FileEntry fileEntry2 = (FileEntry)obj2;
+
+			createDate1 = fileEntry1.getCreateDate();
+			createDate2 = fileEntry2.getCreateDate();
 		}
 
 		int value = DateUtil.compareTo(createDate1, createDate2);

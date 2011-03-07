@@ -34,13 +34,15 @@ public class FileVersionVersionComparator
 		_ascending = ascending;
 	}
 
-	public int compare(DLFileVersion fileVersion1, DLFileVersion fileVersion2) {
+	public int compare(
+		DLFileVersion dlFileVersion1, DLFileVersion dlFileVersion2) {
+
 		int value = 0;
 
 		int[] versionParts1 = StringUtil.split(
-			fileVersion1.getVersion(), StringPool.PERIOD, 0);
+			dlFileVersion1.getVersion(), StringPool.PERIOD, 0);
 		int[] versionParts2 = StringUtil.split(
-			fileVersion2.getVersion(), StringPool.PERIOD, 0);
+			dlFileVersion2.getVersion(), StringPool.PERIOD, 0);
 
 		if ((versionParts1.length != 2) && (versionParts2.length != 2)) {
 			value = 0;
