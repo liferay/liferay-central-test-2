@@ -131,7 +131,7 @@ public class SubscriptionSender implements Serializable {
 				String toAddress = ovp.getKey();
 				String toName = ovp.getValue();
 
-				if (_sentAddresses.contains(toAddress)) {
+				if (_sentEmailAddresses.contains(toAddress)) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
 							"Do not send a duplicate email to " + toAddress);
@@ -146,7 +146,7 @@ public class SubscriptionSender implements Serializable {
 								"have received an email");
 					}
 
-					_sentAddresses.add(toAddress);
+					_sentEmailAddresses.add(toAddress);
 				}
 
 				InternetAddress to = new InternetAddress(toAddress, toName);
@@ -328,7 +328,7 @@ public class SubscriptionSender implements Serializable {
 
 		String emailAddress = user.getEmailAddress();
 
-		if (_sentAddresses.contains(emailAddress)) {
+		if (_sentEmailAddresses.contains(emailAddress)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Do not send a duplicate email to " + emailAddress);
@@ -343,7 +343,7 @@ public class SubscriptionSender implements Serializable {
 						" to the list of users who have received an email");
 			}
 
-			_sentAddresses.add(emailAddress);
+			_sentEmailAddresses.add(emailAddress);
 		}
 
 		if (!user.isActive()) {
@@ -591,6 +591,6 @@ public class SubscriptionSender implements Serializable {
 		new ArrayList<ObjectValuePair<String, Long>>();
 	private List<ObjectValuePair<String, String>> _runtimeSubscribersOVPs =
 		new ArrayList<ObjectValuePair<String, String>>();
-	private Set<String> _sentAddresses = new HashSet<String>();
+	private Set<String> _sentEmailAddresses = new HashSet<String>();
 
 }
