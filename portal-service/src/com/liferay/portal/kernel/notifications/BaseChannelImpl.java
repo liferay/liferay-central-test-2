@@ -35,6 +35,7 @@ public abstract class BaseChannelImpl implements Channel {
 		if ((currentTime > nextCleanUpTime) &&
 			_nextCleanUpTime.compareAndSet(
 				nextCleanUpTime, currentTime + _cleanUpInterval)) {
+
 			try {
 				doCleanUp();
 			}

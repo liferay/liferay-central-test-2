@@ -154,7 +154,6 @@ public class ChannelImpl extends BaseChannelImpl {
 	}
 
 	public void init() throws ChannelException {
-
 		_reentrantLock.lock();
 
 		try {
@@ -270,7 +269,6 @@ public class ChannelImpl extends BaseChannelImpl {
 	}
 
 	protected void doCleanUp() throws Exception {
-
 		_reentrantLock.lock();
 
 		try {
