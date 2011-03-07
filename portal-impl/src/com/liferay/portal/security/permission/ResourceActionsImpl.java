@@ -336,7 +336,7 @@ public class ResourceActionsImpl implements ResourceActions {
 			actions = getPortletMimeTypeActions(name);
 
 			if (!name.equals(PortletKeys.PORTAL)) {
-				checkPortletActions(actions);
+				checkPortletActions(name, actions);
 			}
 
 			List<String> communityDefaultActions =
@@ -654,11 +654,20 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
-	protected void checkPortletActions(List<String> actions) {
+	protected void checkPortletActions(String name, List<String> actions) {
+		Portlet portlet = portletLocalService.getPortletById(name);
+
 		if (!actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL) &&
 			!actions.contains(ActionKeys.ADD_TO_PAGE)) {
 
 			actions.add(ActionKeys.ADD_TO_PAGE);
+		}
+
+		if ((portlet != null) &&
+			(portlet.getControlPanelEntryCategory() != null) &&
+			!actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL)) {
+
+			actions.add(ActionKeys.ACCESS_IN_CONTROL_PANEL);
 		}
 
 		if (!actions.contains(ActionKeys.CONFIGURATION)) {
@@ -1011,7 +1020,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		supportsActions.addAll(getPortletMimeTypeActions(name));
 
 		if (!name.equals(PortletKeys.PORTAL)) {
-			checkPortletActions(supportsActions);
+			checkPortletActions(name, supportsActions);
 		}
 
 		supportsActions = setActions(
