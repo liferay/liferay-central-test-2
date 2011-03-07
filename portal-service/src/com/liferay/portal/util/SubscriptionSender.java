@@ -131,6 +131,24 @@ public class SubscriptionSender implements Serializable {
 				String toAddress = ovp.getKey();
 				String toName = ovp.getValue();
 
+				if (_sentAddresses.contains(toAddress)) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Do not send a duplicate email to " + toAddress);
+					}
+
+					return;
+				}
+				else {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Add " + toAddress + " to the list of users who " +
+								"have received an email");
+					}
+
+					_sentAddresses.add(toAddress);
+				}
+
 				InternetAddress to = new InternetAddress(toAddress, toName);
 
 				sendEmail(to, LocaleUtil.getDefault());
@@ -291,31 +309,10 @@ public class SubscriptionSender implements Serializable {
 	protected void notifySubscriber(Subscription subscription)
 		throws Exception {
 
-		long subscriptionUserId = subscription.getUserId();
-
-		if (_sentUserIds.contains(subscriptionUserId)) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Do not send a duplicate email to user " +
-						subscriptionUserId);
-			}
-
-			return;
-		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Add user " + subscriptionUserId +
-						" to the list of users who have received an email");
-			}
-
-			_sentUserIds.add(subscriptionUserId);
-		}
-
 		User user = null;
 
 		try {
-			user = UserLocalServiceUtil.getUserById(subscriptionUserId);
+			user = UserLocalServiceUtil.getUserById(subscription.getUserId());
 		}
 		catch (NoSuchUserException nsue) {
 			if (_log.isInfoEnabled()) {
@@ -329,9 +326,29 @@ public class SubscriptionSender implements Serializable {
 			return;
 		}
 
+		String emailAddress = user.getEmailAddress();
+
+		if (_sentAddresses.contains(emailAddress)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not send a duplicate email to " + emailAddress);
+			}
+
+			return;
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Add " + emailAddress +
+						" to the list of users who have received an email");
+			}
+
+			_sentAddresses.add(emailAddress);
+		}
+
 		if (!user.isActive()) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Skip inactive user " + subscriptionUserId);
+				_log.debug("Skip inactive user " + user.getUserId());
 			}
 
 			return;
@@ -341,7 +358,7 @@ public class SubscriptionSender implements Serializable {
 
 		int type = group.getType();
 
-		if (!GroupLocalServiceUtil.hasUserGroup(subscriptionUserId, groupId) &&
+		if (!GroupLocalServiceUtil.hasUserGroup(user.getUserId(), groupId) &&
 			(type != GroupConstants.TYPE_COMMUNITY_OPEN)) {
 
 			if (_log.isInfoEnabled()) {
@@ -358,7 +375,7 @@ public class SubscriptionSender implements Serializable {
 		try {
 			if (!hasPermission(subscription, user)) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("Skip unauthorized user " + subscriptionUserId);
+					_log.debug("Skip unauthorized user " + user.getUserId());
 				}
 
 				return;
@@ -574,6 +591,6 @@ public class SubscriptionSender implements Serializable {
 		new ArrayList<ObjectValuePair<String, Long>>();
 	private List<ObjectValuePair<String, String>> _runtimeSubscribersOVPs =
 		new ArrayList<ObjectValuePair<String, String>>();
-	private Set<Long> _sentUserIds = new HashSet<Long>();
+	private Set<String> _sentAddresses = new HashSet<String>();
 
 }
