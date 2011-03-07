@@ -327,9 +327,19 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 			long repositoryId, long parentFolderId, int start, int end)
 		throws PortalException, SystemException {
 
+		return getFolders(
+			repositoryId, parentFolderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	public List<Folder> getFolders(
+			long repositoryId, long parentFolderId, int start, int end,
+			OrderByComparator obc)
+		throws PortalException, SystemException {
+
 		Repository repository = getRepository(repositoryId);
 
-		return repository.getFolders(parentFolderId, start, end);
+		return repository.getFolders(parentFolderId, start, end, obc);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
@@ -682,7 +692,8 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		}
 
 		List<Folder> srcSubfolders = repository.getFolders(
-			srcFolder.getFolderId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			srcFolder.getFolderId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
 
 		for (Folder srcSubfolder : srcSubfolders) {
 			Folder destSubfolder = repository.addFolder(

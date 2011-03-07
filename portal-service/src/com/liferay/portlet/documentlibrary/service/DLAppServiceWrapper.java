@@ -222,6 +222,15 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.getFolders(repositoryId, parentFolderId, start, end);
 	}
 
+	public java.util.List<com.liferay.portal.kernel.repository.model.Folder> getFolders(
+		long repositoryId, long parentFolderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlAppService.getFolders(repositoryId, parentFolderId, start,
+			end, obc);
+	}
+
 	public java.util.List<java.lang.Object> getFoldersAndFileEntriesAndFileShortcuts(
 		long repositoryId, long folderId, int status, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,

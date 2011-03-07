@@ -474,11 +474,12 @@ public class DLRepositoryLocalServiceImpl
 	}
 
 	public List<DLFolder> getFolders(
-			long groupId, long parentFolderId, int start, int end)
+			long groupId, long parentFolderId, int start, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return dlFolderPersistence.findByG_P(
-			groupId, parentFolderId, start, end);
+			groupId, parentFolderId, start, end, obc);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(

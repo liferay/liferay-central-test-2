@@ -140,10 +140,11 @@ public class BaseLocalRepositoryImpl implements LocalRepository {
 		return _repository.getFolder(parentFolderId, title);
 	}
 
-	public List<Folder> getFolders(long parentFolderId, int start, int end)
+	public List<Folder> getFolders(
+			long parentFolderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return _repository.getFolders(parentFolderId, start, end);
+		return _repository.getFolders(parentFolderId, start, end, obc);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(

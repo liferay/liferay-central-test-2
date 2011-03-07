@@ -91,7 +91,8 @@ public interface Repository {
 	public Folder getFolder(long parentFolderId, String title)
 		throws PortalException, SystemException;
 
-	public List<Folder> getFolders(long parentFolderId, int start, int end)
+	public List<Folder> getFolders(
+			long parentFolderId, int start, int end, OrderByComparator obc)
 		throws SystemException;
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(

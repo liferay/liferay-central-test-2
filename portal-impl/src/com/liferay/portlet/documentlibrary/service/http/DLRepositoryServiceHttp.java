@@ -723,14 +723,14 @@ public class DLRepositoryServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
 		HttpPrincipal httpPrincipal, long groupId, long parentFolderId,
-		int start, int end)
+		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(DLRepositoryServiceUtil.class.getName(),
 					"getFolders", _getFoldersParameterTypes19);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
-					parentFolderId, start, end);
+					parentFolderId, start, end, obc);
 
 			Object returnObj = null;
 
@@ -1855,7 +1855,8 @@ public class DLRepositoryServiceHttp {
 			long.class, long.class, java.lang.String.class
 		};
 	private static final Class<?>[] _getFoldersParameterTypes19 = new Class[] {
-			long.class, long.class, int.class, int.class
+			long.class, long.class, int.class, int.class,
+			com.liferay.portal.kernel.util.OrderByComparator.class
 		};
 	private static final Class<?>[] _getFoldersAndFileEntriesAndFileShortcutsParameterTypes20 =
 		new Class[] { long.class, long.class, int.class, int.class, int.class };

@@ -274,12 +274,13 @@ public class DLRepositoryServiceSoap {
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
-		long groupId, long parentFolderId, int start, int end)
+		long groupId, long parentFolderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> returnValue =
 				DLRepositoryServiceUtil.getFolders(groupId, parentFolderId,
-					start, end);
+					start, end, obc);
 
 			return returnValue;
 		}

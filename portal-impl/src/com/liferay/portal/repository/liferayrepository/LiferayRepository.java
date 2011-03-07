@@ -217,11 +217,12 @@ public class LiferayRepository
 		return new LiferayFolder(dlFolder);
 	}
 
-	public List<Folder> getFolders(long parentFolderId, int start, int end)
+	public List<Folder> getFolders(
+			long parentFolderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		List<DLFolder> dlFolders = dlRepositoryService.getFolders(
-			getGroupId(), toFolderId(parentFolderId), start, end);
+			getGroupId(), toFolderId(parentFolderId), start, end, obc);
 
 		return toFolders(dlFolders);
 	}

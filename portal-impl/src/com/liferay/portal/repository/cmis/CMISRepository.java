@@ -57,9 +57,14 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
+import com.liferay.portlet.documentlibrary.util.comparator.FileEntryCreateDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryModifiedDateComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryReadCountComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.FileEntrySizeComparator;
 import com.liferay.portlet.documentlibrary.util.comparator.FileEntryTitleComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.FolderCreateDateComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.FolderModifiedDateComparator;
+import com.liferay.portlet.documentlibrary.util.comparator.FolderNameComparator;
 
 import java.io.InputStream;
 
@@ -273,7 +278,10 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		List<FileEntry> fileEntries = getFileEntries(folderId);
 
 		if (obc != null) {
-			if (obc instanceof FileEntryModifiedDateComparator) {
+			if (obc instanceof FileEntryCreateDateComparator ||
+				obc instanceof FileEntryModifiedDateComparator ||
+				obc instanceof FileEntrySizeComparator) {
+
 				fileEntries = ListUtil.sort(fileEntries, obc);
 			}
 			else if (obc instanceof FileEntryReadCountComparator) {
@@ -454,10 +462,24 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 				", title=" + title + "}");
 	}
 
-	public List<Folder> getFolders(long parentFolderId, int start, int end)
+	public List<Folder> getFolders(
+			long parentFolderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
 		List<Folder> folders = getFolders(parentFolderId);
+
+		if (obc != null) {
+			if (obc instanceof FolderCreateDateComparator ||
+				obc instanceof FolderModifiedDateComparator) {
+
+				folders = ListUtil.sort(folders, obc);
+			}
+			else if (obc instanceof FolderNameComparator) {
+				if (!obc.isAscending()) {
+					folders = ListUtil.sort(folders, obc);
+				}
+			}
+		}
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
 			return folders;
@@ -516,7 +538,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			List<Long> subfolderIds = new ArrayList<Long>();
 
 			List<Folder> subFolders = getFolders(
-				folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+				folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 			getSubfolderIds(subfolderIds, subFolders, recurse);
 
@@ -1292,7 +1314,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 			if (recurse) {
 				List<Folder> subSubFolders = getFolders(
-					subfolderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+					subfolderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 				getSubfolderIds(subfolderIds, subSubFolders, recurse);
 			}

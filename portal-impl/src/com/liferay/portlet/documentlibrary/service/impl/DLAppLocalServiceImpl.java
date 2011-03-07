@@ -353,9 +353,19 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 			long repositoryId, long parentFolderId, int start, int end)
 		throws PortalException, SystemException {
 
+		return getFolders(
+			repositoryId, parentFolderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	public List<Folder> getFolders(
+			long repositoryId, long parentFolderId, int start, int end,
+			OrderByComparator obc)
+		throws PortalException, SystemException {
+
 		LocalRepository localRepository = getLocalRepository(repositoryId);
 
-		return localRepository.getFolders(parentFolderId, start, end);
+		return localRepository.getFolders(parentFolderId, start, end, obc);
 	}
 
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(

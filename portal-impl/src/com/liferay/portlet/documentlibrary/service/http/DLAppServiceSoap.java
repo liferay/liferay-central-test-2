@@ -260,6 +260,24 @@ public class DLAppServiceSoap {
 		}
 	}
 
+	public static java.util.List<com.liferay.portal.kernel.repository.model.Folder> getFolders(
+		long repositoryId, long parentFolderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.kernel.repository.model.Folder> returnValue =
+				DLAppServiceUtil.getFolders(repositoryId, parentFolderId,
+					start, end, obc);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getFoldersAndFileEntriesAndFileShortcutsCount(
 		long repositoryId, long folderId, int status) throws RemoteException {
 		try {
