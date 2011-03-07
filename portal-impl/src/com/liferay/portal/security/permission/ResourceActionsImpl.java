@@ -655,13 +655,13 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	protected void checkPortletActions(String name, List<String> actions) {
-		Portlet portlet = portletLocalService.getPortletById(name);
-
 		if (!actions.contains(ActionKeys.ACCESS_IN_CONTROL_PANEL) &&
 			!actions.contains(ActionKeys.ADD_TO_PAGE)) {
 
 			actions.add(ActionKeys.ADD_TO_PAGE);
 		}
+
+		Portlet portlet = portletLocalService.getPortletById(name);
 
 		if ((portlet != null) &&
 			(portlet.getControlPanelEntryCategory() != null) &&
