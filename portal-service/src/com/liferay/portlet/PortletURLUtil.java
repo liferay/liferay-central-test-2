@@ -202,6 +202,15 @@ public class PortletURLUtil {
 
 		sb.append("&p_p_isolated=1");
 
+		Boolean renderPortletResource = (Boolean)request.getAttribute(
+			WebKeys.RENDER_PORTLET_RESOURCE);
+
+		boolean runtimePortlet = (renderPortletResource != null) &&
+			renderPortletResource.booleanValue();
+
+		sb.append("&p_p_runtime=");
+		sb.append(String.valueOf(runtimePortlet));
+
 		String doAsUserId = themeDisplay.getDoAsUserId();
 
 		if (Validator.isNotNull(doAsUserId)) {
