@@ -54,7 +54,8 @@ UnicodeProperties layoutTypeSettings =  selLayout.getTypeSettingsProperties();
 
 		<c:if test="<%= selLayout.getIconImage() %>">
 			<liferay-ui:icon
-				cssClass="deleteIconImage"
+				cssClass="modify-link"
+				id="deleteIconLink"
 				image="delete"
 				label="<%= true %>"
 				url="javascript:;"
@@ -68,29 +69,21 @@ UnicodeProperties layoutTypeSettings =  selLayout.getTypeSettingsProperties();
 </aui:fieldset>
 
 <aui:script use="aui-base">
-	var deleteIconImageLink = A.one('.deleteIconImage a');
-
+	var deleteLogoLink = A.one('#<portlet:namespace />deleteIconLink');
 	var iconImageInput =  A.one('#<portlet:namespace />iconImage');
-
 	var layoutIconContainer =  A.one('#<portlet:namespace />layoutIconContainer');
-
-	if (deleteIconImageLink) {
-		deleteIconImageLink.on(
-			'click',
-			function() {
-				iconImageInput.val(false);
-
-				layoutIconContainer.hide();
-			}
-		);
-	}
-
 	var iconFileNameInput = A.one('#<portlet:namespace />iconFileName');
 
-	iconFileNameInput.on(
-		'change',
-		function() {
-			iconImageInput.val(true);
-		}
-	);
+	var changeLogo = function(event) {
+		var changeLogo = (event.type == 'change');
+
+		iconImageInput.val(changeLogo);
+		layoutIconContainer.hide();
+	};
+
+	if (deleteLogoLink) {
+		deleteLogoLink.on('click', changeLogo);
+	}
+
+	iconFileNameInput.on('change', changeLogo);
 </aui:script>
