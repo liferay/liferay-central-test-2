@@ -454,6 +454,12 @@
 	<bean id="com.liferay.portal.util.PortalUtil" class="com.liferay.portal.util.PortalUtil">
 		<property name="portal" ref="com.liferay.portal.util.Portal" />
 	</bean>
+	<bean id="com.liferay.portal.util.PortalClassLoaderAdvice" class="com.liferay.portal.util.PortalClassLoaderAdvice" />
+	<aop:config>
+		<aop:aspect ref="com.liferay.portal.util.PortalClassLoaderAdvice" >
+			<aop:around pointcut="execution(public * com.liferay.portal.kernel.xml.SAXReader.read(..))" method="setClassLoader" />
+		</aop:aspect>
+	</aop:config>
 	<bean id="com.liferay.portal.util.PortletListerFactoryUtil" class="com.liferay.portal.util.PortletListerFactoryUtil">
 		<property name="portletListerFactory">
 			<bean class="com.liferay.portal.util.PortletListerFactoryImpl" />
