@@ -14,6 +14,8 @@
 
 package com.liferay.portal.spring.aop;
 
+import com.liferay.portal.kernel.spring.aop.Swallowable;
+
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
@@ -27,9 +29,20 @@ public abstract class ChainableMethodAdvice implements MethodInterceptor {
 		throws Throwable {
 	}
 
-	public void afterThrowing(
+	public boolean afterThrowing(
 			MethodInvocation methodInvocation, Throwable throwable)
 		throws Throwable {
+		if (!(throwable instanceof Swallowable)) {
+			return true;
+		}
+
+		Swallowable swallowable = (Swallowable)throwable;
+		if (swallowable.isSwallowable()) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	public Object before(MethodInvocation methodInvocation) throws Throwable {
@@ -64,9 +77,9 @@ public abstract class ChainableMethodAdvice implements MethodInterceptor {
 			afterReturning(methodInvocation, returnValue);
 		}
 		catch (Throwable throwable) {
-			afterThrowing(methodInvocation, throwable);
-
-			throw throwable;
+			if (afterThrowing(methodInvocation, throwable)) {
+				throw throwable;
+			}
 		}
 		finally {
 			duringFinally(methodInvocation);

@@ -72,7 +72,7 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		}
 	}
 
-	public void afterThrowing(
+	public boolean afterThrowing(
 			MethodInvocation methodInvocation, Throwable throwable)
 		throws Throwable {
 
@@ -82,6 +82,8 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 		if (serviceRequestDataSample != null) {
 			serviceRequestDataSample.capture(RequestStatus.ERROR);
 		}
+
+		return true;
 	}
 
 	public Object before(MethodInvocation methodInvocation) throws Throwable {
