@@ -17,9 +17,9 @@
 
 	var STR_BBCODE_END_OPEN = '[/';
 
-	var STR_ATTR_TAG_CLOSE = '">';
+	var STR_TAG_ATTR_CLOSE = '">';
 
-	var STR_ATTR_TAG_OPEN = '<span style="';
+	var STR_TAG_ATTR_STYLE_OPEN = '<span style="';
 
 	var STR_TAG_BR = '<br>';
 
@@ -27,15 +27,15 @@
 
 	var STR_TAG_END_OPEN = '</';
 
+	var STR_TAG_INVALID_OPEN = '<span style="color: red">';
+
 	var STR_TAG_P_OPEN = '<p>';
 
 	var STR_TAG_OPEN = '<';
 
 	var STR_TAG_SPAN_CLOSE = '</span>';
 
-	var STR_TAG_SPAN_OPEN = '<span style="color: red">';
-
-	var TPL_LIST_ITEM = STR_TAG_SPAN_OPEN + STR_BBCODE_OPEN + LIST + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
+	var TPL_LIST_ITEM = STR_TAG_INVALID_OPEN + STR_BBCODE_OPEN + LIST + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
 
 	var MAP_FONT_SIZE = {
 		1: 10,
@@ -70,6 +70,8 @@
 	};
 
 	BBCodeParser.prototype = {
+		constructor: BBCodeParser,
+
 		parse: function(data) {
 			var instance = this;
 
@@ -84,7 +86,9 @@
 
 			var result = data.replace(
 				REGEX_MAIN,
-				A.bind(instance._process, instance)
+				function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
+					return instance._process(matchedStr, crlf, openTag, tagOption, closeTag, offset, str);
+				}
 			);
 
 			if (instance._noParse) {
@@ -97,12 +101,12 @@
 				if ( lastBBTag == 'url') {
 					openTags.pop();
 
-					endTags.push(STR_ATTR_TAG_CLOSE, data.substr(instance._urlStart, data.length - instance._urlStart), '</a>');
+					endTags.push(STR_TAG_ATTR_CLOSE, data.substr(instance._urlStart, data.length - instance._urlStart), '</a>');
 				}
 				else if (lastBBTag == 'img') {
 					openTags.pop();
 
-					endTags.push(STR_ATTR_TAG_CLOSE);
+					endTags.push(STR_TAG_ATTR_CLOSE);
 				}
 
 				while (openTags.length) {
@@ -152,7 +156,7 @@
 				}
 			);
 
-			return STR_ATTR_TAG_OPEN + 'color: ' + tagOption + STR_ATTR_TAG_CLOSE;
+			return STR_TAG_ATTR_STYLE_OPEN + 'color: ' + tagOption + STR_TAG_ATTR_CLOSE;
 		},
 
 		_handleEm: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
@@ -171,7 +175,7 @@
 		_handleFont: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
 			var instance = this;
 
-			var result = STR_ATTR_TAG_OPEN + 'font-family: ' + tagOption + STR_ATTR_TAG_CLOSE;
+			var result = STR_TAG_ATTR_STYLE_OPEN + 'font-family: ' + tagOption + STR_TAG_ATTR_CLOSE;
 
 			instance._openTags.push(
 				{
@@ -191,7 +195,7 @@
 			instance._openTags.push(
 				{
 					bbTag: openTag,
-					endTag: STR_ATTR_TAG_CLOSE
+					endTag: STR_TAG_ATTR_CLOSE
 				}
 			);
 
@@ -220,7 +224,7 @@
 			var result = STR_TAG_OPEN + tag + STR_TAG_END_CLOSE;
 
 			if (styleAttr) {
-				result = STR_TAG_OPEN + tag + ' style="' + styleAttr + STR_ATTR_TAG_CLOSE;
+				result = STR_TAG_OPEN + tag + ' style="' + styleAttr + STR_TAG_ATTR_CLOSE;
 			}
 
 			return result;
@@ -236,7 +240,7 @@
 			}
 			else {
 				if (instance._hasOpenTag(openTag)) {
-					instance._processEndTag(matchedStr, crlf, openTag, tagOption, '*', offset, orig);
+					instance._processEndTag(matchedStr, crlf, openTag, tagOption, '*', offset, str);
 				}
 
 				instance._openTags.push(
@@ -265,7 +269,7 @@
 			var result = '<blockquote>';
 
 			if (tagOption && tagOption.length && REGEX_URI.test(tagOption)) {
-				result = '<blockquote cite="' + tagOption + STR_ATTR_TAG_CLOSE;
+				result = '<blockquote cite="' + tagOption + STR_TAG_ATTR_CLOSE;
 			}
 
 			return result;
@@ -298,7 +302,7 @@
 				}
 			);
 
-			return STR_ATTR_TAG_OPEN + 'font-size: ' + instance._getFontSize(tagOption) + 'px">';
+			return STR_TAG_ATTR_STYLE_OPEN + 'font-size: ' + instance._getFontSize(tagOption) + 'px' + STR_TAG_ATTR_CLOSE;
 		},
 
 		_handleStrikeThrough: function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
@@ -446,7 +450,7 @@
 			if (tagOption && REGEX_URI.test(tagOption)) {
 				instance._urlStart = -1;
 
-				result = '<a href="' + tagOption + STR_ATTR_TAG_CLOSE;
+				result = '<a href="' + tagOption + STR_TAG_ATTR_CLOSE;
 			}
 			else {
 				instance._urlStart = matchedStr.length + offset;
@@ -534,11 +538,11 @@
 					}
 
 					if (!openTags.length || openTags[openTags.length - 1].bbTag != closeTag) {
-						result = STR_TAG_SPAN_OPEN + STR_BBCODE_END_OPEN + closeTag + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
+						result = STR_TAG_INVALID_OPEN + STR_BBCODE_END_OPEN + closeTag + STR_BBCODE_CLOSE + STR_TAG_SPAN_CLOSE;
 					}
 					else if (closeTag == 'url') {
 						if (instance._urlStart > 0) {
-							result = STR_ATTR_TAG_CLOSE + orig.substr(instance._urlStart, offset - instance._urlStart) + openTags.pop().endTag;
+							result = STR_TAG_ATTR_CLOSE + str.substr(instance._urlStart, offset - instance._urlStart) + openTags.pop().endTag;
 						}
 						else {
 							result = openTags.pop().endTag;
