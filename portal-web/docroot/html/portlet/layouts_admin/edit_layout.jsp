@@ -152,7 +152,7 @@ String[][] categorySections = {mainSections};
 									<c:otherwise>
 										if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
 											document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-											document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selLayout.getParentPlid() %>";
+											document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selLayout.getParentPlid() %>";
 											submitForm(document.<portlet:namespace />fm);
 										}
 									</c:otherwise>
