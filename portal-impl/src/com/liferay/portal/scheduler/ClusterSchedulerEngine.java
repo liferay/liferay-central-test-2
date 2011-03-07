@@ -123,7 +123,8 @@ public class ClusterSchedulerEngine
 					_memorySchedulerClusterEventListener);
 
 				LockLocalServiceUtil.unlock(
-					_classNameForLock, _classNameForLock, _localClusterNodeAddress,
+					_LOCK_CLASS_NAME, _LOCK_CLASS_NAME,
+					_localClusterNodeAddress,
 					PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED);
 			}
 		}
@@ -183,12 +184,13 @@ public class ClusterSchedulerEngine
 	public void updateMemorySchedulerClusterMaster() throws SchedulerException {
 		try {
 			Lock lock = lockMemorySchedulerCluster(null);
-			
+
 			Address address = (Address)getDeserializedObject(lock.getOwner());
-			
+
 			if (ClusterExecutorUtil.isClusterNodeAlive(address)) {
 				return;
 			}
+
 			lockMemorySchedulerCluster(lock.getOwner());
 		}
 		catch (Exception e) {
@@ -234,24 +236,22 @@ public class ClusterSchedulerEngine
 		return _localClusterNodeAddress.equals(lock.getOwner());
 	}
 
-	protected Lock lockMemorySchedulerCluster(String expectOwner)
-		throws Exception {
-
+	protected Lock lockMemorySchedulerCluster(String owner) throws Exception {
 		if (_localClusterNodeAddress == null) {
 			_localClusterNodeAddress = getSerializedString(
 				ClusterExecutorUtil.getLocalClusterNodeAddress());
 		}
 
 		Lock lock = null;
-		
-		if (expectOwner == null) {
+
+		if (owner == null) {
 			lock = LockLocalServiceUtil.lock(
-				_classNameForLock, _classNameForLock, _localClusterNodeAddress,
+				_LOCK_CLASS_NAME, _LOCK_CLASS_NAME, _localClusterNodeAddress,
 				PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED);
 		}
 		else {
 			lock = LockLocalServiceUtil.lock(
-				_classNameForLock, _classNameForLock, expectOwner,
+				_LOCK_CLASS_NAME, _LOCK_CLASS_NAME, owner,
 				_localClusterNodeAddress,
 				PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED);
 		}
@@ -259,10 +259,12 @@ public class ClusterSchedulerEngine
 		return lock;
 	}
 
+	private static final String _LOCK_CLASS_NAME =
+		SchedulerEngine.class.getName();
+
 	private static Log _log = LogFactoryUtil.getLog(
 		ClusterSchedulerEngine.class);
 
-	private static String _classNameForLock = SchedulerEngine.class.getName();
 	private static String _localClusterNodeAddress;
 
 	private ClusterEventListener _memorySchedulerClusterEventListener;

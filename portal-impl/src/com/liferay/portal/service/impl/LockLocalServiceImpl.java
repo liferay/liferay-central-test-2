@@ -201,11 +201,11 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 
 		return lock;
 	}
-	
+
 	@Transactional(isolation = Isolation.SERIALIZABLE)
 	public Lock lock(
-			String className, String key, String expectOwner, 
-			String updateOwner, boolean retrieveFromCache)
+			String className, String key, String expectedOwner,
+			String updatedOwner, boolean retrieveFromCache)
 		throws SystemException {
 
 		Lock lock = lockPersistence.fetchByC_K(
@@ -214,7 +214,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 		if (lock != null) {
 			String owner = lock.getOwner();
 
-			if (!owner.equals(expectOwner)) {
+			if (!owner.equals(expectedOwner)) {
 				return lock;
 			}
 
@@ -231,7 +231,7 @@ public class LockLocalServiceImpl extends LockLocalServiceBaseImpl {
 			lock.setCreateDate(new Date());
 			lock.setClassName(className);
 			lock.setKey(key);
-			lock.setOwner(updateOwner);
+			lock.setOwner(updatedOwner);
 
 			lockPersistence.update(lock, false);
 
