@@ -33,6 +33,12 @@ public class ResourceFinderUtil {
 		return getFinder().findByC_P(companyId, primKey);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Resource> findByN_S(
+		java.lang.String name, int scope)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getFinder().findByN_S(name, scope);
+	}
+
 	public static ResourceFinder getFinder() {
 		if (_finder == null) {
 			_finder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName());

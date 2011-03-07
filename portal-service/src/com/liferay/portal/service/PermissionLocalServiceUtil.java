@@ -268,11 +268,23 @@ public class PermissionLocalServiceUtil {
 		return getService().addPermissions(companyId, actionIds, resourceId);
 	}
 
+	public static void addRolePermissions(java.lang.String roleName,
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addRolePermissions(roleName, permission);
+	}
+
 	public static void addUserPermissions(long userId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		getService().addUserPermissions(userId, actionIds, resourceId);
+	}
+
+	public static void checkPermissions(java.lang.String name,
+		java.util.List<java.lang.String> actionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().checkPermissions(name, actionIds);
 	}
 
 	public static java.util.List<java.lang.String> getActions(

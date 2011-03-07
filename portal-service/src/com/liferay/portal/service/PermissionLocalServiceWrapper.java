@@ -259,11 +259,23 @@ public class PermissionLocalServiceWrapper implements PermissionLocalService {
 			resourceId);
 	}
 
+	public void addRolePermissions(java.lang.String roleName,
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_permissionLocalService.addRolePermissions(roleName, permission);
+	}
+
 	public void addUserPermissions(long userId, java.lang.String[] actionIds,
 		long resourceId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_permissionLocalService.addUserPermissions(userId, actionIds, resourceId);
+	}
+
+	public void checkPermissions(java.lang.String name,
+		java.util.List<java.lang.String> actionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_permissionLocalService.checkPermissions(name, actionIds);
 	}
 
 	public java.util.List<java.lang.String> getActions(

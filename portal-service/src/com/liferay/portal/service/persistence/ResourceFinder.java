@@ -25,4 +25,8 @@ public interface ResourceFinder {
 	public java.util.List<com.liferay.portal.model.Resource> findByC_P(
 		long companyId, java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Resource> findByN_S(
+		java.lang.String name, int scope)
+		throws com.liferay.portal.kernel.exception.SystemException;
 }
