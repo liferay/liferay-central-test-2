@@ -889,13 +889,14 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		if (_schedulerEngineClusterManager == null) {
-			_log.error("Can not update memory scheduler cluster master, portal "
-				+ "is no configured to use a clustered scheduler engine.");
+			_log.error(
+				"Unable to update memory scheduler cluster master because " +
+					"the portal is using a clustered scheduler engine");
+
 			return;
 		}
 
 		_schedulerEngineClusterManager.updateMemorySchedulerClusterMaster();
-
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SchedulerEngineUtil.class);
