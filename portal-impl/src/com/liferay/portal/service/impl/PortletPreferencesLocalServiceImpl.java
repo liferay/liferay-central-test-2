@@ -307,8 +307,9 @@ public class PortletPreferencesLocalServiceImpl
 					ownerId, ownerType, plid, portletId);
 
 			if (portletPreferences == null) {
-				if ((portlet != null) && portlet.isUndeployedPortlet() &&
-					PortletPreferencesThreadLocal.isStrict()) {
+				if (((portlet != null) && portlet.isUndeployedPortlet() &&
+						PortletPreferencesThreadLocal.isStrict()) ||
+					(defaultPreferences == null)) {
 
 					return new PortletPreferencesImpl();
 				}
