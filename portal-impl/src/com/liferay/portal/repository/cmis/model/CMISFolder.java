@@ -25,7 +25,6 @@ import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLRepositoryLocalServiceUtil;
@@ -188,28 +187,37 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public long getUserId() {
-		try {
-			return UserLocalServiceUtil.getDefaultUserId(getCompanyId());
-		}
-		catch (Exception e) {
+		User user = getUser(_cmisFolder.getCreatedBy());
+
+		if (user == null) {
 			return 0;
+		}
+		else {
+			return user.getUserId();
 		}
 	}
 
 	public String getUserName() {
-		return _cmisFolder.getCreatedBy();
+		User user = getUser(_cmisFolder.getCreatedBy());
+
+		if (user == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return user.getFullName();
+		}
 	}
 
 	public String getUserUuid() {
-		try {
-			User user = UserLocalServiceUtil.getDefaultUser(
-				getCompanyId());
+		User user = getUser(_cmisFolder.getCreatedBy());
 
+		try {
 			return user.getUserUuid();
 		}
 		catch (Exception e) {
-			return StringPool.BLANK;
 		}
+
+		return StringPool.BLANK;
 	}
 
 	public String getUuid() {
@@ -237,7 +245,7 @@ public class CMISFolder extends CMISModel implements Folder {
 	}
 
 	public boolean isSupportsLocking() {
-		return false;
+		return true;
 	}
 
 	public boolean isSupportsMetadata() {

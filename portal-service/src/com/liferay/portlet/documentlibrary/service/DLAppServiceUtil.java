@@ -343,10 +343,10 @@ public class DLAppServiceUtil {
 		return getService().getSubfolderIds(repositoryId, folderId, recurse);
 	}
 
-	public static com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)
+	public static void lockFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().lockFileEntry(fileEntryId);
+		getService().lockFileEntry(fileEntryId);
 	}
 
 	public static com.liferay.portal.model.Lock lockFileEntry(

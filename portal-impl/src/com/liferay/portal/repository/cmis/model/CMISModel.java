@@ -15,8 +15,13 @@
 package com.liferay.portal.repository.cmis.model;
 
 import com.liferay.portal.kernel.repository.RepositoryException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -31,6 +36,8 @@ import org.apache.chemistry.opencmis.commons.enums.Action;
  * @author Alexander Chow
  */
 public abstract class CMISModel {
+
+	public abstract long getCompanyId();
 
 	public String getDescription() {
 		return StringPool.BLANK;
@@ -56,6 +63,40 @@ public abstract class CMISModel {
 			allowableActions.getAllowableActions();
 
 		return allowableActionsSet.contains(action);
+	}
+
+	protected User getUser(String createdBy) {
+		User user = null;
+
+		try {
+			String authType = CompanyLocalServiceUtil.getCompany(
+				getCompanyId()).getAuthType();
+
+			if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
+				user = UserLocalServiceUtil.getUser(
+					GetterUtil.getLong(createdBy));
+			}
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
+				user = UserLocalServiceUtil.getUserByEmailAddress(
+					getCompanyId(), createdBy);
+			}
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
+				user = UserLocalServiceUtil.getUserByScreenName(
+					getCompanyId(), createdBy);
+			}
+		}
+		catch (Exception e) {
+		}
+
+		if (user == null) {
+			try {
+				user = UserLocalServiceUtil.getDefaultUser(getCompanyId());
+			}
+			catch (Exception e) {
+			}
+		}
+
+		return user;
 	}
 
 	private static Map<String, Action> _mappedActionKeys =

@@ -323,10 +323,10 @@ public class DLAppServiceWrapper implements DLAppService {
 		return _dlAppService.getSubfolderIds(repositoryId, folderId, recurse);
 	}
 
-	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId)
+	public void lockFileEntry(long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _dlAppService.lockFileEntry(fileEntryId);
+		_dlAppService.lockFileEntry(fileEntryId);
 	}
 
 	public com.liferay.portal.model.Lock lockFileEntry(long fileEntryId,

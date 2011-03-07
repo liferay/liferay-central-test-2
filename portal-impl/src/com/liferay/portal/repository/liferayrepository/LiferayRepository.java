@@ -286,10 +286,10 @@ public class LiferayRepository
 			getGroupId(), toFolderId(folderId), recurse);
 	}
 
-	public Lock lockFileEntry(long fileEntryId)
+	public void lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
-		return dlRepositoryService.lockFileEntry(fileEntryId);
+		dlRepositoryService.lockFileEntry(fileEntryId);
 	}
 
 	public Lock lockFileEntry(

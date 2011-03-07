@@ -25,14 +25,12 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.LockImpl;
 import com.liferay.portal.repository.cmis.CMISRepository;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.CMISRepositoryLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
@@ -44,9 +42,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.chemistry.opencmis.client.api.Document;
+import org.apache.chemistry.opencmis.commons.data.AllowableActions;
 import org.apache.chemistry.opencmis.commons.data.ContentStream;
+import org.apache.chemistry.opencmis.commons.enums.Action;
 
 /**
  * @author Alexander Chow
@@ -181,9 +182,23 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public Lock getLock() {
+		if (!isLocked()) {
+			return null;
+		}
+
+		String checkedOutBy = _document.getVersionSeriesCheckedOutBy();
+
+		User user = getUser(checkedOutBy);
+
 		Lock lock = new LockImpl();
 
 		lock.setCreateDate(new Date());
+		lock.setCompanyId(getCompanyId());
+
+		if (user != null) {
+			lock.setUserId(user.getUserId());
+			lock.setUserName(user.getFullName());
+		}
 
 		return lock;
 	}
@@ -217,28 +232,37 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public long getUserId() {
-		try {
-			return UserLocalServiceUtil.getDefaultUserId(getCompanyId());
-		}
-		catch (Exception e) {
+		User user = getUser(_document.getCreatedBy());
+
+		if (user == null) {
 			return 0;
+		}
+		else {
+			return user.getUserId();
 		}
 	}
 
 	public String getUserName() {
-		return _document.getCreatedBy();
+		User user = getUser(_document.getCreatedBy());
+
+		if (user == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return user.getFullName();
+		}
 	}
 
 	public String getUserUuid() {
-		try {
-			User user = UserLocalServiceUtil.getDefaultUser(
-				getCompanyId());
+		User user = getUser(_document.getCreatedBy());
 
+		try {
 			return user.getUserUuid();
 		}
 		catch (Exception e) {
-			return StringPool.BLANK;
 		}
+
+		return StringPool.BLANK;
 	}
 
 	public String getUuid() {
@@ -263,7 +287,16 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public boolean hasLock() {
-		return false;
+		if (!isLocked()) {
+			return false;
+		}
+
+ 		AllowableActions allowableActions = _document.getAllowableActions();
+
+		Set<Action> allowableActionsSet =
+			allowableActions.getAllowableActions();
+
+		return allowableActionsSet.contains(Action.CAN_CHECK_IN);
 	}
 
 	public boolean isDefaultRepository() {
@@ -275,18 +308,11 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 	}
 
 	public boolean isLocked() {
-		String checkedOutId = _document.getVersionSeriesCheckedOutId();
-
-		if (Validator.isNotNull(checkedOutId)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return _document.isVersionSeriesCheckedOut();
 	}
 
 	public boolean isSupportsLocking() {
-		return false;
+		return true;
 	}
 
 	public boolean isSupportsMetadata() {

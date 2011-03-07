@@ -121,7 +121,7 @@ public interface Repository {
 	public List<Long> getSubfolderIds(long folderId, boolean recurse)
 		throws SystemException;
 
-	public Lock lockFileEntry(long fileEntryId)
+	public void lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException;
 
 	public Lock lockFileEntry(

@@ -450,12 +450,12 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		return repository.getSubfolderIds(folderId, recurse);
 	}
 
-	public Lock lockFileEntry(long fileEntryId)
+	public void lockFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
 		Repository repository = getRepository(0, fileEntryId, 0);
 
-		return repository.lockFileEntry(fileEntryId);
+		repository.lockFileEntry(fileEntryId);
 	}
 
 	public Lock lockFileEntry(

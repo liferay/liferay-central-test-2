@@ -95,6 +95,7 @@ import org.apache.chemistry.opencmis.commons.PropertyIds;
 import org.apache.chemistry.opencmis.commons.SessionParameter;
 import org.apache.chemistry.opencmis.commons.data.ContentStream;
 import org.apache.chemistry.opencmis.commons.data.PropertyData;
+import org.apache.chemistry.opencmis.commons.enums.Action;
 import org.apache.chemistry.opencmis.commons.enums.BaseTypeId;
 import org.apache.chemistry.opencmis.commons.enums.BindingType;
 import org.apache.chemistry.opencmis.commons.enums.UnfileObject;
@@ -581,8 +582,25 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 	public abstract boolean isWebServices();
 
-	public Lock lockFileEntry(long fileEntryId) {
-		throw new UnsupportedOperationException();
+	public void lockFileEntry(long fileEntryId) {
+		try {
+			Session session = getSession();
+
+			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
+
+			Document document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+
+			document.checkOut();
+
+			document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	public Lock lockFileEntry(
@@ -717,12 +735,16 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		Document document = null;
 
+		boolean checkedOut = false;
+
 		try {
 			Session session = getSession();
 
 			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
 
 			document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
 
 			Document oldVersion = null;
 
@@ -746,32 +768,46 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			String title = oldVersion.getName();
 			ContentStream contentStream = oldVersion.getContentStream();
 
-			String oldTitle = document.getName();
+			Set<Action> allowableActionsSet =
+				document.getAllowableActions().getAllowableActions();
 
-			ObjectId pwcId = document.checkOut();
+			if (allowableActionsSet.contains(Action.CAN_CHECK_OUT)) {
+				document.checkOut();
 
-			if (!pwcId.toString().equals(versionSeriesId.toString())) {
-				document = (Document)session.getObject(pwcId);
+				checkedOut = true;
 			}
 
-			Map<String, Object> properties = new HashMap<String, Object>();
+			document = document.getObjectOfLatestVersion(false);
+
+			String oldTitle = document.getName();
+
+			Map<String, Object> properties = null;
 
 			if (Validator.isNotNull(title) && !title.equals(oldTitle)) {
+				properties = new HashMap<String, Object>();
+
 				properties.put(PropertyIds.NAME, title);
 			}
 
-			String documentId = document.getId();
+			checkUpdatable(allowableActionsSet, properties, contentStream);
 
-			ObjectId newObjectId = document.checkIn(
-				true, properties, contentStream, changeLog);
+			if (checkedOut) {
+				document.checkIn(
+					true, properties, contentStream, changeLog);
 
-			if (!documentId.equals(newObjectId.toString())) {
-				document = (Document)session.getObject(newObjectId);
+				checkedOut = false;
+			}
+			else {
+				if (properties != null) {
+					document = (Document)document.updateProperties(properties);
+				}
+
+				document.setContentStream(contentStream, true);
 			}
 
-			toFileEntry(document);
+			document = (Document)session.getObject(versionSeriesId);
 
-			document = null;
+			document.refresh();
 		}
 		catch (PortalException pe) {
 			throw pe;
@@ -785,7 +821,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			throw new RepositoryException(e);
 		}
 		finally {
-			if (document != null) {
+			if (checkedOut) {
 				document.cancelCheckOut();
 			}
 		}
@@ -821,11 +857,30 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 	}
 
 	public void unlockFileEntry(long fileEntryId) {
-		throw new UnsupportedOperationException();
+		try {
+			Session session = getSession();
+
+			ObjectId versionSeriesId = toFileEntryId(fileEntryId);
+
+			Document document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+
+			document = document.getObjectOfLatestVersion(false);
+
+			document.checkIn(false, null, null, StringPool.BLANK);
+
+			document = (Document)session.getObject(versionSeriesId);
+
+			document.refresh();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	public void unlockFileEntry(long fileEntryId, String lockUuid) {
-		throw new UnsupportedOperationException();
+		unlockFileEntry(fileEntryId);
 	}
 
 	public void unlockFolder(long folderId, String lockUuid) {
@@ -840,6 +895,8 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		Document document = null;
 
+		boolean checkedOut = false;
+
 		try {
 			Session session = getSession();
 
@@ -847,19 +904,28 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 			document = (Document)session.getObject(versionSeriesId);
 
-			ObjectId pwcId = document.checkOut();
+			document.refresh();
 
-			if (!pwcId.toString().equals(versionSeriesId.toString())) {
-				document = (Document)session.getObject(pwcId);
+			Set<Action> allowableActionsSet =
+				document.getAllowableActions().getAllowableActions();
+
+			if (allowableActionsSet.contains(Action.CAN_CHECK_OUT)) {
+				document.checkOut();
+
+				checkedOut = true;
 			}
+
+			document = document.getObjectOfLatestVersion(false);
 
 			String oldTitle = document.getName();
 
-			Map<String, Object> properties = new HashMap<String, Object>();
+			Map<String, Object> properties = null;
 
 			ContentStream contentStream = null;
 
 			if (Validator.isNotNull(title) && !title.equals(oldTitle)) {
+				properties = new HashMap<String, Object>();
+
 				properties.put(PropertyIds.NAME, title);
 			}
 
@@ -871,18 +937,29 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 					sourceFileName, BigInteger.valueOf(size), contentType, is);
 			}
 
-			String documentId = document.getId();
+			checkUpdatable(allowableActionsSet, properties, contentStream);
 
-			ObjectId newObjectId = document.checkIn(
-				majorVersion, properties, contentStream, changeLog);
+			if (checkedOut) {
+				document.checkIn(
+					majorVersion, properties, contentStream, changeLog);
 
-			if (!documentId.equals(newObjectId.toString())) {
-				document = (Document)session.getObject(newObjectId);
+				checkedOut = false;
+			}
+			else {
+				if (properties != null) {
+					document = (Document)document.updateProperties(properties);
+				}
+
+				if (contentStream != null) {
+					document.setContentStream(contentStream, true);
+				}
 			}
 
-			FileEntry fileEntry = toFileEntry(document);
+			document = (Document)session.getObject(versionSeriesId);
 
-			document = null;
+			document.refresh();
+
+			FileEntry fileEntry = toFileEntry(document);
 
 			return fileEntry;
 		}
@@ -898,7 +975,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			throw new RepositoryException(e);
 		}
 		finally {
-			if (document != null) {
+			if (checkedOut) {
 				document.cancelCheckOut();
 			}
 		}
@@ -1051,6 +1128,24 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 		putParameter(parameters, SessionParameter.REPOSITORY_ID, parameterKey);
 	}
 
+	protected void checkUpdatable(
+			Set<Action> allowableActionsSet, Map<String, Object> properties,
+			ContentStream contentStream)
+		throws PrincipalException {
+
+		if (properties != null) {
+			if (!allowableActionsSet.contains(Action.CAN_UPDATE_PROPERTIES)) {
+				throw new PrincipalException();
+			}
+		}
+
+		if (contentStream != null) {
+			if (!allowableActionsSet.contains(Action.CAN_SET_CONTENT_STREAM)) {
+				throw new PrincipalException();
+			}
+		}
+	}
+
 	protected Session getCachedSession() {
 		HttpSession httpSession = PortalSessionThreadLocal.getHttpSession();
 
@@ -1096,7 +1191,9 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 		ObjectId objectId = toFileEntryId(fileEntryId);
 
-		return toFileEntry((Document)session.getObject(objectId));
+		Document document = (Document)session.getObject(objectId);
+
+		return toFileEntry(document.getObjectOfLatestVersion(false));
 	}
 
 	protected FileVersion getFileVersion(Session session, long fileVersionId)
