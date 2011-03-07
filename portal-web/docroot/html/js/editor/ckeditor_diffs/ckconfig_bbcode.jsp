@@ -76,7 +76,7 @@ CKEDITOR.config.filebrowserUploadUrl = '';
 
 CKEDITOR.config.fontSize_sizes = '10/10px;12/12px;16/16px;18/18px;24/24px;32/32px;48/48px';
 
-CKEDITOR.config.format_tags = 'p;h1;h2;h3;h4;h5;h6;pre';
+CKEDITOR.config.format_tags = 'p;pre';
 
 CKEDITOR.config.language = '<%= HtmlUtil.escape(languageId) %>';
 
