@@ -22,10 +22,10 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
+import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 
@@ -126,7 +126,7 @@ public class EditFolderAction extends PortletAction {
 			actionRequest, "mergeWithParentFolder");
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			DLFolder.class.getName(), actionRequest);
+			IGFolder.class.getName(), actionRequest);
 
 		if (folderId <= 0) {
 
