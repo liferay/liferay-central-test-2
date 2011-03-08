@@ -133,6 +133,12 @@ public class Message implements Serializable {
 		_values.put(key, value);
 	}
 
+	public void remove(String key) {
+		if (_values != null) {
+			_values.remove(key);
+		}
+	}
+
 	public void setDestinationName(String destinationName) {
 		_destinationName = destinationName;
 	}
