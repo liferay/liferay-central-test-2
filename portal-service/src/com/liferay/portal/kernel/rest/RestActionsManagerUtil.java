@@ -25,15 +25,8 @@ public class RestActionsManagerUtil {
 		return _restActionsManager;
 	}
 
-	public static Object lookup(String[] pathChunks, String method) {
-		return getRestActionsManager().getRestActionConfig(pathChunks, method);
-	}
-
-	public static Object[] prepareParameters(
-		String[] pathChunks, RestActionConfig restActionConfig) {
-
-		return getRestActionsManager().prepareParameters(
-			pathChunks, restActionConfig);
+	public static RestAction lookup(String path, String method) {
+		return getRestActionsManager().lookup(path, method);
 	}
 
 	public static void registerRestAction(

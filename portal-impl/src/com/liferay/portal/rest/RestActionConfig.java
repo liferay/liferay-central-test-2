@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.rest;
+package com.liferay.portal.rest;
 
 import com.liferay.portal.kernel.util.MethodParameterNamesResolverUtil;
 

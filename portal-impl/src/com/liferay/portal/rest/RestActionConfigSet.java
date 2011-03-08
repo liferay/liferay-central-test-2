@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.rest;
+package com.liferay.portal.rest;
 
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringPool;
@@ -30,7 +30,7 @@ public class RestActionConfigSet implements Comparable<RestActionConfigSet> {
 
 		restActionConfig.setRestActionConfigSet(this);
 
-		int index = getRestActionConfigIndex(restActionConfig.getMethod());
+		int index = _getRestActionConfigIndex(restActionConfig.getMethod());
 
 		if (index == -1) {
 			if (restActionConfig.getMethod() == null) {
@@ -66,7 +66,7 @@ public class RestActionConfigSet implements Comparable<RestActionConfigSet> {
 	}
 
 	public RestActionConfig getRestActionConfig(String method) {
-		int index = getRestActionConfigIndex(method);
+		int index = _getRestActionConfigIndex(method);
 
 		if (index == -1) {
 			return null;
@@ -80,10 +80,10 @@ public class RestActionConfigSet implements Comparable<RestActionConfigSet> {
 
 		_pathChunks = StringUtil.split(path.substring(1), StringPool.SLASH);
 
-		_pathMacros = resolvePathMacros(_pathChunks);
+		_pathMacros = _resolvePathMacros(_pathChunks);
 	}
 
-	protected int[] getPathChunkIndexes(
+	private int[] _getPathChunkIndexes(
 		String pathChunk, String leftBoundary, String rightBoundary) {
 
 		int index = pathChunk.indexOf(leftBoundary, 0);
@@ -112,7 +112,7 @@ public class RestActionConfigSet implements Comparable<RestActionConfigSet> {
 		return indexes;
 	}
 
-	protected int getRestActionConfigIndex(String method) {
+	private int _getRestActionConfigIndex(String method) {
 		for (int i = 0; i < _restActionConfigs.size(); i++) {
 			RestActionConfig restActionConfig = _restActionConfigs.get(i);
 
@@ -128,14 +128,14 @@ public class RestActionConfigSet implements Comparable<RestActionConfigSet> {
 		return -1;
 	}
 
-	protected PathMacro[] resolvePathMacros(String[] pathChunks) {
+	private PathMacro[] _resolvePathMacros(String[] pathChunks) {
 		List<PathMacro> pathMacros = new ArrayList<PathMacro>(
 			pathChunks.length);
 
 		for (int i = 0; i < pathChunks.length; i++) {
 			String pathChunk = pathChunks[i];
 
-			int[] indexes = getPathChunkIndexes(
+			int[] indexes = _getPathChunkIndexes(
 				pathChunk, StringPool.DOLLAR_AND_OPEN_CURLY_BRACE,
 				StringPool.CLOSE_CURLY_BRACE);
 

@@ -14,16 +14,8 @@
 
 package com.liferay.portal.kernel.rest;
 
-import java.lang.reflect.Method;
+public interface RestAction {
 
-/**
- * @author Igor Spasic
- */
-public interface RestActionsManager {
-
-	public RestAction lookup(String path, String method);
-
-	public void registerRestAction(
-		Class<?> actionClass, Method actionMethod, String path, String method);
+	Object invoke() throws Exception;
 
 }

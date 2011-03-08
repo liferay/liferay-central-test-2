@@ -14,19 +14,17 @@
 
 package com.liferay.portal.rest;
 
-import com.liferay.portal.kernel.rest.PathMacro;
-import com.liferay.portal.kernel.rest.RestActionConfig;
-import com.liferay.portal.kernel.rest.RestActionConfigSet;
+import com.liferay.portal.kernel.rest.RestAction;
 import com.liferay.portal.kernel.rest.RestActionsManager;
 import com.liferay.portal.kernel.util.BinarySearch;
 import com.liferay.portal.kernel.util.SortedArrayList;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Method;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import jodd.util.ReflectUtil;
 
 /**
  * @author Igor Spasic
@@ -40,8 +38,10 @@ public class RestActionsManagerImpl implements RestActionsManager {
 			_restActionConfigSets);
 	}
 
-	public RestActionConfig getRestActionConfig(
-		String[] pathChunks, String method) {
+	public RestAction lookup(String path, String method) {
+
+		String[] pathChunks = StringUtil
+			.split(path.substring(1), StringPool.SLASH);
 
 		int low = 0;
 		int high = _restActionConfigSets.size() - 1;
@@ -57,7 +57,7 @@ public class RestActionsManagerImpl implements RestActionsManager {
 				pathChunk, low, high);
 
 			if (nextLow < 0) {
-				int pathChunkndex = getPathChunkIndex(
+				int pathChunkndex = _getPathChunkIndex(
 					pathChunk, depth, pathMacroIndex, low, high);
 
 				if (pathChunkndex == -1) {
@@ -103,44 +103,7 @@ public class RestActionsManagerImpl implements RestActionsManager {
 			return null;
 		}
 
-		return restActionConfig;
-	}
-
-	public Object[] prepareParameters(
-		String[] pathChunks, RestActionConfig restActionConfig) {
-
-		String[] parameterNames = restActionConfig.getParameterNames();
-		Class<?>[] parameterTypes = restActionConfig.getParameterTypes();
-		PathMacro[] pathMacros = restActionConfig.getPathMacros();
-
-		Object[] parameters = new Object[parameterNames.length];
-
-		for (PathMacro pathMacro : pathMacros) {
-			int index = pathMacro.getIndex();
-
-			if (index >= pathChunks.length) {
-				continue;
-			}
-
-			String value = pathChunks[index];
-
-			for (int i = 0; i < parameterNames.length; i++) {
-				String parameterName = parameterNames[i];
-
-				if (!parameterName.equals(pathMacro.getName())) {
-					continue;
-				}
-
-				Class<?> parameterType = parameterTypes[i];
-
-				Object parameterValue = ReflectUtil.castType(
-					value, parameterType);
-
-				parameters[i] = parameterValue;
-			}
-		}
-
-		return parameters;
+		return new RestActionImpl(restActionConfig, pathChunks);
 	}
 
 	public void registerRestAction(
@@ -169,7 +132,7 @@ public class RestActionsManagerImpl implements RestActionsManager {
 		restActionConfigSet.addRestActionConfig(restActionConfig);
 	}
 
-	protected int getPathChunkIndex(
+	private int _getPathChunkIndex(
 		String pathChunk, int depth, int pathMacroIndex, int low, int high) {
 
 		for (int i = low; i <= high; i++) {
@@ -219,10 +182,6 @@ public class RestActionsManagerImpl implements RestActionsManager {
 		return -1;
 	}
 
-	private PathChunksBinarySearch _pathChunksBinarySearch;
-	private SortedArrayList<RestActionConfigSet> _restActionConfigSets;
-	private BinarySearch<RestActionConfigSet> _restActionConfigSetsBinarySearch;
-
 	private class PathChunksBinarySearch extends BinarySearch<String> {
 
 		protected int compare(int index, String element) {
@@ -247,5 +206,9 @@ public class RestActionsManagerImpl implements RestActionsManager {
 		private int _depth;
 
 	}
+
+	private PathChunksBinarySearch _pathChunksBinarySearch;
+	private SortedArrayList<RestActionConfigSet> _restActionConfigSets;
+	private BinarySearch<RestActionConfigSet> _restActionConfigSetsBinarySearch;
 
 }
