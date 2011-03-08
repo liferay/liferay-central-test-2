@@ -73,6 +73,7 @@ strictfp
 super
 switch
 synchronized
+terminated
 text
 this
 throw
