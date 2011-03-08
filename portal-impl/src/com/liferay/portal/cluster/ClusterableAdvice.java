@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.cluster.Clusterable;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.spring.aop.Swallowable;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodTargetClassKey;
 import com.liferay.portal.spring.aop.AnnotationChainableMethodAdvice;
@@ -77,6 +78,24 @@ public class ClusterableAdvice
 		clusterRequest.setServletContextName(_servletContextName);
 
 		ClusterExecutorUtil.execute(clusterRequest);
+	}
+
+	public boolean afterThrowing(
+			MethodInvocation methodInvocation, Throwable throwable)
+		throws Throwable {
+
+		if (!(throwable instanceof Swallowable)) {
+			return true;
+		}
+
+		Swallowable swallowable = (Swallowable)throwable;
+
+		if (swallowable.isSwallowable()) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	public Clusterable getNullAnnotation() {
