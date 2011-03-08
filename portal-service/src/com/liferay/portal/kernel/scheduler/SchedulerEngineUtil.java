@@ -308,7 +308,7 @@ public class SchedulerEngineUtil {
 
 		if (_schedulerEngine instanceof SchedulerEngineClusterManager) {
 			_instance._schedulerEngineClusterManager =
-				(SchedulerEngineClusterManager)_schedulerEngineClusterManager;
+				_schedulerEngineClusterManager;
 		}
 	}
 
