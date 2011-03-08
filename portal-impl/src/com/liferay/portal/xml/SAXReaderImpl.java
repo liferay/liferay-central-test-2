@@ -16,7 +16,6 @@ package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
@@ -331,15 +330,15 @@ public class SAXReaderImpl implements SAXReader {
 	public Document read(File file, boolean validate)
 		throws DocumentException {
 
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+		ClassLoader classLoader = getClass().getClassLoader();
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
+			if (contextClassLoader != classLoader) {
+				currentThread.setContextClassLoader(classLoader);
 			}
 
 			org.dom4j.io.SAXReader saxReader = getSAXReader(validate);
@@ -350,7 +349,7 @@ public class SAXReaderImpl implements SAXReader {
 			throw new DocumentException(de.getMessage(), de);
 		}
 		finally {
-			if (contextClassLoader != portalClassLoader) {
+			if (contextClassLoader != classLoader) {
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -363,15 +362,15 @@ public class SAXReaderImpl implements SAXReader {
 	public Document read(InputStream is, boolean validate)
 		throws DocumentException {
 
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+		ClassLoader classLoader = getClass().getClassLoader();
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
+			if (contextClassLoader != classLoader) {
+				currentThread.setContextClassLoader(classLoader);
 			}
 
 			org.dom4j.io.SAXReader saxReader = getSAXReader(validate);
@@ -382,7 +381,7 @@ public class SAXReaderImpl implements SAXReader {
 			throw new DocumentException(de.getMessage(), de);
 		}
 		finally {
-			if (contextClassLoader != portalClassLoader) {
+			if (contextClassLoader != classLoader) {
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -395,15 +394,15 @@ public class SAXReaderImpl implements SAXReader {
 	public Document read(Reader reader, boolean validate)
 		throws DocumentException {
 
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+		ClassLoader classLoader = getClass().getClassLoader();
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
+			if (contextClassLoader != classLoader) {
+				currentThread.setContextClassLoader(classLoader);
 			}
 
 			org.dom4j.io.SAXReader saxReader = getSAXReader(validate);
@@ -414,7 +413,7 @@ public class SAXReaderImpl implements SAXReader {
 			throw new DocumentException(de.getMessage(), de);
 		}
 		finally {
-			if (contextClassLoader != portalClassLoader) {
+			if (contextClassLoader != classLoader) {
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
@@ -435,15 +434,15 @@ public class SAXReaderImpl implements SAXReader {
 	}
 
 	public Document read(URL url, boolean validate) throws DocumentException {
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+		ClassLoader classLoader = getClass().getClassLoader();
 
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
 		try {
-			if (contextClassLoader != portalClassLoader) {
-				currentThread.setContextClassLoader(portalClassLoader);
+			if (contextClassLoader != classLoader) {
+				currentThread.setContextClassLoader(classLoader);
 			}
 
 			org.dom4j.io.SAXReader saxReader = getSAXReader(validate);
@@ -454,7 +453,7 @@ public class SAXReaderImpl implements SAXReader {
 			throw new DocumentException(de.getMessage(), de);
 		}
 		finally {
-			if (contextClassLoader != portalClassLoader) {
+			if (contextClassLoader != classLoader) {
 				currentThread.setContextClassLoader(contextClassLoader);
 			}
 		}
