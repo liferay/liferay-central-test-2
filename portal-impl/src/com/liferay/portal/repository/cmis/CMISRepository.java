@@ -770,7 +770,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			ContentStream contentStream = oldVersion.getContentStream();
 
 			AllowableActions allowableActions = document.getAllowableActions();
-			
+
 			Set<Action> allowableActionsSet =
 				allowableActions.getAllowableActions();
 
@@ -909,7 +909,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			document.refresh();
 
 			AllowableActions allowableActions = document.getAllowableActions();
-			
+
 			Set<Action> allowableActionsSet =
 				allowableActions.getAllowableActions();
 
