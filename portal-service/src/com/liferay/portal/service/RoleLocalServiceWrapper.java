@@ -316,12 +316,6 @@ public class RoleLocalServiceWrapper implements RoleLocalService {
 	}
 
 	public java.util.List<com.liferay.portal.model.Role> getRoles(
-		java.lang.String name)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _roleLocalService.getRoles(name);
-	}
-
-	public java.util.List<com.liferay.portal.model.Role> getRoles(
 		long[] roleIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

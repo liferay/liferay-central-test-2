@@ -254,24 +254,18 @@ public class PermissionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Permission> addPermissions(
-		long companyId, java.lang.String name, long resourceId,
-		boolean portletActions)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addPermissions(companyId, name, resourceId, portletActions);
-	}
-
-	public static java.util.List<com.liferay.portal.model.Permission> addPermissions(
 		long companyId, java.util.List<java.lang.String> actionIds,
 		long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().addPermissions(companyId, actionIds, resourceId);
 	}
 
-	public static void addRolePermissions(java.lang.String roleName,
-		com.liferay.portal.model.Permission permission)
+	public static java.util.List<com.liferay.portal.model.Permission> addPermissions(
+		long companyId, java.lang.String name, long resourceId,
+		boolean portletActions)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getService().addRolePermissions(roleName, permission);
+		return getService()
+				   .addPermissions(companyId, name, resourceId, portletActions);
 	}
 
 	public static void addUserPermissions(long userId,
@@ -283,7 +277,8 @@ public class PermissionLocalServiceUtil {
 
 	public static void checkPermissions(java.lang.String name,
 		java.util.List<java.lang.String> actionIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		getService().checkPermissions(name, actionIds);
 	}
 
@@ -306,16 +301,16 @@ public class PermissionLocalServiceUtil {
 				   .getGroupPermissions(groupId, companyId, name, scope, primKey);
 	}
 
+	public static long getLatestPermissionId()
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLatestPermissionId();
+	}
+
 	public static java.util.List<com.liferay.portal.model.Permission> getOrgGroupPermissions(
 		long organizationId, long groupId, long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getOrgGroupPermissions(organizationId, groupId, resourceId);
-	}
-
-	public static long getLatestPermissionId()
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getLatestPermissionId();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Permission> getPermissions(

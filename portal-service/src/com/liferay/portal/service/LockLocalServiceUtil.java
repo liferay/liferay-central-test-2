@@ -326,11 +326,11 @@ public class LockLocalServiceUtil {
 
 	public static com.liferay.portal.model.Lock lock(
 		java.lang.String className, java.lang.String key,
-		java.lang.String expectOwner, java.lang.String updateOwner,
+		java.lang.String expectedOwner, java.lang.String updatedOwner,
 		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .lock(className, key, expectOwner, updateOwner,
+				   .lock(className, key, expectedOwner, updatedOwner,
 			retrieveFromCache);
 	}
 

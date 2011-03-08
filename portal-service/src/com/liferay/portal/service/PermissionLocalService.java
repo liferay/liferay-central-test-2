@@ -226,17 +226,13 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Permission> addPermissions(
-		long companyId, java.lang.String name, long resourceId,
-		boolean portletActions)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<com.liferay.portal.model.Permission> addPermissions(
 		long companyId, java.util.List<java.lang.String> actionIds,
 		long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	public void addRolePermissions(java.lang.String roleName,
-		com.liferay.portal.model.Permission permission)
+	public java.util.List<com.liferay.portal.model.Permission> addPermissions(
+		long companyId, java.lang.String name, long resourceId,
+		boolean portletActions)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void addUserPermissions(long userId, java.lang.String[] actionIds,
@@ -246,7 +242,8 @@ public interface PermissionLocalService {
 
 	public void checkPermissions(java.lang.String name,
 		java.util.List<java.lang.String> actionIds)
-		throws com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.String> getActions(
@@ -264,12 +261,12 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.portal.model.Permission> getOrgGroupPermissions(
-		long organizationId, long groupId, long resourceId)
+	public long getLatestPermissionId()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public long getLatestPermissionId()
+	public java.util.List<com.liferay.portal.model.Permission> getOrgGroupPermissions(
+		long organizationId, long groupId, long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

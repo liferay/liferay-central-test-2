@@ -17,8 +17,6 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchResourceActionException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -60,7 +58,7 @@ public class ResourceActionLocalServiceImpl
 	}
 
 	public void checkResourceActions(String name, List<String> actionIds)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
 			return;
@@ -97,7 +95,7 @@ public class ResourceActionLocalServiceImpl
 	protected void checkResourceActions(
 			String name, List<String> actionIds,
 			List<ResourceAction> resourceActions)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		long lastBitwiseValue = 1;
 
@@ -121,63 +119,52 @@ public class ResourceActionLocalServiceImpl
 
 			ResourceAction resourceAction = _resourceActions.get(key);
 
-			if (resourceAction == null) {
-				resourceAction = resourceActionPersistence.fetchByN_A(
-					name, actionId);
+			if (resourceAction != null) {
+				continue;
 			}
 
-			if (resourceAction == null) {
-				long bitwiseValue = 1;
+			resourceAction = resourceActionPersistence.fetchByN_A(
+				name, actionId);
 
-				if (!actionId.equals(ActionKeys.VIEW)) {
-					bitwiseValue = MathUtil.base2Pow(++lastBitwiseLogValue);
-				}
-
-				long resourceActionId = counterLocalService.increment(
-					ResourceAction.class.getName());
-
-				resourceAction = resourceActionPersistence.create(
-					resourceActionId);
-
-				resourceAction.setName(name);
-				resourceAction.setActionId(actionId);
-				resourceAction.setBitwiseValue(bitwiseValue);
-
-				resourceActionPersistence.update(resourceAction, false);
-
-				_resourceActions.put(key, resourceAction);
-
-				if (communityDefaultActions.contains(actionId)) {
-					try {
-						resourcePermissionLocalService.addResourcePermissions(
-							name, RoleConstants.COMMUNITY_MEMBER,
-							ResourceConstants.SCOPE_INDIVIDUAL, actionId);
-					}
-					catch (PortalException pe) {
-						_log.error(pe, pe);
-					}
-				}
-
-				if (guestDefaultActions.contains(actionId)) {
-					try {
-						resourcePermissionLocalService.addResourcePermissions(
-							name, RoleConstants.GUEST,
-							ResourceConstants.SCOPE_INDIVIDUAL, actionId);
-					}
-					catch (PortalException pe) {
-						_log.error(pe, pe);
-					}
-				}
-
-				try {
-					resourcePermissionLocalService.addResourcePermissions(
-						name, RoleConstants.OWNER,
-						ResourceConstants.SCOPE_INDIVIDUAL, actionId);
-				}
-				catch (PortalException pe) {
-					_log.error(pe, pe);
-				}
+			if (resourceAction != null) {
+				continue;
 			}
+
+			long bitwiseValue = 1;
+
+			if (!actionId.equals(ActionKeys.VIEW)) {
+				bitwiseValue = MathUtil.base2Pow(++lastBitwiseLogValue);
+			}
+
+			long resourceActionId = counterLocalService.increment(
+				ResourceAction.class.getName());
+
+			resourceAction = resourceActionPersistence.create(
+				resourceActionId);
+
+			resourceAction.setName(name);
+			resourceAction.setActionId(actionId);
+			resourceAction.setBitwiseValue(bitwiseValue);
+
+			resourceActionPersistence.update(resourceAction, false);
+
+			_resourceActions.put(key, resourceAction);
+
+			if (communityDefaultActions.contains(actionId)) {
+				resourcePermissionLocalService.addResourcePermissions(
+					name, RoleConstants.COMMUNITY_MEMBER,
+					ResourceConstants.SCOPE_INDIVIDUAL, actionId);
+			}
+
+			if (guestDefaultActions.contains(actionId)) {
+				resourcePermissionLocalService.addResourcePermissions(
+					name, RoleConstants.GUEST,
+					ResourceConstants.SCOPE_INDIVIDUAL, actionId);
+			}
+
+			resourcePermissionLocalService.addResourcePermissions(
+				name, RoleConstants.OWNER, ResourceConstants.SCOPE_INDIVIDUAL,
+				actionId);
 		}
 	}
 
@@ -187,8 +174,5 @@ public class ResourceActionLocalServiceImpl
 
 	private static Map<String, ResourceAction> _resourceActions =
 		new HashMap<String, ResourceAction>();
-
-	private static Log _log = LogFactoryUtil.getLog(
-		ResourceActionLocalServiceImpl.class);
 
 }

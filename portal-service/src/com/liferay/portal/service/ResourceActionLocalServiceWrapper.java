@@ -247,7 +247,8 @@ public class ResourceActionLocalServiceWrapper
 
 	public void checkResourceActions(java.lang.String name,
 		java.util.List<java.lang.String> actionIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		_resourceActionLocalService.checkResourceActions(name, actionIds);
 	}
 

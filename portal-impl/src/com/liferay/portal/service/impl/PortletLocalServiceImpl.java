@@ -202,13 +202,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	public Portlet deployRemotePortlet(Portlet portlet, String categoryName)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		return deployRemotePortlet(portlet, new String[] {categoryName});
 	}
 
 	public Portlet deployRemotePortlet(Portlet portlet, String[] categoryNames)
-		throws SystemException {
+		throws PortalException, SystemException {
 
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
