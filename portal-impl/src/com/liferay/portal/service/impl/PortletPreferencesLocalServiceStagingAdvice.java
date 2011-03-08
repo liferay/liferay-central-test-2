@@ -157,6 +157,10 @@ public class PortletPreferencesLocalServiceStagingAdvice
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
+		if (serviceContext == null) {
+			return methodInvocation.proceed();
+		}
+
 		boolean exporting = ParamUtil.getBoolean(serviceContext, "exporting");
 
 		if ((layoutRevision == null) || exporting) {
