@@ -30,6 +30,7 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourceActionLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -106,11 +107,8 @@ public class ResourceActionLocalServiceImpl
 			lastBitwiseValue = resourceAction.getBitwiseValue();
 		}
 
-		List<String> communityDefaultActions =
-			ResourceActionsUtil.getModelResourceCommunityDefaultActions(name);
-
-		List<String> guestDefaultActions =
-			ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
+		List<ResourceAction> newDefaultResourceActions =
+			new ArrayList<ResourceAction>();
 
 		int lastBitwiseLogValue = MathUtil.base2Log(lastBitwiseValue);
 
@@ -149,6 +147,18 @@ public class ResourceActionLocalServiceImpl
 			resourceActionPersistence.update(resourceAction, false);
 
 			_resourceActions.put(key, resourceAction);
+
+			newDefaultResourceActions.add(resourceAction);
+		}
+
+		List<String> communityDefaultActions =
+			ResourceActionsUtil.getModelResourceCommunityDefaultActions(name);
+
+		List<String> guestDefaultActions =
+			ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
+
+		for (ResourceAction resourceAction : newDefaultResourceActions) {
+			String actionId = resourceAction.getActionId();
 
 			if (communityDefaultActions.contains(actionId)) {
 				resourcePermissionLocalService.addResourcePermissions(
