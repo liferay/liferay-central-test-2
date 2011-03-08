@@ -192,13 +192,14 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 
 		Lock lock = new LockImpl();
 
-		lock.setCreateDate(new Date());
 		lock.setCompanyId(getCompanyId());
 
 		if (user != null) {
 			lock.setUserId(user.getUserId());
 			lock.setUserName(user.getFullName());
 		}
+
+		lock.setCreateDate(new Date());
 
 		return lock;
 	}

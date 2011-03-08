@@ -93,6 +93,7 @@ import org.apache.chemistry.opencmis.client.runtime.OperationContextImpl;
 import org.apache.chemistry.opencmis.client.runtime.SessionFactoryImpl;
 import org.apache.chemistry.opencmis.commons.PropertyIds;
 import org.apache.chemistry.opencmis.commons.SessionParameter;
+import org.apache.chemistry.opencmis.commons.data.AllowableActions;
 import org.apache.chemistry.opencmis.commons.data.ContentStream;
 import org.apache.chemistry.opencmis.commons.data.PropertyData;
 import org.apache.chemistry.opencmis.commons.enums.Action;
@@ -768,8 +769,10 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			String title = oldVersion.getName();
 			ContentStream contentStream = oldVersion.getContentStream();
 
+			AllowableActions allowableActions = document.getAllowableActions();
+			
 			Set<Action> allowableActionsSet =
-				document.getAllowableActions().getAllowableActions();
+				allowableActions.getAllowableActions();
 
 			if (allowableActionsSet.contains(Action.CAN_CHECK_OUT)) {
 				document.checkOut();
@@ -792,8 +795,7 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 			checkUpdatable(allowableActionsSet, properties, contentStream);
 
 			if (checkedOut) {
-				document.checkIn(
-					true, properties, contentStream, changeLog);
+				document.checkIn(true, properties, contentStream, changeLog);
 
 				checkedOut = false;
 			}
@@ -906,8 +908,10 @@ public abstract class CMISRepository extends BaseRepositoryImpl {
 
 			document.refresh();
 
+			AllowableActions allowableActions = document.getAllowableActions();
+			
 			Set<Action> allowableActionsSet =
-				document.getAllowableActions().getAllowableActions();
+				allowableActions.getAllowableActions();
 
 			if (allowableActionsSet.contains(Action.CAN_CHECK_OUT)) {
 				document.checkOut();
