@@ -21,6 +21,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+/**
+ * @author Igor Spasic
+ */
 public class RestActionConfigSet implements Comparable<RestActionConfigSet> {
 
 	public boolean addRestActionConfig(RestActionConfig restActionConfig) {

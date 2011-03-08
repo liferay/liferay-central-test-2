@@ -14,8 +14,11 @@
 
 package com.liferay.portal.kernel.rest;
 
+/**
+ * @author Igor Spasic
+ */
 public interface RestAction {
 
-	Object invoke() throws Exception;
+	public Object invoke() throws Exception;
 
 }

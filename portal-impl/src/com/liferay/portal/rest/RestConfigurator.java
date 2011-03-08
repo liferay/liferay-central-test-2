@@ -34,72 +34,80 @@ import java.net.URL;
 import jodd.io.findfile.FindClass;
 
 import jodd.util.ClassLoaderUtil;
+
+import org.apache.commons.lang.time.StopWatch;
+
+/**
+ * @author Igor Spasic
+ */
 public class RestConfigurator extends FindClass {
 
 	public RestConfigurator() {
-		_restClassSuffix = "Impl";
-		_restAnnotationBytes = getTypeSignatureBytes(REST.class);
-		_checkBytecodeSignature = true;
 		setIncludedJars("*portal-impl.jar");
 	}
 
 	public void configure() throws PortalException {
+		File portalImplLib = new File(
+			PortalUtil.getPortalLibDir(), "portal-impl.jar");
 
-		File portalImplLib =
-			new File(PortalUtil.getPortalLibDir(), "portal-impl.jar");
+		URL[] classPathURLs = null;
 
-		URL[] scanPath;
+		if (portalImplLib.exists()) {
+			classPathURLs = new URL[1];
 
-		if (portalImplLib.exists() == false) {
-			scanPath = ClassLoaderUtil.getFullClassPath(RestConfigurator.class);
-		} else {
-			scanPath = new URL[1];
 			try {
-				scanPath[0] = portalImplLib.toURL();
+				classPathURLs[0] = portalImplLib.toURL();
 			}
-			catch (MalformedURLException e) {
-				_log.error(e, e);
+			catch (MalformedURLException murle) {
+				_log.error(murle, murle);
 			}
 		}
+		else {
+			classPathURLs = ClassLoaderUtil.getFullClassPath(
+				RestConfigurator.class);
+		}
 
-		configure(scanPath);
+		configure(classPathURLs);
 	}
 
-	public void configure(URL... classpath) throws PortalException {
-		_elapsed = System.currentTimeMillis();
+	public void configure(URL... classPathURLs) throws PortalException {
+		StopWatch stopWatch = null;
 
-		_log.info("REST automatic configuration started...");
+		if (_log.isDebugEnabled()) {
+			_log.debug("Configure REST actions");
+
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
 
 		try {
-			scanUrls(classpath);
+			scanUrls(classPathURLs);
 		}
-		catch (Exception ex) {
-			throw new PortalException("Unable to scan classpath for REST.", ex);
+		catch (Exception e) {
+			throw new PortalException(e.getMessage(), e);
 		}
 
-		_elapsed = System.currentTimeMillis() - _elapsed;
-
-		_log.info(
-			"REST configured in " + _elapsed + " ms. " +
-				"Total actions: " + _registeredActionsCount);
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Configuring " + _registeredActionsCount +
+					" actions in completed " + stopWatch.getTime() + " ms");
+		}
 	}
 
 	public void setCheckBytecodeSignature(boolean checkBytecodeSignature) {
-		this._checkBytecodeSignature = checkBytecodeSignature;
+		_checkBytecodeSignature = checkBytecodeSignature;
 	}
 
 	public void setRestActionsManager(RestActionsManager restActionsManager) {
-		this._restActionsManager = restActionsManager;
+		_restActionsManager = restActionsManager;
 	}
 
-	@Override
-	protected void onEntry(EntryData entryData) throws ClassNotFoundException {
-		String entryName = entryData.getName();
+	protected void onEntry(EntryData entryData) throws Exception {
+		String className = entryData.getName();
 
-		if (entryName.endsWith(_restClassSuffix) == true) {
-
+		if (className.endsWith("Impl")) {
 			if (_checkBytecodeSignature) {
-
 				InputStream inputStream = entryData.openInputStream();
 
 				if (!isTypeSignatureInUse(inputStream, _restAnnotationBytes)) {
@@ -107,36 +115,34 @@ public class RestConfigurator extends FindClass {
 				}
 			}
 
-			_onRestClass(entryName);
+			_onRestClass(className);
 		}
 	}
 
-	private boolean _checkClass(Class clazz) {
+	private boolean _isRestClass(Class<?> clazz) {
+		if (!clazz.isAnonymousClass() && !clazz.isArray() && !clazz.isEnum() &&
+			!clazz.isInterface() && !clazz.isLocalClass() &&
+			!clazz.isPrimitive() &&
+			!(clazz.isMemberClass() ^
+				Modifier.isStatic(clazz.getModifiers()))) {
 
-		return
-			(clazz.isAnonymousClass() == false) &&
-			(clazz.isArray() == false) &&
-			(clazz.isEnum() == false) &&
-			(clazz.isInterface() == false) &&
-			(clazz.isLocalClass() == false) &&
-			((clazz.isMemberClass() ^
-				Modifier.isStatic(clazz.getModifiers())) == false) &&
-			(clazz.isPrimitive() == false);
+			return true;
+		}
+
+		return false;
 	}
 
-	private void _onRestClass(String className) throws ClassNotFoundException {
+	private void _onRestClass(String className) throws Exception {
+		Class<?> actionClass = ClassLoaderUtil.loadClass(
+			className, this.getClass());
 
-		Class actionClass =
-			ClassLoaderUtil.loadClass(className, this.getClass());
-
-		if (_checkClass(actionClass) == false) {
+		if (!_isRestClass(actionClass)) {
 			return;
 		}
 
-		Method[] allPublicMethods = actionClass.getMethods();
+		Method[] methods = actionClass.getMethods();
 
-		for (Method method : allPublicMethods) {
-
+		for (Method method : methods) {
 			REST restAnnotation = method.getAnnotation(REST.class);
 
 			if (restAnnotation == null) {
@@ -144,14 +150,11 @@ public class RestConfigurator extends FindClass {
 			}
 
 			_registerRestAction(actionClass, method, restAnnotation);
-
 		}
 	}
-
 	private void _registerRestAction(
-		Class<?> implementationClass, Method method, REST restAnnotation) {
-
-		_registeredActionsCount++;
+			Class<?> implementationClass, Method method, REST restAnnotation)
+		throws Exception {
 
 		String path = restAnnotation.value().trim();
 
@@ -161,50 +164,34 @@ public class RestConfigurator extends FindClass {
 			httpMethod = null;
 		}
 
-		// implementation -> util
 		String utilClassName = implementationClass.getName();
 
 		if (utilClassName.endsWith("Impl")) {
-			utilClassName =
-				utilClassName.substring(0, utilClassName.length() - 4);
+			utilClassName = utilClassName.substring(
+				0, utilClassName.length() - 4);
 
 			utilClassName += "Util";
 		}
 
 		utilClassName = StringUtil.replace(utilClassName, ".impl.", ".");
 
-		try {
-			Class utilClass =
-				ClassLoaderUtil.loadClass(utilClassName, this.getClass());
+		Class<?> utilClass = ClassLoaderUtil.loadClass(
+			utilClassName, this.getClass());
 
-			method = utilClass.getMethod(
-				method.getName(), method.getParameterTypes());
-		}
-		catch (Exception ex) {
-			// ignore
-		}
+		method = utilClass.getMethod(
+			method.getName(), method.getParameterTypes());
 
 		_restActionsManager.registerRestAction(
-			method.getDeclaringClass(),
-			method,
-			path,
-			httpMethod
-		);
+			method.getDeclaringClass(), method, path, httpMethod);
 
+		_registeredActionsCount++;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(RestConfigurator.class);
 
-	private boolean _checkBytecodeSignature;
-
-	private long _elapsed;
-
+	private boolean _checkBytecodeSignature = true;
 	private int _registeredActionsCount;
-
 	private RestActionsManager _restActionsManager;
-
-	private final byte[] _restAnnotationBytes;
-
-	private String _restClassSuffix;
+	private byte[] _restAnnotationBytes = getTypeSignatureBytes(REST.class);
 
 }

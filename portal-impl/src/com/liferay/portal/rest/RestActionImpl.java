@@ -19,29 +19,34 @@ import com.liferay.portal.kernel.rest.RestAction;
 import java.lang.reflect.Method;
 
 import jodd.util.ReflectUtil;
+
+/**
+ * @author Igor Spasic
+ */
 public class RestActionImpl implements RestAction {
 
-	public RestActionImpl(RestActionConfig config, String[] pathChunks) {
-		_config = config;
+	public RestActionImpl(
+		RestActionConfig restActionConfig, String[] pathChunks) {
+
+		_restActionConfig = restActionConfig;
 		_pathChunks = pathChunks;
 	}
 
 	public Object invoke() throws Exception {
-		Object service = _config.getActionClass();
+		Class<?> actionClass = _restActionConfig.getActionClass();
 
-		Method actionMethod = _config.getActionMethod();
+		Method actionMethod = _restActionConfig.getActionMethod();
 
 		Object[] parameters = _prepareParameters();
 
-		return actionMethod.invoke(service, parameters);
+		return actionMethod.invoke(actionClass, parameters);
 	}
 
 	private Object[] _prepareParameters() {
-
 		String[] pathChunks = _pathChunks;
-		String[] parameterNames = _config.getParameterNames();
-		Class<?>[] parameterTypes = _config.getParameterTypes();
-		PathMacro[] pathMacros = _config.getPathMacros();
+		String[] parameterNames = _restActionConfig.getParameterNames();
+		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
+		PathMacro[] pathMacros = _restActionConfig.getPathMacros();
 
 		Object[] parameters = new Object[parameterNames.length];
 
@@ -73,7 +78,7 @@ public class RestActionImpl implements RestAction {
 		return parameters;
 	}
 
-	private final RestActionConfig _config;
+	private String[] _pathChunks;
+	private RestActionConfig _restActionConfig;
 
-	private final String[] _pathChunks;
 }

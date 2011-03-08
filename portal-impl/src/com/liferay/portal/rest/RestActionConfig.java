@@ -17,6 +17,10 @@ package com.liferay.portal.rest;
 import com.liferay.portal.kernel.util.MethodParameterNamesResolverUtil;
 
 import java.lang.reflect.Method;
+
+/**
+ * @author Igor Spasic
+ */
 public class RestActionConfig {
 
 	public Class<?> getActionClass() {

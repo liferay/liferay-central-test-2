@@ -15,6 +15,10 @@
 package com.liferay.portal.rest;
 
 import java.util.regex.Pattern;
+
+/**
+ * @author Igor Spasic
+ */
 public class PathMacro {
 
 	public int getIndex() {
