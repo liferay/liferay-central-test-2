@@ -139,7 +139,7 @@ public class LiferayDeployerFactory implements DeployerFactory {
     public LiferayDeployerFactory(ApplicationContext applicationContext) {
         _applicationContext = applicationContext;
 
-		_deployerFactory = applicationContext.getBean("deployerFactory");
+		_deployerFactory = _applicationContext.getBean("deployerFactory");
     }
 
     public Deployer getDeployer(
@@ -149,7 +149,7 @@ public class LiferayDeployerFactory implements DeployerFactory {
 			deploymentVersion, server);
 
         return new LiferayDeployer(
-			_fileService: applicationContext.getBean("tomcatFileService"),
+			_fileService: _applicationContext.getBean("tomcatFileService"),
 			_server: server, _deployer: deployer);
     }
 
