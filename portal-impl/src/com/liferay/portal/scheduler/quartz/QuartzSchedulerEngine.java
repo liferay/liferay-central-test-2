@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.scheduler.TriggerFactoryUtil;
 import com.liferay.portal.kernel.scheduler.TriggerState;
 import com.liferay.portal.kernel.scheduler.TriggerType;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerResponse;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
@@ -96,7 +97,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			delete(scheduler, groupName);
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to delete jobs", e);
+			throw new SchedulerException(
+				"Unable to delete jobs in group {" + groupName + "}", e);
 		}
 	}
 
@@ -144,7 +146,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return getScheduledJob(scheduler, jobName, groupName);
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to get job", e);
+			throw new SchedulerException(
+				"Unable to get job {jobName=" + jobName + ", groupName=" +
+					groupName + "}",
+				e);
 		}
 	}
 
@@ -193,7 +198,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			return getScheduledJobs(scheduler, groupName);
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to get jobs", e);
+			throw new SchedulerException(
+				"Unable to get jobs in group {" + groupName + "}", e);
 		}
 	}
 
@@ -208,7 +214,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			pause(scheduler, groupName);
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to pause jobs", e);
+			throw new SchedulerException(
+				"Unable to pause jobs in group {" + groupName + "}", e);
 		}
 	}
 
@@ -225,7 +232,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			pause(scheduler, jobName, groupName);
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to pause job", e);
+			throw new SchedulerException(
+				"Unable to pause job {jobName=" + jobName + ", groupName=" +
+					groupName + "}",
+				e);
 		}
 	}
 
@@ -240,7 +250,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			resume(scheduler, groupName);
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to resume jobs", e);
+			throw new SchedulerException(
+				"Unable to resume jobs in group {" + groupName + "}", e);
 		}
 	}
 
@@ -257,7 +268,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			resume(scheduler, jobName, groupName);
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to resume job", e);
+			throw new SchedulerException(
+				"Unable to resume job {jobName=" + jobName + ", groupName=" +
+					groupName + "}",
+				e);
 		}
 	}
 
@@ -363,7 +377,10 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			suppressError(jobName, groupName, scheduler);
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to suppress error for job", e);
+			throw new SchedulerException(
+				"Unable to suppress error for job {jobName=" + jobName +
+					", groupName=" + groupName + "}",
+				e);
 		}
 	}
 
@@ -387,7 +404,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			unschedule(groupName, scheduler);
 		}
 		catch (Exception e) {
-			throw new SchedulerException("Unable to unschedule jobs", e);
+			throw new SchedulerException(
+				"Unable to unschedule jobs in group {" + groupName + "}", e);
 		}
 	}
 
@@ -523,24 +541,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	}
 
 	protected String getOriginalGroupName(String groupName) {
-		if (groupName.startsWith(
-				StorageType.MEMORY_MULTIPLE_INSTANCES.toString())) {
+		int delimiterIndex = groupName.indexOf(CharPool.POUND);
 
-			return groupName.substring(
-				StorageType.MEMORY_MULTIPLE_INSTANCES.toString().length() + 1);
-		}
-		else if (groupName.startsWith(
-					StorageType.MEMORY_SINGLE_INSTANCE.toString())) {
-
-			return groupName.substring(
-				StorageType.MEMORY_SINGLE_INSTANCE.toString().length() + 1);
-		}
-		else if (groupName.startsWith(StorageType.PERSISTED.toString())) {
-			return groupName.substring(
-				StorageType.PERSISTED.toString().length() + 1);
-		}
-
-		return groupName;
+		return groupName.substring(delimiterIndex + 1);
 	}
 
 	protected Trigger getQuartzTrigger(
@@ -732,22 +735,12 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 	}
 
-	protected StorageType getStorageType(String groupName) throws Exception {
-		if (groupName.startsWith(StorageType.PERSISTED.toString())) {
-			return StorageType.PERSISTED;
-		}
-		else if (groupName.startsWith(
-					StorageType.MEMORY_MULTIPLE_INSTANCES.toString())) {
+	protected StorageType getStorageType(String groupName) {
+		int delimiterIndex = groupName.indexOf(CharPool.POUND);
 
-			return StorageType.MEMORY_MULTIPLE_INSTANCES;
-		}
-		else if (groupName.startsWith(
-					StorageType.MEMORY_SINGLE_INSTANCE.toString())) {
+		String storageTypeString = groupName.substring(0, delimiterIndex);
 
-			return StorageType.MEMORY_SINGLE_INSTANCE;
-		}
-
-		throw new Exception("Unable to get storage type");
+		return StorageType.valueOf(storageTypeString);
 	}
 
 	protected void handleJobState(
@@ -1093,8 +1086,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			scheduler.rescheduleJob(jobName, groupName, quartzTrigger);
 		}
 		else {
-			JobDetail jobDetail = scheduler.getJobDetail(
-				jobName, groupName);
+			JobDetail jobDetail = scheduler.getJobDetail(jobName, groupName);
 
 			if (jobDetail == null) {
 				return;

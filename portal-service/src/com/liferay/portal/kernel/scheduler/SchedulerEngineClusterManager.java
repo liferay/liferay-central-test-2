@@ -14,11 +14,13 @@
 
 package com.liferay.portal.kernel.scheduler;
 
+import com.liferay.portal.model.Lock;
+
 /**
  * @author Tina Tian
  */
 public interface SchedulerEngineClusterManager {
 
-	public void updateMemorySchedulerClusterMaster() throws SchedulerException;
+	public Lock updateMemorySchedulerClusterMaster() throws SchedulerException;
 
 }

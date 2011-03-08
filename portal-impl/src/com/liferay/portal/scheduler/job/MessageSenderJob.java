@@ -14,6 +14,8 @@
 
 package com.liferay.portal.scheduler.job;
 
+import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
+import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -21,7 +23,12 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.JobState;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.TriggerState;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
+import com.liferay.portal.util.PropsValues;
 
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -77,34 +84,29 @@ public class MessageSenderJob implements Job {
 			jobDetail.getFullName());
 
 		if (jobExecutionContext.getNextFireTime() == null) {
-			if (message.getBoolean(SchedulerEngine.PERSISTED)) {
-				Trigger trigger = jobExecutionContext.getTrigger();
+			Trigger trigger = jobExecutionContext.getTrigger();
 
-				jobState.setTriggerTimeInfomation(
-					SchedulerEngine.END_TIME, trigger.getEndTime());
-				jobState.setTriggerTimeInfomation(
-					SchedulerEngine.FINAL_FIRE_TIME,
-					trigger.getFinalFireTime());
-				jobState.setTriggerTimeInfomation(
-					SchedulerEngine.NEXT_FIRE_TIME, null);
-				jobState.setTriggerTimeInfomation(
-					SchedulerEngine.PREVIOUS_FIRE_TIME,
-					trigger.getPreviousFireTime());
-				jobState.setTriggerTimeInfomation(
-					SchedulerEngine.START_TIME, trigger.getStartTime());
+			StorageType storageType = StorageType.valueOf(
+				jobDataMap.getString(SchedulerEngine.STORAGE_TYPE));
 
-				jobState.setTriggerState(TriggerState.COMPLETE);
+			switch(storageType) {
+				case PERSISTED:
+					JobState jobStateClone = updatePersistedJobState(
+						jobState, trigger);
 
-				JobState jobStateClone = (JobState)jobState.clone();
+					jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
 
-				jobStateClone.clearExceptions();
+					scheduler.addJob(jobDetail, true);
 
-				jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
-
-				scheduler.addJob(jobDetail, true);
-			}
-			else {
-				message.put(SchedulerEngine.DISABLE, true);
+					break;
+				case MEMORY_SINGLE_INSTANCE:
+					if (PropsValues.CLUSTER_LINK_ENABLED) {
+						notifyClusterMember(
+							storageType, trigger.getJobName(),
+							trigger.getGroup());
+					}
+				case MEMORY_MULTIPLE_INSTANCES:
+					message.put(SchedulerEngine.DISABLE, true);
 			}
 		}
 
@@ -113,6 +115,45 @@ public class MessageSenderJob implements Job {
 		MessageBusUtil.sendMessage(destinationName, message);
 	}
 
+	protected void notifyClusterMember(
+			StorageType storageType, String jobName, String groupName)
+		throws Exception {
+
+		MethodHandler methodHandler = new MethodHandler(
+			_deleteJob, jobName, groupName, storageType);
+
+		ClusterRequest clusterRequest =
+			ClusterRequest.createMulticastRequest(methodHandler, true);
+
+		ClusterExecutorUtil.execute(clusterRequest);
+	}
+
+	protected JobState updatePersistedJobState(
+		JobState jobState, Trigger trigger) {
+
+		jobState.setTriggerTimeInfomation(
+			SchedulerEngine.END_TIME, trigger.getEndTime());
+		jobState.setTriggerTimeInfomation(
+			SchedulerEngine.FINAL_FIRE_TIME, trigger.getFinalFireTime());
+		jobState.setTriggerTimeInfomation(SchedulerEngine.NEXT_FIRE_TIME, null);
+		jobState.setTriggerTimeInfomation(
+			SchedulerEngine.PREVIOUS_FIRE_TIME, trigger.getPreviousFireTime());
+		jobState.setTriggerTimeInfomation(
+			SchedulerEngine.START_TIME, trigger.getStartTime());
+
+		jobState.setTriggerState(TriggerState.COMPLETE);
+
+		JobState jobStateClone = (JobState)jobState.clone();
+
+		jobStateClone.clearExceptions();
+
+		return jobStateClone;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(MessageSenderJob.class);
+
+	private static MethodKey _deleteJob = new MethodKey(
+		SchedulerEngineUtil.class.getName(), "delete", String.class,
+		String.class, StorageType.class);
 
 }

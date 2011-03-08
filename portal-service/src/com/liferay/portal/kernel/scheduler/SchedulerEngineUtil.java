@@ -274,10 +274,12 @@ public class SchedulerEngineUtil {
 	}
 
 	/**
-	 * @deprecated {@link #unschedule(String, String, StorageType)}
+	 * @deprecated {@link #unschedule(String, String)}
 	 */
-	public static void unschedule(Trigger trigger) throws SchedulerException {
-		_instance._unschedule(trigger);
+	public static void unschedule(Trigger trigger, StorageType storageType)
+		throws SchedulerException {
+
+		_instance._unschedule(trigger, storageType);
 	}
 
 	public static void update(
@@ -619,7 +621,7 @@ public class SchedulerEngineUtil {
 	private String _namespaceGroupName(
 		String groupName, StorageType storageType) {
 
-		return storageType.toString().concat(StringPool.UNDERLINE).concat(
+		return storageType.toString().concat(StringPool.POUND).concat(
 			groupName);
 	}
 
@@ -835,10 +837,12 @@ public class SchedulerEngineUtil {
 	}
 
 	/**
-	 * @deprecated {@link #_unschedule(String, String, StorageType)}
+	 * @deprecated {@link #_unschedule(String, String)}
 	 */
-	private void _unschedule(Trigger trigger) throws SchedulerException {
-		_schedulerEngine.unschedule(trigger);
+	private void _unschedule(Trigger trigger, StorageType storageType)
+		throws SchedulerException {
+
+		_unschedule(trigger.getJobName(), trigger.getGroupName(), storageType);
 	}
 
 	private void _update(
