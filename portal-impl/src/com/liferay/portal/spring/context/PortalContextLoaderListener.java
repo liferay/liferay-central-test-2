@@ -134,8 +134,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			applicationContext.getAutowireCapableBeanFactory();
 
 		clearFilteredPropertyDescriptorsCache(autowireCapableBeanFactory);
-
-		InitUtil.initPost();
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {

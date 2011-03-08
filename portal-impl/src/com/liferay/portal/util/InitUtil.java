@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataSourceFactoryUtil;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.rest.RestActionsManagerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -31,7 +30,6 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.log.Log4jLogFactoryImpl;
-import com.liferay.portal.rest.RestConfigurator;
 import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.log4j.Log4JUtil;
@@ -141,32 +139,11 @@ public class InitUtil {
 		_initialized = true;
 	}
 
-	/**
-	 * Initialization after Spring ctx is ready.
-	 */
-	public static synchronized void initPost() {
-
-		// REST
-
-		RestConfigurator restConfigurator = new RestConfigurator();
-
-		restConfigurator.setRestActionsManager(
-			RestActionsManagerUtil.getRestActionsManager());
-
-		try {
-			restConfigurator.configure();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	public static synchronized void initWithSpring() {
+	public synchronized static void initWithSpring() {
 		initWithSpring(false);
 	}
 
-	public static synchronized void initWithSpring(boolean force) {
+	public synchronized static void initWithSpring(boolean force) {
 		if (force) {
 			_initialized = false;
 		}
