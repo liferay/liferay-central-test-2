@@ -64,18 +64,12 @@ public class RenderPortletAction extends Action {
 		boolean staticPortlet = ParamUtil.getBoolean(request, "p_p_static");
 		boolean staticStartPortlet = ParamUtil.getBoolean(
 			request, "p_p_static_start");
-		boolean runtimePortlet = ParamUtil.getBoolean(request, "p_p_runtime");
 
 		if (staticPortlet) {
 			portlet = (Portlet)portlet.clone();
 
 			portlet.setStatic(true);
 			portlet.setStaticStart(staticStartPortlet);
-		}
-
-		if (runtimePortlet) {
-			request.setAttribute(
-				WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
 		}
 
 		if (ajaxId != null) {
