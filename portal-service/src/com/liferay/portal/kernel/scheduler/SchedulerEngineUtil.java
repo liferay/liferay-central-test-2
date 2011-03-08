@@ -183,6 +183,12 @@ public class SchedulerEngineUtil {
 		return _instance._getStartTime(jobName, groupName, storageType);
 	}
 
+	public static String namespaceGroupName(
+		String groupName, StorageType storageType) {
+
+		return _instance._namespaceGroupName(groupName, storageType);
+	}
+
 	public static void pause(String groupName, StorageType storageType)
 		throws SchedulerException {
 
@@ -271,15 +277,6 @@ public class SchedulerEngineUtil {
 		throws SchedulerException {
 
 		_instance._unschedule(jobName, groupName, storageType);
-	}
-
-	/**
-	 * @deprecated {@link #unschedule(String, String)}
-	 */
-	public static void unschedule(Trigger trigger, StorageType storageType)
-		throws SchedulerException {
-
-		_instance._unschedule(trigger, storageType);
 	}
 
 	public static void update(
@@ -834,15 +831,6 @@ public class SchedulerEngineUtil {
 
 		_schedulerEngine.unschedule(
 			jobName, _namespaceGroupName(groupName, storageType));
-	}
-
-	/**
-	 * @deprecated {@link #_unschedule(String, String)}
-	 */
-	private void _unschedule(Trigger trigger, StorageType storageType)
-		throws SchedulerException {
-
-		_unschedule(trigger.getJobName(), trigger.getGroupName(), storageType);
 	}
 
 	private void _update(

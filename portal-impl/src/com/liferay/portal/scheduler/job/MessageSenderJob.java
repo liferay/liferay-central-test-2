@@ -89,24 +89,24 @@ public class MessageSenderJob implements Job {
 			StorageType storageType = StorageType.valueOf(
 				jobDataMap.getString(SchedulerEngine.STORAGE_TYPE));
 
-			switch(storageType) {
-				case PERSISTED:
-					JobState jobStateClone = updatePersistedJobState(
-						jobState, trigger);
+			if (storageType.equals(StorageType.MEMORY_SINGLE_INSTANCE)) {
+				if (PropsValues.CLUSTER_LINK_ENABLED) {
+					notifyClusterMember(
+						trigger.getJobName(), trigger.getGroup(), storageType);
+				}
+			}
+			else if (storageType.equals(
+						StorageType.MEMORY_MULTIPLE_INSTANCES)) {
 
-					jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
+				message.put(SchedulerEngine.DISABLE, true);
+			}
+			else if (storageType.equals(StorageType.PERSISTED)) {
+				JobState jobStateClone = updatePersistedJobState(
+					jobState, trigger);
 
-					scheduler.addJob(jobDetail, true);
+				jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
 
-					break;
-				case MEMORY_SINGLE_INSTANCE:
-					if (PropsValues.CLUSTER_LINK_ENABLED) {
-						notifyClusterMember(
-							storageType, trigger.getJobName(),
-							trigger.getGroup());
-					}
-				case MEMORY_MULTIPLE_INSTANCES:
-					message.put(SchedulerEngine.DISABLE, true);
+				scheduler.addJob(jobDetail, true);
 			}
 		}
 
@@ -116,11 +116,11 @@ public class MessageSenderJob implements Job {
 	}
 
 	protected void notifyClusterMember(
-			StorageType storageType, String jobName, String groupName)
+			String jobName, String groupName, StorageType storageType)
 		throws Exception {
 
 		MethodHandler methodHandler = new MethodHandler(
-			_deleteJob, jobName, groupName, storageType);
+			_deleteJobMethodKey, jobName, groupName, storageType);
 
 		ClusterRequest clusterRequest =
 			ClusterRequest.createMulticastRequest(methodHandler, true);
@@ -131,6 +131,7 @@ public class MessageSenderJob implements Job {
 	protected JobState updatePersistedJobState(
 		JobState jobState, Trigger trigger) {
 
+		jobState.setTriggerState(TriggerState.COMPLETE);
 		jobState.setTriggerTimeInfomation(
 			SchedulerEngine.END_TIME, trigger.getEndTime());
 		jobState.setTriggerTimeInfomation(
@@ -141,8 +142,6 @@ public class MessageSenderJob implements Job {
 		jobState.setTriggerTimeInfomation(
 			SchedulerEngine.START_TIME, trigger.getStartTime());
 
-		jobState.setTriggerState(TriggerState.COMPLETE);
-
 		JobState jobStateClone = (JobState)jobState.clone();
 
 		jobStateClone.clearExceptions();
@@ -152,7 +151,7 @@ public class MessageSenderJob implements Job {
 
 	private static Log _log = LogFactoryUtil.getLog(MessageSenderJob.class);
 
-	private static MethodKey _deleteJob = new MethodKey(
+	private static MethodKey _deleteJobMethodKey = new MethodKey(
 		SchedulerEngineUtil.class.getName(), "delete", String.class,
 		String.class, StorageType.class);
 

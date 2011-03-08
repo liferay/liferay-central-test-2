@@ -91,13 +91,6 @@ public class SchedulerEngineProxyBean
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 * @deprecated {@link #unschedule(String, String)}
-	 */
-	public void unschedule(Trigger trigger) {
-		throw new UnsupportedOperationException();
-	}
-
 	public void update(Trigger trigger) {
 		throw new UnsupportedOperationException();
 	}

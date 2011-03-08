@@ -98,7 +98,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to delete jobs in group {" + groupName + "}", e);
+				"Unable to delete jobs in group " + groupName, e);
 		}
 	}
 
@@ -199,7 +199,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to get jobs in group {" + groupName + "}", e);
+				"Unable to get jobs in group " + groupName, e);
 		}
 	}
 
@@ -215,7 +215,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to pause jobs in group {" + groupName + "}", e);
+				"Unable to pause jobs in group " + groupName, e);
 		}
 	}
 
@@ -251,7 +251,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to resume jobs in group {" + groupName + "}", e);
+				"Unable to resume jobs in group " + groupName, e);
 		}
 	}
 
@@ -384,15 +384,6 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 	}
 
-	/**
-	 * @deprecated {@link #unschedule(String, String)}
-	 */
-	public void unschedule(com.liferay.portal.kernel.scheduler.Trigger trigger)
-		throws SchedulerException {
-
-		unschedule(trigger.getJobName(), trigger.getGroupName());
-	}
-
 	public void unschedule(String groupName) throws SchedulerException {
 		if (!PropsValues.SCHEDULER_ENABLED) {
 			return;
@@ -405,7 +396,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to unschedule jobs in group {" + groupName + "}", e);
+				"Unable to unschedule jobs in group " + groupName, e);
 		}
 	}
 
@@ -541,9 +532,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	}
 
 	protected String getOriginalGroupName(String groupName) {
-		int delimiterIndex = groupName.indexOf(CharPool.POUND);
+		int pos = groupName.indexOf(CharPool.POUND);
 
-		return groupName.substring(delimiterIndex + 1);
+		return groupName.substring(pos + 1);
 	}
 
 	protected Trigger getQuartzTrigger(
@@ -736,9 +727,9 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	}
 
 	protected StorageType getStorageType(String groupName) {
-		int delimiterIndex = groupName.indexOf(CharPool.POUND);
+		int pos = groupName.indexOf(CharPool.POUND);
 
-		String storageTypeString = groupName.substring(0, delimiterIndex);
+		String storageTypeString = groupName.substring(0, pos);
 
 		return StorageType.valueOf(storageTypeString);
 	}

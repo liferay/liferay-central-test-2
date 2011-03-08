@@ -123,12 +123,6 @@ public interface SchedulerEngine {
 	public void unschedule(String jobName, String groupName)
 		throws SchedulerException;
 
-	/**
-	 * @deprecated {@link #unschedule(String, String)}
-	 */
-	@MessagingProxy(mode = ProxyMode.SYNC)
-	public void unschedule(Trigger trigger) throws SchedulerException;
-
 	public void update(Trigger trigger) throws SchedulerException;
 
 }

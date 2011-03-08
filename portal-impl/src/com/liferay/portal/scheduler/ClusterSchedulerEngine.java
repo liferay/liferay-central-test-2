@@ -20,9 +20,11 @@ import com.liferay.portal.kernel.cluster.ClusterEvent;
 import com.liferay.portal.kernel.cluster.ClusterEventListener;
 import com.liferay.portal.kernel.cluster.ClusterEventType;
 import com.liferay.portal.kernel.cluster.ClusterExecutorUtil;
+import com.liferay.portal.kernel.cluster.ClusterNodeResponse;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponses;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.cluster.Clusterable;
+import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
@@ -54,6 +56,7 @@ import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -62,8 +65,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * @author Tina Tian
  */
 public class ClusterSchedulerEngine
-	implements SchedulerEngine, SchedulerEngineClusterManager,
-		IdentifiableBean {
+	implements IdentifiableBean, SchedulerEngine,
+			   SchedulerEngineClusterManager {
 
 	public static SchedulerEngine createClusterSchedulerEngine(
 		SchedulerEngine schedulerEngine) {
@@ -81,32 +84,16 @@ public class ClusterSchedulerEngine
 
 	@Clusterable
 	public void delete(String groupName) throws SchedulerException {
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
-				Iterator<Map.Entry<String, ObjectValuePair<
-					SchedulerResponse, TriggerState>>> iterator =
-						_memorySingleInstanceJobs.entrySet().iterator();
-
-				while (iterator.hasNext()) {
-					SchedulerResponse schedulerResponse =
-						iterator.next().getValue().getKey();
-
-					if (schedulerResponse.getGroupName().equals(groupName)) {
-						iterator.remove();
-					}
-				}
+			if (isMemorySchedulerSlave(groupName)) {
+				removeMemorySingleInstanceJobs(groupName);
 
 				return;
 			}
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to delete jobs in group {" + groupName + "}", e);
+				"Unable to delete jobs in group " + groupName, e);
 		}
 
 		_readLock.lock();
@@ -118,20 +105,15 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
 	}
 
 	@Clusterable
 	public void delete(String jobName, String groupName)
 		throws SchedulerException {
 
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
+			if (isMemorySchedulerSlave(groupName)) {
 				_memorySingleInstanceJobs.remove(
 					getFullName(jobName, groupName));
 
@@ -154,21 +136,20 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
+	}
+
+	public String getBeanIdentifier() {
+		return _beanIdentifier;
 	}
 
 	public SchedulerResponse getScheduledJob(String jobName, String groupName)
 		throws SchedulerException {
 
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
+			if (isMemorySchedulerSlave(groupName)) {
 				return (SchedulerResponse)callMaster(
-					_getScheduledJobByJobNameGroupName, jobName, groupName);
+					_getScheduledJobMethodKey, jobName, groupName);
 			}
 		}
 		catch (Exception e) {
@@ -192,10 +173,9 @@ public class ClusterSchedulerEngine
 		throws SchedulerException {
 
 		try {
-			if (!isMemorySchedulerClusterLockOwner(
-				lockMemorySchedulerCluster(null))) {
-
-				return (List<SchedulerResponse>)callMaster(_getScheduledJobs);
+			if (isMemorySchedulerSlave()) {
+				return (List<SchedulerResponse>)callMaster(
+					_getScheduledJobsMethodKey1);
 			}
 		}
 		catch (Exception e) {
@@ -215,20 +195,15 @@ public class ClusterSchedulerEngine
 	public List<SchedulerResponse> getScheduledJobs(String groupName)
 		throws SchedulerException {
 
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
+			if (isMemorySchedulerSlave(groupName)) {
 				return (List<SchedulerResponse>)callMaster(
-					_getScheduledJobByGroupName, groupName);
+					_getScheduledJobsMethodKey2, groupName);
 			}
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to get jobs in group {" + groupName + "}", e);
+				"Unable to get jobs in group " + groupName, e);
 		}
 
 		_readLock.lock();
@@ -241,35 +216,18 @@ public class ClusterSchedulerEngine
 		}
 	}
 
-	public String getBeanIdentifier() {
-		return _beanIdentifier;
-	}
-
 	@Clusterable
 	public void pause(String groupName) throws SchedulerException {
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
-				for(ObjectValuePair<SchedulerResponse, TriggerState> value :
-					_memorySingleInstanceJobs.values()) {
-
-					SchedulerResponse schedulerResponse = value.getKey();
-
-					if (schedulerResponse.getGroupName().equals(groupName)) {
-						value.setValue(TriggerState.PAUSED);
-					}
-				}
+			if (isMemorySchedulerSlave(groupName)) {
+				updateMemorySingleInstanceJobs(groupName, TriggerState.PAUSED);
 
 				return;
 			}
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to pause jobs in group {" + groupName + "}", e);
+				"Unable to pause jobs in group " + groupName, e);
 		}
 
 		_readLock.lock();
@@ -281,28 +239,17 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
 	}
 
 	@Clusterable
 	public void pause(String jobName, String groupName)
 		throws SchedulerException {
 
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
-				ObjectValuePair<SchedulerResponse, TriggerState>
-					memorySingleInstanceJob =
-						_memorySingleInstanceJobs.get(
-							getFullName(jobName, groupName));
-
-				if (memorySingleInstanceJob != null) {
-					memorySingleInstanceJob.setValue(TriggerState.PAUSED);
-				}
+			if (isMemorySchedulerSlave(groupName)) {
+				updateMemorySingleInstanceJob(
+					jobName, groupName, TriggerState.PAUSED);
 
 				return;
 			}
@@ -323,34 +270,21 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
 	}
 
 	@Clusterable
 	public void resume(String groupName) throws SchedulerException {
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
-				for(ObjectValuePair<SchedulerResponse, TriggerState> value :
-					_memorySingleInstanceJobs.values()) {
-
-					SchedulerResponse schedulerResponse = value.getKey();
-
-					if (schedulerResponse.getGroupName().equals(groupName)) {
-						value.setValue(TriggerState.NORMAL);
-					}
-				}
+			if (isMemorySchedulerSlave(groupName)) {
+				updateMemorySingleInstanceJobs(groupName, TriggerState.NORMAL);
 
 				return;
 			}
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to resume jobs in group {" + groupName + "}", e);
+				"Unable to resume jobs in group " + groupName, e);
 		}
 
 		_readLock.lock();
@@ -362,28 +296,17 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
 	}
 
 	@Clusterable
 	public void resume(String jobName, String groupName)
 		throws SchedulerException {
 
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
-				ObjectValuePair<SchedulerResponse, TriggerState>
-					memorySingleInstanceJob =
-						_memorySingleInstanceJobs.get(
-							getFullName(jobName, groupName));
-
-				if (memorySingleInstanceJob != null) {
-					memorySingleInstanceJob.setValue(TriggerState.NORMAL);
-				}
+			if (isMemorySchedulerSlave(groupName)) {
+				updateMemorySingleInstanceJob(
+					jobName, groupName, TriggerState.NORMAL);
 
 				return;
 			}
@@ -404,7 +327,7 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
 	}
 
 	@Clusterable
@@ -416,13 +339,8 @@ public class ClusterSchedulerEngine
 		String groupName = trigger.getGroupName();
 		String jobName = trigger.getJobName();
 
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
+			if (isMemorySchedulerSlave(groupName)) {
 				SchedulerResponse schedulerResponse = new SchedulerResponse();
 
 				schedulerResponse.setDescription(description);
@@ -457,7 +375,7 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
 	}
 
 	public void setBeanIdentifier(String beanIdentifier) {
@@ -467,7 +385,7 @@ public class ClusterSchedulerEngine
 	public void shutdown() throws SchedulerException {
 		try {
 			ClusterExecutorUtil.removeClusterEventListener(
-				_memorySchedulerClusterEventListener);
+				_clusterEventListener);
 
 			LockLocalServiceUtil.unlock(
 				_LOCK_CLASS_NAME, _LOCK_CLASS_NAME, _localClusterNodeAddress,
@@ -490,14 +408,13 @@ public class ClusterSchedulerEngine
 			_localClusterNodeAddress = getSerializedString(
 				ClusterExecutorUtil.getLocalClusterNodeAddress());
 
-			_memorySchedulerClusterEventListener =
-				new MemorySchedulerClusterEventListener();
+			_clusterEventListener = new MemorySchedulerClusterEventListener();
 
 			ClusterExecutorUtil.addClusterEventListener(
-				_memorySchedulerClusterEventListener);
+				_clusterEventListener);
 
 			if (!isMemorySchedulerClusterLockOwner(
-				lockMemorySchedulerCluster(null))) {
+					lockMemorySchedulerCluster(null))) {
 
 				initMemorySingleInstanceJobs();
 			}
@@ -513,13 +430,8 @@ public class ClusterSchedulerEngine
 	public void suppressError(String jobName, String groupName)
 		throws SchedulerException {
 
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
+			if (isMemorySchedulerSlave(groupName)) {
 				return;
 			}
 		}
@@ -539,41 +451,21 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
 	}
 
 	@Clusterable
 	public void unschedule(String groupName) throws SchedulerException {
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
-				Iterator<Map.Entry<String, ObjectValuePair<
-					SchedulerResponse, TriggerState>>> iterator =
-						_memorySingleInstanceJobs.entrySet().iterator();
-
-				while (iterator.hasNext()) {
-					Map.Entry<String, ObjectValuePair<
-						SchedulerResponse, TriggerState>> entry =
-							iterator.next();
-
-					SchedulerResponse schedulerResponse =
-						entry.getValue().getKey();
-
-					if (schedulerResponse.getGroupName().equals(groupName)) {
-						iterator.remove();
-					}
-				}
+			if (isMemorySchedulerSlave(groupName)) {
+				removeMemorySingleInstanceJobs(groupName);
 
 				return;
 			}
 		}
 		catch (Exception e) {
 			throw new SchedulerException(
-				"Unable to unschedule jobs in group {" + groupName + "}", e);
+				"Unable to unschedule jobs in group " + groupName, e);
 		}
 
 		_readLock.lock();
@@ -585,20 +477,15 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
 	}
 
 	@Clusterable
 	public void unschedule(String jobName, String groupName)
 		throws SchedulerException {
 
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
-
+			if (isMemorySchedulerSlave(groupName)) {
 				_memorySingleInstanceJobs.remove(
 					getFullName(jobName, groupName));
 
@@ -621,17 +508,7 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
-	}
-
-	/**
-	 * @deprecated {@link #unschedule(String, String)}
-	 */
-	@Clusterable
-	public void unschedule(Trigger trigger) throws SchedulerException {
-		if (_log.isWarnEnabled()) {
-			_log.warn("");
-		}
+		skipClusterInvoking(groupName);
 	}
 
 	@Clusterable
@@ -639,20 +516,17 @@ public class ClusterSchedulerEngine
 		String jobName = trigger.getJobName();
 		String groupName = trigger.getGroupName();
 
-		StorageType storageType = getStorageType(groupName);
-
 		try {
-			if ((storageType == StorageType.MEMORY_SINGLE_INSTANCE) &&
-				!isMemorySchedulerClusterLockOwner(
-					lockMemorySchedulerCluster(null))) {
+			if (isMemorySchedulerSlave(groupName)) {
+				for (ObjectValuePair<SchedulerResponse, TriggerState>
+						memorySingleInstanceJob :
+							_memorySingleInstanceJobs.values()) {
 
-				for(ObjectValuePair<SchedulerResponse, TriggerState> value :
-					_memorySingleInstanceJobs.values()) {
+					SchedulerResponse schedulerResponse =
+						memorySingleInstanceJob.getKey();
 
-					SchedulerResponse schedulerResponse = value.getKey();
-
-					if (schedulerResponse.getGroupName().equals(groupName) &&
-						schedulerResponse.getJobName().equals(jobName)) {
+					if (jobName.equals(schedulerResponse.getJobName()) &&
+						groupName.equals(schedulerResponse.getGroupName())) {
 
 						schedulerResponse.setTrigger(trigger);
 
@@ -680,7 +554,7 @@ public class ClusterSchedulerEngine
 			_readLock.unlock();
 		}
 
-		skipClusterInvoking(storageType);
+		skipClusterInvoking(groupName);
 	}
 
 	public Lock updateMemorySchedulerClusterMaster() throws SchedulerException {
@@ -706,18 +580,25 @@ public class ClusterSchedulerEngine
 
 		MethodHandler methodHandler = new MethodHandler(methodKey, arguments);
 
-		Address masterAddress = (Address)getDeserializedObject(
-			updateMemorySchedulerClusterMaster().getOwner());
+		Lock lock = updateMemorySchedulerClusterMaster();
+
+		Address address = (Address)getDeserializedObject(lock.getOwner());
 
 		ClusterRequest clusterRequest = ClusterRequest.createUnicastRequest(
-			methodHandler, masterAddress);
+			methodHandler, address);
 
 		clusterRequest.setBeanIdentifier(_beanIdentifier);
 
-		ClusterNodeResponses responses = ClusterExecutorUtil.execute(
-			clusterRequest).get();
+		FutureClusterResponses futureClusterResponses =
+			ClusterExecutorUtil.execute(clusterRequest);
 
-		return responses.getClusterResponse(masterAddress).getResult();
+		ClusterNodeResponses clusterNodeResponses =
+			futureClusterResponses.get();
+
+		ClusterNodeResponse clusterNodeResponse =
+			clusterNodeResponses.getClusterResponse(address);
+
+		return clusterNodeResponse.getResult();
 	}
 
 	protected Object getDeserializedObject(String string) throws Exception {
@@ -756,9 +637,9 @@ public class ClusterSchedulerEngine
 	}
 
 	protected StorageType getStorageType(String groupName) {
-		int delimiterIndex = groupName.indexOf(CharPool.POUND);
+		int pos = groupName.indexOf(CharPool.POUND);
 
-		String storageTypeString = groupName.substring(0, delimiterIndex);
+		String storageTypeString = groupName.substring(0, pos);
 
 		return StorageType.valueOf(storageTypeString);
 	}
@@ -766,17 +647,16 @@ public class ClusterSchedulerEngine
 	protected void initMemorySingleInstanceJobs() throws Exception {
 		List<SchedulerResponse> schedulerResponses =
 			(List<SchedulerResponse>)callMaster(
-				_getScheduledJobsByType,
+				_getScheduledJobsMethodKey3,
 				StorageType.MEMORY_SINGLE_INSTANCE);
 
 		for (SchedulerResponse schedulerResponse : schedulerResponses) {
-			String jobName = schedulerResponse.getJobName();
-			String groupName =
-				StorageType.MEMORY_SINGLE_INSTANCE.toString().concat(
-				StringPool.UNDERLINE).concat(
-				schedulerResponse.getGroupName());
-
 			Trigger oldTrigger = schedulerResponse.getTrigger();
+
+			String jobName = schedulerResponse.getJobName();
+			String groupName = SchedulerEngineUtil.namespaceGroupName(
+				schedulerResponse.getGroupName(),
+				StorageType.MEMORY_SINGLE_INSTANCE);
 
 			Trigger newTrigger = TriggerFactoryUtil.buildTrigger(
 				oldTrigger.getTriggerType(), jobName, groupName,
@@ -785,50 +665,82 @@ public class ClusterSchedulerEngine
 
 			schedulerResponse.setTrigger(newTrigger);
 
+			Message message = schedulerResponse.getMessage();
+
+			message.remove(JOB_STATE);
+
 			TriggerState triggerState = SchedulerEngineUtil.getJobState(
 				schedulerResponse);
 
-			schedulerResponse.getMessage().put(JOB_STATE, null);
-
 			_memorySingleInstanceJobs.put(
 				getFullName(jobName, groupName),
-				new ObjectValuePair<SchedulerResponse,TriggerState>(
+				new ObjectValuePair<SchedulerResponse, TriggerState>(
 					schedulerResponse, triggerState));
 		}
-
 	}
 
 	protected boolean isMemorySchedulerClusterLockOwner(Lock lock)
 		throws Exception {
 
-		boolean isMaster = _localClusterNodeAddress.equals(lock.getOwner());
+		boolean master = _localClusterNodeAddress.equals(lock.getOwner());
 
-		if (isMaster != _wasMaster) {
-			if (_wasMaster) {
-				_localClusterNodeAddress = getSerializedString(
-					ClusterExecutorUtil.getLocalClusterNodeAddress());
+		if (master == _master) {
+			return master;
+		}
 
-				for (ObjectValuePair<SchedulerResponse, TriggerState>
-					memorySingleInstanceJob :
-						_memorySingleInstanceJobs.values()) {
+		if (!_master) {
+			_master = master;
 
-					SchedulerResponse schedulerResponse =
-						memorySingleInstanceJob.getKey();
+			return _master;
+		}
 
-					_schedulerEngine.delete(
-						schedulerResponse.getJobName(),
-						schedulerResponse.getGroupName());
-				}
+		_localClusterNodeAddress = getSerializedString(
+			ClusterExecutorUtil.getLocalClusterNodeAddress());
 
-				initMemorySingleInstanceJobs();
+		for (ObjectValuePair<SchedulerResponse, TriggerState>
+				memorySingleInstanceJob : _memorySingleInstanceJobs.values()) {
 
-				_log.info("Master of memory scheduler has been changed");
+			SchedulerResponse schedulerResponse =
+				memorySingleInstanceJob.getKey();
+
+			_schedulerEngine.delete(
+				schedulerResponse.getJobName(),
+				schedulerResponse.getGroupName());
+		}
+
+		initMemorySingleInstanceJobs();
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Another node is now the memory scheduler master");
+		}
+
+		_master = master;
+
+		return master;
+	}
+
+	protected boolean isMemorySchedulerSlave() throws Exception {
+		return isMemorySchedulerSlave(null);
+	}
+
+	protected boolean isMemorySchedulerSlave(String groupName)
+		throws Exception {
+
+		if (groupName != null) {
+			StorageType storageType = getStorageType(groupName);
+
+			if (!storageType.equals(StorageType.MEMORY_SINGLE_INSTANCE)) {
+				return false;
 			}
 		}
 
-		_wasMaster = isMaster;
+		Lock lock = lockMemorySchedulerCluster(null);
 
-		return isMaster;
+		if (isMemorySchedulerClusterLockOwner(lock)) {
+			return false;
+		}
+
+		return true;
 	}
 
 	protected Lock lockMemorySchedulerCluster(String owner) throws Exception {
@@ -846,54 +758,112 @@ public class ClusterSchedulerEngine
 				PropsValues.MEMORY_CLUSTER_SCHEDULER_LOCK_CACHE_ENABLED);
 		}
 
-		if (lock.isNew()) {
-			_writeLock.lock();
+		if (!lock.isNew()) {
+			return lock;
+		}
 
-			ProxyModeThreadLocal.setForceSync(true);
+		boolean forceSync = ProxyModeThreadLocal.isForceSync();
 
-			try {
-				for (ObjectValuePair<SchedulerResponse, TriggerState>
+		ProxyModeThreadLocal.setForceSync(true);
+
+		_writeLock.lock();
+
+		try {
+			for (ObjectValuePair<SchedulerResponse, TriggerState>
 					memorySingleInstanceJob :
 						_memorySingleInstanceJobs.values()) {
 
-					SchedulerResponse schedulerResponse =
-						memorySingleInstanceJob.getKey();
+				SchedulerResponse schedulerResponse =
+					memorySingleInstanceJob.getKey();
 
-					_schedulerEngine.schedule(
-						schedulerResponse.getTrigger(),
-						schedulerResponse.getDescription(),
-						schedulerResponse.getDestinationName(),
-						schedulerResponse.getMessage());
+				_schedulerEngine.schedule(
+					schedulerResponse.getTrigger(),
+					schedulerResponse.getDescription(),
+					schedulerResponse.getDestinationName(),
+					schedulerResponse.getMessage());
 
-					TriggerState triggerState =
-						memorySingleInstanceJob.getValue();
+				TriggerState triggerState =
+					memorySingleInstanceJob.getValue();
 
-					if (triggerState.equals(TriggerState.PAUSED)) {
-						_schedulerEngine.pause(
-							schedulerResponse.getJobName(),
-							schedulerResponse.getGroupName());
-					}
+				if (triggerState.equals(TriggerState.PAUSED)) {
+					_schedulerEngine.pause(
+						schedulerResponse.getJobName(),
+						schedulerResponse.getGroupName());
 				}
 			}
-			finally {
-				ProxyModeThreadLocal.setForceSync(false);
+		}
+		finally {
+			ProxyModeThreadLocal.setForceSync(forceSync);
 
-				_writeLock.unlock();
-			}
+			_writeLock.unlock();
 		}
 
 		return lock;
 	}
 
-	protected void skipClusterInvoking(StorageType storageType)
+	protected void removeMemorySingleInstanceJobs(String groupName) {
+		Set<Map.Entry<String, ObjectValuePair<SchedulerResponse, TriggerState>>>
+			memorySingleInstanceJobs = _memorySingleInstanceJobs.entrySet();
+
+		Iterator
+			<Map.Entry<String,
+				ObjectValuePair<SchedulerResponse, TriggerState>>> itr =
+					memorySingleInstanceJobs.iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry <String, ObjectValuePair<SchedulerResponse, TriggerState>>
+				entry = itr.next();
+
+			ObjectValuePair<SchedulerResponse, TriggerState>
+				memorySingleInstanceJob = entry.getValue();
+
+			SchedulerResponse schedulerResponse =
+				memorySingleInstanceJob.getKey();
+
+			if (groupName.equals(schedulerResponse.getGroupName())) {
+				itr.remove();
+			}
+		}
+	}
+
+	protected void skipClusterInvoking(String groupName)
 		throws SchedulerException {
 
-		if (storageType == StorageType.PERSISTED) {
-			SchedulerException exception = new SchedulerException();
+		StorageType storageType = getStorageType(groupName);
 
-			exception.setSwallowable(true);
+		if (storageType.equals(StorageType.PERSISTED)) {
+			SchedulerException schedulerException = new SchedulerException();
 
-			throw exception;
+			schedulerException.setSwallowable(true);
+
+			throw schedulerException;
+		}
+	}
+
+	protected void updateMemorySingleInstanceJob(
+		String jobName, String groupName, TriggerState triggerState) {
+
+		ObjectValuePair<SchedulerResponse, TriggerState>
+			memorySingleInstanceJob = _memorySingleInstanceJobs.get(
+				getFullName(jobName, groupName));
+
+		if (memorySingleInstanceJob != null) {
+			memorySingleInstanceJob.setValue(triggerState);
+		}
+	}
+
+	protected void updateMemorySingleInstanceJobs(
+		String groupName, TriggerState triggerState) {
+
+		for (ObjectValuePair<SchedulerResponse, TriggerState>
+				memorySingleInstanceJob : _memorySingleInstanceJobs.values()) {
+
+			SchedulerResponse schedulerResponse =
+				memorySingleInstanceJob.getKey();
+
+			if (groupName.equals(schedulerResponse.getGroupName())) {
+				memorySingleInstanceJob.setValue(triggerState);
+			}
 		}
 	}
 
@@ -903,27 +873,26 @@ public class ClusterSchedulerEngine
 	private static Log _log = LogFactoryUtil.getLog(
 		ClusterSchedulerEngine.class);
 
-	private static MethodKey _getScheduledJobByGroupName = new MethodKey(
-		SchedulerEngine.class.getName(), "getScheduledJobs", String.class);
-	private static MethodKey _getScheduledJobByJobNameGroupName = new MethodKey(
+	private static MethodKey _getScheduledJobMethodKey = new MethodKey(
 		SchedulerEngine.class.getName(), "getScheduledJob", String.class,
 		String.class);
-	private static MethodKey _getScheduledJobs = new MethodKey(
+	private static MethodKey _getScheduledJobsMethodKey1 = new MethodKey(
 		SchedulerEngine.class.getName(), "getScheduledJobs");
-	private static MethodKey _getScheduledJobsByType = new MethodKey(
+	private static MethodKey _getScheduledJobsMethodKey2 = new MethodKey(
+		SchedulerEngine.class.getName(), "getScheduledJobs", String.class);
+	private static MethodKey _getScheduledJobsMethodKey3 = new MethodKey(
 		SchedulerEngineUtil.class.getName(), "getScheduledJobs",
 		StorageType.class);
 
 	private String _beanIdentifier;
+	private ClusterEventListener _clusterEventListener;
 	private volatile String _localClusterNodeAddress;
-	private ClusterEventListener _memorySchedulerClusterEventListener;
+	private volatile boolean _master;
 	private Map<String, ObjectValuePair<SchedulerResponse, TriggerState>>
-		_memorySingleInstanceJobs =
-			new ConcurrentHashMap<String,
-				ObjectValuePair<SchedulerResponse, TriggerState>>();
+		_memorySingleInstanceJobs = new ConcurrentHashMap
+			<String, ObjectValuePair<SchedulerResponse, TriggerState>>();
 	private java.util.concurrent.locks.Lock _readLock;
 	private SchedulerEngine _schedulerEngine;
-	private volatile boolean _wasMaster;
 	private java.util.concurrent.locks.Lock _writeLock;
 
 	private class MemorySchedulerClusterEventListener
