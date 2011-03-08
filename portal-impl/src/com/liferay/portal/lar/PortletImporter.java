@@ -77,11 +77,13 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
+import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 
 import java.io.File;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -944,6 +946,8 @@ public class PortletImporter {
 					String defaultData = expandoColumnElement.elementText(
 						"default-data");
 
+					Serializable defaultDataObject = ExpandoConverterUtil.getAttributeFromString(type, defaultData);
+					
 					ExpandoColumn expandoColumn = null;
 
 					try {
@@ -952,13 +956,14 @@ public class PortletImporter {
 
 						ExpandoColumnLocalServiceUtil.updateColumn(
 							expandoColumn.getColumnId(), name, type,
-							defaultData);
+							defaultDataObject);
 					}
 					catch (NoSuchColumnException e) {
+
 						expandoColumn =
 							ExpandoColumnLocalServiceUtil.addColumn(
 								expandoTable.getTableId(), name, type,
-								defaultData);
+								defaultDataObject);
 					}
 
 					ExpandoColumnLocalServiceUtil.updateTypeSettings(
