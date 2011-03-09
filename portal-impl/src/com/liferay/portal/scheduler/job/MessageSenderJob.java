@@ -102,7 +102,7 @@ public class MessageSenderJob implements Job {
 
 				if (PropsValues.CLUSTER_LINK_ENABLED &&
 					storageType.equals(StorageType.MEMORY_SINGLE_INSTANCE)) {
-					
+
 					notifyClusterMember(
 						trigger.getJobName(), trigger.getGroup(), storageType);
 				}
