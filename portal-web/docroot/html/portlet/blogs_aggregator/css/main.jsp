@@ -79,6 +79,11 @@
 
 .ie {
 	.portlet-blogs-aggregator {
+		.entry-date {
+			overflow: visible;
+			white-space: nowrap;
+		}
+
 		.entry-info {
 			height: 1%;
 		}
