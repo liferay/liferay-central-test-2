@@ -1648,7 +1648,15 @@ public class HookHotDeployListener
 		Filter filter = (Filter)InstanceFactory.newInstance(
 			portletClassLoader, filterClassName);
 
-		List<Class> interfaces = new ArrayList<Class>();
+		List<Class<?>> interfaces = new ArrayList<Class<?>>();
+
+		if (filter instanceof TryFilter) {
+			interfaces.add(TryFilter.class);
+		}
+
+		if (filter instanceof TryFinallyFilter) {
+			interfaces.add(TryFinallyFilter.class);
+		}
 
 		if (filter instanceof WrapHttpServletRequestFilter) {
 			interfaces.add(WrapHttpServletRequestFilter.class);
@@ -1656,14 +1664,6 @@ public class HookHotDeployListener
 
 		if (filter instanceof WrapHttpServletResponseFilter) {
 			interfaces.add(WrapHttpServletResponseFilter.class);
-		}
-
-		if (filter instanceof TryFinallyFilter) {
-			interfaces.add(TryFinallyFilter.class);
-		}
-
-		if (filter instanceof TryFilter) {
-			interfaces.add(TryFilter.class);
 		}
 
 		if (filter instanceof LiferayFilter) {
@@ -1674,7 +1674,7 @@ public class HookHotDeployListener
 		}
 
 		filter = (Filter)Proxy.newProxyInstance(
-			portletClassLoader, interfaces.toArray(new Class[] {}),
+			portletClassLoader, interfaces.toArray(new Class[0]),
 			new ClassLoaderBeanHandler(filter, portletClassLoader));
 
 		return filter;
