@@ -221,10 +221,21 @@ The default value is "vm".
 <!ELEMENT template-extension (#PCDATA)>
 
 <!--
-The settings element contain a list of settings or properties that are available
-to the theme object at runtime. They are described with a key value pair.
+The settings element contain a list of settings that are available to the
+themeDisplay object at runtime. They are described with a key value pair.
 
-For example, you can access it with the command: theme.getSetting("hello").
+For example, you can access it with the command:
+themeDisplay.getSetting("hello").
+
+You can make your settings configurable throuhg the User Interface setting the
+attribute configurable to true. Using this option, administrators will be able
+to change the settings for a page or a set of pages.
+If your setting is configurable then you can choose which form element should be
+displayed (text, textarea, checkbox, select) using the attribute type and you
+can set the valid options for the select using the attribute options. When your
+settings are configurable the attribute value will act as the default value.
+
+
 -->
 <!ELEMENT settings (setting*)>
 
@@ -238,7 +249,10 @@ See the comments in the settings element.
 -->
 <!ATTLIST setting
 	key CDATA #REQUIRED
-	value CDATA #REQUIRED
+	value CDATA #IMPLIED
+	configurable CDATA #IMPLIED
+	type CDATA #IMPLIED
+	options CDATA #IMPLIED
 >
 
 <!--

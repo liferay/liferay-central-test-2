@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 6.0.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_6_0_0.dtd">
+<!DOCTYPE look-and-feel PUBLIC "-//Liferay//DTD Look and Feel 6.1.0//EN" "http://www.liferay.com/dtd/liferay-look-and-feel_6_1_0.dtd">
 
 <look-and-feel>
 	<compatibility>
@@ -15,9 +15,9 @@
 		<images-path>${root-path}/images</images-path>
 		<template-extension>vm</template-extension>
 		<settings>
-			<setting key="bullet-style-options" value="dots,arrows" />
+			<setting configurable="true" key="bullet-style" options="dots,arrows" type="select" value="dots" />
+			<setting configurable="true" key="portlet-setup-show-borders-default" value="true" type="checkbox" />
 			<setting key="hello" value="world" />
-			<setting key="hi" value="mom" />
 		</settings>
 		<roles>
 			<role-name>User</role-name>
@@ -35,9 +35,15 @@
 	</theme>
 	<theme id="control-panel" name="Control Panel">
 		<root-path>/html/themes/control_panel</root-path>
+		<settings>
+			<setting configurable="true" key="footer-text" type="textarea" value="Powered by Liferay" />
+		</settings>
 	</theme>
 	<theme id="mobile" name="Mobile">
 		<root-path>/wap/themes/${theme-id}</root-path>
+		<settings>
+			<setting configurable="true" key="bullet-style" options="dots,arrows" type="select" value="dots" />
+		</settings>
 		<wap-theme>true</wap-theme>
 	</theme>
 </look-and-feel>

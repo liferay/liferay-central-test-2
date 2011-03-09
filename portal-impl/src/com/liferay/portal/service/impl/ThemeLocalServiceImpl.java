@@ -635,10 +635,21 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				while (itr2.hasNext()) {
 					Element settingEl = itr2.next();
 
+					boolean configurable = GetterUtil.getBoolean(
+						settingEl.attributeValue("configurable"));
 					String key = settingEl.attributeValue("key");
+					String options = settingEl.attributeValue("options");
+					String type = settingEl.attributeValue("type");
 					String value = settingEl.attributeValue("value");
 
-					themeModel.setSetting(key, value);
+					String[] optionsArray = null;
+
+					if (Validator.isNotNull(options)) {
+						optionsArray = StringUtil.split(options);
+					}
+
+					themeModel.addSetting(
+						key, value, configurable, type, optionsArray);
 				}
 			}
 

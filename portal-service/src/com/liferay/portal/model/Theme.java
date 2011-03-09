@@ -62,6 +62,8 @@ public interface Theme extends Comparable<Theme>, Plugin, Serializable {
 
 	public void setCssPath(String cssPath);
 
+	public String getDevice();
+
 	public String getImagesPath();
 
 	public void setImagesPath(String imagesPath);
@@ -78,9 +80,19 @@ public interface Theme extends Comparable<Theme>, Plugin, Serializable {
 
 	public void setTemplateExtension(String templateExtension);
 
-	public Properties getSettings();
+	public Map<String, ThemeSetting> getConfigurableSettings();
+
+	public void addSetting(
+		 String key, String value, boolean configurable, String type,
+		 String[] options);
+
+	public Map<String, ThemeSetting> getSettings();
+
+	public Properties getSettingsProperties();
 
 	public String getSetting(String key);
+
+	public String[] getSettingOptions(String key);
 
 	public void setSetting(String key, String value);
 

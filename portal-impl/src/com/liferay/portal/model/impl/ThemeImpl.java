@@ -27,6 +27,7 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.SpriteImage;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.model.ThemeSetting;
 import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupLimit;
@@ -43,6 +44,7 @@ import java.util.Properties;
 
 /**
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  */
 public class ThemeImpl extends PluginBaseImpl implements Theme {
 
@@ -167,6 +169,15 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_cssPath = cssPath;
 	}
 
+public String getDevice() {
+		if (isWapTheme()) {
+			return "wap";
+		}
+		else {
+			return "regular";
+		}
+	}
+
 	public String getImagesPath() {
 		return _imagesPath;
 	}
@@ -203,16 +214,81 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_templateExtension = templateExtension;
 	}
 
-	public Properties getSettings() {
+	public Map<String, ThemeSetting> getSettings() {
 		return _settings;
 	}
 
+	public Properties getSettingsProperties() {
+		Properties properties = new Properties();
+
+		for (String key : _settings.keySet()) {
+			ThemeSetting setting = _settings.get(key);
+
+			if (setting != null) {
+				properties.setProperty(key, setting.getValue());
+			}
+		}
+
+		return properties;
+	}
+
+	public void addSetting(
+		 String key, String value, boolean configurable, String type,
+		 String[] options) {
+
+		ThemeSetting themeSetting = new ThemeSettingImpl(
+			configurable, options, type, value);
+
+		_settings.put(key, themeSetting);
+	}
+
 	public String getSetting(String key) {
-		return _settings.getProperty(key);
+		String value = StringPool.BLANK;
+
+		ThemeSetting themeSetting = _settings.get(key);
+
+		if (themeSetting != null) {
+			value = themeSetting.getValue();
+		}
+
+		return value;
 	}
 
 	public void setSetting(String key, String value) {
-		_settings.setProperty(key, value);
+		ThemeSetting themeSetting = _settings.get(key);
+
+		if (themeSetting != null) {
+			themeSetting.setValue(value);
+		}
+		else {
+			addSetting(key, value, false, null, null);
+		}
+	}
+
+	public String[] getSettingOptions(String key) {
+		String[] options = null;
+
+		ThemeSetting themeSetting = _settings.get(key);
+
+		if (themeSetting != null) {
+			options = themeSetting.getOptions();
+		}
+
+		return options;
+	}
+
+	public Map<String, ThemeSetting> getConfigurableSettings() {
+		Map<String, ThemeSetting> configurableSettings = new HashMap();
+
+		for (Map.Entry<String,ThemeSetting> entry : _settings.entrySet()) {
+			ThemeSetting themeSetting = entry.getValue();
+
+			if (themeSetting.isConfigurable()) {
+				configurableSettings.put(entry.getKey(), entry.getValue());
+			}
+		}
+
+		return configurableSettings;
 	}
 
 	public boolean getWapTheme() {
@@ -475,7 +551,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	private String _javaScriptPath = "${root-path}/js";
 	private String _virtualPath = StringPool.BLANK;
 	private String _templateExtension = "vm";
-	private Properties _settings = new Properties();
+	private Map<String, ThemeSetting> _settings = new HashMap();
 	private boolean _wapTheme;
 	private Map<String, ColorScheme> _colorSchemesMap =
 		new HashMap<String, ColorScheme>();
