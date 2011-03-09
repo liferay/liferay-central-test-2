@@ -17,19 +17,17 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
-List<Theme> themes = (List<Theme>)request.getAttribute("edit_pages.jsp-themes");
-List<ColorScheme> colorSchemes = (List<ColorScheme>)request.getAttribute("edit_pages.jsp-colorSchemes");
-
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 LayoutSet selLayoutSet = (LayoutSet)request.getAttribute("edit_pages.jsp-selLayoutSet");
 
+List<Theme> themes = (List<Theme>)request.getAttribute("edit_pages.jsp-themes");
+List<ColorScheme> colorSchemes = (List<ColorScheme>)request.getAttribute("edit_pages.jsp-colorSchemes");
 Theme selTheme = (Theme)request.getAttribute("edit_pages.jsp-selTheme");
 ColorScheme selColorScheme = (ColorScheme)request.getAttribute("edit_pages.jsp-selColorScheme");
+String device = (String)request.getAttribute("edit_pages.jsp-device");
+boolean editable = (Boolean)request.getAttribute("edit_pages.jsp-editable");
 
 PluginPackage selPluginPackage = selTheme.getPluginPackage();
-String device = (String)request.getAttribute("edit_pages.jsp-device");
-
-boolean editable = (Boolean)request.getAttribute("edit_pages.jsp-editable");
 
 Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSettings();
 %>
@@ -86,7 +84,7 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 						</dd>
 					</c:if>
 
-					<c:if test="<%= !editable && (configurableSettings.size() > 0)  %>">
+					<c:if test="<%= !editable && !configurableSettings.isEmpty()  %>">
 
 						<%
 						for (String name : configurableSettings.keySet()) {
@@ -109,8 +107,8 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 		</div>
 
 		<c:if test="<%= editable %>">
-			<c:if test="<%= !colorSchemes.isEmpty() || configurableSettings.size() > 0 %>">
-				<liferay-ui:panel-container  extended="<%= true %>" persistState="<%= true %>">
+			<c:if test="<%= !colorSchemes.isEmpty() || !configurableSettings.isEmpty() %>">
+				<liferay-ui:panel-container extended="<%= true %>" persistState="<%= true %>">
 					<c:if test="<%= !colorSchemes.isEmpty() %>">
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>'>
 							<aui:fieldset cssCclass="color-schemes">
@@ -142,7 +140,7 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 						</liferay-ui:panel>
 					</c:if>
 
-					<c:if test="<%= configurableSettings.size() > 0 %>">
+					<c:if test="<%= !configurableSettings.isEmpty() %>">
 						<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" persistState="<%= true %>" title="settings">
 							<aui:fieldset>
 
@@ -164,7 +162,7 @@ Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSetting
 								%>
 
 									<c:choose>
-										<c:when test='<%= type.equals("text") || type.equals("textarea") || type.equals("checkbox") %>'>
+										<c:when test='<%= type.equals("checkbox") || type.equals("text") || type.equals("textarea") %>'>
 											<aui:input label="<%= name %>"  name="<%= propertyName %>" type="<%= type %>" value="<%= value %>" />
 										</c:when>
 										<c:when test='<%= type.equals("select") %>'>

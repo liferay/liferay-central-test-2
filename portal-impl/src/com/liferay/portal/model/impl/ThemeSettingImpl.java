@@ -14,13 +14,20 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ThemeSetting;
 
 /**
  * @author Julio Camarero
  */
 public class ThemeSettingImpl implements ThemeSetting {
-	public ThemeSettingImpl() {
+
+	public static String namespaceProperty(String device) {
+		return _PROPERTY_NAMESPACE.concat(device);
+	}
+
+	public static String namespaceProperty(String device, String key) {
+		return namespaceProperty(device).concat(StringPool.COLON).concat(key);
 	}
 
 	public ThemeSettingImpl(
@@ -64,7 +71,9 @@ public class ThemeSettingImpl implements ThemeSetting {
 		_value = value;
 	}
 
-	private boolean _configurable = false;
+	private static final String _PROPERTY_NAMESPACE = "lfr-theme:";
+
+	private boolean _configurable;
 	private String[] _options;
 	private String _type;
 	private String _value;

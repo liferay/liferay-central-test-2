@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import java.io.IOException;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -40,7 +39,6 @@ import java.util.Map;
  * </p>
  *
  * @author Alexander Chow
- * @author Julio Camarero
  */
 public class UnicodeProperties extends HashMap<String, String> {
 
@@ -86,12 +84,6 @@ public class UnicodeProperties extends HashMap<String, String> {
 		else {
 			return value;
 		}
-	}
-
-	public String getThemeProperty(String key, String device) {
-		key = _THEME_PREFIX + device + StringPool.COLON + key;
-
-		return get(key);
 	}
 
 	public boolean isSafe() {
@@ -180,31 +172,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 		}
 	}
 
-	public void removeThemeProperties(String device) {
-		Iterator<String> itr = super.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String key = itr.next();
-
-			if (key.startsWith(_THEME_PREFIX + device)) {
-				itr.remove();
-			}
-		}
-	}
-
-	public String removeThemeProperty(Object key, String device) {
-		key = _THEME_PREFIX + device + StringPool.COLON + key;
-
-		return remove(key);
-	}
-
 	public String setProperty(String key, String value) {
-		return put(key, value);
-	}
-
-	public String setThemeProperty(String key, String device, String value) {
-		key = _THEME_PREFIX + device + StringPool.COLON + key;
-
 		return put(key, value);
 	}
 
@@ -257,8 +225,6 @@ public class UnicodeProperties extends HashMap<String, String> {
 
 	private static final String _SAFE_NEWLINE_CHARACTER =
 		"_SAFE_NEWLINE_CHARACTER_";
-
-	public static final String _THEME_PREFIX = "lfr-theme:";
 
 	private static Log _log = LogFactoryUtil.getLog(UnicodeProperties.class);
 

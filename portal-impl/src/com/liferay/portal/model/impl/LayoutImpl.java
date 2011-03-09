@@ -132,26 +132,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public LayoutImpl() {
 	}
 
-	public String getThemeSetting(String key, String device) {
-		UnicodeProperties properties = getTypeSettingsProperties();
-
-		String value = properties.getThemeProperty(key, device);
-
-		if (value != null) {
-			return value;
-		}
-
-		try {
-			LayoutSet layoutSet = getLayoutSet();
-
-			value = layoutSet.getThemeSetting(key, device);
-		}
-		catch (Exception e) {
-		}
-
-		return value;
-	}
-
 	public List<Layout> getAllChildren() throws SystemException {
 		List<Layout> layouts = new ArrayList<Layout>();
 
@@ -361,6 +341,27 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return ThemeLocalServiceUtil.getTheme(
 				getCompanyId(), getThemeId(), false);
 		}
+	}
+
+	public String getThemeSetting(String key, String device) {
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
+
+		String value = typeSettingsProperties.getProperty(
+			ThemeSettingImpl.namespaceProperty(device, key));
+
+		if (value != null) {
+			return value;
+		}
+
+		try {
+			LayoutSet layoutSet = getLayoutSet();
+
+			value = layoutSet.getThemeSetting(key, device);
+		}
+		catch (Exception e) {
+		}
+
+		return value;
 	}
 
 	public String getTypeSettings() {

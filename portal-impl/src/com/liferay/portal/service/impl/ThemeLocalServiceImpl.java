@@ -223,21 +223,17 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		String themesPath, boolean loadFromServletContext, String[] xmls,
 		PluginPackage pluginPackage) {
 
-		List<String> themeIds = new ArrayList<String>();
+		List<String> themeIdsList = new ArrayList<String>();
 
 		try {
 			for (int i = 0; i < xmls.length; i++) {
-				Set<String> themes = _readThemes(
+				Set<String> themeIds = _readThemes(
 					servletContextName, servletContext, themesPath,
 					loadFromServletContext, xmls[i], pluginPackage);
 
-				Iterator<String> itr = themes.iterator();
-
-				while (itr.hasNext()) {
-					String themeId = itr.next();
-
-					if (!themeIds.contains(themeId)) {
-						themeIds.add(themeId);
+				for (String themeId : themeIds) {
+					if (!themeIdsList.contains(themeId)) {
+						themeIdsList.add(themeId);
 					}
 				}
 			}
@@ -248,7 +244,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 		_themesPool.clear();
 
-		return themeIds;
+		return themeIdsList;
 	}
 
 	public void uninstallThemes(List<String> themeIds) {
@@ -263,96 +259,97 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 		_themesPool.clear();
 	}
 
-	private List<ThemeCompanyId> _getCompanyLimitExcludes(Element el) {
+	private List<ThemeCompanyId> _getCompanyLimitExcludes(Element element) {
 		List<ThemeCompanyId> includes = new ArrayList<ThemeCompanyId>();
 
-		if (el != null) {
-			List<Element> companyIds = el.elements("company-id");
+		if (element == null) {
+			return includes;
+		}
 
-			for (int i = 0; i < companyIds.size(); i++) {
-				Element companyIdEl = companyIds.get(i);
+		List<Element> companyIdsElements = element.elements("company-id");
 
-				String name = companyIdEl.attributeValue("name");
-				String pattern = companyIdEl.attributeValue("pattern");
+		for (int i = 0; i < companyIdsElements.size(); i++) {
+			Element companyIdElement = companyIdsElements.get(i);
 
-				ThemeCompanyId themeCompanyId = null;
+			String name = companyIdElement.attributeValue("name");
+			String pattern = companyIdElement.attributeValue("pattern");
 
-				if (Validator.isNotNull(name)) {
-					themeCompanyId = new ThemeCompanyId(name, false);
-				}
-				else if (Validator.isNotNull(pattern)) {
-					themeCompanyId = new ThemeCompanyId(pattern, true);
-				}
+			ThemeCompanyId themeCompanyId = null;
 
-				if (themeCompanyId != null) {
-					includes.add(themeCompanyId);
-				}
+			if (Validator.isNotNull(name)) {
+				themeCompanyId = new ThemeCompanyId(name, false);
+			}
+			else if (Validator.isNotNull(pattern)) {
+				themeCompanyId = new ThemeCompanyId(pattern, true);
+			}
+
+			if (themeCompanyId != null) {
+				includes.add(themeCompanyId);
 			}
 		}
 
 		return includes;
 	}
 
-	private List<ThemeCompanyId> _getCompanyLimitIncludes(Element el) {
-		return _getCompanyLimitExcludes(el);
+	private List<ThemeCompanyId> _getCompanyLimitIncludes(Element element) {
+		return _getCompanyLimitExcludes(element);
 	}
 
-	private List<ThemeGroupId> _getGroupLimitExcludes(Element el) {
+	private List<ThemeGroupId> _getGroupLimitExcludes(Element element) {
 		List<ThemeGroupId> includes = new ArrayList<ThemeGroupId>();
 
-		if (el != null) {
-			List<Element> groupIds = el.elements("group-id");
+		if (element == null) {
+			return includes;
+		}
 
-			for (int i = 0; i < groupIds.size(); i++) {
-				Element groupIdEl = groupIds.get(i);
+		List<Element> groupIdsElements = element.elements("group-id");
 
-				String name = groupIdEl.attributeValue("name");
-				String pattern = groupIdEl.attributeValue("pattern");
+		for (int i = 0; i < groupIdsElements.size(); i++) {
+			Element groupIdElement = groupIdsElements.get(i);
 
-				ThemeGroupId themeGroupId = null;
+			String name = groupIdElement.attributeValue("name");
+			String pattern = groupIdElement.attributeValue("pattern");
 
-				if (Validator.isNotNull(name)) {
-					themeGroupId = new ThemeGroupId(name, false);
-				}
-				else if (Validator.isNotNull(pattern)) {
-					themeGroupId = new ThemeGroupId(pattern, true);
-				}
+			ThemeGroupId themeGroupId = null;
 
-				if (themeGroupId != null) {
-					includes.add(themeGroupId);
-				}
+			if (Validator.isNotNull(name)) {
+				themeGroupId = new ThemeGroupId(name, false);
+			}
+			else if (Validator.isNotNull(pattern)) {
+				themeGroupId = new ThemeGroupId(pattern, true);
+			}
+
+			if (themeGroupId != null) {
+				includes.add(themeGroupId);
 			}
 		}
 
 		return includes;
 	}
 
-	private List<ThemeGroupId> _getGroupLimitIncludes(Element el) {
-		return _getGroupLimitExcludes(el);
+	private List<ThemeGroupId> _getGroupLimitIncludes(Element element) {
+		return _getGroupLimitExcludes(element);
 	}
 
 	private Map<String, Theme> _getThemes(long companyId) {
 		Map<String, Theme> themes = _themesPool.get(companyId);
 
-		if (themes == null) {
-			themes = new ConcurrentHashMap<String, Theme>();
-
-			Iterator<Map.Entry<String, Theme>> itr =
-				_themes.entrySet().iterator();
-
-			while (itr.hasNext()) {
-				Map.Entry<String, Theme> entry = itr.next();
-
-				String themeId = entry.getKey();
-				Theme theme = entry.getValue();
-
-				if (theme.isCompanyAvailable(companyId)) {
-					themes.put(themeId, theme);
-				}
-			}
-
-			_themesPool.put(companyId, themes);
+		if (themes != null) {
+			return themes;
 		}
+
+		themes = new ConcurrentHashMap<String, Theme>();
+
+		for (Map.Entry<String, Theme> entry : _themes.entrySet()) {
+			String themeId = entry.getKey();
+			Theme theme = entry.getValue();
+
+			if (theme.isCompanyAvailable(companyId)) {
+				themes.put(themeId, theme);
+			}
+		}
+
+		_themesPool.put(companyId, themes);
 
 		return themes;
 	}
@@ -366,18 +363,17 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 	}
 
 	private void _readColorSchemes(
-		Element theme, Map<String, ColorScheme> colorSchemes,
+		Element themeElement, Map<String, ColorScheme> colorSchemes,
 		ContextReplace themeContextReplace) {
 
-		Iterator<Element> itr = theme.elements("color-scheme").iterator();
+		List<Element> colorSchemeElements = themeElement.elements(
+			"color-scheme");
 
-		while (itr.hasNext()) {
-			Element colorScheme = itr.next();
-
+		for (Element colorSchemeElement : colorSchemeElements) {
 			ContextReplace colorSchemeContextReplace =
 				(ContextReplace)themeContextReplace.clone();
 
-			String id = colorScheme.attributeValue("id");
+			String id = colorSchemeElement.attributeValue("id");
 
 			colorSchemeContextReplace.addValue("color-scheme-id", id);
 
@@ -388,16 +384,17 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			}
 
 			String name = GetterUtil.getString(
-				colorScheme.attributeValue("name"), colorSchemeModel.getName());
+				colorSchemeElement.attributeValue("name"),
+				colorSchemeModel.getName());
 
 			name = colorSchemeContextReplace.replace(name);
 
 			boolean defaultCs = GetterUtil.getBoolean(
-				colorScheme.elementText("default-cs"),
+				colorSchemeElement.elementText("default-cs"),
 				colorSchemeModel.isDefaultCs());
 
 			String cssClass = GetterUtil.getString(
-				colorScheme.elementText("css-class"),
+				colorSchemeElement.elementText("css-class"),
 				colorSchemeModel.getCssClass());
 
 			cssClass = colorSchemeContextReplace.replace(cssClass);
@@ -405,7 +402,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			colorSchemeContextReplace.addValue("css-class", cssClass);
 
 			String colorSchemeImagesPath = GetterUtil.getString(
-				colorScheme.elementText("color-scheme-images-path"),
+				colorSchemeElement.elementText("color-scheme-images-path"),
 				colorSchemeModel.getColorSchemeImagesPath());
 
 			colorSchemeImagesPath = colorSchemeContextReplace.replace(
@@ -435,24 +432,22 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			return themeIds;
 		}
 
-		Document doc = SAXReaderUtil.read(xml, true);
+		Document document = SAXReaderUtil.read(xml, true);
 
-		Element root = doc.getRootElement();
+		Element rootElement = document.getRootElement();
 
 		Version portalVersion = _getVersion(ReleaseInfo.getVersion());
 
 		boolean compatible = false;
 
-		Element compatibilityEl = root.element("compatibility");
+		Element compatibilityElement = rootElement.element("compatibility");
 
-		if (compatibilityEl != null) {
-			Iterator<Element> itr = compatibilityEl.elements(
-				"version").iterator();
+		if (compatibilityElement != null) {
+			List<Element> versionElements = compatibilityElement.elements(
+				"version");
 
-			while (itr.hasNext()) {
-				Element versionEl = itr.next();
-
-				Version version = _getVersion(versionEl.getTextTrim());
+			for (Element versionElement : versionElements) {
+				Version version = _getVersion(versionElement.getTextTrim());
 
 				if (version.includes(portalVersion)) {
 					compatible = true;
@@ -472,61 +467,62 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 		ThemeCompanyLimit companyLimit = null;
 
-		Element companyLimitEl = root.element("company-limit");
+		Element companyLimitElement = rootElement.element("company-limit");
 
-		if (companyLimitEl != null) {
+		if (companyLimitElement != null) {
 			companyLimit = new ThemeCompanyLimit();
 
-			Element companyIncludesEl =
-				companyLimitEl.element("company-includes");
+			Element companyIncludesElement = companyLimitElement.element(
+				"company-includes");
 
-			if (companyIncludesEl != null) {
+			if (companyIncludesElement != null) {
 				companyLimit.setIncludes(
-					_getCompanyLimitIncludes(companyIncludesEl));
+					_getCompanyLimitIncludes(companyIncludesElement));
 			}
 
-			Element companyExcludesEl =
-				companyLimitEl.element("company-excludes");
+			Element companyExcludesElement = companyLimitElement.element(
+				"company-excludes");
 
-			if (companyExcludesEl != null) {
+			if (companyExcludesElement != null) {
 				companyLimit.setExcludes(
-					_getCompanyLimitExcludes(companyExcludesEl));
+					_getCompanyLimitExcludes(companyExcludesElement));
 			}
 		}
 
 		ThemeGroupLimit groupLimit = null;
 
-		Element groupLimitEl = root.element("group-limit");
+		Element groupLimitElement = rootElement.element("group-limit");
 
-		if (groupLimitEl != null) {
+		if (groupLimitElement != null) {
 			groupLimit = new ThemeGroupLimit();
 
-			Element groupIncludesEl = groupLimitEl.element("group-includes");
+			Element groupIncludesElement = groupLimitElement.element(
+				"group-includes");
 
-			if (groupIncludesEl != null) {
-				groupLimit.setIncludes(_getGroupLimitIncludes(groupIncludesEl));
+			if (groupIncludesElement != null) {
+				groupLimit.setIncludes(
+					_getGroupLimitIncludes(groupIncludesElement));
 			}
 
-			Element groupExcludesEl =
-				groupLimitEl.element("group-excludes");
+			Element groupExcludesElement = groupLimitElement.element(
+				"group-excludes");
 
-			if (groupExcludesEl != null) {
-				groupLimit.setExcludes(_getGroupLimitExcludes(groupExcludesEl));
+			if (groupExcludesElement != null) {
+				groupLimit.setExcludes(
+					_getGroupLimitExcludes(groupExcludesElement));
 			}
 		}
 
 		long timestamp = ServletContextUtil.getLastModified(servletContext);
 
-		Iterator<Element> itr1 = root.elements("theme").iterator();
+		List<Element> themeElements = rootElement.elements("theme");
 
-		while (itr1.hasNext()) {
-			Element theme = itr1.next();
-
+		for (Element themeElement : themeElements) {
 			ContextReplace themeContextReplace = new ContextReplace();
 
 			themeContextReplace.addValue("themes-path", themesPath);
 
-			String themeId = theme.attributeValue("id");
+			String themeId = themeElement.attributeValue("id");
 
 			if (servletContextName != null) {
 				themeId =
@@ -540,44 +536,44 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
 			themeIds.add(themeId);
 
-			Theme themeModel = _themes.get(themeId);
+			Theme theme = _themes.get(themeId);
 
-			if (themeModel == null) {
-				themeModel = new ThemeImpl(themeId);
+			if (theme == null) {
+				theme = new ThemeImpl(themeId);
 
-				_themes.put(themeId, themeModel);
+				_themes.put(themeId, theme);
 			}
 
-			themeModel.setTimestamp(timestamp);
+			theme.setTimestamp(timestamp);
 
 			PluginSetting pluginSetting =
 				pluginSettingLocalService.getDefaultPluginSetting();
 
-			themeModel.setPluginPackage(pluginPackage);
-			themeModel.setDefaultPluginSetting(pluginSetting);
+			theme.setPluginPackage(pluginPackage);
+			theme.setDefaultPluginSetting(pluginSetting);
 
-			themeModel.setThemeCompanyLimit(companyLimit);
-			themeModel.setThemeGroupLimit(groupLimit);
+			theme.setThemeCompanyLimit(companyLimit);
+			theme.setThemeGroupLimit(groupLimit);
 
 			if (servletContextName != null) {
-				themeModel.setServletContextName(servletContextName);
+				theme.setServletContextName(servletContextName);
 			}
 
-			themeModel.setLoadFromServletContext(loadFromServletContext);
+			theme.setLoadFromServletContext(loadFromServletContext);
 
 			String name = GetterUtil.getString(
-				theme.attributeValue("name"), themeModel.getName());
+				themeElement.attributeValue("name"), theme.getName());
 
 			String rootPath = GetterUtil.getString(
-				theme.elementText("root-path"), themeModel.getRootPath());
+				themeElement.elementText("root-path"), theme.getRootPath());
 
 			rootPath = themeContextReplace.replace(rootPath);
 
 			themeContextReplace.addValue("root-path", rootPath);
 
 			String templatesPath = GetterUtil.getString(
-				theme.elementText("templates-path"),
-				themeModel.getTemplatesPath());
+				themeElement.elementText("templates-path"),
+				theme.getTemplatesPath());
 
 			templatesPath = themeContextReplace.replace(templatesPath);
 			templatesPath = StringUtil.safePath(templatesPath);
@@ -585,7 +581,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			themeContextReplace.addValue("templates-path", templatesPath);
 
 			String cssPath = GetterUtil.getString(
-				theme.elementText("css-path"), themeModel.getCssPath());
+				themeElement.elementText("css-path"), theme.getCssPath());
 
 			cssPath = themeContextReplace.replace(cssPath);
 			cssPath = StringUtil.safePath(cssPath);
@@ -593,8 +589,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			themeContextReplace.addValue("css-path", cssPath);
 
 			String imagesPath = GetterUtil.getString(
-				theme.elementText("images-path"),
-				themeModel.getImagesPath());
+				themeElement.elementText("images-path"), theme.getImagesPath());
 
 			imagesPath = themeContextReplace.replace(imagesPath);
 			imagesPath = StringUtil.safePath(imagesPath);
@@ -602,8 +597,8 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			themeContextReplace.addValue("images-path", imagesPath);
 
 			String javaScriptPath = GetterUtil.getString(
-				theme.elementText("javascript-path"),
-				themeModel.getJavaScriptPath());
+				themeElement.elementText("javascript-path"),
+				theme.getJavaScriptPath());
 
 			javaScriptPath = themeContextReplace.replace(javaScriptPath);
 			javaScriptPath = StringUtil.safePath(javaScriptPath);
@@ -611,91 +606,86 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			themeContextReplace.addValue("javascript-path", javaScriptPath);
 
 			String virtualPath = GetterUtil.getString(
-				theme.elementText("virtual-path"), themeModel.getVirtualPath());
+				themeElement.elementText("virtual-path"),
+				theme.getVirtualPath());
 
 			String templateExtension = GetterUtil.getString(
-				theme.elementText("template-extension"),
-				themeModel.getTemplateExtension());
+				themeElement.elementText("template-extension"),
+				theme.getTemplateExtension());
 
-			themeModel.setName(name);
-			themeModel.setRootPath(rootPath);
-			themeModel.setTemplatesPath(templatesPath);
-			themeModel.setCssPath(cssPath);
-			themeModel.setImagesPath(imagesPath);
-			themeModel.setJavaScriptPath(javaScriptPath);
-			themeModel.setVirtualPath(virtualPath);
-			themeModel.setTemplateExtension(templateExtension);
+			theme.setName(name);
+			theme.setRootPath(rootPath);
+			theme.setTemplatesPath(templatesPath);
+			theme.setCssPath(cssPath);
+			theme.setImagesPath(imagesPath);
+			theme.setJavaScriptPath(javaScriptPath);
+			theme.setVirtualPath(virtualPath);
+			theme.setTemplateExtension(templateExtension);
 
-			Element settingsEl = theme.element("settings");
+			Element settingsElement = themeElement.element("settings");
 
-			if (settingsEl != null) {
-				Iterator<Element> itr2 = settingsEl.elements(
-					"setting").iterator();
+			if (settingsElement != null) {
+				List<Element> settingElements = settingsElement.elements(
+					"setting");
 
-				while (itr2.hasNext()) {
-					Element settingEl = itr2.next();
-
+				for (Element settingElement : settingElements) {
 					boolean configurable = GetterUtil.getBoolean(
-						settingEl.attributeValue("configurable"));
-					String key = settingEl.attributeValue("key");
-					String options = settingEl.attributeValue("options");
-					String type = settingEl.attributeValue("type");
-					String value = settingEl.attributeValue("value");
+						settingElement.attributeValue("configurable"));
+					String key = settingElement.attributeValue("key");
+					String[] options = StringUtil.split(
+						settingElement.attributeValue("options"));
+					String type = settingElement.attributeValue("type");
+					String value = settingElement.attributeValue("value");
 
-					String[] optionsArray = null;
-
-					if (Validator.isNotNull(options)) {
-						optionsArray = StringUtil.split(options);
-					}
-
-					themeModel.addSetting(
-						key, value, configurable, type, optionsArray);
+					theme.addSetting(key, value, configurable, type, options);
 				}
 			}
 
-			themeModel.setWapTheme(GetterUtil.getBoolean(
-				theme.elementText("wap-theme"), themeModel.isWapTheme()));
+			theme.setWapTheme(
+				GetterUtil.getBoolean(
+					themeElement.elementText("wap-theme"), theme.isWapTheme()));
 
-			Element rolesEl = theme.element("roles");
+			Element rolesElement = themeElement.element("roles");
 
-			if (rolesEl != null) {
-				Iterator<Element> itr2 = rolesEl.elements(
-					"role-name").iterator();
+			if (rolesElement != null) {
+				List<Element> roleNameElements = rolesElement.elements(
+					"role-name");
 
-				while (itr2.hasNext()) {
-					Element roleNameEl = itr2.next();
-
-					pluginSetting.addRole(roleNameEl.getText());
+				for (Element roleNameElement : roleNameElements) {
+					pluginSetting.addRole(roleNameElement.getText());
 				}
 			}
 
 			_readColorSchemes(
-				theme, themeModel.getColorSchemesMap(), themeContextReplace);
+				themeElement, theme.getColorSchemesMap(), themeContextReplace);
 			_readColorSchemes(
-				theme, themeModel.getColorSchemesMap(), themeContextReplace);
+				themeElement, theme.getColorSchemesMap(), themeContextReplace);
 
-			Element layoutTemplatesEl = theme.element("layout-templates");
+			Element layoutTemplatesElement = themeElement.element(
+				"layout-templates");
 
-			if (layoutTemplatesEl != null) {
-				Element standardEl = layoutTemplatesEl.element("standard");
+			if (layoutTemplatesElement != null) {
+				Element standardElement = layoutTemplatesElement.element(
+					"standard");
 
-				if (standardEl != null) {
+				if (standardElement != null) {
 					layoutTemplateLocalService.readLayoutTemplate(
 						servletContextName, servletContext, null,
-						standardEl, true, themeId, pluginPackage);
+						standardElement, true, themeId, pluginPackage);
 				}
 
-				Element customEl = layoutTemplatesEl.element("custom");
+				Element customElement = layoutTemplatesElement.element(
+					"custom");
 
-				if (customEl != null) {
+				if (customElement != null) {
 					layoutTemplateLocalService.readLayoutTemplate(
 						servletContextName, servletContext, null,
-						customEl, false, themeId, pluginPackage);
+						customElement, false, themeId, pluginPackage);
 				}
 			}
 
-			if (!themeModel.isWapTheme()) {
-				_setSpriteImages(servletContext, themeModel, imagesPath);
+			if (!theme.isWapTheme()) {
+				_setSpriteImages(servletContext, theme, imagesPath);
 			}
 		}
 

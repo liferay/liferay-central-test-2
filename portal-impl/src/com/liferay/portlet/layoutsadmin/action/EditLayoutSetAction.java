@@ -30,6 +30,7 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.model.impl.ThemeSettingImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
@@ -195,7 +196,7 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 	protected void updateLookAndFeel(
 			ActionRequest actionRequest, long companyId, long liveGroupId,
 			long stagingGroupId, boolean privateLayout,
-			UnicodeProperties properties)
+			UnicodeProperties typeSettingsProperties)
 		throws Exception {
 
 		String[] devices = StringUtil.split(
@@ -234,10 +235,13 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 					String newValue = themeSettingsProperties.get(key);
 
 					if (!newValue.equals(defaultValue)) {
-						properties.setThemeProperty(key, device, newValue);
+						typeSettingsProperties.setProperty(
+							ThemeSettingImpl.namespaceProperty(device, key),
+							newValue);
 					}
 					else {
-						properties.removeThemeProperty(key, device);
+						typeSettingsProperties.remove(
+							ThemeSettingImpl.namespaceProperty(device, key));
 					}
 				}
 			}
@@ -274,17 +278,17 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 
 	protected void updateSettings(
 			ActionRequest actionRequest, long liveGroupId, long stagingGroupId,
-			boolean privateLayout, UnicodeProperties properties)
+			boolean privateLayout, UnicodeProperties settingsProperties)
 		throws Exception {
 
 		UnicodeProperties typeSettingsProperties =
 			PropertiesParamUtil.getProperties(
 				actionRequest, "TypeSettingsProperties--");
 
-		properties.putAll(typeSettingsProperties);
+		settingsProperties.putAll(typeSettingsProperties);
 
 		LayoutSetServiceUtil.updateSettings(
-			liveGroupId, privateLayout, properties.toString());
+			liveGroupId, privateLayout, settingsProperties.toString());
 
 		if (stagingGroupId > 0) {
 			LayoutSetServiceUtil.updateSettings(

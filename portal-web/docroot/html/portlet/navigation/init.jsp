@@ -28,6 +28,7 @@ if (Validator.isNotNull(portletResource)) {
 String defaultBulletStyle = GetterUtil.getString(themeDisplay.getThemeSetting("bullet-style"), "dots");
 
 String bulletStyle = PrefsParamUtil.getString(preferences, renderRequest, "bulletStyle", defaultBulletStyle);
+
 String displayStyle = PrefsParamUtil.getString(preferences, renderRequest, "displayStyle", "relative-with-breadcrumb");
 
 String headerType = PrefsParamUtil.getString(preferences, renderRequest, "headerType", "root-layout");

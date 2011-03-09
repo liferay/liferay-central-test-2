@@ -16,8 +16,7 @@
 		<template-extension>vm</template-extension>
 		<settings>
 			<setting configurable="true" key="bullet-style" options="dots,arrows" type="select" value="dots" />
-			<setting configurable="true" key="portlet-setup-show-borders-default" value="true" type="checkbox" />
-			<setting key="hello" value="world" />
+			<setting configurable="true" key="portlet-setup-show-borders-default" type="checkbox" value="true" />
 		</settings>
 		<roles>
 			<role-name>User</role-name>

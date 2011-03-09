@@ -87,9 +87,10 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 	public String getThemeSetting(String key, String device)
 		throws SystemException {
 
-		UnicodeProperties properties = getSettingsProperties();
+		UnicodeProperties settingsProperties = getSettingsProperties();
 
-		String value = properties.getThemeProperty(key, device);
+		String value = settingsProperties.getProperty(
+			ThemeSettingImpl.namespaceProperty(device, key));
 
 		if (value != null) {
 			return value;

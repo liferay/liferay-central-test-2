@@ -93,145 +93,6 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		_name = name;
 	}
 
-	public String getThemeId() {
-		return _themeId;
-	}
-
-	public String getPluginId() {
-		return getThemeId();
-	}
-
-	public String getPluginType() {
-		return Plugin.TYPE_THEME;
-	}
-
-	public ThemeCompanyLimit getThemeCompanyLimit() {
-		return _themeCompanyLimit;
-	}
-
-	public void setThemeCompanyLimit(ThemeCompanyLimit themeCompanyLimit) {
-		_themeCompanyLimit = themeCompanyLimit;
-	}
-
-	public boolean isCompanyAvailable(long companyId) {
-		return isAvailable(getThemeCompanyLimit(), companyId);
-	}
-
-	public ThemeGroupLimit getThemeGroupLimit() {
-		return _themeGroupLimit;
-	}
-
-	public void setThemeGroupLimit(ThemeGroupLimit themeGroupLimit) {
-		_themeGroupLimit = themeGroupLimit;
-	}
-
-	public boolean isGroupAvailable(long groupId) {
-		return isAvailable(getThemeGroupLimit(), groupId);
-	}
-
-	public long getTimestamp() {
-		return _timestamp;
-	}
-
-	public void setTimestamp(long timestamp) {
-		_timestamp = timestamp;
-	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public String getRootPath() {
-		return _rootPath;
-	}
-
-	public void setRootPath(String rootPath) {
-		_rootPath = rootPath;
-	}
-
-	public String getTemplatesPath() {
-		return _templatesPath;
-	}
-
-	public void setTemplatesPath(String templatesPath) {
-		_templatesPath = templatesPath;
-	}
-
-	public String getCssPath() {
-		return _cssPath;
-	}
-
-	public void setCssPath(String cssPath) {
-		_cssPath = cssPath;
-	}
-
-public String getDevice() {
-		if (isWapTheme()) {
-			return "wap";
-		}
-		else {
-			return "regular";
-		}
-	}
-
-	public String getImagesPath() {
-		return _imagesPath;
-	}
-
-	public void setImagesPath(String imagesPath) {
-		_imagesPath = imagesPath;
-	}
-
-	public String getJavaScriptPath() {
-		return _javaScriptPath;
-	}
-
-	public void setJavaScriptPath(String javaScriptPath) {
-		_javaScriptPath = javaScriptPath;
-	}
-
-	public String getVirtualPath() {
-		return _virtualPath;
-	}
-
-	public void setVirtualPath(String virtualPath) {
-		if (_warFile && Validator.isNull(virtualPath)) {
-			virtualPath = PropsValues.THEME_VIRTUAL_PATH;
-		}
-
-		_virtualPath = virtualPath;
-	}
-
-	public String getTemplateExtension() {
-		return _templateExtension;
-	}
-
-	public void setTemplateExtension(String templateExtension) {
-		_templateExtension = templateExtension;
-	}
-
-	public Map<String, ThemeSetting> getSettings() {
-		return _settings;
-	}
-
-	public Properties getSettingsProperties() {
-		Properties properties = new Properties();
-
-		for (String key : _settings.keySet()) {
-			ThemeSetting setting = _settings.get(key);
-
-			if (setting != null) {
-				properties.setProperty(key, setting.getValue());
-			}
-		}
-
-		return properties;
-	}
-
 	public void addSetting(
 		 String key, String value, boolean configurable, String type,
 		 String[] options) {
@@ -240,197 +101,6 @@ public String getDevice() {
 			configurable, options, type, value);
 
 		_settings.put(key, themeSetting);
-	}
-
-	public String getSetting(String key) {
-		String value = StringPool.BLANK;
-
-		ThemeSetting themeSetting = _settings.get(key);
-
-		if (themeSetting != null) {
-			value = themeSetting.getValue();
-		}
-
-		return value;
-	}
-
-	public void setSetting(String key, String value) {
-		ThemeSetting themeSetting = _settings.get(key);
-
-		if (themeSetting != null) {
-			themeSetting.setValue(value);
-		}
-		else {
-			addSetting(key, value, false, null, null);
-		}
-	}
-
-	public String[] getSettingOptions(String key) {
-		String[] options = null;
-
-		ThemeSetting themeSetting = _settings.get(key);
-
-		if (themeSetting != null) {
-			options = themeSetting.getOptions();
-		}
-
-		return options;
-	}
-
-	public Map<String, ThemeSetting> getConfigurableSettings() {
-		Map<String, ThemeSetting> configurableSettings = new HashMap();
-
-		for (Map.Entry<String,ThemeSetting> entry : _settings.entrySet()) {
-			ThemeSetting themeSetting = entry.getValue();
-
-			if (themeSetting.isConfigurable()) {
-				configurableSettings.put(entry.getKey(), entry.getValue());
-			}
-		}
-
-		return configurableSettings;
-	}
-
-	public boolean getWapTheme() {
-		return _wapTheme;
-	}
-
-	public boolean isWapTheme() {
-		return _wapTheme;
-	}
-
-	public void setWapTheme(boolean wapTheme) {
-		_wapTheme = wapTheme;
-	}
-
-	public List<ColorScheme> getColorSchemes() {
-		List<ColorScheme> colorSchemes = ListUtil.fromCollection(
-			_colorSchemesMap.values());
-
-		return ListUtil.sort(colorSchemes);
-	}
-
-	public Map<String, ColorScheme> getColorSchemesMap() {
-		return _colorSchemesMap;
-	}
-
-	public boolean hasColorSchemes() {
-		if (_colorSchemesMap.size() > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public SpriteImage getSpriteImage(String fileName) {
-		return _spriteImagesMap.get(fileName);
-	}
-
-	public void setSpriteImages(
-		String spriteFileName, Properties spriteProperties) {
-
-		Iterator<Map.Entry<Object, Object>> itr =
-			spriteProperties.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<Object, Object> entry = itr.next();
-
-			String key = (String)entry.getKey();
-			String value = (String)entry.getValue();
-
-			int[] values = StringUtil.split(value, 0);
-
-			int offset = values[0];
-			int height = values[1];
-			int width = values[2];
-
-			SpriteImage spriteImage = new SpriteImage(
-				spriteFileName, key, offset, height, width);
-
-			_spriteImagesMap.put(key, spriteImage);
-		}
-	}
-
-	public String getServletContextName() {
-		return _servletContextName;
-	}
-
-	public void setServletContextName(String servletContextName) {
-		_servletContextName = servletContextName;
-
-		if (Validator.isNotNull(_servletContextName)) {
-			_warFile = true;
-		}
-		else {
-			_warFile = false;
-		}
-	}
-
-	public boolean getWARFile() {
-		return _warFile;
-	}
-
-	public boolean isWARFile() {
-		return _warFile;
-	}
-
-	public String getContextPath() {
-		if (isWARFile()) {
-			return StringPool.SLASH.concat(getServletContextName());
-		}
-		else {
-			return PortalUtil.getPathContext();
-		}
-	}
-
-	public String getStaticResourcePath() {
-		String proxyPath = PortalUtil.getPathProxy();
-
-		String virtualPath = getVirtualPath();
-
-		if (Validator.isNotNull(virtualPath)) {
-			return proxyPath.concat(virtualPath);
-		}
-
-		String contextPath = getContextPath();
-
-		if (isWARFile()) {
-			return proxyPath.concat(contextPath);
-		}
-		else {
-			return contextPath;
-		}
-	}
-
-	public String getFreeMarkerTemplateLoader() {
-		if (_loadFromServletContext) {
-			return FreeMarkerTemplateLoader.SERVLET_SEPARATOR;
-		}
-		else {
-			return FreeMarkerTemplateLoader.THEME_LOADER_SEPARATOR;
-		}
-	}
-
-	public boolean getLoadFromServletContext() {
-		return _loadFromServletContext;
-	}
-
-	public boolean isLoadFromServletContext() {
-		return _loadFromServletContext;
-	}
-
-	public void setLoadFromServletContext(boolean loadFromServletContext) {
-		_loadFromServletContext = loadFromServletContext;
-	}
-
-	public String getVelocityResourceListener() {
-		if (_loadFromServletContext) {
-			return VelocityResourceListener.SERVLET_SEPARATOR;
-		}
-		else {
-			return VelocityResourceListener.THEME_LOADER_SEPARATOR;
-		}
 	}
 
 	public int compareTo(Theme theme) {
@@ -461,8 +131,339 @@ public String getDevice() {
 		}
 	}
 
+	public List<ColorScheme> getColorSchemes() {
+		List<ColorScheme> colorSchemes = ListUtil.fromCollection(
+			_colorSchemesMap.values());
+
+		return ListUtil.sort(colorSchemes);
+	}
+
+	public Map<String, ColorScheme> getColorSchemesMap() {
+		return _colorSchemesMap;
+	}
+
+	public Map<String, ThemeSetting> getConfigurableSettings() {
+		Map<String, ThemeSetting> configurableSettings =
+			new HashMap<String, ThemeSetting>();
+
+		for (Map.Entry<String,ThemeSetting> entry : _settings.entrySet()) {
+			ThemeSetting themeSetting = entry.getValue();
+
+			if (themeSetting.isConfigurable()) {
+				configurableSettings.put(entry.getKey(), entry.getValue());
+			}
+		}
+
+		return configurableSettings;
+	}
+
+	public String getContextPath() {
+		if (isWARFile()) {
+			return StringPool.SLASH.concat(getServletContextName());
+		}
+		else {
+			return PortalUtil.getPathContext();
+		}
+	}
+
+	public String getCssPath() {
+		return _cssPath;
+	}
+
+	public String getDevice() {
+		if (isWapTheme()) {
+			return "wap";
+		}
+		else {
+			return "regular";
+		}
+	}
+
+	public String getFreeMarkerTemplateLoader() {
+		if (_loadFromServletContext) {
+			return FreeMarkerTemplateLoader.SERVLET_SEPARATOR;
+		}
+		else {
+			return FreeMarkerTemplateLoader.THEME_LOADER_SEPARATOR;
+		}
+	}
+
+	public String getImagesPath() {
+		return _imagesPath;
+	}
+
+	public String getJavaScriptPath() {
+		return _javaScriptPath;
+	}
+
+	public boolean getLoadFromServletContext() {
+		return _loadFromServletContext;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public String getPluginId() {
+		return getThemeId();
+	}
+
+	public String getPluginType() {
+		return Plugin.TYPE_THEME;
+	}
+
+	public String getRootPath() {
+		return _rootPath;
+	}
+
+	public String getServletContextName() {
+		return _servletContextName;
+	}
+
+	public String getSetting(String key) {
+		String value = StringPool.BLANK;
+
+		ThemeSetting themeSetting = _settings.get(key);
+
+		if (themeSetting != null) {
+			value = themeSetting.getValue();
+		}
+
+		return value;
+	}
+
+	public String[] getSettingOptions(String key) {
+		String[] options = null;
+
+		ThemeSetting themeSetting = _settings.get(key);
+
+		if (themeSetting != null) {
+			options = themeSetting.getOptions();
+		}
+
+		return options;
+	}
+
+	public Map<String, ThemeSetting> getSettings() {
+		return _settings;
+	}
+
+	public Properties getSettingsProperties() {
+		Properties properties = new Properties();
+
+		for (String key : _settings.keySet()) {
+			ThemeSetting setting = _settings.get(key);
+
+			if (setting != null) {
+				properties.setProperty(key, setting.getValue());
+			}
+		}
+
+		return properties;
+	}
+
+	public SpriteImage getSpriteImage(String fileName) {
+		return _spriteImagesMap.get(fileName);
+	}
+
+	public String getStaticResourcePath() {
+		String proxyPath = PortalUtil.getPathProxy();
+
+		String virtualPath = getVirtualPath();
+
+		if (Validator.isNotNull(virtualPath)) {
+			return proxyPath.concat(virtualPath);
+		}
+
+		String contextPath = getContextPath();
+
+		if (isWARFile()) {
+			return proxyPath.concat(contextPath);
+		}
+		else {
+			return contextPath;
+		}
+	}
+
+	public String getTemplateExtension() {
+		return _templateExtension;
+	}
+
+	public String getTemplatesPath() {
+		return _templatesPath;
+	}
+
+	public ThemeCompanyLimit getThemeCompanyLimit() {
+		return _themeCompanyLimit;
+	}
+
+	public ThemeGroupLimit getThemeGroupLimit() {
+		return _themeGroupLimit;
+	}
+
+	public String getThemeId() {
+		return _themeId;
+	}
+
+	public long getTimestamp() {
+		return _timestamp;
+	}
+
+	public String getVelocityResourceListener() {
+		if (_loadFromServletContext) {
+			return VelocityResourceListener.SERVLET_SEPARATOR;
+		}
+		else {
+			return VelocityResourceListener.THEME_LOADER_SEPARATOR;
+		}
+	}
+
+	public String getVirtualPath() {
+		return _virtualPath;
+	}
+
+	public boolean getWapTheme() {
+		return _wapTheme;
+	}
+
+	public boolean getWARFile() {
+		return _warFile;
+	}
+
+	public boolean hasColorSchemes() {
+		if (_colorSchemesMap.size() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public int hashCode() {
 		return _themeId.hashCode();
+	}
+
+	public boolean isCompanyAvailable(long companyId) {
+		return isAvailable(getThemeCompanyLimit(), companyId);
+	}
+
+	public boolean isGroupAvailable(long groupId) {
+		return isAvailable(getThemeGroupLimit(), groupId);
+	}
+
+	public boolean isLoadFromServletContext() {
+		return _loadFromServletContext;
+	}
+
+	public boolean isWapTheme() {
+		return _wapTheme;
+	}
+
+	public boolean isWARFile() {
+		return _warFile;
+	}
+
+	public void setCssPath(String cssPath) {
+		_cssPath = cssPath;
+	}
+
+	public void setImagesPath(String imagesPath) {
+		_imagesPath = imagesPath;
+	}
+
+	public void setJavaScriptPath(String javaScriptPath) {
+		_javaScriptPath = javaScriptPath;
+	}
+
+	public void setLoadFromServletContext(boolean loadFromServletContext) {
+		_loadFromServletContext = loadFromServletContext;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setRootPath(String rootPath) {
+		_rootPath = rootPath;
+	}
+
+	public void setServletContextName(String servletContextName) {
+		_servletContextName = servletContextName;
+
+		if (Validator.isNotNull(_servletContextName)) {
+			_warFile = true;
+		}
+		else {
+			_warFile = false;
+		}
+	}
+
+	public void setSetting(String key, String value) {
+		ThemeSetting themeSetting = _settings.get(key);
+
+		if (themeSetting != null) {
+			themeSetting.setValue(value);
+		}
+		else {
+			addSetting(key, value, false, null, null);
+		}
+	}
+
+	public void setSpriteImages(
+		String spriteFileName, Properties spriteProperties) {
+
+		Iterator<Map.Entry<Object, Object>> itr =
+			spriteProperties.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<Object, Object> entry = itr.next();
+
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
+
+			int[] values = StringUtil.split(value, 0);
+
+			int offset = values[0];
+			int height = values[1];
+			int width = values[2];
+
+			SpriteImage spriteImage = new SpriteImage(
+				spriteFileName, key, offset, height, width);
+
+			_spriteImagesMap.put(key, spriteImage);
+		}
+	}
+
+	public void setTemplateExtension(String templateExtension) {
+		_templateExtension = templateExtension;
+	}
+
+	public void setTemplatesPath(String templatesPath) {
+		_templatesPath = templatesPath;
+	}
+
+	public void setThemeCompanyLimit(ThemeCompanyLimit themeCompanyLimit) {
+		_themeCompanyLimit = themeCompanyLimit;
+	}
+
+	public void setThemeGroupLimit(ThemeGroupLimit themeGroupLimit) {
+		_themeGroupLimit = themeGroupLimit;
+	}
+
+	public void setTimestamp(long timestamp) {
+		_timestamp = timestamp;
+	}
+
+	public void setVirtualPath(String virtualPath) {
+		if (_warFile && Validator.isNull(virtualPath)) {
+			virtualPath = PropsValues.THEME_VIRTUAL_PATH;
+		}
+
+		_virtualPath = virtualPath;
+	}
+
+	public void setWapTheme(boolean wapTheme) {
+		_wapTheme = wapTheme;
 	}
 
 	protected boolean isAvailable(ThemeCompanyLimit limit, long id) {
@@ -539,26 +540,27 @@ public String getDevice() {
 
 	private static Log _log = LogFactoryUtil.getLog(ThemeImpl.class);
 
-	private String _themeId;
-	private ThemeCompanyLimit _themeCompanyLimit;
-	private ThemeGroupLimit _themeGroupLimit;
-	private long _timestamp;
-	private String _name;
-	private String _rootPath = "/";
-	private String _templatesPath = "${root-path}/templates";
+	private Map<String, ColorScheme> _colorSchemesMap =
+		new HashMap<String, ColorScheme>();
 	private String _cssPath = "${root-path}/css";
 	private String _imagesPath = "${root-path}/images";
 	private String _javaScriptPath = "${root-path}/js";
-	private String _virtualPath = StringPool.BLANK;
-	private String _templateExtension = "vm";
-	private Map<String, ThemeSetting> _settings = new HashMap();
-	private boolean _wapTheme;
-	private Map<String, ColorScheme> _colorSchemesMap =
-		new HashMap<String, ColorScheme>();
+	private boolean _loadFromServletContext;
+	private String _name;
+	private String _rootPath = "/";
+	private String _servletContextName = StringPool.BLANK;
+	private Map<String, ThemeSetting> _settings =
+		new HashMap<String, ThemeSetting>();
 	private Map<String, SpriteImage> _spriteImagesMap =
 		new HashMap<String, SpriteImage>();
-	private String _servletContextName = StringPool.BLANK;
+	private String _templateExtension = "vm";
+	private String _templatesPath = "${root-path}/templates";
+	private ThemeCompanyLimit _themeCompanyLimit;
+	private ThemeGroupLimit _themeGroupLimit;
+	private String _themeId;
+	private long _timestamp;
+	private String _virtualPath = StringPool.BLANK;
+	private boolean _wapTheme;
 	private boolean _warFile;
-	private boolean _loadFromServletContext;
 
 }

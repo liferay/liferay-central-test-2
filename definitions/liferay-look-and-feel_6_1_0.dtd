@@ -222,20 +222,22 @@ The default value is "vm".
 
 <!--
 The settings element contain a list of settings that are available to the
-themeDisplay object at runtime. They are described with a key value pair.
+theme display object at runtime. They are described with a key value pair.
 
 For example, you can access it with the command:
 themeDisplay.getSetting("hello").
 
-You can make your settings configurable throuhg the User Interface setting the
-attribute configurable to true. Using this option, administrators will be able
-to change the settings for a page or a set of pages.
-If your setting is configurable then you can choose which form element should be
-displayed (text, textarea, checkbox, select) using the attribute type and you
-can set the valid options for the select using the attribute options. When your
-settings are configurable the attribute value will act as the default value.
+Set the configurable attribute to true if the setting is configurable from the
+user interface at runtime. This allows administrators to change the settings for
+a page or a set of pages.
 
+Set the type attribute to designate whether the HTML input for the setting is a
+checkbox, select, text, or textarea.
 
+Set the options attribute with a comma delimited list to specify the options for
+the HTML input.
+
+Set the value attribute to specify the default value.
 -->
 <!ELEMENT settings (setting*)>
 

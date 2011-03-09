@@ -369,7 +369,7 @@ public class ThemeDisplay implements Serializable {
 	public Properties getThemeSettings() {
 		Theme theme = getTheme();
 
-		Properties settings = new Properties();
+		Properties properties = new Properties();
 
 		Map<String, ThemeSetting> themeSettings = theme.getSettings();
 
@@ -377,14 +377,14 @@ public class ThemeDisplay implements Serializable {
 			ThemeSetting themeSetting = themeSettings.get(key);
 
 			if (themeSetting.isConfigurable()) {
-				settings.put(key, getThemeSetting(key));
+				properties.put(key, getThemeSetting(key));
 			}
 			else {
-				settings.put(key, themeSetting.getValue());
+				properties.put(key, themeSetting.getValue());
 			}
 		}
 
-		return settings;
+		return properties;
 	}
 
 	public String getTilesContent() {

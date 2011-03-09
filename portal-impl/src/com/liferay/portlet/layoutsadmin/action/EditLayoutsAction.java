@@ -52,6 +52,7 @@ import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ThemeSettingImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -80,8 +81,10 @@ import com.liferay.portlet.communities.action.ActionUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.util.servlet.UploadException;
 
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -697,7 +700,19 @@ public class EditLayoutsAction extends PortletAction {
 				themeId = StringPool.BLANK;
 				colorSchemeId = StringPool.BLANK;
 
-				properties.removeThemeProperties(device);
+				String keyPrefix = ThemeSettingImpl.namespaceProperty(device);
+
+				Set<String> keys = properties.keySet();
+
+				Iterator<String> itr = keys.iterator();
+
+				while (itr.hasNext()) {
+					String key = itr.next();
+
+					if (key.startsWith(keyPrefix)) {
+						itr.remove();
+					}
+				}
 			}
 			else if (Validator.isNotNull(themeId)) {
 				Theme theme = ThemeLocalServiceUtil.getTheme(
@@ -722,7 +737,8 @@ public class EditLayoutsAction extends PortletAction {
 				for (String key : themeSettingsProperties.keySet()) {
 					String value = themeSettingsProperties.get(key);
 
-					properties.setThemeProperty(key, device, value);
+					properties.setProperty(
+						ThemeSettingImpl.namespaceProperty(device, key), value);
 				}
 			}
 
