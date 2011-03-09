@@ -62,6 +62,7 @@ public class PortletAutoDeployer
 			tomcatLibDir = PrefsPropsUtil.getString(
 				PropsKeys.AUTO_DEPLOY_TOMCAT_LIB_DIR,
 				PropsValues.AUTO_DEPLOY_TOMCAT_LIB_DIR);
+			deploymentContextBaseDir = destDir;
 
 			List<String> jars = new ArrayList<String>();
 

@@ -56,7 +56,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -116,6 +115,7 @@ public class BaseDeployer implements Deployer {
 		jbossPrefix = GetterUtil.getString(
 			System.getProperty("deployer.jboss.prefix"));
 		tomcatLibDir = System.getProperty("deployer.tomcat.lib.dir");
+		deploymentContextBaseDir = System.getProperty("deployer.deployment.context.base.dir");
 		this.wars = wars;
 		this.jars = jars;
 
@@ -351,6 +351,39 @@ public class BaseDeployer implements Deployer {
 		}
 	}
 
+	public void copyServicesDependencies(File srcFile) 
+		throws Exception {
+	
+		Properties properties = getPluginPackageProperties(srcFile);
+
+		if (properties == null) {
+			return;
+		}
+		
+		String[] requiredDeploymentContexts = StringUtil.split(
+			properties.getProperty(
+				"required-deployment-contexts",
+				properties.getProperty("required.deployment.contexts")));
+		
+		if (!new File(deploymentContextBaseDir).exists()) {
+			return;
+		}
+
+		for (int i = 0; i < requiredDeploymentContexts.length; i++) {
+			String requiredDeploymentContext = requiredDeploymentContexts[i];
+			
+			File servicesDependencyFile =
+				findServicesDependencyFile(requiredDeploymentContext);
+
+			if (servicesDependencyFile.exists()) {
+				FileUtil.copyFile(
+					servicesDependencyFile.getAbsolutePath(), srcFile +
+						"/WEB-INF/lib/" + servicesDependencyFile.getName(),
+					true);
+			}
+		}
+	}
+
 	public void copyProperties(File srcFile, PluginPackage pluginPackage)
 		throws Exception {
 
@@ -489,6 +522,7 @@ public class BaseDeployer implements Deployer {
 		copyTlds(srcFile, pluginPackage);
 		copyXmls(srcFile, displayName, pluginPackage);
 		copyPortalDependencies(srcFile);
+		copyServicesDependencies(srcFile);
 
 		updateGeronimoWebXml(srcFile, displayName, pluginPackage);
 
@@ -861,6 +895,34 @@ public class BaseDeployer implements Deployer {
 		}
 
 		return FileUtil.getAbsolutePath(file);
+	}
+
+	public File findServicesDependencyFile(String requiredDeploymentContext) {
+		if (deploymentContextBaseDir.equals(destDir)) {
+			return new File(deploymentContextBaseDir + "/" +
+				requiredDeploymentContext + "/WEB-INF/lib/" +
+				requiredDeploymentContext + "-service.jar");
+		}
+		else {
+			String path = "";
+
+			if (requiredDeploymentContext.endsWith("-hook")) {
+				path = "/hooks/";
+			}
+			else if (requiredDeploymentContext.endsWith("-layouttpl")) {
+				path = "/layouttpl/";
+			}
+			else if (requiredDeploymentContext.endsWith("-portlet")) {
+				path = "/portlets/";
+			}
+			else if (requiredDeploymentContext.endsWith("-theme")) {
+				path = "/portlets/";
+			}
+
+			return new File(deploymentContextBaseDir + path +
+				requiredDeploymentContext + "/docroot/WEB-INF/lib/" +
+				requiredDeploymentContext + "-service.jar");
+		}
 	}
 
 	public String getDisplayName(File srcFile) {
@@ -1583,6 +1645,7 @@ public class BaseDeployer implements Deployer {
 	protected String filePattern;
 	protected String jbossPrefix;
 	protected String tomcatLibDir;
+	protected String deploymentContextBaseDir;
 	protected List<String> wars;
 	protected List<String> jars;
 
