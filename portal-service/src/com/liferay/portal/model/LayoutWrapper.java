@@ -1003,6 +1003,11 @@ public class LayoutWrapper implements Layout {
 		return _layout.toXmlString();
 	}
 
+	public java.lang.String getThemeSetting(java.lang.String key,
+		java.lang.String device) {
+		return _layout.getThemeSetting(key, device);
+	}
+
 	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layout.getAllChildren();

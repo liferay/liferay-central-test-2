@@ -45,6 +45,10 @@ public interface LayoutSet extends LayoutSetModel {
 
 	public java.lang.String getSettingsProperty(java.lang.String key);
 
+	public java.lang.String getThemeSetting(java.lang.String key,
+		java.lang.String device)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
 	public java.lang.String getVirtualHostname();
 
 	public com.liferay.portal.model.Theme getWapTheme()

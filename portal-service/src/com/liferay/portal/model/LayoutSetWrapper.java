@@ -401,6 +401,12 @@ public class LayoutSetWrapper implements LayoutSet {
 		return _layoutSet.getSettingsProperty(key);
 	}
 
+	public java.lang.String getThemeSetting(java.lang.String key,
+		java.lang.String device)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutSet.getThemeSetting(key, device);
+	}
+
 	public java.lang.String getVirtualHostname() {
 		return _layoutSet.getVirtualHostname();
 	}

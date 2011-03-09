@@ -29,6 +29,9 @@ public interface Layout extends LayoutModel {
 	 *
 	 * Never modify this interface directly. Add methods to {@link com.liferay.portal.model.impl.LayoutImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
+	public java.lang.String getThemeSetting(java.lang.String key,
+		java.lang.String device);
+
 	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
 		throws com.liferay.portal.kernel.exception.SystemException;
 
