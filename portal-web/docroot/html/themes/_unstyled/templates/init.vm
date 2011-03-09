@@ -189,9 +189,7 @@
 
 	#set ($typeSettingsProperties = $layout.getTypeSettingsProperties())
 
-	#set ($page_javascript_1 = $typeSettingsProperties.getProperty("javascript-1"))
-	#set ($page_javascript_2 = $typeSettingsProperties.getProperty("javascript-2"))
-	#set ($page_javascript_3 = $typeSettingsProperties.getProperty("javascript-3"))
+	#set ($page_javascript = $typeSettingsProperties.getProperty("javascript"))
 
 	#set ($community_name = $htmlUtil.escape($page_group.getDescriptiveName()))
 

@@ -189,9 +189,7 @@
 	<#assign typeSettingsProperties = layout.getTypeSettingsProperties() />
 
 	<#if typeSettingsProperties??>
-		<#assign page_javascript_1 = typeSettingsProperties["javascript-1"]!/>
-		<#assign page_javascript_2 = typeSettingsProperties["javascript-2"]!/>
-		<#assign page_javascript_3 = typeSettingsProperties["javascript-3"]!/>
+		<#assign page_javascript = typeSettingsProperties["javascript"]!/>
 	</#if>
 
 	<#assign community_name = htmlUtil.escape(page_group.getDescriptiveName()) />
