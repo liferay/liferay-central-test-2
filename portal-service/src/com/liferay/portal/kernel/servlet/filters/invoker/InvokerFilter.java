@@ -77,6 +77,12 @@ public class InvokerFilter implements Filter {
 		InvokerFilterChain invokerFilterChain = getInvokerFilterChain(
 			request, uri, filterChain);
 
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
+
+		invokerFilterChain.setContextClassLoader(contextClassLoader);
+
 		invokerFilterChain.doFilter(servletRequest, servletResponse);
 	}
 

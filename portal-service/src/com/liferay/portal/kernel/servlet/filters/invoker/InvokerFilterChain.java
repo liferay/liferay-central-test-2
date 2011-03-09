@@ -97,7 +97,7 @@ public class InvokerFilterChain implements FilterChain {
 					}
 				}
 				else {
-					filter.doFilter(request, response, this);
+					processDoFilter(filter, request, response);
 				}
 			}
 			else {
@@ -108,6 +108,10 @@ public class InvokerFilterChain implements FilterChain {
 				doFilter(request, response);
 			}
 		}
+	}
+
+	public void setContextClassLoader(ClassLoader classLoader) {
+		_contextClassLoader = classLoader;
 	}
 
 	protected void processDirectCallFilter(
@@ -179,8 +183,27 @@ public class InvokerFilterChain implements FilterChain {
 		}
 	}
 
+	protected void processDoFilter(
+			Filter filter, ServletRequest request, ServletResponse response)
+		throws IOException, ServletException {
+
+		Thread currentThread = Thread.currentThread();
+
+		ClassLoader previousClassLoader = currentThread.getContextClassLoader();
+
+		currentThread.setContextClassLoader(_contextClassLoader);
+
+		try {
+			filter.doFilter(request, response, this);
+		}
+		finally {
+			currentThread.setContextClassLoader(previousClassLoader);
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(InvokerFilterChain.class);
 
+	private ClassLoader _contextClassLoader;
 	private FilterChain _filterChain;
 	private Queue<Filter> _filters = new LinkedList<Filter>();
 
