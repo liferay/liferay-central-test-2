@@ -71,19 +71,11 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
 import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
-import com.liferay.portlet.expando.NoSuchColumnException;
-import com.liferay.portlet.expando.NoSuchTableException;
-import com.liferay.portlet.expando.model.ExpandoColumn;
-import com.liferay.portlet.expando.model.ExpandoTable;
-import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
-import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
-import com.liferay.portlet.expando.util.ExpandoConverterUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.social.util.SocialActivityThreadLocal;
 
 import java.io.File;
-import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -222,7 +214,6 @@ public class PortletImporter {
 
 		readCategories(context);
 		readComments(context, root);
-		readExpandos(context);
 		readLocks(context, root);
 		readRatings(context, root);
 		readTags(context, root);
@@ -894,82 +885,6 @@ public class PortletImporter {
 				}
 
 				context.addComments(className, classPK, messages);
-			}
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-	}
-
-	protected void readExpandos(PortletDataContext context)
-		throws SystemException {
-
-		try {
-			String xml = context.getZipEntryAsString(
-				context.getSourceRootPath() + "/expando-tables.xml");
-
-			if (xml == null) {
-				return;
-			}
-
-			Document doc = SAXReaderUtil.read(xml);
-
-			Element root = doc.getRootElement();
-
-			List<Element> expandoTableElements = root.elements("expando-table");
-
-			for (Element expandoTableElement : expandoTableElements) {
-				String className = expandoTableElement.attributeValue(
-					"class-name");
-
-				ExpandoTable expandoTable = null;
-
-				try {
-					expandoTable = ExpandoTableLocalServiceUtil.getDefaultTable(
-						context.getCompanyId(), className);
-				}
-				catch (NoSuchTableException e) {
-					expandoTable =
-						ExpandoTableLocalServiceUtil.addDefaultTable(
-							context.getCompanyId(), className);
-				}
-
-				List<Element> expandoColumnElements =
-					expandoTableElement.elements("expando-column");
-
-				for (Element expandoColumnElement : expandoColumnElements) {
-					String name = expandoColumnElement.attributeValue("name");
-					int type = GetterUtil.getInteger(
-						expandoColumnElement.attributeValue("type"));
-					String typeSettings = expandoColumnElement.elementText(
-						"type-settings");
-					String defaultData = expandoColumnElement.elementText(
-						"default-data");
-
-					Serializable defaultDataObject = ExpandoConverterUtil.getAttributeFromString(type, defaultData);
-					
-					ExpandoColumn expandoColumn = null;
-
-					try {
-						expandoColumn = ExpandoColumnLocalServiceUtil.getColumn(
-							expandoTable.getTableId(), name);
-
-						ExpandoColumnLocalServiceUtil.updateColumn(
-							expandoColumn.getColumnId(), name, type,
-							defaultDataObject);
-					}
-					catch (NoSuchColumnException e) {
-
-						expandoColumn =
-							ExpandoColumnLocalServiceUtil.addColumn(
-								expandoTable.getTableId(), name, type,
-								defaultDataObject);
-					}
-
-					ExpandoColumnLocalServiceUtil.updateTypeSettings(
-						expandoColumn.getColumnId(), typeSettings);
-				}
-
 			}
 		}
 		catch (Exception e) {

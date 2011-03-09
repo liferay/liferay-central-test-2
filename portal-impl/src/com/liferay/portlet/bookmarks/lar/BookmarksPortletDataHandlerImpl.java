@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -34,7 +33,6 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -87,10 +85,6 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
-
-		portletDataContext.addExpandoColumns(BookmarksEntry.class.getName());
-
-		portletDataContext.addExpandoColumns(BookmarksFolder.class.getName());
 
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.bookmarks",
@@ -151,10 +145,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			BookmarksFolder folder =
 				(BookmarksFolder)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, folderElement);
-
-			importFolder(portletDataContext, folder, expandoAttributes);
+			importFolder(portletDataContext, folder);
 		}
 
 		Element entriesElement = rootElement.element("entries");
@@ -169,10 +160,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			BookmarksEntry entry =
 				(BookmarksEntry)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, entryElement);
-
-			importEntry(portletDataContext, entry, expandoAttributes);
+			importEntry(portletDataContext, entry);
 		}
 
 		return null;
@@ -199,7 +187,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 				portletDataContext.addPermissions(
 					BookmarksFolder.class, folder.getFolderId());
 
-				portletDataContext.addZipEntry(path, folderElement, folder);
+				portletDataContext.addZipEntry(path, folder);
 			}
 		}
 
@@ -255,7 +243,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			entry.setUserUuid(entry.getUserUuid());
 
-			portletDataContext.addZipEntry(path, entryElement, entry);
+			portletDataContext.addZipEntry(path, entry);
 		}
 	}
 
@@ -285,7 +273,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			portletDataContext.addPermissions(
 				BookmarksFolder.class, folder.getFolderId());
 
-			portletDataContext.addZipEntry(path, folderElement, folder);
+			portletDataContext.addZipEntry(path, folder);
 		}
 	}
 
@@ -318,48 +306,19 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getImportFolderPath(
 		PortletDataContext portletDataContext, long folderId) {
 
-		return getImportFolderPath(portletDataContext, folderId, false);
-	}
-
-	protected String getImportFolderPath(
-		PortletDataContext portletDataContext, long folderId,
-		boolean expandoAttributes) {
-
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(
 			portletDataContext.getSourcePortletPath(PortletKeys.BOOKMARKS));
 		sb.append("/folders/");
 		sb.append(folderId);
-
-		if (expandoAttributes) {
-			sb.append("-expando");
-		}
-
 		sb.append(".xml");
 
 		return sb.toString();
 	}
 
-	protected Map<String, Serializable> getParentFolderAttributes(
-		PortletDataContext portletDataContext, long folderId) {
-
-		String expandoPath = getImportFolderPath(
-			portletDataContext, folderId, true);
-
-		Map<String, Serializable> parentFolderAttributes = null;
-		if (Validator.isNotNull(expandoPath)) {
-			parentFolderAttributes =
-				(Map<String, Serializable>)
-					portletDataContext.getZipEntryAsObject(expandoPath);
-		}
-
-		return parentFolderAttributes;
-	}
-
 	protected void importEntry(
-			PortletDataContext portletDataContext, BookmarksEntry entry,
-			Map<String, Serializable> expandoAttributes)
+			PortletDataContext portletDataContext, BookmarksEntry entry)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(entry.getUserUuid());
@@ -393,10 +352,6 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(entry.getCreateDate());
 		serviceContext.setModifiedDate(entry.getModifiedDate());
 
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
-
 		if ((folderId != BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == entry.getFolderId())) {
 
@@ -405,10 +360,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			BookmarksFolder folder =
 				(BookmarksFolder)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> parentFolderAttributes =
-				getParentFolderAttributes(portletDataContext, folderId);
-
-			importFolder(portletDataContext, folder, parentFolderAttributes);
+			importFolder(portletDataContext, folder);
 
 			folderId = MapUtil.getLong(
 				folderPKs, entry.getFolderId(), entry.getFolderId());
@@ -455,8 +407,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void importFolder(
-			PortletDataContext portletDataContext, BookmarksFolder folder,
-			Map<String, Serializable> expandoAttributes)
+			PortletDataContext portletDataContext, BookmarksFolder folder)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(folder.getUserUuid());
@@ -476,10 +427,6 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(folder.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
-
 		if ((parentFolderId !=
 				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
@@ -490,11 +437,7 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 			BookmarksFolder parentFolder =
 				(BookmarksFolder)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> parentFolderAttributes =
-				getParentFolderAttributes(portletDataContext, parentFolderId);
-
-			importFolder(
-				portletDataContext, parentFolder, parentFolderAttributes);
+			importFolder(portletDataContext, parentFolder);
 
 			parentFolderId = MapUtil.getLong(
 				folderPKs, folder.getParentFolderId(),

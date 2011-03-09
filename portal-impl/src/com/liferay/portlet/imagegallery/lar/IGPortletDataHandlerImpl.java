@@ -46,7 +46,6 @@ import com.liferay.util.PwdGenerator;
 
 import java.io.File;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -64,8 +63,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, Element foldersElement,
 			Element imagesElement, IGImage image, boolean checkDateRange)
 		throws Exception {
-
-		portletDataContext.addExpandoColumns(IGImage.class.getName());
 
 		if (checkDateRange &&
 			!portletDataContext.isWithinDateRange(image.getModifiedDate())) {
@@ -118,7 +115,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			portletDataContext.addZipEntry(binPath, largeImage.getTextObj());
 		}
 
-		portletDataContext.addZipEntry(path, imageElement, image);
+		portletDataContext.addZipEntry(path, image);
 	}
 
 	public static String getImagePath(
@@ -147,10 +144,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		IGFolder folder = (IGFolder)portletDataContext.getZipEntryAsObject(
 			path);
 
-		Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-			portletDataContext, folderElement);
-
-		importFolder(portletDataContext, folder, expandoAttributes);
+		importFolder(portletDataContext, folder);
 	}
 
 	public static void importImage(
@@ -159,18 +153,15 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		String path = imageElement.attributeValue("path");
 
+		String binPath = imageElement.attributeValue("bin-path");
+
 		if (!portletDataContext.isPathNotProcessed(path)) {
 			return;
 		}
 
-		String binPath = imageElement.attributeValue("bin-path");
-
 		IGImage image = (IGImage)portletDataContext.getZipEntryAsObject(path);
 
-		Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-			portletDataContext, imageElement);
-
-		importImage(portletDataContext, image, binPath, expandoAttributes);
+		importImage(portletDataContext, image, binPath);
 	}
 
 	public PortletDataHandlerControl[] getExportControls() {
@@ -193,25 +184,8 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		return PropsValues.IG_PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
 
-	protected static Map<String, Serializable> getParentFolderAttributes(
-		PortletDataContext portletDataContext, long parentFolderId) {
-
-		String expandoPath = getImportFolderPath(
-			portletDataContext, parentFolderId, true);
-
-		Map<String, Serializable> parentFolderAttributes = null;
-		if (Validator.isNotNull(expandoPath)) {
-			parentFolderAttributes =
-				(Map<String, Serializable>)
-					portletDataContext.getZipEntryAsObject(expandoPath);
-		}
-
-		return parentFolderAttributes;
-	}
-
 	protected static void importFolder(
-			PortletDataContext portletDataContext, IGFolder folder,
-			Map<String, Serializable> expandoAttributes)
+			PortletDataContext portletDataContext, IGFolder folder)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(folder.getUserUuid());
@@ -231,10 +205,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(folder.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
-
 		if ((parentFolderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
 
@@ -244,11 +214,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			IGFolder parentFolder =
 				(IGFolder)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> parentFolderAttributes =
-				getParentFolderAttributes(portletDataContext, parentFolderId);
-
-			importFolder(
-				portletDataContext, parentFolder, parentFolderAttributes);
+			importFolder(portletDataContext, parentFolder);
 
 			parentFolderId = MapUtil.getLong(
 				folderPKs, folder.getParentFolderId(),
@@ -304,7 +270,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	protected static void importImage(
 			PortletDataContext portletDataContext, IGImage image,
-			String binPath, Map<String, Serializable> expandoAttributes)
+			String binPath)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(image.getUserUuid());
@@ -365,10 +331,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(image.getCreateDate());
 		serviceContext.setModifiedDate(image.getModifiedDate());
 
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
-
 		if ((folderId != IGFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(folderId == image.getFolderId())) {
 
@@ -377,10 +339,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			IGFolder folder = (IGFolder)portletDataContext.getZipEntryAsObject(
 				path);
 
-			Map<String, Serializable> parentFolderAttributes =
-				getParentFolderAttributes(portletDataContext, folderId);
-
-			importFolder(portletDataContext, folder, parentFolderAttributes);
+			importFolder(portletDataContext, folder);
 
 			folderId = MapUtil.getLong(
 				folderPKs, image.getFolderId(), image.getFolderId());
@@ -483,8 +442,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, Element foldersElement,
 			Element imagesElement, IGFolder folder)
 		throws Exception {
-
-		portletDataContext.addExpandoColumns(IGFolder.class.getName());
 
 		if (portletDataContext.isWithinDateRange(folder.getModifiedDate())) {
 			exportParentFolder(
@@ -635,24 +592,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getImportFolderPath(
 		PortletDataContext portletDataContext, long folderId) {
 
-		return getImportFolderPath(portletDataContext, folderId, false);
-	}
-
-	protected static String getImportFolderPath(
-		PortletDataContext portletDataContext, long folderId,
-		boolean expandoAttributes) {
-
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(
 			portletDataContext.getSourcePortletPath(PortletKeys.IMAGE_GALLERY));
 		sb.append("/folders/");
 		sb.append(folderId);
-
-		if (expandoAttributes) {
-			sb.append("-expando");
-		}
-
 		sb.append(".xml");
 
 		return sb.toString();
@@ -681,10 +626,6 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
-
-		portletDataContext.addExpandoColumns(IGImage.class.getName());
-
-		portletDataContext.addExpandoColumns(IGFolder.class.getName());
 
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.imagegallery",
@@ -747,10 +688,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 			IGFolder folder = (IGFolder)portletDataContext.getZipEntryAsObject(
 				path);
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, folderElement);
-
-			importFolder(portletDataContext, folder, expandoAttributes);
+			importFolder(portletDataContext, folder);
 		}
 
 		Element imagesElement = rootElement.element("images");
@@ -769,10 +707,7 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 
 			String binPath = imageElement.attributeValue("bin-path");
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, imageElement);
-
-			importImage(portletDataContext, image, binPath, expandoAttributes);
+			importImage(portletDataContext, image, binPath);
 		}
 
 		return null;

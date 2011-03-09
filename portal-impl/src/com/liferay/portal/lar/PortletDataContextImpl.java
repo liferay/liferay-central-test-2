@@ -33,10 +33,8 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
-import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.Resource;
@@ -67,8 +65,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.expando.model.ExpandoColumn;
-import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
@@ -103,7 +99,6 @@ import com.thoughtworks.xstream.XStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -253,20 +248,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		String className, long classPK, List<MBMessage> messages) {
 
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
-	}
-
-	public void addExpandoColumns(String resourceClassName)
-		throws PortalException, SystemException {
-
-		if (_expandoColumnsMap.containsKey(resourceClassName)) {
-			return;
-		}
-
-		List<ExpandoColumn> expandoColumns =
-			ExpandoColumnLocalServiceUtil.getDefaultTableColumns(
-				_companyId, resourceClassName);
-
-		_expandoColumnsMap.put(resourceClassName, expandoColumns);
 	}
 
 	public void addLocks(Class<?> classObj, String key)
@@ -458,27 +439,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	public void addZipEntry(String path, Element element, BaseModel baseModel)
-		throws SystemException {
-
-		addZipEntry(path, toXML(baseModel));
-
-		Map<String, Serializable> expandoAttributes =
-			baseModel.getExpandoBridge().getAttributes();
-
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			int index = path.lastIndexOf(".xml");
-
-			String expandoPath = path.substring(0, index).
-				concat("-expando").
-				concat(path.substring(index, path.length()));
-
-			element.addAttribute("expando-path", expandoPath);
-
-			addZipEntry(expandoPath, expandoAttributes);
-		}
-	}
-
 	public Object fromXML(byte[] bytes) {
 		return _xStream.fromXML(new String(bytes));
 	}
@@ -541,10 +501,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public Date getEndDate() {
 		return _endDate;
-	}
-
-	public Map<String, List<ExpandoColumn>> getExpandoColumns() {
-		return _expandoColumnsMap;
 	}
 
 	public long getGroupId() {
@@ -1176,8 +1132,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _companyId;
 	private String _dataStrategy;
 	private Date _endDate;
-	private Map<String, List<ExpandoColumn>> _expandoColumnsMap =
-		new HashMap<String, List<ExpandoColumn>>();
 	private long _groupId;
 	private Map<String, Lock> _locksMap = new HashMap<String, Lock>();
 	private Map<String, Map<?, ?>> _newPrimaryKeysMaps =

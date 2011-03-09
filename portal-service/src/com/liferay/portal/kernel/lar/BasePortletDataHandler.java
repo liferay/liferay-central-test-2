@@ -14,12 +14,7 @@
 
 package com.liferay.portal.kernel.lar;
 
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.xml.Element;
-
 import javax.portlet.PortletPreferences;
-import java.io.Serializable;
-import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -107,23 +102,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 		return null;
 	}
-
-	protected static Map<String, Serializable> getExpandoAttributes(
-		PortletDataContext portletDataContext, Element element) {
-
-		String expandoPath = element.attributeValue("expando-path");
-
-		Map<String, Serializable> expandoAttributes = null;
-
-		if (Validator.isNotNull(expandoPath)) {
-			expandoAttributes =
-				(Map<String, Serializable>)
-					portletDataContext.getZipEntryAsObject(expandoPath);
-		}
-
-		return expandoAttributes;
-	}
-
 
 	private static final boolean _ALWAYS_EXPORTABLE = false;
 

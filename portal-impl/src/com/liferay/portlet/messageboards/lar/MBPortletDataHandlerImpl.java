@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.kernel.xml.Document;
@@ -54,7 +53,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -113,10 +111,6 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
-
-		portletDataContext.addExpandoColumns(MBCategory.class.getName());
-
-		portletDataContext.addExpandoColumns(MBMessage.class.getName());
 
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.messageboards",
@@ -191,10 +185,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			MBCategory category =
 				(MBCategory)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, categoryElement);
-
-			importCategory(portletDataContext, category, expandoAttributes);
+			importCategory(portletDataContext, category);
 		}
 
 		Element messagesElement = rootElement.element("messages");
@@ -209,11 +200,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			MBMessage message =
 				(MBMessage)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, messageElement);
-
-			importMessage(
-				portletDataContext, messageElement, message, expandoAttributes);
+			importMessage(portletDataContext, messageElement, message);
 		}
 
 		if (portletDataContext.getBooleanParameter(
@@ -307,8 +294,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				portletDataContext.addPermissions(
 					MBCategory.class, category.getCategoryId());
 
-				portletDataContext.addZipEntry(
-					path, categoriesElement, category);
+				portletDataContext.addZipEntry(path, category);
 			}
 		}
 
@@ -404,7 +390,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				}
 			}
 
-			portletDataContext.addZipEntry(path, messageElement, message);
+			portletDataContext.addZipEntry(path, message);
 		}
 	}
 
@@ -480,13 +466,6 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getImportCategoryPath(
 		PortletDataContext portletDataContext, long categoryId) {
 
-		return getImportCategoryPath(portletDataContext, categoryId, false);
-	}
-
-	protected String getImportCategoryPath(
-		PortletDataContext portletDataContext, long categoryId,
-		boolean expandoAttributes) {
-
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(
@@ -494,11 +473,6 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				PortletKeys.MESSAGE_BOARDS));
 		sb.append("/categories/");
 		sb.append(categoryId);
-
-		if (expandoAttributes) {
-			sb.append("-expando");
-		}
-
 		sb.append(".xml");
 
 		return sb.toString();
@@ -548,23 +522,6 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		return sb.toString();
 	}
 
-	protected Map<String, Serializable> getParentCategoryAttributes(
-		PortletDataContext portletDataContext, long parentCategoryId) {
-
-		String expandoPath = getImportCategoryPath(
-			portletDataContext, parentCategoryId, true);
-
-		Map<String, Serializable> parentCategoryAttributes = null;
-
-		if (Validator.isNotNull(expandoPath)) {
-			parentCategoryAttributes =
-				(Map<String, Serializable>)
-					portletDataContext.getZipEntryAsObject(expandoPath);
-		}
-
-		return parentCategoryAttributes;
-	}
-
 	protected String getUserBanPath(
 		PortletDataContext portletDataContext, MBBan ban) {
 
@@ -607,8 +564,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void importCategory(
-		PortletDataContext portletDataContext, MBCategory category,
-		Map<String, Serializable> expandoAttributes)
+			PortletDataContext portletDataContext, MBCategory category)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(category.getUserUuid());
@@ -646,10 +602,6 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(category.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
-
 		if ((parentCategoryId !=
 				MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) &&
 			(parentCategoryId != MBCategoryConstants.DISCUSSION_CATEGORY_ID) &&
@@ -661,12 +613,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			MBCategory parentCategory =
 				(MBCategory)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> parentCategoryAttributes =
-				getParentCategoryAttributes(
-					portletDataContext, parentCategoryId);
-
-			importCategory(
-				portletDataContext, parentCategory, parentCategoryAttributes);
+			importCategory(portletDataContext, parentCategory);
 
 			parentCategoryId = MapUtil.getLong(
 				categoryPKs, category.getParentCategoryId(),
@@ -722,7 +669,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	protected void importMessage(
 			PortletDataContext portletDataContext, Element messageElement,
-			MBMessage message, Map<String, Serializable> expandoAttributes)
+			MBMessage message)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(message.getUserUuid());
@@ -793,10 +740,6 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(message.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
-
 		if (message.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
 				WorkflowConstants.ACTION_SAVE_DRAFT);
@@ -811,11 +754,7 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 			MBCategory category =
 				(MBCategory)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> parentCategoryAttributes =
-				getParentCategoryAttributes(portletDataContext, categoryId);
-
-			importCategory(
-				portletDataContext, category, parentCategoryAttributes);
+			importCategory(portletDataContext, category);
 
 			categoryId = MapUtil.getLong(
 				categoryPKs, message.getCategoryId(), message.getCategoryId());
