@@ -110,8 +110,8 @@ public class InvokerFilterChain implements FilterChain {
 		}
 	}
 
-	public void setContextClassLoader(ClassLoader classLoader) {
-		_contextClassLoader = classLoader;
+	public void setContextClassLoader(ClassLoader contextClassLoader) {
+		_contextClassLoader = contextClassLoader;
 	}
 
 	protected void processDirectCallFilter(
@@ -184,7 +184,8 @@ public class InvokerFilterChain implements FilterChain {
 	}
 
 	protected void processDoFilter(
-			Filter filter, ServletRequest request, ServletResponse response)
+			Filter filter, ServletRequest servletRequest,
+			ServletResponse servletResponse)
 		throws IOException, ServletException {
 
 		Thread currentThread = Thread.currentThread();
@@ -194,7 +195,7 @@ public class InvokerFilterChain implements FilterChain {
 		currentThread.setContextClassLoader(_contextClassLoader);
 
 		try {
-			filter.doFilter(request, response, this);
+			filter.doFilter(servletRequest, servletResponse, this);
 		}
 		finally {
 			currentThread.setContextClassLoader(previousClassLoader);
