@@ -46,6 +46,10 @@ import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
 import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.servlet.LiferayFilter;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
+import com.liferay.portal.kernel.servlet.TryFilter;
+import com.liferay.portal.kernel.servlet.TryFinallyFilter;
+import com.liferay.portal.kernel.servlet.WrapHttpServletRequestFilter;
+import com.liferay.portal.kernel.servlet.WrapHttpServletResponseFilter;
 import com.liferay.portal.kernel.servlet.filters.invoker.FilterMapping;
 import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilterConfig;
 import com.liferay.portal.kernel.servlet.filters.invoker.InvokerFilterHelper;
@@ -1644,16 +1648,34 @@ public class HookHotDeployListener
 		Filter filter = (Filter)InstanceFactory.newInstance(
 			portletClassLoader, filterClassName);
 
+		List<Class> interfaces = new ArrayList<Class>();
+
+		if (filter instanceof WrapHttpServletRequestFilter) {
+			interfaces.add(WrapHttpServletRequestFilter.class);
+		}
+
+		if (filter instanceof WrapHttpServletResponseFilter) {
+			interfaces.add(WrapHttpServletResponseFilter.class);
+		}
+
+		if (filter instanceof TryFinallyFilter) {
+			interfaces.add(TryFinallyFilter.class);
+		}
+
+		if (filter instanceof TryFilter) {
+			interfaces.add(TryFilter.class);
+		}
+
 		if (filter instanceof LiferayFilter) {
-			filter = (Filter)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {LiferayFilter.class},
-				new ClassLoaderBeanHandler(filter, portletClassLoader));
+			interfaces.add(LiferayFilter.class);
 		}
 		else {
-			filter = (Filter)Proxy.newProxyInstance(
-				portletClassLoader, new Class[] {Filter.class},
-				new ClassLoaderBeanHandler(filter, portletClassLoader));
+			interfaces.add(Filter.class);
 		}
+
+		filter = (Filter)Proxy.newProxyInstance(
+			portletClassLoader, interfaces.toArray(new Class[] {}),
+			new ClassLoaderBeanHandler(filter, portletClassLoader));
 
 		return filter;
 	}
