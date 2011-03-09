@@ -103,17 +103,32 @@
 					<isset property="test.ant.script.plugin.portlets" />
 					<then>
 						<if>
-							<equals arg1="@{test.ant.script.version}" arg2="5.1.2" />
+							<and>
+								<equals arg1="${test.ant.script.plugin.portlets}" arg2="web-form-portlet" />
+								<equals arg1="@{test.ant.script.version}" arg2="5.2.3" />
+							</and>
 							<then>
-								<var name="test.ant.script.file.plugin.portlets" value="&lt;param name=&quot;portlet.plugins.upgrade.includes&quot; value=&quot;${test.ant.script.plugin.portlets}&quot; /&gt;" />
+								<var name="test.ant.script.file.plugin.portlets" value=" " />
 								<var name="test.ant.script.file.plugin.portlets.ee" value=" " />
 							</then>
 							<elseif>
-								<equals arg1="@{test.ant.script.version}" arg2="5.2.3" />
-								<then>
-									<var name="test.ant.script.file.plugin.portlets" value=" " />
-									<var name="test.ant.script.file.plugin.portlets.ee" value=" " />
-								</then>
+								<and>
+									<or>
+										<equals arg1="@{test.ant.script.version}" arg2="5.2.3" />
+										<equals arg1="@{test.ant.script.version}" arg2="5.2.5" />
+										<equals arg1="@{test.ant.script.version}" arg2="5.2.7" />
+										<equals arg1="@{test.ant.script.version}" arg2="5.2.8" />
+										<equals arg1="@{test.ant.script.version}" arg2="5.2.9" />
+									</or>
+									<or>
+										<equals arg1="${test.ant.script.plugin.portlets}" arg2="social-coding-portlet" />
+										<equals arg1="${test.ant.script.plugin.portlets}" arg2="social-networking-portlet" />
+									</or>
+								</and>
+									<then>
+										<var name="test.ant.script.file.plugin.portlets" value="&lt;param name=&quot;portlet.plugins.upgrade.includes&quot; value=&quot;${test.ant.script.plugin.portlets}&quot; /&gt;" />
+										<var name="test.ant.script.file.plugin.portlets.ee" value="&lt;param name=&quot;plugins.version.includes&quot; value=&quot;wol-portlet**.war&quot; /&gt;" />
+									</then>
 							</elseif>
 							<else>
 								<var name="test.ant.script.file.plugin.portlets" value="&lt;param name=&quot;portlet.plugins.upgrade.includes&quot; value=&quot;${test.ant.script.plugin.portlets}&quot; /&gt;" />
