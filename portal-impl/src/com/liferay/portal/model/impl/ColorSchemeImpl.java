@@ -61,41 +61,36 @@ public class ColorSchemeImpl implements ColorScheme {
 		_cssClass = cssClass;
 	}
 
-	public String getColorSchemeId() {
-		return _colorSchemeId;
+	public int compareTo(ColorScheme colorScheme) {
+		return getName().compareTo(colorScheme.getName());
 	}
 
-	public String getName() {
-		if (Validator.isNull(_name)) {
-			return _colorSchemeId;
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		ColorScheme colorScheme = null;
+
+		try {
+			colorScheme = (ColorScheme)obj;
+		}
+		catch (ClassCastException cce) {
+			return false;
+		}
+
+		String colorSchemeId = colorScheme.getColorSchemeId();
+
+		if (getColorSchemeId().equals(colorSchemeId)) {
+			return true;
 		}
 		else {
-			return _name;
+			return false;
 		}
 	}
 
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public boolean getDefaultCs() {
-		return _defaultCs;
-	}
-
-	public boolean isDefaultCs() {
-		return _defaultCs;
-	}
-
-	public void setDefaultCs(boolean defaultCs) {
-		_defaultCs = defaultCs;
-	}
-
-	public String getCssClass() {
-		return _cssClass;
-	}
-
-	public void setCssClass(String cssClass) {
-		_cssClass = cssClass;
+	public String getColorSchemeId() {
+		return _colorSchemeId;
 	}
 
 	public String getColorSchemeImagesPath() {
@@ -126,32 +121,21 @@ public class ColorSchemeImpl implements ColorScheme {
 		return _colorSchemeImagesPath;
 	}
 
-	public void setColorSchemeImagesPath(String colorSchemeImagesPath) {
-		_colorSchemeImagesPath = colorSchemeImagesPath;
+	public String getCssClass() {
+		return _cssClass;
 	}
 
-	public String getSettings() {
-		return PropertiesUtil.toString(_settingsProperties);
+	public boolean getDefaultCs() {
+		return _defaultCs;
 	}
 
-	public void setSettings(String settings) {
-		_settingsProperties.clear();
-
-		try {
-			PropertiesUtil.load(_settingsProperties, settings);
-			PropertiesUtil.trimKeys(_settingsProperties);
+	public String getName() {
+		if (Validator.isNull(_name)) {
+			return _colorSchemeId;
 		}
-		catch (IOException ioe) {
-			_log.error(ioe);
+		else {
+			return _name;
 		}
-	}
-
-	public Properties getSettingsProperties() {
-		return _settingsProperties;
-	}
-
-	public void setSettingsProperties(Properties settingsProperties) {
-		_settingsProperties = settingsProperties;
 	}
 
 	public String getSetting(String key) {
@@ -167,46 +151,62 @@ public class ColorSchemeImpl implements ColorScheme {
 		}
 	}
 
-	public int compareTo(ColorScheme colorScheme) {
-		return getName().compareTo(colorScheme.getName());
+	public String getSettings() {
+		return PropertiesUtil.toString(_settingsProperties);
 	}
 
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-
-		ColorScheme colorScheme = null;
-
-		try {
-			colorScheme = (ColorScheme)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
-
-		String colorSchemeId = colorScheme.getColorSchemeId();
-
-		if (getColorSchemeId().equals(colorSchemeId)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	public Properties getSettingsProperties() {
+		return _settingsProperties;
 	}
 
 	public int hashCode() {
 		return _colorSchemeId.hashCode();
 	}
 
+	public boolean isDefaultCs() {
+		return _defaultCs;
+	}
+
+	public void setColorSchemeImagesPath(String colorSchemeImagesPath) {
+		_colorSchemeImagesPath = colorSchemeImagesPath;
+	}
+
+	public void setCssClass(String cssClass) {
+		_cssClass = cssClass;
+	}
+
+	public void setDefaultCs(boolean defaultCs) {
+		_defaultCs = defaultCs;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setSettings(String settings) {
+		_settingsProperties.clear();
+
+		try {
+			PropertiesUtil.load(_settingsProperties, settings);
+			PropertiesUtil.trimKeys(_settingsProperties);
+		}
+		catch (IOException ioe) {
+			_log.error(ioe);
+		}
+	}
+
+	public void setSettingsProperties(Properties settingsProperties) {
+		_settingsProperties = settingsProperties;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ColorScheme.class);
 
 	private String _colorSchemeId;
-	private String _name;
-	private String _cssClass;
 	private String _colorSchemeImagesPath =
 		"${images-path}/color_schemes/${css-class}";
+	private String _cssClass;
 	private boolean _defaultCs;
+	private String _name;
 	private Properties _settingsProperties = new SafeProperties();
 
 }

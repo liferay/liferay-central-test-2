@@ -25,34 +25,34 @@ public interface ColorScheme extends Comparable<ColorScheme>, Serializable {
 
 	public String getColorSchemeId();
 
-	public String getName();
-
-	public void setName(String name);
-
-	public boolean getDefaultCs();
-
-	public boolean isDefaultCs();
-
-	public void setDefaultCs(boolean defaultCs);
-
-	public String getCssClass();
-
-	public void setCssClass(String cssClass);
-
 	public String getColorSchemeImagesPath();
-
-	public void setColorSchemeImagesPath(String colorSchemeImagesPath);
 
 	public String getColorSchemeThumbnailPath();
 
-	public String getSettings();
+	public String getCssClass();
 
-	public void setSettings(String settings);
+	public boolean getDefaultCs();
+
+	public String getName();
+
+	public String getSetting(String key);
+
+	public String getSettings();
 
 	public Properties getSettingsProperties();
 
-	public void setSettingsProperties(Properties settingsProperties);
+	public boolean isDefaultCs();
 
-	public String getSetting(String key);
+	public void setColorSchemeImagesPath(String colorSchemeImagesPath);
+
+	public void setCssClass(String cssClass);
+
+	public void setDefaultCs(boolean defaultCs);
+
+	public void setName(String name);
+
+	public void setSettings(String settings);
+
+	public void setSettingsProperties(Properties settingsProperties);
 
 }
