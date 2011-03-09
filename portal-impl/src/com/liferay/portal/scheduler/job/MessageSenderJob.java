@@ -89,24 +89,23 @@ public class MessageSenderJob implements Job {
 			StorageType storageType = StorageType.valueOf(
 				jobDataMap.getString(SchedulerEngine.STORAGE_TYPE));
 
-			if (storageType.equals(StorageType.MEMORY_SINGLE_INSTANCE)) {
-				if (PropsValues.CLUSTER_LINK_ENABLED) {
-					notifyClusterMember(
-						trigger.getJobName(), trigger.getGroup(), storageType);
-				}
-			}
-			else if (storageType.equals(
-						StorageType.MEMORY_MULTIPLE_INSTANCES)) {
-
-				message.put(SchedulerEngine.DISABLE, true);
-			}
-			else if (storageType.equals(StorageType.PERSISTED)) {
+			if (storageType.equals(StorageType.PERSISTED)) {
 				JobState jobStateClone = updatePersistedJobState(
 					jobState, trigger);
 
 				jobDataMap.put(SchedulerEngine.JOB_STATE, jobStateClone);
 
 				scheduler.addJob(jobDetail, true);
+			}
+			else {
+				message.put(SchedulerEngine.DISABLE, true);
+
+				if (PropsValues.CLUSTER_LINK_ENABLED &&
+					storageType.equals(StorageType.MEMORY_SINGLE_INSTANCE)) {
+					
+					notifyClusterMember(
+						trigger.getJobName(), trigger.getGroup(), storageType);
+				}
 			}
 		}
 
