@@ -60,7 +60,6 @@ import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetBranchLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
@@ -644,7 +643,8 @@ public class EditLayoutsAction extends PortletAction {
 
 		updateLookAndFeel(
 			actionRequest, themeDisplay.getCompanyId(), liveGroupId,
-			stagingGroupId, privateLayout, layout.getLayoutId());
+			stagingGroupId, privateLayout, layout.getLayoutId(),
+			layout.getTypeSettingsProperties());
 
 		return new Object[] {layout, oldFriendlyURL};
 	}
@@ -675,7 +675,8 @@ public class EditLayoutsAction extends PortletAction {
 
 	protected void updateLookAndFeel(
 			ActionRequest actionRequest, long companyId, long liveGroupId,
-			long stagingGroupId, boolean privateLayout, long layoutId)
+			long stagingGroupId, boolean privateLayout, long layoutId,
+			UnicodeProperties properties)
 		throws Exception {
 
 		String[] devices = StringUtil.split(
@@ -695,6 +696,8 @@ public class EditLayoutsAction extends PortletAction {
 			if (inheritLookAndFeel) {
 				themeId = StringPool.BLANK;
 				colorSchemeId = StringPool.BLANK;
+
+				properties.removeThemeProperties(device);
 			}
 			else if (Validator.isNotNull(themeId)) {
 				Theme theme = ThemeLocalServiceUtil.getTheme(
@@ -711,6 +714,16 @@ public class EditLayoutsAction extends PortletAction {
 
 					colorSchemeId = colorScheme.getColorSchemeId();
 				}
+
+				UnicodeProperties themeSettingsProperties =
+					PropertiesParamUtil.getProperties(
+						actionRequest, device + "ThemeSettingsProperties--");
+
+				for (String key : themeSettingsProperties.keySet()) {
+					String value = themeSettingsProperties.get(key);
+
+					properties.setThemeProperty(key, device, value);
+				}
 			}
 
 			long groupId = liveGroupId;
@@ -719,16 +732,12 @@ public class EditLayoutsAction extends PortletAction {
 				groupId = stagingGroupId;
 			}
 
-			if (layoutId <= 0) {
-				LayoutSetServiceUtil.updateLookAndFeel(
-					groupId, privateLayout, themeId, colorSchemeId, css,
-					wapTheme);
-			}
-			else {
-				LayoutServiceUtil.updateLookAndFeel(
-					groupId, privateLayout, layoutId, themeId, colorSchemeId,
-					css, wapTheme);
-			}
+			LayoutServiceUtil.updateLayout(
+				groupId, privateLayout, layoutId, properties.toString());
+
+			LayoutServiceUtil.updateLookAndFeel(
+				groupId, privateLayout, layoutId, themeId, colorSchemeId,
+				css, wapTheme);
 		}
 	}
 

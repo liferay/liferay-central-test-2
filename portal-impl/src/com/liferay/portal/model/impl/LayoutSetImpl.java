@@ -84,6 +84,31 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 		return settingsProperties.getProperty(key);
 	}
 
+	public String getThemeSetting(String key, String device)
+		throws SystemException {
+
+		UnicodeProperties properties = getSettingsProperties();
+
+		String value = properties.getThemeProperty(key, device);
+
+		if (value != null) {
+			return value;
+		}
+
+		Theme theme = null;
+
+		if (device.equals("regular")) {
+			theme = getTheme();
+		}
+		else {
+			theme = getWapTheme();
+		}
+
+		value = theme.getSetting(key);
+
+		return value;
+	}
+
 	public String getVirtualHostname() {
 		try {
 			VirtualHost virtualHost =

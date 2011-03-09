@@ -20,6 +20,9 @@
 List<Theme> themes = (List<Theme>)request.getAttribute("edit_pages.jsp-themes");
 List<ColorScheme> colorSchemes = (List<ColorScheme>)request.getAttribute("edit_pages.jsp-colorSchemes");
 
+Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
+LayoutSet selLayoutSet = (LayoutSet)request.getAttribute("edit_pages.jsp-selLayoutSet");
+
 Theme selTheme = (Theme)request.getAttribute("edit_pages.jsp-selTheme");
 ColorScheme selColorScheme = (ColorScheme)request.getAttribute("edit_pages.jsp-selColorScheme");
 
@@ -27,6 +30,8 @@ PluginPackage selPluginPackage = selTheme.getPluginPackage();
 String device = (String)request.getAttribute("edit_pages.jsp-device");
 
 boolean editable = (Boolean)request.getAttribute("edit_pages.jsp-editable");
+
+Map<String, ThemeSetting> configurableSettings = selTheme.getConfigurableSettings();
 %>
 
 <div class="lfr-theme-list">
@@ -80,41 +85,114 @@ boolean editable = (Boolean)request.getAttribute("edit_pages.jsp-editable");
 							<%= selColorScheme.getName() %>
 						</dd>
 					</c:if>
+
+					<c:if test="<%= !editable && (configurableSettings.size() > 0)  %>">
+
+						<%
+						for (String name : configurableSettings.keySet()) {
+						%>
+
+							<dt class="theme-setting">
+								<liferay-ui:message key="<%= name %>" />
+							</dt>
+							<dd>
+								<%= selLayoutSet.getThemeSetting(name, device) %>
+							</dd>
+
+						<%
+						}
+						%>
+
+					</c:if>
 				</dl>
 			</div>
 		</div>
 
-		<c:if test="<%= editable && !colorSchemes.isEmpty() %>">
-			<div class="color-schemes">
-				<liferay-ui:panel-container extended="<%= true %>" id="communitiesColorSchemesPanelContainer" persistState="<%= true %>">
-					<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" id="communitiesColorSchemesPanel" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>'>
-						<div class="lfr-component lfr-theme-list">
+		<c:if test="<%= editable %>">
+			<c:if test="<%= !colorSchemes.isEmpty() || configurableSettings.size() > 0 %>">
+				<liferay-ui:panel-container  extended="<%= true %>" persistState="<%= true %>">
+					<c:if test="<%= !colorSchemes.isEmpty() %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, "color-schemes-x", colorSchemes.size()) %>'>
+							<aui:fieldset cssCclass="color-schemes">
+								<div class="lfr-component lfr-theme-list">
 
-							<%
-							for (int i = 0; i < colorSchemes.size(); i++) {
-								ColorScheme curColorScheme = colorSchemes.get(i);
+									<%
+									for (int i = 0; i < colorSchemes.size(); i++) {
+										ColorScheme curColorScheme = colorSchemes.get(i);
 
-								String cssClass = StringPool.BLANK;
+										String cssClass = StringPool.BLANK;
 
-								if (selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId())) {
-									cssClass = "selected-color-scheme";
+										if (selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId())) {
+											cssClass = "selected-color-scheme";
+										}
+									%>
+
+								<div class="<%= cssClass %> theme-entry">
+									<img alt="" class="modify-link theme-thumbnail" onclick="document.getElementById('<portlet:namespace /><%= device %>ColorSchemeId<%= i %>').checked = true;" src="<%= selTheme.getStaticResourcePath() %><%= curColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
+
+										<aui:input cssClass="theme-title" checked="<%= selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId()) %>" id='<%= device + "ColorSchemeId" + i %>' label="<%= curColorScheme.getName() %>" name='<%= device + "ColorSchemeId" %>' type="radio" value="<%= curColorScheme.getColorSchemeId() %>" />
+									</div>
+
+									<%
+									}
+									%>
+
+								</div>
+							</aui:fieldset>
+						</liferay-ui:panel>
+					</c:if>
+
+					<c:if test="<%= configurableSettings.size() > 0 %>">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" persistState="<%= true %>" title="settings">
+							<aui:fieldset>
+
+								<%
+								for (String name : configurableSettings.keySet()) {
+									ThemeSetting themeSetting = configurableSettings.get(name);
+
+									String type = GetterUtil.getString(themeSetting.getType(), "text");
+									String value = StringPool.BLANK;
+
+									if (selLayout != null) {
+										value = selLayout.getThemeSetting(name, device);
+									}
+									else {
+										value = selLayoutSet.getThemeSetting(name, device);
+									}
+
+									String propertyName = device + "ThemeSettingsProperties--" + name + StringPool.DOUBLE_DASH;
+								%>
+
+									<c:choose>
+										<c:when test='<%= type.equals("text") || type.equals("textarea") || type.equals("checkbox") %>'>
+											<aui:input label="<%= name %>"  name="<%= propertyName %>" type="<%= type %>" value="<%= value %>" />
+										</c:when>
+										<c:when test='<%= type.equals("select") %>'>
+											<aui:select label="<%= name %>" name="<%= propertyName %>">
+
+												<%
+												for (String option : themeSetting.getOptions()) {
+												%>
+
+													<aui:option label="<%= option %>" selected="<%= option.equals(value) %>" />
+
+												<%
+												}
+												%>
+
+											</aui:select>
+										</c:when>
+									</c:choose>
+
+								<%
 								}
-							%>
+								%>
 
-							<div class="<%= cssClass %> theme-entry">
-								<img alt="" class="modify-link theme-thumbnail" onclick="document.getElementById('<portlet:namespace /><%= device %>ColorSchemeId<%= i %>').checked = true;" src="<%= selTheme.getStaticResourcePath() %><%= curColorScheme.getColorSchemeThumbnailPath() %>/thumbnail.png" title="<%= curColorScheme.getName() %>" />
-
-								<aui:input cssClass="theme-title" checked="<%= selColorScheme.getColorSchemeId().equals(curColorScheme.getColorSchemeId()) %>" id='<%= device + "ColorSchemeId" + i %>' label="<%= curColorScheme.getName() %>" name='<%= device + "ColorSchemeId" %>' type="radio" value="<%= curColorScheme.getColorSchemeId() %>" />
-							</div>
-
-							<%
-							}
-							%>
-
-						</div>
-					</liferay-ui:panel>
+							</aui:fieldset>
+						</liferay-ui:panel>
+					</c:if>
 				</liferay-ui:panel-container>
-			</div>
+			</c:if>
 		</c:if>
 	</div>
 

@@ -31,6 +31,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.model.ThemeSetting;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -40,6 +41,8 @@ import java.io.Serializable;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
 import java.util.TimeZone;
 
 import javax.portlet.PortletURL;
@@ -351,6 +354,37 @@ public class ThemeDisplay implements Serializable {
 
 	public String getThemeId() {
 		return _theme.getThemeId();
+	}
+
+	public String getThemeSetting(String key) {
+		Theme theme = getTheme();
+
+		String device = theme.getDevice();
+
+		Layout layout = getLayout();
+
+		return layout.getThemeSetting(key, device);
+	}
+
+	public Properties getThemeSettings() {
+		Theme theme = getTheme();
+
+		Properties settings = new Properties();
+
+		Map<String, ThemeSetting> themeSettings = theme.getSettings();
+
+		for (String key : themeSettings.keySet()) {
+			ThemeSetting themeSetting = themeSettings.get(key);
+
+			if (themeSetting.isConfigurable()) {
+				settings.put(key, getThemeSetting(key));
+			}
+			else {
+				settings.put(key, themeSetting.getValue());
+			}
+		}
+
+		return settings;
 	}
 
 	public String getTilesContent() {
