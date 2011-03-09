@@ -107,6 +107,23 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "countByG_S",
 			new String[] { Long.class.getName(), Integer.class.getName() });
+	public static final FinderPath FINDER_PATH_FIND_BY_U_G_S = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "findByU_G_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_COUNT_BY_U_G_S = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
+			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
+			FINDER_CLASS_NAME_LIST, "countByU_G_S",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			});
 	public static final FinderPath FINDER_PATH_FIND_ALL = new FinderPath(MembershipRequestModelImpl.ENTITY_CACHE_ENABLED,
 			MembershipRequestModelImpl.FINDER_CACHE_ENABLED,
 			FINDER_CLASS_NAME_LIST, "findAll", new String[0]);
@@ -1463,6 +1480,389 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	}
 
 	/**
+	 * Finds all the membership requests where userId = &#63; and groupId = &#63; and statusId = &#63;.
+	 *
+	 * @param userId the user ID to search with
+	 * @param groupId the group ID to search with
+	 * @param statusId the status ID to search with
+	 * @return the matching membership requests
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<MembershipRequest> findByU_G_S(long userId, long groupId,
+		int statusId) throws SystemException {
+		return findByU_G_S(userId, groupId, statusId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Finds a range of all the membership requests where userId = &#63; and groupId = &#63; and statusId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user ID to search with
+	 * @param groupId the group ID to search with
+	 * @param statusId the status ID to search with
+	 * @param start the lower bound of the range of membership requests to return
+	 * @param end the upper bound of the range of membership requests to return (not inclusive)
+	 * @return the range of matching membership requests
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<MembershipRequest> findByU_G_S(long userId, long groupId,
+		int statusId, int start, int end) throws SystemException {
+		return findByU_G_S(userId, groupId, statusId, start, end, null);
+	}
+
+	/**
+	 * Finds an ordered range of all the membership requests where userId = &#63; and groupId = &#63; and statusId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user ID to search with
+	 * @param groupId the group ID to search with
+	 * @param statusId the status ID to search with
+	 * @param start the lower bound of the range of membership requests to return
+	 * @param end the upper bound of the range of membership requests to return (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching membership requests
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<MembershipRequest> findByU_G_S(long userId, long groupId,
+		int statusId, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		Object[] finderArgs = new Object[] {
+				userId, groupId, statusId,
+				
+				String.valueOf(start), String.valueOf(end),
+				String.valueOf(orderByComparator)
+			};
+
+		List<MembershipRequest> list = (List<MembershipRequest>)FinderCacheUtil.getResult(FINDER_PATH_FIND_BY_U_G_S,
+				finderArgs, this);
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(5 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(5);
+			}
+
+			query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
+
+			query.append(_FINDER_COLUMN_U_G_S_USERID_2);
+
+			query.append(_FINDER_COLUMN_U_G_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_U_G_S_STATUSID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			else {
+				query.append(MembershipRequestModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(groupId);
+
+				qPos.add(statusId);
+
+				list = (List<MembershipRequest>)QueryUtil.list(q, getDialect(),
+						start, end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(FINDER_PATH_FIND_BY_U_G_S,
+						finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(FINDER_PATH_FIND_BY_U_G_S,
+						finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Finds the first membership request in the ordered set where userId = &#63; and groupId = &#63; and statusId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user ID to search with
+	 * @param groupId the group ID to search with
+	 * @param statusId the status ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching membership request
+	 * @throws com.liferay.portal.NoSuchMembershipRequestException if a matching membership request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MembershipRequest findByU_G_S_First(long userId, long groupId,
+		int statusId, OrderByComparator orderByComparator)
+		throws NoSuchMembershipRequestException, SystemException {
+		List<MembershipRequest> list = findByU_G_S(userId, groupId, statusId,
+				0, 1, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", groupId=");
+			msg.append(groupId);
+
+			msg.append(", statusId=");
+			msg.append(statusId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMembershipRequestException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the last membership request in the ordered set where userId = &#63; and groupId = &#63; and statusId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param userId the user ID to search with
+	 * @param groupId the group ID to search with
+	 * @param statusId the status ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching membership request
+	 * @throws com.liferay.portal.NoSuchMembershipRequestException if a matching membership request could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MembershipRequest findByU_G_S_Last(long userId, long groupId,
+		int statusId, OrderByComparator orderByComparator)
+		throws NoSuchMembershipRequestException, SystemException {
+		int count = countByU_G_S(userId, groupId, statusId);
+
+		List<MembershipRequest> list = findByU_G_S(userId, groupId, statusId,
+				count - 1, count, orderByComparator);
+
+		if (list.isEmpty()) {
+			StringBundler msg = new StringBundler(8);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", groupId=");
+			msg.append(groupId);
+
+			msg.append(", statusId=");
+			msg.append(statusId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchMembershipRequestException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	/**
+	 * Finds the membership requests before and after the current membership request in the ordered set where userId = &#63; and groupId = &#63; and statusId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param membershipRequestId the primary key of the current membership request
+	 * @param userId the user ID to search with
+	 * @param groupId the group ID to search with
+	 * @param statusId the status ID to search with
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next membership request
+	 * @throws com.liferay.portal.NoSuchMembershipRequestException if a membership request with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public MembershipRequest[] findByU_G_S_PrevAndNext(
+		long membershipRequestId, long userId, long groupId, int statusId,
+		OrderByComparator orderByComparator)
+		throws NoSuchMembershipRequestException, SystemException {
+		MembershipRequest membershipRequest = findByPrimaryKey(membershipRequestId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			MembershipRequest[] array = new MembershipRequestImpl[3];
+
+			array[0] = getByU_G_S_PrevAndNext(session, membershipRequest,
+					userId, groupId, statusId, orderByComparator, true);
+
+			array[1] = membershipRequest;
+
+			array[2] = getByU_G_S_PrevAndNext(session, membershipRequest,
+					userId, groupId, statusId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected MembershipRequest getByU_G_S_PrevAndNext(Session session,
+		MembershipRequest membershipRequest, long userId, long groupId,
+		int statusId, OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_MEMBERSHIPREQUEST_WHERE);
+
+		query.append(_FINDER_COLUMN_U_G_S_USERID_2);
+
+		query.append(_FINDER_COLUMN_U_G_S_GROUPID_2);
+
+		query.append(_FINDER_COLUMN_U_G_S_STATUSID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			if (orderByFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		else {
+			query.append(MembershipRequestModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		qPos.add(groupId);
+
+		qPos.add(statusId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByValues(membershipRequest);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<MembershipRequest> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Finds all the membership requests.
 	 *
 	 * @return the membership requests
@@ -1605,6 +2005,22 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	public void removeByG_S(long groupId, int statusId)
 		throws SystemException {
 		for (MembershipRequest membershipRequest : findByG_S(groupId, statusId)) {
+			membershipRequestPersistence.remove(membershipRequest);
+		}
+	}
+
+	/**
+	 * Removes all the membership requests where userId = &#63; and groupId = &#63; and statusId = &#63; from the database.
+	 *
+	 * @param userId the user ID to search with
+	 * @param groupId the group ID to search with
+	 * @param statusId the status ID to search with
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByU_G_S(long userId, long groupId, int statusId)
+		throws SystemException {
+		for (MembershipRequest membershipRequest : findByU_G_S(userId, groupId,
+				statusId)) {
 			membershipRequestPersistence.remove(membershipRequest);
 		}
 	}
@@ -1776,6 +2192,70 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_S, finderArgs,
 					count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Counts all the membership requests where userId = &#63; and groupId = &#63; and statusId = &#63;.
+	 *
+	 * @param userId the user ID to search with
+	 * @param groupId the group ID to search with
+	 * @param statusId the status ID to search with
+	 * @return the number of matching membership requests
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByU_G_S(long userId, long groupId, int statusId)
+		throws SystemException {
+		Object[] finderArgs = new Object[] { userId, groupId, statusId };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_U_G_S,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_COUNT_MEMBERSHIPREQUEST_WHERE);
+
+			query.append(_FINDER_COLUMN_U_G_S_USERID_2);
+
+			query.append(_FINDER_COLUMN_U_G_S_GROUPID_2);
+
+			query.append(_FINDER_COLUMN_U_G_S_STATUSID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(groupId);
+
+				qPos.add(statusId);
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_G_S,
+					finderArgs, count);
 
 				closeSession(session);
 			}
@@ -1983,6 +2463,9 @@ public class MembershipRequestPersistenceImpl extends BasePersistenceImpl<Member
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "membershipRequest.userId = ?";
 	private static final String _FINDER_COLUMN_G_S_GROUPID_2 = "membershipRequest.groupId = ? AND ";
 	private static final String _FINDER_COLUMN_G_S_STATUSID_2 = "membershipRequest.statusId = ?";
+	private static final String _FINDER_COLUMN_U_G_S_USERID_2 = "membershipRequest.userId = ? AND ";
+	private static final String _FINDER_COLUMN_U_G_S_GROUPID_2 = "membershipRequest.groupId = ? AND ";
+	private static final String _FINDER_COLUMN_U_G_S_STATUSID_2 = "membershipRequest.statusId = ?";
 	private static final String _ORDER_BY_ENTITY_ALIAS = "membershipRequest.";
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY = "No MembershipRequest exists with the primary key ";
 	private static final String _NO_SUCH_ENTITY_WITH_KEY = "No MembershipRequest exists with the key {";
