@@ -50,7 +50,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<aui:select name="preferences--bulletStyle--">
 
 					<%
-					String[] bulletStyleOptions = StringUtil.split(theme.getSetting("bullet-style-options"));
+					String[] bulletStyleOptions = theme.getSettingOptions("bullet-style");
 
 					for (String bulletStyleOption : bulletStyleOptions) {
 					%>

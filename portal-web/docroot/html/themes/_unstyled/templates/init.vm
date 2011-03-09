@@ -4,7 +4,7 @@
 #set ($portlet_display = $portletDisplay)
 
 #set ($theme_timestamp = $themeDisplay.getTheme().getTimestamp())
-#set ($theme_settings = $themeDisplay.getTheme().getSettings())
+#set ($theme_settings = $themeDisplay.getThemeSettings())
 
 #set ($css_class = $theme_display.getColorScheme().getCssClass())
 

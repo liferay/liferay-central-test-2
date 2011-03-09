@@ -183,7 +183,7 @@
 					return "<%= session.getId() %>";
 				},
 				getPortletSetupShowBordersDefault: function() {
-					return <%= GetterUtil.getString(theme.getSetting("portlet-setup-show-borders-default"), "true") %>;
+					return <%= GetterUtil.getString(themeDisplay.getThemeSetting("portlet-setup-show-borders-default"), "true") %>;
 				}
 			},
 

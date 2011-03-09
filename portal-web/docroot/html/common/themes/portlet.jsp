@@ -36,7 +36,7 @@ boolean tilesPortletDecorateBoolean = GetterUtil.getBoolean(tilesPortletDecorate
 boolean portletDecorateDefault = false;
 
 if (tilesPortletDecorateBoolean) {
-	portletDecorateDefault = GetterUtil.getBoolean(theme.getSetting("portlet-setup-show-borders-default"), PropsValues.THEME_PORTLET_DECORATE_DEFAULT);
+	portletDecorateDefault = GetterUtil.getBoolean(themeDisplay.getThemeSetting("portlet-setup-show-borders-default"), PropsValues.THEME_PORTLET_DECORATE_DEFAULT);
 }
 
 boolean portletDecorate = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));

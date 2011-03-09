@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.taglib.portlet.ActionURLTag;
 import com.liferay.taglib.portletext.IconBackTag;
@@ -206,9 +205,7 @@ public class VelocityTaglib {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Theme theme = themeDisplay.getTheme();
-
-		return theme.getSetting(name);
+		return themeDisplay.getThemeSetting(name);
 	}
 
 	public void iconBack() throws Exception {

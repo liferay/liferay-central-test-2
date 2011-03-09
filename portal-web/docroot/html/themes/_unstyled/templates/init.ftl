@@ -4,7 +4,7 @@
 <#assign portlet_display = portletDisplay/>
 
 <#assign theme_timestamp = themeDisplay.getTheme().getTimestamp() />
-<#assign theme_settings = themeDisplay.getTheme().getSettings() />
+<#assign theme_settings = themeDisplay.getThemeSettings() />
 
 <#assign css_class = theme_display.getColorScheme().getCssClass() />
 
