@@ -107,7 +107,7 @@ public class ResourceActionLocalServiceImpl
 			lastBitwiseValue = resourceAction.getBitwiseValue();
 		}
 
-		List<ResourceAction> newDefaultResourceActions =
+		List<ResourceAction> newResourceActions =
 			new ArrayList<ResourceAction>();
 
 		int lastBitwiseLogValue = MathUtil.base2Log(lastBitwiseValue);
@@ -148,7 +148,7 @@ public class ResourceActionLocalServiceImpl
 
 			_resourceActions.put(key, resourceAction);
 
-			newDefaultResourceActions.add(resourceAction);
+			newResourceActions.add(resourceAction);
 		}
 
 		List<String> communityDefaultActions =
@@ -157,7 +157,7 @@ public class ResourceActionLocalServiceImpl
 		List<String> guestDefaultActions =
 			ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
 
-		for (ResourceAction resourceAction : newDefaultResourceActions) {
+		for (ResourceAction resourceAction : newResourceActions) {
 			String actionId = resourceAction.getActionId();
 
 			if (communityDefaultActions.contains(actionId)) {
