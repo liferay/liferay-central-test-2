@@ -134,6 +134,20 @@ public class MembershipRequestLocalServiceImpl
 			membershipRequestId);
 	}
 
+	public boolean hasRequest(long userId, long groupId, int statusId)
+		throws SystemException {
+
+		List<MembershipRequest> requests =
+			membershipRequestPersistence.findByU_G_S(userId, groupId, statusId);
+
+		if (requests.isEmpty()) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
 	public List<MembershipRequest> search(
 			long groupId, int status, int start, int end)
 		throws SystemException {

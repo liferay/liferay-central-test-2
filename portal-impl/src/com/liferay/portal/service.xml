@@ -849,6 +849,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="statusId" />
 		</finder>
+		<finder name="U_G_S" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="groupId" />
+			<finder-column name="statusId" />
+		</finder>
 
 		<!-- References -->
 
