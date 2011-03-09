@@ -84,17 +84,18 @@ public class ResourcePermissionLocalServiceImpl
 			String resourceName, String roleName, int scope, String actionId)
 		throws PortalException, SystemException{
 
-		List<ResourcePermission> resourcePermissions =
-			resourcePermissionPersistence.findByN_S(resourceName, scope);
-
 		List<Role> roles = rolePersistence.findByName(roleName);
 
-		for (ResourcePermission resourcePermission : resourcePermissions) {
-			long companyId = resourcePermission.getCompanyId();
-			String primKey = resourcePermission.getPrimKey();
+		for (Role role : roles) {
+			long roleId = role.getRoleId();
 
-			for (Role role : roles) {
-				long roleId = role.getRoleId();
+			List<ResourcePermission> resourcePermissions =
+				resourcePermissionPersistence.findByN_R_S(
+					resourceName, roleId, scope);
+
+			for (ResourcePermission resourcePermission : resourcePermissions) {
+				long companyId = resourcePermission.getCompanyId();
+				String primKey = resourcePermission.getPrimKey();
 
 				List<String> actionIds =
 					getAvailableResourcePermissionActionIds(

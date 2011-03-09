@@ -1530,10 +1530,6 @@
 		<finder name="RoleId" return-type="Collection">
 			<finder-column name="roleId" />
 		</finder>
-		<finder name="N_S" return-type="Collection">
-			<finder-column name="name" />
-			<finder-column name="scope" />
-		</finder>
 		<finder name="R_S" return-type="Collection">
 			<finder-column name="roleId" />
 			<finder-column name="scope" />
@@ -1541,6 +1537,11 @@
 		<finder name="C_N_S" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
+			<finder-column name="scope" />
+		</finder>
+		<finder name="N_R_S" return-type="Collection">
+			<finder-column name="name" />
+			<finder-column name="roleId" />
 			<finder-column name="scope" />
 		</finder>
 		<finder name="C_N_S_P" return-type="Collection">
