@@ -85,6 +85,7 @@ AUI().add(
 			if (Util.isArray(response)) {
 				var meta = response.shift();
 				var chunk;
+                var payload;
 
 				var portletId;
 				var portlet;
@@ -92,17 +93,19 @@ AUI().add(
 				for (var i = 0, length = response.length; i < length; i++) {
 					chunk = response[i];
 
-					portletId = chunk.portletId;
+                    payload = chunk.payload;
+
+					portletId = payload.portletId;
 					portlet = _portlets[portletId];
 
 					if (portlet) {
 						if (meta.initialRequest) {
-							chunk.data.initialRequest = true;
+							payload.data.initialRequest = true;
 						}
 
-						portlet.listener.call(portlet.scope || Poller, chunk.data, chunk.chunkId);
+						portlet.listener.call(portlet.scope || Poller, payload.data, payload.chunkId);
 
-						if (chunk.data && chunk.data.pollerHintHighConnectivity) {
+						if (payload.data && payload.data.pollerHintHighConnectivity) {
 							_requestDelay = _delays[0];
 							_delayIndex = 0;
 						}
