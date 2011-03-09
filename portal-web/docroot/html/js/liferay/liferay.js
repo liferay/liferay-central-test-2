@@ -8,9 +8,6 @@ Liferay = window.Liferay || {};
 	A.mix(
 		AUI.defaults.io,
 		{
-			dataFormatter: function(data) {
-				return Lang.toQueryString(data);
-			},
 			method: 'POST',
 			uriFormatter: function(value) {
 				return Liferay.Util.getURLWithSessionId(value);
