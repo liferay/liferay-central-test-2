@@ -78,10 +78,7 @@ public class MessageSenderJob implements Job {
 
 		Scheduler scheduler = jobExecutionContext.getScheduler();
 
-		SchedulerContext schedulerContext = scheduler.getContext();
-
-		JobState jobState = (JobState)schedulerContext.get(
-			jobDetail.getFullName());
+		JobState jobState = (JobState)jobDataMap.get(SchedulerEngine.JOB_STATE);
 
 		if (jobExecutionContext.getNextFireTime() == null) {
 			Trigger trigger = jobExecutionContext.getTrigger();
