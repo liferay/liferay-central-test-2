@@ -70,14 +70,14 @@
 			text-align: center;
 
 			label {
-            	width: 65px;
+				width: 65px;
 			}
 
 			img {
 				margin: 4px;
 
 				&.layout-selected {
-                	background-color: #99FF33;
+					background-color: #99FF33;
 					border: 4px solid #99FF33;
 					margin: 0px;
 				}
