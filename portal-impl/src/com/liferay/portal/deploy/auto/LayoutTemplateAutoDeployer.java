@@ -52,7 +52,6 @@ public class LayoutTemplateAutoDeployer
 			unpackWar = PrefsPropsUtil.getBoolean(
 				PropsKeys.AUTO_DEPLOY_UNPACK_WAR,
 				PropsValues.AUTO_DEPLOY_UNPACK_WAR);
-			deploymentContextBaseDir = destDir;
 
 			List<String> jars = new ArrayList<String>();
 
