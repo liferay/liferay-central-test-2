@@ -87,16 +87,14 @@ public class ResourcePermissionLocalServiceImpl
 		List<Role> roles = rolePersistence.findByName(roleName);
 
 		for (Role role : roles) {
-			long companyId = role.getCompanyId();
-			long roleId = role.getRoleId();
-
 			List<String> primKeys = resourcePermissionFinder.findByC_N_S(
-				companyId, resourceName, scope);
+				role.getCompanyId(), resourceName, scope);
 
 			for (String primKey : primKeys) {
 				List<String> actionIds =
 					getAvailableResourcePermissionActionIds(
-						companyId, resourceName, scope, primKey, roleId,
+						role.getCompanyId(), resourceName, scope, primKey,
+						role.getRoleId(),
 						ResourceActionsUtil.getResourceActions(resourceName));
 
 				if (actionIds == (List<?>)Collections.emptyList()) {
@@ -106,7 +104,8 @@ public class ResourcePermissionLocalServiceImpl
 				actionIds.add(actionId);
 
 				setResourcePermissions(
-					companyId, resourceName, scope, primKey, roleId,
+					role.getCompanyId(), resourceName, scope, primKey,
+					role.getRoleId(),
 					actionIds.toArray(new String[actionIds.size()]));
 			}
 		}
