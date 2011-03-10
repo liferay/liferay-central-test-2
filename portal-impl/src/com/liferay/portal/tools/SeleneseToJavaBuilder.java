@@ -953,7 +953,8 @@ public class SeleneseToJavaBuilder {
 				sb.append("}");
 			}
 			else {
-				System.out.println(param1 + " was not translated");
+				System.out.println(
+					param1 + " was not translated " + testFileName);
 			}
 
 			Boolean takeScreenShot = takeScreenShots.get(x);
