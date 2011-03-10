@@ -954,7 +954,7 @@ public class SeleneseToJavaBuilder {
 			}
 			else {
 				System.out.println(
-					param1 + " was not translated " + testFileName);
+					testFileName + " has an unknown command " + param1);
 			}
 
 			Boolean takeScreenShot = takeScreenShots.get(x);
