@@ -14,7 +14,6 @@
 
 package com.liferay.portal.dao.orm.common;
 
-import com.liferay.portal.cache.transactional.TransactionalPortalCache;
 import com.liferay.portal.kernel.cache.CacheKVP;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
@@ -202,10 +201,6 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		if ((portalCache == null) && createIfAbsent) {
 			portalCache = _multiVMPool.getCache(
 				groupKey, PropsValues.VALUE_OBJECT_FINDER_BLOCKING_CACHE);
-
-			if (PropsValues.TRANSACTIONAL_CACHE_ENABLED) {
-				portalCache = new TransactionalPortalCache(portalCache);
-			}
 
 			PortalCache previousPortalCache = _portalCaches.putIfAbsent(
 				groupKey, portalCache);

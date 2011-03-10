@@ -14,6 +14,9 @@
 
 package com.liferay.portal.cache.ehcache;
 
+import com.liferay.portal.cache.transactional.TransactionalPortalCache;
+import com.liferay.portal.dao.orm.common.EntityCacheImpl;
+import com.liferay.portal.dao.orm.common.FinderCacheImpl;
 import com.liferay.portal.kernel.cache.BlockingPortalCache;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.PortalCacheManager;
@@ -117,6 +120,12 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		PortalCache portalCache = new EhcachePortalCache(cache);
 
 		portalCache.setDebug(_debug);
+
+		if (PropsValues.TRANSACTIONAL_CACHE_ENABLED &&
+			(name.startsWith(FinderCacheImpl.CACHE_NAME) ||
+				name.startsWith(EntityCacheImpl.CACHE_NAME))) {
+			portalCache = new TransactionalPortalCache(portalCache);
+		}
 
 		if (PropsValues.EHCACHE_BLOCKING_CACHE_ALLOWED && blocking) {
 			portalCache = new BlockingPortalCache(portalCache);

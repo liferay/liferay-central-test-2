@@ -14,7 +14,6 @@
 
 package com.liferay.portal.dao.orm.common;
 
-import com.liferay.portal.cache.transactional.TransactionalPortalCache;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.CacheRegistryUtil;
 import com.liferay.portal.kernel.cache.MultiVMPool;
@@ -321,10 +320,6 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		if ((portalCache == null) && createIfAbsent) {
 			portalCache = _multiVMPool.getCache(
 				groupKey, PropsValues.VALUE_OBJECT_ENTITY_BLOCKING_CACHE);
-
-			if (PropsValues.TRANSACTIONAL_CACHE_ENABLED) {
-				portalCache = new TransactionalPortalCache(portalCache);
-			}
 
 			PortalCache previousPortalCache = _portalCaches.putIfAbsent(
 				groupKey, portalCache);
