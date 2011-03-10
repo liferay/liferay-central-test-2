@@ -97,7 +97,7 @@ public class MessageSenderJob implements Job {
 				message.put(SchedulerEngine.DISABLE, true);
 
 				if (PropsValues.CLUSTER_LINK_ENABLED &&
-					storageType.equals(StorageType.MEMORY_SINGLE_INSTANCE)) {
+					storageType.equals(StorageType.MEMORY_CLUSTERED)) {
 
 					notifyClusterMember(
 						trigger.getJobName(), trigger.getGroup(), storageType);

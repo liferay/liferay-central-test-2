@@ -19,6 +19,6 @@ package com.liferay.portal.kernel.scheduler;
  */
 public enum StorageType {
 
-	MEMORY_MULTIPLE_INSTANCES, MEMORY_SINGLE_INSTANCE, PERSISTED
+	MEMORY, MEMORY_CLUSTERED, PERSISTED
 
 }

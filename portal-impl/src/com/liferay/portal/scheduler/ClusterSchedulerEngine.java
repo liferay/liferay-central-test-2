@@ -86,7 +86,7 @@ public class ClusterSchedulerEngine
 	public void delete(String groupName) throws SchedulerException {
 		try {
 			if (isMemorySchedulerSlave(groupName)) {
-				removeMemorySingleInstanceJobs(groupName);
+				removeMemoryClusteredJobs(groupName);
 
 				return;
 			}
@@ -114,8 +114,7 @@ public class ClusterSchedulerEngine
 
 		try {
 			if (isMemorySchedulerSlave(groupName)) {
-				_memorySingleInstanceJobs.remove(
-					getFullName(jobName, groupName));
+				_memoryClusteredJobs.remove(getFullName(jobName, groupName));
 
 				return;
 			}
@@ -220,7 +219,7 @@ public class ClusterSchedulerEngine
 	public void pause(String groupName) throws SchedulerException {
 		try {
 			if (isMemorySchedulerSlave(groupName)) {
-				updateMemorySingleInstanceJobs(groupName, TriggerState.PAUSED);
+				updateMemoryClusteredJobs(groupName, TriggerState.PAUSED);
 
 				return;
 			}
@@ -248,7 +247,7 @@ public class ClusterSchedulerEngine
 
 		try {
 			if (isMemorySchedulerSlave(groupName)) {
-				updateMemorySingleInstanceJob(
+				updateMemoryClusteredJob(
 					jobName, groupName, TriggerState.PAUSED);
 
 				return;
@@ -277,7 +276,7 @@ public class ClusterSchedulerEngine
 	public void resume(String groupName) throws SchedulerException {
 		try {
 			if (isMemorySchedulerSlave(groupName)) {
-				updateMemorySingleInstanceJobs(groupName, TriggerState.NORMAL);
+				updateMemoryClusteredJobs(groupName, TriggerState.NORMAL);
 
 				return;
 			}
@@ -305,7 +304,7 @@ public class ClusterSchedulerEngine
 
 		try {
 			if (isMemorySchedulerSlave(groupName)) {
-				updateMemorySingleInstanceJob(
+				updateMemoryClusteredJob(
 					jobName, groupName, TriggerState.NORMAL);
 
 				return;
@@ -350,7 +349,7 @@ public class ClusterSchedulerEngine
 				schedulerResponse.setMessage(message);
 				schedulerResponse.setTrigger(trigger);
 
-				_memorySingleInstanceJobs.put(
+				_memoryClusteredJobs.put(
 					getFullName(jobName, groupName),
 					new ObjectValuePair<SchedulerResponse, TriggerState>(
 						schedulerResponse, TriggerState.NORMAL));
@@ -416,7 +415,7 @@ public class ClusterSchedulerEngine
 			if (!isMemorySchedulerClusterLockOwner(
 					lockMemorySchedulerCluster(null))) {
 
-				initMemorySingleInstanceJobs();
+				initMemoryClusteredJobs();
 			}
 		}
 		catch (Exception e) {
@@ -458,7 +457,7 @@ public class ClusterSchedulerEngine
 	public void unschedule(String groupName) throws SchedulerException {
 		try {
 			if (isMemorySchedulerSlave(groupName)) {
-				removeMemorySingleInstanceJobs(groupName);
+				removeMemoryClusteredJobs(groupName);
 
 				return;
 			}
@@ -486,8 +485,7 @@ public class ClusterSchedulerEngine
 
 		try {
 			if (isMemorySchedulerSlave(groupName)) {
-				_memorySingleInstanceJobs.remove(
-					getFullName(jobName, groupName));
+				_memoryClusteredJobs.remove(getFullName(jobName, groupName));
 
 				return;
 			}
@@ -519,11 +517,10 @@ public class ClusterSchedulerEngine
 		try {
 			if (isMemorySchedulerSlave(groupName)) {
 				for (ObjectValuePair<SchedulerResponse, TriggerState>
-						memorySingleInstanceJob :
-							_memorySingleInstanceJobs.values()) {
+						memoryClusteredJob : _memoryClusteredJobs.values()) {
 
 					SchedulerResponse schedulerResponse =
-						memorySingleInstanceJob.getKey();
+						memoryClusteredJob.getKey();
 
 					if (jobName.equals(schedulerResponse.getJobName()) &&
 						groupName.equals(schedulerResponse.getGroupName())) {
@@ -535,7 +532,7 @@ public class ClusterSchedulerEngine
 				}
 
 				throw new Exception(
-					"Unable to update trigger for memory single instance job");
+					"Unable to update trigger for memory clustered job");
 			}
 		}
 		catch (Exception e) {
@@ -644,19 +641,17 @@ public class ClusterSchedulerEngine
 		return StorageType.valueOf(storageTypeString);
 	}
 
-	protected void initMemorySingleInstanceJobs() throws Exception {
+	protected void initMemoryClusteredJobs() throws Exception {
 		List<SchedulerResponse> schedulerResponses =
 			(List<SchedulerResponse>)callMaster(
-				_getScheduledJobsMethodKey3,
-				StorageType.MEMORY_SINGLE_INSTANCE);
+				_getScheduledJobsMethodKey3, StorageType.MEMORY_CLUSTERED);
 
 		for (SchedulerResponse schedulerResponse : schedulerResponses) {
 			Trigger oldTrigger = schedulerResponse.getTrigger();
 
 			String jobName = schedulerResponse.getJobName();
 			String groupName = SchedulerEngineUtil.namespaceGroupName(
-				schedulerResponse.getGroupName(),
-				StorageType.MEMORY_SINGLE_INSTANCE);
+				schedulerResponse.getGroupName(), StorageType.MEMORY_CLUSTERED);
 
 			Trigger newTrigger = TriggerFactoryUtil.buildTrigger(
 				oldTrigger.getTriggerType(), jobName, groupName,
@@ -672,7 +667,7 @@ public class ClusterSchedulerEngine
 
 			message.remove(JOB_STATE);
 
-			_memorySingleInstanceJobs.put(
+			_memoryClusteredJobs.put(
 				getFullName(jobName, groupName),
 				new ObjectValuePair<SchedulerResponse, TriggerState>(
 					schedulerResponse, triggerState));
@@ -698,17 +693,16 @@ public class ClusterSchedulerEngine
 			ClusterExecutorUtil.getLocalClusterNodeAddress());
 
 		for (ObjectValuePair<SchedulerResponse, TriggerState>
-				memorySingleInstanceJob : _memorySingleInstanceJobs.values()) {
+				memoryClusteredJob : _memoryClusteredJobs.values()) {
 
-			SchedulerResponse schedulerResponse =
-				memorySingleInstanceJob.getKey();
+			SchedulerResponse schedulerResponse = memoryClusteredJob.getKey();
 
 			_schedulerEngine.delete(
 				schedulerResponse.getJobName(),
 				schedulerResponse.getGroupName());
 		}
 
-		initMemorySingleInstanceJobs();
+		initMemoryClusteredJobs();
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Another node is now the memory scheduler master");
@@ -729,7 +723,7 @@ public class ClusterSchedulerEngine
 		if (groupName != null) {
 			StorageType storageType = getStorageType(groupName);
 
-			if (!storageType.equals(StorageType.MEMORY_SINGLE_INSTANCE)) {
+			if (!storageType.equals(StorageType.MEMORY_CLUSTERED)) {
 				return false;
 			}
 		}
@@ -770,11 +764,10 @@ public class ClusterSchedulerEngine
 
 		try {
 			for (ObjectValuePair<SchedulerResponse, TriggerState>
-					memorySingleInstanceJob :
-						_memorySingleInstanceJobs.values()) {
+					memoryClusteredJob : _memoryClusteredJobs.values()) {
 
 				SchedulerResponse schedulerResponse =
-					memorySingleInstanceJob.getKey();
+					memoryClusteredJob.getKey();
 
 				_schedulerEngine.schedule(
 					schedulerResponse.getTrigger(),
@@ -782,8 +775,7 @@ public class ClusterSchedulerEngine
 					schedulerResponse.getDestinationName(),
 					schedulerResponse.getMessage());
 
-				TriggerState triggerState =
-					memorySingleInstanceJob.getValue();
+				TriggerState triggerState = memoryClusteredJob.getValue();
 
 				if (triggerState.equals(TriggerState.PAUSED)) {
 					_schedulerEngine.pause(
@@ -801,24 +793,24 @@ public class ClusterSchedulerEngine
 		return lock;
 	}
 
-	protected void removeMemorySingleInstanceJobs(String groupName) {
+	protected void removeMemoryClusteredJobs(String groupName) {
 		Set<Map.Entry<String, ObjectValuePair<SchedulerResponse, TriggerState>>>
-			memorySingleInstanceJobs = _memorySingleInstanceJobs.entrySet();
+			memoryClusteredJobs = _memoryClusteredJobs.entrySet();
 
 		Iterator
 			<Map.Entry<String,
 				ObjectValuePair<SchedulerResponse, TriggerState>>> itr =
-					memorySingleInstanceJobs.iterator();
+					memoryClusteredJobs.iterator();
 
 		while (itr.hasNext()) {
 			Map.Entry <String, ObjectValuePair<SchedulerResponse, TriggerState>>
 				entry = itr.next();
 
 			ObjectValuePair<SchedulerResponse, TriggerState>
-				memorySingleInstanceJob = entry.getValue();
+				memoryClusteredJob = entry.getValue();
 
 			SchedulerResponse schedulerResponse =
-				memorySingleInstanceJob.getKey();
+				memoryClusteredJob.getKey();
 
 			if (groupName.equals(schedulerResponse.getGroupName())) {
 				itr.remove();
@@ -840,29 +832,29 @@ public class ClusterSchedulerEngine
 		}
 	}
 
-	protected void updateMemorySingleInstanceJob(
+	protected void updateMemoryClusteredJob(
 		String jobName, String groupName, TriggerState triggerState) {
 
 		ObjectValuePair<SchedulerResponse, TriggerState>
-			memorySingleInstanceJob = _memorySingleInstanceJobs.get(
+			memoryClusteredJob = _memoryClusteredJobs.get(
 				getFullName(jobName, groupName));
 
-		if (memorySingleInstanceJob != null) {
-			memorySingleInstanceJob.setValue(triggerState);
+		if (memoryClusteredJob != null) {
+			memoryClusteredJob.setValue(triggerState);
 		}
 	}
 
-	protected void updateMemorySingleInstanceJobs(
+	protected void updateMemoryClusteredJobs(
 		String groupName, TriggerState triggerState) {
 
 		for (ObjectValuePair<SchedulerResponse, TriggerState>
-				memorySingleInstanceJob : _memorySingleInstanceJobs.values()) {
+				memoryClusteredJob : _memoryClusteredJobs.values()) {
 
 			SchedulerResponse schedulerResponse =
-				memorySingleInstanceJob.getKey();
+				memoryClusteredJob.getKey();
 
 			if (groupName.equals(schedulerResponse.getGroupName())) {
-				memorySingleInstanceJob.setValue(triggerState);
+				memoryClusteredJob.setValue(triggerState);
 			}
 		}
 	}
@@ -889,7 +881,7 @@ public class ClusterSchedulerEngine
 	private volatile String _localClusterNodeAddress;
 	private volatile boolean _master;
 	private Map<String, ObjectValuePair<SchedulerResponse, TriggerState>>
-		_memorySingleInstanceJobs = new ConcurrentHashMap
+		_memoryClusteredJobs = new ConcurrentHashMap
 			<String, ObjectValuePair<SchedulerResponse, TriggerState>>();
 	private java.util.concurrent.locks.Lock _readLock;
 	private SchedulerEngine _schedulerEngine;
