@@ -36,6 +36,7 @@ import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -173,7 +174,11 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			WikiNode node = (WikiNode)portletDataContext.getZipEntryAsObject(
 				path);
 
-			WikiPortletDataHandlerImpl.importNode(portletDataContext, node);
+			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
+				portletDataContext, nodeElement);
+
+			WikiPortletDataHandlerImpl.importNode(
+				portletDataContext, node, expandoAttributes);
 		}
 
 		Element pagesElement = rootElement.element("pages");
@@ -191,8 +196,11 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			WikiPage page = (WikiPage)portletDataContext.getZipEntryAsObject(
 				path);
 
+			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
+				portletDataContext, pageElement);
+
 			WikiPortletDataHandlerImpl.importPage(
-				portletDataContext, pageElement, page);
+				portletDataContext, pageElement, page, expandoAttributes);
 		}
 
 		Map<Long, Long> nodePKs =

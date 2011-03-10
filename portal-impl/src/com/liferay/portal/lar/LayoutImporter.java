@@ -81,6 +81,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -303,6 +304,7 @@ public class LayoutImporter {
 		}
 
 		_portletImporter.readComments(context, rootElement);
+		_portletImporter.readExpandos(context);
 		_portletImporter.readLocks(context, rootElement);
 		_portletImporter.readRatings(context, rootElement);
 		_portletImporter.readTags(context, rootElement);
@@ -926,6 +928,19 @@ public class LayoutImporter {
 		}
 		else {
 			ImageLocalServiceUtil.deleteImage(importedLayout.getIconImageId());
+		}
+
+		String expandoPath = layoutElement.attributeValue("expando-path");
+
+		if (Validator.isNotNull(expandoPath)) {
+			Map<String, Serializable> expandoAttributes =
+				(Map<String, Serializable>)context.getZipEntryAsObject(
+					expandoPath);
+
+			ServiceContext serviceContext = new ServiceContext();
+			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
+
+			importedLayout.setExpandoBridgeAttributes(serviceContext);
 		}
 
 		LayoutUtil.update(importedLayout, false);

@@ -17,9 +17,12 @@ package com.liferay.portal.kernel.lar;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Lock;
+import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 
@@ -66,6 +69,9 @@ public interface PortletDataContext extends Serializable {
 	public void addComments(
 		String className, long classPK, List<MBMessage> messages);
 
+	public void addExpandoColumns(String resourceClassName)
+		throws PortalException, SystemException;
+
 	public void addLocks(Class<?> classObj, String key)
 		throws PortalException, SystemException;
 
@@ -99,6 +105,11 @@ public interface PortletDataContext extends Serializable {
 	public void addZipEntry(String name, StringBuilder sb)
 		throws SystemException;
 
+	public void addZipEntry(String path, Element element, BaseModel baseModel)
+		throws SystemException;
+
+	public String getExpandoPath(String path);
+
 	public Object fromXML(byte[] bytes);
 
 	public Object fromXML(String xml);
@@ -126,6 +137,8 @@ public interface PortletDataContext extends Serializable {
 	public String getDataStrategy();
 
 	public Date getEndDate();
+
+	public Map<String, List<ExpandoColumn>> getExpandoColumns();
 
 	public long getGroupId();
 
