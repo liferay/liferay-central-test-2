@@ -62,17 +62,17 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	public static final String TABLE_NAME = "MembershipRequest";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "membershipRequestId", Types.BIGINT },
+			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "createDate", Types.TIMESTAMP },
-			{ "groupId", Types.BIGINT },
 			{ "comments", Types.VARCHAR },
 			{ "replyComments", Types.VARCHAR },
 			{ "replyDate", Types.TIMESTAMP },
 			{ "replierUserId", Types.BIGINT },
 			{ "statusId", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table MembershipRequest (membershipRequestId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,groupId LONG,comments STRING null,replyComments STRING null,replyDate DATE null,replierUserId LONG,statusId INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table MembershipRequest (membershipRequestId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,comments STRING null,replyComments STRING null,replyDate DATE null,replierUserId LONG,statusId INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table MembershipRequest";
 	public static final String ORDER_BY_JPQL = " ORDER BY membershipRequest.createDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY MembershipRequest.createDate DESC";
@@ -96,10 +96,10 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		MembershipRequest model = new MembershipRequestImpl();
 
 		model.setMembershipRequestId(soapModel.getMembershipRequestId());
+		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setCreateDate(soapModel.getCreateDate());
-		model.setGroupId(soapModel.getGroupId());
 		model.setComments(soapModel.getComments());
 		model.setReplyComments(soapModel.getReplyComments());
 		model.setReplyDate(soapModel.getReplyDate());
@@ -152,6 +152,14 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		_membershipRequestId = membershipRequestId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -182,14 +190,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	public String getComments() {
@@ -280,13 +280,13 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 		membershipRequestImpl.setMembershipRequestId(getMembershipRequestId());
 
+		membershipRequestImpl.setGroupId(getGroupId());
+
 		membershipRequestImpl.setCompanyId(getCompanyId());
 
 		membershipRequestImpl.setUserId(getUserId());
 
 		membershipRequestImpl.setCreateDate(getCreateDate());
-
-		membershipRequestImpl.setGroupId(getGroupId());
 
 		membershipRequestImpl.setComments(getComments());
 
@@ -349,14 +349,14 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 		sb.append("{membershipRequestId=");
 		sb.append(getMembershipRequestId());
+		sb.append(", groupId=");
+		sb.append(getGroupId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", userId=");
 		sb.append(getUserId());
 		sb.append(", createDate=");
 		sb.append(getCreateDate());
-		sb.append(", groupId=");
-		sb.append(getGroupId());
 		sb.append(", comments=");
 		sb.append(getComments());
 		sb.append(", replyComments=");
@@ -384,6 +384,10 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		sb.append(getMembershipRequestId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>groupId</column-name><column-value><![CDATA[");
+		sb.append(getGroupId());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
 		sb.append(getCompanyId());
 		sb.append("]]></column-value></column>");
@@ -394,10 +398,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 		sb.append(
 			"<column><column-name>createDate</column-name><column-value><![CDATA[");
 		sb.append(getCreateDate());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>groupId</column-name><column-value><![CDATA[");
-		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>comments</column-name><column-value><![CDATA[");
@@ -426,11 +426,11 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	}
 
 	private long _membershipRequestId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
 	private Date _createDate;
-	private long _groupId;
 	private String _comments;
 	private String _replyComments;
 	private Date _replyDate;

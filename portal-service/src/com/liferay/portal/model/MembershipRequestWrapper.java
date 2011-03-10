@@ -65,6 +65,24 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	}
 
 	/**
+	* Gets the group ID of this membership request.
+	*
+	* @return the group ID of this membership request
+	*/
+	public long getGroupId() {
+		return _membershipRequest.getGroupId();
+	}
+
+	/**
+	* Sets the group ID of this membership request.
+	*
+	* @param groupId the group ID of this membership request
+	*/
+	public void setGroupId(long groupId) {
+		_membershipRequest.setGroupId(groupId);
+	}
+
+	/**
 	* Gets the company ID of this membership request.
 	*
 	* @return the company ID of this membership request
@@ -136,24 +154,6 @@ public class MembershipRequestWrapper implements MembershipRequest {
 	*/
 	public void setCreateDate(java.util.Date createDate) {
 		_membershipRequest.setCreateDate(createDate);
-	}
-
-	/**
-	* Gets the group ID of this membership request.
-	*
-	* @return the group ID of this membership request
-	*/
-	public long getGroupId() {
-		return _membershipRequest.getGroupId();
-	}
-
-	/**
-	* Sets the group ID of this membership request.
-	*
-	* @param groupId the group ID of this membership request
-	*/
-	public void setGroupId(long groupId) {
-		_membershipRequest.setGroupId(groupId);
 	}
 
 	/**

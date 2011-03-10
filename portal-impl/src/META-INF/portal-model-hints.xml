@@ -389,10 +389,10 @@
 	</model>
 	<model name="com.liferay.portal.model.MembershipRequest">
 		<field name="membershipRequestId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
-		<field name="groupId" type="long" />
 		<field name="comments" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>

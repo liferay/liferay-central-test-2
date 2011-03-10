@@ -182,7 +182,7 @@ String tabs1 = (String)objArray[1];
 								url="<%= joinURL %>"
 							/>
 						</c:when>
-						<c:when test="<%= group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED && !MembershipRequestLocalServiceUtil.hasRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) %>">
+						<c:when test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) && !MembershipRequestLocalServiceUtil.hasMembershipRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) %>">
 							<portlet:renderURL var="membershipRequestURL">
 								<portlet:param name="struts_action" value="/communities/post_membership_request" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />

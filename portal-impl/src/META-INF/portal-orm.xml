@@ -441,12 +441,12 @@
 	<mapped-superclass class="com.liferay.portal.model.impl.MembershipRequestModelImpl">
 		<attributes>
 			<id name="membershipRequestId" />
+			<basic name="groupId" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="createDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="groupId" />
 			<basic name="comments" />
 			<basic name="replyComments" />
 			<basic name="replyDate">

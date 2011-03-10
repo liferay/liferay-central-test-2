@@ -64,10 +64,10 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 
 		MembershipRequest newMembershipRequest = _persistence.create(pk);
 
+		newMembershipRequest.setGroupId(nextLong());
 		newMembershipRequest.setCompanyId(nextLong());
 		newMembershipRequest.setUserId(nextLong());
 		newMembershipRequest.setCreateDate(nextDate());
-		newMembershipRequest.setGroupId(nextLong());
 		newMembershipRequest.setComments(randomString());
 		newMembershipRequest.setReplyComments(randomString());
 		newMembershipRequest.setReplyDate(nextDate());
@@ -80,6 +80,8 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingMembershipRequest.getMembershipRequestId(),
 			newMembershipRequest.getMembershipRequestId());
+		assertEquals(existingMembershipRequest.getGroupId(),
+			newMembershipRequest.getGroupId());
 		assertEquals(existingMembershipRequest.getCompanyId(),
 			newMembershipRequest.getCompanyId());
 		assertEquals(existingMembershipRequest.getUserId(),
@@ -87,8 +89,6 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(Time.getShortTimestamp(
 				existingMembershipRequest.getCreateDate()),
 			Time.getShortTimestamp(newMembershipRequest.getCreateDate()));
-		assertEquals(existingMembershipRequest.getGroupId(),
-			newMembershipRequest.getGroupId());
 		assertEquals(existingMembershipRequest.getComments(),
 			newMembershipRequest.getComments());
 		assertEquals(existingMembershipRequest.getReplyComments(),
@@ -176,10 +176,10 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 
 		MembershipRequest membershipRequest = _persistence.create(pk);
 
+		membershipRequest.setGroupId(nextLong());
 		membershipRequest.setCompanyId(nextLong());
 		membershipRequest.setUserId(nextLong());
 		membershipRequest.setCreateDate(nextDate());
-		membershipRequest.setGroupId(nextLong());
 		membershipRequest.setComments(randomString());
 		membershipRequest.setReplyComments(randomString());
 		membershipRequest.setReplyDate(nextDate());

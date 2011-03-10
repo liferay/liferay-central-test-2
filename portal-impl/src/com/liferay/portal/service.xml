@@ -816,6 +816,10 @@
 
 		<column name="membershipRequestId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -824,7 +828,6 @@
 
 		<!-- Other fields -->
 
-		<column name="groupId" type="long" />
 		<column name="comments" type="String" />
 		<column name="replyComments" type="String" />
 		<column name="replyDate" type="Date" />
@@ -849,9 +852,9 @@
 			<finder-column name="groupId" />
 			<finder-column name="statusId" />
 		</finder>
-		<finder name="U_G_S" return-type="Collection">
-			<finder-column name="userId" />
+		<finder name="G_U_S" return-type="Collection">
 			<finder-column name="groupId" />
+			<finder-column name="userId" />
 			<finder-column name="statusId" />
 		</finder>
 

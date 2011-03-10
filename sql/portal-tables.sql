@@ -1005,10 +1005,10 @@ create table MBThread (
 
 create table MembershipRequest (
 	membershipRequestId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	createDate DATE null,
-	groupId LONG,
 	comments STRING null,
 	replyComments STRING null,
 	replyDate DATE null,

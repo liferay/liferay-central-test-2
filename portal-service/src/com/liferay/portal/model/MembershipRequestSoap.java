@@ -32,10 +32,10 @@ public class MembershipRequestSoap implements Serializable {
 		MembershipRequestSoap soapModel = new MembershipRequestSoap();
 
 		soapModel.setMembershipRequestId(model.getMembershipRequestId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setCreateDate(model.getCreateDate());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setComments(model.getComments());
 		soapModel.setReplyComments(model.getReplyComments());
 		soapModel.setReplyDate(model.getReplyDate());
@@ -104,6 +104,14 @@ public class MembershipRequestSoap implements Serializable {
 		_membershipRequestId = membershipRequestId;
 	}
 
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
+
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -126,14 +134,6 @@ public class MembershipRequestSoap implements Serializable {
 
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		_groupId = groupId;
 	}
 
 	public String getComments() {
@@ -177,10 +177,10 @@ public class MembershipRequestSoap implements Serializable {
 	}
 
 	private long _membershipRequestId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private Date _createDate;
-	private long _groupId;
 	private String _comments;
 	private String _replyComments;
 	private Date _replyDate;

@@ -390,8 +390,8 @@ create index IX_E1E7142B on MBThread (groupId, status);
 
 create index IX_8A1CC4B on MembershipRequest (groupId);
 create index IX_C28C72EC on MembershipRequest (groupId, statusId);
+create index IX_35AA8FA6 on MembershipRequest (groupId, userId, statusId);
 create index IX_66D70879 on MembershipRequest (userId);
-create index IX_60D6BB72 on MembershipRequest (userId, groupId, statusId);
 
 create index IX_A425F71A on OrgGroupPermission (groupId);
 create index IX_6C53DA4E on OrgGroupPermission (permissionId);

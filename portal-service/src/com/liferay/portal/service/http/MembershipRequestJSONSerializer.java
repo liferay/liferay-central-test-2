@@ -32,6 +32,7 @@ public class MembershipRequestJSONSerializer {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 		jsonObject.put("membershipRequestId", model.getMembershipRequestId());
+		jsonObject.put("groupId", model.getGroupId());
 		jsonObject.put("companyId", model.getCompanyId());
 		jsonObject.put("userId", model.getUserId());
 
@@ -44,7 +45,6 @@ public class MembershipRequestJSONSerializer {
 		}
 
 		jsonObject.put("createDate", createDateJSON);
-		jsonObject.put("groupId", model.getGroupId());
 		jsonObject.put("comments", model.getComments());
 		jsonObject.put("replyComments", model.getReplyComments());
 

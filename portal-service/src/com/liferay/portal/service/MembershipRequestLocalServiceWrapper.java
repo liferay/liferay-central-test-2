@@ -266,10 +266,10 @@ public class MembershipRequestLocalServiceWrapper
 		_membershipRequestLocalService.deleteMembershipRequestsByUserId(userId);
 	}
 
-	public boolean hasRequest(long userId, long groupId, int statusId)
+	public boolean hasMembershipRequest(long userId, long groupId, int statusId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _membershipRequestLocalService.hasRequest(userId, groupId,
-			statusId);
+		return _membershipRequestLocalService.hasMembershipRequest(userId,
+			groupId, statusId);
 	}
 
 	public java.util.List<com.liferay.portal.model.MembershipRequest> search(

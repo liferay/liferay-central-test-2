@@ -73,6 +73,20 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	public void setMembershipRequestId(long membershipRequestId);
 
 	/**
+	 * Gets the group ID of this membership request.
+	 *
+	 * @return the group ID of this membership request
+	 */
+	public long getGroupId();
+
+	/**
+	 * Sets the group ID of this membership request.
+	 *
+	 * @param groupId the group ID of this membership request
+	 */
+	public void setGroupId(long groupId);
+
+	/**
 	 * Gets the company ID of this membership request.
 	 *
 	 * @return the company ID of this membership request
@@ -128,20 +142,6 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest> {
 	 * @param createDate the create date of this membership request
 	 */
 	public void setCreateDate(Date createDate);
-
-	/**
-	 * Gets the group ID of this membership request.
-	 *
-	 * @return the group ID of this membership request
-	 */
-	public long getGroupId();
-
-	/**
-	 * Sets the group ID of this membership request.
-	 *
-	 * @param groupId the group ID of this membership request
-	 */
-	public void setGroupId(long groupId);
 
 	/**
 	 * Gets the comments of this membership request.

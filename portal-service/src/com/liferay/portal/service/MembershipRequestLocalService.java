@@ -239,7 +239,7 @@ public interface MembershipRequestLocalService {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean hasRequest(long userId, long groupId, int statusId)
+	public boolean hasMembershipRequest(long userId, long groupId, int statusId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

@@ -134,13 +134,13 @@ public class MembershipRequestLocalServiceImpl
 			membershipRequestId);
 	}
 
-	public boolean hasRequest(long userId, long groupId, int statusId)
+	public boolean hasMembershipRequest(long userId, long groupId, int statusId)
 		throws SystemException {
 
-		List<MembershipRequest> requests =
-			membershipRequestPersistence.findByU_G_S(userId, groupId, statusId);
+		List<MembershipRequest> membershipRequests =
+			membershipRequestPersistence.findByG_U_S(groupId, userId, statusId);
 
-		if (requests.isEmpty()) {
+		if (membershipRequests.isEmpty()) {
 			return false;
 		}
 		else {

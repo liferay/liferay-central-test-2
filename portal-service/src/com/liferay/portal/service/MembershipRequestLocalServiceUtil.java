@@ -270,9 +270,10 @@ public class MembershipRequestLocalServiceUtil {
 		getService().deleteMembershipRequestsByUserId(userId);
 	}
 
-	public static boolean hasRequest(long userId, long groupId, int statusId)
+	public static boolean hasMembershipRequest(long userId, long groupId,
+		int statusId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().hasRequest(userId, groupId, statusId);
+		return getService().hasMembershipRequest(userId, groupId, statusId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> search(
