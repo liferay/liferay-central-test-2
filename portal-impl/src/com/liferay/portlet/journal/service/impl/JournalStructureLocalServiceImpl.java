@@ -483,7 +483,7 @@ public class JournalStructureLocalServiceImpl
 				throw new StructureXsdException();
 			}
 			else {
-				char[] c = elName.toCharArray();
+				char[] c = elType.toCharArray();
 
 				for (int i = 0; i < c.length; i++) {
 					if ((!Validator.isChar(c[i])) &&

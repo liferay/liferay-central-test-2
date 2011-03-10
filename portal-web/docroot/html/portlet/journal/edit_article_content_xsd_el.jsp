@@ -241,7 +241,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 								}
 							%>
 
-								<aui:option label="<%= listElName %>" name="<%= listElValue %>" selected="<%= elContent.equals(listElValue) %>" value="<%= listElValue %>" />
+								<aui:option label="<%= listElName %>" selected="<%= elContent.equals(listElValue) %>" value="<%= listElValue %>" />
 
 							<%
 							}
