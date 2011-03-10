@@ -433,7 +433,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 				trigger.getStartDate(), trigger.getEndDate(),
 				trigger.getTriggerContent());
 
-			update(trigger, scheduler);
+			update(scheduler, trigger);
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to update trigger", e);
@@ -640,7 +640,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 			message.put(NEXT_FIRE_TIME, trigger.getNextFireTime());
 			message.put(PREVIOUS_FIRE_TIME, trigger.getPreviousFireTime());
 			message.put(START_TIME, trigger.getStartTime());
-			
+
 			if (CronTrigger.class.isAssignableFrom(trigger.getClass())) {
 
 				CronTrigger cronTrigger = CronTrigger.class.cast(trigger);
@@ -933,8 +933,8 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 	}
 
 	protected void update(
-			com.liferay.portal.kernel.scheduler.Trigger trigger,
-			Scheduler scheduler)
+			Scheduler scheduler,
+			com.liferay.portal.kernel.scheduler.Trigger trigger)
 		throws Exception {
 
 		Trigger quartzTrigger = getQuartzTrigger(trigger);

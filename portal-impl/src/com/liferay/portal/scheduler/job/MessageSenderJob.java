@@ -35,7 +35,6 @@ import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.Scheduler;
-import org.quartz.SchedulerContext;
 import org.quartz.Trigger;
 
 /**
