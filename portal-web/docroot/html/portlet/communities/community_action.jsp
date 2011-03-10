@@ -195,7 +195,7 @@ String tabs1 = (String)objArray[1];
 								url="<%= membershipRequestURL %>"
 							/>
 						</c:when>
-						<c:when test="<%= MembershipRequestLocalServiceUtil.hasRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) %>">
+						<c:when test="<%= MembershipRequestLocalServiceUtil.hasMembershipRequest(user.getUserId(), group.getGroupId(), MembershipRequestConstants.STATUS_PENDING) %>">
 							<liferay-ui:icon
 								image="checked"
 								message="membership-requested"
