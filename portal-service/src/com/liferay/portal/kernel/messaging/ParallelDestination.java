@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.concurrent.ThreadPoolExecutor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CentralizedThreadLocal;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 
 import java.util.Set;
 
@@ -54,6 +55,8 @@ public class ParallelDestination extends BaseAsyncDestination {
 		Set<MessageListener> messageListeners, final Message message) {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
+
+		message.put("companyId", CompanyThreadLocal.getCompanyId());
 
 		for (final MessageListener messageListener : messageListeners) {
 			Runnable runnable = new MessageRunnable(message) {

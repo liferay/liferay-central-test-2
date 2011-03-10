@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 
 /**
  * @author Shuyang Zhou
@@ -30,6 +31,10 @@ public class BufferedIncrementMessageListener extends BaseMessageListener {
 		BatchablePipe<String, BufferedIncreasableEntry> batchablePipe =
 			(BatchablePipe<String, BufferedIncreasableEntry>)
 				message.getPayload();
+
+		long companyId = message.getLong("companyId");
+
+		CompanyThreadLocal.setCompanyId(companyId);
 
 		while (true) {
 			BufferedIncreasableEntry bufferedIncreasableEntry =
