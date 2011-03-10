@@ -122,8 +122,9 @@ public class EhcachePortalCacheManager implements PortalCacheManager {
 		portalCache.setDebug(_debug);
 
 		if (PropsValues.TRANSACTIONAL_CACHE_ENABLED &&
-			(name.startsWith(FinderCacheImpl.CACHE_NAME) ||
-				name.startsWith(EntityCacheImpl.CACHE_NAME))) {
+			(name.startsWith(EntityCacheImpl.CACHE_NAME) ||
+			 name.startsWith(FinderCacheImpl.CACHE_NAME))) {
+
 			portalCache = new TransactionalPortalCache(portalCache);
 		}
 
