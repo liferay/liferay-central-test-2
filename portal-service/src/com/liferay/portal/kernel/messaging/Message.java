@@ -28,6 +28,15 @@ import java.util.Map;
  */
 public class Message implements Serializable {
 
+	public boolean contains(String key) {
+		if (_values == null) {
+			return false;
+		}
+		else {
+			return _values.containsKey(key);
+		}
+	}
+
 	public Object get(String key) {
 		if (_values == null) {
 			return null;
