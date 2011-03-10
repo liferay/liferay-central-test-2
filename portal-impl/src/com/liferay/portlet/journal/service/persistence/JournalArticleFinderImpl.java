@@ -560,6 +560,9 @@ public class JournalArticleFinderImpl
 					sql, JournalArticle.class.getName(),
 					"JournalArticle.resourcePrimKey", "JournalArticle.userId",
 					groupId);
+
+				sql = StringUtil.replace(
+					sql, "(companyId", "(JournalArticle.companyId");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -695,6 +698,9 @@ public class JournalArticleFinderImpl
 					sql, JournalArticle.class.getName(),
 					"JournalArticle.resourcePrimKey", "JournalArticle.userId",
 					groupId);
+
+				sql = StringUtil.replace(
+					sql, "(companyId", "(JournalArticle.companyId");
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
