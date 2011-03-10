@@ -619,24 +619,12 @@ public class IGPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected static String getImportFolderPath(
 		PortletDataContext portletDataContext, long folderId) {
 
-		return getImportFolderPath(portletDataContext, folderId, false);
-	}
-
-	protected static String getImportFolderPath(
-		PortletDataContext portletDataContext, long folderId,
-		boolean expandoAttributes) {
-
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(
 			portletDataContext.getSourcePortletPath(PortletKeys.IMAGE_GALLERY));
 		sb.append("/folders/");
 		sb.append(folderId);
-
-		if (expandoAttributes) {
-			sb.append("-expando");
-		}
-
 		sb.append(".xml");
 
 		return sb.toString();
