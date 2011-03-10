@@ -50,8 +50,7 @@ public class GroupSearch extends SearchContainer<Group> {
 		orderableHeaders.put("type", "type");
 	}
 
-	public static final String EMPTY_RESULTS_MESSAGE =
-		"no-sites-were-found";
+	public static final String EMPTY_RESULTS_MESSAGE = "no-sites-were-found";
 
 	public GroupSearch(PortletRequest portletRequest, PortletURL iteratorURL) {
 		super(

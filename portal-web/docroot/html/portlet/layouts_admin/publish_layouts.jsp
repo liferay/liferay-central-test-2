@@ -241,7 +241,6 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		</c:if>
 
 		<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
-
 			<liferay-ui:message arguments="<%= ree.getGroupId() %>" key="no-site-exists-on-the-remote-server-with-site-id-x" />
 		</c:if>
 
