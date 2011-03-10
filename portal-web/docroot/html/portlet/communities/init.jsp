@@ -90,10 +90,10 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil" %>
 
 <%
+long[] classNameIds = new long[] {PortalUtil.getClassNameId(Group.class), PortalUtil.getClassNameId(Organization.class)};
+
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
-
-long[] classNameIds = new long[] {PortalUtil.getClassNameId(Group.class), PortalUtil.getClassNameId(Organization.class)};
 %>
 
 <%@ include file="/html/portlet/communities/init-ext.jsp" %>
