@@ -54,7 +54,7 @@ if (selLayout != null) {
 			}
 		%>
 
-			<aui:column cssClass="lfr-layout-template-column" columnWidth="<%= 100 / _COLUMNS_COUNT  %>">
+			<aui:column columnWidth="<%= 100 / _COLUMNS_COUNT %>" cssClass="lfr-layout-template-column">
 
 				<%
 				for (int k = 0; k < columnLayoutTemplatesCount; k++) {
