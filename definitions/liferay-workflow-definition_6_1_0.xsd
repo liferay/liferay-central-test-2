@@ -79,6 +79,7 @@
 				<xs:element ref="name" />
 				<xs:element ref="description" minOccurs="0" />
 				<xs:element ref="actions" minOccurs="0" />
+				<xs:element name="requires-all" type="xs:boolean" minOccurs="0" default="false" />
 				<xs:element ref="timers" minOccurs="0" />
 				<xs:element ref="transitions" />
 			</xs:sequence>
@@ -90,6 +91,7 @@
 				<xs:element ref="name" />
 				<xs:element ref="description" minOccurs="0" />
 				<xs:element ref="actions" minOccurs="0" />
+				<xs:element ref="description" minOccurs="0" />
 				<xs:element ref="timers" minOccurs="0" />
 				<xs:element ref="transitions" />
 			</xs:sequence>

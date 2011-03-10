@@ -39,10 +39,8 @@ import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 
 import java.io.File;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
@@ -93,8 +91,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		portletDataContext.addExpandoColumns(BlogsEntry.class.getName());
-
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.blogs", portletDataContext.getScopeGroupId());
 
@@ -138,11 +134,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			BlogsEntry entry =
 				(BlogsEntry)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, entryElement);
-
-			importEntry(
-				portletDataContext, entryElement, entry, expandoAttributes);
+			importEntry(portletDataContext, entryElement, entry);
 		}
 
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "wordpress")) {
@@ -213,7 +205,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				BlogsEntry.class, entry.getEntryId());
 		}
 
-		portletDataContext.addZipEntry(path, entryElement, entry);
+		portletDataContext.addZipEntry(path, entry);
 	}
 
 	protected String getEntryPath(
@@ -247,7 +239,7 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	protected void importEntry(
 			PortletDataContext portletDataContext, Element entryElement,
-			BlogsEntry entry, Map<String, Serializable> expandoAttributes)
+			BlogsEntry entry)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(entry.getUserUuid());
@@ -293,10 +285,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(entry.getCreateDate());
 		serviceContext.setModifiedDate(entry.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
-
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
 
 		if (status != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
