@@ -49,7 +49,6 @@ import com.liferay.portlet.wiki.util.comparator.PageVersionComparator;
 
 import java.io.InputStream;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -68,8 +67,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element pagesElement, WikiNode node)
 		throws Exception {
 
-		portletDataContext.addExpandoColumns(WikiNode.class.getName());
-
 		if (portletDataContext.isWithinDateRange(node.getModifiedDate())) {
 			String path = getNodePath(portletDataContext, node);
 
@@ -83,7 +80,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				portletDataContext.addPermissions(
 					WikiNode.class, node.getNodeId());
 
-				portletDataContext.addZipEntry(path, nodeElement, node);
+				portletDataContext.addZipEntry(path, node);
 			}
 		}
 
@@ -108,8 +105,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	public static void importNode(
-			PortletDataContext portletDataContext, WikiNode node,
-			Map<String, Serializable> expandoAttributes)
+			PortletDataContext portletDataContext, WikiNode node)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(node.getUserUuid());
@@ -121,10 +117,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(node.getCreateDate());
 		serviceContext.setModifiedDate(node.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
-
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
 
 		WikiNode importedNode = null;
 
@@ -184,7 +176,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void importPage(
 			PortletDataContext portletDataContext, Element pageElement,
-			WikiPage page, Map<String, Serializable> expandoAttributes)
+			WikiPage page)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(page.getUserUuid());
@@ -226,10 +218,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setAssetTagNames(assetTagNames);
 		serviceContext.setCreateDate(page.getCreateDate());
 		serviceContext.setModifiedDate(page.getModifiedDate());
-
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
 
 		if (page.getStatus() != WorkflowConstants.STATUS_APPROVED) {
 			serviceContext.setWorkflowAction(
@@ -374,7 +362,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		portletDataContext.addPermissions(WikiNode.class, node.getNodeId());
 
-		portletDataContext.addZipEntry(path, nodeElement, node);
+		portletDataContext.addZipEntry(path, node);
 	}
 
 	protected static void exportPage(
@@ -388,8 +376,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (!portletDataContext.isWithinDateRange(page.getModifiedDate())) {
 			return;
 		}
-
-		portletDataContext.addExpandoColumns(WikiPage.class.getName());
 
 		String path = getPagePath(portletDataContext, page);
 
@@ -481,7 +467,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 				page.setAttachmentsDir(page.getAttachmentsDir());
 			}
 
-			portletDataContext.addZipEntry(path, pageElement, page);
+			portletDataContext.addZipEntry(path, page);
 		}
 
 		exportNode(portletDataContext, nodesElement, page.getNodeId());
@@ -564,10 +550,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		portletDataContext.addExpandoColumns(WikiPage.class.getName());
-
-		portletDataContext.addExpandoColumns(WikiNode.class.getName());
-
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.wiki", portletDataContext.getScopeGroupId());
 
@@ -616,10 +598,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			WikiNode node = (WikiNode)portletDataContext.getZipEntryAsObject(
 				path);
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, nodeElement);
-
-			importNode(portletDataContext, node, expandoAttributes);
+			importNode(portletDataContext, node);
 		}
 
 		Element pagesElement = rootElement.element("pages");
@@ -637,11 +616,7 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			WikiPage page = (WikiPage)portletDataContext.getZipEntryAsObject(
 				path);
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, pageElement);
-
-			importPage(
-				portletDataContext, pageElement, page, expandoAttributes);
+			importPage(portletDataContext, pageElement, page);
 		}
 
 		Map<Long, Long> nodePKs =

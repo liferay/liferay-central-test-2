@@ -31,11 +31,9 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
@@ -80,8 +78,6 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
-
-		portletDataContext.addExpandoColumns(CalEvent.class.getName());
 
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.calendar",
@@ -128,10 +124,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			CalEvent event = (CalEvent)portletDataContext.getZipEntryAsObject(
 				path);
 
-			Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-				portletDataContext, eventElement);
-
-			importEvent(portletDataContext, event, expandoAttributes);
+			importEvent(portletDataContext, event);
 		}
 
 		return null;
@@ -178,7 +171,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 			portletDataContext.addAssetTags(CalEvent.class, event.getEventId());
 		}
 
-		portletDataContext.addZipEntry(path, eventElement, event);
+		portletDataContext.addZipEntry(path, event);
 	}
 
 	protected String getEventPath(
@@ -195,8 +188,7 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected void importEvent(
-			PortletDataContext portletDataContext, CalEvent event,
-			Map<String, Serializable> expandoAttributes)
+			PortletDataContext portletDataContext, CalEvent event)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(event.getUserUuid());
@@ -263,10 +255,6 @@ public class CalendarPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(event.getCreateDate());
 		serviceContext.setModifiedDate(event.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
-
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
 
 		CalEvent importedEvent = null;
 
