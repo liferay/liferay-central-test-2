@@ -89,6 +89,7 @@ AUI().add(
 					var chunk = response[i].payload;
 
 					var chunkData = chunk.data;
+
 					var portletId = chunk.portletId;
 
 					var portlet = _portlets[portletId];
