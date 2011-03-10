@@ -12,11 +12,9 @@
  * details.
  */
 
-package com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.webcontent;
+package com.liferay.portalweb.portal.dbupgrade.sampledata605.webcontent.journalfeed;
 
 import com.liferay.portalweb.portal.BaseTests;
-import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.webcontent.imageassociation.ImageAssociationTests;
-import com.liferay.portalweb.portal.dbupgrade.viewsampledatalatest.webcontent.journalfeed.JournalFeedTests;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
@@ -24,13 +22,17 @@ import junit.framework.TestSuite;
 /**
  * @author Brian Wing Shun Chan
  */
-public class WebContent523LatestTests extends BaseTests {
+public class WCJournalFeedTests extends BaseTests {
 
 	public static Test suite() {
 		TestSuite testSuite = new TestSuite();
 
-		testSuite.addTest(ImageAssociationTests.suite());
-		testSuite.addTest(JournalFeedTests.suite());
+		testSuite.addTestSuite(AddCommunityWCJournalFeedTest.class);
+		testSuite.addTestSuite(AddPageWCTest.class);
+		testSuite.addTestSuite(AddPortletWCTest.class);
+		testSuite.addTestSuite(AddWCContentTest.class);
+		testSuite.addTestSuite(AddWCJournalFeedTest.class);
+		testSuite.addTestSuite(ViewWCJournalFeedURLTest.class);
 
 		return testSuite;
 	}
