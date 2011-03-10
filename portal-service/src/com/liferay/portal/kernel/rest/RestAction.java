@@ -19,6 +19,8 @@ package com.liferay.portal.kernel.rest;
  */
 public interface RestAction {
 
+	public Class getReturnType();
+
 	public Object invoke() throws Exception;
 
 }

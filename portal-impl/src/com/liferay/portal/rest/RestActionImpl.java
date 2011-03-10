@@ -32,6 +32,10 @@ public class RestActionImpl implements RestAction {
 		_pathChunks = pathChunks;
 	}
 
+	public Class getReturnType() {
+		return _restActionConfig.getActionMethod().getReturnType();
+	}
+
 	public Object invoke() throws Exception {
 		Class<?> actionClass = _restActionConfig.getActionClass();
 
