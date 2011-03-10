@@ -25,6 +25,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 
 import java.util.List;
@@ -76,6 +78,10 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
+
+		portletDataContext.addExpandoColumns(DLFileEntry.class.getName());
+
+		portletDataContext.addExpandoColumns(DLFolder.class.getName());
 
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.documentlibrary",
