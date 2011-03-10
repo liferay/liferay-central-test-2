@@ -104,10 +104,6 @@
 		.lfr-page-layouts-content {
 			padding-left: 1em;
 		}
-
-		.ie6 .lfr-layout-template-column {
-			width: 30%;
-		}
 	}
 
 	.theme-entry {
@@ -356,5 +352,9 @@
 
 	.lfr-available-themes h3 {
 		height: 1%;
+	}
+
+	.lfr-page-layouts .lfr-layout-template-column {
+		width: 30%;
 	}
 }
