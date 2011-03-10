@@ -54,7 +54,9 @@ public class ParallelDestination extends BaseAsyncDestination {
 	protected void dispatch(
 		Set<MessageListener> messageListeners, final Message message) {
 
-		message.put("companyId", CompanyThreadLocal.getCompanyId());
+		if (!message.contains("companyId")) {
+			message.put("companyId", CompanyThreadLocal.getCompanyId());
+		}
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
