@@ -37,8 +37,6 @@ AUI().add(
 						}
 
 						if (!instance._currentPopup) {
-							var viewportRegion = A.getBody().get('viewportRegion');
-
 							instance._currentPopup = new A.Dialog(
 								{
 									on: {
@@ -49,8 +47,7 @@ AUI().add(
 										}
 									},
 									title: Liferay.Language.get('look-and-feel'),
-									width: 820,
-									xy: [viewportRegion.left + 20, viewportRegion.top + 20]
+									width: 820
 								}
 							).render();
 
@@ -91,6 +88,7 @@ AUI().add(
 						}
 
 						instance._currentPopup.show();
+						instance._currentPopup.alignToViewport(20, 20);
 						instance._currentPopup.loadingmask.show();
 						instance._currentPopup.io.start();
 					}
