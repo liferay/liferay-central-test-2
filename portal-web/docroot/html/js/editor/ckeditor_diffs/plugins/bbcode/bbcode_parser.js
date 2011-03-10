@@ -84,10 +84,12 @@
 				instance._openTags = openTags;
 			}
 
+			var process = instance._process;
+
 			var result = data.replace(
 				REGEX_MAIN,
-				function(matchedStr, crlf, openTag, tagOption, closeTag, offset, str) {
-					return instance._process(matchedStr, crlf, openTag, tagOption, closeTag, offset, str);
+				function() {
+					return process.apply(instance, arguments);
 				}
 			);
 
