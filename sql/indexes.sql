@@ -481,10 +481,8 @@ create index IX_AACAFF40 on ResourceCode (name);
 create index IX_60B99860 on ResourcePermission (companyId, name, scope);
 create index IX_2200AA69 on ResourcePermission (companyId, name, scope, primKey);
 create unique index IX_8D83D0CE on ResourcePermission (companyId, name, scope, primKey, roleId);
-create index IX_7D710A1D on ResourcePermission (name, roleId, scope);
-create index IX_89C4D322 on ResourcePermission (name, scope);
+create index IX_C8143087 on ResourcePermission (name, scope, roleId);
 create index IX_A37A0588 on ResourcePermission (roleId);
-create index IX_2F80C17C on ResourcePermission (roleId, scope);
 
 create index IX_2578FBD3 on Resource_ (codeId);
 create unique index IX_67DE7856 on Resource_ (codeId, primKey);
