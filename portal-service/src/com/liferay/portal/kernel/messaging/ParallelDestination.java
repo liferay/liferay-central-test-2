@@ -54,9 +54,9 @@ public class ParallelDestination extends BaseAsyncDestination {
 	protected void dispatch(
 		Set<MessageListener> messageListeners, final Message message) {
 
-		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
-
 		message.put("companyId", CompanyThreadLocal.getCompanyId());
+
+		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
 		for (final MessageListener messageListener : messageListeners) {
 			Runnable runnable = new MessageRunnable(message) {

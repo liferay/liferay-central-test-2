@@ -28,13 +28,13 @@ public class BufferedIncrementMessageListener extends BaseMessageListener {
 
 	@SuppressWarnings("rawtypes")
 	protected void doReceive(Message message) throws Exception {
-		BatchablePipe<String, BufferedIncreasableEntry> batchablePipe =
-			(BatchablePipe<String, BufferedIncreasableEntry>)
-				message.getPayload();
-
 		long companyId = message.getLong("companyId");
 
 		CompanyThreadLocal.setCompanyId(companyId);
+
+		BatchablePipe<String, BufferedIncreasableEntry> batchablePipe =
+			(BatchablePipe<String, BufferedIncreasableEntry>)
+				message.getPayload();
 
 		while (true) {
 			BufferedIncreasableEntry bufferedIncreasableEntry =
