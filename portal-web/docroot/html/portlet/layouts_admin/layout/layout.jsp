@@ -49,12 +49,12 @@ if (selLayout != null) {
 		for (int j = 0; j < _COLUMNS_COUNT; j++) {
 			int columnLayoutTemplatesCount = layoutTemplates.size() / _COLUMNS_COUNT;
 
-			if (j < layoutTemplates.size() % _COLUMNS_COUNT) {
+			if (j < (layoutTemplates.size() % _COLUMNS_COUNT)) {
 				columnLayoutTemplatesCount++;
 			}
 		%>
 
-			<aui:column cssClass="lfr-layout-template-column">
+			<aui:column cssClass="lfr-layout-template-column" columnWidth="<%= 100 / _COLUMNS_COUNT  %>">
 
 				<%
 				for (int k = 0; k < columnLayoutTemplatesCount; k++) {
@@ -62,7 +62,7 @@ if (selLayout != null) {
 				%>
 
 					<div class="lfr-layout-template">
-						<img alt="" class="modify-link" onclick="document.getElementById('<portlet:namespace />layoutTemplateId<%= i %>').checked = true;" src="<%= layoutTemplate.getStaticResourcePath() %><%= layoutTemplate.getThumbnailPath() %>" />
+						<img alt="" class='layout-template-entry modify-link <%= selLayoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "layout-selected" : StringPool.BLANK %>' onclick="document.getElementById('<portlet:namespace />layoutTemplateId<%= i %>').checked = true;" src="<%= layoutTemplate.getStaticResourcePath() %><%= layoutTemplate.getThumbnailPath() %>" />
 
 						<aui:input checked="<%= selLayoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) %>" id='<%= "layoutTemplateId" + i %>' label="<%= layoutTemplate.getName() %>" name="layoutTemplateId" type="radio" value="<%= layoutTemplate.getLayoutTemplateId() %>" />
 					</div>
@@ -82,5 +82,5 @@ if (selLayout != null) {
 </aui:fieldset>
 
 <%!
-private static final int _COLUMNS_COUNT = 4;
+private static final int _COLUMNS_COUNT = 3;
 %>

@@ -569,7 +569,8 @@ AUI().add(
 							Util.openWindow(
 								{
 									dialog: {
-										align: Util.Window.ALIGN_CENTER
+										align: Util.Window.ALIGN_CENTER,
+										width: 820
 									},
 									id: item.guid(),
 									title: title,

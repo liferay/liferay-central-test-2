@@ -63,6 +63,53 @@
 		}
 	}
 
+	.lfr-page-layouts {
+		.lfr-layout-template {
+			height: 150px;
+			margin: 0 0 1em;
+			text-align: center;
+
+			label {
+            	width: 65px;
+			}
+
+			img {
+				margin: 4px;
+
+				&.layout-selected {
+                	background-color: #99FF33;
+					border: 4px solid #99FF33;
+					margin: 0px;
+				}
+			}
+
+			.aui-field-content {
+				margin-top: 0;
+			}
+
+			.aui-field-element {
+				float: left;
+			}
+
+			.layout-template-entry {
+				cursor: pointer;
+				width: 100px;
+			}
+		}
+
+		.lfr-layout-template-column-content {
+			padding: 0 2em 0 0;
+		}
+
+		.lfr-page-layouts-content {
+			padding-left: 1em;
+		}
+
+		.ie6 .lfr-layout-template-column {
+			width: 30%;
+		}
+	}
+
 	.theme-entry {
 		cursor: pointer;
 		float: left;
@@ -71,7 +118,6 @@
 		padding: 0.3em;
 		text-align: center;
 		text-decoration: none;
-		width: 120px;
 
 		&:hover label, &:hover {
 
