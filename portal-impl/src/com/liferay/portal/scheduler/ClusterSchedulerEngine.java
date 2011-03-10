@@ -665,12 +665,12 @@ public class ClusterSchedulerEngine
 
 			schedulerResponse.setTrigger(newTrigger);
 
+			TriggerState triggerState = SchedulerEngineUtil.getJobState(
+				schedulerResponse);
+
 			Message message = schedulerResponse.getMessage();
 
 			message.remove(JOB_STATE);
-
-			TriggerState triggerState = SchedulerEngineUtil.getJobState(
-				schedulerResponse);
 
 			_memorySingleInstanceJobs.put(
 				getFullName(jobName, groupName),
