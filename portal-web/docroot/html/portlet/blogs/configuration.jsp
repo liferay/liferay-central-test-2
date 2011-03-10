@@ -103,7 +103,7 @@ String editorContent = emailBody;
 						[$COMMUNITY_NAME$]
 					</dt>
 					<dd>
-						<liferay-ui:message key="the-community-name-associated-with-the-blog" />
+						<liferay-ui:message key="the-site-name-associated-with-the-blog" />
 					</dd>
 					<dt>
 						[$BLOGS_ENTRY_USER_ADDRESS$]
@@ -195,7 +195,7 @@ String editorContent = emailBody;
 						[$COMMUNITY_NAME$]
 					</dt>
 					<dd>
-						<liferay-ui:message key="the-community-name-associated-with-the-blog" />
+						<liferay-ui:message key="the-site-name-associated-with-the-blog" />
 					</dd>
 					<dt>
 						[$BLOGS_ENTRY_USER_ADDRESS$]

@@ -34,7 +34,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 
 <liferay-ui:header
 	backURL="<%= redirect %>"
-	title='<%= (group == null) ? "new-community" : group.getDescriptiveName() %>'
+	title='<%= (group == null) ? "new-site" : group.getDescriptiveName() %>'
 />
 
 <portlet:actionURL var="editCommunityURL">
@@ -57,7 +57,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 
 	<aui:fieldset>
 		<c:if test="<%= group != null %>">
-			<aui:field-wrapper label="group-id">
+			<aui:field-wrapper label="site-id">
 				<%= groupId %>
 			</aui:field-wrapper>
 		</c:if>
@@ -127,7 +127,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 								/>
 							</c:when>
 							<c:otherwise>
-								<liferay-ui:message key="this-community-does-not-have-any-public-pages" />
+								<liferay-ui:message key="this-site-does-not-have-any-public-pages" />
 							</c:otherwise>
 						</c:choose>
 					</aui:field-wrapper>
@@ -171,7 +171,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 								/>
 							</c:when>
 							<c:otherwise>
-								<liferay-ui:message key="this-community-does-not-have-any-private-pages" />
+								<liferay-ui:message key="this-site-does-not-have-any-private-pages" />
 							</c:otherwise>
 						</c:choose>
 					</aui:field-wrapper>
@@ -236,6 +236,6 @@ if (group != null) {
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
 }
 else {
-	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-community"), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-site"), currentURL);
 }
 %>

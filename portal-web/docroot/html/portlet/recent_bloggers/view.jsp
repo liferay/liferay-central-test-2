@@ -64,7 +64,7 @@ else {
 				String blogType = LanguageUtil.get(pageContext, "personal");
 
 				if (group.isCommunity() || group.isOrganization()) {
-					blogType = group.getDescriptiveName();// + " " + LanguageUtil.get(pageContext, "community");
+					blogType = group.getDescriptiveName();// + " " + LanguageUtil.get(pageContext, "site");
 				}
 
 				int entryCount = BlogsEntryLocalServiceUtil.getGroupUserEntriesCount(group.getGroupId(), user2.getUserId(), WorkflowConstants.STATUS_APPROVED);

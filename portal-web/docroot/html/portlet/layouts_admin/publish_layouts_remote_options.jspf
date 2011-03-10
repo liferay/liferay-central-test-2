@@ -15,7 +15,7 @@
 --%>
 
 <div class="portlet-msg-info">
-	<liferay-ui:message key="export-the-selected-data-to-the-community-of-a-remote-portal-or-to-another-community-in-the-same-portal" />
+	<liferay-ui:message key="export-the-selected-data-to-the-site-of-a-remote-portal-or-to-another-site-in-the-same-portal" />
 </div>
 
 <aui:fieldset>
@@ -23,7 +23,7 @@
 
 	<aui:input label="remote-port" name="remotePort" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remotePort") %>' />
 
-	<aui:input label='<%= LanguageUtil.get(pageContext, "remote-group-id" ) + " (" + LanguageUtil.get(pageContext, "organization-or-community") + ")" %>' name="remoteGroupId" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteGroupId") %>' />
+	<aui:input label='<%= LanguageUtil.get(pageContext, "remote-site-id" ) %>' name="remoteGroupId" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteGroupId") %>' />
 
 	<aui:input name="remotePrivateLayout" type="hidden" value="<%= privateLayout %>" />
 </aui:fieldset>

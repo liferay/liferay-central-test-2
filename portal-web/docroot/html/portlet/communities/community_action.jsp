@@ -148,7 +148,7 @@ String tabs1 = (String)objArray[1];
 	</c:if>
 
 	<c:choose>
-		<c:when test='<%= tabs1.equals("communities-owned") || tabs1.equals("communities-joined") %>'>
+		<c:when test='<%= tabs1.equals("sites-owned") || tabs1.equals("sites-joined") %>'>
 			<c:if test="<%= (group.getType() == GroupConstants.TYPE_COMMUNITY_OPEN) || (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) %>">
 				<portlet:actionURL var="leaveURL">
 					<portlet:param name="struts_action" value="/communities/edit_community_assignments" />

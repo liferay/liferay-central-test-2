@@ -62,7 +62,7 @@
 					curGroupName = LanguageUtil.get(pageContext, "global");
 				}
 				else if (curGroup.isUser() && (curGroup.getClassPK() == user.getUserId())) {
-					curGroupName = LanguageUtil.get(pageContext, "my-community");
+					curGroupName = LanguageUtil.get(pageContext, "my-site");
 				}
 				else {
 					curGroupName = curGroup.getDescriptiveName();
@@ -114,7 +114,7 @@
 					%>
 
 					<c:if test="<%= !manageableGroups.isEmpty() %>">
-						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuCommunitiesPanel" persistState="<%= true %>" title="communities">
+						<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="controlPanelMenuCommunitiesPanel" persistState="<%= true %>" title="sites">
 							<ul>
 
 								<%
@@ -128,7 +128,7 @@
 									</c:if>
 
 									<li>
-										<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= (group.isUser() && (group.getClassPK() == user.getUserId())) ? LanguageUtil.get(pageContext, "my-community") : HtmlUtil.escape(group.getDescriptiveName()) %></a>
+										<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", group.getGroupId()) %>"><%= (group.isUser() && (group.getClassPK() == user.getUserId())) ? LanguageUtil.get(pageContext, "my-site") : HtmlUtil.escape(group.getDescriptiveName()) %></a>
 									</li>
 
 								<%
@@ -195,7 +195,7 @@
 								</c:if>
 								<c:if test="<%= showMyCommunity %>">
 									<li>
-										<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", user.getGroup().getGroupId()) %>"><liferay-ui:message key="my-community" /></a>
+										<a href="<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsGroupId", user.getGroup().getGroupId()) %>"><liferay-ui:message key="my-site" /></a>
 									</li>
 								</c:if>
 							</ul>

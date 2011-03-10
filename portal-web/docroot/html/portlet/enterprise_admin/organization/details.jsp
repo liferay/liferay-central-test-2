@@ -125,7 +125,7 @@ if (organization != null) {
 	</c:if>
 
 	<c:if test="<%= organization != null %>">
-		<aui:field-wrapper label="group-id">
+		<aui:field-wrapper label="site-id">
 			<%= groupId %>
 		</aui:field-wrapper>
 	</c:if>

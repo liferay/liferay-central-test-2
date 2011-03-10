@@ -113,7 +113,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 						</aui:button-row>
 					</c:when>
 					<c:otherwise>
-						<liferay-ui:message key="import-from-within-the-target-community-can-cause-conflicts" />
+						<liferay-ui:message key="import-from-within-the-target-site-can-cause-conflicts" />
 					</c:otherwise>
 				</c:choose>
 			</c:when>

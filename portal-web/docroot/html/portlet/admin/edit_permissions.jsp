@@ -39,7 +39,7 @@ request.setAttribute("edit_permissions.jsp-portletURL", portletURL);
 	/>
 
 	<liferay-ui:tabs
-		names="organizations,communities,users"
+		names="organizations,sites,users"
 		param="tabs2"
 		url="<%= portletURL.toString() %>"
 	/>

@@ -164,7 +164,7 @@ if (Validator.isNotNull(folder.getName())) {
 		</div>
 
 		<div class="file-entry-field">
-			<label><liferay-ui:message key="community" /></label>
+			<label><liferay-ui:message key="site" /></label>
 
 			<%= HtmlUtil.escape(toGroup.getDescriptiveName()) %>
 		</div>

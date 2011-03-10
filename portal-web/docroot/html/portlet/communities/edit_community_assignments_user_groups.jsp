@@ -84,7 +84,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_community_assignm
 		<c:if test='<%= tabs2.equals("current") %>'>
 			<liferay-ui:search-container-column-text
 				buffer="buffer"
-				name="community-roles"
+				name="site-roles"
 			>
 
 				<%

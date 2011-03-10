@@ -317,7 +317,7 @@ List<Group> myPlaces = user.getMyPlaces(max);
 											<%= HtmlUtil.escape(organization.getName()) %>
 										</c:when>
 										<c:when test="<%= userCommunity %>">
-											<liferay-ui:message key="my-community" />
+											<liferay-ui:message key="my-site" />
 										</c:when>
 										<c:otherwise>
 											<%= myPlace.getName() %>

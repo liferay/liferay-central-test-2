@@ -57,7 +57,7 @@ public class RoleConstants {
 
 	public static final int TYPE_COMMUNITY = 2;
 
-	public static final String TYPE_COMMUNITY_LABEL = "community";
+	public static final String TYPE_COMMUNITY_LABEL = "site";
 
 	public static final int TYPE_ORGANIZATION = 3;
 

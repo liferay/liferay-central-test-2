@@ -18,7 +18,7 @@
 
 <aui:form method="post" name="fm">
 	<liferay-ui:header
-		title="communities"
+		title="sites"
 	/>
 
 	<%
@@ -66,7 +66,7 @@
 			groupName = LanguageUtil.get(pageContext, "global");
 		}
 		else if (group.isUser()) {
-			groupName = LanguageUtil.get(pageContext, "my-community");
+			groupName = LanguageUtil.get(pageContext, "my-site");
 		}
 
 		StringBundler sb = new StringBundler(7);

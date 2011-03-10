@@ -51,7 +51,7 @@ public class GroupSearch extends SearchContainer<Group> {
 	}
 
 	public static final String EMPTY_RESULTS_MESSAGE =
-		"no-communities-were-found";
+		"no-sites-were-found";
 
 	public GroupSearch(PortletRequest portletRequest, PortletURL iteratorURL) {
 		super(

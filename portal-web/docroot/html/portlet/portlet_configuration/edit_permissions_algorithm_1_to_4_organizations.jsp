@@ -227,7 +227,7 @@ int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 		<%--<table class="lfr-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="assign-permissions-only-to-users-that-are-also-members-of-the-current-community" />
+				<liferay-ui:message key="assign-permissions-only-to-users-that-are-also-members-of-the-current-site" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />organizationIntersection">

@@ -66,11 +66,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 
 			<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
 
-				<%
-				String groupType = LanguageUtil.get(pageContext, (liveGroup.isOrganization()? "organization" : "community"));
-				%>
-
-				<liferay-ui:message arguments="<%= new Object[] {groupType, ree.getGroupId()} %>" key="no-group-exists-on-the-remote-server-with-group-id-x" />
+				<liferay-ui:message arguments="<%= ree.getGroupId() %>" key="no-site-exists-on-the-remote-server-with-site-id-x" />
 			</c:if>
 		</liferay-ui:error>
 
@@ -86,7 +82,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 				</c:if>
 
 				<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_GROUP_ID %>">
-					<liferay-ui:message arguments="<%= roe.getRemoteGroupId() %>" key="the-remote-group-id-x-is-not-valid" />
+					<liferay-ui:message arguments="<%= roe.getRemoteGroupId() %>" key="the-remote-site-id-x-is-not-valid" />
 				</c:if>
 
 				<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_PORT %>">
@@ -102,7 +98,7 @@ UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribut
 
 			<aui:input label="port" name="remotePort" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remotePort") %>' />
 
-			<aui:input label='<%= LanguageUtil.get(pageContext, "remote-group-id" ) + " (" + LanguageUtil.get(pageContext, "organization-or-community") + ")" %>' name="remoteGroupId" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteGroupId") %>' />
+			<aui:input label='<%= LanguageUtil.get(pageContext, "remote-site-id" ) %>' name="remoteGroupId" size="10" type="text" value='<%= liveGroupTypeSettings.getProperty("remoteGroupId") %>' />
 
 			<aui:input inlineLabel="left" label="use-a-secure-network-connection" name="secureConnection" type="checkbox" value='<%= liveGroupTypeSettings.getProperty("secureConnection") %>' />
 		</aui:fieldset>

@@ -33,7 +33,7 @@ GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTe
 
 <div>
 	<c:if test="<%= showAddButton && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
-		<aui:button onClick='<%= renderResponse.getNamespace() + "addGroup();" %>' value="add-community" />
+		<aui:button onClick='<%= renderResponse.getNamespace() + "addGroup();" %>' value="add-site" />
 	</c:if>
 </div>
 

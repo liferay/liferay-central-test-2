@@ -56,7 +56,7 @@ if (Validator.isNotNull(structureId)) {
 	<liferay-ui:panel-container extended="<%= true %>" id="journalArticlesSettingsPanelContainer" persistState="<%= true %>">
 		<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id="journalArticlesFilterPanel" persistState="<%= true %>" title="filter">
 			<aui:fieldset>
-				<aui:select label="community" name="preferences--groupId--">
+				<aui:select label="site" name="preferences--groupId--">
 					<aui:option label="global" selected="<%= groupId == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 
 					<%
@@ -68,7 +68,7 @@ if (Validator.isNotNull(structureId)) {
 						String groupName = HtmlUtil.escape(group.getDescriptiveName());
 
 						if (group.isUser()) {
-							groupName = LanguageUtil.get(pageContext, "my-community");
+							groupName = LanguageUtil.get(pageContext, "my-site");
 						}
 					%>
 

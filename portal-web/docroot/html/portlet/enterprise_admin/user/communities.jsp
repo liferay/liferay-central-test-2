@@ -30,7 +30,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 	/>
 </liferay-util:buffer>
 
-<h3><liferay-ui:message key="communities" /></h3>
+<h3><liferay-ui:message key="sites" /></h3>
 
 <liferay-ui:search-container
 	id='<%= renderResponse.getNamespace() + "groupsSearchContainer" %>'

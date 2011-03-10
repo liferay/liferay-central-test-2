@@ -29,7 +29,7 @@ portletURL.setParameter("target", target);
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">
 	<liferay-ui:header
-		title="communities"
+		title="sites"
 	/>
 
 	<liferay-ui:search-container

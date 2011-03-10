@@ -128,11 +128,11 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 		</c:choose>
 
 		<%
-		String tabs2Names = "users,organizations,user-groups,regular-roles,community-roles,community,guest";
+		String tabs2Names = "users,organizations,user-groups,regular-roles,site-roles,site,guest";
 
 		if (ResourceActionsUtil.isPortalModelResource(modelResource)) {
-			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
-			tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "site,", StringPool.BLANK);
 			tabs2Names = StringUtil.replace(tabs2Names, ",guest", StringPool.BLANK);
 		}
 		else if (modelResource.equals(Layout.class.getName())) {
@@ -140,12 +140,12 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 			// User layouts should not have community assignments
 
 			if (group.isUser()) {
-				tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
-				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+				tabs2Names = StringUtil.replace(tabs2Names, "site,", StringPool.BLANK);
+				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", StringPool.BLANK);
 			}
 			else if (group.isOrganization()) {
-				tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
-				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
+				tabs2Names = StringUtil.replace(tabs2Names, "site,", "organization,");
+				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", "organization-roles,");
 			}
 
 			// Private layouts should not have guest assignments
@@ -156,12 +156,12 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 		}
 		else {
 			if (group.isUser()) {
-				tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
-				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+				tabs2Names = StringUtil.replace(tabs2Names, "site,", StringPool.BLANK);
+				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", StringPool.BLANK);
 			}
 			else if (group.isOrganization()) {
-				tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
-				tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
+				tabs2Names = StringUtil.replace(tabs2Names, "site,", "organization,");
+				tabs2Names = StringUtil.replace(tabs2Names, "site-roles,", "organization-roles,");
 			}
 		}
 		%>
@@ -194,10 +194,10 @@ request.setAttribute("edit_permissions_algorithm_1_to_4.jsp-portletURL", portlet
 			<c:when test='<%= tabs2.equals("user-groups") %>'>
 				<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_user_groups.jsp" />
 			</c:when>
-			<c:when test='<%= tabs2.equals("regular-roles") || tabs2.equals("community-roles") || tabs2.equals("organization-roles") %>'>
+			<c:when test='<%= tabs2.equals("regular-roles") || tabs2.equals("site-roles") || tabs2.equals("organization-roles") %>'>
 				<liferay-util:include page="/html/portlet/portlet_configuration/edit_permissions_algorithm_1_to_4_roles.jsp" />
 			</c:when>
-			<c:when test='<%= tabs2.equals("community") || tabs2.equals("organization") %>'>
+			<c:when test='<%= tabs2.equals("site") || tabs2.equals("organization") %>'>
 				<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 				<aui:input name="groupIdActionIds" type="hidden" />
 

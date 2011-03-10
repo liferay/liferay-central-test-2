@@ -242,11 +242,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 		<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
 
-			<%
-			String groupType = LanguageUtil.get(pageContext, (liveGroup.isOrganization()? "organization" : "community"));
-			%>
-
-			<liferay-ui:message arguments="<%= new Object[] {groupType, ree.getGroupId()} %>" key="no-group-exists-on-the-remote-server-with-group-id-x" />
+			<liferay-ui:message arguments="<%= ree.getGroupId() %>" key="no-site-exists-on-the-remote-server-with-site-id-x" />
 		</c:if>
 
 		<c:if test="<%= ree.getType() == RemoteExportException.NO_LAYOUTS %>">
@@ -265,7 +261,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		</c:if>
 
 		<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_GROUP_ID %>">
-			<liferay-ui:message arguments="<%= roe.getRemoteGroupId() %>" key="the-remote-group-id-x-is-not-valid" />
+			<liferay-ui:message arguments="<%= roe.getRemoteGroupId() %>" key="the-remote-site-id-x-is-not-valid" />
 		</c:if>
 
 		<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_PORT %>">

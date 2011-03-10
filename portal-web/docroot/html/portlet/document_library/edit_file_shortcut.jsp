@@ -98,7 +98,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			<liferay-ui:message key="you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for" />
 		</div>
 
-		<aui:field-wrapper label="community">
+		<aui:field-wrapper label="site">
 
 			<%
 			String toGroupName = BeanPropertiesUtil.getString(toGroup, "name");

@@ -17,16 +17,16 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "communities-owned");
+String tabs1 = ParamUtil.getString(request, "tabs1", "sites-owned");
 
 boolean showTabs1 = true;
 
 if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES)) {
 	if (permissionChecker.isCompanyAdmin()) {
-		tabs1 = "all-communities";
+		tabs1 = "all-sites";
 	}
 	else {
-		tabs1 = "communities-joined";
+		tabs1 = "sites-joined";
 	}
 
 	showTabs1 = false;
@@ -48,7 +48,7 @@ pageContext.setAttribute("portletURL", portletURL);
 	<c:choose>
 		<c:when test="<%= showTabs1 %>">
 			<liferay-ui:tabs
-				names="communities-owned,communities-joined,available-communities"
+				names="sites-owned,sites-joined,available-sites"
 				url="<%= portletURL.toString() %>"
 			/>
 		</c:when>
@@ -74,7 +74,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 	LinkedHashMap groupParams = new LinkedHashMap();
 
-	if (tabs1.equals("communities-owned")) {
+	if (tabs1.equals("sites-owned")) {
 		Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleConstants.COMMUNITY_OWNER);
 
 		List userGroupRole = new ArrayList();
@@ -85,11 +85,11 @@ pageContext.setAttribute("portletURL", portletURL);
 		groupParams.put("userGroupRole", userGroupRole);
 		//groupParams.put("active", Boolean.TRUE);
 	}
-	else if (tabs1.equals("communities-joined")) {
+	else if (tabs1.equals("sites-joined")) {
 		groupParams.put("usersGroups", new Long(user.getUserId()));
 		//groupParams.put("active", Boolean.TRUE);
 	}
-	else if (tabs1.equals("available-communities")) {
+	else if (tabs1.equals("available-sites")) {
 		List types = new ArrayList();
 
 		types.add(new Integer(GroupConstants.TYPE_COMMUNITY_OPEN));
@@ -122,7 +122,7 @@ pageContext.setAttribute("portletURL", portletURL);
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 		%>
 
-		<liferay-ui:message arguments="<%= group.getDescriptiveName() %>" key="community-x-does-not-have-any-private-pages" />
+		<liferay-ui:message arguments="<%= group.getDescriptiveName() %>" key="site-x-does-not-have-any-private-pages" />
 	</liferay-ui:error>
 
 	<liferay-ui:error exception="<%= RequiredGroupException.class %>">
@@ -137,10 +137,10 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		<c:choose>
 			<c:when test="<%= PortalUtil.isSystemGroup(group.getName()) %>">
-				<liferay-ui:message key="the-group-cannot-be-deleted-or-deactivated-because-it-is-a-required-system-group" />
+				<liferay-ui:message key="the-site-cannot-be-deleted-or-deactivated-because-it-is-a-required-system-site" />
 			</c:when>
 			<c:otherwise>
-				<liferay-ui:message key="the-group-cannot-be-deleted-or-deactivated-because-you-are-accessing-the-group" />
+				<liferay-ui:message key="the-site-cannot-be-deleted-or-deactivated-because-you-are-accessing-the-site" />
 			</c:otherwise>
 		</c:choose>
 	</liferay-ui:error>
@@ -153,11 +153,11 @@ pageContext.setAttribute("portletURL", portletURL);
 	headerNames.add("members");
 	headerNames.add("online-now");
 
-	if (tabs1.equals("communities-owned") || tabs1.equals("communities-joined") || tabs1.equals("all-communities")) {
+	if (tabs1.equals("sites-owned") || tabs1.equals("sites-joined") || tabs1.equals("all-sites")) {
 		headerNames.add("active");
 	}
 
-	if (tabs1.equals("communities-owned")) {
+	if (tabs1.equals("sites-owned")) {
 		headerNames.add("pending-requests");
 	}
 
@@ -197,7 +197,7 @@ pageContext.setAttribute("portletURL", portletURL);
 			stagingGroup = group.getStagingGroup();
 		}
 
-		if ((tabs1.equals("communities-owned") || tabs1.equals("communities-joined") || tabs1.equals("all-communities")) &&
+		if ((tabs1.equals("sites-owned") || tabs1.equals("sites-joined") || tabs1.equals("all-sites")) &&
 			((publicLayoutsPageCount > 0) || (privateLayoutsPageCount > 0))) {
 
 			sb.append("<br />");
@@ -302,13 +302,13 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		// Active
 
-		if (tabs1.equals("communities-owned") || tabs1.equals("communities-joined") || tabs1.equals("all-communities")) {
+		if (tabs1.equals("sites-owned") || tabs1.equals("sites-joined") || tabs1.equals("all-sites")) {
 			row.addText(LanguageUtil.get(pageContext, (group.isActive() ? "yes" : "no")));
 		}
 
 		// Restricted number of petitions
 
-		if (tabs1.equals("communities-owned")) {
+		if (tabs1.equals("sites-owned")) {
 			int pendingRequests = MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), MembershipRequestConstants.STATUS_PENDING);
 
 			if (group.getType() == GroupConstants.TYPE_COMMUNITY_RESTRICTED) {

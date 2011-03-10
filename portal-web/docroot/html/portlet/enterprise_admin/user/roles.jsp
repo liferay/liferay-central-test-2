@@ -214,11 +214,11 @@ userGroupRoles.addAll(organizationRoles);
 
 <br /><br />
 
-<h3><liferay-ui:message key="community-roles" /></h3>
+<h3><liferay-ui:message key="site-roles" /></h3>
 
 <c:choose>
 	<c:when test="<%= groups.isEmpty() %>">
-		<liferay-ui:message key="this-user-does-not-belong-to-a-community-to-which-a-community-role-can-be-assigned" />
+		<liferay-ui:message key="this-user-does-not-belong-to-a-site-to-which-a-site-role-can-be-assigned" />
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:search-container
@@ -244,7 +244,7 @@ userGroupRoles.addAll(organizationRoles);
 				/>
 
 				<liferay-ui:search-container-column-text
-					name="community"
+					name="site"
 					value="<%= HtmlUtil.escape(userGroupRole.getGroup().getDescriptiveName()) %>"
 				/>
 

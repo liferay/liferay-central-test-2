@@ -34,7 +34,7 @@ portlets = ListUtil.sort(portlets, new PortletTitleComparator(application, local
 						editPermissionsURL.setParameter("showModelResources", "1");
 						%>
 
-						<aui:option label="community-administration" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
+						<aui:option label="site-administration" selected="<%= _isCurrent(editPermissionsURL.toString(), portletResource, showModelResources) %>" value="<%= editPermissionsURL.toString() %>" />
 					</optgroup>
 				</c:when>
 				<c:when test="<%= role.getType() == RoleConstants.TYPE_ORGANIZATION %>">

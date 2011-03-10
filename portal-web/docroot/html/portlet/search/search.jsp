@@ -106,7 +106,7 @@ int inactiveGroupsCount = GroupLocalServiceUtil.searchCount(themeDisplay.getComp
 
 		<aui:select inlineField="<%= true %>" label="" name="groupId">
 			<aui:option label="everything" selected="<%= groupId == 0 %>" value="0" />
-			<aui:option label='<%= "this-" + (group.isOrganization() ? "organization" : "community") %>' selected="<%= groupId != 0 %>" value="<%= group.getGroupId() %>" />
+			<aui:option label='<%= "this-" + (group.isOrganization() ? "organization" : "site") %>' selected="<%= groupId != 0 %>" value="<%= group.getGroupId() %>" />
 		</aui:select>
 
 		<aui:input align="absmiddle" border="0" inlineField="<%= true %>" label="" name="search" src='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' title="search" type="image" />

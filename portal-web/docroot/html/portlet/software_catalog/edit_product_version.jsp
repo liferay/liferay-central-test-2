@@ -168,7 +168,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			</c:when>
 			<c:otherwise>
 				<td>
-					<a href="<%= editProductEntryURL %>"><liferay-ui:message key="you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version" /></a>
+					<a href="<%= editProductEntryURL %>"><liferay-ui:message key="you-must-specify-a-site-id-and-artifact-id-before-you-can-add-a-product-version" /></a>
 				</td>
 			</c:otherwise>
 		</c:choose>

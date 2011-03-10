@@ -60,7 +60,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 	title='<%= (productEntry != null) ? productEntry.getName() : "new-product" %>'
 />
 
-<liferay-ui:error exception="<%= DuplicateProductEntryModuleIdException.class %>" message="please-enter-a-unique-group-id-and-artifact-id-combination" />
+<liferay-ui:error exception="<%= DuplicateProductEntryModuleIdException.class %>" message="please-enter-a-unique-site-id-and-artifact-id-combination" />
 <liferay-ui:error exception="<%= ProductEntryAuthorException.class %>" message="please-enter-a-valid-author" />
 <liferay-ui:error exception="<%= ProductEntryLicenseException.class %>" message="please-select-at-least-one-license" />
 <liferay-ui:error exception="<%= ProductEntryNameException.class %>" message="please-enter-a-valid-name" />
@@ -214,7 +214,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="group-id" />
+		<liferay-ui:message key="site-id" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= SCProductEntry.class %>" bean="<%= productEntry %>" field="repoGroupId" />

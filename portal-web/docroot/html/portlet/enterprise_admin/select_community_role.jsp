@@ -53,11 +53,11 @@ if (step == 1) {
 			<aui:input name="groupId" type="hidden" />
 
 			<liferay-ui:header
-				title="community-roles"
+				title="site-roles"
 			/>
 
 			<div class="portlet-msg-info">
-				<liferay-ui:message key="please-select-a-community-to-which-you-will-assign-a-community-role" />
+				<liferay-ui:message key="please-select-a-site-to-which-you-will-assign-a-site-role" />
 			</div>
 
 			<%
@@ -136,14 +136,14 @@ if (step == 1) {
 			<aui:input name="step" type="hidden" value="2" />
 			<aui:input name="groupId" type="hidden" value="<%= String.valueOf(groupId) %>" />
 
-			<liferay-ui:header title="community-roles" />
+			<liferay-ui:header title="site-roles" />
 
 			<%
 			Group group = GroupServiceUtil.getGroup(groupId);
 
 			portletURL.setParameter("step", "1");
 
-			String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; " + HtmlUtil.escape(group.getDescriptiveName());
+			String breadcrumbs = "<a href=\"" + portletURL.toString() + "\">" + LanguageUtil.get(pageContext, "sites") + "</a> &raquo; " + HtmlUtil.escape(group.getDescriptiveName());
 			%>
 
 			<div class="breadcrumbs">

@@ -36,7 +36,7 @@ portletURL.setParameter("p_u_i_d", String.valueOf(selUser.getUserId()));
 <aui:input name="addRoleIds" type="hidden" />
 <aui:input name="removeRoleIds" type="hidden" />
 
-<liferay-ui:message key="edit-community-roles-for-user" />: <%= HtmlUtil.escape(selUser.getFullName()) %>
+<liferay-ui:message key="edit-site-roles-for-user" />: <%= HtmlUtil.escape(selUser.getFullName()) %>
 
 <br /><br />
 

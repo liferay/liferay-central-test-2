@@ -24,7 +24,7 @@
 	%>
 
 	<c:if test="<%= !groups.isEmpty() %>">
-		<optgroup label="<liferay-ui:message key="communities" />">
+		<optgroup label="<liferay-ui:message key="sites" />">
 
 			<%
 			for (Group group : groups) {

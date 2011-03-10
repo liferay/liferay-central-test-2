@@ -113,7 +113,7 @@ else if (tabs2.equals("page-updated-email")) {
 						[$COMMUNITY_NAME$]
 					</dt>
 					<dd>
-						<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
+						<liferay-ui:message key="the-site-name-associated-with-the-wiki" />
 					</dd>
 					<dt>
 						[$PAGE_USER_ADDRESS$]
@@ -187,7 +187,7 @@ else if (tabs2.equals("page-updated-email")) {
 						[$COMMUNITY_NAME$]
 					</dt>
 					<dd>
-						<liferay-ui:message key="the-community-name-associated-with-the-wiki" />
+						<liferay-ui:message key="the-site-name-associated-with-the-wiki" />
 					</dd>
 					<dt>
 						[$DIFFS_URL$]

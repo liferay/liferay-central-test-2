@@ -23,7 +23,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_permissions.jsp-p
 
 String systemRoleName = RoleConstants.OWNER;
 
-if (tabs2.equals("communities")) {
+if (tabs2.equals("sites")) {
 	systemRoleName = RoleConstants.COMMUNITY_MEMBER;
 }
 else if (tabs2.equals("organizations")) {
@@ -48,7 +48,7 @@ List<ResourcePermission> resourcePermissions = new UniqueList<ResourcePermission
 
 int roleType = RoleConstants.TYPE_REGULAR;
 
-if (tabs2.equals("communities")) {
+if (tabs2.equals("sites")) {
 	roleType = RoleConstants.TYPE_COMMUNITY;
 }
 else if (tabs2.equals("organizations")) {
@@ -78,7 +78,7 @@ while (rolesItr.hasNext()) {
 
 		Group group = groups.get(0);
 
-		if (tabs2.equals("communities") && !group.isCommunity()) {
+		if (tabs2.equals("sites") && !group.isCommunity()) {
 			continue;
 		}
 		else if (tabs2.equals("organizations") && !group.isOrganization()) {
