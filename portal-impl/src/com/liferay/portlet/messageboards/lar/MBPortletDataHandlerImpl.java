@@ -479,13 +479,6 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	protected String getImportCategoryPath(
 		PortletDataContext portletDataContext, long categoryId) {
 
-		return getImportCategoryPath(portletDataContext, categoryId, false);
-	}
-
-	protected String getImportCategoryPath(
-		PortletDataContext portletDataContext, long categoryId,
-		boolean expandoAttributes) {
-
 		StringBundler sb = new StringBundler(4);
 
 		sb.append(
@@ -493,11 +486,6 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 				PortletKeys.MESSAGE_BOARDS));
 		sb.append("/categories/");
 		sb.append(categoryId);
-
-		if (expandoAttributes) {
-			sb.append("-expando");
-		}
-
 		sb.append(".xml");
 
 		return sb.toString();
