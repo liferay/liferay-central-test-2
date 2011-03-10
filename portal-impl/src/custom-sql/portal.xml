@@ -940,6 +940,18 @@
 				[$SCOPE$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.ResourcePermissionFinder.findByC_N_S">
+		<![CDATA[
+			SELECT
+				DISTINCT ResourcePermission.primKey
+			FROM
+				ResourcePermission
+			WHERE
+				(ResourcePermission.companyId = ?) AND
+				(ResourcePermission.name = ?) AND
+				(ResourcePermission.scope = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByCommunity">
 		<![CDATA[
 			SELECT
