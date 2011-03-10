@@ -39,6 +39,7 @@ import org.apache.commons.lang.time.StopWatch;
 
 /**
  * @author Igor Spasic
+
  */
 public class RestConfigurator extends FindClass {
 
@@ -46,25 +47,48 @@ public class RestConfigurator extends FindClass {
 		setIncludedJars("*portal-impl.jar");
 	}
 
-	public void configure() throws PortalException {
-		File portalImplLib = new File(
-			PortalUtil.getPortalLibDir(), "portal-impl.jar");
+	public void configure(ClassLoader classLoader) throws PortalException {
 
 		URL[] classPathURLs = null;
 
-		if (portalImplLib.exists()) {
+		// determine if we are in portal or in plugin
+		URL pluginsOnlyResource = classLoader.getResource("portal.properties");
+
+		if (pluginsOnlyResource != null) {
+			// plugin
+
+			File pluginWebInf = new File(pluginsOnlyResource.getPath());
+
+			pluginWebInf = pluginWebInf.getParentFile();
+
 			classPathURLs = new URL[1];
 
 			try {
-				classPathURLs[0] = portalImplLib.toURL();
+				classPathURLs[0] = pluginWebInf.toURL();
 			}
 			catch (MalformedURLException murle) {
 				_log.error(murle, murle);
 			}
-		}
-		else {
-			classPathURLs = ClassLoaderUtil.getFullClassPath(
-				RestConfigurator.class);
+
+		} else {
+			// portal
+			File portalImplLib = new File(
+				PortalUtil.getPortalLibDir(), "portal-impl.jar");
+
+			if (portalImplLib.exists()) {
+				classPathURLs = new URL[1];
+
+				try {
+					classPathURLs[0] = portalImplLib.toURL();
+				}
+				catch (MalformedURLException murle) {
+					_log.error(murle, murle);
+				}
+			}
+			else {
+				classPathURLs = ClassLoaderUtil.getFullClassPath(
+					RestConfigurator.class);
+			}
 		}
 
 		configure(classPathURLs);
