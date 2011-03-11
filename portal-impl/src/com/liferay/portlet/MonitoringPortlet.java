@@ -159,11 +159,14 @@ public class MonitoringPortlet implements InvokerPortlet {
 
 	public void init(PortletConfig portletConfig) throws PortletException {
 		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
-		
+
 		_invokerPortlet.init(portletConfigImpl);
-		
-		_actionTimeout = portletConfigImpl.getPortlet().getActionTimeout();
-		_renderTimeout = portletConfigImpl.getPortlet().getRenderTimeout();
+
+		com.liferay.portal.model.Portlet portletModel =
+			portletConfigImpl.getPortlet();
+
+		_actionTimeout = portletModel.getActionTimeout();
+		_renderTimeout = portletModel.getRenderTimeout();
 	}
 
 	public boolean isCheckAuthToken() {
@@ -215,8 +218,9 @@ public class MonitoringPortlet implements InvokerPortlet {
 		try {
 			if (_monitoringPortletActionRequest) {
 				portletRequestDataSample = new PortletRequestDataSample(
-					PortletRequestType.ACTION, actionRequest, actionResponse, 
-					_actionTimeout);
+					PortletRequestType.ACTION, actionRequest, actionResponse);
+
+				portletRequestDataSample.setTimeout(_actionTimeout);
 
 				portletRequestDataSample.prepare();
 			}
@@ -282,8 +286,9 @@ public class MonitoringPortlet implements InvokerPortlet {
 		try {
 			if (_monitoringPortletRenderRequest) {
 				portletRequestDataSample = new PortletRequestDataSample(
-					PortletRequestType.RENDER, renderRequest, renderResponse, 
-					_renderTimeout);
+					PortletRequestType.RENDER, renderRequest, renderResponse);
+
+				portletRequestDataSample.setTimeout(_renderTimeout);
 
 				portletRequestDataSample.prepare();
 			}

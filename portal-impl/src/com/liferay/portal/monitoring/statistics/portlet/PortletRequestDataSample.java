@@ -33,15 +33,7 @@ public class PortletRequestDataSample extends BaseDataSample {
 	public PortletRequestDataSample(
 		PortletRequestType requestType, PortletRequest portletRequest,
 		PortletResponse portletResponse) {
-		this(requestType, portletRequest, portletResponse, -1);
-	}
 
-	public PortletRequestDataSample(
-		PortletRequestType requestType, PortletRequest portletRequest,
-		PortletResponse portletResponse, long timeout) {
-
-		super(timeout);
-		
 		PortletResponseImpl portletResponseImpl =
 			(PortletResponseImpl)portletResponse;
 

@@ -30,14 +30,6 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class BaseDataSample implements DataSample, Serializable {
 
-	public BaseDataSample() {
-		this(-1);
-	}
-
-	public BaseDataSample(long timeout) {
-		_timeout = timeout;
-	}
-
 	public void capture(RequestStatus requestStatus) {
 		if (_stopWatch != null) {
 			_stopWatch.stop();
@@ -45,7 +37,7 @@ public class BaseDataSample implements DataSample, Serializable {
 			_duration = _stopWatch.getTime();
 		}
 
-		if ((_timeout > 0) && (_duration >= _timeout) && 
+		if ((_timeout > 0) && (_duration >= _timeout) &&
 			(requestStatus != RequestStatus.ERROR)) {
 			_requestStatus = RequestStatus.TIMEOUT;
 		}
@@ -82,6 +74,10 @@ public class BaseDataSample implements DataSample, Serializable {
 		return _requestStatus;
 	}
 
+	public long getTimeout() {
+		return _timeout;
+	}
+
 	public String getUser() {
 		return _user;
 	}
@@ -114,6 +110,10 @@ public class BaseDataSample implements DataSample, Serializable {
 		_namespace = namespace;
 	}
 
+	public void setTimeout(long timeout) {
+		_timeout = timeout;
+	}
+
 	public void setUser(String user) {
 		_user = user;
 	}
@@ -137,6 +137,8 @@ public class BaseDataSample implements DataSample, Serializable {
 		sb.append(_requestStatus);
 		sb.append(", stopWatch=");
 		sb.append(_stopWatch);
+		sb.append(", timeout=");
+		sb.append(_timeout);
 		sb.append(", user=");
 		sb.append(_user);
 		sb.append("}");
@@ -152,7 +154,7 @@ public class BaseDataSample implements DataSample, Serializable {
 	private String _namespace;
 	private RequestStatus _requestStatus;
 	private transient StopWatch _stopWatch;
-	private long _timeout;
+	private long _timeout = -1;
 	private String _user;
 
 }
