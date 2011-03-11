@@ -105,6 +105,7 @@ public class LuceneServlet extends HttpServlet {
 	}
 
 	public void destroy() {
+
 		// Wait for indexer to be gracefully interrupted
 
 		for (int i = 0; i < _indexers.size(); i++) {

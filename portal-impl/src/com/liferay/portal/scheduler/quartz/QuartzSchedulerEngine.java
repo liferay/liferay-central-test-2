@@ -724,7 +724,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		for (String groupName : groupNames) {
 			String[] jobNames = _persistedScheduler.getJobNames(groupName);
 
-			for(String jobName : jobNames) {
+			for (String jobName : jobNames) {
 				Trigger trigger = _persistedScheduler.getTrigger(
 					jobName, groupName);
 
