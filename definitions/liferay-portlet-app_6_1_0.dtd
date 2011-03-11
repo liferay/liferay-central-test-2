@@ -576,18 +576,20 @@ attributes are shared even when the private-session-attributes value is true.
 <!ELEMENT private-session-attributes (#PCDATA)>
 
 <!--
-The default value of action-timeout is 0. If set to a value greater than 0 and 
-the property "portlet.async.execute.enabled" in portal.properties is set to
-true, then the portlet's action phase is processed asynchronously with the
-specified timeout in seconds. Otherwise, the portlet is processed synchronously.
+The default value of action-timeout is 0. If set to a value greater than 0, 
+liferay monitoring and the property "monitoring.portlet.action.request" in 
+portal.properties is set to true, then the portlet's action phase procssing will
+be timed. If the execution time is longer than action-timeout, it will be 
+recorded as a timeout request processing. The time unit is millisecond.
 -->
 <!ELEMENT action-timeout (#PCDATA)>
 
 <!--
-The default value of render-timeout is 0. If set to a value greater than 0 and 
-the property "portlet.async.execute.enabled" in portal.properties is set to
-true, then the portlet's render phase is processed asynchronously with the
-specified timeout in seconds. Otherwise, the portlet is processed synchronously.
+The default value of render-timeout is 0. If set to a value greater than 0,
+liferay monitoring and the property "monitoring.portlet.render.request" in 
+portal.properties is set to true, then the portlet's render phase procssing will
+be timed. If the execution time is longer than render-timeout, it will be 
+recorded as a timeout request processing. The time unit is millisecond.
 -->
 <!ELEMENT render-timeout (#PCDATA)>
 
