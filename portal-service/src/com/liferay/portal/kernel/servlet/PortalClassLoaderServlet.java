@@ -59,9 +59,6 @@ public class PortalClassLoaderServlet
 
 		ClassLoader contextClassLoader = currentThread.getContextClassLoader();
 
-		_servletConfig.getServletContext().
-			setAttribute("_ORIGINAL_CLASS_LOADER", contextClassLoader);
-
 		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
 
 		try {
@@ -79,10 +76,6 @@ public class PortalClassLoaderServlet
 			_log.error(e, e);
 		}
 		finally {
-
-			_servletConfig.getServletContext().
-				removeAttribute("_ORIGINAL_CLASS_LOADER");
-
 			currentThread.setContextClassLoader(contextClassLoader);
 		}
 	}

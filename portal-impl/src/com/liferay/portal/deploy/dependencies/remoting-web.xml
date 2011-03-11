@@ -194,3 +194,11 @@
 	<servlet-name>JSON Servlet</servlet-name>
 	<url-pattern>/secure/json/*</url-pattern>
 </servlet-mapping>
+<servlet-mapping>
+	<servlet-name>REST Servlet</servlet-name>
+	<url-pattern>/rest/*</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+	<servlet-name>REST Servlet</servlet-name>
+	<url-pattern>/secure/rest/*</url-pattern>
+</servlet-mapping>

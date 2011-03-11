@@ -14,51 +14,27 @@
 
 package com.liferay.portal.rest;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.servlet.PortalAbstractHttpServlet;
+import com.liferay.portal.kernel.servlet.PortletServlet;
+import com.liferay.portal.servlet.JSONServlet;
+import com.liferay.portal.struts.JSONAction;
 
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
-public class RestServlet extends PortalAbstractHttpServlet {
+/**
+ * @author Igor Spasic
+ */
+public class RestServlet extends JSONServlet {
 
-	public void init(ServletConfig servletConfig) {
-		super.init(servletConfig);
+	protected JSONAction getJSONAction(ServletContext servletContext) {
+		ClassLoader portletClassLoader =
+			(ClassLoader)servletContext.getAttribute(
+				PortletServlet.PORTLET_CLASS_LOADER);
 
-		ServletContext servletContext = servletConfig.getServletContext();
-
-		ClassLoader classLoader =
-			(ClassLoader)servletContext.getAttribute("_ORIGINAL_CLASS_LOADER");
-
-		if (classLoader == null) {
-			classLoader = Thread.currentThread().getContextClassLoader();
-		}
-
-		JSONRestAction jsonAction = new JSONRestAction(classLoader);
+		JSONAction jsonAction = new RESTServiceAction(portletClassLoader);
 
 		jsonAction.setServletContext(servletContext);
 
-		_action = jsonAction;
+		return jsonAction;
 	}
-
-	@Override
-	protected void execute(
-		HttpServletRequest request, HttpServletResponse response) {
-
-		try {
-			_action.execute(null, null, request, response);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	private Action _action;
-
-	private static Log _log = LogFactoryUtil.getLog(RestServlet.class);
 
 }

@@ -30,14 +30,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-public class JSONRestAction extends JSONServiceAction {
 
-	public JSONRestAction(ClassLoader classLoader) {
+/**
+ * @author Igor Spasic
+ */
+public class RESTServiceAction extends JSONServiceAction {
 
+	public RESTServiceAction(ClassLoader classLoader) {
 		RestConfigurator restConfigurator = new RestConfigurator();
 
 		restConfigurator.setRestActionsManager(
-					RestActionsManagerUtil.getRestActionsManager());
+			RestActionsManagerUtil.getRestActionsManager());
 
 		try {
 			restConfigurator.configure(classLoader);
@@ -45,12 +48,11 @@ public class JSONRestAction extends JSONServiceAction {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
 	}
 
 	public String getJSON(
-		ActionMapping mapping, ActionForm form, HttpServletRequest request,
-		HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		String path = GetterUtil.getString(request.getPathInfo());
@@ -60,9 +62,11 @@ public class JSONRestAction extends JSONServiceAction {
 		try {
 			RestAction restAction = RestActionsManagerUtil.lookup(path, method);
 
-//			if (restAction == null) {
-//				// ?
-//			}
+			if (restAction == null) {
+				throw new RuntimeException(
+					"No REST action associated with path " + path +
+						" and method " + method);
+			}
 
 			Object returnObj = restAction.invoke();
 
@@ -91,6 +95,12 @@ public class JSONRestAction extends JSONServiceAction {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JSONRestAction.class);
+	protected String getReroutePath() {
+		return _REROUTE_PATH;
+	}
+
+	private static final String _REROUTE_PATH = "/rest";
+
+	private static Log _log = LogFactoryUtil.getLog(RESTServiceAction.class);
 
 }

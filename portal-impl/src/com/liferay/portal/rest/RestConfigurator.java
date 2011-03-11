@@ -39,7 +39,6 @@ import org.apache.commons.lang.time.StopWatch;
 
 /**
  * @author Igor Spasic
-
  */
 public class RestConfigurator extends FindClass {
 
@@ -48,38 +47,35 @@ public class RestConfigurator extends FindClass {
 	}
 
 	public void configure(ClassLoader classLoader) throws PortalException {
-
 		URL[] classPathURLs = null;
 
-		// determine if we are in portal or in plugin
-		URL pluginsOnlyResource = classLoader.getResource("portal.properties");
+		if (classLoader != null) {
+			URL servicePropertiesURL = classLoader.getResource(
+				"service.properties");
 
-		if (pluginsOnlyResource != null) {
-			// plugin
+			File servicePropertiesFile =
+				new File(servicePropertiesURL.getPath());
 
-			File pluginWebInf = new File(pluginsOnlyResource.getPath());
-
-			pluginWebInf = pluginWebInf.getParentFile();
+			File webInfDir = servicePropertiesFile.getParentFile();
 
 			classPathURLs = new URL[1];
 
 			try {
-				classPathURLs[0] = pluginWebInf.toURL();
+				classPathURLs[0] = webInfDir.toURL();
 			}
 			catch (MalformedURLException murle) {
 				_log.error(murle, murle);
 			}
-
-		} else {
-			// portal
-			File portalImplLib = new File(
+		}
+		else {
+			File portalImplJarFile = new File(
 				PortalUtil.getPortalLibDir(), "portal-impl.jar");
 
-			if (portalImplLib.exists()) {
+			if (portalImplJarFile.exists()) {
 				classPathURLs = new URL[1];
 
 				try {
-					classPathURLs[0] = portalImplLib.toURL();
+					classPathURLs[0] = portalImplJarFile.toURL();
 				}
 				catch (MalformedURLException murle) {
 					_log.error(murle, murle);
