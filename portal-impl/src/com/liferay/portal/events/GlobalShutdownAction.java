@@ -32,10 +32,8 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.ThirdPartyThreadLocalRegistry;
 
@@ -120,12 +118,6 @@ public class GlobalShutdownAction extends SimpleAction {
 		// OpenOffice
 
 		DocumentConversionUtil.disconnect();
-
-		// POP server
-
-		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
-			POPServerUtil.stop();
-		}
 
 		// Scheduler
 

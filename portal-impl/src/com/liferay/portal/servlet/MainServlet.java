@@ -132,29 +132,7 @@ public class MainServlet extends ActionServlet {
 
 		PortalLifecycleUtil.flushDestroys();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Destroy social equity log scheduler");
-		}
-
-		try {
-			destroySocialEquityLogScheduler();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Destroy schedulers");
-		}
-
-		try {
-			destroySchedulers(portlets);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Destroy portlets");
@@ -639,42 +617,6 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
-	protected void destroySchedulers(List<Portlet> portlets) throws Exception {
-		if (!PropsValues.SCHEDULER_ENABLED) {
-			return;
-		}
-
-		for (Portlet portlet : portlets) {
-			if (!portlet.isActive()) {
-				continue;
-			}
-
-			List<SchedulerEntry> schedulerEntries =
-				portlet.getSchedulerEntries();
-
-			if ((schedulerEntries == null) || schedulerEntries.isEmpty()) {
-				continue;
-			}
-
-			for (SchedulerEntry schedulerEntry : schedulerEntries) {
-				SchedulerEngineUtil.unschedule(
-					schedulerEntry, StorageType.PERSISTED);
-			}
-		}
-	}
-
-	protected void destroySocialEquityLogScheduler() throws Exception {
-		try {
-			if (_socialEquityLogSchedulerEntry != null) {
-				SchedulerEngineUtil.unschedule(
-					_socialEquityLogSchedulerEntry, StorageType.PERSISTED);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
 	protected HttpServletRequest encryptRequest(
 		HttpServletRequest request, long companyId) {
 
@@ -970,17 +912,17 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initSocialEquityLogScheduler() throws Exception {
-		_socialEquityLogSchedulerEntry = new SchedulerEntryImpl();
+		SchedulerEntry socialEquityLogSchedulerEntry = new SchedulerEntryImpl();
 
-		_socialEquityLogSchedulerEntry.setEventListenerClass(
+		socialEquityLogSchedulerEntry.setEventListenerClass(
 			CheckEquityLogMessageListener.class.getName());
-		_socialEquityLogSchedulerEntry.setTimeUnit(TimeUnit.MINUTE);
-		_socialEquityLogSchedulerEntry.setTriggerType(TriggerType.SIMPLE);
-		_socialEquityLogSchedulerEntry.setTriggerValue(
+		socialEquityLogSchedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+		socialEquityLogSchedulerEntry.setTriggerType(TriggerType.SIMPLE);
+		socialEquityLogSchedulerEntry.setTriggerValue(
 			PropsValues.SOCIAL_EQUITY_EQUITY_LOG_CHECK_INTERVAL);
 
 		SchedulerEngineUtil.schedule(
-			_socialEquityLogSchedulerEntry, StorageType.PERSISTED,
+			socialEquityLogSchedulerEntry, StorageType.MEMORY_CLUSTERED,
 			PortalClassLoaderUtil.getClassLoader(), 0);
 	}
 
@@ -1258,7 +1200,5 @@ public class MainServlet extends ActionServlet {
 		"Liferay-Portal";
 
 	private static Log _log = LogFactoryUtil.getLog(MainServlet.class);
-
-	private SchedulerEntry _socialEquityLogSchedulerEntry;
 
 }

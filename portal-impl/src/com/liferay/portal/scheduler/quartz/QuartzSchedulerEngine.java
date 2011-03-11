@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.scheduler.IntervalTrigger;
 import com.liferay.portal.kernel.scheduler.JobState;
@@ -306,10 +305,6 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 
 			message.put(RECEIVER_KEY, quartzTrigger.getFullJobName());
 
-			if (isPersisted(destination, message)) {
-				message.put(PERSISTED, true);
-			}
-
 			schedule(
 				scheduler, storageType, quartzTrigger, description, destination,
 				message);
@@ -352,7 +347,7 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		try {
 			_persistedScheduler.start();
 
-			cleanTemporaryJobs();
+			initJobState();
 
 			_memoryScheduler.start();
 		}
@@ -437,31 +432,6 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		}
 		catch (Exception e) {
 			throw new SchedulerException("Unable to update trigger", e);
-		}
-	}
-
-	protected void cleanTemporaryJobs() throws Exception {
-		String[] groupNames = _persistedScheduler.getJobGroupNames();
-
-		for (String groupName : groupNames) {
-			String[] jobNames = _persistedScheduler.getJobNames(groupName);
-
-			for (String jobName : jobNames) {
-				JobDetail jobDetail = _persistedScheduler.getJobDetail(
-					jobName, groupName);
-
-				if (jobDetail == null) {
-					continue;
-				}
-
-				JobDataMap jobDataMap = jobDetail.getJobDataMap();
-
-				Message message = getMessage(jobDataMap);
-
-				if (!message.getBoolean(PERSISTED)) {
-					_persistedScheduler.deleteJob(jobName, groupName);
-				}
-			}
 		}
 	}
 
@@ -748,17 +718,31 @@ public class QuartzSchedulerEngine implements SchedulerEngine {
 		return schedulerFactory.getScheduler();
 	}
 
-	protected boolean isPersisted(String destinationName, Message message) {
-		if (destinationName.equals(DestinationNames.SCHEDULER_DISPATCH)) {
-			return false;
-		}
-		else if (destinationName.equals(DestinationNames.SCHEDULER_SCRIPTING) &&
-				 !message.getBoolean(SchedulerEngine.PERSISTED)) {
+	protected void initJobState() throws Exception {
+		String [] groupNames = _persistedScheduler.getJobGroupNames();
 
-			return false;
-		}
-		else {
-			return true;
+		for (String groupName : groupNames) {
+			String[] jobNames = _persistedScheduler.getJobNames(groupName);
+
+			for(String jobName : jobNames) {
+				Trigger trigger = _persistedScheduler.getTrigger(
+					jobName, groupName);
+
+				if (trigger != null) {
+					continue;
+				}
+
+				JobDetail jobDetail = _persistedScheduler.getJobDetail(
+					jobName, groupName);
+
+				JobDataMap jobDataMap = jobDetail.getJobDataMap();
+
+				JobState jobState = (JobState)jobDataMap.get(JOB_STATE);
+
+				jobState.setTriggerState(TriggerState.COMPLETE);
+
+				_persistedScheduler.addJob(jobDetail, true);
+			}
 		}
 	}
 

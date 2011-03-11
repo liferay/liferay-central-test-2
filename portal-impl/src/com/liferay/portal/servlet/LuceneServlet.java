@@ -83,18 +83,18 @@ public class LuceneServlet extends HttpServlet {
 			}
 
 			if (PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_ENABLED) {
-				_schedulerEntry = new SchedulerEntryImpl();
+				SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
 
-				_schedulerEntry.setEventListenerClass(
+				schedulerEntry.setEventListenerClass(
 					CleanUpMessageListener.class.getName());
-				_schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
-				_schedulerEntry.setTriggerType(TriggerType.SIMPLE);
-				_schedulerEntry.setTriggerValue(
+				schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+				schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+				schedulerEntry.setTriggerValue(
 					PropsValues.LUCENE_STORE_JDBC_AUTO_CLEAN_UP_INTERVAL);
 
 				try {
 					SchedulerEngineUtil.schedule(
-						_schedulerEntry, StorageType.PERSISTED,
+						schedulerEntry, StorageType.MEMORY,
 						PortalClassLoaderUtil.getClassLoader(), 0);
 				}
 				catch (Exception e) {
@@ -105,16 +105,6 @@ public class LuceneServlet extends HttpServlet {
 	}
 
 	public void destroy() {
-		try {
-			if (_schedulerEntry != null) {
-				SchedulerEngineUtil.unschedule(
-					_schedulerEntry, StorageType.PERSISTED);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		// Wait for indexer to be gracefully interrupted
 
 		for (int i = 0; i < _indexers.size(); i++) {
@@ -156,6 +146,5 @@ public class LuceneServlet extends HttpServlet {
 
 	private List<ObjectValuePair<LuceneIndexer, Thread>> _indexers =
 		new ArrayList<ObjectValuePair<LuceneIndexer, Thread>>();
-	private SchedulerEntry _schedulerEntry;
 
 }

@@ -57,10 +57,6 @@ public class POPServerUtil {
 		_instance._start();
 	}
 
-	public static void stop() {
-		_instance._stop();
-	}
-
 	private POPServerUtil() {
 	}
 
@@ -139,34 +135,18 @@ public class POPServerUtil {
 		}
 
 		try {
-			_schedulerEntry = new SchedulerEntryImpl();
+			SchedulerEntry schedulerEntry = new SchedulerEntryImpl();
 
-			_schedulerEntry.setEventListenerClass(
+			schedulerEntry.setEventListenerClass(
 				POPNotificationsMessageListener.class.getName());
-			_schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
-			_schedulerEntry.setTriggerType(TriggerType.SIMPLE);
-			_schedulerEntry.setTriggerValue(
+			schedulerEntry.setTimeUnit(TimeUnit.MINUTE);
+			schedulerEntry.setTriggerType(TriggerType.SIMPLE);
+			schedulerEntry.setTriggerValue(
 				PropsValues.POP_SERVER_NOTIFICATIONS_INTERVAL);
 
 			SchedulerEngineUtil.schedule(
-				_schedulerEntry, StorageType.PERSISTED,
+				schedulerEntry, StorageType.MEMORY_CLUSTERED,
 				PortalClassLoaderUtil.getClassLoader(), 0);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	private void _stop() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Stop");
-		}
-
-		try {
-			if (_schedulerEntry != null) {
-				SchedulerEngineUtil.unschedule(
-					_schedulerEntry, StorageType.PERSISTED);
-			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -178,6 +158,5 @@ public class POPServerUtil {
 	private static POPServerUtil _instance = new POPServerUtil();
 
 	private List<MessageListener> _listeners = new ArrayList<MessageListener>();
-	private SchedulerEntry _schedulerEntry;
 
 }

@@ -430,7 +430,7 @@ public class PortletBagFactory {
 		}
 
 		SchedulerEngineUtil.schedule(
-			schedulerEntry, StorageType.PERSISTED, _classLoader, 0);
+			schedulerEntry, StorageType.MEMORY_CLUSTERED, _classLoader, 0);
 	}
 
 	protected void initSchedulers(Portlet portlet) throws Exception {

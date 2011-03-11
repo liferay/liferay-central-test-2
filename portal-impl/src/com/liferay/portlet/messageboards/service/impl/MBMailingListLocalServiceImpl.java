@@ -156,8 +156,6 @@ public class MBMailingListLocalServiceImpl
 		MBMailingList mailingList = mbMailingListPersistence.findByPrimaryKey(
 			mailingListId);
 
-		boolean oldActive = mailingList.isActive();
-
 		mailingList.setModifiedDate(serviceContext.getModifiedDate(null));
 		mailingList.setEmailAddress(emailAddress);
 		mailingList.setInProtocol(inUseSSL ? inProtocol + "s" : inProtocol);
@@ -180,10 +178,6 @@ public class MBMailingListLocalServiceImpl
 
 		// Scheduler
 
-		if (oldActive) {
-			unscheduleMailingList(mailingList);
-		}
-
 		if (active) {
 			scheduleMailingList(mailingList);
 		}
@@ -199,8 +193,6 @@ public class MBMailingListLocalServiceImpl
 
 	protected void scheduleMailingList(MBMailingList mailingList)
 		throws PortalException {
-
-		unscheduleMailingList(mailingList);
 
 		String groupName = getSchedulerGroupName(mailingList);
 
@@ -228,7 +220,7 @@ public class MBMailingListLocalServiceImpl
 		mailingListRequest.setInPassword(mailingList.getInPassword());
 
 		SchedulerEngineUtil.schedule(
-			trigger, StorageType.PERSISTED, null,
+			trigger, StorageType.MEMORY_CLUSTERED, null,
 			DestinationNames.MESSAGE_BOARDS_MAILING_LIST, mailingListRequest,
 			0);
 	}
@@ -238,7 +230,7 @@ public class MBMailingListLocalServiceImpl
 
 		String groupName = getSchedulerGroupName(mailingList);
 
-		SchedulerEngineUtil.unschedule(groupName, StorageType.PERSISTED);
+		SchedulerEngineUtil.unschedule(groupName, StorageType.MEMORY_CLUSTERED);
 	}
 
 	protected void validate(

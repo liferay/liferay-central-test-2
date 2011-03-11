@@ -150,7 +150,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			if ((schedulerEntries != null) && !schedulerEntries.isEmpty()) {
 				for (SchedulerEntry schedulerEntry : schedulerEntries) {
 					SchedulerEngineUtil.unschedule(
-						schedulerEntry, StorageType.PERSISTED);
+						schedulerEntry, StorageType.MEMORY_CLUSTERED);
 				}
 			}
 		}
