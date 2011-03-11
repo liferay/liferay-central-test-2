@@ -181,6 +181,12 @@ AUI().add(
 				layoutHandler.on('drag:start', A.bind(Layout._onPortletDragStart, Layout));
 			},
 
+			getActiveDropContainer: function() {
+				var options = Layout.options;
+
+				return A.all(options.dropContainer + ':not(.' + options.disabledDropContainerClass + ')').item(0);
+			},
+
 			getActiveDropNodes: function() {
 				var options = Layout.options;
 				var dropNodes = [];

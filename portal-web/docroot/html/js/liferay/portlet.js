@@ -118,7 +118,7 @@
 			var beforePortletLoaded = options.beforePortletLoaded;
 			var onComplete = options.onComplete;
 
-			var container = A.one(Liferay.Layout.options.dropContainer);
+			var container = Liferay.Layout.getActiveDropContainer();
 
 			if (!container) {
 				return;
@@ -131,7 +131,7 @@
 				var column = placeHolder.get('parentNode');
 
 				if (!column) {
-					return null;
+					return;
 				}
 
 				placeHolder.addClass('portlet-boundary');
