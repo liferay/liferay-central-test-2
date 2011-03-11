@@ -170,7 +170,7 @@
 	<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
 	<init-param>
 		<param-name>servlet-class</param-name>
-		<param-value>com.liferay.portal.rest.RestServlet</param-value>
+		<param-value>com.liferay.portal.rest.RESTServlet</param-value>
 	</init-param>
 	<init-param>
 		<param-name>use-portlet-class-loader</param-name>

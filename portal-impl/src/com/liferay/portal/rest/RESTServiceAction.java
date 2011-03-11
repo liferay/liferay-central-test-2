@@ -19,8 +19,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.rest.RestAction;
-import com.liferay.portal.kernel.rest.RestActionsManagerUtil;
+import com.liferay.portal.kernel.rest.RESTAction;
+import com.liferay.portal.kernel.rest.RESTActionsManagerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.lang.reflect.InvocationTargetException;
@@ -37,10 +37,10 @@ import org.apache.struts.action.ActionMapping;
 public class RESTServiceAction extends JSONServiceAction {
 
 	public RESTServiceAction(ClassLoader classLoader) {
-		RestConfigurator restConfigurator = new RestConfigurator();
+		RESTConfigurator restConfigurator = new RESTConfigurator();
 
-		restConfigurator.setRestActionsManager(
-			RestActionsManagerUtil.getRestActionsManager());
+		restConfigurator.setRESTActionsManager(
+			RESTActionsManagerUtil.getRESTActionsManager());
 
 		try {
 			restConfigurator.configure(classLoader);
@@ -60,7 +60,7 @@ public class RESTServiceAction extends JSONServiceAction {
 		String method = GetterUtil.getString(request.getMethod());
 
 		try {
-			RestAction restAction = RestActionsManagerUtil.lookup(path, method);
+			RESTAction restAction = RESTActionsManagerUtil.lookup(path, method);
 
 			if (restAction == null) {
 				throw new RuntimeException(
