@@ -95,9 +95,19 @@ public abstract class JSONAction extends Action {
 		_servletContext = servletContext;
 	}
 
+	protected String getReroutePath() {
+		return null;
+	}
+
 	protected boolean rerouteExecute(
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
+
+		String reroutePath = getReroutePath();
+
+		if (Validator.isNull(reroutePath)) {
+			return false;
+		}
 
 		String requestServletContextName = ParamUtil.getString(
 			request, "servletContextName");
@@ -127,7 +137,7 @@ public abstract class JSONAction extends Action {
 		}
 
 		RequestDispatcher requestDispatcher =
-			requestServletContext.getRequestDispatcher("/json");
+			requestServletContext.getRequestDispatcher(reroutePath);
 
 		if (requestDispatcher == null) {
 			return false;

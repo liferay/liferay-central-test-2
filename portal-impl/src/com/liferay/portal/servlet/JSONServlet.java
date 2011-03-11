@@ -33,8 +33,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
-
 /**
  * @author Brian Wing Shun Chan
  */
@@ -46,11 +44,7 @@ public class JSONServlet extends HttpServlet {
 		_portletClassLoader = (ClassLoader)servletContext.getAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER);
 
-		JSONAction jsonAction = new JSONServiceAction();
-
-		jsonAction.setServletContext(servletContext);
-
-		_action = jsonAction;
+		_jsonAction = getJSONAction(servletContext);
 	}
 
 	public void service(
@@ -77,7 +71,7 @@ public class JSONServlet extends HttpServlet {
 			}
 
 			if (_portletClassLoader == null) {
-				_action.execute(null, null, request, response);
+				_jsonAction.execute(null, null, request, response);
 			}
 			else {
 				Thread currentThread = Thread.currentThread();
@@ -88,7 +82,7 @@ public class JSONServlet extends HttpServlet {
 				try {
 					currentThread.setContextClassLoader(_portletClassLoader);
 
-					_action.execute(null, null, request, response);
+					_jsonAction.execute(null, null, request, response);
 				}
 				finally {
 					currentThread.setContextClassLoader(contextClassLoader);
@@ -100,9 +94,17 @@ public class JSONServlet extends HttpServlet {
 		}
 	}
 
+	protected JSONAction getJSONAction(ServletContext servletContext) {
+		JSONAction jsonAction = new JSONServiceAction();
+
+		jsonAction.setServletContext(servletContext);
+
+		return jsonAction;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(JSONServlet.class);
 
-	private Action _action;
+	private JSONAction _jsonAction;
 	private ClassLoader _portletClassLoader;
 
 }

@@ -490,6 +490,10 @@ public class JSONServiceAction extends JSONAction {
 		}
 	}
 
+	protected String getReroutePath() {
+		return _REROUTE_PATH;
+	}
+
 	protected String getReturnValue(AssetEntryDisplay assetEntryDisplay)
 		throws Exception {
 
@@ -786,6 +790,8 @@ public class JSONServiceAction extends JSONAction {
 
 		return jsonObject;
 	}
+
+	private static final String _REROUTE_PATH = "/json";
 
 	private static Log _log = LogFactoryUtil.getLog(JSONServiceAction.class);
 
