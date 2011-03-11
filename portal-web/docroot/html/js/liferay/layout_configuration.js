@@ -190,7 +190,7 @@
 							}
 							else {
 								var layoutOptions = Layout.options;
-								var firstColumn = A.one(layoutOptions.dropNodes);
+								var firstColumn = Layout.getActiveDropNodes().item(0);
 
 								if (firstColumn) {
 									var dropColumn = firstColumn.one(layoutOptions.dropContainer);

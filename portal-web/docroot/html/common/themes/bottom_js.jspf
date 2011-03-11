@@ -60,7 +60,8 @@ if (layout != null) {
 
 		if (!themeDisplay.isFreeformLayout()) {
 			layoutOptions = {
-				dragNodes: '#main-content .portlet-boundary',
+				disabledDropContainerClass: 'portlet-dropzone-disabled',
+				dragNodes: '#main-content .portlet-boundary:not(.portlet-static)',
 				dropContainer: '.portlet-dropzone',
 				dropNodes: '.portlet-column',
 				emptyColumnClass: 'empty',
@@ -72,6 +73,7 @@ if (layout != null) {
 		}
 		else {
 			layoutOptions = {
+				disabledDropContainerClass: 'portlet-dropzone-disabled',
 				dragNodes: '#main-content .portlet-boundary',
 				dropContainer: '.portlet-dropzone',
 				dropNodes: '.portlet-column',

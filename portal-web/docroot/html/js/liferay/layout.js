@@ -76,7 +76,7 @@ AUI().add(
 					dropContainer: function(dropNode) {
 						return dropNode.one(options.dropContainer);
 					},
-					dropNodes: options.dropNodes,
+					dropNodes: Layout.getActiveDropNodes(),
 					lazyStart: true,
 					on: {
 						'drop:enter': function(event) {
@@ -181,6 +181,21 @@ AUI().add(
 				layoutHandler.on('drag:start', A.bind(Layout._onPortletDragStart, Layout));
 			},
 
+			getActiveDropNodes: function() {
+				var options = Layout.options;
+				var dropNodes = [];
+
+				A.all(options.dropContainer).each(
+					function(dropContainer) {
+						if (!dropContainer.hasClass(options.disabledDropContainerClass)) {
+							dropNodes.push(dropContainer.get('parentNode'));
+						}
+					}
+				);
+
+				return A.all(dropNodes);
+			},
+			
 			getLastPortletNode: function(column) {
 				var instance = this;
 
@@ -410,8 +425,8 @@ AUI().add(
 					var columnHasPortlets = Layout.hasPortlets(columnNode);
 					var originalColumnHasPortlets = Layout.hasPortlets(originalParent);
 
-					var currentColumn = columnNode.ancestor(Layout.options.dropNodes);
-					var originalColumn = originalParent.ancestor(Layout.options.dropNodes);
+					var currentColumn = columnNode.ancestor(options.dropNodes);
+					var originalColumn = originalParent.ancestor(options.dropNodes);
 
 					if (currentColumn) {
 						var dropZoneId = currentColumn.get('id');

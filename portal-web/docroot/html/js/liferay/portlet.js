@@ -130,6 +130,10 @@
 			if (options.placeHolder) {
 				var column = placeHolder.get('parentNode');
 
+				if (!column) {
+					return null;
+				}
+
 				placeHolder.addClass('portlet-boundary');
 
 				portletPosition = column.all('.portlet-boundary').indexOf(placeHolder);
