@@ -34,7 +34,7 @@ List<Group> groups = (List<Group>)request.getAttribute("user.groups");
 
 <liferay-ui:search-container
 	id='<%= renderResponse.getNamespace() + "groupsSearchContainer" %>'
-	headerNames="name,roles"
+	headerNames="name,roles,null"
 >
 	<liferay-ui:search-container-results
 		results="<%= groups %>"

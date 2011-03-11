@@ -206,7 +206,7 @@ if (parentOrganization != null) {
 <liferay-ui:error exception="<%= OrganizationParentException.class %>" message="please-enter-a-valid-parent-organization" />
 
 <liferay-ui:search-container
-	headerNames="name,type"
+	headerNames="name,type,null"
 	id='<%= renderResponse.getNamespace() + "parentOrganizationSearchContainer" %>'
 >
 	<liferay-ui:search-container-results
