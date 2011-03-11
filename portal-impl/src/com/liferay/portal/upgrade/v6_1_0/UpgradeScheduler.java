@@ -42,100 +42,24 @@ import java.util.Map;
  */
 public class UpgradeScheduler extends UpgradeProcess {
 
-	protected void deleteFromCronTrigger(String jobName, String jobGroup)
+	protected void deleteJob(String jobName, String jobGroup)
 		throws Exception {
 
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		runSQL(
+			"delete from QUARTZ_CRON_TRIGGERS where TRIGGER_NAME = '" +
+				jobName + "' and TRIGGER_GROUP = '" + jobGroup + "'");
 
-		try {
-			con = DataAccess.getConnection();
+		runSQL(
+			"delete from QUARTZ_JOB_DETAILS where JOB_NAME = '" +
+				jobName + "' and JOB_GROUP = '" + jobGroup + "'");
 
-			ps = con.prepareStatement(
-				"delete from QUARTZ_CRON_TRIGGERS where TRIGGER_NAME = " +
-					"? and TRIGGER_GROUP = ?");
+		runSQL(
+			"delete from QUARTZ_SIMPLE_TRIGGERS where TRIGGER_NAME = '" +
+				jobName + "' and TRIGGER_GROUP = '" + jobGroup + "'");
 
-			ps.setString(1, jobName);
-			ps.setString(2, jobGroup);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void deleteFromJobDetail(String jobName, String jobGroup)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"delete from QUARTZ_JOB_DETAILS where JOB_NAME = " +
-					"? and JOB_GROUP = ?");
-
-			ps.setString(1, jobName);
-			ps.setString(2, jobGroup);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void deleteFromSimpleTrigger(String jobName, String jobGroup)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"delete from QUARTZ_SIMPLE_TRIGGERS where TRIGGER_NAME = " +
-					"? and TRIGGER_GROUP = ?");
-
-			ps.setString(1, jobName);
-			ps.setString(2, jobGroup);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
-	protected void deleteFromTrigger(String jobName, String jobGroup)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(
-				"delete from QUARTZ_TRIGGERS where TRIGGER_NAME = " +
-					"? and TRIGGER_GROUP = ?");
-
-			ps.setString(1, jobName);
-			ps.setString(2, jobGroup);
-
-			ps.executeUpdate();
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+		runSQL(
+			"delete from QUARTZ_TRIGGERS where TRIGGER_NAME = '" +
+				jobName + "' and TRIGGER_GROUP = '" + jobGroup + "'");
 	}
 
 	protected void doUpgrade() throws Exception {
@@ -151,10 +75,7 @@ public class UpgradeScheduler extends UpgradeProcess {
 			byte[] jobData = (byte[])array[2];
 
 			if (jobData == null) {
-				deleteFromCronTrigger(jobName, jobGroup);
-				deleteFromJobDetail(jobName, jobGroup);
-				deleteFromSimpleTrigger(jobName, jobGroup);
-				deleteFromTrigger(jobName, jobGroup);
+				deleteJob(jobName, jobGroup);
 			}
 			else {
 				updateJobDetail(jobName, jobGroup, jobData);
