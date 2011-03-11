@@ -158,7 +158,12 @@ public class MonitoringPortlet implements InvokerPortlet {
 	}
 
 	public void init(PortletConfig portletConfig) throws PortletException {
-		_invokerPortlet.init(portletConfig);
+		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
+		
+		_invokerPortlet.init(portletConfigImpl);
+		
+		_actionTimeout = portletConfigImpl.getPortlet().getActionTimeout();
+		_renderTimeout = portletConfigImpl.getPortlet().getRenderTimeout();
 	}
 
 	public boolean isCheckAuthToken() {
@@ -210,7 +215,8 @@ public class MonitoringPortlet implements InvokerPortlet {
 		try {
 			if (_monitoringPortletActionRequest) {
 				portletRequestDataSample = new PortletRequestDataSample(
-					PortletRequestType.ACTION, actionRequest, actionResponse);
+					PortletRequestType.ACTION, actionRequest, actionResponse, 
+					_actionTimeout);
 
 				portletRequestDataSample.prepare();
 			}
@@ -276,7 +282,8 @@ public class MonitoringPortlet implements InvokerPortlet {
 		try {
 			if (_monitoringPortletRenderRequest) {
 				portletRequestDataSample = new PortletRequestDataSample(
-					PortletRequestType.RENDER, renderRequest, renderResponse);
+					PortletRequestType.RENDER, renderRequest, renderResponse, 
+					_renderTimeout);
 
 				portletRequestDataSample.prepare();
 			}
@@ -377,7 +384,9 @@ public class MonitoringPortlet implements InvokerPortlet {
 	private static boolean _monitoringPortletResourceRequest =
 		PropsValues.MONITORING_PORTLET_RESOURCE_REQUEST;
 
+	private long _actionTimeout;
 	private InvokerPortlet _invokerPortlet;
+	private long _renderTimeout;
 	private SingleDestinationMessageSender _singleDestinationMessageSender;
 
 }

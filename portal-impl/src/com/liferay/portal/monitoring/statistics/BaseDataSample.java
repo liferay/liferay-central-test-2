@@ -30,6 +30,14 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class BaseDataSample implements DataSample, Serializable {
 
+	public BaseDataSample() {
+		this(-1);
+	}
+
+	public BaseDataSample(long timeout) {
+		_timeout = timeout;
+	}
+
 	public void capture(RequestStatus requestStatus) {
 		if (_stopWatch != null) {
 			_stopWatch.stop();
@@ -37,7 +45,13 @@ public class BaseDataSample implements DataSample, Serializable {
 			_duration = _stopWatch.getTime();
 		}
 
-		_requestStatus = requestStatus;
+		if ((_timeout > 0) && (_duration >= _timeout) && 
+			(requestStatus != RequestStatus.ERROR)) {
+			_requestStatus = RequestStatus.TIMEOUT;
+		}
+		else {
+			_requestStatus = requestStatus;
+		}
 	}
 
 	public Map<String, String> getAttributes() {
@@ -138,6 +152,7 @@ public class BaseDataSample implements DataSample, Serializable {
 	private String _namespace;
 	private RequestStatus _requestStatus;
 	private transient StopWatch _stopWatch;
+	private long _timeout;
 	private String _user;
 
 }
