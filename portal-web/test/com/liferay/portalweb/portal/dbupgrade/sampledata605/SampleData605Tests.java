@@ -19,6 +19,7 @@ import com.liferay.portalweb.portal.dbupgrade.sampledata605.address.AddressTests
 import com.liferay.portalweb.portal.dbupgrade.sampledata605.announcements.AnnouncementsTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata605.announcementsdelivery.AnnouncementsDeliveryTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata605.calendar.CalendarTests;
+import com.liferay.portalweb.portal.dbupgrade.sampledata605.community.CommunityTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata605.documentlibrary.DocumentLibraryTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata605.expando.ExpandoTests;
 import com.liferay.portalweb.portal.dbupgrade.sampledata605.groups.GroupsTests;
@@ -47,6 +48,7 @@ public class SampleData605Tests extends BaseTests {
 		testSuite.addTest(AnnouncementsTests.suite());
 		testSuite.addTest(AnnouncementsDeliveryTests.suite());
 		testSuite.addTest(CalendarTests.suite());
+		testSuite.addTest(CommunityTests.suite());
 		testSuite.addTest(DocumentLibraryTests.suite());
 		testSuite.addTest(ExpandoTests.suite());
 		testSuite.addTest(GroupsTests.suite());
