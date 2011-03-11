@@ -169,8 +169,12 @@ public interface Document extends Serializable {
 
 	public Map<String, Field> getFields();
 
+	public String getPortletId();
+
 	public String getUID();
 
 	public String[] getValues(String name);
+
+	public void remove(String name);
 
 }

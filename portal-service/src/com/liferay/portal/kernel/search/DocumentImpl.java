@@ -446,6 +446,14 @@ public class DocumentImpl implements Document {
 		return _fields;
 	}
 
+	public String getPortletId() {
+		String uid = getUID();
+
+		int pos = uid.indexOf(_UID_PORTLET);
+
+		return uid.substring(0, pos);
+	}
+
 	public String getUID() {
 		Field field = _fields.get(Field.UID);
 
@@ -464,6 +472,10 @@ public class DocumentImpl implements Document {
 		}
 
 		return field.getValues();
+	}
+
+	public void remove(String name) {
+		_fields.remove(name);
 	}
 
 	public void setFields(Map<String, Field> fields) {
