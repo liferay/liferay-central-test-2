@@ -158,7 +158,7 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.rest.RESTActionsManagerUtil" class="com.liferay.portal.kernel.rest.RESTActionsManagerUtil">
-		<property name="restActionsManager">
+		<property name="RESTActionsManager">
 			<bean class="com.liferay.portal.rest.RESTActionsManagerImpl" />
 		</property>
 	</bean>
