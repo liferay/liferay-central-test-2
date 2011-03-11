@@ -50,7 +50,7 @@ public class ViewSampleData527LatestTests extends BaseTests {
 		testSuite.addTest(Announcements527LatestTests.suite());
 		testSuite.addTest(AnnouncementsDelivery527LatestTests.suite());
 		testSuite.addTest(Calendar527LatestTests.suite());
-        testSuite.addTest(Community527LatestTests.suite());
+		testSuite.addTest(Community527LatestTests.suite());
 		testSuite.addTest(DocumentLibrary527LatestTests.suite());
 		testSuite.addTest(Expando527LatestTests.suite());
 		testSuite.addTest(Groups527LatestTests.suite());
