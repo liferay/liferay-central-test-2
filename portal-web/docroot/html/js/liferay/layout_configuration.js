@@ -190,6 +190,7 @@
 							}
 							else {
 								var layoutOptions = Layout.options;
+
 								var firstColumn = Layout.getActiveDropNodes().item(0);
 
 								if (firstColumn) {

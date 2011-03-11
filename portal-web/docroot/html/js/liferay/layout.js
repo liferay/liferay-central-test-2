@@ -189,6 +189,7 @@ AUI().add(
 
 			getActiveDropNodes: function() {
 				var options = Layout.options;
+
 				var dropNodes = [];
 
 				A.all(options.dropContainer).each(
