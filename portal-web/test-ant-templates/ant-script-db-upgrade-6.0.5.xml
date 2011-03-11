@@ -3,7 +3,7 @@
 <project name="portal-test-${test.ant.script.command}-6.0.5" basedir="../../." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="../../build-test-db-upgrade.xml" />
 
-	<target name="test-${test.ant.script.command}-6.0.5-tomcat-db2">
+	<target name="test-${test.ant.script.command}-6.0.5-tomcat-db2-firefox">
 		<antcall target="prepare-db-db2-common">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="6.0.5" />
@@ -30,7 +30,7 @@
 		</antcall>
 	</target>
 
-	<target name="test-${test.ant.script.command}-6.0.5-tomcat-mysql">
+	<target name="test-${test.ant.script.command}-6.0.5-tomcat-mysql-firefox">
 		<antcall target="prepare-db-mysql-common">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="6.0.5" />
@@ -57,7 +57,7 @@
 		</antcall>
 	</target>
 
-	<target name="test-${test.ant.script.command}-6.0.5-tomcat-oracle">
+	<target name="test-${test.ant.script.command}-6.0.5-tomcat-oracle-firefox">
 		<antcall target="prepare-db-oracle-common">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="6.0.5" />
@@ -84,7 +84,7 @@
 		</antcall>
 	</target>
 
-	<target name="test-${test.ant.script.command}-6.0.5-tomcat-postgresql">
+	<target name="test-${test.ant.script.command}-6.0.5-tomcat-postgresql-firefox">
 		<antcall target="prepare-db-postgresql-common">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="6.0.5" />
@@ -111,7 +111,7 @@
 		</antcall>
 	</target>
 
-	<target name="test-${test.ant.script.command}-6.0.5-tomcat-sql-server">
+	<target name="test-${test.ant.script.command}-6.0.5-tomcat-sql-server-firefox">
 		<antcall target="prepare-db-sql-server-common">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="6.0.5" />
@@ -138,7 +138,7 @@
 		</antcall>
 	</target>
 
-	<target name="test-${test.ant.script.command}-6.0.5-tomcat-sybase">
+	<target name="test-${test.ant.script.command}-6.0.5-tomcat-sybase-firefox">
 		<antcall target="prepare-db-sybase-common">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.version" value="6.0.5" />
