@@ -285,7 +285,7 @@ if (!themeDisplay.isStatePopUp()) {
 
 					var focusManager = addContentPanelContainer.focusManager;
 
-					instance._refreshFocusManagerTask = new A.DelayedTask(focusManager.refresh, focusManager);
+					instance._refreshFocusManagerTask = A.debounce(focusManager.refresh, 50, focusManager);
 
 					instance._searchPanelInput.on(
 						'key',
@@ -324,7 +324,7 @@ if (!themeDisplay.isStatePopUp()) {
 								search: function(event) {
 									instance._searchActive = true;
 
-									instance._refreshFocusManagerTask.delay(50);
+									instance._refreshFocusManagerTask();
 
 									if (!trim(searchPanelInput.val())) {
 										body.removeClass(CSS_SEARCH_PANEL_ACTIVE);

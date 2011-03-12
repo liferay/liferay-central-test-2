@@ -101,11 +101,9 @@ AUI().add(
 
 						instance._categoryViewContainer.on('click', instance._onCategoryViewContainerClick, instance);
 
-						instance._hideMessageTask = new A.DelayedTask(
-							function() {
-								instance._portletMessageContainer.hide();
-							}
-						);
+						var portletMessageContainer = instance._portletMessageContainer;
+
+						instance._hideMessageTask = A.debounce(portletMessageContainer.hide, 7000, portletMessageContainer);
 
 						var vocabularyList = A.one(instance._vocabularyContainerSelector);
 
@@ -1594,7 +1592,7 @@ AUI().add(
 
 						output.show();
 
-						instance._hideMessageTask.delay(7000);
+						instance._hideMessageTask();
 					},
 
 					_showCategoryPanel: function(action) {

@@ -550,17 +550,13 @@ AUI().add(
 
 						calculateOffset();
 
-						var calculateTask = new A.DelayedTask(calculateOffset);
+						var calculateTask = A.debounce(calculateOffset, 200);
 
 						if (!ie6) {
-							var onWindowChange = function(event) {
-								calculateTask.delay(200);
-							};
-
 							var win = A.getWin();
 
-							win.on('scroll', onWindowChange);
-							win.on('resize', onWindowChange);
+							win.on('scroll', calculateTask);
+							win.on('resize', calculateTask);
 						}
 					}
 					else {

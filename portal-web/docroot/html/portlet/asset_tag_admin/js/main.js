@@ -72,11 +72,9 @@ AUI().add(
 							points: ['tc', 'tc']
 						};
 
-						instance._hideMessageTask = new A.DelayedTask(
-							function() {
-								instance._portletMessageContainer.hide();
-							}
-						);
+						var portletMessageContainer = instance._portletMessageContainer;
+
+						instance._hideMessageTask = A.debounce(portletMessageContainer.hide, 7000, portletMessageContainer);
 
 						instance._tagsList.on(EVENT_CLICK, instance._onTagsListClick, instance);
 						instance._tagsList.on('key', instance._onTagsListSelect, 'up:13', instance);
@@ -965,7 +963,7 @@ AUI().add(
 
 						output.show();
 
-						instance._hideMessageTask.delay(7000);
+						instance._hideMessageTask();
 					},
 
 					_showLoading: function(container) {

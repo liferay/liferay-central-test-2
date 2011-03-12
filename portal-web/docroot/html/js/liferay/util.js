@@ -706,7 +706,7 @@
 					}
 				);
 
-				var hideTask = new A.DelayedTask(
+				var hideTask = A.debounce(
 					function(event) {
 						showTask.cancel();
 
@@ -723,10 +723,11 @@
 								}
 							}
 						}
-					}
+					},
+					300
 				);
 
-				var showTask = new A.DelayedTask(
+				var showTask = A.debounce(
 					function(event) {
 						hideTask.cancel();
 
@@ -743,20 +744,12 @@
 								}
 							}
 						}
-					}
+					},
+					0
 				);
 
-				lis.on(
-					'mouseenter',
-					A.bind(showTask.delay, showTask, 0, null, null),
-					'li'
-				);
-
-				lis.on(
-					'mouseleave',
-					A.bind(hideTask.delay, hideTask, 300, null, null),
-					'li'
-				);
+				lis.on('mouseenter', showTask, 'li');
+				lis.on('mouseleave', hideTask, 'li');
 			}
 		},
 		['aui-base']
