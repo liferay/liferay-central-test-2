@@ -151,128 +151,47 @@
 	</target>
 
 	<target name="build-test-ant-script-db-upgrade-smoke">
-		<antcall target="create-ant-script">
-			<param name="ant.script.template" value="ant-script-db-upgrade-header.xml" />
-			<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
-		</antcall>
-
 		<for list="${test.ant.script.versions}" param="test.ant.script.version">
 			<sequential>
-
-				<for list="${test.ant.script.dbs}" param="test.ant.script.db">
-					<sequential>
-						<if>
-							<equals arg1="@{test.ant.script.version}" arg2="5.2.7" />
-							<then>
-								<antcall target="append-ant-script">
-									<param name="ant.script.template" value="ant-script-db-upgrade-smoke-5.2.7.xml" />
-									<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
-									<param name="test.ant.script.db" value="@{test.ant.script.db}" />
-								</antcall>
-							</then>
-							<elseif>
-								<equals arg1="@{test.ant.script.version}" arg2="5.2.8" />
-								<then>
-									<antcall target="append-ant-script">
-										<param name="ant.script.template" value="ant-script-db-upgrade-smoke-5.2.8.xml" />
-										<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
-										<param name="test.ant.script.db" value="@{test.ant.script.db}" />
-									</antcall>
-								</then>
-							</elseif>
-							<else>
-								<antcall target="append-ant-script">
-									<param name="ant.script.template" value="ant-script-db-upgrade-smoke-version.xml" />
-									<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
-									<param name="test.ant.script.db" value="@{test.ant.script.db}" />
-									<param name="test.ant.script.version" value="@{test.ant.script.version}" />
-								</antcall>
-							</else>
-						</if>
-					</sequential>
-				</for>
-
-			</sequential>
-		</for>
-
-		<for list="${test.ant.script.dbs}" param="test.ant.script.db">
-			<sequential>
 				<if>
-					<equals arg1="@{test.ant.script.db}" arg2="db2" />
+					<equals arg1="@{test.ant.script.version}" arg2="5.2.7" />
 					<then>
-						<var name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal;" />
+						<antcall target="create-ant-script">
+							<param name="ant.script.template" value="ant-script-db-upgrade-smoke-5.2.7.xml" />
+							<param name="ant.script.file.name" value="build-test-db-upgrade-smoke-5.2.7.xml" />
+							<param name="test.ant.script.version" value="@{test.ant.script.version}" />
+						</antcall>
 					</then>
 					<elseif>
-						<equals arg1="@{test.ant.script.db}" arg2="mysql" />
+						<equals arg1="@{test.ant.script.version}" arg2="5.2.8" />
 						<then>
-							<var name="test.ant.script.db.minimal" value="drop database if exists lportal;${line.separator}create database lportal character set utf8;" />
+							<antcall target="create-ant-script">
+								<param name="ant.script.template" value="ant-script-db-upgrade-smoke-5.2.8.xml" />
+								<param name="ant.script.file.name" value="build-test-db-upgrade-smoke-5.2.8.xml" />
+							<param name="test.ant.script.version" value="@{test.ant.script.version}" />
+							</antcall>
 						</then>
 					</elseif>
 					<elseif>
-						<equals arg1="@{test.ant.script.db}" arg2="oracle" />
-						<then>
-							<var name="test.ant.script.db.minimal" value="&lt;![CDATA[drop user &amp;1 cascade;${line.separator}create user &amp;1 identified by &amp;2;${line.separator}grant connect,resource to &amp;1;${line.separator}exit;]]&gt;" />
-						</then>
-					</elseif>
-					<elseif>
-						<equals arg1="@{test.ant.script.db}" arg2="postgresql" />
-						<then>
-							<var name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal encoding = 'UNICODE';" />
-						</then>
-					</elseif>
-					<elseif>
-						<equals arg1="@{test.ant.script.db}" arg2="sql-server" />
-						<then>
-							<var name="test.ant.script.db.minimal" value="drop database lportal;${line.separator}create database lportal;" />
-						</then>
-					</elseif>
-					<elseif>
-						<equals arg1="@{test.ant.script.db}" arg2="sybase" />
-						<then>
-							<var name="test.ant.script.db.minimal" value="use master${line.separator}exec sp_dboption 'lportal', 'allow nulls by default' , true${line.separator}go${line.separator}exec sp_dboption 'lportal', 'select into/bulkcopy/pllsort' , true${line.separator}go${line.separator}use lportal" />
-						</then>
-					</elseif>
-				</if>
+						<equals arg1="@{test.ant.script.version}" arg2="latest" />
 
-				<if>
-					<equals arg1="@{test.ant.script.db}" arg2="oracle" />
-					<then>
-						<var name="test.ant.script.db.schema" value="username" />
-					</then>
+						<then>
+							<antcall target="create-ant-script">
+								<param name="ant.script.template" value="ant-script-db-upgrade-smoke-latest.xml" />
+								<param name="ant.script.file.name" value="build-test-db-upgrade-smoke-latest.xml" />
+							</antcall>
+						</then>
+					</elseif>
 					<else>
-						<var name="test.ant.script.db.schema" value="schema" />
+						<antcall target="create-ant-script">
+							<param name="ant.script.template" value="ant-script-db-upgrade-smoke.xml" />
+							<param name="ant.script.file.name" value="build-test-db-upgrade-smoke-@{test.ant.script.version}.xml" />
+							<param name="test.ant.script.version" value="@{test.ant.script.version}" />
+						</antcall>
 					</else>
 				</if>
-
-				<antcall target="append-ant-script">
-					<param name="ant.script.template" value="ant-script-db-upgrade-smoke-latest.xml" />
-					<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
-					<param name="test.ant.script.db" value="@{test.ant.script.db}" />
-				</antcall>
 			</sequential>
 		</for>
-
-		<for list="${test.ant.script.dbs}" param="test.ant.script.db">
-			<sequential>
-				<antcall target="append-ant-script">
-					<param name="ant.script.template" value="ant-script-db-upgrade-smoke-overall.xml" />
-					<param name="ant.script.file.name" value="build-test-${test.ant.script.command}.xml" />
-					<param name="test.ant.script.db" value="@{test.ant.script.db}" />
-				</antcall>
-
-				<for list="${test.ant.script.versions}" param="test.ant.script.version">
-					<sequential>
-						<echo file="portal-web/test-ant-scripts/build-test-${test.ant.script.command}.xml" append="true">
-							<![CDATA[${line.separator}		<antcall target="test-db-upgrade-@{test.ant.script.version}-smoke-tomcat-@{test.ant.script.db}-firefox" />]]>
-						</echo>
-					</sequential>
-				</for>
-
-				<echo file="portal-web/test-ant-scripts/build-test-${test.ant.script.command}.xml" append="true"><![CDATA[${line.separator}	</target>${line.separator}]]></echo>
-			</sequential>
-		</for>
-
-		<echo file="portal-web/test-ant-scripts/build-test-${test.ant.script.command}.xml" append="true"><![CDATA[${line.separator}</project>]]></echo>
 	</target>
 
 	<target name="build-test-ant-scripts">
@@ -639,8 +558,7 @@
 
 		<antcall target="build-test-ant-script-db-upgrade-smoke">
 			<param name="test.ant.script.command" value="db-upgrade-smoke" />
-			<param name="test.ant.script.dbs" value="db2,mysql,oracle,postgresql,sql-server,sybase" />
-			<param name="test.ant.script.versions" value="5.1.2,5.2.3,5.2.7,5.2.8,6.0.5" />
+			<param name="test.ant.script.versions" value="5.1.2,5.2.3,5.2.7,5.2.8,6.0.5,latest" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">

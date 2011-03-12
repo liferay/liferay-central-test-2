@@ -1,7 +1,0 @@
-
-	<target name="test-db-upgrade-smoke-tomcat-${test.ant.script.db}-firefox">
-		<antcall target="prepare-${test.ant.script.db}" />
-
-		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
-
-		<antcall target="test-db-upgrade-latest-smoke-tomcat-${test.ant.script.db}-firefox" />
