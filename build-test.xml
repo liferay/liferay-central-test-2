@@ -1771,7 +1771,14 @@ resource.repositories.root=$${user.home}/liferay</echo>
 	</target>
 
 	<target name="prepare-vm-server">
-		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
+		<if>
+			<not>
+				<equals arg1="${skip.prepare-bundle}" arg2="true" />
+			</not>
+			<then>
+				<ant antfile="build-dist.xml" target="build-dist-tomcat" />
+			</then>
+		</if>
 
 		<delete dir="dist" />
 		<mkdir dir="dist" />
@@ -2407,6 +2414,12 @@ file.
 	<target name="stop-selenium-nanny">
 		<exec executable="taskkill.exe">
 			<arg line="/F /IM selenium-nanny.exe" />
+		</exec>
+	</target>
+
+	<target name="stop-vm">
+		<exec dir="${vm.drive}/${vm.host}" executable="${vmware-cmd.executable}">
+			<arg line="${vm.drive}\${vm.host}\${vm.host}.vmx stop hard" />
 		</exec>
 	</target>
 

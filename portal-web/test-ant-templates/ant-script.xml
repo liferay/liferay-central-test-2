@@ -30,6 +30,12 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-db2-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="db2-9.7" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<antcall target="prepare-db2">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -40,6 +46,10 @@
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
+
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-hsql-firefox">
@@ -97,6 +107,12 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-oracle-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="oracle-10.2.0.1.0" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<antcall target="prepare-oracle">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -107,9 +123,18 @@
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-postgresql-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="postgresql-8.4.2-1" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<antcall target="prepare-postgresql">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -120,9 +145,19 @@
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
+
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-sql-server-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="sql-server-2005-sp2" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<antcall target="prepare-sql-server">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -133,9 +168,19 @@
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
+
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-sybase-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="sybase-15.0.2" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<antcall target="prepare-sybase">
 			${test.ant.script.file.properties}
 		</antcall>
@@ -146,6 +191,10 @@
 			${test.ant.script.file.plugin.webs}
 			<property name="test.name" value="${test.ant.script.suite}" />
 		</ant>
+
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 
 	<target name="test-${test.ant.script.command}-weblogic-10.3-mysql-firefox">

@@ -4,6 +4,12 @@
 	<import file="../../build-test-db-upgrade.xml" />
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-db2-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="db2-9.7" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<echo file="create-db2.sql">drop database lportal;
 create database lportal;</echo>
 
@@ -16,6 +22,10 @@ create database lportal;</echo>
 		<antcall target="run-smoke-test" />
 
 		<delete file="create-db2.sql" />
+
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-mysql-firefox">
@@ -34,6 +44,12 @@ create database lportal character set utf8;</echo>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-oracle-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="oracle-10.2.0.1.0" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<echo file="create-oracle.sql">drop user &1 cascade;
 create user &1 identified by &2
 grant connect,resource to &1;
@@ -48,9 +64,19 @@ exit;</echo>
 		<antcall target="run-smoke-test" />
 
 		<delete file="create-oracle.sql" />
+
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-postgresql-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="postgresql-8.4.2-1" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<echo file="create-postgresql.sql">drop database lportal;
 create database lportal encoding = 'UNICODE';</echo>
 
@@ -63,9 +89,19 @@ create database lportal encoding = 'UNICODE';</echo>
 		<antcall target="run-smoke-test" />
 
 		<delete file="create-postgresql.sql" />
+
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-sql-server-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="sql-server-2005-sp2" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<echo file="create-sql-server.sql">drop database lportal;
 create database lportal;</echo>
 
@@ -78,9 +114,19 @@ create database lportal;</echo>
 		<antcall target="run-smoke-test" />
 
 		<delete file="create-sql-server.sql" />
+
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-sybase-firefox">
+		<antcall target="prepare-vm-server">
+			<param name="skip.prepare-bundle" value="true" />
+			<param name="vm.vmdk.suffix" value="sybase-15.0.2" />
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
+
 		<echo file="create-sybase.sql">use master
 exec sp_dboption 'lportal', 'allow nulls by default' , true
 go
@@ -97,5 +143,9 @@ use lportal</echo>
 		<antcall target="run-smoke-test" />
 
 		<delete file="create-sybase.sql" />
+
+		<antcall target="stop-vm">
+			<param name="vm.host" value="${hudson.vm.3.host}" />
+		</antcall>
 	</target>
 </project>
