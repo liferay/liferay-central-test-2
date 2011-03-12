@@ -922,6 +922,14 @@ set JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true -Djonas.felix
 		<ant antfile="build-test.xml" target="test" inheritAll="false" />
 	</target>
 
+	<target name="update-plugins-to-svn-revision">
+		<loadfile property="svn.info.revision.valid" srcfile="svn-revision" />
+
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.revision.valid}" />
+		</exec>
+	</target>
+
 	<target name="validate-xml">
 		<xmlvalidate failonerror="no">
 			<fileset dir="${project.dir}"
