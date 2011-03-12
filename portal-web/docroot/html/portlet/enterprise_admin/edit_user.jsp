@@ -183,6 +183,7 @@ String taglibOnSubmit = "event.preventDefault(); " + renderResponse.getNamespace
 	<aui:input name="redirect" type="hidden" />
 	<aui:input name="backURL" type="hidden" value="<%= backURL %>" />
 	<aui:input name="p_u_i_d" type="hidden" value="<%= (selUser != null) ? selUser.getUserId() : 0 %>" />
+	<aui:input name="filterManageableUserGroupRoles" type="hidden" value="<%= filterManageableUserGroupRoles %>" />
 
 	<%
 	request.setAttribute("user.selUser", selUser);
