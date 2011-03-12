@@ -301,8 +301,6 @@ public class LayoutExporter {
 
 		Layout firstLayout = layouts.get(0);
 
-		context.addExpandoColumns(Layout.class.getName());
-
 		Group group = GroupLocalServiceUtil.getGroup(context.getGroupId());
 
 		if (group.isStagingGroup()) {
@@ -427,10 +425,6 @@ public class LayoutExporter {
 		// Comments
 
 		_portletExporter.exportComments(context, rootElement);
-
-		// Expandos
-
-		_portletExporter.exportExpandos(context);
 
 		// Locks
 
@@ -685,7 +679,7 @@ public class LayoutExporter {
 
 		layoutElement.addAttribute("path", path);
 
-		context.addZipEntry(path, layoutElement, layout);
+		context.addZipEntry(path, layout);
 	}
 
 	protected void exportTheme(LayoutSet layoutSet, ZipWriter zipWriter)

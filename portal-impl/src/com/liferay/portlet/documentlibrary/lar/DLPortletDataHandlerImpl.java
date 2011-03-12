@@ -15,8 +15,6 @@
 package com.liferay.portlet.documentlibrary.lar;
 
 import com.liferay.documentlibrary.DuplicateFileException;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BasePortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
@@ -26,7 +24,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
-import com.liferay.portal.kernel.repository.model.RepositoryModel;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -39,15 +36,12 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
-import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
@@ -58,7 +52,6 @@ import com.liferay.util.PwdGenerator;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -76,8 +69,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Element fileEntriesElement, Element fileRanksElement,
 			FileEntry fileEntry, boolean checkDateRange)
 		throws Exception {
-
-		portletDataContext.addExpandoColumns(DLFileEntry.class.getName());
 
 		if (checkDateRange &&
 			!portletDataContext.isWithinDateRange(
@@ -167,15 +158,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			}
 		}
 
-		Map<String, Serializable> expandoAttributes = null;
-
-		if (fileEntry instanceof LiferayFileEntry) {
-			expandoAttributes = fileVersion.getAttributes();
-		}
-
-		addZipEntry(
-			portletDataContext, path, fileEntryElement,
-			fileEntry, expandoAttributes);
+		portletDataContext.addZipEntry(path, fileEntry);
 
 		if (portletDataContext.getBooleanParameter(_NAMESPACE, "ranks")) {
 			List<DLFileRank> fileRanks = DLFileRankUtil.findByFileEntryId(
@@ -217,9 +200,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		FileEntry fileEntry = (FileEntry)portletDataContext.getZipEntryAsObject(
 			path);
 
-		Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-			portletDataContext, fileEntryElement);
-
 		long userId = portletDataContext.getUserId(fileEntry.getUserUuid());
 
 		Map<Long, Long> folderPKs =
@@ -252,10 +232,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setModifiedDate(fileEntry.getModifiedDate());
 		serviceContext.setScopeGroupId(portletDataContext.getScopeGroupId());
 
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
-
 		String binPath = fileEntryElement.attributeValue("bin-path");
 
 		InputStream is = null;
@@ -278,11 +254,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Folder folder = (Folder)portletDataContext.getZipEntryAsObject(
 				folderPath);
 
-			Map<String, Serializable> parentFolderAttributes =
-				getExpandoAttributes(portletDataContext, folderPath);
-
-			importFolder(
-				portletDataContext, folder, parentFolderAttributes);
+			importFolder(portletDataContext, folder);
 
 			folderId = MapUtil.getLong(
 				folderPKs, fileEntry.getFolderId(), fileEntry.getFolderId());
@@ -468,10 +440,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		Folder folder = (Folder)portletDataContext.getZipEntryAsObject(path);
 
-		Map<String, Serializable> expandoAttributes = getExpandoAttributes(
-			portletDataContext, folderElement);
-
-		importFolder(portletDataContext, folder, expandoAttributes);
+		importFolder(portletDataContext, folder);
 	}
 
 	public PortletDataHandlerControl[] getExportControls() {
@@ -494,23 +463,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public boolean isPublishToLiveByDefault() {
 		return PropsValues.DL_PUBLISH_TO_LIVE_BY_DEFAULT;
-	}
-
-	protected static void addZipEntry(
-			PortletDataContext portletDataContext, String path,
-			Element repositoryModelElement, RepositoryModel repositoryModel,
-			Map<String, Serializable> expandoAttributes)
-		throws SystemException, PortalException {
-
-		portletDataContext.addZipEntry(path, repositoryModel);
-
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			String expandoPath = portletDataContext.getExpandoPath(path);
-
-			repositoryModelElement.addAttribute("expando-path", expandoPath);
-
-			portletDataContext.addZipEntry(expandoPath, expandoAttributes);
-		}
 	}
 
 	protected static void exportFileRank(
@@ -580,15 +532,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 				portletDataContext.addPermissions(
 					Folder.class, folder.getFolderId());
 
-				Map<String, Serializable> expandoAttributes = null;
-
-				if (folder instanceof LiferayFolder) {
-					expandoAttributes = folder.getAttributes();
-				}
-
-				addZipEntry(
-					portletDataContext, path, folderElement,
-					folder, expandoAttributes);
+				portletDataContext.addZipEntry(path, folder);
 			}
 		}
 
@@ -629,8 +573,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			long folderId)
 		throws Exception {
 
-		portletDataContext.addExpandoColumns(DLFolder.class.getName());
-
 		if (folderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			return;
 		}
@@ -652,15 +594,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			portletDataContext.addPermissions(
 				Folder.class, folder.getFolderId());
 
-			Map<String, Serializable> expandoAttributes = null;
-
-			if (folder instanceof DLFolder) {
-				expandoAttributes = folder.getAttributes();
-			}
-
-			addZipEntry(
-				portletDataContext, path, folderElement,
-				folder, expandoAttributes);
+			portletDataContext.addZipEntry(path, folder);
 		}
 	}
 
@@ -889,8 +823,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 	}
 
 	protected static void importFolder(
-			PortletDataContext portletDataContext, Folder folder,
-			Map<String, Serializable> expandoAttributes)
+			PortletDataContext portletDataContext, Folder folder)
 		throws Exception {
 
 		long userId = portletDataContext.getUserId(folder.getUserUuid());
@@ -909,10 +842,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 		serviceContext.setCreateDate(folder.getCreateDate());
 		serviceContext.setModifiedDate(folder.getModifiedDate());
 
-		if ((expandoAttributes != null) && !expandoAttributes.isEmpty()) {
-			serviceContext.setExpandoBridgeAttributes(expandoAttributes);
-		}
-
 		if ((parentFolderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) &&
 			(parentFolderId == folder.getParentFolderId())) {
 
@@ -922,11 +851,7 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			Folder parentFolder =
 				(Folder)portletDataContext.getZipEntryAsObject(path);
 
-			Map<String, Serializable> parentFolderAttributes =
-				getExpandoAttributes(portletDataContext, path);
-
-			importFolder(
-				portletDataContext, parentFolder, parentFolderAttributes);
+			importFolder(portletDataContext, parentFolder);
 
 			parentFolderId = MapUtil.getLong(
 				folderPKs, folder.getParentFolderId(),
@@ -1024,10 +949,6 @@ public class DLPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
-
-		portletDataContext.addExpandoColumns(DLFileEntry.class.getName());
-
-		portletDataContext.addExpandoColumns(DLFolder.class.getName());
 
 		portletDataContext.addPermissions(
 			"com.liferay.portlet.documentlibrary",
