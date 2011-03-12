@@ -8,7 +8,7 @@
 			${test.ant.script.file.properties}
 		</antcall>
 
-		<ant antfile="build-test-glassfish.xml" target="run-selenium-glassfish-firefox">
+		<ant antfile="build-test-glassfish.xml" target="run-selenium-glassfish">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
 			${test.ant.script.file.plugin.webs}
@@ -21,7 +21,7 @@
 			${test.ant.script.file.properties}
 		</antcall>
 
-		<ant antfile="build-test-jboss.xml" target="run-selenium-jboss-firefox">
+		<ant antfile="build-test-jboss.xml" target="run-selenium-jboss">
 			${test.ant.script.file.plugin.hooks}
 			${test.ant.script.file.plugin.portlets}
 			${test.ant.script.file.plugin.webs}
