@@ -64,10 +64,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -587,23 +585,6 @@ public class EditUserAction extends PortletAction {
 			actionRequest, "rolesSearchContainerPrimaryKeys");
 		List<UserGroupRole> userGroupRoles =
 			EnterpriseAdminUtil.getUserGroupRoles(actionRequest);
-
-		if(userGroupRoles.isEmpty()) {
-			userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(
-				user.getUserId());
-
-			boolean filterManageableUserGroupRoles = ParamUtil.getBoolean(
-				actionRequest, "filterManageableUserGroupRoles"); 
-
-			PermissionChecker permissionChecker = 
-				themeDisplay.getPermissionChecker();
-
-			if (filterManageableUserGroupRoles) {
-				userGroupRoles = EnterpriseAdminUtil.filterUserGroupRoles(
-					permissionChecker, userGroupRoles);
-			}
-		}
-
 		long[] userGroupIds = getLongArray(
 			actionRequest, "userGroupsSearchContainerPrimaryKeys");
 		List<Address> addresses = EnterpriseAdminUtil.getAddresses(
