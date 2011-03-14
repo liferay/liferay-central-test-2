@@ -312,7 +312,9 @@ public class UpdateLayoutAction extends Action {
 			String rootPortletId = portlet.getRootPortletId();
 			String layoutRootPortletId = layoutPortlet.getRootPortletId();
 
-			if (rootPortletId.equals(layoutRootPortletId)) {
+			if (rootPortletId.equals(layoutRootPortletId) &&
+					(layoutPortlet.getPortletId() != portlet.getPortletId())) {
+
 				portletOnLayout = true;
 
 				break;
