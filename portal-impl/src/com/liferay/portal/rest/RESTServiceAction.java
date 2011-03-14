@@ -68,7 +68,7 @@ public class RESTServiceAction extends JSONServiceAction {
 						" and method " + method);
 			}
 
-			Object returnObj = restAction.invoke();
+			Object returnObj = restAction.invoke(request);
 
 			if (returnObj != null) {
 				return getReturnValue(returnObj, restAction.getReturnType());

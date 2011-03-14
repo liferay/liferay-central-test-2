@@ -20,6 +20,8 @@ import java.lang.reflect.Method;
 
 import jodd.util.ReflectUtil;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Igor Spasic
  */
@@ -38,12 +40,14 @@ public class RESTActionImpl implements RESTAction {
 		return actionMethod.getReturnType();
 	}
 
-	public Object invoke() throws Exception {
+	public Object invoke(HttpServletRequest request) throws Exception {
 		Class<?> actionClass = _restActionConfig.getActionClass();
 
 		Method actionMethod = _restActionConfig.getActionMethod();
 
 		Object[] parameters = _prepareParameters();
+
+		_injectRequestParameters(parameters, request);
 
 		_fixNullParameters(parameters);
 
@@ -58,6 +62,32 @@ public class RESTActionImpl implements RESTAction {
 
 			if (value == null) {
 				parameters[i] = ReflectUtil.newInstance(parameterTypes[i]);
+			}
+		}
+	}
+
+	private void _injectRequestParameters(
+		Object[] parameters, HttpServletRequest request) {
+
+		String[] parameterNames = _restActionConfig.getParameterNames();
+		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
+
+		for (int i = 0; i < parameters.length; i++) {
+
+			if (parameters[i] == null) {
+				String parameterName = parameterNames[i];
+
+				String parameterValue = request.getParameter(parameterName);
+
+				if (parameterValue != null) {
+
+					Class<?> parameterType = parameterTypes[i];
+
+					Object value = ReflectUtil.castType(
+						parameterValue, parameterType);
+
+					parameters[i] = value;
+				}
 			}
 		}
 	}

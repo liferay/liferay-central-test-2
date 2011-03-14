@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.rest;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Igor Spasic
  */
@@ -21,6 +23,6 @@ public interface RESTAction {
 
 	public Class<?> getReturnType();
 
-	public Object invoke() throws Exception;
+	public Object invoke(HttpServletRequest request) throws Exception;
 
 }
