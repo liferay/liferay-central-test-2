@@ -68,7 +68,7 @@ public class WikiIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	public Summary getSummary(
+	protected Summary doGetSummary(
 		Document document, String snippet, PortletURL portletURL) {
 
 		String title = document.get(Field.TITLE);

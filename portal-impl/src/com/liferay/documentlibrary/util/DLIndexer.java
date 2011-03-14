@@ -62,7 +62,7 @@ public class DLIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	public Summary getSummary(
+	protected Summary doGetSummary(
 		Document document, String snippet, PortletURL portletURL) {
 
 		return null;
