@@ -12,13 +12,13 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
+@generated
 --%>
 
-<%@ include file="/html/taglib/init-taglib.jsp" %>
+<%@ include file="/html/taglib/taglib-init.jsp" %>
 
 <%
-java.lang.String NAMESPACE = "aui:button:";
-
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("aui:button:dynamicAttributes");
 Map<String, Object> scopedAttributes = (Map<String, Object>)request.getAttribute("aui:button:scopedAttributes");
 CustomAttributes customAttributes = (CustomAttributes)request.getAttribute("aui:button:customAttributes");
@@ -47,4 +47,4 @@ _updateOptions(_options, "type", type);
 _updateOptions(_options, "value", value);
 %>
 
-<%@ include file="init-ext.jsp" %>
+<%@ include file="init-ext.jspf" %>

@@ -12,20 +12,20 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
+@generated
 --%>
 
-<%@ page import="com.liferay.alloy.util.MarkupUtil" %>
-<%@ page import="com.liferay.alloy.util.MessageUtil" %>
-<%@ page import="com.liferay.portal.json.JSONFactoryImpl" %>
 <%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil" %>
-<%@ page import="com.liferay.portal.kernel.servlet.taglib.aui.ScriptData" %>
 <%@ page import="com.liferay.portal.kernel.servlet.taglib.CustomAttributes" %>
 <%@ page import="com.liferay.portal.kernel.util.GetterUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.StringBundler" %>
 <%@ page import="com.liferay.portal.kernel.util.StringPool" %>
 <%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
+
 <%@ page import="java.io.Serializable" %>
+
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Date" %>
@@ -35,23 +35,27 @@
 <%@ page import="java.util.Set" %>
 
 <%!
-public static ArrayList<Object> _getArrayList(Object obj) {
-	return (ArrayList<Object>)_safeDeserialize(obj);
-}
+private static Object _deserialize(Object obj) {
+	if (obj != null) {
+		String json = JSONFactoryUtil.looseSerialize(obj);
 
-public static HashMap<String, Object> _getHashMap(Object obj) {
-	return (HashMap)_safeDeserialize(obj);
-}
+		json = StringUtil.unquote(json);
 
-public static Object _safeDeserialize(Object obj) {
-	if (Validator.isNotNull(obj)) {
-		return JSONFactoryUtil.looseDeserialize(StringUtil.unquote(JSONFactoryUtil.looseSerialize(obj)));
+		return JSONFactoryUtil.looseDeserialize(json);
 	}
 
 	return null;
 }
 
-public static void _updateOptions(Map<String, Object> options, String key, Object value) {
+private static ArrayList<Object> _toArrayList(Object obj) {
+	return (ArrayList<Object>)_deserialize(obj);
+}
+
+private static HashMap<String, Object> _toHashMap(Object obj) {
+	return (HashMap<String, Object>)_deserialize(obj);
+}
+
+private static void _updateOptions(Map<String, Object> options, String key, Object value) {
 	if ((options != null) && options.containsKey(key)) {
 		options.put(key, value);
 	}

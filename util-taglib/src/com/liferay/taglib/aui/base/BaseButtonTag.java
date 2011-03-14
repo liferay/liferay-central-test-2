@@ -21,6 +21,7 @@ import javax.servlet.jsp.JspException;
  * @author Eduardo Lundgren
  * @author Bruno Basto
  * @author Nathan Cavanaugh
+ * @generated
  */
 public class BaseButtonTag extends com.liferay.taglib.util.IncludeTag {
 
@@ -109,7 +110,6 @@ public class BaseButtonTag extends com.liferay.taglib.util.IncludeTag {
 
 		setScopedAttribute("value", value);
 	}
-
 
 	protected void cleanUp() {
 		_cssClass = null;
