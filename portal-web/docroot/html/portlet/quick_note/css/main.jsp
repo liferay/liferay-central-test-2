@@ -25,10 +25,12 @@
 		padding: 3px;
 		width: 95%;
 	}
-	#quick-note-title {
+
+	.portlet-title-default {
 		cursor: move;
 		width: 100%;
 	}
+
 	.note-color {
 		border: 1px solid;
 		cursor: pointer;
