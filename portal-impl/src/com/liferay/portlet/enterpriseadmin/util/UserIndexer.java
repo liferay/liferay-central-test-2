@@ -66,29 +66,6 @@ public class UserIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String firstName = document.get("firstName");
-		String middleName = document.get("middleName");
-		String lastName = document.get("lastName");
-
-		FullNameGenerator fullNameGenerator =
-			FullNameGeneratorFactory.getInstance();
-
-		String title = fullNameGenerator.getFullName(
-			firstName, middleName, lastName);
-
-		String content = null;
-
-		String userId = document.get(Field.USER_ID);
-
-		portletURL.setParameter("struts_action", "/enterprise_admin/edit_user");
-		portletURL.setParameter("p_u_i_d", userId);
-
-		return new Summary(title, content, portletURL);
-	}
-
 	protected void addContextQueryParams(
 			BooleanQuery contextQuery, String key, Object value)
 		throws Exception {
@@ -196,6 +173,29 @@ public class UserIndexer extends BaseIndexer {
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String firstName = document.get("firstName");
+		String middleName = document.get("middleName");
+		String lastName = document.get("lastName");
+
+		FullNameGenerator fullNameGenerator =
+			FullNameGeneratorFactory.getInstance();
+
+		String title = fullNameGenerator.getFullName(
+			firstName, middleName, lastName);
+
+		String content = null;
+
+		String userId = document.get(Field.USER_ID);
+
+		portletURL.setParameter("struts_action", "/enterprise_admin/edit_user");
+		portletURL.setParameter("p_u_i_d", userId);
+
+		return new Summary(title, content, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {

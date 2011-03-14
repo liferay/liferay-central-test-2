@@ -62,29 +62,6 @@ public class PluginPackageIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String title = document.get(Field.TITLE);
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		String moduleId = document.get("moduleId");
-		String repositoryURL = document.get("repositoryURL");
-
-		portletURL.setParameter(
-			"struts_action", "/admin/view");
-		portletURL.setParameter("tabs2", "repositories");
-		portletURL.setParameter("moduleId", moduleId);
-		portletURL.setParameter("repositoryURL", repositoryURL);
-
-		return new Summary(title, content, portletURL);
-	}
-
 	protected void doDelete(Object obj) throws Exception {
 		PluginPackage pluginPackage = (PluginPackage)obj;
 
@@ -181,6 +158,29 @@ public class PluginPackageIndexer extends BaseIndexer {
 		document.addKeyword("installedVersion", installedVersion);
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String moduleId = document.get("moduleId");
+		String repositoryURL = document.get("repositoryURL");
+
+		portletURL.setParameter(
+			"struts_action", "/admin/view");
+		portletURL.setParameter("tabs2", "repositories");
+		portletURL.setParameter("moduleId", moduleId);
+		portletURL.setParameter("repositoryURL", repositoryURL);
+
+		return new Summary(title, content, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {

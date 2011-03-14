@@ -67,26 +67,6 @@ public class SCIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String title = document.get(Field.TITLE);
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		String productEntryId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter(
-			"struts_action", "/software_catalog/view_product_entry");
-		portletURL.setParameter("productEntryId", productEntryId);
-
-		return new Summary(title, content, portletURL);
-	}
-
 	protected void doDelete(Object obj) throws Exception {
 		SCProductEntry productEntry = (SCProductEntry)obj;
 
@@ -181,6 +161,26 @@ public class SCIndexer extends BaseIndexer {
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String productEntryId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter(
+			"struts_action", "/software_catalog/view_product_entry");
+		portletURL.setParameter("productEntryId", productEntryId);
+
+		return new Summary(title, content, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {

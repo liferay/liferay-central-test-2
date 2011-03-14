@@ -66,6 +66,21 @@ public class DLIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
+	protected void doDelete(Object obj) throws Exception {
+		DLFileEntry fileEntry = (DLFileEntry)obj;
+
+		FileModel fileModel = new FileModel();
+
+		fileModel.setCompanyId(fileEntry.getCompanyId());
+		fileModel.setFileName(fileEntry.getName());
+		fileModel.setPortletId(PORTLET_ID);
+		fileModel.setRepositoryId(fileEntry.getDataRepositoryId());
+
+		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
+
+		indexer.delete(fileModel);
+	}
+
 	protected Summary doGetSummary(
 		Document document, String snippet, PortletURL portletURL) {
 
@@ -95,21 +110,6 @@ public class DLIndexer extends BaseIndexer {
 		portletURL.setParameter("fileEntryId", fileEntryId);
 
 		return new Summary(title, content, portletURL);
-	}
-
-	protected void doDelete(Object obj) throws Exception {
-		DLFileEntry fileEntry = (DLFileEntry)obj;
-
-		FileModel fileModel = new FileModel();
-
-		fileModel.setCompanyId(fileEntry.getCompanyId());
-		fileModel.setFileName(fileEntry.getName());
-		fileModel.setPortletId(PORTLET_ID);
-		fileModel.setRepositoryId(fileEntry.getDataRepositoryId());
-
-		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
-
-		indexer.delete(fileModel);
 	}
 
 	protected void doReindex(String[] ids) throws Exception {

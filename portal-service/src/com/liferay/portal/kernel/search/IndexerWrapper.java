@@ -38,7 +38,8 @@ public class IndexerWrapper implements Indexer {
 	}
 
 	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+			Document document, String snippet, PortletURL portletURL)
+		throws SearchException {
 
 		return _indexer.getSummary(document, snippet, portletURL);
 	}

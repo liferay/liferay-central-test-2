@@ -55,25 +55,6 @@ public class CalIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String title = document.get(Field.TITLE);
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
-		}
-
-		String eventId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter("struts_action", "/calendar/view_event");
-		portletURL.setParameter("eventId", eventId);
-
-		return new Summary(title, content, portletURL);
-	}
-
 	protected void doDelete(Object obj) throws Exception {
 		CalEvent event = (CalEvent)obj;
 
@@ -135,6 +116,25 @@ public class CalIndexer extends BaseIndexer {
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
+		}
+
+		String eventId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter("struts_action", "/calendar/view_event");
+		portletURL.setParameter("eventId", eventId);
+
+		return new Summary(title, content, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {

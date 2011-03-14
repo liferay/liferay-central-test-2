@@ -73,26 +73,6 @@ public class MBIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String title = document.get(Field.TITLE);
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		String messageId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter(
-			"struts_action", "/message_boards/view_message");
-		portletURL.setParameter("messageId", messageId);
-
-		return new Summary(title, content, portletURL);
-	}
-
 	protected void doDelete(Object obj) throws Exception {
 		if (obj instanceof MBCategory) {
 			MBCategory category = (MBCategory)obj;
@@ -202,6 +182,26 @@ public class MBIndexer extends BaseIndexer {
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String messageId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter(
+			"struts_action", "/message_boards/view_message");
+		portletURL.setParameter("messageId", messageId);
+
+		return new Summary(title, content, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {

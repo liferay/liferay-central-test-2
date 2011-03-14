@@ -62,12 +62,6 @@ public class DLIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		return null;
-	}
-
 	protected void doDelete(Object obj) throws Exception {
 		FileModel fileModel = (FileModel)obj;
 
@@ -262,6 +256,12 @@ public class DLIndexer extends BaseIndexer {
 		}
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		return null;
 	}
 
 	protected void doReindex(Object obj) throws Exception {

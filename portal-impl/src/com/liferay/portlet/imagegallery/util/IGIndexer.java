@@ -61,25 +61,6 @@ public class IGIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String title = document.get(Field.TITLE);
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
-		}
-
-		String imageId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter("struts_action", "/image_gallery/view_image");
-		portletURL.setParameter("imageId", imageId);
-
-		return new Summary(title, content, portletURL);
-	}
-
 	protected void checkSearchFolderId(
 			long folderId, SearchContext searchContext)
 		throws Exception {
@@ -150,6 +131,25 @@ public class IGIndexer extends BaseIndexer {
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.DESCRIPTION), 200);
+		}
+
+		String imageId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter("struts_action", "/image_gallery/view_image");
+		portletURL.setParameter("imageId", imageId);
+
+		return new Summary(title, content, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {

@@ -98,18 +98,27 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL) {
+			Document document, String snippet, PortletURL portletURL)
+		throws SearchException {
 
-		Summary summary = doGetSummary(document, snippet, portletURL);
+		try {
+			Summary summary = doGetSummary(document, snippet, portletURL);
 
-		for (IndexerPostProcessor indexerPostProcessor :
-				_indexerPostProcessors) {
+			for (IndexerPostProcessor indexerPostProcessor :
+					_indexerPostProcessors) {
 
-			indexerPostProcessor.postProcessSummary(
-				summary, document, snippet, portletURL);
+				indexerPostProcessor.postProcessSummary(
+					summary, document, snippet, portletURL);
+			}
+
+			return summary;
 		}
-
-		return summary;
+		catch (SearchException se) {
+			throw se;
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
 	}
 
 	public void registerIndexerPostProcessor(
@@ -659,7 +668,8 @@ public abstract class BaseIndexer implements Indexer {
 	protected abstract Document doGetDocument(Object obj) throws Exception;
 
 	protected abstract Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL);
+			Document document, String snippet, PortletURL portletURL)
+		throws Exception;
 
 	protected abstract void doReindex(Object obj) throws Exception;
 

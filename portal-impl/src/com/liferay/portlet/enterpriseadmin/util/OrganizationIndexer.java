@@ -75,22 +75,6 @@ public class OrganizationIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String title = document.get("name");
-
-		String content = null;
-
-		String organizationId = document.get(Field.ORGANIZATION_ID);
-
-		portletURL.setParameter(
-			"struts_action", "/enterprise_admin/edit_organization");
-		portletURL.setParameter("organizationId", organizationId);
-
-		return new Summary(title, content, portletURL);
-	}
-
 	protected void doDelete(Object obj) throws Exception {
 		Organization organization = (Organization)obj;
 
@@ -200,6 +184,22 @@ public class OrganizationIndexer extends BaseIndexer {
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get("name");
+
+		String content = null;
+
+		String organizationId = document.get(Field.ORGANIZATION_ID);
+
+		portletURL.setParameter(
+			"struts_action", "/enterprise_admin/edit_organization");
+		portletURL.setParameter("organizationId", organizationId);
+
+		return new Summary(title, content, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {

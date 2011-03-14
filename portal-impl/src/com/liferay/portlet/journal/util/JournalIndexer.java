@@ -72,29 +72,6 @@ public class JournalIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String title = document.get(Field.TITLE);
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		String groupId = document.get("groupId");
-		String articleId = document.get(Field.ENTRY_CLASS_PK);
-		String version = document.get("version");
-
-		portletURL.setParameter("struts_action", "/journal/edit_article");
-		portletURL.setParameter("groupId", groupId);
-		portletURL.setParameter("articleId", articleId);
-		portletURL.setParameter("version", version);
-
-		return new Summary(title, content, portletURL);
-	}
-
 	protected void doDelete(Object obj) throws Exception {
 		JournalArticle article = (JournalArticle)obj;
 
@@ -191,6 +168,29 @@ public class JournalIndexer extends BaseIndexer {
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String groupId = document.get("groupId");
+		String articleId = document.get(Field.ENTRY_CLASS_PK);
+		String version = document.get("version");
+
+		portletURL.setParameter("struts_action", "/journal/edit_article");
+		portletURL.setParameter("groupId", groupId);
+		portletURL.setParameter("articleId", articleId);
+		portletURL.setParameter("version", version);
+
+		return new Summary(title, content, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {

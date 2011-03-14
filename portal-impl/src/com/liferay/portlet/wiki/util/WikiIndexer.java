@@ -68,26 +68,6 @@ public class WikiIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String title = document.get(Field.TITLE);
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		String nodeId = document.get("nodeId");
-
-		portletURL.setParameter("struts_action", "/wiki/view");
-		portletURL.setParameter("nodeId", nodeId);
-		portletURL.setParameter("title", title);
-
-		return new Summary(title, content, portletURL);
-	}
-
 	protected void doDelete(Object obj) throws Exception {
 		if (obj instanceof Object[]) {
 			Object[] array = (Object[])obj;
@@ -133,6 +113,26 @@ public class WikiIndexer extends BaseIndexer {
 			SearchEngineUtil.deleteDocument(
 				page.getCompanyId(), document.get(Field.UID));
 		}
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get(Field.TITLE);
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String nodeId = document.get("nodeId");
+
+		portletURL.setParameter("struts_action", "/wiki/view");
+		portletURL.setParameter("nodeId", nodeId);
+		portletURL.setParameter("title", title);
+
+		return new Summary(title, content, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {

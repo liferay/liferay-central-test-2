@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchContext;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -61,8 +62,9 @@ public class DirectoryOpenSearchImpl extends HitsOpenSearchImpl {
 	}
 
 	public Summary getSummary(
-		Indexer indexer, Document document, String snippet,
-		PortletURL portletURL) {
+			Indexer indexer, Document document, String snippet,
+			PortletURL portletURL)
+		throws SearchException {
 
 		Summary summary = super.getSummary(
 			indexer, document, snippet, portletURL);

@@ -40,16 +40,16 @@ public class AssetIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		return null;
-	}
-
 	protected void doDelete(Object obj) {
 	}
 
 	protected Document doGetDocument(Object obj) {
+		return null;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
 		return null;
 	}
 

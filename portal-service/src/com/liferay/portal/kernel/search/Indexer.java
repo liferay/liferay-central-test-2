@@ -32,7 +32,8 @@ public interface Indexer {
 	public Document getDocument(Object obj) throws SearchException;
 
 	public Summary getSummary(
-		Document document, String snippet, PortletURL portletURL);
+			Document document, String snippet, PortletURL portletURL)
+		throws SearchException;
 
 	public void registerIndexerPostProcessor(
 		IndexerPostProcessor indexerPostProcessor);

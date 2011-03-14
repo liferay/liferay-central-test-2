@@ -59,21 +59,6 @@ public class BookmarksIndexer extends BaseIndexer {
 		return CLASS_NAMES;
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		String title = document.get(Field.TITLE);
-
-		String url = document.get(Field.URL);
-
-		String entryId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter("struts_action", "/bookmarks/view_entry");
-		portletURL.setParameter("entryId", entryId);
-
-		return new Summary(title, url, portletURL);
-	}
-
 	protected void checkSearchFolderId(
 			long folderId, SearchContext searchContext)
 		throws Exception {
@@ -147,6 +132,21 @@ public class BookmarksIndexer extends BaseIndexer {
 		ExpandoBridgeIndexerUtil.addAttributes(document, expandoBridge);
 
 		return document;
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		String title = document.get(Field.TITLE);
+
+		String url = document.get(Field.URL);
+
+		String entryId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter("struts_action", "/bookmarks/view_entry");
+		portletURL.setParameter("entryId", entryId);
+
+		return new Summary(title, url, portletURL);
 	}
 
 	protected void doReindex(Object obj) throws Exception {
