@@ -308,12 +308,14 @@ public class UpdateLayoutAction extends Action {
 
 		boolean portletOnLayout = false;
 
-		for (Portlet layoutPortlet : layoutTypePortlet.getAllPortlets()) {
-			String rootPortletId = portlet.getRootPortletId();
-			String layoutRootPortletId = layoutPortlet.getRootPortletId();
+		String rootPortletId = portlet.getRootPortlet().getPortletId();
 
-			if (rootPortletId.equals(layoutRootPortletId) &&
-					(layoutPortlet.getPortletId() != portlet.getPortletId())) {
+		for (Portlet layoutPortlet : layoutTypePortlet.getAllPortlets()) {
+			String layoutRootPortletId =
+				layoutPortlet.getRootPortlet().getPortletId();
+
+			if (layoutRootPortletId.equals(rootPortletId) &&
+				(layoutPortlet.getPortletId() != portlet.getPortletId())) {
 
 				portletOnLayout = true;
 
