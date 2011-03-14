@@ -1,6 +1,8 @@
 AUI().add(
 	'liferay-navigation-touch',
 	function(A) {
-		Liferay.Navigation.prototype._TPL_DELETE_BUTTON = Liferay.Navigation.prototype._TPL_DELETE_BUTTON.replace('aui-helper-hidden', '');
+		var NavigationProto = Liferay.Navigation.prototype;
+
+		NavigationProto.TPL_DELETE_BUTTON = NavigationProto.TPL_DELETE_BUTTON.replace('aui-helper-hidden', '');
 	}
 );

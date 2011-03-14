@@ -71,6 +71,8 @@ AUI().add(
 				NAME: 'navigation',
 
 				prototype: {
+					TPL_DELETE_BUTTON: '<span class="delete-tab aui-helper-hidden">X</span>',
+
 					initializer: function(config) {
 						var instance = this;
 
@@ -694,7 +696,6 @@ AUI().add(
 					},
 
 					_optionsOpen: true,
-					_TPL_DELETE_BUTTON: '<span class="delete-tab aui-helper-hidden">X</span>',
 					_updateURL: ''
 				}
 			}
