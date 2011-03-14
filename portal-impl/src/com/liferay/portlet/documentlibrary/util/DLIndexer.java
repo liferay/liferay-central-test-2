@@ -81,61 +81,6 @@ public class DLIndexer extends BaseIndexer {
 		indexer.delete(fileModel);
 	}
 
-	protected Summary doGetSummary(
-		Document document, String snippet, PortletURL portletURL) {
-
-		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
-
-		liferayPortletURL.setLifecycle(PortletRequest.ACTION_PHASE);
-
-		try {
-			liferayPortletURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-		}
-		catch (WindowStateException wse) {
-		}
-
-		String fileName = document.get("path");
-
-		String title = fileName;
-
-		String content = snippet;
-
-		if (Validator.isNull(snippet)) {
-			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
-		}
-
-		String fileEntryId = document.get(Field.ENTRY_CLASS_PK);
-
-		portletURL.setParameter("struts_action", "/document_library/get_file");
-		portletURL.setParameter("fileEntryId", fileEntryId);
-
-		return new Summary(title, content, portletURL);
-	}
-
-	protected void doReindex(String[] ids) throws Exception {
-		long companyId = GetterUtil.getLong(ids[0]);
-
-		reindexFolders(companyId);
-		reindexRoot(companyId);
-	}
-
-	protected void doReindex(String className, long classPK) throws Exception {
-		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
-			classPK);
-
-		doReindex(fileEntry);
-	}
-
-	protected void doReindex(Object obj) throws Exception {
-		DLFileEntry fileEntry = (DLFileEntry)obj;
-
-		Document document = getDocument(fileEntry);
-
-		if (document != null) {
-			SearchEngineUtil.updateDocument(fileEntry.getCompanyId(), document);
-		}
-	}
-
 	protected Document doGetDocument(Object obj) throws Exception {
 		DLFileEntry fileEntry = (DLFileEntry)obj;
 
@@ -174,6 +119,61 @@ public class DLIndexer extends BaseIndexer {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(FileModel.class);
 
 		return indexer.getDocument(fileModel);
+	}
+
+	protected Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
+
+		liferayPortletURL.setLifecycle(PortletRequest.ACTION_PHASE);
+
+		try {
+			liferayPortletURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+		}
+		catch (WindowStateException wse) {
+		}
+
+		String fileName = document.get("path");
+
+		String title = fileName;
+
+		String content = snippet;
+
+		if (Validator.isNull(snippet)) {
+			content = StringUtil.shorten(document.get(Field.CONTENT), 200);
+		}
+
+		String fileEntryId = document.get(Field.ENTRY_CLASS_PK);
+
+		portletURL.setParameter("struts_action", "/document_library/get_file");
+		portletURL.setParameter("fileEntryId", fileEntryId);
+
+		return new Summary(title, content, portletURL);
+	}
+
+	protected void doReindex(Object obj) throws Exception {
+		DLFileEntry fileEntry = (DLFileEntry)obj;
+
+		Document document = getDocument(fileEntry);
+
+		if (document != null) {
+			SearchEngineUtil.updateDocument(fileEntry.getCompanyId(), document);
+		}
+	}
+
+	protected void doReindex(String className, long classPK) throws Exception {
+		DLFileEntry fileEntry = DLRepositoryLocalServiceUtil.getFileEntry(
+			classPK);
+
+		doReindex(fileEntry);
+	}
+
+	protected void doReindex(String[] ids) throws Exception {
+		long companyId = GetterUtil.getLong(ids[0]);
+
+		reindexFolders(companyId);
+		reindexRoot(companyId);
 	}
 
 	protected String getPortletId(SearchContext searchContext) {
