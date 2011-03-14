@@ -105,7 +105,7 @@ boolean quote = false;
 				<liferay-ui:message key="the-following-post-will-be-added-in-place-of-the-moved-message" />
 			</div>
 
-			<aui:input model="<%= MBMessage.class %>" name="subject" value='<%= LanguageUtil.get(pageContext, "thread-splitted") %>' />
+			<aui:input model="<%= MBMessage.class %>" name="subject" value='<%= LanguageUtil.get(pageContext, "thread-split") %>' />
 
 			<aui:field-wrapper label="body">
 				<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
