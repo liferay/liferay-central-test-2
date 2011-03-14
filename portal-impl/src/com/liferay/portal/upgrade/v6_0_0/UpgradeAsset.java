@@ -388,10 +388,10 @@ public class UpgradeAsset extends UpgradeProcess {
 	}
 
 	protected void doUpgrade() throws Exception {
-		updateResourceCodes();
 		updateAssetEntries();
 		updateAssetCategories();
 		updateAssetTags();
+		updateResourceCodes();
 	}
 
 	protected void updateAssetCategories() throws Exception {
