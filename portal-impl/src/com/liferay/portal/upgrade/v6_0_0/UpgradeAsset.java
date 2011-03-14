@@ -542,7 +542,7 @@ public class UpgradeAsset extends UpgradeProcess {
 	protected void updateCategoryResource(long companyId, long categoryId)
 		throws Exception{
 
-		String oldName = "com.liferay.tags.model.TagsEntry";
+		String oldName = "com.liferay.portlet.tags.model.TagsEntry";
 
 		ResourceCode oldResourceCode =
 			ResourceCodeLocalServiceUtil.getResourceCode(
