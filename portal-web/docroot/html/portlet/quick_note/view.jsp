@@ -18,26 +18,23 @@
 
 <div id="<portlet:namespace />pad" style="background: <%= color %>;">
 	<c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
-		<div class="portlet-title-default">
-			<table border="0" cellpadding="2" cellspacing="0" width="100%">
-			<tr>
-				<td>
-					<span class="note-color yellow"></span>
-					<span class="note-color green"></span>
-					<span class="note-color blue"></span>
-					<span class="note-color red"></span>
-				</td>
-
-				<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
-					<td>
-						<a border="0" class="close-note" href="<%= portletDisplay.getURLClose() %>"><img alt="<liferay-ui:message key="close" />" src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
+			<table width="100%">
+				<tr>
+					<td width="60%">
+						<div class="portlet-title-default" id="quick-note-title">&nbsp;</div>
 					</td>
-				</c:if>
-			</tr>
+					<td>
+						<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
+							<a border="0" class="close-note" href="<%= portletDisplay.getURLClose() %>"><img alt="<liferay-ui:message key="close" />" src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
+						</c:if>
+						<span class="note-color yellow"></span>
+						<span class="note-color green"></span>
+						<span class="note-color blue"></span>
+						<span class="note-color red"></span>
+					</td>
+				</tr>
 			</table>
-		</div>
 	</c:if>
-
 	<div id="<portlet:namespace />note"><%= StringUtil.replace(HtmlUtil.escape(data), "&lt;br /&gt;", "<br />") %></div>
 </div>
 
