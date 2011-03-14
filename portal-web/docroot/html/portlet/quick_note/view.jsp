@@ -19,21 +19,21 @@
 <div id="<portlet:namespace />pad" style="background: <%= color %>;">
 	<c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
 		<table width="100%">
-			<tr>
-				<td width="60%">
-					<div class="portlet-title-default">&nbsp;</div>
-				</td>
-				<td>
-					<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
-						<a border="0" class="close-note" href="<%= portletDisplay.getURLClose() %>"><img alt="<liferay-ui:message key="close" />" src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
-					</c:if>
+		<tr>
+			<td width="60%">
+				<div class="portlet-title-default">&nbsp;</div>
+			</td>
+			<td>
+				<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
+					<a border="0" class="close-note" href="<%= portletDisplay.getURLClose() %>"><img alt="<liferay-ui:message key="close" />" src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
+				</c:if>
 
-					<span class="note-color yellow"></span>
-					<span class="note-color green"></span>
-					<span class="note-color blue"></span>
-					<span class="note-color red"></span>
-				</td>
-			</tr>
+				<span class="note-color yellow"></span>
+				<span class="note-color green"></span>
+				<span class="note-color blue"></span>
+				<span class="note-color red"></span>
+			</td>
+		</tr>
 		</table>
 	</c:if>
 
