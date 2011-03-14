@@ -34,6 +34,8 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.Set" %>
 
+<%@ include file="taglib-init-ext.jspf" %>
+
 <%!
 private static Object _deserialize(Object obj) {
 	if (obj != null) {
