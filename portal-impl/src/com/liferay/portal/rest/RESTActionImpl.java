@@ -18,9 +18,9 @@ import com.liferay.portal.kernel.rest.RESTAction;
 
 import java.lang.reflect.Method;
 
-import jodd.util.ReflectUtil;
-
 import javax.servlet.http.HttpServletRequest;
+
+import jodd.util.ReflectUtil;
 
 /**
  * @author Igor Spasic
@@ -73,22 +73,23 @@ public class RESTActionImpl implements RESTAction {
 		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
 
 		for (int i = 0; i < parameters.length; i++) {
-
-			if (parameters[i] == null) {
-				String parameterName = parameterNames[i];
-
-				String parameterValue = request.getParameter(parameterName);
-
-				if (parameterValue != null) {
-
-					Class<?> parameterType = parameterTypes[i];
-
-					Object value = ReflectUtil.castType(
-						parameterValue, parameterType);
-
-					parameters[i] = value;
-				}
+			if (parameters[i] != null) {
+				continue;
 			}
+
+			String parameterName = parameterNames[i];
+
+			String parameterValue = request.getParameter(parameterName);
+
+			if (parameterValue == null) {
+				continue;
+			}
+
+			Class<?> parameterType = parameterTypes[i];
+
+			Object value = ReflectUtil.castType(parameterValue, parameterType);
+
+			parameters[i] = value;
 		}
 	}
 

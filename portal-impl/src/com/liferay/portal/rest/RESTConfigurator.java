@@ -68,7 +68,9 @@ public class RESTConfigurator extends FindClass {
 			}
 		}
 		else {
-			classLoader = Thread.currentThread().getContextClassLoader();
+			Thread currentThread = Thread.currentThread();
+
+			classLoader = currentThread.getContextClassLoader();
 
 			File portalImplJarFile = new File(
 				PortalUtil.getPortalLibDir(), "portal-impl.jar");
@@ -88,7 +90,7 @@ public class RESTConfigurator extends FindClass {
 			}
 		}
 
-		this._classLoader = classLoader;
+		_classLoader = classLoader;
 
 		configure(classPathURLs);
 	}
