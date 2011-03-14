@@ -68,6 +68,8 @@ public class RESTConfigurator extends FindClass {
 			}
 		}
 		else {
+			classLoader = Thread.currentThread().getContextClassLoader();
+
 			File portalImplJarFile = new File(
 				PortalUtil.getPortalLibDir(), "portal-impl.jar");
 
@@ -82,10 +84,11 @@ public class RESTConfigurator extends FindClass {
 				}
 			}
 			else {
-				classPathURLs = ClassLoaderUtil.getFullClassPath(
-					RESTConfigurator.class);
+				classPathURLs = ClassLoaderUtil.getFullClassPath(classLoader);
 			}
 		}
+
+		this._classLoader = classLoader;
 
 		configure(classPathURLs);
 	}
@@ -153,8 +156,7 @@ public class RESTConfigurator extends FindClass {
 	}
 
 	private void _onRESTClass(String className) throws Exception {
-		Class<?> actionClass = ClassLoaderUtil.loadClass(
-			className, this.getClass());
+		Class<?> actionClass = _classLoader.loadClass(className);
 
 		if (!_isRESTClass(actionClass)) {
 			return;
@@ -195,8 +197,7 @@ public class RESTConfigurator extends FindClass {
 
 		utilClassName = StringUtil.replace(utilClassName, ".impl.", ".");
 
-		Class<?> utilClass = ClassLoaderUtil.loadClass(
-			utilClassName, this.getClass());
+		Class<?> utilClass = _classLoader.loadClass(utilClassName);
 
 		method = utilClass.getMethod(
 			method.getName(), method.getParameterTypes());
@@ -210,6 +211,7 @@ public class RESTConfigurator extends FindClass {
 	private static Log _log = LogFactoryUtil.getLog(RESTConfigurator.class);
 
 	private boolean _checkBytecodeSignature = true;
+	private ClassLoader _classLoader;
 	private int _registeredActionsCount;
 	private RESTActionsManager _restActionsManager;
 	private byte[] _restAnnotationBytes = getTypeSignatureBytes(REST.class);

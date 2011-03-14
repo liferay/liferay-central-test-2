@@ -45,7 +45,21 @@ public class RESTActionImpl implements RESTAction {
 
 		Object[] parameters = _prepareParameters();
 
+		_fixNullParameters(parameters);
+
 		return actionMethod.invoke(actionClass, parameters);
+	}
+
+	private void _fixNullParameters(Object[] parameters) throws Exception {
+		Class<?>[] parameterTypes = _restActionConfig.getParameterTypes();
+
+		for (int i = 0; i < parameters.length; i++) {
+			Object value = parameters[i];
+
+			if (value == null) {
+				parameters[i] = ReflectUtil.newInstance(parameterTypes[i]);
+			}
+		}
 	}
 
 	private Object[] _prepareParameters() {
