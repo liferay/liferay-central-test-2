@@ -20,40 +20,30 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  * @author Ryan Park
  */
-public class Summary {
+public class BaseIndexerPostProcessor implements IndexerPostProcessor {
 
-	public Summary(String title, String content, PortletURL portletURL) {
-		_title = title;
-		_content = content;
-		_portletURL = portletURL;
+	public void postProcessContextQuery(
+			BooleanQuery contextQuery, SearchContext searchContext)
+		throws Exception {
 	}
 
-	public String getContent() {
-		return _content;
+	public void postProcessDocument(Document document, Object obj)
+		throws Exception {
 	}
 
-	public PortletURL getPortletURL() {
-		return _portletURL;
+	public void postProcessFullQuery(
+			BooleanQuery fullQuery, SearchContext searchContext)
+		throws Exception {
 	}
 
-	public String getTitle() {
-		return _title;
+	public void postProcessSearchQuery(
+			BooleanQuery searchQuery, SearchContext searchContext)
+		throws Exception {
 	}
 
-	public void setContent(String content) {
-		_content = content;
+	public void postProcessSummary(
+		Summary summary, Document document, String snippet,
+		PortletURL portletURL) {
 	}
-
-	public void setPortletURL(PortletURL portletURL) {
-		_portletURL = portletURL;
-	}
-
-	public void setTitle(String title) {
-		_title = title;
-	}
-
-	private String _content;
-	private PortletURL _portletURL;
-	private String _title;
 
 }

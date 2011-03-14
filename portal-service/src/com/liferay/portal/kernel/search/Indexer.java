@@ -19,6 +19,7 @@ import javax.portlet.PortletURL;
 /**
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Ryan Park
  */
 public interface Indexer {
 
@@ -33,6 +34,9 @@ public interface Indexer {
 	public Summary getSummary(
 		Document document, String snippet, PortletURL portletURL);
 
+	public void registerIndexerPostProcessor(
+		IndexerPostProcessor indexerPostProcessor);
+
 	public void reindex(Object obj) throws SearchException;
 
 	public void reindex(String className, long classPK) throws SearchException;
@@ -40,5 +44,8 @@ public interface Indexer {
 	public void reindex(String[] ids) throws SearchException;
 
 	public Hits search(SearchContext searchContext) throws SearchException;
+
+	public void unregisterIndexerPostProcessor(
+		IndexerPostProcessor indexerPostProcessor);
 
 }

@@ -43,6 +43,9 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
 import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
+import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.IndexerPostProcessor;
+import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.servlet.LiferayFilter;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
@@ -623,6 +626,46 @@ public class HookHotDeployListener
 			}
 		}
 
+		IndexerPostProcessorContainer indexerPostProcessorContainer =
+			_indexerPostProcessorContainerMap.get(servletContextName);
+
+		if (indexerPostProcessorContainer == null) {
+			indexerPostProcessorContainer = new IndexerPostProcessorContainer();
+
+			_indexerPostProcessorContainerMap.put(
+				servletContextName, indexerPostProcessorContainer);
+		}
+
+		List<Element> indexerPostProcessorElements = rootElement.elements(
+			"indexer-post-processor");
+
+		for (Element indexerPostProcessorElement :
+				indexerPostProcessorElements) {
+
+			String indexerModelName = indexerPostProcessorElement.elementText(
+				"indexer-model-name");
+			String indexerPostProcessorImpl =
+				indexerPostProcessorElement.elementText(
+					"indexer-post-processor-impl");
+
+			Indexer indexer = IndexerRegistryUtil.getIndexer(indexerModelName);
+
+			if (indexer == null) {
+				_log.error("No indexer for " + indexerModelName + " was found");
+
+				continue;
+			}
+
+			IndexerPostProcessor indexerPostProcessor =
+				(IndexerPostProcessor)InstanceFactory.newInstance(
+					portletClassLoader, indexerPostProcessorImpl);
+
+			indexer.registerIndexerPostProcessor(indexerPostProcessor);
+
+			indexerPostProcessorContainer.registerIndexerPostProcessor(
+				indexerModelName, indexerPostProcessor);
+		}
+
 		List<Element> serviceElements = rootElement.elements("service");
 
 		for (Element serviceElement : serviceElements) {
@@ -904,6 +947,13 @@ public class HookHotDeployListener
 
 		if (hotDeployListenersContainer != null) {
 			hotDeployListenersContainer.unregisterHotDeployListeners();
+		}
+
+		IndexerPostProcessorContainer indexerPostProcessorContainer =
+			_indexerPostProcessorContainerMap.remove(servletContextName);
+
+		if (indexerPostProcessorContainer != null) {
+			indexerPostProcessorContainer.unregisterIndexerPostProcessor();
 		}
 
 		LanguagesContainer languagesContainer = _languagesContainerMap.remove(
@@ -1995,6 +2045,9 @@ public class HookHotDeployListener
 	private Map<String, HotDeployListenersContainer>
 		_hotDeployListenersContainerMap =
 			new HashMap<String, HotDeployListenersContainer>();
+	private Map<String, IndexerPostProcessorContainer>
+		_indexerPostProcessorContainerMap =
+			new HashMap<String, IndexerPostProcessorContainer>();
 	private Map<String, LanguagesContainer> _languagesContainerMap =
 		new HashMap<String, LanguagesContainer>();
 	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
@@ -2235,6 +2288,47 @@ public class HookHotDeployListener
 		private List<HotDeployListener> _hotDeployListeners =
 			new ArrayList<HotDeployListener>();
 
+	}
+
+	private class IndexerPostProcessorContainer {
+
+		public void registerIndexerPostProcessor(
+			String modelName, IndexerPostProcessor indexerPostProcessor) {
+
+			List<IndexerPostProcessor> indexerPostProcessors =
+				_indexerPostProcessorMap.get(modelName);
+
+			if (indexerPostProcessors == null) {
+				indexerPostProcessors = new ArrayList<IndexerPostProcessor>();
+
+				_indexerPostProcessorMap.put(modelName, indexerPostProcessors);
+			}
+
+			indexerPostProcessors.add(indexerPostProcessor);
+		}
+
+		public void unregisterIndexerPostProcessor() {
+			for (Map.Entry<String, List<IndexerPostProcessor>> entry :
+					_indexerPostProcessorMap.entrySet()) {
+
+				String modelName = entry.getKey();
+				List<IndexerPostProcessor> indexerPostProcessors =
+					entry.getValue();
+
+				Indexer indexer = IndexerRegistryUtil.getIndexer(modelName);
+
+				for (IndexerPostProcessor indexerPostProcessor :
+						indexerPostProcessors) {
+
+					indexer.unregisterIndexerPostProcessor(
+						indexerPostProcessor);
+				}
+			}
+		}
+
+		private Map<String, List<IndexerPostProcessor>>
+			_indexerPostProcessorMap =
+				new HashMap<String, List<IndexerPostProcessor>>();
 	}
 
 	private class LanguagesContainer {

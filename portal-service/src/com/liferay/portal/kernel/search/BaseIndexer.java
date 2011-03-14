@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
@@ -41,9 +42,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.portlet.PortletURL;
+
 /**
  * @author Brian Wing Shun Chan
  * @author Hugo Huijser
+ * @author Ryan Park
  */
 public abstract class BaseIndexer implements Indexer {
 
@@ -62,6 +66,12 @@ public abstract class BaseIndexer implements Indexer {
 	public Document getDocument(Object obj) throws SearchException {
 		try {
 			Document document = doGetDocument(obj);
+
+			for (IndexerPostProcessor indexerPostProcessor :
+					_indexerPostProcessors) {
+
+				indexerPostProcessor.postProcessDocument(document, obj);
+			}
 
 			if (document == null) {
 				return null;
@@ -85,6 +95,33 @@ public abstract class BaseIndexer implements Indexer {
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
+	}
+
+	public Summary getSummary(
+		Document document, String snippet, PortletURL portletURL) {
+
+		Summary summary = doGetSummary(document, snippet, portletURL);
+
+		for (IndexerPostProcessor indexerPostProcessor :
+				_indexerPostProcessors) {
+
+			indexerPostProcessor.postProcessSummary(
+				summary, document, snippet, portletURL);
+		}
+
+		return summary;
+	}
+
+	public void registerIndexerPostProcessor(
+		IndexerPostProcessor indexerPostProcessor) {
+
+		List<IndexerPostProcessor> indexerPostProcessorsList =
+			ListUtil.fromArray(_indexerPostProcessors);
+
+		indexerPostProcessorsList.add(indexerPostProcessor);
+
+		_indexerPostProcessors = indexerPostProcessorsList.toArray(
+			new IndexerPostProcessor[indexerPostProcessorsList.size()]);
 	}
 
 	public void reindex(Object obj) throws SearchException {
@@ -189,6 +226,18 @@ public abstract class BaseIndexer implements Indexer {
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
+	}
+
+	public void unregisterIndexerPostProcessor(
+		IndexerPostProcessor indexerPostProcessor) {
+
+		List<IndexerPostProcessor> indexerPostProcessorsList =
+			ListUtil.fromArray(_indexerPostProcessors);
+
+		ListUtil.remove(indexerPostProcessorsList, indexerPostProcessor);
+
+		_indexerPostProcessors = indexerPostProcessorsList.toArray(
+			new IndexerPostProcessor[indexerPostProcessorsList.size()]);
 	}
 
 	protected void addSearchAssetCategoryIds(
@@ -557,10 +606,24 @@ public abstract class BaseIndexer implements Indexer {
 
 		postProcessContextQuery(contextQuery, searchContext);
 
+		for (IndexerPostProcessor indexerPostProcessor :
+				_indexerPostProcessors) {
+
+			indexerPostProcessor.postProcessContextQuery(
+				contextQuery, searchContext);
+		}
+
 		BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 		addSearchKeywords(searchQuery, searchContext);
 		postProcessSearchQuery(searchQuery, searchContext);
+
+		for (IndexerPostProcessor indexerPostProcessor :
+				_indexerPostProcessors) {
+
+			indexerPostProcessor.postProcessSearchQuery(
+				searchQuery, searchContext);
+		}
 
 		BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
@@ -582,12 +645,21 @@ public abstract class BaseIndexer implements Indexer {
 
 		postProcessFullQuery(fullQuery, searchContext);
 
+		for (IndexerPostProcessor indexerPostProcessor :
+				_indexerPostProcessors) {
+
+			indexerPostProcessor.postProcessFullQuery(fullQuery, searchContext);
+		}
+
 		return fullQuery;
 	}
 
 	protected abstract void doDelete(Object obj) throws Exception;
 
 	protected abstract Document doGetDocument(Object obj) throws Exception;
+
+	protected abstract Summary doGetSummary(
+		Document document, String snippet, PortletURL portletURL);
 
 	protected abstract void doReindex(Object obj) throws Exception;
 
@@ -715,6 +787,9 @@ public abstract class BaseIndexer implements Indexer {
 
 	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
+
+	private IndexerPostProcessor[] _indexerPostProcessors =
+		new IndexerPostProcessor[0];
 
 	private static final String[] _KEYWORDS_FIELDS = {
 		Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION, Field.PROPERTIES,
