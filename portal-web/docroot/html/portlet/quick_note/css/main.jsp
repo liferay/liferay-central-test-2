@@ -27,7 +27,7 @@
 	}
 
 	.portlet-title-default {
-		cursor: move;
+		float: none;
 		width: 100%;
 	}
 
