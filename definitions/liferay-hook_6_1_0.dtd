@@ -109,10 +109,10 @@ value.object.listener.*
 
 <!ELEMENT custom-jsp-global (#PCDATA)>
 
-<!ELEMENT indexer-post-processor (indexer-model-name,
+<!ELEMENT indexer-post-processor (indexer-class-name,
 indexer-post-processor-impl)>
 
-<!ELEMENT indexer-model-name (#PCDATA)>
+<!ELEMENT indexer-class-name (#PCDATA)>
 
 <!ELEMENT indexer-post-processor-impl (#PCDATA)>
 

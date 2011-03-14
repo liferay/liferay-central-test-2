@@ -788,9 +788,6 @@ public abstract class BaseIndexer implements Indexer {
 	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
 
-	private IndexerPostProcessor[] _indexerPostProcessors =
-		new IndexerPostProcessor[0];
-
 	private static final String[] _KEYWORDS_FIELDS = {
 		Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION, Field.PROPERTIES,
 		Field.TITLE, Field.URL, Field.USER_NAME
@@ -798,6 +795,8 @@ public abstract class BaseIndexer implements Indexer {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 
+	private IndexerPostProcessor[] _indexerPostProcessors =
+		new IndexerPostProcessor[0];
 	private boolean _stagingAware = true;
 
 }

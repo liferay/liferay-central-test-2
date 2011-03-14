@@ -642,16 +642,16 @@ public class HookHotDeployListener
 		for (Element indexerPostProcessorElement :
 				indexerPostProcessorElements) {
 
-			String indexerModelName = indexerPostProcessorElement.elementText(
-				"indexer-model-name");
+			String indexerClassName = indexerPostProcessorElement.elementText(
+				"indexer-class-name");
 			String indexerPostProcessorImpl =
 				indexerPostProcessorElement.elementText(
 					"indexer-post-processor-impl");
 
-			Indexer indexer = IndexerRegistryUtil.getIndexer(indexerModelName);
+			Indexer indexer = IndexerRegistryUtil.getIndexer(indexerClassName);
 
 			if (indexer == null) {
-				_log.error("No indexer for " + indexerModelName + " was found");
+				_log.error("No indexer for " + indexerClassName + " was found");
 
 				continue;
 			}
@@ -663,7 +663,7 @@ public class HookHotDeployListener
 			indexer.registerIndexerPostProcessor(indexerPostProcessor);
 
 			indexerPostProcessorContainer.registerIndexerPostProcessor(
-				indexerModelName, indexerPostProcessor);
+				indexerClassName, indexerPostProcessor);
 		}
 
 		List<Element> serviceElements = rootElement.elements("service");
@@ -2293,15 +2293,17 @@ public class HookHotDeployListener
 	private class IndexerPostProcessorContainer {
 
 		public void registerIndexerPostProcessor(
-			String modelName, IndexerPostProcessor indexerPostProcessor) {
+			String indexerClassName,
+			IndexerPostProcessor indexerPostProcessor) {
 
 			List<IndexerPostProcessor> indexerPostProcessors =
-				_indexerPostProcessorMap.get(modelName);
+				_indexerPostProcessors.get(indexerClassName);
 
 			if (indexerPostProcessors == null) {
 				indexerPostProcessors = new ArrayList<IndexerPostProcessor>();
 
-				_indexerPostProcessorMap.put(modelName, indexerPostProcessors);
+				_indexerPostProcessors.put(
+					indexerClassName, indexerPostProcessors);
 			}
 
 			indexerPostProcessors.add(indexerPostProcessor);
@@ -2309,13 +2311,14 @@ public class HookHotDeployListener
 
 		public void unregisterIndexerPostProcessor() {
 			for (Map.Entry<String, List<IndexerPostProcessor>> entry :
-					_indexerPostProcessorMap.entrySet()) {
+					_indexerPostProcessors.entrySet()) {
 
-				String modelName = entry.getKey();
+				String indexerClassName = entry.getKey();
 				List<IndexerPostProcessor> indexerPostProcessors =
 					entry.getValue();
 
-				Indexer indexer = IndexerRegistryUtil.getIndexer(modelName);
+				Indexer indexer = IndexerRegistryUtil.getIndexer(
+					indexerClassName);
 
 				for (IndexerPostProcessor indexerPostProcessor :
 						indexerPostProcessors) {
@@ -2326,9 +2329,9 @@ public class HookHotDeployListener
 			}
 		}
 
-		private Map<String, List<IndexerPostProcessor>>
-			_indexerPostProcessorMap =
-				new HashMap<String, List<IndexerPostProcessor>>();
+		private Map<String, List<IndexerPostProcessor>> _indexerPostProcessors =
+			new HashMap<String, List<IndexerPostProcessor>>();
+
 	}
 
 	private class LanguagesContainer {
