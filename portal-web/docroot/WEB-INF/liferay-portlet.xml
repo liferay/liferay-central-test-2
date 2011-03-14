@@ -56,6 +56,7 @@
 		<control-panel-entry-weight>5.0</control-panel-entry-weight>
 		<asset-renderer-factory>com.liferay.portlet.calendar.asset.CalEventAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.calendar.CalEventCustomAttributesDisplay</custom-attributes-display>
+		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>true</show-portlet-access-denied>
@@ -202,6 +203,7 @@
 		<custom-attributes-display>com.liferay.portlet.messageboards.MBMessageCustomAttributesDisplay</custom-attributes-display>
 		<workflow-handler>com.liferay.portlet.messageboards.workflow.MBDiscussionWorkflowHandler</workflow-handler>
 		<workflow-handler>com.liferay.portlet.messageboards.workflow.MBMessageWorkflowHandler</workflow-handler>
+		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
@@ -390,6 +392,7 @@
 		<asset-renderer-factory>com.liferay.portlet.blogs.asset.BlogsEntryAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.blogs.BlogsEntryCustomAttributesDisplay</custom-attributes-display>
 		<workflow-handler>com.liferay.portlet.blogs.workflow.BlogsEntryWorkflowHandler</workflow-handler>
+		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
@@ -405,6 +408,7 @@
 		<icon>/html/icons/shopping.png</icon>
 		<struts-path>shopping</struts-path>
 		<configuration-action-class>com.liferay.portlet.shopping.action.ConfigurationActionImpl</configuration-action-class>
+		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
