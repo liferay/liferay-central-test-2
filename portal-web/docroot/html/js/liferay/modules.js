@@ -37,7 +37,6 @@
 			'look-and-feel': ['aui-color-picker', 'aui-dialog', 'aui-io-request', 'aui-tabs-base'],
 			'menu': ['aui-base', 'node-focusmanager', 'selector-css3'],
 			'navigation': ['aui-form-combobox', 'aui-io-request', 'dd-constrain', 'event-touch', 'json-parse', 'node-event-simulate', 'overlay', 'selector-css3', 'sortable', 'substitute'],
-			'navigation-touch': ['liferay-navigation'],
 			'navigation-interaction': ['node-focusmanager'],
 			'notice': ['aui-base'],
 			'panel': ['aui-base', 'aui-io-request'],
@@ -57,17 +56,13 @@
 
 		for (var i in moduleList) {
 			modules['liferay-' + i] = {
-				path: i.replace(REGEX_DASH, STR_UNDERSCORE) + '.js?t=' + (+new Date),
+				path: i.replace(REGEX_DASH, STR_UNDERSCORE) + '.js',
 				requires: moduleList[i]
 			};
 		}
 
 		return modules;
 	};
-
-	if(A.UA.touch) {
-    	GROUPS.alloy.modules['aui-base'].requires.push('event-touch');
-	}
 
 	GROUPS.liferay = {
 		base: PATH_LIFERAY,
@@ -85,22 +80,11 @@
 					path = path.replace(nameRE, '$1$2');
 					path = path.replace(REGEX_DASH, STR_UNDERSCORE);
 
-					config.path = path + '?t=' + (+new Date);
+					config.path = path;
 				}
 			}
 		}
 	};
-	
-	GROUPS.liferay.modules['liferay-navigation'].plugins = {
-		'liferay-navigation-touch': {
-			condition: {
-				test: function(A) {
-					return(A.UA.touch)
-				},
-				trigger: 'liferay-navigation'
-			}
-		}
-	}
 
 	GROUPS.misc = {
 		base: PATH_MISC,

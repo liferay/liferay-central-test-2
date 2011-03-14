@@ -5,6 +5,8 @@ AUI().add(
 		var Util = Liferay.Util;
 		var Lang = A.Lang;
 
+		var TPL_DELETE_BUTTON = '<span class="delete-tab aui-helper-hidden">X</span>';
+
 		var TPL_LIST_ITEM = '<li class="add-page"></li>';
 
 		var TPL_TAB_LINK = '<a href="{url}"><span>{pageTitle}</span></a>';
@@ -306,7 +308,7 @@ AUI().add(
 					_deleteButton: function(obj) {
 						var instance = this;
 
-						obj.append(instance._TPL_DELETE_BUTTON);
+						obj.append(TPL_DELETE_BUTTON);
 					},
 
 					_handleKeyDown: function(event) {
@@ -350,7 +352,7 @@ AUI().add(
 							var navItems = navBlock.all('> ul > li').filter(':not(.selected)');
 
 							navBlock.delegate(
-								['click', 'touchstart' ],
+								'click',
 								A.bind(instance._removePage, instance),
 								'.delete-tab'
 							);
@@ -694,7 +696,6 @@ AUI().add(
 					},
 
 					_optionsOpen: true,
-					_TPL_DELETE_BUTTON: '<span class="delete-tab aui-helper-hidden">X</span>',
 					_updateURL: ''
 				}
 			}
