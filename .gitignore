@@ -94,6 +94,7 @@
 /portal-web/docroot/WEB-INF/src
 /portal-web/docroot/WEB-INF/tmp
 
+/portal-web/docroot/WEB-INF/tld/aui.tld
 /portal-web/docroot/WEB-INF/tld/liferay-*.tld
 
 /portal-web/docroot/html/VAADIN
