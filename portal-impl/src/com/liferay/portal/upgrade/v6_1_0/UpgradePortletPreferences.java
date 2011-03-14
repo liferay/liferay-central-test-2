@@ -60,65 +60,9 @@ public class UpgradePortletPreferences
 		}
 	}
 
-	protected void convertPortletPreferences(
-			long ownerId, int ownerType, long plid, String portletId,
-			String preferences)
-		throws Exception {
-
-		long portletPreferencesId = getPortletPreferencesId(
-			ownerId, ownerType, plid, portletId);
-
-		if (portletPreferencesId == 0) {
-			addPortletPreferences(
-				ownerId, ownerType, plid, portletId, preferences);
-		}
-	}
-
-	protected void convertPortletPreferencesUniquePerLayout() throws Exception {
-		StringBundler sb = new StringBundler(8);
-
-		sb.append("select portletPreferencesId, plid, portletId, preferences ");
-		sb.append("from PortletPreferences where ownerId = ");
-		sb.append(PortletKeys.PREFS_OWNER_ID_DEFAULT);
-		sb.append(" and ownerType = ");
-		sb.append(PortletKeys.PREFS_OWNER_TYPE_LAYOUT);
-		sb.append(" and portletId in (");
-		sb.append(_CONVERT_UNIQUE_PER_LAYOUT_PORTLET_IDS);
-		sb.append(")");
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getConnection();
-
-			ps = con.prepareStatement(sb.toString());
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				long plid = rs.getLong("plid");
-				String portletId = rs.getString("portletId");
-				String preferences = rs.getString("preferences");
-
-				long ownerId = getOwnerId(plid);
-
-				if (ownerId != 0) {
-					convertPortletPreferences(
-						ownerId, PortletKeys.PREFS_OWNER_TYPE_GROUP,
-						PortletKeys.PREFS_PLID_SHARED, portletId, preferences);
-				}
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
 	protected void doUpgrade() throws Exception {
-		convertPortletPreferencesUniquePerLayout();
 		updatePortletPreferences();
+		updatePortletPreferencesOwner();
 	}
 
 	protected long getOwnerId(long plid) throws Exception {
@@ -183,6 +127,58 @@ public class UpgradePortletPreferences
 		return 0;
 	}
 
+	protected void updatePortletPreferencesOwner() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			StringBundler sb = new StringBundler(8);
+
+			sb.append("select portletPreferencesId, plid, portletId, ");
+			sb.append("preferences from PortletPreferences where ownerId = ");
+			sb.append(PortletKeys.PREFS_OWNER_ID_DEFAULT);
+			sb.append(" and ownerType = ");
+			sb.append(PortletKeys.PREFS_OWNER_TYPE_LAYOUT);
+			sb.append(" and portletId in ('8', '19', '33')");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long plid = rs.getLong("plid");
+				String portletId = rs.getString("portletId");
+				String preferences = rs.getString("preferences");
+
+				long ownerId = getOwnerId(plid);
+
+				if (ownerId == 0) {
+					continue;
+				}
+
+				long portletPreferencesId = getPortletPreferencesId(
+					ownerId, PortletKeys.PREFS_OWNER_TYPE_GROUP,
+					PortletKeys.PREFS_PLID_SHARED, portletId);
+
+				if (portletPreferencesId != 0) {
+					continue;
+				}
+
+				addPortletPreferences(
+					ownerId, PortletKeys.PREFS_OWNER_TYPE_GROUP,
+					PortletKeys.PREFS_PLID_SHARED, portletId, preferences);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	private static final String[] _CAMEL_CASE_UPGRADE_PORTLET_IDS = {
 		"8", "15", "19", "20", "33", "36", "39_INSTANCE_%", "47_INSTANCE_%",
 		"56_INSTANCE_%", "54_INSTANCE_%", "59_INSTANCE_%", "62_INSTANCE_%",
@@ -190,8 +186,5 @@ public class UpgradePortletPreferences
 		"85_INSTANCE_%", "100", "101_INSTANCE_%", "102_INSTANCE_%", "114",
 		"115", "118_INSTANCE_%", "122_INSTANCE_%"
 	};
-
-	private static final String _CONVERT_UNIQUE_PER_LAYOUT_PORTLET_IDS =
-		"'8', '19', '33'";
 
 }
