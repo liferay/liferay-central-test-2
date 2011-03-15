@@ -308,10 +308,18 @@ public class UpdateLayoutAction extends Action {
 
 		boolean portletOnLayout = false;
 
-		String portletId = portlet.getPortletId();
+		String rootPortletId = portlet.getRootPortlet().getPortletId();
 
 		for (Portlet layoutPortlet : layoutTypePortlet.getAllPortlets()) {
-			if (portletId.equals(layoutPortlet.getPortletId())) {
+			String layoutRootPortletId =
+				layoutPortlet.getRootPortlet().getPortletId();
+
+			// Check to see if an instance of this portlet is already in layout,
+			// but ignore the portlet that was just added
+
+			if (layoutRootPortletId.equals(rootPortletId) &&
+				(layoutPortlet.getPortletId() != portlet.getPortletId())) {
+
 				portletOnLayout = true;
 
 				break;
