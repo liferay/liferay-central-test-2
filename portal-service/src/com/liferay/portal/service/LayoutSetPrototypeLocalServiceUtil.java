@@ -253,12 +253,20 @@ public class LayoutSetPrototypeLocalServiceUtil {
 	public static com.liferay.portal.model.LayoutSetPrototype addLayoutSetPrototype(
 		long userId, long companyId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, boolean active)
+		java.lang.String description, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .addLayoutSetPrototype(userId, companyId, nameMap,
-			description, active);
+			description, active, serviceContext);
+	}
+
+	public static com.liferay.portal.model.LayoutSetPrototype getLayoutSetPrototypeByUuid(
+		java.lang.String uuid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLayoutSetPrototypeByUuid(uuid);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutSetPrototype> search(
@@ -276,12 +284,13 @@ public class LayoutSetPrototypeLocalServiceUtil {
 	public static com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
 		long layoutSetPrototypeId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, boolean active)
+		java.lang.String description, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateLayoutSetPrototype(layoutSetPrototypeId, nameMap,
-			description, active);
+			description, active, serviceContext);
 	}
 
 	public static LayoutSetPrototypeLocalService getService() {

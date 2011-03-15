@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSetPrototype;
@@ -38,7 +39,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 
 	public LayoutSetPrototype addLayoutSetPrototype(
 			long userId, long companyId, Map<Locale, String> nameMap,
-			String description, boolean active)
+			String description, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout set prototype
@@ -47,6 +48,10 @@ public class LayoutSetPrototypeLocalServiceImpl
 
 		LayoutSetPrototype layoutSetPrototype =
 			layoutSetPrototypePersistence.create(layoutSetPrototypeId);
+
+		if (Validator.isNotNull(serviceContext.getUuid())) {
+			layoutSetPrototype.setUuid(serviceContext.getUuid());
+		}
 
 		layoutSetPrototype.setCompanyId(companyId);
 		layoutSetPrototype.setNameMap(nameMap);
@@ -73,9 +78,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 			userId, LayoutSetPrototype.class.getName(),
 			layoutSetPrototype.getLayoutSetPrototypeId(),
 			layoutSetPrototype.getName(LocaleUtil.getDefault()), null, 0,
-			friendlyURL, true, null);
-
-		ServiceContext serviceContext = new ServiceContext();
+			friendlyURL, true, serviceContext);
 
 		layoutLocalService.addLayout(
 			userId, group.getGroupId(), true,
@@ -121,6 +124,12 @@ public class LayoutSetPrototypeLocalServiceImpl
 		deleteLayoutSetPrototype(layoutSetPrototype);
 	}
 
+	public LayoutSetPrototype getLayoutSetPrototypeByUuid(String uuid)
+		throws PortalException, SystemException {
+
+		return layoutSetPrototypePersistence.findByUuid_First(uuid, null);
+	}
+
 	public List<LayoutSetPrototype> search(
 			long companyId, Boolean active, int start, int end,
 			OrderByComparator obc)
@@ -149,7 +158,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 
 	public LayoutSetPrototype updateLayoutSetPrototype(
 			long layoutSetPrototypeId, Map<Locale, String> nameMap,
-			String description, boolean active)
+			String description, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		// Layout set prototype

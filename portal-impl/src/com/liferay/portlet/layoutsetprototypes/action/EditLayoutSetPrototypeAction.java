@@ -22,6 +22,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutSetPrototypeServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.struts.PortletAction;
 
 import java.util.Locale;
@@ -122,19 +124,23 @@ public class EditLayoutSetPrototypeAction extends PortletAction {
 		String description = ParamUtil.getString(actionRequest, "description");
 		boolean active = ParamUtil.getBoolean(actionRequest, "active");
 
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			actionRequest);
+
 		if (layoutSetPrototypeId <= 0) {
 
 			// Add layout prototoype
 
 			LayoutSetPrototypeServiceUtil.addLayoutSetPrototype(
-				nameMap, description, active);
+				nameMap, description, active, serviceContext);
 		}
 		else {
 
 			// Update layout prototoype
 
 			LayoutSetPrototypeServiceUtil.updateLayoutSetPrototype(
-				layoutSetPrototypeId, nameMap, description, active);
+				layoutSetPrototypeId, nameMap, description, active,
+				serviceContext);
 		}
 	}
 

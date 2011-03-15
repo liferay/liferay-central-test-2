@@ -32,11 +32,12 @@ public class LayoutSetPrototypeServiceWrapper
 
 	public com.liferay.portal.model.LayoutSetPrototype addLayoutSetPrototype(
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, boolean active)
+		java.lang.String description, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeService.addLayoutSetPrototype(nameMap,
-			description, active);
+			description, active, serviceContext);
 	}
 
 	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
@@ -63,11 +64,12 @@ public class LayoutSetPrototypeServiceWrapper
 	public com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
 		long layoutSetPrototypeId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, boolean active)
+		java.lang.String description, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutSetPrototypeService.updateLayoutSetPrototype(layoutSetPrototypeId,
-			nameMap, description, active);
+			nameMap, description, active, serviceContext);
 	}
 
 	public LayoutSetPrototypeService getWrappedLayoutSetPrototypeService() {

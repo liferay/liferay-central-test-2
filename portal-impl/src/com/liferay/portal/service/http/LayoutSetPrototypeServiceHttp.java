@@ -55,7 +55,8 @@ public class LayoutSetPrototypeServiceHttp {
 	public static com.liferay.portal.model.LayoutSetPrototype addLayoutSetPrototype(
 		HttpPrincipal httpPrincipal,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, boolean active)
+		java.lang.String description, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -64,7 +65,7 @@ public class LayoutSetPrototypeServiceHttp {
 					_addLayoutSetPrototypeParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, nameMap,
-					description, active);
+					description, active, serviceContext);
 
 			Object returnObj = null;
 
@@ -205,7 +206,8 @@ public class LayoutSetPrototypeServiceHttp {
 	public static com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
 		HttpPrincipal httpPrincipal, long layoutSetPrototypeId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, boolean active)
+		java.lang.String description, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
@@ -214,7 +216,8 @@ public class LayoutSetPrototypeServiceHttp {
 					_updateLayoutSetPrototypeParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey,
-					layoutSetPrototypeId, nameMap, description, active);
+					layoutSetPrototypeId, nameMap, description, active,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -244,7 +247,8 @@ public class LayoutSetPrototypeServiceHttp {
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutSetPrototypeServiceHttp.class);
 	private static final Class<?>[] _addLayoutSetPrototypeParameterTypes0 = new Class[] {
-			java.util.Map.class, java.lang.String.class, boolean.class
+			java.util.Map.class, java.lang.String.class, boolean.class,
+			com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _deleteLayoutSetPrototypeParameterTypes1 = new Class[] {
 			long.class
@@ -258,6 +262,6 @@ public class LayoutSetPrototypeServiceHttp {
 		};
 	private static final Class<?>[] _updateLayoutSetPrototypeParameterTypes4 = new Class[] {
 			long.class, java.util.Map.class, java.lang.String.class,
-			boolean.class
+			boolean.class, com.liferay.portal.service.ServiceContext.class
 		};
 }

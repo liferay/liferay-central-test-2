@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.base.LayoutSetPrototypeServiceBaseImpl;
 import com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
@@ -38,7 +39,7 @@ public class LayoutSetPrototypeServiceImpl
 
 	public LayoutSetPrototype addLayoutSetPrototype(
 			Map<Locale, String> nameMap, String description,
-			boolean active)
+			boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		PortalPermissionUtil.check(
@@ -48,7 +49,7 @@ public class LayoutSetPrototypeServiceImpl
 
 		return layoutSetPrototypeLocalService.addLayoutSetPrototype(
 			user.getUserId(), user.getCompanyId(), nameMap, description,
-			active);
+			active, serviceContext);
 	}
 
 	public void deleteLayoutSetPrototype(long layoutSetPrototypeId)
@@ -97,14 +98,14 @@ public class LayoutSetPrototypeServiceImpl
 
 	public LayoutSetPrototype updateLayoutSetPrototype(
 			long layoutSetPrototypeId, Map<Locale, String> nameMap,
-			String description, boolean active)
+			String description, boolean active, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		LayoutSetPrototypePermissionUtil.check(
 			getPermissionChecker(), layoutSetPrototypeId, ActionKeys.UPDATE);
 
 		return layoutSetPrototypeLocalService.updateLayoutSetPrototype(
-			layoutSetPrototypeId, nameMap, description, active);
+			layoutSetPrototypeId, nameMap, description, active, serviceContext);
 	}
 
 }

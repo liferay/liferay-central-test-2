@@ -39,10 +39,13 @@ public class LayoutSetPrototypeServiceUtil {
 	 */
 	public static com.liferay.portal.model.LayoutSetPrototype addLayoutSetPrototype(
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, boolean active)
+		java.lang.String description, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().addLayoutSetPrototype(nameMap, description, active);
+		return getService()
+				   .addLayoutSetPrototype(nameMap, description, active,
+			serviceContext);
 	}
 
 	public static void deleteLayoutSetPrototype(long layoutSetPrototypeId)
@@ -69,12 +72,13 @@ public class LayoutSetPrototypeServiceUtil {
 	public static com.liferay.portal.model.LayoutSetPrototype updateLayoutSetPrototype(
 		long layoutSetPrototypeId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
-		java.lang.String description, boolean active)
+		java.lang.String description, boolean active,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateLayoutSetPrototype(layoutSetPrototypeId, nameMap,
-			description, active);
+			description, active, serviceContext);
 	}
 
 	public static LayoutSetPrototypeService getService() {
