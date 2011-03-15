@@ -36,6 +36,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersist
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceTest;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryLinkPersistenceTest;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryPersistenceTest;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceTest;
