@@ -138,10 +138,14 @@ public class StreamUtil {
 
 		if ((inputStream instanceof FileInputStream) &&
 			(outputStream instanceof FileOutputStream)) {
-			FileChannel sourceChannel =
-				((FileInputStream)inputStream).getChannel();
-			FileChannel targetChannel =
-				((FileOutputStream)outputStream).getChannel();
+
+			FileInputStream fileInputStream = (FileInputStream)inputStream;
+
+			FileChannel sourceChannel = fileInputStream.getChannel();
+
+			FileOutputStream fileOutputStream = (FileOutputStream)outputStream;
+
+			FileChannel targetChannel = fileOutputStream.getChannel();
 
 			long position = 0;
 
