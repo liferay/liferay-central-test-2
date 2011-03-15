@@ -43,7 +43,7 @@ import org.apache.commons.lang.time.StopWatch;
 public class RESTConfigurator extends FindClass {
 
 	public RESTConfigurator() {
-		setIncludedJars("*portal-impl.jar");
+		setIncludedJars("*portal-impl.jar", "*_wl_cls_gen.jar");
 	}
 
 	public void configure(ClassLoader classLoader) throws PortalException {
@@ -53,15 +53,30 @@ public class RESTConfigurator extends FindClass {
 			URL servicePropertiesURL = classLoader.getResource(
 				"service.properties");
 
-			File servicePropertiesFile =
-				new File(servicePropertiesURL.getPath());
+			String servicePropertiesPath = servicePropertiesURL.getPath();
 
-			File webInfDir = servicePropertiesFile.getParentFile();
+			File classPathFile = null;
+
+			int index = servicePropertiesPath.indexOf("_wl_cls_gen.jar!");
+
+			if (index != -1) {
+				String wlclsgenJarPath =
+					servicePropertiesPath.substring(0, index + 15);
+
+				classPathFile = new File(wlclsgenJarPath);
+			}
+			else {
+				File servicePropertiesFile = new File(servicePropertiesPath);
+
+				File webInfDir = servicePropertiesFile.getParentFile();
+
+				classPathFile = webInfDir;
+			}
 
 			classPathURLs = new URL[1];
 
 			try {
-				classPathURLs[0] = webInfDir.toURL();
+				classPathURLs[0] = classPathFile.toURL();
 			}
 			catch (MalformedURLException murle) {
 				_log.error(murle, murle);
