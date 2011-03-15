@@ -60,11 +60,12 @@ public class CookieKeys {
 		HttpServletRequest request, HttpServletResponse response,
 		Cookie cookie) {
 
-		addCookie(response, cookie, request.isSecure());
+		addCookie(request, response, cookie, request.isSecure());
 	}
 
-	public static void addCookie(HttpServletResponse response, Cookie cookie,
-		boolean secure) {
+	public static void addCookie(
+		HttpServletRequest request, HttpServletResponse response,
+		Cookie cookie, boolean secure) {
 
 		if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES ||
 			PropsValues.TCK_URL) {
