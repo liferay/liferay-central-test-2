@@ -1655,6 +1655,15 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentModelImpl">
+		<attributes>
+			<id name="contentId" />
+			<basic name="uuid">
+				<column name="UUID_" />
+			</basic>
+			<transient name="primaryKey" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureEntryModelImpl">
 		<attributes>
 			<id name="structureEntryId" />
@@ -3269,6 +3278,10 @@
 	</entity>
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" name="DLFolder">
 		<table name="DLFolder" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl" name="DDMContent">
+		<table name="DDMContent" />
 		<attributes />
 	</entity>
 	<entity class="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureEntryImpl" name="DDMStructureEntry">

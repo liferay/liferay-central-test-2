@@ -384,6 +384,11 @@ create table CyrusVirtual (
 	userId VARCHAR(75) not null
 );
 
+create table DDMContent (
+	uuid_ VARCHAR(75) null,
+	contentId LONG not null primary key
+);
+
 create table DDMStructureEntry (
 	uuid_ VARCHAR(75) null,
 	structureEntryId LONG not null primary key,

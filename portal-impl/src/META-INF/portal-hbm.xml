@@ -94,6 +94,7 @@
 	<import class="com.liferay.portlet.documentlibrary.model.DLFileVersion" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLFolder" />
 	<import class="com.liferay.portlet.documentlibrary.model.DLRepository" />
+	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMContent" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry" />
 	<import class="com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntryLink" />
 	<import class="com.liferay.portlet.expando.model.ExpandoColumn" />
@@ -1394,6 +1395,13 @@
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lastPostDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMContentImpl" table="DDMContent">
+		<cache usage="read-write" />
+		<id name="contentId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureEntryImpl" table="DDMStructureEntry">
 		<cache usage="read-write" />

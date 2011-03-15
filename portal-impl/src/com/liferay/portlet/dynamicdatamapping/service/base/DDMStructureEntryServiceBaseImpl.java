@@ -31,10 +31,12 @@ import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
+import com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLinkService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLocalService;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService;
+import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryLinkPersistence;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryPersistence;
 
@@ -58,6 +60,44 @@ public abstract class DDMStructureEntryServiceBaseImpl extends PrincipalBean
 	 *
 	 * Never modify or reference this class directly. Always use {@link com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryServiceUtil} to access the d d m structure entry remote service.
 	 */
+
+	/**
+	 * Gets the d d m content local service.
+	 *
+	 * @return the d d m content local service
+	 */
+	public DDMContentLocalService getDDMContentLocalService() {
+		return ddmContentLocalService;
+	}
+
+	/**
+	 * Sets the d d m content local service.
+	 *
+	 * @param ddmContentLocalService the d d m content local service
+	 */
+	public void setDDMContentLocalService(
+		DDMContentLocalService ddmContentLocalService) {
+		this.ddmContentLocalService = ddmContentLocalService;
+	}
+
+	/**
+	 * Gets the d d m content persistence.
+	 *
+	 * @return the d d m content persistence
+	 */
+	public DDMContentPersistence getDDMContentPersistence() {
+		return ddmContentPersistence;
+	}
+
+	/**
+	 * Sets the d d m content persistence.
+	 *
+	 * @param ddmContentPersistence the d d m content persistence
+	 */
+	public void setDDMContentPersistence(
+		DDMContentPersistence ddmContentPersistence) {
+		this.ddmContentPersistence = ddmContentPersistence;
+	}
 
 	/**
 	 * Gets the d d m structure entry local service.
@@ -373,6 +413,10 @@ public abstract class DDMStructureEntryServiceBaseImpl extends PrincipalBean
 		}
 	}
 
+	@BeanReference(type = DDMContentLocalService.class)
+	protected DDMContentLocalService ddmContentLocalService;
+	@BeanReference(type = DDMContentPersistence.class)
+	protected DDMContentPersistence ddmContentPersistence;
 	@BeanReference(type = DDMStructureEntryLocalService.class)
 	protected DDMStructureEntryLocalService ddmStructureEntryLocalService;
 	@BeanReference(type = DDMStructureEntryService.class)

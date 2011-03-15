@@ -127,6 +127,8 @@ create unique index IX_717B9BA2 on Country (a3);
 create index IX_25D734CD on Country (active_);
 create unique index IX_19DA007B on Country (name);
 
+create index IX_AE4B50C2 on DDMContent (uuid_);
+
 create index IX_8A62E038 on DDMStructureEntry (groupId);
 create unique index IX_8BB11D66 on DDMStructureEntry (groupId, structureId);
 create index IX_9EA320C2 on DDMStructureEntry (uuid_);

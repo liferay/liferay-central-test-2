@@ -242,6 +242,8 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinder" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLRepositoryLocalService" class="com.liferay.portlet.documentlibrary.service.impl.DLRepositoryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLRepositoryService" class="com.liferay.portlet.documentlibrary.service.impl.DLRepositoryServiceImpl" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMContentLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMContentLocalServiceImpl" />
+	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMContentPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryLocalService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureEntryLocalServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.DDMStructureEntryService" class="com.liferay.portlet.dynamicdatamapping.service.impl.DDMStructureEntryServiceImpl" />
 	<bean id="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryPersistence" class="com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureEntryPersistenceImpl" parent="basePersistence" />

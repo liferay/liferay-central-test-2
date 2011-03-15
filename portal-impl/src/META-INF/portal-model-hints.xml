@@ -1319,6 +1319,10 @@
 		</field>
 		<field name="lastPostDate" type="Date" />
 	</model>
+	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMContent">
+		<field name="uuid" type="String" />
+		<field name="contentId" type="long" />
+	</model>
 	<model name="com.liferay.portlet.dynamicdatamapping.model.DDMStructureEntry">
 		<field name="uuid" type="String" />
 		<field name="structureEntryId" type="long" />

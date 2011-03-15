@@ -191,6 +191,7 @@ public class PersistenceTestSuite extends TestSuite {
 		testSuite.addTestSuite(DLFileVersionPersistenceTest.class);
 		testSuite.addTestSuite(DLFolderPersistenceTest.class);
 
+		testSuite.addTestSuite(DDMContentPersistenceTest.class);
 		testSuite.addTestSuite(DDMStructureEntryLinkPersistenceTest.class);
 		testSuite.addTestSuite(DDMStructureEntryPersistenceTest.class);
 
