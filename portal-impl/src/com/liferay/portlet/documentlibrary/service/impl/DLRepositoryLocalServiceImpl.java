@@ -420,6 +420,13 @@ public class DLRepositoryLocalServiceImpl
 		return dlFileEntryPersistence.findByG_F_T(groupId, folderId, title);
 	}
 
+	public DLFileEntry getFileEntryByName(
+			long groupId, long folderId, String name)
+		throws PortalException, SystemException {
+
+		return dlFileEntryPersistence.findByG_F_N(groupId, folderId, name);
+	}
+
 	public DLFileEntry getFileEntryByUuidAndGroupId(String uuid, long groupId)
 		throws PortalException, SystemException {
 
